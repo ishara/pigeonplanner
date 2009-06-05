@@ -1,0 +1,570 @@
+# Dutch translations for Pigeon Planner package.
+# Copyright (C) 2009 Timo Vanwynsberghe
+# This file is distributed under the same license as the Pigeon Planner package.
+# Automatically generated, 2009.
+#
+# Automatically generated <>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: Pigeon Planner 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-06-04 13:09+0200\n"
+"PO-Revision-Date: 2009-05-06 16:11+0200\n"
+"Last-Translator: Automatically generated <>\n"
+"Language-Team: none <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: PigeonPlanner/Const.py:53
+msgid ""
+"This image is either not supported or corrupt, please choose another one."
+msgstr "Deze afbeelding is niet geldig of is corrupt, kies een andere."
+
+#: PigeonPlanner/Const.py:55
+msgid ""
+"This pigeon already exists, but isn't showing. Do you want to show it again?"
+msgstr ""
+"Deze duif bestaat al, maar word niet getoond. Wilt u deze terug zichtbaar "
+"maken?"
+
+#: PigeonPlanner/Const.py:56
+msgid "This pigeon already exists. Overwrite it?"
+msgstr "Deze duif bestaat al. Wilt u deze overschrijven?"
+
+#: PigeonPlanner/Const.py:57
+msgid "This pigeon doesn't exist. Do you want to add it?"
+msgstr "Deze duif bestaat niet in de database. Wilt u deze toevoegen?"
+
+#: PigeonPlanner/Const.py:59
+#, python-format
+msgid ""
+"The ringnumber and year of the %s are necessary.\n"
+"\n"
+"Check if these are entered."
+msgstr ""
+"Het ringnummer en jaartal van de %s zijn vereist.\n"
+"\n"
+"Controleer of deze zijn ingevuld."
+
+#: PigeonPlanner/Const.py:60
+#, python-format
+msgid ""
+"Incorrect input of the ringnumber or year of the %s.\n"
+"\n"
+"Only numbers are accepted."
+msgstr ""
+"Foute ingave van het ringnummer of jaartal van de %s.\n"
+"\n"
+"Alleen cijfers zijn toegelaten."
+
+#: PigeonPlanner/Const.py:61
+#, python-format
+msgid ""
+"Incorrect input of the ringnumber or year of the %s.\n"
+"\n"
+"Check the length."
+msgstr ""
+"Foute ingave van het ringnummer of jaartal van de %s.\n"
+"\n"
+"Controleer de lengte."
+
+#: PigeonPlanner/Const.py:63
+msgid "All fields have to be entered."
+msgstr "Alle velden moeten ingevuld worden"
+
+#: PigeonPlanner/Const.py:64
+msgid ""
+"The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
+"DD)."
+msgstr ""
+"De door u ingegeven datum heeft het verkeerde formaat. Het moet ISO-"
+"formaatzijn (YYYY-MM-DD)"
+
+#: PigeonPlanner/Const.py:66
+msgid "The backup was successfully created."
+msgstr "De backup is succesvol aangemaakt."
+
+#: PigeonPlanner/Const.py:67
+msgid ""
+"The backup was successfully restored.\n"
+"Restart the program."
+msgstr ""
+"De backup was succesvol terug geplaatst.\n"
+"Herstart het programma."
+
+#: PigeonPlanner/Const.py:69
+msgid ""
+"This will set back all the settings to the default values.\n"
+"Are you sure?"
+msgstr ""
+"Dit zal alle opties terugzetten naar de standaard waarden.\n"
+"bent u zeker?"
+
+#: PigeonPlanner/Const.py:70
+msgid ""
+"You have not entered your personal information.\n"
+"This will be shown on top of the printed pedigree.\n"
+"Do you want to add it now?"
+msgstr ""
+"U hebt nog geen persoonlijke info ingegeven.\n"
+"Dit komt op een geprintte stamboom te staan.\n"
+"Wilt u dit nu ingeven?"
+
+#: PigeonPlanner/Const.py:72
+msgid "Error printing the pedigree"
+msgstr "Fout bij het printen van de stamboom"
+
+#: PigeonPlanner/Checks.py:42
+msgid "sire"
+msgstr "vader"
+
+#: PigeonPlanner/Checks.py:48
+msgid "dam"
+msgstr "moeder"
+
+#: PigeonPlanner/Checks.py:53
+msgid "pigeon"
+msgstr "Duif"
+
+#: PigeonPlanner/Options.py:101 PigeonPlanner/MainWindow.py:777
+#: tmp/MainWindow.glade.h:22
+msgid "Colour"
+msgstr "Kleur"
+
+#: PigeonPlanner/Options.py:101 PigeonPlanner/MainWindow.py:775
+#: tmp/MainWindow.glade.h:49
+msgid "Sex"
+msgstr "Geslacht"
+
+#: PigeonPlanner/Print.py:76 tmp/PedigreeWindow.glade.h:5
+msgid "Pedigree of:"
+msgstr "Stamboom van:"
+
+#: PigeonPlanner/Print.py:281 tmp/MainWindow.glade.h:44
+msgid "Results"
+msgstr "Uitslagen"
+
+#: PigeonPlanner/Print.py:304 PigeonPlanner/Print.py:313
+#: tmp/ResultWindow.glade.h:10
+msgid "Year race"
+msgstr "Jaar vlucht"
+
+#: PigeonPlanner/Print.py:304 PigeonPlanner/Print.py:317
+#: tmp/ResultWindow.glade.h:9
+msgid "Year pigeons"
+msgstr "Jaar duiven"
+
+#: PigeonPlanner/Print.py:304 PigeonPlanner/Print.py:321
+#: PigeonPlanner/Print.py:355 PigeonPlanner/Print.py:356
+#: PigeonPlanner/MainWindow.py:733 PigeonPlanner/ResultWindow.py:57
+#: tmp/MainWindow.glade.h:39 tmp/ResultWindow.glade.h:5
+msgid "Racepoint"
+msgstr "Vlucht"
+
+#: PigeonPlanner/Print.py:304 PigeonPlanner/Print.py:325
+#: PigeonPlanner/Print.py:379 PigeonPlanner/Print.py:380
+#: PigeonPlanner/MainWindow.py:737 PigeonPlanner/ResultWindow.py:61
+#: tmp/MainWindow.glade.h:48 tmp/ResultWindow.glade.h:7
+msgid "Sector"
+msgstr "Sector"
+
+#: PigeonPlanner/Print.py:304 PigeonPlanner/Print.py:329
+#: PigeonPlanner/MainWindow.py:736 PigeonPlanner/ResultWindow.py:60
+#: tmp/ResultWindow.glade.h:2
+msgid "Coefficient"
+msgstr "Coefficient"
+
+#: PigeonPlanner/Print.py:304 PigeonPlanner/Print.py:333
+#: PigeonPlanner/Print.py:361 PigeonPlanner/Print.py:362
+#: tmp/ResultWindow.glade.h:4
+msgid "Place"
+msgstr "Plaats"
+
+#: PigeonPlanner/Print.py:343 PigeonPlanner/Print.py:344
+#: PigeonPlanner/MainWindow.py:645 PigeonPlanner/MainWindow.py:676
+#: PigeonPlanner/MainWindow.py:693 PigeonPlanner/MainWindow.py:705
+#: PigeonPlanner/MainWindow.py:720 PigeonPlanner/ResultWindow.py:62
+msgid "Band no."
+msgstr "Ringnr."
+
+#: PigeonPlanner/Print.py:349 PigeonPlanner/Print.py:350
+#: PigeonPlanner/MainWindow.py:732 PigeonPlanner/ResultWindow.py:56
+#: tmp/MainWindow.glade.h:26
+msgid "Date"
+msgstr "Datum"
+
+#: PigeonPlanner/Print.py:367 PigeonPlanner/Print.py:368
+#: PigeonPlanner/MainWindow.py:735 PigeonPlanner/ResultWindow.py:59
+#: tmp/MainWindow.glade.h:36
+msgid "Out of"
+msgstr "Uit"
+
+#: PigeonPlanner/Print.py:373 PigeonPlanner/Print.py:374
+msgid "Coef."
+msgstr "Coef."
+
+#: PigeonPlanner/Pedigree.py:129 PigeonPlanner/Pedigree.py:408
+#: PigeonPlanner/MainWindow.py:117 PigeonPlanner/MainWindow.py:159
+#: PigeonPlanner/MainWindow.py:558
+msgid "cock"
+msgstr "duiver"
+
+#: PigeonPlanner/Pedigree.py:423 PigeonPlanner/MainWindow.py:117
+#: PigeonPlanner/MainWindow.py:163 PigeonPlanner/MainWindow.py:562
+msgid "hen"
+msgstr "duivin"
+
+#: PigeonPlanner/MainWindow.py:102
+msgid "Images"
+msgstr "Afbeeldingen"
+
+#: PigeonPlanner/MainWindow.py:109
+msgid "PP Backups"
+msgstr "PP Backups"
+
+#: PigeonPlanner/MainWindow.py:117 PigeonPlanner/MainWindow.py:155
+msgid "young bird"
+msgstr "jonge duif"
+
+#: PigeonPlanner/MainWindow.py:179 PigeonPlanner/MainWindow.py:182
+msgid "pigeons"
+msgstr "duiven"
+
+#: PigeonPlanner/MainWindow.py:646 PigeonPlanner/MainWindow.py:677
+#: PigeonPlanner/MainWindow.py:694 PigeonPlanner/MainWindow.py:706
+#: PigeonPlanner/MainWindow.py:721 tmp/MainWindow.glade.h:57
+msgid "Year"
+msgstr "Jaar"
+
+#: PigeonPlanner/MainWindow.py:647 PigeonPlanner/MainWindow.py:678
+msgid "Name"
+msgstr "Naam"
+
+#: PigeonPlanner/MainWindow.py:707
+msgid "Common parent"
+msgstr "Gem. ouder"
+
+#: PigeonPlanner/MainWindow.py:734 PigeonPlanner/ResultWindow.py:58
+#: tmp/MainWindow.glade.h:38
+msgid "Placed"
+msgstr "Plaats"
+
+#: PigeonPlanner/Configuration.py:115 PigeonPlanner/Configuration.py:127
+msgid "#Pigeon Planner configuration file"
+msgstr "#Pigeon Planner configuratie bestand"
+
+#: PigeonPlanner/Configuration.py:186
+#, python-format
+msgid ""
+"Warning: The '%(option)s' option is not set in the '%(section)s' section of "
+"the configuration file, using the default '%(default)s'."
+msgstr ""
+"Waarschuwing: De '%(option)s' optie is niet ingesteld in de '%(section)s' "
+"sectie van het configuratiebestand, de standaardwaarde '%(default)s' wordt "
+"gebruikt."
+
+#: PigeonPlanner/Configuration.py:192
+#, python-format
+msgid ""
+"Warning: There is no section '%(section)s' in the configuration file; an "
+"error occured parsing its option '%(option)s', using the default '%(default)"
+"s'."
+msgstr ""
+"Waarschuwing: Er is geen sectie '%(section)s' in het configuratiebestand; er "
+"is een fout opgetreden bij het afhandelen van de optie '%(option)s', de "
+"standaardwaarde '%(default)s' wordt gebruikt."
+
+#: PigeonPlanner/Configuration.py:195
+#, python-format
+msgid ""
+"Error: There went something wrong parsing the '%(option)s' option in the '%"
+"(section)s' section of the configuration file, using the default '%(default)"
+"s'."
+msgstr ""
+"Fout: Er ging iets fout bij het afhandelen van de '%(option)s' optie in de '%"
+"(section)s' sectie van het configuratiebestand, de standaardwaarde '%"
+"(default)s' wordt gebruikt."
+
+#: PigeonPlanner/ResultWindow.py:92 PigeonPlanner/ResultWindow.py:93
+#: PigeonPlanner/ResultWindow.py:94 PigeonPlanner/ResultWindow.py:95
+#: PigeonPlanner/ResultWindow.py:96 PigeonPlanner/ResultWindow.py:195
+#: PigeonPlanner/ResultWindow.py:196 PigeonPlanner/ResultWindow.py:197
+#: PigeonPlanner/ResultWindow.py:198 PigeonPlanner/ResultWindow.py:199
+#: PigeonPlanner/ResultWindow.py:227 PigeonPlanner/ResultWindow.py:230
+#: PigeonPlanner/ResultWindow.py:233 PigeonPlanner/ResultWindow.py:236
+#: PigeonPlanner/ResultWindow.py:239 PigeonPlanner/ResultWindow.py:242
+msgid "All"
+msgstr "Alles"
+
+#: tmp/MainWindow.glade.h:1
+msgid "<b>Add a new result</b>"
+msgstr "<b>Voeg een nieuwe uitslag toe</b>"
+
+#: tmp/MainWindow.glade.h:2
+msgid "<b>Brothers and sisters</b>"
+msgstr "<b>Broers en zussen</b>"
+
+#: tmp/MainWindow.glade.h:3
+msgid "<b>Create backup</b>"
+msgstr "<b>Backup maken</b>"
+
+#: tmp/MainWindow.glade.h:4
+msgid "<b>Details of pigeon</b>"
+msgstr "<b>Details van duif</b>"
+
+#: tmp/MainWindow.glade.h:5
+msgid "<b>Half brothers and sisters</b>"
+msgstr "<b>Halfbroers en zussen</b>"
+
+#: tmp/MainWindow.glade.h:6
+msgid "<b>Offspring</b>"
+msgstr "<b>Jongen</b>"
+
+#: tmp/MainWindow.glade.h:7 tmp/PedigreeWindow.glade.h:1
+msgid "<b>Pedigree dam</b>"
+msgstr "<b>Stamboom moeder</b>"
+
+#: tmp/MainWindow.glade.h:8 tmp/PedigreeWindow.glade.h:2
+msgid "<b>Pedigree sire</b>"
+msgstr "<b>Stamboom vader</b>"
+
+#: tmp/MainWindow.glade.h:9
+msgid "<b>Restore backup</b>"
+msgstr "<b>Backup terugzetten</b>"
+
+#: tmp/MainWindow.glade.h:10
+msgid "<b>Results of pigeon</b>"
+msgstr "<b>Uitslagen van duif</b>"
+
+#: tmp/MainWindow.glade.h:11
+msgid "Add a series of pigeons"
+msgstr "Voeg een reeks duiven toe"
+
+#: tmp/MainWindow.glade.h:12
+msgid "Add a single pigeon"
+msgstr "Voeg een enkele duif toe"
+
+#: tmp/MainWindow.glade.h:13
+msgid "Add result"
+msgstr "Voeg uitslag toe"
+
+#: tmp/MainWindow.glade.h:14
+msgid "All birds"
+msgstr "Alle duiven"
+
+#: tmp/MainWindow.glade.h:15
+msgid "Are you sure?"
+msgstr "Bent u zeker?"
+
+#: tmp/MainWindow.glade.h:16
+msgid "Backup"
+msgstr "Backup"
+
+#: tmp/MainWindow.glade.h:17
+msgid "Choose a Pigeon Planner backup file to restore"
+msgstr "Kies een Pigeon Planner backup bestand om te herstellen"
+
+#: tmp/MainWindow.glade.h:18
+msgid "Choose a directory where to save the backup"
+msgstr "Kies een map om de backup op te slaan"
+
+#: tmp/MainWindow.glade.h:19
+msgid "Choose an image..."
+msgstr "Kies een afbeelding..."
+
+#: tmp/MainWindow.glade.h:20
+msgid "Click here to add an image"
+msgstr "Klik hier om een afbeelding toe te voegen"
+
+#: tmp/MainWindow.glade.h:21
+msgid "Cocks"
+msgstr "Duivers"
+
+#: tmp/MainWindow.glade.h:23
+msgid ""
+"Create and restore backups from\n"
+"your pigeons and results."
+msgstr ""
+"Maak en herstel backups van\n"
+"uw duiven en uitslagen."
+
+#: tmp/MainWindow.glade.h:25 tmp/PedigreeWindow.glade.h:3
+msgid "Dam"
+msgstr "Moeder"
+
+#: tmp/MainWindow.glade.h:27
+msgid "Een map selecteren"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:28
+msgid "Enter a name for this pigeon..."
+msgstr "Vul een naam voor deze duif in..."
+
+#: tmp/MainWindow.glade.h:29
+msgid "Extra"
+msgstr "Extra"
+
+#: tmp/MainWindow.glade.h:30
+msgid "Filter"
+msgstr "Filteren"
+
+#: tmp/MainWindow.glade.h:31
+msgid "From"
+msgstr "Van"
+
+#: tmp/MainWindow.glade.h:32
+msgid "Go to pigeon"
+msgstr "Ga naar duif"
+
+#: tmp/MainWindow.glade.h:33
+msgid "Hens"
+msgstr "Duivinnen"
+
+#: tmp/MainWindow.glade.h:34
+msgid "Keep this pigeon (and parents) in the pedigree"
+msgstr "Bewaar deze duif (en ouders) in de stamboom"
+
+#: tmp/MainWindow.glade.h:35
+msgid "Loft"
+msgstr "Hok"
+
+#: tmp/MainWindow.glade.h:37 tmp/PedigreeWindow.glade.h:4
+msgid "Pedigree"
+msgstr "Stamboom"
+
+#: tmp/MainWindow.glade.h:40
+msgid "Relatives"
+msgstr "Verwanten"
+
+#: tmp/MainWindow.glade.h:41
+msgid "Remove pigeon"
+msgstr "Verwijder duif"
+
+#: tmp/MainWindow.glade.h:42
+msgid "Remove result"
+msgstr "Verwijder uitslag"
+
+#: tmp/MainWindow.glade.h:43
+msgid "Restore"
+msgstr "Terugzetten"
+
+#: tmp/MainWindow.glade.h:45
+msgid "Search a pigeon"
+msgstr "Zoek een duif"
+
+#: tmp/MainWindow.glade.h:46
+msgid "Search through the list of cocks"
+msgstr "Zoek door de lijst met duivers"
+
+#: tmp/MainWindow.glade.h:47
+msgid "Search through the list of hens"
+msgstr "Zoek door de lijst met duivinnen"
+
+#: tmp/MainWindow.glade.h:50 tmp/PedigreeWindow.glade.h:6
+msgid "Sire"
+msgstr "Vader"
+
+#: tmp/MainWindow.glade.h:51
+msgid "Strain"
+msgstr "Ras"
+
+#: tmp/MainWindow.glade.h:52
+msgid "The following pigeon will be removed:"
+msgstr "De volgende duif zal verwijderd worden:"
+
+#: tmp/MainWindow.glade.h:53
+msgid "To"
+msgstr "Tot"
+
+#: tmp/MainWindow.glade.h:54
+msgid "Tools"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:55 tmp/ResultWindow.glade.h:8
+msgid "View all results"
+msgstr "Bekijk alle uitslagen"
+
+#: tmp/MainWindow.glade.h:56
+msgid "View detail"
+msgstr "Bekijk detail"
+
+#: tmp/MainWindow.glade.h:58
+msgid "Young birds"
+msgstr "Jonge duiven"
+
+#: tmp/OptionsDialog.glade.h:1
+msgid "At position:"
+msgstr "Op positie:"
+
+#: tmp/OptionsDialog.glade.h:2
+msgid "City"
+msgstr "Stad"
+
+#: tmp/OptionsDialog.glade.h:3
+msgid "Default"
+msgstr "Standaard"
+
+#: tmp/OptionsDialog.glade.h:4
+msgid ""
+"Enter some information about yourself.\n"
+"This will be shown on a printed pedigree."
+msgstr ""
+"Vul informatie over uzelf in.\n"
+"Deze zal staan op een geprintte stamboom."
+
+#: tmp/OptionsDialog.glade.h:6
+msgid "First & last name"
+msgstr "Voor & achternaam"
+
+#: tmp/OptionsDialog.glade.h:7
+msgid "General"
+msgstr "Algemeen"
+
+#: tmp/OptionsDialog.glade.h:8
+msgid "Options"
+msgstr "Opties"
+
+#: tmp/OptionsDialog.glade.h:9
+msgid "Personal"
+msgstr "Persoonlijk"
+
+#: tmp/OptionsDialog.glade.h:10
+msgid "Show an extra column"
+msgstr "Laat een extra kolom zien"
+
+#: tmp/OptionsDialog.glade.h:11
+msgid "Show navigation arrows"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:12
+msgid "Street & number"
+msgstr "Straat & nummer"
+
+#: tmp/OptionsDialog.glade.h:13
+msgid "Telephone number"
+msgstr "Telefoon nummer"
+
+#: tmp/OptionsDialog.glade.h:14
+msgid "Value of column:"
+msgstr "Waarde van kolom"
+
+#: tmp/OptionsDialog.glade.h:15
+msgid "Zipcode"
+msgstr "Zipcode"
+
+#: tmp/ResultWindow.glade.h:1
+msgid "<b>Sort options</b>"
+msgstr "<b>Sorteer opties</b>"
+
+#: tmp/ResultWindow.glade.h:3
+msgid "Pigeon"
+msgstr "Duif"
+
+#: tmp/ResultWindow.glade.h:6
+msgid "Results:"
+msgstr "Uitslagen:"
+
+#~ msgid "Organise and manage your pigeons"
+#~ msgstr "Organiseer en beheer uw duiven"

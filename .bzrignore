@@ -1,0 +1,9 @@
+./images_other
+./tmp
+./tools
+./packages
+i18n.sh
+MANIFEST
+MANIFEST.in
+setup.py
+./data
