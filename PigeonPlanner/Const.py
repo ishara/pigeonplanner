@@ -32,11 +32,16 @@ LICENSE = PigeonPlanner.license
 
 
 if sys.platform == 'win32':
-    HOMEDIR = os.environ['HOMEPATH']
+    HOMEDIR = os.environ['USERPROFILE'] 
+    if os.environ.has_key('APPDATA'):
+        PREFDIR = os.path.join(os.environ['APPDATA'], 'pigeonplanner')
+    else:
+        PREFDIR = os.path.join(HOMEDIR, 'pigeonplanner')
     GLADEDIR = './glade/'
     IMAGEDIR = './images/'
 else:
     HOMEDIR = os.environ['HOME']
+    PREFDIR = os.path.join(HOMEDIR, '.pigeonplanner')
     currentPath = os.path.abspath(os.path.dirname(__file__))
     if currentPath.startswith('/usr'):
         GLADEDIR = '/usr/share/pigeonplanner/glade/'
@@ -45,7 +50,6 @@ else:
         GLADEDIR = './glade/'
         IMAGEDIR = './images/'
 
-PREFDIR = os.path.join(HOMEDIR, '.pigeonplanner')
 PIGEONFILE = os.path.join(PREFDIR, 'pigeon.list')
 RESULTFILE = os.path.join(PREFDIR, 'results.db')
 DATAFILE = os.path.join(PREFDIR, 'data.db')
