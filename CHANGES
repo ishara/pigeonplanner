@@ -1,11 +1,11 @@
 0.1.2:
+ * Added option to show/hide navigation arrows
+ * Added program version in window titlebar
  * Fixed crash of some dialogs
  * Rewrote the aboutdialog
- * Added option to show/hide navigation arrows
  * Renamed Globals to Const
  * Moved messagedialog to seperate file
- * Show program version in titlebar
- * Added program details to __init__.py
+ * Moved program details to __init__.py
  * Lots of minor code changes
 
 0.1:
