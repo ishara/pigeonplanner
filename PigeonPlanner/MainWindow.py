@@ -28,6 +28,7 @@ import Dialog
 import Backup
 import Results
 import Options
+import ToolsWindow
 import PigeonParser
 import ResultWindow
 import PedigreeWindow
@@ -50,7 +51,6 @@ class MainWindow:
                       'on_btnadd_clicked'        : self.btnadd_clicked,
                       'on_options_clicked'       : self.options_clicked,
                       'on_tools_clicked'         : self.tools_clicked,
-                      'on_backup_clicked'        : self.backup_clicked,
                       'on_help_clicked'          : self.help_clicked,
                       'on_about_clicked'         : self.about_clicked,
                       'on_sbdetail_clicked'      : self.sbdetail_clicked,
@@ -78,9 +78,6 @@ class MainWindow:
                       'on_calbutton_clicked'     : self.calbutton_clicked,
                       'on_day_selected'          : self.day_selected,
                       'on_day_double_clicked'    : self.day_double_clicked,
-                      'on_bckpclose_clicked'     : self.bckpclose_clicked,
-                      'on_makebackup_clicked'    : self.makebackup_clicked,
-                      'on_restorebackup_clicked' : self.restorebackup_clicked,
                       'on_notebook_switch'       : self.notebook_switch,
                       'on_button_top_clicked'    : self.button_top_clicked,
                       'on_button_up_clicked'     : self.button_up_clicked,
@@ -109,12 +106,6 @@ class MainWindow:
             fileFilter.add_mime_type("image/%s" %item)
             fileFilter.add_pattern("*.%s" %item)
         self.filedialog.add_filter(fileFilter)
-
-        fileFilter = gtk.FileFilter()
-        fileFilter.set_name(_("PP Backups"))
-        fileFilter.add_mime_type("zip/zip")
-        fileFilter.add_pattern("*PigeonPlannerBackup.zip")
-        self.fcButtonRestore.add_filter(fileFilter)
 
         for item in [self.cbRacepoint, self.cbSector, self.cbColour, self.cbStrain, self.cbLoft]:
             self.set_completion(item)
@@ -423,26 +414,7 @@ class MainWindow:
         Options.OptionsDialog(self)
 
     def tools_clicked(self, widget):
-        pass
-        #TODO: Show a tools dialog
-
-    def backup_clicked(self, widget):
-        self.backupdialog.show()
-
-    def bckpclose_clicked(self, widget):
-        self.backupdialog.hide()
-
-    def makebackup_clicked(self, widget):
-        folder = self.fcButtonCreate.get_current_folder()
-        if folder:
-            Backup.make_backup(folder)
-            Dialog.messageDialog('info', Const.MSGBCKPOK, self.main)
-
-    def restorebackup_clicked(self, widget):
-        zipfile = self.fcButtonRestore.get_filename()
-        if zipfile:
-            Backup.restore_backup(zipfile)
-            Dialog.messageDialog('info', Const.MSGRESTOK, self.main)
+        ToolsWindow.ToolsWindow(self)
 
     def help_clicked(self, widget):
         pass

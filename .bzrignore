@@ -1,8 +1,6 @@
-./tmp
-./tools
+./data
 ./packages
-i18n.sh
+./tools
 MANIFEST
 MANIFEST.in
 setup.py
-./data
