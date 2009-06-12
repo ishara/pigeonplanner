@@ -368,7 +368,6 @@ This will be shown on a printed pedigree.</property>
             <property name="layout_style">end</property>
             <child>
               <widget class="GtkButton" id="default">
-                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="xalign">0</property>

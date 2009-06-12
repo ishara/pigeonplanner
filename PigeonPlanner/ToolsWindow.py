@@ -16,6 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import datetime
+
 import gtk
 import gtk.glade
 
@@ -29,6 +31,9 @@ class ToolsWindow:
 
         signalDic = { 'on_makebackup_clicked'    : self.makebackup_clicked,
                       'on_restorebackup_clicked' : self.restorebackup_clicked,
+                      'on_calculate_clicked'     : self.calculate_clicked,
+                      'on_printcalc_clicked'     : self.printcalc_clicked,
+                      'on_calchelp_clicked'      : self.calchelp_clicked,
                       'on_window_destroy'        : self.close_clicked,
                       'on_close_clicked'         : self.close_clicked }
         self.wTree.signal_autoconnect(signalDic)
@@ -41,7 +46,7 @@ class ToolsWindow:
 
         self.toolsdialog.set_transient_for(self.main.main)
 
-        # Build treeview
+        # Build main treeview
         self.liststore = gtk.ListStore(int, str)
         renderer = gtk.CellRendererText()
         column = gtk.TreeViewColumn(_("Tools"), renderer, text=1)
@@ -54,11 +59,29 @@ class ToolsWindow:
 
         # Add the categories
         i = 0
-        for category in [_("Backup")]:
+        for category in [_("Backup"), _("Velocity calculator")]:
             self.liststore.append([i, category])
             i += 1
 
         self.treeview.set_cursor(0)
+
+        # Build velocity treeview
+        self.ls_velocity = gtk.ListStore(int, str, str)
+        renderer = gtk.CellRendererText()
+        column1 = gtk.TreeViewColumn(_("Velocity"), renderer, text=0)
+        column2 = gtk.TreeViewColumn(_("Flight Time"), renderer, text=1)
+        column3 = gtk.TreeViewColumn(_("Time of Arrival"), renderer, text=2)
+        column.set_sort_column_id(0)
+        self.tv_velocity.set_model(self.ls_velocity)
+        self.tv_velocity.append_column(column1)
+        self.tv_velocity.append_column(column2)
+        self.tv_velocity.append_column(column3)
+
+        # Fill spinbuttons
+        dt = datetime.datetime.now()
+        self.sbhour.set_value(dt.hour)
+        self.sbminute.set_value(dt.minute)
+        self.sbdist.set_value(125) #XXX: Random?
 
         # Backups file filter
         fileFilter = gtk.FileFilter()
@@ -72,10 +95,11 @@ class ToolsWindow:
 
     def selection_changed(self, selection):
         model, path = selection.get_selected()
-        selected_id = model[path][0]
+        if not path:
+            return
 
         try:
-            self.notebook.set_current_page(selected_id)
+            self.notebook.set_current_page(model[path][0])
         except TypeError:
             pass
 
@@ -90,6 +114,27 @@ class ToolsWindow:
         if zipfile:
             Backup.restore_backup(zipfile)
             Dialog.messageDialog('info', Const.MSGRESTOK, self.main)
+
+    def calculate_clicked(self, widget):
+        self.ls_velocity.clear()
+
+        begin = self.sbbegin.get_value_as_int()
+        end = self.sbend.get_value_as_int()
+        velocity = begin
+
+        releaseInMinutes = self.sbhour.get_value_as_int()*60 + self.sbminute.get_value_as_int()
+
+        while velocity <= end:
+            timeInMinutes = (self.sbdist.get_value_as_int()*1000)/velocity
+            arrivalInMinutes = releaseInMinutes + timeInMinutes
+            self.ls_velocity.append([velocity, datetime.timedelta(minutes=timeInMinutes), datetime.timedelta(minutes=arrivalInMinutes)])
+            velocity += 50
+
+    def printcalc_clicked(self, widget):
+        pass
+
+    def calchelp_clicked(self, widget):
+        pass
 
 
 
