@@ -7,7 +7,7 @@ copyright = "(C)opyright 2009 Timo Vanwynsberghe"
 
 authors = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
 
-website = "https://launchpad.net/pigeonplanner"
+website = "http://pigeonplanner.sourceforge.net/"
 
 description = "Organise and manage your pigeons"
 
