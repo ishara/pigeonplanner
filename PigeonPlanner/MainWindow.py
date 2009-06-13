@@ -423,6 +423,7 @@ class MainWindow:
     def about_clicked(self, widget):
         dialog = gtk.AboutDialog()
         dialog.set_transient_for(self.main)
+        dialog.set_icon_from_file(Const.IMAGEDIR + 'icon_logo.png')
         dialog.set_modal(True)
         dialog.set_property("skip-taskbar-hint", True)
 
