@@ -51,7 +51,6 @@ class ToolsWindow:
         self.liststore = gtk.ListStore(int, str)
         renderer = gtk.CellRendererText()
         column = gtk.TreeViewColumn(_("Tools"), renderer, text=1)
-        column.set_sort_column_id(0)
         self.treeview.set_model(self.liststore)
         self.treeview.append_column(column)
 
@@ -72,7 +71,6 @@ class ToolsWindow:
         column1 = gtk.TreeViewColumn(_("Velocity"), renderer, text=0)
         column2 = gtk.TreeViewColumn(_("Flight Time"), renderer, text=1)
         column3 = gtk.TreeViewColumn(_("Time of Arrival"), renderer, text=2)
-        column.set_sort_column_id(0)
         self.tv_velocity.set_model(self.ls_velocity)
         self.tv_velocity.append_column(column1)
         self.tv_velocity.append_column(column2)
