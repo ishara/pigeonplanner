@@ -31,6 +31,7 @@ class ToolsWindow:
 
         signalDic = { 'on_makebackup_clicked'    : self.makebackup_clicked,
                       'on_restorebackup_clicked' : self.restorebackup_clicked,
+                      'on_sbbegin_changed'       : self.sbbegin_changed,
                       'on_calculate_clicked'     : self.calculate_clicked,
                       'on_printcalc_clicked'     : self.printcalc_clicked,
                       'on_calchelp_clicked'      : self.calchelp_clicked,
@@ -114,6 +115,12 @@ class ToolsWindow:
         if zipfile:
             Backup.restore_backup(zipfile)
             Dialog.messageDialog('info', Const.MSGRESTOK, self.main)
+
+    def sbbegin_changed(self, widget):
+        spinmin = widget.get_value_as_int()
+        spinmax = widget.get_range()[1]
+
+        self.sbend.set_range(spinmin, spinmax)
 
     def calculate_clicked(self, widget):
         self.ls_velocity.clear()
