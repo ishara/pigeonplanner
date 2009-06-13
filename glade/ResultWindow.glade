@@ -8,6 +8,7 @@
     <property name="modal">True</property>
     <property name="default_width">900</property>
     <property name="default_height">640</property>
+    <property name="icon">icon_logo.png</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <child>
