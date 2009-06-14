@@ -20,7 +20,7 @@ import gtk
 import cairo
 
 import Const
-import Dialog
+import Widgets
 import Options
 from Pedigree import DrawPedigree
 
@@ -55,7 +55,7 @@ class PrintPedigree:
         response = print_.run(action, self.parent)
 
         if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            Dialog.messageDialog('error', Const.MSGPRINTERROR)
+            Widgets.message_dialog('error', Const.MSGPRINTERROR)
         elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
             settings = print_.get_print_settings()
 
@@ -247,7 +247,7 @@ class PrintResults:
         response = print_.run(action)
 
         if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            Dialog.messageDialog('error', Const.MSGPRINTERROR)
+            Widgets.message_dialog('error', Const.MSGPRINTERROR)
         elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
             settings = print_.get_print_settings()
 

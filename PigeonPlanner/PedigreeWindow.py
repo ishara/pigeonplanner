@@ -21,7 +21,7 @@ import gtk.glade
 
 import Const
 import Print
-import Dialog
+import Widgets
 import Options
 from Pedigree import DrawPedigree
 
@@ -73,7 +73,7 @@ class PedigreeWindow:
 
     def print_clicked(self, widget):
         if self.options.optionList.name == '':
-            answer = Dialog.messageDialog('question', Const.MSGNOINFO, self.pedigreewindow)
+            answer = Widgets.message_dialog('question', Const.MSGNOINFO, self.pedigreewindow)
             if answer == 'yes':
                 self.pedigreewindow.destroy()
                 Options.OptionsDialog(self.main, True)

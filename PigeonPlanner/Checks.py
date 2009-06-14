@@ -19,7 +19,7 @@
 import gtk
 
 import Const
-import Dialog
+import Widgets
 
 
 def check_entrys(entrys):
@@ -59,17 +59,17 @@ def check_ring_entry(parent, inputRing, inputYear, pigeon=_('pigeon')):
     '''
 
     if not inputRing or not inputYear:
-        Dialog.messageDialog('error', Const.MSGINPUT %pigeon, parent)
+        Widgets.message_dialog('error', Const.MSGINPUT %pigeon, parent)
         return False
 
     integerCheckRing = inputRing.isdigit()
     integerCheckJaar = inputYear.isdigit()
     if not integerCheckRing or not integerCheckJaar:
-        Dialog.messageDialog('error', Const.MSGNUMBER %pigeon, parent)
+        Widgets.message_dialog('error', Const.MSGNUMBER %pigeon, parent)
         return False
 
     if not len(inputRing) == 7 or not len(inputYear) == 2:
-        Dialog.messageDialog('error', Const.MSGLENGTH %pigeon, parent)
+        Widgets.message_dialog('error', Const.MSGLENGTH %pigeon, parent)
         return False
 
     return True

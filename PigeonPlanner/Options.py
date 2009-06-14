@@ -20,7 +20,7 @@ import gtk
 import gtk.glade
 
 import Const
-import Dialog
+import Widgets
 import Configuration
 
 
@@ -147,7 +147,7 @@ class OptionsDialog:
         self.optionsdialog.destroy()
 
     def default_clicked(self, widget):
-        answer = Dialog.messageDialog('warning', Const.MSGDEFAULT, self.optionsdialog)
+        answer = Widgets.message_dialog('warning', Const.MSGDEFAULT, self.optionsdialog)
         if answer == 'yes':
             self.opt.write_default()
             self.opt = GetOptions()

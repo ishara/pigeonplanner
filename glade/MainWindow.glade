@@ -1866,7 +1866,7 @@
                             <property name="vscrollbar_policy">automatic</property>
                             <property name="shadow_type">in</property>
                             <child>
-                              <widget class="GtkTreeView" id="treeviewbs">
+                              <widget class="GtkTreeView" id="tvBrothers">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                               </widget>
@@ -1907,7 +1907,7 @@
                             <property name="vscrollbar_policy">automatic</property>
                             <property name="shadow_type">in</property>
                             <child>
-                              <widget class="GtkTreeView" id="treeviewhbs">
+                              <widget class="GtkTreeView" id="tvHalfBrothers">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                               </widget>
@@ -1948,7 +1948,7 @@
                             <property name="vscrollbar_policy">automatic</property>
                             <property name="shadow_type">in</property>
                             <child>
-                              <widget class="GtkTreeView" id="treeviewjong">
+                              <widget class="GtkTreeView" id="tvOffspring">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                               </widget>
@@ -2024,7 +2024,7 @@
                             <property name="hscrollbar_policy">automatic</property>
                             <property name="vscrollbar_policy">automatic</property>
                             <child>
-                              <widget class="GtkTreeView" id="treeviewres">
+                              <widget class="GtkTreeView" id="tvResults">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="rules_hint">True</property>
@@ -2855,7 +2855,7 @@
                     <property name="hscrollbar_policy">automatic</property>
                     <property name="vscrollbar_policy">automatic</property>
                     <child>
-                      <widget class="GtkTreeView" id="treeviewfind">
+                      <widget class="GtkTreeView" id="tvFind">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                       </widget>

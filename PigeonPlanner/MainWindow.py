@@ -24,7 +24,7 @@ import gtk
 import gtk.glade
 
 import Const
-import Dialog
+import Widgets
 import Backup
 import Results
 import Options
@@ -198,7 +198,7 @@ class MainWindow:
             if not self.parser.pigeon.has_section(band):
                 self.parser.pigeon.add_section(band)
             else:
-                overwrite = Dialog.messageDialog('warning', Const.MSGEXIST, self.main)
+                overwrite = Widgets.message_dialog('warning', Const.MSGEXIST, self.main)
                 if overwrite == 'no':
                     continue
 
@@ -403,7 +403,7 @@ class MainWindow:
             self.imagePigeon1.set_from_pixbuf(pixbuf)
             self.imageToAdd = filename
         except:
-            Dialog.messageDialog('error', Const.MSGIMG, self.main)
+            Widgets.message_dialog('error', Const.MSGIMG, self.main)
 
         self.filedialog.hide()
 
@@ -474,7 +474,7 @@ class MainWindow:
                     self.treeview.set_cursor(item.path)
                     return
 
-            answer = Dialog.messageDialog('question', Const.MSGADD, self.main)
+            answer = Widgets.message_dialog('question', Const.MSGADD, self.main)
             if answer == 'no':
                 return
             elif answer == 'yes':
@@ -491,13 +491,13 @@ class MainWindow:
         sector = self.cbSector.child.get_text()
 
         if not date or not point or not place or not out:
-            Dialog.messageDialog('error', Const.MSGEMPTY, self.main)
+            Widgets.message_dialog('error', Const.MSGEMPTY, self.main)
             return
 
         try:
             datetime.datetime.strptime(date, self.date_format)
         except ValueError:
-            Dialog.messageDialog('error', Const.MSGFORMAT, self.main)
+            Widgets.message_dialog('error', Const.MSGFORMAT, self.main)
             return
 
         cof = (float(place)/float(out))*100
@@ -515,11 +515,11 @@ class MainWindow:
             Results.add_data('sector', sector)
             self.fill_list(self.cbSector, 'sector')
 
-        self.liststoreres.append([date, point, place, out, cof, sector])
+        self.lsResult.append([date, point, place, out, cof, sector])
 
     def removeresult_clicked(self, widget):
-        model, tIter = self.selectionres.get_selected()
-        path, focus = self.treeviewres.get_cursor()
+        model, tIter = self.selResults.get_selected()
+        path, focus = self.tvResults.get_cursor()
         if not tIter: return
         date = model[tIter][0]
         point = model[tIter][1]
@@ -530,10 +530,10 @@ class MainWindow:
 
         Results.remove_result(ring, date, point, place, out)
 
-        self.liststoreres.remove(tIter)
+        self.lsResult.remove(tIter)
 
-        if len(self.liststoreres) > 0:
-            self.treeviewres.set_cursor(path)
+        if len(self.lsResult) > 0:
+            self.tvResults.set_cursor(path)
 
     def allresults_clicked(self, widget):
         ResultWindow.ResultWindow(self, self.parser.pigeons)
@@ -625,123 +625,41 @@ class MainWindow:
         for column in self.treeview.get_columns():
             self.treeview.remove_column(column)
 
-        self.liststore = gtk.ListStore(str, str, str, str)
-        renderer = gtk.CellRendererText()
-        column1 = gtk.TreeViewColumn(_("Band no."), renderer, text=0)
-        column2 = gtk.TreeViewColumn(_("Year"), renderer, text=1)
-        column3 = gtk.TreeViewColumn(_("Name"), renderer, text=2)
-        column1.set_resizable(True)
-        column2.set_resizable(True)
-        column3.set_resizable(True)
-        column1.set_sort_column_id(0)
-        column2.set_sort_column_id(1)
-        column3.set_sort_column_id(2)
-        column1.connect('clicked', self.column1_clicked)
-        column2.connect('clicked', self.column2_clicked)
-        self.treeview.set_model(self.liststore)
-        self.treeview.append_column(column1)
-        self.treeview.append_column(column2)
-        self.treeview.append_column(column3)
+        columns = [_("Band no."), _("Year"), _("Name")]
         if self.options.optionList.column:
-            column4 = gtk.TreeViewColumn(_(self.options.optionList.columntype), renderer, text=3)
-            column4.set_resizable(True)
-            column4.set_sort_column_id(3)
-            self.treeview.insert_column(column4, self.options.optionList.columnposition)
-
-        self.selection = self.treeview.get_selection()
-        self.selection.connect('changed', self.selection_changed)
+            columns.append(_(self.options.optionList.columntype))
+        types = [str, str, str, str]
+        self.liststore, self.selection = Widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, True, True)
 
     def build_treeviews(self):
         '''
         Build the remaining treeviews
         '''
 
-        self.liststorefind = gtk.ListStore(str, str, str)
-        renderer = gtk.CellRendererText()
-        column1 = gtk.TreeViewColumn(_("Band no."), renderer, text=0)
-        column2 = gtk.TreeViewColumn(_("Year"), renderer, text=1)
-        column3 = gtk.TreeViewColumn(_("Name"), renderer, text=2)
-        column1.set_resizable(True)
-        column2.set_resizable(True)
-        column3.set_resizable(True)
-        column1.set_sort_column_id(0)
-        column2.set_sort_column_id(1)
-        column3.set_sort_column_id(2)
-        self.treeviewfind.set_model(self.liststorefind)
-        self.treeviewfind.append_column(column1)
-        self.treeviewfind.append_column(column2)
-        self.treeviewfind.append_column(column3)
-        self.selectionfind = self.treeviewfind.get_selection()
+        # Find sire/dam treeview
+        columns = [_("Band no."), _("Year"), _("Name")]
+        types = [str, str, str]
+        self.lsFind, self.selectionfind = Widgets.setup_treeview(self.tvFind, columns, types, None, True, True)
 
-        self.liststorebs = gtk.ListStore(str, str)
-        renderer = gtk.CellRendererText()
-        column1 = gtk.TreeViewColumn(_("Band no."), renderer, text=0)
-        column2 = gtk.TreeViewColumn(_("Year"), renderer, text=1)
-        column1.set_sort_column_id(0)
-        column2.set_sort_column_id(1)
-        column1.connect('clicked', self.column1_clicked)
-        column2.connect('clicked', self.column2_clicked)
-        self.treeviewbs.set_model(self.liststorebs)
-        self.treeviewbs.append_column(column1)
-        self.treeviewbs.append_column(column2)
+        # Brothers & sisters treeview
+        columns = [_("Band no."), _("Year")]
+        types = [str, str]
+        self.lsBrothers, self.selBrothers = Widgets.setup_treeview(self.tvBrothers, columns, types, None, True, True)
 
-        self.liststorehbs = gtk.ListStore(str, str, str)
-        renderer = gtk.CellRendererText()
-        column1 = gtk.TreeViewColumn(_("Band no."), renderer, text=0)
-        column2 = gtk.TreeViewColumn(_("Year"), renderer, text=1)
-        column3 = gtk.TreeViewColumn(_("Common parent"), renderer, text=2)
-        column1.set_sort_column_id(0)
-        column2.set_sort_column_id(1)
-        column3.set_sort_column_id(2)
-        column1.connect('clicked', self.column1_clicked)
-        column2.connect('clicked', self.column2_clicked)
-        self.treeviewhbs.set_model(self.liststorehbs)
-        self.treeviewhbs.append_column(column1)
-        self.treeviewhbs.append_column(column2)
-        self.treeviewhbs.append_column(column3)
+        # Halfbrothers & sisters treeview
+        columns = [_("Band no."), _("Year"), _("Common parent")]
+        types = [str, str, str]
+        self.lsHalfBrothers, self.selHalfBrothers = Widgets.setup_treeview(self.tvHalfBrothers, columns, types, None, True, True)
 
-        self.liststorejong = gtk.ListStore(str, str)
-        renderer = gtk.CellRendererText()
-        column1 = gtk.TreeViewColumn(_("Band no."), renderer, text=0)
-        column2 = gtk.TreeViewColumn(_("Year"), renderer, text=1)
-        column1.set_sort_column_id(0)
-        column2.set_sort_column_id(1)
-        column1.connect('clicked', self.column1_clicked)
-        column2.connect('clicked', self.column2_clicked)
-        self.treeviewjong.set_model(self.liststorejong)
-        self.treeviewjong.append_column(column1)
-        self.treeviewjong.append_column(column2)
+        # Offspring treeview
+        columns = [_("Band no."), _("Year")]
+        types = [str, str]
+        self.lsOffspring, self.selOffspring = Widgets.setup_treeview(self.tvOffspring, columns, types, None, True, True)
 
-        self.liststoreres = gtk.ListStore(str, str, int, int, float, str)
-        renderer = gtk.CellRendererText()
-        column1 = gtk.TreeViewColumn(_("Date"), renderer, text=0)
-        column2 = gtk.TreeViewColumn(_("Racepoint"), renderer, text=1)
-        column3 = gtk.TreeViewColumn(_("Placed"), renderer, text=2)
-        column4 = gtk.TreeViewColumn(_("Out of"), renderer, text=3)
-        column5 = gtk.TreeViewColumn(_("Coefficient"), renderer, text=4)
-        column6 = gtk.TreeViewColumn(_("Sector"), renderer, text=5)
-        column1.set_resizable(True)
-        column2.set_resizable(True)
-        column3.set_resizable(True)
-        column4.set_resizable(True)
-        column5.set_resizable(True)
-        column6.set_resizable(True)
-        column1.set_sort_column_id(0)
-        column2.set_sort_column_id(1)
-        column3.set_sort_column_id(2)
-        column4.set_sort_column_id(3)
-        column5.set_sort_column_id(4)
-        column6.set_sort_column_id(5)
-        self.treeviewres.set_model(self.liststoreres)
-        self.treeviewres.append_column(column1)
-        self.treeviewres.append_column(column2)
-        self.treeviewres.append_column(column3)
-        self.treeviewres.append_column(column4)
-        self.treeviewres.append_column(column5)
-        self.treeviewres.append_column(column6)
-
-        self.selectionres = self.treeviewres.get_selection()
-        self.selectionres.connect('changed', self.selectionresult_changed)
+        # Results treeview
+        columns = [_("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector")]
+        types = [str, str, int, int, float, str]
+        self.lsResult, self.selResults = Widgets.setup_treeview(self.tvResults, columns, types, self.selectionresult_changed, True, True)
 
     def fill_treeview(self, pigeonType='all', path=0):
         '''
@@ -899,7 +817,7 @@ class MainWindow:
         @param ring: the selected pigeon
         '''
 
-        self.liststoreres.clear()
+        self.lsResult.clear()
 
         dics = Results.read_result(ring)
         for dic in dics:
@@ -911,9 +829,9 @@ class MainWindow:
 
             cof = (float(place)/float(out))*100
 
-            self.liststoreres.append([date, point, place, out, cof, sector])
+            self.lsResult.append([date, point, place, out, cof, sector])
 
-        self.liststoreres.set_sort_column_id(0, gtk.SORT_ASCENDING)
+        self.lsResult.set_sort_column_id(0, gtk.SORT_ASCENDING)
 
     def find_direct_relatives(self, ring, sire, dam):
         '''
@@ -924,7 +842,7 @@ class MainWindow:
         @param dam: dam of selected pigeon
         '''
 
-        self.liststorebs.clear()
+        self.lsBrothers.clear()
 
         if sire == '' or dam == '': return
 
@@ -933,10 +851,10 @@ class MainWindow:
                dam == self.parser.pigeons[pigeon].dam and not\
                pigeon == ring:
 
-                self.liststorebs.append([pigeon, self.parser.pigeons[pigeon].year])
+                self.lsBrothers.append([pigeon, self.parser.pigeons[pigeon].year])
 
-        self.liststorebs.set_sort_column_id(0, gtk.SORT_ASCENDING)
-        self.liststorebs.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        self.lsBrothers.set_sort_column_id(0, gtk.SORT_ASCENDING)
+        self.lsBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
     def find_half_relatives(self, ring, sire, yearsire, dam, yeardam):
         '''
@@ -949,7 +867,7 @@ class MainWindow:
         @param yeardam: year of the dam of selected pigeon
         '''
 
-        self.liststorehbs.clear()
+        self.lsHalfBrothers.clear()
 
         for pigeon in self.parser.pigeons:
 
@@ -958,17 +876,17 @@ class MainWindow:
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
 
-                    self.liststorehbs.append([pigeon, self.parser.pigeons[pigeon].year, sire+'/'+yearsire[2:]])
+                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].year, sire+'/'+yearsire[2:]])
 
             if not dam == '':
                 if dam == self.parser.pigeons[pigeon].dam\
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
 
-                    self.liststorehbs.append([pigeon, self.parser.pigeons[pigeon].year, dam+'/'+yeardam[2:]])
+                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].year, dam+'/'+yeardam[2:]])
 
-        self.liststorehbs.set_sort_column_id(0, gtk.SORT_ASCENDING)
-        self.liststorehbs.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        self.lsHalfBrothers.set_sort_column_id(0, gtk.SORT_ASCENDING)
+        self.lsHalfBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
     def find_offspring(self, ring, sire, dam):
         '''
@@ -979,15 +897,15 @@ class MainWindow:
         @param dam: dam of selected pigeon
         '''
 
-        self.liststorejong.clear()
+        self.lsOffspring.clear()
 
         for pigeon in self.parser.pigeons:
             if self.parser.pigeons[pigeon].sire == ring or self.parser.pigeons[pigeon].dam == ring:
 
-                self.liststorejong.append([pigeon, self.parser.pigeons[pigeon].year])
+                self.lsOffspring.append([pigeon, self.parser.pigeons[pigeon].year])
 
-        self.liststorejong.set_sort_column_id(0, gtk.SORT_ASCENDING)
-        self.liststorejong.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        self.lsOffspring.set_sort_column_id(0, gtk.SORT_ASCENDING)
+        self.lsOffspring.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
     def set_menuitem_sensitive(self, activated):
         '''
@@ -1100,11 +1018,11 @@ class MainWindow:
             self.parser.pigeon.add_section(section)
         else:
             if check and self.parser.pigeons[section].show == True:
-                overwrite = Dialog.messageDialog('warning', Const.MSGEXIST, self.main)
+                overwrite = Widgets.message_dialog('warning', Const.MSGEXIST, self.main)
                 if overwrite == 'no':
                     return
             elif check and self.parser.pigeons[section].show == False:
-                overwrite = Dialog.messageDialog('warning', Const.MSGSHOW, self.main)
+                overwrite = Widgets.message_dialog('warning', Const.MSGSHOW, self.main)
                 if overwrite == 'no':
                     return
                 if overwrite == 'yes':
@@ -1220,16 +1138,16 @@ class MainWindow:
         @param pigeonType: sex of the pigeons
         '''
 
-        self.liststorefind.clear()
+        self.lsFind.clear()
 
         for pigeon in self.parser.pigeons:
             if pigeonType == self.parser.pigeons[pigeon].sex:
-                self.liststorefind.append([pigeon, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name])
+                self.lsFind.append([pigeon, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name])
 
-        if len(self.liststorefind) > 0:
-            self.liststorefind.set_sort_column_id(0, gtk.SORT_ASCENDING)
-            self.liststorefind.set_sort_column_id(1, gtk.SORT_ASCENDING)
-            self.treeviewfind.set_cursor(0)
+        if len(self.lsFind) > 0:
+            self.lsFind.set_sort_column_id(0, gtk.SORT_ASCENDING)
+            self.lsFind.set_sort_column_id(1, gtk.SORT_ASCENDING)
+            self.tvFind.set_cursor(0)
 
         self.finddialog.show()
 
