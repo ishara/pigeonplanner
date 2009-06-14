@@ -1179,3 +1179,9 @@ class MainWindow:
         for item in items:
             model.append([item])
 
+        number = len(model)
+        if number > 10 and number <= 30:
+            widget.set_wrap_width(2)
+        elif number > 30:
+            widget.set_wrap_width(3)
+

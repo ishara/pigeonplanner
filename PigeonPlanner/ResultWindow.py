@@ -205,64 +205,56 @@ class ResultWindow:
                     self.liststore.append([date, point, placed, out, cof, sector, band, bandsort])
 
                 if fill_combo:
-                    if not pigeon in pigeons:
-                        pigeons.append(pigeon)
-
-                    if not date[:4] in yearRaces:
-                        yearRaces.append(date[:4])
-
-                    if not self.pigeons[pigeon].year in yearPigeons:
-                        yearPigeons.append(self.pigeons[pigeon].year)
-
-                    if not point in racepoints:
-                        racepoints.append(point)
-
-                    if not sector in sectors and not sector == '':
-                        sectors.append(sector)
+                    dataValues = {pigeon : pigeons, \
+                                  date[:4] : yearRaces, \
+                                  self.pigeons[pigeon].year : yearPigeons, \
+                                  point : racepoints, \
+                                  sector : sectors}
+                    for data, datalist in dataValues.iteritems():
+                        self.fill_data(data, datalist)
 
         self.labelResults.set_text(str(numberOfResults))
 
         if fill_combo:
-            pigeons.sort()
-            pigeons.insert(0, _("All"))
-
-            yearRaces.sort()
-            yearRaces.insert(0, _("All"))
-
-            yearPigeons.sort()
-            yearPigeons.insert(0, _("All"))
-
-            racepoints.sort()
-            racepoints.insert(0, _("All"))
-
-            sectors.sort()
-            sectors.insert(0, _("All"))
-
-            for item in pigeons:
-                if not item == _("All"):
-                    item = item + ' / ' + self.pigeons[item].year[2:]
-                self.cbPigeon.get_model().append([item])
-
-            for item in yearRaces:
-                self.cbYearRace.get_model().append([item])
-
-            for item in yearPigeons:
-                self.cbYearPigeons.get_model().append([item])
-
-            for item in racepoints:
-                self.cbRacepoint.get_model().append([item])
-
-            for item in sectors:
-                self.cbSector.get_model().append([item])
-
-            self.cbPigeon.set_wrap_width(2)
-            self.cbRacepoint.set_wrap_width(2)
+            comboValues = {self.cbPigeon : pigeons, \
+                           self.cbYearRace : yearRaces, \
+                           self.cbYearPigeons : yearPigeons, \
+                           self.cbRacepoint : racepoints, \
+                           self.cbSector : sectors}
+            for combo, data in comboValues.iteritems():
+                self.fill_list(combo, data)
 
             self.block_handler = True
-            self.cbPigeon.set_active(0)
-            self.cbYearRace.set_active(0)
-            self.cbYearPigeons.set_active(0)
-            self.cbRacepoint.set_active(0)
-            self.cbSector.set_active(0)
+            for key in comboValues.keys():
+                key.set_active(0)
             self.block_handler = False
+
+    def fill_list(self, widget, items):
+        '''
+        Fill the comboboxes with their data
+
+        @param widget: the combobox
+        @param items: the data
+        '''
+
+        model = widget.get_model()
+        model.clear()
+        items.sort()
+        model.insert(0, [_("All")])
+        for item in items:
+            if widget == self.cbPigeon:
+                if not item == _("All"):
+                    item = item + ' / ' + self.pigeons[item].year[2:]
+            model.append([item])
+
+        number = len(model)
+        if number > 10 and number <= 30:
+            widget.set_wrap_width(2)
+        elif number > 30:
+            widget.set_wrap_width(3)
+
+    def fill_data(self, item, datalist):
+        if not item in datalist and item != '':
+            datalist.append(item)
+
 
