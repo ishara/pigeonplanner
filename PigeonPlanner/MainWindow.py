@@ -99,42 +99,17 @@ class MainWindow:
 
         self.main.set_title("%s %s" %(Const.NAME, Const.VERSION))
 
-        supportedImages = ["png", "jpg", "bmp"]
-        fileFilter = gtk.FileFilter()
-        fileFilter.set_name(_("Images"))
-        for item in supportedImages:
-            fileFilter.add_mime_type("image/%s" %item)
-            fileFilter.add_pattern("*.%s" %item)
-        self.filedialog.add_filter(fileFilter)
-
-        for item in [self.cbRacepoint, self.cbSector, self.cbColour, self.cbStrain, self.cbLoft]:
-            self.set_completion(item)
-
-        self.sexDic = {'0' : _('cock'), '1' : _('hen'), '2' : _('young bird')}
-        self.sexStore = gtk.ListStore(str, str)
-        for key in self.sexDic.keys():
-            self.sexStore.append([key, self.sexDic[key]])
-        self.cbsex = gtk.ComboBox(self.sexStore)
-        self.cbSerieSex = gtk.ComboBox(self.sexStore)
-        for box in [self.cbsex, self.cbSerieSex]:
-            cell = gtk.CellRendererText()
-            box.pack_start(cell, True)
-            box.add_attribute(cell, 'text', 1)
-            box.show()
-
-        self.table1.attach(self.cbSerieSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
-        self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
-
-        self.entrySexKey = gtk.Entry()
-        self.hbox4.pack_start(self.entrySexKey)
-
         self.date_format = '%Y-%m-%d'
         self.imageToAdd = ''
         self.imageDeleted = False
         self.beforeEditPath = None
+        self.sexDic = {'0' : _('cock'), '1' : _('hen'), '2' : _('young bird')}
         self.entrysToCheck = { 'ring' : self.entryRing1, 'year' : self.entryYear1, 
                                'sire' : self.entrySireEdit, 'yearsire' : self.entryYearSireEdit, 
                                'dam' : self.entryDamEdit, 'yeardam' : self.entryYearDamEdit}
+
+        self.entrySexKey = gtk.Entry()
+        self.hbox4.pack_start(self.entrySexKey)
 
         self.options = Options.GetOptions()
         self.parser = PigeonParser.PigeonParser()
@@ -144,14 +119,18 @@ class MainWindow:
         self.build_treeview()
         self.build_treeviews()
         self.fill_treeview()
+        self.create_sexcombos()
+        self.set_filefilter()
+        for item in [self.cbRacepoint, self.cbSector, self.cbColour, self.cbStrain, self.cbLoft]:
+            self.set_completion(item)
 
         if self.options.optionList.arrows:
             self.alignarrows.show()
 
         self.listdata = {self.cbSector : 'sector', self.cbRacepoint : 'racepoint',
                          self.cbColour : 'colour', self.cbStrain : 'strain', self.cbLoft : 'loft'}
-        for key, value in self.listdata.iteritems():
-            self.fill_list(key, value)
+        for key in self.listdata.keys():
+            self.fill_list(key, self.listdata[key])
 
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
@@ -1163,6 +1142,38 @@ class MainWindow:
             self.tvFind.set_cursor(0)
 
         self.finddialog.show()
+
+    def create_sexcombos(self):
+        '''
+        Create the sexcombos and show them
+        '''
+
+        self.sexStore = gtk.ListStore(str, str)
+        for key in self.sexDic.keys():
+            self.sexStore.append([key, self.sexDic[key]])
+        self.cbsex = gtk.ComboBox(self.sexStore)
+        self.cbSerieSex = gtk.ComboBox(self.sexStore)
+        for box in [self.cbsex, self.cbSerieSex]:
+            cell = gtk.CellRendererText()
+            box.pack_start(cell, True)
+            box.add_attribute(cell, 'text', 1)
+            box.show()
+
+        self.table1.attach(self.cbSerieSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
+        self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
+
+    def set_filefilter(self):
+        '''
+        Set a file filter for supported image files
+        '''
+
+        supportedImages = ["png", "jpg", "bmp"]
+        fileFilter = gtk.FileFilter()
+        fileFilter.set_name(_("Images"))
+        for item in supportedImages:
+            fileFilter.add_mime_type("image/%s" %item)
+            fileFilter.add_pattern("*.%s" %item)
+        self.filedialog.add_filter(fileFilter)
 
     def set_completion(self, widget):
         '''
