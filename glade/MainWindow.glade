@@ -474,26 +474,6 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="GtkViewport" id="viewport9">
-                                            <property name="visible">True</property>
-                                            <property name="resize_mode">queue</property>
-                                            <child>
-                                              <widget class="GtkEntry" id="entrySex">
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="editable">False</property>
-                                                <property name="has_frame">False</property>
-                                              </widget>
-                                            </child>
-                                          </widget>
-                                          <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="right_attach">2</property>
-                                            <property name="top_attach">1</property>
-                                            <property name="bottom_attach">2</property>
-                                          </packing>
-                                        </child>
-                                        <child>
                                           <widget class="GtkViewport" id="viewport8">
                                             <property name="visible">True</property>
                                             <property name="resize_mode">queue</property>
@@ -801,6 +781,38 @@
                                           </packing>
                                         </child>
                                         <child>
+                                          <widget class="GtkViewport" id="viewport9">
+                                            <property name="visible">True</property>
+                                            <property name="resize_mode">queue</property>
+                                            <child>
+                                              <widget class="GtkHBox" id="hbox4">
+                                                <property name="visible">True</property>
+                                                <child>
+                                                  <widget class="GtkEntry" id="entrySex">
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <property name="editable">False</property>
+                                                    <property name="has_frame">False</property>
+                                                    <property name="invisible_char">&#x25CF;</property>
+                                                  </widget>
+                                                  <packing>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <placeholder/>
+                                                </child>
+                                              </widget>
+                                            </child>
+                                          </widget>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="right_attach">2</property>
+                                            <property name="top_attach">1</property>
+                                            <property name="bottom_attach">2</property>
+                                          </packing>
+                                        </child>
+                                        <child>
                                           <placeholder/>
                                         </child>
                                       </widget>
@@ -985,20 +997,6 @@
                                             <property name="bottom_attach">8</property>
                                             <property name="x_padding">12</property>
                                             <property name="y_padding">4</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkComboBox" id="cbsex">
-                                            <property name="visible">True</property>
-                                            <property name="items" translatable="yes"></property>
-                                          </widget>
-                                          <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="right_attach">2</property>
-                                            <property name="top_attach">1</property>
-                                            <property name="bottom_attach">2</property>
-                                            <property name="x_options"></property>
-                                            <property name="y_options"></property>
                                           </packing>
                                         </child>
                                         <child>
@@ -1357,6 +1355,9 @@
                                             <property name="top_attach">6</property>
                                             <property name="bottom_attach">8</property>
                                           </packing>
+                                        </child>
+                                        <child>
+                                          <placeholder/>
                                         </child>
                                         <child>
                                           <placeholder/>
@@ -2448,6 +2449,7 @@
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Remove pigeon</property>
     <property name="resizable">False</property>
+    <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon">icon_logo.png</property>
@@ -2622,19 +2624,6 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkComboBox" id="cbSerieSex">
-                        <property name="visible">True</property>
-                        <property name="items" translatable="yes"></property>
-                      </widget>
-                      <packing>
-                        <property name="left_attach">6</property>
-                        <property name="right_attach">7</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
                       <widget class="GtkLabel" id="label50">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Sex</property>
@@ -2749,6 +2738,9 @@
                       <packing>
                         <property name="y_options"></property>
                       </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
                     </child>
                     <child>
                       <placeholder/>

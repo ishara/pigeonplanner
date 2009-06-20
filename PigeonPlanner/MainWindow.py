@@ -110,10 +110,23 @@ class MainWindow:
         for item in [self.cbRacepoint, self.cbSector, self.cbColour, self.cbStrain, self.cbLoft]:
             self.set_completion(item)
 
-        self.sexDic = {_('cock') : 0, _('hen') : 1, _('young bird') : 2}
-        for key, value in self.sexDic.iteritems():
-            self.cbsex.get_model().append([key])
-            self.cbSerieSex.get_model().append([key])
+        self.sexDic = {'0' : _('cock'), '1' : _('hen'), '2' : _('young bird')}
+        self.sexStore = gtk.ListStore(str, str)
+        for key in self.sexDic.keys():
+            self.sexStore.append([key, self.sexDic[key]])
+        self.cbsex = gtk.ComboBox(self.sexStore)
+        self.cbSerieSex = gtk.ComboBox(self.sexStore)
+        for box in [self.cbsex, self.cbSerieSex]:
+            cell = gtk.CellRendererText()
+            box.pack_start(cell, True)
+            box.add_attribute(cell, 'text', 1)
+            box.show()
+
+        self.table1.attach(self.cbSerieSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
+        self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
+
+        self.entrySexKey = gtk.Entry()
+        self.hbox4.pack_start(self.entrySexKey)
 
         self.date_format = '%Y-%m-%d'
         self.imageToAdd = ''
@@ -152,15 +165,15 @@ class MainWindow:
         #TODO: Show menu
 
     def young_activate(self, widget):
-        self.fill_treeview(_('young bird'))
+        self.fill_treeview('2')
         self.set_menuitem_sensitive(widget)
 
     def cock_activate(self, widget):
-        self.fill_treeview(_('cock'))
+        self.fill_treeview('0')
         self.set_menuitem_sensitive(widget)
 
     def hen_activate(self, widget):
-        self.fill_treeview(_('hen'))
+        self.fill_treeview('1')
         self.set_menuitem_sensitive(widget)
 
     def all_activate(self, widget):
@@ -346,8 +359,7 @@ class MainWindow:
         self.entryDamEdit.set_text(self.entryDam.get_text())
         self.entryYearDamEdit.set_text(self.entryYearDam.get_text())
 
-        sexIndex = self.sexDic[self.entrySex.get_text().lower()]
-        self.cbsex.set_active(sexIndex)
+        self.cbsex.set_active(int(self.entrySexKey.get_text())) #FIXME
 
         self.add_edit_start('edit')
 
@@ -444,7 +456,7 @@ class MainWindow:
         ring, year = self.get_main_ring()
 
         name = self.parser.pigeons[ring].name
-        sex = self.parser.pigeons[ring].sex
+        sex = self.sexDic[self.parser.pigeons[ring].sex]
         colour = self.parser.pigeons[ring].colour
         PedigreeWindow.PedigreeWindow(self, ring, year[2:], name, colour, sex)
 
@@ -463,9 +475,9 @@ class MainWindow:
                     ring = text.split(' / ')[0]
                     year = text.split(' / ')[1]
                     if child.get_parent().get_name() == 'tableSire':
-                        sex = 'cock'
+                        sex = '0'
                     else:
-                        sex = 'hen'
+                        sex = '1'
 
         if not ring == '':
             for item in self.liststore:
@@ -481,7 +493,7 @@ class MainWindow:
                 self.add_clicked(None)
                 self.entryRing1.set_text(ring)
                 self.entryYear1.set_text(year)
-                self.cbsex.set_active(self.sexDic[_(sex)])
+                self.cbsex.set_active(int(sex)) #FIXME
 
     def addresult_clicked(self, widget):
         date = self.entryDate.get_text()
@@ -540,11 +552,11 @@ class MainWindow:
 
     def findsire_clicked(self, widget):
         self.search = 'sire'
-        self.fill_find_treeview(_('cock'))
+        self.fill_find_treeview('0')
 
     def finddam_clicked(self, widget):
         self.search = 'dam'
-        self.fill_find_treeview(_('hen'))
+        self.fill_find_treeview('1')
 
     def findadd_clicked(self, widget):
         model, path = self.selectionfind.get_selected()
@@ -676,7 +688,7 @@ class MainWindow:
             if pigeonType == self.parser.pigeons[pigeon].sex or pigeonType == 'all':
                 if self.options.optionList.column:
                     if self.options.optionList.columntype == _('Sex'):
-                        extra = self.parser.pigeons[pigeon].sex
+                        extra = self.sexDic[self.parser.pigeons[pigeon].sex]
                     elif self.options.optionList.columntype == _('Colour'):
                         extra = self.parser.pigeons[pigeon].colour
                     self.liststore.append([pigeon, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name, extra])
@@ -771,7 +783,8 @@ class MainWindow:
 
         self.entryRing.set_text(selected)
         self.entryYear.set_text(year)
-        self.entrySex.set_text(sex)
+        self.entrySexKey.set_text(sex)
+        self.entrySex.set_text(self.sexDic[sex])
         self.entryStrain.set_text(strain)
         self.entryLoft.set_text(loft)
         self.entryColour.set_text(colour)
@@ -982,7 +995,7 @@ class MainWindow:
         infoDic['loft']     = self.cbLoft.child.get_text()
         infoDic['sire']     = self.entrySireEdit.get_text()
         infoDic['dam']      = self.entryDamEdit.get_text()
-        infoDic['sex']      = self.cbsex.get_active_text().lower()
+        infoDic['sex']      = self.cbsex.get_active_text()
         infoDic['year']     = self.calculate_year(self.entryYear1.get_text())
         infoDic['yearsire'] = self.calculate_year(self.entryYearSireEdit.get_text())
         infoDic['yeardam']  = self.calculate_year(self.entryYearDamEdit.get_text())

@@ -126,7 +126,7 @@ class PedigreeBox(gtk.DrawingArea):
         if ring != '':
             self.text = ring + ' / ' + year
 
-            if sex == _('cock'):
+            if sex == '0':
                 self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
                 self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
             else:
@@ -405,7 +405,7 @@ class DrawPedigree:
                 extra1 = extra2 = extra3 = extra4 = extra5 = extra6 = ''
 
             if ringSire:
-                self.build_tree(ringSire, yearSire, _('cock'), extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+1, depth+1, lst)
+                self.build_tree(ringSire, yearSire, '0', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+1, depth+1, lst)
 
             ringDam = self.parser.pigeons[ring].dam
             yearDam = self.parser.pigeons[ring].yeardam
@@ -420,5 +420,5 @@ class DrawPedigree:
                 extra1 = extra2 = extra3 = extra4 = extra5 = extra6 = ''
 
             if ringDam:
-                self.build_tree(ringDam, yearDam, _('hen'), extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+2, depth+1, lst)
+                self.build_tree(ringDam, yearDam, '1', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+2, depth+1, lst)
 
