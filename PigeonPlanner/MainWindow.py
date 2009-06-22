@@ -25,7 +25,6 @@ import gtk.glade
 
 import Const
 import Widgets
-import Backup
 import Results
 import Options
 import ToolsWindow
@@ -87,7 +86,6 @@ class MainWindow:
                       'on_seriedialog_delete'    : self.dialog_delete,
                       'on_finddialog_delete'     : self.dialog_delete,
                       'on_removedialog_delete'   : self.dialog_delete,
-                      'on_backupdialog_delete'   : self.dialog_delete,
                       'on_filedialog_delete'     : self.dialog_delete,
                       'on_main_destroy'          : gtk.main_quit,
                       'on_quit_clicked'          : gtk.main_quit }
