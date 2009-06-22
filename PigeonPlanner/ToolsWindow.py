@@ -22,6 +22,8 @@ import gtk
 import gtk.glade
 
 import Const
+import Backup
+import Widgets
 
 
 class ToolsWindow:
@@ -106,13 +108,13 @@ class ToolsWindow:
         folder = self.fcButtonCreate.get_current_folder()
         if folder:
             Backup.make_backup(folder)
-            Dialog.messageDialog('info', Const.MSGBCKPOK, self.main)
+            Widgets.message_dialog('info', Const.MSGBCKPOK, self.main.main)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             Backup.restore_backup(zipfile)
-            Dialog.messageDialog('info', Const.MSGRESTOK, self.main)
+            Widgets.message_dialog('info', Const.MSGRESTOK, self.main.main)
 
     def sbbegin_changed(self, widget):
         spinmin = widget.get_value_as_int()
