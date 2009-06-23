@@ -50,6 +50,7 @@ else:
         GLADEDIR = './glade/'
         IMAGEDIR = './images/'
 
+DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 PIGEONFILE = os.path.join(PREFDIR, 'pigeon.list')
 RESULTFILE = os.path.join(PREFDIR, 'results.db')
 DATAFILE = os.path.join(PREFDIR, 'data.db')

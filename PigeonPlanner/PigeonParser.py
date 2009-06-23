@@ -19,49 +19,42 @@
 import ConfigParser
 
 import Const
+import Database
 
 
 class PigeonParser:
     def __init__(self):
-        self.pigeon = ConfigParser.SafeConfigParser()
-        self.read_pigeonfile()
-
-    def read_pigeonfile(self):
-        self.pigeon.read(Const.PIGEONFILE)
+        self.database = Database.DatabaseOperations()
 
     def get_pigeons(self):
         self.pigeons = {}
-        sections = self.pigeon.sections()
+        data = self.database.get_pigeons()
+        for pigeon in data:
+            p = ParsedPigeon(pigeon[1],
+                             pigeon[2],
+                             pigeon[3],
+                             pigeon[4],
+                             pigeon[5],
+                             pigeon[6],
+                             pigeon[7],
+                             pigeon[8],
+                             pigeon[9],
+                             pigeon[10],
+                             pigeon[11],
+                             pigeon[12],
+                             pigeon[13],
+                             pigeon[14],
+                             pigeon[15],
+                             pigeon[16],
+                             pigeon[17],
+                             pigeon[18],
+                             pigeon[19],)
 
-        for pigeon in sections:
-            try:
-                p = ParsedPigeon(self.pigeon.get(pigeon,'ring'),
-                                 self.pigeon.get(pigeon,'year'),
-                                 self.pigeon.get(pigeon,'sex'),
-                                 self.pigeon.getboolean(pigeon,'show'),
-                                 self.pigeon.get(pigeon,'extra1'),
-                                 self.pigeon.get(pigeon,'extra2'),
-                                 self.pigeon.get(pigeon,'extra3'),
-                                 self.pigeon.get(pigeon,'extra4'),
-                                 self.pigeon.get(pigeon,'extra5'),
-                                 self.pigeon.get(pigeon,'extra6'),
-                                 self.pigeon.get(pigeon,'name'),
-                                 self.pigeon.get(pigeon,'colour'),
-                                 self.pigeon.get(pigeon,'strain'),
-                                 self.pigeon.get(pigeon,'loft'),
-                                 self.pigeon.get(pigeon,'image'),
-                                 self.pigeon.get(pigeon,'sire'),
-                                 self.pigeon.get(pigeon,'yearsire'),
-                                 self.pigeon.get(pigeon,'dam'),
-                                 self.pigeon.get(pigeon,'yeardam'))
-
-                self.pigeons[p.ring] = p
-            except ConfigParser.NoOptionError, msg: #
-                print msg
+            self.pigeons[p.ring] = p
 
 
 class ParsedPigeon:
-    def __init__(self, ring, year, sex, show, extra1='', extra2='', extra3='', extra4='', extra5='', extra6='', name='', colour='', strain= '', loft='', image='', sire='', yearsire='', dam='', yeardam=''):
+    def __init__(self, ring, year, sex, show, colour='', name='', strain='', loft='', image='', sire='', yearsire='', dam='', yeardam='', extra1='', extra2='', extra3='', extra4='', extra5='', extra6=''):
         self.ring = ring
         self.year = year
         self.name = name

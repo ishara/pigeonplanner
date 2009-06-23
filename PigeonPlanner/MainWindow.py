@@ -25,8 +25,8 @@ import gtk.glade
 
 import Const
 import Widgets
-import Results
 import Options
+import Database
 import ToolsWindow
 import PigeonParser
 import ResultWindow
@@ -101,14 +101,15 @@ class MainWindow:
         self.imageToAdd = ''
         self.imageDeleted = False
         self.beforeEditPath = None
-        self.sexDic = {'0' : _('cock'), '1' : _('hen'), '2' : _('young bird')}
-        self.entrysToCheck = { 'ring' : self.entryRing1, 'year' : self.entryYear1, 
-                               'sire' : self.entrySireEdit, 'yearsire' : self.entryYearSireEdit, 
-                               'dam' : self.entryDamEdit, 'yeardam' : self.entryYearDamEdit}
+        self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
+        self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1, 
+                               'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit, 
+                               'dam': self.entryDamEdit, 'yeardam': self.entryYearDamEdit}
 
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
 
+        self.database = Database.DatabaseOperations()
         self.options = Options.GetOptions()
         self.parser = PigeonParser.PigeonParser()
         self.parser.get_pigeons()
@@ -125,8 +126,11 @@ class MainWindow:
         if self.options.optionList.arrows:
             self.alignarrows.show()
 
-        self.listdata = {self.cbSector : 'sector', self.cbRacepoint : 'racepoint',
-                         self.cbColour : 'colour', self.cbStrain : 'strain', self.cbLoft : 'loft'}
+        self.listdata = {self.cbSector: self.database.get_all_sectors(), \
+                         self.cbRacepoint: self.database.get_all_racepoints(), \
+                         self.cbColour: self.database.get_all_colours(), \
+                         self.cbStrain: self.database.get_all_strains(), \
+                         self.cbLoft: self.database.get_all_lofts()}
         for key in self.listdata.keys():
             self.fill_list(key, self.listdata[key])
 
@@ -165,11 +169,10 @@ class MainWindow:
         self.seriedialog.show()
 
     def serieadd_clicked(self, widget):
-
-        check1 = check.check_ring_entry(self.entrySerieFrom.get_text(), self.entrySerieYear.get_text(), _('pigeons'))
+        check1 = check.check_ring_entry(self.main, self.entrySerieFrom.get_text(), self.entrySerieYear.get_text(), _('pigeons'))
         if not check1: return
 
-        check2 = check.check_ring_entry(self.entrySerieTo.get_text(), self.entrySerieYear.get_text(), _('pigeons'))
+        check2 = check.check_ring_entry(self.main, self.entrySerieTo.get_text(), self.entrySerieYear.get_text(), _('pigeons'))
         if not check2: return
 
         first = self.entrySerieFrom.get_text()
@@ -185,36 +188,14 @@ class MainWindow:
             value += 1
 
         for band in bandList:
-            if not self.parser.pigeon.has_section(band):
-                self.parser.pigeon.add_section(band)
-            else:
+            if self.database.has_pigeon(band):
                 overwrite = Widgets.message_dialog('warning', Const.MSGEXIST, self.main)
                 if overwrite == 'no':
                     continue
 
-            self.parser.pigeon.set(band, 'ring', str(band))
-            self.parser.pigeon.set(band, 'year', self.calculate_year(year))
-            self.parser.pigeon.set(band, 'sex', sex)
-            self.parser.pigeon.set(band, 'show', 'True')
-            self.parser.pigeon.set(band, 'name', '')
-            self.parser.pigeon.set(band, 'colour', '')
-            self.parser.pigeon.set(band, 'strain', '')
-            self.parser.pigeon.set(band, 'loft', '')
-            self.parser.pigeon.set(band, 'image', '')
-            self.parser.pigeon.set(band, 'sire', '')
-            self.parser.pigeon.set(band, 'dam', '')
-            self.parser.pigeon.set(band, 'yearsire', '')
-            self.parser.pigeon.set(band, 'yeardam', '')
-            self.parser.pigeon.set(band, 'extra1', '')
-            self.parser.pigeon.set(band, 'extra2', '')
-            self.parser.pigeon.set(band, 'extra3', '')
-            self.parser.pigeon.set(band, 'extra4', '')
-            self.parser.pigeon.set(band, 'extra5', '')
-            self.parser.pigeon.set(band, 'extra6', '')
+            data = (str(band), self.calculate_year(year), sex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '','')
+            self.database.insert_pigeon(data)
 
-        self.parser.pigeon.write(open(Const.PIGEONFILE, 'w'))
-
-        self.parser.read_pigeonfile()
         self.parser.get_pigeons()
 
         self.fill_treeview()
@@ -301,14 +282,12 @@ class MainWindow:
         dialog = wTree.get_widget('removedialog')
         label = wTree.get_widget('labelPigeon')
         label.set_text(ring + '/' + year[2:])
-        result = dialog.run()
-        if result == 2:
+        answer = dialog.run()
+        if answer == 2:
             if self.chkKeep.get_active():
-                self.parser.pigeon.set(ring, 'show', 'False')
-                self.parser.pigeon.write(open(Const.PIGEONFILE, 'w'))
+                self.database.show_pigeon(ring, 0)
             else:
-                self.parser.pigeon.remove_section(ring)
-                self.parser.pigeon.write(open(Const.PIGEONFILE, 'w'))
+                self.database.delete_pigeon(ring)
                 self.parser.get_pigeons()
 
             self.liststore.remove(tIter)
@@ -343,12 +322,15 @@ class MainWindow:
     def save_clicked(self, widget):
         if not check.check_entrys(self.entrysToCheck): return
 
-        self.write_new_info(False)
+        self.write_new_data()
 
         self.add_edit_finish()
 
     def add_clicked(self, widget):
         self.empty_entryboxes()
+        self.cbColour.child.set_text('')
+        self.cbStrain.child.set_text('')
+        self.cbLoft.child.set_text('')
         self.cbsex.set_active(0)
 
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 75, 75)
@@ -359,7 +341,7 @@ class MainWindow:
     def btnadd_clicked(self, widget):
         if not check.check_entrys(self.entrysToCheck): return
 
-        self.write_new_info(True)
+        self.write_new_pigeon()
 
         self.add_edit_finish()
 
@@ -491,18 +473,15 @@ class MainWindow:
 
         cof = (float(place)/float(out))*100
         ring, year = self.get_main_ring()
-        dic = dict(date=date, point=point, place=place, out=out, sector=sector)
-        Results.add_result(ring, dic)
+        data = (ring, date, point, place, out, sector)
+        self.database.insert_result(data)
 
-        racepoints = Results.read_data('racepoint')
-        if not point in racepoints:
-            Results.add_data('racepoint', point)
-            self.fill_list(self.cbRacepoint, 'racepoint')
+        self.database.insert_racepoint((point, ))
+        self.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
 
-        sectors = Results.read_data('sector')
-        if not sector in sectors and sector != '':
-            Results.add_data('sector', sector)
-            self.fill_list(self.cbSector, 'sector')
+        if sector:
+            self.database.insert_sector((sector, ))
+            self.fill_list(self.cbSector, self.database.get_all_sectors())
 
         self.lsResult.append([date, point, place, out, cof, sector])
 
@@ -517,7 +496,15 @@ class MainWindow:
 
         ring, year = self.get_main_ring()
 
-        Results.remove_result(ring, date, point, place, out)
+        results = self.database.get_pigeon_results(ring)
+        for result in results:
+            if result[2] == date and \
+               result[3] == point and \
+               result[4] == place and \
+               result[5] == out:
+                    ID = result[0]
+
+        self.database.delete_result(ID)
 
         self.lsResult.remove(tIter)
 
@@ -525,7 +512,7 @@ class MainWindow:
             self.tvResults.set_cursor(path)
 
     def allresults_clicked(self, widget):
-        ResultWindow.ResultWindow(self, self.parser.pigeons)
+        ResultWindow.ResultWindow(self, self.parser.pigeons, self.database)
 
     def findsire_clicked(self, widget):
         self.search = 'sire'
@@ -809,13 +796,12 @@ class MainWindow:
 
         self.lsResult.clear()
 
-        dics = Results.read_result(ring)
-        for dic in dics:
-            date = dic['date']
-            point = dic['point']
-            place = dic['place']
-            out = dic['out']
-            sector = dic['sector']
+        for result in self.database.get_pigeon_results(ring):
+            date = result[2]
+            point = result[3]
+            place = result[4]
+            out = result[5]
+            sector = result[6]
 
             cof = (float(place)/float(out))*100
 
@@ -954,94 +940,101 @@ class MainWindow:
 
     def get_add_edit_info(self):
         '''
-        Return a dictionary containig info about the editable widgets.
+        Return a tuple containig info about the editable widgets.
         '''
 
-        infoDic = {}
-
-        infoDic['ring']     = self.entryRing1.get_text()
-        infoDic['name']     = self.entryName1.get_text()
-        infoDic['extra1']   = self.extra11.get_text()
-        infoDic['extra2']   = self.extra21.get_text()
-        infoDic['extra3']   = self.extra31.get_text()
-        infoDic['extra4']   = self.extra41.get_text()
-        infoDic['extra5']   = self.extra51.get_text()
-        infoDic['extra6']   = self.extra61.get_text()
-        infoDic['colour']   = self.cbColour.child.get_text()
-        infoDic['strain']   = self.cbStrain.child.get_text()
-        infoDic['loft']     = self.cbLoft.child.get_text()
-        infoDic['sire']     = self.entrySireEdit.get_text()
-        infoDic['dam']      = self.entryDamEdit.get_text()
-        infoDic['sex']      = self.cbsex.get_active_text()
-        infoDic['year']     = self.calculate_year(self.entryYear1.get_text())
-        infoDic['yearsire'] = self.calculate_year(self.entryYearSireEdit.get_text())
-        infoDic['yeardam']  = self.calculate_year(self.entryYearDamEdit.get_text())
-        infoDic['show']     = 'True'
-
-        image = ''
+        imageTemp = ''
 
         try:
-            image = self.parser.pigeon.get(infoDic['ring'], 'image')
+            imageTemp = self.database.get_image(self.entryRing1.get_text())
         except:
             pass
 
-        if not image == '' and not self.imageDeleted == True:
-            infoDic['image'] = image
+        if not imageTemp == '' and not self.imageDeleted == True:
+            image = imageTemp
         else:
-            infoDic['image'] = self.imageToAdd
+            image = self.imageToAdd
 
         self.imageDeleted = False
 
-        return infoDic
+        infoTuple = (self.entryRing1.get_text(),\
+                     self.calculate_year(self.entryYear1.get_text()),\
+                     self.cbsex.get_active_text(),\
+                     1,\
+                     self.cbColour.child.get_text(),\
+                     self.entryName1.get_text(),\
+                     self.cbStrain.child.get_text(),\
+                     self.cbLoft.child.get_text(),\
+                     image,\
+                     self.entrySireEdit.get_text(),\
+                     self.calculate_year(self.entryYearSireEdit.get_text()),\
+                     self.entryDamEdit.get_text(),\
+                     self.calculate_year(self.entryYearDamEdit.get_text()),\
+                     self.extra11.get_text(),\
+                     self.extra21.get_text(),\
+                     self.extra31.get_text(),\
+                     self.extra41.get_text(),\
+                     self.extra51.get_text(),\
+                     self.extra61.get_text())
 
-    def write_new_info(self, check):
+        return infoTuple
+
+    def write_new_data(self):
         '''
-        Write the new values.
-
-        @param check: Check if the pigeon already exists.
+        Write new data to the pigeon
         '''
 
-        newInfo = self.get_add_edit_info()
-        section = newInfo['ring']
+        infoTuple = self.get_add_edit_info()
+        infoTuple += (infoTuple[0],) # Add the band to the end
+        self.database.update_pigeon(infoTuple)
 
-        if not self.parser.pigeon.has_section(section):
-            self.parser.pigeon.add_section(section)
-        else:
-            if check and self.parser.pigeons[section].show == True:
+        self.update_data(infoTuple)
+
+    def write_new_pigeon(self):
+        '''
+        Write the new pigeon to the database
+        '''
+
+        infoTuple = self.get_add_edit_info()
+        ring = infoTuple[0]
+
+        #TODO; review this statement. Needs cleanup.
+        if self.database.has_pigeon(ring):
+            if self.parser.pigeons[ring].show:
                 overwrite = Widgets.message_dialog('warning', Const.MSGEXIST, self.main)
                 if overwrite == 'no':
                     return
-            elif check and self.parser.pigeons[section].show == False:
+            else:
                 overwrite = Widgets.message_dialog('warning', Const.MSGSHOW, self.main)
                 if overwrite == 'no':
                     return
                 if overwrite == 'yes':
-                    self.parser.pigeon.set(section, 'show', 'True')
-                    self.parser.pigeon.write(open(Const.PIGEONFILE, 'w'))
+                    self.database.show_pigeon(ring, 1)
                     return
 
-        for key, value in newInfo.iteritems():
-            self.parser.pigeon.set(section, key, value)
+        self.database.insert_pigeon(infoTuple)
 
-        self.parser.pigeon.write(open(Const.PIGEONFILE, 'w'))
+        self.update_data(infoTuple)
 
-        colours = Results.read_data('colour')
-        colour = newInfo['colour']
-        if not colour in colours and colour != '':
-            Results.add_data('colour', colour)
-            self.fill_list(self.cbColour, 'colour')
+    def update_data(self, infoTuple):
+        '''
+        Update the data
+        '''
 
-        strains = Results.read_data('strain')
-        strain = newInfo['strain']
-        if not strain in strains and strain != '':
-            Results.add_data('strain', strain)
-            self.fill_list(self.cbStrain, 'strain')
+        colour = infoTuple[4]
+        if colour:
+            self.database.insert_colour((colour, ))
+            self.fill_list(self.cbColour, self.database.get_all_colours())
 
-        lofts = Results.read_data('loft')
-        loft = newInfo['loft']
-        if not loft in lofts and loft != '':
-            Results.add_data('loft', loft)
-            self.fill_list(self.cbLoft, 'loft')
+        strain = infoTuple[6]
+        if strain:
+            self.database.insert_strain((strain, ))
+            self.fill_list(self.cbStrain, self.database.get_all_strains())
+
+        loft = infoTuple[7]
+        if loft:
+            self.database.insert_loft((loft, ))
+            self.fill_list(self.cbLoft, self.database.get_all_lofts())
 
     def calculate_year(self, year):
         '''
@@ -1186,17 +1179,16 @@ class MainWindow:
         completion.set_text_column(0)
         widget.child.set_completion(completion)
 
-    def fill_list(self, widget, name):
+    def fill_list(self, widget, items):
         '''
         Fill the comboboxentry's with their data
 
         @param widget: the comboboxentry
-        @param name: the type of data
+        @param items: list of items to add
         '''
 
         model = widget.get_model()
         model.clear()
-        items = Results.read_data(name)
         items.sort()
         for item in items:
             model.append([item])

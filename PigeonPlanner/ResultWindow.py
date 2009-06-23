@@ -21,11 +21,10 @@ import gtk.glade
 
 import Const
 import Print
-import Results
 
 
 class ResultWindow:
-    def __init__(self, main, pigeons):
+    def __init__(self, main, pigeons, database):
 
         self.gladefile = Const.GLADEDIR + "ResultWindow.glade"
         self.wTree = gtk.glade.XML(self.gladefile)
@@ -46,6 +45,7 @@ class ResultWindow:
             name = w.get_name()
             setattr(self, name, w)
 
+        self.database = database
         self.pigeons = pigeons
         self.main = main
 
@@ -176,33 +176,30 @@ class ResultWindow:
             racepoints = []
             sectors = []
 
-        for pigeon in self.pigeons:
-            dics = Results.read_result(pigeon)
-            if not dics:
-                continue
-            for dic in dics:
-                date = dic['date']
-                point = dic['point']
-                placed = dic['place']
-                out = dic['out']
-                sector = dic['sector']
+        for result in self.database.get_all_results():
+            pigeon = result[1]
+            date = result[2]
+            point = result[3]
+            placed = result[4]
+            out = result[5]
+            sector = result[6]
 
-                cof = (float(placed)/float(out))*100
-                band = pigeon + '/' + self.pigeons[pigeon].year[2:]
-                bandsort = self.pigeons[pigeon].year + pigeon
+            cof = (float(placed)/float(out))*100
+            band = pigeon + '/' + self.pigeons[pigeon].year[2:]
+            bandsort = self.pigeons[pigeon].year + pigeon
 
-                #TODO: This could (and should) be better I think...
-                if ((racepoint == point or racepoint == _("All")) and\
-                   (selpigeon[:7] == pigeon or selpigeon == _("All")) and\
-                   (yearpigeon == self.pigeons[pigeon].year or yearpigeon == _("All")) and\
-                   (yearrace == date[:4] or yearrace == _("All")) and\
-                   (sec == sector or sec == _("All")) and\
-                   (cof <= coef or coef == 0) and\
-                   (placed <= place or place == 0)):
+            #TODO: This could (and should) be better I think...
+            if ((racepoint == point or racepoint == _("All")) and\
+                (selpigeon[:7] == pigeon or selpigeon == _("All")) and\
+                (yearpigeon == self.pigeons[pigeon].year or yearpigeon == _("All")) and\
+                (yearrace == date[:4] or yearrace == _("All")) and\
+                (sec == sector or sec == _("All")) and\
+                (cof <= coef or coef == 0) and\
+                (placed <= place or place == 0)):
 
-                    numberOfResults += 1
+                numberOfResults += 1
 
-                    self.liststore.append([date, point, placed, out, cof, sector, band, bandsort])
+                self.liststore.append([date, point, placed, out, cof, sector, band, bandsort])
 
                 if fill_combo:
                     dataValues = {pigeon : pigeons, \
