@@ -161,11 +161,11 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
-#    def update_result(self, data):
-#        conn, cursor = self.db_connect()
-#        cursor.execute('UPDATE Results SET pigeon=?, date=?, point=?, place=?, out=?, sector=? WHERE Resultkey=?', data)
-#        conn.commit()
-#        conn.close()
+    def update_result(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Results SET date=?, point=?, place=?, out=?, sector=? WHERE Resultkey=?', data)
+        conn.commit()
+        conn.close()
 
     def get_all_results(self):
         conn, cursor = self.db_connect()

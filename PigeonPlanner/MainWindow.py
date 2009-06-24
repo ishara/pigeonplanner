@@ -56,6 +56,9 @@ class MainWindow:
                       'on_goto_clicked'          : self.goto_clicked,
                       'on_addresult_clicked'     : self.addresult_clicked,
                       'on_removeresult_clicked'  : self.removeresult_clicked,
+                      'on_editresult_clicked'    : self.editresult_clicked,
+                      'on_editapply_clicked'     : self.editapply_clicked,
+                      'on_resultcancel_clicked'  : self.resultcancel_clicked,
                       'on_allresults_clicked'    : self.allresults_clicked,
                       'on_filterlist_clicked'    : self.filterlist_clicked,
                       'on_fcopen_clicked'        : self.fcopen_clicked,
@@ -460,23 +463,13 @@ class MainWindow:
                 self.cbsex.set_active(int(sex)) #FIXME
 
     def addresult_clicked(self, widget):
-        date = self.entryDate.get_text()
-        point = self.cbRacepoint.child.get_text()
-        place = self.spinPlaced.get_value_as_int()
-        out = self.spinOutof.get_value_as_int()
-        sector = self.cbSector.child.get_text()
-
-        if not date or not point or not place or not out:
-            Widgets.message_dialog('error', Const.MSGEMPTY, self.main)
-            return
-
+        ring, year = self.get_main_ring()
         try:
-            datetime.datetime.strptime(date, self.date_format)
-        except ValueError:
-            Widgets.message_dialog('error', Const.MSGFORMAT, self.main)
+            date, point, place, out, sector = self.get_resultdata()
+        except TypeError:
             return
 
-        results = self.database.get_pigeon_results('1234567')
+        results = self.database.get_pigeon_results(ring)
         for result in results:
             if result[2] == date and \
                result[3] == point and \
@@ -500,23 +493,11 @@ class MainWindow:
         self.lsResult.append([date, point, place, out, cof, sector])
 
     def removeresult_clicked(self, widget):
-        model, tIter = self.selResults.get_selected()
         path, focus = self.tvResults.get_cursor()
-        if not tIter: return
-        date = model[tIter][0]
-        point = model[tIter][1]
-        place = model[tIter][2]
-        out = model[tIter][3]
-
+        model, tIter = self.selResults.get_selected()
         ring, year = self.get_main_ring()
 
-        results = self.database.get_pigeon_results(ring)
-        for result in results:
-            if result[2] == date and \
-               result[3] == point and \
-               result[4] == place and \
-               result[5] == out:
-                    ID = result[0]
+        ID = self.get_result_id(ring, self.get_selected_result())
 
         self.database.delete_result_from_id(ID)
 
@@ -524,6 +505,43 @@ class MainWindow:
 
         if len(self.lsResult) > 0:
             self.tvResults.set_cursor(path)
+
+    def editresult_clicked(self, widget):
+        date, point, place, out, sector = self.get_selected_result()
+        self.entryDate.set_text(date)
+        self.cbRacepoint.child.set_text(point)
+        self.spinPlaced.set_value(place)
+        self.spinOutof.set_value(out)
+        self.cbSector.child.set_text(sector)
+
+        self.addresult.set_property('visible', False)
+        self.editapply.set_property('visible', True)
+        self.resultcancel.set_property('visible', True)
+
+    def editapply_clicked(self, widget):
+        ring, year = self.get_main_ring()
+        try:
+            date, point, place, out, sector = self.get_resultdata()
+        except TypeError:
+            return
+
+        ID = self.get_result_id(ring, self.get_selected_result())
+
+        self.database.update_result((date, point, place, out, sector, ID))
+
+        self.get_results(ring)
+        self.resultcancel_clicked(None)
+
+    def resultcancel_clicked(self, widget):
+        self.entryDate.set_text('')
+        self.cbRacepoint.child.set_text('')
+        self.spinPlaced.set_value(1)
+        self.spinOutof.set_value(1)
+        self.cbSector.child.set_text('')
+
+        self.addresult.set_property('visible', True)
+        self.editapply.set_property('visible', False)
+        self.resultcancel.set_property('visible', False)
 
     def allresults_clicked(self, widget):
         ResultWindow.ResultWindow(self, self.parser.pigeons, self.database)
@@ -713,15 +731,17 @@ class MainWindow:
 
     def selectionresult_changed(self, selection):
         '''
-        Set the 'remove result'-button sensitive when there is a result selected
+        Set the remove and edit result buttons sensitive when there is a result selected
         '''
 
         model, path = selection.get_selected()
 
         if path:
             self.removeresult.set_sensitive(True)
+            self.editresult.set_sensitive(True)
         else:
             self.removeresult.set_sensitive(False)
+            self.editresult.set_sensitive(False)
 
     def selection_changed(self, selection):
         '''
@@ -1127,6 +1147,57 @@ class MainWindow:
         year = model[path][1]
 
         return ring, year
+
+    def get_resultdata(self):
+        '''
+        Get the values from the result widgets
+        '''
+
+        date = self.entryDate.get_text()
+        point = self.cbRacepoint.child.get_text()
+        place = self.spinPlaced.get_value_as_int()
+        out = self.spinOutof.get_value_as_int()
+        sector = self.cbSector.child.get_text()
+
+        if not date or not point or not place or not out:
+            Widgets.message_dialog('error', Const.MSGEMPTY, self.main)
+            return False
+
+        try:
+            datetime.datetime.strptime(date, self.date_format)
+        except ValueError:
+            Widgets.message_dialog('error', Const.MSGFORMAT, self.main)
+            return False
+
+        return date, point, place, out, sector
+
+    def get_selected_result(self):
+        '''
+        Return the data from the selected result
+        '''
+
+        model, tIter = self.selResults.get_selected()
+        if not tIter: return
+        
+        return model[tIter][0], model[tIter][1], model[tIter][2], model[tIter][3], model[tIter][5]
+
+    def get_result_id(self, ring, data):
+        '''
+        Return the ID of the wanted result
+
+        @param ring: the ring of the pigeon
+        @param data: tuple of data to compare
+        '''
+
+        results = self.database.get_pigeon_results(ring)
+        for result in results:
+            if result[2] == data[0] and \
+               result[3] == data[1] and \
+               result[4] == data[2] and \
+               result[5] == data[3]:
+                    return result[0]
+
+        return None
 
     def fill_find_treeview(self, pigeonType):
         '''
