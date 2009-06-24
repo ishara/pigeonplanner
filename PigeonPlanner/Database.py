@@ -52,8 +52,7 @@ class DatabaseOperations:
                ' out INTEGER,'
                ' sector TEXT)',
     'Colours': '(Colourkey INTEGER PRIMARY KEY,'
-               ' colour TEXT UNIQUE, '
-               ' distance TEXT)',
+               ' colour TEXT UNIQUE)',
     'Racepoints': '(Racepointkey INTEGER PRIMARY KEY,'
                   ' racepoint TEXT UNIQUE)',
     'Sectors': '(Sectorkey INTEGER PRIMARY KEY,'
