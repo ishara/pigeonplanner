@@ -2509,13 +2509,35 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkCheckButton" id="chkKeep">
-                    <property name="label" translatable="yes">Keep this pigeon (and parents) in the pedigree</property>
+                  <widget class="GtkVBox" id="vbox1">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="active">True</property>
-                    <property name="draw_indicator">True</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <widget class="GtkCheckButton" id="chkKeep">
+                        <property name="label" translatable="yes">Keep this pigeon in the pedigree</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                      </widget>
+                      <packing>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkCheckButton" id="chkResults">
+                        <property name="label" translatable="yes">Keep results of this pigeon</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                      </widget>
+                      <packing>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </widget>
                   <packing>
                     <property name="position">3</property>

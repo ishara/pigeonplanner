@@ -149,9 +149,15 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
-    def delete_result(self, ID):
+    def delete_result_from_id(self, ID):
         conn, cursor = self.db_connect()
         cursor.execute('DELETE FROM Results WHERE Resultkey=?', (ID,))
+        conn.commit()
+        conn.close()
+
+    def delete_result_from_band(self, band):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Results WHERE pigeon=?', (band,))
         conn.commit()
         conn.close()
 

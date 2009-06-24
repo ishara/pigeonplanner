@@ -282,6 +282,7 @@ class MainWindow:
         dialog = wTree.get_widget('removedialog')
         label = wTree.get_widget('labelPigeon')
         chkKeep = wTree.get_widget('chkKeep')
+        chkResults = wTree.get_widget('chkResults')
         label.set_text(ring + '/' + year[2:])
         answer = dialog.run()
         if answer == 2:
@@ -290,6 +291,9 @@ class MainWindow:
             else:
                 self.database.delete_pigeon(ring)
                 self.parser.get_pigeons()
+
+            if not chkResults.get_active():
+                self.database.delete_result_from_band(ring)
 
             self.liststore.remove(tIter)
 
@@ -505,7 +509,7 @@ class MainWindow:
                result[5] == out:
                     ID = result[0]
 
-        self.database.delete_result(ID)
+        self.database.delete_result_from_id(ID)
 
         self.lsResult.remove(tIter)
 
