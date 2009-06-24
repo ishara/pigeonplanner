@@ -1226,7 +1226,7 @@ class MainWindow:
 
         self.sexStore = gtk.ListStore(str, str)
         for key in self.sexDic.keys():
-            self.sexStore.append([key, self.sexDic[key]])
+            self.sexStore.insert(int(key), [key, self.sexDic[key]])
         self.cbsex = gtk.ComboBox(self.sexStore)
         self.cbSerieSex = gtk.ComboBox(self.sexStore)
         for box in [self.cbsex, self.cbSerieSex]:
