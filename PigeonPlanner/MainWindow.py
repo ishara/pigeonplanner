@@ -476,6 +476,15 @@ class MainWindow:
             Widgets.message_dialog('error', Const.MSGFORMAT, self.main)
             return
 
+        results = self.database.get_pigeon_results('1234567')
+        for result in results:
+            if result[2] == date and \
+               result[3] == point and \
+               result[4] == place and \
+               result[5] == out:
+                Widgets.message_dialog('error', Const.MSGRESULT, self.main)
+                return
+
         cof = (float(place)/float(out))*100
         ring, year = self.get_main_ring()
         data = (ring, date, point, place, out, sector)

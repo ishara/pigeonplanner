@@ -67,6 +67,7 @@ MSGLENGTH = _("Incorrect input of the ringnumber or year of the %s.\n\nCheck the
 
 MSGEMPTY = _("All fields have to be entered.")
 MSGFORMAT = _("The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD).")
+MSGRESULT = _("The result you want to add already exists.")
 
 MSGBCKPOK = _("The backup was successfully created.")
 MSGRESTOK = _("The backup was successfully restored.\nRestart the program.")
