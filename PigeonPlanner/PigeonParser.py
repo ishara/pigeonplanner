@@ -16,8 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import ConfigParser
-
 import Const
 import Database
 
@@ -28,8 +26,7 @@ class PigeonParser:
 
     def get_pigeons(self):
         self.pigeons = {}
-        data = self.database.get_pigeons()
-        for pigeon in data:
+        for pigeon in self.database.get_pigeons():
             p = ParsedPigeon(pigeon[1],
                              pigeon[2],
                              pigeon[3],
@@ -48,7 +45,7 @@ class PigeonParser:
                              pigeon[16],
                              pigeon[17],
                              pigeon[18],
-                             pigeon[19],)
+                             pigeon[19])
 
             self.pigeons[p.ring] = p
 

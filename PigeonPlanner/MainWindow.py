@@ -281,10 +281,11 @@ class MainWindow:
         wTree = gtk.glade.XML(self.gladefile, 'removedialog')
         dialog = wTree.get_widget('removedialog')
         label = wTree.get_widget('labelPigeon')
+        chkKeep = wTree.get_widget('chkKeep')
         label.set_text(ring + '/' + year[2:])
         answer = dialog.run()
         if answer == 2:
-            if self.chkKeep.get_active():
+            if chkKeep.get_active():
                 self.database.show_pigeon(ring, 0)
             else:
                 self.database.delete_pigeon(ring)
