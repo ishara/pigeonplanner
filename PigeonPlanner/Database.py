@@ -54,7 +54,8 @@ class DatabaseOperations:
     'Colours': '(Colourkey INTEGER PRIMARY KEY,'
                ' colour TEXT UNIQUE)',
     'Racepoints': '(Racepointkey INTEGER PRIMARY KEY,'
-                  ' racepoint TEXT UNIQUE)',
+                  ' racepoint TEXT UNIQUE,'
+                  ' distance INTEGER)',
     'Sectors': '(Sectorkey INTEGER PRIMARY KEY,'
                ' sector TEXT UNIQUE)',
     'Strains': '(Strainkey INTEGER PRIMARY KEY,'
@@ -219,7 +220,7 @@ class DatabaseOperations:
     def insert_racepoint(self, data):
         conn, cursor = self.db_connect()
         try:
-            cursor.execute('INSERT INTO Racepoints VALUES (null, ?)', data)
+            cursor.execute('INSERT INTO Racepoints (Racepointkey, racepoint) VALUES (null, ?)', data)
         except sqlite3.IntegrityError:
             pass
         conn.commit()
