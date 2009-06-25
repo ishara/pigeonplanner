@@ -148,7 +148,7 @@ class OptionsDialog:
 
     def default_clicked(self, widget):
         answer = Widgets.message_dialog('warning', Const.MSGDEFAULT, self.optionsdialog)
-        if answer == 'yes':
+        if answer:
             self.opt.write_default()
             self.opt = GetOptions()
             self.set_options()

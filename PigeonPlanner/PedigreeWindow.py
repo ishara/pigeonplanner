@@ -74,7 +74,7 @@ class PedigreeWindow:
     def print_clicked(self, widget):
         if self.options.optionList.name == '':
             answer = Widgets.message_dialog('question', Const.MSGNOINFO, self.pedigreewindow)
-            if answer == 'yes':
+            if answer:
                 self.pedigreewindow.destroy()
                 Options.OptionsDialog(self.main, True)
                 return

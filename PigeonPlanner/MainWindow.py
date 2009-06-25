@@ -193,7 +193,7 @@ class MainWindow:
         for band in bandList:
             if self.database.has_pigeon(band):
                 overwrite = Widgets.message_dialog('warning', Const.MSGEXIST, self.main)
-                if overwrite == 'no':
+                if not overwrite:
                     continue
 
             data = (str(band), self.calculate_year(year), sex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '','')
@@ -454,9 +454,9 @@ class MainWindow:
                     return
 
             answer = Widgets.message_dialog('question', Const.MSGADD, self.main)
-            if answer == 'no':
+            if not answer:
                 return
-            elif answer == 'yes':
+            else:
                 self.add_clicked(None)
                 self.entryRing1.set_text(ring)
                 self.entryYear1.set_text(year)
@@ -1038,13 +1038,13 @@ class MainWindow:
         if self.database.has_pigeon(ring):
             if self.parser.pigeons[ring].show:
                 overwrite = Widgets.message_dialog('warning', Const.MSGEXIST, self.main)
-                if overwrite == 'no':
+                if not overwrite:
                     return
             else:
                 overwrite = Widgets.message_dialog('warning', Const.MSGSHOW, self.main)
-                if overwrite == 'no':
+                if not overwrite:
                     return
-                if overwrite == 'yes':
+                else:
                     self.database.show_pigeon(ring, 1)
                     return
 
