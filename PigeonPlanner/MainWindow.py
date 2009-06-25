@@ -112,8 +112,8 @@ class MainWindow:
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
 
-        self.database = Database.DatabaseOperations()
         self.options = Options.GetOptions()
+        self.database = Database.DatabaseOperations()
         self.parser = PigeonParser.PigeonParser()
         self.parser.get_pigeons()
         self.pedigree = DrawPedigree([self.tableSire, self.tableDam], button=self.goto)
