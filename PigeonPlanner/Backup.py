@@ -32,55 +32,48 @@ def make_backup(folder):
     outfile = join(folder, 'PigeonPlannerBackup.zip')
 
     try:
-        zip = zipfile.ZipFile(outfile, 'w', zipfile.ZIP_DEFLATED)
-        makezip(infolder, zip, True)
-        zip.close()
+        zipper = zipfile.ZipFile(outfile, 'w', zipfile.ZIP_DEFLATED)
+        makezip(infolder, zipper)
+        zipper.close()
     except RuntimeError:
         if os.path.exists(outfile):
             os.unlink(outfile)
-        zip = zipfile.ZipFile(outfile, 'w', zipfile.ZIP_STORED)
-        makezip(infolder, zip, True)
-        zip.close()
-#        print "    Unable to compress zip file contents."
+        zipper = zipfile.ZipFile(outfile, 'w', zipfile.ZIP_STORED)
+        makezip(infolder, zipper)
+        zipper.close()
 
-def makezip(path, zip, keep):
+def makezip(path, zipper):
     path = os.path.normpath(path)
 
     for (dirpath, dirnames, filenames) in os.walk(path):
-        for file in filenames:
-            if not file.endswith('.lock'):
-#                print "Adding %s..." % os.path.join(path, dirpath, file)
+        for filename in filenames:
+            if not filename.endswith('.lock'):
                 try:
-                    if keep:
-                        zip.write(os.path.join(dirpath, file),
-                        os.path.join(os.path.basename(path), os.path.join(dirpath, file)[len(path)+len(os.sep):]))
-                    else:
-                        zip.write(os.path.join(dirpath, file),            
-                        os.path.join(dirpath[len(path):], file)) 
-
+                    zipper.write(os.path.join(dirpath, filename),            
+                    os.path.join(dirpath[len(path):], filename)) 
                 except Exception, e:
-                    print "    Error adding %s: %s" % (file, e)
+                    print "    Error adding %s: %s" % (filename, e)
 
 def restore_backup(infile):
     if not infile.endswith('PigeonPlannerBackup.zip'):
         return
 
-    outfol = Const.HOMEDIR
+    outfol = Const.PREFDIR
 
-    zip = zipfile.ZipFile(infile, 'r')
-    unzip(outfol, zip)
-    zip.close()
+    zipper = zipfile.ZipFile(infile, 'r')
+    unzip(outfol, zipper)
+    zipper.close()
 
-def unzip(path, zip):
+def unzip(path, zipper):
     if not isdir(path):
         os.makedirs(path)    
 
-    for each in zip.namelist():
+    for each in zipper.namelist():
         if not each.endswith('/'): 
             root, name = split(each)
             directory = normpath(join(path, root))
             if not isdir(directory):
                 os.makedirs(directory)
-            file(join(directory, name), 'wb').write(zip.read(each))
+            file(join(directory, name), 'wb').write(zipper.read(each))
 
 
