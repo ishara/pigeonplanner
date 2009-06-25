@@ -635,7 +635,7 @@ class MainWindow:
 
         columns = [_("Band no."), _("Year"), _("Name")]
         if self.options.optionList.column:
-            columns.append(_(self.options.optionList.columntype))
+            columns.insert(self.options.optionList.columnposition, _(self.options.optionList.columntype))
         types = [str, str, str, str]
         self.liststore, self.selection = Widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, True, True)
 
@@ -687,7 +687,9 @@ class MainWindow:
                         extra = self.sexDic[self.parser.pigeons[pigeon].sex]
                     elif self.options.optionList.columntype == _('Colour'):
                         extra = self.parser.pigeons[pigeon].colour
-                    self.liststore.append([pigeon, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name, extra])
+                    row = [pigeon, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name]
+                    row.insert(self.options.optionList.columnposition, extra)
+                    self.liststore.append(row)
                 else:
                     self.liststore.append([pigeon, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name, None])
 
