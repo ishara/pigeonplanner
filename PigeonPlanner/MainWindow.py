@@ -813,7 +813,7 @@ class MainWindow:
             self.imagePigeon.set_from_pixbuf(pixbuf)
             self.imagePigeon1.set_from_pixbuf(pixbuf)
         except:
-            print "File doesn't exist"
+            Widgets.message_dialog('error', Const.MSG_IMAGE_MISSING, self.main)
 
         if self.notebook.get_current_page() == 0:
             dp = DrawPedigree([self.tableSire, self.tableDam], selected, button=self.goto)

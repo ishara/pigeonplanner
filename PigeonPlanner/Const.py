@@ -56,6 +56,7 @@ RESULTFILE = os.path.join(PREFDIR, 'results.db')
 DATAFILE = os.path.join(PREFDIR, 'data.db')
 
 MSGIMG = _("This image is either not supported or corrupt, please choose another one.")
+MSG_IMAGE_MISSING = _("Error loading this image. Probably you have moved it on your disk.")
 
 MSGSHOW = _("This pigeon already exists, but isn't showing. Do you want to show it again?")
 MSGEXIST = _("This pigeon already exists. Overwrite it?")
