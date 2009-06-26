@@ -103,6 +103,7 @@ class MainWindow:
         self.date_format = '%Y-%m-%d'
         self.imageToAdd = ''
         self.imageDeleted = False
+        self.blockSwitch = False
         self.beforeEditPath = None
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1, 
@@ -323,7 +324,7 @@ class MainWindow:
         self.entryDamEdit.set_text(self.entryDam.get_text())
         self.entryYearDamEdit.set_text(self.entryYearDam.get_text())
 
-        self.cbsex.set_active(int(self.entrySexKey.get_text())) #FIXME
+        self.cbsex.set_active(int(self.entrySexKey.get_text()))
 
         self.add_edit_start('edit')
 
@@ -460,7 +461,7 @@ class MainWindow:
                 self.add_clicked(None)
                 self.entryRing1.set_text(ring)
                 self.entryYear1.set_text(year)
-                self.cbsex.set_active(int(sex)) #FIXME
+                self.cbsex.set_active(int(sex))
 
     def addresult_clicked(self, widget):
         ring, year = self.get_main_ring()
@@ -622,8 +623,9 @@ class MainWindow:
             self.find_direct_relatives(ring, sire, dam)
             self.find_half_relatives(ring, sire, yearsire, dam, yeardam)
             self.find_offspring(ring, sire, dam)
-        elif page_num == 2:
+        elif page_num == 2 and not self.blockSwitch:
             self.get_results(ring)
+            self.blockSwitch = True
 
     def build_treeview(self):
         '''
@@ -822,6 +824,7 @@ class MainWindow:
             self.find_offspring(ring, sire, dam)
         elif self.notebook.get_current_page() == 2:
             self.get_results(ring)
+            self.blockSwitch = False
 
     def get_results(self, ring):
         '''
