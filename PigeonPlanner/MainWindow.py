@@ -447,7 +447,7 @@ class MainWindow:
                     else:
                         sex = '1'
 
-        if not ring == '':
+        if ring:
             for item in self.liststore:
                 number = self.treeview.get_model().get_value(item.iter, 0)
                 if number == ring:
@@ -859,7 +859,7 @@ class MainWindow:
 
         self.lsBrothers.clear()
 
-        if sire == '' or dam == '': return
+        if not sire or not dam: return
 
         for pigeon in self.parser.pigeons:
             if sire == self.parser.pigeons[pigeon].sire and\
@@ -886,14 +886,14 @@ class MainWindow:
 
         for pigeon in self.parser.pigeons:
 
-            if not sire == '':
+            if sire:
                 if sire == self.parser.pigeons[pigeon].sire\
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
 
                     self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].year, sire+'/'+yearsire[2:]])
 
-            if not dam == '':
+            if dam:
                 if dam == self.parser.pigeons[pigeon].dam\
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
@@ -989,7 +989,7 @@ class MainWindow:
         except:
             pass
 
-        if not imageTemp == '' and not self.imageDeleted == True:
+        if imageTemp and not self.imageDeleted == True:
             image = imageTemp
         else:
             image = self.imageToAdd

@@ -72,7 +72,7 @@ class PedigreeWindow:
         self.pedigreewindow.destroy()
 
     def print_clicked(self, widget):
-        if self.options.optionList.name == '':
+        if not self.options.optionList.name:
             answer = Widgets.message_dialog('question', Const.MSGNOINFO, self.pedigreewindow)
             if answer:
                 self.pedigreewindow.destroy()
