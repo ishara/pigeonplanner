@@ -51,9 +51,8 @@ else:
         IMAGEDIR = './images/'
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
-PIGEONFILE = os.path.join(PREFDIR, 'pigeon.list')
-RESULTFILE = os.path.join(PREFDIR, 'results.db')
-DATAFILE = os.path.join(PREFDIR, 'data.db')
+UPDATEURL = 'http://pigeonplanner.sourceforge.net/CURRENT'
+DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/download.html'
 
 MSGIMG = _("This image is either not supported or corrupt, please choose another one.")
 MSG_IMAGE_MISSING = _("Error loading this image. Probably you have moved it on your disk.")

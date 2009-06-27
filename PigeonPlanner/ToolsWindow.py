@@ -16,7 +16,9 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import urllib
 import datetime
+import os.path
 
 import gtk
 import gtk.glade
@@ -37,6 +39,7 @@ class ToolsWindow:
                       'on_calculate_clicked'     : self.calculate_clicked,
                       'on_printcalc_clicked'     : self.printcalc_clicked,
                       'on_calchelp_clicked'      : self.calchelp_clicked,
+                      'on_btnupdate_clicked'     : self.btnupdate_clicked,
                       'on_window_destroy'        : self.close_clicked,
                       'on_close_clicked'         : self.close_clicked }
         self.wTree.signal_autoconnect(signalDic)
@@ -48,6 +51,7 @@ class ToolsWindow:
         self.main = main
 
         self.toolsdialog.set_transient_for(self.main.main)
+        self.linkbutton.set_uri(Const.DOWNLOADURL)
 
         # Build main treeview
         self.liststore = gtk.ListStore(int, str)
@@ -61,7 +65,7 @@ class ToolsWindow:
 
         # Add the categories
         i = 0
-        for category in [_("Backup"), _("Velocity calculator")]:
+        for category in [_("Backup"), _("Velocity calculator"), _("Update")]:
             self.liststore.append([i, category])
             i += 1
 
@@ -143,5 +147,21 @@ class ToolsWindow:
     def calchelp_clicked(self, widget):
         pass
 
+    def btnupdate_clicked(self, widget):
+        local = os.path.join(Const.PREFDIR, Const.UPDATEURL.split('/')[-1])
+
+        urllib.urlretrieve(Const.UPDATEURL, local)
+
+        version = open(local, 'r').readline().strip()
+
+        if Const.VERSION < version:
+            msg = _("A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version")
+            self.linkbutton.set_property('visible', True)
+        elif Const.VERSION == version:
+            msg = _("You already have the latest version installed.")
+        elif Const.VERSION > version:
+            msg = _("This isn't normal, or you must be running a development version")
+
+        self.labelversion.set_text(msg)
 
 
