@@ -26,6 +26,7 @@ import gtk.glade
 import Const
 import Backup
 import Widgets
+from Print import PrintVelocity
 
 
 class ToolsWindow:
@@ -142,7 +143,17 @@ class ToolsWindow:
             velocity += 50
 
     def printcalc_clicked(self, widget):
-        pass
+        data = []
+        for row in self.ls_velocity:
+            velocity, flight, arrival = self.ls_velocity.get(row.iter, 0, 1, 2)
+            data.append((velocity, flight, arrival))
+
+        if data:
+            date = datetime.datetime.now()
+            release = "%s:%s" %(self.sbhour.get_value_as_int(), self.sbminute.get_value_as_int())
+            info = [date.strftime("%Y-%m-%d"), release, self.sbdist.get_value_as_int()]
+
+            PrintVelocity(self.main.main, data, info)
 
     def calchelp_clicked(self, widget):
         pass

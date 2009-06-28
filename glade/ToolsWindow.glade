@@ -515,6 +515,7 @@ your pigeons and results.</property>
                                 <child>
                                   <widget class="GtkButton" id="printcalc">
                                     <property name="label">gtk-print</property>
+                                    <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <property name="use_stock">True</property>
@@ -664,7 +665,7 @@ your pigeons and results.</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkScrolledWindow" id="scrolledwindow1">
+                  <widget class="GtkScrolledWindow" id="swupdate">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hscrollbar_policy">automatic</property>

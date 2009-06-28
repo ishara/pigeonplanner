@@ -411,4 +411,109 @@ class PrintResults:
         cr.stroke()
 
 
+class PrintVelocity:
+    def __init__(self, parent, data, info):
+
+        self.parent = parent
+        self.data = data
+        self.info = info
+
+        paper_size = gtk.PaperSize(gtk.PAPER_NAME_A4)
+
+        setup = gtk.PageSetup()
+        setup.set_paper_size(paper_size)
+
+        print_ = gtk.PrintOperation()
+        print_.set_default_page_setup(setup)
+        print_.set_unit(gtk.UNIT_MM)
+
+        print_.connect("begin_print", self.begin_print)
+        print_.connect("draw_page", self.draw_page)
+
+#        action = gtk.PRINT_OPERATION_ACTION_PREVIEW
+        action = gtk.PRINT_OPERATION_ACTION_PRINT_DIALOG
+
+        response = print_.run(action, self.parent)
+
+        if response == gtk.PRINT_OPERATION_RESULT_ERROR:
+            Widgets.message_dialog('error', Const.MSGPRINTERROR)
+        elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
+            settings = print_.get_print_settings()
+
+    def begin_print(self, operation, context):
+        operation.set_n_pages(1)
+
+    def draw_page (self, operation, context, page_number):
+        cr = context.get_cairo_context()
+
+        total_width = context.get_width()
+        font = "Sans"
+
+        cr.select_font_face(font)
+
+        # head
+        cr.set_font_size(10)
+        cr.move_to(0, 12)
+        cr.show_text(_("Velocity"))
+
+        # line
+        cr.move_to(0, 15)
+        cr.line_to(total_width, 15)
+
+        # info
+        cr.set_font_size(6)
+        cr.move_to(0, 22)
+        cr.show_text(_("Date: ") + self.info[0])
+        cr.move_to(0, 30)
+        cr.show_text(_("Released: ") + self.info[1])
+        cr.move_to(0, 38)
+        cr.show_text(_("Distance: ") + str(self.info[2]))
+
+        # line
+        cr.move_to(0, 42)
+        cr.line_to(total_width, 42)
+
+        # index
+        x = 50
+        cr.move_to(0, x)
+        cr.show_text(_("Velocity"))
+        xb, yb, velocitywidth, height, xa, ya = cr.text_extents(_("Velocity"))
+        cr.move_to(0, x+2)
+        cr.line_to(velocitywidth, x+2)
+
+        cr.move_to(40, x)
+        cr.show_text(_("Flight Time"))
+        xb, yb, flightwidth, height, xa, ya = cr.text_extents(_("Flight Time"))
+        cr.move_to(40, x+2)
+        cr.line_to(40 + flightwidth, x+2)
+
+        cr.move_to(80, x)
+        cr.show_text(_("Time of Arrival"))
+        xb, yb, arrivalwidth, height, xa, ya = cr.text_extents(_("Time of Arrival"))
+        cr.move_to(80, x+2)
+        cr.line_to(80 + arrivalwidth, x+2)
+
+        # data
+        i = 1
+        for data in self.data:
+            xb, yb, width, height, xa, ya = cr.text_extents(str(data[0]))
+            cr.move_to(0 + (velocitywidth/2-width/2), 50 + 8*i)
+            cr.show_text(str(data[0]))
+            xb, yb, width, height, xa, ya = cr.text_extents(data[1])
+            cr.move_to(40 + (flightwidth/2-width/2), 50 + 8*i)
+            cr.show_text(data[1])
+            xb, yb, width, height, xa, ya = cr.text_extents(data[2])
+            cr.move_to(80 + (arrivalwidth/2-width/2), 50 + 8*i)
+            cr.show_text(data[2])
+
+            i += 1
+
+        # final
+        cr.set_line_width(0.4)
+        cr.set_line_cap(cairo.LINE_CAP_ROUND)
+        cr.set_line_join(cairo.LINE_JOIN_ROUND)
+      
+        cr.stroke()
+
+
 
