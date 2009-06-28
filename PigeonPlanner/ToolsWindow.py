@@ -161,17 +161,23 @@ class ToolsWindow:
     def btnupdate_clicked(self, widget):
         local = os.path.join(Const.PREFDIR, Const.UPDATEURL.split('/')[-1])
 
-        urllib.urlretrieve(Const.UPDATEURL, local)
+        try:
+            urllib.urlretrieve(Const.UPDATEURL, local)
+            versionfile = open(local, 'r')
+            version = versionfile.readline().strip()
+            versionfile.close()
+        except IOError:
+            version = None
 
-        version = open(local, 'r').readline().strip()
-
-        if Const.VERSION < version:
-            msg = _("A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version")
+        if not version:
+            msg = Const.MSG_UPDATE_ERROR
+        elif Const.VERSION < version:
+            msg = Const.MSG_UPDATE_AVAILABLE
             self.linkbutton.set_property('visible', True)
         elif Const.VERSION == version:
-            msg = _("You already have the latest version installed.")
+            msg = Const.MSG_NO_UPDATE
         elif Const.VERSION > version:
-            msg = _("This isn't normal, or you must be running a development version")
+            msg = Const.MSG_UPDATE_DEVELOPMENT
 
         self.labelversion.set_text(msg)
 

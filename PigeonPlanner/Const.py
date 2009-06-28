@@ -77,3 +77,7 @@ MSGNOINFO = _("You have not entered your personal information.\nThis will be sho
 
 MSGPRINTERROR = _("Error printing the pedigree")
 
+MSG_UPDATE_ERROR = _("Error trying to get information. Are you connected to the internet?")
+MSG_UPDATE_AVAILABLE = _("A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version")
+MSG_NO_UPDATE = _("You already have the latest version installed.")
+MSG_UPDATE_DEVELOPMENT = _("This isn't normal, or you must be running a development version")
