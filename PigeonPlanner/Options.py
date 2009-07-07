@@ -147,7 +147,7 @@ class OptionsDialog:
         self.optionsdialog.destroy()
 
     def default_clicked(self, widget):
-        answer = Widgets.message_dialog('warning', Const.MSGDEFAULT, self.optionsdialog)
+        answer = Widgets.message_dialog('warning', Const.MSG_DEFAULT_OPTIONS, self.optionsdialog)
         if answer:
             self.opt.write_default()
             self.opt = GetOptions()

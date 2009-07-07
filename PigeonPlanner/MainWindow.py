@@ -193,7 +193,7 @@ class MainWindow:
 
         for band in bandList:
             if self.database.has_pigeon(band):
-                overwrite = Widgets.message_dialog('warning', Const.MSGEXIST, self.main)
+                overwrite = Widgets.message_dialog('warning', Const.MSG_OVERWRITE_PIGEON, self.main)
                 if not overwrite:
                     continue
 
@@ -383,7 +383,7 @@ class MainWindow:
             self.imagePigeon1.set_from_pixbuf(pixbuf)
             self.imageToAdd = filename
         except:
-            Widgets.message_dialog('error', Const.MSGIMG, self.main)
+            Widgets.message_dialog('error', Const.MSG_INVALID_IMAGE, self.main)
 
         self.filedialog.hide()
 
@@ -454,7 +454,7 @@ class MainWindow:
                     self.treeview.set_cursor(item.path)
                     return
 
-            answer = Widgets.message_dialog('question', Const.MSGADD, self.main)
+            answer = Widgets.message_dialog('question', Const.MSG_ADD_PIGEON, self.main)
             if not answer:
                 return
             else:
@@ -476,7 +476,7 @@ class MainWindow:
                result[3] == point and \
                result[4] == place and \
                result[5] == out:
-                Widgets.message_dialog('error', Const.MSGRESULT, self.main)
+                Widgets.message_dialog('error', Const.MSG_RESULT_EXISTS, self.main)
                 return
 
         cof = (float(place)/float(out))*100
@@ -1037,14 +1037,13 @@ class MainWindow:
         infoTuple = self.get_add_edit_info()
         ring = infoTuple[0]
 
-        #TODO; review this statement. Needs cleanup.
         if self.database.has_pigeon(ring):
             if self.parser.pigeons[ring].show:
-                overwrite = Widgets.message_dialog('warning', Const.MSGEXIST, self.main)
+                overwrite = Widgets.message_dialog('warning', Const.MSG_OVERWRITE_PIGEON, self.main)
                 if not overwrite:
                     return
             else:
-                overwrite = Widgets.message_dialog('warning', Const.MSGSHOW, self.main)
+                overwrite = Widgets.message_dialog('warning', Const.MSG_SHOW_PIGEON, self.main)
                 if not overwrite:
                     return
                 else:
@@ -1165,13 +1164,13 @@ class MainWindow:
         sector = self.cbSector.child.get_text()
 
         if not date or not point or not place or not out:
-            Widgets.message_dialog('error', Const.MSGEMPTY, self.main)
+            Widgets.message_dialog('error', Const.MSG_EMPTY_DATA, self.main)
             return False
 
         try:
             datetime.datetime.strptime(date, self.date_format)
         except ValueError:
-            Widgets.message_dialog('error', Const.MSGFORMAT, self.main)
+            Widgets.message_dialog('error', Const.MSG_INVALID_FORMAT, self.main)
             return False
 
         return date, point, place, out, sector

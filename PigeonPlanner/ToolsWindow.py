@@ -113,13 +113,13 @@ class ToolsWindow:
         folder = self.fcButtonCreate.get_current_folder()
         if folder:
             Backup.make_backup(folder)
-            Widgets.message_dialog('info', Const.MSGBCKPOK, self.main.main)
+            Widgets.message_dialog('info', Const.MSG_BACKUP_SUCCES, self.main.main)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             Backup.restore_backup(zipfile)
-            Widgets.message_dialog('info', Const.MSGRESTOK, self.main.main)
+            Widgets.message_dialog('info', Const.MSG_RESTORE_SUCCES, self.main.main)
 
     def sbbegin_changed(self, widget):
         spinmin = widget.get_value_as_int()

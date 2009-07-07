@@ -73,7 +73,7 @@ class PedigreeWindow:
 
     def print_clicked(self, widget):
         if not self.options.optionList.name:
-            answer = Widgets.message_dialog('question', Const.MSGNOINFO, self.pedigreewindow)
+            answer = Widgets.message_dialog('question', Const.MSG_NO_INFO, self.pedigreewindow)
             if answer:
                 self.pedigreewindow.destroy()
                 Options.OptionsDialog(self.main, True)

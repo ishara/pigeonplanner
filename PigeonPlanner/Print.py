@@ -55,7 +55,7 @@ class PrintPedigree:
         response = print_.run(action, self.parent)
 
         if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            Widgets.message_dialog('error', Const.MSGPRINTERROR)
+            Widgets.message_dialog('error', Const.MSG_PRINT_ERROR)
         elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
             settings = print_.get_print_settings()
 
@@ -247,7 +247,7 @@ class PrintResults:
         response = print_.run(action)
 
         if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            Widgets.message_dialog('error', Const.MSGPRINTERROR)
+            Widgets.message_dialog('error', Const.MSG_PRINT_ERROR)
         elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
             settings = print_.get_print_settings()
 
@@ -436,7 +436,7 @@ class PrintVelocity:
         response = print_.run(action, self.parent)
 
         if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            Widgets.message_dialog('error', Const.MSGPRINTERROR)
+            Widgets.message_dialog('error', Const.MSG_PRINT_ERROR)
         elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
             settings = print_.get_print_settings()
 
