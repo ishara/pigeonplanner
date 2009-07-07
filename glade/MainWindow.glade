@@ -2035,8 +2035,10 @@
                               <widget class="GtkTreeView" id="tvResults">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK</property>
                                 <property name="rules_hint">True</property>
                                 <property name="enable_tree_lines">True</property>
+                                <signal name="button_press_event" handler="on_tvResults_press"/>
                               </widget>
                             </child>
                           </widget>

@@ -74,6 +74,7 @@ class MainWindow:
                       'on_eventbox_press'        : self.eventbox_press,
                       'on_eventimage_press'      : self.eventimage_press,
                       'on_treeview_press'        : self.treeview_press,
+                      'on_tvResults_press'       : self.tvResults_press,
                       'on_findsire_clicked'      : self.findsire_clicked,
                       'on_finddam_clicked'       : self.finddam_clicked,
                       'on_findcancel_clicked'    : self.findcancel_clicked,
@@ -235,6 +236,14 @@ class MainWindow:
             entries = [
                 (gtk.STOCK_EDIT, self.edit_clicked),
                 (gtk.STOCK_REMOVE, self.remove_clicked)]
+
+            Widgets.popup_menu(event, entries)
+
+    def tvResults_press(self, widget, event):
+        if event.button == 3:
+            entries = [
+                (gtk.STOCK_EDIT, self.editresult_clicked),
+                (gtk.STOCK_REMOVE, self.removeresult_clicked)]
 
             Widgets.popup_menu(event, entries)
 
