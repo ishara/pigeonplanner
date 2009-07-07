@@ -5,6 +5,7 @@
   <widget class="GtkDialog" id="toolsdialog">
     <property name="visible">True</property>
     <property name="border_width">5</property>
+    <property name="title" translatable="yes">Tools</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="default_width">540</property>
