@@ -125,7 +125,7 @@ class MainWindow:
         self.create_sexcombos()
         self.set_filefilter()
         for item in [self.cbRacepoint, self.cbSector, self.cbColour, self.cbStrain, self.cbLoft]:
-            self.set_completion(item)
+            Widgets.set_completion(item)
 
         if self.options.optionList.arrows:
             self.alignarrows.show()
@@ -136,7 +136,7 @@ class MainWindow:
                          self.cbStrain: self.database.get_all_strains(), \
                          self.cbLoft: self.database.get_all_lofts()}
         for key in self.listdata.keys():
-            self.fill_list(key, self.listdata[key])
+            Widgets.fill_list(key, self.listdata[key])
 
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
@@ -485,11 +485,11 @@ class MainWindow:
         self.database.insert_result(data)
 
         self.database.insert_racepoint((point, ))
-        self.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
+        Widgets.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
 
         if sector:
             self.database.insert_sector((sector, ))
-            self.fill_list(self.cbSector, self.database.get_all_sectors())
+            Widgets.fill_list(self.cbSector, self.database.get_all_sectors())
 
         self.lsResult.append([date, point, place, out, cof, sector])
 
@@ -1063,17 +1063,17 @@ class MainWindow:
         colour = infoTuple[4]
         if colour:
             self.database.insert_colour((colour, ))
-            self.fill_list(self.cbColour, self.database.get_all_colours())
+            Widgets.fill_list(self.cbColour, self.database.get_all_colours())
 
         strain = infoTuple[6]
         if strain:
             self.database.insert_strain((strain, ))
-            self.fill_list(self.cbStrain, self.database.get_all_strains())
+            Widgets.fill_list(self.cbStrain, self.database.get_all_strains())
 
         loft = infoTuple[7]
         if loft:
             self.database.insert_loft((loft, ))
-            self.fill_list(self.cbLoft, self.database.get_all_lofts())
+            Widgets.fill_list(self.cbLoft, self.database.get_all_lofts())
 
     def calculate_year(self, year):
         '''
@@ -1255,37 +1255,4 @@ class MainWindow:
             fileFilter.add_mime_type("image/%s" %item)
             fileFilter.add_pattern("*.%s" %item)
         self.filedialog.add_filter(fileFilter)
-
-    def set_completion(self, widget):
-        '''
-        Set entrycompletion on given widget
-
-        @param widget: the widget to set entrycompletion
-        '''
-
-        completion = gtk.EntryCompletion()
-        completion.set_model(widget.get_model())
-        completion.set_minimum_key_length(1)
-        completion.set_text_column(0)
-        widget.child.set_completion(completion)
-
-    def fill_list(self, widget, items):
-        '''
-        Fill the comboboxentry's with their data
-
-        @param widget: the comboboxentry
-        @param items: list of items to add
-        '''
-
-        model = widget.get_model()
-        model.clear()
-        items.sort()
-        for item in items:
-            model.append([item])
-
-        number = len(model)
-        if number > 10 and number <= 30:
-            widget.set_wrap_width(2)
-        elif number > 30:
-            widget.set_wrap_width(3)
 
