@@ -16,7 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os.path
+
 import gtk
+import gtk.gdk
 
 
 def message_dialog(sort, text, parent=None):
@@ -118,4 +121,35 @@ def fill_list(widget, items):
         widget.set_wrap_width(2)
     elif number > 30:
         widget.set_wrap_width(3)
+
+
+class ImageWindow(gtk.Window):
+    def __init__(self, imagepath, main):
+        gtk.Window.__init__(self)
+        self.set_title(_("View image: ") + os.path.split(imagepath)[-1])
+        self.set_default_size(1000, 825)
+        self.set_transient_for(main)
+        self.set_modal(True)
+        self.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_DIALOG)
+        self.connect("delete_event", self.exit_window)
+
+        sw = gtk.ScrolledWindow()
+        eventbox = gtk.EventBox()
+        eventbox.connect('button-release-event', self.eventbox_press)
+        viewport = gtk.Viewport()
+        image = gtk.Image()
+        image.set_from_pixbuf(gtk.gdk.pixbuf_new_from_file(imagepath))
+        eventbox.add(image)
+        viewport.add(eventbox)
+        sw.add(viewport)
+        self.add(sw)
+        self.show_all()
+
+    def eventbox_press(self, widget, event):
+        self.exit_window(self)
+
+    def exit_window(self, widget, event=None):
+        self.hide()
+        return False
+
 

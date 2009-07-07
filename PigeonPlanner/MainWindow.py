@@ -71,6 +71,7 @@ class MainWindow:
                       'on_serie_activate'        : self.serie_activate,
                       'on_serieadd_clicked'      : self.serieadd_clicked,
                       'on_seriecancel_clicked'   : self.seriecancel_clicked,
+                      'on_eventbox_press'        : self.eventbox_press,
                       'on_eventimage_press'      : self.eventimage_press,
                       'on_treeview_press'        : self.treeview_press,
                       'on_findsire_clicked'      : self.findsire_clicked,
@@ -356,6 +357,12 @@ class MainWindow:
 
     def cancel_clicked(self, widget):
         self.add_edit_finish()
+
+    def eventbox_press(self, widget, event):
+        ring, year = self.get_main_ring()
+        image = self.parser.pigeons[ring].image
+        if image:
+            Widgets.ImageWindow(image, self.main)
 
     def eventimage_press(self, widget, event):
         if event.button == 3:

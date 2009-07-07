@@ -607,11 +607,18 @@
                                             <property name="visible">True</property>
                                             <property name="resize_mode">queue</property>
                                             <child>
-                                              <widget class="GtkImage" id="imagePigeon">
-                                                <property name="width_request">200</property>
-                                                <property name="height_request">200</property>
+                                              <widget class="GtkEventBox" id="eventbox">
                                                 <property name="visible">True</property>
-                                                <property name="stock">gtk-missing-image</property>
+                                                <property name="events">GDK_BUTTON_RELEASE_MASK | GDK_STRUCTURE_MASK</property>
+                                                <signal name="button_press_event" handler="on_eventbox_press"/>
+                                                <child>
+                                                  <widget class="GtkImage" id="imagePigeon">
+                                                    <property name="width_request">200</property>
+                                                    <property name="height_request">200</property>
+                                                    <property name="visible">True</property>
+                                                    <property name="stock">gtk-missing-image</property>
+                                                  </widget>
+                                                </child>
                                               </widget>
                                             </child>
                                           </widget>
@@ -2099,6 +2106,8 @@
                         <property name="visible">True</property>
                       </widget>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
