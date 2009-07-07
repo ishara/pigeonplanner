@@ -236,14 +236,7 @@ class MainWindow:
                 (gtk.STOCK_EDIT, self.edit_clicked),
                 (gtk.STOCK_REMOVE, self.remove_clicked)]
 
-            menu = gtk.Menu()
-            for stock_id, callback in entries:
-                item = gtk.ImageMenuItem(stock_id)
-                if callback:
-                    item.connect("activate", callback)
-                item.show()
-                menu.append(item)
-            menu.popup(None, None, None, 0, event.time)
+            Widgets.popup_menu(event, entries)
 
     def button_top_clicked(self, widget):
         if len(self.liststore) > 0:
@@ -370,14 +363,7 @@ class MainWindow:
                 (gtk.STOCK_ADD, self.open_filedialog),
                 (gtk.STOCK_REMOVE, self.set_default_image)]
 
-            menu = gtk.Menu()
-            for stock_id, callback in entries:
-                item = gtk.ImageMenuItem(stock_id)
-                if callback:
-                    item.connect("activate", callback)
-                item.show()
-                menu.append(item)
-            menu.popup(None, None, None, 0, event.time)
+            Widgets.popup_menu(event, entries)
         else:
             self.open_filedialog()
 

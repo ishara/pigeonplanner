@@ -122,6 +122,16 @@ def fill_list(widget, items):
     elif number > 30:
         widget.set_wrap_width(3)
 
+def popup_menu(event, entries):
+    menu = gtk.Menu()
+    for stock_id, callback in entries:
+        item = gtk.ImageMenuItem(stock_id)
+        if callback:
+            item.connect("activate", callback)
+        item.show()
+        menu.append(item)
+    menu.popup(None, None, None, 0, event.time)
+
 
 class ImageWindow(gtk.Window):
     def __init__(self, imagepath, main):
