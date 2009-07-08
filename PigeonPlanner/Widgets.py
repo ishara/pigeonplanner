@@ -124,9 +124,11 @@ def fill_list(widget, items):
 
 def popup_menu(event, entries):
     menu = gtk.Menu()
-    for stock_id, callback in entries:
+    for stock_id, callback, data in entries:
         item = gtk.ImageMenuItem(stock_id)
-        if callback:
+        if data:
+            item.connect("activate", callback, data)
+        else:
             item.connect("activate", callback)
         item.show()
         menu.append(item)

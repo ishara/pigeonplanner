@@ -1877,6 +1877,8 @@
                               <widget class="GtkTreeView" id="tvBrothers">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK</property>
+                                <signal name="button_press_event" handler="on_tvBrothers_press"/>
                               </widget>
                             </child>
                           </widget>
@@ -1918,6 +1920,8 @@
                               <widget class="GtkTreeView" id="tvHalfBrothers">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK</property>
+                                <signal name="button_press_event" handler="on_tvHalfBrothers_press"/>
                               </widget>
                             </child>
                           </widget>
@@ -1959,6 +1963,8 @@
                               <widget class="GtkTreeView" id="tvOffspring">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK</property>
+                                <signal name="button_press_event" handler="on_tvOffspring_press"/>
                               </widget>
                             </child>
                           </widget>

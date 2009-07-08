@@ -75,6 +75,9 @@ class MainWindow:
                       'on_eventimage_press'      : self.eventimage_press,
                       'on_treeview_press'        : self.treeview_press,
                       'on_tvResults_press'       : self.tvResults_press,
+                      'on_tvBrothers_press'      : self.tvBrothers_press,
+                      'on_tvHalfBrothers_press'  : self.tvHalfBrothers_press,
+                      'on_tvOffspring_press'     : self.tvOffspring_press,
                       'on_findsire_clicked'      : self.findsire_clicked,
                       'on_finddam_clicked'       : self.finddam_clicked,
                       'on_findcancel_clicked'    : self.findcancel_clicked,
@@ -234,18 +237,51 @@ class MainWindow:
     def treeview_press(self, widget, event):
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.edit_clicked),
-                (gtk.STOCK_REMOVE, self.remove_clicked)]
+                (gtk.STOCK_EDIT, self.edit_clicked, None),
+                (gtk.STOCK_REMOVE, self.remove_clicked, None)]
 
             Widgets.popup_menu(event, entries)
 
     def tvResults_press(self, widget, event):
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.editresult_clicked),
-                (gtk.STOCK_REMOVE, self.removeresult_clicked)]
+                (gtk.STOCK_EDIT, self.editresult_clicked, None),
+                (gtk.STOCK_REMOVE, self.removeresult_clicked, None)]
 
             Widgets.popup_menu(event, entries)
+
+    def tvBrothers_press(self, widget, event):
+        ring = self.get_treeview_ring(self.selBrothers)
+        if not ring: return
+
+        if event.button == 3:
+            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
+
+            Widgets.popup_menu(event, entries)
+        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            self.search_pigeon(None, ring)
+
+    def tvHalfBrothers_press(self, widget, event):
+        ring = self.get_treeview_ring(self.selHalfBrothers)
+        if not ring: return
+
+        if event.button == 3:
+            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
+
+            Widgets.popup_menu(event, entries)
+        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            self.search_pigeon(None, ring)
+
+    def tvOffspring_press(self, widget, event):
+        ring = self.get_treeview_ring(self.selOffspring)
+        if not ring: return
+
+        if event.button == 3:
+            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
+
+            Widgets.popup_menu(event, entries)
+        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            self.search_pigeon(None, ring)
 
     def button_top_clicked(self, widget):
         if len(self.liststore) > 0:
@@ -369,8 +405,8 @@ class MainWindow:
     def eventimage_press(self, widget, event):
         if event.button == 3:
             entries = [
-                (gtk.STOCK_ADD, self.open_filedialog),
-                (gtk.STOCK_REMOVE, self.set_default_image)]
+                (gtk.STOCK_ADD, self.open_filedialog, None),
+                (gtk.STOCK_REMOVE, self.set_default_image, None)]
 
             Widgets.popup_menu(event, entries)
         else:
@@ -1153,6 +1189,32 @@ class MainWindow:
         year = model[path][1]
 
         return ring, year
+
+    def search_pigeon(self, widget, ring):
+        '''
+        Set the cursor on the given pigeon
+
+        @param ring: The pigeon to search
+        '''
+
+        for item in self.liststore:
+            number = self.treeview.get_model().get_value(item.iter, 0)
+            if number == ring:
+                self.treeview.set_cursor(item.path)
+                return
+
+    def get_treeview_ring(self, selection):
+        '''
+        Return the ring of the selected row
+
+        @param selection: the selection of the treeview
+        '''
+
+        model, path = selection.get_selected()
+        if not path: return
+        ring = model[path][0]
+
+        return ring
 
     def get_resultdata(self):
         '''
