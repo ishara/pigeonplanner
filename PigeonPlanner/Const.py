@@ -82,3 +82,5 @@ MSG_UPDATE_ERROR = _("Error trying to get information. Are you connected to the 
 MSG_UPDATE_AVAILABLE = _("A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version")
 MSG_NO_UPDATE = _("You already have the latest version installed.")
 MSG_UPDATE_DEVELOPMENT = _("This isn't normal, or you must be running a development version")
+
+MSG_REMOVE_ITEM = _("Removing item '%s' from '%s'.\n\nAre you sure?")

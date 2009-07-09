@@ -199,6 +199,12 @@ class DatabaseOperations:
         conn.close()
         return data
 
+    def delete_colour(self, colour):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Colours WHERE colour=?', (colour,))
+        conn.commit()
+        conn.close()
+
 #### Sectors
     def insert_sector(self, data):
         conn, cursor = self.db_connect()
@@ -215,6 +221,12 @@ class DatabaseOperations:
         data = [row[1] for row in cursor.fetchall() if row[1]]
         conn.close()
         return data
+
+    def delete_sector(self, sector):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Sectors WHERE sector=?', (sector,))
+        conn.commit()
+        conn.close()
 
 #### Racepoints
     def insert_racepoint(self, data):
@@ -233,6 +245,12 @@ class DatabaseOperations:
         conn.close()
         return data
 
+    def delete_racepoint(self, racepoint):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Racepoints WHERE racepoint=?', (racepoint,))
+        conn.commit()
+        conn.close()
+
 #### Strains
     def insert_strain(self, data):
         conn, cursor = self.db_connect()
@@ -250,6 +268,12 @@ class DatabaseOperations:
         conn.close()
         return data
 
+    def delete_strain(self, strain):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Strains WHERE strain=?', (strain,))
+        conn.commit()
+        conn.close()
+
 #### Lofts
     def insert_loft(self, data):
         conn, cursor = self.db_connect()
@@ -266,4 +290,10 @@ class DatabaseOperations:
         data = [row[1] for row in cursor.fetchall() if row[1]]
         conn.close()
         return data
+
+    def delete_loft(self, loft):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Lofts WHERE loft=?', (loft,))
+        conn.commit()
+        conn.close()
 

@@ -41,6 +41,8 @@ class ToolsWindow:
                       'on_printcalc_clicked'     : self.printcalc_clicked,
                       'on_calchelp_clicked'      : self.calchelp_clicked,
                       'on_btnupdate_clicked'     : self.btnupdate_clicked,
+                      'on_cbdata_changed'        : self.cbdata_changed,
+                      'on_dataremove_clicked'    : self.dataremove_clicked,
                       'on_window_destroy'        : self.close_clicked,
                       'on_close_clicked'         : self.close_clicked }
         self.wTree.signal_autoconnect(signalDic)
@@ -66,7 +68,7 @@ class ToolsWindow:
 
         # Add the categories
         i = 0
-        for category in [_("Velocity calculator"), _("Backup"), _("Update")]:
+        for category in [_("Velocity calculator"), _("Data"), _("Backup"), _("Update")]:
             self.liststore.append([i, category])
             i += 1
 
@@ -95,6 +97,12 @@ class ToolsWindow:
         fileFilter.add_mime_type("zip/zip")
         fileFilter.add_pattern("*PigeonPlannerBackup.zip")
         self.fcButtonRestore.add_filter(fileFilter)
+
+        # Fill the data combobox
+        data = ['Colours', 'Racepoints', 'Sectors', 'Strains', 'Lofts']
+        for item in data:
+            self.cbdata.get_model().append([item])
+        self.cbdata.set_active(0)
 
     def close_clicked(self, widget, event=None):
         self.toolsdialog.destroy()
@@ -181,4 +189,55 @@ class ToolsWindow:
 
         self.labelversion.set_text(msg)
 
+    def cbdata_changed(self, widget):
+        datatype = widget.get_active_text()
+        self.fill_item_combo(datatype)
+
+        if self.cbitems.get_active_text():
+            self.dataremove.set_sensitive(True)
+        else:
+            self.dataremove.set_sensitive(False)
+
+    def fill_item_combo(self, datatype):
+        self.cbitems.get_model().clear()
+
+        if datatype == 'Colours':
+            items = self.main.database.get_all_colours()
+        elif datatype == 'Sectors':
+            items = self.main.database.get_all_sectors()
+        elif datatype == 'Racepoints':
+            items = self.main.database.get_all_racepoints()
+        elif datatype == 'Strains':
+            items = self.main.database.get_all_strains()
+        elif datatype == 'Lofts':
+            items = self.main.database.get_all_lofts()
+
+        if items:
+            items.sort()
+
+        for item in items:
+            self.cbitems.append_text(item)
+
+        self.cbitems.set_active(0)
+
+    def dataremove_clicked(self, widget):
+        dataset = self.cbdata.get_active_text()
+        item = self.cbitems.get_active_text()
+        remove = Widgets.message_dialog('question', Const.MSG_REMOVE_ITEM %(item, dataset), self.toolsdialog)
+        if remove:
+            index = self.cbitems.get_active()
+
+            if dataset == 'Colours':
+                self.main.database.delete_colour(item)
+            elif dataset == 'Sectors':
+                self.main.database.delete_sector(item)
+            elif dataset == 'Racepoints':
+                self.main.database.delete_racepoint(item)
+            elif dataset == 'Strains':
+                self.main.database.delete_strain(item)
+            elif dataset == 'Lofts':
+                self.main.database.delete_loft(item)
+
+            self.cbitems.remove_text(index)
+            self.cbitems.set_active(0)
 
