@@ -101,7 +101,7 @@ class OptionsDialog:
         self.columnValueDic = {_("Colour") : 0, _("Sex") : 1}
 
         for item in sorted(self.columnValueDic, key=self.columnValueDic.__getitem__):
-            self.cbColumn.get_model().append([item])
+            self.cbColumn.append_text(item)
 
         self.set_options()
         if not self.chkColumn.get_active():

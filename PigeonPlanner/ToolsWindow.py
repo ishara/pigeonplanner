@@ -101,7 +101,7 @@ class ToolsWindow:
         # Fill the data combobox
         data = ['Colours', 'Racepoints', 'Sectors', 'Strains', 'Lofts']
         for item in data:
-            self.cbdata.get_model().append([item])
+            self.cbdata.append_text(item)
         self.cbdata.set_active(0)
 
     def close_clicked(self, widget, event=None):
