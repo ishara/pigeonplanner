@@ -66,7 +66,7 @@ class ToolsWindow:
 
         # Add the categories
         i = 0
-        for category in [_("Backup"), _("Velocity calculator"), _("Update")]:
+        for category in [_("Velocity calculator"), _("Backup"), _("Update")]:
             self.liststore.append([i, category])
             i += 1
 
