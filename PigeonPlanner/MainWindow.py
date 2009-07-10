@@ -551,8 +551,7 @@ class MainWindow:
         self.cbSector.child.set_text(sector)
 
         self.addresult.set_property('visible', False)
-        self.editapply.set_property('visible', True)
-        self.resultcancel.set_property('visible', True)
+        self.set_multiple_visible(['editapply', 'resultcancel'], True)
 
     def editapply_clicked(self, widget):
         ring, year = self.get_main_ring()
@@ -576,8 +575,7 @@ class MainWindow:
         self.cbSector.child.set_text('')
 
         self.addresult.set_property('visible', True)
-        self.editapply.set_property('visible', False)
-        self.resultcancel.set_property('visible', False)
+        self.set_multiple_visible(['editapply', 'resultcancel'], False)
 
     def allresults_clicked(self, widget):
         ResultWindow.ResultWindow(self, self.parser.pigeons, self.database)
@@ -755,6 +753,18 @@ class MainWindow:
         for item in widgets:
             attr = getattr(self, item)
             attr.set_sensitive(boolean)
+
+    def set_multiple_visible(self, widgets, boolean):
+        ''' 
+        Set multiple widgets visible at once
+
+        @param widgets: list of widgets
+        @param bool: boolean 
+        '''
+
+        for item in widgets:
+            attr = getattr(self, item)
+            attr.set_property('visible', boolean)
 
     def empty_entryboxes(self):
         '''
@@ -1009,8 +1019,7 @@ class MainWindow:
         widgets = ['toolbar', 'notebook', 'treeview', 'vboxButtons']
         self.set_multiple_sensitive(widgets, True)
 
-        self.btnadd.set_property('visible', False)
-        self.save.set_property('visible', False)
+        self.set_multiple_visible(['btnadd', 'save'], False)
 
     def get_add_edit_info(self):
         '''
