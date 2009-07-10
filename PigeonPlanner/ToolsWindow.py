@@ -68,7 +68,7 @@ class ToolsWindow:
 
         # Add the categories
         i = 0
-        for category in [_("Velocity calculator"), _("Data"), _("Backup"), _("Update")]:
+        for category in [_("Velocity calculator"), _("Datasets"), _("Backup"), _("Update")]:
             self.liststore.append([i, category])
             i += 1
 
@@ -89,7 +89,7 @@ class ToolsWindow:
         dt = datetime.datetime.now()
         self.sbhour.set_value(dt.hour)
         self.sbminute.set_value(dt.minute)
-        self.sbdist.set_value(125) #XXX: Random?
+        self.sbdist.set_value(125)
 
         # Backups file filter
         fileFilter = gtk.FileFilter()
@@ -99,7 +99,7 @@ class ToolsWindow:
         self.fcButtonRestore.add_filter(fileFilter)
 
         # Fill the data combobox
-        data = [_('Colours'), _('Racepoints'), _('Sectors'), _('Strains'), _('Lofts')]
+        data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Strains"), _("Lofts")]
         for item in data:
             self.cbdata.append_text(item)
         self.cbdata.set_active(0)
@@ -109,8 +109,7 @@ class ToolsWindow:
 
     def selection_changed(self, selection):
         model, path = selection.get_selected()
-        if not path:
-            return
+        if not path: return
 
         try:
             self.notebook.set_current_page(model[path][0])
@@ -201,15 +200,15 @@ class ToolsWindow:
     def fill_item_combo(self, datatype):
         self.cbitems.get_model().clear()
 
-        if datatype == 'Colours':
+        if datatype == _("Colours"):
             items = self.main.database.get_all_colours()
-        elif datatype == 'Sectors':
+        elif datatype == _("Sectors"):
             items = self.main.database.get_all_sectors()
-        elif datatype == 'Racepoints':
+        elif datatype == _("Racepoints"):
             items = self.main.database.get_all_racepoints()
-        elif datatype == 'Strains':
+        elif datatype == _("Strains"):
             items = self.main.database.get_all_strains()
-        elif datatype == 'Lofts':
+        elif datatype == _("Lofts"):
             items = self.main.database.get_all_lofts()
 
         if items:
@@ -223,7 +222,9 @@ class ToolsWindow:
     def dataremove_clicked(self, widget):
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
+
         remove = Widgets.message_dialog('question', Const.MSG_REMOVE_ITEM %(item, dataset), self.toolsdialog)
+
         if remove:
             index = self.cbitems.get_active()
 
