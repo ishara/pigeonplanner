@@ -99,7 +99,7 @@ class ToolsWindow:
         self.fcButtonRestore.add_filter(fileFilter)
 
         # Fill the data combobox
-        data = ['Colours', 'Racepoints', 'Sectors', 'Strains', 'Lofts']
+        data = [_('Colours'), _('Racepoints'), _('Sectors'), _('Strains'), _('Lofts')]
         for item in data:
             self.cbdata.append_text(item)
         self.cbdata.set_active(0)
