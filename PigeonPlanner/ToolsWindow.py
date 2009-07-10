@@ -228,15 +228,15 @@ class ToolsWindow:
         if remove:
             index = self.cbitems.get_active()
 
-            if dataset == 'Colours':
+            if dataset == _("Colours"):
                 self.main.database.delete_colour(item)
-            elif dataset == 'Sectors':
+            elif dataset == _("Sectors"):
                 self.main.database.delete_sector(item)
-            elif dataset == 'Racepoints':
+            elif dataset == _("Racepoints"):
                 self.main.database.delete_racepoint(item)
-            elif dataset == 'Strains':
+            elif dataset == _("Strains"):
                 self.main.database.delete_strain(item)
-            elif dataset == 'Lofts':
+            elif dataset == _("Lofts"):
                 self.main.database.delete_loft(item)
 
             self.cbitems.remove_text(index)
