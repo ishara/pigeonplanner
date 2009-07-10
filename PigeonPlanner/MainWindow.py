@@ -486,11 +486,8 @@ class MainWindow:
                         sex = '1'
 
         if ring:
-            for item in self.liststore:
-                number = self.treeview.get_model().get_value(item.iter, 0)
-                if number == ring:
-                    self.treeview.set_cursor(item.path)
-                    return
+            pigeon = self.search_pigeon(None, ring)
+            if pigeon: return
 
             answer = Widgets.message_dialog('question', Const.MSG_ADD_PIGEON, self.main)
             if not answer:
@@ -1201,7 +1198,9 @@ class MainWindow:
             number = self.treeview.get_model().get_value(item.iter, 0)
             if number == ring:
                 self.treeview.set_cursor(item.path)
-                return
+                return True
+
+        return False
 
     def get_treeview_ring(self, selection):
         '''
