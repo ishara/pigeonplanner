@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pigeon Planner 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-24 17:58+0200\n"
+"POT-Creation-Date: 2009-07-10 10:25+0200\n"
 "PO-Revision-Date: 2009-05-06 16:11+0200\n"
 "Last-Translator: Automatically generated <>\n"
 "Language-Team: none <>\n"
@@ -17,10 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../PigeonPlanner/Const.py:58
+#: ../PigeonPlanner/Const.py:57
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
 msgstr "Deze afbeelding is niet geldig of is corrupt, kies een andere."
+
+#: ../PigeonPlanner/Const.py:58
+msgid "Error loading this image. Probably you have moved it on your disk."
+msgstr ""
+"Fout bij het laden van deze afbeelding. Waarschijnlijk is deze verplaatst op "
+"de schijf."
 
 #: ../PigeonPlanner/Const.py:60
 msgid ""
@@ -84,7 +90,7 @@ msgstr ""
 
 #: ../PigeonPlanner/Const.py:70
 msgid "The result you want to add already exists."
-msgstr ""
+msgstr "Het resultaat dat u wil toevoegen bestaat al."
 
 #: ../PigeonPlanner/Const.py:72
 msgid "The backup was successfully created."
@@ -106,7 +112,7 @@ msgstr ""
 "Dit zal alle opties terugzetten naar de standaard waarden.\n"
 "bent u zeker?"
 
-#: ../PigeonPlanner/Const.py:76
+#: ../PigeonPlanner/Const.py:77
 msgid ""
 "You have not entered your personal information.\n"
 "This will be shown on top of the printed pedigree.\n"
@@ -116,9 +122,40 @@ msgstr ""
 "Dit komt op een geprintte stamboom te staan.\n"
 "Wilt u dit nu ingeven?"
 
-#: ../PigeonPlanner/Const.py:78
+#: ../PigeonPlanner/Const.py:79
 msgid "Error printing the pedigree"
 msgstr "Fout bij het printen van de stamboom"
+
+#: ../PigeonPlanner/Const.py:81
+msgid "Error trying to get information. Are you connected to the internet?"
+msgstr "Fout bij het ophalen van de informatie. Bent u verbonden met internet?"
+
+#: ../PigeonPlanner/Const.py:82
+msgid ""
+"A new version is available. Please go to the Pigeon Planner website by "
+"clicking the link below and download the latest version"
+msgstr ""
+"Een nieuwe versie is beschikbaar. Bezoek de Pigeon Planner website door op "
+"de onderstaande link te klikken en download de laatste versie"
+
+#: ../PigeonPlanner/Const.py:83
+msgid "You already have the latest version installed."
+msgstr "U hebt al de laatste versie geinstalleerd."
+
+#: ../PigeonPlanner/Const.py:84
+msgid "This isn't normal, or you must be running a development version"
+msgstr "Dit is niet normaal, of u moet een ontwikkelversie hebben"
+
+#: ../PigeonPlanner/Const.py:86
+#, python-format
+msgid ""
+"Removing item '%(item)s' from '%(dataset)s'.\n"
+"\n"
+"Are you sure?"
+msgstr ""
+"Verwijderen van '%(item)s' uit '%(dataset)s'.\n"
+"\n"
+"Bent u zeker?"
 
 #: ../PigeonPlanner/Checks.py:42
 msgid "sire"
@@ -132,13 +169,13 @@ msgstr "moeder"
 msgid "pigeon"
 msgstr "Duif"
 
-#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:688
+#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:728
 #: tmp/MainWindow.glade.h:17
 msgid "Colour"
 msgstr "Kleur"
 
-#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:686
-#: tmp/MainWindow.glade.h:40
+#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:726
+#: tmp/MainWindow.glade.h:42
 msgid "Sex"
 msgstr "Geslacht"
 
@@ -146,7 +183,7 @@ msgstr "Geslacht"
 msgid "Pedigree of:"
 msgstr "Stamboom van:"
 
-#: ../PigeonPlanner/Print.py:281 tmp/MainWindow.glade.h:35
+#: ../PigeonPlanner/Print.py:281 tmp/MainWindow.glade.h:37
 msgid "Results"
 msgstr "Uitslagen"
 
@@ -162,20 +199,20 @@ msgstr "Jaar duiven"
 
 #: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:321
 #: ../PigeonPlanner/Print.py:355 ../PigeonPlanner/Print.py:356
-#: ../PigeonPlanner/MainWindow.py:668 ../PigeonPlanner/ResultWindow.py:57
-#: tmp/MainWindow.glade.h:31 tmp/ResultWindow.glade.h:5
+#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:57
+#: tmp/MainWindow.glade.h:33 tmp/ResultWindow.glade.h:5
 msgid "Racepoint"
 msgstr "Vlucht"
 
 #: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:325
 #: ../PigeonPlanner/Print.py:379 ../PigeonPlanner/Print.py:380
-#: ../PigeonPlanner/MainWindow.py:668 ../PigeonPlanner/ResultWindow.py:61
-#: tmp/MainWindow.glade.h:39 tmp/ResultWindow.glade.h:7
+#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:61
+#: tmp/MainWindow.glade.h:41 tmp/ResultWindow.glade.h:7
 msgid "Sector"
 msgstr "Sector"
 
 #: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:329
-#: ../PigeonPlanner/MainWindow.py:668 ../PigeonPlanner/ResultWindow.py:60
+#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:60
 #: tmp/ResultWindow.glade.h:2
 msgid "Coefficient"
 msgstr "Coefficient"
@@ -187,21 +224,21 @@ msgid "Place"
 msgstr "Plaats"
 
 #: ../PigeonPlanner/Print.py:343 ../PigeonPlanner/Print.py:344
-#: ../PigeonPlanner/MainWindow.py:636 ../PigeonPlanner/MainWindow.py:648
-#: ../PigeonPlanner/MainWindow.py:653 ../PigeonPlanner/MainWindow.py:658
-#: ../PigeonPlanner/MainWindow.py:663 ../PigeonPlanner/ResultWindow.py:62
+#: ../PigeonPlanner/MainWindow.py:676 ../PigeonPlanner/MainWindow.py:688
+#: ../PigeonPlanner/MainWindow.py:693 ../PigeonPlanner/MainWindow.py:698
+#: ../PigeonPlanner/MainWindow.py:703 ../PigeonPlanner/ResultWindow.py:62
 msgid "Band no."
 msgstr "Ringnr."
 
 #: ../PigeonPlanner/Print.py:349 ../PigeonPlanner/Print.py:350
-#: ../PigeonPlanner/MainWindow.py:668 ../PigeonPlanner/ResultWindow.py:56
+#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:56
 #: tmp/MainWindow.glade.h:19
 msgid "Date"
 msgstr "Datum"
 
 #: ../PigeonPlanner/Print.py:367 ../PigeonPlanner/Print.py:368
-#: ../PigeonPlanner/MainWindow.py:668 ../PigeonPlanner/ResultWindow.py:59
-#: tmp/MainWindow.glade.h:28
+#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:59
+#: tmp/MainWindow.glade.h:30
 msgid "Out of"
 msgstr "Uit"
 
@@ -209,70 +246,122 @@ msgstr "Uit"
 msgid "Coef."
 msgstr "Coef."
 
-#: ../PigeonPlanner/ToolsWindow.py:55 tmp/MainWindow.glade.h:45
-msgid "Tools"
-msgstr ""
-
-#: ../PigeonPlanner/ToolsWindow.py:64 tmp/ToolsWindow.glade.h:3
-msgid "Backup"
-msgstr "Backup"
-
-#: ../PigeonPlanner/ToolsWindow.py:64
-msgid "Velocity calculator"
-msgstr "Snelheid meter"
-
-#: ../PigeonPlanner/ToolsWindow.py:73
+#: ../PigeonPlanner/Print.py:457 ../PigeonPlanner/Print.py:479
+#: ../PigeonPlanner/Print.py:480 ../PigeonPlanner/ToolsWindow.py:80
 msgid "Velocity"
 msgstr "Snelheid"
 
-#: ../PigeonPlanner/ToolsWindow.py:74
+#: ../PigeonPlanner/Print.py:466
+msgid "Date: "
+msgstr "Datum: "
+
+#: ../PigeonPlanner/Print.py:468
+msgid "Released: "
+msgstr "Gelost: "
+
+#: ../PigeonPlanner/Print.py:470
+msgid "Distance: "
+msgstr "Afstand: "
+
+#: ../PigeonPlanner/Print.py:485 ../PigeonPlanner/Print.py:486
+#: ../PigeonPlanner/ToolsWindow.py:81
 msgid "Flight Time"
 msgstr "Vlucht tijd"
 
-#: ../PigeonPlanner/ToolsWindow.py:75
+#: ../PigeonPlanner/Print.py:491 ../PigeonPlanner/Print.py:492
+#: ../PigeonPlanner/ToolsWindow.py:82
 msgid "Time of Arrival"
 msgstr "Aankomst tijd"
 
-#: ../PigeonPlanner/ToolsWindow.py:89
+#: ../PigeonPlanner/ToolsWindow.py:62 tmp/MainWindow.glade.h:47
+#: tmp/ToolsWindow.glade.h:26
+msgid "Tools"
+msgstr "Gereedschappen"
+
+#: ../PigeonPlanner/ToolsWindow.py:71
+msgid "Velocity calculator"
+msgstr "Snelheid meter"
+
+#: ../PigeonPlanner/ToolsWindow.py:71
+msgid "Datasets"
+msgstr "Datasets"
+
+#: ../PigeonPlanner/ToolsWindow.py:71 tmp/ToolsWindow.glade.h:8
+msgid "Backup"
+msgstr "Backup"
+
+#: ../PigeonPlanner/ToolsWindow.py:71
+msgid "Update"
+msgstr "Update"
+
+#: ../PigeonPlanner/ToolsWindow.py:96
 msgid "PP Backups"
 msgstr "PP Backups"
 
-#: ../PigeonPlanner/MainWindow.py:107
+#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:203
+msgid "Colours"
+msgstr "Kleuren"
+
+#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:207
+msgid "Racepoints"
+msgstr "Vluchten"
+
+#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:205
+msgid "Sectors"
+msgstr "Sectoren"
+
+#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:209
+msgid "Strains"
+msgstr "Rassen"
+
+#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:211
+msgid "Lofts"
+msgstr "Hokken"
+
+#: ../PigeonPlanner/Widgets.py:141
+msgid "View image: "
+msgstr "Bekijk afbeelding: "
+
+#: ../PigeonPlanner/Widgets.py:155
+msgid "Click to close this window"
+msgstr "Klik om het venster te sluiten"
+
+#: ../PigeonPlanner/MainWindow.py:113
 msgid "cock"
 msgstr "duiver"
 
-#: ../PigeonPlanner/MainWindow.py:107
+#: ../PigeonPlanner/MainWindow.py:113
 msgid "hen"
 msgstr "duivin"
 
-#: ../PigeonPlanner/MainWindow.py:107
+#: ../PigeonPlanner/MainWindow.py:113
 msgid "young bird"
 msgstr "jonge duif"
 
-#: ../PigeonPlanner/MainWindow.py:175 ../PigeonPlanner/MainWindow.py:178
+#: ../PigeonPlanner/MainWindow.py:181 ../PigeonPlanner/MainWindow.py:184
 msgid "pigeons"
 msgstr "duiven"
 
-#: ../PigeonPlanner/MainWindow.py:636 ../PigeonPlanner/MainWindow.py:648
-#: ../PigeonPlanner/MainWindow.py:653 ../PigeonPlanner/MainWindow.py:658
-#: ../PigeonPlanner/MainWindow.py:663 tmp/MainWindow.glade.h:48
+#: ../PigeonPlanner/MainWindow.py:676 ../PigeonPlanner/MainWindow.py:688
+#: ../PigeonPlanner/MainWindow.py:693 ../PigeonPlanner/MainWindow.py:698
+#: ../PigeonPlanner/MainWindow.py:703 tmp/MainWindow.glade.h:50
 msgid "Year"
 msgstr "Jaar"
 
-#: ../PigeonPlanner/MainWindow.py:636 ../PigeonPlanner/MainWindow.py:648
+#: ../PigeonPlanner/MainWindow.py:676 ../PigeonPlanner/MainWindow.py:688
 msgid "Name"
 msgstr "Naam"
 
-#: ../PigeonPlanner/MainWindow.py:658
+#: ../PigeonPlanner/MainWindow.py:698
 msgid "Common parent"
 msgstr "Gem. ouder"
 
-#: ../PigeonPlanner/MainWindow.py:668 ../PigeonPlanner/ResultWindow.py:58
-#: tmp/MainWindow.glade.h:30
+#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:58
+#: tmp/MainWindow.glade.h:32
 msgid "Placed"
 msgstr "Plaats"
 
-#: ../PigeonPlanner/MainWindow.py:1248
+#: ../PigeonPlanner/MainWindow.py:1316
 msgid "Images"
 msgstr "Afbeeldingen"
 
@@ -390,90 +479,98 @@ msgid "Dam"
 msgstr "Moeder"
 
 #: tmp/MainWindow.glade.h:20
+msgid "Edit result"
+msgstr "Bewerk uitslag"
+
+#: tmp/MainWindow.glade.h:21
 msgid "Enter a name for this pigeon..."
 msgstr "Vul een naam voor deze duif in..."
 
-#: tmp/MainWindow.glade.h:21
+#: tmp/MainWindow.glade.h:22
 msgid "Extra"
 msgstr "Extra"
 
-#: tmp/MainWindow.glade.h:22
+#: tmp/MainWindow.glade.h:23
 msgid "Filter"
 msgstr "Filteren"
 
-#: tmp/MainWindow.glade.h:23
+#: tmp/MainWindow.glade.h:24
 msgid "From"
 msgstr "Van"
 
-#: tmp/MainWindow.glade.h:24
+#: tmp/MainWindow.glade.h:25
 msgid "Go to pigeon"
 msgstr "Ga naar duif"
 
-#: tmp/MainWindow.glade.h:25
+#: tmp/MainWindow.glade.h:26
 msgid "Hens"
 msgstr "Duivinnen"
 
-#: tmp/MainWindow.glade.h:26
-msgid "Keep this pigeon (and parents) in the pedigree"
-msgstr "Bewaar deze duif (en ouders) in de stamboom"
-
 #: tmp/MainWindow.glade.h:27
+msgid "Keep results of this pigeon"
+msgstr "Bewaar uitslagen van deze duif"
+
+#: tmp/MainWindow.glade.h:28
+msgid "Keep this pigeon in the pedigree"
+msgstr "Bewaar deze duif in de stamboom"
+
+#: tmp/MainWindow.glade.h:29
 msgid "Loft"
 msgstr "Hok"
 
-#: tmp/MainWindow.glade.h:29 tmp/PedigreeWindow.glade.h:4
+#: tmp/MainWindow.glade.h:31 tmp/PedigreeWindow.glade.h:4
 msgid "Pedigree"
 msgstr "Stamboom"
 
-#: tmp/MainWindow.glade.h:32
+#: tmp/MainWindow.glade.h:34
 msgid "Relatives"
 msgstr "Verwanten"
 
-#: tmp/MainWindow.glade.h:33
+#: tmp/MainWindow.glade.h:35
 msgid "Remove pigeon"
 msgstr "Verwijder duif"
 
-#: tmp/MainWindow.glade.h:34
+#: tmp/MainWindow.glade.h:36
 msgid "Remove result"
 msgstr "Verwijder uitslag"
 
-#: tmp/MainWindow.glade.h:36
+#: tmp/MainWindow.glade.h:38
 msgid "Search a pigeon"
 msgstr "Zoek een duif"
 
-#: tmp/MainWindow.glade.h:37
+#: tmp/MainWindow.glade.h:39
 msgid "Search through the list of cocks"
 msgstr "Zoek door de lijst met duivers"
 
-#: tmp/MainWindow.glade.h:38
+#: tmp/MainWindow.glade.h:40
 msgid "Search through the list of hens"
 msgstr "Zoek door de lijst met duivinnen"
 
-#: tmp/MainWindow.glade.h:41 tmp/PedigreeWindow.glade.h:6
+#: tmp/MainWindow.glade.h:43 tmp/PedigreeWindow.glade.h:6
 msgid "Sire"
 msgstr "Vader"
 
-#: tmp/MainWindow.glade.h:42
+#: tmp/MainWindow.glade.h:44
 msgid "Strain"
 msgstr "Ras"
 
-#: tmp/MainWindow.glade.h:43
+#: tmp/MainWindow.glade.h:45
 msgid "The following pigeon will be removed:"
 msgstr "De volgende duif zal verwijderd worden:"
 
-#: tmp/MainWindow.glade.h:44
+#: tmp/MainWindow.glade.h:46
 msgid "To"
 msgstr "Tot"
 
-#: tmp/MainWindow.glade.h:46 tmp/ResultWindow.glade.h:8
+#: tmp/MainWindow.glade.h:48 tmp/ResultWindow.glade.h:8
 msgid "View all results"
 msgstr "Bekijk alle uitslagen"
 
-#: tmp/MainWindow.glade.h:47
+#: tmp/MainWindow.glade.h:49
 msgid "View detail"
 msgstr "Bekijk detail"
 
-#: tmp/MainWindow.glade.h:49
+#: tmp/MainWindow.glade.h:51
 msgid "Young birds"
 msgstr "Jonge duiven"
 
@@ -550,30 +647,54 @@ msgid "Results:"
 msgstr "Uitslagen:"
 
 #: tmp/ToolsWindow.glade.h:1
+msgid "<b><i><big>Backup</big></i></b>"
+msgstr "<b><i><big>Backup</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:2
+msgid "<b><i><big>Manage data</big></i></b>"
+msgstr "<b><i><big>Beheer data</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:3
+msgid "<b><i><big>Update</big></i></b>"
+msgstr "<b><i><big>Update</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:4
+msgid "<b><i><big>Velocity calculator</big></i></b>"
+msgstr "<b><i><big>Snelheid meter</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:5
 msgid "<b>Create backup</b>"
 msgstr "<b>Backup maken</b>"
 
-#: tmp/ToolsWindow.glade.h:2
+#: tmp/ToolsWindow.glade.h:6
 msgid "<b>Restore backup</b>"
 msgstr "<b>Backup terugzetten</b>"
 
-#: tmp/ToolsWindow.glade.h:4
+#: tmp/ToolsWindow.glade.h:7
+msgid "<i>Click the button below</i>"
+msgstr "<i>Klik op onderstaande knop</i>"
+
+#: tmp/ToolsWindow.glade.h:9
 msgid "Calculate"
 msgstr "Berekenen"
 
-#: tmp/ToolsWindow.glade.h:5
+#: tmp/ToolsWindow.glade.h:10
 msgid "Calculate velocity"
 msgstr "Bereken snelheid"
 
-#: tmp/ToolsWindow.glade.h:6
+#: tmp/ToolsWindow.glade.h:11
+msgid "Check now!"
+msgstr "Controleer nu!"
+
+#: tmp/ToolsWindow.glade.h:12
 msgid "Choose a Pigeon Planner backup file to restore"
 msgstr "Kies een Pigeon Planner backup bestand om te herstellen"
 
-#: tmp/ToolsWindow.glade.h:7
+#: tmp/ToolsWindow.glade.h:13
 msgid "Choose a directory where to save the backup"
 msgstr "Kies een map om de backup op te slaan"
 
-#: tmp/ToolsWindow.glade.h:8
+#: tmp/ToolsWindow.glade.h:14
 msgid ""
 "Create and restore backups from\n"
 "your pigeons and results."
@@ -581,22 +702,42 @@ msgstr ""
 "Maak en herstel backups van\n"
 "uw duiven en uitslagen."
 
-#: tmp/ToolsWindow.glade.h:10
+#: tmp/ToolsWindow.glade.h:16
+msgid "Dataset"
+msgstr "Dataset"
+
+#: tmp/ToolsWindow.glade.h:17
 msgid "Distance (km)"
 msgstr "Afstand (km)"
 
-#: tmp/ToolsWindow.glade.h:11
+#: tmp/ToolsWindow.glade.h:18
+msgid "Downloadpage"
+msgstr "Downloadpagina"
+
+#: tmp/ToolsWindow.glade.h:19
 msgid "Een map selecteren"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:12
+#: tmp/ToolsWindow.glade.h:20
 msgid "From - To (meter/min)"
 msgstr "Van - Tot (meter/min)"
 
-#: tmp/ToolsWindow.glade.h:13
+#: tmp/ToolsWindow.glade.h:21
+msgid "Here you can check if there is a program update available."
+msgstr "Hier kan u controleren of er een update beschikbaar is."
+
+#: tmp/ToolsWindow.glade.h:22
+msgid "Item"
+msgstr "Item"
+
+#: tmp/ToolsWindow.glade.h:23
 msgid "Released (hh : mm)"
 msgstr "Gelost (uu : mm)"
 
-#: tmp/ToolsWindow.glade.h:14
+#: tmp/ToolsWindow.glade.h:24
+msgid "Remove items from your datasets"
+msgstr "Verwijder opties uit datasets"
+
+#: tmp/ToolsWindow.glade.h:25
 msgid "Restore"
 msgstr "Terugzetten"

@@ -83,4 +83,4 @@ MSG_UPDATE_AVAILABLE = _("A new version is available. Please go to the Pigeon Pl
 MSG_NO_UPDATE = _("You already have the latest version installed.")
 MSG_UPDATE_DEVELOPMENT = _("This isn't normal, or you must be running a development version")
 
-MSG_REMOVE_ITEM = _("Removing item '%s' from '%s'.\n\nAre you sure?")
+MSG_REMOVE_ITEM = _("Removing item '%(item)s' from '%(dataset)s'.\n\nAre you sure?")

@@ -509,7 +509,7 @@
                                 </child>
                                 <child>
                                   <widget class="GtkButton" id="dataremove">
-                                    <property name="label" translatable="yes">gtk-delete</property>
+                                    <property name="label">gtk-delete</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
