@@ -448,7 +448,7 @@ class MainWindow:
         dialog.set_name(Const.NAME)
         dialog.set_version(Const.VERSION)
         dialog.set_copyright(Const.COPYRIGHT)
-        dialog.set_comments(_(Const.DESCRIPTION))
+        dialog.set_comments(Const.DESCRIPTION)
         dialog.set_website(Const.WEBSITE)
         dialog.set_website_label("Pigeon Planner website")
         dialog.set_authors(Const.AUTHORS)
