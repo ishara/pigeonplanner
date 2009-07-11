@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pigeon Planner 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 10:51+0200\n"
+"POT-Creation-Date: 2009-07-11 16:42+0200\n"
 "PO-Revision-Date: 2009-05-06 16:11+0200\n"
 "Last-Translator: Automatically generated <>\n"
 "Language-Team: none <>\n"
@@ -169,12 +169,12 @@ msgstr "moeder"
 msgid "pigeon"
 msgstr "Duif"
 
-#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:728
+#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:725
 #: tmp/MainWindow.glade.h:17
 msgid "Colour"
 msgstr "Kleur"
 
-#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:726
+#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:723
 #: tmp/MainWindow.glade.h:42
 msgid "Sex"
 msgstr "Geslacht"
@@ -199,20 +199,20 @@ msgstr "Jaar duiven"
 
 #: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:321
 #: ../PigeonPlanner/Print.py:355 ../PigeonPlanner/Print.py:356
-#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:57
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:57
 #: tmp/MainWindow.glade.h:33 tmp/ResultWindow.glade.h:5
 msgid "Racepoint"
 msgstr "Vlucht"
 
 #: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:325
 #: ../PigeonPlanner/Print.py:379 ../PigeonPlanner/Print.py:380
-#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:61
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:61
 #: tmp/MainWindow.glade.h:41 tmp/ResultWindow.glade.h:7
 msgid "Sector"
 msgstr "Sector"
 
 #: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:329
-#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:60
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:60
 #: tmp/ResultWindow.glade.h:2
 msgid "Coefficient"
 msgstr "Coefficient"
@@ -224,20 +224,20 @@ msgid "Place"
 msgstr "Plaats"
 
 #: ../PigeonPlanner/Print.py:343 ../PigeonPlanner/Print.py:344
-#: ../PigeonPlanner/MainWindow.py:676 ../PigeonPlanner/MainWindow.py:688
-#: ../PigeonPlanner/MainWindow.py:693 ../PigeonPlanner/MainWindow.py:698
-#: ../PigeonPlanner/MainWindow.py:703 ../PigeonPlanner/ResultWindow.py:62
+#: ../PigeonPlanner/MainWindow.py:673 ../PigeonPlanner/MainWindow.py:685
+#: ../PigeonPlanner/MainWindow.py:690 ../PigeonPlanner/MainWindow.py:695
+#: ../PigeonPlanner/MainWindow.py:700 ../PigeonPlanner/ResultWindow.py:62
 msgid "Band no."
 msgstr "Ringnr."
 
 #: ../PigeonPlanner/Print.py:349 ../PigeonPlanner/Print.py:350
-#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:56
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:56
 #: tmp/MainWindow.glade.h:19
 msgid "Date"
 msgstr "Datum"
 
 #: ../PigeonPlanner/Print.py:367 ../PigeonPlanner/Print.py:368
-#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:59
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:59
 #: tmp/MainWindow.glade.h:30
 msgid "Out of"
 msgstr "Uit"
@@ -247,7 +247,7 @@ msgid "Coef."
 msgstr "Coef."
 
 #: ../PigeonPlanner/Print.py:457 ../PigeonPlanner/Print.py:479
-#: ../PigeonPlanner/Print.py:480 ../PigeonPlanner/ToolsWindow.py:80
+#: ../PigeonPlanner/Print.py:480 ../PigeonPlanner/ToolsWindow.py:79
 msgid "Velocity"
 msgstr "Snelheid"
 
@@ -264,62 +264,62 @@ msgid "Distance: "
 msgstr "Afstand: "
 
 #: ../PigeonPlanner/Print.py:485 ../PigeonPlanner/Print.py:486
-#: ../PigeonPlanner/ToolsWindow.py:81
+#: ../PigeonPlanner/ToolsWindow.py:80
 msgid "Flight Time"
 msgstr "Vlucht tijd"
 
 #: ../PigeonPlanner/Print.py:491 ../PigeonPlanner/Print.py:492
-#: ../PigeonPlanner/ToolsWindow.py:82
+#: ../PigeonPlanner/ToolsWindow.py:81
 msgid "Time of Arrival"
 msgstr "Aankomst tijd"
 
-#: ../PigeonPlanner/ToolsWindow.py:62 tmp/MainWindow.glade.h:47
+#: ../PigeonPlanner/ToolsWindow.py:61 tmp/MainWindow.glade.h:47
 #: tmp/ToolsWindow.glade.h:26
 msgid "Tools"
 msgstr "Gereedschappen"
 
-#: ../PigeonPlanner/ToolsWindow.py:71
+#: ../PigeonPlanner/ToolsWindow.py:70
 msgid "Velocity calculator"
 msgstr "Snelheid meter"
 
-#: ../PigeonPlanner/ToolsWindow.py:71
+#: ../PigeonPlanner/ToolsWindow.py:70
 msgid "Datasets"
 msgstr "Datasets"
 
-#: ../PigeonPlanner/ToolsWindow.py:71 tmp/ToolsWindow.glade.h:8
+#: ../PigeonPlanner/ToolsWindow.py:70 tmp/ToolsWindow.glade.h:8
 msgid "Backup"
 msgstr "Backup"
 
-#: ../PigeonPlanner/ToolsWindow.py:71
+#: ../PigeonPlanner/ToolsWindow.py:70
 msgid "Update"
 msgstr "Update"
 
-#: ../PigeonPlanner/ToolsWindow.py:96
+#: ../PigeonPlanner/ToolsWindow.py:95
 msgid "PP Backups"
 msgstr "PP Backups"
 
-#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:203
-#: ../PigeonPlanner/ToolsWindow.py:231
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:199
+#: ../PigeonPlanner/ToolsWindow.py:227
 msgid "Colours"
 msgstr "Kleuren"
 
-#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:207
-#: ../PigeonPlanner/ToolsWindow.py:235
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:203
+#: ../PigeonPlanner/ToolsWindow.py:231
 msgid "Racepoints"
 msgstr "Vluchten"
 
-#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:205
-#: ../PigeonPlanner/ToolsWindow.py:233
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:201
+#: ../PigeonPlanner/ToolsWindow.py:229
 msgid "Sectors"
 msgstr "Sectoren"
 
-#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:209
-#: ../PigeonPlanner/ToolsWindow.py:237
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:205
+#: ../PigeonPlanner/ToolsWindow.py:233
 msgid "Strains"
 msgstr "Rassen"
 
-#: ../PigeonPlanner/ToolsWindow.py:102 ../PigeonPlanner/ToolsWindow.py:211
-#: ../PigeonPlanner/ToolsWindow.py:239
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:207
+#: ../PigeonPlanner/ToolsWindow.py:235
 msgid "Lofts"
 msgstr "Hokken"
 
@@ -347,26 +347,34 @@ msgstr "jonge duif"
 msgid "pigeons"
 msgstr "duiven"
 
-#: ../PigeonPlanner/MainWindow.py:676 ../PigeonPlanner/MainWindow.py:688
-#: ../PigeonPlanner/MainWindow.py:693 ../PigeonPlanner/MainWindow.py:698
-#: ../PigeonPlanner/MainWindow.py:703 tmp/MainWindow.glade.h:50
+#: ../PigeonPlanner/MainWindow.py:555
+msgid "<b>Edit this result</b>"
+msgstr "<b>Bewerk deze uitslag</b>"
+
+#: ../PigeonPlanner/MainWindow.py:580 tmp/MainWindow.glade.h:1
+msgid "<b>Add a new result</b>"
+msgstr "<b>Voeg een nieuwe uitslag toe</b>"
+
+#: ../PigeonPlanner/MainWindow.py:673 ../PigeonPlanner/MainWindow.py:685
+#: ../PigeonPlanner/MainWindow.py:690 ../PigeonPlanner/MainWindow.py:695
+#: ../PigeonPlanner/MainWindow.py:700 tmp/MainWindow.glade.h:50
 msgid "Year"
 msgstr "Jaar"
 
-#: ../PigeonPlanner/MainWindow.py:676 ../PigeonPlanner/MainWindow.py:688
+#: ../PigeonPlanner/MainWindow.py:673 ../PigeonPlanner/MainWindow.py:685
 msgid "Name"
 msgstr "Naam"
 
-#: ../PigeonPlanner/MainWindow.py:698
+#: ../PigeonPlanner/MainWindow.py:695
 msgid "Common parent"
 msgstr "Gem. ouder"
 
-#: ../PigeonPlanner/MainWindow.py:708 ../PigeonPlanner/ResultWindow.py:58
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:58
 #: tmp/MainWindow.glade.h:32
 msgid "Placed"
 msgstr "Plaats"
 
-#: ../PigeonPlanner/MainWindow.py:1316
+#: ../PigeonPlanner/MainWindow.py:1326
 msgid "Images"
 msgstr "Afbeeldingen"
 
@@ -414,10 +422,6 @@ msgstr ""
 #: ../PigeonPlanner/ResultWindow.py:240 ../PigeonPlanner/ResultWindow.py:243
 msgid "All"
 msgstr "Alles"
-
-#: tmp/MainWindow.glade.h:1
-msgid "<b>Add a new result</b>"
-msgstr "<b>Voeg een nieuwe uitslag toe</b>"
 
 #: tmp/MainWindow.glade.h:2
 msgid "<b>Brothers and sisters</b>"
