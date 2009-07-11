@@ -1,3 +1,13 @@
+0.3:
+ * Added option to remove items from datasets
+ * Added option to go to pigeon in relatives tab
+ * Added option to remove/edit result by right-clicking
+ * Added option to view bigger image
+ * Added option to print velocity
+ * Added option to check for updates
+ * Fixed extra column that has wrong position (#386958)
+ * Various code/GUI cleanup
+
 0.2:
  * Added a velocity calculator
  * Added a tools window
