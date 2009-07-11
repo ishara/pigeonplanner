@@ -2503,7 +2503,7 @@
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label58">
+                      <widget class="GtkLabel" id="labeladdresult">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">&lt;b&gt;Add a new result&lt;/b&gt;</property>
                         <property name="use_markup">True</property>

@@ -552,6 +552,7 @@ class MainWindow:
 
         self.addresult.set_property('visible', False)
         self.set_multiple_visible(['editapply', 'resultcancel'], True)
+        self.labeladdresult.set_markup(_("<b>Edit this result</b>"))
 
     def editapply_clicked(self, widget):
         ring, year = self.get_main_ring()
@@ -576,6 +577,7 @@ class MainWindow:
 
         self.addresult.set_property('visible', True)
         self.set_multiple_visible(['editapply', 'resultcancel'], False)
+        self.labeladdresult.set_markup(_("<b>Add a new result</b>"))
 
     def allresults_clicked(self, widget):
         ResultWindow.ResultWindow(self, self.parser.pigeons, self.database)
