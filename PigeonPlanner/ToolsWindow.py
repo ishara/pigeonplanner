@@ -39,7 +39,6 @@ class ToolsWindow:
                       'on_sbbegin_changed'       : self.sbbegin_changed,
                       'on_calculate_clicked'     : self.calculate_clicked,
                       'on_printcalc_clicked'     : self.printcalc_clicked,
-                      'on_calchelp_clicked'      : self.calchelp_clicked,
                       'on_btnupdate_clicked'     : self.btnupdate_clicked,
                       'on_cbdata_changed'        : self.cbdata_changed,
                       'on_dataremove_clicked'    : self.dataremove_clicked,
@@ -161,9 +160,6 @@ class ToolsWindow:
             info = [date.strftime("%Y-%m-%d"), release, self.sbdist.get_value_as_int()]
 
             PrintVelocity(self.main.main, data, info)
-
-    def calchelp_clicked(self, widget):
-        pass
 
     def btnupdate_clicked(self, widget):
         local = os.path.join(Const.PREFDIR, Const.UPDATEURL.split('/')[-1])

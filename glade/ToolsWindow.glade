@@ -8,7 +8,7 @@
     <property name="title" translatable="yes">Tools</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
-    <property name="default_width">540</property>
+    <property name="default_width">550</property>
     <property name="default_height">420</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon">icon_logo.png</property>
@@ -90,7 +90,6 @@
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">False</property>
                                 <property name="position">2</property>
                               </packing>
                             </child>
@@ -103,12 +102,15 @@
                                 <child>
                                   <widget class="GtkLabel" id="label13">
                                     <property name="visible">True</property>
+                                    <property name="xalign">0.05000000074505806</property>
                                     <property name="label" translatable="yes">Distance (km)</property>
                                   </widget>
                                   <packing>
                                     <property name="top_attach">1</property>
                                     <property name="bottom_attach">2</property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
+                                    <property name="x_padding">4</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -128,17 +130,20 @@
                                     <property name="right_attach">2</property>
                                     <property name="top_attach">1</property>
                                     <property name="bottom_attach">2</property>
-                                    <property name="x_options"></property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
                                   </packing>
                                 </child>
                                 <child>
                                   <widget class="GtkLabel" id="label14">
                                     <property name="visible">True</property>
+                                    <property name="xalign">0.05000000074505806</property>
                                     <property name="label" translatable="yes">Released (hh : mm)</property>
                                   </widget>
                                   <packing>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
+                                    <property name="x_padding">4</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -157,7 +162,7 @@
                                   <packing>
                                     <property name="left_attach">1</property>
                                     <property name="right_attach">2</property>
-                                    <property name="x_options"></property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
                                   </packing>
                                 </child>
@@ -177,19 +182,22 @@
                                   <packing>
                                     <property name="left_attach">3</property>
                                     <property name="right_attach">4</property>
-                                    <property name="x_options"></property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
                                   </packing>
                                 </child>
                                 <child>
                                   <widget class="GtkLabel" id="label15">
                                     <property name="visible">True</property>
+                                    <property name="xalign">0.05000000074505806</property>
                                     <property name="label" translatable="yes">From - To (meter/min)</property>
                                   </widget>
                                   <packing>
                                     <property name="top_attach">2</property>
                                     <property name="bottom_attach">3</property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
+                                    <property name="x_padding">4</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -211,7 +219,7 @@
                                     <property name="right_attach">2</property>
                                     <property name="top_attach">2</property>
                                     <property name="bottom_attach">3</property>
-                                    <property name="x_options"></property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
                                   </packing>
                                 </child>
@@ -231,6 +239,7 @@
                                             <property name="stock">gtk-execute</property>
                                           </widget>
                                           <packing>
+                                            <property name="expand">False</property>
                                             <property name="position">0</property>
                                           </packing>
                                         </child>
@@ -240,6 +249,7 @@
                                             <property name="label" translatable="yes">Calculate</property>
                                           </widget>
                                           <packing>
+                                            <property name="expand">False</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
@@ -249,7 +259,7 @@
                                   <packing>
                                     <property name="left_attach">5</property>
                                     <property name="right_attach">6</property>
-                                    <property name="x_options"></property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
                                   </packing>
                                 </child>
@@ -267,7 +277,7 @@
                                     <property name="right_attach">6</property>
                                     <property name="top_attach">1</property>
                                     <property name="bottom_attach">2</property>
-                                    <property name="x_options"></property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
                                   </packing>
                                 </child>
@@ -280,6 +290,8 @@
                                     <property name="left_attach">4</property>
                                     <property name="right_attach">5</property>
                                     <property name="bottom_attach">3</property>
+                                    <property name="x_options">GTK_FILL</property>
+                                    <property name="x_padding">8</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -300,39 +312,7 @@
                                     <property name="right_attach">4</property>
                                     <property name="top_attach">2</property>
                                     <property name="bottom_attach">3</property>
-                                    <property name="x_options"></property>
-                                    <property name="y_options"></property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <widget class="GtkButton" id="calchelp">
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="relief">none</property>
-                                    <signal name="clicked" handler="on_calchelp_clicked"/>
-                                    <child>
-                                      <widget class="GtkHBox" id="hbox7">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <widget class="GtkImage" id="image4">
-                                            <property name="visible">True</property>
-                                            <property name="stock">gtk-info</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                      </widget>
-                                    </child>
-                                  </widget>
-                                  <packing>
-                                    <property name="left_attach">5</property>
-                                    <property name="right_attach">6</property>
-                                    <property name="top_attach">2</property>
-                                    <property name="bottom_attach">3</property>
-                                    <property name="x_options"></property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
                                   </packing>
                                 </child>
@@ -344,7 +324,9 @@
                                   <packing>
                                     <property name="left_attach">2</property>
                                     <property name="right_attach">3</property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
+                                    <property name="x_padding">8</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -357,8 +339,13 @@
                                     <property name="right_attach">3</property>
                                     <property name="top_attach">2</property>
                                     <property name="bottom_attach">3</property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
+                                    <property name="x_padding">8</property>
                                   </packing>
+                                </child>
+                                <child>
+                                  <placeholder/>
                                 </child>
                                 <child>
                                   <placeholder/>
@@ -369,7 +356,6 @@
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">False</property>
                                 <property name="padding">10</property>
                                 <property name="position">3</property>
                               </packing>
@@ -449,7 +435,6 @@
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">False</property>
                                 <property name="position">2</property>
                               </packing>
                             </child>
@@ -480,7 +465,9 @@
                                     <property name="label" translatable="yes">Dataset</property>
                                   </widget>
                                   <packing>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
+                                    <property name="x_padding">12</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -504,7 +491,9 @@
                                   <packing>
                                     <property name="top_attach">1</property>
                                     <property name="bottom_attach">2</property>
+                                    <property name="x_options">GTK_FILL</property>
                                     <property name="y_options"></property>
+                                    <property name="x_padding">12</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -598,7 +587,6 @@ your pigeons and results.</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">False</property>
                                 <property name="position">2</property>
                               </packing>
                             </child>
@@ -626,7 +614,6 @@ your pigeons and results.</property>
                                           </widget>
                                           <packing>
                                             <property name="expand">False</property>
-                                            <property name="fill">False</property>
                                             <property name="position">0</property>
                                           </packing>
                                         </child>
@@ -638,7 +625,6 @@ your pigeons and results.</property>
                                           </widget>
                                           <packing>
                                             <property name="expand">False</property>
-                                            <property name="fill">False</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
@@ -677,7 +663,6 @@ your pigeons and results.</property>
                                               </widget>
                                               <packing>
                                                 <property name="expand">False</property>
-                                                <property name="fill">False</property>
                                                 <property name="position">0</property>
                                               </packing>
                                             </child>
@@ -726,9 +711,11 @@ your pigeons and results.</property>
                                         <child>
                                           <widget class="GtkLabel" id="label10">
                                             <property name="visible">True</property>
+                                            <property name="xalign">0</property>
                                             <property name="label" translatable="yes">Choose a Pigeon Planner backup file to restore</property>
                                           </widget>
                                           <packing>
+                                            <property name="expand">False</property>
                                             <property name="position">0</property>
                                           </packing>
                                         </child>
@@ -738,7 +725,6 @@ your pigeons and results.</property>
                                           </widget>
                                           <packing>
                                             <property name="expand">False</property>
-                                            <property name="fill">False</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
@@ -777,7 +763,6 @@ your pigeons and results.</property>
                                               </widget>
                                               <packing>
                                                 <property name="expand">False</property>
-                                                <property name="fill">False</property>
                                                 <property name="position">0</property>
                                               </packing>
                                             </child>
@@ -863,6 +848,7 @@ your pigeons and results.</property>
                                 <property name="visible">True</property>
                                 <property name="ypad">4</property>
                                 <property name="label" translatable="yes">Here you can check if there is a program update available.</property>
+                                <property name="justify">center</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
