@@ -1,0 +1,697 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-11 16:43+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../PigeonPlanner/Const.py:57
+msgid "This image is either not supported or corrupt, please choose another one."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:58
+msgid "Error loading this image. Probably you have moved it on your disk."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:60
+msgid "This pigeon already exists, but isn't showing. Do you want to show it again?"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:61
+msgid "This pigeon already exists. Overwrite it?"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:62
+msgid "This pigeon doesn't exist. Do you want to add it?"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:64
+#, python-format
+msgid ""
+"The ringnumber and year of the %s are necessary.\n"
+"\n"
+"Check if these are entered."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:65
+#, python-format
+msgid ""
+"Incorrect input of the ringnumber or year of the %s.\n"
+"\n"
+"Only numbers are accepted."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:66
+#, python-format
+msgid ""
+"Incorrect input of the ringnumber or year of the %s.\n"
+"\n"
+"Check the length."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:68
+msgid "All fields have to be entered."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:69
+msgid "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:70
+msgid "The result you want to add already exists."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:72
+msgid "The backup was successfully created."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:73
+msgid ""
+"The backup was successfully restored.\n"
+"Restart the program."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:75
+msgid ""
+"This will set back all the settings to the default values.\n"
+"Are you sure?"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:77
+msgid ""
+"You have not entered your personal information.\n"
+"This will be shown on top of the printed pedigree.\n"
+"Do you want to add it now?"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:79
+msgid "Error printing the pedigree"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:81
+msgid "Error trying to get information. Are you connected to the internet?"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:82
+msgid "A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:83
+msgid "You already have the latest version installed."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:84
+msgid "This isn't normal, or you must be running a development version"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:86
+#, python-format
+msgid ""
+"Removing item '%(item)s' from '%(dataset)s'.\n"
+"\n"
+"Are you sure?"
+msgstr ""
+
+#: ../PigeonPlanner/Checks.py:42
+msgid "sire"
+msgstr ""
+
+#: ../PigeonPlanner/Checks.py:48
+msgid "dam"
+msgstr ""
+
+#: ../PigeonPlanner/Checks.py:53
+msgid "pigeon"
+msgstr ""
+
+#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:725
+#: tmp/MainWindow.glade.h:17
+msgid "Colour"
+msgstr ""
+
+#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:723
+#: tmp/MainWindow.glade.h:42
+msgid "Sex"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:76 tmp/PedigreeWindow.glade.h:5
+msgid "Pedigree of:"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:281 tmp/MainWindow.glade.h:37
+msgid "Results"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:313
+#: tmp/ResultWindow.glade.h:10
+msgid "Year race"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:317
+#: tmp/ResultWindow.glade.h:9
+msgid "Year pigeons"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:321
+#: ../PigeonPlanner/Print.py:355 ../PigeonPlanner/Print.py:356
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:57
+#: tmp/MainWindow.glade.h:33 tmp/ResultWindow.glade.h:5
+msgid "Racepoint"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:325
+#: ../PigeonPlanner/Print.py:379 ../PigeonPlanner/Print.py:380
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:61
+#: tmp/MainWindow.glade.h:41 tmp/ResultWindow.glade.h:7
+msgid "Sector"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:329
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:60
+#: tmp/ResultWindow.glade.h:2
+msgid "Coefficient"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:304 ../PigeonPlanner/Print.py:333
+#: ../PigeonPlanner/Print.py:361 ../PigeonPlanner/Print.py:362
+#: tmp/ResultWindow.glade.h:4
+msgid "Place"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:343 ../PigeonPlanner/Print.py:344
+#: ../PigeonPlanner/MainWindow.py:673 ../PigeonPlanner/MainWindow.py:685
+#: ../PigeonPlanner/MainWindow.py:690 ../PigeonPlanner/MainWindow.py:695
+#: ../PigeonPlanner/MainWindow.py:700 ../PigeonPlanner/ResultWindow.py:62
+msgid "Band no."
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:349 ../PigeonPlanner/Print.py:350
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:56
+#: tmp/MainWindow.glade.h:19
+msgid "Date"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:367 ../PigeonPlanner/Print.py:368
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:59
+#: tmp/MainWindow.glade.h:30
+msgid "Out of"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:373 ../PigeonPlanner/Print.py:374
+msgid "Coef."
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:457 ../PigeonPlanner/Print.py:479
+#: ../PigeonPlanner/Print.py:480 ../PigeonPlanner/ToolsWindow.py:79
+msgid "Velocity"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:466
+msgid "Date: "
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:468
+msgid "Released: "
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:470
+msgid "Distance: "
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:485 ../PigeonPlanner/Print.py:486
+#: ../PigeonPlanner/ToolsWindow.py:80
+msgid "Flight Time"
+msgstr ""
+
+#: ../PigeonPlanner/Print.py:491 ../PigeonPlanner/Print.py:492
+#: ../PigeonPlanner/ToolsWindow.py:81
+msgid "Time of Arrival"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:61 tmp/MainWindow.glade.h:47
+#: tmp/ToolsWindow.glade.h:26
+msgid "Tools"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:70
+msgid "Velocity calculator"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:70
+msgid "Datasets"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:70 tmp/ToolsWindow.glade.h:8
+msgid "Backup"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:70
+msgid "Update"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:95
+msgid "PP Backups"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:199
+#: ../PigeonPlanner/ToolsWindow.py:227
+msgid "Colours"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:203
+#: ../PigeonPlanner/ToolsWindow.py:231
+msgid "Racepoints"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:201
+#: ../PigeonPlanner/ToolsWindow.py:229
+msgid "Sectors"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:205
+#: ../PigeonPlanner/ToolsWindow.py:233
+msgid "Strains"
+msgstr ""
+
+#: ../PigeonPlanner/ToolsWindow.py:101 ../PigeonPlanner/ToolsWindow.py:207
+#: ../PigeonPlanner/ToolsWindow.py:235
+msgid "Lofts"
+msgstr ""
+
+#: ../PigeonPlanner/Widgets.py:141
+msgid "View image: "
+msgstr ""
+
+#: ../PigeonPlanner/Widgets.py:155
+msgid "Click to close this window"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:113
+msgid "cock"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:113
+msgid "hen"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:113
+msgid "young bird"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:181 ../PigeonPlanner/MainWindow.py:184
+msgid "pigeons"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:555
+msgid "<b>Edit this result</b>"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:580 tmp/MainWindow.glade.h:1
+msgid "<b>Add a new result</b>"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:673 ../PigeonPlanner/MainWindow.py:685
+#: ../PigeonPlanner/MainWindow.py:690 ../PigeonPlanner/MainWindow.py:695
+#: ../PigeonPlanner/MainWindow.py:700 tmp/MainWindow.glade.h:50
+msgid "Year"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:673 ../PigeonPlanner/MainWindow.py:685
+msgid "Name"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:695
+msgid "Common parent"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:705 ../PigeonPlanner/ResultWindow.py:58
+#: tmp/MainWindow.glade.h:32
+msgid "Placed"
+msgstr ""
+
+#: ../PigeonPlanner/MainWindow.py:1326
+msgid "Images"
+msgstr ""
+
+#: ../PigeonPlanner/Configuration.py:115 ../PigeonPlanner/Configuration.py:127
+msgid "#Pigeon Planner configuration file"
+msgstr ""
+
+#: ../PigeonPlanner/Configuration.py:186
+#, python-format
+msgid "Warning: The '%(option)s' option is not set in the '%(section)s' section of the configuration file, using the default '%(default)s'."
+msgstr ""
+
+#: ../PigeonPlanner/Configuration.py:192
+#, python-format
+msgid "Warning: There is no section '%(section)s' in the configuration file; an error occured parsing its option '%(option)s', using the default '%(default)s'."
+msgstr ""
+
+#: ../PigeonPlanner/Configuration.py:195
+#, python-format
+msgid "Error: There went something wrong parsing the '%(option)s' option in the '%(section)s' section of the configuration file, using the default '%(default)s'."
+msgstr ""
+
+#: ../PigeonPlanner/ResultWindow.py:92 ../PigeonPlanner/ResultWindow.py:93
+#: ../PigeonPlanner/ResultWindow.py:94 ../PigeonPlanner/ResultWindow.py:95
+#: ../PigeonPlanner/ResultWindow.py:96 ../PigeonPlanner/ResultWindow.py:192
+#: ../PigeonPlanner/ResultWindow.py:193 ../PigeonPlanner/ResultWindow.py:194
+#: ../PigeonPlanner/ResultWindow.py:195 ../PigeonPlanner/ResultWindow.py:196
+#: ../PigeonPlanner/ResultWindow.py:240 ../PigeonPlanner/ResultWindow.py:243
+msgid "All"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:2
+msgid "<b>Brothers and sisters</b>"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:3
+msgid "<b>Details of pigeon</b>"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:4
+msgid "<b>Half brothers and sisters</b>"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:5
+msgid "<b>Offspring</b>"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:6 tmp/PedigreeWindow.glade.h:1
+msgid "<b>Pedigree dam</b>"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:7 tmp/PedigreeWindow.glade.h:2
+msgid "<b>Pedigree sire</b>"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:8
+msgid "<b>Results of pigeon</b>"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:9
+msgid "Add a series of pigeons"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:10
+msgid "Add a single pigeon"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:11
+msgid "Add result"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:12
+msgid "All birds"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:13
+msgid "Are you sure?"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:14
+msgid "Choose an image..."
+msgstr ""
+
+#: tmp/MainWindow.glade.h:15
+msgid "Click here to add an image"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:16
+msgid "Cocks"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:18 tmp/PedigreeWindow.glade.h:3
+msgid "Dam"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:20
+msgid "Edit result"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:21
+msgid "Enter a name for this pigeon..."
+msgstr ""
+
+#: tmp/MainWindow.glade.h:22
+msgid "Extra"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:23
+msgid "Filter"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:24
+msgid "From"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:25
+msgid "Go to pigeon"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:26
+msgid "Hens"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:27
+msgid "Keep results of this pigeon"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:28
+msgid "Keep this pigeon in the pedigree"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:29
+msgid "Loft"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:31 tmp/PedigreeWindow.glade.h:4
+msgid "Pedigree"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:34
+msgid "Relatives"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:35
+msgid "Remove pigeon"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:36
+msgid "Remove result"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:38
+msgid "Search a pigeon"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:39
+msgid "Search through the list of cocks"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:40
+msgid "Search through the list of hens"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:43 tmp/PedigreeWindow.glade.h:6
+msgid "Sire"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:44
+msgid "Strain"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:45
+msgid "The following pigeon will be removed:"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:46
+msgid "To"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:48 tmp/ResultWindow.glade.h:8
+msgid "View all results"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:49
+msgid "View detail"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:51
+msgid "Young birds"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:1
+msgid "At position:"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:2
+msgid "City"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:3
+msgid "Default"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:4
+msgid ""
+"Enter some information about yourself.\n"
+"This will be shown on a printed pedigree."
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:6
+msgid "First & last name"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:7
+msgid "General"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:8
+msgid "Options"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:9
+msgid "Personal"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:10
+msgid "Show an extra column"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:11
+msgid "Show navigation arrows"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:12
+msgid "Street & number"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:13
+msgid "Telephone number"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:14
+msgid "Value of column:"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:15
+msgid "Zipcode"
+msgstr ""
+
+#: tmp/ResultWindow.glade.h:1
+msgid "<b>Sort options</b>"
+msgstr ""
+
+#: tmp/ResultWindow.glade.h:3
+msgid "Pigeon"
+msgstr ""
+
+#: tmp/ResultWindow.glade.h:6
+msgid "Results:"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:1
+msgid "<b><i><big>Backup</big></i></b>"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:2
+msgid "<b><i><big>Manage data</big></i></b>"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:3
+msgid "<b><i><big>Update</big></i></b>"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:4
+msgid "<b><i><big>Velocity calculator</big></i></b>"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:5
+msgid "<b>Create backup</b>"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:6
+msgid "<b>Restore backup</b>"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:7
+msgid "<i>Click the button below</i>"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:9
+msgid "Calculate"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:10
+msgid "Calculate velocity"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:11
+msgid "Check now!"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:12
+msgid "Choose a Pigeon Planner backup file to restore"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:13
+msgid "Choose a directory where to save the backup"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:14
+msgid ""
+"Create and restore backups from\n"
+"your pigeons and results."
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:16
+msgid "Dataset"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:17
+msgid "Distance (km)"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:18
+msgid "Downloadpage"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:19
+msgid "Een map selecteren"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:20
+msgid "From - To (meter/min)"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:21
+msgid "Here you can check if there is a program update available."
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:22
+msgid "Item"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:23
+msgid "Released (hh : mm)"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:24
+msgid "Remove items from your datasets"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:25
+msgid "Restore"
+msgstr ""
