@@ -550,8 +550,7 @@ class MainWindow:
         self.spinOutof.set_value(out)
         self.cbSector.child.set_text(sector)
 
-        self.addresult.set_property('visible', False)
-        self.set_multiple_visible(['editapply', 'resultcancel'], True)
+        self.set_multiple_visible({'addresult': False, 'editapply': True, 'resultcancel': True})
         self.labeladdresult.set_markup(_("<b>Edit this result</b>"))
 
     def editapply_clicked(self, widget):
@@ -575,8 +574,7 @@ class MainWindow:
         self.spinOutof.set_value(1)
         self.cbSector.child.set_text('')
 
-        self.addresult.set_property('visible', True)
-        self.set_multiple_visible(['editapply', 'resultcancel'], False)
+        self.set_multiple_visible({'addresult': True, 'editapply': False, 'resultcancel': False})
         self.labeladdresult.set_markup(_("<b>Add a new result</b>"))
 
     def allresults_clicked(self, widget):
@@ -756,17 +754,19 @@ class MainWindow:
             attr = getattr(self, item)
             attr.set_sensitive(boolean)
 
-    def set_multiple_visible(self, widgets, boolean):
+    def set_multiple_visible(self, widgets):
         ''' 
         Set multiple widgets visible at once
 
-        @param widgets: list of widgets
-        @param bool: boolean 
+        @param widgets: dic of widgets with booleans
         '''
 
-        for item in widgets:
-            attr = getattr(self, item)
-            attr.set_property('visible', boolean)
+        for key in widgets.keys():
+            attr = getattr(self, key)
+            if widgets[key]:
+                attr.show()
+            else:
+                attr.hide()
 
     def empty_entryboxes(self):
         '''
@@ -1021,7 +1021,7 @@ class MainWindow:
         widgets = ['toolbar', 'notebook', 'treeview', 'vboxButtons']
         self.set_multiple_sensitive(widgets, True)
 
-        self.set_multiple_visible(['btnadd', 'save'], False)
+        self.set_multiple_visible({'btnadd': False, 'save': False})
 
     def get_add_edit_info(self):
         '''
