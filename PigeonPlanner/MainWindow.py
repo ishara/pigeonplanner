@@ -176,21 +176,25 @@ class MainWindow:
         self.seriedialog.show()
 
     def serieadd_clicked(self, widget):
-        check1 = check.check_ring_entry(self.main, self.entrySerieFrom.get_text(), self.entrySerieYear.get_text(), _('pigeons'))
+        seriefrom = self.entrySerieFrom.get_text()
+        serieto = self.entrySerieTo.get_text()
+        serieyear = self.entrySerieYear.get_text()
+        seriesex = self.cbSerieSex.get_active_text()
+
+        if not seriefrom.isdigit() or not serieto.isdigit():
+            Widgets.message_dialog('error', Const.MSG_INVALID_SERIE, self.main)
+            return
+
+        check1 = check.check_ring_entry(self.main, seriefrom, serieyear, _('pigeons'))
         if not check1: return
 
-        check2 = check.check_ring_entry(self.main, self.entrySerieTo.get_text(), self.entrySerieYear.get_text(), _('pigeons'))
+        check2 = check.check_ring_entry(self.main, serieto, serieyear, _('pigeons'))
         if not check2: return
 
-        first = self.entrySerieFrom.get_text()
-        last = self.entrySerieTo.get_text()
-        year = self.entrySerieYear.get_text()
-        sex = self.cbSerieSex.get_active_text()
-
         bandList = []
-        value = int(first)
+        value = int(seriefrom)
 
-        while value <= int(last):
+        while value <= int(serieto):
             bandList.append(str(value))
             value += 1
 
@@ -200,7 +204,7 @@ class MainWindow:
                 if not overwrite:
                     continue
 
-            data = (str(band), year, sex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '','')
+            data = (str(band), serieyear, sex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '','')
             self.database.insert_pigeon(data)
 
         self.parser.get_pigeons()

@@ -64,6 +64,7 @@ MSG_ADD_PIGEON = _("This pigeon doesn't exist. Do you want to add it?")
 MSG_EMPTY_FIELDS = _("The ringnumber and year of the %s are necessary.\n\nCheck if these are entered.")
 MSG_INVALID_NUMBER = _("Incorrect input of the year of the %s.\n\nOnly numbers are accepted.")
 MSG_INVALID_LENGTH = _("Incorrect input of the year of the %s.\n\nCheck the length.")
+MSG_INVALID_SERIE = _("Incorrect input. Only numbers are allowed when adding multiple pigeons.")
 
 MSG_EMPTY_DATA = _("All fields have to be entered.")
 MSG_INVALID_FORMAT = _("The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD).")
