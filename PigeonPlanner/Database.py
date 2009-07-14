@@ -25,7 +25,8 @@ import Const
 class DatabaseOperations:
     SCHEMA = {
     'Pigeons': '(Pigeonskey INTEGER PRIMARY KEY,'
-               ' band TEXT UNIQUE,'
+               ' pindex TEXT UNIQUE,'
+               ' band TEXT,'
                ' year TEXT,'
                ' sex TEXT,'
                ' show INTEGER,'
@@ -85,7 +86,7 @@ class DatabaseOperations:
     def insert_pigeon(self, data):
         conn, cursor = self.db_connect()
         try:
-            cursor.execute('INSERT INTO Pigeons VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+            cursor.execute('INSERT INTO Pigeons VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
         except sqlite3.IntegrityError:
             pass
         conn.commit()
@@ -93,19 +94,19 @@ class DatabaseOperations:
 
     def delete_pigeon(self, band):
         conn, cursor = self.db_connect()
-        cursor.execute('DELETE FROM Pigeons WHERE band=?', (band,))
+        cursor.execute('DELETE FROM Pigeons WHERE pindex=?', (band,))
         conn.commit()
         conn.close()
 
     def update_pigeon(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Pigeons SET band=?, year=?, sex=?, show=?, colour=?, name=?, strain=?, loft=?, image=?, sire=?, yearsire=?, dam=?, yeardam=?, extra1=?, extra2=?, extra3=?, extra4=?, extra5=?, extra6=? WHERE band=?', data)
+        cursor.execute('UPDATE Pigeons SET band=?, year=?, sex=?, show=?, colour=?, name=?, strain=?, loft=?, image=?, sire=?, yearsire=?, dam=?, yeardam=?, extra1=?, extra2=?, extra3=?, extra4=?, extra5=?, extra6=? WHERE pindex=?', data)
         conn.commit()
         conn.close()
 
     def show_pigeon(self, band, value):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Pigeons SET show=? WHERE band=?', (value, band))
+        cursor.execute('UPDATE Pigeons SET show=? WHERE pindex=?', (value, band))
         conn.commit()
         conn.close()
 
@@ -119,7 +120,7 @@ class DatabaseOperations:
     def get_pigeon(self, band):
         conn, cursor = self.db_connect()
         data = None
-        for row in cursor.execute('SELECT * FROM Pigeons WHERE band=?', (band,)):
+        for row in cursor.execute('SELECT * FROM Pigeons WHERE pindex=?', (band,)):
             data = row
 
         conn.close()
@@ -127,7 +128,7 @@ class DatabaseOperations:
 
     def has_pigeon(self, band):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT COUNT(*) FROM Pigeons WHERE band=?', (band,))
+        cursor.execute('SELECT COUNT(*) FROM Pigeons WHERE pindex=?', (band,))
         data = [row[0] for row in cursor.fetchall() if row[0]]
         conn.close()
         if data:
@@ -137,7 +138,7 @@ class DatabaseOperations:
 
     def get_image(self, band):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT image FROM Pigeons WHERE band=?', (band,))
+        cursor.execute('SELECT image FROM Pigeons WHERE pindex=?', (band,))
         data = cursor.fetchone()[0]
         return data
 
@@ -157,7 +158,7 @@ class DatabaseOperations:
 
     def delete_result_from_band(self, band):
         conn, cursor = self.db_connect()
-        cursor.execute('DELETE FROM Results WHERE pigeon=?', (band,))
+        cursor.execute('DELETE FROM Results WHERE pindex=?', (band,))
         conn.commit()
         conn.close()
 
@@ -176,7 +177,7 @@ class DatabaseOperations:
 
     def get_pigeon_results(self, band):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT * FROM Results WHERE pigeon=?', (band,))
+        cursor.execute('SELECT * FROM Results WHERE pindex=?', (band,))
         data = cursor.fetchall()
         conn.close()
         return data

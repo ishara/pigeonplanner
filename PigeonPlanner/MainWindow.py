@@ -85,7 +85,6 @@ class MainWindow:
                       'on_calbutton_clicked'     : self.calbutton_clicked,
                       'on_day_selected'          : self.day_selected,
                       'on_day_double_clicked'    : self.day_double_clicked,
-                      'on_notebook_switch'       : self.notebook_switch,
                       'on_button_top_clicked'    : self.button_top_clicked,
                       'on_button_up_clicked'     : self.button_up_clicked,
                       'on_button_down_clicked'   : self.button_down_clicked,
@@ -108,11 +107,10 @@ class MainWindow:
         self.date_format = '%Y-%m-%d'
         self.imageToAdd = ''
         self.imageDeleted = False
-        self.blockSwitch = False
         self.beforeEditPath = None
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
-        self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1, 
-                               'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit, 
+        self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
+                               'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit,
                                'dam': self.entryDamEdit, 'yeardam': self.entryYearDamEdit}
 
         self.entrySexKey = gtk.Entry()
@@ -202,7 +200,7 @@ class MainWindow:
                 if not overwrite:
                     continue
 
-            data = (str(band), self.calculate_year(year), sex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '','')
+            data = (str(band), year, sex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '','')
             self.database.insert_pigeon(data)
 
         self.parser.get_pigeons()
@@ -316,7 +314,7 @@ class MainWindow:
             self.treeview.set_cursor(path)
 
     def remove_clicked(self, widget):
-        ring, year = self.get_main_ring()
+        pindex, ring, year = self.get_main_ring()
 
         model, tIter = self.selection.get_selected()
         path, focus = self.treeview.get_cursor()
@@ -326,7 +324,7 @@ class MainWindow:
         label = wTree.get_widget('labelPigeon')
         chkKeep = wTree.get_widget('chkKeep')
         chkResults = wTree.get_widget('chkResults')
-        label.set_text(ring + '/' + year[2:])
+        label.set_text(ring + ' / ' + year)
         answer = dialog.run()
         if answer == 2:
             if chkKeep.get_active():
@@ -397,8 +395,8 @@ class MainWindow:
         self.add_edit_finish()
 
     def eventbox_press(self, widget, event):
-        ring, year = self.get_main_ring()
-        image = self.parser.pigeons[ring].image
+        pindex, ring, year = self.get_main_ring()
+        image = self.parser.pigeons[pindex].image
         if image:
             Widgets.ImageWindow(image, self.main)
 
@@ -459,12 +457,12 @@ class MainWindow:
         dialog.destroy()
 
     def sbdetail_clicked(self, widget):
-        ring, year = self.get_main_ring()
+        pindex, ring, year = self.get_main_ring()
 
-        name = self.parser.pigeons[ring].name
-        sex = self.sexDic[self.parser.pigeons[ring].sex]
-        colour = self.parser.pigeons[ring].colour
-        PedigreeWindow.PedigreeWindow(self, ring, year[2:], name, colour, sex)
+        name = self.parser.pigeons[pindex].name
+        sex = self.sexDic[self.parser.pigeons[pindex].sex]
+        colour = self.parser.pigeons[pindex].colour
+        PedigreeWindow.PedigreeWindow(self, pindex, ring, year, name, colour, sex)
 
     def goto_clicked(self, widget):
         ring = ''
@@ -486,7 +484,7 @@ class MainWindow:
                         sex = '1'
 
         if ring:
-            pigeon = self.search_pigeon(None, ring)
+            pigeon = self.search_pigeon(None, ring+year)
             if pigeon: return
 
             answer = Widgets.message_dialog('question', Const.MSG_ADD_PIGEON, self.main)
@@ -499,13 +497,13 @@ class MainWindow:
                 self.cbsex.set_active(int(sex))
 
     def addresult_clicked(self, widget):
-        ring, year = self.get_main_ring()
+        pindex, ring, year = self.get_main_ring()
         try:
             date, point, place, out, sector = self.get_resultdata()
         except TypeError:
             return
 
-        results = self.database.get_pigeon_results(ring)
+        results = self.database.get_pigeon_results(pindex)
         for result in results:
             if result[2] == date and \
                result[3] == point and \
@@ -515,7 +513,7 @@ class MainWindow:
                 return
 
         cof = (float(place)/float(out))*100
-        ring, year = self.get_main_ring()
+
         data = (ring, date, point, place, out, sector)
         self.database.insert_result(data)
 
@@ -531,7 +529,7 @@ class MainWindow:
     def removeresult_clicked(self, widget):
         path, focus = self.tvResults.get_cursor()
         model, tIter = self.selResults.get_selected()
-        ring, year = self.get_main_ring()
+        pindex, ring, year = self.get_main_ring()
 
         ID = self.get_result_id(ring, self.get_selected_result())
 
@@ -550,11 +548,11 @@ class MainWindow:
         self.spinOutof.set_value(out)
         self.cbSector.child.set_text(sector)
 
-        self.set_multiple_visible({'addresult': False, 'editapply': True, 'resultcancel': True})
+        Widgets.set_multiple_visible({self.addresult: False, self.editapply: True, self.resultcancel: True})
         self.labeladdresult.set_markup(_("<b>Edit this result</b>"))
 
     def editapply_clicked(self, widget):
-        ring, year = self.get_main_ring()
+        pindex, ring, year = self.get_main_ring()
         try:
             date, point, place, out, sector = self.get_resultdata()
         except TypeError:
@@ -574,7 +572,7 @@ class MainWindow:
         self.spinOutof.set_value(1)
         self.cbSector.child.set_text('')
 
-        self.set_multiple_visible({'addresult': True, 'editapply': False, 'resultcancel': False})
+        Widgets.set_multiple_visible({self.addresult: True, self.editapply: False, self.resultcancel: False})
         self.labeladdresult.set_markup(_("<b>Add a new result</b>"))
 
     def allresults_clicked(self, widget):
@@ -637,29 +635,6 @@ class MainWindow:
 
         self.spinOutof.set_range(spinmin, spinmax)
 
-    def notebook_switch(self, widget, page, page_num):
-        try:
-            selected, year = self.get_main_ring()
-        except TypeError:
-            return
-
-        ring     = self.parser.pigeons[selected].ring
-        sire     = self.parser.pigeons[selected].sire
-        yearsire = self.parser.pigeons[selected].yearsire
-        dam      = self.parser.pigeons[selected].dam
-        yeardam  = self.parser.pigeons[selected].yeardam
-
-        if page_num == 0:
-            dp = DrawPedigree([self.tableSire, self.tableDam], selected, button=self.goto)
-            dp.draw_pedigree()
-        elif page_num == 1:
-            self.find_direct_relatives(ring, sire, dam)
-            self.find_half_relatives(ring, sire, yearsire, dam, yeardam)
-            self.find_offspring(ring, sire, dam)
-        elif page_num == 2 and not self.blockSwitch:
-            self.get_results(ring)
-            self.blockSwitch = True
-
     def build_treeview(self):
         '''
         Build the main treeview
@@ -671,8 +646,8 @@ class MainWindow:
         columns = [_("Band no."), _("Year"), _("Name")]
         if self.options.optionList.column:
             columns.insert(self.options.optionList.columnposition, _(self.options.optionList.columntype))
-        types = [str, str, str, str]
-        self.liststore, self.selection = Widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, True, True)
+        types = [str, str, str, str, str]
+        self.liststore, self.selection = Widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, True, True, True)
 
     def build_treeviews(self):
         '''
@@ -682,22 +657,22 @@ class MainWindow:
         # Find sire/dam treeview
         columns = [_("Band no."), _("Year"), _("Name")]
         types = [str, str, str]
-        self.lsFind, self.selectionfind = Widgets.setup_treeview(self.tvFind, columns, types, None, True, True)
+        self.lsFind, self.selectionfind = Widgets.setup_treeview(self.tvFind, columns, types, None, True, True, True)
 
         # Brothers & sisters treeview
         columns = [_("Band no."), _("Year")]
-        types = [str, str]
-        self.lsBrothers, self.selBrothers = Widgets.setup_treeview(self.tvBrothers, columns, types, None, True, True)
+        types = [str, str, str]
+        self.lsBrothers, self.selBrothers = Widgets.setup_treeview(self.tvBrothers, columns, types, None, True, True, True)
 
         # Halfbrothers & sisters treeview
         columns = [_("Band no."), _("Year"), _("Common parent")]
-        types = [str, str, str]
-        self.lsHalfBrothers, self.selHalfBrothers = Widgets.setup_treeview(self.tvHalfBrothers, columns, types, None, True, True)
+        types = [str, str, str, str]
+        self.lsHalfBrothers, self.selHalfBrothers = Widgets.setup_treeview(self.tvHalfBrothers, columns, types, None, True, True, True)
 
         # Offspring treeview
         columns = [_("Band no."), _("Year")]
-        types = [str, str]
-        self.lsOffspring, self.selOffspring = Widgets.setup_treeview(self.tvOffspring, columns, types, None, True, True)
+        types = [str, str, str]
+        self.lsOffspring, self.selOffspring = Widgets.setup_treeview(self.tvOffspring, columns, types, None, True, True, True)
 
         # Results treeview
         columns = [_("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector")]
@@ -714,23 +689,23 @@ class MainWindow:
 
         self.liststore.clear()
 
-        for pigeon in self.parser.pigeons:
-            if not self.parser.pigeons[pigeon].show: continue
-            if pigeonType == self.parser.pigeons[pigeon].sex or pigeonType == 'all':
+        for pindex in self.parser.pigeons:
+            if not self.parser.pigeons[pindex].show: continue
+            if pigeonType == self.parser.pigeons[pindex].sex or pigeonType == 'all':
                 if self.options.optionList.column:
                     if self.options.optionList.columntype == _('Sex'):
-                        extra = self.sexDic[self.parser.pigeons[pigeon].sex]
+                        extra = self.sexDic[self.parser.pigeons[pindex].sex]
                     elif self.options.optionList.columntype == _('Colour'):
-                        extra = self.parser.pigeons[pigeon].colour
-                    row = [pigeon, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name]
-                    row.insert(self.options.optionList.columnposition, extra)
+                        extra = self.parser.pigeons[pindex].colour
+                    row = [pindex, self.parser.pigeons[pindex].ring, self.parser.pigeons[pindex].year, self.parser.pigeons[pindex].name]
+                    row.insert(self.options.optionList.columnposition+1, extra)
                     self.liststore.append(row)
                 else:
-                    self.liststore.append([pigeon, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name, None])
+                    self.liststore.append([pindex, self.parser.pigeons[pindex].ring, self.parser.pigeons[pindex].year, self.parser.pigeons[pindex].name, None])
 
         if len(self.liststore) > 0:
-            self.liststore.set_sort_column_id(0, gtk.SORT_ASCENDING)
             self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+            self.liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
             if path == None:
                 path = 0
             self.treeview.set_cursor(path)
@@ -741,32 +716,6 @@ class MainWindow:
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(image, width, height)
             self.imagePigeon.set_from_pixbuf(pixbuf)
             self.imagePigeon1.set_from_pixbuf(pixbuf)
-
-    def set_multiple_sensitive(self, widgets, boolean):
-        ''' 
-        Set multiple widgets sensitive at once
-
-        @param widgets: list of widgets
-        @param bool: boolean 
-        '''
-
-        for item in widgets:
-            attr = getattr(self, item)
-            attr.set_sensitive(boolean)
-
-    def set_multiple_visible(self, widgets):
-        ''' 
-        Set multiple widgets visible at once
-
-        @param widgets: dic of widgets with booleans
-        '''
-
-        for key in widgets.keys():
-            attr = getattr(self, key)
-            if widgets[key]:
-                attr.show()
-            else:
-                attr.hide()
 
     def empty_entryboxes(self):
         '''
@@ -802,35 +751,35 @@ class MainWindow:
         model, path = selection.get_selected()
 
         if path:
-            self.set_multiple_sensitive(['edit', 'remove', 'sbdetail'], True)
+            Widgets.set_multiple_sensitive({self.edit: True, self.remove: True, self.sbdetail: True})
         else:
-            self.set_multiple_sensitive(['edit', 'remove', 'sbdetail'], False)
+            Widgets.set_multiple_sensitive({self.edit: False, self.remove: False, self.sbdetail: False})
             self.empty_entryboxes()
             return
 
         self.empty_entryboxes()
 
-        selected = model[path][0]
+        pindex = model[path][0]
 
-        ring     = self.parser.pigeons[selected].ring
-        year     = self.parser.pigeons[selected].year[2:]
-        sex      = self.parser.pigeons[selected].sex
-        strain   = self.parser.pigeons[selected].strain
-        loft     = self.parser.pigeons[selected].loft
-        extra1   = self.parser.pigeons[selected].extra1
-        extra2   = self.parser.pigeons[selected].extra2
-        extra3   = self.parser.pigeons[selected].extra3
-        extra4   = self.parser.pigeons[selected].extra4
-        extra5   = self.parser.pigeons[selected].extra5
-        extra6   = self.parser.pigeons[selected].extra6
-        colour   = self.parser.pigeons[selected].colour
-        name     = self.parser.pigeons[selected].name
-        sire     = self.parser.pigeons[selected].sire
-        yearsire = self.parser.pigeons[selected].yearsire
-        dam      = self.parser.pigeons[selected].dam
-        yeardam  = self.parser.pigeons[selected].yeardam
+        ring     = self.parser.pigeons[pindex].ring
+        year     = self.parser.pigeons[pindex].year
+        sex      = self.parser.pigeons[pindex].sex
+        strain   = self.parser.pigeons[pindex].strain
+        loft     = self.parser.pigeons[pindex].loft
+        extra1   = self.parser.pigeons[pindex].extra1
+        extra2   = self.parser.pigeons[pindex].extra2
+        extra3   = self.parser.pigeons[pindex].extra3
+        extra4   = self.parser.pigeons[pindex].extra4
+        extra5   = self.parser.pigeons[pindex].extra5
+        extra6   = self.parser.pigeons[pindex].extra6
+        colour   = self.parser.pigeons[pindex].colour
+        name     = self.parser.pigeons[pindex].name
+        sire     = self.parser.pigeons[pindex].sire
+        yearsire = self.parser.pigeons[pindex].yearsire
+        dam      = self.parser.pigeons[pindex].dam
+        yeardam  = self.parser.pigeons[pindex].yeardam
 
-        self.entryRing.set_text(selected)
+        self.entryRing.set_text(ring)
         self.entryYear.set_text(year)
         self.entrySexKey.set_text(sex)
         self.entrySex.set_text(self.sexDic[sex])
@@ -846,11 +795,11 @@ class MainWindow:
         self.extra6.set_text(extra6)
         self.entrySire.set_text(sire)
         self.entryDam.set_text(dam)
-        self.entryYearSire.set_text(yearsire[2:])
-        self.entryYearDam.set_text(yeardam[2:])
+        self.entryYearSire.set_text(yearsire)
+        self.entryYearDam.set_text(yeardam)
 
-        if self.parser.pigeons[selected].image:
-            image = self.parser.pigeons[selected].image
+        if self.parser.pigeons[pindex].image:
+            image = self.parser.pigeons[pindex].image
             width = height = 200
         else:
             image = Const.IMAGEDIR + 'icon_logo.png'
@@ -862,27 +811,25 @@ class MainWindow:
         except:
             Widgets.message_dialog('error', Const.MSG_IMAGE_MISSING, self.main)
 
-        if self.notebook.get_current_page() == 0:
-            dp = DrawPedigree([self.tableSire, self.tableDam], selected, button=self.goto)
-            dp.draw_pedigree()
-        elif self.notebook.get_current_page() == 1:
-            self.find_direct_relatives(ring, sire, dam)
-            self.find_half_relatives(ring, sire, yearsire, dam, yeardam)
-            self.find_offspring(ring, sire, dam)
-        elif self.notebook.get_current_page() == 2:
-            self.get_results(ring)
-            self.blockSwitch = False
+        dp = DrawPedigree([self.tableSire, self.tableDam], pindex, button=self.goto)
+        dp.draw_pedigree()
 
-    def get_results(self, ring):
+        self.find_direct_relatives(pindex, sire, dam)
+        self.find_half_relatives(pindex, sire, yearsire, dam, yeardam)
+        self.find_offspring(pindex, sire, dam)
+
+        self.get_results(pindex)
+
+    def get_results(self, pindex):
         '''
         Get all results of selected pigeon
 
-        @param ring: the selected pigeon
+        @param pindex: the selected pigeon
         '''
 
         self.lsResult.clear()
 
-        for result in self.database.get_pigeon_results(ring):
+        for result in self.database.get_pigeon_results(pindex):
             date = result[2]
             point = result[3]
             place = result[4]
@@ -895,11 +842,11 @@ class MainWindow:
 
         self.lsResult.set_sort_column_id(0, gtk.SORT_ASCENDING)
 
-    def find_direct_relatives(self, ring, sire, dam):
+    def find_direct_relatives(self, pindex, sire, dam):
         '''
         Search all brothers and sisters of the selected pigeon.
 
-        @param ring: the selected pigeon
+        @param pindex: the selected pigeon
         @param sire: sire of selected pigeon
         @param dam: dam of selected pigeon
         '''
@@ -911,18 +858,18 @@ class MainWindow:
         for pigeon in self.parser.pigeons:
             if sire == self.parser.pigeons[pigeon].sire and\
                dam == self.parser.pigeons[pigeon].dam and not\
-               pigeon == ring:
+               pigeon == pindex:
 
-                self.lsBrothers.append([pigeon, self.parser.pigeons[pigeon].year])
+                self.lsBrothers.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year])
 
-        self.lsBrothers.set_sort_column_id(0, gtk.SORT_ASCENDING)
         self.lsBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        self.lsBrothers.set_sort_column_id(2, gtk.SORT_ASCENDING)
 
-    def find_half_relatives(self, ring, sire, yearsire, dam, yeardam):
+    def find_half_relatives(self, pindex, sire, yearsire, dam, yeardam):
         '''
         Search all halfbrothers and sisters of the selected pigeon.
 
-        @param ring: the selected pigeon
+        @param pindex: the selected pigeon
         @param sire: sire of selected pigeon
         @param yearsire: year of the sire of selected pigeon
         @param dam: dam of selected pigeon
@@ -938,23 +885,23 @@ class MainWindow:
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
 
-                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].year, sire+'/'+yearsire[2:]])
+                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year, sire+'/'+yearsire[2:]])
 
             if dam:
                 if dam == self.parser.pigeons[pigeon].dam\
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
 
-                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].year, dam+'/'+yeardam[2:]])
+                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year, dam+'/'+yeardam[2:]])
 
-        self.lsHalfBrothers.set_sort_column_id(0, gtk.SORT_ASCENDING)
         self.lsHalfBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        self.lsHalfBrothers.set_sort_column_id(2, gtk.SORT_ASCENDING)
 
-    def find_offspring(self, ring, sire, dam):
+    def find_offspring(self, pindex, sire, dam):
         '''
         Find all youngsters of the selected pigeon.
 
-        @param ring: the selected pigeon
+        @param pindex: the selected pigeon
         @param sire: sire of selected pigeon
         @param dam: dam of selected pigeon
         '''
@@ -962,12 +909,13 @@ class MainWindow:
         self.lsOffspring.clear()
 
         for pigeon in self.parser.pigeons:
+            ring = self.parser.pigeons[pindex].ring
             if self.parser.pigeons[pigeon].sire == ring or self.parser.pigeons[pigeon].dam == ring:
 
-                self.lsOffspring.append([pigeon, self.parser.pigeons[pigeon].year])
+                self.lsOffspring.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year])
 
-        self.lsOffspring.set_sort_column_id(0, gtk.SORT_ASCENDING)
         self.lsOffspring.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        self.lsOffspring.set_sort_column_id(2, gtk.SORT_ASCENDING)
 
     def set_menuitem_sensitive(self, activated):
         '''
@@ -991,18 +939,16 @@ class MainWindow:
         '''
 
         if operation == 'add':
-            self.btnadd.set_property('visible', True)
+            Widgets.set_multiple_visible({self.btnadd: True})
         elif operation == 'edit':
-            self.save.set_property('visible', True)
+            Widgets.set_multiple_visible({self.save: True})
             self.beforeEditPath, focus = self.treeview.get_cursor()
 
         self.entryRing1.grab_focus()
 
-        self.alignUnEdit.set_property('visible', False)
-        self.alignEdit.set_property('visible', True)
+        Widgets.set_multiple_visible({self.alignUnEdit: False, self.alignEdit: True})
 
-        widgets = ['toolbar', 'notebook', 'treeview', 'vboxButtons']
-        self.set_multiple_sensitive(widgets, False)
+        Widgets.set_multiple_sensitive({self.toolbar: False, self.notebook: False, self.treeview: False, self.vboxButtons: False})
 
     def add_edit_finish(self):
         '''
@@ -1015,13 +961,11 @@ class MainWindow:
 
         self.beforeEditPath = 0
 
-        self.alignUnEdit.set_property('visible', True)
-        self.alignEdit.set_property('visible', False)
+        Widgets.set_multiple_visible({self.alignUnEdit: True, self.alignEdit: False})
 
-        widgets = ['toolbar', 'notebook', 'treeview', 'vboxButtons']
-        self.set_multiple_sensitive(widgets, True)
+        Widgets.set_multiple_sensitive({self.toolbar: True, self.notebook: True, self.treeview: True, self.vboxButtons: True})
 
-        self.set_multiple_visible({'btnadd': False, 'save': False})
+        Widgets.set_multiple_visible({self.btnadd: False, self.save: False})
 
     def get_add_edit_info(self):
         '''
@@ -1043,7 +987,7 @@ class MainWindow:
         self.imageDeleted = False
 
         infoTuple = (self.entryRing1.get_text(),\
-                     self.calculate_year(self.entryYear1.get_text()),\
+                     self.entryYear1.get_text(),\
                      self.cbsex.get_active_text(),\
                      1,\
                      self.cbColour.child.get_text(),\
@@ -1052,9 +996,9 @@ class MainWindow:
                      self.cbLoft.child.get_text(),\
                      image,\
                      self.entrySireEdit.get_text(),\
-                     self.calculate_year(self.entryYearSireEdit.get_text()),\
+                     self.entryYearSireEdit.get_text(),\
                      self.entryDamEdit.get_text(),\
-                     self.calculate_year(self.entryYearDamEdit.get_text()),\
+                     self.entryYearDamEdit.get_text(),\
                      self.extra11.get_text(),\
                      self.extra21.get_text(),\
                      self.extra31.get_text(),\
@@ -1070,7 +1014,7 @@ class MainWindow:
         '''
 
         infoTuple = self.get_add_edit_info()
-        infoTuple += (infoTuple[0],) # Add the band to the end
+        infoTuple += (infoTuple[0] + infoTuple[1],) # Make the pindex and add to the tuple
         self.database.update_pigeon(infoTuple)
 
         self.update_data(infoTuple)
@@ -1081,10 +1025,12 @@ class MainWindow:
         '''
 
         infoTuple = self.get_add_edit_info()
-        ring = infoTuple[0]
+        pindex = infoTuple[0] + infoTuple[1]
+        pindexTuple = (pindex,)
+        pindexTuple += infoTuple
 
-        if self.database.has_pigeon(ring):
-            if self.parser.pigeons[ring].show:
+        if self.database.has_pigeon(pindex):
+            if self.parser.pigeons[pindex].show:
                 overwrite = Widgets.message_dialog('warning', Const.MSG_OVERWRITE_PIGEON, self.main)
                 if not overwrite:
                     return
@@ -1093,10 +1039,10 @@ class MainWindow:
                 if not overwrite:
                     return
                 else:
-                    self.database.show_pigeon(ring, 1)
+                    self.database.show_pigeon(pindex, 1)
                     return
 
-        self.database.insert_pigeon(infoTuple)
+        self.database.insert_pigeon(pindexTuple)
 
         self.update_data(infoTuple)
 
@@ -1119,22 +1065,6 @@ class MainWindow:
         if loft:
             self.database.insert_loft((loft, ))
             Widgets.fill_list(self.cbLoft, self.database.get_all_lofts())
-
-    def calculate_year(self, year):
-        '''
-        Add 19 or 20 in front of the year.
-        '''
-
-        if not year:
-            return ''
-
-        year = int(year)
-        if year in range(0, 50): #XXX
-            year += 2000
-        else:
-            year += 1900
-
-        return str(year)
 
     def set_default_image(self, widget):
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 75, 75)
@@ -1193,10 +1123,11 @@ class MainWindow:
 
         model, path = self.selection.get_selected()
         if not path: return
-        ring = model[path][0]
-        year = model[path][1]
+        pindex = model[path][0]
+        ring = model[path][1]
+        year = model[path][2]
 
-        return ring, year
+        return pindex, ring, year
 
     def search_pigeon(self, widget, ring):
         '''

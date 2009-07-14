@@ -27,7 +27,7 @@ from Pedigree import DrawPedigree
 
 
 class PedigreeWindow:
-    def __init__(self, main, ring, year, name, colour, sex):
+    def __init__(self, main, pindex, ring, year, name, colour, sex):
         '''
         A detailed pedigree of the selected pigeon.
 
@@ -52,6 +52,7 @@ class PedigreeWindow:
             setattr(self, wname, w)
 
         self.main = main
+        self.pindex = pindex
         self.ring = ring
         self.year = year
         self.name = name
@@ -65,7 +66,7 @@ class PedigreeWindow:
         self.labelRing.set_text(self.ring + '/' + self.year)
         self.labelName.set_text(self.name)
 
-        dp = DrawPedigree([self.tableSire, self.tableDam], ring, True)
+        dp = DrawPedigree([self.tableSire, self.tableDam], pindex, True)
         dp.draw_pedigree()
 
     def close_clicked(self, widget, event=None):

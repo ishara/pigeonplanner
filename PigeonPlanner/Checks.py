@@ -62,13 +62,11 @@ def check_ring_entry(parent, inputRing, inputYear, pigeon=_('pigeon')):
         Widgets.message_dialog('error', Const.MSG_EMPTY_FIELDS %pigeon, parent)
         return False
 
-    integerCheckRing = inputRing.isdigit()
-    integerCheckJaar = inputYear.isdigit()
-    if not integerCheckRing or not integerCheckJaar:
+    if not inputYear.isdigit():
         Widgets.message_dialog('error', Const.MSG_INVALID_NUMBER %pigeon, parent)
         return False
 
-    if not len(inputRing) == 7 or not len(inputYear) == 2:
+    if not len(inputYear) == 4:
         Widgets.message_dialog('error', Const.MSG_INVALID_LENGTH %pigeon, parent)
         return False
 

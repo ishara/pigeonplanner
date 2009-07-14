@@ -54,15 +54,17 @@ def message_dialog(sort, text, parent=None):
         return True
     dialog.destroy()
 
-def setup_treeview(treeview, columns, column_types, changed_callback=None, resizeable=True, sortable=True):
+def setup_treeview(treeview, columns, column_types, changed_callback=None, resizeable=True, sortable=True, hidden_column=False):
     '''
     Create a ListStore and TreeViewSelection for the given treeview
 
+    @param treeview        : The treeview
     @param columns         : List of column names
     @param column_types    : List of variable types for each column
     @param changed_callback: the callback function for the "changed" signal
     @param resizeable_cols : True to allow columns to be resizable
     @param sortable_cols   : True to allow user to sort columns
+    @param hidden_column   : True to move text one up
     '''
 
     liststore = gtk.ListStore(*column_types)
@@ -71,10 +73,16 @@ def setup_treeview(treeview, columns, column_types, changed_callback=None, resiz
         rendererText = gtk.CellRendererText()
         rendererText.set_property('yalign', 0.0)
 
-        column = gtk.TreeViewColumn(columns[i], rendererText, text=i)
+        if hidden_column:
+            column = gtk.TreeViewColumn(columns[i], rendererText, text=i+1)
+        else:
+            column = gtk.TreeViewColumn(columns[i], rendererText, text=i)
 
         if sortable:
-            column.set_sort_column_id(i)
+            if hidden_column:
+                column.set_sort_column_id(i+1)
+            else:
+                column.set_sort_column_id(i)
 
         if resizeable:
             column.set_resizable(True)
@@ -121,6 +129,29 @@ def fill_list(widget, items):
         widget.set_wrap_width(2)
     elif number > 30:
         widget.set_wrap_width(3)
+
+def set_multiple_sensitive(widgets):
+    ''' 
+    Set multiple widgets sensitive at once
+
+    @param widgets: dic of widgets with booleans
+    '''
+
+    for key in widgets.keys():
+        key.set_sensitive(widgets[key])
+
+def set_multiple_visible(widgets):
+    ''' 
+    Set multiple widgets visible at once
+
+    @param widgets: dic of widgets with booleans
+    '''
+
+    for key in widgets.keys():
+        if widgets[key]:
+            key.show()
+        else:
+            key.hide()
 
 def popup_menu(event, entries):
     menu = gtk.Menu()

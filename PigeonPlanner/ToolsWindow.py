@@ -56,14 +56,9 @@ class ToolsWindow:
         self.linkbutton.set_uri(Const.DOWNLOADURL)
 
         # Build main treeview
-        self.liststore = gtk.ListStore(int, str)
-        renderer = gtk.CellRendererText()
-        column = gtk.TreeViewColumn(_("Tools"), renderer, text=1)
-        self.treeview.set_model(self.liststore)
-        self.treeview.append_column(column)
-
-        self.selection = self.treeview.get_selection()
-        self.selection.connect('changed', self.selection_changed)
+        columns = [_("Tools")]
+        types = [int, str]
+        self.liststore, self.selection = Widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, False, False, True)
 
         # Add the categories
         i = 0
@@ -74,15 +69,9 @@ class ToolsWindow:
         self.treeview.set_cursor(0)
 
         # Build velocity treeview
-        self.ls_velocity = gtk.ListStore(int, str, str)
-        renderer = gtk.CellRendererText()
-        column1 = gtk.TreeViewColumn(_("Velocity"), renderer, text=0)
-        column2 = gtk.TreeViewColumn(_("Flight Time"), renderer, text=1)
-        column3 = gtk.TreeViewColumn(_("Time of Arrival"), renderer, text=2)
-        self.tv_velocity.set_model(self.ls_velocity)
-        self.tv_velocity.append_column(column1)
-        self.tv_velocity.append_column(column2)
-        self.tv_velocity.append_column(column3)
+        columns = [_("Velocity"), _("Flight Time"), _("Time of Arrival")]
+        types = [int, str, str]
+        self.ls_velocity, self.sel_velocity = Widgets.setup_treeview(self.tv_velocity, columns, types, None, False, False, False)
 
         # Fill spinbuttons
         dt = datetime.datetime.now()
