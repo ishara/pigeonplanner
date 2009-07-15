@@ -577,15 +577,16 @@ class MainWindow:
         model, path = self.selectionfind.get_selected()
         if not path: return
 
-        ring = model[path][0]
-        year = model[path][1]
+        pindex = model[path][0]
+        ring = model[path][1]
+        year = model[path][2]
 
         if self.search == 'sire':
             self.entrySireEdit.set_text(ring)
-            self.entryYearSireEdit.set_text(year[2:])
+            self.entryYearSireEdit.set_text(year)
         else:
             self.entryDamEdit.set_text(ring)
-            self.entryYearDamEdit.set_text(year[2:])
+            self.entryYearDamEdit.set_text(year)
 
         self.finddialog.hide()
 
@@ -643,7 +644,7 @@ class MainWindow:
 
         # Find sire/dam treeview
         columns = [_("Band no."), _("Year"), _("Name")]
-        types = [str, str, str]
+        types = [str, str, str, str]
         self.lsFind, self.selectionfind = Widgets.setup_treeview(self.tvFind, columns, types, None, True, True, True)
 
         # Brothers & sisters treeview
@@ -1200,11 +1201,11 @@ class MainWindow:
 
         for pigeon in self.parser.pigeons:
             if pigeonType == self.parser.pigeons[pigeon].sex:
-                self.lsFind.append([pigeon, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name])
+                self.lsFind.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name])
 
         if len(self.lsFind) > 0:
-            self.lsFind.set_sort_column_id(0, gtk.SORT_ASCENDING)
             self.lsFind.set_sort_column_id(1, gtk.SORT_ASCENDING)
+            self.lsFind.set_sort_column_id(2, gtk.SORT_ASCENDING)
             self.tvFind.set_cursor(0)
 
         self.finddialog.show()
