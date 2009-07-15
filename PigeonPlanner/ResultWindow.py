@@ -185,7 +185,7 @@ class ResultWindow:
             sector = result[6]
 
             cof = (float(placed)/float(out))*100
-            band = pigeon + '/' + self.pigeons[pigeon].year[2:]
+            band = self.pigeons[pigeon].ring + '/' + self.pigeons[pigeon].year
             bandsort = self.pigeons[pigeon].year + pigeon
 
             #TODO: This could (and should) be better I think...
