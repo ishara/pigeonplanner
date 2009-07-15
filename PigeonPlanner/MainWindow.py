@@ -181,15 +181,15 @@ class MainWindow:
         serieyear = self.entrySerieYear.get_text()
         seriesex = self.cbSerieSex.get_active_text()
 
-        if not seriefrom.isdigit() or not serieto.isdigit():
-            Widgets.message_dialog('error', Const.MSG_INVALID_SERIE, self.main)
-            return
-
         check1 = check.check_ring_entry(self.main, seriefrom, serieyear, _('pigeons'))
         if not check1: return
 
         check2 = check.check_ring_entry(self.main, serieto, serieyear, _('pigeons'))
         if not check2: return
+
+        if not seriefrom.isdigit() or not serieto.isdigit():
+            Widgets.message_dialog('error', Const.MSG_INVALID_SERIE, self.main)
+            return
 
         bandList = []
         value = int(seriefrom)
