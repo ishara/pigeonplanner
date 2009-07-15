@@ -19,6 +19,7 @@
 import datetime
 import gobject
 import ConfigParser
+import webbrowser
 
 import gtk
 import gtk.glade
@@ -1079,17 +1080,11 @@ class MainWindow:
     def open_filedialog(self, widget=None):
         self.filedialog.show()
 
-    def show_uri(self, screen, link):
-        try:
-            gtk.show_uri(screen, link, 0)
-        except:
-            pass
-
     def url_hook(self, about, link):
-        self.show_uri(about.get_screen(), link)
+        pass
 
     def email_hook(self, about, email):
-        self.show_uri(about.get_screen(), "mailto:%s" % email)
+        webbrowser.open("mailto:%s" % email)
 
     def position_popup(self):
         '''
