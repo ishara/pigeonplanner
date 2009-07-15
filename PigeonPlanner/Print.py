@@ -26,9 +26,10 @@ from Pedigree import DrawPedigree
 
 
 class PrintPedigree:
-    def __init__(self, parent, ring, year, sex, colour, name):
+    def __init__(self, parent, pindex, ring, year, sex, colour, name):
 
         self.parent = parent
+        self.pindex = pindex
         self.ring = ring
         self.year = year
         self.sex = sex
@@ -148,7 +149,7 @@ class PrintPedigree:
 
         lst = [None]*31
         dp = DrawPedigree()
-        dp.build_tree(self.ring, self.year, self.sex, '', '', '', '', '', '', 0, 1, lst)
+        dp.build_tree(self.pindex, self.ring, self.year, self.sex, '', '', '', '', '', '', 0, 1, lst)
 
         for i in range(1, 31):
             x = pos[i][0][0]
@@ -160,7 +161,7 @@ class PrintPedigree:
 
             if lst[i]:
                 cr.move_to(x + 0.5, y + 0.5 + font_size)
-                cr.show_text(lst[i][0] + "/" + lst[i][1] + "    " + lst[i][2])
+                cr.show_text(lst[i][1] + "/" + lst[i][2])
 
                 if i <= 6:
                     height = 6
@@ -171,19 +172,19 @@ class PrintPedigree:
 
                 if height >= 1:
                     cr.move_to(x + 0.5, y + 1.75 + font_size*2)
-                    cr.show_text(lst[i][3])
+                    cr.show_text(lst[i][4])
                 if height >= 3:
                     cr.move_to(x + 0.5, y + 2.5 + font_size*3)
-                    cr.show_text(lst[i][4])
-                    cr.move_to(x + 0.5, y + 3 + font_size*4)
                     cr.show_text(lst[i][5])
+                    cr.move_to(x + 0.5, y + 3 + font_size*4)
+                    cr.show_text(lst[i][6])
                 if height == 6:
                     cr.move_to(x + 0.5, y + 3.5 + font_size*5)
-                    cr.show_text(lst[i][6])
-                    cr.move_to(x + 0.5, y + 4 + font_size*6)
                     cr.show_text(lst[i][7])
-                    cr.move_to(x + 0.5, y + 4.5 + font_size*7)
+                    cr.move_to(x + 0.5, y + 4 + font_size*6)
                     cr.show_text(lst[i][8])
+                    cr.move_to(x + 0.5, y + 4.5 + font_size*7)
+                    cr.show_text(lst[i][9])
 
             if pos[i][1]:
                 w = 3

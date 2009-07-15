@@ -80,6 +80,6 @@ class PedigreeWindow:
                 Options.OptionsDialog(self.main, True)
                 return
 
-        Print.PrintPedigree(self.pedigreewindow, self.ring, self.year, self.sex, self.colour, self.name)
+        Print.PrintPedigree(self.pedigreewindow, self.pindex, self.ring, self.year, self.sex, self.colour, self.name)
 
 
