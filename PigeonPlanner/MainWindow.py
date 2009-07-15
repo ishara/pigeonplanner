@@ -18,7 +18,6 @@
 
 import datetime
 import gobject
-import ConfigParser
 import webbrowser
 
 import gtk
