@@ -441,24 +441,7 @@ class MainWindow:
         #TODO: Open a help screen.
 
     def about_clicked(self, widget):
-        dialog = gtk.AboutDialog()
-        dialog.set_transient_for(self.main)
-        dialog.set_icon_from_file(Const.IMAGEDIR + 'icon_logo.png')
-        dialog.set_modal(True)
-        dialog.set_property("skip-taskbar-hint", True)
-
-        dialog.set_name(Const.NAME)
-        dialog.set_version(Const.VERSION)
-        dialog.set_copyright(Const.COPYRIGHT)
-        dialog.set_comments(Const.DESCRIPTION)
-        dialog.set_website(Const.WEBSITE)
-        dialog.set_website_label("Pigeon Planner website")
-        dialog.set_authors(Const.AUTHORS)
-        dialog.set_license(Const.LICENSE)
-        dialog.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 80, 80))
-
-        result = dialog.run()
-        dialog.destroy()
+        Widgets.about_dialog(self.main)
 
     def sbdetail_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
