@@ -88,6 +88,7 @@ class ToolsWindow:
 
         # Fill the data combobox
         data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Strains"), _("Lofts")]
+        data.sort()
         for item in data:
             self.cbdata.append_text(item)
         self.cbdata.set_active(0)
