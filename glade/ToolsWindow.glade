@@ -621,7 +621,7 @@ your pigeons and results.</property>
                                           <widget class="GtkFileChooserButton" id="fcButtonCreate">
                                             <property name="visible">True</property>
                                             <property name="action">select-folder</property>
-                                            <property name="title" translatable="yes">Een map selecteren</property>
+                                            <property name="title" translatable="yes">Select a directory</property>
                                           </widget>
                                           <packing>
                                             <property name="expand">False</property>
@@ -722,6 +722,7 @@ your pigeons and results.</property>
                                         <child>
                                           <widget class="GtkFileChooserButton" id="fcButtonRestore">
                                             <property name="visible">True</property>
+                                            <property name="title" translatable="yes">Select a valid backup file</property>
                                           </widget>
                                           <packing>
                                             <property name="expand">False</property>
