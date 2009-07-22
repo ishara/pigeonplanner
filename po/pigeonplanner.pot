@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-21 13:54+0200\n"
+"POT-Creation-Date: 2009-07-22 16:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,109 +17,127 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../PigeonPlanner/Const.py:57
-msgid "This image is either not supported or corrupt, please choose another one."
+msgid "Invalid image!"
 msgstr ""
 
 #: ../PigeonPlanner/Const.py:58
-msgid "Error loading this image. Probably you have moved it on your disk."
+msgid "This image is either not supported or corrupt, please choose another one."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:59 ../PigeonPlanner/Const.py:62
+#: ../PigeonPlanner/Const.py:76 ../PigeonPlanner/Const.py:79
+#: ../PigeonPlanner/Const.py:82 ../PigeonPlanner/Const.py:85
+#: ../PigeonPlanner/Const.py:89 ../PigeonPlanner/Const.py:92
+#: ../PigeonPlanner/Const.py:95 ../PigeonPlanner/Const.py:110
+msgid "Error"
 msgstr ""
 
 #: ../PigeonPlanner/Const.py:60
-msgid "This pigeon already exists, but isn't showing. Do you want to show it again?"
+msgid "Loading image failed!"
 msgstr ""
 
 #: ../PigeonPlanner/Const.py:61
-msgid "This pigeon already exists. Overwrite it?"
-msgstr ""
-
-#: ../PigeonPlanner/Const.py:62
-msgid "This pigeon doesn't exist. Do you want to add it?"
+msgid "Maybe you have renamed the image or moved it on your disk."
 msgstr ""
 
 #: ../PigeonPlanner/Const.py:64
-#, python-format
-msgid ""
-"The ringnumber and year of the %s are necessary.\n"
-"\n"
-"Check if these are entered."
+msgid "This pigeon already exists, but isn't showing. Do you want to show it again?"
 msgstr ""
 
-#: ../PigeonPlanner/Const.py:65
-#, python-format
-msgid ""
-"Incorrect input of the year of the %s.\n"
-"\n"
-"Only numbers are accepted."
-msgstr ""
-
-#: ../PigeonPlanner/Const.py:66
-#, python-format
-msgid ""
-"Incorrect input of the year of the %s.\n"
-"\n"
-"Check the length."
+#: ../PigeonPlanner/Const.py:66 ../PigeonPlanner/Const.py:69
+msgid "Warning"
 msgstr ""
 
 #: ../PigeonPlanner/Const.py:67
-msgid "Incorrect input. Only numbers are allowed when adding multiple pigeons."
-msgstr ""
-
-#: ../PigeonPlanner/Const.py:69
-msgid "All fields have to be entered."
+msgid "This pigeon already exists. Overwrite it?"
 msgstr ""
 
 #: ../PigeonPlanner/Const.py:70
+msgid "This pigeon doesn't exist. Do you want to add it?"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:72
+msgid "Adding pigeon"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:74 ../PigeonPlanner/Const.py:77
+#: ../PigeonPlanner/Const.py:80 ../PigeonPlanner/Const.py:83
+#: ../PigeonPlanner/Const.py:87 ../PigeonPlanner/Const.py:90
+#: ../PigeonPlanner/Const.py:93
+msgid "Invalid input!"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:75
+msgid "The ringnumber and year are necessary."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:78
+msgid "Only numbers are accepted as year input."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:81
+msgid "Check the length of the year."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:84
+msgid "Only numbers are allowed when adding multiple pigeons."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:88
+msgid "All fields have to be entered."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:91
 msgid "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."
 msgstr ""
 
-#: ../PigeonPlanner/Const.py:71
+#: ../PigeonPlanner/Const.py:94
 msgid "The result you want to add already exists."
 msgstr ""
 
-#: ../PigeonPlanner/Const.py:73
+#: ../PigeonPlanner/Const.py:97
 msgid "The backup was successfully created."
 msgstr ""
 
-#: ../PigeonPlanner/Const.py:74
+#: ../PigeonPlanner/Const.py:99 ../PigeonPlanner/Const.py:102
+msgid "Completed!"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:100
 msgid ""
 "The backup was successfully restored.\n"
 "Restart the program."
 msgstr ""
 
-#: ../PigeonPlanner/Const.py:76
+#: ../PigeonPlanner/Const.py:104
+msgid "No personal information found."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:105
+msgid ""
+"This will be shown on top of the printed pedigree.\n"
+"Do you want to add it now?"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:106 tmp/OptionsDialog.glade.h:9
+msgid "Personal"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:108
+msgid "Error printing the pedigree"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:112
 msgid ""
 "This will set back all the settings to the default values.\n"
 "Are you sure?"
 msgstr ""
 
-#: ../PigeonPlanner/Const.py:78
-msgid ""
-"You have not entered your personal information.\n"
-"This will be shown on top of the printed pedigree.\n"
-"Do you want to add it now?"
+#: ../PigeonPlanner/Const.py:114
+msgid "Default settings"
 msgstr ""
 
-#: ../PigeonPlanner/Const.py:80
-msgid "Error printing the pedigree"
-msgstr ""
-
-#: ../PigeonPlanner/Const.py:82
-msgid "Error trying to get information. Are you connected to the internet?"
-msgstr ""
-
-#: ../PigeonPlanner/Const.py:83
-msgid "A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version"
-msgstr ""
-
-#: ../PigeonPlanner/Const.py:84
-msgid "You already have the latest version installed."
-msgstr ""
-
-#: ../PigeonPlanner/Const.py:85
-msgid "This isn't normal, or you must be running a development version"
-msgstr ""
-
-#: ../PigeonPlanner/Const.py:87
+#: ../PigeonPlanner/Const.py:116
 #, python-format
 msgid ""
 "Removing item '%(item)s' from '%(dataset)s'.\n"
@@ -127,16 +145,24 @@ msgid ""
 "Are you sure?"
 msgstr ""
 
-#: ../PigeonPlanner/Checks.py:40
-msgid "sire"
+#: ../PigeonPlanner/Const.py:118
+msgid "Remove data"
 msgstr ""
 
-#: ../PigeonPlanner/Checks.py:46
-msgid "dam"
+#: ../PigeonPlanner/Const.py:120
+msgid "Error trying to get information. Are you connected to the internet?"
 msgstr ""
 
-#: ../PigeonPlanner/Checks.py:51
-msgid "pigeon"
+#: ../PigeonPlanner/Const.py:121
+msgid "A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version"
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:122
+msgid "You already have the latest version installed."
+msgstr ""
+
+#: ../PigeonPlanner/Const.py:123
+msgid "This isn't normal, or you must be running a development version"
 msgstr ""
 
 #: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:686
@@ -293,11 +319,11 @@ msgstr ""
 msgid "Lofts"
 msgstr ""
 
-#: ../PigeonPlanner/Widgets.py:200
+#: ../PigeonPlanner/Widgets.py:209
 msgid "View image: "
 msgstr ""
 
-#: ../PigeonPlanner/Widgets.py:214
+#: ../PigeonPlanner/Widgets.py:223
 msgid "Click to close this window"
 msgstr ""
 
@@ -564,10 +590,6 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:8
 msgid "Options"
-msgstr ""
-
-#: tmp/OptionsDialog.glade.h:9
-msgid "Personal"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:10
