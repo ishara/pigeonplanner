@@ -209,7 +209,7 @@ class ToolsWindow:
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
 
-        remove = Widgets.message_dialog('question', Const.MSG_REMOVE_ITEM %{'item': item, 'dataset': dataset}, self.toolsdialog)
+        remove = Widgets.message_dialog('question', Const.MSG_REMOVE_ITEM, self.toolsdialog, {'item': item, 'dataset': dataset})
 
         if remove:
             index = self.cbitems.get_active()

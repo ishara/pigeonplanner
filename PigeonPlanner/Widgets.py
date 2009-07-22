@@ -24,29 +24,38 @@ import gtk.gdk
 import Const
 
 
-def message_dialog(sort, text, parent=None):
+def message_dialog(msgtype, data, parent=None, extra=None):
     '''
     Display a message dialog.
 
     @param parent: The parent window
-    @param sort: The sort of dialog
-    @param text: The text to display
+    @param msgtype: The sort of dialog
+    @param data: Tuple of primary text, secondary text and dialog title
     '''
 
-    if sort == 'error':
-        sort = gtk.MESSAGE_ERROR
+    if extra:
+        head = data[0] %extra
+    else:
+        head = data[0]
+    text = data[1]
+    title = data[2]
+
+    if msgtype == 'error':
+        msgtype = gtk.MESSAGE_ERROR
         buttons = gtk.BUTTONS_OK
-    elif sort == 'warning':
-        sort = gtk.MESSAGE_WARNING
+    elif msgtype == 'warning':
+        msgtype = gtk.MESSAGE_WARNING
         buttons = gtk.BUTTONS_YES_NO
-    elif sort == 'question':
-        sort = gtk.MESSAGE_QUESTION
+    elif msgtype == 'question':
+        msgtype = gtk.MESSAGE_QUESTION
         buttons = gtk.BUTTONS_YES_NO
-    elif sort == 'info':
-        sort = gtk.MESSAGE_INFO
+    elif msgtype == 'info':
+        msgtype = gtk.MESSAGE_INFO
         buttons = gtk.BUTTONS_OK
 
-    dialog = gtk.MessageDialog(parent=parent, type=sort, message_format=text, buttons=buttons)
+    dialog = gtk.MessageDialog(parent=parent, type=msgtype, message_format=head, buttons=buttons)
+    dialog.format_secondary_text(text)
+    dialog.set_title(title)
     result = dialog.run()
     if result == -9:
         dialog.destroy()

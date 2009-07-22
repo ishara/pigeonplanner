@@ -37,35 +37,34 @@ def check_entrys(entrys):
     inputRingSire = entrys['sire'].get_text()
     inputYearSire = entrys['yearsire'].get_text()
     if inputRingSire:
-        checkSire = check_ring_entry(parent, inputRingSire, inputYearSire, _('sire'))
+        checkSire = check_ring_entry(parent, inputRingSire, inputYearSire)
         if not checkSire: return False
 
     inputRingDam = entrys['dam'].get_text()
     inputYearDam = entrys['yeardam'].get_text()
     if inputRingDam:
-        checkDam = check_ring_entry(parent, inputRingDam, inputYearDam, _('dam'))
+        checkDam = check_ring_entry(parent, inputRingDam, inputYearDam)
         if not checkDam: return False
 
     return True
 
-def check_ring_entry(parent, inputRing, inputYear, pigeon=_('pigeon')):
+def check_ring_entry(parent, inputRing, inputYear):
     '''
         
     @param inputRing: The ringnumber to check
     @param inputYear: the year to check
-    @param pigeon: Kind of pigeon
     '''
 
     if not inputRing or not inputYear:
-        Widgets.message_dialog('error', Const.MSG_EMPTY_FIELDS %pigeon, parent)
+        Widgets.message_dialog('error', Const.MSG_EMPTY_FIELDS, parent)
         return False
 
     if not inputYear.isdigit():
-        Widgets.message_dialog('error', Const.MSG_INVALID_NUMBER %pigeon, parent)
+        Widgets.message_dialog('error', Const.MSG_INVALID_NUMBER, parent)
         return False
 
     if not len(inputYear) == 4:
-        Widgets.message_dialog('error', Const.MSG_INVALID_LENGTH %pigeon, parent)
+        Widgets.message_dialog('error', Const.MSG_INVALID_LENGTH, parent)
         return False
 
     return True

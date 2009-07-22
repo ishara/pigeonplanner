@@ -54,34 +54,71 @@ DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 UPDATEURL = 'http://pigeonplanner.sourceforge.net/CURRENT'
 DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/download.html'
 
-MSG_INVALID_IMAGE = _("This image is either not supported or corrupt, please choose another one.")
-MSG_IMAGE_MISSING = _("Error loading this image. Probably you have moved it on your disk.")
+MSG_INVALID_IMAGE = (_("Invalid image!"),
+                     _("This image is either not supported or corrupt, please choose another one."),
+                     _("Error"))
+MSG_IMAGE_MISSING = (_("Loading image failed!"),
+                     _("Maybe you have renamed the image or moved it on your disk."),
+                     _("Error"))
 
-MSG_SHOW_PIGEON = _("This pigeon already exists, but isn't showing. Do you want to show it again?")
-MSG_OVERWRITE_PIGEON = _("This pigeon already exists. Overwrite it?")
-MSG_ADD_PIGEON = _("This pigeon doesn't exist. Do you want to add it?")
+MSG_SHOW_PIGEON = (_("This pigeon already exists, but isn't showing. Do you want to show it again?"),
+                   None,
+                   _("Warning"))
+MSG_OVERWRITE_PIGEON = (_("This pigeon already exists. Overwrite it?"),
+                        None,
+                        _("Warning"))
+MSG_ADD_PIGEON = (_("This pigeon doesn't exist. Do you want to add it?"),
+                  None,
+                  _("Adding pigeon"))
 
-MSG_EMPTY_FIELDS = _("The ringnumber and year of the %s are necessary.\n\nCheck if these are entered.")
-MSG_INVALID_NUMBER = _("Incorrect input of the year of the %s.\n\nOnly numbers are accepted.")
-MSG_INVALID_LENGTH = _("Incorrect input of the year of the %s.\n\nCheck the length.")
-MSG_INVALID_SERIE = _("Incorrect input. Only numbers are allowed when adding multiple pigeons.")
+MSG_EMPTY_FIELDS = (_("Invalid input!"),
+                    _("The ringnumber and year are necessary."),
+                    _("Error"))
+MSG_INVALID_NUMBER = (_("Invalid input!"),
+                      _("Only numbers are accepted as year input."),
+                      _("Error"))
+MSG_INVALID_LENGTH = (_("Invalid input!"),
+                      _("Check the length of the year."),
+                      _("Error"))
+MSG_INVALID_SERIE = (_("Invalid input!"),
+                     _("Only numbers are allowed when adding multiple pigeons."),
+                     _("Error"))
 
-MSG_EMPTY_DATA = _("All fields have to be entered.")
-MSG_INVALID_FORMAT = _("The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD).")
-MSG_RESULT_EXISTS = _("The result you want to add already exists.")
+MSG_EMPTY_DATA = (_("Invalid input!"),
+                  _("All fields have to be entered."),
+                  _("Error"))
+MSG_INVALID_FORMAT = (_("Invalid input!"),
+                      _("The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."),
+                      _("Error"))
+MSG_RESULT_EXISTS = (_("Invalid input!"),
+                     _("The result you want to add already exists."),
+                     _("Error"))
 
-MSG_BACKUP_SUCCES = _("The backup was successfully created.")
-MSG_RESTORE_SUCCES = _("The backup was successfully restored.\nRestart the program.")
+MSG_BACKUP_SUCCES = (_("The backup was successfully created."),
+                     None,
+                     _("Completed!"))
+MSG_RESTORE_SUCCES = (_("The backup was successfully restored.\nRestart the program."),
+                      None,
+                      _("Completed!"))
 
-MSG_DEFAULT_OPTIONS = _("This will set back all the settings to the default values.\nAre you sure?")
+MSG_NO_INFO = (_("No personal information found."),
+               _("This will be shown on top of the printed pedigree.\nDo you want to add it now?"),
+               _("Personal"))
 
-MSG_NO_INFO = _("You have not entered your personal information.\nThis will be shown on top of the printed pedigree.\nDo you want to add it now?")
+MSG_PRINT_ERROR = (_("Error printing the pedigree"),
+                   None,
+                   _("Error"))
 
-MSG_PRINT_ERROR = _("Error printing the pedigree")
+MSG_DEFAULT_OPTIONS = (_("This will set back all the settings to the default values.\nAre you sure?"),
+                       None,
+                       _("Default settings"))
+
+MSG_REMOVE_ITEM = (_("Removing item '%(item)s' from '%(dataset)s'.\n\nAre you sure?"),
+                   None,
+                   _("Remove data"))
 
 MSG_UPDATE_ERROR = _("Error trying to get information. Are you connected to the internet?")
 MSG_UPDATE_AVAILABLE = _("A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version")
 MSG_NO_UPDATE = _("You already have the latest version installed.")
 MSG_UPDATE_DEVELOPMENT = _("This isn't normal, or you must be running a development version")
 
-MSG_REMOVE_ITEM = _("Removing item '%(item)s' from '%(dataset)s'.\n\nAre you sure?")
