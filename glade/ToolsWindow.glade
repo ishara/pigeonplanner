@@ -400,6 +400,7 @@
                       <widget class="GtkViewport" id="viewport5">
                         <property name="visible">True</property>
                         <property name="resize_mode">queue</property>
+                        <property name="shadow_type">none</property>
                         <child>
                           <widget class="GtkVBox" id="vbox6">
                             <property name="visible">True</property>
@@ -532,6 +533,147 @@
                   </widget>
                   <packing>
                     <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                  <packing>
+                    <property name="type">tab</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkScrolledWindow" id="swstats">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <child>
+                      <widget class="GtkViewport" id="viewport6">
+                        <property name="visible">True</property>
+                        <property name="resize_mode">queue</property>
+                        <property name="shadow_type">none</property>
+                        <child>
+                          <widget class="GtkVBox" id="vbox7">
+                            <property name="visible">True</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <widget class="GtkLabel" id="label25">
+                                <property name="visible">True</property>
+                                <property name="xalign">0.05000000074505806</property>
+                                <property name="ypad">10</property>
+                                <property name="label" translatable="yes">&lt;b&gt;&lt;i&gt;&lt;big&gt;Statistics&lt;/big&gt;&lt;/i&gt;&lt;/b&gt;</property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkHSeparator" id="hseparator5">
+                                <property name="visible">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label24">
+                                <property name="visible">True</property>
+                                <property name="ypad">4</property>
+                                <property name="label" translatable="yes">Here you can see some statistics of your database</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkTable" id="table4">
+                                <property name="visible">True</property>
+                                <property name="n_rows">2</property>
+                                <property name="n_columns">3</property>
+                                <child>
+                                  <widget class="GtkButton" id="btnsearchdb">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <signal name="clicked" handler="on_btnsearchdb_clicked"/>
+                                    <child>
+                                      <widget class="GtkHBox" id="hbox7">
+                                        <property name="visible">True</property>
+                                        <child>
+                                          <widget class="GtkImage" id="image4">
+                                            <property name="visible">True</property>
+                                            <property name="stock">gtk-find</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="GtkLabel" id="label28">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">Search database</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </widget>
+                                    </child>
+                                  </widget>
+                                  <packing>
+                                    <property name="left_attach">1</property>
+                                    <property name="right_attach">2</property>
+                                    <property name="x_options"></property>
+                                    <property name="y_options"></property>
+                                    <property name="y_padding">8</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <widget class="GtkScrolledWindow" id="scrolledwindow1">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="hscrollbar_policy">automatic</property>
+                                    <property name="vscrollbar_policy">automatic</property>
+                                    <property name="shadow_type">in</property>
+                                    <child>
+                                      <widget class="GtkTreeView" id="tvstats">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="headers_visible">False</property>
+                                      </widget>
+                                    </child>
+                                  </widget>
+                                  <packing>
+                                    <property name="right_attach">3</property>
+                                    <property name="top_attach">1</property>
+                                    <property name="bottom_attach">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
@@ -799,7 +941,7 @@ your pigeons and results.</property>
                     </child>
                   </widget>
                   <packing>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
                 <child>
@@ -818,6 +960,7 @@ your pigeons and results.</property>
                       <widget class="GtkViewport" id="viewport4">
                         <property name="visible">True</property>
                         <property name="resize_mode">queue</property>
+                        <property name="shadow_type">none</property>
                         <child>
                           <widget class="GtkVBox" id="vbox5">
                             <property name="visible">True</property>
@@ -935,7 +1078,7 @@ your pigeons and results.</property>
                     </child>
                   </widget>
                   <packing>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                   </packing>
                 </child>
                 <child>

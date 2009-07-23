@@ -42,6 +42,7 @@ class ToolsWindow:
                       'on_btnupdate_clicked'     : self.btnupdate_clicked,
                       'on_cbdata_changed'        : self.cbdata_changed,
                       'on_dataremove_clicked'    : self.dataremove_clicked,
+                      'on_btnsearchdb_clicked'   : self.btnsearchdb_clicked,
                       'on_window_destroy'        : self.close_clicked,
                       'on_close_clicked'         : self.close_clicked }
         self.wTree.signal_autoconnect(signalDic)
@@ -62,7 +63,7 @@ class ToolsWindow:
 
         # Add the categories
         i = 0
-        for category in [_("Velocity calculator"), _("Datasets"), _("Backup"), _("Update")]:
+        for category in [_("Velocity calculator"), _("Datasets"), _("Statistics"), _("Backup"), _("Update")]:
             self.liststore.append([i, category])
             i += 1
 
@@ -72,6 +73,11 @@ class ToolsWindow:
         columns = [_("Velocity"), _("Flight Time"), _("Time of Arrival")]
         types = [int, str, str]
         self.ls_velocity, self.sel_velocity = Widgets.setup_treeview(self.tv_velocity, columns, types, None, False, False, False)
+
+        # Build statistics treeview
+        columns = ["Item", "Value"]
+        types = [str, str]
+        self.ls_stats, self.sel_stats = Widgets.setup_treeview(self.tvstats, columns, types, None, False, False, False)
 
         # Fill spinbuttons
         dt = datetime.datetime.now()
@@ -105,18 +111,7 @@ class ToolsWindow:
         except TypeError:
             pass
 
-    def makebackup_clicked(self, widget):
-        folder = self.fcButtonCreate.get_current_folder()
-        if folder:
-            Backup.make_backup(folder)
-            Widgets.message_dialog('info', Const.MSG_BACKUP_SUCCES, self.main.main)
-
-    def restorebackup_clicked(self, widget):
-        zipfile = self.fcButtonRestore.get_filename()
-        if zipfile:
-            Backup.restore_backup(zipfile)
-            Widgets.message_dialog('info', Const.MSG_RESTORE_SUCCES, self.main.main)
-
+    # Velocity
     def sbbegin_changed(self, widget):
         spinmin = widget.get_value_as_int()
         spinmax = widget.get_range()[1]
@@ -151,29 +146,7 @@ class ToolsWindow:
 
             PrintVelocity(self.main.main, data, info)
 
-    def btnupdate_clicked(self, widget):
-        local = os.path.join(Const.PREFDIR, Const.UPDATEURL.split('/')[-1])
-
-        try:
-            urllib.urlretrieve(Const.UPDATEURL, local)
-            versionfile = open(local, 'r')
-            version = versionfile.readline().strip()
-            versionfile.close()
-        except IOError:
-            version = None
-
-        if not version:
-            msg = Const.MSG_UPDATE_ERROR
-        elif Const.VERSION < version:
-            msg = Const.MSG_UPDATE_AVAILABLE
-            self.linkbutton.set_property('visible', True)
-        elif Const.VERSION == version:
-            msg = Const.MSG_NO_UPDATE
-        elif Const.VERSION > version:
-            msg = Const.MSG_UPDATE_DEVELOPMENT
-
-        self.labelversion.set_text(msg)
-
+    # Data
     def cbdata_changed(self, widget):
         datatype = widget.get_active_text()
         self.fill_item_combo(datatype)
@@ -228,3 +201,48 @@ class ToolsWindow:
             self.cbitems.remove_text(index)
             self.cbitems.set_active(0)
 
+    # Statistics
+    def btnsearchdb_clicked(self, widget):
+        items = {_("Number of pigeons"): self.main.database.get_pigeons(),
+                 _("Number of results"): self.main.database.get_all_results()
+                }
+
+        for item, value in items.iteritems():
+            self.ls_stats.append([item, len(value)])
+
+    # Backup
+    def makebackup_clicked(self, widget):
+        folder = self.fcButtonCreate.get_current_folder()
+        if folder:
+            Backup.make_backup(folder)
+            Widgets.message_dialog('info', Const.MSG_BACKUP_SUCCES, self.main.main)
+
+    def restorebackup_clicked(self, widget):
+        zipfile = self.fcButtonRestore.get_filename()
+        if zipfile:
+            Backup.restore_backup(zipfile)
+            Widgets.message_dialog('info', Const.MSG_RESTORE_SUCCES, self.main.main)
+
+    # Update
+    def btnupdate_clicked(self, widget):
+        local = os.path.join(Const.PREFDIR, Const.UPDATEURL.split('/')[-1])
+
+        try:
+            urllib.urlretrieve(Const.UPDATEURL, local)
+            versionfile = open(local, 'r')
+            version = versionfile.readline().strip()
+            versionfile.close()
+        except IOError:
+            version = None
+
+        if not version:
+            msg = Const.MSG_UPDATE_ERROR
+        elif Const.VERSION < version:
+            msg = Const.MSG_UPDATE_AVAILABLE
+            self.linkbutton.set_property('visible', True)
+        elif Const.VERSION == version:
+            msg = Const.MSG_NO_UPDATE
+        elif Const.VERSION > version:
+            msg = Const.MSG_UPDATE_DEVELOPMENT
+
+        self.labelversion.set_text(msg)
