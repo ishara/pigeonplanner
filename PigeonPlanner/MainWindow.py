@@ -90,12 +90,16 @@ class MainWindow:
                       'on_button_down_clicked'   : self.button_down_clicked,
                       'on_button_bottom_clicked' : self.button_bottom_clicked,
                       'on_spinPlaced_changed'    : self.spinPlaced_changed,
+                      'on_menuclose_activate'    : self.menuclose_activate,
+                      'on_menuhome_activate'     : self.menuhome_activate,
+                      'on_menuforum_activate'    : self.menuforum_activate,
+                      'on_menuabout_activate'    : self.menuabout_activate,
                       'on_seriedialog_delete'    : self.dialog_delete,
                       'on_finddialog_delete'     : self.dialog_delete,
                       'on_removedialog_delete'   : self.dialog_delete,
                       'on_filedialog_delete'     : self.dialog_delete,
-                      'on_main_destroy'          : gtk.main_quit,
-                      'on_quit_clicked'          : gtk.main_quit }
+                      'on_main_destroy'          : self.quit_program,
+                      'on_quit_clicked'          : self.quit_program }
         self.wTree.signal_autoconnect(signalDic)
 
         for widget in self.wTree.get_widget_prefix(''):
@@ -144,10 +148,27 @@ class MainWindow:
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
 
+    def quit_program(self, widget=None):
+        gtk.main_quit()
+
     def dialog_delete(self, widget, event):
         widget.hide()
         return True
 
+    # Menu callbacks
+    def menuclose_activate(self, widget):
+        self.quit_program()
+
+    def menuhome_activate(self, widget):
+        webbrowser.open(Const.WEBSITE)
+
+    def menuforum_activate(self, widget):
+        webbrowser.open(Const.FORUMURL)
+
+    def menuabout_activate(self, widget):
+        Widgets.about_dialog(self.main)
+
+    # Filter callbacks
     def filterlist_clicked(self, widget):
         pass
         #TODO: Show menu
@@ -168,6 +189,7 @@ class MainWindow:
         self.fill_treeview()
         self.set_menuitem_sensitive(widget)
 
+    # Serie callbacks
     def serie_activate(self, widget):
         self.entrySerieFrom.set_text('')
         self.entrySerieTo.set_text('')
@@ -216,6 +238,7 @@ class MainWindow:
     def seriecancel_clicked(self, widget):
         self.seriedialog.hide()
 
+    # Main treeview callbacks
     def column1_clicked(self, column):
         treeview = column.get_tree_view()
         liststore = treeview.get_model()
@@ -244,47 +267,7 @@ class MainWindow:
 
             Widgets.popup_menu(event, entries)
 
-    def tvResults_press(self, widget, event):
-        if event.button == 3:
-            entries = [
-                (gtk.STOCK_EDIT, self.editresult_clicked, None),
-                (gtk.STOCK_REMOVE, self.removeresult_clicked, None)]
-
-            Widgets.popup_menu(event, entries)
-
-    def tvBrothers_press(self, widget, event):
-        ring = self.get_treeview_ring(self.selBrothers)
-        if not ring: return
-
-        if event.button == 3:
-            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
-
-            Widgets.popup_menu(event, entries)
-        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            self.search_pigeon(None, ring)
-
-    def tvHalfBrothers_press(self, widget, event):
-        ring = self.get_treeview_ring(self.selHalfBrothers)
-        if not ring: return
-
-        if event.button == 3:
-            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
-
-            Widgets.popup_menu(event, entries)
-        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            self.search_pigeon(None, ring)
-
-    def tvOffspring_press(self, widget, event):
-        ring = self.get_treeview_ring(self.selOffspring)
-        if not ring: return
-
-        if event.button == 3:
-            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
-
-            Widgets.popup_menu(event, entries)
-        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            self.search_pigeon(None, ring)
-
+    # Navigation arrows callbacks
     def button_top_clicked(self, widget):
         if len(self.liststore) > 0:
             path = (0,)
@@ -317,6 +300,7 @@ class MainWindow:
             path = (len(self.liststore)-1,)
             self.treeview.set_cursor(path)
 
+    # Remove callback
     def remove_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
 
@@ -347,6 +331,7 @@ class MainWindow:
         if len(self.liststore) > 0:
             self.treeview.set_cursor(path)
 
+    # Add/Edit callbacks
     def edit_clicked(self, widget):
         self.entryRing1.set_text(self.entryRing.get_text())
         self.entryYear1.set_text(self.entryYear.get_text())
@@ -398,6 +383,7 @@ class MainWindow:
     def cancel_clicked(self, widget):
         self.add_edit_finish()
 
+    # Image callbacks
     def eventbox_press(self, widget, event):
         pindex, ring, year = self.get_main_ring()
         image = self.parser.pigeons[pindex].image
@@ -430,6 +416,7 @@ class MainWindow:
     def fccancel_clicked(self, widget):
         self.filedialog.hide()
 
+    # Other toolbar callbacks
     def options_clicked(self, widget):
         Options.OptionsDialog(self)
 
@@ -443,6 +430,7 @@ class MainWindow:
     def about_clicked(self, widget):
         Widgets.about_dialog(self.main)
 
+    # Pedigree callbacks
     def sbdetail_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
 
@@ -482,6 +470,49 @@ class MainWindow:
                 self.entryRing1.set_text(ring)
                 self.entryYear1.set_text(year)
                 self.cbsex.set_active(int(sex))
+
+    # Relatives callbacks
+    def tvBrothers_press(self, widget, event):
+        ring = self.get_treeview_ring(self.selBrothers)
+        if not ring: return
+
+        if event.button == 3:
+            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
+
+            Widgets.popup_menu(event, entries)
+        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            self.search_pigeon(None, ring)
+
+    def tvHalfBrothers_press(self, widget, event):
+        ring = self.get_treeview_ring(self.selHalfBrothers)
+        if not ring: return
+
+        if event.button == 3:
+            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
+
+            Widgets.popup_menu(event, entries)
+        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            self.search_pigeon(None, ring)
+
+    def tvOffspring_press(self, widget, event):
+        ring = self.get_treeview_ring(self.selOffspring)
+        if not ring: return
+
+        if event.button == 3:
+            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
+
+            Widgets.popup_menu(event, entries)
+        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            self.search_pigeon(None, ring)
+
+    # Result callbacks
+    def tvResults_press(self, widget, event):
+        if event.button == 3:
+            entries = [
+                (gtk.STOCK_EDIT, self.editresult_clicked, None),
+                (gtk.STOCK_REMOVE, self.removeresult_clicked, None)]
+
+            Widgets.popup_menu(event, entries)
 
     def addresult_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
@@ -565,6 +596,13 @@ class MainWindow:
     def allresults_clicked(self, widget):
         ResultWindow.ResultWindow(self, self.parser.pigeons, self.database)
 
+    def spinPlaced_changed(self, widget):
+        spinmin = widget.get_value_as_int()
+        spinmax = widget.get_range()[1]
+
+        self.spinOutof.set_range(spinmin, spinmax)
+
+    # Find parent callbacks
     def findsire_clicked(self, widget):
         self.search = 'sire'
         self.fill_find_treeview('0')
@@ -593,6 +631,7 @@ class MainWindow:
     def findcancel_clicked(self, widget):
         self.finddialog.hide()
 
+    # Calendar callbacks
     def calbutton_clicked(self, widget):
         self.position_popup()
 
@@ -617,11 +656,9 @@ class MainWindow:
     def day_double_clicked(self, widget, data=None):
         self.hide_popup()
 
-    def spinPlaced_changed(self, widget):
-        spinmin = widget.get_value_as_int()
-        spinmax = widget.get_range()[1]
-
-        self.spinOutof.set_range(spinmin, spinmax)
+    #
+    # End of callbacks
+    ##################
 
     def build_treeview(self):
         '''
