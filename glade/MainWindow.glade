@@ -17,7 +17,7 @@
             <child>
               <widget class="GtkMenuItem" id="menuitem1">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">_Bestand</property>
+                <property name="label" translatable="yes">_File</property>
                 <property name="use_underline">True</property>
                 <child>
                   <widget class="GtkMenu" id="menu1">
@@ -41,9 +41,35 @@
               </widget>
             </child>
             <child>
+              <widget class="GtkMenuItem" id="menuitem2">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">_Edit</property>
+                <property name="use_underline">True</property>
+                <child>
+                  <widget class="GtkMenu" id="menu2">
+                    <property name="visible">True</property>
+                    <child>
+                      <widget class="GtkSeparatorMenuItem" id="separatormenuitem3">
+                        <property name="visible">True</property>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="GtkImageMenuItem" id="menupref">
+                        <property name="label">gtk-preferences</property>
+                        <property name="visible">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_menupref_activate"/>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
               <widget class="GtkMenuItem" id="menuitem4">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">_Hulp</property>
+                <property name="label" translatable="yes">_Help</property>
                 <property name="use_underline">True</property>
                 <child>
                   <widget class="GtkMenu" id="menu3">

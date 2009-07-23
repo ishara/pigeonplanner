@@ -91,6 +91,7 @@ class MainWindow:
                       'on_button_bottom_clicked' : self.button_bottom_clicked,
                       'on_spinPlaced_changed'    : self.spinPlaced_changed,
                       'on_menuclose_activate'    : self.menuclose_activate,
+                      'on_menupref_activate'     : self.menupref_activate,
                       'on_menuhome_activate'     : self.menuhome_activate,
                       'on_menuforum_activate'    : self.menuforum_activate,
                       'on_menuabout_activate'    : self.menuabout_activate,
@@ -158,6 +159,9 @@ class MainWindow:
     # Menu callbacks
     def menuclose_activate(self, widget):
         self.quit_program()
+
+    def menupref_activate(self, widget):
+        Options.OptionsDialog(self)
 
     def menuhome_activate(self, widget):
         webbrowser.open(Const.WEBSITE)
