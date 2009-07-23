@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pigeon Planner 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-23 15:33+0200\n"
+"POT-Creation-Date: 2009-07-23 16:38+0200\n"
 "PO-Revision-Date: 2009-05-06 16:11+0200\n"
 "Last-Translator: Automatically generated <>\n"
 "Language-Team: none <>\n"
@@ -265,7 +265,7 @@ msgid "Coef."
 msgstr "Coef."
 
 #: ../PigeonPlanner/Print.py:458 ../PigeonPlanner/Print.py:480
-#: ../PigeonPlanner/Print.py:481 ../PigeonPlanner/ToolsWindow.py:72
+#: ../PigeonPlanner/Print.py:481 ../PigeonPlanner/ToolsWindow.py:73
 msgid "Velocity"
 msgstr "Snelheid"
 
@@ -282,64 +282,76 @@ msgid "Distance: "
 msgstr "Afstand: "
 
 #: ../PigeonPlanner/Print.py:486 ../PigeonPlanner/Print.py:487
-#: ../PigeonPlanner/ToolsWindow.py:72
+#: ../PigeonPlanner/ToolsWindow.py:73
 msgid "Flight Time"
 msgstr "Vlucht tijd"
 
 #: ../PigeonPlanner/Print.py:492 ../PigeonPlanner/Print.py:493
-#: ../PigeonPlanner/ToolsWindow.py:72
+#: ../PigeonPlanner/ToolsWindow.py:73
 msgid "Time of Arrival"
 msgstr "Aankomst tijd"
 
-#: ../PigeonPlanner/ToolsWindow.py:59 tmp/MainWindow.glade.h:48
-#: tmp/ToolsWindow.glade.h:27
+#: ../PigeonPlanner/ToolsWindow.py:60 tmp/MainWindow.glade.h:48
+#: tmp/ToolsWindow.glade.h:30
 msgid "Tools"
 msgstr "Gereedschappen"
 
-#: ../PigeonPlanner/ToolsWindow.py:65
+#: ../PigeonPlanner/ToolsWindow.py:66
 msgid "Velocity calculator"
 msgstr "Snelheid meter"
 
-#: ../PigeonPlanner/ToolsWindow.py:65
+#: ../PigeonPlanner/ToolsWindow.py:66
 msgid "Datasets"
 msgstr "Datasets"
 
-#: ../PigeonPlanner/ToolsWindow.py:65 tmp/ToolsWindow.glade.h:8
+#: ../PigeonPlanner/ToolsWindow.py:66
+msgid "Statistics"
+msgstr "Statistieken"
+
+#: ../PigeonPlanner/ToolsWindow.py:66 tmp/ToolsWindow.glade.h:9
 msgid "Backup"
 msgstr "Backup"
 
-#: ../PigeonPlanner/ToolsWindow.py:65
+#: ../PigeonPlanner/ToolsWindow.py:66
 msgid "Update"
 msgstr "Update"
 
-#: ../PigeonPlanner/ToolsWindow.py:84
+#: ../PigeonPlanner/ToolsWindow.py:90
 msgid "PP Backups"
 msgstr "PP Backups"
 
-#: ../PigeonPlanner/ToolsWindow.py:90 ../PigeonPlanner/ToolsWindow.py:189
-#: ../PigeonPlanner/ToolsWindow.py:217
+#: ../PigeonPlanner/ToolsWindow.py:96 ../PigeonPlanner/ToolsWindow.py:162
+#: ../PigeonPlanner/ToolsWindow.py:190
 msgid "Colours"
 msgstr "Kleuren"
 
-#: ../PigeonPlanner/ToolsWindow.py:90 ../PigeonPlanner/ToolsWindow.py:193
-#: ../PigeonPlanner/ToolsWindow.py:221
+#: ../PigeonPlanner/ToolsWindow.py:96 ../PigeonPlanner/ToolsWindow.py:166
+#: ../PigeonPlanner/ToolsWindow.py:194
 msgid "Racepoints"
 msgstr "Vluchten"
 
-#: ../PigeonPlanner/ToolsWindow.py:90 ../PigeonPlanner/ToolsWindow.py:191
-#: ../PigeonPlanner/ToolsWindow.py:219
+#: ../PigeonPlanner/ToolsWindow.py:96 ../PigeonPlanner/ToolsWindow.py:164
+#: ../PigeonPlanner/ToolsWindow.py:192
 msgid "Sectors"
 msgstr "Sectoren"
 
-#: ../PigeonPlanner/ToolsWindow.py:90 ../PigeonPlanner/ToolsWindow.py:195
-#: ../PigeonPlanner/ToolsWindow.py:223
+#: ../PigeonPlanner/ToolsWindow.py:96 ../PigeonPlanner/ToolsWindow.py:168
+#: ../PigeonPlanner/ToolsWindow.py:196
 msgid "Strains"
 msgstr "Rassen"
 
-#: ../PigeonPlanner/ToolsWindow.py:90 ../PigeonPlanner/ToolsWindow.py:197
-#: ../PigeonPlanner/ToolsWindow.py:225
+#: ../PigeonPlanner/ToolsWindow.py:96 ../PigeonPlanner/ToolsWindow.py:170
+#: ../PigeonPlanner/ToolsWindow.py:198
 msgid "Lofts"
 msgstr "Hokken"
+
+#: ../PigeonPlanner/ToolsWindow.py:206
+msgid "Number of pigeons"
+msgstr "Aantal duiven"
+
+#: ../PigeonPlanner/ToolsWindow.py:207
+msgid "Number of results"
+msgstr "Aantal uitslagen"
 
 #: ../PigeonPlanner/Widgets.py:209
 msgid "View image: "
@@ -698,46 +710,50 @@ msgid "<b><i><big>Manage data</big></i></b>"
 msgstr "<b><i><big>Beheer data</big></i></b>"
 
 #: tmp/ToolsWindow.glade.h:3
+msgid "<b><i><big>Statistics</big></i></b>"
+msgstr "<b><i><big>Statistieken</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:4
 msgid "<b><i><big>Update</big></i></b>"
 msgstr "<b><i><big>Update</big></i></b>"
 
-#: tmp/ToolsWindow.glade.h:4
+#: tmp/ToolsWindow.glade.h:5
 msgid "<b><i><big>Velocity calculator</big></i></b>"
 msgstr "<b><i><big>Snelheid meter</big></i></b>"
 
-#: tmp/ToolsWindow.glade.h:5
+#: tmp/ToolsWindow.glade.h:6
 msgid "<b>Create backup</b>"
 msgstr "<b>Backup maken</b>"
 
-#: tmp/ToolsWindow.glade.h:6
+#: tmp/ToolsWindow.glade.h:7
 msgid "<b>Restore backup</b>"
 msgstr "<b>Backup terugzetten</b>"
 
-#: tmp/ToolsWindow.glade.h:7
+#: tmp/ToolsWindow.glade.h:8
 msgid "<i>Click the button below</i>"
 msgstr "<i>Klik op onderstaande knop</i>"
 
-#: tmp/ToolsWindow.glade.h:9
+#: tmp/ToolsWindow.glade.h:10
 msgid "Calculate"
 msgstr "Berekenen"
 
-#: tmp/ToolsWindow.glade.h:10
+#: tmp/ToolsWindow.glade.h:11
 msgid "Calculate velocity"
 msgstr "Bereken snelheid"
 
-#: tmp/ToolsWindow.glade.h:11
+#: tmp/ToolsWindow.glade.h:12
 msgid "Check now!"
 msgstr "Controleer nu!"
 
-#: tmp/ToolsWindow.glade.h:12
+#: tmp/ToolsWindow.glade.h:13
 msgid "Choose a Pigeon Planner backup file to restore"
 msgstr "Kies een Pigeon Planner backup bestand om te herstellen"
 
-#: tmp/ToolsWindow.glade.h:13
+#: tmp/ToolsWindow.glade.h:14
 msgid "Choose a directory where to save the backup"
 msgstr "Kies een map om de backup op te slaan"
 
-#: tmp/ToolsWindow.glade.h:14
+#: tmp/ToolsWindow.glade.h:15
 msgid ""
 "Create and restore backups from\n"
 "your pigeons and results."
@@ -745,46 +761,54 @@ msgstr ""
 "Maak en herstel backups van\n"
 "uw duiven en uitslagen."
 
-#: tmp/ToolsWindow.glade.h:16
+#: tmp/ToolsWindow.glade.h:17
 msgid "Dataset"
 msgstr "Dataset"
 
-#: tmp/ToolsWindow.glade.h:17
+#: tmp/ToolsWindow.glade.h:18
 msgid "Distance (km)"
 msgstr "Afstand (km)"
 
-#: tmp/ToolsWindow.glade.h:18
+#: tmp/ToolsWindow.glade.h:19
 msgid "Downloadpage"
 msgstr "Downloadpagina"
 
-#: tmp/ToolsWindow.glade.h:19
+#: tmp/ToolsWindow.glade.h:20
 msgid "From - To (meter/min)"
 msgstr "Van - Tot (meter/min)"
 
-#: tmp/ToolsWindow.glade.h:20
+#: tmp/ToolsWindow.glade.h:21
 msgid "Here you can check if there is a program update available."
 msgstr "Hier kan u controleren of er een update beschikbaar is."
 
-#: tmp/ToolsWindow.glade.h:21
+#: tmp/ToolsWindow.glade.h:22
+msgid "Here you can see some statistics of your database"
+msgstr "Bekijk hier enkele statistieken van uw database"
+
+#: tmp/ToolsWindow.glade.h:23
 msgid "Item"
 msgstr "Item"
 
-#: tmp/ToolsWindow.glade.h:22
+#: tmp/ToolsWindow.glade.h:24
 msgid "Released (hh : mm)"
 msgstr "Gelost (uu : mm)"
 
-#: tmp/ToolsWindow.glade.h:23
+#: tmp/ToolsWindow.glade.h:25
 msgid "Remove items from your datasets"
 msgstr "Verwijder opties uit datasets"
 
-#: tmp/ToolsWindow.glade.h:24
+#: tmp/ToolsWindow.glade.h:26
 msgid "Restore"
 msgstr "Terugzetten"
 
-#: tmp/ToolsWindow.glade.h:25
+#: tmp/ToolsWindow.glade.h:27
+msgid "Search database"
+msgstr "Doorzoek database"
+
+#: tmp/ToolsWindow.glade.h:28
 msgid "Select a directory"
 msgstr "Selecteer een map"
 
-#: tmp/ToolsWindow.glade.h:26
+#: tmp/ToolsWindow.glade.h:29
 msgid "Select a valid backup file"
 msgstr "Selecteer een geldig backup bestand"
