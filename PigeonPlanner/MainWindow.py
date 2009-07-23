@@ -149,7 +149,7 @@ class MainWindow:
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
 
-    def quit_program(self, widget=None):
+    def quit_program(self, widget=None, event=None):
         gtk.main_quit()
 
     def dialog_delete(self, widget, event):
