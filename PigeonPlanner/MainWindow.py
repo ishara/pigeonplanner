@@ -120,7 +120,7 @@ class MainWindow:
         self.database = Database.DatabaseOperations()
         self.parser = PigeonParser.PigeonParser()
         self.parser.get_pigeons()
-        self.pedigree = DrawPedigree([self.tableSire, self.tableDam], button=self.goto)
+        self.pedigree = DrawPedigree([self.tableSire, self.tableDam], button=self.goto, pigeons=self.parser.pigeons)
         self.pedigree.draw_pedigree()
         self.build_treeview()
         self.build_treeviews()
@@ -799,7 +799,7 @@ class MainWindow:
         except:
             Widgets.message_dialog('error', Const.MSG_IMAGE_MISSING, self.main)
 
-        dp = DrawPedigree([self.tableSire, self.tableDam], pindex, button=self.goto)
+        dp = DrawPedigree([self.tableSire, self.tableDam], pindex, button=self.goto, pigeons=self.parser.pigeons)
         dp.draw_pedigree()
 
         self.find_direct_relatives(pindex, sire, dam)

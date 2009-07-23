@@ -25,8 +25,6 @@
 
 import gtk
 
-import PigeonParser
-
 
 class ExtraBox(gtk.DrawingArea):
     def __init__(self, text):
@@ -37,19 +35,13 @@ class ExtraBox(gtk.DrawingArea):
         self.text = '\n'.join(text)
 
         if text != '':
-#            (240/256.0, 230/256.0, 140/256.0)
-#            (255/256.0, 228/256.0, 196/256.0)
-#            (112/256.0, 219/256.0, 147/256.0)
-#            (155/256.0, 205/256.0, 155/256.0)
-#            (152/256.0, 251/256.0, 152/256.0)
-
             self.bgcolor = (240/256.0, 230/256.0, 140/256.0)
             self.bordercolor = (0,0,0)
         else:
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
             self.bordercolor = (0,0,0)
 
-        self.set_size_request(220,25) # ??
+        self.set_size_request(220,25)
 
     def realize(self, widget):
         self.context = self.window.cairo_create()
@@ -152,10 +144,7 @@ class PedigreeBox(gtk.DrawingArea):
             self.gotobutton.set_sensitive(False)
 
     def pressed(self, widget, event):
-        if self.is_focus():
-            self.set_property("is-focus", False)
-        else:
-            self.set_property("is-focus", True)
+        self.grab_focus()
 
     def realize(self, widget):
         self.context = self.window.cairo_create()
@@ -214,18 +203,16 @@ class PedigreeBox(gtk.DrawingArea):
 
 
 class DrawPedigree:
-    def __init__(self, tables=None, pindex=None, detail=False, button=None):
+    def __init__(self, tables=None, pindex=None, detail=False, button=None, pigeons=None):
 
         self.pindex = pindex
         self.detail = detail
         self.button = button
+        self.pigeons = pigeons
         self.tables = tables
         if self.tables:
             self.tableSire = tables[0]
             self.tableDam = tables[1]
-
-        self.parser = PigeonParser.PigeonParser()
-        self.parser.get_pigeons()
 
     def draw_pedigree(self):
         if self.detail:
@@ -278,15 +265,14 @@ class DrawPedigree:
         lst = [None]*rng
 
         try:
-            ring = self.parser.pigeons[self.pindex].ring
-            year = self.parser.pigeons[self.pindex].year
-            sex = self.parser.pigeons[self.pindex].sex
+            ring = self.pigeons[self.pindex].ring
+            year = self.pigeons[self.pindex].year
+            sex = self.pigeons[self.pindex].sex
         except KeyError:
             ring = ''
             year = ''
             sex = ''
 
-#        self.build_tree(self.ring, year, sex, '', '', '', '', '', '', 0, 1, lst)
         self.build_tree(self.pindex, ring, year, sex, '', '', '', '', '', '', 0, 1, lst)
 
         for table in self.tables:
@@ -391,80 +377,39 @@ class DrawPedigree:
 
         lst[index] = (pindex, ring, year, sex, ex1, ex2, ex3, ex4, ex5, ex6)
 
-        if pindex in self.parser.pigeons:
+        if pindex in self.pigeons:
 
             lst[index] = (pindex, ring, year, sex, ex1, ex2, ex3, ex4, ex5, ex6)
 
-            ringSire = self.parser.pigeons[pindex].sire
-            yearSire = self.parser.pigeons[pindex].yearsire
+            ringSire = self.pigeons[pindex].sire
+            yearSire = self.pigeons[pindex].yearsire
             pindexsire = ringSire + yearSire
             try:
-                extra1 = self.parser.pigeons[pindexsire].extra1
-                extra2 = self.parser.pigeons[pindexsire].extra2
-                extra3 = self.parser.pigeons[pindexsire].extra3
-                extra4 = self.parser.pigeons[pindexsire].extra4
-                extra5 = self.parser.pigeons[pindexsire].extra5
-                extra6 = self.parser.pigeons[pindexsire].extra6
+                extra1 = self.pigeons[pindexsire].extra1
+                extra2 = self.pigeons[pindexsire].extra2
+                extra3 = self.pigeons[pindexsire].extra3
+                extra4 = self.pigeons[pindexsire].extra4
+                extra5 = self.pigeons[pindexsire].extra5
+                extra6 = self.pigeons[pindexsire].extra6
             except KeyError:
                 extra1 = extra2 = extra3 = extra4 = extra5 = extra6 = ''
 
             if ringSire:
                 self.build_tree(pindexsire, ringSire, yearSire, '0', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+1, depth+1, lst)
 
-            ringDam = self.parser.pigeons[pindex].dam
-            yearDam = self.parser.pigeons[pindex].yeardam
+            ringDam = self.pigeons[pindex].dam
+            yearDam = self.pigeons[pindex].yeardam
             pindexdam = ringDam + yearDam
             try:
-                extra1 = self.parser.pigeons[pindexdam].extra1
-                extra2 = self.parser.pigeons[pindexdam].extra2
-                extra3 = self.parser.pigeons[pindexdam].extra3
-                extra4 = self.parser.pigeons[pindexdam].extra4
-                extra5 = self.parser.pigeons[pindexdam].extra5
-                extra6 = self.parser.pigeons[pindexdam].extra6
+                extra1 = self.pigeons[pindexdam].extra1
+                extra2 = self.pigeons[pindexdam].extra2
+                extra3 = self.pigeons[pindexdam].extra3
+                extra4 = self.pigeons[pindexdam].extra4
+                extra5 = self.pigeons[pindexdam].extra5
+                extra6 = self.pigeons[pindexdam].extra6
             except KeyError:
                 extra1 = extra2 = extra3 = extra4 = extra5 = extra6 = ''
 
             if ringDam:
                 self.build_tree(pindexdam, ringDam, yearDam, '1', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+2, depth+1, lst)
-
-
-#    def build_tree(self, ring, year, sex, ex1, ex2, ex3, ex4, ex5, ex6, index, depth, lst):
-#        if depth > 5 or ring == None or index >= len(lst):
-#            return
-
-#        lst[index] = (ring, year[2:], sex, ex1, ex2, ex3, ex4, ex5, ex6)
-
-#        if ring in self.parser.pigeons:
-
-#            lst[index] = (ring, year[2:], sex, ex1, ex2, ex3, ex4, ex5, ex6)
-
-#            ringSire = self.parser.pigeons[ring].sire
-#            yearSire = self.parser.pigeons[ring].yearsire
-#            try:
-#                extra1 = self.parser.pigeons[ringSire].extra1
-#                extra2 = self.parser.pigeons[ringSire].extra2
-#                extra3 = self.parser.pigeons[ringSire].extra3
-#                extra4 = self.parser.pigeons[ringSire].extra4
-#                extra5 = self.parser.pigeons[ringSire].extra5
-#                extra6 = self.parser.pigeons[ringSire].extra6
-#            except KeyError:
-#                extra1 = extra2 = extra3 = extra4 = extra5 = extra6 = ''
-
-#            if ringSire:
-#                self.build_tree(ringSire, yearSire, '0', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+1, depth+1, lst)
-
-#            ringDam = self.parser.pigeons[ring].dam
-#            yearDam = self.parser.pigeons[ring].yeardam
-#            try:
-#                extra1 = self.parser.pigeons[ringDam].extra1
-#                extra2 = self.parser.pigeons[ringDam].extra2
-#                extra3 = self.parser.pigeons[ringDam].extra3
-#                extra4 = self.parser.pigeons[ringDam].extra4
-#                extra5 = self.parser.pigeons[ringDam].extra5
-#                extra6 = self.parser.pigeons[ringDam].extra6
-#            except KeyError:
-#                extra1 = extra2 = extra3 = extra4 = extra5 = extra6 = ''
-
-#            if ringDam:
-#                self.build_tree(ringDam, yearDam, '1', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+2, depth+1, lst)
 
