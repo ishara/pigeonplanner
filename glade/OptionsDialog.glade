@@ -147,7 +147,7 @@
                         </child>
                         <child>
                           <widget class="GtkCheckButton" id="chkArrows">
-                            <property name="label" translatable="yes">Show navigation arrows</property>
+                            <property name="label" translatable="yes">Show or hide the navigation arrows</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
@@ -159,7 +159,7 @@
                         </child>
                         <child>
                           <widget class="GtkCheckButton" id="chkToolbar">
-                            <property name="label" translatable="yes">Show toolbar</property>
+                            <property name="label" translatable="yes">Show or hide the toolbar</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
