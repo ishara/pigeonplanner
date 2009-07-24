@@ -25,11 +25,12 @@ import Configuration
 
 
 class ParsedOptions:
-    def __init__(self, column, columntype, columnposition, arrows, name, street, code, city, tel):
+    def __init__(self, column, columntype, columnposition, arrows, toolbar, name, street, code, city, tel):
         self.column = column
         self.columntype = columntype
         self.columnposition = columnposition
         self.arrows = arrows
+        self.toolbar = toolbar
         self.name = name
         self.street = street
         self.code = code
@@ -47,6 +48,7 @@ class GetOptions:
                           self.conf.get('Options', 'columntype'),
                           self.conf.getint('Options', 'columnposition'),
                           self.conf.getboolean('Options', 'arrows'),
+                          self.conf.getboolean('Options', 'toolbar'),
                           self.conf.get('personal', 'name'),
                           self.conf.get('personal', 'street'),
                           self.conf.get('personal', 'code'),
@@ -72,6 +74,17 @@ class GetOptions:
 
         self.conf.generateNewFile(dic)
         self.conf.copyNew(new=True)
+
+    def set_option(self, section, option, value):
+        '''
+        Set a single option to the configuration file
+
+        @param section: The section of the option
+        @param option: The option to change
+        @param value: The value for the option
+        '''
+
+        self.conf.set_option(section, option, value)
 
 
 class OptionsDialog:
@@ -120,6 +133,7 @@ class OptionsDialog:
         self.sbColumn.set_value(self.opt.optionList.columnposition)
 
         self.chkArrows.set_active(self.opt.optionList.arrows)
+        self.chkToolbar.set_active(self.opt.optionList.toolbar)
 
         self.entryName.set_text(self.opt.optionList.name),
         self.entryStreet.set_text(self.opt.optionList.street),
@@ -158,7 +172,8 @@ class OptionsDialog:
         dic = {"Options" : {'column' : str(self.chkColumn.get_active()),
                             'columntype' : self.cbColumn.get_active_text(),
                             'columnposition' : self.sbColumn.get_value_as_int(),
-                            'arrows' : str(self.chkArrows.get_active())
+                            'arrows' : str(self.chkArrows.get_active()),
+                            'toolbar' : str(self.chkToolbar.get_active())
                            },
                "personal" : {'name' : self.entryName.get_text(),
                              'street' : self.entryStreet.get_text(),
@@ -177,8 +192,29 @@ class OptionsDialog:
 
         if self.chkArrows.get_active():
             self.main.alignarrows.show()
+
+            self.main.blockMenuCallback = True
+            self.main.menuarrows.set_active(True)
+            self.main.blockMenuCallback = False
         else:
             self.main.alignarrows.hide()
+
+            self.main.blockMenuCallback = True
+            self.main.menuarrows.set_active(False)
+            self.main.blockMenuCallback = False
+
+        if self.chkToolbar.get_active():
+            self.main.toolbar.show()
+
+            self.main.blockMenuCallback = True
+            self.main.menutoolbar.set_active(True)
+            self.main.blockMenuCallback = False
+        else:
+            self.main.toolbar.hide()
+
+            self.main.blockMenuCallback = True
+            self.main.menutoolbar.set_active(False)
+            self.main.blockMenuCallback = False
 
         self.optionsdialog.destroy()
 

@@ -92,6 +92,8 @@ class MainWindow:
                       'on_spinPlaced_changed'    : self.spinPlaced_changed,
                       'on_menuclose_activate'    : self.menuclose_activate,
                       'on_menupref_activate'     : self.menupref_activate,
+                      'on_menuarrows_toggled'    : self.menuarrows_toggled,
+                      'on_menutoolbar_toggled'   : self.menutoolbar_toggled,
                       'on_menuhome_activate'     : self.menuhome_activate,
                       'on_menuforum_activate'    : self.menuforum_activate,
                       'on_menuabout_activate'    : self.menuabout_activate,
@@ -113,6 +115,7 @@ class MainWindow:
         self.imageToAdd = ''
         self.imageDeleted = False
         self.beforeEditPath = None
+        self.blockMenuCallback = False
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
                                'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit,
@@ -138,6 +141,10 @@ class MainWindow:
         if self.options.optionList.arrows:
             self.alignarrows.show()
 
+            self.blockMenuCallback = True
+            self.menuarrows.set_active(True)
+            self.blockMenuCallback = False
+
         self.listdata = {self.cbSector: self.database.get_all_sectors(), \
                          self.cbRacepoint: self.database.get_all_racepoints(), \
                          self.cbColour: self.database.get_all_colours(), \
@@ -162,6 +169,26 @@ class MainWindow:
 
     def menupref_activate(self, widget):
         Options.OptionsDialog(self)
+
+    def menuarrows_toggled(self, widget):
+        if self.blockMenuCallback: return
+
+        if widget.get_active():
+            self.alignarrows.show()
+            self.options.set_option('Options', 'arrows', 'True')
+        else:
+            self.alignarrows.hide()
+            self.options.set_option('Options', 'arrows', 'False')
+
+    def menutoolbar_toggled(self, widget):
+        if self.blockMenuCallback: return
+
+        if widget.get_active():
+            self.toolbar.show()
+            self.options.set_option('Options', 'toolbar', 'True')
+        else:
+            self.toolbar.hide()
+            self.options.set_option('Options', 'toolbar', 'False')
 
     def menuhome_activate(self, widget):
         webbrowser.open(Const.WEBSITE)

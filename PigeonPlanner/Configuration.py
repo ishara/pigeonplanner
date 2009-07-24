@@ -43,6 +43,7 @@ class Configuration:
         self.__addOption('Options', 'columntype', 'Sex')
         self.__addOption('Options', 'columnposition', 2)
         self.__addOption('Options', 'arrows', 'True')
+        self.__addOption('Options', 'toolbar', 'True')
 
         self.__addSection('personal')
         self.__addOption('personal', 'name', '')
@@ -153,6 +154,21 @@ class ConfigurationParser(ConfigParser.ConfigParser):
             file = open(self.prefFile, 'w')
             file.write(fileToWrite)
             file.close()
+
+    def set_option(self, section, option, value):
+        '''
+        Set a single option to the configuration file
+
+        @param section: The section of the option
+        @param option: The option to change
+        @param value: The value for the option
+        '''
+
+        ConfigParser.ConfigParser.set(self, section, option, value)
+
+        file = open(self.prefFile, 'w')
+        ConfigParser.ConfigParser.write(self, file)
+        file.close()
 
     def get(self, section, option):
         '''
