@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-23 16:41+0200\n"
+"POT-Creation-Date: 2009-07-24 14:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -165,12 +165,12 @@ msgstr ""
 msgid "This isn't normal, or you must be running a development version"
 msgstr ""
 
-#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:727
+#: ../PigeonPlanner/Options.py:114 ../PigeonPlanner/MainWindow.py:754
 #: tmp/MainWindow.glade.h:17
 msgid "Colour"
 msgstr ""
 
-#: ../PigeonPlanner/Options.py:101 ../PigeonPlanner/MainWindow.py:725
+#: ../PigeonPlanner/Options.py:114 ../PigeonPlanner/MainWindow.py:752
 #: tmp/MainWindow.glade.h:43
 msgid "Sex"
 msgstr ""
@@ -195,20 +195,20 @@ msgstr ""
 
 #: ../PigeonPlanner/Print.py:305 ../PigeonPlanner/Print.py:322
 #: ../PigeonPlanner/Print.py:356 ../PigeonPlanner/Print.py:357
-#: ../PigeonPlanner/MainWindow.py:707 ../PigeonPlanner/ResultWindow.py:57
+#: ../PigeonPlanner/MainWindow.py:734 ../PigeonPlanner/ResultWindow.py:57
 #: tmp/MainWindow.glade.h:34 tmp/ResultWindow.glade.h:5
 msgid "Racepoint"
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:305 ../PigeonPlanner/Print.py:326
 #: ../PigeonPlanner/Print.py:380 ../PigeonPlanner/Print.py:381
-#: ../PigeonPlanner/MainWindow.py:707 ../PigeonPlanner/ResultWindow.py:61
+#: ../PigeonPlanner/MainWindow.py:734 ../PigeonPlanner/ResultWindow.py:61
 #: tmp/MainWindow.glade.h:42 tmp/ResultWindow.glade.h:7
 msgid "Sector"
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:305 ../PigeonPlanner/Print.py:330
-#: ../PigeonPlanner/MainWindow.py:707 ../PigeonPlanner/ResultWindow.py:60
+#: ../PigeonPlanner/MainWindow.py:734 ../PigeonPlanner/ResultWindow.py:60
 #: tmp/ResultWindow.glade.h:2
 msgid "Coefficient"
 msgstr ""
@@ -220,20 +220,20 @@ msgid "Place"
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:344 ../PigeonPlanner/Print.py:345
-#: ../PigeonPlanner/MainWindow.py:675 ../PigeonPlanner/MainWindow.py:687
-#: ../PigeonPlanner/MainWindow.py:692 ../PigeonPlanner/MainWindow.py:697
-#: ../PigeonPlanner/MainWindow.py:702 ../PigeonPlanner/ResultWindow.py:62
+#: ../PigeonPlanner/MainWindow.py:702 ../PigeonPlanner/MainWindow.py:714
+#: ../PigeonPlanner/MainWindow.py:719 ../PigeonPlanner/MainWindow.py:724
+#: ../PigeonPlanner/MainWindow.py:729 ../PigeonPlanner/ResultWindow.py:62
 msgid "Band no."
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:350 ../PigeonPlanner/Print.py:351
-#: ../PigeonPlanner/MainWindow.py:707 ../PigeonPlanner/ResultWindow.py:56
+#: ../PigeonPlanner/MainWindow.py:734 ../PigeonPlanner/ResultWindow.py:56
 #: tmp/MainWindow.glade.h:19
 msgid "Date"
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:368 ../PigeonPlanner/Print.py:369
-#: ../PigeonPlanner/MainWindow.py:707 ../PigeonPlanner/ResultWindow.py:59
+#: ../PigeonPlanner/MainWindow.py:734 ../PigeonPlanner/ResultWindow.py:59
 #: tmp/MainWindow.glade.h:31
 msgid "Out of"
 msgstr ""
@@ -269,7 +269,7 @@ msgstr ""
 msgid "Time of Arrival"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:60 tmp/MainWindow.glade.h:48
+#: ../PigeonPlanner/ToolsWindow.py:60 tmp/MainWindow.glade.h:50
 #: tmp/ToolsWindow.glade.h:30
 msgid "Tools"
 msgstr ""
@@ -339,68 +339,68 @@ msgstr ""
 msgid "Click to close this window"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:116
+#: ../PigeonPlanner/MainWindow.py:119
 msgid "cock"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:116
+#: ../PigeonPlanner/MainWindow.py:119
 msgid "hen"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:116
+#: ../PigeonPlanner/MainWindow.py:119
 msgid "young bird"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:210 ../PigeonPlanner/MainWindow.py:213
+#: ../PigeonPlanner/MainWindow.py:237 ../PigeonPlanner/MainWindow.py:240
 msgid "pigeons"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:574
+#: ../PigeonPlanner/MainWindow.py:601
 msgid "<b>Edit this result</b>"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:598 tmp/MainWindow.glade.h:1
+#: ../PigeonPlanner/MainWindow.py:625 tmp/MainWindow.glade.h:1
 msgid "<b>Add a new result</b>"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:675 ../PigeonPlanner/MainWindow.py:687
-#: ../PigeonPlanner/MainWindow.py:692 ../PigeonPlanner/MainWindow.py:697
-#: ../PigeonPlanner/MainWindow.py:702 tmp/MainWindow.glade.h:52
+#: ../PigeonPlanner/MainWindow.py:702 ../PigeonPlanner/MainWindow.py:714
+#: ../PigeonPlanner/MainWindow.py:719 ../PigeonPlanner/MainWindow.py:724
+#: ../PigeonPlanner/MainWindow.py:729 tmp/MainWindow.glade.h:54
 msgid "Year"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:675 ../PigeonPlanner/MainWindow.py:687
+#: ../PigeonPlanner/MainWindow.py:702 ../PigeonPlanner/MainWindow.py:714
 msgid "Name"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:697
+#: ../PigeonPlanner/MainWindow.py:724
 msgid "Common parent"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:707 ../PigeonPlanner/ResultWindow.py:58
+#: ../PigeonPlanner/MainWindow.py:734 ../PigeonPlanner/ResultWindow.py:58
 #: tmp/MainWindow.glade.h:33
 msgid "Placed"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:1280
+#: ../PigeonPlanner/MainWindow.py:1307
 msgid "Images"
 msgstr ""
 
-#: ../PigeonPlanner/Configuration.py:115 ../PigeonPlanner/Configuration.py:127
+#: ../PigeonPlanner/Configuration.py:116 ../PigeonPlanner/Configuration.py:128
 msgid "#Pigeon Planner configuration file"
 msgstr ""
 
-#: ../PigeonPlanner/Configuration.py:186
+#: ../PigeonPlanner/Configuration.py:202
 #, python-format
 msgid "Warning: The '%(option)s' option is not set in the '%(section)s' section of the configuration file, using the default '%(default)s'."
 msgstr ""
 
-#: ../PigeonPlanner/Configuration.py:192
+#: ../PigeonPlanner/Configuration.py:208
 #, python-format
 msgid "Warning: There is no section '%(section)s' in the configuration file; an error occured parsing its option '%(option)s', using the default '%(default)s'."
 msgstr ""
 
-#: ../PigeonPlanner/Configuration.py:195
+#: ../PigeonPlanner/Configuration.py:211
 #, python-format
 msgid "Error: There went something wrong parsing the '%(option)s' option in the '%(section)s' section of the configuration file, using the default '%(default)s'."
 msgstr ""
@@ -550,48 +550,60 @@ msgstr ""
 msgid "Search through the list of hens"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:44 tmp/PedigreeWindow.glade.h:6
+#: tmp/MainWindow.glade.h:44 tmp/OptionsDialog.glade.h:11
+msgid "Show navigation arrows"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:45 tmp/OptionsDialog.glade.h:12
+msgid "Show toolbar"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:46 tmp/PedigreeWindow.glade.h:6
 msgid "Sire"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:45
+#: tmp/MainWindow.glade.h:47
 msgid "Strain"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:46
+#: tmp/MainWindow.glade.h:48
 msgid "The following pigeon will be removed:"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:47
+#: tmp/MainWindow.glade.h:49
 msgid "To"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:49 tmp/ResultWindow.glade.h:8
+#: tmp/MainWindow.glade.h:51 tmp/ResultWindow.glade.h:8
 msgid "View all results"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:50
+#: tmp/MainWindow.glade.h:52
 msgid "View detail"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:51
+#: tmp/MainWindow.glade.h:53
 msgid "Website"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:53
+#: tmp/MainWindow.glade.h:55
 msgid "Young birds"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:54
+#: tmp/MainWindow.glade.h:56
 msgid "_Edit"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:55
+#: tmp/MainWindow.glade.h:57
 msgid "_File"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:56
+#: tmp/MainWindow.glade.h:58
 msgid "_Help"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:59
+msgid "_View"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:1
@@ -628,23 +640,19 @@ msgstr ""
 msgid "Show an extra column"
 msgstr ""
 
-#: tmp/OptionsDialog.glade.h:11
-msgid "Show navigation arrows"
-msgstr ""
-
-#: tmp/OptionsDialog.glade.h:12
+#: tmp/OptionsDialog.glade.h:13
 msgid "Street & number"
 msgstr ""
 
-#: tmp/OptionsDialog.glade.h:13
+#: tmp/OptionsDialog.glade.h:14
 msgid "Telephone number"
 msgstr ""
 
-#: tmp/OptionsDialog.glade.h:14
+#: tmp/OptionsDialog.glade.h:15
 msgid "Value of column:"
 msgstr ""
 
-#: tmp/OptionsDialog.glade.h:15
+#: tmp/OptionsDialog.glade.h:16
 msgid "Zipcode"
 msgstr ""
 
