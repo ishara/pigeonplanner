@@ -194,26 +194,26 @@ class OptionsDialog:
             self.main.alignarrows.show()
 
             self.main.blockMenuCallback = True
-            self.main.menuarrows.set_active(True)
+            self.main.Arrows.set_active(True)
             self.main.blockMenuCallback = False
         else:
             self.main.alignarrows.hide()
 
             self.main.blockMenuCallback = True
-            self.main.menuarrows.set_active(False)
+            self.main.Arrows.set_active(False)
             self.main.blockMenuCallback = False
 
         if self.chkToolbar.get_active():
             self.main.toolbar.show()
 
             self.main.blockMenuCallback = True
-            self.main.menutoolbar.set_active(True)
+            self.main.Toolbar.set_active(True)
             self.main.blockMenuCallback = False
         else:
             self.main.toolbar.hide()
 
             self.main.blockMenuCallback = True
-            self.main.menutoolbar.set_active(False)
+            self.main.Toolbar.set_active(False)
             self.main.blockMenuCallback = False
 
         self.optionsdialog.destroy()

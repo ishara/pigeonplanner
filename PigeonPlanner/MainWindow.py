@@ -130,6 +130,7 @@ class MainWindow:
         self.parser.get_pigeons()
         self.pedigree = DrawPedigree([self.tableSire, self.tableDam], button=self.goto, pigeons=self.parser.pigeons)
         self.pedigree.draw_pedigree()
+        self.build_menubar()
         self.build_treeview()
         self.build_treeviews()
         self.fill_treeview()
@@ -142,7 +143,14 @@ class MainWindow:
             self.alignarrows.show()
 
             self.blockMenuCallback = True
-            self.menuarrows.set_active(True)
+            self.Arrows.set_active(True)
+            self.blockMenuCallback = False
+
+        if self.options.optionList.toolbar:
+            self.toolbar.show()
+
+            self.blockMenuCallback = True
+            self.Toolbar.set_active(True)
             self.blockMenuCallback = False
 
         self.listdata = {self.cbSector: self.database.get_all_sectors(), \
@@ -690,6 +698,67 @@ class MainWindow:
     #
     # End of callbacks
     ##################
+
+    def build_menubar(self):
+        uimanager = gtk.UIManager()
+        uimanager.add_ui_from_string(Widgets.uistring)
+        uimanager.insert_action_group(self.create_action_group(), 0)
+        self.main.add_accel_group(uimanager.get_accel_group())
+
+        uimanager.connect('connect-proxy', self.uimanager_connect_proxy)
+
+        menubar = uimanager.get_widget('/MenuBar')
+        arrows = uimanager.get_widget('/MenuBar/ViewMenu/Arrows')
+        toolbar = uimanager.get_widget('/MenuBar/ViewMenu/Toolbar')
+
+        setattr(self, "Arrows", arrows)
+        setattr(self, "Toolbar", toolbar)
+
+        self.vbox.pack_start(menubar, False, False)
+        self.vbox.reorder_child(menubar, 0)
+
+    def create_action_group(self):
+        entries = (
+            ("FileMenu", None, _("_File")),
+            ("EditMenu", None, _("_Edit")),
+            ("ViewMenu", None, _("_View")),
+            ("HelpMenu", None, _("_Help")),
+            ("Quit", gtk.STOCK_QUIT, _("_Quit"), "<control>Q",
+                    _("Quit the program"), self.quit_program),
+            ("Preferences", gtk.STOCK_PREFERENCES, _("_Preferences"), "<control>P",
+                    _("Configure the application"), self.menupref_activate),
+            ("Home", gtk.STOCK_HOME, _("_Website"), None,
+                    _("Go to the website for more information"), self.menuhome_activate),
+            ("Forum", gtk.STOCK_INFO, _("Forum"), None,
+                    _("Go to the forum for online help"), self.menuforum_activate),
+            ("About", gtk.STOCK_ABOUT, _("_About"), None,
+                    _("About this application"), self.menuabout_activate)
+           )
+
+        toggle_entries = (
+            ("Arrows",  None, _("Navigation arrows"), None,
+                    _("Show or hide the navigation arrows"), self.menuarrows_toggled, False),
+            ("Toolbar",  None, _("Toolbar"), None,
+                    _("Show or hide the toolbar"), self.menutoolbar_toggled, False)
+           )
+
+        action_group = gtk.ActionGroup("MainWindowActions")
+        action_group.add_actions(entries)
+        action_group.add_toggle_actions(toggle_entries)
+
+        return action_group
+
+    def uimanager_connect_proxy(self, uimgr, action, widget):
+        tooltip = action.get_property('tooltip')
+        if isinstance(widget, gtk.MenuItem) and tooltip:
+            widget.connect('select', self.menu_item_select, tooltip)
+            widget.connect('deselect', self.menu_item_deselect)
+
+    def menu_item_select(self, menuitem, tooltip):
+        self.statusbar.push(-1, tooltip)
+
+    def menu_item_deselect(self, menuitem):
+        self.statusbar.pop(-1)
 
     def build_treeview(self):
         '''

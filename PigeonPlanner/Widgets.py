@@ -24,6 +24,30 @@ import gtk.gdk
 import Const
 
 
+uistring = '''
+<ui>
+   <menubar name="MenuBar">
+      <menu action="FileMenu">
+         <separator/>
+         <menuitem action="Quit"/>
+      </menu>
+      <menu action="EditMenu">
+         <menuitem action="Preferences"/>
+      </menu>
+      <menu action="ViewMenu">
+         <menuitem action="Arrows"/>
+         <menuitem action="Toolbar"/>
+      </menu>
+      <menu action="HelpMenu">
+         <menuitem action="Home"/>
+         <menuitem action="Forum"/>
+         <separator/>
+         <menuitem action="About"/>
+      </menu>
+   </menubar>
+</ui>
+'''
+
 def message_dialog(msgtype, data, parent=None, extra=None):
     '''
     Display a message dialog.
