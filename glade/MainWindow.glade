@@ -3116,7 +3116,7 @@
     <child>
       <widget class="GtkMenuItem" id="serie">
         <property name="visible">True</property>
-        <property name="label" translatable="yes">Add a series of pigeons</property>
+        <property name="label" translatable="yes">Add a range of pigeons</property>
         <property name="use_underline">True</property>
         <signal name="activate" handler="on_serie_activate"/>
       </widget>

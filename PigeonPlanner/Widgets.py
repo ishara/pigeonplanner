@@ -32,7 +32,7 @@ uistring = '''
       </menu>
       <menu action="PigeonMenu">
          <menuitem action="Add"/>
-         <menuitem action="Addserie"/>
+         <menuitem action="Addrange"/>
          <separator/>
          <menuitem action="Edit"/>
          <menuitem action="Remove"/>
