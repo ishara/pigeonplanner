@@ -429,7 +429,7 @@ msgstr "Voeg een nieuwe duif toe"
 
 #: ../PigeonPlanner/MainWindow.py:771
 msgid "Add ran_ge"
-msgstr "Voeg reeks toe"
+msgstr "_Reeks toevoegen"
 
 #: ../PigeonPlanner/MainWindow.py:772 tmp/MainWindow.glade.h:9
 msgid "Add a range of pigeons"
@@ -457,7 +457,7 @@ msgstr "Bekijk de gedetailleerde stamboom van deze duif"
 
 #: ../PigeonPlanner/MainWindow.py:779
 msgid "Add resul_t"
-msgstr "Voeg _uitslag toe"
+msgstr "_Uitslag toevoegen"
 
 #: ../PigeonPlanner/MainWindow.py:780
 msgid "Add a new result for this pigeon"
