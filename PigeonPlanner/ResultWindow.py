@@ -241,7 +241,7 @@ class ResultWindow:
         for item in items:
             if widget == self.cbPigeon:
                 if not item == _("All"):
-                    item = item + ' / ' + self.pigeons[item].year[2:]
+                    item = self.pigeons[item].ring + ' / ' + self.pigeons[item].year[2:]
             model.append([item])
 
         number = len(model)
