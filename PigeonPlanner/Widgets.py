@@ -28,8 +28,16 @@ uistring = '''
 <ui>
    <menubar name="MenuBar">
       <menu action="FileMenu">
-         <separator/>
          <menuitem action="Quit"/>
+      </menu>
+      <menu action="PigeonMenu">
+         <menuitem action="Add"/>
+         <menuitem action="Addserie"/>
+         <separator/>
+         <menuitem action="Edit"/>
+         <menuitem action="Remove"/>
+         <menuitem action="Pedigree"/>
+         <menuitem action="Addresult"/>
       </menu>
       <menu action="EditMenu">
          <menuitem action="Preferences"/>

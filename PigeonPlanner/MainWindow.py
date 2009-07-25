@@ -183,6 +183,24 @@ class MainWindow:
     def menuclose_activate(self, widget):
         self.quit_program()
 
+    def menuadd_activate(self, widget):
+        self.add_clicked(None)
+
+    def menuaddserie_activate(self, widget):
+        self.serie_activate(None)
+
+    def menuedit_activate(self, widget):
+        self.edit_clicked(None)
+
+    def menuremove_activate(self, widget):
+        self.remove_clicked(None)
+
+    def menupedigree_activate(self, widget):
+        self.sbdetail_clicked(None)
+
+    def menuaddresult_activate(self, widget):
+        self.notebook.set_current_page(2)
+
     def menupref_activate(self, widget):
         Options.OptionsDialog(self)
 
@@ -740,11 +758,24 @@ class MainWindow:
     def create_action_group(self):
         entries = (
             ("FileMenu", None, _("_File")),
+            ("PigeonMenu", None, _("_Pigeon")),
             ("EditMenu", None, _("_Edit")),
             ("ViewMenu", None, _("_View")),
             ("HelpMenu", None, _("_Help")),
             ("Quit", gtk.STOCK_QUIT, _("_Quit"), "<control>Q",
                     _("Quit the program"), self.quit_program),
+            ("Add", gtk.STOCK_ADD, _("_Add"), "<control>A",
+                    _("Add a new pigeon"), self.menuadd_activate),
+            ("Addserie", gtk.STOCK_ADD, _("Add _serie"), "<control><shift>A",
+                    _("Add a serie of pigeons"), self.menuaddserie_activate),
+            ("Edit", gtk.STOCK_EDIT, _("_Edit"), "<control>E",
+                    _("Edit the selected pigeon"), self.menuedit_activate),
+            ("Remove", gtk.STOCK_REMOVE, _("_Remove"), "<control>R",
+                    _("Remove the selected pigeon"), self.menuremove_activate),
+            ("Pedigree", gtk.STOCK_FIND, _("_Pedigree"), None,
+                    _("View the detailed pedigree of this pigeon"), self.menupedigree_activate),
+            ("Addresult", gtk.STOCK_ADD, _("Add resul_t"), None,
+                    _("Add a new result for this pigeon"), self.menuaddresult_activate),
             ("Preferences", gtk.STOCK_PREFERENCES, _("_Preferences"), "<control>P",
                     _("Configure the application"), self.menupref_activate),
             ("Home", gtk.STOCK_HOME, _("_Website"), None,
