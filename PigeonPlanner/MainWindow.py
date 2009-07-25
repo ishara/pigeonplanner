@@ -393,13 +393,13 @@ class MainWindow:
         answer = dialog.run()
         if answer == 2:
             if chkKeep.get_active():
-                self.database.show_pigeon(ring, 0)
+                self.database.show_pigeon(pindex, 0)
             else:
-                self.database.delete_pigeon(ring)
+                self.database.delete_pigeon(pindex)
                 self.parser.get_pigeons()
 
             if not chkResults.get_active():
-                self.database.delete_result_from_band(ring)
+                self.database.delete_result_from_band(pindex)
 
             self.liststore.remove(tIter)
 
