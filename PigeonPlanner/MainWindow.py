@@ -116,6 +116,7 @@ class MainWindow:
         self.imageDeleted = False
         self.beforeEditPath = None
         self.blockMenuCallback = False
+        self.columnValueDic = {'0': _("Colour"), '1': _("Sex")}
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
                                'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit,
@@ -791,7 +792,8 @@ class MainWindow:
 
         columns = [_("Band no."), _("Year"), _("Name")]
         if self.options.optionList.column:
-            columns.insert(self.options.optionList.columnposition, _(self.options.optionList.columntype))
+            columns.insert(self.options.optionList.columnposition,
+                           _(self.columnValueDic[self.options.optionList.columntype]))
         types = [str, str, str, str, str]
         self.liststore, self.selection = Widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, True, True, True)
 
@@ -839,9 +841,9 @@ class MainWindow:
             if not self.parser.pigeons[pindex].show: continue
             if pigeonType == self.parser.pigeons[pindex].sex or pigeonType == 'all':
                 if self.options.optionList.column:
-                    if self.options.optionList.columntype == _('Sex'):
+                    if self.options.optionList.columntype == '1':
                         extra = self.sexDic[self.parser.pigeons[pindex].sex]
-                    elif self.options.optionList.columntype == _('Colour'):
+                    elif self.options.optionList.columntype == '0':
                         extra = self.parser.pigeons[pindex].colour
                     row = [pindex, self.parser.pigeons[pindex].ring, self.parser.pigeons[pindex].year, self.parser.pigeons[pindex].name]
                     row.insert(self.options.optionList.columnposition+1, extra)

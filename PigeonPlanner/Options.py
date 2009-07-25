@@ -113,10 +113,7 @@ class OptionsDialog:
 
         self.opt = GetOptions()
 
-        self.columnValueDic = {_("Colour") : 0, _("Sex") : 1}
-
-        for item in sorted(self.columnValueDic, key=self.columnValueDic.__getitem__):
-            self.cbColumn.append_text(item)
+        self.create_columntype_combo()
 
         self.set_options()
         if not self.chkColumn.get_active():
@@ -128,10 +125,24 @@ class OptionsDialog:
             self.notebook.get_nth_page(0).set_sensitive(0)
             self.notebook.set_current_page(1)
 
+    def create_columntype_combo(self):
+        self.typeStore = gtk.ListStore(str, str)
+        for key in self.main.columnValueDic.keys():
+            self.typeStore.insert(int(key), [key, self.main.columnValueDic[key]])
+        self.cbColumn = gtk.ComboBox(self.typeStore)
+        cell = gtk.CellRendererText()
+        self.cbColumn.pack_start(cell, True)
+        self.cbColumn.add_attribute(cell, 'text', 1)
+        self.cbColumn.show()
+
+        self.cbColumn.connect('changed', self.columnOpt_changed)
+
+        self.aligntype.add(self.cbColumn)
+
     def set_options(self):
         self.chkColumn.set_active(self.opt.optionList.column)
 
-        self.cbColumn.set_active(self.columnValueDic[_(self.opt.optionList.columntype)])
+        self.cbColumn.set_active(int(self.opt.optionList.columntype))
         self.sbColumn.set_value(self.opt.optionList.columnposition)
 
         self.chkArrows.set_active(self.opt.optionList.arrows)

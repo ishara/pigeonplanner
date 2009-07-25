@@ -40,7 +40,7 @@ class Configuration:
 
         self.__addSection('Options')
         self.__addOption('Options', 'column', 'False')
-        self.__addOption('Options', 'columntype', 'Sex')
+        self.__addOption('Options', 'columntype', '0')
         self.__addOption('Options', 'columnposition', 2)
         self.__addOption('Options', 'arrows', 'True')
         self.__addOption('Options', 'toolbar', 'True')
