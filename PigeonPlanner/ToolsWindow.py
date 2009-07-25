@@ -207,6 +207,8 @@ class ToolsWindow:
                  _("Number of results"): self.main.database.get_all_results()
                 }
 
+        self.ls_stats.clear()
+
         for item, value in items.iteritems():
             self.ls_stats.append([item, len(value)])
 
