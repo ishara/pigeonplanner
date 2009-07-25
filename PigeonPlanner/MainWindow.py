@@ -746,13 +746,19 @@ class MainWindow:
         uimanager.connect('connect-proxy', self.uimanager_connect_proxy)
 
         menubar = uimanager.get_widget('/MenuBar')
-        arrows = uimanager.get_widget('/MenuBar/ViewMenu/Arrows')
-        toolbar = uimanager.get_widget('/MenuBar/ViewMenu/Toolbar')
-        statusbar = uimanager.get_widget('/MenuBar/ViewMenu/Statusbar')
+        widgetDic = {"Arrows": uimanager.get_widget('/MenuBar/ViewMenu/Arrows'),
+                     "Toolbar": uimanager.get_widget('/MenuBar/ViewMenu/Toolbar'),
+                     "Statusbar": uimanager.get_widget('/MenuBar/ViewMenu/Statusbar'),
+                     "Edit": uimanager.get_widget('/MenuBar/PigeonMenu/Edit'),
+                     "Remove": uimanager.get_widget('/MenuBar/PigeonMenu/Remove'),
+                     "Pedigree": uimanager.get_widget('/MenuBar/PigeonMenu/Pedigree'),
+                     "Addresult": uimanager.get_widget('/MenuBar/PigeonMenu/Addresult')
+                    }
 
-        setattr(self, "Arrows", arrows)
-        setattr(self, "Toolbar", toolbar)
-        setattr(self, "Statusbar", statusbar)
+        for key, value in widgetDic.iteritems():
+            setattr(self, key, value)
+
+        Widgets.set_multiple_sensitive({self.Edit: False, self.Remove: False, self.Pedigree: False, self.Addresult: False})
 
         self.vbox.pack_start(menubar, False, False)
         self.vbox.reorder_child(menubar, 0)
@@ -918,11 +924,9 @@ class MainWindow:
         model, path = selection.get_selected()
 
         if path:
-            self.removeresult.set_sensitive(True)
-            self.editresult.set_sensitive(True)
+            Widgets.set_multiple_sensitive({self.removeresult: True, self.editresult: True})
         else:
-            self.removeresult.set_sensitive(False)
-            self.editresult.set_sensitive(False)
+            Widgets.set_multiple_sensitive({self.removeresult: False, self.editresult: False})
 
     def selection_changed(self, selection):
         '''
@@ -932,9 +936,11 @@ class MainWindow:
         model, path = selection.get_selected()
 
         if path:
-            Widgets.set_multiple_sensitive({self.edit: True, self.remove: True, self.sbdetail: True})
+            Widgets.set_multiple_sensitive({self.edit: True, self.remove: True, self.sbdetail: True,
+                                            self.Edit: True, self.Remove: True, self.Pedigree: True, self.Addresult: True})
         else:
-            Widgets.set_multiple_sensitive({self.edit: False, self.remove: False, self.sbdetail: False})
+            Widgets.set_multiple_sensitive({self.edit: False, self.remove: False, self.sbdetail: False,
+                                            self.Edit: False, self.Remove: False, self.Pedigree: False, self.Addresult: False})
             self.empty_entryboxes()
             return
 
