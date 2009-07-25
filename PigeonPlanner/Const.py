@@ -81,7 +81,7 @@ MSG_INVALID_NUMBER = (_("Invalid input!"),
 MSG_INVALID_LENGTH = (_("Invalid input!"),
                       _("Check the length of the year."),
                       _("Error"))
-MSG_INVALID_SERIE = (_("Invalid input!"),
+MSG_INVALID_RANGE = (_("Invalid input!"),
                      _("Only numbers are allowed when adding multiple pigeons."),
                      _("Error"))
 

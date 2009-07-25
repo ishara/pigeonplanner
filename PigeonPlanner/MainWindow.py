@@ -68,9 +68,9 @@ class MainWindow:
                       'on_hen_activate'          : self.hen_activate,
                       'on_all_activate'          : self.all_activate,
                       'on_single_activate'       : self.add_clicked,
-                      'on_serie_activate'        : self.serie_activate,
-                      'on_serieadd_clicked'      : self.serieadd_clicked,
-                      'on_seriecancel_clicked'   : self.seriecancel_clicked,
+                      'on_range_activate'        : self.range_activate,
+                      'on_rangeadd_clicked'      : self.rangeadd_clicked,
+                      'on_rangecancel_clicked'   : self.rangecancel_clicked,
                       'on_eventbox_press'        : self.eventbox_press,
                       'on_eventimage_press'      : self.eventimage_press,
                       'on_treeview_press'        : self.treeview_press,
@@ -97,7 +97,7 @@ class MainWindow:
                       'on_menuhome_activate'     : self.menuhome_activate,
                       'on_menuforum_activate'    : self.menuforum_activate,
                       'on_menuabout_activate'    : self.menuabout_activate,
-                      'on_seriedialog_delete'    : self.dialog_delete,
+                      'on_rangedialog_delete'    : self.dialog_delete,
                       'on_finddialog_delete'     : self.dialog_delete,
                       'on_removedialog_delete'   : self.dialog_delete,
                       'on_filedialog_delete'     : self.dialog_delete,
@@ -186,8 +186,8 @@ class MainWindow:
     def menuadd_activate(self, widget):
         self.add_clicked(None)
 
-    def menuaddserie_activate(self, widget):
-        self.serie_activate(None)
+    def menuaddrange_activate(self, widget):
+        self.range_activate(None)
 
     def menuedit_activate(self, widget):
         self.edit_clicked(None)
@@ -264,34 +264,34 @@ class MainWindow:
         self.fill_treeview()
         self.set_menuitem_sensitive(widget)
 
-    # Serie callbacks
-    def serie_activate(self, widget):
-        self.entrySerieFrom.set_text('')
-        self.entrySerieTo.set_text('')
-        self.entrySerieYear.set_text('')
-        self.cbSerieSex.set_active(2)
-        self.seriedialog.show()
+    # range callbacks
+    def range_activate(self, widget):
+        self.entryRangeFrom.set_text('')
+        self.entryRangeTo.set_text('')
+        self.entryRangeYear.set_text('')
+        self.cbRangeSex.set_active(2)
+        self.rangedialog.show()
 
-    def serieadd_clicked(self, widget):
-        seriefrom = self.entrySerieFrom.get_text()
-        serieto = self.entrySerieTo.get_text()
-        serieyear = self.entrySerieYear.get_text()
-        seriesex = self.cbSerieSex.get_active_text()
+    def rangeadd_clicked(self, widget):
+        rangefrom = self.entryRangeFrom.get_text()
+        rangeto = self.entryRangeTo.get_text()
+        rangeyear = self.entryRangeYear.get_text()
+        rangesex = self.cbRangeSex.get_active_text()
 
-        check1 = check.check_ring_entry(self.main, seriefrom, serieyear, _('pigeons'))
+        check1 = check.check_ring_entry(self.main, rangefrom, rangeyear, _('pigeons'))
         if not check1: return
 
-        check2 = check.check_ring_entry(self.main, serieto, serieyear, _('pigeons'))
+        check2 = check.check_ring_entry(self.main, rangeto, rangeyear, _('pigeons'))
         if not check2: return
 
-        if not seriefrom.isdigit() or not serieto.isdigit():
-            Widgets.message_dialog('error', Const.MSG_INVALID_SERIE, self.main)
+        if not rangefrom.isdigit() or not rangeto.isdigit():
+            Widgets.message_dialog('error', Const.MSG_INVALID_RANGE, self.main)
             return
 
         bandList = []
-        value = int(seriefrom)
+        value = int(rangefrom)
 
-        while value <= int(serieto):
+        while value <= int(rangeto):
             bandList.append(str(value))
             value += 1
 
@@ -301,17 +301,17 @@ class MainWindow:
                 if not overwrite:
                     continue
 
-            data = (str(band), serieyear, sex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '','')
+            data = (str(band), rangeyear, sex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '','')
             self.database.insert_pigeon(data)
 
         self.parser.get_pigeons()
 
         self.fill_treeview()
 
-        self.seriedialog.hide()
+        self.rangedialog.hide()
 
-    def seriecancel_clicked(self, widget):
-        self.seriedialog.hide()
+    def rangecancel_clicked(self, widget):
+        self.rangedialog.hide()
 
     # Main treeview callbacks
     def column1_clicked(self, column):
@@ -767,7 +767,7 @@ class MainWindow:
             ("Add", gtk.STOCK_ADD, _("_Add"), "<control>A",
                     _("Add a new pigeon"), self.menuadd_activate),
             ("Addrange", gtk.STOCK_ADD, _("Add ran_ge"), "<control><shift>A",
-                    _("Add a range of pigeons"), self.menuaddserie_activate),
+                    _("Add a range of pigeons"), self.menuaddrange_activate),
             ("Edit", gtk.STOCK_EDIT, _("_Edit"), "<control>E",
                     _("Edit the selected pigeon"), self.menuedit_activate),
             ("Remove", gtk.STOCK_REMOVE, _("_Remove"), "<control>R",
@@ -1410,14 +1410,14 @@ class MainWindow:
         for key in self.sexDic.keys():
             self.sexStore.insert(int(key), [key, self.sexDic[key]])
         self.cbsex = gtk.ComboBox(self.sexStore)
-        self.cbSerieSex = gtk.ComboBox(self.sexStore)
-        for box in [self.cbsex, self.cbSerieSex]:
+        self.cbRangeSex = gtk.ComboBox(self.sexStore)
+        for box in [self.cbsex, self.cbRangeSex]:
             cell = gtk.CellRendererText()
             box.pack_start(cell, True)
             box.add_attribute(cell, 'text', 1)
             box.show()
 
-        self.table1.attach(self.cbSerieSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
+        self.table1.attach(self.cbRangeSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
         self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
 
     def set_filefilter(self):

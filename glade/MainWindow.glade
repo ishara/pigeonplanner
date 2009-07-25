@@ -2730,16 +2730,16 @@
       </widget>
     </child>
   </widget>
-  <widget class="GtkDialog" id="seriedialog">
+  <widget class="GtkDialog" id="rangedialog">
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Add a series of pigeons</property>
+    <property name="title" translatable="yes">Add a range of pigeons</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main</property>
     <property name="has_separator">False</property>
-    <signal name="delete_event" handler="on_seriedialog_delete"/>
+    <signal name="delete_event" handler="on_rangedialog_delete"/>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox6">
         <property name="visible">True</property>
@@ -2802,7 +2802,7 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkEntry" id="entrySerieYear">
+                      <widget class="GtkEntry" id="entryRangeYear">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="max_length">4</property>
@@ -2854,7 +2854,7 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkEntry" id="entrySerieTo">
+                      <widget class="GtkEntry" id="entryRangeTo">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="max_length">14</property>
@@ -2870,7 +2870,7 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkEntry" id="entrySerieFrom">
+                      <widget class="GtkEntry" id="entryRangeFrom">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="max_length">14</property>
@@ -2927,13 +2927,13 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <widget class="GtkButton" id="seriecancel">
+              <widget class="GtkButton" id="rangecancel">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_seriecancel_clicked"/>
+                <signal name="clicked" handler="on_rangecancel_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -2942,7 +2942,7 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkButton" id="serieadd">
+              <widget class="GtkButton" id="rangeadd">
                 <property name="label">gtk-add</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -2950,7 +2950,7 @@
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_serieadd_clicked"/>
+                <signal name="clicked" handler="on_rangeadd_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -3114,11 +3114,11 @@
       </widget>
     </child>
     <child>
-      <widget class="GtkMenuItem" id="serie">
+      <widget class="GtkMenuItem" id="range">
         <property name="visible">True</property>
         <property name="label" translatable="yes">Add a range of pigeons</property>
         <property name="use_underline">True</property>
-        <signal name="activate" handler="on_serie_activate"/>
+        <signal name="activate" handler="on_range_activate"/>
       </widget>
     </child>
   </widget>
