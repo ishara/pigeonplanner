@@ -18,6 +18,7 @@
 
 import urllib
 import datetime
+import os
 import os.path
 
 import gtk
@@ -234,6 +235,7 @@ class ToolsWindow:
             versionfile = open(local, 'r')
             version = versionfile.readline().strip()
             versionfile.close()
+            os.remove(local)
         except IOError:
             version = None
 
