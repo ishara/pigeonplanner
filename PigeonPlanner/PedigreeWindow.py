@@ -66,7 +66,7 @@ class PedigreeWindow:
         self.labelRing.set_text(self.ring + '/' + self.year)
         self.labelName.set_text(self.name)
 
-        dp = DrawPedigree([self.tableSire, self.tableDam], pindex, True)
+        dp = DrawPedigree([self.tableSire, self.tableDam], pindex, True, None, self.main.parser.pigeons)
         dp.draw_pedigree()
 
     def close_clicked(self, widget, event=None):
