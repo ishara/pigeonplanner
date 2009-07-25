@@ -37,6 +37,7 @@ uistring = '''
       <menu action="ViewMenu">
          <menuitem action="Arrows"/>
          <menuitem action="Toolbar"/>
+         <menuitem action="Statusbar"/>
       </menu>
       <menu action="HelpMenu">
          <menuitem action="Home"/>

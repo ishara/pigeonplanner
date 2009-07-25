@@ -25,12 +25,13 @@ import Configuration
 
 
 class ParsedOptions:
-    def __init__(self, column, columntype, columnposition, arrows, toolbar, name, street, code, city, tel):
+    def __init__(self, column, columntype, columnposition, arrows, toolbar, statusbar, name, street, code, city, tel):
         self.column = column
         self.columntype = columntype
         self.columnposition = columnposition
         self.arrows = arrows
         self.toolbar = toolbar
+        self.statusbar = statusbar
         self.name = name
         self.street = street
         self.code = code
@@ -49,6 +50,7 @@ class GetOptions:
                           self.conf.getint('Options', 'columnposition'),
                           self.conf.getboolean('Options', 'arrows'),
                           self.conf.getboolean('Options', 'toolbar'),
+                          self.conf.getboolean('Options', 'statusbar'),
                           self.conf.get('personal', 'name'),
                           self.conf.get('personal', 'street'),
                           self.conf.get('personal', 'code'),
@@ -134,6 +136,7 @@ class OptionsDialog:
 
         self.chkArrows.set_active(self.opt.optionList.arrows)
         self.chkToolbar.set_active(self.opt.optionList.toolbar)
+        self.chkStatusbar.set_active(self.opt.optionList.statusbar)
 
         self.entryName.set_text(self.opt.optionList.name),
         self.entryStreet.set_text(self.opt.optionList.street),
@@ -173,7 +176,8 @@ class OptionsDialog:
                             'columntype' : self.cbColumn.get_active_text(),
                             'columnposition' : self.sbColumn.get_value_as_int(),
                             'arrows' : str(self.chkArrows.get_active()),
-                            'toolbar' : str(self.chkToolbar.get_active())
+                            'toolbar' : str(self.chkToolbar.get_active()),
+                            'statusbar' : str(self.chkStatusbar.get_active())
                            },
                "personal" : {'name' : self.entryName.get_text(),
                              'street' : self.entryStreet.get_text(),
@@ -214,6 +218,19 @@ class OptionsDialog:
 
             self.main.blockMenuCallback = True
             self.main.Toolbar.set_active(False)
+            self.main.blockMenuCallback = False
+
+        if self.chkStatusbar.get_active():
+            self.main.statusbar.show()
+
+            self.main.blockMenuCallback = True
+            self.main.Statusbar.set_active(True)
+            self.main.blockMenuCallback = False
+        else:
+            self.main.statusbar.hide()
+
+            self.main.blockMenuCallback = True
+            self.main.Statusbar.set_active(False)
             self.main.blockMenuCallback = False
 
         self.optionsdialog.destroy()

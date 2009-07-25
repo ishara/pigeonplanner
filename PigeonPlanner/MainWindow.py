@@ -153,6 +153,13 @@ class MainWindow:
             self.Toolbar.set_active(True)
             self.blockMenuCallback = False
 
+        if self.options.optionList.statusbar:
+            self.statusbar.show()
+
+            self.blockMenuCallback = True
+            self.Statusbar.set_active(True)
+            self.blockMenuCallback = False
+
         self.listdata = {self.cbSector: self.database.get_all_sectors(), \
                          self.cbRacepoint: self.database.get_all_racepoints(), \
                          self.cbColour: self.database.get_all_colours(), \
@@ -197,6 +204,16 @@ class MainWindow:
         else:
             self.toolbar.hide()
             self.options.set_option('Options', 'toolbar', 'False')
+
+    def menustatusbar_toggled(self, widget):
+        if self.blockMenuCallback: return
+
+        if widget.get_active():
+            self.statusbar.show()
+            self.options.set_option('Options', 'statusbar', 'True')
+        else:
+            self.statusbar.hide()
+            self.options.set_option('Options', 'statusbar', 'False')
 
     def menuhome_activate(self, widget):
         webbrowser.open(Const.WEBSITE)
@@ -710,9 +727,11 @@ class MainWindow:
         menubar = uimanager.get_widget('/MenuBar')
         arrows = uimanager.get_widget('/MenuBar/ViewMenu/Arrows')
         toolbar = uimanager.get_widget('/MenuBar/ViewMenu/Toolbar')
+        statusbar = uimanager.get_widget('/MenuBar/ViewMenu/Statusbar')
 
         setattr(self, "Arrows", arrows)
         setattr(self, "Toolbar", toolbar)
+        setattr(self, "Statusbar", statusbar)
 
         self.vbox.pack_start(menubar, False, False)
         self.vbox.reorder_child(menubar, 0)
@@ -739,7 +758,9 @@ class MainWindow:
             ("Arrows",  None, _("Navigation arrows"), None,
                     _("Show or hide the navigation arrows"), self.menuarrows_toggled, False),
             ("Toolbar",  None, _("Toolbar"), None,
-                    _("Show or hide the toolbar"), self.menutoolbar_toggled, False)
+                    _("Show or hide the toolbar"), self.menutoolbar_toggled, False),
+            ("Statusbar",  None, _("Statusbar"), None,
+                    _("Show or hide the statusbar"), self.menustatusbar_toggled, False)
            )
 
         action_group = gtk.ActionGroup("MainWindowActions")
