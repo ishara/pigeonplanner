@@ -278,10 +278,10 @@ class MainWindow:
         rangeyear = self.entryRangeYear.get_text()
         rangesex = self.cbRangeSex.get_active_text()
 
-        check1 = check.check_ring_entry(self.main, rangefrom, rangeyear, _('pigeons'))
+        check1 = check.check_ring_entry(self.main, rangefrom, rangeyear)
         if not check1: return
 
-        check2 = check.check_ring_entry(self.main, rangeto, rangeyear, _('pigeons'))
+        check2 = check.check_ring_entry(self.main, rangeto, rangeyear)
         if not check2: return
 
         if not rangefrom.isdigit() or not rangeto.isdigit():
@@ -296,12 +296,14 @@ class MainWindow:
             value += 1
 
         for band in bandList:
-            if self.database.has_pigeon(band):
+            pindex = band + rangeyear
+
+            if self.database.has_pigeon(pindex):
                 overwrite = Widgets.message_dialog('warning', Const.MSG_OVERWRITE_PIGEON, self.main)
                 if not overwrite:
                     continue
 
-            data = (str(band), rangeyear, sex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '','')
+            data = (pindex, band, rangeyear, rangesex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')
             self.database.insert_pigeon(data)
 
         self.parser.get_pigeons()
