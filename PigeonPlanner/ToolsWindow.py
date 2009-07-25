@@ -204,14 +204,31 @@ class ToolsWindow:
 
     # Statistics
     def btnsearchdb_clicked(self, widget):
-        items = {_("Number of pigeons"): self.main.database.get_pigeons(),
-                 _("Number of results"): self.main.database.get_all_results()
+        pigeons = self.main.database.get_pigeons()
+        results = self.main.database.get_all_results()
+
+        cocks = 0
+        hens = 0
+        ybirds = 0
+        for pigeon in pigeons:
+            if pigeon[4] == '0':
+                cocks += 1
+            elif pigeon[4] == '1':
+                hens += 1
+            elif pigeon[4] == '2':
+                ybirds += 1
+
+        items = {_("Number of pigeons"): len(pigeons),
+                 _("Number of cocks"): cocks,
+                 _("Number of hens"): hens,
+                 _("Number of young birds"): ybirds,
+                 _("Number of results"): len(results)
                 }
 
         self.ls_stats.clear()
 
-        for item, value in items.iteritems():
-            self.ls_stats.append([item, len(value)])
+        for item in sorted(items, key=items.__getitem__):
+            self.ls_stats.append([item, items[item]])
 
     # Backup
     def makebackup_clicked(self, widget):
