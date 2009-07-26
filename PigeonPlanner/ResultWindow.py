@@ -207,7 +207,7 @@ class ResultWindow:
                                   self.pigeons[pigeon].year : yearPigeons, \
                                   point : racepoints, \
                                   sector : sectors}
-                    for data, datalist in dataValues.iteritems():
+                    for data, datalist in dataValues.items():
                         self.fill_data(data, datalist)
 
         self.labelResults.set_text(str(numberOfResults))
@@ -218,7 +218,7 @@ class ResultWindow:
                            self.cbYearPigeons : yearPigeons, \
                            self.cbRacepoint : racepoints, \
                            self.cbSector : sectors}
-            for combo, data in comboValues.iteritems():
+            for combo, data in comboValues.items():
                 self.fill_list(combo, data)
 
             self.block_handler = True

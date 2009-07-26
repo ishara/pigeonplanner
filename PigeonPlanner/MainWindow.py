@@ -756,7 +756,7 @@ class MainWindow:
                      "Addresult": uimanager.get_widget('/MenuBar/PigeonMenu/Addresult')
                     }
 
-        for key, value in widgetDic.iteritems():
+        for key, value in widgetDic.items():
             setattr(self, key, value)
 
         Widgets.set_multiple_sensitive({self.Edit: False, self.Remove: False, self.Pedigree: False, self.Addresult: False})

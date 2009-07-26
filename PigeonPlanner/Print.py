@@ -387,7 +387,7 @@ class PrintResults:
         i = 1
         for result in self.results:
             cr.move_to(0, 98 + 6*i)
-            for key, value in result.iteritems():
+            for key, value in result.items():
                 cr.show_text(key)
                 cr.move_to(30, 98 + 6*i)
                 cr.show_text(value[0])

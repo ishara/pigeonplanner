@@ -73,7 +73,7 @@ class DatabaseOperations:
 
         if create_tables:
             conn, cursor = self.db_connect()
-            for table_name, sql in self.SCHEMA.iteritems():
+            for table_name, sql in self.SCHEMA.items():
                 cursor.execute('CREATE TABLE IF NOT EXISTS %s %s' % (table_name, sql))
                 conn.commit()
             conn.close()

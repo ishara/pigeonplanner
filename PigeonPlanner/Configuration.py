@@ -127,10 +127,10 @@ class ConfigurationParser(ConfigParser.ConfigParser):
         '''
 
         self.newFile = _("#Pigeon Planner configuration file")
-        for section, values in valueDic.iteritems():
+        for section, values in valueDic.items():
             self.newFile += "\n\n"
             self.newFile += "[%s]" % section
-            for option, value in valueDic[section].iteritems():
+            for option, value in valueDic[section].items():
                 self.newFile += "\n%s = %s" % (option, value)
 
     def copyNew(self, new=False, default=False):
