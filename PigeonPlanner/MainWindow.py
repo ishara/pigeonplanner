@@ -389,6 +389,7 @@ class MainWindow:
         label = wTree.get_widget('labelPigeon')
         chkKeep = wTree.get_widget('chkKeep')
         chkResults = wTree.get_widget('chkResults')
+        dialog.set_transient_for(self.main)
         label.set_text(ring + ' / ' + year)
         answer = dialog.run()
         if answer == 2:
