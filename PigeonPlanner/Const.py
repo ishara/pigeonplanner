@@ -118,6 +118,10 @@ MSG_REMOVE_ITEM = (_("Removing item '%(item)s' from '%(dataset)s'.\n\nAre you su
                    None,
                    _("Remove data"))
 
+MSG_RESTART_PROGRAM = (_("Restart required"),
+                       _("Please restart the program for the changes to take effect"),
+                       _("Restart required"))
+
 MSG_UPDATE_ERROR = _("Error trying to get information. Are you connected to the internet?")
 MSG_UPDATE_AVAILABLE = _("A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version")
 MSG_NO_UPDATE = _("You already have the latest version installed.")

@@ -16,6 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os
+import sys
+import shutil
+
 import gtk
 import gtk.glade
 
@@ -25,7 +29,8 @@ import Configuration
 
 
 class ParsedOptions:
-    def __init__(self, column, columntype, columnposition, arrows, toolbar, statusbar, name, street, code, city, tel):
+    def __init__(self, theme, column, columntype, columnposition, arrows, toolbar, statusbar, name, street, code, city, tel):
+        self.theme = theme
         self.column = column
         self.columntype = columntype
         self.columnposition = columnposition
@@ -45,7 +50,8 @@ class GetOptions:
 
         self.optionList = []
 
-        p = ParsedOptions(self.conf.getboolean('Options', 'column'),
+        p = ParsedOptions(self.conf.getint('Options', 'theme'),
+                          self.conf.getboolean('Options', 'column'),
                           self.conf.get('Options', 'columntype'),
                           self.conf.getint('Options', 'columnposition'),
                           self.conf.getboolean('Options', 'arrows'),
@@ -115,6 +121,21 @@ class OptionsDialog:
 
         self.create_columntype_combo()
 
+        # Show the theme changer on Windows
+        if sys.platform.startswith("win"):
+            self.hboxThemes.show()
+
+            themes = os.listdir('./share/themes/')
+            themes.sort()
+            for theme in themes:
+                self.cbThemes.append_text(theme)
+
+            number = len(self.cbThemes.get_model())
+            if number > 10 and number <= 30:
+                self.cbThemes.set_wrap_width(2)
+            elif number > 30:
+                self.cbThemes.set_wrap_width(3)
+
         self.set_options()
         if not self.chkColumn.get_active():
             self.aligncolumn.set_sensitive(False)
@@ -140,6 +161,8 @@ class OptionsDialog:
         self.aligntype.add(self.cbColumn)
 
     def set_options(self):
+        self.cbThemes.set_active(self.opt.optionList.theme)
+
         self.chkColumn.set_active(self.opt.optionList.column)
 
         self.cbColumn.set_active(int(self.opt.optionList.columntype))
@@ -182,24 +205,32 @@ class OptionsDialog:
             self.set_options()
 
     def ok_clicked(self, widget):
-        dic = {"Options" : {'column' : str(self.chkColumn.get_active()),
-                            'columntype' : self.cbColumn.get_active_text(),
-                            'columnposition' : self.sbColumn.get_value_as_int(),
-                            'arrows' : str(self.chkArrows.get_active()),
-                            'toolbar' : str(self.chkToolbar.get_active()),
-                            'statusbar' : str(self.chkStatusbar.get_active())
+        dic = {"Options" : {'theme': self.cbThemes.get_active(),
+                            'column': str(self.chkColumn.get_active()),
+                            'columntype': self.cbColumn.get_active_text(),
+                            'columnposition': self.sbColumn.get_value_as_int(),
+                            'arrows': str(self.chkArrows.get_active()),
+                            'toolbar': str(self.chkToolbar.get_active()),
+                            'statusbar': str(self.chkStatusbar.get_active())
                            },
-               "personal" : {'name' : self.entryName.get_text(),
-                             'street' : self.entryStreet.get_text(),
-                             'code' : self.entryCode.get_text(),
-                             'city' : self.entryCity.get_text(),
-                             'tel' : self.entryTel.get_text(),
+               "personal" : {'name': self.entryName.get_text(),
+                             'street': self.entryStreet.get_text(),
+                             'code': self.entryCode.get_text(),
+                             'city': self.entryCity.get_text(),
+                             'tel': self.entryTel.get_text(),
                             }
               }
 
         self.opt.write_options(dic)
 
         self.main.options = GetOptions()
+
+        if self.cbThemes.get_active() != self.opt.optionList.theme:
+            shutil.copy(os.path.join('./share/themes', self.cbThemes.get_active_text(), 'gtk-2.0/gtkrc'),
+                                     './etc/gtk-2.0/')
+
+            Widgets.message_dialog('info', Const.MSG_RESTART_PROGRAM, self.optionsdialog)
+
         if self.treeviewOptsChanged:
             self.main.build_treeview()
             self.main.fill_treeview()

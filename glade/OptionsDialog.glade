@@ -41,6 +41,36 @@
                         <property name="orientation">vertical</property>
                         <property name="spacing">8</property>
                         <child>
+                          <widget class="GtkHBox" id="hboxThemes">
+                            <property name="spacing">20</property>
+                            <child>
+                              <widget class="GtkLabel" id="label13">
+                                <property name="visible">True</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">Change the theme</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkComboBox" id="cbThemes">
+                                <property name="visible">True</property>
+                                <property name="items" translatable="yes"></property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="pack_type">end</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
                           <widget class="GtkVBox" id="vbox3">
                             <property name="visible">True</property>
                             <property name="orientation">vertical</property>
@@ -138,7 +168,7 @@
                             </child>
                           </widget>
                           <packing>
-                            <property name="position">0</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -150,7 +180,7 @@
                             <property name="draw_indicator">True</property>
                           </widget>
                           <packing>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
@@ -162,7 +192,7 @@
                             <property name="draw_indicator">True</property>
                           </widget>
                           <packing>
-                            <property name="position">2</property>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                         <child>
@@ -174,7 +204,7 @@
                             <property name="draw_indicator">True</property>
                           </widget>
                           <packing>
-                            <property name="position">3</property>
+                            <property name="position">5</property>
                           </packing>
                         </child>
                       </widget>
