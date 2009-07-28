@@ -2931,42 +2931,6 @@
       </widget>
     </child>
   </widget>
-  <widget class="GtkMenu" id="filtermenu">
-    <property name="visible">True</property>
-    <child>
-      <widget class="GtkMenuItem" id="young">
-        <property name="visible">True</property>
-        <property name="label" translatable="yes">Young birds</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="on_young_activate"/>
-      </widget>
-    </child>
-    <child>
-      <widget class="GtkMenuItem" id="cock">
-        <property name="visible">True</property>
-        <property name="label" translatable="yes">Cocks</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="on_cock_activate"/>
-      </widget>
-    </child>
-    <child>
-      <widget class="GtkMenuItem" id="hen">
-        <property name="visible">True</property>
-        <property name="label" translatable="yes">Hens</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="on_hen_activate"/>
-      </widget>
-    </child>
-    <child>
-      <widget class="GtkMenuItem" id="all">
-        <property name="visible">True</property>
-        <property name="sensitive">False</property>
-        <property name="label" translatable="yes">All birds</property>
-        <property name="use_underline">True</property>
-        <signal name="activate" handler="on_all_activate"/>
-      </widget>
-    </child>
-  </widget>
   <widget class="GtkFileChooserDialog" id="filedialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Choose an image...</property>
