@@ -1437,11 +1437,8 @@ class MainWindow:
         Set a file filter for supported image files
         '''
 
-        supportedImages = ["png", "jpg", "bmp"]
         fileFilter = gtk.FileFilter()
         fileFilter.set_name(_("Images"))
-        for item in supportedImages:
-            fileFilter.add_mime_type("image/%s" %item)
-            fileFilter.add_pattern("*.%s" %item)
+        filefilter.add_pixbuf_formats()
         self.filedialog.add_filter(fileFilter)
 
