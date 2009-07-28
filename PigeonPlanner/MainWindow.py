@@ -1439,6 +1439,6 @@ class MainWindow:
 
         fileFilter = gtk.FileFilter()
         fileFilter.set_name(_("Images"))
-        filefilter.add_pixbuf_formats()
+        fileFilter.add_pixbuf_formats()
         self.filedialog.add_filter(fileFilter)
 
