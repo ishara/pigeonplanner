@@ -979,7 +979,8 @@ class MainWindow:
         except:
             Widgets.message_dialog('error', Const.MSG_IMAGE_MISSING, self.main)
 
-        dp = DrawPedigree([self.tableSire, self.tableDam], pindex, button=self.goto, pigeons=self.parser.pigeons)
+        dp = DrawPedigree([self.tableSire, self.tableDam], pindex,
+                           button=self.goto, pigeons=self.parser.pigeons)
         dp.draw_pedigree()
 
         self.find_direct_relatives(pindex, sire, dam)
@@ -1028,7 +1029,8 @@ class MainWindow:
                dam == self.parser.pigeons[pigeon].dam and not\
                pigeon == pindex:
 
-                self.lsBrothers.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year])
+                self.lsBrothers.append([pigeon, self.parser.pigeons[pigeon].ring,
+                                        self.parser.pigeons[pigeon].year])
 
         self.lsBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.lsBrothers.set_sort_column_id(2, gtk.SORT_ASCENDING)
@@ -1053,14 +1055,16 @@ class MainWindow:
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
 
-                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year, sire+'/'+yearsire[2:]])
+                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].ring,
+                                                self.parser.pigeons[pigeon].year, sire+'/'+yearsire[2:]])
 
             if dam:
                 if dam == self.parser.pigeons[pigeon].dam\
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
 
-                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year, dam+'/'+yeardam[2:]])
+                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].ring,
+                                                self.parser.pigeons[pigeon].year, dam+'/'+yeardam[2:]])
 
         self.lsHalfBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.lsHalfBrothers.set_sort_column_id(2, gtk.SORT_ASCENDING)
@@ -1080,7 +1084,8 @@ class MainWindow:
             ring = self.parser.pigeons[pindex].ring
             if self.parser.pigeons[pigeon].sire == ring or self.parser.pigeons[pigeon].dam == ring:
 
-                self.lsOffspring.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year])
+                self.lsOffspring.append([pigeon, self.parser.pigeons[pigeon].ring,
+                                         self.parser.pigeons[pigeon].year])
 
         self.lsOffspring.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.lsOffspring.set_sort_column_id(2, gtk.SORT_ASCENDING)
@@ -1116,7 +1121,8 @@ class MainWindow:
 
         Widgets.set_multiple_visible({self.alignUnEdit: False, self.alignEdit: True})
 
-        Widgets.set_multiple_sensitive({self.toolbar: False, self.notebook: False, self.treeview: False, self.vboxButtons: False})
+        Widgets.set_multiple_sensitive({self.toolbar: False, self.notebook: False,
+                                        self.treeview: False, self.vboxButtons: False})
 
     def add_edit_finish(self):
         '''
@@ -1131,7 +1137,8 @@ class MainWindow:
 
         Widgets.set_multiple_visible({self.alignUnEdit: True, self.alignEdit: False})
 
-        Widgets.set_multiple_sensitive({self.toolbar: True, self.notebook: True, self.treeview: True, self.vboxButtons: True})
+        Widgets.set_multiple_sensitive({self.toolbar: True, self.notebook: True,
+                                        self.treeview: True, self.vboxButtons: True})
 
         Widgets.set_multiple_visible({self.btnadd: False, self.save: False})
 
@@ -1394,7 +1401,10 @@ class MainWindow:
 
         for pigeon in self.parser.pigeons:
             if pigeonType == self.parser.pigeons[pigeon].sex:
-                self.lsFind.append([pigeon, self.parser.pigeons[pigeon].ring, self.parser.pigeons[pigeon].year, self.parser.pigeons[pigeon].name])
+                self.lsFind.append([pigeon,
+                                    self.parser.pigeons[pigeon].ring,
+                                    self.parser.pigeons[pigeon].year,
+                                    self.parser.pigeons[pigeon].name])
 
         if len(self.lsFind) > 0:
             self.lsFind.set_sort_column_id(1, gtk.SORT_ASCENDING)
