@@ -701,8 +701,8 @@ class MainWindow:
                      "Filtermenu": uimanager.get_widget('/MenuBar/ViewMenu/FilterMenu'),
                      "MenuEdit": uimanager.get_widget('/MenuBar/PigeonMenu/Edit'),
                      "MenuRemove": uimanager.get_widget('/MenuBar/PigeonMenu/Remove'),
-                     "Pedigree": uimanager.get_widget('/MenuBar/PigeonMenu/Pedigree'),
-                     "Addresult": uimanager.get_widget('/MenuBar/PigeonMenu/Addresult'),
+                     "MenuPedigree": uimanager.get_widget('/MenuBar/PigeonMenu/Pedigree'),
+                     "MenuAddresult": uimanager.get_widget('/MenuBar/PigeonMenu/Addresult'),
                      "ToolEdit": uimanager.get_widget('/Toolbar/Edit'),
                      "ToolRemove": uimanager.get_widget('/Toolbar/Remove')
                     }
@@ -710,7 +710,8 @@ class MainWindow:
         for key, value in widgetDic.items():
             setattr(self, key, value)
 
-        Widgets.set_multiple_sensitive({self.MenuEdit: False, self.MenuRemove: False, self.Pedigree: False, self.Addresult: False})
+        Widgets.set_multiple_sensitive({self.MenuEdit: False, self.MenuRemove: False,
+                                        self.MenuPedigree: False, self.MenuAddresult: False})
 
         self.vbox.pack_start(menubar, False, False)
         self.vbox.reorder_child(menubar, 0)
@@ -905,11 +906,15 @@ class MainWindow:
         model, path = selection.get_selected()
 
         if path:
-            Widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True, self.sbdetail: True,
-                                            self.MenuEdit: True, self.MenuRemove: True, self.Pedigree: True, self.Addresult: True})
+            Widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
+                                            self.sbdetail: True, self.MenuEdit: True,
+                                            self.MenuRemove: True, self.MenuPedigree: True,
+                                            self.MenuAddresult: True, self.addresult: True})
         else:
-            Widgets.set_multiple_sensitive({self.ToolEdit: False, self.ToolRemove: False, self.sbdetail: False,
-                                            self.MenuEdit: False, self.MenuRemove: False, self.Pedigree: False, self.Addresult: False})
+            Widgets.set_multiple_sensitive({self.ToolEdit: False, self.ToolRemove: False,
+                                            self.sbdetail: False, self.MenuEdit: False,
+                                            self.MenuRemove: False, self.MenuPedigree: False,
+                                            self.MenuAddresult: False, self.addresult: False})
             self.empty_entryboxes()
             return
 
