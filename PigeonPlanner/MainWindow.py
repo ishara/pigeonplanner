@@ -1252,7 +1252,9 @@ class MainWindow:
         self.filedialog.show()
 
     def url_hook(self, about, link):
-        pass
+        import sys
+        if sys.platform.startswith("win"):
+            webbrowser.open(link)
 
     def email_hook(self, about, email):
         webbrowser.open("mailto:%s" % email)
