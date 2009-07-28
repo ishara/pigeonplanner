@@ -180,7 +180,6 @@ class OptionsDialog:
             self.opt.write_default()
             self.opt = GetOptions()
             self.set_options()
-#            self.treeviewOptsChanged = True
 
     def ok_clicked(self, widget):
         dic = {"Options" : {'column' : str(self.chkColumn.get_active()),
@@ -209,39 +208,39 @@ class OptionsDialog:
             self.main.alignarrows.show()
 
             self.main.blockMenuCallback = True
-            self.main.Arrows.set_active(True)
+            self.main.MenuArrows.set_active(True)
             self.main.blockMenuCallback = False
         else:
             self.main.alignarrows.hide()
 
             self.main.blockMenuCallback = True
-            self.main.Arrows.set_active(False)
+            self.main.MenuArrows.set_active(False)
             self.main.blockMenuCallback = False
 
         if self.chkToolbar.get_active():
             self.main.toolbar.show()
 
             self.main.blockMenuCallback = True
-            self.main.Toolbar.set_active(True)
+            self.main.MenuToolbar.set_active(True)
             self.main.blockMenuCallback = False
         else:
             self.main.toolbar.hide()
 
             self.main.blockMenuCallback = True
-            self.main.Toolbar.set_active(False)
+            self.main.MenuToolbar.set_active(False)
             self.main.blockMenuCallback = False
 
         if self.chkStatusbar.get_active():
             self.main.statusbar.show()
 
             self.main.blockMenuCallback = True
-            self.main.Statusbar.set_active(True)
+            self.main.MenuStatusbar.set_active(True)
             self.main.blockMenuCallback = False
         else:
             self.main.statusbar.hide()
 
             self.main.blockMenuCallback = True
-            self.main.Statusbar.set_active(False)
+            self.main.MenuStatusbar.set_active(False)
             self.main.blockMenuCallback = False
 
         self.optionsdialog.destroy()

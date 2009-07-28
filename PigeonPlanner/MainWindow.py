@@ -108,7 +108,8 @@ class MainWindow:
         self.database = Database.DatabaseOperations()
         self.parser = PigeonParser.PigeonParser()
         self.parser.get_pigeons()
-        self.pedigree = DrawPedigree([self.tableSire, self.tableDam], button=self.goto, pigeons=self.parser.pigeons)
+        self.pedigree = DrawPedigree([self.tableSire, self.tableDam],
+                                      button=self.goto, pigeons=self.parser.pigeons)
         self.pedigree.draw_pedigree()
         self.build_menubar()
         self.build_treeview()
@@ -123,21 +124,21 @@ class MainWindow:
             self.alignarrows.show()
 
             self.blockMenuCallback = True
-            self.Arrows.set_active(True)
+            self.MenuArrows.set_active(True)
             self.blockMenuCallback = False
 
         if self.options.optionList.toolbar:
             self.toolbar.show()
 
             self.blockMenuCallback = True
-            self.Toolbar.set_active(True)
+            self.MenuToolbar.set_active(True)
             self.blockMenuCallback = False
 
         if self.options.optionList.statusbar:
             self.statusbar.show()
 
             self.blockMenuCallback = True
-            self.Statusbar.set_active(True)
+            self.MenuStatusbar.set_active(True)
             self.blockMenuCallback = False
 
         self.listdata = {self.cbSector: self.database.get_all_sectors(), \
@@ -147,8 +148,6 @@ class MainWindow:
                          self.cbLoft: self.database.get_all_lofts()}
         for key in self.listdata.keys():
             Widgets.fill_list(key, self.listdata[key])
-
-#        self.filterlist.set_menu(self.Filtermenu.get_submenu())  # FIXME
 
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
@@ -691,6 +690,10 @@ class MainWindow:
     ##################
 
     def build_menubar(self):
+        '''
+        Build menu and toolbar from the xml UI string
+        '''
+
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(Widgets.uistring)
         uimanager.insert_action_group(self.create_action_group(), 0)
@@ -700,9 +703,9 @@ class MainWindow:
 
         menubar = uimanager.get_widget('/MenuBar')
         self.toolbar = uimanager.get_widget('/Toolbar')
-        widgetDic = {"Arrows": uimanager.get_widget('/MenuBar/ViewMenu/Arrows'),
-                     "Toolbar": uimanager.get_widget('/MenuBar/ViewMenu/Toolbar'),
-                     "Statusbar": uimanager.get_widget('/MenuBar/ViewMenu/Statusbar'),
+        widgetDic = {"MenuArrows": uimanager.get_widget('/MenuBar/ViewMenu/Arrows'),
+                     "MenuToolbar": uimanager.get_widget('/MenuBar/ViewMenu/Toolbar'),
+                     "MenuStatusbar": uimanager.get_widget('/MenuBar/ViewMenu/Statusbar'),
                      "Filtermenu": uimanager.get_widget('/MenuBar/ViewMenu/FilterMenu'),
                      "MenuEdit": uimanager.get_widget('/MenuBar/PigeonMenu/Edit'),
                      "MenuRemove": uimanager.get_widget('/MenuBar/PigeonMenu/Remove'),
@@ -724,6 +727,10 @@ class MainWindow:
         self.vbox.reorder_child(self.toolbar, 1)
 
     def create_action_group(self):
+        '''
+        Create the action group for our menu and toolbar
+        '''
+
         entries = (
             ("FileMenu", None, _("_File")),
             ("PigeonMenu", None, _("_Pigeon")),
