@@ -92,7 +92,7 @@ class MainWindow:
         self.date_format = '%Y-%m-%d'
         self.imageToAdd = ''
         self.imageDeleted = False
-        self.beforeEditPath = None
+        self.beforeEditPath = 0
         self.blockMenuCallback = False
         self.editResultMode = False
         self.columnValueDic = {'0': _("Colour"), '1': _("Sex")}
@@ -149,6 +149,8 @@ class MainWindow:
         for key in self.listdata.keys():
             Widgets.fill_list(key, self.listdata[key])
 
+        self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 75, 75)
+
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
 
@@ -170,8 +172,7 @@ class MainWindow:
         self.cbLoft.child.set_text('')
         self.cbsex.set_active(0)
 
-        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 75, 75)
-        self.imagePigeon1.set_from_pixbuf(pixbuf)
+        self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
 
         self.add_edit_start('add')
 
@@ -860,43 +861,33 @@ class MainWindow:
 
         for pindex in self.parser.pigeons:
             if not self.parser.pigeons[pindex].show: continue
+
             if pigeonType == self.parser.pigeons[pindex].sex or pigeonType == 'all':
+                row = [pindex,
+                       self.parser.pigeons[pindex].ring,
+                       self.parser.pigeons[pindex].year,
+                       self.parser.pigeons[pindex].name]
+
                 if self.options.optionList.column:
-                    if self.options.optionList.columntype == '1':
-                        extra = self.sexDic[self.parser.pigeons[pindex].sex]
-                    elif self.options.optionList.columntype == '0':
+                    if self.options.optionList.columntype == '0':
                         extra = self.parser.pigeons[pindex].colour
-                    row = [pindex, self.parser.pigeons[pindex].ring, self.parser.pigeons[pindex].year, self.parser.pigeons[pindex].name]
+                    elif self.options.optionList.columntype == '1':
+                        extra = self.sexDic[self.parser.pigeons[pindex].sex]
+
                     row.insert(self.options.optionList.columnposition+1, extra)
-                    self.liststore.append(row)
                 else:
-                    self.liststore.append([pindex, self.parser.pigeons[pindex].ring, self.parser.pigeons[pindex].year, self.parser.pigeons[pindex].name, None])
+                    row.insert(4, None)
+
+                self.liststore.append(row)
 
         if len(self.liststore) > 0:
             self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
             self.liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
-            if path == None:
-                path = 0
             self.treeview.set_cursor(path)
             self.treeview.set_property('has-focus', True)
         else:
-            image = Const.IMAGEDIR + 'icon_logo.png'
-            width = height = 75
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(image, width, height)
-            self.imagePigeon.set_from_pixbuf(pixbuf)
-            self.imagePigeon1.set_from_pixbuf(pixbuf)
-
-    def empty_entryboxes(self):
-        '''
-        Empty all entryboxes
-        '''
-
-        entryWidgets = self.wTree.get_widget_prefix("entry")
-        for widget in entryWidgets:
-            name = widget.get_name()
-            if not name == 'entryDate':
-                attr = getattr(self, name)
-                attr.set_text('')
+            self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
+            self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
 
     def selectionresult_changed(self, selection):
         '''
@@ -980,6 +971,7 @@ class MainWindow:
         else:
             image = Const.IMAGEDIR + 'icon_logo.png'
             width = height = 75
+
         try:
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(image, width, height)
             self.imagePigeon.set_from_pixbuf(pixbuf)
@@ -1242,9 +1234,20 @@ class MainWindow:
             self.database.insert_loft((loft, ))
             Widgets.fill_list(self.cbLoft, self.database.get_all_lofts())
 
+    def empty_entryboxes(self):
+        '''
+        Empty all entryboxes
+        '''
+
+        entryWidgets = self.wTree.get_widget_prefix("entry")
+        for widget in entryWidgets:
+            name = widget.get_name()
+            if not name == 'entryDate':
+                attr = getattr(self, name)
+                attr.set_text('')
+
     def set_default_image(self, widget):
-        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 75, 75)
-        self.imagePigeon1.set_from_pixbuf(pixbuf)
+        self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
         self.imageToAdd = ''
         self.imageDeleted = True
 
