@@ -94,6 +94,7 @@ class MainWindow:
         self.imageDeleted = False
         self.beforeEditPath = None
         self.blockMenuCallback = False
+        self.editResultMode = False
         self.columnValueDic = {'0': _("Colour"), '1': _("Sex")}
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
@@ -594,6 +595,8 @@ class MainWindow:
         Widgets.set_multiple_visible({self.addresult: False, self.editapply: True, self.resultcancel: True})
         self.labeladdresult.set_markup(_("<b>Edit this result</b>"))
 
+        self.editResultMode = True
+
     def editapply_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
         try:
@@ -617,6 +620,8 @@ class MainWindow:
 
         Widgets.set_multiple_visible({self.addresult: True, self.editapply: False, self.resultcancel: False})
         self.labeladdresult.set_markup(_("<b>Add a new result</b>"))
+
+        self.editResultMode = False
 
     def allresults_clicked(self, widget):
         ResultWindow.ResultWindow(self, self.parser.pigeons, self.database)
@@ -906,6 +911,9 @@ class MainWindow:
         model, path = selection.get_selected()
 
         if path:
+            if self.editResultMode:
+                self.resultcancel_clicked(None)
+
             Widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
                                             self.sbdetail: True, self.MenuEdit: True,
                                             self.MenuRemove: True, self.MenuPedigree: True,
