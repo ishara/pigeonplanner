@@ -2460,6 +2460,7 @@
         <child>
           <widget class="GtkHBox" id="hbox19">
             <property name="visible">True</property>
+            <property name="spacing">12</property>
             <child>
               <widget class="GtkImage" id="image1">
                 <property name="visible">True</property>
@@ -2468,19 +2469,22 @@
                 <property name="icon-size">6</property>
               </widget>
               <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
               <widget class="GtkVBox" id="vbox3">
                 <property name="visible">True</property>
+                <property name="spacing">14</property>
                 <child>
                   <widget class="GtkLabel" id="label30">
                     <property name="visible">True</property>
+                    <property name="xpad">30</property>
                     <property name="label" translatable="yes">The following pigeon will be removed:</property>
                   </widget>
                   <packing>
-                    <property name="padding">12</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
@@ -2489,7 +2493,6 @@
                     <property name="visible">True</property>
                   </widget>
                   <packing>
-                    <property name="padding">12</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -2499,7 +2502,6 @@
                     <property name="label" translatable="yes">Are you sure?</property>
                   </widget>
                   <packing>
-                    <property name="padding">12</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
@@ -2535,6 +2537,7 @@
                     </child>
                   </widget>
                   <packing>
+                    <property name="padding">8</property>
                     <property name="position">3</property>
                   </packing>
                 </child>
@@ -2558,6 +2561,7 @@
                 <property name="response_id">1</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="has_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
               </widget>
