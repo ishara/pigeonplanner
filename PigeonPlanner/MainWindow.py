@@ -42,16 +42,9 @@ class MainWindow:
         self.gladefile = Const.GLADEDIR + "MainWindow.glade"
         self.wTree = gtk.glade.XML(self.gladefile)
 
-        signalDic = { 'on_add_clicked'           : self.add_clicked,
-                      'on_remove_clicked'        : self.remove_clicked,
-                      'on_edit_clicked'          : self.edit_clicked,
-                      'on_save_clicked'          : self.save_clicked,
+        signalDic = { 'on_save_clicked'          : self.save_clicked,
                       'on_cancel_clicked'        : self.cancel_clicked,
                       'on_btnadd_clicked'        : self.btnadd_clicked,
-                      'on_options_clicked'       : self.options_clicked,
-                      'on_tools_clicked'         : self.tools_clicked,
-                      'on_help_clicked'          : self.help_clicked,
-                      'on_about_clicked'         : self.about_clicked,
                       'on_sbdetail_clicked'      : self.sbdetail_clicked,
                       'on_goto_clicked'          : self.goto_clicked,
                       'on_addresult_clicked'     : self.addresult_clicked,
@@ -60,15 +53,8 @@ class MainWindow:
                       'on_editapply_clicked'     : self.editapply_clicked,
                       'on_resultcancel_clicked'  : self.resultcancel_clicked,
                       'on_allresults_clicked'    : self.allresults_clicked,
-                      'on_filterlist_clicked'    : self.filterlist_clicked,
                       'on_fcopen_clicked'        : self.fcopen_clicked,
                       'on_fccancel_clicked'      : self.fccancel_clicked,
-                      'on_young_activate'        : self.young_activate,
-                      'on_cock_activate'         : self.cock_activate,
-                      'on_hen_activate'          : self.hen_activate,
-                      'on_all_activate'          : self.all_activate,
-                      'on_single_activate'       : self.add_clicked,
-                      'on_range_activate'        : self.range_activate,
                       'on_rangeadd_clicked'      : self.rangeadd_clicked,
                       'on_rangecancel_clicked'   : self.rangecancel_clicked,
                       'on_eventbox_press'        : self.eventbox_press,
@@ -90,19 +76,11 @@ class MainWindow:
                       'on_button_down_clicked'   : self.button_down_clicked,
                       'on_button_bottom_clicked' : self.button_bottom_clicked,
                       'on_spinPlaced_changed'    : self.spinPlaced_changed,
-                      'on_menuclose_activate'    : self.menuclose_activate,
-                      'on_menupref_activate'     : self.menupref_activate,
-                      'on_menuarrows_toggled'    : self.menuarrows_toggled,
-                      'on_menutoolbar_toggled'   : self.menutoolbar_toggled,
-                      'on_menuhome_activate'     : self.menuhome_activate,
-                      'on_menuforum_activate'    : self.menuforum_activate,
-                      'on_menuabout_activate'    : self.menuabout_activate,
                       'on_rangedialog_delete'    : self.dialog_delete,
                       'on_finddialog_delete'     : self.dialog_delete,
                       'on_removedialog_delete'   : self.dialog_delete,
                       'on_filedialog_delete'     : self.dialog_delete,
-                      'on_main_destroy'          : self.quit_program,
-                      'on_quit_clicked'          : self.quit_program }
+                      'on_main_destroy'          : self.quit_program}
         self.wTree.signal_autoconnect(signalDic)
 
         for widget in self.wTree.get_widget_prefix(''):
@@ -169,6 +147,8 @@ class MainWindow:
         for key in self.listdata.keys():
             Widgets.fill_list(key, self.listdata[key])
 
+#        self.filterlist.set_menu(self.Filtermenu.get_submenu())  # FIXME
+
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
 
@@ -184,22 +164,97 @@ class MainWindow:
         self.quit_program()
 
     def menuadd_activate(self, widget):
-        self.add_clicked(None)
+        self.empty_entryboxes()
+        self.cbColour.child.set_text('')
+        self.cbStrain.child.set_text('')
+        self.cbLoft.child.set_text('')
+        self.cbsex.set_active(0)
+
+        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 75, 75)
+        self.imagePigeon1.set_from_pixbuf(pixbuf)
+
+        self.add_edit_start('add')
 
     def menuaddrange_activate(self, widget):
-        self.range_activate(None)
+        self.entryRangeFrom.set_text('')
+        self.entryRangeTo.set_text('')
+        self.entryRangeYear.set_text('')
+        self.cbRangeSex.set_active(2)
+        self.rangedialog.show()
 
     def menuedit_activate(self, widget):
-        self.edit_clicked(None)
+        self.entryRing1.set_text(self.entryRing.get_text())
+        self.entryYear1.set_text(self.entryYear.get_text())
+        self.entryName1.set_text(self.entryName.get_text())
+        self.extra11.set_text(self.extra1.get_text())
+        self.extra21.set_text(self.extra2.get_text())
+        self.extra31.set_text(self.extra3.get_text())
+        self.extra41.set_text(self.extra4.get_text())
+        self.extra51.set_text(self.extra5.get_text())
+        self.extra61.set_text(self.extra6.get_text())
+        self.cbColour.child.set_text(self.entryColour.get_text())
+        self.cbStrain.child.set_text(self.entryStrain.get_text())
+        self.cbLoft.child.set_text(self.entryLoft.get_text())
+        self.entrySireEdit.set_text(self.entrySire.get_text())
+        self.entryYearSireEdit.set_text(self.entryYearSire.get_text())
+        self.entryDamEdit.set_text(self.entryDam.get_text())
+        self.entryYearDamEdit.set_text(self.entryYearDam.get_text())
+
+        self.cbsex.set_active(int(self.entrySexKey.get_text()))
+
+        self.add_edit_start('edit')
 
     def menuremove_activate(self, widget):
-        self.remove_clicked(None)
+        pindex, ring, year = self.get_main_ring()
+
+        model, tIter = self.selection.get_selected()
+        path, focus = self.treeview.get_cursor()
+
+        wTree = gtk.glade.XML(self.gladefile, 'removedialog')
+        dialog = wTree.get_widget('removedialog')
+        label = wTree.get_widget('labelPigeon')
+        chkKeep = wTree.get_widget('chkKeep')
+        chkResults = wTree.get_widget('chkResults')
+        dialog.set_transient_for(self.main)
+        label.set_text(ring + ' / ' + year)
+        answer = dialog.run()
+        if answer == 2:
+            if chkKeep.get_active():
+                self.database.show_pigeon(pindex, 0)
+            else:
+                self.database.delete_pigeon(pindex)
+                self.parser.get_pigeons()
+
+            if not chkResults.get_active():
+                self.database.delete_result_from_band(pindex)
+
+            self.liststore.remove(tIter)
+
+        dialog.destroy()
+
+        if len(self.liststore) > 0:
+            self.treeview.set_cursor(path)
 
     def menupedigree_activate(self, widget):
         self.sbdetail_clicked(None)
 
     def menuaddresult_activate(self, widget):
         self.notebook.set_current_page(2)
+
+    def menufilter_action(self, action, widget):
+        value = widget.get_current_value()
+
+        if value == 0:
+            self.fill_treeview()
+        elif value == 1:
+            self.fill_treeview('0')
+        elif value == 2:
+            self.fill_treeview('1')
+        elif value == 3:
+            self.fill_treeview('2')
+
+    def menutools_activate(self, widget):
+        ToolsWindow.ToolsWindow(self)
 
     def menupref_activate(self, widget):
         Options.OptionsDialog(self)
@@ -243,35 +298,7 @@ class MainWindow:
     def menuabout_activate(self, widget):
         Widgets.about_dialog(self.main)
 
-    # Filter callbacks
-    def filterlist_clicked(self, widget):
-        pass
-        #TODO: Show menu
-
-    def young_activate(self, widget):
-        self.fill_treeview('2')
-        self.set_menuitem_sensitive(widget)
-
-    def cock_activate(self, widget):
-        self.fill_treeview('0')
-        self.set_menuitem_sensitive(widget)
-
-    def hen_activate(self, widget):
-        self.fill_treeview('1')
-        self.set_menuitem_sensitive(widget)
-
-    def all_activate(self, widget):
-        self.fill_treeview()
-        self.set_menuitem_sensitive(widget)
-
     # range callbacks
-    def range_activate(self, widget):
-        self.entryRangeFrom.set_text('')
-        self.entryRangeTo.set_text('')
-        self.entryRangeYear.set_text('')
-        self.cbRangeSex.set_active(2)
-        self.rangedialog.show()
-
     def rangeadd_clicked(self, widget):
         rangefrom = self.entryRangeFrom.get_text()
         rangeto = self.entryRangeTo.get_text()
@@ -339,8 +366,8 @@ class MainWindow:
     def treeview_press(self, widget, event):
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.edit_clicked, None),
-                (gtk.STOCK_REMOVE, self.remove_clicked, None)]
+                (gtk.STOCK_EDIT, self.menuedit_activate, None),
+                (gtk.STOCK_REMOVE, self.menuremove_activate, None)]
 
             Widgets.popup_menu(event, entries)
 
@@ -377,79 +404,13 @@ class MainWindow:
             path = (len(self.liststore)-1,)
             self.treeview.set_cursor(path)
 
-    # Remove callback
-    def remove_clicked(self, widget):
-        pindex, ring, year = self.get_main_ring()
-
-        model, tIter = self.selection.get_selected()
-        path, focus = self.treeview.get_cursor()
-
-        wTree = gtk.glade.XML(self.gladefile, 'removedialog')
-        dialog = wTree.get_widget('removedialog')
-        label = wTree.get_widget('labelPigeon')
-        chkKeep = wTree.get_widget('chkKeep')
-        chkResults = wTree.get_widget('chkResults')
-        dialog.set_transient_for(self.main)
-        label.set_text(ring + ' / ' + year)
-        answer = dialog.run()
-        if answer == 2:
-            if chkKeep.get_active():
-                self.database.show_pigeon(pindex, 0)
-            else:
-                self.database.delete_pigeon(pindex)
-                self.parser.get_pigeons()
-
-            if not chkResults.get_active():
-                self.database.delete_result_from_band(pindex)
-
-            self.liststore.remove(tIter)
-
-        dialog.destroy()
-
-        if len(self.liststore) > 0:
-            self.treeview.set_cursor(path)
-
     # Add/Edit callbacks
-    def edit_clicked(self, widget):
-        self.entryRing1.set_text(self.entryRing.get_text())
-        self.entryYear1.set_text(self.entryYear.get_text())
-        self.entryName1.set_text(self.entryName.get_text())
-        self.extra11.set_text(self.extra1.get_text())
-        self.extra21.set_text(self.extra2.get_text())
-        self.extra31.set_text(self.extra3.get_text())
-        self.extra41.set_text(self.extra4.get_text())
-        self.extra51.set_text(self.extra5.get_text())
-        self.extra61.set_text(self.extra6.get_text())
-        self.cbColour.child.set_text(self.entryColour.get_text())
-        self.cbStrain.child.set_text(self.entryStrain.get_text())
-        self.cbLoft.child.set_text(self.entryLoft.get_text())
-        self.entrySireEdit.set_text(self.entrySire.get_text())
-        self.entryYearSireEdit.set_text(self.entryYearSire.get_text())
-        self.entryDamEdit.set_text(self.entryDam.get_text())
-        self.entryYearDamEdit.set_text(self.entryYearDam.get_text())
-
-        self.cbsex.set_active(int(self.entrySexKey.get_text()))
-
-        self.add_edit_start('edit')
-
     def save_clicked(self, widget):
         if not check.check_entrys(self.entrysToCheck): return
 
         self.write_new_data()
 
         self.add_edit_finish()
-
-    def add_clicked(self, widget):
-        self.empty_entryboxes()
-        self.cbColour.child.set_text('')
-        self.cbStrain.child.set_text('')
-        self.cbLoft.child.set_text('')
-        self.cbsex.set_active(0)
-
-        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 75, 75)
-        self.imagePigeon1.set_from_pixbuf(pixbuf)
-
-        self.add_edit_start('add')
 
     def btnadd_clicked(self, widget):
         if not check.check_entrys(self.entrysToCheck): return
@@ -494,20 +455,6 @@ class MainWindow:
     def fccancel_clicked(self, widget):
         self.filedialog.hide()
 
-    # Other toolbar callbacks
-    def options_clicked(self, widget):
-        Options.OptionsDialog(self)
-
-    def tools_clicked(self, widget):
-        ToolsWindow.ToolsWindow(self)
-
-    def help_clicked(self, widget):
-        pass
-        #TODO: Open a help screen.
-
-    def about_clicked(self, widget):
-        Widgets.about_dialog(self.main)
-
     # Pedigree callbacks
     def sbdetail_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
@@ -551,37 +498,37 @@ class MainWindow:
 
     # Relatives callbacks
     def tvBrothers_press(self, widget, event):
-        ring = self.get_treeview_ring(self.selBrothers)
-        if not ring: return
+        pindex = self.get_treeview_pindex(self.selBrothers)
+        if not pindex: return
 
         if event.button == 3:
-            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
+            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)]
 
             Widgets.popup_menu(event, entries)
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            self.search_pigeon(None, ring)
+            self.search_pigeon(None, pindex)
 
     def tvHalfBrothers_press(self, widget, event):
-        ring = self.get_treeview_ring(self.selHalfBrothers)
-        if not ring: return
+        pindex = self.get_treeview_pindex(self.selHalfBrothers)
+        if not pindex: return
 
         if event.button == 3:
-            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
+            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)]
 
             Widgets.popup_menu(event, entries)
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            self.search_pigeon(None, ring)
+            self.search_pigeon(None, pindex)
 
     def tvOffspring_press(self, widget, event):
-        ring = self.get_treeview_ring(self.selOffspring)
-        if not ring: return
+        pindex = self.get_treeview_pindex(self.selOffspring)
+        if not pindex: return
 
         if event.button == 3:
-            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, ring)]
+            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)]
 
             Widgets.popup_menu(event, entries)
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            self.search_pigeon(None, ring)
+            self.search_pigeon(None, pindex)
 
     # Result callbacks
     def tvResults_press(self, widget, event):
@@ -747,22 +694,28 @@ class MainWindow:
         uimanager.connect('connect-proxy', self.uimanager_connect_proxy)
 
         menubar = uimanager.get_widget('/MenuBar')
+        self.toolbar = uimanager.get_widget('/Toolbar')
         widgetDic = {"Arrows": uimanager.get_widget('/MenuBar/ViewMenu/Arrows'),
                      "Toolbar": uimanager.get_widget('/MenuBar/ViewMenu/Toolbar'),
                      "Statusbar": uimanager.get_widget('/MenuBar/ViewMenu/Statusbar'),
-                     "Edit": uimanager.get_widget('/MenuBar/PigeonMenu/Edit'),
-                     "Remove": uimanager.get_widget('/MenuBar/PigeonMenu/Remove'),
+                     "Filtermenu": uimanager.get_widget('/MenuBar/ViewMenu/FilterMenu'),
+                     "MenuEdit": uimanager.get_widget('/MenuBar/PigeonMenu/Edit'),
+                     "MenuRemove": uimanager.get_widget('/MenuBar/PigeonMenu/Remove'),
                      "Pedigree": uimanager.get_widget('/MenuBar/PigeonMenu/Pedigree'),
-                     "Addresult": uimanager.get_widget('/MenuBar/PigeonMenu/Addresult')
+                     "Addresult": uimanager.get_widget('/MenuBar/PigeonMenu/Addresult'),
+                     "ToolEdit": uimanager.get_widget('/Toolbar/Edit'),
+                     "ToolRemove": uimanager.get_widget('/Toolbar/Remove')
                     }
 
         for key, value in widgetDic.items():
             setattr(self, key, value)
 
-        Widgets.set_multiple_sensitive({self.Edit: False, self.Remove: False, self.Pedigree: False, self.Addresult: False})
+        Widgets.set_multiple_sensitive({self.MenuEdit: False, self.MenuRemove: False, self.Pedigree: False, self.Addresult: False})
 
         self.vbox.pack_start(menubar, False, False)
         self.vbox.reorder_child(menubar, 0)
+        self.vbox.pack_start(self.toolbar, False, False)
+        self.vbox.reorder_child(self.toolbar, 1)
 
     def create_action_group(self):
         entries = (
@@ -770,6 +723,7 @@ class MainWindow:
             ("PigeonMenu", None, _("_Pigeon")),
             ("EditMenu", None, _("_Edit")),
             ("ViewMenu", None, _("_View")),
+            ("FilterMenu", None, _("_Filter pigeons")),
             ("HelpMenu", None, _("_Help")),
             ("Quit", gtk.STOCK_QUIT, _("_Quit"), "<control>Q",
                     _("Quit the program"), self.quit_program),
@@ -785,6 +739,8 @@ class MainWindow:
                     _("View the detailed pedigree of this pigeon"), self.menupedigree_activate),
             ("Addresult", gtk.STOCK_ADD, _("Add resul_t"), None,
                     _("Add a new result for this pigeon"), self.menuaddresult_activate),
+            ("Tools", gtk.STOCK_EXECUTE, _("_Tools"), "<control>T",
+                    _("Various tools"), self.menutools_activate),
             ("Preferences", gtk.STOCK_PREFERENCES, _("_Preferences"), "<control>P",
                     _("Configure the application"), self.menupref_activate),
             ("Home", gtk.STOCK_HOME, _("_Website"), None,
@@ -804,9 +760,21 @@ class MainWindow:
                     _("Show or hide the statusbar"), self.menustatusbar_toggled, False)
            )
 
+        filter_entries = (
+            ( "All", None, _("_All"), None,
+                    _("Show all pigeons"), 0),
+            ( "Cocks", None, _("_Cocks"), None,
+                    _("Only show cocks"), 1),
+            ( "Hens", None, _("_Hens"), None,
+                    _("Only show hens"), 2),
+            ( "Young", None, _("_Young birds"), None,
+                    _("Only show young birds"), 3)
+           )
+
         action_group = gtk.ActionGroup("MainWindowActions")
         action_group.add_actions(entries)
         action_group.add_toggle_actions(toggle_entries)
+        action_group.add_radio_actions(filter_entries, 0, self.menufilter_action)
 
         return action_group
 
@@ -937,11 +905,11 @@ class MainWindow:
         model, path = selection.get_selected()
 
         if path:
-            Widgets.set_multiple_sensitive({self.edit: True, self.remove: True, self.sbdetail: True,
-                                            self.Edit: True, self.Remove: True, self.Pedigree: True, self.Addresult: True})
+            Widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True, self.sbdetail: True,
+                                            self.MenuEdit: True, self.MenuRemove: True, self.Pedigree: True, self.Addresult: True})
         else:
-            Widgets.set_multiple_sensitive({self.edit: False, self.remove: False, self.sbdetail: False,
-                                            self.Edit: False, self.Remove: False, self.Pedigree: False, self.Addresult: False})
+            Widgets.set_multiple_sensitive({self.ToolEdit: False, self.ToolRemove: False, self.sbdetail: False,
+                                            self.MenuEdit: False, self.MenuRemove: False, self.Pedigree: False, self.Addresult: False})
             self.empty_entryboxes()
             return
 
@@ -1326,18 +1294,18 @@ class MainWindow:
 
         return False
 
-    def get_treeview_ring(self, selection):
+    def get_treeview_pindex(self, selection):
         '''
-        Return the ring of the selected row
+        Return the pindex of the selected row
 
         @param selection: the selection of the treeview
         '''
 
         model, path = selection.get_selected()
         if not path: return
-        ring = model[path][0]
+        pindex = model[path][0]
 
-        return ring
+        return pindex
 
     def get_resultdata(self):
         '''

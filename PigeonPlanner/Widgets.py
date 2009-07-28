@@ -40,9 +40,17 @@ uistring = '''
          <menuitem action="Addresult"/>
       </menu>
       <menu action="EditMenu">
+         <menuitem action="Tools"/>
          <menuitem action="Preferences"/>
       </menu>
       <menu action="ViewMenu">
+         <menu action="FilterMenu">
+            <menuitem action="All"/>
+            <menuitem action="Cocks"/>
+            <menuitem action="Hens"/>
+            <menuitem action="Young"/>
+         </menu>
+         <separator/>
          <menuitem action="Arrows"/>
          <menuitem action="Toolbar"/>
          <menuitem action="Statusbar"/>
@@ -54,6 +62,18 @@ uistring = '''
          <menuitem action="About"/>
       </menu>
    </menubar>
+
+   <toolbar name="Toolbar">
+      <toolitem action="Add"/>
+      <toolitem action="Edit"/>
+      <toolitem action="Remove"/>
+      <separator/>
+      <toolitem action="Preferences"/>
+      <toolitem action="Tools"/>
+      <separator/>
+      <toolitem action="About"/>
+      <toolitem action="Quit"/>
+   </toolbar>
 </ui>
 '''
 
