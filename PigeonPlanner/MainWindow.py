@@ -492,7 +492,7 @@ class MainWindow:
             if not answer:
                 return
             else:
-                self.add_clicked(None)
+                self.menuadd_activate(None)
                 self.entryRing1.set_text(ring)
                 self.entryYear1.set_text(year)
                 self.cbsex.set_active(int(sex))
