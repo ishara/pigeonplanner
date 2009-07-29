@@ -122,7 +122,8 @@ class OptionsDialog:
         self.create_columntype_combo()
 
         # Show the theme changer on Windows
-        if sys.platform.startswith("win"):
+        self.win32 = sys.platform.startswith("win")
+        if self.win32:
             self.hboxThemes.show()
 
             themes = os.listdir('./share/themes/')
@@ -225,7 +226,7 @@ class OptionsDialog:
 
         self.main.options = GetOptions()
 
-        if self.cbThemes.get_active() != self.opt.optionList.theme:
+        if self.win32 and self.cbThemes.get_active() != self.opt.optionList.theme:
             shutil.copy(os.path.join('./share/themes', self.cbThemes.get_active_text(), 'gtk-2.0/gtkrc'),
                                      './etc/gtk-2.0/')
 
