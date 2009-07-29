@@ -114,6 +114,7 @@ class OptionsDialog:
             setattr(self, name, w)
 
         self.main = main
+        self.personal = personal
 
         self.optionsdialog.set_transient_for(self.main.main)
 
@@ -143,7 +144,7 @@ class OptionsDialog:
 
         self.treeviewOptsChanged = False
 
-        if personal:
+        if self.personal:
             self.notebook.get_nth_page(0).set_sensitive(0)
             self.notebook.set_current_page(1)
 
@@ -276,4 +277,7 @@ class OptionsDialog:
             self.main.blockMenuCallback = False
 
         self.optionsdialog.destroy()
+
+        if self.personal:
+            self.main.sbdetail_clicked(None)
 
