@@ -1,7 +1,9 @@
 
 name = "Pigeon Planner"
 
-version = "0.3.1"
+versionbase = "0.4"
+
+version = "0.4.bzr136"
 
 copyright = "(C)opyright 2009 Timo Vanwynsberghe"
 
@@ -23,3 +25,4 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>"""
+

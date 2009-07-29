@@ -154,7 +154,7 @@ class PedigreeBox(gtk.DrawingArea):
         s = self.textlayout.get_pixel_size()
         xmin = s[0] + 12
         ymin = s[1] + 11
-        self.set_size_request(max(xmin, 120), max(ymin, 25))
+        self.set_size_request(max(xmin, 150), max(ymin, 25))
         
     def expose(self, widget, event):
         alloc = self.get_allocation()
