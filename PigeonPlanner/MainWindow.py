@@ -16,8 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os.path
 import datetime
-import gobject
 import webbrowser
 
 import gtk
@@ -53,6 +53,7 @@ class MainWindow:
                       'on_editapply_clicked'     : self.editapply_clicked,
                       'on_resultcancel_clicked'  : self.resultcancel_clicked,
                       'on_allresults_clicked'    : self.allresults_clicked,
+                      'on_filedialog_selection'  : self.filedialog_selection,
                       'on_fcopen_clicked'        : self.fcopen_clicked,
                       'on_fccancel_clicked'      : self.fccancel_clicked,
                       'on_rangeadd_clicked'      : self.rangeadd_clicked,
@@ -1259,7 +1260,45 @@ class MainWindow:
         self.imageDeleted = True
 
     def open_filedialog(self, widget=None):
+        '''
+        Set a preview image and show the Filechooser dialog
+        '''
+
+        self.file_previewbox = gtk.VBox()
+        self.file_previewbox.set_size_request(200, 200)
+        self.file_preview = gtk.Image()
+        self.file_previewlabel = gtk.Label()
+        self.file_previewbox.pack_start(self.file_preview)
+        self.file_previewbox.pack_start(self.file_previewlabel)
+        self.filedialog.set_preview_widget(self.file_previewbox)
+        self.file_previewbox.show_all()
+
         self.filedialog.show()
+
+    def filedialog_selection(self, widget):
+        '''
+        Update the image preview in the filechooser dialog
+        '''
+
+        preview_file = self.filedialog.get_preview_filename()
+        if preview_file and os.path.isfile(preview_file):
+            self.filedialog.set_preview_widget_active(True)
+            pixbuf = gtk.gdk.pixbuf_new_from_file(preview_file)
+
+            new_width = width = pixbuf.get_width()
+            new_height = height = pixbuf.get_height()
+            max_width = 200
+            max_height = 200
+            if new_width > max_width or new_height > max_height:
+                new_width = max_width
+                new_height = max_width*height/width
+                if new_height > max_height:
+                    new_height = max_height
+                    new_width = max_height*width/height
+            pixbuf = pixbuf.scale_simple(new_width, new_height, gtk.gdk.INTERP_TILES)
+            self.file_preview.set_from_pixbuf(pixbuf)
+        else:
+            self.filedialog.set_preview_widget_active(False)
 
     def url_hook(self, about, link):
         import sys
