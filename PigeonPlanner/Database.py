@@ -46,7 +46,7 @@ class DatabaseOperations:
                ' extra5 TEXT,'
                ' extra6 TEXT)',
     'Results': '(Resultkey INTEGER PRIMARY KEY,'
-               ' pigeon TEXT,'
+               ' pindex TEXT,'
                ' date TEXT,'
                ' point TEXT,'
                ' place INTEGER,'
