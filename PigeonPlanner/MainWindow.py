@@ -108,6 +108,7 @@ class MainWindow:
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
 
+        self.statusmsg = Widgets.Statusbar(self.statusbar)
         self.options = Options.GetOptions()
         self.database = Database.DatabaseOperations()
         self.parser = PigeonParser.PigeonParser()
@@ -812,10 +813,10 @@ class MainWindow:
             widget.connect('deselect', self.menu_item_deselect)
 
     def menu_item_select(self, menuitem, tooltip):
-        self.statusbar.push(-1, tooltip)
+        self.statusmsg.push_message(tooltip)
 
     def menu_item_deselect(self, menuitem):
-        self.statusbar.pop(-1)
+        self.statusmsg.pop_message()
 
     def build_treeview(self):
         '''

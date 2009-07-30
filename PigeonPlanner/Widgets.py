@@ -256,6 +256,17 @@ def popup_menu(event, entries):
     menu.popup(None, None, None, 0, event.time)
 
 
+class Statusbar:
+    def __init__(self, statusbar):
+        self.statusbar = statusbar
+
+    def push_message(self, message):
+        self.statusbar.push(-1, message)
+
+    def pop_message(self):
+        self.statusbar.pop(-1)
+
+
 class ImageWindow(gtk.Window):
     def __init__(self, imagepath, main):
         gtk.Window.__init__(self)
