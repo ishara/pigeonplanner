@@ -46,6 +46,8 @@ class MainWindow:
 
         signalDic = { 'on_save_clicked'          : self.save_clicked,
                       'on_cancel_clicked'        : self.cancel_clicked,
+                      'on_widget_enter'          : self.widget_enter,
+                      'on_widget_leave'          : self.widget_leave,
                       'on_btnadd_clicked'        : self.btnadd_clicked,
                       'on_sbdetail_clicked'      : self.sbdetail_clicked,
                       'on_goto_clicked'          : self.goto_clicked,
@@ -154,6 +156,20 @@ class MainWindow:
         for key in self.listdata.keys():
             Widgets.fill_list(key, self.listdata[key])
 
+        self.statusmsgs = { 'entryRing1': (self.statusmsg.get_id("band"),
+                                            _("Enter the bandnumber of the pigeon")),
+                            'entryYear1': (self.statusmsg.get_id("year"),
+                                            _("Enter the year of the pigeon")),
+                            'entryName1': (self.statusmsg.get_id("name"),
+                                            _("Enter a name for the pigeon")),
+                            'eventimage': (self.statusmsg.get_id("img"),
+                                            _("Click here to add an image")),
+                            'findSire': (self.statusmsg.get_id("sire"),
+                                            _("Search through the list of cocks")),
+                            'findDam': (self.statusmsg.get_id("dam"),
+                                            _("Search through the list of hens"))
+                          }
+
         if self.options.optionList.update:
             gobject.idle_add(self.search_updates)
 
@@ -174,6 +190,16 @@ class MainWindow:
             download = Widgets.message_dialog('question', Const.MSG_UPDATE_NOW, self.main)
             if download:
                 webbrowser.open(Const.DOWNLOADURL)
+
+    def widget_enter(self, widget, event):
+        for con_id in self.statusmsgs.values():
+            self.statusmsg.pop_message(con_id[0])
+
+        self.statusmsg.push_message(self.statusmsgs[widget.get_name()][0],
+                                    self.statusmsgs[widget.get_name()][1])
+
+    def widget_leave(self, widget, event):
+        self.statusmsg.pop_message(self.statusmsgs[widget.get_name()][0])
 
     # Menu callbacks
     def menuclose_activate(self, widget):
@@ -813,10 +839,10 @@ class MainWindow:
             widget.connect('deselect', self.menu_item_deselect)
 
     def menu_item_select(self, menuitem, tooltip):
-        self.statusmsg.push_message(tooltip)
+        self.statusmsg.push_message(-1, tooltip)
 
     def menu_item_deselect(self, menuitem):
-        self.statusmsg.pop_message()
+        self.statusmsg.pop_message(-1)
 
     def build_treeview(self):
         '''

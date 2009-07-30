@@ -799,8 +799,11 @@
                                               <widget class="GtkEntry" id="entryRing1">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
+                                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                                                 <property name="width_chars">15</property>
                                                 <property name="xalign">0.5</property>
+                                                <signal name="leave_notify_event" handler="on_widget_leave"/>
+                                                <signal name="enter_notify_event" handler="on_widget_enter"/>
                                               </widget>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -822,8 +825,11 @@
                                               <widget class="GtkEntry" id="entryYear1">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
+                                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                                                 <property name="max_length">4</property>
                                                 <property name="width_chars">4</property>
+                                                <signal name="leave_notify_event" handler="on_widget_leave"/>
+                                                <signal name="enter_notify_event" handler="on_widget_enter"/>
                                               </widget>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -855,14 +861,15 @@
                                             <child>
                                               <widget class="GtkEventBox" id="eventimage">
                                                 <property name="visible">True</property>
-                                                <property name="events">GDK_BUTTON_RELEASE_MASK | GDK_STRUCTURE_MASK</property>
+                                                <property name="events">GDK_BUTTON_RELEASE_MASK | GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                                                 <signal name="button_press_event" handler="on_eventimage_press"/>
+                                                <signal name="leave_notify_event" handler="on_widget_leave"/>
+                                                <signal name="enter_notify_event" handler="on_widget_enter"/>
                                                 <child>
                                                   <widget class="GtkImage" id="imagePigeon1">
                                                     <property name="width_request">200</property>
                                                     <property name="height_request">200</property>
                                                     <property name="visible">True</property>
-                                                    <property name="tooltip" translatable="yes">Click here to add an image</property>
                                                     <property name="stock">gtk-missing-image</property>
                                                   </widget>
                                                 </child>
@@ -929,10 +936,12 @@
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
-                                                <property name="tooltip" translatable="yes">Search through the list of cocks</property>
+                                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                                                 <property name="relief">none</property>
                                                 <property name="focus_on_click">False</property>
                                                 <signal name="clicked" handler="on_findsire_clicked"/>
+                                                <signal name="leave_notify_event" handler="on_widget_leave"/>
+                                                <signal name="enter_notify_event" handler="on_widget_enter"/>
                                                 <child>
                                                   <widget class="GtkImage" id="image8">
                                                     <property name="visible">True</property>
@@ -1003,10 +1012,12 @@
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
-                                                <property name="tooltip" translatable="yes">Search through the list of hens</property>
+                                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                                                 <property name="relief">none</property>
                                                 <property name="focus_on_click">False</property>
                                                 <signal name="clicked" handler="on_finddam_clicked"/>
+                                                <signal name="leave_notify_event" handler="on_widget_leave"/>
+                                                <signal name="enter_notify_event" handler="on_widget_enter"/>
                                                 <child>
                                                   <widget class="GtkImage" id="image9">
                                                     <property name="visible">True</property>
@@ -1045,8 +1056,9 @@
                                             <property name="width_request">190</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="tooltip" translatable="yes">Enter a name for this pigeon...</property>
                                             <property name="xalign">0.5</property>
+                                            <signal name="leave_notify_event" handler="on_widget_leave"/>
+                                            <signal name="enter_notify_event" handler="on_widget_enter"/>
                                           </widget>
                                           <packing>
                                             <property name="left_attach">2</property>

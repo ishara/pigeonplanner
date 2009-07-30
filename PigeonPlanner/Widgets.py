@@ -260,11 +260,14 @@ class Statusbar:
     def __init__(self, statusbar):
         self.statusbar = statusbar
 
-    def push_message(self, message):
-        self.statusbar.push(-1, message)
+    def get_id(self, text):
+        return self.statusbar.get_context_id(text)
 
-    def pop_message(self):
-        self.statusbar.pop(-1)
+    def push_message(self, context_id, message):
+        self.statusbar.push(context_id, message)
+
+    def pop_message(self, context_id):
+        self.statusbar.pop(context_id)
 
 
 class ImageWindow(gtk.Window):
