@@ -29,7 +29,7 @@ import Configuration
 
 
 class ParsedOptions:
-    def __init__(self, theme, column, columntype, columnposition, arrows, toolbar, statusbar, name, street, code, city, tel):
+    def __init__(self, theme, column, columntype, columnposition, arrows, toolbar, statusbar, update, name, street, code, city, tel):
         self.theme = theme
         self.column = column
         self.columntype = columntype
@@ -37,6 +37,7 @@ class ParsedOptions:
         self.arrows = arrows
         self.toolbar = toolbar
         self.statusbar = statusbar
+        self.update = update
         self.name = name
         self.street = street
         self.code = code
@@ -57,6 +58,7 @@ class GetOptions:
                           self.conf.getboolean('Options', 'arrows'),
                           self.conf.getboolean('Options', 'toolbar'),
                           self.conf.getboolean('Options', 'statusbar'),
+                          self.conf.getboolean('Options', 'update'),
                           self.conf.get('personal', 'name'),
                           self.conf.get('personal', 'street'),
                           self.conf.get('personal', 'code'),
@@ -146,7 +148,8 @@ class OptionsDialog:
 
         if self.personal:
             self.notebook.get_nth_page(0).set_sensitive(0)
-            self.notebook.set_current_page(1)
+            self.notebook.get_nth_page(1).set_sensitive(0)
+            self.notebook.set_current_page(2)
 
     def create_columntype_combo(self):
         self.typeStore = gtk.ListStore(str, str)
@@ -173,12 +176,13 @@ class OptionsDialog:
         self.chkArrows.set_active(self.opt.optionList.arrows)
         self.chkToolbar.set_active(self.opt.optionList.toolbar)
         self.chkStatusbar.set_active(self.opt.optionList.statusbar)
+        self.chkUpdate.set_active(self.opt.optionList.update)
 
-        self.entryName.set_text(self.opt.optionList.name),
-        self.entryStreet.set_text(self.opt.optionList.street),
-        self.entryCode.set_text(self.opt.optionList.code),
-        self.entryCity.set_text(self.opt.optionList.city),
-        self.entryTel.set_text(self.opt.optionList.tel),
+        self.entryName.set_text(self.opt.optionList.name)
+        self.entryStreet.set_text(self.opt.optionList.street)
+        self.entryCode.set_text(self.opt.optionList.code)
+        self.entryCity.set_text(self.opt.optionList.city)
+        self.entryTel.set_text(self.opt.optionList.tel)
 
         self.treeviewOptsChanged = False
 
@@ -213,7 +217,8 @@ class OptionsDialog:
                             'columnposition': self.sbColumn.get_value_as_int(),
                             'arrows': str(self.chkArrows.get_active()),
                             'toolbar': str(self.chkToolbar.get_active()),
-                            'statusbar': str(self.chkStatusbar.get_active())
+                            'statusbar': str(self.chkStatusbar.get_active()),
+                            'update': str(self.chkUpdate.get_active())
                            },
                "personal" : {'name': self.entryName.get_text(),
                              'street': self.entryStreet.get_text(),

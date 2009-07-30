@@ -16,15 +16,13 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import urllib
 import datetime
-import os
-import os.path
 
 import gtk
 import gtk.glade
 
 import Const
+import Update
 import Backup
 import Widgets
 from Print import PrintVelocity
@@ -245,25 +243,10 @@ class ToolsWindow:
 
     # Update
     def btnupdate_clicked(self, widget):
-        local = os.path.join(Const.PREFDIR, Const.UPDATEURL.split('/')[-1])
-
-        try:
-            urllib.urlretrieve(Const.UPDATEURL, local)
-            versionfile = open(local, 'r')
-            version = versionfile.readline().strip()
-            versionfile.close()
-            os.remove(local)
-        except IOError:
-            version = None
-
-        if not version:
-            msg = Const.MSG_UPDATE_ERROR
-        elif Const.VERSION < version:
-            msg = Const.MSG_UPDATE_AVAILABLE
-            self.linkbutton.set_property('visible', True)
-        elif Const.VERSION == version:
-            msg = Const.MSG_NO_UPDATE
-        elif Const.VERSION > version:
-            msg = Const.MSG_UPDATE_DEVELOPMENT
+        msg, new = Update.update()
 
         self.labelversion.set_text(msg)
+
+        if new:
+            self.linkbutton.set_property('visible', True)
+

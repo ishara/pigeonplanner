@@ -20,10 +20,12 @@ import os.path
 import datetime
 import webbrowser
 
+import gobject
 import gtk
 import gtk.glade
 
 import Const
+import Update
 import Widgets
 import Options
 import Database
@@ -151,6 +153,9 @@ class MainWindow:
         for key in self.listdata.keys():
             Widgets.fill_list(key, self.listdata[key])
 
+        if self.options.optionList.update:
+            gobject.idle_add(self.search_updates)
+
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
 
@@ -160,6 +165,14 @@ class MainWindow:
     def dialog_delete(self, widget, event):
         widget.hide()
         return True
+
+    def search_updates(self):
+        msg, new = Update.update()
+
+        if new:
+            download = Widgets.message_dialog('question', Const.MSG_UPDATE_NOW, self.main)
+            if download:
+                webbrowser.open(Const.DOWNLOADURL)
 
     # Menu callbacks
     def menuclose_activate(self, widget):

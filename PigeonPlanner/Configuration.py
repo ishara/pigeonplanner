@@ -46,6 +46,7 @@ class Configuration:
         self.__addOption('Options', 'arrows', 'True')
         self.__addOption('Options', 'toolbar', 'True')
         self.__addOption('Options', 'statusbar', 'True')
+        self.__addOption('Options', 'update', 'True')
 
         self.__addSection('personal')
         self.__addOption('personal', 'name', '')
