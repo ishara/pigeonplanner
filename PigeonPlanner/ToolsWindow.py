@@ -175,6 +175,9 @@ class ToolsWindow:
         for item in items:
             self.cbitems.append_text(item)
 
+        if len(self.cbitems.get_model()) > 10:
+            self.cbitems.set_wrap_width(2)
+
         self.cbitems.set_active(0)
 
     def dataremove_clicked(self, widget):
