@@ -371,7 +371,8 @@ class MainWindow:
                 if not overwrite:
                     continue
 
-            data = (pindex, band, rangeyear, rangesex, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')
+            data = (pindex, band, rangeyear, rangesex, 1,
+                    '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')
             self.database.insert_pigeon(data)
 
         self.parser.get_pigeons()
@@ -632,7 +633,10 @@ class MainWindow:
         self.spinOutof.set_value(out)
         self.cbSector.child.set_text(sector)
 
-        Widgets.set_multiple_visible({self.addresult: False, self.editapply: True, self.resultcancel: True})
+        Widgets.set_multiple_visible({self.addresult: False,
+                                      self.editapply: True,
+                                      self.resultcancel: True})
+
         self.labeladdresult.set_markup(_("<b>Edit this result</b>"))
 
         self.editResultMode = True
@@ -658,7 +662,10 @@ class MainWindow:
         self.spinOutof.set_value(1)
         self.cbSector.child.set_text('')
 
-        Widgets.set_multiple_visible({self.addresult: True, self.editapply: False, self.resultcancel: False})
+        Widgets.set_multiple_visible({self.addresult: True,
+                                      self.editapply: False,
+                                      self.resultcancel: False})
+
         self.labeladdresult.set_markup(_("<b>Add a new result</b>"))
 
         self.editResultMode = False
@@ -857,7 +864,10 @@ class MainWindow:
             columns.insert(self.options.optionList.columnposition,
                            _(self.columnValueDic[self.options.optionList.columntype]))
         types = [str, str, str, str, str]
-        self.liststore, self.selection = Widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, True, True, True)
+        self.liststore, self.selection = Widgets.setup_treeview(self.treeview,
+                                                                columns, types,
+                                                                self.selection_changed,
+                                                                True, True, True)
 
     def build_treeviews(self):
         '''
@@ -867,27 +877,42 @@ class MainWindow:
         # Find sire/dam treeview
         columns = [_("Band no."), _("Year"), _("Name")]
         types = [str, str, str, str]
-        self.lsFind, self.selectionfind = Widgets.setup_treeview(self.tvFind, columns, types, None, True, True, True)
+        self.lsFind, self.selectionfind = Widgets.setup_treeview(self.tvFind,
+                                                                 columns, types,
+                                                                 None,
+                                                                 True, True, True)
 
         # Brothers & sisters treeview
         columns = [_("Band no."), _("Year")]
         types = [str, str, str]
-        self.lsBrothers, self.selBrothers = Widgets.setup_treeview(self.tvBrothers, columns, types, None, True, True, True)
+        self.lsBrothers, self.selBrothers = Widgets.setup_treeview(self.tvBrothers,
+                                                                   columns, types,
+                                                                   None,
+                                                                   True, True, True)
 
         # Halfbrothers & sisters treeview
         columns = [_("Band no."), _("Year"), _("Common parent")]
         types = [str, str, str, str]
-        self.lsHalfBrothers, self.selHalfBrothers = Widgets.setup_treeview(self.tvHalfBrothers, columns, types, None, True, True, True)
+        self.lsHalfBrothers, self.selHalfBrothers = Widgets.setup_treeview(self.tvHalfBrothers,
+                                                                           columns, types,
+                                                                           None,
+                                                                           True, True, True)
 
         # Offspring treeview
         columns = [_("Band no."), _("Year")]
         types = [str, str, str]
-        self.lsOffspring, self.selOffspring = Widgets.setup_treeview(self.tvOffspring, columns, types, None, True, True, True)
+        self.lsOffspring, self.selOffspring = Widgets.setup_treeview(self.tvOffspring,
+                                                                     columns, types,
+                                                                     None,
+                                                                     True, True, True)
 
         # Results treeview
         columns = [_("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector")]
         types = [str, str, int, int, float, str]
-        self.lsResult, self.selResults = Widgets.setup_treeview(self.tvResults, columns, types, self.selectionresult_changed, True, True)
+        self.lsResult, self.selResults = Widgets.setup_treeview(self.tvResults,
+                                                                columns, types,
+                                                                self.selectionresult_changed,
+                                                                True, True)
 
     def fill_treeview(self, pigeonType='all', path=0):
         '''
@@ -948,6 +973,8 @@ class MainWindow:
 
         model, path = selection.get_selected()
 
+        self.empty_entryboxes()
+
         if path:
             if self.editResultMode:
                 self.resultcancel_clicked(None)
@@ -961,11 +988,9 @@ class MainWindow:
                                             self.sbdetail: False, self.MenuEdit: False,
                                             self.MenuRemove: False, self.MenuPedigree: False,
                                             self.MenuAddresult: False, self.addresult: False})
-            self.empty_entryboxes()
+
             self.lsResult.clear()
             return
-
-        self.empty_entryboxes()
 
         pindex = model[path][0]
 
