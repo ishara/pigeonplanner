@@ -119,8 +119,8 @@ class MainWindow:
                                       button=self.goto, pigeons=self.parser.pigeons)
         self.pedigree.draw_pedigree()
         self.build_menubar()
-        self.build_treeview()
         self.build_treeviews()
+        self.build_treeview()
         self.fill_treeview()
         self.create_sexcombos()
         self.set_filefilter()
@@ -962,6 +962,7 @@ class MainWindow:
                                             self.MenuRemove: False, self.MenuPedigree: False,
                                             self.MenuAddresult: False, self.addresult: False})
             self.empty_entryboxes()
+            self.lsResult.clear()
             return
 
         self.empty_entryboxes()
