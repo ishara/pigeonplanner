@@ -185,13 +185,22 @@ class ResultWindow:
             sector = result[6]
 
             cof = (float(placed)/float(out))*100
-            band = self.pigeons[pigeon].ring + '/' + self.pigeons[pigeon].year
-            bandsort = self.pigeons[pigeon].year + pigeon
+            try:
+                year = self.pigeons[pigeon].year
+                ring = self.pigeons[pigeon].ring
+            except KeyError:
+                # HACK Pigeon is removed but results are kept.
+                #      Make the band with the pindex.
+                ring = pigeon[:-4]
+                year = pigeon[-4:]
+
+            band = '%s/%s' %(ring, year)
+            bandsort = year + pigeon
 
             #TODO: This could (and should) be better I think...
             if ((racepoint == point or racepoint == _("All")) and\
-                (selpigeon[:7] == pigeon or selpigeon == _("All")) and\
-                (yearpigeon == self.pigeons[pigeon].year or yearpigeon == _("All")) and\
+                (selpigeon[:-7] == ring or selpigeon == _("All")) and\
+                (yearpigeon == year or yearpigeon == _("All")) and\
                 (yearrace == date[:4] or yearrace == _("All")) and\
                 (sec == sector or sec == _("All")) and\
                 (cof <= coef or coef == 0) and\
@@ -204,7 +213,7 @@ class ResultWindow:
                 if fill_combo:
                     dataValues = {pigeon : pigeons, \
                                   date[:4] : yearRaces, \
-                                  self.pigeons[pigeon].year : yearPigeons, \
+                                  year : yearPigeons, \
                                   point : racepoints, \
                                   sector : sectors}
                     for data, datalist in dataValues.items():
@@ -241,7 +250,16 @@ class ResultWindow:
         for item in items:
             if widget == self.cbPigeon:
                 if not item == _("All"):
-                    item = self.pigeons[item].ring + ' / ' + self.pigeons[item].year[2:]
+                    try:
+                        year = self.pigeons[item].year
+                        ring = self.pigeons[item].ring
+                    except KeyError:
+                        # Hack again
+                        ring = item[:-4]
+                        year = item[-4:]
+
+                    item = '%s / %s' %(ring, year)
+
             model.append([item])
 
         number = len(model)
