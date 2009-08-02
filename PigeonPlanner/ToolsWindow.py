@@ -41,6 +41,8 @@ class ToolsWindow:
                       'on_btnupdate_clicked'     : self.btnupdate_clicked,
                       'on_cbdata_changed'        : self.cbdata_changed,
                       'on_dataremove_clicked'    : self.dataremove_clicked,
+                      'on_dataadd_clicked'       : self.dataadd_clicked,
+                      'on_entryData_changed'     : self.entryData_changed,
                       'on_btnsearchdb_clicked'   : self.btnsearchdb_clicked,
                       'on_window_destroy'        : self.close_clicked,
                       'on_close_clicked'         : self.close_clicked }
@@ -96,7 +98,9 @@ class ToolsWindow:
         data.sort()
         for item in data:
             self.cbdata.append_text(item)
+            self.cbdata2.append_text(item)
         self.cbdata.set_active(0)
+        self.cbdata2.set_active(0)
 
     def close_clicked(self, widget, event=None):
         self.toolsdialog.destroy()
@@ -150,11 +154,6 @@ class ToolsWindow:
         datatype = widget.get_active_text()
         self.fill_item_combo(datatype)
 
-        if self.cbitems.get_active_text():
-            self.dataremove.set_sensitive(True)
-        else:
-            self.dataremove.set_sensitive(False)
-
     def fill_item_combo(self, datatype):
         self.cbitems.get_model().clear()
 
@@ -180,6 +179,11 @@ class ToolsWindow:
 
         self.cbitems.set_active(0)
 
+        if self.cbitems.get_active_text():
+            self.dataremove.set_sensitive(True)
+        else:
+            self.dataremove.set_sensitive(False)
+
     def dataremove_clicked(self, widget):
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
@@ -202,6 +206,32 @@ class ToolsWindow:
 
             self.cbitems.remove_text(index)
             self.cbitems.set_active(0)
+
+    def dataadd_clicked(self, widget):
+        datatype = self.cbdata2.get_active_text()
+        item = (self.entryData.get_text(), )
+
+        if datatype == _("Colours"):
+            self.main.database.insert_colour(item)
+        elif datatype == _("Sectors"):
+            self.main.database.insert_sector(item)
+        elif datatype == _("Racepoints"):
+            self.main.database.insert_racepoint(item)
+        elif datatype == _("Strains"):
+            self.main.database.insert_strain(item)
+        elif datatype == _("Lofts"):
+            self.main.database.insert_loft(item)
+
+        self.entryData.set_text('')
+
+        if datatype == self.cbdata.get_active_text():
+            self.fill_item_combo(datatype)
+
+    def entryData_changed(self, widget):
+        if widget.get_text_length() > 0:
+            self.dataadd.set_sensitive(True)
+        else:
+            self.dataadd.set_sensitive(False)
 
     # Statistics
     def btnsearchdb_clicked(self, widget):
