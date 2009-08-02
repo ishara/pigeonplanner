@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-31 00:18+0200\n"
+"POT-Creation-Date: 2009-08-02 14:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -165,7 +165,7 @@ msgstr ""
 msgid "There is an update available, do you want to download it now?"
 msgstr ""
 
-#: ../PigeonPlanner/Const.py:127 ../PigeonPlanner/ToolsWindow.py:65
+#: ../PigeonPlanner/Const.py:127 ../PigeonPlanner/ToolsWindow.py:67
 msgid "Update"
 msgstr ""
 
@@ -205,20 +205,20 @@ msgstr ""
 
 #: ../PigeonPlanner/Print.py:305 ../PigeonPlanner/Print.py:322
 #: ../PigeonPlanner/Print.py:356 ../PigeonPlanner/Print.py:357
-#: ../PigeonPlanner/MainWindow.py:888 ../PigeonPlanner/ResultWindow.py:57
+#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:57
 #: tmp/MainWindow.glade.h:26 tmp/ResultWindow.glade.h:5
 msgid "Racepoint"
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:305 ../PigeonPlanner/Print.py:326
 #: ../PigeonPlanner/Print.py:380 ../PigeonPlanner/Print.py:381
-#: ../PigeonPlanner/MainWindow.py:888 ../PigeonPlanner/ResultWindow.py:61
+#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:61
 #: tmp/MainWindow.glade.h:32 tmp/ResultWindow.glade.h:7
 msgid "Sector"
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:305 ../PigeonPlanner/Print.py:330
-#: ../PigeonPlanner/MainWindow.py:888 ../PigeonPlanner/ResultWindow.py:60
+#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:60
 #: tmp/ResultWindow.glade.h:2
 msgid "Coefficient"
 msgstr ""
@@ -230,20 +230,20 @@ msgid "Place"
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:344 ../PigeonPlanner/Print.py:345
-#: ../PigeonPlanner/MainWindow.py:855 ../PigeonPlanner/MainWindow.py:868
-#: ../PigeonPlanner/MainWindow.py:873 ../PigeonPlanner/MainWindow.py:878
-#: ../PigeonPlanner/MainWindow.py:883 ../PigeonPlanner/ResultWindow.py:62
+#: ../PigeonPlanner/MainWindow.py:862 ../PigeonPlanner/MainWindow.py:878
+#: ../PigeonPlanner/MainWindow.py:886 ../PigeonPlanner/MainWindow.py:894
+#: ../PigeonPlanner/MainWindow.py:902 ../PigeonPlanner/ResultWindow.py:62
 msgid "Band no."
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:350 ../PigeonPlanner/Print.py:351
-#: ../PigeonPlanner/MainWindow.py:888 ../PigeonPlanner/ResultWindow.py:56
+#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:56
 #: tmp/MainWindow.glade.h:15
 msgid "Date"
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:368 ../PigeonPlanner/Print.py:369
-#: ../PigeonPlanner/MainWindow.py:888 ../PigeonPlanner/ResultWindow.py:59
+#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:59
 #: tmp/MainWindow.glade.h:23
 msgid "Out of"
 msgstr ""
@@ -253,7 +253,7 @@ msgid "Coef."
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:458 ../PigeonPlanner/Print.py:480
-#: ../PigeonPlanner/Print.py:481 ../PigeonPlanner/ToolsWindow.py:72
+#: ../PigeonPlanner/Print.py:481 ../PigeonPlanner/ToolsWindow.py:74
 msgid "Velocity"
 msgstr ""
 
@@ -270,81 +270,81 @@ msgid "Distance: "
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:486 ../PigeonPlanner/Print.py:487
-#: ../PigeonPlanner/ToolsWindow.py:72
+#: ../PigeonPlanner/ToolsWindow.py:74
 msgid "Flight Time"
 msgstr ""
 
 #: ../PigeonPlanner/Print.py:492 ../PigeonPlanner/Print.py:493
-#: ../PigeonPlanner/ToolsWindow.py:72
+#: ../PigeonPlanner/ToolsWindow.py:74
 msgid "Time of Arrival"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:59 tmp/ToolsWindow.glade.h:30
+#: ../PigeonPlanner/ToolsWindow.py:61 tmp/ToolsWindow.glade.h:32
 msgid "Tools"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:65
+#: ../PigeonPlanner/ToolsWindow.py:67
 msgid "Velocity calculator"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:65
+#: ../PigeonPlanner/ToolsWindow.py:67
 msgid "Datasets"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:65
+#: ../PigeonPlanner/ToolsWindow.py:67
 msgid "Statistics"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:65 tmp/ToolsWindow.glade.h:9
+#: ../PigeonPlanner/ToolsWindow.py:67 tmp/ToolsWindow.glade.h:12
 msgid "Backup"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:89
+#: ../PigeonPlanner/ToolsWindow.py:91
 msgid "PP Backups"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:95 ../PigeonPlanner/ToolsWindow.py:161
-#: ../PigeonPlanner/ToolsWindow.py:189
+#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:160
+#: ../PigeonPlanner/ToolsWindow.py:196 ../PigeonPlanner/ToolsWindow.py:214
 msgid "Colours"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:95 ../PigeonPlanner/ToolsWindow.py:165
-#: ../PigeonPlanner/ToolsWindow.py:193
+#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:164
+#: ../PigeonPlanner/ToolsWindow.py:200 ../PigeonPlanner/ToolsWindow.py:218
 msgid "Racepoints"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:95 ../PigeonPlanner/ToolsWindow.py:163
-#: ../PigeonPlanner/ToolsWindow.py:191
+#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:162
+#: ../PigeonPlanner/ToolsWindow.py:198 ../PigeonPlanner/ToolsWindow.py:216
 msgid "Sectors"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:95 ../PigeonPlanner/ToolsWindow.py:167
-#: ../PigeonPlanner/ToolsWindow.py:195
+#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:166
+#: ../PigeonPlanner/ToolsWindow.py:202 ../PigeonPlanner/ToolsWindow.py:220
 msgid "Strains"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:95 ../PigeonPlanner/ToolsWindow.py:169
-#: ../PigeonPlanner/ToolsWindow.py:197
+#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:168
+#: ../PigeonPlanner/ToolsWindow.py:204 ../PigeonPlanner/ToolsWindow.py:222
 msgid "Lofts"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:219
+#: ../PigeonPlanner/ToolsWindow.py:252
 msgid "Number of pigeons"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:220
+#: ../PigeonPlanner/ToolsWindow.py:253
 msgid "Number of cocks"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:221
+#: ../PigeonPlanner/ToolsWindow.py:254
 msgid "Number of hens"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:222
+#: ../PigeonPlanner/ToolsWindow.py:255
 msgid "Number of young birds"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:223
+#: ../PigeonPlanner/ToolsWindow.py:256
 msgid "Number of results"
 msgstr ""
 
@@ -400,206 +400,206 @@ msgstr ""
 msgid "Search through the list of hens"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:636
+#: ../PigeonPlanner/MainWindow.py:640
 msgid "<b>Edit this result</b>"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:662 tmp/MainWindow.glade.h:1
+#: ../PigeonPlanner/MainWindow.py:669 tmp/MainWindow.glade.h:1
 msgid "<b>Add a new result</b>"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:776
+#: ../PigeonPlanner/MainWindow.py:783
 msgid "_File"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:777
+#: ../PigeonPlanner/MainWindow.py:784
 msgid "_Pigeon"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:778 ../PigeonPlanner/MainWindow.py:788
+#: ../PigeonPlanner/MainWindow.py:785 ../PigeonPlanner/MainWindow.py:795
 msgid "_Edit"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:779
+#: ../PigeonPlanner/MainWindow.py:786
 msgid "_View"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:780
+#: ../PigeonPlanner/MainWindow.py:787
 msgid "_Filter pigeons"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:781
+#: ../PigeonPlanner/MainWindow.py:788
 msgid "_Help"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:782
+#: ../PigeonPlanner/MainWindow.py:789
 msgid "_Quit"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:783
+#: ../PigeonPlanner/MainWindow.py:790
 msgid "Quit the program"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:784
+#: ../PigeonPlanner/MainWindow.py:791
 msgid "_Add"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:785
+#: ../PigeonPlanner/MainWindow.py:792
 msgid "Add a new pigeon"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:786
+#: ../PigeonPlanner/MainWindow.py:793
 msgid "Add ran_ge"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:787 tmp/MainWindow.glade.h:9
+#: ../PigeonPlanner/MainWindow.py:794 tmp/MainWindow.glade.h:9
 msgid "Add a range of pigeons"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:789
+#: ../PigeonPlanner/MainWindow.py:796
 msgid "Edit the selected pigeon"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:790
+#: ../PigeonPlanner/MainWindow.py:797
 msgid "_Remove"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:791
+#: ../PigeonPlanner/MainWindow.py:798
 msgid "Remove the selected pigeon"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:792
+#: ../PigeonPlanner/MainWindow.py:799
 msgid "_Pedigree"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:793
+#: ../PigeonPlanner/MainWindow.py:800
 msgid "View the detailed pedigree of this pigeon"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:794
+#: ../PigeonPlanner/MainWindow.py:801
 msgid "Add resul_t"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:795
+#: ../PigeonPlanner/MainWindow.py:802
 msgid "Add a new result for this pigeon"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:796
+#: ../PigeonPlanner/MainWindow.py:803
 msgid "_Tools"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:797
+#: ../PigeonPlanner/MainWindow.py:804
 msgid "Various tools"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:798
+#: ../PigeonPlanner/MainWindow.py:805
 msgid "_Preferences"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:799
+#: ../PigeonPlanner/MainWindow.py:806
 msgid "Configure the application"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:800
+#: ../PigeonPlanner/MainWindow.py:807
 msgid "_Website"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:801
+#: ../PigeonPlanner/MainWindow.py:808
 msgid "Go to the website for more information"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:802
+#: ../PigeonPlanner/MainWindow.py:809
 msgid "Forum"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:803
+#: ../PigeonPlanner/MainWindow.py:810
 msgid "Go to the forum for online help"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:804
+#: ../PigeonPlanner/MainWindow.py:811
 msgid "_About"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:805
+#: ../PigeonPlanner/MainWindow.py:812
 msgid "About this application"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:809
+#: ../PigeonPlanner/MainWindow.py:816
 msgid "Navigation arrows"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:810 tmp/OptionsDialog.glade.h:14
+#: ../PigeonPlanner/MainWindow.py:817 tmp/OptionsDialog.glade.h:14
 msgid "Show or hide the navigation arrows"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:811
+#: ../PigeonPlanner/MainWindow.py:818
 msgid "Toolbar"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:812 tmp/OptionsDialog.glade.h:16
+#: ../PigeonPlanner/MainWindow.py:819 tmp/OptionsDialog.glade.h:16
 msgid "Show or hide the toolbar"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:813
+#: ../PigeonPlanner/MainWindow.py:820
 msgid "Statusbar"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:814 tmp/OptionsDialog.glade.h:15
+#: ../PigeonPlanner/MainWindow.py:821 tmp/OptionsDialog.glade.h:15
 msgid "Show or hide the statusbar"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:818
+#: ../PigeonPlanner/MainWindow.py:825
 msgid "_All"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:819
+#: ../PigeonPlanner/MainWindow.py:826
 msgid "Show all pigeons"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:820
+#: ../PigeonPlanner/MainWindow.py:827
 msgid "_Cocks"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:821
+#: ../PigeonPlanner/MainWindow.py:828
 msgid "Only show cocks"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:822
+#: ../PigeonPlanner/MainWindow.py:829
 msgid "_Hens"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:823
+#: ../PigeonPlanner/MainWindow.py:830
 msgid "Only show hens"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:824
+#: ../PigeonPlanner/MainWindow.py:831
 msgid "_Young birds"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:825
+#: ../PigeonPlanner/MainWindow.py:832
 msgid "Only show young birds"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:855 ../PigeonPlanner/MainWindow.py:868
-#: ../PigeonPlanner/MainWindow.py:873 ../PigeonPlanner/MainWindow.py:878
-#: ../PigeonPlanner/MainWindow.py:883 tmp/MainWindow.glade.h:40
+#: ../PigeonPlanner/MainWindow.py:862 ../PigeonPlanner/MainWindow.py:878
+#: ../PigeonPlanner/MainWindow.py:886 ../PigeonPlanner/MainWindow.py:894
+#: ../PigeonPlanner/MainWindow.py:902 tmp/MainWindow.glade.h:40
 msgid "Year"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:855 ../PigeonPlanner/MainWindow.py:868
+#: ../PigeonPlanner/MainWindow.py:862 ../PigeonPlanner/MainWindow.py:878
 msgid "Name"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:878
+#: ../PigeonPlanner/MainWindow.py:894
 msgid "Common parent"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:888 ../PigeonPlanner/ResultWindow.py:58
+#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:58
 #: tmp/MainWindow.glade.h:25
 msgid "Placed"
 msgstr ""
 
-#: ../PigeonPlanner/MainWindow.py:1519
+#: ../PigeonPlanner/MainWindow.py:1545
 msgid "Images"
 msgstr ""
 
@@ -624,10 +624,10 @@ msgstr ""
 
 #: ../PigeonPlanner/ResultWindow.py:92 ../PigeonPlanner/ResultWindow.py:93
 #: ../PigeonPlanner/ResultWindow.py:94 ../PigeonPlanner/ResultWindow.py:95
-#: ../PigeonPlanner/ResultWindow.py:96 ../PigeonPlanner/ResultWindow.py:192
-#: ../PigeonPlanner/ResultWindow.py:193 ../PigeonPlanner/ResultWindow.py:194
-#: ../PigeonPlanner/ResultWindow.py:195 ../PigeonPlanner/ResultWindow.py:196
-#: ../PigeonPlanner/ResultWindow.py:240 ../PigeonPlanner/ResultWindow.py:243
+#: ../PigeonPlanner/ResultWindow.py:96 ../PigeonPlanner/ResultWindow.py:201
+#: ../PigeonPlanner/ResultWindow.py:202 ../PigeonPlanner/ResultWindow.py:203
+#: ../PigeonPlanner/ResultWindow.py:204 ../PigeonPlanner/ResultWindow.py:205
+#: ../PigeonPlanner/ResultWindow.py:249 ../PigeonPlanner/ResultWindow.py:252
 msgid "All"
 msgstr ""
 
@@ -842,91 +842,99 @@ msgid "<b><i><big>Velocity calculator</big></i></b>"
 msgstr ""
 
 #: tmp/ToolsWindow.glade.h:6
-msgid "<b>Create backup</b>"
+msgid "<b>Add items</b>"
 msgstr ""
 
 #: tmp/ToolsWindow.glade.h:7
-msgid "<b>Restore backup</b>"
+msgid "<b>Create backup</b>"
 msgstr ""
 
 #: tmp/ToolsWindow.glade.h:8
-msgid "<i>Click the button below</i>"
+msgid "<b>Remove items</b>"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:9
+msgid "<b>Restore backup</b>"
 msgstr ""
 
 #: tmp/ToolsWindow.glade.h:10
-msgid "Calculate"
+msgid "<i>Click the button below</i>"
 msgstr ""
 
 #: tmp/ToolsWindow.glade.h:11
-msgid "Calculate velocity"
-msgstr ""
-
-#: tmp/ToolsWindow.glade.h:12
-msgid "Check now!"
+msgid "Add and remove items from your datasets"
 msgstr ""
 
 #: tmp/ToolsWindow.glade.h:13
-msgid "Choose a Pigeon Planner backup file to restore"
+msgid "Calculate"
 msgstr ""
 
 #: tmp/ToolsWindow.glade.h:14
-msgid "Choose a directory where to save the backup"
+msgid "Calculate velocity"
 msgstr ""
 
 #: tmp/ToolsWindow.glade.h:15
+msgid "Check now!"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:16
+msgid "Choose a Pigeon Planner backup file to restore"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:17
+msgid "Choose a directory where to save the backup"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:18
 msgid ""
 "Create and restore backups from\n"
 "your pigeons and results."
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:17
+#: tmp/ToolsWindow.glade.h:20
 msgid "Dataset"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:18
+#: tmp/ToolsWindow.glade.h:21
 msgid "Distance (km)"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:19
+#: tmp/ToolsWindow.glade.h:22
 msgid "Downloadpage"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:20
+#: tmp/ToolsWindow.glade.h:23
 msgid "From - To (meter/min)"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:21
+#: tmp/ToolsWindow.glade.h:24
 msgid "Here you can check if there is a program update available."
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:22
+#: tmp/ToolsWindow.glade.h:25
 msgid "Here you can see some statistics of your database"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:23
+#: tmp/ToolsWindow.glade.h:26
 msgid "Item"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:24
+#: tmp/ToolsWindow.glade.h:27
 msgid "Released (hh : mm)"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:25
-msgid "Remove items from your datasets"
-msgstr ""
-
-#: tmp/ToolsWindow.glade.h:26
+#: tmp/ToolsWindow.glade.h:28
 msgid "Restore"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:27
+#: tmp/ToolsWindow.glade.h:29
 msgid "Search database"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:28
+#: tmp/ToolsWindow.glade.h:30
 msgid "Select a directory"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:29
+#: tmp/ToolsWindow.glade.h:31
 msgid "Select a valid backup file"
 msgstr ""
