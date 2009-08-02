@@ -30,6 +30,7 @@ class DatabaseOperations:
                ' year TEXT,'
                ' sex TEXT,'
                ' show INTEGER,'
+               ' alive INTEGER,'
                ' colour TEXT,'
                ' name TEXT,'
                ' strain TEXT,'
@@ -86,7 +87,7 @@ class DatabaseOperations:
     def insert_pigeon(self, data):
         conn, cursor = self.db_connect()
         try:
-            cursor.execute('INSERT INTO Pigeons VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+            cursor.execute('INSERT INTO Pigeons VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
         except sqlite3.IntegrityError:
             pass
         conn.commit()
@@ -100,7 +101,7 @@ class DatabaseOperations:
 
     def update_pigeon(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Pigeons SET band=?, year=?, sex=?, show=?, colour=?, name=?, strain=?, loft=?, image=?, sire=?, yearsire=?, dam=?, yeardam=?, extra1=?, extra2=?, extra3=?, extra4=?, extra5=?, extra6=? WHERE pindex=?', data)
+        cursor.execute('UPDATE Pigeons SET band=?, year=?, sex=?, show=?, alive=?, colour=?, name=?, strain=?, loft=?, image=?, sire=?, yearsire=?, dam=?, yeardam=?, extra1=?, extra2=?, extra3=?, extra4=?, extra5=?, extra6=? WHERE pindex=?', data)
         conn.commit()
         conn.close()
 

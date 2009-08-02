@@ -46,21 +46,24 @@ class PigeonParser:
                              pigeon[17],
                              pigeon[18],
                              pigeon[19],
-                             pigeon[20])
+                             pigeon[20],
+                             pigeon[21])
 
             self.pigeons[p.pindex] = p
 
 
 class ParsedPigeon:
-    def __init__(self, pindex, ring, year, sex, show, colour='', name='', strain='', loft='', image='', sire='', yearsire='', dam='', yeardam='', extra1='', extra2='', extra3='', extra4='', extra5='', extra6=''):
+    def __init__(self, pindex, ring, year, sex, show, alive, colour='', name='', strain='', loft='', image='', sire='', yearsire='', dam='', yeardam='', extra1='', extra2='', extra3='', extra4='', extra5='', extra6=''):
         self.pindex = pindex
         self.ring = ring
         self.year = year
-        self.name = name
+        self.sex = sex
+        self.show = show
+        self.alive = alive
         self.colour = colour
+        self.name = name
         self.strain = strain
         self.loft = loft
-        self.sex = sex
         self.image = image
         self.sire = sire
         self.yearsire = yearsire
@@ -72,5 +75,4 @@ class ParsedPigeon:
         self.extra4 = extra4
         self.extra5 = extra5
         self.extra6 = extra6
-        self.show = show
 

@@ -371,7 +371,7 @@ class MainWindow:
                 if not overwrite:
                     continue
 
-            data = (pindex, band, rangeyear, rangesex, 1,
+            data = (pindex, band, rangeyear, rangesex, 1, 1,
                     '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')
             self.database.insert_pigeon(data)
 
@@ -1230,6 +1230,7 @@ class MainWindow:
         infoTuple = (self.entryRing1.get_text(),\
                      self.entryYear1.get_text(),\
                      self.cbsex.get_active_text(),\
+                     1,\
                      1,\
                      self.cbColour.child.get_text(),\
                      self.entryName1.get_text(),\
