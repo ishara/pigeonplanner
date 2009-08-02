@@ -236,7 +236,10 @@ class OptionsDialog:
             shutil.copy(os.path.join('./share/themes', self.cbThemes.get_active_text(), 'gtk-2.0/gtkrc'),
                                      './etc/gtk-2.0/')
 
-            Widgets.message_dialog('info', Const.MSG_RESTART_PROGRAM, self.optionsdialog)
+            gtk.rc_parse('./etc/gtk-2.0/')
+            screen = self.main.main.get_screen()
+            settings = gtk.settings_get_for_screen(screen)
+            gtk.rc_reparse_all_for_settings(settings, True)
 
         if self.treeviewOptsChanged:
             self.main.build_treeview()

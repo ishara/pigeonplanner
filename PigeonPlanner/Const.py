@@ -118,10 +118,6 @@ MSG_REMOVE_ITEM = (_("Removing item '%(item)s' from '%(dataset)s'.\n\nAre you su
                    None,
                    _("Remove data"))
 
-MSG_RESTART_PROGRAM = (_("Restart required"),
-                       _("Please restart the program for the changes to take effect"),
-                       _("Restart required"))
-
 MSG_UPDATE_NOW = (_("Update available!"),
                   _("There is an update available, do you want to download it now?"),
                   _("Update"))
