@@ -178,6 +178,7 @@
                                     <property name="numeric">True</property>
                                     <property name="wrap">True</property>
                                     <property name="update_policy">if-valid</property>
+                                    <signal name="changed" handler="on_sbminute_changed"/>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">3</property>

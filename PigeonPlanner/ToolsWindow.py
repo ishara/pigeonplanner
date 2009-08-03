@@ -36,6 +36,7 @@ class ToolsWindow:
         signalDic = { 'on_makebackup_clicked'    : self.makebackup_clicked,
                       'on_restorebackup_clicked' : self.restorebackup_clicked,
                       'on_sbbegin_changed'       : self.sbbegin_changed,
+                      'on_sbminute_changed'      : self.sbminute_changed,
                       'on_calculate_clicked'     : self.calculate_clicked,
                       'on_printcalc_clicked'     : self.printcalc_clicked,
                       'on_btnupdate_clicked'     : self.btnupdate_clicked,
@@ -121,6 +122,12 @@ class ToolsWindow:
 
         self.sbend.set_range(spinmin, spinmax)
 
+    def sbminute_changed(self, widget):
+        value = widget.get_value_as_int()
+
+        if value >= 0 and value < 10:
+            widget.set_text('0%s' %value)
+
     def calculate_clicked(self, widget):
         self.ls_velocity.clear()
 
@@ -144,7 +151,7 @@ class ToolsWindow:
 
         if data:
             date = datetime.datetime.now()
-            release = "%s:%s" %(self.sbhour.get_value_as_int(), self.sbminute.get_value_as_int())
+            release = "%s:%s" %(self.sbhour.get_text(), self.sbminute.get_text())
             info = [date.strftime("%Y-%m-%d"), release, self.sbdist.get_value_as_int()]
 
             PrintVelocity(self.main.main, data, info)
