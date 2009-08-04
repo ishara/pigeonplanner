@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pigeon Planner 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-02 14:27+0200\n"
+"POT-Creation-Date: 2009-08-04 15:39+0200\n"
 "PO-Revision-Date: 2009-05-06 16:11+0200\n"
 "Last-Translator: Automatically generated <>\n"
 "Language-Team: none <>\n"
@@ -167,31 +167,23 @@ msgstr ""
 msgid "Remove data"
 msgstr "Verwijder data"
 
-#: ../PigeonPlanner/Const.py:121 ../PigeonPlanner/Const.py:123
-msgid "Restart required"
-msgstr "Herstart vereist"
-
-#: ../PigeonPlanner/Const.py:122
-msgid "Please restart the program for the changes to take effect"
-msgstr "Herstart het programma om de veranderingen door te voeren"
-
-#: ../PigeonPlanner/Const.py:125
+#: ../PigeonPlanner/Const.py:121
 msgid "Update available!"
 msgstr "Update beschikbaar!"
 
-#: ../PigeonPlanner/Const.py:126
+#: ../PigeonPlanner/Const.py:122
 msgid "There is an update available, do you want to download it now?"
 msgstr "Er is een update beschikbaar, wilt u deze nu downloaden?"
 
-#: ../PigeonPlanner/Const.py:127 ../PigeonPlanner/ToolsWindow.py:67
+#: ../PigeonPlanner/Const.py:123 ../PigeonPlanner/ToolsWindow.py:68
 msgid "Update"
 msgstr "Update"
 
-#: ../PigeonPlanner/Const.py:129
+#: ../PigeonPlanner/Const.py:125
 msgid "Error trying to get information. Are you connected to the internet?"
 msgstr "Fout bij het ophalen van de informatie. Bent u verbonden met internet?"
 
-#: ../PigeonPlanner/Const.py:130
+#: ../PigeonPlanner/Const.py:126
 msgid ""
 "A new version is available. Please go to the Pigeon Planner website by "
 "clicking the link below and download the latest version"
@@ -199,11 +191,11 @@ msgstr ""
 "Een nieuwe versie is beschikbaar. Bezoek de Pigeon Planner website door op "
 "de onderstaande link te klikken en download de laatste versie"
 
-#: ../PigeonPlanner/Const.py:131
+#: ../PigeonPlanner/Const.py:127
 msgid "You already have the latest version installed."
 msgstr "U hebt al de laatste versie geinstalleerd."
 
-#: ../PigeonPlanner/Const.py:132
+#: ../PigeonPlanner/Const.py:128
 msgid "This isn't normal, or you must be running a development version"
 msgstr "Dit is niet normaal, of u moet een ontwikkelversie hebben"
 
@@ -227,20 +219,20 @@ msgstr "Jaar duiven"
 
 #: ../PigeonPlanner/Print.py:305 ../PigeonPlanner/Print.py:322
 #: ../PigeonPlanner/Print.py:356 ../PigeonPlanner/Print.py:357
-#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:57
+#: ../PigeonPlanner/MainWindow.py:925 ../PigeonPlanner/ResultWindow.py:57
 #: tmp/MainWindow.glade.h:26 tmp/ResultWindow.glade.h:5
 msgid "Racepoint"
 msgstr "Vlucht"
 
 #: ../PigeonPlanner/Print.py:305 ../PigeonPlanner/Print.py:326
 #: ../PigeonPlanner/Print.py:380 ../PigeonPlanner/Print.py:381
-#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:61
+#: ../PigeonPlanner/MainWindow.py:925 ../PigeonPlanner/ResultWindow.py:61
 #: tmp/MainWindow.glade.h:32 tmp/ResultWindow.glade.h:7
 msgid "Sector"
 msgstr "Sector"
 
 #: ../PigeonPlanner/Print.py:305 ../PigeonPlanner/Print.py:330
-#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:60
+#: ../PigeonPlanner/MainWindow.py:925 ../PigeonPlanner/ResultWindow.py:60
 #: tmp/ResultWindow.glade.h:2
 msgid "Coefficient"
 msgstr "Coefficient"
@@ -252,20 +244,20 @@ msgid "Place"
 msgstr "Plaats"
 
 #: ../PigeonPlanner/Print.py:344 ../PigeonPlanner/Print.py:345
-#: ../PigeonPlanner/MainWindow.py:862 ../PigeonPlanner/MainWindow.py:878
-#: ../PigeonPlanner/MainWindow.py:886 ../PigeonPlanner/MainWindow.py:894
-#: ../PigeonPlanner/MainWindow.py:902 ../PigeonPlanner/ResultWindow.py:62
+#: ../PigeonPlanner/MainWindow.py:877 ../PigeonPlanner/MainWindow.py:893
+#: ../PigeonPlanner/MainWindow.py:901 ../PigeonPlanner/MainWindow.py:909
+#: ../PigeonPlanner/MainWindow.py:917 ../PigeonPlanner/ResultWindow.py:62
 msgid "Band no."
 msgstr "Ringnr."
 
 #: ../PigeonPlanner/Print.py:350 ../PigeonPlanner/Print.py:351
-#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:56
+#: ../PigeonPlanner/MainWindow.py:925 ../PigeonPlanner/ResultWindow.py:56
 #: tmp/MainWindow.glade.h:15
 msgid "Date"
 msgstr "Datum"
 
 #: ../PigeonPlanner/Print.py:368 ../PigeonPlanner/Print.py:369
-#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:59
+#: ../PigeonPlanner/MainWindow.py:925 ../PigeonPlanner/ResultWindow.py:59
 #: tmp/MainWindow.glade.h:23
 msgid "Out of"
 msgstr "Uit"
@@ -275,7 +267,7 @@ msgid "Coef."
 msgstr "Coef."
 
 #: ../PigeonPlanner/Print.py:458 ../PigeonPlanner/Print.py:480
-#: ../PigeonPlanner/Print.py:481 ../PigeonPlanner/ToolsWindow.py:74
+#: ../PigeonPlanner/Print.py:481 ../PigeonPlanner/ToolsWindow.py:75
 msgid "Velocity"
 msgstr "Snelheid"
 
@@ -292,89 +284,110 @@ msgid "Distance: "
 msgstr "Afstand: "
 
 #: ../PigeonPlanner/Print.py:486 ../PigeonPlanner/Print.py:487
-#: ../PigeonPlanner/ToolsWindow.py:74
+#: ../PigeonPlanner/ToolsWindow.py:75
 msgid "Flight Time"
 msgstr "Vlucht tijd"
 
 #: ../PigeonPlanner/Print.py:492 ../PigeonPlanner/Print.py:493
-#: ../PigeonPlanner/ToolsWindow.py:74
+#: ../PigeonPlanner/ToolsWindow.py:75
 msgid "Time of Arrival"
 msgstr "Aankomst tijd"
 
-#: ../PigeonPlanner/ToolsWindow.py:61 tmp/ToolsWindow.glade.h:32
+#: ../PigeonPlanner/ToolsWindow.py:62 tmp/ToolsWindow.glade.h:32
 msgid "Tools"
 msgstr "Gereedschappen"
 
-#: ../PigeonPlanner/ToolsWindow.py:67
+#: ../PigeonPlanner/ToolsWindow.py:68
 msgid "Velocity calculator"
 msgstr "Snelheid meter"
 
-#: ../PigeonPlanner/ToolsWindow.py:67
+#: ../PigeonPlanner/ToolsWindow.py:68
 msgid "Datasets"
 msgstr "Datasets"
 
-#: ../PigeonPlanner/ToolsWindow.py:67
+#: ../PigeonPlanner/ToolsWindow.py:68
 msgid "Statistics"
 msgstr "Statistieken"
 
-#: ../PigeonPlanner/ToolsWindow.py:67 tmp/ToolsWindow.glade.h:12
+#: ../PigeonPlanner/ToolsWindow.py:68 ../PigeonPlanner/Widgets.py:306
+#: tmp/ToolsWindow.glade.h:12
 msgid "Backup"
 msgstr "Backup"
 
-#: ../PigeonPlanner/ToolsWindow.py:91
-msgid "PP Backups"
-msgstr "PP Backups"
-
-#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:160
-#: ../PigeonPlanner/ToolsWindow.py:196 ../PigeonPlanner/ToolsWindow.py:214
+#: ../PigeonPlanner/ToolsWindow.py:94 ../PigeonPlanner/ToolsWindow.py:163
+#: ../PigeonPlanner/ToolsWindow.py:199 ../PigeonPlanner/ToolsWindow.py:217
 msgid "Colours"
 msgstr "Kleuren"
 
-#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:164
-#: ../PigeonPlanner/ToolsWindow.py:200 ../PigeonPlanner/ToolsWindow.py:218
+#: ../PigeonPlanner/ToolsWindow.py:94 ../PigeonPlanner/ToolsWindow.py:167
+#: ../PigeonPlanner/ToolsWindow.py:203 ../PigeonPlanner/ToolsWindow.py:221
 msgid "Racepoints"
 msgstr "Vluchten"
 
-#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:162
-#: ../PigeonPlanner/ToolsWindow.py:198 ../PigeonPlanner/ToolsWindow.py:216
+#: ../PigeonPlanner/ToolsWindow.py:94 ../PigeonPlanner/ToolsWindow.py:165
+#: ../PigeonPlanner/ToolsWindow.py:201 ../PigeonPlanner/ToolsWindow.py:219
 msgid "Sectors"
 msgstr "Sectoren"
 
-#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:166
-#: ../PigeonPlanner/ToolsWindow.py:202 ../PigeonPlanner/ToolsWindow.py:220
+#: ../PigeonPlanner/ToolsWindow.py:94 ../PigeonPlanner/ToolsWindow.py:169
+#: ../PigeonPlanner/ToolsWindow.py:205 ../PigeonPlanner/ToolsWindow.py:223
 msgid "Strains"
 msgstr "Rassen"
 
-#: ../PigeonPlanner/ToolsWindow.py:97 ../PigeonPlanner/ToolsWindow.py:168
-#: ../PigeonPlanner/ToolsWindow.py:204 ../PigeonPlanner/ToolsWindow.py:222
+#: ../PigeonPlanner/ToolsWindow.py:94 ../PigeonPlanner/ToolsWindow.py:171
+#: ../PigeonPlanner/ToolsWindow.py:207 ../PigeonPlanner/ToolsWindow.py:225
 msgid "Lofts"
 msgstr "Hokken"
 
-#: ../PigeonPlanner/ToolsWindow.py:252
+#: ../PigeonPlanner/ToolsWindow.py:255
 msgid "Number of pigeons"
 msgstr "Aantal duiven"
 
-#: ../PigeonPlanner/ToolsWindow.py:253
+#: ../PigeonPlanner/ToolsWindow.py:256
 msgid "Number of cocks"
 msgstr "Aantal duivers"
 
-#: ../PigeonPlanner/ToolsWindow.py:254
+#: ../PigeonPlanner/ToolsWindow.py:257
 msgid "Number of hens"
 msgstr "Aantal duivinnen"
 
-#: ../PigeonPlanner/ToolsWindow.py:255
+#: ../PigeonPlanner/ToolsWindow.py:258
 msgid "Number of young birds"
 msgstr "Aantal jonge duiven"
 
-#: ../PigeonPlanner/ToolsWindow.py:256
+#: ../PigeonPlanner/ToolsWindow.py:259
 msgid "Number of results"
 msgstr "Aantal uitslagen"
 
-#: ../PigeonPlanner/Widgets.py:276
+#: ../PigeonPlanner/Widgets.py:88
+msgid "PP Backups"
+msgstr "PP Backups"
+
+#: ../PigeonPlanner/Widgets.py:298 tmp/ToolsWindow.glade.h:17
+msgid "Choose a directory where to save the backup"
+msgstr "Kies een map om de backup op te slaan"
+
+#: ../PigeonPlanner/Widgets.py:300 tmp/ToolsWindow.glade.h:30
+msgid "Select a directory"
+msgstr "Selecteer een map"
+
+#: ../PigeonPlanner/Widgets.py:315 tmp/ToolsWindow.glade.h:16
+msgid "Choose a Pigeon Planner backup file to restore"
+msgstr "Kies een Pigeon Planner backup bestand om te herstellen"
+
+#: ../PigeonPlanner/Widgets.py:317 tmp/ToolsWindow.glade.h:31
+msgid "Select a valid backup file"
+msgstr "Selecteer een geldig backup bestand"
+
+#: ../PigeonPlanner/Widgets.py:324 tmp/ToolsWindow.glade.h:28
+msgid "Restore"
+msgstr "Terugzetten"
+
+#: ../PigeonPlanner/Widgets.py:349
 msgid "View image: "
 msgstr "Bekijk afbeelding: "
 
-#: ../PigeonPlanner/Widgets.py:290
+#: ../PigeonPlanner/Widgets.py:363
 msgid "Click to close this window"
 msgstr "Klik om het venster te sluiten"
 
@@ -422,206 +435,230 @@ msgstr "Zoek door de lijst met duivers"
 msgid "Search through the list of hens"
 msgstr "Zoek door de lijst met duivinnen"
 
-#: ../PigeonPlanner/MainWindow.py:640
+#: ../PigeonPlanner/MainWindow.py:206
+msgid "Create backup"
+msgstr "Backup maken"
+
+#: ../PigeonPlanner/MainWindow.py:211
+msgid "Restore backup"
+msgstr "Backup terugzetten"
+
+#: ../PigeonPlanner/MainWindow.py:650
 msgid "<b>Edit this result</b>"
 msgstr "<b>Bewerk deze uitslag</b>"
 
-#: ../PigeonPlanner/MainWindow.py:669 tmp/MainWindow.glade.h:1
+#: ../PigeonPlanner/MainWindow.py:679 tmp/MainWindow.glade.h:1
 msgid "<b>Add a new result</b>"
 msgstr "<b>Voeg een nieuwe uitslag toe</b>"
 
-#: ../PigeonPlanner/MainWindow.py:783
+#: ../PigeonPlanner/MainWindow.py:793
 msgid "_File"
 msgstr "_Bestand"
 
-#: ../PigeonPlanner/MainWindow.py:784
+#: ../PigeonPlanner/MainWindow.py:794 ../PigeonPlanner/MainWindow.py:800
+msgid "_Backup"
+msgstr "_Backup"
+
+#: ../PigeonPlanner/MainWindow.py:795
 msgid "_Pigeon"
 msgstr "Dui_f"
 
-#: ../PigeonPlanner/MainWindow.py:785 ../PigeonPlanner/MainWindow.py:795
+#: ../PigeonPlanner/MainWindow.py:796 ../PigeonPlanner/MainWindow.py:810
 msgid "_Edit"
 msgstr "Be_werken"
 
-#: ../PigeonPlanner/MainWindow.py:786
+#: ../PigeonPlanner/MainWindow.py:797
 msgid "_View"
 msgstr "Beel_d"
 
-#: ../PigeonPlanner/MainWindow.py:787
+#: ../PigeonPlanner/MainWindow.py:798
 msgid "_Filter pigeons"
 msgstr "Duiven _filteren"
 
-#: ../PigeonPlanner/MainWindow.py:788
+#: ../PigeonPlanner/MainWindow.py:799
 msgid "_Help"
 msgstr "_Hulp"
 
-#: ../PigeonPlanner/MainWindow.py:789
+#: ../PigeonPlanner/MainWindow.py:801
+msgid "Create a backup of your database"
+msgstr "Maak een backup van uw database"
+
+#: ../PigeonPlanner/MainWindow.py:802
+msgid "_Restore"
+msgstr "_Herstellen"
+
+#: ../PigeonPlanner/MainWindow.py:803
+msgid "Restore a backup of your database"
+msgstr "Herstel een backup van uw database"
+
+#: ../PigeonPlanner/MainWindow.py:804
 msgid "_Quit"
 msgstr "A_fsluiten"
 
-#: ../PigeonPlanner/MainWindow.py:790
+#: ../PigeonPlanner/MainWindow.py:805
 msgid "Quit the program"
 msgstr "Het programma afsluiten"
 
-#: ../PigeonPlanner/MainWindow.py:791
+#: ../PigeonPlanner/MainWindow.py:806
 msgid "_Add"
 msgstr "_Toevoegen"
 
-#: ../PigeonPlanner/MainWindow.py:792
+#: ../PigeonPlanner/MainWindow.py:807
 msgid "Add a new pigeon"
 msgstr "Voeg een nieuwe duif toe"
 
-#: ../PigeonPlanner/MainWindow.py:793
+#: ../PigeonPlanner/MainWindow.py:808
 msgid "Add ran_ge"
 msgstr "_Reeks toevoegen"
 
-#: ../PigeonPlanner/MainWindow.py:794 tmp/MainWindow.glade.h:9
+#: ../PigeonPlanner/MainWindow.py:809 tmp/MainWindow.glade.h:9
 msgid "Add a range of pigeons"
 msgstr "Voeg een reeks duiven toe"
 
-#: ../PigeonPlanner/MainWindow.py:796
+#: ../PigeonPlanner/MainWindow.py:811
 msgid "Edit the selected pigeon"
 msgstr "Bewerk de geselecteerde duif"
 
-#: ../PigeonPlanner/MainWindow.py:797
+#: ../PigeonPlanner/MainWindow.py:812
 msgid "_Remove"
 msgstr "_Verwijderen"
 
-#: ../PigeonPlanner/MainWindow.py:798
+#: ../PigeonPlanner/MainWindow.py:813
 msgid "Remove the selected pigeon"
 msgstr "Verwijder de geselecteerde duif"
 
-#: ../PigeonPlanner/MainWindow.py:799
+#: ../PigeonPlanner/MainWindow.py:814
 msgid "_Pedigree"
 msgstr "_Stamboom"
 
-#: ../PigeonPlanner/MainWindow.py:800
+#: ../PigeonPlanner/MainWindow.py:815
 msgid "View the detailed pedigree of this pigeon"
 msgstr "Bekijk de gedetailleerde stamboom van deze duif"
 
-#: ../PigeonPlanner/MainWindow.py:801
+#: ../PigeonPlanner/MainWindow.py:816
 msgid "Add resul_t"
 msgstr "_Uitslag toevoegen"
 
-#: ../PigeonPlanner/MainWindow.py:802
+#: ../PigeonPlanner/MainWindow.py:817
 msgid "Add a new result for this pigeon"
 msgstr "Voeg een nieuwe uitslag to aan deze duif"
 
-#: ../PigeonPlanner/MainWindow.py:803
+#: ../PigeonPlanner/MainWindow.py:818
 msgid "_Tools"
 msgstr "_Gereedschappen"
 
-#: ../PigeonPlanner/MainWindow.py:804
+#: ../PigeonPlanner/MainWindow.py:819
 msgid "Various tools"
 msgstr "Verschillende gereedschappen"
 
-#: ../PigeonPlanner/MainWindow.py:805
+#: ../PigeonPlanner/MainWindow.py:820
 msgid "_Preferences"
 msgstr "_Voorkeuren"
 
-#: ../PigeonPlanner/MainWindow.py:806
+#: ../PigeonPlanner/MainWindow.py:821
 msgid "Configure the application"
 msgstr "Toepassing configureren"
 
-#: ../PigeonPlanner/MainWindow.py:807
+#: ../PigeonPlanner/MainWindow.py:822
 msgid "_Website"
 msgstr "_Website"
 
-#: ../PigeonPlanner/MainWindow.py:808
+#: ../PigeonPlanner/MainWindow.py:823
 msgid "Go to the website for more information"
 msgstr "Ga naar de website voor meer informatie"
 
-#: ../PigeonPlanner/MainWindow.py:809
+#: ../PigeonPlanner/MainWindow.py:824
 msgid "Forum"
 msgstr "Forum"
 
-#: ../PigeonPlanner/MainWindow.py:810
+#: ../PigeonPlanner/MainWindow.py:825
 msgid "Go to the forum for online help"
 msgstr "Ga naar het forum voor online hulp"
 
-#: ../PigeonPlanner/MainWindow.py:811
+#: ../PigeonPlanner/MainWindow.py:826
 msgid "_About"
 msgstr "I_nfo"
 
-#: ../PigeonPlanner/MainWindow.py:812
+#: ../PigeonPlanner/MainWindow.py:827
 msgid "About this application"
 msgstr "Info over deze toepassing"
 
-#: ../PigeonPlanner/MainWindow.py:816
+#: ../PigeonPlanner/MainWindow.py:831
 msgid "Navigation arrows"
 msgstr "Navigatie pijlen"
 
-#: ../PigeonPlanner/MainWindow.py:817 tmp/OptionsDialog.glade.h:14
+#: ../PigeonPlanner/MainWindow.py:832 tmp/OptionsDialog.glade.h:14
 msgid "Show or hide the navigation arrows"
 msgstr "Toon of verberg de navigatie pijlen"
 
-#: ../PigeonPlanner/MainWindow.py:818
+#: ../PigeonPlanner/MainWindow.py:833
 msgid "Toolbar"
 msgstr "Werkbalk"
 
-#: ../PigeonPlanner/MainWindow.py:819 tmp/OptionsDialog.glade.h:16
+#: ../PigeonPlanner/MainWindow.py:834 tmp/OptionsDialog.glade.h:16
 msgid "Show or hide the toolbar"
 msgstr "Toon of verberg de werkbalk"
 
-#: ../PigeonPlanner/MainWindow.py:820
+#: ../PigeonPlanner/MainWindow.py:835
 msgid "Statusbar"
 msgstr "Statusbalk"
 
-#: ../PigeonPlanner/MainWindow.py:821 tmp/OptionsDialog.glade.h:15
+#: ../PigeonPlanner/MainWindow.py:836 tmp/OptionsDialog.glade.h:15
 msgid "Show or hide the statusbar"
 msgstr "Toon of verberg de statusbalk"
 
-#: ../PigeonPlanner/MainWindow.py:825
+#: ../PigeonPlanner/MainWindow.py:840
 msgid "_All"
 msgstr "_Alles"
 
-#: ../PigeonPlanner/MainWindow.py:826
+#: ../PigeonPlanner/MainWindow.py:841
 msgid "Show all pigeons"
 msgstr "Laat alle duiven zien"
 
-#: ../PigeonPlanner/MainWindow.py:827
+#: ../PigeonPlanner/MainWindow.py:842
 msgid "_Cocks"
 msgstr "_Duivers"
 
-#: ../PigeonPlanner/MainWindow.py:828
+#: ../PigeonPlanner/MainWindow.py:843
 msgid "Only show cocks"
 msgstr "Laat alleen de duivers zien"
 
-#: ../PigeonPlanner/MainWindow.py:829
+#: ../PigeonPlanner/MainWindow.py:844
 msgid "_Hens"
 msgstr "Dui_vinnen"
 
-#: ../PigeonPlanner/MainWindow.py:830
+#: ../PigeonPlanner/MainWindow.py:845
 msgid "Only show hens"
 msgstr "Laat alleen de duivinnen zien"
 
-#: ../PigeonPlanner/MainWindow.py:831
+#: ../PigeonPlanner/MainWindow.py:846
 msgid "_Young birds"
 msgstr "_Jonge duiven"
 
-#: ../PigeonPlanner/MainWindow.py:832
+#: ../PigeonPlanner/MainWindow.py:847
 msgid "Only show young birds"
 msgstr "Laat alleen de jonge duiven zien"
 
-#: ../PigeonPlanner/MainWindow.py:862 ../PigeonPlanner/MainWindow.py:878
-#: ../PigeonPlanner/MainWindow.py:886 ../PigeonPlanner/MainWindow.py:894
-#: ../PigeonPlanner/MainWindow.py:902 tmp/MainWindow.glade.h:40
+#: ../PigeonPlanner/MainWindow.py:877 ../PigeonPlanner/MainWindow.py:893
+#: ../PigeonPlanner/MainWindow.py:901 ../PigeonPlanner/MainWindow.py:909
+#: ../PigeonPlanner/MainWindow.py:917 tmp/MainWindow.glade.h:40
 msgid "Year"
 msgstr "Jaar"
 
-#: ../PigeonPlanner/MainWindow.py:862 ../PigeonPlanner/MainWindow.py:878
+#: ../PigeonPlanner/MainWindow.py:877 ../PigeonPlanner/MainWindow.py:893
 msgid "Name"
 msgstr "Naam"
 
-#: ../PigeonPlanner/MainWindow.py:894
+#: ../PigeonPlanner/MainWindow.py:909
 msgid "Common parent"
 msgstr "Gem. ouder"
 
-#: ../PigeonPlanner/MainWindow.py:910 ../PigeonPlanner/ResultWindow.py:58
+#: ../PigeonPlanner/MainWindow.py:925 ../PigeonPlanner/ResultWindow.py:58
 #: tmp/MainWindow.glade.h:25
 msgid "Placed"
 msgstr "Plaats"
 
-#: ../PigeonPlanner/MainWindow.py:1545
+#: ../PigeonPlanner/MainWindow.py:1561
 msgid "Images"
 msgstr "Afbeeldingen"
 
@@ -918,14 +955,6 @@ msgstr "Bereken snelheid"
 msgid "Check now!"
 msgstr "Controleer nu!"
 
-#: tmp/ToolsWindow.glade.h:16
-msgid "Choose a Pigeon Planner backup file to restore"
-msgstr "Kies een Pigeon Planner backup bestand om te herstellen"
-
-#: tmp/ToolsWindow.glade.h:17
-msgid "Choose a directory where to save the backup"
-msgstr "Kies een map om de backup op te slaan"
-
 #: tmp/ToolsWindow.glade.h:18
 msgid ""
 "Create and restore backups from\n"
@@ -966,18 +995,6 @@ msgstr "Item"
 msgid "Released (hh : mm)"
 msgstr "Gelost (uu : mm)"
 
-#: tmp/ToolsWindow.glade.h:28
-msgid "Restore"
-msgstr "Terugzetten"
-
 #: tmp/ToolsWindow.glade.h:29
 msgid "Search database"
 msgstr "Doorzoek database"
-
-#: tmp/ToolsWindow.glade.h:30
-msgid "Select a directory"
-msgstr "Selecteer een map"
-
-#: tmp/ToolsWindow.glade.h:31
-msgid "Select a valid backup file"
-msgstr "Selecteer een geldig backup bestand"
