@@ -88,11 +88,7 @@ class ToolsWindow:
         self.sbdist.set_value(125)
 
         # Backups file filter
-        fileFilter = gtk.FileFilter()
-        fileFilter.set_name(_("PP Backups"))
-        fileFilter.add_mime_type("zip/zip")
-        fileFilter.add_pattern("*PigeonPlannerBackup.zip")
-        self.fcButtonRestore.add_filter(fileFilter)
+        self.fcButtonRestore.add_filter(Widgets.backupFileFilter)
 
         # Fill the data combobox
         data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Strains"), _("Lofts")]

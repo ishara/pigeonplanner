@@ -202,6 +202,16 @@ class MainWindow:
         self.statusmsg.pop_message(self.statusmsgs[widget.get_name()][0])
 
     # Menu callbacks
+    def menubackup_activate(self, widget):
+        dialog = Widgets.BackupDialog(self.main, _("Create backup"), 'create')
+        run = dialog.run()
+        dialog.destroy()
+
+    def menurestore_activate(self, widget):
+        dialog = Widgets.BackupDialog(self.main, _("Restore backup"), 'restore')
+        run = dialog.run()
+        dialog.destroy()
+
     def menuclose_activate(self, widget):
         self.quit_program()
 
@@ -781,11 +791,16 @@ class MainWindow:
 
         entries = (
             ("FileMenu", None, _("_File")),
+            ("BackupMenu", None, _("_Backup")),
             ("PigeonMenu", None, _("_Pigeon")),
             ("EditMenu", None, _("_Edit")),
             ("ViewMenu", None, _("_View")),
             ("FilterMenu", None, _("_Filter pigeons")),
             ("HelpMenu", None, _("_Help")),
+            ("Backup", gtk.STOCK_FLOPPY, _("_Backup"), None,
+                    _("Create a backup of your database"), self.menubackup_activate),
+            ("Restore", gtk.STOCK_REVERT_TO_SAVED, _("_Restore"), None,
+                    _("Restore a backup of your database"), self.menurestore_activate),
             ("Quit", gtk.STOCK_QUIT, _("_Quit"), "<control>Q",
                     _("Quit the program"), self.quit_program),
             ("Add", gtk.STOCK_ADD, _("_Add"), "<control>A",

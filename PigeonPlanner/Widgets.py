@@ -22,12 +22,18 @@ import gtk
 import gtk.gdk
 
 import Const
+import Backup
 
 
 uistring = '''
 <ui>
    <menubar name="MenuBar">
       <menu action="FileMenu">
+         <menu action="BackupMenu">
+            <menuitem action="Backup"/>
+            <menuitem action="Restore"/>
+         </menu>
+         <separator/>
          <menuitem action="Quit"/>
       </menu>
       <menu action="PigeonMenu">
@@ -76,6 +82,13 @@ uistring = '''
    </toolbar>
 </ui>
 '''
+
+
+backupFileFilter = gtk.FileFilter()
+backupFileFilter.set_name(_("PP Backups"))
+backupFileFilter.add_mime_type("zip/zip")
+backupFileFilter.add_pattern("*PigeonPlannerBackup.zip")
+
 
 def message_dialog(msgtype, data, parent=None, extra=None):
     '''
@@ -269,6 +282,66 @@ class Statusbar:
     def pop_message(self, context_id):
         self.statusbar.pop(context_id)
 
+
+class BackupDialog(gtk.Dialog):
+    def __init__(self, parent, title, backuptype):
+        gtk.Dialog.__init__(self, title, parent,
+                            gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                            ("gtk-close", gtk.RESPONSE_CLOSE))
+
+        self.par = parent
+
+        self.set_resizable(False)
+        self.set_has_separator(False)
+
+        if backuptype == 'create':
+            label = gtk.Label(_("Choose a directory where to save the backup"))
+            label.set_padding(30, 0)
+            self.fcButtonCreate = gtk.FileChooserButton(_("Select a directory"))
+            self.fcButtonCreate.set_action(gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+
+            self.vbox.pack_start(label, False, True, 8)
+            self.vbox.pack_start(self.fcButtonCreate, False, True, 12)
+
+            button = gtk.Button(_("Backup"))
+            button.connect('clicked', self.makebackup_clicked)
+            image = gtk.Image()
+            image.set_from_stock(gtk.STOCK_REDO, gtk.ICON_SIZE_BUTTON)
+            button.set_image(image)
+            self.action_area.pack_start(button)
+            self.action_area.reorder_child(button, 0)
+
+        else:
+            label = gtk.Label(_("Choose a Pigeon Planner backup file to restore"))
+            label.set_padding(30, 0)
+            self.fcButtonRestore = gtk.FileChooserButton(_("Select a valid backup file"))
+            self.fcButtonRestore.set_action(gtk.FILE_CHOOSER_ACTION_OPEN)
+            self.fcButtonRestore.add_filter(backupFileFilter)
+
+            self.vbox.pack_start(label, False, True, 8)
+            self.vbox.pack_start(self.fcButtonRestore, False, True, 12)
+
+            button = gtk.Button(_("Restore"))
+            button.connect('clicked', self.restorebackup_clicked)
+            image = gtk.Image()
+            image.set_from_stock(gtk.STOCK_UNDO, gtk.ICON_SIZE_BUTTON)
+            button.set_image(image)
+            self.action_area.pack_start(button)
+            self.action_area.reorder_child(button, 0)
+
+        self.show_all()
+
+    def makebackup_clicked(self, widget):
+        folder = self.fcButtonCreate.get_current_folder()
+        if folder:
+            Backup.make_backup(folder)
+            message_dialog('info', Const.MSG_BACKUP_SUCCES, self.par)
+
+    def restorebackup_clicked(self, widget):
+        zipfile = self.fcButtonRestore.get_filename()
+        if zipfile:
+            Backup.restore_backup(zipfile)
+            message_dialog('info', Const.MSG_RESTORE_SUCCES, self.par)
 
 class ImageWindow(gtk.Window):
     def __init__(self, imagepath, main):
