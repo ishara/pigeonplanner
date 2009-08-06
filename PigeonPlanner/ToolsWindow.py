@@ -268,14 +268,20 @@ class ToolsWindow:
     def makebackup_clicked(self, widget):
         folder = self.fcButtonCreate.get_current_folder()
         if folder:
-            Backup.make_backup(folder)
-            Widgets.message_dialog('info', Const.MSG_BACKUP_SUCCES, self.main.main)
+            success = Backup.make_backup(folder)
+            if success:
+                Widgets.message_dialog('info', Const.MSG_BACKUP_SUCCES, self.main.main)
+            else:
+                Widgets.message_dialog('info', Conts.MSG_BACKUP_FAILED, self.main.main)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
-            Backup.restore_backup(zipfile)
-            Widgets.message_dialog('info', Const.MSG_RESTORE_SUCCES, self.main.main)
+            success = Backup.restore_backup(zipfile)
+            if success:
+                Widgets.message_dialog('info', Const.MSG_RESTORE_SUCCES, self.main.main)
+            else:
+                Widgets.message_dialog('info', Conts.MSG_RESTORE_FAILED, self.main.main)
 
     # Update
     def btnupdate_clicked(self, widget):

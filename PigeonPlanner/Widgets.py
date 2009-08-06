@@ -334,14 +334,20 @@ class BackupDialog(gtk.Dialog):
     def makebackup_clicked(self, widget):
         folder = self.fcButtonCreate.get_current_folder()
         if folder:
-            Backup.make_backup(folder)
-            message_dialog('info', Const.MSG_BACKUP_SUCCES, self.par)
+            success = Backup.make_backup(folder)
+            if success:
+                Widgets.message_dialog('info', Const.MSG_BACKUP_SUCCES, self.par)
+            else:
+                Widgets.message_dialog('info', Conts.MSG_BACKUP_FAILED, self.par)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
-            Backup.restore_backup(zipfile)
-            message_dialog('info', Const.MSG_RESTORE_SUCCES, self.par)
+            success = Backup.restore_backup(zipfile)
+            if success:
+                Widgets.message_dialog('info', Const.MSG_RESTORE_SUCCES, self.par)
+            else:
+                Widgets.message_dialog('info', Conts.MSG_RESTORE_FAILED, self.par)
 
 class ImageWindow(gtk.Window):
     def __init__(self, imagepath, main):

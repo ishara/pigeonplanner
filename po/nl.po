@@ -6,9 +6,9 @@
 # Automatically generated <>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: Pigeon Planner 0.1\n"
+"Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-04 15:39+0200\n"
+"POT-Creation-Date: 2009-08-06 16:43+0200\n"
 "PO-Revision-Date: 2009-05-06 16:11+0200\n"
 "Last-Translator: Automatically generated <>\n"
 "Language-Team: none <>\n"
@@ -30,7 +30,7 @@ msgstr "Deze afbeelding is niet geldig of is corrupt, kies een andere."
 #: ../PigeonPlanner/Const.py:77 ../PigeonPlanner/Const.py:80
 #: ../PigeonPlanner/Const.py:83 ../PigeonPlanner/Const.py:86
 #: ../PigeonPlanner/Const.py:90 ../PigeonPlanner/Const.py:93
-#: ../PigeonPlanner/Const.py:96 ../PigeonPlanner/Const.py:111
+#: ../PigeonPlanner/Const.py:96 ../PigeonPlanner/Const.py:117
 msgid "Error"
 msgstr "Fout"
 
@@ -108,11 +108,19 @@ msgstr "Het resultaat dat u wil toevoegen bestaat al."
 msgid "The backup was successfully created."
 msgstr "De backup is succesvol aangemaakt."
 
-#: ../PigeonPlanner/Const.py:100 ../PigeonPlanner/Const.py:103
+#: ../PigeonPlanner/Const.py:100 ../PigeonPlanner/Const.py:106
 msgid "Completed!"
 msgstr "Voltooid!"
 
 #: ../PigeonPlanner/Const.py:101
+msgid "There was an error making the backup."
+msgstr "Er is een fout opgetreden bij het maken van de backup."
+
+#: ../PigeonPlanner/Const.py:103 ../PigeonPlanner/Const.py:109
+msgid "Failed!"
+msgstr "Mislukt!"
+
+#: ../PigeonPlanner/Const.py:104
 msgid ""
 "The backup was successfully restored.\n"
 "Restart the program."
@@ -120,11 +128,15 @@ msgstr ""
 "De backup was succesvol terug geplaatst.\n"
 "Herstart het programma."
 
-#: ../PigeonPlanner/Const.py:105
-msgid "No personal information found."
-msgstr "Geen persoonlijke info gevonden."
+#: ../PigeonPlanner/Const.py:107
+msgid "There was an error restoring the backup."
+msgstr "Er is een fout opgetreden bij het herstellen van de backup."
 
-#: ../PigeonPlanner/Const.py:106
+#: ../PigeonPlanner/Const.py:111
+msgid "No personal information found."
+msgstr "Geen persoonlijke informatie gevonden."
+
+#: ../PigeonPlanner/Const.py:112
 msgid ""
 "This will be shown on top of the printed pedigree.\n"
 "Do you want to add it now?"
@@ -132,15 +144,15 @@ msgstr ""
 "Dit komt op een geprintte stamboom te staan.\n"
 "Wilt u dit nu ingeven?"
 
-#: ../PigeonPlanner/Const.py:107 tmp/OptionsDialog.glade.h:12
+#: ../PigeonPlanner/Const.py:113 tmp/OptionsDialog.glade.h:12
 msgid "Personal"
 msgstr "Persoonlijk"
 
-#: ../PigeonPlanner/Const.py:109
+#: ../PigeonPlanner/Const.py:115
 msgid "Error printing the pedigree"
 msgstr "Fout bij het printen van de stamboom"
 
-#: ../PigeonPlanner/Const.py:113
+#: ../PigeonPlanner/Const.py:119
 msgid ""
 "This will set back all the settings to the default values.\n"
 "Are you sure?"
@@ -148,11 +160,11 @@ msgstr ""
 "Dit zal alle opties terugzetten naar de standaard waarden.\n"
 "bent u zeker?"
 
-#: ../PigeonPlanner/Const.py:115
+#: ../PigeonPlanner/Const.py:121
 msgid "Default settings"
 msgstr "Standaard instellingen"
 
-#: ../PigeonPlanner/Const.py:117
+#: ../PigeonPlanner/Const.py:123
 #, python-format
 msgid ""
 "Removing item '%(item)s' from '%(dataset)s'.\n"
@@ -163,27 +175,27 @@ msgstr ""
 "\n"
 "Bent u zeker?"
 
-#: ../PigeonPlanner/Const.py:119
+#: ../PigeonPlanner/Const.py:125
 msgid "Remove data"
 msgstr "Verwijder data"
 
-#: ../PigeonPlanner/Const.py:121
+#: ../PigeonPlanner/Const.py:127
 msgid "Update available!"
 msgstr "Update beschikbaar!"
 
-#: ../PigeonPlanner/Const.py:122
+#: ../PigeonPlanner/Const.py:128
 msgid "There is an update available, do you want to download it now?"
 msgstr "Er is een update beschikbaar, wilt u deze nu downloaden?"
 
-#: ../PigeonPlanner/Const.py:123 ../PigeonPlanner/ToolsWindow.py:68
+#: ../PigeonPlanner/Const.py:129 ../PigeonPlanner/ToolsWindow.py:68
 msgid "Update"
 msgstr "Update"
 
-#: ../PigeonPlanner/Const.py:125
+#: ../PigeonPlanner/Const.py:131
 msgid "Error trying to get information. Are you connected to the internet?"
 msgstr "Fout bij het ophalen van de informatie. Bent u verbonden met internet?"
 
-#: ../PigeonPlanner/Const.py:126
+#: ../PigeonPlanner/Const.py:132
 msgid ""
 "A new version is available. Please go to the Pigeon Planner website by "
 "clicking the link below and download the latest version"
@@ -191,11 +203,11 @@ msgstr ""
 "Een nieuwe versie is beschikbaar. Bezoek de Pigeon Planner website door op "
 "de onderstaande link te klikken en download de laatste versie"
 
-#: ../PigeonPlanner/Const.py:127
+#: ../PigeonPlanner/Const.py:133
 msgid "You already have the latest version installed."
 msgstr "U hebt al de laatste versie geinstalleerd."
 
-#: ../PigeonPlanner/Const.py:128
+#: ../PigeonPlanner/Const.py:134
 msgid "This isn't normal, or you must be running a development version"
 msgstr "Dit is niet normaal, of u moet een ontwikkelversie hebben"
 
@@ -383,11 +395,11 @@ msgstr "Selecteer een geldig backup bestand"
 msgid "Restore"
 msgstr "Terugzetten"
 
-#: ../PigeonPlanner/Widgets.py:349
+#: ../PigeonPlanner/Widgets.py:355
 msgid "View image: "
 msgstr "Bekijk afbeelding: "
 
-#: ../PigeonPlanner/Widgets.py:363
+#: ../PigeonPlanner/Widgets.py:369
 msgid "Click to close this window"
 msgstr "Klik om het venster te sluiten"
 

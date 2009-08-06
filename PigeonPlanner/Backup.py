@@ -41,6 +41,10 @@ def make_backup(folder):
         zipper = zipfile.ZipFile(outfile, 'w', zipfile.ZIP_STORED)
         makezip(infolder, zipper)
         zipper.close()
+    except:
+        return False
+
+    return True
 
 def makezip(path, zipper):
     path = os.path.normpath(path)
@@ -48,11 +52,8 @@ def makezip(path, zipper):
     for (dirpath, dirnames, filenames) in os.walk(path):
         for filename in filenames:
             if not filename.endswith('.lock'):
-                try:
-                    zipper.write(os.path.join(dirpath, filename),            
-                    os.path.join(dirpath[len(path):], filename)) 
-                except Exception, e:
-                    print "    Error adding %s: %s" % (filename, e)
+                zipper.write(os.path.join(dirpath, filename),            
+                os.path.join(dirpath[len(path):], filename)) 
 
 def restore_backup(infile):
     if not infile.endswith('PigeonPlannerBackup.zip'):
@@ -61,8 +62,15 @@ def restore_backup(infile):
     outfol = Const.PREFDIR
 
     zipper = zipfile.ZipFile(infile, 'r')
-    unzip(outfol, zipper)
+
+    try:
+        unzip(outfol, zipper)
+    except:
+        return False
+
     zipper.close()
+
+    return True
 
 def unzip(path, zipper):
     if not isdir(path):
