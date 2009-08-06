@@ -222,8 +222,6 @@ class MainWindow:
         self.cbLoft.child.set_text('')
         self.cbsex.set_active(0)
 
-        self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
-
         self.add_edit_start('add')
 
     def menuaddrange_activate(self, widget):
