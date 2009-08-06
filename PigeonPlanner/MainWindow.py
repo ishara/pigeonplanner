@@ -1198,7 +1198,7 @@ class MainWindow:
 
         self.entryRing1.grab_focus()
 
-        Widgets.set_multiple_visible({self.alignUnEdit: False, self.alignEdit: True})
+        self.detailbook.set_current_page(1)
 
         Widgets.set_multiple_sensitive({self.toolbar: False, self.notebook: False,
                                         self.treeview: False, self.vboxButtons: False})
@@ -1214,7 +1214,7 @@ class MainWindow:
 
         self.beforeEditPath = 0
 
-        Widgets.set_multiple_visible({self.alignUnEdit: True, self.alignEdit: False})
+        self.detailbook.set_current_page(0)
 
         Widgets.set_multiple_sensitive({self.toolbar: True, self.notebook: True,
                                         self.treeview: True, self.vboxButtons: True})
