@@ -29,6 +29,9 @@ uistring = '''
 <ui>
    <menubar name="MenuBar">
       <menu action="FileMenu">
+         <menuitem action="Add"/>
+         <menuitem action="Addrange"/>
+         <separator/>
          <menu action="BackupMenu">
             <menuitem action="Backup"/>
             <menuitem action="Restore"/>
@@ -36,18 +39,15 @@ uistring = '''
          <separator/>
          <menuitem action="Quit"/>
       </menu>
+      <menu action="EditMenu">
+         <menuitem action="Tools"/>
+         <menuitem action="Preferences"/>
+      </menu>
       <menu action="PigeonMenu">
-         <menuitem action="Add"/>
-         <menuitem action="Addrange"/>
-         <separator/>
          <menuitem action="Edit"/>
          <menuitem action="Remove"/>
          <menuitem action="Pedigree"/>
          <menuitem action="Addresult"/>
-      </menu>
-      <menu action="EditMenu">
-         <menuitem action="Tools"/>
-         <menuitem action="Preferences"/>
       </menu>
       <menu action="ViewMenu">
          <menu action="FilterMenu">
