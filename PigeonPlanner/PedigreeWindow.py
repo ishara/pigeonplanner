@@ -15,23 +15,27 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+'''
+A detailed pedigree of the selected pigeon.
+'''
+
 
 import gtk
 import gtk.glade
 
 import Const
-import Print
 import Widgets
-import Options
+from Print import PrintPedigree
+from Options import OptionsDialog
 from Pedigree import DrawPedigree
 
 
 class PedigreeWindow:
     def __init__(self, main, pindex, ring, year, name, colour, sex):
         '''
-        A detailed pedigree of the selected pigeon.
+        Constructor
 
-        @param main: The main window to set as parent
+        @param main: The main instance class
         @param ring: The selected pigeon
         @param year: Year of the pigeon
         @param name: Name of the pigeon
@@ -59,27 +63,26 @@ class PedigreeWindow:
         self.colour = colour
         self.sex = sex
 
-        self.options = Options.GetOptions()
-
         self.pedigreewindow.set_transient_for(self.main.main)
 
         self.labelRing.set_text(self.ring + '/' + self.year)
         self.labelName.set_text(self.name)
 
-        dp = DrawPedigree([self.tableSire, self.tableDam], pindex, True, None, self.main.parser.pigeons)
+        dp = DrawPedigree([self.tableSire, self.tableDam], pindex,
+                          True, None,
+                          self.main.parser.pigeons)
         dp.draw_pedigree()
 
     def close_clicked(self, widget, event=None):
         self.pedigreewindow.destroy()
 
     def print_clicked(self, widget):
-        if not self.options.optionList.name:
-            answer = Widgets.message_dialog('question', Const.MSG_NO_INFO, self.pedigreewindow)
-            if answer:
+        if not self.main.options.optionList.name:
+            if Widgets.message_dialog('question', Const.MSG_NO_INFO, self.pedigreewindow):
                 self.pedigreewindow.destroy()
-                Options.OptionsDialog(self.main, True)
+                OptionsDialog(self.main, True)
                 return
 
-        Print.PrintPedigree(self.pedigreewindow, self.pindex, self.ring, self.year, self.sex, self.colour, self.name)
-
+        PrintPedigree(self.pedigreewindow, self.pindex, self.ring,
+                      self.year, self.sex, self.colour, self.name)
 
