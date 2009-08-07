@@ -410,7 +410,9 @@ class MainWindow:
             liststore.set_sort_column_id(1, gtk.SORT_DESCENDING)
 
     def treeview_press(self, widget, event):
-        if event.button == 3:
+        path, focus = self.treeview.get_cursor()
+
+        if event.button == 3 and path:
             entries = [
                 (gtk.STOCK_EDIT, self.menuedit_activate, None),
                 (gtk.STOCK_REMOVE, self.menuremove_activate, None)]
