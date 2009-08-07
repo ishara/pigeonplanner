@@ -580,7 +580,9 @@ class MainWindow:
 
     # Result callbacks
     def tvResults_press(self, widget, event):
-        if event.button == 3:
+        path, focus = self.tvResults.get_cursor()
+
+        if event.button == 3 and path:
             entries = [
                 (gtk.STOCK_EDIT, self.editresult_clicked, None),
                 (gtk.STOCK_REMOVE, self.removeresult_clicked, None)]
