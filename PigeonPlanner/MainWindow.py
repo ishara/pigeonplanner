@@ -295,12 +295,8 @@ class MainWindow:
 
         if value == 0:
             self.fill_treeview()
-        elif value == 1:
-            self.fill_treeview('0')
-        elif value == 2:
-            self.fill_treeview('1')
-        elif value == 3:
-            self.fill_treeview('2')
+        else:
+            self.fill_treeview(str(value-1))
 
     def menutools_activate(self, widget):
         ToolsWindow.ToolsWindow(self)
