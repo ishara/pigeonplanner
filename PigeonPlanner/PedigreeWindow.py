@@ -77,12 +77,6 @@ class PedigreeWindow:
         self.pedigreewindow.destroy()
 
     def print_clicked(self, widget):
-        if not self.main.options.optionList.name:
-            if Widgets.message_dialog('question', Const.MSG_NO_INFO, self.pedigreewindow):
-                self.pedigreewindow.destroy()
-                OptionsDialog(self.main, True)
-                return
-
         PrintPedigree(self.pedigreewindow, self.pindex, self.ring,
                       self.year, self.sex, self.colour, self.name)
 

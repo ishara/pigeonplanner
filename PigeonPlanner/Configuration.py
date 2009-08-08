@@ -48,13 +48,6 @@ class Configuration:
         self.__addOption('Options', 'statusbar', 'True')
         self.__addOption('Options', 'update', 'True')
 
-        self.__addSection('personal')
-        self.__addOption('personal', 'name', '')
-        self.__addOption('personal', 'street', '')
-        self.__addOption('personal', 'code', '')
-        self.__addOption('personal', 'city', '')
-        self.__addOption('personal', 'tel', '')
-
     def __addSection(self, name):
         '''
         Add a section.

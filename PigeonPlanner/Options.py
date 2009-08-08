@@ -29,7 +29,7 @@ import Configuration
 
 
 class ParsedOptions:
-    def __init__(self, theme, column, columntype, columnposition, arrows, toolbar, statusbar, update, name, street, code, city, tel):
+    def __init__(self, theme, column, columntype, columnposition, arrows, toolbar, statusbar, update):
         self.theme = theme
         self.column = column
         self.columntype = columntype
@@ -38,11 +38,6 @@ class ParsedOptions:
         self.toolbar = toolbar
         self.statusbar = statusbar
         self.update = update
-        self.name = name
-        self.street = street
-        self.code = code
-        self.city = city
-        self.tel = tel
 
 
 class GetOptions:
@@ -58,12 +53,7 @@ class GetOptions:
                           self.conf.getboolean('Options', 'arrows'),
                           self.conf.getboolean('Options', 'toolbar'),
                           self.conf.getboolean('Options', 'statusbar'),
-                          self.conf.getboolean('Options', 'update'),
-                          self.conf.get('personal', 'name'),
-                          self.conf.get('personal', 'street'),
-                          self.conf.get('personal', 'code'),
-                          self.conf.get('personal', 'city'),
-                          self.conf.get('personal', 'tel'))
+                          self.conf.getboolean('Options', 'update'))
 
         self.optionList = p
 
@@ -98,7 +88,7 @@ class GetOptions:
 
 
 class OptionsDialog:
-    def __init__(self, main, personal=False):
+    def __init__(self, main):
 
         self.gladefile = Const.GLADEDIR + "OptionsDialog.glade"
         self.wTree = gtk.glade.XML(self.gladefile)
@@ -116,7 +106,6 @@ class OptionsDialog:
             setattr(self, name, w)
 
         self.main = main
-        self.personal = personal
 
         self.optionsdialog.set_transient_for(self.main.main)
 
@@ -146,11 +135,6 @@ class OptionsDialog:
 
         self.treeviewOptsChanged = False
 
-        if self.personal:
-            self.notebook.get_nth_page(0).set_sensitive(0)
-            self.notebook.get_nth_page(1).set_sensitive(0)
-            self.notebook.set_current_page(2)
-
     def create_columntype_combo(self):
         self.typeStore = gtk.ListStore(str, str)
         for key in self.main.columnValueDic.keys():
@@ -177,12 +161,6 @@ class OptionsDialog:
         self.chkToolbar.set_active(self.opt.optionList.toolbar)
         self.chkStatusbar.set_active(self.opt.optionList.statusbar)
         self.chkUpdate.set_active(self.opt.optionList.update)
-
-        self.entryName.set_text(self.opt.optionList.name)
-        self.entryStreet.set_text(self.opt.optionList.street)
-        self.entryCode.set_text(self.opt.optionList.code)
-        self.entryCity.set_text(self.opt.optionList.city)
-        self.entryTel.set_text(self.opt.optionList.tel)
 
         self.treeviewOptsChanged = False
 
@@ -219,13 +197,7 @@ class OptionsDialog:
                             'toolbar': str(self.chkToolbar.get_active()),
                             'statusbar': str(self.chkStatusbar.get_active()),
                             'update': str(self.chkUpdate.get_active())
-                           },
-               "personal" : {'name': self.entryName.get_text(),
-                             'street': self.entryStreet.get_text(),
-                             'code': self.entryCode.get_text(),
-                             'city': self.entryCity.get_text(),
-                             'tel': self.entryTel.get_text(),
-                            }
+                           }
               }
 
         self.opt.write_options(dic)
@@ -285,7 +257,4 @@ class OptionsDialog:
             self.main.blockMenuCallback = False
 
         self.optionsdialog.destroy()
-
-        if self.personal:
-            self.main.sbdetail_clicked(None)
 

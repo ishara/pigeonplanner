@@ -85,16 +85,16 @@ class PrintPedigree:
 
         # address
         cr.set_font_size(6)
-        cr.move_to(0, 22)
-        cr.show_text(self.options.optionList.name)
-        cr.move_to(0, 30)
-        cr.show_text(self.options.optionList.street)
-        cr.move_to(0, 38)
-        cr.show_text(self.options.optionList.code + " " + self.options.optionList.city)
-        cr.move_to(0, 46)
-        cr.show_text(self.options.optionList.tel)
+#        cr.move_to(0, 22)
+#        cr.show_text(self.options.optionList.name)
+#        cr.move_to(0, 30)
+#        cr.show_text(self.options.optionList.street)
+#        cr.move_to(0, 38)
+#        cr.show_text(self.options.optionList.code + " " + self.options.optionList.city)
+#        cr.move_to(0, 46)
+#        cr.show_text(self.options.optionList.tel)
 
-        # duifdetails
+        # pigeondetails
         xb, yb, width, height, xa, ya = cr.text_extents(self.sex)
         cr.move_to(total_width-width, 22)
         cr.show_text(self.sex)
@@ -227,8 +227,6 @@ class PrintResults:
         self.fsector = fsector
         self.fcoef = fcoef
         self.fplace = fplace
-
-        self.options = Options.GetOptions()
 
         paper_size = gtk.PaperSize(gtk.PAPER_NAME_A4)
 
