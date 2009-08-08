@@ -53,10 +53,21 @@ class DatabaseOperations:
                ' place INTEGER,'
                ' out INTEGER,'
                ' sector TEXT)',
+    'Addresses': '(Addresskey INTEGER PRIMARY KEY,'
+                 ' name TEXT,'
+                 ' first TEXT,'
+                 ' street TEXT,'
+                 ' code TEXT,'
+                 ' city TEXT,'
+                 ' country TEXT,'
+                 ' phone TEXT,'
+                 ' comment TEXT)',
     'Colours': '(Colourkey INTEGER PRIMARY KEY,'
                ' colour TEXT UNIQUE)',
     'Racepoints': '(Racepointkey INTEGER PRIMARY KEY,'
                   ' racepoint TEXT UNIQUE,'
+                  ' xco INTEGER,'
+                  ' yco INTEGER,'
                   ' distance INTEGER)',
     'Sectors': '(Sectorkey INTEGER PRIMARY KEY,'
                ' sector TEXT UNIQUE)',
