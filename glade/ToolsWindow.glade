@@ -805,7 +805,7 @@
                                 <child>
                                   <widget class="GtkTable" id="table6">
                                     <property name="visible">True</property>
-                                    <property name="n_rows">13</property>
+                                    <property name="n_rows">14</property>
                                     <property name="n_columns">2</property>
                                     <property name="row_spacing">4</property>
                                     <child>
@@ -1010,8 +1010,8 @@
                                       <packing>
                                         <property name="left_attach">1</property>
                                         <property name="right_attach">2</property>
-                                        <property name="top_attach">12</property>
-                                        <property name="bottom_attach">13</property>
+                                        <property name="top_attach">13</property>
+                                        <property name="bottom_attach">14</property>
                                         <property name="x_options"></property>
                                         <property name="y_options"></property>
                                       </packing>
@@ -1043,9 +1043,24 @@
                                         </child>
                                       </widget>
                                       <packing>
+                                        <property name="top_attach">13</property>
+                                        <property name="bottom_attach">14</property>
+                                        <property name="x_options"></property>
+                                        <property name="y_options"></property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="GtkCheckButton" id="chkme">
+                                        <property name="label" translatable="yes">This is me</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="draw_indicator">True</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="right_attach">2</property>
                                         <property name="top_attach">12</property>
                                         <property name="bottom_attach">13</property>
-                                        <property name="x_options"></property>
+                                        <property name="x_options">GTK_FILL</property>
                                         <property name="y_options"></property>
                                       </packing>
                                     </child>

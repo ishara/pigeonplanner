@@ -61,7 +61,8 @@ class DatabaseOperations:
                  ' country TEXT,'
                  ' phone TEXT,'
                  ' email TEXT,'
-                 ' comment TEXT)',
+                 ' comment TEXT,'
+                 ' me INTEGER)',
     'Colours': '(Colourkey INTEGER PRIMARY KEY,'
                ' colour TEXT UNIQUE)',
     'Racepoints': '(Racepointkey INTEGER PRIMARY KEY,'
@@ -198,7 +199,7 @@ class DatabaseOperations:
 #### Addresses
     def insert_address(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('INSERT INTO Addresses VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+        cursor.execute('INSERT INTO Addresses VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
         conn.commit()
         conn.close()
 

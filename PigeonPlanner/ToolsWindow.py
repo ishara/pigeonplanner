@@ -288,8 +288,18 @@ class ToolsWindow:
         for entry in self.get_entrys():
             entry.set_property('editable', True)
 
-        Widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True})
         Widgets.set_multiple_sensitive({self.treeview: False, self.vboxtv: False})
+
+        alreadyMe = False
+        for item in self.main.database.get_all_addresses():
+            if item[9]:
+                alreadyMe = True
+                break
+
+        if alreadyMe:
+            Widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True})
+        else:
+            Widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True, self.chkme: True})
 
         self.adentryname.grab_focus()
 
@@ -320,7 +330,9 @@ class ToolsWindow:
         for entry in self.get_entrys():
             entry.set_property('editable', False)
 
-        Widgets.set_multiple_visible({self.btnadd: False, self.btncancel: False})
+        self.chkme.set_active(False)
+
+        Widgets.set_multiple_visible({self.btnadd: False, self.btncancel: False, self.chkme: False})
         Widgets.set_multiple_sensitive({self.treeview: True, self.vboxtv: True})
 
     def adremove_clicked(self, widget):
@@ -344,7 +356,8 @@ class ToolsWindow:
                 self.adentrycountry.get_text(),\
                 self.adentryphone.get_text(),\
                 self.adentrymail.get_text(),\
-                self.adentrycomment.get_text())
+                self.adentrycomment.get_text(),\
+                int(self.chkme.get_active()))
 
     def get_entrys(self):
         entrys = []
