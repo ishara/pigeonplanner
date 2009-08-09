@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-09 17:25+0200\n"
+"POT-Creation-Date: 2009-08-09 23:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -293,7 +293,7 @@ msgstr ""
 msgid "Time of Arrival"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:66 tmp/ToolsWindow.glade.h:38
+#: ../PigeonPlanner/ToolsWindow.py:66 tmp/ToolsWindow.glade.h:39
 msgid "Tools"
 msgstr ""
 
@@ -348,23 +348,23 @@ msgstr ""
 msgid "Lofts"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:376
+#: ../PigeonPlanner/ToolsWindow.py:389
 msgid "Number of pigeons"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:377
+#: ../PigeonPlanner/ToolsWindow.py:390
 msgid "Number of cocks"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:378
+#: ../PigeonPlanner/ToolsWindow.py:391
 msgid "Number of hens"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:379
+#: ../PigeonPlanner/ToolsWindow.py:392
 msgid "Number of young birds"
 msgstr ""
 
-#: ../PigeonPlanner/ToolsWindow.py:380
+#: ../PigeonPlanner/ToolsWindow.py:393
 msgid "Number of results"
 msgstr ""
 
@@ -977,6 +977,10 @@ msgstr ""
 msgid "Street"
 msgstr ""
 
-#: tmp/ToolsWindow.glade.h:39
+#: tmp/ToolsWindow.glade.h:38
+msgid "This is me"
+msgstr ""
+
+#: tmp/ToolsWindow.glade.h:40
 msgid "Zipcode / City"
 msgstr ""
