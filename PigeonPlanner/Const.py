@@ -95,6 +95,13 @@ MSG_RESULT_EXISTS = (_("Invalid input!"),
                      _("The result you want to add already exists."),
                      _("Error"))
 
+MSG_NAME_EMPTY = (_("Invalid input!"),
+                  _("The name has to be entered."),
+                  _("Error"))
+MSG_NAME_EXISTS = (_("Invalid input!"),
+                   _("The persoon you want to add already exists."),
+                   _("Error"))
+
 MSG_BACKUP_SUCCES = (_("The backup was successfully created."),
                      None,
                      _("Completed!"))

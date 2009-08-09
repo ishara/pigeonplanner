@@ -55,12 +55,12 @@ class DatabaseOperations:
                ' sector TEXT)',
     'Addresses': '(Addresskey INTEGER PRIMARY KEY,'
                  ' name TEXT,'
-                 ' first TEXT,'
                  ' street TEXT,'
                  ' code TEXT,'
                  ' city TEXT,'
                  ' country TEXT,'
                  ' phone TEXT,'
+                 ' email TEXT,'
                  ' comment TEXT)',
     'Colours': '(Colourkey INTEGER PRIMARY KEY,'
                ' colour TEXT UNIQUE)',
@@ -194,6 +194,33 @@ class DatabaseOperations:
         conn.close()
         return data
 
+
+#### Addresses
+    def insert_address(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('INSERT INTO Addresses VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+        conn.commit()
+        conn.close()
+
+    def delete_address(self, name):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Addresses WHERE name=?', (name,))
+        conn.commit()
+        conn.close()
+
+    def get_all_addresses(self):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Addresses')
+        data = cursor.fetchall()
+        conn.close()
+        return data
+
+    def get_address(self, name):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Addresses WHERE name=?', (name,))
+        data = cursor.fetchone()
+        conn.close()
+        return data
 
 #### Colours
     def insert_colour(self, data):

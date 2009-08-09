@@ -44,6 +44,10 @@ class ToolsWindow:
                       'on_dataremove_clicked'    : self.dataremove_clicked,
                       'on_dataadd_clicked'       : self.dataadd_clicked,
                       'on_entryData_changed'     : self.entryData_changed,
+                      'on_adadd_clicked'         : self.adadd_clicked,
+                      'on_adremove_clicked'      : self.adremove_clicked,
+                      'on_btnadd_clicked'        : self.btnadd_clicked,
+                      'on_btncancel_clicked'     : self.btncancel_clicked,
                       'on_btnsearchdb_clicked'   : self.btnsearchdb_clicked,
                       'on_window_destroy'        : self.close_clicked,
                       'on_close_clicked'         : self.close_clicked }
@@ -65,7 +69,7 @@ class ToolsWindow:
 
         # Add the categories
         i = 0
-        for category in [_("Velocity calculator"), _("Datasets"), _("Statistics"), _("Backup"), _("Update")]:
+        for category in [_("Velocity calculator"), _("Datasets"), _("Addresses"), _("Statistics"), _("Backup"), _("Update")]:
             self.liststore.append([i, category])
             i += 1
 
@@ -75,6 +79,17 @@ class ToolsWindow:
         columns = [_("Velocity"), _("Flight Time"), _("Time of Arrival")]
         types = [int, str, str]
         self.ls_velocity, self.sel_velocity = Widgets.setup_treeview(self.tv_velocity, columns, types, None, False, False, False)
+
+        # Build addresses treeview
+        columns = [_("Name")]
+        types = [str]
+        self.ls_address, self.sel_address = Widgets.setup_treeview(self.tvaddress,
+                                                                   columns, types,
+                                                                   self.adselection_changed,
+                                                                   True, True, False)
+
+        # Fill address treeview
+        self.fill_address_view()
 
         # Build statistics treeview
         columns = ["Item", "Value"]
@@ -235,6 +250,112 @@ class ToolsWindow:
             self.dataadd.set_sensitive(True)
         else:
             self.dataadd.set_sensitive(False)
+
+    # Addresses
+    def fill_address_view(self):
+        self.ls_address.clear()
+
+        for item in self.main.database.get_all_addresses():
+            self.ls_address.append([item[1]])
+
+    def adselection_changed(self, selection):
+        model, path = selection.get_selected()
+
+        self.empty_adentrys()
+
+        if path:
+            Widgets.set_multiple_sensitive({self.adremove: True})
+        else:
+            Widgets.set_multiple_sensitive({self.adremove: False})
+            return
+
+        name = model[path][0]
+
+        data = self.main.database.get_address(name)
+
+        self.adentryname.set_text(name)
+        self.adentrystreet.set_text(data[2])
+        self.adentryzip.set_text(data[3])
+        self.adentrycity.set_text(data[4])
+        self.adentrycountry.set_text(data[5])
+        self.adentryphone.set_text(data[6])
+        self.adentrymail.set_text(data[7])
+        self.adentrycomment.set_text(data[8])
+
+    def adadd_clicked(self, widget):
+        self.empty_adentrys()
+
+        for entry in self.get_entrys():
+            entry.set_property('editable', True)
+
+        Widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True})
+        Widgets.set_multiple_sensitive({self.treeview: False, self.vboxtv: False})
+
+        self.adentryname.grab_focus()
+
+    def btnadd_clicked(self, widget):
+        data = self.get_entry_data()
+
+        if not data[0]:
+            Widgets.message_dialog('error', Const.MSG_NAME_EMPTY, self.toolsdialog)
+            return
+
+        for ad in self.main.database.get_all_addresses():
+            if data[0] == ad[1]:
+                Widgets.message_dialog('error', Const.MSG_NAME_EXISTS, self.toolsdialog)
+                return
+
+        self.main.database.insert_address(data)
+
+        self.fill_address_view()
+
+        self.finish_add()
+
+    def btncancel_clicked(self, widget):
+        self.finish_add()
+
+    def finish_add(self):
+        self.empty_adentrys()
+
+        for entry in self.get_entrys():
+            entry.set_property('editable', False)
+
+        Widgets.set_multiple_visible({self.btnadd: False, self.btncancel: False})
+        Widgets.set_multiple_sensitive({self.treeview: True, self.vboxtv: True})
+
+    def adremove_clicked(self, widget):
+        self.main.database.delete_address(self.get_name())
+
+        model, path = self.sel_address.get_selected()
+        self.ls_address.remove(path)
+
+    def get_name(self):
+        model, path = self.sel_address.get_selected()
+        if not path:
+            return None
+        else:
+            return model[path][0]
+
+    def get_entry_data(self):
+        return (self.adentryname.get_text(),\
+                self.adentrystreet.get_text(),\
+                self.adentryzip.get_text(),\
+                self.adentrycity.get_text(),\
+                self.adentrycountry.get_text(),\
+                self.adentryphone.get_text(),\
+                self.adentrymail.get_text(),\
+                self.adentrycomment.get_text())
+
+    def get_entrys(self):
+        entrys = []
+        for widget in self.wTree.get_widget_prefix("adentry"):
+            entrys.append(getattr(self, widget.get_name()))
+
+        return entrys
+
+    def empty_adentrys(self):
+        for entry in self.get_entrys():
+            entry.set_text('')
 
     # Statistics
     def btnsearchdb_clicked(self, widget):
