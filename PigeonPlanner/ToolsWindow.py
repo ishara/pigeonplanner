@@ -258,6 +258,8 @@ class ToolsWindow:
         for item in self.main.database.get_all_addresses():
             self.ls_address.append([item[1]])
 
+        self.ls_address.set_sort_column_id(0, gtk.SORT_ASCENDING)
+
     def adselection_changed(self, selection):
         model, path = selection.get_selected()
 
