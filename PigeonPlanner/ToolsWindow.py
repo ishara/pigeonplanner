@@ -173,6 +173,10 @@ class ToolsWindow:
         self.fill_item_combo(datatype)
 
     def fill_item_combo(self, datatype):
+        '''
+        Fill the item combobox with available items for the selected data
+        '''
+
         self.cbitems.get_model().clear()
 
         if datatype == _("Colours"):
@@ -253,6 +257,10 @@ class ToolsWindow:
 
     # Addresses
     def fill_address_view(self):
+        '''
+        Fill the treeview with available addresses
+        ''' 
+
         self.ls_address.clear()
 
         for item in self.main.database.get_all_addresses():
@@ -355,6 +363,10 @@ class ToolsWindow:
             self.tvaddress.set_cursor((0,))
 
     def get_name(self):
+        '''
+        Return the name of the selected person
+        '''
+
         model, path = self.sel_address.get_selected()
         if not path:
             return None
@@ -362,6 +374,10 @@ class ToolsWindow:
             return model[path][0]
 
     def get_entry_data(self):
+        '''
+        Return the text of all the entry's
+        '''
+
         return (self.adentryname.get_text(),\
                 self.adentrystreet.get_text(),\
                 self.adentryzip.get_text(),\
@@ -373,6 +389,10 @@ class ToolsWindow:
                 int(self.chkme.get_active()))
 
     def get_entrys(self):
+        '''
+        Return all entry's
+        '''
+
         entrys = []
         for widget in self.wTree.get_widget_prefix("adentry"):
             entrys.append(getattr(self, widget.get_name()))
@@ -380,6 +400,10 @@ class ToolsWindow:
         return entrys
 
     def empty_adentrys(self):
+        '''
+        Clear all entry's
+        '''
+
         for entry in self.get_entrys():
             entry.set_text('')
 
