@@ -338,6 +338,9 @@ class ToolsWindow:
         Widgets.set_multiple_sensitive({self.treeview: True, self.vboxtv: True})
 
     def adremove_clicked(self, widget):
+        if not Widgets.message_dialog('warning', Const.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
+            return
+
         self.main.database.delete_address(self.get_name())
 
         model, path = self.sel_address.get_selected()

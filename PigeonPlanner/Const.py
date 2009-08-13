@@ -101,6 +101,9 @@ MSG_NAME_EMPTY = (_("Invalid input!"),
 MSG_NAME_EXISTS = (_("Invalid input!"),
                    _("The persoon you want to add already exists."),
                    _("Error"))
+MSG_REMOVE_ADDRESS = (_("Removing '%s'"),
+                      _("Are you sure you want to remove this person from your addresses?"),
+                      _("Remove address"))
 
 MSG_BACKUP_SUCCES = (_("The backup was successfully created."),
                      None,
