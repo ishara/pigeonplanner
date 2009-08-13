@@ -28,6 +28,7 @@ import Widgets
 from Print import PrintPedigree
 from Options import OptionsDialog
 from Pedigree import DrawPedigree
+from ToolsWindow import ToolsWindow
 
 
 class PedigreeWindow:
@@ -77,6 +78,28 @@ class PedigreeWindow:
         self.pedigreewindow.destroy()
 
     def print_clicked(self, widget):
+        userinfo = {'name': '', 'street': '', 'code': '', 'city': '', 'phone': ''}
+
+        for address in self.main.database.get_all_addresses():
+            if address[9]:
+                userinfo['name'] = address[1]
+                userinfo['street'] = address[2]
+                userinfo['code'] = address[3]
+                userinfo['city'] = address[4]
+                userinfo['phone'] = address[6]
+
+                break
+
+        if not userinfo['name']:
+            if Widgets.message_dialog('question', Const.MSG_NO_INFO, self.pedigreewindow):
+                tw = ToolsWindow(self.main)
+                tw.toolsdialog.set_keep_above(True)
+                tw.treeview.set_cursor(2)
+                tw.adadd_clicked(None, pedigree_call=True)
+                tw.chkme.set_active(True)
+
+                return
+
         PrintPedigree(self.pedigreewindow, self.pindex, self.ring,
-                      self.year, self.sex, self.colour, self.name)
+                      self.year, self.sex, self.colour, self.name, userinfo)
 

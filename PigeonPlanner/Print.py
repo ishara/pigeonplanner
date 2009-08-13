@@ -21,12 +21,11 @@ import cairo
 
 import Const
 import Widgets
-import Database
 from Pedigree import DrawPedigree
 
 
 class PrintPedigree:
-    def __init__(self, parent, pindex, ring, year, sex, colour, name):
+    def __init__(self, parent, pindex, ring, year, sex, colour, name, userinfo):
 
         self.parent = parent
         self.pindex = pindex
@@ -35,8 +34,7 @@ class PrintPedigree:
         self.sex = sex
         self.colour = colour
         self.name = name
-
-        self.database = Database.DatabaseOperations()
+        self.userinfo = userinfo
 
         paper_size = gtk.PaperSize(gtk.PAPER_NAME_A4)
 
@@ -85,31 +83,14 @@ class PrintPedigree:
 
         # address
         cr.set_font_size(6)
-        # Get the users address
-        name = ''
-        street = ''
-        code = ''
-        city = ''
-        phone = ''
-
-        for address in self.database.get_all_addresses():
-            if address[9]:
-                name = address[1]
-                street = address[2]
-                code = address[3]
-                city = address[4]
-                phone = address[6]
-
-                break
-        # Put it on the pedigree
         cr.move_to(0, 22)
-        cr.show_text(name)
+        cr.show_text(self.userinfo['name'])
         cr.move_to(0, 30)
-        cr.show_text(street)
+        cr.show_text(self.userinfo['street'])
         cr.move_to(0, 38)
-        cr.show_text("%s %s" %(code, city))
+        cr.show_text("%s %s" %(self.userinfo['code'], self.userinfo['city']))
         cr.move_to(0, 46)
-        cr.show_text(phone)
+        cr.show_text(self.userinfo['phone'])
 
         # pigeondetails
         xb, yb, width, height, xa, ya = cr.text_extents(self.sex)

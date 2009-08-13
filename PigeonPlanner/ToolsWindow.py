@@ -284,7 +284,9 @@ class ToolsWindow:
         self.adentrymail.set_text(data[7])
         self.adentrycomment.set_text(data[8])
 
-    def adadd_clicked(self, widget):
+    def adadd_clicked(self, widget, pedigree_call=False):
+        self.pedigree_call = pedigree_call
+
         self.empty_adentrys()
 
         for entry in self.get_entrys():
@@ -336,6 +338,9 @@ class ToolsWindow:
 
         Widgets.set_multiple_visible({self.btnadd: False, self.btncancel: False, self.chkme: False})
         Widgets.set_multiple_sensitive({self.treeview: True, self.vboxtv: True})
+
+        if self.pedigree_call:
+            self.toolsdialog.destroy()
 
     def adremove_clicked(self, widget):
         if not Widgets.message_dialog('warning', Const.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
