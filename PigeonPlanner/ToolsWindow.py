@@ -343,6 +343,9 @@ class ToolsWindow:
         model, path = self.sel_address.get_selected()
         self.ls_address.remove(path)
 
+        if len(self.ls_address) > 0:
+            self.tvaddress.set_cursor((0,))
+
     def get_name(self):
         model, path = self.sel_address.get_selected()
         if not path:
