@@ -93,6 +93,7 @@ class DatabaseOperations:
 
     def db_connect(self):
         conn = sqlite3.connect(Const.DATABASE)
+        conn.text_factory = str
         cursor = conn.cursor()
         return (conn, cursor)
 
