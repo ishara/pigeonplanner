@@ -182,11 +182,12 @@ class OptionsDialog:
         self.optionsdialog.destroy()
 
     def default_clicked(self, widget):
-        answer = Widgets.message_dialog('warning', Const.MSG_DEFAULT_OPTIONS, self.optionsdialog)
-        if answer:
+        if Widgets.message_dialog('warning', Const.MSG_DEFAULT_OPTIONS, self.optionsdialog):
             self.opt.write_default()
             self.opt = GetOptions()
             self.set_options()
+
+            self.finish_options(True)
 
     def ok_clicked(self, widget):
         dic = {"Options" : {'theme': self.cbThemes.get_active(),
@@ -201,6 +202,10 @@ class OptionsDialog:
               }
 
         self.opt.write_options(dic)
+
+        self.finish_options()
+
+    def finish_options(self, set_default=False):
 
         self.main.options = GetOptions()
 
@@ -256,5 +261,6 @@ class OptionsDialog:
             self.main.MenuStatusbar.set_active(False)
             self.main.blockMenuCallback = False
 
-        self.optionsdialog.destroy()
+        if not set_default:
+            self.optionsdialog.destroy()
 
