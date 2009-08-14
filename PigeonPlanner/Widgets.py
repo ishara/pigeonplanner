@@ -43,12 +43,6 @@ uistring = '''
          <menuitem action="Tools"/>
          <menuitem action="Preferences"/>
       </menu>
-      <menu action="PigeonMenu">
-         <menuitem action="Edit"/>
-         <menuitem action="Remove"/>
-         <menuitem action="Pedigree"/>
-         <menuitem action="Addresult"/>
-      </menu>
       <menu action="ViewMenu">
          <menu action="FilterMenu">
             <menuitem action="All"/>
@@ -60,6 +54,12 @@ uistring = '''
          <menuitem action="Arrows"/>
          <menuitem action="Toolbar"/>
          <menuitem action="Statusbar"/>
+      </menu>
+      <menu action="PigeonMenu">
+         <menuitem action="Edit"/>
+         <menuitem action="Remove"/>
+         <menuitem action="Pedigree"/>
+         <menuitem action="Addresult"/>
       </menu>
       <menu action="HelpMenu">
          <menuitem action="Home"/>
