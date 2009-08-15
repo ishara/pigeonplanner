@@ -27,7 +27,7 @@ VERSION = pigeonplanner.version
 AUTHORS = pigeonplanner.authors
 WEBSITE = pigeonplanner.website
 COPYRIGHT = pigeonplanner.copyright
-DESCRIPTION = _(pigeonplanner.description)
+DESCRIPTION = pigeonplanner.description
 LICENSE = pigeonplanner.license
 
 
