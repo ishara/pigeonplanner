@@ -19,10 +19,21 @@ import os
 import sys
 import gettext
 import locale
-import pygtk; pygtk.require('2.0')
 import gobject
-import gtk
-import gtk.glade
+
+try:
+    import pygtk; pygtk.require('2.0')
+except:
+    print "Can not find PyGTK. This is necessary to run this program."
+    sys.exit(1)
+
+try:
+    import gtk
+    import gtk.glade
+except:
+    print "The GTK runtime is required to run this program."
+    sys.exit(1)
+
 import __builtin__
 
 
