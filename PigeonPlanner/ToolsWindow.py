@@ -100,7 +100,6 @@ class ToolsWindow:
         dt = datetime.datetime.now()
         self.sbhour.set_value(dt.hour)
         self.sbminute.set_value(dt.minute)
-        self.sbdist.set_value(125)
 
         # Backups file filter
         self.fcButtonRestore.add_filter(Widgets.backupFileFilter)
