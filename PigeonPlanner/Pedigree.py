@@ -116,7 +116,7 @@ class PedigreeBox(gtk.DrawingArea):
         self.text = ''
 
         if ring != '':
-            self.text = ring + ' / ' + year
+            self.text = ring + ' / ' + year[2:]
 
             if sex == '0':
                 self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
