@@ -43,8 +43,7 @@ class PedigreeWindow:
         @param sex: Sex of the pigeon
         ''' 
 
-        self.gladefile = Const.GLADEDIR + "PedigreeWindow.glade"
-        self.wTree = gtk.glade.XML(self.gladefile)
+        self.wTree = gtk.glade.XML(Const.GLADEPEDIGREE)
 
         signalDic = { 'on_print_clicked'     : self.print_clicked,
                       'on_dialog_destroy'    : self.close_clicked,

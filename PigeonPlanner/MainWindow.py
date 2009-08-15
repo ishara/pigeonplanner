@@ -41,9 +41,7 @@ from OptionsDialog import OptionsDialog
 class MainWindow:
 
     def __init__(self):
-
-        self.gladefile = Const.GLADEDIR + "MainWindow.glade"
-        self.wTree = gtk.glade.XML(self.gladefile)
+        self.wTree = gtk.glade.XML(Const.GLADEMAIN)
 
         signalDic = { 'on_save_clicked'          : self.save_clicked,
                       'on_cancel_clicked'        : self.cancel_clicked,

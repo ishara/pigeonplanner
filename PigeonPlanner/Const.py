@@ -50,6 +50,12 @@ else:
         GLADEDIR = './glade/'
         IMAGEDIR = './images/'
 
+GLADEMAIN = os.path.join(GLADEDIR, "MainWindow.glade")
+GLADEOPTIONS = os.path.join(GLADEDIR, "OptionsDialog.glade")
+GLADEPEDIGREE = os.path.join(GLADEDIR, "PedigreeWindow.glade")
+GLADERESULT = os.path.join(GLADEDIR, "ResultWindow.glade")
+GLADETOOLS = os.path.join(GLADEDIR, "ToolsWindow.glade")
+
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 UPDATEURL = 'http://pigeonplanner.sourceforge.net/CURRENT'
 DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/download.html'

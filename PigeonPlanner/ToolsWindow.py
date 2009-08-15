@@ -30,8 +30,7 @@ from Print import PrintVelocity
 
 class ToolsWindow:
     def __init__(self, main):
-        self.gladefile = Const.GLADEDIR + "ToolsWindow.glade"
-        self.wTree = gtk.glade.XML(self.gladefile)
+        self.wTree = gtk.glade.XML(Const.GLADETOOLS)
 
         signalDic = { 'on_makebackup_clicked'    : self.makebackup_clicked,
                       'on_restorebackup_clicked' : self.restorebackup_clicked,

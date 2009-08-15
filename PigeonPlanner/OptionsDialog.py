@@ -30,9 +30,7 @@ import Options
 
 class OptionsDialog:
     def __init__(self, main):
-
-        self.gladefile = Const.GLADEDIR + "OptionsDialog.glade"
-        self.wTree = gtk.glade.XML(self.gladefile)
+        self.wTree = gtk.glade.XML(Const.GLADEOPTIONS)
 
         signalDic = { 'on_chkColumn_toggled'     : self.chkColumn_toggled,
                       'on_columnOpt_changed'     : self.columnOpt_changed,

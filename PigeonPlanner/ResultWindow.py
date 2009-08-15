@@ -25,9 +25,7 @@ import Print
 
 class ResultWindow:
     def __init__(self, main, pigeons, database):
-
-        self.gladefile = Const.GLADEDIR + "ResultWindow.glade"
-        self.wTree = gtk.glade.XML(self.gladefile)
+        self.wTree = gtk.glade.XML(Const.GLADERESULT)
 
         signalDic = { 'on_cbYearRace_changed'    : self.cbYearRace_changed,
                       'on_cbPigeon_changed'      : self.cbPigeon_changed,
