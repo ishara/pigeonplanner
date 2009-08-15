@@ -21,8 +21,8 @@ import os.path
 import gtk
 import gtk.gdk
 
-import Const
-import Backup
+import const
+import backup
 
 
 uistring = '''
@@ -140,19 +140,19 @@ def about_dialog(parent):
 
     dialog = gtk.AboutDialog()
     dialog.set_transient_for(parent)
-    dialog.set_icon_from_file(Const.IMAGEDIR + 'icon_logo.png')
+    dialog.set_icon_from_file(const.IMAGEDIR + 'icon_logo.png')
     dialog.set_modal(True)
     dialog.set_property("skip-taskbar-hint", True)
 
-    dialog.set_name(Const.NAME)
-    dialog.set_version(Const.VERSION)
-    dialog.set_copyright(Const.COPYRIGHT)
-    dialog.set_comments(Const.DESCRIPTION)
-    dialog.set_website(Const.WEBSITE)
+    dialog.set_name(const.NAME)
+    dialog.set_version(const.VERSION)
+    dialog.set_copyright(const.COPYRIGHT)
+    dialog.set_comments(const.DESCRIPTION)
+    dialog.set_website(const.WEBSITE)
     dialog.set_website_label("Pigeon Planner website")
-    dialog.set_authors(Const.AUTHORS)
-    dialog.set_license(Const.LICENSE)
-    dialog.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 80, 80))
+    dialog.set_authors(const.AUTHORS)
+    dialog.set_license(const.LICENSE)
+    dialog.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(const.IMAGEDIR + 'icon_logo.png', 80, 80))
 
     result = dialog.run()
     dialog.destroy()
@@ -334,18 +334,18 @@ class BackupDialog(gtk.Dialog):
     def makebackup_clicked(self, widget):
         folder = self.fcButtonCreate.get_current_folder()
         if folder:
-            success = Backup.make_backup(folder)
+            success = backup.make_backup(folder)
             if success:
-                message_dialog('info', Const.MSG_BACKUP_SUCCES, self.par)
+                message_dialog('info', const.MSG_BACKUP_SUCCES, self.par)
             else:
                 message_dialog('info', Conts.MSG_BACKUP_FAILED, self.par)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
-            success = Backup.restore_backup(zipfile)
+            success = backup.restore_backup(zipfile)
             if success:
-                message_dialog('info', Const.MSG_RESTORE_SUCCES, self.par)
+                message_dialog('info', const.MSG_RESTORE_SUCCES, self.par)
             else:
                 message_dialog('info', Conts.MSG_RESTORE_FAILED, self.par)
 

@@ -19,13 +19,13 @@
 import gtk
 import gtk.glade
 
-import Const
-import Print
+import const
+from printing import PrintResults
 
 
 class ResultWindow:
     def __init__(self, main, pigeons, database):
-        self.wTree = gtk.glade.XML(Const.GLADERESULT)
+        self.wTree = gtk.glade.XML(const.GLADERESULT)
 
         signalDic = { 'on_cbYearRace_changed'    : self.cbYearRace_changed,
                       'on_cbPigeon_changed'      : self.cbPigeon_changed,
@@ -115,7 +115,7 @@ class ResultWindow:
 
             results.append({band : [date, racepoint, placed, out, coef, sector]})
 
-        Print.PrintResults(results, self.yearpigeon, self.yearrace, self.racepoint, self.sector, self.coef, self.place)
+        PrintResults(results, self.yearpigeon, self.yearrace, self.racepoint, self.sector, self.coef, self.place)
 
     def column7_clicked(self, column):
         treeview = column.get_tree_view()

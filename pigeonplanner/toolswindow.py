@@ -21,16 +21,16 @@ import datetime
 import gtk
 import gtk.glade
 
-import Const
-import Update
-import Backup
-import Widgets
-from Print import PrintVelocity
+import const
+import update
+import backup
+import widgets
+from printing import PrintVelocity
 
 
 class ToolsWindow:
     def __init__(self, main):
-        self.wTree = gtk.glade.XML(Const.GLADETOOLS)
+        self.wTree = gtk.glade.XML(const.GLADETOOLS)
 
         signalDic = { 'on_makebackup_clicked'    : self.makebackup_clicked,
                       'on_restorebackup_clicked' : self.restorebackup_clicked,
@@ -59,12 +59,12 @@ class ToolsWindow:
         self.main = main
 
         self.toolsdialog.set_transient_for(self.main.main)
-        self.linkbutton.set_uri(Const.DOWNLOADURL)
+        self.linkbutton.set_uri(const.DOWNLOADURL)
 
         # Build main treeview
         columns = [_("Tools")]
         types = [int, str]
-        self.liststore, self.selection = Widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, False, False, True)
+        self.liststore, self.selection = widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, False, False, True)
 
         # Add the categories
         i = 0
@@ -77,12 +77,12 @@ class ToolsWindow:
         # Build velocity treeview
         columns = [_("Velocity"), _("Flight Time"), _("Time of Arrival")]
         types = [int, str, str]
-        self.ls_velocity, self.sel_velocity = Widgets.setup_treeview(self.tv_velocity, columns, types, None, False, False, False)
+        self.ls_velocity, self.sel_velocity = widgets.setup_treeview(self.tv_velocity, columns, types, None, False, False, False)
 
         # Build addresses treeview
         columns = [_("Name")]
         types = [str]
-        self.ls_address, self.sel_address = Widgets.setup_treeview(self.tvaddress,
+        self.ls_address, self.sel_address = widgets.setup_treeview(self.tvaddress,
                                                                    columns, types,
                                                                    self.adselection_changed,
                                                                    True, True, False)
@@ -93,7 +93,7 @@ class ToolsWindow:
         # Build statistics treeview
         columns = ["Item", "Value"]
         types = [str, str]
-        self.ls_stats, self.sel_stats = Widgets.setup_treeview(self.tvstats, columns, types, None, False, False, False)
+        self.ls_stats, self.sel_stats = widgets.setup_treeview(self.tvstats, columns, types, None, False, False, False)
 
         # Fill spinbuttons
         dt = datetime.datetime.now()
@@ -101,7 +101,7 @@ class ToolsWindow:
         self.sbminute.set_value(dt.minute)
 
         # Backups file filter
-        self.fcButtonRestore.add_filter(Widgets.backupFileFilter)
+        self.fcButtonRestore.add_filter(widgets.backupFileFilter)
 
         # Fill the data combobox
         data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Strains"), _("Lofts")]
@@ -208,7 +208,7 @@ class ToolsWindow:
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
 
-        remove = Widgets.message_dialog('question', Const.MSG_REMOVE_ITEM, self.toolsdialog, {'item': item, 'dataset': dataset})
+        remove = widgets.message_dialog('question', const.MSG_REMOVE_ITEM, self.toolsdialog, {'item': item, 'dataset': dataset})
 
         if remove:
             index = self.cbitems.get_active()
@@ -272,9 +272,9 @@ class ToolsWindow:
         self.empty_adentrys()
 
         if path:
-            Widgets.set_multiple_sensitive({self.adremove: True})
+            widgets.set_multiple_sensitive({self.adremove: True})
         else:
-            Widgets.set_multiple_sensitive({self.adremove: False})
+            widgets.set_multiple_sensitive({self.adremove: False})
             return
 
         name = model[path][0]
@@ -298,7 +298,7 @@ class ToolsWindow:
         for entry in self.get_entrys():
             entry.set_property('editable', True)
 
-        Widgets.set_multiple_sensitive({self.treeview: False, self.vboxtv: False})
+        widgets.set_multiple_sensitive({self.treeview: False, self.vboxtv: False})
 
         alreadyMe = False
         for item in self.main.database.get_all_addresses():
@@ -307,9 +307,9 @@ class ToolsWindow:
                 break
 
         if alreadyMe:
-            Widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True})
+            widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True})
         else:
-            Widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True, self.chkme: True})
+            widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True, self.chkme: True})
 
         self.adentryname.grab_focus()
 
@@ -317,12 +317,12 @@ class ToolsWindow:
         data = self.get_entry_data()
 
         if not data[0]:
-            Widgets.message_dialog('error', Const.MSG_NAME_EMPTY, self.toolsdialog)
+            widgets.message_dialog('error', const.MSG_NAME_EMPTY, self.toolsdialog)
             return
 
         for ad in self.main.database.get_all_addresses():
             if data[0] == ad[1]:
-                Widgets.message_dialog('error', Const.MSG_NAME_EXISTS, self.toolsdialog)
+                widgets.message_dialog('error', const.MSG_NAME_EXISTS, self.toolsdialog)
                 return
 
         self.main.database.insert_address(data)
@@ -342,14 +342,14 @@ class ToolsWindow:
 
         self.chkme.set_active(False)
 
-        Widgets.set_multiple_visible({self.btnadd: False, self.btncancel: False, self.chkme: False})
-        Widgets.set_multiple_sensitive({self.treeview: True, self.vboxtv: True})
+        widgets.set_multiple_visible({self.btnadd: False, self.btncancel: False, self.chkme: False})
+        widgets.set_multiple_sensitive({self.treeview: True, self.vboxtv: True})
 
         if self.pedigree_call:
             self.toolsdialog.destroy()
 
     def adremove_clicked(self, widget):
-        if not Widgets.message_dialog('warning', Const.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
+        if not widgets.message_dialog('warning', const.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
             return
 
         self.main.database.delete_address(self.get_name())
@@ -437,24 +437,24 @@ class ToolsWindow:
     def makebackup_clicked(self, widget):
         folder = self.fcButtonCreate.get_current_folder()
         if folder:
-            success = Backup.make_backup(folder)
+            success = backup.make_backup(folder)
             if success:
-                Widgets.message_dialog('info', Const.MSG_BACKUP_SUCCES, self.main.main)
+                widgets.message_dialog('info', const.MSG_BACKUP_SUCCES, self.main.main)
             else:
-                Widgets.message_dialog('info', Conts.MSG_BACKUP_FAILED, self.main.main)
+                widgets.message_dialog('info', Conts.MSG_BACKUP_FAILED, self.main.main)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
-            success = Backup.restore_backup(zipfile)
+            success = backup.restore_backup(zipfile)
             if success:
-                Widgets.message_dialog('info', Const.MSG_RESTORE_SUCCES, self.main.main)
+                widgets.message_dialog('info', const.MSG_RESTORE_SUCCES, self.main.main)
             else:
-                Widgets.message_dialog('info', Conts.MSG_RESTORE_FAILED, self.main.main)
+                widgets.message_dialog('info', Conts.MSG_RESTORE_FAILED, self.main.main)
 
     # Update
     def btnupdate_clicked(self, widget):
-        msg, new = Update.update()
+        msg, new = update.update()
 
         self.labelversion.set_text(msg)
 

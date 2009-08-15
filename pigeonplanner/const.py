@@ -19,16 +19,16 @@
 import os
 import sys
 
-import PigeonPlanner
+import pigeonplanner
 
 
-NAME = PigeonPlanner.name
-VERSION = PigeonPlanner.version
-AUTHORS = PigeonPlanner.authors
-WEBSITE = PigeonPlanner.website
-COPYRIGHT = PigeonPlanner.copyright
-DESCRIPTION = _(PigeonPlanner.description)
-LICENSE = PigeonPlanner.license
+NAME = pigeonplanner.name
+VERSION = pigeonplanner.version
+AUTHORS = pigeonplanner.authors
+WEBSITE = pigeonplanner.website
+COPYRIGHT = pigeonplanner.copyright
+DESCRIPTION = _(pigeonplanner.description)
+LICENSE = pigeonplanner.license
 
 
 if sys.platform.startswith("win"):

@@ -21,14 +21,14 @@ import sys
 import zipfile
 from os.path import isdir, join, normpath, split
 
-import Const
+import const
 
 
 def make_backup(folder):
     if not isdir(folder):
         return
 
-    infolder = Const.PREFDIR
+    infolder = const.PREFDIR
     outfile = join(folder, 'PigeonPlannerBackup.zip')
 
     try:
@@ -59,7 +59,7 @@ def restore_backup(infile):
     if not infile.endswith('PigeonPlannerBackup.zip'):
         return
 
-    outfol = Const.PREFDIR
+    outfol = const.PREFDIR
 
     zipper = zipfile.ZipFile(infile, 'r')
 

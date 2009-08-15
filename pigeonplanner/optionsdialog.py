@@ -23,14 +23,14 @@ import shutil
 import gtk
 import gtk.glade
 
-import Const
-import Widgets
-import Options
+import const
+import widgets
+import options
 
 
 class OptionsDialog:
     def __init__(self, main):
-        self.wTree = gtk.glade.XML(Const.GLADEOPTIONS)
+        self.wTree = gtk.glade.XML(const.GLADEOPTIONS)
 
         signalDic = { 'on_chkColumn_toggled'     : self.chkColumn_toggled,
                       'on_columnOpt_changed'     : self.columnOpt_changed,
@@ -48,7 +48,7 @@ class OptionsDialog:
 
         self.optionsdialog.set_transient_for(self.main.main)
 
-        self.opt = Options.GetOptions()
+        self.opt = options.GetOptions()
 
         self.create_columntype_combo()
 
@@ -121,9 +121,9 @@ class OptionsDialog:
         self.optionsdialog.destroy()
 
     def default_clicked(self, widget):
-        if Widgets.message_dialog('warning', Const.MSG_DEFAULT_OPTIONS, self.optionsdialog):
+        if widgets.message_dialog('warning', const.MSG_DEFAULT_OPTIONS, self.optionsdialog):
             self.opt.write_default()
-            self.opt = Options.GetOptions()
+            self.opt = options.GetOptions()
             self.set_options()
 
             self.finish_options(True)
@@ -146,7 +146,7 @@ class OptionsDialog:
 
     def finish_options(self, set_default=False):
 
-        self.main.options = Options.GetOptions()
+        self.main.options = options.GetOptions()
 
         if self.win32 and self.cbThemes.get_active() != self.opt.optionList.theme:
             shutil.copy(os.path.join('./share/themes', self.cbThemes.get_active_text(), 'gtk-2.0/gtkrc'),

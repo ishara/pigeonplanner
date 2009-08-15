@@ -40,7 +40,7 @@ def main():
         LOCALE_PATH = os.path.join(currentPath, 'languages')
 
     if win32:
-        import PigeonPlanner.libi18n as libi18n
+        import pigeonplanner.libi18n as libi18n
         libi18n.fix_locale()
     try:
         locale.setlocale(locale.LC_ALL, '')
@@ -56,7 +56,7 @@ def main():
     __builtin__._ = gettext.gettext
 
 
-    import PigeonPlanner.MainWindow as main
+    import pigeonplanner.mainwindow as main
 
     try:
         pigeonplanner = main.MainWindow()

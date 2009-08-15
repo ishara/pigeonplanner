@@ -19,7 +19,7 @@
 import os.path
 import sqlite3
 
-import Const
+import const
 
 
 class DatabaseOperations:
@@ -81,7 +81,7 @@ class DatabaseOperations:
     def __init__(self):
         create_tables = False
 
-        if not os.path.exists(Const.DATABASE):
+        if not os.path.exists(const.DATABASE):
             create_tables = True
 
         if create_tables:
@@ -92,7 +92,7 @@ class DatabaseOperations:
             conn.close()
 
     def db_connect(self):
-        conn = sqlite3.connect(Const.DATABASE)
+        conn = sqlite3.connect(const.DATABASE)
         conn.text_factory = str
         cursor = conn.cursor()
         return (conn, cursor)

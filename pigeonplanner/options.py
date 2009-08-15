@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import Configuration
+import configuration
 
 
 class ParsedOptions:
@@ -33,7 +33,7 @@ class ParsedOptions:
 
 class GetOptions:
     def __init__(self):
-        self.conf = Configuration.ConfigurationParser()
+        self.conf = configuration.ConfigurationParser()
 
         self.optionList = []
 

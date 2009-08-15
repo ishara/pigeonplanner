@@ -24,24 +24,24 @@ import gobject
 import gtk
 import gtk.glade
 
-import Const
-import Update
-import Widgets
-import Options
-import Database
-import ToolsWindow
-import PigeonParser
-import ResultWindow
-import PedigreeWindow
-import Checks as check
-from Pedigree import DrawPedigree
-from OptionsDialog import OptionsDialog
+import const
+import update
+import widgets
+import options
+import database
+import pigeonparser
+import checks as check
+from pedigree import DrawPedigree
+from toolswindow import ToolsWindow
+from resultwindow import ResultWindow
+from optionsdialog import OptionsDialog
+from pedigreewindow import PedigreeWindow
 
 
 class MainWindow:
 
     def __init__(self):
-        self.wTree = gtk.glade.XML(Const.GLADEMAIN)
+        self.wTree = gtk.glade.XML(const.GLADEMAIN)
 
         signalDic = { 'on_save_clicked'          : self.save_clicked,
                       'on_cancel_clicked'        : self.cancel_clicked,
@@ -91,7 +91,7 @@ class MainWindow:
             name = widget.get_name()
             setattr(self, name, widget)
 
-        self.main.set_title("%s %s" %(Const.NAME, Const.VERSION))
+        self.main.set_title("%s %s" %(const.NAME, const.VERSION))
 
         self.date_format = '%Y-%m-%d'
         self.imageToAdd = ''
@@ -99,7 +99,7 @@ class MainWindow:
         self.beforeEditPath = 0
         self.blockMenuCallback = False
         self.editResultMode = False
-        self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(Const.IMAGEDIR + 'icon_logo.png', 75, 75)
+        self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(const.IMAGEDIR + 'icon_logo.png', 75, 75)
         self.columnValueDic = {'0': _("Colour"), '1': _("Sex")}
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
@@ -109,10 +109,10 @@ class MainWindow:
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
 
-        self.statusmsg = Widgets.Statusbar(self.statusbar)
-        self.options = Options.GetOptions()
-        self.database = Database.DatabaseOperations()
-        self.parser = PigeonParser.PigeonParser()
+        self.statusmsg = widgets.Statusbar(self.statusbar)
+        self.options = options.GetOptions()
+        self.database = database.DatabaseOperations()
+        self.parser = pigeonparser.PigeonParser()
         self.parser.get_pigeons()
         self.pedigree = DrawPedigree([self.tableSire, self.tableDam],
                                       button=self.goto, pigeons=self.parser.pigeons)
@@ -124,7 +124,7 @@ class MainWindow:
         self.create_sexcombos()
         self.set_filefilter()
         for item in [self.cbRacepoint, self.cbSector, self.cbColour, self.cbStrain, self.cbLoft]:
-            Widgets.set_completion(item)
+            widgets.set_completion(item)
 
         if self.options.optionList.arrows:
             self.alignarrows.show()
@@ -153,7 +153,7 @@ class MainWindow:
                          self.cbStrain: self.database.get_all_strains(), \
                          self.cbLoft: self.database.get_all_lofts()}
         for key in self.listdata.keys():
-            Widgets.fill_list(key, self.listdata[key])
+            widgets.fill_list(key, self.listdata[key])
 
         self.statusmsgs = { 'entryRing1': (self.statusmsg.get_id("band"),
                                             _("Enter the bandnumber of the pigeon")),
@@ -183,12 +183,12 @@ class MainWindow:
         return True
 
     def search_updates(self):
-        msg, new = Update.update()
+        msg, new = update.update()
 
         if new:
-            download = Widgets.message_dialog('question', Const.MSG_UPDATE_NOW, self.main)
+            download = widgets.message_dialog('question', const.MSG_UPDATE_NOW, self.main)
             if download:
-                webbrowser.open(Const.DOWNLOADURL)
+                webbrowser.open(const.DOWNLOADURL)
 
     def widget_enter(self, widget, event):
         for con_id in self.statusmsgs.values():
@@ -202,12 +202,12 @@ class MainWindow:
 
     # Menu callbacks
     def menubackup_activate(self, widget):
-        dialog = Widgets.BackupDialog(self.main, _("Create backup"), 'create')
+        dialog = widgets.BackupDialog(self.main, _("Create backup"), 'create')
         run = dialog.run()
         dialog.destroy()
 
     def menurestore_activate(self, widget):
-        dialog = Widgets.BackupDialog(self.main, _("Restore backup"), 'restore')
+        dialog = widgets.BackupDialog(self.main, _("Restore backup"), 'restore')
         run = dialog.run()
         dialog.destroy()
 
@@ -298,7 +298,7 @@ class MainWindow:
             self.fill_treeview(str(value-1))
 
     def menutools_activate(self, widget):
-        ToolsWindow.ToolsWindow(self)
+        ToolsWindow(self)
 
     def menupref_activate(self, widget):
         OptionsDialog(self)
@@ -334,13 +334,13 @@ class MainWindow:
             self.options.set_option('Options', 'statusbar', 'False')
 
     def menuhome_activate(self, widget):
-        webbrowser.open(Const.WEBSITE)
+        webbrowser.open(const.WEBSITE)
 
     def menuforum_activate(self, widget):
-        webbrowser.open(Const.FORUMURL)
+        webbrowser.open(const.FORUMURL)
 
     def menuabout_activate(self, widget):
-        Widgets.about_dialog(self.main)
+        widgets.about_dialog(self.main)
 
     # range callbacks
     def rangeadd_clicked(self, widget):
@@ -356,7 +356,7 @@ class MainWindow:
         if not check2: return
 
         if not rangefrom.isdigit() or not rangeto.isdigit():
-            Widgets.message_dialog('error', Const.MSG_INVALID_RANGE, self.main)
+            widgets.message_dialog('error', const.MSG_INVALID_RANGE, self.main)
             return
 
         bandList = []
@@ -370,7 +370,7 @@ class MainWindow:
             pindex = band + rangeyear
 
             if self.database.has_pigeon(pindex):
-                overwrite = Widgets.message_dialog('warning', Const.MSG_OVERWRITE_PIGEON, self.main)
+                overwrite = widgets.message_dialog('warning', const.MSG_OVERWRITE_PIGEON, self.main)
                 if not overwrite:
                     continue
 
@@ -416,7 +416,7 @@ class MainWindow:
                 (gtk.STOCK_EDIT, self.menuedit_activate, None),
                 (gtk.STOCK_REMOVE, self.menuremove_activate, None)]
 
-            Widgets.popup_menu(event, entries)
+            widgets.popup_menu(event, entries)
 
     # Navigation arrows callbacks
     def button_top_clicked(self, widget):
@@ -474,7 +474,7 @@ class MainWindow:
         pindex, ring, year = self.get_main_ring()
         image = self.parser.pigeons[pindex].image
         if image:
-            Widgets.ImageWindow(image, self.main)
+            widgets.ImageWindow(image, self.main)
 
     def eventimage_press(self, widget, event):
         if event.button == 3:
@@ -482,7 +482,7 @@ class MainWindow:
                 (gtk.STOCK_ADD, self.open_filedialog, None),
                 (gtk.STOCK_REMOVE, self.set_default_image, None)]
 
-            Widgets.popup_menu(event, entries)
+            widgets.popup_menu(event, entries)
         else:
             self.open_filedialog()
 
@@ -495,7 +495,7 @@ class MainWindow:
             self.imagePigeon1.set_from_pixbuf(pixbuf)
             self.imageToAdd = filename
         except:
-            Widgets.message_dialog('error', Const.MSG_INVALID_IMAGE, self.main)
+            widgets.message_dialog('error', const.MSG_INVALID_IMAGE, self.main)
 
         self.filedialog.hide()
 
@@ -509,7 +509,7 @@ class MainWindow:
         name = self.parser.pigeons[pindex].name
         sex = self.sexDic[self.parser.pigeons[pindex].sex]
         colour = self.parser.pigeons[pindex].colour
-        PedigreeWindow.PedigreeWindow(self, pindex, ring, year, name, colour, sex)
+        PedigreeWindow(self, pindex, ring, year, name, colour, sex)
 
     def goto_clicked(self, widget):
         ring = ''
@@ -534,7 +534,7 @@ class MainWindow:
             pigeon = self.search_pigeon(None, ring+year)
             if pigeon: return
 
-            answer = Widgets.message_dialog('question', Const.MSG_ADD_PIGEON, self.main)
+            answer = widgets.message_dialog('question', const.MSG_ADD_PIGEON, self.main)
             if not answer:
                 return
             else:
@@ -551,7 +551,7 @@ class MainWindow:
         if event.button == 3:
             entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)]
 
-            Widgets.popup_menu(event, entries)
+            widgets.popup_menu(event, entries)
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
             self.search_pigeon(None, pindex)
 
@@ -562,7 +562,7 @@ class MainWindow:
         if event.button == 3:
             entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)]
 
-            Widgets.popup_menu(event, entries)
+            widgets.popup_menu(event, entries)
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
             self.search_pigeon(None, pindex)
 
@@ -573,7 +573,7 @@ class MainWindow:
         if event.button == 3:
             entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)]
 
-            Widgets.popup_menu(event, entries)
+            widgets.popup_menu(event, entries)
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
             self.search_pigeon(None, pindex)
 
@@ -586,7 +586,7 @@ class MainWindow:
                 (gtk.STOCK_EDIT, self.editresult_clicked, None),
                 (gtk.STOCK_REMOVE, self.removeresult_clicked, None)]
 
-            Widgets.popup_menu(event, entries)
+            widgets.popup_menu(event, entries)
 
     def addresult_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
@@ -601,7 +601,7 @@ class MainWindow:
                result[3] == point and \
                result[4] == place and \
                result[5] == out:
-                Widgets.message_dialog('error', Const.MSG_RESULT_EXISTS, self.main)
+                widgets.message_dialog('error', const.MSG_RESULT_EXISTS, self.main)
                 return
 
         cof = (float(place)/float(out))*100
@@ -610,11 +610,11 @@ class MainWindow:
         self.database.insert_result(data)
 
         self.database.insert_racepoint((point, ))
-        Widgets.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
+        widgets.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
 
         if sector:
             self.database.insert_sector((sector, ))
-            Widgets.fill_list(self.cbSector, self.database.get_all_sectors())
+            widgets.fill_list(self.cbSector, self.database.get_all_sectors())
 
         self.lsResult.append([date, point, place, out, cof, sector])
 
@@ -640,7 +640,7 @@ class MainWindow:
         self.spinOutof.set_value(out)
         self.cbSector.child.set_text(sector)
 
-        Widgets.set_multiple_visible({self.addresult: False,
+        widgets.set_multiple_visible({self.addresult: False,
                                       self.editapply: True,
                                       self.resultcancel: True})
 
@@ -669,7 +669,7 @@ class MainWindow:
         self.spinOutof.set_value(1)
         self.cbSector.child.set_text('')
 
-        Widgets.set_multiple_visible({self.addresult: True,
+        widgets.set_multiple_visible({self.addresult: True,
                                       self.editapply: False,
                                       self.resultcancel: False})
 
@@ -678,7 +678,7 @@ class MainWindow:
         self.editResultMode = False
 
     def allresults_clicked(self, widget):
-        ResultWindow.ResultWindow(self, self.parser.pigeons, self.database)
+        ResultWindow(self, self.parser.pigeons, self.database)
 
     def spinPlaced_changed(self, widget):
         spinmin = widget.get_value_as_int()
@@ -750,7 +750,7 @@ class MainWindow:
         '''
 
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(Widgets.uistring)
+        uimanager.add_ui_from_string(widgets.uistring)
         uimanager.insert_action_group(self.create_action_group(), 0)
         self.main.add_accel_group(uimanager.get_accel_group())
 
@@ -773,7 +773,7 @@ class MainWindow:
         for key, value in widgetDic.items():
             setattr(self, key, value)
 
-        Widgets.set_multiple_sensitive({self.MenuEdit: False, self.MenuRemove: False,
+        widgets.set_multiple_sensitive({self.MenuEdit: False, self.MenuRemove: False,
                                         self.MenuPedigree: False, self.MenuAddresult: False})
 
         self.vbox.pack_start(menubar, False, False)
@@ -876,7 +876,7 @@ class MainWindow:
             columns.insert(self.options.optionList.columnposition,
                            _(self.columnValueDic[self.options.optionList.columntype]))
         types = [str, str, str, str, str]
-        self.liststore, self.selection = Widgets.setup_treeview(self.treeview,
+        self.liststore, self.selection = widgets.setup_treeview(self.treeview,
                                                                 columns, types,
                                                                 self.selection_changed,
                                                                 True, True, True)
@@ -889,7 +889,7 @@ class MainWindow:
         # Find sire/dam treeview
         columns = [_("Band no."), _("Year"), _("Name")]
         types = [str, str, str, str]
-        self.lsFind, self.selectionfind = Widgets.setup_treeview(self.tvFind,
+        self.lsFind, self.selectionfind = widgets.setup_treeview(self.tvFind,
                                                                  columns, types,
                                                                  None,
                                                                  True, True, True)
@@ -897,7 +897,7 @@ class MainWindow:
         # Brothers & sisters treeview
         columns = [_("Band no."), _("Year")]
         types = [str, str, str]
-        self.lsBrothers, self.selBrothers = Widgets.setup_treeview(self.tvBrothers,
+        self.lsBrothers, self.selBrothers = widgets.setup_treeview(self.tvBrothers,
                                                                    columns, types,
                                                                    None,
                                                                    True, True, True)
@@ -905,7 +905,7 @@ class MainWindow:
         # Halfbrothers & sisters treeview
         columns = [_("Band no."), _("Year"), _("Common parent")]
         types = [str, str, str, str]
-        self.lsHalfBrothers, self.selHalfBrothers = Widgets.setup_treeview(self.tvHalfBrothers,
+        self.lsHalfBrothers, self.selHalfBrothers = widgets.setup_treeview(self.tvHalfBrothers,
                                                                            columns, types,
                                                                            None,
                                                                            True, True, True)
@@ -913,7 +913,7 @@ class MainWindow:
         # Offspring treeview
         columns = [_("Band no."), _("Year")]
         types = [str, str, str]
-        self.lsOffspring, self.selOffspring = Widgets.setup_treeview(self.tvOffspring,
+        self.lsOffspring, self.selOffspring = widgets.setup_treeview(self.tvOffspring,
                                                                      columns, types,
                                                                      None,
                                                                      True, True, True)
@@ -921,7 +921,7 @@ class MainWindow:
         # Results treeview
         columns = [_("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector")]
         types = [str, str, int, int, float, str]
-        self.lsResult, self.selResults = Widgets.setup_treeview(self.tvResults,
+        self.lsResult, self.selResults = widgets.setup_treeview(self.tvResults,
                                                                 columns, types,
                                                                 self.selectionresult_changed,
                                                                 True, True)
@@ -974,9 +974,9 @@ class MainWindow:
         model, path = selection.get_selected()
 
         if path:
-            Widgets.set_multiple_sensitive({self.removeresult: True, self.editresult: True})
+            widgets.set_multiple_sensitive({self.removeresult: True, self.editresult: True})
         else:
-            Widgets.set_multiple_sensitive({self.removeresult: False, self.editresult: False})
+            widgets.set_multiple_sensitive({self.removeresult: False, self.editresult: False})
 
     def selection_changed(self, selection):
         '''
@@ -991,12 +991,12 @@ class MainWindow:
             if self.editResultMode:
                 self.resultcancel_clicked(None)
 
-            Widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
+            widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
                                             self.sbdetail: True, self.MenuEdit: True,
                                             self.MenuRemove: True, self.MenuPedigree: True,
                                             self.MenuAddresult: True, self.addresult: True})
         else:
-            Widgets.set_multiple_sensitive({self.ToolEdit: False, self.ToolRemove: False,
+            widgets.set_multiple_sensitive({self.ToolEdit: False, self.ToolRemove: False,
                                             self.sbdetail: False, self.MenuEdit: False,
                                             self.MenuRemove: False, self.MenuPedigree: False,
                                             self.MenuAddresult: False, self.addresult: False})
@@ -1047,7 +1047,7 @@ class MainWindow:
             image = self.parser.pigeons[pindex].image
             width = height = 200
         else:
-            image = Const.IMAGEDIR + 'icon_logo.png'
+            image = const.IMAGEDIR + 'icon_logo.png'
             width = height = 75
 
         try:
@@ -1055,7 +1055,7 @@ class MainWindow:
             self.imagePigeon.set_from_pixbuf(pixbuf)
             self.imagePigeon1.set_from_pixbuf(pixbuf)
         except:
-            Widgets.message_dialog('error', Const.MSG_IMAGE_MISSING, self.main)
+            widgets.message_dialog('error', const.MSG_IMAGE_MISSING, self.main)
 
         dp = DrawPedigree([self.tableSire, self.tableDam], pindex,
                            button=self.goto, pigeons=self.parser.pigeons)
@@ -1190,16 +1190,16 @@ class MainWindow:
         '''
 
         if operation == 'add':
-            Widgets.set_multiple_visible({self.btnadd: True})
+            widgets.set_multiple_visible({self.btnadd: True})
         elif operation == 'edit':
-            Widgets.set_multiple_visible({self.save: True})
+            widgets.set_multiple_visible({self.save: True})
             self.beforeEditPath, focus = self.treeview.get_cursor()
 
         self.entryRing1.grab_focus()
 
         self.detailbook.set_current_page(1)
 
-        Widgets.set_multiple_sensitive({self.toolbar: False, self.notebook: False,
+        widgets.set_multiple_sensitive({self.toolbar: False, self.notebook: False,
                                         self.treeview: False, self.vboxButtons: False})
 
     def add_edit_finish(self):
@@ -1215,10 +1215,10 @@ class MainWindow:
 
         self.detailbook.set_current_page(0)
 
-        Widgets.set_multiple_sensitive({self.toolbar: True, self.notebook: True,
+        widgets.set_multiple_sensitive({self.toolbar: True, self.notebook: True,
                                         self.treeview: True, self.vboxButtons: True})
 
-        Widgets.set_multiple_visible({self.btnadd: False, self.save: False})
+        widgets.set_multiple_visible({self.btnadd: False, self.save: False})
 
     def get_add_edit_info(self):
         '''
@@ -1285,11 +1285,11 @@ class MainWindow:
 
         if self.database.has_pigeon(pindex):
             if self.parser.pigeons[pindex].show:
-                overwrite = Widgets.message_dialog('warning', Const.MSG_OVERWRITE_PIGEON, self.main)
+                overwrite = widgets.message_dialog('warning', const.MSG_OVERWRITE_PIGEON, self.main)
                 if not overwrite:
                     return
             else:
-                overwrite = Widgets.message_dialog('warning', Const.MSG_SHOW_PIGEON, self.main)
+                overwrite = widgets.message_dialog('warning', const.MSG_SHOW_PIGEON, self.main)
                 if not overwrite:
                     return
                 else:
@@ -1308,17 +1308,17 @@ class MainWindow:
         colour = infoTuple[4]
         if colour:
             self.database.insert_colour((colour, ))
-            Widgets.fill_list(self.cbColour, self.database.get_all_colours())
+            widgets.fill_list(self.cbColour, self.database.get_all_colours())
 
         strain = infoTuple[6]
         if strain:
             self.database.insert_strain((strain, ))
-            Widgets.fill_list(self.cbStrain, self.database.get_all_strains())
+            widgets.fill_list(self.cbStrain, self.database.get_all_strains())
 
         loft = infoTuple[7]
         if loft:
             self.database.insert_loft((loft, ))
-            Widgets.fill_list(self.cbLoft, self.database.get_all_lofts())
+            widgets.fill_list(self.cbLoft, self.database.get_all_lofts())
 
     def empty_entryboxes(self):
         '''
@@ -1468,13 +1468,13 @@ class MainWindow:
         sector = self.cbSector.child.get_text()
 
         if not date or not point or not place or not out:
-            Widgets.message_dialog('error', Const.MSG_EMPTY_DATA, self.main)
+            widgets.message_dialog('error', const.MSG_EMPTY_DATA, self.main)
             return False
 
         try:
             datetime.datetime.strptime(date, self.date_format)
         except ValueError:
-            Widgets.message_dialog('error', Const.MSG_INVALID_FORMAT, self.main)
+            widgets.message_dialog('error', const.MSG_INVALID_FORMAT, self.main)
             return False
 
         return date, point, place, out, sector

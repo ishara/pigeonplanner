@@ -23,11 +23,11 @@ A detailed pedigree of the selected pigeon.
 import gtk
 import gtk.glade
 
-import Const
-import Widgets
-from Print import PrintPedigree
-from Pedigree import DrawPedigree
-from ToolsWindow import ToolsWindow
+import const
+import widgets
+from pedigree import DrawPedigree
+from printing import PrintPedigree
+from toolswindow import ToolsWindow
 
 
 class PedigreeWindow:
@@ -43,7 +43,7 @@ class PedigreeWindow:
         @param sex: Sex of the pigeon
         ''' 
 
-        self.wTree = gtk.glade.XML(Const.GLADEPEDIGREE)
+        self.wTree = gtk.glade.XML(const.GLADEPEDIGREE)
 
         signalDic = { 'on_print_clicked'     : self.print_clicked,
                       'on_dialog_destroy'    : self.close_clicked,
@@ -89,7 +89,7 @@ class PedigreeWindow:
                 break
 
         if not userinfo['name']:
-            if Widgets.message_dialog('question', Const.MSG_NO_INFO, self.pedigreewindow):
+            if widgets.message_dialog('question', const.MSG_NO_INFO, self.pedigreewindow):
                 tw = ToolsWindow(self.main)
                 tw.toolsdialog.set_keep_above(True)
                 tw.treeview.set_cursor(2)

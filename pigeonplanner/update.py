@@ -19,16 +19,16 @@
 import os
 import urllib
 
-import Const
+import const
 
 
 def update():
     new = False
 
-    local = os.path.join(Const.PREFDIR, Const.UPDATEURL.split('/')[-1])
+    local = os.path.join(const.PREFDIR, const.UPDATEURL.split('/')[-1])
 
     try:
-        urllib.urlretrieve(Const.UPDATEURL, local)
+        urllib.urlretrieve(const.UPDATEURL, local)
         versionfile = open(local, 'r')
         version = versionfile.readline().strip()
         versionfile.close()
@@ -37,14 +37,14 @@ def update():
         version = None
 
     if not version:
-        msg = Const.MSG_UPDATE_ERROR
-    elif Const.VERSION < version:
-        msg = Const.MSG_UPDATE_AVAILABLE
+        msg = const.MSG_UPDATE_ERROR
+    elif const.VERSION < version:
+        msg = const.MSG_UPDATE_AVAILABLE
         new = True
-    elif Const.VERSION == version:
-        msg = Const.MSG_NO_UPDATE
-    elif Const.VERSION > version:
-        msg = Const.MSG_UPDATE_DEVELOPMENT
+    elif const.VERSION == version:
+        msg = const.MSG_NO_UPDATE
+    elif const.VERSION > version:
+        msg = const.MSG_UPDATE_DEVELOPMENT
 
     return msg, new
 

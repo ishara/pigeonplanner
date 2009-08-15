@@ -16,13 +16,12 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import Const
-import Database
+import database
 
 
 class PigeonParser:
     def __init__(self):
-        self.database = Database.DatabaseOperations()
+        self.database = database.DatabaseOperations()
 
     def get_pigeons(self):
         self.pigeons = {}

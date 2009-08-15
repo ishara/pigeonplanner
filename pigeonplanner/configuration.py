@@ -21,7 +21,7 @@
 import os
 import ConfigParser
 
-import Const
+import const
 
 
 class Configuration:
@@ -95,7 +95,7 @@ class ConfigurationParser(ConfigParser.ConfigParser):
 
         ConfigParser.ConfigParser.__init__(self)
 
-        self.prefFile = os.path.join(Const.PREFDIR, 'pigeonplanner.cfg')
+        self.prefFile = os.path.join(const.PREFDIR, 'pigeonplanner.cfg')
 
         configuration = Configuration()
         self.sections = configuration.getConfiguration()
@@ -142,8 +142,8 @@ class ConfigurationParser(ConfigParser.ConfigParser):
             fileToWrite = self.newFile
         else:
             if not os.path.exists(self.prefFile) or default:
-                if not os.path.exists(Const.PREFDIR):
-                    os.makedirs(Const.PREFDIR, 0755)
+                if not os.path.exists(const.PREFDIR):
+                    os.makedirs(const.PREFDIR, 0755)
                 fileToWrite = self.defaultFile
 
         if fileToWrite:
