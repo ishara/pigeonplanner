@@ -1,3 +1,27 @@
+0.4:
+ * Added a menubar
+ * Added option to show/hide toolbar
+ * Added option to show/hide statusbar
+ * Added option to change the theme (only on Windows)
+ * Added option to check for updates at startup
+ * Added option to add items to the datasets
+ * Added more supported image filetypes
+ * Added statistics to the tools
+ * Added an address tool
+ * Added statusbar messages
+ * Fixed crash when adding a pigeon after go-to is clicked
+ * Fixed bug where removing a pigeon didn't always work
+ * Fixed bug where clicking the aboutdialog doesn't work
+ * Fixed bug where results would stay when no pigeon is selected
+ * Fixed bug when making a backup
+ * Fixed bug when right clicking on empty treeview
+ * Fixed bug where the database wouldn't accept special characters
+ * Increased bandnumber length
+ * Made sure minutes have a leading zero
+ * Removed personal info from preferences dialog
+ * Lots of user interface cleanups
+ * Lots of code fixes and cleanups
+
 0.3:
  * Added option to remove items from datasets
  * Added option to go to pigeon in relatives tab

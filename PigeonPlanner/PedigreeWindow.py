@@ -26,7 +26,6 @@ import gtk.glade
 import Const
 import Widgets
 from Print import PrintPedigree
-from Options import OptionsDialog
 from Pedigree import DrawPedigree
 from ToolsWindow import ToolsWindow
 

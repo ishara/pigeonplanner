@@ -35,6 +35,7 @@ import ResultWindow
 import PedigreeWindow
 import Checks as check
 from Pedigree import DrawPedigree
+from OptionsDialog import OptionsDialog
 
 
 class MainWindow:
@@ -302,7 +303,7 @@ class MainWindow:
         ToolsWindow.ToolsWindow(self)
 
     def menupref_activate(self, widget):
-        Options.OptionsDialog(self)
+        OptionsDialog(self)
 
     def menuarrows_toggled(self, widget):
         if self.blockMenuCallback: return
