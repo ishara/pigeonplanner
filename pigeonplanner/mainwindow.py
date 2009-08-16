@@ -186,8 +186,7 @@ class MainWindow:
         msg, new = update.update()
 
         if new:
-            download = widgets.message_dialog('question', const.MSG_UPDATE_NOW, self.main)
-            if download:
+            if widgets.message_dialog('question', const.MSG_UPDATE_NOW, self.main):
                 webbrowser.open(const.DOWNLOADURL)
 
     def widget_enter(self, widget, event):
@@ -370,8 +369,7 @@ class MainWindow:
             pindex = band + rangeyear
 
             if self.database.has_pigeon(pindex):
-                overwrite = widgets.message_dialog('warning', const.MSG_OVERWRITE_PIGEON, self.main)
-                if not overwrite:
+                if not widgets.message_dialog('warning', const.MSG_OVERWRITE_PIGEON, self.main):
                     continue
 
             data = (pindex, band, rangeyear, rangesex, 1, 1,
@@ -534,8 +532,7 @@ class MainWindow:
             pigeon = self.search_pigeon(None, ring+year)
             if pigeon: return
 
-            answer = widgets.message_dialog('question', const.MSG_ADD_PIGEON, self.main)
-            if not answer:
+            if not widgets.message_dialog('question', const.MSG_ADD_PIGEON, self.main):
                 return
             else:
                 self.menuadd_activate(None)
@@ -1285,12 +1282,10 @@ class MainWindow:
 
         if self.database.has_pigeon(pindex):
             if self.parser.pigeons[pindex].show:
-                overwrite = widgets.message_dialog('warning', const.MSG_OVERWRITE_PIGEON, self.main)
-                if not overwrite:
+                if not widgets.message_dialog('warning', const.MSG_OVERWRITE_PIGEON, self.main):
                     return
             else:
-                overwrite = widgets.message_dialog('warning', const.MSG_SHOW_PIGEON, self.main)
-                if not overwrite:
+                if not widgets.message_dialog('warning', const.MSG_SHOW_PIGEON, self.main):
                     return
                 else:
                     self.database.show_pigeon(pindex, 1)

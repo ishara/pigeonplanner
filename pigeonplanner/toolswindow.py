@@ -208,9 +208,7 @@ class ToolsWindow:
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
 
-        remove = widgets.message_dialog('question', const.MSG_REMOVE_ITEM, self.toolsdialog, {'item': item, 'dataset': dataset})
-
-        if remove:
+        if widgets.message_dialog('question', const.MSG_REMOVE_ITEM, self.toolsdialog, {'item': item, 'dataset': dataset}):
             index = self.cbitems.get_active()
 
             if dataset == _("Colours"):
@@ -435,19 +433,15 @@ class ToolsWindow:
 
     # Backup
     def makebackup_clicked(self, widget):
-        folder = self.fcButtonCreate.get_current_folder()
-        if folder:
-            success = backup.make_backup(folder)
-            if success:
+        if self.fcButtonCreate.get_current_folder():
+            if backup.make_backup(folder):
                 widgets.message_dialog('info', const.MSG_BACKUP_SUCCES, self.main.main)
             else:
                 widgets.message_dialog('info', Conts.MSG_BACKUP_FAILED, self.main.main)
 
     def restorebackup_clicked(self, widget):
-        zipfile = self.fcButtonRestore.get_filename()
-        if zipfile:
-            success = backup.restore_backup(zipfile)
-            if success:
+        if self.fcButtonRestore.get_filename():
+            if backup.restore_backup(zipfile):
                 widgets.message_dialog('info', const.MSG_RESTORE_SUCCES, self.main.main)
             else:
                 widgets.message_dialog('info', Conts.MSG_RESTORE_FAILED, self.main.main)

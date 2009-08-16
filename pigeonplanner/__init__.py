@@ -3,7 +3,7 @@ name = "Pigeon Planner"
 
 versionbase = "0.4"
 
-version = "0.4.bzr196"
+version = "0.4.bzr197"
 
 copyright = "(C)opyright 2009 Timo Vanwynsberghe"
 
