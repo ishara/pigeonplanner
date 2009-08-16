@@ -1305,17 +1305,17 @@ class MainWindow:
         Update the data
         '''
 
-        colour = infoTuple[4]
+        colour = infoTuple[5]
         if colour:
             self.database.insert_colour((colour, ))
             widgets.fill_list(self.cbColour, self.database.get_all_colours())
 
-        strain = infoTuple[6]
+        strain = infoTuple[7]
         if strain:
             self.database.insert_strain((strain, ))
             widgets.fill_list(self.cbStrain, self.database.get_all_strains())
 
-        loft = infoTuple[7]
+        loft = infoTuple[8]
         if loft:
             self.database.insert_loft((loft, ))
             widgets.fill_list(self.cbLoft, self.database.get_all_lofts())
