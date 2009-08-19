@@ -620,6 +620,9 @@ class MainWindow:
         model, tIter = self.selResults.get_selected()
         pindex, ring, year = self.get_main_ring()
 
+        if not widgets.message_dialog('warning', const.MSG_REMOVE_RESULT, self.main):
+            return
+
         ID = self.get_result_id(pindex, self.get_selected_result())
         self.database.delete_result_from_id(ID)
 
