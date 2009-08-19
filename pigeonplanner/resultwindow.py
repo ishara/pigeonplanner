@@ -24,7 +24,7 @@ from printing import PrintResults
 
 
 class ResultWindow:
-    def __init__(self, main, pigeons, database):
+    def __init__(self, mainwindow, pigeons, database):
         self.wTree = gtk.glade.XML(const.GLADERESULT)
 
         signalDic = { 'on_cbYearRace_changed'    : self.cbYearRace_changed,
@@ -45,9 +45,8 @@ class ResultWindow:
 
         self.database = database
         self.pigeons = pigeons
-        self.main = main
 
-        self.resultwindow.set_transient_for(self.main.main)
+        self.resultwindow.set_transient_for(mainwindow)
 
         self.liststore = gtk.ListStore(str, str, int, int, float, str, str, str)
         renderer = gtk.CellRendererText()

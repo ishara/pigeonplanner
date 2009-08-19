@@ -674,7 +674,7 @@ class MainWindow:
         self.editResultMode = False
 
     def allresults_clicked(self, widget):
-        ResultWindow(self, self.parser.pigeons, self.database)
+        ResultWindow(self.main, self.parser.pigeons, self.database)
 
     def spinPlaced_changed(self, widget):
         spinmin = widget.get_value_as_int()
