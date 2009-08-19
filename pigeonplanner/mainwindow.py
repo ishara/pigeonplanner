@@ -510,35 +510,21 @@ class MainWindow:
         PedigreeWindow(self, pindex, ring, year, name, colour, sex)
 
     def goto_clicked(self, widget):
-        ring = ''
-        year = ''
-
         children = []
         children.extend(self.tableSire.get_children())
         children.extend(self.tableDam.get_children())
 
         for child in children:
             if child.is_focus():
-                text = child.textlayout.get_text()
-                if text:
-                    ring = text.split(' / ')[0]
-                    year = text.split(' / ')[1]
-                    if child.get_parent().get_name() == 'tableSire':
-                        sex = '0'
-                    else:
-                        sex = '1'
+                if self.search_pigeon(None, child.pindex): return
 
-        if ring:
-            pigeon = self.search_pigeon(None, ring+year)
-            if pigeon: return
+                if widgets.message_dialog('question', const.MSG_ADD_PIGEON, self.main):
+                    self.menuadd_activate(None)
+                    self.entryRing1.set_text(child.ring)
+                    self.entryYear1.set_text(child.year)
+                    self.cbsex.set_active(int(child.sex))
 
-            if not widgets.message_dialog('question', const.MSG_ADD_PIGEON, self.main):
-                return
-            else:
-                self.menuadd_activate(None)
-                self.entryRing1.set_text(ring)
-                self.entryYear1.set_text(year)
-                self.cbsex.set_active(int(sex))
+                break
 
     # Relatives callbacks
     def tvBrothers_press(self, widget, event):
@@ -1425,16 +1411,16 @@ class MainWindow:
 
         return pindex, ring, year
 
-    def search_pigeon(self, widget, ring):
+    def search_pigeon(self, widget, pindex):
         '''
         Set the cursor on the given pigeon
 
-        @param ring: The pigeon to search
+        @param widget: Only given when selected through menu
+        @param pindex: The index of the pigeon to search
         '''
 
         for item in self.liststore:
-            number = self.treeview.get_model().get_value(item.iter, 0)
-            if number == ring:
+            if self.liststore.get_value(item.iter, 0) == ring:
                 self.treeview.set_cursor(item.path)
                 return True
 

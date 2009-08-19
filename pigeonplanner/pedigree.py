@@ -97,7 +97,7 @@ class ExtraBox(gtk.DrawingArea):
 
 
 class PedigreeBox(gtk.DrawingArea):
-    def __init__(self, ring, year, sex, detail=False, button=None):
+    def __init__(self, pindex, ring, year, sex, detail=False, button=None):
         gtk.DrawingArea.__init__(self)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
         self.hightlight = False
@@ -109,8 +109,10 @@ class PedigreeBox(gtk.DrawingArea):
             self.connect("focus-in-event", self.focus_in)
             self.connect("focus-out-event", self.focus_out)
 
+        self.pindex = pindex
         self.ring = ring
         self.year = year
+        self.sex = sex
         self.gotobutton = button
 
         self.text = ''
@@ -118,7 +120,7 @@ class PedigreeBox(gtk.DrawingArea):
         if ring != '':
             self.text = ring + ' / ' + year[2:]
 
-            if sex == '0':
+            if self.sex == '0':
                 self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
                 self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
             else:
@@ -298,13 +300,13 @@ class DrawPedigree:
                     height = 1
 
             if not lst[i]:
-                box = PedigreeBox('', '', 'other', detail=self.detail, button=self.button)
+                box = PedigreeBox('', '', '', 'other', detail=self.detail, button=self.button)
                 table.attach(box, x, y, w, h)
                 if self.detail:
                     extrabox = ExtraBox('')
                     table.attach(extrabox, x, y, w+1, h+height)
             else:
-                box = PedigreeBox(lst[i][1], lst[i][2], lst[i][3], detail=self.detail, button=self.button)
+                box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], detail=self.detail, button=self.button)
                 table.attach(box, x, y, w, h)
                 if self.detail:
                     extra = []
