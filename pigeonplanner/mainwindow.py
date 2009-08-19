@@ -651,11 +651,11 @@ class MainWindow:
         except TypeError:
             return
 
-        ID = self.get_result_id(ring, self.get_selected_result())
+        ID = self.get_result_id(pindex, self.get_selected_result())
 
         self.database.update_result((date, point, place, out, sector, ID))
 
-        self.get_results(ring)
+        self.get_results(pindex)
         self.resultcancel_clicked(None)
 
     def resultcancel_clicked(self, widget):
