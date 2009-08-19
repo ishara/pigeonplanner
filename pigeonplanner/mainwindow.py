@@ -620,8 +620,7 @@ class MainWindow:
         model, tIter = self.selResults.get_selected()
         pindex, ring, year = self.get_main_ring()
 
-        ID = self.get_result_id(ring, self.get_selected_result())
-
+        ID = self.get_result_id(pindex, self.get_selected_result())
         self.database.delete_result_from_id(ID)
 
         self.lsResult.remove(tIter)
@@ -1484,16 +1483,15 @@ class MainWindow:
         
         return model[tIter][0], model[tIter][1], model[tIter][2], model[tIter][3], model[tIter][5]
 
-    def get_result_id(self, ring, data):
+    def get_result_id(self, pindex, data):
         '''
         Return the ID of the wanted result
 
-        @param ring: the ring of the pigeon
+        @param pindex: the pindex of the pigeon
         @param data: tuple of data to compare
         '''
 
-        results = self.database.get_pigeon_results(ring)
-        for result in results:
+        for result in self.database.get_pigeon_results(pindex):
             if result[2] == data[0] and \
                result[3] == data[1] and \
                result[4] == data[2] and \

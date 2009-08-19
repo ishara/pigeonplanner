@@ -189,9 +189,9 @@ class DatabaseOperations:
         conn.close()
         return data
 
-    def get_pigeon_results(self, band):
+    def get_pigeon_results(self, pindex):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT * FROM Results WHERE pindex=?', (band,))
+        cursor.execute('SELECT * FROM Results WHERE pindex=?', (pindex,))
         data = cursor.fetchall()
         conn.close()
         return data
