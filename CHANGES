@@ -1,3 +1,11 @@
+0.4.2:
+ * Fixed bug where wrong item would be saved in dataset when adding a pigeon
+ * Fixed bug where result can't be deleted
+ * Fixed bug where result can't be editted
+ * Don't let distance spinbutton go below zero
+ * Changed filenames
+ * Some code cleanup
+
 0.4:
  * Added a menubar
  * Added option to show/hide toolbar
