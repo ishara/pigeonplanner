@@ -30,7 +30,7 @@ import widgets
 import options
 import database
 import pigeonparser
-import checks as check
+import checks
 from pedigree import DrawPedigree
 from toolswindow import ToolsWindow
 from resultwindow import ResultWindow
@@ -348,11 +348,8 @@ class MainWindow:
         rangeyear = self.entryRangeYear.get_text()
         rangesex = self.cbRangeSex.get_active_text()
 
-        check1 = check.check_ring_entry(self.main, rangefrom, rangeyear)
-        if not check1: return
-
-        check2 = check.check_ring_entry(self.main, rangeto, rangeyear)
-        if not check2: return
+        if not checks.check_ring_entry(self.main, rangefrom, rangeyear): return
+        if not checks.check_ring_entry(self.main, rangeto, rangeyear): return
 
         if not rangefrom.isdigit() or not rangeto.isdigit():
             widgets.message_dialog('error', const.MSG_INVALID_RANGE, self.main)
@@ -451,14 +448,14 @@ class MainWindow:
 
     # Add/Edit callbacks
     def save_clicked(self, widget):
-        if not check.check_entrys(self.entrysToCheck): return
+        if not checks.check_entrys(self.entrysToCheck): return
 
         self.write_new_data()
 
         self.add_edit_finish()
 
     def btnadd_clicked(self, widget):
-        if not check.check_entrys(self.entrysToCheck): return
+        if not checks.check_entrys(self.entrysToCheck): return
 
         self.write_new_pigeon()
 
