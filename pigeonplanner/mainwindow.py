@@ -525,35 +525,20 @@ class MainWindow:
 
     # Relatives callbacks
     def tvBrothers_press(self, widget, event):
-        pindex = self.get_treeview_pindex(self.selBrothers)
-        if not pindex: return
-
-        if event.button == 3:
-            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)]
-
-            widgets.popup_menu(event, entries)
-        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            self.search_pigeon(None, pindex)
+        self.treeview_menu(self.selBrothers, event)
 
     def tvHalfBrothers_press(self, widget, event):
-        pindex = self.get_treeview_pindex(self.selHalfBrothers)
-        if not pindex: return
-
-        if event.button == 3:
-            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)]
-
-            widgets.popup_menu(event, entries)
-        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            self.search_pigeon(None, pindex)
+        self.treeview_menu(self.selHalfBrothers, event)
 
     def tvOffspring_press(self, widget, event):
-        pindex = self.get_treeview_pindex(self.selOffspring)
+        self.treeview_menu(self.selOffspring, event)
+
+    def treeview_menu(self, selection, event):
+        pindex = self.get_treeview_pindex(selection)
         if not pindex: return
 
         if event.button == 3:
-            entries = [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)]
-
-            widgets.popup_menu(event, entries)
+            widgets.popup_menu(event, [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)])
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
             self.search_pigeon(None, pindex)
 
