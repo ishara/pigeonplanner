@@ -1420,7 +1420,7 @@ class MainWindow:
         '''
 
         for item in self.liststore:
-            if self.liststore.get_value(item.iter, 0) == ring:
+            if self.liststore.get_value(item.iter, 0) == pindex:
                 self.treeview.set_cursor(item.path)
                 return True
 
