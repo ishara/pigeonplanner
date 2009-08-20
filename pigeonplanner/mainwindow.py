@@ -560,8 +560,7 @@ class MainWindow:
         except TypeError:
             return
 
-        results = self.database.get_pigeon_results(pindex)
-        for result in results:
+        for result in self.database.get_pigeon_results(pindex):
             if result[2] == date and \
                result[3] == point and \
                result[4] == place and \
@@ -622,9 +621,12 @@ class MainWindow:
         except TypeError:
             return
 
-        ID = self.get_result_id(pindex, self.get_selected_result())
-
-        self.database.update_result((date, point, place, out, sector, ID))
+        self.database.update_result((date, \
+                                     point, \
+                                     place, \
+                                     out, \
+                                     sector, \
+                                     self.get_result_id(pindex, self.get_selected_result())))
 
         self.get_results(pindex)
         self.resultcancel_clicked(None)
@@ -648,10 +650,7 @@ class MainWindow:
         ResultWindow(self.main, self.parser.pigeons, self.database)
 
     def spinPlaced_changed(self, widget):
-        spinmin = widget.get_value_as_int()
-        spinmax = widget.get_range()[1]
-
-        self.spinOutof.set_range(spinmin, spinmax)
+        self.spinOutof.set_range(widget.get_value_as_int(), widget.get_range()[1])
 
     # Find parent callbacks
     def findsire_clicked(self, widget):
@@ -842,9 +841,10 @@ class MainWindow:
         if self.options.optionList.column:
             columns.insert(self.options.optionList.columnposition,
                            _(self.columnValueDic[self.options.optionList.columntype]))
-        types = [str, str, str, str, str]
+
         self.liststore, self.selection = widgets.setup_treeview(self.treeview,
-                                                                columns, types,
+                                                                columns,
+                                                                [str, str, str, str, str],
                                                                 self.selection_changed,
                                                                 True, True, True)
 
@@ -854,36 +854,36 @@ class MainWindow:
         '''
 
         # Find sire/dam treeview
-        columns = [_("Band no."), _("Year"), _("Name")]
-        types = [str, str, str, str]
-        self.lsFind, self.selectionfind = widgets.setup_treeview(self.tvFind,
-                                                                 columns, types,
-                                                                 None,
-                                                                 True, True, True)
+        self.lsFind, self.selectionfind = widgets.setup_treeview(
+                                self.tvFind,
+                                [_("Band no."), _("Year"), _("Name")],
+                                [str, str, str, str],
+                                None,
+                                True, True, True)
 
         # Brothers & sisters treeview
-        columns = [_("Band no."), _("Year")]
-        types = [str, str, str]
-        self.lsBrothers, self.selBrothers = widgets.setup_treeview(self.tvBrothers,
-                                                                   columns, types,
-                                                                   None,
-                                                                   True, True, True)
+        self.lsBrothers, self.selBrothers = widgets.setup_treeview(
+                                self.tvBrothers,
+                                [_("Band no."), _("Year")],
+                                [str, str, str],
+                                None,
+                                True, True, True)
 
         # Halfbrothers & sisters treeview
-        columns = [_("Band no."), _("Year"), _("Common parent")]
-        types = [str, str, str, str]
-        self.lsHalfBrothers, self.selHalfBrothers = widgets.setup_treeview(self.tvHalfBrothers,
-                                                                           columns, types,
-                                                                           None,
-                                                                           True, True, True)
+        self.lsHalfBrothers, self.selHalfBrothers = widgets.setup_treeview(
+                                self.tvHalfBrothers,
+                                [_("Band no."), _("Year"), _("Common parent")],
+                                [str, str, str, str],
+                                None,
+                                True, True, True)
 
         # Offspring treeview
-        columns = [_("Band no."), _("Year")]
-        types = [str, str, str]
-        self.lsOffspring, self.selOffspring = widgets.setup_treeview(self.tvOffspring,
-                                                                     columns, types,
-                                                                     None,
-                                                                     True, True, True)
+        self.lsOffspring, self.selOffspring = widgets.setup_treeview(
+                                self.tvOffspring,
+                                [_("Band no."), _("Year")],
+                                [str, str, str],
+                                None,
+                                True, True, True)
 
         # Results treeview
         columns = [_("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector")]
@@ -1135,20 +1135,6 @@ class MainWindow:
         self.lsOffspring.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.lsOffspring.set_sort_column_id(2, gtk.SORT_ASCENDING)
 
-    def set_menuitem_sensitive(self, activated):
-        '''
-        Set the current selected item of the filtermenu active/inactive
-
-        @param activated: the currently activated item
-        '''
-
-        filterList = [self.young, self.cock, self.hen, self.all]
-        for item in filterList:
-            if not item.get_property('sensitive'):
-                item.set_property('sensitive', True)
-
-        activated.set_property('sensitive', False)
-
     def add_edit_start(self, operation):
         '''
         Do all the necessary things to start editing or adding.
@@ -1380,7 +1366,7 @@ class MainWindow:
 
     def get_main_ring(self):
         '''
-        Return the ring and year of selected pigeon
+        Return the pindex, ring and year of selected pigeon
         '''
 
         model, path = self.selection.get_selected()
@@ -1412,9 +1398,8 @@ class MainWindow:
 
         model, path = selection.get_selected()
         if not path: return
-        pindex = model[path][0]
 
-        return pindex
+        return model[path][0]
 
     def get_resultdata(self):
         '''
