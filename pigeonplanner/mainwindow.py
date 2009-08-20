@@ -1308,8 +1308,7 @@ class MainWindow:
         Empty all entryboxes
         '''
 
-        entryWidgets = self.wTree.get_widget_prefix("entry")
-        for widget in entryWidgets:
+        for widget in self.wTree.get_widget_prefix("entry"):
             name = widget.get_name()
             if not name == 'entryDate':
                 attr = getattr(self, name)
@@ -1374,21 +1373,20 @@ class MainWindow:
         Position the popup calendar
         '''
 
-        req = self.calpopup.size_request()
-        (x,y) = gtk.gdk.Window.get_origin(self.calbutton.window)
+        (x, y) = gtk.gdk.Window.get_origin(self.calbutton.window)
 
         x += self.calbutton.allocation.x
         y += self.calbutton.allocation.y
         bwidth = self.calbutton.allocation.width
         bheight = self.calbutton.allocation.height
 
-        x += bwidth - req[0]
+        x += bwidth - self.calpopup.size_request()[0]
         y += bheight
 
         if x < 0: x = 0
         if y < 0: y = 0
         
-        self.calpopup.move(x,y)
+        self.calpopup.move(x, y)
 
     def hide_popup(self):
         '''
@@ -1405,11 +1403,8 @@ class MainWindow:
 
         model, path = self.selection.get_selected()
         if not path: return
-        pindex = model[path][0]
-        ring = model[path][1]
-        year = model[path][2]
 
-        return pindex, ring, year
+        return model[path][0], model[path][1], model[path][2]
 
     def search_pigeon(self, widget, pindex):
         '''

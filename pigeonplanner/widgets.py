@@ -97,6 +97,7 @@ def message_dialog(msgtype, data, parent=None, extra=None):
     @param parent: The parent window
     @param msgtype: The sort of dialog
     @param data: Tuple of primary text, secondary text and dialog title
+    @param extra: Extra data to use with a string formatter
     '''
 
     if extra:
@@ -257,6 +258,12 @@ def set_multiple_visible(widgets):
             key.hide()
 
 def popup_menu(event, entries):
+    '''
+    Make a right click menu
+
+    @param entries: List of wanted menuentries
+    '''
+
     menu = gtk.Menu()
     for stock_id, callback, data in entries:
         item = gtk.ImageMenuItem(stock_id)
