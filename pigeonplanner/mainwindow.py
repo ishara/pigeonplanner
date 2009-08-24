@@ -257,7 +257,7 @@ class MainWindow:
         model, tIter = self.selection.get_selected()
         path, focus = self.treeview.get_cursor()
 
-        wTree = gtk.glade.XML(self.gladefile, 'removedialog')
+        wTree = gtk.glade.XML(const.GLADEMAIN, 'removedialog')
         dialog = wTree.get_widget('removedialog')
         label = wTree.get_widget('labelPigeon')
         chkKeep = wTree.get_widget('chkKeep')
