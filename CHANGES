@@ -1,3 +1,9 @@
+0.4.4:
+ * Fixed crash at startup when database is empty
+ * Fixed 'go to pigeon'
+ * Added a confirmation dialog when removing results
+ * Code cleaup
+
 0.4.2:
  * Fixed bug where wrong item would be saved in dataset when adding a pigeon
  * Fixed bug where result can't be deleted
