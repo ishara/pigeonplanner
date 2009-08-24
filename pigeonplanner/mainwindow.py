@@ -230,6 +230,9 @@ class MainWindow:
         self.rangedialog.show()
 
     def menuedit_activate(self, widget):
+        model, treeiter = self.selection.get_selected()
+        if not treeiter: return # No pigeon selected, but user pressed ctrl+e
+
         self.entryRing1.set_text(self.entryRing.get_text())
         self.entryYear1.set_text(self.entryYear.get_text())
         self.entryName1.set_text(self.entryName.get_text())
@@ -252,7 +255,11 @@ class MainWindow:
         self.add_edit_start('edit')
 
     def menuremove_activate(self, widget):
-        pindex, ring, year = self.get_main_ring()
+        try:
+            pindex, ring, year = self.get_main_ring()
+        except TypeError:
+            # No pigeon selected, but user pressed ctrl+r
+            return
 
         model, tIter = self.selection.get_selected()
         path, focus = self.treeview.get_cursor()
