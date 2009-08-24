@@ -380,8 +380,8 @@ class DrawPedigree:
         lst[index] = (pindex, ring, year, sex, ex1, ex2, ex3, ex4, ex5, ex6)
 
         if not self.pigeons:
-            import PigeonParser
-            self.parser = PigeonParser.PigeonParser()
+            import pigeonparser
+            self.parser = pigeonparser.PigeonParser()
             self.parser.get_pigeons()
             self.pigeons = self.parser.pigeons
 
