@@ -264,6 +264,11 @@ class MainWindow:
         chkResults = wTree.get_widget('chkResults')
         dialog.set_transient_for(self.main)
         label.set_text(ring + ' / ' + year)
+
+        if len(self.database.get_pigeon_results(pindex)) == 0:
+            chkResults.set_active(False)
+            chkResults.hide()
+
         answer = dialog.run()
         if answer == 2:
             if chkKeep.get_active():
