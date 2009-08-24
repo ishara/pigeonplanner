@@ -1,5 +1,6 @@
 0.4.4:
  * Fixed crash at startup when database is empty
+ * Fixed problem when removing a pigeon
  * Fixed 'go to pigeon'
  * Added a confirmation dialog when removing results
  * Code cleaup
