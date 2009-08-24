@@ -18,6 +18,7 @@
 
 import os
 import sys
+import locale
 
 import pigeonplanner
 
@@ -58,8 +59,12 @@ GLADETOOLS = os.path.join(GLADEDIR, "ToolsWindow.glade")
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 UPDATEURL = 'http://pigeonplanner.sourceforge.net/CURRENT'
-DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/download.html'
 FORUMURL = 'https://sourceforge.net/apps/phpbb/pigeonplanner/'
+
+if locale.getlocale()[0][:2]:
+    DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/nl/download.html'
+else:
+    DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/en/download.html'
 
 MSG_INVALID_IMAGE = (_("Invalid image!"),
                      _("This image is either not supported or corrupt, please choose another one."),
