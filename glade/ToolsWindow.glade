@@ -11,7 +11,7 @@
     <property name="default_width">620</property>
     <property name="default_height">520</property>
     <property name="destroy_with_parent">True</property>
-    <property name="icon">icon_logo.png</property>
+    <property name="icon">../images/icon_logo.png</property>
     <property name="type_hint">dialog</property>
     <property name="has_separator">False</property>
     <signal name="destroy_event" handler="on_window_destroy"/>

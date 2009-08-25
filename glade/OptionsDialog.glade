@@ -11,7 +11,7 @@
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
-    <property name="icon">icon_logo.png</property>
+    <property name="icon">../images/icon_logo.png</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="has_separator">False</property>

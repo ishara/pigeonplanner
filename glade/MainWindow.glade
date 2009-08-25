@@ -6,7 +6,7 @@
     <property name="visible">True</property>
     <property name="default_width">1000</property>
     <property name="default_height">825</property>
-    <property name="icon">icon_logo.png</property>
+    <property name="icon">../images/icon_logo.png</property>
     <signal name="delete_event" handler="on_main_destroy"/>
     <child>
       <widget class="GtkVBox" id="vbox">
@@ -1804,7 +1804,7 @@
                 <child>
                   <widget class="GtkImage" id="image3">
                     <property name="visible">True</property>
-                    <property name="pixbuf">icon_pedigree.png</property>
+                    <property name="pixbuf">../images/icon_pedigree.png</property>
                   </widget>
                   <packing>
                     <property name="position">0</property>
@@ -1969,7 +1969,7 @@
                 <child>
                   <widget class="GtkImage" id="image5">
                     <property name="visible">True</property>
-                    <property name="pixbuf">icon_relatives.png</property>
+                    <property name="pixbuf">../images/icon_relatives.png</property>
                   </widget>
                   <packing>
                     <property name="position">0</property>
@@ -2304,7 +2304,7 @@
                                     <child>
                                       <widget class="GtkImage" id="image12">
                                         <property name="visible">True</property>
-                                        <property name="pixbuf">icon_calendar.png</property>
+                                        <property name="pixbuf">../images/icon_calendar.png</property>
                                       </widget>
                                     </child>
                                   </widget>
@@ -2502,7 +2502,7 @@
                 <child>
                   <widget class="GtkImage" id="image10">
                     <property name="visible">True</property>
-                    <property name="pixbuf">icon_result.png</property>
+                    <property name="pixbuf">../images/icon_result.png</property>
                   </widget>
                   <packing>
                     <property name="position">0</property>
@@ -2548,7 +2548,7 @@
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="destroy_with_parent">True</property>
-    <property name="icon">icon_logo.png</property>
+    <property name="icon">../images/icon_logo.png</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">main</property>
