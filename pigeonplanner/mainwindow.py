@@ -19,6 +19,7 @@
 import os.path
 import datetime
 import webbrowser
+from os.path import join
 
 import gobject
 import gtk
@@ -99,7 +100,7 @@ class MainWindow:
         self.beforeEditPath = 0
         self.blockMenuCallback = False
         self.editResultMode = False
-        self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(const.IMAGEDIR + 'icon_logo.png', 75, 75)
+        self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(join(const.IMAGEDIR, 'icon_logo.png'), 75, 75)
         self.columnValueDic = {'0': _("Colour"), '1': _("Sex")}
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
@@ -1026,7 +1027,7 @@ class MainWindow:
             image = self.parser.pigeons[pindex].image
             width = height = 200
         else:
-            image = const.IMAGEDIR + 'icon_logo.png'
+            image = join(const.IMAGEDIR, 'icon_logo.png')
             width = height = 75
 
         try:
