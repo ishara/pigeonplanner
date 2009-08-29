@@ -479,7 +479,12 @@ class MainWindow:
 
     # Image callbacks
     def eventbox_press(self, widget, event):
-        pindex, ring, year = self.get_main_ring()
+        try:
+            pindex, ring, year = self.get_main_ring()
+        except TypeError:
+            # No pigeon is selected
+            return
+
         image = self.parser.pigeons[pindex].image
         if image:
             widgets.ImageWindow(image, self.main)
