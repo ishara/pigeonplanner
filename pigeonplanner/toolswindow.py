@@ -246,7 +246,7 @@ class ToolsWindow:
             self.fill_item_combo(datatype)
 
     def entryData_changed(self, widget):
-        if widget.get_text_length() > 0:
+        if len(widget.get_text()) > 0:
             self.dataadd.set_sensitive(True)
         else:
             self.dataadd.set_sensitive(False)
