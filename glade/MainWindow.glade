@@ -1391,7 +1391,7 @@
                             <property name="top_padding">4</property>
                             <property name="bottom_padding">4</property>
                             <property name="left_padding">4</property>
-                            <property name="right_padding">4</property>
+                            <property name="right_padding">2</property>
                             <child>
                               <widget class="GtkFrame" id="frame1">
                                 <property name="visible">True</property>
@@ -1544,7 +1544,7 @@
                             <property name="yscale">0</property>
                             <property name="top_padding">4</property>
                             <property name="bottom_padding">4</property>
-                            <property name="left_padding">4</property>
+                            <property name="left_padding">2</property>
                             <property name="right_padding">4</property>
                             <child>
                               <widget class="GtkFrame" id="frame2">
