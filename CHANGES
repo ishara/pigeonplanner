@@ -1,3 +1,13 @@
+0.4.6:
+ * Fixed problem when adding pictures on Windows
+ * Fixed error when trying to add items to datasets
+ * Fixed downloadpage url
+ * Fixed error when clicking picture when no pigeon is selected
+ * Fixed screensize to fit on a 1024x768 resolution
+ * Added icons to preferences tabs
+ * Only show "keep results" when pigeon has results
+ * Made an installer for Windows
+
 0.4.4:
  * Fixed crash at startup when database is empty
  * Fixed problem when removing a pigeon

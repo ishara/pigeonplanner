@@ -1,13 +1,13 @@
 -= Install Pigeon Planner =-
 
-No need to install Pigeon Planner. Run it directly from its folder.
+See your platform below for instructions.
 
 *Linux:
-Run pigeonplanner.py to start Pigeon Planner.
+Untar the package and run pigeonplanner.py to start Pigeon Planner.
 
 *Windows
-Run pigeonplanner.exe to start Pigeon Planner.
+Run the setup file and install the program. Start Pigeon Planner by
+the shortcut in the startmenu or on the desktop (optional).
 
 
-A setup file will be added in the future. As well as Linux-specific
-distribution packages.
+Linux distribution packages will be added in the future if necessary.
