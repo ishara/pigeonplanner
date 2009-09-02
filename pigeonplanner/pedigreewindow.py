@@ -31,15 +31,12 @@ from toolswindow import ToolsWindow
 
 
 class PedigreeWindow:
-    def __init__(self, main, pindex, ring, year, name, colour, sex):
+    def __init__(self, main, pigeoninfo):
         '''
         Constructor
 
         @param main: The main instance class
-        @param ring: The selected pigeon
-        @param year: Year of the pigeon
-        @param name: Name of the pigeon
-        @param colour: Colour of the pigeon
+        @param pigeoninfo: Dictionary containing pigeon info
         @param sex: Sex of the pigeon
         ''' 
 
@@ -55,19 +52,20 @@ class PedigreeWindow:
             setattr(self, wname, w)
 
         self.main = main
-        self.pindex = pindex
-        self.ring = ring
-        self.year = year
-        self.name = name
-        self.colour = colour
-        self.sex = sex
+        self.pigeoninfo = pigeoninfo
+        self.pindex = pigeoninfo['pindex']
+        self.ring = pigeoninfo['ring']
+        self.year = pigeoninfo['year']
+        self.sex = pigeoninfo['sex']
+        self.colour = pigeoninfo['colour']
+        self.name = pigeoninfo['name']
 
         self.pedigreewindow.set_transient_for(self.main.main)
 
         self.labelRing.set_text(self.ring + '/' + self.year)
         self.labelName.set_text(self.name)
 
-        dp = DrawPedigree([self.tableSire, self.tableDam], pindex,
+        dp = DrawPedigree([self.tableSire, self.tableDam], self.pindex,
                           True, None,
                           self.main.parser.pigeons)
         dp.draw_pedigree()
@@ -98,6 +96,5 @@ class PedigreeWindow:
 
                 return
 
-        PrintPedigree(self.pedigreewindow, self.pindex, self.ring,
-                      self.year, self.sex, self.colour, self.name, userinfo)
+        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo)
 

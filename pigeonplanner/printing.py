@@ -25,15 +25,16 @@ from pedigree import DrawPedigree
 
 
 class PrintPedigree:
-    def __init__(self, parent, pindex, ring, year, sex, colour, name, userinfo):
+    def __init__(self, parent, pigeoninfo, userinfo):
 
         self.parent = parent
-        self.pindex = pindex
-        self.ring = ring
-        self.year = year
-        self.sex = sex
-        self.colour = colour
-        self.name = name
+        self.pindex = pigeoninfo['pindex']
+        self.ring = pigeoninfo['ring']
+        self.year = pigeoninfo['year']
+        self.sex = pigeoninfo['sex']
+        self.colour = pigeoninfo['colour']
+        self.name = pigeoninfo['name']
+        self.pigeoninfo = pigeoninfo
         self.userinfo = userinfo
 
         paper_size = gtk.PaperSize(gtk.PAPER_NAME_A4)
@@ -73,9 +74,10 @@ class PrintPedigree:
         cr.set_font_size(10)
         cr.move_to(0, 12)
         cr.show_text(_("Pedigree of:"))
-        xb, yb, width, height, xa, ya = cr.text_extents(self.ring + " / " + self.year)
+        ring = "%s / %s" %(self.pigeoninfo['ring'], self.pigeoninfo['year'][2:])
+        xb, yb, width, height, xa, ya = cr.text_extents(ring)
         cr.move_to(total_width-width, 12)
-        cr.show_text(self.ring + " / " + self.year)
+        cr.show_text(ring)
 
         # line
         cr.move_to(0, 14)
@@ -93,19 +95,34 @@ class PrintPedigree:
         cr.show_text(self.userinfo['phone'])
 
         # pigeondetails
-        xb, yb, width, height, xa, ya = cr.text_extents(self.sex)
+        sexname = "%s - %s" %(self.pigeoninfo['sex'], self.pigeoninfo['name'])
+        xb, yb, width, height, xa, ya = cr.text_extents(sexname)
         cr.move_to(total_width-width, 22)
-        cr.show_text(self.sex)
-        xb, yb, width, height, xa, ya = cr.text_extents(self.colour)
-        cr.move_to(total_width-width, 30)
-        cr.show_text(self.colour)
-        xb, yb, width, height, xa, ya = cr.text_extents(self.name)
-        cr.move_to(total_width-width, 38)
-        cr.show_text(self.name)
+        cr.show_text(sexname)
+
+        cr.set_font_size(4)
+        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra1'])
+        cr.move_to(total_width-width, 28)
+        cr.show_text(self.pigeoninfo['extra1'])
+        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra2'])
+        cr.move_to(total_width-width, 34)
+        cr.show_text(self.pigeoninfo['extra2'])
+        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra3'])
+        cr.move_to(total_width-width, 40)
+        cr.show_text(self.pigeoninfo['extra3'])
+        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra4'])
+        cr.move_to(total_width-width, 46)
+        cr.show_text(self.pigeoninfo['extra4'])
+        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra5'])
+        cr.move_to(total_width-width, 52)
+        cr.show_text(self.pigeoninfo['extra5'])
+        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra6'])
+        cr.move_to(total_width-width, 58)
+        cr.show_text(self.pigeoninfo['extra6'])
 
         # line
-        cr.move_to(0, 50)
-        cr.line_to(total_width, 50)
+        cr.move_to(0, 60)
+        cr.line_to(total_width, 60)
 
         # pedigree
         font_size = 3
@@ -114,36 +131,36 @@ class PrintPedigree:
         cr.set_font_size(font_size)
 
         pos = [(),
-               ((0, 85, 44, 28), ((47, 99, 79),(47, 99, 119))),
-               ((0, 170, 44, 28), ((47, 184, 164),(47, 184, 204))),
-               ((50, 65, 44, 28), ((97, 79, 69),(97, 79, 89))),
-               ((50, 105, 44, 28), ((97, 119, 109),(97, 119, 129))),
-               ((50, 150, 44, 28), ((97, 164, 154),(97, 164, 174))),
-               ((50, 190, 44, 28), ((97 ,204, 194),(97, 204, 214))),
-               ((100, 61, 44, 16), ((147, 69, 64),(147, 69, 74))),
-               ((100, 81, 44, 16), ((147, 89, 84),(147, 89, 94))),
-               ((100, 101, 44, 16), ((147, 109, 104),(147, 109, 114))),
-               ((100, 121, 44, 16), ((147, 129, 124),(147, 129, 134))),
-               ((100, 146, 44, 16), ((147, 154, 149),(147, 154, 159))),
-               ((100, 166, 44, 16), ((147, 174, 169),(147, 174, 179))),
-               ((100, 186, 44, 16), ((147, 194, 189),(147, 194, 199))),
-               ((100, 206, 44, 16), ((147, 214, 209),(147, 214, 219))),
-               ((150, 60, 44, 8), (None)),
-               ((150, 70, 44, 8), (None)),
-               ((150, 80, 44, 8), (None)),
-               ((150, 90, 44, 8), (None)),
-               ((150, 100, 44, 8), (None)),
-               ((150, 110, 44, 8), (None)),
-               ((150, 120, 44, 8), (None)),
-               ((150, 130, 44, 8), (None)),
-               ((150, 145, 44, 8), (None)),
-               ((150, 155, 44, 8), (None)),
-               ((150, 165, 44, 8), (None)),
-               ((150, 175, 44, 8), (None)),
-               ((150, 185, 44, 8), (None)),
-               ((150, 195, 44, 8), (None)),
-               ((150, 205, 44, 8), (None)),
-               ((150, 215, 44, 8), (None))]
+               ((0, 95, 46, 28), ((48, 109, 85),(48, 109, 133))),
+               ((0, 191, 46, 28), ((48, 205, 181),(48, 205, 229))),
+               ((50, 71, 46, 28), ((98, 85, 73),(98, 85, 97))),
+               ((50, 119, 46, 28), ((98, 133, 121),(98, 133, 145))),
+               ((50, 167, 46, 28), ((98, 181, 169),(98, 181, 193))),
+               ((50, 215, 46, 28), ((98, 229, 217),(98, 229, 241))),
+               ((100, 65, 46, 16), ((148, 73, 67),(148, 73, 79))),
+               ((100, 89, 46, 16), ((148, 97, 91),(148, 97, 103))),
+               ((100, 113, 46, 16), ((148, 121, 115),(148, 121, 127))),
+               ((100, 137, 46, 16), ((148, 145, 139),(148, 145, 151))),
+               ((100, 161, 46, 16), ((148, 169, 163),(148, 169, 175))),
+               ((100, 185, 46, 16), ((148, 193, 187),(148, 193, 199))),
+               ((100, 209, 46, 16), ((148, 217, 211),(148, 217, 223))),
+               ((100, 233, 46, 16), ((148, 241, 235),(148, 241, 247))),
+               ((150, 62, 46, 10), (None)),
+               ((150, 74, 46, 10), (None)),
+               ((150, 86, 46, 10), (None)),
+               ((150, 98, 46, 10), (None)),
+               ((150, 110, 46, 10), (None)),
+               ((150, 122, 46, 10), (None)),
+               ((150, 134, 46, 10), (None)),
+               ((150, 146, 46, 10), (None)),
+               ((150, 158, 46, 10), (None)),
+               ((150, 170, 46, 10), (None)),
+               ((150, 182, 46, 10), (None)),
+               ((150, 194, 46, 10), (None)),
+               ((150, 206, 46, 10), (None)),
+               ((150, 218, 46, 10), (None)),
+               ((150, 230, 46, 10), (None)),
+               ((150, 242, 46, 10), (None))]
 
         lst = [None]*31
         dp = DrawPedigree()
@@ -159,7 +176,7 @@ class PrintPedigree:
 
             if lst[i]:
                 cr.move_to(x + 0.5, y + 0.5 + font_size)
-                cr.show_text(lst[i][1] + "/" + lst[i][2])
+                cr.show_text(lst[i][1] + "/" + lst[i][2][2:])
 
                 if i <= 6:
                     height = 6
@@ -185,7 +202,7 @@ class PrintPedigree:
                     cr.show_text(lst[i][9])
 
             if pos[i][1]:
-                w = 3
+                w = 2
 
                 x = pos[i][1][0][0]
                 y = pos[i][1][0][1]
@@ -460,11 +477,11 @@ class PrintVelocity:
         # info
         cr.set_font_size(6)
         cr.move_to(0, 22)
-        cr.show_text(_("Date: ") + self.info[0])
+        cr.show_text("%s: " %_("Date") + self.info[0])
         cr.move_to(0, 30)
-        cr.show_text(_("Released: ") + self.info[1])
+        cr.show_text("%s: " %_("Released") + self.info[1])
         cr.move_to(0, 38)
-        cr.show_text(_("Distance: ") + str(self.info[2]))
+        cr.show_text("%s: " %_("Distance") + str(self.info[2]))
 
         # line
         cr.move_to(0, 42)

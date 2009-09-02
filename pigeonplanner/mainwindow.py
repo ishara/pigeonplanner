@@ -519,10 +519,18 @@ class MainWindow:
     def sbdetail_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
 
-        name = self.parser.pigeons[pindex].name
-        sex = self.sexDic[self.parser.pigeons[pindex].sex]
-        colour = self.parser.pigeons[pindex].colour
-        PedigreeWindow(self, pindex, ring, year, name, colour, sex)
+        pigeoninfo = {'pindex': pindex, 'ring': ring, 'year': year,
+                      'sex': self.sexDic[self.parser.pigeons[pindex].sex],
+                      'colour': self.parser.pigeons[pindex].colour,
+                      'name': self.parser.pigeons[pindex].name,
+                      'extra1': self.parser.pigeons[pindex].extra1,
+                      'extra2': self.parser.pigeons[pindex].extra2,
+                      'extra3': self.parser.pigeons[pindex].extra3,
+                      'extra4': self.parser.pigeons[pindex].extra4,
+                      'extra5': self.parser.pigeons[pindex].extra5,
+                      'extra6': self.parser.pigeons[pindex].extra6}
+
+        PedigreeWindow(self, pigeoninfo)
 
     def goto_clicked(self, widget):
         children = []
