@@ -28,12 +28,6 @@ class PrintPedigree:
     def __init__(self, parent, pigeoninfo, userinfo):
 
         self.parent = parent
-        self.pindex = pigeoninfo['pindex']
-        self.ring = pigeoninfo['ring']
-        self.year = pigeoninfo['year']
-        self.sex = pigeoninfo['sex']
-        self.colour = pigeoninfo['colour']
-        self.name = pigeoninfo['name']
         self.pigeoninfo = pigeoninfo
         self.userinfo = userinfo
 
@@ -95,7 +89,10 @@ class PrintPedigree:
         cr.show_text(self.userinfo['phone'])
 
         # pigeondetails
-        sexname = "%s - %s" %(self.pigeoninfo['sex'], self.pigeoninfo['name'])
+        if self.pigeoninfo['name']:
+            sexname = "%s - %s" %(self.pigeoninfo['sex'], self.pigeoninfo['name'])
+        else:
+            sexname = self.pigeoninfo['sex']
         xb, yb, width, height, xa, ya = cr.text_extents(sexname)
         cr.move_to(total_width-width, 22)
         cr.show_text(sexname)
@@ -164,7 +161,8 @@ class PrintPedigree:
 
         lst = [None]*31
         dp = DrawPedigree()
-        dp.build_tree(self.pindex, self.ring, self.year, self.sex, '', '', '', '', '', '', 0, 1, lst)
+        dp.build_tree(self.pigeoninfo['pindex'], self.pigeoninfo['ring'], self.pigeoninfo['year'],
+                      self.pigeoninfo['sex'], '', '', '', '', '', '', 0, 1, lst)
 
         for i in range(1, 31):
             x = pos[i][0][0]
