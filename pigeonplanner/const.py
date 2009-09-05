@@ -62,9 +62,9 @@ UPDATEURL = 'http://pigeonplanner.sourceforge.net/CURRENT'
 FORUMURL = 'https://sourceforge.net/apps/phpbb/pigeonplanner/'
 
 if locale.getlocale()[0][:2]:
-    DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/nl/download.html'
+    DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/nl/download.php'
 else:
-    DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/en/download.html'
+    DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/en/download.php'
 
 MSG_INVALID_IMAGE = (_("Invalid image!"),
                      _("This image is either not supported or corrupt, please choose another one."),
