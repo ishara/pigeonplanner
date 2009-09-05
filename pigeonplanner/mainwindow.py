@@ -20,6 +20,7 @@ import os.path
 import datetime
 import webbrowser
 from os.path import join
+from threading import Thread
 
 import gobject
 import gtk
@@ -171,7 +172,8 @@ class MainWindow:
                           }
 
         if self.options.optionList.update:
-            gobject.idle_add(self.search_updates)
+            updatethread = Thread(group=None, target=self.search_updates, name=None)
+            updatethread.start()
 
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
