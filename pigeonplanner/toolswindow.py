@@ -18,6 +18,7 @@
 
 import datetime
 
+import gobject
 import gtk
 import gtk.glade
 
@@ -448,6 +449,9 @@ class ToolsWindow:
 
     # Update
     def btnupdate_clicked(self, widget):
+        gobject.idle_add(self.update_check)
+
+    def update_check(self):
         msg, new = update.update()
 
         self.labelversion.set_text(msg)
