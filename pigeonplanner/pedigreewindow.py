@@ -37,7 +37,6 @@ class PedigreeWindow:
 
         @param main: The main instance class
         @param pigeoninfo: Dictionary containing pigeon info
-        @param sex: Sex of the pigeon
         ''' 
 
         self.wTree = gtk.glade.XML(const.GLADEPEDIGREE)
@@ -62,7 +61,8 @@ class PedigreeWindow:
 
         self.pedigreewindow.set_transient_for(self.main.main)
 
-        self.labelRing.set_text(self.ring + '/' + self.year)
+        self.labelRing.set_text("%s / %s" %(self.ring, self.year[2:]))
+        self.labelSex.set_text(self.sex)
         self.labelName.set_text(self.name)
 
         dp = DrawPedigree([self.tableSire, self.tableDam], self.pindex,
