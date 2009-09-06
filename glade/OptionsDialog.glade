@@ -290,7 +290,7 @@
               <widget class="GtkHBox" id="hbox3">
                 <property name="visible">True</property>
                 <child>
-                  <widget class="GtkImage" id="image3">
+                  <widget class="GtkImage" id="imagePage">
                     <property name="visible">True</property>
                     <property name="stock">gtk-page-setup</property>
                   </widget>

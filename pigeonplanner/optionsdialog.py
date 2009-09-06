@@ -68,6 +68,10 @@ class OptionsDialog:
             elif number > 30:
                 self.cbThemes.set_wrap_width(3)
 
+            # Page setup icon is available since PyGTK 2.14
+            # We only use 2.12 on Windows (missing binaries)
+            self.imagePage.set_from_file(os.path.join(const.IMAGEDIR, 'gtk_pagesetup.png'))
+
         self.set_options()
         if not self.chkColumn.get_active():
             self.aligncolumn.set_sensitive(False)
