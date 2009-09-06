@@ -23,7 +23,18 @@
 # http://www.jumbo-psp.com/PSP-for-Fun/images/Color%20tabel.htm
 
 
+from cgi import escape
+
 import gtk
+
+
+def format_text(text):
+    if not text:
+        return ""
+
+    text = escape(text)
+
+    return text
 
 
 class ExtraBox(gtk.DrawingArea):
@@ -35,6 +46,7 @@ class ExtraBox(gtk.DrawingArea):
         self.text = '\n'.join(text)
 
         if text != '':
+            self.text = format_text(self.text)
             self.bgcolor = (240/256.0, 230/256.0, 140/256.0)
             self.bordercolor = (0,0,0)
         else:
