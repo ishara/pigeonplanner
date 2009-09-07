@@ -413,6 +413,8 @@ class ToolsWindow:
         hens = 0
         ybirds = 0
         for pigeon in pigeons:
+            if not pigeon[5]: continue # Pigeon is not shown, don't count it
+
             if pigeon[4] == '0':
                 cocks += 1
             elif pigeon[4] == '1':
