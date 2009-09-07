@@ -61,7 +61,7 @@ DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 UPDATEURL = 'http://pigeonplanner.sourceforge.net/CURRENT'
 FORUMURL = 'https://sourceforge.net/apps/phpbb/pigeonplanner/'
 
-if locale.getlocale()[0][:2]:
+if locale.getlocale()[0][:2] == 'nl':
     DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/nl/download.php'
 else:
     DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/en/download.php'
