@@ -1,3 +1,15 @@
+0.4.8:
+ * Added pigeon details to printed pedigree
+ * Added sex of selected pigeon to detailed pedigree
+ * Added images to pedigree tabs
+ * Fixed bug where pedigree couldn't display some special characters
+ * Fixed possible hangup when checking for updates
+ * Fixed jumping of the detail pedigree
+ * Fixed detailed pedigree window height for 1024x768
+ * Fixed missing image in preferences tabs (Windows)
+ * Fixed download URLs
+ * Don't show older or same pigeon whe searching for parents
+
 0.4.6:
  * Fixed problem when adding pictures on Windows
  * Fixed error when trying to add items to datasets
