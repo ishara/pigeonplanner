@@ -1433,13 +1433,24 @@ your pigeons and results.</property>
                                           </packing>
                                         </child>
                                         <child>
+                                          <widget class="GtkLabel" id="label40">
+                                            <property name="visible">True</property>
+                                            <property name="xalign">0</property>
+                                            <property name="label" translatable="yes">Warning! This will overwrite the existing database!</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
                                           <widget class="GtkFileChooserButton" id="fcButtonRestore">
                                             <property name="visible">True</property>
                                             <property name="title" translatable="yes">Select a valid backup file</property>
                                           </widget>
                                           <packing>
                                             <property name="expand">False</property>
-                                            <property name="position">1</property>
+                                            <property name="position">2</property>
                                           </packing>
                                         </child>
                                         <child>
@@ -1482,7 +1493,7 @@ your pigeons and results.</property>
                                             </child>
                                           </widget>
                                           <packing>
-                                            <property name="position">2</property>
+                                            <property name="position">3</property>
                                           </packing>
                                         </child>
                                       </widget>
