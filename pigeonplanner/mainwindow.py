@@ -684,11 +684,11 @@ class MainWindow:
     # Find parent callbacks
     def findsire_clicked(self, widget):
         self.search = 'sire'
-        self.fill_find_treeview('0')
+        self.fill_find_treeview('0', self.entryRing1.get_text(), self.entryYear1.get_text())
 
     def finddam_clicked(self, widget):
         self.search = 'dam'
-        self.fill_find_treeview('1')
+        self.fill_find_treeview('1', self.entryRing1.get_text(), self.entryYear1.get_text())
 
     def findadd_clicked(self, widget):
         model, path = self.selectionfind.get_selected()
@@ -1480,17 +1480,21 @@ class MainWindow:
 
         return None
 
-    def fill_find_treeview(self, pigeonType):
+    def fill_find_treeview(self, sex, band, year):
         '''
         Fill the 'find'-treeview with pigeons of the wanted sex
 
-        @param pigeonType: sex of the pigeons
+        @param sex: sex of the pigeons
+        @param band: band of the pigeon
+        @param year: year of the pigeon
         '''
 
         self.lsFind.clear()
 
         for pigeon in self.parser.pigeons:
-            if pigeonType == self.parser.pigeons[pigeon].sex:
+            if sex == self.parser.pigeons[pigeon].sex and \
+               band != self.parser.pigeons[pigeon].ring and \
+               year >= self.parser.pigeons[pigeon].year:
                 self.lsFind.append([pigeon,
                                     self.parser.pigeons[pigeon].ring,
                                     self.parser.pigeons[pigeon].year,
