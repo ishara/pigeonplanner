@@ -321,11 +321,14 @@ class BackupDialog(gtk.Dialog):
         else:
             label = gtk.Label(_("Choose a Pigeon Planner backup file to restore"))
             label.set_padding(30, 0)
+            label2 = gtk.Label(_("Warning! This will overwrite the existing database!"))
+            label2.set_padding(30, 0)
             self.fcButtonRestore = gtk.FileChooserButton(_("Select a valid backup file"))
             self.fcButtonRestore.set_action(gtk.FILE_CHOOSER_ACTION_OPEN)
             self.fcButtonRestore.add_filter(backupFileFilter)
 
             self.vbox.pack_start(label, False, True, 8)
+            self.vbox.pack_start(label2, False, True, 8)
             self.vbox.pack_start(self.fcButtonRestore, False, True, 12)
 
             button = gtk.Button(_("Restore"))
