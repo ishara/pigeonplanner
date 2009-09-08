@@ -112,7 +112,7 @@
                 <child>
                   <widget class="GtkLabel" id="label6">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">  -  </property>
+                    <property name="label">  -  </property>
                   </widget>
                   <packing>
                     <property name="left_attach">2</property>
@@ -124,7 +124,7 @@
                 <child>
                   <widget class="GtkLabel" id="label7">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">  -  </property>
+                    <property name="label">  -  </property>
                   </widget>
                   <packing>
                     <property name="left_attach">4</property>

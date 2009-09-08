@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-08 15:41+0200\n"
+"POT-Creation-Date: 2009-09-08 15:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "Error: There went something wrong parsing the '%(option)s' option in the '%(section)s' section of the configuration file, using the default '%(default)s'."
 msgstr ""
 
-#: ../pigeonplanner/printing.py:70 tmp/PedigreeWindow.glade.h:6
+#: ../pigeonplanner/printing.py:70 tmp/PedigreeWindow.glade.h:5
 msgid "Pedigree of:"
 msgstr ""
 
@@ -732,11 +732,11 @@ msgstr ""
 msgid "<b>Offspring</b>"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:6 tmp/PedigreeWindow.glade.h:2
+#: tmp/MainWindow.glade.h:6 tmp/PedigreeWindow.glade.h:1
 msgid "<b>Pedigree dam</b>"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:7 tmp/PedigreeWindow.glade.h:3
+#: tmp/MainWindow.glade.h:7 tmp/PedigreeWindow.glade.h:2
 msgid "<b>Pedigree sire</b>"
 msgstr ""
 
@@ -752,7 +752,7 @@ msgstr ""
 msgid "Choose an image..."
 msgstr ""
 
-#: tmp/MainWindow.glade.h:14 tmp/PedigreeWindow.glade.h:4
+#: tmp/MainWindow.glade.h:14 tmp/PedigreeWindow.glade.h:3
 msgid "Dam"
 msgstr ""
 
@@ -784,7 +784,7 @@ msgstr ""
 msgid "Loft"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:24 tmp/PedigreeWindow.glade.h:5
+#: tmp/MainWindow.glade.h:24 tmp/PedigreeWindow.glade.h:4
 msgid "Pedigree"
 msgstr ""
 
@@ -800,7 +800,7 @@ msgstr ""
 msgid "Search a pigeon"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:34 tmp/PedigreeWindow.glade.h:7
+#: tmp/MainWindow.glade.h:34 tmp/PedigreeWindow.glade.h:6
 msgid "Sire"
 msgstr ""
 
@@ -858,10 +858,6 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:12
 msgid "Value of column:"
-msgstr ""
-
-#: tmp/PedigreeWindow.glade.h:1
-msgid "  -  "
 msgstr ""
 
 #: tmp/ResultWindow.glade.h:1
