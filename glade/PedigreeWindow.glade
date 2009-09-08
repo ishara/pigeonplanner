@@ -622,9 +622,28 @@
               </widget>
             </child>
             <child>
-              <widget class="GtkLabel" id="label2">
+              <widget class="GtkHBox" id="hbox1">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Sire</property>
+                <child>
+                  <widget class="GtkImage" id="imageSire">
+                    <property name="visible">True</property>
+                    <property name="pixbuf">../images/symbol_male.png</property>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label2">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Sire</property>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </widget>
               <packing>
                 <property name="tab_fill">False</property>
@@ -1090,9 +1109,28 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label3">
+              <widget class="GtkHBox" id="hbox2">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Dam</property>
+                <child>
+                  <widget class="GtkImage" id="imageDam">
+                    <property name="visible">True</property>
+                    <property name="pixbuf">../images/symbol_female.png</property>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="label3">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Dam</property>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </widget>
               <packing>
                 <property name="position">1</property>
