@@ -56,7 +56,7 @@
                       <widget class="GtkButton" id="button_top">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <property name="receives_default">False</property>
                         <property name="xalign">0</property>
                         <property name="yalign">0</property>
                         <signal name="clicked" handler="on_button_top_clicked"/>
@@ -77,7 +77,7 @@
                       <widget class="GtkButton" id="button_up">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <property name="receives_default">False</property>
                         <property name="xalign">0</property>
                         <property name="yalign">0</property>
                         <signal name="clicked" handler="on_button_up_clicked"/>
@@ -98,7 +98,7 @@
                       <widget class="GtkButton" id="button_down">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <property name="receives_default">False</property>
                         <property name="xalign">0</property>
                         <property name="yalign">0</property>
                         <signal name="clicked" handler="on_button_down_clicked"/>
@@ -119,7 +119,7 @@
                       <widget class="GtkButton" id="button_bottom">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <property name="receives_default">False</property>
                         <property name="xalign">0</property>
                         <property name="yalign">0</property>
                         <signal name="clicked" handler="on_button_bottom_clicked"/>
@@ -756,9 +756,7 @@
                                               <widget class="GtkButton" id="save">
                                                 <property name="label">gtk-save</property>
                                                 <property name="can_focus">True</property>
-                                                <property name="can_default">True</property>
-                                                <property name="has_default">True</property>
-                                                <property name="receives_default">True</property>
+                                                <property name="receives_default">False</property>
                                                 <property name="use_stock">True</property>
                                                 <signal name="clicked" handler="on_save_clicked"/>
                                               </widget>
@@ -795,7 +793,7 @@
                                             <property name="label">gtk-cancel</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
-                                            <property name="receives_default">True</property>
+                                            <property name="receives_default">False</property>
                                             <property name="use_stock">True</property>
                                             <signal name="clicked" handler="on_cancel_clicked"/>
                                           </widget>
@@ -841,6 +839,7 @@
                                                 <property name="can_focus">True</property>
                                                 <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                                                 <property name="invisible_char">&#x25CF;</property>
+                                                <property name="activates_default">True</property>
                                                 <property name="width_chars">15</property>
                                                 <property name="xalign">0.5</property>
                                                 <signal name="leave_notify_event" handler="on_widget_leave"/>
@@ -869,6 +868,7 @@
                                                 <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                                                 <property name="max_length">4</property>
                                                 <property name="invisible_char">&#x25CF;</property>
+                                                <property name="activates_default">True</property>
                                                 <property name="width_chars">4</property>
                                                 <signal name="leave_notify_event" handler="on_widget_leave"/>
                                                 <signal name="enter_notify_event" handler="on_widget_enter"/>
@@ -940,6 +940,7 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="events">GDK_FOCUS_CHANGE_MASK | GDK_STRUCTURE_MASK</property>
                                                     <property name="invisible_char">&#x25CF;</property>
+                                                    <property name="activates_default">True</property>
                                                     <property name="width_chars">15</property>
                                                     <property name="xalign">0.5</property>
                                                     <signal name="changed" handler="on_entrySireEdit_changed"/>
@@ -967,6 +968,7 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="max_length">4</property>
                                                     <property name="invisible_char">&#x25CF;</property>
+                                                    <property name="activates_default">True</property>
                                                     <property name="width_chars">4</property>
                                                   </widget>
                                                   <packing>
@@ -1023,6 +1025,7 @@
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
                                                     <property name="invisible_char">&#x25CF;</property>
+                                                    <property name="activates_default">True</property>
                                                     <property name="width_chars">15</property>
                                                     <property name="xalign">0.5</property>
                                                   </widget>
@@ -1048,6 +1051,7 @@
                                                     <property name="can_focus">True</property>
                                                     <property name="max_length">4</property>
                                                     <property name="invisible_char">&#x25CF;</property>
+                                                    <property name="activates_default">True</property>
                                                     <property name="width_chars">4</property>
                                                   </widget>
                                                   <packing>
@@ -1111,6 +1115,7 @@
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="invisible_char">&#x25CF;</property>
+                                            <property name="activates_default">True</property>
                                             <property name="xalign">0.5</property>
                                             <signal name="leave_notify_event" handler="on_widget_leave"/>
                                             <signal name="enter_notify_event" handler="on_widget_enter"/>
@@ -1218,6 +1223,7 @@
                                                         <property name="max_length">28</property>
                                                         <property name="has_frame">False</property>
                                                         <property name="invisible_char">&#x25CF;</property>
+                                                        <property name="activates_default">True</property>
                                                       </widget>
                                                       <packing>
                                                         <property name="expand">False</property>
@@ -1232,6 +1238,7 @@
                                                         <property name="max_length">28</property>
                                                         <property name="has_frame">False</property>
                                                         <property name="invisible_char">&#x25CF;</property>
+                                                        <property name="activates_default">True</property>
                                                       </widget>
                                                       <packing>
                                                         <property name="expand">False</property>
@@ -1246,6 +1253,7 @@
                                                         <property name="max_length">28</property>
                                                         <property name="has_frame">False</property>
                                                         <property name="invisible_char">&#x25CF;</property>
+                                                        <property name="activates_default">True</property>
                                                       </widget>
                                                       <packing>
                                                         <property name="expand">False</property>
@@ -1260,6 +1268,7 @@
                                                         <property name="max_length">28</property>
                                                         <property name="has_frame">False</property>
                                                         <property name="invisible_char">&#x25CF;</property>
+                                                        <property name="activates_default">True</property>
                                                       </widget>
                                                       <packing>
                                                         <property name="expand">False</property>
@@ -1274,6 +1283,7 @@
                                                         <property name="max_length">28</property>
                                                         <property name="has_frame">False</property>
                                                         <property name="invisible_char">&#x25CF;</property>
+                                                        <property name="activates_default">True</property>
                                                       </widget>
                                                       <packing>
                                                         <property name="expand">False</property>
@@ -1288,6 +1298,7 @@
                                                         <property name="max_length">28</property>
                                                         <property name="has_frame">False</property>
                                                         <property name="invisible_char">&#x25CF;</property>
+                                                        <property name="activates_default">True</property>
                                                       </widget>
                                                       <packing>
                                                         <property name="expand">False</property>
@@ -1707,7 +1718,7 @@
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
                             <signal name="clicked" handler="on_sbdetail_clicked"/>
                             <child>
                               <widget class="GtkHBox" id="hbox22">
@@ -1749,7 +1760,7 @@
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
                             <property name="focus_on_click">False</property>
                             <signal name="clicked" handler="on_goto_clicked"/>
                             <child>
@@ -2044,7 +2055,7 @@
                       <widget class="GtkButton" id="allresults">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <property name="receives_default">False</property>
                         <signal name="clicked" handler="on_allresults_clicked"/>
                         <child>
                           <widget class="GtkHBox" id="hbox25">
@@ -2093,7 +2104,7 @@
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <property name="receives_default">False</property>
                         <signal name="clicked" handler="on_editresult_clicked"/>
                         <child>
                           <widget class="GtkHBox" id="hbox5">
@@ -2132,7 +2143,7 @@
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
+                        <property name="receives_default">False</property>
                         <signal name="clicked" handler="on_removeresult_clicked"/>
                         <child>
                           <widget class="GtkHBox" id="hbox26">
@@ -2297,7 +2308,7 @@
                                   <widget class="GtkButton" id="calbutton">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
+                                    <property name="receives_default">False</property>
                                     <signal name="clicked" handler="on_calbutton_clicked"/>
                                     <child>
                                       <widget class="GtkImage" id="image12">
@@ -2361,9 +2372,7 @@
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
-                                <property name="can_default">True</property>
-                                <property name="has_default">True</property>
-                                <property name="receives_default">True</property>
+                                <property name="receives_default">False</property>
                                 <signal name="clicked" handler="on_addresult_clicked"/>
                                 <child>
                                   <widget class="GtkHBox" id="hbox24">
@@ -2408,7 +2417,7 @@
                                   <widget class="GtkButton" id="editapply">
                                     <property name="label">gtk-apply</property>
                                     <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
+                                    <property name="receives_default">False</property>
                                     <property name="use_stock">True</property>
                                     <signal name="clicked" handler="on_editapply_clicked"/>
                                   </widget>
@@ -2421,7 +2430,7 @@
                                 <child>
                                   <widget class="GtkButton" id="resultcancel">
                                     <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
+                                    <property name="receives_default">False</property>
                                     <signal name="clicked" handler="on_resultcancel_clicked"/>
                                     <child>
                                       <widget class="GtkHBox" id="hbox9">
