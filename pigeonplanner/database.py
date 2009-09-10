@@ -118,6 +118,18 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
+    def update_pigeon_sire(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Pigeons SET sire=?, yearsire=? WHERE pindex=?', data)
+        conn.commit()
+        conn.close()
+
+    def update_pigeon_dam(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Pigeons SET dam=?, yeardam=? WHERE pindex=?', data)
+        conn.commit()
+        conn.close()
+
     def show_pigeon(self, band, value):
         conn, cursor = self.db_connect()
         cursor.execute('UPDATE Pigeons SET show=? WHERE pindex=?', (value, band))

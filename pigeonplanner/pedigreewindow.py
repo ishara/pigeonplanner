@@ -65,12 +65,12 @@ class PedigreeWindow:
         self.labelSex.set_text(self.sex)
         self.labelName.set_text(self.name)
 
-        dp = DrawPedigree([self.tableSire, self.tableDam], self.pindex,
-                          True, None,
-                          self.main.parser.pigeons)
-        dp.draw_pedigree()
+        self.dp = DrawPedigree([self.tableSire, self.tableDam], self.pindex,
+                                True, None,
+                                self.main.parser.pigeons, self.main, self)
+        self.dp.draw_pedigree()
 
-    def close_clicked(self, widget, event=None):
+    def close_clicked(self, widget=None, event=None):
         self.pedigreewindow.destroy()
 
     def print_clicked(self, widget):
