@@ -344,10 +344,14 @@ class ToolsWindow:
         for item in self.main.database.get_all_addresses():
             if item[9]:
                 alreadyMe = True
+                self.me = item[1]
                 break
 
         if alreadyMe:
             widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True})
+            if self.admode == 'edit' and self.me == self.get_name():
+                widgets.set_multiple_visible({self.chkme: True})
+                self.chkme.set_active(True)
         else:
             widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True, self.chkme: True})
 
