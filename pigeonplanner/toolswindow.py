@@ -45,6 +45,7 @@ class ToolsWindow:
                       'on_dataadd_clicked'       : self.dataadd_clicked,
                       'on_entryData_changed'     : self.entryData_changed,
                       'on_adadd_clicked'         : self.adadd_clicked,
+                      'on_adedit_clicked'        : self.adedit_clicked,
                       'on_adremove_clicked'      : self.adremove_clicked,
                       'on_btnadd_clicked'        : self.btnadd_clicked,
                       'on_btncancel_clicked'     : self.btncancel_clicked,
@@ -271,10 +272,15 @@ class ToolsWindow:
         self.empty_adentrys()
 
         if path:
-            widgets.set_multiple_sensitive({self.adremove: True})
+            widgets.set_multiple_sensitive({self.adremove: True, self.adedit: True})
         else:
-            widgets.set_multiple_sensitive({self.adremove: False})
+            widgets.set_multiple_sensitive({self.adremove: False, self.adedit: False})
             return
+
+        self.set_data()
+
+    def set_data(self):
+        model, path = self.sel_address.get_selected()
 
         name = model[path][0]
 
@@ -292,8 +298,43 @@ class ToolsWindow:
     def adadd_clicked(self, widget, pedigree_call=False):
         self.pedigree_call = pedigree_call
 
-        self.empty_adentrys()
+        self.admode = 'add'
 
+        self.start_add()
+
+    def adedit_clicked(self, widget):
+        self.pedigree_call = False
+
+        self.admode = 'edit'
+
+        self.start_add()
+
+    def btnadd_clicked(self, widget):
+        data = self.get_entry_data()
+
+        if not data[0]:
+            widgets.message_dialog('error', const.MSG_NAME_EMPTY, self.toolsdialog)
+            return
+
+        if self.admode == 'add':
+            for ad in self.main.database.get_all_addresses():
+                if data[0] == ad[1]:
+                    widgets.message_dialog('error', const.MSG_NAME_EXISTS, self.toolsdialog)
+                    return
+
+            self.main.database.insert_address(data)
+        else:
+            data += (self.get_name(), )
+            self.main.database.update_address(data)
+
+        self.fill_address_view()
+
+        self.finish_add()
+
+    def btncancel_clicked(self, widget):
+        self.finish_add()
+
+    def start_add(self):
         for entry in self.get_entrys():
             entry.set_property('editable', True)
 
@@ -311,27 +352,6 @@ class ToolsWindow:
             widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True, self.chkme: True})
 
         self.adentryname.grab_focus()
-
-    def btnadd_clicked(self, widget):
-        data = self.get_entry_data()
-
-        if not data[0]:
-            widgets.message_dialog('error', const.MSG_NAME_EMPTY, self.toolsdialog)
-            return
-
-        for ad in self.main.database.get_all_addresses():
-            if data[0] == ad[1]:
-                widgets.message_dialog('error', const.MSG_NAME_EXISTS, self.toolsdialog)
-                return
-
-        self.main.database.insert_address(data)
-
-        self.fill_address_view()
-
-        self.finish_add()
-
-    def btncancel_clicked(self, widget):
-        self.finish_add()
 
     def finish_add(self):
         self.empty_adentrys()

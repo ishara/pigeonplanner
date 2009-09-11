@@ -222,6 +222,12 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
+    def update_address(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Addresses SET name=?, street=?, code=?, city=?, country=?, phone=?, email=?, comment=?, me=? WHERE name=?', data)
+        conn.commit()
+        conn.close()
+
     def get_all_addresses(self):
         conn, cursor = self.db_connect()
         cursor.execute('SELECT * FROM Addresses')
