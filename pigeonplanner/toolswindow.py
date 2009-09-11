@@ -430,14 +430,14 @@ class ToolsWindow:
 
     # Statistics
     def btnsearchdb_clicked(self, widget):
-        pigeons = self.main.database.get_pigeons()
-        results = self.main.database.get_all_results()
-
         cocks = 0
         hens = 0
         ybirds = 0
-        for pigeon in pigeons:
+        ptotal = 0
+        for pigeon in self.main.database.get_pigeons():
             if not pigeon[5]: continue # Pigeon is not shown, don't count it
+
+            ptotal += 1
 
             if pigeon[4] == '0':
                 cocks += 1
@@ -446,11 +446,11 @@ class ToolsWindow:
             elif pigeon[4] == '2':
                 ybirds += 1
 
-        items = {_("Number of pigeons"): len(pigeons),
+        items = {_("Number of pigeons"): ptotal,
                  _("Number of cocks"): cocks,
                  _("Number of hens"): hens,
                  _("Number of young birds"): ybirds,
-                 _("Number of results"): len(results)
+                 _("Number of results"): len(self.main.database.get_all_results())
                 }
 
         self.ls_stats.clear()
