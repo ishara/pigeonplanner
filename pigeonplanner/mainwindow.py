@@ -63,6 +63,9 @@ class MainWindow:
                       'on_fccancel_clicked'      : self.fccancel_clicked,
                       'on_rangeadd_clicked'      : self.rangeadd_clicked,
                       'on_rangecancel_clicked'   : self.rangecancel_clicked,
+                      'on_srchentry_changed'     : self.srchentry_changed,
+                      'on_search_clicked'        : self.search_clicked,
+                      'on_srchclose_clicked'     : self.srchclose_clicked,
                       'on_eventbox_press'        : self.eventbox_press,
                       'on_eventimage_press'      : self.eventimage_press,
                       'on_treeview_press'        : self.treeview_press,
@@ -82,10 +85,7 @@ class MainWindow:
                       'on_button_down_clicked'   : self.button_down_clicked,
                       'on_button_bottom_clicked' : self.button_bottom_clicked,
                       'on_spinPlaced_changed'    : self.spinPlaced_changed,
-                      'on_rangedialog_delete'    : self.dialog_delete,
-                      'on_finddialog_delete'     : self.dialog_delete,
-                      'on_removedialog_delete'   : self.dialog_delete,
-                      'on_filedialog_delete'     : self.dialog_delete,
+                      'on_dialog_delete'    : self.dialog_delete,
                       'on_main_destroy'          : self.quit_program}
         self.wTree.signal_autoconnect(signalDic)
 
@@ -215,6 +215,9 @@ class MainWindow:
 
     def menuclose_activate(self, widget):
         self.quit_program()
+
+    def menusearch_activate(self, widget):
+        self.searchdialog.show()
 
     def menuadd_activate(self, widget):
         self.empty_entryboxes()
@@ -397,6 +400,27 @@ class MainWindow:
 
     def rangecancel_clicked(self, widget):
         self.rangedialog.hide()
+
+    # Search dialog callbacks
+    def srchentry_changed(self, widget):
+        if widget.get_text():
+            self.search.set_sensitive(True)
+        else:
+            self.search.set_sensitive(False)
+
+    def search_clicked(self, widget):
+        keyword = self.srchentry.get_text()
+
+        try:
+            pindex, show = self.database.search_band(keyword).next()
+        except StopIteration:
+            return # No results found
+
+        if show:
+            self.search_pigeon(None, pindex)
+
+    def srchclose_clicked(self, widget):
+        self.searchdialog.hide()
 
     # Main treeview callbacks
     def column1_clicked(self, column):
@@ -784,6 +808,7 @@ class MainWindow:
         entries = (
             ("FileMenu", None, _("_File")),
             ("BackupMenu", None, _("_Backup")),
+            ("SearchMenu", None, _("_Search")),
             ("PigeonMenu", None, _("_Pigeon")),
             ("EditMenu", None, _("_Edit")),
             ("ViewMenu", None, _("_View")),
@@ -799,11 +824,13 @@ class MainWindow:
                     _("Add a new pigeon"), self.menuadd_activate),
             ("Addrange", gtk.STOCK_ADD, _("Add ran_ge"), "<control><shift>A",
                     _("Add a range of pigeons"), self.menuaddrange_activate),
+            ("Search", gtk.STOCK_FIND, _("_Find..."), "<control>F",
+                    _("Search through the list of pigeons"), self.menusearch_activate),
             ("Edit", gtk.STOCK_EDIT, _("_Edit"), "<control>E",
                     _("Edit the selected pigeon"), self.menuedit_activate),
             ("Remove", gtk.STOCK_REMOVE, _("_Remove"), "<control>R",
                     _("Remove the selected pigeon"), self.menuremove_activate),
-            ("Pedigree", gtk.STOCK_FIND, _("_Pedigree"), None,
+            ("Pedigree", gtk.STOCK_FIND, _("_Pedigree"), "<control>G",
                     _("View the detailed pedigree of this pigeon"), self.menupedigree_activate),
             ("Addresult", gtk.STOCK_ADD, _("Add resul_t"), None,
                     _("Add a new result for this pigeon"), self.menuaddresult_activate),

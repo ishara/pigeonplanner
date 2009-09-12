@@ -55,6 +55,9 @@ uistring = '''
          <menuitem action="Toolbar"/>
          <menuitem action="Statusbar"/>
       </menu>
+      <menu action="SearchMenu">
+         <menuitem action="Search"/>
+      </menu>
       <menu action="PigeonMenu">
          <menuitem action="Edit"/>
          <menuitem action="Remove"/>
