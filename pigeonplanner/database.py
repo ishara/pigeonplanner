@@ -113,9 +113,9 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
-    def delete_pigeon(self, band):
+    def delete_pigeon(self, pindex):
         conn, cursor = self.db_connect()
-        cursor.execute('DELETE FROM Pigeons WHERE pindex=?', (band,))
+        cursor.execute('DELETE FROM Pigeons WHERE pindex=?', (pindex,))
         conn.commit()
         conn.close()
 

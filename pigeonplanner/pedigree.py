@@ -42,21 +42,6 @@ def format_text(text):
 
     return text
 
-def setup_database():
-    return database.DatabaseOperations()
-
-def update_pigeon(db, data):
-    db.update_pedigree_pigeon(data)
-
-def add_pigeon(db, data):
-    db.insert_pigeon(data)
-
-def add_parent(db, kindex, band, year, sex):
-    if sex == '0':
-        db.update_pigeon_sire((band, year, kindex))
-    else:
-        db.update_pigeon_dam((band, year, kindex))
-
 
 class ExtraBox(gtk.DrawingArea):
     def __init__(self, text):
@@ -157,8 +142,6 @@ class PedigreeBox(gtk.DrawingArea):
         self.main = main
         self.pedigree = pedigree
 
-        self.db = setup_database()
-
         self.text = ''
 
         if ring != '':
@@ -181,7 +164,12 @@ class PedigreeBox(gtk.DrawingArea):
         if event.button == 1:
             self.edit_start()
         elif event.button == 3:
-            if self.ring and self.year and not self.main.parser.pigeons[self.pindex].show:
+            try:
+                show = self.main.parser.pigeons[self.pindex].show
+            except KeyError:
+                show = 0
+
+            if self.ring and self.year and not show:
                 entries = [
                     (gtk.STOCK_EDIT, self.edit_start, None),
                     (gtk.STOCK_REMOVE, self.remove_pigeon, None)]
@@ -220,7 +208,7 @@ class PedigreeBox(gtk.DrawingArea):
                     '', '', '', '', '', '', '', '', '',
                     self.kinfo[4], self.kinfo[5], self.kinfo[6],
                     self.kinfo[7], self.kinfo[8], self.kinfo[9])
-            add_pigeon(self.db, data)
+            self.main.database.insert_pigeon(data)
 
         self.editdialog.show()
 
@@ -253,21 +241,31 @@ class PedigreeBox(gtk.DrawingArea):
                     self.entryExtra6.get_text())
             self.add_pigeon(data)
 
+    def edit_parent(self, kindex, band, year, sex):
+        if sex == '0':
+            self.main.database.update_pigeon_sire((band, year, kindex))
+        else:
+            self.main.database.update_pigeon_dam((band, year, kindex))
+
     def edit_pigeon(self, data):
-        update_pigeon(self.db, data)
+        self.main.database.update_pedigree_pigeon(data)
 
-        add_parent(self.db, self.kindex, data[1], data[2], self.sex)
+        self.edit_parent(self.kindex, data[1], data[2], self.sex)
 
-        self.edit_add_finish()
+        self.redraw()
+
+        self.close_dialog()
 
     def add_pigeon(self, data):
-        add_pigeon(self.db, data)
+        self.main.database.insert_pigeon(data)
 
-        add_parent(self.db, self.kindex, data[1], data[2], self.sex)
+        self.edit_parent(self.kindex, data[1], data[2], self.sex)
 
-        self.edit_add_finish()
+        self.redraw()
 
-    def edit_add_finish(self):
+        self.close_dialog()
+
+    def redraw(self):
         self.main.parser.get_pigeons()
         self.main.fill_treeview()
 
@@ -275,8 +273,6 @@ class PedigreeBox(gtk.DrawingArea):
                           True, None,
                           self.main.parser.pigeons, self.main, self.pedigree)
         dp.draw_pedigree()
-
-        self.close_dialog()
 
     def cancel_clicked(self, widget):
         self.close_dialog()
@@ -289,8 +285,11 @@ class PedigreeBox(gtk.DrawingArea):
         self.editdialog.hide()
 
     def remove_pigeon(self, widget=None):
-        #TODO Remove this pigeon (and parents, and further if needed)
-        pass
+        self.main.database.delete_pigeon(self.pindex)
+
+        self.edit_parent(self.kindex, '', '', self.sex)
+
+        self.redraw()
 
     def focus_in(self, widget, event):
         self.hightlight = True
