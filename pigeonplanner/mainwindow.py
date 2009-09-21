@@ -238,7 +238,7 @@ class MainWindow:
 
     def menuedit_activate(self, widget):
         model, treeiter = self.selection.get_selected()
-        if not treeiter: return # No pigeon selected, but user pressed ctrl+e
+        if not treeiter: return
 
         self.entryRing1.set_text(self.entryRing.get_text())
         self.entryYear1.set_text(self.entryYear.get_text())
@@ -265,7 +265,6 @@ class MainWindow:
         try:
             pindex, ring, year = self.get_main_ring()
         except TypeError:
-            # No pigeon selected, but user pressed ctrl+r
             return
 
         model, tIter = self.selection.get_selected()
@@ -771,7 +770,8 @@ class MainWindow:
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(widgets.uistring)
         uimanager.insert_action_group(self.create_action_group(), 0)
-        self.main.add_accel_group(uimanager.get_accel_group())
+        self.accelgroup = uimanager.get_accel_group()
+        self.main.add_accel_group(self.accelgroup)
 
         uimanager.connect('connect-proxy', self.uimanager_connect_proxy)
 
@@ -1211,6 +1211,8 @@ class MainWindow:
         widgets.set_multiple_sensitive({self.toolbar: False, self.notebook: False,
                                         self.treeview: False, self.vboxButtons: False})
 
+        self.main.remove_accel_group(self.accelgroup)
+
     def add_edit_finish(self):
         '''
         Do all the necessary things to finish editing or adding.
@@ -1228,6 +1230,8 @@ class MainWindow:
                                         self.treeview: True, self.vboxButtons: True})
 
         widgets.set_multiple_visible({self.btnadd: False, self.save: False})
+
+        self.main.add_accel_group(self.accelgroup)
 
     def get_add_edit_info(self):
         '''
