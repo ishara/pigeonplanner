@@ -125,6 +125,12 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
+    def update_pedigree_pigeon(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Pigeons SET pindex=?, band=?, year=?, extra1=?, extra2=?, extra3=?, extra4=?, extra5=?, extra6=? WHERE pindex=?', data)
+        conn.commit()
+        conn.close()
+
     def update_pigeon_sire(self, data):
         conn, cursor = self.db_connect()
         cursor.execute('UPDATE Pigeons SET sire=?, yearsire=? WHERE pindex=?', data)

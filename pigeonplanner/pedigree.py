@@ -30,6 +30,7 @@ import gtk.glade
 
 import const
 import checks
+import widgets
 import database
 
 
@@ -43,6 +44,9 @@ def format_text(text):
 
 def setup_database():
     return database.DatabaseOperations()
+
+def update_pigeon(db, data):
+    db.update_pedigree_pigeon(data)
 
 def add_pigeon(db, data):
     db.insert_pigeon(data)
@@ -135,7 +139,6 @@ class PedigreeBox(gtk.DrawingArea):
         if detail:
             if kinfo:
                 self.kindex = kinfo[0]
-                self.set_tooltip_text(_("Click here to insert a pigeon"))
                 self.connect("button-press-event", self.detail_pressed)
         else:
             self.set_property("can-focus", True)
@@ -176,57 +179,95 @@ class PedigreeBox(gtk.DrawingArea):
 
     def detail_pressed(self, widget, event):
         if event.button == 1:
-            self.wTree = gtk.glade.XML(const.GLADEPEDIGREE, 'editdialog')
+            self.edit_start()
+        elif event.button == 3:
+            if self.ring and self.year and not self.main.parser.pigeons[self.pindex].show:
+                entries = [
+                    (gtk.STOCK_EDIT, self.edit_start, None),
+                    (gtk.STOCK_REMOVE, self.remove_pigeon, None)]
 
-            signalDic = { 'on_cancel_clicked'  : self.cancel_clicked,
-                          'on_save_clicked'    : self.save_clicked,
-                          'on_dialog_destroy'  : self.close_dialog }
-            self.wTree.signal_autoconnect(signalDic)
+                widgets.popup_menu(event, entries)
+            else:
+                entries = [
+                    (gtk.STOCK_EDIT, self.edit_start, None)]
 
-            for w in self.wTree.get_widget_prefix(''):
-                wname = w.get_name()
-                setattr(self, wname, w)
+                widgets.popup_menu(event, entries)
 
-            if self.ring and self.year:
-                print "Edit" # Never gets called??
-                return
-                #TODO Edit the existing pigeon
-#                self.entryRing.set_text(self.ring)
-#                self.entryYear.set_text(self.year)
-#                self.entryExtra1.set_text(self.details[0])
-#                self.entryExtra2.set_text(self.details[1])
-#                self.entryExtra3.set_text(self.details[2])
-#                self.entryExtra4.set_text(self.details[3])
-#                self.entryExtra5.set_text(self.details[4])
-#                self.entryExtra6.set_text(self.details[5])
-            if not self.kindex in self.main.parser.pigeons:
-                data = (self.kinfo[0], self.kinfo[1], self.kinfo[2], self.kinfo[3], 0, 1,
-                        '', '', '', '', '', '', '', '', '',
-                        self.kinfo[4], self.kinfo[5], self.kinfo[6],
-                        self.kinfo[7], self.kinfo[8], self.kinfo[9])
-                add_pigeon(self.db, data)
+    def edit_start(self, widget=None):
+        self.wTree = gtk.glade.XML(const.GLADEPEDIGREE, 'editdialog')
 
-            self.editdialog.show()
+        signalDic = { 'on_cancel_clicked'  : self.cancel_clicked,
+                      'on_save_clicked'    : self.save_clicked,
+                      'on_dialog_destroy'  : self.close_dialog }
+        self.wTree.signal_autoconnect(signalDic)
+
+        for w in self.wTree.get_widget_prefix(''):
+            wname = w.get_name()
+            setattr(self, wname, w)
+
+        if self.ring and self.year:
+            self.entryRing.set_text(self.ring)
+            self.entryYear.set_text(self.year)
+            self.entryExtra1.set_text(self.details[0])
+            self.entryExtra2.set_text(self.details[1])
+            self.entryExtra3.set_text(self.details[2])
+            self.entryExtra4.set_text(self.details[3])
+            self.entryExtra5.set_text(self.details[4])
+            self.entryExtra6.set_text(self.details[5])
+
+        if not self.kindex in self.main.parser.pigeons:
+            data = (self.kinfo[0], self.kinfo[1], self.kinfo[2], self.kinfo[3], 0, 1,
+                    '', '', '', '', '', '', '', '', '',
+                    self.kinfo[4], self.kinfo[5], self.kinfo[6],
+                    self.kinfo[7], self.kinfo[8], self.kinfo[9])
+            add_pigeon(self.db, data)
+
+        self.editdialog.show()
 
     def save_clicked(self, widget):
         ring = self.entryRing.get_text()
         year = self.entryYear.get_text()
-        pindex = ring + year
 
         if not checks.check_ring_entry(self.editdialog, ring, year): return
 
-        data = (pindex, ring, year, self.sex , 0, 1,
-                '', '', '', '', '', '', '', '', '',
-                self.entryExtra1.get_text(),
-                self.entryExtra2.get_text(),
-                self.entryExtra3.get_text(),
-                self.entryExtra4.get_text(),
-                self.entryExtra5.get_text(),
-                self.entryExtra6.get_text())
+        pindex = ring + year
+
+        if self.pindex:
+            data = (pindex, ring, year,
+                    self.entryExtra1.get_text(),
+                    self.entryExtra2.get_text(),
+                    self.entryExtra3.get_text(),
+                    self.entryExtra4.get_text(),
+                    self.entryExtra5.get_text(),
+                    self.entryExtra6.get_text(),
+                    self.pindex)
+            self.edit_pigeon(data)
+        else:
+            data = (pindex, ring, year, self.sex , 0, 1,
+                    '', '', '', '', '', '', '', '', '',
+                    self.entryExtra1.get_text(),
+                    self.entryExtra2.get_text(),
+                    self.entryExtra3.get_text(),
+                    self.entryExtra4.get_text(),
+                    self.entryExtra5.get_text(),
+                    self.entryExtra6.get_text())
+            self.add_pigeon(data)
+
+    def edit_pigeon(self, data):
+        update_pigeon(self.db, data)
+
+        add_parent(self.db, self.kindex, data[1], data[2], self.sex)
+
+        self.edit_add_finish()
+
+    def add_pigeon(self, data):
         add_pigeon(self.db, data)
 
-        add_parent(self.db, self.kindex, ring, year, self.sex)
+        add_parent(self.db, self.kindex, data[1], data[2], self.sex)
 
+        self.edit_add_finish()
+
+    def edit_add_finish(self):
         self.main.parser.get_pigeons()
         self.main.fill_treeview()
 
@@ -246,6 +287,10 @@ class PedigreeBox(gtk.DrawingArea):
             attr.set_text('')
 
         self.editdialog.hide()
+
+    def remove_pigeon(self, widget=None):
+        #TODO Remove this pigeon (and parents, and further if needed)
+        pass
 
     def focus_in(self, widget, event):
         self.hightlight = True
@@ -419,19 +464,32 @@ class DrawPedigree:
                 else:
                     height = 1
 
+            if i%2 == 1:
+                sex = '0'
+                try:
+                    kinfo = lst[(i - 1) / 2]
+                except TypeError:
+                    kinfo = None
+            else:
+                sex = '1'
+                try:
+                    kinfo = lst[(i - 2) / 2]
+                except TypeError:
+                    kinfo = None
+
             if not lst[i]:
-                if i%2 == 1:
-                    sex = '0'
-                    try:
-                        kinfo = lst[(i - 1) / 2]
-                    except TypeError:
-                        kinfo = None
-                else:
-                    sex = '1'
-                    try:
-                        kinfo = lst[(i - 2) / 2]
-                    except TypeError:
-                        kinfo = None
+#                if i%2 == 1:
+#                    sex = '0'
+#                    try:
+#                        kinfo = lst[(i - 1) / 2]
+#                    except TypeError:
+#                        kinfo = None
+#                else:
+#                    sex = '1'
+#                    try:
+#                        kinfo = lst[(i - 2) / 2]
+#                    except TypeError:
+#                        kinfo = None
 
                 box = PedigreeBox('', '', '', sex, None, self.detail, self.button, kinfo, self.main, self.pedigree)
                 table.attach(box, x, y, w, h)
@@ -458,7 +516,7 @@ class DrawPedigree:
                     allExtra.append(lst[i][8])
                     allExtra.append(lst[i][9])
 
-                    box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, self.button)
+                    box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
                     table.attach(box, x, y, w, h)
 
                     extrabox = ExtraBox(extra)
