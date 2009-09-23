@@ -1280,9 +1280,11 @@ class MainWindow:
         Write new data to the pigeon
         '''
 
+        pindex, ring, year = self.get_main_ring()
         infoTuple = self.get_add_edit_info()
-        infoTuple += (infoTuple[0] + infoTuple[1],) # Make the pindex and add to the tuple
-        self.database.update_pigeon(infoTuple)
+        data = (infoTuple[0] + infoTuple[1], ) + infoTuple + (pindex, )
+
+        self.database.update_pigeon(data)
 
         self.update_data(infoTuple)
 
