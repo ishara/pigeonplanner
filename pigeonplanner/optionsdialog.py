@@ -166,13 +166,13 @@ class OptionsDialog:
             self.main.fill_treeview()
 
         if self.chkArrows.get_active():
-            self.main.alignarrows.show()
+            self.main.vboxButtons.show()
 
             self.main.blockMenuCallback = True
             self.main.MenuArrows.set_active(True)
             self.main.blockMenuCallback = False
         else:
-            self.main.alignarrows.hide()
+            self.main.vboxButtons.hide()
 
             self.main.blockMenuCallback = True
             self.main.MenuArrows.set_active(False)

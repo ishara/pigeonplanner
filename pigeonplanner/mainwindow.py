@@ -129,7 +129,7 @@ class MainWindow:
             widgets.set_completion(item)
 
         if self.options.optionList.arrows:
-            self.alignarrows.show()
+            self.vboxButtons.show()
 
             self.blockMenuCallback = True
             self.MenuArrows.set_active(True)
@@ -324,10 +324,10 @@ class MainWindow:
         if self.blockMenuCallback: return
 
         if widget.get_active():
-            self.alignarrows.show()
+            self.vboxButtons.show()
             self.options.set_option('Options', 'arrows', 'True')
         else:
-            self.alignarrows.hide()
+            self.vboxButtons.hide()
             self.options.set_option('Options', 'arrows', 'False')
 
     def menutoolbar_toggled(self, widget):
