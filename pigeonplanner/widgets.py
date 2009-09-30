@@ -32,6 +32,8 @@ uistring = '''
          <menuitem action="Add"/>
          <menuitem action="Addrange"/>
          <separator/>
+         <menuitem action="Log"/>
+         <separator/>
          <menu action="BackupMenu">
             <menuitem action="Backup"/>
             <menuitem action="Restore"/>

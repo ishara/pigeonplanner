@@ -21,6 +21,8 @@ import datetime
 import webbrowser
 from os.path import join
 from threading import Thread
+import logging
+logger = logging.getLogger(__name__)
 
 import gobject
 import gtk
@@ -33,6 +35,7 @@ import options
 import database
 import pigeonparser
 import checks
+from logdialog import LogDialog
 from pedigree import DrawPedigree
 from toolswindow import ToolsWindow
 from resultwindow import ResultWindow
@@ -218,6 +221,9 @@ class MainWindow:
 
     def menusearch_activate(self, widget):
         self.searchdialog.show()
+
+    def menulog_activate(self, widget):
+        LogDialog()
 
     def menuadd_activate(self, widget):
         self.empty_entryboxes()
@@ -824,6 +830,8 @@ class MainWindow:
                     _("Add a new pigeon"), self.menuadd_activate),
             ("Addrange", gtk.STOCK_ADD, _("Add ran_ge"), "<control><shift>A",
                     _("Add a range of pigeons"), self.menuaddrange_activate),
+            ("Log", gtk.STOCK_FILE, _("_Logfile Viewer"), "<control>L",
+                    _("See the logfile"), self.menulog_activate),
             ("Search", gtk.STOCK_FIND, _("_Find..."), "<control>F",
                     _("Search through the list of pigeons"), self.menusearch_activate),
             ("Edit", gtk.STOCK_EDIT, _("_Edit"), "<control>E",

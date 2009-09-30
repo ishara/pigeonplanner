@@ -52,12 +52,14 @@ else:
         IMAGEDIR = './images/'
 
 GLADEMAIN = os.path.join(GLADEDIR, "MainWindow.glade")
+GLADELOG = os.path.join(GLADEDIR, "LogDialog.glade")
 GLADEOPTIONS = os.path.join(GLADEDIR, "OptionsDialog.glade")
 GLADEPEDIGREE = os.path.join(GLADEDIR, "PedigreeWindow.glade")
 GLADERESULT = os.path.join(GLADEDIR, "ResultWindow.glade")
 GLADETOOLS = os.path.join(GLADEDIR, "ToolsWindow.glade")
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
+LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')
 UPDATEURL = 'http://pigeonplanner.sourceforge.net/CURRENT'
 FORUMURL = 'https://sourceforge.net/apps/phpbb/pigeonplanner/'
 
