@@ -46,7 +46,6 @@
             </child>
             <child>
               <widget class="GtkVBox" id="vboxButtons">
-                <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">4</property>
                 <child>
