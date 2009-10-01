@@ -20,6 +20,8 @@
 
 import os
 import ConfigParser
+import logging
+logger = logging.getLogger(__name__)
 
 import const
 
@@ -195,16 +197,16 @@ class ConfigurationParser(ConfigParser.ConfigParser):
                 raise OptionEmptyError
             return value
         except ConfigParser.NoOptionError:
-            print _("Warning: The '%(option)s' option is not set in the '%(section)s' section of the configuration file, using the default '%(default)s'.") % el
+            logger.warning("The '%(option)s' option is not set in the '%(section)s' section of the configuration file, using the default '%(default)s'." % el)
             return default
         except OptionEmptyError:
-            #print _("Warning: The value of the '%(option)s' option in the '%(section)s' section of the configuration file is empty, using the default '%(default)s'.") % el
+            logger.warning("The value of the '%(option)s' option in the '%(section)s' section of the configuration file is empty, using the default '%(default)s'." % el)
             return default
         except ConfigParser.NoSectionError:
-            print _("Warning: There is no section '%(section)s' in the configuration file; an error occured parsing its option '%(option)s', using the default '%(default)s'.") % el
+            logger.warning("There is no section '%(section)s' in the configuration file; an error occured parsing its option '%(option)s', using the default '%(default)s'." % el)
             return default
         except:
-            print _("Error: There went something wrong parsing the '%(option)s' option in the '%(section)s' section of the configuration file, using the default '%(default)s'.") % el
+            logger.error("There went something wrong parsing the '%(option)s' option in the '%(section)s' section of the configuration file, using the default '%(default)s'." % el)
             return default
 
 class OptionEmptyError(Exception):

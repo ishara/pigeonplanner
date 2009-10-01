@@ -20,6 +20,8 @@ import os
 import sys
 import zipfile
 from os.path import isdir, join, normpath, split
+import logging
+logger = logging.getLogger(__name__)
 
 import const
 
@@ -41,7 +43,8 @@ def make_backup(folder):
         zipper = zipfile.ZipFile(outfile, 'w', zipfile.ZIP_STORED)
         makezip(infolder, zipper)
         zipper.close()
-    except:
+    except Exception, e:
+        logger.exception(e)
         return False
 
     return True
@@ -65,7 +68,8 @@ def restore_backup(infile):
 
     try:
         unzip(outfol, zipper)
-    except:
+    except Exception, e:
+        logger.exception(e)
         return False
 
     zipper.close()

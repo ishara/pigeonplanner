@@ -175,6 +175,7 @@ class MainWindow:
                           }
 
         if self.options.optionList.update:
+            logger.info("Start: Auto check for updates")
             updatethread = Thread(group=None, target=self.search_updates, name=None)
             updatethread.start()
 
@@ -192,8 +193,12 @@ class MainWindow:
         msg, new = update.update()
 
         if new:
+            logger.info("End: New version found")
             if widgets.message_dialog('question', const.MSG_UPDATE_NOW, self.main):
+                logger.info("End: Going to download page")
                 webbrowser.open(const.DOWNLOADURL)
+        else:
+            logger.info("End: Already running the latest version")
 
     def widget_enter(self, widget, event):
         for con_id in self.statusmsgs.values():
@@ -235,12 +240,16 @@ class MainWindow:
 
         self.add_edit_start('add')
 
+        logger.info("Start: Adding a pigeon")
+
     def menuaddrange_activate(self, widget):
         self.entryRangeFrom.set_text('')
         self.entryRangeTo.set_text('')
         self.entryRangeYear.set_text('')
         self.cbRangeSex.set_active(2)
         self.rangedialog.show()
+
+        logger.info("Start: Adding a range of pigeons")
 
     def menuedit_activate(self, widget):
         model, treeiter = self.selection.get_selected()
@@ -267,7 +276,11 @@ class MainWindow:
 
         self.add_edit_start('edit')
 
+        logger.info("Start: Editting a pigeon")
+
     def menuremove_activate(self, widget):
+        logger.info("Start: Removing a pigeon")
+
         try:
             pindex, ring, year = self.get_main_ring()
         except TypeError:
@@ -291,12 +304,15 @@ class MainWindow:
         answer = dialog.run()
         if answer == 2:
             if chkKeep.get_active():
+                logger.info("Remove: Hiding the pigeon")
                 self.database.show_pigeon(pindex, 0)
             else:
+                logger.info("Remove: Removing the pigeon")
                 self.database.delete_pigeon(pindex)
                 self.parser.get_pigeons()
 
             if not chkResults.get_active():
+                logger.info("Remove: Removing the results")
                 self.database.delete_result_from_band(pindex)
 
             self.liststore.remove(tIter)
@@ -321,9 +337,11 @@ class MainWindow:
             self.fill_treeview(str(value-1))
 
     def menutools_activate(self, widget):
+        logger.info("Open: Tools window")
         ToolsWindow(self)
 
     def menupref_activate(self, widget):
+        logger.info("Open: Preferences dialog")
         OptionsDialog(self)
 
     def menuarrows_toggled(self, widget):
@@ -357,12 +375,15 @@ class MainWindow:
             self.options.set_option('Options', 'statusbar', 'False')
 
     def menuhome_activate(self, widget):
+        logger.info("Open: Website")
         webbrowser.open(const.WEBSITE)
 
     def menuforum_activate(self, widget):
+        logger.info("Open: Forum")
         webbrowser.open(const.FORUMURL)
 
     def menuabout_activate(self, widget):
+        logger.info("Open: About dialog")
         widgets.about_dialog(self.main)
 
     # range callbacks

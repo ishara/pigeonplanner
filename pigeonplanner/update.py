@@ -18,6 +18,8 @@
 
 import os
 import urllib
+import logging
+logger = logging.getLogger(__name__)
 
 import const
 
@@ -33,7 +35,8 @@ def update():
         version = versionfile.readline().strip()
         versionfile.close()
         os.remove(local)
-    except IOError:
+    except IOError, e:
+        logger.error(e)
         version = None
 
     if not version:
