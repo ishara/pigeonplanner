@@ -266,8 +266,9 @@ class PedigreeBox(gtk.DrawingArea):
         self.close_dialog()
 
     def redraw(self):
+        path, focus = self.main.treeview.get_cursor()
         self.main.parser.get_pigeons()
-        self.main.fill_treeview()
+        self.main.fill_treeview(path=path)
 
         dp = DrawPedigree([self.pedigree.tableSire, self.pedigree.tableDam], self.pedigree.pindex,
                           True, None,
