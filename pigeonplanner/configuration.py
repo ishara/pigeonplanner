@@ -45,7 +45,7 @@ class Configuration:
         self.__addOption('Options', 'column', 'False')
         self.__addOption('Options', 'columntype', '0')
         self.__addOption('Options', 'columnposition', 2)
-        self.__addOption('Options', 'arrows', 'True')
+        self.__addOption('Options', 'arrows', 'False')
         self.__addOption('Options', 'toolbar', 'True')
         self.__addOption('Options', 'statusbar', 'True')
         self.__addOption('Options', 'update', 'True')
