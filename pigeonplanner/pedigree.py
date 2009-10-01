@@ -220,7 +220,7 @@ class PedigreeBox(gtk.DrawingArea):
 
         pindex = ring + year
 
-        if self.pindex:
+        if self.pindex and self.pindex in self.main.parser.pigeons:
             data = (pindex, ring, year,
                     self.entryExtra1.get_text(),
                     self.entryExtra2.get_text(),
