@@ -52,7 +52,6 @@ class MainWindow:
                       'on_cancel_clicked'        : self.cancel_clicked,
                       'on_widget_enter'          : self.widget_enter,
                       'on_widget_leave'          : self.widget_leave,
-                      'on_btnadd_clicked'        : self.btnadd_clicked,
                       'on_sbdetail_clicked'      : self.sbdetail_clicked,
                       'on_goto_clicked'          : self.goto_clicked,
                       'on_addresult_clicked'     : self.addresult_clicked,
@@ -520,14 +519,10 @@ class MainWindow:
     def save_clicked(self, widget):
         if not checks.check_entrys(self.entrysToCheck): return
 
-        self.write_new_data()
-
-        self.add_edit_finish()
-
-    def btnadd_clicked(self, widget):
-        if not checks.check_entrys(self.entrysToCheck): return
-
-        self.write_new_pigeon()
+        if self.operation == 'edit':
+            self.write_new_data()
+        elif self.operation == 'add':
+            self.write_new_pigeon()
 
         self.add_edit_finish()
 
@@ -1231,11 +1226,10 @@ class MainWindow:
         @param operation: 'add' or 'edit'
         '''
 
-        if operation == 'add':
-            widgets.set_multiple_visible({self.btnadd: True})
-        elif operation == 'edit':
-            widgets.set_multiple_visible({self.save: True})
+        if operation == 'edit':
             self.beforeEditPath, focus = self.treeview.get_cursor()
+
+        self.operation = operation
 
         self.detailbook.set_current_page(1)
 
@@ -1245,6 +1239,7 @@ class MainWindow:
         self.main.remove_accel_group(self.accelgroup)
 
         self.entryRing1.grab_focus()
+        self.save.grab_default()
 
     def add_edit_finish(self):
         '''
@@ -1261,8 +1256,6 @@ class MainWindow:
 
         widgets.set_multiple_sensitive({self.toolbar: True, self.notebook: True,
                                         self.treeview: True, self.vboxButtons: True})
-
-        widgets.set_multiple_visible({self.btnadd: False, self.save: False})
 
         self.main.add_accel_group(self.accelgroup)
 
