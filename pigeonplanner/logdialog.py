@@ -85,11 +85,12 @@ class LogDialog(gtk.Dialog):
         for s in SEVERITY:
             self.combo.append_text(s)
         self.combo.set_active(0)
+        self.combo.set_sensitive(False)
 
         #report info
         hbox = gtk.HBox()
         self.vbox.pack_start(hbox, False, False, 10)
-        label = gtk.Label(_("If there are any errors, make sure the box above\nis set to \"DEBUG\" and mail the entire text to:\n\ntimovwb@gmail.com"))
+        label = gtk.Label(_("If there are any errors, mail the entire text to:\n\ntimovwb@gmail.com"))
         label.set_justify(gtk.JUSTIFY_CENTER)
         label.set_alignment(0.50, 0)
         hbox.pack_start(label, True, True, 10)
