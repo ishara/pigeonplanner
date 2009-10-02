@@ -1,3 +1,12 @@
+0.5.0:
+ * Added option to edit the pedigree
+ * Added option to edit an address
+ * Added option to search for a pigeon
+ * Added a logviewer
+ * Added tooltips to some editable widgets
+ * Fixed bug that editing a band number is impossible
+ * Fixed bug that ring entry wouldn't always focus on add/edit
+
 0.4.8:
  * Added pigeon details to printed pedigree
  * Added sex of selected pigeon to detailed pedigree
