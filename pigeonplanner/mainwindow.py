@@ -110,6 +110,10 @@ class MainWindow:
                                'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit,
                                'dam': self.entryDamEdit, 'yeardam': self.entryYearDamEdit}
 
+        self.cancelEscAG = gtk.AccelGroup()
+        key, modifier = gtk.accelerator_parse('Escape')
+        self.cancelEscAG.connect_group(key, modifier, gtk.ACCEL_VISIBLE, self.add_edit_finish)
+
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
 
@@ -1237,11 +1241,12 @@ class MainWindow:
                                         self.treeview: False, self.vboxButtons: False})
 
         self.main.remove_accel_group(self.accelgroup)
+        self.main.add_accel_group(self.cancelEscAG)
 
         self.entryRing1.grab_focus()
         self.save.grab_default()
 
-    def add_edit_finish(self):
+    def add_edit_finish(self, *args):
         '''
         Do all the necessary things to finish editing or adding.
         '''
@@ -1258,6 +1263,7 @@ class MainWindow:
                                         self.treeview: True, self.vboxButtons: True})
 
         self.main.add_accel_group(self.accelgroup)
+        self.main.remove_accel_group(self.cancelEscAG)
 
     def get_add_edit_info(self):
         '''
