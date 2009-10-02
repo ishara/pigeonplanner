@@ -174,6 +174,10 @@ class MainWindow:
                                             _("Search through the list of hens"))
                           }
 
+        for wname, data in self.statusmsgs.items():
+            attr = getattr(self, wname)
+            attr.set_tooltip_text(data[1])
+
         if self.options.optionList.update:
             logger.info("Start: Auto check for updates")
             updatethread = Thread(group=None, target=self.search_updates, name=None)
