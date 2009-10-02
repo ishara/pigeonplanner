@@ -84,6 +84,10 @@ class PigeonPlanner:
 
         __builtin__._ = gettext.gettext
 
+        # Options
+        import pigeonplanner.options as options
+        self.options = options.GetOptions()
+
 		# Logging setup
         import pigeonplanner.const as const
 
@@ -120,7 +124,7 @@ if __name__ == "__main__":
     import pigeonplanner.mainwindow as main
 
     try:
-        pigeonplanner = main.MainWindow()
+        pigeonplanner = main.MainWindow(app.options)
         gtk.main()
     except KeyboardInterrupt:
         pass

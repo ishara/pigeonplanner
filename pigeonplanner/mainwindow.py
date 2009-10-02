@@ -45,7 +45,7 @@ from pedigreewindow import PedigreeWindow
 
 class MainWindow:
 
-    def __init__(self):
+    def __init__(self, options):
         self.wTree = gtk.glade.XML(const.GLADEMAIN)
 
         signalDic = { 'on_save_clicked'          : self.save_clicked,
@@ -118,7 +118,8 @@ class MainWindow:
         self.hbox4.pack_start(self.entrySexKey)
 
         self.statusmsg = widgets.Statusbar(self.statusbar)
-        self.options = options.GetOptions()
+#        self.options = options.GetOptions()
+        self.options = options
         self.database = database.DatabaseOperations()
         self.parser = pigeonparser.PigeonParser()
         self.parser.get_pigeons()
