@@ -1237,14 +1237,14 @@ class MainWindow:
             widgets.set_multiple_visible({self.save: True})
             self.beforeEditPath, focus = self.treeview.get_cursor()
 
-        self.entryRing1.grab_focus()
-
         self.detailbook.set_current_page(1)
 
         widgets.set_multiple_sensitive({self.toolbar: False, self.notebook: False,
                                         self.treeview: False, self.vboxButtons: False})
 
         self.main.remove_accel_group(self.accelgroup)
+
+        self.entryRing1.grab_focus()
 
     def add_edit_finish(self):
         '''
