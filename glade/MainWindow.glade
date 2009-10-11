@@ -1189,7 +1189,7 @@
                                                     <property name="visible">True</property>
                                                     <property name="orientation">vertical</property>
                                                     <child>
-                                                      <widget class="GtkEntry" id="extra11">
+                                                      <widget class="GtkEntry" id="entryExtra11">
                                                         <property name="visible">True</property>
                                                         <property name="can_focus">True</property>
                                                         <property name="max_length">28</property>
@@ -1204,7 +1204,7 @@
                                                       </packing>
                                                     </child>
                                                     <child>
-                                                      <widget class="GtkEntry" id="extra21">
+                                                      <widget class="GtkEntry" id="entryExtra21">
                                                         <property name="visible">True</property>
                                                         <property name="can_focus">True</property>
                                                         <property name="max_length">28</property>
@@ -1219,7 +1219,7 @@
                                                       </packing>
                                                     </child>
                                                     <child>
-                                                      <widget class="GtkEntry" id="extra31">
+                                                      <widget class="GtkEntry" id="entryExtra31">
                                                         <property name="visible">True</property>
                                                         <property name="can_focus">True</property>
                                                         <property name="max_length">28</property>
@@ -1234,7 +1234,7 @@
                                                       </packing>
                                                     </child>
                                                     <child>
-                                                      <widget class="GtkEntry" id="extra41">
+                                                      <widget class="GtkEntry" id="entryExtra41">
                                                         <property name="visible">True</property>
                                                         <property name="can_focus">True</property>
                                                         <property name="max_length">28</property>
@@ -1249,7 +1249,7 @@
                                                       </packing>
                                                     </child>
                                                     <child>
-                                                      <widget class="GtkEntry" id="extra51">
+                                                      <widget class="GtkEntry" id="entryExtra51">
                                                         <property name="visible">True</property>
                                                         <property name="can_focus">True</property>
                                                         <property name="max_length">28</property>
@@ -1264,7 +1264,7 @@
                                                       </packing>
                                                     </child>
                                                     <child>
-                                                      <widget class="GtkEntry" id="extra61">
+                                                      <widget class="GtkEntry" id="entryExtra61">
                                                         <property name="visible">True</property>
                                                         <property name="can_focus">True</property>
                                                         <property name="max_length">28</property>

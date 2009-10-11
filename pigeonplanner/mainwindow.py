@@ -266,12 +266,12 @@ class MainWindow:
         self.entryRing1.set_text(self.entryRing.get_text())
         self.entryYear1.set_text(self.entryYear.get_text())
         self.entryName1.set_text(self.entryName.get_text())
-        self.extra11.set_text(self.extra1.get_text())
-        self.extra21.set_text(self.extra2.get_text())
-        self.extra31.set_text(self.extra3.get_text())
-        self.extra41.set_text(self.extra4.get_text())
-        self.extra51.set_text(self.extra5.get_text())
-        self.extra61.set_text(self.extra6.get_text())
+        self.entryExtra11.set_text(self.extra1.get_text())
+        self.entryExtra21.set_text(self.extra2.get_text())
+        self.entryExtra31.set_text(self.extra3.get_text())
+        self.entryExtra41.set_text(self.extra4.get_text())
+        self.entryExtra51.set_text(self.extra5.get_text())
+        self.entryExtra61.set_text(self.extra6.get_text())
         self.cbColour.child.set_text(self.entryColour.get_text())
         self.cbStrain.child.set_text(self.entryStrain.get_text())
         self.cbLoft.child.set_text(self.entryLoft.get_text())
@@ -1299,12 +1299,12 @@ class MainWindow:
                      self.entryYearSireEdit.get_text(),\
                      self.entryDamEdit.get_text(),\
                      self.entryYearDamEdit.get_text(),\
-                     self.extra11.get_text(),\
-                     self.extra21.get_text(),\
-                     self.extra31.get_text(),\
-                     self.extra41.get_text(),\
-                     self.extra51.get_text(),\
-                     self.extra61.get_text())
+                     self.entryExtra11.get_text(),\
+                     self.entryExtra21.get_text(),\
+                     self.entryExtra31.get_text(),\
+                     self.entryExtra41.get_text(),\
+                     self.entryExtra51.get_text(),\
+                     self.entryExtra61.get_text())
 
         return infoTuple
 
