@@ -104,7 +104,6 @@ class MainWindow:
         self.blockMenuCallback = False
         self.editResultMode = False
         self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(join(const.IMAGEDIR, 'icon_logo.png'), 75, 75)
-        self.columnValueDic = {'0': _("Colour"), '1': _("Sex")}
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
                                'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit,
@@ -118,7 +117,6 @@ class MainWindow:
         self.hbox4.pack_start(self.entrySexKey)
 
         self.statusmsg = widgets.Statusbar(self.statusbar)
-#        self.options = options.GetOptions()
         self.options = options
         self.database = database.DatabaseOperations()
         self.parser = pigeonparser.PigeonParser()
@@ -132,6 +130,7 @@ class MainWindow:
         self.fill_treeview()
         self.create_sexcombos()
         self.set_filefilter()
+
         for item in [self.cbRacepoint, self.cbSector, self.cbColour, self.cbStrain, self.cbLoft]:
             widgets.set_completion(item)
 
@@ -161,8 +160,8 @@ class MainWindow:
                          self.cbColour: self.database.get_all_colours(), \
                          self.cbStrain: self.database.get_all_strains(), \
                          self.cbLoft: self.database.get_all_lofts()}
-        for key in self.listdata.keys():
-            widgets.fill_list(key, self.listdata[key])
+        for key, value in self.listdata.items():
+            widgets.fill_list(key, value)
 
         self.statusmsgs = { 'entryRing1': (self.statusmsg.get_id("band"),
                                             _("Enter the bandnumber of the pigeon")),
@@ -926,16 +925,24 @@ class MainWindow:
         for column in self.treeview.get_columns():
             self.treeview.remove_column(column)
 
-        columns = [_("Band no."), _("Year"), _("Name")]
-        if self.options.optionList.column:
-            columns.insert(self.options.optionList.columnposition,
-                           _(self.columnValueDic[self.options.optionList.columntype]))
+        columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"), _("Loft"), _("Strain")]
 
         self.liststore, self.selection = widgets.setup_treeview(self.treeview,
                                                                 columns,
-                                                                [str, str, str, str, str],
+                                                                [str, str, str, str, str, str, str, str],
                                                                 self.selection_changed,
                                                                 True, True, True)
+        self.set_treeview_columns()
+
+    def set_treeview_columns(self):
+        self.columns = {2: self.options.optionList.colname,
+                        3: self.options.optionList.colcolour,
+                        4: self.options.optionList.colsex,
+                        5: self.options.optionList.colloft,
+                        6: self.options.optionList.colstrain}
+
+        for key, value in self.columns.items():
+            self.treeview.get_column(key).set_visible(value)
 
     def build_treeviews(self):
         '''
@@ -999,17 +1006,11 @@ class MainWindow:
                 row = [pindex,
                        self.parser.pigeons[pindex].ring,
                        self.parser.pigeons[pindex].year,
-                       self.parser.pigeons[pindex].name]
-
-                if self.options.optionList.column:
-                    if self.options.optionList.columntype == '0':
-                        extra = self.parser.pigeons[pindex].colour
-                    elif self.options.optionList.columntype == '1':
-                        extra = self.sexDic[self.parser.pigeons[pindex].sex]
-
-                    row.insert(self.options.optionList.columnposition+1, extra)
-                else:
-                    row.insert(4, None)
+                       self.parser.pigeons[pindex].name,
+                       self.parser.pigeons[pindex].colour,
+                       self.sexDic[self.parser.pigeons[pindex].sex],
+                       self.parser.pigeons[pindex].loft,
+                       self.parser.pigeons[pindex].strain]
 
                 self.liststore.append(row)
 

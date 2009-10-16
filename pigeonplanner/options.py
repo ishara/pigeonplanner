@@ -20,15 +20,17 @@ import configuration
 
 
 class ParsedOptions:
-    def __init__(self, theme, column, columntype, columnposition, arrows, toolbar, statusbar, update):
+    def __init__(self, theme, arrows, toolbar, statusbar, update, name, colour, sex, loft, strain):
         self.theme = theme
-        self.column = column
-        self.columntype = columntype
-        self.columnposition = columnposition
         self.arrows = arrows
         self.toolbar = toolbar
         self.statusbar = statusbar
         self.update = update
+        self.colname = name
+        self.colcolour = colour
+        self.colsex = sex
+        self.colloft = loft
+        self.colstrain = strain
 
 
 class GetOptions:
@@ -38,13 +40,15 @@ class GetOptions:
         self.optionList = []
 
         p = ParsedOptions(self.conf.getint('Options', 'theme'),
-                          self.conf.getboolean('Options', 'column'),
-                          self.conf.get('Options', 'columntype'),
-                          self.conf.getint('Options', 'columnposition'),
                           self.conf.getboolean('Options', 'arrows'),
                           self.conf.getboolean('Options', 'toolbar'),
                           self.conf.getboolean('Options', 'statusbar'),
-                          self.conf.getboolean('Options', 'update'))
+                          self.conf.getboolean('Options', 'update'),
+                          self.conf.getboolean('Columns', 'name'),
+                          self.conf.getboolean('Columns', 'colour'),
+                          self.conf.getboolean('Columns', 'sex'),
+                          self.conf.getboolean('Columns', 'loft'),
+                          self.conf.getboolean('Columns', 'strain'))
 
         self.optionList = p
 

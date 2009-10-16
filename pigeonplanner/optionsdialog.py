@@ -32,12 +32,10 @@ class OptionsDialog:
     def __init__(self, main):
         self.wTree = gtk.glade.XML(const.GLADEOPTIONS)
 
-        signalDic = { 'on_chkColumn_toggled'     : self.chkColumn_toggled,
-                      'on_columnOpt_changed'     : self.columnOpt_changed,
-                      'on_cancel_clicked'        : self.cancel_clicked,
-                      'on_ok_clicked'            : self.ok_clicked,
-                      'on_default_clicked'       : self.default_clicked,
-                      'on_dialog_destroy'        : self.close_clicked}
+        signalDic = { 'on_cancel_clicked' : self.cancel_clicked,
+                      'on_ok_clicked'     : self.ok_clicked,
+                      'on_default_clicked': self.default_clicked,
+                      'on_dialog_destroy' : self.close_clicked}
         self.wTree.signal_autoconnect(signalDic)
 
         for w in self.wTree.get_widget_prefix(''):
@@ -50,12 +48,10 @@ class OptionsDialog:
 
         self.opt = options.GetOptions()
 
-        self.create_columntype_combo()
-
         # Show the theme changer on Windows
         self.win32 = sys.platform.startswith("win")
         if self.win32:
-            self.hboxThemes.show()
+            self.framethemes.show()
 
             themes = os.listdir('./share/themes/')
             themes.sort()
@@ -73,50 +69,20 @@ class OptionsDialog:
             self.imagePage.set_from_file(os.path.join(const.IMAGEDIR, 'gtk_pagesetup.png'))
 
         self.set_options()
-        if not self.chkColumn.get_active():
-            self.aligncolumn.set_sensitive(False)
-
-        self.treeviewOptsChanged = False
-
-    def create_columntype_combo(self):
-        self.typeStore = gtk.ListStore(str, str)
-        for key in self.main.columnValueDic.keys():
-            self.typeStore.insert(int(key), [key, self.main.columnValueDic[key]])
-        self.cbColumn = gtk.ComboBox(self.typeStore)
-        cell = gtk.CellRendererText()
-        self.cbColumn.pack_start(cell, True)
-        self.cbColumn.add_attribute(cell, 'text', 1)
-        self.cbColumn.show()
-
-        self.cbColumn.connect('changed', self.columnOpt_changed)
-
-        self.aligntype.add(self.cbColumn)
 
     def set_options(self):
+        self.chkName.set_active(self.opt.optionList.colname)
+        self.chkColour.set_active(self.opt.optionList.colcolour)
+        self.chkSex.set_active(self.opt.optionList.colsex)
+        self.chkLoft.set_active(self.opt.optionList.colloft)
+        self.chkStrain.set_active(self.opt.optionList.colstrain)
+
         self.cbThemes.set_active(self.opt.optionList.theme)
-
-        self.chkColumn.set_active(self.opt.optionList.column)
-
-        self.cbColumn.set_active(int(self.opt.optionList.columntype))
-        self.sbColumn.set_value(self.opt.optionList.columnposition)
 
         self.chkArrows.set_active(self.opt.optionList.arrows)
         self.chkToolbar.set_active(self.opt.optionList.toolbar)
         self.chkStatusbar.set_active(self.opt.optionList.statusbar)
         self.chkUpdate.set_active(self.opt.optionList.update)
-
-        self.treeviewOptsChanged = False
-
-    def columnOpt_changed(self, widget):
-        self.treeviewOptsChanged = True
-
-    def chkColumn_toggled(self, widget):
-        self.treeviewOptsChanged = True
-
-        if widget.get_active():
-            self.aligncolumn.set_sensitive(True)
-        else:
-            self.aligncolumn.set_sensitive(False)
 
     def close_clicked(self, widget, event=None):
         self.optionsdialog.destroy()
@@ -134,13 +100,16 @@ class OptionsDialog:
 
     def ok_clicked(self, widget):
         dic = {"Options" : {'theme': self.cbThemes.get_active(),
-                            'column': str(self.chkColumn.get_active()),
-                            'columntype': self.cbColumn.get_active_text(),
-                            'columnposition': self.sbColumn.get_value_as_int(),
                             'arrows': str(self.chkArrows.get_active()),
                             'toolbar': str(self.chkToolbar.get_active()),
                             'statusbar': str(self.chkStatusbar.get_active()),
                             'update': str(self.chkUpdate.get_active())
+                           },
+               "Columns" : {'name': str(self.chkName.get_active()),
+                            'colour': str(self.chkColour.get_active()),
+                            'sex': str(self.chkSex.get_active()),
+                            'loft': str(self.chkLoft.get_active()),
+                            'strain': str(self.chkStrain.get_active())
                            }
               }
 
@@ -161,9 +130,7 @@ class OptionsDialog:
             settings = gtk.settings_get_for_screen(screen)
             gtk.rc_reparse_all_for_settings(settings, True)
 
-        if self.treeviewOptsChanged:
-            self.main.build_treeview()
-            self.main.fill_treeview()
+        self.main.set_treeview_columns()
 
         if self.chkArrows.get_active():
             self.main.vboxButtons.show()
