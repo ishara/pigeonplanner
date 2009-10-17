@@ -134,6 +134,10 @@ class MainWindow:
         for item in [self.cbRacepoint, self.cbSector, self.cbColour, self.cbStrain, self.cbLoft]:
             widgets.set_completion(item)
 
+        # This can't be done in Glade
+        for cbentry in [self.cbColour, self.cbStrain, self.cbLoft]:
+            cbentry.child.set_activates_default(True)
+
         if self.options.optionList.arrows:
             self.vboxButtons.show()
 
