@@ -172,6 +172,7 @@ class PedigreeBox(gtk.DrawingArea):
             if self.ring and self.year and not show:
                 entries = [
                     (gtk.STOCK_EDIT, self.edit_start, None),
+                    (gtk.STOCK_CLEAR, self.clear_box, None),
                     (gtk.STOCK_REMOVE, self.remove_pigeon, None)]
 
                 widgets.popup_menu(event, entries)
@@ -288,6 +289,11 @@ class PedigreeBox(gtk.DrawingArea):
     def remove_pigeon(self, widget=None):
         self.main.database.delete_pigeon(self.pindex)
 
+        self.edit_parent(self.kindex, '', '', self.sex)
+
+        self.redraw()
+
+    def clear_box(self, widget=None):
         self.edit_parent(self.kindex, '', '', self.sex)
 
         self.redraw()
