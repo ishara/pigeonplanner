@@ -59,34 +59,38 @@ class PrintPedigree:
     def draw_page (self, operation, context, page_number):
         cr = context.get_cairo_context()
 
-        total_width = context.get_width()
         font = "Sans"
+        total_width = context.get_width()
+        # page corrections
+        line_width = total_width - 4
+        total_width -= 6
 
         cr.select_font_face(font)
 
         # head
-        cr.set_font_size(10)
-        cr.move_to(0, 12)
+        cr.set_font_size(8)
+        cr.move_to(0, 10)
         cr.show_text(_("Pedigree of:"))
         ring = "%s / %s" %(self.pigeoninfo['ring'], self.pigeoninfo['year'][2:])
         xb, yb, width, height, xa, ya = cr.text_extents(ring)
-        cr.move_to(total_width-width, 12)
+        cr.move_to(total_width-width, 10)
         cr.show_text(ring)
 
         # line
-        cr.move_to(0, 14)
-        cr.line_to(total_width, 14)
+        cr.move_to(0, 12)
+        cr.line_to(line_width, 12)
 
         # address
-        cr.set_font_size(6)
-        cr.move_to(0, 22)
+        cr.set_font_size(5)
+        cr.move_to(0, 19)
         cr.show_text(self.userinfo['name'])
-        cr.move_to(0, 30)
+        cr.move_to(0, 26)
         cr.show_text(self.userinfo['street'])
-        cr.move_to(0, 38)
+        cr.move_to(0, 33)
         cr.show_text("%s %s" %(self.userinfo['code'], self.userinfo['city']))
-        cr.move_to(0, 46)
+        cr.move_to(0, 40)
         cr.show_text(self.userinfo['phone'])
+        #XXX: Add e-mail address?
 
         # pigeondetails
         if self.pigeoninfo['name']:
@@ -94,32 +98,32 @@ class PrintPedigree:
         else:
             sexname = self.pigeoninfo['sex']
         xb, yb, width, height, xa, ya = cr.text_extents(sexname)
-        cr.move_to(total_width-width, 22)
+        cr.move_to(total_width-width, 19)
         cr.show_text(sexname)
 
         cr.set_font_size(4)
         xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra1'])
-        cr.move_to(total_width-width, 28)
+        cr.move_to(total_width-width, 25)
         cr.show_text(self.pigeoninfo['extra1'])
         xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra2'])
-        cr.move_to(total_width-width, 34)
+        cr.move_to(total_width-width, 30)
         cr.show_text(self.pigeoninfo['extra2'])
         xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra3'])
-        cr.move_to(total_width-width, 40)
+        cr.move_to(total_width-width, 35)
         cr.show_text(self.pigeoninfo['extra3'])
         xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra4'])
-        cr.move_to(total_width-width, 46)
+        cr.move_to(total_width-width, 40)
         cr.show_text(self.pigeoninfo['extra4'])
         xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra5'])
-        cr.move_to(total_width-width, 52)
+        cr.move_to(total_width-width, 45)
         cr.show_text(self.pigeoninfo['extra5'])
         xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra6'])
-        cr.move_to(total_width-width, 58)
+        cr.move_to(total_width-width, 50)
         cr.show_text(self.pigeoninfo['extra6'])
 
         # line
-        cr.move_to(0, 60)
-        cr.line_to(total_width, 60)
+        cr.move_to(0, 52)
+        cr.line_to(line_width, 52)
 
         # pedigree
         font_size = 3
@@ -128,36 +132,69 @@ class PrintPedigree:
         cr.set_font_size(font_size)
 
         pos = [(),
-               ((0, 95, 46, 28), ((48, 109, 85),(48, 109, 133))),
-               ((0, 191, 46, 28), ((48, 205, 181),(48, 205, 229))),
-               ((50, 71, 46, 28), ((98, 85, 73),(98, 85, 97))),
-               ((50, 119, 46, 28), ((98, 133, 121),(98, 133, 145))),
-               ((50, 167, 46, 28), ((98, 181, 169),(98, 181, 193))),
-               ((50, 215, 46, 28), ((98, 229, 217),(98, 229, 241))),
-               ((100, 65, 46, 16), ((148, 73, 67),(148, 73, 79))),
-               ((100, 89, 46, 16), ((148, 97, 91),(148, 97, 103))),
-               ((100, 113, 46, 16), ((148, 121, 115),(148, 121, 127))),
-               ((100, 137, 46, 16), ((148, 145, 139),(148, 145, 151))),
-               ((100, 161, 46, 16), ((148, 169, 163),(148, 169, 175))),
-               ((100, 185, 46, 16), ((148, 193, 187),(148, 193, 199))),
-               ((100, 209, 46, 16), ((148, 217, 211),(148, 217, 223))),
-               ((100, 233, 46, 16), ((148, 241, 235),(148, 241, 247))),
-               ((150, 62, 46, 10), (None)),
-               ((150, 74, 46, 10), (None)),
-               ((150, 86, 46, 10), (None)),
-               ((150, 98, 46, 10), (None)),
-               ((150, 110, 46, 10), (None)),
-               ((150, 122, 46, 10), (None)),
-               ((150, 134, 46, 10), (None)),
-               ((150, 146, 46, 10), (None)),
-               ((150, 158, 46, 10), (None)),
-               ((150, 170, 46, 10), (None)),
-               ((150, 182, 46, 10), (None)),
-               ((150, 194, 46, 10), (None)),
-               ((150, 206, 46, 10), (None)),
-               ((150, 218, 46, 10), (None)),
-               ((150, 230, 46, 10), (None)),
-               ((150, 242, 46, 10), (None))]
+               ((0, 95, 45, 28), ((47, 109, 85),(47, 109, 133))),
+               ((0, 191, 45, 28), ((47, 205, 181),(47, 205, 229))),
+               ((49, 71, 45, 28), ((96, 85, 73),(96, 85, 97))),
+               ((49, 119, 45, 28), ((96, 133, 121),(96, 133, 145))),
+               ((49, 167, 45, 28), ((96, 181, 169),(96, 181, 193))),
+               ((49, 215, 45, 28), ((96, 229, 217),(96, 229, 241))),
+               ((98, 65, 45, 16), ((145, 73, 67),(145, 73, 79))),
+               ((98, 89, 45, 16), ((145, 97, 91),(145, 97, 103))),
+               ((98, 113, 45, 16), ((145, 121, 115),(145, 121, 127))),
+               ((98, 137, 45, 16), ((145, 145, 139),(145, 145, 151))),
+               ((98, 161, 45, 16), ((145, 169, 163),(145, 169, 175))),
+               ((98, 185, 45, 16), ((145, 193, 187),(145, 193, 199))),
+               ((98, 209, 45, 16), ((145, 217, 211),(145, 217, 223))),
+               ((98, 233, 45, 16), ((145, 241, 235),(145, 241, 247))),
+               ((147, 62, 45, 10), (None)),
+               ((147, 74, 45, 10), (None)),
+               ((147, 86, 45, 10), (None)),
+               ((147, 98, 45, 10), (None)),
+               ((147, 110, 45, 10), (None)),
+               ((147, 122, 45, 10), (None)),
+               ((147, 134, 45, 10), (None)),
+               ((147, 146, 45, 10), (None)),
+               ((147, 158, 45, 10), (None)),
+               ((147, 170, 45, 10), (None)),
+               ((147, 182, 45, 10), (None)),
+               ((147, 194, 45, 10), (None)),
+               ((147, 206, 45, 10), (None)),
+               ((147, 218, 45, 10), (None)),
+               ((147, 230, 45, 10), (None)),
+               ((147, 242, 45, 10), (None))]
+
+#Working:
+#        pos = [(),
+#               ((0, 95, 46, 28), ((48, 109, 85),(48, 109, 133))),
+#               ((0, 191, 46, 28), ((48, 205, 181),(48, 205, 229))),
+#               ((50, 71, 46, 28), ((98, 85, 73),(98, 85, 97))),
+#               ((50, 119, 46, 28), ((98, 133, 121),(98, 133, 145))),
+#               ((50, 167, 46, 28), ((98, 181, 169),(98, 181, 193))),
+#               ((50, 215, 46, 28), ((98, 229, 217),(98, 229, 241))),
+#               ((100, 65, 46, 16), ((148, 73, 67),(148, 73, 79))),
+#               ((100, 89, 46, 16), ((148, 97, 91),(148, 97, 103))),
+#               ((100, 113, 46, 16), ((148, 121, 115),(148, 121, 127))),
+#               ((100, 137, 46, 16), ((148, 145, 139),(148, 145, 151))),
+#               ((100, 161, 46, 16), ((148, 169, 163),(148, 169, 175))),
+#               ((100, 185, 46, 16), ((148, 193, 187),(148, 193, 199))),
+#               ((100, 209, 46, 16), ((148, 217, 211),(148, 217, 223))),
+#               ((100, 233, 46, 16), ((148, 241, 235),(148, 241, 247))),
+#               ((150, 62, 46, 10), (None)),
+#               ((150, 74, 46, 10), (None)),
+#               ((150, 86, 46, 10), (None)),
+#               ((150, 98, 46, 10), (None)),
+#               ((150, 110, 46, 10), (None)),
+#               ((150, 122, 46, 10), (None)),
+#               ((150, 134, 46, 10), (None)),
+#               ((150, 146, 46, 10), (None)),
+#               ((150, 158, 46, 10), (None)),
+#               ((150, 170, 46, 10), (None)),
+#               ((150, 182, 46, 10), (None)),
+#               ((150, 194, 46, 10), (None)),
+#               ((150, 206, 46, 10), (None)),
+#               ((150, 218, 46, 10), (None)),
+#               ((150, 230, 46, 10), (None)),
+#               ((150, 242, 46, 10), (None))]
 
 #        pos = [(),
 #               ((0, 95, 46, 28), ((48, 109, 85),(48, 109, 133))),
@@ -254,7 +291,7 @@ class PrintPedigree:
                 cr.line_to(x+w, h)
 
         cr.set_source_rgb(0, 0, 0)
-        cr.set_line_width(0.4)
+        cr.set_line_width(0.3)
         cr.set_line_cap(cairo.LINE_CAP_ROUND)
         cr.set_line_join(cairo.LINE_JOIN_ROUND)
       
