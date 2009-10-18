@@ -30,6 +30,7 @@ import gtk.glade
 
 import const
 import update
+import backup
 import widgets
 import options
 import database
@@ -194,6 +195,18 @@ class MainWindow:
         gtk.about_dialog_set_email_hook(self.email_hook)
 
     def quit_program(self, widget=None, event=None):
+        if self.options.optionList.backup:
+            import time
+
+            daysInSeconds = self.options.optionList.interval * 24 * 60 * 60
+            if time.time() - self.options.optionList.last >= daysInSeconds:
+                if backup.make_backup(self.options.optionList.location):
+                    widgets.message_dialog('info', const.MSG_BACKUP_SUCCES, self.main)
+                else:
+                    widgets.message_dialog('info', const.MSG_BACKUP_FAILED, self.main)
+
+                self.options.set_option('Backup', 'last', time.time())
+
         gtk.main_quit()
 
     def dialog_delete(self, widget, event):

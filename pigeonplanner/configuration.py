@@ -19,6 +19,7 @@
 
 
 import os
+import time
 import ConfigParser
 import logging
 logger = logging.getLogger(__name__)
@@ -46,6 +47,11 @@ class Configuration:
         self.__addOption('Options', 'toolbar', 'True')
         self.__addOption('Options', 'statusbar', 'True')
         self.__addOption('Options', 'update', 'True')
+        self.__addSection('Backup')
+        self.__addOption('Backup', 'backup', 'True')
+        self.__addOption('Backup', 'interval', 7)
+        self.__addOption('Backup', 'location', const.HOMEDIR)
+        self.__addOption('Backup', 'last', time.time())
         self.__addSection('Columns')
         self.__addOption('Columns', 'name', 'True')
         self.__addOption('Columns', 'colour', 'False')

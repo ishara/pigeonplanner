@@ -32,10 +32,12 @@ class OptionsDialog:
     def __init__(self, main):
         self.wTree = gtk.glade.XML(const.GLADEOPTIONS)
 
-        signalDic = { 'on_cancel_clicked' : self.cancel_clicked,
-                      'on_ok_clicked'     : self.ok_clicked,
-                      'on_default_clicked': self.default_clicked,
-                      'on_dialog_destroy' : self.close_clicked}
+        signalDic = { 'on_chkBackup_toggled': self.chkBackup_toggled,
+                      'on_sbDay_changed'    : self.sbDay_changed,
+                      'on_cancel_clicked'   : self.cancel_clicked,
+                      'on_ok_clicked'       : self.ok_clicked,
+                      'on_default_clicked'  : self.default_clicked,
+                      'on_dialog_destroy'   : self.close_clicked}
         self.wTree.signal_autoconnect(signalDic)
 
         for w in self.wTree.get_widget_prefix(''):
@@ -82,13 +84,30 @@ class OptionsDialog:
         self.chkArrows.set_active(self.opt.optionList.arrows)
         self.chkToolbar.set_active(self.opt.optionList.toolbar)
         self.chkStatusbar.set_active(self.opt.optionList.statusbar)
+
         self.chkUpdate.set_active(self.opt.optionList.update)
+
+        self.chkBackup.set_active(self.opt.optionList.backup)
+        self.sbDay.set_value(self.opt.optionList.interval)
+        self.fcbutton.set_current_folder(self.opt.optionList.location)
 
     def close_clicked(self, widget, event=None):
         self.optionsdialog.destroy()
 
     def cancel_clicked(self, widget):
         self.optionsdialog.destroy()
+
+    def chkBackup_toggled(self, widget):
+        self.alignbackup.set_sensitive(widget.get_active())
+
+    def sbDay_changed(self, widget):
+        value = widget.get_value_as_int()
+
+        dstring = 'days'
+        if value == 1:
+            dstring = 'day'
+
+        widget.set_text('%s %s' % (value, dstring))
 
     def default_clicked(self, widget):
         if widgets.message_dialog('warning', const.MSG_DEFAULT_OPTIONS, self.optionsdialog):
@@ -105,6 +124,11 @@ class OptionsDialog:
                             'statusbar': str(self.chkStatusbar.get_active()),
                             'update': str(self.chkUpdate.get_active())
                            },
+               "Backup" : {'backup': str(self.chkBackup.get_active()),
+                           'interval': self.sbDay.get_value_as_int(),
+                           'location': self.fcbutton.get_current_folder(),
+                           'last': self.opt.optionList.last
+                          },
                "Columns" : {'name': str(self.chkName.get_active()),
                             'colour': str(self.chkColour.get_active()),
                             'sex': str(self.chkSex.get_active()),
