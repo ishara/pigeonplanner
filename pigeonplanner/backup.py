@@ -54,7 +54,9 @@ def makezip(path, zipper):
 
     for (dirpath, dirnames, filenames) in os.walk(path):
         for filename in filenames:
-            if not filename.endswith('.lock'):
+            if not filename.endswith('.lock') and not\
+                   filename.endswith('.log') and not\
+                   filename.endswith('.old'):
                 zipper.write(os.path.join(dirpath, filename),            
                 os.path.join(dirpath[len(path):], filename)) 
 
