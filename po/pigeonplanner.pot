@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-02 09:13+0200\n"
+"POT-Creation-Date: 2009-10-19 10:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../pigeonplanner/configuration.py:114 ../pigeonplanner/configuration.py:126
+#: ../pigeonplanner/configuration.py:123 ../pigeonplanner/configuration.py:135
 msgid "#Pigeon Planner configuration file"
 msgstr ""
 
@@ -31,98 +31,94 @@ msgid ""
 "timovwb@gmail.com"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:70 tmp/PedigreeWindow.glade.h:6
+#: ../pigeonplanner/printing.py:73 tmp/PedigreeWindow.glade.h:4
 msgid "Pedigree of:"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:325 tmp/MainWindow.glade.h:32
+#: ../pigeonplanner/printing.py:362 tmp/MainWindow.glade.h:32
 msgid "Results"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:348 ../pigeonplanner/printing.py:357
+#: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:394
 #: tmp/ResultWindow.glade.h:10
 msgid "Year race"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:348 ../pigeonplanner/printing.py:361
+#: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:398
 #: tmp/ResultWindow.glade.h:9
 msgid "Year pigeons"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:348 ../pigeonplanner/printing.py:365
-#: ../pigeonplanner/printing.py:399 ../pigeonplanner/printing.py:400
-#: ../pigeonplanner/resultwindow.py:54 ../pigeonplanner/mainwindow.py:974
+#: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:402
+#: ../pigeonplanner/printing.py:436 ../pigeonplanner/printing.py:437
+#: ../pigeonplanner/resultwindow.py:54 ../pigeonplanner/mainwindow.py:1012
 #: tmp/MainWindow.glade.h:28 tmp/ResultWindow.glade.h:5
 msgid "Racepoint"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:348 ../pigeonplanner/printing.py:369
-#: ../pigeonplanner/printing.py:423 ../pigeonplanner/printing.py:424
-#: ../pigeonplanner/resultwindow.py:58 ../pigeonplanner/mainwindow.py:974
+#: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:406
+#: ../pigeonplanner/printing.py:460 ../pigeonplanner/printing.py:461
+#: ../pigeonplanner/resultwindow.py:58 ../pigeonplanner/mainwindow.py:1012
 #: tmp/MainWindow.glade.h:36 tmp/ResultWindow.glade.h:7
 msgid "Sector"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:348 ../pigeonplanner/printing.py:373
-#: ../pigeonplanner/resultwindow.py:57 ../pigeonplanner/mainwindow.py:974
+#: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:410
+#: ../pigeonplanner/resultwindow.py:57 ../pigeonplanner/mainwindow.py:1012
 #: tmp/ResultWindow.glade.h:2
 msgid "Coefficient"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:348 ../pigeonplanner/printing.py:377
-#: ../pigeonplanner/printing.py:405 ../pigeonplanner/printing.py:406
+#: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:414
+#: ../pigeonplanner/printing.py:442 ../pigeonplanner/printing.py:443
 #: tmp/ResultWindow.glade.h:4
 msgid "Place"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:387 ../pigeonplanner/printing.py:388
-#: ../pigeonplanner/resultwindow.py:59 ../pigeonplanner/mainwindow.py:925
-#: ../pigeonplanner/mainwindow.py:944 ../pigeonplanner/mainwindow.py:952
-#: ../pigeonplanner/mainwindow.py:960 ../pigeonplanner/mainwindow.py:968
+#: ../pigeonplanner/printing.py:424 ../pigeonplanner/printing.py:425
+#: ../pigeonplanner/resultwindow.py:59 ../pigeonplanner/mainwindow.py:955
+#: ../pigeonplanner/mainwindow.py:982 ../pigeonplanner/mainwindow.py:990
+#: ../pigeonplanner/mainwindow.py:998 ../pigeonplanner/mainwindow.py:1006
 msgid "Band no."
 msgstr ""
 
-#: ../pigeonplanner/printing.py:393 ../pigeonplanner/printing.py:394
-#: ../pigeonplanner/printing.py:510 ../pigeonplanner/resultwindow.py:53
-#: ../pigeonplanner/mainwindow.py:974 tmp/MainWindow.glade.h:16
+#: ../pigeonplanner/printing.py:430 ../pigeonplanner/printing.py:431
+#: ../pigeonplanner/printing.py:547 ../pigeonplanner/resultwindow.py:53
+#: ../pigeonplanner/mainwindow.py:1012 tmp/MainWindow.glade.h:16
 msgid "Date"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:411 ../pigeonplanner/printing.py:412
-#: ../pigeonplanner/resultwindow.py:56 ../pigeonplanner/mainwindow.py:974
+#: ../pigeonplanner/printing.py:448 ../pigeonplanner/printing.py:449
+#: ../pigeonplanner/resultwindow.py:56 ../pigeonplanner/mainwindow.py:1012
 #: tmp/MainWindow.glade.h:25
 msgid "Out of"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:417 ../pigeonplanner/printing.py:418
+#: ../pigeonplanner/printing.py:454 ../pigeonplanner/printing.py:455
 msgid "Coef."
 msgstr ""
 
-#: ../pigeonplanner/printing.py:501 ../pigeonplanner/printing.py:523
-#: ../pigeonplanner/printing.py:524 ../pigeonplanner/toolswindow.py:80
+#: ../pigeonplanner/printing.py:538 ../pigeonplanner/printing.py:560
+#: ../pigeonplanner/printing.py:561 ../pigeonplanner/toolswindow.py:80
 msgid "Velocity"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:512
+#: ../pigeonplanner/printing.py:549
 msgid "Released"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:514
+#: ../pigeonplanner/printing.py:551
 msgid "Distance"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:529 ../pigeonplanner/printing.py:530
+#: ../pigeonplanner/printing.py:566 ../pigeonplanner/printing.py:567
 #: ../pigeonplanner/toolswindow.py:80
 msgid "Flight Time"
 msgstr ""
 
-#: ../pigeonplanner/printing.py:535 ../pigeonplanner/printing.py:536
+#: ../pigeonplanner/printing.py:572 ../pigeonplanner/printing.py:573
 #: ../pigeonplanner/toolswindow.py:80
 msgid "Time of Arrival"
-msgstr ""
-
-#: ../pigeonplanner/widgets.py:93
-msgid "PP Backups"
 msgstr ""
 
 #: ../pigeonplanner/widgets.py:310 tmp/ToolsWindow.glade.h:18
@@ -158,11 +154,11 @@ msgstr ""
 msgid "View image: "
 msgstr ""
 
-#: ../pigeonplanner/widgets.py:384
+#: ../pigeonplanner/widgets.py:383
 msgid "Click to close this window"
 msgstr ""
 
-#: ../pigeonplanner/resultwindow.py:55 ../pigeonplanner/mainwindow.py:974
+#: ../pigeonplanner/resultwindow.py:55 ../pigeonplanner/mainwindow.py:1012
 #: tmp/MainWindow.glade.h:27
 msgid "Placed"
 msgstr ""
@@ -174,6 +170,14 @@ msgstr ""
 #: ../pigeonplanner/resultwindow.py:201 ../pigeonplanner/resultwindow.py:202
 #: ../pigeonplanner/resultwindow.py:246 ../pigeonplanner/resultwindow.py:249
 msgid "All"
+msgstr ""
+
+#: ../pigeonplanner/optionsdialog.py:106
+msgid "days"
+msgstr ""
+
+#: ../pigeonplanner/optionsdialog.py:108
+msgid "day"
 msgstr ""
 
 #: ../pigeonplanner/toolswindow.py:67 tmp/ToolsWindow.glade.h:39
@@ -200,8 +204,9 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: ../pigeonplanner/toolswindow.py:85 ../pigeonplanner/mainwindow.py:925
-#: ../pigeonplanner/mainwindow.py:944 tmp/ToolsWindow.glade.h:30
+#: ../pigeonplanner/toolswindow.py:85 ../pigeonplanner/mainwindow.py:955
+#: ../pigeonplanner/mainwindow.py:982 tmp/OptionsDialog.glade.h:16
+#: tmp/ToolsWindow.glade.h:30
 msgid "Name"
 msgstr ""
 
@@ -454,285 +459,297 @@ msgstr ""
 msgid "This isn't normal, or you must be running a development version"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:108 tmp/MainWindow.glade.h:14
-msgid "Colour"
-msgstr ""
-
-#: ../pigeonplanner/mainwindow.py:108 tmp/MainWindow.glade.h:37
-msgid "Sex"
-msgstr ""
-
-#: ../pigeonplanner/mainwindow.py:109
+#: ../pigeonplanner/mainwindow.py:110
 msgid "cock"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:109
+#: ../pigeonplanner/mainwindow.py:110
 msgid "hen"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:109
+#: ../pigeonplanner/mainwindow.py:110
 msgid "young bird"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:164
+#: ../pigeonplanner/mainwindow.py:174
 msgid "Enter the bandnumber of the pigeon"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:166
+#: ../pigeonplanner/mainwindow.py:176
 msgid "Enter the year of the pigeon"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:168
+#: ../pigeonplanner/mainwindow.py:178
 msgid "Enter a name for the pigeon"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:170
+#: ../pigeonplanner/mainwindow.py:180
 msgid "Click here to add an image"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:172
+#: ../pigeonplanner/mainwindow.py:182
 msgid "Search through the list of cocks"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:174
+#: ../pigeonplanner/mainwindow.py:184
 msgid "Search through the list of hens"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:215
+#: ../pigeonplanner/mainwindow.py:241
 msgid "Create backup"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:220
+#: ../pigeonplanner/mainwindow.py:246
 msgid "Restore backup"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:692
+#: ../pigeonplanner/mainwindow.py:714
 msgid "<b>Edit this result</b>"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:724 tmp/MainWindow.glade.h:1
+#: ../pigeonplanner/mainwindow.py:746 tmp/MainWindow.glade.h:1
 msgid "<b>Add a new result</b>"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:836
+#: ../pigeonplanner/mainwindow.py:866
 msgid "_File"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:837 ../pigeonplanner/mainwindow.py:844
+#: ../pigeonplanner/mainwindow.py:867 ../pigeonplanner/mainwindow.py:874
 msgid "_Backup"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:838
+#: ../pigeonplanner/mainwindow.py:868
 msgid "_Search"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:839
+#: ../pigeonplanner/mainwindow.py:869
 msgid "_Pigeon"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:840 ../pigeonplanner/mainwindow.py:858
+#: ../pigeonplanner/mainwindow.py:870 ../pigeonplanner/mainwindow.py:888
 msgid "_Edit"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:841
+#: ../pigeonplanner/mainwindow.py:871
 msgid "_View"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:842
+#: ../pigeonplanner/mainwindow.py:872
 msgid "_Filter pigeons"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:843
+#: ../pigeonplanner/mainwindow.py:873
 msgid "_Help"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:845
+#: ../pigeonplanner/mainwindow.py:875
 msgid "Create a backup of your database"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:846
+#: ../pigeonplanner/mainwindow.py:876
 msgid "_Restore"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:847
+#: ../pigeonplanner/mainwindow.py:877
 msgid "Restore a backup of your database"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:848
+#: ../pigeonplanner/mainwindow.py:878
 msgid "_Quit"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:849
+#: ../pigeonplanner/mainwindow.py:879
 msgid "Quit the program"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:850
+#: ../pigeonplanner/mainwindow.py:880
 msgid "_Add"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:851
+#: ../pigeonplanner/mainwindow.py:881
 msgid "Add a new pigeon"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:852
+#: ../pigeonplanner/mainwindow.py:882
 msgid "Add ran_ge"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:853 tmp/MainWindow.glade.h:9
+#: ../pigeonplanner/mainwindow.py:883 tmp/MainWindow.glade.h:9
 msgid "Add a range of pigeons"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:854
+#: ../pigeonplanner/mainwindow.py:884
 msgid "_Logfile Viewer"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:855
+#: ../pigeonplanner/mainwindow.py:885
 msgid "See the logfile"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:856
+#: ../pigeonplanner/mainwindow.py:886
 msgid "_Find..."
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:857
+#: ../pigeonplanner/mainwindow.py:887
 msgid "Search through the list of pigeons"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:859
+#: ../pigeonplanner/mainwindow.py:889
 msgid "Edit the selected pigeon"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:860
+#: ../pigeonplanner/mainwindow.py:890
 msgid "_Remove"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:861
+#: ../pigeonplanner/mainwindow.py:891
 msgid "Remove the selected pigeon"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:862
+#: ../pigeonplanner/mainwindow.py:892
 msgid "_Pedigree"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:863
+#: ../pigeonplanner/mainwindow.py:893
 msgid "View the detailed pedigree of this pigeon"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:864
+#: ../pigeonplanner/mainwindow.py:894
 msgid "Add resul_t"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:865
+#: ../pigeonplanner/mainwindow.py:895
 msgid "Add a new result for this pigeon"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:866
+#: ../pigeonplanner/mainwindow.py:896
 msgid "_Tools"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:867
+#: ../pigeonplanner/mainwindow.py:897
 msgid "Various tools"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:868
+#: ../pigeonplanner/mainwindow.py:898
 msgid "_Preferences"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:869
+#: ../pigeonplanner/mainwindow.py:899
 msgid "Configure the application"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:870
+#: ../pigeonplanner/mainwindow.py:900
 msgid "_Website"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:871
+#: ../pigeonplanner/mainwindow.py:901
 msgid "Go to the website for more information"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:872
+#: ../pigeonplanner/mainwindow.py:902
 msgid "Forum"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:873
+#: ../pigeonplanner/mainwindow.py:903
 msgid "Go to the forum for online help"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:874
+#: ../pigeonplanner/mainwindow.py:904
 msgid "_About"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:875
+#: ../pigeonplanner/mainwindow.py:905
 msgid "About this application"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:879
+#: ../pigeonplanner/mainwindow.py:909
 msgid "Navigation arrows"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:880 tmp/OptionsDialog.glade.h:9
+#: ../pigeonplanner/mainwindow.py:910 tmp/OptionsDialog.glade.h:19
 msgid "Show or hide the navigation arrows"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:881
+#: ../pigeonplanner/mainwindow.py:911
 msgid "Toolbar"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:882 tmp/OptionsDialog.glade.h:11
+#: ../pigeonplanner/mainwindow.py:912 tmp/OptionsDialog.glade.h:21
 msgid "Show or hide the toolbar"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:883
+#: ../pigeonplanner/mainwindow.py:913
 msgid "Statusbar"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:884 tmp/OptionsDialog.glade.h:10
+#: ../pigeonplanner/mainwindow.py:914 tmp/OptionsDialog.glade.h:20
 msgid "Show or hide the statusbar"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:888
+#: ../pigeonplanner/mainwindow.py:918
 msgid "_All"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:889
+#: ../pigeonplanner/mainwindow.py:919
 msgid "Show all pigeons"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:890
+#: ../pigeonplanner/mainwindow.py:920
 msgid "_Cocks"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:891
+#: ../pigeonplanner/mainwindow.py:921
 msgid "Only show cocks"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:892
+#: ../pigeonplanner/mainwindow.py:922
 msgid "_Hens"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:893
+#: ../pigeonplanner/mainwindow.py:923
 msgid "Only show hens"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:894
+#: ../pigeonplanner/mainwindow.py:924
 msgid "_Young birds"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:895
+#: ../pigeonplanner/mainwindow.py:925
 msgid "Only show young birds"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:925 ../pigeonplanner/mainwindow.py:944
-#: ../pigeonplanner/mainwindow.py:952 ../pigeonplanner/mainwindow.py:960
-#: ../pigeonplanner/mainwindow.py:968 tmp/MainWindow.glade.h:44
+#: ../pigeonplanner/mainwindow.py:955 ../pigeonplanner/mainwindow.py:982
+#: ../pigeonplanner/mainwindow.py:990 ../pigeonplanner/mainwindow.py:998
+#: ../pigeonplanner/mainwindow.py:1006 tmp/MainWindow.glade.h:44
 msgid "Year"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:960
+#: ../pigeonplanner/mainwindow.py:955 tmp/MainWindow.glade.h:14
+#: tmp/OptionsDialog.glade.h:9
+msgid "Colour"
+msgstr ""
+
+#: ../pigeonplanner/mainwindow.py:955 tmp/MainWindow.glade.h:37
+#: tmp/OptionsDialog.glade.h:18
+msgid "Sex"
+msgstr ""
+
+#: ../pigeonplanner/mainwindow.py:955 tmp/MainWindow.glade.h:23
+#: tmp/OptionsDialog.glade.h:14
+msgid "Loft"
+msgstr ""
+
+#: ../pigeonplanner/mainwindow.py:955 tmp/MainWindow.glade.h:39
+#: tmp/OptionsDialog.glade.h:22
+msgid "Strain"
+msgstr ""
+
+#: ../pigeonplanner/mainwindow.py:998
 msgid "Common parent"
 msgstr ""
 
-#: ../pigeonplanner/mainwindow.py:1599
+#: ../pigeonplanner/mainwindow.py:1631
 msgid "Images"
 msgstr ""
 
@@ -752,11 +769,11 @@ msgstr ""
 msgid "<b>Offspring</b>"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:6 tmp/PedigreeWindow.glade.h:1
+#: tmp/MainWindow.glade.h:6
 msgid "<b>Pedigree dam</b>"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:7 tmp/PedigreeWindow.glade.h:2
+#: tmp/MainWindow.glade.h:7
 msgid "<b>Pedigree sire</b>"
 msgstr ""
 
@@ -776,7 +793,7 @@ msgstr ""
 msgid "Choose an image..."
 msgstr ""
 
-#: tmp/MainWindow.glade.h:15 tmp/PedigreeWindow.glade.h:3
+#: tmp/MainWindow.glade.h:15 tmp/PedigreeWindow.glade.h:1
 msgid "Dam"
 msgstr ""
 
@@ -804,15 +821,11 @@ msgstr ""
 msgid "Keep this pigeon in the pedigree"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:23
-msgid "Loft"
-msgstr ""
-
 #: tmp/MainWindow.glade.h:24
 msgid "Names"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:26 tmp/PedigreeWindow.glade.h:5
+#: tmp/MainWindow.glade.h:26 tmp/PedigreeWindow.glade.h:3
 msgid "Pedigree"
 msgstr ""
 
@@ -836,12 +849,8 @@ msgstr ""
 msgid "Search in:"
 msgstr ""
 
-#: tmp/MainWindow.glade.h:38 tmp/PedigreeWindow.glade.h:7
+#: tmp/MainWindow.glade.h:38 tmp/PedigreeWindow.glade.h:5
 msgid "Sire"
-msgstr ""
-
-#: tmp/MainWindow.glade.h:39
-msgid "Strain"
 msgstr ""
 
 #: tmp/MainWindow.glade.h:40
@@ -861,42 +870,62 @@ msgid "View detail"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:1
-msgid "Appearance"
+msgid "<b>Backup</b>"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:2
-msgid "At position:"
+msgid "<b>Columns</b>"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:3
-msgid "Change the theme"
+msgid "<b>Other</b>"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:4
-msgid "Check for updates on startup"
+msgid "<b>Theme</b>"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:5
-msgid "Default"
+msgid "<b>Update</b>"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:6
-msgid "General"
+msgid "Appearance"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:7
-msgid "Options"
+msgid "Change the theme"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:8
-msgid "Show an extra column"
+msgid "Check for updates on startup"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:10
+msgid "Default"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:11
+msgid "General"
 msgstr ""
 
 #: tmp/OptionsDialog.glade.h:12
-msgid "Value of column:"
+msgid "Interval"
 msgstr ""
 
-#: tmp/PedigreeWindow.glade.h:4
+#: tmp/OptionsDialog.glade.h:13
+msgid "Location"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:15
+msgid "Make an automatic backup"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:17
+msgid "Options"
+msgstr ""
+
+#: tmp/PedigreeWindow.glade.h:2
 msgid "Insert a pigeon"
 msgstr ""
 

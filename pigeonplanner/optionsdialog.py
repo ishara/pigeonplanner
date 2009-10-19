@@ -103,9 +103,9 @@ class OptionsDialog:
     def sbDay_changed(self, widget):
         value = widget.get_value_as_int()
 
-        dstring = 'days'
+        dstring = _("days")
         if value == 1:
-            dstring = 'day'
+            dstring = _("day")
 
         widget.set_text('%s %s' % (value, dstring))
 

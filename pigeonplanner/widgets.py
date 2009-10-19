@@ -90,7 +90,7 @@ uistring = '''
 
 
 backupFileFilter = gtk.FileFilter()
-backupFileFilter.set_name(_("PP Backups"))
+backupFileFilter.set_name("PP Backups")
 backupFileFilter.add_mime_type("zip/zip")
 backupFileFilter.add_pattern("*PigeonPlannerBackup.zip")
 
