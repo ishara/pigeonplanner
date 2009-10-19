@@ -3140,14 +3140,69 @@
         <property name="label_xalign">0</property>
         <property name="shadow_type">out</property>
         <child>
-          <widget class="GtkCalendar" id="calendar">
+          <widget class="GtkHBox" id="hbox2">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="year">2009</property>
-            <property name="month">3</property>
-            <property name="day">28</property>
-            <signal name="day_selected_double_click" handler="on_day_double_clicked"/>
-            <signal name="day_selected" handler="on_day_selected"/>
+            <child>
+              <widget class="GtkVBox" id="vbox1">
+                <property name="visible">True</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">8</property>
+                <child>
+                  <widget class="GtkButton" id="calapply">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_calapply_clicked"/>
+                    <child>
+                      <widget class="GtkImage" id="image3">
+                        <property name="visible">True</property>
+                        <property name="stock">gtk-apply</property>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkButton" id="calcancel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="on_calcancel_clicked"/>
+                    <child>
+                      <widget class="GtkImage" id="image5">
+                        <property name="visible">True</property>
+                        <property name="stock">gtk-cancel</property>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkCalendar" id="calendar">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="year">2009</property>
+                <property name="month">3</property>
+                <property name="day">28</property>
+                <signal name="day_selected_double_click" handler="on_day_double_clicked"/>
+                <signal name="day_selected" handler="on_day_selected"/>
+              </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </widget>
         </child>
         <child>

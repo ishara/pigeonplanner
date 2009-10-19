@@ -81,6 +81,8 @@ class MainWindow:
                       'on_findcancel_clicked'    : self.findcancel_clicked,
                       'on_findadd_clicked'       : self.findadd_clicked,
                       'on_calbutton_clicked'     : self.calbutton_clicked,
+                      'on_calapply_clicked'      : self.calapply_clicked,
+                      'on_calcancel_clicked'     : self.calcancel_clicked,
                       'on_day_selected'          : self.day_selected,
                       'on_day_double_clicked'    : self.day_double_clicked,
                       'on_button_top_clicked'    : self.button_top_clicked,
@@ -791,6 +793,14 @@ class MainWindow:
         self.calpopup.grab_add()
         self.calpopup.show()
         self.calpopup.grab_focus()
+
+    def calapply_clicked(self, widget):
+        self.hide_popup()
+
+    def calcancel_clicked(self, widget):
+        self.entryDate.set_text('')
+
+        self.hide_popup()
 
     def day_selected(self, widget):
         year, month, day = self.calendar.get_date()
