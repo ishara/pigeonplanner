@@ -104,7 +104,7 @@ class MainWindow:
         self.date_format = '%Y-%m-%d'
         self.imageToAdd = ''
         self.imageDeleted = False
-        self.beforeEditPath = 0
+        self.selectionPath = 0
         self.blockMenuCallback = False
         self.editResultMode = False
         self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(join(const.IMAGEDIR, 'icon_logo.png'), 75, 75)
@@ -551,7 +551,7 @@ class MainWindow:
         self.add_edit_finish()
 
     def cancel_clicked(self, widget):
-        self.add_edit_finish()
+        self.add_edit_finish(True)
 
     # Image callbacks
     def eventbox_press(self, widget, event):
@@ -1260,10 +1260,13 @@ class MainWindow:
         @param operation: 'add' or 'edit'
         '''
 
-        if operation == 'edit':
-            self.beforeEditPath, focus = self.treeview.get_cursor()
+        if operation == 'add':
+            # Clear the pedigree
+            self.pedigree.draw_pedigree()
 
         self.operation = operation
+
+        self.selectionPath, focus = self.treeview.get_cursor()
 
         self.detailbook.set_current_page(1)
 
@@ -1281,11 +1284,15 @@ class MainWindow:
         Do all the necessary things to finish editing or adding.
         '''
 
-        self.parser.get_pigeons()
+        if args: # Cancel
+            # Reselect pigeon when user cancels adding
+            self.selection.unselect_path(self.selectionPath)
+            self.selection.select_path(self.selectionPath)
+        else: # Save
+            self.parser.get_pigeons()
+            self.fill_treeview(path=self.selectionPath)
 
-        self.fill_treeview(path=self.beforeEditPath)
-
-        self.beforeEditPath = 0
+        self.selectionPath = 0
 
         self.detailbook.set_current_page(0)
 
