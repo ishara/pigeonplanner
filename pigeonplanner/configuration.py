@@ -42,7 +42,7 @@ class Configuration:
         '''
 
         self.__addSection('Options')
-        self.__addOption('Options', 'theme', 8)
+        self.__addOption('Options', 'theme', 6)
         self.__addOption('Options', 'arrows', 'False')
         self.__addOption('Options', 'toolbar', 'True')
         self.__addOption('Options', 'statusbar', 'True')
