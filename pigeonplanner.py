@@ -130,7 +130,11 @@ class PigeonPlanner:
         if locale_error:
             self.logger.debug("Locale error: %s" % locale_error)
         else:
-            self.logger.debug("Locale: %s, %s" % (locale.getlocale()[0], language))
+            if win32:
+                loc = libi18n._getlang()
+            else:
+                loc = locale.getlocale()[0]
+            self.logger.debug("Locale: %s" % loc)
 
     def exception_hook(self, type, value, trace):
         import pigeonplanner.logdialog as logdialog
