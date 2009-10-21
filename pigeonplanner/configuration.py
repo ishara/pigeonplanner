@@ -47,6 +47,7 @@ class Configuration:
         self.__addOption('Options', 'toolbar', 'True')
         self.__addOption('Options', 'statusbar', 'True')
         self.__addOption('Options', 'update', 'True')
+        self.__addOption('Options', 'language', 'def')
         self.__addSection('Backup')
         self.__addOption('Backup', 'backup', 'True')
         self.__addOption('Backup', 'interval', 7)
@@ -120,7 +121,7 @@ class ConfigurationParser(ConfigParser.ConfigParser):
         Creates the default configurationfile string based on the known Section's and Option's.
         '''
 
-        self.defaultFile = _("#Pigeon Planner configuration file")
+        self.defaultFile = "#Pigeon Planner configuration file"
         for section in self.sections:
             self.defaultFile += "\n\n"
             self.defaultFile += "[%s]" % section.name

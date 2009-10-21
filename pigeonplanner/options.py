@@ -20,12 +20,13 @@ import configuration
 
 
 class ParsedOptions:
-    def __init__(self, theme, arrows, toolbar, statusbar, update, backup, interval, location, last, name, colour, sex, loft, strain):
+    def __init__(self, theme, arrows, toolbar, statusbar, update, language, backup, interval, location, last, name, colour, sex, loft, strain):
         self.theme = theme
         self.arrows = arrows
         self.toolbar = toolbar
         self.statusbar = statusbar
         self.update = update
+        self.language = language
         self.backup = backup
         self.interval = interval
         self.location = location
@@ -48,6 +49,7 @@ class GetOptions:
                           self.conf.getboolean('Options', 'toolbar'),
                           self.conf.getboolean('Options', 'statusbar'),
                           self.conf.getboolean('Options', 'update'),
+                          self.conf.get('Options', 'language'),
                           self.conf.getboolean('Backup', 'backup'),
                           self.conf.getint('Backup', 'interval'),
                           self.conf.get('Backup', 'location'),

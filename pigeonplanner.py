@@ -57,6 +57,10 @@ class PigeonPlanner:
 	        sys.stdout = open("nul", "w")
 	        sys.stderr = open("nul", "w")
 
+        # Options
+        import pigeonplanner.options as options
+        self.options = options.GetOptions()
+
         # Locale setup
         currentPath = ''
 
@@ -68,25 +72,41 @@ class PigeonPlanner:
         else:
             LOCALE_PATH = os.path.join(currentPath, 'languages')
 
+        APP_NAME = 'pigeonplanner'
+
         if win32:
             import pigeonplanner.libi18n as libi18n
             libi18n.fix_locale()
+
+        gettext.textdomain(APP_NAME)
+
+        language = self.options.optionList.language
+        if language == 'def':
+            language = ''
+
         try:
-            locale.setlocale(locale.LC_ALL, '')
+            langTranslation = gettext.translation(APP_NAME, LOCALE_PATH, [language])
+            langTranslation.install()
         except:
-            pass
-            
-        APP_NAME = 'pigeonplanner'
+            langTranslation = gettext
+
+        locale_error = None
+        if win32:
+            libi18n._putenv('LC_ALL', language)
+        else:
+            try:
+                locale.setlocale(locale.LC_ALL, locale.normalize(language).split('.')[0]+'.UTF-8')
+            except locale.Error, e:
+                try:
+                    locale.setlocale(locale.LC_ALL, locale.normalize(language))
+                except locale.Error, e:
+                    locale_error = "Force lang failed: '%(language)s' (%(second)s and %(third)s tested)" % {'language': e, 'second': locale.normalize(language).split('.')[0]+'.UTF-8', 'third': locale.normalize(language)}
 
         for module in (gettext, gtk.glade):
             module.bindtextdomain(APP_NAME, LOCALE_PATH)
             module.textdomain(APP_NAME)
 
-        __builtin__._ = gettext.gettext
-
-        # Options
-        import pigeonplanner.options as options
-        self.options = options.GetOptions()
+        __builtin__._ = langTranslation.gettext
 
 		# Logging setup
         import pigeonplanner.const as const
@@ -107,6 +127,10 @@ class PigeonPlanner:
         self.logger.debug("Python version: %s" % sys.version)
         self.logger.debug("GTK+ version: %s" % ".".join(str(n) for n in gtk.gtk_version))
         self.logger.debug("PyGTK version: %s" % ".".join(str(n) for n in gtk.pygtk_version))
+        if locale_error:
+            self.logger.debug("Locale error: %s" % locale_error)
+        else:
+            self.logger.debug("Locale: %s, %s" % (locale.getlocale()[0], language))
 
     def exception_hook(self, type, value, trace):
         import pigeonplanner.logdialog as logdialog

@@ -16,8 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import const
 import widgets
+import messages
 
 
 def check_entrys(entrys):
@@ -56,15 +56,15 @@ def check_ring_entry(parent, inputRing, inputYear):
     '''
 
     if not inputRing or not inputYear:
-        widgets.message_dialog('error', const.MSG_EMPTY_FIELDS, parent)
+        widgets.message_dialog('error', messages.MSG_EMPTY_FIELDS, parent)
         return False
 
     if not inputYear.isdigit():
-        widgets.message_dialog('error', const.MSG_INVALID_NUMBER, parent)
+        widgets.message_dialog('error', messages.MSG_INVALID_NUMBER, parent)
         return False
 
     if not len(inputYear) == 4:
-        widgets.message_dialog('error', const.MSG_INVALID_LENGTH, parent)
+        widgets.message_dialog('error', messages.MSG_INVALID_LENGTH, parent)
         return False
 
     return True

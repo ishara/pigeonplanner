@@ -26,6 +26,7 @@ import const
 import update
 import backup
 import widgets
+import messages
 from printing import PrintVelocity
 
 
@@ -210,7 +211,7 @@ class ToolsWindow:
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
 
-        if widgets.message_dialog('question', const.MSG_REMOVE_ITEM, self.toolsdialog, {'item': item, 'dataset': dataset}):
+        if widgets.message_dialog('question', messages.MSG_REMOVE_ITEM, self.toolsdialog, {'item': item, 'dataset': dataset}):
             index = self.cbitems.get_active()
 
             if dataset == _("Colours"):
@@ -313,13 +314,13 @@ class ToolsWindow:
         data = self.get_entry_data()
 
         if not data[0]:
-            widgets.message_dialog('error', const.MSG_NAME_EMPTY, self.toolsdialog)
+            widgets.message_dialog('error', messages.MSG_NAME_EMPTY, self.toolsdialog)
             return
 
         if self.admode == 'add':
             for ad in self.main.database.get_all_addresses():
                 if data[0] == ad[1]:
-                    widgets.message_dialog('error', const.MSG_NAME_EXISTS, self.toolsdialog)
+                    widgets.message_dialog('error', messages.MSG_NAME_EXISTS, self.toolsdialog)
                     return
 
             self.main.database.insert_address(data)
@@ -372,7 +373,7 @@ class ToolsWindow:
             self.toolsdialog.destroy()
 
     def adremove_clicked(self, widget):
-        if not widgets.message_dialog('warning', const.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
+        if not widgets.message_dialog('warning', messages.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
             return
 
         self.main.database.delete_address(self.get_name())
@@ -462,16 +463,16 @@ class ToolsWindow:
     def makebackup_clicked(self, widget):
         if self.fcButtonCreate.get_current_folder():
             if backup.make_backup(folder):
-                widgets.message_dialog('info', const.MSG_BACKUP_SUCCES, self.main.main)
+                widgets.message_dialog('info', messages.MSG_BACKUP_SUCCES, self.main.main)
             else:
-                widgets.message_dialog('info', Conts.MSG_BACKUP_FAILED, self.main.main)
+                widgets.message_dialog('info', messages.MSG_BACKUP_FAILED, self.main.main)
 
     def restorebackup_clicked(self, widget):
         if self.fcButtonRestore.get_filename():
             if backup.restore_backup(zipfile):
-                widgets.message_dialog('info', const.MSG_RESTORE_SUCCES, self.main.main)
+                widgets.message_dialog('info', messages.MSG_RESTORE_SUCCES, self.main.main)
             else:
-                widgets.message_dialog('info', Conts.MSG_RESTORE_FAILED, self.main.main)
+                widgets.message_dialog('info', messages.MSG_RESTORE_FAILED, self.main.main)
 
     # Update
     def btnupdate_clicked(self, widget):

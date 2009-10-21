@@ -25,6 +25,7 @@ import gtk.glade
 
 import const
 import widgets
+import messages
 from pedigree import DrawPedigree
 from printing import PrintPedigree
 from toolswindow import ToolsWindow
@@ -87,7 +88,7 @@ class PedigreeWindow:
                 break
 
         if not userinfo['name']:
-            if widgets.message_dialog('question', const.MSG_NO_INFO, self.pedigreewindow):
+            if widgets.message_dialog('question', messages.MSG_NO_INFO, self.pedigreewindow):
                 tw = ToolsWindow(self.main)
                 tw.toolsdialog.set_keep_above(True)
                 tw.treeview.set_cursor(2)

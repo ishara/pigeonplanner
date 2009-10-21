@@ -26,6 +26,7 @@ import gtk.glade
 import const
 import widgets
 import options
+import messages
 
 
 class OptionsDialog:
@@ -70,6 +71,15 @@ class OptionsDialog:
             # We only use 2.12 on Windows (missing binaries)
             self.imagePage.set_from_file(os.path.join(const.IMAGEDIR, 'gtk_pagesetup.png'))
 
+        # Fill language combobox with available languages
+        self.languagelookup = [
+                ('Default', 'def'),
+                ('English', 'en'),
+                ('Español (Spanish)', 'es'),
+                ('Nederlands (Dutch)', 'nl'),]
+        for name, code in self.languagelookup:
+            self.cbLang.append_text(name)
+
         self.set_options()
 
     def set_options(self):
@@ -86,6 +96,12 @@ class OptionsDialog:
         self.chkStatusbar.set_active(self.opt.optionList.statusbar)
 
         self.chkUpdate.set_active(self.opt.optionList.update)
+
+        for i in xrange(0, len(self.languagelookup)):
+            name, code = self.languagelookup[i]
+            if self.opt.optionList.language == code:
+                self.cbLang.set_active(i)
+                break
 
         self.chkBackup.set_active(self.opt.optionList.backup)
         self.sbDay.set_value(self.opt.optionList.interval)
@@ -110,7 +126,7 @@ class OptionsDialog:
         widget.set_text('%s %s' % (value, dstring))
 
     def default_clicked(self, widget):
-        if widgets.message_dialog('warning', const.MSG_DEFAULT_OPTIONS, self.optionsdialog):
+        if widgets.message_dialog('warning', messages.MSG_DEFAULT_OPTIONS, self.optionsdialog):
             self.opt.write_default()
             self.opt = options.GetOptions()
             self.set_options()
@@ -122,7 +138,8 @@ class OptionsDialog:
                             'arrows': str(self.chkArrows.get_active()),
                             'toolbar': str(self.chkToolbar.get_active()),
                             'statusbar': str(self.chkStatusbar.get_active()),
-                            'update': str(self.chkUpdate.get_active())
+                            'update': str(self.chkUpdate.get_active()),
+                            'language': self.languagelookup[self.cbLang.get_active()][1]
                            },
                "Backup" : {'backup': str(self.chkBackup.get_active()),
                            'interval': self.sbDay.get_value_as_int(),
@@ -144,6 +161,9 @@ class OptionsDialog:
     def finish_options(self, set_default=False):
 
         self.main.options = options.GetOptions()
+
+        if self.languagelookup[self.cbLang.get_active()][1] != self.opt.optionList.language:
+            widgets.message_dialog('info', messages.MSG_RESTART_APP, self.optionsdialog)
 
         if self.win32 and self.cbThemes.get_active() != self.opt.optionList.theme:
             shutil.copy(os.path.join('./share/themes', self.cbThemes.get_active_text(), 'gtk-2.0/gtkrc'),

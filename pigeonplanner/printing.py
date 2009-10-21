@@ -19,8 +19,8 @@
 import gtk
 import cairo
 
-import const
 import widgets
+import messages
 from pedigree import DrawPedigree
 
 
@@ -49,7 +49,7 @@ class PrintPedigree:
         response = print_.run(action, self.parent)
 
         if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            widgets.message_dialog('error', const.MSG_PRINT_ERROR)
+            widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
         elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
             settings = print_.get_print_settings()
 
@@ -328,7 +328,7 @@ class PrintResults:
         response = print_.run(action)
 
         if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            widgets.message_dialog('error', const.MSG_PRINT_ERROR)
+            widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
         elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
             settings = print_.get_print_settings()
 
@@ -517,7 +517,7 @@ class PrintVelocity:
         response = print_.run(action, self.parent)
 
         if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            widgets.message_dialog('error', const.MSG_PRINT_ERROR)
+            widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
         elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
             settings = print_.get_print_settings()
 

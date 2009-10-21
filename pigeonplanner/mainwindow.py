@@ -34,6 +34,7 @@ import backup
 import widgets
 import options
 import database
+import messages
 import pigeonparser
 import checks
 from logdialog import LogDialog
@@ -203,9 +204,9 @@ class MainWindow:
             daysInSeconds = self.options.optionList.interval * 24 * 60 * 60
             if time.time() - self.options.optionList.last >= daysInSeconds:
                 if backup.make_backup(self.options.optionList.location):
-                    widgets.message_dialog('info', const.MSG_BACKUP_SUCCES, self.main)
+                    widgets.message_dialog('info', messages.MSG_BACKUP_SUCCES, self.main)
                 else:
-                    widgets.message_dialog('info', const.MSG_BACKUP_FAILED, self.main)
+                    widgets.message_dialog('info', messages.MSG_BACKUP_FAILED, self.main)
 
                 self.options.set_option('Backup', 'last', time.time())
 
@@ -220,7 +221,7 @@ class MainWindow:
 
         if new:
             logger.info("End: New version found")
-            if widgets.message_dialog('question', const.MSG_UPDATE_NOW, self.main):
+            if widgets.message_dialog('question', messages.MSG_UPDATE_NOW, self.main):
                 logger.info("End: Going to download page")
                 webbrowser.open(const.DOWNLOADURL)
         else:
@@ -423,7 +424,7 @@ class MainWindow:
         if not checks.check_ring_entry(self.main, rangeto, rangeyear): return
 
         if not rangefrom.isdigit() or not rangeto.isdigit():
-            widgets.message_dialog('error', const.MSG_INVALID_RANGE, self.main)
+            widgets.message_dialog('error', messages.MSG_INVALID_RANGE, self.main)
             return
 
         bandList = []
@@ -437,7 +438,7 @@ class MainWindow:
             pindex = band + rangeyear
 
             if self.database.has_pigeon(pindex):
-                if not widgets.message_dialog('warning', const.MSG_OVERWRITE_PIGEON, self.main):
+                if not widgets.message_dialog('warning', messages.MSG_OVERWRITE_PIGEON, self.main):
                     continue
 
             data = (pindex, band, rangeyear, rangesex, 1, 1,
@@ -583,7 +584,7 @@ class MainWindow:
             self.imagePigeon1.set_from_pixbuf(pixbuf)
             self.imageToAdd = filename
         except:
-            widgets.message_dialog('error', const.MSG_INVALID_IMAGE, self.main)
+            widgets.message_dialog('error', messages.MSG_INVALID_IMAGE, self.main)
 
         self.filedialog.hide()
 
@@ -616,7 +617,7 @@ class MainWindow:
             if child.is_focus():
                 if self.search_pigeon(None, child.pindex): return
 
-                if widgets.message_dialog('question', const.MSG_ADD_PIGEON, self.main):
+                if widgets.message_dialog('question', messages.MSG_ADD_PIGEON, self.main):
                     self.menuadd_activate(None)
                     self.entryRing1.set_text(child.ring)
                     self.entryYear1.set_text(child.year)
@@ -666,7 +667,7 @@ class MainWindow:
                result[3] == point and \
                result[4] == place and \
                result[5] == out:
-                widgets.message_dialog('error', const.MSG_RESULT_EXISTS, self.main)
+                widgets.message_dialog('error', messages.MSG_RESULT_EXISTS, self.main)
                 return
 
         cof = (float(place)/float(out))*100
@@ -688,7 +689,7 @@ class MainWindow:
         model, tIter = self.selResults.get_selected()
         pindex, ring, year = self.get_main_ring()
 
-        if not widgets.message_dialog('warning', const.MSG_REMOVE_RESULT, self.main):
+        if not widgets.message_dialog('warning', messages.MSG_REMOVE_RESULT, self.main):
             return
 
         ID = self.get_result_id(pindex, self.get_selected_result())
@@ -1139,7 +1140,7 @@ class MainWindow:
             self.imagePigeon.set_from_pixbuf(pixbuf)
             self.imagePigeon1.set_from_pixbuf(pixbuf)
         except:
-            widgets.message_dialog('error', const.MSG_IMAGE_MISSING, self.main)
+            widgets.message_dialog('error', messages.MSG_IMAGE_MISSING, self.main)
 
         dp = DrawPedigree([self.tableSire, self.tableDam], pindex,
                            button=self.goto, pigeons=self.parser.pigeons)
@@ -1361,10 +1362,10 @@ class MainWindow:
 
         if self.database.has_pigeon(pindex):
             if self.parser.pigeons[pindex].show:
-                if not widgets.message_dialog('warning', const.MSG_OVERWRITE_PIGEON, self.main):
+                if not widgets.message_dialog('warning', messages.MSG_OVERWRITE_PIGEON, self.main):
                     return
             else:
-                if not widgets.message_dialog('warning', const.MSG_SHOW_PIGEON, self.main):
+                if not widgets.message_dialog('warning', messages.MSG_SHOW_PIGEON, self.main):
                     return
                 else:
                     self.database.show_pigeon(pindex, 1)
@@ -1536,13 +1537,13 @@ class MainWindow:
         sector = self.cbSector.child.get_text()
 
         if not date or not point or not place or not out:
-            widgets.message_dialog('error', const.MSG_EMPTY_DATA, self.main)
+            widgets.message_dialog('error', messages.MSG_EMPTY_DATA, self.main)
             return False
 
         try:
             datetime.datetime.strptime(date, self.date_format)
         except ValueError:
-            widgets.message_dialog('error', const.MSG_INVALID_FORMAT, self.main)
+            widgets.message_dialog('error', messages.MSG_INVALID_FORMAT, self.main)
             return False
 
         return date, point, place, out, sector

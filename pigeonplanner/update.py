@@ -22,6 +22,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import const
+import messages
 
 
 def update():
@@ -40,14 +41,14 @@ def update():
         version = None
 
     if not version:
-        msg = const.MSG_UPDATE_ERROR
+        msg = messages.MSG_UPDATE_ERROR
     elif const.VERSION < version:
-        msg = const.MSG_UPDATE_AVAILABLE
+        msg = messages.MSG_UPDATE_AVAILABLE
         new = True
     elif const.VERSION == version:
-        msg = const.MSG_NO_UPDATE
+        msg = messages.MSG_NO_UPDATE
     elif const.VERSION > version:
-        msg = const.MSG_UPDATE_DEVELOPMENT
+        msg = messages.MSG_UPDATE_DEVELOPMENT
 
     return msg, new
 

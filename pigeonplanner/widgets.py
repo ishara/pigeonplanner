@@ -23,6 +23,7 @@ import gtk.gdk
 
 import const
 import backup
+import messages
 
 
 uistring = '''
@@ -351,18 +352,18 @@ class BackupDialog(gtk.Dialog):
         if folder:
             success = backup.make_backup(folder)
             if success:
-                message_dialog('info', const.MSG_BACKUP_SUCCES, self.par)
+                message_dialog('info', messages.MSG_BACKUP_SUCCES, self.par)
             else:
-                message_dialog('info', Conts.MSG_BACKUP_FAILED, self.par)
+                message_dialog('info', messages.MSG_BACKUP_FAILED, self.par)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             success = backup.restore_backup(zipfile)
             if success:
-                message_dialog('info', const.MSG_RESTORE_SUCCES, self.par)
+                message_dialog('info', messages.MSG_RESTORE_SUCCES, self.par)
             else:
-                message_dialog('info', Conts.MSG_RESTORE_FAILED, self.par)
+                message_dialog('info', messages.MSG_RESTORE_FAILED, self.par)
 
 class ImageWindow(gtk.Window):
     def __init__(self, imagepath, main):
