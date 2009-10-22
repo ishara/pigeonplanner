@@ -5,10 +5,11 @@
   <widget class="GtkWindow" id="resultwindow">
     <property name="title" translatable="yes">View all results</property>
     <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
     <property name="default_width">900</property>
     <property name="default_height">640</property>
+    <property name="destroy_with_parent">True</property>
     <property name="icon">../images/icon_logo.png</property>
-    <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <child>
       <widget class="GtkVBox" id="vbox1">
