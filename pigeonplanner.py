@@ -42,8 +42,6 @@ import __builtin__
 
 class PigeonPlanner:
     def __init__(self):
-        import pigeonplanner.const as const
-
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
         sys.excepthook = self.exception_hook
@@ -111,6 +109,8 @@ class PigeonPlanner:
         __builtin__._ = langTranslation.gettext
 
 		# Logging setup
+        import pigeonplanner.const as const
+
         if os.path.exists(const.LOGFILE):
             if os.path.exists("%s.old" % const.LOGFILE):
                 os.remove("%s.old" % const.LOGFILE)
@@ -140,6 +140,7 @@ class PigeonPlanner:
         import traceback
         from cStringIO import StringIO
 
+        import pigeonplanner.const as const
         import pigeonplanner.logdialog as logdialog
 
         file_name = tb.tb_frame.f_code.co_filename
