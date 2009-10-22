@@ -4,6 +4,7 @@
   <!-- interface-naming-policy toplevel-contextual -->
   <widget class="GtkWindow" id="main">
     <property name="visible">True</property>
+    <property name="default_width">1018</property>
     <property name="default_height">810</property>
     <property name="icon">../images/icon_logo.png</property>
     <signal name="delete_event" handler="on_main_destroy"/>
