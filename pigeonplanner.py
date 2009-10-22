@@ -42,6 +42,8 @@ import __builtin__
 
 class PigeonPlanner:
     def __init__(self):
+        import pigeonplanner.const as const
+
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
         sys.excepthook = self.exception_hook
@@ -109,8 +111,6 @@ class PigeonPlanner:
         __builtin__._ = langTranslation.gettext
 
 		# Logging setup
-        import pigeonplanner.const as const
-
         if os.path.exists(const.LOGFILE):
             if os.path.exists("%s.old" % const.LOGFILE):
                 os.remove("%s.old" % const.LOGFILE)
@@ -136,14 +136,26 @@ class PigeonPlanner:
                 loc = locale.getlocale()[0]
             self.logger.debug("Locale: %s" % loc)
 
-    def exception_hook(self, type, value, trace):
+    def exception_hook(self, type_, value, tb):
+        import traceback
+        from cStringIO import StringIO
+
         import pigeonplanner.logdialog as logdialog
 
-        file_name = trace.tb_frame.f_code.co_filename
-        line_no = trace.tb_lineno
-        exception = type.__name__
+        file_name = tb.tb_frame.f_code.co_filename
+        line_no = tb.tb_lineno
+        exception = type_.__name__
+        trace = StringIO()
+        traceback.print_exception(type_, value, tb, None, trace)
         self.logger.critical("File %s line %i - %s: %s" % (file_name, line_no, exception, value))
-        print self.old_exception_hook(type, value, trace)
+        tbtext = ''
+        for line in trace.getvalue().split('\n'):
+            if line:
+                tbtext += "TRACEBACK: %s\n" % line
+        logfile = open(const.LOGFILE, "a")
+        logfile.write(tbtext)
+        logfile.close()
+        print trace.getvalue()
         logdialog.LogDialog()
 
 if __name__ == "__main__":

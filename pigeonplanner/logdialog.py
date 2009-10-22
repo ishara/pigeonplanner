@@ -23,8 +23,8 @@ import gobject
 import const
 
 
-SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow", "ERROR": "red", "CRITICAL": "white"}
+SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]
+COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow", "ERROR": "red", "CRITICAL": "white", "TRACEBACK": "white"}
 
 class LogDialog(gtk.Dialog):
     def __init__(self, widget=False):
