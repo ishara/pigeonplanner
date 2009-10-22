@@ -115,6 +115,8 @@ class ToolsWindow:
         self.cbdata.set_active(0)
         self.cbdata2.set_active(0)
 
+        self.toolsdialog.show()
+
     def close_clicked(self, widget, event=None):
         self.toolsdialog.destroy()
 

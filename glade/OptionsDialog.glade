@@ -5,7 +5,6 @@
   <widget class="GtkDialog" id="optionsdialog">
     <property name="width_request">440</property>
     <property name="height_request">400</property>
-    <property name="visible">True</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Options</property>
     <property name="resizable">False</property>

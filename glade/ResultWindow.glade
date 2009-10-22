@@ -3,7 +3,6 @@
   <!-- interface-requires gtk+ 2.16 -->
   <!-- interface-naming-policy toplevel-contextual -->
   <widget class="GtkWindow" id="resultwindow">
-    <property name="visible">True</property>
     <property name="title" translatable="yes">View all results</property>
     <property name="modal">True</property>
     <property name="default_width">900</property>
@@ -14,6 +13,7 @@
     <child>
       <widget class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <child>
           <widget class="GtkToolbar" id="toolbar1">
             <property name="visible">True</property>

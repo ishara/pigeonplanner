@@ -98,6 +98,8 @@ class ResultWindow:
         self.liststore.set_sort_column_id(7, gtk.SORT_ASCENDING)
         self.column8.set_sort_order(gtk.SORT_DESCENDING)
 
+        self.resultwindow.show()
+
     def close(self, widget, event=None):
         self.resultwindow.destroy()
 

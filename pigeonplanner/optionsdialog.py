@@ -82,6 +82,8 @@ class OptionsDialog:
 
         self.set_options()
 
+        self.optionsdialog.show()
+
     def set_options(self):
         self.chkName.set_active(self.opt.optionList.colname)
         self.chkColour.set_active(self.opt.optionList.colcolour)
