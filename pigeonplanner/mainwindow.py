@@ -1045,7 +1045,9 @@ class MainWindow:
         if len(self.liststore) > 0:
             self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
             self.liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
-            self.treeview.set_cursor(path)
+            if not path:
+                path = 0
+            self.selection.select_path(path)
             self.treeview.set_property('has-focus', True)
         else:
             self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
@@ -1286,6 +1288,8 @@ class MainWindow:
 
         if args: # Cancel
             # Reselect pigeon when user cancels adding
+            if not self.selectionPath:
+                self.selectionPath = 0
             self.selection.unselect_path(self.selectionPath)
             self.selection.select_path(self.selectionPath)
         else: # Save
