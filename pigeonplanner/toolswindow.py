@@ -51,7 +51,7 @@ class ToolsWindow:
                       'on_btnadd_clicked'        : self.btnadd_clicked,
                       'on_btncancel_clicked'     : self.btncancel_clicked,
                       'on_btnsearchdb_clicked'   : self.btnsearchdb_clicked,
-                      'on_window_destroy'        : self.close_clicked,
+                      'on_window_delete'         : self.close_clicked,
                       'on_close_clicked'         : self.close_clicked }
         self.wTree.signal_autoconnect(signalDic)
 

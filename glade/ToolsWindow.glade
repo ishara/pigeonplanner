@@ -13,7 +13,7 @@
     <property name="icon">../images/icon_logo.png</property>
     <property name="type_hint">dialog</property>
     <property name="has_separator">False</property>
-    <signal name="destroy_event" handler="on_window_destroy"/>
+    <signal name="delete_event" handler="on_window_delete"/>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
