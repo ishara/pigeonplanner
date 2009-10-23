@@ -38,7 +38,7 @@ class OptionsDialog:
                       'on_cancel_clicked'   : self.cancel_clicked,
                       'on_ok_clicked'       : self.ok_clicked,
                       'on_default_clicked'  : self.default_clicked,
-                      'on_dialog_destroy'   : self.close_clicked}
+                      'on_dialog_delete'    : self.close_clicked}
         self.wTree.signal_autoconnect(signalDic)
 
         for w in self.wTree.get_widget_prefix(''):

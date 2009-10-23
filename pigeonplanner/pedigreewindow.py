@@ -43,7 +43,7 @@ class PedigreeWindow:
         self.wTree = gtk.glade.XML(const.GLADEPEDIGREE)
 
         signalDic = { 'on_print_clicked'     : self.print_clicked,
-                      'on_dialog_destroy'    : self.close_clicked,
+                      'on_dialog_delete'     : self.close_clicked,
                       'on_close_clicked'     : self.close_clicked }
         self.wTree.signal_autoconnect(signalDic)
 

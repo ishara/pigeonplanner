@@ -36,7 +36,7 @@ class ResultWindow:
                       'on_sbPlace_changed'       : self.sbPlace_changed,
                       'on_print_clicked'         : self.print_clicked,
                       'on_close_clicked'         : self.close,
-                      'on_window_destroy'        : self.close}
+                      'on_dialog_delete'         : self.close}
         self.wTree.signal_autoconnect(signalDic)
 
         for w in self.wTree.get_widget_prefix(''):
