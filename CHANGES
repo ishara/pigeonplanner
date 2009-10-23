@@ -1,3 +1,18 @@
+0.5.2:
+ * Added options to customize columns
+ * Added option to make automatic backups
+ * Added option to clear a pedigree field
+ * Added option to change the language
+ * Added apply and cancel buttons to the calendar
+ * Fixed that comboboxentry's activate default
+ * Fixed bug when editing to an existing pigeon in pedigree
+ * Fixed bug where theme was set wrong on first run
+ * Improved pedigree window
+ * Improved printed pedigree
+ * Show full traceback in the log
+ * Don't backup logfiles
+ * Little random improvements
+
 0.5.0:
  * Added option to edit the pedigree
  * Added option to edit an address
