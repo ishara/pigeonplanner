@@ -16,7 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os
 import datetime
+import logging
+logger = logging.getLogger(__name__)
 
 import gobject
 import gtk
@@ -51,6 +54,8 @@ class ToolsWindow:
                       'on_btnadd_clicked'        : self.btnadd_clicked,
                       'on_btncancel_clicked'     : self.btncancel_clicked,
                       'on_btnsearchdb_clicked'   : self.btnsearchdb_clicked,
+                      'on_dboptimize_clicked'    : self.dboptimize_clicked,
+                      'on_dbremove_clicked'      : self.dbremove_clicked,
                       'on_window_delete'         : self.close_clicked,
                       'on_close_clicked'         : self.close_clicked }
         self.wTree.signal_autoconnect(signalDic)
@@ -71,7 +76,7 @@ class ToolsWindow:
 
         # Add the categories
         i = 0
-        for category in [_("Velocity calculator"), _("Datasets"), _("Addresses"), _("Statistics"), _("Backup"), _("Update")]:
+        for category in [_("Velocity calculator"), _("Datasets"), _("Addresses"), _("Statistics"), _("Database"), _("Backup"), _("Update")]:
             self.liststore.append([i, category])
             i += 1
 
@@ -117,7 +122,7 @@ class ToolsWindow:
 
         self.toolsdialog.show()
 
-    def close_clicked(self, widget, event=None):
+    def close_clicked(self, widget=None, event=None):
         self.toolsdialog.destroy()
 
     def selection_changed(self, selection):
@@ -460,6 +465,25 @@ class ToolsWindow:
 
         for item in sorted(items, key=items.__getitem__):
             self.ls_stats.append([item, items[item]])
+
+    # Database
+    def dboptimize_clicked(self, widget):
+        self.toolsdialog.set_sensitive(False)
+        self.main.database.optimize_db()
+        self.toolsdialog.set_sensitive(True)
+        widgets.message_dialog('info', messages.MSG_OPTIMIZE_FINISH, self.toolsdialog)
+
+    def dbremove_clicked(self, widget):
+        if widgets.message_dialog('warning', messages.MSG_REMOVE_DATABASE, self.toolsdialog):
+            logger.debug("Start deleting the database")
+            try:
+                os.remove(const.DATABASE)
+            except Exception, msg:
+                logger.error("Deleting database: %s" % msg)
+            else:
+                widgets.message_dialog('info', messages.MSG_RMDB_FINISH, self.toolsdialog)
+                self.close_clicked()
+                self.main.quit_program(backup=False)
 
     # Backup
     def makebackup_clicked(self, widget):

@@ -197,8 +197,8 @@ class MainWindow:
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
 
-    def quit_program(self, widget=None, event=None):
-        if self.options.optionList.backup:
+    def quit_program(self, widget=None, event=None, backup=True):
+        if self.options.optionList.backup and backup:
             import time
 
             daysInSeconds = self.options.optionList.interval * 24 * 60 * 60

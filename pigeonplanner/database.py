@@ -97,6 +97,13 @@ class DatabaseOperations:
         cursor = conn.cursor()
         return (conn, cursor)
 
+#### Optimize
+    def optimize_db(self):
+        conn, cursor = self.db_connect()
+        cursor.execute("VACUUM")
+        conn.commit()
+        conn.close()
+
 #### Search
     def search_band(self, band):
         conn, cursor = self.db_connect()
