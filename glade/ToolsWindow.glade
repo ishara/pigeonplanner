@@ -1381,7 +1381,7 @@
                                             <child>
                                               <widget class="GtkLabel" id="label48">
                                                 <property name="visible">True</property>
-                                                <property name="label" translatable="yes">This will optimize your database.
+                                                <property name="label" translatable="yes">Optimize your database.
 (Please wait, this can take some time)</property>
                                                 <property name="justify">center</property>
                                               </widget>
@@ -1402,7 +1402,7 @@
                                     <child>
                                       <widget class="GtkLabel" id="label43">
                                         <property name="visible">True</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Optimize&lt;/b&gt;</property>
+                                        <property name="label" translatable="yes">&lt;b&gt;Optimize database&lt;/b&gt;</property>
                                         <property name="use_markup">True</property>
                                       </widget>
                                       <packing>
@@ -1481,24 +1481,6 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <placeholder/>
-                                            </child>
-                                            <child>
-                                              <placeholder/>
-                                            </child>
-                                            <child>
-                                              <placeholder/>
-                                            </child>
-                                            <child>
-                                              <placeholder/>
-                                            </child>
-                                            <child>
-                                              <placeholder/>
-                                            </child>
-                                            <child>
-                                              <placeholder/>
-                                            </child>
-                                            <child>
                                               <widget class="GtkLabel" id="label46">
                                                 <property name="visible">True</property>
                                                 <property name="label" translatable="yes">&lt;b&gt;Warning!&lt;/b&gt;</property>
@@ -1511,6 +1493,24 @@
                                                 <property name="bottom_attach">2</property>
                                               </packing>
                                             </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
                                           </widget>
                                         </child>
                                       </widget>
@@ -1518,7 +1518,7 @@
                                     <child>
                                       <widget class="GtkLabel" id="label44">
                                         <property name="visible">True</property>
-                                        <property name="label" translatable="yes">&lt;b&gt;Remove&lt;/b&gt;</property>
+                                        <property name="label" translatable="yes">&lt;b&gt;Remove database&lt;/b&gt;</property>
                                         <property name="use_markup">True</property>
                                       </widget>
                                       <packing>
