@@ -16,15 +16,13 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import os.path
 import datetime
 import webbrowser
-from os.path import join
+from os.path import join, isfile
 from threading import Thread
 import logging
 logger = logging.getLogger(__name__)
 
-import gobject
 import gtk
 import gtk.glade
 
@@ -1444,7 +1442,7 @@ class MainWindow:
         '''
 
         preview_file = self.filedialog.get_preview_filename()
-        if preview_file and os.path.isfile(preview_file):
+        if preview_file and isfile(preview_file):
             self.filedialog.set_preview_widget_active(True)
             pixbuf = gtk.gdk.pixbuf_new_from_file(preview_file)
 
