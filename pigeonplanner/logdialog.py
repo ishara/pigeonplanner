@@ -17,6 +17,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import webbrowser
+
 import gtk
 import gobject
 
@@ -88,12 +90,13 @@ class LogDialog(gtk.Dialog):
         self.combo.set_sensitive(False)
 
         #report info
-        hbox = gtk.HBox()
-        self.vbox.pack_start(hbox, False, False, 10)
-        label = gtk.Label(_("If there are any errors, mail the entire text to:\n\ntimovwb@gmail.com"))
+        label = gtk.Label(_("If there are any errors, mail the entire text to:"))
         label.set_justify(gtk.JUSTIFY_CENTER)
         label.set_alignment(0.50, 0)
-        hbox.pack_start(label, True, True, 10)
+        self.vbox.pack_start(label, False, False, 10)
+        link = gtk.LinkButton("timovwb@gmail.com", "timovwb@gmail.com")
+        self.vbox.pack_start(link, False, True, 10)
+        gtk.link_button_set_uri_hook(self.email_hook)
 
         #action area
         button = gtk.Button(None, gtk.STOCK_CLOSE)
@@ -105,6 +108,9 @@ class LogDialog(gtk.Dialog):
 
         gobject.timeout_add(1000, self.update)
         self.run()
+
+    def email_hook(self, button, email):
+        webbrowser.open("mailto:%s" % email)
 
     def insert_color(self, buffer, line):
         for s in SEVERITY[self.combo.get_active():]:
