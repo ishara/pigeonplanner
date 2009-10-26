@@ -74,8 +74,9 @@ class LogDialog(gtk.Dialog):
         self.vbox.pack_start(hbox, False, False, 10)
         buttonbox = gtk.HButtonBox()
         hbox.pack_start(buttonbox, False, False, 10)
-#        label = gtk.Label("Minimum severity shown.")
-#        hbox.pack_start(label, False, False, 10)
+        label = gtk.Label("Minimum severity shown.")
+        label.set_no_show_all(True)
+        hbox.pack_start(label, False, False, 10)
         aspect = gtk.AspectFrame()
         aspect.set_shadow_type(gtk.SHADOW_NONE)
         hbox.pack_start(aspect)
@@ -87,7 +88,7 @@ class LogDialog(gtk.Dialog):
         for s in SEVERITY:
             self.combo.append_text(s)
         self.combo.set_active(0)
-        self.combo.set_sensitive(False)
+        self.combo.set_no_show_all(True)
 
         #report info
         label = gtk.Label(_("If there are any errors, mail the entire text to:"))
