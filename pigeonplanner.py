@@ -40,6 +40,17 @@ except:
 import __builtin__
 
 
+class  NullFile(object):
+    def __init__(self, *arg, **kwarg):
+        pass
+
+    def write(self, data):
+        pass
+
+    def close(self):
+        pass
+
+
 class PigeonPlanner:
     def __init__(self):
         # Customized exception hook
@@ -54,8 +65,13 @@ class PigeonPlanner:
 	
         # Disable py2exe log feature
         if win32 and py2exe:
-	        sys.stdout = open("nul", "w")
-	        sys.stderr = open("nul", "w")
+            try:
+	            sys.stdout = open("nul", "w")
+	            sys.stderr = open("nul", "w")
+            except IOError:
+                # "nul" doesn't exist, use our own class
+	            sys.stdout = NullFile()
+	            sys.stderr = NullFile()
 
         # Options
         import pigeonplanner.options as options
