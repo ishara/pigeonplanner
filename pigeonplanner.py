@@ -18,6 +18,8 @@
 import os
 import os.path
 import sys
+if sys.platform.startswith('win'):
+    os.environ['PATH'] += ";bin"
 import gettext
 import locale
 import logging
