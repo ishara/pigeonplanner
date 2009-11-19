@@ -69,6 +69,10 @@ MSG_REMOVE_ADDRESS = (_("Removing '%s'"),
                       _("Are you sure you want to remove this person from your addresses?"),
                       _("Remove address"))
 
+MSG_REMOVE_ITEM = (_("Removing '%s' from '%s'."),
+                   _("Are you sure you want to remove this item?"),
+                   _("Remove item"))
+
 MSG_REMOVE_DATABASE = (_("Removing database"),
                        _("Are you sure you want to remove the database? All data will be lost."),
                        _("Remove database"))
