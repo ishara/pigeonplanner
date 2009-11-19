@@ -50,7 +50,7 @@ class Configuration:
         self.__addOption('Options', 'language', 'def')
         self.__addSection('Backup')
         self.__addOption('Backup', 'backup', 'True')
-        self.__addOption('Backup', 'interval', 7)
+        self.__addOption('Backup', 'interval', 30)
         self.__addOption('Backup', 'location', const.HOMEDIR)
         self.__addOption('Backup', 'last', time.time())
         self.__addSection('Columns')
