@@ -2067,6 +2067,7 @@
                 <child>
                   <widget class="GtkVButtonBox" id="vbuttonbox2">
                     <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">8</property>
                     <property name="layout_style">spread</property>
                     <child>
@@ -2242,6 +2243,7 @@
                             <child>
                               <widget class="GtkLabel" id="label13">
                                 <property name="visible">True</property>
+                                <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Sector</property>
                               </widget>
                               <packing>
@@ -2301,6 +2303,7 @@
                             <child>
                               <widget class="GtkLabel" id="label61">
                                 <property name="visible">True</property>
+                                <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Placed</property>
                               </widget>
                               <packing>
@@ -2327,6 +2330,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
+                                    <property name="relief">none</property>
                                     <signal name="clicked" handler="on_calbutton_clicked"/>
                                     <child>
                                       <widget class="GtkImage" id="image12">
@@ -2366,6 +2370,7 @@
                             <child>
                               <widget class="GtkLabel" id="label59">
                                 <property name="visible">True</property>
+                                <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Date</property>
                               </widget>
                               <packing>
@@ -2376,6 +2381,7 @@
                             <child>
                               <widget class="GtkLabel" id="label60">
                                 <property name="visible">True</property>
+                                <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Racepoint</property>
                               </widget>
                               <packing>

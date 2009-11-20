@@ -110,6 +110,7 @@ class MainWindow:
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
                                'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit,
                                'dam': self.entryDamEdit, 'yeardam': self.entryYearDamEdit}
+        self.entryDate.set_text(datetime.date.today().strftime(self.date_format))
 
         self.cancelEscAG = gtk.AccelGroup()
         key, modifier = gtk.accelerator_parse('Escape')
@@ -785,6 +786,8 @@ class MainWindow:
     def calbutton_clicked(self, widget):
         self.position_popup()
 
+        self.savedDate = self.entryDate.get_text()
+
         date = datetime.date.today()
         self.calendar.select_month(date.month-1, date.year)
         self.calendar.select_day(date.day)
@@ -797,7 +800,7 @@ class MainWindow:
         self.hide_popup()
 
     def calcancel_clicked(self, widget):
-        self.entryDate.set_text('')
+        self.entryDate.set_text(self.savedDate)
 
         self.hide_popup()
 
