@@ -1089,6 +1089,7 @@ class MainWindow:
                                             self.MenuRemove: False, self.MenuPedigree: False,
                                             self.MenuAddresult: False, self.addresult: False})
 
+            self.pedigree.draw_pedigree()
             self.lsResult.clear()
             return
 
