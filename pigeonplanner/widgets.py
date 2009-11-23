@@ -147,7 +147,7 @@ def about_dialog(parent):
 
     dialog = gtk.AboutDialog()
     dialog.set_transient_for(parent)
-    dialog.set_icon_from_file(const.IMAGEDIR + 'icon_logo.png')
+    dialog.set_icon_from_file(os.path.join(const.IMAGEDIR, 'icon_logo.png'))
     dialog.set_modal(True)
     dialog.set_property("skip-taskbar-hint", True)
 
@@ -159,7 +159,7 @@ def about_dialog(parent):
     dialog.set_website_label("Pigeon Planner website")
     dialog.set_authors(const.AUTHORS)
     dialog.set_license(const.LICENSE)
-    dialog.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(const.IMAGEDIR + 'icon_logo.png', 80, 80))
+    dialog.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(const.IMAGEDIR, 'icon_logo.png'), 80, 80))
 
     result = dialog.run()
     dialog.destroy()
