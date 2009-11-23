@@ -139,7 +139,7 @@ class PigeonPlanner:
         self.logger.info("Version: %s" % const.VERSION)
         self.logger.debug("Home path: %s" % const.HOMEDIR)
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
-        self.logger.debug("Current path: %s" % os.getcwd())
+        self.logger.debug("Current path: %s" % const.topPath)
         if win32:
             self.logger.debug("Windows version: %s" % ", ".join(str(n) for n in sys.getwindowsversion()))
         self.logger.debug("Python version: %s" % sys.version)

@@ -43,13 +43,13 @@ if sys.platform.startswith("win"):
 else:
     HOMEDIR = os.environ['HOME']
     PREFDIR = os.path.join(HOMEDIR, '.pigeonplanner')
-    currentPath = os.path.abspath(os.path.dirname(__file__))
-    if currentPath.startswith('/usr'):
+    topPath = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+    if topPath.startswith('/usr'):
         GLADEDIR = '/usr/share/pigeonplanner/glade/'
         IMAGEDIR = '/usr/share/pigeonplanner/images/'
     else:
-        GLADEDIR = './glade/'
-        IMAGEDIR = './images/'
+        GLADEDIR = os.path.join(topPath, 'glade')
+        IMAGEDIR = os.path.join(topPath, 'images')
 
 GLADEMAIN = os.path.join(GLADEDIR, "MainWindow.glade")
 GLADELOG = os.path.join(GLADEDIR, "LogDialog.glade")
