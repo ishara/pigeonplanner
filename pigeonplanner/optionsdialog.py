@@ -74,7 +74,7 @@ class OptionsDialog:
         # Fill language combobox with available languages
         self.languagelookup = [
                 ('Default', 'def'),
-                ('Arabic', 'ar'),
+                ('Arabic (العربية)', 'ar'),
                 ('English', 'en'),
                 ('Español (Spanish)', 'es'),
                 ('Nederlands (Dutch)', 'nl'),]
