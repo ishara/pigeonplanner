@@ -543,11 +543,6 @@ class MainWindow:
         if not checks.check_entrys(self.entrysToCheck): return
 
         if self.operation == 'edit':
-            pindex, ring, year = self.get_main_ring()
-            if self.database.has_results(pindex):
-                infoTuple = self.get_add_edit_info()
-                self.database.update_result_pindex(infoTuple[0]+infoTuple[1], pindex)
-
             self.write_new_data()
         elif self.operation == 'add':
             self.write_new_pigeon()
@@ -1363,7 +1358,11 @@ class MainWindow:
 
         pindex, ring, year = self.get_main_ring()
         infoTuple = self.get_add_edit_info()
-        data = (infoTuple[0] + infoTuple[1], ) + infoTuple + (pindex, )
+        pindex_new = infoTuple[0] + infoTuple[1]
+        data = (pindex_new, ) + infoTuple + (pindex, )
+
+        if self.database.has_results(pindex):
+            self.database.update_result_pindex(pindex_new, pindex)
 
         self.database.update_pigeon(data)
 
