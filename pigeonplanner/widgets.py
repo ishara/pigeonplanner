@@ -158,7 +158,7 @@ def about_dialog(parent):
     dialog.set_website(const.WEBSITE)
     dialog.set_website_label("Pigeon Planner website")
     dialog.set_authors(const.AUTHORS)
-    dialog.set_translator_credits(_('translator-credits'))
+    dialog.set_translator_credits('translator-credits')
     dialog.set_license(const.LICENSE)
     dialog.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(const.IMAGEDIR, 'icon_logo.png'), 80, 80))
 

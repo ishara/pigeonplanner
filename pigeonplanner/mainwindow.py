@@ -543,6 +543,7 @@ class MainWindow:
         if not checks.check_entrys(self.entrysToCheck): return
 
         if self.operation == 'edit':
+            #TODO: If pigeon has results, ask to take along
             self.write_new_data()
         elif self.operation == 'add':
             self.write_new_pigeon()
