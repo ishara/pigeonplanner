@@ -232,6 +232,16 @@ class DatabaseOperations:
         conn.close()
         return data
 
+    def has_results(self, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT COUNT(*) FROM Results WHERE pindex=?', (pindex,))
+        data = [row[0] for row in cursor.fetchall() if row[0]]
+        conn.close()
+        if data:
+            return data[0]
+        else:
+            return None
+
 
 #### Addresses
     def insert_address(self, data):

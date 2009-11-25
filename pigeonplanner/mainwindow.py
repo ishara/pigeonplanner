@@ -323,7 +323,7 @@ class MainWindow:
         dialog.set_transient_for(self.main)
         label.set_text(ring + ' / ' + year)
 
-        if len(self.database.get_pigeon_results(pindex)) == 0:
+        if not self.database.has_results(pindex):
             chkResults.set_active(False)
             chkResults.hide()
 
