@@ -218,6 +218,12 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
+    def update_result_pindex(self, pindex, pindex_old):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Results SET pindex=? WHERE pindex=?', (pindex, pindex_old))
+        conn.commit()
+        conn.close()
+
     def get_all_results(self):
         conn, cursor = self.db_connect()
         cursor.execute('SELECT * FROM Results')

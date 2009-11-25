@@ -124,8 +124,8 @@ class MainWindow:
         self.database = database.DatabaseOperations()
         self.parser = pigeonparser.PigeonParser()
         self.parser.get_pigeons()
-        self.pedigree = DrawPedigree([self.tableSire, self.tableDam],
-                                      button=self.goto, pigeons=self.parser.pigeons)
+        self.pedigree = DrawPedigree([self.tableSire, self.tableDam], button=self.goto,
+                                      pigeons=self.parser.pigeons, lang=self.options.optionList.language)
         self.pedigree.draw_pedigree()
         self.build_menubar()
         self.build_treeviews()
@@ -543,7 +543,11 @@ class MainWindow:
         if not checks.check_entrys(self.entrysToCheck): return
 
         if self.operation == 'edit':
-            #TODO: If pigeon has results, ask to take along
+            pindex, ring, year = self.get_main_ring()
+            if self.database.has_results(pindex):
+                infoTuple = self.get_add_edit_info()
+                self.database.update_result_pindex(infoTuple[0]+infoTuple[1], pindex)
+
             self.write_new_data()
         elif self.operation == 'add':
             self.write_new_pigeon()
@@ -1148,7 +1152,8 @@ class MainWindow:
             widgets.message_dialog('error', messages.MSG_IMAGE_MISSING, self.main)
 
         dp = DrawPedigree([self.tableSire, self.tableDam], pindex,
-                           button=self.goto, pigeons=self.parser.pigeons)
+                           button=self.goto, pigeons=self.parser.pigeons,
+                           lang=self.options.optionList.language)
         dp.draw_pedigree()
 
         self.find_direct_relatives(pindex, sire, dam)

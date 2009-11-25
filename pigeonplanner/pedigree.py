@@ -326,7 +326,7 @@ class PedigreeBox(gtk.DrawingArea):
         else:
             y = 25
         self.set_size_request(max(xmin, 150), max(ymin, y))
-        
+
     def expose(self, widget, event):
         alloc = self.get_allocation()
         self.context = self.window.cairo_create()
@@ -374,7 +374,7 @@ class PedigreeBox(gtk.DrawingArea):
 
 
 class DrawPedigree:
-    def __init__(self, tables=None, pindex=None, detail=False, button=None, pigeons=None, main=None, pedigree=None):
+    def __init__(self, tables=None, pindex=None, detail=False, button=None, pigeons=None, main=None, pedigree=None, lang=None):
 
         self.pindex = pindex
         self.detail = detail
@@ -383,6 +383,7 @@ class DrawPedigree:
         self.tables = tables
         self.main = main
         self.pedigree = pedigree
+        self.lang = lang
         if self.tables:
             self.tableSire = tables[0]
             self.tableDam = tables[1]
@@ -484,19 +485,6 @@ class DrawPedigree:
                     kinfo = None
 
             if not lst[i]:
-#                if i%2 == 1:
-#                    sex = '0'
-#                    try:
-#                        kinfo = lst[(i - 1) / 2]
-#                    except TypeError:
-#                        kinfo = None
-#                else:
-#                    sex = '1'
-#                    try:
-#                        kinfo = lst[(i - 2) / 2]
-#                    except TypeError:
-#                        kinfo = None
-
                 box = PedigreeBox('', '', '', sex, None, self.detail, self.button, kinfo, self.main, self.pedigree)
                 table.attach(box, x, y, w, h)
                 if self.detail:
