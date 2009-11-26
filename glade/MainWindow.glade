@@ -1828,6 +1828,7 @@
             <child>
               <widget class="GtkVBox" id="vboxPedigree">
                 <property name="visible">True</property>
+                <property name="orientation">vertical</property>
                 <child>
                   <widget class="GtkImage" id="image3">
                     <property name="visible">True</property>
@@ -1993,6 +1994,7 @@
             <child>
               <widget class="GtkVBox" id="vboxRelatives">
                 <property name="visible">True</property>
+                <property name="orientation">vertical</property>
                 <child>
                   <widget class="GtkImage" id="image5">
                     <property name="visible">True</property>
@@ -2531,6 +2533,7 @@
             <child>
               <widget class="GtkVBox" id="vboxResults">
                 <property name="visible">True</property>
+                <property name="orientation">vertical</property>
                 <child>
                   <widget class="GtkImage" id="image10">
                     <property name="visible">True</property>

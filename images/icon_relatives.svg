@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -10,15 +11,15 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg2"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47pre4 r22446"
    width="48"
    height="48"
    version="1.0"
-   sodipodi:docname="icon_verwant.svg"
+   sodipodi:docname="icon_relatives.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/timo/Bureaublad/pyDuif/images/icon_stamboom.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-filename="/home/timo/Bureaublad/Pigeon Planner/images/icon_relatives.png"
+   inkscape:export-xdpi="60"
+   inkscape:export-ydpi="60">
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -27,6 +28,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -41,8 +43,8 @@
        id="perspective9" />
   </defs>
   <sodipodi:namedview
-     inkscape:window-height="1121"
-     inkscape:window-width="1920"
+     inkscape:window-height="1116"
+     inkscape:window-width="1918"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -58,7 +60,8 @@
      inkscape:cy="24"
      inkscape:window-x="0"
      inkscape:window-y="31"
-     inkscape:current-layer="svg2">
+     inkscape:current-layer="svg2"
+     inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
        id="grid2382"
