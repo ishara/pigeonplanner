@@ -424,7 +424,7 @@ class DrawPedigree:
                         ((6, 7, 14, 15), (None))]
         else:
             rng = 15
-            self.pos = [(), 
+            self.pos = [(),
                         ((0, 1, 4, 5), ((1,0,3),(1,5,3))),
                         ((0, 1, 4, 5), ((1,0,3),(1,5,3))),
                         ((2, 3, 1, 2), ((3,0,1),(3,2,1))),
@@ -554,7 +554,10 @@ class DrawPedigree:
         alloc = area.get_allocation()
         gc.line_style = gtk.gdk.LINE_SOLID
         gc.line_width = 2
-        area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2, alloc.height/2)
+        if self.lang == 'ar':
+            area.window.draw_line(gc, alloc.width/2, alloc.height/2, alloc.width, alloc.height/2)
+        else:
+            area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2, alloc.height/2)
         area.window.draw_line(gc, alloc.width/2, 0, alloc.width/2, alloc.height)
 
     def line_expose_cb(self, area, event):
@@ -564,10 +567,16 @@ class DrawPedigree:
         gc.line_style = gtk.gdk.LINE_SOLID
         gc.line_width = 2
         if idx %2 == 0:
-            area.window.draw_line(gc, alloc.width, alloc.height/2, alloc.width/2, alloc.height/2)
+            if self.lang == 'ar':
+                area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2, alloc.height/2)
+            else:
+                area.window.draw_line(gc, alloc.width, alloc.height/2, alloc.width/2, alloc.height/2)
             area.window.draw_line(gc, alloc.width/2, 0, alloc.width/2, alloc.height/2)
         else:
-            area.window.draw_line(gc, alloc.width, alloc.height/2, alloc.width/2, alloc.height/2)
+            if self.lang == 'ar':
+                area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2, alloc.height/2)
+            else:
+                area.window.draw_line(gc, alloc.width, alloc.height/2, alloc.width/2, alloc.height/2)
             area.window.draw_line(gc, alloc.width/2, alloc.height, alloc.width/2, alloc.height/2)
 
     def build_tree(self, pindex, ring, year, sex, ex1, ex2, ex3, ex4, ex5, ex6, index, depth, lst):
