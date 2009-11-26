@@ -5,7 +5,7 @@
   <widget class="GtkWindow" id="main">
     <property name="visible">True</property>
     <property name="default_width">1018</property>
-    <property name="default_height">810</property>
+    <property name="default_height">780</property>
     <property name="icon">../images/icon_logo.png</property>
     <signal name="delete_event" handler="on_main_destroy"/>
     <child>
@@ -1407,7 +1407,7 @@
                   <widget class="GtkVBox" id="vboxPedigre">
                     <property name="visible">True</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">8</property>
+                    <property name="spacing">4</property>
                     <child>
                       <widget class="GtkHBox" id="hboxPedigree">
                         <property name="visible">True</property>
@@ -1417,8 +1417,8 @@
                             <property name="visible">True</property>
                             <property name="xscale">0</property>
                             <property name="yscale">0</property>
-                            <property name="top_padding">4</property>
-                            <property name="bottom_padding">4</property>
+                            <property name="top_padding">2</property>
+                            <property name="bottom_padding">2</property>
                             <property name="left_padding">4</property>
                             <property name="right_padding">2</property>
                             <child>
@@ -1571,8 +1571,8 @@
                             <property name="visible">True</property>
                             <property name="xscale">0</property>
                             <property name="yscale">0</property>
-                            <property name="top_padding">4</property>
-                            <property name="bottom_padding">4</property>
+                            <property name="top_padding">2</property>
+                            <property name="bottom_padding">2</property>
                             <property name="left_padding">2</property>
                             <property name="right_padding">4</property>
                             <child>
