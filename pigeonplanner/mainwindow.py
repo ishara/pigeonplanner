@@ -1074,11 +1074,10 @@ class MainWindow:
         model, path = selection.get_selected()
 
         self.empty_entryboxes()
+        if self.editResultMode:
+            self.resultcancel_clicked(None)
 
         if path:
-            if self.editResultMode:
-                self.resultcancel_clicked(None)
-
             widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
                                             self.sbdetail: True, self.MenuEdit: True,
                                             self.MenuRemove: True, self.MenuPedigree: True,
@@ -1089,6 +1088,7 @@ class MainWindow:
                                             self.MenuRemove: False, self.MenuPedigree: False,
                                             self.MenuAddresult: False, self.addresult: False})
 
+            self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
             self.pedigree.draw_pedigree()
             self.lsResult.clear()
             return
