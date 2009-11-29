@@ -1,3 +1,23 @@
+0.5.4:
+ * Added Arabic language
+ * Added option to optimize the database
+ * Added option to remove the database
+ * Fixed bug where results would disappear when changing the pigeons number
+ * Fixed bug where program crashes when making a starter on Linux
+ * Fixed bug where user can't remove item
+ * Fixed bug where program would fail if nul-file isn't found
+ * Fixed bug where previous pedigree would stay when no pigeon is selected
+ * Fixed bug where previous image would stay when no pigeon is selected
+ * E-mailaddress in the logfile viewer is clickable
+ * Changed calendar cancel behavior
+ * Changed default automatic backup interval to 30
+ * Changed default theme to clearlooks-classic
+ * Cleaned up the application folder on Windows
+ * Cleaned up the icons
+ * Restirct date-entry to 10 characters
+ * Made a new logo
+ * Various code and interface fixes
+
 0.5.2:
  * Added options to customize columns
  * Added option to make automatic backups
