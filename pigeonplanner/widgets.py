@@ -33,6 +33,7 @@ uistring = '''
          <menuitem action="Add"/>
          <menuitem action="Addrange"/>
          <separator/>
+         <menuitem action="Album"/>
          <menuitem action="Log"/>
          <separator/>
          <menu action="BackupMenu">

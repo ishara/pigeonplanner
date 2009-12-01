@@ -190,6 +190,14 @@ class DatabaseOperations:
         conn, cursor = self.db_connect()
         cursor.execute('SELECT image FROM Pigeons WHERE pindex=?', (band,))
         data = cursor.fetchone()[0]
+        conn.close()
+        return data
+
+    def get_all_images(self):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT pindex, band, year, image FROM Pigeons')
+        data = [image for image in cursor.fetchall()]
+        conn.close()
         return data
 
 

@@ -89,7 +89,9 @@ class MainWindow:
                       'on_button_down_clicked'   : self.button_down_clicked,
                       'on_button_bottom_clicked' : self.button_bottom_clicked,
                       'on_spinPlaced_changed'    : self.spinPlaced_changed,
-                      'on_dialog_delete'    : self.dialog_delete,
+                      'on_albumclose_clicked'    : self.albumclose_clicked,
+                      'on_iconview_changed'      : self.iconview_changed,
+                      'on_dialog_delete'         : self.dialog_delete,
                       'on_main_destroy'          : self.quit_program}
         self.wTree.signal_autoconnect(signalDic)
 
@@ -252,6 +254,20 @@ class MainWindow:
 
     def menusearch_activate(self, widget):
         self.searchdialog.show()
+
+    def menualbum_activate(self, widget):
+        store = gtk.ListStore(str, str, gtk.gdk.Pixbuf)
+        self.iconview.set_model(store)
+        self.iconview.set_text_column(1)
+        self.iconview.set_pixbuf_column(2)
+
+        for pigeon in self.database.get_all_images():
+            if not pigeon[3]: continue
+
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(pigeon[3], 96, 96)
+            store.append([pigeon[0], "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
+
+        self.photoalbum.show()
 
     def menulog_activate(self, widget):
         LogDialog()
@@ -817,6 +833,25 @@ class MainWindow:
     def day_double_clicked(self, widget, data=None):
         self.hide_popup()
 
+    # Photo album callbacks
+    def albumclose_clicked(self, widget):
+        self.image.clear()
+        self.photoalbum.hide()
+
+    def iconview_changed(self, widget):
+        model = widget.get_model()
+        try:
+            path = widget.get_selected_items()[0]
+        except IndexError:
+            self.image.clear()
+            return
+
+        pindex = model[path][0]
+        image = self.parser.pigeons[pindex].image
+
+        self.image.set_from_pixbuf(gtk.gdk.pixbuf_new_from_file_at_size(image, 520, 460))
+
+
     #
     # End of callbacks
     ##################
@@ -883,6 +918,8 @@ class MainWindow:
                     _("Add a new pigeon"), self.menuadd_activate),
             ("Addrange", gtk.STOCK_ADD, _("Add ran_ge"), "<control><shift>A",
                     _("Add a range of pigeons"), self.menuaddrange_activate),
+            ("Album", gtk.STOCK_DIRECTORY, _("_Photo Album"), None,
+                    _("View the images of your pigeons"), self.menualbum_activate),
             ("Log", gtk.STOCK_FILE, _("_Logfile Viewer"), "<control>L",
                     _("See the logfile"), self.menulog_activate),
             ("Search", gtk.STOCK_FIND, _("_Find..."), "<control>F",
