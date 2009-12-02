@@ -16,6 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+MSG_ALREADY_RUNNING = (_("Pigeon Planner is already running."),
+                       None,
+                       _("Error"))
+
 MSG_MAKE_DONATION = (_("Go to the website?"),
                      _("Pigeon Planner is free software. You don’t need to pay for using it. But if you like it, please consider donating to help improving it."),
                      _("Make a donation"))

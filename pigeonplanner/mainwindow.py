@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os
 import datetime
 import webbrowser
 from os.path import join, isfile
@@ -172,6 +173,11 @@ class MainWindow:
 
         if self.options.optionList.runs < 10:
             self.options.set_option('Options', 'runs', self.options.optionList.runs+1)
+
+        try:
+            os.remove(join(const.TEMPDIR, 'pigeonplanner.pid'))
+        except:
+            pass
 
         gtk.main_quit()
 

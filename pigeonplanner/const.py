@@ -19,6 +19,7 @@
 import os
 import sys
 import locale
+import tempfile
 
 import pigeonplanner
 
@@ -50,6 +51,8 @@ else:
     else:
         GLADEDIR = os.path.join(topPath, 'glade')
         IMAGEDIR = os.path.join(topPath, 'images')
+
+TEMPDIR = tempfile.gettempdir()
 
 GLADEMAIN = os.path.join(GLADEDIR, "MainWindow.glade")
 GLADELOG = os.path.join(GLADEDIR, "LogDialog.glade")
