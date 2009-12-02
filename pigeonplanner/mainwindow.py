@@ -44,56 +44,9 @@ from pedigreewindow import PedigreeWindow
 
 
 class MainWindow:
-
     def __init__(self, options):
         self.wTree = gtk.glade.XML(const.GLADEMAIN)
-
-        signalDic = { 'on_save_clicked'          : self.save_clicked,
-                      'on_cancel_clicked'        : self.cancel_clicked,
-                      'on_widget_enter'          : self.widget_enter,
-                      'on_widget_leave'          : self.widget_leave,
-                      'on_sbdetail_clicked'      : self.sbdetail_clicked,
-                      'on_goto_clicked'          : self.goto_clicked,
-                      'on_addresult_clicked'     : self.addresult_clicked,
-                      'on_removeresult_clicked'  : self.removeresult_clicked,
-                      'on_editresult_clicked'    : self.editresult_clicked,
-                      'on_editapply_clicked'     : self.editapply_clicked,
-                      'on_resultcancel_clicked'  : self.resultcancel_clicked,
-                      'on_allresults_clicked'    : self.allresults_clicked,
-                      'on_filedialog_selection'  : self.filedialog_selection,
-                      'on_fcopen_clicked'        : self.fcopen_clicked,
-                      'on_fccancel_clicked'      : self.fccancel_clicked,
-                      'on_rangeadd_clicked'      : self.rangeadd_clicked,
-                      'on_rangecancel_clicked'   : self.rangecancel_clicked,
-                      'on_srchentry_changed'     : self.srchentry_changed,
-                      'on_search_clicked'        : self.search_clicked,
-                      'on_srchclose_clicked'     : self.srchclose_clicked,
-                      'on_eventbox_press'        : self.eventbox_press,
-                      'on_eventimage_press'      : self.eventimage_press,
-                      'on_treeview_press'        : self.treeview_press,
-                      'on_tvResults_press'       : self.tvResults_press,
-                      'on_tvBrothers_press'      : self.tvBrothers_press,
-                      'on_tvHalfBrothers_press'  : self.tvHalfBrothers_press,
-                      'on_tvOffspring_press'     : self.tvOffspring_press,
-                      'on_findsire_clicked'      : self.findsire_clicked,
-                      'on_finddam_clicked'       : self.finddam_clicked,
-                      'on_findcancel_clicked'    : self.findcancel_clicked,
-                      'on_findadd_clicked'       : self.findadd_clicked,
-                      'on_calbutton_clicked'     : self.calbutton_clicked,
-                      'on_calapply_clicked'      : self.calapply_clicked,
-                      'on_calcancel_clicked'     : self.calcancel_clicked,
-                      'on_day_selected'          : self.day_selected,
-                      'on_day_double_clicked'    : self.day_double_clicked,
-                      'on_button_top_clicked'    : self.button_top_clicked,
-                      'on_button_up_clicked'     : self.button_up_clicked,
-                      'on_button_down_clicked'   : self.button_down_clicked,
-                      'on_button_bottom_clicked' : self.button_bottom_clicked,
-                      'on_spinPlaced_changed'    : self.spinPlaced_changed,
-                      'on_albumclose_clicked'    : self.albumclose_clicked,
-                      'on_iconview_changed'      : self.iconview_changed,
-                      'on_dialog_delete'         : self.dialog_delete,
-                      'on_main_destroy'          : self.quit_program}
-        self.wTree.signal_autoconnect(signalDic)
+        self.wTree.signal_autoconnect(self)
 
         for widget in self.wTree.get_widget_prefix(''):
             name = widget.get_name()
@@ -213,7 +166,7 @@ class MainWindow:
 
         gtk.main_quit()
 
-    def dialog_delete(self, widget, event):
+    def on_dialog_delete(self, widget, event):
         widget.hide()
         return True
 
@@ -228,14 +181,14 @@ class MainWindow:
         else:
             logger.info("End: Already running the latest version")
 
-    def widget_enter(self, widget, event):
+    def on_widget_enter(self, widget, event):
         for con_id in self.statusmsgs.values():
             self.statusmsg.pop_message(con_id[0])
 
         self.statusmsg.push_message(self.statusmsgs[widget.get_name()][0],
                                     self.statusmsgs[widget.get_name()][1])
 
-    def widget_leave(self, widget, event):
+    def on_widget_leave(self, widget, event):
         self.statusmsg.pop_message(self.statusmsgs[widget.get_name()][0])
 
     # Menu callbacks
@@ -365,7 +318,7 @@ class MainWindow:
             self.treeview.set_cursor(path)
 
     def menupedigree_activate(self, widget):
-        self.sbdetail_clicked(None)
+        self.on_sbdetail_clicked(None)
 
     def menuaddresult_activate(self, widget):
         self.notebook.set_current_page(2)
@@ -429,7 +382,7 @@ class MainWindow:
         widgets.about_dialog(self.main)
 
     # range callbacks
-    def rangeadd_clicked(self, widget):
+    def on_rangeadd_clicked(self, widget):
         rangefrom = self.entryRangeFrom.get_text()
         rangeto = self.entryRangeTo.get_text()
         rangeyear = self.entryRangeYear.get_text()
@@ -466,17 +419,17 @@ class MainWindow:
 
         self.rangedialog.hide()
 
-    def rangecancel_clicked(self, widget):
+    def on_rangecancel_clicked(self, widget):
         self.rangedialog.hide()
 
     # Search dialog callbacks
-    def srchentry_changed(self, widget):
+    def on_srchentry_changed(self, widget):
         if widget.get_text():
             self.search.set_sensitive(True)
         else:
             self.search.set_sensitive(False)
 
-    def search_clicked(self, widget):
+    def on_search_clicked(self, widget):
         keyword = self.srchentry.get_text()
 
         try:
@@ -487,7 +440,7 @@ class MainWindow:
         if show:
             self.search_pigeon(None, pindex)
 
-    def srchclose_clicked(self, widget):
+    def on_srchclose_clicked(self, widget):
         self.searchdialog.hide()
 
     # Main treeview callbacks
@@ -511,7 +464,7 @@ class MainWindow:
             liststore.set_sort_column_id(0, gtk.SORT_DESCENDING)
             liststore.set_sort_column_id(1, gtk.SORT_DESCENDING)
 
-    def treeview_press(self, widget, event):
+    def on_treeview_press(self, widget, event):
         path, focus = self.treeview.get_cursor()
 
         if event.button == 3 and path:
@@ -522,12 +475,12 @@ class MainWindow:
             widgets.popup_menu(event, entries)
 
     # Navigation arrows callbacks
-    def button_top_clicked(self, widget):
+    def on_button_top_clicked(self, widget):
         if len(self.liststore) > 0:
             path = (0,)
             self.treeview.set_cursor(path)
 
-    def button_up_clicked(self, widget):
+    def on_button_up_clicked(self, widget):
         path, focus = self.treeview.get_cursor()
 
         try:
@@ -538,7 +491,7 @@ class MainWindow:
         except TypeError:
             pass
 
-    def button_down_clicked(self, widget):
+    def on_button_down_clicked(self, widget):
         path, focus = self.treeview.get_cursor()
 
         try:
@@ -549,13 +502,13 @@ class MainWindow:
         except TypeError:
             pass
 
-    def button_bottom_clicked(self, widget):
+    def on_button_bottom_clicked(self, widget):
         if len(self.liststore) > 0:
             path = (len(self.liststore)-1,)
             self.treeview.set_cursor(path)
 
     # Add/Edit callbacks
-    def save_clicked(self, widget):
+    def on_save_clicked(self, widget):
         if not checks.check_entrys(self.entrysToCheck): return
 
         if self.operation == 'edit':
@@ -565,11 +518,11 @@ class MainWindow:
 
         self.add_edit_finish()
 
-    def cancel_clicked(self, widget):
+    def on_cancel_clicked(self, widget):
         self.add_edit_finish(True)
 
     # Image callbacks
-    def eventbox_press(self, widget, event):
+    def on_eventbox_press(self, widget, event):
         try:
             pindex, ring, year = self.get_main_ring()
         except TypeError:
@@ -580,7 +533,7 @@ class MainWindow:
         if image:
             widgets.ImageWindow(image, self.main)
 
-    def eventimage_press(self, widget, event):
+    def on_eventimage_press(self, widget, event):
         if event.button == 3:
             entries = [
                 (gtk.STOCK_ADD, self.open_filedialog, None),
@@ -590,7 +543,7 @@ class MainWindow:
         else:
             self.open_filedialog()
 
-    def fcopen_clicked(self, widget):
+    def on_fcopen_clicked(self, widget):
         self.imageToAdd = None
         filename = self.filedialog.get_filename()
         try:
@@ -603,11 +556,11 @@ class MainWindow:
 
         self.filedialog.hide()
 
-    def fccancel_clicked(self, widget):
+    def on_fccancel_clicked(self, widget):
         self.filedialog.hide()
 
     # Pedigree callbacks
-    def sbdetail_clicked(self, widget):
+    def on_sbdetail_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
 
         pigeoninfo = {'pindex': pindex, 'ring': ring, 'year': year,
@@ -623,7 +576,7 @@ class MainWindow:
 
         PedigreeWindow(self, pigeoninfo)
 
-    def goto_clicked(self, widget):
+    def on_goto_clicked(self, widget):
         children = []
         children.extend(self.tableSire.get_children())
         children.extend(self.tableDam.get_children())
@@ -641,13 +594,13 @@ class MainWindow:
                 break
 
     # Relatives callbacks
-    def tvBrothers_press(self, widget, event):
+    def on_tvBrothers_press(self, widget, event):
         self.treeview_menu(self.selBrothers, event)
 
-    def tvHalfBrothers_press(self, widget, event):
+    def on_tvHalfBrothers_press(self, widget, event):
         self.treeview_menu(self.selHalfBrothers, event)
 
-    def tvOffspring_press(self, widget, event):
+    def on_tvOffspring_press(self, widget, event):
         self.treeview_menu(self.selOffspring, event)
 
     def treeview_menu(self, selection, event):
@@ -660,17 +613,17 @@ class MainWindow:
             self.search_pigeon(None, pindex)
 
     # Result callbacks
-    def tvResults_press(self, widget, event):
+    def on_tvResults_press(self, widget, event):
         path, focus = self.tvResults.get_cursor()
 
         if event.button == 3 and path:
             entries = [
-                (gtk.STOCK_EDIT, self.editresult_clicked, None),
-                (gtk.STOCK_REMOVE, self.removeresult_clicked, None)]
+                (gtk.STOCK_EDIT, self.on_editresult_clicked, None),
+                (gtk.STOCK_REMOVE, self.on_removeresult_clicked, None)]
 
             widgets.popup_menu(event, entries)
 
-    def addresult_clicked(self, widget):
+    def on_addresult_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
         try:
             date, point, place, out, sector = self.get_resultdata()
@@ -699,7 +652,7 @@ class MainWindow:
 
         self.lsResult.append([date, point, place, out, cof, sector])
 
-    def removeresult_clicked(self, widget):
+    def on_removeresult_clicked(self, widget):
         path, focus = self.tvResults.get_cursor()
         model, tIter = self.selResults.get_selected()
         pindex, ring, year = self.get_main_ring()
@@ -715,7 +668,7 @@ class MainWindow:
         if len(self.lsResult) > 0:
             self.tvResults.set_cursor(path)
 
-    def editresult_clicked(self, widget):
+    def on_editresult_clicked(self, widget):
         date, point, place, out, sector = self.get_selected_result()
         self.entryDate.set_text(date)
         self.cbRacepoint.child.set_text(point)
@@ -731,7 +684,7 @@ class MainWindow:
 
         self.editResultMode = True
 
-    def editapply_clicked(self, widget):
+    def on_editapply_clicked(self, widget):
         pindex, ring, year = self.get_main_ring()
         try:
             date, point, place, out, sector = self.get_resultdata()
@@ -746,9 +699,9 @@ class MainWindow:
                                      self.get_result_id(pindex, self.get_selected_result())))
 
         self.get_results(pindex)
-        self.resultcancel_clicked(None)
+        self.on_resultcancel_clicked(None)
 
-    def resultcancel_clicked(self, widget):
+    def on_resultcancel_clicked(self, widget):
         self.entryDate.set_text('')
         self.cbRacepoint.child.set_text('')
         self.spinPlaced.set_value(1)
@@ -763,22 +716,22 @@ class MainWindow:
 
         self.editResultMode = False
 
-    def allresults_clicked(self, widget):
+    def on_allresults_clicked(self, widget):
         ResultWindow(self.main, self.parser.pigeons, self.database)
 
-    def spinPlaced_changed(self, widget):
+    def on_spinPlaced_changed(self, widget):
         self.spinOutof.set_range(widget.get_value_as_int(), widget.get_range()[1])
 
     # Find parent callbacks
-    def findsire_clicked(self, widget):
+    def on_findsire_clicked(self, widget):
         self.search = 'sire'
         self.fill_find_treeview('0', self.entryRing1.get_text(), self.entryYear1.get_text())
 
-    def finddam_clicked(self, widget):
+    def on_finddam_clicked(self, widget):
         self.search = 'dam'
         self.fill_find_treeview('1', self.entryRing1.get_text(), self.entryYear1.get_text())
 
-    def findadd_clicked(self, widget):
+    def on_findadd_clicked(self, widget):
         model, path = self.selectionfind.get_selected()
         if not path: return
 
@@ -795,11 +748,11 @@ class MainWindow:
 
         self.finddialog.hide()
 
-    def findcancel_clicked(self, widget):
+    def on_findcancel_clicked(self, widget):
         self.finddialog.hide()
 
     # Calendar callbacks
-    def calbutton_clicked(self, widget):
+    def on_calbutton_clicked(self, widget):
         self.position_popup()
 
         self.savedDate = self.entryDate.get_text()
@@ -812,15 +765,15 @@ class MainWindow:
         self.calpopup.show()
         self.calpopup.grab_focus()
 
-    def calapply_clicked(self, widget):
+    def on_calapply_clicked(self, widget):
         self.hide_popup()
 
-    def calcancel_clicked(self, widget):
+    def on_calcancel_clicked(self, widget):
         self.entryDate.set_text(self.savedDate)
 
         self.hide_popup()
 
-    def day_selected(self, widget):
+    def on_day_selected(self, widget):
         year, month, day = self.calendar.get_date()
         month += 1        
         the_date = datetime.date(year, month, day)
@@ -830,15 +783,15 @@ class MainWindow:
         else:
             self.entryDate.set_text('')
 
-    def day_double_clicked(self, widget, data=None):
+    def on_day_double_clicked(self, widget, data=None):
         self.hide_popup()
 
     # Photo album callbacks
-    def albumclose_clicked(self, widget):
+    def on_albumclose_clicked(self, widget):
         self.image.clear()
         self.photoalbum.hide()
 
-    def iconview_changed(self, widget):
+    def on_iconview_changed(self, widget):
         model = widget.get_model()
         try:
             path = widget.get_selected_items()[0]
@@ -1112,7 +1065,7 @@ class MainWindow:
 
         self.empty_entryboxes()
         if self.editResultMode:
-            self.resultcancel_clicked(None)
+            self.on_resultcancel_clicked(None)
 
         if path:
             widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
@@ -1482,7 +1435,7 @@ class MainWindow:
 
         self.filedialog.show()
 
-    def filedialog_selection(self, widget):
+    def on_filedialog_selection(self, widget):
         '''
         Update the image preview in the filechooser dialog
         '''

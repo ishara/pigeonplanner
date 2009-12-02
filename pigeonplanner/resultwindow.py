@@ -26,18 +26,7 @@ from printing import PrintResults
 class ResultWindow:
     def __init__(self, mainwindow, pigeons, database):
         self.wTree = gtk.glade.XML(const.GLADERESULT)
-
-        signalDic = { 'on_cbYearRace_changed'    : self.cbYearRace_changed,
-                      'on_cbPigeon_changed'      : self.cbPigeon_changed,
-                      'on_cbYearPigeons_changed' : self.cbYearPigeons_changed,
-                      'on_cbRacepoint_changed'   : self.cbRacepoint_changed,
-                      'on_cbSector_changed'      : self.cbSector_changed,
-                      'on_sbCoefficient_changed' : self.sbCoefficient_changed,
-                      'on_sbPlace_changed'       : self.sbPlace_changed,
-                      'on_print_clicked'         : self.print_clicked,
-                      'on_close_clicked'         : self.close,
-                      'on_dialog_delete'         : self.close}
-        self.wTree.signal_autoconnect(signalDic)
+        self.wTree.signal_autoconnect(self)
 
         for w in self.wTree.get_widget_prefix(''):
             name = w.get_name()
@@ -82,7 +71,7 @@ class ResultWindow:
         self.treeviewres.append_column(column5)
         self.treeviewres.append_column(column6)
 
-        self.column7.connect('clicked', self.column7_clicked)
+        self.column7.connect('clicked', self.on_column7_clicked)
 
         self.block_handler = False
 
@@ -100,10 +89,10 @@ class ResultWindow:
 
         self.resultwindow.show()
 
-    def close(self, widget, event=None):
+    def on_close_window(self, widget, event=None):
         self.resultwindow.destroy()
 
-    def print_clicked(self, widget):
+    def on_print_clicked(self, widget):
         results = []
         for item in self.liststore:
             date = self.liststore.get_value(item.iter, 0)
@@ -118,7 +107,7 @@ class ResultWindow:
 
         PrintResults(results, self.yearpigeon, self.yearrace, self.racepoint, self.sector, self.coef, self.place)
 
-    def column7_clicked(self, column):
+    def on_column7_clicked(self, column):
         treeview = column.get_tree_view()
         liststore = treeview.get_model()
 
@@ -129,31 +118,31 @@ class ResultWindow:
             liststore.set_sort_column_id(7, gtk.SORT_DESCENDING)
             self.column8.set_sort_order(gtk.SORT_ASCENDING)
 
-    def cbPigeon_changed(self, widget):
+    def on_cbPigeon_changed(self, widget):
         self.pigeon = widget.get_active_text()
         self.set_results()
 
-    def cbYearRace_changed(self, widget):
+    def on_cbYearRace_changed(self, widget):
         self.yearrace = widget.get_active_text()
         self.set_results()
 
-    def cbYearPigeons_changed(self, widget):
+    def on_cbYearPigeons_changed(self, widget):
         self.yearpigeon = widget.get_active_text()
         self.set_results()
 
-    def cbRacepoint_changed(self, widget):
+    def on_cbRacepoint_changed(self, widget):
         self.racepoint = widget.get_active_text()
         self.set_results()
 
-    def cbSector_changed(self, widget):
+    def on_cbSector_changed(self, widget):
         self.sector = widget.get_active_text()
         self.set_results()
 
-    def sbCoefficient_changed(self, widget):
+    def on_sbCoefficient_changed(self, widget):
         self.coef = widget.get_value_as_int()
         self.set_results()
 
-    def sbPlace_changed(self, widget):
+    def on_sbPlace_changed(self, widget):
         self.place = widget.get_value_as_int()
         self.set_results()
 

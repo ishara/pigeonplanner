@@ -12,7 +12,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="icon">../images/icon_logo.png</property>
     <property name="skip_taskbar_hint">True</property>
-    <signal name="delete_event" handler="on_dialog_delete"/>
+    <signal name="delete_event" handler="on_close_dialog"/>
     <child>
       <widget class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
@@ -45,7 +45,7 @@
               <widget class="GtkToolButton" id="close">
                 <property name="visible">True</property>
                 <property name="stock_id">gtk-close</property>
-                <signal name="clicked" handler="on_close_clicked"/>
+                <signal name="clicked" handler="on_close_dialog"/>
               </widget>
               <packing>
                 <property name="expand">False</property>

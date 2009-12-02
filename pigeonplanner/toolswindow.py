@@ -36,29 +36,7 @@ from printing import PrintVelocity
 class ToolsWindow:
     def __init__(self, main):
         self.wTree = gtk.glade.XML(const.GLADETOOLS)
-
-        signalDic = { 'on_makebackup_clicked'    : self.makebackup_clicked,
-                      'on_restorebackup_clicked' : self.restorebackup_clicked,
-                      'on_sbbegin_changed'       : self.sbbegin_changed,
-                      'on_sbminute_changed'      : self.sbminute_changed,
-                      'on_calculate_clicked'     : self.calculate_clicked,
-                      'on_printcalc_clicked'     : self.printcalc_clicked,
-                      'on_btnupdate_clicked'     : self.btnupdate_clicked,
-                      'on_cbdata_changed'        : self.cbdata_changed,
-                      'on_dataremove_clicked'    : self.dataremove_clicked,
-                      'on_dataadd_clicked'       : self.dataadd_clicked,
-                      'on_entryData_changed'     : self.entryData_changed,
-                      'on_adadd_clicked'         : self.adadd_clicked,
-                      'on_adedit_clicked'        : self.adedit_clicked,
-                      'on_adremove_clicked'      : self.adremove_clicked,
-                      'on_btnadd_clicked'        : self.btnadd_clicked,
-                      'on_btncancel_clicked'     : self.btncancel_clicked,
-                      'on_btnsearchdb_clicked'   : self.btnsearchdb_clicked,
-                      'on_dboptimize_clicked'    : self.dboptimize_clicked,
-                      'on_dbremove_clicked'      : self.dbremove_clicked,
-                      'on_window_delete'         : self.close_clicked,
-                      'on_close_clicked'         : self.close_clicked }
-        self.wTree.signal_autoconnect(signalDic)
+        self.wTree.signal_autoconnect(self)
 
         for w in self.wTree.get_widget_prefix(''):
             wname = w.get_name()
@@ -122,7 +100,7 @@ class ToolsWindow:
 
         self.toolsdialog.show()
 
-    def close_clicked(self, widget=None, event=None):
+    def on_close_dialog(self, widget=None, event=None):
         self.toolsdialog.destroy()
 
     def selection_changed(self, selection):
@@ -135,19 +113,19 @@ class ToolsWindow:
             pass
 
     # Velocity
-    def sbbegin_changed(self, widget):
+    def on_sbbegin_changed(self, widget):
         spinmin = widget.get_value_as_int()
         spinmax = widget.get_range()[1]
 
         self.sbend.set_range(spinmin, spinmax)
 
-    def sbminute_changed(self, widget):
+    def on_sbminute_changed(self, widget):
         value = widget.get_value_as_int()
 
         if value >= 0 and value < 10:
             widget.set_text('0%s' %value)
 
-    def calculate_clicked(self, widget):
+    def on_calculate_clicked(self, widget):
         self.ls_velocity.clear()
 
         begin = self.sbbegin.get_value_as_int()
@@ -162,7 +140,7 @@ class ToolsWindow:
             self.ls_velocity.append([velocity, datetime.timedelta(minutes=timeInMinutes), datetime.timedelta(minutes=arrivalInMinutes)])
             velocity += 50
 
-    def printcalc_clicked(self, widget):
+    def on_printcalc_clicked(self, widget):
         data = []
         for row in self.ls_velocity:
             velocity, flight, arrival = self.ls_velocity.get(row.iter, 0, 1, 2)
@@ -176,7 +154,7 @@ class ToolsWindow:
             PrintVelocity(self.main.main, data, info)
 
     # Data
-    def cbdata_changed(self, widget):
+    def on_cbdata_changed(self, widget):
         datatype = widget.get_active_text()
         self.fill_item_combo(datatype)
 
@@ -214,7 +192,7 @@ class ToolsWindow:
         else:
             self.dataremove.set_sensitive(False)
 
-    def dataremove_clicked(self, widget):
+    def on_dataremove_clicked(self, widget):
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
 
@@ -235,7 +213,7 @@ class ToolsWindow:
             self.cbitems.remove_text(index)
             self.cbitems.set_active(0)
 
-    def dataadd_clicked(self, widget):
+    def on_dataadd_clicked(self, widget):
         datatype = self.cbdata2.get_active_text()
         item = (self.entryData.get_text(), )
 
@@ -255,7 +233,7 @@ class ToolsWindow:
         if datatype == self.cbdata.get_active_text():
             self.fill_item_combo(datatype)
 
-    def entryData_changed(self, widget):
+    def on_entryData_changed(self, widget):
         if len(widget.get_text()) > 0:
             self.dataadd.set_sensitive(True)
         else:
@@ -303,21 +281,21 @@ class ToolsWindow:
         self.adentrymail.set_text(data[7])
         self.adentrycomment.set_text(data[8])
 
-    def adadd_clicked(self, widget, pedigree_call=False):
+    def on_adadd_clicked(self, widget, pedigree_call=False):
         self.pedigree_call = pedigree_call
 
         self.admode = 'add'
 
         self.start_add()
 
-    def adedit_clicked(self, widget):
+    def on_adedit_clicked(self, widget):
         self.pedigree_call = False
 
         self.admode = 'edit'
 
         self.start_add()
 
-    def btnadd_clicked(self, widget):
+    def on_btnadd_clicked(self, widget):
         data = self.get_entry_data()
 
         if not data[0]:
@@ -339,7 +317,7 @@ class ToolsWindow:
 
         self.finish_add()
 
-    def btncancel_clicked(self, widget):
+    def on_btncancel_clicked(self, widget):
         self.finish_add()
 
     def start_add(self):
@@ -379,7 +357,7 @@ class ToolsWindow:
         if self.pedigree_call:
             self.toolsdialog.destroy()
 
-    def adremove_clicked(self, widget):
+    def on_adremove_clicked(self, widget):
         if not widgets.message_dialog('warning', messages.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
             return
 
@@ -437,7 +415,7 @@ class ToolsWindow:
             entry.set_text('')
 
     # Statistics
-    def btnsearchdb_clicked(self, widget):
+    def on_btnsearchdb_clicked(self, widget):
         cocks = 0
         hens = 0
         ybirds = 0
@@ -467,13 +445,13 @@ class ToolsWindow:
             self.ls_stats.append([item, items[item]])
 
     # Database
-    def dboptimize_clicked(self, widget):
+    def on_dboptimize_clicked(self, widget):
         self.toolsdialog.set_sensitive(False)
         self.main.database.optimize_db()
         self.toolsdialog.set_sensitive(True)
         widgets.message_dialog('info', messages.MSG_OPTIMIZE_FINISH, self.toolsdialog)
 
-    def dbremove_clicked(self, widget):
+    def on_dbremove_clicked(self, widget):
         if widgets.message_dialog('warning', messages.MSG_REMOVE_DATABASE, self.toolsdialog):
             logger.debug("Start deleting the database")
             try:
@@ -486,14 +464,14 @@ class ToolsWindow:
                 self.main.quit_program(backup=False)
 
     # Backup
-    def makebackup_clicked(self, widget):
+    def on_makebackup_clicked(self, widget):
         if self.fcButtonCreate.get_current_folder():
             if backup.make_backup(folder):
                 widgets.message_dialog('info', messages.MSG_BACKUP_SUCCES, self.main.main)
             else:
                 widgets.message_dialog('info', messages.MSG_BACKUP_FAILED, self.main.main)
 
-    def restorebackup_clicked(self, widget):
+    def on_restorebackup_clicked(self, widget):
         if self.fcButtonRestore.get_filename():
             if backup.restore_backup(zipfile):
                 widgets.message_dialog('info', messages.MSG_RESTORE_SUCCES, self.main.main)
@@ -501,7 +479,7 @@ class ToolsWindow:
                 widgets.message_dialog('info', messages.MSG_RESTORE_FAILED, self.main.main)
 
     # Update
-    def btnupdate_clicked(self, widget):
+    def on_btnupdate_clicked(self, widget):
         gobject.idle_add(self.update_check)
 
     def update_check(self):

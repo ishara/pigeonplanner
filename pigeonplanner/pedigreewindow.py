@@ -41,11 +41,7 @@ class PedigreeWindow:
         ''' 
 
         self.wTree = gtk.glade.XML(const.GLADEPEDIGREE)
-
-        signalDic = { 'on_print_clicked'     : self.print_clicked,
-                      'on_dialog_delete'     : self.close_clicked,
-                      'on_close_clicked'     : self.close_clicked }
-        self.wTree.signal_autoconnect(signalDic)
+        self.wTree.signal_autoconnect(self)
 
         for w in self.wTree.get_widget_prefix(''):
             wname = w.get_name()
@@ -71,10 +67,10 @@ class PedigreeWindow:
                                 self, self.main.options.optionList.language)
         self.dp.draw_pedigree()
 
-    def close_clicked(self, widget=None, event=None):
+    def on_close_dialog(self, widget=None, event=None):
         self.pedigreewindow.destroy()
 
-    def print_clicked(self, widget):
+    def on_print_clicked(self, widget):
         userinfo = {'name': '', 'street': '', 'code': '', 'city': '', 'phone': ''}
 
         for address in self.main.database.get_all_addresses():

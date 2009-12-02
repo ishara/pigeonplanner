@@ -32,14 +32,7 @@ import messages
 class OptionsDialog:
     def __init__(self, main):
         self.wTree = gtk.glade.XML(const.GLADEOPTIONS)
-
-        signalDic = { 'on_chkBackup_toggled': self.chkBackup_toggled,
-                      'on_sbDay_changed'    : self.sbDay_changed,
-                      'on_cancel_clicked'   : self.cancel_clicked,
-                      'on_ok_clicked'       : self.ok_clicked,
-                      'on_default_clicked'  : self.default_clicked,
-                      'on_dialog_delete'    : self.close_clicked}
-        self.wTree.signal_autoconnect(signalDic)
+        self.wTree.signal_autoconnect(self)
 
         for w in self.wTree.get_widget_prefix(''):
             name = w.get_name()
@@ -110,16 +103,16 @@ class OptionsDialog:
         self.sbDay.set_value(self.opt.optionList.interval)
         self.fcbutton.set_current_folder(self.opt.optionList.location)
 
-    def close_clicked(self, widget, event=None):
+    def on_close_dialog(self, widget, event=None):
         self.optionsdialog.destroy()
 
-    def cancel_clicked(self, widget):
+    def on_cancel_clicked(self, widget):
         self.optionsdialog.destroy()
 
-    def chkBackup_toggled(self, widget):
+    def on_chkBackup_toggled(self, widget):
         self.alignbackup.set_sensitive(widget.get_active())
 
-    def sbDay_changed(self, widget):
+    def on_sbDay_changed(self, widget):
         value = widget.get_value_as_int()
 
         dstring = _("days")
@@ -128,7 +121,7 @@ class OptionsDialog:
 
         widget.set_text('%s %s' % (value, dstring))
 
-    def default_clicked(self, widget):
+    def on_default_clicked(self, widget):
         if widgets.message_dialog('warning', messages.MSG_DEFAULT_OPTIONS, self.optionsdialog):
             self.opt.write_default()
             self.opt = options.GetOptions()
@@ -136,7 +129,7 @@ class OptionsDialog:
 
             self.finish_options(True)
 
-    def ok_clicked(self, widget):
+    def on_ok_clicked(self, widget):
         dic = {"Options" : {'theme': self.cbThemes.get_active(),
                             'arrows': str(self.chkArrows.get_active()),
                             'toolbar': str(self.chkToolbar.get_active()),
