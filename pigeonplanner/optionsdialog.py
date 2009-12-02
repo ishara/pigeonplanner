@@ -135,7 +135,8 @@ class OptionsDialog:
                             'toolbar': str(self.chkToolbar.get_active()),
                             'statusbar': str(self.chkStatusbar.get_active()),
                             'update': str(self.chkUpdate.get_active()),
-                            'language': self.languagelookup[self.cbLang.get_active()][1]
+                            'language': self.languagelookup[self.cbLang.get_active()][1],
+                            'runs': self.opt.optionList.runs
                            },
                "Backup" : {'backup': str(self.chkBackup.get_active()),
                            'interval': self.sbDay.get_value_as_int(),

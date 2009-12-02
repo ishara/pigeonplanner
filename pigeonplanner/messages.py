@@ -16,6 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+MSG_MAKE_DONATION = (_("Go to the website?"),
+                     _("Pigeon Planner is free software. You don’t need to pay for using it. But if you like it, please consider donating to help improving it."),
+                     _("Make a donation"))
+
 MSG_INVALID_IMAGE = (_("Invalid image!"),
                      _("This image is either not supported or corrupt, please choose another one."),
                      _("Error"))

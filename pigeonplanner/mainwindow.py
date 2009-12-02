@@ -143,6 +143,12 @@ class MainWindow:
             attr = getattr(self, wname)
             attr.set_tooltip_text(data[1])
 
+        if self.options.optionList.runs == 10:
+            if widgets.message_dialog('question', messages.MSG_MAKE_DONATION, self.main):
+                webbrowser.open(const.WEBSITE)
+
+            self.options.set_option('Options', 'runs', self.options.optionList.runs+1)
+
         if self.options.optionList.update:
             logger.info("Start: Auto check for updates")
             updatethread = Thread(group=None, target=self.search_updates, name=None)
@@ -163,6 +169,9 @@ class MainWindow:
                     widgets.message_dialog('info', messages.MSG_BACKUP_FAILED, self.main)
 
                 self.options.set_option('Backup', 'last', time.time())
+
+        if self.options.optionList.runs < 10:
+            self.options.set_option('Options', 'runs', self.options.optionList.runs+1)
 
         gtk.main_quit()
 
