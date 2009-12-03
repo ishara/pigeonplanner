@@ -224,16 +224,17 @@ class MainWindow:
         self.searchdialog.show()
 
     def menualbum_activate(self, widget):
-        store = gtk.ListStore(str, str, gtk.gdk.Pixbuf)
+        store = gtk.ListStore(str, str, str, gtk.gdk.Pixbuf)
+        store.set_sort_column_id(0, gtk.SORT_ASCENDING)
         self.iconview.set_model(store)
-        self.iconview.set_text_column(1)
-        self.iconview.set_pixbuf_column(2)
+        self.iconview.set_text_column(2)
+        self.iconview.set_pixbuf_column(3)
 
         for pigeon in self.database.get_all_images():
             if not pigeon[3]: continue
 
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(pigeon[3], 96, 96)
-            store.append([pigeon[0], "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
+            store.append(["%s%s" %(pigeon[2], pigeon[1]), pigeon[0], "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
 
         self.photoalbum.show()
 
@@ -814,7 +815,7 @@ class MainWindow:
             self.image.clear()
             return
 
-        pindex = model[path][0]
+        pindex = model[path][1]
         image = self.parser.pigeons[pindex].image
 
         self.image.set_from_pixbuf(gtk.gdk.pixbuf_new_from_file_at_size(image, 520, 460))
