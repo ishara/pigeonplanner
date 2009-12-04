@@ -461,7 +461,7 @@ class ToolsWindow:
             else:
                 widgets.message_dialog('info', messages.MSG_RMDB_FINISH, self.toolsdialog)
                 self.close_clicked()
-                self.main.quit_program(backup=False)
+                self.main.quit_program(bckp=False)
 
     # Backup
     def on_makebackup_clicked(self, widget):
