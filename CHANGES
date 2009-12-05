@@ -1,3 +1,11 @@
+0.6.0:
+ * Added a photo album
+ * Added option to only allow one instance of the program
+ * Added option that a donation dialog would show after 10 runs
+ * Fixed bug where automatic backup was broken
+ * Fixed bug where making backups through toolswindow was broken
+ * Code changed from signal dict to instance
+
 0.5.4:
  * Added Arabic language
  * Added option to optimize the database
