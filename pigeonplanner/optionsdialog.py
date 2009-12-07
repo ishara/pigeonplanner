@@ -159,17 +159,9 @@ class OptionsDialog:
 
         self.main.options = options.GetOptions()
 
-        if self.languagelookup[self.cbLang.get_active()][1] != self.opt.optionList.language:
+        if self.languagelookup[self.cbLang.get_active()][1] != self.opt.optionList.language or\
+           self.win32 and self.cbThemes.get_active() != self.opt.optionList.theme:
             widgets.message_dialog('info', messages.MSG_RESTART_APP, self.optionsdialog)
-
-        if self.win32 and self.cbThemes.get_active() != self.opt.optionList.theme:
-            shutil.copy(os.path.join('./share/themes', self.cbThemes.get_active_text(), 'gtk-2.0/gtkrc'),
-                                     './etc/gtk-2.0/')
-
-            gtk.rc_parse('./etc/gtk-2.0/')
-            screen = self.main.main.get_screen()
-            settings = gtk.settings_get_for_screen(screen)
-            gtk.rc_reparse_all_for_settings(settings, True)
 
         self.main.set_treeview_columns()
 

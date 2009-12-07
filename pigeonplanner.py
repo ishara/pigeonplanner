@@ -164,6 +164,12 @@ class PigeonPlanner:
                 loc = locale.getlocale()[0]
             self.logger.debug("Locale: %s" % loc)
 
+        # Set theme
+        if win32:
+            themes = os.listdir('.\\share\\themes')
+            themefile = os.path.join('.\\share\\themes', themes[self.options.optionList.theme], 'gtk-2.0\\gtkrc')
+            gtk.rc_parse(themefile)
+
     def check_pid(self, pid_file, win32):
         if not os.path.isfile(pid_file):
             return
