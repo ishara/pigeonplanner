@@ -1323,11 +1323,11 @@ class MainWindow:
         imageTemp = ''
 
         try:
-            imageTemp = self.database.get_image(self.entryRing1.get_text())
+            imageTemp = self.database.get_image(self.entryRing1.get_text()+self.entryYear1.get_text())
         except:
             pass
 
-        if imageTemp and not self.imageDeleted == True:
+        if imageTemp and not self.imageDeleted:
             image = imageTemp
         else:
             image = self.imageToAdd

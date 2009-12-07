@@ -186,9 +186,9 @@ class DatabaseOperations:
         else:
             return None
 
-    def get_image(self, band):
+    def get_image(self, pindex):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT image FROM Pigeons WHERE pindex=?', (band,))
+        cursor.execute('SELECT image FROM Pigeons WHERE pindex=?', (pindex,))
         data = cursor.fetchone()[0]
         conn.close()
         return data

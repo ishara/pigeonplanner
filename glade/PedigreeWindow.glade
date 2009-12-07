@@ -1287,7 +1287,7 @@
               <widget class="GtkLabel" id="label2">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">Band No.</property>
+                <property name="label" translatable="yes">Band no.</property>
               </widget>
             </child>
             <child>
