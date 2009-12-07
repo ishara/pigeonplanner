@@ -216,6 +216,11 @@ class PigeonPlanner:
         print trace.getvalue()
         logdialog.LogDialog()
 
+        try:
+            os.remove(join(const.TEMPDIR, 'pigeonplanner.pid'))
+        except:
+            pass
+
 if __name__ == "__main__":
     app = PigeonPlanner()
 
