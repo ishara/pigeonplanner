@@ -18,7 +18,6 @@
 
 import os
 import sys
-import shutil
 
 import gtk
 import gtk.glade
