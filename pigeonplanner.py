@@ -217,7 +217,7 @@ class PigeonPlanner:
         logdialog.LogDialog()
 
         try:
-            os.remove(join(const.TEMPDIR, 'pigeonplanner.pid'))
+            os.remove(os.path.join(const.TEMPDIR, 'pigeonplanner.pid'))
         except:
             pass
 
