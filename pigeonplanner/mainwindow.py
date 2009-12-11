@@ -656,7 +656,7 @@ class MainWindow:
 
         cof = (float(place)/float(out))*100
 
-        data = (pindex, date, point, place, out, sector)
+        data = (pindex, date, point, place, out, sector, '', '', '', '', '')
         self.database.insert_result(data)
 
         self.database.insert_racepoint((point, ))

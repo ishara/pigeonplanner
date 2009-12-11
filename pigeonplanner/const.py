@@ -60,6 +60,7 @@ GLADEOPTIONS = os.path.join(GLADEDIR, "OptionsDialog.glade")
 GLADEPEDIGREE = os.path.join(GLADEDIR, "PedigreeWindow.glade")
 GLADERESULT = os.path.join(GLADEDIR, "ResultWindow.glade")
 GLADETOOLS = os.path.join(GLADEDIR, "ToolsWindow.glade")
+GLADEASSIST = os.path.join(GLADEDIR, "DBAssistant.glade")
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')

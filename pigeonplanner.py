@@ -170,6 +170,25 @@ class PigeonPlanner:
             themefile = os.path.join('.\\share\\themes', themes[self.options.optionList.theme], 'gtk-2.0\\gtkrc')
             gtk.rc_parse(themefile)
 
+        # Check database
+        import pigeonplanner.database as database
+
+        db = database.DatabaseOperations()
+
+        UPDATE_DB = False
+        db_version = db.get_db_version()
+        if db_version < 2:
+            UPDATE_DB = True
+
+        if UPDATE_DB:
+            import pigeonplanner.dbassistant as dbass
+
+            assistant = dbass.DBAssistant(db, db_version)
+            gtk.main()
+
+            if assistant.cancelled:
+                exit(0)
+
     def check_pid(self, pid_file, win32):
         if not os.path.isfile(pid_file):
             return

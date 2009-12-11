@@ -24,13 +24,15 @@ import const
 
 class DatabaseOperations:
     SCHEMA = {
+    'Version': '(Versionkey INTEGER PRIMARY KEY,'
+               ' db_version INTEGER)',
     'Pigeons': '(Pigeonskey INTEGER PRIMARY KEY,'
                ' pindex TEXT UNIQUE,'
                ' band TEXT,'
                ' year TEXT,'
                ' sex TEXT,'
                ' show INTEGER,'
-               ' alive INTEGER,'
+               ' active INTEGER,'
                ' colour TEXT,'
                ' name TEXT,'
                ' strain TEXT,'
@@ -52,7 +54,12 @@ class DatabaseOperations:
                ' point TEXT,'
                ' place INTEGER,'
                ' out INTEGER,'
-               ' sector TEXT)',
+               ' sector TEXT,'
+               ' wind TEXT,'
+               ' weather TEXT,'
+               ' put TEXT,'
+               ' back TEXT,'
+               ' comment TEXT)',
     'Addresses': '(Addresskey INTEGER PRIMARY KEY,'
                  ' name TEXT,'
                  ' street TEXT,'
@@ -67,15 +74,33 @@ class DatabaseOperations:
                ' colour TEXT UNIQUE)',
     'Racepoints': '(Racepointkey INTEGER PRIMARY KEY,'
                   ' racepoint TEXT UNIQUE,'
-                  ' xco INTEGER,'
-                  ' yco INTEGER,'
-                  ' distance INTEGER)',
+                  ' xco TEXT,'
+                  ' yco TEXT,'
+                  ' distance TEXT)',
     'Sectors': '(Sectorkey INTEGER PRIMARY KEY,'
                ' sector TEXT UNIQUE)',
     'Strains': '(Strainkey INTEGER PRIMARY KEY,'
                ' strain TEXT UNIQUE)',
     'Lofts': '(Loftkey INTEGER PRIMARY KEY,'
              ' loft TEXT UNIQUE)',
+    'Weather': '(Weatherkey INTEGER PRIMARY KEY,'
+               ' weather TEXT UNIQUE)',
+    'Wind': '(Windkey INTEGER PRIMARY KEY,'
+            ' wind TEXT UNIQUE)',
+    'Sold': '(Soldkey INTEGER PRIMARY KEY,'
+            ' pindex TEXT,'
+            ' person TEXT,'
+            ' date TEXT,'
+            ' info TEXT)',
+    'Lost': '(Lostkey INTEGER PRIMARY KEY,'
+            ' pindex TEXT,'
+            ' racepoint TEXT,'
+            ' date TEXT,'
+            ' info TEXT)',
+    'Dead': '(Deadkey INTEGER PRIMARY KEY,'
+            ' pindex TEXT,'
+            ' date TEXT,'
+            ' info TEXT)',
     }
 
     def __init__(self):
@@ -96,6 +121,61 @@ class DatabaseOperations:
         conn.text_factory = str
         cursor = conn.cursor()
         return (conn, cursor)
+
+#### Version
+    def get_db_version(self):
+        conn, cursor = self.db_connect()
+        try: 
+            cursor.execute('SELECT db_version FROM Version')
+            data = cursor.fetchone()[0]
+        except TypeError:
+            # Firstrun
+            data = 2
+        except sqlite3.OperationalError:
+            # Old database
+            data = 0
+        conn.close()
+        return data
+
+#### 
+    def insert_db_version(self, version):
+        conn, cursor = self.db_connect()
+        try:
+            cursor.execute('INSERT INTO Version VALUES (null, ?)', (version, ))
+        except sqlite3.IntegrityError:
+            pass
+        conn.commit()
+        conn.close()
+
+    def add_table_from_schema(self, table):
+        conn, cursor = self.db_connect()
+        cursor.execute("CREATE TABLE IF NOT EXISTS %s %s" %(table, self.SCHEMA[table]))
+        conn.commit()
+        conn.close()
+
+    def rename_table(self, old, new):
+        conn, cursor = self.db_connect()
+        cursor.execute("ALTER TABLE %s RENAME TO %s" %(old, new))
+        conn.commit()
+        conn.close()
+
+    def copy_table(self, frm, to):
+        conn, cursor = self.db_connect()
+        cursor.execute("INSERT INTO %s SELECT * FROM %s" %(to, frm))
+        conn.commit()
+        conn.close()
+
+    def copy_table2(self, frm, to):
+        conn, cursor = self.db_connect()
+        cursor.execute("INSERT INTO %s(Resultkey, pindex, date, point, place, out, sector) SELECT * FROM %s" %(to, frm))
+        conn.commit()
+        conn.close()
+
+    def drop_table(self, table):
+        conn, cursor = self.db_connect()
+        cursor.execute("DROP TABLE %s" %table)
+        conn.commit()
+        conn.close()
 
 #### Optimize
     def optimize_db(self):
@@ -204,7 +284,7 @@ class DatabaseOperations:
 #### Results
     def insert_result(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('INSERT INTO Results VALUES (null, ?, ?, ?, ?, ?, ?)', data)
+        cursor.execute('INSERT INTO Results VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
         conn.commit()
         conn.close()
 
