@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-04 15:26+0100\n"
-"PO-Revision-Date: 2009-12-04 15:30+0100\n"
+"POT-Creation-Date: 2009-12-11 16:25+0100\n"
+"PO-Revision-Date: 2009-12-11 16:26+0100\n"
 "Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
 "Language-Team: none <>\n"
 "MIME-Version: 1.0\n"
@@ -163,8 +163,8 @@ msgstr "Verwijder adres"
 
 #: ../pigeonplanner/messages.py:80
 #, python-format
-msgid "Removing '%s' from '%s'."
-msgstr "'%s' uit '%s' verwijderen."
+msgid "Removing '%(item)s' from '%(dataset)s'."
+msgstr "'%(item)s' uit '%(dataset)s' verwijderen."
 
 #: ../pigeonplanner/messages.py:81
 msgid "Are you sure you want to remove this item?"
@@ -202,6 +202,7 @@ msgstr "Optimaliseren is voltooid."
 #: ../pigeonplanner/messages.py:94
 #: ../pigeonplanner/messages.py:98
 #: ../pigeonplanner/messages.py:104
+#: tmp/DBAssistant.glade.h:5
 msgid "Completed!"
 msgstr "Voltooid!"
 
@@ -308,7 +309,7 @@ msgid "If there are any errors, mail the entire text to:"
 msgstr "Als er foutmeldingen zijn, mail de volledige tekst naar:"
 
 #: ../pigeonplanner/printing.py:73
-#: tmp/PedigreeWindow.glade.h:4
+#: tmp/PedigreeWindow.glade.h:7
 msgid "Pedigree of:"
 msgstr "Stamboom van:"
 
@@ -375,6 +376,7 @@ msgstr "Plaats"
 #: ../pigeonplanner/mainwindow.py:998
 #: ../pigeonplanner/mainwindow.py:1006
 #: ../pigeonplanner/mainwindow.py:1014
+#: tmp/PedigreeWindow.glade.h:1
 msgid "Band no."
 msgstr "Ringnr."
 
@@ -496,11 +498,11 @@ msgstr "Plaats"
 msgid "All"
 msgstr "Alles"
 
-#: ../pigeonplanner/optionsdialog.py:118
+#: ../pigeonplanner/optionsdialog.py:117
 msgid "days"
 msgstr "dagen"
 
-#: ../pigeonplanner/optionsdialog.py:120
+#: ../pigeonplanner/optionsdialog.py:119
 msgid "day"
 msgstr "dag"
 
@@ -533,6 +535,7 @@ msgstr "Database"
 #: ../pigeonplanner/mainwindow.py:963
 #: ../pigeonplanner/mainwindow.py:990
 #: tmp/OptionsDialog.glade.h:18
+#: tmp/PedigreeWindow.glade.h:5
 #: tmp/ToolsWindow.glade.h:35
 msgid "Name"
 msgstr "Naam"
@@ -879,6 +882,7 @@ msgstr "Jaar"
 #: ../pigeonplanner/mainwindow.py:963
 #: tmp/MainWindow.glade.h:14
 #: tmp/OptionsDialog.glade.h:11
+#: tmp/PedigreeWindow.glade.h:2
 msgid "Colour"
 msgstr "Kleur"
 
@@ -907,6 +911,62 @@ msgstr "Gem. ouder"
 #: ../pigeonplanner/mainwindow.py:1656
 msgid "Images"
 msgstr "Afbeeldingen"
+
+#: tmp/DBAssistant.glade.h:1
+msgid "<b><i><big>Update complete</big></i></b>"
+msgstr "<b><i><big>Opwaardering voltooid</big></i></b>"
+
+#: tmp/DBAssistant.glade.h:2
+msgid "<b><i><big>Update required</big></i></b>"
+msgstr "<b><i><big>Opwaardering vereist</big></i></b>"
+
+#: tmp/DBAssistant.glade.h:3
+msgid "<b><i><big>Updating database...</big></i></b>"
+msgstr "<b><i><big>Database opwaarderen...</big></i></b>"
+
+#: tmp/DBAssistant.glade.h:4
+msgid "Cleaning up..."
+msgstr "Opschonen..."
+
+#: tmp/DBAssistant.glade.h:6
+msgid "Database operations:"
+msgstr "Database bewerkingen:"
+
+#: tmp/DBAssistant.glade.h:7
+msgid "Database update"
+msgstr "Database opwaardering"
+
+#: tmp/DBAssistant.glade.h:8
+msgid "Doing the database operations..."
+msgstr "De database bewerking doen..."
+
+#: tmp/DBAssistant.glade.h:9
+msgid "Making a backup..."
+msgstr "Backup maken..."
+
+#: tmp/DBAssistant.glade.h:10
+msgid ""
+"Pigeon Planner needs to update the current database.\n"
+"\n"
+"This can take a while depending on the operation and the amount of data.\n"
+"\n"
+"\n"
+"Note: Older versions of Pigeon Planner won't work anymore."
+msgstr ""
+"Pigeon Planner moet de huidige database opwaarderen.\n"
+"\n"
+"Dit kan een tijdje duren afhankelijk van de bewerking en hoeveelheid data.\n"
+"\n"
+"\n"
+"Opmerking: Oudere versies van Pigeon Planner zullen niet meer werken."
+
+#: tmp/DBAssistant.glade.h:16
+msgid "Start"
+msgstr "Starten"
+
+#: tmp/DBAssistant.glade.h:17
+msgid "The database update is complete. Pigeon Planner will now start."
+msgstr "Het opwaarderen van de database is voltooid. Pigeon Planner zal nu starten."
 
 #: tmp/MainWindow.glade.h:2
 msgid "<b>Brothers and sisters</b>"
@@ -949,7 +1009,7 @@ msgid "Choose an image..."
 msgstr "Kies een afbeelding..."
 
 #: tmp/MainWindow.glade.h:15
-#: tmp/PedigreeWindow.glade.h:1
+#: tmp/PedigreeWindow.glade.h:3
 msgid "Dam"
 msgstr "Moeder"
 
@@ -982,7 +1042,7 @@ msgid "Names"
 msgstr "Namen"
 
 #: tmp/MainWindow.glade.h:26
-#: tmp/PedigreeWindow.glade.h:3
+#: tmp/PedigreeWindow.glade.h:6
 msgid "Pedigree"
 msgstr "Stamboom"
 
@@ -1011,7 +1071,7 @@ msgid "Search in:"
 msgstr "Zoek in:"
 
 #: tmp/MainWindow.glade.h:39
-#: tmp/PedigreeWindow.glade.h:5
+#: tmp/PedigreeWindow.glade.h:8
 msgid "Sire"
 msgstr "Vader"
 
@@ -1096,7 +1156,7 @@ msgstr "Maak een automatische backup"
 msgid "Options"
 msgstr "Opties"
 
-#: tmp/PedigreeWindow.glade.h:2
+#: tmp/PedigreeWindow.glade.h:4
 msgid "Insert a pigeon"
 msgstr "Een duif invoegen"
 
@@ -1272,14 +1332,8 @@ msgstr "Dit ben ik"
 msgid "Zipcode / City"
 msgstr "Zipcode / Stad"
 
-#~ msgid ""
-#~ "Removing item '%(item)s' from '%(dataset)s'.\n"
-#~ "\n"
-#~ "Are you sure?"
-#~ msgstr ""
-#~ "Verwijderen van '%(item)s' uit '%(dataset)s'.\n"
-#~ "\n"
-#~ "Bent u zeker?"
+#~ msgid "Removing '%s' from '%s'."
+#~ msgstr "'%s' uit '%s' verwijderen."
 #~ msgid "PP Backups"
 #~ msgstr "PP Backups"
 #~ msgid "At position:"

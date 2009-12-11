@@ -77,7 +77,7 @@ MSG_REMOVE_ADDRESS = (_("Removing '%s'"),
                       _("Are you sure you want to remove this person from your addresses?"),
                       _("Remove address"))
 
-MSG_REMOVE_ITEM = (_("Removing '%s' from '%s'."),
+MSG_REMOVE_ITEM = (_("Removing '%(item)s' from '%(dataset)s'."),
                    _("Are you sure you want to remove this item?"),
                    _("Remove item"))
 

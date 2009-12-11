@@ -1,24 +1,28 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Spanish translation for pigeonplanner
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the pigeonplanner package.
 #
-#, fuzzy
+# Timo Vanwynsberghe <timovwb at gmail dot com>, 2009.
+# Federico Vera <dktcoding at gmail dot com>
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-11 16:35+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2009-12-11 16:25+0100\n"
+"PO-Revision-Date: 2009-12-05 02:08+0200\n"
+"Last-Translator: Muhammad <oepc.org@gmail.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-11-14 01:16+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+"X-Poedit-Language: Arabic\n"
+"X-Poedit-Country: EGYPT\n"
 
 #: ../pigeonplanner/messages.py:19
 msgid "Pigeon Planner is already running."
-msgstr ""
+msgstr "البرنامج قيد التشغيل بالفعل."
 
 #: ../pigeonplanner/messages.py:21 ../pigeonplanner/messages.py:29
 #: ../pigeonplanner/messages.py:32 ../pigeonplanner/messages.py:46
@@ -28,55 +32,62 @@ msgstr ""
 #: ../pigeonplanner/messages.py:72 ../pigeonplanner/messages.py:75
 #: ../pigeonplanner/messages.py:115
 msgid "Error"
-msgstr ""
+msgstr "خطأ"
 
 #: ../pigeonplanner/messages.py:23
 msgid "Go to the website?"
-msgstr ""
+msgstr "إذهب الى الموقع الالكترونى؟"
 
 #: ../pigeonplanner/messages.py:24
-msgid "Pigeon Planner is free software. You don’t need to pay for using it. But if you like it, please consider donating to help improving it."
+msgid ""
+"Pigeon Planner is free software. You don’t need to pay for using it. But if "
+"you like it, please consider donating to help improving it."
 msgstr ""
+"برنامج إدارة الحمام هو برنامج مجانى. ولا تحتاج للدفع مقابل استخدامة.ولكن لو "
+"اعجبك البرنامج وترغب فى التبرع للمساعدة فى تطويره اكثر يمكنك ذلك."
 
 #: ../pigeonplanner/messages.py:25
 msgid "Make a donation"
-msgstr ""
+msgstr "تقديم تبرع"
 
 #: ../pigeonplanner/messages.py:27
 msgid "Invalid image!"
-msgstr ""
+msgstr "صورة غير صحيحة !"
 
 #: ../pigeonplanner/messages.py:28
-msgid "This image is either not supported or corrupt, please choose another one."
-msgstr ""
+msgid ""
+"This image is either not supported or corrupt, please choose another one."
+msgstr "هذه الصورة هي إما غير معتمد أو معطوبة ، يرجى اختيار صورة اخرى."
 
 #: ../pigeonplanner/messages.py:30
 msgid "Loading image failed!"
-msgstr ""
+msgstr "فشل فى تحميل الصورة!"
 
 #: ../pigeonplanner/messages.py:31
 msgid "Maybe you have renamed the image or moved it on your disk."
 msgstr ""
+"ربما انت قمت باعادة تسمية الصور أو قمت بنقلها أو مسحها من على قرصك الصلب."
 
 #: ../pigeonplanner/messages.py:34
-msgid "This pigeon already exists, but isn't showing. Do you want to show it again?"
-msgstr ""
+msgid ""
+"This pigeon already exists, but isn't showing. Do you want to show it again?"
+msgstr "هذه الحمامة موجودة بالفعل, ولكن لم تظهر . هل تريد إظهارها مره أخرى؟"
 
 #: ../pigeonplanner/messages.py:36 ../pigeonplanner/messages.py:39
 msgid "Warning"
-msgstr ""
+msgstr "تحذير"
 
 #: ../pigeonplanner/messages.py:37
 msgid "This pigeon already exists. Overwrite it?"
-msgstr ""
+msgstr "هذه الحمامة موجوده بالفعل . الكتابه عليها ؟"
 
 #: ../pigeonplanner/messages.py:40
 msgid "This pigeon doesn't exist. Do you want to add it?"
-msgstr ""
+msgstr "هذه الحمامة غير موجوده . هل تريد إضافتها؟"
 
 #: ../pigeonplanner/messages.py:42
 msgid "Adding pigeon"
-msgstr ""
+msgstr "إضافة حمام"
 
 #: ../pigeonplanner/messages.py:44 ../pigeonplanner/messages.py:47
 #: ../pigeonplanner/messages.py:50 ../pigeonplanner/messages.py:53
@@ -84,248 +95,262 @@ msgstr ""
 #: ../pigeonplanner/messages.py:63 ../pigeonplanner/messages.py:70
 #: ../pigeonplanner/messages.py:73
 msgid "Invalid input!"
-msgstr ""
+msgstr "مدخلات غير صحيح !"
 
 #: ../pigeonplanner/messages.py:45
 msgid "The ringnumber and year are necessary."
-msgstr ""
+msgstr "رقم الدبلة و السنة ضروريين."
 
 #: ../pigeonplanner/messages.py:48
 msgid "Only numbers are accepted as year input."
-msgstr ""
+msgstr "فقط الأرقام مسموح بها عند إدخال السنة."
 
 #: ../pigeonplanner/messages.py:51
 msgid "Check the length of the year."
-msgstr ""
+msgstr "التحقق من طول السنة."
 
 #: ../pigeonplanner/messages.py:54
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr ""
+msgstr "مسموح بالأرقام فقط عند إضافة حمام كثير."
 
 #: ../pigeonplanner/messages.py:58
 msgid "All fields have to be entered."
-msgstr ""
+msgstr "لابد من إدخال جميع الحقول."
 
 #: ../pigeonplanner/messages.py:61
-msgid "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."
-msgstr ""
+msgid ""
+"The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
+"DD)."
+msgstr "التاريخ مدخل بشكل خاطىء . يجب أن يكون بتنسيق الأيزو (سنة-شهر- يوم)."
 
 #: ../pigeonplanner/messages.py:64
 msgid "The result you want to add already exists."
-msgstr ""
+msgstr "النتيجة التي تريد إضافتها موجوده بالفعل."
 
 #: ../pigeonplanner/messages.py:66
 msgid "Removing the selected result"
-msgstr ""
+msgstr "حذف النتيجة المختارة"
 
 #: ../pigeonplanner/messages.py:67 tmp/MainWindow.glade.h:11
 msgid "Are you sure?"
-msgstr ""
+msgstr "هل أنت متأكد؟"
 
 #: ../pigeonplanner/messages.py:68 tmp/MainWindow.glade.h:32
 msgid "Remove result"
-msgstr ""
+msgstr "حذف نتيجة"
 
 #: ../pigeonplanner/messages.py:71
 msgid "The name has to be entered."
-msgstr ""
+msgstr "لابد من إدخال الأسم."
 
 #: ../pigeonplanner/messages.py:74
 msgid "The persoon you want to add already exists."
-msgstr ""
+msgstr "الشخص الذي تريد إضافته موجود بالفعل."
 
 #: ../pigeonplanner/messages.py:76
 #, python-format
 msgid "Removing '%s'"
-msgstr ""
+msgstr "'%s' جارى الحذف"
 
 #: ../pigeonplanner/messages.py:77
 msgid "Are you sure you want to remove this person from your addresses?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد إزالة هذا الشخص من العناوين الخاصة بك؟"
 
 #: ../pigeonplanner/messages.py:78
 msgid "Remove address"
-msgstr ""
+msgstr "حذف العنوان"
 
 #: ../pigeonplanner/messages.py:80
-#, python-format
+#, fuzzy, python-format
 msgid "Removing '%(item)s' from '%(dataset)s'."
-msgstr ""
+msgstr "حذف '%s' من  '%s'."
 
 #: ../pigeonplanner/messages.py:81
 msgid "Are you sure you want to remove this item?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف هذا البند؟"
 
 #: ../pigeonplanner/messages.py:82
 msgid "Remove item"
-msgstr ""
+msgstr "حذف بند"
 
 #: ../pigeonplanner/messages.py:84
 msgid "Removing database"
-msgstr ""
+msgstr "جارى حذف قاعدة البيانات ... "
 
 #: ../pigeonplanner/messages.py:85
 msgid "Are you sure you want to remove the database? All data will be lost."
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف قاعدة البيانات؟ كل البيانات ستحذف."
 
 #: ../pigeonplanner/messages.py:86
 msgid "Remove database"
-msgstr ""
+msgstr "حذف قاعدة البيانات"
 
 #: ../pigeonplanner/messages.py:88
-msgid "Click \"OK\" to close the program. A new database will be created the next time you start the program again."
+msgid ""
+"Click \"OK\" to close the program. A new database will be created the next "
+"time you start the program again."
 msgstr ""
+"انقر \"موافق \" لإغلاق البرنامج. سيتم إنشاء قاعدة بيانات جديدة عند تشغيل "
+"البرنامج مرة أخرى."
 
 #: ../pigeonplanner/messages.py:90 ../pigeonplanner/messages.py:123
 msgid "Restart required"
-msgstr ""
+msgstr "إعادة تشغيل الكومبيوتر مطلوبة"
 
 #: ../pigeonplanner/messages.py:92
 msgid "Optimization has been completed."
-msgstr ""
+msgstr "عملية التحسين تمت."
 
 #: ../pigeonplanner/messages.py:94 ../pigeonplanner/messages.py:98
 #: ../pigeonplanner/messages.py:104 tmp/DBAssistant.glade.h:5
 msgid "Completed!"
-msgstr ""
+msgstr "تم !"
 
 #: ../pigeonplanner/messages.py:96
 msgid "The backup was successfully created."
-msgstr ""
+msgstr "النسخ الإحتياطي تم بنجاح."
 
 #: ../pigeonplanner/messages.py:99
 msgid "There was an error making the backup."
-msgstr ""
+msgstr "هناك خطأ فى عمل النسخة الإحتياطية."
 
 #: ../pigeonplanner/messages.py:101 ../pigeonplanner/messages.py:107
 msgid "Failed!"
-msgstr ""
+msgstr "فشل !"
 
 #: ../pigeonplanner/messages.py:102
 msgid ""
 "The backup was successfully restored.\n"
 "Restart the program."
 msgstr ""
+"تم إستعادة النسخة الإحتياطية بنجاح.\n"
+"إعادة تشغيل البرنامج."
 
 #: ../pigeonplanner/messages.py:105
 msgid "There was an error restoring the backup."
-msgstr ""
+msgstr "هناك خطأ فى إستعادة النسخة الإحتياطية."
 
 #: ../pigeonplanner/messages.py:109
 msgid "No personal information found."
-msgstr ""
+msgstr "لا توجد معلومات شخصية."
 
 #: ../pigeonplanner/messages.py:110
 msgid ""
 "This will be shown on top of the printed pedigree.\n"
 "Do you want to add it now?"
 msgstr ""
+"هذا سيظهر أعلى شهادة النسب المطبوعة.\n"
+"هل تريد إضافتها الأن؟"
 
 #: ../pigeonplanner/messages.py:111
 msgid "Personal"
-msgstr ""
+msgstr "شخصى"
 
 #: ../pigeonplanner/messages.py:113
 msgid "Error printing the pedigree"
-msgstr ""
+msgstr "خطأ أثناء طباعة شهادة النسب"
 
 #: ../pigeonplanner/messages.py:117
 msgid ""
 "This will set back all the settings to the default values.\n"
 "Are you sure?"
-msgstr ""
+msgstr "الإعدادات الافتراضية"
 
 #: ../pigeonplanner/messages.py:119
 msgid "Default settings"
-msgstr ""
+msgstr "البرنامج يحتاج إلى إعادة تشغيله لتفعيل التغييرات."
 
 #: ../pigeonplanner/messages.py:121
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
-msgstr ""
+msgstr "البرنامج يحتاج إلى إعادة تشغيله لتفعيل التغييرات."
 
 #: ../pigeonplanner/messages.py:125
 msgid "Update available!"
-msgstr ""
+msgstr "تحديث جديد متوفر!"
 
 #: ../pigeonplanner/messages.py:126
 msgid "There is an update available, do you want to download it now?"
-msgstr ""
+msgstr "هناك تحديثاً جديداً متوفرة ، هل تريد تحميله الآن؟"
 
 #: ../pigeonplanner/messages.py:127 ../pigeonplanner/toolswindow.py:57
 msgid "Update"
-msgstr ""
+msgstr "تحديث"
 
 #: ../pigeonplanner/messages.py:129
 msgid "Error trying to get information. Are you connected to the internet?"
-msgstr ""
+msgstr "خطأ في محاولة الحصول على البيانات. هل أنت متصلا بالإنترنت؟"
 
 #: ../pigeonplanner/messages.py:130
-msgid "A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version"
+msgid ""
+"A new version is available. Please go to the Pigeon Planner website by "
+"clicking the link below and download the latest version"
 msgstr ""
+" نسخة جديدة متوفرة. يرجى الدخول إلى موقع البرنامج من خلال النقر على الرابط "
+"أدناه وتنزيل أحدث إصدار"
 
 #: ../pigeonplanner/messages.py:131
 msgid "You already have the latest version installed."
-msgstr ""
+msgstr "البرنامج المثبت لديك بالفعل هو آخر إصدار حتى الان."
 
 #: ../pigeonplanner/messages.py:132
 msgid "This isn't normal, or you must be running a development version"
-msgstr ""
+msgstr "هذا امر غير طبيعي ، أو يجب أن تقوم بتشغيل الإصدار المطور"
 
 #: ../pigeonplanner/configuration.py:137
 msgid "#Pigeon Planner configuration file"
-msgstr ""
+msgstr "#عارض ملف السجل"
 
 #: ../pigeonplanner/logdialog.py:34
 msgid "Logfile Viewer"
-msgstr ""
+msgstr "عارض ملف السجل"
 
 #: ../pigeonplanner/logdialog.py:94
 msgid "If there are any errors, mail the entire text to:"
-msgstr ""
+msgstr "إذا كان هناك أية أخطاء, ارسل نص الخطأ الى :"
 
 #: ../pigeonplanner/printing.py:73 tmp/PedigreeWindow.glade.h:7
 msgid "Pedigree of:"
-msgstr ""
+msgstr "شهادة النسب لـ :"
 
 #: ../pigeonplanner/printing.py:362 tmp/MainWindow.glade.h:33
 msgid "Results"
-msgstr ""
+msgstr "نتائج السباقات"
 
 #: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:394
 #: tmp/ResultWindow.glade.h:10
 msgid "Year race"
-msgstr ""
+msgstr "سنة السباق"
 
 #: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:398
 #: tmp/ResultWindow.glade.h:9
 msgid "Year pigeons"
-msgstr ""
+msgstr "سنة الحمام"
 
 #: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:402
 #: ../pigeonplanner/printing.py:436 ../pigeonplanner/printing.py:437
 #: ../pigeonplanner/resultwindow.py:43 ../pigeonplanner/mainwindow.py:1020
 #: tmp/MainWindow.glade.h:29 tmp/ResultWindow.glade.h:5
 msgid "Racepoint"
-msgstr ""
+msgstr "نقطة السباق"
 
 #: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:406
 #: ../pigeonplanner/printing.py:460 ../pigeonplanner/printing.py:461
 #: ../pigeonplanner/resultwindow.py:47 ../pigeonplanner/mainwindow.py:1020
 #: tmp/MainWindow.glade.h:37 tmp/ResultWindow.glade.h:7
 msgid "Sector"
-msgstr ""
+msgstr "القطاع"
 
 #: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:410
 #: ../pigeonplanner/resultwindow.py:46 ../pigeonplanner/mainwindow.py:1020
 #: tmp/ResultWindow.glade.h:2
 msgid "Coefficient"
-msgstr ""
+msgstr "الدرجة"
 
 #: ../pigeonplanner/printing.py:385 ../pigeonplanner/printing.py:414
 #: ../pigeonplanner/printing.py:442 ../pigeonplanner/printing.py:443
 #: tmp/ResultWindow.glade.h:4
 msgid "Place"
-msgstr ""
+msgstr "المكان"
 
 #: ../pigeonplanner/printing.py:424 ../pigeonplanner/printing.py:425
 #: ../pigeonplanner/resultwindow.py:48 ../pigeonplanner/mainwindow.py:963
@@ -333,92 +358,92 @@ msgstr ""
 #: ../pigeonplanner/mainwindow.py:1006 ../pigeonplanner/mainwindow.py:1014
 #: tmp/PedigreeWindow.glade.h:1
 msgid "Band no."
-msgstr ""
+msgstr "رقم الدبلة"
 
 #: ../pigeonplanner/printing.py:430 ../pigeonplanner/printing.py:431
 #: ../pigeonplanner/printing.py:547 ../pigeonplanner/resultwindow.py:42
 #: ../pigeonplanner/mainwindow.py:1020 tmp/MainWindow.glade.h:16
 msgid "Date"
-msgstr ""
+msgstr "التاريخ"
 
 #: ../pigeonplanner/printing.py:448 ../pigeonplanner/printing.py:449
 #: ../pigeonplanner/resultwindow.py:45 ../pigeonplanner/mainwindow.py:1020
 #: tmp/MainWindow.glade.h:25
 msgid "Out of"
-msgstr ""
+msgstr "من"
 
 #: ../pigeonplanner/printing.py:454 ../pigeonplanner/printing.py:455
 msgid "Coef."
-msgstr ""
+msgstr "الدرجة"
 
 #: ../pigeonplanner/printing.py:538 ../pigeonplanner/printing.py:560
 #: ../pigeonplanner/printing.py:561 ../pigeonplanner/toolswindow.py:64
 msgid "Velocity"
-msgstr ""
+msgstr "السرعة"
 
 #: ../pigeonplanner/printing.py:549
 msgid "Released"
-msgstr ""
+msgstr "الإطلاق"
 
 #: ../pigeonplanner/printing.py:551
 msgid "Distance"
-msgstr ""
+msgstr "المسافة"
 
 #: ../pigeonplanner/printing.py:566 ../pigeonplanner/printing.py:567
 #: ../pigeonplanner/toolswindow.py:64
 msgid "Flight Time"
-msgstr ""
+msgstr "زمن الطيران"
 
 #: ../pigeonplanner/printing.py:572 ../pigeonplanner/printing.py:573
 #: ../pigeonplanner/toolswindow.py:64
 msgid "Time of Arrival"
-msgstr ""
+msgstr "وقت الوصول"
 
 #: ../pigeonplanner/widgets.py:162
 msgid "translator-credits"
-msgstr ""
+msgstr "Muhammad Mahmoud"
 
 #: ../pigeonplanner/widgets.py:313 tmp/ToolsWindow.glade.h:22
 msgid "Choose a directory where to save the backup"
-msgstr ""
+msgstr "إختر المجلد لحفظ النسخة الإحتياطية به"
 
 #: ../pigeonplanner/widgets.py:315 tmp/ToolsWindow.glade.h:43
 msgid "Select a directory"
-msgstr ""
+msgstr "إختر مجلد"
 
 #: ../pigeonplanner/widgets.py:321 ../pigeonplanner/toolswindow.py:57
 #: tmp/ToolsWindow.glade.h:17
 msgid "Backup"
-msgstr ""
+msgstr "عمل نسخ إحتياطى"
 
 #: ../pigeonplanner/widgets.py:330 tmp/ToolsWindow.glade.h:21
 msgid "Choose a Pigeon Planner backup file to restore"
-msgstr ""
+msgstr "إختر ملف النسخة الإحتياطية لإستعادتة"
 
 #: ../pigeonplanner/widgets.py:332 tmp/ToolsWindow.glade.h:48
 msgid "Warning! This will overwrite the existing database!"
-msgstr ""
+msgstr "تحذير! سيتم الكتابة فوق قاعدة البيانات الموجودة !"
 
 #: ../pigeonplanner/widgets.py:334 tmp/ToolsWindow.glade.h:44
 msgid "Select a valid backup file"
-msgstr ""
+msgstr "إختر ملف نسخة إحتياطية صحيح"
 
 #: ../pigeonplanner/widgets.py:342 tmp/ToolsWindow.glade.h:41
 msgid "Restore"
-msgstr ""
+msgstr "إستعادة"
 
 #: ../pigeonplanner/widgets.py:373
 msgid "View image: "
-msgstr ""
+msgstr "معاينة الصوره:"
 
 #: ../pigeonplanner/widgets.py:386
 msgid "Click to close this window"
-msgstr ""
+msgstr "إضغط لإغلاق هذه النافذة"
 
 #: ../pigeonplanner/resultwindow.py:44 ../pigeonplanner/mainwindow.py:1020
 #: tmp/MainWindow.glade.h:28
 msgid "Placed"
-msgstr ""
+msgstr "المركز"
 
 #: ../pigeonplanner/resultwindow.py:78 ../pigeonplanner/resultwindow.py:79
 #: ../pigeonplanner/resultwindow.py:80 ../pigeonplanner/resultwindow.py:81
@@ -427,404 +452,407 @@ msgstr ""
 #: ../pigeonplanner/resultwindow.py:192 ../pigeonplanner/resultwindow.py:193
 #: ../pigeonplanner/resultwindow.py:237 ../pigeonplanner/resultwindow.py:240
 msgid "All"
-msgstr ""
+msgstr "الكل"
 
 #: ../pigeonplanner/optionsdialog.py:117
 msgid "days"
-msgstr ""
+msgstr "ايام"
 
 #: ../pigeonplanner/optionsdialog.py:119
 msgid "day"
-msgstr ""
+msgstr "يوم"
 
 #: ../pigeonplanner/toolswindow.py:51 tmp/ToolsWindow.glade.h:47
 msgid "Tools"
-msgstr ""
+msgstr "الأدوات"
 
 #: ../pigeonplanner/toolswindow.py:57
 msgid "Velocity calculator"
-msgstr ""
+msgstr "حاسبة السرعة"
 
 #: ../pigeonplanner/toolswindow.py:57
 msgid "Datasets"
-msgstr ""
+msgstr "مجموعات البيانات"
 
 #: ../pigeonplanner/toolswindow.py:57
 msgid "Addresses"
-msgstr ""
+msgstr "العناوين"
 
 #: ../pigeonplanner/toolswindow.py:57
 msgid "Statistics"
-msgstr ""
+msgstr "الأحصائيات"
 
 #: ../pigeonplanner/toolswindow.py:57
 msgid "Database"
-msgstr ""
+msgstr "قاعدة البيانات"
 
 #: ../pigeonplanner/toolswindow.py:69 ../pigeonplanner/mainwindow.py:963
 #: ../pigeonplanner/mainwindow.py:990 tmp/OptionsDialog.glade.h:18
 #: tmp/PedigreeWindow.glade.h:5 tmp/ToolsWindow.glade.h:35
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:168
 #: ../pigeonplanner/toolswindow.py:202 ../pigeonplanner/toolswindow.py:220
 msgid "Colours"
-msgstr ""
+msgstr "الالوان"
 
 #: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:172
 #: ../pigeonplanner/toolswindow.py:206 ../pigeonplanner/toolswindow.py:224
 msgid "Racepoints"
-msgstr ""
+msgstr "نقاط السباق"
 
 #: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:170
 #: ../pigeonplanner/toolswindow.py:204 ../pigeonplanner/toolswindow.py:222
 msgid "Sectors"
-msgstr ""
+msgstr "القطاعات"
 
 #: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:174
 #: ../pigeonplanner/toolswindow.py:208 ../pigeonplanner/toolswindow.py:226
 msgid "Strains"
-msgstr ""
+msgstr "السلالات"
 
 #: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:176
 #: ../pigeonplanner/toolswindow.py:210 ../pigeonplanner/toolswindow.py:228
 msgid "Lofts"
-msgstr ""
+msgstr "اللوفتات"
 
 #: ../pigeonplanner/toolswindow.py:435
 msgid "Number of pigeons"
-msgstr ""
+msgstr "عدد الحمام"
 
 #: ../pigeonplanner/toolswindow.py:436
 msgid "Number of cocks"
-msgstr ""
+msgstr "عدد الذكور"
 
 #: ../pigeonplanner/toolswindow.py:437
 msgid "Number of hens"
-msgstr ""
+msgstr "عدد الاناث"
 
 #: ../pigeonplanner/toolswindow.py:438
 msgid "Number of young birds"
-msgstr ""
+msgstr "عدد الطيور اليافعه"
 
 #: ../pigeonplanner/toolswindow.py:439
 msgid "Number of results"
-msgstr ""
+msgstr "عدد النتائج"
 
 #: ../pigeonplanner/mainwindow.py:65
 msgid "cock"
-msgstr ""
+msgstr "ذكر"
 
 #: ../pigeonplanner/mainwindow.py:65
 msgid "hen"
-msgstr ""
+msgstr "انثى"
 
 #: ../pigeonplanner/mainwindow.py:65
 msgid "young bird"
-msgstr ""
+msgstr "يافع"
 
 #: ../pigeonplanner/mainwindow.py:130
 msgid "Enter the bandnumber of the pigeon"
-msgstr ""
+msgstr "أدخل رقم دبلة الحمامة"
 
 #: ../pigeonplanner/mainwindow.py:132
 msgid "Enter the year of the pigeon"
-msgstr ""
+msgstr "أدخل سنة ميلاد الحمامة"
 
 #: ../pigeonplanner/mainwindow.py:134
 msgid "Enter a name for the pigeon"
-msgstr ""
+msgstr "أدخل اسماً للحمامة"
 
 #: ../pigeonplanner/mainwindow.py:136
 msgid "Click here to add an image"
-msgstr ""
+msgstr "انقر هنا لإضافة صورة"
 
 #: ../pigeonplanner/mainwindow.py:138
 msgid "Search through the list of cocks"
-msgstr ""
+msgstr "البحث خلال قائمة الذكور"
 
 #: ../pigeonplanner/mainwindow.py:140
 msgid "Search through the list of hens"
-msgstr ""
+msgstr "البحث خلال قائمة الإناث"
 
 #: ../pigeonplanner/mainwindow.py:211
 msgid "Create backup"
-msgstr ""
+msgstr "إنشاء نسخة احتياطية"
 
 #: ../pigeonplanner/mainwindow.py:216
 msgid "Restore backup"
-msgstr ""
+msgstr "إستعادة النسخة الاحتياطية"
 
 #: ../pigeonplanner/mainwindow.py:699
 msgid "<b>Edit this result</b>"
-msgstr ""
+msgstr "<b>تعديل هذه النتيجة</b>"
 
 #: ../pigeonplanner/mainwindow.py:731 tmp/MainWindow.glade.h:1
 msgid "<b>Add a new result</b>"
-msgstr ""
+msgstr "<b>إضافة نتيجة جديدة</b>"
 
 #: ../pigeonplanner/mainwindow.py:872
 msgid "_File"
-msgstr ""
+msgstr "_ملف"
 
 #: ../pigeonplanner/mainwindow.py:873 ../pigeonplanner/mainwindow.py:880
 msgid "_Backup"
-msgstr ""
+msgstr "_النسخ الاحتياطي"
 
 #: ../pigeonplanner/mainwindow.py:874
 msgid "_Search"
-msgstr ""
+msgstr "_بحث"
 
 #: ../pigeonplanner/mainwindow.py:875
 msgid "_Pigeon"
-msgstr ""
+msgstr "_الحمام"
 
 #: ../pigeonplanner/mainwindow.py:876 ../pigeonplanner/mainwindow.py:896
 msgid "_Edit"
-msgstr ""
+msgstr "_تعديل"
 
 #: ../pigeonplanner/mainwindow.py:877
 msgid "_View"
-msgstr ""
+msgstr "_معاينة"
 
 #: ../pigeonplanner/mainwindow.py:878
 msgid "_Filter pigeons"
-msgstr ""
+msgstr "_فلترة الحمام"
 
 #: ../pigeonplanner/mainwindow.py:879
 msgid "_Help"
-msgstr ""
+msgstr "_مساعدة"
 
 #: ../pigeonplanner/mainwindow.py:881
 msgid "Create a backup of your database"
-msgstr ""
+msgstr "إنشاء نسخة احتياطية من قاعدة بياناتك"
 
 #: ../pigeonplanner/mainwindow.py:882
 msgid "_Restore"
-msgstr ""
+msgstr "_إستعادة"
 
 #: ../pigeonplanner/mainwindow.py:883
 msgid "Restore a backup of your database"
-msgstr ""
+msgstr "إستعادة نسخة احتياطية من قاعدة بياناتك"
 
 #: ../pigeonplanner/mainwindow.py:884
 msgid "_Quit"
-msgstr ""
+msgstr "_إنهاء"
 
 #: ../pigeonplanner/mainwindow.py:885
 msgid "Quit the program"
-msgstr ""
+msgstr "إنهاء البرنامج"
 
 #: ../pigeonplanner/mainwindow.py:886
 msgid "_Add"
-msgstr ""
+msgstr "_إضافة"
 
 #: ../pigeonplanner/mainwindow.py:887
 msgid "Add a new pigeon"
-msgstr ""
+msgstr "إضافة حمامة جديدة"
 
 #: ../pigeonplanner/mainwindow.py:888
 msgid "Add ran_ge"
-msgstr ""
+msgstr "_إضافة مجموعة"
 
 #: ../pigeonplanner/mainwindow.py:889 tmp/MainWindow.glade.h:9
 msgid "Add a range of pigeons"
-msgstr ""
+msgstr "إضافة مجموعة من الحمام"
 
 #: ../pigeonplanner/mainwindow.py:890
 msgid "_Photo Album"
-msgstr ""
+msgstr "_ألبوم الصور"
 
 #: ../pigeonplanner/mainwindow.py:891
 msgid "View the images of your pigeons"
-msgstr ""
+msgstr "عرض الصور الخاصة بحمامك"
 
 #: ../pigeonplanner/mainwindow.py:892
 msgid "_Logfile Viewer"
-msgstr ""
+msgstr "_عارض ملف السجل"
 
 #: ../pigeonplanner/mainwindow.py:893
 msgid "See the logfile"
-msgstr ""
+msgstr "معاينة ملف السجل"
 
 #: ../pigeonplanner/mainwindow.py:894
 msgid "_Find..."
-msgstr ""
+msgstr "_بحث ..."
 
 #: ../pigeonplanner/mainwindow.py:895
 msgid "Search through the list of pigeons"
-msgstr ""
+msgstr "البحث فى قائمة الحمام"
 
 #: ../pigeonplanner/mainwindow.py:897
 msgid "Edit the selected pigeon"
-msgstr ""
+msgstr "تعديل الحمامة المختاره"
 
 #: ../pigeonplanner/mainwindow.py:898
 msgid "_Remove"
-msgstr ""
+msgstr "_حذف"
 
 #: ../pigeonplanner/mainwindow.py:899
 msgid "Remove the selected pigeon"
-msgstr ""
+msgstr "حذف الحمامة المختارة"
 
 #: ../pigeonplanner/mainwindow.py:900
 msgid "_Pedigree"
-msgstr ""
+msgstr "_شهادة النسب"
 
 #: ../pigeonplanner/mainwindow.py:901
 msgid "View the detailed pedigree of this pigeon"
-msgstr ""
+msgstr "عرض شهادة النسب المفصلة لهذه الحمامة"
 
 #: ../pigeonplanner/mainwindow.py:902
 msgid "Add resul_t"
-msgstr ""
+msgstr "_إضافة نتيجة"
 
 #: ../pigeonplanner/mainwindow.py:903
 msgid "Add a new result for this pigeon"
-msgstr ""
+msgstr "إضافة نتيجة جديدة لهذة الحمامة"
 
 #: ../pigeonplanner/mainwindow.py:904
 msgid "_Tools"
-msgstr ""
+msgstr "_الأدوات"
 
 #: ../pigeonplanner/mainwindow.py:905
 msgid "Various tools"
-msgstr ""
+msgstr "أدوات متنوعة"
 
 #: ../pigeonplanner/mainwindow.py:906
 msgid "_Preferences"
-msgstr ""
+msgstr "_التفضيلات"
 
 #: ../pigeonplanner/mainwindow.py:907
 msgid "Configure the application"
-msgstr ""
+msgstr "إعداد  البرنامج"
 
 #: ../pigeonplanner/mainwindow.py:908
 msgid "_Website"
-msgstr ""
+msgstr "_الموقع الالكترونى"
 
 #: ../pigeonplanner/mainwindow.py:909
 msgid "Go to the website for more information"
-msgstr ""
+msgstr "إذهب الى الموقع الالكترونى لمزيد من المعلومات"
 
 #: ../pigeonplanner/mainwindow.py:910
 msgid "Forum"
-msgstr ""
+msgstr "المنتدى"
 
 #: ../pigeonplanner/mainwindow.py:911
 msgid "Go to the forum for online help"
-msgstr ""
+msgstr "إذهب اللى المنتدى لطب الدعم الفنى"
 
 #: ../pigeonplanner/mainwindow.py:912
 msgid "_About"
-msgstr ""
+msgstr "_عن البرنامج"
 
 #: ../pigeonplanner/mainwindow.py:913
 msgid "About this application"
-msgstr ""
+msgstr "عن البرنامج"
 
 #: ../pigeonplanner/mainwindow.py:917
 msgid "Navigation arrows"
-msgstr ""
+msgstr "أسهم التصفح"
 
 #: ../pigeonplanner/mainwindow.py:918 tmp/OptionsDialog.glade.h:21
 msgid "Show or hide the navigation arrows"
-msgstr ""
+msgstr "إظهار أو إخفاء اسهم التصفح"
 
 #: ../pigeonplanner/mainwindow.py:919
 msgid "Toolbar"
-msgstr ""
+msgstr "شريط الأدوات"
 
 #: ../pigeonplanner/mainwindow.py:920 tmp/OptionsDialog.glade.h:23
 msgid "Show or hide the toolbar"
-msgstr ""
+msgstr "إظهار أو إخفاء شريط الأدوات"
 
 #: ../pigeonplanner/mainwindow.py:921
 msgid "Statusbar"
-msgstr ""
+msgstr "شريط الحالة"
 
 #: ../pigeonplanner/mainwindow.py:922 tmp/OptionsDialog.glade.h:22
 msgid "Show or hide the statusbar"
-msgstr ""
+msgstr "إظهار أو إخفاء شريط الحالة"
 
 #: ../pigeonplanner/mainwindow.py:926
 msgid "_All"
-msgstr ""
+msgstr "_الكل"
 
 #: ../pigeonplanner/mainwindow.py:927
 msgid "Show all pigeons"
-msgstr ""
+msgstr "إعرض كل الحمام"
 
 #: ../pigeonplanner/mainwindow.py:928
 msgid "_Cocks"
-msgstr ""
+msgstr "_الذكور"
 
 #: ../pigeonplanner/mainwindow.py:929
 msgid "Only show cocks"
-msgstr ""
+msgstr "إعرض الذكور بس"
 
 #: ../pigeonplanner/mainwindow.py:930
 msgid "_Hens"
-msgstr ""
+msgstr "_الإناث"
 
 #: ../pigeonplanner/mainwindow.py:931
 msgid "Only show hens"
-msgstr ""
+msgstr "عرض الإناث فقط"
 
 #: ../pigeonplanner/mainwindow.py:932
 msgid "_Young birds"
-msgstr ""
+msgstr "_الطيور اليافعة"
 
 #: ../pigeonplanner/mainwindow.py:933
 msgid "Only show young birds"
-msgstr ""
+msgstr "إعرض الحمام اليافع فقط"
 
 #: ../pigeonplanner/mainwindow.py:963 ../pigeonplanner/mainwindow.py:990
 #: ../pigeonplanner/mainwindow.py:998 ../pigeonplanner/mainwindow.py:1006
 #: ../pigeonplanner/mainwindow.py:1014 tmp/MainWindow.glade.h:45
 msgid "Year"
-msgstr ""
+msgstr "السنة"
 
 #: ../pigeonplanner/mainwindow.py:963 tmp/MainWindow.glade.h:14
 #: tmp/OptionsDialog.glade.h:11 tmp/PedigreeWindow.glade.h:2
 msgid "Colour"
-msgstr ""
+msgstr "اللون"
 
 #: ../pigeonplanner/mainwindow.py:963 tmp/MainWindow.glade.h:38
 #: tmp/OptionsDialog.glade.h:20
 msgid "Sex"
-msgstr ""
+msgstr "الجنس"
 
 #: ../pigeonplanner/mainwindow.py:963 tmp/MainWindow.glade.h:23
 #: tmp/OptionsDialog.glade.h:16
 msgid "Loft"
-msgstr ""
+msgstr "اللوفت"
 
 #: ../pigeonplanner/mainwindow.py:963 tmp/MainWindow.glade.h:40
 #: tmp/OptionsDialog.glade.h:24
 msgid "Strain"
-msgstr ""
+msgstr "السلالة"
 
 #: ../pigeonplanner/mainwindow.py:1006
 msgid "Common parent"
-msgstr ""
+msgstr "الأصول"
 
 #: ../pigeonplanner/mainwindow.py:1656
 msgid "Images"
-msgstr ""
+msgstr "الصور"
 
 #: tmp/DBAssistant.glade.h:1
+#, fuzzy
 msgid "<b><i><big>Update complete</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>تحديث</big></i></b>"
 
 #: tmp/DBAssistant.glade.h:2
+#, fuzzy
 msgid "<b><i><big>Update required</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>تحديث</big></i></b>"
 
 #: tmp/DBAssistant.glade.h:3
+#, fuzzy
 msgid "<b><i><big>Updating database...</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>قاعدة البيانات</big></i></b>"
 
 #: tmp/DBAssistant.glade.h:4
 msgid "Cleaning up..."
@@ -835,16 +863,18 @@ msgid "Database operations:"
 msgstr ""
 
 #: tmp/DBAssistant.glade.h:7
+#, fuzzy
 msgid "Database update"
-msgstr ""
+msgstr "قاعدة البيانات"
 
 #: tmp/DBAssistant.glade.h:8
 msgid "Doing the database operations..."
 msgstr ""
 
 #: tmp/DBAssistant.glade.h:9
+#, fuzzy
 msgid "Making a backup..."
-msgstr ""
+msgstr "عمل نسخة إحتياطية إوتوماكتيكية"
 
 #: tmp/DBAssistant.glade.h:10
 msgid ""
@@ -857,8 +887,9 @@ msgid ""
 msgstr ""
 
 #: tmp/DBAssistant.glade.h:16
+#, fuzzy
 msgid "Start"
-msgstr ""
+msgstr "الشارع"
 
 #: tmp/DBAssistant.glade.h:17
 msgid "The database update is complete. Pigeon Planner will now start."
@@ -866,356 +897,358 @@ msgstr ""
 
 #: tmp/MainWindow.glade.h:2
 msgid "<b>Brothers and sisters</b>"
-msgstr ""
+msgstr "<b>الإخوه والأخوات</b>"
 
 #: tmp/MainWindow.glade.h:3
 msgid "<b>Details of pigeon</b>"
-msgstr ""
+msgstr "<b>تفاصيل عن الحمامة</b>"
 
 #: tmp/MainWindow.glade.h:4
 msgid "<b>Half brothers and sisters</b>"
-msgstr ""
+msgstr "<b>الإخوة والأخوات غير الأشقاء</b>"
 
 #: tmp/MainWindow.glade.h:5
 msgid "<b>Offspring</b>"
-msgstr ""
+msgstr "<b>النسل</b>"
 
 #: tmp/MainWindow.glade.h:6
 msgid "<b>Pedigree dam</b>"
-msgstr ""
+msgstr "<b>شهادة نسب الأم</b>"
 
 #: tmp/MainWindow.glade.h:7
 msgid "<b>Pedigree sire</b>"
-msgstr ""
+msgstr "<b>شهادة نسب الأب</b>"
 
 #: tmp/MainWindow.glade.h:8
 msgid "<b>Results of pigeon</b>"
-msgstr ""
+msgstr "<b>نتائج الحمام</b>"
 
 #: tmp/MainWindow.glade.h:10
 msgid "Add result"
-msgstr ""
+msgstr "إضافة نتيجة"
 
 #: tmp/MainWindow.glade.h:12
 msgid "Band numbers"
-msgstr ""
+msgstr "رقم الدبلة"
 
 #: tmp/MainWindow.glade.h:13
 msgid "Choose an image..."
-msgstr ""
+msgstr "إختار صورة ..."
 
 #: tmp/MainWindow.glade.h:15 tmp/PedigreeWindow.glade.h:3
 msgid "Dam"
-msgstr ""
+msgstr "الأم"
 
 #: tmp/MainWindow.glade.h:17
 msgid "Edit result"
-msgstr ""
+msgstr "تعديل النتيجة"
 
 #: tmp/MainWindow.glade.h:18
 msgid "Extra"
-msgstr ""
+msgstr "معلومات إضافية"
 
 #: tmp/MainWindow.glade.h:19
 msgid "From"
-msgstr ""
+msgstr "من"
 
 #: tmp/MainWindow.glade.h:20
 msgid "Go to pigeon"
-msgstr ""
+msgstr "إيجاد حمامة"
 
 #: tmp/MainWindow.glade.h:21
 msgid "Keep results of this pigeon"
-msgstr ""
+msgstr "حفظ نتائج هذه الحمامة"
 
 #: tmp/MainWindow.glade.h:22
 msgid "Keep this pigeon in the pedigree"
-msgstr ""
+msgstr "حفظ هذه الحمامة فى شهادة النسب"
 
 #: tmp/MainWindow.glade.h:24
 msgid "Names"
-msgstr ""
+msgstr "الأسماء"
 
 #: tmp/MainWindow.glade.h:26 tmp/PedigreeWindow.glade.h:6
 msgid "Pedigree"
-msgstr ""
+msgstr "شهادة النسب"
 
 #: tmp/MainWindow.glade.h:27
 msgid "Photo Album"
-msgstr ""
+msgstr "ألبوم الصور"
 
 #: tmp/MainWindow.glade.h:30
 msgid "Relatives"
-msgstr ""
+msgstr "الأقارب"
 
 #: tmp/MainWindow.glade.h:31
 msgid "Remove pigeon"
-msgstr ""
+msgstr "حذف حمامة"
 
 #: tmp/MainWindow.glade.h:34
 msgid "Search a pigeon"
-msgstr ""
+msgstr "بحث عن حمامة"
 
 #: tmp/MainWindow.glade.h:35
 msgid "Search for:"
-msgstr ""
+msgstr "البحث عن:"
 
 #: tmp/MainWindow.glade.h:36
 msgid "Search in:"
-msgstr ""
+msgstr "البحث فى:"
 
 #: tmp/MainWindow.glade.h:39 tmp/PedigreeWindow.glade.h:8
 msgid "Sire"
-msgstr ""
+msgstr "الأب"
 
 #: tmp/MainWindow.glade.h:41
 msgid "The following pigeon will be removed:"
-msgstr ""
+msgstr "الحمامة التالية سيتم حذفها"
 
 #: tmp/MainWindow.glade.h:42
 msgid "To"
-msgstr ""
+msgstr "الى"
 
 #: tmp/MainWindow.glade.h:43 tmp/ResultWindow.glade.h:8
 msgid "View all results"
-msgstr ""
+msgstr "مشاهدة كل النتائج"
 
 #: tmp/MainWindow.glade.h:44
 msgid "View detail"
-msgstr ""
+msgstr "مشاهدة التفاصيل"
 
 #: tmp/OptionsDialog.glade.h:1
 msgid "<b>Backup</b>"
-msgstr ""
+msgstr "<b>عمل نسخة إحتياطية</b>"
 
 #: tmp/OptionsDialog.glade.h:2
 msgid "<b>Columns</b>"
-msgstr ""
+msgstr "<b>الأعمدة</b>"
 
 #: tmp/OptionsDialog.glade.h:3
 msgid "<b>Language</b>"
-msgstr ""
+msgstr "<b>اللغة</b>"
 
 #: tmp/OptionsDialog.glade.h:4
 msgid "<b>Other</b>"
-msgstr ""
+msgstr "<b>أخرى</b>"
 
 #: tmp/OptionsDialog.glade.h:5
 msgid "<b>Theme</b>"
-msgstr ""
+msgstr "<b>الشكل</b>"
 
 #: tmp/OptionsDialog.glade.h:6
 msgid "<b>Update</b>"
-msgstr ""
+msgstr "<b>تحديث</b>"
 
 #: tmp/OptionsDialog.glade.h:7
 msgid "Appearance"
-msgstr ""
+msgstr "المظهر"
 
 #: tmp/OptionsDialog.glade.h:8
 msgid "Change the language to"
-msgstr ""
+msgstr "تغيير اللغة"
 
 #: tmp/OptionsDialog.glade.h:9
 msgid "Change the theme"
-msgstr ""
+msgstr "تغيير الشكل"
 
 #: tmp/OptionsDialog.glade.h:10
 msgid "Check for updates on startup"
-msgstr ""
+msgstr "التحقق من التحديثات الجديدة عند بدء تشغيل البرنامج"
 
 #: tmp/OptionsDialog.glade.h:12
 msgid "Default"
-msgstr ""
+msgstr "الوضع الإفتراضى"
 
 #: tmp/OptionsDialog.glade.h:13
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: tmp/OptionsDialog.glade.h:14
 msgid "Interval"
-msgstr ""
+msgstr "إستراحة"
 
 #: tmp/OptionsDialog.glade.h:15
 msgid "Location"
-msgstr ""
+msgstr "الموقع"
 
 #: tmp/OptionsDialog.glade.h:17
 msgid "Make an automatic backup"
-msgstr ""
+msgstr "عمل نسخة إحتياطية إوتوماكتيكية"
 
 #: tmp/OptionsDialog.glade.h:19
 msgid "Options"
-msgstr ""
+msgstr "الخيارات"
 
 #: tmp/PedigreeWindow.glade.h:4
 msgid "Insert a pigeon"
-msgstr ""
+msgstr "إدخال حمامة"
 
 #: tmp/ResultWindow.glade.h:1
 msgid "<b>Sort options</b>"
-msgstr ""
+msgstr "<b>خيارات الترتيب</b>"
 
 #: tmp/ResultWindow.glade.h:3
 msgid "Pigeon"
-msgstr ""
+msgstr "الحمام"
 
 #: tmp/ResultWindow.glade.h:6
 msgid "Results:"
-msgstr ""
+msgstr "النتائج:"
 
 #: tmp/ToolsWindow.glade.h:1
 msgid "<b><i><big>Addresses</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>العناوين</big></i></b>"
 
 #: tmp/ToolsWindow.glade.h:2
 msgid "<b><i><big>Backup</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>عمل نسخة إحتياطية</big></i></b>"
 
 #: tmp/ToolsWindow.glade.h:3
 msgid "<b><i><big>Database</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>قاعدة البيانات</big></i></b>"
 
 #: tmp/ToolsWindow.glade.h:4
 msgid "<b><i><big>Manage data</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>إدارة البيانات</big></i></b>"
 
 #: tmp/ToolsWindow.glade.h:5
 msgid "<b><i><big>Statistics</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>الإحصائيات</big></i></b>"
 
 #: tmp/ToolsWindow.glade.h:6
 msgid "<b><i><big>Update</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>تحديث</big></i></b>"
 
 #: tmp/ToolsWindow.glade.h:7
 msgid "<b><i><big>Velocity calculator</big></i></b>"
-msgstr ""
+msgstr "<b><i><big>حاسبة السرعة</big></i></b>"
 
 #: tmp/ToolsWindow.glade.h:8
 msgid "<b>Add items</b>"
-msgstr ""
+msgstr "<b>إضافة بند</b>"
 
 #: tmp/ToolsWindow.glade.h:9
 msgid "<b>Create backup</b>"
-msgstr ""
+msgstr "<b>إنشاء نسخة إحتياطية</b>"
 
 #: tmp/ToolsWindow.glade.h:10
 msgid "<b>Optimize database</b>"
-msgstr ""
+msgstr "<b>تحسين قاعدة البيانات</b>"
 
 #: tmp/ToolsWindow.glade.h:11
 msgid "<b>Remove database</b>"
-msgstr ""
+msgstr "<b>حذف قاعدة البيانات</b>"
 
 #: tmp/ToolsWindow.glade.h:12
 msgid "<b>Remove items</b>"
-msgstr ""
+msgstr "<b>حذف بنود</b>"
 
 #: tmp/ToolsWindow.glade.h:13
 msgid "<b>Restore backup</b>"
-msgstr ""
+msgstr "<b>إستعادة النسخة الإحتياطية</b>"
 
 #: tmp/ToolsWindow.glade.h:14
 msgid "<b>Warning!</b>"
-msgstr ""
+msgstr "<b>تحذير !</b>"
 
 #: tmp/ToolsWindow.glade.h:15
 msgid "<i>Click the button below</i>"
-msgstr ""
+msgstr "<i>إضغط على الزر بالاسفل</i>"
 
 #: tmp/ToolsWindow.glade.h:16
 msgid "Add and remove items from your datasets"
-msgstr ""
+msgstr "إضافة وحذف بنود من مجموعة بياناتك"
 
 #: tmp/ToolsWindow.glade.h:18
 msgid "Calculate"
-msgstr ""
+msgstr "إحسب"
 
 #: tmp/ToolsWindow.glade.h:19
 msgid "Calculate velocity"
-msgstr ""
+msgstr "حساب السرعة"
 
 #: tmp/ToolsWindow.glade.h:20
 msgid "Check now!"
-msgstr ""
+msgstr "تحقق الان !"
 
 #: tmp/ToolsWindow.glade.h:23
 msgid "Comment"
-msgstr ""
+msgstr "تعليق"
 
 #: tmp/ToolsWindow.glade.h:24
 msgid "Country"
-msgstr ""
+msgstr "الدولة"
 
 #: tmp/ToolsWindow.glade.h:25
 msgid ""
 "Create and restore backups from\n"
 "your pigeons and results."
-msgstr ""
+msgstr "إنشاء وإستعادة نسخة إحتياطية من بيانات حمامك ونتائجك"
 
 #: tmp/ToolsWindow.glade.h:27
 msgid "Dataset"
-msgstr ""
+msgstr "مجموعة البيانات"
 
 #: tmp/ToolsWindow.glade.h:28
 msgid "Distance (km)"
-msgstr ""
+msgstr "المسافة (كم)"
 
 #: tmp/ToolsWindow.glade.h:29
 msgid "Downloadpage"
-msgstr ""
+msgstr "صفحة التحميل"
 
 #: tmp/ToolsWindow.glade.h:30
 msgid "From - To (meter/min)"
-msgstr ""
+msgstr "من -  إلى (متر/دقيقة)"
 
 #: tmp/ToolsWindow.glade.h:31
 msgid "Here you can check if there is a program update available."
-msgstr ""
+msgstr "هنا يمكنك التحقق من وجود تحديثات للبرنامج."
 
 #: tmp/ToolsWindow.glade.h:32
 msgid "Here you can see some statistics of your database"
-msgstr ""
+msgstr "هنا يمكنك مشاهدة  بعض الإحصاءات من قاعدة بياناتك"
 
 #: tmp/ToolsWindow.glade.h:33
 msgid "If you remove the database, all your data will be lost."
-msgstr ""
+msgstr "إذا قمت بحذف قاعدة البيانات ، ستفقد جميع بياناتك."
 
 #: tmp/ToolsWindow.glade.h:34
 msgid "Item"
-msgstr ""
+msgstr "بند"
 
 #: tmp/ToolsWindow.glade.h:36
 msgid "Optimize"
-msgstr ""
+msgstr "تحسين"
 
 #: tmp/ToolsWindow.glade.h:37
 msgid ""
 "Optimize your database.\n"
 "(Please wait, this can take some time)"
 msgstr ""
+"تحسين قاعدة البيانات الخاصة بك. \n"
+"(يرجى الانتظار ، وهذا قد يستغرق بعض الوقت)"
 
 #: tmp/ToolsWindow.glade.h:39
 msgid "Phone / E-mail"
-msgstr ""
+msgstr "التليفون/البريد الإلكترونى"
 
 #: tmp/ToolsWindow.glade.h:40
 msgid "Released (hh : mm)"
-msgstr ""
+msgstr "وقت الإطلاق (ساعة : دقيقة)"
 
 #: tmp/ToolsWindow.glade.h:42
 msgid "Search database"
-msgstr ""
+msgstr "البحث فى قاعدة البيانات"
 
 #: tmp/ToolsWindow.glade.h:45
 msgid "Street"
-msgstr ""
+msgstr "الشارع"
 
 #: tmp/ToolsWindow.glade.h:46
 msgid "This is me"
-msgstr ""
+msgstr "هذا انا"
 
 #: tmp/ToolsWindow.glade.h:49
 msgid "Zipcode / City"
-msgstr ""
+msgstr "الرقم البريدى/المدينة"

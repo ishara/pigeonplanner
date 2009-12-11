@@ -196,7 +196,7 @@ class ToolsWindow:
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
 
-        if widgets.message_dialog('question', messages.MSG_REMOVE_ITEM, self.toolsdialog, (item, dataset)):
+        if widgets.message_dialog('question', messages.MSG_REMOVE_ITEM, self.toolsdialog, {'item': item, 'dataset': dataset}):
             index = self.cbitems.get_active()
 
             if dataset == _("Colours"):
