@@ -28,7 +28,7 @@ import messages
 def update():
     new = False
 
-    local = os.path.join(const.PREFDIR, const.UPDATEURL.split('/')[-1])
+    local = os.path.join(const.TEMPDIR, 'pigeonplanner_update')
 
     try:
         urllib.urlretrieve(const.UPDATEURL, local)
