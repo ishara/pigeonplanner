@@ -174,11 +174,6 @@ class MainWindow:
         if self.options.optionList.runs < 10:
             self.options.set_option('Options', 'runs', self.options.optionList.runs+1)
 
-        try:
-            os.remove(join(const.TEMPDIR, 'pigeonplanner.pid'))
-        except:
-            pass
-
         gtk.main_quit()
 
     def on_dialog_delete(self, widget, event):

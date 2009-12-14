@@ -126,17 +126,9 @@ class PigeonPlanner:
 
         __builtin__._ = langTranslation.gettext
 
-        # Only allow 1 instance of the program
+		# Logging setup
         import pigeonplanner.const as const
 
-        pidfile = os.path.join(const.TEMPDIR, 'pigeonplanner.pid')
-        self.check_pid(pidfile, win32)
-
-        pfile = open(pidfile, 'wt')
-        pfile.write(str(os.getpid()))
-        pfile.close()
-
-		# Logging setup
         if os.path.exists(const.LOGFILE):
             if os.path.exists("%s.old" % const.LOGFILE):
                 os.remove("%s.old" % const.LOGFILE)
@@ -188,35 +180,6 @@ class PigeonPlanner:
 
             if assistant.cancelled:
                 exit(0)
-
-    def check_pid(self, pid_file, win32):
-        if not os.path.isfile(pid_file):
-            return
-
-        pid = 0
-        try:
-            pfile = open(pid_file, 'rt')
-            data = pfile.read()
-            pfile.close()
-            pid = int(data)
-        except:
-            pass
-
-        if 0 == pid:
-            return
-
-        if not win32:
-            try:
-                os.kill(pid, 0)
-            except:
-                return
-
-        import pigeonplanner.messages as msgs
-        from pigeonplanner.widgets import message_dialog
-
-        message_dialog('error', msgs.MSG_ALREADY_RUNNING)
-
-        exit(0)
 
     def exception_hook(self, type_, value, tb):
         import traceback
