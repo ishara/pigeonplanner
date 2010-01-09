@@ -55,6 +55,8 @@ class DatabaseOperations:
                ' place INTEGER,'
                ' out INTEGER,'
                ' sector TEXT,'
+               ' type TEXT,'
+               ' category TEXT,'
                ' wind TEXT,'
                ' weather TEXT,'
                ' put TEXT,'
@@ -79,6 +81,10 @@ class DatabaseOperations:
                   ' distance TEXT)',
     'Sectors': '(Sectorkey INTEGER PRIMARY KEY,'
                ' sector TEXT UNIQUE)',
+    'Types': '(Typekey INTEGER PRIMARY KEY,'
+             ' type TEXT UNIQUE)',
+    'Categories': '(Categorykey INTEGER PRIMARY KEY,'
+                  ' category TEXT UNIQUE)',
     'Strains': '(Strainkey INTEGER PRIMARY KEY,'
                ' strain TEXT UNIQUE)',
     'Lofts': '(Loftkey INTEGER PRIMARY KEY,'
@@ -284,9 +290,12 @@ class DatabaseOperations:
 #### Results
     def insert_result(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('INSERT INTO Results VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+        cursor.execute('INSERT INTO Results VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
         conn.commit()
+        rowid = cursor.lastrowid
         conn.close()
+
+        return rowid
 
     def delete_result_from_id(self, ID):
         conn, cursor = self.db_connect()
@@ -302,7 +311,7 @@ class DatabaseOperations:
 
     def update_result(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Results SET date=?, point=?, place=?, out=?, sector=? WHERE Resultkey=?', data)
+        cursor.execute('UPDATE Results SET date=?, point=?, place=?, out=?, sector=?, type=?, category=?, wind=?, weather=?, put=?, back=?, comment=? WHERE Resultkey=?', data)
         conn.commit()
         conn.close()
 
@@ -326,6 +335,13 @@ class DatabaseOperations:
         conn.close()
         return data
 
+    def get_pigeon_results_at_date(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Results WHERE pindex=? AND date=?', data)
+        data = cursor.fetchall()
+        conn.close()
+        return data
+
     def has_results(self, pindex):
         conn, cursor = self.db_connect()
         cursor.execute('SELECT COUNT(*) FROM Results WHERE pindex=?', (pindex,))
@@ -335,7 +351,6 @@ class DatabaseOperations:
             return data[0]
         else:
             return None
-
 
 #### Addresses
     def insert_address(self, data):
@@ -416,6 +431,52 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
+#### Types
+    def insert_type(self, data):
+        conn, cursor = self.db_connect()
+        try:
+            cursor.execute('INSERT INTO Types VALUES (null, ?)', data)
+        except sqlite3.IntegrityError:
+            pass
+        conn.commit()
+        conn.close()
+
+    def get_all_types(self):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Types')
+        data = [row[1] for row in cursor.fetchall() if row[1]]
+        conn.close()
+        return data
+
+    def delete_type(self, ftype):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Types WHERE type=?', (ftype,))
+        conn.commit()
+        conn.close()
+
+#### Categories
+    def insert_category(self, data):
+        conn, cursor = self.db_connect()
+        try:
+            cursor.execute('INSERT INTO Categories VALUES (null, ?)', data)
+        except sqlite3.IntegrityError:
+            pass
+        conn.commit()
+        conn.close()
+
+    def get_all_categories(self):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Categories')
+        data = [row[1] for row in cursor.fetchall() if row[1]]
+        conn.close()
+        return data
+
+    def delete_category(self, category):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Categories WHERE category=?', (category,))
+        conn.commit()
+        conn.close()
+
 #### Racepoints
     def insert_racepoint(self, data):
         conn, cursor = self.db_connect()
@@ -436,6 +497,52 @@ class DatabaseOperations:
     def delete_racepoint(self, racepoint):
         conn, cursor = self.db_connect()
         cursor.execute('DELETE FROM Racepoints WHERE racepoint=?', (racepoint,))
+        conn.commit()
+        conn.close()
+
+#### Weather
+    def insert_weather(self, data):
+        conn, cursor = self.db_connect()
+        try:
+            cursor.execute('INSERT INTO Weather (Weatherkey, weather) VALUES (null, ?)', data)
+        except sqlite3.IntegrityError:
+            pass
+        conn.commit()
+        conn.close()
+
+    def get_all_weather(self):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Weather')
+        data = [row[1] for row in cursor.fetchall() if row[1]]
+        conn.close()
+        return data
+
+    def delete_weather(self, weather):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Weather WHERE weather=?', (weather,))
+        conn.commit()
+        conn.close()
+
+#### Wind
+    def insert_wind(self, data):
+        conn, cursor = self.db_connect()
+        try:
+            cursor.execute('INSERT INTO Wind (Windkey, wind) VALUES (null, ?)', data)
+        except sqlite3.IntegrityError:
+            pass
+        conn.commit()
+        conn.close()
+
+    def get_all_wind(self):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Wind')
+        data = [row[1] for row in cursor.fetchall() if row[1]]
+        conn.close()
+        return data
+
+    def delete_wind(self, wind):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Wind WHERE wind=?', (wind,))
         conn.commit()
         conn.close()
 

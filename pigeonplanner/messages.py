@@ -55,7 +55,7 @@ MSG_INVALID_RANGE = (_("Invalid input!"),
                      _("Error"))
 
 MSG_EMPTY_DATA = (_("Invalid input!"),
-                  _("All fields have to be entered."),
+                  _("At least the date and racepoint have to be entered."),
                   _("Error"))
 MSG_INVALID_FORMAT = (_("Invalid input!"),
                       _("The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."),

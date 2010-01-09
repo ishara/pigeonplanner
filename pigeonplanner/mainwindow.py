@@ -60,7 +60,6 @@ class MainWindow:
         self.imageDeleted = False
         self.selectionPath = 0
         self.blockMenuCallback = False
-        self.editResultMode = False
         self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(join(const.IMAGEDIR, 'icon_logo.png'), 75, 75)
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
@@ -90,11 +89,13 @@ class MainWindow:
         self.create_sexcombos()
         self.set_filefilter()
 
-        for item in [self.cbRacepoint, self.cbSector, self.cbColour, self.cbStrain, self.cbLoft]:
+        cbentries = [self.cbRacepoint, self.cbSector, self.cbType, self.cbCategory, self.cbWeather, self.cbWind, self.cbColour, self.cbStrain, self.cbLoft]
+
+        for item in cbentries:
             widgets.set_completion(item)
 
         # This can't be done in Glade
-        for cbentry in [self.cbColour, self.cbStrain, self.cbLoft]:
+        for cbentry in cbentries:
             cbentry.child.set_activates_default(True)
 
         if self.options.optionList.arrows:
@@ -119,7 +120,11 @@ class MainWindow:
             self.blockMenuCallback = False
 
         self.listdata = {self.cbSector: self.database.get_all_sectors(), \
+                         self.cbType: self.database.get_all_types(), \
+                         self.cbCategory: self.database.get_all_categories(), \
                          self.cbRacepoint: self.database.get_all_racepoints(), \
+                         self.cbWeather: self.database.get_all_weather(), \
+                         self.cbWind: self.database.get_all_wind(), \
                          self.cbColour: self.database.get_all_colours(), \
                          self.cbStrain: self.database.get_all_strains(), \
                          self.cbLoft: self.database.get_all_lofts()}
@@ -634,34 +639,19 @@ class MainWindow:
 
             widgets.popup_menu(event, entries)
 
+    def on_allresults_clicked(self, widget):
+        ResultWindow(self.main, self.parser.pigeons, self.database)
+
     def on_addresult_clicked(self, widget):
-        pindex, ring, year = self.get_main_ring()
-        try:
-            date, point, place, out, sector = self.get_resultdata()
-        except TypeError:
-            return
+        self.menubar.set_sensitive(False)
+        self.toolbar.set_sensitive(False)
 
-        for result in self.database.get_pigeon_results(pindex):
-            if result[2] == date and \
-               result[3] == point and \
-               result[4] == place and \
-               result[5] == out:
-                widgets.message_dialog('error', messages.MSG_RESULT_EXISTS, self.main)
-                return
-
-        cof = (float(place)/float(out))*100
-
-        data = (pindex, date, point, place, out, sector, '', '', '', '', '')
-        self.database.insert_result(data)
-
-        self.database.insert_racepoint((point, ))
-        widgets.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
-
-        if sector:
-            self.database.insert_sector((sector, ))
-            widgets.fill_list(self.cbSector, self.database.get_all_sectors())
-
-        self.lsResult.append([date, point, place, out, cof, sector])
+        self.clear_resultdialog_fields()
+        self.resultDialogMode = 'add'
+        self.labelModeResult.set_text(_('Add result for:'))
+        self.resultdialog.show()
+        self.resultdialog.set_modal(False)
+        self.entryDate.set_position(10)
 
     def on_removeresult_clicked(self, widget):
         path, focus = self.tvResults.get_cursor()
@@ -671,8 +661,7 @@ class MainWindow:
         if not widgets.message_dialog('warning', messages.MSG_REMOVE_RESULT, self.main):
             return
 
-        ID = self.get_result_id(pindex, self.get_selected_result())
-        self.database.delete_result_from_id(ID)
+        self.database.delete_result_from_id(model[tIter][0])
 
         self.lsResult.remove(tIter)
 
@@ -680,58 +669,116 @@ class MainWindow:
             self.tvResults.set_cursor(path)
 
     def on_editresult_clicked(self, widget):
-        date, point, place, out, sector = self.get_selected_result()
-        self.entryDate.set_text(date)
-        self.cbRacepoint.child.set_text(point)
-        self.spinPlaced.set_value(place)
-        self.spinOutof.set_value(out)
-        self.cbSector.child.set_text(sector)
+        result = self.get_selected_result()
+        for index, item in enumerate(result): # Happens on conversion from 0.6.0 to 0.7.0
+            if item == None:
+                result[index] = ''
 
-        widgets.set_multiple_visible({self.addresult: False,
-                                      self.editapply: True,
-                                      self.resultcancel: True})
+        self.entryDate.set_text(result[1])
+        self.cbRacepoint.child.set_text(result[2])
+        self.spinPlaced.set_value(result[3])
+        self.spinOutof.set_value(result[4])
+        self.cbSector.child.set_text(result[6])
+        self.cbType.child.set_text(result[7])
+        self.cbCategory.child.set_text(result[8])
+        self.cbWeather.child.set_text(result[9])
+        self.cbWind.child.set_text(result[10])
+        self.entryComment.set_text(result[11])
 
-        self.labeladdresult.set_markup(_("<b>Edit this result</b>"))
+        self.resultDialogMode = 'edit'
+        self.labelModeResult.set_text(_('Edit result for:'))
+        self.resultdialog.show()
+        self.resultdialog.set_modal(True)
+        self.entryDate.set_position(10)
 
-        self.editResultMode = True
-
-    def on_editapply_clicked(self, widget):
-        pindex, ring, year = self.get_main_ring()
+    def on_resultdialogsave_clicked(self, widget):
         try:
-            date, point, place, out, sector = self.get_resultdata()
+            pindex, ring, year = self.get_main_ring()
         except TypeError:
             return
 
-        self.database.update_result((date, \
-                                     point, \
-                                     place, \
-                                     out, \
-                                     sector, \
-                                     self.get_result_id(pindex, self.get_selected_result())))
+        try:
+            date, point, place, out, sector, ftype, category, weather, wind, comment = self.get_resultdata()
+        except TypeError:
+            return
 
-        self.get_results(pindex)
-        self.on_resultcancel_clicked(None)
+        for result in self.database.get_pigeon_results_at_date((pindex, date)):
+            if result[3] == point and \
+               result[4] == place and \
+               result[5] == out and \
+               result[6] == sector  and \
+               result[7] == ftype  and \
+               result[8] == category  and \
+               result[9] == wind  and \
+               result[10] == weather  and \
+               result[13] == comment:
+                widgets.message_dialog('error', messages.MSG_RESULT_EXISTS, self.main)
+                return
 
-    def on_resultcancel_clicked(self, widget):
-        self.entryDate.set_text('')
+        cof = (float(place)/float(out))*100
+
+        self.database.insert_racepoint((point, ))
+        widgets.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
+
+        if sector:
+            self.database.insert_sector((sector, ))
+            widgets.fill_list(self.cbSector, self.database.get_all_sectors())
+
+        if ftype:
+            self.database.insert_type((ftype, ))
+            widgets.fill_list(self.cbType, self.database.get_all_types())
+
+        if category:
+            self.database.insert_category((category, ))
+            widgets.fill_list(self.cbCategory, self.database.get_all_categories())
+
+        if weather:
+            self.database.insert_weather((weather, ))
+            widgets.fill_list(self.cbWeather, self.database.get_all_weather())
+
+        if wind:
+            self.database.insert_wind((wind, ))
+            widgets.fill_list(self.cbWind, self.database.get_all_wind())
+
+        data = (date, point, place, out, sector, ftype, category, wind, weather, '', '', comment)
+        if self.resultDialogMode == 'add':
+            data = (pindex, ) + data
+            rowid = self.database.insert_result(data)
+            self.lsResult.append([rowid, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
+        elif self.resultDialogMode == 'edit':
+            selection = self.tvResults.get_selection()
+            model, node = selection.get_selected()
+            self.lsResult.set(node, 1, date, 2, point, 3, place, 4, out, 5, cof, 6, sector, 7, ftype, 8, category, 9, weather, 10, wind, 11, comment)
+
+            data += (self.lsResult.get_value(node, 0), )
+            self.database.update_result(data)
+
+        self.hide_result_dialog()
+
+    def on_resultdialogcancel_clicked(self, widget):
+        self.hide_result_dialog()
+
+    def hide_result_dialog(self, widget=None, event=None):
+        self.menubar.set_sensitive(True)
+        self.toolbar.set_sensitive(True)
+        self.resultdialog.hide()
+
+        return True
+
+    def on_spinPlaced_changed(self, widget):
+        self.spinOutof.set_range(widget.get_value_as_int(), widget.get_range()[1])
+
+    def clear_resultdialog_fields(self):
+        self.entryDate.set_text(datetime.date.today().strftime(self.date_format))
         self.cbRacepoint.child.set_text('')
         self.spinPlaced.set_value(1)
         self.spinOutof.set_value(1)
         self.cbSector.child.set_text('')
-
-        widgets.set_multiple_visible({self.addresult: True,
-                                      self.editapply: False,
-                                      self.resultcancel: False})
-
-        self.labeladdresult.set_markup(_("<b>Add a new result</b>"))
-
-        self.editResultMode = False
-
-    def on_allresults_clicked(self, widget):
-        ResultWindow(self.main, self.parser.pigeons, self.database)
-
-    def on_spinPlaced_changed(self, widget):
-        self.spinOutof.set_range(widget.get_value_as_int(), widget.get_range()[1])
+        self.cbType.child.set_text('')
+        self.cbCategory.child.set_text('')
+        self.cbWeather.child.set_text('')
+        self.cbWind.child.set_text('')
+        self.entryComment.set_text('')
 
     # Find parent callbacks
     def on_findsire_clicked(self, widget):
@@ -833,7 +880,7 @@ class MainWindow:
 
         uimanager.connect('connect-proxy', self.uimanager_connect_proxy)
 
-        menubar = uimanager.get_widget('/MenuBar')
+        self.menubar = uimanager.get_widget('/MenuBar')
         self.toolbar = uimanager.get_widget('/Toolbar')
         widgetDic = {"MenuArrows": uimanager.get_widget('/MenuBar/ViewMenu/Arrows'),
                      "MenuToolbar": uimanager.get_widget('/MenuBar/ViewMenu/Toolbar'),
@@ -853,8 +900,8 @@ class MainWindow:
         widgets.set_multiple_sensitive({self.MenuEdit: False, self.MenuRemove: False,
                                         self.MenuPedigree: False, self.MenuAddresult: False})
 
-        self.vbox.pack_start(menubar, False, False)
-        self.vbox.reorder_child(menubar, 0)
+        self.vbox.pack_start(self.menubar, False, False)
+        self.vbox.reorder_child(self.menubar, 0)
         self.vbox.pack_start(self.toolbar, False, False)
         self.vbox.reorder_child(self.toolbar, 1)
 
@@ -1012,12 +1059,12 @@ class MainWindow:
                                 True, True, True)
 
         # Results treeview
-        columns = [_("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector")]
-        types = [str, str, int, int, float, str]
+        columns = [_("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector"), _("Type"), _("Category"), _("Weather"), _("Wind"), _("Comment")]
+        types = [str, str, str, int, int, float, str, str, str, str, str, str]
         self.lsResult, self.selResults = widgets.setup_treeview(self.tvResults,
                                                                 columns, types,
                                                                 self.selectionresult_changed,
-                                                                True, True)
+                                                                True, True, True)
 
     def fill_treeview(self, pigeonType='all', path=0):
         '''
@@ -1075,8 +1122,6 @@ class MainWindow:
         model, path = selection.get_selected()
 
         self.empty_entryboxes()
-        if self.editResultMode:
-            self.on_resultcancel_clicked(None)
 
         if path:
             widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
@@ -1157,6 +1202,7 @@ class MainWindow:
         self.find_offspring(pindex, sire, dam)
 
         self.get_results(pindex)
+        self.labelPigeonResult.set_text("%s / %s" %(ring, year))
 
     def get_results(self, pindex):
         '''
@@ -1168,15 +1214,21 @@ class MainWindow:
         self.lsResult.clear()
 
         for result in self.database.get_pigeon_results(pindex):
+            key = result[0]
             date = result[2]
             point = result[3]
             place = result[4]
             out = result[5]
             sector = result[6]
+            ftype = result[7]
+            category = result[8]
+            wind = result[9]
+            weather = result[10]
+            comment = result[13]
 
             cof = (float(place)/float(out))*100
 
-            self.lsResult.append([date, point, place, out, cof, sector])
+            self.lsResult.append([key, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
 
         self.lsResult.set_sort_column_id(0, gtk.SORT_ASCENDING)
 
@@ -1554,18 +1606,23 @@ class MainWindow:
         place = self.spinPlaced.get_value_as_int()
         out = self.spinOutof.get_value_as_int()
         sector = self.cbSector.child.get_text()
+        ftype = self.cbType.child.get_text()
+        category = self.cbCategory.child.get_text()
+        weather = self.cbWeather.child.get_text()
+        wind = self.cbWind.child.get_text()
+        comment = self.entryComment.get_text()
 
         if not date or not point or not place or not out:
-            widgets.message_dialog('error', messages.MSG_EMPTY_DATA, self.main)
+            widgets.message_dialog('error', messages.MSG_EMPTY_DATA, self.resultdialog)
             return False
 
         try:
             datetime.datetime.strptime(date, self.date_format)
         except ValueError:
-            widgets.message_dialog('error', messages.MSG_INVALID_FORMAT, self.main)
+            widgets.message_dialog('error', messages.MSG_INVALID_FORMAT, self.resultdialog)
             return False
 
-        return date, point, place, out, sector
+        return date, point, place, out, sector, ftype, category, weather, wind, comment
 
     def get_selected_result(self):
         '''
@@ -1575,24 +1632,7 @@ class MainWindow:
         model, tIter = self.selResults.get_selected()
         if not tIter: return
         
-        return model[tIter][0], model[tIter][1], model[tIter][2], model[tIter][3], model[tIter][5]
-
-    def get_result_id(self, pindex, data):
-        '''
-        Return the ID of the wanted result
-
-        @param pindex: the pindex of the pigeon
-        @param data: tuple of data to compare
-        '''
-
-        for result in self.database.get_pigeon_results(pindex):
-            if result[2] == data[0] and \
-               result[3] == data[1] and \
-               result[4] == data[2] and \
-               result[5] == data[3]:
-                    return result[0]
-
-        return None
+        return list(model[tIter])
 
     def fill_find_treeview(self, sex, band, year):
         '''

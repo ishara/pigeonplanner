@@ -90,7 +90,7 @@ class ToolsWindow:
         self.fcButtonRestore.add_filter(widgets.backupFileFilter)
 
         # Fill the data combobox
-        data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Strains"), _("Lofts")]
+        data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Types"), _("Categories"), _("Strains"), _("Lofts"), _("Weather"), _("Wind")]
         data.sort()
         for item in data:
             self.cbdata.append_text(item)
@@ -155,8 +155,7 @@ class ToolsWindow:
 
     # Data
     def on_cbdata_changed(self, widget):
-        datatype = widget.get_active_text()
-        self.fill_item_combo(datatype)
+        self.fill_item_combo(widget.get_active_text())
 
     def fill_item_combo(self, datatype):
         '''
@@ -169,12 +168,20 @@ class ToolsWindow:
             items = self.main.database.get_all_colours()
         elif datatype == _("Sectors"):
             items = self.main.database.get_all_sectors()
+        elif datatype == _("Types"):
+            items = self.main.database.get_all_types()
+        elif datatype == _("Categories"):
+            items = self.main.database.get_all_categories()
         elif datatype == _("Racepoints"):
             items = self.main.database.get_all_racepoints()
         elif datatype == _("Strains"):
             items = self.main.database.get_all_strains()
         elif datatype == _("Lofts"):
             items = self.main.database.get_all_lofts()
+        elif datatype == _("Weather"):
+            items = self.main.database.get_all_weather()
+        elif datatype == _("Wind"):
+            items = self.main.database.get_all_wind()
 
         if items:
             items.sort()
@@ -203,12 +210,20 @@ class ToolsWindow:
                 self.main.database.delete_colour(item)
             elif dataset == _("Sectors"):
                 self.main.database.delete_sector(item)
+            elif dataset == _("Types"):
+                self.main.database.delete_type(item)
+            elif dataset == _("Categories"):
+                self.main.database.delete_category(item)
             elif dataset == _("Racepoints"):
                 self.main.database.delete_racepoint(item)
             elif dataset == _("Strains"):
                 self.main.database.delete_strain(item)
             elif dataset == _("Lofts"):
                 self.main.database.delete_loft(item)
+            elif dataset == _("Weather"):
+                self.main.database.delete_weather(item)
+            elif dataset == _("Wind"):
+                self.main.database.delete_wind(item)
 
             self.cbitems.remove_text(index)
             self.cbitems.set_active(0)
@@ -221,12 +236,20 @@ class ToolsWindow:
             self.main.database.insert_colour(item)
         elif datatype == _("Sectors"):
             self.main.database.insert_sector(item)
+        elif datatype == _("Types"):
+            self.main.database.insert_type(item)
+        elif datatype == _("Categories"):
+            self.main.database.insert_category(item)
         elif datatype == _("Racepoints"):
             self.main.database.insert_racepoint(item)
         elif datatype == _("Strains"):
             self.main.database.insert_strain(item)
         elif datatype == _("Lofts"):
             self.main.database.insert_loft(item)
+        elif datatype == _("Weather"):
+            self.main.database.insert_weather(item)
+        elif datatype == _("Wind"):
+            self.main.database.insert_wind(item)
 
         self.entryData.set_text('')
 
