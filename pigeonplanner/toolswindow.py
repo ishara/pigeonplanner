@@ -483,7 +483,7 @@ class ToolsWindow:
                 logger.error("Deleting database: %s" % msg)
             else:
                 widgets.message_dialog('info', messages.MSG_RMDB_FINISH, self.toolsdialog)
-                self.close_clicked()
+                self.on_close_dialog()
                 self.main.quit_program(bckp=False)
 
     # Backup
