@@ -702,20 +702,32 @@ class MainWindow:
         except TypeError:
             return
 
-        for result in self.database.get_pigeon_results_at_date((pindex, date)):
-            if result[3] == point and \
-               result[4] == place and \
-               result[5] == out and \
-               result[6] == sector  and \
-               result[7] == ftype  and \
-               result[8] == category  and \
-               result[9] == wind  and \
-               result[10] == weather  and \
-               result[13] == comment:
-                widgets.message_dialog('error', messages.MSG_RESULT_EXISTS, self.main)
-                return
-
         cof = (float(place)/float(out))*100
+        data = (date, point, place, out, sector, ftype, category, wind, weather, '', '', comment)
+        if self.resultDialogMode == 'add':
+            data = (pindex, ) + data
+            rowid = self.database.insert_result(data)
+            self.lsResult.append([rowid, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
+
+            for result in self.database.get_pigeon_results_at_date((pindex, date)):
+                if result[3] == point and \
+                   result[4] == place and \
+                   result[5] == out and \
+                   result[6] == sector  and \
+                   result[7] == ftype  and \
+                   result[8] == category  and \
+                   result[9] == wind  and \
+                   result[10] == weather  and \
+                   result[13] == comment:
+                    widgets.message_dialog('error', messages.MSG_RESULT_EXISTS, self.main)
+                    return
+        elif self.resultDialogMode == 'edit':
+            selection = self.tvResults.get_selection()
+            model, node = selection.get_selected()
+            self.lsResult.set(node, 1, date, 2, point, 3, place, 4, out, 5, cof, 6, sector, 7, ftype, 8, category, 9, weather, 10, wind, 11, comment)
+
+            data += (self.lsResult.get_value(node, 0), )
+            self.database.update_result(data)
 
         self.database.insert_racepoint((point, ))
         widgets.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
@@ -739,19 +751,6 @@ class MainWindow:
         if wind:
             self.database.insert_wind((wind, ))
             widgets.fill_list(self.cbWind, self.database.get_all_wind())
-
-        data = (date, point, place, out, sector, ftype, category, wind, weather, '', '', comment)
-        if self.resultDialogMode == 'add':
-            data = (pindex, ) + data
-            rowid = self.database.insert_result(data)
-            self.lsResult.append([rowid, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
-        elif self.resultDialogMode == 'edit':
-            selection = self.tvResults.get_selection()
-            model, node = selection.get_selected()
-            self.lsResult.set(node, 1, date, 2, point, 3, place, 4, out, 5, cof, 6, sector, 7, ftype, 8, category, 9, weather, 10, wind, 11, comment)
-
-            data += (self.lsResult.get_value(node, 0), )
-            self.database.update_result(data)
 
         self.hide_result_dialog()
 
