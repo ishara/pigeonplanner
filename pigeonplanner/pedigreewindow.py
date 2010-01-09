@@ -88,7 +88,7 @@ class PedigreeWindow:
                 tw = ToolsWindow(self.main)
                 tw.toolsdialog.set_keep_above(True)
                 tw.treeview.set_cursor(2)
-                tw.adadd_clicked(None, pedigree_call=True)
+                tw.on_adadd_clicked(None, pedigree_call=True)
                 tw.chkme.set_active(True)
 
                 return
