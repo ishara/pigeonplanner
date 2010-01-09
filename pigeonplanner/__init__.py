@@ -19,9 +19,9 @@ name = "Pigeon Planner"
 
 versionbase = "0.6.9"
 
-version = "0.6.9.bzr356"
+version = "0.6.9.bzr357"
 
-copyright = "(C)opyright 2009 Timo Vanwynsberghe"
+copyright = "(C)opyright 2009-2010 Timo Vanwynsberghe"
 
 authors = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
 
