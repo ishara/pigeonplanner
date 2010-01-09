@@ -216,6 +216,7 @@ if __name__ == "__main__":
 
     try:
         pigeonplanner = main.MainWindow(app.options)
+        gobject.threads_init()
         gtk.main()
     except KeyboardInterrupt:
         pass
