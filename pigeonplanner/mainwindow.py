@@ -1334,6 +1334,7 @@ class MainWindow:
         self.main.add_accel_group(self.cancelEscAG)
 
         self.entryRing1.grab_focus()
+        self.entryRing1.set_position(-1)
         self.save.grab_default()
 
     def add_edit_finish(self, *args):
