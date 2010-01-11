@@ -729,6 +729,8 @@ class MainWindow:
             data += (self.lsResult.get_value(node, 0), )
             self.database.update_result(data)
 
+            self.hide_result_dialog()
+
         self.database.insert_racepoint((point, ))
         widgets.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
 
@@ -751,8 +753,6 @@ class MainWindow:
         if wind:
             self.database.insert_wind((wind, ))
             widgets.fill_list(self.cbWind, self.database.get_all_wind())
-
-        self.hide_result_dialog()
 
     def on_resultdialogcancel_clicked(self, widget):
         self.hide_result_dialog()
