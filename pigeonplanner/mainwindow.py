@@ -1229,7 +1229,7 @@ class MainWindow:
 
             self.lsResult.append([key, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
 
-        self.lsResult.set_sort_column_id(0, gtk.SORT_ASCENDING)
+        self.lsResult.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
     def find_direct_relatives(self, pindex, sire, dam):
         '''
