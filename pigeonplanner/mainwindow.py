@@ -705,10 +705,6 @@ class MainWindow:
         cof = (float(place)/float(out))*100
         data = (date, point, place, out, sector, ftype, category, wind, weather, '', '', comment)
         if self.resultDialogMode == 'add':
-            data = (pindex, ) + data
-            rowid = self.database.insert_result(data)
-            self.lsResult.append([rowid, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
-
             for result in self.database.get_pigeon_results_at_date((pindex, date)):
                 if result[3] == point and \
                    result[4] == place and \
@@ -721,6 +717,10 @@ class MainWindow:
                    result[13] == comment:
                     widgets.message_dialog('error', messages.MSG_RESULT_EXISTS, self.main)
                     return
+
+            data = (pindex, ) + data
+            rowid = self.database.insert_result(data)
+            self.lsResult.append([rowid, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
         elif self.resultDialogMode == 'edit':
             selection = self.tvResults.get_selection()
             model, node = selection.get_selected()
