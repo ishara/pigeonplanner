@@ -180,6 +180,11 @@ class PigeonPlanner:
 
             if assistant.cancelled:
                 exit(0)
+            elif assistant.error:
+                import pigeonplanner.logdialog as logdialog
+
+                logdialog.LogDialog()
+                exit(0)
 
     def exception_hook(self, type_, value, tb):
         import traceback
