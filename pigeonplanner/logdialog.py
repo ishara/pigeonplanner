@@ -96,7 +96,9 @@ class LogDialog(gtk.Dialog):
         label.set_alignment(0.50, 0)
         self.vbox.pack_start(label, False, False, 10)
         link = gtk.LinkButton("timovwb@gmail.com", "timovwb@gmail.com")
-        self.vbox.pack_start(link, False, True, 10)
+        bbox = gtk.HButtonBox()
+        bbox.add(link)
+        self.vbox.pack_start(bbox, False, True, 10)
         gtk.link_button_set_uri_hook(self.email_hook)
 
         #action area
