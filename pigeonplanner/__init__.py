@@ -19,13 +19,13 @@ name = "Pigeon Planner"
 
 versionbase = "0.6.9"
 
-version = "0.6.9.bzr369"
+version = "0.6.9.bzr370"
 
 copyright = "(C)opyright 2009-2010 Timo Vanwynsberghe"
 
 authors = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
 
-website = "http://pigeonplanner.sourceforge.net/"
+website = "http://www.pigeonplanner.com"
 
 description = "Organise and manage your pigeons"
 

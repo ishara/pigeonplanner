@@ -18,7 +18,6 @@
 
 import os
 import sys
-import locale
 import tempfile
 
 import pigeonplanner
@@ -64,17 +63,7 @@ GLADEASSIST = os.path.join(GLADEDIR, "DBAssistant.glade")
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')
-UPDATEURL = 'http://pigeonplanner.sourceforge.net/CURRENT'
+
+UPDATEURL = 'http://www.pigeonplanner.com/CURRENT'
+DOWNLOADURL = 'http://www.pigeonplanner.com/download'
 FORUMURL = 'https://sourceforge.net/apps/phpbb/pigeonplanner/'
-
-try:
-    lang = locale.getlocale()[0][:2]
-except TypeError:
-    lang = locale.getlocale()[0]
-else:
-    lang = ''
-
-if lang == 'nl' or lang == 'dutch':
-    DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/nl/download.php'
-else:
-    DOWNLOADURL = 'http://pigeonplanner.sourceforge.net/en/download.php'
