@@ -179,12 +179,12 @@ class PigeonPlanner:
             gtk.main()
 
             if assistant.cancelled:
-                exit(0)
+                sys.exit()
             elif assistant.error:
                 import pigeonplanner.logdialog as logdialog
 
                 logdialog.LogDialog()
-                exit(0)
+                sys.exit()
 
     def exception_hook(self, type_, value, tb):
         import traceback
