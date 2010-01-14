@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-11 15:06+0100\n"
-"PO-Revision-Date: 2009-12-05 20:53+0000\n"
-"Last-Translator: korisk <Unknown>\n"
+"POT-Creation-Date: 2010-01-11 15:07+0100\n"
+"PO-Revision-Date: 2009-12-28 07:43+0000\n"
+"Last-Translator: Sergey Sedov <Unknown>\n"
 "Language-Team: none <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-12-11 15:08+0000\n"
+"X-Launchpad-Export-Date: 2010-01-14 20:04+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../pigeonplanner/messages.py:19
@@ -111,9 +111,8 @@ msgid "Only numbers are allowed when adding multiple pigeons."
 msgstr "В поле ввода номера кольца допустимы только числа"
 
 #: ../pigeonplanner/messages.py:58
-#, fuzzy
 msgid "At least the date and racepoint have to be entered."
-msgstr "Все поля должны быть заполнены"
+msgstr ""
 
 #: ../pigeonplanner/messages.py:61
 msgid ""
@@ -160,9 +159,9 @@ msgid "Remove address"
 msgstr "Удалить адрес"
 
 #: ../pigeonplanner/messages.py:80
-#, fuzzy, python-format
+#, python-format
 msgid "Removing '%(item)s' from '%(dataset)s'."
-msgstr "Удаление  '%s' из '%s'."
+msgstr ""
 
 #: ../pigeonplanner/messages.py:81
 msgid "Are you sure you want to remove this item?"
@@ -178,7 +177,8 @@ msgstr "Удаление базы данных"
 
 #: ../pigeonplanner/messages.py:85
 msgid "Are you sure you want to remove the database? All data will be lost."
-msgstr "Вы уверены, что хотите удалить базу данных? Все данные будут потеряны."
+msgstr ""
+"Вы уверены, что хотите удалить базу данных? Все данные будут потеряны."
 
 #: ../pigeonplanner/messages.py:86
 msgid "Remove database"
@@ -405,6 +405,7 @@ msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Sergey Sedov https://launchpad.net/~serg-sedov\n"
+"  Timo https://launchpad.net/~timovwb\n"
 "  korisk https://launchpad.net/~korisk\n"
 "  korisk https://launchpad.net/~korisk-yandex"
 
@@ -609,14 +610,12 @@ msgid "Restore backup"
 msgstr "Восстановить из резервной копии"
 
 #: ../pigeonplanner/mainwindow.py:651
-#, fuzzy
 msgid "Add result for:"
-msgstr "Добавить результат"
+msgstr ""
 
 #: ../pigeonplanner/mainwindow.py:689
-#, fuzzy
 msgid "Edit result for:"
-msgstr "Редактировать результаты"
+msgstr ""
 
 #: ../pigeonplanner/mainwindow.py:913
 msgid "_File"
@@ -882,46 +881,40 @@ msgid "Images"
 msgstr "Изображения"
 
 #: tmp/DBAssistant.glade.h:1
-#, fuzzy
 msgid "<b><i><big>Update complete</big></i></b>"
-msgstr "<b><i><big>Обновить</big></i></b>"
+msgstr ""
 
 #: tmp/DBAssistant.glade.h:2
-#, fuzzy
 msgid "<b><i><big>Update failed</big></i></b>"
-msgstr "<b><i><big>Обновить</big></i></b>"
+msgstr ""
 
 #: tmp/DBAssistant.glade.h:3
-#, fuzzy
 msgid "<b><i><big>Update required</big></i></b>"
-msgstr "<b><i><big>Обновить</big></i></b>"
+msgstr ""
 
 #: tmp/DBAssistant.glade.h:4
-#, fuzzy
 msgid "<b><i><big>Updating database...</big></i></b>"
-msgstr "<b><i><big>База данных</big></i></b>"
+msgstr "<b><i><big>Обновление базы данных...</big></i></b>"
 
 #: tmp/DBAssistant.glade.h:5
 msgid "Cleaning up..."
-msgstr ""
+msgstr "Очистка..."
 
 #: tmp/DBAssistant.glade.h:7
 msgid "Database operations:"
 msgstr ""
 
 #: tmp/DBAssistant.glade.h:8
-#, fuzzy
 msgid "Database update"
-msgstr "База данных"
+msgstr ""
 
 #: tmp/DBAssistant.glade.h:9
 msgid "Doing the database operations..."
 msgstr ""
 
 #: tmp/DBAssistant.glade.h:10
-#, fuzzy
 msgid "Making a backup..."
-msgstr "Автоматически создавать резервную копию"
+msgstr "Идёт резервное копирование..."
 
 #: tmp/DBAssistant.glade.h:11
 msgid ""
@@ -943,13 +936,12 @@ msgid ""
 msgstr ""
 
 #: tmp/DBAssistant.glade.h:22
-#, fuzzy
 msgid "Start"
-msgstr "Улица"
+msgstr "Начать"
 
 #: tmp/DBAssistant.glade.h:23
 msgid "The database update is complete. Pigeon Planner will now start."
-msgstr ""
+msgstr "Обновление базы данных завершено. Pigeon Planner запускается."
 
 #: tmp/MainWindow.glade.h:1
 msgid "<b>Brothers and sisters</b>"
@@ -1056,9 +1048,8 @@ msgid "To"
 msgstr "К"
 
 #: tmp/MainWindow.glade.h:42
-#, fuzzy
 msgid "View all"
-msgstr "Смотреть подробности"
+msgstr ""
 
 #: tmp/MainWindow.glade.h:43
 msgid "View detail"
