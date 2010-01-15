@@ -1,3 +1,14 @@
+0.7.0:
+ * Added option to add colour and name to pedigree pigeons
+ * Fixed bug where theme couldn't be changed on Vista and up
+ * Fixed bug where image would disappear when editing pigeon
+ * Fixed bug where error pops up when trying to print the pedigree
+ * Fixed bug where the database couldn't be deleted
+ * Greatly improved the results
+ * Removed the option that will allow only one instance
+ * Various little GUI changes
+ * Various little code changes and cleanup
+
 0.6.0:
  * Added a photo album
  * Added option to only allow one instance of the program
