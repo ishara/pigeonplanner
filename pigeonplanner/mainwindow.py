@@ -703,7 +703,7 @@ class MainWindow:
             return
 
         cof = (float(place)/float(out))*100
-        data = (date, point, place, out, sector, ftype, category, wind, weather, '', '', comment)
+        data = (date, point, place, out, sector, ftype, category, wind, weather, '', '', 0, 0, comment)
         if self.resultDialogMode == 'add':
             for result in self.database.get_pigeon_results_at_date((pindex, date)):
                 if result[3] == point and \
@@ -714,7 +714,7 @@ class MainWindow:
                    result[8] == category  and \
                    result[9] == wind  and \
                    result[10] == weather  and \
-                   result[13] == comment:
+                   result[15] == comment:
                     widgets.message_dialog('error', messages.MSG_RESULT_EXISTS, self.main)
                     return
 
@@ -1223,7 +1223,7 @@ class MainWindow:
             category = result[8]
             wind = result[9]
             weather = result[10]
-            comment = result[13]
+            comment = result[15]
 
             cof = (float(place)/float(out))*100
 

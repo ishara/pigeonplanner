@@ -61,6 +61,8 @@ class DatabaseOperations:
                ' weather TEXT,'
                ' put TEXT,'
                ' back TEXT,'
+               ' ownplace INTEGER,'
+               ' ownout INTEGER,'
                ' comment TEXT)',
     'Addresses': '(Addresskey INTEGER PRIMARY KEY,'
                  ' name TEXT,'
@@ -290,7 +292,7 @@ class DatabaseOperations:
 #### Results
     def insert_result(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('INSERT INTO Results VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+        cursor.execute('INSERT INTO Results VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
         conn.commit()
         rowid = cursor.lastrowid
         conn.close()
@@ -311,7 +313,7 @@ class DatabaseOperations:
 
     def update_result(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Results SET date=?, point=?, place=?, out=?, sector=?, type=?, category=?, wind=?, weather=?, put=?, back=?, comment=? WHERE Resultkey=?', data)
+        cursor.execute('UPDATE Results SET date=?, point=?, place=?, out=?, sector=?, type=?, category=?, wind=?, weather=?, put=?, back=?, ownplace=?, ownout=?, comment=? WHERE Resultkey=?', data)
         conn.commit()
         conn.close()
 
