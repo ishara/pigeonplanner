@@ -56,8 +56,6 @@ class MainWindow:
         self.main.set_title("%s %s" %(const.NAME, const.VERSION))
 
         self.date_format = '%Y-%m-%d'
-        self.imageToAdd = ''
-        self.imageDeleted = False
         self.selectionPath = 0
         self.blockMenuCallback = False
         self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(join(const.IMAGEDIR, 'icon_logo.png'), 75, 75)
@@ -248,6 +246,7 @@ class MainWindow:
         self.cbLoft.child.set_text('')
         self.cbsex.set_active(0)
         self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
+        self.labelImgPath.set_text('')
 
         self.add_edit_start('add')
 
@@ -560,13 +559,12 @@ class MainWindow:
             self.open_filedialog()
 
     def on_fcopen_clicked(self, widget):
-        self.imageToAdd = None
         filename = self.filedialog.get_filename()
         try:
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 200, 200)
             self.imagePigeon.set_from_pixbuf(pixbuf)
             self.imagePigeon1.set_from_pixbuf(pixbuf)
-            self.imageToAdd = filename
+            self.labelImgPath.set_text(filename)
         except:
             widgets.message_dialog('error', messages.MSG_INVALID_IMAGE, self.main)
 
@@ -1100,6 +1098,7 @@ class MainWindow:
         else:
             self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
             self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
+            self.labelImgPath.set_text('')
 
     def selectionresult_changed(self, selection):
         '''
@@ -1134,6 +1133,7 @@ class MainWindow:
                                             self.MenuAddresult: False, self.addresult: False})
 
             self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
+            self.labelImgPath.set_text('')
             self.pedigree.draw_pedigree()
             self.lsResult.clear()
             return
@@ -1180,9 +1180,11 @@ class MainWindow:
         if self.parser.pigeons[pindex].image:
             image = self.parser.pigeons[pindex].image
             width = height = 200
+            self.labelImgPath.set_text(image)
         else:
             image = join(const.IMAGEDIR, 'icon_logo.png')
             width = height = 75
+            self.labelImgPath.set_text('')
 
         try:
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(image, width, height)
@@ -1367,20 +1369,6 @@ class MainWindow:
         Return a tuple containig info about the editable widgets.
         '''
 
-        imageTemp = ''
-
-        try:
-            imageTemp = self.database.get_image(self.entryRing1.get_text()+self.entryYear1.get_text())
-        except:
-            pass
-
-        if imageTemp and not self.imageDeleted:
-            image = imageTemp
-        else:
-            image = self.imageToAdd
-
-        self.imageDeleted = False
-
         infoTuple = (self.entryRing1.get_text(),\
                      self.entryYear1.get_text(),\
                      self.cbsex.get_active_text(),\
@@ -1390,7 +1378,7 @@ class MainWindow:
                      self.entryName1.get_text(),\
                      self.cbStrain.child.get_text(),\
                      self.cbLoft.child.get_text(),\
-                     image,\
+                     self.labelImgPath.get_text(),\
                      self.entrySireEdit.get_text(),\
                      self.entryYearSireEdit.get_text(),\
                      self.entryDamEdit.get_text(),\
@@ -1479,8 +1467,7 @@ class MainWindow:
 
     def set_default_image(self, widget):
         self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
-        self.imageToAdd = ''
-        self.imageDeleted = True
+        self.labelImgPath.set_text('')
 
     def open_filedialog(self, widget=None):
         '''
