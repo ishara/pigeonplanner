@@ -231,7 +231,8 @@ class PrintPedigree:
         lst = [None]*31
         dp = DrawPedigree()
         dp.build_tree(self.pigeoninfo['pindex'], self.pigeoninfo['ring'], self.pigeoninfo['year'],
-                      self.pigeoninfo['sex'], '', '', '', '', '', '', 0, 1, lst)
+                      self.pigeoninfo['sex'], self.pigeoninfo['name'], self.pigeoninfo['colour'],
+                      '', '', '', '', '', '', 0, 1, lst)
 
         for i in range(1, 31):
             x = pos[i][0][0]
