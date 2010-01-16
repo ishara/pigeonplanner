@@ -134,7 +134,7 @@ class ConfigurationParser(ConfigParser.ConfigParser):
         Creates a new configuration file based on the given dic.
         '''
 
-        self.newFile = _("#Pigeon Planner configuration file")
+        self.newFile = "#Pigeon Planner configuration file"
         for section, values in valueDic.items():
             self.newFile += "\n\n"
             self.newFile += "[%s]" % section

@@ -69,7 +69,9 @@ class OptionsDialog:
                 ('Arabic (العربية)', 'ar'),
                 ('English', 'en'),
                 ('Español (Spanish)', 'es'),
-                ('Nederlands (Dutch)', 'nl'),]
+                ('Nederlands (Dutch)', 'nl'),
+                ('Русский (Russian)', 'ru')
+                ]
         for name, code in self.languagelookup:
             self.cbLang.append_text(name)
 
