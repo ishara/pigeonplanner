@@ -1,3 +1,9 @@
+0.7.2:
+ * Added Russian language
+ * Fixed error when editing a pigeon
+ * Fixed error when printing the pedigree (#508902)
+ * Fixed possible imagepath problems
+
 0.7.0:
  * Added option to add colour and name to pedigree pigeons
  * Fixed bug where theme couldn't be changed on Vista and up
