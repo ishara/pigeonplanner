@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 import gtk
 import gtk.glade
+import gobject
 
 import const
 import update
@@ -188,11 +189,15 @@ class MainWindow:
 
         if new:
             logger.info("End: New version found")
-            if widgets.message_dialog('question', messages.MSG_UPDATE_NOW, self.main):
-                logger.info("End: Going to download page")
-                webbrowser.open(const.DOWNLOADURL)
+            gobject.idle_add(self.update_dialog)
         else:
             logger.info("End: Already running the latest version")
+
+    def update_dialog(self):
+        if widgets.message_dialog('question', messages.MSG_UPDATE_NOW, self.main):
+            webbrowser.open(const.DOWNLOADURL)
+
+        return False
 
     def on_widget_enter(self, widget, event):
         for con_id in self.statusmsgs.values():
