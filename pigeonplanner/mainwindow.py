@@ -1639,8 +1639,6 @@ class MainWindow:
         self.lsFind.clear()
 
         for pigeon in self.parser.pigeons:
-            if not self.parser.pigeons[pigeon].show: continue
-
             if sex == self.parser.pigeons[pigeon].sex and \
                band != self.parser.pigeons[pigeon].ring and \
                year >= self.parser.pigeons[pigeon].year:
