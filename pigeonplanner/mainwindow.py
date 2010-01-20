@@ -342,6 +342,7 @@ class MainWindow:
 
     def menuaddresult_activate(self, widget):
         self.notebook.set_current_page(2)
+        self.on_addresult_clicked(None)
 
     def menufilter_action(self, action, widget):
         value = widget.get_current_value()
