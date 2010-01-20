@@ -332,10 +332,12 @@ class MainWindow:
 
             self.liststore.remove(tIter)
 
-        dialog.destroy()
+            if len(self.liststore) > 0:
+                if not path:
+                    path = 0
+                self.treeview.set_cursor(path)
 
-        if len(self.liststore) > 0:
-            self.treeview.set_cursor(path)
+        dialog.destroy()
 
     def menupedigree_activate(self, widget):
         self.on_sbdetail_clicked(None)
