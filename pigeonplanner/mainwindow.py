@@ -291,7 +291,7 @@ class MainWindow:
 
         self.add_edit_start('edit')
 
-        logger.info("Start: Editting a pigeon")
+        logger.info("Start: Editing a pigeon")
 
     def menuremove_activate(self, widget):
         logger.info("Start: Removing a pigeon")
@@ -355,11 +355,9 @@ class MainWindow:
             self.fill_treeview(str(value-1))
 
     def menutools_activate(self, widget):
-        logger.info("Open: Tools window")
         ToolsWindow(self)
 
     def menupref_activate(self, widget):
-        logger.info("Open: Preferences dialog")
         OptionsDialog(self)
 
     def menuarrows_toggled(self, widget):
@@ -393,15 +391,12 @@ class MainWindow:
             self.options.set_option('Options', 'statusbar', 'False')
 
     def menuhome_activate(self, widget):
-        logger.info("Open: Website")
         webbrowser.open(const.WEBSITE)
 
     def menuforum_activate(self, widget):
-        logger.info("Open: Forum")
         webbrowser.open(const.FORUMURL)
 
     def menuabout_activate(self, widget):
-        logger.info("Open: About dialog")
         widgets.about_dialog(self.main)
 
     # range callbacks
@@ -418,26 +413,20 @@ class MainWindow:
             widgets.message_dialog('error', messages.MSG_INVALID_RANGE, self.main)
             return
 
-        bandList = []
         value = int(rangefrom)
-
         while value <= int(rangeto):
-            bandList.append(str(value))
-            value += 1
-
-        for band in bandList:
+            band = str(value)
             pindex = band + rangeyear
 
             if self.database.has_pigeon(pindex):
                 if not widgets.message_dialog('warning', messages.MSG_OVERWRITE_PIGEON, self.main):
                     continue
 
-            data = (pindex, band, rangeyear, rangesex, 1, 1,
-                    '', '', '', '', '', '', '', '', '', '', '', '', '', '', '')
-            self.database.insert_pigeon(data)
+            self.database.insert_pigeon((pindex, band, rangeyear, rangesex, 1, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''))
+
+            value += 1
 
         self.parser.get_pigeons()
-
         self.fill_treeview()
 
         self.rangedialog.hide()
