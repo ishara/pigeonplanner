@@ -35,10 +35,14 @@ def update():
         versionfile = open(local, 'r')
         version = versionfile.readline().strip()
         versionfile.close()
-        os.remove(local)
     except IOError, e:
         logger.error(e)
         version = None
+
+    try:
+        os.remove(local)
+    except:
+        pass
 
     if not version:
         msg = messages.MSG_UPDATE_ERROR

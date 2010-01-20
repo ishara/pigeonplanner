@@ -87,7 +87,7 @@ class ToolsWindow:
         self.sbminute.set_value(dt.minute)
 
         # Backups file filter
-        self.fcButtonRestore.add_filter(widgets.backupFileFilter)
+        self.fcButtonRestore.add_filter(widgets.get_backup_filefilter())
 
         # Fill the data combobox
         data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Types"), _("Categories"), _("Strains"), _("Lofts"), _("Weather"), _("Wind")]
@@ -514,4 +514,6 @@ class ToolsWindow:
 
         if new:
             self.linkbutton.set_property('visible', True)
+
+        return False
 

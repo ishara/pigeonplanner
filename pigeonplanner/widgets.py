@@ -91,11 +91,13 @@ uistring = '''
 '''
 
 
-backupFileFilter = gtk.FileFilter()
-backupFileFilter.set_name("PP Backups")
-backupFileFilter.add_mime_type("zip/zip")
-backupFileFilter.add_pattern("*PigeonPlannerBackup.zip")
+def get_backup_filefilter():
+    backupFileFilter = gtk.FileFilter()
+    backupFileFilter.set_name("PP Backups")
+    backupFileFilter.add_mime_type("zip/zip")
+    backupFileFilter.add_pattern("*PigeonPlannerBackup.zip")
 
+    return backupFileFilter
 
 def message_dialog(msgtype, data, parent=None, extra=None):
     '''
@@ -333,7 +335,7 @@ class BackupDialog(gtk.Dialog):
             label2.set_padding(30, 0)
             self.fcButtonRestore = gtk.FileChooserButton(_("Select a valid backup file"))
             self.fcButtonRestore.set_action(gtk.FILE_CHOOSER_ACTION_OPEN)
-            self.fcButtonRestore.add_filter(backupFileFilter)
+            self.fcButtonRestore.add_filter(get_backup_filefilter())
 
             self.vbox.pack_start(label, False, True, 8)
             self.vbox.pack_start(label2, False, True, 8)
