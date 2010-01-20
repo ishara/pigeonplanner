@@ -255,19 +255,19 @@ class PrintPedigree:
 
                 if height >= 1:
                     cr.move_to(x + 0.5, y + 1.75 + font_size*2)
-                    cr.show_text(lst[i][4])
+                    cr.show_text(lst[i][6])
                 if height >= 3:
                     cr.move_to(x + 0.5, y + 2.5 + font_size*3)
-                    cr.show_text(lst[i][5])
+                    cr.show_text(lst[i][7])
                     cr.move_to(x + 0.5, y + 3 + font_size*4)
-                    cr.show_text(lst[i][6])
+                    cr.show_text(lst[i][8])
                 if height == 6:
                     cr.move_to(x + 0.5, y + 3.5 + font_size*5)
-                    cr.show_text(lst[i][7])
-                    cr.move_to(x + 0.5, y + 4 + font_size*6)
-                    cr.show_text(lst[i][8])
-                    cr.move_to(x + 0.5, y + 4.5 + font_size*7)
                     cr.show_text(lst[i][9])
+                    cr.move_to(x + 0.5, y + 4 + font_size*6)
+                    cr.show_text(lst[i][10])
+                    cr.move_to(x + 0.5, y + 4.5 + font_size*7)
+                    cr.show_text(lst[i][11])
 
             if pos[i][1]:
                 w = 2

@@ -64,6 +64,6 @@ GLADEASSIST = os.path.join(GLADEDIR, "DBAssistant.glade")
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')
 
-UPDATEURL = 'http://www.pigeonplanner.com/CURRENT2'
+UPDATEURL = 'http://www.pigeonplanner.com/CURRENT'
 DOWNLOADURL = 'http://www.pigeonplanner.com/download'
 FORUMURL = 'https://sourceforge.net/apps/phpbb/pigeonplanner/'
