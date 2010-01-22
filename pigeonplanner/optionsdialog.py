@@ -77,6 +77,9 @@ class OptionsDialog:
 
         self.set_options()
 
+        # Set the default button as secondary. This option is broken in Glade.
+        self.action_area.set_child_secondary(self.default, True)
+
         self.optionsdialog.show()
 
     def set_options(self):
