@@ -66,4 +66,4 @@ LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')
 
 UPDATEURL = 'http://www.pigeonplanner.com/CURRENT'
 DOWNLOADURL = 'http://www.pigeonplanner.com/download'
-FORUMURL = 'https://sourceforge.net/apps/phpbb/pigeonplanner/'
+FORUMURL = 'http://www.pigeonplanner.com/forum'
