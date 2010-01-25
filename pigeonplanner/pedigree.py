@@ -23,15 +23,27 @@
 # http://www.jumbo-psp.com/PSP-for-Fun/images/Color%20tabel.htm
 
 
+import sys
 from cgi import escape
 
 import gtk
 import gtk.glade
 
+try:
+    import cairo
+    cairo_available = True
+except:
+    cairo_available = False
+
 import const
 import checks
 import widgets
 import database
+
+
+# Cairo-drawn boxes don't show up
+if "darwin" in sys.platform:
+    cairo_available = False
 
 
 def format_text(text):
@@ -44,6 +56,57 @@ def format_text(text):
 
 
 class ExtraBox(gtk.DrawingArea):
+    def __init__(self, text):
+        gtk.DrawingArea.__init__(self)
+        self.connect("expose_event", self.expose)
+        self.connect("realize", self.realize)
+
+        self.text = '\n'.join(text)
+
+        if self.text != '':
+            self.text = format_text(self.text)
+
+        self.textlayout = self.create_pango_layout(self.text)
+        s = self.textlayout.get_pixel_size()
+        xmin = s[0] + 12
+        ymin = s[1] + 11
+        self.set_size_request(max(xmin, 220), max(ymin, 25))
+
+    def realize(self, widget):
+        self.bg_gc = self.window.new_gc()
+        self.text_gc = self.window.new_gc()
+        self.border_gc = self.window.new_gc()
+        self.border_gc.line_style = gtk.gdk.LINE_SOLID
+        self.border_gc.line_width = 1
+        self.shadow_gc = self.window.new_gc()
+        self.shadow_gc.line_style = gtk.gdk.LINE_SOLID
+        self.shadow_gc.line_width = 4
+        if self.text != '':
+            self.bg_gc.set_foreground(self.get_colormap().alloc_color("#f0e68c"))
+            self.border_gc.set_foreground(self.get_colormap().alloc_color("#777777"))
+        else:
+            self.bg_gc.set_foreground(self.get_colormap().alloc_color("#eeeeee"))
+            self.border_gc.set_foreground(self.get_colormap().alloc_color("#777777"))
+        self.shadow_gc.set_foreground(self.get_colormap().alloc_color("#999999"))
+
+    def expose(self,widget,event):
+        alloc = self.get_allocation()
+
+        self.window.draw_line(self.shadow_gc, 3, alloc.height-1, alloc.width, alloc.height-1)
+        self.window.draw_line(self.shadow_gc, alloc.width-1, 3, alloc.width-1, alloc.height)
+
+        self.window.draw_rectangle(self.bg_gc, True, 1, 1, alloc.width-5, alloc.height-5)
+
+        if self.text:
+            self.window.draw_layout(self.text_gc, 5, 4, self.textlayout)
+
+        if self.border_gc.line_width > 1:
+            self.window.draw_rectangle(self.border_gc, False, 1, 1, alloc.width-6, alloc.height-6)
+        else:
+            self.window.draw_rectangle(self.border_gc, False, 0, 0, alloc.width-4, alloc.height-4)
+
+
+class ExtraBox_cairo(gtk.DrawingArea):
     def __init__(self, text):
         gtk.DrawingArea.__init__(self)
         self.connect("expose_event", self.expose)
@@ -114,23 +177,8 @@ class ExtraBox(gtk.DrawingArea):
         self.context.stroke()
 
 
-class PedigreeBox(gtk.DrawingArea):
-    def __init__(self, pindex, ring, year, sex, name, colour, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
-        gtk.DrawingArea.__init__(self)
-        self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
-        self.hightlight = False
-        self.connect("expose_event", self.expose)
-        self.connect("realize", self.realize)
-        if detail:
-            if kinfo:
-                self.kindex = kinfo[0]
-                self.connect("button-press-event", self.detail_pressed)
-        else:
-            self.set_property("can-focus", True)
-            self.connect("button-press-event", self.pressed)
-            self.connect("focus-in-event", self.focus_in)
-            self.connect("focus-out-event", self.focus_out)
-
+class PedigreeEditBox:
+    def __init__(self, pindex, ring, year, sex, name, colour, details, kinfo, main, pedigree):
         self.pindex = pindex
         self.ring = ring
         self.year = year
@@ -138,29 +186,12 @@ class PedigreeBox(gtk.DrawingArea):
         self.pname = name
         self.colour = colour
         self.details = details
-        self.detail = detail
-        self.gotobutton = button
         self.kinfo = kinfo
         self.main = main
         self.pedigree = pedigree
 
-        self.text = ''
-
-        if ring != '':
-            self.text = ring + ' / ' + year[2:]
-
-            if self.sex == '0':
-                self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
-                self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
-            else:
-                self.bgcolor = (255/256.0, 205/256.0, 241/256.0)
-                self.bordercolor = (135/256.0, 32/256.0, 106/256.0)
-        else:
-            self.set_property("can-focus", False)
-            self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
-            self.bordercolor = (0,0,0)
-
-        self.set_size_request(200,25)
+        if kinfo:
+            self.kindex = kinfo[0]
 
     def detail_pressed(self, widget, event):
         if event.button == 1:
@@ -184,7 +215,6 @@ class PedigreeBox(gtk.DrawingArea):
 
                 widgets.popup_menu(event, entries)
 
-    #### Start editbox
     def edit_start(self, widget=None):
         self.wTree = gtk.glade.XML(const.GLADEPEDIGREE, 'editdialog')
 
@@ -303,7 +333,153 @@ class PedigreeBox(gtk.DrawingArea):
         self.edit_parent(self.kindex, '', '', self.sex)
 
         self.redraw()
-    #### End editbox
+
+
+class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
+    def __init__(self, pindex, ring, year, sex, name, colour, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
+        gtk.DrawingArea.__init__(self)
+        PedigreeEditBox.__init__(self, pindex, ring, year, sex, name, colour, details, kinfo, main, pedigree)
+        self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
+        self.connect("expose_event", self.expose)
+        self.connect("realize", self.realize)
+
+        if detail:
+            if kinfo:
+                self.kindex = kinfo[0]
+                self.connect("button-press-event", self.detail_pressed)
+        else:
+            self.set_property("can-focus", True)
+            self.connect("button-press-event", self.pressed)
+            self.connect("focus-in-event", self.focus_in)
+            self.connect("focus-out-event", self.focus_out)
+
+        self.pindex = pindex
+        self.ring = ring
+        self.year = year
+        self.sex = sex
+        self.pname = name
+        self.colour = colour
+        self.details = details
+        self.detail = detail
+        self.gotobutton = button
+        self.kinfo = kinfo
+        self.main = main
+        self.pedigree = pedigree
+
+        text = ''
+
+        if ring != '':
+            text = ring + ' / ' + year[2:]
+
+        self.textlayout = self.create_pango_layout(text)
+        s = self.textlayout.get_pixel_size()
+        xmin = s[0] + 12
+        ymin = s[1] + 11
+        if self.detail:
+            y = 34
+        else:
+            y = 25
+        self.set_size_request(max(xmin, 150), max(ymin, y))
+
+    def focus_in(self, widget, event):
+        self.queue_draw()
+        if self.textlayout.get_text() and self.gotobutton:
+            self.gotobutton.set_sensitive(True)
+
+    def focus_out(self, widget, event):
+        self.queue_draw()
+        if self.gotobutton:
+            self.gotobutton.set_sensitive(False)
+
+    def pressed(self, widget, event):
+        self.grab_focus()
+    
+    def realize(self,widget):
+        self.bg_gc = self.window.new_gc()
+        self.text_gc = self.window.new_gc()
+        self.border_gc = self.window.new_gc()
+        self.border_gc.line_style = gtk.gdk.LINE_SOLID
+        self.border_gc.line_width = 1
+        self.shadow_gc = self.window.new_gc()
+        self.shadow_gc.line_style = gtk.gdk.LINE_SOLID
+        self.shadow_gc.line_width = 4
+        if self.pindex:
+            if self.sex == '0':
+                self.bg_gc.set_foreground(self.get_colormap().alloc_color("#b9cfe7"))
+                self.border_gc.set_foreground(self.get_colormap().alloc_color("#204a87"))
+            else:
+                self.bg_gc.set_foreground(self.get_colormap().alloc_color("#ffcdf1"))
+                self.border_gc.set_foreground(self.get_colormap().alloc_color("#87206a"))
+        else:
+            self.bg_gc.set_foreground(self.get_colormap().alloc_color("#eeeeee"))
+            self.border_gc.set_foreground(self.get_colormap().alloc_color("#777777"))
+        self.shadow_gc.set_foreground(self.get_colormap().alloc_color("#999999"))
+
+    def expose(self,widget,event):
+        alloc = self.get_allocation()
+
+        self.window.draw_line(self.shadow_gc, 3, alloc.height-1, alloc.width, alloc.height-1)
+        self.window.draw_line(self.shadow_gc, alloc.width-1, 3, alloc.width-1, alloc.height)
+
+        self.window.draw_rectangle(self.bg_gc, True, 1, 1, alloc.width-5, alloc.height-5)
+
+        if self.pindex:
+            self.window.draw_layout(self.text_gc, 5, 4, self.textlayout)
+
+        if self.border_gc.line_width > 1:
+            self.window.draw_rectangle(self.border_gc, False, 1, 1, alloc.width-6, alloc.height-6)
+        else:
+            self.window.draw_rectangle(self.border_gc, False, 0, 0, alloc.width-4, alloc.height-4)
+
+
+class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
+    def __init__(self, pindex, ring, year, sex, name, colour, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
+        gtk.DrawingArea.__init__(self)
+        PedigreeEditBox.__init__(self, pindex, ring, year, sex, name, colour, details, kinfo, main, pedigree)
+        self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
+        self.hightlight = False
+        self.connect("expose_event", self.expose)
+        self.connect("realize", self.realize)
+        if detail:
+            if kinfo:
+                self.kindex = kinfo[0]
+                self.connect("button-press-event", self.detail_pressed)
+        else:
+            self.set_property("can-focus", True)
+            self.connect("button-press-event", self.pressed)
+            self.connect("focus-in-event", self.focus_in)
+            self.connect("focus-out-event", self.focus_out)
+
+        self.pindex = pindex
+        self.ring = ring
+        self.year = year
+        self.sex = sex
+        self.pname = name
+        self.colour = colour
+        self.details = details
+        self.detail = detail
+        self.gotobutton = button
+        self.kinfo = kinfo
+        self.main = main
+        self.pedigree = pedigree
+
+        self.text = ''
+
+        if ring != '':
+            self.text = ring + ' / ' + year[2:]
+
+            if self.sex == '0':
+                self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
+                self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
+            else:
+                self.bgcolor = (255/256.0, 205/256.0, 241/256.0)
+                self.bordercolor = (135/256.0, 32/256.0, 106/256.0)
+        else:
+            self.set_property("can-focus", False)
+            self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
+            self.bordercolor = (0,0,0)
+
+        self.set_size_request(200,25)
 
     def focus_in(self, widget, event):
         self.hightlight = True
@@ -492,10 +668,16 @@ class DrawPedigree:
                     kinfo = None
 
             if not lst[i]:
-                box = PedigreeBox('', '', '', sex, '', '', None, self.detail, self.button, kinfo, self.main, self.pedigree)
+                if cairo_available:
+                    box = PedigreeBox_cairo('', '', '', sex, '', '', None, self.detail, self.button, kinfo, self.main, self.pedigree)
+                else:
+                    box = PedigreeBox('', '', '', sex, '', '', None, self.detail, self.button, kinfo, self.main, self.pedigree)
                 table.attach(box, x, y, w, h)
                 if self.detail:
-                    extrabox = ExtraBox('')
+                    if cairo_available:
+                        extrabox = ExtraBox_cairo('')
+                    else:
+                        extrabox = ExtraBox('')
                     table.attach(extrabox, x, y, w+1, h+height)
             else:
                 if self.detail:
@@ -517,13 +699,22 @@ class DrawPedigree:
                     allExtra.append(lst[i][10])
                     allExtra.append(lst[i][11])
 
-                    box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], lst[i][4], lst[i][5], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
+                    if cairo_available:
+                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], lst[i][4], lst[i][5], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
+                    else:
+                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], lst[i][4], lst[i][5], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
                     table.attach(box, x, y, w, h)
 
-                    extrabox = ExtraBox(extra)
+                    if cairo_available:
+                        extrabox = ExtraBox_cairo(extra)
+                    else:
+                        extrabox = ExtraBox(extra)
                     table.attach(extrabox, x, y, w+1, h+height)
                 else:
-                    box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], '', '', None, self.detail, self.button)
+                    if cairo_available:
+                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], '', '', None, self.detail, self.button)
+                    else:
+                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], '', '', None, self.detail, self.button)
                     table.attach(box, x, y, w, h)
 
             if self.pos[i][1]:
