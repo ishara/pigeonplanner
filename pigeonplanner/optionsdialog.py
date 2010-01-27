@@ -66,11 +66,12 @@ class OptionsDialog:
         # Fill language combobox with available languages
         self.languagelookup = [
                 ('Default', 'def'),
-                ('Arabic (العربية)', 'ar'),
+                ('Arabic', 'ar'),
+                ('Bosnian', 'bs'),
+                ('Dutch', 'nl'),
                 ('English', 'en'),
-                ('Español (Spanish)', 'es'),
-                ('Nederlands (Dutch)', 'nl'),
-                ('Русский (Russian)', 'ru')
+                ('Russian', 'ru'),
+                ('Spanish', 'es')
                 ]
         for name, code in self.languagelookup:
             self.cbLang.append_text(name)
