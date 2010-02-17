@@ -50,9 +50,7 @@ def format_text(text):
     if not text:
         return ""
 
-    text = escape(text)
-
-    return text
+    return escape(text)
 
 
 class ExtraBox(gtk.DrawingArea):
@@ -178,13 +176,11 @@ class ExtraBox_cairo(gtk.DrawingArea):
 
 
 class PedigreeEditBox:
-    def __init__(self, pindex, ring, year, sex, name, colour, details, kinfo, main, pedigree):
+    def __init__(self, pindex, ring, year, sex, details, kinfo, main, pedigree):
         self.pindex = pindex
         self.ring = ring
         self.year = year
         self.sex = sex
-        self.pname = name
-        self.colour = colour
         self.details = details
         self.kinfo = kinfo
         self.main = main
@@ -227,15 +223,9 @@ class PedigreeEditBox:
             wname = w.get_name()
             setattr(self, wname, w)
 
-        self.cbColour.child.set_activates_default(True)
-        widgets.fill_list(self.cbColour, self.main.database.get_all_colours())
-        widgets.set_completion(self.cbColour)
-
         if self.ring and self.year:
             self.entryRing.set_text(self.ring)
             self.entryYear.set_text(self.year)
-            self.entryName.set_text(self.pname)
-            self.cbColour.child.set_text(self.colour)
             self.entryExtra1.set_text(self.details[0])
             self.entryExtra2.set_text(self.details[1])
             self.entryExtra3.set_text(self.details[2])
@@ -245,9 +235,9 @@ class PedigreeEditBox:
 
         if not self.kindex in self.main.parser.pigeons:
             data = (self.kinfo[0], self.kinfo[1], self.kinfo[2], self.kinfo[3], 0, 1,
-                    self.kinfo[4], self.kinfo[5], '', '', '', '', '', '', '',
-                    self.kinfo[6], self.kinfo[7], self.kinfo[8],
-                    self.kinfo[9], self.kinfo[10], self.kinfo[11])
+                    '', '', '', '', '', '', '', '', '',
+                    self.kinfo[4], self.kinfo[5], self.kinfo[6],
+                    self.kinfo[7], self.kinfo[8], self.kinfo[9])
             self.main.database.insert_pigeon(data)
 
         self.editdialog.show()
@@ -262,8 +252,6 @@ class PedigreeEditBox:
 
         if self.pindex and self.pindex in self.main.parser.pigeons:
             data = (pindex, ring, year,
-                    self.entryName.get_text(),
-                    self.cbColour.child.get_text(),
                     self.entryExtra1.get_text(),
                     self.entryExtra2.get_text(),
                     self.entryExtra3.get_text(),
@@ -274,9 +262,7 @@ class PedigreeEditBox:
             self.edit_pigeon(data)
         else:
             data = (pindex, ring, year, self.sex , 0, 1,
-                    self.cbColour.child.get_text(),
-                    self.entryName.get_text(),
-                    '', '', '', '', '', '', '',
+                    '', '', '', '', '', '', '', '', '',
                     self.entryExtra1.get_text(),
                     self.entryExtra2.get_text(),
                     self.entryExtra3.get_text(),
@@ -336,7 +322,7 @@ class PedigreeEditBox:
 
 
 class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
-    def __init__(self, pindex, ring, year, sex, name, colour, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
+    def __init__(self, pindex, ring, year, sex, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
         gtk.DrawingArea.__init__(self)
         PedigreeEditBox.__init__(self, pindex, ring, year, sex, name, colour, details, kinfo, main, pedigree)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
@@ -357,8 +343,6 @@ class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
         self.ring = ring
         self.year = year
         self.sex = sex
-        self.pname = name
-        self.colour = colour
         self.details = details
         self.detail = detail
         self.gotobutton = button
@@ -433,9 +417,9 @@ class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
 
 
 class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
-    def __init__(self, pindex, ring, year, sex, name, colour, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
+    def __init__(self, pindex, ring, year, sex, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
         gtk.DrawingArea.__init__(self)
-        PedigreeEditBox.__init__(self, pindex, ring, year, sex, name, colour, details, kinfo, main, pedigree)
+        PedigreeEditBox.__init__(self, pindex, ring, year, sex, details, kinfo, main, pedigree)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
         self.hightlight = False
         self.connect("expose_event", self.expose)
@@ -454,8 +438,6 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
         self.ring = ring
         self.year = year
         self.sex = sex
-        self.pname = name
-        self.colour = colour
         self.details = details
         self.detail = detail
         self.gotobutton = button
@@ -630,7 +612,7 @@ class DrawPedigree:
             year = ''
             sex = ''
 
-        self.build_tree(self.pindex, ring, year, sex, '', '', '', '', '', '', '', '', 0, 1, lst)
+        self.build_tree(self.pindex, ring, year, sex, '', '', '', '', '', '', 0, 1, lst)
 
         for table in self.tables:
             for child in table.get_children():
@@ -669,9 +651,9 @@ class DrawPedigree:
 
             if not lst[i]:
                 if cairo_available:
-                    box = PedigreeBox_cairo('', '', '', sex, '', '', None, self.detail, self.button, kinfo, self.main, self.pedigree)
+                    box = PedigreeBox_cairo('', '', '', sex, None, self.detail, self.button, kinfo, self.main, self.pedigree)
                 else:
-                    box = PedigreeBox('', '', '', sex, '', '', None, self.detail, self.button, kinfo, self.main, self.pedigree)
+                    box = PedigreeBox('', '', '', sex, None, self.detail, self.button, kinfo, self.main, self.pedigree)
                 table.attach(box, x, y, w, h)
                 if self.detail:
                     if cairo_available:
@@ -682,27 +664,21 @@ class DrawPedigree:
             else:
                 if self.detail:
                     extra = []
-                    extra.append(lst[i][6])
+                    extra.append(lst[i][4])
                     if height >= 2:
+                        extra.append(lst[i][5])
+                        extra.append(lst[i][6])
+                    if height == 4:
                         extra.append(lst[i][7])
                         extra.append(lst[i][8])
-                    if height == 4:
                         extra.append(lst[i][9])
-                        extra.append(lst[i][10])
-                        extra.append(lst[i][11])
 
-                    allExtra = []
-                    allExtra.append(lst[i][6])
-                    allExtra.append(lst[i][7])
-                    allExtra.append(lst[i][8])
-                    allExtra.append(lst[i][9])
-                    allExtra.append(lst[i][10])
-                    allExtra.append(lst[i][11])
+                    allExtra = [lst[i][4], lst[i][5], lst[i][6], lst[i][7], lst[i][8], lst[i][9]]
 
                     if cairo_available:
-                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], lst[i][4], lst[i][5], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
+                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
                     else:
-                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], lst[i][4], lst[i][5], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
+                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
                     table.attach(box, x, y, w, h)
 
                     if cairo_available:
@@ -712,9 +688,9 @@ class DrawPedigree:
                     table.attach(extrabox, x, y, w+1, h+height)
                 else:
                     if cairo_available:
-                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], '', '', None, self.detail, self.button)
+                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], None, self.detail, self.button)
                     else:
-                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], '', '', None, self.detail, self.button)
+                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], None, self.detail, self.button)
                     table.attach(box, x, y, w, h)
 
             if self.pos[i][1]:
@@ -777,11 +753,11 @@ class DrawPedigree:
                 area.window.draw_line(gc, alloc.width, alloc.height/2, alloc.width/2, alloc.height/2)
             area.window.draw_line(gc, alloc.width/2, alloc.height, alloc.width/2, alloc.height/2)
 
-    def build_tree(self, pindex, ring, year, sex, name, colour, ex1, ex2, ex3, ex4, ex5, ex6, index, depth, lst):
+    def build_tree(self, pindex, ring, year, sex, ex1, ex2, ex3, ex4, ex5, ex6, index, depth, lst):
         if depth > 5 or ring == None or index >= len(lst):
             return
 
-        lst[index] = (pindex, ring, year, sex, name, colour, ex1, ex2, ex3, ex4, ex5, ex6)
+        lst[index] = (pindex, ring, year, sex, ex1, ex2, ex3, ex4, ex5, ex6)
 
         if not self.pigeons:
             import pigeonparser
@@ -790,15 +766,10 @@ class DrawPedigree:
             self.pigeons = self.parser.pigeons
 
         if pindex in self.pigeons:
-
-            lst[index] = (pindex, ring, year, sex, name, colour, ex1, ex2, ex3, ex4, ex5, ex6)
-
             ringSire = self.pigeons[pindex].sire
             yearSire = self.pigeons[pindex].yearsire
             pindexsire = ringSire + yearSire
             try:
-                name = self.pigeons[pindexsire].name
-                colour = self.pigeons[pindexsire].colour
                 extra1 = self.pigeons[pindexsire].extra1
                 extra2 = self.pigeons[pindexsire].extra2
                 extra3 = self.pigeons[pindexsire].extra3
@@ -806,17 +777,20 @@ class DrawPedigree:
                 extra5 = self.pigeons[pindexsire].extra5
                 extra6 = self.pigeons[pindexsire].extra6
             except KeyError:
-                name = colour = extra1 = extra2 = extra3 = extra4 = extra5 = extra6 = ''
+                extra1 = ''
+                extra2 = ''
+                extra3 = ''
+                extra4 = ''
+                extra5 = ''
+                extra6 = ''
 
             if ringSire:
-                self.build_tree(pindexsire, ringSire, yearSire, '0', name, colour, extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+1, depth+1, lst)
+                self.build_tree(pindexsire, ringSire, yearSire, '0', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+1, depth+1, lst)
 
             ringDam = self.pigeons[pindex].dam
             yearDam = self.pigeons[pindex].yeardam
             pindexdam = ringDam + yearDam
             try:
-                name = self.pigeons[pindexsire].name
-                colour = self.pigeons[pindexsire].colour
                 extra1 = self.pigeons[pindexdam].extra1
                 extra2 = self.pigeons[pindexdam].extra2
                 extra3 = self.pigeons[pindexdam].extra3
@@ -824,8 +798,13 @@ class DrawPedigree:
                 extra5 = self.pigeons[pindexdam].extra5
                 extra6 = self.pigeons[pindexdam].extra6
             except KeyError:
-                name = colour = extra1 = extra2 = extra3 = extra4 = extra5 = extra6 = ''
+                extra1 = ''
+                extra2 = ''
+                extra3 = ''
+                extra4 = ''
+                extra5 = ''
+                extra6 = ''
 
             if ringDam:
-                self.build_tree(pindexdam, ringDam, yearDam, '1', name, colour, extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+2, depth+1, lst)
+                self.build_tree(pindexdam, ringDam, yearDam, '1', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+2, depth+1, lst)
 
