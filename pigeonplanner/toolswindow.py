@@ -365,6 +365,7 @@ class ToolsWindow:
             widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True, self.chkme: True})
 
         self.adentryname.grab_focus()
+        self.adentryname.set_position(-1)
 
     def finish_add(self):
         self.empty_adentrys()

@@ -240,6 +240,8 @@ class PedigreeEditBox:
                     self.kinfo[7], self.kinfo[8], self.kinfo[9])
             self.main.database.insert_pigeon(data)
 
+        self.entryRing.grab_focus()
+        self.entryRing.set_position(-1)
         self.editdialog.show()
 
     def save_clicked(self, widget):
