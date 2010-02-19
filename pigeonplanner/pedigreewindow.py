@@ -49,6 +49,7 @@ class PedigreeWindow:
 
         self.main = main
         self.pigeoninfo = pigeoninfo
+        self.pindex = pigeoninfo['pindex']
 
         self.pedigreewindow.set_transient_for(self.main.main)
 
