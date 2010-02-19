@@ -49,20 +49,14 @@ class PedigreeWindow:
 
         self.main = main
         self.pigeoninfo = pigeoninfo
-        self.pindex = pigeoninfo['pindex']
-        self.ring = pigeoninfo['ring']
-        self.year = pigeoninfo['year']
-        self.sex = pigeoninfo['sex']
-        self.colour = pigeoninfo['colour']
-        self.name = pigeoninfo['name']
 
         self.pedigreewindow.set_transient_for(self.main.main)
 
-        self.labelRing.set_text("%s / %s" %(self.ring, self.year[2:]))
-        self.labelSex.set_text(self.sex)
-        self.labelName.set_text(self.name)
+        self.labelRing.set_text("%s / %s" %(self.pigeoninfo['ring'], self.pigeoninfo['year'][2:]))
+        self.labelSex.set_text(self.pigeoninfo['sex'])
+        self.labelName.set_text(self.pigeoninfo['name'])
 
-        self.dp = DrawPedigree([self.tableSire, self.tableDam], self.pindex,
+        self.dp = DrawPedigree([self.tableSire, self.tableDam], self.pigeoninfo['pindex'],
                                 True, None, self.main.parser.pigeons, self.main,
                                 self, self.main.options.optionList.language)
         self.dp.draw_pedigree()
@@ -71,7 +65,7 @@ class PedigreeWindow:
         self.pedigreewindow.destroy()
 
     def on_print_clicked(self, widget):
-        userinfo = {'name': '', 'street': '', 'code': '', 'city': '', 'phone': ''}
+        userinfo = {}
 
         for address in self.main.database.get_all_addresses():
             if address[9]:
@@ -80,7 +74,7 @@ class PedigreeWindow:
                 userinfo['code'] = address[3]
                 userinfo['city'] = address[4]
                 userinfo['phone'] = address[6]
-
+                userinfo['email'] = address[7]
                 break
 
         if not userinfo['name']:
@@ -93,5 +87,5 @@ class PedigreeWindow:
 
                 return
 
-        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo)
+        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo, self.main.options.optionList)
 

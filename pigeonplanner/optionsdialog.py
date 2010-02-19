@@ -84,6 +84,20 @@ class OptionsDialog:
         self.optionsdialog.show()
 
     def set_options(self):
+        # General
+        self.chkUpdate.set_active(self.opt.optionList.update)
+
+        for i in xrange(0, len(self.languagelookup)):
+            name, code = self.languagelookup[i]
+            if self.opt.optionList.language == code:
+                self.cbLang.set_active(i)
+                break
+
+        self.chkBackup.set_active(self.opt.optionList.backup)
+        self.sbDay.set_value(self.opt.optionList.interval)
+        self.fcbutton.set_current_folder(self.opt.optionList.location)
+
+        # Appearance
         self.chkName.set_active(self.opt.optionList.colname)
         self.chkColour.set_active(self.opt.optionList.colcolour)
         self.chkSex.set_active(self.opt.optionList.colsex)
@@ -96,17 +110,20 @@ class OptionsDialog:
         self.chkToolbar.set_active(self.opt.optionList.toolbar)
         self.chkStatusbar.set_active(self.opt.optionList.statusbar)
 
-        self.chkUpdate.set_active(self.opt.optionList.update)
+        # Printing
+        self.cbPaper.set_active(self.opt.optionList.paper)
+        self.cbLayout.set_active(self.opt.optionList.layout)
 
-        for i in xrange(0, len(self.languagelookup)):
-            name, code = self.languagelookup[i]
-            if self.opt.optionList.language == code:
-                self.cbLang.set_active(i)
-                break
+        self.chkPerName.set_active(self.opt.optionList.perName)
+        self.chkPerAddress.set_active(self.opt.optionList.perAddress)
+        self.chkPerPhone.set_active(self.opt.optionList.perPhone)
+        self.chkPerEmail.set_active(self.opt.optionList.perEmail)
 
-        self.chkBackup.set_active(self.opt.optionList.backup)
-        self.sbDay.set_value(self.opt.optionList.interval)
-        self.fcbutton.set_current_folder(self.opt.optionList.location)
+        self.chkPigName.set_active(self.opt.optionList.pigName)
+        self.chkPigColour.set_active(self.opt.optionList.pigColour)
+        self.chkPigSex.set_active(self.opt.optionList.pigSex)
+        self.chkPigExtra.set_active(self.opt.optionList.pigExtra)
+        self.chkPigImage.set_active(self.opt.optionList.pigImage)
 
     def on_close_dialog(self, widget, event=None):
         self.optionsdialog.destroy()
@@ -135,25 +152,37 @@ class OptionsDialog:
             self.finish_options(True)
 
     def on_ok_clicked(self, widget):
-        dic = {"Options" : {'theme': self.cbThemes.get_active(),
-                            'arrows': str(self.chkArrows.get_active()),
-                            'toolbar': str(self.chkToolbar.get_active()),
-                            'statusbar': str(self.chkStatusbar.get_active()),
-                            'update': str(self.chkUpdate.get_active()),
-                            'language': self.languagelookup[self.cbLang.get_active()][1],
-                            'runs': self.opt.optionList.runs
-                           },
-               "Backup" : {'backup': str(self.chkBackup.get_active()),
-                           'interval': self.sbDay.get_value_as_int(),
-                           'location': self.fcbutton.get_current_folder(),
-                           'last': self.opt.optionList.last
+        dic = {"Options": {'theme': self.cbThemes.get_active(),
+                           'arrows': str(self.chkArrows.get_active()),
+                           'toolbar': str(self.chkToolbar.get_active()),
+                           'statusbar': str(self.chkStatusbar.get_active()),
+                           'update': str(self.chkUpdate.get_active()),
+                           'language': self.languagelookup[self.cbLang.get_active()][1],
+                           'runs': self.opt.optionList.runs
                           },
-               "Columns" : {'name': str(self.chkName.get_active()),
-                            'colour': str(self.chkColour.get_active()),
-                            'sex': str(self.chkSex.get_active()),
-                            'loft': str(self.chkLoft.get_active()),
-                            'strain': str(self.chkStrain.get_active())
-                           }
+               "Backup": {'backup': str(self.chkBackup.get_active()),
+                          'interval': self.sbDay.get_value_as_int(),
+                          'location': self.fcbutton.get_current_folder(),
+                          'last': self.opt.optionList.last
+                         },
+               "Columns": {'name': str(self.chkName.get_active()),
+                           'colour': str(self.chkColour.get_active()),
+                           'sex': str(self.chkSex.get_active()),
+                           'loft': str(self.chkLoft.get_active()),
+                           'strain': str(self.chkStrain.get_active())
+                          },
+                "Printing": {"paper": self.cbPaper.get_active(),
+                             "layout": self.cbLayout.get_active(),
+                             "perName": str(self.chkPerName.get_active()),
+                             "perAddress": str(self.chkPerAddress.get_active()),
+                             "perPhone": str(self.chkPerPhone.get_active()),
+                             "perEmail": str(self.chkPerEmail.get_active()),
+                             "pigName": str(self.chkPigName.get_active()),
+                             "pigColour": str(self.chkPigColour.get_active()),
+                             "pigSex": str(self.chkPigSex.get_active()),
+                             "pigExtra": str(self.chkPigExtra.get_active()),
+                             "pigImage": str(self.chkPigImage.get_active()),
+                            }
               }
 
         self.opt.write_options(dic)

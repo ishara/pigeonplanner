@@ -25,13 +25,17 @@ from pedigree import DrawPedigree
 
 
 class PrintPedigree:
-    def __init__(self, parent, pigeoninfo, userinfo):
-
+    def __init__(self, parent, pigeoninfo, userinfo, options):
         self.parent = parent
         self.pigeoninfo = pigeoninfo
         self.userinfo = userinfo
+        self.options = options
 
-        paper_size = gtk.PaperSize(gtk.PAPER_NAME_A4)
+        if options.paper == 0:
+            psize = gtk.PAPER_NAME_A4
+        elif options.paper == 1:
+            psize = gtk.PAPER_NAME_LETTER
+        paper_size = gtk.PaperSize(psize)
 
         setup = gtk.PageSetup()
         setup.set_paper_size(paper_size)
@@ -82,44 +86,65 @@ class PrintPedigree:
 
         # address
         cr.set_font_size(5)
-        cr.move_to(0, 19)
-        cr.show_text(self.userinfo['name'])
-        cr.move_to(0, 26)
-        cr.show_text(self.userinfo['street'])
-        cr.move_to(0, 33)
-        cr.show_text("%s %s" %(self.userinfo['code'], self.userinfo['city']))
-        cr.move_to(0, 40)
-        cr.show_text(self.userinfo['phone'])
-        #XXX: Add e-mail address?
+        endPerson = 19
+        if self.options.perName:
+            cr.move_to(0, endPerson)
+            cr.show_text(self.userinfo['name'])
+            endPerson += 7
+        if self.options.perAddress:
+            cr.move_to(0, endPerson)
+            cr.show_text(self.userinfo['street'])
+            cr.move_to(0, endPerson+7)
+            cr.show_text("%s %s" %(self.userinfo['code'], self.userinfo['city']))
+            endPerson += 14
+        if self.options.perPhone:
+            cr.move_to(0, endPerson)
+            cr.show_text(self.userinfo['phone'])
+            endPerson += 7
+        if self.options.perEmail:
+            cr.move_to(0, endPerson)
+            cr.show_text(self.userinfo['email'])
+
 
         # pigeondetails
-        if self.pigeoninfo['name']:
-            sexname = "%s - %s" %(self.pigeoninfo['sex'], self.pigeoninfo['name'])
-        else:
-            sexname = self.pigeoninfo['sex']
-        xb, yb, width, height, xa, ya = cr.text_extents(sexname)
-        cr.move_to(total_width-width, 19)
-        cr.show_text(sexname)
+        endPigeon = 19
+        name = ''
+        colour = ''
+        sex = ''
+        if self.options.pigName and self.pigeoninfo['name']:
+            name = "%s - " %self.pigeoninfo['name']
+        if self.options.pigColour and self.pigeoninfo['colour']:
+            colour = "%s - " %self.pigeoninfo['colour']
+        if self.options.pigSex:
+            sex = self.pigeoninfo['sex']
+        info = name + colour + sex
+        xb, yb, width, height, xa, ya = cr.text_extents(info)
+        cr.move_to(total_width-width, endPigeon)
+        cr.show_text(info)
+        if info:
+            endPigeon += 6
 
-        cr.set_font_size(4)
-        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra1'])
-        cr.move_to(total_width-width, 25)
-        cr.show_text(self.pigeoninfo['extra1'])
-        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra2'])
-        cr.move_to(total_width-width, 30)
-        cr.show_text(self.pigeoninfo['extra2'])
-        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra3'])
-        cr.move_to(total_width-width, 35)
-        cr.show_text(self.pigeoninfo['extra3'])
-        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra4'])
-        cr.move_to(total_width-width, 40)
-        cr.show_text(self.pigeoninfo['extra4'])
-        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra5'])
-        cr.move_to(total_width-width, 45)
-        cr.show_text(self.pigeoninfo['extra5'])
-        xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra6'])
-        cr.move_to(total_width-width, 50)
-        cr.show_text(self.pigeoninfo['extra6'])
+        if self.options.pigExtra:
+            cr.set_font_size(4)
+            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra1'])
+            cr.move_to(total_width-width, endPigeon)
+            cr.show_text(self.pigeoninfo['extra1'])
+            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra2'])
+            cr.move_to(total_width-width, endPigeon+5)
+            cr.show_text(self.pigeoninfo['extra2'])
+            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra3'])
+            cr.move_to(total_width-width, endPigeon+10)
+            cr.show_text(self.pigeoninfo['extra3'])
+            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra4'])
+            cr.move_to(total_width-width, endPigeon+15)
+            cr.show_text(self.pigeoninfo['extra4'])
+            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra5'])
+            cr.move_to(total_width-width, endPigeon+20)
+            cr.show_text(self.pigeoninfo['extra5'])
+            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra6'])
+            cr.move_to(total_width-width, endPigeon+25)
+            cr.show_text(self.pigeoninfo['extra6'])
+            endPigeon += 25
 
         # line
         cr.move_to(0, 52)
@@ -231,7 +256,7 @@ class PrintPedigree:
         lst = [None]*31
         dp = DrawPedigree()
         dp.build_tree(self.pigeoninfo['pindex'], self.pigeoninfo['ring'], self.pigeoninfo['year'],
-                      self.pigeoninfo['sex'], self.pigeoninfo['name'], self.pigeoninfo['colour'],
+                      self.pigeoninfo['sex'],
                       '', '', '', '', '', '', 0, 1, lst)
 
         for i in range(1, 31):
@@ -255,19 +280,19 @@ class PrintPedigree:
 
                 if height >= 1:
                     cr.move_to(x + 0.5, y + 1.75 + font_size*2)
-                    cr.show_text(lst[i][6])
+                    cr.show_text(lst[i][4])
                 if height >= 3:
                     cr.move_to(x + 0.5, y + 2.5 + font_size*3)
-                    cr.show_text(lst[i][7])
+                    cr.show_text(lst[i][5])
                     cr.move_to(x + 0.5, y + 3 + font_size*4)
-                    cr.show_text(lst[i][8])
+                    cr.show_text(lst[i][6])
                 if height == 6:
                     cr.move_to(x + 0.5, y + 3.5 + font_size*5)
-                    cr.show_text(lst[i][9])
+                    cr.show_text(lst[i][7])
                     cr.move_to(x + 0.5, y + 4 + font_size*6)
-                    cr.show_text(lst[i][10])
+                    cr.show_text(lst[i][8])
                     cr.move_to(x + 0.5, y + 4.5 + font_size*7)
-                    cr.show_text(lst[i][11])
+                    cr.show_text(lst[i][9])
 
             if pos[i][1]:
                 w = 2

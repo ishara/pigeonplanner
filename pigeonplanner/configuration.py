@@ -60,6 +60,18 @@ class Configuration:
         self.__addOption('Columns', 'sex', 'False')
         self.__addOption('Columns', 'strain', 'False')
         self.__addOption('Columns', 'loft', 'False')
+        self.__addSection('Printing')
+        self.__addOption('Printing', 'paper', 0)
+        self.__addOption('Printing', 'layout', 0)
+        self.__addOption('Printing', 'perName', 'True')
+        self.__addOption('Printing', 'perAddress', 'True')
+        self.__addOption('Printing', 'perPhone', 'True')
+        self.__addOption('Printing', 'perEmail', 'False')
+        self.__addOption('Printing', 'pigName', 'True')
+        self.__addOption('Printing', 'pigColour', 'True')
+        self.__addOption('Printing', 'pigSex', 'True')
+        self.__addOption('Printing', 'pigExtra', 'True')
+        self.__addOption('Printing', 'pigImage', 'False')
 
     def __addSection(self, name):
         '''

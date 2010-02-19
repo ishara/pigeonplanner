@@ -20,7 +20,7 @@ import configuration
 
 
 class ParsedOptions:
-    def __init__(self, theme, arrows, toolbar, statusbar, update, language, runs, backup, interval, location, last, name, colour, sex, loft, strain):
+    def __init__(self, theme, arrows, toolbar, statusbar, update, language, runs, backup, interval, location, last, name, colour, sex, loft, strain, paper, layout, perName, perAddress, perPhone, perEmail, pigName, pigColour, pigSex, pigExtra, pigImage):
         self.theme = theme
         self.arrows = arrows
         self.toolbar = toolbar
@@ -37,6 +37,17 @@ class ParsedOptions:
         self.colsex = sex
         self.colloft = loft
         self.colstrain = strain
+        self.paper = paper
+        self.layout = layout
+        self.perName = perName
+        self.perAddress = perAddress
+        self.perPhone = perPhone
+        self.perEmail = perEmail
+        self.pigName = pigName
+        self.pigColour = pigColour
+        self.pigSex = pigSex
+        self.pigExtra = pigExtra
+        self.pigImage = pigImage
 
 
 class GetOptions:
@@ -60,7 +71,18 @@ class GetOptions:
                           self.conf.getboolean('Columns', 'colour'),
                           self.conf.getboolean('Columns', 'sex'),
                           self.conf.getboolean('Columns', 'loft'),
-                          self.conf.getboolean('Columns', 'strain'))
+                          self.conf.getboolean('Columns', 'strain'),
+                          self.conf.getint('Printing', 'paper'),
+                          self.conf.getint('Printing', 'layout'),
+                          self.conf.getboolean('Printing', 'perName'),
+                          self.conf.getboolean('Printing', 'perAddress'),
+                          self.conf.getboolean('Printing', 'perPhone'),
+                          self.conf.getboolean('Printing', 'perEmail'),
+                          self.conf.getboolean('Printing', 'pigName'),
+                          self.conf.getboolean('Printing', 'pigColour'),
+                          self.conf.getboolean('Printing', 'pigSex'),
+                          self.conf.getboolean('Printing', 'pigExtra'),
+                          self.conf.getboolean('Printing', 'pigImage'))
 
         self.optionList = p
 

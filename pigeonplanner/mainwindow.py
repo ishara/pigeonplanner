@@ -578,6 +578,7 @@ class MainWindow:
                       'sex': self.sexDic[self.parser.pigeons[pindex].sex],
                       'colour': self.parser.pigeons[pindex].colour,
                       'name': self.parser.pigeons[pindex].name,
+                      'image': self.parser.pigeons[pindex].image,
                       'extra1': self.parser.pigeons[pindex].extra1,
                       'extra2': self.parser.pigeons[pindex].extra2,
                       'extra3': self.parser.pigeons[pindex].extra3,
