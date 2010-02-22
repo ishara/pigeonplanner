@@ -594,3 +594,97 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
+#### Status
+    def delete_status(self, table, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM %s WHERE pindex=?' %table, (pindex,))
+        conn.commit()
+        conn.close()
+
+#### Sold
+    def insert_sold(self, data):
+        conn, cursor = self.db_connect()
+        try:
+            cursor.execute('INSERT INTO Sold VALUES (null, ?, ?, ?, ?)', data)
+        except sqlite3.IntegrityError:
+            pass
+        conn.commit()
+        conn.close()
+
+    def update_sold(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Sold SET date=?, person=?, info=? WHERE pindex=?', data)
+        conn.commit()
+        conn.close()
+
+    def get_sold_data(self, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT person, date, info FROM Sold WHERE pindex=?', (pindex,))
+        data = cursor.fetchone()
+        conn.close()
+        return data
+
+    def delete_sold(self, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Sold WHERE pindex=?', (pindex,))
+        conn.commit()
+        conn.close()
+
+#### Lost
+    def insert_lost(self, data):
+        conn, cursor = self.db_connect()
+        try:
+            cursor.execute('INSERT INTO Lost VALUES (null, ?, ?, ?, ?)', data)
+        except sqlite3.IntegrityError:
+            pass
+        conn.commit()
+        conn.close()
+
+    def update_lost(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Lost SET date=?, racepoint=?, info=? WHERE pindex=?', data)
+        conn.commit()
+        conn.close()
+
+    def get_lost_data(self, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT racepoint, date, info FROM Lost WHERE pindex=?', (pindex,))
+        data = cursor.fetchone()
+        conn.close()
+        return data
+
+    def delete_lost(self, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Lost WHERE pindex=?', (pindex,))
+        conn.commit()
+        conn.close()
+
+#### Dead
+    def insert_dead(self, data):
+        conn, cursor = self.db_connect()
+        try:
+            cursor.execute('INSERT INTO Dead VALUES (null, ?, ?, ?)', data)
+        except sqlite3.IntegrityError:
+            pass
+        conn.commit()
+        conn.close()
+
+    def update_dead(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Dead SET date=?, info=? WHERE pindex=?', data)
+        conn.commit()
+        conn.close()
+
+    def get_dead_data(self, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT date, info FROM Dead WHERE pindex=?', (pindex,))
+        data = cursor.fetchone()
+        conn.close()
+        return data
+
+    def delete_dead(self, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Dead WHERE pindex=?', (pindex,))
+        conn.commit()
+        conn.close()
+

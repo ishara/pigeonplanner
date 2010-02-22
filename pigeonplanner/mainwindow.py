@@ -61,10 +61,12 @@ class MainWindow:
         self.blockMenuCallback = False
         self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(join(const.IMAGEDIR, 'icon_logo.png'), 75, 75)
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
+        self.pigeonStatus = {0: 'dead', 1: 'active', 2: 'sold', 3: 'lost'}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
                                'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit,
                                'dam': self.entryDamEdit, 'yeardam': self.entryYearDamEdit}
         self.entryDate.set_text(datetime.date.today().strftime(self.date_format))
+        self.cbStatus.set_active(1)
 
         self.cancelEscAG = gtk.AccelGroup()
         key, modifier = gtk.accelerator_parse('Escape')
@@ -252,6 +254,8 @@ class MainWindow:
         self.cbsex.set_active(0)
         self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
         self.labelImgPath.set_text('')
+        self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, 'active.png'))
+        self.cbStatus.set_active(1)
 
         self.add_edit_start('add')
 
@@ -287,6 +291,10 @@ class MainWindow:
         self.entryDamEdit.set_text(self.entryDam.get_text())
         self.entryYearDamEdit.set_text(self.entryYearDam.get_text())
 
+        status = self.parser.pigeons[model[treeiter][0]].active
+        self.cbStatus.set_active(status)
+        self.notebookStatus.set_current_page(status)
+
         self.cbsex.set_active(int(self.entrySexKey.get_text()))
 
         self.add_edit_start('edit')
@@ -310,7 +318,7 @@ class MainWindow:
         chkKeep = wTree.get_widget('chkKeep')
         chkResults = wTree.get_widget('chkResults')
         dialog.set_transient_for(self.main)
-        label.set_text(ring + ' / ' + year)
+        label.set_text('%s / %s' %(ring, year))
 
         if not self.database.has_results(pindex):
             chkResults.set_active(False)
@@ -324,6 +332,11 @@ class MainWindow:
             else:
                 logger.info("Remove: Removing the pigeon")
                 self.database.delete_pigeon(pindex)
+                # Only remove status when pigeon is completely removed
+                status = self.parser.pigeons[pindex].active
+                if status != 1:
+                    self.database.delete_status(self.pigeonStatus[status].capitalize(), pindex)
+
                 self.parser.get_pigeons()
 
             if not chkResults.get_active():
@@ -805,10 +818,11 @@ class MainWindow:
         self.finddialog.hide()
 
     # Calendar callbacks
-    def on_calbutton_clicked(self, widget):
-        self.position_popup()
+    def on_calicon_press(self, widget, icon, event):
+        self.savedDate = widget.get_text()
+        self.dateEntry = widget
 
-        self.savedDate = self.entryDate.get_text()
+        self.position_popup()
 
         date = datetime.date.today()
         self.calendar.select_month(date.month-1, date.year)
@@ -822,7 +836,7 @@ class MainWindow:
         self.hide_popup()
 
     def on_calcancel_clicked(self, widget):
-        self.entryDate.set_text(self.savedDate)
+        self.dateEntry.set_text(self.savedDate)
 
         self.hide_popup()
 
@@ -832,9 +846,9 @@ class MainWindow:
         the_date = datetime.date(year, month, day)
 
         if the_date:
-            self.entryDate.set_text(the_date.strftime(self.date_format))
+            self.dateEntry.set_text(the_date.strftime(self.date_format))
         else:
-            self.entryDate.set_text('')
+            self.dateEntry.set_text('')
 
     def on_day_double_clicked(self, widget, data=None):
         self.hide_popup()
@@ -856,6 +870,33 @@ class MainWindow:
         image = self.parser.pigeons[pindex].image
 
         self.image.set_from_pixbuf(gtk.gdk.pixbuf_new_from_file_at_size(image, 520, 460))
+
+    # Statusdialog
+    def on_btnStatus_clicked(self, widget):
+        pindex, ring, year = self.get_main_ring()
+        status = self.parser.pigeons[pindex].active
+        self.labelStatus.set_markup("<b>%s</b>" %_(self.pigeonStatus[status]))
+        self.notebookStatus.set_current_page(status)
+        self.set_status_editable(False)
+        self.set_statusentry_icon(False)
+        self.hboxStatus.hide()
+        self.hboxStatus2.show()
+        self.statusdialog.show()
+
+    def on_btnStatus1_clicked(self, widget):
+        self.set_status_editable(True)
+        self.set_statusentry_icon(True)
+        self.hboxStatus.show()
+        self.hboxStatus2.hide()
+        self.statusdialog.show()
+
+    def on_closestatusdialog_clicked(self, widget):
+        self.statusdialog.hide()
+
+    def on_cbStatus_changed(self, widget):
+        status = widget.get_active()
+        self.notebookStatus.set_current_page(status)
+        self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
 
 
     #
@@ -1129,7 +1170,8 @@ class MainWindow:
                                             self.sbdetail: False, self.MenuEdit: False,
                                             self.MenuRemove: False, self.MenuPedigree: False,
                                             self.MenuAddresult: False, self.addresult: False})
-
+            self.imageStatus.clear()
+            self.imageStatus1.clear()
             self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
             self.labelImgPath.set_text('')
             self.pedigree.draw_pedigree()
@@ -1155,6 +1197,7 @@ class MainWindow:
         yearsire = self.parser.pigeons[pindex].yearsire
         dam      = self.parser.pigeons[pindex].dam
         yeardam  = self.parser.pigeons[pindex].yeardam
+        status   = self.parser.pigeons[pindex].active
 
         self.entryRing.set_text(ring)
         self.entryYear.set_text(year)
@@ -1191,6 +1234,9 @@ class MainWindow:
         except:
             widgets.message_dialog('error', messages.MSG_IMAGE_MISSING, self.main)
 
+        self.imageStatus.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
+        self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
+
         dp = DrawPedigree([self.tableSire, self.tableDam], pindex,
                            button=self.goto, pigeons=self.parser.pigeons,
                            lang=self.options.optionList.language)
@@ -1202,6 +1248,36 @@ class MainWindow:
 
         self.get_results(pindex)
         self.labelPigeonResult.set_text("%s / %s" %(ring, year))
+
+        self.fill_status(pindex, status)
+
+    def fill_status(self, pindex, status):
+        '''
+        Fill the correct statusdetails for the selected pigeon
+
+        @param pindex: the selected pigeon
+        @param status: the status
+        '''
+
+        if status == 1: # Active
+            return
+        elif status == 0: # Dead
+            data = self.database.get_dead_data(pindex)
+            if data:
+                self.entryDeadDate.set_text(data[0])
+                self.textDeadInfo.get_buffer().set_text(data[1])
+        elif status == 2: # Sold
+            data = self.database.get_sold_data(pindex)
+            if data:
+                self.entrySoldDate.set_text(data[1])
+                self.entrySoldBuyer.set_text(data[0])
+                self.textSoldInfo.get_buffer().set_text(data[2])
+        elif sstatus == 3: # Lost
+            data = self.database.get_lost_data(pindex)
+            if data:
+                self.entryLostDate.set_text(data[1])
+                self.entryLostPoint.set_text(data[0])
+                self.textLostInfo.get_buffer().set_text(data[2])
 
     def get_results(self, pindex):
         '''
@@ -1371,7 +1447,7 @@ class MainWindow:
                      self.entryYear1.get_text(),\
                      self.cbsex.get_active_text(),\
                      1,\
-                     1,\
+                     self.cbStatus.get_active(),\
                      self.cbColour.child.get_text(),\
                      self.entryName1.get_text(),\
                      self.cbStrain.child.get_text(),\
@@ -1390,6 +1466,23 @@ class MainWindow:
 
         return infoTuple
 
+    def get_status_info(self):
+        bffr = self.textDeadInfo.get_buffer()
+        dead = (self.entryDeadDate.get_text(),\
+                bffr.get_text(*bffr.get_bounds()))
+
+        bffr = self.textSoldInfo.get_buffer()
+        sold = (self.entrySoldDate.get_text(),\
+                self.entrySoldBuyer.get_text(),\
+                bffr.get_text(*bffr.get_bounds()))
+
+        bffr = self.textLostInfo.get_buffer()
+        lost = (self.entryLostDate.get_text(),\
+                self.entryLostPoint.get_text(),\
+                bffr.get_text(*bffr.get_bounds()))
+
+        return dead, sold, lost
+
     def write_new_data(self):
         '''
         Write new data to the pigeon
@@ -1404,6 +1497,26 @@ class MainWindow:
             self.database.update_result_pindex(pindex_new, pindex)
 
         self.database.update_pigeon(data)
+
+        status = self.cbStatus.get_active()
+        old_status = self.parser.pigeons[pindex].active
+        if status != old_status:
+            if old_status != 1:
+                self.database.delete_status(self.pigeonStatus[old_status].capitalize(), pindex)
+
+            if status == 0:
+                self.database.insert_dead((pindex,) + self.get_status_info()[0])
+            elif status == 2:
+                self.database.insert_sold((pindex,) + self.get_status_info()[1])
+            elif status == 3:
+                self.database.insert_lost((pindex,) + self.get_status_info()[2])
+        else:
+            if status == 0:
+                self.database.update_dead(self.get_status_info()[0] + (pindex,))
+            elif status == 2:
+                self.database.update_sold(self.get_status_info()[1] + (pindex,))
+            elif status == 3:
+                self.database.update_lost(self.get_status_info()[2] + (pindex,))
 
         self.update_data(infoTuple)
 
@@ -1430,6 +1543,15 @@ class MainWindow:
 
         self.database.insert_pigeon(pindexTuple)
 
+        status = self.cbStatus.get_active()
+
+        if status == 0:
+            self.database.insert_dead((pindex,) + self.get_status_info()[0])
+        elif status == 2:
+            self.database.insert_sold((pindex,) + self.get_status_info()[1])
+        elif status == 3:
+                self.database.insert_lost((pindex,) + self.get_status_info()[2])
+
         self.update_data(infoTuple)
 
     def update_data(self, infoTuple):
@@ -1454,7 +1576,7 @@ class MainWindow:
 
     def empty_entryboxes(self):
         '''
-        Empty all entryboxes
+        Empty all entryboxes and textviews
         '''
 
         for widget in self.wTree.get_widget_prefix("entry"):
@@ -1462,6 +1584,27 @@ class MainWindow:
             if not name == 'entryDate':
                 attr = getattr(self, name)
                 attr.set_text('')
+
+        for widget in self.wTree.get_widget_prefix("text"):
+            attr = getattr(self, widget.get_name())
+            attr.get_buffer().set_text('')
+
+    def set_status_editable(self, value):
+        self.entryDeadDate.set_editable(value)
+        self.textDeadInfo.set_editable(value)
+
+        self.entrySoldDate.set_editable(value)
+        self.entrySoldBuyer.set_editable(value)
+        self.textSoldInfo.set_editable(value)
+
+        self.entryLostDate.set_editable(value)
+        self.entryLostPoint.set_editable(value)
+        self.textLostInfo.set_editable(value)
+
+    def set_statusentry_icon(self, value):
+        self.entryDeadDate.set_icon_sensitive(1, value)
+        self.entrySoldDate.set_icon_sensitive(1, value)
+        self.entryLostDate.set_icon_sensitive(1, value)
 
     def set_default_image(self, widget):
         self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
@@ -1521,14 +1664,19 @@ class MainWindow:
         Position the popup calendar
         '''
 
-        (x, y) = gtk.gdk.Window.get_origin(self.calbutton.window)
+        if self.dateEntry.get_name() == 'entryDate':
+            window = self.resultdialog.window
+        else:
+            window = self.statusdialog.window
 
-        x += self.calbutton.allocation.x
-        y += self.calbutton.allocation.y
-        bwidth = self.calbutton.allocation.width
-        bheight = self.calbutton.allocation.height
+        (x, y) = gtk.gdk.Window.get_origin(window)
 
-        x += bwidth - self.calpopup.size_request()[0]
+        x += self.dateEntry.allocation.x
+        y += self.dateEntry.allocation.y
+        bwidth = self.dateEntry.allocation.width
+        bheight = self.dateEntry.allocation.height
+
+        x += bwidth - self.dateEntry.size_request()[0]
         y += bheight
 
         if x < 0: x = 0
