@@ -1272,7 +1272,7 @@ class MainWindow:
                 self.entrySoldDate.set_text(data[1])
                 self.entrySoldBuyer.set_text(data[0])
                 self.textSoldInfo.get_buffer().set_text(data[2])
-        elif sstatus == 3: # Lost
+        elif status == 3: # Lost
             data = self.database.get_lost_data(pindex)
             if data:
                 self.entryLostDate.set_text(data[1])
