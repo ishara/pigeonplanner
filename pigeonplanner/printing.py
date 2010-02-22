@@ -18,6 +18,8 @@
 
 import gtk
 import cairo
+import logging
+logger = logging.getLogger(__name__)
 
 import widgets
 import messages
@@ -53,6 +55,8 @@ class PrintPedigree:
         response = print_.run(action, self.parent)
 
         if response == gtk.PRINT_OPERATION_RESULT_ERROR:
+            print_error = print_.get_error()
+            logger.error("Error printing pedigree: %s" %print_error)
             widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
         elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
             settings = print_.get_print_settings()
