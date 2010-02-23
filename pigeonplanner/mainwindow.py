@@ -136,6 +136,8 @@ class MainWindow:
                                             _("Enter the bandnumber of the pigeon")),
                             'entryYear1': (self.statusmsg.get_id("year"),
                                             _("Enter the year of the pigeon")),
+                            'btnStatus1': (self.statusmsg.get_id("status"),
+                                            _("Click here to set the status of the pigeon")),
                             'entryName1': (self.statusmsg.get_id("name"),
                                             _("Enter a name for the pigeon")),
                             'eventimage': (self.statusmsg.get_id("img"),
