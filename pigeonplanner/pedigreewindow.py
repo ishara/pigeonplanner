@@ -78,7 +78,7 @@ class PedigreeWindow:
                 userinfo['email'] = address[7]
                 break
 
-        if not userinfo['name']:
+        if not userinfo.has_key('name'):
             if widgets.message_dialog('question', messages.MSG_NO_INFO, self.pedigreewindow):
                 tw = ToolsWindow(self.main)
                 tw.toolsdialog.set_keep_above(True)
