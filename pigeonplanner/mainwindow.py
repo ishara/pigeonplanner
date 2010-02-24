@@ -1604,9 +1604,14 @@ class MainWindow:
         self.textLostInfo.set_editable(value)
 
     def set_statusentry_icon(self, value):
-        self.entryDeadDate.set_icon_sensitive(1, value)
-        self.entrySoldDate.set_icon_sensitive(1, value)
-        self.entryLostDate.set_icon_sensitive(1, value)
+        if value:
+            pixbuf = gtk.gdk.pixbuf_new_from_file(join(const.IMAGEDIR, 'icon_calendar.png'))
+        else:
+            pixbuf = None
+
+        self.entryDeadDate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
+        self.entrySoldDate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
+        self.entryLostDate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
 
     def set_default_image(self, widget):
         self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
