@@ -243,6 +243,11 @@ class MainWindow:
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(pigeon[3], 96, 96)
             store.append(["%s%s" %(pigeon[2], pigeon[1]), pigeon[0], "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
 
+        if len(store) > 0:
+            self.labelImage.hide()
+        else:
+            self.labelImage.show()
+
         self.photoalbum.show()
 
     def menulog_activate(self, widget):
@@ -862,6 +867,7 @@ class MainWindow:
 
     def on_iconview_changed(self, widget):
         model = widget.get_model()
+
         try:
             path = widget.get_selected_items()[0]
         except IndexError:

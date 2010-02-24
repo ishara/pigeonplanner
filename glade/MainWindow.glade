@@ -3098,6 +3098,7 @@
   <widget class="GtkDialog" id="photoalbum">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Photo Album</property>
+    <property name="window_position">center-on-parent</property>
     <property name="default_width">810</property>
     <property name="default_height">520</property>
     <property name="destroy_with_parent">True</property>
@@ -3137,8 +3138,27 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkImage" id="image">
+              <widget class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <widget class="GtkLabel" id="labelImage">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">There are no images found.</property>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkImage" id="image">
+                    <property name="visible">True</property>
+                  </widget>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </widget>
               <packing>
                 <property name="position">1</property>
