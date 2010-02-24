@@ -613,7 +613,7 @@ class DatabaseOperations:
 
     def update_sold(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Sold SET date=?, person=?, info=? WHERE pindex=?', data)
+        cursor.execute('UPDATE Sold SET person=?, date=?, info=? WHERE pindex=?', data)
         conn.commit()
         conn.close()
 
@@ -642,7 +642,7 @@ class DatabaseOperations:
 
     def update_lost(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Lost SET date=?, racepoint=?, info=? WHERE pindex=?', data)
+        cursor.execute('UPDATE Lost SET racepoint=?, date=?, info=? WHERE pindex=?', data)
         conn.commit()
         conn.close()
 

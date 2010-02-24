@@ -1474,13 +1474,13 @@ class MainWindow:
                 bffr.get_text(*bffr.get_bounds()))
 
         bffr = self.textSoldInfo.get_buffer()
-        sold = (self.entrySoldDate.get_text(),\
-                self.entrySoldBuyer.get_text(),\
+        sold = (self.entrySoldBuyer.get_text(),\
+                self.entrySoldDate.get_text(),\
                 bffr.get_text(*bffr.get_bounds()))
 
         bffr = self.textLostInfo.get_buffer()
-        lost = (self.entryLostDate.get_text(),\
-                self.entryLostPoint.get_text(),\
+        lost = (self.entryLostPoint.get_text(),\
+                self.entryLostDate.get_text(),\
                 bffr.get_text(*bffr.get_bounds()))
 
         return dead, sold, lost
