@@ -53,15 +53,15 @@ class LogDialog(gtk.Dialog):
         scroll.get_vadjustment().connect("value-changed", self.value_changed)
 
         #textview
-        buffer = gtk.TextBuffer()
-        self.textview = gtk.TextView(buffer)
+        bffr = gtk.TextBuffer()
+        self.textview = gtk.TextView(bffr)
         scroll.add(self.textview)
         self.textview.set_wrap_mode(gtk.WRAP_NONE)
         self.textview.set_editable(False)
         self.textview.set_cursor_visible(False)
         self.textview.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
 
-        table = buffer.get_tag_table()
+        table = bffr.get_tag_table()
         for name, color in COLORS.items():
             tag = gtk.TextTag(name)
             tag.set_property("foreground", color)
@@ -83,7 +83,7 @@ class LogDialog(gtk.Dialog):
 
         self.combo = gtk.combo_box_new_text()
         buttonbox.pack_start(self.combo)
-        self.combo.connect("changed", self.reload)
+        self.combo.connect("changed", self.reload_view)
 
         for s in SEVERITY:
             self.combo.append_text(s)
@@ -115,25 +115,25 @@ class LogDialog(gtk.Dialog):
     def email_hook(self, button, email):
         webbrowser.open("mailto:%s" % email)
 
-    def insert_color(self, buffer, line):
+    def insert_color(self, bffr, line):
         for s in SEVERITY[self.combo.get_active():]:
             if s in line:
-                buffer.insert_with_tags(buffer.get_end_iter(), "%s\n" % line, buffer.get_tag_table().lookup(s))
+                bffr.insert_with_tags(bffr.get_end_iter(), "%s\n" %line, bffr.get_tag_table().lookup(s))
                 break
 
-    def reload(self, textview):
-        buffer = self.textview.get_buffer()
-        buffer.set_text("")
-        ini, fin = self.back_buffer.get_bounds()
-        for line in self.back_buffer.get_text(ini, fin).split("\n"):
-            self.insert_color(buffer, line)
+    def reload_view(self, textview):
+        bffr = self.textview.get_buffer()
+        bffr.set_text("")
+        start, end = self.back_buffer.get_bounds()
+        for line in self.back_buffer.get_text(start, end).split("\n"):
+            self.insert_color(bffr, line)
 
     def update(self):
         try:
-            buffer = self.textview.get_buffer()
+            bffr = self.textview.get_buffer()
             for line in self.file.readlines():
                 self.back_buffer.insert(self.back_buffer.get_end_iter(), line)
-                self.insert_color(buffer, line.strip())
+                self.insert_color(bffr, line.strip())
         except:
             pass
         else:
