@@ -99,6 +99,15 @@ class MainWindow:
         for cbentry in cbentries:
             cbentry.child.set_activates_default(True)
 
+        if const.SMALL_SCREEN:
+            self.vboxPedigree.set_orientation(gtk.ORIENTATION_HORIZONTAL)
+            self.vboxRelatives.set_orientation(gtk.ORIENTATION_HORIZONTAL)
+            self.vboxResults.set_orientation(gtk.ORIENTATION_HORIZONTAL)
+
+            self.imagePedigreeTab.set_from_file(join(const.IMAGEDIR, 'icon_pedigree_small.png'))
+            self.imageRelativesTab.set_from_file(join(const.IMAGEDIR, 'icon_relatives_small.png'))
+            self.imageResultsTab.set_from_file(join(const.IMAGEDIR, 'icon_result_small.png'))
+
         if self.options.optionList.arrows:
             self.vboxButtons.show()
 

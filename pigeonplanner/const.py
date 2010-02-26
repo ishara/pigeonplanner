@@ -20,6 +20,8 @@ import os
 import sys
 import tempfile
 
+import gtk.gdk
+
 import pigeonplanner
 
 
@@ -30,6 +32,11 @@ WEBSITE = pigeonplanner.website
 COPYRIGHT = pigeonplanner.copyright
 DESCRIPTION = pigeonplanner.description
 LICENSE = pigeonplanner.license
+
+
+SMALL_SCREEN = False
+if gtk.gdk.screen_height() <= 768:
+    SMALL_SCREEN = True
 
 
 UNIX = False

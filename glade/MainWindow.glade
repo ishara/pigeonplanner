@@ -1472,7 +1472,7 @@
                             <property name="yscale">0</property>
                             <property name="top_padding">2</property>
                             <property name="bottom_padding">2</property>
-                            <property name="left_padding">4</property>
+                            <property name="left_padding">2</property>
                             <property name="right_padding">2</property>
                             <child>
                               <widget class="GtkFrame" id="frame1">
@@ -1627,7 +1627,7 @@
                             <property name="top_padding">2</property>
                             <property name="bottom_padding">2</property>
                             <property name="left_padding">2</property>
-                            <property name="right_padding">4</property>
+                            <property name="right_padding">2</property>
                             <child>
                               <widget class="GtkFrame" id="frame2">
                                 <property name="visible">True</property>
@@ -1879,7 +1879,7 @@
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <widget class="GtkImage" id="image3">
+                  <widget class="GtkImage" id="imagePedigreeTab">
                     <property name="visible">True</property>
                     <property name="pixbuf">../images/icon_pedigree.png</property>
                   </widget>
@@ -2045,7 +2045,7 @@
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <widget class="GtkImage" id="image5">
+                  <widget class="GtkImage" id="imageRelativesTab">
                     <property name="visible">True</property>
                     <property name="pixbuf">../images/icon_relatives.png</property>
                   </widget>
@@ -2245,7 +2245,7 @@
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <widget class="GtkImage" id="image10">
+                  <widget class="GtkImage" id="imageResultsTab">
                     <property name="visible">True</property>
                     <property name="pixbuf">../images/icon_result.png</property>
                   </widget>
