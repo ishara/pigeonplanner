@@ -462,6 +462,18 @@
                                   </packing>
                                 </child>
                                 <child>
+                                  <widget class="GtkCheckButton" id="chkStats">
+                                    <property name="label" translatable="yes">Show or hide pigeon statistics</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="draw_indicator">True</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
                                   <widget class="GtkCheckButton" id="chkToolbar">
                                     <property name="label" translatable="yes">Show or hide the toolbar</property>
                                     <property name="visible">True</property>
@@ -470,7 +482,7 @@
                                     <property name="draw_indicator">True</property>
                                   </widget>
                                   <packing>
-                                    <property name="position">1</property>
+                                    <property name="position">2</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -482,7 +494,7 @@
                                     <property name="draw_indicator">True</property>
                                   </widget>
                                   <packing>
-                                    <property name="position">2</property>
+                                    <property name="position">3</property>
                                   </packing>
                                 </child>
                               </widget>

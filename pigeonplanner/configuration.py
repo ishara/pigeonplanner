@@ -44,6 +44,7 @@ class Configuration:
         self.__addSection('Options')
         self.__addOption('Options', 'theme', 2)
         self.__addOption('Options', 'arrows', 'False')
+        self.__addOption('Options', 'stats', 'False')
         self.__addOption('Options', 'toolbar', 'True')
         self.__addOption('Options', 'statusbar', 'True')
         self.__addOption('Options', 'update', 'True')

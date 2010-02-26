@@ -105,6 +105,7 @@ class OptionsDialog:
         self.cbThemes.set_active(self.opt.optionList.theme)
 
         self.chkArrows.set_active(self.opt.optionList.arrows)
+        self.chkStats.set_active(self.opt.optionList.stats)
         self.chkToolbar.set_active(self.opt.optionList.toolbar)
         self.chkStatusbar.set_active(self.opt.optionList.statusbar)
 
@@ -152,6 +153,7 @@ class OptionsDialog:
     def on_ok_clicked(self, widget):
         dic = {"Options": {'theme': self.cbThemes.get_active(),
                            'arrows': str(self.chkArrows.get_active()),
+                           'stats': str(self.chkStats.get_active()),
                            'toolbar': str(self.chkToolbar.get_active()),
                            'statusbar': str(self.chkStatusbar.get_active()),
                            'update': str(self.chkUpdate.get_active()),
@@ -208,6 +210,19 @@ class OptionsDialog:
 
             self.main.blockMenuCallback = True
             self.main.MenuArrows.set_active(False)
+            self.main.blockMenuCallback = False
+
+        if self.chkStats.get_active():
+            self.main.tableStatistics.show()
+
+            self.main.blockMenuCallback = True
+            self.main.MenuStats.set_active(True)
+            self.main.blockMenuCallback = False
+        else:
+            self.main.tableStatistics.hide()
+
+            self.main.blockMenuCallback = True
+            self.main.MenuStats.set_active(False)
             self.main.blockMenuCallback = False
 
         if self.chkToolbar.get_active():

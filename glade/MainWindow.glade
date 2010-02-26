@@ -22,23 +22,171 @@
           <widget class="GtkHBox" id="hbox2">
             <property name="visible">True</property>
             <child>
-              <widget class="GtkScrolledWindow" id="scrolledwindow3">
+              <widget class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hscrollbar_policy">automatic</property>
-                <property name="vscrollbar_policy">automatic</property>
-                <property name="shadow_type">in</property>
+                <property name="orientation">vertical</property>
                 <child>
-                  <widget class="GtkTreeView" id="treeview">
-                    <property name="height_request">280</property>
+                  <widget class="GtkScrolledWindow" id="scrolledwindow3">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="has_focus">True</property>
-                    <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK</property>
-                    <property name="rules_hint">True</property>
-                    <property name="enable_tree_lines">True</property>
-                    <signal name="button_press_event" handler="on_treeview_press"/>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <widget class="GtkTreeView" id="treeview">
+                        <property name="height_request">280</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK</property>
+                        <property name="rules_hint">True</property>
+                        <property name="enable_tree_lines">True</property>
+                        <signal name="button_press_event" handler="on_treeview_press"/>
+                      </widget>
+                    </child>
                   </widget>
+                  <packing>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkAlignment" id="alignment8">
+                    <property name="visible">True</property>
+                    <property name="xscale">0</property>
+                    <property name="bottom_padding">4</property>
+                    <child>
+                      <widget class="GtkTable" id="tableStatistics">
+                        <property name="visible">True</property>
+                        <property name="n_columns">4</property>
+                        <property name="column_spacing">8</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <widget class="GtkFrame" id="frame7">
+                            <property name="visible">True</property>
+                            <property name="label_xalign">0.5</property>
+                            <property name="shadow_type">in</property>
+                            <child>
+                              <widget class="GtkAlignment" id="alignment10">
+                                <property name="visible">True</property>
+                                <child>
+                                  <widget class="GtkLabel" id="labelStatTotal">
+                                    <property name="visible">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label20">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Total</property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="type">label_item</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
+                        <child>
+                          <widget class="GtkFrame" id="frame8">
+                            <property name="visible">True</property>
+                            <property name="label_xalign">0.5</property>
+                            <property name="shadow_type">in</property>
+                            <child>
+                              <widget class="GtkAlignment" id="alignment11">
+                                <property name="visible">True</property>
+                                <child>
+                                  <widget class="GtkLabel" id="labelStatCocks">
+                                    <property name="visible">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label22">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Cocks</property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="type">label_item</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkFrame" id="frame10">
+                            <property name="visible">True</property>
+                            <property name="label_xalign">0.5</property>
+                            <property name="shadow_type">in</property>
+                            <child>
+                              <widget class="GtkAlignment" id="alignment14">
+                                <property name="visible">True</property>
+                                <child>
+                                  <widget class="GtkLabel" id="labelStatHens">
+                                    <property name="visible">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label23">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Hens</property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="type">label_item</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="right_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkFrame" id="frame11">
+                            <property name="visible">True</property>
+                            <property name="label_xalign">0.5</property>
+                            <property name="shadow_type">in</property>
+                            <child>
+                              <widget class="GtkAlignment" id="alignment15">
+                                <property name="visible">True</property>
+                                <child>
+                                  <widget class="GtkLabel" id="labelStatYoung">
+                                    <property name="visible">True</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label24">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Young birds</property>
+                                <property name="use_markup">True</property>
+                              </widget>
+                              <packing>
+                                <property name="type">label_item</property>
+                              </packing>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="right_attach">4</property>
+                          </packing>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
               </widget>
               <packing>

@@ -20,9 +20,10 @@ import configuration
 
 
 class ParsedOptions:
-    def __init__(self, theme, arrows, toolbar, statusbar, update, language, runs, backup, interval, location, last, name, colour, sex, loft, strain, paper, layout, perName, perAddress, perPhone, perEmail, pigName, pigColour, pigSex, pigExtra, pigImage):
+    def __init__(self, theme, arrows, stats, toolbar, statusbar, update, language, runs, backup, interval, location, last, name, colour, sex, loft, strain, paper, layout, perName, perAddress, perPhone, perEmail, pigName, pigColour, pigSex, pigExtra, pigImage):
         self.theme = theme
         self.arrows = arrows
+        self.stats = stats
         self.toolbar = toolbar
         self.statusbar = statusbar
         self.update = update
@@ -54,37 +55,34 @@ class GetOptions:
     def __init__(self):
         self.conf = configuration.ConfigurationParser()
 
-        self.optionList = []
-
-        p = ParsedOptions(self.conf.getint('Options', 'theme'),
-                          self.conf.getboolean('Options', 'arrows'),
-                          self.conf.getboolean('Options', 'toolbar'),
-                          self.conf.getboolean('Options', 'statusbar'),
-                          self.conf.getboolean('Options', 'update'),
-                          self.conf.get('Options', 'language'),
-                          self.conf.getint('Options', 'runs'),
-                          self.conf.getboolean('Backup', 'backup'),
-                          self.conf.getint('Backup', 'interval'),
-                          self.conf.get('Backup', 'location'),
-                          self.conf.getfloat('Backup', 'last'),
-                          self.conf.getboolean('Columns', 'name'),
-                          self.conf.getboolean('Columns', 'colour'),
-                          self.conf.getboolean('Columns', 'sex'),
-                          self.conf.getboolean('Columns', 'loft'),
-                          self.conf.getboolean('Columns', 'strain'),
-                          self.conf.getint('Printing', 'paper'),
-                          self.conf.getint('Printing', 'layout'),
-                          self.conf.getboolean('Printing', 'perName'),
-                          self.conf.getboolean('Printing', 'perAddress'),
-                          self.conf.getboolean('Printing', 'perPhone'),
-                          self.conf.getboolean('Printing', 'perEmail'),
-                          self.conf.getboolean('Printing', 'pigName'),
-                          self.conf.getboolean('Printing', 'pigColour'),
-                          self.conf.getboolean('Printing', 'pigSex'),
-                          self.conf.getboolean('Printing', 'pigExtra'),
-                          self.conf.getboolean('Printing', 'pigImage'))
-
-        self.optionList = p
+        self.optionList = ParsedOptions(self.conf.getint('Options', 'theme'),
+                                        self.conf.getboolean('Options', 'arrows'),
+                                        self.conf.getboolean('Options', 'stats'),
+                                        self.conf.getboolean('Options', 'toolbar'),
+                                        self.conf.getboolean('Options', 'statusbar'),
+                                        self.conf.getboolean('Options', 'update'),
+                                        self.conf.get('Options', 'language'),
+                                        self.conf.getint('Options', 'runs'),
+                                        self.conf.getboolean('Backup', 'backup'),
+                                        self.conf.getint('Backup', 'interval'),
+                                        self.conf.get('Backup', 'location'),
+                                        self.conf.getfloat('Backup', 'last'),
+                                        self.conf.getboolean('Columns', 'name'),
+                                        self.conf.getboolean('Columns', 'colour'),
+                                        self.conf.getboolean('Columns', 'sex'),
+                                        self.conf.getboolean('Columns', 'loft'),
+                                        self.conf.getboolean('Columns', 'strain'),
+                                        self.conf.getint('Printing', 'paper'),
+                                        self.conf.getint('Printing', 'layout'),
+                                        self.conf.getboolean('Printing', 'perName'),
+                                        self.conf.getboolean('Printing', 'perAddress'),
+                                        self.conf.getboolean('Printing', 'perPhone'),
+                                        self.conf.getboolean('Printing', 'perEmail'),
+                                        self.conf.getboolean('Printing', 'pigName'),
+                                        self.conf.getboolean('Printing', 'pigColour'),
+                                        self.conf.getboolean('Printing', 'pigSex'),
+                                        self.conf.getboolean('Printing', 'pigExtra'),
+                                        self.conf.getboolean('Printing', 'pigImage'))
 
     def write_default(self):
         '''

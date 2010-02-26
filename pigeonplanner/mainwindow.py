@@ -89,6 +89,7 @@ class MainWindow:
         self.fill_treeview()
         self.create_sexcombos()
         self.set_filefilter()
+        self.count_active_pigeons()
 
         cbentries = [self.cbRacepoint, self.cbSector, self.cbType, self.cbCategory, self.cbWeather, self.cbWind, self.cbColour, self.cbStrain, self.cbLoft]
 
@@ -113,6 +114,13 @@ class MainWindow:
 
             self.blockMenuCallback = True
             self.MenuArrows.set_active(True)
+            self.blockMenuCallback = False
+
+        if self.options.optionList.stats:
+            self.tableStatistics.show()
+
+            self.blockMenuCallback = True
+            self.MenuStats.set_active(True)
             self.blockMenuCallback = False
 
         if self.options.optionList.toolbar:
@@ -366,6 +374,8 @@ class MainWindow:
                     path = 0
                 self.treeview.set_cursor(path)
 
+            self.count_active_pigeons()
+
         dialog.destroy()
 
     def menupedigree_activate(self, widget):
@@ -398,6 +408,16 @@ class MainWindow:
         else:
             self.vboxButtons.hide()
             self.options.set_option('Options', 'arrows', 'False')
+
+    def menustats_toggled(self, widget):
+        if self.blockMenuCallback: return
+
+        if widget.get_active():
+            self.tableStatistics.show()
+            self.options.set_option('Options', 'stats', 'True')
+        else:
+            self.tableStatistics.hide()
+            self.options.set_option('Options', 'stats', 'False')
 
     def menutoolbar_toggled(self, widget):
         if self.blockMenuCallback: return
@@ -936,6 +956,7 @@ class MainWindow:
         self.menubar = uimanager.get_widget('/MenuBar')
         self.toolbar = uimanager.get_widget('/Toolbar')
         widgetDic = {"MenuArrows": uimanager.get_widget('/MenuBar/ViewMenu/Arrows'),
+                     "MenuStats": uimanager.get_widget('/MenuBar/ViewMenu/Stats'),
                      "MenuToolbar": uimanager.get_widget('/MenuBar/ViewMenu/Toolbar'),
                      "MenuStatusbar": uimanager.get_widget('/MenuBar/ViewMenu/Statusbar'),
                      "Filtermenu": uimanager.get_widget('/MenuBar/ViewMenu/FilterMenu'),
@@ -1011,6 +1032,8 @@ class MainWindow:
         toggle_entries = (
             ("Arrows",  None, _("Navigation arrows"), None,
                     _("Show or hide the navigation arrows"), self.menuarrows_toggled, False),
+            ("Stats",  None, _("Statistics"), None,
+                    _("Show or hide pigeon statistics"), self.menustats_toggled, False),
             ("Toolbar",  None, _("Toolbar"), None,
                     _("Show or hide the toolbar"), self.menutoolbar_toggled, False),
             ("Statusbar",  None, _("Statusbar"), None,
@@ -1444,6 +1467,7 @@ class MainWindow:
         else: # Save
             self.parser.get_pigeons()
             self.fill_treeview(path=self.selectionPath)
+            self.count_active_pigeons()
 
         self.selectionPath = 0
 
@@ -1843,4 +1867,30 @@ class MainWindow:
         fileFilter.set_name(_("Images"))
         fileFilter.add_pixbuf_formats()
         self.filedialog.add_filter(fileFilter)
+
+    def count_active_pigeons(self):
+        '''
+        Count all active pigeons and set the statistics labels
+        '''
+
+        cocks = 0
+        hens = 0
+        ybirds = 0
+        ptotal = 0
+        for pigeon in self.database.get_pigeons():
+            if not pigeon[5]: continue
+
+            ptotal += 1
+
+            if pigeon[4] == '0':
+                cocks += 1
+            elif pigeon[4] == '1':
+                hens += 1
+            elif pigeon[4] == '2':
+                ybirds += 1
+
+        self.labelStatTotal.set_markup("<b>%i</b>" %ptotal)
+        self.labelStatCocks.set_markup("<b>%i</b>" %cocks)
+        self.labelStatHens.set_markup("<b>%i</b>" %hens)
+        self.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
 

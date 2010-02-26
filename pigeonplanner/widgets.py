@@ -56,6 +56,7 @@ uistring = '''
          </menu>
          <separator/>
          <menuitem action="Arrows"/>
+         <menuitem action="Stats"/>
          <menuitem action="Toolbar"/>
          <menuitem action="Statusbar"/>
       </menu>
