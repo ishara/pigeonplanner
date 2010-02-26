@@ -213,13 +213,13 @@ class OptionsDialog:
             self.main.blockMenuCallback = False
 
         if self.chkStats.get_active():
-            self.main.tableStatistics.show()
+            self.main.alignStats.show()
 
             self.main.blockMenuCallback = True
             self.main.MenuStats.set_active(True)
             self.main.blockMenuCallback = False
         else:
-            self.main.tableStatistics.hide()
+            self.main.alignStats.hide()
 
             self.main.blockMenuCallback = True
             self.main.MenuStats.set_active(False)

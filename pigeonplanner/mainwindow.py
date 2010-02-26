@@ -117,7 +117,7 @@ class MainWindow:
             self.blockMenuCallback = False
 
         if self.options.optionList.stats:
-            self.tableStatistics.show()
+            self.alignStats.show()
 
             self.blockMenuCallback = True
             self.MenuStats.set_active(True)
@@ -413,10 +413,10 @@ class MainWindow:
         if self.blockMenuCallback: return
 
         if widget.get_active():
-            self.tableStatistics.show()
+            self.alignStats.show()
             self.options.set_option('Options', 'stats', 'True')
         else:
-            self.tableStatistics.hide()
+            self.alignStats.hide()
             self.options.set_option('Options', 'stats', 'False')
 
     def menutoolbar_toggled(self, widget):

@@ -49,8 +49,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkAlignment" id="alignment8">
-                    <property name="visible">True</property>
+                  <widget class="GtkAlignment" id="alignStats">
                     <property name="xscale">0</property>
                     <property name="bottom_padding">4</property>
                     <child>
