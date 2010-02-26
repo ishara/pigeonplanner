@@ -1665,8 +1665,7 @@ class MainWindow:
             self.filedialog.set_preview_widget_active(False)
 
     def url_hook(self, about, link):
-        import sys
-        if sys.platform.startswith("win"):
+        if const.WINDOWS:
             webbrowser.open(link)
 
     def email_hook(self, about, email):

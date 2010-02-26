@@ -17,7 +17,6 @@
 
 
 import os
-import sys
 import zipfile
 from os.path import isdir, join, normpath, split
 import logging

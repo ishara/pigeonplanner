@@ -32,7 +32,18 @@ DESCRIPTION = pigeonplanner.description
 LICENSE = pigeonplanner.license
 
 
+UNIX = False
+WINDOWS = False
+OSX = False
 if sys.platform.startswith("win"):
+	WINDOWS = True
+elif "darwin" in sys.platform:
+	OSX = True
+else:
+	UNIX = True
+
+
+if WINDOWS:
     HOMEDIR = os.environ['USERPROFILE'] 
     if os.environ.has_key('APPDATA'):
         PREFDIR = os.path.join(os.environ['APPDATA'], 'pigeonplanner')

@@ -23,7 +23,6 @@
 # http://www.jumbo-psp.com/PSP-for-Fun/images/Color%20tabel.htm
 
 
-import sys
 from cgi import escape
 
 import gtk
@@ -42,7 +41,7 @@ import database
 
 
 # Cairo-drawn boxes don't show up
-if "darwin" in sys.platform:
+if const.OSX:
     cairo_available = False
 
 

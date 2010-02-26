@@ -17,7 +17,6 @@
 
 
 import os
-import sys
 
 import gtk
 import gtk.glade
@@ -44,8 +43,7 @@ class OptionsDialog:
         self.opt = options.GetOptions()
 
         # Show the theme changer on Windows
-        self.win32 = sys.platform.startswith("win")
-        if self.win32:
+        if const.WINDOWS:
             self.framethemes.show()
 
             themes = os.listdir('./share/themes/')
@@ -194,7 +192,7 @@ class OptionsDialog:
         self.main.options = options.GetOptions()
 
         if self.languagelookup[self.cbLang.get_active()][1] != self.opt.optionList.language or\
-           self.win32 and self.cbThemes.get_active() != self.opt.optionList.theme:
+           const.WINDOWS and self.cbThemes.get_active() != self.opt.optionList.theme:
             widgets.message_dialog('info', messages.MSG_RESTART_APP, self.optionsdialog)
 
         self.main.set_treeview_columns()
