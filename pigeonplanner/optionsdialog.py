@@ -68,6 +68,7 @@ class OptionsDialog:
                 ('Bosnian', 'bs'),
                 ('Dutch', 'nl'),
                 ('English', 'en'),
+                ('French', 'fr'),
                 ('Russian', 'ru'),
                 ('Spanish', 'es')
                 ]
