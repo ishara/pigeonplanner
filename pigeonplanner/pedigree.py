@@ -119,21 +119,16 @@ class ExtraBox_cairo(gtk.DrawingArea):
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
             self.bordercolor = (0,0,0)
 
-        self.set_size_request(220,25)
-
     def realize(self, widget):
-        self.context = self.window.cairo_create()
-        self.textlayout = self.context.create_layout()
-        self.textlayout.set_font_description(self.get_style().font_desc)
-        self.textlayout.set_markup(self.text)
-        s = self.textlayout.get_pixel_size()
-        xmin = s[0] + 12
-        ymin = s[1] + 11
-        self.set_size_request(max(xmin, 220), max(ymin, 25))
+        self.set_size_request(max(12, 220), max(28, 25))
         
     def expose(self, widget, event):
         alloc = self.get_allocation()
         self.context = self.window.cairo_create()
+
+        self.textlayout = self.context.create_layout()
+        self.textlayout.set_font_description(self.get_style().font_desc)
+        self.textlayout.set_markup(self.text)
 
         self.context.move_to(0, 5)
         self.context.curve_to(0, 2, 2,0, 5,0)
@@ -325,7 +320,7 @@ class PedigreeEditBox:
 class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
     def __init__(self, pindex, ring, year, sex, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
         gtk.DrawingArea.__init__(self)
-        PedigreeEditBox.__init__(self, pindex, ring, year, sex, name, colour, details, kinfo, main, pedigree)
+        PedigreeEditBox.__init__(self, pindex, ring, year, sex, details, kinfo, main, pedigree)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
         self.connect("expose_event", self.expose)
         self.connect("realize", self.realize)
@@ -379,7 +374,7 @@ class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
     def pressed(self, widget, event):
         self.grab_focus()
     
-    def realize(self,widget):
+    def realize(self, widget):
         self.bg_gc = self.window.new_gc()
         self.text_gc = self.window.new_gc()
         self.border_gc = self.window.new_gc()
@@ -462,8 +457,6 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
             self.bordercolor = (0,0,0)
 
-        self.set_size_request(200,25)
-
     def focus_in(self, widget, event):
         self.hightlight = True
         self.queue_draw()
@@ -480,22 +473,20 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
         self.grab_focus()
 
     def realize(self, widget):
-        self.context = self.window.cairo_create()
-        self.textlayout = self.context.create_layout()
-        self.textlayout.set_font_description(self.get_style().font_desc)
-        self.textlayout.set_markup(self.text)
-        s = self.textlayout.get_pixel_size()
-        xmin = s[0] + 12
-        ymin = s[1] + 11
         if self.detail:
             y = 34
         else:
             y = 25
-        self.set_size_request(max(xmin, 150), max(ymin, y))
+
+        self.set_size_request(max(12, 150), max(28, y))
 
     def expose(self, widget, event):
         alloc = self.get_allocation()
         self.context = self.window.cairo_create()
+
+        self.textlayout = self.context.create_layout()
+        self.textlayout.set_font_description(self.get_style().font_desc)
+        self.textlayout.set_markup(self.text)
 
         self.context.move_to(0, 5)
         self.context.curve_to(0, 2, 2,0, 5,0)
