@@ -427,7 +427,6 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
         else:
             self.set_property("can-focus", True)
             self.connect("button-press-event", self.pressed)
-            self.connect("focus-in-event", self.focus_in)
             self.connect("focus-out-event", self.focus_out)
 
         self.pindex = pindex
@@ -457,12 +456,6 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
             self.bordercolor = (0,0,0)
 
-    def focus_in(self, widget, event):
-        self.hightlight = True
-        self.queue_draw()
-        if self.textlayout.get_text() and self.gotobutton:
-            self.gotobutton.set_sensitive(True)
-
     def focus_out(self, widget, event):
         self.hightlight = False
         self.queue_draw()
@@ -470,7 +463,11 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
             self.gotobutton.set_sensitive(False)
 
     def pressed(self, widget, event):
-        self.grab_focus()
+        if self.textlayout.get_text() and self.gotobutton:
+            self.hightlight = True
+            self.queue_draw()
+            self.grab_focus()
+            self.gotobutton.set_sensitive(True)
 
     def realize(self, widget):
         if self.detail:
