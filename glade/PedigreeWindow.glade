@@ -3,7 +3,6 @@
   <!-- interface-requires gtk+ 2.16 -->
   <!-- interface-naming-policy toplevel-contextual -->
   <widget class="GtkWindow" id="pedigreewindow">
-    <property name="visible">True</property>
     <property name="title" translatable="yes">Pedigree</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>

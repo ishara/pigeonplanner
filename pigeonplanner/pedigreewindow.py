@@ -62,6 +62,8 @@ class PedigreeWindow:
                                 self, self.main.options.optionList.language)
         self.dp.draw_pedigree()
 
+        self.pedigreewindow.show()
+
     def on_close_dialog(self, widget=None, event=None):
         self.pedigreewindow.destroy()
 
