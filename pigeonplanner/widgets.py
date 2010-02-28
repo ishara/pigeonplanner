@@ -81,6 +81,7 @@ uistring = '''
       <toolitem action="Add"/>
       <toolitem action="Edit"/>
       <toolitem action="Remove"/>
+      <toolitem action="Pedigree"/>
       <separator/>
       <toolitem action="Preferences"/>
       <toolitem action="Tools"/>

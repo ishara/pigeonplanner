@@ -965,7 +965,8 @@ class MainWindow:
                      "MenuPedigree": uimanager.get_widget('/MenuBar/PigeonMenu/Pedigree'),
                      "MenuAddresult": uimanager.get_widget('/MenuBar/PigeonMenu/Addresult'),
                      "ToolEdit": uimanager.get_widget('/Toolbar/Edit'),
-                     "ToolRemove": uimanager.get_widget('/Toolbar/Remove')
+                     "ToolRemove": uimanager.get_widget('/Toolbar/Remove'),
+                     "ToolPedigree": uimanager.get_widget('/Toolbar/Pedigree')
                     }
 
         for key, value in widgetDic.items():
@@ -1202,11 +1203,13 @@ class MainWindow:
 
         if path:
             widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
+                                            self.ToolPedigree: True,
                                             self.sbdetail: True, self.MenuEdit: True,
                                             self.MenuRemove: True, self.MenuPedigree: True,
                                             self.MenuAddresult: True, self.addresult: True})
         else:
             widgets.set_multiple_sensitive({self.ToolEdit: False, self.ToolRemove: False,
+                                            self.ToolPedigree: False,
                                             self.sbdetail: False, self.MenuEdit: False,
                                             self.MenuRemove: False, self.MenuPedigree: False,
                                             self.MenuAddresult: False, self.addresult: False})
