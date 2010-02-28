@@ -77,6 +77,7 @@ class MainWindow:
         factory = gtk.IconFactory()
         factory.add_default()
         factory.add('pedigree-detail', icon_set)
+        gtk.stock_add([('pedigree-detail', _('_Pedigree'), 0, 0, 'pigeonplanner')])
 
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
@@ -553,7 +554,8 @@ class MainWindow:
         if event.button == 3 and path:
             entries = [
                 (gtk.STOCK_EDIT, self.menuedit_activate, None),
-                (gtk.STOCK_REMOVE, self.menuremove_activate, None)]
+                (gtk.STOCK_REMOVE, self.menuremove_activate, None),
+                ("pedigree-detail", self.menupedigree_activate, None)]
 
             widgets.popup_menu(event, entries)
 
