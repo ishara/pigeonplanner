@@ -79,6 +79,7 @@ uistring = '''
 
    <toolbar name="Toolbar">
       <toolitem action="Add"/>
+      <separator/>
       <toolitem action="Edit"/>
       <toolitem action="Remove"/>
       <toolitem action="Pedigree"/>
