@@ -38,6 +38,7 @@ import const
 import checks
 import widgets
 import database
+import messages
 
 
 # Cairo-drawn boxes don't show up
@@ -297,8 +298,7 @@ class PedigreeEditBox:
         self.main.fill_treeview(path=path)
 
         dp = DrawPedigree([self.pedigree.tableSire, self.pedigree.tableDam], self.pedigree.pindex,
-                          True, None,
-                          self.main.parser.pigeons, self.main, self.pedigree)
+                          True, self.main.parser.pigeons, self.main, self.pedigree)
         dp.draw_pedigree()
 
     def close_dialog(self, widget=None, event=None):
@@ -318,7 +318,7 @@ class PedigreeEditBox:
 
 
 class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
-    def __init__(self, pindex, ring, year, sex, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
+    def __init__(self, pindex, ring, year, sex, details, detail=False, kinfo=None, main=None, pedigree=None):
         gtk.DrawingArea.__init__(self)
         PedigreeEditBox.__init__(self, pindex, ring, year, sex, details, kinfo, main, pedigree)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
@@ -341,7 +341,6 @@ class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
         self.sex = sex
         self.details = details
         self.detail = detail
-        self.gotobutton = button
         self.kinfo = kinfo
         self.main = main
         self.pedigree = pedigree
@@ -363,13 +362,9 @@ class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
 
     def focus_in(self, widget, event):
         self.queue_draw()
-        if self.textlayout.get_text() and self.gotobutton:
-            self.gotobutton.set_sensitive(True)
 
     def focus_out(self, widget, event):
         self.queue_draw()
-        if self.gotobutton:
-            self.gotobutton.set_sensitive(False)
 
     def pressed(self, widget, event):
         self.grab_focus()
@@ -413,7 +408,7 @@ class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
 
 
 class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
-    def __init__(self, pindex, ring, year, sex, details, detail=False, button=None, kinfo=None, main=None, pedigree=None):
+    def __init__(self, pindex, ring, year, sex, details, detail=False, kinfo=None, main=None, pedigree=None):
         gtk.DrawingArea.__init__(self)
         PedigreeEditBox.__init__(self, pindex, ring, year, sex, details, kinfo, main, pedigree)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
@@ -435,7 +430,6 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
         self.sex = sex
         self.details = details
         self.detail = detail
-        self.gotobutton = button
         self.kinfo = kinfo
         self.main = main
         self.pedigree = pedigree
@@ -459,15 +453,22 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
     def focus_out(self, widget, event):
         self.hightlight = False
         self.queue_draw()
-        if self.gotobutton:
-            self.gotobutton.set_sensitive(False)
 
     def pressed(self, widget, event):
-        if self.textlayout.get_text() and self.gotobutton:
+        if self.textlayout.get_text():
             self.hightlight = True
             self.queue_draw()
             self.grab_focus()
-            self.gotobutton.set_sensitive(True)
+
+            if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+                if self.main.search_pigeon(None, self.pindex):
+                    return
+
+                if widgets.message_dialog('question', messages.MSG_ADD_PIGEON, self.main.main):
+                    self.main.menuadd_activate(None)
+                    self.main.entryRing1.set_text(self.ring)
+                    self.main.entryYear1.set_text(self.year)
+                    self.main.cbsex.set_active(int(self.sex))
 
     def realize(self, widget):
         if self.detail:
@@ -528,11 +529,10 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
 
 
 class DrawPedigree:
-    def __init__(self, tables=None, pindex=None, detail=False, button=None, pigeons=None, main=None, pedigree=None, lang=None):
+    def __init__(self, tables=None, pindex=None, detail=False, pigeons=None, main=None, pedigree=None, lang=None):
 
         self.pindex = pindex
         self.detail = detail
-        self.button = button
         self.pigeons = pigeons
         self.tables = tables
         self.main = main
@@ -640,9 +640,9 @@ class DrawPedigree:
 
             if not lst[i]:
                 if cairo_available:
-                    box = PedigreeBox_cairo('', '', '', sex, None, self.detail, self.button, kinfo, self.main, self.pedigree)
+                    box = PedigreeBox_cairo('', '', '', sex, None, self.detail, kinfo, self.main, self.pedigree)
                 else:
-                    box = PedigreeBox('', '', '', sex, None, self.detail, self.button, kinfo, self.main, self.pedigree)
+                    box = PedigreeBox('', '', '', sex, None, self.detail, kinfo, self.main, self.pedigree)
                 table.attach(box, x, y, w, h)
                 if self.detail:
                     if cairo_available:
@@ -665,9 +665,9 @@ class DrawPedigree:
                     allExtra = [lst[i][4], lst[i][5], lst[i][6], lst[i][7], lst[i][8], lst[i][9]]
 
                     if cairo_available:
-                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
+                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, kinfo, self.main, self.pedigree)
                     else:
-                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, self.button, kinfo, self.main, self.pedigree)
+                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, kinfo, self.main, self.pedigree)
                     table.attach(box, x, y, w, h)
 
                     if cairo_available:
@@ -677,9 +677,9 @@ class DrawPedigree:
                     table.attach(extrabox, x, y, w+1, h+height)
                 else:
                     if cairo_available:
-                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], None, self.detail, self.button)
+                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], None, self.detail, main=self.main)
                     else:
-                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], None, self.detail, self.button)
+                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], None, self.detail)
                     table.attach(box, x, y, w, h)
 
             if self.pos[i][1]:

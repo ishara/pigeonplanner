@@ -86,8 +86,8 @@ class MainWindow:
         self.database = database.DatabaseOperations()
         self.parser = pigeonparser.PigeonParser()
         self.parser.get_pigeons()
-        self.pedigree = DrawPedigree([self.tableSire, self.tableDam], button=self.goto,
-                                      pigeons=self.parser.pigeons, lang=self.options.optionList.language)
+        self.pedigree = DrawPedigree([self.tableSire, self.tableDam], pigeons=self.parser.pigeons,
+                                        lang=self.options.optionList.language)
         self.pedigree.draw_pedigree()
         self.build_menubar()
         self.build_treeviews()
@@ -385,7 +385,21 @@ class MainWindow:
         dialog.destroy()
 
     def menupedigree_activate(self, widget):
-        self.on_sbdetail_clicked(None)
+        pindex, ring, year = self.get_main_ring()
+
+        pigeoninfo = {'pindex': pindex, 'ring': ring, 'year': year,
+                      'sex': self.sexDic[self.parser.pigeons[pindex].sex],
+                      'colour': self.parser.pigeons[pindex].colour,
+                      'name': self.parser.pigeons[pindex].name,
+                      'image': self.parser.pigeons[pindex].image,
+                      'extra1': self.parser.pigeons[pindex].extra1,
+                      'extra2': self.parser.pigeons[pindex].extra2,
+                      'extra3': self.parser.pigeons[pindex].extra3,
+                      'extra4': self.parser.pigeons[pindex].extra4,
+                      'extra5': self.parser.pigeons[pindex].extra5,
+                      'extra6': self.parser.pigeons[pindex].extra6}
+
+        PedigreeWindow(self, pigeoninfo)
 
     def menuaddresult_activate(self, widget):
         self.notebook.set_current_page(2)
@@ -624,41 +638,6 @@ class MainWindow:
 
     def on_fccancel_clicked(self, widget):
         self.filedialog.hide()
-
-    # Pedigree callbacks
-    def on_sbdetail_clicked(self, widget):
-        pindex, ring, year = self.get_main_ring()
-
-        pigeoninfo = {'pindex': pindex, 'ring': ring, 'year': year,
-                      'sex': self.sexDic[self.parser.pigeons[pindex].sex],
-                      'colour': self.parser.pigeons[pindex].colour,
-                      'name': self.parser.pigeons[pindex].name,
-                      'image': self.parser.pigeons[pindex].image,
-                      'extra1': self.parser.pigeons[pindex].extra1,
-                      'extra2': self.parser.pigeons[pindex].extra2,
-                      'extra3': self.parser.pigeons[pindex].extra3,
-                      'extra4': self.parser.pigeons[pindex].extra4,
-                      'extra5': self.parser.pigeons[pindex].extra5,
-                      'extra6': self.parser.pigeons[pindex].extra6}
-
-        PedigreeWindow(self, pigeoninfo)
-
-    def on_goto_clicked(self, widget):
-        children = []
-        children.extend(self.tableSire.get_children())
-        children.extend(self.tableDam.get_children())
-
-        for child in children:
-            if child.is_focus():
-                if self.search_pigeon(None, child.pindex): return
-
-                if widgets.message_dialog('question', messages.MSG_ADD_PIGEON, self.main):
-                    self.menuadd_activate(None)
-                    self.entryRing1.set_text(child.ring)
-                    self.entryYear1.set_text(child.year)
-                    self.cbsex.set_active(int(child.sex))
-
-                break
 
     # Relatives callbacks
     def on_tvBrothers_press(self, widget, event):
@@ -1211,14 +1190,12 @@ class MainWindow:
 
         if path:
             widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
-                                            self.ToolPedigree: True,
-                                            self.sbdetail: True, self.MenuEdit: True,
+                                            self.ToolPedigree: True, self.MenuEdit: True,
                                             self.MenuRemove: True, self.MenuPedigree: True,
                                             self.MenuAddresult: True, self.addresult: True})
         else:
             widgets.set_multiple_sensitive({self.ToolEdit: False, self.ToolRemove: False,
-                                            self.ToolPedigree: False,
-                                            self.sbdetail: False, self.MenuEdit: False,
+                                            self.ToolPedigree: False, self.MenuEdit: False,
                                             self.MenuRemove: False, self.MenuPedigree: False,
                                             self.MenuAddresult: False, self.addresult: False})
             self.imageStatus.clear()
@@ -1288,9 +1265,8 @@ class MainWindow:
         self.imageStatus.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
         self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
 
-        dp = DrawPedigree([self.tableSire, self.tableDam], pindex,
-                           button=self.goto, pigeons=self.parser.pigeons,
-                           lang=self.options.optionList.language)
+        dp = DrawPedigree([self.tableSire, self.tableDam], pindex, pigeons=self.parser.pigeons,
+                            main=self, lang=self.options.optionList.language)
         dp.draw_pedigree()
 
         self.find_direct_relatives(pindex, sire, dam)

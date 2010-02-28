@@ -58,7 +58,7 @@ class PedigreeWindow:
         self.labelName.set_text(self.pigeoninfo['name'])
 
         self.dp = DrawPedigree([self.tableSire, self.tableDam], self.pigeoninfo['pindex'],
-                                True, None, self.main.parser.pigeons, self.main,
+                                True, self.main.parser.pigeons, self.main,
                                 self, self.main.options.optionList.language)
         self.dp.draw_pedigree()
 
