@@ -72,6 +72,12 @@ class MainWindow:
         key, modifier = gtk.accelerator_parse('Escape')
         self.cancelEscAG.connect_group(key, modifier, gtk.ACCEL_VISIBLE, self.add_edit_finish)
 
+        pixbuf = gtk.gdk.pixbuf_new_from_file(join(const.IMAGEDIR, 'icon_pedigree_detail.png'))
+        icon_set = gtk.IconSet(pixbuf)
+        factory = gtk.IconFactory()
+        factory.add_default()
+        factory.add('pedigree-detail', icon_set)
+
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
 
@@ -1014,7 +1020,9 @@ class MainWindow:
                     _("Edit the selected pigeon"), self.menuedit_activate),
             ("Remove", gtk.STOCK_REMOVE, _("_Remove"), "<control>R",
                     _("Remove the selected pigeon"), self.menuremove_activate),
-            ("Pedigree", gtk.STOCK_FIND, _("_Pedigree"), "<control>G",
+#            ("Pedigree", gtk.STOCK_FIND, _("_Pedigree"), "<control>G",
+#                    _("View the detailed pedigree of this pigeon"), self.menupedigree_activate),
+            ("Pedigree", "pedigree-detail", _("_Pedigree"), "<control>G",
                     _("View the detailed pedigree of this pigeon"), self.menupedigree_activate),
             ("Addresult", gtk.STOCK_ADD, _("Add resul_t"), None,
                     _("Add a new result for this pigeon"), self.menuaddresult_activate),
