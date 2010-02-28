@@ -1033,6 +1033,7 @@
                                                     <property name="receives_default">True</property>
                                                     <property name="relief">none</property>
                                                     <signal name="clicked" handler="on_btnStatus1_clicked"/>
+                                                    <signal name="leave_notify_event" handler="on_widget_leave"/>
                                                     <signal name="enter_notify_event" handler="on_widget_enter"/>
                                                     <child>
                                                       <widget class="GtkImage" id="imageStatus1">
