@@ -853,9 +853,7 @@ class MainWindow:
         self.calendar.select_month(date.month-1, date.year)
         self.calendar.select_day(date.day)
 
-        self.calpopup.grab_add()
         self.calpopup.show()
-        self.calpopup.grab_focus()
 
     def on_calapply_clicked(self, widget):
         self.hide_popup()
@@ -1003,8 +1001,6 @@ class MainWindow:
                     _("Edit the selected pigeon"), self.menuedit_activate),
             ("Remove", gtk.STOCK_REMOVE, _("_Remove"), "<control>R",
                     _("Remove the selected pigeon"), self.menuremove_activate),
-#            ("Pedigree", gtk.STOCK_FIND, _("_Pedigree"), "<control>G",
-#                    _("View the detailed pedigree of this pigeon"), self.menupedigree_activate),
             ("Pedigree", "pedigree-detail", _("_Pedigree"), "<control>G",
                     _("View the detailed pedigree of this pigeon"), self.menupedigree_activate),
             ("Addresult", gtk.STOCK_ADD, _("Add resul_t"), None,
@@ -1726,7 +1722,6 @@ class MainWindow:
         '''
 
         self.calpopup.hide()
-        self.calpopup.grab_remove()
 
     def get_main_ring(self):
         '''
