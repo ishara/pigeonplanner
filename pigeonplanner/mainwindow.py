@@ -17,7 +17,6 @@
 
 
 import os
-import Image
 import datetime
 import webbrowser
 from os.path import join, isfile, isdir, splitext, basename
@@ -1911,9 +1910,8 @@ class MainWindow:
         @param img_path: the full path to the image
         '''
 
-        im = Image.open(img_path)
-        im.thumbnail((200, 200), Image.ANTIALIAS)
-        im.save(join(const.THUMBDIR, "%s.png") %self.get_image_name(img_path), "png")
+        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img_path, 200, 200)
+        pixbuf.save(join(const.THUMBDIR, "%s.png") %self.get_image_name(img_path), 'png')
 
     def get_thumb_path(self, image):
         '''
