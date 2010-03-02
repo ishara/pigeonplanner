@@ -17,9 +17,10 @@
 
 
 import os
+import Image
 import datetime
 import webbrowser
-from os.path import join, isfile
+from os.path import join, isfile, isdir, splitext, basename
 from threading import Thread
 import logging
 logger = logging.getLogger(__name__)
@@ -87,6 +88,15 @@ class MainWindow:
         self.database = database.DatabaseOperations()
         self.parser = pigeonparser.PigeonParser()
         self.parser.get_pigeons()
+
+        # Make thumbnails if they don't exist yet (new in 0.8.0)
+        if not isdir(const.THUMBDIR):
+            os.mkdir(const.THUMBDIR)
+            for pigeon in self.parser.pigeons:
+                img_path = self.parser.pigeons[pigeon].image
+                if img_path != '':
+                   self.image_to_thumb(img_path)
+
         self.pedigree = DrawPedigree([self.tableSire, self.tableDam], pigeons=self.parser.pigeons,
                                         lang=self.options.optionList.language)
         self.pedigree.draw_pedigree()
@@ -307,6 +317,8 @@ class MainWindow:
         model, treeiter = self.selection.get_selected()
         if not treeiter: return
 
+        pindex = model[treeiter][0]
+
         self.entryRing1.set_text(self.entryRing.get_text())
         self.entryYear1.set_text(self.entryYear.get_text())
         self.entryName1.set_text(self.entryName.get_text())
@@ -324,11 +336,13 @@ class MainWindow:
         self.entryDamEdit.set_text(self.entryDam.get_text())
         self.entryYearDamEdit.set_text(self.entryYearDam.get_text())
 
-        status = self.parser.pigeons[model[treeiter][0]].active
+        self.cbsex.set_active(int(self.entrySexKey.get_text()))
+
+        status = self.parser.pigeons[pindex].active
         self.cbStatus.set_active(status)
         self.notebookStatus.set_current_page(status)
 
-        self.cbsex.set_active(int(self.entrySexKey.get_text()))
+        self.preEditImage = self.parser.pigeons[pindex].image
 
         self.add_edit_start('edit')
 
@@ -369,6 +383,10 @@ class MainWindow:
                 status = self.parser.pigeons[pindex].active
                 if status != 1:
                     self.database.delete_status(self.pigeonStatus[status].capitalize(), pindex)
+                # Same for the picture
+                image = self.parser.pigeons[pindex].image
+                if image:
+                    os.remove(self.get_thumb_path(image))
 
                 self.parser.get_pigeons()
 
@@ -1226,6 +1244,7 @@ class MainWindow:
         dam      = self.parser.pigeons[pindex].dam
         yeardam  = self.parser.pigeons[pindex].yeardam
         status   = self.parser.pigeons[pindex].active
+        image    = self.parser.pigeons[pindex].image
 
         self.entryRing.set_text(ring)
         self.entryYear.set_text(year)
@@ -1246,21 +1265,16 @@ class MainWindow:
         self.entryYearSire.set_text(yearsire)
         self.entryYearDam.set_text(yeardam)
 
-        if self.parser.pigeons[pindex].image:
-            image = self.parser.pigeons[pindex].image
-            width = height = 200
+        if image:
+            thumb = self.get_thumb_path(image)
+            pixbuf = gtk.gdk.pixbuf_new_from_file(thumb)
             self.labelImgPath.set_text(image)
         else:
-            image = join(const.IMAGEDIR, 'icon_logo.png')
-            width = height = 75
+            pixbuf = self.logoPixbuf
             self.labelImgPath.set_text('')
 
-        try:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(image, width, height)
-            self.imagePigeon.set_from_pixbuf(pixbuf)
-            self.imagePigeon1.set_from_pixbuf(pixbuf)
-        except:
-            widgets.message_dialog('error', messages.MSG_IMAGE_MISSING, self.main)
+        self.imagePigeon.set_from_pixbuf(pixbuf)
+        self.imagePigeon1.set_from_pixbuf(pixbuf)
 
         self.imageStatus.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
         self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
@@ -1526,6 +1540,13 @@ class MainWindow:
 
         self.database.update_pigeon(data)
 
+        image = infoTuple[9]
+        if image != self.preEditImage:
+            if self.preEditImage:
+                os.remove(self.get_thumb_path(self.preEditImage))
+            if image:
+                self.image_to_thumb(image)
+
         status = self.cbStatus.get_active()
         old_status = self.parser.pigeons[pindex].active
         if status != old_status:
@@ -1570,6 +1591,9 @@ class MainWindow:
                     return
 
         self.database.insert_pigeon(pindexTuple)
+
+        if infoTuple[9]:
+            self.image_to_thumb(infoTuple[9])
 
         status = self.cbStatus.get_active()
 
@@ -1879,4 +1903,27 @@ class MainWindow:
         self.labelStatCocks.set_markup("<b>%i</b>" %cocks)
         self.labelStatHens.set_markup("<b>%i</b>" %hens)
         self.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
+
+    def image_to_thumb(self, img_path):
+        '''
+        Convert an image to a thumbnail
+
+        @param img_path: the full path to the image
+        '''
+
+        im = Image.open(img_path)
+        im.thumbnail((200, 200), Image.ANTIALIAS)
+        im.save(join(const.THUMBDIR, "%s.png") %self.get_image_name(img_path), "png")
+
+    def get_thumb_path(self, image):
+        '''
+        Get the thumbnail from an image
+
+        @param image: the full path to the image
+        '''
+
+        return join(const.THUMBDIR, "%s.png") %self.get_image_name(image)
+
+    def get_image_name(self, name):
+        return splitext(basename(name))[0]
 
