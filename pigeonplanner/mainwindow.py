@@ -1582,7 +1582,7 @@ class MainWindow:
         pindexTuple += infoTuple
 
         if self.database.has_pigeon(pindex):
-            if self.parser.pigeons[pindex].show:
+            if self.parser.pigeons[pindex].show == 1:
                 if not widgets.message_dialog('warning', messages.MSG_OVERWRITE_PIGEON, self.main):
                     return
             else:

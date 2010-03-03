@@ -193,7 +193,7 @@ class PedigreeEditBox:
             except KeyError:
                 show = 0
 
-            if self.ring and self.year and not show:
+            if self.ring and self.year and show == 0:
                 entries = [
                     (gtk.STOCK_EDIT, self.edit_start, None),
                     (gtk.STOCK_CLEAR, self.clear_box, None),
@@ -268,6 +268,8 @@ class PedigreeEditBox:
                     self.entryExtra6.get_text())
             self.add_pigeon(data)
 
+        self.main.parser.get_pigeons()
+
     def edit_parent(self, kindex, band, year, sex):
         if sex == '0':
             self.main.database.update_pigeon_sire((band, year, kindex))
@@ -310,6 +312,8 @@ class PedigreeEditBox:
         self.edit_parent(self.kindex, '', '', self.sex)
 
         self.redraw()
+
+        self.main.parser.get_pigeons()
 
     def clear_box(self, widget=None):
         self.edit_parent(self.kindex, '', '', self.sex)
@@ -464,11 +468,18 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
                 if self.main.search_pigeon(None, self.pindex):
                     return
 
-                if widgets.message_dialog('question', messages.MSG_ADD_PIGEON, self.main.main):
-                    self.main.menuadd_activate(None)
-                    self.main.entryRing1.set_text(self.ring)
-                    self.main.entryYear1.set_text(self.year)
-                    self.main.cbsex.set_active(int(self.sex))
+                if self.pindex in self.main.parser.pigeons:
+                    if widgets.message_dialog('warning', messages.MSG_SHOW_PIGEON, self.main.main):
+                        self.main.database.show_pigeon(self.pindex, 1)
+                        self.main.parser.get_pigeons()
+                        self.main.fill_treeview()
+                        return
+                else:
+                    if widgets.message_dialog('question', messages.MSG_ADD_PIGEON, self.main.main):
+                        self.main.menuadd_activate(None)
+                        self.main.entryRing1.set_text(self.ring)
+                        self.main.entryYear1.set_text(self.year)
+                        self.main.cbsex.set_active(int(self.sex))
 
     def realize(self, widget):
         if self.detail:
