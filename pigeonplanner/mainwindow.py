@@ -275,8 +275,11 @@ class MainWindow:
         for pigeon in self.database.get_all_images():
             if not pigeon[3]: continue
 
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(pigeon[3], 96, 96)
-            store.append(["%s%s" %(pigeon[2], pigeon[1]), pigeon[0], "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
+            try:
+                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(pigeon[3], 96, 96)
+                store.append(["%s%s" %(pigeon[2], pigeon[1]), pigeon[0], "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
+            except gobject.GError:
+                logger.error("Photo album: Could not find original image for: %s/%s" %(pigeon[1], pigeon[2]))
 
         if len(store) > 0:
             self.labelImage.hide()

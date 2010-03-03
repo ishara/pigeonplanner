@@ -20,6 +20,7 @@ import os.path
 
 import gtk
 import gtk.gdk
+import gobject
 
 import const
 import backup
@@ -387,11 +388,23 @@ class ImageWindow(gtk.Window):
         eventbox = gtk.EventBox()
         eventbox.connect('button-release-event', self.eventbox_press)
         image = gtk.Image()
-        image.set_from_pixbuf(gtk.gdk.pixbuf_new_from_file(imagepath))
-        image.set_tooltip_text(_("Click to close this window"))
-        eventbox.add(image)
-        sw.add_with_viewport(eventbox)
-        self.add(sw)
+        try:
+            image.set_from_pixbuf(gtk.gdk.pixbuf_new_from_file(imagepath))
+        except gobject.GError:
+            vbox = gtk.VBox()
+            bbox = gtk.HButtonBox()
+            label = gtk.Label(_("Could not find the original image, full size image is not available."))
+            button = gtk.Button(stock=gtk.STOCK_CLOSE)
+            button.connect("clicked", self.exit_window)
+            bbox.pack_start(button, False, False)
+            vbox.pack_start(label, False, False, 14)
+            vbox.pack_start(bbox, False, False)
+            self.add(vbox)
+        else:
+            image.set_tooltip_text(_("Click to close this window"))
+            eventbox.add(image)
+            sw.add_with_viewport(eventbox)
+            self.add(sw)
         self.show_all()
 
     def eventbox_press(self, widget, event):
