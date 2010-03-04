@@ -89,6 +89,13 @@ class PedigreeWindow:
                 tw.chkme.set_active(True)
 
                 return
+            else:
+                userinfo['name'] = ""
+                userinfo['street'] = ""
+                userinfo['code'] = ""
+                userinfo['city'] = ""
+                userinfo['phone'] = ""
+                userinfo['email'] = ""
 
         PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo, self.main.options.optionList)
 
