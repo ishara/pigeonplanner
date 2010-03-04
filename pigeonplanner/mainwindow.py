@@ -126,32 +126,16 @@ class MainWindow:
             self.imageResultsTab.set_from_file(join(const.IMAGEDIR, 'icon_result_small.png'))
 
         if self.options.optionList.arrows:
-            self.vboxButtons.show()
-
-            self.blockMenuCallback = True
             self.MenuArrows.set_active(True)
-            self.blockMenuCallback = False
 
         if self.options.optionList.stats:
-            self.alignStats.show()
-
-            self.blockMenuCallback = True
             self.MenuStats.set_active(True)
-            self.blockMenuCallback = False
 
         if self.options.optionList.toolbar:
-            self.toolbar.show()
-
-            self.blockMenuCallback = True
             self.MenuToolbar.set_active(True)
-            self.blockMenuCallback = False
 
         if self.options.optionList.statusbar:
-            self.statusbar.show()
-
-            self.blockMenuCallback = True
             self.MenuStatusbar.set_active(True)
-            self.blockMenuCallback = False
 
         self.listdata = {self.cbSector: self.database.get_all_sectors(), \
                          self.cbType: self.database.get_all_types(), \
