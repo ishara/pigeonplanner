@@ -901,7 +901,11 @@ class MainWindow:
 
     # Statusdialog
     def on_btnStatus_clicked(self, widget):
-        pindex, ring, year = self.get_main_ring()
+        try:
+            pindex, ring, year = self.get_main_ring()
+        except TypeError:
+            return
+
         status = self.parser.pigeons[pindex].active
         self.labelStatus.set_markup("<b>%s</b>" %_(self.pigeonStatus[status]))
         self.notebookStatus.set_current_page(status)
