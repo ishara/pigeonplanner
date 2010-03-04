@@ -1,3 +1,16 @@
+0.8.0:
+ * Added feature to set the pigeon status
+ * Added option to show statistics
+ * Added options to configure printing
+ * Added ability to resize the bottom notebook
+ * Fixed display of wrong info in pedigree
+ * Use thumbnails as pictures instead of full sized original
+ * Changed the way pedigreeboxes behave
+ * Moved the detailed pedigree button to the toolbar
+ * Improved the display on small screen resolutions
+ * Updated GTK+ and PyGTK binaries on Windows
+ * Various little GUI and code fixes
+
 0.7.4:
  * Added Bosnian language
  * Fixed hangups or crashes when autochecking for updates
