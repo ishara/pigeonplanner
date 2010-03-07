@@ -76,7 +76,7 @@ class PrintPedigree:
             if save_path:
                 if not save_path.endswith(".pdf"):
                     save_path += ".pdf"
-                print_.set_property("export-filename", save_path)
+                print_.set_export_filename(save_path)
                 action = gtk.PRINT_OPERATION_ACTION_EXPORT
 
         if action != None:
