@@ -21,13 +21,14 @@ import cairo
 import logging
 logger = logging.getLogger(__name__)
 
+import const
 import widgets
 import messages
 from pedigree import DrawPedigree
 
 
 class PrintPedigree:
-    def __init__(self, parent, pigeoninfo, userinfo, options):
+    def __init__(self, parent, pigeoninfo, userinfo, options, print_action):
         self.parent = parent
         self.pigeoninfo = pigeoninfo
         self.userinfo = userinfo
@@ -50,16 +51,42 @@ class PrintPedigree:
         print_.connect("draw_page", self.draw_page)
 
 #        action = gtk.PRINT_OPERATION_ACTION_PREVIEW
-        action = gtk.PRINT_OPERATION_ACTION_PRINT_DIALOG
+        action = None
+        if print_action == 'print':
+            action = gtk.PRINT_OPERATION_ACTION_PRINT_DIALOG
+        elif print_action == 'save':
+            fc = gtk.FileChooserDialog(title=_("Save as..."), 
+                        parent=self.parent,
+                        action=gtk.FILE_CHOOSER_ACTION_SAVE,
+                        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK))
+            ftr = gtk.FileFilter()
+            ftr.set_name("PDF")
+            ftr.add_pattern("*.pdf")
+            fc.add_filter(ftr)
 
-        response = print_.run(action, self.parent)
+            fc.set_current_name("pedigree_%s_%s.pdf" %(self.pigeoninfo['ring'], self.pigeoninfo['year']))
+            fc.set_current_folder(const.HOMEDIR)
 
-        if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            print_error = print_.get_error()
-            logger.error("Error printing pedigree: %s" %print_error)
-            widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
-        elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
-            settings = print_.get_print_settings()
+            response = fc.run()
+            save_path = None
+            if response == gtk.RESPONSE_OK:
+                save_path = fc.get_filename()
+            fc.destroy()
+            if save_path:
+                if not save_path.endswith(".pdf"):
+                    save_path += ".pdf"
+                print_.set_property("export-filename", save_path)
+                action = gtk.PRINT_OPERATION_ACTION_EXPORT
+
+        if action != None:
+            response = print_.run(action, self.parent)
+
+            if response == gtk.PRINT_OPERATION_RESULT_ERROR:
+                print_error = print_.get_error()
+                logger.error("Error printing pedigree: %s" %print_error)
+                widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
+            elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
+                settings = print_.get_print_settings()
 
     def begin_print(self, operation, context):
         operation.set_n_pages(1)

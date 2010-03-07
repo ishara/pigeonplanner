@@ -67,7 +67,13 @@ class PedigreeWindow:
     def on_close_dialog(self, widget=None, event=None):
         self.pedigreewindow.destroy()
 
+    def on_save_clicked(self, widget):
+        self.do_operation('save')
+
     def on_print_clicked(self, widget):
+        self.do_operation('print')
+
+    def do_operation(self, op):
         userinfo = {}
 
         for address in self.main.database.get_all_addresses():
@@ -97,5 +103,5 @@ class PedigreeWindow:
                 userinfo['phone'] = ""
                 userinfo['email'] = ""
 
-        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo, self.main.options.optionList)
+        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo, self.main.options.optionList, op)
 
