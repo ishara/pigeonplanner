@@ -32,6 +32,26 @@
               </packing>
             </child>
             <child>
+              <widget class="GtkSeparatorToolItem" id="toolbutton2">
+                <property name="visible">True</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkToolButton" id="preview">
+                <property name="visible">True</property>
+                <property name="stock_id">gtk-print-preview</property>
+                <signal name="clicked" handler="on_preview_clicked"/>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
               <widget class="GtkToolButton" id="print">
                 <property name="visible">True</property>
                 <property name="stock_id">gtk-print</property>

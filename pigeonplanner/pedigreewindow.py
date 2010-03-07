@@ -70,6 +70,9 @@ class PedigreeWindow:
     def on_save_clicked(self, widget):
         self.do_operation('save')
 
+    def on_preview_clicked(self, widget):
+        self.do_operation('preview')
+
     def on_print_clicked(self, widget):
         self.do_operation('print')
 

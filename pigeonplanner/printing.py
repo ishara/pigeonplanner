@@ -50,10 +50,11 @@ class PrintPedigree:
         print_.connect("begin_print", self.begin_print)
         print_.connect("draw_page", self.draw_page)
 
-#        action = gtk.PRINT_OPERATION_ACTION_PREVIEW
         action = None
         if print_action == 'print':
             action = gtk.PRINT_OPERATION_ACTION_PRINT_DIALOG
+        elif print_action == 'preview':
+            action = gtk.PRINT_OPERATION_ACTION_PREVIEW
         elif print_action == 'save':
             fc = gtk.FileChooserDialog(title=_("Save as..."), 
                         parent=self.parent,
