@@ -94,6 +94,19 @@ uistring = '''
 </ui>
 '''
 
+pedigreeui = '''
+<ui>
+   <toolbar name="Toolbar">
+      <toolitem action="Save"/>
+      <separator/>
+      <toolitem action="Preview"/>
+      <toolitem action="Print"/>
+      <separator/>
+      <toolitem action="Close"/>
+   </toolbar>
+</ui>
+'''
+
 
 def get_backup_filefilter():
     backupFileFilter = gtk.FileFilter()

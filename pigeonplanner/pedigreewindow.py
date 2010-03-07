@@ -53,6 +53,8 @@ class PedigreeWindow:
 
         self.pedigreewindow.set_transient_for(self.main.main)
 
+        self.build_toolbar()
+
         self.labelRing.set_text("%s / %s" %(self.pigeoninfo['ring'], self.pigeoninfo['year'][2:]))
         self.labelSex.set_text(self.pigeoninfo['sex'])
         self.labelName.set_text(self.pigeoninfo['name'])
@@ -63,6 +65,34 @@ class PedigreeWindow:
         self.dp.draw_pedigree()
 
         self.pedigreewindow.show()
+
+    def build_toolbar(self):
+        uimanager = gtk.UIManager()
+        uimanager.add_ui_from_string(widgets.pedigreeui)
+        uimanager.insert_action_group(self.create_action_group(), 0)
+        accelgroup = uimanager.get_accel_group()
+        self.pedigreewindow.add_accel_group(accelgroup)
+
+        toolbar = uimanager.get_widget('/Toolbar')
+        self.vbox.pack_start(toolbar, False, False)
+        self.vbox.reorder_child(toolbar, 0)
+
+    def create_action_group(self):
+        entries = (
+            ("Save", gtk.STOCK_SAVE, None, "<control>S",
+                    _("Save this pedigree"), self.on_save_clicked),
+            ("Preview", gtk.STOCK_PRINT_PREVIEW, None, "<control>E",
+                    _("View this pedigree"), self.on_preview_clicked),
+            ("Print", gtk.STOCK_PRINT, None, "<control>P",
+                    _("Print this pedigree"), self.on_print_clicked),
+            ("Close", gtk.STOCK_CLOSE, None, "<control>Q",
+                    _("Close this window"), self.on_close_dialog)
+           )
+
+        action_group = gtk.ActionGroup("PedigreeWindowActions")
+        action_group.add_actions(entries)
+
+        return action_group
 
     def on_close_dialog(self, widget=None, event=None):
         self.pedigreewindow.destroy()
