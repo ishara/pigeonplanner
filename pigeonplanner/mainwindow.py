@@ -91,10 +91,7 @@ class MainWindow:
         # Make thumbnails if they don't exist yet (new in 0.8.0)
         if not isdir(const.THUMBDIR):
             os.mkdir(const.THUMBDIR)
-            for pigeon in self.parser.pigeons:
-                img_path = self.parser.pigeons[pigeon].image
-                if img_path != '':
-                   self.image_to_thumb(img_path)
+            self.build_thumbnails()
 
         self.pedigree = DrawPedigree([self.tableSire, self.tableDam], pigeons=self.parser.pigeons,
                                         lang=self.options.optionList.language)
@@ -1256,9 +1253,22 @@ class MainWindow:
         self.entryYearDam.set_text(yeardam)
 
         if image:
-            thumb = self.get_thumb_path(image)
-            pixbuf = gtk.gdk.pixbuf_new_from_file(thumb)
-            self.labelImgPath.set_text(image)
+            def get_pigeon_thumbnail():
+                try:
+                    thumb = self.get_thumb_path(image)
+                    pixbuf = gtk.gdk.pixbuf_new_from_file(thumb)
+                    self.labelImgPath.set_text(image)
+                except gobject.GError:
+                    # Something went wrong with the thumbnail filenames. Delete all and rebuild.
+                    logger.warning("Thumb not found, rebuilding complete list.")
+                    for img_thumb in os.listdir(const.THUMBDIR):
+                        os.remove(join(const.THUMBDIR, img_thumb))
+                    self.build_thumbnails()
+                    pixbuf = get_pigeon_thumbnail()
+
+                return pixbuf
+
+            pixbuf = get_pigeon_thumbnail()
         else:
             pixbuf = self.logoPixbuf
             self.labelImgPath.set_text('')
@@ -1893,6 +1903,12 @@ class MainWindow:
         self.labelStatCocks.set_markup("<b>%i</b>" %cocks)
         self.labelStatHens.set_markup("<b>%i</b>" %hens)
         self.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
+
+    def build_thumbnails(self):
+        for pigeon in self.parser.pigeons:
+            img_path = self.parser.pigeons[pigeon].image
+            if img_path != '':
+                self.image_to_thumb(img_path)
 
     def image_to_thumb(self, img_path):
         '''
