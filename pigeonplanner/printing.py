@@ -27,12 +27,9 @@ import messages
 from pedigree import DrawPedigree
 
 
-class PrintPedigree:
-    def __init__(self, parent, pigeoninfo, userinfo, options, print_action):
+class BasePrinting:
+    def __init__(self, parent, options, print_action, pdf_name):
         self.parent = parent
-        self.pigeoninfo = pigeoninfo
-        self.userinfo = userinfo
-        self.options = options
 
         if options.paper == 0:
             psize = gtk.PAPER_NAME_A4
@@ -65,7 +62,7 @@ class PrintPedigree:
             ftr.add_pattern("*.pdf")
             fc.add_filter(ftr)
 
-            fc.set_current_name("pedigree_%s_%s.pdf" %(self.pigeoninfo['ring'], self.pigeoninfo['year']))
+            fc.set_current_name("%s.pdf" %pdf_name)
             fc.set_current_folder(const.HOMEDIR)
 
             response = fc.run()
@@ -84,10 +81,19 @@ class PrintPedigree:
 
             if response == gtk.PRINT_OPERATION_RESULT_ERROR:
                 print_error = print_.get_error()
-                logger.error("Error printing pedigree: %s" %print_error)
+                logger.error("Error printing: %s" %print_error)
                 widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
             elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
                 settings = print_.get_print_settings()
+
+
+class PrintPedigree(BasePrinting):
+    def __init__(self, parent, pigeoninfo, userinfo, options, print_action):
+        pdf_name = "pedigree_%s_%s" %(pigeoninfo['ring'], pigeoninfo['year'])
+        self.pigeoninfo = pigeoninfo
+        self.options = options
+        self.userinfo = userinfo
+        BasePrinting.__init__(self, parent, options, print_action, pdf_name)
 
     def begin_print(self, operation, context):
         operation.set_n_pages(1)
