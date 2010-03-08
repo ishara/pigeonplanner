@@ -107,6 +107,14 @@ pedigreeui = '''
 </ui>
 '''
 
+resultui = '''
+<ui>
+   <toolbar name="Toolbar">
+      <toolitem action="Close"/>
+   </toolbar>
+</ui>
+'''
+
 
 def get_backup_filefilter():
     backupFileFilter = gtk.FileFilter()

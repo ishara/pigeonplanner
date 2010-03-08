@@ -20,6 +20,7 @@ import gtk
 import gtk.glade
 
 import const
+import widgets
 from printing import PrintResults
 
 
@@ -36,6 +37,8 @@ class ResultWindow:
         self.pigeons = pigeons
 
         self.resultwindow.set_transient_for(mainwindow)
+
+        self.build_toolbar()
 
         self.liststore = gtk.ListStore(str, str, int, int, float, str, str, str)
         renderer = gtk.CellRendererText()
@@ -88,6 +91,28 @@ class ResultWindow:
         self.column8.set_sort_order(gtk.SORT_DESCENDING)
 
         self.resultwindow.show()
+
+    def build_toolbar(self):
+        uimanager = gtk.UIManager()
+        uimanager.add_ui_from_string(widgets.resultui)
+        uimanager.insert_action_group(self.create_action_group(), 0)
+        accelgroup = uimanager.get_accel_group()
+        self.resultwindow.add_accel_group(accelgroup)
+
+        toolbar = uimanager.get_widget('/Toolbar')
+        self.vbox.pack_start(toolbar, False, False)
+        self.vbox.reorder_child(toolbar, 0)
+
+    def create_action_group(self):
+        entries = (
+            ("Close", gtk.STOCK_CLOSE, None, "<control>Q",
+                    _("Close this window"), self.on_close_window),
+           )
+
+        action_group = gtk.ActionGroup("ResultWindowActions")
+        action_group.add_actions(entries)
+
+        return action_group
 
     def on_close_window(self, widget, event=None):
         self.resultwindow.destroy()
