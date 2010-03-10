@@ -79,13 +79,13 @@ class PedigreeWindow:
 
     def create_action_group(self):
         entries = (
-            ("Save", gtk.STOCK_SAVE, None, "<control>S",
+            ("Save", gtk.STOCK_SAVE, None, None,
                     _("Save this pedigree"), self.on_save_clicked),
-            ("Preview", gtk.STOCK_PRINT_PREVIEW, None, "<control>E",
+            ("Preview", gtk.STOCK_PRINT_PREVIEW, None, None,
                     _("View this pedigree"), self.on_preview_clicked),
-            ("Print", gtk.STOCK_PRINT, None, "<control>P",
+            ("Print", gtk.STOCK_PRINT, None, None,
                     _("Print this pedigree"), self.on_print_clicked),
-            ("Close", gtk.STOCK_CLOSE, None, "<control>Q",
+            ("Close", gtk.STOCK_CLOSE, None, None,
                     _("Close this window"), self.on_close_dialog)
            )
 

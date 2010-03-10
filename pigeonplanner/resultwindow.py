@@ -105,7 +105,7 @@ class ResultWindow:
 
     def create_action_group(self):
         entries = (
-            ("Close", gtk.STOCK_CLOSE, None, "<control>Q",
+            ("Close", gtk.STOCK_CLOSE, None, None,
                     _("Close this window"), self.on_close_window),
            )
 
