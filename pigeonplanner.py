@@ -75,6 +75,14 @@ class PigeonPlanner:
 	            sys.stdout = NullFile()
 	            sys.stderr = NullFile()
 
+        # Detect if program is running for the first time
+        import pigeonplanner.const as const
+
+        if os.path.isdir(const.PREFDIR):
+            firstrun = False
+        else:
+            firstrun = True
+
         # Options
         import pigeonplanner.options as options
         self.options = options.GetOptions()
@@ -127,8 +135,6 @@ class PigeonPlanner:
         __builtin__._ = langTranslation.gettext
 
 		# Logging setup
-        import pigeonplanner.const as const
-
         if os.path.exists(const.LOGFILE):
             if os.path.exists("%s.old" % const.LOGFILE):
                 os.remove("%s.old" % const.LOGFILE)
@@ -155,6 +161,8 @@ class PigeonPlanner:
             else:
                 loc = locale.getlocale()[0]
             self.logger.debug("Locale: %s" % loc)
+        if firstrun:
+            self.logger.debug("First run")
 
         # Set theme
         if win32:
