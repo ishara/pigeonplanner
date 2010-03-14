@@ -16,8 +16,11 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import sys
 import os.path
 import sqlite3
+import logging
+logger = logging.getLogger(__name__)
 
 import const
 
@@ -125,7 +128,23 @@ class DatabaseOperations:
             conn.close()
 
     def db_connect(self):
-        conn = sqlite3.connect(const.DATABASE)
+        try:
+            conn = sqlite3.connect(const.DATABASE)
+        except Exception, e:
+            import logdialog
+
+            logger.critical("Could not connect to database")
+            logger.critical(e)
+            logger.debug("Databasedir: %s" %const.PREFDIR)
+            logger.debug("Database: %s" %const.DATABASE)
+            logger.debug("Databasedir exists: %s" %os.path.exists(const.PREFDIR))
+            logger.debug("Database exists: %s" %os.path.exists(const.DATABASE))
+            logger.debug("Databasedir writable: %s" %os.access(const.PREFDIR, os.W_OK))
+            logger.debug("Database writable: %s" %os.access(const.DATABASE, os.W_OK))
+
+            logdialog.LogDialog()
+            sys.exit()
+
         conn.text_factory = str
         cursor = conn.cursor()
         return (conn, cursor)
