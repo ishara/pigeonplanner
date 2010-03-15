@@ -245,6 +245,7 @@ class MainWindow:
 
     def menusearch_activate(self, widget):
         self.searchdialog.show()
+        self.srchentry.grab_focus()
 
     def menualbum_activate(self, widget):
         store = gtk.ListStore(str, str, str, gtk.gdk.Pixbuf)
@@ -514,16 +515,46 @@ class MainWindow:
         else:
             self.search.set_sensitive(False)
 
+    def selectionsearchresult_changed(self, selection):
+        model, path = selection.get_selected()
+
+        if path:
+            widgets.set_multiple_sensitive({self.srchgoto: True})
+        else:
+            widgets.set_multiple_sensitive({self.srchgoto: False})
+
     def on_search_clicked(self, widget):
         keyword = self.srchentry.get_text()
+        results = []
 
-        try:
-            pindex, show = self.database.search_band(keyword).next()
-        except StopIteration:
-            return # No results found
+        if self.chkband.get_active():
+            results.extend([pindex for pindex in self.parser.pigeons
+                                if keyword in self.parser.pigeons[pindex].ring])
 
-        if show:
-            self.search_pigeon(None, pindex)
+        if self.chkname.get_active():
+            results.extend([pindex for pindex in self.parser.pigeons
+                                if keyword in self.parser.pigeons[pindex].name])
+
+        self.lsSearchresults.clear()
+        for pindex in results:
+            if not self.parser.pigeons[pindex].show: continue
+
+            row = [pindex,
+                   self.parser.pigeons[pindex].ring,
+                   self.parser.pigeons[pindex].year,
+                   self.parser.pigeons[pindex].name]
+
+            self.lsSearchresults.append(row)
+
+        if len(self.lsSearchresults) > 0:
+            self.lsSearchresults.set_sort_column_id(1, gtk.SORT_ASCENDING)
+            self.lsSearchresults.set_sort_column_id(2, gtk.SORT_ASCENDING)
+
+    def on_srchgoto_clicked(self, widget):
+        model, path = self.selSearchresults.get_selected()
+        if not path: return
+
+        self.search_pigeon(None, model[path][0])
 
     def on_srchclose_clicked(self, widget):
         self.searchdialog.hide()
@@ -1134,6 +1165,14 @@ class MainWindow:
                                                                 columns, types,
                                                                 self.selectionresult_changed,
                                                                 True, True, True)
+
+        # Search results treeview
+        self.lsSearchresults, self.selSearchresults = widgets.setup_treeview(
+                                self.tvSearchresults,
+                                [_("Band no."), _("Year"), _("Name")],
+                                [str, str, str, str],
+                                self.selectionsearchresult_changed,
+                                True, True, True)
 
     def fill_treeview(self, pigeonType='all', path=0):
         '''

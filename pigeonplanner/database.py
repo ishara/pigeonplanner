@@ -211,12 +211,6 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
-#### Search
-    def search_band(self, band):
-        conn, cursor = self.db_connect()
-        for row in cursor.execute('SELECT pindex, show FROM Pigeons WHERE band=?', (band,)).fetchall():
-            yield row
-
 #### Pigeons
     def insert_pigeon(self, data):
         conn, cursor = self.db_connect()
