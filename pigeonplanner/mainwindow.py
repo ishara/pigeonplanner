@@ -510,8 +510,14 @@ class MainWindow:
     def on_srchentry_changed(self, widget):
         if widget.get_text():
             self.search.set_sensitive(True)
+            widget.set_icon_from_stock(gtk.ENTRY_ICON_SECONDARY, gtk.STOCK_CLEAR)
         else:
             self.search.set_sensitive(False)
+            widget.set_icon_from_stock(gtk.ENTRY_ICON_SECONDARY, None)
+
+    def on_srchentry_press(self, widget, icon, event):
+        widget.set_text('')
+        widget.grab_focus()
 
     def selectionsearchresult_changed(self, selection):
         model, path = selection.get_selected()

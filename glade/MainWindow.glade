@@ -3044,6 +3044,7 @@
                     <property name="invisible_char">&#x25CF;</property>
                     <property name="activates_default">True</property>
                     <signal name="changed" handler="on_srchentry_changed"/>
+                    <signal name="icon_press" handler="on_srchentry_press"/>
                   </widget>
                   <packing>
                     <property name="position">1</property>
