@@ -142,7 +142,10 @@ class MainWindow:
                          self.cbWind: self.database.get_all_wind(), \
                          self.cbColour: self.database.get_all_colours(), \
                          self.cbStrain: self.database.get_all_strains(), \
-                         self.cbLoft: self.database.get_all_lofts()}
+                         self.cbLoft: self.database.get_all_lofts(), \
+                         self.cbFilterColour: self.database.get_all_colours(), \
+                         self.cbFilterStrain: self.database.get_all_strains(), \
+                         self.cbFilterLoft: self.database.get_all_lofts()}
         for key, value in self.listdata.items():
             widgets.fill_list(key, value)
 
@@ -410,13 +413,8 @@ class MainWindow:
         self.notebook.set_current_page(2)
         self.on_addresult_clicked(None)
 
-    def menufilter_action(self, action, widget):
-        value = widget.get_current_value()
-
-        if value == 0:
-            self.fill_treeview()
-        else:
-            self.fill_treeview(str(value-1))
+    def menufilter_activate(self, widget):
+        self.filterdialog.show()
 
     def menutools_activate(self, widget):
         ToolsWindow(self)
@@ -558,6 +556,13 @@ class MainWindow:
 
     def on_srchclose_clicked(self, widget):
         self.searchdialog.hide()
+
+    # Filter dialog callbacks
+    def on_filterapply_clicked(self, widget):
+        self.fill_treeview()
+
+    def on_closefilterdialog_clicked(self, widget):
+        self.filterdialog.hide()
 
     # Main treeview callbacks
     def column1_clicked(self, column):
@@ -1015,7 +1020,6 @@ class MainWindow:
             ("PigeonMenu", None, _("_Pigeon")),
             ("EditMenu", None, _("_Edit")),
             ("ViewMenu", None, _("_View")),
-            ("FilterMenu", None, _("_Filter pigeons")),
             ("HelpMenu", None, _("_Help")),
             ("Backup", gtk.STOCK_FLOPPY, _("_Backup"), None,
                     _("Create a backup of your database"), self.menubackup_activate),
@@ -1045,6 +1049,8 @@ class MainWindow:
                     _("Various tools"), self.menutools_activate),
             ("Preferences", gtk.STOCK_PREFERENCES, None, "<control>P",
                     _("Configure the application"), self.menupref_activate),
+            ("Filter", None, _("_Filter..."), None,
+                    _("Advanced pigeon filter"), self.menufilter_activate),
             ("Home", gtk.STOCK_HOME, _("_Website"), None,
                     _("Go to the website for more information"), self.menuhome_activate),
             ("Forum", gtk.STOCK_INFO, _("Forum"), None,
@@ -1064,21 +1070,9 @@ class MainWindow:
                     _("Show or hide the statusbar"), self.menustatusbar_toggled, False)
            )
 
-        filter_entries = (
-            ( "All", None, _("_All"), None,
-                    _("Show all pigeons"), 0),
-            ( "Cocks", None, _("_Cocks"), None,
-                    _("Only show cocks"), 1),
-            ( "Hens", None, _("_Hens"), None,
-                    _("Only show hens"), 2),
-            ( "Young", None, _("_Young birds"), None,
-                    _("Only show young birds"), 3)
-           )
-
         action_group = gtk.ActionGroup("MainWindowActions")
         action_group.add_actions(entries)
         action_group.add_toggle_actions(toggle_entries)
-        action_group.add_radio_actions(filter_entries, 0, self.menufilter_action)
 
         return action_group
 
@@ -1174,11 +1168,10 @@ class MainWindow:
                                 self.selectionsearchresult_changed,
                                 True, True, True)
 
-    def fill_treeview(self, pigeonType='all', path=0):
+    def fill_treeview(self, path=0):
         '''
         Fill the main treeview with pigeons.
 
-        @param pigeonType: The gender of pigeons to show
         @param path: The path to set the cursor
         '''
 
@@ -1187,17 +1180,31 @@ class MainWindow:
         for pindex in self.parser.pigeons:
             if not self.parser.pigeons[pindex].show: continue
 
-            if pigeonType == self.parser.pigeons[pindex].sex or pigeonType == 'all':
-                row = [pindex,
-                       self.parser.pigeons[pindex].ring,
-                       self.parser.pigeons[pindex].year,
-                       self.parser.pigeons[pindex].name,
-                       self.parser.pigeons[pindex].colour,
-                       self.sexDic[self.parser.pigeons[pindex].sex],
-                       self.parser.pigeons[pindex].loft,
-                       self.parser.pigeons[pindex].strain]
+            # Filters
+            if self.chkFilterSex.get_active():
+                if not self.parser.pigeons[pindex].sex == self.cbFilterSex.get_active_text():
+                    continue
 
-                self.liststore.append(row)
+            if self.chkFilterColours.get_active():
+                if not self.parser.pigeons[pindex].colour == self.cbFilterColour.get_active_text():
+                    continue
+
+            if self.chkFilterStrains.get_active():
+                if not self.parser.pigeons[pindex].strain == self.cbFilterStrain.get_active_text():
+                    continue
+
+            if self.chkFilterLofts.get_active():
+                if not self.parser.pigeons[pindex].loft == self.cbFilterLoft.get_active_text():
+                    continue
+
+            self.liststore.append([pindex,
+                   self.parser.pigeons[pindex].ring,
+                   self.parser.pigeons[pindex].year,
+                   self.parser.pigeons[pindex].name,
+                   self.parser.pigeons[pindex].colour,
+                   self.sexDic[self.parser.pigeons[pindex].sex],
+                   self.parser.pigeons[pindex].loft,
+                   self.parser.pigeons[pindex].strain])
 
         if len(self.liststore) > 0:
             self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
@@ -1205,7 +1212,7 @@ class MainWindow:
             if not path:
                 path = 0
             self.selection.select_path(path)
-            self.treeview.set_property('has-focus', True)
+            self.treeview.grab_focus()
         else:
             self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
             self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
@@ -1506,7 +1513,7 @@ class MainWindow:
             self.selection.select_path(self.selectionPath)
         else: # Save
             self.parser.get_pigeons()
-            self.fill_treeview(path=self.selectionPath)
+            self.fill_treeview(self.selectionPath)
             self.count_active_pigeons()
 
         self.selectionPath = 0
@@ -1898,7 +1905,8 @@ class MainWindow:
             self.sexStore.insert(int(key), [key, self.sexDic[key]])
         self.cbsex = gtk.ComboBox(self.sexStore)
         self.cbRangeSex = gtk.ComboBox(self.sexStore)
-        for box in [self.cbsex, self.cbRangeSex]:
+        self.cbFilterSex = gtk.ComboBox(self.sexStore)
+        for box in [self.cbsex, self.cbRangeSex, self.cbFilterSex]:
             cell = gtk.CellRendererText()
             box.pack_start(cell, True)
             box.add_attribute(cell, 'text', 1)
@@ -1906,6 +1914,7 @@ class MainWindow:
 
         self.table1.attach(self.cbRangeSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
         self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
+        self.hbox7.pack_start(self.cbFilterSex, True, True)
 
     def set_filefilter(self):
         '''

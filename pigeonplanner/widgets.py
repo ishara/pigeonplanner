@@ -49,12 +49,7 @@ uistring = '''
          <menuitem action="Preferences"/>
       </menu>
       <menu action="ViewMenu">
-         <menu action="FilterMenu">
-            <menuitem action="All"/>
-            <menuitem action="Cocks"/>
-            <menuitem action="Hens"/>
-            <menuitem action="Young"/>
-         </menu>
+         <menuitem action="Filter"/>
          <separator/>
          <menuitem action="Arrows"/>
          <menuitem action="Stats"/>
