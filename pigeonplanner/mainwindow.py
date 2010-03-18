@@ -999,7 +999,6 @@ class MainWindow:
         entries = (
             ("FileMenu", None, _("_File")),
             ("BackupMenu", None, _("_Backup")),
-            ("SearchMenu", None, _("_Search")),
             ("PigeonMenu", None, _("_Pigeon")),
             ("EditMenu", None, _("_Edit")),
             ("ViewMenu", None, _("_View")),

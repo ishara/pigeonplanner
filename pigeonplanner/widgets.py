@@ -34,6 +34,7 @@ uistring = '''
          <menuitem action="Add"/>
          <menuitem action="Addrange"/>
          <separator/>
+         <menuitem action="Tools"/>
          <menuitem action="Album"/>
          <menuitem action="Log"/>
          <separator/>
@@ -45,7 +46,8 @@ uistring = '''
          <menuitem action="Quit"/>
       </menu>
       <menu action="EditMenu">
-         <menuitem action="Tools"/>
+         <menuitem action="Search"/>
+         <separator/>
          <menuitem action="Preferences"/>
       </menu>
       <menu action="ViewMenu">
@@ -55,9 +57,6 @@ uistring = '''
          <menuitem action="Stats"/>
          <menuitem action="Toolbar"/>
          <menuitem action="Statusbar"/>
-      </menu>
-      <menu action="SearchMenu">
-         <menuitem action="Search"/>
       </menu>
       <menu action="PigeonMenu">
          <menuitem action="Edit"/>
