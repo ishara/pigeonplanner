@@ -516,6 +516,7 @@ class MainWindow:
             widget.set_icon_from_stock(gtk.ENTRY_ICON_SECONDARY, None)
 
     def on_srchentry_press(self, widget, icon, event):
+        self.fill_treeview()
         widget.set_text('')
         widget.grab_focus()
 
