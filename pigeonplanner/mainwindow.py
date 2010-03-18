@@ -519,14 +519,6 @@ class MainWindow:
         widget.set_text('')
         widget.grab_focus()
 
-    def selectionsearchresult_changed(self, selection):
-        model, path = selection.get_selected()
-
-        if path:
-            widgets.set_multiple_sensitive({self.srchgoto: True})
-        else:
-            widgets.set_multiple_sensitive({self.srchgoto: False})
-
     def on_search_clicked(self, widget):
         keyword = self.srchentry.get_text()
         results = []
@@ -539,29 +531,13 @@ class MainWindow:
             results.extend([pindex for pindex in self.parser.pigeons
                                 if keyword in self.parser.pigeons[pindex].name])
 
-        self.lsSearchresults.clear()
-        for pindex in results:
-            if not self.parser.pigeons[pindex].show: continue
+        self.fill_treeview(search_results=results)
 
-            row = [pindex,
-                   self.parser.pigeons[pindex].ring,
-                   self.parser.pigeons[pindex].year,
-                   self.parser.pigeons[pindex].name]
-
-            self.lsSearchresults.append(row)
-
-        if len(self.lsSearchresults) > 0:
-            self.lsSearchresults.set_sort_column_id(1, gtk.SORT_ASCENDING)
-            self.lsSearchresults.set_sort_column_id(2, gtk.SORT_ASCENDING)
-
-    def on_srchgoto_clicked(self, widget):
-        model, path = self.selSearchresults.get_selected()
-        if not path: return
-
-        self.search_pigeon(None, model[path][0])
-
-    def on_srchclose_clicked(self, widget):
+    def on_srchclose_clicked(self, widget, event=None):
+        self.fill_treeview()
         self.searchdialog.hide()
+
+        return True
 
     # Filter dialog callbacks
     def on_filterapply_clicked(self, widget):
@@ -1166,15 +1142,7 @@ class MainWindow:
                                                                 self.selectionresult_changed,
                                                                 True, True, True)
 
-        # Search results treeview
-        self.lsSearchresults, self.selSearchresults = widgets.setup_treeview(
-                                self.tvSearchresults,
-                                [_("Band no."), _("Year"), _("Name")],
-                                [str, str, str, str],
-                                self.selectionsearchresult_changed,
-                                True, True, True)
-
-    def fill_treeview(self, path=0):
+    def fill_treeview(self, path=0, search_results=[]):
         '''
         Fill the main treeview with pigeons.
 
@@ -1183,7 +1151,12 @@ class MainWindow:
 
         self.liststore.clear()
 
-        for pindex in self.parser.pigeons:
+        if search_results:
+            pigeons = search_results
+        else:
+            pigeons = self.parser.pigeons
+
+        for pindex in pigeons:
             if not self.parser.pigeons[pindex].show: continue
 
             # Filters

@@ -3011,7 +3011,7 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">main</property>
     <property name="has_separator">False</property>
-    <signal name="delete_event" handler="on_dialog_delete"/>
+    <signal name="delete_event" handler="on_srchclose_clicked"/>
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox5">
         <property name="visible">True</property>
@@ -3114,26 +3114,6 @@
                 <property name="position">1</property>
               </packing>
             </child>
-            <child>
-              <widget class="GtkScrolledWindow" id="scrolledwindow1">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hscrollbar_policy">automatic</property>
-                <property name="vscrollbar_policy">automatic</property>
-                <property name="shadow_type">in</property>
-                <child>
-                  <widget class="GtkTreeView" id="tvSearchresults">
-                    <property name="height_request">200</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="rules_hint">True</property>
-                  </widget>
-                </child>
-              </widget>
-              <packing>
-                <property name="position">2</property>
-              </packing>
-            </child>
           </widget>
           <packing>
             <property name="position">1</property>
@@ -3144,20 +3124,7 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <widget class="GtkButton" id="srchgoto">
-                <property name="label">gtk-jump-to</property>
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_srchgoto_clicked"/>
-              </widget>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
+              <placeholder/>
             </child>
             <child>
               <widget class="GtkButton" id="srchclose">
