@@ -55,6 +55,9 @@ class PedigreeWindow:
 
         self.build_toolbar()
 
+        if const.WINDOWS:
+            self.preview_button.hide()
+
         self.labelRing.set_text("%s / %s" %(self.pigeoninfo['ring'], self.pigeoninfo['year'][2:]))
         self.labelSex.set_text(self.pigeoninfo['sex'])
         self.labelName.set_text(self.pigeoninfo['name'])
@@ -72,6 +75,8 @@ class PedigreeWindow:
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.pedigreewindow.add_accel_group(accelgroup)
+
+        self.preview_button = uimanager.get_widget('/Toolbar/Preview')
 
         toolbar = uimanager.get_widget('/Toolbar')
         self.vbox.pack_start(toolbar, False, False)
