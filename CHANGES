@@ -1,3 +1,12 @@
+0.8.2:
+ * Added option to save the pedigree to pdf
+ * Added new filter dialog
+ * Fixed error connecting to database on non utf-8
+ * Fixed bug where log doesn't show on non utf-8
+ * Improved search dialog
+ * Create thumbnails again if something goes wrong
+ * Various improvements and changes
+
 0.8.0:
  * Added feature to set the pigeon status
  * Added option to show statistics
