@@ -1032,7 +1032,7 @@ class MainWindow:
             ("Preferences", gtk.STOCK_PREFERENCES, None, "<control>P",
                     _("Configure the application"), self.menupref_activate),
             ("Filter", None, _("_Filter..."), None,
-                    _("Advanced pigeon filter"), self.menufilter_activate),
+                    _("Set filter options"), self.menufilter_activate),
             ("Home", gtk.STOCK_HOME, _("_Website"), None,
                     _("Go to the website for more information"), self.menuhome_activate),
             ("Forum", gtk.STOCK_INFO, _("Forum"), None,
