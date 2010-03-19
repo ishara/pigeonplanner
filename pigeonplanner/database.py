@@ -128,8 +128,9 @@ class DatabaseOperations:
             conn.close()
 
     def db_connect(self):
+        encoding = sys.getfilesystemencoding() or 'utf-8'
         try:
-            conn = sqlite3.connect(const.DATABASE)
+            conn = sqlite3.connect(const.DATABASE.decode(encoding).encode("utf-8"))
         except Exception, e:
             import logdialog
 
@@ -141,6 +142,7 @@ class DatabaseOperations:
             logger.debug("Database exists: %s" %os.path.exists(const.DATABASE))
             logger.debug("Databasedir writable: %s" %os.access(const.PREFDIR, os.W_OK))
             logger.debug("Database writable: %s" %os.access(const.DATABASE, os.W_OK))
+            logger.debug("Encoding: %s" %sys.getfilesystemencoding())
 
             logdialog.LogDialog()
             sys.exit()
