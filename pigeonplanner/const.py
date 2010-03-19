@@ -39,6 +39,9 @@ if gtk.gdk.screen_height() <= 768:
     SMALL_SCREEN = True
 
 
+ENCODING = sys.getfilesystemencoding() or 'utf-8'
+
+
 UNIX = False
 WINDOWS = False
 OSX = False

@@ -37,7 +37,7 @@ class LogDialog(gtk.Dialog):
 
         self.file = open(const.LOGFILE, "r")
         self.back_buffer = gtk.TextBuffer()
-        self.back_buffer.set_text(self.file.read())
+        self.back_buffer.set_text(self.file.read().decode(const.ENCODING).encode("utf-8"))
 
         frame = gtk.Frame()
         self.vbox.pack_start(frame)
