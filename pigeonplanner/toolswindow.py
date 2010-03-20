@@ -480,6 +480,8 @@ class ToolsWindow:
             logger.debug("Start deleting the database")
             try:
                 os.remove(const.DATABASE)
+                for img_thumb in os.listdir(const.THUMBDIR):
+                    os.remove(os.path.join(const.THUMBDIR, img_thumb))
             except Exception, msg:
                 logger.error("Deleting database: %s" % msg)
             else:
