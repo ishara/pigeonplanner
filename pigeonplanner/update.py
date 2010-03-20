@@ -27,6 +27,7 @@ import messages
 
 def update():
     new = False
+    error = False
 
     local = os.path.join(const.TEMPDIR, 'pigeonplanner_update')
 
@@ -38,6 +39,7 @@ def update():
     except IOError, e:
         logger.error(e)
         version = None
+        error = True
 
     try:
         os.remove(local)
@@ -54,5 +56,5 @@ def update():
     elif const.VERSION > version:
         msg = messages.MSG_UPDATE_DEVELOPMENT
 
-    return msg, new
+    return msg, new, error
 

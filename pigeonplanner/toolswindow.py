@@ -509,7 +509,7 @@ class ToolsWindow:
         gobject.idle_add(self.update_check)
 
     def update_check(self):
-        msg, new = update.update()
+        msg, new, error = update.update()
 
         self.labelversion.set_text(msg)
 

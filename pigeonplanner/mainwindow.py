@@ -208,13 +208,16 @@ class MainWindow:
         return True
 
     def search_updates(self):
-        msg, new = update.update()
+        msg, new, error = update.update()
 
         if new:
             logger.info("End: New version found")
             gobject.idle_add(self.update_dialog)
         else:
-            logger.info("End: Already running the latest version")
+            if error:
+                logger.info("End: Could not retrieve version information.")
+            else:
+                logger.info("End: Already running the latest version")
 
     def update_dialog(self):
         if widgets.message_dialog('question', messages.MSG_UPDATE_NOW, self.main):
