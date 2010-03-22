@@ -27,16 +27,21 @@ import logging
 try:
     import pygtk; pygtk.require('2.0')
 except:
-    print "Can not find PyGTK. This is necessary to run this program."
+    print "The Python GTK (PyGTK) bindings are required to run this program."
     sys.exit(1)
 
 import gobject
 
 try:
     import gtk
-    import gtk.glade
 except:
     print "The GTK+ runtime is required to run this program."
+    sys.exit(1)
+
+try:
+    import gtk.glade
+except:
+    print "The GTK Glade (libglade) bindings are required to run this program."
     sys.exit(1)
 
 import __builtin__
