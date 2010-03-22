@@ -1179,6 +1179,10 @@ class MainWindow:
                 if not self.parser.pigeons[pindex].loft == self.cbFilterLoft.get_active_text():
                     continue
 
+            if self.chkFilterStatus.get_active():
+                if not self.parser.pigeons[pindex].active == self.cbFilterStatus.get_active():
+                    continue
+
             self.liststore.append([pindex,
                    self.parser.pigeons[pindex].ring,
                    self.parser.pigeons[pindex].year,
