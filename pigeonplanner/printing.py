@@ -17,6 +17,7 @@
 
 
 import gtk
+import gobject
 import cairo
 import logging
 logger = logging.getLogger(__name__)
@@ -77,14 +78,18 @@ class BasePrinting:
                 action = gtk.PRINT_OPERATION_ACTION_EXPORT
 
         if action != None:
-            response = print_.run(action, self.parent)
-
-            if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-                print_error = print_.get_error()
-                logger.error("Error printing: %s" %print_error)
-                widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
-            elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
-                settings = print_.get_print_settings()
+            try:
+                response = print_.run(action, self.parent)
+            except gobject.GError, e:
+                logger.error("Error in print operation: %s" %e)
+                widgets.message_dialog('error', messages.MSG_PRINTOP_ERROR, self.parent)
+            else:
+                if response == gtk.PRINT_OPERATION_RESULT_ERROR:
+                    print_error = print_.get_error()
+                    logger.error("Error printing: %s" %print_error)
+                    widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
+                elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
+                    settings = print_.get_print_settings()
 
 
 class PrintPedigree(BasePrinting):

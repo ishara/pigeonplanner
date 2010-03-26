@@ -113,6 +113,9 @@ MSG_NO_INFO = (_("No personal information found."),
 MSG_PRINT_ERROR = (_("Error printing the pedigree"),
                    None,
                    _("Error"))
+MSG_PRINTOP_ERROR = (_("An error occured in the print operation!"),
+                     _("See the logfile (File->Logfile viewer) for more info."),
+                     _("Error"))
 
 MSG_DEFAULT_OPTIONS = (_("This will set back all the settings to the default values.\nAre you sure?"),
                        None,
