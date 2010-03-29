@@ -44,6 +44,7 @@ class BasePrinting:
         print_ = gtk.PrintOperation()
         print_.set_default_page_setup(setup)
         print_.set_unit(gtk.UNIT_MM)
+        print_.set_show_progress(True)
 
         print_.connect("begin_print", self.begin_print)
         print_.connect("draw_page", self.draw_page)
