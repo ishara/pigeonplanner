@@ -551,26 +551,6 @@ class MainWindow:
         self.filterdialog.hide()
 
     # Main treeview callbacks
-    def column1_clicked(self, column):
-        treeview = column.get_tree_view()
-        liststore = treeview.get_model()
-        if column.get_sort_order() == gtk.SORT_ASCENDING:
-            liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
-            liststore.set_sort_column_id(0, gtk.SORT_ASCENDING)
-        else:
-            liststore.set_sort_column_id(1, gtk.SORT_DESCENDING)
-            liststore.set_sort_column_id(0, gtk.SORT_DESCENDING)
-
-    def column2_clicked(self, column):
-        treeview = column.get_tree_view()
-        liststore = treeview.get_model()
-        if column.get_sort_order() == gtk.SORT_ASCENDING:
-            liststore.set_sort_column_id(0, gtk.SORT_ASCENDING)
-            liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
-        else:
-            liststore.set_sort_column_id(0, gtk.SORT_DESCENDING)
-            liststore.set_sort_column_id(1, gtk.SORT_DESCENDING)
-
     def on_treeview_press(self, widget, event):
         path, focus = self.treeview.get_cursor()
 
