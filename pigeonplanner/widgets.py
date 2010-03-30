@@ -253,7 +253,11 @@ def setup_treeview(treeview, columns, column_types, changed_callback=None, resiz
     if filter_callback:
         model_filter = liststore.filter_new()
         model_filter.set_visible_func(filter_callback)
-        treeview.set_model(model_filter)
+
+        model_sort = gtk.TreeModelSort(model_filter)
+        model_sort.set_sort_column_id(2, gtk.SORT_ASCENDING)
+        treeview.set_model(model_sort)
+
         return liststore, tvSelection, model_filter
     else:
         treeview.set_model(liststore)
