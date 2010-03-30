@@ -545,12 +545,37 @@ class MainWindow:
 
     # Filter dialog callbacks
     def on_filterapply_clicked(self, widget):
-        self.fill_treeview()
+        self.modelfilter.refilter()
 
     def on_closefilterdialog_clicked(self, widget):
         self.filterdialog.hide()
 
     # Main treeview callbacks
+    def visible_cb(self, model, row_iter):
+        pindex = model.get_value(row_iter, 0)
+
+        if self.chkFilterSex.get_active():
+            if not self.parser.pigeons[pindex].sex == self.cbFilterSex.get_active_text():
+                return False
+
+        if self.chkFilterColours.get_active():
+            if not self.parser.pigeons[pindex].colour == self.cbFilterColour.get_active_text():
+                return False
+
+        if self.chkFilterStrains.get_active():
+            if not self.parser.pigeons[pindex].strain == self.cbFilterStrain.get_active_text():
+                return False
+
+        if self.chkFilterLofts.get_active():
+            if not self.parser.pigeons[pindex].loft == self.cbFilterLoft.get_active_text():
+                return False
+
+        if self.chkFilterStatus.get_active():
+            if not self.parser.pigeons[pindex].active == self.cbFilterStatus.get_active():
+                return False
+
+        return True
+
     def on_treeview_press(self, widget, event):
         path, focus = self.treeview.get_cursor()
 
@@ -1063,11 +1088,11 @@ class MainWindow:
 
         columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"), _("Loft"), _("Strain")]
 
-        self.liststore, self.selection = widgets.setup_treeview(self.treeview,
+        self.liststore, self.selection, self.modelfilter = widgets.setup_treeview(self.treeview,
                                                                 columns,
                                                                 [str, str, str, str, str, str, str, str],
                                                                 self.selection_changed,
-                                                                True, True, True)
+                                                                True, True, True, self.visible_cb)
         self.set_treeview_columns()
 
     def set_treeview_columns(self):
@@ -1141,27 +1166,6 @@ class MainWindow:
 
         for pindex in pigeons:
             if not self.parser.pigeons[pindex].show: continue
-
-            # Filters
-            if self.chkFilterSex.get_active():
-                if not self.parser.pigeons[pindex].sex == self.cbFilterSex.get_active_text():
-                    continue
-
-            if self.chkFilterColours.get_active():
-                if not self.parser.pigeons[pindex].colour == self.cbFilterColour.get_active_text():
-                    continue
-
-            if self.chkFilterStrains.get_active():
-                if not self.parser.pigeons[pindex].strain == self.cbFilterStrain.get_active_text():
-                    continue
-
-            if self.chkFilterLofts.get_active():
-                if not self.parser.pigeons[pindex].loft == self.cbFilterLoft.get_active_text():
-                    continue
-
-            if self.chkFilterStatus.get_active():
-                if not self.parser.pigeons[pindex].active == self.cbFilterStatus.get_active():
-                    continue
 
             self.liststore.append([pindex,
                    self.parser.pigeons[pindex].ring,

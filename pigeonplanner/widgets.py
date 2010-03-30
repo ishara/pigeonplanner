@@ -211,7 +211,7 @@ def about_dialog(parent):
     result = dialog.run()
     dialog.destroy()
 
-def setup_treeview(treeview, columns, column_types, changed_callback=None, resizeable=True, sortable=True, hidden_column=False):
+def setup_treeview(treeview, columns, column_types, changed_callback=None, resizeable=True, sortable=True, hidden_column=False, filter_callback=None):
     '''
     Create a ListStore and TreeViewSelection for the given treeview
 
@@ -250,9 +250,14 @@ def setup_treeview(treeview, columns, column_types, changed_callback=None, resiz
     if changed_callback:
         tvSelection.connect('changed', changed_callback)
 
-    treeview.set_model(liststore)
-
-    return liststore, tvSelection
+    if filter_callback:
+        model_filter = liststore.filter_new()
+        model_filter.set_visible_func(filter_callback)
+        treeview.set_model(model_filter)
+        return liststore, tvSelection, model_filter
+    else:
+        treeview.set_model(liststore)
+        return liststore, tvSelection
 
 def set_completion(widget):
     '''
