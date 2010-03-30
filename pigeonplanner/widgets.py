@@ -116,6 +116,23 @@ resultui = '''
 </ui>
 '''
 
+previewui = '''
+<ui>
+   <toolbar name="Toolbar">
+      <toolitem action="First"/>
+      <toolitem action="Prev"/>
+      <toolitem action="Next"/>
+      <toolitem action="Last"/>
+      <separator/>
+      <toolitem action="Fit"/>
+      <toolitem action="In"/>
+      <toolitem action="Out"/>
+      <separator/>
+      <toolitem action="Close"/>
+   </toolbar>
+</ui>
+'''
+
 
 def get_backup_filefilter():
     backupFileFilter = gtk.FileFilter()
@@ -435,5 +452,4 @@ class ImageWindow(gtk.Window):
     def exit_window(self, widget, event=None):
         self.hide()
         return False
-
 

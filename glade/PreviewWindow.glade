@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<glade-interface>
+  <!-- interface-requires gtk+ 2.16 -->
+  <!-- interface-naming-policy project-wide -->
+  <widget class="GtkWindow" id="previewwindow">
+    <property name="title" translatable="yes">Print Preview</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="default_width">800</property>
+    <property name="default_height">600</property>
+    <property name="icon">../images/icon_logo.png</property>
+    <signal name="delete_event" handler="on_window_delete"/>
+    <child>
+      <widget class="GtkVBox" id="vbox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <widget class="GtkScrolledWindow" id="swin">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="hscrollbar_policy">automatic</property>
+            <property name="vscrollbar_policy">automatic</property>
+            <property name="shadow_type">in</property>
+            <signal name="size_allocate" handler="on_swin_size_allocate"/>
+            <child>
+              <widget class="GtkViewport" id="viewport1">
+                <property name="visible">True</property>
+                <property name="resize_mode">queue</property>
+                <child>
+                  <widget class="GtkDrawingArea" id="drawingarea">
+                    <property name="visible">True</property>
+                    <signal name="expose_event" handler="on_drawingarea_expose"/>
+                  </widget>
+                </child>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+</glade-interface>
