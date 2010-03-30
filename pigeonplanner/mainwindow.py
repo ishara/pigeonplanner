@@ -384,7 +384,7 @@ class MainWindow:
                 logger.info("Remove: Removing the results")
                 self.database.delete_result_from_band(pindex)
 
-            self.liststore.remove(tIter)
+            self.liststore.remove(self.modelfilter.convert_iter_to_child_iter(tIter))
 
             if len(self.liststore) > 0:
                 if not path:
