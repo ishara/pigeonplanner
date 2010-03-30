@@ -544,6 +544,15 @@ class MainWindow:
         return True
 
     # Filter dialog callbacks
+    def on_btnClearFilters_clicked(self, widget):
+        self.chkFilterSex.set_active(False)
+        self.chkFilterColours.set_active(False)
+        self.chkFilterStrains.set_active(False)
+        self.chkFilterLofts.set_active(False)
+        self.chkFilterStatus.set_active(False)
+
+        self.modelfilter.refilter()
+
     def on_filterapply_clicked(self, widget):
         self.modelfilter.refilter()
 

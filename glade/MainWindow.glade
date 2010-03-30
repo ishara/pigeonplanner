@@ -4547,6 +4547,35 @@ Lost</property>
                 <property name="position">4</property>
               </packing>
             </child>
+            <child>
+              <widget class="GtkTable" id="table111">
+                <property name="visible">True</property>
+                <child>
+                  <widget class="GtkButton" id="btnClearFilters">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip" translatable="yes">Clear all filters</property>
+                    <signal name="clicked" handler="on_btnClearFilters_clicked"/>
+                    <child>
+                      <widget class="GtkImage" id="image1">
+                        <property name="visible">True</property>
+                        <property name="stock">gtk-clear</property>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="x_options"></property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">5</property>
+              </packing>
+            </child>
           </widget>
           <packing>
             <property name="position">1</property>
