@@ -258,7 +258,7 @@ def setup_treeview(treeview, columns, column_types, changed_callback=None, resiz
         model_sort.set_sort_column_id(2, gtk.SORT_ASCENDING)
         treeview.set_model(model_sort)
 
-        return liststore, tvSelection, model_filter
+        return liststore, tvSelection, model_filter, model_sort
     else:
         treeview.set_model(liststore)
         return liststore, tvSelection

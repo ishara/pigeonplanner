@@ -384,7 +384,8 @@ class MainWindow:
                 logger.info("Remove: Removing the results")
                 self.database.delete_result_from_band(pindex)
 
-            self.liststore.remove(self.modelfilter.convert_iter_to_child_iter(tIter))
+            filter_iter = self.modelsort.convert_iter_to_child_iter(None, tIter)
+            self.liststore.remove(self.modelfilter.convert_iter_to_child_iter(filter_iter))
 
             if len(self.liststore) > 0:
                 if not path:
@@ -1097,7 +1098,8 @@ class MainWindow:
 
         columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"), _("Loft"), _("Strain")]
 
-        self.liststore, self.selection, self.modelfilter = widgets.setup_treeview(self.treeview,
+        self.liststore, self.selection, self.modelfilter, self.modelsort = widgets.setup_treeview(
+                                                                self.treeview,
                                                                 columns,
                                                                 [str, str, str, str, str, str, str, str],
                                                                 self.selection_changed,
