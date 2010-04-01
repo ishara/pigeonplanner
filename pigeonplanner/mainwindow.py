@@ -57,7 +57,7 @@ class MainWindow:
         self.main.set_title("%s %s" %(const.NAME, const.VERSION))
 
         self.date_format = '%Y-%m-%d'
-        self.selectionPath = 0
+        self.changedRowIter = None
         self.blockMenuCallback = False
         self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(join(const.IMAGEDIR, 'icon_logo.png'), 75, 75)
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
@@ -304,10 +304,10 @@ class MainWindow:
         logger.info("Start: Adding a range of pigeons")
 
     def menuedit_activate(self, widget):
-        model, treeiter = self.selection.get_selected()
-        if not treeiter: return
+        model, self.treeIterEdit = self.selection.get_selected()
+        if not self.treeIterEdit: return
 
-        pindex = model[treeiter][0]
+        pindex = model[self.treeIterEdit][0]
 
         self.entryRing1.set_text(self.entryRing.get_text())
         self.entryYear1.set_text(self.entryYear.get_text())
@@ -1216,11 +1216,11 @@ class MainWindow:
         Get all the data/info from the selected pigeon
         '''
 
-        model, path = selection.get_selected()
+        model, tree_iter = selection.get_selected()
 
         self.empty_entryboxes()
 
-        if path:
+        if tree_iter:
             widgets.set_multiple_sensitive({self.ToolEdit: True, self.ToolRemove: True,
                                             self.ToolPedigree: True, self.MenuEdit: True,
                                             self.MenuRemove: True, self.MenuPedigree: True,
@@ -1238,7 +1238,7 @@ class MainWindow:
             self.lsResult.clear()
             return
 
-        pindex = model[path][0]
+        pindex = model.get_value(tree_iter, 0)
 
         ring     = self.parser.pigeons[pindex].ring
         year     = self.parser.pigeons[pindex].year
@@ -1467,13 +1467,9 @@ class MainWindow:
 
         self.operation = operation
 
-        self.selectionPath, focus = self.treeview.get_cursor()
-
-        self.detailbook.set_current_page(1)
-
         widgets.set_multiple_sensitive({self.toolbar: False, self.notebook: False,
                                         self.treeview: False, self.vboxButtons: False})
-
+        self.detailbook.set_current_page(1)
         self.main.remove_accel_group(self.accelgroup)
         self.main.add_accel_group(self.cancelEscAG)
 
@@ -1486,26 +1482,22 @@ class MainWindow:
         Do all the necessary things to finish editing or adding.
         '''
 
-        if args: # Cancel
-            # Reselect pigeon when user cancels adding
-            if not self.selectionPath:
-                self.selectionPath = 0
-            self.selection.unselect_path(self.selectionPath)
-            self.selection.select_path(self.selectionPath)
-        else: # Save
-            self.parser.get_pigeons()
-            self.fill_treeview(self.selectionPath)
-            self.count_active_pigeons()
-
-        self.selectionPath = 0
-
-        self.detailbook.set_current_page(0)
+        self.parser.get_pigeons()
+        self.count_active_pigeons()
+        if self.changedRowIter and self.operation == 'add':
+            filter_iter = self.modelfilter.convert_child_iter_to_iter(self.changedRowIter)
+            sort_iter = self.modelsort.convert_child_iter_to_iter(None, filter_iter)
+            self.selection.select_iter(sort_iter)
+            self.treeview.scroll_to_cell(self.modelsort.get_path(sort_iter))
+        if self.operation == 'edit':
+            self.selection.emit('changed')
 
         widgets.set_multiple_sensitive({self.toolbar: True, self.notebook: True,
                                         self.treeview: True, self.vboxButtons: True})
-
-        self.main.add_accel_group(self.accelgroup)
+        self.detailbook.set_current_page(0)
         self.main.remove_accel_group(self.cancelEscAG)
+        self.main.add_accel_group(self.accelgroup)
+        self.treeview.grab_focus()
 
     def get_add_edit_info(self):
         '''
@@ -1595,6 +1587,16 @@ class MainWindow:
                 self.database.update_lost(self.get_status_info()[2] + (pindex,))
 
         self.update_data(infoTuple)
+        filter_iter = self.modelsort.convert_iter_to_child_iter(None, self.treeIterEdit)
+        self.liststore.set(self.modelfilter.convert_iter_to_child_iter(filter_iter),
+                                0, pindex_new,
+                                1, infoTuple[0],
+                                2, infoTuple[1],
+                                3, infoTuple[6],
+                                4, infoTuple[5],
+                                5, self.sexDic[infoTuple[2]],
+                                6, infoTuple[8],
+                                7, infoTuple[7])
 
     def write_new_pigeon(self):
         '''
@@ -1632,6 +1634,15 @@ class MainWindow:
                 self.database.insert_lost((pindex,) + self.get_status_info()[2])
 
         self.update_data(infoTuple)
+
+        self.changedRowIter = self.liststore.append([pindex,
+                                                     infoTuple[0],
+                                                     infoTuple[1],
+                                                     infoTuple[6],
+                                                     infoTuple[5],
+                                                     self.sexDic[infoTuple[2]],
+                                                     infoTuple[8],
+                                                     infoTuple[7]])
 
     def update_data(self, infoTuple):
         '''
