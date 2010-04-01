@@ -371,7 +371,7 @@ class MainWindow:
                 self.database.delete_pigeon(pindex)
                 # Only remove status when pigeon is completely removed
                 status = self.parser.pigeons[pindex].active
-                if status != 1:
+                if status != const.ACTIVE:
                     self.database.delete_status(self.pigeonStatus[status].capitalize(), pindex)
                 # Same for the picture
                 image = self.parser.pigeons[pindex].image
@@ -1327,20 +1327,20 @@ class MainWindow:
         @param status: the status
         '''
 
-        if status == 1: # Active
+        if status == const.ACTIVE:
             return
-        elif status == 0: # Dead
+        elif status == const.DEAD:
             data = self.database.get_dead_data(pindex)
             if data:
                 self.entryDeadDate.set_text(data[0])
                 self.textDeadInfo.get_buffer().set_text(data[1])
-        elif status == 2: # Sold
+        elif status == const.SOLD:
             data = self.database.get_sold_data(pindex)
             if data:
                 self.entrySoldDate.set_text(data[1])
                 self.entrySoldBuyer.set_text(data[0])
                 self.textSoldInfo.get_buffer().set_text(data[2])
-        elif status == 3: # Lost
+        elif status == const.LOST:
             data = self.database.get_lost_data(pindex)
             if data:
                 self.entryLostDate.set_text(data[1])
@@ -1569,21 +1569,21 @@ class MainWindow:
         status = self.cbStatus.get_active()
         old_status = self.parser.pigeons[pindex].active
         if status != old_status:
-            if old_status != 1:
+            if old_status != const.ACTIVE:
                 self.database.delete_status(self.pigeonStatus[old_status].capitalize(), pindex)
 
-            if status == 0:
+            if status == const.DEAD:
                 self.database.insert_dead((pindex,) + self.get_status_info()[0])
-            elif status == 2:
+            elif status == const.SOLD:
                 self.database.insert_sold((pindex,) + self.get_status_info()[1])
-            elif status == 3:
+            elif status == const.LOST:
                 self.database.insert_lost((pindex,) + self.get_status_info()[2])
         else:
-            if status == 0:
+            if status == const.DEAD:
                 self.database.update_dead(self.get_status_info()[0] + (pindex,))
-            elif status == 2:
+            elif status == const.SOLD:
                 self.database.update_sold(self.get_status_info()[1] + (pindex,))
-            elif status == 3:
+            elif status == const.LOST:
                 self.database.update_lost(self.get_status_info()[2] + (pindex,))
 
         self.update_data(infoTuple)
@@ -1626,11 +1626,11 @@ class MainWindow:
 
         status = self.cbStatus.get_active()
 
-        if status == 0:
+        if status == const.DEAD:
             self.database.insert_dead((pindex,) + self.get_status_info()[0])
-        elif status == 2:
+        elif status == const.SOLD:
             self.database.insert_sold((pindex,) + self.get_status_info()[1])
-        elif status == 3:
+        elif status == const.LOST:
                 self.database.insert_lost((pindex,) + self.get_status_info()[2])
 
         self.update_data(infoTuple)

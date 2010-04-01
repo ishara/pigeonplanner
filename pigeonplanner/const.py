@@ -90,3 +90,8 @@ THUMBDIR = os.path.join(PREFDIR, 'thumbs')
 UPDATEURL = 'http://www.pigeonplanner.com/CURRENT'
 DOWNLOADURL = 'http://www.pigeonplanner.com/download'
 FORUMURL = 'http://www.pigeonplanner.com/forum'
+
+DEAD = 0
+ACTIVE = 1
+SOLD = 2
+LOST = 3
