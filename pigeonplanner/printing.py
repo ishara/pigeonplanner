@@ -90,7 +90,8 @@ class PrintPreview:
         self.vbox.reorder_child(toolbar, 0)
 
     def create_action_group(self):
-        entries = (
+        action_group = gtk.ActionGroup("PreviewWindowActions")
+        action_group.add_actions((
             ("First", gtk.STOCK_GOTO_FIRST, None, None,
                     _("Shows the first page"), self.on_first_clicked),
             ("Prev", gtk.STOCK_GO_BACK, None, None,
@@ -105,16 +106,11 @@ class PrintPreview:
                     _("Zooms the page out"), self.on_zoom_out_clicked),
             ("Close", gtk.STOCK_CLOSE, None, None,
                     _("Close this window"), self.on_close_clicked),
-           )
-
-        toggles = (
+           ))
+        action_group.add_toggle_actions((
             ("Fit", gtk.STOCK_ZOOM_FIT, None, None,
                     _("Zooms to fit the whole page"), self.on_zoom_fit_toggled),
-           )
-
-        action_group = gtk.ActionGroup("PreviewWindowActions")
-        action_group.add_actions(entries)
-        action_group.add_toggle_actions(toggles)
+           ))
 
         return action_group
 

@@ -1014,7 +1014,8 @@ class MainWindow:
         Create the action group for our menu and toolbar
         '''
 
-        entries = (
+        action_group = gtk.ActionGroup("MainWindowActions")
+        action_group.add_actions((
             ("FileMenu", None, _("_File")),
             ("BackupMenu", None, _("_Backup")),
             ("PigeonMenu", None, _("_Pigeon")),
@@ -1057,9 +1058,8 @@ class MainWindow:
                     _("Go to the forum for online help"), self.menuforum_activate),
             ("About", gtk.STOCK_ABOUT, None, None,
                     _("About this application"), self.menuabout_activate)
-           )
-
-        toggle_entries = (
+           ))
+        action_group.add_toggle_actions((
             ("Arrows",  None, _("Navigation arrows"), None,
                     _("Show or hide the navigation arrows"), self.menuarrows_toggled, False),
             ("Stats",  None, _("Statistics"), None,
@@ -1068,11 +1068,7 @@ class MainWindow:
                     _("Show or hide the toolbar"), self.menutoolbar_toggled, False),
             ("Statusbar",  None, _("Statusbar"), None,
                     _("Show or hide the statusbar"), self.menustatusbar_toggled, False)
-           )
-
-        action_group = gtk.ActionGroup("MainWindowActions")
-        action_group.add_actions(entries)
-        action_group.add_toggle_actions(toggle_entries)
+           ))
 
         return action_group
 

@@ -62,7 +62,8 @@ class ResultWindow:
         self.vbox.reorder_child(toolbar, 0)
 
     def create_action_group(self):
-        entries = (
+        action_group = gtk.ActionGroup("ResultWindowActions")
+        action_group.add_actions((
             ("Save", gtk.STOCK_SAVE, None, None,
                     _("Save these results"), self.on_save_clicked),
             ("Preview", gtk.STOCK_PRINT_PREVIEW, None, None,
@@ -73,10 +74,7 @@ class ResultWindow:
                     _("Set filter options"), self.on_filter_clicked),
             ("Close", gtk.STOCK_CLOSE, None, None,
                     _("Close this window"), self.on_close_window),
-           )
-
-        action_group = gtk.ActionGroup("ResultWindowActions")
-        action_group.add_actions(entries)
+           ))
 
         return action_group
 

@@ -78,7 +78,8 @@ class PedigreeWindow:
         self.vbox.reorder_child(toolbar, 0)
 
     def create_action_group(self):
-        entries = (
+        action_group = gtk.ActionGroup("PedigreeWindowActions")
+        action_group.add_actions((
             ("Save", gtk.STOCK_SAVE, None, None,
                     _("Save this pedigree"), self.on_save_clicked),
             ("Preview", gtk.STOCK_PRINT_PREVIEW, None, None,
@@ -87,10 +88,7 @@ class PedigreeWindow:
                     _("Print this pedigree"), self.on_print_clicked),
             ("Close", gtk.STOCK_CLOSE, None, None,
                     _("Close this window"), self.on_close_dialog)
-           )
-
-        action_group = gtk.ActionGroup("PedigreeWindowActions")
-        action_group.add_actions(entries)
+           ))
 
         return action_group
 
