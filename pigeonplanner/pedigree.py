@@ -419,10 +419,12 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
         self.hightlight = False
         self.connect("expose_event", self.expose)
         self.connect("realize", self.realize)
+        editable = False
         if detail:
             if kinfo:
                 self.kindex = kinfo[0]
                 self.connect("button-press-event", self.detail_pressed)
+                editable = True
         else:
             self.set_property("can-focus", True)
             self.connect("button-press-event", self.pressed)
@@ -453,6 +455,9 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
             self.set_property("can-focus", False)
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
             self.bordercolor = (0,0,0)
+
+            if editable:
+                self.text = "<span style='italic' foreground='#6a6a6a'>%s</span>" %format_text(_("<edit>"))
 
     def focus_out(self, widget, event):
         self.hightlight = False
