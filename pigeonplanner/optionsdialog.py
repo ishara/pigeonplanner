@@ -62,6 +62,7 @@ class OptionsDialog:
                 ('Default', 'def'),
                 ('Arabic', 'ar'),
                 ('Bosnian', 'bs'),
+                ('Croatian', 'hr'),
                 ('Dutch', 'nl'),
                 ('English', 'en'),
                 ('French', 'fr'),
