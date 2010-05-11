@@ -16,9 +16,13 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import math
+import datetime
+
 import gtk
 import gobject
 import cairo
+import pango
 import logging
 logger = logging.getLogger(__name__)
 
@@ -41,6 +45,7 @@ MARGIN = 6
 class PrintPreview:
 
     zoom_factors = {
+        0.25: '25%',
         0.50: '50%',
         0.75: '75%',
         1.00: '100%',
@@ -255,8 +260,8 @@ class PrintPreview:
         cr.stroke()
 
         if self.orientation == gtk.PAGE_ORIENTATION_LANDSCAPE:
-            cr.rotate(radians(-90))
-            cr.translate(-paper_h, 0)
+            cr.rotate(math.radians(90))
+            cr.translate(0, -paper_w)
 
         dpi = PRINTER_DPI * self.zoom
         self.context.set_cairo_context(cr, dpi, dpi)
@@ -280,7 +285,7 @@ class PrintPreview:
 
 
 class BasePrinting:
-    def __init__(self, parent, options, print_action, pdf_name):
+    def __init__(self, parent, options, print_action, pdf_name, orientation):
         self.parent = parent
 
         if options.paper == 0:
@@ -291,9 +296,15 @@ class BasePrinting:
 
         setup = gtk.PageSetup()
         setup.set_paper_size(paper_size)
+        setup.set_orientation(orientation)
+
+        settings = gtk.PrintSettings()
+        settings.set_paper_size(paper_size)
+        settings.set_orientation(orientation)
 
         print_ = gtk.PrintOperation()
         print_.set_default_page_setup(setup)
+        print_.set_print_settings(settings)
         print_.set_unit(gtk.UNIT_MM)
         print_.set_show_progress(True)
 
@@ -344,16 +355,6 @@ class BasePrinting:
                 elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
                     settings = print_.get_print_settings()
 
-
-class PrintPedigree(BasePrinting):
-    def __init__(self, parent, pigeoninfo, userinfo, options, print_action):
-        pdf_name = "pedigree_%s_%s" %(pigeoninfo['ring'], pigeoninfo['year'])
-        self.pigeoninfo = pigeoninfo
-        self.options = options
-        self.userinfo = userinfo
-        self.preview = None
-        BasePrinting.__init__(self, parent, options, print_action, pdf_name)
-
     def preview_page(self, operation, preview, context, parent):
         self.preview = PrintPreview(operation, preview, context, parent)
 
@@ -371,6 +372,17 @@ class PrintPedigree(BasePrinting):
         context.set_cairo_context(cr, PRINTER_DPI, PRINTER_DPI)
 
         return True
+
+
+class PrintPedigree(BasePrinting):
+    def __init__(self, parent, pigeoninfo, userinfo, options, print_action):
+        pdf_name = "pedigree_%s_%s" %(pigeoninfo['ring'], pigeoninfo['year'])
+        orientation = gtk.PAGE_ORIENTATION_PORTRAIT
+        self.pigeoninfo = pigeoninfo
+        self.options = options
+        self.userinfo = userinfo
+        self.preview = None
+        BasePrinting.__init__(self, parent, options, print_action, pdf_name, orientation)
 
     def begin_print(self, operation, context):
         operation.set_n_pages(1)
@@ -577,7 +589,7 @@ class PrintPedigree(BasePrinting):
                       self.pigeoninfo['sex'],
                       '', '', '', '', '', '', 0, 1, lst)
 
-        for i in range(1, 31):
+        for i in xrange(1, 31):
             x = pos[i][0][0]
             y = pos[i][0][1]
             w = pos[i][0][2]
@@ -642,199 +654,192 @@ class PrintPedigree(BasePrinting):
         cr.stroke()
 
 
-class PrintResults:
-    def __init__(self, results, fyearpigeon, fyearrace, fracepoint, fsector, fcoef, fplace):
-
+class PrintResults(BasePrinting):
+    def __init__(self, parent, results, userinfo, options, print_action):
+        self.today = datetime.date.today()
+        pdf_name = "results_%s" %self.today
+        orientation = gtk.PAGE_ORIENTATION_LANDSCAPE
         self.results = results
+        self.options = options
+        self.userinfo = userinfo
 
-        self.fyearpigeon = fyearpigeon
-        self.fyearrace = fyearrace
-        self.fracepoint = fracepoint
-        self.fsector = fsector
-        self.fcoef = fcoef
-        self.fplace = fplace
+        self.preview = None
 
-        paper_size = gtk.PaperSize(gtk.PAPER_NAME_A4)
+        self.header_font_size = 12
+        self.pagenr_font_size = 6
+        self.text_font_size = 8
 
-        setup = gtk.PageSetup()
-        setup.set_paper_size(paper_size)
+        self.columnNames = {
+                    0: _("Band no."),
+                    1: _("Date"),
+                    2: _("Racepoint"),
+                    3: _("Placed"),
+                    4: _("Out of"),
+                    5: _("Coef."),
+                    6: _("Sector"),
+                    7: _("Type"),
+                    8: _("Category"),
+                    9: _("Weather"),
+                    10: _("Wind"),
+                    11: _("Comment")
+                }
 
-        print_ = gtk.PrintOperation()
-        print_.set_default_page_setup(setup)
-        print_.set_unit(gtk.UNIT_MM)
-
-        print_.connect("begin_print", self.begin_print)
-        print_.connect("draw_page", self.draw_page)
-
-        action = gtk.PRINT_OPERATION_ACTION_PREVIEW
-#        action = gtk.PRINT_OPERATION_ACTION_PRINT_DIALOG
-
-        response = print_.run(action)
-
-        if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
-        elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
-            settings = print_.get_print_settings()
+        BasePrinting.__init__(self, parent, options, print_action, pdf_name, orientation)
 
     def begin_print(self, operation, context):
-        width = context.get_width()
-        height = context.get_height()
-        self.layout = context.create_pango_layout()
+        self.width = context.get_width()
+        self.height = context.get_height()
 
-        num_lines = len(self.results)
-        print "num_lines:", num_lines
+        header = ''
+        if self.options.perName:
+            header += '%s\n' %self.userinfo['name']
+        if self.options.perAddress:
+            header += '%s\n' %self.userinfo['street']
+            header += '%s %s\n' %(self.userinfo['code'], self.userinfo['city'])
+        if self.options.perPhone:
+            header += '%s\n' %self.userinfo['phone']
+        if self.options.perEmail:
+            header += '%s' %self.userinfo['email']
+        self.header_layout = context.create_pango_layout()
+        self.header_layout.set_font_description(pango.FontDescription("Arial "+str(self.header_font_size)))
+        self.header_layout.set_width(int(self.width*pango.SCALE))
+        self.header_layout.set_alignment(pango.ALIGN_LEFT)
+        self.header_layout.set_text(header)
+        self.header_height = self.header_layout.get_size()[1] / 1024.0 + 2
+        self.results_start = self.header_height + 4
 
-        lines_first_page = 30
-        lines_per_page = height / (4/2)
-#        pages = ( int(math.ceil( float(num_lines) / float(self.lines_per_page) ) ) )
+        self.pagenr_layout = context.create_pango_layout()
+        self.pagenr_layout.set_font_description(pango.FontDescription("Arial "+str(self.pagenr_font_size)))
+        self.pagenr_layout.set_width(int(self.width*pango.SCALE))
+        self.pagenr_layout.set_alignment(pango.ALIGN_RIGHT)
 
-#        operation.set_n_pages(pages)
+        self.results_layouts = []
+        self.column_layouts = []
+        for x in xrange(12):
+            if x == 5 and not self.options.resCoef:
+                continue
+            if x == 6 and not self.options.resSector:
+                continue
+            if x == 7 and not self.options.resType:
+                continue
+            if x == 8 and not self.options.resCategory:
+                continue
+            if x == 9 and not self.options.resWeather:
+                continue
+            if x == 10 and not self.options.resWind:
+                continue
+            if x == 11 and not self.options.resComment:
+                continue
 
-        operation.set_n_pages(2)
+            self.results_layouts.append(self.create_layout(context, x))
+            self.column_layouts.append(self.create_column_layout(context, x))
+
+        num_lines = self.results_layouts[0].get_line_count()
+
+        self.page_breaks = []
+        page_height = 0
+
+        for line in xrange(num_lines):
+            layout_line = self.results_layouts[0].get_line(line)
+            ink_rect, logical_rect = layout_line.get_extents()
+            lx, ly, lwidth, lheight = logical_rect
+            line_height = lheight / 1024.0
+            if page_height + line_height > self.height - self.results_start:
+                self.page_breaks.append(line)
+                page_height = 0
+            page_height += line_height
+
+        operation.set_n_pages(len(self.page_breaks) + 1)
+
+        if self.preview:
+            self.preview.start()
 
     def draw_page (self, operation, context, page_number):
+        if page_number == 0:
+            start = 0
+        else:
+            start = self.page_breaks[page_number - 1]
+
+        try:
+            end = self.page_breaks[page_number]
+        except IndexError:
+            end = self.results_layouts[0].get_line_count()
+
         cr = context.get_cairo_context()
+        cr.set_source_rgb(0, 0, 0)
+        cr.move_to(0, 0)
 
-        total_width = context.get_width()
-        font = "Sans"
+        date_page = "%s %s / %s" %(_("Page"), page_number+1, operation.props.n_pages)
+        if self.options.resDate:
+            date_page += "\n\n%s" %self.today
+        self.pagenr_layout.set_text(date_page)
+        cr.show_layout(self.pagenr_layout)
+        cr.show_layout(self.header_layout)
 
-        cr.select_font_face(font)
-
-        # head
-        cr.set_font_size(10)
-        cr.move_to(0, 12)
-        cr.show_text(_("Results"))
-
-        # line
-        cr.move_to(0, 15)
-        cr.line_to(total_width, 15)
-
-        # address
-        cr.set_font_size(6)
-        cr.move_to(0, 22)
-        cr.show_text(self.options.optionList.name)
-        cr.move_to(0, 30)
-        cr.show_text(self.options.optionList.street)
-        cr.move_to(0, 38)
-        cr.show_text(self.options.optionList.code + " " + self.options.optionList.city)
-        cr.move_to(0, 46)
-        cr.show_text(self.options.optionList.tel)
-
-        # line
-        cr.move_to(0, 50)
-        cr.line_to(total_width, 50)
-
-        # filters
-        prev_width = 0
-        words = [_("Year race"), _("Year pigeons"), _("Racepoint"), _("Sector"), _("Coefficient"), _("Place")]
-        for word in words:
-            xb, yb, width, height, xa, ya = cr.text_extents(word)
-            if width > prev_width:
-                full_width = width
-            prev_width = width
-
-        cr.set_font_size(4)
-        cr.move_to(0, 56)
-        cr.show_text(_("Year race"))
-        cr.move_to(full_width + 10, 56)
-        cr.show_text(self.fyearrace)
-        cr.move_to(0, 62)
-        cr.show_text(_("Year pigeons"))
-        cr.move_to(full_width + 10, 62)
-        cr.show_text(self.fyearpigeon)
-        cr.move_to(0, 68)
-        cr.show_text(_("Racepoint"))
-        cr.move_to(full_width + 10, 68)
-        cr.show_text(self.fracepoint)
-        cr.move_to(0, 74)
-        cr.show_text(_("Sector"))
-        cr.move_to(full_width + 10, 74)
-        cr.show_text(self.fsector)
-        cr.move_to(0, 80)
-        cr.show_text(_("Coefficient"))
-        cr.move_to(full_width + 10, 80)
-        cr.show_text(str(self.fcoef))
-        cr.move_to(0, 86)
-        cr.show_text(_("Place"))
-        cr.move_to(full_width + 10, 86)
-        cr.show_text(str(self.fplace))
-
-        # line
-        cr.move_to(0, 90)
-        cr.line_to(total_width, 90)
-
-        # index
-        cr.move_to(0, 96)
-        cr.show_text(_("Band no."))
-        xb, yb, width, height, xa, ya = cr.text_extents(_("Band no."))
-        cr.move_to(0, 98)
-        cr.line_to(width, 98)
-
-        cr.move_to(30, 96)
-        cr.show_text(_("Date"))
-        xb, yb, width, height, xa, ya = cr.text_extents(_("Date"))
-        cr.move_to(30, 98)
-        cr.line_to(30 + width, 98)
-
-        cr.move_to(60, 96)
-        cr.show_text(_("Racepoint"))
-        xb, yb, width, height, xa, ya = cr.text_extents(_("Racepoint"))
-        cr.move_to(60, 98)
-        cr.line_to(60 + width, 98)
-
-        cr.move_to(100, 96)
-        cr.show_text(_("Place"))
-        xb, yb, width, height, xa, ya = cr.text_extents(_("Place"))
-        cr.move_to(100, 98)
-        cr.line_to(100 + width, 98)
-
-        cr.move_to(115, 96)
-        cr.show_text(_("Out of"))
-        xb, yb, width, height, xa, ya = cr.text_extents(_("Out of"))
-        cr.move_to(115, 98)
-        cr.line_to(115 + width, 98)
-
-        cr.move_to(130, 96)
-        cr.show_text(_("Coef."))
-        xb, yb, width, height, xa, ya = cr.text_extents(_("Coef."))
-        cr.move_to(130, 98)
-        cr.line_to(130 + width, 98)
-
-        cr.move_to(145, 96)
-        cr.show_text(_("Sector"))
-        xb, yb, width, height, xa, ya = cr.text_extents(_("Sector"))
-        cr.move_to(145, 98)
-        cr.line_to(145 + width, 98)
-
-
-        # results
-        i = 1
-        for result in self.results:
-            cr.move_to(0, 98 + 6*i)
-            for key, value in result.items():
-                cr.show_text(key)
-                cr.move_to(30, 98 + 6*i)
-                cr.show_text(value[0])
-                cr.move_to(60, 98 + 6*i)
-                cr.show_text(value[1])
-                cr.move_to(100, 98 + 6*i)
-                cr.show_text(str(value[2]))
-                cr.move_to(115, 98 + 6*i)
-                cr.show_text(str(value[3]))
-                cr.move_to(130, 98 + 6*i)
-                cr.show_text(str(value[4])[:5])
-                cr.move_to(145, 98 + 6*i)
-                cr.show_text(value[5])
-
-                i += 1
-
-        # final
-        cr.set_line_width(0.4)
-        cr.set_line_cap(cairo.LINE_CAP_ROUND)
-        cr.set_line_join(cairo.LINE_JOIN_ROUND)
-      
+        cr.move_to(0, self.header_height)
+        cr.line_to(context.get_width(), self.header_height)
+        cr.set_line_width(0.3)
         cr.stroke()
 
+        for index, column_layout in enumerate(self.results_layouts):
+            i = 0
+            start_pos_y = 0
+            title_height = 0
+
+            if self.options.resColumnNames:
+                if index == 0:
+                    start_pos_x = 0
+                else:
+                    size_title = self.column_layouts[index-1].get_size()[0]
+                    size_column = self.results_layouts[index-1].get_size()[0]
+                    if size_title >= size_column:
+                        start_pos_x += self.column_layouts[index-1].get_size()[0] / 1024.0 + 4
+                    else:
+                        start_pos_x += self.results_layouts[index-1].get_size()[0] / 1024.0 + 4
+
+                cr.move_to(start_pos_x, start_pos_y + self.results_start)
+                cr.show_layout(self.column_layouts[index])
+                title_height += self.column_layouts[index].get_size()[1] / 1024.0 + 2
+            else:
+                if index == 0:
+                    start_pos_x = 0
+                else:
+                    start_pos_x += self.results_layouts[index-1].get_size()[0] / 1024.0 + 4
+
+            line_iter = column_layout.get_iter()
+            while True:
+                if i >= start:
+                    line = line_iter.get_line()
+                    x, logical_rect = line_iter.get_line_extents()
+                    lx, ly, lwidth, lheight = logical_rect
+                    baseline = line_iter.get_baseline()
+                    if i == start:
+                        start_pos_y = ly / pango.SCALE
+                    cr.move_to(start_pos_x, baseline / 1024.0 - start_pos_y + self.results_start + title_height)
+                    cr.show_layout_line(line)
+                i += 1
+                if not (i < end and line_iter.next_line()):
+                    break
+
+    def create_layout(self, context, column):
+        text = ''
+        for result in self.results:
+            text += '%s\n' %result[column]
+        layout = context.create_pango_layout()
+        layout.set_font_description(pango.FontDescription("Arial "+str(self.text_font_size)))
+        layout.set_width(int(self.width*pango.SCALE))
+        layout.set_wrap(pango.WRAP_CHAR)
+        layout.set_text(text)
+
+        return layout
+
+    def create_column_layout(self, context, column):
+        layout = context.create_pango_layout()
+        layout.set_font_description(pango.FontDescription("Arial "+str(self.text_font_size)))
+        layout.set_width(int(self.width*pango.SCALE))
+        layout.set_markup("<u>%s</u>" %self.columnNames[column])
+
+        return layout
 
 class PrintVelocity:
     def __init__(self, parent, data, info):

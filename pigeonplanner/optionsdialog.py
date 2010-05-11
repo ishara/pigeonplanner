@@ -121,6 +121,16 @@ class OptionsDialog:
         self.chkPigExtra.set_active(self.opt.optionList.pigExtra)
         self.chkPigImage.set_active(self.opt.optionList.pigImage)
 
+        self.chkResCoef.set_active(self.opt.optionList.resCoef)
+        self.chkResSector.set_active(self.opt.optionList.resSector)
+        self.chkResCategory.set_active(self.opt.optionList.resCategory)
+        self.chkResType.set_active(self.opt.optionList.resType)
+        self.chkResWeather.set_active(self.opt.optionList.resWeather)
+        self.chkResWind.set_active(self.opt.optionList.resWind)
+        self.chkResComment.set_active(self.opt.optionList.resComment)
+        self.chkResColumnNames.set_active(self.opt.optionList.resColumnNames)
+        self.chkResDate.set_active(self.opt.optionList.resDate)
+
     def on_close_dialog(self, widget, event=None):
         self.optionsdialog.destroy()
 
@@ -179,6 +189,15 @@ class OptionsDialog:
                              "pigSex": str(self.chkPigSex.get_active()),
                              "pigExtra": str(self.chkPigExtra.get_active()),
                              "pigImage": str(self.chkPigImage.get_active()),
+                             "resCoef": str(self.chkResCoef.get_active()),
+                             "resSector": str(self.chkResSector.get_active()),
+                             "resCategory": str(self.chkResCategory.get_active()),
+                             "resType": str(self.chkResType.get_active()),
+                             "resWeather": str(self.chkResWeather.get_active()),
+                             "resWind": str(self.chkResWind.get_active()),
+                             "resComment": str(self.chkResComment.get_active()),
+                             "resColumnNames": str(self.chkResColumnNames.get_active()),
+                             "resDate": str(self.chkResDate.get_active()),
                             }
               }
 

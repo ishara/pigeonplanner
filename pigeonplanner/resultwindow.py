@@ -21,11 +21,13 @@ import gtk.glade
 
 import const
 import widgets
+import messages
 from printing import PrintResults
+from toolswindow import ToolsWindow
 
 
 class ResultWindow:
-    def __init__(self, mainwindow, pigeons, database):
+    def __init__(self, main, pigeons, database):
         self.wTree = gtk.glade.XML(const.GLADERESULT)
         self.wTree.signal_autoconnect(self)
 
@@ -33,10 +35,11 @@ class ResultWindow:
             name = w.get_name()
             setattr(self, name, w)
 
+        self.main = main
         self.database = database
         self.pigeons = pigeons
 
-        self.resultwindow.set_transient_for(mainwindow)
+        self.resultwindow.set_transient_for(self.main.main)
 
         self.build_toolbar()
         self.build_treeview()
@@ -53,9 +56,6 @@ class ResultWindow:
 
         # Just for now...
         uimanager.get_widget('/Toolbar/Filter').hide()
-        uimanager.get_widget('/Toolbar/Print').hide()
-        uimanager.get_widget('/Toolbar/Preview').hide()
-        uimanager.get_widget('/Toolbar/Save').hide()
 
         toolbar = uimanager.get_widget('/Toolbar')
         self.vbox.pack_start(toolbar, False, False)
@@ -130,23 +130,57 @@ class ResultWindow:
         pass
 
     def on_save_clicked(self, widget):
-        pass
+        self.do_operation('save')
 
     def on_preview_clicked(self, widget):
-        pass
+        self.do_operation('preview')
 
     def on_print_clicked(self, widget):
+        self.do_operation('print')
+
+    def do_operation(self, op):
+        #TODO: put this in module, same code as pedigree
+        userinfo = {}
+
+        for address in self.main.database.get_all_addresses():
+            if address[9]:
+                userinfo['name'] = address[1]
+                userinfo['street'] = address[2]
+                userinfo['code'] = address[3]
+                userinfo['city'] = address[4]
+                userinfo['phone'] = address[6]
+                userinfo['email'] = address[7]
+                break
+
+        if not userinfo.has_key('name'):
+            if widgets.message_dialog('question', messages.MSG_NO_INFO, self.resultwindow):
+                tw = ToolsWindow(self.main)
+                tw.toolsdialog.set_keep_above(True)
+                tw.treeview.set_cursor(2)
+                tw.on_adadd_clicked(None, pedigree_call=True)
+                tw.chkme.set_active(True)
+
+                return
+            else:
+                userinfo['name'] = ""
+                userinfo['street'] = ""
+                userinfo['code'] = ""
+                userinfo['city'] = ""
+                userinfo['phone'] = ""
+                userinfo['email'] = ""
+
         results = []
         for item in self.liststore:
-            date = self.liststore.get_value(item.iter, 0)
-            racepoint = self.liststore.get_value(item.iter, 1)
-            placed = self.liststore.get_value(item.iter, 2)
-            out = self.liststore.get_value(item.iter, 3)
-            coef = self.liststore.get_value(item.iter, 4)
-            sector = self.liststore.get_value(item.iter, 5)
-            band = self.liststore.get_value(item.iter, 6)
+            values = []
+            for x in range(2, 14):
+                value = self.liststore.get_value(item.iter, x)
+                if value == None:
+                    value = ''
+                if x == 2:
+                    value = "%s / %s" %(self.liststore.get_value(item.iter, 1), value[2:])
+                if x == 7:
+                    value = '%3.2f' %value
+                values.append(str(value))
+            results.append(values)
 
-            results.append({band : [date, racepoint, placed, out, coef, sector]})
-
-        PrintResults(results, self.yearpigeon, self.yearrace, self.racepoint, self.sector, self.coef, self.place)
-
+        PrintResults(self.resultwindow, results, userinfo, self.main.options.optionList, op)

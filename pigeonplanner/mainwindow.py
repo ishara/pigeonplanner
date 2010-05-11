@@ -712,7 +712,7 @@ class MainWindow:
             widgets.popup_menu(event, entries)
 
     def on_allresults_clicked(self, widget):
-        ResultWindow(self.main, self.parser.pigeons, self.database)
+        ResultWindow(self, self.parser.pigeons, self.database)
 
     def on_addresult_clicked(self, widget):
         self.menubar.set_sensitive(False)

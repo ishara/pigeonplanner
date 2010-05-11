@@ -73,6 +73,15 @@ class Configuration:
         self.__addOption('Printing', 'pigSex', 'True')
         self.__addOption('Printing', 'pigExtra', 'True')
         self.__addOption('Printing', 'pigImage', 'False')
+        self.__addOption('Printing', 'resCoef', 'True')
+        self.__addOption('Printing', 'resSector', 'True')
+        self.__addOption('Printing', 'resCategory', 'True')
+        self.__addOption('Printing', 'resType', 'True')
+        self.__addOption('Printing', 'resWeather', 'True')
+        self.__addOption('Printing', 'resWind', 'True')
+        self.__addOption('Printing', 'resComment', 'True')
+        self.__addOption('Printing', 'resColumnNames', 'True')
+        self.__addOption('Printing', 'resDate', 'True')
 
     def __addSection(self, name):
         '''

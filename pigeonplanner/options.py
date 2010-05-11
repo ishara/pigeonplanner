@@ -20,7 +20,7 @@ import configuration
 
 
 class ParsedOptions:
-    def __init__(self, theme, arrows, stats, toolbar, statusbar, update, language, runs, backup, interval, location, last, name, colour, sex, loft, strain, paper, layout, perName, perAddress, perPhone, perEmail, pigName, pigColour, pigSex, pigExtra, pigImage):
+    def __init__(self, theme, arrows, stats, toolbar, statusbar, update, language, runs, backup, interval, location, last, name, colour, sex, loft, strain, paper, layout, perName, perAddress, perPhone, perEmail, pigName, pigColour, pigSex, pigExtra, pigImage, resCoef, resSector, resCategory, resType, resWeather, resWind, resComment, resColumnNames, resDate):
         self.theme = theme
         self.arrows = arrows
         self.stats = stats
@@ -49,6 +49,15 @@ class ParsedOptions:
         self.pigSex = pigSex
         self.pigExtra = pigExtra
         self.pigImage = pigImage
+        self.resCoef = resCoef
+        self.resSector = resSector
+        self.resCategory = resCategory
+        self.resType = resType
+        self.resWeather = resWeather
+        self.resWind = resWind
+        self.resComment = resComment
+        self.resColumnNames = resColumnNames
+        self.resDate = resDate
 
 
 class GetOptions:
@@ -82,7 +91,17 @@ class GetOptions:
                                         self.conf.getboolean('Printing', 'pigColour'),
                                         self.conf.getboolean('Printing', 'pigSex'),
                                         self.conf.getboolean('Printing', 'pigExtra'),
-                                        self.conf.getboolean('Printing', 'pigImage'))
+                                        self.conf.getboolean('Printing', 'pigImage'),
+                                        self.conf.getboolean('Printing', 'resCoef'),
+                                        self.conf.getboolean('Printing', 'resSector'),
+                                        self.conf.getboolean('Printing', 'resCategory'),
+                                        self.conf.getboolean('Printing', 'resType'),
+                                        self.conf.getboolean('Printing', 'resWeather'),
+                                        self.conf.getboolean('Printing', 'resWind'),
+                                        self.conf.getboolean('Printing', 'resComment'),
+                                        self.conf.getboolean('Printing', 'resColumnNames'),
+                                        self.conf.getboolean('Printing', 'resDate'),
+                                )
 
     def write_default(self):
         '''
