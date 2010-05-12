@@ -252,11 +252,9 @@ class PhotoAlbum:
     def on_slideshow_toggled(self, widget):
         if widget.get_active():
             self.slide_button.set_stock_id(gtk.STOCK_MEDIA_STOP)
-            self.run_slideshow = True
-            self.slideshow_timer = gobject.timeout_add(2000, self.slideshow)
+            self.slideshow_timer = gobject.timeout_add(3000, self.slideshow)
         else:
             self.slide_button.set_stock_id(gtk.STOCK_MEDIA_PLAY)
-            self.run_slideshow = False
             gobject.source_remove(self.slideshow_timer)
 
     def slideshow(self):
@@ -267,10 +265,7 @@ class PhotoAlbum:
 
         self.set_picture(next)
 
-        if self.run_slideshow:
-            return True
-        else:
-            return False
+        return True
 
     def on_swin_size_allocate(self, scrolledwindow, allocation):
         if self.zoom_mode == ZOOM_BEST_FIT:
