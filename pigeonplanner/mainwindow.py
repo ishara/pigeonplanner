@@ -633,9 +633,7 @@ class MainWindow:
             # No pigeon is selected
             return
 
-        image = self.parser.pigeons[pindex].image
-        if image:
-            widgets.ImageWindow(image, self.main)
+        PhotoAlbum(self.main, self.parser, self.database, pindex)
 
     def on_eventimage_press(self, widget, event):
         if event.button == 3:

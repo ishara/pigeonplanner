@@ -46,7 +46,7 @@ class PhotoAlbum:
         2.00: '200%',
     }
 
-    def __init__(self, parent, parser, database):
+    def __init__(self, parent, parser, database, pindex=None):
         self.wTree = gtk.glade.XML(const.GLADEPHOTOALBUM)
         self.wTree.signal_autoconnect(self)
 
@@ -68,7 +68,15 @@ class PhotoAlbum:
         self.picture_no = len(self.iconview.get_model())
         self.current_picture = 0
         self.zoom_mode = ZOOM_FREE
-        self.iconview.select_path((0,))
+        if pindex:
+            path = tuple(index for index, row in enumerate(self.iconview.get_model()) if row[1] == pindex)
+        else:
+            path = (0,)
+        try:
+            self.iconview.select_path(path)
+        except:
+            # Original image is missing
+            pass
         self.set_zoom(1.0)
         self.zoom_fit_button.set_active(True)
 
