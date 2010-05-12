@@ -39,6 +39,7 @@ import pigeonparser
 import checks
 from logdialog import LogDialog
 from pedigree import DrawPedigree
+from photoalbum import PhotoAlbum
 from toolswindow import ToolsWindow
 from resultwindow import ResultWindow
 from optionsdialog import OptionsDialog
@@ -254,27 +255,7 @@ class MainWindow:
         self.srchentry.grab_focus()
 
     def menualbum_activate(self, widget):
-        store = gtk.ListStore(str, str, str, gtk.gdk.Pixbuf)
-        store.set_sort_column_id(0, gtk.SORT_ASCENDING)
-        self.iconview.set_model(store)
-        self.iconview.set_text_column(2)
-        self.iconview.set_pixbuf_column(3)
-
-        for pigeon in self.database.get_all_images():
-            if not pigeon[3]: continue
-
-            try:
-                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(pigeon[3], 96, 96)
-                store.append(["%s%s" %(pigeon[2], pigeon[1]), pigeon[0], "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
-            except gobject.GError:
-                logger.error("Photo album: Could not find original image for: %s/%s" %(pigeon[1], pigeon[2]))
-
-        if len(store) > 0:
-            self.labelImage.hide()
-        else:
-            self.labelImage.show()
-
-        self.photoalbum.show()
+        PhotoAlbum(self.main, self.parser, self.database)
 
     def menulog_activate(self, widget):
         LogDialog()
@@ -913,25 +894,6 @@ class MainWindow:
 
     def on_day_double_clicked(self, widget, data=None):
         self.hide_popup()
-
-    # Photo album callbacks
-    def on_albumclose_clicked(self, widget):
-        self.image.clear()
-        self.photoalbum.hide()
-
-    def on_iconview_changed(self, widget):
-        model = widget.get_model()
-
-        try:
-            path = widget.get_selected_items()[0]
-        except IndexError:
-            self.image.clear()
-            return
-
-        pindex = model[path][1]
-        image = self.parser.pigeons[pindex].image
-
-        self.image.set_from_pixbuf(gtk.gdk.pixbuf_new_from_file_at_size(image, 520, 460))
 
     # Statusdialog
     def on_btnStatus_clicked(self, widget):

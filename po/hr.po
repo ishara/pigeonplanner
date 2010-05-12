@@ -1,0 +1,1486 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-11 10:43+0200\n"
+"PO-Revision-Date: 2010-04-06 11:38+0100\n"
+"Last-Translator: Jakov Šredl <BR.pigeon@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../pigeonplanner/messages.py:19
+msgid "Pigeon Planner is already running."
+msgstr "Pigeon Planner već je pokrenut"
+
+#: ../pigeonplanner/messages.py:21 ../pigeonplanner/messages.py:29
+#: ../pigeonplanner/messages.py:32 ../pigeonplanner/messages.py:46
+#: ../pigeonplanner/messages.py:49 ../pigeonplanner/messages.py:52
+#: ../pigeonplanner/messages.py:55 ../pigeonplanner/messages.py:59
+#: ../pigeonplanner/messages.py:62 ../pigeonplanner/messages.py:65
+#: ../pigeonplanner/messages.py:72 ../pigeonplanner/messages.py:75
+#: ../pigeonplanner/messages.py:115 ../pigeonplanner/messages.py:118
+msgid "Error"
+msgstr "Pogrješka"
+
+#: ../pigeonplanner/messages.py:23
+msgid "Go to the website?"
+msgstr "Ideš na web stranice?"
+
+#: ../pigeonplanner/messages.py:24
+msgid ""
+"Pigeon Planner is free software. You don’t need to pay for using it. But if "
+"you like it, please consider donating to help improving it."
+msgstr ""
+"Pigeon Planner je besplatni program. Ne morate platiti za njegovu porabu. "
+"Ali ako želite, porazmislite o donaciji kojom ćete potpomoći unaprjeđivanju "
+"programa."
+
+#: ../pigeonplanner/messages.py:25
+msgid "Make a donation"
+msgstr "Uplati donaciju"
+
+#: ../pigeonplanner/messages.py:27
+msgid "Invalid image!"
+msgstr "Pogrješna slika!"
+
+#: ../pigeonplanner/messages.py:28
+msgid ""
+"This image is either not supported or corrupt, please choose another one."
+msgstr "Ova slika ili nije podržana ili je oštećena. Izaberi drugu datoteku."
+
+#: ../pigeonplanner/messages.py:30
+msgid "Loading image failed!"
+msgstr "Neuspjelo učitavanje slike!"
+
+#: ../pigeonplanner/messages.py:31
+msgid "Maybe you have renamed the image or moved it on your disk."
+msgstr "Možda si preimenovao sliku ili je premjestio na disk."
+
+#: ../pigeonplanner/messages.py:34
+msgid ""
+"This pigeon already exists, but isn't showing. Do you want to show it again?"
+msgstr "Golub već postoji, ali nije prikazan. Želiš li ga ponovo prikazati?"
+
+#: ../pigeonplanner/messages.py:36 ../pigeonplanner/messages.py:39
+msgid "Warning"
+msgstr "Upozorenje"
+
+#: ../pigeonplanner/messages.py:37
+msgid "This pigeon already exists. Overwrite it?"
+msgstr "Golub već postoji. Želite li ga ponovo prepisati?"
+
+#: ../pigeonplanner/messages.py:40
+msgid "This pigeon doesn't exist. Do you want to add it?"
+msgstr "Ovaj golub ne postoji. Želiš li ga dodati?"
+
+#: ../pigeonplanner/messages.py:42
+msgid "Adding pigeon"
+msgstr "Dodavanje goluba"
+
+#: ../pigeonplanner/messages.py:44 ../pigeonplanner/messages.py:47
+#: ../pigeonplanner/messages.py:50 ../pigeonplanner/messages.py:53
+#: ../pigeonplanner/messages.py:57 ../pigeonplanner/messages.py:60
+#: ../pigeonplanner/messages.py:63 ../pigeonplanner/messages.py:70
+#: ../pigeonplanner/messages.py:73
+msgid "Invalid input!"
+msgstr "Pogrješan unos"
+
+#: ../pigeonplanner/messages.py:45
+msgid "The ringnumber and year are necessary."
+msgstr "Broj prstena i godina su obavezni."
+
+#: ../pigeonplanner/messages.py:48
+msgid "Only numbers are accepted as year input."
+msgstr "Za upis godine prihvaćaju se samo brojevi."
+
+#: ../pigeonplanner/messages.py:51
+msgid "Check the length of the year."
+msgstr "Provjeri dužinu godine."
+
+#: ../pigeonplanner/messages.py:54
+msgid "Only numbers are allowed when adding multiple pigeons."
+msgstr "Dopušteni su samo brojevi kad se dodaje više golubova."
+
+#: ../pigeonplanner/messages.py:58
+msgid "At least the date and racepoint have to be entered."
+msgstr "Moraju biti upisani barem nadnevak i mjesto puštanja."
+
+#: ../pigeonplanner/messages.py:61
+msgid ""
+"The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
+"DD)."
+msgstr ""
+"Upisani nadnevak u neispravnom je formatu. Mora biti upisan u ISO formatu "
+"(GGGG-MM-DD)."
+
+#: ../pigeonplanner/messages.py:64
+msgid "The result you want to add already exists."
+msgstr "Rezultat koji želiš dodati već postoji."
+
+#: ../pigeonplanner/messages.py:66
+msgid "Removing the selected result"
+msgstr "Uklanjanje izabranog rezultata"
+
+#: ../pigeonplanner/messages.py:67 tmp/MainWindow.glade.h:9
+msgid "Are you sure?"
+msgstr "Jesi li siguran?"
+
+#: ../pigeonplanner/messages.py:68
+msgid "Remove result"
+msgstr "Ukloni rezultat"
+
+#: ../pigeonplanner/messages.py:71
+msgid "The name has to be entered."
+msgstr "Ime mora biti upisano."
+
+#: ../pigeonplanner/messages.py:74
+msgid "The persoon you want to add already exists."
+msgstr "Osoba koju želiš dodati već postoji."
+
+#: ../pigeonplanner/messages.py:76
+#, python-format
+msgid "Removing '%s'"
+msgstr "Uklanjanje '%s'"
+
+#: ../pigeonplanner/messages.py:77
+msgid "Are you sure you want to remove this person from your addresses?"
+msgstr "Jesi li siguran da želiš ukloniti ovu osobu iz svog adresara?"
+
+#: ../pigeonplanner/messages.py:78
+msgid "Remove address"
+msgstr "Uklanjanje adrese"
+
+#: ../pigeonplanner/messages.py:80
+#, python-format
+msgid "Removing '%(item)s' from '%(dataset)s'."
+msgstr "Uklanjanje '%(stavak)a' iz '%skupa podataka'."
+
+#: ../pigeonplanner/messages.py:81
+msgid "Are you sure you want to remove this item?"
+msgstr "Jesi li siguran da želiš ukloniti ovu stavku?"
+
+#: ../pigeonplanner/messages.py:82
+msgid "Remove item"
+msgstr "Uklanjanje stavke"
+
+#: ../pigeonplanner/messages.py:84
+msgid "Removing database"
+msgstr "Uklanjanje baze podataka"
+
+#: ../pigeonplanner/messages.py:85
+msgid "Are you sure you want to remove the database? All data will be lost."
+msgstr ""
+"Jesi li siguran da želiš ukloniti bazu podataka? Svi podatci bit će "
+"izgubljeni."
+
+#: ../pigeonplanner/messages.py:86
+msgid "Remove database"
+msgstr "Uklanjanje baze podataka"
+
+#: ../pigeonplanner/messages.py:88
+msgid ""
+"Click \"OK\" to close the program. A new database will be created the next "
+"time you start the program again."
+msgstr ""
+"Pritisni \"OK\" za zatvaranje programa. Nova baza podataka bit će kreirana "
+"sljedeći put kad pokreneš program."
+
+#: ../pigeonplanner/messages.py:90 ../pigeonplanner/messages.py:126
+msgid "Restart required"
+msgstr "Obavezno ponovno pokretanje"
+
+#: ../pigeonplanner/messages.py:92
+msgid "Optimization has been completed."
+msgstr "Optimizacija je završena."
+
+#: ../pigeonplanner/messages.py:94 ../pigeonplanner/messages.py:98
+#: ../pigeonplanner/messages.py:104 tmp/DBAssistant.glade.h:6
+msgid "Completed!"
+msgstr "Gotovo!"
+
+#: ../pigeonplanner/messages.py:96
+msgid "The backup was successfully created."
+msgstr "Sigurnosna kopija je kreirana."
+
+#: ../pigeonplanner/messages.py:99
+msgid "There was an error making the backup."
+msgstr "Došlo je do pogrješke pri stvaranju sigurnosne kopije."
+
+#: ../pigeonplanner/messages.py:101 ../pigeonplanner/messages.py:107
+msgid "Failed!"
+msgstr "Neuspjelo!"
+
+#: ../pigeonplanner/messages.py:102
+msgid ""
+"The backup was successfully restored.\n"
+"Restart the program."
+msgstr ""
+"Sigurnosna kopija uspješno je povraćena. \n"
+"Restartaj program."
+
+#: ../pigeonplanner/messages.py:105
+msgid "There was an error restoring the backup."
+msgstr "Došlo je do pogrješke pri vraćanju sigurnosne kopije."
+
+#: ../pigeonplanner/messages.py:109
+msgid "No personal information found."
+msgstr "Nisu pronađene osobne informacije."
+
+#: ../pigeonplanner/messages.py:110
+msgid ""
+"This will be shown on top of the printed pedigree.\n"
+"Do you want to add it now?"
+msgstr ""
+"Ovo će se prikazati na vrhu ispisanog rodovnika. \n"
+"Želiš li to dodati sada?"
+
+#: ../pigeonplanner/messages.py:111
+msgid "Personal"
+msgstr "Osobno"
+
+#: ../pigeonplanner/messages.py:113
+msgid "Error printing the pedigree"
+msgstr "Pogrješka pri ispisu rodovnika"
+
+#: ../pigeonplanner/messages.py:116
+msgid "An error occured in the print operation!"
+msgstr ""
+
+#: ../pigeonplanner/messages.py:117
+msgid "See the logfile (File->Logfile viewer) for more info."
+msgstr ""
+
+#: ../pigeonplanner/messages.py:120
+msgid ""
+"This will set back all the settings to the default values.\n"
+"Are you sure?"
+msgstr ""
+"Ovime će sve postavke biti vraćene na inicijalne vrijednosti. \n"
+"Jesi li siguran?"
+
+#: ../pigeonplanner/messages.py:122
+msgid "Default settings"
+msgstr "Inicijalne postavke"
+
+#: ../pigeonplanner/messages.py:124
+msgid "Pigeon Planner needs to be restarted for the changes to take effect."
+msgstr ""
+"Pigeon Planner mora se ponovo pokrenuti da bi učinak promjena bio vidljiv."
+
+#: ../pigeonplanner/messages.py:128
+msgid "Update available!"
+msgstr "Dostupna je nadogradnja!"
+
+#: ../pigeonplanner/messages.py:129
+msgid "There is an update available, do you want to download it now?"
+msgstr "Dostupna je nadogradnja, želiš li sada pokrenuti download?"
+
+#: ../pigeonplanner/messages.py:130 ../pigeonplanner/toolswindow.py:57
+msgid "Update"
+msgstr "Nadogradnja"
+
+#: ../pigeonplanner/messages.py:132
+msgid "Error trying to get information. Are you connected to the internet?"
+msgstr "Pogrješka pri dohvatu podataka. Jesi li spojen na internet?"
+
+#: ../pigeonplanner/messages.py:133
+msgid ""
+"A new version is available. Please go to the Pigeon Planner website by "
+"clicking the link below and download the latest version"
+msgstr ""
+"Dostupna je nova inačica. Klikni na poveznicu prema web stranici i pokreni "
+"download posljednje inačice"
+
+#: ../pigeonplanner/messages.py:134
+msgid "You already have the latest version installed."
+msgstr "Već imaš instaliranu posljednju inačicu."
+
+#: ../pigeonplanner/messages.py:135
+msgid "This isn't normal, or you must be running a development version"
+msgstr "Ovo nije uobičajeno, ili moraš pokrenuti razvojnu inačicu"
+
+#: ../pigeonplanner/logdialog.py:34
+msgid "Logfile Viewer"
+msgstr "Preglednik log datoteke"
+
+#: ../pigeonplanner/logdialog.py:94
+msgid "If there are any errors, mail the entire text to:"
+msgstr "Dođe li do pogrješke, pošalji e-poštom cijeli tekst na:"
+
+#: ../pigeonplanner/pedigreewindow.py:84
+msgid "Save this pedigree"
+msgstr "Pohrani ovaj rodovnik"
+
+#: ../pigeonplanner/pedigreewindow.py:86
+msgid "View this pedigree"
+msgstr "Pogledaj ovaj rodovnik"
+
+#: ../pigeonplanner/pedigreewindow.py:88
+msgid "Print this pedigree"
+msgstr "Ispiši ovaj rodovnik"
+
+#: ../pigeonplanner/pedigreewindow.py:90 ../pigeonplanner/printing.py:113
+#: ../pigeonplanner/resultwindow.py:76
+msgid "Close this window"
+msgstr "Zatvori ovaj prozor"
+
+#: ../pigeonplanner/printing.py:101
+msgid "Shows the first page"
+msgstr ""
+
+#: ../pigeonplanner/printing.py:103
+msgid "Shows previous page"
+msgstr ""
+
+#: ../pigeonplanner/printing.py:105
+msgid "Shows the next page"
+msgstr ""
+
+#: ../pigeonplanner/printing.py:107
+msgid "Shows the last page"
+msgstr ""
+
+#: ../pigeonplanner/printing.py:109
+msgid "Zooms the page in"
+msgstr ""
+
+#: ../pigeonplanner/printing.py:111
+msgid "Zooms the page out"
+msgstr ""
+
+#: ../pigeonplanner/printing.py:117
+msgid "Zooms to fit the whole page"
+msgstr ""
+
+#: ../pigeonplanner/printing.py:321
+msgid "Save as..."
+msgstr "Pohrani kao..."
+
+#: ../pigeonplanner/printing.py:407 tmp/PedigreeWindow.glade.h:5
+msgid "Pedigree of:"
+msgstr "Rodovnik od:"
+
+#: ../pigeonplanner/printing.py:673 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/mainwindow.py:1095 ../pigeonplanner/mainwindow.py:1123
+#: ../pigeonplanner/mainwindow.py:1131 ../pigeonplanner/mainwindow.py:1139
+#: ../pigeonplanner/mainwindow.py:1147 tmp/PedigreeWindow.glade.h:1
+msgid "Band no."
+msgstr "Broj prstena"
+
+#: ../pigeonplanner/printing.py:674 ../pigeonplanner/printing.py:896
+#: ../pigeonplanner/resultwindow.py:82 ../pigeonplanner/mainwindow.py:1153
+#: tmp/MainWindow.glade.h:21
+msgid "Date"
+msgstr "Nadnevak"
+
+#: ../pigeonplanner/printing.py:675 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/mainwindow.py:1153 tmp/MainWindow.glade.h:43
+#: tmp/ResultWindow.glade.h:6
+msgid "Racepoint"
+msgstr "Mjesto puštanja"
+
+#: ../pigeonplanner/printing.py:676 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/mainwindow.py:1153 tmp/MainWindow.glade.h:42
+msgid "Placed"
+msgstr "Smješteno"
+
+#: ../pigeonplanner/printing.py:677 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/mainwindow.py:1153 tmp/MainWindow.glade.h:38
+msgid "Out of"
+msgstr "Iz"
+
+#: ../pigeonplanner/printing.py:678
+msgid "Coef."
+msgstr "Koef."
+
+#: ../pigeonplanner/printing.py:679 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/mainwindow.py:1153 tmp/MainWindow.glade.h:50
+#: tmp/OptionsDialog.glade.h:39 tmp/ResultWindow.glade.h:7
+msgid "Sector"
+msgstr "Sektor"
+
+#: ../pigeonplanner/printing.py:680 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/mainwindow.py:1153 tmp/MainWindow.glade.h:61
+#: tmp/OptionsDialog.glade.h:48
+msgid "Type"
+msgstr "Tip"
+
+#: ../pigeonplanner/printing.py:681 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/mainwindow.py:1153 tmp/MainWindow.glade.h:12
+#: tmp/OptionsDialog.glade.h:14
+msgid "Category"
+msgstr "Kategorija"
+
+#: ../pigeonplanner/printing.py:682 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:181
+#: ../pigeonplanner/toolswindow.py:223 ../pigeonplanner/toolswindow.py:249
+#: ../pigeonplanner/mainwindow.py:1153 tmp/MainWindow.glade.h:63
+#: tmp/OptionsDialog.glade.h:49
+msgid "Weather"
+msgstr "Vrijeme"
+
+#: ../pigeonplanner/printing.py:683 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:183
+#: ../pigeonplanner/toolswindow.py:225 ../pigeonplanner/toolswindow.py:251
+#: ../pigeonplanner/mainwindow.py:1153 tmp/MainWindow.glade.h:64
+#: tmp/OptionsDialog.glade.h:50
+msgid "Wind"
+msgstr "Vjetar"
+
+#: ../pigeonplanner/printing.py:684 ../pigeonplanner/resultwindow.py:82
+#: ../pigeonplanner/mainwindow.py:1153 tmp/MainWindow.glade.h:19
+#: tmp/OptionsDialog.glade.h:20 tmp/ToolsWindow.glade.h:23
+msgid "Comment"
+msgstr "Komentar"
+
+#: ../pigeonplanner/printing.py:772
+#, fuzzy
+msgid "Page"
+msgstr "Mjesto"
+
+#: ../pigeonplanner/printing.py:887 ../pigeonplanner/printing.py:909
+#: ../pigeonplanner/printing.py:910 ../pigeonplanner/toolswindow.py:64
+msgid "Velocity"
+msgstr "Brzina"
+
+#: ../pigeonplanner/printing.py:898
+msgid "Released"
+msgstr "Pušteni"
+
+#: ../pigeonplanner/printing.py:900
+msgid "Distance"
+msgstr "Udaljenost"
+
+#: ../pigeonplanner/printing.py:915 ../pigeonplanner/printing.py:916
+#: ../pigeonplanner/toolswindow.py:64
+msgid "Flight Time"
+msgstr "Vrijeme leta"
+
+#: ../pigeonplanner/printing.py:921 ../pigeonplanner/printing.py:922
+#: ../pigeonplanner/toolswindow.py:64
+msgid "Time of Arrival"
+msgstr "Vrijeme dolaska"
+
+#: ../pigeonplanner/widgets.py:207
+msgid "translator-credits"
+msgstr "Iznos za prevoditelja"
+
+#: ../pigeonplanner/widgets.py:367 tmp/ToolsWindow.glade.h:22
+msgid "Choose a directory where to save the backup"
+msgstr "Izaberi direktorij u koji će se pohraniti sigurnosna kopija"
+
+#: ../pigeonplanner/widgets.py:369 tmp/ToolsWindow.glade.h:43
+msgid "Select a directory"
+msgstr "Izaberi direktorij"
+
+#: ../pigeonplanner/widgets.py:375 ../pigeonplanner/toolswindow.py:57
+#: tmp/ToolsWindow.glade.h:17
+msgid "Backup"
+msgstr "Sigurnosna kopija"
+
+#: ../pigeonplanner/widgets.py:384 tmp/ToolsWindow.glade.h:21
+msgid "Choose a Pigeon Planner backup file to restore"
+msgstr "Izaberi datoteku sigurnosne kopije koja će biti povraćena"
+
+#: ../pigeonplanner/widgets.py:386 tmp/ToolsWindow.glade.h:48
+msgid "Warning! This will overwrite the existing database!"
+msgstr "Pozor! Ovo će prepisati postojeću bazu podataka!"
+
+#: ../pigeonplanner/widgets.py:388 tmp/ToolsWindow.glade.h:44
+msgid "Select a valid backup file"
+msgstr "Izaberi ispravnu sigurnosnu kopiju"
+
+#: ../pigeonplanner/widgets.py:396 tmp/ToolsWindow.glade.h:41
+msgid "Restore"
+msgstr "Povrati"
+
+#: ../pigeonplanner/widgets.py:427
+msgid "View image: "
+msgstr "Pogledaj sliku:"
+
+#: ../pigeonplanner/widgets.py:444
+msgid "Could not find the original image, full size image is not available."
+msgstr "Ne mogu ponaći originalnu sliku, slika u punoj veličini nije dostupna."
+
+#: ../pigeonplanner/widgets.py:452
+msgid "Click to close this window"
+msgstr "Klikni za zatvaranje prozora"
+
+#: ../pigeonplanner/resultwindow.py:68
+#, fuzzy
+msgid "Save these results"
+msgstr "Pohrani ovaj rodovnik"
+
+#: ../pigeonplanner/resultwindow.py:70
+#, fuzzy
+msgid "View these results"
+msgstr "Prikaz svih rezultata"
+
+#: ../pigeonplanner/resultwindow.py:72
+#, fuzzy
+msgid "Print these results"
+msgstr "Uklanjanje izabranog rezultata"
+
+#: ../pigeonplanner/resultwindow.py:73 ../pigeonplanner/mainwindow.py:1053
+msgid "_Filter..."
+msgstr "_Filter..."
+
+#: ../pigeonplanner/resultwindow.py:74 ../pigeonplanner/mainwindow.py:1054
+msgid "Set filter options"
+msgstr "Postavi opcije filtera"
+
+#: ../pigeonplanner/resultwindow.py:82 ../pigeonplanner/mainwindow.py:1095
+#: ../pigeonplanner/mainwindow.py:1123 ../pigeonplanner/mainwindow.py:1131
+#: ../pigeonplanner/mainwindow.py:1139 ../pigeonplanner/mainwindow.py:1147
+#: tmp/MainWindow.glade.h:65
+msgid "Year"
+msgstr "Godina"
+
+#: ../pigeonplanner/resultwindow.py:82 ../pigeonplanner/mainwindow.py:1153
+#: tmp/OptionsDialog.glade.h:18 tmp/ResultWindow.glade.h:2
+msgid "Coefficient"
+msgstr "Koeficijent"
+
+#: ../pigeonplanner/optionsdialog.py:147
+msgid "days"
+msgstr "dani"
+
+#: ../pigeonplanner/optionsdialog.py:149
+msgid "day"
+msgstr "dan"
+
+#: ../pigeonplanner/toolswindow.py:51 tmp/ToolsWindow.glade.h:47
+msgid "Tools"
+msgstr "Alati"
+
+#: ../pigeonplanner/toolswindow.py:57
+msgid "Velocity calculator"
+msgstr "Proračun brzine"
+
+#: ../pigeonplanner/toolswindow.py:57
+msgid "Datasets"
+msgstr "Skupovi podataka"
+
+#: ../pigeonplanner/toolswindow.py:57
+msgid "Addresses"
+msgstr "Adrese"
+
+#: ../pigeonplanner/toolswindow.py:57 ../pigeonplanner/mainwindow.py:1065
+msgid "Statistics"
+msgstr "Statistika"
+
+#: ../pigeonplanner/toolswindow.py:57
+msgid "Database"
+msgstr "Baza podataka"
+
+#: ../pigeonplanner/toolswindow.py:69 ../pigeonplanner/mainwindow.py:1095
+#: ../pigeonplanner/mainwindow.py:1123 tmp/OptionsDialog.glade.h:30
+#: tmp/ToolsWindow.glade.h:35
+msgid "Name"
+msgstr "Ime"
+
+#: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:167
+#: ../pigeonplanner/toolswindow.py:209 ../pigeonplanner/toolswindow.py:235
+#: tmp/MainWindow.glade.h:18
+msgid "Colours"
+msgstr "Boje"
+
+#: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:175
+#: ../pigeonplanner/toolswindow.py:217 ../pigeonplanner/toolswindow.py:243
+msgid "Racepoints"
+msgstr "Mjesta puštanja"
+
+#: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:169
+#: ../pigeonplanner/toolswindow.py:211 ../pigeonplanner/toolswindow.py:237
+msgid "Sectors"
+msgstr "Sektori"
+
+#: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:171
+#: ../pigeonplanner/toolswindow.py:213 ../pigeonplanner/toolswindow.py:239
+msgid "Types"
+msgstr "Tipovi"
+
+#: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:173
+#: ../pigeonplanner/toolswindow.py:215 ../pigeonplanner/toolswindow.py:241
+msgid "Categories"
+msgstr "Kategorije"
+
+#: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:177
+#: ../pigeonplanner/toolswindow.py:219 ../pigeonplanner/toolswindow.py:245
+#: tmp/MainWindow.glade.h:55
+msgid "Strains"
+msgstr "Loze"
+
+#: ../pigeonplanner/toolswindow.py:93 ../pigeonplanner/toolswindow.py:179
+#: ../pigeonplanner/toolswindow.py:221 ../pigeonplanner/toolswindow.py:247
+#: tmp/MainWindow.glade.h:34
+msgid "Lofts"
+msgstr "Golubinjaci"
+
+#: ../pigeonplanner/toolswindow.py:459
+msgid "Number of pigeons"
+msgstr "Broj golubova"
+
+#: ../pigeonplanner/toolswindow.py:460
+msgid "Number of cocks"
+msgstr "Broj mužjaka"
+
+#: ../pigeonplanner/toolswindow.py:461
+msgid "Number of hens"
+msgstr "Broj ženki"
+
+#: ../pigeonplanner/toolswindow.py:462
+msgid "Number of young birds"
+msgstr "Broj mladih"
+
+#: ../pigeonplanner/toolswindow.py:463
+msgid "Number of results"
+msgstr "Broj rezultata"
+
+#: ../pigeonplanner/mainwindow.py:63
+msgid "cock"
+msgstr "mužjak"
+
+#: ../pigeonplanner/mainwindow.py:63
+msgid "hen"
+msgstr "ženka"
+
+#: ../pigeonplanner/mainwindow.py:63
+msgid "young bird"
+msgstr "mladi"
+
+#: ../pigeonplanner/mainwindow.py:80 ../pigeonplanner/mainwindow.py:1045
+msgid "_Pedigree"
+msgstr "_Rodovnik"
+
+#: ../pigeonplanner/mainwindow.py:153
+msgid "Enter the bandnumber of the pigeon"
+msgstr "Unesi broj prstena"
+
+#: ../pigeonplanner/mainwindow.py:155
+msgid "Enter the year of the pigeon"
+msgstr "Unesi godinu goluba"
+
+#: ../pigeonplanner/mainwindow.py:157
+msgid "Click here to set the status of the pigeon"
+msgstr "Klikni ovdje da postaviš status goluba"
+
+#: ../pigeonplanner/mainwindow.py:159
+msgid "Enter a name for the pigeon"
+msgstr "Upiši ime goluba"
+
+#: ../pigeonplanner/mainwindow.py:161
+msgid "Click here to add an image"
+msgstr "Klikni ovdje da dodaš sliku"
+
+#: ../pigeonplanner/mainwindow.py:163
+msgid "Search through the list of cocks"
+msgstr "Pretraži listu mužjaka"
+
+#: ../pigeonplanner/mainwindow.py:165
+msgid "Search through the list of hens"
+msgstr "Pretraži listu ženki"
+
+#: ../pigeonplanner/mainwindow.py:240
+msgid "Create backup"
+msgstr "Kreiraj sigurnosnu kopiju"
+
+#: ../pigeonplanner/mainwindow.py:245
+msgid "Restore backup"
+msgstr "Povrati sigurnosnu kopiju"
+
+#: ../pigeonplanner/mainwindow.py:723
+msgid "Add result for:"
+msgstr "Dodaj rezultat za:"
+
+#: ../pigeonplanner/mainwindow.py:761
+msgid "Edit result for:"
+msgstr "Izmijeni rezultat za:"
+
+#: ../pigeonplanner/mainwindow.py:1019
+msgid "_File"
+msgstr "_Datoteka"
+
+#: ../pigeonplanner/mainwindow.py:1020 ../pigeonplanner/mainwindow.py:1025
+msgid "_Backup"
+msgstr "_Sigurnosna kopija"
+
+#: ../pigeonplanner/mainwindow.py:1021
+msgid "_Pigeon"
+msgstr "_Golub"
+
+#: ../pigeonplanner/mainwindow.py:1022
+msgid "_Edit"
+msgstr "_Izmjena"
+
+#: ../pigeonplanner/mainwindow.py:1023
+msgid "_View"
+msgstr "_Pregled"
+
+#: ../pigeonplanner/mainwindow.py:1024
+msgid "_Help"
+msgstr "_Pomoć"
+
+#: ../pigeonplanner/mainwindow.py:1026
+msgid "Create a backup of your database"
+msgstr "Kreiraj sigurnosnu kopiju baze podataka"
+
+#: ../pigeonplanner/mainwindow.py:1027
+msgid "_Restore"
+msgstr "_Povrati"
+
+#: ../pigeonplanner/mainwindow.py:1028
+msgid "Restore a backup of your database"
+msgstr "Povrati sigurnosnu kopiju baze podataka"
+
+#: ../pigeonplanner/mainwindow.py:1030
+msgid "Quit the program"
+msgstr "Izlaz iz programa"
+
+#: ../pigeonplanner/mainwindow.py:1032
+msgid "Add a new pigeon"
+msgstr "Dodaj novog goluba"
+
+#: ../pigeonplanner/mainwindow.py:1033
+msgid "Add ran_ge"
+msgstr "Dodaj ras_pon"
+
+#: ../pigeonplanner/mainwindow.py:1034 tmp/MainWindow.glade.h:8
+msgid "Add a range of pigeons"
+msgstr "Dodaj raspon golubova"
+
+#: ../pigeonplanner/mainwindow.py:1035
+msgid "_Photo Album"
+msgstr "_Foto album"
+
+#: ../pigeonplanner/mainwindow.py:1036
+msgid "View the images of your pigeons"
+msgstr "Prikaz slika golubova"
+
+#: ../pigeonplanner/mainwindow.py:1037
+msgid "_Logfile Viewer"
+msgstr "_Preglednik log datoteke"
+
+#: ../pigeonplanner/mainwindow.py:1038
+msgid "See the logfile"
+msgstr "Pogledaj log datoteku"
+
+#: ../pigeonplanner/mainwindow.py:1039
+msgid "_Find..."
+msgstr "_Pronađi..."
+
+#: ../pigeonplanner/mainwindow.py:1040
+msgid "Search through the list of pigeons"
+msgstr "Pretraži listu golubova"
+
+#: ../pigeonplanner/mainwindow.py:1042
+msgid "Edit the selected pigeon"
+msgstr "Izmjeni podatke o odabranom golubu"
+
+#: ../pigeonplanner/mainwindow.py:1044
+msgid "Remove the selected pigeon"
+msgstr "Ukloni odabranog goluba"
+
+#: ../pigeonplanner/mainwindow.py:1046
+msgid "View the detailed pedigree of this pigeon"
+msgstr "Prikaz detaljnog rodovnika ovoga goluba"
+
+#: ../pigeonplanner/mainwindow.py:1047
+msgid "Add resul_t"
+msgstr "Dodaj rezulta_t"
+
+#: ../pigeonplanner/mainwindow.py:1048
+msgid "Add a new result for this pigeon"
+msgstr "Dodaj novi rezultat za ovog goluba"
+
+#: ../pigeonplanner/mainwindow.py:1049
+msgid "_Tools"
+msgstr "_Alati"
+
+#: ../pigeonplanner/mainwindow.py:1050
+msgid "Various tools"
+msgstr "Različiti alati"
+
+#: ../pigeonplanner/mainwindow.py:1052
+msgid "Configure the application"
+msgstr "Konfiguriraj program"
+
+#: ../pigeonplanner/mainwindow.py:1055
+msgid "_Website"
+msgstr "_Web stranica"
+
+#: ../pigeonplanner/mainwindow.py:1056
+msgid "Go to the website for more information"
+msgstr "Pogledaj web stranicu za više informacija"
+
+#: ../pigeonplanner/mainwindow.py:1057
+msgid "Forum"
+msgstr "Forum"
+
+#: ../pigeonplanner/mainwindow.py:1058
+msgid "Go to the forum for online help"
+msgstr "Potraži pomoć na forumu"
+
+#: ../pigeonplanner/mainwindow.py:1060
+msgid "About this application"
+msgstr "O ovom programu"
+
+#: ../pigeonplanner/mainwindow.py:1063
+msgid "Navigation arrows"
+msgstr "Strjelice za navigaciju"
+
+#: ../pigeonplanner/mainwindow.py:1064 tmp/OptionsDialog.glade.h:42
+msgid "Show or hide the navigation arrows"
+msgstr "Prikaži ili sakrij strjelice za navigaciju"
+
+#: ../pigeonplanner/mainwindow.py:1066 tmp/OptionsDialog.glade.h:41
+msgid "Show or hide pigeon statistics"
+msgstr "Prikaži ili sakrij statistiku golubova"
+
+#: ../pigeonplanner/mainwindow.py:1067
+msgid "Toolbar"
+msgstr "Alatna traka"
+
+#: ../pigeonplanner/mainwindow.py:1068 tmp/OptionsDialog.glade.h:44
+msgid "Show or hide the toolbar"
+msgstr "Prikaži ili sakrij alatnu traku"
+
+#: ../pigeonplanner/mainwindow.py:1069
+msgid "Statusbar"
+msgstr "Statusna traka"
+
+#: ../pigeonplanner/mainwindow.py:1070 tmp/OptionsDialog.glade.h:43
+msgid "Show or hide the statusbar"
+msgstr "Prikaži ili sakrij statusnu traku"
+
+#: ../pigeonplanner/mainwindow.py:1095 tmp/MainWindow.glade.h:17
+#: tmp/OptionsDialog.glade.h:19
+msgid "Colour"
+msgstr "Boja"
+
+#: ../pigeonplanner/mainwindow.py:1095 tmp/MainWindow.glade.h:51
+#: tmp/OptionsDialog.glade.h:40
+msgid "Sex"
+msgstr "Spol"
+
+#: ../pigeonplanner/mainwindow.py:1095 tmp/MainWindow.glade.h:33
+#: tmp/OptionsDialog.glade.h:28
+msgid "Loft"
+msgstr "Golubinjak"
+
+#: ../pigeonplanner/mainwindow.py:1095 tmp/MainWindow.glade.h:54
+#: tmp/OptionsDialog.glade.h:47
+msgid "Strain"
+msgstr "Loza"
+
+#: ../pigeonplanner/mainwindow.py:1139
+msgid "Common parent"
+msgstr "Zajednički roditelj"
+
+#: ../pigeonplanner/mainwindow.py:1913
+msgid "Images"
+msgstr "Slike"
+
+#: tmp/DBAssistant.glade.h:1
+msgid "<b><i><big>Update complete</big></i></b>"
+msgstr "<b><i><big>Nadogradnja je dovršena</big></i></b>"
+
+#: tmp/DBAssistant.glade.h:2
+msgid "<b><i><big>Update failed</big></i></b>"
+msgstr "<b><i><big>Nadogradnja nije uspjela</big></i></b>"
+
+#: tmp/DBAssistant.glade.h:3
+msgid "<b><i><big>Update required</big></i></b>"
+msgstr "<b><i><big>Obavezna nadogradnja</big></i></b>"
+
+#: tmp/DBAssistant.glade.h:4
+msgid "<b><i><big>Updating database...</big></i></b>"
+msgstr "<b><i><big>Nadogradnja baze podataka...</big></i></b>"
+
+#: tmp/DBAssistant.glade.h:5
+msgid "Cleaning up..."
+msgstr "Čišćenje..."
+
+#: tmp/DBAssistant.glade.h:7
+msgid "Database operations:"
+msgstr "Operacije nad bazom podataka:"
+
+#: tmp/DBAssistant.glade.h:8
+msgid "Database update"
+msgstr "Nadogradnja baze podataka"
+
+#: tmp/DBAssistant.glade.h:9
+msgid "Doing the database operations..."
+msgstr "Izvršenje operacija nad bazom podataka..."
+
+#: tmp/DBAssistant.glade.h:10
+msgid "Making a backup..."
+msgstr "Izrada sigurnosne kopije..."
+
+#: tmp/DBAssistant.glade.h:11
+msgid ""
+"Pigeon Planner failed to upgrade the database.\n"
+"\n"
+"A backup has been restored so you can keep using the previous version.\n"
+"\n"
+"An errorlog will be created when you close this window."
+msgstr ""
+"Pigeon Planner nije uspio nadograditi bazu podataka.\n"
+"\n"
+"Povraćena je sigurnosna kopija tako da možeš koristiti prethodnu inačicu.\n"
+"\n"
+"Errorlog datoteka bit će kreirana kad zatvoriš ovaj prozor."
+
+#: tmp/DBAssistant.glade.h:16
+msgid ""
+"Pigeon Planner needs to update the current database.\n"
+"\n"
+"This can take a while depending on the operation and the amount of data.\n"
+"\n"
+"\n"
+"Note: Older versions of Pigeon Planner won't work anymore."
+msgstr ""
+"Pigeon Planner mora nadograditi postojeću bazu podataka .\n"
+"\n"
+"Ovo će trajati ovisno o operacijama i količini podataka.\n"
+"\n"
+"\n"
+"Opaska: Starija inačica Pigeon Plannera više neće raditi."
+
+#: tmp/DBAssistant.glade.h:22
+msgid "Start"
+msgstr "Pokreni"
+
+#: tmp/DBAssistant.glade.h:23
+msgid "The database update is complete. Pigeon Planner will now start."
+msgstr ""
+"Nadogradnja baze podataka je dovršena. Pigeon Planner će se sad pokrenuti."
+
+#: tmp/MainWindow.glade.h:1
+msgid "<b>Brothers and sisters</b>"
+msgstr "<b>Braća i sestre</b>"
+
+#: tmp/MainWindow.glade.h:2
+msgid "<b>Details of pigeon</b>"
+msgstr "<b>Detalji o golubu</b>"
+
+#: tmp/MainWindow.glade.h:3
+msgid "<b>Half brothers and sisters</b>"
+msgstr "<b>Polubraća i polusestre</b>"
+
+#: tmp/MainWindow.glade.h:4
+msgid "<b>Offspring</b>"
+msgstr "<b>Potomstvo</b>"
+
+#: tmp/MainWindow.glade.h:5
+msgid "<b>Pedigree dam</b>"
+msgstr "<b>Rodovnik majke</b>"
+
+#: tmp/MainWindow.glade.h:6
+msgid "<b>Pedigree sire</b>"
+msgstr "<b>Rodovnik oca</b>"
+
+#: tmp/MainWindow.glade.h:7
+msgid "<b>Results of pigeon</b>"
+msgstr "<b>Rezultati goluba</b>"
+
+#: tmp/MainWindow.glade.h:10
+msgid "Band numbers"
+msgstr "Brojevi prstenova"
+
+#: tmp/MainWindow.glade.h:11
+msgid "Buyer"
+msgstr "Kupac"
+
+#: tmp/MainWindow.glade.h:13
+msgid "Choose a status for this pigeon:"
+msgstr "Izaberi status za ovoga goluba:"
+
+#: tmp/MainWindow.glade.h:14
+msgid "Choose an image..."
+msgstr "Izaberi sliku..."
+
+#: tmp/MainWindow.glade.h:15
+msgid "Clear all filters"
+msgstr ""
+
+#: tmp/MainWindow.glade.h:16
+msgid "Cocks"
+msgstr "Mužjaci"
+
+#: tmp/MainWindow.glade.h:20 tmp/PedigreeWindow.glade.h:2
+msgid "Dam"
+msgstr "Majka"
+
+#: tmp/MainWindow.glade.h:22
+msgid ""
+"Dead\n"
+"Active\n"
+"Sold\n"
+"Lost"
+msgstr ""
+"Mrtav\n"
+"Aktivan\n"
+"Prodan\n"
+"Izgubljen"
+
+#: tmp/MainWindow.glade.h:26 tmp/OptionsDialog.glade.h:23
+msgid "Extra"
+msgstr "Dodatno"
+
+#: tmp/MainWindow.glade.h:27
+msgid "Extra info"
+msgstr "Dodatne informacije"
+
+#: tmp/MainWindow.glade.h:28
+msgid "Filter pigeons"
+msgstr "Filter golubova"
+
+#: tmp/MainWindow.glade.h:29
+msgid "From"
+msgstr "Od"
+
+#: tmp/MainWindow.glade.h:30
+msgid "Hens"
+msgstr "Ženke"
+
+#: tmp/MainWindow.glade.h:31
+msgid "Keep results of this pigeon"
+msgstr "Zadrži rezultate ovoga goluba"
+
+#: tmp/MainWindow.glade.h:32
+msgid "Keep this pigeon in the pedigree"
+msgstr "Zadrži ovoga goluba u rodovniku"
+
+#: tmp/MainWindow.glade.h:35
+msgid "Names"
+msgstr "Imena"
+
+#: tmp/MainWindow.glade.h:36
+msgid "No extra information available."
+msgstr "Dodatne informacije nisu dotupne."
+
+#: tmp/MainWindow.glade.h:37
+msgid "Only show:"
+msgstr "Prikaži samo:"
+
+#: tmp/MainWindow.glade.h:39 tmp/OptionsDialog.glade.h:34
+#: tmp/PedigreeWindow.glade.h:4
+msgid "Pedigree"
+msgstr "Rodovnik"
+
+#: tmp/MainWindow.glade.h:40
+msgid "Photo Album"
+msgstr "Foto album"
+
+#: tmp/MainWindow.glade.h:41
+msgid "Pigeon status"
+msgstr "Status goluba"
+
+#: tmp/MainWindow.glade.h:44
+msgid "Relatives"
+msgstr "Srodnici"
+
+#: tmp/MainWindow.glade.h:45
+msgid "Remove pigeon"
+msgstr "Ukloni goluba"
+
+#: tmp/MainWindow.glade.h:46 tmp/OptionsDialog.glade.h:38
+msgid "Results"
+msgstr "Rezultati"
+
+#: tmp/MainWindow.glade.h:47
+msgid "Search a pigeon"
+msgstr "Potraži goluba"
+
+#: tmp/MainWindow.glade.h:48
+msgid "Search for:"
+msgstr "Potraži za:"
+
+#: tmp/MainWindow.glade.h:49
+msgid "Search in:"
+msgstr "Potraži u:"
+
+#: tmp/MainWindow.glade.h:52 tmp/PedigreeWindow.glade.h:6
+msgid "Sire"
+msgstr "Otac"
+
+#: tmp/MainWindow.glade.h:53
+#, fuzzy
+msgid "Status"
+msgstr "Statusna traka"
+
+#: tmp/MainWindow.glade.h:56
+msgid "The current status is:"
+msgstr "Postojeći status je:"
+
+#: tmp/MainWindow.glade.h:57
+msgid "The following pigeon will be removed:"
+msgstr "Sljedeći golub bit će uklonjen:"
+
+#: tmp/MainWindow.glade.h:58
+msgid "There are no images found."
+msgstr "Nisu pronađene slike."
+
+#: tmp/MainWindow.glade.h:59
+msgid "To"
+msgstr "Za"
+
+#: tmp/MainWindow.glade.h:60
+msgid "Total"
+msgstr "Ukupno"
+
+#: tmp/MainWindow.glade.h:62
+msgid "View all"
+msgstr "Prikaz svih"
+
+#: tmp/MainWindow.glade.h:66
+msgid "Young birds"
+msgstr "Mladi"
+
+#: tmp/MainWindow.glade.h:67
+msgid "active"
+msgstr "aktivan"
+
+#: tmp/MainWindow.glade.h:68
+msgid "dead"
+msgstr "mrtav"
+
+#: tmp/MainWindow.glade.h:69
+msgid "lost"
+msgstr "izgubljen"
+
+#: tmp/MainWindow.glade.h:70
+msgid "sold"
+msgstr "prodan"
+
+#: tmp/OptionsDialog.glade.h:1
+msgid "<b>Backup</b>"
+msgstr "<b>Sigurnosna kopija</b>"
+
+#: tmp/OptionsDialog.glade.h:2
+msgid "<b>Columns</b>"
+msgstr "<b>Stupci</b>"
+
+#: tmp/OptionsDialog.glade.h:3
+#, fuzzy
+msgid "<b>General</b>"
+msgstr "<b>Osobno</b>"
+
+#: tmp/OptionsDialog.glade.h:4
+msgid "<b>Language</b>"
+msgstr "<b>Jezik</b>"
+
+#: tmp/OptionsDialog.glade.h:5
+msgid "<b>Layout</b>"
+msgstr "<b>Izgled stranice</b>"
+
+#: tmp/OptionsDialog.glade.h:6
+msgid "<b>Other</b>"
+msgstr "<b>Ostalo</b>"
+
+#: tmp/OptionsDialog.glade.h:7
+msgid "<b>Paper</b>"
+msgstr "<b>Papir</b>"
+
+#: tmp/OptionsDialog.glade.h:8
+msgid "<b>Personal</b>"
+msgstr "<b>Osobno</b>"
+
+#: tmp/OptionsDialog.glade.h:9
+msgid "<b>Pigeon</b>"
+msgstr "<b>Golub</b>"
+
+#: tmp/OptionsDialog.glade.h:10
+msgid "<b>Theme</b>"
+msgstr "<b>Tema</b>"
+
+#: tmp/OptionsDialog.glade.h:11
+msgid "<b>Update</b>"
+msgstr "<b>Nadogradnja</b>"
+
+#: tmp/OptionsDialog.glade.h:12
+msgid "Address"
+msgstr "Adresa"
+
+#: tmp/OptionsDialog.glade.h:13
+msgid "Appearance"
+msgstr "Izgled"
+
+#: tmp/OptionsDialog.glade.h:15
+msgid "Change the language to"
+msgstr "Promijeni jezik u"
+
+#: tmp/OptionsDialog.glade.h:16
+msgid "Change the theme"
+msgstr "Promijeni temu"
+
+#: tmp/OptionsDialog.glade.h:17
+msgid "Check for updates on startup"
+msgstr "Provjeri postojanje nadogradnje pri pokretanju programa"
+
+#: tmp/OptionsDialog.glade.h:21
+msgid "Default"
+msgstr "Postojeće"
+
+#: tmp/OptionsDialog.glade.h:22
+msgid "E-mail"
+msgstr "E-pošta"
+
+#: tmp/OptionsDialog.glade.h:24
+msgid "General"
+msgstr "Općenito"
+
+#: tmp/OptionsDialog.glade.h:25
+msgid "Image"
+msgstr "Slika"
+
+#: tmp/OptionsDialog.glade.h:26
+msgid "Interval"
+msgstr "Interval"
+
+#: tmp/OptionsDialog.glade.h:27
+msgid "Location"
+msgstr "Lokacija"
+
+#: tmp/OptionsDialog.glade.h:29
+msgid "Make an automatic backup"
+msgstr "Automatski napravi sigurnosnu kopiju"
+
+#: tmp/OptionsDialog.glade.h:31
+msgid "Options"
+msgstr "Opcije"
+
+#: tmp/OptionsDialog.glade.h:32
+msgid "Original"
+msgstr "Izvorno"
+
+#: tmp/OptionsDialog.glade.h:33
+msgid "Paper format:"
+msgstr "Format papira:"
+
+#: tmp/OptionsDialog.glade.h:35
+msgid "Pedigree layout:"
+msgstr "Izgled stranice rodovnika:"
+
+#: tmp/OptionsDialog.glade.h:36
+msgid "Phone"
+msgstr "Telefon"
+
+#: tmp/OptionsDialog.glade.h:37
+msgid "Printing"
+msgstr "Ispis"
+
+#: tmp/OptionsDialog.glade.h:45
+msgid "Show the column names"
+msgstr ""
+
+#: tmp/OptionsDialog.glade.h:46
+msgid "Show the date"
+msgstr ""
+
+#: tmp/PedigreeWindow.glade.h:3
+msgid "Insert a pigeon"
+msgstr "Unesi goluba"
+
+#: tmp/PreviewWindow.glade.h:1
+msgid "Print Preview"
+msgstr ""
+
+#: tmp/ResultWindow.glade.h:1
+msgid "<b>Sort options</b>"
+msgstr "<b>Sortiraj opcije</b>"
+
+#: tmp/ResultWindow.glade.h:3
+#, fuzzy
+msgid "Filter results"
+msgstr "Prikaz svih rezultata"
+
+#: tmp/ResultWindow.glade.h:4
+msgid "Pigeon"
+msgstr "Golub"
+
+#: tmp/ResultWindow.glade.h:5
+msgid "Place"
+msgstr "Mjesto"
+
+#: tmp/ResultWindow.glade.h:8
+msgid "View all results"
+msgstr "Prikaz svih rezultata"
+
+#: tmp/ResultWindow.glade.h:9
+msgid "Year pigeons"
+msgstr "Godina golubova"
+
+#: tmp/ResultWindow.glade.h:10
+msgid "Year race"
+msgstr "Godina utrke"
+
+#: tmp/ToolsWindow.glade.h:1
+msgid "<b><i><big>Addresses</big></i></b>"
+msgstr "<b><i><big>Adrese</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:2
+msgid "<b><i><big>Backup</big></i></b>"
+msgstr "<b><i><big>Sigurnosna kopija</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:3
+msgid "<b><i><big>Database</big></i></b>"
+msgstr "<b><i><big>Baza podataka</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:4
+msgid "<b><i><big>Manage data</big></i></b>"
+msgstr "<b><i><big>Upravljanje podatcima</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:5
+msgid "<b><i><big>Statistics</big></i></b>"
+msgstr "<b><i><big>Statistika</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:6
+msgid "<b><i><big>Update</big></i></b>"
+msgstr "<b><i><big>Nadogradnja</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:7
+msgid "<b><i><big>Velocity calculator</big></i></b>"
+msgstr "<b><i><big>Izračun brzine</big></i></b>"
+
+#: tmp/ToolsWindow.glade.h:8
+msgid "<b>Add items</b>"
+msgstr "<b>Dodaj stavke</b>"
+
+#: tmp/ToolsWindow.glade.h:9
+msgid "<b>Create backup</b>"
+msgstr "<b>Kreiraj sigurnosnu kopiju</b>"
+
+#: tmp/ToolsWindow.glade.h:10
+msgid "<b>Optimize database</b>"
+msgstr "<b>Optimiziraj bazu podataka</b>"
+
+#: tmp/ToolsWindow.glade.h:11
+msgid "<b>Remove database</b>"
+msgstr "<b>Ukloni bazu podataka</b>"
+
+#: tmp/ToolsWindow.glade.h:12
+msgid "<b>Remove items</b>"
+msgstr "<b>Ukloni stavke</b>"
+
+#: tmp/ToolsWindow.glade.h:13
+msgid "<b>Restore backup</b>"
+msgstr "<b>Povrati sigurnosnu kopiju</b>"
+
+#: tmp/ToolsWindow.glade.h:14
+msgid "<b>Warning!</b>"
+msgstr "<b>Pozor!</b>"
+
+#: tmp/ToolsWindow.glade.h:15
+msgid "<i>Click the button below</i>"
+msgstr "<i>Klikni na doljnji gumb</i>"
+
+#: tmp/ToolsWindow.glade.h:16
+msgid "Add and remove items from your datasets"
+msgstr "Dodaj i ukloni stavke iz skupova podataka"
+
+#: tmp/ToolsWindow.glade.h:18
+msgid "Calculate"
+msgstr "Izračun"
+
+#: tmp/ToolsWindow.glade.h:19
+msgid "Calculate velocity"
+msgstr "Izračun brzine"
+
+#: tmp/ToolsWindow.glade.h:20
+msgid "Check now!"
+msgstr "Provjeri sada!"
+
+#: tmp/ToolsWindow.glade.h:24
+msgid "Country"
+msgstr "Zemlja"
+
+#: tmp/ToolsWindow.glade.h:25
+msgid ""
+"Create and restore backups from\n"
+"your pigeons and results."
+msgstr ""
+"Kreiraj i povrati sigurnosne kopije od\n"
+"svojih golubova i rezultata."
+
+#: tmp/ToolsWindow.glade.h:27
+msgid "Dataset"
+msgstr "Skup podataka"
+
+#: tmp/ToolsWindow.glade.h:28
+msgid "Distance (km)"
+msgstr "Razdaljina (km)"
+
+#: tmp/ToolsWindow.glade.h:29
+msgid "Downloadpage"
+msgstr "Stranica za download"
+
+#: tmp/ToolsWindow.glade.h:30
+msgid "From - To (meter/min)"
+msgstr "od – do (metar/min)"
+
+#: tmp/ToolsWindow.glade.h:31
+msgid "Here you can check if there is a program update available."
+msgstr "Ovdje možeš provjeriti je li dostupna nadogradnja programa."
+
+#: tmp/ToolsWindow.glade.h:32
+msgid "Here you can see some statistics of your database"
+msgstr "Ovdje možeš pogledati statistiku svoje baze podataka"
+
+#: tmp/ToolsWindow.glade.h:33
+msgid "If you remove the database, all your data will be lost."
+msgstr "Ako ukloniš bazu podataka, svi tvoji podatci bit će izgubljeni."
+
+#: tmp/ToolsWindow.glade.h:34
+msgid "Item"
+msgstr "Stavka"
+
+#: tmp/ToolsWindow.glade.h:36
+msgid "Optimize"
+msgstr "Optimizacija"
+
+#: tmp/ToolsWindow.glade.h:37
+msgid ""
+"Optimize your database.\n"
+"(Please wait, this can take some time)"
+msgstr ""
+"Optimiziraj svoju bazu podataka.\n"
+"(Pričekaj, molim, ovo može potrajati)"
+
+#: tmp/ToolsWindow.glade.h:39
+msgid "Phone / E-mail"
+msgstr "Telefon / E-pošta"
+
+#: tmp/ToolsWindow.glade.h:40
+msgid "Released (hh : mm)"
+msgstr "Pušten (hh:mm)"
+
+#: tmp/ToolsWindow.glade.h:42
+msgid "Search database"
+msgstr "Pretraži bazu podataka"
+
+#: tmp/ToolsWindow.glade.h:45
+msgid "Street"
+msgstr "Ulica"
+
+#: tmp/ToolsWindow.glade.h:46
+msgid "This is me"
+msgstr "Ovo sam ja"
+
+#: tmp/ToolsWindow.glade.h:49
+msgid "Zipcode / City"
+msgstr "Broj pošte / Grad"
+
+#~ msgid "All"
+#~ msgstr "Sve"
+
+#~ msgid "Results:"
+#~ msgstr "Rezultati:"

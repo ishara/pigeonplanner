@@ -88,6 +88,23 @@ uistring = '''
 </ui>
 '''
 
+photoalbumui = '''
+<ui>
+   <toolbar name="Toolbar">
+      <toolitem action="First"/>
+      <toolitem action="Prev"/>
+      <toolitem action="Next"/>
+      <toolitem action="Last"/>
+      <separator/>
+      <toolitem action="Fit"/>
+      <toolitem action="In"/>
+      <toolitem action="Out"/>
+      <separator/>
+      <toolitem action="Close"/>
+   </toolbar>
+</ui>
+'''
+
 pedigreeui = '''
 <ui>
    <toolbar name="Toolbar">
