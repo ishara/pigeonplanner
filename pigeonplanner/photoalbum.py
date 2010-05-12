@@ -115,7 +115,7 @@ class PhotoAlbum:
             ("Fit", gtk.STOCK_ZOOM_FIT, None, None,
                     _("Zooms to fit the whole picture"), self.on_zoom_fit_toggled),
             ("Slide", gtk.STOCK_MEDIA_PLAY, None, None,
-                    _("Shows a slideshow"), self.on_slideshow_toggled),
+                    _("View slideshow"), self.on_slideshow_toggled),
             ("Screen", gtk.STOCK_FULLSCREEN, None, None,
                     _("View in fullscreen"), self.on_fullscreen_toggled),
            ))
