@@ -96,6 +96,10 @@ photoalbumui = '''
       <toolitem action="Next"/>
       <toolitem action="Last"/>
       <separator/>
+      <toolitem action="Slide"/>
+      <separator/>
+      <toolitem action="Screen"/>
+      <separator/>
       <toolitem action="Fit"/>
       <toolitem action="In"/>
       <toolitem action="Out"/>

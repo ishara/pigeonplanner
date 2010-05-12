@@ -18,6 +18,7 @@
 
 import gtk
 import gtk.glade
+import gobject
 import logging
 logger = logging.getLogger(__name__)
 
@@ -85,6 +86,7 @@ class PhotoAlbum:
         self.prev_button = uimanager.get_widget('/Toolbar/Prev')
         self.next_button = uimanager.get_widget('/Toolbar/Next')
         self.last_button = uimanager.get_widget('/Toolbar/Last')
+        self.slide_button = uimanager.get_widget('/Toolbar/Slide')
 
         toolbar = uimanager.get_widget('/Toolbar')
         toolbar.set_style(gtk.TOOLBAR_ICONS)
@@ -112,6 +114,10 @@ class PhotoAlbum:
         action_group.add_toggle_actions((
             ("Fit", gtk.STOCK_ZOOM_FIT, None, None,
                     _("Zooms to fit the whole picture"), self.on_zoom_fit_toggled),
+            ("Slide", gtk.STOCK_MEDIA_PLAY, None, None,
+                    _("Shows a slideshow"), self.on_slideshow_toggled),
+            ("Screen", gtk.STOCK_FULLSCREEN, None, None,
+                    _("View in fullscreen"), self.on_fullscreen_toggled),
            ))
 
         return action_group
@@ -237,6 +243,35 @@ class PhotoAlbum:
         self.zoom_mode = ZOOM_FREE
         self.set_zoom(self.zoom_out())
 
+    def on_fullscreen_toggled(self, widget):
+        if widget.get_active():
+            self.photoalbum.fullscreen()
+        else:
+            self.photoalbum.unfullscreen()
+
+    def on_slideshow_toggled(self, widget):
+        if widget.get_active():
+            self.slide_button.set_stock_id(gtk.STOCK_MEDIA_STOP)
+            self.run_slideshow = True
+            self.slideshow_timer = gobject.timeout_add(2000, self.slideshow)
+        else:
+            self.slide_button.set_stock_id(gtk.STOCK_MEDIA_PLAY)
+            self.run_slideshow = False
+            gobject.source_remove(self.slideshow_timer)
+
+    def slideshow(self):
+        if self.current_picture + 1 == self.picture_no:
+            next = 0
+        else:
+            next = self.current_picture + 1
+
+        self.set_picture(next)
+
+        if self.run_slideshow:
+            return True
+        else:
+            return False
+
     def on_swin_size_allocate(self, scrolledwindow, allocation):
         if self.zoom_mode == ZOOM_BEST_FIT:
             self.set_zoom(self.zoom_best_fit())
@@ -293,7 +328,8 @@ class PhotoAlbum:
              self.last_button: self.current_picture < self.picture_no - 1,
              self.zoom_in_button: True,
              self.zoom_out_button: True,
-             self.zoom_fit_button: True})
+             self.zoom_fit_button: True,
+             self.slide_button: True})
 
     def set_pixbuf(self, filename):
         if not filename:
@@ -319,5 +355,6 @@ class PhotoAlbum:
              self.last_button: False,
              self.zoom_in_button: False,
              self.zoom_out_button: False,
-             self.zoom_fit_button: False})
+             self.zoom_fit_button: False,
+             self.slide_button: False})
 
