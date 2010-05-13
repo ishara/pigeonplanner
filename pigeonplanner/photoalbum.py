@@ -308,6 +308,16 @@ class PhotoAlbum:
         self.context.set_source_pixbuf(self.pixbuf.scale_simple(picture_w, picture_h, self.interp), 0, 0)
         self.context.paint()
 
+    def on_drawingarea_scroll(self, widget, event):
+        if event.direction == gtk.gdk.SCROLL_UP:
+            self.zoom_fit_button.set_active(False)
+            self.zoom_mode = ZOOM_FREE
+            self.set_zoom(self.zoom_in())
+        elif event.direction == gtk.gdk.SCROLL_DOWN:
+            self.zoom_fit_button.set_active(False)
+            self.zoom_mode = ZOOM_FREE
+            self.set_zoom(self.zoom_out())
+
     def on_iconview_changed(self, widget):
         model = widget.get_model()
 
