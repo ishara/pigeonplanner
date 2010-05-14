@@ -42,6 +42,36 @@ class OptionsDialog:
 
         self.opt = options.GetOptions()
 
+        # Build main treeview
+        self.liststore = gtk.ListStore(int, gtk.gdk.Pixbuf, str)
+        self.selection = self.treeview.get_selection()
+        self.selection.connect('changed', self.selection_changed)
+        self.treeview.set_model(self.liststore)
+
+        cellText = gtk.CellRendererText()
+        cellPix = gtk.CellRendererPixbuf()
+
+        treeViewColumn = gtk.TreeViewColumn('Categories')
+        treeViewColumn.pack_start(cellPix, expand=False)
+        treeViewColumn.add_attribute(cellPix, 'pixbuf', 1)
+        treeViewColumn.pack_start(cellText, expand=True)
+        treeViewColumn.set_attributes(cellText, text=2)
+        self.treeview.append_column(treeViewColumn)
+
+        categories = [(_("General"), gtk.STOCK_PROPERTIES),
+                      (_("Appearance"), gtk.STOCK_PAGE_SETUP),
+                      (_("Printing"), gtk.STOCK_PRINT)]
+        i = 0
+        for item in categories:
+            self.liststore.append(
+                    [i,
+                     self.treeview.render_icon(item[1], gtk.ICON_SIZE_LARGE_TOOLBAR),
+                     item[0]
+                    ])
+            i += 1
+
+        self.selection.select_path((0,))
+
         # Show the theme changer on Windows
         if const.WINDOWS:
             self.framethemes.show()
@@ -78,6 +108,15 @@ class OptionsDialog:
         self.action_area.set_child_secondary(self.default, True)
 
         self.optionsdialog.show()
+
+    def selection_changed(self, selection):
+        model, path = selection.get_selected()
+        if not path: return
+
+        try:
+            self.notebook.set_current_page(model[path][0])
+        except TypeError:
+            pass
 
     def set_options(self):
         # General
