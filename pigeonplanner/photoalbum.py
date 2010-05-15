@@ -318,6 +318,12 @@ class PhotoAlbum:
             self.zoom_mode = ZOOM_FREE
             self.set_zoom(self.zoom_out())
 
+    def on_iconview_scroll(self, widget, event):
+        if event.direction == gtk.gdk.SCROLL_UP:
+            self.set_picture(self.current_picture - 1)
+        elif event.direction == gtk.gdk.SCROLL_DOWN:
+            self.set_picture(self.current_picture + 1)
+
     def on_iconview_changed(self, widget):
         model = widget.get_model()
 
