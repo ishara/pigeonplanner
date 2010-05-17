@@ -28,6 +28,7 @@ import gtk.glade
 import const
 import update
 import backup
+import common
 import widgets
 import messages
 from printing import PrintVelocity
@@ -440,23 +441,9 @@ class ToolsWindow:
 
     # Statistics
     def on_btnsearchdb_clicked(self, widget):
-        cocks = 0
-        hens = 0
-        ybirds = 0
-        ptotal = 0
-        for pigeon in self.main.database.get_pigeons():
-            if not pigeon[5]: continue # Pigeon is not shown, don't count it
+        total, cocks, hens, ybirds = common.count_active_pigeons(self.main.database)
 
-            ptotal += 1
-
-            if pigeon[4] == '0':
-                cocks += 1
-            elif pigeon[4] == '1':
-                hens += 1
-            elif pigeon[4] == '2':
-                ybirds += 1
-
-        items = {_("Number of pigeons"): ptotal,
+        items = {_("Number of pigeons"): total,
                  _("Number of cocks"): cocks,
                  _("Number of hens"): hens,
                  _("Number of young birds"): ybirds,

@@ -1887,23 +1887,9 @@ class MainWindow:
         Count all active pigeons and set the statistics labels
         '''
 
-        cocks = 0
-        hens = 0
-        ybirds = 0
-        ptotal = 0
-        for pigeon in self.database.get_pigeons():
-            if not pigeon[5]: continue
+        total, cocks, hens, ybirds = common.count_active_pigeons(self.database)
 
-            ptotal += 1
-
-            if pigeon[4] == '0':
-                cocks += 1
-            elif pigeon[4] == '1':
-                hens += 1
-            elif pigeon[4] == '2':
-                ybirds += 1
-
-        self.labelStatTotal.set_markup("<b>%i</b>" %ptotal)
+        self.labelStatTotal.set_markup("<b>%i</b>" %total)
         self.labelStatCocks.set_markup("<b>%i</b>" %cocks)
         self.labelStatHens.set_markup("<b>%i</b>" %hens)
         self.labelStatYoung.set_markup("<b>%i</b>" %ybirds)

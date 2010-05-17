@@ -19,6 +19,25 @@
 import gobject
 
 
+def count_active_pigeons(database):
+    cocks = 0
+    hens = 0
+    ybirds = 0
+    total = 0
+    for pigeon in database.get_pigeons():
+        if not pigeon[5]: continue
+
+        total += 1
+
+        if pigeon[4] == '0':
+            cocks += 1
+        elif pigeon[4] == '1':
+            hens += 1
+        elif pigeon[4] == '2':
+            ybirds += 1
+
+    return total, cocks, hens, ybirds
+
 def add_statusbar_message(statusbar, message):
     statusbar.pop(0)
     statusbar.push(0, message)
