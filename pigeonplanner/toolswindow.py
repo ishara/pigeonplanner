@@ -443,17 +443,16 @@ class ToolsWindow:
     def on_btnsearchdb_clicked(self, widget):
         total, cocks, hens, ybirds = common.count_active_pigeons(self.main.database)
 
-        items = {_("Number of pigeons"): total,
-                 _("Number of cocks"): cocks,
-                 _("Number of hens"): hens,
-                 _("Number of young birds"): ybirds,
-                 _("Number of results"): len(self.main.database.get_all_results())
-                }
+        items = [(_("Number of pigeons"), total),
+                 (_("Number of cocks"), cocks),
+                 (_("Number of hens"), hens),
+                 (_("Number of young birds"), ybirds),
+                 (_("Number of results"), len(self.main.database.get_all_results()))
+                ]
 
         self.ls_stats.clear()
-
-        for item in sorted(items, key=items.__getitem__):
-            self.ls_stats.append([item, items[item]])
+        for description, value in items:
+            self.ls_stats.append([description, value])
 
     # Database
     def on_dboptimize_clicked(self, widget):
