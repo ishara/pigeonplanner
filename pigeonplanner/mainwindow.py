@@ -31,6 +31,7 @@ import gobject
 import const
 import update
 import backup
+import common
 import widgets
 import options
 import database
@@ -374,6 +375,8 @@ class MainWindow:
                 self.treeview.set_cursor(path)
 
             self.count_active_pigeons()
+
+            common.add_statusbar_message(self.statusbar, _("Pigeon %s/%s has been removed" %(ring, year)))
 
         dialog.destroy()
 
@@ -719,6 +722,8 @@ class MainWindow:
         if len(self.lsResult) > 0:
             self.tvResults.set_cursor(path)
 
+            common.add_statusbar_message(self.statusbar, _("Result has been removed"))
+
     def on_editresult_clicked(self, widget):
         result = self.get_selected_result()
         for index, item in enumerate(result): # Happens on conversion from 0.6.0 to 0.7.0
@@ -772,6 +777,7 @@ class MainWindow:
             data = (pindex, ) + data
             rowid = self.database.insert_result(data)
             self.lsResult.append([rowid, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
+            common.add_statusbar_message(self.statusbar, _("Result has been added"))
         elif self.resultDialogMode == 'edit':
             selection = self.tvResults.get_selection()
             model, node = selection.get_selected()
@@ -1599,6 +1605,8 @@ class MainWindow:
                                                      self.sexDic[infoTuple[2]],
                                                      infoTuple[8],
                                                      infoTuple[7]])
+
+        common.add_statusbar_message(self.statusbar, _("Pigeon %s/%s has been added" %(infoTuple[0], infoTuple[1])))
 
     def update_data(self, infoTuple):
         '''
