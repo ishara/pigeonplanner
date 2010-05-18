@@ -3531,13 +3531,13 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <widget class="GtkButton" id="resultdialogcancel">
-                <property name="label">gtk-cancel</property>
+              <widget class="GtkButton" id="resultdialogclose">
+                <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_resultdialogcancel_clicked"/>
+                <signal name="clicked" handler="on_resultdialogclose_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>

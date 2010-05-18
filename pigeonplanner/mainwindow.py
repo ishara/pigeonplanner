@@ -811,7 +811,7 @@ class MainWindow:
             self.database.insert_wind((wind, ))
             widgets.fill_list(self.cbWind, self.database.get_all_wind())
 
-    def on_resultdialogcancel_clicked(self, widget):
+    def on_resultdialogclose_clicked(self, widget):
         self.hide_result_dialog()
 
     def hide_result_dialog(self, widget=None, event=None):
