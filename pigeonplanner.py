@@ -152,7 +152,26 @@ class PigeonPlanner:
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
         if win32:
             self.logger.debug("Current path: %s" % os.getcwd())
-            self.logger.debug("Windows version: %s" % ", ".join(str(n) for n in sys.getwindowsversion()))
+
+            ver = os.sys.getwindowsversion()
+            ver_format = ver[3], ver[0], ver[1]
+            win_versions = {
+                (1, 4, 0): '95',
+                (1, 4, 10): '98',
+                (1, 4, 90): 'ME',
+                (2, 4, 0): 'NT',
+                (2, 5, 0): '2000',
+                (2, 5, 1): 'XP',
+                (2, 5, 2): '2003',
+                (2, 6, 0): 'Vista',
+                (2, 6, 1): '7',
+            }
+            if ver_format in win_versions:
+                win_ver = win_versions[ver_format]
+            else:
+                win_ver = ", ".join(str(n) for n in sys.getwindowsversion())
+
+            self.logger.debug("Windows version: %s" % win_ver)
         else:
             self.logger.debug("Current path: %s" % const.topPath)
         self.logger.debug("Python version: %s" % sys.version)
