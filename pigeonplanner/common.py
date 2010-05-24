@@ -16,8 +16,22 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os.path
+
+import gtk
 import gobject
 
+import const
+import widgets
+
+
+def create_stock_icon(filename, name, description):
+    pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR, filename))
+    icon_set = gtk.IconSet(pixbuf)
+    factory = gtk.IconFactory()
+    factory.add_default()
+    factory.add(name, icon_set)
+    gtk.stock_add([(name, description, 0, 0, 'pigeonplanner')])
 
 def count_active_pigeons(database):
     cocks = 0
@@ -46,3 +60,47 @@ def add_statusbar_message(statusbar, message):
 def pop_statusbar_message(statusbar):
     statusbar.pop(0)
     return False
+
+def send_email(recipient='', subject='', body='', attachment=''):
+    """
+    Send an email with the default emailclient.
+    Do this with the simplemapi module on Windows and
+    with the xdg-email commandline program on Linux.
+    """
+
+    if const.WINDOWS:
+        import simplemapi
+
+        simplemapi.SendMail(recipient, subject, body, attachment)
+    elif const.UNIX:
+        if not search_file('xdg-email', os.environ['PATH']):
+            widgets.message_dialog('error', messages.MSG_NO_MAILCLIENT)
+            return
+
+        import subprocess
+
+        cmd = ['xdg-email']
+        if subject:
+            cmd.append('--subject')
+            cmd.append(subject)
+        if body:
+            cmd.append('--body')
+            cmd.append(body)
+        if attachment:
+            cmd.append('--attach')
+            cmd.append(attachment)
+        if recipient:
+            cmd.append(recipient)
+
+        subprocess.Popen(cmd)
+
+def search_file(filename, search_path):
+    paths = search_path.split(':')
+    path_found = None
+    for path in paths:
+        if os.path.exists(os.path.join(path, filename)):
+            path_found = os.path.abspath(os.path.join(path, filename))
+            break
+
+    return path_found
+

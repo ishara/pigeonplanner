@@ -20,10 +20,13 @@ A detailed pedigree of the selected pigeon.
 '''
 
 
+import os.path
+
 import gtk
 import gtk.glade
 
 import const
+import common
 import widgets
 import messages
 from pedigree import DrawPedigree
@@ -64,6 +67,8 @@ class PedigreeWindow:
                                 self, self.main.options.optionList.language)
         self.dp.draw_pedigree()
 
+        self.pdfname = "pedigree_%s_%s.pdf" %(pigeoninfo['ring'], pigeoninfo['year'])
+
         self.pedigreewindow.show()
 
     def build_toolbar(self):
@@ -82,6 +87,8 @@ class PedigreeWindow:
         action_group.add_actions((
             ("Save", gtk.STOCK_SAVE, None, None,
                     _("Save this pedigree"), self.on_save_clicked),
+            ("Mail", 'email', None, None,
+                    _("Email this pedigree"), self.on_mail_clicked),
             ("Preview", gtk.STOCK_PRINT_PREVIEW, None, None,
                     _("View this pedigree"), self.on_preview_clicked),
             ("Print", gtk.STOCK_PRINT, None, None,
@@ -94,6 +101,11 @@ class PedigreeWindow:
 
     def on_close_dialog(self, widget=None, event=None):
         self.pedigreewindow.destroy()
+
+    def on_mail_clicked(self, widget):
+        self.do_operation('mail')
+        pedigree = os.path.join(const.TEMPDIR, self.pdfname)
+        common.send_email(attachment=pedigree)
 
     def on_save_clicked(self, widget):
         self.do_operation('save')
@@ -134,5 +146,5 @@ class PedigreeWindow:
                 userinfo['phone'] = ""
                 userinfo['email'] = ""
 
-        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo, self.main.options.optionList, op)
+        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo, self.main.options.optionList, op, self.pdfname)
 

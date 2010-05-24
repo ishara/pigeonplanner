@@ -113,6 +113,7 @@ pedigreeui = '''
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="Save"/>
+      <toolitem action="Mail"/>
       <separator/>
       <toolitem action="Preview"/>
       <toolitem action="Print"/>
@@ -126,6 +127,7 @@ resultui = '''
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="Save"/>
+      <toolitem action="Mail"/>
       <separator/>
       <toolitem action="Preview"/>
       <toolitem action="Print"/>

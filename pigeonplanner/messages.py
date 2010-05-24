@@ -129,6 +129,10 @@ MSG_UPDATE_NOW = (_("Update available!"),
                   _("There is an update available, do you want to download it now?"),
                   _("Update"))
 
+MSG_NO_MAILCLIENT = (_("Failed to find xdg-email!"),
+                     _("Please check if you have the xdg-utils package installed"),
+                     _("Error"))
+
 MSG_UPDATE_ERROR = _("Error trying to get information. Are you connected to the internet?")
 MSG_UPDATE_AVAILABLE = _("A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version")
 MSG_NO_UPDATE = _("You already have the latest version installed.")

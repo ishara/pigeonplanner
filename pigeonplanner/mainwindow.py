@@ -74,13 +74,8 @@ class MainWindow:
         key, modifier = gtk.accelerator_parse('Escape')
         self.cancelEscAG.connect_group(key, modifier, gtk.ACCEL_VISIBLE, self.add_edit_finish)
 
-        pixbuf = gtk.gdk.pixbuf_new_from_file(join(const.IMAGEDIR, 'icon_pedigree_detail.png'))
-        icon_set = gtk.IconSet(pixbuf)
-        factory = gtk.IconFactory()
-        factory.add_default()
-        factory.add('pedigree-detail', icon_set)
-        gtk.stock_add([('pedigree-detail', _('_Pedigree'), 0, 0, 'pigeonplanner')])
-
+        common.create_stock_icon('icon_pedigree_detail.png', 'pedigree-detail', _('_Pedigree'))
+        common.create_stock_icon('icon_email.png', 'email', _('E-mail'))
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
 

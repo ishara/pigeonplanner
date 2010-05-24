@@ -17,6 +17,7 @@
 
 
 import math
+import os.path
 import datetime
 
 import gtk
@@ -316,6 +317,9 @@ class BasePrinting:
             action = gtk.PRINT_OPERATION_ACTION_PRINT_DIALOG
         elif print_action == 'preview':
             action = gtk.PRINT_OPERATION_ACTION_PREVIEW
+        elif print_action == 'mail':
+            print_.set_export_filename(os.path.join(const.TEMPDIR, pdf_name))
+            action = gtk.PRINT_OPERATION_ACTION_EXPORT
         elif print_action == 'save':
             fc = gtk.FileChooserDialog(title=_("Save as..."), 
                         parent=self.parent,
@@ -326,7 +330,7 @@ class BasePrinting:
             ftr.add_pattern("*.pdf")
             fc.add_filter(ftr)
 
-            fc.set_current_name("%s.pdf" %pdf_name)
+            fc.set_current_name(pdf_name)
             fc.set_current_folder(const.HOMEDIR)
 
             response = fc.run()
@@ -374,8 +378,7 @@ class BasePrinting:
 
 
 class PrintPedigree(BasePrinting):
-    def __init__(self, parent, pigeoninfo, userinfo, options, print_action):
-        pdf_name = "pedigree_%s_%s" %(pigeoninfo['ring'], pigeoninfo['year'])
+    def __init__(self, parent, pigeoninfo, userinfo, options, print_action, pdf_name):
         orientation = gtk.PAGE_ORIENTATION_PORTRAIT
         self.pigeoninfo = pigeoninfo
         self.options = options
@@ -654,9 +657,7 @@ class PrintPedigree(BasePrinting):
 
 
 class PrintResults(BasePrinting):
-    def __init__(self, parent, results, userinfo, options, print_action):
-        self.today = datetime.date.today()
-        pdf_name = "results_%s" %self.today
+    def __init__(self, parent, results, userinfo, options, print_action, pdf_name):
         orientation = gtk.PAGE_ORIENTATION_LANDSCAPE
         self.results = results
         self.options = options
@@ -770,7 +771,7 @@ class PrintResults(BasePrinting):
 
         date_page = "%s %s / %s" %(_("Page"), page_number+1, operation.props.n_pages)
         if self.options.resDate:
-            date_page += "\n\n%s" %self.today
+            date_page += "\n\n%s" %datetime.date.today()
         self.pagenr_layout.set_text(date_page)
         cr.show_layout(self.pagenr_layout)
         cr.show_layout(self.header_layout)

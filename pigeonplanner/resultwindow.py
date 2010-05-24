@@ -16,10 +16,14 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os.path
+import datetime
+
 import gtk
 import gtk.glade
 
 import const
+import common
 import widgets
 import messages
 from printing import PrintResults
@@ -45,6 +49,8 @@ class ResultWindow:
         self.build_treeview()
         self.fill_treeview()
 
+        self.pdfname = "results_%s.pdf" %datetime.date.today()
+
         self.resultwindow.show()
 
     def build_toolbar(self):
@@ -66,6 +72,8 @@ class ResultWindow:
         action_group.add_actions((
             ("Save", gtk.STOCK_SAVE, None, None,
                     _("Save these results"), self.on_save_clicked),
+            ("Mail", 'email', None, None,
+                    _("Email these results"), self.on_mail_clicked),
             ("Preview", gtk.STOCK_PRINT_PREVIEW, None, None,
                     _("View these results"), self.on_preview_clicked),
             ("Print", gtk.STOCK_PRINT, None, None,
@@ -129,6 +137,11 @@ class ResultWindow:
     def on_apply_clicked(self, widget):
         pass
 
+    def on_mail_clicked(self, widget):
+        self.do_operation('mail')
+        results = os.path.join(const.TEMPDIR, self.pdfname)
+        common.send_email(attachment=results)
+
     def on_save_clicked(self, widget):
         self.do_operation('save')
 
@@ -183,4 +196,4 @@ class ResultWindow:
                 values.append(str(value))
             results.append(values)
 
-        PrintResults(self.resultwindow, results, userinfo, self.main.options.optionList, op)
+        PrintResults(self.resultwindow, results, userinfo, self.main.options.optionList, op, self.pdfname)
