@@ -213,13 +213,8 @@ class PigeonPlanner:
         import pigeonplanner.database as database
 
         db = database.DatabaseOperations()
-
-        UPDATE_DB = False
         db_version = db.get_db_version()
-        if db_version < 2:
-            UPDATE_DB = True
-
-        if UPDATE_DB:
+        if db_version < const.DATABASE_VERSION:
             import pigeonplanner.dbassistant as dbass
 
             assistant = dbass.DBAssistant(db, db_version)
@@ -231,6 +226,12 @@ class PigeonPlanner:
                 import pigeonplanner.logdialog as logdialog
 
                 logdialog.LogDialog()
+                sys.exit()
+        elif db_version > const.DATABASE_VERSION:
+            import pigeonplanner.messages as messages
+            import pigeonplanner.widgets as widgets
+
+            if not widgets.message_dialog('warning', messages.MSG_OLD_DATABASE):
                 sys.exit()
 
     def exception_hook(self, type_, value, tb):

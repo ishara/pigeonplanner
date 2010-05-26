@@ -34,6 +34,9 @@ DESCRIPTION = pigeonplanner.description
 LICENSE = pigeonplanner.license
 
 
+DATABASE_VERSION = 2
+
+
 SMALL_SCREEN = False
 if gtk.gdk.screen_height() <= 768:
     SMALL_SCREEN = True
