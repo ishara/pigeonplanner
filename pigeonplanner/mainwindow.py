@@ -74,8 +74,6 @@ class MainWindow:
         key, modifier = gtk.accelerator_parse('Escape')
         self.cancelEscAG.connect_group(key, modifier, gtk.ACCEL_VISIBLE, self.add_edit_finish)
 
-        common.create_stock_icon('icon_pedigree_detail.png', 'pedigree-detail', _('_Pedigree'))
-        common.create_stock_icon('icon_email.png', 'email', _('E-mail'))
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
 
@@ -179,6 +177,8 @@ class MainWindow:
 
         gtk.about_dialog_set_url_hook(self.url_hook)
         gtk.about_dialog_set_email_hook(self.email_hook)
+
+        self.allresults.set_use_stock(True)
 
         self.main.show()
 

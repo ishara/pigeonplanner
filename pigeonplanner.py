@@ -194,6 +194,21 @@ class PigeonPlanner:
             themefile = os.path.join('.\\share\\themes', themes[self.options.optionList.theme], 'gtk-2.0\\gtkrc')
             gtk.rc_parse(themefile)
 
+        # Register custom stock icons
+        import pigeonplanner.common as common
+
+        common.create_stock_button([
+                                ('icon_pedigree_detail.png', 'pedigree-detail', _('_Pedigree')),
+                                ('icon_email.png', 'email', _('E-mail')),
+                                ('gtk-find', 'view-all', _('View all')),
+                                ('gtk-execute', 'calculate', _('Calculate')),
+                                ('gtk-find', 'search-database', _('Search database')),
+                                ('gtk-properties', 'optimize', _('Optimize')),
+                                ('gtk-redo', 'backup', _('Backup')),
+                                ('gtk-undo', 'restore', _('Restore')),
+                                ('gtk-find', 'check', _('Check now!')),
+                                ])
+
         # Check database
         import pigeonplanner.database as database
 

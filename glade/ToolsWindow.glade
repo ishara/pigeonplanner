@@ -17,7 +17,6 @@
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <widget class="GtkHBox" id="hbox1">
@@ -60,7 +59,6 @@
                         <child>
                           <widget class="GtkVBox" id="vbox4">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <child>
                               <widget class="GtkLabel" id="label19">
                                 <property name="visible">True</property>
@@ -226,36 +224,11 @@
                                 </child>
                                 <child>
                                   <widget class="GtkButton" id="calculate">
+                                    <property name="label">calculate</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <signal name="clicked" handler="on_calculate_clicked"/>
-                                    <child>
-                                      <widget class="GtkHBox" id="hbox6">
-                                        <property name="visible">True</property>
-                                        <property name="spacing">4</property>
-                                        <child>
-                                          <widget class="GtkImage" id="image3">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">1</property>
-                                            <property name="stock">gtk-execute</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkLabel" id="label16">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="label" translatable="yes">Calculate</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </widget>
-                                    </child>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">5</property>
@@ -285,7 +258,6 @@
                                 <child>
                                   <widget class="GtkVSeparator" id="vseparator1">
                                     <property name="visible">True</property>
-                                    <property name="orientation">vertical</property>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">4</property>
@@ -405,7 +377,6 @@
                         <child>
                           <widget class="GtkVBox" id="vbox6">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <child>
                               <widget class="GtkLabel" id="label20">
                                 <property name="visible">True</property>
@@ -689,7 +660,6 @@
                         <child>
                           <widget class="GtkVBox" id="vbox8">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <child>
                               <widget class="GtkLabel" id="label31">
                                 <property name="visible">True</property>
@@ -731,7 +701,6 @@
                                 <child>
                                   <widget class="GtkVBox" id="vboxtv">
                                     <property name="visible">True</property>
-                                    <property name="orientation">vertical</property>
                                     <property name="spacing">8</property>
                                     <child>
                                       <widget class="GtkScrolledWindow" id="scrolledwindow2">
@@ -1144,7 +1113,6 @@
                         <child>
                           <widget class="GtkVBox" id="vbox7">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <child>
                               <widget class="GtkLabel" id="label25">
                                 <property name="visible">True</property>
@@ -1186,35 +1154,11 @@
                                 <property name="n_columns">3</property>
                                 <child>
                                   <widget class="GtkButton" id="btnsearchdb">
+                                    <property name="label">search-database</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <signal name="clicked" handler="on_btnsearchdb_clicked"/>
-                                    <child>
-                                      <widget class="GtkHBox" id="hbox7">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <widget class="GtkImage" id="image4">
-                                            <property name="visible">True</property>
-                                            <property name="stock">gtk-find</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkLabel" id="label28">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">Search database</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </widget>
-                                    </child>
                                   </widget>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -1285,7 +1229,6 @@
                         <child>
                           <widget class="GtkVBox" id="vbox9">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <child>
                               <widget class="GtkLabel" id="label41">
                                 <property name="visible">True</property>
@@ -1322,7 +1265,6 @@
                             <child>
                               <widget class="GtkVBox" id="vbox10">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">40</property>
                                 <child>
                                   <widget class="GtkFrame" id="frame5">
@@ -1341,33 +1283,11 @@
                                             <property name="row_spacing">8</property>
                                             <child>
                                               <widget class="GtkButton" id="dboptimize">
+                                                <property name="label">optimize</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
                                                 <signal name="clicked" handler="on_dboptimize_clicked"/>
-                                                <child>
-                                                  <widget class="GtkHBox" id="hbox12">
-                                                    <property name="visible">True</property>
-                                                    <child>
-                                                      <widget class="GtkImage" id="image10">
-                                                        <property name="visible">True</property>
-                                                        <property name="stock">gtk-properties</property>
-                                                      </widget>
-                                                      <packing>
-                                                        <property name="position">0</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <widget class="GtkLabel" id="label47">
-                                                        <property name="visible">True</property>
-                                                        <property name="label" translatable="yes">Optimize</property>
-                                                      </widget>
-                                                      <packing>
-                                                        <property name="position">1</property>
-                                                      </packing>
-                                                    </child>
-                                                  </widget>
-                                                </child>
                                               </widget>
                                               <packing>
                                                 <property name="left_attach">1</property>
@@ -1565,7 +1485,6 @@
                         <child>
                           <widget class="GtkVBox" id="vbox1">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <child>
                               <widget class="GtkLabel" id="label18">
                                 <property name="visible">True</property>
@@ -1615,7 +1534,6 @@ your pigeons and results.</property>
                                     <child>
                                       <widget class="GtkVBox" id="vbox2">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
                                         <property name="spacing">4</property>
                                         <child>
                                           <widget class="GtkLabel" id="label7">
@@ -1644,33 +1562,11 @@ your pigeons and results.</property>
                                             <property name="visible">True</property>
                                             <child>
                                               <widget class="GtkButton" id="backup">
+                                                <property name="label">backup</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
                                                 <signal name="clicked" handler="on_makebackup_clicked"/>
-                                                <child>
-                                                  <widget class="GtkHBox" id="hbox3">
-                                                    <property name="visible">True</property>
-                                                    <child>
-                                                      <widget class="GtkImage" id="image1">
-                                                        <property name="visible">True</property>
-                                                        <property name="stock">gtk-redo</property>
-                                                      </widget>
-                                                      <packing>
-                                                        <property name="position">0</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <widget class="GtkLabel" id="label8">
-                                                        <property name="visible">True</property>
-                                                        <property name="label" translatable="yes">Backup</property>
-                                                      </widget>
-                                                      <packing>
-                                                        <property name="position">1</property>
-                                                      </packing>
-                                                    </child>
-                                                  </widget>
-                                                </child>
                                               </widget>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1717,7 +1613,6 @@ your pigeons and results.</property>
                                     <child>
                                       <widget class="GtkVBox" id="vbox3">
                                         <property name="visible">True</property>
-                                        <property name="orientation">vertical</property>
                                         <property name="spacing">4</property>
                                         <child>
                                           <widget class="GtkLabel" id="label10">
@@ -1756,33 +1651,11 @@ your pigeons and results.</property>
                                             <property name="visible">True</property>
                                             <child>
                                               <widget class="GtkButton" id="restore">
+                                                <property name="label">restore</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
                                                 <signal name="clicked" handler="on_restorebackup_clicked"/>
-                                                <child>
-                                                  <widget class="GtkHBox" id="hbox5">
-                                                    <property name="visible">True</property>
-                                                    <child>
-                                                      <widget class="GtkImage" id="image2">
-                                                        <property name="visible">True</property>
-                                                        <property name="stock">gtk-undo</property>
-                                                      </widget>
-                                                      <packing>
-                                                        <property name="position">0</property>
-                                                      </packing>
-                                                    </child>
-                                                    <child>
-                                                      <widget class="GtkLabel" id="label11">
-                                                        <property name="visible">True</property>
-                                                        <property name="label" translatable="yes">Restore</property>
-                                                      </widget>
-                                                      <packing>
-                                                        <property name="position">1</property>
-                                                      </packing>
-                                                    </child>
-                                                  </widget>
-                                                </child>
                                               </widget>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1844,7 +1717,6 @@ your pigeons and results.</property>
                         <child>
                           <widget class="GtkVBox" id="vbox5">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <child>
                               <widget class="GtkLabel" id="label17">
                                 <property name="visible">True</property>
@@ -1887,33 +1759,11 @@ your pigeons and results.</property>
                                 <property name="row_spacing">20</property>
                                 <child>
                                   <widget class="GtkButton" id="btnupdate">
+                                    <property name="label" translatable="yes">check</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
                                     <signal name="clicked" handler="on_btnupdate_clicked"/>
-                                    <child>
-                                      <widget class="GtkHBox" id="hbox8">
-                                        <property name="visible">True</property>
-                                        <child>
-                                          <widget class="GtkImage" id="image5">
-                                            <property name="visible">True</property>
-                                            <property name="stock">gtk-find</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <widget class="GtkLabel" id="label6">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">Check now!</property>
-                                          </widget>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </widget>
-                                    </child>
                                   </widget>
                                   <packing>
                                     <property name="top_attach">2</property>

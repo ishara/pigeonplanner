@@ -25,13 +25,24 @@ import const
 import widgets
 
 
-def create_stock_icon(filename, name, description):
-    pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR, filename))
-    icon_set = gtk.IconSet(pixbuf)
+def create_stock_button(icons):
+    """
+    Register stock buttons from custom or stock images.
+
+    @param icons: A list of tuples containing filename or stock, name and description
+    """
+
     factory = gtk.IconFactory()
     factory.add_default()
-    factory.add(name, icon_set)
-    gtk.stock_add([(name, description, 0, 0, 'pigeonplanner')])
+    for image, name, description in icons:
+        if image.startswith('gtk-'):
+            # We need a widget (any widget) here to use the render_icon() method.
+            pixbuf = gtk.Window().render_icon(image, gtk.ICON_SIZE_BUTTON)
+        else:
+            pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR, image))
+        iconset = gtk.IconSet(pixbuf)
+        factory.add(name, iconset)
+        gtk.stock_add([(name, description, 0, 0, 'pigeonplanner')])
 
 def count_active_pigeons(database):
     cocks = 0
