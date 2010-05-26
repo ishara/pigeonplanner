@@ -99,7 +99,7 @@ class ToolsWindow:
         self.cbdata.set_active(0)
         self.cbdata2.set_active(0)
 
-        # Make stocbuttons from these
+        # Make stockbuttons from these
         self.calculate.set_use_stock(True)
         self.btnsearchdb.set_use_stock(True)
         self.dboptimize.set_use_stock(True)
@@ -160,7 +160,7 @@ class ToolsWindow:
             release = "%s:%s" %(self.sbhour.get_text(), self.sbminute.get_text())
             info = [date.strftime("%Y-%m-%d"), release, self.sbdist.get_value_as_int()]
 
-            PrintVelocity(self.main.main, data, info)
+            PrintVelocity(self.main.main, data, info, self.main.options.optionList, 'print')
 
     # Data
     def on_cbdata_changed(self, widget):

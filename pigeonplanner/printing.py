@@ -841,37 +841,23 @@ class PrintResults(BasePrinting):
 
         return layout
 
-class PrintVelocity:
-    def __init__(self, parent, data, info):
-
+class PrintVelocity(BasePrinting):
+    def __init__(self, parent, data, info, options, print_action, pdf_name=''):
+        orientation = gtk.PAGE_ORIENTATION_PORTRAIT
+        self.options = options
         self.parent = parent
         self.data = data
         self.info = info
-
-        paper_size = gtk.PaperSize(gtk.PAPER_NAME_A4)
-
-        setup = gtk.PageSetup()
-        setup.set_paper_size(paper_size)
-
-        print_ = gtk.PrintOperation()
-        print_.set_default_page_setup(setup)
-        print_.set_unit(gtk.UNIT_MM)
-
-        print_.connect("begin_print", self.begin_print)
-        print_.connect("draw_page", self.draw_page)
-
-#        action = gtk.PRINT_OPERATION_ACTION_PREVIEW
-        action = gtk.PRINT_OPERATION_ACTION_PRINT_DIALOG
-
-        response = print_.run(action, self.parent)
-
-        if response == gtk.PRINT_OPERATION_RESULT_ERROR:
-            widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
-        elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
-            settings = print_.get_print_settings()
+        self.preview = None
+        BasePrinting.__init__(self, parent, options, print_action, pdf_name, orientation)
 
     def begin_print(self, operation, context):
         operation.set_n_pages(1)
+
+        # There is no preview button, but Linux users have a printpreview button in
+        # the printdialog. Weird things happen if we don't do this.
+        if self.preview:
+            self.preview.start()
 
     def draw_page (self, operation, context, page_number):
         cr = context.get_cairo_context()
@@ -944,6 +930,4 @@ class PrintVelocity:
         cr.set_line_join(cairo.LINE_JOIN_ROUND)
       
         cr.stroke()
-
-
 
