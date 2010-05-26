@@ -179,7 +179,6 @@ class MainWindow:
         gtk.about_dialog_set_email_hook(self.email_hook)
 
         self.allresults.set_use_stock(True)
-        self.vbuttonbox2.set_child_secondary(self.allresults, True)
 
         self.main.show()
 
