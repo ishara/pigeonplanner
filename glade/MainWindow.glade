@@ -2161,7 +2161,7 @@
                       <widget class="GtkVButtonBox" id="vbuttonbox2">
                         <property name="visible">True</property>
                         <property name="spacing">4</property>
-                        <property name="layout_style">spread</property>
+                        <property name="layout_style">end</property>
                         <child>
                           <widget class="GtkButton" id="allresults">
                             <property name="label">view-all</property>
@@ -2177,26 +2177,6 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="dummy">
-                            <property name="visible">True</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="dummy1">
-                            <property name="visible">True</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                        <child>
                           <widget class="GtkButton" id="addresult">
                             <property name="label">gtk-add</property>
                             <property name="visible">True</property>
@@ -2208,7 +2188,7 @@
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">3</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -2224,7 +2204,7 @@
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">4</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
@@ -2240,7 +2220,7 @@
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">5</property>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                       </widget>
