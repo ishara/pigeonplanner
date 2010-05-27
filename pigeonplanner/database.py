@@ -358,6 +358,16 @@ class DatabaseOperations:
         conn.close()
         return data
 
+    def has_result(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT COUNT(*) FROM Results WHERE pindex=? and date=? and point=? and place=? and out=? and sector=? and type=? and category=? and wind=? and weather=? and put=? and back=? and ownplace=? and ownout=? and comment=?', data)
+        data = [row[0] for row in cursor.fetchall() if row[0]]
+        conn.close()
+        if data:
+            return data[0]
+        else:
+            return None
+
     def has_results(self, pindex):
         conn, cursor = self.db_connect()
         cursor.execute('SELECT COUNT(*) FROM Results WHERE pindex=?', (pindex,))
