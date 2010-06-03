@@ -16,10 +16,11 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os
+import os.path
 import urllib
 import random
 import mimetypes
-import os.path
 import threading
 
 import gtk
@@ -119,6 +120,27 @@ class MailDialog:
 
     def on_close_clicked(self, widget):
         self.close_dialog()
+
+    def on_rename_clicked(self, widget):
+        self.entry_attachment.set_text(os.path.basename(self.attachment))
+
+        self.hbox_label.hide()
+        self.hbox_entry.show()
+
+    def on_apply_clicked(self, widget):
+        filename = self.entry_attachment.get_text()
+        if not filename.endswith('.pdf'):
+            filename += '.pdf'
+
+        new_attachment = os.path.join(const.TEMPDIR, filename)
+
+        os.rename(self.attachment, new_attachment)
+
+        self.attachment = new_attachment
+        self.label_attachment.set_text(filename)
+
+        self.hbox_entry.hide()
+        self.hbox_label.show()
 
     def on_send_clicked(self, widget):
         if not self.entry_to.get_text() or not self.entry_mail.get_text():
