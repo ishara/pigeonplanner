@@ -19,11 +19,13 @@ name = "Pigeon Planner"
 
 versionbase = "0.8.9"
 
-version = "0.8.9.bzr501"
+version = "0.8.9.bzr502"
 
 copyright = "(C)opyright 2009-2010 Timo Vanwynsberghe"
 
 authors = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
+
+artists = ["Timo Vanwynsberghe <timovwb@gmail.com>", "http://www.openclipart.org"]
 
 website = "http://www.pigeonplanner.com"
 

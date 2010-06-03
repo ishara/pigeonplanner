@@ -28,6 +28,7 @@ import pigeonplanner
 NAME = pigeonplanner.name
 VERSION = pigeonplanner.version
 AUTHORS = pigeonplanner.authors
+ARTISTS = pigeonplanner.artists
 WEBSITE = pigeonplanner.website
 COPYRIGHT = pigeonplanner.copyright
 DESCRIPTION = pigeonplanner.description
