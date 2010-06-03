@@ -17,23 +17,24 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import webbrowser
-
 import gtk
 import gobject
 
 import const
+import mailing
 
 
 SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]
 COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow", "ERROR": "red", "CRITICAL": "white", "TRACEBACK": "white"}
 
 class LogDialog(gtk.Dialog):
-    def __init__(self, widget=False):
+    def __init__(self, database=None):
         gtk.Dialog.__init__(self)
         self.set_title(_("Logfile Viewer"))
         self.set_size_request(700,500)
         self.set_icon(self.render_icon(gtk.STOCK_FILE, gtk.ICON_SIZE_MENU))
+
+        self.database = database
 
         self.file = open(const.LOGFILE, "r")
         self.back_buffer = gtk.TextBuffer()
@@ -90,21 +91,13 @@ class LogDialog(gtk.Dialog):
         self.combo.set_active(0)
         self.combo.set_no_show_all(True)
 
-        #report info
-        label = gtk.Label(_("If there are any errors, mail the entire text to:"))
-        label.set_justify(gtk.JUSTIFY_CENTER)
-        label.set_alignment(0.50, 0)
-        self.vbox.pack_start(label, False, False, 10)
-        link = gtk.LinkButton("timovwb@gmail.com", "timovwb@gmail.com")
-        bbox = gtk.HButtonBox()
-        bbox.add(link)
-        self.vbox.pack_start(bbox, False, True, 10)
-        gtk.link_button_set_uri_hook(self.email_hook)
-
         #action area
-        button = gtk.Button(None, gtk.STOCK_CLOSE)
-        self.action_area.pack_start(button)
-        button.connect("clicked", self.close)
+        button_report = gtk.Button(None, 'report')
+        button_report.connect("clicked", self.report_log)
+        self.action_area.pack_start(button_report)
+        button_close = gtk.Button(None, gtk.STOCK_CLOSE)
+        button_close.connect("clicked", self.close)
+        self.action_area.pack_start(button_close)
 
         self.connect("response", self.close)
         self.show_all()
@@ -112,8 +105,8 @@ class LogDialog(gtk.Dialog):
         gobject.timeout_add(1000, self.update)
         self.run()
 
-    def email_hook(self, button, email):
-        webbrowser.open("mailto:%s" % email)
+    def report_log(self, widget):
+        mailing.MailDialog(self, self.database, const.LOGFILE, 'log')
 
     def insert_color(self, bffr, line):
         for s in SEVERITY[self.combo.get_active():]:
@@ -151,5 +144,3 @@ class LogDialog(gtk.Dialog):
         self.file.close()
         self.destroy()
 
-if __name__ == "__main__":
-    c = LogView()

@@ -97,6 +97,7 @@ UPDATEURL = 'http://www.pigeonplanner.com/CURRENT'
 DOWNLOADURL = 'http://www.pigeonplanner.com/download'
 FORUMURL = 'http://www.pigeonplanner.com/forum'
 MAILURL = "http://www.pigeonplanner.com/cgi-bin/pigeonplanner_mailing.py"
+REPORTMAIL = "timovwb@gmail.com"
 
 USER_AGENT = {"User-Agent": "Pigeon Planner/%s" %VERSION}
 

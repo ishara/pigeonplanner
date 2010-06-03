@@ -201,6 +201,7 @@ class PigeonPlanner:
                                 ('icon_pedigree_detail.png', 'pedigree-detail', _('_Pedigree')),
                                 ('icon_email.png', 'email', _('E-mail')),
                                 ('icon_send.png', 'send', _('Send')),
+                                ('icon_report.png', 'report', _('Report')),
                                 ('gtk-find', 'view-all', _('View all')),
                                 ('gtk-execute', 'calculate', _('Calculate')),
                                 ('gtk-find', 'search-database', _('Search database')),

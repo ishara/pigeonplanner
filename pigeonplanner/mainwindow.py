@@ -254,7 +254,7 @@ class MainWindow:
         PhotoAlbum(self.main, self.parser, self.database)
 
     def menulog_activate(self, widget):
-        LogDialog()
+        LogDialog(self.database)
 
     def menuadd_activate(self, widget):
         self.empty_entryboxes()

@@ -9,7 +9,6 @@
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="default_width">340</property>
-    <property name="default_height">260</property>
     <property name="icon">../images/icon_logo.png</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
@@ -28,7 +27,6 @@
                 <property name="spacing">8</property>
                 <child>
                   <widget class="GtkFrame" id="frame_to">
-                    <property name="visible">True</property>
                     <property name="label_xalign">0</property>
                     <property name="shadow_type">none</property>
                     <child>
@@ -112,7 +110,6 @@
                 </child>
                 <child>
                   <widget class="GtkFrame" id="frame_subject">
-                    <property name="visible">True</property>
                     <property name="label_xalign">0</property>
                     <property name="shadow_type">none</property>
                     <child>
