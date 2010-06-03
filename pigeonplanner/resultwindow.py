@@ -23,7 +23,7 @@ import gtk
 import gtk.glade
 
 import const
-import common
+import mailing
 import widgets
 import messages
 from printing import PrintResults
@@ -140,7 +140,8 @@ class ResultWindow:
     def on_mail_clicked(self, widget):
         self.do_operation('mail')
         results = os.path.join(const.TEMPDIR, self.pdfname)
-        common.send_email(attachment=results)
+
+        mailing.MailDialog(self.resultwindow, self.database, results)
 
     def on_save_clicked(self, widget):
         self.do_operation('save')

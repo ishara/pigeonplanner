@@ -86,6 +86,7 @@ GLADETOOLS = os.path.join(GLADEDIR, "ToolsWindow.glade")
 GLADEASSIST = os.path.join(GLADEDIR, "DBAssistant.glade")
 GLADEPREVIEW = os.path.join(GLADEDIR, "PreviewWindow.glade")
 GLADEPHOTOALBUM = os.path.join(GLADEDIR, "PhotoAlbum.glade")
+GLADEDIALOGS = os.path.join(GLADEDIR, "Dialogs.glade")
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')
@@ -94,6 +95,9 @@ THUMBDIR = os.path.join(PREFDIR, 'thumbs')
 UPDATEURL = 'http://www.pigeonplanner.com/CURRENT'
 DOWNLOADURL = 'http://www.pigeonplanner.com/download'
 FORUMURL = 'http://www.pigeonplanner.com/forum'
+MAILURL = "http://www.pigeonplanner.com/cgi-bin/pigeonplanner_mailing.py"
+
+USER_AGENT = {"User-Agent": "Pigeon Planner/%s" %VERSION}
 
 DEAD = 0
 ACTIVE = 1

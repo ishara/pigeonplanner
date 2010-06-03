@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import urllib2
 import os.path
 
 import gtk
@@ -72,39 +73,6 @@ def pop_statusbar_message(statusbar):
     statusbar.pop(0)
     return False
 
-def send_email(recipient='', subject='', body='', attachment=''):
-    """
-    Send an email with the default emailclient.
-    Do this with the simplemapi module on Windows and
-    with the xdg-email commandline program on Linux.
-    """
-
-    if const.WINDOWS:
-        import simplemapi
-
-        simplemapi.SendMail(recipient, subject, body, attachment)
-    elif const.UNIX:
-        if not search_file('xdg-email', os.environ['PATH']):
-            widgets.message_dialog('error', messages.MSG_NO_MAILCLIENT)
-            return
-
-        import subprocess
-
-        cmd = ['xdg-email']
-        if subject:
-            cmd.append('--subject')
-            cmd.append(subject)
-        if body:
-            cmd.append('--body')
-            cmd.append(body)
-        if attachment:
-            cmd.append('--attach')
-            cmd.append(attachment)
-        if recipient:
-            cmd.append(recipient)
-
-        subprocess.Popen(cmd)
-
 def search_file(filename, search_path):
     paths = search_path.split(':')
     path_found = None
@@ -114,4 +82,18 @@ def search_file(filename, search_path):
             break
 
     return path_found
+
+
+class URLOpen:
+    def __init__(self, cookie=None):
+        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+
+    def open(self, url, body, headers=None):
+        if not headers:
+            headers = const.USER_AGENT
+        else:
+            if not "User-Agent" in headers:
+                headers.update(const.USER_AGENT)
+
+        return self.opener.open(urllib2.Request(url, body, headers))
 

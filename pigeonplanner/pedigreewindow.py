@@ -28,6 +28,7 @@ import gtk.glade
 import const
 import common
 import widgets
+import mailing
 import messages
 from pedigree import DrawPedigree
 from printing import PrintPedigree
@@ -105,7 +106,8 @@ class PedigreeWindow:
     def on_mail_clicked(self, widget):
         self.do_operation('mail')
         pedigree = os.path.join(const.TEMPDIR, self.pdfname)
-        common.send_email(attachment=pedigree)
+
+        mailing.MailDialog(self.pedigreewindow, self.main.database, pedigree)
 
     def on_save_clicked(self, widget):
         self.do_operation('save')
