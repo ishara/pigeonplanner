@@ -113,6 +113,11 @@ class MailDialog:
 
     def close_dialog(self, widget=None, event=None):
         if not self.sending:
+            try:
+                os.remove(self.attachment)
+            except:
+                pass
+
             self.maildialog.destroy()
 
     def on_cancel_clicked(self, widget):
