@@ -112,6 +112,8 @@ class MailDialog:
         self.entry_mail.set_text(email)
         self.label_attachment.set_text(os.path.basename(attachment))
 
+        self.maildialog.show()
+
     def close_dialog(self, widget=None, event=None):
         if not self.sending:
             try:
