@@ -23,6 +23,7 @@ import gtk
 import gtk.glade
 
 import const
+import common
 import mailing
 import widgets
 import messages
@@ -153,20 +154,9 @@ class ResultWindow:
         self.do_operation('print')
 
     def do_operation(self, op):
-        #TODO: put this in module, same code as pedigree
-        userinfo = {}
+        userinfo = common.get_own_address(self.main.database)
 
-        for address in self.main.database.get_all_addresses():
-            if address[9]:
-                userinfo['name'] = address[1]
-                userinfo['street'] = address[2]
-                userinfo['code'] = address[3]
-                userinfo['city'] = address[4]
-                userinfo['phone'] = address[6]
-                userinfo['email'] = address[7]
-                break
-
-        if not userinfo.has_key('name'):
+        if userinfo['name'] == '':
             if widgets.message_dialog('question', messages.MSG_NO_INFO, self.resultwindow):
                 tw = ToolsWindow(self.main)
                 tw.toolsdialog.set_keep_above(True)
@@ -175,13 +165,6 @@ class ResultWindow:
                 tw.chkme.set_active(True)
 
                 return
-            else:
-                userinfo['name'] = ""
-                userinfo['street'] = ""
-                userinfo['code'] = ""
-                userinfo['city'] = ""
-                userinfo['phone'] = ""
-                userinfo['email'] = ""
 
         results = []
         for item in self.liststore:

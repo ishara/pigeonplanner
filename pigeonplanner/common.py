@@ -83,6 +83,20 @@ def search_file(filename, search_path):
 
     return path_found
 
+def get_own_address(database):
+        userinfo = dict(name='', street='', code='', city='', country='', phone='', email='', comment='')
+        info = database.get_own_address()
+        if info:
+            userinfo['name'] = info[1]
+            userinfo['street'] = info[2]
+            userinfo['code'] = info[3]
+            userinfo['city'] = info[4]
+            userinfo['country'] = info[5]
+            userinfo['phone'] = info[6]
+            userinfo['email'] = info[7]
+            userinfo['comment'] = info[8]
+        return userinfo
+
 
 class URLOpen:
     def __init__(self, cookie=None):

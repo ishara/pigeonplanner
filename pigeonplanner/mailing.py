@@ -96,11 +96,10 @@ class MailDialog:
         self.textview_message.set_buffer(self.textbuffer)
 
         name, email = '', ''
-        for address in database.get_all_addresses():
-            if address[9]:
-                name = address[1]
-                email = address[7]
-                break
+        info = common.get_own_address(database)
+        if info:
+            name = info['name']
+            email = info['email']
 
         self.entry_name.set_text(name)
         self.entry_mail.set_text(email)

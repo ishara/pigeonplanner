@@ -411,6 +411,13 @@ class DatabaseOperations:
         conn.close()
         return data
 
+    def get_own_address(self):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Addresses WHERE me=1')
+        data = cursor.fetchone()
+        conn.close()
+        return data
+
 #### Colours
     def insert_colour(self, data):
         conn, cursor = self.db_connect()
