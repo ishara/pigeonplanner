@@ -50,7 +50,7 @@ class ResultWindow:
         self.build_treeview()
         self.fill_treeview()
 
-        self.pdfname = "results_%s.pdf" %datetime.date.today()
+        self.pdfname = "%s_%s.pdf" %(_("Results"), datetime.date.today())
 
         self.resultwindow.show()
 

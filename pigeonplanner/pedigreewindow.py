@@ -68,7 +68,7 @@ class PedigreeWindow:
                                 self, self.main.options.optionList.language)
         self.dp.draw_pedigree()
 
-        self.pdfname = "pedigree_%s_%s.pdf" %(pigeoninfo['ring'], pigeoninfo['year'])
+        self.pdfname = "%s_%s_%s.pdf" %(_("Pedigree"), pigeoninfo['ring'], pigeoninfo['year'])
 
         self.pedigreewindow.show()
 
