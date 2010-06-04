@@ -241,6 +241,7 @@ class PigeonPlanner:
         from cStringIO import StringIO
 
         import pigeonplanner.const as const
+        import pigeonplanner.database as database
         import pigeonplanner.logdialog as logdialog
 
         file_name = tb.tb_frame.f_code.co_filename
@@ -257,7 +258,7 @@ class PigeonPlanner:
         logfile.write(tbtext)
         logfile.close()
         print trace.getvalue()
-        logdialog.LogDialog()
+        logdialog.LogDialog(database.DatabaseOperations())
 
 if __name__ == "__main__":
     app = PigeonPlanner()
