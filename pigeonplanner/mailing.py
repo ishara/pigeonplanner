@@ -112,6 +112,9 @@ class MailDialog:
         self.entry_mail.set_text(email)
         self.label_attachment.set_text(os.path.basename(attachment))
 
+        if kind == 'log':
+            self.entry_name.grab_focus()
+            self.entry_name.set_position(-1)
         self.maildialog.show()
 
     def close_dialog(self, widget=None, event=None):
