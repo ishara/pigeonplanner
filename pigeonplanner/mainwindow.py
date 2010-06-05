@@ -234,6 +234,12 @@ class MainWindow:
         self.statusmsg.pop_message(self.statusmsgs[widget.get_name()][0])
 
     # Menu callbacks
+    def menuprintpedigree_activate(self, widget):
+        userinfo = common.get_own_address(self.database)
+        pigeoninfo = self.get_pigeoninfo()
+
+        PrintPedigree(self.main, pigeoninfo, userinfo, self.options.optionList, 'print', '')
+
     def menuprintblank_activate(self, widget):
         userinfo = common.get_own_address(self.database)
         pigeoninfo = dict(pindex='', ring='', year='', sex='', colour='', name='', image='', extra1='', extra2='', extra3='', extra4='', extra5='', extra6='')
@@ -383,21 +389,7 @@ class MainWindow:
         dialog.destroy()
 
     def menupedigree_activate(self, widget):
-        pindex, ring, year = self.get_main_ring()
-
-        pigeoninfo = {'pindex': pindex, 'ring': ring, 'year': year,
-                      'sex': self.sexDic[self.parser.pigeons[pindex].sex],
-                      'colour': self.parser.pigeons[pindex].colour,
-                      'name': self.parser.pigeons[pindex].name,
-                      'image': self.parser.pigeons[pindex].image,
-                      'extra1': self.parser.pigeons[pindex].extra1,
-                      'extra2': self.parser.pigeons[pindex].extra2,
-                      'extra3': self.parser.pigeons[pindex].extra3,
-                      'extra4': self.parser.pigeons[pindex].extra4,
-                      'extra5': self.parser.pigeons[pindex].extra5,
-                      'extra6': self.parser.pigeons[pindex].extra6}
-
-        PedigreeWindow(self, pigeoninfo)
+        PedigreeWindow(self, self.get_pigeoninfo())
 
     def menuaddresult_activate(self, widget):
         self.notebook.set_current_page(2)
@@ -982,7 +974,9 @@ class MainWindow:
             ("EditMenu", None, _("_Edit")),
             ("ViewMenu", None, _("_View")),
             ("HelpMenu", None, _("_Help")),
-            ("Blank", None, _("Blank pedigree"), None,
+            ("PrintPedigree", None, _("_Pedigree"), None,
+                    _("Print this pedigree"), self.menuprintpedigree_activate),
+            ("PrintBlank", None, _("Blank pedigree"), None,
                     _("Print a blank pedigree"), self.menuprintblank_activate),
             ("Backup", gtk.STOCK_FLOPPY, _("_Backup"), None,
                     _("Create a backup of your database"), self.menubackup_activate),
@@ -1744,6 +1738,30 @@ class MainWindow:
         '''
 
         self.calpopup.hide()
+
+    def get_pigeoninfo(self):
+        '''
+        Get a dictionary of the current pigeons details
+        '''
+
+        pindex, ring, year = self.get_main_ring()
+
+        pigeoninfo = {}
+        pigeoninfo['pindex'] = pindex
+        pigeoninfo['ring'] = ring
+        pigeoninfo['year'] = year
+        pigeoninfo['sex'] = self.sexDic[self.parser.pigeons[pindex].sex]
+        pigeoninfo['colour'] = self.parser.pigeons[pindex].colour
+        pigeoninfo['name'] = self.parser.pigeons[pindex].name
+        pigeoninfo['image'] = self.parser.pigeons[pindex].image
+        pigeoninfo['extra1'] = self.parser.pigeons[pindex].extra1
+        pigeoninfo['extra2'] = self.parser.pigeons[pindex].extra2
+        pigeoninfo['extra3'] = self.parser.pigeons[pindex].extra3
+        pigeoninfo['extra4'] = self.parser.pigeons[pindex].extra4
+        pigeoninfo['extra5'] = self.parser.pigeons[pindex].extra5
+        pigeoninfo['extra6'] = self.parser.pigeons[pindex].extra6
+
+        return pigeoninfo
 
     def get_main_ring(self):
         '''

@@ -39,7 +39,8 @@ uistring = '''
          <menuitem action="Log"/>
          <separator/>
          <menu action="PrintMenu">
-            <menuitem action="Blank"/>
+            <menuitem action="PrintPedigree"/>
+            <menuitem action="PrintBlank"/>
          </menu>
          <separator/>
          <menu action="BackupMenu">
