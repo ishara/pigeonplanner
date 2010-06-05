@@ -407,7 +407,9 @@ class PrintPedigree(BasePrinting):
         cr.set_font_size(8)
         cr.move_to(0, 10)
         cr.show_text(_("Pedigree of:"))
-        ring = "%s / %s" %(self.pigeoninfo['ring'], self.pigeoninfo['year'][2:])
+        ring = ""
+        if self.pigeoninfo['ring']:
+            ring = "%s / %s" %(self.pigeoninfo['ring'], self.pigeoninfo['year'][2:])
         xb, yb, width, height, xa, ya = cr.text_extents(ring)
         cr.move_to(total_width-width, 10)
         cr.show_text(ring)

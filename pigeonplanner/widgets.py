@@ -38,6 +38,10 @@ uistring = '''
          <menuitem action="Album"/>
          <menuitem action="Log"/>
          <separator/>
+         <menu action="PrintMenu">
+            <menuitem action="Blank"/>
+         </menu>
+         <separator/>
          <menu action="BackupMenu">
             <menuitem action="Backup"/>
             <menuitem action="Restore"/>

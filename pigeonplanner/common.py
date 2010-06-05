@@ -24,6 +24,8 @@ import gobject
 
 import const
 import widgets
+import messages
+from toolswindow import ToolsWindow
 
 
 def create_stock_button(icons):
@@ -98,9 +100,6 @@ def get_own_address(database):
     return userinfo
 
 def check_userinfo(parent, main, name):
-    import messages
-    from toolswindow import ToolsWindow
-
     if name == '':
         if widgets.message_dialog('question', messages.MSG_NO_INFO, parent):
             tw = ToolsWindow(main)

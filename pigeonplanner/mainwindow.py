@@ -41,6 +41,7 @@ import checks
 from logdialog import LogDialog
 from pedigree import DrawPedigree
 from photoalbum import PhotoAlbum
+from printing import PrintPedigree
 from toolswindow import ToolsWindow
 from resultwindow import ResultWindow
 from optionsdialog import OptionsDialog
@@ -233,6 +234,12 @@ class MainWindow:
         self.statusmsg.pop_message(self.statusmsgs[widget.get_name()][0])
 
     # Menu callbacks
+    def menuprintblank_activate(self, widget):
+        userinfo = common.get_own_address(self.database)
+        pigeoninfo = dict(pindex='', ring='', year='', sex='', colour='', name='', image='', extra1='', extra2='', extra3='', extra4='', extra5='', extra6='')
+
+        PrintPedigree(self.main, pigeoninfo, userinfo, self.options.optionList, 'print', '')
+
     def menubackup_activate(self, widget):
         dialog = widgets.BackupDialog(self.main, _("Create backup"), 'create')
         run = dialog.run()
@@ -969,11 +976,14 @@ class MainWindow:
         action_group = gtk.ActionGroup("MainWindowActions")
         action_group.add_actions((
             ("FileMenu", None, _("_File")),
+            ("PrintMenu", gtk.STOCK_PRINT, None),
             ("BackupMenu", None, _("_Backup")),
             ("PigeonMenu", None, _("_Pigeon")),
             ("EditMenu", None, _("_Edit")),
             ("ViewMenu", None, _("_View")),
             ("HelpMenu", None, _("_Help")),
+            ("Blank", None, _("Blank pedigree"), None,
+                    _("Print a blank pedigree"), self.menuprintblank_activate),
             ("Backup", gtk.STOCK_FLOPPY, _("_Backup"), None,
                     _("Create a backup of your database"), self.menubackup_activate),
             ("Restore", gtk.STOCK_REVERT_TO_SAVED, _("_Restore"), None,
