@@ -29,10 +29,8 @@ import const
 import common
 import widgets
 import mailing
-import messages
 from pedigree import DrawPedigree
 from printing import PrintPedigree
-from toolswindow import ToolsWindow
 
 
 class PedigreeWindow:
@@ -121,15 +119,7 @@ class PedigreeWindow:
     def do_operation(self, op):
         userinfo = common.get_own_address(self.main.database)
 
-        if userinfo['name'] == '':
-            if widgets.message_dialog('question', messages.MSG_NO_INFO, self.pedigreewindow):
-                tw = ToolsWindow(self.main)
-                tw.toolsdialog.set_keep_above(True)
-                tw.treeview.set_cursor(2)
-                tw.on_adadd_clicked(None, pedigree_call=True)
-                tw.chkme.set_active(True)
-
-                return
+        if not common.check_userinfo(self.pedigreewindow, self.main, userinfo['name']): return
 
         PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo, self.main.options.optionList, op, self.pdfname)
 

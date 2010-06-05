@@ -84,18 +84,34 @@ def search_file(filename, search_path):
     return path_found
 
 def get_own_address(database):
-        userinfo = dict(name='', street='', code='', city='', country='', phone='', email='', comment='')
-        info = database.get_own_address()
-        if info:
-            userinfo['name'] = info[1]
-            userinfo['street'] = info[2]
-            userinfo['code'] = info[3]
-            userinfo['city'] = info[4]
-            userinfo['country'] = info[5]
-            userinfo['phone'] = info[6]
-            userinfo['email'] = info[7]
-            userinfo['comment'] = info[8]
-        return userinfo
+    userinfo = dict(name='', street='', code='', city='', country='', phone='', email='', comment='')
+    info = database.get_own_address()
+    if info:
+        userinfo['name'] = info[1]
+        userinfo['street'] = info[2]
+        userinfo['code'] = info[3]
+        userinfo['city'] = info[4]
+        userinfo['country'] = info[5]
+        userinfo['phone'] = info[6]
+        userinfo['email'] = info[7]
+        userinfo['comment'] = info[8]
+    return userinfo
+
+def check_userinfo(parent, main, name):
+    import messages
+    from toolswindow import ToolsWindow
+
+    if name == '':
+        if widgets.message_dialog('question', messages.MSG_NO_INFO, parent):
+            tw = ToolsWindow(main)
+            tw.toolsdialog.set_keep_above(True)
+            tw.treeview.set_cursor(2)
+            tw.on_adadd_clicked(None, pedigree_call=True)
+            tw.chkme.set_active(True)
+
+            return False
+
+    return True
 
 
 class URLOpen:

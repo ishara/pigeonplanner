@@ -26,9 +26,7 @@ import const
 import common
 import mailing
 import widgets
-import messages
 from printing import PrintResults
-from toolswindow import ToolsWindow
 
 
 class ResultWindow:
@@ -156,15 +154,7 @@ class ResultWindow:
     def do_operation(self, op):
         userinfo = common.get_own_address(self.main.database)
 
-        if userinfo['name'] == '':
-            if widgets.message_dialog('question', messages.MSG_NO_INFO, self.resultwindow):
-                tw = ToolsWindow(self.main)
-                tw.toolsdialog.set_keep_above(True)
-                tw.treeview.set_cursor(2)
-                tw.on_adadd_clicked(None, pedigree_call=True)
-                tw.chkme.set_active(True)
-
-                return
+        if not common.check_userinfo(self.resultwindow, self.main, userinfo['name']): return
 
         results = []
         for item in self.liststore:
@@ -181,3 +171,4 @@ class ResultWindow:
             results.append(values)
 
         PrintResults(self.resultwindow, results, userinfo, self.main.options.optionList, op, self.pdfname)
+
