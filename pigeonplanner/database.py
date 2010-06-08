@@ -71,7 +71,7 @@ class DatabaseOperations:
                   ' pindex TEXT,'
                   ' date TEXT,'
                   ' description TEXT,'
-                  ' by TEXT,'
+                  ' doneby TEXT,'
                   ' medication TEXT,'
                   ' dosage TEXT,'
                   ' comment TEXT,'
@@ -383,7 +383,7 @@ class DatabaseOperations:
 
     def update_medication(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Medication SET date=?, description=?, by=?, medication=?, dosage=?, comment=?, vaccination=? WHERE Medicationkey=?', data)
+        cursor.execute('UPDATE Medication SET date=?, description=?, doneby=?, medication=?, dosage=?, comment=?, vaccination=? WHERE Medicationkey=?', data)
         conn.commit()
         conn.close()
 
