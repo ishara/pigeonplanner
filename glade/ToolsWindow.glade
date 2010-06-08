@@ -1759,7 +1759,7 @@ your pigeons and results.</property>
                                 <property name="row_spacing">20</property>
                                 <child>
                                   <widget class="GtkButton" id="btnupdate">
-                                    <property name="label" translatable="yes">check</property>
+                                    <property name="label">check</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>

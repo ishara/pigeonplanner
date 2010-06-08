@@ -132,10 +132,6 @@ MSG_UPDATE_NOW = (_("Update available!"),
                   _("There is an update available, do you want to download it now?"),
                   _("Update"))
 
-MSG_OLD_DATABASE = (_("The database version doesn't match the program version! Continue?"),
-                    _("It is not advised to continue. This may result in the program not to function correctly or even cause data loss!"),
-                    _("Warning"))
-
 MSG_NEED_EMAIL = (_("The recipient and sender's e-mailaddress are required."),
                   None,
                   _("Error"))

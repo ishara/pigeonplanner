@@ -5057,7 +5057,7 @@ Lost</property>
             </child>
             <child>
               <widget class="GtkCheckButton" id="chkVaccination">
-                <property name="label" translatable="yes">Vaccination?</property>
+                <property name="label" translatable="yes">Vaccination</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
