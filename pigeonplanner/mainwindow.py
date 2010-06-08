@@ -885,7 +885,9 @@ class MainWindow:
         if self.medicationDialogMode == 'add':
             data = (pindex, ) + data
             rowid = self.database.insert_medication(data)
-            self.lsMedication.append([rowid, data[1], data[2]])
+            rowiter = self.lsMedication.append([rowid, data[1], data[2]])
+            self.selMedication.select_iter(rowiter)
+            self.tvMedication.scroll_to_cell(self.lsMedication.get_path(rowiter))
         elif self.medicationDialogMode == 'edit':
             selection = self.tvMedication.get_selection()
             model, node = selection.get_selected()
