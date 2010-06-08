@@ -215,26 +215,24 @@ class PigeonPlanner:
         import pigeonplanner.database as database
 
         db = database.DatabaseOperations()
-        db_version = db.get_db_version()
-        if db_version < const.DATABASE_VERSION:
-            import pigeonplanner.dbassistant as dbass
 
-            assistant = dbass.DBAssistant(db, db_version)
-            gtk.main()
+        # Check if all tables are present
+        for s_table, s_columns in db.SCHEMA.items():
+            if not s_table in db.get_tablenames():
+                self.logger.info("Adding table '%s'" %s_table)
+                db.add_table_from_schema(s_table)
 
-            if assistant.cancelled:
-                sys.exit()
-            elif assistant.error:
-                import pigeonplanner.logdialog as logdialog
-
-                logdialog.LogDialog()
-                sys.exit()
-        elif db_version > const.DATABASE_VERSION:
-            import pigeonplanner.messages as messages
-            import pigeonplanner.widgets as widgets
-
-            if not widgets.message_dialog('warning', messages.MSG_OLD_DATABASE):
-                sys.exit()
+        # Check if all columns are present
+        for table in db.get_tablenames(): # Get all tables again because there could be added
+            for column_def in db.SCHEMA[table][1:-1].split(', '):
+                column = column_def.split(' ')[0]
+                if not column in db.get_columnnames(table):
+                    # Note: no need to show a progressbar. According to the SQLite website:
+                    # The execution time of the ALTER TABLE command is independent of the
+                    # amount of data in the table. The ALTER TABLE command runs as quickly
+                    # on a table with 10 million rows as it does on a table with 1 row.
+                    self.logger.info("Adding column '%s' to table '%s'" %(column, table))
+                    db.add_column(table, column_def)
 
     def exception_hook(self, type_, value, tb):
         import traceback

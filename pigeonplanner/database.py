@@ -159,67 +159,30 @@ class DatabaseOperations:
         cursor = conn.cursor()
         return (conn, cursor)
 
-#### Version
-    def get_db_version(self):
+#### 
+    def get_tablenames(self):
         conn, cursor = self.db_connect()
-        try: 
-            cursor.execute('SELECT db_version FROM Version')
-            data = cursor.fetchone()[0]
-        except TypeError:
-            # Firstrun, return latest version
-            data = const.DATABASE_VERSION
-        except sqlite3.OperationalError:
-            # Old database
-            data = 0
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        data = [table[0] for table in cursor.fetchall()]
         conn.close()
         return data
 
-#### 
-    def insert_db_version(self, version):
+    def get_columnnames(self, table):
         conn, cursor = self.db_connect()
-        try:
-            cursor.execute('INSERT INTO Version VALUES (null, ?)', (version, ))
-        except sqlite3.IntegrityError:
-            pass
-        conn.commit()
+        cursor.execute("PRAGMA table_info(%s)" %table)
+        data = [column[1] for column in cursor.fetchall()]
         conn.close()
+        return data
 
-    def change_db_version(self, version):
+    def add_column(self, table, column):
         conn, cursor = self.db_connect()
-        try:
-            cursor.execute('UPDATE Version SET db_version=? WHERE VersionKey=1', (version, ))
-        except sqlite3.IntegrityError:
-            pass
+        cursor.execute("ALTER TABLE %s ADD COLUMN %s" %(table, column))
         conn.commit()
         conn.close()
 
     def add_table_from_schema(self, table):
         conn, cursor = self.db_connect()
         cursor.execute("CREATE TABLE IF NOT EXISTS %s %s" %(table, self.SCHEMA[table]))
-        conn.commit()
-        conn.close()
-
-    def rename_table(self, old, new):
-        conn, cursor = self.db_connect()
-        cursor.execute("ALTER TABLE %s RENAME TO %s" %(old, new))
-        conn.commit()
-        conn.close()
-
-    def copy_table(self, frm, to):
-        conn, cursor = self.db_connect()
-        cursor.execute("INSERT INTO %s SELECT * FROM %s" %(to, frm))
-        conn.commit()
-        conn.close()
-
-    def copy_table2(self, frm, to):
-        conn, cursor = self.db_connect()
-        cursor.execute("INSERT INTO %s(Resultkey, pindex, date, point, place, out, sector) SELECT * FROM %s" %(to, frm))
-        conn.commit()
-        conn.close()
-
-    def drop_table(self, table):
-        conn, cursor = self.db_connect()
-        cursor.execute("DROP TABLE %s" %table)
         conn.commit()
         conn.close()
 
