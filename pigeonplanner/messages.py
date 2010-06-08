@@ -65,7 +65,10 @@ MSG_RESULT_EXISTS = (_("Invalid input!"),
                      _("Error"))
 MSG_REMOVE_RESULT = (_("Removing the selected result"),
                      _("Are you sure?"),
-                     _("Remove result"))
+                     _("Remove entry"))
+MSG_REMOVE_MEDICATION = (_("Removing the selected medication entry"),
+                         _("Are you sure?"),
+                         _("Remove entry"))
 
 MSG_NAME_EMPTY = (_("Invalid input!"),
                   _("The name has to be entered."),
@@ -75,7 +78,7 @@ MSG_NAME_EXISTS = (_("Invalid input!"),
                    _("Error"))
 MSG_REMOVE_ADDRESS = (_("Removing '%s'"),
                       _("Are you sure you want to remove this person from your addresses?"),
-                      _("Remove address"))
+                      _("Remove entry"))
 
 MSG_REMOVE_ITEM = (_("Removing '%(item)s' from '%(dataset)s'."),
                    _("Are you sure you want to remove this item?"),

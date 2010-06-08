@@ -35,7 +35,7 @@ DESCRIPTION = pigeonplanner.description
 LICENSE = pigeonplanner.license
 
 
-DATABASE_VERSION = 2
+DATABASE_VERSION = 3
 
 
 SMALL_SCREEN = False

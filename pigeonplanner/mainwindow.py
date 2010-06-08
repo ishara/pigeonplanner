@@ -367,6 +367,8 @@ class MainWindow:
                 image = self.parser.pigeons[pindex].image
                 if image:
                     os.remove(self.get_thumb_path(image))
+                # And medication
+                self.database.delete_medication_from_band(pindex)
 
                 self.parser.get_pigeons()
 
@@ -821,6 +823,96 @@ class MainWindow:
         self.cbWind.child.set_text('')
         self.entryComment.set_text('')
 
+    # Medication callbacks
+    def on_tvMedication_press(self, widget, event):
+        path, focus = self.tvMedication.get_cursor()
+
+        if event.button == 3 and path:
+            entries = [
+                (gtk.STOCK_EDIT, self.on_editmedication_clicked, None),
+                (gtk.STOCK_REMOVE, self.on_removemedication_clicked, None)]
+
+            widgets.popup_menu(event, entries)
+
+    def on_addmedication_clicked(self, widget):
+        self.clear_medicationdialog_fields()
+        self.medicationDialogMode = 'add'
+        self.medicationdialog.show()
+        self.entry_meddialog_date.grab_focus()
+        self.entry_meddialog_date.set_position(10)
+
+    def on_removemedication_clicked(self, widget):
+        path, focus = self.tvMedication.get_cursor()
+        model, tIter = self.selMedication.get_selected()
+        pindex, ring, year = self.get_main_ring()
+
+        if not widgets.message_dialog('warning', messages.MSG_REMOVE_MEDICATION, self.main):
+            return
+
+        self.database.delete_medication_from_id(model[tIter][0])
+
+        self.lsMedication.remove(tIter)
+
+        if len(self.lsMedication) > 0:
+            self.tvMedication.set_cursor(path)
+
+    def on_editmedication_clicked(self, widget):
+        med = self.get_selected_medication()
+        self.entry_meddialog_date.set_text(med[2])
+        self.entry_meddialog_desc.set_text(med[3])
+        self.entry_meddialog_by.set_text(med[4])
+        self.entry_meddialog_med.set_text(med[5])
+        self.entry_meddialog_dos.set_text(med[6])
+        self.entry_meddialog_comment.set_text(med[7])
+        self.chkVaccination.set_active(med[8])
+
+        self.medicationDialogMode = 'edit'
+        self.medicationdialog.show()
+        self.entry_meddialog_date.grab_focus()
+        self.entry_meddialog_date.set_position(10)
+
+    def on_medicationdialogsave_clicked(self, widget):
+        try:
+            pindex, ring, year = self.get_main_ring()
+        except TypeError:
+            return
+
+        try:
+            data = self.get_medicationdata()
+        except TypeError:
+            return
+
+        if self.medicationDialogMode == 'add':
+            data = (pindex, ) + data
+            rowid = self.database.insert_medication(data)
+            self.lsMedication.append([rowid, data[1], data[2]])
+        elif self.medicationDialogMode == 'edit':
+            selection = self.tvMedication.get_selection()
+            model, node = selection.get_selected()
+            self.lsMedication.set(node, 1, data[0], 2, data[1])
+
+            data += (self.lsMedication.get_value(node, 0), )
+            self.database.update_medication(data)
+
+            selection.unselect_iter(node)
+            selection.select_iter(node)
+
+        self.hide_medication_dialog()
+
+    def on_medicationdialogcancel_clicked(self, widget):
+        self.hide_medication_dialog()
+
+    def hide_medication_dialog(self, widget=None, event=None):
+        self.medicationdialog.hide()
+
+        return True
+
+    def clear_medicationdialog_fields(self):
+        for entry in self.wTree.get_widget_prefix('entry_meddialog_'):
+            entry.set_text('')
+        self.entry_meddialog_date.set_text(datetime.date.today().strftime(self.date_format))
+        self.chkVaccination.set_active(False)
+
     # Find parent callbacks
     def on_findsire_clicked(self, widget):
         self.search = 'sire'
@@ -1105,6 +1197,14 @@ class MainWindow:
                                 None,
                                 True, True, True)
 
+        # Medication treeview
+        self.lsMedication, self.selMedication = widgets.setup_treeview(
+                                self.tvMedication,
+                                [_("Date"), _("Description")],
+                                [str, str, str],
+                                self.selectionmedication_changed,
+                                True, True, True)
+
         # Results treeview
         columns = [_("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector"), _("Type"), _("Category"), _("Weather"), _("Wind"), _("Comment")]
         types = [str, str, str, int, int, float, str, str, str, str, str, str]
@@ -1163,6 +1263,28 @@ class MainWindow:
         else:
             widgets.set_multiple_sensitive({self.removeresult: False, self.editresult: False})
 
+    def selectionmedication_changed(self, selection):
+        model, path = selection.get_selected()
+
+        if path:
+            widgets.set_multiple_sensitive({self.removemedication: True, self.editmedication: True})
+        else:
+            widgets.set_multiple_sensitive({self.removemedication: False, self.editmedication: False})
+
+            for entry in self.wTree.get_widget_prefix('entry_med_'):
+                entry.set_text('')
+
+            return
+
+        data = self.get_selected_medication()
+        self.entry_med_date.set_text(data[2])
+        self.entry_med_desc.set_text(data[3])
+        self.entry_med_by.set_text(data[4])
+        self.entry_med_med.set_text(data[5])
+        self.entry_med_dosage.set_text(data[6])
+        self.entry_med_comment.set_text(data[7])
+        self.label_vaccination.set_sensitive(data[8])
+
     def selection_changed(self, selection):
         '''
         Get all the data/info from the selected pigeon
@@ -1187,6 +1309,7 @@ class MainWindow:
             self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
             self.labelImgPath.set_text('')
             self.pedigree.draw_pedigree()
+            self.lsMedication.clear()
             self.lsResult.clear()
             return
 
@@ -1269,6 +1392,8 @@ class MainWindow:
         self.get_results(pindex)
         self.labelPigeonResult.set_text("%s / %s" %(ring, year))
 
+        self.get_medication(pindex)
+
         self.fill_status(pindex, status)
 
     def fill_status(self, pindex, status):
@@ -1326,6 +1451,14 @@ class MainWindow:
             self.lsResult.append([key, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
 
         self.lsResult.set_sort_column_id(1, gtk.SORT_ASCENDING)
+
+    def get_medication(self, pindex):
+        self.lsMedication.clear()
+
+        for med in self.database.get_pigeon_medication(pindex):
+            self.lsMedication.append([med[0], med[2], med[3]])
+
+        self.lsMedication.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
     def find_direct_relatives(self, pindex, sire, dam):
         '''
@@ -1714,6 +1847,8 @@ class MainWindow:
 
         if self.dateEntry.get_name() == 'entryDate':
             window = self.resultdialog.window
+        elif self.dateEntry.get_name() == 'entry_meddialog_date':
+            window = self.medicationdialog.window
         else:
             window = self.statusdialog.window
 
@@ -1837,6 +1972,23 @@ class MainWindow:
         if not tIter: return
         
         return list(model[tIter])
+
+    def get_selected_medication(self):
+        model, tIter = self.selMedication.get_selected()
+        if not tIter: return
+
+        return self.database.get_medication_from_id(model[tIter][0])
+
+    def get_medicationdata(self):
+        return (
+            self.entry_meddialog_date.get_text(),
+            self.entry_meddialog_desc.get_text(),
+            self.entry_meddialog_by.get_text(),
+            self.entry_meddialog_med.get_text(),
+            self.entry_meddialog_dos.get_text(),
+            self.entry_meddialog_comment.get_text(),
+            int(self.chkVaccination.get_active())
+                )
 
     def fill_find_treeview(self, sex, band, year):
         '''

@@ -85,11 +85,15 @@ class DBAssistant:
         # Database operations
         if self.version == 0: # 0.6.0 to 0.7.0
             success, exception = self.db_060_to_070()
-            if success:
-                self.img2.set_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
-            else:
-                self.upgrade_failed(exception)
-                return
+            success, exception = self.db_070_to_090()
+        elif self.version == 2: # 0.7.0 to 0.9.0
+            success, exception = self.db_070_to_090()
+
+        if success:
+            self.img2.set_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
+        else:
+            self.upgrade_failed(exception)
+            return
 
         while gtk.events_pending():
             gtk.main_iteration()
@@ -171,6 +175,19 @@ class DBAssistant:
             self.db.add_table_from_schema('Pigeons')
             self.db.copy_table('Pigeons_tmp', 'Pigeons')
             self.db.drop_table('Pigeons_tmp')
+        except Exception, e:
+            return False, e
+
+        return True, None
+
+    def db_070_to_090(self):
+        try:
+            # Add new tables
+            for table in ['Medication']:
+                self.db.add_table_from_schema(table)
+
+            # Change database version
+            self.db.change_db_version(3)
         except Exception, e:
             return False, e
 

@@ -67,6 +67,15 @@ class DatabaseOperations:
                ' ownplace INTEGER,'
                ' ownout INTEGER,'
                ' comment TEXT)',
+    'Medication': '(Medicationkey INTEGER PRIMARY KEY,'
+                  ' pindex TEXT,'
+                  ' date TEXT,'
+                  ' description TEXT,'
+                  ' by TEXT,'
+                  ' medication TEXT,'
+                  ' dosage TEXT,'
+                  ' comment TEXT,'
+                  ' vaccination INTEGER)',
     'Addresses': '(Addresskey INTEGER PRIMARY KEY,'
                  ' name TEXT,'
                  ' street TEXT,'
@@ -157,8 +166,8 @@ class DatabaseOperations:
             cursor.execute('SELECT db_version FROM Version')
             data = cursor.fetchone()[0]
         except TypeError:
-            # Firstrun
-            data = 2
+            # Firstrun, return latest version
+            data = const.DATABASE_VERSION
         except sqlite3.OperationalError:
             # Old database
             data = 0
@@ -170,6 +179,15 @@ class DatabaseOperations:
         conn, cursor = self.db_connect()
         try:
             cursor.execute('INSERT INTO Version VALUES (null, ?)', (version, ))
+        except sqlite3.IntegrityError:
+            pass
+        conn.commit()
+        conn.close()
+
+    def change_db_version(self, version):
+        conn, cursor = self.db_connect()
+        try:
+            cursor.execute('UPDATE Version SET db_version=? WHERE VersionKey=1', (version, ))
         except sqlite3.IntegrityError:
             pass
         conn.commit()
@@ -377,6 +395,48 @@ class DatabaseOperations:
             return data[0]
         else:
             return None
+
+#### Medication
+    def insert_medication(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('INSERT INTO Medication VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+        conn.commit()
+        rowid = cursor.lastrowid
+        conn.close()
+
+        return rowid
+
+    def delete_medication_from_id(self, ID):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Medication WHERE Medicationkey=?', (ID,))
+        conn.commit()
+        conn.close()
+
+    def delete_medication_from_band(self, band):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Medication WHERE pindex=?', (band,))
+        conn.commit()
+        conn.close()
+
+    def update_medication(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Medication SET date=?, description=?, by=?, medication=?, dosage=?, comment=?, vaccination=? WHERE Medicationkey=?', data)
+        conn.commit()
+        conn.close()
+
+    def get_pigeon_medication(self, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Medication WHERE pindex=?', (pindex,))
+        data = cursor.fetchall()
+        conn.close()
+        return data
+
+    def get_medication_from_id(self, ID):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Medication WHERE Medicationkey=?', (ID,))
+        data = cursor.fetchone()
+        conn.close()
+        return data
 
 #### Addresses
     def insert_address(self, data):
