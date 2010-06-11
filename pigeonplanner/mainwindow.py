@@ -17,6 +17,7 @@
 
 
 import os
+import time
 import datetime
 import webbrowser
 from os.path import join, isfile, isdir, splitext, basename
@@ -59,7 +60,6 @@ class MainWindow:
 
         self.main.set_title("%s %s" %(const.NAME, const.VERSION))
 
-        self.date_format = '%Y-%m-%d'
         self.changedRowIter = None
         self.blockMenuCallback = False
         self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(join(const.IMAGEDIR, 'icon_logo.png'), 75, 75)
@@ -68,7 +68,7 @@ class MainWindow:
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
                                'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit,
                                'dam': self.entryDamEdit, 'yeardam': self.entryYearDamEdit}
-        self.entryDate.set_text(datetime.date.today().strftime(self.date_format))
+        self.entryDate.set_text(datetime.date.today().strftime(const.DATE_FORMAT))
         self.cbStatus.set_active(1)
 
         self.cancelEscAG = gtk.AccelGroup()
@@ -183,10 +183,18 @@ class MainWindow:
 
         self.main.show()
 
+        events = self.database.get_notification(time.time())
+        if events:
+            description = events[0][2]
+            if len(description) > 20:
+                description = description[:24]+"..."
+            if widgets.message_dialog('question', messages.MSG_EVENT_NOTIFY, self.main, description):
+                tw = ToolsWindow(self, events[0][0])
+                tw.toolsdialog.set_keep_above(True)
+                tw.treeview.set_cursor(1)
+
     def quit_program(self, widget=None, event=None, bckp=True):
         if self.options.optionList.backup and bckp:
-            import time
-
             daysInSeconds = self.options.optionList.interval * 24 * 60 * 60
             if time.time() - self.options.optionList.last >= daysInSeconds:
                 if backup.make_backup(self.options.optionList.location):
@@ -812,7 +820,7 @@ class MainWindow:
         self.spinOutof.set_range(widget.get_value_as_int(), widget.get_range()[1])
 
     def clear_resultdialog_fields(self):
-        self.entryDate.set_text(datetime.date.today().strftime(self.date_format))
+        self.entryDate.set_text(datetime.date.today().strftime(const.DATE_FORMAT))
         self.cbRacepoint.child.set_text('')
         self.spinPlaced.set_value(1)
         self.spinOutof.set_value(1)
@@ -912,7 +920,7 @@ class MainWindow:
     def clear_medicationdialog_fields(self):
         for entry in self.wTree.get_widget_prefix('entry_meddialog_'):
             entry.set_text('')
-        self.entry_meddialog_date.set_text(datetime.date.today().strftime(self.date_format))
+        self.entry_meddialog_date.set_text(datetime.date.today().strftime(const.DATE_FORMAT))
         self.chkVaccination.set_active(False)
 
     # Find parent callbacks
@@ -971,7 +979,7 @@ class MainWindow:
         the_date = datetime.date(year, month, day)
 
         if the_date:
-            self.dateEntry.set_text(the_date.strftime(self.date_format))
+            self.dateEntry.set_text(the_date.strftime(const.DATE_FORMAT))
         else:
             self.dateEntry.set_text('')
 
@@ -1958,7 +1966,7 @@ class MainWindow:
             return False
 
         try:
-            datetime.datetime.strptime(date, self.date_format)
+            datetime.datetime.strptime(date, const.DATE_FORMAT)
         except ValueError:
             widgets.message_dialog('error', messages.MSG_INVALID_FORMAT, self.resultdialog)
             return False

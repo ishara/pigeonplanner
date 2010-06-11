@@ -86,6 +86,13 @@ class DatabaseOperations:
                  ' email TEXT,'
                  ' comment TEXT,'
                  ' me INTEGER)',
+    'Events': '(Eventskey INTEGER PRIMARY KEY,'
+              ' date TEXT,'
+              ' description TEXT,'
+              ' comment TEXT,'
+              ' notify TEXT,'
+              ' interval INTEGER,'
+              ' notifyday INTEGER)',
     'Colours': '(Colourkey INTEGER PRIMARY KEY,'
                ' colour TEXT UNIQUE)',
     'Racepoints': '(Racepointkey INTEGER PRIMARY KEY,'
@@ -398,6 +405,49 @@ class DatabaseOperations:
         conn, cursor = self.db_connect()
         cursor.execute('SELECT * FROM Medication WHERE Medicationkey=?', (ID,))
         data = cursor.fetchone()
+        conn.close()
+        return data
+
+#### Events
+    def insert_event(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('INSERT INTO Events VALUES (null, ?, ?, ?, ?, ?, ?)', data)
+        conn.commit()
+        rowid = cursor.lastrowid
+        conn.close()
+
+        return rowid
+
+    def delete_event(self, ID):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Events WHERE Eventskey=?', (ID,))
+        conn.commit()
+        conn.close()
+
+    def update_event(self, data):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Events SET date=?, description=?, comment=?, notify=?, interval=?, notifyday=? WHERE Eventskey=?', data)
+        conn.commit()
+        conn.close()
+
+    def get_all_events(self):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT * FROM Events')
+        data = cursor.fetchall()
+        conn.close()
+        return data
+
+    def get_event_data(self, ID):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT comment, notify, interval FROM Events WHERE Eventskey=?', (ID,))
+        data = cursor.fetchone()
+        conn.close()
+        return data
+
+    def get_notification(self, now):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT Eventskey, date, description FROM Events WHERE notifyday<=? AND notifyday!=0 ORDER BY date ASC', (now,))
+        data = cursor.fetchall()
         conn.close()
         return data
 

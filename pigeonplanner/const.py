@@ -100,6 +100,8 @@ REPORTMAIL = "timovwb@gmail.com"
 
 USER_AGENT = {"User-Agent": "Pigeon Planner/%s" %VERSION}
 
+DATE_FORMAT = '%Y-%m-%d'
+
 DEAD = 0
 ACTIVE = 1
 SOLD = 2

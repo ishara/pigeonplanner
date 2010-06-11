@@ -17,6 +17,7 @@
 
 
 import os
+import time
 import datetime
 import logging
 logger = logging.getLogger(__name__)
@@ -35,7 +36,7 @@ from printing import PrintVelocity
 
 
 class ToolsWindow:
-    def __init__(self, main):
+    def __init__(self, main, notification=0):
         self.wTree = gtk.glade.XML(const.GLADETOOLS)
         self.wTree.signal_autoconnect(self)
 
@@ -44,6 +45,7 @@ class ToolsWindow:
             setattr(self, wname, w)
 
         self.main = main
+        self.notification = notification
 
         self.toolsdialog.set_transient_for(self.main.main)
         self.linkbutton.set_uri(const.DOWNLOADURL)
@@ -55,7 +57,7 @@ class ToolsWindow:
 
         # Add the categories
         i = 0
-        for category in [_("Velocity calculator"), _("Datasets"), _("Addresses"), _("Statistics"), _("Database"), _("Backup"), _("Update")]:
+        for category in [_("Velocity calculator"), _("Calendar"), _("Datasets"), _("Addresses"), _("Statistics"), _("Database"), _("Backup"), _("Update")]:
             self.liststore.append([i, category])
             i += 1
 
@@ -66,11 +68,15 @@ class ToolsWindow:
         types = [int, str, str]
         self.ls_velocity, self.sel_velocity = widgets.setup_treeview(self.tv_velocity, columns, types, None, False, False, False)
 
+        # Build events treeview
+        self.ls_events, self.sel_events = widgets.setup_treeview(self.tv_events,
+                                                [_("Date"), _("Description")], [str, str, str],
+                                                self.events_changed, True, True, True)
+        self.fill_events_view()
+
         # Build addresses treeview
-        columns = [_("Name")]
-        types = [str]
         self.ls_address, self.sel_address = widgets.setup_treeview(self.tvaddress,
-                                                                   columns, types,
+                                                                   [_("Name")], [str],
                                                                    self.adselection_changed,
                                                                    True, True, False)
 
@@ -161,6 +167,131 @@ class ToolsWindow:
             info = [date.strftime("%Y-%m-%d"), release, self.sbdist.get_value_as_int()]
 
             PrintVelocity(self.main.main, data, info, self.main.options.optionList, 'print')
+
+    # Events
+    def fill_events_view(self):
+        self.ls_events.clear()
+
+        for item in self.main.database.get_all_events():
+            rowiter = self.ls_events.append([item[0], item[1], item[2]])
+            if item[0] == self.notification:
+                self.sel_events.select_iter(rowiter)
+                self.tv_events.scroll_to_cell(self.ls_events.get_path(rowiter))
+
+        self.ls_events.set_sort_column_id(1, gtk.SORT_ASCENDING)
+
+    def events_changed(self, selection):
+        model, path = selection.get_selected()
+
+        if path:
+            widgets.set_multiple_sensitive({self.event_remove: True, self.event_edit: True})
+        else:
+            widgets.set_multiple_sensitive({self.event_remove: False, self.event_edit: False})
+            self.textview_events.get_buffer().set_text('')
+            self.label_notification.set_text('')
+            self.label_notify.set_text("-1")
+            return
+
+        data = self.main.database.get_event_data(model[path][0])
+        self.textview_events.get_buffer().set_text(data[0])
+        if int(data[1]):
+            self.label_notification.set_text(_("Notification is set on %s days in advance") %data[2])
+            self.label_notify.set_text(str(data[2]))
+        else:
+            self.label_notification.set_text(_("No notification set"))
+            self.label_notify.set_text("-1")
+
+    def on_event_add_clicked(self, widget):
+        self.eventsDialogMode = 'add'
+
+        date = datetime.date.today()
+        self.calendar_event.select_month(date.month-1, date.year)
+        self.calendar_event.select_day(date.day)
+
+        self.entry_eventdialog_description.set_text('')
+        self.textview_eventdialog_comment.get_buffer().set_text('')
+
+        self.chknotify.set_active(False)
+        self.spin_notify.set_value(1)
+
+        self.eventsdialog.show()
+
+    def on_event_edit_clicked(self, widget):
+        model, path = self.sel_events.get_selected()
+
+        self.eventsDialogMode = 'edit'
+
+        year, month, day = model[path][1].split('-')
+        self.calendar_event.select_month(int(month)-1, int(year))
+        self.calendar_event.select_day(int(day))
+
+        self.entry_eventdialog_description.set_text(model[path][2])
+        textbuffer = self.textview_events.get_buffer()
+        self.textview_eventdialog_comment.get_buffer().set_text(textbuffer.get_text(*textbuffer.get_bounds()))
+
+        notify = int(self.label_notify.get_text())
+        if notify < 0:
+            self.chknotify.set_active(False)
+            self.spin_notify.set_value(1)
+        else:
+            self.chknotify.set_active(True)
+            self.spin_notify.set_value(notify)
+
+        self.eventsdialog.show()
+
+    def on_event_remove_clicked(self, widget):
+        path, focus = self.tv_events.get_cursor()
+        model, tIter = self.sel_events.get_selected()
+
+        self.main.database.delete_event(model[tIter][0])
+
+        self.ls_events.remove(tIter)
+        if len(self.ls_events) > 0:
+            self.tv_events.set_cursor(path)
+
+    def on_eventsdialog_delete(self, widget, event):
+        self.eventsdialog.hide()
+        return True
+
+    def on_chknotify_toggled(self, widget):
+        if widget.get_active():
+            self.hbox_notify.set_sensitive(True)
+        else:
+            self.hbox_notify.set_sensitive(False)
+
+    def on_event_cancel_clicked(self, widget):
+        self.eventsdialog.hide()
+
+    def on_event_save_clicked(self, widget):
+        year, month, day = self.calendar_event.get_date()
+        date = datetime.date(year, month+1, day).strftime(const.DATE_FORMAT)
+        description = self.entry_eventdialog_description.get_text()
+        textbuffer = self.textview_eventdialog_comment.get_buffer()
+        comment = textbuffer.get_text(*textbuffer.get_bounds())
+        notify = self.chknotify.get_active()
+        interval = self.spin_notify.get_value()
+
+        notifyday = 0
+        if notify:
+            eventday = time.mktime((year, month+1, day, 0, 0, 0, 0, 0, 0))
+            notifyday = eventday - (interval*86400)
+
+        if self.eventsDialogMode == 'add':
+            rowid = self.main.database.insert_event((date, description, comment, notify, interval, notifyday))
+            rowiter = self.ls_events.append([rowid, date, description])
+            self.sel_events.select_iter(rowiter)
+            self.tv_events.scroll_to_cell(self.ls_events.get_path(rowiter))
+        elif self.eventsDialogMode == 'edit':
+            selection = self.tv_events.get_selection()
+            model, node = selection.get_selected()
+            self.ls_events.set(node, 1, date, 2, description)
+            ID = self.ls_events.get_value(node, 0)
+            self.main.database.update_event((date, description, comment, notify, interval, notifyday, ID))
+
+            selection.unselect_iter(node)
+            selection.select_iter(node)
+
+        self.eventsdialog.hide()
 
     # Data
     def on_cbdata_changed(self, widget):

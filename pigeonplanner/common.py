@@ -104,7 +104,7 @@ def check_userinfo(parent, main, name):
         if widgets.message_dialog('question', messages.MSG_NO_INFO, parent):
             tw = ToolsWindow(main)
             tw.toolsdialog.set_keep_above(True)
-            tw.treeview.set_cursor(2)
+            tw.treeview.set_cursor(3)
             tw.on_adadd_clicked(None, pedigree_call=True)
             tw.chkme.set_active(True)
 
