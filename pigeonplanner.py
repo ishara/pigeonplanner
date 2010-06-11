@@ -224,9 +224,16 @@ class PigeonPlanner:
 
         # Check if all columns are present
         for table in db.get_tablenames(): # Get all tables again because there could be added
+            columns = db.get_columnnames(table)
+            if table == 'Pigeons' and 'alive' in columns:
+                # This column has been renamed somewhere between 0.4.0 and 0.6.0
+                self.logger.info("Renaming 'alive' column")
+                db.change_column_name(table)
+                # Get all columns again in this table
+                columns = db.get_columnnames(table)
             for column_def in db.SCHEMA[table][1:-1].split(', '):
                 column = column_def.split(' ')[0]
-                if not column in db.get_columnnames(table):
+                if not column in columns:
                     # Note: no need to show a progressbar. According to the SQLite website:
                     # The execution time of the ALTER TABLE command is independent of the
                     # amount of data in the table. The ALTER TABLE command runs as quickly

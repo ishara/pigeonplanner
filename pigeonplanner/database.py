@@ -193,6 +193,19 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
+    def change_column_name(self, table):
+        conn, cursor = self.db_connect()
+        cursor.execute("CREATE TEMP TABLE tmp_%s AS SELECT * FROM %s" %(table, table))
+        cursor.execute("DROP TABLE %s" %table)
+        cursor.execute("CREATE TABLE IF NOT EXISTS %s %s" %(table, self.SCHEMA[table]))
+        cursor.execute("INSERT INTO %s SELECT * FROM tmp_%s" %(table, table))
+        # No need to drop the temporary table. From the SQLite docs:
+        # If the "TEMP" or "TEMPORARY" keyword occurs (...) the table is only
+        # visible within that same database connection and is automatically
+        # deleted when the database connection is closed.
+        conn.commit()
+        conn.close()
+
 #### Optimize
     def optimize_db(self):
         conn, cursor = self.db_connect()
