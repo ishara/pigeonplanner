@@ -19,7 +19,6 @@
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <widget class="GtkHBox" id="hbox2">
@@ -58,7 +57,6 @@
                     <child>
                       <widget class="GtkVBox" id="vbox4">
                         <property name="visible">True</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">8</property>
                         <child>
                           <widget class="GtkFrame" id="frame5">
@@ -107,7 +105,6 @@
                                 <child>
                                   <widget class="GtkVBox" id="vbox3">
                                     <property name="visible">True</property>
-                                    <property name="orientation">vertical</property>
                                     <child>
                                       <widget class="GtkCheckButton" id="chkBackup">
                                         <property name="label" translatable="yes">Make an automatic backup</property>
@@ -135,8 +132,8 @@
                                             <child>
                                               <widget class="GtkFileChooserButton" id="fcbutton">
                                                 <property name="visible">True</property>
-                                                <property name="create_folders">False</property>
                                                 <property name="action">select-folder</property>
+                                                <property name="create_folders">False</property>
                                                 <property name="title" translatable="yes"></property>
                                               </widget>
                                               <packing>
@@ -281,7 +278,6 @@
                     <child>
                       <widget class="GtkVBox" id="vbox2">
                         <property name="visible">True</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">8</property>
                         <child>
                           <widget class="GtkFrame" id="framethemes">
@@ -447,7 +443,6 @@
                                 <child>
                                   <widget class="GtkVBox" id="vbox1">
                                     <property name="visible">True</property>
-                                    <property name="orientation">vertical</property>
                                     <child>
                                       <widget class="GtkCheckButton" id="chkArrows">
                                         <property name="label" translatable="yes">Show or hide the navigation arrows</property>
@@ -538,7 +533,6 @@
                     <child>
                       <widget class="GtkVBox" id="vbox5">
                         <property name="visible">True</property>
-                        <property name="orientation">vertical</property>
                         <property name="spacing">8</property>
                         <child>
                           <widget class="GtkFrame" id="frame7">
@@ -685,7 +679,6 @@ Letter</property>
                             <child>
                               <widget class="GtkVBox" id="vbox6">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">8</property>
                                 <child>
                                   <widget class="GtkFrame" id="frame9">
@@ -872,7 +865,6 @@ Letter</property>
                             <child>
                               <widget class="GtkVBox" id="vbox7">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">8</property>
                                 <child>
                                   <widget class="GtkFrame" id="frame11">
@@ -886,7 +878,6 @@ Letter</property>
                                         <child>
                                           <widget class="GtkVBox" id="vbox8">
                                             <property name="visible">True</property>
-                                            <property name="orientation">vertical</property>
                                             <child>
                                               <widget class="GtkCheckButton" id="chkResColumnNames">
                                                 <property name="label" translatable="yes">Show the column names</property>
