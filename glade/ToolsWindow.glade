@@ -60,11 +60,10 @@
                           <widget class="GtkVBox" id="vbox4">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkLabel" id="label19">
+                              <widget class="GtkLabel" id="label_title_0">
                                 <property name="visible">True</property>
                                 <property name="xalign">0.05000000074505806</property>
                                 <property name="ypad">10</property>
-                                <property name="label" translatable="yes">&lt;b&gt;&lt;i&gt;&lt;big&gt;Velocity calculator&lt;/big&gt;&lt;/i&gt;&lt;/b&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
@@ -378,11 +377,10 @@
                           <widget class="GtkVBox" id="vbox11">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkLabel" id="label6">
+                              <widget class="GtkLabel" id="label_title_1">
                                 <property name="visible">True</property>
                                 <property name="xalign">0.05000000074505806</property>
                                 <property name="ypad">10</property>
-                                <property name="label" translatable="yes">&lt;b&gt;&lt;i&gt;&lt;big&gt;Calendar&lt;/big&gt;&lt;/i&gt;&lt;/b&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
@@ -620,11 +618,10 @@
                           <widget class="GtkVBox" id="vbox6">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkLabel" id="label20">
+                              <widget class="GtkLabel" id="label_title_2">
                                 <property name="visible">True</property>
                                 <property name="xalign">0.05000000074505806</property>
                                 <property name="ypad">10</property>
-                                <property name="label" translatable="yes">&lt;b&gt;&lt;i&gt;&lt;big&gt;Manage data&lt;/big&gt;&lt;/i&gt;&lt;/b&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
@@ -903,11 +900,10 @@
                           <widget class="GtkVBox" id="vbox8">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkLabel" id="label31">
+                              <widget class="GtkLabel" id="label_title_3">
                                 <property name="visible">True</property>
                                 <property name="xalign">0.05000000074505806</property>
                                 <property name="ypad">10</property>
-                                <property name="label" translatable="yes">&lt;b&gt;&lt;i&gt;&lt;big&gt;Addresses&lt;/big&gt;&lt;/i&gt;&lt;/b&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
@@ -1356,11 +1352,10 @@
                           <widget class="GtkVBox" id="vbox7">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkLabel" id="label25">
+                              <widget class="GtkLabel" id="label_title_4">
                                 <property name="visible">True</property>
                                 <property name="xalign">0.05000000074505806</property>
                                 <property name="ypad">10</property>
-                                <property name="label" translatable="yes">&lt;b&gt;&lt;i&gt;&lt;big&gt;Statistics&lt;/big&gt;&lt;/i&gt;&lt;/b&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
@@ -1472,11 +1467,10 @@
                           <widget class="GtkVBox" id="vbox9">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkLabel" id="label41">
+                              <widget class="GtkLabel" id="label_title_5">
                                 <property name="visible">True</property>
                                 <property name="xalign">0.05000000074505806</property>
                                 <property name="ypad">10</property>
-                                <property name="label" translatable="yes">&lt;b&gt;&lt;i&gt;&lt;big&gt;Database&lt;/big&gt;&lt;/i&gt;&lt;/b&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
@@ -1728,11 +1722,10 @@
                           <widget class="GtkVBox" id="vbox1">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkLabel" id="label18">
+                              <widget class="GtkLabel" id="label_title_6">
                                 <property name="visible">True</property>
                                 <property name="xalign">0.05000000074505806</property>
                                 <property name="ypad">10</property>
-                                <property name="label" translatable="yes">&lt;b&gt;&lt;i&gt;&lt;big&gt;Backup&lt;/big&gt;&lt;/i&gt;&lt;/b&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>
@@ -1960,11 +1953,10 @@ your pigeons and results.</property>
                           <widget class="GtkVBox" id="vbox5">
                             <property name="visible">True</property>
                             <child>
-                              <widget class="GtkLabel" id="label17">
+                              <widget class="GtkLabel" id="label_title_7">
                                 <property name="visible">True</property>
                                 <property name="xalign">0.05000000074505806</property>
                                 <property name="ypad">10</property>
-                                <property name="label" translatable="yes">&lt;b&gt;&lt;i&gt;&lt;big&gt;Update&lt;/big&gt;&lt;/i&gt;&lt;/b&gt;</property>
                                 <property name="use_markup">True</property>
                               </widget>
                               <packing>

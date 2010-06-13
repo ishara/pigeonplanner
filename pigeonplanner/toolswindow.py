@@ -59,6 +59,8 @@ class ToolsWindow:
         i = 0
         for category in [_("Velocity calculator"), _("Calendar"), _("Datasets"), _("Addresses"), _("Statistics"), _("Database"), _("Backup"), _("Update")]:
             self.liststore.append([i, category])
+            label = getattr(self, "label_title_%s" %i)
+            label.set_markup("<b><i><big>%s</big></i></b>" %category)
             i += 1
 
         self.treeview.set_cursor(0)
