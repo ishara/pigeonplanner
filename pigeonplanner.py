@@ -198,7 +198,7 @@ class PigeonPlanner:
         import pigeonplanner.common as common
 
         common.create_stock_button([
-                                ('icon_pedigree_detail.png', 'pedigree-detail', _('_Pedigree')),
+                                ('icon_pedigree_detail.png', 'pedigree-detail', _('Pedigree')),
                                 ('icon_email.png', 'email', _('E-mail')),
                                 ('icon_send.png', 'send', _('Send')),
                                 ('icon_report.png', 'report', _('Report')),

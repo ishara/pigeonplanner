@@ -110,13 +110,16 @@ class MainWindow:
             cbentry.child.set_activates_default(True)
 
         if const.SMALL_SCREEN:
-            self.vboxPedigree.set_orientation(gtk.ORIENTATION_HORIZONTAL)
-            self.vboxRelatives.set_orientation(gtk.ORIENTATION_HORIZONTAL)
-            self.vboxResults.set_orientation(gtk.ORIENTATION_HORIZONTAL)
+            common.create_stock_button([
+                                ('icon_pedigree.png', 'pedigree', ''),
+                                ('icon_relatives.png', 'relatives', ''),
+                                ('icon_result.png', 'results', ''),
+                                ('icon_medication.png', 'medication', '')
+                            ])
 
-            self.imagePedigreeTab.set_from_file(join(const.IMAGEDIR, 'icon_pedigree_small.png'))
-            self.imageRelativesTab.set_from_file(join(const.IMAGEDIR, 'icon_relatives_small.png'))
-            self.imageResultsTab.set_from_file(join(const.IMAGEDIR, 'icon_result_small.png'))
+            for tabname in ['Pedigree', 'Relatives', 'Results', 'Medication']:
+                getattr(self, 'vbox'+tabname).set_orientation(gtk.ORIENTATION_HORIZONTAL)
+                getattr(self, 'image'+tabname+'Tab').set_from_stock(tabname.lower(), gtk.ICON_SIZE_BUTTON)
 
         if self.options.optionList.arrows:
             self.MenuArrows.set_active(True)
