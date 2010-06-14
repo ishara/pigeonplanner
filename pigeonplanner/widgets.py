@@ -196,6 +196,7 @@ def message_dialog(msgtype, data, parent=None, extra=None):
     elif msgtype == 'question':
         msgtype = gtk.MESSAGE_QUESTION
         buttons = gtk.BUTTONS_YES_NO
+        title = head + " - Pigeon Planner"
     elif msgtype == 'info':
         msgtype = gtk.MESSAGE_INFO
         buttons = gtk.BUTTONS_OK

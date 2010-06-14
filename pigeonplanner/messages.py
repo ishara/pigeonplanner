@@ -16,81 +16,85 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+ERROR = _("Error")
+WARNING = _("Warning")
+
+
 MSG_ALREADY_RUNNING = (_("Pigeon Planner is already running."),
                        None,
-                       _("Error"))
+                       ERROR)
 
 MSG_MAKE_DONATION = (_("Go to the website?"),
                      _("Pigeon Planner is free software. You don’t need to pay for using it. But if you like it, please consider donating to help improving it."),
-                     _("Make a donation"))
+                     "")
 
 MSG_EVENT_NOTIFY = (_("Notification for '%s'"),
                     _("Go to the calendar?"),
-                    _("Calendar"))
+                    "")
 
 MSG_INVALID_IMAGE = (_("Invalid image!"),
                      _("This image is either not supported or corrupt, please choose another one."),
-                     _("Error"))
+                     ERROR)
 MSG_IMAGE_MISSING = (_("Loading image failed!"),
                      _("Maybe you have renamed the image or moved it on your disk."),
-                     _("Error"))
+                     ERROR)
 
 MSG_SHOW_PIGEON = (_("This pigeon already exists, but isn't showing. Do you want to show it again?"),
                    None,
-                   _("Warning"))
+                   WARNING)
 MSG_OVERWRITE_PIGEON = (_("This pigeon already exists. Overwrite it?"),
                         None,
-                        _("Warning"))
+                        WARNING)
 MSG_ADD_PIGEON = (_("This pigeon doesn't exist. Do you want to add it?"),
                   None,
                   _("Adding pigeon"))
 
 MSG_EMPTY_FIELDS = (_("Invalid input!"),
                     _("The ringnumber and year are necessary."),
-                    _("Error"))
+                    ERROR)
 MSG_INVALID_NUMBER = (_("Invalid input!"),
                       _("Only numbers are accepted as year input."),
-                      _("Error"))
+                      ERROR)
 MSG_INVALID_LENGTH = (_("Invalid input!"),
                       _("Check the length of the year."),
-                      _("Error"))
+                      ERROR)
 MSG_INVALID_RANGE = (_("Invalid input!"),
                      _("Only numbers are allowed when adding multiple pigeons."),
-                     _("Error"))
+                     ERROR)
 
 MSG_EMPTY_DATA = (_("Invalid input!"),
                   _("At least the date and racepoint have to be entered."),
-                  _("Error"))
+                  ERROR)
 MSG_INVALID_FORMAT = (_("Invalid input!"),
                       _("The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."),
-                      _("Error"))
+                      ERROR)
 MSG_RESULT_EXISTS = (_("Invalid input!"),
                      _("The result you want to add already exists."),
-                     _("Error"))
+                     ERROR)
 MSG_REMOVE_RESULT = (_("Removing the selected result"),
                      _("Are you sure?"),
-                     _("Remove entry"))
+                     "")
 MSG_REMOVE_MEDICATION = (_("Removing the selected medication entry"),
                          _("Are you sure?"),
-                         _("Remove entry"))
+                         "")
 
 MSG_NAME_EMPTY = (_("Invalid input!"),
                   _("The name has to be entered."),
-                  _("Error"))
+                  ERROR)
 MSG_NAME_EXISTS = (_("Invalid input!"),
                    _("The persoon you want to add already exists."),
-                   _("Error"))
+                   ERROR)
 MSG_REMOVE_ADDRESS = (_("Removing '%s'"),
                       _("Are you sure you want to remove this person from your addresses?"),
-                      _("Remove entry"))
+                      "")
 
 MSG_REMOVE_ITEM = (_("Removing '%(item)s' from '%(dataset)s'."),
                    _("Are you sure you want to remove this item?"),
-                   _("Remove item"))
+                   "")
 
 MSG_REMOVE_DATABASE = (_("Removing database"),
                        _("Are you sure you want to remove the database? All data will be lost."),
-                       _("Remove database"))
+                       _("Removing database"))
 
 MSG_RMDB_FINISH = (_("Click \"OK\" to close the program. A new database will be created the next time you start the program again."),
                    None,
@@ -115,17 +119,17 @@ MSG_RESTORE_FAILED = (_("There was an error restoring the backup."),
 
 MSG_NO_INFO = (_("No personal information found."),
                _("This will be shown on top of the printed pedigree.\nDo you want to add it now?"),
-               _("Personal"))
+               "")
 
 MSG_PRINT_ERROR = (_("Error printing the pedigree"),
                    None,
-                   _("Error"))
+                   ERROR)
 MSG_PRINTOP_ERROR = (_("An error occured in the print operation!"),
                      _("See the logfile (File->Logfile viewer) for more info."),
-                     _("Error"))
+                     ERROR)
 
-MSG_DEFAULT_OPTIONS = (_("This will set back all the settings to the default values.\nAre you sure?"),
-                       None,
+MSG_DEFAULT_OPTIONS = (_("This will set back all the settings to the default values."),
+                       _("Are you sure?"),
                        _("Default settings"))
 
 MSG_RESTART_APP = (_("Pigeon Planner needs to be restarted for the changes to take effect."),
@@ -134,11 +138,11 @@ MSG_RESTART_APP = (_("Pigeon Planner needs to be restarted for the changes to ta
 
 MSG_UPDATE_NOW = (_("Update available!"),
                   _("There is an update available, do you want to download it now?"),
-                  _("Update"))
+                  "")
 
 MSG_NEED_EMAIL = (_("The recipient and sender's e-mailaddress are required."),
                   None,
-                  _("Error"))
+                  ERROR)
 
 MSG_UPDATE_ERROR = _("Error trying to get information. Are you connected to the internet?")
 MSG_UPDATE_AVAILABLE = _("A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version")

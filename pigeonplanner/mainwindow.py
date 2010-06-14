@@ -719,7 +719,7 @@ class MainWindow:
         model, tIter = self.selResults.get_selected()
         pindex, ring, year = self.get_main_ring()
 
-        if not widgets.message_dialog('warning', messages.MSG_REMOVE_RESULT, self.main):
+        if not widgets.message_dialog('question', messages.MSG_REMOVE_RESULT, self.main):
             return
 
         self.database.delete_result_from_id(model[tIter][0])
@@ -857,7 +857,7 @@ class MainWindow:
         model, tIter = self.selMedication.get_selected()
         pindex, ring, year = self.get_main_ring()
 
-        if not widgets.message_dialog('warning', messages.MSG_REMOVE_MEDICATION, self.main):
+        if not widgets.message_dialog('question', messages.MSG_REMOVE_MEDICATION, self.main):
             return
 
         self.database.delete_medication_from_id(model[tIter][0])

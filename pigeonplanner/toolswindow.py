@@ -524,7 +524,7 @@ class ToolsWindow:
             self.toolsdialog.destroy()
 
     def on_adremove_clicked(self, widget):
-        if not widgets.message_dialog('warning', messages.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
+        if not widgets.message_dialog('question', messages.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
             return
 
         self.main.database.delete_address(self.get_name())
