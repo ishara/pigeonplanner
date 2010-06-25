@@ -1,8 +1,70 @@
-<?xml version="1.0"?>
-<glade-interface>
-  <!-- interface-requires gtk+ 2.16 -->
-  <!-- interface-naming-policy toplevel-contextual -->
-  <widget class="GtkWindow" id="resultwindow">
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.18"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name pindex -->
+      <column type="gchararray"/>
+      <!-- column-name band -->
+      <column type="gchararray"/>
+      <!-- column-name year -->
+      <column type="gchararray"/>
+      <!-- column-name date -->
+      <column type="gchararray"/>
+      <!-- column-name racepoint -->
+      <column type="gchararray"/>
+      <!-- column-name placed -->
+      <column type="gint"/>
+      <!-- column-name out -->
+      <column type="gint"/>
+      <!-- column-name coef -->
+      <column type="gfloat"/>
+      <!-- column-name sector -->
+      <column type="gchararray"/>
+      <!-- column-name type -->
+      <column type="gchararray"/>
+      <!-- column-name category -->
+      <column type="gchararray"/>
+      <!-- column-name weather -->
+      <column type="gchararray"/>
+      <!-- column-name wind -->
+      <column type="gchararray"/>
+      <!-- column-name comment -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore2">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore3">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore4">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore5">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkWindow" id="resultwindow">
     <property name="title" translatable="yes">View all results</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
@@ -11,59 +73,225 @@
     <property name="destroy_with_parent">True</property>
     <property name="icon">../images/icon_logo.png</property>
     <property name="skip_taskbar_hint">True</property>
-    <signal name="delete_event" handler="on_close_window"/>
+    <signal name="delete-event" handler="on_close_window" swapped="no"/>
     <child>
-      <widget class="GtkVBox" id="vbox">
+      <object class="GtkVBox" id="vbox">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <child>
           <placeholder/>
         </child>
         <child>
-          <widget class="GtkFrame" id="frame1">
+          <object class="GtkFrame" id="frame1">
             <property name="visible">True</property>
             <property name="label_xalign">0</property>
             <property name="shadow_type">none</property>
             <child>
-              <widget class="GtkAlignment" id="alignment1">
+              <object class="GtkAlignment" id="alignment1">
                 <property name="visible">True</property>
                 <property name="bottom_padding">8</property>
                 <child>
-                  <widget class="GtkScrolledWindow" id="scrolledwindow1">
+                  <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hscrollbar_policy">automatic</property>
                     <property name="vscrollbar_policy">automatic</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <widget class="GtkTreeView" id="treeviewres">
+                      <object class="GtkTreeView" id="treeviewres">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="model">liststore</property>
                         <property name="rules_hint">True</property>
-                      </widget>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                            <property name="title" translatable="yes">Band no.</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">1</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext6"/>
+                              <attributes>
+                                <attribute name="text">1</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                            <property name="title" translatable="yes">Year</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">2</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext7"/>
+                              <attributes>
+                                <attribute name="text">2</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                            <property name="title" translatable="yes">Date</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">3</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext8"/>
+                              <attributes>
+                                <attribute name="text">3</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn4">
+                            <property name="title" translatable="yes">Racepoint</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">4</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext9"/>
+                              <attributes>
+                                <attribute name="text">4</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn5">
+                            <property name="title" translatable="yes">Placed</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">5</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext10"/>
+                              <attributes>
+                                <attribute name="text">5</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn6">
+                            <property name="title" translatable="yes">Out of</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">6</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext11"/>
+                              <attributes>
+                                <attribute name="text">6</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn7">
+                            <property name="title" translatable="yes">Coefficient</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">7</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext12"/>
+                              <attributes>
+                                <attribute name="text">7</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn8">
+                            <property name="title" translatable="yes">Sector</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">8</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext13"/>
+                              <attributes>
+                                <attribute name="text">8</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn9">
+                            <property name="title" translatable="yes">Type</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">9</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext14"/>
+                              <attributes>
+                                <attribute name="text">9</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn10">
+                            <property name="title" translatable="yes">Category</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">10</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext15"/>
+                              <attributes>
+                                <attribute name="text">10</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn11">
+                            <property name="title" translatable="yes">Weather</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">11</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext16"/>
+                              <attributes>
+                                <attribute name="text">11</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn12">
+                            <property name="title" translatable="yes">Wind</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">12</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext17"/>
+                              <attributes>
+                                <attribute name="text">12</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn13">
+                            <property name="title" translatable="yes">Comment</property>
+                            <property name="sort_indicator">True</property>
+                            <property name="sort_column_id">13</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext18"/>
+                              <attributes>
+                                <attribute name="text">13</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
                     </child>
-                  </widget>
+                  </object>
                 </child>
-              </widget>
+              </object>
             </child>
-            <child>
-              <widget class="GtkLabel" id="label1">
+            <child type="label">
+              <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
                 <property name="use_markup">True</property>
-              </widget>
-              <packing>
-                <property name="type">label_item</property>
-              </packing>
+              </object>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="position">1</property>
           </packing>
         </child>
-      </widget>
+      </object>
     </child>
-  </widget>
-  <widget class="GtkDialog" id="filterdialog">
+  </object>
+  <object class="GtkDialog" id="filterdialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Filter results</property>
     <property name="modal">True</property>
@@ -73,34 +301,33 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">resultwindow</property>
     <property name="has_separator">False</property>
-    <signal name="delete_event" handler="on_dialog_delete"/>
+    <signal name="delete-event" handler="on_dialog_delete" swapped="no"/>
     <child internal-child="vbox">
-      <widget class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
-          <widget class="GtkFrame" id="frame2">
+          <object class="GtkFrame" id="frame2">
             <property name="visible">True</property>
             <property name="label_xalign">0</property>
             <property name="shadow_type">none</property>
             <child>
-              <widget class="GtkAlignment" id="alignment2">
+              <object class="GtkAlignment" id="alignment2">
                 <property name="visible">True</property>
                 <property name="left_padding">12</property>
                 <child>
-                  <widget class="GtkTable" id="table1">
+                  <object class="GtkTable" id="table1">
                     <property name="visible">True</property>
                     <property name="n_rows">8</property>
                     <property name="n_columns">2</property>
                     <property name="column_spacing">8</property>
                     <property name="row_spacing">4</property>
                     <child>
-                      <widget class="GtkLabel" id="label3">
+                      <object class="GtkLabel" id="label3">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Year race</property>
-                      </widget>
+                      </object>
                       <packing>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
@@ -109,11 +336,11 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label4">
+                      <object class="GtkLabel" id="label4">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Year pigeons</property>
-                      </widget>
+                      </object>
                       <packing>
                         <property name="top_attach">2</property>
                         <property name="bottom_attach">3</property>
@@ -122,11 +349,11 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label5">
+                      <object class="GtkLabel" id="label5">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Racepoint</property>
-                      </widget>
+                      </object>
                       <packing>
                         <property name="top_attach">3</property>
                         <property name="bottom_attach">4</property>
@@ -135,11 +362,17 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkComboBox" id="cbYearRace">
+                      <object class="GtkComboBox" id="cbYearRace">
                         <property name="visible">True</property>
-                        <property name="items" translatable="yes"></property>
-                        <signal name="changed" handler="on_cbYearRace_changed"/>
-                      </widget>
+                        <property name="model">liststore5</property>
+                        <signal name="changed" handler="on_cbYearRace_changed" swapped="no"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext5"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
@@ -149,11 +382,17 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkComboBox" id="cbYearPigeons">
+                      <object class="GtkComboBox" id="cbYearPigeons">
                         <property name="visible">True</property>
-                        <property name="items" translatable="yes"></property>
-                        <signal name="changed" handler="on_cbYearPigeons_changed"/>
-                      </widget>
+                        <property name="model">liststore4</property>
+                        <signal name="changed" handler="on_cbYearPigeons_changed" swapped="no"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext4"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
@@ -163,11 +402,17 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkComboBox" id="cbRacepoint">
+                      <object class="GtkComboBox" id="cbRacepoint">
                         <property name="visible">True</property>
-                        <property name="items" translatable="yes"></property>
-                        <signal name="changed" handler="on_cbRacepoint_changed"/>
-                      </widget>
+                        <property name="model">liststore3</property>
+                        <signal name="changed" handler="on_cbRacepoint_changed" swapped="no"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
@@ -177,11 +422,11 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label7">
+                      <object class="GtkLabel" id="label7">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Place</property>
-                      </widget>
+                      </object>
                       <packing>
                         <property name="top_attach">6</property>
                         <property name="bottom_attach">7</property>
@@ -190,13 +435,13 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkSpinButton" id="sbPlace">
+                      <object class="GtkSpinButton" id="sbPlace">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="invisible_char">&#x25CF;</property>
-                        <property name="adjustment">0 0 20000 1 10 0</property>
-                        <signal name="value_changed" handler="on_sbPlace_changed"/>
-                      </widget>
+                        <property name="invisible_char">●</property>
+                        <property name="adjustment">adjustment2</property>
+                        <signal name="value-changed" handler="on_sbPlace_changed" swapped="no"/>
+                      </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
@@ -206,11 +451,11 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label6">
+                      <object class="GtkLabel" id="label6">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Coefficient</property>
-                      </widget>
+                      </object>
                       <packing>
                         <property name="top_attach">5</property>
                         <property name="bottom_attach">6</property>
@@ -219,13 +464,13 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkSpinButton" id="sbCoefficient">
+                      <object class="GtkSpinButton" id="sbCoefficient">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="invisible_char">&#x25CF;</property>
-                        <property name="adjustment">0 0 110 1 10 0</property>
-                        <signal name="value_changed" handler="on_sbCoefficient_changed"/>
-                      </widget>
+                        <property name="invisible_char">●</property>
+                        <property name="adjustment">adjustment1</property>
+                        <signal name="value-changed" handler="on_sbCoefficient_changed" swapped="no"/>
+                      </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
@@ -235,11 +480,11 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label8">
+                      <object class="GtkLabel" id="label8">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Sector</property>
-                      </widget>
+                      </object>
                       <packing>
                         <property name="top_attach">4</property>
                         <property name="bottom_attach">5</property>
@@ -248,11 +493,17 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkComboBox" id="cbSector">
+                      <object class="GtkComboBox" id="cbSector">
                         <property name="visible">True</property>
-                        <property name="items" translatable="yes"></property>
-                        <signal name="changed" handler="on_cbSector_changed"/>
-                      </widget>
+                        <property name="model">liststore2</property>
+                        <signal name="changed" handler="on_cbSector_changed" swapped="no"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
@@ -262,22 +513,28 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkLabel" id="label10">
+                      <object class="GtkLabel" id="label10">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Pigeon</property>
-                      </widget>
+                      </object>
                       <packing>
                         <property name="x_options">GTK_FILL</property>
                         <property name="y_options"></property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkComboBox" id="cbPigeon">
+                      <object class="GtkComboBox" id="cbPigeon">
                         <property name="visible">True</property>
-                        <property name="items" translatable="yes"></property>
-                        <signal name="changed" handler="on_cbPigeon_changed"/>
-                      </widget>
+                        <property name="model">liststore1</property>
+                        <signal name="changed" handler="on_cbPigeon_changed" swapped="no"/>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
@@ -290,21 +547,18 @@
                     <child>
                       <placeholder/>
                     </child>
-                  </widget>
+                  </object>
                 </child>
-              </widget>
+              </object>
             </child>
-            <child>
-              <widget class="GtkLabel" id="label2">
+            <child type="label">
+              <object class="GtkLabel" id="label2">
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">&lt;b&gt;Sort options&lt;/b&gt;</property>
                 <property name="use_markup">True</property>
-              </widget>
-              <packing>
-                <property name="type">label_item</property>
-              </packing>
+              </object>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
@@ -312,18 +566,18 @@
           </packing>
         </child>
         <child internal-child="action_area">
-          <widget class="GtkHButtonBox" id="dialog-action_area1">
+          <object class="GtkHButtonBox" id="dialog-action_area1">
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <widget class="GtkButton" id="close">
+              <object class="GtkButton" id="close">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_dialog_delete"/>
-              </widget>
+                <signal name="clicked" handler="on_dialog_delete" swapped="no"/>
+              </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
@@ -331,28 +585,42 @@
               </packing>
             </child>
             <child>
-              <widget class="GtkButton" id="apply">
+              <object class="GtkButton" id="apply">
                 <property name="label">gtk-apply</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_apply_clicked"/>
-              </widget>
+                <signal name="clicked" handler="on_apply_clicked" swapped="no"/>
+              </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="expand">False</property>
             <property name="pack_type">end</property>
             <property name="position">0</property>
           </packing>
         </child>
-      </widget>
+      </object>
     </child>
-  </widget>
-</glade-interface>
+    <action-widgets>
+      <action-widget response="0">close</action-widget>
+      <action-widget response="0">apply</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="upper">110</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment2">
+    <property name="upper">20000</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+</interface>

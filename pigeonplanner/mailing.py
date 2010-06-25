@@ -24,13 +24,13 @@ import mimetypes
 import threading
 
 import gtk
-import gtk.glade
 import gobject
 
 import const
 import common
 import widgets
 import messages
+from gtkbuilderapp import GtkbuilderApp
 
 
 def send_email(recipient='', sender='', subject='', body='', attachment=None):
@@ -74,14 +74,9 @@ def encode_multipart_formdata(fields, files):
     return 'multipart/form-data; boundary=%s' % BOUNDARY, '\r\n'.join(body)
 
 
-class MailDialog:
+class MailDialog(GtkbuilderApp):
     def __init__(self, parent, database, attachment, kind='pdf'):
-        self.wTree = gtk.glade.XML(const.GLADEDIALOGS, 'maildialog')
-        self.wTree.signal_autoconnect(self)
-
-        for w in self.wTree.get_widget_prefix(''):
-            wname = w.get_name()
-            setattr(self, wname, w)
+        GtkbuilderApp.__init__(self, const.GLADEDIALOGS, const.DOMAIN)
 
         self.maildialog.set_transient_for(parent)
 

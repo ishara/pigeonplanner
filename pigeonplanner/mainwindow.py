@@ -26,7 +26,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 import gtk
-import gtk.glade
 import gobject
 
 import const
@@ -47,16 +46,12 @@ from toolswindow import ToolsWindow
 from resultwindow import ResultWindow
 from optionsdialog import OptionsDialog
 from pedigreewindow import PedigreeWindow
+from gtkbuilderapp import GtkbuilderApp
 
 
-class MainWindow:
+class MainWindow(GtkbuilderApp):
     def __init__(self, options):
-        self.wTree = gtk.glade.XML(const.GLADEMAIN)
-        self.wTree.signal_autoconnect(self)
-
-        for widget in self.wTree.get_widget_prefix(''):
-            name = widget.get_name()
-            setattr(self, name, widget)
+        GtkbuilderApp.__init__(self, const.GLADEMAIN, const.DOMAIN)
 
         self.main.set_title("%s %s" %(const.NAME, const.VERSION))
 
@@ -238,11 +233,11 @@ class MainWindow:
         for con_id in self.statusmsgs.values():
             self.statusmsg.pop_message(con_id[0])
 
-        self.statusmsg.push_message(self.statusmsgs[widget.get_name()][0],
-                                    self.statusmsgs[widget.get_name()][1])
+        self.statusmsg.push_message(self.statusmsgs[self.get_object_name(widget)][0],
+                                    self.statusmsgs[self.get_object_name(widget)][1])
 
     def on_widget_leave(self, widget, event):
-        self.statusmsg.pop_message(self.statusmsgs[widget.get_name()][0])
+        self.statusmsg.pop_message(self.statusmsgs[self.get_object_name(widget)][0])
 
     # Menu callbacks
     def menuprintpedigree_activate(self, widget):
@@ -350,21 +345,15 @@ class MainWindow:
         model, tIter = self.selection.get_selected()
         path, focus = self.treeview.get_cursor()
 
-        wTree = gtk.glade.XML(const.GLADEMAIN, 'removedialog')
-        dialog = wTree.get_widget('removedialog')
-        label = wTree.get_widget('labelPigeon')
-        chkKeep = wTree.get_widget('chkKeep')
-        chkResults = wTree.get_widget('chkResults')
-        dialog.set_transient_for(self.main)
-        label.set_text('%s / %s' %(ring, year))
-
+        self.labelPigeon.set_text('%s / %s' %(ring, year))
+        self.chkKeep.set_active(True)
         if not self.database.has_results(pindex):
-            chkResults.set_active(False)
-            chkResults.hide()
+            self.chkResults.set_active(False)
+            self.chkResults.hide()
 
-        answer = dialog.run()
+        answer = self.removedialog.run()
         if answer == 2:
-            if chkKeep.get_active():
+            if self.chkKeep.get_active():
                 logger.info("Remove: Hiding the pigeon")
                 self.database.show_pigeon(pindex, 0)
             else:
@@ -383,7 +372,7 @@ class MainWindow:
 
                 self.parser.get_pigeons()
 
-            if not chkResults.get_active():
+            if not self.chkResults.get_active():
                 logger.info("Remove: Removing the results")
                 self.database.delete_result_from_band(pindex)
 
@@ -399,7 +388,7 @@ class MainWindow:
 
             common.add_statusbar_message(self.statusbar, _("Pigeon %s/%s has been removed" %(ring, year)))
 
-        dialog.destroy()
+        self.removedialog.hide()
 
     def menupedigree_activate(self, widget):
         PedigreeWindow(self, self.get_pigeoninfo())
@@ -921,7 +910,7 @@ class MainWindow:
         return True
 
     def clear_medicationdialog_fields(self):
-        for entry in self.wTree.get_widget_prefix('entry_meddialog_'):
+        for entry in self.get_objects_from_prefix('entry_meddialog_'):
             entry.set_text('')
         self.entry_meddialog_date.set_text(datetime.date.today().strftime(const.DATE_FORMAT))
         self.chkVaccination.set_active(False)
@@ -1150,17 +1139,16 @@ class MainWindow:
         Build the main treeview
         '''
 
-        for column in self.treeview.get_columns():
-            self.treeview.remove_column(column)
+        self.selection = self.treeview.get_selection()
+        self.selection.connect('changed', self.selection_changed)
 
-        columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"), _("Loft"), _("Strain")]
+        self.modelfilter = self.liststore.filter_new()
+        self.modelfilter.set_visible_func(self.visible_cb)
 
-        self.liststore, self.selection, self.modelfilter, self.modelsort = widgets.setup_treeview(
-                                                                self.treeview,
-                                                                columns,
-                                                                [str, str, str, str, str, str, str, str],
-                                                                self.selection_changed,
-                                                                True, True, True, self.visible_cb)
+        self.modelsort = gtk.TreeModelSort(self.modelfilter)
+        self.modelsort.set_sort_column_id(2, gtk.SORT_ASCENDING)
+        self.treeview.set_model(self.modelsort)
+
         self.set_treeview_columns()
 
     def set_treeview_columns(self):
@@ -1178,53 +1166,14 @@ class MainWindow:
         Build the remaining treeviews
         '''
 
-        # Find sire/dam treeview
-        self.lsFind, self.selectionfind = widgets.setup_treeview(
-                                self.tvFind,
-                                [_("Band no."), _("Year"), _("Name")],
-                                [str, str, str, str],
-                                None,
-                                True, True, True)
-
-        # Brothers & sisters treeview
-        self.lsBrothers, self.selBrothers = widgets.setup_treeview(
-                                self.tvBrothers,
-                                [_("Band no."), _("Year")],
-                                [str, str, str],
-                                None,
-                                True, True, True)
-
-        # Halfbrothers & sisters treeview
-        self.lsHalfBrothers, self.selHalfBrothers = widgets.setup_treeview(
-                                self.tvHalfBrothers,
-                                [_("Band no."), _("Year"), _("Common parent")],
-                                [str, str, str, str],
-                                None,
-                                True, True, True)
-
-        # Offspring treeview
-        self.lsOffspring, self.selOffspring = widgets.setup_treeview(
-                                self.tvOffspring,
-                                [_("Band no."), _("Year")],
-                                [str, str, str],
-                                None,
-                                True, True, True)
-
-        # Medication treeview
-        self.lsMedication, self.selMedication = widgets.setup_treeview(
-                                self.tvMedication,
-                                [_("Date"), _("Description")],
-                                [str, str, str],
-                                self.selectionmedication_changed,
-                                True, True, True)
-
-        # Results treeview
-        columns = [_("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector"), _("Type"), _("Category"), _("Weather"), _("Wind"), _("Comment")]
-        types = [str, str, str, int, int, float, str, str, str, str, str, str]
-        self.lsResult, self.selResults = widgets.setup_treeview(self.tvResults,
-                                                                columns, types,
-                                                                self.selectionresult_changed,
-                                                                True, True, True)
+        self.selectionfind = self.tvFind.get_selection()
+        self.selBrothers = self.tvBrothers.get_selection()
+        self.selHalfBrothers = self.tvHalfBrothers.get_selection()
+        self.selOffspring = self.tvOffspring.get_selection()
+        self.selMedication = self.tvMedication.get_selection()
+        self.selMedication.connect('changed', self.selectionmedication_changed)
+        self.selResults = self.tvResults.get_selection()
+        self.selResults.connect('changed', self.selectionresult_changed)
 
     def fill_treeview(self, path=0, search_results=[]):
         '''
@@ -1284,7 +1233,7 @@ class MainWindow:
         else:
             widgets.set_multiple_sensitive({self.removemedication: False, self.editmedication: False})
 
-            for entry in self.wTree.get_widget_prefix('entry_med_'):
+            for entry in self.get_objects_from_prefix('entry_med_'):
                 entry.set_text('')
 
             return
@@ -1769,15 +1718,12 @@ class MainWindow:
         Empty all entryboxes and textviews
         '''
 
-        for widget in self.wTree.get_widget_prefix("entry"):
-            name = widget.get_name()
-            if not name == 'entryDate':
-                attr = getattr(self, name)
-                attr.set_text('')
+        for widget in self.get_objects_from_prefix("entry"):
+            if not self.get_object_name(widget) == 'entryDate':
+                widget.set_text('')
 
-        for widget in self.wTree.get_widget_prefix("text"):
-            attr = getattr(self, widget.get_name())
-            attr.get_buffer().set_text('')
+        for widget in self.get_objects_from_prefix("text"):
+            widget.get_buffer().set_text('')
 
     def set_status_editable(self, value):
         self.entryDeadDate.set_editable(value)
@@ -1858,9 +1804,9 @@ class MainWindow:
         Position the popup calendar
         '''
 
-        if self.dateEntry.get_name() == 'entryDate':
+        if self.get_object_name(self.dateEntry) == 'entryDate':
             window = self.resultdialog.window
-        elif self.dateEntry.get_name() == 'entry_meddialog_date':
+        elif self.get_object_name(self.dateEntry) == 'entry_meddialog_date':
             window = self.medicationdialog.window
         else:
             window = self.statusdialog.window
@@ -2049,7 +1995,7 @@ class MainWindow:
 
         self.table1.attach(self.cbRangeSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
         self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
-        self.hbox7.pack_start(self.cbFilterSex, True, True)
+        self.hbox_filter_sex.pack_start(self.cbFilterSex, True, True)
 
     def set_filefilter(self):
         '''

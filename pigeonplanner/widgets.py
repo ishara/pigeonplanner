@@ -241,58 +241,6 @@ def about_dialog(parent):
     result = dialog.run()
     dialog.destroy()
 
-def setup_treeview(treeview, columns, column_types, changed_callback=None, resizeable=True, sortable=True, hidden_column=False, filter_callback=None):
-    '''
-    Create a ListStore and TreeViewSelection for the given treeview
-
-    @param treeview        : The treeview
-    @param columns         : List of column names
-    @param column_types    : List of variable types for each column
-    @param changed_callback: the callback function for the "changed" signal
-    @param resizeable_cols : True to allow columns to be resizable
-    @param sortable_cols   : True to allow user to sort columns
-    @param hidden_column   : True to move text one up
-    '''
-
-    liststore = gtk.ListStore(*column_types)
-
-    for i in range(len(columns)):
-        rendererText = gtk.CellRendererText()
-        rendererText.set_property('yalign', 0.0)
-
-        if hidden_column:
-            column = gtk.TreeViewColumn(columns[i], rendererText, text=i+1)
-        else:
-            column = gtk.TreeViewColumn(columns[i], rendererText, text=i)
-
-        if sortable:
-            if hidden_column:
-                column.set_sort_column_id(i+1)
-            else:
-                column.set_sort_column_id(i)
-
-        if resizeable:
-            column.set_resizable(True)
-
-        treeview.append_column(column)
-
-    tvSelection = treeview.get_selection()
-    if changed_callback:
-        tvSelection.connect('changed', changed_callback)
-
-    if filter_callback:
-        model_filter = liststore.filter_new()
-        model_filter.set_visible_func(filter_callback)
-
-        model_sort = gtk.TreeModelSort(model_filter)
-        model_sort.set_sort_column_id(2, gtk.SORT_ASCENDING)
-        treeview.set_model(model_sort)
-
-        return liststore, tvSelection, model_filter, model_sort
-    else:
-        treeview.set_model(liststore)
-        return liststore, tvSelection
-
 def set_completion(widget):
     '''
     Set entrycompletion on given widget
@@ -450,4 +398,54 @@ class BackupDialog(gtk.Dialog):
                 message_dialog('info', messages.MSG_RESTORE_SUCCES, self.par)
             else:
                 message_dialog('info', messages.MSG_RESTORE_FAILED, self.par)
+
+class EditPedigreeDialog(gtk.Dialog):
+    def __init__(self, parent):
+        gtk.Dialog.__init__(self, _("Insert a pigeon"), parent, gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
+
+        self.set_position(gtk.WIN_POS_MOUSE)
+        self.set_property("skip-taskbar-hint", True)
+
+        table = gtk.Table(2,2)
+        table.set_row_spacings(4)
+        table.set_col_spacings(8)
+        table.set_homogeneous(False)
+        self.vbox.pack_start(table, False, True)
+
+        label = gtk.Label(_("Band no."))
+        label.set_alignment(0.0, 0.5)
+        table.attach(label, 0, 1, 0, 1)
+
+        hbox = gtk.HBox()
+        self.entryRing = gtk.Entry()
+        self.entryRing.set_width_chars(15)
+        self.entryRing.set_alignment(0.5)
+        self.entryRing.set_activates_default(True)
+        hbox.pack_start(self.entryRing, False, True)
+        label = gtk.Label("/")
+        hbox.pack_start(label, False, True)
+        self.entryYear = gtk.Entry(4)
+        self.entryYear.set_width_chars(4)
+        self.entryYear.set_activates_default(True)
+        hbox.pack_start(self.entryYear, False, True)
+        table.attach(hbox, 1, 2, 0, 1)
+
+        viewport = gtk.Viewport()
+        vbox = gtk.VBox()
+        for x in range(1, 7):
+            entry = gtk.Entry(28)
+            entry.set_has_frame(False)
+            entry.set_activates_default(True)
+            setattr(self, 'entryExtra'+str(x), entry)
+            vbox.pack_start(entry)
+
+        viewport.add(vbox)
+        table.attach(viewport, 0, 2, 1, 2)
+
+        self.vbox.show_all()
+
+        self.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+        b = self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_APPLY)
+        b.set_property('can-default', True)
+        b.set_property('has-default', True)
 

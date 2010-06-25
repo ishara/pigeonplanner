@@ -98,11 +98,13 @@ FORUMURL = 'http://www.pigeonplanner.com/forum'
 MAILURL = "http://www.pigeonplanner.com/cgi-bin/pigeonplanner_mailing.py"
 REPORTMAIL = "timovwb@gmail.com"
 
+DOMAIN = 'pigeonplanner'
+
 USER_AGENT = {"User-Agent": "Pigeon Planner/%s" %VERSION}
 
 DATE_FORMAT = '%Y-%m-%d'
 
-DEAD = 0
-ACTIVE = 1
-SOLD = 2
-LOST = 3
+(DEAD,
+ ACTIVE,
+ SOLD,
+ LOST) = range(4)

@@ -26,7 +26,6 @@
 from cgi import escape
 
 import gtk
-import gtk.glade
 
 try:
     import cairo
@@ -207,26 +206,20 @@ class PedigreeEditBox:
                 widgets.popup_menu(event, entries)
 
     def edit_start(self, widget=None):
-        self.wTree = gtk.glade.XML(const.GLADEPEDIGREE, 'editdialog')
-
-        signalDic = { 'on_cancel_clicked'  : self.close_dialog,
-                      'on_save_clicked'    : self.save_clicked,
-                      'on_dialog_destroy'  : self.close_dialog }
-        self.wTree.signal_autoconnect(signalDic)
-
-        for w in self.wTree.get_widget_prefix(''):
-            wname = w.get_name()
-            setattr(self, wname, w)
+        parent = None
+        if self.pedigree:
+            parent = self.pedigree.pedigreewindow
+        self.editdialog = widgets.EditPedigreeDialog(parent)
 
         if self.ring and self.year:
-            self.entryRing.set_text(self.ring)
-            self.entryYear.set_text(self.year)
-            self.entryExtra1.set_text(self.details[0])
-            self.entryExtra2.set_text(self.details[1])
-            self.entryExtra3.set_text(self.details[2])
-            self.entryExtra4.set_text(self.details[3])
-            self.entryExtra5.set_text(self.details[4])
-            self.entryExtra6.set_text(self.details[5])
+            self.editdialog.entryRing.set_text(self.ring)
+            self.editdialog.entryYear.set_text(self.year)
+            self.editdialog.entryExtra1.set_text(self.details[0])
+            self.editdialog.entryExtra2.set_text(self.details[1])
+            self.editdialog.entryExtra3.set_text(self.details[2])
+            self.editdialog.entryExtra4.set_text(self.details[3])
+            self.editdialog.entryExtra5.set_text(self.details[4])
+            self.editdialog.entryExtra6.set_text(self.details[5])
 
         if not self.kindex in self.main.parser.pigeons:
             data = (self.kinfo[0], self.kinfo[1], self.kinfo[2], self.kinfo[3], 0, 1,
@@ -235,40 +228,48 @@ class PedigreeEditBox:
                     self.kinfo[7], self.kinfo[8], self.kinfo[9])
             self.main.database.insert_pigeon(data)
 
-        self.entryRing.grab_focus()
-        self.entryRing.set_position(-1)
-        self.editdialog.show()
+        self.editdialog.entryRing.grab_focus()
+        self.editdialog.entryRing.set_position(-1)
+        response = self.editdialog.run()
+        if response == gtk.RESPONSE_APPLY:
+            #FIXME If user enters invalid ring or year, the dialog is closed.
+            self.save_pigeon_data()
+            
+        self.editdialog.destroy()
 
-    def save_clicked(self, widget):
-        ring = self.entryRing.get_text()
-        year = self.entryYear.get_text()
+    def save_pigeon_data(self):
+        ring = self.editdialog.entryRing.get_text()
+        year = self.editdialog.entryYear.get_text()
 
-        if not checks.check_ring_entry(self.editdialog, ring, year): return
+        if not checks.check_ring_entry(self.editdialog, ring, year):
+            return False
 
         pindex = ring + year
 
         if self.pindex and self.pindex in self.main.parser.pigeons:
             data = (pindex, ring, year,
-                    self.entryExtra1.get_text(),
-                    self.entryExtra2.get_text(),
-                    self.entryExtra3.get_text(),
-                    self.entryExtra4.get_text(),
-                    self.entryExtra5.get_text(),
-                    self.entryExtra6.get_text(),
+                    self.editdialog.entryExtra1.get_text(),
+                    self.editdialog.entryExtra2.get_text(),
+                    self.editdialog.entryExtra3.get_text(),
+                    self.editdialog.entryExtra4.get_text(),
+                    self.editdialog.entryExtra5.get_text(),
+                    self.editdialog.entryExtra6.get_text(),
                     self.pindex)
             self.edit_pigeon(data)
         else:
             data = (pindex, ring, year, self.sex , 0, 1,
                     '', '', '', '', '', '', '', '', '',
-                    self.entryExtra1.get_text(),
-                    self.entryExtra2.get_text(),
-                    self.entryExtra3.get_text(),
-                    self.entryExtra4.get_text(),
-                    self.entryExtra5.get_text(),
-                    self.entryExtra6.get_text())
+                    self.editdialog.entryExtra1.get_text(),
+                    self.editdialog.entryExtra2.get_text(),
+                    self.editdialog.entryExtra3.get_text(),
+                    self.editdialog.entryExtra4.get_text(),
+                    self.editdialog.entryExtra5.get_text(),
+                    self.editdialog.entryExtra6.get_text())
             self.add_pigeon(data)
 
         self.main.parser.get_pigeons()
+
+        return True
 
     def edit_parent(self, kindex, band, year, sex):
         if sex == '0':
@@ -283,28 +284,12 @@ class PedigreeEditBox:
 
         self.redraw()
 
-        self.close_dialog()
-
     def add_pigeon(self, data):
         self.main.database.insert_pigeon(data)
 
         self.edit_parent(self.kindex, data[1], data[2], self.sex)
 
         self.redraw()
-
-        self.close_dialog()
-
-    def redraw(self):
-        path, focus = self.main.treeview.get_cursor()
-        self.main.parser.get_pigeons()
-        self.main.fill_treeview(path=path)
-
-        dp = DrawPedigree([self.pedigree.tableSire, self.pedigree.tableDam], self.pedigree.pindex,
-                          True, self.main.parser.pigeons, self.main, self.pedigree)
-        dp.draw_pedigree()
-
-    def close_dialog(self, widget=None, event=None):
-        self.editdialog.hide()
 
     def remove_pigeon(self, widget=None):
         self.main.database.delete_pigeon(self.pindex)
@@ -319,6 +304,15 @@ class PedigreeEditBox:
         self.edit_parent(self.kindex, '', '', self.sex)
 
         self.redraw()
+
+    def redraw(self):
+        path, focus = self.main.treeview.get_cursor()
+        self.main.parser.get_pigeons()
+        self.main.fill_treeview(path=path)
+
+        dp = DrawPedigree([self.pedigree.tableSire, self.pedigree.tableDam], self.pedigree.pindex,
+                          True, self.main.parser.pigeons, self.main, self.pedigree)
+        dp.draw_pedigree()
 
 
 class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):

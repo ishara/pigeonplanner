@@ -24,7 +24,6 @@ logger = logging.getLogger(__name__)
 
 import gobject
 import gtk
-import gtk.glade
 
 import const
 import update
@@ -33,16 +32,12 @@ import common
 import widgets
 import messages
 from printing import PrintVelocity
+from gtkbuilderapp import GtkbuilderApp
 
 
-class ToolsWindow:
+class ToolsWindow(GtkbuilderApp):
     def __init__(self, main, notification=0):
-        self.wTree = gtk.glade.XML(const.GLADETOOLS)
-        self.wTree.signal_autoconnect(self)
-
-        for w in self.wTree.get_widget_prefix(''):
-            wname = w.get_name()
-            setattr(self, wname, w)
+        GtkbuilderApp.__init__(self, const.GLADETOOLS, const.DOMAIN)
 
         self.main = main
         self.notification = notification
@@ -51,9 +46,8 @@ class ToolsWindow:
         self.linkbutton.set_uri(const.DOWNLOADURL)
 
         # Build main treeview
-        columns = [_("Tools")]
-        types = [int, str]
-        self.liststore, self.selection = widgets.setup_treeview(self.treeview, columns, types, self.selection_changed, False, False, True)
+        self.selection = self.treeview.get_selection()
+        self.selection.connect('changed', self.selection_changed)
 
         # Add the categories
         i = 0
@@ -65,35 +59,25 @@ class ToolsWindow:
 
         self.treeview.set_cursor(0)
 
-        # Build velocity treeview
-        columns = [_("Velocity"), _("Flight Time"), _("Time of Arrival")]
-        types = [int, str, str]
-        self.ls_velocity, self.sel_velocity = widgets.setup_treeview(self.tv_velocity, columns, types, None, False, False, False)
+        # Build other treeviews
+        self.sel_velocity = self.tv_velocity.get_selection()
 
-        # Build events treeview
-        self.ls_events, self.sel_events = widgets.setup_treeview(self.tv_events,
-                                                [_("Date"), _("Description")], [str, str, str],
-                                                self.events_changed, True, True, True)
+        self.sel_stats = self.tvstats.get_selection()
+
+        self.sel_events = self.tv_events.get_selection()
+        self.sel_events.connect('changed', self.events_changed)
         self.fill_events_view()
 
-        # Build addresses treeview
-        self.ls_address, self.sel_address = widgets.setup_treeview(self.tvaddress,
-                                                                   [_("Name")], [str],
-                                                                   self.adselection_changed,
-                                                                   True, True, False)
-
-        # Fill address treeview
+        self.sel_address = self.tvaddress.get_selection()
+        self.sel_address.connect('changed', self.adselection_changed)
         self.fill_address_view()
-
-        # Build statistics treeview
-        columns = ["Item", "Value"]
-        types = [str, str]
-        self.ls_stats, self.sel_stats = widgets.setup_treeview(self.tvstats, columns, types, None, False, False, False)
 
         # Fill spinbuttons
         dt = datetime.datetime.now()
         self.sbhour.set_value(dt.hour)
         self.sbminute.set_value(dt.minute)
+        self.sbbegin.set_value(700)
+        self.sbend.set_value(1800)
 
         # Backups file filter
         self.fcButtonRestore.add_filter(widgets.get_backup_filefilter())
@@ -567,8 +551,8 @@ class ToolsWindow:
         '''
 
         entrys = []
-        for widget in self.wTree.get_widget_prefix("adentry"):
-            entrys.append(getattr(self, widget.get_name()))
+        for widget in self.get_objects_from_prefix("adentry"):
+            entrys.append(widget)
 
         return entrys
 

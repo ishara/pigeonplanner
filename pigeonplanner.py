@@ -38,12 +38,6 @@ except:
     print "The GTK+ runtime is required to run this program."
     sys.exit(1)
 
-try:
-    import gtk.glade
-except:
-    print "The GTK Glade (libglade) bindings are required to run this program."
-    sys.exit(1)
-
 import __builtin__
 
 
@@ -103,20 +97,16 @@ class PigeonPlanner:
         else:
             LOCALE_PATH = os.path.join(currentPath, 'languages')
 
-        APP_NAME = 'pigeonplanner'
-
         if win32:
             import pigeonplanner.libi18n as libi18n
             libi18n.fix_locale()
-
-        gettext.textdomain(APP_NAME)
 
         language = self.options.optionList.language
         if language == 'def':
             language = ''
 
         try:
-            langTranslation = gettext.translation(APP_NAME, LOCALE_PATH, [language])
+            langTranslation = gettext.translation(const.DOMAIN, LOCALE_PATH, [language])
             langTranslation.install()
         except:
             langTranslation = gettext
@@ -133,9 +123,16 @@ class PigeonPlanner:
                 except locale.Error, e:
                     locale_error = "Force lang failed: '%(language)s' (%(second)s and %(third)s tested)" % {'language': e, 'second': locale.normalize(language).split('.')[0]+'.UTF-8', 'third': locale.normalize(language)}
 
-        for module in (gettext, gtk.glade):
-            module.bindtextdomain(APP_NAME, LOCALE_PATH)
-            module.textdomain(APP_NAME)
+        if win32:
+            # Module locale has no method bindtextdomain on MS Windows.
+            # Use the gettext library directly through ctypes.
+            # Info: https://bugzilla.gnome.org/show_bug.cgi?id=574520
+            self.setup_windows_gettext(const.DOMAIN, LOCALE_PATH, "intl.dll")
+        else:
+            locale.bindtextdomain(const.DOMAIN, LOCALE_PATH)
+
+        gettext.bindtextdomain(const.DOMAIN, LOCALE_PATH)
+        gettext.textdomain(const.DOMAIN)
 
         __builtin__._ = langTranslation.gettext
 
@@ -240,6 +237,16 @@ class PigeonPlanner:
                     # on a table with 10 million rows as it does on a table with 1 row.
                     self.logger.info("Adding column '%s' to table '%s'" %(column, table))
                     db.add_column(table, column_def)
+
+
+    def setup_windows_gettext(self, domain, localedir, intl_path):
+        import ctypes
+
+        libintl = ctypes.cdll.LoadLibrary(intl_path)
+        libintl.bindtextdomain(domain, localedir.encode(sys.getfilesystemencoding()))
+        libintl.textdomain(domain)
+        libintl.bind_textdomain_codeset(domain, "UTF-8")
+        libintl.gettext.restype = ctypes.c_char_p
 
     def exception_hook(self, type_, value, tb):
         import traceback

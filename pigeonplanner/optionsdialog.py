@@ -19,22 +19,17 @@
 import os
 
 import gtk
-import gtk.glade
 
 import const
 import widgets
 import options
 import messages
+from gtkbuilderapp import GtkbuilderApp
 
 
-class OptionsDialog:
+class OptionsDialog(GtkbuilderApp):
     def __init__(self, main):
-        self.wTree = gtk.glade.XML(const.GLADEOPTIONS)
-        self.wTree.signal_autoconnect(self)
-
-        for w in self.wTree.get_widget_prefix(''):
-            name = w.get_name()
-            setattr(self, name, w)
+        GtkbuilderApp.__init__(self, const.GLADEOPTIONS, const.DOMAIN)
 
         self.main = main
 
@@ -43,20 +38,8 @@ class OptionsDialog:
         self.opt = options.GetOptions()
 
         # Build main treeview
-        self.liststore = gtk.ListStore(int, gtk.gdk.Pixbuf, str)
         self.selection = self.treeview.get_selection()
         self.selection.connect('changed', self.selection_changed)
-        self.treeview.set_model(self.liststore)
-
-        cellText = gtk.CellRendererText()
-        cellPix = gtk.CellRendererPixbuf()
-
-        treeViewColumn = gtk.TreeViewColumn('Categories')
-        treeViewColumn.pack_start(cellPix, expand=False)
-        treeViewColumn.add_attribute(cellPix, 'pixbuf', 1)
-        treeViewColumn.pack_start(cellText, expand=True)
-        treeViewColumn.set_attributes(cellText, text=2)
-        self.treeview.append_column(treeViewColumn)
 
         categories = [(_("General"), gtk.STOCK_PROPERTIES),
                       (_("Appearance"), gtk.STOCK_PAGE_SETUP),

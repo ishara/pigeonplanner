@@ -1,48 +1,47 @@
-<?xml version="1.0"?>
-<glade-interface>
-  <!-- interface-requires gtk+ 2.16 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.18"/>
   <!-- interface-naming-policy project-wide -->
-  <widget class="GtkWindow" id="previewwindow">
+  <object class="GtkWindow" id="previewwindow">
     <property name="title" translatable="yes">Print Preview</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="default_width">800</property>
     <property name="default_height">600</property>
     <property name="icon">../images/icon_logo.png</property>
-    <signal name="delete_event" handler="on_window_delete"/>
+    <signal name="delete-event" handler="on_window_delete" swapped="no"/>
     <child>
-      <widget class="GtkVBox" id="vbox">
+      <object class="GtkVBox" id="vbox">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <child>
           <placeholder/>
         </child>
         <child>
-          <widget class="GtkScrolledWindow" id="swin">
+          <object class="GtkScrolledWindow" id="swin">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="hscrollbar_policy">automatic</property>
             <property name="vscrollbar_policy">automatic</property>
             <property name="shadow_type">in</property>
-            <signal name="size_allocate" handler="on_swin_size_allocate"/>
+            <signal name="size-allocate" handler="on_swin_size_allocate" swapped="no"/>
             <child>
-              <widget class="GtkViewport" id="viewport1">
+              <object class="GtkViewport" id="viewport1">
                 <property name="visible">True</property>
                 <property name="resize_mode">queue</property>
                 <child>
-                  <widget class="GtkDrawingArea" id="drawingarea">
+                  <object class="GtkDrawingArea" id="drawingarea">
                     <property name="visible">True</property>
-                    <signal name="expose_event" handler="on_drawingarea_expose"/>
-                  </widget>
+                    <signal name="expose-event" handler="on_drawingarea_expose" swapped="no"/>
+                  </object>
                 </child>
-              </widget>
+              </object>
             </child>
-          </widget>
+          </object>
           <packing>
             <property name="position">1</property>
           </packing>
         </child>
-      </widget>
+      </object>
     </child>
-  </widget>
-</glade-interface>
+  </object>
+</interface>

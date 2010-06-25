@@ -23,7 +23,6 @@ A detailed pedigree of the selected pigeon.
 import os.path
 
 import gtk
-import gtk.glade
 
 import const
 import common
@@ -31,23 +30,19 @@ import widgets
 import mailing
 from pedigree import DrawPedigree
 from printing import PrintPedigree
+from gtkbuilderapp import GtkbuilderApp
 
 
-class PedigreeWindow:
+class PedigreeWindow(GtkbuilderApp):
     def __init__(self, main, pigeoninfo):
         '''
         Constructor
 
         @param main: The main instance class
         @param pigeoninfo: Dictionary containing pigeon info
-        ''' 
+        '''
 
-        self.wTree = gtk.glade.XML(const.GLADEPEDIGREE)
-        self.wTree.signal_autoconnect(self)
-
-        for w in self.wTree.get_widget_prefix(''):
-            wname = w.get_name()
-            setattr(self, wname, w)
+        GtkbuilderApp.__init__(self, const.GLADEPEDIGREE, const.DOMAIN)
 
         self.main = main
         self.pigeoninfo = pigeoninfo

@@ -31,6 +31,7 @@ import const
 import widgets
 import messages
 from pedigree import DrawPedigree
+from gtkbuilderapp import GtkbuilderApp
 
 
 PRINTER_DPI = 72.0
@@ -43,7 +44,7 @@ MARGIN = 6
  ZOOM_FREE,) = range(3)
 
 
-class PrintPreview:
+class PrintPreview(GtkbuilderApp):
 
     zoom_factors = {
         0.50: '50%',
@@ -58,12 +59,7 @@ class PrintPreview:
     }
 
     def __init__(self, operation, preview, context, parent):
-        self.wTree = gtk.glade.XML(const.GLADEPREVIEW)
-        self.wTree.signal_autoconnect(self)
-
-        for w in self.wTree.get_widget_prefix(''):
-            name = w.get_name()
-            setattr(self, name, w)
+        GtkbuilderApp.__init__(self, const.GLADEPREVIEW, const.DOMAIN)
 
         self.previewwindow.set_transient_for(parent)
 

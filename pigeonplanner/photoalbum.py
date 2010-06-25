@@ -17,13 +17,13 @@
 
 
 import gtk
-import gtk.glade
 import gobject
 import logging
 logger = logging.getLogger(__name__)
 
 import const
 import widgets
+from gtkbuilderapp import GtkbuilderApp
 
 
 MARGIN = 6
@@ -33,7 +33,7 @@ MARGIN = 6
  ZOOM_FREE,) = range(3)
 
 
-class PhotoAlbum:
+class PhotoAlbum(GtkbuilderApp):
 
     zoom_factors = {
         0.25: '25%',
@@ -47,12 +47,7 @@ class PhotoAlbum:
     }
 
     def __init__(self, parent, parser, database, pindex=None):
-        self.wTree = gtk.glade.XML(const.GLADEPHOTOALBUM)
-        self.wTree.signal_autoconnect(self)
-
-        for w in self.wTree.get_widget_prefix(''):
-            name = w.get_name()
-            setattr(self, name, w)
+        GtkbuilderApp.__init__(self, const.GLADEPHOTOALBUM, const.DOMAIN)
 
         self.photoalbum.set_transient_for(parent)
 
@@ -67,6 +62,7 @@ class PhotoAlbum:
         self.max = (1600, 1200)
         self.picture_no = len(self.iconview.get_model())
         self.current_picture = 0
+        self.zoom = 1.0
         self.zoom_mode = ZOOM_FREE
         if pindex:
             path = tuple(index for index, row in enumerate(self.iconview.get_model()) if row[1] == pindex)

@@ -20,23 +20,18 @@ import os.path
 import datetime
 
 import gtk
-import gtk.glade
 
 import const
 import common
 import mailing
 import widgets
 from printing import PrintResults
+from gtkbuilderapp import GtkbuilderApp
 
 
-class ResultWindow:
+class ResultWindow(GtkbuilderApp):
     def __init__(self, main, pigeons, database):
-        self.wTree = gtk.glade.XML(const.GLADERESULT)
-        self.wTree.signal_autoconnect(self)
-
-        for w in self.wTree.get_widget_prefix(''):
-            name = w.get_name()
-            setattr(self, name, w)
+        GtkbuilderApp.__init__(self, const.GLADERESULT, const.DOMAIN)
 
         self.main = main
         self.database = database
@@ -45,7 +40,6 @@ class ResultWindow:
         self.resultwindow.set_transient_for(self.main.main)
 
         self.build_toolbar()
-        self.build_treeview()
         self.fill_treeview()
 
         self.pdfname = "%s_%s.pdf" %(_("Results"), datetime.date.today())
@@ -84,14 +78,6 @@ class ResultWindow:
            ))
 
         return action_group
-
-    def build_treeview(self):
-        columns = [_("Band no."), _("Year"), _("Date"), _("Racepoint"), _("Placed"), _("Out of"), _("Coefficient"), _("Sector"), _("Type"), _("Category"), _("Weather"), _("Wind"), _("Comment")]
-        types = [str, str, str, str, str, int, int, float, str, str, str, str, str, str]
-
-        self.liststore, self.selection = widgets.setup_treeview(self.treeviewres,
-                                                                columns, types,
-                                                                None, True, True, True)
 
     def fill_treeview(self):
         self.liststore.clear()
