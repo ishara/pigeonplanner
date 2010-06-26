@@ -407,6 +407,12 @@ class DatabaseOperations:
         conn.commit()
         conn.close()
 
+    def update_medication_pindex(self, pindex, pindex_old):
+        conn, cursor = self.db_connect()
+        cursor.execute('UPDATE Medication SET pindex=? WHERE pindex=?', (pindex, pindex_old))
+        conn.commit()
+        conn.close()
+
     def get_pigeon_medication(self, pindex):
         conn, cursor = self.db_connect()
         cursor.execute('SELECT * FROM Medication WHERE pindex=?', (pindex,))
@@ -420,6 +426,16 @@ class DatabaseOperations:
         data = cursor.fetchone()
         conn.close()
         return data
+
+    def has_medication(self, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT COUNT(*) FROM Medication WHERE pindex=?', (pindex,))
+        data = [row[0] for row in cursor.fetchall() if row[0]]
+        conn.close()
+        if data:
+            return data[0]
+        else:
+            return None
 
 #### Events
     def insert_event(self, data):

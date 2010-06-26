@@ -1597,6 +1597,8 @@ class MainWindow(GtkbuilderApp):
 
         if self.database.has_results(pindex):
             self.database.update_result_pindex(pindex_new, pindex)
+        if self.database.has_medication(pindex):
+            self.database.update_medication_pindex(pindex_new, pindex)
 
         self.database.update_pigeon(data)
 
