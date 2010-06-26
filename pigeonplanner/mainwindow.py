@@ -376,8 +376,7 @@ class MainWindow(GtkbuilderApp):
                 logger.info("Remove: Removing the results")
                 self.database.delete_result_from_band(pindex)
 
-            filter_iter = self.modelsort.convert_iter_to_child_iter(None, tIter)
-            self.liststore.remove(self.modelfilter.convert_iter_to_child_iter(filter_iter))
+            self.liststore.remove(tIter)
 
             if len(self.liststore) > 0:
                 if not path:
@@ -532,40 +531,15 @@ class MainWindow(GtkbuilderApp):
         self.chkFilterLofts.set_active(False)
         self.chkFilterStatus.set_active(False)
 
-        self.modelfilter.refilter()
+        self.fill_treeview()
 
     def on_filterapply_clicked(self, widget):
-        self.modelfilter.refilter()
+        self.fill_treeview(filter_active=True)
 
     def on_closefilterdialog_clicked(self, widget):
         self.filterdialog.hide()
 
     # Main treeview callbacks
-    def visible_cb(self, model, row_iter):
-        pindex = model.get_value(row_iter, 0)
-
-        if self.chkFilterSex.get_active():
-            if not self.parser.pigeons[pindex].sex == self.cbFilterSex.get_active_text():
-                return False
-
-        if self.chkFilterColours.get_active():
-            if not self.parser.pigeons[pindex].colour == self.cbFilterColour.get_active_text():
-                return False
-
-        if self.chkFilterStrains.get_active():
-            if not self.parser.pigeons[pindex].strain == self.cbFilterStrain.get_active_text():
-                return False
-
-        if self.chkFilterLofts.get_active():
-            if not self.parser.pigeons[pindex].loft == self.cbFilterLoft.get_active_text():
-                return False
-
-        if self.chkFilterStatus.get_active():
-            if not self.parser.pigeons[pindex].active == self.cbFilterStatus.get_active():
-                return False
-
-        return True
-
     def on_treeview_press(self, widget, event):
         path, focus = self.treeview.get_cursor()
 
@@ -670,8 +644,9 @@ class MainWindow(GtkbuilderApp):
         self.treeview_menu(self.selOffspring, event)
 
     def treeview_menu(self, selection, event):
-        pindex = self.get_treeview_pindex(selection)
-        if not pindex: return
+        model, path = selection.get_selected()
+        if not path: return
+        pindex = model[path][0]
 
         if event.button == 3:
             widgets.popup_menu(event, [(gtk.STOCK_JUMP_TO, self.search_pigeon, pindex)])
@@ -1141,14 +1116,6 @@ class MainWindow(GtkbuilderApp):
 
         self.selection = self.treeview.get_selection()
         self.selection.connect('changed', self.selection_changed)
-
-        self.modelfilter = self.liststore.filter_new()
-        self.modelfilter.set_visible_func(self.visible_cb)
-
-        self.modelsort = gtk.TreeModelSort(self.modelfilter)
-        self.modelsort.set_sort_column_id(2, gtk.SORT_ASCENDING)
-        self.treeview.set_model(self.modelsort)
-
         self.set_treeview_columns()
 
     def set_treeview_columns(self):
@@ -1175,11 +1142,36 @@ class MainWindow(GtkbuilderApp):
         self.selResults = self.tvResults.get_selection()
         self.selResults.connect('changed', self.selectionresult_changed)
 
-    def fill_treeview(self, path=0, search_results=[]):
+    def pigeon_filter(self, pindex):
+        if self.chkFilterSex.get_active():
+            if not self.parser.pigeons[pindex].sex == self.cbFilterSex.get_active_text():
+                return False
+
+        if self.chkFilterColours.get_active():
+            if not self.parser.pigeons[pindex].colour == self.cbFilterColour.get_active_text():
+                return False
+
+        if self.chkFilterStrains.get_active():
+            if not self.parser.pigeons[pindex].strain == self.cbFilterStrain.get_active_text():
+                return False
+
+        if self.chkFilterLofts.get_active():
+            if not self.parser.pigeons[pindex].loft == self.cbFilterLoft.get_active_text():
+                return False
+
+        if self.chkFilterStatus.get_active():
+            if not self.parser.pigeons[pindex].active == self.cbFilterStatus.get_active():
+                return False
+
+        return True
+
+    def fill_treeview(self, path=0, search_results=[], filter_active=False):
         '''
         Fill the main treeview with pigeons.
 
         @param path: The path to set the cursor
+        @param search_results: A pigeonlist to show
+        @param filter_active: If the filter is active
         '''
 
         self.liststore.clear()
@@ -1191,6 +1183,10 @@ class MainWindow(GtkbuilderApp):
 
         for pindex in pigeons:
             if not self.parser.pigeons[pindex].show: continue
+
+            if filter_active:
+                if not self.pigeon_filter(pindex):
+                    continue
 
             self.liststore.append([pindex,
                    self.parser.pigeons[pindex].ring,
@@ -1532,10 +1528,8 @@ class MainWindow(GtkbuilderApp):
         self.parser.get_pigeons()
         self.count_active_pigeons()
         if self.changedRowIter and self.operation == 'add':
-            filter_iter = self.modelfilter.convert_child_iter_to_iter(self.changedRowIter)
-            sort_iter = self.modelsort.convert_child_iter_to_iter(None, filter_iter)
-            self.selection.select_iter(sort_iter)
-            self.treeview.scroll_to_cell(self.modelsort.get_path(sort_iter))
+            self.selection.select_iter(self.changedRowIter)
+            self.treeview.scroll_to_cell(self.liststore.get_path(self.changedRowIter))
         if self.operation == 'edit':
             self.selection.emit('changed')
 
@@ -1634,8 +1628,7 @@ class MainWindow(GtkbuilderApp):
                 self.database.update_lost(self.get_status_info()[2] + (pindex,))
 
         self.update_data(infoTuple)
-        filter_iter = self.modelsort.convert_iter_to_child_iter(None, self.treeIterEdit)
-        self.liststore.set(self.modelfilter.convert_iter_to_child_iter(filter_iter),
+        self.liststore.set(self.treeIterEdit,
                                 0, pindex_new,
                                 1, infoTuple[0],
                                 2, infoTuple[1],
@@ -1878,21 +1871,7 @@ class MainWindow(GtkbuilderApp):
         for item in self.liststore:
             if self.liststore.get_value(item.iter, 0) == pindex:
                 self.treeview.set_cursor(item.path)
-                return True
-
-        return False
-
-    def get_treeview_pindex(self, selection):
-        '''
-        Return the pindex of the selected row
-
-        @param selection: the selection of the treeview
-        '''
-
-        model, path = selection.get_selected()
-        if not path: return
-
-        return model[path][0]
+                break
 
     def get_resultdata(self):
         '''
