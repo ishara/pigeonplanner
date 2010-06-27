@@ -35,6 +35,7 @@ except:
 
 import const
 import checks
+import common
 import widgets
 import database
 import messages
@@ -244,7 +245,7 @@ class PedigreeEditBox:
         if not checks.check_ring_entry(self.editdialog, ring, year):
             return False
 
-        pindex = ring + year
+        pindex = common.get_pindex_from_band(ring, year)
 
         if self.pindex and self.pindex in self.main.parser.pigeons:
             data = (pindex, ring, year,

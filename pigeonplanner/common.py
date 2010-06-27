@@ -112,6 +112,14 @@ def check_userinfo(parent, main, name):
 
     return True
 
+def get_pindex_from_band(band, year):
+    return band+year
+
+def get_band_from_pindex(pindex):
+    band = pindex[:len(pindex)-4]
+    year = pindex[-4:]
+    return band, year
+
 
 class URLOpen:
     def __init__(self, cookie=None):
