@@ -45,6 +45,34 @@ class ToolsWindow(GtkbuilderApp):
         self.toolsdialog.set_transient_for(self.main.main)
         self.linkbutton.set_uri(const.DOWNLOADURL)
 
+        distance_units = [
+                    (_('Yards'), 0.9144),
+                    (_('Kilometres'), 1000),
+                    (_('Metres'), 1),
+                    (_('Centimetres'), 0.01),
+                    (_('Inches'), 0.025),
+                    (_('Feet'), 0.3048),
+                    (_('Miles'), 1609.344),
+                    (_('Nautical Miles'), 1852)
+            ]
+        speed_units = [
+                (_('Yard per Minute'), 0.01524),
+                (_('Metres per Minute'), 0.0166666666),
+                (_('Metres per Second'), 1),
+                (_('Kilometre per Hour'), 0.277777777777777777777777777777777777),
+                (_('Feet per Second'), 0.3048),
+                (_('Feet per Minute'), 0.00508),
+                (_('Mile per Hour'), 0.44704)
+            ]
+
+        for item in distance_units:
+            self.ls_dist_units.append(item)
+        for item in speed_units:
+            self.ls_speed_units.append(item)
+
+        self.combobox_velocity_distance.set_active(0)
+        self.combobox_velocity_speed.set_active(0)
+
         # Build main treeview
         self.selection = self.treeview.get_selection()
         self.selection.connect('changed', self.selection_changed)
@@ -92,6 +120,7 @@ class ToolsWindow(GtkbuilderApp):
         self.cbdata2.set_active(0)
 
         # Make stockbuttons from these
+        self.button_velocity_calculate.set_use_stock(True)
         self.calculate.set_use_stock(True)
         self.btnsearchdb.set_use_stock(True)
         self.dboptimize.set_use_stock(True)
@@ -114,6 +143,26 @@ class ToolsWindow(GtkbuilderApp):
             pass
 
     # Velocity
+    ## Exact
+    def on_button_velocity_calculate_clicked(self, widget):
+        dist_iter = self.combobox_velocity_distance.get_active_iter()
+        distunit = self.ls_dist_units.get(dist_iter, 1)[0]
+        speed_iter = self.combobox_velocity_speed.get_active_iter()
+        speedunit = self.ls_speed_units.get(speed_iter, 1)[0]
+
+        distance = self.spinbutton_velocity_distance.get_value()
+        hours = self.spinbutton_velocity_hours.get_value_as_int()
+        minutes = self.spinbutton_velocity_minutes.get_value_as_int()
+        seconds = self.spinbutton_velocity_seconds.get_value_as_int()
+        seconds_total = (hours * 3600) + (minutes * 60) + seconds
+        if seconds_total == 0:
+            self.spinbutton_velocity_seconds.set_value(1)
+            seconds_total = 1
+
+        speed = (distance * distunit) / (seconds_total * speedunit)
+        self.entry_velocity_result.set_text("%.6f" %speed)
+
+    ## Prognosis
     def on_sbbegin_changed(self, widget):
         spinmin = widget.get_value_as_int()
         spinmax = widget.get_range()[1]
