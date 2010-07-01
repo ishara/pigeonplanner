@@ -120,6 +120,11 @@ def get_band_from_pindex(pindex):
     year = pindex[-4:]
     return band, year
 
+def add_zero_to_time(value):
+    if value >= 0 and value < 10:
+        return '0%s' %value
+    return str(value)
+
 
 class URLOpen:
     def __init__(self, cookie=None):

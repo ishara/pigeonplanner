@@ -72,6 +72,8 @@ class ToolsWindow(GtkbuilderApp):
 
         self.combobox_velocity_distance.set_active(0)
         self.combobox_velocity_speed.set_active(0)
+        self.combobox_prognosis_distance.set_active(0)
+        self.combobox_prognosis_speed.set_active(0)
 
         # Build main treeview
         self.selection = self.treeview.get_selection()
@@ -102,10 +104,9 @@ class ToolsWindow(GtkbuilderApp):
 
         # Fill spinbuttons
         dt = datetime.datetime.now()
-        self.sbhour.set_value(dt.hour)
-        self.sbminute.set_value(dt.minute)
-        self.sbbegin.set_value(700)
-        self.sbend.set_value(1800)
+        self.spinbutton_prognosis_hours.set_value(dt.hour)
+        self.spinbutton_prognosis_minutes.set_value(dt.minute)
+        self.spinbutton_prognosis_seconds.set_value(dt.second)
 
         # Backups file filter
         self.fcButtonRestore.add_filter(widgets.get_backup_filefilter())
@@ -143,6 +144,10 @@ class ToolsWindow(GtkbuilderApp):
             pass
 
     # Velocity
+    def on_spinbutton_time_changed(self, widget):
+        value = widget.get_value_as_int()
+        widget.set_text(common.add_zero_to_time(value))
+
     ## Exact
     def on_button_velocity_calculate_clicked(self, widget):
         dist_iter = self.combobox_velocity_distance.get_active_iter()
@@ -163,44 +168,43 @@ class ToolsWindow(GtkbuilderApp):
         self.entry_velocity_result.set_text("%.6f" %speed)
 
     ## Prognosis
-    def on_sbbegin_changed(self, widget):
+    def on_spinbutton_prognosis_from_changed(self, widget):
         spinmin = widget.get_value_as_int()
         spinmax = widget.get_range()[1]
 
-        self.sbend.set_range(spinmin, spinmax)
-
-    def on_sbminute_changed(self, widget):
-        value = widget.get_value_as_int()
-
-        if value >= 0 and value < 10:
-            widget.set_text('0%s' %value)
+        self.spinbutton_prognosis_to.set_range(spinmin, spinmax)
 
     def on_calculate_clicked(self, widget):
+        dist_iter = self.combobox_prognosis_distance.get_active_iter()
+        distunit = self.ls_dist_units.get(dist_iter, 1)[0]
+        speed_iter = self.combobox_prognosis_speed.get_active_iter()
+        speedunit = self.ls_speed_units.get(speed_iter, 1)[0]
+
+        begin = self.spinbutton_prognosis_from.get_value_as_int()
+        end = self.spinbutton_prognosis_to.get_value_as_int()
+        distance = self.spinbutton_prognosis_distance.get_value()
+        hours = self.spinbutton_prognosis_hours.get_value_as_int()
+        minutes = self.spinbutton_prognosis_minutes.get_value_as_int()
+        seconds = self.spinbutton_prognosis_seconds.get_value_as_int()
+        seconds_total = (hours * 3600) + (minutes * 60) + seconds
+
         self.ls_velocity.clear()
 
-        begin = self.sbbegin.get_value_as_int()
-        end = self.sbend.get_value_as_int()
-        velocity = begin
-
-        releaseInMinutes = self.sbhour.get_value_as_int()*60 + self.sbminute.get_value_as_int()
-
-        while velocity <= end:
-            timeInMinutes = (self.sbdist.get_value_as_int()*1000)/velocity
-            arrivalInMinutes = releaseInMinutes + timeInMinutes
-            self.ls_velocity.append([velocity, datetime.timedelta(minutes=timeInMinutes), datetime.timedelta(minutes=arrivalInMinutes)])
-            velocity += 50
+        for speed in xrange(begin, end+50, 50):
+            flight = int((distance*distunit) / (speed*speedunit))
+            arrival = seconds_total + flight
+            self.ls_velocity.append([speed, datetime.timedelta(seconds=flight), datetime.timedelta(seconds=arrival)])
 
     def on_printcalc_clicked(self, widget):
-        data = []
-        for row in self.ls_velocity:
-            velocity, flight, arrival = self.ls_velocity.get(row.iter, 0, 1, 2)
-            data.append((velocity, flight, arrival))
-
+        data = [self.ls_velocity.get(row.iter, 0, 1, 2) for row in self.ls_velocity]
         if data:
             date = datetime.datetime.now()
-            release = "%s:%s" %(self.sbhour.get_text(), self.sbminute.get_text())
-            info = [date.strftime("%Y-%m-%d"), release, self.sbdist.get_value_as_int()]
-
+            distance = "%s %s" %(self.spinbutton_prognosis_distance.get_value_as_int(),
+                                 self.combobox_prognosis_distance.get_active_text())
+            release = "%s:%s:%s" %(self.spinbutton_prognosis_hours.get_text(),
+                                 self.spinbutton_prognosis_minutes.get_text(),
+                                 self.spinbutton_prognosis_seconds.get_text())
+            info = [date.strftime("%Y-%m-%d"), release, distance]
             PrintVelocity(self.main.main, data, info, self.main.options.optionList, 'print')
 
     # Events
