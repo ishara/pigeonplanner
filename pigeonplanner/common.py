@@ -116,9 +116,12 @@ def get_pindex_from_band(band, year):
     return band+year
 
 def get_band_from_pindex(pindex):
-    band = pindex[:len(pindex)-4]
+    band = pindex[:-4]
     year = pindex[-4:]
     return band, year
+
+def calculate_coefficient(place, out):
+    return (float(place)/float(out))*100
 
 def add_zero_to_time(value):
     if value >= 0 and value < 10:

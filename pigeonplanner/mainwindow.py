@@ -136,12 +136,9 @@ class MainWindow(GtkbuilderApp):
                          self.cbWind: self.database.get_all_wind(), \
                          self.cbColour: self.database.get_all_colours(), \
                          self.cbStrain: self.database.get_all_strains(), \
-                         self.cbLoft: self.database.get_all_lofts(), \
-                         self.cbFilterColour: self.database.get_all_colours(), \
-                         self.cbFilterStrain: self.database.get_all_strains(), \
-                         self.cbFilterLoft: self.database.get_all_lofts()}
+                         self.cbLoft: self.database.get_all_lofts()}
         for key, value in self.listdata.items():
-            widgets.fill_list(key, value)
+            widgets.fill_combobox(key, value)
 
         self.statusmsgs = { 'entryRing1': (self.statusmsg.get_id("band"),
                                             _("Enter the bandnumber of the pigeon")),
@@ -397,7 +394,20 @@ class MainWindow(GtkbuilderApp):
         self.on_addresult_clicked(None)
 
     def menufilter_activate(self, widget):
-        self.filterdialog.show()
+        filterdialog = widgets.FilterDialog(self.main, _("Filter pigeons"), self.fill_treeview)
+
+        self.cbFilterSex = widgets.create_sex_combobox(self.sexDic)
+        self.chkFilterSex = filterdialog.add_filter_custom(_("Sex"), self.cbFilterSex)
+        self.chkFilterColours, self.cbFilterColour = filterdialog.add_filter_combobox(_("Colours"),
+                                                        self.database.get_all_colours())
+        self.chkFilterStrains, self.cbFilterStrain = filterdialog.add_filter_combobox(_("Strains"),
+                                                        self.database.get_all_strains())
+        self.chkFilterLofts, self.cbFilterLoft = filterdialog.add_filter_combobox(_("Lofts"),
+                                                        self.database.get_all_lofts())
+        self.cbFilterStatus = widgets.create_status_combobox()
+        self.chkFilterStatus = filterdialog.add_filter_custom(_("Status"), self.cbFilterStatus)
+
+        filterdialog.run()
 
     def menutools_activate(self, widget):
         ToolsWindow(self)
@@ -522,22 +532,6 @@ class MainWindow(GtkbuilderApp):
         self.searchdialog.hide()
 
         return True
-
-    # Filter dialog callbacks
-    def on_btnClearFilters_clicked(self, widget):
-        self.chkFilterSex.set_active(False)
-        self.chkFilterColours.set_active(False)
-        self.chkFilterStrains.set_active(False)
-        self.chkFilterLofts.set_active(False)
-        self.chkFilterStatus.set_active(False)
-
-        self.fill_treeview()
-
-    def on_filterapply_clicked(self, widget):
-        self.fill_treeview(filter_active=True)
-
-    def on_closefilterdialog_clicked(self, widget):
-        self.filterdialog.hide()
 
     # Main treeview callbacks
     def on_treeview_press(self, widget, event):
@@ -751,27 +745,27 @@ class MainWindow(GtkbuilderApp):
             self.hide_result_dialog()
 
         self.database.insert_racepoint((point, ))
-        widgets.fill_list(self.cbRacepoint, self.database.get_all_racepoints())
+        widgets.fill_combobox(self.cbRacepoint, self.database.get_all_racepoints())
 
         if sector:
             self.database.insert_sector((sector, ))
-            widgets.fill_list(self.cbSector, self.database.get_all_sectors())
+            widgets.fill_combobox(self.cbSector, self.database.get_all_sectors())
 
         if ftype:
             self.database.insert_type((ftype, ))
-            widgets.fill_list(self.cbType, self.database.get_all_types())
+            widgets.fill_combobox(self.cbType, self.database.get_all_types())
 
         if category:
             self.database.insert_category((category, ))
-            widgets.fill_list(self.cbCategory, self.database.get_all_categories())
+            widgets.fill_combobox(self.cbCategory, self.database.get_all_categories())
 
         if weather:
             self.database.insert_weather((weather, ))
-            widgets.fill_list(self.cbWeather, self.database.get_all_weather())
+            widgets.fill_combobox(self.cbWeather, self.database.get_all_weather())
 
         if wind:
             self.database.insert_wind((wind, ))
-            widgets.fill_list(self.cbWind, self.database.get_all_wind())
+            widgets.fill_combobox(self.cbWind, self.database.get_all_wind())
 
     def on_resultdialogclose_clicked(self, widget):
         self.hide_result_dialog()
@@ -1404,7 +1398,7 @@ class MainWindow(GtkbuilderApp):
             weather = result[10]
             comment = result[15]
 
-            cof = (float(place)/float(out))*100
+            cof = common.calculate_coefficient(place, out)
 
             self.lsResult.append([key, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
 
@@ -1696,17 +1690,17 @@ class MainWindow(GtkbuilderApp):
         colour = infoTuple[5]
         if colour:
             self.database.insert_colour((colour, ))
-            widgets.fill_list(self.cbColour, self.database.get_all_colours())
+            widgets.fill_combobox(self.cbColour, self.database.get_all_colours())
 
         strain = infoTuple[7]
         if strain:
             self.database.insert_strain((strain, ))
-            widgets.fill_list(self.cbStrain, self.database.get_all_strains())
+            widgets.fill_combobox(self.cbStrain, self.database.get_all_strains())
 
         loft = infoTuple[8]
         if loft:
             self.database.insert_loft((loft, ))
-            widgets.fill_list(self.cbLoft, self.database.get_all_lofts())
+            widgets.fill_combobox(self.cbLoft, self.database.get_all_lofts())
 
     def empty_entryboxes(self):
         '''
@@ -1967,8 +1961,7 @@ class MainWindow(GtkbuilderApp):
             self.sexStore.insert(int(key), [key, self.sexDic[key]])
         self.cbsex = gtk.ComboBox(self.sexStore)
         self.cbRangeSex = gtk.ComboBox(self.sexStore)
-        self.cbFilterSex = gtk.ComboBox(self.sexStore)
-        for box in [self.cbsex, self.cbRangeSex, self.cbFilterSex]:
+        for box in [self.cbsex, self.cbRangeSex]:
             cell = gtk.CellRendererText()
             box.pack_start(cell, True)
             box.add_attribute(cell, 'text', 1)
@@ -1976,7 +1969,6 @@ class MainWindow(GtkbuilderApp):
 
         self.table1.attach(self.cbRangeSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
         self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
-        self.hbox_filter_sex.pack_start(self.cbFilterSex, True, True)
 
     def set_filefilter(self):
         '''

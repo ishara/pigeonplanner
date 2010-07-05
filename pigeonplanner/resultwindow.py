@@ -29,6 +29,24 @@ from printing import PrintResults
 from gtkbuilderapp import GtkbuilderApp
 
 
+(KEY,
+ PINDEX,
+ DATE,
+ POINT,
+ PLACE,
+ OUT,
+ SECTOR,
+ TYPE,
+ CATEGORY,
+ WIND,
+ WEATHER,
+ PUT,
+ BACK,
+ OWNPLACE,
+ OWNOUT,
+ COMMENT) = range(16)
+
+
 class ResultWindow(GtkbuilderApp):
     def __init__(self, main, pigeons, database):
         GtkbuilderApp.__init__(self, const.GLADERESULT, const.DOMAIN)
@@ -39,8 +57,15 @@ class ResultWindow(GtkbuilderApp):
 
         self.resultwindow.set_transient_for(self.main.main)
 
+        self.filter_pigeons = []
+        self.filter_pigeon_years = []
+        self.filter_race_years = []
+        self.filter_points = []
+        self.filter_sectors = []
+
         self.build_toolbar()
         self.fill_treeview()
+        self.liststore.foreach(self.fill_filters)
 
         self.pdfname = "%s_%s.pdf" %(_("Results"), datetime.date.today())
 
@@ -52,9 +77,6 @@ class ResultWindow(GtkbuilderApp):
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.resultwindow.add_accel_group(accelgroup)
-
-        # Just for now...
-        uimanager.get_widget('/Toolbar/Filter').hide()
 
         toolbar = uimanager.get_widget('/Toolbar')
         self.vbox.pack_start(toolbar, False, False)
@@ -79,21 +101,57 @@ class ResultWindow(GtkbuilderApp):
 
         return action_group
 
-    def fill_treeview(self):
+    def result_filter(self, result):
+        if self.chkFilterPigeons.get_active():
+            if not result[PINDEX] == self.cbFilterPigeons.get_active_text():
+                return False
+
+        if self.chkFilterPigeonYears.get_active():
+            if not self.pigeons[result[PINDEX]].year == self.cbFilterPigeonYears.get_active_text():
+                return False
+
+        if self.chkFilterRaceYears.get_active():
+            if not result[DATE][:4] == self.cbFilterRaceYears.get_active_text():
+                return False
+
+        if self.chkFilterPoints.get_active():
+            if not result[POINT] == self.cbFilterPoints.get_active_text():
+                return False
+
+        if self.chkFilterSectors.get_active():
+            if not result[SECTOR] == self.cbFilterSectors.get_active_text():
+                return False
+
+        if self.chkFilterCoef.get_active():
+            coef = int(common.calculate_coefficient(result[PLACE], result[OUT]))
+            if not coef == self.sbFilterCoef.get_value_as_int():
+                return False
+
+        if self.chkFilterPlace.get_active():
+            if not result[PLACE] == self.sbFilterPlace.get_value_as_int():
+                return False
+
+        return True
+
+    def fill_treeview(self, filter_active=False):
         self.liststore.clear()
 
         for result in self.database.get_all_results():
-            pindex = result[1]
-            date = result[2]
-            point = result[3]
-            place = result[4]
-            out = result[5]
-            sector = result[6]
-            ftype = result[7]
-            category = result[8]
-            wind = result[9]
-            weather = result[10]
-            comment = result[15]
+            if filter_active:
+                if not self.result_filter(result):
+                    continue
+
+            pindex = result[PINDEX]
+            date = result[DATE]
+            point = result[POINT]
+            place = result[PLACE]
+            out = result[OUT]
+            sector = result[SECTOR]
+            ftype = result[TYPE]
+            category = result[CATEGORY]
+            wind = result[WIND]
+            weather = result[WEATHER]
+            comment = result[COMMENT]
 
             cof = (float(place)/float(out))*100
             try:
@@ -102,25 +160,36 @@ class ResultWindow(GtkbuilderApp):
             except KeyError:
                 # HACK Pigeon is removed but results are kept.
                 #      Make the band with the pindex.
-                ring = pindex[:-4]
-                year = pindex[-4:]
+                ring, year = common.get_band_from_pindex(pindex)
 
             self.liststore.append([pindex, ring, year, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
 
+        self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
 
     def on_close_window(self, widget, event=None):
         self.resultwindow.destroy()
 
-    def on_dialog_delete(self, widget, event=None):
-        self.filterdialog.hide()
-        return True
-
     def on_filter_clicked(self, widget):
-        self.filterdialog.show()
+        filterdialog = widgets.FilterDialog(self.resultwindow, _("Filter results"), self.fill_treeview)
 
-    def on_apply_clicked(self, widget):
-        pass
+        self.cbFilterPigeons = self.pigeons_combobox()
+        self.chkFilterPigeons = filterdialog.add_filter_custom(
+                                                        _("Pigeons"), self.cbFilterPigeons)
+        self.chkFilterPigeonYears, self.cbFilterPigeonYears = filterdialog.add_filter_combobox(
+                                                        _("Year of pigeon"), self.filter_pigeon_years)
+        self.chkFilterRaceYears, self.cbFilterRaceYears = filterdialog.add_filter_combobox(
+                                                        _("Year of race"), self.filter_race_years)
+        self.chkFilterPoints, self.cbFilterPoints = filterdialog.add_filter_combobox(
+                                                        _("Racepoint"), self.filter_points)
+        self.chkFilterSectors, self.cbFilterSectors = filterdialog.add_filter_combobox(
+                                                        _("Sector"), self.filter_sectors)
+        self.chkFilterCoef, self.sbFilterCoef = filterdialog.add_filter_spinbutton(
+                                                        _("Coefficient"))
+        self.chkFilterPlace, self.sbFilterPlace = filterdialog.add_filter_spinbutton(
+                                                        _("Place"), 1)
+
+        filterdialog.run()
 
     def on_mail_clicked(self, widget):
         self.do_operation('mail')
@@ -157,4 +226,31 @@ class ResultWindow(GtkbuilderApp):
             results.append(values)
 
         PrintResults(self.resultwindow, results, userinfo, self.main.options.optionList, op, self.pdfname)
+
+    def fill_filters(self, model, path, treeiter):
+        pindex, ring, year, date, point, sector = model.get(treeiter, 0, 1, 2, 3, 4, 8)
+        if not pindex in self.filter_pigeons:
+            self.filter_pigeons.append(pindex)
+        if not year in self.filter_pigeon_years:
+            self.filter_pigeon_years.append(year)
+        if not date[:4] in self.filter_race_years:
+            self.filter_race_years.append(date[:4])
+        if not point in self.filter_points:
+            self.filter_points.append(point)
+        if not sector in self.filter_sectors:
+            self.filter_sectors.append(sector)
+
+    def pigeons_combobox(self):
+        store = gtk.ListStore(str, str)
+        for pindex in self.filter_pigeons:
+            band = "%s/%s" %(self.pigeons[pindex].ring, self.pigeons[pindex].year)
+            store.append([pindex, band])
+        cell = gtk.CellRendererText()
+        combobox = gtk.ComboBox(store)
+        combobox.pack_start(cell, True)
+        combobox.add_attribute(cell, 'text', 1)
+        combobox.set_active(0)
+        widgets.set_combobox_wrap(combobox)
+
+        return combobox
 

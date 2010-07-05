@@ -241,39 +241,6 @@ def about_dialog(parent):
     result = dialog.run()
     dialog.destroy()
 
-def set_completion(widget):
-    '''
-    Set entrycompletion on given widget
-
-    @param widget: the widget to set entrycompletion
-    '''
-
-    completion = gtk.EntryCompletion()
-    completion.set_model(widget.get_model())
-    completion.set_minimum_key_length(1)
-    completion.set_text_column(0)
-    widget.child.set_completion(completion)
-
-def fill_list(widget, items):
-    '''
-    Fill the comboboxentry's with their data
-
-    @param widget: the comboboxentry
-    @param items: list of items to add
-    '''
-
-    model = widget.get_model()
-    model.clear()
-    items.sort()
-    for item in items:
-        model.append([item])
-
-    number = len(model)
-    if number > 10 and number <= 30:
-        widget.set_wrap_width(2)
-    elif number > 30:
-        widget.set_wrap_width(3)
-
 def set_multiple_sensitive(widgets):
     ''' 
     Set multiple widgets sensitive at once
@@ -314,6 +281,74 @@ def popup_menu(event, entries):
         item.show()
         menu.append(item)
     menu.popup(None, None, None, 0, event.time)
+
+def set_completion(widget):
+    '''
+    Set entrycompletion on given widget
+
+    @param widget: the widget to set entrycompletion
+    '''
+
+    completion = gtk.EntryCompletion()
+    completion.set_model(widget.get_model())
+    completion.set_minimum_key_length(1)
+    completion.set_text_column(0)
+    widget.child.set_completion(completion)
+
+def set_combobox_wrap(combobox):
+    '''
+    Wrap the columns of a combobox depending on the number of items
+
+    @param combobox: the combobox
+    '''
+
+    length = len(combobox.get_model())
+    if length > 10 and length <= 30:
+        combobox.set_wrap_width(2)
+    elif length > 30:
+        combobox.set_wrap_width(3)
+
+def fill_combobox(combobox, items, active=0):
+    '''
+    Fill a combobox with the given data
+
+    @param widget: the combobox
+    @param items: list of items to add
+    @param active: index of the active value
+    '''
+
+    model = combobox.get_model()
+    model.clear()
+    items.sort()
+    for item in items:
+        model.append([item])
+
+    set_combobox_wrap(combobox)
+    combobox.set_active(active)
+
+def create_sex_combobox(sexdic):
+    store = gtk.ListStore(str, str)
+    for key, value in sexdic.items():
+        store.insert(int(key), [key, value])
+    cell = gtk.CellRendererText()
+    combobox = gtk.ComboBox(store)
+    combobox.pack_start(cell, True)
+    combobox.add_attribute(cell, 'text', 1)
+    combobox.set_active(0)
+
+    return combobox
+
+def create_status_combobox():
+    store = gtk.ListStore(str)
+    for item in [_("Dead"), _("Active"), _("Sold"), _("Lost")]:
+        store.append([item])
+    cell = gtk.CellRendererText()
+    combobox = gtk.ComboBox(store)
+    combobox.pack_start(cell, True)
+    combobox.add_attribute(cell, 'text', 0)
+    combobox.set_active(0)
+
+    return combobox
 
 
 class Statusbar:
@@ -448,4 +483,99 @@ class EditPedigreeDialog(gtk.Dialog):
         b = self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_APPLY)
         b.set_property('can-default', True)
         b.set_property('has-default', True)
+
+
+class FilterDialog(gtk.Dialog):
+    def __init__(self, parent, title, fill_treeview_cb):
+        gtk.Dialog.__init__(self, title, parent, gtk.DIALOG_DESTROY_WITH_PARENT,
+                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+
+        self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        self.set_resizable(False)
+        self.set_skip_taskbar_hint(True)
+
+        self.fill_treeview_cb = fill_treeview_cb
+        self.checkboxes = []
+        self.active = False
+        self.sizegroup = gtk.SizeGroup(gtk.SIZE_GROUP_HORIZONTAL)
+
+        btnapply = gtk.Button(stock=gtk.STOCK_APPLY)
+        btnapply.connect("clicked", self.on_btnapply_clicked)
+        btnclear = gtk.Button()
+        image = gtk.Image()
+        image.set_from_stock(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
+        btnclear.set_image(image)
+        btnclear.connect("clicked", self.on_btnclear_clicked)
+        hbox = gtk.HBox()
+        hbox.pack_start(btnapply, False, False)
+        hbox.pack_start(btnclear, False, False, 4)
+        self.vbox.pack_end(hbox, False, False)
+
+    def run(self):
+        '''
+        Implement a non-blocking dialog so the user can browse through
+        the pigeons while seeing the filters.
+        '''
+
+        self.connect('response', self.on_dialog_response)
+        self.show_all()
+
+    def on_dialog_response(self, dialog, response_id):
+        if response_id == gtk.RESPONSE_CLOSE or response_id == gtk.RESPONSE_DELETE_EVENT:
+            self.clear_filters()
+            dialog.destroy()
+
+    def on_btnclear_clicked(self, widget):
+        self.clear_filters()
+        self.active = False
+
+    def on_btnapply_clicked(self, widget):
+        self.fill_treeview_cb(filter_active=True)
+        self.active = True
+
+    def on_spinbutton_changed(self, widget, value, text):
+        if widget.get_value_as_int() == value:
+            widget.set_text(text)
+
+    def clear_filters(self):
+        for checkbox in self.checkboxes:
+            checkbox.set_active(False)
+
+        if self.active:
+            self.fill_treeview_cb()
+
+    def __add_filter(self, widget, label):
+        self.sizegroup.add_widget(widget)
+        check = gtk.CheckButton(_("Only show:"))
+        hbox = gtk.HBox()
+        hbox.pack_start(check, False, True, 8)
+        hbox.pack_start(widget, True, True)
+        align = gtk.Alignment()
+        align.set_padding(0, 0, 12, 0)
+        align.add(hbox)
+        frame = gtk.Frame(label)
+        frame.set_shadow_type(gtk.SHADOW_NONE)
+        frame.add(align)
+        self.vbox.pack_start(frame, False, False, 8)
+        self.checkboxes.append(check)
+
+        return check
+
+    def add_filter_custom(self, label, widget):
+        return self.__add_filter(widget, label)
+
+    def add_filter_combobox(self, label, items):
+        combobox = gtk.combo_box_new_text()
+        fill_combobox(combobox, items)
+
+        return self.__add_filter(combobox, label), combobox
+
+    def add_filter_spinbutton(self, label, lowest=0, lowest_text=None):
+        adj = gtk.Adjustment(lowest, lowest, 4000, 1, 10, 0)
+        spinbutton = gtk.SpinButton(adj, 4)
+        if lowest_text:
+            spinbutton.set_text(lowest_text)
+            spinbutton.connect('changed', self.on_spinbutton_changed, lowest, lowest_text)
+
+        return self.__add_filter(spinbutton, label), spinbutton
 
