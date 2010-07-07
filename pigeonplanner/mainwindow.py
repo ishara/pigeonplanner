@@ -59,7 +59,7 @@ class MainWindow(GtkbuilderApp):
         self.blockMenuCallback = False
         self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(join(const.IMAGEDIR, 'icon_logo.png'), 75, 75)
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
-        self.pigeonStatus = {0: 'dead', 1: 'active', 2: 'sold', 3: 'lost'}
+        self.pigeonStatus = {0: 'Dead', 1: 'Active', 2: 'Sold', 3: 'Lost'}
         self.entrysToCheck = { 'ring': self.entryRing1, 'year': self.entryYear1,
                                'sire': self.entrySireEdit, 'yearsire': self.entryYearSireEdit,
                                'dam': self.entryDamEdit, 'yeardam': self.entryYearDamEdit}
@@ -359,7 +359,7 @@ class MainWindow(GtkbuilderApp):
                 # Only remove status when pigeon is completely removed
                 status = self.parser.pigeons[pindex].active
                 if status != const.ACTIVE:
-                    self.database.delete_status(self.pigeonStatus[status].capitalize(), pindex)
+                    self.database.delete_status(self.pigeonStatus[status], pindex)
                 # Same for the picture
                 image = self.parser.pigeons[pindex].image
                 if image:
@@ -1048,7 +1048,7 @@ class MainWindow(GtkbuilderApp):
     def on_cbStatus_changed(self, widget):
         status = widget.get_active()
         self.notebookStatus.set_current_page(status)
-        self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
+        self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status].lower()))
 
 
     #
@@ -1402,8 +1402,8 @@ class MainWindow(GtkbuilderApp):
         self.imagePigeon.set_from_pixbuf(pixbuf)
         self.imagePigeon1.set_from_pixbuf(pixbuf)
 
-        self.imageStatus.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
-        self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status]))
+        self.imageStatus.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status].lower()))
+        self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, '%s.png' %self.pigeonStatus[status].lower()))
 
         dp = DrawPedigree([self.tableSire, self.tableDam], pindex, pigeons=self.parser.pigeons,
                             main=self, lang=self.options.optionList.language)
@@ -1679,7 +1679,7 @@ class MainWindow(GtkbuilderApp):
         old_status = self.parser.pigeons[pindex].active
         if status != old_status:
             if old_status != const.ACTIVE:
-                self.database.delete_status(self.pigeonStatus[old_status].capitalize(), pindex)
+                self.database.delete_status(self.pigeonStatus[old_status], pindex)
 
             if status == const.DEAD:
                 self.database.insert_dead((pindex,) + self.get_status_info()[0])
