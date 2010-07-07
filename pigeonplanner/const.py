@@ -104,6 +104,13 @@ USER_AGENT = {"User-Agent": "Pigeon Planner/%s" %VERSION}
 
 DATE_FORMAT = '%Y-%m-%d'
 
+(SIRE,
+ DAM,
+ YOUNG) = range(3)
+
+(ADD,
+ EDIT) = range(2)
+
 (DEAD,
  ACTIVE,
  SOLD,

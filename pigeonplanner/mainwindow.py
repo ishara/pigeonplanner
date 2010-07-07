@@ -283,7 +283,7 @@ class MainWindow(GtkbuilderApp):
         self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR, 'active.png'))
         self.cbStatus.set_active(1)
 
-        self.add_edit_start('add')
+        self.add_edit_start(const.ADD)
 
         logger.info("Start: Adding a pigeon")
 
@@ -327,7 +327,7 @@ class MainWindow(GtkbuilderApp):
 
         self.preEditImage = self.parser.pigeons[pindex].image
 
-        self.add_edit_start('edit')
+        self.add_edit_start(const.EDIT)
 
         logger.info("Start: Editing a pigeon")
 
@@ -582,9 +582,9 @@ class MainWindow(GtkbuilderApp):
     def on_save_clicked(self, widget):
         if not checks.check_entrys(self.entrysToCheck): return
 
-        if self.operation == 'edit':
+        if self.operation == const.EDIT:
             self.write_new_data()
-        elif self.operation == 'add':
+        elif self.operation == const.ADD:
             self.write_new_pigeon()
 
         self.add_edit_finish()
@@ -666,7 +666,7 @@ class MainWindow(GtkbuilderApp):
         self.toolbar.set_sensitive(False)
 
         self.clear_resultdialog_fields()
-        self.resultDialogMode = 'add'
+        self.resultDialogMode = const.ADD
         self.labelModeResult.set_text(_('Add result for:'))
         self.resultdialog.show()
         self.resultdialog.set_modal(False)
@@ -706,7 +706,7 @@ class MainWindow(GtkbuilderApp):
         self.cbWind.child.set_text(result[10])
         self.entryComment.set_text(result[11])
 
-        self.resultDialogMode = 'edit'
+        self.resultDialogMode = const.EDIT
         self.labelModeResult.set_text(_('Edit result for:'))
         self.resultdialog.show()
         self.resultdialog.set_modal(True)
@@ -725,7 +725,7 @@ class MainWindow(GtkbuilderApp):
 
         cof = (float(place)/float(out))*100
         data = (date, point, place, out, sector, ftype, category, wind, weather, '', '', 0, 0, comment)
-        if self.resultDialogMode == 'add':
+        if self.resultDialogMode == const.ADD:
             if self.database.has_result((pindex,)+data):
                 widgets.message_dialog('error', messages.MSG_RESULT_EXISTS, self.main)
                 return
@@ -734,7 +734,7 @@ class MainWindow(GtkbuilderApp):
             rowid = self.database.insert_result(data)
             self.lsResult.append([rowid, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
             common.add_statusbar_message(self.statusbar, _("Result has been added"))
-        elif self.resultDialogMode == 'edit':
+        elif self.resultDialogMode == const.EDIT:
             selection = self.tvResults.get_selection()
             model, node = selection.get_selected()
             self.lsResult.set(node, 1, date, 2, point, 3, place, 4, out, 5, cof, 6, sector, 7, ftype, 8, category, 9, weather, 10, wind, 11, comment)
@@ -807,7 +807,7 @@ class MainWindow(GtkbuilderApp):
         self.clear_medicationdialog_fields()
         self.fill_medicationselect_treeview()
         widgets.fill_combobox(self.cbMedicationLoft, self.database.get_all_lofts())
-        self.medicationDialogMode = 'add'
+        self.medicationDialogMode = const.ADD
         self.medicationdialog.show()
         self.entry_meddialog_date.grab_focus()
         self.entry_meddialog_date.set_position(10)
@@ -856,7 +856,7 @@ class MainWindow(GtkbuilderApp):
             if row[2] in self.database.get_pigeons_from_medid(med[1]):
                 row[1] = True
 
-        self.medicationDialogMode = 'edit'
+        self.medicationDialogMode = const.EDIT
         self.medicationdialog.show()
         self.entry_meddialog_date.grab_focus()
         self.entry_meddialog_date.set_position(10)
@@ -873,7 +873,7 @@ class MainWindow(GtkbuilderApp):
             return
 
         pigeons = [row[2] for row in self.lsMedicationSelect if row[1]]
-        if self.medicationDialogMode == 'add':
+        if self.medicationDialogMode == const.ADD:
             medid = data[0] + common.get_random_number(10)
             for pindex in pigeons:
                 self.database.insert_medication((medid, pindex, ) + data)
@@ -881,7 +881,7 @@ class MainWindow(GtkbuilderApp):
                 rowiter = self.lsMedication.append([medid, data[0], data[1]])
                 self.selMedication.select_iter(rowiter)
                 self.tvMedication.scroll_to_cell(self.lsMedication.get_path(rowiter))
-        elif self.medicationDialogMode == 'edit':
+        elif self.medicationDialogMode == const.EDIT:
             selection = self.tvMedication.get_selection()
             model, node = selection.get_selected()
             self.lsMedication.set(node, 1, data[0], 2, data[1])
@@ -960,12 +960,10 @@ class MainWindow(GtkbuilderApp):
 
     # Find parent callbacks
     def on_findsire_clicked(self, widget):
-        self.search = 'sire'
-        self.fill_find_treeview('0', self.entryRing1.get_text(), self.entryYear1.get_text())
+        self.fill_find_treeview(const.SIRE, self.entryRing1.get_text(), self.entryYear1.get_text())
 
     def on_finddam_clicked(self, widget):
-        self.search = 'dam'
-        self.fill_find_treeview('1', self.entryRing1.get_text(), self.entryYear1.get_text())
+        self.fill_find_treeview(const.DAM, self.entryRing1.get_text(), self.entryYear1.get_text())
 
     def on_findadd_clicked(self, widget):
         model, path = self.selectionfind.get_selected()
@@ -975,7 +973,7 @@ class MainWindow(GtkbuilderApp):
         ring = model[path][1]
         year = model[path][2]
 
-        if self.search == 'sire':
+        if int(self.parser.pigeons[pindex].sex) == const.SIRE:
             self.entrySireEdit.set_text(ring)
             self.entryYearSireEdit.set_text(year)
         else:
@@ -1569,10 +1567,10 @@ class MainWindow(GtkbuilderApp):
         '''
         Do all the necessary things to start editing or adding.
 
-        @param operation: 'add' or 'edit'
+        @param operation: One of the ADD or EDIT constants
         '''
 
-        if operation == 'add':
+        if operation == const.ADD:
             # Clear the pedigree
             self.pedigree.draw_pedigree()
 
@@ -1595,10 +1593,10 @@ class MainWindow(GtkbuilderApp):
 
         self.parser.get_pigeons()
         self.count_active_pigeons()
-        if self.changedRowIter and self.operation == 'add':
+        if self.changedRowIter and self.operation == const.ADD:
             self.selection.select_iter(self.changedRowIter)
             self.treeview.scroll_to_cell(self.liststore.get_path(self.changedRowIter))
-        if self.operation == 'edit':
+        if self.operation == const.EDIT:
             self.selection.emit('changed')
 
         widgets.set_multiple_sensitive({self.toolbar: True, self.notebook: True,
@@ -2010,7 +2008,7 @@ class MainWindow(GtkbuilderApp):
         self.lsFind.clear()
 
         for pigeon in self.parser.pigeons:
-            if sex == self.parser.pigeons[pigeon].sex and \
+            if str(sex) == self.parser.pigeons[pigeon].sex and \
                band != self.parser.pigeons[pigeon].ring and \
                year >= self.parser.pigeons[pigeon].year:
                 self.lsFind.append([pigeon,

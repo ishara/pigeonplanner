@@ -241,7 +241,7 @@ class ToolsWindow(GtkbuilderApp):
             self.label_notify.set_text("-1")
 
     def on_event_add_clicked(self, widget):
-        self.eventsDialogMode = 'add'
+        self.eventsDialogMode = const.ADD
 
         date = datetime.date.today()
         self.calendar_event.select_month(date.month-1, date.year)
@@ -258,7 +258,7 @@ class ToolsWindow(GtkbuilderApp):
     def on_event_edit_clicked(self, widget):
         model, path = self.sel_events.get_selected()
 
-        self.eventsDialogMode = 'edit'
+        self.eventsDialogMode = const.EDIT
 
         year, month, day = model[path][1].split('-')
         self.calendar_event.select_month(int(month)-1, int(year))
@@ -315,12 +315,12 @@ class ToolsWindow(GtkbuilderApp):
             eventday = time.mktime((year, month+1, day, 0, 0, 0, 0, 0, 0))
             notifyday = eventday - (interval*86400)
 
-        if self.eventsDialogMode == 'add':
+        if self.eventsDialogMode == const.ADD:
             rowid = self.main.database.insert_event((date, description, comment, notify, interval, notifyday))
             rowiter = self.ls_events.append([rowid, date, description])
             self.sel_events.select_iter(rowiter)
             self.tv_events.scroll_to_cell(self.ls_events.get_path(rowiter))
-        elif self.eventsDialogMode == 'edit':
+        elif self.eventsDialogMode == const.EDIT:
             selection = self.tv_events.get_selection()
             model, node = selection.get_selected()
             self.ls_events.set(node, 1, date, 2, description)
@@ -486,14 +486,14 @@ class ToolsWindow(GtkbuilderApp):
     def on_adadd_clicked(self, widget, pedigree_call=False):
         self.pedigree_call = pedigree_call
 
-        self.admode = 'add'
+        self.admode = const.ADD
 
         self.start_add()
 
     def on_adedit_clicked(self, widget):
         self.pedigree_call = False
 
-        self.admode = 'edit'
+        self.admode = const.EDIT
 
         self.start_add()
 
@@ -504,7 +504,7 @@ class ToolsWindow(GtkbuilderApp):
             widgets.message_dialog('error', messages.MSG_NAME_EMPTY, self.toolsdialog)
             return
 
-        if self.admode == 'add':
+        if self.admode == const.ADD:
             for ad in self.main.database.get_all_addresses():
                 if data[0] == ad[1]:
                     widgets.message_dialog('error', messages.MSG_NAME_EXISTS, self.toolsdialog)
@@ -537,7 +537,7 @@ class ToolsWindow(GtkbuilderApp):
 
         if alreadyMe:
             widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True})
-            if self.admode == 'edit' and self.me == self.get_name():
+            if self.admode == const.EDIT and self.me == self.get_name():
                 widgets.set_multiple_visible({self.chkme: True})
                 self.chkme.set_active(True)
         else:
