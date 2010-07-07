@@ -68,6 +68,7 @@ class DatabaseOperations:
                ' ownout INTEGER,'
                ' comment TEXT)',
     'Medication': '(Medicationkey INTEGER PRIMARY KEY,'
+                  ' medid TEXT,'
                   ' pindex TEXT,'
                   ' date TEXT,'
                   ' description TEXT,'
@@ -382,16 +383,19 @@ class DatabaseOperations:
 #### Medication
     def insert_medication(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('INSERT INTO Medication VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+        cursor.execute('INSERT INTO Medication VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
         conn.commit()
-        rowid = cursor.lastrowid
         conn.close()
-
-        return rowid
 
     def delete_medication_from_id(self, ID):
         conn, cursor = self.db_connect()
-        cursor.execute('DELETE FROM Medication WHERE Medicationkey=?', (ID,))
+        cursor.execute('DELETE FROM Medication WHERE medid=?', (ID,))
+        conn.commit()
+        conn.close()
+
+    def delete_medication_from_id_pindex(self, ID, pindex):
+        conn, cursor = self.db_connect()
+        cursor.execute('DELETE FROM Medication WHERE medid=? AND pindex=?', (ID,pindex))
         conn.commit()
         conn.close()
 
@@ -403,7 +407,7 @@ class DatabaseOperations:
 
     def update_medication(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Medication SET date=?, description=?, doneby=?, medication=?, dosage=?, comment=?, vaccination=? WHERE Medicationkey=?', data)
+        cursor.execute('UPDATE Medication SET date=?, description=?, doneby=?, medication=?, dosage=?, comment=?, vaccination=? WHERE medid=?', data)
         conn.commit()
         conn.close()
 
@@ -422,14 +426,31 @@ class DatabaseOperations:
 
     def get_medication_from_id(self, ID):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT * FROM Medication WHERE Medicationkey=?', (ID,))
+        cursor.execute('SELECT * FROM Medication WHERE medid=?', (ID,))
         data = cursor.fetchone()
+        conn.close()
+        return data
+
+    def get_pigeons_from_medid(self, medid):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT pindex FROM Medication WHERE medid=?', (medid,))
+        data = [row[0] for row in cursor.fetchall() if row[0]]
         conn.close()
         return data
 
     def has_medication(self, pindex):
         conn, cursor = self.db_connect()
         cursor.execute('SELECT COUNT(*) FROM Medication WHERE pindex=?', (pindex,))
+        data = [row[0] for row in cursor.fetchall() if row[0]]
+        conn.close()
+        if data:
+            return data[0]
+        else:
+            return None
+
+    def count_medication_entries(self, medid):
+        conn, cursor = self.db_connect()
+        cursor.execute('SELECT COUNT(*) FROM Medication WHERE medid=?', (medid,))
         data = [row[0] for row in cursor.fetchall() if row[0]]
         conn.close()
         if data:

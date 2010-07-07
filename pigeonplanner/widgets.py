@@ -579,3 +579,35 @@ class FilterDialog(gtk.Dialog):
 
         return self.__add_filter(spinbutton, label), spinbutton
 
+
+class MedicationRemoveDialog(gtk.Dialog):
+    def __init__(self, parent, multiple=False):
+        gtk.Dialog.__init__(self, '', parent, gtk.DIALOG_DESTROY_WITH_PARENT,
+                            (gtk.STOCK_NO, gtk.RESPONSE_NO, gtk.STOCK_YES, gtk.RESPONSE_YES))
+
+        self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        self.set_resizable(False)
+        self.set_skip_taskbar_hint(True)
+
+        text = _("Removing the selected medication entry")
+        self.set_title(text + " - Pigeon Planner")
+        self.check = gtk.CheckButton(_("Remove this entry for all pigeons?"))
+        label1 = gtk.Label()
+        label1.set_markup("<b>%s</b>" %text)
+        label1.set_alignment(0.0, 0.5)
+        label2 = gtk.Label(_("Are you sure?"))
+        label2.set_alignment(0.0, 0.5)
+        vbox = gtk.VBox()
+        vbox.pack_start(label1, False, False, 8)
+        vbox.pack_start(label2, False, False, 8)
+        if multiple:
+            vbox.pack_start(self.check, False, False, 12)
+        image = gtk.Image()
+        image.set_from_stock(gtk.STOCK_DIALOG_WARNING, gtk.ICON_SIZE_DIALOG)
+        hbox = gtk.HBox()
+        hbox.pack_start(image, False, False, 12)
+        hbox.pack_start(vbox, False, False, 12)
+        self.vbox.pack_start(hbox, False, False)
+        self.vbox.show_all()
+
+

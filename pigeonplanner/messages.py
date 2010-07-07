@@ -74,9 +74,6 @@ MSG_RESULT_EXISTS = (_("Invalid input!"),
 MSG_REMOVE_RESULT = (_("Removing the selected result"),
                      _("Are you sure?"),
                      "")
-MSG_REMOVE_MEDICATION = (_("Removing the selected medication entry"),
-                         _("Are you sure?"),
-                         "")
 
 MSG_NAME_EMPTY = (_("Invalid input!"),
                   _("The name has to be entered."),

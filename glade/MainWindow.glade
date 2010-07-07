@@ -2,6 +2,13 @@
 <interface>
   <requires lib="gtk+" version="2.18"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="liststore12">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore15"/>
   <object class="GtkListStore" id="lsResult">
     <columns>
       <!-- column-name id -->
@@ -178,7 +185,7 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkListStore" id="liststore12">
+  <object class="GtkListStore" id="liststore_lofts">
     <columns>
       <!-- column-name item -->
       <column type="gchararray"/>
@@ -1658,7 +1665,7 @@
                                             <child>
                                               <object class="GtkComboBoxEntry" id="cbLoft">
                                                 <property name="visible">True</property>
-                                                <property name="model">liststore12</property>
+                                                <property name="model">liststore_lofts</property>
                                                 <property name="text_column">0</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="cellrenderertext2"/>
@@ -5066,9 +5073,10 @@
   <object class="GtkDialog" id="medicationdialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Medication</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
-    <property name="default_width">340</property>
+    <property name="default_width">360</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
@@ -5081,7 +5089,7 @@
         <child>
           <object class="GtkTable" id="table1543">
             <property name="visible">True</property>
-            <property name="n_rows">7</property>
+            <property name="n_rows">8</property>
             <property name="n_columns">2</property>
             <property name="column_spacing">10</property>
             <property name="row_spacing">8</property>
@@ -5276,12 +5284,143 @@
               </packing>
             </child>
             <child>
+              <object class="GtkExpander" id="expander">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <child>
+                  <object class="GtkAlignment" id="alignment26">
+                    <property name="visible">True</property>
+                    <property name="left_padding">8</property>
+                    <child>
+                      <object class="GtkVBox" id="vbox9">
+                        <property name="visible">True</property>
+                        <property name="spacing">4</property>
+                        <child>
+                          <object class="GtkHBox" id="hbox12">
+                            <property name="visible">True</property>
+                            <property name="spacing">8</property>
+                            <child>
+                              <object class="GtkCheckButton" id="chkMedicationLoft">
+                                <property name="label" translatable="yes">Loft</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="draw_indicator">True</property>
+                                <signal name="toggled" handler="on_chkMedicationLoft_toggled" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkComboBox" id="cbMedicationLoft">
+                                <property name="visible">True</property>
+                                <property name="model">liststore12</property>
+                                <signal name="changed" handler="on_cbMedicationLoft_changed" swapped="no"/>
+                                <child>
+                                  <object class="GtkCellRendererText" id="cellrenderertext13"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkScrolledWindow" id="scrolledwindow14">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="hscrollbar_policy">automatic</property>
+                            <property name="vscrollbar_policy">automatic</property>
+                            <property name="shadow_type">in</property>
+                            <child>
+                              <object class="GtkTreeView" id="tvMedicationSelect">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="model">lsMedicationSelect</property>
+                                <property name="headers_visible">False</property>
+                                <child>
+                                  <object class="GtkTreeViewColumn" id="treeviewcolumn31">
+                                    <child>
+                                      <object class="GtkCellRendererToggle" id="celltoggle">
+                                        <signal name="toggled" handler="on_celltoggle_toggled" swapped="no"/>
+                                      </object>
+                                      <attributes>
+                                        <attribute name="activatable">0</attribute>
+                                        <attribute name="active">1</attribute>
+                                      </attributes>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkTreeViewColumn" id="treeviewcolumn32">
+                                    <property name="title" translatable="yes">Band no.</property>
+                                    <property name="clickable">True</property>
+                                    <property name="sort_indicator">True</property>
+                                    <property name="sort_column_id">3</property>
+                                    <child>
+                                      <object class="GtkCellRendererText" id="cellrenderertext11"/>
+                                      <attributes>
+                                        <attribute name="text">3</attribute>
+                                      </attributes>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkTreeViewColumn" id="treeviewcolumn33">
+                                    <property name="title" translatable="yes">Year</property>
+                                    <property name="clickable">True</property>
+                                    <property name="sort_indicator">True</property>
+                                    <property name="sort_column_id">4</property>
+                                    <child>
+                                      <object class="GtkCellRendererText" id="cellrenderertext12"/>
+                                      <attributes>
+                                        <attribute name="text">4</attribute>
+                                      </attributes>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child type="label">
+                  <object class="GtkLabel" id="label87">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Multiple pigeons</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="right_attach">2</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
+              </packing>
+            </child>
+            <child>
               <placeholder/>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -5346,5 +5485,19 @@
     <property name="upper">20000</property>
     <property name="value">1</property>
     <property name="step_increment">1</property>
+  </object>
+  <object class="GtkListStore" id="lsMedicationSelect">
+    <columns>
+      <!-- column-name can_active -->
+      <column type="gboolean"/>
+      <!-- column-name can_toggle -->
+      <column type="gboolean"/>
+      <!-- column-name pindex -->
+      <column type="gchararray"/>
+      <!-- column-name band -->
+      <column type="gchararray"/>
+      <!-- column-name year -->
+      <column type="gchararray"/>
+    </columns>
   </object>
 </interface>

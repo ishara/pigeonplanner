@@ -19,7 +19,6 @@
 import os
 import os.path
 import urllib
-import random
 import mimetypes
 import threading
 
@@ -53,7 +52,7 @@ def post_multipart(url, fields, files):
     return common.URLOpen().open(url, body, headers).read().strip()
 
 def encode_multipart_formdata(fields, files):
-    BOUNDARY = '----------%s' %''.join([random.choice('0123456789') for x in range(20)])
+    BOUNDARY = '----------%s' %common.get_random_number(20)
     body = []
     for (key, value) in fields:
         body.append('--' + BOUNDARY)

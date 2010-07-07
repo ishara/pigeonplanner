@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import random
 import urllib2
 import os.path
 
@@ -128,6 +129,8 @@ def add_zero_to_time(value):
         return '0%s' %value
     return str(value)
 
+def get_random_number(value):
+    return ''.join([random.choice('0123456789') for x in range(value)])
 
 class URLOpen:
     def __init__(self, cookie=None):

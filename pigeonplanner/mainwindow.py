@@ -805,6 +805,8 @@ class MainWindow(GtkbuilderApp):
 
     def on_addmedication_clicked(self, widget):
         self.clear_medicationdialog_fields()
+        self.fill_medicationselect_treeview()
+        widgets.fill_combobox(self.cbMedicationLoft, self.database.get_all_lofts())
         self.medicationDialogMode = 'add'
         self.medicationdialog.show()
         self.entry_meddialog_date.grab_focus()
@@ -812,28 +814,47 @@ class MainWindow(GtkbuilderApp):
 
     def on_removemedication_clicked(self, widget):
         path, focus = self.tvMedication.get_cursor()
-        model, tIter = self.selMedication.get_selected()
+        model, treeiter = self.selMedication.get_selected()
         pindex, ring, year = self.get_main_ring()
+        medid = model[treeiter][0]
 
-        if not widgets.message_dialog('question', messages.MSG_REMOVE_MEDICATION, self.main):
+        multiple = False
+        if self.database.count_medication_entries(medid) > 1:
+            multiple = True
+        dialog = widgets.MedicationRemoveDialog(self.main, multiple)
+        dialog.check.set_active(multiple)
+        response = dialog.run()
+        if response == gtk.RESPONSE_NO or response == gtk.RESPONSE_DELETE_EVENT:
+            dialog.destroy()
             return
 
-        self.database.delete_medication_from_id(model[tIter][0])
+        if dialog.check.get_active():
+            self.database.delete_medication_from_id(medid)
+        else:
+            self.database.delete_medication_from_id_pindex(medid, pindex)
+        dialog.destroy()
 
-        self.lsMedication.remove(tIter)
-
+        self.lsMedication.remove(treeiter)
         if len(self.lsMedication) > 0:
             self.tvMedication.set_cursor(path)
 
     def on_editmedication_clicked(self, widget):
+        self.fill_medicationselect_treeview()
+        widgets.fill_combobox(self.cbMedicationLoft, self.database.get_all_lofts())
+
         med = self.get_selected_medication()
-        self.entry_meddialog_date.set_text(med[2])
-        self.entry_meddialog_desc.set_text(med[3])
-        self.entry_meddialog_by.set_text(med[4])
-        self.entry_meddialog_med.set_text(med[5])
-        self.entry_meddialog_dos.set_text(med[6])
-        self.entry_meddialog_comment.set_text(med[7])
-        self.chkVaccination.set_active(med[8])
+        self.entry_meddialog_date.set_text(med[3])
+        self.entry_meddialog_desc.set_text(med[4])
+        self.entry_meddialog_by.set_text(med[5])
+        self.entry_meddialog_med.set_text(med[6])
+        self.entry_meddialog_dos.set_text(med[7])
+        self.entry_meddialog_comment.set_text(med[8])
+        self.chkVaccination.set_active(med[9])
+
+        for row in self.lsMedicationSelect:
+            if not row[0]: continue
+            if row[2] in self.database.get_pigeons_from_medid(med[1]):
+                row[1] = True
 
         self.medicationDialogMode = 'edit'
         self.medicationdialog.show()
@@ -842,7 +863,7 @@ class MainWindow(GtkbuilderApp):
 
     def on_medicationdialogsave_clicked(self, widget):
         try:
-            pindex, ring, year = self.get_main_ring()
+            mainpindex, ring, year = self.get_main_ring()
         except TypeError:
             return
 
@@ -851,18 +872,28 @@ class MainWindow(GtkbuilderApp):
         except TypeError:
             return
 
+        pigeons = [row[2] for row in self.lsMedicationSelect if row[1]]
         if self.medicationDialogMode == 'add':
-            data = (pindex, ) + data
-            rowid = self.database.insert_medication(data)
-            rowiter = self.lsMedication.append([rowid, data[1], data[2]])
-            self.selMedication.select_iter(rowiter)
-            self.tvMedication.scroll_to_cell(self.lsMedication.get_path(rowiter))
+            medid = data[0] + common.get_random_number(10)
+            for pindex in pigeons:
+                self.database.insert_medication((medid, pindex, ) + data)
+                if not pindex == mainpindex: continue # Only fill med treeview on current pigeon
+                rowiter = self.lsMedication.append([medid, data[0], data[1]])
+                self.selMedication.select_iter(rowiter)
+                self.tvMedication.scroll_to_cell(self.lsMedication.get_path(rowiter))
         elif self.medicationDialogMode == 'edit':
             selection = self.tvMedication.get_selection()
             model, node = selection.get_selected()
             self.lsMedication.set(node, 1, data[0], 2, data[1])
+            medid = model[node][0]
 
-            data += (self.lsMedication.get_value(node, 0), )
+            pigeons_current = self.database.get_pigeons_from_medid(medid)
+            for pindex in [pindex for pindex in pigeons if pindex not in pigeons_current]:
+                self.database.insert_medication((medid, pindex, ) + data)
+            for pindex in [pindex for pindex in pigeons_current if pindex not in pigeons]:
+                self.database.delete_medication_from_id_pindex(medid, pindex)
+
+            data += (medid, )
             self.database.update_medication(data)
 
             selection.unselect_iter(node)
@@ -875,7 +906,7 @@ class MainWindow(GtkbuilderApp):
 
     def hide_medication_dialog(self, widget=None, event=None):
         self.medicationdialog.hide()
-
+        self.expander.set_expanded(False)
         return True
 
     def clear_medicationdialog_fields(self):
@@ -883,6 +914,49 @@ class MainWindow(GtkbuilderApp):
             entry.set_text('')
         self.entry_meddialog_date.set_text(datetime.date.today().strftime(const.DATE_FORMAT))
         self.chkVaccination.set_active(False)
+
+    def select_loft(self):
+        loft = self.cbMedicationLoft.get_active_text()
+        for row in self.lsMedicationSelect:
+            if not row[0]: continue
+            if self.parser.pigeons[row[2]].loft == loft:
+                row[1] = True
+            else:
+                row[1] = False
+
+    def on_chkMedicationLoft_toggled(self, widget):
+        if widget.get_active():
+            self.select_loft()
+        else:
+            for row in self.lsMedicationSelect:
+                if not row[0]: continue
+                row[1] = False
+
+    def on_cbMedicationLoft_changed(self, widget):
+        if self.chkMedicationLoft.get_active():
+            self.select_loft()
+
+    def on_celltoggle_toggled(self, cell, path):
+        self.lsMedicationSelect[path][1] = not self.lsMedicationSelect[path][1]
+
+    def fill_medicationselect_treeview(self):
+        mainpindex, ring, year = self.get_main_ring()
+
+        self.lsMedicationSelect.clear()
+
+        for pindex in self.parser.pigeons:
+            if not self.parser.pigeons[pindex].show:
+                continue
+            active = True
+            if mainpindex == pindex:
+                active = False
+
+            self.lsMedicationSelect.append([active, not active, pindex,
+                   self.parser.pigeons[pindex].ring,
+                   self.parser.pigeons[pindex].year])
+
+        self.lsMedicationSelect.set_sort_column_id(3, gtk.SORT_ASCENDING)
+        self.lsMedicationSelect.set_sort_column_id(4, gtk.SORT_ASCENDING)
 
     # Find parent callbacks
     def on_findsire_clicked(self, widget):
@@ -1229,13 +1303,13 @@ class MainWindow(GtkbuilderApp):
             return
 
         data = self.get_selected_medication()
-        self.entry_med_date.set_text(data[2])
-        self.entry_med_desc.set_text(data[3])
-        self.entry_med_by.set_text(data[4])
-        self.entry_med_med.set_text(data[5])
-        self.entry_med_dosage.set_text(data[6])
-        self.entry_med_comment.set_text(data[7])
-        self.label_vaccination.set_sensitive(data[8])
+        self.entry_med_date.set_text(data[3])
+        self.entry_med_desc.set_text(data[4])
+        self.entry_med_by.set_text(data[5])
+        self.entry_med_med.set_text(data[6])
+        self.entry_med_dosage.set_text(data[7])
+        self.entry_med_comment.set_text(data[8])
+        self.label_vaccination.set_sensitive(data[9])
 
     def selection_changed(self, selection):
         '''
@@ -1408,7 +1482,7 @@ class MainWindow(GtkbuilderApp):
         self.lsMedication.clear()
 
         for med in self.database.get_pigeon_medication(pindex):
-            self.lsMedication.append([med[0], med[2], med[3]])
+            self.lsMedication.append([med[1], med[3], med[4]])
 
         self.lsMedication.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
