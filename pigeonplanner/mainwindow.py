@@ -1234,7 +1234,7 @@ class MainWindow(GtkbuilderApp):
 
         return True
 
-    def fill_treeview(self, path=0, search_results=[], filter_active=False):
+    def fill_treeview(self, path=0, search_results=None, filter_active=False):
         '''
         Fill the main treeview with pigeons.
 
@@ -1245,7 +1245,7 @@ class MainWindow(GtkbuilderApp):
 
         self.liststore.clear()
 
-        if search_results:
+        if search_results is not None:
             pigeons = search_results
         else:
             pigeons = self.parser.pigeons
