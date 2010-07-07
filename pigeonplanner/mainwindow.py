@@ -91,12 +91,15 @@ class MainWindow(GtkbuilderApp):
         self.build_treeviews()
         self.build_treeview()
         self.fill_treeview()
-        self.create_sexcombos()
         self.set_filefilter()
         self.count_active_pigeons()
 
-        cbentries = [self.cbRacepoint, self.cbSector, self.cbType, self.cbCategory, self.cbWeather, self.cbWind, self.cbColour, self.cbStrain, self.cbLoft]
+        self.cbRangeSex = widgets.create_sex_combobox(self.sexDic)
+        self.cbsex = widgets.create_sex_combobox(self.sexDic)
+        self.table1.attach(self.cbRangeSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
+        self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
 
+        cbentries = [self.cbRacepoint, self.cbSector, self.cbType, self.cbCategory, self.cbWeather, self.cbWind, self.cbColour, self.cbStrain, self.cbLoft]
         for item in cbentries:
             widgets.set_completion(item)
 
@@ -2022,25 +2025,6 @@ class MainWindow(GtkbuilderApp):
             self.tvFind.set_cursor(0)
 
         self.finddialog.show()
-
-    def create_sexcombos(self):
-        '''
-        Create the sexcombos and show them
-        '''
-
-        self.sexStore = gtk.ListStore(str, str)
-        for key in self.sexDic.keys():
-            self.sexStore.insert(int(key), [key, self.sexDic[key]])
-        self.cbsex = gtk.ComboBox(self.sexStore)
-        self.cbRangeSex = gtk.ComboBox(self.sexStore)
-        for box in [self.cbsex, self.cbRangeSex]:
-            cell = gtk.CellRendererText()
-            box.pack_start(cell, True)
-            box.add_attribute(cell, 'text', 1)
-            box.show()
-
-        self.table1.attach(self.cbRangeSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
-        self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL, 0, 0)
 
     def set_filefilter(self):
         '''

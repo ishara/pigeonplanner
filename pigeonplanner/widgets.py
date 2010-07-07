@@ -335,6 +335,7 @@ def create_sex_combobox(sexdic):
     combobox.pack_start(cell, True)
     combobox.add_attribute(cell, 'text', 1)
     combobox.set_active(0)
+    combobox.show()
 
     return combobox
 
