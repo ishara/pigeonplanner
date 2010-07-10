@@ -186,7 +186,7 @@ class PigeonPlanner:
             self.logger.debug("First run")
 
         # Set theme
-        if win32:
+        if win32 and os.path.exists('.\\share\\themes'):
             themes = os.listdir('.\\share\\themes')
             themefile = os.path.join('.\\share\\themes', themes[self.options.optionList.theme], 'gtk-2.0\\gtkrc')
             gtk.rc_parse(themefile)

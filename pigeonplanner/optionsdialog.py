@@ -56,10 +56,10 @@ class OptionsDialog(GtkbuilderApp):
         self.selection.select_path((0,))
 
         # Show the theme changer on Windows
-        if const.WINDOWS:
+        if const.WINDOWS and os.path.exists('.\\share\\themes'):
             self.framethemes.show()
 
-            themes = os.listdir('./share/themes/')
+            themes = os.listdir('.\\share\\themes\\')
             themes.sort()
             for theme in themes:
                 self.cbThemes.append_text(theme)
