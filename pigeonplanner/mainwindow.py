@@ -1252,10 +1252,7 @@ class MainWindow(GtkbuilderApp):
 
         for pindex in pigeons:
             if not self.parser.pigeons[pindex].show: continue
-
-            if filter_active:
-                if not self.pigeon_filter(pindex):
-                    continue
+            if filter_active and not self.pigeon_filter(pindex): continue
 
             self.liststore.append([pindex,
                    self.parser.pigeons[pindex].ring,

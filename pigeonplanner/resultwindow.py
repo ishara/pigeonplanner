@@ -137,22 +137,11 @@ class ResultWindow(GtkbuilderApp):
         self.liststore.clear()
 
         for result in self.database.get_all_results():
-            if filter_active:
-                if not self.result_filter(result):
-                    continue
+            if filter_active and not self.result_filter(result): continue
 
             pindex = result[PINDEX]
-            date = result[DATE]
-            point = result[POINT]
             place = result[PLACE]
             out = result[OUT]
-            sector = result[SECTOR]
-            ftype = result[TYPE]
-            category = result[CATEGORY]
-            wind = result[WIND]
-            weather = result[WEATHER]
-            comment = result[COMMENT]
-
             cof = (float(place)/float(out))*100
             try:
                 year = self.pigeons[pindex].year
@@ -162,7 +151,11 @@ class ResultWindow(GtkbuilderApp):
                 #      Make the band with the pindex.
                 ring, year = common.get_band_from_pindex(pindex)
 
-            self.liststore.append([pindex, ring, year, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
+            self.liststore.append([pindex, ring, year, result[DATE], result[POINT],
+                                    place, out, cof, result[SECTOR], result[TYPE],
+                                    result[CATEGORY], result[WEATHER], result[WIND],
+                                    result[COMMENT]
+                                ])
 
         self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
