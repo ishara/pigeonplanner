@@ -78,15 +78,14 @@ else:
 
 TEMPDIR = tempfile.gettempdir()
 
-GLADEMAIN = os.path.join(GLADEDIR, "MainWindow.glade")
-GLADELOG = os.path.join(GLADEDIR, "LogDialog.glade")
-GLADEOPTIONS = os.path.join(GLADEDIR, "OptionsDialog.glade")
-GLADEPEDIGREE = os.path.join(GLADEDIR, "PedigreeWindow.glade")
-GLADERESULT = os.path.join(GLADEDIR, "ResultWindow.glade")
-GLADETOOLS = os.path.join(GLADEDIR, "ToolsWindow.glade")
-GLADEPREVIEW = os.path.join(GLADEDIR, "PreviewWindow.glade")
-GLADEPHOTOALBUM = os.path.join(GLADEDIR, "PhotoAlbum.glade")
-GLADEDIALOGS = os.path.join(GLADEDIR, "Dialogs.glade")
+GLADEMAIN = os.path.join(GLADEDIR, "MainWindow.ui")
+GLADEOPTIONS = os.path.join(GLADEDIR, "OptionsDialog.ui")
+GLADEPEDIGREE = os.path.join(GLADEDIR, "PedigreeWindow.ui")
+GLADERESULT = os.path.join(GLADEDIR, "ResultWindow.ui")
+GLADETOOLS = os.path.join(GLADEDIR, "ToolsWindow.ui")
+GLADEPREVIEW = os.path.join(GLADEDIR, "PreviewWindow.ui")
+GLADEPHOTOALBUM = os.path.join(GLADEDIR, "PhotoAlbum.ui")
+GLADEDIALOGS = os.path.join(GLADEDIR, "Dialogs.ui")
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')
