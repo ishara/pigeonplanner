@@ -236,7 +236,12 @@ class ResultWindow(GtkbuilderApp):
     def pigeons_combobox(self):
         store = gtk.ListStore(str, str)
         for pindex in self.filter_pigeons:
-            band = "%s/%s" %(self.pigeons[pindex].ring, self.pigeons[pindex].year)
+            try:
+                year = self.pigeons[pindex].year
+                ring = self.pigeons[pindex].ring
+            except KeyError:
+                ring, year = common.get_band_from_pindex(pindex)
+            band = "%s/%s" %(ring, year)
             store.append([pindex, band])
         cell = gtk.CellRendererText()
         combobox = gtk.ComboBox(store)
