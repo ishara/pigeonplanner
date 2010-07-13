@@ -735,7 +735,7 @@ class MainWindow(GtkbuilderApp):
 
             data = (pindex, ) + data
             rowid = self.database.insert_result(data)
-            self.lsResult.append([rowid, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
+            self.lsResult.insert(0, [rowid, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
             common.add_statusbar_message(self.statusbar, _("Result has been added"))
         elif self.resultDialogMode == const.EDIT:
             selection = self.tvResults.get_selection()
@@ -881,7 +881,7 @@ class MainWindow(GtkbuilderApp):
             for pindex in pigeons:
                 self.database.insert_medication((medid, pindex, ) + data)
                 if not pindex == mainpindex: continue # Only fill med treeview on current pigeon
-                rowiter = self.lsMedication.append([medid, data[0], data[1]])
+                rowiter = self.lsMedication.insert(0, [medid, data[0], data[1]])
                 self.selMedication.select_iter(rowiter)
                 self.tvMedication.scroll_to_cell(self.lsMedication.get_path(rowiter))
         elif self.medicationDialogMode == const.EDIT:
@@ -954,7 +954,7 @@ class MainWindow(GtkbuilderApp):
             if mainpindex == pindex:
                 active = False
 
-            self.lsMedicationSelect.append([active, not active, pindex,
+            self.lsMedicationSelect.insert(0, [active, not active, pindex,
                    self.parser.pigeons[pindex].ring,
                    self.parser.pigeons[pindex].year])
 
@@ -1254,7 +1254,7 @@ class MainWindow(GtkbuilderApp):
             if not self.parser.pigeons[pindex].show: continue
             if filter_active and not self.pigeon_filter(pindex): continue
 
-            self.liststore.append([pindex,
+            self.liststore.insert(0, [pindex,
                    self.parser.pigeons[pindex].ring,
                    self.parser.pigeons[pindex].year,
                    self.parser.pigeons[pindex].name,
@@ -1455,32 +1455,34 @@ class MainWindow(GtkbuilderApp):
         @param pindex: the selected pigeon
         '''
 
+        self.tvResults.freeze_child_notify()
+        self.tvResults.set_model(None)
+
+        self.lsResult.set_default_sort_func(lambda *args: -1) 
+        self.lsResult.set_sort_column_id(-1, gtk.SORT_ASCENDING)
+
         self.lsResult.clear()
 
         for result in self.database.get_pigeon_results(pindex):
-            key = result[0]
-            date = result[2]
-            point = result[3]
             place = result[4]
             out = result[5]
-            sector = result[6]
-            ftype = result[7]
-            category = result[8]
-            wind = result[9]
-            weather = result[10]
-            comment = result[15]
-
             cof = common.calculate_coefficient(place, out)
 
-            self.lsResult.append([key, date, point, place, out, cof, sector, ftype, category, weather, wind, comment])
+            self.lsResult.insert(0, [result[0], result[2], result[3],
+                                    place, out, cof,
+                                    result[6], result[7], result[8],
+                                    result[9], result[10], result[15]])
 
         self.lsResult.set_sort_column_id(1, gtk.SORT_ASCENDING)
+
+        self.tvResults.set_model(self.lsResult)
+        self.tvResults.thaw_child_notify()
 
     def get_medication(self, pindex):
         self.lsMedication.clear()
 
         for med in self.database.get_pigeon_medication(pindex):
-            self.lsMedication.append([med[1], med[3], med[4]])
+            self.lsMedication.insert(0, [med[1], med[3], med[4]])
 
         self.lsMedication.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
@@ -1502,7 +1504,7 @@ class MainWindow(GtkbuilderApp):
                dam == self.parser.pigeons[pigeon].dam and not\
                pigeon == pindex:
 
-                self.lsBrothers.append([pigeon, self.parser.pigeons[pigeon].ring,
+                self.lsBrothers.insert(0, [pigeon, self.parser.pigeons[pigeon].ring,
                                         self.parser.pigeons[pigeon].year])
 
         self.lsBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
@@ -1528,7 +1530,7 @@ class MainWindow(GtkbuilderApp):
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
 
-                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].ring,
+                    self.lsHalfBrothers.insert(0, [pigeon, self.parser.pigeons[pigeon].ring,
                                                 self.parser.pigeons[pigeon].year, sire+'/'+yearsire[2:]])
 
             if dam:
@@ -1536,7 +1538,7 @@ class MainWindow(GtkbuilderApp):
                 and not (sire == self.parser.pigeons[pigeon].sire and\
                     dam == self.parser.pigeons[pigeon].dam):
 
-                    self.lsHalfBrothers.append([pigeon, self.parser.pigeons[pigeon].ring,
+                    self.lsHalfBrothers.insert(0, [pigeon, self.parser.pigeons[pigeon].ring,
                                                 self.parser.pigeons[pigeon].year, dam+'/'+yeardam[2:]])
 
         self.lsHalfBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
@@ -1557,7 +1559,7 @@ class MainWindow(GtkbuilderApp):
             ring = self.parser.pigeons[pindex].ring
             if self.parser.pigeons[pigeon].sire == ring or self.parser.pigeons[pigeon].dam == ring:
 
-                self.lsOffspring.append([pigeon, self.parser.pigeons[pigeon].ring,
+                self.lsOffspring.insert(0, [pigeon, self.parser.pigeons[pigeon].ring,
                                          self.parser.pigeons[pigeon].year])
 
         self.lsOffspring.set_sort_column_id(1, gtk.SORT_ASCENDING)
@@ -1743,7 +1745,7 @@ class MainWindow(GtkbuilderApp):
 
         self.update_data(infoTuple)
 
-        self.changedRowIter = self.liststore.append([pindex,
+        self.changedRowIter = self.liststore.insert(0, [pindex,
                                                      infoTuple[0],
                                                      infoTuple[1],
                                                      infoTuple[6],
@@ -2011,7 +2013,7 @@ class MainWindow(GtkbuilderApp):
             if str(sex) == self.parser.pigeons[pigeon].sex and \
                band != self.parser.pigeons[pigeon].ring and \
                year >= self.parser.pigeons[pigeon].year:
-                self.lsFind.append([pigeon,
+                self.lsFind.insert(0, [pigeon,
                                     self.parser.pigeons[pigeon].ring,
                                     self.parser.pigeons[pigeon].year,
                                     self.parser.pigeons[pigeon].name])

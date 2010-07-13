@@ -193,7 +193,9 @@ class ToolsWindow(GtkbuilderApp):
         for speed in xrange(begin, end+50, 50):
             flight = int((distance*distunit) / (speed*speedunit))
             arrival = seconds_total + flight
-            self.ls_velocity.append([speed, datetime.timedelta(seconds=flight), datetime.timedelta(seconds=arrival)])
+            self.ls_velocity.insert(0, [speed,
+                                        datetime.timedelta(seconds=flight),
+                                        datetime.timedelta(seconds=arrival)])
 
     def on_printcalc_clicked(self, widget):
         data = [self.ls_velocity.get(row.iter, 0, 1, 2) for row in self.ls_velocity]
@@ -212,7 +214,7 @@ class ToolsWindow(GtkbuilderApp):
         self.ls_events.clear()
 
         for item in self.main.database.get_all_events():
-            rowiter = self.ls_events.append([item[0], item[1], item[2]])
+            rowiter = self.ls_events.insert(0, [item[0], item[1], item[2]])
             if item[0] == self.notification:
                 self.sel_events.select_iter(rowiter)
                 self.tv_events.scroll_to_cell(self.ls_events.get_path(rowiter))
@@ -317,7 +319,7 @@ class ToolsWindow(GtkbuilderApp):
 
         if self.eventsDialogMode == const.ADD:
             rowid = self.main.database.insert_event((date, description, comment, notify, interval, notifyday))
-            rowiter = self.ls_events.append([rowid, date, description])
+            rowiter = self.ls_events.insert(0, [rowid, date, description])
             self.sel_events.select_iter(rowiter)
             self.tv_events.scroll_to_cell(self.ls_events.get_path(rowiter))
         elif self.eventsDialogMode == const.EDIT:
@@ -450,7 +452,7 @@ class ToolsWindow(GtkbuilderApp):
         self.ls_address.clear()
 
         for item in self.main.database.get_all_addresses():
-            self.ls_address.append([item[1]])
+            self.ls_address.insert(0, [item[1]])
 
         self.ls_address.set_sort_column_id(0, gtk.SORT_ASCENDING)
 
@@ -630,7 +632,7 @@ class ToolsWindow(GtkbuilderApp):
 
         self.ls_stats.clear()
         for description, value in items:
-            self.ls_stats.append([description, value])
+            self.ls_stats.insert(0, [description, value])
 
     # Database
     def on_dboptimize_clicked(self, widget):

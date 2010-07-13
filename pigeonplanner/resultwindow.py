@@ -134,6 +134,12 @@ class ResultWindow(GtkbuilderApp):
         return True
 
     def fill_treeview(self, filter_active=False):
+        self.treeviewres.freeze_child_notify()
+        self.treeviewres.set_model(None)
+
+        self.liststore.set_default_sort_func(lambda *args: -1) 
+        self.liststore.set_sort_column_id(-1, gtk.SORT_ASCENDING)
+
         self.liststore.clear()
 
         for result in self.database.get_all_results():
@@ -151,7 +157,7 @@ class ResultWindow(GtkbuilderApp):
                 #      Make the band with the pindex.
                 ring, year = common.get_band_from_pindex(pindex)
 
-            self.liststore.append([pindex, ring, year, result[DATE], result[POINT],
+            self.liststore.insert(0, [pindex, ring, year, result[DATE], result[POINT],
                                     place, out, cof, result[SECTOR], result[TYPE],
                                     result[CATEGORY], result[WEATHER], result[WIND],
                                     result[COMMENT]
@@ -159,6 +165,9 @@ class ResultWindow(GtkbuilderApp):
 
         self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
+
+        self.treeviewres.set_model(self.liststore)
+        self.treeviewres.thaw_child_notify()
 
     def on_close_window(self, widget, event=None):
         self.resultwindow.destroy()
