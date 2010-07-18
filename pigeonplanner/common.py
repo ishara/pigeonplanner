@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Functions for some common tasks
+"""
+
 
 import random
 import urllib2
@@ -33,22 +37,39 @@ def create_stock_button(icons):
     """
     Register stock buttons from custom or stock images.
 
-    @param icons: A list of tuples containing filename or stock, name and description
+    @param icons: A list of tuples containing filename or stock,
+                  name and description
     """
 
     factory = gtk.IconFactory()
     factory.add_default()
     for image, name, description in icons:
         if image.startswith('gtk-'):
-            # We need a widget (any widget) here to use the render_icon() method.
+            # We need a widget (any widget) here to use render_icon()
             pixbuf = gtk.Window().render_icon(image, gtk.ICON_SIZE_BUTTON)
         else:
-            pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR, image))
+            pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR,
+                                                               image))
         iconset = gtk.IconSet(pixbuf)
         factory.add(name, iconset)
         gtk.stock_add([(name, description, 0, 0, 'pigeonplanner')])
 
+def encode_string(string):
+    """
+    Encode a string to utf-8
+
+    @param string: A string which needs to be encoded
+    """
+
+    return string.decode(const.ENCODING).encode("utf-8")
+
 def count_active_pigeons(database):
+    """
+    Count the active pigeons as total and seperate sexes
+
+    @param database: A Pigeon Planner database instance
+    """
+
     cocks = 0
     hens = 0
     ybirds = 0
@@ -76,18 +97,15 @@ def pop_statusbar_message(statusbar):
     statusbar.pop(0)
     return False
 
-def search_file(filename, search_path):
-    paths = search_path.split(':')
-    path_found = None
-    for path in paths:
-        if os.path.exists(os.path.join(path, filename)):
-            path_found = os.path.abspath(os.path.join(path, filename))
-            break
-
-    return path_found
-
 def get_own_address(database):
-    userinfo = dict(name='', street='', code='', city='', country='', phone='', email='', comment='')
+    """
+    Retrieve the users personal info
+
+    @param database: A Pigeon Planner database instance
+    """
+
+    userinfo = dict(name='', street='', code='', city='', country='',
+                    phone='', email='', comment='')
     info = database.get_own_address()
     if info:
         userinfo['name'] = info[1]
@@ -101,6 +119,14 @@ def get_own_address(database):
     return userinfo
 
 def check_userinfo(parent, main, name):
+    """
+    Check if the user has entered his personal info
+
+    @param parent: A parent window
+    @param main: The main instance
+    @param name: The name of the user
+    """
+
     if name == '':
         if widgets.message_dialog('question', messages.MSG_NO_INFO, parent):
             tw = ToolsWindow(main)
@@ -114,29 +140,78 @@ def check_userinfo(parent, main, name):
     return True
 
 def get_pindex_from_band(band, year):
+    """
+    Create the pindex from the pigeons band and year
+
+    @param band: The pigeons band number
+    @param year: The year of the pigeon
+    """
+
     return band+year
 
 def get_band_from_pindex(pindex):
+    """
+    Retrieve the pigeons band and year from a pindex
+
+    @param pindex: The pindex of the pigeon
+    """
+
     band = pindex[:-4]
     year = pindex[-4:]
     return band, year
 
 def calculate_coefficient(place, out):
+    """
+    Calculate the coefficient of a result
+
+    @param place: The pigeons place
+    @param out: The total number of pigeons
+    """
+
     return (float(place)/float(out))*100
 
 def add_zero_to_time(value):
+    """
+    Add a zero in front of a one digit number
+
+    @param value: The value to be checked
+    """
+
     if value >= 0 and value < 10:
         return '0%s' %value
     return str(value)
 
 def get_random_number(value):
+    """
+    Get a random number of the given length
+
+    @param value: The length of the number
+    """
+
     return ''.join([random.choice('0123456789') for x in range(value)])
 
 class URLOpen:
+    """
+    A custom class to open URLs
+    """
     def __init__(self, cookie=None):
+        """
+        Build our urllib2 opener
+
+        @param cookie: Cookie to be used
+        """
+
         self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
 
     def open(self, url, body, headers=None):
+        """
+        Open a given url
+
+        @param url: The url to open
+        @param body: Extra data to send along
+        @param headers: Optional header
+        """
+
         if not headers:
             headers = const.USER_AGENT
         else:

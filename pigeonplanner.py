@@ -14,6 +14,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Pigeon Planner startup script
+"""
+
 
 import os
 import os.path
@@ -82,7 +86,7 @@ class PigeonPlanner:
         else:
             firstrun = True
 
-        # Options
+        # Initialize options
         import pigeonplanner.options as options
         self.options = options.GetOptions()
 
@@ -106,7 +110,8 @@ class PigeonPlanner:
             language = ''
 
         try:
-            langTranslation = gettext.translation(const.DOMAIN, LOCALE_PATH, [language])
+            langTranslation = gettext.translation(const.DOMAIN, LOCALE_PATH,
+                                                  [language])
             langTranslation.install()
         except:
             langTranslation = gettext
@@ -115,13 +120,16 @@ class PigeonPlanner:
         if win32:
             libi18n._putenv('LC_ALL', language)
         else:
+            s = locale.normalize(language).split('.')[0]+'.UTF-8'
             try:
-                locale.setlocale(locale.LC_ALL, locale.normalize(language).split('.')[0]+'.UTF-8')
+                locale.setlocale(locale.LC_ALL, s)
             except locale.Error, e:
                 try:
                     locale.setlocale(locale.LC_ALL, locale.normalize(language))
                 except locale.Error, e:
-                    locale_error = "Force lang failed: '%(language)s' (%(second)s and %(third)s tested)" % {'language': e, 'second': locale.normalize(language).split('.')[0]+'.UTF-8', 'third': locale.normalize(language)}
+                    locale_error = "Force lang failed: '%s' \
+                                    (%s and %s tested)" \
+                                    %(e, s, locale.normalize(language))
 
         if win32:
             # Module locale has no method bindtextdomain on MS Windows.
@@ -141,7 +149,10 @@ class PigeonPlanner:
             if os.path.exists("%s.old" % const.LOGFILE):
                 os.remove("%s.old" % const.LOGFILE)
             os.rename(const.LOGFILE, "%s.old" % const.LOGFILE)
-        logging.basicConfig(level=logging.DEBUG, format='[%(asctime)s] %(name)s %(levelname)s: %(message)s', filename=const.LOGFILE, filemode='w')
+        logging.basicConfig(level=logging.DEBUG,
+                            format=const.LOG_FORMAT,
+                            filename=const.LOGFILE,
+                            filemode='w')
         self.logger = logging.getLogger(self.__class__.__name__)
 
         self.logger.info("Version: %s" % const.VERSION)
@@ -172,8 +183,10 @@ class PigeonPlanner:
         else:
             self.logger.debug("Current path: %s" % const.topPath)
         self.logger.debug("Python version: %s" % sys.version)
-        self.logger.debug("GTK+ version: %s" % ".".join(str(n) for n in gtk.gtk_version))
-        self.logger.debug("PyGTK version: %s" % ".".join(str(n) for n in gtk.pygtk_version))
+        self.logger.debug("GTK+ version: %s" % ".".join(str(n) for n in
+                                                        gtk.gtk_version))
+        self.logger.debug("PyGTK version: %s" % ".".join(str(n) for n in
+                                                         gtk.pygtk_version))
         if locale_error:
             self.logger.debug("Locale error: %s" % locale_error)
         else:
@@ -188,62 +201,68 @@ class PigeonPlanner:
         # Set theme
         if win32 and os.path.exists('.\\share\\themes'):
             themes = os.listdir('.\\share\\themes')
-            themefile = os.path.join('.\\share\\themes', themes[self.options.optionList.theme], 'gtk-2.0\\gtkrc')
+            themefile = os.path.join('.\\share\\themes',
+                                     themes[self.options.optionList.theme],
+                                     'gtk-2.0\\gtkrc')
             gtk.rc_parse(themefile)
 
         # Register custom stock icons
         import pigeonplanner.common as common
 
         common.create_stock_button([
-                                ('icon_pedigree_detail.png', 'pedigree-detail', _('Pedigree')),
-                                ('icon_email.png', 'email', _('E-mail')),
-                                ('icon_send.png', 'send', _('Send')),
-                                ('icon_report.png', 'report', _('Report')),
-                                ('gtk-find', 'view-all', _('View all')),
-                                ('gtk-execute', 'calculate', _('Calculate')),
-                                ('gtk-find', 'search-database', _('Search database')),
-                                ('gtk-properties', 'optimize', _('Optimize')),
-                                ('gtk-redo', 'backup', _('Backup')),
-                                ('gtk-undo', 'restore', _('Restore')),
-                                ('gtk-find', 'check', _('Check now!')),
-                                ])
+                ('icon_pedigree_detail.png', 'pedigree-detail', _('Pedigree')),
+                ('icon_email.png', 'email', _('E-mail')),
+                ('icon_send.png', 'send', _('Send')),
+                ('icon_report.png', 'report', _('Report')),
+                ('gtk-find', 'view-all', _('View all')),
+                ('gtk-execute', 'calculate', _('Calculate')),
+                ('gtk-find', 'search-database', _('Search database')),
+                ('gtk-properties', 'optimize', _('Optimize')),
+                ('gtk-redo', 'backup', _('Backup')),
+                ('gtk-undo', 'restore', _('Restore')),
+                ('gtk-find', 'check', _('Check now!')),
+            ])
 
         # Check database
         import pigeonplanner.database as database
 
-        db = database.DatabaseOperations()
+        self.db = database.DatabaseOperations()
 
         # Check if all tables are present
-        for s_table, s_columns in db.SCHEMA.items():
-            if not s_table in db.get_tablenames():
+        for s_table, s_columns in self.db.SCHEMA.items():
+            if not s_table in self.db.get_tablenames():
                 self.logger.info("Adding table '%s'" %s_table)
-                db.add_table_from_schema(s_table)
+                self.db.add_table_from_schema(s_table)
 
         # Check if all columns are present
-        for table in db.get_tablenames(): # Get all tables again because there could be added
-            columns = db.get_columnnames(table)
+        for table in self.db.get_tablenames(): # Get all tables again
+            columns = self.db.get_columnnames(table)
             if table == 'Pigeons' and 'alive' in columns:
-                # This column has been renamed somewhere between 0.4.0 and 0.6.0
+                # This column has been renamed somewhere
+                # between version 0.4.0 and 0.6.0
                 self.logger.info("Renaming 'alive' column")
-                db.change_column_name(table)
+                self.db.change_column_name(table)
                 # Get all columns again in this table
-                columns = db.get_columnnames(table)
-            for column_def in db.SCHEMA[table][1:-1].split(', '):
+                columns = self.db.get_columnnames(table)
+            for column_def in self.db.SCHEMA[table][1:-1].split(', '):
                 column = column_def.split(' ')[0]
                 if not column in columns:
-                    # Note: no need to show a progressbar. According to the SQLite website:
-                    # The execution time of the ALTER TABLE command is independent of the
-                    # amount of data in the table. The ALTER TABLE command runs as quickly
-                    # on a table with 10 million rows as it does on a table with 1 row.
-                    self.logger.info("Adding column '%s' to table '%s'" %(column, table))
-                    db.add_column(table, column_def)
-
+                    # Note: no need to show a progressbar. According to the
+                    # SQLite website:
+                    # The execution time of the ALTER TABLE command is
+                    # independent of the amount of data in the table.
+                    # The ALTER TABLE command runs as quickly on a table
+                    # with 10 million rows as it does on a table with 1 row.
+                    self.logger.info("Adding column '%s' to table '%s'"
+                                     %(column, table))
+                    self.db.add_column(table, column_def)
 
     def setup_windows_gettext(self, domain, localedir, intl_path):
         import ctypes
 
         libintl = ctypes.cdll.LoadLibrary(intl_path)
-        libintl.bindtextdomain(domain, localedir.encode(sys.getfilesystemencoding()))
+        encoding = sys.getfilesystemencoding()
+        libintl.bindtextdomain(domain, localedir.encode(encoding))
         libintl.textdomain(domain)
         libintl.bind_textdomain_codeset(domain, "UTF-8")
         libintl.gettext.restype = ctypes.c_char_p
@@ -261,7 +280,10 @@ class PigeonPlanner:
         exception = type_.__name__
         trace = StringIO()
         traceback.print_exception(type_, value, tb, None, trace)
-        self.logger.critical("File %s line %i - %s: %s" % (file_name, line_no, exception, value))
+        self.logger.critical("File %s line %i - %s: %s" % (file_name,
+                                                           line_no,
+                                                           exception,
+                                                           value))
         tbtext = ''
         for line in trace.getvalue().split('\n'):
             if line:
@@ -278,7 +300,7 @@ if __name__ == "__main__":
     import pigeonplanner.mainwindow as main
 
     try:
-        pigeonplanner = main.MainWindow(app.options)
+        pigeonplanner = main.MainWindow(app.options, app.db)
         gobject.threads_init()
         gtk.main()
     except KeyboardInterrupt:

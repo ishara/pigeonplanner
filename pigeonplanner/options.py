@@ -15,12 +15,25 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Interface to get and set configuration options
+"""
+
 
 import configuration
 
 
 class ParsedOptions:
-    def __init__(self, theme, arrows, stats, toolbar, statusbar, update, language, runs, backup, interval, location, last, name, colour, sex, loft, strain, paper, layout, perName, perAddress, perPhone, perEmail, pigName, pigColour, pigSex, pigExtra, pigImage, resCoef, resSector, resCategory, resType, resWeather, resWind, resComment, resColumnNames, resDate):
+    """
+    Class that holds all options
+    """
+    def __init__(self, theme, arrows, stats, toolbar, statusbar, update,
+                 language, runs, backup, interval, location, last, name,
+                 colour, sex, loft, strain, paper, layout, perName,
+                 perAddress, perPhone, perEmail, pigName, pigColour,
+                 pigSex, pigExtra, pigImage, resCoef, resSector, resCategory,
+                 resType, resWeather, resWind, resComment, resColumnNames,
+                 resDate):
         self.theme = theme
         self.arrows = arrows
         self.stats = stats
@@ -64,71 +77,72 @@ class GetOptions:
     def __init__(self):
         self.conf = configuration.ConfigurationParser()
 
-        self.optionList = ParsedOptions(self.conf.getint('Options', 'theme'),
-                                        self.conf.getboolean('Options', 'arrows'),
-                                        self.conf.getboolean('Options', 'stats'),
-                                        self.conf.getboolean('Options', 'toolbar'),
-                                        self.conf.getboolean('Options', 'statusbar'),
-                                        self.conf.getboolean('Options', 'update'),
-                                        self.conf.get('Options', 'language'),
-                                        self.conf.getint('Options', 'runs'),
-                                        self.conf.getboolean('Backup', 'backup'),
-                                        self.conf.getint('Backup', 'interval'),
-                                        self.conf.get('Backup', 'location'),
-                                        self.conf.getfloat('Backup', 'last'),
-                                        self.conf.getboolean('Columns', 'name'),
-                                        self.conf.getboolean('Columns', 'colour'),
-                                        self.conf.getboolean('Columns', 'sex'),
-                                        self.conf.getboolean('Columns', 'loft'),
-                                        self.conf.getboolean('Columns', 'strain'),
-                                        self.conf.getint('Printing', 'paper'),
-                                        self.conf.getint('Printing', 'layout'),
-                                        self.conf.getboolean('Printing', 'perName'),
-                                        self.conf.getboolean('Printing', 'perAddress'),
-                                        self.conf.getboolean('Printing', 'perPhone'),
-                                        self.conf.getboolean('Printing', 'perEmail'),
-                                        self.conf.getboolean('Printing', 'pigName'),
-                                        self.conf.getboolean('Printing', 'pigColour'),
-                                        self.conf.getboolean('Printing', 'pigSex'),
-                                        self.conf.getboolean('Printing', 'pigExtra'),
-                                        self.conf.getboolean('Printing', 'pigImage'),
-                                        self.conf.getboolean('Printing', 'resCoef'),
-                                        self.conf.getboolean('Printing', 'resSector'),
-                                        self.conf.getboolean('Printing', 'resCategory'),
-                                        self.conf.getboolean('Printing', 'resType'),
-                                        self.conf.getboolean('Printing', 'resWeather'),
-                                        self.conf.getboolean('Printing', 'resWind'),
-                                        self.conf.getboolean('Printing', 'resComment'),
-                                        self.conf.getboolean('Printing', 'resColumnNames'),
-                                        self.conf.getboolean('Printing', 'resDate'),
-                                )
+        self.optionList = ParsedOptions(
+                    self.conf.getint('Options', 'theme'),
+                    self.conf.getboolean('Options', 'arrows'),
+                    self.conf.getboolean('Options', 'stats'),
+                    self.conf.getboolean('Options', 'toolbar'),
+                    self.conf.getboolean('Options', 'statusbar'),
+                    self.conf.getboolean('Options', 'update'),
+                    self.conf.get('Options', 'language'),
+                    self.conf.getint('Options', 'runs'),
+                    self.conf.getboolean('Backup', 'backup'),
+                    self.conf.getint('Backup', 'interval'),
+                    self.conf.get('Backup', 'location'),
+                    self.conf.getfloat('Backup', 'last'),
+                    self.conf.getboolean('Columns', 'name'),
+                    self.conf.getboolean('Columns', 'colour'),
+                    self.conf.getboolean('Columns', 'sex'),
+                    self.conf.getboolean('Columns', 'loft'),
+                    self.conf.getboolean('Columns', 'strain'),
+                    self.conf.getint('Printing', 'paper'),
+                    self.conf.getint('Printing', 'layout'),
+                    self.conf.getboolean('Printing', 'perName'),
+                    self.conf.getboolean('Printing', 'perAddress'),
+                    self.conf.getboolean('Printing', 'perPhone'),
+                    self.conf.getboolean('Printing', 'perEmail'),
+                    self.conf.getboolean('Printing', 'pigName'),
+                    self.conf.getboolean('Printing', 'pigColour'),
+                    self.conf.getboolean('Printing', 'pigSex'),
+                    self.conf.getboolean('Printing', 'pigExtra'),
+                    self.conf.getboolean('Printing', 'pigImage'),
+                    self.conf.getboolean('Printing', 'resCoef'),
+                    self.conf.getboolean('Printing', 'resSector'),
+                    self.conf.getboolean('Printing', 'resCategory'),
+                    self.conf.getboolean('Printing', 'resType'),
+                    self.conf.getboolean('Printing', 'resWeather'),
+                    self.conf.getboolean('Printing', 'resWind'),
+                    self.conf.getboolean('Printing', 'resComment'),
+                    self.conf.getboolean('Printing', 'resColumnNames'),
+                    self.conf.getboolean('Printing', 'resDate'),
+                )
 
     def write_default(self):
-        '''
+        """
         Write the default configuration file
-        '''
+        """
 
         self.conf.generateDefaultFile()
         self.conf.copyNew(default=True)
 
     def write_options(self, dic):
-        '''
+        """
         Write the options to the configuration file
 
         @param dic: a dictionary of options ({section : {key : value}}) 
-        '''
+        """
 
         self.conf.generateNewFile(dic)
         self.conf.copyNew(new=True)
 
     def set_option(self, section, option, value):
-        '''
+        """
         Set a single option to the configuration file
 
         @param section: The section of the option
         @param option: The option to change
         @param value: The value for the option
-        '''
+        """
 
         self.conf.set_option(section, option, value)
 

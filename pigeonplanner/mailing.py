@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Interface for sending mails
+"""
+
 
 import os
 import os.path
@@ -61,9 +65,11 @@ def encode_multipart_formdata(fields, files):
         body.append(value)
     for (key, fd) in files:
         filename = fd.name.split('/')[-1]
-        contenttype = mimetypes.guess_type(filename)[0] or 'application/octet-stream'
+        contenttype = (mimetypes.guess_type(filename)[0] or 
+                       'application/octet-stream')
         body.append('--%s' % BOUNDARY)
-        body.append('Content-Disposition: form-data; name="%s"; filename="%s"' % (key, filename))
+        body.append('Content-Disposition: form-data; name="%s"; filename="%s"'
+                    %(key, filename))
         body.append('Content-Type: %s' % contenttype)
         fd.seek(0)
         body.append('\r\n' + fd.read())
@@ -88,7 +94,8 @@ class MailDialog(GtkbuilderApp):
             self.frame_subject.show()
         else:
             import uuid
-            self.entry_subject.set_text("Pigeon Planner errorlog [%s]" %str(uuid.uuid1()))
+            self.entry_subject.set_text("Pigeon Planner errorlog [%s]"
+                                        %str(uuid.uuid1()))
             self.entry_to.set_text(const.REPORTMAIL)
             self.rename.hide()
 
@@ -149,13 +156,14 @@ class MailDialog(GtkbuilderApp):
 
     def on_send_clicked(self, widget):
         if not self.entry_to.get_text() or not self.entry_mail.get_text():
-            widgets.message_dialog('error', messages.MSG_NEED_EMAIL, self.maildialog)
+            widgets.message_dialog('error', messages.MSG_NEED_EMAIL,
+                                   self.maildialog)
             return
 
         self.progressbar.show()
         self.vbox_fields.set_sensitive(False)
         self.action_area.set_sensitive(False)
-        th = threading.Thread(group=None, target=self.sendmail_thread, name=None)
+        th = threading.Thread(None, self.sendmail_thread, None)
         th.start()
 
     def sendmail_thread(self):
@@ -165,7 +173,8 @@ class MailDialog(GtkbuilderApp):
         recipient = self.entry_to.get_text()
         subject = self.entry_subject.get_text()
         body = self.textbuffer.get_text(*self.textbuffer.get_bounds()).strip()
-        sender = "%s <%s>" %(self.entry_name.get_text(), self.entry_mail.get_text())
+        sender = "%s <%s>" %(self.entry_name.get_text(),
+                             self.entry_mail.get_text())
 
         send_email(recipient, sender, subject, body, self.attachment)
 
@@ -178,7 +187,8 @@ class MailDialog(GtkbuilderApp):
         self.cancel.hide()
         self.close.show()
         self.action_area.set_sensitive(True)
-        self.label_result.set_markup("<b>%s</b>" %_("The e-mail has been sent succesfully!"))
+        self.label_result.set_markup("<b>%s</b>"
+                                %_("The e-mail has been sent succesfully!"))
         self.label_result.show()
 
     def pulse_progressbar(self):

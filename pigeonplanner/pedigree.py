@@ -22,6 +22,10 @@
 # http://web.njit.edu/~kevin/rgb.txt.html
 # http://www.jumbo-psp.com/PSP-for-Fun/images/Color%20tabel.htm
 
+"""
+Provides various classes to draw the pedigree
+"""
+
 
 from cgi import escape
 
@@ -80,28 +84,38 @@ class ExtraBox(gtk.DrawingArea):
         self.shadow_gc.line_style = gtk.gdk.LINE_SOLID
         self.shadow_gc.line_width = 4
         if self.text != '':
-            self.bg_gc.set_foreground(self.get_colormap().alloc_color("#f0e68c"))
-            self.border_gc.set_foreground(self.get_colormap().alloc_color("#777777"))
+            self.bg_gc.set_foreground(
+                            self.get_colormap().alloc_color("#f0e68c"))
+            self.border_gc.set_foreground(
+                            self.get_colormap().alloc_color("#777777"))
         else:
-            self.bg_gc.set_foreground(self.get_colormap().alloc_color("#eeeeee"))
-            self.border_gc.set_foreground(self.get_colormap().alloc_color("#777777"))
-        self.shadow_gc.set_foreground(self.get_colormap().alloc_color("#999999"))
+            self.bg_gc.set_foreground(
+                            self.get_colormap().alloc_color("#eeeeee"))
+            self.border_gc.set_foreground(
+                            self.get_colormap().alloc_color("#777777"))
+        self.shadow_gc.set_foreground(
+                            self.get_colormap().alloc_color("#999999"))
 
     def expose(self,widget,event):
         alloc = self.get_allocation()
 
-        self.window.draw_line(self.shadow_gc, 3, alloc.height-1, alloc.width, alloc.height-1)
-        self.window.draw_line(self.shadow_gc, alloc.width-1, 3, alloc.width-1, alloc.height)
+        self.window.draw_line(self.shadow_gc, 3, alloc.height-1,
+                              alloc.width, alloc.height-1)
+        self.window.draw_line(self.shadow_gc, alloc.width-1, 3,
+                              alloc.width-1, alloc.height)
 
-        self.window.draw_rectangle(self.bg_gc, True, 1, 1, alloc.width-5, alloc.height-5)
+        self.window.draw_rectangle(self.bg_gc, True, 1, 1, alloc.width-5,
+                                   alloc.height-5)
 
         if self.text:
             self.window.draw_layout(self.text_gc, 5, 4, self.textlayout)
 
         if self.border_gc.line_width > 1:
-            self.window.draw_rectangle(self.border_gc, False, 1, 1, alloc.width-6, alloc.height-6)
+            self.window.draw_rectangle(self.border_gc, False, 1, 1,
+                                       alloc.width-6, alloc.height-6)
         else:
-            self.window.draw_rectangle(self.border_gc, False, 0, 0, alloc.width-4, alloc.height-4)
+            self.window.draw_rectangle(self.border_gc, False, 0, 0,
+                                       alloc.width-4, alloc.height-4)
 
 
 class ExtraBox_cairo(gtk.DrawingArea):
@@ -134,11 +148,14 @@ class ExtraBox_cairo(gtk.DrawingArea):
         self.context.move_to(0, 5)
         self.context.curve_to(0, 2, 2,0, 5,0)
         self.context.line_to(alloc.width-8,0)
-        self.context.curve_to(alloc.width-5, 0, alloc.width-3, 2, alloc.width-3, 5)
+        self.context.curve_to(alloc.width-5, 0, alloc.width-3, 2,
+                              alloc.width-3, 5)
         self.context.line_to(alloc.width-3, alloc.height-8)
-        self.context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5, alloc.height-3, alloc.width-8, alloc.height-3)
+        self.context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5,
+                              alloc.height-3, alloc.width-8, alloc.height-3)
         self.context.line_to(5, alloc.height-3)
-        self.context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0, alloc.height-8)
+        self.context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0,
+                              alloc.height-8)
         self.context.close_path()
         path = self.context.copy_path()
 
@@ -146,7 +163,8 @@ class ExtraBox_cairo(gtk.DrawingArea):
         self.context.translate(3, 3)
         self.context.new_path()
         self.context.append_path(path)
-        self.context.set_source_rgba(self.bordercolor[0], self.bordercolor[1], self.bordercolor[2], 0.4)
+        self.context.set_source_rgba(self.bordercolor[0], self.bordercolor[1],
+                                     self.bordercolor[2], 0.4)
         self.context.fill_preserve()
         self.context.set_line_width(0)
         self.context.stroke()
@@ -156,7 +174,8 @@ class ExtraBox_cairo(gtk.DrawingArea):
         self.context.clip()
 
         self.context.append_path(path)
-        self.context.set_source_rgb(self.bgcolor[0], self.bgcolor[1], self.bgcolor[2])
+        self.context.set_source_rgb(self.bgcolor[0], self.bgcolor[1],
+                                    self.bgcolor[2])
         self.context.fill_preserve()
         self.context.stroke()
 
@@ -166,12 +185,14 @@ class ExtraBox_cairo(gtk.DrawingArea):
 
         self.context.set_line_width(2)
         self.context.append_path(path)
-        self.context.set_source_rgb(self.bordercolor[0], self.bordercolor[1], self.bordercolor[2])
+        self.context.set_source_rgb(self.bordercolor[0], self.bordercolor[1],
+                                    self.bordercolor[2])
         self.context.stroke()
 
 
 class PedigreeEditBox:
-    def __init__(self, pindex, ring, year, sex, details, kinfo, main, pedigree):
+    def __init__(self, pindex, ring, year, sex, details, kinfo, main,
+                 pedigree):
         self.pindex = pindex
         self.ring = ring
         self.year = year
@@ -223,8 +244,8 @@ class PedigreeEditBox:
             self.editdialog.entryExtra6.set_text(self.details[5])
 
         if not self.kindex in self.main.parser.pigeons:
-            data = (self.kinfo[0], self.kinfo[1], self.kinfo[2], self.kinfo[3], 0, 1,
-                    '', '', '', '', '', '', '', '', '',
+            data = (self.kinfo[0], self.kinfo[1], self.kinfo[2],
+                    self.kinfo[3], 0, 1, '', '', '', '', '', '', '', '', '',
                     self.kinfo[4], self.kinfo[5], self.kinfo[6],
                     self.kinfo[7], self.kinfo[8], self.kinfo[9])
             self.main.database.insert_pigeon(data)
@@ -311,15 +332,18 @@ class PedigreeEditBox:
         self.main.parser.get_pigeons()
         self.main.fill_treeview(path=path)
 
-        dp = DrawPedigree([self.pedigree.tableSire, self.pedigree.tableDam], self.pedigree.pindex,
-                          True, self.main.parser.pigeons, self.main, self.pedigree)
+        dp = DrawPedigree([self.pedigree.tableSire, self.pedigree.tableDam],
+                          self.pedigree.pindex, True,
+                          self.main.parser.pigeons, self.main, self.pedigree)
         dp.draw_pedigree()
 
 
 class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
-    def __init__(self, pindex, ring, year, sex, details, detail=False, kinfo=None, main=None, pedigree=None):
+    def __init__(self, pindex, ring, year, sex, details, detail=False,
+                 kinfo=None, main=None, pedigree=None):
         gtk.DrawingArea.__init__(self)
-        PedigreeEditBox.__init__(self, pindex, ring, year, sex, details, kinfo, main, pedigree)
+        PedigreeEditBox.__init__(self, pindex, ring, year, sex, details,
+                                 kinfo, main, pedigree)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
         self.connect("expose_event", self.expose)
         self.connect("realize", self.realize)
@@ -379,37 +403,51 @@ class PedigreeBox(gtk.DrawingArea, PedigreeEditBox):
         self.shadow_gc.line_width = 4
         if self.pindex:
             if self.sex == '0':
-                self.bg_gc.set_foreground(self.get_colormap().alloc_color("#b9cfe7"))
-                self.border_gc.set_foreground(self.get_colormap().alloc_color("#204a87"))
+                self.bg_gc.set_foreground(
+                        self.get_colormap().alloc_color("#b9cfe7"))
+                self.border_gc.set_foreground(
+                        self.get_colormap().alloc_color("#204a87"))
             else:
-                self.bg_gc.set_foreground(self.get_colormap().alloc_color("#ffcdf1"))
-                self.border_gc.set_foreground(self.get_colormap().alloc_color("#87206a"))
+                self.bg_gc.set_foreground(
+                        self.get_colormap().alloc_color("#ffcdf1"))
+                self.border_gc.set_foreground(
+                        self.get_colormap().alloc_color("#87206a"))
         else:
-            self.bg_gc.set_foreground(self.get_colormap().alloc_color("#eeeeee"))
-            self.border_gc.set_foreground(self.get_colormap().alloc_color("#777777"))
-        self.shadow_gc.set_foreground(self.get_colormap().alloc_color("#999999"))
+            self.bg_gc.set_foreground(
+                        self.get_colormap().alloc_color("#eeeeee"))
+            self.border_gc.set_foreground(
+                        self.get_colormap().alloc_color("#777777"))
+        self.shadow_gc.set_foreground(
+                        self.get_colormap().alloc_color("#999999"))
 
     def expose(self,widget,event):
         alloc = self.get_allocation()
 
-        self.window.draw_line(self.shadow_gc, 3, alloc.height-1, alloc.width, alloc.height-1)
-        self.window.draw_line(self.shadow_gc, alloc.width-1, 3, alloc.width-1, alloc.height)
+        self.window.draw_line(self.shadow_gc, 3, alloc.height-1,
+                              alloc.width, alloc.height-1)
+        self.window.draw_line(self.shadow_gc, alloc.width-1, 3,
+                              alloc.width-1, alloc.height)
 
-        self.window.draw_rectangle(self.bg_gc, True, 1, 1, alloc.width-5, alloc.height-5)
+        self.window.draw_rectangle(self.bg_gc, True, 1, 1,
+                                   alloc.width-5, alloc.height-5)
 
         if self.pindex:
             self.window.draw_layout(self.text_gc, 5, 4, self.textlayout)
 
         if self.border_gc.line_width > 1:
-            self.window.draw_rectangle(self.border_gc, False, 1, 1, alloc.width-6, alloc.height-6)
+            self.window.draw_rectangle(self.border_gc, False, 1, 1,
+                                       alloc.width-6, alloc.height-6)
         else:
-            self.window.draw_rectangle(self.border_gc, False, 0, 0, alloc.width-4, alloc.height-4)
+            self.window.draw_rectangle(self.border_gc, False, 0, 0,
+                                       alloc.width-4, alloc.height-4)
 
 
 class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
-    def __init__(self, pindex, ring, year, sex, details, detail=False, kinfo=None, main=None, pedigree=None):
+    def __init__(self, pindex, ring, year, sex, details, detail=False,
+                 kinfo=None, main=None, pedigree=None):
         gtk.DrawingArea.__init__(self)
-        PedigreeEditBox.__init__(self, pindex, ring, year, sex, details, kinfo, main, pedigree)
+        PedigreeEditBox.__init__(self, pindex, ring, year, sex, details,
+                                 kinfo, main, pedigree)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
         self.hightlight = False
         self.connect("expose_event", self.expose)
@@ -452,7 +490,8 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
             self.bordercolor = (0,0,0)
 
             if editable:
-                self.text = "<span style='italic' foreground='#6a6a6a'>%s</span>" %format_text(_("<edit>"))
+                tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
+                self.text = tform %format_text(_("<edit>"))
 
     def focus_out(self, widget, event):
         self.hightlight = False
@@ -469,13 +508,17 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
                     return
 
                 if self.pindex in self.main.parser.pigeons:
-                    if widgets.message_dialog('warning', messages.MSG_SHOW_PIGEON, self.main.main):
+                    if widgets.message_dialog('warning',
+                                              messages.MSG_SHOW_PIGEON,
+                                              self.main.mainwindow):
                         self.main.database.show_pigeon(self.pindex, 1)
                         self.main.parser.get_pigeons()
                         self.main.fill_treeview()
                         return
                 else:
-                    if widgets.message_dialog('question', messages.MSG_ADD_PIGEON, self.main.main):
+                    if widgets.message_dialog('question',
+                                              messages.MSG_ADD_PIGEON,
+                                              self.main.mainwindow):
                         self.main.menuadd_activate(None)
                         self.main.entryRing1.set_text(self.ring)
                         self.main.entryYear1.set_text(self.year)
@@ -500,11 +543,14 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
         self.context.move_to(0, 5)
         self.context.curve_to(0, 2, 2,0, 5,0)
         self.context.line_to(alloc.width-8,0)
-        self.context.curve_to(alloc.width-5, 0, alloc.width-3, 2, alloc.width-3, 5)
+        self.context.curve_to(alloc.width-5, 0, alloc.width-3, 2,
+                              alloc.width-3, 5)
         self.context.line_to(alloc.width-3, alloc.height-8)
-        self.context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5, alloc.height-3, alloc.width-8, alloc.height-3)
+        self.context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5,
+                              alloc.height-3, alloc.width-8, alloc.height-3)
         self.context.line_to(5, alloc.height-3)
-        self.context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0, alloc.height-8)
+        self.context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0,
+                              alloc.height-8)
         self.context.close_path()
         path = self.context.copy_path()
 
@@ -512,7 +558,8 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
         self.context.translate(3, 3)
         self.context.new_path()
         self.context.append_path(path)
-        self.context.set_source_rgba(self.bordercolor[0], self.bordercolor[1], self.bordercolor[2], 0.4)
+        self.context.set_source_rgba(self.bordercolor[0], self.bordercolor[1],
+                                     self.bordercolor[2], 0.4)
         self.context.fill_preserve()
         self.context.set_line_width(0)
         self.context.stroke()
@@ -522,7 +569,8 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
         self.context.clip()
 
         self.context.append_path(path)
-        self.context.set_source_rgb(self.bgcolor[0], self.bgcolor[1], self.bgcolor[2])
+        self.context.set_source_rgb(self.bgcolor[0], self.bgcolor[1],
+                                    self.bgcolor[2])
         self.context.fill_preserve()
         self.context.stroke()
 
@@ -535,13 +583,14 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
         else:
             self.context.set_line_width(2)
         self.context.append_path(path)
-        self.context.set_source_rgb(self.bordercolor[0], self.bordercolor[1], self.bordercolor[2])
+        self.context.set_source_rgb(self.bordercolor[0], self.bordercolor[1],
+                                    self.bordercolor[2])
         self.context.stroke()
 
 
 class DrawPedigree:
-    def __init__(self, tables=None, pindex=None, detail=False, pigeons=None, main=None, pedigree=None, lang=None):
-
+    def __init__(self, tables=None, pindex=None, detail=False, pigeons=None,
+                 main=None, pedigree=None, lang=None):
         self.pindex = pindex
         self.detail = detail
         self.pigeons = pigeons
@@ -612,7 +661,8 @@ class DrawPedigree:
             year = ''
             sex = ''
 
-        self.build_tree(self.pindex, ring, year, sex, '', '', '', '', '', '', 0, 1, lst)
+        self.build_tree(self.pindex, ring, year, sex, '', '', '', '', '',
+                        '', 0, 1, lst)
 
         for table in self.tables:
             for child in table.get_children():
@@ -651,9 +701,12 @@ class DrawPedigree:
 
             if not lst[i]:
                 if cairo_available:
-                    box = PedigreeBox_cairo('', '', '', sex, None, self.detail, kinfo, self.main, self.pedigree)
+                    box = PedigreeBox_cairo('', '', '', sex, None,
+                                            self.detail, kinfo, self.main,
+                                            self.pedigree)
                 else:
-                    box = PedigreeBox('', '', '', sex, None, self.detail, kinfo, self.main, self.pedigree)
+                    box = PedigreeBox('', '', '', sex, None, self.detail,
+                                      kinfo, self.main, self.pedigree)
                 table.attach(box, x, y, w, h)
                 if self.detail:
                     if cairo_available:
@@ -673,12 +726,18 @@ class DrawPedigree:
                         extra.append(lst[i][8])
                         extra.append(lst[i][9])
 
-                    allExtra = [lst[i][4], lst[i][5], lst[i][6], lst[i][7], lst[i][8], lst[i][9]]
+                    allExtra = [lst[i][4], lst[i][5], lst[i][6], lst[i][7],
+                                lst[i][8], lst[i][9]]
 
                     if cairo_available:
-                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, kinfo, self.main, self.pedigree)
+                        box = PedigreeBox_cairo(lst[i][0], lst[i][1],
+                                                lst[i][2], lst[i][3],
+                                                allExtra, self.detail, kinfo,
+                                                self.main, self.pedigree)
                     else:
-                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], allExtra, self.detail, kinfo, self.main, self.pedigree)
+                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2],
+                                          lst[i][3], allExtra, self.detail,
+                                          kinfo, self.main, self.pedigree)
                     table.attach(box, x, y, w, h)
 
                     if cairo_available:
@@ -688,9 +747,12 @@ class DrawPedigree:
                     table.attach(extrabox, x, y, w+1, h+height)
                 else:
                     if cairo_available:
-                        box = PedigreeBox_cairo(lst[i][0], lst[i][1], lst[i][2], lst[i][3], None, self.detail, main=self.main)
+                        box = PedigreeBox_cairo(lst[i][0], lst[i][1],
+                                                lst[i][2], lst[i][3], None,
+                                                self.detail, main=self.main)
                     else:
-                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2], lst[i][3], None, self.detail)
+                        box = PedigreeBox(lst[i][0], lst[i][1], lst[i][2],
+                                          lst[i][3], None, self.detail)
                     table.attach(box, x, y, w, h)
 
             if self.pos[i][1]:
@@ -729,10 +791,13 @@ class DrawPedigree:
         gc.line_style = gtk.gdk.LINE_SOLID
         gc.line_width = 2
         if self.lang == 'ar':
-            area.window.draw_line(gc, alloc.width/2, alloc.height/2, alloc.width, alloc.height/2)
+            area.window.draw_line(gc, alloc.width/2, alloc.height/2,
+                                  alloc.width, alloc.height/2)
         else:
-            area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2, alloc.height/2)
-        area.window.draw_line(gc, alloc.width/2, 0, alloc.width/2, alloc.height)
+            area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2,
+                                  alloc.height/2)
+        area.window.draw_line(gc, alloc.width/2, 0, alloc.width/2,
+                              alloc.height)
 
     def line_expose_cb(self, area, event):
         gc = area.window.new_gc()
@@ -742,18 +807,25 @@ class DrawPedigree:
         gc.line_width = 2
         if idx %2 == 0:
             if self.lang == 'ar':
-                area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2, alloc.height/2)
+                area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2,
+                                      alloc.height/2)
             else:
-                area.window.draw_line(gc, alloc.width, alloc.height/2, alloc.width/2, alloc.height/2)
-            area.window.draw_line(gc, alloc.width/2, 0, alloc.width/2, alloc.height/2)
+                area.window.draw_line(gc, alloc.width, alloc.height/2,
+                                      alloc.width/2, alloc.height/2)
+            area.window.draw_line(gc, alloc.width/2, 0, alloc.width/2,
+                                  alloc.height/2)
         else:
             if self.lang == 'ar':
-                area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2, alloc.height/2)
+                area.window.draw_line(gc, 0, alloc.height/2, alloc.width/2,
+                                      alloc.height/2)
             else:
-                area.window.draw_line(gc, alloc.width, alloc.height/2, alloc.width/2, alloc.height/2)
-            area.window.draw_line(gc, alloc.width/2, alloc.height, alloc.width/2, alloc.height/2)
+                area.window.draw_line(gc, alloc.width, alloc.height/2,
+                                      alloc.width/2, alloc.height/2)
+            area.window.draw_line(gc, alloc.width/2, alloc.height,
+                                  alloc.width/2, alloc.height/2)
 
-    def build_tree(self, pindex, ring, year, sex, ex1, ex2, ex3, ex4, ex5, ex6, index, depth, lst):
+    def build_tree(self, pindex, ring, year, sex, ex1, ex2, ex3, ex4, ex5,
+                   ex6, index, depth, lst):
         if depth > 5 or ring == None or index >= len(lst):
             return
 
@@ -785,7 +857,9 @@ class DrawPedigree:
                 extra6 = ''
 
             if ringSire:
-                self.build_tree(pindexsire, ringSire, yearSire, '0', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+1, depth+1, lst)
+                self.build_tree(pindexsire, ringSire, yearSire, '0', extra1,
+                                extra2, extra3, extra4, extra5, extra6,
+                                (2*index)+1, depth+1, lst)
 
             ringDam = self.pigeons[pindex].dam
             yearDam = self.pigeons[pindex].yeardam
@@ -806,5 +880,7 @@ class DrawPedigree:
                 extra6 = ''
 
             if ringDam:
-                self.build_tree(pindexdam, ringDam, yearDam, '1', extra1, extra2, extra3, extra4, extra5, extra6, (2*index)+2, depth+1, lst)
+                self.build_tree(pindexdam, ringDam, yearDam, '1', extra1,
+                                extra2, extra3, extra4, extra5, extra6,
+                                (2*index)+2, depth+1, lst)
 

@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
-'''
+"""
 A detailed pedigree of the selected pigeon.
-'''
+"""
 
 
 import os.path
@@ -35,12 +35,12 @@ from gtkbuilderapp import GtkbuilderApp
 
 class PedigreeWindow(GtkbuilderApp):
     def __init__(self, main, pigeoninfo):
-        '''
+        """
         Constructor
 
         @param main: The main instance class
         @param pigeoninfo: Dictionary containing pigeon info
-        '''
+        """
 
         GtkbuilderApp.__init__(self, const.GLADEPEDIGREE, const.DOMAIN)
 
@@ -48,20 +48,23 @@ class PedigreeWindow(GtkbuilderApp):
         self.pigeoninfo = pigeoninfo
         self.pindex = pigeoninfo['pindex']
 
-        self.pedigreewindow.set_transient_for(self.main.main)
+        self.pedigreewindow.set_transient_for(self.main.mainwindow)
 
         self.build_toolbar()
 
-        self.labelRing.set_text("%s / %s" %(self.pigeoninfo['ring'], self.pigeoninfo['year'][2:]))
+        self.labelRing.set_text("%s / %s" %(self.pigeoninfo['ring'],
+                                            self.pigeoninfo['year'][2:]))
         self.labelSex.set_text(self.pigeoninfo['sex'])
         self.labelName.set_text(self.pigeoninfo['name'])
 
-        self.dp = DrawPedigree([self.tableSire, self.tableDam], self.pigeoninfo['pindex'],
-                                True, self.main.parser.pigeons, self.main,
+        self.dp = DrawPedigree([self.tableSire, self.tableDam],
+                                self.pigeoninfo['pindex'], True,
+                                self.main.parser.pigeons, self.main,
                                 self, self.main.options.optionList.language)
         self.dp.draw_pedigree()
 
-        self.pdfname = "%s_%s_%s.pdf" %(_("Pedigree"), pigeoninfo['ring'], pigeoninfo['year'])
+        self.pdfname = "%s_%s_%s.pdf" %(_("Pedigree"), pigeoninfo['ring'],
+                                        pigeoninfo['year'])
 
         self.pedigreewindow.show()
 
@@ -114,7 +117,10 @@ class PedigreeWindow(GtkbuilderApp):
     def do_operation(self, op):
         userinfo = common.get_own_address(self.main.database)
 
-        if not common.check_userinfo(self.pedigreewindow, self.main, userinfo['name']): return
+        if not common.check_userinfo(self.pedigreewindow, self.main,
+                                     userinfo['name']):
+            return
 
-        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo, self.main.options.optionList, op, self.pdfname)
+        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo,
+                      self.main.options.optionList, op, self.pdfname)
 

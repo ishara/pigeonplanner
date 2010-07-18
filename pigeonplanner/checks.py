@@ -15,17 +15,21 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Provides functions to check band and year entries
+"""
+
 
 import widgets
 import messages
 
 
 def check_entrys(entrys):
-    '''
+    """
     Check the ring and year entry's if they contain valid text.
 
     @param entrys: Dic of entrys to check
-    '''
+    """
 
     parent = entrys['ring'].get_toplevel()
 
@@ -49,11 +53,11 @@ def check_entrys(entrys):
     return True
 
 def check_ring_entry(parent, inputRing, inputYear):
-    '''
+    """
         
     @param inputRing: The ringnumber to check
     @param inputYear: the year to check
-    '''
+    """
 
     if not inputRing or not inputYear:
         widgets.message_dialog('error', messages.MSG_EMPTY_FIELDS, parent)

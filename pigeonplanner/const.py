@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Definies all constants
+"""
+
 
 import os
 import sys
@@ -101,6 +105,7 @@ DOMAIN = 'pigeonplanner'
 
 USER_AGENT = {"User-Agent": "Pigeon Planner/%s" %VERSION}
 
+LOG_FORMAT = '[%(asctime)s] %(name)s %(levelname)s: %(message)s'
 DATE_FORMAT = '%Y-%m-%d'
 
 (SIRE,

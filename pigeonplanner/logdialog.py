@@ -16,16 +16,22 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Logdialog class
+"""
+
 
 import gtk
 import gobject
 
 import const
+import common
 import mailing
 
 
 SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]
-COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow", "ERROR": "red", "CRITICAL": "white", "TRACEBACK": "white"}
+COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow",
+          "ERROR": "red", "CRITICAL": "white", "TRACEBACK": "white"}
 
 class LogDialog(gtk.Dialog):
     def __init__(self, database=None):
@@ -38,7 +44,7 @@ class LogDialog(gtk.Dialog):
 
         self.file = open(const.LOGFILE, "r")
         self.back_buffer = gtk.TextBuffer()
-        self.back_buffer.set_text(self.file.read().decode(const.ENCODING).encode("utf-8"))
+        self.back_buffer.set_text(common.encode_string(self.file.read()))
 
         frame = gtk.Frame()
         self.vbox.pack_start(frame)
@@ -60,7 +66,8 @@ class LogDialog(gtk.Dialog):
         self.textview.set_wrap_mode(gtk.WRAP_NONE)
         self.textview.set_editable(False)
         self.textview.set_cursor_visible(False)
-        self.textview.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse("black"))
+        self.textview.modify_base(gtk.STATE_NORMAL,
+                                  gtk.gdk.color_parse("black"))
 
         table = bffr.get_tag_table()
         for name, color in COLORS.items():
@@ -111,7 +118,8 @@ class LogDialog(gtk.Dialog):
     def insert_color(self, bffr, line):
         for s in SEVERITY[self.combo.get_active():]:
             if s in line:
-                bffr.insert_with_tags(bffr.get_end_iter(), "%s\n" %line, bffr.get_tag_table().lookup(s))
+                bffr.insert_with_tags(bffr.get_end_iter(), "%s\n" %line,
+                                      bffr.get_tag_table().lookup(s))
                 break
 
     def reload_view(self, textview):
@@ -138,7 +146,8 @@ class LogDialog(gtk.Dialog):
             vadjust.need_scroll = True
 
     def value_changed (self, vadjust):
-        vadjust.need_scroll = abs(vadjust.value + vadjust.page_size - vadjust.upper) < vadjust.step_increment
+        vadjust.need_scroll = abs(vadjust.value + vadjust.page_size -
+                                  vadjust.upper) < vadjust.step_increment
 
     def close(self, widget=None, other=None):
         self.file.close()

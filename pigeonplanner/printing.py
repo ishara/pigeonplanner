@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Ingterface for all printing operations
+"""
+
 
 import math
 import os.path
@@ -110,7 +114,8 @@ class PrintPreview(GtkbuilderApp):
            ))
         action_group.add_toggle_actions((
             ("Fit", gtk.STOCK_ZOOM_FIT, None, None,
-                    _("Zooms to fit the whole page"), self.on_zoom_fit_toggled),
+                    _("Zooms to fit the whole page"),
+                    self.on_zoom_fit_toggled),
            ))
 
         return action_group
@@ -155,8 +160,10 @@ class PrintPreview(GtkbuilderApp):
         self.drawingarea.set_size_request(screen_width, screen_height)
         self.drawingarea.queue_draw()
         
-        self.zoom_in_button.set_sensitive(self.zoom != max(self.zoom_factors.keys()))
-        self.zoom_out_button.set_sensitive(self.zoom != min(self.zoom_factors.keys()))
+        self.zoom_in_button.set_sensitive(self.zoom !=
+                                          max(self.zoom_factors.keys()))
+        self.zoom_out_button.set_sensitive(self.zoom !=
+                                           min(self.zoom_factors.keys()))
         
     def zoom_in(self):
         zoom = [z for z in self.zoom_factors.keys() if z > self.zoom]
@@ -320,7 +327,8 @@ class BasePrinting:
             fc = gtk.FileChooserDialog(title=_("Save as..."), 
                         parent=self.parent,
                         action=gtk.FILE_CHOOSER_ACTION_SAVE,
-                        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK))
+                        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                                 gtk.STOCK_SAVE, gtk.RESPONSE_OK))
             ftr = gtk.FileFilter()
             ftr.set_name("PDF")
             ftr.add_pattern("*.pdf")
@@ -345,7 +353,8 @@ class BasePrinting:
                 response = print_.run(action, self.parent)
             except gobject.GError, e:
                 logger.error("Error in print operation: %s" %e)
-                widgets.message_dialog('error', messages.MSG_PRINTOP_ERROR, self.parent)
+                widgets.message_dialog('error', messages.MSG_PRINTOP_ERROR,
+                                       self.parent)
             else:
                 if response == gtk.PRINT_OPERATION_RESULT_ERROR:
                     print_error = print_.get_error()
@@ -374,13 +383,15 @@ class BasePrinting:
 
 
 class PrintPedigree(BasePrinting):
-    def __init__(self, parent, pigeoninfo, userinfo, options, print_action, pdf_name):
+    def __init__(self, parent, pigeoninfo, userinfo, options, print_action,
+                 pdf_name):
         orientation = gtk.PAGE_ORIENTATION_PORTRAIT
         self.pigeoninfo = pigeoninfo
         self.options = options
         self.userinfo = userinfo
         self.preview = None
-        BasePrinting.__init__(self, parent, options, print_action, pdf_name, orientation)
+        BasePrinting.__init__(self, parent, options, print_action, pdf_name,
+                              orientation)
 
     def begin_print(self, operation, context):
         operation.set_n_pages(1)
@@ -405,7 +416,8 @@ class PrintPedigree(BasePrinting):
         cr.show_text(_("Pedigree of:"))
         ring = ""
         if self.pigeoninfo['ring']:
-            ring = "%s / %s" %(self.pigeoninfo['ring'], self.pigeoninfo['year'][2:])
+            ring = "%s / %s" %(self.pigeoninfo['ring'],
+                               self.pigeoninfo['year'][2:])
         xb, yb, width, height, xa, ya = cr.text_extents(ring)
         cr.move_to(total_width-width, 10)
         cr.show_text(ring)
@@ -425,7 +437,8 @@ class PrintPedigree(BasePrinting):
             cr.move_to(0, endPerson)
             cr.show_text(self.userinfo['street'])
             cr.move_to(0, endPerson+7)
-            cr.show_text("%s %s" %(self.userinfo['code'], self.userinfo['city']))
+            cr.show_text("%s %s" %(self.userinfo['code'],
+                                   self.userinfo['city']))
             endPerson += 14
         if self.options.perPhone:
             cr.move_to(0, endPerson)
@@ -456,22 +469,28 @@ class PrintPedigree(BasePrinting):
 
         if self.options.pigExtra:
             cr.set_font_size(4)
-            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra1'])
+            xb, yb, width, height, xa, ya = \
+                                cr.text_extents(self.pigeoninfo['extra1'])
             cr.move_to(total_width-width, endPigeon)
             cr.show_text(self.pigeoninfo['extra1'])
-            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra2'])
+            xb, yb, width, height, xa, ya = \
+                                cr.text_extents(self.pigeoninfo['extra2'])
             cr.move_to(total_width-width, endPigeon+5)
             cr.show_text(self.pigeoninfo['extra2'])
-            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra3'])
+            xb, yb, width, height, xa, ya = \
+                                cr.text_extents(self.pigeoninfo['extra3'])
             cr.move_to(total_width-width, endPigeon+10)
             cr.show_text(self.pigeoninfo['extra3'])
-            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra4'])
+            xb, yb, width, height, xa, ya = \
+                                cr.text_extents(self.pigeoninfo['extra4'])
             cr.move_to(total_width-width, endPigeon+15)
             cr.show_text(self.pigeoninfo['extra4'])
-            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra5'])
+            xb, yb, width, height, xa, ya = \
+                                cr.text_extents(self.pigeoninfo['extra5'])
             cr.move_to(total_width-width, endPigeon+20)
             cr.show_text(self.pigeoninfo['extra5'])
-            xb, yb, width, height, xa, ya = cr.text_extents(self.pigeoninfo['extra6'])
+            xb, yb, width, height, xa, ya = \
+                                cr.text_extents(self.pigeoninfo['extra6'])
             cr.move_to(total_width-width, endPigeon+25)
             cr.show_text(self.pigeoninfo['extra6'])
             endPigeon += 25
@@ -585,8 +604,8 @@ class PrintPedigree(BasePrinting):
 
         lst = [None]*31
         dp = DrawPedigree()
-        dp.build_tree(self.pigeoninfo['pindex'], self.pigeoninfo['ring'], self.pigeoninfo['year'],
-                      self.pigeoninfo['sex'],
+        dp.build_tree(self.pigeoninfo['pindex'], self.pigeoninfo['ring'],
+                      self.pigeoninfo['year'], self.pigeoninfo['sex'],
                       '', '', '', '', '', '', 0, 1, lst)
 
         for i in xrange(1, 31):
@@ -655,7 +674,8 @@ class PrintPedigree(BasePrinting):
 
 
 class PrintResults(BasePrinting):
-    def __init__(self, parent, results, userinfo, options, print_action, pdf_name):
+    def __init__(self, parent, results, userinfo, options, print_action,
+                 pdf_name):
         orientation = gtk.PAGE_ORIENTATION_LANDSCAPE
         self.results = results
         self.options = options
@@ -682,7 +702,8 @@ class PrintResults(BasePrinting):
                     11: _("Comment")
                 }
 
-        BasePrinting.__init__(self, parent, options, print_action, pdf_name, orientation)
+        BasePrinting.__init__(self, parent, options, print_action, pdf_name,
+                              orientation)
 
     def begin_print(self, operation, context):
         self.width = context.get_width()
@@ -699,7 +720,8 @@ class PrintResults(BasePrinting):
         if self.options.perEmail:
             header += '%s' %self.userinfo['email']
         self.header_layout = context.create_pango_layout()
-        self.header_layout.set_font_description(pango.FontDescription("Arial "+str(self.header_font_size)))
+        font = pango.FontDescription("Arial "+str(self.header_font_size))
+        self.header_layout.set_font_description(font)
         self.header_layout.set_width(int(self.width*pango.SCALE))
         self.header_layout.set_alignment(pango.ALIGN_LEFT)
         self.header_layout.set_text(header)
@@ -707,7 +729,8 @@ class PrintResults(BasePrinting):
         self.results_start = self.header_height + 4
 
         self.pagenr_layout = context.create_pango_layout()
-        self.pagenr_layout.set_font_description(pango.FontDescription("Arial "+str(self.pagenr_font_size)))
+        font = pango.FontDescription("Arial "+str(self.pagenr_font_size))
+        self.pagenr_layout.set_font_description(font)
         self.pagenr_layout.set_width(int(self.width*pango.SCALE))
         self.pagenr_layout.set_alignment(pango.ALIGN_RIGHT)
 
@@ -767,7 +790,8 @@ class PrintResults(BasePrinting):
         cr.set_source_rgb(0, 0, 0)
         cr.move_to(0, 0)
 
-        date_page = "%s %s / %s" %(_("Page"), page_number+1, operation.props.n_pages)
+        date_page = "%s %s / %s" %(_("Page"), page_number+1,
+                                   operation.props.n_pages)
         if self.options.resDate:
             date_page += "\n\n%s" %datetime.date.today()
         self.pagenr_layout.set_text(date_page)
@@ -791,18 +815,26 @@ class PrintResults(BasePrinting):
                     size_title = self.column_layouts[index-1].get_size()[0]
                     size_column = self.results_layouts[index-1].get_size()[0]
                     if size_title >= size_column:
-                        start_pos_x += self.column_layouts[index-1].get_size()[0] / 1024.0 + 4
+                        start_pos_x += \
+                            (self.column_layouts[index-1].get_size()[0] /
+                             1024.0 + 4)
                     else:
-                        start_pos_x += self.results_layouts[index-1].get_size()[0] / 1024.0 + 4
+                        start_pos_x += \
+                            (self.results_layouts[index-1].get_size()[0] /
+                             1024.0 + 4)
 
                 cr.move_to(start_pos_x, start_pos_y + self.results_start)
                 cr.show_layout(self.column_layouts[index])
-                title_height += self.column_layouts[index].get_size()[1] / 1024.0 + 2
+                title_height += \
+                            (self.column_layouts[index].get_size()[1] /
+                             1024.0 + 2)
             else:
                 if index == 0:
                     start_pos_x = 0
                 else:
-                    start_pos_x += self.results_layouts[index-1].get_size()[0] / 1024.0 + 4
+                    start_pos_x += \
+                            (self.results_layouts[index-1].get_size()[0] /
+                             1024.0 + 4)
 
             line_iter = column_layout.get_iter()
             while True:
@@ -813,7 +845,8 @@ class PrintResults(BasePrinting):
                     baseline = line_iter.get_baseline()
                     if i == start:
                         start_pos_y = ly / pango.SCALE
-                    cr.move_to(start_pos_x, baseline / 1024.0 - start_pos_y + self.results_start + title_height)
+                    cr.move_to(start_pos_x, baseline / 1024.0 - start_pos_y +
+                               self.results_start + title_height)
                     cr.show_layout_line(line)
                 i += 1
                 if not (i < end and line_iter.next_line()):
@@ -824,7 +857,8 @@ class PrintResults(BasePrinting):
         for result in self.results:
             text += '%s\n' %result[column]
         layout = context.create_pango_layout()
-        layout.set_font_description(pango.FontDescription("Arial "+str(self.text_font_size)))
+        font = pango.FontDescription("Arial "+str(self.text_font_size))
+        layout.set_font_description(font)
         layout.set_width(int(self.width*pango.SCALE))
         layout.set_wrap(pango.WRAP_CHAR)
         layout.set_text(text)
@@ -833,7 +867,8 @@ class PrintResults(BasePrinting):
 
     def create_column_layout(self, context, column):
         layout = context.create_pango_layout()
-        layout.set_font_description(pango.FontDescription("Arial "+str(self.text_font_size)))
+        font = pango.FontDescription("Arial "+str(self.text_font_size))
+        layout.set_font_description(font)
         layout.set_width(int(self.width*pango.SCALE))
         layout.set_markup("<u>%s</u>" %self.columnNames[column])
 
@@ -847,13 +882,14 @@ class PrintVelocity(BasePrinting):
         self.data = data
         self.info = info
         self.preview = None
-        BasePrinting.__init__(self, parent, options, print_action, pdf_name, orientation)
+        BasePrinting.__init__(self, parent, options, print_action, pdf_name,
+                              orientation)
 
     def begin_print(self, operation, context):
         operation.set_n_pages(1)
 
-        # There is no preview button, but Linux users have a printpreview button in
-        # the printdialog. Weird things happen if we don't do this.
+        # There is no preview button, but Linux users have a printpreview
+        # button in the printdialog. Weird things happen if we don't do this.
         if self.preview:
             self.preview.start()
 
@@ -897,13 +933,15 @@ class PrintVelocity(BasePrinting):
 
         cr.move_to(40, x)
         cr.show_text(_("Flight Time"))
-        xb, yb, flightwidth, height, xa, ya = cr.text_extents(_("Flight Time"))
+        xb, yb, flightwidth, height, xa, ya = \
+                                    cr.text_extents(_("Flight Time"))
         cr.move_to(40, x+2)
         cr.line_to(40 + flightwidth, x+2)
 
         cr.move_to(80, x)
         cr.show_text(_("Time of Arrival"))
-        xb, yb, arrivalwidth, height, xa, ya = cr.text_extents(_("Time of Arrival"))
+        xb, yb, arrivalwidth, height, xa, ya = \
+                                    cr.text_extents(_("Time of Arrival"))
         cr.move_to(80, x+2)
         cr.line_to(80 + arrivalwidth, x+2)
 

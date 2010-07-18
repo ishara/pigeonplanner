@@ -18,6 +18,10 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
+"""
+Fix locale problems on win32
+"""
+
 
 import os
 import sys

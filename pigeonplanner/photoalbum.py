@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+A photo album to display all pigeon pictures
+"""
+
 
 import gtk
 import gobject
@@ -65,7 +69,9 @@ class PhotoAlbum(GtkbuilderApp):
         self.zoom = 1.0
         self.zoom_mode = ZOOM_FREE
         if pindex:
-            path = tuple(index for index, row in enumerate(self.iconview.get_model()) if row[1] == pindex)
+            path = tuple(index for index, row in
+                         enumerate(self.iconview.get_model()) if
+                         row[1] == pindex)
         else:
             path = (0,)
         try:
@@ -117,7 +123,8 @@ class PhotoAlbum(GtkbuilderApp):
            ))
         action_group.add_toggle_actions((
             ("Fit", gtk.STOCK_ZOOM_FIT, None, None,
-                    _("Zooms to fit the whole picture"), self.on_zoom_fit_toggled),
+                    _("Zooms to fit the whole picture"),
+                    self.on_zoom_fit_toggled),
             ("Slide", gtk.STOCK_MEDIA_PLAY, None, None,
                     _("View slideshow"), self.on_slideshow_toggled),
             ("Screen", gtk.STOCK_FULLSCREEN, None, None,
@@ -137,10 +144,13 @@ class PhotoAlbum(GtkbuilderApp):
             if not pigeon[3]: continue
 
             try:
-                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(pigeon[3], 96, 96)
-                store.append(["%s%s" %(pigeon[2], pigeon[1]), pigeon[0], "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
+                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(pigeon[3],
+                                                              96, 96)
+                store.append(["%s%s" %(pigeon[2], pigeon[1]), pigeon[0],
+                              "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
             except gobject.GError:
-                logger.error("Could not find original image for: %s/%s" %(pigeon[1], pigeon[2]))
+                logger.error("Could not find original image for: %s/%s"
+                             %(pigeon[1], pigeon[2]))
 
         if len(store) > 0:
             self.labelImage.hide()
@@ -184,8 +194,10 @@ class PhotoAlbum(GtkbuilderApp):
         self.drawingarea.set_size_request(screen_width, screen_height)
         self.drawingarea.queue_draw()
         
-        self.zoom_in_button.set_sensitive(self.zoom != max(self.zoom_factors.keys()))
-        self.zoom_out_button.set_sensitive(self.zoom != min(self.zoom_factors.keys()))
+        self.zoom_in_button.set_sensitive(self.zoom !=
+                                          max(self.zoom_factors.keys()))
+        self.zoom_out_button.set_sensitive(self.zoom !=
+                                           min(self.zoom_factors.keys()))
         
     def zoom_in(self):
         zoom = [z for z in self.zoom_factors.keys() if z > self.zoom]
@@ -208,7 +220,8 @@ class PhotoAlbum(GtkbuilderApp):
             return
 
         width, height, vsb_w, hsb_h = self.get_view_size()
-        zoom = min(width / float(self.pixbuf.get_width()), height / float(self.pixbuf.get_height()))
+        zoom = min(width / float(self.pixbuf.get_width()), height /
+                                 float(self.pixbuf.get_height()))
 
         return zoom
 
@@ -301,7 +314,8 @@ class PhotoAlbum(GtkbuilderApp):
             ytranslate += (height - picture_h) / 2
 
         self.context.translate(xtranslate, ytranslate)
-        self.context.set_source_pixbuf(self.pixbuf.scale_simple(picture_w, picture_h, self.interp), 0, 0)
+        self.context.set_source_pixbuf(self.pixbuf.scale_simple(picture_w,
+                                       picture_h, self.interp), 0, 0)
         self.context.paint()
 
     def on_drawingarea_press(self, widget, event):

@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Options dialog class
+"""
+
 
 import os
 
@@ -33,7 +37,7 @@ class OptionsDialog(GtkbuilderApp):
 
         self.main = main
 
-        self.optionsdialog.set_transient_for(self.main.main)
+        self.optionsdialog.set_transient_for(self.main.mainwindow)
 
         self.opt = options.GetOptions()
 
@@ -48,7 +52,8 @@ class OptionsDialog(GtkbuilderApp):
         for item in categories:
             self.liststore.append(
                     [i,
-                     self.treeview.render_icon(item[1], gtk.ICON_SIZE_LARGE_TOOLBAR),
+                     self.treeview.render_icon(item[1],
+                                               gtk.ICON_SIZE_LARGE_TOOLBAR),
                      item[0]
                     ])
             i += 1
@@ -173,7 +178,8 @@ class OptionsDialog(GtkbuilderApp):
         widget.set_text('%s %s' % (value, dstring))
 
     def on_default_clicked(self, widget):
-        if widgets.message_dialog('warning', messages.MSG_DEFAULT_OPTIONS, self.optionsdialog):
+        if widgets.message_dialog('warning', messages.MSG_DEFAULT_OPTIONS,
+                                  self.optionsdialog):
             self.opt.write_default()
             self.opt = options.GetOptions()
             self.set_options()
@@ -187,7 +193,8 @@ class OptionsDialog(GtkbuilderApp):
                            'toolbar': str(self.chkToolbar.get_active()),
                            'statusbar': str(self.chkStatusbar.get_active()),
                            'update': str(self.chkUpdate.get_active()),
-                           'language': self.languagelookup[self.cbLang.get_active()][1],
+                           'language': \
+                             self.languagelookup[self.cbLang.get_active()][1],
                            'runs': self.opt.optionList.runs
                           },
                "Backup": {'backup': str(self.chkBackup.get_active()),
@@ -201,27 +208,28 @@ class OptionsDialog(GtkbuilderApp):
                            'loft': str(self.chkLoft.get_active()),
                            'strain': str(self.chkStrain.get_active())
                           },
-                "Printing": {"paper": self.cbPaper.get_active(),
-                             "layout": self.cbLayout.get_active(),
-                             "perName": str(self.chkPerName.get_active()),
-                             "perAddress": str(self.chkPerAddress.get_active()),
-                             "perPhone": str(self.chkPerPhone.get_active()),
-                             "perEmail": str(self.chkPerEmail.get_active()),
-                             "pigName": str(self.chkPigName.get_active()),
-                             "pigColour": str(self.chkPigColour.get_active()),
-                             "pigSex": str(self.chkPigSex.get_active()),
-                             "pigExtra": str(self.chkPigExtra.get_active()),
-                             "pigImage": str(self.chkPigImage.get_active()),
-                             "resCoef": str(self.chkResCoef.get_active()),
-                             "resSector": str(self.chkResSector.get_active()),
-                             "resCategory": str(self.chkResCategory.get_active()),
-                             "resType": str(self.chkResType.get_active()),
-                             "resWeather": str(self.chkResWeather.get_active()),
-                             "resWind": str(self.chkResWind.get_active()),
-                             "resComment": str(self.chkResComment.get_active()),
-                             "resColumnNames": str(self.chkResColumnNames.get_active()),
-                             "resDate": str(self.chkResDate.get_active()),
-                            }
+                "Printing": {
+                    "paper": self.cbPaper.get_active(),
+                    "layout": self.cbLayout.get_active(),
+                    "perName": str(self.chkPerName.get_active()),
+                    "perAddress": str(self.chkPerAddress.get_active()),
+                    "perPhone": str(self.chkPerPhone.get_active()),
+                    "perEmail": str(self.chkPerEmail.get_active()),
+                    "pigName": str(self.chkPigName.get_active()),
+                    "pigColour": str(self.chkPigColour.get_active()),
+                    "pigSex": str(self.chkPigSex.get_active()),
+                    "pigExtra": str(self.chkPigExtra.get_active()),
+                    "pigImage": str(self.chkPigImage.get_active()),
+                    "resCoef": str(self.chkResCoef.get_active()),
+                    "resSector": str(self.chkResSector.get_active()),
+                    "resCategory": str(self.chkResCategory.get_active()),
+                    "resType": str(self.chkResType.get_active()),
+                    "resWeather": str(self.chkResWeather.get_active()),
+                    "resWind": str(self.chkResWind.get_active()),
+                    "resComment": str(self.chkResComment.get_active()),
+                    "resColumnNames": str(self.chkResColumnNames.get_active()),
+                    "resDate": str(self.chkResDate.get_active()),
+                   }
               }
 
         self.opt.write_options(dic)
@@ -232,9 +240,11 @@ class OptionsDialog(GtkbuilderApp):
 
         self.main.options = options.GetOptions()
 
-        if self.languagelookup[self.cbLang.get_active()][1] != self.opt.optionList.language or\
-           const.WINDOWS and self.cbThemes.get_active() != self.opt.optionList.theme:
-            widgets.message_dialog('info', messages.MSG_RESTART_APP, self.optionsdialog)
+        if self.languagelookup[self.cbLang.get_active()][1] != \
+           self.opt.optionList.language or const.WINDOWS and \
+           self.cbThemes.get_active() != self.opt.optionList.theme:
+            widgets.message_dialog('info', messages.MSG_RESTART_APP,
+                                   self.optionsdialog)
 
         self.main.set_treeview_columns()
 

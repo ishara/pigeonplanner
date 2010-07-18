@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Tools window class
+"""
+
 
 import os
 import time
@@ -42,7 +46,7 @@ class ToolsWindow(GtkbuilderApp):
         self.main = main
         self.notification = notification
 
-        self.toolsdialog.set_transient_for(self.main.main)
+        self.toolsdialog.set_transient_for(self.main.mainwindow)
         self.linkbutton.set_uri(const.DOWNLOADURL)
 
         distance_units = [
@@ -59,7 +63,7 @@ class ToolsWindow(GtkbuilderApp):
                 (_('Yard per Minute'), 0.01524),
                 (_('Metres per Minute'), 0.0166666666),
                 (_('Metres per Second'), 1),
-                (_('Kilometre per Hour'), 0.277777777777777777777777777777777777),
+                (_('Kilometre per Hour'), 0.27777777777777777777777777777777),
                 (_('Feet per Second'), 0.3048),
                 (_('Feet per Minute'), 0.00508),
                 (_('Mile per Hour'), 0.44704)
@@ -81,7 +85,9 @@ class ToolsWindow(GtkbuilderApp):
 
         # Add the categories
         i = 0
-        for category in [_("Velocity calculator"), _("Calendar"), _("Datasets"), _("Addresses"), _("Statistics"), _("Database"), _("Backup"), _("Update")]:
+        for category in [_("Velocity calculator"), _("Calendar"),
+                         _("Datasets"), _("Addresses"), _("Statistics"),
+                         _("Database"), _("Backup"), _("Update")]:
             self.liststore.append([i, category])
             label = getattr(self, "label_title_%s" %i)
             label.set_markup("<b><i><big>%s</big></i></b>" %category)
@@ -112,7 +118,9 @@ class ToolsWindow(GtkbuilderApp):
         self.fcButtonRestore.add_filter(widgets.get_backup_filefilter())
 
         # Fill the data combobox
-        data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Types"), _("Categories"), _("Strains"), _("Lofts"), _("Weather"), _("Wind")]
+        data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Types"),
+                _("Categories"), _("Strains"), _("Lofts"), _("Weather"),
+                _("Wind")]
         data.sort()
         for item in data:
             self.cbdata.append_text(item)
@@ -198,16 +206,19 @@ class ToolsWindow(GtkbuilderApp):
                                         datetime.timedelta(seconds=arrival)])
 
     def on_printcalc_clicked(self, widget):
-        data = [self.ls_velocity.get(row.iter, 0, 1, 2) for row in self.ls_velocity]
+        data = [self.ls_velocity.get(row.iter, 0, 1, 2)
+                for row in self.ls_velocity]
         if data:
             date = datetime.datetime.now()
-            distance = "%s %s" %(self.spinbutton_prognosis_distance.get_value_as_int(),
-                                 self.combobox_prognosis_distance.get_active_text())
+            distance = "%s %s" %(
+                        self.spinbutton_prognosis_distance.get_value_as_int(),
+                        self.combobox_prognosis_distance.get_active_text())
             release = "%s:%s:%s" %(self.spinbutton_prognosis_hours.get_text(),
                                  self.spinbutton_prognosis_minutes.get_text(),
                                  self.spinbutton_prognosis_seconds.get_text())
             info = [date.strftime("%Y-%m-%d"), release, distance]
-            PrintVelocity(self.main.main, data, info, self.main.options.optionList, 'print')
+            PrintVelocity(self.main.mainwindow, data, info,
+                          self.main.options.optionList, 'print')
 
     # Events
     def fill_events_view(self):
@@ -225,9 +236,11 @@ class ToolsWindow(GtkbuilderApp):
         model, path = selection.get_selected()
 
         if path:
-            widgets.set_multiple_sensitive({self.event_remove: True, self.event_edit: True})
+            widgets.set_multiple_sensitive({self.event_remove: True,
+                                            self.event_edit: True})
         else:
-            widgets.set_multiple_sensitive({self.event_remove: False, self.event_edit: False})
+            widgets.set_multiple_sensitive({self.event_remove: False,
+                                            self.event_edit: False})
             self.textview_events.get_buffer().set_text('')
             self.label_notification.set_text('')
             self.label_notify.set_text("-1")
@@ -236,7 +249,8 @@ class ToolsWindow(GtkbuilderApp):
         data = self.main.database.get_event_data(model[path][0])
         self.textview_events.get_buffer().set_text(data[0])
         if int(data[1]):
-            self.label_notification.set_text(_("Notification is set on %s days in advance") %data[2])
+            self.label_notification.set_text(
+                    _("Notification is set on %s days in advance") %data[2])
             self.label_notify.set_text(str(data[2]))
         else:
             self.label_notification.set_text(_("No notification set"))
@@ -268,7 +282,8 @@ class ToolsWindow(GtkbuilderApp):
 
         self.entry_eventdialog_description.set_text(model[path][2])
         textbuffer = self.textview_events.get_buffer()
-        self.textview_eventdialog_comment.get_buffer().set_text(textbuffer.get_text(*textbuffer.get_bounds()))
+        self.textview_eventdialog_comment.get_buffer().set_text(
+                                textbuffer.get_text(*textbuffer.get_bounds()))
 
         notify = int(self.label_notify.get_text())
         if notify < 0:
@@ -318,7 +333,9 @@ class ToolsWindow(GtkbuilderApp):
             notifyday = eventday - (interval*86400)
 
         if self.eventsDialogMode == const.ADD:
-            rowid = self.main.database.insert_event((date, description, comment, notify, interval, notifyday))
+            rowid = self.main.database.insert_event((date, description,
+                                                     comment, notify,
+                                                     interval, notifyday))
             rowiter = self.ls_events.insert(0, [rowid, date, description])
             self.sel_events.select_iter(rowiter)
             self.tv_events.scroll_to_cell(self.ls_events.get_path(rowiter))
@@ -327,7 +344,8 @@ class ToolsWindow(GtkbuilderApp):
             model, node = selection.get_selected()
             self.ls_events.set(node, 1, date, 2, description)
             ID = self.ls_events.get_value(node, 0)
-            self.main.database.update_event((date, description, comment, notify, interval, notifyday, ID))
+            self.main.database.update_event((date, description, comment,
+                                             notify, interval, notifyday, ID))
 
             selection.unselect_iter(node)
             selection.select_iter(node)
@@ -339,9 +357,9 @@ class ToolsWindow(GtkbuilderApp):
         self.fill_item_combo(widget.get_active_text())
 
     def fill_item_combo(self, datatype):
-        '''
+        """
         Fill the item combobox with available items for the selected data
-        '''
+        """
 
         self.cbitems.get_model().clear()
 
@@ -384,7 +402,9 @@ class ToolsWindow(GtkbuilderApp):
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
 
-        if widgets.message_dialog('question', messages.MSG_REMOVE_ITEM, self.toolsdialog, {'item': item, 'dataset': dataset}):
+        if widgets.message_dialog('question', messages.MSG_REMOVE_ITEM,
+                                  self.toolsdialog,
+                                  {'item': item, 'dataset': dataset}):
             index = self.cbitems.get_active()
 
             if dataset == _("Colours"):
@@ -445,9 +465,9 @@ class ToolsWindow(GtkbuilderApp):
 
     # Addresses
     def fill_address_view(self):
-        '''
+        """
         Fill the treeview with available addresses
-        ''' 
+        """ 
 
         self.ls_address.clear()
 
@@ -462,9 +482,11 @@ class ToolsWindow(GtkbuilderApp):
         self.empty_adentrys()
 
         if path:
-            widgets.set_multiple_sensitive({self.adremove: True, self.adedit: True})
+            widgets.set_multiple_sensitive({self.adremove: True,
+                                            self.adedit: True})
         else:
-            widgets.set_multiple_sensitive({self.adremove: False, self.adedit: False})
+            widgets.set_multiple_sensitive({self.adremove: False,
+                                            self.adedit: False})
             return
 
         self.set_data()
@@ -503,13 +525,15 @@ class ToolsWindow(GtkbuilderApp):
         data = self.get_entry_data()
 
         if not data[0]:
-            widgets.message_dialog('error', messages.MSG_NAME_EMPTY, self.toolsdialog)
+            widgets.message_dialog('error', messages.MSG_NAME_EMPTY,
+                                   self.toolsdialog)
             return
 
         if self.admode == const.ADD:
             for ad in self.main.database.get_all_addresses():
                 if data[0] == ad[1]:
-                    widgets.message_dialog('error', messages.MSG_NAME_EXISTS, self.toolsdialog)
+                    widgets.message_dialog('error', messages.MSG_NAME_EXISTS,
+                                           self.toolsdialog)
                     return
 
             self.main.database.insert_address(data)
@@ -528,7 +552,8 @@ class ToolsWindow(GtkbuilderApp):
         for entry in self.get_entrys():
             entry.set_property('editable', True)
 
-        widgets.set_multiple_sensitive({self.treeview: False, self.vboxtv: False})
+        widgets.set_multiple_sensitive({self.treeview: False,
+                                        self.vboxtv: False})
 
         alreadyMe = False
         for item in self.main.database.get_all_addresses():
@@ -538,12 +563,15 @@ class ToolsWindow(GtkbuilderApp):
                 break
 
         if alreadyMe:
-            widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True})
+            widgets.set_multiple_visible({self.btnadd: True,
+                                          self.btncancel: True})
             if self.admode == const.EDIT and self.me == self.get_name():
                 widgets.set_multiple_visible({self.chkme: True})
                 self.chkme.set_active(True)
         else:
-            widgets.set_multiple_visible({self.btnadd: True, self.btncancel: True, self.chkme: True})
+            widgets.set_multiple_visible({self.btnadd: True,
+                                          self.btncancel: True,
+                                          self.chkme: True})
 
         self.adentryname.grab_focus()
         self.adentryname.set_position(-1)
@@ -556,14 +584,18 @@ class ToolsWindow(GtkbuilderApp):
 
         self.chkme.set_active(False)
 
-        widgets.set_multiple_visible({self.btnadd: False, self.btncancel: False, self.chkme: False})
-        widgets.set_multiple_sensitive({self.treeview: True, self.vboxtv: True})
+        widgets.set_multiple_visible({self.btnadd: False,
+                                      self.btncancel: False,
+                                      self.chkme: False})
+        widgets.set_multiple_sensitive({self.treeview: True,
+                                        self.vboxtv: True})
 
         if self.pedigree_call:
             self.toolsdialog.destroy()
 
     def on_adremove_clicked(self, widget):
-        if not widgets.message_dialog('question', messages.MSG_REMOVE_ADDRESS, self.toolsdialog, self.get_name()):
+        if not widgets.message_dialog('question', messages.MSG_REMOVE_ADDRESS,
+                                      self.toolsdialog, self.get_name()):
             return
 
         self.main.database.delete_address(self.get_name())
@@ -575,9 +607,9 @@ class ToolsWindow(GtkbuilderApp):
             self.tvaddress.set_cursor((0,))
 
     def get_name(self):
-        '''
+        """
         Return the name of the selected person
-        '''
+        """
 
         model, path = self.sel_address.get_selected()
         if not path:
@@ -586,9 +618,9 @@ class ToolsWindow(GtkbuilderApp):
             return model[path][0]
 
     def get_entry_data(self):
-        '''
+        """
         Return the text of all the entry's
-        '''
+        """
 
         return (self.adentryname.get_text(),\
                 self.adentrystreet.get_text(),\
@@ -601,9 +633,9 @@ class ToolsWindow(GtkbuilderApp):
                 int(self.chkme.get_active()))
 
     def get_entrys(self):
-        '''
+        """
         Return all entry's
-        '''
+        """
 
         entrys = []
         for widget in self.get_objects_from_prefix("adentry"):
@@ -612,22 +644,24 @@ class ToolsWindow(GtkbuilderApp):
         return entrys
 
     def empty_adentrys(self):
-        '''
+        """
         Clear all entry's
-        '''
+        """
 
         for entry in self.get_entrys():
             entry.set_text('')
 
     # Statistics
     def on_btnsearchdb_clicked(self, widget):
-        total, cocks, hens, ybirds = common.count_active_pigeons(self.main.database)
+        total, cocks, hens, ybirds = \
+                            common.count_active_pigeons(self.main.database)
 
         items = [(_("Number of pigeons"), total),
                  (_("Number of cocks"), cocks),
                  (_("Number of hens"), hens),
                  (_("Number of young birds"), ybirds),
-                 (_("Number of results"), len(self.main.database.get_all_results()))
+                 (_("Number of results"), \
+                                    len(self.main.database.get_all_results()))
                 ]
 
         self.ls_stats.clear()
@@ -639,10 +673,12 @@ class ToolsWindow(GtkbuilderApp):
         self.toolsdialog.set_sensitive(False)
         self.main.database.optimize_db()
         self.toolsdialog.set_sensitive(True)
-        widgets.message_dialog('info', messages.MSG_OPTIMIZE_FINISH, self.toolsdialog)
+        widgets.message_dialog('info', messages.MSG_OPTIMIZE_FINISH,
+                               self.toolsdialog)
 
     def on_dbremove_clicked(self, widget):
-        if widgets.message_dialog('warning', messages.MSG_REMOVE_DATABASE, self.toolsdialog):
+        if widgets.message_dialog('warning', messages.MSG_REMOVE_DATABASE,
+                                  self.toolsdialog):
             logger.debug("Start deleting the database")
             try:
                 os.remove(const.DATABASE)
@@ -651,7 +687,8 @@ class ToolsWindow(GtkbuilderApp):
             except Exception, msg:
                 logger.error("Deleting database: %s" % msg)
             else:
-                widgets.message_dialog('info', messages.MSG_RMDB_FINISH, self.toolsdialog)
+                widgets.message_dialog('info', messages.MSG_RMDB_FINISH,
+                                       self.toolsdialog)
                 self.on_close_dialog()
                 self.main.quit_program(bckp=False)
 
@@ -660,17 +697,21 @@ class ToolsWindow(GtkbuilderApp):
         folder = self.fcButtonCreate.get_current_folder()
         if folder:
             if backup.make_backup(folder):
-                widgets.message_dialog('info', messages.MSG_BACKUP_SUCCES, self.main.main)
+                widgets.message_dialog('info', messages.MSG_BACKUP_SUCCES,
+                                       self.main.mainwindow)
             else:
-                widgets.message_dialog('info', messages.MSG_BACKUP_FAILED, self.main.main)
+                widgets.message_dialog('info', messages.MSG_BACKUP_FAILED,
+                                       self.main.mainwindow)
 
     def on_restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             if backup.restore_backup(zipfile):
-                widgets.message_dialog('info', messages.MSG_RESTORE_SUCCES, self.main.main)
+                widgets.message_dialog('info', messages.MSG_RESTORE_SUCCES,
+                                       self.main.mainwindow)
             else:
-                widgets.message_dialog('info', messages.MSG_RESTORE_FAILED, self.main.main)
+                widgets.message_dialog('info', messages.MSG_RESTORE_FAILED,
+                                       self.main.mainwindow)
 
     # Update
     def on_btnupdate_clicked(self, widget):

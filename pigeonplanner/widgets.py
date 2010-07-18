@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Various widgets
+"""
+
 
 import os.path
 
@@ -27,7 +31,7 @@ import backup
 import messages
 
 
-uistring = '''
+uistring = """
 <ui>
    <menubar name="MenuBar">
       <menu action="FileMenu">
@@ -91,9 +95,9 @@ uistring = '''
       <toolitem action="Quit"/>
    </toolbar>
 </ui>
-'''
+"""
 
-photoalbumui = '''
+photoalbumui = """
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="First"/>
@@ -112,9 +116,9 @@ photoalbumui = '''
       <toolitem action="Close"/>
    </toolbar>
 </ui>
-'''
+"""
 
-pedigreeui = '''
+pedigreeui = """
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="Save"/>
@@ -126,9 +130,9 @@ pedigreeui = '''
       <toolitem action="Close"/>
    </toolbar>
 </ui>
-'''
+"""
 
-resultui = '''
+resultui = """
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="Save"/>
@@ -142,9 +146,9 @@ resultui = '''
       <toolitem action="Close"/>
    </toolbar>
 </ui>
-'''
+"""
 
-previewui = '''
+previewui = """
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="First"/>
@@ -159,7 +163,7 @@ previewui = '''
       <toolitem action="Close"/>
    </toolbar>
 </ui>
-'''
+"""
 
 
 def get_backup_filefilter():
@@ -171,14 +175,14 @@ def get_backup_filefilter():
     return backupFileFilter
 
 def message_dialog(msgtype, data, parent=None, extra=None):
-    '''
+    """
     Display a message dialog.
 
     @param parent: The parent window
     @param msgtype: The sort of dialog
     @param data: Tuple of primary text, secondary text and dialog title
     @param extra: Extra data to use with a string formatter
-    '''
+    """
 
     if extra:
         head = data[0] %extra
@@ -201,7 +205,8 @@ def message_dialog(msgtype, data, parent=None, extra=None):
         msgtype = gtk.MESSAGE_INFO
         buttons = gtk.BUTTONS_OK
 
-    dialog = gtk.MessageDialog(parent=parent, type=msgtype, message_format=head, buttons=buttons)
+    dialog = gtk.MessageDialog(parent=parent, type=msgtype,
+                               message_format=head, buttons=buttons)
     dialog.format_secondary_text(text)
     dialog.set_title(title)
     result = dialog.run()
@@ -214,11 +219,11 @@ def message_dialog(msgtype, data, parent=None, extra=None):
     dialog.destroy()
 
 def about_dialog(parent):
-    '''
+    """
     Build and show the about dialog
 
     @param parent: Parent for the dialog
-    '''
+    """
 
     dialog = gtk.AboutDialog()
     dialog.set_transient_for(parent)
@@ -236,27 +241,30 @@ def about_dialog(parent):
     dialog.set_artists(const.ARTISTS)
     dialog.set_translator_credits(_('translator-credits'))
     dialog.set_license(const.LICENSE)
-    dialog.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(const.IMAGEDIR, 'icon_logo.png'), 80, 80))
+    dialog.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(
+                                            os.path.join(const.IMAGEDIR,
+                                                         'icon_logo.png'),
+                                            80, 80))
 
     result = dialog.run()
     dialog.destroy()
 
 def set_multiple_sensitive(widgets):
-    ''' 
+    """ 
     Set multiple widgets sensitive at once
 
     @param widgets: dic of widgets with booleans
-    '''
+    """
 
     for key in widgets.keys():
         key.set_sensitive(widgets[key])
 
 def set_multiple_visible(widgets):
-    ''' 
+    """ 
     Set multiple widgets visible at once
 
     @param widgets: dic of widgets with booleans
-    '''
+    """
 
     for key in widgets.keys():
         if widgets[key]:
@@ -265,11 +273,11 @@ def set_multiple_visible(widgets):
             key.hide()
 
 def popup_menu(event, entries):
-    '''
+    """
     Make a right click menu
 
     @param entries: List of wanted menuentries
-    '''
+    """
 
     menu = gtk.Menu()
     for stock_id, callback, data in entries:
@@ -283,11 +291,11 @@ def popup_menu(event, entries):
     menu.popup(None, None, None, 0, event.time)
 
 def set_completion(widget):
-    '''
+    """
     Set entrycompletion on given widget
 
     @param widget: the widget to set entrycompletion
-    '''
+    """
 
     completion = gtk.EntryCompletion()
     completion.set_model(widget.get_model())
@@ -296,11 +304,11 @@ def set_completion(widget):
     widget.child.set_completion(completion)
 
 def set_combobox_wrap(combobox):
-    '''
+    """
     Wrap the columns of a combobox depending on the number of items
 
     @param combobox: the combobox
-    '''
+    """
 
     length = len(combobox.get_model())
     if length > 10 and length <= 30:
@@ -309,13 +317,13 @@ def set_combobox_wrap(combobox):
         combobox.set_wrap_width(3)
 
 def fill_combobox(combobox, items, active=0):
-    '''
+    """
     Fill a combobox with the given data
 
     @param widget: the combobox
     @param items: list of items to add
     @param active: index of the active value
-    '''
+    """
 
     model = combobox.get_model()
     model.clear()
@@ -380,8 +388,10 @@ class BackupDialog(gtk.Dialog):
         if backuptype == 'create':
             label = gtk.Label(_("Choose a directory where to save the backup"))
             label.set_padding(30, 0)
-            self.fcButtonCreate = gtk.FileChooserButton(_("Select a directory"))
-            self.fcButtonCreate.set_action(gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+            title = _("Select a directory")
+            self.fcButtonCreate = gtk.FileChooserButton(title)
+            self.fcButtonCreate.set_action(
+                                        gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
 
             self.vbox.pack_start(label, False, True, 8)
             self.vbox.pack_start(self.fcButtonCreate, False, True, 12)
@@ -395,11 +405,14 @@ class BackupDialog(gtk.Dialog):
             self.action_area.reorder_child(button, 0)
 
         else:
-            label = gtk.Label(_("Choose a Pigeon Planner backup file to restore"))
+            text = _("Choose a Pigeon Planner backup file to restore")
+            label = gtk.Label(text)
             label.set_padding(30, 0)
-            label2 = gtk.Label(_("Warning! This will overwrite the existing database!"))
+            text2 = _("Warning! This will overwrite the existing database!")
+            label2 = gtk.Label(text2)
             label2.set_padding(30, 0)
-            self.fcButtonRestore = gtk.FileChooserButton(_("Select a valid backup file"))
+            title = _("Select a valid backup file")
+            self.fcButtonRestore = gtk.FileChooserButton(title)
             self.fcButtonRestore.set_action(gtk.FILE_CHOOSER_ACTION_OPEN)
             self.fcButtonRestore.add_filter(get_backup_filefilter())
 
@@ -437,7 +450,8 @@ class BackupDialog(gtk.Dialog):
 
 class EditPedigreeDialog(gtk.Dialog):
     def __init__(self, parent):
-        gtk.Dialog.__init__(self, _("Insert a pigeon"), parent, gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
+        gtk.Dialog.__init__(self, _("Insert a pigeon"), parent,
+                            gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 
         self.set_position(gtk.WIN_POS_MOUSE)
         self.set_property("skip-taskbar-hint", True)
@@ -488,7 +502,8 @@ class EditPedigreeDialog(gtk.Dialog):
 
 class FilterDialog(gtk.Dialog):
     def __init__(self, parent, title, fill_treeview_cb):
-        gtk.Dialog.__init__(self, title, parent, gtk.DIALOG_DESTROY_WITH_PARENT,
+        gtk.Dialog.__init__(self, title, parent,
+                            gtk.DIALOG_DESTROY_WITH_PARENT,
                             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
 
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
@@ -513,16 +528,17 @@ class FilterDialog(gtk.Dialog):
         self.vbox.pack_end(hbox, False, False)
 
     def run(self):
-        '''
+        """
         Implement a non-blocking dialog so the user can browse through
         the pigeons while seeing the filters.
-        '''
+        """
 
         self.connect('response', self.on_dialog_response)
         self.show_all()
 
     def on_dialog_response(self, dialog, response_id):
-        if response_id == gtk.RESPONSE_CLOSE or response_id == gtk.RESPONSE_DELETE_EVENT:
+        if response_id == gtk.RESPONSE_CLOSE or \
+           response_id == gtk.RESPONSE_DELETE_EVENT:
             self.clear_filters()
             dialog.destroy()
 
@@ -576,7 +592,8 @@ class FilterDialog(gtk.Dialog):
         spinbutton = gtk.SpinButton(adj, 4)
         if lowest_text:
             spinbutton.set_text(lowest_text)
-            spinbutton.connect('changed', self.on_spinbutton_changed, lowest, lowest_text)
+            spinbutton.connect('changed', self.on_spinbutton_changed, lowest,
+                               lowest_text)
 
         return self.__add_filter(spinbutton, label), spinbutton
 
@@ -584,7 +601,8 @@ class FilterDialog(gtk.Dialog):
 class MedicationRemoveDialog(gtk.Dialog):
     def __init__(self, parent, multiple=False):
         gtk.Dialog.__init__(self, '', parent, gtk.DIALOG_DESTROY_WITH_PARENT,
-                            (gtk.STOCK_NO, gtk.RESPONSE_NO, gtk.STOCK_YES, gtk.RESPONSE_YES))
+                            (gtk.STOCK_NO, gtk.RESPONSE_NO,
+                             gtk.STOCK_YES, gtk.RESPONSE_YES))
 
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
         self.set_resizable(False)
@@ -610,5 +628,4 @@ class MedicationRemoveDialog(gtk.Dialog):
         hbox.pack_start(vbox, False, False, 12)
         self.vbox.pack_start(hbox, False, False)
         self.vbox.show_all()
-
 

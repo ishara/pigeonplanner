@@ -17,6 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Provides classes for our configuration
+"""
 
 import os
 import time
@@ -29,17 +32,17 @@ import const
 
 class Configuration:
     def __init__(self):
-        '''
+        """
         Initialisation.
-        '''
+        """
 
         self.sections = []
         self.__defineConfiguration()
 
     def __defineConfiguration(self):
-        '''
+        """
         Adds all the wanted sections and options.
-        '''
+        """
 
         self.__addSection('Options')
         self.__addOption('Options', 'theme', 2)
@@ -84,49 +87,49 @@ class Configuration:
         self.__addOption('Printing', 'resDate', 'True')
 
     def __addSection(self, name):
-        '''
+        """
         Add a section.
 
         @param name The name of the section.
-        '''
+        """
 
         section = Section(name)
         self.sections.append(section)
 
     def __addOption(self, section, name, default):
-        '''
+        """
         Add an option.
 
         @param section The name of the section the option belongs to.
-        @param name The name of the option, this is the 'key' ($name = $defaultvalue).
-        '''
+        @param name The name of the option, this is the 'key'
+        """
 
         option = Option(name, default)
         section = self.findSection(section)
         section.addOption(option)
 
     def findSection(self, name):
-        '''
+        """
         Returns the section object for the section with the given name.
-        '''
+        """
 
         for section in self.sections:
             if section.name == name:
                 return section
 
     def getConfiguration(self):
-        '''
+        """
         Returns a list of Sections, each containing its Options.
-        '''
+        """
 
         return self.sections
 
 class ConfigurationParser(ConfigParser.ConfigParser):
     def __init__(self):
-        '''
-        Initialises the variables, copies new (default) configuration file if it does not
-        exist and reads the configuration file.
-        '''
+        """
+        Initialises the variables, copies new (default) configuration file
+        if it does not exist and reads the configuration file.
+        """
 
         ConfigParser.ConfigParser.__init__(self)
 
@@ -140,21 +143,23 @@ class ConfigurationParser(ConfigParser.ConfigParser):
         ConfigParser.ConfigParser.read(self, self.prefFile)
 
     def generateDefaultFile(self):
-        '''
-        Creates the default configurationfile string based on the known Section's and Option's.
-        '''
+        """
+        Creates the default configurationfile string based on the known
+        Section's and Option's.
+        """
 
         self.defaultFile = "#Pigeon Planner configuration file"
         for section in self.sections:
             self.defaultFile += "\n\n"
             self.defaultFile += "[%s]" % section.name
             for option in section.options:
-                self.defaultFile += "\n%s = %s" % (option.name, option.defaultValue)
+                self.defaultFile += "\n%s = %s" % (option.name,
+                                                   option.defaultValue)
 
     def generateNewFile(self, valueDic):
-        '''
+        """
         Creates a new configuration file based on the given dic.
-        '''
+        """
 
         self.newFile = "#Pigeon Planner configuration file"
         for section, values in valueDic.items():
@@ -164,12 +169,12 @@ class ConfigurationParser(ConfigParser.ConfigParser):
                 self.newFile += "\n%s = %s" % (option, value)
 
     def copyNew(self, new=False, default=False):
-        '''
+        """
         Copies a default configuration file if it does not exist yet.
 
         @param new: Should we write a new file?
         @param default: Should we write a default file?
-        '''
+        """
 
         fileToWrite = None
 
@@ -187,13 +192,13 @@ class ConfigurationParser(ConfigParser.ConfigParser):
             file.close()
 
     def set_option(self, section, option, value):
-        '''
+        """
         Set a single option to the configuration file
 
         @param section: The section of the option
         @param option: The option to change
         @param value: The value for the option
-        '''
+        """
 
         ConfigParser.ConfigParser.set(self, section, option, value)
 
@@ -202,14 +207,14 @@ class ConfigurationParser(ConfigParser.ConfigParser):
         file.close()
 
     def get(self, section, option):
-        '''
+        """
         Overrides the 'get' method from the standard ConfigParser.ConfigParser.
         This one is safer as it uses a default value in case of errors.
         
         @param section The section of the configuration file.
         @param option The option you want the value of.
-        @return The value of the option, or the default value in case of an error.
-        '''
+        @return The value of the option, or the default value in case of error.
+        """
 
         default=None
         for sectionItem in self.sections:
@@ -230,40 +235,50 @@ class ConfigurationParser(ConfigParser.ConfigParser):
                 raise OptionEmptyError
             return value
         except ConfigParser.NoOptionError:
-            logger.warning("The '%(option)s' option is not set in the '%(section)s' section of the configuration file, using the default '%(default)s'." % el)
+            logger.warning("The '%(option)s' option is not set in the \
+                           '%(section)s' section of the configuration file, \
+                           using the default '%(default)s'." % el)
             return default
         except OptionEmptyError:
-            logger.warning("The value of the '%(option)s' option in the '%(section)s' section of the configuration file is empty, using the default '%(default)s'." % el)
+            logger.warning("The value of the '%(option)s' option in the \
+                           '%(section)s' section of the configuration file \
+                           is empty, using the default '%(default)s'." % el)
             return default
         except ConfigParser.NoSectionError:
-            logger.warning("There is no section '%(section)s' in the configuration file; an error occured parsing its option '%(option)s', using the default '%(default)s'." % el)
+            logger.warning("There is no section '%(section)s' in the \
+                           configuration file; an error occured parsing its \
+                           option '%(option)s', using the default \
+                           '%(default)s'." % el)
             return default
         except:
-            logger.error("There went something wrong parsing the '%(option)s' option in the '%(section)s' section of the configuration file, using the default '%(default)s'." % el)
+            logger.error("There went something wrong parsing the '%(option)s' \
+                         option in the '%(section)s' section of the \
+                         configuration file, using the default \
+                         '%(default)s'." % el)
             return default
 
 class OptionEmptyError(Exception):
-    '''
+    """
     An exception to raise if the value of an option is equal to "".
-    '''
+    """
     def __init__(self):
         Exception.__init__(self)
 
 class Section:
     def __init__(self, name, options=None):
-        '''
+        """
         Initialisation.
 
         @param name The name of the section.
-        '''
+        """
 
         self.name = name
         self.options = options
 
     def addOption(self, option):
-        '''
+        """
         Adds the Option to this Section.
-        '''
+        """
 
         if not self.options:
             self.options = []
@@ -271,12 +286,12 @@ class Section:
 
 class Option:
     def __init__(self, name, defaultValue):
-        '''
+        """
         Initialisation.
 
         @param name The name of the option.
         @param defaultValue The default value of the option.
-        '''
+        """
 
         self.name = name
         self.defaultValue = defaultValue

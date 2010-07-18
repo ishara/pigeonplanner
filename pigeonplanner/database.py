@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+"""
+Provides access to the database
+"""
+
 
 import sys
 import os.path
@@ -23,6 +27,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import const
+import common
 
 
 class DatabaseOperations:
@@ -140,13 +145,14 @@ class DatabaseOperations:
         if create_tables:
             conn, cursor = self.db_connect()
             for table_name, sql in self.SCHEMA.items():
-                cursor.execute('CREATE TABLE IF NOT EXISTS %s %s' % (table_name, sql))
+                cursor.execute('CREATE TABLE IF NOT EXISTS %s %s' 
+                                                    %(table_name, sql))
                 conn.commit()
             conn.close()
 
     def db_connect(self):
         try:
-            conn = sqlite3.connect(const.DATABASE.decode(const.ENCODING).encode("utf-8"))
+            conn = sqlite3.connect(common.encode_string(const.DATABASE))
         except Exception, e:
             import logdialog
 
@@ -154,10 +160,13 @@ class DatabaseOperations:
             logger.critical(e)
             logger.debug("Databasedir: %s" %const.PREFDIR)
             logger.debug("Database: %s" %const.DATABASE)
-            logger.debug("Databasedir exists: %s" %os.path.exists(const.PREFDIR))
+            logger.debug("Databasedir exists: %s"
+                                        %os.path.exists(const.PREFDIR))
             logger.debug("Database exists: %s" %os.path.exists(const.DATABASE))
-            logger.debug("Databasedir writable: %s" %os.access(const.PREFDIR, os.W_OK))
-            logger.debug("Database writable: %s" %os.access(const.DATABASE, os.W_OK))
+            logger.debug("Databasedir writable: %s"
+                                        %os.access(const.PREFDIR, os.W_OK))
+            logger.debug("Database writable: %s"
+                                        %os.access(const.DATABASE, os.W_OK))
             logger.debug("Encoding: %s" %sys.getfilesystemencoding())
 
             logdialog.LogDialog()
@@ -190,15 +199,18 @@ class DatabaseOperations:
 
     def add_table_from_schema(self, table):
         conn, cursor = self.db_connect()
-        cursor.execute("CREATE TABLE IF NOT EXISTS %s %s" %(table, self.SCHEMA[table]))
+        cursor.execute("CREATE TABLE IF NOT EXISTS %s %s"
+                                        %(table, self.SCHEMA[table]))
         conn.commit()
         conn.close()
 
     def change_column_name(self, table):
         conn, cursor = self.db_connect()
-        cursor.execute("CREATE TEMP TABLE tmp_%s AS SELECT * FROM %s" %(table, table))
+        cursor.execute("CREATE TEMP TABLE tmp_%s AS SELECT * FROM %s"
+                                        %(table, table))
         cursor.execute("DROP TABLE %s" %table)
-        cursor.execute("CREATE TABLE IF NOT EXISTS %s %s" %(table, self.SCHEMA[table]))
+        cursor.execute("CREATE TABLE IF NOT EXISTS %s %s"
+                                        %(table, self.SCHEMA[table]))
         cursor.execute("INSERT INTO %s SELECT * FROM tmp_%s" %(table, table))
         # No need to drop the temporary table. From the SQLite docs:
         # If the "TEMP" or "TEMPORARY" keyword occurs (...) the table is only
@@ -218,7 +230,9 @@ class DatabaseOperations:
     def insert_pigeon(self, data):
         conn, cursor = self.db_connect()
         try:
-            cursor.execute('INSERT INTO Pigeons VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+            cursor.execute('INSERT INTO Pigeons VALUES (null, ?, ?, ?, ?, \
+                           ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, \
+                           ?)', data)
         except sqlite3.IntegrityError:
             pass
         conn.commit()
@@ -232,14 +246,20 @@ class DatabaseOperations:
 
     def update_pigeon(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Pigeons SET pindex=?, band=?, year=?, sex=?, show=?, active=?, colour=?, name=?, strain=?, loft=?, image=?, sire=?, yearsire=?, dam=?, yeardam=?, extra1=?, extra2=?, extra3=?, extra4=?, extra5=?, extra6=? WHERE pindex=?', data)
+        cursor.execute('UPDATE Pigeons SET pindex=?, band=?, year=?, sex=?, \
+                        show=?, active=?, colour=?, name=?, strain=?, loft=?, \
+                        image=?, sire=?, yearsire=?, dam=?, yeardam=?, \
+                        extra1=?, extra2=?, extra3=?, extra4=?, extra5=?, \
+                        extra6=? WHERE pindex=?', data)
         conn.commit()
         conn.close()
 
     def update_pedigree_pigeon(self, data):
         conn, cursor = self.db_connect()
         try:
-            cursor.execute('UPDATE Pigeons SET pindex=?, band=?, year=?, extra1=?, extra2=?, extra3=?, extra4=?, extra5=?, extra6=? WHERE pindex=?', data)
+            cursor.execute('UPDATE Pigeons SET pindex=?, band=?, year=?, \
+                            extra1=?, extra2=?, extra3=?, extra4=?, extra5=?, \
+                            extra6=? WHERE pindex=?', data)
         except sqlite3.IntegrityError:
             pass
 
@@ -248,19 +268,22 @@ class DatabaseOperations:
 
     def update_pigeon_sire(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Pigeons SET sire=?, yearsire=? WHERE pindex=?', data)
+        cursor.execute('UPDATE Pigeons SET sire=?, yearsire=? WHERE pindex=?',
+                        data)
         conn.commit()
         conn.close()
 
     def update_pigeon_dam(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Pigeons SET dam=?, yeardam=? WHERE pindex=?', data)
+        cursor.execute('UPDATE Pigeons SET dam=?, yeardam=? WHERE pindex=?',
+                        data)
         conn.commit()
         conn.close()
 
     def show_pigeon(self, band, value):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Pigeons SET show=? WHERE pindex=?', (value, band))
+        cursor.execute('UPDATE Pigeons SET show=? WHERE pindex=?',
+                       (value, band))
         conn.commit()
         conn.close()
 
@@ -274,7 +297,8 @@ class DatabaseOperations:
     def get_pigeon(self, band):
         conn, cursor = self.db_connect()
         data = None
-        for row in cursor.execute('SELECT * FROM Pigeons WHERE pindex=?', (band,)):
+        for row in cursor.execute('SELECT * FROM Pigeons WHERE pindex=?',
+                                  (band,)):
             data = row
 
         conn.close()
@@ -308,7 +332,8 @@ class DatabaseOperations:
 #### Results
     def insert_result(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('INSERT INTO Results VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+        cursor.execute('INSERT INTO Results VALUES (null, ?, ?, ?, ?, ?, ?, \
+                       ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
         conn.commit()
         rowid = cursor.lastrowid
         conn.close()
@@ -329,13 +354,17 @@ class DatabaseOperations:
 
     def update_result(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Results SET date=?, point=?, place=?, out=?, sector=?, type=?, category=?, wind=?, weather=?, put=?, back=?, ownplace=?, ownout=?, comment=? WHERE Resultkey=?', data)
+        cursor.execute('UPDATE Results SET date=?, point=?, place=?, out=?, \
+                       sector=?, type=?, category=?, wind=?, weather=?, \
+                       put=?, back=?, ownplace=?, ownout=?, comment=? WHERE \
+                       Resultkey=?', data)
         conn.commit()
         conn.close()
 
     def update_result_pindex(self, pindex, pindex_old):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Results SET pindex=? WHERE pindex=?', (pindex, pindex_old))
+        cursor.execute('UPDATE Results SET pindex=? WHERE pindex=?',
+                       (pindex, pindex_old))
         conn.commit()
         conn.close()
 
@@ -362,7 +391,11 @@ class DatabaseOperations:
 
     def has_result(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT COUNT(*) FROM Results WHERE pindex=? and date=? and point=? and place=? and out=? and sector=? and type=? and category=? and wind=? and weather=? and put=? and back=? and ownplace=? and ownout=? and comment=?', data)
+        cursor.execute('SELECT COUNT(*) FROM Results WHERE pindex=? and \
+                       date=? and point=? and place=? and out=? and sector=? \
+                       and type=? and category=? and wind=? and weather=? \
+                       and put=? and back=? and ownplace=? and ownout=? \
+                       and comment=?', data)
         data = [row[0] for row in cursor.fetchall() if row[0]]
         conn.close()
         if data:
@@ -372,7 +405,8 @@ class DatabaseOperations:
 
     def has_results(self, pindex):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT COUNT(*) FROM Results WHERE pindex=?', (pindex,))
+        cursor.execute('SELECT COUNT(*) FROM Results WHERE pindex=?',
+                       (pindex,))
         data = [row[0] for row in cursor.fetchall() if row[0]]
         conn.close()
         if data:
@@ -383,7 +417,8 @@ class DatabaseOperations:
 #### Medication
     def insert_medication(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('INSERT INTO Medication VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+        cursor.execute('INSERT INTO Medication VALUES (null, ?, ?, ?, ?, ?, \
+                       ?, ?, ?, ?)', data)
         conn.commit()
         conn.close()
 
@@ -395,7 +430,8 @@ class DatabaseOperations:
 
     def delete_medication_from_id_pindex(self, ID, pindex):
         conn, cursor = self.db_connect()
-        cursor.execute('DELETE FROM Medication WHERE medid=? AND pindex=?', (ID,pindex))
+        cursor.execute('DELETE FROM Medication WHERE medid=? AND pindex=?',
+                       (ID,pindex))
         conn.commit()
         conn.close()
 
@@ -407,13 +443,16 @@ class DatabaseOperations:
 
     def update_medication(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Medication SET date=?, description=?, doneby=?, medication=?, dosage=?, comment=?, vaccination=? WHERE medid=?', data)
+        cursor.execute('UPDATE Medication SET date=?, description=?, \
+                       doneby=?, medication=?, dosage=?, comment=?, \
+                       vaccination=? WHERE medid=?', data)
         conn.commit()
         conn.close()
 
     def update_medication_pindex(self, pindex, pindex_old):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Medication SET pindex=? WHERE pindex=?', (pindex, pindex_old))
+        cursor.execute('UPDATE Medication SET pindex=? WHERE pindex=?',
+                       (pindex, pindex_old))
         conn.commit()
         conn.close()
 
@@ -440,7 +479,8 @@ class DatabaseOperations:
 
     def has_medication(self, pindex):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT COUNT(*) FROM Medication WHERE pindex=?', (pindex,))
+        cursor.execute('SELECT COUNT(*) FROM Medication WHERE pindex=?',
+                       (pindex,))
         data = [row[0] for row in cursor.fetchall() if row[0]]
         conn.close()
         if data:
@@ -450,7 +490,8 @@ class DatabaseOperations:
 
     def count_medication_entries(self, medid):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT COUNT(*) FROM Medication WHERE medid=?', (medid,))
+        cursor.execute('SELECT COUNT(*) FROM Medication WHERE medid=?',
+                       (medid,))
         data = [row[0] for row in cursor.fetchall() if row[0]]
         conn.close()
         if data:
@@ -461,7 +502,8 @@ class DatabaseOperations:
 #### Events
     def insert_event(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('INSERT INTO Events VALUES (null, ?, ?, ?, ?, ?, ?)', data)
+        cursor.execute('INSERT INTO Events VALUES (null, ?, ?, ?, ?, ?, ?)',
+                       data)
         conn.commit()
         rowid = cursor.lastrowid
         conn.close()
@@ -476,7 +518,9 @@ class DatabaseOperations:
 
     def update_event(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Events SET date=?, description=?, comment=?, notify=?, interval=?, notifyday=? WHERE Eventskey=?', data)
+        cursor.execute('UPDATE Events SET date=?, description=?, comment=?, \
+                       notify=?, interval=?, notifyday=? WHERE Eventskey=?',
+                       data)
         conn.commit()
         conn.close()
 
@@ -489,14 +533,17 @@ class DatabaseOperations:
 
     def get_event_data(self, ID):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT comment, notify, interval FROM Events WHERE Eventskey=?', (ID,))
+        cursor.execute('SELECT comment, notify, interval FROM Events WHERE \
+                       Eventskey=?', (ID,))
         data = cursor.fetchone()
         conn.close()
         return data
 
     def get_notification(self, now):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT Eventskey, date, description FROM Events WHERE notifyday<=? AND notifyday!=0 ORDER BY date ASC', (now,))
+        cursor.execute('SELECT Eventskey, date, description FROM Events \
+                       WHERE notifyday<=? AND notifyday!=0 ORDER BY date ASC',
+                       (now,))
         data = cursor.fetchall()
         conn.close()
         return data
@@ -504,7 +551,8 @@ class DatabaseOperations:
 #### Addresses
     def insert_address(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('INSERT INTO Addresses VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)', data)
+        cursor.execute('INSERT INTO Addresses VALUES (null, ?, ?, ?, ?, ?, \
+                       ?, ?, ?, ?)', data)
         conn.commit()
         conn.close()
 
@@ -516,7 +564,9 @@ class DatabaseOperations:
 
     def update_address(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Addresses SET name=?, street=?, code=?, city=?, country=?, phone=?, email=?, comment=?, me=? WHERE name=?', data)
+        cursor.execute('UPDATE Addresses SET name=?, street=?, code=?, \
+                       city=?, country=?, phone=?, email=?, comment=?, \
+                       me=? WHERE name=?', data)
         conn.commit()
         conn.close()
 
@@ -637,7 +687,8 @@ class DatabaseOperations:
     def insert_racepoint(self, data):
         conn, cursor = self.db_connect()
         try:
-            cursor.execute('INSERT INTO Racepoints (Racepointkey, racepoint) VALUES (null, ?)', data)
+            cursor.execute('INSERT INTO Racepoints (Racepointkey, \
+                           racepoint) VALUES (null, ?)', data)
         except sqlite3.IntegrityError:
             pass
         conn.commit()
@@ -652,7 +703,8 @@ class DatabaseOperations:
 
     def delete_racepoint(self, racepoint):
         conn, cursor = self.db_connect()
-        cursor.execute('DELETE FROM Racepoints WHERE racepoint=?', (racepoint,))
+        cursor.execute('DELETE FROM Racepoints WHERE racepoint=?',
+                       (racepoint,))
         conn.commit()
         conn.close()
 
@@ -660,7 +712,8 @@ class DatabaseOperations:
     def insert_weather(self, data):
         conn, cursor = self.db_connect()
         try:
-            cursor.execute('INSERT INTO Weather (Weatherkey, weather) VALUES (null, ?)', data)
+            cursor.execute('INSERT INTO Weather (Weatherkey, \
+                           weather) VALUES (null, ?)', data)
         except sqlite3.IntegrityError:
             pass
         conn.commit()
@@ -683,7 +736,8 @@ class DatabaseOperations:
     def insert_wind(self, data):
         conn, cursor = self.db_connect()
         try:
-            cursor.execute('INSERT INTO Wind (Windkey, wind) VALUES (null, ?)', data)
+            cursor.execute('INSERT INTO Wind (Windkey, wind) VALUES \
+                           (null, ?)', data)
         except sqlite3.IntegrityError:
             pass
         conn.commit()
@@ -767,13 +821,15 @@ class DatabaseOperations:
 
     def update_sold(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Sold SET person=?, date=?, info=? WHERE pindex=?', data)
+        cursor.execute('UPDATE Sold SET person=?, date=?, info=? WHERE \
+                       pindex=?', data)
         conn.commit()
         conn.close()
 
     def get_sold_data(self, pindex):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT person, date, info FROM Sold WHERE pindex=?', (pindex,))
+        cursor.execute('SELECT person, date, info FROM Sold WHERE \
+                       pindex=?', (pindex,))
         data = cursor.fetchone()
         conn.close()
         return data
@@ -796,13 +852,15 @@ class DatabaseOperations:
 
     def update_lost(self, data):
         conn, cursor = self.db_connect()
-        cursor.execute('UPDATE Lost SET racepoint=?, date=?, info=? WHERE pindex=?', data)
+        cursor.execute('UPDATE Lost SET racepoint=?, date=?, info=? \
+                       WHERE pindex=?', data)
         conn.commit()
         conn.close()
 
     def get_lost_data(self, pindex):
         conn, cursor = self.db_connect()
-        cursor.execute('SELECT racepoint, date, info FROM Lost WHERE pindex=?', (pindex,))
+        cursor.execute('SELECT racepoint, date, info FROM Lost WHERE \
+                       pindex=?', (pindex,))
         data = cursor.fetchone()
         conn.close()
         return data

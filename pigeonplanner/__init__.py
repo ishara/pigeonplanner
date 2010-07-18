@@ -19,19 +19,21 @@ name = "Pigeon Planner"
 
 versionbase = "0.8.9"
 
-version = "0.8.9.bzr547"
+version = "0.8.9.bzr548"
 
 copyright = "(C)opyright 2009-2010 Timo Vanwynsberghe"
 
 authors = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
 
-artists = ["Timo Vanwynsberghe <timovwb@gmail.com>", "http://www.openclipart.org"]
+artists = ["Timo Vanwynsberghe <timovwb@gmail.com>",
+           "http://www.openclipart.org"]
 
 website = "http://www.pigeonplanner.com"
 
 description = "Organise and manage your pigeons"
 
-license = """Pigeon Planner is free software: you can redistribute it and/or modify
+license = """
+Pigeon Planner is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
