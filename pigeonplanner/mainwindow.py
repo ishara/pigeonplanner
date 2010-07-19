@@ -682,6 +682,16 @@ class MainWindow(GtkbuilderApp):
     def on_fccancel_clicked(self, widget):
         self.filedialog.hide()
 
+    def on_filedialog_update_preview(self, widget):
+        filename = self.filedialog.get_preview_filename()
+        try:
+          pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128, 128)
+          self.filedialog.get_preview_widget().set_from_pixbuf(pixbuf)
+          have_preview = True
+        except:
+          have_preview = False
+        self.filedialog.set_preview_widget_active(have_preview)
+
     # Relatives callbacks
     def on_tvBrothers_press(self, widget, event):
         self.treeview_menu(self.selBrothers, event)
@@ -1964,42 +1974,9 @@ class MainWindow(GtkbuilderApp):
         fileFilter.add_pixbuf_formats()
         self.filedialog.add_filter(fileFilter)
 
-        self.file_previewbox = gtk.VBox()
-        self.file_previewbox.set_size_request(200, 200)
-        self.file_preview = gtk.Image()
-        self.file_previewlabel = gtk.Label()
-        self.file_previewbox.pack_start(self.file_preview)
-        self.file_previewbox.pack_start(self.file_previewlabel)
-        self.filedialog.set_preview_widget(self.file_previewbox)
-        self.file_previewbox.show_all()
-
+        preview = gtk.Image()
+        self.filedialog.set_preview_widget(preview)
         self.filedialog.show()
-
-    def on_filedialog_selection(self, widget):
-        """
-        Update the image preview in the filechooser dialog
-        """
-
-        preview_file = self.filedialog.get_preview_filename()
-        if preview_file and os.path.isfile(preview_file):
-            self.filedialog.set_preview_widget_active(True)
-            pixbuf = gtk.gdk.pixbuf_new_from_file(preview_file)
-
-            new_width = width = pixbuf.get_width()
-            new_height = height = pixbuf.get_height()
-            max_width = 200
-            max_height = 200
-            if new_width > max_width or new_height > max_height:
-                new_width = max_width
-                new_height = max_width*height/width
-                if new_height > max_height:
-                    new_height = max_height
-                    new_width = max_height*width/height
-            pixbuf = pixbuf.scale_simple(new_width, new_height,
-                                         gtk.gdk.INTERP_TILES)
-            self.file_preview.set_from_pixbuf(pixbuf)
-        else:
-            self.filedialog.set_preview_widget_active(False)
 
     def url_hook(self, about, link):
         if const.WINDOWS:
