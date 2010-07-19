@@ -180,7 +180,7 @@ class MainWindow(GtkbuilderApp):
             attr.set_tooltip_text(data[1])
 
         if self.options.optionList.runs == 10:
-            if widgets.message_dialog('question', messages.MSG_MAKE_DONATION,
+            if widgets.message_dialog(const.QUESTION, messages.MSG_MAKE_DONATION,
                                       self.mainwindow):
                 webbrowser.open(const.WEBSITE)
 
@@ -204,7 +204,8 @@ class MainWindow(GtkbuilderApp):
             description = events[0][2]
             if len(description) > 20:
                 description = description[:24]+"..."
-            if widgets.message_dialog('question', messages.MSG_EVENT_NOTIFY,
+            if widgets.message_dialog(const.QUESTION,
+                                      messages.MSG_EVENT_NOTIFY,
                                       self.mainwindow, description):
                 tw = ToolsWindow(self, events[0][0])
                 tw.toolsdialog.set_keep_above(True)
@@ -215,10 +216,12 @@ class MainWindow(GtkbuilderApp):
             daysInSeconds = self.options.optionList.interval * 24 * 60 * 60
             if time.time() - self.options.optionList.last >= daysInSeconds:
                 if backup.make_backup(self.options.optionList.location):
-                    widgets.message_dialog('info', messages.MSG_BACKUP_SUCCES,
+                    widgets.message_dialog(const.INFO,
+                                           messages.MSG_BACKUP_SUCCES,
                                            self.mainwindow)
                 else:
-                    widgets.message_dialog('info', messages.MSG_BACKUP_FAILED,
+                    widgets.message_dialog(const.INFO,
+                                           messages.MSG_BACKUP_FAILED,
                                            self.mainwindow)
 
                 self.options.set_option('Backup', 'last', time.time())
@@ -246,7 +249,7 @@ class MainWindow(GtkbuilderApp):
                 logger.info("End: Already running the latest version")
 
     def update_dialog(self):
-        if widgets.message_dialog('question', messages.MSG_UPDATE_NOW,
+        if widgets.message_dialog(const.QUESTION, messages.MSG_UPDATE_NOW,
                                   self.mainwindow):
             webbrowser.open(const.DOWNLOADURL)
 
@@ -520,7 +523,7 @@ class MainWindow(GtkbuilderApp):
             return
 
         if not rangefrom.isdigit() or not rangeto.isdigit():
-            widgets.message_dialog('error', messages.MSG_INVALID_RANGE,
+            widgets.message_dialog(const.ERROR, messages.MSG_INVALID_RANGE,
                                    self.mainwindow)
             return
 
@@ -530,7 +533,7 @@ class MainWindow(GtkbuilderApp):
             pindex = band + rangeyear
 
             if self.database.has_pigeon(pindex):
-                if not widgets.message_dialog('warning',
+                if not widgets.message_dialog(const.WARNING,
                                               messages.MSG_OVERWRITE_PIGEON,
                                               self.mainwindow):
                     continue
@@ -671,7 +674,7 @@ class MainWindow(GtkbuilderApp):
             self.imagePigeon1.set_from_pixbuf(pixbuf)
             self.labelImgPath.set_text(filename)
         except:
-            widgets.message_dialog('error', messages.MSG_INVALID_IMAGE,
+            widgets.message_dialog(const.ERROR, messages.MSG_INVALID_IMAGE,
                                    self.mainwindow)
 
         self.filedialog.hide()
@@ -732,7 +735,8 @@ class MainWindow(GtkbuilderApp):
         model, tIter = self.selResults.get_selected()
         pindex, ring, year = self.get_main_ring()
 
-        if not widgets.message_dialog('question', messages.MSG_REMOVE_RESULT,
+        if not widgets.message_dialog(const.QUESTION,
+                                      messages.MSG_REMOVE_RESULT,
                                       self.mainwindow):
             return
 
@@ -787,7 +791,8 @@ class MainWindow(GtkbuilderApp):
                 weather, '', '', 0, 0, comment)
         if self.resultDialogMode == const.ADD:
             if self.database.has_result((pindex,)+data):
-                widgets.message_dialog('error', messages.MSG_RESULT_EXISTS,
+                widgets.message_dialog(const.ERROR,
+                                       messages.MSG_RESULT_EXISTS,
                                        self.mainwindow)
                 return
 
@@ -1847,12 +1852,12 @@ class MainWindow(GtkbuilderApp):
 
         if self.database.has_pigeon(pindex):
             if self.parser.pigeons[pindex].show == 1:
-                if not widgets.message_dialog('warning',
+                if not widgets.message_dialog(const.WARNING,
                                               messages.MSG_OVERWRITE_PIGEON,
                                               self.mainwindow):
                     return
             else:
-                if not widgets.message_dialog('warning',
+                if not widgets.message_dialog(const.WARNING,
                                               messages.MSG_SHOW_PIGEON,
                                               self.mainwindow):
                     return
@@ -2101,14 +2106,14 @@ class MainWindow(GtkbuilderApp):
         comment = self.entryComment.get_text()
 
         if not date or not point or not place or not out:
-            widgets.message_dialog('error', messages.MSG_EMPTY_DATA,
+            widgets.message_dialog(const.ERROR, messages.MSG_EMPTY_DATA,
                                    self.resultdialog)
             return False
 
         try:
             datetime.datetime.strptime(date, const.DATE_FORMAT)
         except ValueError:
-            widgets.message_dialog('error', messages.MSG_INVALID_FORMAT,
+            widgets.message_dialog(const.ERROR, messages.MSG_INVALID_FORMAT,
                                    self.resultdialog)
             return False
 

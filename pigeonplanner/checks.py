@@ -20,6 +20,7 @@ Provides functions to check band and year entries
 """
 
 
+import const
 import widgets
 import messages
 
@@ -60,15 +61,17 @@ def check_ring_entry(parent, inputRing, inputYear):
     """
 
     if not inputRing or not inputYear:
-        widgets.message_dialog('error', messages.MSG_EMPTY_FIELDS, parent)
+        widgets.message_dialog(const.ERROR, messages.MSG_EMPTY_FIELDS, parent)
         return False
 
     if not inputYear.isdigit():
-        widgets.message_dialog('error', messages.MSG_INVALID_NUMBER, parent)
+        widgets.message_dialog(const.ERROR, messages.MSG_INVALID_NUMBER,
+                               parent)
         return False
 
     if not len(inputYear) == 4:
-        widgets.message_dialog('error', messages.MSG_INVALID_LENGTH, parent)
+        widgets.message_dialog(const.ERROR, messages.MSG_INVALID_LENGTH,
+                               parent)
         return False
 
     return True

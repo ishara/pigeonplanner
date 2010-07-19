@@ -156,7 +156,7 @@ class MailDialog(GtkbuilderApp):
 
     def on_send_clicked(self, widget):
         if not self.entry_to.get_text() or not self.entry_mail.get_text():
-            widgets.message_dialog('error', messages.MSG_NEED_EMAIL,
+            widgets.message_dialog(const.ERROR, messages.MSG_NEED_EMAIL,
                                    self.maildialog)
             return
 

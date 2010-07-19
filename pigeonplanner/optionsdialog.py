@@ -178,7 +178,8 @@ class OptionsDialog(GtkbuilderApp):
         widget.set_text('%s %s' % (value, dstring))
 
     def on_default_clicked(self, widget):
-        if widgets.message_dialog('warning', messages.MSG_DEFAULT_OPTIONS,
+        if widgets.message_dialog(const.WARNING,
+                                  messages.MSG_DEFAULT_OPTIONS,
                                   self.optionsdialog):
             self.opt.write_default()
             self.opt = options.GetOptions()
@@ -243,7 +244,7 @@ class OptionsDialog(GtkbuilderApp):
         if self.languagelookup[self.cbLang.get_active()][1] != \
            self.opt.optionList.language or const.WINDOWS and \
            self.cbThemes.get_active() != self.opt.optionList.theme:
-            widgets.message_dialog('info', messages.MSG_RESTART_APP,
+            widgets.message_dialog(const.INFO, messages.MSG_RESTART_APP,
                                    self.optionsdialog)
 
         self.main.set_treeview_columns()

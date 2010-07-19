@@ -119,3 +119,8 @@ DATE_FORMAT = '%Y-%m-%d'
  ACTIVE,
  SOLD,
  LOST) = range(4)
+
+(ERROR,
+ WARNING,
+ QUESTION,
+ INFO) = range(4)

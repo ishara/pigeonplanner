@@ -508,7 +508,7 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
                     return
 
                 if self.pindex in self.main.parser.pigeons:
-                    if widgets.message_dialog('warning',
+                    if widgets.message_dialog(const.WARNING,
                                               messages.MSG_SHOW_PIGEON,
                                               self.main.mainwindow):
                         self.main.database.show_pigeon(self.pindex, 1)
@@ -516,7 +516,7 @@ class PedigreeBox_cairo(gtk.DrawingArea, PedigreeEditBox):
                         self.main.fill_treeview()
                         return
                 else:
-                    if widgets.message_dialog('question',
+                    if widgets.message_dialog(const.QUESTION,
                                               messages.MSG_ADD_PIGEON,
                                               self.main.mainwindow):
                         self.main.menuadd_activate(None)

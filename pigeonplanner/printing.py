@@ -353,13 +353,15 @@ class BasePrinting:
                 response = print_.run(action, self.parent)
             except gobject.GError, e:
                 logger.error("Error in print operation: %s" %e)
-                widgets.message_dialog('error', messages.MSG_PRINTOP_ERROR,
+                widgets.message_dialog(const.ERROR,
+                                       messages.MSG_PRINTOP_ERROR,
                                        self.parent)
             else:
                 if response == gtk.PRINT_OPERATION_RESULT_ERROR:
                     print_error = print_.get_error()
                     logger.error("Error printing: %s" %print_error)
-                    widgets.message_dialog('error', messages.MSG_PRINT_ERROR)
+                    widgets.message_dialog(const.ERROR,
+                                           messages.MSG_PRINT_ERROR)
                 elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
                     settings = print_.get_print_settings()
 

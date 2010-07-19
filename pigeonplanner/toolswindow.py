@@ -402,7 +402,7 @@ class ToolsWindow(GtkbuilderApp):
         dataset = self.cbdata.get_active_text()
         item = self.cbitems.get_active_text()
 
-        if widgets.message_dialog('question', messages.MSG_REMOVE_ITEM,
+        if widgets.message_dialog(const.QUESTION, messages.MSG_REMOVE_ITEM,
                                   self.toolsdialog,
                                   {'item': item, 'dataset': dataset}):
             index = self.cbitems.get_active()
@@ -525,14 +525,15 @@ class ToolsWindow(GtkbuilderApp):
         data = self.get_entry_data()
 
         if not data[0]:
-            widgets.message_dialog('error', messages.MSG_NAME_EMPTY,
+            widgets.message_dialog(const.ERROR, messages.MSG_NAME_EMPTY,
                                    self.toolsdialog)
             return
 
         if self.admode == const.ADD:
             for ad in self.main.database.get_all_addresses():
                 if data[0] == ad[1]:
-                    widgets.message_dialog('error', messages.MSG_NAME_EXISTS,
+                    widgets.message_dialog(const.ERROR,
+                                           messages.MSG_NAME_EXISTS,
                                            self.toolsdialog)
                     return
 
@@ -594,7 +595,8 @@ class ToolsWindow(GtkbuilderApp):
             self.toolsdialog.destroy()
 
     def on_adremove_clicked(self, widget):
-        if not widgets.message_dialog('question', messages.MSG_REMOVE_ADDRESS,
+        if not widgets.message_dialog(const.QUESTION,
+                                      messages.MSG_REMOVE_ADDRESS,
                                       self.toolsdialog, self.get_name()):
             return
 
@@ -673,11 +675,11 @@ class ToolsWindow(GtkbuilderApp):
         self.toolsdialog.set_sensitive(False)
         self.main.database.optimize_db()
         self.toolsdialog.set_sensitive(True)
-        widgets.message_dialog('info', messages.MSG_OPTIMIZE_FINISH,
+        widgets.message_dialog(const.INFO, messages.MSG_OPTIMIZE_FINISH,
                                self.toolsdialog)
 
     def on_dbremove_clicked(self, widget):
-        if widgets.message_dialog('warning', messages.MSG_REMOVE_DATABASE,
+        if widgets.message_dialog(const.WARNING, messages.MSG_REMOVE_DATABASE,
                                   self.toolsdialog):
             logger.debug("Start deleting the database")
             try:
@@ -687,7 +689,7 @@ class ToolsWindow(GtkbuilderApp):
             except Exception, msg:
                 logger.error("Deleting database: %s" % msg)
             else:
-                widgets.message_dialog('info', messages.MSG_RMDB_FINISH,
+                widgets.message_dialog(const.INFO, messages.MSG_RMDB_FINISH,
                                        self.toolsdialog)
                 self.on_close_dialog()
                 self.main.quit_program(bckp=False)
@@ -697,20 +699,20 @@ class ToolsWindow(GtkbuilderApp):
         folder = self.fcButtonCreate.get_current_folder()
         if folder:
             if backup.make_backup(folder):
-                widgets.message_dialog('info', messages.MSG_BACKUP_SUCCES,
+                widgets.message_dialog(const.INFO, messages.MSG_BACKUP_SUCCES,
                                        self.main.mainwindow)
             else:
-                widgets.message_dialog('info', messages.MSG_BACKUP_FAILED,
+                widgets.message_dialog(const.INFO, messages.MSG_BACKUP_FAILED,
                                        self.main.mainwindow)
 
     def on_restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             if backup.restore_backup(zipfile):
-                widgets.message_dialog('info', messages.MSG_RESTORE_SUCCES,
+                widgets.message_dialog(const.INFO, messages.MSG_RESTORE_SUCCES,
                                        self.main.mainwindow)
             else:
-                widgets.message_dialog('info', messages.MSG_RESTORE_FAILED,
+                widgets.message_dialog(const.INFO, messages.MSG_RESTORE_FAILED,
                                        self.main.mainwindow)
 
     # Update

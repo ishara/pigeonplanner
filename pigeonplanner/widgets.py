@@ -191,17 +191,17 @@ def message_dialog(msgtype, data, parent=None, extra=None):
     text = data[1]
     title = data[2]
 
-    if msgtype == 'error':
+    if msgtype == const.ERROR:
         msgtype = gtk.MESSAGE_ERROR
         buttons = gtk.BUTTONS_OK
-    elif msgtype == 'warning':
+    elif msgtype == const.WARNING:
         msgtype = gtk.MESSAGE_WARNING
         buttons = gtk.BUTTONS_YES_NO
-    elif msgtype == 'question':
+    elif msgtype == const.QUESTION:
         msgtype = gtk.MESSAGE_QUESTION
         buttons = gtk.BUTTONS_YES_NO
         title = head + " - Pigeon Planner"
-    elif msgtype == 'info':
+    elif msgtype == const.INFO:
         msgtype = gtk.MESSAGE_INFO
         buttons = gtk.BUTTONS_OK
 
@@ -435,18 +435,18 @@ class BackupDialog(gtk.Dialog):
         if folder:
             success = backup.make_backup(folder)
             if success:
-                message_dialog('info', messages.MSG_BACKUP_SUCCES, self.par)
+                message_dialog(const.INFO, messages.MSG_BACKUP_SUCCES, self.par)
             else:
-                message_dialog('info', messages.MSG_BACKUP_FAILED, self.par)
+                message_dialog(const.INFO, messages.MSG_BACKUP_FAILED, self.par)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             success = backup.restore_backup(zipfile)
             if success:
-                message_dialog('info', messages.MSG_RESTORE_SUCCES, self.par)
+                message_dialog(const.INFO, messages.MSG_RESTORE_SUCCES, self.par)
             else:
-                message_dialog('info', messages.MSG_RESTORE_FAILED, self.par)
+                message_dialog(const.INFO, messages.MSG_RESTORE_FAILED, self.par)
 
 class EditPedigreeDialog(gtk.Dialog):
     def __init__(self, parent):

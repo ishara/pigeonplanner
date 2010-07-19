@@ -128,7 +128,8 @@ def check_userinfo(parent, main, name):
     """
 
     if name == '':
-        if widgets.message_dialog('question', messages.MSG_NO_INFO, parent):
+        if widgets.message_dialog(const.QUESTION, messages.MSG_NO_INFO,
+                                  parent):
             tw = ToolsWindow(main)
             tw.toolsdialog.set_keep_above(True)
             tw.treeview.set_cursor(3)
