@@ -23,14 +23,13 @@ Functions for some common tasks
 import random
 import urllib2
 import os.path
+import webbrowser
 
 import gtk
 import gobject
 
-import const
-import widgets
-import messages
-from toolswindow import ToolsWindow
+from pigeonplanner import const
+from pigeonplanner import messages
 
 
 def create_stock_button(icons):
@@ -118,28 +117,6 @@ def get_own_address(database):
         userinfo['comment'] = info[8]
     return userinfo
 
-def check_userinfo(parent, main, name):
-    """
-    Check if the user has entered his personal info
-
-    @param parent: A parent window
-    @param main: The main instance
-    @param name: The name of the user
-    """
-
-    if name == '':
-        if widgets.message_dialog(const.QUESTION, messages.MSG_NO_INFO,
-                                  parent):
-            tw = ToolsWindow(main)
-            tw.toolsdialog.set_keep_above(True)
-            tw.treeview.set_cursor(3)
-            tw.on_adadd_clicked(None, pedigree_call=True)
-            tw.chkme.set_active(True)
-
-            return False
-
-    return True
-
 def get_pindex_from_band(band, year):
     """
     Create the pindex from the pigeons band and year
@@ -190,6 +167,42 @@ def get_random_number(value):
     """
 
     return ''.join([random.choice('0123456789') for x in range(value)])
+
+def image_to_thumb(img_path):
+    """
+    Convert an image to a thumbnail
+
+    @param img_path: the full path to the image
+    """
+
+    pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img_path, 200, 200)
+    pixbuf.save(os.path.join(const.THUMBDIR,
+                         "%s.png") %get_image_name(img_path), 'png')
+
+def get_thumb_path(image):
+    """
+    Get the thumbnail from an image
+
+    @param image: the full path to the image
+    """
+
+    return os.path.join(const.THUMBDIR, "%s.png") %get_image_name(image)
+
+def get_image_name(name):
+    """
+    Get the filename from a full image path
+
+    @param name: the full path to the image
+    """
+
+    return os.path.splitext(os.path.basename(name))[0]
+
+def url_hook(about, link):
+    webbrowser.open(link)
+
+def email_hook(about, email):
+    webbrowser.open("mailto:%s" % email)
+
 
 class URLOpen:
     """

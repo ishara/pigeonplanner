@@ -14,37 +14,3 @@
 
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
-
-"""
-Provides functions to check band and year entries
-"""
-
-
-from pigeonplanner import messages
-
-
-def check_ring_entry(inputRing, inputYear):
-    """
-    Check if the ring and year input are valid
-    
-    @param inputRing: The ringnumber to check
-    @param inputYear: the year to check
-    """
-
-    msg = ""
-    error = False
-
-    if not inputRing or not inputYear:
-        error = True
-        msg = messages.MSG_EMPTY_FIELDS
-
-    elif not inputYear.isdigit():
-        error = True
-        msg = messages.MSG_INVALID_NUMBER
-
-    elif not len(inputYear) == 4:
-        error = True
-        msg = messages.MSG_INVALID_LENGTH
-
-    return error, msg
-

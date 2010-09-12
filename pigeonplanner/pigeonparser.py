@@ -20,12 +20,9 @@ Parser to get all pigeons
 """
 
 
-import database
-
-
-class PigeonParser:
-    def __init__(self):
-        self.database = database.DatabaseOperations()
+class PigeonParser(object):
+    def __init__(self, database):
+        self.database = database
 
     def get_pigeons(self):
         self.pigeons = {}
@@ -55,7 +52,7 @@ class PigeonParser:
             self.pigeons[p.pindex] = p
 
 
-class ParsedPigeon:
+class ParsedPigeon(object):
     def __init__(self, pindex, ring, year, sex, show, active, colour='',
                  name='', strain='', loft='', image='', sire='', yearsire='',
                  dam='', yeardam='', extra1='', extra2='', extra3='',

@@ -24,16 +24,17 @@ import os.path
 
 import gtk
 
-import const
-import common
-import widgets
-import mailing
-from pedigree import DrawPedigree
-from printing import PrintPedigree
-from gtkbuilderapp import GtkbuilderApp
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import builder
+from pigeonplanner import printing
+from pigeonplanner.ui import pedigree
+from pigeonplanner.ui import maildialog
+from pigeonplanner.ui import toolswindow
+from pigeonplanner.ui.widgets import menus
 
 
-class PedigreeWindow(GtkbuilderApp):
+class PedigreeWindow(builder.GtkBuilder):
     def __init__(self, main, pigeoninfo):
         """
         Constructor
@@ -42,7 +43,7 @@ class PedigreeWindow(GtkbuilderApp):
         @param pigeoninfo: Dictionary containing pigeon info
         """
 
-        GtkbuilderApp.__init__(self, const.GLADEPEDIGREE, const.DOMAIN)
+        builder.GtkBuilder.__init__(self, const.GLADEPEDIGREE)
 
         self.main = main
         self.pigeoninfo = pigeoninfo
@@ -57,11 +58,10 @@ class PedigreeWindow(GtkbuilderApp):
         self.labelSex.set_text(self.pigeoninfo['sex'])
         self.labelName.set_text(self.pigeoninfo['name'])
 
-        self.dp = DrawPedigree([self.tableSire, self.tableDam],
-                                self.pigeoninfo['pindex'], True,
-                                self.main.parser.pigeons, self.main,
-                                self, self.main.options.optionList.language)
-        self.dp.draw_pedigree()
+        dp = pedigree.DrawPedigree(self.main, self)
+        dp.draw_pedigree(self.main.parser.pigeons,
+                         [self.tableSire, self.tableDam],
+                         self.pigeoninfo['pindex'], True)
 
         self.pdfname = "%s_%s_%s.pdf" %(_("Pedigree"), pigeoninfo['ring'],
                                         pigeoninfo['year'])
@@ -70,7 +70,7 @@ class PedigreeWindow(GtkbuilderApp):
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(widgets.pedigreeui)
+        uimanager.add_ui_from_string(menus.pedigreeui)
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.pedigreewindow.add_accel_group(accelgroup)
@@ -103,7 +103,8 @@ class PedigreeWindow(GtkbuilderApp):
         self.do_operation('mail')
         pedigree = os.path.join(const.TEMPDIR, self.pdfname)
 
-        mailing.MailDialog(self.pedigreewindow, self.main.database, pedigree)
+        maildialog.MailDialog(self.pedigreewindow,
+                              self.main.database, pedigree)
 
     def on_save_clicked(self, widget):
         self.do_operation('save')
@@ -117,10 +118,11 @@ class PedigreeWindow(GtkbuilderApp):
     def do_operation(self, op):
         userinfo = common.get_own_address(self.main.database)
 
-        if not common.check_userinfo(self.pedigreewindow, self.main,
-                                     userinfo['name']):
+        if not toolswindow.edit_user_info(self.pedigreewindow, self.main,
+                                          userinfo['name']):
             return
 
-        PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo,
-                      self.main.options.optionList, op, self.pdfname)
+        printing.PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo,
+                               self.main.options.optionList, op, self.pdfname,
+                               self.main.parser.pigeons)
 

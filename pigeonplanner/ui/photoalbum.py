@@ -25,9 +25,9 @@ import gobject
 import logging
 logger = logging.getLogger(__name__)
 
-import const
-import widgets
-from gtkbuilderapp import GtkbuilderApp
+from pigeonplanner import const
+from pigeonplanner import builder
+from pigeonplanner.ui.widgets import menus
 
 
 MARGIN = 6
@@ -37,7 +37,7 @@ MARGIN = 6
  ZOOM_FREE,) = range(3)
 
 
-class PhotoAlbum(GtkbuilderApp):
+class PhotoAlbum(builder.GtkBuilder):
 
     zoom_factors = {
         0.25: '25%',
@@ -51,7 +51,7 @@ class PhotoAlbum(GtkbuilderApp):
     }
 
     def __init__(self, parent, parser, database, pindex=None):
-        GtkbuilderApp.__init__(self, const.GLADEPHOTOALBUM, const.DOMAIN)
+        builder.GtkBuilder.__init__(self, const.GLADEPHOTOALBUM)
 
         self.photoalbum.set_transient_for(parent)
 
@@ -84,7 +84,7 @@ class PhotoAlbum(GtkbuilderApp):
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(widgets.photoalbumui)
+        uimanager.add_ui_from_string(menus.photoalbumui)
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.photoalbum.add_accel_group(accelgroup)
@@ -354,7 +354,7 @@ class PhotoAlbum(GtkbuilderApp):
         self.set_pixbuf(image)
         self.current_picture = path[0]
 
-        widgets.set_multiple_sensitive(
+        self.set_multiple_sensitive(
             {self.first_button: self.current_picture,
              self.prev_button: self.current_picture,
              self.next_button: self.current_picture < self.picture_no - 1,
@@ -381,7 +381,7 @@ class PhotoAlbum(GtkbuilderApp):
         self.drawingarea.queue_draw()
 
     def disable_toolbuttons(self):
-        widgets.set_multiple_sensitive(
+        self.set_multiple_sensitive(
             {self.first_button: False,
              self.prev_button: False,
              self.next_button: False,

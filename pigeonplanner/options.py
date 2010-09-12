@@ -20,10 +20,10 @@ Interface to get and set configuration options
 """
 
 
-import configuration
+from pigeonplanner import configuration
 
 
-class ParsedOptions:
+class ParsedOptions(object):
     """
     Class that holds all options
     """
@@ -73,7 +73,7 @@ class ParsedOptions:
         self.resDate = resDate
 
 
-class GetOptions:
+class GetOptions(object):
     def __init__(self):
         self.conf = configuration.ConfigurationParser()
 

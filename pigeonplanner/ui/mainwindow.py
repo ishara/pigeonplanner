@@ -32,28 +32,31 @@ logger = logging.getLogger(__name__)
 import gtk
 import gobject
 
-import const
-import update
-import backup
-import common
-import checks
-import widgets
-import messages
-import pigeonparser
-from logdialog import LogDialog
-from pedigree import DrawPedigree
-from photoalbum import PhotoAlbum
-from printing import PrintPedigree
-from toolswindow import ToolsWindow
-from resultwindow import ResultWindow
-from optionsdialog import OptionsDialog
-from pedigreewindow import PedigreeWindow
-from gtkbuilderapp import GtkbuilderApp
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import update
+from pigeonplanner import backup
+from pigeonplanner import checks
+from pigeonplanner import builder
+from pigeonplanner import printing
+from pigeonplanner import messages
+from pigeonplanner import pigeonparser
+from pigeonplanner.ui import dialogs
+from pigeonplanner.ui import pedigree
+from pigeonplanner.ui import logdialog
+from pigeonplanner.ui import photoalbum
+from pigeonplanner.ui import toolswindow
+from pigeonplanner.ui import resultwindow
+from pigeonplanner.ui import optionsdialog
+from pigeonplanner.ui import pedigreewindow
+from pigeonplanner.ui.widgets import menus
+from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui.widgets import filefilters
 
 
-class MainWindow(GtkbuilderApp):
+class MainWindow(builder.GtkBuilder):
     def __init__(self, options, database):
-        GtkbuilderApp.__init__(self, const.GLADEMAIN, const.DOMAIN)
+        builder.GtkBuilder.__init__(self, const.GLADEMAIN)
 
         self.options = options
         self.database = database
@@ -68,12 +71,6 @@ class MainWindow(GtkbuilderApp):
                                                 75, 75)
         self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
         self.pigeonStatus = {0: 'Dead', 1: 'Active', 2: 'Sold', 3: 'Lost'}
-        self.entrysToCheck = {'ring': self.entryRing1,
-                              'year': self.entryYear1,
-                              'sire': self.entrySireEdit,
-                              'yearsire': self.entryYearSireEdit,
-                              'dam': self.entryDamEdit,
-                              'yeardam': self.entryYearDamEdit}
         self.today = datetime.date.today().strftime(const.DATE_FORMAT)
         self.entryDate.set_text(self.today)
         self.cbStatus.set_active(1)
@@ -86,8 +83,7 @@ class MainWindow(GtkbuilderApp):
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
 
-        self.statusmsg = widgets.Statusbar(self.statusbar)
-        self.parser = pigeonparser.PigeonParser()
+        self.parser = pigeonparser.PigeonParser(self.database)
         self.parser.get_pigeons()
 
         # Make thumbnails if they don't exist yet (new in 0.8.0)
@@ -96,18 +92,16 @@ class MainWindow(GtkbuilderApp):
             os.mkdir(const.THUMBDIR)
             self.build_thumbnails()
 
-        self.pedigree = DrawPedigree([self.tableSire, self.tableDam],
-                                     pigeons=self.parser.pigeons,
-                                     lang=self.options.optionList.language)
-        self.pedigree.draw_pedigree()
+        self.pedigree = pedigree.DrawPedigree(self)
+        self.draw_empty_pedigree()
         self.build_menubar()
         self.build_treeviews()
         self.build_treeview()
         self.fill_treeview()
         self.count_active_pigeons()
 
-        self.cbRangeSex = widgets.create_sex_combobox(self.sexDic)
-        self.cbsex = widgets.create_sex_combobox(self.sexDic)
+        self.cbRangeSex = comboboxes.SexCombobox(self.sexDic)
+        self.cbsex = comboboxes.SexCombobox(self.sexDic)
         self.table1.attach(self.cbRangeSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL)
         self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL)
 
@@ -115,7 +109,7 @@ class MainWindow(GtkbuilderApp):
                      self.cbCategory, self.cbWeather, self.cbWind,
                      self.cbColour, self.cbStrain, self.cbLoft]
         for item in cbentries:
-            widgets.set_completion(item)
+            comboboxes.set_entry_completion(item)
 
         # This can't be done in Glade
         for cbentry in cbentries:
@@ -157,21 +151,21 @@ class MainWindow(GtkbuilderApp):
                          self.cbStrain: self.database.get_all_strains(),
                          self.cbLoft: self.database.get_all_lofts()}
         for key, value in self.listdata.items():
-            widgets.fill_combobox(key, value)
+            comboboxes.fill_combobox(key, value)
 
-        self.statusmsgs = {'entryRing1': (self.statusmsg.get_id("band"),
+        self.statusmsgs = {'entryRing1': (self.statusbar.get_context_id("band"),
                             _("Enter the bandnumber of the pigeon")),
-                           'entryYear1': (self.statusmsg.get_id("year"),
+                           'entryYear1': (self.statusbar.get_context_id("year"),
                             _("Enter the year of the pigeon")),
-                           'btnStatus1': (self.statusmsg.get_id("status"),
+                           'btnStatus1': (self.statusbar.get_context_id("status"),
                             _("Click here to set the status of the pigeon")),
-                           'entryName1': (self.statusmsg.get_id("name"),
+                           'entryName1': (self.statusbar.get_context_id("name"),
                             _("Enter a name for the pigeon")),
-                           'eventimage': (self.statusmsg.get_id("img"),
+                           'eventimage': (self.statusbar.get_context_id("img"),
                             _("Click here to add an image")),
-                           'findSire': (self.statusmsg.get_id("sire"),
+                           'findSire': (self.statusbar.get_context_id("sire"),
                             _("Search through the list of cocks")),
-                           'findDam': (self.statusmsg.get_id("dam"),
+                           'findDam': (self.statusbar.get_context_id("dam"),
                             _("Search through the list of hens"))
                           }
 
@@ -180,8 +174,10 @@ class MainWindow(GtkbuilderApp):
             attr.set_tooltip_text(data[1])
 
         if self.options.optionList.runs == 10:
-            if widgets.message_dialog(const.QUESTION, messages.MSG_MAKE_DONATION,
-                                      self.mainwindow):
+            d = dialogs.MessageDialog(const.QUESTION,
+                                      messages.MSG_MAKE_DONATION,
+                                      self.mainwindow)
+            if d.response == gtk.RESPONSE_YES:
                 webbrowser.open(const.WEBSITE)
 
             self.options.set_option('Options', 'runs',
@@ -192,9 +188,6 @@ class MainWindow(GtkbuilderApp):
             updatethread = Thread(None, self.search_updates, None)
             updatethread.start()
 
-        gtk.about_dialog_set_url_hook(self.url_hook)
-        gtk.about_dialog_set_email_hook(self.email_hook)
-
         self.allresults.set_use_stock(True)
 
         self.mainwindow.show()
@@ -204,10 +197,11 @@ class MainWindow(GtkbuilderApp):
             description = events[0][2]
             if len(description) > 20:
                 description = description[:24]+"..."
-            if widgets.message_dialog(const.QUESTION,
+            d = dialogs.MessageDialog(const.QUESTION,
                                       messages.MSG_EVENT_NOTIFY,
-                                      self.mainwindow, description):
-                tw = ToolsWindow(self, events[0][0])
+                                      self.mainwindow, description)
+            if d.response == gtk.RESPONSE_YES:
+                tw = toolswindow.ToolsWindow(self, events[0][0])
                 tw.toolsdialog.set_keep_above(True)
                 tw.treeview.set_cursor(1)
 
@@ -216,13 +210,13 @@ class MainWindow(GtkbuilderApp):
             daysInSeconds = self.options.optionList.interval * 24 * 60 * 60
             if time.time() - self.options.optionList.last >= daysInSeconds:
                 if backup.make_backup(self.options.optionList.location):
-                    widgets.message_dialog(const.INFO,
-                                           messages.MSG_BACKUP_SUCCES,
-                                           self.mainwindow)
+                    dialogs.MessageDialog(const.INFO,
+                                          messages.MSG_BACKUP_SUCCES,
+                                          self.mainwindow)
                 else:
-                    widgets.message_dialog(const.INFO,
-                                           messages.MSG_BACKUP_FAILED,
-                                           self.mainwindow)
+                    dialogs.MessageDialog(const.INFO,
+                                          messages.MSG_BACKUP_FAILED,
+                                          self.mainwindow)
 
                 self.options.set_option('Backup', 'last', time.time())
 
@@ -249,31 +243,33 @@ class MainWindow(GtkbuilderApp):
                 logger.info("End: Already running the latest version")
 
     def update_dialog(self):
-        if widgets.message_dialog(const.QUESTION, messages.MSG_UPDATE_NOW,
-                                  self.mainwindow):
+        d = dialogs.MessageDialog(const.QUESTION, messages.MSG_UPDATE_NOW,
+                                  self.mainwindow)
+        if d.response == gtk.RESPONSE_YES:
             webbrowser.open(const.DOWNLOADURL)
 
         return False
 
     def on_widget_enter(self, widget, event):
         for con_id in self.statusmsgs.values():
-            self.statusmsg.pop_message(con_id[0])
+            self.statusbar.pop(con_id[0])
 
-        self.statusmsg.push_message(
+        self.statusbar.push(
                             self.statusmsgs[self.get_object_name(widget)][0],
                             self.statusmsgs[self.get_object_name(widget)][1])
 
     def on_widget_leave(self, widget, event):
         name = self.get_object_name(widget)
-        self.statusmsg.pop_message(self.statusmsgs[name][0])
+        self.statusbar.pop(self.statusmsgs[name][0])
 
     # Menu callbacks
     def menuprintpedigree_activate(self, widget):
         userinfo = common.get_own_address(self.database)
         pigeoninfo = self.get_pigeoninfo()
 
-        PrintPedigree(self.mainwindow, pigeoninfo, userinfo,
-                      self.options.optionList, 'print', '')
+        printing.PrintPedigree(self.mainwindow, pigeoninfo, userinfo,
+                               self.options.optionList, 'print', '',
+                               self.parser.pigeons)
 
     def menuprintblank_activate(self, widget):
         userinfo = common.get_own_address(self.database)
@@ -281,16 +277,18 @@ class MainWindow(GtkbuilderApp):
                           name='', image='', extra1='', extra2='', extra3='',
                           extra4='', extra5='', extra6='')
 
-        PrintPedigree(self.mainwindow, pigeoninfo, userinfo,
-                      self.options.optionList, 'print', '')
+        printing.PrintPedigree(self.mainwindow, pigeoninfo, userinfo,
+                               self.options.optionList, 'print', '',
+                               self.parser.pigeons)
 
     def menubackup_activate(self, widget):
-        dialog = widgets.BackupDialog(self.mainwindow, _("Create backup"), 'create')
+        dialog = dialogs.BackupDialog(self.mainwindow, _("Create backup"),
+                                      'create')
         run = dialog.run()
         dialog.destroy()
 
     def menurestore_activate(self, widget):
-        dialog = widgets.BackupDialog(self.mainwindow, _("Restore backup"),
+        dialog = dialogs.BackupDialog(self.mainwindow, _("Restore backup"),
                                       'restore')
         run = dialog.run()
         dialog.destroy()
@@ -303,10 +301,10 @@ class MainWindow(GtkbuilderApp):
         self.srchentry.grab_focus()
 
     def menualbum_activate(self, widget):
-        PhotoAlbum(self.mainwindow, self.parser, self.database)
+        photoalbum.PhotoAlbum(self.mainwindow, self.parser, self.database)
 
     def menulog_activate(self, widget):
-        LogDialog(self.database)
+        logdialog.LogDialog(self.database)
 
     def menuadd_activate(self, widget):
         self.empty_entryboxes()
@@ -401,7 +399,7 @@ class MainWindow(GtkbuilderApp):
                 # Same for the picture
                 image = self.parser.pigeons[pindex].image
                 if image:
-                    os.remove(self.get_thumb_path(image))
+                    os.remove(common.get_thumb_path(image))
                 # And medication
                 self.database.delete_medication_from_band(pindex)
 
@@ -426,18 +424,18 @@ class MainWindow(GtkbuilderApp):
         self.removedialog.hide()
 
     def menupedigree_activate(self, widget):
-        PedigreeWindow(self, self.get_pigeoninfo())
+        pedigreewindow.PedigreeWindow(self, self.get_pigeoninfo())
 
     def menuaddresult_activate(self, widget):
         self.notebook.set_current_page(2)
         self.on_addresult_clicked(None)
 
     def menufilter_activate(self, widget):
-        filterdialog = widgets.FilterDialog(self.mainwindow,
+        filterdialog = dialogs.FilterDialog(self.mainwindow,
                                             _("Filter pigeons"),
                                             self.fill_treeview)
 
-        self.cbFilterSex = widgets.create_sex_combobox(self.sexDic)
+        self.cbFilterSex = comboboxes.SexCombobox(self.sexDic)
         self.chkFilterSex = filterdialog.add_filter_custom(_("Sex"),
                                                            self.cbFilterSex)
         self.chkFilterColours, self.cbFilterColour = \
@@ -449,17 +447,17 @@ class MainWindow(GtkbuilderApp):
         self.chkFilterLofts, self.cbFilterLoft = \
                                 filterdialog.add_filter_combobox(_("Lofts"),
                                             self.database.get_all_lofts())
-        self.cbFilterStatus = widgets.create_status_combobox()
+        self.cbFilterStatus = comboboxes.StatusCombobox()
         self.chkFilterStatus = filterdialog.add_filter_custom(_("Status"),
                                                         self.cbFilterStatus)
 
         filterdialog.run()
 
     def menutools_activate(self, widget):
-        ToolsWindow(self)
+        toolswindow.ToolsWindow(self)
 
     def menupref_activate(self, widget):
-        OptionsDialog(self)
+        optionsdialog.OptionsDialog(self)
 
     def menuarrows_toggled(self, widget):
         if self.blockMenuCallback: return
@@ -508,7 +506,7 @@ class MainWindow(GtkbuilderApp):
         webbrowser.open(const.FORUMURL)
 
     def menuabout_activate(self, widget):
-        widgets.about_dialog(self.mainwindow)
+        dialogs.AboutDialog(self.mainwindow)
 
     # range callbacks
     def on_rangeadd_clicked(self, widget):
@@ -517,14 +515,18 @@ class MainWindow(GtkbuilderApp):
         rangeyear = self.entryRangeYear.get_text()
         rangesex = self.cbRangeSex.get_active_text()
 
-        if not checks.check_ring_entry(self.mainwindow, rangefrom, rangeyear):
+        error, msg = checks.check_ring_entry(rangefrom, rangeyear)
+        if error:
+            dialogs.MessageDialog(const.ERROR, msg, self.mainwindow)
             return
-        if not checks.check_ring_entry(self.mainwindow, rangeto, rangeyear):
+        error, msg = checks.check_ring_entry(rangeto, rangeyear)
+        if error:
+            dialogs.MessageDialog(const.ERROR, msg, self.mainwindow)
             return
 
         if not rangefrom.isdigit() or not rangeto.isdigit():
-            widgets.message_dialog(const.ERROR, messages.MSG_INVALID_RANGE,
-                                   self.mainwindow)
+            dialogs.MessageDialog(const.ERROR, messages.MSG_INVALID_RANGE,
+                                  self.mainwindow)
             return
 
         value = int(rangefrom)
@@ -533,9 +535,9 @@ class MainWindow(GtkbuilderApp):
             pindex = band + rangeyear
 
             if self.database.has_pigeon(pindex):
-                if not widgets.message_dialog(const.WARNING,
-                                              messages.MSG_OVERWRITE_PIGEON,
-                                              self.mainwindow):
+                if not dialogs.MessageDialog(const.WARNING,
+                                             messages.MSG_OVERWRITE_PIGEON,
+                                             self.mainwindow):
                     continue
 
             self.database.insert_pigeon((pindex, band, rangeyear, rangesex,
@@ -597,7 +599,7 @@ class MainWindow(GtkbuilderApp):
                 (gtk.STOCK_REMOVE, self.menuremove_activate, None),
                 ("pedigree-detail", self.menupedigree_activate, None)]
 
-            widgets.popup_menu(event, entries)
+            menus.popup_menu(event, entries)
 
     # Navigation arrows callbacks
     def on_button_top_clicked(self, widget):
@@ -634,7 +636,17 @@ class MainWindow(GtkbuilderApp):
 
     # Add/Edit callbacks
     def on_save_clicked(self, widget):
-        if not checks.check_entrys(self.entrysToCheck): return
+        entries = [(self.entryRing1, self.entryYear1),
+                   (self.entrySireEdit, self.entryYearSireEdit),
+                   (self.entryDamEdit, self.entryYearDamEdit)]
+        for band, year in entries:
+            if band == '':
+                continue
+            error, msg = checks.check_ring_entry(band.get_text(),
+                                                 year.get_text())
+            if error:
+                dialogs.MessageDialog(const.ERROR, msg, self.mainwindow)
+                return
 
         if self.operation == const.EDIT:
             self.write_new_data()
@@ -654,7 +666,7 @@ class MainWindow(GtkbuilderApp):
             # No pigeon is selected
             return
 
-        PhotoAlbum(self.mainwindow, self.parser, self.database, pindex)
+        photoalbum.PhotoAlbum(self.mainwindow, self.parser, self.database, pindex)
 
     def on_eventimage_press(self, widget, event):
         if event.button == 3:
@@ -662,7 +674,7 @@ class MainWindow(GtkbuilderApp):
                 (gtk.STOCK_ADD, self.open_filedialog, None),
                 (gtk.STOCK_REMOVE, self.set_default_image, None)]
 
-            widgets.popup_menu(event, entries)
+            menus.popup_menu(event, entries)
         else:
             self.open_filedialog()
 
@@ -674,8 +686,8 @@ class MainWindow(GtkbuilderApp):
             self.imagePigeon1.set_from_pixbuf(pixbuf)
             self.labelImgPath.set_text(filename)
         except:
-            widgets.message_dialog(const.ERROR, messages.MSG_INVALID_IMAGE,
-                                   self.mainwindow)
+            dialogs.MessageDialog(const.ERROR, messages.MSG_INVALID_IMAGE,
+                                  self.mainwindow)
 
         self.filedialog.hide()
 
@@ -708,7 +720,7 @@ class MainWindow(GtkbuilderApp):
         pindex = model[path][0]
 
         if event.button == 3:
-            widgets.popup_menu(event, [(gtk.STOCK_JUMP_TO,
+            menus.popup_menu(event, [(gtk.STOCK_JUMP_TO,
                                         self.search_pigeon,
                                         pindex)
                                       ])
@@ -724,10 +736,10 @@ class MainWindow(GtkbuilderApp):
                 (gtk.STOCK_EDIT, self.on_editresult_clicked, None),
                 (gtk.STOCK_REMOVE, self.on_removeresult_clicked, None)]
 
-            widgets.popup_menu(event, entries)
+            menus.popup_menu(event, entries)
 
     def on_allresults_clicked(self, widget):
-        ResultWindow(self, self.parser.pigeons, self.database)
+        resultwindow.ResultWindow(self, self.parser.pigeons, self.database)
 
     def on_addresult_clicked(self, widget):
         self.menubar.set_sensitive(False)
@@ -745,9 +757,9 @@ class MainWindow(GtkbuilderApp):
         model, tIter = self.selResults.get_selected()
         pindex, ring, year = self.get_main_ring()
 
-        if not widgets.message_dialog(const.QUESTION,
-                                      messages.MSG_REMOVE_RESULT,
-                                      self.mainwindow):
+        if not dialogs.MessageDialog(const.QUESTION,
+                                     messages.MSG_REMOVE_RESULT,
+                                     self.mainwindow):
             return
 
         self.database.delete_result_from_id(model[tIter][0])
@@ -801,9 +813,9 @@ class MainWindow(GtkbuilderApp):
                 weather, '', '', 0, 0, comment)
         if self.resultDialogMode == const.ADD:
             if self.database.has_result((pindex,)+data):
-                widgets.message_dialog(const.ERROR,
-                                       messages.MSG_RESULT_EXISTS,
-                                       self.mainwindow)
+                dialogs.MessageDialog(const.ERROR,
+                                      messages.MSG_RESULT_EXISTS,
+                                      self.mainwindow)
                 return
 
             data = (pindex, ) + data
@@ -826,31 +838,33 @@ class MainWindow(GtkbuilderApp):
             self.hide_result_dialog()
 
         self.database.insert_racepoint((point, ))
-        widgets.fill_combobox(self.cbRacepoint,
-                              self.database.get_all_racepoints())
+        comboboxes.fill_combobox(self.cbRacepoint,
+                                 self.database.get_all_racepoints())
 
         if sector:
             self.database.insert_sector((sector, ))
-            widgets.fill_combobox(self.cbSector,
-                                  self.database.get_all_sectors())
+            comboboxes.fill_combobox(self.cbSector,
+                                     self.database.get_all_sectors())
 
         if ftype:
             self.database.insert_type((ftype, ))
-            widgets.fill_combobox(self.cbType, self.database.get_all_types())
+            comboboxes.fill_combobox(self.cbType,
+                                     self.database.get_all_types())
 
         if category:
             self.database.insert_category((category, ))
-            widgets.fill_combobox(self.cbCategory,
-                                  self.database.get_all_categories())
+            comboboxes.fill_combobox(self.cbCategory,
+                                     self.database.get_all_categories())
 
         if weather:
             self.database.insert_weather((weather, ))
-            widgets.fill_combobox(self.cbWeather,
-                                  self.database.get_all_weather())
+            comboboxes.fill_combobox(self.cbWeather,
+                                     self.database.get_all_weather())
 
         if wind:
             self.database.insert_wind((wind, ))
-            widgets.fill_combobox(self.cbWind, self.database.get_all_wind())
+            comboboxes.fill_combobox(self.cbWind,
+                                     self.database.get_all_wind())
 
     def on_resultdialogclose_clicked(self, widget):
         self.hide_result_dialog()
@@ -887,13 +901,13 @@ class MainWindow(GtkbuilderApp):
                 (gtk.STOCK_EDIT, self.on_editmedication_clicked, None),
                 (gtk.STOCK_REMOVE, self.on_removemedication_clicked, None)]
 
-            widgets.popup_menu(event, entries)
+            menus.popup_menu(event, entries)
 
     def on_addmedication_clicked(self, widget):
         self.clear_medicationdialog_fields()
         self.fill_medicationselect_treeview()
-        widgets.fill_combobox(self.cbMedicationLoft,
-                              self.database.get_all_lofts())
+        comboboxes.fill_combobox(self.cbMedicationLoft,
+                                 self.database.get_all_lofts())
         self.medicationDialogMode = const.ADD
         self.medicationdialog.show()
         self.entry_meddialog_date.grab_focus()
@@ -908,7 +922,7 @@ class MainWindow(GtkbuilderApp):
         multiple = False
         if self.database.count_medication_entries(medid) > 1:
             multiple = True
-        dialog = widgets.MedicationRemoveDialog(self.mainwindow, multiple)
+        dialog = dialogs.MedicationRemoveDialog(self.mainwindow, multiple)
         dialog.check.set_active(multiple)
         resp = dialog.run()
         if resp == gtk.RESPONSE_NO or resp == gtk.RESPONSE_DELETE_EVENT:
@@ -927,8 +941,8 @@ class MainWindow(GtkbuilderApp):
 
     def on_editmedication_clicked(self, widget):
         self.fill_medicationselect_treeview()
-        widgets.fill_combobox(self.cbMedicationLoft,
-                              self.database.get_all_lofts())
+        comboboxes.fill_combobox(self.cbMedicationLoft,
+                                 self.database.get_all_lofts())
 
         med = self.get_selected_medication()
         self.entry_meddialog_date.set_text(med[3])
@@ -1158,7 +1172,7 @@ class MainWindow(GtkbuilderApp):
         """
 
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(widgets.uistring)
+        uimanager.add_ui_from_string(menus.uistring)
         uimanager.insert_action_group(self.create_action_group(), 0)
         self.accelgroup = uimanager.get_accel_group()
         self.mainwindow.add_accel_group(self.accelgroup)
@@ -1188,10 +1202,10 @@ class MainWindow(GtkbuilderApp):
         for key, value in widgetDic.items():
             setattr(self, key, value)
 
-        widgets.set_multiple_sensitive({self.MenuEdit: False,
-                                        self.MenuRemove: False,
-                                        self.MenuPedigree: False,
-                                        self.MenuAddresult: False})
+        self.set_multiple_sensitive({self.MenuEdit: False,
+                                     self.MenuRemove: False,
+                                     self.MenuPedigree: False,
+                                     self.MenuAddresult: False})
 
         self.vbox.pack_start(self.menubar, False, False)
         self.vbox.reorder_child(self.menubar, 0)
@@ -1285,10 +1299,10 @@ class MainWindow(GtkbuilderApp):
             widget.connect('deselect', self.menu_item_deselect)
 
     def menu_item_select(self, menuitem, tooltip):
-        self.statusmsg.push_message(-1, tooltip)
+        self.statusbar.push(-1, tooltip)
 
     def menu_item_deselect(self, menuitem):
-        self.statusmsg.pop_message(-1)
+        self.statusbar.pop(-1)
 
     def build_treeview(self):
         """
@@ -1401,21 +1415,21 @@ class MainWindow(GtkbuilderApp):
         model, path = selection.get_selected()
 
         if path:
-            widgets.set_multiple_sensitive({self.removeresult: True,
-                                            self.editresult: True})
+            self.set_multiple_sensitive({self.removeresult: True,
+                                         self.editresult: True})
         else:
-            widgets.set_multiple_sensitive({self.removeresult: False,
-                                            self.editresult: False})
+            self.set_multiple_sensitive({self.removeresult: False,
+                                         self.editresult: False})
 
     def selectionmedication_changed(self, selection):
         model, path = selection.get_selected()
 
         if path:
-            widgets.set_multiple_sensitive({self.removemedication: True,
-                                            self.editmedication: True})
+            self.set_multiple_sensitive({self.removemedication: True,
+                                         self.editmedication: True})
         else:
-            widgets.set_multiple_sensitive({self.removemedication: False,
-                                            self.editmedication: False})
+            self.set_multiple_sensitive({self.removemedication: False,
+                                         self.editmedication: False})
 
             for entry in self.get_objects_from_prefix('entry_med_'):
                 entry.set_text('')
@@ -1441,22 +1455,22 @@ class MainWindow(GtkbuilderApp):
         self.empty_entryboxes()
 
         if tree_iter:
-            widgets.set_multiple_sensitive({
-                            self.ToolEdit: True, self.ToolRemove: True,
-                            self.ToolPedigree: True, self.MenuEdit: True,
-                            self.MenuRemove: True, self.MenuPedigree: True,
-                            self.MenuAddresult: True, self.addresult: True})
+            self.set_multiple_sensitive({
+                        self.ToolEdit: True, self.ToolRemove: True,
+                        self.ToolPedigree: True, self.MenuEdit: True,
+                        self.MenuRemove: True, self.MenuPedigree: True,
+                        self.MenuAddresult: True, self.addresult: True})
         else:
-            widgets.set_multiple_sensitive({
-                            self.ToolEdit: False, self.ToolRemove: False,
-                            self.ToolPedigree: False, self.MenuEdit: False,
-                            self.MenuRemove: False, self.MenuPedigree: False,
-                            self.MenuAddresult: False, self.addresult: False})
+            self.set_multiple_sensitive({
+                        self.ToolEdit: False, self.ToolRemove: False,
+                        self.ToolPedigree: False, self.MenuEdit: False,
+                        self.MenuRemove: False, self.MenuPedigree: False,
+                        self.MenuAddresult: False, self.addresult: False})
             self.imageStatus.clear()
             self.imageStatus1.clear()
             self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
             self.labelImgPath.set_text('')
-            self.pedigree.draw_pedigree()
+            self.draw_empty_pedigree()
             self.lsMedication.clear()
             self.lsResult.clear()
             return
@@ -1505,7 +1519,7 @@ class MainWindow(GtkbuilderApp):
         if image:
             def get_pigeon_thumbnail():
                 try:
-                    thumb = self.get_thumb_path(image)
+                    thumb = common.get_thumb_path(image)
                     pixbuf = gtk.gdk.pixbuf_new_from_file(thumb)
                     self.labelImgPath.set_text(image)
                 except gobject.GError:
@@ -1532,10 +1546,8 @@ class MainWindow(GtkbuilderApp):
         self.imageStatus1.set_from_file(os.path.join(const.IMAGEDIR,
                                 '%s.png' %self.pigeonStatus[status].lower()))
 
-        dp = DrawPedigree([self.tableSire, self.tableDam], pindex,
-                           pigeons=self.parser.pigeons,
-                           main=self, lang=self.options.optionList.language)
-        dp.draw_pedigree()
+        self.pedigree.draw_pedigree(self.parser.pigeons,
+                                    [self.tableSire, self.tableDam], pindex)
 
         self.find_direct_relatives(pindex, sire, dam)
         self.find_half_relatives(pindex, sire, yearsire, dam, yeardam)
@@ -1709,14 +1721,14 @@ class MainWindow(GtkbuilderApp):
 
         if operation == const.ADD:
             # Clear the pedigree
-            self.pedigree.draw_pedigree()
+            self.draw_empty_pedigree()
 
         self.operation = operation
 
-        widgets.set_multiple_sensitive({self.toolbar: False,
-                                        self.notebook: False,
-                                        self.treeview: False,
-                                        self.vboxButtons: False})
+        self.set_multiple_sensitive({self.toolbar: False,
+                                     self.notebook: False,
+                                     self.treeview: False,
+                                     self.vboxButtons: False})
         self.detailbook.set_current_page(1)
         self.mainwindow.remove_accel_group(self.accelgroup)
         self.mainwindow.add_accel_group(self.cancelEscAG)
@@ -1739,10 +1751,10 @@ class MainWindow(GtkbuilderApp):
         if self.operation == const.EDIT:
             self.selection.emit('changed')
 
-        widgets.set_multiple_sensitive({self.toolbar: True,
-                                        self.notebook: True,
-                                        self.treeview: True,
-                                        self.vboxButtons: True})
+        self.set_multiple_sensitive({self.toolbar: True,
+                                     self.notebook: True,
+                                     self.treeview: True,
+                                     self.vboxButtons: True})
         self.detailbook.set_current_page(0)
         self.mainwindow.remove_accel_group(self.cancelEscAG)
         self.mainwindow.add_accel_group(self.accelgroup)
@@ -1814,9 +1826,9 @@ class MainWindow(GtkbuilderApp):
         image = infoTuple[9]
         if image != self.preEditImage:
             if self.preEditImage:
-                os.remove(self.get_thumb_path(self.preEditImage))
+                os.remove(common.get_thumb_path(self.preEditImage))
             if image:
-                self.image_to_thumb(image)
+                common.image_to_thumb(image)
 
         status = self.cbStatus.get_active()
         old_status = self.parser.pigeons[pindex].active
@@ -1862,14 +1874,14 @@ class MainWindow(GtkbuilderApp):
 
         if self.database.has_pigeon(pindex):
             if self.parser.pigeons[pindex].show == 1:
-                if not widgets.message_dialog(const.WARNING,
-                                              messages.MSG_OVERWRITE_PIGEON,
-                                              self.mainwindow):
+                if not dialogs.MessageDialog(const.WARNING,
+                                             messages.MSG_OVERWRITE_PIGEON,
+                                             self.mainwindow):
                     return
             else:
-                if not widgets.message_dialog(const.WARNING,
-                                              messages.MSG_SHOW_PIGEON,
-                                              self.mainwindow):
+                if not dialogs.MessageDialog(const.WARNING,
+                                             messages.MSG_SHOW_PIGEON,
+                                             self.mainwindow):
                     return
                 else:
                     self.database.show_pigeon(pindex, 1)
@@ -1878,7 +1890,7 @@ class MainWindow(GtkbuilderApp):
         self.database.insert_pigeon(pindexTuple)
 
         if infoTuple[9]:
-            self.image_to_thumb(infoTuple[9])
+            common.image_to_thumb(infoTuple[9])
 
         status = self.cbStatus.get_active()
 
@@ -1911,19 +1923,24 @@ class MainWindow(GtkbuilderApp):
         colour = infoTuple[5]
         if colour:
             self.database.insert_colour((colour, ))
-            widgets.fill_combobox(self.cbColour,
-                                  self.database.get_all_colours())
+            comboboxes.fill_combobox(self.cbColour,
+                                     self.database.get_all_colours())
 
         strain = infoTuple[7]
         if strain:
             self.database.insert_strain((strain, ))
-            widgets.fill_combobox(self.cbStrain,
-                                  self.database.get_all_strains())
+            comboboxes.fill_combobox(self.cbStrain,
+                                     self.database.get_all_strains())
 
         loft = infoTuple[8]
         if loft:
             self.database.insert_loft((loft, ))
-            widgets.fill_combobox(self.cbLoft, self.database.get_all_lofts())
+            comboboxes.fill_combobox(self.cbLoft,
+                                     self.database.get_all_lofts())
+
+    def draw_empty_pedigree(self):
+        self.pedigree.draw_pedigree(self.parser.pigeons,
+                                    [self.tableSire, self.tableDam])
 
     def empty_entryboxes(self):
         """
@@ -1969,21 +1986,10 @@ class MainWindow(GtkbuilderApp):
         Set a preview image and show the Filechooser dialog
         """
 
-        fileFilter = gtk.FileFilter()
-        fileFilter.set_name(_("Images"))
-        fileFilter.add_pixbuf_formats()
-        self.filedialog.add_filter(fileFilter)
-
         preview = gtk.Image()
         self.filedialog.set_preview_widget(preview)
+        self.filedialog.add_filter(filefilters.ImageFilter())
         self.filedialog.show()
-
-    def url_hook(self, about, link):
-        if const.WINDOWS:
-            webbrowser.open(link)
-
-    def email_hook(self, about, email):
-        webbrowser.open("mailto:%s" % email)
 
     def position_popup(self):
         """
@@ -2083,15 +2089,15 @@ class MainWindow(GtkbuilderApp):
         comment = self.entryComment.get_text()
 
         if not date or not point or not place or not out:
-            widgets.message_dialog(const.ERROR, messages.MSG_EMPTY_DATA,
-                                   self.resultdialog)
+            dialogs.MessageDialog(const.ERROR, messages.MSG_EMPTY_DATA,
+                                  self.resultdialog)
             return False
 
         try:
             datetime.datetime.strptime(date, const.DATE_FORMAT)
         except ValueError:
-            widgets.message_dialog(const.ERROR, messages.MSG_INVALID_FORMAT,
-                                   self.resultdialog)
+            dialogs.MessageDialog(const.ERROR, messages.MSG_INVALID_FORMAT,
+                                  self.resultdialog)
             return False
 
         return (date, point, place, out, sector, ftype, category,
@@ -2167,35 +2173,5 @@ class MainWindow(GtkbuilderApp):
         for pigeon in self.parser.pigeons:
             img_path = self.parser.pigeons[pigeon].image
             if img_path != '':
-                self.image_to_thumb(img_path)
-
-    def image_to_thumb(self, img_path):
-        """
-        Convert an image to a thumbnail
-
-        @param img_path: the full path to the image
-        """
-
-        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img_path, 200, 200)
-        pixbuf.save(os.path.join(const.THUMBDIR,
-                         "%s.png") %self.get_image_name(img_path), 'png')
-
-    def get_thumb_path(self, image):
-        """
-        Get the thumbnail from an image
-
-        @param image: the full path to the image
-        """
-
-        return os.path.join(const.THUMBDIR,
-                            "%s.png") %self.get_image_name(image)
-
-    def get_image_name(self, name):
-        """
-        Get the filename from a full image path
-
-        @param name: the full path to the image
-        """
-
-        return os.path.splitext(os.path.basename(name))[0]
+                common.image_to_thumb(img_path)
 

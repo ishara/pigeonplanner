@@ -20,18 +20,19 @@ Interface for Gtkbuilder
 
 import gtk
 
+from pigeonplanner import const
 
-class GtkbuilderApp(object):
-    def __init__(self, path, domain):
+
+class GtkBuilder(object):
+    def __init__(self, path):
         """
         Initialize Gtkbuilder, connect all signals and get all widgets
 
         @param path: Path to the Glade file
-        @param domain: Translation domain
         """
 
         self.builder = gtk.Builder()
-        self.builder.set_translation_domain(domain)
+        self.builder.set_translation_domain(const.DOMAIN)
         self.builder.add_from_file(path)
         self.builder.connect_signals(self)
         for obj in self.builder.get_objects():
@@ -62,4 +63,27 @@ class GtkbuilderApp(object):
         """
 
         return gtk.Buildable.get_name(obj)
+
+    def set_multiple_sensitive(self, widgets):
+        """ 
+        Set multiple widgets sensitive at once
+
+        @param widgets: dic of widgets with booleans
+        """
+
+        for widget, sensitive in widgets.items():
+            widget.set_sensitive(sensitive)
+
+    def set_multiple_visible(self, widgets):
+        """ 
+        Set multiple widgets visible at once
+
+        @param widgets: dic of widgets with booleans
+        """
+
+        for widget, visible in widgets.items():
+            if visible:
+                widget.show()
+            else:
+                widget.hide()
 

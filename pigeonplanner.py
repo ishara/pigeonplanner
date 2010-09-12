@@ -35,6 +35,7 @@ except:
     sys.exit(1)
 
 import gobject
+gobject.threads_init()
 
 try:
     import gtk
@@ -56,7 +57,7 @@ class  NullFile(object):
         pass
 
 
-class PigeonPlanner:
+class PigeonPlanner(object):
     def __init__(self):
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
@@ -79,7 +80,7 @@ class PigeonPlanner:
 	            sys.stderr = NullFile()
 
         # Detect if program is running for the first time
-        import pigeonplanner.const as const
+        from pigeonplanner import const
 
         if os.path.isdir(const.PREFDIR):
             firstrun = False
@@ -87,7 +88,7 @@ class PigeonPlanner:
             firstrun = True
 
         # Initialize options
-        import pigeonplanner.options as options
+        from pigeonplanner import options
         self.options = options.GetOptions()
 
         # Locale setup
@@ -102,7 +103,7 @@ class PigeonPlanner:
             LOCALE_PATH = os.path.join(currentPath, 'languages')
 
         if win32:
-            import pigeonplanner.libi18n as libi18n
+            from pigeonplanner import libi18n
             libi18n.fix_locale()
 
         language = self.options.optionList.language
@@ -207,7 +208,7 @@ class PigeonPlanner:
             gtk.rc_parse(themefile)
 
         # Register custom stock icons
-        import pigeonplanner.common as common
+        from pigeonplanner import common
 
         common.create_stock_button([
                 ('icon_pedigree_detail.png', 'pedigree-detail', _('Pedigree')),
@@ -224,7 +225,7 @@ class PigeonPlanner:
             ])
 
         # Check database
-        import pigeonplanner.database as database
+        from pigeonplanner import database
 
         self.db = database.DatabaseOperations()
 
@@ -271,9 +272,9 @@ class PigeonPlanner:
         import traceback
         from cStringIO import StringIO
 
-        import pigeonplanner.const as const
-        import pigeonplanner.database as database
-        import pigeonplanner.logdialog as logdialog
+        from pigeonplanner import const
+        from pigeonplanner import database
+        from pigeonplanner.ui import logdialog
 
         file_name = tb.tb_frame.f_code.co_filename
         line_no = tb.tb_lineno
@@ -297,11 +298,10 @@ class PigeonPlanner:
 if __name__ == "__main__":
     app = PigeonPlanner()
 
-    import pigeonplanner.mainwindow as main
+    from pigeonplanner.ui import mainwindow
 
     try:
-        pigeonplanner = main.MainWindow(app.options, app.db)
-        gobject.threads_init()
+        pigeonplanner = mainwindow.MainWindow(app.options, app.db)
         gtk.main()
     except KeyboardInterrupt:
         pass

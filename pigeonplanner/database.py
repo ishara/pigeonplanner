@@ -26,11 +26,11 @@ import sqlite3
 import logging
 logger = logging.getLogger(__name__)
 
-import const
-import common
+from pigeonplanner import const
+from pigeonplanner import common
 
 
-class DatabaseOperations:
+class DatabaseOperations(object):
     SCHEMA = {
     'Version': '(Versionkey INTEGER PRIMARY KEY,'
                ' db_version INTEGER)',

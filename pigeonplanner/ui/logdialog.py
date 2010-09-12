@@ -24,9 +24,9 @@ Logdialog class
 import gtk
 import gobject
 
-import const
-import common
-import mailing
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner.ui import maildialog
 
 
 SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]
@@ -113,7 +113,7 @@ class LogDialog(gtk.Dialog):
         self.run()
 
     def report_log(self, widget):
-        mailing.MailDialog(self, self.database, const.LOGFILE, 'log')
+        maildialog.MailDialog(self, self.database, const.LOGFILE, 'log')
 
     def insert_color(self, bffr, line):
         for s in SEVERITY[self.combo.get_active():]:

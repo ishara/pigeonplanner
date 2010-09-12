@@ -15,363 +15,89 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
-"""
-Various widgets
-"""
-
 
 import os.path
 
 import gtk
-import gtk.gdk
-import gobject
 
-import const
-import backup
-import messages
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import checks
 
 
-uistring = """
-<ui>
-   <menubar name="MenuBar">
-      <menu action="FileMenu">
-         <menuitem action="Add"/>
-         <menuitem action="Addrange"/>
-         <separator/>
-         <menuitem action="Tools"/>
-         <menuitem action="Album"/>
-         <menuitem action="Log"/>
-         <separator/>
-         <menu action="PrintMenu">
-            <menuitem action="PrintPedigree"/>
-            <menuitem action="PrintBlank"/>
-         </menu>
-         <separator/>
-         <menu action="BackupMenu">
-            <menuitem action="Backup"/>
-            <menuitem action="Restore"/>
-         </menu>
-         <separator/>
-         <menuitem action="Quit"/>
-      </menu>
-      <menu action="EditMenu">
-         <menuitem action="Search"/>
-         <separator/>
-         <menuitem action="Preferences"/>
-      </menu>
-      <menu action="ViewMenu">
-         <menuitem action="Filter"/>
-         <separator/>
-         <menuitem action="Arrows"/>
-         <menuitem action="Stats"/>
-         <menuitem action="Toolbar"/>
-         <menuitem action="Statusbar"/>
-      </menu>
-      <menu action="PigeonMenu">
-         <menuitem action="Edit"/>
-         <menuitem action="Remove"/>
-         <menuitem action="Pedigree"/>
-         <menuitem action="Addresult"/>
-      </menu>
-      <menu action="HelpMenu">
-         <menuitem action="Home"/>
-         <menuitem action="Forum"/>
-         <separator/>
-         <menuitem action="About"/>
-      </menu>
-   </menubar>
+class MessageDialog(gtk.MessageDialog):
+    def __init__(self, msgtype, data, parent=None, extra=None):
+        """
+        Display a message dialog.
 
-   <toolbar name="Toolbar">
-      <toolitem action="Add"/>
-      <separator/>
-      <toolitem action="Edit"/>
-      <toolitem action="Remove"/>
-      <toolitem action="Pedigree"/>
-      <separator/>
-      <toolitem action="Preferences"/>
-      <toolitem action="Tools"/>
-      <separator/>
-      <toolitem action="About"/>
-      <toolitem action="Quit"/>
-   </toolbar>
-</ui>
-"""
+        @param parent: The parent window
+        @param msgtype: The sort of dialog
+        @param data: Tuple of primary text, secondary text and dialog title
+        @param extra: Extra data to use with a string formatter
+        """
 
-photoalbumui = """
-<ui>
-   <toolbar name="Toolbar">
-      <toolitem action="First"/>
-      <toolitem action="Prev"/>
-      <toolitem action="Next"/>
-      <toolitem action="Last"/>
-      <separator/>
-      <toolitem action="Slide"/>
-      <separator/>
-      <toolitem action="Screen"/>
-      <separator/>
-      <toolitem action="Fit"/>
-      <toolitem action="In"/>
-      <toolitem action="Out"/>
-      <separator/>
-      <toolitem action="Close"/>
-   </toolbar>
-</ui>
-"""
-
-pedigreeui = """
-<ui>
-   <toolbar name="Toolbar">
-      <toolitem action="Save"/>
-      <toolitem action="Mail"/>
-      <separator/>
-      <toolitem action="Preview"/>
-      <toolitem action="Print"/>
-      <separator/>
-      <toolitem action="Close"/>
-   </toolbar>
-</ui>
-"""
-
-resultui = """
-<ui>
-   <toolbar name="Toolbar">
-      <toolitem action="Save"/>
-      <toolitem action="Mail"/>
-      <separator/>
-      <toolitem action="Preview"/>
-      <toolitem action="Print"/>
-      <separator/>
-      <toolitem action="Filter"/>
-      <separator/>
-      <toolitem action="Close"/>
-   </toolbar>
-</ui>
-"""
-
-previewui = """
-<ui>
-   <toolbar name="Toolbar">
-      <toolitem action="First"/>
-      <toolitem action="Prev"/>
-      <toolitem action="Next"/>
-      <toolitem action="Last"/>
-      <separator/>
-      <toolitem action="Fit"/>
-      <toolitem action="In"/>
-      <toolitem action="Out"/>
-      <separator/>
-      <toolitem action="Close"/>
-   </toolbar>
-</ui>
-"""
-
-
-def get_backup_filefilter():
-    backupFileFilter = gtk.FileFilter()
-    backupFileFilter.set_name("PP Backups")
-    backupFileFilter.add_mime_type("zip/zip")
-    backupFileFilter.add_pattern("*PigeonPlannerBackup.zip")
-
-    return backupFileFilter
-
-def message_dialog(msgtype, data, parent=None, extra=None):
-    """
-    Display a message dialog.
-
-    @param parent: The parent window
-    @param msgtype: The sort of dialog
-    @param data: Tuple of primary text, secondary text and dialog title
-    @param extra: Extra data to use with a string formatter
-    """
-
-    if extra:
-        head = data[0] %extra
-    else:
-        head = data[0]
-    text = data[1]
-    title = data[2]
-
-    if msgtype == const.ERROR:
-        msgtype = gtk.MESSAGE_ERROR
-        buttons = gtk.BUTTONS_OK
-    elif msgtype == const.WARNING:
-        msgtype = gtk.MESSAGE_WARNING
-        buttons = gtk.BUTTONS_YES_NO
-    elif msgtype == const.QUESTION:
-        msgtype = gtk.MESSAGE_QUESTION
-        buttons = gtk.BUTTONS_YES_NO
-        title = head + " - Pigeon Planner"
-    elif msgtype == const.INFO:
-        msgtype = gtk.MESSAGE_INFO
-        buttons = gtk.BUTTONS_OK
-
-    dialog = gtk.MessageDialog(parent=parent, type=msgtype,
-                               message_format=head, buttons=buttons)
-    dialog.format_secondary_text(text)
-    dialog.set_title(title)
-    result = dialog.run()
-    if result == -9:
-        dialog.destroy()
-        return False
-    elif result == -8:
-        dialog.destroy()
-        return True
-    dialog.destroy()
-
-def about_dialog(parent):
-    """
-    Build and show the about dialog
-
-    @param parent: Parent for the dialog
-    """
-
-    dialog = gtk.AboutDialog()
-    dialog.set_transient_for(parent)
-    dialog.set_icon_from_file(os.path.join(const.IMAGEDIR, 'icon_logo.png'))
-    dialog.set_modal(True)
-    dialog.set_property("skip-taskbar-hint", True)
-
-    dialog.set_name(const.NAME)
-    dialog.set_version(const.VERSION)
-    dialog.set_copyright(const.COPYRIGHT)
-    dialog.set_comments(const.DESCRIPTION)
-    dialog.set_website(const.WEBSITE)
-    dialog.set_website_label("Pigeon Planner website")
-    dialog.set_authors(const.AUTHORS)
-    dialog.set_artists(const.ARTISTS)
-    dialog.set_translator_credits(_('translator-credits'))
-    dialog.set_license(const.LICENSE)
-    dialog.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(
-                                            os.path.join(const.IMAGEDIR,
-                                                         'icon_logo.png'),
-                                            80, 80))
-
-    result = dialog.run()
-    dialog.destroy()
-
-def set_multiple_sensitive(widgets):
-    """ 
-    Set multiple widgets sensitive at once
-
-    @param widgets: dic of widgets with booleans
-    """
-
-    for key in widgets.keys():
-        key.set_sensitive(widgets[key])
-
-def set_multiple_visible(widgets):
-    """ 
-    Set multiple widgets visible at once
-
-    @param widgets: dic of widgets with booleans
-    """
-
-    for key in widgets.keys():
-        if widgets[key]:
-            key.show()
+        if extra:
+            head = data[0] %extra
         else:
-            key.hide()
+            head = data[0]
+        text = data[1]
+        title = data[2]
 
-def popup_menu(event, entries):
-    """
-    Make a right click menu
+        if msgtype == const.ERROR:
+            msgtype = gtk.MESSAGE_ERROR
+            buttons = gtk.BUTTONS_OK
+        elif msgtype == const.WARNING:
+            msgtype = gtk.MESSAGE_WARNING
+            buttons = gtk.BUTTONS_YES_NO
+        elif msgtype == const.QUESTION:
+            msgtype = gtk.MESSAGE_QUESTION
+            buttons = gtk.BUTTONS_YES_NO
+            title = head + " - Pigeon Planner"
+        elif msgtype == const.INFO:
+            msgtype = gtk.MESSAGE_INFO
+            buttons = gtk.BUTTONS_OK
 
-    @param entries: List of wanted menuentries
-    """
+        gtk.MessageDialog.__init__(self, parent, 0, msgtype)
+        self.set_markup(head)
+        self.format_secondary_text(text)
+        self.set_title(title)
 
-    menu = gtk.Menu()
-    for stock_id, callback, data in entries:
-        item = gtk.ImageMenuItem(stock_id)
-        if data:
-            item.connect("activate", callback, data)
-        else:
-            item.connect("activate", callback)
-        item.show()
-        menu.append(item)
-    menu.popup(None, None, None, 0, event.time)
+        self.add_button(gtk.STOCK_NO, gtk.RESPONSE_NO)
+        self.add_button(gtk.STOCK_YES, gtk.RESPONSE_YES)
 
-def set_completion(widget):
-    """
-    Set entrycompletion on given widget
-
-    @param widget: the widget to set entrycompletion
-    """
-
-    completion = gtk.EntryCompletion()
-    completion.set_model(widget.get_model())
-    completion.set_minimum_key_length(1)
-    completion.set_text_column(0)
-    widget.child.set_completion(completion)
-
-def set_combobox_wrap(combobox):
-    """
-    Wrap the columns of a combobox depending on the number of items
-
-    @param combobox: the combobox
-    """
-
-    length = len(combobox.get_model())
-    if length > 10 and length <= 30:
-        combobox.set_wrap_width(2)
-    elif length > 30:
-        combobox.set_wrap_width(3)
-
-def fill_combobox(combobox, items, active=0):
-    """
-    Fill a combobox with the given data
-
-    @param widget: the combobox
-    @param items: list of items to add
-    @param active: index of the active value
-    """
-
-    model = combobox.get_model()
-    model.clear()
-    items.sort()
-    for item in items:
-        model.append([item])
-
-    set_combobox_wrap(combobox)
-    combobox.set_active(active)
-
-def create_sex_combobox(sexdic):
-    store = gtk.ListStore(str, str)
-    for key, value in sexdic.items():
-        store.insert(int(key), [key, value])
-    cell = gtk.CellRendererText()
-    combobox = gtk.ComboBox(store)
-    combobox.pack_start(cell, True)
-    combobox.add_attribute(cell, 'text', 1)
-    combobox.set_active(0)
-    combobox.show()
-
-    return combobox
-
-def create_status_combobox():
-    store = gtk.ListStore(str)
-    for item in [_("Dead"), _("Active"), _("Sold"), _("Lost")]:
-        store.append([item])
-    cell = gtk.CellRendererText()
-    combobox = gtk.ComboBox(store)
-    combobox.pack_start(cell, True)
-    combobox.add_attribute(cell, 'text', 0)
-    combobox.set_active(0)
-
-    return combobox
+        self.response = self.run()
+        self.destroy()
 
 
-class Statusbar:
-    def __init__(self, statusbar):
-        self.statusbar = statusbar
+class AboutDialog(gtk.AboutDialog):
+    def __init__(self, parent):
+        gtk.AboutDialog.__init__(self)
 
-    def get_id(self, text):
-        return self.statusbar.get_context_id(text)
+        gtk.about_dialog_set_url_hook(common.url_hook)
+        gtk.about_dialog_set_email_hook(common.email_hook)
 
-    def push_message(self, context_id, message):
-        self.statusbar.push(context_id, message)
+        self.set_transient_for(parent)
+        self.set_icon_from_file(os.path.join(const.IMAGEDIR, 'icon_logo.png'))
+        self.set_modal(True)
+        self.set_property("skip-taskbar-hint", True)
 
-    def pop_message(self, context_id):
-        self.statusbar.pop(context_id)
+        self.set_name(const.NAME)
+        self.set_version(const.VERSION)
+        self.set_copyright(const.COPYRIGHT)
+        self.set_comments(const.DESCRIPTION)
+        self.set_website(const.WEBSITE)
+        self.set_website_label("Pigeon Planner website")
+        self.set_authors(const.AUTHORS)
+        self.set_artists(const.ARTISTS)
+        self.set_translator_credits(_('translator-credits'))
+        self.set_license(const.LICENSE)
+        self.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(
+                                                os.path.join(const.IMAGEDIR,
+                                                             'icon_logo.png'),
+                                                80, 80))
+
+        result = self.run()
+        self.destroy()
 
 
 class BackupDialog(gtk.Dialog):
@@ -435,28 +161,37 @@ class BackupDialog(gtk.Dialog):
         if folder:
             success = backup.make_backup(folder)
             if success:
-                message_dialog(const.INFO, messages.MSG_BACKUP_SUCCES, self.par)
+                MessageDialog(const.INFO, messages.MSG_BACKUP_SUCCES, self.par)
             else:
-                message_dialog(const.INFO, messages.MSG_BACKUP_FAILED, self.par)
+                MessageDialog(const.INFO, messages.MSG_BACKUP_FAILED, self.par)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             success = backup.restore_backup(zipfile)
             if success:
-                message_dialog(const.INFO, messages.MSG_RESTORE_SUCCES, self.par)
+                MessageDialog(const.INFO, messages.MSG_RESTORE_SUCCES, self.par)
             else:
-                message_dialog(const.INFO, messages.MSG_RESTORE_FAILED, self.par)
+                MessageDialog(const.INFO, messages.MSG_RESTORE_FAILED, self.par)
+
 
 class EditPedigreeDialog(gtk.Dialog):
-    def __init__(self, parent):
+    def __init__(self, parent, main, pindex, sex, kinfo, draw):
         gtk.Dialog.__init__(self, _("Insert a pigeon"), parent,
                             gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
 
         self.set_position(gtk.WIN_POS_MOUSE)
         self.set_property("skip-taskbar-hint", True)
+        self.connect('response', self.on_dialog_response)
 
-        table = gtk.Table(2,2)
+        self.main = main
+        self.draw = draw
+        self.pindex = pindex
+        self.sex = sex
+        if kinfo is not None:
+            self.kindex = kinfo[0]
+
+        table = gtk.Table(2, 2)
         table.set_row_spacings(4)
         table.set_col_spacings(8)
         table.set_homogeneous(False)
@@ -498,6 +233,110 @@ class EditPedigreeDialog(gtk.Dialog):
         b = self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_APPLY)
         b.set_property('can-default', True)
         b.set_property('has-default', True)
+
+    def run(self, ring, year, details):
+        if ring and year:
+            self.entryRing.set_text(ring)
+            self.entryYear.set_text(year)
+            self.entryExtra1.set_text(details[0])
+            self.entryExtra2.set_text(details[1])
+            self.entryExtra3.set_text(details[2])
+            self.entryExtra4.set_text(details[3])
+            self.entryExtra5.set_text(details[4])
+            self.entryExtra6.set_text(details[5])
+
+        if not self.kindex in self.main.parser.pigeons:
+            data = (kinfo[0], kinfo[1], kinfo[2], kinfo[3],
+                    0, 1, '', '', '', '', '', '', '', '', '',
+                    kinfo[4], kinfo[5], kinfo[6],
+                    kinfo[7], kinfo[8], kinfo[9])
+            self.main.database.insert_pigeon(data)
+
+        self.entryRing.grab_focus()
+        self.entryRing.set_position(-1)
+
+        self.show_all()
+
+    def on_dialog_response(self, dialog, response):
+        if response == gtk.RESPONSE_APPLY:
+            self.save_pigeon_data()
+
+        self.destroy()
+
+    def save_pigeon_data(self):
+        ring = self.entryRing.get_text()
+        year = self.entryYear.get_text()
+
+        error, msg = checks.check_ring_entry(ring, year)
+        if error:
+            MessageDialog(const.ERROR, msg, self)
+            return False
+
+        pindex = common.get_pindex_from_band(ring, year)
+
+        if self.pindex and self.pindex in self.main.parser.pigeons:
+            data = (pindex, ring, year,
+                    self.entryExtra1.get_text(),
+                    self.entryExtra2.get_text(),
+                    self.entryExtra3.get_text(),
+                    self.entryExtra4.get_text(),
+                    self.entryExtra5.get_text(),
+                    self.entryExtra6.get_text(),
+                    self.pindex)
+            self.edit_pigeon(data)
+        else:
+            data = (pindex, ring, year, self.sex , 0, 1,
+                    '', '', '', '', '', '', '', '', '',
+                    self.entryExtra1.get_text(),
+                    self.entryExtra2.get_text(),
+                    self.entryExtra3.get_text(),
+                    self.entryExtra4.get_text(),
+                    self.entryExtra5.get_text(),
+                    self.entryExtra6.get_text())
+            self.add_pigeon(data)
+
+        return True
+
+    def edit_parent(self, kindex, band, year, sex):
+        if sex == '0':
+            self.main.database.update_pigeon_sire((band, year, kindex))
+        else:
+            self.main.database.update_pigeon_dam((band, year, kindex))
+
+    def edit_pigeon(self, data):
+        self.main.database.update_pedigree_pigeon(data)
+        self.edit_parent(self.kindex, data[1], data[2], self.sex)
+
+        self.redraw_pedigree()
+
+    def add_pigeon(self, data):
+        self.main.database.insert_pigeon(data)
+        self.edit_parent(self.kindex, data[1], data[2], self.sex)
+
+        self.redraw_pedigree()
+
+    def remove_pigeon(self, widget, pindex):
+        self.main.database.delete_pigeon(pindex)
+        self.edit_parent(self.kindex, '', '', self.sex)
+
+        self.redraw_pedigree()
+
+    def clear_box(self, widget=None):
+        self.edit_parent(self.kindex, '', '', self.sex)
+
+        self.redraw_pedigree()
+
+    def redraw_pedigree(self):
+        self.main.parser.get_pigeons()
+        tree_iter = self.main.selection.get_selected()[1]
+        self.main.selection.unselect_iter(tree_iter)
+        self.main.selection.select_iter(tree_iter)
+
+        mainpindex = self.main.get_main_ring()[0]
+        self.draw.draw_pedigree(self.main.parser.pigeons,
+                                [self.draw.pedigree.tableSire,
+                                 self.draw.pedigree.tableDam],
+                                mainpindex, True)
 
 
 class FilterDialog(gtk.Dialog):

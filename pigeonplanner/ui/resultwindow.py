@@ -25,12 +25,15 @@ import datetime
 
 import gtk
 
-import const
-import common
-import mailing
-import widgets
-from printing import PrintResults
-from gtkbuilderapp import GtkbuilderApp
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import builder
+from pigeonplanner import printing
+from pigeonplanner.ui import dialogs
+from pigeonplanner.ui import maildialog
+from pigeonplanner.ui import toolswindow
+from pigeonplanner.ui.widgets import menus
+from pigeonplanner.ui.widgets import comboboxes
 
 
 (KEY,
@@ -51,9 +54,9 @@ from gtkbuilderapp import GtkbuilderApp
  COMMENT) = range(16)
 
 
-class ResultWindow(GtkbuilderApp):
+class ResultWindow(builder.GtkBuilder):
     def __init__(self, main, pigeons, database):
-        GtkbuilderApp.__init__(self, const.GLADERESULT, const.DOMAIN)
+        builder.GtkBuilder.__init__(self, const.GLADERESULT)
 
         self.main = main
         self.database = database
@@ -77,7 +80,7 @@ class ResultWindow(GtkbuilderApp):
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(widgets.resultui)
+        uimanager.add_ui_from_string(menus.resultui)
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.resultwindow.add_accel_group(accelgroup)
@@ -181,7 +184,7 @@ class ResultWindow(GtkbuilderApp):
         self.resultwindow.destroy()
 
     def on_filter_clicked(self, widget):
-        filterdialog = widgets.FilterDialog(self.resultwindow,
+        filterdialog = dialogs.FilterDialog(self.resultwindow,
                                             _("Filter results"),
                                             self.fill_treeview)
 
@@ -218,7 +221,7 @@ class ResultWindow(GtkbuilderApp):
         self.do_operation('mail')
         results = os.path.join(const.TEMPDIR, self.pdfname)
 
-        mailing.MailDialog(self.resultwindow, self.database, results)
+        maildialog.MailDialog(self.resultwindow, self.database, results)
 
     def on_save_clicked(self, widget):
         self.do_operation('save')
@@ -232,8 +235,8 @@ class ResultWindow(GtkbuilderApp):
     def do_operation(self, op):
         userinfo = common.get_own_address(self.main.database)
 
-        if not common.check_userinfo(self.resultwindow, self.main,
-                                     userinfo['name']):
+        if not toolswindow.edit_user_info(self.resultwindow, self.main,
+                                          userinfo['name']):
             return
 
         results = []
@@ -251,8 +254,8 @@ class ResultWindow(GtkbuilderApp):
                 values.append(str(value))
             results.append(values)
 
-        PrintResults(self.resultwindow, results, userinfo,
-                     self.main.options.optionList, op, self.pdfname)
+        printing.PrintResults(self.resultwindow, results, userinfo,
+                              self.main.options.optionList, op, self.pdfname)
 
     def fill_filters(self, model, path, treeiter):
         pindex, ring, year, date, point, sector = model.get(treeiter,
@@ -283,7 +286,7 @@ class ResultWindow(GtkbuilderApp):
         combobox.pack_start(cell, True)
         combobox.add_attribute(cell, 'text', 1)
         combobox.set_active(0)
-        widgets.set_combobox_wrap(combobox)
+        comboboxes.set_combobox_wrap(combobox)
 
         return combobox
 

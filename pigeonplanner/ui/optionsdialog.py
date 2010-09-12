@@ -24,16 +24,15 @@ import os
 
 import gtk
 
-import const
-import widgets
-import options
-import messages
-from gtkbuilderapp import GtkbuilderApp
+from pigeonplanner import const
+from pigeonplanner import builder
+from pigeonplanner import options
+from pigeonplanner import messages
 
 
-class OptionsDialog(GtkbuilderApp):
+class OptionsDialog(builder.GtkBuilder):
     def __init__(self, main):
-        GtkbuilderApp.__init__(self, const.GLADEOPTIONS, const.DOMAIN)
+        builder.GtkBuilder.__init__(self, const.GLADEOPTIONS)
 
         self.main = main
 
@@ -178,9 +177,10 @@ class OptionsDialog(GtkbuilderApp):
         widget.set_text('%s %s' % (value, dstring))
 
     def on_default_clicked(self, widget):
-        if widgets.message_dialog(const.WARNING,
+        d = dialogs.MessageDialog(const.WARNING,
                                   messages.MSG_DEFAULT_OPTIONS,
-                                  self.optionsdialog):
+                                  self.optionsdialog)
+        if d.response == gtk.RESPONSE_YES:
             self.opt.write_default()
             self.opt = options.GetOptions()
             self.set_options()
@@ -244,8 +244,8 @@ class OptionsDialog(GtkbuilderApp):
         if self.languagelookup[self.cbLang.get_active()][1] != \
            self.opt.optionList.language or const.WINDOWS and \
            self.cbThemes.get_active() != self.opt.optionList.theme:
-            widgets.message_dialog(const.INFO, messages.MSG_RESTART_APP,
-                                   self.optionsdialog)
+            dialogs.MessageDialog(const.INFO, messages.MSG_RESTART_APP,
+                                  self.optionsdialog)
 
         self.main.set_treeview_columns()
 

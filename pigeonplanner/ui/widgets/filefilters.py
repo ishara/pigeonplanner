@@ -15,36 +15,31 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
-"""
-Provides functions to check band and year entries
-"""
+
+import gtk
 
 
-from pigeonplanner import messages
+class BackupFilter(gtk.FileFilter):
+    def __init__(self):
+        gtk.FileFilter.__init__(self)
+
+        self.set_name("PP Backups")
+        self.add_mime_type("zip/zip")
+        self.add_pattern("*PigeonPlannerBackup.zip")
 
 
-def check_ring_entry(inputRing, inputYear):
-    """
-    Check if the ring and year input are valid
-    
-    @param inputRing: The ringnumber to check
-    @param inputYear: the year to check
-    """
+class ImageFilter(gtk.FileFilter):
+    def __init__(self):
+        gtk.FileFilter.__init__(self)
 
-    msg = ""
-    error = False
+        self.set_name(_("Images"))
+        self.add_pixbuf_formats()
 
-    if not inputRing or not inputYear:
-        error = True
-        msg = messages.MSG_EMPTY_FIELDS
 
-    elif not inputYear.isdigit():
-        error = True
-        msg = messages.MSG_INVALID_NUMBER
+class PdfFilter(gtk.FileFilter):
+    def __init__(self):
+        gtk.FileFilter.__init__(self)
 
-    elif not len(inputYear) == 4:
-        error = True
-        msg = messages.MSG_INVALID_LENGTH
-
-    return error, msg
+        self.set_name("PDF")
+        self.add_pattern("*.pdf")
 

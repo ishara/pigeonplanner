@@ -27,10 +27,10 @@ import ConfigParser
 import logging
 logger = logging.getLogger(__name__)
 
-import const
+from pigeonplanner import const
 
 
-class Configuration:
+class Configuration(object):
     def __init__(self):
         """
         Initialisation.
@@ -264,7 +264,7 @@ class OptionEmptyError(Exception):
     def __init__(self):
         Exception.__init__(self)
 
-class Section:
+class Section(object):
     def __init__(self, name, options=None):
         """
         Initialisation.
@@ -284,7 +284,7 @@ class Section:
             self.options = []
         self.options.append(option)
 
-class Option:
+class Option(object):
     def __init__(self, name, defaultValue):
         """
         Initialisation.
