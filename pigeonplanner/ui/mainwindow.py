@@ -70,7 +70,7 @@ class MainWindow(builder.GtkBuilder):
                                                 os.path.join(const.IMAGEDIR,
                                                              'icon_logo.png'),
                                                 75, 75)
-        self.sexDic = {'0': _('cock'), '1': _('hen'), '2': _('young bird')}
+        self.sexDic = {'0': _('Cock'), '1': _('Hen'), '2': _('Young bird')}
         self.pigeonStatus = {0: 'Dead', 1: 'Active', 2: 'Sold', 3: 'Lost'}
         self.today = datetime.date.today().strftime(const.DATE_FORMAT)
         self.entryDate.set_text(self.today)
