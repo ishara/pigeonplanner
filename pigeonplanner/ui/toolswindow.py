@@ -230,6 +230,8 @@ class ToolsWindow(builder.GtkBuilder):
                                         datetime.timedelta(seconds=flight),
                                         datetime.timedelta(seconds=arrival)])
 
+        self.ls_velocity.set_sort_column_id(0, gtk.SORT_ASCENDING)
+
     def on_printcalc_clicked(self, widget):
         data = [self.ls_velocity.get(row.iter, 0, 1, 2)
                 for row in self.ls_velocity]
