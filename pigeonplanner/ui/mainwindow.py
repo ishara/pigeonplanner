@@ -52,6 +52,7 @@ from pigeonplanner.ui import pedigreewindow
 from pigeonplanner.ui.widgets import menus
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.widgets import filefilters
+from pigeonplanner.ui.widgets import checkbutton
 
 
 class MainWindow(builder.GtkBuilder):
@@ -104,6 +105,8 @@ class MainWindow(builder.GtkBuilder):
         self.cbsex = comboboxes.SexCombobox(self.sexDic)
         self.table1.attach(self.cbRangeSex, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL)
         self.table4.attach(self.cbsex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL)
+        self.check_vaccination = checkbutton.VaccinationCheck()
+        self.alignment_vaccination.add(self.check_vaccination)
 
         cbentries = [self.cbRacepoint, self.cbSector, self.cbType,
                      self.cbCategory, self.cbWeather, self.cbWind,
@@ -1433,7 +1436,7 @@ class MainWindow(builder.GtkBuilder):
 
             for entry in self.get_objects_from_prefix('entry_med_'):
                 entry.set_text('')
-
+            self.check_vaccination.set_active(False)
             return
 
         data = self.get_selected_medication()
@@ -1443,7 +1446,7 @@ class MainWindow(builder.GtkBuilder):
         self.entry_med_med.set_text(data[6])
         self.entry_med_dosage.set_text(data[7])
         self.entry_med_comment.set_text(data[8])
-        self.label_vaccination.set_sensitive(data[9])
+        self.check_vaccination.set_active(data[9])
 
     def selection_changed(self, selection):
         """
