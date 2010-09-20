@@ -188,6 +188,7 @@ class EditPedigreeDialog(gtk.Dialog):
         self.draw = draw
         self.pindex = pindex
         self.sex = sex
+        self.kinfo = kinfo
         if kinfo is not None:
             self.kindex = kinfo[0]
 
@@ -246,10 +247,10 @@ class EditPedigreeDialog(gtk.Dialog):
             self.entryExtra6.set_text(details[5])
 
         if not self.kindex in self.main.parser.pigeons:
-            data = (kinfo[0], kinfo[1], kinfo[2], kinfo[3],
+            data = (self.kinfo[0], self.kinfo[1], self.kinfo[2], self.kinfo[3],
                     0, 1, '', '', '', '', '', '', '', '', '',
-                    kinfo[4], kinfo[5], kinfo[6],
-                    kinfo[7], kinfo[8], kinfo[9])
+                    self.kinfo[4], self.kinfo[5], self.kinfo[6],
+                    self.kinfo[7], self.kinfo[8], self.kinfo[9])
             self.main.database.insert_pigeon(data)
 
         self.entryRing.grab_focus()
