@@ -133,7 +133,8 @@ class PedigreeBox_cairo(gtk.DrawingArea):
                                               messages.MSG_SHOW_PIGEON,
                                               self.main.mainwindow)
                     if d.response == gtk.RESPONSE_YES:
-                        self.main.database.show_pigeon(self.pindex, 1)
+                        self.main.database.update_table(self.main.database.PIGEONS,
+                                                        (1, self.pindex), 5, 1)
                         self.main.parser.get_pigeons()
                         self.main.fill_treeview()
                         return
@@ -369,7 +370,8 @@ class PedigreeBox(gtk.DrawingArea):
                                               messages.MSG_SHOW_PIGEON,
                                               self.main.mainwindow)
                     if d.response == gtk.RESPONSE_YES:
-                        self.main.database.show_pigeon(self.pindex, 1)
+                        self.main.database.update_table(self.main.database.PIGEONS,
+                                                        (1, self.pindex), 5, 1)
                         self.main.parser.get_pigeons()
                         self.main.fill_treeview()
                         return

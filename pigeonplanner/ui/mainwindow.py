@@ -144,17 +144,17 @@ class MainWindow(builder.GtkBuilder):
         if self.options.optionList.statusbar:
             self.MenuStatusbar.set_active(True)
 
-        self.listdata = {self.cbSector: self.database.get_all_sectors(),
-                         self.cbType: self.database.get_all_types(),
-                         self.cbCategory: self.database.get_all_categories(),
-                         self.cbRacepoint: self.database.get_all_racepoints(),
-                         self.cbWeather: self.database.get_all_weather(),
-                         self.cbWind: self.database.get_all_wind(),
-                         self.cbColour: self.database.get_all_colours(),
-                         self.cbStrain: self.database.get_all_strains(),
-                         self.cbLoft: self.database.get_all_lofts()}
-        for key, value in self.listdata.items():
-            comboboxes.fill_combobox(key, value)
+        listdata = {self.cbSector: self.database.SECTORS,
+                    self.cbType: self.database.TYPES,
+                    self.cbCategory: self.database.CATEGORIES,
+                    self.cbRacepoint: self.database.RACEPOINTS,
+                    self.cbWeather: self.database.WEATHER,
+                    self.cbWind: self.database.WIND,
+                    self.cbColour: self.database.COLOURS,
+                    self.cbStrain: self.database.STRAINS,
+                    self.cbLoft: self.database.LOFTS}
+        for key, value in listdata.items():
+            comboboxes.fill_combobox(key, self.database.select_from_table(value))
 
         self.statusmsgs = {'entryRing1': (self.statusbar.get_context_id("band"),
                             _("Enter the bandnumber of the pigeon")),
@@ -390,27 +390,28 @@ class MainWindow(builder.GtkBuilder):
         if answer == 2:
             if self.chkKeep.get_active():
                 logger.info("Remove: Hiding the pigeon")
-                self.database.show_pigeon(pindex, 0)
+                self.database.update_table(self.database.PIGEONS,
+                                           (0, pindex), 5, 1)
             else:
                 logger.info("Remove: Removing the pigeon")
-                self.database.delete_pigeon(pindex)
+                self.database.delete_from_table(self.database.PIGEONS, pindex)
                 # Only remove status when pigeon is completely removed
                 status = self.parser.pigeons[pindex].active
                 if status != const.ACTIVE:
-                    self.database.delete_status(self.pigeonStatus[status],
-                                                pindex)
+                    self.database.delete_from_table(self.pigeonStatus[status],
+                                                    pindex)
                 # Same for the picture
                 image = self.parser.pigeons[pindex].image
                 if image:
                     os.remove(common.get_thumb_path(image))
                 # And medication
-                self.database.delete_medication_from_band(pindex)
+                self.database.delete_from_table(self.database.MED, pindex, 2)
 
                 self.parser.get_pigeons()
 
             if not self.chkResults.get_active():
                 logger.info("Remove: Removing the results")
-                self.database.delete_result_from_band(pindex)
+                self.database.delete_from_table(self.database.RESULT, pindex)
 
             self.liststore.remove(tIter)
 
@@ -443,13 +444,16 @@ class MainWindow(builder.GtkBuilder):
                                                            self.cbFilterSex)
         self.chkFilterColours, self.cbFilterColour = \
                                 filterdialog.add_filter_combobox(_("Colours"),
-                                            self.database.get_all_colours())
+                                            self.database.select_from_table(
+                                                self.database.COLOURS))
         self.chkFilterStrains, self.cbFilterStrain = \
                                 filterdialog.add_filter_combobox(_("Strains"),
-                                            self.database.get_all_strains())
+                                            self.database.select_from_table(
+                                                self.database.STRAINS))
         self.chkFilterLofts, self.cbFilterLoft = \
                                 filterdialog.add_filter_combobox(_("Lofts"),
-                                            self.database.get_all_lofts())
+                                            self.database.select_from_table(
+                                                self.database.LOFTS))
         self.cbFilterStatus = comboboxes.StatusCombobox()
         self.chkFilterStatus = filterdialog.add_filter_custom(_("Status"),
                                                         self.cbFilterStatus)
@@ -543,7 +547,8 @@ class MainWindow(builder.GtkBuilder):
                                              self.mainwindow):
                     continue
 
-            self.database.insert_pigeon((pindex, band, rangeyear, rangesex,
+            self.database.insert_into_table(self.database.PIGEONS,
+                                        (pindex, band, rangeyear, rangesex,
                                          1, 1, '', '', '', '', '', '', '',
                                          '', '', '', '', '', '', '', ''))
 
@@ -765,7 +770,7 @@ class MainWindow(builder.GtkBuilder):
                                      self.mainwindow):
             return
 
-        self.database.delete_result_from_id(model[tIter][0])
+        self.database.delete_from_table(self.database.RESULT, model[tIter][0], 0)
 
         self.lsResult.remove(tIter)
 
@@ -822,7 +827,7 @@ class MainWindow(builder.GtkBuilder):
                 return
 
             data = (pindex, ) + data
-            rowid = self.database.insert_result(data)
+            rowid = self.database.insert_into_table(self.database.RESULTS, data)
             self.lsResult.insert(0, [rowid, date, point, place, out, cof,
                                      sector, ftype, category, weather,
                                      wind, comment])
@@ -836,38 +841,46 @@ class MainWindow(builder.GtkBuilder):
                               9, weather, 10, wind, 11, comment)
 
             data += (self.lsResult.get_value(node, 0), )
-            self.database.update_result(data)
+            self.database.update_table(self.database.RESULTS, data, 2, 0)
 
             self.hide_result_dialog()
 
-        self.database.insert_racepoint((point, ))
+        self.database.insert_into_table(self.database.RACEPOINTS,
+                                        (point, "", "", ""))
         comboboxes.fill_combobox(self.cbRacepoint,
-                                 self.database.get_all_racepoints())
+                                 self.database.select_from_table(
+                                            self.database.RACEPOINTS))
 
         if sector:
-            self.database.insert_sector((sector, ))
+            self.database.insert_into_table(self.database.SECTORS, (sector, ))
             comboboxes.fill_combobox(self.cbSector,
-                                     self.database.get_all_sectors())
+                                     self.database.select_from_table(
+                                            self.database.SECTORS))
 
         if ftype:
-            self.database.insert_type((ftype, ))
+            self.database.insert_into_table(self.database.TYPES, (ftype, ))
             comboboxes.fill_combobox(self.cbType,
-                                     self.database.get_all_types())
+                                     self.database.select_from_table(
+                                            self.database.TYPES))
 
         if category:
-            self.database.insert_category((category, ))
+            self.database.insert_into_table(self.database.CATEGORIES,
+                                            (category, ))
             comboboxes.fill_combobox(self.cbCategory,
-                                     self.database.get_all_categories())
+                                     self.database.select_from_table(
+                                            self.database.CATEGORIES))
 
         if weather:
-            self.database.insert_weather((weather, ))
+            self.database.insert_into_table(self.database.WEATHER, (weather, ))
             comboboxes.fill_combobox(self.cbWeather,
-                                     self.database.get_all_weather())
+                                     self.database.select_from_table(
+                                            self.database.WEATHER))
 
         if wind:
-            self.database.insert_wind((wind, ))
+            self.database.insert_into_table(self.database.WIND, (wind, ))
             comboboxes.fill_combobox(self.cbWind,
-                                     self.database.get_all_wind())
+                                     self.database.select_from_table(
+                                            self.database.WIND))
 
     def on_resultdialogclose_clicked(self, widget):
         self.hide_result_dialog()
@@ -910,7 +923,8 @@ class MainWindow(builder.GtkBuilder):
         self.clear_medicationdialog_fields()
         self.fill_medicationselect_treeview()
         comboboxes.fill_combobox(self.cbMedicationLoft,
-                                 self.database.get_all_lofts())
+                                 self.database.select_from_table(
+                                                        self.database.LOFTS))
         self.medicationDialogMode = const.ADD
         self.medicationdialog.show()
         self.entry_meddialog_date.grab_focus()
@@ -933,7 +947,7 @@ class MainWindow(builder.GtkBuilder):
             return
 
         if dialog.check.get_active():
-            self.database.delete_medication_from_id(medid)
+            self.database.delete_from_table(self.database.MED, medid)
         else:
             self.database.delete_medication_from_id_pindex(medid, pindex)
         dialog.destroy()
@@ -945,7 +959,8 @@ class MainWindow(builder.GtkBuilder):
     def on_editmedication_clicked(self, widget):
         self.fill_medicationselect_treeview()
         comboboxes.fill_combobox(self.cbMedicationLoft,
-                                 self.database.get_all_lofts())
+                                 self.database.select_from_table(
+                                                        self.database.LOFTS))
 
         med = self.get_selected_medication()
         self.entry_meddialog_date.set_text(med[3])
@@ -981,7 +996,8 @@ class MainWindow(builder.GtkBuilder):
         if self.medicationDialogMode == const.ADD:
             medid = data[0] + common.get_random_number(10)
             for pindex in pigeons:
-                self.database.insert_medication((medid, pindex, ) + data)
+                self.database.insert_into_table(self.database.MED,
+                                                (medid, pindex, ) + data)
                 # Only fill med treeview on current pigeon
                 if not pindex == mainpindex: continue
                 rowiter = self.lsMedication.insert(0, [medid,
@@ -999,13 +1015,14 @@ class MainWindow(builder.GtkBuilder):
             pigeons_current = self.database.get_pigeons_from_medid(medid)
             for pindex in [pindex for pindex in pigeons
                            if pindex not in pigeons_current]:
-                self.database.insert_medication((medid, pindex, ) + data)
+                self.database.insert_into_table(self.database.MED,
+                                                (medid, pindex, ) + data)
             for pindex in [pindex for pindex in pigeons_current
                            if pindex not in pigeons]:
                 self.database.delete_medication_from_id_pindex(medid, pindex)
 
             data += (medid, )
-            self.database.update_medication(data)
+            self.database.update_table(self.database.MED, data, 3, 1)
 
             selection.unselect_iter(node)
             selection.select_iter(node)
@@ -1820,11 +1837,13 @@ class MainWindow(builder.GtkBuilder):
         data = (pindex_new, ) + infoTuple + ptuple
 
         if self.database.has_results(pindex):
-            self.database.update_result_pindex(pindex_new, pindex)
+            self.database.update_table(self.database.RESULTS,
+                                       (pindex_new, pindex), 1, 1)
         if self.database.has_medication(pindex):
-            self.database.update_medication_pindex(pindex_new, pindex)
+            self.database.update_table(self.database.MED,
+                                       (pindex_new, pindex), 2, 2)
 
-        self.database.update_pigeon(data)
+        self.database.update_table(self.database.PIGEONS, data, 1, 1)
 
         image = infoTuple[9]
         if image != self.preEditImage:
@@ -1837,22 +1856,31 @@ class MainWindow(builder.GtkBuilder):
         old_status = self.parser.pigeons[pindex].active
         if status != old_status:
             if old_status != const.ACTIVE:
-                self.database.delete_status(self.pigeonStatus[old_status],
-                                            pindex)
+                self.database.delete_from_table(self.pigeonStatus[old_status],
+                                                pindex)
 
             if status == const.DEAD:
-                self.database.insert_dead(ptuple + self.get_status_info()[0])
+                self.database.insert_into_table(self.database.DEAD,
+                                        ptuple + self.get_status_info()[0])
             elif status == const.SOLD:
-                self.database.insert_sold(ptuple + self.get_status_info()[1])
+                self.database.insert_into_table(self.database.SOLD,
+                                        ptuple + self.get_status_info()[1])
             elif status == const.LOST:
-                self.database.insert_lost(ptuple + self.get_status_info()[2])
+                self.database.insert_into_table(self.database.LOST,
+                                        ptuple + self.get_status_info()[2])
         else:
             if status == const.DEAD:
-                self.database.update_dead(self.get_status_info()[0] + ptuple)
+                self.database.update_table(self.database.DEAD,
+                                           self.get_status_info()[0] + ptuple,
+                                           2, 1)
             elif status == const.SOLD:
-                self.database.update_sold(self.get_status_info()[1] + ptuple)
+                self.database.update_table(self.database.SOLD,
+                                           self.get_status_info()[1] + ptuple,
+                                           2, 1)
             elif status == const.LOST:
-                self.database.update_lost(self.get_status_info()[2] + ptuple)
+                self.database.update_table(self.database.LOST,
+                                           self.get_status_info()[2] + ptuple,
+                                           2, 1)
 
         self.update_data(infoTuple)
         self.liststore.set(self.treeIterEdit,
@@ -1887,10 +1915,11 @@ class MainWindow(builder.GtkBuilder):
                                              self.mainwindow):
                     return
                 else:
-                    self.database.show_pigeon(pindex, 1)
+                    self.database.update_table(self.database.PIGEONS,
+                                               (1, pindex), 5, 1)
                     return
 
-        self.database.insert_pigeon(pindexTuple)
+        self.database.insert_into_table(self.database.PIGEONS, pindexTuple)
 
         if infoTuple[9]:
             common.image_to_thumb(infoTuple[9])
@@ -1898,11 +1927,14 @@ class MainWindow(builder.GtkBuilder):
         status = self.cbStatus.get_active()
 
         if status == const.DEAD:
-            self.database.insert_dead((pindex,) + self.get_status_info()[0])
+            self.database.insert_into_table(self.database.DEAD,
+                                        (pindex,) + self.get_status_info()[0])
         elif status == const.SOLD:
-            self.database.insert_sold((pindex,) + self.get_status_info()[1])
+            self.database.insert_into_table(self.database.SOLD,
+                                        (pindex,) + self.get_status_info()[1])
         elif status == const.LOST:
-            self.database.insert_lost((pindex,) + self.get_status_info()[2])
+            self.database.insert_into_table(self.database.LOST,
+                                        (pindex,) + self.get_status_info()[2])
 
         self.update_data(infoTuple)
 
@@ -1925,21 +1957,24 @@ class MainWindow(builder.GtkBuilder):
 
         colour = infoTuple[5]
         if colour:
-            self.database.insert_colour((colour, ))
+            self.database.insert_into_table(self.database.COLOURS, (colour, ))
             comboboxes.fill_combobox(self.cbColour,
-                                     self.database.get_all_colours())
+                                     self.database.select_from_table(
+                                                        self.database.COLOURS))
 
         strain = infoTuple[7]
         if strain:
-            self.database.insert_strain((strain, ))
+            self.database.insert_into_table(self.database.STRAINS, (strain, ))
             comboboxes.fill_combobox(self.cbStrain,
-                                     self.database.get_all_strains())
+                                     self.database.select_from_table(
+                                                        self.database.STRAINS))
 
         loft = infoTuple[8]
         if loft:
-            self.database.insert_loft((loft, ))
+            self.database.insert_into_table(self.database.LOFTS, (loft, ))
             comboboxes.fill_combobox(self.cbLoft,
-                                     self.database.get_all_lofts())
+                                     self.database.select_from_table(
+                                                        self.database.LOFTS))
 
     def draw_empty_pedigree(self):
         self.pedigree.draw_pedigree(self.parser.pigeons,

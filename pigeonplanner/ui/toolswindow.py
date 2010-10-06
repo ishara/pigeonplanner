@@ -70,6 +70,7 @@ class ToolsWindow(builder.GtkBuilder):
 
         self.main = main
         self.notification = notification
+        self.db = self.main.database
 
         self.toolsdialog.set_transient_for(self.main.mainwindow)
         self.linkbutton.set_uri(const.DOWNLOADURL)
@@ -251,7 +252,7 @@ class ToolsWindow(builder.GtkBuilder):
     def fill_events_view(self):
         self.ls_events.clear()
 
-        for item in self.main.database.get_all_events():
+        for item in self.db.get_all_events():
             rowiter = self.ls_events.insert(0, [item[0], item[1], item[2]])
             if item[0] == self.notification:
                 self.sel_events.select_iter(rowiter)
@@ -273,7 +274,7 @@ class ToolsWindow(builder.GtkBuilder):
             self.label_notify.set_text("-1")
             return
 
-        data = self.main.database.get_event_data(model[path][0])
+        data = self.db.get_event_data(model[path][0])
         self.textview_events.get_buffer().set_text(data[0])
         if int(data[1]):
             self.label_notification.set_text(
@@ -326,7 +327,7 @@ class ToolsWindow(builder.GtkBuilder):
         path, focus = self.tv_events.get_cursor()
         model, tIter = self.sel_events.get_selected()
 
-        self.main.database.delete_event(model[tIter][0])
+        self.db.delete_from_table(self.db.EVENTS, model[tIter][0], 0)
 
         self.ls_events.remove(tIter)
         if len(self.ls_events) > 0:
@@ -360,9 +361,9 @@ class ToolsWindow(builder.GtkBuilder):
             notifyday = eventday - (interval*86400)
 
         if self.eventsDialogMode == const.ADD:
-            rowid = self.main.database.insert_event((date, description,
-                                                     comment, notify,
-                                                     interval, notifyday))
+            rowid = self.db.insert_into_table(self.db.EVENTS,
+                                              (date, description, comment,
+                                               notify, interval, notifyday))
             rowiter = self.ls_events.insert(0, [rowid, date, description])
             self.sel_events.select_iter(rowiter)
             self.tv_events.scroll_to_cell(self.ls_events.get_path(rowiter))
@@ -371,8 +372,9 @@ class ToolsWindow(builder.GtkBuilder):
             model, node = selection.get_selected()
             self.ls_events.set(node, 1, date, 2, description)
             ID = self.ls_events.get_value(node, 0)
-            self.main.database.update_event((date, description, comment,
-                                             notify, interval, notifyday, ID))
+            self.db.update_table(self.database.EVENTS,
+                                 (date, description, comment,
+                                  notify, interval, notifyday, ID), 1, 0)
 
             selection.unselect_iter(node)
             selection.select_iter(node)
@@ -391,23 +393,23 @@ class ToolsWindow(builder.GtkBuilder):
         self.cbitems.get_model().clear()
 
         if datatype == _("Colours"):
-            items = self.main.database.get_all_colours()
+            items = self.db.select_from_table(self.db.COLOURS)
         elif datatype == _("Sectors"):
-            items = self.main.database.get_all_sectors()
+            items = self.db.select_from_table(self.db.SECTORES)
         elif datatype == _("Types"):
-            items = self.main.database.get_all_types()
+            items = self.db.select_from_table(self.db.TYPES)
         elif datatype == _("Categories"):
-            items = self.main.database.get_all_categories()
+            items = self.db.select_from_table(self.db.CATEGORIES)
         elif datatype == _("Racepoints"):
-            items = self.main.database.get_all_racepoints()
+            items = self.db.select_from_table(self.db.RACEPOINTS)
         elif datatype == _("Strains"):
-            items = self.main.database.get_all_strains()
+            items = self.db.select_from_table(self.db.STRAINS)
         elif datatype == _("Lofts"):
-            items = self.main.database.get_all_lofts()
+            items = self.db.select_from_table(self.db.LOFTS)
         elif datatype == _("Weather"):
-            items = self.main.database.get_all_weather()
+            items = self.db.select_from_table(self.db.WEATHER)
         elif datatype == _("Wind"):
-            items = self.main.database.get_all_wind()
+            items = self.db.select_from_table(self.db.WIND)
 
         if items:
             items.sort()
@@ -436,23 +438,23 @@ class ToolsWindow(builder.GtkBuilder):
             index = self.cbitems.get_active()
 
             if dataset == _("Colours"):
-                self.main.database.delete_colour(item)
+                self.db.delete_from_table(self.db.COLOURS, item)
             elif dataset == _("Sectors"):
-                self.main.database.delete_sector(item)
+                self.db.delete_from_table(self.db.SECTORS, item)
             elif dataset == _("Types"):
-                self.main.database.delete_type(item)
+                self.db.delete_from_table(self.db.TYPES, item)
             elif dataset == _("Categories"):
-                self.main.database.delete_category(item)
+                self.db.delete_from_table(self.db.CATEGORIES, item)
             elif dataset == _("Racepoints"):
-                self.main.database.delete_racepoint(item)
+                self.db.delete_from_table(self.db.RACEPOINTS, item)
             elif dataset == _("Strains"):
-                self.main.database.delete_strain(item)
+                self.db.delete_from_table(self.db.STRAINS, item)
             elif dataset == _("Lofts"):
-                self.main.database.delete_loft(item)
+                self.db.delete_from_table(self.db.LOFTS, item)
             elif dataset == _("Weather"):
-                self.main.database.delete_weather(item)
+                self.db.delete_from_table(self.db.WEATHER, item)
             elif dataset == _("Wind"):
-                self.main.database.delete_wind(item)
+                self.db.delete_from_table(self.db.WIND, item)
 
             self.cbitems.remove_text(index)
             self.cbitems.set_active(0)
@@ -462,23 +464,23 @@ class ToolsWindow(builder.GtkBuilder):
         item = (self.entryData.get_text(), )
 
         if datatype == _("Colours"):
-            self.main.database.insert_colour(item)
+            self.db.insert_into_table(self.db.COLOURS, item)
         elif datatype == _("Sectors"):
-            self.main.database.insert_sector(item)
+            self.db.insert_into_table(self.db.SECTORS, item)
         elif datatype == _("Types"):
-            self.main.database.insert_type(item)
+            self.db.insert_into_table(self.db.TYPES, item)
         elif datatype == _("Categories"):
-            self.main.database.insert_category(item)
+            self.db.insert_into_table(self.db.CATEGORIES, item)
         elif datatype == _("Racepoints"):
-            self.main.database.insert_racepoint(item)
+            self.db.insert_into_table(self.db.RACEPOINTS, item+("", "", ""))
         elif datatype == _("Strains"):
-            self.main.database.insert_strain(item)
+            self.db.insert_into_table(self.db.STRAINS, item)
         elif datatype == _("Lofts"):
-            self.main.database.insert_loft(item)
+            self.db.insert_into_table(self.db.LOFTS, item)
         elif datatype == _("Weather"):
-            self.main.database.insert_weather(item)
+            self.db.insert_into_table(self.db.WEATHER, item)
         elif datatype == _("Wind"):
-            self.main.database.insert_wind(item)
+            self.db.insert_into_table(self.db.WIND, item)
 
         self.entryData.set_text('')
 
@@ -499,7 +501,7 @@ class ToolsWindow(builder.GtkBuilder):
 
         self.ls_address.clear()
 
-        for item in self.main.database.get_all_addresses():
+        for item in self.db.get_all_addresses():
             self.ls_address.insert(0, [item[1]])
 
         self.ls_address.set_sort_column_id(0, gtk.SORT_ASCENDING)
@@ -524,7 +526,7 @@ class ToolsWindow(builder.GtkBuilder):
 
         name = model[path][0]
 
-        data = self.main.database.get_address(name)
+        data = self.db.get_address(name)
 
         self.adentryname.set_text(name)
         self.adentrystreet.set_text(data[2])
@@ -558,17 +560,17 @@ class ToolsWindow(builder.GtkBuilder):
             return
 
         if self.admode == const.ADD:
-            for ad in self.main.database.get_all_addresses():
+            for ad in self.db.get_all_addresses():
                 if data[0] == ad[1]:
                     dialogs.MessageDialog(const.ERROR,
                                           messages.MSG_NAME_EXISTS,
                                           self.toolsdialog)
                     return
 
-            self.main.database.insert_address(data)
+            self.db.insert_into_table(self.db.ADDR, data)
         else:
             data += (self.get_name(), )
-            self.main.database.update_address(data)
+            self.db.update_table(self.db.ADDR, data, 1, 1)
 
         self.fill_address_view()
 
@@ -585,7 +587,7 @@ class ToolsWindow(builder.GtkBuilder):
                                      self.vboxtv: False})
 
         alreadyMe = False
-        for item in self.main.database.get_all_addresses():
+        for item in self.db.get_all_addresses():
             if item[9]:
                 alreadyMe = True
                 self.me = item[1]
@@ -628,7 +630,7 @@ class ToolsWindow(builder.GtkBuilder):
                                      self.toolsdialog, self.get_name()):
             return
 
-        self.main.database.delete_address(self.get_name())
+        self.db.delete_from_table(self.db.ADDR, self.get_name())
 
         model, path = self.sel_address.get_selected()
         self.ls_address.remove(path)
@@ -684,14 +686,14 @@ class ToolsWindow(builder.GtkBuilder):
     # Statistics
     def on_btnsearchdb_clicked(self, widget):
         total, cocks, hens, ybirds = \
-                            common.count_active_pigeons(self.main.database)
+                            common.count_active_pigeons(self.db)
 
         items = [(_("Number of pigeons"), total),
                  (_("Number of cocks"), cocks),
                  (_("Number of hens"), hens),
                  (_("Number of young birds"), ybirds),
                  (_("Number of results"), \
-                                    len(self.main.database.get_all_results()))
+                                    len(self.db.get_all_results()))
                 ]
 
         self.ls_stats.clear()
@@ -701,7 +703,7 @@ class ToolsWindow(builder.GtkBuilder):
     # Database
     def on_dboptimize_clicked(self, widget):
         self.toolsdialog.set_sensitive(False)
-        self.main.database.optimize_db()
+        self.db.optimize_db()
         self.toolsdialog.set_sensitive(True)
         dialogs.MessageDialog(const.INFO, messages.MSG_OPTIMIZE_FINISH,
                               self.toolsdialog)

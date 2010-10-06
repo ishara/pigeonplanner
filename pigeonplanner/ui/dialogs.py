@@ -251,7 +251,8 @@ class EditPedigreeDialog(gtk.Dialog):
                     0, 1, '', '', '', '', '', '', '', '', '',
                     self.kinfo[4], self.kinfo[5], self.kinfo[6],
                     self.kinfo[7], self.kinfo[8], self.kinfo[9])
-            self.main.database.insert_pigeon(data)
+            self.main.database.insert_into_table(self.main.database.PIGEONS,
+                                                 data)
 
         self.entryRing.grab_focus()
         self.entryRing.set_position(-1)
@@ -300,9 +301,11 @@ class EditPedigreeDialog(gtk.Dialog):
 
     def edit_parent(self, kindex, band, year, sex):
         if sex == '0':
-            self.main.database.update_pigeon_sire((band, year, kindex))
+            self.main.database.update_table(self.main.database.PIGEONS,
+                                            (band, year, kindex), 12, 1)
         else:
-            self.main.database.update_pigeon_dam((band, year, kindex))
+            self.main.database.update_table(self.main.database.PIGEONS,
+                                            (band, year, kindex), 14, 1)
 
     def edit_pigeon(self, data):
         self.main.database.update_pedigree_pigeon(data)
@@ -311,13 +314,13 @@ class EditPedigreeDialog(gtk.Dialog):
         self.redraw_pedigree()
 
     def add_pigeon(self, data):
-        self.main.database.insert_pigeon(data)
+        self.main.database.insert_into_table(self.main.database.PIGEONS, data)
         self.edit_parent(self.kindex, data[1], data[2], self.sex)
 
         self.redraw_pedigree()
 
     def remove_pigeon(self, widget, pindex):
-        self.main.database.delete_pigeon(pindex)
+        self.main.database.delete_from_table(self.main.database.PIGEONS, pindex)
         self.edit_parent(self.kindex, '', '', self.sex)
 
         self.redraw_pedigree()
