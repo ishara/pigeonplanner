@@ -70,7 +70,7 @@ class PedigreeWindow(builder.GtkBuilder):
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(menus.pedigreeui)
+        uimanager.add_ui_from_string(menus.ui_pedigreewindow)
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.pedigreewindow.add_accel_group(accelgroup)

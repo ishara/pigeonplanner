@@ -19,7 +19,7 @@
 import gtk
 
 
-uistring = """
+ui_mainwindow = """
 <ui>
    <menubar name="MenuBar">
       <menu action="FileMenu">
@@ -85,7 +85,7 @@ uistring = """
 </ui>
 """
 
-photoalbumui = """
+ui_photoalbum = """
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="First"/>
@@ -106,7 +106,7 @@ photoalbumui = """
 </ui>
 """
 
-pedigreeui = """
+ui_pedigreewindow = """
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="Save"/>
@@ -120,7 +120,7 @@ pedigreeui = """
 </ui>
 """
 
-resultui = """
+ui_resultwindow = """
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="Save"/>
@@ -136,7 +136,7 @@ resultui = """
 </ui>
 """
 
-previewui = """
+ui_printpreview = """
 <ui>
    <toolbar name="Toolbar">
       <toolitem action="First"/>

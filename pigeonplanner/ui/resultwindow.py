@@ -80,7 +80,7 @@ class ResultWindow(builder.GtkBuilder):
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(menus.resultui)
+        uimanager.add_ui_from_string(menus.ui_resultwindow)
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.resultwindow.add_accel_group(accelgroup)

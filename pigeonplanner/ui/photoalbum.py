@@ -84,7 +84,7 @@ class PhotoAlbum(builder.GtkBuilder):
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(menus.photoalbumui)
+        uimanager.add_ui_from_string(menus.ui_photoalbum)
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.photoalbum.add_accel_group(accelgroup)

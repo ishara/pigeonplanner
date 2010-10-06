@@ -58,7 +58,7 @@ class PrintPreview(builder.GtkBuilder):
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(menus.previewui)
+        uimanager.add_ui_from_string(menus.ui_printpreview)
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.previewwindow.add_accel_group(accelgroup)

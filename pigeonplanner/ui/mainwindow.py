@@ -1193,7 +1193,7 @@ class MainWindow(builder.GtkBuilder):
         """
 
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(menus.uistring)
+        uimanager.add_ui_from_string(menus.ui_mainwindow)
         uimanager.insert_action_group(self.create_action_group(), 0)
         self.accelgroup = uimanager.get_accel_group()
         self.mainwindow.add_accel_group(self.accelgroup)
