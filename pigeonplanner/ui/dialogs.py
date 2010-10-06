@@ -268,9 +268,10 @@ class EditPedigreeDialog(gtk.Dialog):
         ring = self.entryRing.get_text()
         year = self.entryYear.get_text()
 
-        error, msg = checks.check_ring_entry(ring, year)
-        if error:
-            MessageDialog(const.ERROR, msg, self)
+        try:
+            checks.check_ring_entry(ring, year)
+        except checks.InvalidInputError, msg:
+            MessageDialog(const.ERROR, msg.value, self)
             return False
 
         pindex = common.get_pindex_from_band(ring, year)

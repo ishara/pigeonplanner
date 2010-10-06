@@ -23,6 +23,14 @@ Provides functions to check band and year entries
 from pigeonplanner import messages
 
 
+class InvalidInputError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
+
 def check_ring_entry(inputRing, inputYear):
     """
     Check if the ring and year input are valid
@@ -31,20 +39,13 @@ def check_ring_entry(inputRing, inputYear):
     @param inputYear: the year to check
     """
 
-    msg = ""
-    error = False
-
     if not inputRing or not inputYear:
-        error = True
-        msg = messages.MSG_EMPTY_FIELDS
+        raise InvalidInputError(messages.MSG_EMPTY_FIELDS)
 
     elif not inputYear.isdigit():
-        error = True
-        msg = messages.MSG_INVALID_NUMBER
+        raise InvalidInputError(messages.MSG_INVALID_NUMBER)
 
     elif not len(inputYear) == 4:
-        error = True
-        msg = messages.MSG_INVALID_LENGTH
+        raise InvalidInputError(messages.MSG_INVALID_LENGTH)
 
-    return error, msg
 

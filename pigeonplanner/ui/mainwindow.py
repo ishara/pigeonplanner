@@ -522,13 +522,11 @@ class MainWindow(builder.GtkBuilder):
         rangeyear = self.entryRangeYear.get_text()
         rangesex = self.cbRangeSex.get_active_text()
 
-        error, msg = checks.check_ring_entry(rangefrom, rangeyear)
-        if error:
-            dialogs.MessageDialog(const.ERROR, msg, self.mainwindow)
-            return
-        error, msg = checks.check_ring_entry(rangeto, rangeyear)
-        if error:
-            dialogs.MessageDialog(const.ERROR, msg, self.mainwindow)
+        try:
+            checks.check_ring_entry(rangefrom, rangeyear)
+            checks.check_ring_entry(rangeto, rangeyear)
+        except checks.InvalidInputError, msg:
+            dialogs.MessageDialog(const.ERROR, msg.value, self.mainwindow)
             return
 
         if not rangefrom.isdigit() or not rangeto.isdigit():
@@ -648,12 +646,15 @@ class MainWindow(builder.GtkBuilder):
                    (self.entrySireEdit, self.entryYearSireEdit),
                    (self.entryDamEdit, self.entryYearDamEdit)]
         for band, year in entries:
-            if band == '':
+            # Sire and dam input are not required
+            if band.get_text() == '' and \
+               self.get_object_name(band) != "entryRing1":
                 continue
-            error, msg = checks.check_ring_entry(band.get_text(),
-                                                 year.get_text())
-            if error:
-                dialogs.MessageDialog(const.ERROR, msg, self.mainwindow)
+
+            try:
+                checks.check_ring_entry(band.get_text(), year.get_text())
+            except checks.InvalidInputError, msg:
+                dialogs.MessageDialog(const.ERROR, msg.value, self.mainwindow)
                 return
 
         if self.operation == const.EDIT:
