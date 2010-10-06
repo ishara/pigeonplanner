@@ -23,6 +23,7 @@ import gtk
 from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import checks
+from pigeonplanner.ui.widgets import comboboxes
 
 
 class MessageDialog(gtk.MessageDialog):
@@ -426,7 +427,7 @@ class FilterDialog(gtk.Dialog):
 
     def add_filter_combobox(self, label, items):
         combobox = gtk.combo_box_new_text()
-        fill_combobox(combobox, items)
+        comboboxes.fill_combobox(combobox, items)
 
         return self.__add_filter(combobox, label), combobox
 
