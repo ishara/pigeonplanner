@@ -45,25 +45,24 @@ class MessageDialog(gtk.MessageDialog):
 
         if msgtype == const.ERROR:
             msgtype = gtk.MESSAGE_ERROR
-            buttons = gtk.BUTTONS_OK
+            buttons = (gtk.STOCK_OK, gtk.RESPONSE_OK)
         elif msgtype == const.WARNING:
             msgtype = gtk.MESSAGE_WARNING
-            buttons = gtk.BUTTONS_YES_NO
+            buttons = (gtk.STOCK_NO, gtk.RESPONSE_NO,
+                       gtk.STOCK_YES, gtk.RESPONSE_YES)
         elif msgtype == const.QUESTION:
             msgtype = gtk.MESSAGE_QUESTION
-            buttons = gtk.BUTTONS_YES_NO
+            buttons = (gtk.STOCK_NO, gtk.RESPONSE_NO,
+                       gtk.STOCK_YES, gtk.RESPONSE_YES)
             title = head + " - Pigeon Planner"
         elif msgtype == const.INFO:
             msgtype = gtk.MESSAGE_INFO
-            buttons = gtk.BUTTONS_OK
+            buttons = (gtk.STOCK_OK, gtk.RESPONSE_OK)
 
-        gtk.MessageDialog.__init__(self, parent, 0, msgtype)
-        self.set_markup(head)
+        gtk.MessageDialog.__init__(self, parent, 0, msgtype, message_format=head)
         self.format_secondary_text(text)
         self.set_title(title)
-
-        self.add_button(gtk.STOCK_NO, gtk.RESPONSE_NO)
-        self.add_button(gtk.STOCK_YES, gtk.RESPONSE_YES)
+        self.add_buttons(*buttons)
 
         self.response = self.run()
         self.destroy()
