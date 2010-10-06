@@ -411,7 +411,7 @@ class MainWindow(builder.GtkBuilder):
 
             if not self.chkResults.get_active():
                 logger.info("Remove: Removing the results")
-                self.database.delete_from_table(self.database.RESULT, pindex)
+                self.database.delete_from_table(self.database.RESULTS, pindex)
 
             self.liststore.remove(tIter)
 
