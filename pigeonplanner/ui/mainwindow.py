@@ -1398,12 +1398,8 @@ class MainWindow(builder.GtkBuilder):
 
         self.liststore.clear()
 
-        if search_results is not None:
-            pigeons = search_results
-        else:
-            pigeons = self.parser.pigeons
-
-        for pindex in pigeons:
+        for pindex in search_results if search_results is not None \
+                                     else self.parser.pigeons:
             if not self.parser.pigeons[pindex].show: continue
             if filter_active and not self.pigeon_filter(pindex): continue
 
