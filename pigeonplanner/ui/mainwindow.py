@@ -771,7 +771,8 @@ class MainWindow(builder.GtkBuilder):
                                      self.mainwindow):
             return
 
-        self.database.delete_from_table(self.database.RESULT, model[tIter][0], 0)
+        self.database.delete_from_table(self.database.RESULTS,
+                                        model[tIter][0], 0)
 
         self.lsResult.remove(tIter)
 
