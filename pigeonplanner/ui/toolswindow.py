@@ -263,12 +263,11 @@ class ToolsWindow(builder.GtkBuilder):
     def events_changed(self, selection):
         model, path = selection.get_selected()
 
+        widgets = [self.event_remove, self.event_edit]
         if path:
-            self.set_multiple_sensitive({self.event_remove: True,
-                                         self.event_edit: True})
+            self.set_multiple_sensitive(widgets, True)
         else:
-            self.set_multiple_sensitive({self.event_remove: False,
-                                         self.event_edit: False})
+            self.set_multiple_sensitive(widgets, False)
             self.textview_events.get_buffer().set_text('')
             self.label_notification.set_text('')
             self.label_notify.set_text("-1")
@@ -511,12 +510,11 @@ class ToolsWindow(builder.GtkBuilder):
 
         self.empty_adentrys()
 
+        widgets = [self.adremove, self.adedit]
         if path:
-            self.set_multiple_sensitive({self.adremove: True,
-                                         self.adedit: True})
+            self.set_multiple_sensitive(widgets, True)
         else:
-            self.set_multiple_sensitive({self.adremove: False,
-                                         self.adedit: False})
+            self.set_multiple_sensitive(widgets, False)
             return
 
         self.set_data()
@@ -583,8 +581,7 @@ class ToolsWindow(builder.GtkBuilder):
         for entry in self.get_entrys():
             entry.set_property('editable', True)
 
-        self.set_multiple_sensitive({self.treeview: False,
-                                     self.vboxtv: False})
+        self.set_multiple_sensitive([self.treeview, self.vboxtv], False)
 
         alreadyMe = False
         for item in self.db.get_all_addresses():
@@ -594,15 +591,13 @@ class ToolsWindow(builder.GtkBuilder):
                 break
 
         if alreadyMe:
-            self.set_multiple_visible({self.btnadd: True,
-                                       self.btncancel: True})
+            self.set_multiple_visible([self.btnadd, self.btncancel], True)
             if self.admode == const.EDIT and self.me == self.get_name():
-                self.set_multiple_visible({self.chkme: True})
+                self.set_multiple_visible([self.chkme], True)
                 self.chkme.set_active(True)
         else:
-            self.set_multiple_visible({self.btnadd: True,
-                                       self.btncancel: True,
-                                       self.chkme: True})
+            self.set_multiple_visible([self.btnadd, self.btncancel, self.chkme],
+                                      True)
 
         self.adentryname.grab_focus()
         self.adentryname.set_position(-1)
@@ -615,11 +610,9 @@ class ToolsWindow(builder.GtkBuilder):
 
         self.chkme.set_active(False)
 
-        self.set_multiple_visible({self.btnadd: False,
-                                   self.btncancel: False,
-                                   self.chkme: False})
-        self.set_multiple_sensitive({self.treeview: True,
-                                     self.vboxtv: True})
+        self.set_multiple_visible([self.btnadd, self.btncancel, self.chkme],
+                                  False)
+        self.set_multiple_sensitive([self.treeview, self.vboxtv], True)
 
         if self.pedigree_call:
             self.toolsdialog.destroy()

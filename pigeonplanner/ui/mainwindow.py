@@ -1224,10 +1224,9 @@ class MainWindow(builder.GtkBuilder):
         for key, value in widgetDic.items():
             setattr(self, key, value)
 
-        self.set_multiple_sensitive({self.MenuEdit: False,
-                                     self.MenuRemove: False,
-                                     self.MenuPedigree: False,
-                                     self.MenuAddresult: False})
+        self.set_multiple_sensitive([self.MenuEdit, self.MenuRemove,
+                                     self.MenuPedigree, self.MenuAddresult],
+                                    False)
 
         self.vbox.pack_start(self.menubar, False, False)
         self.vbox.reorder_child(self.menubar, 0)
@@ -1432,22 +1431,20 @@ class MainWindow(builder.GtkBuilder):
 
         model, path = selection.get_selected()
 
+        widgets = [self.removeresult, self.editresult]
         if path:
-            self.set_multiple_sensitive({self.removeresult: True,
-                                         self.editresult: True})
+            self.set_multiple_sensitive(widgets, True)
         else:
-            self.set_multiple_sensitive({self.removeresult: False,
-                                         self.editresult: False})
+            self.set_multiple_sensitive(widgets, False)
 
     def selectionmedication_changed(self, selection):
         model, path = selection.get_selected()
 
+        widgets = [self.removemedication, self.editmedication]
         if path:
-            self.set_multiple_sensitive({self.removemedication: True,
-                                         self.editmedication: True})
+            self.set_multiple_sensitive(widgets, True)
         else:
-            self.set_multiple_sensitive({self.removemedication: False,
-                                         self.editmedication: False})
+            self.set_multiple_sensitive(widgets, False)
 
             for entry in self.get_objects_from_prefix('entry_med_'):
                 entry.set_text('')
@@ -1472,18 +1469,13 @@ class MainWindow(builder.GtkBuilder):
 
         self.empty_entryboxes()
 
+        widgets = [self.ToolEdit, self.ToolRemove, self.ToolPedigree,
+                   self.MenuEdit, self.MenuRemove, self.MenuPedigree,
+                   self.MenuAddresult, self.addresult]
         if tree_iter:
-            self.set_multiple_sensitive({
-                        self.ToolEdit: True, self.ToolRemove: True,
-                        self.ToolPedigree: True, self.MenuEdit: True,
-                        self.MenuRemove: True, self.MenuPedigree: True,
-                        self.MenuAddresult: True, self.addresult: True})
+            self.set_multiple_sensitive(widgets, True)
         else:
-            self.set_multiple_sensitive({
-                        self.ToolEdit: False, self.ToolRemove: False,
-                        self.ToolPedigree: False, self.MenuEdit: False,
-                        self.MenuRemove: False, self.MenuPedigree: False,
-                        self.MenuAddresult: False, self.addresult: False})
+            self.set_multiple_sensitive(widgets, False)
             self.imageStatus.clear()
             self.imageStatus1.clear()
             self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
@@ -1743,10 +1735,8 @@ class MainWindow(builder.GtkBuilder):
 
         self.operation = operation
 
-        self.set_multiple_sensitive({self.toolbar: False,
-                                     self.notebook: False,
-                                     self.treeview: False,
-                                     self.vboxButtons: False})
+        self.set_multiple_sensitive([self.toolbar, self.notebook,
+                                     self.treeview, self.vboxButtons], False)
         self.detailbook.set_current_page(1)
         self.mainwindow.remove_accel_group(self.accelgroup)
         self.mainwindow.add_accel_group(self.cancelEscAG)
@@ -1769,10 +1759,8 @@ class MainWindow(builder.GtkBuilder):
         if self.operation == const.EDIT:
             self.selection.emit('changed')
 
-        self.set_multiple_sensitive({self.toolbar: True,
-                                     self.notebook: True,
-                                     self.treeview: True,
-                                     self.vboxButtons: True})
+        self.set_multiple_sensitive([self.toolbar, self.notebook,
+                                     self.treeview, self.vboxButtons], True)
         self.detailbook.set_current_page(0)
         self.mainwindow.remove_accel_group(self.cancelEscAG)
         self.mainwindow.add_accel_group(self.accelgroup)

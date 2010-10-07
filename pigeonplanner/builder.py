@@ -64,26 +64,39 @@ class GtkBuilder(object):
 
         return gtk.Buildable.get_name(obj)
 
-    def set_multiple_sensitive(self, widgets):
+    def set_multiple_sensitive(self, widgets, value=None):
         """ 
         Set multiple widgets sensitive at once
 
-        @param widgets: dic of widgets with booleans
+        @param widgets: dic or list of widgets
+        @param value: bool to indicate the state
         """
 
-        for widget, sensitive in widgets.items():
-            widget.set_sensitive(sensitive)
+        if isinstance(widgets, dict):
+            for widget, sensitive in widgets.items():
+                widget.set_sensitive(sensitive)
+        else:
+            for widget in widgets:
+                widget.set_sensitive(value)
 
-    def set_multiple_visible(self, widgets):
+    def set_multiple_visible(self, widgets, value=None):
         """ 
         Set multiple widgets visible at once
 
-        @param widgets: dic of widgets with booleans
+        @param widgets: dic or list of widgets
+        @param value: bool to indicate the state
         """
 
-        for widget, visible in widgets.items():
-            if visible:
-                widget.show()
-            else:
-                widget.hide()
+        if isinstance(widgets, dict):
+            for widget, visible in widgets.items():
+                if visible:
+                    widget.show()
+                else:
+                    widget.hide()
+        else:
+            for widget in widgets:
+                if value:
+                    widget.show()
+                else:
+                    widget.hide()
 

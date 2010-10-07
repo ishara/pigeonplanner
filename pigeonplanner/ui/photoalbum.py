@@ -382,12 +382,12 @@ class PhotoAlbum(builder.GtkBuilder):
 
     def disable_toolbuttons(self):
         self.set_multiple_sensitive(
-            {self.first_button: False,
-             self.prev_button: False,
-             self.next_button: False,
-             self.last_button: False,
-             self.zoom_in_button: False,
-             self.zoom_out_button: False,
-             self.zoom_fit_button: False,
-             self.slide_button: False})
+            [self.first_button,
+             self.prev_button,
+             self.next_button,
+             self.last_button,
+             self.zoom_in_button,
+             self.zoom_out_button,
+             self.zoom_fit_button,
+             self.slide_button], False)
 
