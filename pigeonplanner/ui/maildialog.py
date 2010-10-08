@@ -38,6 +38,7 @@ class MailDialog(builder.GtkBuilder):
 
         self.send.set_use_stock(True)
         self.attachment = attachment
+        self.kind = kind
         self.sending = False
 
         if kind == 'pdf':
@@ -71,10 +72,11 @@ class MailDialog(builder.GtkBuilder):
 
     def close_dialog(self, widget=None, event=None):
         if not self.sending:
-            try:
-                os.remove(self.attachment)
-            except:
-                pass
+            if self.kind == 'pdf':
+                try:
+                    os.remove(self.attachment)
+                except:
+                    pass
 
             self.maildialog.destroy()
 

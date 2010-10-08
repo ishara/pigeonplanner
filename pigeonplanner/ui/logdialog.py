@@ -21,6 +21,8 @@ Logdialog class
 """
 
 
+import os.path
+
 import gtk
 import gobject
 
@@ -41,10 +43,7 @@ class LogDialog(gtk.Dialog):
         self.set_icon(self.render_icon(gtk.STOCK_FILE, gtk.ICON_SIZE_MENU))
 
         self.database = database
-
-        self.file = open(const.LOGFILE, "r")
-        self.back_buffer = gtk.TextBuffer()
-        self.back_buffer.set_text(common.encode_string(self.file.read()))
+        self.set_logfile()
 
         frame = gtk.Frame()
         self.vbox.pack_start(frame)
@@ -89,6 +88,7 @@ class LogDialog(gtk.Dialog):
         aspect.set_shadow_type(gtk.SHADOW_NONE)
         hbox.pack_start(aspect)
 
+        ##severity
         self.combo = gtk.combo_box_new_text()
         buttonbox.pack_start(self.combo)
         self.combo.connect("changed", self.reload_view)
@@ -97,6 +97,19 @@ class LogDialog(gtk.Dialog):
             self.combo.append_text(s)
         self.combo.set_active(0)
         self.combo.set_no_show_all(True)
+
+        ##logs
+        self.combo_logs = gtk.combo_box_new_text()
+        buttonbox.pack_start(self.combo_logs)
+        self.combo_logs.connect("changed", self.set_logfile)
+        self.combo_logs.connect("changed", self.reload_view)
+
+        logs = [const.LOGFILE]
+        if os.path.exists("%s.old" % const.LOGFILE):
+            logs.append("%s.old" % const.LOGFILE)
+        for log in logs:
+            self.combo_logs.append_text(os.path.basename(log))
+        self.combo_logs.set_active(0)
 
         #action area
         button_report = gtk.Button(None, 'report')
@@ -112,8 +125,18 @@ class LogDialog(gtk.Dialog):
         gobject.timeout_add(1000, self.update)
         self.run()
 
+    def set_logfile(self, widget=None):
+        if widget is not None:
+            logfile = os.path.join(const.PREFDIR, widget.get_active_text())
+        else:
+            logfile = const.LOGFILE
+        self.file = open(logfile, "r")
+        self.back_buffer = gtk.TextBuffer()
+        self.back_buffer.set_text(common.encode_string(self.file.read()))
+
     def report_log(self, widget):
-        maildialog.MailDialog(self, self.database, const.LOGFILE, 'log')
+        logfile = os.path.join(const.PREFDIR, self.combo_logs.get_active_text())
+        maildialog.MailDialog(self, self.database, logfile, 'log')
 
     def insert_color(self, bffr, line):
         for s in SEVERITY[self.combo.get_active():]:
