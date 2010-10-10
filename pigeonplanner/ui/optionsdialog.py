@@ -28,6 +28,7 @@ from pigeonplanner import const
 from pigeonplanner import builder
 from pigeonplanner import options
 from pigeonplanner import messages
+from pigeonplanner.ui import dialogs
 
 
 class OptionsDialog(builder.GtkBuilder):
