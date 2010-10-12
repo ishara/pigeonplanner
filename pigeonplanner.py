@@ -270,30 +270,21 @@ class PigeonPlanner(object):
 
     def exception_hook(self, type_, value, tb):
         import traceback
-        from cStringIO import StringIO
 
         from pigeonplanner import const
-        from pigeonplanner import database
         from pigeonplanner.ui import logdialog
 
-        file_name = tb.tb_frame.f_code.co_filename
-        line_no = tb.tb_lineno
-        exception = type_.__name__
-        trace = StringIO()
-        traceback.print_exception(type_, value, tb, None, trace)
-        self.logger.critical("File %s line %i - %s: %s" % (file_name,
-                                                           line_no,
-                                                           exception,
-                                                           value))
+        tb = "".join(traceback.format_exception(type_, value, tb))
+        print >> sys.stderr, tb
+
         tbtext = ''
-        for line in trace.getvalue().split('\n'):
+        for line in tb.split('\n'):
             if line:
                 tbtext += "TRACEBACK: %s\n" % line
         logfile = open(const.LOGFILE, "a")
         logfile.write(tbtext)
         logfile.close()
-        print trace.getvalue()
-        logdialog.LogDialog(database.DatabaseOperations())
+        logdialog.LogDialog()
 
 if __name__ == "__main__":
     app = PigeonPlanner()
