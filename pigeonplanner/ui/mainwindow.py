@@ -715,17 +715,18 @@ class MainWindow(builder.GtkBuilder):
 
     # Relatives callbacks
     def on_tvBrothers_press(self, widget, event):
-        self.treeview_menu(self.selBrothers, event)
+        self.relative_treeview_pressed(widget, event)
 
     def on_tvHalfBrothers_press(self, widget, event):
-        self.treeview_menu(self.selHalfBrothers, event)
+        self.relative_treeview_pressed(widget, event)
 
     def on_tvOffspring_press(self, widget, event):
-        self.treeview_menu(self.selOffspring, event)
+        self.relative_treeview_pressed(widget, event)
 
-    def treeview_menu(self, selection, event):
-        model, path = selection.get_selected()
+    def relative_treeview_pressed(self, treeview, event):
+        path, focus = treeview.get_cursor()
         if not path: return
+        model = treeview.get_model()
         pindex = model[path][0]
 
         if event.button == 3:
