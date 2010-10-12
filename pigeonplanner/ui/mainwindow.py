@@ -730,9 +730,7 @@ class MainWindow(builder.GtkBuilder):
 
         if event.button == 3:
             menus.popup_menu(event, [(gtk.STOCK_JUMP_TO,
-                                        self.search_pigeon,
-                                        pindex)
-                                      ])
+                                      self.search_pigeon, (pindex,))])
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
             self.search_pigeon(None, pindex)
 
