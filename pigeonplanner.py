@@ -27,6 +27,8 @@ if sys.platform.startswith('win'):
 import gettext
 import locale
 import logging
+import webbrowser
+from threading import Thread
 
 try:
     import pygtk; pygtk.require('2.0')
@@ -59,18 +61,20 @@ class  NullFile(object):
 
 class PigeonPlanner(object):
     def __init__(self):
+        self.db = None
+
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
         sys.excepthook = self.exception_hook
 
         # Windows/py2exe detection
-        win32 = sys.platform.startswith("win")
+        self.win32 = sys.platform.startswith("win")
         py2exe = False
-        if win32 and hasattr(sys, 'frozen'):
+        if self.win32 and hasattr(sys, 'frozen'):
 	        py2exe = True
 	
         # Disable py2exe log feature
-        if win32 and py2exe:
+        if self.win32 and py2exe:
             try:
 	            sys.stdout = open("nul", "w")
 	            sys.stderr = open("nul", "w")
@@ -80,21 +84,19 @@ class PigeonPlanner(object):
 	            sys.stderr = NullFile()
 
         # Detect if program is running for the first time
-        from pigeonplanner import const
-
+        self.firstrun = True
         if os.path.isdir(const.PREFDIR):
-            firstrun = False
-        else:
-            firstrun = True
+            self.firstrun = False
 
         # Initialize options
         from pigeonplanner import options
         self.options = options.GetOptions()
 
+    def setup_locale(self):
         # Locale setup
         currentPath = ''
 
-        if not win32:
+        if not self.win32:
             currentPath = os.path.abspath(os.path.dirname(__file__))
 
         if currentPath.startswith('/usr/bin'):
@@ -102,7 +104,7 @@ class PigeonPlanner(object):
         else:
             LOCALE_PATH = os.path.join(currentPath, 'languages')
 
-        if win32:
+        if self.win32:
             from pigeonplanner import libi18n
             libi18n.fix_locale()
 
@@ -117,8 +119,8 @@ class PigeonPlanner(object):
         except:
             langTranslation = gettext
 
-        locale_error = None
-        if win32:
+        self.locale_error = None
+        if self.win32:
             libi18n._putenv('LC_ALL', language)
         else:
             s = locale.normalize(language).split('.')[0]+'.UTF-8'
@@ -128,11 +130,11 @@ class PigeonPlanner(object):
                 try:
                     locale.setlocale(locale.LC_ALL, locale.normalize(language))
                 except locale.Error, e:
-                    locale_error = "Force lang failed: '%s' \
-                                    (%s and %s tested)" \
-                                    %(e, s, locale.normalize(language))
+                   self. locale_error = "Force lang failed: '%s' \
+                                         (%s and %s tested)" \
+                                         %(e, s, locale.normalize(language))
 
-        if win32:
+        if self.win32:
             # Module locale has no method bindtextdomain on MS Windows.
             # Use the gettext library directly through ctypes.
             # Info: https://bugzilla.gnome.org/show_bug.cgi?id=574520
@@ -145,7 +147,11 @@ class PigeonPlanner(object):
 
         __builtin__._ = langTranslation.gettext
 
-		# Logging setup
+    def setup_logging(self):
+        """
+        Setup logging and add some debug messages
+        """
+
         if os.path.exists(const.LOGFILE):
             if os.path.exists("%s.old" % const.LOGFILE):
                 os.remove("%s.old" % const.LOGFILE)
@@ -159,7 +165,7 @@ class PigeonPlanner(object):
         self.logger.info("Version: %s" % const.VERSION)
         self.logger.debug("Home path: %s" % const.HOMEDIR)
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
-        if win32:
+        if self.win32:
             self.logger.debug("Current path: %s" % os.getcwd())
 
             ver = os.sys.getwindowsversion()
@@ -188,19 +194,20 @@ class PigeonPlanner(object):
                                                         gtk.gtk_version))
         self.logger.debug("PyGTK version: %s" % ".".join(str(n) for n in
                                                          gtk.pygtk_version))
-        if locale_error:
-            self.logger.debug("Locale error: %s" % locale_error)
+        if self.locale_error:
+            self.logger.debug("Locale error: %s" % self.locale_error)
         else:
-            if win32:
+            if self.win32:
                 loc = libi18n._getlang()
             else:
                 loc = locale.getlocale()[0]
             self.logger.debug("Locale: %s" % loc)
-        if firstrun:
+        if self.firstrun:
             self.logger.debug("First run")
 
+    def setup_theme(self):
         # Set theme
-        if win32 and os.path.exists('.\\share\\themes'):
+        if self.win32 and os.path.exists('.\\share\\themes'):
             themes = os.listdir('.\\share\\themes')
             themefile = os.path.join('.\\share\\themes',
                                      themes[self.options.optionList.theme],
@@ -224,7 +231,11 @@ class PigeonPlanner(object):
                 ('gtk-find', 'check', _('Check now!')),
             ])
 
-        # Check database
+    def setup_database(self):
+        """
+        Setup the database and check if it needs an update
+        """
+
         from pigeonplanner import database
 
         self.db = database.DatabaseOperations()
@@ -258,6 +269,16 @@ class PigeonPlanner(object):
                                      %(column, table))
                     self.db.add_column(table, column_def)
 
+    def setup_parser(self):
+        """
+        Setup the pigeon parser object which will hold all the pigeons
+        """
+
+        from pigeonplanner import pigeonparser
+
+        self.parser = pigeonparser.PigeonParser(self.db)
+        self.parser.get_pigeons()
+
     def setup_windows_gettext(self, domain, localedir, intl_path):
         import ctypes
 
@@ -268,10 +289,39 @@ class PigeonPlanner(object):
         libintl.bind_textdomain_codeset(domain, "UTF-8")
         libintl.gettext.restype = ctypes.c_char_p
 
+    def search_updates(self):
+        from pigeonplanner import update
+
+        msg, new, error = update.update()
+
+        if new:
+            gobject.idle_add(update_dialog)
+        else:
+            if error:
+                self.logger.debug("AutoUpdate: Could not retrieve version information.")
+            else:
+                self.logger.debug("AutoUpdate: Already running the latest version")
+
+    def update_dialog(self):
+        from pigeonplanner import messages
+        from pigeonplanner.ui.dialogs import MessageDialog
+
+        d = MessageDialog(const.QUESTION, messages.MSG_UPDATE_NOW, None)
+        if d.response == gtk.RESPONSE_YES:
+            webbrowser.open(const.DOWNLOADURL)
+
+        return False
+
     def exception_hook(self, type_, value, tb):
         import traceback
 
-        from pigeonplanner import const
+        # Just fallback when an exception is raised before locale setup
+        try:
+            s = ""
+            _(s)
+        except NameError:
+            __builtin__._ = lambda s: s
+
         from pigeonplanner.ui import logdialog
 
         tb = "".join(traceback.format_exception(type_, value, tb))
@@ -284,18 +334,23 @@ class PigeonPlanner(object):
         logfile = open(const.LOGFILE, "a")
         logfile.write(tbtext)
         logfile.close()
-        logdialog.LogDialog()
+        logdialog.LogDialog(self.db)
 
 if __name__ == "__main__":
+    from pigeonplanner import const
     app = PigeonPlanner()
+    app.setup_locale()
+    app.setup_logging()
+    app.setup_theme()
+    app.setup_database()
+    app.setup_parser()
+
+    if app.options.optionList.update:
+        updatethread = Thread(None, app.search_updates, None)
+        updatethread.start()
 
     from pigeonplanner.ui import mainwindow
+    pigeonplanner = mainwindow.MainWindow(app.options, app.db, app.parser)
 
-    try:
-        pigeonplanner = mainwindow.MainWindow(app.options, app.db)
-        gtk.main()
-    except KeyboardInterrupt:
-        pass
-    except:
-        raise
+    gtk.main()
 

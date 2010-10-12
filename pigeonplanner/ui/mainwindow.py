@@ -25,7 +25,6 @@ import os.path
 import time
 import datetime
 import webbrowser
-from threading import Thread
 import logging
 logger = logging.getLogger(__name__)
 
@@ -40,7 +39,6 @@ from pigeonplanner import checks
 from pigeonplanner import builder
 from pigeonplanner import printing
 from pigeonplanner import messages
-from pigeonplanner import pigeonparser
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui import pedigree
 from pigeonplanner.ui import logdialog
@@ -56,11 +54,12 @@ from pigeonplanner.ui.widgets import checkbutton
 
 
 class MainWindow(builder.GtkBuilder):
-    def __init__(self, options, database):
+    def __init__(self, options, database, parser):
         builder.GtkBuilder.__init__(self, const.GLADEMAIN)
 
         self.options = options
         self.database = database
+        self.parser = parser
 
         self.mainwindow.set_title("%s %s" %(const.NAME, const.VERSION))
 
@@ -83,9 +82,6 @@ class MainWindow(builder.GtkBuilder):
 
         self.entrySexKey = gtk.Entry()
         self.hbox4.pack_start(self.entrySexKey)
-
-        self.parser = pigeonparser.PigeonParser(self.database)
-        self.parser.get_pigeons()
 
         # Make thumbnails if they don't exist yet (new in 0.8.0)
         if not os.path.isdir(const.THUMBDIR):
@@ -186,11 +182,6 @@ class MainWindow(builder.GtkBuilder):
             self.options.set_option('Options', 'runs',
                                     self.options.optionList.runs+1)
 
-        if self.options.optionList.update:
-            logger.info("Start: Auto check for updates")
-            updatethread = Thread(None, self.search_updates, None)
-            updatethread.start()
-
         self.allresults.set_use_stock(True)
 
         self.mainwindow.show()
@@ -232,26 +223,6 @@ class MainWindow(builder.GtkBuilder):
     def on_dialog_delete(self, widget, event):
         widget.hide()
         return True
-
-    def search_updates(self):
-        msg, new, error = update.update()
-
-        if new:
-            logger.info("End: New version found")
-            gobject.idle_add(self.update_dialog)
-        else:
-            if error:
-                logger.info("End: Could not retrieve version information.")
-            else:
-                logger.info("End: Already running the latest version")
-
-    def update_dialog(self):
-        d = dialogs.MessageDialog(const.QUESTION, messages.MSG_UPDATE_NOW,
-                                  self.mainwindow)
-        if d.response == gtk.RESPONSE_YES:
-            webbrowser.open(const.DOWNLOADURL)
-
-        return False
 
     def on_widget_enter(self, widget, event):
         for con_id in self.statusmsgs.values():

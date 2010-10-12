@@ -30,7 +30,6 @@ from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner.ui import maildialog
 
-
 SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]
 COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow",
           "ERROR": "red", "CRITICAL": "white", "TRACEBACK": "white"}
