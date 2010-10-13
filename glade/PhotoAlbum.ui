@@ -10,7 +10,7 @@
     <property name="default_height">640</property>
     <property name="destroy_with_parent">True</property>
     <property name="skip_taskbar_hint">True</property>
-    <signal name="delete-event" handler="on_window_delete" swapped="no"/>
+    <signal name="delete_event" handler="on_window_delete"/>
     <child>
       <object class="GtkHBox" id="hbox1">
         <property name="visible">True</property>
@@ -29,8 +29,8 @@
                 <property name="can_focus">True</property>
                 <property name="events">GDK_STRUCTURE_MASK | GDK_SCROLL_MASK</property>
                 <property name="columns">2</property>
-                <signal name="selection-changed" handler="on_iconview_changed" swapped="no"/>
-                <signal name="scroll-event" handler="on_iconview_scroll" swapped="no"/>
+                <signal name="selection_changed" handler="on_iconview_changed"/>
+                <signal name="scroll_event" handler="on_iconview_scroll"/>
               </object>
             </child>
           </object>
@@ -61,7 +61,7 @@
                 <property name="can_focus">True</property>
                 <property name="hscrollbar_policy">automatic</property>
                 <property name="vscrollbar_policy">automatic</property>
-                <signal name="size-allocate" handler="on_swin_size_allocate" swapped="no"/>
+                <signal name="size_allocate" handler="on_swin_size_allocate"/>
                 <child>
                   <object class="GtkViewport" id="viewport">
                     <property name="visible">True</property>
@@ -71,9 +71,9 @@
                       <object class="GtkDrawingArea" id="drawingarea">
                         <property name="visible">True</property>
                         <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK | GDK_SCROLL_MASK</property>
-                        <signal name="expose-event" handler="on_drawingarea_expose" swapped="no"/>
-                        <signal name="button-press-event" handler="on_drawingarea_press" swapped="no"/>
-                        <signal name="scroll-event" handler="on_drawingarea_scroll" swapped="no"/>
+                        <signal name="expose_event" handler="on_drawingarea_expose"/>
+                        <signal name="button_press_event" handler="on_drawingarea_press"/>
+                        <signal name="scroll_event" handler="on_drawingarea_scroll"/>
                       </object>
                     </child>
                   </object>

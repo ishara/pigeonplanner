@@ -11,7 +11,7 @@
     <property name="icon">../images/icon_logo.png</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
-    <signal name="delete-event" handler="close_dialog" swapped="no"/>
+    <signal name="delete_event" handler="close_dialog"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
@@ -181,7 +181,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="relief">none</property>
-                                <signal name="clicked" handler="on_rename_clicked" swapped="no"/>
+                                <signal name="clicked" handler="on_rename_clicked"/>
                                 <child>
                                   <object class="GtkImage" id="image2">
                                     <property name="visible">True</property>
@@ -219,7 +219,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="relief">none</property>
-                                <signal name="clicked" handler="on_apply_clicked" swapped="no"/>
+                                <signal name="clicked" handler="on_apply_clicked"/>
                                 <child>
                                   <object class="GtkImage" id="image1">
                                     <property name="visible">True</property>
@@ -293,7 +293,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_cancel_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_cancel_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -309,7 +309,7 @@
                 <property name="can_default">True</property>
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="on_send_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_send_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -323,7 +323,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_close_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_close_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>

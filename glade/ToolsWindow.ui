@@ -29,9 +29,9 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment6">
+    <property name="value">1</property>
     <property name="lower">1</property>
     <property name="upper">2000</property>
-    <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -46,22 +46,22 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment3">
+    <property name="value">700</property>
     <property name="lower">700</property>
     <property name="upper">2000</property>
-    <property name="value">700</property>
     <property name="step_increment">50</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment2">
+    <property name="value">1800</property>
     <property name="lower">700</property>
     <property name="upper">2000</property>
-    <property name="value">1800</property>
     <property name="step_increment">50</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment1">
-    <property name="upper">999</property>
     <property name="value">1</property>
+    <property name="upper">999</property>
     <property name="step_increment">1</property>
   </object>
   <object class="GtkDialog" id="eventsdialog">
@@ -72,8 +72,7 @@
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">toolsdialog</property>
-    <property name="has_separator">False</property>
-    <signal name="delete-event" handler="on_eventsdialog_delete" swapped="no"/>
+    <signal name="delete_event" handler="on_eventsdialog_delete"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
@@ -184,7 +183,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="on_chknotify_toggled" swapped="no"/>
+                        <signal name="toggled" handler="on_chknotify_toggled"/>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -265,7 +264,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_event_cancel_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_event_cancel_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -280,7 +279,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_event_save_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_event_save_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -302,6 +301,82 @@
       <action-widget response="0">event_save</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkListStore" id="ls_speed_units">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gfloat"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="ls_dist_units">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gfloat"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="ls_stats">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="ls_address">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="ls_events">
+    <columns>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+      <!-- column-name date -->
+      <column type="gchararray"/>
+      <!-- column-name description -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="ls_velocity">
+    <columns>
+      <!-- column-name velocity -->
+      <column type="gint"/>
+      <!-- column-name flight -->
+      <column type="gchararray"/>
+      <!-- column-name arrival -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name id -->
+      <column type="gint"/>
+      <!-- column-name category -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore3">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore2">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkDialog" id="toolsdialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Tools</property>
@@ -312,8 +387,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="icon">../images/icon_logo.png</property>
     <property name="type_hint">dialog</property>
-    <property name="has_separator">False</property>
-    <signal name="delete-event" handler="on_close_dialog" swapped="no"/>
+    <signal name="delete_event" handler="on_close_dialog"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
@@ -451,7 +525,7 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
-                                        <signal name="clicked" handler="on_button_velocity_calculate_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_button_velocity_calculate_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="left_attach">1</property>
@@ -496,7 +570,7 @@
                                             <property name="invisible_char">●</property>
                                             <property name="adjustment">adjustment8</property>
                                             <property name="numeric">True</property>
-                                            <signal name="changed" handler="on_spinbutton_time_changed" swapped="no"/>
+                                            <signal name="changed" handler="on_spinbutton_time_changed"/>
                                           </object>
                                           <packing>
                                             <property name="position">2</property>
@@ -520,7 +594,7 @@
                                             <property name="invisible_char">●</property>
                                             <property name="adjustment">adjustment9</property>
                                             <property name="numeric">True</property>
-                                            <signal name="changed" handler="on_spinbutton_time_changed" swapped="no"/>
+                                            <signal name="changed" handler="on_spinbutton_time_changed"/>
                                           </object>
                                           <packing>
                                             <property name="position">4</property>
@@ -777,7 +851,7 @@
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <signal name="clicked" handler="on_calculate_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_calculate_clicked"/>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -795,7 +869,7 @@
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="clicked" handler="on_printcalc_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_printcalc_clicked"/>
                                           </object>
                                           <packing>
                                             <property name="left_attach">2</property>
@@ -847,7 +921,7 @@
                                                 <property name="numeric">True</property>
                                                 <property name="wrap">True</property>
                                                 <property name="update_policy">if-valid</property>
-                                                <signal name="changed" handler="on_spinbutton_time_changed" swapped="no"/>
+                                                <signal name="changed" handler="on_spinbutton_time_changed"/>
                                               </object>
                                               <packing>
                                                 <property name="position">2</property>
@@ -874,7 +948,7 @@
                                                 <property name="numeric">True</property>
                                                 <property name="wrap">True</property>
                                                 <property name="update_policy">if-valid</property>
-                                                <signal name="changed" handler="on_spinbutton_time_changed" swapped="no"/>
+                                                <signal name="changed" handler="on_spinbutton_time_changed"/>
                                               </object>
                                               <packing>
                                                 <property name="position">4</property>
@@ -965,7 +1039,7 @@
                                                 <property name="numeric">True</property>
                                                 <property name="wrap">True</property>
                                                 <property name="update_policy">if-valid</property>
-                                                <signal name="value-changed" handler="on_spinbutton_prognosis_from_changed" swapped="no"/>
+                                                <signal name="value_changed" handler="on_spinbutton_prognosis_from_changed"/>
                                               </object>
                                               <packing>
                                                 <property name="position">0</property>
@@ -1074,7 +1148,7 @@
                                             <property name="search_column">0</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="treeviewcolumn7">
-                                                <property name="title" translatable="yes">Velocity</property>
+                                                <property name="title">Velocity</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="cellrenderertext10"/>
                                                   <attributes>
@@ -1085,7 +1159,7 @@
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="treeviewcolumn8">
-                                                <property name="title" translatable="yes">Flight Time</property>
+                                                <property name="title">Flight Time</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="cellrenderertext11"/>
                                                   <attributes>
@@ -1096,7 +1170,7 @@
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="treeviewcolumn9">
-                                                <property name="title" translatable="yes">Time of Arrival</property>
+                                                <property name="title">Time of Arrival</property>
                                                 <child>
                                                   <object class="GtkCellRendererText" id="cellrenderertext12"/>
                                                   <attributes>
@@ -1208,7 +1282,7 @@
                                             <property name="model">ls_events</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="treeviewcolumn5">
-                                                <property name="title" translatable="yes">Date</property>
+                                                <property name="title">Date</property>
                                                 <property name="sort_indicator">True</property>
                                                 <property name="sort_column_id">1</property>
                                                 <child>
@@ -1221,7 +1295,7 @@
                                             </child>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="treeviewcolumn6">
-                                                <property name="title" translatable="yes">Description</property>
+                                                <property name="title">Description</property>
                                                 <property name="sort_indicator">True</property>
                                                 <property name="sort_column_id">2</property>
                                                 <child>
@@ -1249,7 +1323,7 @@
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <signal name="clicked" handler="on_event_add_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_event_add_clicked"/>
                                             <child>
                                               <object class="GtkImage" id="image1">
                                                 <property name="visible">True</property>
@@ -1268,7 +1342,7 @@
                                             <property name="sensitive">False</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <signal name="clicked" handler="on_event_edit_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_event_edit_clicked"/>
                                             <child>
                                               <object class="GtkImage" id="image2">
                                                 <property name="visible">True</property>
@@ -1289,7 +1363,7 @@
                                             <property name="sensitive">False</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <signal name="clicked" handler="on_event_remove_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_event_remove_clicked"/>
                                             <child>
                                               <object class="GtkImage" id="image3">
                                                 <property name="visible">True</property>
@@ -1501,7 +1575,7 @@
                                           <object class="GtkComboBox" id="cbdata">
                                             <property name="visible">True</property>
                                             <property name="model">liststore2</property>
-                                            <signal name="changed" handler="on_cbdata_changed" swapped="no"/>
+                                            <signal name="changed" handler="on_cbdata_changed"/>
                                             <child>
                                               <object class="GtkCellRendererText" id="cellrenderertext2"/>
                                               <attributes>
@@ -1536,7 +1610,7 @@
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="clicked" handler="on_dataremove_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_dataremove_clicked"/>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -1632,7 +1706,7 @@
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="invisible_char">●</property>
-                                            <signal name="changed" handler="on_entryData_changed" swapped="no"/>
+                                            <signal name="changed" handler="on_entryData_changed"/>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -1650,7 +1724,7 @@
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="clicked" handler="on_dataadd_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_dataadd_clicked"/>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -1764,7 +1838,7 @@
                                             <property name="rules_hint">True</property>
                                             <child>
                                               <object class="GtkTreeViewColumn" id="treeviewcolumn4">
-                                                <property name="title" translatable="yes">Name</property>
+                                                <property name="title">Name</property>
                                                 <property name="sort_indicator">True</property>
                                                 <property name="sort_column_id">0</property>
                                                 <child>
@@ -1791,7 +1865,7 @@
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <signal name="clicked" handler="on_adadd_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_adadd_clicked"/>
                                             <child>
                                               <object class="GtkImage" id="image6">
                                                 <property name="visible">True</property>
@@ -1810,7 +1884,7 @@
                                             <property name="sensitive">False</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <signal name="clicked" handler="on_adedit_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_adedit_clicked"/>
                                             <child>
                                               <object class="GtkImage" id="image8">
                                                 <property name="visible">True</property>
@@ -1829,7 +1903,7 @@
                                             <property name="sensitive">False</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <signal name="clicked" handler="on_adremove_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_adremove_clicked"/>
                                             <child>
                                               <object class="GtkImage" id="image7">
                                                 <property name="visible">True</property>
@@ -2056,7 +2130,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="use_stock">True</property>
-                                        <signal name="clicked" handler="on_btncancel_clicked" swapped="no"/>
+                                        <signal name="clicked" handler="on_btncancel_clicked"/>
                                       </object>
                                       <packing>
                                         <property name="left_attach">1</property>
@@ -2085,7 +2159,7 @@
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
                                             <property name="use_stock">True</property>
-                                            <signal name="clicked" handler="on_btnadd_clicked" swapped="no"/>
+                                            <signal name="clicked" handler="on_btnadd_clicked"/>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2215,7 +2289,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <signal name="clicked" handler="on_btnsearchdb_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_btnsearchdb_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>
@@ -2363,7 +2437,7 @@
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
-                                                <signal name="clicked" handler="on_dboptimize_clicked" swapped="no"/>
+                                                <signal name="clicked" handler="on_dboptimize_clicked"/>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
@@ -2451,7 +2525,7 @@
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
                                                 <property name="use_stock">True</property>
-                                                <signal name="clicked" handler="on_dbremove_clicked" swapped="no"/>
+                                                <signal name="clicked" handler="on_dbremove_clicked"/>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
@@ -2632,7 +2706,7 @@ your pigeons and results.</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
-                                                <signal name="clicked" handler="on_makebackup_clicked" swapped="no"/>
+                                                <signal name="clicked" handler="on_makebackup_clicked"/>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2718,7 +2792,7 @@ your pigeons and results.</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
-                                                <signal name="clicked" handler="on_restorebackup_clicked" swapped="no"/>
+                                                <signal name="clicked" handler="on_restorebackup_clicked"/>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2819,7 +2893,7 @@ your pigeons and results.</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <signal name="clicked" handler="on_btnupdate_clicked" swapped="no"/>
+                                    <signal name="clicked" handler="on_btnupdate_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="top_attach">2</property>
@@ -2894,7 +2968,7 @@ your pigeons and results.</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_close_dialog" swapped="no"/>
+                <signal name="clicked" handler="on_close_dialog"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -2915,86 +2989,10 @@ your pigeons and results.</property>
       <action-widget response="0">close</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkListStore" id="ls_speed_units">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-      <!-- column-name value -->
-      <column type="gfloat"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="ls_dist_units">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-      <!-- column-name value -->
-      <column type="gfloat"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="ls_stats">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-      <!-- column-name value -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="ls_address">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="ls_events">
-    <columns>
-      <!-- column-name id -->
-      <column type="gchararray"/>
-      <!-- column-name date -->
-      <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="ls_velocity">
-    <columns>
-      <!-- column-name velocity -->
-      <column type="gint"/>
-      <!-- column-name flight -->
-      <column type="gchararray"/>
-      <!-- column-name arrival -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="liststore">
-    <columns>
-      <!-- column-name id -->
-      <column type="gint"/>
-      <!-- column-name category -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="liststore3">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="liststore2">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="liststore1">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkAdjustment" id="adjustment_velocity_distance">
+    <property name="value">1</property>
     <property name="lower">1</property>
     <property name="upper">999999</property>
-    <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
