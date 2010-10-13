@@ -744,7 +744,11 @@ class ToolsWindow(builder.GtkBuilder):
         gobject.idle_add(self.update_check)
 
     def update_check(self):
-        msg, new, error = update.update()
+        try:
+            new, msg = update.update()
+        except update.UpdateError, exc:
+            new = False
+            msg = str(exc)
 
         self.labelversion.set_text(msg)
 

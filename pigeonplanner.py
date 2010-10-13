@@ -292,15 +292,16 @@ class PigeonPlanner(object):
     def search_updates(self):
         from pigeonplanner import update
 
-        msg, new, error = update.update()
+        try:
+            new, msg = update.update()
+        except update.UpdateError, exc:
+            self.logger.error(exc)
+            return
 
         if new:
-            gobject.idle_add(update_dialog)
+            gobject.idle_add(self.update_dialog)
         else:
-            if error:
-                self.logger.debug("AutoUpdate: Could not retrieve version information.")
-            else:
-                self.logger.debug("AutoUpdate: Already running the latest version")
+            self.logger.info("AutoUpdate: %s" %msg)
 
     def update_dialog(self):
         from pigeonplanner import messages

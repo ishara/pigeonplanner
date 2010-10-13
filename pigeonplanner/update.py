@@ -29,10 +29,14 @@ from pigeonplanner import const
 from pigeonplanner import messages
 
 
-def update():
-    new = False
-    error = False
+class UpdateError(Exception):
+    def __init__(self, msg):
+        self.msg = msg
 
+    def __str__(self):
+        return "Updater: %s" %self.msg
+
+def update():
     local = os.path.join(const.TEMPDIR, 'pigeonplanner_update')
 
     try:
@@ -42,17 +46,15 @@ def update():
         versionfile.close()
     except IOError, e:
         logger.error(e)
-        version = None
-        error = True
+        raise UpdateError(messages.MSG_UPDATE_ERROR)
 
     try:
         os.remove(local)
     except:
         pass
 
-    if not version:
-        msg = messages.MSG_UPDATE_ERROR
-    elif const.VERSION < version:
+    new = False
+    if const.VERSION < version:
         msg = messages.MSG_UPDATE_AVAILABLE
         new = True
     elif const.VERSION == version:
@@ -60,5 +62,5 @@ def update():
     elif const.VERSION > version:
         msg = messages.MSG_UPDATE_DEVELOPMENT
 
-    return msg, new, error
+    return new, msg
 
