@@ -1,0 +1,1626 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION CZ\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-05 12:07+0200\n"
+"PO-Revision-Date: 2010-11-01 09:35+0100\n"
+"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
+"Language-Team: Jindra <sidloj@volny.cz>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: c:\\translate\\wp\\wp-content\\plugins\\advanced-cate\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../pigeonplanner/messages.py:19
+msgid "Error"
+msgstr "Chyba"
+
+#: ../pigeonplanner/messages.py:20
+msgid "Warning"
+msgstr "Varování"
+
+#: ../pigeonplanner/messages.py:23
+msgid "Pigeon Planner is already running."
+msgstr "Pigeon Planner je již spuštěn."
+
+#: ../pigeonplanner/messages.py:27
+msgid "Go to the website?"
+msgstr "Chceš na webové stránky?"
+
+#: ../pigeonplanner/messages.py:28
+msgid "Pigeon Planner is free software. You don’t need to pay for using it. But if you like it, please consider donating to help improving it."
+msgstr "Pigeon Planner je svobodný software. Nemusíte platit za jeho používání. Ale pokud se vám líbí, prosím zvaž dar pro zlepšení."
+
+#: ../pigeonplanner/messages.py:31
+#, python-format
+msgid "Notification for '%s'"
+msgstr "Oznámení pro '% s'"
+
+#: ../pigeonplanner/messages.py:32
+msgid "Go to the calendar?"
+msgstr "Chceš do kalendáře?"
+
+#: ../pigeonplanner/messages.py:35
+msgid "Invalid image!"
+msgstr "Neplatný obrázek!"
+
+#: ../pigeonplanner/messages.py:36
+msgid "This image is either not supported or corrupt, please choose another one."
+msgstr "Tento obrázek je buď není podporován nebo je poškozen, zvol jiný."
+
+#: ../pigeonplanner/messages.py:38
+msgid "Loading image failed!"
+msgstr "Načítání obrázků selhalo!"
+
+#: ../pigeonplanner/messages.py:39
+msgid "Maybe you have renamed the image or moved it on your disk."
+msgstr "Možná jsi přejmenoval obrázek nebo přesunul jinam na disk."
+
+#: ../pigeonplanner/messages.py:42
+msgid "This pigeon already exists, but isn't showing. Do you want to show it again?"
+msgstr "Tento holub již existuje, ale není zobrazen. Chceš ho ukázat znovu?"
+
+#: ../pigeonplanner/messages.py:45
+msgid "This pigeon already exists. Overwrite it?"
+msgstr "Tento holub již existuje. Chceš ho přepsat?"
+
+#: ../pigeonplanner/messages.py:48
+msgid "This pigeon doesn't exist. Do you want to add it?"
+msgstr "Tento holub neexistuje. Chceš ho přidat?"
+
+#: ../pigeonplanner/messages.py:50
+msgid "Adding pigeon"
+msgstr "Přidat holuba"
+
+#: ../pigeonplanner/messages.py:52
+#: ../pigeonplanner/messages.py:55
+#: ../pigeonplanner/messages.py:58
+#: ../pigeonplanner/messages.py:61
+#: ../pigeonplanner/messages.py:65
+#: ../pigeonplanner/messages.py:68
+#: ../pigeonplanner/messages.py:71
+#: ../pigeonplanner/messages.py:81
+#: ../pigeonplanner/messages.py:84
+msgid "Invalid input!"
+msgstr "Neplatný vstup!"
+
+#: ../pigeonplanner/messages.py:53
+msgid "The ringnumber and year are necessary."
+msgstr "Číslo kroužku a rok jsou nazbytné"
+
+#: ../pigeonplanner/messages.py:56
+msgid "Only numbers are accepted as year input."
+msgstr "Pouze čísla jsou přijímána jako rok vstupu."
+
+#: ../pigeonplanner/messages.py:59
+msgid "Check the length of the year."
+msgstr "Podívej se na délku roku"
+
+#: ../pigeonplanner/messages.py:62
+msgid "Only numbers are allowed when adding multiple pigeons."
+msgstr "Pouze čísla jsou přijímána jako rok vstupu"
+
+#: ../pigeonplanner/messages.py:66
+msgid "At least the date and racepoint have to be entered."
+msgstr "Datum a místo závodu musí být zadán."
+
+#: ../pigeonplanner/messages.py:69
+msgid "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."
+msgstr "Datum, vstoupu má špatný formát. To by mělo být ve formátu (RRRR-MM-DD)."
+
+#: ../pigeonplanner/messages.py:72
+msgid "The result you want to add already exists."
+msgstr "Výsledek, který chceš přidat již existuje."
+
+#: ../pigeonplanner/messages.py:74
+msgid "Removing the selected result"
+msgstr "Odstranit vybraný výsledek"
+
+#: ../pigeonplanner/messages.py:75
+#: ../pigeonplanner/messages.py:78
+#: ../pigeonplanner/messages.py:132
+#: tmp/MainWindow.glade.h:10
+msgid "Are you sure?"
+msgstr "Jseš si jist?"
+
+#: ../pigeonplanner/messages.py:77
+msgid "Removing the selected medication entry"
+msgstr "Smazat vybraný lék"
+
+#: ../pigeonplanner/messages.py:82
+msgid "The name has to be entered."
+msgstr "Je třeba zadat jméno"
+
+#: ../pigeonplanner/messages.py:85
+msgid "The persoon you want to add already exists."
+msgstr "Již existuje."
+
+#: ../pigeonplanner/messages.py:87
+#, python-format
+msgid "Removing '%s'"
+msgstr "Odstranění '% s'"
+
+#: ../pigeonplanner/messages.py:88
+msgid "Are you sure you want to remove this person from your addresses?"
+msgstr "Jseš si jist, že chce odstranit tuto osobu ze svého adresáře?"
+
+#: ../pigeonplanner/messages.py:91
+#, python-format
+msgid "Removing '%(item)s' from '%(dataset)s'."
+msgstr "Odstranění '% (item) s' z '% (dataset) s'."
+
+#: ../pigeonplanner/messages.py:92
+msgid "Are you sure you want to remove this item?"
+msgstr "Jseš si jist, že chcete odstranit tuto položku?"
+
+#: ../pigeonplanner/messages.py:95
+#: ../pigeonplanner/messages.py:97
+msgid "Removing database"
+msgstr "seš si jist, že chcete odstranit tuto položku?"
+
+#: ../pigeonplanner/messages.py:96
+msgid "Are you sure you want to remove the database? All data will be lost."
+msgstr "Jste si jist, že chceš odstranit databázi? Všechna data budou ztracena."
+
+#: ../pigeonplanner/messages.py:99
+msgid "Click \"OK\" to close the program. A new database will be created the next time you start the program again."
+msgstr "Klepněte na tlačítko  \"OK \" pro zavření programu. Nová databáze bude vytvořena při příštím spuštění programu znovu."
+
+#: ../pigeonplanner/messages.py:101
+#: ../pigeonplanner/messages.py:137
+msgid "Restart required"
+msgstr "Je nutný restart!"
+
+#: ../pigeonplanner/messages.py:103
+msgid "Optimization has been completed."
+msgstr "Optimalizace byla dokončena."
+
+#: ../pigeonplanner/messages.py:105
+#: ../pigeonplanner/messages.py:109
+#: ../pigeonplanner/messages.py:115
+msgid "Completed!"
+msgstr "Dokončeno!"
+
+#: ../pigeonplanner/messages.py:107
+msgid "The backup was successfully created."
+msgstr "Záloha byla úspěšně vytvořena."
+
+#: ../pigeonplanner/messages.py:110
+msgid "There was an error making the backup."
+msgstr "Došlo k chybě při vytváření zálohy."
+
+#: ../pigeonplanner/messages.py:112
+#: ../pigeonplanner/messages.py:118
+msgid "Failed!"
+msgstr "Selhání!"
+
+#: ../pigeonplanner/messages.py:113
+msgid ""
+"The backup was successfully restored.\n"
+"Restart the program."
+msgstr ""
+"Záloha byla úspěšně obnovena. \n"
+"Restartování programu."
+
+#: ../pigeonplanner/messages.py:116
+msgid "There was an error restoring the backup."
+msgstr ""
+"Záloha byla úspěšně obnovena. \n"
+"Restartování programu."
+
+#: ../pigeonplanner/messages.py:120
+msgid "No personal information found."
+msgstr "Žádné  informace nalézt."
+
+#: ../pigeonplanner/messages.py:121
+msgid ""
+"This will be shown on top of the printed pedigree.\n"
+"Do you want to add it now?"
+msgstr ""
+"Bude zobrazen v horní části vytištěné rodokmenu.\n"
+" Chceš jej přida nyní?"
+
+#: ../pigeonplanner/messages.py:124
+msgid "Error printing the pedigree"
+msgstr "Chyba tisku rodokmen"
+
+#: ../pigeonplanner/messages.py:127
+msgid "An error occured in the print operation!"
+msgstr "Došlo k chybě při tisku !"
+
+#: ../pigeonplanner/messages.py:128
+msgid "See the logfile (File->Logfile viewer) for more info."
+msgstr "Nalezneš v souboru protokolu (Soubor-> Protokol prohlížeč souborů) pro více informací."
+
+#: ../pigeonplanner/messages.py:131
+msgid "This will set back all the settings to the default values."
+msgstr "Všechna nastavení budou nastavena na výchozí hodnoty."
+
+#: ../pigeonplanner/messages.py:133
+msgid "Default settings"
+msgstr "Výchozí nastavení"
+
+#: ../pigeonplanner/messages.py:135
+msgid "Pigeon Planner needs to be restarted for the changes to take effect."
+msgstr "Pro projevení změn je třeba program restartovat"
+
+#: ../pigeonplanner/messages.py:139
+msgid "Update available!"
+msgstr "Je kdispozici aktualizace"
+
+#: ../pigeonplanner/messages.py:140
+msgid "There is an update available, do you want to download it now?"
+msgstr "Je k dispozici aktualizace, chceš ji nyní stáhnout?"
+
+#: ../pigeonplanner/messages.py:143
+msgid "The recipient and sender's e-mailaddress are required."
+msgstr "Příjemce a odesílatel e-mailové adresy jsou povinné."
+
+#: ../pigeonplanner/messages.py:147
+msgid "Error trying to get information. Are you connected to the internet?"
+msgstr "Chyba při pokusu o získání informací. Jseš připojen k internetu?"
+
+#: ../pigeonplanner/messages.py:148
+msgid "A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version"
+msgstr "Je nová verze  k dispozici. Prosím, jdi na webové stránky Pigeon Planner klepnutím na odkaz níže a stáhněte nejnovější verzi"
+
+#: ../pigeonplanner/messages.py:149
+msgid "You already have the latest version installed."
+msgstr "Již máš nainstalovanou nejnovější verzi."
+
+#: ../pigeonplanner/messages.py:150
+msgid "This isn't normal, or you must be running a development version"
+msgstr "To není normální, nebo musíš mýt spuštěnou verzi ve vývoji"
+
+#: ../pigeonplanner/logdialog.py:33
+msgid "Logfile Viewer"
+msgstr "Prohlížeč log souborů"
+
+#: ../pigeonplanner/pedigreewindow.py:64
+#: ../pigeonplanner.py:198
+#: tmp/MainWindow.glade.h:41
+#: tmp/OptionsDialog.glade.h:34
+#: tmp/PedigreeWindow.glade.h:2
+msgid "Pedigree"
+msgstr "Rodokmen"
+
+#: ../pigeonplanner/pedigreewindow.py:83
+msgid "Save this pedigree"
+msgstr "Uložit tento rodokmen"
+
+#: ../pigeonplanner/pedigreewindow.py:85
+msgid "Email this pedigree"
+msgstr "Poslat rodokmen"
+
+#: ../pigeonplanner/pedigreewindow.py:87
+msgid "View this pedigree"
+msgstr "Zobrazit tuto rodokmen"
+
+#: ../pigeonplanner/pedigreewindow.py:89
+#: ../pigeonplanner/mainwindow.py:1041
+msgid "Print this pedigree"
+msgstr "Tisknout rodokmen"
+
+#: ../pigeonplanner/pedigreewindow.py:91
+#: ../pigeonplanner/printing.py:109
+#: ../pigeonplanner/resultwindow.py:99
+#: ../pigeonplanner/photoalbum.py:116
+msgid "Close this window"
+msgstr "Zavřít okno"
+
+#: ../pigeonplanner/mailing.py:182
+msgid "The e-mail has been sent succesfully!"
+msgstr "E-mail byl úspěšně odeslán!"
+
+#: ../pigeonplanner/printing.py:97
+msgid "Shows the first page"
+msgstr "První stránka"
+
+#: ../pigeonplanner/printing.py:99
+msgid "Shows previous page"
+msgstr "Předchozí stránka"
+
+#: ../pigeonplanner/printing.py:101
+msgid "Shows the next page"
+msgstr "Další stránka"
+
+#: ../pigeonplanner/printing.py:103
+msgid "Shows the last page"
+msgstr "Poslední stránka"
+
+#: ../pigeonplanner/printing.py:105
+msgid "Zooms the page in"
+msgstr "Zvětšit stránku"
+
+#: ../pigeonplanner/printing.py:107
+msgid "Zooms the page out"
+msgstr "Zmenšit tránku"
+
+#: ../pigeonplanner/printing.py:113
+msgid "Zooms to fit the whole page"
+msgstr "Na celou stránku"
+
+#: ../pigeonplanner/printing.py:320
+msgid "Save as..."
+msgstr "Uložit jako ..."
+
+#: ../pigeonplanner/printing.py:405
+#: tmp/PedigreeWindow.glade.h:3
+msgid "Pedigree of:"
+msgstr "Rodokmen:"
+
+#: ../pigeonplanner/printing.py:671
+#: ../pigeonplanner/widgets.py:450
+#: tmp/MainWindow.glade.h:11
+#: tmp/ResultWindow.glade.h:1
+msgid "Band no."
+msgstr "Rodokmen:"
+
+#: ../pigeonplanner/printing.py:672
+#: ../pigeonplanner/printing.py:880
+#: tmp/MainWindow.glade.h:23
+#: tmp/ResultWindow.glade.h:5
+#: tmp/ToolsWindow.glade.h:18
+msgid "Date"
+msgstr "Datum"
+
+#: ../pigeonplanner/printing.py:673
+#: ../pigeonplanner/resultwindow.py:184
+#: tmp/MainWindow.glade.h:44
+#: tmp/ResultWindow.glade.h:8
+msgid "Racepoint"
+msgstr "Vypouštěcí místo"
+
+#: ../pigeonplanner/printing.py:674
+#: tmp/MainWindow.glade.h:43
+#: tmp/ResultWindow.glade.h:7
+msgid "Placed"
+msgstr "Umístění"
+
+#: ../pigeonplanner/printing.py:675
+#: tmp/MainWindow.glade.h:40
+#: tmp/ResultWindow.glade.h:6
+msgid "Out of"
+msgstr "Z"
+
+#: ../pigeonplanner/printing.py:676
+msgid "Coef."
+msgstr "Koeficient"
+
+#: ../pigeonplanner/printing.py:677
+#: ../pigeonplanner/resultwindow.py:186
+#: tmp/MainWindow.glade.h:51
+#: tmp/OptionsDialog.glade.h:38
+#: tmp/ResultWindow.glade.h:9
+msgid "Sector"
+msgstr "Odvětví"
+
+#: ../pigeonplanner/printing.py:678
+#: tmp/MainWindow.glade.h:60
+#: tmp/OptionsDialog.glade.h:47
+#: tmp/ResultWindow.glade.h:10
+msgid "Type"
+msgstr "Druh"
+
+#: ../pigeonplanner/printing.py:679
+#: tmp/MainWindow.glade.h:14
+#: tmp/OptionsDialog.glade.h:14
+#: tmp/ResultWindow.glade.h:2
+msgid "Category"
+msgstr "Kategorie"
+
+#: ../pigeonplanner/printing.py:680
+#: ../pigeonplanner/toolswindow.py:115
+#: ../pigeonplanner/toolswindow.py:360
+#: ../pigeonplanner/toolswindow.py:402
+#: ../pigeonplanner/toolswindow.py:428
+#: tmp/MainWindow.glade.h:62
+#: tmp/OptionsDialog.glade.h:48
+#: tmp/ResultWindow.glade.h:12
+msgid "Weather"
+msgstr "Počasí"
+
+#: ../pigeonplanner/printing.py:681
+#: ../pigeonplanner/toolswindow.py:115
+#: ../pigeonplanner/toolswindow.py:362
+#: ../pigeonplanner/toolswindow.py:404
+#: ../pigeonplanner/toolswindow.py:430
+#: tmp/MainWindow.glade.h:63
+#: tmp/OptionsDialog.glade.h:49
+#: tmp/ResultWindow.glade.h:13
+msgid "Wind"
+msgstr "Vítr"
+
+#: ../pigeonplanner/printing.py:682
+#: tmp/MainWindow.glade.h:20
+#: tmp/OptionsDialog.glade.h:20
+#: tmp/ResultWindow.glade.h:4
+#: tmp/ToolsWindow.glade.h:13
+msgid "Comment"
+msgstr "Komentář"
+
+#: ../pigeonplanner/printing.py:770
+msgid "Page"
+msgstr "Stránka"
+
+#: ../pigeonplanner/printing.py:871
+#: ../pigeonplanner/printing.py:893
+#: ../pigeonplanner/printing.py:894
+#: tmp/ToolsWindow.glade.h:47
+msgid "Velocity"
+msgstr "Rychlost"
+
+#: ../pigeonplanner/printing.py:882
+#: tmp/ToolsWindow.glade.h:38
+msgid "Released"
+msgstr "Zveřejněno"
+
+#: ../pigeonplanner/printing.py:884
+#: tmp/ToolsWindow.glade.h:20
+msgid "Distance"
+msgstr "Vzdálenost"
+
+#: ../pigeonplanner/printing.py:899
+#: ../pigeonplanner/printing.py:900
+#: tmp/ToolsWindow.glade.h:22
+msgid "Flight Time"
+msgstr "Čas letu"
+
+#: ../pigeonplanner/printing.py:905
+#: ../pigeonplanner/printing.py:906
+#: tmp/ToolsWindow.glade.h:45
+msgid "Time of Arrival"
+msgstr "Čas příletu"
+
+#: ../pigeonplanner/widgets.py:237
+msgid "translator-credits"
+msgstr "Překladatel"
+
+#: ../pigeonplanner/widgets.py:343
+#: tmp/MainWindow.glade.h:24
+msgid "Dead"
+msgstr "Mrtvý"
+
+#: ../pigeonplanner/widgets.py:343
+#: tmp/MainWindow.glade.h:8
+msgid "Active"
+msgstr "Aktivní"
+
+#: ../pigeonplanner/widgets.py:343
+#: tmp/MainWindow.glade.h:54
+msgid "Sold"
+msgstr "Prodáno"
+
+#: ../pigeonplanner/widgets.py:343
+#: tmp/MainWindow.glade.h:35
+msgid "Lost"
+msgstr "Ztratil se"
+
+#: ../pigeonplanner/widgets.py:380
+#: tmp/ToolsWindow.glade.h:12
+msgid "Choose a directory where to save the backup"
+msgstr "Vyber si adresář, kam uložit zálohu"
+
+#: ../pigeonplanner/widgets.py:382
+#: tmp/ToolsWindow.glade.h:40
+msgid "Select a directory"
+msgstr "Vyber adresář"
+
+#: ../pigeonplanner/widgets.py:388
+#: ../pigeonplanner/toolswindow.py:84
+#: ../pigeonplanner.py:206
+msgid "Backup"
+msgstr "Záloha"
+
+#: ../pigeonplanner/widgets.py:397
+#: tmp/ToolsWindow.glade.h:11
+msgid "Choose a Pigeon Planner backup file to restore"
+msgstr "Vyber si záložní soubor pro obnovu Pigeon Planner "
+
+#: ../pigeonplanner/widgets.py:399
+#: tmp/ToolsWindow.glade.h:48
+msgid "Warning! This will overwrite the existing database!"
+msgstr "Upozornění! Tím se přepíše stávající databáze!"
+
+#: ../pigeonplanner/widgets.py:401
+#: tmp/ToolsWindow.glade.h:41
+msgid "Select a valid backup file"
+msgstr "Vyber platný soubor zálohy"
+
+#: ../pigeonplanner/widgets.py:409
+#: ../pigeonplanner.py:207
+msgid "Restore"
+msgstr "Obnovit"
+
+#: ../pigeonplanner/widgets.py:439
+msgid "Insert a pigeon"
+msgstr "Vložit holuba"
+
+#: ../pigeonplanner/widgets.py:549
+msgid "Only show:"
+msgstr "Jen zobrazit"
+
+#: ../pigeonplanner/resultwindow.py:70
+#: tmp/MainWindow.glade.h:47
+#: tmp/OptionsDialog.glade.h:37
+msgid "Results"
+msgstr "Výsledek"
+
+#: ../pigeonplanner/resultwindow.py:89
+msgid "Save these results"
+msgstr "Uložit  výsledky"
+
+#: ../pigeonplanner/resultwindow.py:91
+msgid "Email these results"
+msgstr "Výsledky e-mailem"
+
+#: ../pigeonplanner/resultwindow.py:93
+msgid "View these results"
+msgstr "K výsledkům"
+
+#: ../pigeonplanner/resultwindow.py:95
+msgid "Print these results"
+msgstr "Tisk výsledků"
+
+#: ../pigeonplanner/resultwindow.py:96
+#: ../pigeonplanner/mainwindow.py:1072
+msgid "_Filter..."
+msgstr "_Filter..."
+
+#: ../pigeonplanner/resultwindow.py:97
+#: ../pigeonplanner/mainwindow.py:1073
+msgid "Set filter options"
+msgstr "Nastavit možnosti filtru"
+
+#: ../pigeonplanner/resultwindow.py:174
+msgid "Filter results"
+msgstr "Filtrovat výsledky"
+
+#: ../pigeonplanner/resultwindow.py:178
+msgid "Pigeons"
+msgstr "Holubi"
+
+#: ../pigeonplanner/resultwindow.py:180
+msgid "Year of pigeon"
+msgstr "Ročník holuba"
+
+#: ../pigeonplanner/resultwindow.py:182
+msgid "Year of race"
+msgstr "Ročník závodu"
+
+#: ../pigeonplanner/resultwindow.py:188
+#: tmp/MainWindow.glade.h:18
+#: tmp/OptionsDialog.glade.h:18
+#: tmp/ResultWindow.glade.h:3
+msgid "Coefficient"
+msgstr "Koeficient"
+
+#: ../pigeonplanner/resultwindow.py:190
+msgid "Place"
+msgstr "Místo"
+
+#: ../pigeonplanner/optionsdialog.py:44
+msgid "General"
+msgstr "Obecné"
+
+#: ../pigeonplanner/optionsdialog.py:45
+msgid "Appearance"
+msgstr "Vzhled"
+
+#: ../pigeonplanner/optionsdialog.py:46
+msgid "Printing"
+msgstr "Tisk"
+
+#: ../pigeonplanner/optionsdialog.py:169
+msgid "days"
+msgstr "Dni"
+
+#: ../pigeonplanner/optionsdialog.py:171
+msgid "day"
+msgstr "Den"
+
+#: ../pigeonplanner/toolswindow.py:49
+msgid "Yards"
+msgstr "Yardy"
+
+#: ../pigeonplanner/toolswindow.py:50
+msgid "Kilometres"
+msgstr "Kilometry"
+
+#: ../pigeonplanner/toolswindow.py:51
+msgid "Metres"
+msgstr "Metry"
+
+#: ../pigeonplanner/toolswindow.py:52
+msgid "Centimetres"
+msgstr "Centmetry"
+
+#: ../pigeonplanner/toolswindow.py:53
+msgid "Inches"
+msgstr "Inche"
+
+#: ../pigeonplanner/toolswindow.py:54
+msgid "Feet"
+msgstr "Stopy"
+
+#: ../pigeonplanner/toolswindow.py:55
+msgid "Miles"
+msgstr "Míle"
+
+#: ../pigeonplanner/toolswindow.py:56
+msgid "Nautical Miles"
+msgstr "Námořní Míle"
+
+#: ../pigeonplanner/toolswindow.py:59
+msgid "Yard per Minute"
+msgstr "Yardů za minutu"
+
+#: ../pigeonplanner/toolswindow.py:60
+msgid "Metres per Minute"
+msgstr "Metrů za minutu"
+
+#: ../pigeonplanner/toolswindow.py:61
+msgid "Metres per Second"
+msgstr "Merů z vteřinu"
+
+#: ../pigeonplanner/toolswindow.py:62
+msgid "Kilometre per Hour"
+msgstr "Kilometrů za hodinu"
+
+#: ../pigeonplanner/toolswindow.py:63
+msgid "Feet per Second"
+msgstr "Stop za vteřinu"
+
+#: ../pigeonplanner/toolswindow.py:64
+msgid "Feet per Minute"
+msgstr "Stop za minutu"
+
+#: ../pigeonplanner/toolswindow.py:65
+msgid "Mile per Hour"
+msgstr "Mil za hodinu"
+
+#: ../pigeonplanner/toolswindow.py:84
+msgid "Velocity calculator"
+msgstr "Kalkulačka rychlosti"
+
+#: ../pigeonplanner/toolswindow.py:84
+#: tmp/ToolsWindow.glade.h:10
+msgid "Calendar"
+msgstr "Kalendář"
+
+#: ../pigeonplanner/toolswindow.py:84
+msgid "Datasets"
+msgstr "Datové soubory"
+
+#: ../pigeonplanner/toolswindow.py:84
+msgid "Addresses"
+msgstr "Adresy"
+
+#: ../pigeonplanner/toolswindow.py:84
+#: ../pigeonplanner/mainwindow.py:1084
+msgid "Statistics"
+msgstr "Statistika"
+
+#: ../pigeonplanner/toolswindow.py:84
+msgid "Database"
+msgstr "Databáze"
+
+#: ../pigeonplanner/toolswindow.py:84
+msgid "Update"
+msgstr "Aktualizace"
+
+#: ../pigeonplanner/toolswindow.py:115
+#: ../pigeonplanner/toolswindow.py:346
+#: ../pigeonplanner/toolswindow.py:388
+#: ../pigeonplanner/toolswindow.py:414
+#: ../pigeonplanner/mainwindow.py:401
+msgid "Colours"
+msgstr "Barvy"
+
+#: ../pigeonplanner/toolswindow.py:115
+#: ../pigeonplanner/toolswindow.py:354
+#: ../pigeonplanner/toolswindow.py:396
+#: ../pigeonplanner/toolswindow.py:422
+msgid "Racepoints"
+msgstr "Závodní body"
+
+#: ../pigeonplanner/toolswindow.py:115
+#: ../pigeonplanner/toolswindow.py:348
+#: ../pigeonplanner/toolswindow.py:390
+#: ../pigeonplanner/toolswindow.py:416
+msgid "Sectors"
+msgstr "Sektory"
+
+#: ../pigeonplanner/toolswindow.py:115
+#: ../pigeonplanner/toolswindow.py:350
+#: ../pigeonplanner/toolswindow.py:392
+#: ../pigeonplanner/toolswindow.py:418
+msgid "Types"
+msgstr "Druhy"
+
+#: ../pigeonplanner/toolswindow.py:115
+#: ../pigeonplanner/toolswindow.py:352
+#: ../pigeonplanner/toolswindow.py:394
+#: ../pigeonplanner/toolswindow.py:420
+msgid "Categories"
+msgstr "Kategorie"
+
+#: ../pigeonplanner/toolswindow.py:115
+#: ../pigeonplanner/toolswindow.py:356
+#: ../pigeonplanner/toolswindow.py:398
+#: ../pigeonplanner/toolswindow.py:424
+#: ../pigeonplanner/mainwindow.py:403
+msgid "Strains"
+msgstr "Kmeny"
+
+#: ../pigeonplanner/toolswindow.py:115
+#: ../pigeonplanner/toolswindow.py:358
+#: ../pigeonplanner/toolswindow.py:400
+#: ../pigeonplanner/toolswindow.py:426
+#: ../pigeonplanner/mainwindow.py:405
+msgid "Lofts"
+msgstr "Holubníky"
+
+#: ../pigeonplanner/toolswindow.py:237
+#, python-format
+msgid "Notification is set on %s days in advance"
+msgstr "Oznámení je nastaveno  na%  dní předem"
+
+#: ../pigeonplanner/toolswindow.py:240
+msgid "No notification set"
+msgstr "Žádné oznámení není nastaveno"
+
+#: ../pigeonplanner/toolswindow.py:624
+msgid "Number of pigeons"
+msgstr "Číslo holuba"
+
+#: ../pigeonplanner/toolswindow.py:625
+msgid "Number of cocks"
+msgstr "Číslo holuba"
+
+#: ../pigeonplanner/toolswindow.py:626
+msgid "Number of hens"
+msgstr "Číslo holubice"
+
+#: ../pigeonplanner/toolswindow.py:627
+msgid "Number of young birds"
+msgstr "Číslo holouběte"
+
+#: ../pigeonplanner/toolswindow.py:628
+msgid "Number of results"
+msgstr "Číslo výsledku"
+
+#: ../pigeonplanner/photoalbum.py:104
+msgid "Shows the first picture"
+msgstr "Zobrazí se první snímek"
+
+#: ../pigeonplanner/photoalbum.py:106
+msgid "Shows previous picture"
+msgstr "Předchozí obrázek"
+
+#: ../pigeonplanner/photoalbum.py:108
+msgid "Shows the next picture"
+msgstr "Následující obrázek"
+
+#: ../pigeonplanner/photoalbum.py:110
+msgid "Shows the last picture"
+msgstr "Poslední obrázek"
+
+#: ../pigeonplanner/photoalbum.py:112
+msgid "Zooms the picture in"
+msgstr "Zvětšení obrázku"
+
+#: ../pigeonplanner/photoalbum.py:114
+msgid "Zooms the picture out"
+msgstr "Zvětšení obrázku v"
+
+#: ../pigeonplanner/photoalbum.py:120
+msgid "Zooms to fit the whole picture"
+msgstr "Zvětšit obrázek na plnou velikost"
+
+#: ../pigeonplanner/photoalbum.py:122
+msgid "View slideshow"
+msgstr "Prohlížení obrázků"
+
+#: ../pigeonplanner/photoalbum.py:124
+msgid "View in fullscreen"
+msgstr "Zobrazit na celou obrazovku"
+
+#: ../pigeonplanner/mainwindow.py:61
+msgid "cock"
+msgstr "Holub"
+
+#: ../pigeonplanner/mainwindow.py:61
+msgid "hen"
+msgstr "Holubice"
+
+#: ../pigeonplanner/mainwindow.py:61
+msgid "young bird"
+msgstr "Holoubě"
+
+#: ../pigeonplanner/mainwindow.py:144
+msgid "Enter the bandnumber of the pigeon"
+msgstr "Zadej číslo kroužku holuba"
+
+#: ../pigeonplanner/mainwindow.py:146
+msgid "Enter the year of the pigeon"
+msgstr "Zadej ročník holuba"
+
+#: ../pigeonplanner/mainwindow.py:148
+msgid "Click here to set the status of the pigeon"
+msgstr "Klikni zde pro nastavení stavu holubů"
+
+#: ../pigeonplanner/mainwindow.py:150
+msgid "Enter a name for the pigeon"
+msgstr "Zadejte jméno holuba"
+
+#: ../pigeonplanner/mainwindow.py:152
+msgid "Click here to add an image"
+msgstr "Klikni zde pro přidání obrázku"
+
+#: ../pigeonplanner/mainwindow.py:154
+msgid "Search through the list of cocks"
+msgstr "Hledávání v seznamu holubů"
+
+#: ../pigeonplanner/mainwindow.py:156
+msgid "Search through the list of hens"
+msgstr "Hledání v seznamu holubic"
+
+#: ../pigeonplanner/mainwindow.py:253
+msgid "Create backup"
+msgstr "Vytvořit zálohu"
+
+#: ../pigeonplanner/mainwindow.py:258
+msgid "Restore backup"
+msgstr "Obnovit zálohu"
+
+#: ../pigeonplanner/mainwindow.py:385
+#, python-format
+msgid "Pigeon %s/%s has been removed"
+msgstr "Holub %s/%s byl odebrán"
+
+#: ../pigeonplanner/mainwindow.py:397
+msgid "Filter pigeons"
+msgstr "Filtr holubů"
+
+#: ../pigeonplanner/mainwindow.py:400
+#: tmp/MainWindow.glade.h:52
+#: tmp/OptionsDialog.glade.h:39
+msgid "Sex"
+msgstr "Phlaví"
+
+#: ../pigeonplanner/mainwindow.py:408
+msgid "Status"
+msgstr "Stav"
+
+#: ../pigeonplanner/mainwindow.py:670
+msgid "Add result for:"
+msgstr "Přidat výsledek pro:"
+
+#: ../pigeonplanner/mainwindow.py:690
+msgid "Result has been removed"
+msgstr "Výsledkem byl odebrán"
+
+#: ../pigeonplanner/mainwindow.py:710
+msgid "Edit result for:"
+msgstr "Upravit výsledek pro:"
+
+#: ../pigeonplanner/mainwindow.py:736
+msgid "Result has been added"
+msgstr "Výsledek byl přidán"
+
+#: ../pigeonplanner/mainwindow.py:1033
+msgid "_File"
+msgstr "_Soubor"
+
+#: ../pigeonplanner/mainwindow.py:1035
+#: ../pigeonplanner/mainwindow.py:1044
+msgid "_Backup"
+msgstr "_Záloha"
+
+#: ../pigeonplanner/mainwindow.py:1036
+msgid "_Pigeon"
+msgstr "_Holub"
+
+#: ../pigeonplanner/mainwindow.py:1037
+msgid "_Edit"
+msgstr "_Upravit"
+
+#: ../pigeonplanner/mainwindow.py:1038
+msgid "_View"
+msgstr "_Zobrazit"
+
+#: ../pigeonplanner/mainwindow.py:1039
+msgid "_Help"
+msgstr "_Pomoc"
+
+#: ../pigeonplanner/mainwindow.py:1040
+#: ../pigeonplanner/mainwindow.py:1064
+msgid "_Pedigree"
+msgstr "_Rodokmen"
+
+#: ../pigeonplanner/mainwindow.py:1042
+msgid "Blank pedigree"
+msgstr "Prázdný rodokmen"
+
+#: ../pigeonplanner/mainwindow.py:1043
+msgid "Print a blank pedigree"
+msgstr "Tisk prázdného rodokmenu"
+
+#: ../pigeonplanner/mainwindow.py:1045
+msgid "Create a backup of your database"
+msgstr "Vytvořte zálohu databáze"
+
+#: ../pigeonplanner/mainwindow.py:1046
+msgid "_Restore"
+msgstr "_Obnovit"
+
+#: ../pigeonplanner/mainwindow.py:1047
+msgid "Restore a backup of your database"
+msgstr "Obnovit zálohu databáze"
+
+#: ../pigeonplanner/mainwindow.py:1049
+msgid "Quit the program"
+msgstr "Konec programu"
+
+#: ../pigeonplanner/mainwindow.py:1051
+msgid "Add a new pigeon"
+msgstr "Přidat nového holuba"
+
+#: ../pigeonplanner/mainwindow.py:1052
+msgid "Add ran_ge"
+msgstr "Přidat _řadu"
+
+#: ../pigeonplanner/mainwindow.py:1053
+#: tmp/MainWindow.glade.h:9
+msgid "Add a range of pigeons"
+msgstr "Přdej řadu holubů"
+
+#: ../pigeonplanner/mainwindow.py:1054
+msgid "_Photo Album"
+msgstr "_Fotoalbum"
+
+#: ../pigeonplanner/mainwindow.py:1055
+msgid "View the images of your pigeons"
+msgstr "Zobrazit snímky  holubů"
+
+#: ../pigeonplanner/mainwindow.py:1056
+msgid "_Logfile Viewer"
+msgstr "Prohlížet log soubor"
+
+#: ../pigeonplanner/mainwindow.py:1057
+msgid "See the logfile"
+msgstr "Nalezneš v souboru protokolu"
+
+#: ../pigeonplanner/mainwindow.py:1058
+msgid "_Find..."
+msgstr "_Najít..."
+
+#: ../pigeonplanner/mainwindow.py:1059
+msgid "Search through the list of pigeons"
+msgstr "Vyhledávání v seznamu holubů"
+
+#: ../pigeonplanner/mainwindow.py:1061
+msgid "Edit the selected pigeon"
+msgstr "Upravit vybraného holuba"
+
+#: ../pigeonplanner/mainwindow.py:1063
+msgid "Remove the selected pigeon"
+msgstr "Vyjmout vybraného holuba"
+
+#: ../pigeonplanner/mainwindow.py:1065
+msgid "View the detailed pedigree of this pigeon"
+msgstr "Zobrazit detailní rodokmen  holuba"
+
+#: ../pigeonplanner/mainwindow.py:1066
+msgid "Add resul_t"
+msgstr "Přidat výs_ledek"
+
+#: ../pigeonplanner/mainwindow.py:1067
+msgid "Add a new result for this pigeon"
+msgstr "Přidat nový výsledek  holuba"
+
+#: ../pigeonplanner/mainwindow.py:1068
+msgid "_Tools"
+msgstr "_Nástroje"
+
+#: ../pigeonplanner/mainwindow.py:1069
+msgid "Various tools"
+msgstr "Různé nástroje"
+
+#: ../pigeonplanner/mainwindow.py:1071
+msgid "Configure the application"
+msgstr "Konfigurace aplikace"
+
+#: ../pigeonplanner/mainwindow.py:1074
+msgid "_Website"
+msgstr "_Internetové stránky"
+
+#: ../pigeonplanner/mainwindow.py:1075
+msgid "Go to the website for more information"
+msgstr "Jdi na webové stránky pro více informací"
+
+#: ../pigeonplanner/mainwindow.py:1076
+msgid "Forum"
+msgstr "Fórum"
+
+#: ../pigeonplanner/mainwindow.py:1077
+msgid "Go to the forum for online help"
+msgstr "řejít na fórum pro on-line pomoc"
+
+#: ../pigeonplanner/mainwindow.py:1079
+msgid "About this application"
+msgstr "O  aplikaci"
+
+#: ../pigeonplanner/mainwindow.py:1082
+msgid "Navigation arrows"
+msgstr "Navigační šipky"
+
+#: ../pigeonplanner/mainwindow.py:1083
+#: tmp/OptionsDialog.glade.h:41
+msgid "Show or hide the navigation arrows"
+msgstr "Zobrazit nebo skrýt navigační šipky"
+
+#: ../pigeonplanner/mainwindow.py:1085
+#: tmp/OptionsDialog.glade.h:40
+msgid "Show or hide pigeon statistics"
+msgstr "Ukázat nebo skrýt statistiku holuba"
+
+#: ../pigeonplanner/mainwindow.py:1086
+msgid "Toolbar"
+msgstr "Panel nástrojů"
+
+#: ../pigeonplanner/mainwindow.py:1087
+#: tmp/OptionsDialog.glade.h:43
+msgid "Show or hide the toolbar"
+msgstr "Zobrazení nebo skrytí panelu nástrojů"
+
+#: ../pigeonplanner/mainwindow.py:1088
+msgid "Statusbar"
+msgstr "Stavový  řádek"
+
+#: ../pigeonplanner/mainwindow.py:1089
+#: tmp/OptionsDialog.glade.h:42
+msgid "Show or hide the statusbar"
+msgstr "Zobrazit nebo skrýt stavový řádek"
+
+#: ../pigeonplanner/mainwindow.py:1683
+#, python-format
+msgid "Pigeon %s/%s has been added"
+msgstr "Holub %s/%s byl přidán"
+
+#: ../pigeonplanner/mainwindow.py:1979
+msgid "Images"
+msgstr "Obrázky"
+
+#: ../pigeonplanner/pedigree.py:455
+msgid "<edit>"
+msgstr "<Upravitt>"
+
+#: ../pigeonplanner.py:199
+#: tmp/Dialogs.glade.h:7
+#: tmp/OptionsDialog.glade.h:22
+msgid "E-mail"
+msgstr "e-mail"
+
+#: ../pigeonplanner.py:200
+msgid "Send"
+msgstr "Poslat"
+
+#: ../pigeonplanner.py:201
+msgid "Report"
+msgstr "Zpráva"
+
+#: ../pigeonplanner.py:202
+msgid "View all"
+msgstr "Zobrazit všechny"
+
+#: ../pigeonplanner.py:203
+msgid "Calculate"
+msgstr "Spočítat"
+
+#: ../pigeonplanner.py:204
+msgid "Search database"
+msgstr "Databáze pro vyhledávání"
+
+#: ../pigeonplanner.py:205
+msgid "Optimize"
+msgstr "Optimalizovat"
+
+#: ../pigeonplanner.py:208
+msgid "Check now!"
+msgstr "Optimalizovat"
+
+#: tmp/Dialogs.glade.h:1
+msgid "<b>Attached file:</b>"
+msgstr "<b>Přiložený soubor:</b>"
+
+#: tmp/Dialogs.glade.h:2
+msgid "<b>Message:</b>"
+msgstr "<b>Zpráva:</b>"
+
+#: tmp/Dialogs.glade.h:3
+msgid "<b>Send to:</b>"
+msgstr "<b>Zasílejte na adresu:</b>"
+
+#: tmp/Dialogs.glade.h:4
+msgid "<b>Subject:</b>"
+msgstr "<b>Předmět:</b>"
+
+#: tmp/Dialogs.glade.h:5
+msgid "<b>Your e-mailaddress:</b>"
+msgstr "<b>Váš e-mail:</b>"
+
+#: tmp/Dialogs.glade.h:6
+msgid "<b>Your name:</b>"
+msgstr "<b>Tvoje jméno:</b>"
+
+#: tmp/Dialogs.glade.h:8
+msgid "Sending..."
+msgstr "Odeslat ..."
+
+#: tmp/MainWindow.glade.h:1
+msgid "<b>Brothers and sisters</b>"
+msgstr "<b>Bratři a sestry</b>"
+
+#: tmp/MainWindow.glade.h:2
+msgid "<b>Details of pigeon</b>"
+msgstr "<b>Podrobnosti o  holubovi</b>"
+
+#: tmp/MainWindow.glade.h:3
+msgid "<b>Half brothers and sisters</b>"
+msgstr "<b>Nevlastní bratři a sestry</b>"
+
+#: tmp/MainWindow.glade.h:4
+msgid "<b>Offspring</b>"
+msgstr "<b>Potomstvo</b>"
+
+#: tmp/MainWindow.glade.h:5
+msgid "<b>Pedigree dam</b>"
+msgstr "<b>Rodokmen holubice</b>"
+
+#: tmp/MainWindow.glade.h:6
+msgid "<b>Pedigree sire</b>"
+msgstr "<b>Rodokmen holuba</b>"
+
+#: tmp/MainWindow.glade.h:7
+msgid "<b>Results of pigeon</b>"
+msgstr "<b>Výsledky holuba</b>"
+
+#: tmp/MainWindow.glade.h:12
+msgid "Band numbers"
+msgstr "Čísla kroužků"
+
+#: tmp/MainWindow.glade.h:13
+msgid "Buyer"
+msgstr "Kupující"
+
+#: tmp/MainWindow.glade.h:15
+msgid "Choose a status for this pigeon:"
+msgstr "Vyber si pro holuba postavení:"
+
+#: tmp/MainWindow.glade.h:16
+msgid "Choose an image..."
+msgstr "Vyber si obrázek ..."
+
+#: tmp/MainWindow.glade.h:17
+msgid "Cocks"
+msgstr "Holub"
+
+#: tmp/MainWindow.glade.h:19
+#: tmp/OptionsDialog.glade.h:19
+msgid "Colour"
+msgstr "Barva"
+
+#: tmp/MainWindow.glade.h:21
+msgid "Common parent"
+msgstr "Společná matka"
+
+#: tmp/MainWindow.glade.h:22
+#: tmp/PedigreeWindow.glade.h:1
+msgid "Dam"
+msgstr "Holubice"
+
+#: tmp/MainWindow.glade.h:25
+#: tmp/ToolsWindow.glade.h:19
+msgid "Description"
+msgstr "Popis"
+
+#: tmp/MainWindow.glade.h:26
+msgid "Done by"
+msgstr "Provádí se"
+
+#: tmp/MainWindow.glade.h:27
+msgid "Dosage"
+msgstr "Dávkování"
+
+#: tmp/MainWindow.glade.h:28
+#: tmp/OptionsDialog.glade.h:23
+msgid "Extra"
+msgstr "Více"
+
+#: tmp/MainWindow.glade.h:29
+msgid "Extra info"
+msgstr "Více info"
+
+#: tmp/MainWindow.glade.h:30
+msgid "From"
+msgstr "Z"
+
+#: tmp/MainWindow.glade.h:31
+msgid "Hens"
+msgstr "Holubice"
+
+#: tmp/MainWindow.glade.h:32
+msgid "Keep results of this pigeon"
+msgstr "Máš výsledky tohoto holuba"
+
+#: tmp/MainWindow.glade.h:33
+msgid "Keep this pigeon in the pedigree"
+msgstr "Ponechat holuba v rodokmenu"
+
+#: tmp/MainWindow.glade.h:34
+#: tmp/OptionsDialog.glade.h:28
+msgid "Loft"
+msgstr "Holubník"
+
+#: tmp/MainWindow.glade.h:36
+msgid "Medication"
+msgstr "Lék"
+
+#: tmp/MainWindow.glade.h:37
+#: tmp/OptionsDialog.glade.h:30
+#: tmp/ToolsWindow.glade.h:30
+msgid "Name"
+msgstr "Jméno"
+
+#: tmp/MainWindow.glade.h:38
+msgid "Names"
+msgstr "Jména"
+
+#: tmp/MainWindow.glade.h:39
+msgid "No extra information available."
+msgstr "Žádné další informace k dispozici."
+
+#: tmp/MainWindow.glade.h:42
+msgid "Pigeon status"
+msgstr "Stav holuba"
+
+#: tmp/MainWindow.glade.h:45
+msgid "Relatives"
+msgstr "Příbuzní"
+
+#: tmp/MainWindow.glade.h:46
+msgid "Remove pigeon"
+msgstr "Odebrat holuba"
+
+#: tmp/MainWindow.glade.h:48
+msgid "Search a pigeon"
+msgstr "Hledat holuba"
+
+#: tmp/MainWindow.glade.h:49
+msgid "Search for:"
+msgstr "Hledat:"
+
+#: tmp/MainWindow.glade.h:50
+msgid "Search in:"
+msgstr "Hledat v:"
+
+#: tmp/MainWindow.glade.h:53
+#: tmp/PedigreeWindow.glade.h:4
+msgid "Sire"
+msgstr "Holub"
+
+#: tmp/MainWindow.glade.h:55
+#: tmp/OptionsDialog.glade.h:46
+msgid "Strain"
+msgstr "Kmen"
+
+#: tmp/MainWindow.glade.h:56
+msgid "The current status is:"
+msgstr "Současný stav:"
+
+#: tmp/MainWindow.glade.h:57
+msgid "The following pigeon will be removed:"
+msgstr "Následující holub bude odstraněn:"
+
+#: tmp/MainWindow.glade.h:58
+msgid "To"
+msgstr "Komu..."
+
+#: tmp/MainWindow.glade.h:59
+msgid "Total"
+msgstr "Celkem"
+
+#: tmp/MainWindow.glade.h:61
+msgid "Vaccination"
+msgstr "Očkování"
+
+#: tmp/MainWindow.glade.h:64
+#: tmp/ResultWindow.glade.h:14
+msgid "Year"
+msgstr "Ročník"
+
+#: tmp/MainWindow.glade.h:65
+msgid "Young birds"
+msgstr "Holoubě"
+
+#: tmp/OptionsDialog.glade.h:1
+msgid "<b>Backup</b>"
+msgstr "<b>Záloha</b>"
+
+#: tmp/OptionsDialog.glade.h:2
+msgid "<b>Columns</b>"
+msgstr "<b>Sloupce</b>"
+
+#: tmp/OptionsDialog.glade.h:3
+msgid "<b>General</b>"
+msgstr "<b>Obecné</b>"
+
+#: tmp/OptionsDialog.glade.h:4
+msgid "<b>Language</b>"
+msgstr "<b>Jazyk</b>"
+
+#: tmp/OptionsDialog.glade.h:5
+msgid "<b>Layout</b>"
+msgstr "<b>Projekt</b>"
+
+#: tmp/OptionsDialog.glade.h:6
+msgid "<b>Other</b>"
+msgstr "<b>Ostatní</b>"
+
+#: tmp/OptionsDialog.glade.h:7
+msgid "<b>Paper</b>"
+msgstr "<b>Papír</b>"
+
+#: tmp/OptionsDialog.glade.h:8
+msgid "<b>Personal</b>"
+msgstr "<b>Osobní</b>"
+
+#: tmp/OptionsDialog.glade.h:9
+msgid "<b>Pigeon</b>"
+msgstr "<b>Holub</b>"
+
+#: tmp/OptionsDialog.glade.h:10
+msgid "<b>Theme</b>"
+msgstr "<b>Vzhled programu</b>"
+
+#: tmp/OptionsDialog.glade.h:11
+msgid "<b>Update</b>"
+msgstr "<b>Aktualizace</b>"
+
+#: tmp/OptionsDialog.glade.h:12
+msgid "A4"
+msgstr "A4"
+
+#: tmp/OptionsDialog.glade.h:13
+msgid "Address"
+msgstr "Adresa"
+
+#: tmp/OptionsDialog.glade.h:15
+msgid "Change the language to"
+msgstr "Změna jazyka "
+
+#: tmp/OptionsDialog.glade.h:16
+msgid "Change the theme"
+msgstr "Změnit vzhled"
+
+#: tmp/OptionsDialog.glade.h:17
+msgid "Check for updates on startup"
+msgstr "Kontrola aktualizací při spuštění"
+
+#: tmp/OptionsDialog.glade.h:21
+msgid "Default"
+msgstr "Výchozí nastavení"
+
+#: tmp/OptionsDialog.glade.h:24
+msgid "Image"
+msgstr "Obrázek"
+
+#: tmp/OptionsDialog.glade.h:25
+msgid "Interval"
+msgstr "Interval"
+
+#: tmp/OptionsDialog.glade.h:26
+msgid "Letter"
+msgstr "Dopis"
+
+#: tmp/OptionsDialog.glade.h:27
+msgid "Location"
+msgstr "Místo"
+
+#: tmp/OptionsDialog.glade.h:29
+msgid "Make an automatic backup"
+msgstr "Zkontrolujte, automatické zálohování"
+
+#: tmp/OptionsDialog.glade.h:31
+msgid "Options"
+msgstr "Nastavení"
+
+#: tmp/OptionsDialog.glade.h:32
+msgid "Original"
+msgstr "Původní"
+
+#: tmp/OptionsDialog.glade.h:33
+msgid "Paper format:"
+msgstr "Formát papíru"
+
+#: tmp/OptionsDialog.glade.h:35
+msgid "Pedigree layout:"
+msgstr "Uspořádání rodokmenu"
+
+#: tmp/OptionsDialog.glade.h:36
+msgid "Phone"
+msgstr "Telefon"
+
+#: tmp/OptionsDialog.glade.h:44
+msgid "Show the column names"
+msgstr "Zobrazit názvy sloupců"
+
+#: tmp/OptionsDialog.glade.h:45
+msgid "Show the date"
+msgstr "Zobrazit den"
+
+#: tmp/PhotoAlbum.glade.h:1
+msgid "Photo Album"
+msgstr "Fotoalbum"
+
+#: tmp/PhotoAlbum.glade.h:2
+msgid "There are no images found."
+msgstr "Nejsou nalezeny žádné obrázky"
+
+#: tmp/PreviewWindow.glade.h:1
+msgid "Print Preview"
+msgstr "Náhled tisku"
+
+#: tmp/ResultWindow.glade.h:11
+msgid "View all results"
+msgstr "Zobrazit všechny výsledky"
+
+#: tmp/ToolsWindow.glade.h:1
+msgid "<b>Add items</b>"
+msgstr "<b>Přidat položky</b>"
+
+#: tmp/ToolsWindow.glade.h:2
+msgid "<b>Create backup</b>"
+msgstr "<b>Vytvořit zálohu</b>"
+
+#: tmp/ToolsWindow.glade.h:3
+msgid "<b>Optimize database</b>"
+msgstr "<b>Optimalizace databáze</b>"
+
+#: tmp/ToolsWindow.glade.h:4
+msgid "<b>Remove database</b>"
+msgstr "<b>Odebrat databázi</b>"
+
+#: tmp/ToolsWindow.glade.h:5
+msgid "<b>Remove items</b>"
+msgstr "<b>Odstranit položky</b>"
+
+#: tmp/ToolsWindow.glade.h:6
+msgid "<b>Restore backup</b>"
+msgstr "<b>Odstranit položky</b>"
+
+#: tmp/ToolsWindow.glade.h:7
+msgid "<b>Warning!</b>"
+msgstr "<b>Upozornění!</b>"
+
+#: tmp/ToolsWindow.glade.h:8
+msgid "<i>Click the button below</i>"
+msgstr "<i>Klikněte na tlačítko níže</i>"
+
+#: tmp/ToolsWindow.glade.h:9
+msgid "Add and remove items from your datasets"
+msgstr "Přidání a odebrání položek z datové sady"
+
+#: tmp/ToolsWindow.glade.h:14
+msgid "Country"
+msgstr "Země"
+
+#: tmp/ToolsWindow.glade.h:15
+msgid ""
+"Create and restore backups from\n"
+"your pigeons and results."
+msgstr ""
+"Vytvářet a obnovovat zálohy z \n"
+" Vaše holuby a výsledky."
+
+#: tmp/ToolsWindow.glade.h:17
+msgid "Dataset"
+msgstr "Soubor dat"
+
+#: tmp/ToolsWindow.glade.h:21
+msgid "Downloadpage"
+msgstr "Download stránky"
+
+#: tmp/ToolsWindow.glade.h:23
+msgid "Here you can check if there is a program update available."
+msgstr "Zde si můžete zkontrolovat, zda je k programui aktualizace."
+
+#: tmp/ToolsWindow.glade.h:24
+msgid "Here you can see some statistics of your database"
+msgstr "Zde můžete vidět některé statistiky databáze"
+
+#: tmp/ToolsWindow.glade.h:25
+msgid "Hours"
+msgstr "Hodiny"
+
+#: tmp/ToolsWindow.glade.h:26
+msgid "If you remove the database, all your data will be lost."
+msgstr "Pokud odstraníte databázi, budou všechna vaše data ztracena."
+
+#: tmp/ToolsWindow.glade.h:27
+msgid "Item"
+msgstr "Položka"
+
+#: tmp/ToolsWindow.glade.h:28
+msgid "Minutes"
+msgstr "Minuty"
+
+#: tmp/ToolsWindow.glade.h:29
+msgid "NOTE: You will only be notified when the program starts!"
+msgstr "Poznámka:  oznámení, program začíná!"
+
+#: tmp/ToolsWindow.glade.h:31
+msgid "Notify me!"
+msgstr "Informujte mě!"
+
+#: tmp/ToolsWindow.glade.h:32
+msgid "Number of days in advance:"
+msgstr "Počet dní dopředu:"
+
+#: tmp/ToolsWindow.glade.h:33
+msgid ""
+"Optimize your database.\n"
+"(Please wait, this can take some time)"
+msgstr ""
+"Optimalizuj databázi.\n"
+"(Počkejte prosím, to může chvíli trvat)"
+
+#: tmp/ToolsWindow.glade.h:35
+msgid "Phone / E-mail"
+msgstr "Telefon/e-mail"
+
+#: tmp/ToolsWindow.glade.h:36
+msgid "Prognosis"
+msgstr "Prognóza"
+
+#: tmp/ToolsWindow.glade.h:37
+msgid "Range"
+msgstr "Rozsah"
+
+#: tmp/ToolsWindow.glade.h:39
+msgid "Seconds"
+msgstr "Vtřiny"
+
+#: tmp/ToolsWindow.glade.h:42
+msgid "Street"
+msgstr "Ulice"
+
+#: tmp/ToolsWindow.glade.h:43
+msgid "This is me"
+msgstr "To jsem já"
+
+#: tmp/ToolsWindow.glade.h:44
+msgid "Time"
+msgstr "Čas"
+
+#: tmp/ToolsWindow.glade.h:46
+msgid "Tools"
+msgstr "Nástroje"
+
+#: tmp/ToolsWindow.glade.h:49
+msgid "Zipcode / City"
+msgstr "Směrovací číslo/Město"
+
