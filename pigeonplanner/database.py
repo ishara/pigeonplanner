@@ -344,7 +344,10 @@ class DatabaseOperations(object):
 
     def has_results(self, pindex):
         sql = 'SELECT COUNT(*) FROM Results WHERE pindex=?'
-        return self.__db_execute_select(sql, (pindex,), RET_FIRSTCOL)
+        if len(self.__db_execute_select(sql, (pindex,), RET_FIRSTCOL)) == 0:
+            return False
+        else:
+            return True
 
 #### Medication
     def delete_medication_from_id_pindex(self, ID, pindex):

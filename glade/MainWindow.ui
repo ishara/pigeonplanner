@@ -2319,6 +2319,7 @@
                 <child>
                   <object class="GtkLabel" id="labelPigeon">
                     <property name="visible">True</property>
+                    <property name="wrap">True</property>
                   </object>
                   <packing>
                     <property name="position">1</property>

@@ -306,9 +306,10 @@ class MainWindow(builder.GtkBuilder):
         logger.info("Start: Adding a range of pigeons")
 
     def menuedit_activate(self, widget):
-        model, self.treeIterEdit = self.selection.get_selected()
-        if not self.treeIterEdit: return
+        model, paths = self.selection.get_selected_rows()
+        if len(paths) != 1: return
 
+        self.treeIterEdit = self.liststore.get_iter(paths[0])
         pindex = model[self.treeIterEdit][0]
 
         self.entryRing1.set_text(self.entryRing.get_text())
@@ -341,60 +342,75 @@ class MainWindow(builder.GtkBuilder):
         logger.info("Start: Editing a pigeon")
 
     def menuremove_activate(self, widget):
-        logger.info("Start: Removing a pigeon")
+        model, paths = self.selection.get_selected_rows()
 
-        try:
+        if self.selection.count_selected_rows() == 1:
+            logger.info("Start: Removing one pigeon")
             pindex, ring, year = self.get_main_ring()
-        except TypeError:
-            return
+            statusbarmsg = _("Pigeon %s/%s has been removed" %(ring, year))
+            pigeonlabel = '%s / %s' %(ring, year)
+            show_result_option = self.database.has_results(pindex)
+            pigeons = [pindex]
+        else:
+            logger.info("Start: Removing multiple pigeons")
+            pigeons = [p for p, y, r in self.get_main_ring()]
+            bands = ['%s / %s' %(ring, year) for pindex, ring, year in
+                     self.get_main_ring()]
+            pigeonlabel = ", ".join(bands)
+            statusbarmsg = _("%s pigeons have been removed" %len(pigeons))
+            show_result_option = False
+            for p in pigeons:
+                if self.database.has_results(p):
+                    show_result_option = True
+                    break
 
-        model, tIter = self.selection.get_selected()
-        path, focus = self.treeview.get_cursor()
-
-        self.labelPigeon.set_text('%s / %s' %(ring, year))
+        self.labelPigeon.set_text(pigeonlabel)
         self.chkKeep.set_active(True)
-        if not self.database.has_results(pindex):
-            self.chkResults.set_active(False)
-            self.chkResults.hide()
+        self.chkResults.set_active(False)
+        self.set_multiple_visible([self.chkResults], show_result_option)
 
         answer = self.removedialog.run()
         if answer == 2:
             if self.chkKeep.get_active():
-                logger.info("Remove: Hiding the pigeon")
-                self.database.update_table(self.database.PIGEONS,
-                                           (0, pindex), 5, 1)
+                logger.info("Remove: Hiding the pigeon(s)")
+                for pindex in pigeons:
+                    self.database.update_table(self.database.PIGEONS,
+                                               (0, pindex), 5, 1)
             else:
-                logger.info("Remove: Removing the pigeon")
-                self.database.delete_from_table(self.database.PIGEONS, pindex)
-                # Only remove status when pigeon is completely removed
-                status = self.parser.pigeons[pindex].active
-                if status != const.ACTIVE:
-                    self.database.delete_from_table(self.pigeonStatus[status],
-                                                    pindex)
-                # Same for the picture
-                image = self.parser.pigeons[pindex].image
-                if image:
-                    os.remove(common.get_thumb_path(image))
-                # And medication
-                self.database.delete_from_table(self.database.MED, pindex, 2)
+                logger.info("Remove: Removing the pigeon(s)")
+                for pindex in pigeons:
+                    self.database.delete_from_table(self.database.PIGEONS, pindex)
+                    # Only remove status when pigeon is completely removed
+                    status = self.parser.pigeons[pindex].active
+                    if status != const.ACTIVE:
+                        self.database.delete_from_table(self.pigeonStatus[status],
+                                                        pindex)
+                    # Same for the picture
+                    image = self.parser.pigeons[pindex].image
+                    if image:
+                        os.remove(common.get_thumb_path(image))
+                    # And medication
+                    self.database.delete_from_table(self.database.MED, pindex, 2)
 
                 self.parser.get_pigeons()
 
             if not self.chkResults.get_active():
                 logger.info("Remove: Removing the results")
-                self.database.delete_from_table(self.database.RESULTS, pindex)
+                for pindex in pigeons:
+                    self.database.delete_from_table(self.database.RESULTS, pindex)
 
-            self.liststore.remove(tIter)
+            iters = [self.liststore.get_iter(path) for path in paths]
+            self.selection.handler_block(self.selection_changed_id)
+            for tree_iter in iters:
+                self.liststore.remove(tree_iter)
+            self.selection.handler_unblock(self.selection_changed_id)
 
             if len(self.liststore) > 0:
-                if not path:
-                    path = 0
-                self.treeview.set_cursor(path)
+                self.selection.select_path(paths[0])
 
             self.count_active_pigeons()
 
-            common.add_statusbar_message(self.statusbar,
-                        _("Pigeon %s/%s has been removed" %(ring, year)))
+            common.add_statusbar_message(self.statusbar, statusbarmsg)
 
         self.removedialog.hide()
 
@@ -1301,7 +1317,9 @@ class MainWindow(builder.GtkBuilder):
         """
 
         self.selection = self.treeview.get_selection()
-        self.selection.connect('changed', self.selection_changed)
+        self.selection.set_mode(gtk.SELECTION_MULTIPLE)
+        self.selection_changed_id = self.selection.connect('changed',
+                                                           self.selection_changed)
         self.set_treeview_columns()
 
     def set_treeview_columns(self):
@@ -1430,29 +1448,38 @@ class MainWindow(builder.GtkBuilder):
         self.entry_med_comment.set_text(data[8])
         self.check_vaccination.set_active(data[9])
 
+    def clear_pigeon_data(self, widgets):
+        self.set_multiple_sensitive(widgets, False)
+        self.imageStatus.clear()
+        self.imageStatus1.clear()
+        self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
+        self.labelImgPath.set_text('')
+        self.draw_empty_pedigree()
+        self.lsMedication.clear()
+        self.lsResult.clear()
+
     def selection_changed(self, selection):
         """
         Get all the data/info from the selected pigeon
         """
 
-        model, tree_iter = selection.get_selected()
+        n_rows_selected = selection.count_selected_rows()
+        model, tree_iters = selection.get_selected_rows()
 
         self.empty_entryboxes()
 
-        widgets = [self.ToolEdit, self.ToolRemove, self.ToolPedigree,
-                   self.MenuEdit, self.MenuRemove, self.MenuPedigree,
-                   self.MenuAddresult, self.addresult]
-        if tree_iter:
+        widgets = [self.ToolEdit, self.ToolPedigree, self.MenuEdit,
+                   self.MenuPedigree, self.MenuAddresult, self.addresult,
+                   self.ToolRemove, self.MenuRemove]
+        if n_rows_selected == 1:
+            tree_iter = self.liststore.get_iter(tree_iters[0])
             self.set_multiple_sensitive(widgets, True)
-        else:
-            self.set_multiple_sensitive(widgets, False)
-            self.imageStatus.clear()
-            self.imageStatus1.clear()
-            self.imagePigeon.set_from_pixbuf(self.logoPixbuf)
-            self.labelImgPath.set_text('')
-            self.draw_empty_pedigree()
-            self.lsMedication.clear()
-            self.lsResult.clear()
+        elif n_rows_selected == 0:
+            self.clear_pigeon_data(widgets)
+            return
+        elif n_rows_selected > 1:
+            # Disable everything except th remove buttons
+            self.clear_pigeon_data(widgets[:-2])
             return
 
         pindex = model.get_value(tree_iter, 0)
@@ -1723,6 +1750,7 @@ class MainWindow(builder.GtkBuilder):
         self.parser.get_pigeons()
         self.count_active_pigeons()
         if self.changedRowIter and self.operation == const.ADD:
+            self.selection.unselect_all()
             self.selection.select_iter(self.changedRowIter)
             path = self.liststore.get_path(self.changedRowIter)
             self.treeview.scroll_to_cell(path)
@@ -2048,10 +2076,15 @@ class MainWindow(builder.GtkBuilder):
         Return the pindex, ring and year of selected pigeon
         """
 
-        model, path = self.selection.get_selected()
-        if not path: return
-
-        return model[path][0], model[path][1], model[path][2]
+        model, paths = self.selection.get_selected_rows()
+        if len(paths) < 1:
+            return
+        elif len(paths) == 1:
+            path = paths[0]
+            return model[path][0], model[path][1], model[path][2]
+        elif len(paths) > 1:
+            return [(model[path][0], model[path][1], model[path][2])
+                    for path in paths]
 
     def search_pigeon(self, widget, pindex):
         """
