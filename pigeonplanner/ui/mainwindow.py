@@ -1221,8 +1221,9 @@ class MainWindow(builder.GtkBuilder):
             setattr(self, key, value)
 
         self.set_multiple_sensitive([self.MenuEdit, self.MenuRemove,
-                                     self.MenuPedigree, self.MenuAddresult],
-                                    False)
+                                     self.MenuPedigree, self.MenuAddresult,
+                                     self.ToolEdit, self.ToolRemove,
+                                     self.ToolPedigree], False)
 
         self.vbox.pack_start(self.menubar, False, False)
         self.vbox.reorder_child(self.menubar, 0)
