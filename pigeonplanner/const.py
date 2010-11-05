@@ -97,7 +97,7 @@ THUMBDIR = os.path.join(PREFDIR, 'thumbs')
 
 UPDATEURL = 'http://www.pigeonplanner.com/CURRENT'
 DOWNLOADURL = 'http://www.pigeonplanner.com/download'
-FORUMURL = 'http://www.pigeonplanner.com/forum'
+FORUMURL = 'http://forum.pigeonplanner.com'
 MAILURL = "http://www.pigeonplanner.com/cgi-bin/pigeonplanner_mailing.py"
 REPORTMAIL = "timovwb@gmail.com"
 
