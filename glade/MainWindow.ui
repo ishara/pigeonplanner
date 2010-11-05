@@ -3426,7 +3426,7 @@
                                                     <child>
                                                       <object class="GtkImage" id="imageStatus">
                                                         <property name="visible">True</property>
-                                                        <property name="stock">gtk-missing-image</property>
+                                                        <property name="pixbuf">../images/active.png</property>
                                                       </object>
                                                     </child>
                                                   </object>
