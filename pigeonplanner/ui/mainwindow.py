@@ -405,11 +405,15 @@ class MainWindow(builder.GtkBuilder):
                 for pindex in pigeons:
                     self.database.delete_from_table(self.database.RESULTS, pindex)
 
+            # Block the selection changed signal for each row that is being
+            # removed. This will cause problems because the deleted pigeon
+            # will be selected. Just emit the signal once afterwards.
             iters = [self.liststore.get_iter(path) for path in paths]
             self.selection.handler_block(self.selection_changed_id)
             for tree_iter in iters:
                 self.liststore.remove(tree_iter)
             self.selection.handler_unblock(self.selection_changed_id)
+            self.selection.emit('changed')
 
             if len(self.liststore) > 0:
                 self.selection.select_path(paths[0])
