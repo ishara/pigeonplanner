@@ -69,6 +69,12 @@ class MainWindow(builder.GtkBuilder):
                                                 os.path.join(const.IMAGEDIR,
                                                              'icon_logo.png'),
                                                 75, 75)
+        self.sexImgs = {'0': gtk.gdk.pixbuf_new_from_file(os.path.join(
+                                        const.IMAGEDIR, "symbol_male.png")),
+                        '1': gtk.gdk.pixbuf_new_from_file(os.path.join(
+                                        const.IMAGEDIR, "symbol_female.png")),
+                        '2': gtk.gdk.pixbuf_new_from_file(os.path.join(
+                                        const.IMAGEDIR, "symbol_young.png"))}
         self.sexDic = {'0': _('Cock'), '1': _('Hen'), '2': _('Young bird')}
         self.pigeonStatus = {0: 'Dead', 1: 'Active', 2: 'Sold', 3: 'Lost'}
         self.today = datetime.date.today().strftime(const.DATE_FORMAT)
@@ -1651,9 +1657,11 @@ class MainWindow(builder.GtkBuilder):
                dam == self.parser.pigeons[pigeon].dam and not\
                pigeon == pindex:
 
+                sex = self.parser.pigeons[pigeon].sex
                 self.lsBrothers.insert(0, [pigeon,
                                            self.parser.pigeons[pigeon].ring,
-                                           self.parser.pigeons[pigeon].year])
+                                           self.parser.pigeons[pigeon].year,
+                                           sex, self.sexImgs[sex]])
 
         self.lsBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.lsBrothers.set_sort_column_id(2, gtk.SORT_ASCENDING)
@@ -1672,7 +1680,7 @@ class MainWindow(builder.GtkBuilder):
         self.lsHalfBrothers.clear()
 
         for pigeon in self.parser.pigeons:
-
+            sex = self.parser.pigeons[pigeon].sex
             if sire:
                 if sire == self.parser.pigeons[pigeon].sire\
                 and not (sire == self.parser.pigeons[pigeon].sire and\
@@ -1681,7 +1689,8 @@ class MainWindow(builder.GtkBuilder):
                     self.lsHalfBrothers.insert(0, [pigeon,
                                             self.parser.pigeons[pigeon].ring,
                                             self.parser.pigeons[pigeon].year,
-                                            sire+'/'+yearsire[2:]])
+                                            sire+'/'+yearsire[2:],
+                                            sex, self.sexImgs[sex]])
 
             if dam:
                 if dam == self.parser.pigeons[pigeon].dam\
@@ -1691,7 +1700,8 @@ class MainWindow(builder.GtkBuilder):
                     self.lsHalfBrothers.insert(0, [pigeon,
                                             self.parser.pigeons[pigeon].ring,
                                             self.parser.pigeons[pigeon].year,
-                                            dam+'/'+yeardam[2:]])
+                                            dam+'/'+yeardam[2:],
+                                            sex, self.sexImgs[sex]])
 
         self.lsHalfBrothers.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.lsHalfBrothers.set_sort_column_id(2, gtk.SORT_ASCENDING)
@@ -1712,9 +1722,11 @@ class MainWindow(builder.GtkBuilder):
             if self.parser.pigeons[pigeon].sire == ring or \
                self.parser.pigeons[pigeon].dam == ring:
 
+                sex = self.parser.pigeons[pigeon].sex
                 self.lsOffspring.insert(0, [pigeon,
                                             self.parser.pigeons[pigeon].ring,
-                                            self.parser.pigeons[pigeon].year])
+                                            self.parser.pigeons[pigeon].year,
+                                            sex, self.sexImgs[sex]])
 
         self.lsOffspring.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.lsOffspring.set_sort_column_id(2, gtk.SORT_ASCENDING)

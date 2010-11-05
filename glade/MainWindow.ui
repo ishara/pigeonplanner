@@ -172,38 +172,6 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkListStore" id="lsBrothers">
-    <columns>
-      <!-- column-name pindex -->
-      <column type="gchararray"/>
-      <!-- column-name band -->
-      <column type="gchararray"/>
-      <!-- column-name year -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="lsOffspring">
-    <columns>
-      <!-- column-name pindex -->
-      <column type="gchararray"/>
-      <!-- column-name band -->
-      <column type="gchararray"/>
-      <!-- column-name year -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="lsHalfBrothers">
-    <columns>
-      <!-- column-name pindex -->
-      <column type="gchararray"/>
-      <!-- column-name band -->
-      <column type="gchararray"/>
-      <!-- column-name year -->
-      <column type="gchararray"/>
-      <!-- column-name common -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkListStore" id="lsMedication">
     <columns>
       <!-- column-name id -->
@@ -247,6 +215,50 @@
     <columns>
       <!-- column-name item -->
       <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="lsBrothers">
+    <columns>
+      <!-- column-name pindex -->
+      <column type="gchararray"/>
+      <!-- column-name band -->
+      <column type="gchararray"/>
+      <!-- column-name year -->
+      <column type="gchararray"/>
+      <!-- column-name sex -->
+      <column type="gchararray"/>
+      <!-- column-name seximage -->
+      <column type="GdkPixbuf"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="lsHalfBrothers">
+    <columns>
+      <!-- column-name pindex -->
+      <column type="gchararray"/>
+      <!-- column-name band -->
+      <column type="gchararray"/>
+      <!-- column-name year -->
+      <column type="gchararray"/>
+      <!-- column-name common -->
+      <column type="gchararray"/>
+      <!-- column-name sex -->
+      <column type="gchararray"/>
+      <!-- column-name seximage -->
+      <column type="GdkPixbuf"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="lsOffspring">
+    <columns>
+      <!-- column-name pindex -->
+      <column type="gchararray"/>
+      <!-- column-name band -->
+      <column type="gchararray"/>
+      <!-- column-name year -->
+      <column type="gchararray"/>
+      <!-- column-name sex -->
+      <column type="gchararray"/>
+      <!-- column-name seximage -->
+      <column type="GdkPixbuf"/>
     </columns>
   </object>
   <object class="GtkDialog" id="medicationdialog">
@@ -4502,6 +4514,19 @@
                                         </child>
                                       </object>
                                     </child>
+                                    <child>
+                                      <object class="GtkTreeViewColumn" id="treeviewcolumn34">
+                                        <property name="title">Sex</property>
+                                        <property name="sort_indicator">True</property>
+                                        <property name="sort_column_id">3</property>
+                                        <child>
+                                          <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
+                                          <attributes>
+                                            <attribute name="pixbuf">4</attribute>
+                                          </attributes>
+                                        </child>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -4571,6 +4596,7 @@
                                     </child>
                                     <child>
                                       <object class="GtkTreeViewColumn" id="treeviewcolumn15">
+                                        <property name="resizable">True</property>
                                         <property name="title">Common parent</property>
                                         <property name="sort_indicator">True</property>
                                         <property name="sort_column_id">3</property>
@@ -4578,6 +4604,19 @@
                                           <object class="GtkCellRendererText" id="cellrenderertext29"/>
                                           <attributes>
                                             <attribute name="text">3</attribute>
+                                          </attributes>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkTreeViewColumn" id="treeviewcolumn35">
+                                        <property name="title">Sex</property>
+                                        <property name="sort_indicator">True</property>
+                                        <property name="sort_column_id">4</property>
+                                        <child>
+                                          <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf2"/>
+                                          <attributes>
+                                            <attribute name="pixbuf">5</attribute>
                                           </attributes>
                                         </child>
                                       </object>
@@ -4645,6 +4684,19 @@
                                           <object class="GtkCellRendererText" id="cellrenderertext31"/>
                                           <attributes>
                                             <attribute name="text">2</attribute>
+                                          </attributes>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkTreeViewColumn" id="treeviewcolumn36">
+                                        <property name="title">Sex</property>
+                                        <property name="sort_indicator">True</property>
+                                        <property name="sort_column_id">3</property>
+                                        <child>
+                                          <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf3"/>
+                                          <attributes>
+                                            <attribute name="pixbuf">4</attribute>
                                           </attributes>
                                         </child>
                                       </object>
