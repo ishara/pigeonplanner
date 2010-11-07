@@ -1,29 +1,30 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Occitan (post 1500) translation for pigeonplanner
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the pigeonplanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-07 15:54+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2010-11-07 15:46+0100\n"
+"PO-Revision-Date: 2010-03-22 17:52+0000\n"
+"Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
+"Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-07-11 03:43+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../pigeonplanner/messages.py:19
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: ../pigeonplanner/messages.py:20
 msgid "Warning"
-msgstr ""
+msgstr "Avertiment"
 
 #: ../pigeonplanner/messages.py:23
 msgid "Pigeon Planner is already running."
@@ -34,7 +35,9 @@ msgid "Go to the website?"
 msgstr ""
 
 #: ../pigeonplanner/messages.py:28
-msgid "Pigeon Planner is free software. You don’t need to pay for using it. But if you like it, please consider donating to help improving it."
+msgid ""
+"Pigeon Planner is free software. You don’t need to pay for using it. But if "
+"you like it, please consider donating to help improving it."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:31
@@ -48,10 +51,11 @@ msgstr ""
 
 #: ../pigeonplanner/messages.py:35
 msgid "Invalid image!"
-msgstr ""
+msgstr "Imatge invalid !"
 
 #: ../pigeonplanner/messages.py:36
-msgid "This image is either not supported or corrupt, please choose another one."
+msgid ""
+"This image is either not supported or corrupt, please choose another one."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:38
@@ -63,7 +67,8 @@ msgid "Maybe you have renamed the image or moved it on your disk."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:42
-msgid "This pigeon already exists, but isn't showing. Do you want to show it again?"
+msgid ""
+"This pigeon already exists, but isn't showing. Do you want to show it again?"
 msgstr ""
 
 #: ../pigeonplanner/messages.py:45
@@ -107,7 +112,9 @@ msgid "At least the date and racepoint have to be entered."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:69
-msgid "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."
+msgid ""
+"The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
+"DD)."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:72
@@ -121,7 +128,7 @@ msgstr ""
 #: ../pigeonplanner/messages.py:75 ../pigeonplanner/messages.py:129
 #: ../pigeonplanner/ui/dialogs.py:461 tmp/MainWindow.glade.h:10
 msgid "Are you sure?"
-msgstr ""
+msgstr "Sètz segur(a) ?"
 
 #: ../pigeonplanner/messages.py:79
 msgid "The name has to be entered."
@@ -134,7 +141,7 @@ msgstr ""
 #: ../pigeonplanner/messages.py:84
 #, python-format
 msgid "Removing '%s'"
-msgstr ""
+msgstr "suprimir '%s'"
 
 #: ../pigeonplanner/messages.py:85
 msgid "Are you sure you want to remove this person from your addresses?"
@@ -158,12 +165,14 @@ msgid "Are you sure you want to remove the database? All data will be lost."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:96
-msgid "Click \"OK\" to close the program. A new database will be created the next time you start the program again."
+msgid ""
+"Click \"OK\" to close the program. A new database will be created the next "
+"time you start the program again."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:98 ../pigeonplanner/messages.py:134
 msgid "Restart required"
-msgstr ""
+msgstr "Vos cal tornar amodar l'ordenador"
 
 #: ../pigeonplanner/messages.py:100
 msgid "Optimization has been completed."
@@ -172,7 +181,7 @@ msgstr ""
 #: ../pigeonplanner/messages.py:102 ../pigeonplanner/messages.py:106
 #: ../pigeonplanner/messages.py:112
 msgid "Completed!"
-msgstr ""
+msgstr "Acabat !"
 
 #: ../pigeonplanner/messages.py:104
 msgid "The backup was successfully created."
@@ -224,7 +233,7 @@ msgstr ""
 
 #: ../pigeonplanner/messages.py:130
 msgid "Default settings"
-msgstr ""
+msgstr "Paramètres per defaut"
 
 #: ../pigeonplanner/messages.py:132
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
@@ -247,7 +256,9 @@ msgid "Error trying to get information. Are you connected to the internet?"
 msgstr ""
 
 #: ../pigeonplanner/messages.py:145
-msgid "A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version"
+msgid ""
+"A new version is available. Please go to the Pigeon Planner website by "
+"clicking the link below and download the latest version"
 msgstr ""
 
 #: ../pigeonplanner/messages.py:146
@@ -294,7 +305,7 @@ msgstr ""
 #: ../pigeonplanner/ui/resultwindow.py:106
 #: ../pigeonplanner/ui/photoalbum.py:122
 msgid "Close this window"
-msgstr ""
+msgstr "Tampar aquesta fenèstra"
 
 #: ../pigeonplanner/ui/printpreview.py:83
 msgid "Shows the first page"
@@ -327,6 +338,8 @@ msgstr ""
 #: ../pigeonplanner/ui/dialogs.py:92
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  Cédric VALMARY (Tot en òc) https://launchpad.net/~cvalmary"
 
 #: ../pigeonplanner/ui/dialogs.py:115 tmp/ToolsWindow.glade.h:12
 msgid "Choose a directory where to save the backup"
@@ -334,12 +347,12 @@ msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:117 tmp/ToolsWindow.glade.h:40
 msgid "Select a directory"
-msgstr ""
+msgstr "Seleccionatz un repertòri"
 
 #: ../pigeonplanner/ui/dialogs.py:125 ../pigeonplanner/ui/toolswindow.py:116
 #: ../pigeonplanner.py:230
 msgid "Backup"
-msgstr ""
+msgstr "Salvament"
 
 #: ../pigeonplanner/ui/dialogs.py:134 tmp/ToolsWindow.glade.h:11
 msgid "Choose a Pigeon Planner backup file to restore"
@@ -355,7 +368,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:149 ../pigeonplanner.py:231
 msgid "Restore"
-msgstr ""
+msgstr "Restablir"
 
 #: ../pigeonplanner/ui/dialogs.py:180
 msgid "Insert a pigeon"
@@ -364,7 +377,7 @@ msgstr ""
 #: ../pigeonplanner/ui/dialogs.py:201 ../pigeonplanner/printing.py:446
 #: tmp/MainWindow.glade.h:11 tmp/ResultWindow.glade.h:1
 msgid "Band no."
-msgstr ""
+msgstr "N° de baga"
 
 #: ../pigeonplanner/ui/dialogs.py:410
 msgid "Only show:"
@@ -381,7 +394,7 @@ msgstr ""
 #: ../pigeonplanner/ui/resultwindow.py:77 tmp/MainWindow.glade.h:47
 #: tmp/OptionsDialog.glade.h:37
 msgid "Results"
-msgstr ""
+msgstr "Resultats"
 
 #: ../pigeonplanner/ui/resultwindow.py:96
 msgid "Save these results"
@@ -402,7 +415,7 @@ msgstr ""
 #: ../pigeonplanner/ui/resultwindow.py:103
 #: ../pigeonplanner/ui/mainwindow.py:1309
 msgid "_Filter..."
-msgstr ""
+msgstr "_Filtrar…"
 
 #: ../pigeonplanner/ui/resultwindow.py:104
 #: ../pigeonplanner/ui/mainwindow.py:1310
@@ -428,42 +441,42 @@ msgstr ""
 #: ../pigeonplanner/ui/resultwindow.py:205 ../pigeonplanner/printing.py:448
 #: tmp/MainWindow.glade.h:44 tmp/ResultWindow.glade.h:8
 msgid "Racepoint"
-msgstr ""
+msgstr "Raça"
 
 #: ../pigeonplanner/ui/resultwindow.py:209 ../pigeonplanner/printing.py:452
 #: tmp/MainWindow.glade.h:51 tmp/OptionsDialog.glade.h:38
 #: tmp/ResultWindow.glade.h:9
 msgid "Sector"
-msgstr ""
+msgstr "Sector"
 
 #: ../pigeonplanner/ui/resultwindow.py:213 tmp/MainWindow.glade.h:18
 #: tmp/OptionsDialog.glade.h:18 tmp/ResultWindow.glade.h:3
 msgid "Coefficient"
-msgstr ""
+msgstr "Coeficient"
 
 #: ../pigeonplanner/ui/resultwindow.py:216
 msgid "Place"
-msgstr ""
+msgstr "Luòc"
 
 #: ../pigeonplanner/ui/optionsdialog.py:49
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../pigeonplanner/ui/optionsdialog.py:50
 msgid "Appearance"
-msgstr ""
+msgstr "Aparéncia"
 
 #: ../pigeonplanner/ui/optionsdialog.py:51
 msgid "Printing"
-msgstr ""
+msgstr "Estampatge"
 
 #: ../pigeonplanner/ui/optionsdialog.py:166
 msgid "days"
-msgstr ""
+msgstr "jorns"
 
 #: ../pigeonplanner/ui/optionsdialog.py:168
 msgid "day"
-msgstr ""
+msgstr "jorn"
 
 #: ../pigeonplanner/ui/toolswindow.py:79
 msgid "Yards"
@@ -527,7 +540,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/toolswindow.py:114
 msgid "Velocity calculator"
-msgstr ""
+msgstr "Calcul de velocitat"
 
 #: ../pigeonplanner/ui/toolswindow.py:114 tmp/ToolsWindow.glade.h:10
 msgid "Calendar"
@@ -535,24 +548,24 @@ msgstr ""
 
 #: ../pigeonplanner/ui/toolswindow.py:115
 msgid "Datasets"
-msgstr ""
+msgstr "Donadas"
 
 #: ../pigeonplanner/ui/toolswindow.py:115
 msgid "Addresses"
-msgstr ""
+msgstr "Adreças"
 
 #: ../pigeonplanner/ui/toolswindow.py:115
 #: ../pigeonplanner/ui/mainwindow.py:1324
 msgid "Statistics"
-msgstr ""
+msgstr "Estatisticas"
 
 #: ../pigeonplanner/ui/toolswindow.py:116
 msgid "Database"
-msgstr ""
+msgstr "Banca de donadas"
 
 #: ../pigeonplanner/ui/toolswindow.py:116
 msgid "Update"
-msgstr ""
+msgstr "Metre a jorn"
 
 #: ../pigeonplanner/ui/toolswindow.py:147
 #: ../pigeonplanner/ui/toolswindow.py:394
@@ -560,35 +573,35 @@ msgstr ""
 #: ../pigeonplanner/ui/toolswindow.py:465
 #: ../pigeonplanner/ui/mainwindow.py:458
 msgid "Colours"
-msgstr ""
+msgstr "Colors"
 
 #: ../pigeonplanner/ui/toolswindow.py:147
 #: ../pigeonplanner/ui/toolswindow.py:402
 #: ../pigeonplanner/ui/toolswindow.py:447
 #: ../pigeonplanner/ui/toolswindow.py:473
 msgid "Racepoints"
-msgstr ""
+msgstr "Resultats de corsa"
 
 #: ../pigeonplanner/ui/toolswindow.py:147
 #: ../pigeonplanner/ui/toolswindow.py:396
 #: ../pigeonplanner/ui/toolswindow.py:441
 #: ../pigeonplanner/ui/toolswindow.py:467
 msgid "Sectors"
-msgstr ""
+msgstr "Sectors"
 
 #: ../pigeonplanner/ui/toolswindow.py:147
 #: ../pigeonplanner/ui/toolswindow.py:398
 #: ../pigeonplanner/ui/toolswindow.py:443
 #: ../pigeonplanner/ui/toolswindow.py:469
 msgid "Types"
-msgstr ""
+msgstr "Tipes"
 
 #: ../pigeonplanner/ui/toolswindow.py:148
 #: ../pigeonplanner/ui/toolswindow.py:400
 #: ../pigeonplanner/ui/toolswindow.py:445
 #: ../pigeonplanner/ui/toolswindow.py:471
 msgid "Categories"
-msgstr ""
+msgstr "Categorias"
 
 #: ../pigeonplanner/ui/toolswindow.py:148
 #: ../pigeonplanner/ui/toolswindow.py:404
@@ -596,7 +609,7 @@ msgstr ""
 #: ../pigeonplanner/ui/toolswindow.py:475
 #: ../pigeonplanner/ui/mainwindow.py:462
 msgid "Strains"
-msgstr ""
+msgstr "tensions"
 
 #: ../pigeonplanner/ui/toolswindow.py:148
 #: ../pigeonplanner/ui/toolswindow.py:406
@@ -613,7 +626,7 @@ msgstr ""
 #: tmp/MainWindow.glade.h:62 tmp/OptionsDialog.glade.h:48
 #: tmp/ResultWindow.glade.h:12
 msgid "Weather"
-msgstr ""
+msgstr "Metèo"
 
 #: ../pigeonplanner/ui/toolswindow.py:149
 #: ../pigeonplanner/ui/toolswindow.py:410
@@ -622,7 +635,7 @@ msgstr ""
 #: tmp/MainWindow.glade.h:63 tmp/OptionsDialog.glade.h:49
 #: tmp/ResultWindow.glade.h:13
 msgid "Wind"
-msgstr ""
+msgstr "Vent"
 
 #: ../pigeonplanner/ui/toolswindow.py:280
 #, python-format
@@ -694,12 +707,14 @@ msgid "Cock"
 msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:78
+#, fuzzy
 msgid "Hen"
-msgstr ""
+msgstr "Femèla"
 
 #: ../pigeonplanner/ui/mainwindow.py:78
+#, fuzzy
 msgid "Young bird"
-msgstr ""
+msgstr "Jove"
 
 #: ../pigeonplanner/ui/mainwindow.py:162
 msgid "Enter the bandnumber of the pigeon"
@@ -731,7 +746,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:268
 msgid "Create backup"
-msgstr ""
+msgstr "Crear un salvament"
 
 #: ../pigeonplanner/ui/mainwindow.py:275
 msgid "Restore backup"
@@ -754,7 +769,7 @@ msgstr ""
 #: ../pigeonplanner/ui/mainwindow.py:455 tmp/MainWindow.glade.h:52
 #: tmp/OptionsDialog.glade.h:39
 msgid "Sex"
-msgstr ""
+msgstr "Sèxe"
 
 #: ../pigeonplanner/ui/mainwindow.py:470
 msgid "Status"
@@ -778,7 +793,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:1264
 msgid "_File"
-msgstr ""
+msgstr "_Fichièr"
 
 #: ../pigeonplanner/ui/mainwindow.py:1266
 #: ../pigeonplanner/ui/mainwindow.py:1275
@@ -791,20 +806,20 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:1268
 msgid "_Edit"
-msgstr ""
+msgstr "_Edicion"
 
 #: ../pigeonplanner/ui/mainwindow.py:1269
 msgid "_View"
-msgstr ""
+msgstr "_Afichatge"
 
 #: ../pigeonplanner/ui/mainwindow.py:1270
 msgid "_Help"
-msgstr ""
+msgstr "_Ajuda"
 
 #: ../pigeonplanner/ui/mainwindow.py:1271
 #: ../pigeonplanner/ui/mainwindow.py:1299
 msgid "_Pedigree"
-msgstr ""
+msgstr "_Pedigree"
 
 #: ../pigeonplanner/ui/mainwindow.py:1273
 msgid "Blank pedigree"
@@ -820,7 +835,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:1278
 msgid "_Restore"
-msgstr ""
+msgstr "_Restablir"
 
 #: ../pigeonplanner/ui/mainwindow.py:1279
 msgid "Restore a backup of your database"
@@ -828,7 +843,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:1282
 msgid "Quit the program"
-msgstr ""
+msgstr "Quitar lo programa"
 
 #: ../pigeonplanner/ui/mainwindow.py:1284
 msgid "Add a new pigeon"
@@ -860,7 +875,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:1292
 msgid "_Find..."
-msgstr ""
+msgstr "_Recercar..."
 
 #: ../pigeonplanner/ui/mainwindow.py:1293
 msgid "Search through the list of pigeons"
@@ -888,7 +903,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:1305
 msgid "_Tools"
-msgstr ""
+msgstr "_Espleches"
 
 #: ../pigeonplanner/ui/mainwindow.py:1306
 msgid "Various tools"
@@ -896,11 +911,11 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:1308
 msgid "Configure the application"
-msgstr ""
+msgstr "Configuracion de l'aplicacion"
 
 #: ../pigeonplanner/ui/mainwindow.py:1311
 msgid "_Website"
-msgstr ""
+msgstr "Site _Web"
 
 #: ../pigeonplanner/ui/mainwindow.py:1312
 msgid "Go to the website for more information"
@@ -916,7 +931,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:1318
 msgid "About this application"
-msgstr ""
+msgstr "A prepaus d'aquesta aplicacion"
 
 #: ../pigeonplanner/ui/mainwindow.py:1321
 msgid "Navigation arrows"
@@ -932,15 +947,15 @@ msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:1327
 msgid "Toolbar"
-msgstr ""
+msgstr "Barra d'espleches"
 
 #: ../pigeonplanner/ui/mainwindow.py:1328 tmp/OptionsDialog.glade.h:43
 msgid "Show or hide the toolbar"
-msgstr ""
+msgstr "Aficha o amaga la barra d'espleches"
 
 #: ../pigeonplanner/ui/mainwindow.py:1330
 msgid "Statusbar"
-msgstr ""
+msgstr "Barra d'estat"
 
 #: ../pigeonplanner/ui/mainwindow.py:1331 tmp/OptionsDialog.glade.h:42
 msgid "Show or hide the statusbar"
@@ -957,7 +972,7 @@ msgstr ""
 
 #: ../pigeonplanner/ui/widgets/filefilters.py:35
 msgid "Images"
-msgstr ""
+msgstr "Imatges"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:91 tmp/MainWindow.glade.h:24
 msgid "Dead"
@@ -977,17 +992,17 @@ msgstr ""
 
 #: ../pigeonplanner/printing.py:81
 msgid "Save as..."
-msgstr ""
+msgstr "Enregistrar jos..."
 
 #: ../pigeonplanner/printing.py:171 tmp/PedigreeWindow.glade.h:3
 msgid "Pedigree of:"
-msgstr ""
+msgstr "Pedigree de :"
 
 #: ../pigeonplanner/printing.py:447 ../pigeonplanner/printing.py:671
 #: tmp/MainWindow.glade.h:23 tmp/ResultWindow.glade.h:5
 #: tmp/ToolsWindow.glade.h:18
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: ../pigeonplanner/printing.py:449 tmp/MainWindow.glade.h:43
 #: tmp/ResultWindow.glade.h:7
@@ -997,27 +1012,27 @@ msgstr ""
 #: ../pigeonplanner/printing.py:450 tmp/MainWindow.glade.h:40
 #: tmp/ResultWindow.glade.h:6
 msgid "Out of"
-msgstr ""
+msgstr "de"
 
 #: ../pigeonplanner/printing.py:451
 msgid "Coef."
-msgstr ""
+msgstr "Coef"
 
 #: ../pigeonplanner/printing.py:453 tmp/MainWindow.glade.h:60
 #: tmp/OptionsDialog.glade.h:47 tmp/ResultWindow.glade.h:10
 msgid "Type"
-msgstr ""
+msgstr "Tipe"
 
 #: ../pigeonplanner/printing.py:454 tmp/MainWindow.glade.h:14
 #: tmp/OptionsDialog.glade.h:14 tmp/ResultWindow.glade.h:2
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
 #: ../pigeonplanner/printing.py:457 tmp/MainWindow.glade.h:20
 #: tmp/OptionsDialog.glade.h:20 tmp/ResultWindow.glade.h:4
 #: tmp/ToolsWindow.glade.h:13
 msgid "Comment"
-msgstr ""
+msgstr "Comentari"
 
 #: ../pigeonplanner/printing.py:548
 msgid "Page"
@@ -1026,29 +1041,29 @@ msgstr ""
 #: ../pigeonplanner/printing.py:662 ../pigeonplanner/printing.py:684
 #: ../pigeonplanner/printing.py:685 tmp/ToolsWindow.glade.h:47
 msgid "Velocity"
-msgstr ""
+msgstr "Velocitat"
 
 #: ../pigeonplanner/printing.py:673 tmp/ToolsWindow.glade.h:38
 msgid "Released"
-msgstr ""
+msgstr "Publicat"
 
 #: ../pigeonplanner/printing.py:675 tmp/ToolsWindow.glade.h:20
 msgid "Distance"
-msgstr ""
+msgstr "Distància"
 
 #: ../pigeonplanner/printing.py:690 ../pigeonplanner/printing.py:692
 #: tmp/ToolsWindow.glade.h:22
 msgid "Flight Time"
-msgstr ""
+msgstr "Temps de vòl"
 
 #: ../pigeonplanner/printing.py:697 ../pigeonplanner/printing.py:699
 #: tmp/ToolsWindow.glade.h:45
 msgid "Time of Arrival"
-msgstr ""
+msgstr "Ora d'arribada"
 
 #: ../pigeonplanner.py:223 tmp/Dialogs.glade.h:7 tmp/OptionsDialog.glade.h:22
 msgid "E-mail"
-msgstr ""
+msgstr "Adreça electronica"
 
 #: ../pigeonplanner.py:224
 msgid "Send"
@@ -1060,11 +1075,11 @@ msgstr ""
 
 #: ../pigeonplanner.py:226
 msgid "View all"
-msgstr ""
+msgstr "Veire tot"
 
 #: ../pigeonplanner.py:227
 msgid "Calculate"
-msgstr ""
+msgstr "Calcular"
 
 #: ../pigeonplanner.py:228
 msgid "Search database"
@@ -1072,11 +1087,11 @@ msgstr ""
 
 #: ../pigeonplanner.py:229
 msgid "Optimize"
-msgstr ""
+msgstr "Optimizar"
 
 #: ../pigeonplanner.py:232
 msgid "Check now!"
-msgstr ""
+msgstr "Verificacion !"
 
 #: tmp/Dialogs.glade.h:1
 msgid "<b>Attached file:</b>"
@@ -1108,7 +1123,7 @@ msgstr ""
 
 #: tmp/MainWindow.glade.h:1
 msgid "<b>Brothers and sisters</b>"
-msgstr ""
+msgstr "<b>Fraires e sòrres</b>"
 
 #: tmp/MainWindow.glade.h:2
 msgid "<b>Details of pigeon</b>"
@@ -1148,7 +1163,7 @@ msgstr ""
 
 #: tmp/MainWindow.glade.h:16
 msgid "Choose an image..."
-msgstr ""
+msgstr "Causir un imatge..."
 
 #: tmp/MainWindow.glade.h:17
 msgid "Cocks"
@@ -1156,11 +1171,11 @@ msgstr ""
 
 #: tmp/MainWindow.glade.h:19 tmp/OptionsDialog.glade.h:19
 msgid "Colour"
-msgstr ""
+msgstr "Color"
 
 #: tmp/MainWindow.glade.h:21
 msgid "Common parent"
-msgstr ""
+msgstr "Parents"
 
 #: tmp/MainWindow.glade.h:22 tmp/PedigreeWindow.glade.h:1
 msgid "Dam"
@@ -1213,11 +1228,11 @@ msgstr ""
 #: tmp/MainWindow.glade.h:37 tmp/OptionsDialog.glade.h:30
 #: tmp/ToolsWindow.glade.h:30
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: tmp/MainWindow.glade.h:38
 msgid "Names"
-msgstr ""
+msgstr "Noms"
 
 #: tmp/MainWindow.glade.h:39
 msgid "No extra information available."
@@ -1241,11 +1256,11 @@ msgstr ""
 
 #: tmp/MainWindow.glade.h:49
 msgid "Search for:"
-msgstr ""
+msgstr "Recercar :"
 
 #: tmp/MainWindow.glade.h:50
 msgid "Search in:"
-msgstr ""
+msgstr "Recercar dins :"
 
 #: tmp/MainWindow.glade.h:53 tmp/PedigreeWindow.glade.h:4
 msgid "Sire"
@@ -1253,7 +1268,7 @@ msgstr ""
 
 #: tmp/MainWindow.glade.h:55 tmp/OptionsDialog.glade.h:46
 msgid "Strain"
-msgstr ""
+msgstr "Passar"
 
 #: tmp/MainWindow.glade.h:56
 msgid "The current status is:"
@@ -1265,11 +1280,11 @@ msgstr ""
 
 #: tmp/MainWindow.glade.h:58
 msgid "To"
-msgstr ""
+msgstr "A"
 
 #: tmp/MainWindow.glade.h:59
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: tmp/MainWindow.glade.h:61
 msgid "Vaccination"
@@ -1277,7 +1292,7 @@ msgstr ""
 
 #: tmp/MainWindow.glade.h:64 tmp/ResultWindow.glade.h:14
 msgid "Year"
-msgstr ""
+msgstr "Annada"
 
 #: tmp/MainWindow.glade.h:65
 msgid "Young birds"
@@ -1289,7 +1304,7 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:2
 msgid "<b>Columns</b>"
-msgstr ""
+msgstr "<b>Colomnas</b>"
 
 #: tmp/OptionsDialog.glade.h:3
 msgid "<b>General</b>"
@@ -1297,7 +1312,7 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:4
 msgid "<b>Language</b>"
-msgstr ""
+msgstr "<b>Lenga</b>"
 
 #: tmp/OptionsDialog.glade.h:5
 msgid "<b>Layout</b>"
@@ -1305,7 +1320,7 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:6
 msgid "<b>Other</b>"
-msgstr ""
+msgstr "<b>Autre</b>"
 
 #: tmp/OptionsDialog.glade.h:7
 msgid "<b>Paper</b>"
@@ -1313,7 +1328,7 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:8
 msgid "<b>Personal</b>"
-msgstr ""
+msgstr "<b>Personal</b>"
 
 #: tmp/OptionsDialog.glade.h:9
 msgid "<b>Pigeon</b>"
@@ -1321,11 +1336,11 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:10
 msgid "<b>Theme</b>"
-msgstr ""
+msgstr "<b>Tèma</b>"
 
 #: tmp/OptionsDialog.glade.h:11
 msgid "<b>Update</b>"
-msgstr ""
+msgstr "<b>Mesa a jorn</b>"
 
 #: tmp/OptionsDialog.glade.h:12
 msgid "A4"
@@ -1333,7 +1348,7 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:13
 msgid "Address"
-msgstr ""
+msgstr "Adreça"
 
 #: tmp/OptionsDialog.glade.h:15
 msgid "Change the language to"
@@ -1349,15 +1364,15 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:21
 msgid "Default"
-msgstr ""
+msgstr "Per defaut"
 
 #: tmp/OptionsDialog.glade.h:24
 msgid "Image"
-msgstr ""
+msgstr "Imatge"
 
 #: tmp/OptionsDialog.glade.h:25
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 #: tmp/OptionsDialog.glade.h:26
 msgid "Letter"
@@ -1365,7 +1380,7 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:27
 msgid "Location"
-msgstr ""
+msgstr "Emplaçament"
 
 #: tmp/OptionsDialog.glade.h:29
 msgid "Make an automatic backup"
@@ -1373,15 +1388,15 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:31
 msgid "Options"
-msgstr ""
+msgstr "Opcions"
 
 #: tmp/OptionsDialog.glade.h:32
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: tmp/OptionsDialog.glade.h:33
 msgid "Paper format:"
-msgstr ""
+msgstr "Format del papièr :"
 
 #: tmp/OptionsDialog.glade.h:35
 msgid "Pedigree layout:"
@@ -1389,7 +1404,7 @@ msgstr ""
 
 #: tmp/OptionsDialog.glade.h:36
 msgid "Phone"
-msgstr ""
+msgstr "Telefòn"
 
 #: tmp/OptionsDialog.glade.h:44
 msgid "Show the column names"
@@ -1401,7 +1416,7 @@ msgstr ""
 
 #: tmp/PhotoAlbum.glade.h:1
 msgid "Photo Album"
-msgstr ""
+msgstr "Album de fòtos"
 
 #: tmp/PhotoAlbum.glade.h:2
 msgid "There are no images found."
@@ -1417,7 +1432,7 @@ msgstr ""
 
 #: tmp/ToolsWindow.glade.h:1
 msgid "<b>Add items</b>"
-msgstr ""
+msgstr "<b>Apondre</b>"
 
 #: tmp/ToolsWindow.glade.h:2
 msgid "<b>Create backup</b>"
@@ -1433,7 +1448,7 @@ msgstr ""
 
 #: tmp/ToolsWindow.glade.h:5
 msgid "<b>Remove items</b>"
-msgstr ""
+msgstr "<b>suprimir</b>"
 
 #: tmp/ToolsWindow.glade.h:6
 msgid "<b>Restore backup</b>"
@@ -1441,7 +1456,7 @@ msgstr ""
 
 #: tmp/ToolsWindow.glade.h:7
 msgid "<b>Warning!</b>"
-msgstr ""
+msgstr "<b>Atencion !</b>"
 
 #: tmp/ToolsWindow.glade.h:8
 msgid "<i>Click the button below</i>"
@@ -1453,7 +1468,7 @@ msgstr ""
 
 #: tmp/ToolsWindow.glade.h:14
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #: tmp/ToolsWindow.glade.h:15
 msgid ""
@@ -1467,7 +1482,7 @@ msgstr ""
 
 #: tmp/ToolsWindow.glade.h:21
 msgid "Downloadpage"
-msgstr ""
+msgstr "Cargament"
 
 #: tmp/ToolsWindow.glade.h:23
 msgid "Here you can check if there is a program update available."
@@ -1487,7 +1502,7 @@ msgstr ""
 
 #: tmp/ToolsWindow.glade.h:27
 msgid "Item"
-msgstr ""
+msgstr "Element"
 
 #: tmp/ToolsWindow.glade.h:28
 msgid "Minutes"
@@ -1529,11 +1544,11 @@ msgstr ""
 
 #: tmp/ToolsWindow.glade.h:42
 msgid "Street"
-msgstr ""
+msgstr "Carrièra"
 
 #: tmp/ToolsWindow.glade.h:43
 msgid "This is me"
-msgstr ""
+msgstr "Soi ieu"
 
 #: tmp/ToolsWindow.glade.h:44
 msgid "Time"
@@ -1541,8 +1556,11 @@ msgstr ""
 
 #: tmp/ToolsWindow.glade.h:46
 msgid "Tools"
-msgstr ""
+msgstr "Espleches"
 
 #: tmp/ToolsWindow.glade.h:49
 msgid "Zipcode / City"
 msgstr ""
+
+#~ msgid "cock"
+#~ msgstr "Mascle"

@@ -1,21 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Serbian translation for pigeonplanner
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the pigeonplanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-07 15:54+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2010-11-07 15:46+0100\n"
+"PO-Revision-Date: 2010-02-09 21:38+0000\n"
+"Last-Translator: jaha <almir.jahic@bih.net.ba>\n"
+"Language-Team: Serbian <sr@li.org>\n"
+"Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-07-11 03:43+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../pigeonplanner/messages.py:19
 msgid "Error"
@@ -27,14 +28,16 @@ msgstr ""
 
 #: ../pigeonplanner/messages.py:23
 msgid "Pigeon Planner is already running."
-msgstr ""
+msgstr "Pigeon Planner je već pokrenut."
 
 #: ../pigeonplanner/messages.py:27
 msgid "Go to the website?"
 msgstr ""
 
 #: ../pigeonplanner/messages.py:28
-msgid "Pigeon Planner is free software. You don’t need to pay for using it. But if you like it, please consider donating to help improving it."
+msgid ""
+"Pigeon Planner is free software. You don’t need to pay for using it. But if "
+"you like it, please consider donating to help improving it."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:31
@@ -51,7 +54,8 @@ msgid "Invalid image!"
 msgstr ""
 
 #: ../pigeonplanner/messages.py:36
-msgid "This image is either not supported or corrupt, please choose another one."
+msgid ""
+"This image is either not supported or corrupt, please choose another one."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:38
@@ -63,7 +67,8 @@ msgid "Maybe you have renamed the image or moved it on your disk."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:42
-msgid "This pigeon already exists, but isn't showing. Do you want to show it again?"
+msgid ""
+"This pigeon already exists, but isn't showing. Do you want to show it again?"
 msgstr ""
 
 #: ../pigeonplanner/messages.py:45
@@ -107,7 +112,9 @@ msgid "At least the date and racepoint have to be entered."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:69
-msgid "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."
+msgid ""
+"The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
+"DD)."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:72
@@ -158,7 +165,9 @@ msgid "Are you sure you want to remove the database? All data will be lost."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:96
-msgid "Click \"OK\" to close the program. A new database will be created the next time you start the program again."
+msgid ""
+"Click \"OK\" to close the program. A new database will be created the next "
+"time you start the program again."
 msgstr ""
 
 #: ../pigeonplanner/messages.py:98 ../pigeonplanner/messages.py:134
@@ -172,19 +181,19 @@ msgstr ""
 #: ../pigeonplanner/messages.py:102 ../pigeonplanner/messages.py:106
 #: ../pigeonplanner/messages.py:112
 msgid "Completed!"
-msgstr ""
+msgstr "Završeno!"
 
 #: ../pigeonplanner/messages.py:104
 msgid "The backup was successfully created."
-msgstr ""
+msgstr "Rezervna kopija je uspješno kreirana."
 
 #: ../pigeonplanner/messages.py:107
 msgid "There was an error making the backup."
-msgstr ""
+msgstr "Došlo je do pogreške kod izrade sigurnosne kopije."
 
 #: ../pigeonplanner/messages.py:109 ../pigeonplanner/messages.py:115
 msgid "Failed!"
-msgstr ""
+msgstr "Nije uspjelo!"
 
 #: ../pigeonplanner/messages.py:110
 msgid ""
@@ -247,7 +256,9 @@ msgid "Error trying to get information. Are you connected to the internet?"
 msgstr ""
 
 #: ../pigeonplanner/messages.py:145
-msgid "A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version"
+msgid ""
+"A new version is available. Please go to the Pigeon Planner website by "
+"clicking the link below and download the latest version"
 msgstr ""
 
 #: ../pigeonplanner/messages.py:146
@@ -327,6 +338,8 @@ msgstr ""
 #: ../pigeonplanner/ui/dialogs.py:92
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  jaha https://launchpad.net/~almir-jahic"
 
 #: ../pigeonplanner/ui/dialogs.py:115 tmp/ToolsWindow.glade.h:12
 msgid "Choose a directory where to save the backup"

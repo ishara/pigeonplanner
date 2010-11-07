@@ -1,82 +1,92 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Romanian translation for pigeonplanner
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the pigeonplanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-07 15:54+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2010-11-07 15:46+0100\n"
+"PO-Revision-Date: 2010-10-16 09:35+0000\n"
+"Last-Translator: Iacob Catalin <Unknown>\n"
+"Language-Team: Romanian <ro@li.org>\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-10-17 04:55+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../pigeonplanner/messages.py:19
 msgid "Error"
-msgstr ""
+msgstr "Eroare"
 
 #: ../pigeonplanner/messages.py:20
 msgid "Warning"
-msgstr ""
+msgstr "Avertizare"
 
 #: ../pigeonplanner/messages.py:23
 msgid "Pigeon Planner is already running."
-msgstr ""
+msgstr "Pigeon Planner ruleaza deja."
 
 #: ../pigeonplanner/messages.py:27
 msgid "Go to the website?"
-msgstr ""
+msgstr "Mergi catre pagina de internet?"
 
 #: ../pigeonplanner/messages.py:28
-msgid "Pigeon Planner is free software. You don’t need to pay for using it. But if you like it, please consider donating to help improving it."
+msgid ""
+"Pigeon Planner is free software. You don’t need to pay for using it. But if "
+"you like it, please consider donating to help improving it."
 msgstr ""
+"Pigeon Planner este un program gratuit. Nu trebuie sa platesti pentru a-l "
+"folosi. Daca doresti, poti contribui printr-o donatie la imbunatatire "
+"programului."
 
 #: ../pigeonplanner/messages.py:31
 #, python-format
 msgid "Notification for '%s'"
-msgstr ""
+msgstr "Notificare pentru '%s'"
 
 #: ../pigeonplanner/messages.py:32
 msgid "Go to the calendar?"
-msgstr ""
+msgstr "Mergi la calendar?"
 
 #: ../pigeonplanner/messages.py:35
 msgid "Invalid image!"
-msgstr ""
+msgstr "Imagine nealocata!"
 
 #: ../pigeonplanner/messages.py:36
-msgid "This image is either not supported or corrupt, please choose another one."
-msgstr ""
+msgid ""
+"This image is either not supported or corrupt, please choose another one."
+msgstr "Aceasta imagine nu este intr-un format agreat, alege alta."
 
 #: ../pigeonplanner/messages.py:38
 msgid "Loading image failed!"
-msgstr ""
+msgstr "Incarcarea imaginii nu a reusit!"
 
 #: ../pigeonplanner/messages.py:39
 msgid "Maybe you have renamed the image or moved it on your disk."
-msgstr ""
+msgstr "Poate ai redenumit imaginea sau ai sters-o de pe disc."
 
 #: ../pigeonplanner/messages.py:42
-msgid "This pigeon already exists, but isn't showing. Do you want to show it again?"
+msgid ""
+"This pigeon already exists, but isn't showing. Do you want to show it again?"
 msgstr ""
+"Acest porumbel exista deja in aplicatie, dar nu se afiseaza. Vrei sa il "
+"afisezi din nou?"
 
 #: ../pigeonplanner/messages.py:45
 msgid "This pigeon already exists. Overwrite it?"
-msgstr ""
+msgstr "Acest porumbel exista deja in aplicatie. Vrei sa il inlocuiesti?"
 
 #: ../pigeonplanner/messages.py:48
 msgid "This pigeon doesn't exist. Do you want to add it?"
-msgstr ""
+msgstr "Acest porumbel nu exista in aplicatie. Vrei sa il adaugi?"
 
 #: ../pigeonplanner/messages.py:50
 msgid "Adding pigeon"
-msgstr ""
+msgstr "Adaugare porumbel"
 
 #: ../pigeonplanner/messages.py:52 ../pigeonplanner/messages.py:55
 #: ../pigeonplanner/messages.py:58 ../pigeonplanner/messages.py:61
@@ -84,475 +94,496 @@ msgstr ""
 #: ../pigeonplanner/messages.py:71 ../pigeonplanner/messages.py:78
 #: ../pigeonplanner/messages.py:81
 msgid "Invalid input!"
-msgstr ""
+msgstr "Introducere invalida!"
 
 #: ../pigeonplanner/messages.py:53
 msgid "The ringnumber and year are necessary."
-msgstr ""
+msgstr "Seria de inel si anul sunt necesare."
 
 #: ../pigeonplanner/messages.py:56
 msgid "Only numbers are accepted as year input."
-msgstr ""
+msgstr "Doar cifrele sunt acceptate la introducerea anului!"
 
 #: ../pigeonplanner/messages.py:59
 msgid "Check the length of the year."
-msgstr ""
+msgstr "Verifica lungimea anului."
 
 #: ../pigeonplanner/messages.py:62
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr ""
+msgstr "Doar cifrele sunt acceptate cand adaugi mai multi porumbei."
 
 #: ../pigeonplanner/messages.py:66
 msgid "At least the date and racepoint have to be entered."
-msgstr ""
+msgstr "Macar data si localitatea de lansare trebuiesc a fi introduse."
 
 #: ../pigeonplanner/messages.py:69
-msgid "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."
+msgid ""
+"The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
+"DD)."
 msgstr ""
+"Data pe care ai introdus-o este intr-un format gresit. Trebuie sa fie in "
+"format ISO (AAAA-LL-ZZ)"
 
 #: ../pigeonplanner/messages.py:72
 msgid "The result you want to add already exists."
-msgstr ""
+msgstr "Rezultatul pe care vrei sa il adaugi exista deja."
 
 #: ../pigeonplanner/messages.py:74
 msgid "Removing the selected result"
-msgstr ""
+msgstr "Sterge rezultatul selectat."
 
 #: ../pigeonplanner/messages.py:75 ../pigeonplanner/messages.py:129
 #: ../pigeonplanner/ui/dialogs.py:461 tmp/MainWindow.glade.h:10
 msgid "Are you sure?"
-msgstr ""
+msgstr "Eşti sigur?"
 
 #: ../pigeonplanner/messages.py:79
 msgid "The name has to be entered."
-msgstr ""
+msgstr "Numele trebuie introdus"
 
 #: ../pigeonplanner/messages.py:82
 msgid "The persoon you want to add already exists."
-msgstr ""
+msgstr "Persoana pe care vrei sa o adaugi deja exista."
 
 #: ../pigeonplanner/messages.py:84
 #, python-format
 msgid "Removing '%s'"
-msgstr ""
+msgstr "Inlaturare '%s'"
 
 #: ../pigeonplanner/messages.py:85
 msgid "Are you sure you want to remove this person from your addresses?"
-msgstr ""
+msgstr "Esti sigur ca vrei sa inlaturi aceasta persoana din adresele tale?"
 
 #: ../pigeonplanner/messages.py:88
 #, python-format
 msgid "Removing '%(item)s' from '%(dataset)s'."
-msgstr ""
+msgstr "Inlaturare'%(item)s' din'%(dataset)s'."
 
 #: ../pigeonplanner/messages.py:89
 msgid "Are you sure you want to remove this item?"
-msgstr ""
+msgstr "Esti sigur ca vrei sa inlaturi acest element?"
 
 #: ../pigeonplanner/messages.py:92 ../pigeonplanner/messages.py:94
 msgid "Removing database"
-msgstr ""
+msgstr "Inlaturare baza de date"
 
 #: ../pigeonplanner/messages.py:93
 msgid "Are you sure you want to remove the database? All data will be lost."
 msgstr ""
+"Esti sigur ca vrei sa stergi baza de date? Toate datele vor fi pierdute."
 
 #: ../pigeonplanner/messages.py:96
-msgid "Click \"OK\" to close the program. A new database will be created the next time you start the program again."
+msgid ""
+"Click \"OK\" to close the program. A new database will be created the next "
+"time you start the program again."
 msgstr ""
+"Apasa \"OK\" pentru a inchide programul. O noua baza de date va fi creata la "
+"repornirea programului."
 
 #: ../pigeonplanner/messages.py:98 ../pigeonplanner/messages.py:134
 msgid "Restart required"
-msgstr ""
+msgstr "Este necesară repornirea"
 
 #: ../pigeonplanner/messages.py:100
 msgid "Optimization has been completed."
-msgstr ""
+msgstr "Optimizarea s-a incheiat."
 
 #: ../pigeonplanner/messages.py:102 ../pigeonplanner/messages.py:106
 #: ../pigeonplanner/messages.py:112
 msgid "Completed!"
-msgstr ""
+msgstr "Incheiat!"
 
 #: ../pigeonplanner/messages.py:104
 msgid "The backup was successfully created."
-msgstr ""
+msgstr "Copia de rezerva a fost creata cu succes."
 
 #: ../pigeonplanner/messages.py:107
 msgid "There was an error making the backup."
-msgstr ""
+msgstr "A aparut o eroare la crearea copiei de rezerva."
 
 #: ../pigeonplanner/messages.py:109 ../pigeonplanner/messages.py:115
 msgid "Failed!"
-msgstr ""
+msgstr "Nereusit!"
 
 #: ../pigeonplanner/messages.py:110
 msgid ""
 "The backup was successfully restored.\n"
 "Restart the program."
 msgstr ""
+"Copia de rezerva a fost restaurata cu succes.\n"
+"Reporneste programul."
 
 #: ../pigeonplanner/messages.py:113
 msgid "There was an error restoring the backup."
-msgstr ""
+msgstr "A aparut o eroare la restaurarea copiei de rezerva."
 
 #: ../pigeonplanner/messages.py:117
 msgid "No personal information found."
-msgstr ""
+msgstr "Nu s-au gasit informatii personale."
 
 #: ../pigeonplanner/messages.py:118
 msgid ""
 "This will be shown on top of the printed pedigree.\n"
 "Do you want to add it now?"
 msgstr ""
+"Acesta va aparea in partea de sus a pedigree-lui la imprimare.\n"
+"Vrei sa il adaugi acum?"
 
 #: ../pigeonplanner/messages.py:121
 msgid "Error printing the pedigree"
-msgstr ""
+msgstr "Eroare la imprimarea pedigree-ului."
 
 #: ../pigeonplanner/messages.py:124
 msgid "An error occured in the print operation!"
-msgstr ""
+msgstr "A intervenit o eroare in operatia de imprimare."
 
 #: ../pigeonplanner/messages.py:125
 msgid "See the logfile (File->Logfile viewer) for more info."
-msgstr ""
+msgstr "Vizualizeaza fisierul de logare (Fisier->Vizualizare fisier de logare)"
 
 #: ../pigeonplanner/messages.py:128
 msgid "This will set back all the settings to the default values."
-msgstr ""
+msgstr "Aceasta va readuce toate setarile la valorile de baza."
 
 #: ../pigeonplanner/messages.py:130
 msgid "Default settings"
-msgstr ""
+msgstr "Setari de baza"
 
 #: ../pigeonplanner/messages.py:132
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
-msgstr ""
+msgstr "Pentru ca schimbarile sa aiba efect programul trebuie repornit."
 
 #: ../pigeonplanner/messages.py:136
 msgid "Update available!"
-msgstr ""
+msgstr "Imbunatatire disponibila!"
 
 #: ../pigeonplanner/messages.py:137
 msgid "There is an update available, do you want to download it now?"
-msgstr ""
+msgstr "Aici gasesti o imbunatatire disponibila, vrei sa o descarci acum?"
 
 #: ../pigeonplanner/messages.py:140
 msgid "The recipient and sender's e-mailaddress are required."
-msgstr ""
+msgstr "Destinatarul si mailul expeditorului sunt  necesare."
 
 #: ../pigeonplanner/messages.py:144
 msgid "Error trying to get information. Are you connected to the internet?"
 msgstr ""
+"A intervenit o eroare in gasirea informatiei. Esti conectat la internet?"
 
 #: ../pigeonplanner/messages.py:145
-msgid "A new version is available. Please go to the Pigeon Planner website by clicking the link below and download the latest version"
+msgid ""
+"A new version is available. Please go to the Pigeon Planner website by "
+"clicking the link below and download the latest version"
 msgstr ""
+"O noua versiune este disponibila. Viziteaza pagina de internet a Pigeon "
+"Planner urmand legatura de mai jos si descarca ultima versiune."
 
 #: ../pigeonplanner/messages.py:146
 msgid "You already have the latest version installed."
-msgstr ""
+msgstr "Ai deja ultima versiune instalata."
 
 #: ../pigeonplanner/messages.py:147
 msgid "This isn't normal, or you must be running a development version"
-msgstr ""
+msgstr "Acest lucru nu este normal, sau folositi o versiune de dezvoltare"
 
 #: ../pigeonplanner/ui/logdialog.py:40
 msgid "Logfile Viewer"
-msgstr ""
+msgstr "Vizualizare fisier de logare"
 
 #: ../pigeonplanner/ui/maildialog.py:144
 msgid "The e-mail has been sent succesfully!"
-msgstr ""
+msgstr "E-mailul a fost trimis cu succes!"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:66 ../pigeonplanner.py:222
 #: tmp/MainWindow.glade.h:41 tmp/OptionsDialog.glade.h:34
 #: tmp/PedigreeWindow.glade.h:2
 msgid "Pedigree"
-msgstr ""
+msgstr "Arborele genealogic"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:86
 msgid "Save this pedigree"
-msgstr ""
+msgstr "Salveaza acest certificat de origine"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:88
 msgid "Email this pedigree"
-msgstr ""
+msgstr "Trimite pe mail acest certificat de origine"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:90
 msgid "View this pedigree"
-msgstr ""
+msgstr "Afiseaza acest certificat de origine"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:92
 #: ../pigeonplanner/ui/mainwindow.py:1272
 msgid "Print this pedigree"
-msgstr ""
+msgstr "Imprima acest certificat de origine"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:94
 #: ../pigeonplanner/ui/printpreview.py:95
 #: ../pigeonplanner/ui/resultwindow.py:106
 #: ../pigeonplanner/ui/photoalbum.py:122
 msgid "Close this window"
-msgstr ""
+msgstr "Închide această fereastră"
 
 #: ../pigeonplanner/ui/printpreview.py:83
 msgid "Shows the first page"
-msgstr ""
+msgstr "Arată prima pagină"
 
 #: ../pigeonplanner/ui/printpreview.py:85
 msgid "Shows previous page"
-msgstr ""
+msgstr "Arată pagina precedentă"
 
 #: ../pigeonplanner/ui/printpreview.py:87
 msgid "Shows the next page"
-msgstr ""
+msgstr "Arată pagina următoare"
 
 #: ../pigeonplanner/ui/printpreview.py:89
 msgid "Shows the last page"
-msgstr ""
+msgstr "Arată ultima pagină"
 
 #: ../pigeonplanner/ui/printpreview.py:91
 msgid "Zooms the page in"
-msgstr ""
+msgstr "Măreşte pagina"
 
 #: ../pigeonplanner/ui/printpreview.py:93
 msgid "Zooms the page out"
-msgstr ""
+msgstr "Micşorează pagina"
 
 #: ../pigeonplanner/ui/printpreview.py:99
 msgid "Zooms to fit the whole page"
-msgstr ""
+msgstr "Potriveşte la mărimea paginii"
 
 #: ../pigeonplanner/ui/dialogs.py:92
 msgid "translator-credits"
 msgstr ""
+"Launchpad Contributions:\n"
+"  Iacob Catalin https://launchpad.net/~catalin-iacob25"
 
 #: ../pigeonplanner/ui/dialogs.py:115 tmp/ToolsWindow.glade.h:12
 msgid "Choose a directory where to save the backup"
-msgstr ""
+msgstr "Alege un director unde sa salvezi copia de rezerva"
 
 #: ../pigeonplanner/ui/dialogs.py:117 tmp/ToolsWindow.glade.h:40
 msgid "Select a directory"
-msgstr ""
+msgstr "Selectați un director"
 
 #: ../pigeonplanner/ui/dialogs.py:125 ../pigeonplanner/ui/toolswindow.py:116
 #: ../pigeonplanner.py:230
 msgid "Backup"
-msgstr ""
+msgstr "Copie de rezerva"
 
 #: ../pigeonplanner/ui/dialogs.py:134 tmp/ToolsWindow.glade.h:11
 msgid "Choose a Pigeon Planner backup file to restore"
-msgstr ""
+msgstr "Alege o copie de rezerva a Pigeon Planner pentru a o restaura"
 
 #: ../pigeonplanner/ui/dialogs.py:137 tmp/ToolsWindow.glade.h:48
 msgid "Warning! This will overwrite the existing database!"
-msgstr ""
+msgstr "Atentie! Aceasta va inlocui baza de date existenta!"
 
 #: ../pigeonplanner/ui/dialogs.py:140 tmp/ToolsWindow.glade.h:41
 msgid "Select a valid backup file"
-msgstr ""
+msgstr "Selecteaza o copie de rezerva valida"
 
 #: ../pigeonplanner/ui/dialogs.py:149 ../pigeonplanner.py:231
 msgid "Restore"
-msgstr ""
+msgstr "Restaurează"
 
 #: ../pigeonplanner/ui/dialogs.py:180
 msgid "Insert a pigeon"
-msgstr ""
+msgstr "Introduce un porumbel"
 
 #: ../pigeonplanner/ui/dialogs.py:201 ../pigeonplanner/printing.py:446
 #: tmp/MainWindow.glade.h:11 tmp/ResultWindow.glade.h:1
 msgid "Band no."
-msgstr ""
+msgstr "Inelul nr."
 
 #: ../pigeonplanner/ui/dialogs.py:410
 msgid "Only show:"
-msgstr ""
+msgstr "Afișează doar:"
 
 #: ../pigeonplanner/ui/dialogs.py:455
 msgid "Removing the selected medication entry"
-msgstr ""
+msgstr "Sterge medicatia introdusa"
 
 #: ../pigeonplanner/ui/dialogs.py:457
+#, fuzzy
 msgid "Remove this entry for all pigeons?"
-msgstr ""
+msgstr "Inlatura porumbelul selectat"
 
 #: ../pigeonplanner/ui/resultwindow.py:77 tmp/MainWindow.glade.h:47
 #: tmp/OptionsDialog.glade.h:37
 msgid "Results"
-msgstr ""
+msgstr "Rezultate"
 
 #: ../pigeonplanner/ui/resultwindow.py:96
 msgid "Save these results"
-msgstr ""
+msgstr "Salveaza aceste rezultate"
 
 #: ../pigeonplanner/ui/resultwindow.py:98
 msgid "Email these results"
-msgstr ""
+msgstr "Trimite pe e-mail aceste rezultate"
 
 #: ../pigeonplanner/ui/resultwindow.py:100
 msgid "View these results"
-msgstr ""
+msgstr "Vizualizeaza aceste rezultate"
 
 #: ../pigeonplanner/ui/resultwindow.py:102
 msgid "Print these results"
-msgstr ""
+msgstr "Imprima aceste rezultate"
 
 #: ../pigeonplanner/ui/resultwindow.py:103
 #: ../pigeonplanner/ui/mainwindow.py:1309
 msgid "_Filter..."
-msgstr ""
+msgstr "_Filtrează..."
 
 #: ../pigeonplanner/ui/resultwindow.py:104
 #: ../pigeonplanner/ui/mainwindow.py:1310
 msgid "Set filter options"
-msgstr ""
+msgstr "Regleaza optiunile de filtrare"
 
 #: ../pigeonplanner/ui/resultwindow.py:188
 msgid "Filter results"
-msgstr ""
+msgstr "Rezultatele filtrarii"
 
 #: ../pigeonplanner/ui/resultwindow.py:193
 msgid "Pigeons"
-msgstr ""
+msgstr "Porumbei"
 
 #: ../pigeonplanner/ui/resultwindow.py:197
 msgid "Year of pigeon"
-msgstr ""
+msgstr "Anul porumbelului"
 
 #: ../pigeonplanner/ui/resultwindow.py:201
 msgid "Year of race"
-msgstr ""
+msgstr "Anul cursei"
 
 #: ../pigeonplanner/ui/resultwindow.py:205 ../pigeonplanner/printing.py:448
 #: tmp/MainWindow.glade.h:44 tmp/ResultWindow.glade.h:8
 msgid "Racepoint"
-msgstr ""
+msgstr "Punct de lansare"
 
 #: ../pigeonplanner/ui/resultwindow.py:209 ../pigeonplanner/printing.py:452
 #: tmp/MainWindow.glade.h:51 tmp/OptionsDialog.glade.h:38
 #: tmp/ResultWindow.glade.h:9
 msgid "Sector"
-msgstr ""
+msgstr "Zona"
 
 #: ../pigeonplanner/ui/resultwindow.py:213 tmp/MainWindow.glade.h:18
 #: tmp/OptionsDialog.glade.h:18 tmp/ResultWindow.glade.h:3
 msgid "Coefficient"
-msgstr ""
+msgstr "Punctaj"
 
 #: ../pigeonplanner/ui/resultwindow.py:216
 msgid "Place"
-msgstr ""
+msgstr "Loc"
 
 #: ../pigeonplanner/ui/optionsdialog.py:49
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../pigeonplanner/ui/optionsdialog.py:50
 msgid "Appearance"
-msgstr ""
+msgstr "Înfățișare"
 
 #: ../pigeonplanner/ui/optionsdialog.py:51
 msgid "Printing"
-msgstr ""
+msgstr "Imprimare"
 
 #: ../pigeonplanner/ui/optionsdialog.py:166
 msgid "days"
-msgstr ""
+msgstr "zile"
 
 #: ../pigeonplanner/ui/optionsdialog.py:168
 msgid "day"
-msgstr ""
+msgstr "zi"
 
 #: ../pigeonplanner/ui/toolswindow.py:79
 msgid "Yards"
-msgstr ""
+msgstr "Yarzi"
 
 #: ../pigeonplanner/ui/toolswindow.py:80
 msgid "Kilometres"
-msgstr ""
+msgstr "Kilometri"
 
 #: ../pigeonplanner/ui/toolswindow.py:81
 msgid "Metres"
-msgstr ""
+msgstr "Metri"
 
 #: ../pigeonplanner/ui/toolswindow.py:82
 msgid "Centimetres"
-msgstr ""
+msgstr "Centimetri"
 
 #: ../pigeonplanner/ui/toolswindow.py:83
 msgid "Inches"
-msgstr ""
+msgstr "Inci"
 
 #: ../pigeonplanner/ui/toolswindow.py:84
 msgid "Feet"
-msgstr ""
+msgstr "Picior"
 
 #: ../pigeonplanner/ui/toolswindow.py:85
 msgid "Miles"
-msgstr ""
+msgstr "Mile"
 
 #: ../pigeonplanner/ui/toolswindow.py:86
 msgid "Nautical Miles"
-msgstr ""
+msgstr "Mile marine"
 
 #: ../pigeonplanner/ui/toolswindow.py:89
 msgid "Yard per Minute"
-msgstr ""
+msgstr "Yard pe minut"
 
 #: ../pigeonplanner/ui/toolswindow.py:90
 msgid "Metres per Minute"
-msgstr ""
+msgstr "Metri pe minut"
 
 #: ../pigeonplanner/ui/toolswindow.py:91
 msgid "Metres per Second"
-msgstr ""
+msgstr "Metri pe secunda"
 
 #: ../pigeonplanner/ui/toolswindow.py:92
 msgid "Kilometre per Hour"
-msgstr ""
+msgstr "Kilometri la Ora"
 
 #: ../pigeonplanner/ui/toolswindow.py:93
 msgid "Feet per Second"
-msgstr ""
+msgstr "Picioare pe secunda"
 
 #: ../pigeonplanner/ui/toolswindow.py:94
 msgid "Feet per Minute"
-msgstr ""
+msgstr "Picioare pe Minut"
 
 #: ../pigeonplanner/ui/toolswindow.py:95
 msgid "Mile per Hour"
-msgstr ""
+msgstr "Mile la Ora"
 
 #: ../pigeonplanner/ui/toolswindow.py:114
 msgid "Velocity calculator"
-msgstr ""
+msgstr "Claculator de viteza"
 
 #: ../pigeonplanner/ui/toolswindow.py:114 tmp/ToolsWindow.glade.h:10
 msgid "Calendar"
-msgstr ""
+msgstr "Calendar"
 
 #: ../pigeonplanner/ui/toolswindow.py:115
 msgid "Datasets"
-msgstr ""
+msgstr "Seturi de date"
 
 #: ../pigeonplanner/ui/toolswindow.py:115
 msgid "Addresses"
-msgstr ""
+msgstr "Adrese"
 
 #: ../pigeonplanner/ui/toolswindow.py:115
 #: ../pigeonplanner/ui/mainwindow.py:1324
 msgid "Statistics"
-msgstr ""
+msgstr "Statistici"
 
 #: ../pigeonplanner/ui/toolswindow.py:116
 msgid "Database"
-msgstr ""
+msgstr "Baza de date"
 
 #: ../pigeonplanner/ui/toolswindow.py:116
 msgid "Update"
-msgstr ""
+msgstr "Actualizează"
 
 #: ../pigeonplanner/ui/toolswindow.py:147
 #: ../pigeonplanner/ui/toolswindow.py:394
@@ -560,35 +591,35 @@ msgstr ""
 #: ../pigeonplanner/ui/toolswindow.py:465
 #: ../pigeonplanner/ui/mainwindow.py:458
 msgid "Colours"
-msgstr ""
+msgstr "Culori"
 
 #: ../pigeonplanner/ui/toolswindow.py:147
 #: ../pigeonplanner/ui/toolswindow.py:402
 #: ../pigeonplanner/ui/toolswindow.py:447
 #: ../pigeonplanner/ui/toolswindow.py:473
 msgid "Racepoints"
-msgstr ""
+msgstr "Puncte de lansare"
 
 #: ../pigeonplanner/ui/toolswindow.py:147
 #: ../pigeonplanner/ui/toolswindow.py:396
 #: ../pigeonplanner/ui/toolswindow.py:441
 #: ../pigeonplanner/ui/toolswindow.py:467
 msgid "Sectors"
-msgstr ""
+msgstr "Zone"
 
 #: ../pigeonplanner/ui/toolswindow.py:147
 #: ../pigeonplanner/ui/toolswindow.py:398
 #: ../pigeonplanner/ui/toolswindow.py:443
 #: ../pigeonplanner/ui/toolswindow.py:469
 msgid "Types"
-msgstr ""
+msgstr "Tipuri"
 
 #: ../pigeonplanner/ui/toolswindow.py:148
 #: ../pigeonplanner/ui/toolswindow.py:400
 #: ../pigeonplanner/ui/toolswindow.py:445
 #: ../pigeonplanner/ui/toolswindow.py:471
 msgid "Categories"
-msgstr ""
+msgstr "Categorii"
 
 #: ../pigeonplanner/ui/toolswindow.py:148
 #: ../pigeonplanner/ui/toolswindow.py:404
@@ -596,7 +627,7 @@ msgstr ""
 #: ../pigeonplanner/ui/toolswindow.py:475
 #: ../pigeonplanner/ui/mainwindow.py:462
 msgid "Strains"
-msgstr ""
+msgstr "Linii"
 
 #: ../pigeonplanner/ui/toolswindow.py:148
 #: ../pigeonplanner/ui/toolswindow.py:406
@@ -604,7 +635,7 @@ msgstr ""
 #: ../pigeonplanner/ui/toolswindow.py:477
 #: ../pigeonplanner/ui/mainwindow.py:466
 msgid "Lofts"
-msgstr ""
+msgstr "Compartimente"
 
 #: ../pigeonplanner/ui/toolswindow.py:148
 #: ../pigeonplanner/ui/toolswindow.py:408
@@ -613,7 +644,7 @@ msgstr ""
 #: tmp/MainWindow.glade.h:62 tmp/OptionsDialog.glade.h:48
 #: tmp/ResultWindow.glade.h:12
 msgid "Weather"
-msgstr ""
+msgstr "Vreme"
 
 #: ../pigeonplanner/ui/toolswindow.py:149
 #: ../pigeonplanner/ui/toolswindow.py:410
@@ -622,927 +653,943 @@ msgstr ""
 #: tmp/MainWindow.glade.h:63 tmp/OptionsDialog.glade.h:49
 #: tmp/ResultWindow.glade.h:13
 msgid "Wind"
-msgstr ""
+msgstr "Vânt"
 
 #: ../pigeonplanner/ui/toolswindow.py:280
 #, python-format
 msgid "Notification is set on %s days in advance"
-msgstr ""
+msgstr "Notificarea este reglata cu %s i avans"
 
 #: ../pigeonplanner/ui/toolswindow.py:283
 msgid "No notification set"
-msgstr ""
+msgstr "Nicio notificare reglata"
 
 #: ../pigeonplanner/ui/toolswindow.py:684
 msgid "Number of pigeons"
-msgstr ""
+msgstr "Numar de porumbei"
 
 #: ../pigeonplanner/ui/toolswindow.py:685
 msgid "Number of cocks"
-msgstr ""
+msgstr "Numar de masculi"
 
 #: ../pigeonplanner/ui/toolswindow.py:686
 msgid "Number of hens"
-msgstr ""
+msgstr "Numar de femele"
 
 #: ../pigeonplanner/ui/toolswindow.py:687
 msgid "Number of young birds"
-msgstr ""
+msgstr "Numar de pasari tinere"
 
 #: ../pigeonplanner/ui/toolswindow.py:688
 msgid "Number of results"
-msgstr ""
+msgstr "Numar de clasari"
 
 #: ../pigeonplanner/ui/photoalbum.py:110
 msgid "Shows the first picture"
-msgstr ""
+msgstr "Arata prima imagine"
 
 #: ../pigeonplanner/ui/photoalbum.py:112
 msgid "Shows previous picture"
-msgstr ""
+msgstr "Arata precedenta imagine"
 
 #: ../pigeonplanner/ui/photoalbum.py:114
 msgid "Shows the next picture"
-msgstr ""
+msgstr "Arata urmatoarea imagine"
 
 #: ../pigeonplanner/ui/photoalbum.py:116
 msgid "Shows the last picture"
-msgstr ""
+msgstr "Arata ultima imgine"
 
 #: ../pigeonplanner/ui/photoalbum.py:118
 msgid "Zooms the picture in"
-msgstr ""
+msgstr "Micsoreaza imaginea"
 
 #: ../pigeonplanner/ui/photoalbum.py:120
 msgid "Zooms the picture out"
-msgstr ""
+msgstr "Mareste imaginea"
 
 #: ../pigeonplanner/ui/photoalbum.py:126
 msgid "Zooms to fit the whole picture"
-msgstr ""
+msgstr "Mareste pentru a potrivi intreaga imagine"
 
 #: ../pigeonplanner/ui/photoalbum.py:129
 msgid "View slideshow"
-msgstr ""
+msgstr "Vizualizeaza in slideshow"
 
 #: ../pigeonplanner/ui/photoalbum.py:131
 msgid "View in fullscreen"
-msgstr ""
+msgstr "Vizualizeaza pe tot ecranul"
 
 #: ../pigeonplanner/ui/mainwindow.py:78
+#, fuzzy
 msgid "Cock"
-msgstr ""
+msgstr "Masculi"
 
 #: ../pigeonplanner/ui/mainwindow.py:78
+#, fuzzy
 msgid "Hen"
-msgstr ""
+msgstr "Femele"
 
 #: ../pigeonplanner/ui/mainwindow.py:78
+#, fuzzy
 msgid "Young bird"
-msgstr ""
+msgstr "Pui"
 
 #: ../pigeonplanner/ui/mainwindow.py:162
 msgid "Enter the bandnumber of the pigeon"
-msgstr ""
+msgstr "Introduce numarul matricol al porumbelui"
 
 #: ../pigeonplanner/ui/mainwindow.py:164
 msgid "Enter the year of the pigeon"
-msgstr ""
+msgstr "Introduce anul de nastere al porumbelului"
 
 #: ../pigeonplanner/ui/mainwindow.py:166
 msgid "Click here to set the status of the pigeon"
-msgstr ""
+msgstr "Apasa aici pentru a regla starea porumbelului"
 
 #: ../pigeonplanner/ui/mainwindow.py:168
 msgid "Enter a name for the pigeon"
-msgstr ""
+msgstr "Introduce numele porumbelului"
 
 #: ../pigeonplanner/ui/mainwindow.py:170
 msgid "Click here to add an image"
-msgstr ""
+msgstr "Apasa aici pentru a adauga o imagine"
 
 #: ../pigeonplanner/ui/mainwindow.py:172
 msgid "Search through the list of cocks"
-msgstr ""
+msgstr "Cauta in lista de masculi"
 
 #: ../pigeonplanner/ui/mainwindow.py:174
 msgid "Search through the list of hens"
-msgstr ""
+msgstr "Cauta in lista de femele"
 
 #: ../pigeonplanner/ui/mainwindow.py:268
 msgid "Create backup"
-msgstr ""
+msgstr "Creează o copie de rezerva"
 
 #: ../pigeonplanner/ui/mainwindow.py:275
 msgid "Restore backup"
-msgstr ""
+msgstr "Restaureaza copia de rezerva"
 
 #: ../pigeonplanner/ui/mainwindow.py:368
 #, python-format
 msgid "Pigeon %s/%s has been removed"
-msgstr ""
+msgstr "Porumbelul %s/%s a fost indepartat"
 
 #: ../pigeonplanner/ui/mainwindow.py:378
-#, python-format
+#, fuzzy, python-format
 msgid "%s pigeons have been removed"
-msgstr ""
+msgstr "Porumbelul %s/%s a fost indepartat"
 
 #: ../pigeonplanner/ui/mainwindow.py:451
 msgid "Filter pigeons"
-msgstr ""
+msgstr "Filtreaza porumbeii"
 
 #: ../pigeonplanner/ui/mainwindow.py:455 tmp/MainWindow.glade.h:52
 #: tmp/OptionsDialog.glade.h:39
 msgid "Sex"
-msgstr ""
+msgstr "Sex"
 
 #: ../pigeonplanner/ui/mainwindow.py:470
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: ../pigeonplanner/ui/mainwindow.py:779
 msgid "Add result for:"
-msgstr ""
+msgstr "Adauga rezultate pentru:"
 
 #: ../pigeonplanner/ui/mainwindow.py:803
 msgid "Result has been removed"
-msgstr ""
+msgstr "Rezultatul a fost indepartat"
 
 #: ../pigeonplanner/ui/mainwindow.py:824
 msgid "Edit result for:"
-msgstr ""
+msgstr "Modifica rezultat pentru:"
 
 #: ../pigeonplanner/ui/mainwindow.py:857
 msgid "Result has been added"
-msgstr ""
+msgstr "Rezultatul a fost adaugat"
 
 #: ../pigeonplanner/ui/mainwindow.py:1264
 msgid "_File"
-msgstr ""
+msgstr "_Fisier"
 
 #: ../pigeonplanner/ui/mainwindow.py:1266
 #: ../pigeonplanner/ui/mainwindow.py:1275
 msgid "_Backup"
-msgstr ""
+msgstr "_Copie de rezervă"
 
 #: ../pigeonplanner/ui/mainwindow.py:1267
 msgid "_Pigeon"
-msgstr ""
+msgstr "_Porumbel"
 
 #: ../pigeonplanner/ui/mainwindow.py:1268
 msgid "_Edit"
-msgstr ""
+msgstr "_Modifică"
 
 #: ../pigeonplanner/ui/mainwindow.py:1269
 msgid "_View"
-msgstr ""
+msgstr "_Vizualizare"
 
 #: ../pigeonplanner/ui/mainwindow.py:1270
 msgid "_Help"
-msgstr ""
+msgstr "_Ajutor"
 
 #: ../pigeonplanner/ui/mainwindow.py:1271
 #: ../pigeonplanner/ui/mainwindow.py:1299
 msgid "_Pedigree"
-msgstr ""
+msgstr "_Certificat de origine"
 
 #: ../pigeonplanner/ui/mainwindow.py:1273
 msgid "Blank pedigree"
-msgstr ""
+msgstr "Certificat de origine necompletat"
 
 #: ../pigeonplanner/ui/mainwindow.py:1274
 msgid "Print a blank pedigree"
-msgstr ""
+msgstr "Imprima un certificat de origine necompletat"
 
 #: ../pigeonplanner/ui/mainwindow.py:1276
 msgid "Create a backup of your database"
-msgstr ""
+msgstr "Creaza o copie de rezerva pentru baza ta de date"
 
 #: ../pigeonplanner/ui/mainwindow.py:1278
 msgid "_Restore"
-msgstr ""
+msgstr "_Restaurează"
 
 #: ../pigeonplanner/ui/mainwindow.py:1279
 msgid "Restore a backup of your database"
-msgstr ""
+msgstr "Restaureaza o copie de rezerva a bazei tale de date"
 
 #: ../pigeonplanner/ui/mainwindow.py:1282
 msgid "Quit the program"
-msgstr ""
+msgstr "Inchide programul"
 
 #: ../pigeonplanner/ui/mainwindow.py:1284
 msgid "Add a new pigeon"
-msgstr ""
+msgstr "Adauga un porumbel nou"
 
 #: ../pigeonplanner/ui/mainwindow.py:1285
 msgid "Add ran_ge"
-msgstr ""
+msgstr "Adauga gama"
 
 #: ../pigeonplanner/ui/mainwindow.py:1286 tmp/MainWindow.glade.h:9
 msgid "Add a range of pigeons"
-msgstr ""
+msgstr "Adauga o gama de porumbei"
 
 #: ../pigeonplanner/ui/mainwindow.py:1287
 msgid "_Photo Album"
-msgstr ""
+msgstr "_Album foto"
 
 #: ../pigeonplanner/ui/mainwindow.py:1288
 msgid "View the images of your pigeons"
-msgstr ""
+msgstr "Vizualizeaza imaginile porumbeilor tai"
 
 #: ../pigeonplanner/ui/mainwindow.py:1290
 msgid "_Logfile Viewer"
-msgstr ""
+msgstr "_ Fisier de logare"
 
 #: ../pigeonplanner/ui/mainwindow.py:1291
 msgid "See the logfile"
-msgstr ""
+msgstr "Vezi fisierul de logare"
 
 #: ../pigeonplanner/ui/mainwindow.py:1292
 msgid "_Find..."
-msgstr ""
+msgstr "_Gaseste"
 
 #: ../pigeonplanner/ui/mainwindow.py:1293
 msgid "Search through the list of pigeons"
-msgstr ""
+msgstr "Cauta in lista de porumbei"
 
 #: ../pigeonplanner/ui/mainwindow.py:1296
 msgid "Edit the selected pigeon"
-msgstr ""
+msgstr "Editeaza porumbelul selectat"
 
 #: ../pigeonplanner/ui/mainwindow.py:1298
 msgid "Remove the selected pigeon"
-msgstr ""
+msgstr "Inlatura porumbelul selectat"
 
 #: ../pigeonplanner/ui/mainwindow.py:1300
 msgid "View the detailed pedigree of this pigeon"
-msgstr ""
+msgstr "Vizualizeaza certificatul de origine detaliat al acestui porumbel"
 
 #: ../pigeonplanner/ui/mainwindow.py:1302
 msgid "Add resul_t"
-msgstr ""
+msgstr "Adauga rezul_t"
 
 #: ../pigeonplanner/ui/mainwindow.py:1303
 msgid "Add a new result for this pigeon"
-msgstr ""
+msgstr "Adauga un nou rezultat al acestui porumbel"
 
 #: ../pigeonplanner/ui/mainwindow.py:1305
 msgid "_Tools"
-msgstr ""
+msgstr "_Instrumente"
 
 #: ../pigeonplanner/ui/mainwindow.py:1306
 msgid "Various tools"
-msgstr ""
+msgstr "Instrumente diferite"
 
 #: ../pigeonplanner/ui/mainwindow.py:1308
 msgid "Configure the application"
-msgstr ""
+msgstr "Configurați aplicația"
 
 #: ../pigeonplanner/ui/mainwindow.py:1311
 msgid "_Website"
-msgstr ""
+msgstr "_Pagina de internet"
 
 #: ../pigeonplanner/ui/mainwindow.py:1312
 msgid "Go to the website for more information"
-msgstr ""
+msgstr "Mergi la pagina de internet pentru mai multe informatii"
 
 #: ../pigeonplanner/ui/mainwindow.py:1314
 msgid "Forum"
-msgstr ""
+msgstr "Forum"
 
 #: ../pigeonplanner/ui/mainwindow.py:1315
 msgid "Go to the forum for online help"
-msgstr ""
+msgstr "Mergi la forum pentru ajutor online"
 
 #: ../pigeonplanner/ui/mainwindow.py:1318
 msgid "About this application"
-msgstr ""
+msgstr "Despre această aplicaţie"
 
 #: ../pigeonplanner/ui/mainwindow.py:1321
 msgid "Navigation arrows"
-msgstr ""
+msgstr "Sageti de navigare"
 
 #: ../pigeonplanner/ui/mainwindow.py:1322 tmp/OptionsDialog.glade.h:41
 msgid "Show or hide the navigation arrows"
-msgstr ""
+msgstr "Arata sau ascunde sagetile de navigare"
 
 #: ../pigeonplanner/ui/mainwindow.py:1325 tmp/OptionsDialog.glade.h:40
 msgid "Show or hide pigeon statistics"
-msgstr ""
+msgstr "Arata sau ascunde statisticile porumbelului"
 
 #: ../pigeonplanner/ui/mainwindow.py:1327
 msgid "Toolbar"
-msgstr ""
+msgstr "Bara de unelte"
 
 #: ../pigeonplanner/ui/mainwindow.py:1328 tmp/OptionsDialog.glade.h:43
 msgid "Show or hide the toolbar"
-msgstr ""
+msgstr "Afișează sau ascunde bara de unelte"
 
 #: ../pigeonplanner/ui/mainwindow.py:1330
 msgid "Statusbar"
-msgstr ""
+msgstr "Bara de stare"
 
 #: ../pigeonplanner/ui/mainwindow.py:1331 tmp/OptionsDialog.glade.h:42
 msgid "Show or hide the statusbar"
-msgstr ""
+msgstr "Afișează sau ascunde bara de stare"
 
 #: ../pigeonplanner/ui/mainwindow.py:1976
 #, python-format
 msgid "Pigeon %s/%s has been added"
-msgstr ""
+msgstr "Pormbelul %s/%s a fost adaugat"
 
 #: ../pigeonplanner/ui/widgets/pedigreeboxes.py:93
 msgid "<edit>"
-msgstr ""
+msgstr "<modifica>"
 
 #: ../pigeonplanner/ui/widgets/filefilters.py:35
 msgid "Images"
-msgstr ""
+msgstr "Imagini"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:91 tmp/MainWindow.glade.h:24
 msgid "Dead"
-msgstr ""
+msgstr "Mort"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:91 tmp/MainWindow.glade.h:8
 msgid "Active"
-msgstr ""
+msgstr "Activ"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:91 tmp/MainWindow.glade.h:54
 msgid "Sold"
-msgstr ""
+msgstr "Vândut"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:91 tmp/MainWindow.glade.h:35
 msgid "Lost"
-msgstr ""
+msgstr "Pierdut"
 
 #: ../pigeonplanner/printing.py:81
 msgid "Save as..."
-msgstr ""
+msgstr "Salveaza ca..."
 
 #: ../pigeonplanner/printing.py:171 tmp/PedigreeWindow.glade.h:3
 msgid "Pedigree of:"
-msgstr ""
+msgstr "Arborele genealogic al"
 
 #: ../pigeonplanner/printing.py:447 ../pigeonplanner/printing.py:671
 #: tmp/MainWindow.glade.h:23 tmp/ResultWindow.glade.h:5
 #: tmp/ToolsWindow.glade.h:18
 msgid "Date"
-msgstr ""
+msgstr "Dată"
 
 #: ../pigeonplanner/printing.py:449 tmp/MainWindow.glade.h:43
 #: tmp/ResultWindow.glade.h:7
 msgid "Placed"
-msgstr ""
+msgstr "Loc"
 
 #: ../pigeonplanner/printing.py:450 tmp/MainWindow.glade.h:40
 #: tmp/ResultWindow.glade.h:6
 msgid "Out of"
-msgstr ""
+msgstr "Din"
 
 #: ../pigeonplanner/printing.py:451
 msgid "Coef."
-msgstr ""
+msgstr "Punctaj"
 
 #: ../pigeonplanner/printing.py:453 tmp/MainWindow.glade.h:60
 #: tmp/OptionsDialog.glade.h:47 tmp/ResultWindow.glade.h:10
 msgid "Type"
-msgstr ""
+msgstr "Tip:"
 
 #: ../pigeonplanner/printing.py:454 tmp/MainWindow.glade.h:14
 #: tmp/OptionsDialog.glade.h:14 tmp/ResultWindow.glade.h:2
 msgid "Category"
-msgstr ""
+msgstr "Categorie"
 
 #: ../pigeonplanner/printing.py:457 tmp/MainWindow.glade.h:20
 #: tmp/OptionsDialog.glade.h:20 tmp/ResultWindow.glade.h:4
 #: tmp/ToolsWindow.glade.h:13
 msgid "Comment"
-msgstr ""
+msgstr "Comentariu"
 
 #: ../pigeonplanner/printing.py:548
 msgid "Page"
-msgstr ""
+msgstr "Pagină"
 
 #: ../pigeonplanner/printing.py:662 ../pigeonplanner/printing.py:684
 #: ../pigeonplanner/printing.py:685 tmp/ToolsWindow.glade.h:47
 msgid "Velocity"
-msgstr ""
+msgstr "Viteza"
 
 #: ../pigeonplanner/printing.py:673 tmp/ToolsWindow.glade.h:38
 msgid "Released"
-msgstr ""
+msgstr "Lansare"
 
 #: ../pigeonplanner/printing.py:675 tmp/ToolsWindow.glade.h:20
 msgid "Distance"
-msgstr ""
+msgstr "Distanța"
 
 #: ../pigeonplanner/printing.py:690 ../pigeonplanner/printing.py:692
 #: tmp/ToolsWindow.glade.h:22
 msgid "Flight Time"
-msgstr ""
+msgstr "Timp de zbor"
 
 #: ../pigeonplanner/printing.py:697 ../pigeonplanner/printing.py:699
 #: tmp/ToolsWindow.glade.h:45
 msgid "Time of Arrival"
-msgstr ""
+msgstr "Timp de sosire"
 
 #: ../pigeonplanner.py:223 tmp/Dialogs.glade.h:7 tmp/OptionsDialog.glade.h:22
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
 #: ../pigeonplanner.py:224
 msgid "Send"
-msgstr ""
+msgstr "Trimite"
 
 #: ../pigeonplanner.py:225
 msgid "Report"
-msgstr ""
+msgstr "Raport"
 
 #: ../pigeonplanner.py:226
 msgid "View all"
-msgstr ""
+msgstr "Vizualizare totala"
 
 #: ../pigeonplanner.py:227
 msgid "Calculate"
-msgstr ""
+msgstr "Calculează"
 
 #: ../pigeonplanner.py:228
 msgid "Search database"
-msgstr ""
+msgstr "Cauta baza de date"
 
 #: ../pigeonplanner.py:229
 msgid "Optimize"
-msgstr ""
+msgstr "Optimizează"
 
 #: ../pigeonplanner.py:232
 msgid "Check now!"
-msgstr ""
+msgstr "Verifica acum!"
 
 #: tmp/Dialogs.glade.h:1
 msgid "<b>Attached file:</b>"
-msgstr ""
+msgstr "<b>Fisier atasat:</b>"
 
 #: tmp/Dialogs.glade.h:2
 msgid "<b>Message:</b>"
-msgstr ""
+msgstr "<b>Mesaj:</b>"
 
 #: tmp/Dialogs.glade.h:3
 msgid "<b>Send to:</b>"
-msgstr ""
+msgstr "<b>Trimite catre:</b>"
 
 #: tmp/Dialogs.glade.h:4
 msgid "<b>Subject:</b>"
-msgstr ""
+msgstr "<b>Subiect:</b>"
 
 #: tmp/Dialogs.glade.h:5
 msgid "<b>Your e-mailaddress:</b>"
-msgstr ""
+msgstr "<b>Adresa ta de mail:</b>"
 
 #: tmp/Dialogs.glade.h:6
 msgid "<b>Your name:</b>"
-msgstr ""
+msgstr "<b>Numele tau:</b>"
 
 #: tmp/Dialogs.glade.h:8
 msgid "Sending..."
-msgstr ""
+msgstr "Se trimite..."
 
 #: tmp/MainWindow.glade.h:1
 msgid "<b>Brothers and sisters</b>"
-msgstr ""
+msgstr "<b>Frati si surori</b"
 
 #: tmp/MainWindow.glade.h:2
 msgid "<b>Details of pigeon</b>"
-msgstr ""
+msgstr "<b>Detaliile porumbelului</b>"
 
 #: tmp/MainWindow.glade.h:3
 msgid "<b>Half brothers and sisters</b>"
-msgstr ""
+msgstr "<b>Frati si surori vitregi</b>"
 
 #: tmp/MainWindow.glade.h:4
 msgid "<b>Offspring</b>"
-msgstr ""
+msgstr "<b>Produsi</b>"
 
 #: tmp/MainWindow.glade.h:5
 msgid "<b>Pedigree dam</b>"
-msgstr ""
+msgstr "<b>Arbore genealogic mama</b>"
 
 #: tmp/MainWindow.glade.h:6
 msgid "<b>Pedigree sire</b>"
-msgstr ""
+msgstr "<b>Arbore genealogic tata</b>"
 
 #: tmp/MainWindow.glade.h:7
 msgid "<b>Results of pigeon</b>"
-msgstr ""
+msgstr "<b>Rezultatele porumbelului</b>"
 
 #: tmp/MainWindow.glade.h:12
 msgid "Band numbers"
-msgstr ""
+msgstr "Serie inel"
 
 #: tmp/MainWindow.glade.h:13
 msgid "Buyer"
-msgstr ""
+msgstr "Cumpărător"
 
 #: tmp/MainWindow.glade.h:15
 msgid "Choose a status for this pigeon:"
-msgstr ""
+msgstr "Alege o stare pentru acest porumbel:"
 
 #: tmp/MainWindow.glade.h:16
 msgid "Choose an image..."
-msgstr ""
+msgstr "Alege o imagine"
 
 #: tmp/MainWindow.glade.h:17
 msgid "Cocks"
-msgstr ""
+msgstr "Masculi"
 
 #: tmp/MainWindow.glade.h:19 tmp/OptionsDialog.glade.h:19
 msgid "Colour"
-msgstr ""
+msgstr "Culoare"
 
 #: tmp/MainWindow.glade.h:21
 msgid "Common parent"
-msgstr ""
+msgstr "Parinte comun"
 
 #: tmp/MainWindow.glade.h:22 tmp/PedigreeWindow.glade.h:1
 msgid "Dam"
-msgstr ""
+msgstr "Mama"
 
 #: tmp/MainWindow.glade.h:25 tmp/ToolsWindow.glade.h:19
 msgid "Description"
-msgstr ""
+msgstr "Descriere"
 
 #: tmp/MainWindow.glade.h:26
 msgid "Done by"
-msgstr ""
+msgstr "Realizat de"
 
 #: tmp/MainWindow.glade.h:27
 msgid "Dosage"
-msgstr ""
+msgstr "Dozare"
 
 #: tmp/MainWindow.glade.h:28 tmp/OptionsDialog.glade.h:23
 msgid "Extra"
-msgstr ""
+msgstr "Suplimentar"
 
 #: tmp/MainWindow.glade.h:29
 msgid "Extra info"
-msgstr ""
+msgstr "Informaţii suplimentare"
 
 #: tmp/MainWindow.glade.h:30
 msgid "From"
-msgstr ""
+msgstr "De la"
 
 #: tmp/MainWindow.glade.h:31
 msgid "Hens"
-msgstr ""
+msgstr "Femele"
 
 #: tmp/MainWindow.glade.h:32
 msgid "Keep results of this pigeon"
-msgstr ""
+msgstr "Pastreaza rezultatele acestui porumbel"
 
 #: tmp/MainWindow.glade.h:33
 msgid "Keep this pigeon in the pedigree"
-msgstr ""
+msgstr "Pastreaza acest porumbel in arborele genealogic"
 
 #: tmp/MainWindow.glade.h:34 tmp/OptionsDialog.glade.h:28
 msgid "Loft"
-msgstr ""
+msgstr "Compartiment"
 
 #: tmp/MainWindow.glade.h:36
 msgid "Medication"
-msgstr ""
+msgstr "Medicatie"
 
 #: tmp/MainWindow.glade.h:37 tmp/OptionsDialog.glade.h:30
 #: tmp/ToolsWindow.glade.h:30
 msgid "Name"
-msgstr ""
+msgstr "Nume"
 
 #: tmp/MainWindow.glade.h:38
 msgid "Names"
-msgstr ""
+msgstr "Nume"
 
 #: tmp/MainWindow.glade.h:39
 msgid "No extra information available."
-msgstr ""
+msgstr "Informatii suplimentare indisponibile."
 
 #: tmp/MainWindow.glade.h:42
 msgid "Pigeon status"
-msgstr ""
+msgstr "Stare porumbel"
 
 #: tmp/MainWindow.glade.h:45
 msgid "Relatives"
-msgstr ""
+msgstr "Rude"
 
 #: tmp/MainWindow.glade.h:46
 msgid "Remove pigeon"
-msgstr ""
+msgstr "Inlatura porumbelul"
 
 #: tmp/MainWindow.glade.h:48
 msgid "Search a pigeon"
-msgstr ""
+msgstr "Cauta un porumbel"
 
 #: tmp/MainWindow.glade.h:49
 msgid "Search for:"
-msgstr ""
+msgstr "Căutare pentru:"
 
 #: tmp/MainWindow.glade.h:50
 msgid "Search in:"
-msgstr ""
+msgstr "Caută în:"
 
 #: tmp/MainWindow.glade.h:53 tmp/PedigreeWindow.glade.h:4
 msgid "Sire"
-msgstr ""
+msgstr "Tata"
 
 #: tmp/MainWindow.glade.h:55 tmp/OptionsDialog.glade.h:46
 msgid "Strain"
-msgstr ""
+msgstr "Rasa"
 
 #: tmp/MainWindow.glade.h:56
 msgid "The current status is:"
-msgstr ""
+msgstr "Starea curenta este:"
 
 #: tmp/MainWindow.glade.h:57
 msgid "The following pigeon will be removed:"
-msgstr ""
+msgstr "Urmatorul porumbel va fi inlaturat:"
 
 #: tmp/MainWindow.glade.h:58
 msgid "To"
-msgstr ""
+msgstr "Către"
 
 #: tmp/MainWindow.glade.h:59
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: tmp/MainWindow.glade.h:61
 msgid "Vaccination"
-msgstr ""
+msgstr "Vaccinare"
 
 #: tmp/MainWindow.glade.h:64 tmp/ResultWindow.glade.h:14
 msgid "Year"
-msgstr ""
+msgstr "An"
 
 #: tmp/MainWindow.glade.h:65
 msgid "Young birds"
-msgstr ""
+msgstr "Pui"
 
 #: tmp/OptionsDialog.glade.h:1
 msgid "<b>Backup</b>"
-msgstr ""
+msgstr "<b>Copie de rezerva</b>"
 
 #: tmp/OptionsDialog.glade.h:2
 msgid "<b>Columns</b>"
-msgstr ""
+msgstr "<b>Coloane</b>"
 
 #: tmp/OptionsDialog.glade.h:3
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>General</b>"
 
 #: tmp/OptionsDialog.glade.h:4
 msgid "<b>Language</b>"
-msgstr ""
+msgstr "<b>Limbă</b>"
 
 #: tmp/OptionsDialog.glade.h:5
 msgid "<b>Layout</b>"
-msgstr ""
+msgstr "<b>Aranjament</b>"
 
 #: tmp/OptionsDialog.glade.h:6
 msgid "<b>Other</b>"
-msgstr ""
+msgstr "<b>Alta</b>"
 
 #: tmp/OptionsDialog.glade.h:7
 msgid "<b>Paper</b>"
-msgstr ""
+msgstr "<b>Hartie</b>"
 
 #: tmp/OptionsDialog.glade.h:8
 msgid "<b>Personal</b>"
-msgstr ""
+msgstr "<b>Personal</b>"
 
 #: tmp/OptionsDialog.glade.h:9
 msgid "<b>Pigeon</b>"
-msgstr ""
+msgstr "<b>Porumbel</b>"
 
 #: tmp/OptionsDialog.glade.h:10
 msgid "<b>Theme</b>"
-msgstr ""
+msgstr "<b>Temă</b>"
 
 #: tmp/OptionsDialog.glade.h:11
 msgid "<b>Update</b>"
-msgstr ""
+msgstr "<b>Actualizare</b>"
 
 #: tmp/OptionsDialog.glade.h:12
 msgid "A4"
-msgstr ""
+msgstr "A4"
 
 #: tmp/OptionsDialog.glade.h:13
 msgid "Address"
-msgstr ""
+msgstr "Adresă"
 
 #: tmp/OptionsDialog.glade.h:15
 msgid "Change the language to"
-msgstr ""
+msgstr "Schimba limba in"
 
 #: tmp/OptionsDialog.glade.h:16
 msgid "Change the theme"
-msgstr ""
+msgstr "Schimba infatisarea"
 
 #: tmp/OptionsDialog.glade.h:17
 msgid "Check for updates on startup"
-msgstr ""
+msgstr "La pornire, verifică existența unor versiuni mai noi"
 
 #: tmp/OptionsDialog.glade.h:21
 msgid "Default"
-msgstr ""
+msgstr "Implicit"
 
 #: tmp/OptionsDialog.glade.h:24
 msgid "Image"
-msgstr ""
+msgstr "Imagine"
 
 #: tmp/OptionsDialog.glade.h:25
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 #: tmp/OptionsDialog.glade.h:26
 msgid "Letter"
-msgstr ""
+msgstr "Scrisoare"
 
 #: tmp/OptionsDialog.glade.h:27
 msgid "Location"
-msgstr ""
+msgstr "Locație"
 
 #: tmp/OptionsDialog.glade.h:29
 msgid "Make an automatic backup"
-msgstr ""
+msgstr "Realizeaza automat o baza de date"
 
 #: tmp/OptionsDialog.glade.h:31
 msgid "Options"
-msgstr ""
+msgstr "Optiuni"
 
 #: tmp/OptionsDialog.glade.h:32
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: tmp/OptionsDialog.glade.h:33
 msgid "Paper format:"
-msgstr ""
+msgstr "Format foaie:"
 
 #: tmp/OptionsDialog.glade.h:35
 msgid "Pedigree layout:"
-msgstr ""
+msgstr "Aspect arbore genealogic:"
 
 #: tmp/OptionsDialog.glade.h:36
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: tmp/OptionsDialog.glade.h:44
 msgid "Show the column names"
-msgstr ""
+msgstr "Afiseaza numele coloanei"
 
 #: tmp/OptionsDialog.glade.h:45
 msgid "Show the date"
-msgstr ""
+msgstr "Afiseaza data"
 
 #: tmp/PhotoAlbum.glade.h:1
 msgid "Photo Album"
-msgstr ""
+msgstr "Album foto"
 
 #: tmp/PhotoAlbum.glade.h:2
 msgid "There are no images found."
-msgstr ""
+msgstr "Aici nu s-au gasit imagini."
 
 #: tmp/PreviewWindow.glade.h:1
 msgid "Print Preview"
-msgstr ""
+msgstr "Previzualizare imprimare"
 
 #: tmp/ResultWindow.glade.h:11
 msgid "View all results"
-msgstr ""
+msgstr "Vizualizeaza toate rezultatele"
 
 #: tmp/ToolsWindow.glade.h:1
 msgid "<b>Add items</b>"
-msgstr ""
+msgstr "<b>Adauga elemente</b>"
 
 #: tmp/ToolsWindow.glade.h:2
 msgid "<b>Create backup</b>"
-msgstr ""
+msgstr "<b>Creaza copie de rezerva</b>"
 
 #: tmp/ToolsWindow.glade.h:3
 msgid "<b>Optimize database</b>"
-msgstr ""
+msgstr "<b>Optimizeaza baza de date</b>"
 
 #: tmp/ToolsWindow.glade.h:4
 msgid "<b>Remove database</b>"
-msgstr ""
+msgstr "<b>Inlatura baza de date</b>"
 
 #: tmp/ToolsWindow.glade.h:5
 msgid "<b>Remove items</b>"
-msgstr ""
+msgstr "<b>Inlatura elementele</b>"
 
 #: tmp/ToolsWindow.glade.h:6
 msgid "<b>Restore backup</b>"
-msgstr ""
+msgstr "<b>Restaureaza copia de rezerva</b>"
 
 #: tmp/ToolsWindow.glade.h:7
 msgid "<b>Warning!</b>"
-msgstr ""
+msgstr "<b>Avertizare!</b>"
 
 #: tmp/ToolsWindow.glade.h:8
 msgid "<i>Click the button below</i>"
-msgstr ""
+msgstr "<i>Apasa butonul de mai jos</i>"
 
 #: tmp/ToolsWindow.glade.h:9
 msgid "Add and remove items from your datasets"
-msgstr ""
+msgstr "Adauga sau inlatura elemente din baza ta de date"
 
 #: tmp/ToolsWindow.glade.h:14
 msgid "Country"
-msgstr ""
+msgstr "Tara"
 
 #: tmp/ToolsWindow.glade.h:15
 msgid ""
 "Create and restore backups from\n"
 "your pigeons and results."
 msgstr ""
+"Creaza si restaureaza copii de rezerva din\n"
+"porumbeii si rezultatele tale"
 
 #: tmp/ToolsWindow.glade.h:17
 msgid "Dataset"
-msgstr ""
+msgstr "Set de date"
 
 #: tmp/ToolsWindow.glade.h:21
 msgid "Downloadpage"
-msgstr ""
+msgstr "Pagina de descarcare"
 
 #: tmp/ToolsWindow.glade.h:23
 msgid "Here you can check if there is a program update available."
-msgstr ""
+msgstr "Aici poti verifica daca exista o actualizare a programului disponibila"
 
 #: tmp/ToolsWindow.glade.h:24
 msgid "Here you can see some statistics of your database"
-msgstr ""
+msgstr "Aici poti vedea cateva statistici ale bazei tale de date"
 
 #: tmp/ToolsWindow.glade.h:25
 msgid "Hours"
-msgstr ""
+msgstr "Ore"
 
 #: tmp/ToolsWindow.glade.h:26
 msgid "If you remove the database, all your data will be lost."
-msgstr ""
+msgstr "Daca inlaturi baza de date, toate informatiile vor fi pierdute."
 
 #: tmp/ToolsWindow.glade.h:27
 msgid "Item"
-msgstr ""
+msgstr "Element"
 
 #: tmp/ToolsWindow.glade.h:28
 msgid "Minutes"
-msgstr ""
+msgstr "Minute"
 
 #: tmp/ToolsWindow.glade.h:29
 msgid "NOTE: You will only be notified when the program starts!"
-msgstr ""
+msgstr "NOTA: Vei fi notificat numai la pornirea programului!"
 
 #: tmp/ToolsWindow.glade.h:31
 msgid "Notify me!"
-msgstr ""
+msgstr "Notifica-ma!"
 
 #: tmp/ToolsWindow.glade.h:32
 msgid "Number of days in advance:"
-msgstr ""
+msgstr "Numar de zile in avans:"
 
 #: tmp/ToolsWindow.glade.h:33
 msgid ""
 "Optimize your database.\n"
 "(Please wait, this can take some time)"
 msgstr ""
+"Optimizam baza ta de date\n"
+"(Te rog sa astepti, acest lucru necesita ceva timp)"
 
 #: tmp/ToolsWindow.glade.h:35
 msgid "Phone / E-mail"
-msgstr ""
+msgstr "Telefon / Email"
 
 #: tmp/ToolsWindow.glade.h:36
 msgid "Prognosis"
-msgstr ""
+msgstr "Prognoza"
 
 #: tmp/ToolsWindow.glade.h:37
 msgid "Range"
-msgstr ""
+msgstr "Interval"
 
 #: tmp/ToolsWindow.glade.h:39
 msgid "Seconds"
-msgstr ""
+msgstr "Secunde"
 
 #: tmp/ToolsWindow.glade.h:42
 msgid "Street"
-msgstr ""
+msgstr "Strada"
 
 #: tmp/ToolsWindow.glade.h:43
 msgid "This is me"
-msgstr ""
+msgstr "Acesta sunt eu"
 
 #: tmp/ToolsWindow.glade.h:44
 msgid "Time"
-msgstr ""
+msgstr "Timp"
 
 #: tmp/ToolsWindow.glade.h:46
 msgid "Tools"
-msgstr ""
+msgstr "Unelte"
 
 #: tmp/ToolsWindow.glade.h:49
 msgid "Zipcode / City"
-msgstr ""
+msgstr "Cod postal / Oras"
+
+#~ msgid "cock"
+#~ msgstr "Mascul"
+
+#~ msgid "hen"
+#~ msgstr "Femela"
+
+#~ msgid "young bird"
+#~ msgstr "Pui"
