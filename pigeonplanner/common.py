@@ -21,6 +21,7 @@ Functions for some common tasks
 
 
 import random
+import inspect
 import urllib2
 import os.path
 import webbrowser
@@ -52,6 +53,13 @@ def create_stock_button(icons):
         iconset = gtk.IconSet(pixbuf)
         factory.add(name, iconset)
         gtk.stock_add([(name, description, 0, 0, 'pigeonplanner')])
+
+def get_function_name():
+    """
+    Retrieve the name of the fnction/method
+    """
+
+    return inspect.stack()[1][3]
 
 def encode_string(string):
     """

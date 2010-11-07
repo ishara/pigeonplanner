@@ -244,6 +244,7 @@ class MainWindow(builder.GtkBuilder):
 
     # Menu callbacks
     def menuprintpedigree_activate(self, widget):
+        logger.info(common.get_function_name())
         userinfo = common.get_own_address(self.database)
         pigeoninfo = self.get_pigeoninfo()
 
@@ -252,6 +253,7 @@ class MainWindow(builder.GtkBuilder):
                                self.parser.pigeons)
 
     def menuprintblank_activate(self, widget):
+        logger.info(common.get_function_name())
         userinfo = common.get_own_address(self.database)
         pigeoninfo = dict(pindex='', ring='', year='', sex='', colour='',
                           name='', image='', extra1='', extra2='', extra3='',
@@ -262,31 +264,38 @@ class MainWindow(builder.GtkBuilder):
                                self.parser.pigeons)
 
     def menubackup_activate(self, widget):
+        logger.info(common.get_function_name())
         dialog = dialogs.BackupDialog(self.mainwindow, _("Create backup"),
                                       'create')
         run = dialog.run()
         dialog.destroy()
 
     def menurestore_activate(self, widget):
+        logger.info(common.get_function_name())
         dialog = dialogs.BackupDialog(self.mainwindow, _("Restore backup"),
                                       'restore')
         run = dialog.run()
         dialog.destroy()
 
     def menuclose_activate(self, widget):
+        logger.info(common.get_function_name())
         self.quit_program()
 
     def menusearch_activate(self, widget):
+        logger.info(common.get_function_name())
         self.searchdialog.show()
         self.srchentry.grab_focus()
 
     def menualbum_activate(self, widget):
+        logger.info(common.get_function_name())
         photoalbum.PhotoAlbum(self.mainwindow, self.parser, self.database)
 
     def menulog_activate(self, widget):
+        logger.info(common.get_function_name())
         logdialog.LogDialog(self.database)
 
     def menuadd_activate(self, widget):
+        logger.info(common.get_function_name())
         self.empty_entryboxes()
         self.cbColour.child.set_text('')
         self.cbStrain.child.set_text('')
@@ -303,6 +312,7 @@ class MainWindow(builder.GtkBuilder):
         logger.info("Start: Adding a pigeon")
 
     def menuaddrange_activate(self, widget):
+        logger.info(common.get_function_name())
         self.entryRangeFrom.set_text('')
         self.entryRangeTo.set_text('')
         self.entryRangeYear.set_text('')
@@ -312,6 +322,7 @@ class MainWindow(builder.GtkBuilder):
         logger.info("Start: Adding a range of pigeons")
 
     def menuedit_activate(self, widget):
+        logger.info(common.get_function_name())
         model, paths = self.selection.get_selected_rows()
         if len(paths) != 1: return
 
@@ -348,6 +359,7 @@ class MainWindow(builder.GtkBuilder):
         logger.info("Start: Editing a pigeon")
 
     def menuremove_activate(self, widget):
+        logger.info(common.get_function_name())
         model, paths = self.selection.get_selected_rows()
 
         if self.selection.count_selected_rows() == 1:
@@ -425,13 +437,16 @@ class MainWindow(builder.GtkBuilder):
         self.removedialog.hide()
 
     def menupedigree_activate(self, widget):
+        logger.info(common.get_function_name())
         pedigreewindow.PedigreeWindow(self, self.get_pigeoninfo())
 
     def menuaddresult_activate(self, widget):
+        logger.info(common.get_function_name())
         self.notebook.set_current_page(2)
         self.on_addresult_clicked(None)
 
     def menufilter_activate(self, widget):
+        logger.info(common.get_function_name())
         filterdialog = dialogs.FilterDialog(self.mainwindow,
                                             _("Filter pigeons"),
                                             self.fill_treeview)
@@ -458,12 +473,15 @@ class MainWindow(builder.GtkBuilder):
         filterdialog.run()
 
     def menutools_activate(self, widget):
+        logger.info(common.get_function_name())
         toolswindow.ToolsWindow(self)
 
     def menupref_activate(self, widget):
+        logger.info(common.get_function_name())
         optionsdialog.OptionsDialog(self)
 
     def menuarrows_toggled(self, widget):
+        logger.info(common.get_function_name())
         if self.blockMenuCallback: return
 
         if widget.get_active():
@@ -474,6 +492,7 @@ class MainWindow(builder.GtkBuilder):
             self.options.set_option('Options', 'arrows', 'False')
 
     def menustats_toggled(self, widget):
+        logger.info(common.get_function_name())
         if self.blockMenuCallback: return
 
         if widget.get_active():
@@ -484,6 +503,7 @@ class MainWindow(builder.GtkBuilder):
             self.options.set_option('Options', 'stats', 'False')
 
     def menutoolbar_toggled(self, widget):
+        logger.info(common.get_function_name())
         if self.blockMenuCallback: return
 
         if widget.get_active():
@@ -494,6 +514,7 @@ class MainWindow(builder.GtkBuilder):
             self.options.set_option('Options', 'toolbar', 'False')
 
     def menustatusbar_toggled(self, widget):
+        logger.info(common.get_function_name())
         if self.blockMenuCallback: return
 
         if widget.get_active():
@@ -504,12 +525,15 @@ class MainWindow(builder.GtkBuilder):
             self.options.set_option('Options', 'statusbar', 'False')
 
     def menuhome_activate(self, widget):
+        logger.info(common.get_function_name())
         webbrowser.open(const.WEBSITE)
 
     def menuforum_activate(self, widget):
+        logger.info(common.get_function_name())
         webbrowser.open(const.FORUMURL)
 
     def menuabout_activate(self, widget):
+        logger.info(common.get_function_name())
         dialogs.AboutDialog(self.mainwindow)
 
     # range callbacks
