@@ -48,6 +48,9 @@ except:
 import __builtin__
 
 
+WIN32 = sys.platform.startswith("win")
+
+
 class  NullFile(object):
     def __init__(self, *arg, **kwarg):
         pass
@@ -67,14 +70,13 @@ class PigeonPlanner(object):
         self.old_exception_hook = sys.excepthook
         sys.excepthook = self.exception_hook
 
-        # Windows/py2exe detection
-        self.win32 = sys.platform.startswith("win")
+        # py2exe detection
         py2exe = False
-        if self.win32 and hasattr(sys, 'frozen'):
+        if WIN32 and hasattr(sys, 'frozen'):
 	        py2exe = True
 	
         # Disable py2exe log feature
-        if self.win32 and py2exe:
+        if WIN32 and py2exe:
             try:
 	            sys.stdout = open("nul", "w")
 	            sys.stderr = open("nul", "w")
@@ -96,7 +98,7 @@ class PigeonPlanner(object):
         # Locale setup
         currentPath = ''
 
-        if not self.win32:
+        if not WIN32:
             currentPath = os.path.abspath(os.path.dirname(__file__))
 
         if currentPath.startswith('/usr/bin'):
@@ -104,8 +106,7 @@ class PigeonPlanner(object):
         else:
             LOCALE_PATH = os.path.join(currentPath, 'languages')
 
-        if self.win32:
-            from pigeonplanner import libi18n
+        if WIN32:
             libi18n.fix_locale()
 
         language = self.options.optionList.language
@@ -120,7 +121,7 @@ class PigeonPlanner(object):
             langTranslation = gettext
 
         self.locale_error = None
-        if self.win32:
+        if WIN32:
             libi18n._putenv('LC_ALL', language)
         else:
             s = locale.normalize(language).split('.')[0]+'.UTF-8'
@@ -134,7 +135,7 @@ class PigeonPlanner(object):
                                          (%s and %s tested)" \
                                          %(e, s, locale.normalize(language))
 
-        if self.win32:
+        if WIN32:
             # Module locale has no method bindtextdomain on MS Windows.
             # Use the gettext library directly through ctypes.
             # Info: https://bugzilla.gnome.org/show_bug.cgi?id=574520
@@ -165,7 +166,7 @@ class PigeonPlanner(object):
         self.logger.info("Version: %s" % const.VERSION)
         self.logger.debug("Home path: %s" % const.HOMEDIR)
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
-        if self.win32:
+        if WIN32:
             self.logger.debug("Current path: %s" % os.getcwd())
 
             ver = os.sys.getwindowsversion()
@@ -197,7 +198,7 @@ class PigeonPlanner(object):
         if self.locale_error:
             self.logger.debug("Locale error: %s" % self.locale_error)
         else:
-            if self.win32:
+            if WIN32:
                 loc = libi18n._getlang()
             else:
                 loc = locale.getlocale()[0]
@@ -207,7 +208,7 @@ class PigeonPlanner(object):
 
     def setup_theme(self):
         # Set theme
-        if self.win32 and os.path.exists('.\\share\\themes'):
+        if WIN32 and os.path.exists('.\\share\\themes'):
             themes = os.listdir('.\\share\\themes')
             themefile = os.path.join('.\\share\\themes',
                                      themes[self.options.optionList.theme],
@@ -339,6 +340,8 @@ class PigeonPlanner(object):
 
 if __name__ == "__main__":
     from pigeonplanner import const
+    if WIN32:
+        from pigeonplanner import libi18n
     app = PigeonPlanner()
     app.setup_locale()
     app.setup_logging()
