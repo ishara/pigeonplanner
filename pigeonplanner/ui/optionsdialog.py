@@ -29,6 +29,7 @@ from pigeonplanner import builder
 from pigeonplanner import options
 from pigeonplanner import messages
 from pigeonplanner.ui import dialogs
+from pigeonplanner.ui.widgets import comboboxes
 
 
 class OptionsDialog(builder.GtkBuilder):
@@ -76,19 +77,11 @@ class OptionsDialog(builder.GtkBuilder):
                 self.cbThemes.set_wrap_width(3)
 
         # Fill language combobox with available languages
-        self.languagelookup = [
-                ('Default', 'def'),
-                ('Arabic', 'ar'),
-                ('Bosnian', 'bs'),
-                ('Croatian', 'hr'),
-                ('Dutch', 'nl'),
-                ('English', 'en'),
-                ('French', 'fr'),
-                ('Russian', 'ru'),
-                ('Spanish', 'es')
-                ]
-        for name, code in self.languagelookup:
-            self.cbLang.append_text(name)
+        self.languages = os.listdir(const.LANGDIR)
+        self.languages.insert(0, 'en')
+        self.languages.sort()
+        self.languages.insert(0, 'def')
+        comboboxes.fill_combobox(self.cbLang, self.languages, sort=False)
 
         self.set_options()
 
@@ -110,10 +103,9 @@ class OptionsDialog(builder.GtkBuilder):
         # General
         self.chkUpdate.set_active(self.opt.optionList.update)
 
-        for i in xrange(0, len(self.languagelookup)):
-            name, code = self.languagelookup[i]
-            if self.opt.optionList.language == code:
-                self.cbLang.set_active(i)
+        for index, lang in enumerate(self.languages):
+            if self.opt.optionList.language == lang:
+                self.cbLang.set_active(index)
                 break
 
         self.chkBackup.set_active(self.opt.optionList.backup)
@@ -195,8 +187,7 @@ class OptionsDialog(builder.GtkBuilder):
                            'toolbar': str(self.chkToolbar.get_active()),
                            'statusbar': str(self.chkStatusbar.get_active()),
                            'update': str(self.chkUpdate.get_active()),
-                           'language': \
-                             self.languagelookup[self.cbLang.get_active()][1],
+                           'language': self.cbLang.get_active_text(),
                            'runs': self.opt.optionList.runs
                           },
                "Backup": {'backup': str(self.chkBackup.get_active()),
@@ -242,8 +233,8 @@ class OptionsDialog(builder.GtkBuilder):
 
         self.main.options = options.GetOptions()
 
-        if self.languagelookup[self.cbLang.get_active()][1] != \
-           self.opt.optionList.language or const.WINDOWS and \
+        if self.cbLang.get_active_text() != self.opt.optionList.language or\
+           const.WINDOWS and\
            self.cbThemes.get_active() != self.opt.optionList.theme:
             dialogs.MessageDialog(const.INFO, messages.MSG_RESTART_APP,
                                   self.optionsdialog)

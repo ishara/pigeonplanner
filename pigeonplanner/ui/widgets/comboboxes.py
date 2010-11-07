@@ -47,18 +47,20 @@ def set_combobox_wrap(combobox):
     elif length > 30:
         combobox.set_wrap_width(3)
 
-def fill_combobox(combobox, items, active=0):
+def fill_combobox(combobox, items, active=0, sort=True):
     """
     Fill a combobox with the given data
 
     @param widget: the combobox
     @param items: list of items to add
     @param active: index of the active value
+    @param sort: sort the data or not
     """
 
     model = combobox.get_model()
     model.clear()
-    items.sort()
+    if sort:
+        items.sort()
     for item in items:
         model.append([item])
 

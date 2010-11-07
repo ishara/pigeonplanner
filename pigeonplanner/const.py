@@ -69,6 +69,7 @@ if WINDOWS:
         PREFDIR = os.path.join(HOMEDIR, 'pigeonplanner')
     GLADEDIR = './glade/'
     IMAGEDIR = './images/'
+    LANGDIR = './languages/'
 else:
     HOMEDIR = os.environ['HOME']
     PREFDIR = os.path.join(HOMEDIR, '.pigeonplanner')
@@ -76,9 +77,11 @@ else:
     if topPath.startswith('/usr'):
         GLADEDIR = '/usr/share/pigeonplanner/glade/'
         IMAGEDIR = '/usr/share/pigeonplanner/images/'
+        LANGDIR = '/usr/share/locale/'
     else:
         GLADEDIR = os.path.join(topPath, 'glade')
         IMAGEDIR = os.path.join(topPath, 'images')
+        LANGDIR = os.path.join(topPath, 'languages')
 
 TEMPDIR = tempfile.gettempdir()
 
