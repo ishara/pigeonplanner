@@ -16,6 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import math
+
 import gtk
 
 from pigeonplanner import const
