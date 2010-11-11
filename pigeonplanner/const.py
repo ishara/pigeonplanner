@@ -75,8 +75,14 @@ else:
     PREFDIR = os.path.join(HOMEDIR, '.pigeonplanner')
     topPath = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
     if topPath.startswith('/usr'):
-        GLADEDIR = '/usr/share/pigeonplanner/glade/'
-        IMAGEDIR = '/usr/share/pigeonplanner/images/'
+        if os.path.exists('/usr/share/pigeonplanner'):
+            prefix = '/usr/share/'
+        elif os.path.exists('/usr/local/share/pigeonplanner'):
+            prefix = '/usr/local/share/'
+        else:
+            prefix = sys.prefix
+        GLADEDIR = os.path.join(prefix, 'pigeonplanner/glade/')
+        IMAGEDIR = os.path.join(prefix, 'pigeonplanner/images/')
         LANGDIR = '/usr/share/locale/'
     else:
         GLADEDIR = os.path.join(topPath, 'glade')

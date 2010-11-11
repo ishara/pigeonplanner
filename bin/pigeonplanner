@@ -339,6 +339,12 @@ class PigeonPlanner(object):
         logdialog.LogDialog(self.db)
 
 if __name__ == "__main__":
+    # Detect our module path
+    pp_dir = os.path.join(os.path.dirname(sys.argv[0]), '..')
+    prefix = os.path.abspath(os.path.normpath(pp_dir))
+    if not prefix.startswith('/usr'):
+        sys.path.insert(0, pp_dir)
+
     from pigeonplanner import const
     if WIN32:
         from pigeonplanner import libi18n
