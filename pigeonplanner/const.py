@@ -67,9 +67,16 @@ if WINDOWS:
         PREFDIR = os.path.join(os.environ['APPDATA'], 'pigeonplanner')
     else:
         PREFDIR = os.path.join(HOMEDIR, 'pigeonplanner')
-    GLADEDIR = './glade/'
-    IMAGEDIR = './images/'
-    LANGDIR = './languages/'
+    if hasattr(sys, 'frozen'):
+        # Exe is in topdir
+        GLADEDIR = './glade/'
+        IMAGEDIR = './images/'
+        LANGDIR = './languages/'
+    else:
+        # Startup script is in /bin
+        GLADEDIR = '../glade/'
+        IMAGEDIR = '../images/'
+        LANGDIR = '../languages/'
 else:
     HOMEDIR = os.environ['HOME']
     PREFDIR = os.path.join(HOMEDIR, '.pigeonplanner')

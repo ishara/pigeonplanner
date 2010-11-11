@@ -95,17 +95,6 @@ class PigeonPlanner(object):
         self.options = options.GetOptions()
 
     def setup_locale(self):
-        # Locale setup
-        currentPath = ''
-
-        if not WIN32:
-            currentPath = os.path.abspath(os.path.dirname(__file__))
-
-        if currentPath.startswith('/usr/bin'):
-            LOCALE_PATH = '/usr/share/locale'
-        else:
-            LOCALE_PATH = os.path.join(currentPath, 'languages')
-
         if WIN32:
             libi18n.fix_locale()
 
@@ -114,7 +103,7 @@ class PigeonPlanner(object):
             language = ''
 
         try:
-            langTranslation = gettext.translation(const.DOMAIN, LOCALE_PATH,
+            langTranslation = gettext.translation(const.DOMAIN, const.LANGDIR,
                                                   [language])
             langTranslation.install()
         except:
@@ -123,6 +112,10 @@ class PigeonPlanner(object):
         self.locale_error = None
         if WIN32:
             libi18n._putenv('LC_ALL', language)
+            # Module locale has no method bindtextdomain on MS Windows.
+            # Use the gettext library directly through ctypes.
+            # Info: https://bugzilla.gnome.org/show_bug.cgi?id=574520
+            self.setup_windows_gettext(const.DOMAIN, const.LANGDIR, "intl.dll")
         else:
             s = locale.normalize(language).split('.')[0]+'.UTF-8'
             try:
@@ -134,16 +127,9 @@ class PigeonPlanner(object):
                    self. locale_error = "Force lang failed: '%s' \
                                          (%s and %s tested)" \
                                          %(e, s, locale.normalize(language))
+            locale.bindtextdomain(const.DOMAIN, const.LANGDIR)
 
-        if WIN32:
-            # Module locale has no method bindtextdomain on MS Windows.
-            # Use the gettext library directly through ctypes.
-            # Info: https://bugzilla.gnome.org/show_bug.cgi?id=574520
-            self.setup_windows_gettext(const.DOMAIN, LOCALE_PATH, "intl.dll")
-        else:
-            locale.bindtextdomain(const.DOMAIN, LOCALE_PATH)
-
-        gettext.bindtextdomain(const.DOMAIN, LOCALE_PATH)
+        gettext.bindtextdomain(const.DOMAIN, const.LANGDIR)
         gettext.textdomain(const.DOMAIN)
 
         __builtin__._ = langTranslation.gettext
