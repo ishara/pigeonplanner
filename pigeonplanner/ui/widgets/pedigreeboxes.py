@@ -126,9 +126,11 @@ class PedigreeBox_cairo(gtk.DrawingArea):
 
             if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
                 if self.main.search_pigeon(None, self.pindex):
+                    # Pigeon is found in the list
                     return
 
                 if self.pindex in self.main.parser.pigeons:
+                    # Pigeon exists, so it isn't shown in the list
                     d = dialogs.MessageDialog(const.WARNING,
                                               messages.MSG_SHOW_PIGEON,
                                               self.main.mainwindow)
@@ -137,8 +139,8 @@ class PedigreeBox_cairo(gtk.DrawingArea):
                                                         (1, self.pindex), 5, 1)
                         self.main.parser.get_pigeons()
                         self.main.fill_treeview()
-                        return
                 else:
+                    # Pigeon doesn't exist in the database
                     d = dialogs.MessageDialog(const.QUESTION,
                                               messages.MSG_ADD_PIGEON,
                                               self.main.mainwindow)
