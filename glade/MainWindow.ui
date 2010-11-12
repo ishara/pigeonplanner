@@ -25,7 +25,7 @@
   <object class="GtkAdjustment" id="adjustment1">
     <property name="value">1</property>
     <property name="lower">1</property>
-    <property name="upper">20000</property>
+    <property name="upper">200000</property>
     <property name="step_increment">1</property>
   </object>
   <object class="GtkListStore" id="liststore">
