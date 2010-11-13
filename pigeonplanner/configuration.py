@@ -219,10 +219,8 @@ class ConfigurationParser(ConfigParser.ConfigParser):
         default=None
         for sectionItem in self.sections:
             if sectionItem.name == section:
-                sectionObj = sectionItem
                 for optionItem in sectionItem.options:
                     if optionItem.name == option:
-                        optionObj = optionItem
                         default = optionItem.defaultValue
 
         el = {'option': option,

@@ -23,7 +23,10 @@ import gtk
 from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import checks
+from pigeonplanner import backup
+from pigeonplanner import messages
 from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui.widgets import filefilters
 
 
 class MessageDialog(gtk.MessageDialog):
@@ -140,7 +143,7 @@ class BackupDialog(gtk.Dialog):
             title = _("Select a valid backup file")
             self.fcButtonRestore = gtk.FileChooserButton(title)
             self.fcButtonRestore.set_action(gtk.FILE_CHOOSER_ACTION_OPEN)
-            self.fcButtonRestore.add_filter(get_backup_filefilter())
+            self.fcButtonRestore.add_filter(filefilters.BackupFilter())
 
             self.vbox.pack_start(label, False, True, 8)
             self.vbox.pack_start(label2, False, True, 8)
