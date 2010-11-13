@@ -29,6 +29,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import gtk
+import glib
 import gobject
 
 from pigeonplanner import const
@@ -2053,6 +2054,8 @@ class MainWindow(builder.GtkBuilder):
         preview = gtk.Image()
         self.filedialog.set_preview_widget(preview)
         self.filedialog.add_filter(filefilters.ImageFilter())
+        image_folder = glib.get_user_special_dir(glib.USER_DIRECTORY_PICTURES)
+        self.filedialog.set_current_folder(image_folder)
         self.filedialog.show()
 
     def position_popup(self):
