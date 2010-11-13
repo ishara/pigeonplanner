@@ -33,7 +33,6 @@ import gobject
 
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import update
 from pigeonplanner import backup
 from pigeonplanner import checks
 from pigeonplanner import builder

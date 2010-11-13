@@ -28,6 +28,7 @@ from pigeonplanner import common
 from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import mailing
+from pigeonplanner.ui import dialogs
 
 
 class MailDialog(builder.GtkBuilder):

@@ -20,7 +20,6 @@ Ingterface for all printing operations
 """
 
 
-import math
 import os.path
 import datetime
 

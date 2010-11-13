@@ -30,7 +30,6 @@ import gtk
 import gobject
 
 from pigeonplanner import const
-from pigeonplanner import messages
 
 
 def create_stock_button(icons):
