@@ -705,6 +705,10 @@ class MainWindow(builder.GtkBuilder):
         else:
             self.open_filedialog()
 
+    def on_fcnoimage_clicked(self, widget):
+        self.set_default_image()
+        self.filedialog.hide()
+
     def on_fcopen_clicked(self, widget):
         filename = self.filedialog.get_filename()
         try:
@@ -2037,7 +2041,7 @@ class MainWindow(builder.GtkBuilder):
         self.entrySoldDate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pb)
         self.entryLostDate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pb)
 
-    def set_default_image(self, widget):
+    def set_default_image(self, widget=None):
         self.imagePigeon1.set_from_pixbuf(self.logoPixbuf)
         self.labelImgPath.set_text('')
 
