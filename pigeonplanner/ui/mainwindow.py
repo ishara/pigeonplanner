@@ -248,7 +248,7 @@ class MainWindow(builder.GtkBuilder):
         pigeoninfo = self.get_pigeoninfo()
 
         printing.PrintPedigree(self.mainwindow, pigeoninfo, userinfo,
-                               self.options.optionList, 'print', '',
+                               self.options.optionList, const.PRINT, '',
                                self.parser.pigeons)
 
     def menuprintblank_activate(self, widget):
@@ -259,20 +259,20 @@ class MainWindow(builder.GtkBuilder):
                           extra4='', extra5='', extra6='')
 
         printing.PrintPedigree(self.mainwindow, pigeoninfo, userinfo,
-                               self.options.optionList, 'print', '',
+                               self.options.optionList, const.PRINT, '',
                                self.parser.pigeons)
 
     def menubackup_activate(self, widget):
         logger.info(common.get_function_name())
         dialog = dialogs.BackupDialog(self.mainwindow, _("Create backup"),
-                                      'create')
+                                      const.CREATE)
         run = dialog.run()
         dialog.destroy()
 
     def menurestore_activate(self, widget):
         logger.info(common.get_function_name())
         dialog = dialogs.BackupDialog(self.mainwindow, _("Restore backup"),
-                                      'restore')
+                                      const.RESTORE)
         run = dialog.run()
         dialog.destroy()
 

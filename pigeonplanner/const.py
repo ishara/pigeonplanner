@@ -131,6 +131,9 @@ DATE_FORMAT = '%Y-%m-%d'
 (ADD,
  EDIT) = range(2)
 
+(CREATE,
+ RESTORE) = range(2)
+
 (DEAD,
  ACTIVE,
  SOLD,
@@ -140,3 +143,9 @@ DATE_FORMAT = '%Y-%m-%d'
  WARNING,
  QUESTION,
  INFO) = range(4)
+
+(PRINT,
+ PREVIEW,
+ MAIL,
+ SAVE) = range(4)
+

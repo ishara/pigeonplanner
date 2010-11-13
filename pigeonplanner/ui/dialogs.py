@@ -114,7 +114,7 @@ class BackupDialog(gtk.Dialog):
         self.set_resizable(False)
         self.set_has_separator(False)
 
-        if backuptype == 'create':
+        if backuptype == const.CREATE:
             label = gtk.Label(_("Choose a directory where to save the backup"))
             label.set_padding(30, 0)
             title = _("Select a directory")

@@ -69,14 +69,14 @@ class BasePrinting(object):
         print_.connect("preview", self.preview_page)
 
         action = None
-        if print_action == 'print':
+        if print_action == const.PRINT:
             action = gtk.PRINT_OPERATION_ACTION_PRINT_DIALOG
-        elif print_action == 'preview':
+        elif print_action == const.PREVIEW:
             action = gtk.PRINT_OPERATION_ACTION_PREVIEW
-        elif print_action == 'mail':
+        elif print_action == const.MAIL:
             print_.set_export_filename(os.path.join(const.TEMPDIR, pdf_name))
             action = gtk.PRINT_OPERATION_ACTION_EXPORT
-        elif print_action == 'save':
+        elif print_action == const.SAVE:
             fc = gtk.FileChooserDialog(title=_("Save as..."), 
                         parent=self.parent,
                         action=gtk.FILE_CHOOSER_ACTION_SAVE,

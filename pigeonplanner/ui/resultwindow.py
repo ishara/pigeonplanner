@@ -218,19 +218,19 @@ class ResultWindow(builder.GtkBuilder):
         filterdialog.run()
 
     def on_mail_clicked(self, widget):
-        self.do_operation('mail')
+        self.do_operation(const.MAIL)
         results = os.path.join(const.TEMPDIR, self.pdfname)
 
         maildialog.MailDialog(self.resultwindow, self.database, results)
 
     def on_save_clicked(self, widget):
-        self.do_operation('save')
+        self.do_operation(const.SAVE)
 
     def on_preview_clicked(self, widget):
-        self.do_operation('preview')
+        self.do_operation(const.PREVIEW)
 
     def on_print_clicked(self, widget):
-        self.do_operation('print')
+        self.do_operation(const.PRINT)
 
     def do_operation(self, op):
         userinfo = common.get_own_address(self.main.database)
