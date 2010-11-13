@@ -104,8 +104,8 @@ class AboutDialog(gtk.AboutDialog):
 
 
 class BackupDialog(gtk.Dialog):
-    def __init__(self, parent, title, backuptype):
-        gtk.Dialog.__init__(self, title, parent,
+    def __init__(self, parent, backuptype):
+        gtk.Dialog.__init__(self, None, parent,
                             gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
                             ("gtk-close", gtk.RESPONSE_CLOSE))
 
@@ -115,6 +115,7 @@ class BackupDialog(gtk.Dialog):
         self.set_has_separator(False)
 
         if backuptype == const.CREATE:
+            self.set_title(_("Create backup"))
             label = gtk.Label(_("Choose a directory where to save the backup"))
             label.set_padding(30, 0)
             title = _("Select a directory")
@@ -134,6 +135,7 @@ class BackupDialog(gtk.Dialog):
             self.action_area.reorder_child(button, 0)
 
         else:
+            self.set_title(_("Restore backup"))
             text = _("Choose a Pigeon Planner backup file to restore")
             label = gtk.Label(text)
             label.set_padding(30, 0)
@@ -162,20 +164,20 @@ class BackupDialog(gtk.Dialog):
     def makebackup_clicked(self, widget):
         folder = self.fcButtonCreate.get_current_folder()
         if folder:
-            success = backup.make_backup(folder)
-            if success:
-                MessageDialog(const.INFO, messages.MSG_BACKUP_SUCCES, self.par)
+            if backup.make_backup(folder):
+                msg = messages.MSG_BACKUP_SUCCES
             else:
-                MessageDialog(const.INFO, messages.MSG_BACKUP_FAILED, self.par)
+                msg = messages.MSG_BACKUP_FAILED
+            MessageDialog(const.INFO, msg, self.par)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
-            success = backup.restore_backup(zipfile)
-            if success:
-                MessageDialog(const.INFO, messages.MSG_RESTORE_SUCCES, self.par)
+            if backup.restore_backup(zipfile):
+                msg = messages.MSG_RESTORE_SUCCES
             else:
-                MessageDialog(const.INFO, messages.MSG_RESTORE_FAILED, self.par)
+                msg = messages.MSG_RESTORE_FAILED
+            MessageDialog(const.INFO, msg, self.par)
 
 
 class EditPedigreeDialog(gtk.Dialog):

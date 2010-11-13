@@ -264,15 +264,13 @@ class MainWindow(builder.GtkBuilder):
 
     def menubackup_activate(self, widget):
         logger.info(common.get_function_name())
-        dialog = dialogs.BackupDialog(self.mainwindow, _("Create backup"),
-                                      const.CREATE)
+        dialog = dialogs.BackupDialog(self.mainwindow, const.CREATE)
         run = dialog.run()
         dialog.destroy()
 
     def menurestore_activate(self, widget):
         logger.info(common.get_function_name())
-        dialog = dialogs.BackupDialog(self.mainwindow, _("Restore backup"),
-                                      const.RESTORE)
+        dialog = dialogs.BackupDialog(self.mainwindow, const.RESTORE)
         run = dialog.run()
         dialog.destroy()
 
