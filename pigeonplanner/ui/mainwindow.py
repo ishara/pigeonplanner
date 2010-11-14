@@ -307,8 +307,6 @@ class MainWindow(builder.GtkBuilder):
 
         self.add_edit_start(const.ADD)
 
-        logger.info("Start: Adding a pigeon")
-
     def menuaddrange_activate(self, widget):
         logger.info(common.get_function_name())
         self.entryRangeFrom.set_text('')
@@ -317,8 +315,6 @@ class MainWindow(builder.GtkBuilder):
         self.cbRangeSex.set_active(2)
         self.entryRangeFrom.grab_focus()
         self.rangedialog.show()
-
-        logger.info("Start: Adding a range of pigeons")
 
     def menuedit_activate(self, widget):
         logger.info(common.get_function_name())
@@ -355,21 +351,19 @@ class MainWindow(builder.GtkBuilder):
 
         self.add_edit_start(const.EDIT)
 
-        logger.info("Start: Editing a pigeon")
-
     def menuremove_activate(self, widget):
         logger.info(common.get_function_name())
         model, paths = self.selection.get_selected_rows()
 
         if self.selection.count_selected_rows() == 1:
-            logger.info("Start: Removing one pigeon")
+            logger.info("Remove: Removing one pigeon")
             pindex, ring, year = self.get_main_ring()
             statusbarmsg = _("Pigeon %s/%s has been removed" %(ring, year))
             pigeonlabel = '%s / %s' %(ring, year)
             show_result_option = self.database.has_results(pindex)
             pigeons = [pindex]
         else:
-            logger.info("Start: Removing multiple pigeons")
+            logger.info("Remove: Removing multiple pigeons")
             pigeons = [p for p, y, r in self.get_main_ring()]
             bands = ['%s / %s' %(ring, year) for pindex, ring, year in
                      self.get_main_ring()]
