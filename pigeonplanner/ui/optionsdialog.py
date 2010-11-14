@@ -70,17 +70,8 @@ class OptionsDialog(builder.GtkBuilder):
         # Show the theme changer on Windows
         if const.WINDOWS and os.path.exists('.\\share\\themes'):
             self.framethemes.show()
-
             themes = os.listdir('.\\share\\themes\\')
-            themes.sort()
-            for theme in themes:
-                self.cbThemes.append_text(theme)
-
-            number = len(self.cbThemes.get_model())
-            if number > 10 and number <= 30:
-                self.cbThemes.set_wrap_width(2)
-            elif number > 30:
-                self.cbThemes.set_wrap_width(3)
+            comboboxes.fill_combobox(self.cbThemes, themes)
 
         # Fill language combobox with available languages
         self.languages = os.listdir(const.LANGDIR)
