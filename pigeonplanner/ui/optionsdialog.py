@@ -46,19 +46,25 @@ class OptionsDialog(builder.GtkBuilder):
         self.selection = self.treeview.get_selection()
         self.selection.connect('changed', self.selection_changed)
 
-        categories = [(_("General"), gtk.STOCK_PROPERTIES),
-                      (_("Appearance"), gtk.STOCK_PAGE_SETUP),
-                      (_("Printing"), gtk.STOCK_PRINT)]
+        # Add the categories
+        # [(Category, image, [children]), ]
+        categories = [(_("General"), gtk.STOCK_PROPERTIES,
+                            []),
+                      (_("Appearance"), gtk.STOCK_PAGE_SETUP,
+                            []),
+                      (_("Printing"), gtk.STOCK_PRINT,
+                            [_("Pedigree"),
+                             _("Results"),
+                            ]),
+                    ]
         i = 0
-        for item in categories:
-            self.liststore.append(
-                    [i,
-                     self.treeview.render_icon(item[1],
-                                               gtk.ICON_SIZE_LARGE_TOOLBAR),
-                     item[0]
-                    ])
+        for parent, img, children in categories:
+            icon = self.treeview.render_icon(img, gtk.ICON_SIZE_LARGE_TOOLBAR)
+            p_iter = self.treestore.append(None, [i, icon, parent])
+            for child in children:
+                i += 1
+                self.treestore.append(p_iter, [i, None, child])
             i += 1
-
         self.selection.select_path((0,))
 
         # Show the theme changer on Windows
