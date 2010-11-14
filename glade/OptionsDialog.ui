@@ -1154,37 +1154,13 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="default">
+                <property name="label" translatable="yes">Default</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="image">image1</property>
                 <property name="yalign">0</property>
                 <signal name="clicked" handler="on_default_clicked"/>
-                <child>
-                  <object class="GtkHBox" id="hbox1">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkImage" id="image1">
-                        <property name="visible">True</property>
-                        <property name="xalign">0.98000001907348633</property>
-                        <property name="yalign">0</property>
-                        <property name="stock">gtk-revert-to-saved</property>
-                      </object>
-                      <packing>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label2">
-                        <property name="visible">True</property>
-                        <property name="xalign">0.019999999552965164</property>
-                        <property name="label" translatable="yes">Default</property>
-                      </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1237,5 +1213,9 @@
       <action-widget response="0">cancel</action-widget>
       <action-widget response="0">ok</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="stock">gtk-revert-to-saved</property>
   </object>
 </interface>

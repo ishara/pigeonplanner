@@ -521,10 +521,11 @@
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="button_velocity_calculate">
-                                        <property name="label">calculate</property>
+                                        <property name="label" translatable="yes">Calculate</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
+                                        <property name="image">imageCalculate</property>
                                         <signal name="clicked" handler="on_button_velocity_calculate_clicked"/>
                                       </object>
                                       <packing>
@@ -847,10 +848,11 @@
                                         </child>
                                         <child>
                                           <object class="GtkButton" id="calculate">
-                                            <property name="label">calculate</property>
+                                            <property name="label" translatable="yes">Calculate</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
+                                            <property name="image">imageCalculate2</property>
                                             <signal name="clicked" handler="on_calculate_clicked"/>
                                           </object>
                                           <packing>
@@ -2285,10 +2287,11 @@
                                 <property name="n_columns">3</property>
                                 <child>
                                   <object class="GtkButton" id="btnsearchdb">
-                                    <property name="label">search-database</property>
+                                    <property name="label" translatable="yes">Search database</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
+                                    <property name="image">imageSearchDB</property>
                                     <signal name="clicked" handler="on_btnsearchdb_clicked"/>
                                   </object>
                                   <packing>
@@ -2433,10 +2436,11 @@
                                             <property name="row_spacing">8</property>
                                             <child>
                                               <object class="GtkButton" id="dboptimize">
-                                                <property name="label">optimize</property>
+                                                <property name="label" translatable="yes">Optimize</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
+                                                <property name="image">imageOptimize</property>
                                                 <signal name="clicked" handler="on_dboptimize_clicked"/>
                                               </object>
                                               <packing>
@@ -2702,10 +2706,11 @@ your pigeons and results.</property>
                                             <property name="visible">True</property>
                                             <child>
                                               <object class="GtkButton" id="backup">
-                                                <property name="label">backup</property>
+                                                <property name="label" translatable="yes">Backup</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
+                                                <property name="image">imageBackup</property>
                                                 <signal name="clicked" handler="on_makebackup_clicked"/>
                                               </object>
                                               <packing>
@@ -2788,10 +2793,11 @@ your pigeons and results.</property>
                                             <property name="visible">True</property>
                                             <child>
                                               <object class="GtkButton" id="restore">
-                                                <property name="label">restore</property>
+                                                <property name="label" translatable="yes">Restore</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">True</property>
+                                                <property name="image">imageRestore</property>
                                                 <signal name="clicked" handler="on_restorebackup_clicked"/>
                                               </object>
                                               <packing>
@@ -2889,10 +2895,11 @@ your pigeons and results.</property>
                                 <property name="row_spacing">20</property>
                                 <child>
                                   <object class="GtkButton" id="btnupdate">
-                                    <property name="label">check</property>
+                                    <property name="label" translatable="yes">Check now!</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
+                                    <property name="image">imageCheck</property>
                                     <signal name="clicked" handler="on_btnupdate_clicked"/>
                                   </object>
                                   <packing>
@@ -2995,5 +3002,33 @@ your pigeons and results.</property>
     <property name="upper">999999</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
+  </object>
+  <object class="GtkImage" id="imageCalculate">
+    <property name="visible">True</property>
+    <property name="stock">gtk-execute</property>
+  </object>
+  <object class="GtkImage" id="imageCalculate2">
+    <property name="visible">True</property>
+    <property name="stock">gtk-execute</property>
+  </object>
+  <object class="GtkImage" id="imageSearchDB">
+    <property name="visible">True</property>
+    <property name="stock">gtk-find</property>
+  </object>
+  <object class="GtkImage" id="imageOptimize">
+    <property name="visible">True</property>
+    <property name="stock">gtk-properties</property>
+  </object>
+  <object class="GtkImage" id="imageCheck">
+    <property name="visible">True</property>
+    <property name="stock">gtk-find</property>
+  </object>
+  <object class="GtkImage" id="imageRestore">
+    <property name="visible">True</property>
+    <property name="stock">gtk-undo</property>
+  </object>
+  <object class="GtkImage" id="imageBackup">
+    <property name="visible">True</property>
+    <property name="stock">gtk-redo</property>
   </object>
 </interface>

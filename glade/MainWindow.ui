@@ -1859,7 +1859,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="image">image2</property>
+                <property name="image">imageNoImage</property>
                 <signal name="clicked" handler="on_fcnoimage_clicked"/>
               </object>
               <packing>
@@ -4962,10 +4962,11 @@
                         <property name="layout_style">end</property>
                         <child>
                           <object class="GtkButton" id="allresults">
-                            <property name="label">view-all</property>
+                            <property name="label" translatable="yes">View all</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="image">imageViewAll</property>
                             <signal name="clicked" handler="on_allresults_clicked"/>
                           </object>
                           <packing>
@@ -5561,8 +5562,12 @@
       </object>
     </child>
   </object>
-  <object class="GtkImage" id="image2">
+  <object class="GtkImage" id="imageNoImage">
     <property name="visible">True</property>
     <property name="stock">gtk-clear</property>
+  </object>
+  <object class="GtkImage" id="imageViewAll">
+    <property name="visible">True</property>
+    <property name="stock">gtk-find</property>
   </object>
 </interface>

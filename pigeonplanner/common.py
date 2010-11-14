@@ -34,22 +34,16 @@ from pigeonplanner import const
 
 def create_stock_button(icons):
     """
-    Register stock buttons from custom or stock images.
+    Register stock buttons from custom images.
 
-    @param icons: A list of tuples containing filename or stock,
-                  name and description
+    @param icons: A list of tuples containing filename, name and description
     """
 
     factory = gtk.IconFactory()
     factory.add_default()
-    for image, name, description in icons:
-        if image.startswith('gtk-'):
-            # We need a widget (any widget) here to use render_icon()
-            pixbuf = gtk.Window().render_icon(image, gtk.ICON_SIZE_BUTTON)
-        else:
-            pixbuf = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR,
-                                                               image))
-        iconset = gtk.IconSet(pixbuf)
+    for img, name, description in icons:
+        pb = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR, img))
+        iconset = gtk.IconSet(pb)
         factory.add(name, iconset)
         gtk.stock_add([(name, description, 0, 0, 'pigeonplanner')])
 
