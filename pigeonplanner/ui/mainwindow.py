@@ -315,6 +315,7 @@ class MainWindow(builder.GtkBuilder):
         self.entryRangeTo.set_text('')
         self.entryRangeYear.set_text('')
         self.cbRangeSex.set_active(2)
+        self.entryRangeFrom.grab_focus()
         self.rangedialog.show()
 
         logger.info("Start: Adding a range of pigeons")
