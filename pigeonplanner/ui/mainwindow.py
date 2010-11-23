@@ -403,8 +403,6 @@ class MainWindow(builder.GtkBuilder):
                     # And medication
                     self.database.delete_from_table(self.database.MED, pindex, 2)
 
-                self.parser.get_pigeons()
-
             if not self.chkResults.get_active():
                 logger.info("Remove: Removing the results")
                 for pindex in pigeons:
@@ -423,6 +421,7 @@ class MainWindow(builder.GtkBuilder):
             if len(self.liststore) > 0:
                 self.selection.select_path(paths[0])
 
+            self.parser.get_pigeons()
             self.count_active_pigeons()
 
             common.add_statusbar_message(self.statusbar, statusbarmsg)
@@ -1925,40 +1924,43 @@ class MainWindow(builder.GtkBuilder):
         pindexTuple = (pindex,)
         pindexTuple += infoTuple
 
+        newAdd = True
         if self.database.has_pigeon(pindex):
             if self.parser.pigeons[pindex].show == 1:
-                if not dialogs.MessageDialog(const.WARNING,
-                                             messages.MSG_OVERWRITE_PIGEON,
-                                             self.mainwindow):
+                d = dialogs.MessageDialog(const.WARNING,
+                                          messages.MSG_OVERWRITE_PIGEON,
+                                          self.mainwindow)
+                if not d.response == gtk.RESPONSE_YES:
                     return
             else:
-                if not dialogs.MessageDialog(const.WARNING,
-                                             messages.MSG_SHOW_PIGEON,
-                                             self.mainwindow):
-                    return
-                else:
+                d = dialogs.MessageDialog(const.WARNING,
+                                          messages.MSG_SHOW_PIGEON,
+                                          self.mainwindow)
+                if d.response == gtk.RESPONSE_YES:
                     self.database.update_table(self.database.PIGEONS,
                                                (1, pindex), 5, 1)
+                    newAdd = False
+                else:
                     return
 
-        self.database.insert_into_table(self.database.PIGEONS, pindexTuple)
+        if newAdd:
+            self.database.insert_into_table(self.database.PIGEONS, pindexTuple)
 
-        if infoTuple[9]:
-            common.image_to_thumb(infoTuple[9])
+            if infoTuple[9]:
+                common.image_to_thumb(infoTuple[9])
 
-        status = self.cbStatus.get_active()
-
-        if status == const.DEAD:
-            self.database.insert_into_table(self.database.DEAD,
+            status = self.cbStatus.get_active()
+            if status == const.DEAD:
+                self.database.insert_into_table(self.database.DEAD,
                                         (pindex,) + self.get_status_info()[0])
-        elif status == const.SOLD:
-            self.database.insert_into_table(self.database.SOLD,
+            elif status == const.SOLD:
+                self.database.insert_into_table(self.database.SOLD,
                                         (pindex,) + self.get_status_info()[1])
-        elif status == const.LOST:
-            self.database.insert_into_table(self.database.LOST,
+            elif status == const.LOST:
+                self.database.insert_into_table(self.database.LOST,
                                         (pindex,) + self.get_status_info()[2])
 
-        self.update_data(infoTuple)
+            self.update_data(infoTuple)
 
         self.changedRowIter = self.liststore.insert(0, [pindex,
                                                      infoTuple[0],
