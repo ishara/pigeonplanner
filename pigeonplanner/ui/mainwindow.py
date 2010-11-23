@@ -1972,7 +1972,7 @@ class MainWindow(builder.GtkBuilder):
                                                      infoTuple[7]])
 
         common.add_statusbar_message(self.statusbar,
-                _("Pigeon %s/%s has been added" %(infoTuple[0], infoTuple[1])))
+                _("Pigeon %s/%s has been added") %(infoTuple[0], infoTuple[1]))
 
     def update_data(self, infoTuple):
         """
