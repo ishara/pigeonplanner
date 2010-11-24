@@ -747,10 +747,14 @@ class MainWindow(builder.GtkBuilder):
         pindex = model[path][0]
 
         if event.button == 3:
-            menus.popup_menu(event, [(gtk.STOCK_JUMP_TO,
-                                      self.search_pigeon, (pindex,))])
+            menus.popup_menu(event, [
+                                     (gtk.STOCK_INFO,
+                                      self.show_pigeon_details, (pindex,)),
+                                     (gtk.STOCK_JUMP_TO,
+                                      self.search_pigeon, (pindex,)),
+                                    ])
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            self.search_pigeon(None, pindex)
+            self.show_pigeon_details(None, pindex)
 
     # Result callbacks
     def on_tvResults_press(self, widget, event):
@@ -1167,6 +1171,45 @@ class MainWindow(builder.GtkBuilder):
     def on_day_double_clicked(self, widget, data=None):
         self.hide_popup()
 
+    # Details dialog
+    def show_pigeon_details(self, widget, pindex):
+        band, year = common.get_band_from_pindex(pindex)
+        self.detailsdialog.set_title(_("Details of %s/%s") %(band, year))
+
+        self.entryRingDet.set_text(band)
+        self.entryYearDet.set_text(year)
+        self.entrySexDet.set_text(self.sexDic[self.parser.pigeons[pindex].sex])
+        self.entryStrainDet.set_text(self.parser.pigeons[pindex].strain)
+        self.entryLoftDet.set_text(self.parser.pigeons[pindex].loft)
+        self.entryColourDet.set_text(self.parser.pigeons[pindex].colour)
+        self.entryNameDet.set_text(self.parser.pigeons[pindex].name)
+        self.entryExtraDet1.set_text(self.parser.pigeons[pindex].extra1)
+        self.entryExtraDet2.set_text(self.parser.pigeons[pindex].extra2)
+        self.entryExtraDet3.set_text(self.parser.pigeons[pindex].extra3)
+        self.entryExtraDet4.set_text(self.parser.pigeons[pindex].extra4)
+        self.entryExtraDet5.set_text(self.parser.pigeons[pindex].extra5)
+        self.entryExtraDet6.set_text(self.parser.pigeons[pindex].extra6)
+        self.entrySireDet.set_text(self.parser.pigeons[pindex].sire)
+        self.entryDamDet.set_text(self.parser.pigeons[pindex].dam)
+        self.entryYearSireDet.set_text(self.parser.pigeons[pindex].yearsire)
+        self.entryYearDamDet.set_text(self.parser.pigeons[pindex].yeardam)
+
+        image = self.parser.pigeons[pindex].image
+        if image:
+            pixbuf = self.get_pigeon_thumbnail(image)
+        else:
+            pixbuf = self.logoPixbuf
+        self.imagePigeonDet.set_from_pixbuf(pixbuf)
+
+        status = self.parser.pigeons[pindex].active
+        self.imageStatusDet.set_from_file(os.path.join(const.IMAGEDIR,
+                                '%s.png' %self.pigeonStatus[status].lower()))
+
+        self.detailsdialog.show()
+
+    def on_closedetailsdialog_clicked(self, widget):
+        self.detailsdialog.hide()
+
     # Statusdialog
     def on_btnStatus_clicked(self, widget):
         try:
@@ -1555,23 +1598,7 @@ class MainWindow(builder.GtkBuilder):
         self.entryYearDam.set_text(yeardam)
 
         if image:
-            def get_pigeon_thumbnail():
-                try:
-                    thumb = common.get_thumb_path(image)
-                    pixbuf = gtk.gdk.pixbuf_new_from_file(thumb)
-                    self.labelImgPath.set_text(image)
-                except gobject.GError:
-                    # Something went wrong with the thumbnail filenames.
-                    # Delete all and rebuild.
-                    logger.warning("Thumb not found, rebuild complete list.")
-                    for img_thumb in os.listdir(const.THUMBDIR):
-                        os.remove(os.path.join(const.THUMBDIR, img_thumb))
-                    self.build_thumbnails()
-                    pixbuf = get_pigeon_thumbnail()
-
-                return pixbuf
-
-            pixbuf = get_pigeon_thumbnail()
+            pixbuf = self.get_pigeon_thumbnail(image)
         else:
             pixbuf = self.logoPixbuf
             self.labelImgPath.set_text('')
@@ -2245,4 +2272,20 @@ class MainWindow(builder.GtkBuilder):
             img_path = self.parser.pigeons[pigeon].image
             if img_path != '':
                 common.image_to_thumb(img_path)
+
+    def get_pigeon_thumbnail(self, image):
+        try:
+            thumb = common.get_thumb_path(image)
+            pixbuf = gtk.gdk.pixbuf_new_from_file(thumb)
+            self.labelImgPath.set_text(image)
+        except gobject.GError:
+            # Something went wrong with the thumbnail filenames.
+            # Delete all and rebuild.
+            logger.warning("Thumb not found, rebuild complete list.")
+            for img_thumb in os.listdir(const.THUMBDIR):
+                os.remove(os.path.join(const.THUMBDIR, img_thumb))
+            self.build_thumbnails()
+            pixbuf = get_pigeon_thumbnail()
+
+        return pixbuf
 
