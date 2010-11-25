@@ -1173,6 +1173,9 @@ class MainWindow(builder.GtkBuilder):
 
     # Details dialog
     def show_pigeon_details(self, widget, pindex):
+        if not pindex in self.parser.pigeons:
+            return
+
         band, year = common.get_band_from_pindex(pindex)
         self.detailsdialog.set_title(_("Details of %s/%s") %(band, year))
 

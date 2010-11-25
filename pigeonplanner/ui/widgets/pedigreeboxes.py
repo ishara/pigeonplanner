@@ -119,36 +119,49 @@ class PedigreeBox_cairo(gtk.DrawingArea):
             menus.popup_menu(event, entries)
 
     def pressed(self, widget, event):
-        if self.textlayout.get_text():
-            self.hightlight = True
-            self.queue_draw()
-            self.grab_focus()
+        if self.textlayout.get_text() == '':
+            return
 
-            if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-                if self.main.search_pigeon(None, self.pindex):
-                    # Pigeon is found in the list
-                    return
+        self.hightlight = True
+        self.queue_draw()
+        self.grab_focus()
 
-                if self.pindex in self.main.parser.pigeons:
-                    # Pigeon exists, so it isn't shown in the list
-                    d = dialogs.MessageDialog(const.WARNING,
-                                              messages.MSG_SHOW_PIGEON,
-                                              self.main.mainwindow)
-                    if d.response == gtk.RESPONSE_YES:
-                        self.main.database.update_table(self.main.database.PIGEONS,
-                                                        (1, self.pindex), 5, 1)
-                        self.main.parser.get_pigeons()
-                        self.main.fill_treeview()
-                else:
-                    # Pigeon doesn't exist in the database
-                    d = dialogs.MessageDialog(const.QUESTION,
-                                              messages.MSG_ADD_PIGEON,
-                                              self.main.mainwindow)
-                    if d.response == gtk.RESPONSE_YES:
-                        self.main.menuadd_activate(None)
-                        self.main.entryRing1.set_text(self.ring)
-                        self.main.entryYear1.set_text(self.year)
-                        self.main.cbsex.set_active(int(self.sex))
+        if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            self.select_pigeon()
+        elif event.button == 3:
+            menus.popup_menu(event, [
+                                     (gtk.STOCK_INFO,
+                                      self.main.show_pigeon_details,
+                                      (self.pindex,)),
+                                     (gtk.STOCK_JUMP_TO,
+                                      self.select_pigeon, None),
+                                    ])
+
+    def select_pigeon(self, widget=None):
+        if self.main.search_pigeon(None, self.pindex):
+            # Pigeon is found in the list
+            return
+
+        if self.pindex in self.main.parser.pigeons:
+            # Pigeon exists, so it isn't shown in the list
+            d = dialogs.MessageDialog(const.WARNING,
+                                      messages.MSG_SHOW_PIGEON,
+                                      self.main.mainwindow)
+            if d.response == gtk.RESPONSE_YES:
+                self.main.database.update_table(self.main.database.PIGEONS,
+                                                (1, self.pindex), 5, 1)
+                self.main.parser.get_pigeons()
+                self.main.fill_treeview()
+        else:
+            # Pigeon doesn't exist in the database
+            d = dialogs.MessageDialog(const.QUESTION,
+                                      messages.MSG_ADD_PIGEON,
+                                      self.main.mainwindow)
+            if d.response == gtk.RESPONSE_YES:
+                self.main.menuadd_activate(None)
+                self.main.entryRing1.set_text(self.ring)
+                self.main.entryYear1.set_text(self.year)
+                self.main.cbsex.set_active(int(self.sex))
 
     def realize(self, widget):
         if self.detailed:
