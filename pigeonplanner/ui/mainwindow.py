@@ -2288,7 +2288,7 @@ class MainWindow(builder.GtkBuilder):
             for img_thumb in os.listdir(const.THUMBDIR):
                 os.remove(os.path.join(const.THUMBDIR, img_thumb))
             self.build_thumbnails()
-            pixbuf = get_pigeon_thumbnail()
+            pixbuf = self.get_pigeon_thumbnail(image)
 
         return pixbuf
 
