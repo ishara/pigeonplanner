@@ -106,14 +106,20 @@ class PedigreeBox_cairo(gtk.DrawingArea):
             except KeyError:
                 show = 0
 
-            entries = [(gtk.STOCK_EDIT, editbox.run,
-                                        (self.ring, self.year, self.details)
-                )]
+            entries = [
+                       (gtk.STOCK_EDIT, editbox.run,
+                        (self.ring, self.year, self.details))
+                    ]
 
-            if self.ring and self.year and show == 0:
-                entries.append((gtk.STOCK_CLEAR, editbox.clear_box, None))
-                entries.append((gtk.STOCK_REMOVE,
-                                editbox.remove_pigeon, (self.pindex,)))
+            if self.ring and self.year:
+                if show == 0:
+                    entries.append((gtk.STOCK_CLEAR, editbox.clear_box, None))
+                    entries.append((gtk.STOCK_REMOVE,
+                                    editbox.remove_pigeon, (self.pindex,)))
+                elif show == 1:
+                    entries.append((gtk.STOCK_INFO,
+                                    self.main.show_pigeon_details,
+                                    (self.pindex,)))
 
             menus.popup_menu(event, entries)
 
