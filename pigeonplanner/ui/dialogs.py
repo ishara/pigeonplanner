@@ -240,7 +240,7 @@ class EditPedigreeDialog(gtk.Dialog):
         b.set_property('can-default', True)
         b.set_property('has-default', True)
 
-    def run(self, ring, year, details):
+    def run(self, widget, ring, year, details):
         if ring and year:
             self.entryRing.set_text(ring)
             self.entryYear.set_text(year)

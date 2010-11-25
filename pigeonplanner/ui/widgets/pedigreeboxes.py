@@ -93,28 +93,27 @@ class PedigreeBox_cairo(gtk.DrawingArea):
                 self.text = tform %format_text(_("<edit>"))
 
     def detail_pressed(self, widget, event):
-        self.editbox = dialogs.EditPedigreeDialog(
+        editbox = dialogs.EditPedigreeDialog(
                                     self.get_toplevel(), self.main,
                                     self.pindex, self.sex, self.kinfo,
                                     self.draw)
 
         if event.button == 1:
-            self.editbox.run(self.ring, self.year, self.details)
+            editbox.run(None, self.ring, self.year, self.details)
         elif event.button == 3:
             try:
                 show = self.main.parser.pigeons[self.pindex].show
             except KeyError:
                 show = 0
 
-            entries = [(gtk.STOCK_EDIT, self.editbox.run,
+            entries = [(gtk.STOCK_EDIT, editbox.run,
                                         (self.ring, self.year, self.details)
                 )]
 
             if self.ring and self.year and show == 0:
-                entries.append((gtk.STOCK_CLEAR,
-                                self.editbox.clear_box, None))
+                entries.append((gtk.STOCK_CLEAR, editbox.clear_box, None))
                 entries.append((gtk.STOCK_REMOVE,
-                                self.editbox.remove_pigeon, (self.pindex,)))
+                                editbox.remove_pigeon, (self.pindex,)))
 
             menus.popup_menu(event, entries)
 
@@ -345,28 +344,27 @@ class PedigreeBox(gtk.DrawingArea):
         self.queue_draw()
 
     def detail_pressed(self, widget, event):
-        self.editbox = dialogs.EditPedigreeDialog(
+        editbox = dialogs.EditPedigreeDialog(
                                     self.get_toplevel(), self.main,
                                     self.pindex, self.sex, self.kinfo,
                                     self.draw)
 
         if event.button == 1:
-            self.editbox.run(self.ring, self.year, self.details)
+            editbox.run(self.ring, self.year, self.details)
         elif event.button == 3:
             try:
                 show = self.main.parser.pigeons[self.pindex].show
             except KeyError:
                 show = 0
 
-            entries = [(gtk.STOCK_EDIT, self.editbox.run,
+            entries = [(gtk.STOCK_EDIT, editbox.run,
                                         (self.ring, self.year, self.details)
                 )]
 
             if self.ring and self.year and show == 0:
-                entries.append((gtk.STOCK_CLEAR,
-                                self.editbox.clear_box, None))
+                entries.append((gtk.STOCK_CLEAR, editbox.clear_box, None))
                 entries.append((gtk.STOCK_REMOVE,
-                                self.editbox.remove_pigeon, (self.pindex,)))
+                                editbox.remove_pigeon, (self.pindex,)))
 
             menus.popup_menu(event, entries)
 
