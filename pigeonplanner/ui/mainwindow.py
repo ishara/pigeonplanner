@@ -1299,6 +1299,26 @@ class MainWindow(builder.GtkBuilder):
         self.vbox.pack_start(self.toolbar, False, False)
         self.vbox.reorder_child(self.toolbar, 1)
 
+        if const.OSX:
+            try:
+                import igemacintegration as igemi
+            except ImportError:
+                logger.warning("ige-mac-integration not found")
+            else:
+                # Move the menu bar from the window to the Mac menu bar
+                self.menubar.hide()
+                igemi.ige_mac_menu_set_menu_bar(self.menubar)
+
+                # Reparent some items to the "Application" menu
+                for widget in ('/MenuBar/HelpMenu/About',
+                               '/MenuBar/EditMenu/Preferences'):
+                    item = uimanager.get_widget(widget)
+                    group = igemi.ige_mac_menu_add_app_menu_group()
+                    igemi.ige_mac_menu_add_app_menu_item(group, item, None)
+
+                quit_item = uimanager.get_widget('/MenuBar/FileMenu/Quit')
+                igemi.ige_mac_menu_set_quit_menu_item(quit_item)
+
     def create_action_group(self):
         """
         Create the action group for our menu and toolbar

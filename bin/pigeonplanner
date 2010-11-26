@@ -118,16 +118,26 @@ class PigeonPlanner(object):
             self.setup_windows_gettext(const.DOMAIN, const.LANGDIR, "intl.dll")
         else:
             s = locale.normalize(language).split('.')[0]+'.UTF-8'
+
+            if const.OSX and 'LANG' not in os.environ:
+                import subprocess
+                loc_cmd = ('defaults', 'read', 'NSGlobalDomain', 'AppleLocale')
+                process = subprocess.Popen(loc_cmd, stdout=subprocess.PIPE)
+                output, error_output = process.communicate()
+                s = output.strip() + '.UTF-8'
+                os.environ['LANG'] = s
+
             try:
                 locale.setlocale(locale.LC_ALL, s)
             except locale.Error, e:
                 try:
                     locale.setlocale(locale.LC_ALL, locale.normalize(language))
                 except locale.Error, e:
-                   self. locale_error = "Force lang failed: '%s' \
+                    self.locale_error = "Force lang failed: '%s' \
                                          (%s and %s tested)" \
                                          %(e, s, locale.normalize(language))
-            locale.bindtextdomain(const.DOMAIN, const.LANGDIR)
+            if not const.OSX:
+                locale.bindtextdomain(const.DOMAIN, const.LANGDIR)
 
         gettext.bindtextdomain(const.DOMAIN, const.LANGDIR)
         gettext.textdomain(const.DOMAIN)
@@ -182,10 +192,12 @@ class PigeonPlanner(object):
         self.logger.debug("PyGTK version: %s" % ".".join(str(n) for n in
                                                          gtk.pygtk_version))
         if self.locale_error:
-            self.logger.debug("Locale error: %s" % self.locale_error)
+            self.logger.error("Locale: %s" % self.locale_error)
         else:
             if WIN32:
                 loc = libi18n._getlang()
+            elif const.OSX:
+                loc = os.getenv('LANG')
             else:
                 loc = locale.getlocale()[0]
             self.logger.debug("Locale: %s" % loc)
