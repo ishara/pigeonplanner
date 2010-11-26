@@ -170,5 +170,5 @@ def popup_menu(event, entries):
             item.connect("activate", callback)
         item.show()
         menu.append(item)
-    menu.popup(None, None, None, 0, event.time)
+    menu.popup(None, None, None, event.button, event.time)
 

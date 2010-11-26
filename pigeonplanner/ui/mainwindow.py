@@ -609,10 +609,11 @@ class MainWindow(builder.GtkBuilder):
         return True
 
     # Main treeview callbacks
-    def on_treeview_press(self, widget, event):
-        path, focus = self.treeview.get_cursor()
+    def on_treeview_press(self, treeview, event):
+        pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if pthinfo is None: return
 
-        if event.button == 3 and path:
+        if event.button == 3:
             entries = [
                 (gtk.STOCK_EDIT, self.menuedit_activate, None),
                 (gtk.STOCK_REMOVE, self.menuremove_activate, None),
@@ -741,10 +742,10 @@ class MainWindow(builder.GtkBuilder):
         self.relative_treeview_pressed(widget, event)
 
     def relative_treeview_pressed(self, treeview, event):
-        path, focus = treeview.get_cursor()
-        if not path: return
-        model = treeview.get_model()
-        pindex = model[path][0]
+        pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if pthinfo is None: return
+        path, col, cellx, celly = pthinfo
+        pindex = treeview.get_model()[path][0]
 
         if event.button == 3:
             menus.popup_menu(event, [
@@ -757,10 +758,11 @@ class MainWindow(builder.GtkBuilder):
             self.show_pigeon_details(None, pindex)
 
     # Result callbacks
-    def on_tvResults_press(self, widget, event):
-        path, focus = self.tvResults.get_cursor()
+    def on_tvResults_press(self, treeview, event):
+        pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if pthinfo is None: return
 
-        if event.button == 3 and path:
+        if event.button == 3:
             entries = [
                 (gtk.STOCK_EDIT, self.on_editresult_clicked, None),
                 (gtk.STOCK_REMOVE, self.on_removeresult_clicked, None)]
@@ -931,10 +933,11 @@ class MainWindow(builder.GtkBuilder):
         self.entryComment.set_text('')
 
     # Medication callbacks
-    def on_tvMedication_press(self, widget, event):
-        path, focus = self.tvMedication.get_cursor()
+    def on_tvMedication_press(self, treeview, event):
+        pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if pthinfo is None: return
 
-        if event.button == 3 and path:
+        if event.button == 3:
             entries = [
                 (gtk.STOCK_EDIT, self.on_editmedication_clicked, None),
                 (gtk.STOCK_REMOVE, self.on_removemedication_clicked, None)]
