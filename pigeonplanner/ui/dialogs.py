@@ -338,9 +338,9 @@ class EditPedigreeDialog(gtk.Dialog):
 
     def redraw_pedigree(self):
         self.main.parser.get_pigeons()
-        tree_iter = self.main.selection.get_selected()[1]
-        self.main.selection.unselect_iter(tree_iter)
-        self.main.selection.select_iter(tree_iter)
+        model, paths = self.main.selection.get_selected_rows()
+        self.main.selection.unselect_path(paths[0])
+        self.main.selection.select_path(paths[0])
 
         mainpindex = self.main.get_main_ring()[0]
         self.draw.draw_pedigree(self.main.parser.pigeons,

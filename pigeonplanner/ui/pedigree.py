@@ -37,6 +37,7 @@ from pigeonplanner.ui.widgets import pedigreeboxes
 if const.OSX:
     cairo_available = False
 
+
 class DrawPedigree(object):
     def __init__(self, main=None, pedigree=None):
         self.main = main

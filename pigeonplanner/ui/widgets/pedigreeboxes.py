@@ -36,61 +36,9 @@ def format_text(text):
     return glib.markup_escape_text(text)
 
 
-class PedigreeBox_cairo(gtk.DrawingArea):
-    def __init__(self, pindex, ring, year, sex, details, kinfo,
-                 detailed, main, draw):
-        gtk.DrawingArea.__init__(self)
-
-        self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
-        self.hightlight = False
-        self.connect("expose_event", self.expose)
-        self.connect("realize", self.realize)
-        self.editable = False
-        if detailed:
-            if kinfo:
-                self.kindex = kinfo[0]
-                self.connect("button-press-event", self.detail_pressed)
-                self.editable = True
-        else:
-            self.set_property("can-focus", True)
-            self.connect("button-press-event", self.pressed)
-            self.connect("focus-out-event", self.focus_out)
-
-        self.pindex = pindex
-        self.ring = ring
-        self.year = year
-        self.sex = sex
-        self.details = details
-        self.kinfo = kinfo
-        self.detailed = detailed
-        self.main = main
-        self.draw = draw
-
-        self.text = ''
-        self.set_text()
-
-    def focus_out(self, widget, event):
-        self.hightlight = False
-        self.queue_draw()
-
-    def set_text(self):
-        if self.ring != '':
-            self.text = self.ring + ' / ' + self.year[2:]
-
-            if self.sex == '0':
-                self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
-                self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
-            else:
-                self.bgcolor = (255/256.0, 205/256.0, 241/256.0)
-                self.bordercolor = (135/256.0, 32/256.0, 106/256.0)
-        else:
-            self.set_property("can-focus", False)
-            self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
-            self.bordercolor = (0,0,0)
-
-            if self.editable:
-                tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
-                self.text = tform %format_text(_("<edit>"))
+class BaseBox(object):
+    def __init__(self):
+        pass
 
     def detail_pressed(self, widget, event):
         editbox = dialogs.EditPedigreeDialog(
@@ -167,6 +115,64 @@ class PedigreeBox_cairo(gtk.DrawingArea):
                 self.main.entryRing1.set_text(self.ring)
                 self.main.entryYear1.set_text(self.year)
                 self.main.cbsex.set_active(int(self.sex))
+
+
+class PedigreeBox_cairo(BaseBox, gtk.DrawingArea):
+    def __init__(self, pindex, ring, year, sex, details, kinfo,
+                 detailed, main, draw):
+        BaseBox.__init__(self)
+        gtk.DrawingArea.__init__(self)
+
+        self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
+        self.hightlight = False
+        self.connect("expose_event", self.expose)
+        self.connect("realize", self.realize)
+        self.editable = False
+        if detailed:
+            if kinfo:
+                self.kindex = kinfo[0]
+                self.connect("button-press-event", self.detail_pressed)
+                self.editable = True
+        else:
+            self.set_property("can-focus", True)
+            self.connect("button-press-event", self.pressed)
+            self.connect("focus-out-event", self.focus_out)
+
+        self.pindex = pindex
+        self.ring = ring
+        self.year = year
+        self.sex = sex
+        self.details = details
+        self.kinfo = kinfo
+        self.detailed = detailed
+        self.main = main
+        self.draw = draw
+
+        self.text = ''
+        self.set_text()
+
+    def focus_out(self, widget, event):
+        self.hightlight = False
+        self.queue_draw()
+
+    def set_text(self):
+        if self.ring != '':
+            self.text = self.ring + ' / ' + self.year[2:]
+
+            if self.sex == '0':
+                self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
+                self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
+            else:
+                self.bgcolor = (255/256.0, 205/256.0, 241/256.0)
+                self.bordercolor = (135/256.0, 32/256.0, 106/256.0)
+        else:
+            self.set_property("can-focus", False)
+            self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
+            self.bordercolor = (0,0,0)
+
+            if self.editable:
+                tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
+                self.text = tform %format_text(_("<edit>"))
 
     def realize(self, widget):
         if self.detailed:
@@ -299,10 +305,12 @@ class ExtraBox_cairo(gtk.DrawingArea):
         self.context.stroke()
 
 
-class PedigreeBox(gtk.DrawingArea):
+class PedigreeBox(BaseBox, gtk.DrawingArea):
     def __init__(self, pindex, ring, year, sex, details, kinfo,
                  detailed, main, draw):
+        BaseBox.__init__(self)
         gtk.DrawingArea.__init__(self)
+
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
         self.connect("expose_event", self.expose)
         self.connect("realize", self.realize)
@@ -329,11 +337,15 @@ class PedigreeBox(gtk.DrawingArea):
         self.draw = draw
 
         text = ''
-
         if ring != '':
             text = ring + ' / ' + year[2:]
+        else:
+            if self.editable:
+                tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
+                text = tform %format_text(_("<edit>"))
 
-        self.textlayout = self.create_pango_layout(text)
+        self.textlayout = self.create_pango_layout('')
+        self.textlayout.set_markup(text)
         s = self.textlayout.get_pixel_size()
         xmin = s[0] + 12
         ymin = s[1] + 11
@@ -344,65 +356,12 @@ class PedigreeBox(gtk.DrawingArea):
         self.set_size_request(max(xmin, 150), max(ymin, y))
 
     def focus_in(self, widget, event):
+        self.border_gc.line_width = 3
         self.queue_draw()
 
     def focus_out(self, widget, event):
+        self.border_gc.line_width = 1
         self.queue_draw()
-
-    def detail_pressed(self, widget, event):
-        editbox = dialogs.EditPedigreeDialog(
-                                    self.get_toplevel(), self.main,
-                                    self.pindex, self.sex, self.kinfo,
-                                    self.draw)
-
-        if event.button == 1:
-            editbox.run(self.ring, self.year, self.details)
-        elif event.button == 3:
-            try:
-                show = self.main.parser.pigeons[self.pindex].show
-            except KeyError:
-                show = 0
-
-            entries = [(gtk.STOCK_EDIT, editbox.run,
-                                        (self.ring, self.year, self.details)
-                )]
-
-            if self.ring and self.year and show == 0:
-                entries.append((gtk.STOCK_CLEAR, editbox.clear_box, None))
-                entries.append((gtk.STOCK_REMOVE,
-                                editbox.remove_pigeon, (self.pindex,)))
-
-            menus.popup_menu(event, entries)
-
-    def pressed(self, widget, event):
-        if self.textlayout.get_text():
-            self.hightlight = True
-            self.queue_draw()
-            self.grab_focus()
-
-            if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-                if self.main.search_pigeon(None, self.pindex):
-                    return
-
-                if self.pindex in self.main.parser.pigeons:
-                    d = dialogs.MessageDialog(const.WARNING,
-                                              messages.MSG_SHOW_PIGEON,
-                                              self.main.mainwindow)
-                    if d.response == gtk.RESPONSE_YES:
-                        self.main.database.update_table(self.main.database.PIGEONS,
-                                                        (1, self.pindex), 5, 1)
-                        self.main.parser.get_pigeons()
-                        self.main.fill_treeview()
-                        return
-                else:
-                    d = dialogs.MessageDialog(const.QUESTION,
-                                              messages.MSG_ADD_PIGEON,
-                                              self.main.mainwindow)
-                    if d.response == gtk.RESPONSE_YES:
-                        self.main.menuadd_activate(None)
-                        self.main.entryRing1.set_text(self.ring)
-                        self.main.entryYear1.set_text(self.year)
-                        self.main.cbsex.set_active(int(self.sex))
     
     def realize(self, widget):
         self.bg_gc = self.window.new_gc()
@@ -443,7 +402,7 @@ class PedigreeBox(gtk.DrawingArea):
         self.window.draw_rectangle(self.bg_gc, True, 1, 1,
                                    alloc.width-5, alloc.height-5)
 
-        if self.pindex:
+        if self.pindex or self.editable:
             self.window.draw_layout(self.text_gc, 5, 4, self.textlayout)
 
         if self.border_gc.line_width > 1:
