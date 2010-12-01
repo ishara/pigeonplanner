@@ -177,8 +177,7 @@ def image_to_thumb(img_path):
     """
 
     pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img_path, 200, 200)
-    pixbuf.save(os.path.join(const.THUMBDIR,
-                         "%s.png") %get_image_name(img_path), 'png')
+    pixbuf.save(get_thumb_path(img_path), 'png')
 
 def get_thumb_path(image):
     """
@@ -187,7 +186,11 @@ def get_thumb_path(image):
     @param image: the full path to the image
     """
 
-    return os.path.join(const.THUMBDIR, "%s.png") %get_image_name(image)
+    path = os.path.join(const.THUMBDIR, "%s.png") %get_image_name(image)
+
+    if not const.ENCODING == 'utf-8':
+        return encode_string(path)
+    return path
 
 def get_image_name(name):
     """
