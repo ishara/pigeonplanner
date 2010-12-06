@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION CZ\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-29 10:53+0100\n"
-"PO-Revision-Date: 2010-11-05 16:49+0000\n"
+"POT-Creation-Date: 2010-12-06 20:28+0100\n"
+"PO-Revision-Date: 2010-11-07 17:57+0000\n"
 "Last-Translator: Timo <timovwb@gmail.com>\n"
 "Language-Team: Jindra <sidloj@volny.cz>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-06 04:55+0000\n"
+"X-Launchpad-Export-Date: 2010-11-08 05:15+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-SearchPath-1: ..\n"
@@ -137,6 +137,7 @@ msgstr "Odstranit vybraný výsledek"
 
 #: ../pigeonplanner/messages.py:75 ../pigeonplanner/messages.py:129
 #: ../pigeonplanner/ui/dialogs.py:466 tmp/MainWindow.glade.h:10
+#: tmp/MainWindow.ui.h:10
 msgid "Are you sure?"
 msgstr "Jseš si jist?"
 
@@ -300,8 +301,9 @@ msgstr "E-mail byl úspěšně odeslán!"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:66
 #: ../pigeonplanner/ui/optionsdialog.py:56 ../bin/pigeonplanner:220
-#: tmp/MainWindow.glade.h:41 tmp/OptionsDialog.glade.h:34
-#: tmp/PedigreeWindow.glade.h:2
+#: tmp/MainWindow.glade.h:41 tmp/MainWindow.ui.h:39
+#: tmp/OptionsDialog.glade.h:34 tmp/PedigreeWindow.glade.h:2
+#: tmp/PedigreeWindow.ui.h:2
 msgid "Pedigree"
 msgstr "Rodokmen"
 
@@ -370,14 +372,17 @@ msgid "Create backup"
 msgstr "Vytvořit zálohu"
 
 #: ../pigeonplanner/ui/dialogs.py:119 tmp/ToolsWindow.glade.h:12
+#: tmp/ToolsWindow.ui.h:15
 msgid "Choose a directory where to save the backup"
 msgstr "Vyber si adresář kam uložit zálohu"
 
 #: ../pigeonplanner/ui/dialogs.py:121 tmp/ToolsWindow.glade.h:40
+#: tmp/ToolsWindow.ui.h:44
 msgid "Select a directory"
 msgstr "Vyber adresář"
 
 #: ../pigeonplanner/ui/dialogs.py:129 ../pigeonplanner/ui/toolswindow.py:116
+#: tmp/ToolsWindow.ui.h:10
 msgid "Backup"
 msgstr "Záloha"
 
@@ -386,18 +391,21 @@ msgid "Restore backup"
 msgstr "Obnovit zálohu"
 
 #: ../pigeonplanner/ui/dialogs.py:139 tmp/ToolsWindow.glade.h:11
+#: tmp/ToolsWindow.ui.h:14
 msgid "Choose a Pigeon Planner backup file to restore"
 msgstr "Vyber si záložní soubor pro obnovu Pigeon Planner"
 
 #: ../pigeonplanner/ui/dialogs.py:142 tmp/ToolsWindow.glade.h:48
+#: tmp/ToolsWindow.ui.h:51
 msgid "Warning! This will overwrite the existing database!"
 msgstr "Upozornění! Tím se přepíše stávající databáze!"
 
 #: ../pigeonplanner/ui/dialogs.py:145 tmp/ToolsWindow.glade.h:41
+#: tmp/ToolsWindow.ui.h:45
 msgid "Select a valid backup file"
 msgstr "Vyber platný soubor zálohy"
 
-#: ../pigeonplanner/ui/dialogs.py:154
+#: ../pigeonplanner/ui/dialogs.py:154 tmp/ToolsWindow.ui.h:41
 msgid "Restore"
 msgstr "Obnovit"
 
@@ -419,13 +427,12 @@ msgid "Removing the selected medication entry"
 msgstr "Smazat vybraný lék"
 
 #: ../pigeonplanner/ui/dialogs.py:462
-#, fuzzy
 msgid "Remove this entry for all pigeons?"
-msgstr "Vyjmout vybraného holuba"
+msgstr ""
 
 #: ../pigeonplanner/ui/resultwindow.py:77
 #: ../pigeonplanner/ui/optionsdialog.py:57 tmp/MainWindow.glade.h:47
-#: tmp/OptionsDialog.glade.h:37
+#: tmp/MainWindow.ui.h:45 tmp/OptionsDialog.glade.h:37
 msgid "Results"
 msgstr "Výsledek"
 
@@ -472,18 +479,20 @@ msgid "Year of race"
 msgstr "Ročník závodu"
 
 #: ../pigeonplanner/ui/resultwindow.py:205 ../pigeonplanner/printing.py:447
-#: tmp/MainWindow.glade.h:44 tmp/ResultWindow.glade.h:8
+#: tmp/MainWindow.glade.h:44 tmp/MainWindow.ui.h:42 tmp/ResultWindow.glade.h:8
 msgid "Racepoint"
 msgstr "Vypouštěcí místo"
 
 #: ../pigeonplanner/ui/resultwindow.py:209 ../pigeonplanner/printing.py:451
-#: tmp/MainWindow.glade.h:51 tmp/OptionsDialog.glade.h:38
+#: tmp/MainWindow.glade.h:51 tmp/MainWindow.ui.h:49
+#: tmp/OptionsDialog.glade.h:38 tmp/OptionsDialog.ui.h:36
 #: tmp/ResultWindow.glade.h:9
 msgid "Sector"
 msgstr "Odvětví"
 
 #: ../pigeonplanner/ui/resultwindow.py:213 tmp/MainWindow.glade.h:18
-#: tmp/OptionsDialog.glade.h:18 tmp/ResultWindow.glade.h:3
+#: tmp/OptionsDialog.glade.h:18 tmp/OptionsDialog.ui.h:18
+#: tmp/ResultWindow.glade.h:3
 msgid "Coefficient"
 msgstr "Koeficient"
 
@@ -576,6 +585,7 @@ msgid "Velocity calculator"
 msgstr "Kalkulačka rychlosti"
 
 #: ../pigeonplanner/ui/toolswindow.py:114 tmp/ToolsWindow.glade.h:10
+#: tmp/ToolsWindow.ui.h:12
 msgid "Calendar"
 msgstr "Kalendář"
 
@@ -656,7 +666,8 @@ msgstr "Holubníky"
 #: ../pigeonplanner/ui/toolswindow.py:408
 #: ../pigeonplanner/ui/toolswindow.py:453
 #: ../pigeonplanner/ui/toolswindow.py:479 ../pigeonplanner/printing.py:454
-#: tmp/MainWindow.glade.h:62 tmp/OptionsDialog.glade.h:48
+#: tmp/MainWindow.glade.h:62 tmp/MainWindow.ui.h:61
+#: tmp/OptionsDialog.glade.h:48 tmp/OptionsDialog.ui.h:46
 #: tmp/ResultWindow.glade.h:12
 msgid "Weather"
 msgstr "Počasí"
@@ -665,7 +676,8 @@ msgstr "Počasí"
 #: ../pigeonplanner/ui/toolswindow.py:410
 #: ../pigeonplanner/ui/toolswindow.py:455
 #: ../pigeonplanner/ui/toolswindow.py:481 ../pigeonplanner/printing.py:455
-#: tmp/MainWindow.glade.h:63 tmp/OptionsDialog.glade.h:49
+#: tmp/MainWindow.glade.h:63 tmp/MainWindow.ui.h:62
+#: tmp/OptionsDialog.glade.h:49 tmp/OptionsDialog.ui.h:47
 #: tmp/ResultWindow.glade.h:13
 msgid "Wind"
 msgstr "Vítr"
@@ -736,19 +748,16 @@ msgid "View in fullscreen"
 msgstr "Zobrazit na celou obrazovku"
 
 #: ../pigeonplanner/ui/mainwindow.py:78
-#, fuzzy
 msgid "Cock"
-msgstr "Holub"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:78
-#, fuzzy
 msgid "Hen"
-msgstr "Holubice"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:78
-#, fuzzy
 msgid "Young bird"
-msgstr "Holoubě"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:162
 msgid "Enter the bandnumber of the pigeon"
@@ -784,16 +793,17 @@ msgid "Pigeon %s/%s has been removed"
 msgstr "Holub %s/%s byl odebrán"
 
 #: ../pigeonplanner/ui/mainwindow.py:371
-#, fuzzy, python-format
+#, python-format
 msgid "%s pigeons have been removed"
-msgstr "Holub %s/%s byl odebrán"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:443
 msgid "Filter pigeons"
 msgstr "Filtr holubů"
 
 #: ../pigeonplanner/ui/mainwindow.py:447 tmp/MainWindow.glade.h:52
-#: tmp/OptionsDialog.glade.h:39
+#: tmp/MainWindow.ui.h:50 tmp/OptionsDialog.glade.h:39
+#: tmp/OptionsDialog.ui.h:37
 msgid "Sex"
 msgstr "Pohlaví"
 
@@ -885,6 +895,7 @@ msgid "Add ran_ge"
 msgstr "Přidat _řadu"
 
 #: ../pigeonplanner/ui/mainwindow.py:1351 tmp/MainWindow.glade.h:9
+#: tmp/MainWindow.ui.h:9
 msgid "Add a range of pigeons"
 msgstr "Přdat řadu holubů"
 
@@ -969,10 +980,12 @@ msgid "Navigation arrows"
 msgstr "Navigační šipky"
 
 #: ../pigeonplanner/ui/mainwindow.py:1387 tmp/OptionsDialog.glade.h:41
+#: tmp/OptionsDialog.ui.h:39
 msgid "Show or hide the navigation arrows"
 msgstr "Zobrazit nebo skrýt navigační šipky"
 
 #: ../pigeonplanner/ui/mainwindow.py:1390 tmp/OptionsDialog.glade.h:40
+#: tmp/OptionsDialog.ui.h:38
 msgid "Show or hide pigeon statistics"
 msgstr "Ukázat nebo skrýt statistiku holuba"
 
@@ -981,6 +994,7 @@ msgid "Toolbar"
 msgstr "Panel nástrojů"
 
 #: ../pigeonplanner/ui/mainwindow.py:1393 tmp/OptionsDialog.glade.h:43
+#: tmp/OptionsDialog.ui.h:41
 msgid "Show or hide the toolbar"
 msgstr "Zobrazit  nebo skrýt panelu nástrojů"
 
@@ -989,6 +1003,7 @@ msgid "Statusbar"
 msgstr "Stavový  řádek"
 
 #: ../pigeonplanner/ui/mainwindow.py:1396 tmp/OptionsDialog.glade.h:42
+#: tmp/OptionsDialog.ui.h:40
 msgid "Show or hide the statusbar"
 msgstr "Zobrazit nebo skrýt stavový řádek"
 
@@ -1007,18 +1022,22 @@ msgid "Images"
 msgstr "Obrázky"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:91 tmp/MainWindow.glade.h:24
+#: tmp/MainWindow.ui.h:21
 msgid "Dead"
 msgstr "Mrtvý"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:91 tmp/MainWindow.glade.h:8
+#: tmp/MainWindow.ui.h:8
 msgid "Active"
 msgstr "Aktivní"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:91 tmp/MainWindow.glade.h:54
+#: tmp/MainWindow.ui.h:52
 msgid "Sold"
 msgstr "Prodáno"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:91 tmp/MainWindow.glade.h:35
+#: tmp/MainWindow.ui.h:32
 msgid "Lost"
 msgstr "Ztracený"
 
@@ -1027,22 +1046,23 @@ msgid "Save as..."
 msgstr "Uložit jako ..."
 
 #: ../pigeonplanner/printing.py:170 tmp/PedigreeWindow.glade.h:3
+#: tmp/PedigreeWindow.ui.h:3
 msgid "Pedigree of:"
 msgstr "Rodokmen:"
 
 #: ../pigeonplanner/printing.py:446 ../pigeonplanner/printing.py:670
-#: tmp/MainWindow.glade.h:23 tmp/ResultWindow.glade.h:5
+#: tmp/MainWindow.glade.h:23 tmp/MainWindow.ui.h:20 tmp/ResultWindow.glade.h:5
 #: tmp/ToolsWindow.glade.h:18
 msgid "Date"
 msgstr "Datum"
 
 #: ../pigeonplanner/printing.py:448 tmp/MainWindow.glade.h:43
-#: tmp/ResultWindow.glade.h:7
+#: tmp/MainWindow.ui.h:41 tmp/ResultWindow.glade.h:7
 msgid "Placed"
 msgstr "Umístění"
 
 #: ../pigeonplanner/printing.py:449 tmp/MainWindow.glade.h:40
-#: tmp/ResultWindow.glade.h:6
+#: tmp/MainWindow.ui.h:38 tmp/ResultWindow.glade.h:6
 msgid "Out of"
 msgstr "Z"
 
@@ -1051,18 +1071,21 @@ msgid "Coef."
 msgstr "Koeficient"
 
 #: ../pigeonplanner/printing.py:452 tmp/MainWindow.glade.h:60
-#: tmp/OptionsDialog.glade.h:47 tmp/ResultWindow.glade.h:10
+#: tmp/MainWindow.ui.h:58 tmp/OptionsDialog.glade.h:47
+#: tmp/OptionsDialog.ui.h:45 tmp/ResultWindow.glade.h:10
 msgid "Type"
 msgstr "Druh"
 
 #: ../pigeonplanner/printing.py:453 tmp/MainWindow.glade.h:14
-#: tmp/OptionsDialog.glade.h:14 tmp/ResultWindow.glade.h:2
+#: tmp/MainWindow.ui.h:13 tmp/OptionsDialog.glade.h:14
+#: tmp/OptionsDialog.ui.h:14 tmp/ResultWindow.glade.h:2
 msgid "Category"
 msgstr "Kategorie"
 
 #: ../pigeonplanner/printing.py:456 tmp/MainWindow.glade.h:20
-#: tmp/OptionsDialog.glade.h:20 tmp/ResultWindow.glade.h:4
-#: tmp/ToolsWindow.glade.h:13
+#: tmp/MainWindow.ui.h:18 tmp/OptionsDialog.glade.h:20
+#: tmp/OptionsDialog.ui.h:20 tmp/ResultWindow.glade.h:4
+#: tmp/ToolsWindow.glade.h:13 tmp/ToolsWindow.ui.h:16
 msgid "Comment"
 msgstr "Komentář"
 
@@ -1072,14 +1095,17 @@ msgstr "Stránka"
 
 #: ../pigeonplanner/printing.py:661 ../pigeonplanner/printing.py:683
 #: ../pigeonplanner/printing.py:684 tmp/ToolsWindow.glade.h:47
+#: tmp/ToolsWindow.ui.h:50
 msgid "Velocity"
 msgstr "Rychlost"
 
 #: ../pigeonplanner/printing.py:672 tmp/ToolsWindow.glade.h:38
+#: tmp/ToolsWindow.ui.h:40
 msgid "Released"
 msgstr "Zveřejněno"
 
 #: ../pigeonplanner/printing.py:674 tmp/ToolsWindow.glade.h:20
+#: tmp/ToolsWindow.ui.h:22
 msgid "Distance"
 msgstr "Vzdálenost"
 
@@ -1093,7 +1119,8 @@ msgstr "Čas letu"
 msgid "Time of Arrival"
 msgstr "Čas příletu"
 
-#: ../bin/pigeonplanner:221 tmp/Dialogs.glade.h:7 tmp/OptionsDialog.glade.h:22
+#: ../bin/pigeonplanner:221 tmp/Dialogs.glade.h:7 tmp/Dialogs.ui.h:7
+#: tmp/OptionsDialog.glade.h:22 tmp/OptionsDialog.ui.h:22
 msgid "E-mail"
 msgstr "e-mail"
 
@@ -1105,83 +1132,84 @@ msgstr "Poslat"
 msgid "Report"
 msgstr "Zpráva"
 
-#: tmp/Dialogs.glade.h:1
+#: tmp/Dialogs.glade.h:1 tmp/Dialogs.ui.h:1
 msgid "<b>Attached file:</b>"
 msgstr "<b>Přiložený soubor:</b>"
 
-#: tmp/Dialogs.glade.h:2
+#: tmp/Dialogs.glade.h:2 tmp/Dialogs.ui.h:2
 msgid "<b>Message:</b>"
 msgstr "<b>Zpráva:</b>"
 
-#: tmp/Dialogs.glade.h:3
+#: tmp/Dialogs.glade.h:3 tmp/Dialogs.ui.h:3
 msgid "<b>Send to:</b>"
 msgstr "<b>Zasílejte na adresu:</b>"
 
-#: tmp/Dialogs.glade.h:4
+#: tmp/Dialogs.glade.h:4 tmp/Dialogs.ui.h:4
 msgid "<b>Subject:</b>"
 msgstr "<b>Předmět:</b>"
 
-#: tmp/Dialogs.glade.h:5
+#: tmp/Dialogs.glade.h:5 tmp/Dialogs.ui.h:5
 msgid "<b>Your e-mailaddress:</b>"
 msgstr "<b>Váš e-mail:</b>"
 
-#: tmp/Dialogs.glade.h:6
+#: tmp/Dialogs.glade.h:6 tmp/Dialogs.ui.h:6
 msgid "<b>Your name:</b>"
 msgstr "<b>Tvoje jméno:</b>"
 
-#: tmp/Dialogs.glade.h:8
+#: tmp/Dialogs.glade.h:8 tmp/Dialogs.ui.h:8
 msgid "Sending..."
 msgstr "Odeslat ..."
 
-#: tmp/MainWindow.glade.h:1
+#: tmp/MainWindow.glade.h:1 tmp/MainWindow.ui.h:1
 msgid "<b>Brothers and sisters</b>"
 msgstr "<b>Bratři a sestry</b>"
 
-#: tmp/MainWindow.glade.h:2
+#: tmp/MainWindow.glade.h:2 tmp/MainWindow.ui.h:2
 msgid "<b>Details of pigeon</b>"
 msgstr "<b>Podrobnosti o  holubovi</b>"
 
-#: tmp/MainWindow.glade.h:3
+#: tmp/MainWindow.glade.h:3 tmp/MainWindow.ui.h:3
 msgid "<b>Half brothers and sisters</b>"
 msgstr "<b>Nevlastní bratři a sestry</b>"
 
-#: tmp/MainWindow.glade.h:4
+#: tmp/MainWindow.glade.h:4 tmp/MainWindow.ui.h:4
 msgid "<b>Offspring</b>"
 msgstr "<b>Potomstvo</b>"
 
-#: tmp/MainWindow.glade.h:5
+#: tmp/MainWindow.glade.h:5 tmp/MainWindow.ui.h:5
 msgid "<b>Pedigree dam</b>"
 msgstr "<b>Rodokmen holubice</b>"
 
-#: tmp/MainWindow.glade.h:6
+#: tmp/MainWindow.glade.h:6 tmp/MainWindow.ui.h:6
 msgid "<b>Pedigree sire</b>"
 msgstr "<b>Rodokmen holuba</b>"
 
-#: tmp/MainWindow.glade.h:7
+#: tmp/MainWindow.glade.h:7 tmp/MainWindow.ui.h:7
 msgid "<b>Results of pigeon</b>"
 msgstr "<b>Výsledky holuba</b>"
 
-#: tmp/MainWindow.glade.h:12
+#: tmp/MainWindow.glade.h:12 tmp/MainWindow.ui.h:11
 msgid "Band numbers"
 msgstr "Čísla kroužků"
 
-#: tmp/MainWindow.glade.h:13
+#: tmp/MainWindow.glade.h:13 tmp/MainWindow.ui.h:12
 msgid "Buyer"
 msgstr "Kupující"
 
-#: tmp/MainWindow.glade.h:15
+#: tmp/MainWindow.glade.h:15 tmp/MainWindow.ui.h:14
 msgid "Choose a status for this pigeon:"
 msgstr "Vyber si pro holuba postavení:"
 
-#: tmp/MainWindow.glade.h:16
+#: tmp/MainWindow.glade.h:16 tmp/MainWindow.ui.h:15
 msgid "Choose an image..."
 msgstr "Vyber si obrázek ..."
 
-#: tmp/MainWindow.glade.h:17
+#: tmp/MainWindow.glade.h:17 tmp/MainWindow.ui.h:16
 msgid "Cocks"
 msgstr "Holub"
 
-#: tmp/MainWindow.glade.h:19 tmp/OptionsDialog.glade.h:19
+#: tmp/MainWindow.glade.h:19 tmp/MainWindow.ui.h:17
+#: tmp/OptionsDialog.glade.h:19 tmp/OptionsDialog.ui.h:19
 msgid "Colour"
 msgstr "Barva"
 
@@ -1189,300 +1217,322 @@ msgstr "Barva"
 msgid "Common parent"
 msgstr "Společný rodič"
 
-#: tmp/MainWindow.glade.h:22 tmp/PedigreeWindow.glade.h:1
+#: tmp/MainWindow.glade.h:22 tmp/MainWindow.ui.h:19
+#: tmp/PedigreeWindow.glade.h:1 tmp/PedigreeWindow.ui.h:1
 msgid "Dam"
 msgstr "Holubice"
 
-#: tmp/MainWindow.glade.h:25 tmp/ToolsWindow.glade.h:19
+#: tmp/MainWindow.glade.h:25 tmp/MainWindow.ui.h:22 tmp/ToolsWindow.glade.h:19
+#: tmp/ToolsWindow.ui.h:21
 msgid "Description"
 msgstr "Popis"
 
-#: tmp/MainWindow.glade.h:26
+#: tmp/MainWindow.glade.h:26 tmp/MainWindow.ui.h:23
 msgid "Done by"
 msgstr "Provádí se"
 
-#: tmp/MainWindow.glade.h:27
+#: tmp/MainWindow.glade.h:27 tmp/MainWindow.ui.h:24
 msgid "Dosage"
 msgstr "Dávkování"
 
-#: tmp/MainWindow.glade.h:28 tmp/OptionsDialog.glade.h:23
+#: tmp/MainWindow.glade.h:28 tmp/MainWindow.ui.h:25
+#: tmp/OptionsDialog.glade.h:23 tmp/OptionsDialog.ui.h:23
 msgid "Extra"
 msgstr "Více"
 
-#: tmp/MainWindow.glade.h:29
+#: tmp/MainWindow.glade.h:29 tmp/MainWindow.ui.h:26
 msgid "Extra info"
 msgstr "Více info"
 
-#: tmp/MainWindow.glade.h:30
+#: tmp/MainWindow.glade.h:30 tmp/MainWindow.ui.h:27
 msgid "From"
 msgstr "Z"
 
-#: tmp/MainWindow.glade.h:31
+#: tmp/MainWindow.glade.h:31 tmp/MainWindow.ui.h:28
 msgid "Hens"
 msgstr "Holubice"
 
-#: tmp/MainWindow.glade.h:32
+#: tmp/MainWindow.glade.h:32 tmp/MainWindow.ui.h:29
 msgid "Keep results of this pigeon"
 msgstr "Máš výsledky tohoto holuba"
 
-#: tmp/MainWindow.glade.h:33
+#: tmp/MainWindow.glade.h:33 tmp/MainWindow.ui.h:30
 msgid "Keep this pigeon in the pedigree"
 msgstr "Ponechat holuba v rodokmenu"
 
-#: tmp/MainWindow.glade.h:34 tmp/OptionsDialog.glade.h:28
+#: tmp/MainWindow.glade.h:34 tmp/MainWindow.ui.h:31
+#: tmp/OptionsDialog.glade.h:28 tmp/OptionsDialog.ui.h:28
 msgid "Loft"
 msgstr "Holubník"
 
-#: tmp/MainWindow.glade.h:36
+#: tmp/MainWindow.glade.h:36 tmp/MainWindow.ui.h:33
 msgid "Medication"
 msgstr "Lék"
 
 #: tmp/MainWindow.glade.h:37 tmp/OptionsDialog.glade.h:30
-#: tmp/ToolsWindow.glade.h:30
+#: tmp/OptionsDialog.ui.h:30 tmp/ToolsWindow.glade.h:30
+#: tmp/ToolsWindow.ui.h:31
 msgid "Name"
 msgstr "Jméno"
 
-#: tmp/MainWindow.glade.h:38
+#: tmp/MainWindow.glade.h:38 tmp/MainWindow.ui.h:35
 msgid "Names"
 msgstr "Jména"
 
-#: tmp/MainWindow.glade.h:39
+#: tmp/MainWindow.glade.h:39 tmp/MainWindow.ui.h:36
 msgid "No extra information available."
 msgstr "Žádné další informace k dispozici."
 
-#: tmp/MainWindow.glade.h:42
+#: tmp/MainWindow.glade.h:42 tmp/MainWindow.ui.h:40
 msgid "Pigeon status"
 msgstr "Stav holuba"
 
-#: tmp/MainWindow.glade.h:45
+#: tmp/MainWindow.glade.h:45 tmp/MainWindow.ui.h:43
 msgid "Relatives"
 msgstr "Příbuzní"
 
-#: tmp/MainWindow.glade.h:46
+#: tmp/MainWindow.glade.h:46 tmp/MainWindow.ui.h:44
 msgid "Remove pigeon"
 msgstr "Odebrat holuba"
 
-#: tmp/MainWindow.glade.h:48
+#: tmp/MainWindow.glade.h:48 tmp/MainWindow.ui.h:46
 msgid "Search a pigeon"
 msgstr "Hledat holuba"
 
-#: tmp/MainWindow.glade.h:49
+#: tmp/MainWindow.glade.h:49 tmp/MainWindow.ui.h:47
 msgid "Search for:"
 msgstr "Hledat:"
 
-#: tmp/MainWindow.glade.h:50
+#: tmp/MainWindow.glade.h:50 tmp/MainWindow.ui.h:48
 msgid "Search in:"
 msgstr "Hledat v:"
 
-#: tmp/MainWindow.glade.h:53 tmp/PedigreeWindow.glade.h:4
+#: tmp/MainWindow.glade.h:53 tmp/MainWindow.ui.h:51
+#: tmp/PedigreeWindow.glade.h:4 tmp/PedigreeWindow.ui.h:4
 msgid "Sire"
 msgstr "Holub"
 
-#: tmp/MainWindow.glade.h:55 tmp/OptionsDialog.glade.h:46
+#: tmp/MainWindow.glade.h:55 tmp/MainWindow.ui.h:53
+#: tmp/OptionsDialog.glade.h:46 tmp/OptionsDialog.ui.h:44
 msgid "Strain"
 msgstr "Kmen"
 
-#: tmp/MainWindow.glade.h:56
+#: tmp/MainWindow.glade.h:56 tmp/MainWindow.ui.h:54
 msgid "The current status is:"
 msgstr "Současný stav:"
 
-#: tmp/MainWindow.glade.h:57
+#: tmp/MainWindow.glade.h:57 tmp/MainWindow.ui.h:55
 msgid "The following pigeon will be removed:"
 msgstr "Následující holub bude odstraněn:"
 
-#: tmp/MainWindow.glade.h:58
+#: tmp/MainWindow.glade.h:58 tmp/MainWindow.ui.h:56
 msgid "To"
 msgstr "Komu..."
 
-#: tmp/MainWindow.glade.h:59
+#: tmp/MainWindow.glade.h:59 tmp/MainWindow.ui.h:57
 msgid "Total"
 msgstr "Celkem"
 
-#: tmp/MainWindow.glade.h:61
+#: tmp/MainWindow.glade.h:61 tmp/MainWindow.ui.h:59
 msgid "Vaccination"
 msgstr "Očkování"
 
-#: tmp/MainWindow.glade.h:64 tmp/ResultWindow.glade.h:14
+#: tmp/MainWindow.glade.h:64 tmp/MainWindow.ui.h:63
+#: tmp/ResultWindow.glade.h:14
 msgid "Year"
 msgstr "Ročník"
 
-#: tmp/MainWindow.glade.h:65
+#: tmp/MainWindow.glade.h:65 tmp/MainWindow.ui.h:64
 msgid "Young birds"
 msgstr "Holoubě"
 
-#: tmp/OptionsDialog.glade.h:1
+#: tmp/MainWindow.ui.h:34
+#, fuzzy
+msgid "Multiple pigeons"
+msgstr "Filtr holubů"
+
+#: tmp/MainWindow.ui.h:37
+#, fuzzy
+msgid "No image"
+msgstr "Obrázek"
+
+#: tmp/MainWindow.ui.h:60
+msgid "View all"
+msgstr "Zobrazit všechny"
+
+#: tmp/OptionsDialog.glade.h:1 tmp/OptionsDialog.ui.h:1
 msgid "<b>Backup</b>"
 msgstr "<b>Záloha</b>"
 
-#: tmp/OptionsDialog.glade.h:2
+#: tmp/OptionsDialog.glade.h:2 tmp/OptionsDialog.ui.h:2
 msgid "<b>Columns</b>"
 msgstr "<b>Sloupce</b>"
 
-#: tmp/OptionsDialog.glade.h:3
+#: tmp/OptionsDialog.glade.h:3 tmp/OptionsDialog.ui.h:3
 msgid "<b>General</b>"
 msgstr "<b>Obecné</b>"
 
-#: tmp/OptionsDialog.glade.h:4
+#: tmp/OptionsDialog.glade.h:4 tmp/OptionsDialog.ui.h:4
 msgid "<b>Language</b>"
 msgstr "<b>Jazyk</b>"
 
-#: tmp/OptionsDialog.glade.h:5
+#: tmp/OptionsDialog.glade.h:5 tmp/OptionsDialog.ui.h:5
 msgid "<b>Layout</b>"
 msgstr "<b>Projekt</b>"
 
-#: tmp/OptionsDialog.glade.h:6
+#: tmp/OptionsDialog.glade.h:6 tmp/OptionsDialog.ui.h:6
 msgid "<b>Other</b>"
 msgstr "<b>Ostatní</b>"
 
-#: tmp/OptionsDialog.glade.h:7
+#: tmp/OptionsDialog.glade.h:7 tmp/OptionsDialog.ui.h:7
 msgid "<b>Paper</b>"
 msgstr "<b>Papír</b>"
 
-#: tmp/OptionsDialog.glade.h:8
+#: tmp/OptionsDialog.glade.h:8 tmp/OptionsDialog.ui.h:8
 msgid "<b>Personal</b>"
 msgstr "<b>Osobní</b>"
 
-#: tmp/OptionsDialog.glade.h:9
+#: tmp/OptionsDialog.glade.h:9 tmp/OptionsDialog.ui.h:9
 msgid "<b>Pigeon</b>"
 msgstr "<b>Holub</b>"
 
-#: tmp/OptionsDialog.glade.h:10
+#: tmp/OptionsDialog.glade.h:10 tmp/OptionsDialog.ui.h:10
 msgid "<b>Theme</b>"
 msgstr "<b>Vzhled programu</b>"
 
-#: tmp/OptionsDialog.glade.h:11
+#: tmp/OptionsDialog.glade.h:11 tmp/OptionsDialog.ui.h:11
 msgid "<b>Update</b>"
 msgstr "<b>Aktualizace</b>"
 
-#: tmp/OptionsDialog.glade.h:12
+#: tmp/OptionsDialog.glade.h:12 tmp/OptionsDialog.ui.h:12
 msgid "A4"
 msgstr "A4"
 
-#: tmp/OptionsDialog.glade.h:13
+#: tmp/OptionsDialog.glade.h:13 tmp/OptionsDialog.ui.h:13
 msgid "Address"
 msgstr "Adresa"
 
-#: tmp/OptionsDialog.glade.h:15
+#: tmp/OptionsDialog.glade.h:15 tmp/OptionsDialog.ui.h:15
 msgid "Change the language to"
 msgstr "Změna jazyka"
 
-#: tmp/OptionsDialog.glade.h:16
+#: tmp/OptionsDialog.glade.h:16 tmp/OptionsDialog.ui.h:16
 msgid "Change the theme"
 msgstr "Změnit vzhled"
 
-#: tmp/OptionsDialog.glade.h:17
+#: tmp/OptionsDialog.glade.h:17 tmp/OptionsDialog.ui.h:17
 msgid "Check for updates on startup"
 msgstr "Kontrola aktualizací při spuštění"
 
-#: tmp/OptionsDialog.glade.h:21
+#: tmp/OptionsDialog.glade.h:21 tmp/OptionsDialog.ui.h:21
 msgid "Default"
 msgstr "Výchozí nastavení"
 
-#: tmp/OptionsDialog.glade.h:24
+#: tmp/OptionsDialog.glade.h:24 tmp/OptionsDialog.ui.h:24
 msgid "Image"
 msgstr "Obrázek"
 
-#: tmp/OptionsDialog.glade.h:25
+#: tmp/OptionsDialog.glade.h:25 tmp/OptionsDialog.ui.h:25
 msgid "Interval"
 msgstr "Interval"
 
-#: tmp/OptionsDialog.glade.h:26
+#: tmp/OptionsDialog.glade.h:26 tmp/OptionsDialog.ui.h:26
 msgid "Letter"
 msgstr "Dopis"
 
-#: tmp/OptionsDialog.glade.h:27
+#: tmp/OptionsDialog.glade.h:27 tmp/OptionsDialog.ui.h:27
 msgid "Location"
 msgstr "Místo"
 
-#: tmp/OptionsDialog.glade.h:29
+#: tmp/OptionsDialog.glade.h:29 tmp/OptionsDialog.ui.h:29
 msgid "Make an automatic backup"
 msgstr "Zkontroluj, automatické zálohování"
 
-#: tmp/OptionsDialog.glade.h:31
+#: tmp/OptionsDialog.glade.h:31 tmp/OptionsDialog.ui.h:31
 msgid "Options"
 msgstr "Nastavení"
 
-#: tmp/OptionsDialog.glade.h:32
+#: tmp/OptionsDialog.glade.h:32 tmp/OptionsDialog.ui.h:32
 msgid "Original"
 msgstr "Původní"
 
-#: tmp/OptionsDialog.glade.h:33
+#: tmp/OptionsDialog.glade.h:33 tmp/OptionsDialog.ui.h:33
 msgid "Paper format:"
 msgstr "Formát papíru"
 
-#: tmp/OptionsDialog.glade.h:35
+#: tmp/OptionsDialog.glade.h:35 tmp/OptionsDialog.ui.h:34
 msgid "Pedigree layout:"
 msgstr "Uspořádání rodokmenu"
 
-#: tmp/OptionsDialog.glade.h:36
+#: tmp/OptionsDialog.glade.h:36 tmp/OptionsDialog.ui.h:35
 msgid "Phone"
 msgstr "Telefon"
 
-#: tmp/OptionsDialog.glade.h:44
+#: tmp/OptionsDialog.glade.h:44 tmp/OptionsDialog.ui.h:42
 msgid "Show the column names"
 msgstr "Zobrazit názvy sloupců"
 
-#: tmp/OptionsDialog.glade.h:45
+#: tmp/OptionsDialog.glade.h:45 tmp/OptionsDialog.ui.h:43
 msgid "Show the date"
 msgstr "Zobrazit den"
 
-#: tmp/PhotoAlbum.glade.h:1
+#: tmp/PhotoAlbum.glade.h:1 tmp/PhotoAlbum.ui.h:1
 msgid "Photo Album"
 msgstr "Fotoalbum"
 
-#: tmp/PhotoAlbum.glade.h:2
+#: tmp/PhotoAlbum.glade.h:2 tmp/PhotoAlbum.ui.h:2
 msgid "There are no images found."
 msgstr "Nejsou nalezeny žádné obrázky"
 
-#: tmp/PreviewWindow.glade.h:1
+#: tmp/PreviewWindow.glade.h:1 tmp/PreviewWindow.ui.h:1
 msgid "Print Preview"
 msgstr "Náhled tisku"
 
-#: tmp/ResultWindow.glade.h:11
+#: tmp/ResultWindow.glade.h:11 tmp/ResultWindow.ui.h:1
 msgid "View all results"
 msgstr "Zobrazit všechny výsledky"
 
-#: tmp/ToolsWindow.glade.h:1
+#: tmp/ToolsWindow.glade.h:1 tmp/ToolsWindow.ui.h:1
 msgid "<b>Add items</b>"
 msgstr "<b>Přidat položky</b>"
 
-#: tmp/ToolsWindow.glade.h:2
+#: tmp/ToolsWindow.glade.h:2 tmp/ToolsWindow.ui.h:2
 msgid "<b>Create backup</b>"
 msgstr "<b>Vytvořit zálohu</b>"
 
-#: tmp/ToolsWindow.glade.h:3
+#: tmp/ToolsWindow.glade.h:3 tmp/ToolsWindow.ui.h:3
 msgid "<b>Optimize database</b>"
 msgstr "<b>Optimalizace databáze</b>"
 
-#: tmp/ToolsWindow.glade.h:4
+#: tmp/ToolsWindow.glade.h:4 tmp/ToolsWindow.ui.h:4
 msgid "<b>Remove database</b>"
 msgstr "<b>Odebrat databázi</b>"
 
-#: tmp/ToolsWindow.glade.h:5
+#: tmp/ToolsWindow.glade.h:5 tmp/ToolsWindow.ui.h:5
 msgid "<b>Remove items</b>"
 msgstr "<b>Odstranit položky</b>"
 
-#: tmp/ToolsWindow.glade.h:6
+#: tmp/ToolsWindow.glade.h:6 tmp/ToolsWindow.ui.h:6
 msgid "<b>Restore backup</b>"
 msgstr "<b>Obnovit zálohu</b>"
 
-#: tmp/ToolsWindow.glade.h:7
+#: tmp/ToolsWindow.glade.h:7 tmp/ToolsWindow.ui.h:7
 msgid "<b>Warning!</b>"
 msgstr "<b>Upozornění!</b>"
 
-#: tmp/ToolsWindow.glade.h:8
+#: tmp/ToolsWindow.glade.h:8 tmp/ToolsWindow.ui.h:8
 msgid "<i>Click the button below</i>"
 msgstr "<i>Klikněte na tlačítko níže</i>"
 
-#: tmp/ToolsWindow.glade.h:9
+#: tmp/ToolsWindow.glade.h:9 tmp/ToolsWindow.ui.h:9
 msgid "Add and remove items from your datasets"
 msgstr "Přidání a odebrání položek z datové sady"
 
-#: tmp/ToolsWindow.glade.h:14
+#: tmp/ToolsWindow.glade.h:14 tmp/ToolsWindow.ui.h:17
 msgid "Country"
 msgstr "Země"
 
-#: tmp/ToolsWindow.glade.h:15
+#: tmp/ToolsWindow.glade.h:15 tmp/ToolsWindow.ui.h:18
 msgid ""
 "Create and restore backups from\n"
 "your pigeons and results."
@@ -1490,51 +1540,51 @@ msgstr ""
 "Vytvářet a obnovovat zálohy z\n"
 "Moji holubi a výsledky."
 
-#: tmp/ToolsWindow.glade.h:17
+#: tmp/ToolsWindow.glade.h:17 tmp/ToolsWindow.ui.h:20
 msgid "Dataset"
 msgstr "Soubor dat"
 
-#: tmp/ToolsWindow.glade.h:21
+#: tmp/ToolsWindow.glade.h:21 tmp/ToolsWindow.ui.h:23
 msgid "Downloadpage"
 msgstr "Download stránky"
 
-#: tmp/ToolsWindow.glade.h:23
+#: tmp/ToolsWindow.glade.h:23 tmp/ToolsWindow.ui.h:24
 msgid "Here you can check if there is a program update available."
 msgstr "Zde si můžeš zkontrolovat, zda je k programu aktualizace."
 
-#: tmp/ToolsWindow.glade.h:24
+#: tmp/ToolsWindow.glade.h:24 tmp/ToolsWindow.ui.h:25
 msgid "Here you can see some statistics of your database"
 msgstr "Zde můžeš vidět některé statistiky databáze"
 
-#: tmp/ToolsWindow.glade.h:25
+#: tmp/ToolsWindow.glade.h:25 tmp/ToolsWindow.ui.h:26
 msgid "Hours"
 msgstr "Hodiny"
 
-#: tmp/ToolsWindow.glade.h:26
+#: tmp/ToolsWindow.glade.h:26 tmp/ToolsWindow.ui.h:27
 msgid "If you remove the database, all your data will be lost."
 msgstr "Pokud odstraníš databázi, budou všechna vaše data ztracena."
 
-#: tmp/ToolsWindow.glade.h:27
+#: tmp/ToolsWindow.glade.h:27 tmp/ToolsWindow.ui.h:28
 msgid "Item"
 msgstr "Položka"
 
-#: tmp/ToolsWindow.glade.h:28
+#: tmp/ToolsWindow.glade.h:28 tmp/ToolsWindow.ui.h:29
 msgid "Minutes"
 msgstr "Minuty"
 
-#: tmp/ToolsWindow.glade.h:29
+#: tmp/ToolsWindow.glade.h:29 tmp/ToolsWindow.ui.h:30
 msgid "NOTE: You will only be notified when the program starts!"
 msgstr "Poznámka:  oznámení, program začíná!"
 
-#: tmp/ToolsWindow.glade.h:31
+#: tmp/ToolsWindow.glade.h:31 tmp/ToolsWindow.ui.h:32
 msgid "Notify me!"
 msgstr "Informujte mě!"
 
-#: tmp/ToolsWindow.glade.h:32
+#: tmp/ToolsWindow.glade.h:32 tmp/ToolsWindow.ui.h:33
 msgid "Number of days in advance:"
 msgstr "Počet dní dopředu:"
 
-#: tmp/ToolsWindow.glade.h:33
+#: tmp/ToolsWindow.glade.h:33 tmp/ToolsWindow.ui.h:35
 msgid ""
 "Optimize your database.\n"
 "(Please wait, this can take some time)"
@@ -1542,56 +1592,57 @@ msgstr ""
 "Optimalizuj databázi.\n"
 "(Počkej prosím, to může chvíli trvat)"
 
-#: tmp/ToolsWindow.glade.h:35
+#: tmp/ToolsWindow.glade.h:35 tmp/ToolsWindow.ui.h:37
 msgid "Phone / E-mail"
 msgstr "Telefon/e-mail"
 
-#: tmp/ToolsWindow.glade.h:36
+#: tmp/ToolsWindow.glade.h:36 tmp/ToolsWindow.ui.h:38
 msgid "Prognosis"
 msgstr "Prognóza"
 
-#: tmp/ToolsWindow.glade.h:37
+#: tmp/ToolsWindow.glade.h:37 tmp/ToolsWindow.ui.h:39
 msgid "Range"
 msgstr "Rozsah"
 
-#: tmp/ToolsWindow.glade.h:39
+#: tmp/ToolsWindow.glade.h:39 tmp/ToolsWindow.ui.h:43
 msgid "Seconds"
 msgstr "Vetřiny"
 
-#: tmp/ToolsWindow.glade.h:42
+#: tmp/ToolsWindow.glade.h:42 tmp/ToolsWindow.ui.h:46
 msgid "Street"
 msgstr "Ulice"
 
-#: tmp/ToolsWindow.glade.h:43
+#: tmp/ToolsWindow.glade.h:43 tmp/ToolsWindow.ui.h:47
 msgid "This is me"
 msgstr "To jsem já"
 
-#: tmp/ToolsWindow.glade.h:44
+#: tmp/ToolsWindow.glade.h:44 tmp/ToolsWindow.ui.h:48
 msgid "Time"
 msgstr "Čas"
 
-#: tmp/ToolsWindow.glade.h:46
+#: tmp/ToolsWindow.glade.h:46 tmp/ToolsWindow.ui.h:49
 msgid "Tools"
 msgstr "Nástroje"
 
-#: tmp/ToolsWindow.glade.h:49
+#: tmp/ToolsWindow.glade.h:49 tmp/ToolsWindow.ui.h:52
 msgid "Zipcode / City"
 msgstr "Směrovací číslo/Město"
 
-#~ msgid "View all"
-#~ msgstr "Zobrazit všechny"
+#: tmp/ToolsWindow.ui.h:11
+msgid "Calculate"
+msgstr "Spočítat"
 
-#~ msgid "Calculate"
-#~ msgstr "Spočítat"
+#: tmp/ToolsWindow.ui.h:13
+msgid "Check now!"
+msgstr "Zkontrolovat"
 
-#~ msgid "Search database"
-#~ msgstr "Databáze pro vyhledávání"
+#: tmp/ToolsWindow.ui.h:34
+msgid "Optimize"
+msgstr "Optimalizovat"
 
-#~ msgid "Optimize"
-#~ msgstr "Optimalizovat"
-
-#~ msgid "Check now!"
-#~ msgstr "Zkontrolovat"
+#: tmp/ToolsWindow.ui.h:42
+msgid "Search database"
+msgstr "Databáze pro vyhledávání"
 
 #~ msgid "cock"
 #~ msgstr "Holub"
