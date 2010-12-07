@@ -77,7 +77,7 @@ class OptionsDialog(builder.GtkBuilder):
         self.languages = os.listdir(const.LANGDIR)
         self.languages.insert(0, 'en')
         self.languages.sort()
-        self.languages.insert(0, 'def')
+        self.languages.insert(0, 'Default')
         comboboxes.fill_combobox(self.cbLang, self.languages, sort=False)
 
         self.set_options()
