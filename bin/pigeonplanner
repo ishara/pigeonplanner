@@ -22,8 +22,6 @@ Pigeon Planner startup script
 import os
 import os.path
 import sys
-if sys.platform.startswith('win'):
-    os.environ['PATH'] += ";bin"
 import logging
 import webbrowser
 from threading import Thread
