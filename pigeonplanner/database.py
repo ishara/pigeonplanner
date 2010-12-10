@@ -237,13 +237,20 @@ class DatabaseOperations(object):
             data = [row[0] for row in cursor.fetchall() if row[0]]
         elif retval == RET_SECCOL:
             data = [row[1] for row in cursor.fetchall() if row[1]]
-        elif retval == RET_ALLCOL:
+        elif retval == RET_ALLCOL or retval is None:
             data = cursor.fetchall()
         elif retval == RET_ONEROW:
             data = cursor.fetchone()
 
         conn.close()
         return data
+
+#### General methods to be called outside this module
+    def execute(self, sql, select=False):
+        if select:
+            return self.__db_execute_select(sql, None, RET_ALLCOL)
+        else:
+            return self.__db_execute(sql)
 
 #### General methods for SQL queries
     def insert_into_table(self, table, data):
@@ -298,9 +305,46 @@ class DatabaseOperations(object):
         conn.commit()
         conn.close()
 
-#### Optimize
+#### Maintenance
     def optimize_db(self):
         self.__db_execute("VACUUM")
+
+    def check_db(self):
+        return self.__db_execute_select("PRAGMA integrity_check")
+
+    def check_empty_column(self, table, column):
+        sql = "SELECT * FROM %s WHERE %s=''" %(table, column)
+        return self.__db_execute_select(sql, None, RET_ALLCOL)
+
+    def check_schema(self):
+        # Check if all tables are present
+        for s_table, s_columns in self.SCHEMA.items():
+            if not s_table in self.get_tablenames():
+                logger.info("Adding table '%s'" %s_table)
+                self.add_table_from_schema(s_table)
+
+        # Check if all columns are present
+        for table in self.get_tablenames(): # Get all tables again
+            columns = self.get_columnnames(table)
+            if table == 'Pigeons' and 'alive' in columns:
+                # This column has been renamed somewhere
+                # between version 0.4.0 and 0.6.0
+                logger.info("Renaming 'alive' column")
+                self.change_column_name(table)
+                # Get all columns again in this table
+                columns = self.get_columnnames(table)
+            for column_def in self.SCHEMA[table][1:-1].split(', '):
+                column = column_def.split(' ')[0]
+                if not column in columns:
+                    # Note: no need to show a progressbar. According to the
+                    # SQLite website:
+                    # The execution time of the ALTER TABLE command is
+                    # independent of the amount of data in the table.
+                    # The ALTER TABLE command runs as quickly on a table
+                    # with 10 million rows as it does on a table with 1 row.
+                    logger.info("Adding column '%s' to table '%s'"
+                                %(column, table))
+                    self.add_column(table, column_def)
 
 #### Pigeons
     def update_pedigree_pigeon(self, data):

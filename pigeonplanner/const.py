@@ -106,6 +106,7 @@ GLADETOOLS = os.path.join(GLADEDIR, "ToolsWindow.ui")
 GLADEPREVIEW = os.path.join(GLADEDIR, "PreviewWindow.ui")
 GLADEPHOTOALBUM = os.path.join(GLADEDIR, "PhotoAlbum.ui")
 GLADEDIALOGS = os.path.join(GLADEDIR, "Dialogs.ui")
+GLADEDBTOOL = os.path.join(GLADEDIR, "DatabaseTool.ui")
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')

@@ -15,14 +15,13 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 """
-Pigeon Planner startup script
+Pigeon Planner database tool startup script
 """
 
 
 import os
 import os.path
 import sys
-from threading import Thread
 
 try:
     import pygtk; pygtk.require('2.0')
@@ -53,14 +52,9 @@ if __name__ == "__main__":
     app.setup_locale()
     app.setup_theme()
     app.setup_database()
-    app.setup_parser()
 
-    if app.options.optionList.update:
-        updatethread = Thread(None, app.search_updates, None)
-        updatethread.start()
-
-    from pigeonplanner.ui import mainwindow
-    pigeonplanner = mainwindow.MainWindow(app.options, app.db, app.parser)
+    from pigeonplanner.ui import databasetool
+    dbtool = databasetool.DBWindow(app.db)
 
     gtk.main()
 
