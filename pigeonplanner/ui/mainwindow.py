@@ -1322,6 +1322,9 @@ class MainWindow(builder.GtkBuilder):
         Create the action group for our menu and toolbar
         """
 
+        # Custom about description for Mac OS X
+        about = _("About Pigeon Planner")
+
         action_group = gtk.ActionGroup("MainWindowActions")
         action_group.add_actions((
             ("FileMenu", None, _("_File")),
@@ -1377,7 +1380,7 @@ class MainWindow(builder.GtkBuilder):
             ("Forum", gtk.STOCK_INFO, _("Forum"), None,
                     _("Go to the forum for online help"),
                     self.menuforum_activate),
-            ("About", gtk.STOCK_ABOUT, None, None,
+            ("About", gtk.STOCK_ABOUT, about if const.OSX else None, None,
                     _("About this application"), self.menuabout_activate)
            ))
         action_group.add_toggle_actions((
