@@ -154,14 +154,6 @@ class ToolsWindow(builder.GtkBuilder):
         self.cbdata.set_active(0)
         self.cbdata2.set_active(0)
 
-        # Make stockbuttons from these
-        self.button_velocity_calculate.set_use_stock(True)
-        self.calculate.set_use_stock(True)
-        self.btnsearchdb.set_use_stock(True)
-        self.backup.set_use_stock(True)
-        self.restore.set_use_stock(True)
-        self.btnupdate.set_use_stock(True)
-
         self.toolsdialog.show()
 
     def on_close_dialog(self, widget=None, event=None):

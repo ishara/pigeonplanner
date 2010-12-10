@@ -188,8 +188,6 @@ class MainWindow(builder.GtkBuilder):
             self.options.set_option('Options', 'runs',
                                     self.options.optionList.runs+1)
 
-        self.allresults.set_use_stock(True)
-
         self.mainwindow.show()
 
         events = self.database.get_notification(time.time())
