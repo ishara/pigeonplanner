@@ -93,14 +93,6 @@ MSG_REMOVE_DATABASE = (_("Removing database"),
                        _("Are you sure you want to remove the database? All data will be lost."),
                        _("Removing database"))
 
-MSG_RMDB_FINISH = (_("Click \"OK\" to close the program. A new database will be created the next time you start the program again."),
-                   None,
-                   _("Restart required"))
-
-MSG_OPTIMIZE_FINISH = (_("Optimization has been completed."),
-                       None,
-                       _("Completed!"))
-
 MSG_BACKUP_SUCCES = (_("The backup was successfully created."),
                      None,
                      _("Completed!"))

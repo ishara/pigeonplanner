@@ -113,7 +113,7 @@ class ToolsWindow(builder.GtkBuilder):
         i = 0
         for category in [_("Velocity calculator"), _("Calendar"),
                          _("Datasets"), _("Addresses"), _("Statistics"),
-                         _("Database"), _("Backup"), _("Update")]:
+                         _("Backup"), _("Update")]:
             self.liststore.append([i, category])
             label = getattr(self, "label_title_%s" %i)
             label.set_markup("<b><i><big>%s</big></i></b>" %category)
@@ -158,7 +158,6 @@ class ToolsWindow(builder.GtkBuilder):
         self.button_velocity_calculate.set_use_stock(True)
         self.calculate.set_use_stock(True)
         self.btnsearchdb.set_use_stock(True)
-        self.dboptimize.set_use_stock(True)
         self.backup.set_use_stock(True)
         self.restore.set_use_stock(True)
         self.btnupdate.set_use_stock(True)
@@ -692,31 +691,6 @@ class ToolsWindow(builder.GtkBuilder):
         self.ls_stats.clear()
         for description, value in items:
             self.ls_stats.insert(0, [description, value])
-
-    # Database
-    def on_dboptimize_clicked(self, widget):
-        self.toolsdialog.set_sensitive(False)
-        self.db.optimize_db()
-        self.toolsdialog.set_sensitive(True)
-        dialogs.MessageDialog(const.INFO, messages.MSG_OPTIMIZE_FINISH,
-                              self.toolsdialog)
-
-    def on_dbremove_clicked(self, widget):
-        d = dialogs.MessageDialog(const.WARNING, messages.MSG_REMOVE_DATABASE,
-                                  self.toolsdialog)
-        if d.response == gtk.RESPONSE_YES:
-            logger.debug("Start deleting the database")
-            try:
-                os.remove(const.DATABASE)
-                for img_thumb in os.listdir(const.THUMBDIR):
-                    os.remove(os.path.join(const.THUMBDIR, img_thumb))
-            except Exception, msg:
-                logger.error("Deleting database: %s" % msg)
-            else:
-                dialogs.MessageDialog(const.INFO, messages.MSG_RMDB_FINISH,
-                                      self.toolsdialog)
-                self.on_close_dialog()
-                self.main.quit_program(bckp=False)
 
     # Backup
     def on_makebackup_clicked(self, widget):
