@@ -170,7 +170,7 @@ class OptionsDialog(builder.GtkBuilder):
         d = dialogs.MessageDialog(const.WARNING,
                                   messages.MSG_DEFAULT_OPTIONS,
                                   self.optionsdialog)
-        if d.response == gtk.RESPONSE_YES:
+        if d.yes:
             self.opt.write_default()
             self.opt = options.GetOptions()
             self.set_options()

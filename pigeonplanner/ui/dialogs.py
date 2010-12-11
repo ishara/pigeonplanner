@@ -68,7 +68,8 @@ class MessageDialog(gtk.MessageDialog):
         self.set_title(title)
         self.add_buttons(*buttons)
 
-        self.response = self.run()
+        response = self.run()
+        self.yes = response == gtk.RESPONSE_YES
         self.destroy()
 
 

@@ -52,7 +52,7 @@ def edit_user_info(parent, main, name):
     if name == '':
         d = dialogs.MessageDialog(const.QUESTION, messages.MSG_NO_INFO,
                                   parent)
-        if d.response == gtk.RESPONSE_YES:
+        if d.yes:
             tw = ToolsWindow(main)
             tw.toolsdialog.set_keep_above(True)
             tw.treeview.set_cursor(3)
@@ -424,7 +424,7 @@ class ToolsWindow(builder.GtkBuilder):
         d = dialogs.MessageDialog(const.QUESTION, messages.MSG_REMOVE_ITEM,
                                   self.toolsdialog,
                                   {'item': item, 'dataset': dataset})
-        if d.response == gtk.RESPONSE_YES:
+        if d.yes:
             index = self.cbitems.get_active()
 
             if dataset == _("Colours"):

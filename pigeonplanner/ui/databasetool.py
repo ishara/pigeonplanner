@@ -112,7 +112,7 @@ class DBWindow(builder.GtkBuilder):
         self.__set_image(self.image_delete, EXECUTE)
         d = dialogs.MessageDialog(const.WARNING, messages.MSG_REMOVE_DATABASE,
                                   self.dbwindow)
-        if d.response == gtk.RESPONSE_YES:
+        if d.yes:
             try:
                 os.remove(const.DATABASE)
                 for img_thumb in os.listdir(const.THUMBDIR):

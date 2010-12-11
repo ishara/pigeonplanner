@@ -191,7 +191,7 @@ class Startup(object):
         from pigeonplanner.ui.dialogs import MessageDialog
 
         d = MessageDialog(const.QUESTION, messages.MSG_UPDATE_NOW, None)
-        if d.response == gtk.RESPONSE_YES:
+        if d.yes:
             webbrowser.open(const.DOWNLOADURL)
 
         return False

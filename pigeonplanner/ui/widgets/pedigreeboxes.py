@@ -100,7 +100,7 @@ class BaseBox(object):
             d = dialogs.MessageDialog(const.WARNING,
                                       messages.MSG_SHOW_PIGEON,
                                       self.main.mainwindow)
-            if d.response == gtk.RESPONSE_YES:
+            if d.yes:
                 self.main.database.update_table(self.main.database.PIGEONS,
                                                 (1, self.pindex), 5, 1)
                 self.main.parser.get_pigeons()
@@ -110,7 +110,7 @@ class BaseBox(object):
             d = dialogs.MessageDialog(const.QUESTION,
                                       messages.MSG_ADD_PIGEON,
                                       self.main.mainwindow)
-            if d.response == gtk.RESPONSE_YES:
+            if d.yes:
                 self.main.menuadd_activate(None)
                 self.main.entryRing1.set_text(self.ring)
                 self.main.entryYear1.set_text(self.year)

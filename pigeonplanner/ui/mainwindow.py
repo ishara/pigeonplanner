@@ -182,7 +182,7 @@ class MainWindow(builder.GtkBuilder):
             d = dialogs.MessageDialog(const.QUESTION,
                                       messages.MSG_MAKE_DONATION,
                                       self.mainwindow)
-            if d.response == gtk.RESPONSE_YES:
+            if d.yes:
                 webbrowser.open(const.WEBSITE)
 
             self.options.set_option('Options', 'runs',
@@ -198,7 +198,7 @@ class MainWindow(builder.GtkBuilder):
             d = dialogs.MessageDialog(const.QUESTION,
                                       messages.MSG_EVENT_NOTIFY,
                                       self.mainwindow, description)
-            if d.response == gtk.RESPONSE_YES:
+            if d.yes:
                 tw = toolswindow.ToolsWindow(self, events[0][0])
                 tw.toolsdialog.set_keep_above(True)
                 tw.treeview.set_cursor(1)
@@ -1984,13 +1984,13 @@ class MainWindow(builder.GtkBuilder):
                 d = dialogs.MessageDialog(const.WARNING,
                                           messages.MSG_OVERWRITE_PIGEON,
                                           self.mainwindow)
-                if not d.response == gtk.RESPONSE_YES:
+                if not d.yes:
                     return
             else:
                 d = dialogs.MessageDialog(const.WARNING,
                                           messages.MSG_SHOW_PIGEON,
                                           self.mainwindow)
-                if d.response == gtk.RESPONSE_YES:
+                if d.yes:
                     self.database.update_table(self.database.PIGEONS,
                                                (1, pindex), 5, 1)
                     newAdd = False
