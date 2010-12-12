@@ -673,16 +673,22 @@ class ToolsWindow(builder.GtkBuilder):
                             common.count_active_pigeons(self.db)
 
         items = [(_("Number of pigeons"), total),
-                 (_("Number of cocks"), cocks),
-                 (_("Number of hens"), hens),
-                 (_("Number of young birds"), ybirds),
-                 (_("Number of results"), \
+                 (_("Number of cocks"), "%s (%s %%)"
+                                %(cocks, self.get_percentage(cocks, total))),
+                 (_("Number of hens"), "%s (%s %%)"
+                                %(hens, self.get_percentage(hens, total))),
+                 (_("Number of young birds"), "%s (%s %%)"
+                                %(ybirds, self.get_percentage(ybirds, total))),
+                 (_("Number of results"),
                                     len(self.db.get_all_results()))
                 ]
 
         self.ls_stats.clear()
         for description, value in items:
             self.ls_stats.insert(0, [description, value])
+
+    def get_percentage(self, value, total):
+        return "%.2f" %((value/float(total))*100)
 
     # Backup
     def on_makebackup_clicked(self, widget):
