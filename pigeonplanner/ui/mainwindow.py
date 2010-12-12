@@ -36,6 +36,7 @@ from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import backup
 from pigeonplanner import checks
+from pigeonplanner import update
 from pigeonplanner import builder
 from pigeonplanner import printing
 from pigeonplanner import messages
@@ -521,6 +522,25 @@ class MainWindow(builder.GtkBuilder):
     def menuforum_activate(self, widget):
         logger.info(common.get_function_name())
         webbrowser.open(const.FORUMURL)
+
+    def menuupdate_activate(self, widget):
+        logger.info(common.get_function_name())
+        try:
+            new, msg = update.update()
+        except update.UpdateError, exc:
+            new = False
+            msg = str(exc)
+
+        title = _("Search for updates...")
+        if new:
+            d = dialogs.MessageDialog(const.QUESTION,
+                                      (msg, _("Go to the website?"), title),
+                                      self.mainwindow)
+            if d.yes:
+                webbrowser.open(const.DOWNLOADURL)
+        else:
+            dialogs.MessageDialog(const.INFO, (msg, None, title),
+                                  self.mainwindow)
 
     def menuabout_activate(self, widget):
         logger.info(common.get_function_name())
@@ -1380,6 +1400,9 @@ class MainWindow(builder.GtkBuilder):
             ("Forum", gtk.STOCK_INFO, _("Forum"), None,
                     _("Go to the forum for online help"),
                     self.menuforum_activate),
+            ("Update", gtk.STOCK_CONNECT, _("Search for updates..."), None,
+                    _("Search online for program updates"),
+                    self.menuupdate_activate),
             ("About", gtk.STOCK_ABOUT, about if const.OSX else None, None,
                     _("About this application"), self.menuabout_activate)
            ))

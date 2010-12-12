@@ -65,6 +65,8 @@ ui_mainwindow = """
          <menuitem action="Home"/>
          <menuitem action="Forum"/>
          <separator/>
+         <menuitem action="Update"/>
+         <separator/>
          <menuitem action="About"/>
       </menu>
    </menubar>

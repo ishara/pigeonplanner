@@ -40,12 +40,9 @@ class MessageDialog(gtk.MessageDialog):
         @param extra: Extra data to use with a string formatter
         """
 
+        head, text, title = data
         if extra:
-            head = data[0] %extra
-        else:
-            head = data[0]
-        text = data[1]
-        title = data[2]
+            head = head %extra
 
         if msgtype == const.ERROR:
             msgtype = gtk.MESSAGE_ERROR

@@ -31,7 +31,6 @@ import gtk
 
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import update
 from pigeonplanner import backup
 from pigeonplanner import builder
 from pigeonplanner import messages
@@ -73,7 +72,6 @@ class ToolsWindow(builder.GtkBuilder):
         self.db = self.main.database
 
         self.toolsdialog.set_transient_for(self.main.mainwindow)
-        self.linkbutton.set_uri(const.DOWNLOADURL)
 
         distance_units = [
                     (_('Yards'), 0.9144),
@@ -113,7 +111,7 @@ class ToolsWindow(builder.GtkBuilder):
         i = 0
         for category in [_("Velocity calculator"), _("Calendar"),
                          _("Datasets"), _("Addresses"), _("Statistics"),
-                         _("Backup"), _("Update")]:
+                         _("Backup")]:
             self.liststore.append([i, category])
             label = getattr(self, "label_title_%s" %i)
             label.set_markup("<b><i><big>%s</big></i></b>" %category)
@@ -710,22 +708,4 @@ class ToolsWindow(builder.GtkBuilder):
             else:
                 dialogs.MessageDialog(const.INFO, messages.MSG_RESTORE_FAILED,
                                       self.main.mainwindow)
-
-    # Update
-    def on_btnupdate_clicked(self, widget):
-        gobject.idle_add(self.update_check)
-
-    def update_check(self):
-        try:
-            new, msg = update.update()
-        except update.UpdateError, exc:
-            new = False
-            msg = str(exc)
-
-        self.labelversion.set_text(msg)
-
-        if new:
-            self.linkbutton.set_property('visible', True)
-
-        return False
 
