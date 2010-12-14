@@ -582,10 +582,12 @@
                       <object class="GtkTreeView" id="tvMedicationSelect">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK</property>
                         <property name="model">lsMedicationSelect</property>
                         <property name="headers_visible">False</property>
                         <property name="headers_clickable">False</property>
                         <property name="search_column">0</property>
+                        <signal name="button_press_event" handler="on_tvMedicationSelect_press"/>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn31">
                             <child>

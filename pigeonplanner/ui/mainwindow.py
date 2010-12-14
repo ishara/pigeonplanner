@@ -962,6 +962,19 @@ class MainWindow(builder.GtkBuilder):
 
             menus.popup_menu(event, entries)
 
+    def on_tvMedicationSelect_press(self, treeview, event):
+        pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if pthinfo is None: return
+        path, col, cellx, celly = pthinfo
+        pindex = treeview.get_model()[path][2]
+
+        if event.button == 3:
+            entries = [
+                (gtk.STOCK_INFO, self.show_pigeon_details, (pindex,))
+                ]
+
+            menus.popup_menu(event, entries)
+
     def on_addmedication_clicked(self, widget):
         self.meddialog_expanded = False
         self.clear_medicationdialog_fields()
