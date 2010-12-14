@@ -963,6 +963,7 @@ class MainWindow(builder.GtkBuilder):
             menus.popup_menu(event, entries)
 
     def on_addmedication_clicked(self, widget):
+        self.meddialog_expanded = False
         self.clear_medicationdialog_fields()
         self.fill_medicationselect_treeview()
         comboboxes.fill_combobox(self.cbMedicationLoft,
@@ -1077,7 +1078,7 @@ class MainWindow(builder.GtkBuilder):
 
     def hide_medication_dialog(self, widget=None, event=None):
         self.medicationdialog.hide()
-        self.expander.set_expanded(False)
+        self.meddialog_list_hide()
         return True
 
     def clear_medicationdialog_fields(self):
@@ -1128,6 +1129,24 @@ class MainWindow(builder.GtkBuilder):
 
         self.lsMedicationSelect.set_sort_column_id(3, gtk.SORT_ASCENDING)
         self.lsMedicationSelect.set_sort_column_id(4, gtk.SORT_ASCENDING)
+
+    def on_meddialogexpand_clicked(self, widget):
+        if self.meddialog_expanded:
+            self.meddialog_list_hide()
+        else:
+            self.meddialog_list_show()
+
+    def meddialog_list_show(self):
+        self.meddialog_expanded = True
+        self.set_multiple_visible([self.medsep, self.medvbox], True)
+        self.meddialogexpandimg.set_from_stock(gtk.STOCK_GO_BACK,
+                                               gtk.ICON_SIZE_BUTTON)
+
+    def meddialog_list_hide(self):
+        self.meddialog_expanded = False
+        self.set_multiple_visible([self.medsep, self.medvbox], False)
+        self.meddialogexpandimg.set_from_stock(gtk.STOCK_GO_FORWARD,
+                                               gtk.ICON_SIZE_BUTTON)
 
     # Find parent callbacks
     def on_findsire_clicked(self, widget):
