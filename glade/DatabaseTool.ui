@@ -379,6 +379,10 @@
       <action-widget response="0">button_quit</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkImage" id="image4">
+    <property name="visible">True</property>
+    <property name="stock">gtk-file</property>
+  </object>
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="stock">gtk-properties</property>
@@ -387,15 +391,11 @@
     <property name="visible">True</property>
     <property name="stock">gtk-find</property>
   </object>
-  <object class="GtkImage" id="image4">
-    <property name="visible">True</property>
-    <property name="stock">gtk-file</property>
-  </object>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
-      <widget name="button_delete"/>
-      <widget name="button_check"/>
       <widget name="button_optimize"/>
+      <widget name="button_check"/>
+      <widget name="button_delete"/>
     </widgets>
   </object>
 </interface>

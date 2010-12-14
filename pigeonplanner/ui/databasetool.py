@@ -96,14 +96,27 @@ class DBWindow(builder.GtkBuilder):
             for row in rows:
                 data = list(row)
                 pindex = data[1]
-                logger.debug("Fixing empty sex value for '%s'" %pindex)
+                band = data[2]
+                year = data[3]
                 # Remove indexkey and append pindex
                 data = data[1:]
                 data.append(pindex)
+                # Try to detect the correct sex, set a fallback first
+                sex = const.YOUNG
+                if self.database.has_parent(band, year, const.SIRE) == 0:
+                    # No pigeon has it set as sire, try as dam
+                    if self.database.has_parent(band, year, const.DAM) > 0:
+                        # Found atleast once as dam
+                        sex = const.DAM
+                else:
+                    # Found atleast once as sire
+                    sex = const.SIRE
                 # Set a value
-                data[3] = const.SIRE
+                data[3] = sex
                 # Update this pigeon in the database
                 self.database.update_table(self.database.PIGEONS, data, 1, 1)
+                logger.debug("Fixed empty sex value for '%s' with value '%s'"
+                             %(pindex, sex))
 
         self.__set_image(self.image_check, OK)
 
