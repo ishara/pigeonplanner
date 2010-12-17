@@ -1014,6 +1014,7 @@ class MainWindow(builder.GtkBuilder):
             self.tvMedication.set_cursor(path)
 
     def on_editmedication_clicked(self, widget):
+        self.meddialog_expanded = False
         self.fill_medicationselect_treeview()
         comboboxes.fill_combobox(self.cbMedicationLoft,
                                  self.database.select_from_table(
