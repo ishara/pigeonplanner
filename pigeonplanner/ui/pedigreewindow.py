@@ -30,7 +30,7 @@ from pigeonplanner import builder
 from pigeonplanner import printing
 from pigeonplanner.ui import pedigree
 from pigeonplanner.ui import maildialog
-from pigeonplanner.ui import toolswindow
+from pigeonplanner.ui import addressbook
 from pigeonplanner.ui.widgets import menus
 
 
@@ -117,9 +117,9 @@ class PedigreeWindow(builder.GtkBuilder):
 
     def do_operation(self, op):
         userinfo = common.get_own_address(self.main.database)
-
-        if not toolswindow.edit_user_info(self.pedigreewindow, self.main,
-                                          userinfo['name']):
+        if not addressbook.check_user_info(self.pedigreewindow,
+                                           self.main.database,
+                                           userinfo['name']):
             return
 
         printing.PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo,
