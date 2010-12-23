@@ -44,6 +44,7 @@ from pigeonplanner.ui import dialogs
 from pigeonplanner.ui import pedigree
 from pigeonplanner.ui import logdialog
 from pigeonplanner.ui import photoalbum
+from pigeonplanner.ui import addressbook
 from pigeonplanner.ui import toolswindow
 from pigeonplanner.ui import resultwindow
 from pigeonplanner.ui import optionsdialog
@@ -514,6 +515,10 @@ class MainWindow(builder.GtkBuilder):
         else:
             self.statusbar.hide()
             self.options.set_option('Options', 'statusbar', 'False')
+
+    def menuaddresses_activate(self, widget):
+        logger.info(common.get_function_name())
+        addressbook.AddressBook(self.mainwindow, self.database)
 
     def menuhome_activate(self, widget):
         logger.info(common.get_function_name())
@@ -1386,6 +1391,7 @@ class MainWindow(builder.GtkBuilder):
             ("PigeonMenu", None, _("_Pigeon")),
             ("EditMenu", None, _("_Edit")),
             ("ViewMenu", None, _("_View")),
+            ("ToolsMenu", None, _("_Tools")),
             ("HelpMenu", None, _("_Help")),
             ("PrintPedigree", None, _("_Pedigree"), None,
                     _("Print this pedigree"), self.menuprintpedigree_activate),
@@ -1403,9 +1409,6 @@ class MainWindow(builder.GtkBuilder):
                     _("Add a new pigeon"), self.menuadd_activate),
             ("Addrange", gtk.STOCK_ADD, _("Add ran_ge"), "<control><shift>A",
                     _("Add a range of pigeons"), self.menuaddrange_activate),
-            ("Album", gtk.STOCK_DIRECTORY, _("_Photo Album"), None,
-                    _("View the images of your pigeons"),
-                    self.menualbum_activate),
             ("Log", gtk.STOCK_FILE, _("_Logfile Viewer"), "<control>L",
                     _("See the logfile"), self.menulog_activate),
             ("Search", gtk.STOCK_FIND, _("_Find..."), "<control>F",
@@ -1427,6 +1430,11 @@ class MainWindow(builder.GtkBuilder):
                     _("Configure the application"), self.menupref_activate),
             ("Filter", None, _("_Filter..."), None,
                     _("Set filter options"), self.menufilter_activate),
+            ("Album", None, _("_Photo Album"), None,
+                    _("View the images of your pigeons"),
+                    self.menualbum_activate),
+            ("Addresses", None, _("Address book"), None,
+                    _("View the address book"),  self.menuaddresses_activate),
             ("Home", gtk.STOCK_HOME, _("_Website"), None,
                     _("Go to the website for more information"),
                     self.menuhome_activate),

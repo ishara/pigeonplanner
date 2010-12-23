@@ -445,9 +445,9 @@ class DatabaseOperations(object):
         sql = 'SELECT * FROM Addresses'
         return self.__db_execute_select(sql, None, RET_ALLCOL)
 
-    def get_address(self, name):
-        sql = 'SELECT * FROM Addresses WHERE name=?'
-        return self.__db_execute_select(sql, (name,), RET_ONEROW)
+    def get_address(self, key):
+        sql = 'SELECT * FROM Addresses WHERE Addresskey=?'
+        return self.__db_execute_select(sql, (key,), RET_ONEROW)
 
     def get_own_address(self):
         sql = 'SELECT * FROM Addresses WHERE me=1'

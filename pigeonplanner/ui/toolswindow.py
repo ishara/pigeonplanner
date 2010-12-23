@@ -39,30 +39,6 @@ from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import filefilters
 
 
-def edit_user_info(parent, main, name):
-    """
-    Check if the user has entered his personal info
-
-    @param parent: A parent window
-    @param main: The main instance
-    @param name: The name of the user
-    """
-
-    if name == '':
-        d = dialogs.MessageDialog(const.QUESTION, messages.MSG_NO_INFO,
-                                  parent)
-        if d.yes:
-            tw = ToolsWindow(main)
-            tw.toolsdialog.set_keep_above(True)
-            tw.treeview.set_cursor(3)
-            tw.on_adadd_clicked(None, pedigree_call=True)
-            tw.chkme.set_active(True)
-
-            return False
-
-    return True
-
-
 class ToolsWindow(builder.GtkBuilder):
     def __init__(self, main, notification=0):
         builder.GtkBuilder.__init__(self, const.GLADETOOLS)
@@ -110,8 +86,7 @@ class ToolsWindow(builder.GtkBuilder):
         # Add the categories
         i = 0
         for category in [_("Velocity calculator"), _("Calendar"),
-                         _("Datasets"), _("Addresses"), _("Statistics"),
-                         _("Backup")]:
+                         _("Datasets"), _("Statistics"), _("Backup")]:
             self.liststore.append([i, category])
             label = getattr(self, "label_title_%s" %i)
             label.set_markup("<b><i><big>%s</big></i></b>" %category)
@@ -127,10 +102,6 @@ class ToolsWindow(builder.GtkBuilder):
         self.sel_events = self.tv_events.get_selection()
         self.sel_events.connect('changed', self.events_changed)
         self.fill_events_view()
-
-        self.sel_address = self.tvaddress.get_selection()
-        self.sel_address.connect('changed', self.adselection_changed)
-        self.fill_address_view()
 
         # Fill spinbuttons
         dt = datetime.datetime.now()
@@ -480,190 +451,6 @@ class ToolsWindow(builder.GtkBuilder):
             self.dataadd.set_sensitive(True)
         else:
             self.dataadd.set_sensitive(False)
-
-    # Addresses
-    def fill_address_view(self):
-        """
-        Fill the treeview with available addresses
-        """ 
-
-        self.ls_address.clear()
-
-        for item in self.db.get_all_addresses():
-            self.ls_address.insert(0, [item[1]])
-
-        self.ls_address.set_sort_column_id(0, gtk.SORT_ASCENDING)
-
-    def adselection_changed(self, selection):
-        model, path = selection.get_selected()
-
-        self.empty_adentrys()
-
-        widgets = [self.adremove, self.adedit]
-        if path:
-            self.set_multiple_sensitive(widgets, True)
-        else:
-            self.set_multiple_sensitive(widgets, False)
-            return
-
-        self.set_data()
-
-    def set_data(self):
-        model, path = self.sel_address.get_selected()
-
-        name = model[path][0]
-
-        data = self.db.get_address(name)
-
-        self.adentryname.set_text(name)
-        self.adentrystreet.set_text(data[2])
-        self.adentryzip.set_text(data[3])
-        self.adentrycity.set_text(data[4])
-        self.adentrycountry.set_text(data[5])
-        self.adentryphone.set_text(data[6])
-        self.adentrymail.set_text(data[7])
-        self.adentrycomment.set_text(data[8])
-
-    def on_adadd_clicked(self, widget, pedigree_call=False):
-        self.pedigree_call = pedigree_call
-
-        self.admode = const.ADD
-
-        self.start_add()
-
-    def on_adedit_clicked(self, widget):
-        self.pedigree_call = False
-
-        self.admode = const.EDIT
-
-        self.start_add()
-
-    def on_btnadd_clicked(self, widget):
-        data = self.get_entry_data()
-
-        if not data[0]:
-            dialogs.MessageDialog(const.ERROR, messages.MSG_NAME_EMPTY,
-                                  self.toolsdialog)
-            return
-
-        if self.admode == const.ADD:
-            for ad in self.db.get_all_addresses():
-                if data[0] == ad[1]:
-                    dialogs.MessageDialog(const.ERROR,
-                                          messages.MSG_NAME_EXISTS,
-                                          self.toolsdialog)
-                    return
-
-            self.db.insert_into_table(self.db.ADDR, data)
-        else:
-            data += (self.get_name(), )
-            self.db.update_table(self.db.ADDR, data, 1, 1)
-
-        self.fill_address_view()
-
-        self.finish_add()
-
-    def on_btncancel_clicked(self, widget):
-        self.finish_add()
-
-    def start_add(self):
-        for entry in self.get_entrys():
-            entry.set_property('editable', True)
-
-        self.set_multiple_sensitive([self.treeview, self.vboxtv], False)
-
-        alreadyMe = False
-        for item in self.db.get_all_addresses():
-            if item[9]:
-                alreadyMe = True
-                self.me = item[1]
-                break
-
-        if alreadyMe:
-            self.set_multiple_visible([self.btnadd, self.btncancel], True)
-            if self.admode == const.EDIT and self.me == self.get_name():
-                self.set_multiple_visible([self.chkme], True)
-                self.chkme.set_active(True)
-        else:
-            self.set_multiple_visible([self.btnadd, self.btncancel, self.chkme],
-                                      True)
-
-        self.adentryname.grab_focus()
-        self.adentryname.set_position(-1)
-
-    def finish_add(self):
-        self.empty_adentrys()
-
-        for entry in self.get_entrys():
-            entry.set_property('editable', False)
-
-        self.chkme.set_active(False)
-
-        self.set_multiple_visible([self.btnadd, self.btncancel, self.chkme],
-                                  False)
-        self.set_multiple_sensitive([self.treeview, self.vboxtv], True)
-
-        if self.pedigree_call:
-            self.toolsdialog.destroy()
-
-    def on_adremove_clicked(self, widget):
-        if not dialogs.MessageDialog(const.QUESTION,
-                                     messages.MSG_REMOVE_ADDRESS,
-                                     self.toolsdialog, self.get_name()):
-            return
-
-        self.db.delete_from_table(self.db.ADDR, self.get_name())
-
-        model, path = self.sel_address.get_selected()
-        self.ls_address.remove(path)
-
-        if len(self.ls_address) > 0:
-            self.tvaddress.set_cursor((0,))
-
-    def get_name(self):
-        """
-        Return the name of the selected person
-        """
-
-        model, path = self.sel_address.get_selected()
-        if not path:
-            return None
-        else:
-            return model[path][0]
-
-    def get_entry_data(self):
-        """
-        Return the text of all the entry's
-        """
-
-        return (self.adentryname.get_text(),\
-                self.adentrystreet.get_text(),\
-                self.adentryzip.get_text(),\
-                self.adentrycity.get_text(),\
-                self.adentrycountry.get_text(),\
-                self.adentryphone.get_text(),\
-                self.adentrymail.get_text(),\
-                self.adentrycomment.get_text(),\
-                int(self.chkme.get_active()))
-
-    def get_entrys(self):
-        """
-        Return all entry's
-        """
-
-        entrys = []
-        for widget in self.get_objects_from_prefix("adentry"):
-            entrys.append(widget)
-
-        return entrys
-
-    def empty_adentrys(self):
-        """
-        Clear all entry's
-        """
-
-        for entry in self.get_entrys():
-            entry.set_text('')
 
     # Statistics
     def on_btnsearchdb_clicked(self, widget):

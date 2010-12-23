@@ -27,7 +27,6 @@ ui_mainwindow = """
          <menuitem action="Addrange"/>
          <separator/>
          <menuitem action="Tools"/>
-         <menuitem action="Album"/>
          <menuitem action="Log"/>
          <separator/>
          <menu action="PrintMenu">
@@ -60,6 +59,10 @@ ui_mainwindow = """
          <menuitem action="Remove"/>
          <menuitem action="Pedigree"/>
          <menuitem action="Addresult"/>
+      </menu>
+      <menu action="ToolsMenu">
+         <menuitem action="Album"/>
+         <menuitem action="Addresses"/>
       </menu>
       <menu action="HelpMenu">
          <menuitem action="Home"/>
