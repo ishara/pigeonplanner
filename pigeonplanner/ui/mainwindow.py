@@ -576,9 +576,10 @@ class MainWindow(builder.GtkBuilder):
             pindex = band + rangeyear
 
             if self.database.has_pigeon(pindex):
-                if not dialogs.MessageDialog(const.WARNING,
-                                             messages.MSG_OVERWRITE_PIGEON,
-                                             self.mainwindow):
+                d = dialogs.MessageDialog(const.WARNING,
+                                          messages.MSG_OVERWRITE_PIGEON,
+                                          self.mainwindow)
+                if not d.yes:
                     continue
 
             self.database.insert_into_table(self.database.PIGEONS,
@@ -811,9 +812,10 @@ class MainWindow(builder.GtkBuilder):
         model, tIter = self.selResults.get_selected()
         pindex, ring, year = self.get_main_ring()
 
-        if not dialogs.MessageDialog(const.QUESTION,
-                                     messages.MSG_REMOVE_RESULT,
-                                     self.mainwindow):
+        d = dialogs.MessageDialog(const.QUESTION,
+                                  messages.MSG_REMOVE_RESULT,
+                                  self.mainwindow)
+        if not d.yes:
             return
 
         self.database.delete_from_table(self.database.RESULTS,
