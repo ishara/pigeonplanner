@@ -354,7 +354,7 @@ class ToolsWindow(builder.GtkBuilder):
         if datatype == _("Colours"):
             items = self.db.select_from_table(self.db.COLOURS)
         elif datatype == _("Sectors"):
-            items = self.db.select_from_table(self.db.SECTORES)
+            items = self.db.select_from_table(self.db.SECTORS)
         elif datatype == _("Types"):
             items = self.db.select_from_table(self.db.TYPES)
         elif datatype == _("Categories"):
