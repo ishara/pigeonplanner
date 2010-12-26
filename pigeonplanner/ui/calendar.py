@@ -26,6 +26,7 @@ from pigeonplanner import checks
 from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner.ui import dialogs
+from pigeonplanner.ui.widgets import date
 
 
 class Calendar(builder.GtkBuilder):
@@ -130,8 +131,7 @@ class Calendar(builder.GtkBuilder):
             self.labelnotify.set_text("-1")
 
     def on_dateicon_pressed(self, widget, icon, event):
-        #TODO
-        pass
+        date.CalendarPopup(widget)
 
     def on_checknotify_toggled(self, widget):
         self.set_multiple_sensitive([self.alignnotify], widget.get_active())
@@ -166,9 +166,9 @@ class Calendar(builder.GtkBuilder):
             else:
                 self.textview.set_editable(value)
 
-#        icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
-#        pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if value else None
-#        self.entrydate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
+        icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
+        pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if value else None
+        self.entrydate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
 
         self.entrydate.grab_focus()
         self.entrydate.set_position(-1)
