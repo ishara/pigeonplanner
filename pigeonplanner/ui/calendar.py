@@ -45,7 +45,6 @@ class Calendar(builder.GtkBuilder):
         self._fill_treeview(notification_id)
         if notification_id is None:
             self._selection.select_path(0)
-        self.entrydate.connect('icon-press', self.on_dateicon_pressed)
 
         self.calendarwindow.set_transient_for(parent)
         self.calendarwindow.show()
@@ -167,9 +166,9 @@ class Calendar(builder.GtkBuilder):
             else:
                 self.textview.set_editable(value)
 
-        #icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
-        #pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if value else None
-        #self.entrydate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
+#        icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
+#        pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if value else None
+#        self.entrydate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
 
         self.entrydate.grab_focus()
         self.entrydate.set_position(-1)

@@ -99,6 +99,7 @@
                                 <property name="has_frame">False</property>
                                 <property name="invisible_char">•</property>
                                 <property name="width_chars">16</property>
+                                <signal name="icon_press" handler="on_dateicon_pressed"/>
                               </object>
                             </child>
                           </object>
