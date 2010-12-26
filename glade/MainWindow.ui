@@ -1770,93 +1770,6 @@
       <action-widget response="0">srchclose</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkWindow" id="calpopup">
-    <property name="can_focus">True</property>
-    <property name="events">GDK_KEY_PRESS_MASK | GDK_STRUCTURE_MASK</property>
-    <property name="type">popup</property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="decorated">False</property>
-    <child>
-      <object class="GtkFrame" id="frame23">
-        <property name="visible">True</property>
-        <property name="label_xalign">0</property>
-        <property name="shadow_type">out</property>
-        <child>
-          <object class="GtkHBox" id="hbox4">
-            <property name="visible">True</property>
-            <child>
-              <object class="GtkVBox" id="vbox5">
-                <property name="visible">True</property>
-                <property name="spacing">8</property>
-                <child>
-                  <object class="GtkButton" id="calapply">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="can_default">True</property>
-                    <property name="has_default">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_calapply_clicked"/>
-                    <child>
-                      <object class="GtkImage" id="image3">
-                        <property name="visible">True</property>
-                        <property name="stock">gtk-apply</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="calcancel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_calcancel_clicked"/>
-                    <child>
-                      <object class="GtkImage" id="image5">
-                        <property name="visible">True</property>
-                        <property name="stock">gtk-cancel</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkCalendar" id="calendar">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="year">2009</property>
-                <property name="month">3</property>
-                <property name="day">28</property>
-                <signal name="day_selected_double_click" handler="on_day_double_clicked"/>
-                <signal name="day_selected" handler="on_day_selected"/>
-              </object>
-              <packing>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-        </child>
-        <child type="label_item">
-          <placeholder/>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkFileChooserDialog" id="filedialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Choose an image...</property>
@@ -3343,7 +3256,7 @@
                                                 <property name="visible">True</property>
                                                 <property name="resize_mode">queue</property>
                                                 <child>
-                                                  <object class="GtkHBox" id="hbox5">
+                                                  <object class="GtkHBox" id="hbox4">
                                                     <property name="visible">True</property>
                                                     <child>
                                                       <object class="GtkEntry" id="entrySex">

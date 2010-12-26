@@ -50,6 +50,7 @@ from pigeonplanner.ui import toolswindow
 from pigeonplanner.ui import resultwindow
 from pigeonplanner.ui import optionsdialog
 from pigeonplanner.ui import pedigreewindow
+from pigeonplanner.ui.widgets import date
 from pigeonplanner.ui.widgets import menus
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.widgets import filefilters
@@ -1203,37 +1204,7 @@ class MainWindow(builder.GtkBuilder):
 
     # Calendar callbacks
     def on_calicon_press(self, widget, icon, event):
-        self.savedDate = widget.get_text()
-        self.dateEntry = widget
-
-        self.position_popup()
-
-        date = datetime.date.today()
-        self.calendar.select_month(date.month-1, date.year)
-        self.calendar.select_day(date.day)
-
-        self.calpopup.show()
-
-    def on_calapply_clicked(self, widget):
-        self.hide_popup()
-
-    def on_calcancel_clicked(self, widget):
-        self.dateEntry.set_text(self.savedDate)
-
-        self.hide_popup()
-
-    def on_day_selected(self, widget):
-        year, month, day = self.calendar.get_date()
-        month += 1        
-        the_date = datetime.date(year, month, day)
-
-        if the_date:
-            self.dateEntry.set_text(the_date.strftime(const.DATE_FORMAT))
-        else:
-            self.dateEntry.set_text('')
-
-    def on_day_double_clicked(self, widget, data=None):
-        self.hide_popup()
+        date.CalendarPopup(widget)
 
     # Details dialog
     def show_pigeon_details(self, widget, pindex):
@@ -2179,40 +2150,6 @@ class MainWindow(builder.GtkBuilder):
         image_folder = glib.get_user_special_dir(glib.USER_DIRECTORY_PICTURES)
         self.filedialog.set_current_folder(image_folder)
         self.filedialog.show()
-
-    def position_popup(self):
-        """
-        Position the popup calendar
-        """
-
-        if self.get_object_name(self.dateEntry) == 'entryDate':
-            window = self.resultdialog.window
-        elif self.get_object_name(self.dateEntry) == 'entry_meddialog_date':
-            window = self.medicationdialog.window
-        else:
-            window = self.statusdialog.window
-
-        (x, y) = gtk.gdk.Window.get_origin(window)
-
-        x += self.dateEntry.allocation.x
-        y += self.dateEntry.allocation.y
-        bwidth = self.dateEntry.allocation.width
-        bheight = self.dateEntry.allocation.height
-
-        x += bwidth - self.dateEntry.size_request()[0]
-        y += bheight
-
-        if x < 0: x = 0
-        if y < 0: y = 0
-        
-        self.calpopup.move(x, y)
-
-    def hide_popup(self):
-        """
-        Hide the popup calendar
-        """
-
-        self.calpopup.hide()
 
     def get_pigeoninfo(self):
         """
