@@ -58,9 +58,13 @@ class PedigreeWindow(builder.GtkBuilder):
         self.labelSex.set_text(self.pigeoninfo['sex'])
         self.labelName.set_text(self.pigeoninfo['name'])
 
+        tableSire = gtk.Table(20, 7)
+        self.alignSire.add(tableSire)
+        tableDam = gtk.Table(20, 7)
+        self.alignDam.add(tableDam)
         dp = pedigree.DrawPedigree(self.main, self)
         dp.draw_pedigree(self.main.parser.pigeons,
-                         [self.tableSire, self.tableDam],
+                         [tableSire, tableDam],
                          self.pigeoninfo['pindex'], True)
 
         self.pdfname = "%s_%s_%s.pdf" %(_("Pedigree"), pigeoninfo['ring'],

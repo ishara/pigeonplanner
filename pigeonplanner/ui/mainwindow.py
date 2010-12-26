@@ -99,6 +99,11 @@ class MainWindow(builder.GtkBuilder):
             os.mkdir(const.THUMBDIR)
             self.build_thumbnails()
 
+        self.tableSire = gtk.Table(7, 5)
+        self.alignSire.add(self.tableSire)
+        self.tableDam = gtk.Table(7, 5)
+        self.alignDam.add(self.tableDam)
+
         self.pedigree = pedigree.DrawPedigree(self)
         self.draw_empty_pedigree()
         self.build_menubar()
