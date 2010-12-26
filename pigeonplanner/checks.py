@@ -20,6 +20,9 @@ Provides functions to check band and year entries
 """
 
 
+import datetime
+
+from pigeonplanner import const
 from pigeonplanner import messages
 
 
@@ -48,4 +51,10 @@ def check_ring_entry(inputRing, inputYear):
     elif not len(inputYear) == 4:
         raise InvalidInputError(messages.MSG_INVALID_LENGTH)
 
+def check_date_input(date):
+    try:
+        datetime.datetime.strptime(date, const.DATE_FORMAT)
+    except ValueError:
+        return False
+    return True
 

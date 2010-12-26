@@ -118,9 +118,10 @@ class DatabaseOperations(object):
           ' me INTEGER)',
     EVENTS: '(Eventskey INTEGER PRIMARY KEY,'
             ' date TEXT,'
+            ' type TEXT,'
             ' description TEXT,'
             ' comment TEXT,'
-            ' notify TEXT,'
+            ' notify INTEGER,'
             ' interval INTEGER,'
             ' notifyday INTEGER)',
     COLOURS: '(Colourkey INTEGER PRIMARY KEY,'
@@ -429,10 +430,10 @@ class DatabaseOperations(object):
 #### Events
     def get_all_events(self):
         sql = 'SELECT * FROM Events'
-        return self.__db_execute_select(sql, None, RET_ALLCOL)
+        return self.__db_execute_select(sql)
 
-    def get_event_data(self, ID):
-        sql = 'SELECT comment, notify, interval FROM Events WHERE Eventskey=?'
+    def get_event(self, ID):
+        sql = 'SELECT * FROM Events WHERE Eventskey=?'
         return self.__db_execute_select(sql, (ID,), RET_ONEROW)
 
     def get_notification(self, now):

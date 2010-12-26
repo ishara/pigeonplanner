@@ -41,6 +41,7 @@ from pigeonplanner import builder
 from pigeonplanner import printing
 from pigeonplanner import messages
 from pigeonplanner.ui import dialogs
+from pigeonplanner.ui import calendar
 from pigeonplanner.ui import pedigree
 from pigeonplanner.ui import logdialog
 from pigeonplanner.ui import photoalbum
@@ -201,9 +202,7 @@ class MainWindow(builder.GtkBuilder):
                                       messages.MSG_EVENT_NOTIFY,
                                       self.mainwindow, description)
             if d.yes:
-                tw = toolswindow.ToolsWindow(self, events[0][0])
-                tw.toolsdialog.set_keep_above(True)
-                tw.treeview.set_cursor(1)
+                calendar.Calendar(self.mainwindow, self.database, events[0][0])
 
     def quit_program(self, widget=None, event=None, bckp=True):
         if self.options.optionList.backup and bckp:
@@ -519,6 +518,10 @@ class MainWindow(builder.GtkBuilder):
     def menuaddresses_activate(self, widget):
         logger.info(common.get_function_name())
         addressbook.AddressBook(self.mainwindow, self.database)
+
+    def menucalendar_activate(self, widget):
+        logger.info(common.get_function_name())
+        calendar.Calendar(self.mainwindow, self.database)
 
     def menuhome_activate(self, widget):
         logger.info(common.get_function_name())
@@ -1437,6 +1440,8 @@ class MainWindow(builder.GtkBuilder):
                     self.menualbum_activate),
             ("Addresses", None, _("Address book"), None,
                     _("View the address book"),  self.menuaddresses_activate),
+            ("Calendar", None, _("Calendar"), None,
+                    _("View the calendar"),  self.menucalendar_activate),
             ("Home", gtk.STOCK_HOME, _("_Website"), None,
                     _("Go to the website for more information"),
                     self.menuhome_activate),

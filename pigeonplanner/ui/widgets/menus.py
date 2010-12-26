@@ -63,6 +63,7 @@ ui_mainwindow = """
       <menu action="ToolsMenu">
          <menuitem action="Album"/>
          <menuitem action="Addresses"/>
+         <menuitem action="Calendar"/>
       </menu>
       <menu action="HelpMenu">
          <menuitem action="Home"/>
