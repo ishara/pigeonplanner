@@ -127,6 +127,6 @@ class PedigreeWindow(builder.GtkBuilder):
             return
 
         printing.PrintPedigree(self.pedigreewindow, self.pigeoninfo, userinfo,
-                               self.main.options.optionList, op, self.pdfname,
+                               self.main.options, op, self.pdfname,
                                self.main.parser.pigeons)
 

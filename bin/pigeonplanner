@@ -55,7 +55,7 @@ if __name__ == "__main__":
     app.setup_database()
     app.setup_parser()
 
-    if app.options.optionList.update:
+    if app.options.update:
         updatethread = Thread(None, app.search_updates, None)
         updatethread.start()
 

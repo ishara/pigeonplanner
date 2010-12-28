@@ -80,7 +80,7 @@ class Startup(object):
     def setup_locale(self):
         from pigeonplanner import intl
 
-        language = self.options.optionList.language
+        language = self.options.language
         intl.install(const.DOMAIN, const.LANGDIR, language)
 
     def setup_logging(self):
@@ -138,7 +138,7 @@ class Startup(object):
         if WIN32 and os.path.exists('.\\share\\themes'):
             themes = os.listdir('.\\share\\themes')
             themefile = os.path.join('.\\share\\themes',
-                                     themes[self.options.optionList.theme],
+                                     themes[self.options.theme],
                                      'gtk-2.0\\gtkrc')
             gtk.rc_parse(themefile)
 

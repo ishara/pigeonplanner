@@ -23,28 +23,27 @@ Options dialog class
 import os
 
 import gtk
+import gobject
 
 from pigeonplanner import const
 from pigeonplanner import builder
-from pigeonplanner import options
 from pigeonplanner import messages
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import comboboxes
 
 
 class OptionsDialog(builder.GtkBuilder):
-    def __init__(self, main):
+    __gsignals__ = {'interface-changed': (gobject.SIGNAL_RUN_LAST,
+                                      None, (bool, bool, bool, bool)),
+                    }
+    def __init__(self, parent, options):
         builder.GtkBuilder.__init__(self, const.GLADEOPTIONS)
 
-        self.main = main
-
-        self.optionsdialog.set_transient_for(self.main.mainwindow)
-
-        self.opt = options.GetOptions()
+        self.options = options
 
         # Build main treeview
-        self.selection = self.treeview.get_selection()
-        self.selection.connect('changed', self.selection_changed)
+        self._selection = self.treeview.get_selection()
+        self._selection.connect('changed', self.on_selection_changed)
 
         # Add the categories
         # [(Category, image, [children]), ]
@@ -58,139 +57,84 @@ class OptionsDialog(builder.GtkBuilder):
                             ]),
                     ]
         i = 0
-        for parent, img, children in categories:
+        for par, img, children in categories:
             icon = self.treeview.render_icon(img, gtk.ICON_SIZE_LARGE_TOOLBAR)
-            p_iter = self.treestore.append(None, [i, icon, parent])
+            p_iter = self.treestore.append(None, [i, icon, par])
             for child in children:
                 i += 1
                 self.treestore.append(p_iter, [i, None, child])
             i += 1
-        self.selection.select_path((0,))
+        self._selection.select_path(0)
 
         # Show the theme changer on Windows
         if const.WINDOWS and os.path.exists('.\\share\\themes'):
             self.framethemes.show()
             themes = os.listdir('.\\share\\themes\\')
-            comboboxes.fill_combobox(self.cbThemes, themes)
+            comboboxes.fill_combobox(self.combothemes, themes)
 
         # Fill language combobox with available languages
         self.languages = os.listdir(const.LANGDIR)
         self.languages.insert(0, 'en')
         self.languages.sort()
         self.languages.insert(0, 'Default')
-        comboboxes.fill_combobox(self.cbLang, self.languages, sort=False)
+        comboboxes.fill_combobox(self.combolangs, self.languages, sort=False)
 
-        self.set_options()
+        self._set_options()
 
-        # Set the default button as secondary. This option is broken in Glade.
-        self.action_area.set_child_secondary(self.default, True)
-
+        self.optionsdialog.set_transient_for(parent)
         self.optionsdialog.show()
 
-    def selection_changed(self, selection):
-        model, path = selection.get_selected()
-        if not path: return
+    # Callbacks
+    def on_selection_changed(self, selection):
+        model, rowiter = selection.get_selected()
+        if rowiter is None: return
 
         try:
-            self.notebook.set_current_page(model[path][0])
+            self.notebook.set_current_page(model[rowiter][0])
         except TypeError:
             pass
-
-    def set_options(self):
-        # General
-        self.chkUpdate.set_active(self.opt.optionList.update)
-
-        for index, lang in enumerate(self.languages):
-            if self.opt.optionList.language == lang:
-                self.cbLang.set_active(index)
-                break
-
-        self.chkBackup.set_active(self.opt.optionList.backup)
-        self.sbDay.set_value(self.opt.optionList.interval)
-        self.fcbutton.set_current_folder(self.opt.optionList.location)
-
-        # Appearance
-        self.chkName.set_active(self.opt.optionList.colname)
-        self.chkColour.set_active(self.opt.optionList.colcolour)
-        self.chkSex.set_active(self.opt.optionList.colsex)
-        self.chkLoft.set_active(self.opt.optionList.colloft)
-        self.chkStrain.set_active(self.opt.optionList.colstrain)
-
-        self.cbThemes.set_active(self.opt.optionList.theme)
-
-        self.chkArrows.set_active(self.opt.optionList.arrows)
-        self.chkStats.set_active(self.opt.optionList.stats)
-        self.chkToolbar.set_active(self.opt.optionList.toolbar)
-        self.chkStatusbar.set_active(self.opt.optionList.statusbar)
-
-        # Printing
-        self.cbPaper.set_active(self.opt.optionList.paper)
-        self.cbLayout.set_active(self.opt.optionList.layout)
-
-        self.chkPerName.set_active(self.opt.optionList.perName)
-        self.chkPerAddress.set_active(self.opt.optionList.perAddress)
-        self.chkPerPhone.set_active(self.opt.optionList.perPhone)
-        self.chkPerEmail.set_active(self.opt.optionList.perEmail)
-
-        self.chkPigName.set_active(self.opt.optionList.pigName)
-        self.chkPigColour.set_active(self.opt.optionList.pigColour)
-        self.chkPigSex.set_active(self.opt.optionList.pigSex)
-        self.chkPigExtra.set_active(self.opt.optionList.pigExtra)
-        self.chkPigImage.set_active(self.opt.optionList.pigImage)
-
-        self.chkResCoef.set_active(self.opt.optionList.resCoef)
-        self.chkResSector.set_active(self.opt.optionList.resSector)
-        self.chkResCategory.set_active(self.opt.optionList.resCategory)
-        self.chkResType.set_active(self.opt.optionList.resType)
-        self.chkResWeather.set_active(self.opt.optionList.resWeather)
-        self.chkResWind.set_active(self.opt.optionList.resWind)
-        self.chkResComment.set_active(self.opt.optionList.resComment)
-        self.chkResColumnNames.set_active(self.opt.optionList.resColumnNames)
-        self.chkResDate.set_active(self.opt.optionList.resDate)
 
     def on_close_dialog(self, widget, event=None):
         self.optionsdialog.destroy()
 
-    def on_cancel_clicked(self, widget):
-        self.optionsdialog.destroy()
-
-    def on_chkBackup_toggled(self, widget):
+    def on_checkbackup_toggled(self, widget):
         self.alignbackup.set_sensitive(widget.get_active())
 
-    def on_sbDay_changed(self, widget):
+    def on_spinday_changed(self, widget):
         value = widget.get_value_as_int()
-
-        dstring = _("days")
-        if value == 1:
-            dstring = _("day")
-
+        dstring = _("days") if value == 1 else _("day")
         widget.set_text('%s %s' % (value, dstring))
 
-    def on_default_clicked(self, widget):
+    def on_buttondefault_clicked(self, widget):
         d = dialogs.MessageDialog(const.WARNING,
                                   messages.MSG_DEFAULT_OPTIONS,
                                   self.optionsdialog)
         if d.yes:
-            self.opt.write_default()
-            self.opt = options.GetOptions()
-            self.set_options()
+            self.options.write_default()
+            self._set_options()
+            self._finish_options(False, True)
 
-            self.finish_options(True)
+    def on_buttoncancel_clicked(self, widget):
+        self.optionsdialog.destroy()
 
-    def on_ok_clicked(self, widget):
-        dic = {"Options": {'theme': self.cbThemes.get_active(),
+    def on_buttonok_clicked(self, widget):
+        restart = self.combolangs.get_active_text() != self.options.language or\
+                    (const.WINDOWS and
+                     self.combothemes.get_active() != self.options.theme)
+
+        dic = {"Options": {'theme': self.combothemes.get_active(),
                            'arrows': str(self.chkArrows.get_active()),
                            'stats': str(self.chkStats.get_active()),
                            'toolbar': str(self.chkToolbar.get_active()),
                            'statusbar': str(self.chkStatusbar.get_active()),
                            'update': str(self.chkUpdate.get_active()),
-                           'language': self.cbLang.get_active_text(),
-                           'runs': self.opt.optionList.runs
+                           'language': self.combolangs.get_active_text(),
+                           'runs': self.options.runs
                           },
-               "Backup": {'backup': str(self.chkBackup.get_active()),
-                          'interval': self.sbDay.get_value_as_int(),
+               "Backup": {'backup': str(self.checkbackup.get_active()),
+                          'interval': self.spinday.get_value_as_int(),
                           'location': self.fcbutton.get_current_folder(),
-                          'last': self.opt.optionList.last
+                          'last': self.options.last
                          },
                "Columns": {'name': str(self.chkName.get_active()),
                            'colour': str(self.chkColour.get_active()),
@@ -222,73 +166,72 @@ class OptionsDialog(builder.GtkBuilder):
                    }
               }
 
-        self.opt.write_options(dic)
+        self.options.write_options(dic)
+        self._finish_options(restart)
 
-        self.finish_options()
+    # Internal methods
+    def _set_options(self):
+        # General
+        self.chkUpdate.set_active(self.options.update)
 
-    def finish_options(self, set_default=False):
+        for index, lang in enumerate(self.languages):
+            if self.options.language == lang:
+                self.combolangs.set_active(index)
+                break
 
-        self.main.options = options.GetOptions()
+        self.checkbackup.set_active(self.options.backup)
+        self.spinday.set_value(self.options.interval)
+        self.fcbutton.set_current_folder(self.options.location)
 
-        if self.cbLang.get_active_text() != self.opt.optionList.language or\
-           const.WINDOWS and\
-           self.cbThemes.get_active() != self.opt.optionList.theme:
+        # Appearance
+        self.chkName.set_active(self.options.colname)
+        self.chkColour.set_active(self.options.colcolour)
+        self.chkSex.set_active(self.options.colsex)
+        self.chkLoft.set_active(self.options.colloft)
+        self.chkStrain.set_active(self.options.colstrain)
+
+        self.combothemes.set_active(self.options.theme)
+
+        self.chkArrows.set_active(self.options.arrows)
+        self.chkStats.set_active(self.options.stats)
+        self.chkToolbar.set_active(self.options.toolbar)
+        self.chkStatusbar.set_active(self.options.statusbar)
+
+        # Printing
+        self.cbPaper.set_active(self.options.paper)
+        self.cbLayout.set_active(self.options.layout)
+
+        self.chkPerName.set_active(self.options.perName)
+        self.chkPerAddress.set_active(self.options.perAddress)
+        self.chkPerPhone.set_active(self.options.perPhone)
+        self.chkPerEmail.set_active(self.options.perEmail)
+
+        self.chkPigName.set_active(self.options.pigName)
+        self.chkPigColour.set_active(self.options.pigColour)
+        self.chkPigSex.set_active(self.options.pigSex)
+        self.chkPigExtra.set_active(self.options.pigExtra)
+        self.chkPigImage.set_active(self.options.pigImage)
+
+        self.chkResCoef.set_active(self.options.resCoef)
+        self.chkResSector.set_active(self.options.resSector)
+        self.chkResCategory.set_active(self.options.resCategory)
+        self.chkResType.set_active(self.options.resType)
+        self.chkResWeather.set_active(self.options.resWeather)
+        self.chkResWind.set_active(self.options.resWind)
+        self.chkResComment.set_active(self.options.resComment)
+        self.chkResColumnNames.set_active(self.options.resColumnNames)
+        self.chkResDate.set_active(self.options.resDate)
+
+    def _finish_options(self, restart=False, set_default=False):
+        arrows = self.chkArrows.get_active()
+        stats = self.chkStats.get_active()
+        toolbar = self.chkToolbar.get_active()
+        statusbar = self.chkStatusbar.get_active()
+        self.emit('interface-changed', arrows, stats, toolbar, statusbar)
+
+        if restart:
             dialogs.MessageDialog(const.INFO, messages.MSG_RESTART_APP,
                                   self.optionsdialog)
-
-        self.main.set_treeview_columns()
-
-        if self.chkArrows.get_active():
-            self.main.vboxButtons.show()
-
-            self.main.blockMenuCallback = True
-            self.main.MenuArrows.set_active(True)
-            self.main.blockMenuCallback = False
-        else:
-            self.main.vboxButtons.hide()
-
-            self.main.blockMenuCallback = True
-            self.main.MenuArrows.set_active(False)
-            self.main.blockMenuCallback = False
-
-        if self.chkStats.get_active():
-            self.main.alignStats.show()
-
-            self.main.blockMenuCallback = True
-            self.main.MenuStats.set_active(True)
-            self.main.blockMenuCallback = False
-        else:
-            self.main.alignStats.hide()
-
-            self.main.blockMenuCallback = True
-            self.main.MenuStats.set_active(False)
-            self.main.blockMenuCallback = False
-
-        if self.chkToolbar.get_active():
-            self.main.toolbar.show()
-
-            self.main.blockMenuCallback = True
-            self.main.MenuToolbar.set_active(True)
-            self.main.blockMenuCallback = False
-        else:
-            self.main.toolbar.hide()
-
-            self.main.blockMenuCallback = True
-            self.main.MenuToolbar.set_active(False)
-            self.main.blockMenuCallback = False
-
-        if self.chkStatusbar.get_active():
-            self.main.statusbar.show()
-
-            self.main.blockMenuCallback = True
-            self.main.MenuStatusbar.set_active(True)
-            self.main.blockMenuCallback = False
-        else:
-            self.main.statusbar.hide()
-
-            self.main.blockMenuCallback = True
-            self.main.MenuStatusbar.set_active(False)
-            self.main.blockMenuCallback = False
 
         if not set_default:
             self.optionsdialog.destroy()

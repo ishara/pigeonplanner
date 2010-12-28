@@ -255,7 +255,7 @@ class ResultWindow(builder.GtkBuilder):
             results.append(values)
 
         printing.PrintResults(self.resultwindow, results, userinfo,
-                              self.main.options.optionList, op, self.pdfname)
+                              self.main.options, op, self.pdfname)
 
     def fill_filters(self, model, path, treeiter):
         pindex, ring, year, date, point, sector = model.get(treeiter,

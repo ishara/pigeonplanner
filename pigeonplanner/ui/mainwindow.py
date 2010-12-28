@@ -68,7 +68,6 @@ class MainWindow(builder.GtkBuilder):
         self.mainwindow.set_title("%s %s" %(const.NAME, const.VERSION))
 
         self.changedRowIter = None
-        self.blockMenuCallback = False
         self.logoPixbuf = gtk.gdk.pixbuf_new_from_file_at_size(
                                                 os.path.join(const.IMAGEDIR,
                                                              'icon_logo.png'),
@@ -143,17 +142,10 @@ class MainWindow(builder.GtkBuilder):
                 tabImage = getattr(self, 'image'+tabname+'Tab')
                 tabImage.set_from_stock(tabname.lower(), gtk.ICON_SIZE_BUTTON)
 
-        if self.options.optionList.arrows:
-            self.MenuArrows.set_active(True)
-
-        if self.options.optionList.stats:
-            self.MenuStats.set_active(True)
-
-        if self.options.optionList.toolbar:
-            self.MenuToolbar.set_active(True)
-
-        if self.options.optionList.statusbar:
-            self.MenuStatusbar.set_active(True)
+        self.MenuArrows.set_active(self.options.arrows)
+        self.MenuStats.set_active(self.options.stats)
+        self.MenuToolbar.set_active(self.options.toolbar)
+        self.MenuStatusbar.set_active(self.options.statusbar)
 
         listdata = {self.cbSector: self.database.SECTORS,
                     self.cbType: self.database.TYPES,
@@ -187,7 +179,7 @@ class MainWindow(builder.GtkBuilder):
             attr = getattr(self, wname)
             attr.set_tooltip_text(data[1])
 
-        if self.options.optionList.runs == 10:
+        if self.options.runs == 10:
             d = dialogs.MessageDialog(const.QUESTION,
                                       messages.MSG_MAKE_DONATION,
                                       self.mainwindow)
@@ -195,7 +187,7 @@ class MainWindow(builder.GtkBuilder):
                 webbrowser.open(const.WEBSITE)
 
             self.options.set_option('Options', 'runs',
-                                    self.options.optionList.runs+1)
+                                    self.options.runs+1)
 
         self.mainwindow.show()
 
@@ -211,10 +203,10 @@ class MainWindow(builder.GtkBuilder):
                 calendar.Calendar(self.mainwindow, self.database, events[0][0])
 
     def quit_program(self, widget=None, event=None, bckp=True):
-        if self.options.optionList.backup and bckp:
-            daysInSeconds = self.options.optionList.interval * 24 * 60 * 60
-            if time.time() - self.options.optionList.last >= daysInSeconds:
-                if backup.make_backup(self.options.optionList.location):
+        if self.options.backup and bckp:
+            daysInSeconds = self.options.interval * 24 * 60 * 60
+            if time.time() - self.options.last >= daysInSeconds:
+                if backup.make_backup(self.options.location):
                     dialogs.MessageDialog(const.INFO,
                                           messages.MSG_BACKUP_SUCCES,
                                           self.mainwindow)
@@ -225,9 +217,9 @@ class MainWindow(builder.GtkBuilder):
 
                 self.options.set_option('Backup', 'last', time.time())
 
-        if self.options.optionList.runs < 10:
+        if self.options.runs < 10:
             self.options.set_option('Options', 'runs',
-                                    self.options.optionList.runs+1)
+                                    self.options.runs+1)
 
         gtk.main_quit()
 
@@ -247,6 +239,14 @@ class MainWindow(builder.GtkBuilder):
         name = self.get_object_name(widget)
         self.statusbar.pop(self.statusmsgs[name][0])
 
+    def on_interface_changed(self, dialog, arrows, stats, toolbar, statusbar):
+        self.MenuArrows.set_active(arrows)
+        self.MenuStats.set_active(stats)
+        self.MenuToolbar.set_active(toolbar)
+        self.MenuStatusbar.set_active(statusbar)
+
+        self.set_treeview_columns()
+
     # Menu callbacks
     def menuprintpedigree_activate(self, widget):
         logger.info(common.get_function_name())
@@ -254,7 +254,7 @@ class MainWindow(builder.GtkBuilder):
         pigeoninfo = self.get_pigeoninfo()
 
         printing.PrintPedigree(self.mainwindow, pigeoninfo, userinfo,
-                               self.options.optionList, const.PRINT, '',
+                               self.options, const.PRINT, '',
                                self.parser.pigeons)
 
     def menuprintblank_activate(self, widget):
@@ -265,7 +265,7 @@ class MainWindow(builder.GtkBuilder):
                           extra4='', extra5='', extra6='')
 
         printing.PrintPedigree(self.mainwindow, pigeoninfo, userinfo,
-                               self.options.optionList, const.PRINT, '',
+                               self.options, const.PRINT, '',
                                self.parser.pigeons)
 
     def menubackup_activate(self, widget):
@@ -475,51 +475,32 @@ class MainWindow(builder.GtkBuilder):
 
     def menupref_activate(self, widget):
         logger.info(common.get_function_name())
-        optionsdialog.OptionsDialog(self)
+        dialog = optionsdialog.OptionsDialog(self.mainwindow, self.options)
+        dialog.connect('interface-changed', self.on_interface_changed)
 
     def menuarrows_toggled(self, widget):
         logger.info(common.get_function_name())
-        if self.blockMenuCallback: return
-
-        if widget.get_active():
-            self.vboxButtons.show()
-            self.options.set_option('Options', 'arrows', 'True')
-        else:
-            self.vboxButtons.hide()
-            self.options.set_option('Options', 'arrows', 'False')
+        value = widget.get_active()
+        self.set_multiple_visible([self.vboxButtons], value)
+        self.options.set_option('Options', 'arrows', str(value))
 
     def menustats_toggled(self, widget):
         logger.info(common.get_function_name())
-        if self.blockMenuCallback: return
-
-        if widget.get_active():
-            self.alignStats.show()
-            self.options.set_option('Options', 'stats', 'True')
-        else:
-            self.alignStats.hide()
-            self.options.set_option('Options', 'stats', 'False')
+        value = widget.get_active()
+        self.set_multiple_visible([self.alignStats], value)
+        self.options.set_option('Options', 'stats', str(value))
 
     def menutoolbar_toggled(self, widget):
         logger.info(common.get_function_name())
-        if self.blockMenuCallback: return
-
-        if widget.get_active():
-            self.toolbar.show()
-            self.options.set_option('Options', 'toolbar', 'True')
-        else:
-            self.toolbar.hide()
-            self.options.set_option('Options', 'toolbar', 'False')
+        value = widget.get_active()
+        self.set_multiple_visible([self.toolbar], value)
+        self.options.set_option('Options', 'toolbar', str(value))
 
     def menustatusbar_toggled(self, widget):
         logger.info(common.get_function_name())
-        if self.blockMenuCallback: return
-
-        if widget.get_active():
-            self.statusbar.show()
-            self.options.set_option('Options', 'statusbar', 'True')
-        else:
-            self.statusbar.hide()
-            self.options.set_option('Options', 'statusbar', 'False')
+        value = widget.get_active()
+        self.set_multiple_visible([self.statusbar], value)
+        self.options.set_option('Options', 'statusbar', str(value))
 
     def menuaddresses_activate(self, widget):
         logger.info(common.get_function_name())
@@ -1471,11 +1452,11 @@ class MainWindow(builder.GtkBuilder):
         self.set_treeview_columns()
 
     def set_treeview_columns(self):
-        self.columns = {2: self.options.optionList.colname,
-                        3: self.options.optionList.colcolour,
-                        4: self.options.optionList.colsex,
-                        5: self.options.optionList.colloft,
-                        6: self.options.optionList.colstrain}
+        self.columns = {2: self.options.colname,
+                        3: self.options.colcolour,
+                        4: self.options.colsex,
+                        5: self.options.colloft,
+                        6: self.options.colstrain}
 
         for key, value in self.columns.items():
             self.treeview.get_column(key).set_visible(value)

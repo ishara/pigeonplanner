@@ -23,7 +23,7 @@ import gtk
 from pigeonplanner import const
 
 
-class GtkBuilder(object):
+class GtkBuilder(gtk.Builder, object):
     def __init__(self, path):
         """
         Initialize Gtkbuilder, connect all signals and get all widgets
@@ -31,11 +31,11 @@ class GtkBuilder(object):
         @param path: Path to the Glade file
         """
 
-        self.builder = gtk.Builder()
-        self.builder.set_translation_domain(const.DOMAIN)
-        self.builder.add_from_file(path)
-        self.builder.connect_signals(self)
-        for obj in self.builder.get_objects():
+        gtk.Builder.__init__(self)
+        self.set_translation_domain(const.DOMAIN)
+        self.add_from_file(path)
+        self.connect_signals(self)
+        for obj in self.get_objects():
             if issubclass(type(obj), gtk.Buildable):
                 setattr(self, gtk.Buildable.get_name(obj), obj)
 
@@ -47,7 +47,7 @@ class GtkBuilder(object):
         """
 
         objects = []
-        for obj in self.builder.get_objects():
+        for obj in self.get_objects():
             if issubclass(type(obj), gtk.Buildable):
                 name = gtk.Buildable.get_name(obj)
                 if name.startswith(prefix):

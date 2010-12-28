@@ -140,7 +140,7 @@ class ConfigurationParser(ConfigParser.ConfigParser):
 
         self.generateDefaultFile()
         self.copyNew()
-        ConfigParser.ConfigParser.read(self, self.prefFile)
+        self.read(self.prefFile)
 
     def generateDefaultFile(self):
         """

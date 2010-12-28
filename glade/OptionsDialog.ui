@@ -184,13 +184,13 @@
                                   <object class="GtkVBox" id="vbox3">
                                     <property name="visible">True</property>
                                     <child>
-                                      <object class="GtkCheckButton" id="chkBackup">
+                                      <object class="GtkCheckButton" id="checkbackup">
                                         <property name="label" translatable="yes">Make an automatic backup</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="draw_indicator">True</property>
-                                        <signal name="toggled" handler="on_chkBackup_toggled"/>
+                                        <signal name="toggled" handler="on_checkbackup_toggled"/>
                                       </object>
                                       <packing>
                                         <property name="position">0</property>
@@ -246,12 +246,12 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkSpinButton" id="sbDay">
+                                              <object class="GtkSpinButton" id="spinday">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="invisible_char">●</property>
                                                 <property name="adjustment">adjustment1</property>
-                                                <signal name="changed" handler="on_sbDay_changed"/>
+                                                <signal name="changed" handler="on_spinday_changed"/>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
@@ -306,7 +306,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="cbLang">
+                                      <object class="GtkComboBox" id="combolangs">
                                         <property name="visible">True</property>
                                         <property name="model">liststore4</property>
                                         <child>
@@ -378,7 +378,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBox" id="cbThemes">
+                                      <object class="GtkComboBox" id="combothemes">
                                         <property name="visible">True</property>
                                         <property name="model">liststore3</property>
                                         <child>
@@ -1153,14 +1153,14 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="default">
+              <object class="GtkButton" id="buttondefault">
                 <property name="label" translatable="yes">Default</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image1</property>
                 <property name="yalign">0</property>
-                <signal name="clicked" handler="on_default_clicked"/>
+                <signal name="clicked" handler="on_buttondefault_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1170,13 +1170,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="cancel">
+              <object class="GtkButton" id="buttoncancel">
                 <property name="label">gtk-cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_cancel_clicked"/>
+                <signal name="clicked" handler="on_buttoncancel_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1185,13 +1185,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="ok">
+              <object class="GtkButton" id="buttonok">
                 <property name="label">gtk-ok</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_ok_clicked"/>
+                <signal name="clicked" handler="on_buttonok_clicked"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1209,9 +1209,9 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">default</action-widget>
-      <action-widget response="0">cancel</action-widget>
-      <action-widget response="0">ok</action-widget>
+      <action-widget response="0">buttondefault</action-widget>
+      <action-widget response="0">buttoncancel</action-widget>
+      <action-widget response="0">buttonok</action-widget>
     </action-widgets>
   </object>
   <object class="GtkImage" id="image1">

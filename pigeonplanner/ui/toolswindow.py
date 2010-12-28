@@ -201,7 +201,7 @@ class ToolsWindow(builder.GtkBuilder):
                                  self.spinbutton_prognosis_seconds.get_text())
             info = [date.strftime("%Y-%m-%d"), release, distance]
             printing.PrintVelocity(self.main.mainwindow, data, info,
-                                   self.main.options.optionList, const.PRINT)
+                                   self.main.options, const.PRINT)
 
     # Data
     def on_cbdata_changed(self, widget):
