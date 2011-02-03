@@ -55,6 +55,5 @@ def check_date_input(date):
     try:
         datetime.datetime.strptime(date, const.DATE_FORMAT)
     except ValueError:
-        return False
-    return True
+        raise InvalidInputError(messages.MSG_INVALID_FORMAT)
 

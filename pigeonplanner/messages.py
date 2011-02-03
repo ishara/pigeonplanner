@@ -48,6 +48,9 @@ MSG_OVERWRITE_PIGEON = (_("This pigeon already exists. Overwrite it?"),
 MSG_ADD_PIGEON = (_("This pigeon doesn't exist. Do you want to add it?"),
                   None,
                   _("Adding pigeon"))
+MSG_NO_PIGEON = (_("The selected pigeon can't be found."),
+                 None,
+                 _("Not found!"))
 
 MSG_EMPTY_FIELDS = (_("Invalid input!"),
                     _("The ringnumber and year are necessary."),

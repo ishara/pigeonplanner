@@ -52,7 +52,6 @@ class Configuration(object):
         self.__addOption('Options', 'statusbar', 'True')
         self.__addOption('Options', 'update', 'True')
         self.__addOption('Options', 'language', 'def')
-        self.__addOption('Options', 'runs', 0)
         self.__addSection('Backup')
         self.__addOption('Backup', 'backup', 'True')
         self.__addOption('Backup', 'interval', 30)

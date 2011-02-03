@@ -359,6 +359,7 @@
                 <child>
                   <object class="GtkToolButton" id="buttonedit">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-edit</property>
                     <signal name="clicked" handler="on_buttonedit_clicked"/>
@@ -371,6 +372,7 @@
                 <child>
                   <object class="GtkToolButton" id="buttonremove">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-remove</property>
                     <signal name="clicked" handler="on_buttonremove_clicked"/>

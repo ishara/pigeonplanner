@@ -109,6 +109,9 @@ GLADEDIALOGS = os.path.join(GLADEDIR, "Dialogs.ui")
 GLADEDBTOOL = os.path.join(GLADEDIR, "DatabaseTool.ui")
 GLADEADDRESSES = os.path.join(GLADEDIR, "AddressBook.ui")
 GLADECALENDAR = os.path.join(GLADEDIR, "Calendar.ui")
+GLADEMEDVIEW = os.path.join(GLADEDIR, "MedicationView.ui")
+GLADERESVIEW = os.path.join(GLADEDIR, "ResultsView.ui")
+GLADEDETAILS = os.path.join(GLADEDIR, "DetailsView.ui")
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')
@@ -126,6 +129,15 @@ USER_AGENT = {"User-Agent": "Pigeon Planner/%s" %VERSION}
 
 LOG_FORMAT = '[%(asctime)s] %(name)s %(levelname)s: %(message)s'
 DATE_FORMAT = '%Y-%m-%d'
+
+LOGO_IMG = gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(
+                                        IMAGEDIR, 'icon_logo.png'), 75, 75)
+SEX_IMGS = {'0': gtk.gdk.pixbuf_new_from_file(os.path.join(
+                                        IMAGEDIR, "symbol_male.png")),
+            '1': gtk.gdk.pixbuf_new_from_file(os.path.join(
+                                        IMAGEDIR, "symbol_female.png")),
+            '2': gtk.gdk.pixbuf_new_from_file(os.path.join(
+                                        IMAGEDIR, "symbol_young.png"))}
 
 (SIRE,
  DAM,

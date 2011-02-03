@@ -16,7 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import os.path
 import time
 
 import gtk
@@ -24,7 +23,6 @@ import gtk
 from pigeonplanner import const
 from pigeonplanner import checks
 from pigeonplanner import builder
-from pigeonplanner import messages
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import date
 
@@ -41,6 +39,9 @@ class Calendar(builder.GtkBuilder):
         self._entries.append(self._textbuffer)
         self._normalbuttons = [self.buttonadd, self.buttonedit, self.buttonremove]
         self._editbuttons = [self.buttonsave, self.buttoncancel]
+        self.entrydate = date.DateEntry(False)
+        self.entrydate.set_text('')
+        self.framedate.add(self.entrydate)
         self._selection = self.treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)
         self._fill_treeview(notification_id)
@@ -82,10 +83,11 @@ class Calendar(builder.GtkBuilder):
 
     def on_buttonsave_clicked(self, widget):
         data = self._get_entry_data()
-        date, type_ = data[0], data[1]
-        if not checks.check_date_input(date):
-            dialogs.MessageDialog(const.ERROR, messages.MSG_INVALID_FORMAT,
-                                  self.calendarwindow)
+        date_, type_ = data[0], data[1]
+        try:
+            checks.check_date_input(date_)
+        except checks.InvalidInputError, msg:
+            dialogs.MessageDialog(const.ERROR, msg.value, self.calendarwindow)
             return
         self._set_widgets(False)
         if self._mode == const.ADD:
@@ -130,9 +132,6 @@ class Calendar(builder.GtkBuilder):
             self.labelnotification.set_text(_("No notification set"))
             self.labelnotify.set_text("-1")
 
-    def on_dateicon_pressed(self, widget, icon, event):
-        date.CalendarPopup(widget)
-
     def on_checknotify_toggled(self, widget):
         self.set_multiple_sensitive([self.alignnotify], widget.get_active())
 
@@ -166,12 +165,8 @@ class Calendar(builder.GtkBuilder):
             else:
                 self.textview.set_editable(value)
 
-        icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
-        pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if value else None
-        self.entrydate.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
-
+        self.entrydate.set_editable(value)
         self.entrydate.grab_focus()
-        self.entrydate.set_position(-1)
 
     def _get_entry_data(self):
         date = self.entrydate.get_text()

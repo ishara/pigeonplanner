@@ -25,23 +25,43 @@ import gtk.gdk
 from pigeonplanner import const
 
 
-class DateEntry(gtk.Entry):
-    def __init__(self):
-        gtk.Entry.__init__(self)
-        self.set_max_length(10)
-        self.set_width_chars(16)
-        icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
-        pixbuf = gtk.gdk.pixbuf_new_from_file(icon)
-        self.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
-        self.connect('icon-press', self.on_icon_pressed)
+class DateEntry(gtk.Viewport):
+    def __init__(self, editable=True):
+        gtk.Viewport.__init__(self)
+
+        self._entry = gtk.Entry()
+        self._entry.set_max_length(10)
+        self._entry.set_width_chars(16)
+        self._entry.set_alignment(.5)
+        self._entry.connect('icon-press', self.on_icon_pressed)
 
         today = datetime.datetime.today()
-        self.set_text(today.strftime(const.DATE_FORMAT))
+        self._entry.set_text(today.strftime(const.DATE_FORMAT))
 
-        self.show()
+        self.set_editable(editable)
+        self.add(self._entry)
+        self.show_all()
 
     def on_icon_pressed(self, widget, icon, event):
-        calendar = CalendarPopup(self)
+        CalendarPopup(widget)
+
+    def set_editable(self, editable):
+        self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
+        self._entry.set_has_frame(editable)
+        self._entry.set_editable(editable)
+        icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
+        pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if editable else None
+        self._entry.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
+
+    def set_text(self, text):
+        self._entry.set_text(text)
+
+    def get_text(self):
+        return self._entry.get_text()
+
+    def grab_focus(self):
+        self._entry.grab_focus()
+        self._entry.set_position(-1)
 
 
 class CalendarPopup(gtk.Window):

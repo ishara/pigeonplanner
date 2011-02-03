@@ -19,10 +19,12 @@
 import os.path
 
 import gtk
+import gtk.gdk
+import glib
+import gobject
 
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import checks
 from pigeonplanner import backup
 from pigeonplanner import messages
 from pigeonplanner.ui.widgets import comboboxes
@@ -70,6 +72,35 @@ class MessageDialog(gtk.MessageDialog):
         self.destroy()
 
 
+class ImageChooser(gtk.FileChooserDialog):
+    RESPONSE_OPEN = 1
+    RESPONSE_CLEAR = 2
+    def __init__(self, parent):
+        gtk.FileChooserDialog.__init__(self, _("Choose an image..."), parent,
+                                                gtk.FILE_CHOOSER_ACTION_OPEN)
+        self.connect('update-preview', self.on_update_preview)
+        preview = gtk.Image()
+        self.set_preview_widget(preview)
+        self.add_filter(filefilters.ImageFilter())
+        image_folder = glib.get_user_special_dir(glib.USER_DIRECTORY_PICTURES)
+        self.set_current_folder(image_folder)
+        image = gtk.image_new_from_stock(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
+        buttonclear = self.add_button(_("No image"), self.RESPONSE_CLEAR)
+        buttonclear.set_image(image)
+        self.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+        self.add_button(gtk.STOCK_OPEN, self.RESPONSE_OPEN)
+
+    def on_update_preview(self, widget):
+        filename = self.get_preview_filename()
+        try:
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128, 128)
+            self.get_preview_widget().set_from_pixbuf(pixbuf)
+            have_preview = True
+        except:
+            have_preview = False
+        self.set_preview_widget_active(have_preview)
+
+
 class AboutDialog(gtk.AboutDialog):
     def __init__(self, parent):
         gtk.AboutDialog.__init__(self)
@@ -96,8 +127,7 @@ class AboutDialog(gtk.AboutDialog):
                                                 os.path.join(const.IMAGEDIR,
                                                              'icon_logo.png'),
                                                 80, 80))
-
-        result = self.run()
+        self.run()
         self.destroy()
 
 
@@ -106,7 +136,6 @@ class BackupDialog(gtk.Dialog):
         gtk.Dialog.__init__(self, None, parent,
                             gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
                             ("gtk-close", gtk.RESPONSE_CLOSE))
-
         self.par = parent
 
         self.set_resizable(False)
@@ -178,190 +207,22 @@ class BackupDialog(gtk.Dialog):
             MessageDialog(const.INFO, msg, self.par)
 
 
-class EditPedigreeDialog(gtk.Dialog):
-    def __init__(self, parent, main, pindex, sex, kinfo, draw):
-        gtk.Dialog.__init__(self, _("Insert a pigeon"), parent,
-                            gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT)
-
-        self.set_position(gtk.WIN_POS_MOUSE)
-        self.set_property("skip-taskbar-hint", True)
-        self.connect('response', self.on_dialog_response)
-
-        self.main = main
-        self.draw = draw
-        self.pindex = pindex
-        self.sex = sex
-        self.kinfo = kinfo
-        if kinfo is not None:
-            self.kindex = kinfo[0]
-
-        table = gtk.Table(2, 2)
-        table.set_row_spacings(4)
-        table.set_col_spacings(8)
-        table.set_homogeneous(False)
-        self.vbox.pack_start(table, False, True)
-
-        label = gtk.Label(_("Band no."))
-        label.set_alignment(0.0, 0.5)
-        table.attach(label, 0, 1, 0, 1)
-
-        hbox = gtk.HBox()
-        self.entryRing = gtk.Entry()
-        self.entryRing.set_width_chars(15)
-        self.entryRing.set_alignment(0.5)
-        self.entryRing.set_activates_default(True)
-        hbox.pack_start(self.entryRing, False, True)
-        label = gtk.Label("/")
-        hbox.pack_start(label, False, True)
-        self.entryYear = gtk.Entry(4)
-        self.entryYear.set_width_chars(4)
-        self.entryYear.set_activates_default(True)
-        hbox.pack_start(self.entryYear, False, True)
-        table.attach(hbox, 1, 2, 0, 1)
-
-        viewport = gtk.Viewport()
-        vbox = gtk.VBox()
-        for x in range(1, 7):
-            entry = gtk.Entry(28)
-            entry.set_has_frame(False)
-            entry.set_activates_default(True)
-            setattr(self, 'entryExtra'+str(x), entry)
-            vbox.pack_start(entry)
-
-        viewport.add(vbox)
-        table.attach(viewport, 0, 2, 1, 2)
-
-        self.vbox.show_all()
-
-        self.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
-        b = self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_APPLY)
-        b.set_property('can-default', True)
-        b.set_property('has-default', True)
-
-    def run(self, widget, ring, year, details):
-        if ring and year:
-            self.entryRing.set_text(ring)
-            self.entryYear.set_text(year)
-            self.entryExtra1.set_text(details[0])
-            self.entryExtra2.set_text(details[1])
-            self.entryExtra3.set_text(details[2])
-            self.entryExtra4.set_text(details[3])
-            self.entryExtra5.set_text(details[4])
-            self.entryExtra6.set_text(details[5])
-
-        if not self.kindex in self.main.parser.pigeons:
-            data = (self.kinfo[0], self.kinfo[1], self.kinfo[2], self.kinfo[3],
-                    0, 1, '', '', '', '', '', '', '', '', '',
-                    self.kinfo[4], self.kinfo[5], self.kinfo[6],
-                    self.kinfo[7], self.kinfo[8], self.kinfo[9])
-            self.main.database.insert_into_table(self.main.database.PIGEONS,
-                                                 data)
-
-        self.entryRing.grab_focus()
-        self.entryRing.set_position(-1)
-
-        self.show_all()
-
-    def on_dialog_response(self, dialog, response):
-        if response == gtk.RESPONSE_APPLY:
-            self.save_pigeon_data()
-
-        self.destroy()
-
-    def save_pigeon_data(self):
-        ring = self.entryRing.get_text()
-        year = self.entryYear.get_text()
-
-        try:
-            checks.check_ring_entry(ring, year)
-        except checks.InvalidInputError, msg:
-            MessageDialog(const.ERROR, msg.value, self)
-            return False
-
-        pindex = common.get_pindex_from_band(ring, year)
-
-        if self.pindex and self.pindex in self.main.parser.pigeons:
-            data = (pindex, ring, year,
-                    self.entryExtra1.get_text(),
-                    self.entryExtra2.get_text(),
-                    self.entryExtra3.get_text(),
-                    self.entryExtra4.get_text(),
-                    self.entryExtra5.get_text(),
-                    self.entryExtra6.get_text(),
-                    self.pindex)
-            self.edit_pigeon(data)
-        else:
-            data = (pindex, ring, year, self.sex , 0, 1,
-                    '', '', '', '', '', '', '', '', '',
-                    self.entryExtra1.get_text(),
-                    self.entryExtra2.get_text(),
-                    self.entryExtra3.get_text(),
-                    self.entryExtra4.get_text(),
-                    self.entryExtra5.get_text(),
-                    self.entryExtra6.get_text())
-            self.add_pigeon(data)
-
-        return True
-
-    def edit_parent(self, kindex, band, year, sex):
-        if sex == '0':
-            self.main.database.update_table(self.main.database.PIGEONS,
-                                            (band, year, kindex), 12, 1)
-        else:
-            self.main.database.update_table(self.main.database.PIGEONS,
-                                            (band, year, kindex), 14, 1)
-
-    def edit_pigeon(self, data):
-        self.main.database.update_pedigree_pigeon(data)
-        self.edit_parent(self.kindex, data[1], data[2], self.sex)
-
-        self.redraw_pedigree()
-
-    def add_pigeon(self, data):
-        self.main.database.insert_into_table(self.main.database.PIGEONS, data)
-        self.edit_parent(self.kindex, data[1], data[2], self.sex)
-
-        self.redraw_pedigree()
-
-    def remove_pigeon(self, widget, pindex):
-        self.main.database.delete_from_table(self.main.database.PIGEONS, pindex)
-        self.edit_parent(self.kindex, '', '', self.sex)
-
-        self.redraw_pedigree()
-
-    def clear_box(self, widget=None):
-        self.edit_parent(self.kindex, '', '', self.sex)
-
-        self.redraw_pedigree()
-
-    def redraw_pedigree(self):
-        self.main.parser.get_pigeons()
-        model, paths = self.main.selection.get_selected_rows()
-        self.main.selection.unselect_path(paths[0])
-        self.main.selection.select_path(paths[0])
-
-        mainpindex = self.main.get_main_ring()[0]
-        self.draw.draw_pedigree(self.main.parser.pigeons,
-                                [self.draw.pedigree.tableSire,
-                                 self.draw.pedigree.tableDam],
-                                mainpindex, True)
-
-
 class FilterDialog(gtk.Dialog):
-    def __init__(self, parent, title, fill_treeview_cb):
+    __gsignals__ = {'apply-clicked': (gobject.SIGNAL_RUN_LAST,
+                                      None, ()),
+                    'clear-clicked': (gobject.SIGNAL_RUN_LAST,
+                                      None, ()),
+                    }
+    def __init__(self, parent, title):
         gtk.Dialog.__init__(self, title, parent,
                             gtk.DIALOG_DESTROY_WITH_PARENT,
                             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
-
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
         self.set_resizable(False)
         self.set_skip_taskbar_hint(True)
 
-        self.fill_treeview_cb = fill_treeview_cb
-        self.checkboxes = []
-        self.active = False
+        self.filters = []
         self.sizegroup = gtk.SizeGroup(gtk.SIZE_GROUP_HORIZONTAL)
-
         btnapply = gtk.Button(stock=gtk.STOCK_APPLY)
         btnapply.connect("clicked", self.on_btnapply_clicked)
         btnclear = gtk.Button()
@@ -374,75 +235,127 @@ class FilterDialog(gtk.Dialog):
         hbox.pack_start(btnclear, False, False, 4)
         self.vbox.pack_end(hbox, False, False)
 
-    def run(self):
-        """
-        Implement a non-blocking dialog so the user can browse through
-        the pigeons while seeing the filters.
-        """
-
-        self.connect('response', self.on_dialog_response)
-        self.show_all()
-
+    # Callbacks
     def on_dialog_response(self, dialog, response_id):
         if response_id == gtk.RESPONSE_CLOSE or \
            response_id == gtk.RESPONSE_DELETE_EVENT:
-            self.clear_filters()
+            self._clear_filters()
+            self.emit('clear-clicked')
             dialog.destroy()
 
     def on_btnclear_clicked(self, widget):
-        self.clear_filters()
-        self.active = False
+        self._clear_filters()
+        self.emit('clear-clicked')
 
     def on_btnapply_clicked(self, widget):
-        self.fill_treeview_cb(filter_active=True)
-        self.active = True
+        self.emit('apply-clicked')
 
     def on_spinbutton_changed(self, widget, value, text):
         if widget.get_value_as_int() == value:
             widget.set_text(text)
 
-    def clear_filters(self):
-        for checkbox in self.checkboxes:
-            checkbox.set_active(False)
+    # Public methods
+    def run(self):
+        self.connect('response', self.on_dialog_response)
+        self.show_all()
 
-        if self.active:
-            self.fill_treeview_cb()
+    def get_filters(self):
+        return self.filters
 
-    def __add_filter(self, widget, label):
+    def add_custom(self, name, label, widget, get_data_func):
+        widget.get_data = get_data_func
+        self._add_filter(name, label, widget)
+
+    def add_combobox(self, name, label, data):
+        combobox = gtk.combo_box_new_text()
+        combobox.get_data = combobox.get_active_text
+        comboboxes.fill_combobox(combobox, data)
+        self._add_filter(name, label, combobox)
+
+    def add_spinbutton(self, name, label, lowest=0, lowest_text=None):
+        adj = gtk.Adjustment(lowest, lowest, 4000, 1, 10, 0)
+        spinbutton = gtk.SpinButton(adj, 4)
+        spinbutton.get_data = spinbutton.get_value_as_int
+        if lowest_text:
+            spinbutton.set_text(lowest_text)
+            spinbutton.connect('changed', self.on_spinbutton_changed, lowest,
+                               lowest_text)
+        self._add_filter(name, label, spinbutton)
+
+    # Internal methods
+    def _add_filter(self, name, label, widget):
         self.sizegroup.add_widget(widget)
         check = gtk.CheckButton(_("Only show:"))
         hbox = gtk.HBox()
         hbox.pack_start(check, False, True, 8)
         hbox.pack_start(widget, True, True)
         align = gtk.Alignment()
-        align.set_padding(0, 0, 12, 0)
+        align.set_padding(0, 0, 4, 0)
         align.add(hbox)
         frame = gtk.Frame(label)
         frame.set_shadow_type(gtk.SHADOW_NONE)
         frame.add(align)
-        self.vbox.pack_start(frame, False, False, 8)
-        self.checkboxes.append(check)
+        self.vbox.pack_start(frame, False, False, 0)
+        self.filters.append((name, check, widget))
 
-        return check
+    def _clear_filters(self):
+        for name, checkbox, widget in self.filters:
+            checkbox.set_active(False)
 
-    def add_filter_custom(self, label, widget):
-        return self.__add_filter(widget, label)
 
-    def add_filter_combobox(self, label, items):
-        combobox = gtk.combo_box_new_text()
-        comboboxes.fill_combobox(combobox, items)
+class SearchDialog(gtk.Dialog):
+    __gsignals__ = {'search': (gobject.SIGNAL_RUN_LAST, None, (object, str)),
+                    'clear': (gobject.SIGNAL_RUN_LAST, None, ()),
+                    }
+    def __init__(self, parent):
+        gtk.Dialog.__init__(self, _("Search a pigeon"), parent,
+                            gtk.DIALOG_DESTROY_WITH_PARENT,
+                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+        self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        self.set_resizable(False)
+        self.set_skip_taskbar_hint(True)
 
-        return self.__add_filter(combobox, label), combobox
+        self.button = gtk.Button(stock=gtk.STOCK_FIND)
+        self.button.set_sensitive(False)
+        self.button.connect('clicked', self.on_button_clicked)
+        self.action_area.pack_start(self.button)
 
-    def add_filter_spinbutton(self, label, lowest=0, lowest_text=None):
-        adj = gtk.Adjustment(lowest, lowest, 4000, 1, 10, 0)
-        spinbutton = gtk.SpinButton(adj, 4)
-        if lowest_text:
-            spinbutton.set_text(lowest_text)
-            spinbutton.connect('changed', self.on_spinbutton_changed, lowest,
-                               lowest_text)
+        label = gtk.Label(_("Search for:"))
+        self.entry = gtk.Entry()
+        self.entry.connect('changed', self.on_entry_changed)
+        self.entry.connect('icon-press', self.on_entryicon_press)
+        hbox = gtk.HBox(False, 8)
+        hbox.pack_start(label, False, True, 0)
+        hbox.pack_start(self.entry, False, True, 0)
 
-        return self.__add_filter(spinbutton, label), spinbutton
+        label = gtk.Label(_("Search in:"))
+        check1 = gtk.CheckButton(_("Band numbers"))
+        check2 = gtk.CheckButton(_("Names"))
+        table = gtk.Table(2, 2)
+        table.set_col_spacings(12)
+        table.attach(label, 0, 1, 0, 1, gtk.FILL)
+        table.attach(check1, 1, 2, 0, 1)
+        table.attach(check2, 1, 2, 1, 2)
+        self.results = [check1, check2]
+
+        self.vbox.set_spacing(8)
+        self.vbox.pack_start(hbox, False, False, 0)
+        self.vbox.pack_start(table, False, True, 0)
+        self.vbox.show_all()
+
+    def on_entry_changed(self, widget):
+        has_text = widget.get_text() != ''
+        icon = gtk.STOCK_CLEAR if has_text else None
+        self.button.set_sensitive(has_text)
+        widget.set_icon_from_stock(gtk.ENTRY_ICON_SECONDARY, icon)
+
+    def on_entryicon_press(self, widget, icon, event):
+        self.emit('clear')
+        widget.set_text('')
+        widget.grab_focus()
+
+    def on_button_clicked(self, widget):
+        self.emit('search', self.results, self.entry.get_text())
 
 
 class MedicationRemoveDialog(gtk.Dialog):

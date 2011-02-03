@@ -128,8 +128,7 @@ class OptionsDialog(builder.GtkBuilder):
                            'toolbar': str(self.chkToolbar.get_active()),
                            'statusbar': str(self.chkStatusbar.get_active()),
                            'update': str(self.chkUpdate.get_active()),
-                           'language': self.combolangs.get_active_text(),
-                           'runs': self.options.runs
+                           'language': self.combolangs.get_active_text()
                           },
                "Backup": {'backup': str(self.checkbackup.get_active()),
                           'interval': self.spinday.get_value_as_int(),

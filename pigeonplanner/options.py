@@ -40,7 +40,6 @@ class GetOptions(object):
         self.statusbar = self.conf.getboolean('Options', 'statusbar')
         self.update = self.conf.getboolean('Options', 'update')
         self.language = self.conf.get('Options', 'language')
-        self.runs = self.conf.getint('Options', 'runs')
         self.backup = self.conf.getboolean('Backup', 'backup')
         self.interval = self.conf.getint('Backup', 'interval')
         self.location = self.conf.get('Backup', 'location')

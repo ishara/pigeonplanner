@@ -20,13 +20,10 @@ Tools window class
 """
 
 
-import os
-import time
 import datetime
 import logging
 logger = logging.getLogger(__name__)
 
-import gobject
 import gtk
 
 from pigeonplanner import const

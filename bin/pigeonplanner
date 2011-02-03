@@ -53,7 +53,7 @@ if __name__ == "__main__":
     app.setup_locale()
     app.setup_theme()
     app.setup_database()
-    app.setup_parser()
+    app.setup_pigeons()
 
     if app.options.update:
         updatethread = Thread(None, app.search_updates, None)

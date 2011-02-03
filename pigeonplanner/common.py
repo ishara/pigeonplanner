@@ -24,6 +24,7 @@ import random
 import inspect
 import urllib2
 import os.path
+import datetime
 import webbrowser
 
 import gtk
@@ -31,6 +32,8 @@ import gobject
 
 from pigeonplanner import const
 
+
+sexdic = {'0': _('Cock'), '1': _('Hen'), '2': _('Young bird')}
 
 def create_stock_button(icons):
     """
@@ -53,6 +56,9 @@ def get_function_name():
     """
 
     return inspect.stack()[1][3]
+
+def get_date():
+    return datetime.date.today().strftime(const.DATE_FORMAT)
 
 def encode_string(string):
     """
@@ -200,6 +206,12 @@ def get_image_name(name):
     """
 
     return os.path.splitext(os.path.basename(name))[0]
+
+def build_thumbnails(pigeons):
+    for pigeon in pigeons.values():
+        img_path = pigeon.get_image()
+        if img_path != '' and img_path is not None:
+            image_to_thumb(img_path)
 
 def url_hook(about, link):
     webbrowser.open(link)

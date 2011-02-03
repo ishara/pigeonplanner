@@ -20,6 +20,8 @@
 
 import gtk
 
+from pigeonplanner import common
+
 
 def set_entry_completion(widget):
     """
@@ -69,11 +71,11 @@ def fill_combobox(combobox, items, active=0, sort=True):
 
 
 class SexCombobox(gtk.ComboBox):
-    def __init__(self, sexdic):
+    def __init__(self):
         store = gtk.ListStore(str, str)
         gtk.ComboBox.__init__(self, store)
 
-        for key, value in sexdic.items():
+        for key, value in common.sexdic.items():
             store.insert(int(key), [key, value])
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)
@@ -84,10 +86,9 @@ class SexCombobox(gtk.ComboBox):
 
 class StatusCombobox(gtk.ComboBox):
     def __init__(self):
-        store = gtk.ListStore(str, str)
+        store = gtk.ListStore(str)
         gtk.ComboBox.__init__(self, store)
 
-        store = gtk.ListStore(str)
         for item in [_("Dead"), _("Active"), _("Sold"), _("Lost")]:
             store.append([item])
         cell = gtk.CellRendererText()

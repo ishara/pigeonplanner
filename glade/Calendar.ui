@@ -82,27 +82,12 @@
                     <property name="visible">True</property>
                     <property name="spacing">2</property>
                     <child>
-                      <object class="GtkFrame" id="frame1">
+                      <object class="GtkFrame" id="framedate">
                         <property name="visible">True</property>
                         <property name="label_xalign">0</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkViewport" id="viewport1">
-                            <property name="visible">True</property>
-                            <property name="resize_mode">queue</property>
-                            <child>
-                              <object class="GtkEntry" id="entrydate">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="editable">False</property>
-                                <property name="max_length">10</property>
-                                <property name="has_frame">False</property>
-                                <property name="invisible_char">•</property>
-                                <property name="width_chars">16</property>
-                                <signal name="icon_press" handler="on_dateicon_pressed"/>
-                              </object>
-                            </child>
-                          </object>
+                          <placeholder/>
                         </child>
                         <child type="label">
                           <object class="GtkLabel" id="label1">
@@ -349,6 +334,7 @@
                 <child>
                   <object class="GtkToolButton" id="buttonedit">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-edit</property>
                     <signal name="clicked" handler="on_buttonedit_clicked"/>
@@ -361,6 +347,7 @@
                 <child>
                   <object class="GtkToolButton" id="buttonremove">
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="use_underline">True</property>
                     <property name="stock_id">gtk-remove</property>
                     <signal name="clicked" handler="on_buttonremove_clicked"/>

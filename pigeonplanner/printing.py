@@ -32,8 +32,8 @@ logger = logging.getLogger(__name__)
 
 from pigeonplanner import const
 from pigeonplanner import messages
-from pigeonplanner import pedigree
 from pigeonplanner.ui import dialogs
+from pigeonplanner.ui import pedigree
 from pigeonplanner.ui import printpreview
 from pigeonplanner.ui.widgets import filefilters
 
@@ -115,6 +115,12 @@ class BasePrinting(object):
                 elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
                     settings = print_.get_print_settings()
 
+    def begin_print(self, operation, context):
+        raise NotImplementedError
+
+    def draw_page (self, operation, context, page_number):
+        raise NotImplementedError
+
     def preview_page(self, operation, preview, context, parent):
         self.preview = printpreview.PrintPreview(operation, preview,
                                                  context, parent)
@@ -136,13 +142,13 @@ class BasePrinting(object):
 
 
 class PrintPedigree(BasePrinting):
-    def __init__(self, parent, pigeoninfo, userinfo, options, print_action,
-                 pdf_name, pigeons):
+    def __init__(self, parent, pigeon, userinfo, options, print_action,
+                 pdf_name, parser):
         orientation = gtk.PAGE_ORIENTATION_PORTRAIT
-        self.pigeoninfo = pigeoninfo
+        self.pigeon = pigeon
         self.options = options
         self.userinfo = userinfo
-        self.pigeons = pigeons
+        self.parser = parser
         self.preview = None
         BasePrinting.__init__(self, parent, options, print_action, pdf_name,
                               orientation)
@@ -168,10 +174,7 @@ class PrintPedigree(BasePrinting):
         cr.set_font_size(8)
         cr.move_to(0, 10)
         cr.show_text(_("Pedigree of:"))
-        ring = ""
-        if self.pigeoninfo['ring']:
-            ring = "%s / %s" %(self.pigeoninfo['ring'],
-                               self.pigeoninfo['year'][2:])
+        ring = self.pigeon.get_band_string(True)
         xb, yb, width, height, xa, ya = cr.text_extents(ring)
         cr.move_to(total_width-width, 10)
         cr.show_text(ring)
@@ -208,12 +211,12 @@ class PrintPedigree(BasePrinting):
         name = ''
         colour = ''
         sex = ''
-        if self.options.pigName and self.pigeoninfo['name']:
-            name = "%s - " %self.pigeoninfo['name']
-        if self.options.pigColour and self.pigeoninfo['colour']:
-            colour = "%s - " %self.pigeoninfo['colour']
+        if self.options.pigName and self.pigeon.get_name():
+            name = "%s - " %self.pigeon.get_name()
+        if self.options.pigColour and self.pigeon.get_colour():
+            colour = "%s - " %self.pigeon.get_colour()
         if self.options.pigSex:
-            sex = self.pigeoninfo['sex']
+            sex = self.pigeon.get_sex_string()
         info = name + colour + sex
         xb, yb, width, height, xa, ya = cr.text_extents(info)
         cr.move_to(total_width-width, endPigeon)
@@ -222,31 +225,27 @@ class PrintPedigree(BasePrinting):
             endPigeon += 6
 
         if self.options.pigExtra:
+            ex1, ex2, ex3, ex4, ex5, ex6 = self.pigeon.get_extra()
+
             cr.set_font_size(4)
-            xb, yb, width, height, xa, ya = \
-                                cr.text_extents(self.pigeoninfo['extra1'])
+            xb, yb, width, height, xa, ya = cr.text_extents(ex1)
             cr.move_to(total_width-width, endPigeon)
-            cr.show_text(self.pigeoninfo['extra1'])
-            xb, yb, width, height, xa, ya = \
-                                cr.text_extents(self.pigeoninfo['extra2'])
+            cr.show_text(ex1)
+            xb, yb, width, height, xa, ya = cr.text_extents(ex2)
             cr.move_to(total_width-width, endPigeon+5)
-            cr.show_text(self.pigeoninfo['extra2'])
-            xb, yb, width, height, xa, ya = \
-                                cr.text_extents(self.pigeoninfo['extra3'])
+            cr.show_text(ex2)
+            xb, yb, width, height, xa, ya = cr.text_extents(ex3)
             cr.move_to(total_width-width, endPigeon+10)
-            cr.show_text(self.pigeoninfo['extra3'])
-            xb, yb, width, height, xa, ya = \
-                                cr.text_extents(self.pigeoninfo['extra4'])
+            cr.show_text(ex3)
+            xb, yb, width, height, xa, ya = cr.text_extents(ex4)
             cr.move_to(total_width-width, endPigeon+15)
-            cr.show_text(self.pigeoninfo['extra4'])
-            xb, yb, width, height, xa, ya = \
-                                cr.text_extents(self.pigeoninfo['extra5'])
+            cr.show_text(ex4)
+            xb, yb, width, height, xa, ya = cr.text_extents(ex5)
             cr.move_to(total_width-width, endPigeon+20)
-            cr.show_text(self.pigeoninfo['extra5'])
-            xb, yb, width, height, xa, ya = \
-                                cr.text_extents(self.pigeoninfo['extra6'])
+            cr.show_text(ex5)
+            xb, yb, width, height, xa, ya = cr.text_extents(ex6)
             cr.move_to(total_width-width, endPigeon+25)
-            cr.show_text(self.pigeoninfo['extra6'])
+            cr.show_text(ex6)
             endPigeon += 25
 
         # line
@@ -357,10 +356,12 @@ class PrintPedigree(BasePrinting):
 #               ((150, 266, 46, 10), (None))]
 
         lst = [None]*31
-        pedigree.build_tree(self.pigeons,
-                            self.pigeoninfo['pindex'], self.pigeoninfo['ring'],
-                            self.pigeoninfo['year'], self.pigeoninfo['sex'],
-                            '', '', '', '', '', '', 0, 1, lst)
+#        ring, year = self.pigeon.get_band()
+        pedigree.build_tree(self.parser, self.pigeon, 0, 1, lst)
+#        pedigree.build_tree(self.pigeons,
+#                            self.pigeon.get_pindex(), ring, year,
+#                            self.pigeon.get_sex(),
+#                            '', '', '', '', '', '', 0, 1, lst)
 
         for i in xrange(1, 31):
             x = pos[i][0][0]
@@ -371,8 +372,10 @@ class PrintPedigree(BasePrinting):
             cr.rectangle(x, y, w, h)
 
             if lst[i]:
+                pigeon = lst[i]
                 cr.move_to(x + 0.5, y + 0.5 + font_size)
-                cr.show_text(lst[i][1] + "/" + lst[i][2][2:])
+                cr.show_text(pigeon.get_band_string(True))
+#                cr.show_text(lst[i][1] + "/" + lst[i][2][2:])
 
                 if i <= 6:
                     height = 6
@@ -380,22 +383,28 @@ class PrintPedigree(BasePrinting):
                     height = 3
                 else:
                     height = 1
-
+                ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.get_extra()
                 if height >= 1:
                     cr.move_to(x + 0.5, y + 1.75 + font_size*2)
-                    cr.show_text(lst[i][4])
+                    cr.show_text(ex1)
+#                    cr.show_text(lst[i][4])
                 if height >= 3:
                     cr.move_to(x + 0.5, y + 2.5 + font_size*3)
-                    cr.show_text(lst[i][5])
+                    cr.show_text(ex2)
+#                    cr.show_text(lst[i][5])
                     cr.move_to(x + 0.5, y + 3 + font_size*4)
-                    cr.show_text(lst[i][6])
+                    cr.show_text(ex3)
+#                    cr.show_text(lst[i][6])
                 if height == 6:
                     cr.move_to(x + 0.5, y + 3.5 + font_size*5)
-                    cr.show_text(lst[i][7])
+                    cr.show_text(ex4)
+#                    cr.show_text(lst[i][7])
                     cr.move_to(x + 0.5, y + 4 + font_size*6)
-                    cr.show_text(lst[i][8])
+                    cr.show_text(ex5)
+#                    cr.show_text(lst[i][8])
                     cr.move_to(x + 0.5, y + 4.5 + font_size*7)
-                    cr.show_text(lst[i][9])
+                    cr.show_text(ex6)
+#                    cr.show_text(lst[i][9])
 
             if pos[i][1]:
                 w = 2

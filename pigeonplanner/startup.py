@@ -50,6 +50,8 @@ class  NullFile(object):
 class Startup(object):
     def __init__(self):
         self.db = None
+        self.parser = None
+        self.logger = None
 
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
@@ -58,17 +60,17 @@ class Startup(object):
         # py2exe detection
         py2exe = False
         if WIN32 and hasattr(sys, 'frozen'):
-	        py2exe = True
+            py2exe = True
 	
         # Disable py2exe log feature
         if WIN32 and py2exe:
             try:
-	            sys.stdout = open("nul", "w")
-	            sys.stderr = open("nul", "w")
+                sys.stdout = open("nul", "w")
+                sys.stderr = open("nul", "w")
             except IOError:
                 # "nul" doesn't exist, use our own class
-	            sys.stdout = NullFile()
-	            sys.stderr = NullFile()
+                sys.stdout = NullFile()
+                sys.stderr = NullFile()
 
         # Detect if program is running for the first time
         self.firstrun = not os.path.isdir(const.PREFDIR)
@@ -162,15 +164,21 @@ class Startup(object):
         self.db = database.DatabaseOperations()
         self.db.check_schema()
 
-    def setup_parser(self):
+    def setup_pigeons(self):
         """
-        Setup the pigeon parser object which will hold all the pigeons
+        Setup the pigeon parser object which will hold all the pigeons and
+        build the image thumbnails if needed.
         """
 
         from pigeonplanner import pigeonparser
 
         self.parser = pigeonparser.PigeonParser(self.db)
-        self.parser.get_pigeons()
+        self.parser.build_pigeons()
+        if not os.path.isdir(const.THUMBDIR):
+            from pigeonplanner import common
+            self.logger.debug("Make thumbnail folder and building thumbnails")
+            os.mkdir(const.THUMBDIR)
+            common.build_thumbnails(self.parser.pigeons)
 
     def search_updates(self):
         from pigeonplanner import update

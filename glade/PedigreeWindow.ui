@@ -7,7 +7,7 @@
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="default_width">960</property>
-    <property name="default_height">680</property>
+    <property name="default_height">660</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon">../images/icon_logo.png</property>
     <property name="skip_taskbar_hint">True</property>
@@ -120,6 +120,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
+            <property name="pack_type">end</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -219,7 +220,8 @@
             </child>
           </object>
           <packing>
-            <property name="position">2</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </object>

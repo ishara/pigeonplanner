@@ -349,7 +349,7 @@ class PhotoAlbum(builder.GtkBuilder):
             return
 
         pindex = model[path][1]
-        image = self.parser.pigeons[pindex].image
+        image = self.parser.pigeons[pindex].get_image()
 
         self.set_pixbuf(image)
         self.current_picture = path[0]

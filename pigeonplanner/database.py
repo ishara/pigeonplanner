@@ -191,7 +191,7 @@ class DatabaseOperations(object):
         try:
             conn = sqlite3.connect(common.encode_string(const.DATABASE))
         except Exception, e:
-            import logdialog
+            from pigeonplanner.ui import logdialog
 
             logger.critical("Could not connect to database")
             logger.critical(e)
@@ -365,6 +365,10 @@ class DatabaseOperations(object):
     def get_pigeons(self):
         sql = 'SELECT * FROM Pigeons'
         return self.__db_execute_select(sql, None, RET_ALLCOL)
+
+    def get_pigeon_data(self, pindex):
+        sql = 'SELECT * FROM Pigeons WHERE pindex=?'
+        return self.__db_execute_select(sql, (pindex,), RET_ONEROW)
 
     def has_pigeon(self, band):
         sql = 'SELECT COUNT(*) FROM Pigeons WHERE pindex=?'

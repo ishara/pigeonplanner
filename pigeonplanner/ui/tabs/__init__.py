@@ -16,31 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
-
-
-class VaccinationCheck(gtk.CheckButton):
-    """
-    This class subclasses gtk.CheckButton which we will use to display
-    if a pigeon is vaccinated or not. Because this is just an indicator,
-    the user isn't allowed to change its state.
-
-    We achieve this by overriding the "pressed" and "released" signals
-    and do nothing in them.
-    """
-
-    __gtype_name__ = 'VaccinationCheck'
-
-    def __init__(self):
-        gtk.CheckButton.__init__(self)
-
-        self.show()
-
-    def do_pressed(self):
-        pass
-
-    def do_released(self):
-        pass
-
-
+from pigeonplanner.ui.tabs.pedigree import PedigreeTab
+from pigeonplanner.ui.tabs.relatives import RelativesTab
+from pigeonplanner.ui.tabs.results import ResultsTab
+from pigeonplanner.ui.tabs.medication import MedicationTab
 
