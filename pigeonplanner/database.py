@@ -162,18 +162,13 @@ class DatabaseOperations(object):
     }
 
     def __init__(self):
-        create_tables = False
+        self.conn, self.cursor = self.__db_connect()
 
         if not os.path.exists(const.DATABASE):
-            create_tables = True
-
-        if create_tables:
-            conn, cursor = self.__db_connect()
             for table_name, sql in self.SCHEMA.items():
-                cursor.execute('CREATE TABLE IF NOT EXISTS %s %s' 
+                self.cursor.execute('CREATE TABLE IF NOT EXISTS %s %s' 
                                                     %(table_name, sql))
-                conn.commit()
-            conn.close()
+                self.conn.commit()
 
     def get_n_column_name(self, table, start=1, end=None):
         if end is None:
@@ -186,6 +181,9 @@ class DatabaseOperations(object):
         for name in colnames:
             sql += " %s=?," %name
         return sql.lstrip(' (').rstrip(',')
+
+    def close(self):
+        self.conn.close()
 
     def __db_connect(self):
         try:
@@ -214,36 +212,31 @@ class DatabaseOperations(object):
         return (conn, cursor)
 
     def __db_execute(self, sql, args=None):
-        conn, cursor = self.__db_connect()
         try:
             if args is None:
-                cursor.execute(sql)
+                self.cursor.execute(sql)
             else:
-                cursor.execute(sql, args)
+                self.cursor.execute(sql, args)
         except sqlite3.IntegrityError:
             pass
-        conn.commit()
-        conn.close()
-        return cursor.lastrowid
+        self.conn.commit()
+        return self.cursor.lastrowid
 
     def __db_execute_select(self, sql, args=None, retval=None):
         data = None
-        conn, cursor = self.__db_connect()
         if args is None:
-            cursor.execute(sql)
+            self.cursor.execute(sql)
         else:
-            cursor.execute(sql, args)
+            self.cursor.execute(sql, args)
 
         if retval == RET_FIRSTCOL:
-            data = [row[0] for row in cursor.fetchall() if row[0]]
+            data = [row[0] for row in self.cursor.fetchall() if row[0]]
         elif retval == RET_SECCOL:
-            data = [row[1] for row in cursor.fetchall() if row[1]]
+            data = [row[1] for row in self.cursor.fetchall() if row[1]]
         elif retval == RET_ALLCOL or retval is None:
-            data = cursor.fetchall()
+            data = self.cursor.fetchall()
         elif retval == RET_ONEROW:
-            data = cursor.fetchone()
-
-        conn.close()
+            data = self.cursor.fetchone()
         return data
 
 #### General methods to be called outside this module
@@ -292,19 +285,17 @@ class DatabaseOperations(object):
         self.__db_execute(sql)
 
     def change_column_name(self, table):
-        conn, cursor = self.__db_connect()
-        cursor.execute("CREATE TEMP TABLE tmp_%s AS SELECT * FROM %s"
+        self.cursor.execute("CREATE TEMP TABLE tmp_%s AS SELECT * FROM %s"
                                         %(table, table))
-        cursor.execute("DROP TABLE %s" %table)
-        cursor.execute("CREATE TABLE IF NOT EXISTS %s %s"
+        self.cursor.execute("DROP TABLE %s" %table)
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS %s %s"
                                         %(table, self.SCHEMA[table]))
         cursor.execute("INSERT INTO %s SELECT * FROM tmp_%s" %(table, table))
         # No need to drop the temporary table. From the SQLite docs:
         # If the "TEMP" or "TEMPORARY" keyword occurs (...) the table is only
         # visible within that same database connection and is automatically
         # deleted when the database connection is closed.
-        conn.commit()
-        conn.close()
+        self.conn.commit()
 
 #### Maintenance
     def optimize_db(self):

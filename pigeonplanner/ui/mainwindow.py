@@ -114,6 +114,7 @@ class MainWindow(builder.GtkBuilder):
                 tools.Calendar(self.mainwindow, self.database, events[0][0])
 
     def quit_program(self, widget=None, event=None, bckp=True):
+        self.database.close()
         if self.options.backup and bckp:
             daysInSeconds = self.options.interval * 24 * 60 * 60
             if time.time() - self.options.last >= daysInSeconds:
