@@ -228,6 +228,3 @@ class Startup(object):
         logfile.close()
         logdialog.LogDialog(self.db)
 
-        if self.db is not None:
-            self.db.close()
-
