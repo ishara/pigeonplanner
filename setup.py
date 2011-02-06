@@ -40,6 +40,8 @@ data_files = [
 packages = [
             "pigeonplanner",
             "pigeonplanner.ui",
+            "pigeonplanner.ui.tabs",
+            "pigeonplanner.ui.tools",
             "pigeonplanner.ui.widgets",
         ]
 
@@ -65,7 +67,7 @@ def run_setup():
           license = "GPLv3",
           url = pigeonplanner.website,
           packages = packages,
-          scripts = ["bin/pigeonplanner"],
+          scripts = ["bin/pigeonplanner", "bin/pigeonplanner-db"],
           data_files = data_files + translation_files,
         )
 
