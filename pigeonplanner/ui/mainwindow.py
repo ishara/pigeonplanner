@@ -401,6 +401,10 @@ class MainWindow(builder.GtkBuilder):
             dialogs.MessageDialog(const.INFO, (msg, None, title),
                                   self.mainwindow)
 
+    def menuinfo_activate(self, widget):
+        logger.info(common.get_function_name())
+        dialogs.InfoDialog(self.mainwindow, self.database)
+
     def menuabout_activate(self, widget):
         logger.info(common.get_function_name())
         dialogs.AboutDialog(self.mainwindow)
@@ -647,6 +651,8 @@ class MainWindow(builder.GtkBuilder):
             ("Update", gtk.STOCK_CONNECT, _("Search for updates..."), None,
                     _("Search online for program updates"),
                     self.menuupdate_activate),
+            ("Info", gtk.STOCK_INFO, None, None,
+                    _("General information"), self.menuinfo_activate),
             ("About", gtk.STOCK_ABOUT, None, None,
                     _("About this application"), self.menuabout_activate)
            ))

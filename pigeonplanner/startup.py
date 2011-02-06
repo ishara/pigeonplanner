@@ -31,6 +31,7 @@ import gtk
 import gobject
 
 from pigeonplanner import const
+from pigeonplanner import common
 
 
 WIN32 = sys.platform.startswith("win")
@@ -105,26 +106,8 @@ class Startup(object):
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
         if WIN32:
             self.logger.debug("Current path: %s" % os.getcwd())
-
-            ver = os.sys.getwindowsversion()
-            ver_format = ver[3], ver[0], ver[1]
-            win_versions = {
-                (1, 4, 0): '95',
-                (1, 4, 10): '98',
-                (1, 4, 90): 'ME',
-                (2, 4, 0): 'NT',
-                (2, 5, 0): '2000',
-                (2, 5, 1): 'XP',
-                (2, 5, 2): '2003',
-                (2, 6, 0): 'Vista',
-                (2, 6, 1): '7',
-            }
-            if ver_format in win_versions:
-                win_ver = win_versions[ver_format]
-            else:
-                win_ver = ", ".join(str(n) for n in sys.getwindowsversion())
-
-            self.logger.debug("Windows version: %s" % win_ver)
+            win_ver = common.get_windows_version()
+            self.logger.debug("Windows version: %s" %win_ver)
         else:
             self.logger.debug("Current path: %s" % const.topPath)
         self.logger.debug("Python version: %s" % sys.version)
@@ -145,8 +128,6 @@ class Startup(object):
             gtk.rc_parse(themefile)
 
         # Register custom stock icons
-        from pigeonplanner import common
-
         common.create_stock_button([
                 ('icon_pedigree_detail.png', 'pedigree-detail', _('Pedigree')),
                 ('icon_email.png', 'email', _('E-mail')),
@@ -175,7 +156,6 @@ class Startup(object):
         self.parser = pigeonparser.PigeonParser(self.db)
         self.parser.build_pigeons()
         if not os.path.isdir(const.THUMBDIR):
-            from pigeonplanner import common
             self.logger.debug("Make thumbnail folder and building thumbnails")
             os.mkdir(const.THUMBDIR)
             common.build_thumbnails(self.parser.pigeons)

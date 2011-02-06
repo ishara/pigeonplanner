@@ -20,6 +20,8 @@ Functions for some common tasks
 """
 
 
+import os
+import sys
 import random
 import inspect
 import urllib2
@@ -33,7 +35,11 @@ import gobject
 from pigeonplanner import const
 
 
-sexdic = {'0': _('Cock'), '1': _('Hen'), '2': _('Young bird')}
+def get_sexdic():
+    return {'0': _('Cock'), '1': _('Hen'), '2': _('Young bird')}
+
+def get_sex(sex):
+    return get_sexdic()[sex]
 
 def create_stock_button(icons):
     """
@@ -56,6 +62,25 @@ def get_function_name():
     """
 
     return inspect.stack()[1][3]
+
+def get_windows_version():
+    ver = os.sys.getwindowsversion()
+    ver_format = ver[3], ver[0], ver[1]
+    win_versions = {
+                (1, 4, 0): '95',
+                (1, 4, 10): '98',
+                (1, 4, 90): 'ME',
+                (2, 4, 0): 'NT',
+                (2, 5, 0): '2000',
+                (2, 5, 1): 'XP',
+                (2, 5, 2): '2003',
+                (2, 6, 0): 'Vista',
+                (2, 6, 1): '7',
+            }
+    if ver_format in win_versions:
+        return win_versions[ver_format]
+    else:
+        return ", ".join(str(n) for n in sys.getwindowsversion())
 
 def get_date():
     return datetime.date.today().strftime(const.DATE_FORMAT)

@@ -72,6 +72,8 @@ ui_mainwindow = """
          <separator/>
          <menuitem action="Update"/>
          <separator/>
+         <menuitem action="Info"/>
+         <separator/>
          <menuitem action="About"/>
       </menu>
    </menubar>

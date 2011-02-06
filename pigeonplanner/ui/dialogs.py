@@ -16,7 +16,9 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os
 import os.path
+import sys
 
 import gtk
 import gtk.gdk
@@ -124,11 +126,81 @@ class AboutDialog(gtk.AboutDialog):
         self.set_translator_credits(_('translator-credits'))
         self.set_license(const.LICENSE)
         self.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(
-                                                os.path.join(const.IMAGEDIR,
-                                                             'icon_logo.png'),
-                                                80, 80))
+                        os.path.join(const.IMAGEDIR, 'icon_logo.png'), 80, 80))
         self.run()
         self.destroy()
+
+
+class InfoDialog(gtk.Dialog):
+    def __init__(self, parent, database):
+        gtk.Dialog.__init__(self, _("General information"), parent,
+                            gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                            ("gtk-close", gtk.RESPONSE_CLOSE))
+        self.set_default_response(gtk.RESPONSE_CLOSE)
+        self.resize(440, 380)
+        self.database = database
+
+        treeview = gtk.TreeView()
+        treeview.set_headers_visible(False)
+        selection = treeview.get_selection()
+        selection.set_select_function(self._select_func)
+        liststore = gtk.ListStore(str, str, str)
+        columns = ["Item", "Value"]
+        for index, column in enumerate(columns):
+            textrenderer = gtk.CellRendererText()
+            tvcolumn = gtk.TreeViewColumn(column, textrenderer, markup=index, background=2)
+            tvcolumn.set_sort_column_id(index)
+            treeview.append_column(tvcolumn)
+        treeview.set_model(liststore)
+        sw = gtk.ScrolledWindow()
+        sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        sw.add(treeview)
+        self.vbox.pack_start(sw)
+        self.vbox.show_all()
+
+        template = "<b>%s</b>"
+        liststore.append([template %_("Technical details"), "", "#dcdcdc"])
+        for item, value in self.get_versions():
+            liststore.append([item, value, "#ffffff"])
+        liststore.append([template %_("Data information"), "", "#dcdcdc"])
+        for item, value in self.get_data():
+            liststore.append([item, value, "#ffffff"])
+
+        self.run()
+        self.destroy()
+
+    def get_versions(self):
+        if hasattr(os, "uname"):
+            operatingsystem = os.uname()[0]
+            distribution = os.uname()[2]
+        else:
+            operatingsystem = "Windows"
+            distribution = common.get_windows_version()
+
+        return (("Pigeon Planner", str(const.VERSION)),
+                ("Python", str(sys.version).replace('\n','')),
+                ("LANG", os.environ.get('LANG','')),
+                ("OS", operatingsystem),
+                ("Distribution", distribution))
+
+    def get_data(self):
+        total, cocks, hens, ybirds = common.count_active_pigeons(self.database)
+
+        return ((_("Number of pigeons"), total),
+                (_("Number of cocks"), "%s (%s %%)"
+                                %(cocks, self.get_percentage(cocks, total))),
+                (_("Number of hens"), "%s (%s %%)"
+                                %(hens, self.get_percentage(hens, total))),
+                (_("Number of young birds"), "%s (%s %%)"
+                                %(ybirds, self.get_percentage(ybirds, total))),
+                (_("Number of results"),
+                                    len(self.database.get_all_results())))
+
+    def get_percentage(self, value, total):
+        return "%.2f" %((value/float(total))*100)
+
+    def _select_func(self, data):
+        return False
 
 
 class BackupDialog(gtk.Dialog):

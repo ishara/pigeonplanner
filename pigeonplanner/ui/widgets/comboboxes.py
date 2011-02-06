@@ -75,7 +75,7 @@ class SexCombobox(gtk.ComboBox):
         store = gtk.ListStore(str, str)
         gtk.ComboBox.__init__(self, store)
 
-        for key, value in common.sexdic.items():
+        for key, value in common.get_sexdic().items():
             store.insert(int(key), [key, value])
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)

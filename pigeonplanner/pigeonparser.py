@@ -129,7 +129,7 @@ class Pigeon(object):
         return self.sex
 
     def get_sex_string(self):
-        return common.sexdic[self.sex]
+        return common.get_sex(self.sex)
 
     def get_visible(self):
         return self.show

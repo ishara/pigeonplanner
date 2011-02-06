@@ -77,7 +77,7 @@ class ToolsWindow(builder.GtkBuilder):
 
         # Add the categories
         i = 0
-        for category in [_("Velocity calculator"), _("Statistics")]:
+        for category in [_("Velocity calculator")]:
             self.liststore.append([i, category])
             label = getattr(self, "label_title_%s" %i)
             label.set_markup("<b><i><big>%s</big></i></b>" %category)
@@ -87,8 +87,6 @@ class ToolsWindow(builder.GtkBuilder):
 
         # Build other treeviews
         self.sel_velocity = self.tv_velocity.get_selection()
-
-        self.sel_stats = self.tvstats.get_selection()
 
         # Fill spinbuttons
         dt = datetime.datetime.now()
@@ -180,27 +178,4 @@ class ToolsWindow(builder.GtkBuilder):
             info = [date.strftime("%Y-%m-%d"), release, distance]
             printing.PrintVelocity(self.main.mainwindow, data, info,
                                    self.main.options, const.PRINT)
-
-    # Statistics
-    def on_btnsearchdb_clicked(self, widget):
-        total, cocks, hens, ybirds = \
-                            common.count_active_pigeons(self.db)
-
-        items = [(_("Number of pigeons"), total),
-                 (_("Number of cocks"), "%s (%s %%)"
-                                %(cocks, self.get_percentage(cocks, total))),
-                 (_("Number of hens"), "%s (%s %%)"
-                                %(hens, self.get_percentage(hens, total))),
-                 (_("Number of young birds"), "%s (%s %%)"
-                                %(ybirds, self.get_percentage(ybirds, total))),
-                 (_("Number of results"),
-                                    len(self.db.get_all_results()))
-                ]
-
-        self.ls_stats.clear()
-        for description, value in items:
-            self.ls_stats.insert(0, [description, value])
-
-    def get_percentage(self, value, total):
-        return "%.2f" %((value/float(total))*100)
 
