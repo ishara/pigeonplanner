@@ -15,31 +15,23 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
-"""
-Tools window class
-"""
-
 
 import datetime
-import logging
-logger = logging.getLogger(__name__)
 
 import gtk
 
 from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import builder
-from pigeonplanner import printing
 
 
-class ToolsWindow(builder.GtkBuilder):
-    def __init__(self, main):
-        builder.GtkBuilder.__init__(self, const.GLADETOOLS)
+class VelocityCalculator(builder.GtkBuilder):
+    def __init__(self, parent, database, options):
+        builder.GtkBuilder.__init__(self, const.GLADEVELOCITY)
 
-        self.main = main
-        self.db = self.main.database
-
-        self.toolsdialog.set_transient_for(self.main.mainwindow)
+        self.parent = parent
+        self.database = database
+        self.options = options
 
         distance_units = [
                     (_('Yards'), 0.9144),
@@ -65,50 +57,25 @@ class ToolsWindow(builder.GtkBuilder):
             self.ls_dist_units.append(item)
         for item in speed_units:
             self.ls_speed_units.append(item)
-
         self.combobox_velocity_distance.set_active(0)
         self.combobox_velocity_speed.set_active(0)
         self.combobox_prognosis_distance.set_active(0)
         self.combobox_prognosis_speed.set_active(0)
 
-        # Build main treeview
-        self.selection = self.treeview.get_selection()
-        self.selection.connect('changed', self.selection_changed)
-
-        # Add the categories
-        i = 0
-        for category in [_("Velocity calculator")]:
-            self.liststore.append([i, category])
-            label = getattr(self, "label_title_%s" %i)
-            label.set_markup("<b><i><big>%s</big></i></b>" %category)
-            i += 1
-
-        self.treeview.set_cursor(0)
-
-        # Build other treeviews
-        self.sel_velocity = self.tv_velocity.get_selection()
-
-        # Fill spinbuttons
         dt = datetime.datetime.now()
         self.spinbutton_prognosis_hours.set_value(dt.hour)
         self.spinbutton_prognosis_minutes.set_value(dt.minute)
         self.spinbutton_prognosis_seconds.set_value(dt.second)
+        self.spinbutton_prognosis_from.set_value(800)
+        self.spinbutton_prognosis_to.set_value(1800)
 
-        self.toolsdialog.show()
+        self.velocitywindow.set_transient_for(parent)
+        self.velocitywindow.show()
 
-    def on_close_dialog(self, widget=None, event=None):
-        self.toolsdialog.destroy()
+    # Callbacks
+    def close_window(self, widget, event=None):
+        self.velocitywindow.destroy()
 
-    def selection_changed(self, selection):
-        model, path = selection.get_selected()
-        if not path: return
-
-        try:
-            self.notebook.set_current_page(model[path][0])
-        except TypeError:
-            pass
-
-    # Velocity
     def on_spinbutton_time_changed(self, widget):
         value = widget.get_value_as_int()
         widget.set_text(common.add_zero_to_time(value))
@@ -136,7 +103,6 @@ class ToolsWindow(builder.GtkBuilder):
     def on_spinbutton_prognosis_from_changed(self, widget):
         spinmin = widget.get_value_as_int()
         spinmax = widget.get_range()[1]
-
         self.spinbutton_prognosis_to.set_range(spinmin, spinmax)
 
     def on_calculate_clicked(self, widget):
@@ -154,14 +120,12 @@ class ToolsWindow(builder.GtkBuilder):
         seconds_total = (hours * 3600) + (minutes * 60) + seconds
 
         self.ls_velocity.clear()
-
         for speed in xrange(begin, end+50, 50):
             flight = int((distance*distunit) / (speed*speedunit))
             arrival = seconds_total + flight
             self.ls_velocity.insert(0, [speed,
                                         datetime.timedelta(seconds=flight),
                                         datetime.timedelta(seconds=arrival)])
-
         self.ls_velocity.set_sort_column_id(0, gtk.SORT_ASCENDING)
 
     def on_printcalc_clicked(self, widget):
@@ -176,6 +140,7 @@ class ToolsWindow(builder.GtkBuilder):
                                  self.spinbutton_prognosis_minutes.get_text(),
                                  self.spinbutton_prognosis_seconds.get_text())
             info = [date.strftime("%Y-%m-%d"), release, distance]
-            printing.PrintVelocity(self.main.mainwindow, data, info,
-                                   self.main.options, const.PRINT)
+            from pigeonplanner import printing
+            printing.PrintVelocity(self.parent, data, info,
+                                   self.options, const.PRINT)
 

@@ -42,7 +42,6 @@ from pigeonplanner.ui import tools
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui import pedigree
 from pigeonplanner.ui import logdialog
-from pigeonplanner.ui import toolswindow
 from pigeonplanner.ui import detailsview
 from pigeonplanner.ui import optionsdialog
 from pigeonplanner.ui import pedigreewindow
@@ -329,10 +328,6 @@ class MainWindow(builder.GtkBuilder):
         logger.info(common.get_function_name())
         self.treeview.run_filterdialog(self.mainwindow, self.database)
 
-    def menutools_activate(self, widget):
-        logger.info(common.get_function_name())
-        toolswindow.ToolsWindow(self)
-
     def menupref_activate(self, widget):
         logger.info(common.get_function_name())
         dialog = optionsdialog.OptionsDialog(self.mainwindow, self.options)
@@ -361,6 +356,10 @@ class MainWindow(builder.GtkBuilder):
         value = widget.get_active()
         self.set_multiple_visible([self.statusbar], value)
         self.options.set_option('Options', 'statusbar', str(value))
+
+    def menuvelocity_activate(self, widget):
+        logger.info(common.get_function_name())
+        tools.VelocityCalculator(self.mainwindow, self.database, self.options)
 
     def menuaddresses_activate(self, widget):
         logger.info(common.get_function_name())
@@ -627,12 +626,13 @@ class MainWindow(builder.GtkBuilder):
             ("Addresult", gtk.STOCK_ADD, _("Add resul_t"), None,
                     _("Add a new result for this pigeon"),
                     self.menuaddresult_activate),
-            ("Tools", gtk.STOCK_EXECUTE, _("_Tools"), "<control>T",
-                    _("Various tools"), self.menutools_activate),
             ("Preferences", gtk.STOCK_PREFERENCES, None, "<control>P",
                     _("Configure the application"), self.menupref_activate),
             ("Filter", None, _("_Filter..."), None,
                     _("Set filter options"), self.menufilter_activate),
+            ("Velocity", None, _("Velocity calculator"), None,
+                    _("Calculate the velocity of flights"),
+                    self.menuvelocity_activate),
             ("Album", None, _("_Photo Album"), None,
                     _("View the images of your pigeons"),
                     self.menualbum_activate),
