@@ -28,12 +28,8 @@ import gtk
 
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import backup
 from pigeonplanner import builder
-from pigeonplanner import messages
 from pigeonplanner import printing
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui.widgets import filefilters
 
 
 class ToolsWindow(builder.GtkBuilder):
@@ -81,8 +77,7 @@ class ToolsWindow(builder.GtkBuilder):
 
         # Add the categories
         i = 0
-        for category in [_("Velocity calculator"),
-                         _("Datasets"), _("Statistics"), _("Backup")]:
+        for category in [_("Velocity calculator"), _("Statistics")]:
             self.liststore.append([i, category])
             label = getattr(self, "label_title_%s" %i)
             label.set_markup("<b><i><big>%s</big></i></b>" %category)
@@ -100,20 +95,6 @@ class ToolsWindow(builder.GtkBuilder):
         self.spinbutton_prognosis_hours.set_value(dt.hour)
         self.spinbutton_prognosis_minutes.set_value(dt.minute)
         self.spinbutton_prognosis_seconds.set_value(dt.second)
-
-        # Backups file filter
-        self.fcButtonRestore.add_filter(filefilters.BackupFilter())
-
-        # Fill the data combobox
-        data = [_("Colours"), _("Racepoints"), _("Sectors"), _("Types"),
-                _("Categories"), _("Strains"), _("Lofts"), _("Weather"),
-                _("Wind")]
-        data.sort()
-        for item in data:
-            self.cbdata.append_text(item)
-            self.cbdata2.append_text(item)
-        self.cbdata.set_active(0)
-        self.cbdata2.set_active(0)
 
         self.toolsdialog.show()
 
@@ -200,118 +181,6 @@ class ToolsWindow(builder.GtkBuilder):
             printing.PrintVelocity(self.main.mainwindow, data, info,
                                    self.main.options, const.PRINT)
 
-    # Data
-    def on_cbdata_changed(self, widget):
-        self.fill_item_combo(widget.get_active_text())
-
-    def fill_item_combo(self, datatype):
-        """
-        Fill the item combobox with available items for the selected data
-        """
-
-        self.cbitems.get_model().clear()
-
-        if datatype == _("Colours"):
-            items = self.db.select_from_table(self.db.COLOURS)
-        elif datatype == _("Sectors"):
-            items = self.db.select_from_table(self.db.SECTORS)
-        elif datatype == _("Types"):
-            items = self.db.select_from_table(self.db.TYPES)
-        elif datatype == _("Categories"):
-            items = self.db.select_from_table(self.db.CATEGORIES)
-        elif datatype == _("Racepoints"):
-            items = self.db.select_from_table(self.db.RACEPOINTS)
-        elif datatype == _("Strains"):
-            items = self.db.select_from_table(self.db.STRAINS)
-        elif datatype == _("Lofts"):
-            items = self.db.select_from_table(self.db.LOFTS)
-        elif datatype == _("Weather"):
-            items = self.db.select_from_table(self.db.WEATHER)
-        elif datatype == _("Wind"):
-            items = self.db.select_from_table(self.db.WIND)
-
-        if items:
-            items.sort()
-
-        for item in items:
-            self.cbitems.append_text(item)
-
-        if len(self.cbitems.get_model()) > 10:
-            self.cbitems.set_wrap_width(2)
-
-        self.cbitems.set_active(0)
-
-        if self.cbitems.get_active_text():
-            self.dataremove.set_sensitive(True)
-        else:
-            self.dataremove.set_sensitive(False)
-
-    def on_dataremove_clicked(self, widget):
-        dataset = self.cbdata.get_active_text()
-        item = self.cbitems.get_active_text()
-
-        d = dialogs.MessageDialog(const.QUESTION, messages.MSG_REMOVE_ITEM,
-                                  self.toolsdialog,
-                                  {'item': item, 'dataset': dataset})
-        if d.yes:
-            index = self.cbitems.get_active()
-
-            if dataset == _("Colours"):
-                self.db.delete_from_table(self.db.COLOURS, item)
-            elif dataset == _("Sectors"):
-                self.db.delete_from_table(self.db.SECTORS, item)
-            elif dataset == _("Types"):
-                self.db.delete_from_table(self.db.TYPES, item)
-            elif dataset == _("Categories"):
-                self.db.delete_from_table(self.db.CATEGORIES, item)
-            elif dataset == _("Racepoints"):
-                self.db.delete_from_table(self.db.RACEPOINTS, item)
-            elif dataset == _("Strains"):
-                self.db.delete_from_table(self.db.STRAINS, item)
-            elif dataset == _("Lofts"):
-                self.db.delete_from_table(self.db.LOFTS, item)
-            elif dataset == _("Weather"):
-                self.db.delete_from_table(self.db.WEATHER, item)
-            elif dataset == _("Wind"):
-                self.db.delete_from_table(self.db.WIND, item)
-
-            self.cbitems.remove_text(index)
-            self.cbitems.set_active(0)
-
-    def on_dataadd_clicked(self, widget):
-        datatype = self.cbdata2.get_active_text()
-        item = (self.entryData.get_text(), )
-
-        if datatype == _("Colours"):
-            self.db.insert_into_table(self.db.COLOURS, item)
-        elif datatype == _("Sectors"):
-            self.db.insert_into_table(self.db.SECTORS, item)
-        elif datatype == _("Types"):
-            self.db.insert_into_table(self.db.TYPES, item)
-        elif datatype == _("Categories"):
-            self.db.insert_into_table(self.db.CATEGORIES, item)
-        elif datatype == _("Racepoints"):
-            self.db.insert_into_table(self.db.RACEPOINTS, item+("", "", ""))
-        elif datatype == _("Strains"):
-            self.db.insert_into_table(self.db.STRAINS, item)
-        elif datatype == _("Lofts"):
-            self.db.insert_into_table(self.db.LOFTS, item)
-        elif datatype == _("Weather"):
-            self.db.insert_into_table(self.db.WEATHER, item)
-        elif datatype == _("Wind"):
-            self.db.insert_into_table(self.db.WIND, item)
-
-        self.entryData.set_text('')
-
-        if datatype == self.cbdata.get_active_text():
-            self.fill_item_combo(datatype)
-
-    def on_entryData_changed(self, widget):
-        if len(widget.get_text()) > 0:
-            self.dataadd.set_sensitive(True)
-        else:
-            self.dataadd.set_sensitive(False)
-
     # Statistics
     def on_btnsearchdb_clicked(self, widget):
         total, cocks, hens, ybirds = \
@@ -334,25 +203,4 @@ class ToolsWindow(builder.GtkBuilder):
 
     def get_percentage(self, value, total):
         return "%.2f" %((value/float(total))*100)
-
-    # Backup
-    def on_makebackup_clicked(self, widget):
-        folder = self.fcButtonCreate.get_current_folder()
-        if folder:
-            if backup.make_backup(folder):
-                dialogs.MessageDialog(const.INFO, messages.MSG_BACKUP_SUCCES,
-                                      self.main.mainwindow)
-            else:
-                dialogs.MessageDialog(const.INFO, messages.MSG_BACKUP_FAILED,
-                                      self.main.mainwindow)
-
-    def on_restorebackup_clicked(self, widget):
-        zipfile = self.fcButtonRestore.get_filename()
-        if zipfile:
-            if backup.restore_backup(zipfile):
-                dialogs.MessageDialog(const.INFO, messages.MSG_RESTORE_SUCCES,
-                                      self.main.mainwindow)
-            else:
-                dialogs.MessageDialog(const.INFO, messages.MSG_RESTORE_FAILED,
-                                      self.main.mainwindow)
 

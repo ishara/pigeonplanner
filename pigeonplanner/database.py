@@ -290,7 +290,7 @@ class DatabaseOperations(object):
         self.cursor.execute("DROP TABLE %s" %table)
         self.cursor.execute("CREATE TABLE IF NOT EXISTS %s %s"
                                         %(table, self.SCHEMA[table]))
-        cursor.execute("INSERT INTO %s SELECT * FROM tmp_%s" %(table, table))
+        self.cursor.execute("INSERT INTO %s SELECT * FROM tmp_%s" %(table, table))
         # No need to drop the temporary table. From the SQLite docs:
         # If the "TEMP" or "TEMPORARY" keyword occurs (...) the table is only
         # visible within that same database connection and is automatically

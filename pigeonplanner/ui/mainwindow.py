@@ -370,6 +370,10 @@ class MainWindow(builder.GtkBuilder):
         logger.info(common.get_function_name())
         tools.Calendar(self.mainwindow, self.database)
 
+    def menudata_activate(self, widget):
+        logger.info(common.get_function_name())
+        tools.DataManager(self.mainwindow, self.database)
+
     def menuhome_activate(self, widget):
         logger.info(common.get_function_name())
         webbrowser.open(const.WEBSITE)
@@ -632,6 +636,8 @@ class MainWindow(builder.GtkBuilder):
                     _("View the address book"),  self.menuaddresses_activate),
             ("Calendar", None, _("Calendar"), None,
                     _("View the calendar"),  self.menucalendar_activate),
+            ("Data", None, _("Data manager"), None,
+                    _("Manage your data"),  self.menudata_activate),
             ("Home", gtk.STOCK_HOME, _("_Website"), None,
                     _("Go to the website for more information"),
                     self.menuhome_activate),

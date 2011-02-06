@@ -19,4 +19,5 @@
 from pigeonplanner.ui.tools.addressbook import AddressBook, check_user_info
 from pigeonplanner.ui.tools.calendar import Calendar
 from pigeonplanner.ui.tools.photoalbum import PhotoAlbum
+from pigeonplanner.ui.tools.datamanager import DataManager
 

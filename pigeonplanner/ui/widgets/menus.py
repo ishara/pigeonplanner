@@ -64,6 +64,7 @@ ui_mainwindow = """
          <menuitem action="Album"/>
          <menuitem action="Addresses"/>
          <menuitem action="Calendar"/>
+         <menuitem action="Data"/>
       </menu>
       <menu action="HelpMenu">
          <menuitem action="Home"/>
