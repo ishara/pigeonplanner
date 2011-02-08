@@ -100,6 +100,8 @@ class MainWindow(builder.GtkBuilder):
         self.MenuStatusbar.set_active(self.options.statusbar)
 
         self.mainwindow.set_title("%s %s" %(const.NAME, const.VERSION))
+        self.mainwindow.resize(self.options.window_w, self.options.window_h)
+        self.mainwindow.move(self.options.window_x, self.options.window_y)
         self.mainwindow.show()
 
         events = self.database.get_notification(time.time())
@@ -114,6 +116,14 @@ class MainWindow(builder.GtkBuilder):
 
     def quit_program(self, widget=None, event=None, bckp=True):
         self.database.close()
+
+        x, y = self.mainwindow.get_position()
+        w, h = self.mainwindow.get_size()
+        self.options.set_option('Window', 'window_x', x)
+        self.options.set_option('Window', 'window_y', y)
+        self.options.set_option('Window', 'window_w', w)
+        self.options.set_option('Window', 'window_h', h)
+
         if self.options.backup and bckp:
             daysInSeconds = self.options.interval * 24 * 60 * 60
             if time.time() - self.options.last >= daysInSeconds:

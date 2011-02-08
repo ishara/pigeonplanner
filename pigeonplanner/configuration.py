@@ -52,6 +52,11 @@ class Configuration(object):
         self.__addOption('Options', 'statusbar', 'True')
         self.__addOption('Options', 'update', 'True')
         self.__addOption('Options', 'language', 'def')
+        self.__addSection('Window')
+        self.__addOption('Window', 'window_x', 0)
+        self.__addOption('Window', 'window_y', 0)
+        self.__addOption('Window', 'window_w', 1)
+        self.__addOption('Window', 'window_h', 720)
         self.__addSection('Backup')
         self.__addOption('Backup', 'backup', 'True')
         self.__addOption('Backup', 'interval', 30)
@@ -232,26 +237,34 @@ class ConfigurationParser(ConfigParser.ConfigParser):
                 raise OptionEmptyError
             return value
         except ConfigParser.NoOptionError:
-            logger.warning("The '%(option)s' option is not set in the \
-                           '%(section)s' section of the configuration file, \
-                           using the default '%(default)s'." % el)
+            logger.warning("The '%(option)s' option is not set in the "
+                           "'%(section)s' section of the configuration file, "
+                           "using the default '%(default)s'." % el)
             return default
         except OptionEmptyError:
-            logger.warning("The value of the '%(option)s' option in the \
-                           '%(section)s' section of the configuration file \
-                           is empty, using the default '%(default)s'." % el)
+            logger.warning("The value of the '%(option)s' option in the "
+                           "'%(section)s' section of the configuration file "
+                           "is empty, using the default '%(default)s'." % el)
             return default
         except ConfigParser.NoSectionError:
-            logger.warning("There is no section '%(section)s' in the \
-                           configuration file; an error occured parsing its \
-                           option '%(option)s', using the default \
-                           '%(default)s'." % el)
+            logger.warning("There is no section '%(section)s' in the "
+                           "configuration file; an error occured parsing its "
+                           "option '%(option)s', using the default "
+                           "'%(default)s'." % el)
+
+            preffile = open(self.prefFile, 'a')
+            for sectionItem in self.sections:
+                if sectionItem.name == section:
+                    preffile.write("\n\n[%s]" %section)
+            preffile.close()
+            self.read(self.prefFile)
+
             return default
         except:
-            logger.error("There went something wrong parsing the '%(option)s' \
-                         option in the '%(section)s' section of the \
-                         configuration file, using the default \
-                         '%(default)s'." % el)
+            logger.error("There went something wrong parsing the '%(option)s' "
+                         "option in the '%(section)s' section of the "
+                         "configuration file, using the default "
+                         "'%(default)s'." % el)
             return default
 
 class OptionEmptyError(Exception):
