@@ -253,9 +253,7 @@ class ConfigurationParser(ConfigParser.ConfigParser):
                            "'%(default)s'." % el)
 
             preffile = open(self.prefFile, 'a')
-            for sectionItem in self.sections:
-                if sectionItem.name == section:
-                    preffile.write("\n\n[%s]" %section)
+            preffile.write("\n\n[%s]" %section)
             preffile.close()
             self.read(self.prefFile)
 

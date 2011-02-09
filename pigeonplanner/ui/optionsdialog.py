@@ -130,6 +130,11 @@ class OptionsDialog(builder.GtkBuilder):
                            'update': str(self.chkUpdate.get_active()),
                            'language': self.combolangs.get_active_text()
                           },
+               "Window": {'window_x': self.options.window_x,
+                          'window_y': self.options.window_y,
+                          'window_w': self.options.window_w,
+                          'window_h': self.options.window_h
+                         },
                "Backup": {'backup': str(self.checkbackup.get_active()),
                           'interval': self.spinday.get_value_as_int(),
                           'location': self.fcbutton.get_current_folder(),
@@ -141,7 +146,7 @@ class OptionsDialog(builder.GtkBuilder):
                            'loft': str(self.chkLoft.get_active()),
                            'strain': str(self.chkStrain.get_active())
                           },
-                "Printing": {
+               "Printing": {
                     "paper": self.cbPaper.get_active(),
                     "layout": self.cbLayout.get_active(),
                     "perName": str(self.chkPerName.get_active()),
