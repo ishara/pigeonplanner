@@ -546,7 +546,7 @@ class DetailsView(builder.GtkBuilder):
             if old_status != const.ACTIVE:
                 self.database.delete_from_table(self.statusdic[old_status],
                                                 pindex)
-            self._insert_status_data(status, pindex, (dead, lost, sold))
+            self._insert_status_data(status, pindex, (dead, sold, lost))
         else:
             if status == const.DEAD:
                 dead.append(pindex)
