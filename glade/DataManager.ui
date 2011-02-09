@@ -4,6 +4,7 @@
   <!-- interface-naming-policy project-wide -->
   <object class="GtkDialog" id="managerwindow">
     <property name="border_width">5</property>
+    <property name="title" translatable="yes">Data manager</property>
     <property name="type_hint">dialog</property>
     <signal name="delete_event" handler="close_window"/>
     <child internal-child="vbox">
