@@ -103,6 +103,7 @@ class MainWindow(builder.GtkBuilder):
         self.mainwindow.resize(self.options.window_w, self.options.window_h)
         self.mainwindow.move(self.options.window_x, self.options.window_y)
         self.mainwindow.show()
+        self.treeview.grab_focus()
 
         events = self.database.get_notification(time.time())
         if events:
