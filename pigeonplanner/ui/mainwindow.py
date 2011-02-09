@@ -167,6 +167,7 @@ class MainWindow(builder.GtkBuilder):
             self.treeview.update_row(data, path=path)
             self.selection.emit('changed')
         elif operation == const.ADD:
+            if not pigeon.get_visible(): return
             row = [pigeon, pigeon.get_pindex(), band, year, pigeon.get_name(),
                    pigeon.get_colour(), pigeon.get_sex_string(),
                    pigeon.get_loft(), pigeon.get_strain()]
