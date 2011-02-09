@@ -174,7 +174,7 @@ class PrintPedigree(BasePrinting):
         cr.set_font_size(8)
         cr.move_to(0, 10)
         cr.show_text(_("Pedigree of:"))
-        ring = self.pigeon.get_band_string(True)
+        ring = self.pigeon.get_band_string(True) if self.pigeon is not None else ''
         xb, yb, width, height, xa, ya = cr.text_extents(ring)
         cr.move_to(total_width-width, 10)
         cr.show_text(ring)
@@ -211,11 +211,13 @@ class PrintPedigree(BasePrinting):
         name = ''
         colour = ''
         sex = ''
-        if self.options.pigName and self.pigeon.get_name():
+        if self.options.pigName and self.pigeon is not None and\
+            self.pigeon.get_name():
             name = "%s - " %self.pigeon.get_name()
-        if self.options.pigColour and self.pigeon.get_colour():
+        if self.options.pigColour and self.pigeon is not None and\
+            self.pigeon.get_colour():
             colour = "%s - " %self.pigeon.get_colour()
-        if self.options.pigSex:
+        if self.options.pigSex and self.pigeon is not None:
             sex = self.pigeon.get_sex_string()
         info = name + colour + sex
         xb, yb, width, height, xa, ya = cr.text_extents(info)
@@ -225,7 +227,8 @@ class PrintPedigree(BasePrinting):
             endPigeon += 6
 
         if self.options.pigExtra:
-            ex1, ex2, ex3, ex4, ex5, ex6 = self.pigeon.get_extra()
+            ex1, ex2, ex3, ex4, ex5, ex6 = self.pigeon.get_extra() if\
+                self.pigeon is not None else ('', '', '', '', '', '')
 
             cr.set_font_size(4)
             xb, yb, width, height, xa, ya = cr.text_extents(ex1)
@@ -290,78 +293,8 @@ class PrintPedigree(BasePrinting):
                ((147, 230, 45, 10), (None)),
                ((147, 242, 45, 10), (None))]
 
-#Working:
-#        pos = [(),
-#               ((0, 95, 46, 28), ((48, 109, 85),(48, 109, 133))),
-#               ((0, 191, 46, 28), ((48, 205, 181),(48, 205, 229))),
-#               ((50, 71, 46, 28), ((98, 85, 73),(98, 85, 97))),
-#               ((50, 119, 46, 28), ((98, 133, 121),(98, 133, 145))),
-#               ((50, 167, 46, 28), ((98, 181, 169),(98, 181, 193))),
-#               ((50, 215, 46, 28), ((98, 229, 217),(98, 229, 241))),
-#               ((100, 65, 46, 16), ((148, 73, 67),(148, 73, 79))),
-#               ((100, 89, 46, 16), ((148, 97, 91),(148, 97, 103))),
-#               ((100, 113, 46, 16), ((148, 121, 115),(148, 121, 127))),
-#               ((100, 137, 46, 16), ((148, 145, 139),(148, 145, 151))),
-#               ((100, 161, 46, 16), ((148, 169, 163),(148, 169, 175))),
-#               ((100, 185, 46, 16), ((148, 193, 187),(148, 193, 199))),
-#               ((100, 209, 46, 16), ((148, 217, 211),(148, 217, 223))),
-#               ((100, 233, 46, 16), ((148, 241, 235),(148, 241, 247))),
-#               ((150, 62, 46, 10), (None)),
-#               ((150, 74, 46, 10), (None)),
-#               ((150, 86, 46, 10), (None)),
-#               ((150, 98, 46, 10), (None)),
-#               ((150, 110, 46, 10), (None)),
-#               ((150, 122, 46, 10), (None)),
-#               ((150, 134, 46, 10), (None)),
-#               ((150, 146, 46, 10), (None)),
-#               ((150, 158, 46, 10), (None)),
-#               ((150, 170, 46, 10), (None)),
-#               ((150, 182, 46, 10), (None)),
-#               ((150, 194, 46, 10), (None)),
-#               ((150, 206, 46, 10), (None)),
-#               ((150, 218, 46, 10), (None)),
-#               ((150, 230, 46, 10), (None)),
-#               ((150, 242, 46, 10), (None))]
-
-#        pos = [(),
-#               ((0, 95, 46, 28), ((48, 109, 85),(48, 109, 133))),
-#               ((0, 215, 46, 28), ((48, 229, 205),(48, 229, 253))),
-#               ((50, 71, 46, 28), ((98, 85, 73),(98, 85, 97))),
-#               ((50, 119, 46, 28), ((98, 133, 121),(98, 133, 145))),
-#               ((50, 191, 46, 28), ((98, 205, 193),(98, 205, 217))),
-#               ((50, 239, 46, 28), ((98, 253, 241),(98, 253, 265))),
-#               ((100, 65, 46, 16), ((148, 73, 67),(148, 73, 79))),
-#               ((100, 89, 46, 16), ((148, 97, 91),(148, 97, 103))),
-#               ((100, 113, 46, 16), ((148, 121, 115),(148, 121, 127))),
-#               ((100, 137, 46, 16), ((148, 145, 139),(148, 145, 151))),
-#               ((100, 185, 46, 16), ((148, 193, 187),(148, 193, 199))),
-#               ((100, 209, 46, 16), ((148, 217, 211),(148, 217, 223))),
-#               ((100, 233, 46, 16), ((148, 241, 235),(148, 241, 247))),
-#               ((100, 257, 46, 16), ((148, 265, 259),(148, 265, 271))),
-#               ((150, 62, 46, 10), (None)),
-#               ((150, 74, 46, 10), (None)),
-#               ((150, 86, 46, 10), (None)),
-#               ((150, 98, 46, 10), (None)),
-#               ((150, 110, 46, 10), (None)),
-#               ((150, 122, 46, 10), (None)),
-#               ((150, 134, 46, 10), (None)),
-#               ((150, 146, 46, 10), (None)),
-#               ((150, 182, 46, 10), (None)),
-#               ((150, 194, 46, 10), (None)),
-#               ((150, 206, 46, 10), (None)),
-#               ((150, 218, 46, 10), (None)),
-#               ((150, 230, 46, 10), (None)),
-#               ((150, 242, 46, 10), (None)),
-#               ((150, 254, 46, 10), (None)),
-#               ((150, 266, 46, 10), (None))]
-
         lst = [None]*31
-#        ring, year = self.pigeon.get_band()
         pedigree.build_tree(self.parser, self.pigeon, 0, 1, lst)
-#        pedigree.build_tree(self.pigeons,
-#                            self.pigeon.get_pindex(), ring, year,
-#                            self.pigeon.get_sex(),
-#                            '', '', '', '', '', '', 0, 1, lst)
 
         for i in xrange(1, 31):
             x = pos[i][0][0]
@@ -374,8 +307,8 @@ class PrintPedigree(BasePrinting):
             if lst[i]:
                 pigeon = lst[i]
                 cr.move_to(x + 0.5, y + 0.5 + font_size)
-                cr.show_text(pigeon.get_band_string(True))
-#                cr.show_text(lst[i][1] + "/" + lst[i][2][2:])
+                cr.show_text(pigeon.get_band_string(True) if pigeon is not None
+                                else '')
 
                 if i <= 6:
                     height = 6
@@ -383,28 +316,23 @@ class PrintPedigree(BasePrinting):
                     height = 3
                 else:
                     height = 1
-                ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.get_extra()
+                ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.get_extra() if\
+                    pigeon is not None else ('', '', '', '', '', '')
                 if height >= 1:
                     cr.move_to(x + 0.5, y + 1.75 + font_size*2)
                     cr.show_text(ex1)
-#                    cr.show_text(lst[i][4])
                 if height >= 3:
                     cr.move_to(x + 0.5, y + 2.5 + font_size*3)
                     cr.show_text(ex2)
-#                    cr.show_text(lst[i][5])
                     cr.move_to(x + 0.5, y + 3 + font_size*4)
                     cr.show_text(ex3)
-#                    cr.show_text(lst[i][6])
                 if height == 6:
                     cr.move_to(x + 0.5, y + 3.5 + font_size*5)
                     cr.show_text(ex4)
-#                    cr.show_text(lst[i][7])
                     cr.move_to(x + 0.5, y + 4 + font_size*6)
                     cr.show_text(ex5)
-#                    cr.show_text(lst[i][8])
                     cr.move_to(x + 0.5, y + 4.5 + font_size*7)
                     cr.show_text(ex6)
-#                    cr.show_text(lst[i][9])
 
             if pos[i][1]:
                 w = 2
