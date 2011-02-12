@@ -94,7 +94,9 @@ class CalendarPopup(gtk.Window):
         self._entry = entry
         self._saved_date = entry.get_text()
 
-        self.add(hbox)
+        vp = gtk.Viewport()
+        vp.add(hbox)
+        self.add(vp)
         self._set_position()
         self.show_all()
 
