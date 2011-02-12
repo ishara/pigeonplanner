@@ -521,7 +521,7 @@
             <child>
               <object class="GtkAlignment" id="alignment2">
                 <property name="visible">True</property>
-                <property name="left_padding">12</property>
+                <property name="left_padding">4</property>
                 <child>
                   <object class="GtkVBox" id="vbox1">
                     <property name="visible">True</property>
@@ -866,7 +866,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="padding">12</property>
+            <property name="padding">4</property>
             <property name="position">2</property>
           </packing>
         </child>
