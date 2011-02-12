@@ -197,6 +197,7 @@ class InfoDialog(gtk.Dialog):
                                     len(self.database.get_all_results())))
 
     def get_percentage(self, value, total):
+        if total == 0: return "0"
         return "%.2f" %((value/float(total))*100)
 
     def _select_func(self, data):
