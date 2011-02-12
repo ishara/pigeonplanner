@@ -120,11 +120,15 @@ class Startup(object):
 
     def setup_theme(self):
         # Set theme
-        if WIN32 and os.path.exists('.\\share\\themes'):
-            themes = os.listdir('.\\share\\themes')
-            themefile = os.path.join('.\\share\\themes',
-                                     themes[self.options.theme],
-                                     'gtk-2.0\\gtkrc')
+        themedir = '.\\share\\themes'
+        if WIN32 and os.path.exists(themedir):
+            themes = os.listdir(themedir)
+            try:
+                theme = themes[self.options.theme]
+            except IndexError:
+                theme = themes[1]
+                self.options.set_option('Options', 'theme', 1)
+            themefile = os.path.join(themedir, theme, 'gtk-2.0\\gtkrc')
             gtk.rc_parse(themefile)
 
         # Register custom stock icons

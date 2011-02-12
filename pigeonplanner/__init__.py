@@ -21,7 +21,7 @@ name = "Pigeon Planner"
 
 versionbase = "0.8.9"
 
-version = "0.8.9.bzr662"
+version = "0.8.9.bzr663"
 
 copyright = "(C)opyright 2009-%s Timo Vanwynsberghe" %datetime.now().year
 
