@@ -15,13 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+from datetime import datetime
+
 name = "Pigeon Planner"
 
 versionbase = "0.8.9"
 
-version = "0.8.9.bzr659"
+version = "0.8.9.bzr660"
 
-copyright = "(C)opyright 2009-2010 Timo Vanwynsberghe"
+copyright = "(C)opyright 2009-%s Timo Vanwynsberghe" %datetime.now().year
 
 authors = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
 
