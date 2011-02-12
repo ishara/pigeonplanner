@@ -41,7 +41,8 @@ class PedigreeWindow(builder.GtkBuilder):
         self.options = options
         self.parser = parser
         self.pigeon = pigeon
-        self.pdfname = "%s_%s.pdf" %(_("Pedigree"), pigeon.get_band_string())
+        ring, year = pigeon.get_band()
+        self.pdfname = "%s_%s_%s.pdf" %(_("Pedigree"), ring, year)
         self.build_toolbar()
 
         self.labelRing.set_text(pigeon.get_band_string(True))
@@ -63,6 +64,9 @@ class PedigreeWindow(builder.GtkBuilder):
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.pedigreewindow.add_accel_group(accelgroup)
+
+        # Hide the Mail feature for now
+        uimanager.get_widget('/Toolbar/Mail').hide()
 
         toolbar = uimanager.get_widget('/Toolbar')
         self.vbox.pack_start(toolbar, False, False)

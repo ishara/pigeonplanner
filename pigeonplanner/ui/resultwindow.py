@@ -81,7 +81,7 @@ class ResultWindow(builder.GtkBuilder):
         self.fill_treeview()
 
         self.resultwindow.set_transient_for(parent)
-        self.resultwindow.show_all()
+        self.resultwindow.show()
 
     # Callbacks
     def on_close_window(self, widget, event=None):
@@ -159,6 +159,9 @@ class ResultWindow(builder.GtkBuilder):
         uimanager.insert_action_group(self._create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
         self.resultwindow.add_accel_group(accelgroup)
+
+        # Hide the Mail feature for now
+        uimanager.get_widget('/Toolbar/Mail').hide()
 
         toolbar = uimanager.get_widget('/Toolbar')
         self.vbox.pack_start(toolbar, False, False)
