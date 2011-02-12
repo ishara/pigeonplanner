@@ -92,7 +92,7 @@ class Calendar(builder.GtkBuilder):
         self._set_widgets(False)
         if self._mode == const.ADD:
             rowid = self.db.insert_into_table(self.db.EVENTS, data)
-            rowiter = self.liststore.insert(0, [rowid, date, type_])
+            rowiter = self.liststore.insert(0, [rowid, date_, type_])
             self._selection.select_iter(rowiter)
             path = self.liststore.get_path(rowiter)
             self.treeview.scroll_to_cell(path)
@@ -100,7 +100,7 @@ class Calendar(builder.GtkBuilder):
             data = data + (self._get_event_key(),)
             self.db.update_table(self.db.EVENTS, data, 1, 0)
             model, rowiter = self._selection.get_selected()
-            self.liststore.set(rowiter, 1, date, 2, type_)
+            self.liststore.set(rowiter, 1, date_, 2, type_)
             self._selection.emit('changed')
 
     def on_buttoncancel_clicked(self, widget):
