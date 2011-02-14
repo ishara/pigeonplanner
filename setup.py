@@ -25,6 +25,7 @@ import os
 import glob
 from distutils.core import setup
 
+import i18n
 import pigeonplanner
 
 
@@ -45,7 +46,9 @@ packages = [
             "pigeonplanner.ui.widgets",
         ]
 
-# Search for available translations
+# Compile translation files
+i18n.create_mo()
+# Search for the translation files
 translation_files = []
 for mofile in glob.glob('languages/*/LC_MESSAGES/pigeonplanner.mo'):
     _, lang, _ = mofile.split('/', 2)
