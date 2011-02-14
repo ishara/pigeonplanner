@@ -420,7 +420,7 @@ class DatabaseOperations(object):
 
     def count_medication_entries(self, medid):
         sql = 'SELECT COUNT(*) FROM Medication WHERE medid=?'
-        return self.__db_execute_select(sql, (medid,), RET_FIRSTCOL)
+        return self.__db_execute_select(sql, (medid,), RET_FIRSTCOL)[0]
 
 #### Events
     def get_all_events(self):
