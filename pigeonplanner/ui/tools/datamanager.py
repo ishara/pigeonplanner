@@ -29,15 +29,17 @@ class DataManager(builder.GtkBuilder):
 
         self.database = database
 
-        self.tables = {_("Colours"): self.database.COLOURS,
-                       _("Sectors"): self.database.SECTORS,
-                       _("Types"): self.database.TYPES,
-                       _("Categories"): self.database.CATEGORIES,
-                       _("Racepoints"): self.database.RACEPOINTS,
-                       _("Strains"): self.database.STRAINS,
-                       _("Lofts"): self.database.LOFTS,
-                       _("Weather"): self.database.WEATHER,
-                       _("Wind"): self.database.WIND}
+        # XXX: Translated strings are not unicode on some Windows XP systems
+        # that were tested.
+        self.tables = {unicode(_("Colours")): self.database.COLOURS,
+                       unicode(_("Sectors")): self.database.SECTORS,
+                       unicode(_("Types")): self.database.TYPES,
+                       unicode(_("Categories")): self.database.CATEGORIES,
+                       unicode(_("Racepoints")): self.database.RACEPOINTS,
+                       unicode(_("Strains")): self.database.STRAINS,
+                       unicode(_("Lofts")): self.database.LOFTS,
+                       unicode(_("Weather")): self.database.WEATHER,
+                       unicode(_("Wind")): self.database.WIND}
         comboboxes.fill_combobox(self.comboset, self.tables.keys())
         comboboxes.fill_combobox(self.combosetadd, self.tables.keys())
 
