@@ -73,7 +73,11 @@ class OptionsDialog(builder.GtkBuilder):
             comboboxes.fill_combobox(self.combothemes, themes)
 
         # Fill language combobox with available languages
-        self.languages = os.listdir(const.LANGDIR)
+        try:
+            self.languages = os.listdir(const.LANGDIR)
+        except OSError:
+            # There are no compiled mo-files
+            self.languages = []
         self.languages.insert(0, 'en')
         self.languages.sort()
         self.languages.insert(0, 'Default')
