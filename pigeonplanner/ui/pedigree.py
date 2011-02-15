@@ -60,6 +60,9 @@ class DrawPedigree(object):
         self.parser = parser
         self.treeview = treeview
 
+        self.tables = None
+        self.pigeon = None
+
     # Callbacks
     def on_button_press(self, box, event, detailed):
         parent = box.get_toplevel()
@@ -105,9 +108,12 @@ class DrawPedigree(object):
 
     # Public methods
     def draw_pedigree(self, tables, pigeon=None, detailed=False):
-        self.tables = tables
         self.pigeon = pigeon
         if detailed:
+            # Only save the tables when in the detailed window. Otherwise
+            # these will be overwritten when a reselect of a pigeon happens
+            # in the _redraw method.
+            self.tables = tables
             pos = [
                    ((0, 7, 8), ((0,7),(8,7))),
                    ((2, 3, 4), ((0,3),(4,3))),

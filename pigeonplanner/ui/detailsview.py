@@ -72,6 +72,7 @@ class DetailsDialog(gtk.Dialog):
 
     def on_edit_finished(self, detailsview, pigeon, operation):
         detailsview.set_details(pigeon)
+        self.destroy()
 
     def on_edit_cancelled(self, detailsview):
         self.destroy()
