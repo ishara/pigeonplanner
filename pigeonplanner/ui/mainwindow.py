@@ -93,6 +93,7 @@ class MainWindow(builder.GtkBuilder):
         self.pedigreetab.draw_pedigree()
         self.treeview.fill_treeview()
         self._set_statistics()
+        self.pigeon_no = len(self.treeview.get_model())
 
         self.MenuArrows.set_active(self.options.arrows)
         self.MenuStats.set_active(self.options.stats)
@@ -495,7 +496,7 @@ class MainWindow(builder.GtkBuilder):
             self._clear_pigeon_data()
             self.set_multiple_sensitive(widgets[:-2], False)
             return
-
+        self.current_pigeon = paths[0][0]
         pigeon = model.get_value(tree_iter, 0)
         self.pedigreetab.draw_pedigree(pigeon)
         self.relativestab.fill_treeviews(pigeon)
@@ -505,30 +506,16 @@ class MainWindow(builder.GtkBuilder):
 
     # Navigation arrows callbacks
     def on_button_top_clicked(self, widget):
-        self.selection.unselect_all()
-        self.selection.select_path(0)
+        self._set_pigeon(0)
 
     def on_button_up_clicked(self, widget):
-        model, paths = self.selection.get_selected_rows()
-        if len(paths) == 0: return
-        path = paths[0][0] - 1
-        if path < 0:
-            path = 0
-        self.selection.unselect_all()
-        self.selection.select_path(path)
+        self._set_pigeon(self.current_pigeon - 1)
 
     def on_button_down_clicked(self, widget):
-        model, paths = self.selection.get_selected_rows()
-        if len(paths) == 0: return
-        path = paths[0][0] + 1
-        if path > self.treeview.get_n_rows()-1:
-            path = self.treeview.get_n_rows()-1
-        self.selection.unselect_all()
-        self.selection.select_path(path)
+        self._set_pigeon(self.current_pigeon + 1)
 
     def on_button_bottom_clicked(self, widget):
-        self.selection.unselect_all()
-        self.selection.select_path(self.treeview.get_n_rows()-1)
+        self._set_pigeon(self.pigeon_no - 1)
 
     ####################
     # Public methods
@@ -713,4 +700,12 @@ class MainWindow(builder.GtkBuilder):
         self.labelStatCocks.set_markup("<b>%i</b>" %cocks)
         self.labelStatHens.set_markup("<b>%i</b>" %hens)
         self.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
+
+    def _set_pigeon(self, pigeon_no):
+        if pigeon_no < 0 or pigeon_no >= self.pigeon_no:
+            return
+
+        if self.current_pigeon != pigeon_no:
+            self.selection.unselect_all()
+            self.selection.select_path(pigeon_no)
 
