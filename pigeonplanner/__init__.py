@@ -19,9 +19,9 @@ from datetime import datetime
 
 name = "Pigeon Planner"
 
-versionbase = "0.8.9"
+versionbase = "1.0.0"
 
-version = "0.8.9.bzr673"
+version = "1.0.0"
 
 copyright = "(C)opyright 2009-%s Timo Vanwynsberghe" %datetime.now().year
 
