@@ -306,9 +306,10 @@ class DetailsView(builder.GtkBuilder):
         ring, year = self.entrybandedit.get_band()
         ringsire, yearsire = self.entrysireedit.get_band()
         ringdam, yeardam = self.entrydamedit.get_band()
+        show = 0 if self.pigeon is None else self.pigeon.get_visible() 
         datalist = [ring, year,
                     self.combosex.get_active_text(),
-                    0 if self.pedigree_mode else 1,
+                    show,
                     self.combostatus.get_active(),
                     self.combocolour.child.get_text(),
                     self.entrynameedit.get_text(),
