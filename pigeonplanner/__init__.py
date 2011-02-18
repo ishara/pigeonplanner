@@ -15,25 +15,19 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+
 from datetime import datetime
 
+
 name = "Pigeon Planner"
-
-versionbase = "1.0.0"
-
-version = "1.0.0"
-
+versionbase = "1.1.0"
+version = "1.1.0"
 copyright = "(C)opyright 2009-%s Timo Vanwynsberghe" %datetime.now().year
-
 authors = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
-
 artists = ["Timo Vanwynsberghe <timovwb@gmail.com>",
-"http://www.openclipart.org"]
-
+           "http://www.openclipart.org"]
 website = "http://www.pigeonplanner.com"
-
 description = "Organise and manage your pigeons"
-
 license = """
 Pigeon Planner is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
