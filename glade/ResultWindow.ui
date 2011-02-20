@@ -78,7 +78,7 @@
                         <property name="rules_hint">True</property>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn1">
-                            <property name="title">Band no.</property>
+                            <property name="title" translatable="yes">Band no.</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">1</property>
                             <child>
@@ -91,7 +91,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn2">
-                            <property name="title">Year</property>
+                            <property name="title" translatable="yes">Year</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">2</property>
                             <child>
@@ -104,7 +104,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn3">
-                            <property name="title">Date</property>
+                            <property name="title" translatable="yes">Date</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">3</property>
                             <child>
@@ -117,7 +117,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn4">
-                            <property name="title">Racepoint</property>
+                            <property name="title" translatable="yes">Racepoint</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">4</property>
                             <child>
@@ -130,7 +130,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn5">
-                            <property name="title">Placed</property>
+                            <property name="title" translatable="yes">Placed</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">5</property>
                             <child>
@@ -143,7 +143,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn6">
-                            <property name="title">Out of</property>
+                            <property name="title" translatable="yes">Out of</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">6</property>
                             <child>
@@ -156,7 +156,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn7">
-                            <property name="title">Coefficient</property>
+                            <property name="title" translatable="yes">Coefficient</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">7</property>
                             <child>
@@ -169,7 +169,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn8">
-                            <property name="title">Sector</property>
+                            <property name="title" translatable="yes">Sector</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">8</property>
                             <child>
@@ -182,7 +182,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn9">
-                            <property name="title">Type</property>
+                            <property name="title" translatable="yes">Type</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">9</property>
                             <child>
@@ -195,7 +195,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn10">
-                            <property name="title">Category</property>
+                            <property name="title" translatable="yes">Category</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">10</property>
                             <child>
@@ -208,7 +208,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn11">
-                            <property name="title">Weather</property>
+                            <property name="title" translatable="yes">Weather</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">11</property>
                             <child>
@@ -221,7 +221,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn12">
-                            <property name="title">Wind</property>
+                            <property name="title" translatable="yes">Wind</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">12</property>
                             <child>
@@ -234,7 +234,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn13">
-                            <property name="title">Comment</property>
+                            <property name="title" translatable="yes">Comment</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">13</property>
                             <child>
