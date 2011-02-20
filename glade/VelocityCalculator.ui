@@ -772,7 +772,7 @@
                         <property name="search_column">0</property>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn7">
-                            <property name="title">Velocity</property>
+                            <property name="title" translatable="yes">Velocity</property>
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext10"/>
                               <attributes>
@@ -783,7 +783,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn8">
-                            <property name="title">Flight Time</property>
+                            <property name="title" translatable="yes">Flight Time</property>
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext11"/>
                               <attributes>
@@ -794,7 +794,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn9">
-                            <property name="title">Time of Arrival</property>
+                            <property name="title" translatable="yes">Time of Arrival</property>
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext12"/>
                               <attributes>
