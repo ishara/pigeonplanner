@@ -483,7 +483,7 @@ def install(domain, localedir, language):
     _install(domain, localedir)
     try:
         langTranslation = gettext.translation(domain, localedir, [language])
-        langTranslation.install()
+        langTranslation.install(unicode=True)
     except IOError, exc:
         if language != '':
             logger.error(exc)
