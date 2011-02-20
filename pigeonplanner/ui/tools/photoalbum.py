@@ -372,13 +372,28 @@ class PhotoAlbum(builder.GtkBuilder):
 
         pixbuf = gtk.gdk.pixbuf_new_from_file(filename)
         width, height = pixbuf.get_width(), pixbuf.get_height()
-        if not self.max or (width < self.max[0] and height < self.max[1]):
+        max_w, max_h = self.max
+        if (width < max_w and height < max_h):
             self.pixbuf = pixbuf
         else:
             width, height = self.scale_to_fit((width, height), self.max)
             self.pixbuf = pixbuf.scale_simple(width, height, self.interp)
-
         self.drawingarea.queue_draw()
+
+    def scale_to_fit(self, image, frame):
+        image_width, image_height = image
+        frame_width, frame_height = frame
+        image_aspect = float(image_width) / image_height
+        frame_aspect = float(frame_width) / frame_height
+        max_width = min(frame_width, image_width)
+        max_height = min(frame_height, image_height)
+        if frame_aspect > image_aspect:
+            height = max_height
+            width = int(height * image_aspect)
+        else:
+            width = max_width
+            height = int(width / image_aspect)
+        return width, height
 
     def disable_toolbuttons(self):
         self.set_multiple_sensitive(
