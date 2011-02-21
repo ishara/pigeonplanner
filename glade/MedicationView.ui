@@ -473,7 +473,7 @@
                         <signal name="button_press_event" handler="on_treeview_press"/>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn1">
-                            <property name="title">Date</property>
+                            <property name="title" translatable="yes">Date</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">1</property>
                             <child>
@@ -486,7 +486,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn2">
-                            <property name="title">Description</property>
+                            <property name="title" translatable="yes">Description</property>
                             <property name="sort_column_id">2</property>
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext2"/>

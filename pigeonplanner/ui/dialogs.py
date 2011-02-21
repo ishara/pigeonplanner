@@ -19,6 +19,7 @@
 import os
 import os.path
 import sys
+import platform
 
 import gtk
 import gtk.gdk
@@ -170,12 +171,18 @@ class InfoDialog(gtk.Dialog):
         self.destroy()
 
     def get_versions(self):
-        if hasattr(os, "uname"):
-            operatingsystem = os.uname()[0]
-            distribution = os.uname()[2]
+        operatingsystem = platform.system()
+        if operatingsystem == "Windows":
+            release, version, csd, ptype = platform.win32_ver()
+            distribution = "%s %s" %(release, csd)
+        elif operatingsystem == "Linux":
+            distname, version, nick = platform.linux_distribution()
+            distribution = "%s %s" %(distname, version)
+        elif operatingsystem == "Darwin":
+            release, versioninfo, machine = platform.mac_ver()
+            distribution = release
         else:
-            operatingsystem = "Windows"
-            distribution = common.get_windows_version()
+            distribution = ''
 
         return (("Pigeon Planner", str(const.VERSION)),
                 ("Python", str(sys.version).replace('\n','')),

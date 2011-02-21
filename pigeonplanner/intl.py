@@ -408,7 +408,7 @@ def _dugettext(domain, message):
     else:
         return t.ugettext(message)
 
-def _install(domain, localedir):
+def _install(domain, localedir, language):
     '''
     :param domain: translation domain
     :param localedir: locale directory
@@ -421,7 +421,10 @@ def _install(domain, localedir):
 
     if sys.platform == 'win32' or sys.platform == 'nt':
         # on windows systems, set the LANGUAGE environment variable
-        _putenv('LANGUAGE', _getscreenlanguage())
+        if language == '':
+            language = _getscreenlanguage()
+        _putenv('LANG', language)
+        _putenv('LANGUAGE', language)
     elif "darwin" in sys.platform:
         if 'LANG' not in os.environ:
             import subprocess
@@ -432,6 +435,7 @@ def _install(domain, localedir):
         logger.debug("Locale: %s" %os.getenv('LANG'))
     else:
         # Needed on Linux systems to translate gtk.Builder files
+        os.environ['LANGUAGE'] = language
         locale.bindtextdomain(domain, localedir)
         logger.debug("Locale: %s" %locale.getlocale()[0])
 
@@ -480,10 +484,10 @@ def install(domain, localedir, language):
     else:
         language = locale.normalize(language).split('.')[0]+'.UTF-8'
 
-    _install(domain, localedir)
+    _install(domain, localedir, language)
     try:
         langTranslation = gettext.translation(domain, localedir, [language])
-        langTranslation.install()
+        langTranslation.install(unicode=True)
     except IOError, exc:
         if language != '':
             logger.error(exc)
