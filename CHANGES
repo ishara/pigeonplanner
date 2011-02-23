@@ -1,3 +1,11 @@
+1.0.2:
+ * Fixed untranslated treeview columns
+ * Fixed error in photo album
+ * Fixed missing translation when custom language is set
+ * Improved operating system detection in information dialog
+ * Updated INSTALL file
+ * Updated translations
+
 1.0.0:
  No detailed changes
 
