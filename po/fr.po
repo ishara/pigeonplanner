@@ -8,27 +8,27 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-12 14:48+0100\n"
-"PO-Revision-Date: 2010-11-07 18:08+0000\n"
-"Last-Translator: Timo <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2011-02-20 22:07+0000\n"
+"Last-Translator: fredericlandreau <fredericlandreau@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-08 05:15+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-21 04:53+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: fr\n"
 
 #: ../pigeonplanner/common.py:39
 msgid "Cock"
-msgstr ""
+msgstr "Male"
 
 #: ../pigeonplanner/common.py:39
 msgid "Hen"
-msgstr ""
+msgstr "Femelle"
 
 #: ../pigeonplanner/common.py:39
 msgid "Young bird"
-msgstr ""
+msgstr "Jeune"
 
 #: ../pigeonplanner/messages.py:19
 msgid "Error"
@@ -57,11 +57,11 @@ msgstr ""
 #: ../pigeonplanner/messages.py:31
 #, python-format
 msgid "Notification for '%s'"
-msgstr ""
+msgstr "Notification pour '%s'"
 
 #: ../pigeonplanner/messages.py:32
 msgid "Go to the calendar?"
-msgstr ""
+msgstr "Aller au calendrier"
 
 #: ../pigeonplanner/messages.py:35
 msgid "Invalid image!"
@@ -101,13 +101,12 @@ msgid "Adding pigeon"
 msgstr "Ajouter pigeon"
 
 #: ../pigeonplanner/messages.py:51
-#, fuzzy
 msgid "The selected pigeon can't be found."
-msgstr "Modifier le pigeon sélectionné"
+msgstr "Le pigeon selectionné n'a pas été trouvé"
 
 #: ../pigeonplanner/messages.py:53
 msgid "Not found!"
-msgstr ""
+msgstr "Pas trouvé"
 
 #: ../pigeonplanner/messages.py:55 ../pigeonplanner/messages.py:58
 #: ../pigeonplanner/messages.py:61 ../pigeonplanner/messages.py:64
@@ -131,7 +130,8 @@ msgstr "Année en 4 chiffres"
 
 #: ../pigeonplanner/messages.py:65
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr "Seuls les chiffres sont autorisés lors de l'ajout de plusieurs pigeons"
+msgstr ""
+"Seuls les chiffres sont autorisés lors de l'ajout de plusieurs pigeons"
 
 #: ../pigeonplanner/messages.py:69
 msgid "At least the date and racepoint have to be entered."
@@ -178,9 +178,9 @@ msgstr ""
 "d'adresse?"
 
 #: ../pigeonplanner/messages.py:91
-#, fuzzy, python-format
+#, python-format
 msgid "Removing '%s' from '%s'."
-msgstr "Supprimer '%(item)s' de '%(dataset)s'."
+msgstr "Déplacé '%s' from '%s'."
 
 #: ../pigeonplanner/messages.py:92
 msgid "Are you sure you want to remove this item?"
@@ -242,15 +242,15 @@ msgstr "Erreur lors de l'impression du pedigree"
 
 #: ../pigeonplanner/messages.py:119
 msgid "An error occured in the print operation!"
-msgstr ""
+msgstr "Erreur d impression"
 
 #: ../pigeonplanner/messages.py:120
 msgid "See the logfile (File->Logfile viewer) for more info."
-msgstr ""
+msgstr "Voir le fichier Log pour plus d information"
 
 #: ../pigeonplanner/messages.py:123
 msgid "This will set back all the settings to the default values."
-msgstr ""
+msgstr "Retour aux valeurs par défault"
 
 #: ../pigeonplanner/messages.py:125
 msgid "Default settings"
@@ -276,7 +276,7 @@ msgstr ""
 
 #: ../pigeonplanner/messages.py:135
 msgid "The recipient and sender's e-mailaddress are required."
-msgstr ""
+msgstr "Le nom et l'adresse email est requis"
 
 #: ../pigeonplanner/messages.py:139
 msgid "Error trying to get information. Are you connected to the internet?"
@@ -284,9 +284,8 @@ msgstr ""
 "Impossible de récupérer les informations, êtes-vous connecté a Internet?"
 
 #: ../pigeonplanner/messages.py:140
-#, fuzzy
 msgid "A new version is available."
-msgstr "Pas d'information supplémentaire disponible"
+msgstr "Une nouvelle version est disponible."
 
 #: ../pigeonplanner/messages.py:141
 msgid "You already have the latest version installed."
@@ -302,67 +301,67 @@ msgstr "Visualisation du fichier des acces"
 
 #: ../pigeonplanner/ui/maildialog.py:145
 msgid "The e-mail has been sent succesfully!"
-msgstr ""
+msgstr "L'email a bien été envoyé"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:37
 msgid "Yards"
-msgstr ""
+msgstr "distance en Yards"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:38
 msgid "Kilometres"
-msgstr ""
+msgstr "Kilomètres"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:39
 msgid "Metres"
-msgstr ""
+msgstr "Mètres"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:40
 msgid "Centimetres"
-msgstr ""
+msgstr "Centimètres"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:41
 msgid "Inches"
-msgstr ""
+msgstr "Pouces"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:42
 msgid "Feet"
-msgstr ""
+msgstr "Pieds"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:43
 msgid "Miles"
-msgstr ""
+msgstr "Miles"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:44
 msgid "Nautical Miles"
-msgstr ""
+msgstr "Miles nautic"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:47
 msgid "Yard per Minute"
-msgstr ""
+msgstr "Yard par minute"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:48
 msgid "Metres per Minute"
-msgstr ""
+msgstr "Metres par minute"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:49
 msgid "Metres per Second"
-msgstr ""
+msgstr "Metres par seconde"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:50
 msgid "Kilometre per Hour"
-msgstr ""
+msgstr "KM/H"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:51
 msgid "Feet per Second"
-msgstr ""
+msgstr "Pied par seconde"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:52
 msgid "Feet per Minute"
-msgstr ""
+msgstr "Pied par minute"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:53
 msgid "Mile per Hour"
-msgstr ""
+msgstr "mille par heure"
 
 #: ../pigeonplanner/ui/tools/datamanager.py:32
 #: ../pigeonplanner/ui/widgets/treeview.py:175
@@ -411,35 +410,35 @@ msgstr "Vent"
 #: ../pigeonplanner/ui/tools/calendar.py:129
 #, python-format
 msgid "Notification set on %s days"
-msgstr ""
+msgstr "Notification de %s jours"
 
 #: ../pigeonplanner/ui/tools/calendar.py:132
 msgid "No notification set"
-msgstr ""
+msgstr "Pas de notification"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:110
 msgid "Shows the first picture"
-msgstr ""
+msgstr "Affichage de la premiere image"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:112
 msgid "Shows previous picture"
-msgstr ""
+msgstr "Montrer l'image précédente"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:114
 msgid "Shows the next picture"
-msgstr ""
+msgstr "Montrer l'image suivante"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:116
 msgid "Shows the last picture"
-msgstr ""
+msgstr "Montrer la derniere image"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:118
 msgid "Zooms the picture in"
-msgstr ""
+msgstr "Zoom avant de l image"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:120
 msgid "Zooms the picture out"
-msgstr ""
+msgstr "Zoom arriere de l image"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:122
 #: ../pigeonplanner/ui/pedigreewindow.py:86
@@ -450,15 +449,15 @@ msgstr "Fermer cette fenêtre"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:126
 msgid "Zooms to fit the whole picture"
-msgstr ""
+msgstr "Zoom de l'image"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:129
 msgid "View slideshow"
-msgstr ""
+msgstr "Voir le diaporama"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:131
 msgid "View in fullscreen"
-msgstr ""
+msgstr "Voir en plein ecran"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:45
 #: ../pigeonplanner/ui/optionsdialog.py:55
@@ -473,7 +472,7 @@ msgstr "Sauvegarder ce pedigree"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:80
 msgid "Email this pedigree"
-msgstr ""
+msgstr "Email du pedigree"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:82
 msgid "View this pedigree"
@@ -486,50 +485,48 @@ msgstr "Imprimer ce pedigree"
 
 #: ../pigeonplanner/ui/printpreview.py:85
 msgid "Shows the first page"
-msgstr ""
+msgstr "Affiche la première page"
 
 #: ../pigeonplanner/ui/printpreview.py:87
 msgid "Shows previous page"
-msgstr ""
+msgstr "Affiche la page précédente"
 
 #: ../pigeonplanner/ui/printpreview.py:89
 msgid "Shows the next page"
-msgstr ""
+msgstr "Affiche la page suivante"
 
 #: ../pigeonplanner/ui/printpreview.py:91
 msgid "Shows the last page"
-msgstr ""
+msgstr "Affiche la dernière page"
 
 #: ../pigeonplanner/ui/printpreview.py:93
 msgid "Zooms the page in"
-msgstr ""
+msgstr "Agrandit la taille de la page"
 
 #: ../pigeonplanner/ui/printpreview.py:95
 msgid "Zooms the page out"
-msgstr ""
+msgstr "Diminue la taille de la page"
 
 #: ../pigeonplanner/ui/printpreview.py:101
 msgid "Zooms to fit the whole page"
-msgstr ""
+msgstr "Affiche toute la page"
 
 #: ../pigeonplanner/ui/detailsview.py:45
-#, fuzzy
 msgid "Details of pigeon"
-msgstr "<b>Details du pigeon</b>"
+msgstr "Détail du pigeon"
 
 #: ../pigeonplanner/ui/detailsview.py:47
-#, fuzzy, python-format
+#, python-format
 msgid "Details of %s"
-msgstr "<b>Details du pigeon</b>"
+msgstr "Details de %s"
 
 #: ../pigeonplanner/ui/dialogs.py:81
 msgid "Choose an image..."
 msgstr "Choisir une photo"
 
 #: ../pigeonplanner/ui/dialogs.py:90
-#, fuzzy
 msgid "No image"
-msgstr "Photo"
+msgstr "Aucune image"
 
 #: ../pigeonplanner/ui/dialogs.py:126
 msgid "translator-credits"
@@ -543,17 +540,16 @@ msgstr ""
 "  prometee https://launchpad.net/~prometee"
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
-#, fuzzy
 msgid "General information"
-msgstr "Pas d'information personnelle trouvée"
+msgstr "Information générale"
 
 #: ../pigeonplanner/ui/dialogs.py:162
 msgid "Technical details"
-msgstr ""
+msgstr "Détails techniques"
 
 #: ../pigeonplanner/ui/dialogs.py:165
 msgid "Data information"
-msgstr ""
+msgstr "Information des données"
 
 #: ../pigeonplanner/ui/dialogs.py:189
 msgid "Number of pigeons"
@@ -637,11 +633,11 @@ msgstr "Noms"
 
 #: ../pigeonplanner/ui/dialogs.py:443
 msgid "Removing the selected medication entry"
-msgstr ""
+msgstr "Suppression de la médication selectionnée"
 
 #: ../pigeonplanner/ui/dialogs.py:445
 msgid "Remove this entry for all pigeons?"
-msgstr ""
+msgstr "Suppression de cette entrée pour tous les pigeons ?"
 
 #: ../pigeonplanner/ui/resultwindow.py:64
 #: ../pigeonplanner/ui/optionsdialog.py:56
@@ -651,19 +647,19 @@ msgstr "Résultats"
 
 #: ../pigeonplanner/ui/resultwindow.py:99
 msgid "Filter results"
-msgstr ""
+msgstr "Filtrer les résultats"
 
 #: ../pigeonplanner/ui/resultwindow.py:104
 msgid "Pigeons"
-msgstr ""
+msgstr "Pigeons"
 
 #: ../pigeonplanner/ui/resultwindow.py:105
 msgid "Year of pigeon"
-msgstr ""
+msgstr "Année du pigeon"
 
 #: ../pigeonplanner/ui/resultwindow.py:106
 msgid "Year of race"
-msgstr ""
+msgstr "Année de la course"
 
 #: ../pigeonplanner/ui/resultwindow.py:107 ../pigeonplanner/printing.py:384
 #: tmp/DetailsView.ui.h:15 tmp/ResultsView.ui.h:7
@@ -685,19 +681,19 @@ msgstr "Lieu"
 
 #: ../pigeonplanner/ui/resultwindow.py:173
 msgid "Save these results"
-msgstr ""
+msgstr "Sauver ces résultats"
 
 #: ../pigeonplanner/ui/resultwindow.py:175
 msgid "Email these results"
-msgstr ""
+msgstr "Email ces résultats"
 
 #: ../pigeonplanner/ui/resultwindow.py:177
 msgid "View these results"
-msgstr ""
+msgstr "Voir ces résultats"
 
 #: ../pigeonplanner/ui/resultwindow.py:179
 msgid "Print these results"
-msgstr ""
+msgstr "Imprimer ces résultats"
 
 #: ../pigeonplanner/ui/resultwindow.py:180
 #: ../pigeonplanner/ui/mainwindow.py:643
@@ -769,7 +765,7 @@ msgstr "Sexe"
 
 #: ../pigeonplanner/ui/tabs/medication.py:56 tmp/MedicationView.ui.h:7
 msgid "Medication"
-msgstr ""
+msgstr "Médication"
 
 #: ../pigeonplanner/ui/tabs/results.py:232
 msgid "Edit result for:"
@@ -790,22 +786,21 @@ msgstr "Pedigree de la mère"
 #: ../pigeonplanner/ui/mainwindow.py:177
 #, python-format
 msgid "Pigeon %s has been added"
-msgstr ""
+msgstr "Pigeon %s a été ajouté"
 
 #: ../pigeonplanner/ui/mainwindow.py:266
 #, python-format
 msgid "Pigeon %s has been removed"
-msgstr ""
+msgstr "Pigeon %s a été supprimé"
 
 #: ../pigeonplanner/ui/mainwindow.py:275
 #, python-format
 msgid "%s pigeons have been removed"
-msgstr ""
+msgstr "%s pigeons ont été supprimés"
 
 #: ../pigeonplanner/ui/mainwindow.py:404 ../pigeonplanner/ui/mainwindow.py:663
-#, fuzzy
 msgid "Search for updates..."
-msgstr "Rechercher:"
+msgstr "Recherche pour Mise a jour"
 
 #: ../pigeonplanner/ui/mainwindow.py:602
 msgid "_File"
@@ -841,11 +836,11 @@ msgstr "_Pedigree"
 
 #: ../pigeonplanner/ui/mainwindow.py:612
 msgid "Blank pedigree"
-msgstr ""
+msgstr "Pedigrée vierge"
 
 #: ../pigeonplanner/ui/mainwindow.py:613
 msgid "Print a blank pedigree"
-msgstr ""
+msgstr "Imprimer un pedigree vierge"
 
 #: ../pigeonplanner/ui/mainwindow.py:615
 msgid "Create a backup of your database"
@@ -921,7 +916,7 @@ msgstr "Calcul de vitesse"
 
 #: ../pigeonplanner/ui/mainwindow.py:646
 msgid "Calculate the velocity of flights"
-msgstr ""
+msgstr "Calcul de la velocitée des vols"
 
 #: ../pigeonplanner/ui/mainwindow.py:648
 msgid "_Photo Album"
@@ -932,31 +927,28 @@ msgid "View the images of your pigeons"
 msgstr "Visualiser les photos de vos pigeons"
 
 #: ../pigeonplanner/ui/mainwindow.py:651 tmp/AddressBook.ui.h:1
-#, fuzzy
 msgid "Address book"
-msgstr "Adresse"
+msgstr "Carnet d'adresses"
 
 #: ../pigeonplanner/ui/mainwindow.py:652
 msgid "View the address book"
-msgstr ""
+msgstr "Voir le carnet d'adresses"
 
 #: ../pigeonplanner/ui/mainwindow.py:653 tmp/Calendar.ui.h:1
 msgid "Calendar"
-msgstr ""
+msgstr "Calendrier"
 
 #: ../pigeonplanner/ui/mainwindow.py:654
-#, fuzzy
 msgid "View the calendar"
-msgstr "Voir ce pedigree"
+msgstr "Voir le calendrier"
 
 #: ../pigeonplanner/ui/mainwindow.py:655 tmp/DataManager.ui.h:3
-#, fuzzy
 msgid "Data manager"
-msgstr "Base de données"
+msgstr "Gestion des données"
 
 #: ../pigeonplanner/ui/mainwindow.py:656
 msgid "Manage your data"
-msgstr ""
+msgstr "gestion de vos données"
 
 #: ../pigeonplanner/ui/mainwindow.py:657
 msgid "_Website"
@@ -976,7 +968,7 @@ msgstr "Aller sur le forum pour l'aide en ligne"
 
 #: ../pigeonplanner/ui/mainwindow.py:664
 msgid "Search online for program updates"
-msgstr ""
+msgstr "Recherche des MAJ en ligne"
 
 #: ../pigeonplanner/ui/mainwindow.py:669
 msgid "About this application"
@@ -1016,21 +1008,19 @@ msgstr "Afficher ou masquer la barre d'état"
 
 #: ../pigeonplanner/ui/databasetool.py:38
 msgid "Executing..."
-msgstr ""
+msgstr "Execution"
 
 #: ../pigeonplanner/ui/databasetool.py:40
-#, fuzzy
 msgid "Error: see the logfile for more info."
-msgstr "Aller sur le site web pour plus d'information"
+msgstr "Erreur : voir le fichier Log"
 
 #: ../pigeonplanner/ui/databasetool.py:41
 msgid "Operation cancelled"
-msgstr ""
+msgstr "Opération annulée"
 
 #: ../pigeonplanner/ui/databasetool.py:42
-#, fuzzy
 msgid "Operation completed"
-msgstr "L'optimisation est  terminée"
+msgstr "Operation achevée avec succés"
 
 #: ../pigeonplanner/ui/widgets/treeview.py:169
 msgid "Filter pigeons"
@@ -1038,7 +1028,7 @@ msgstr "Filtrer les pigeons"
 
 #: ../pigeonplanner/ui/widgets/treeview.py:182
 msgid "Status"
-msgstr ""
+msgstr "Statuts"
 
 #: ../pigeonplanner/ui/widgets/treeview.py:190 tmp/AddressBook.ui.h:5
 #: tmp/OptionsDialog.ui.h:30
@@ -1063,7 +1053,7 @@ msgstr "Souche"
 #: ../pigeonplanner/ui/widgets/pedigreeboxes.py:69
 #: ../pigeonplanner/ui/widgets/pedigreeboxes.py:240
 msgid "<edit>"
-msgstr ""
+msgstr "<edition>"
 
 #: ../pigeonplanner/ui/widgets/filefilters.py:35
 msgid "Images"
@@ -1071,19 +1061,19 @@ msgstr "Photos"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:92 tmp/DetailsView.ui.h:8
 msgid "Dead"
-msgstr ""
+msgstr "Mort"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:92 tmp/DetailsView.ui.h:2
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:92 tmp/DetailsView.ui.h:19
 msgid "Sold"
-msgstr ""
+msgstr "Vendu"
 
 #: ../pigeonplanner/ui/widgets/comboboxes.py:92 tmp/DetailsView.ui.h:12
 msgid "Lost"
-msgstr ""
+msgstr "Perdu(e)"
 
 #: ../pigeonplanner/printing.py:80
 msgid "Save as..."
@@ -1128,7 +1118,7 @@ msgstr "Commentaires"
 
 #: ../pigeonplanner/printing.py:484
 msgid "Page"
-msgstr ""
+msgstr "page"
 
 #: ../pigeonplanner/printing.py:598 ../pigeonplanner/printing.py:620
 #: ../pigeonplanner/printing.py:621 tmp/VelocityCalculator.ui.h:10
@@ -1158,11 +1148,11 @@ msgstr "E-mail"
 
 #: ../pigeonplanner/startup.py:134
 msgid "Send"
-msgstr ""
+msgstr "Envoi"
 
 #: ../pigeonplanner/startup.py:135
 msgid "Report"
-msgstr ""
+msgstr "Rapport"
 
 #: tmp/AddressBook.ui.h:3
 msgid "Country"
@@ -1186,15 +1176,15 @@ msgstr "Code Postal / Ville"
 
 #: tmp/Calendar.ui.h:4 tmp/MedicationView.ui.h:3
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: tmp/Calendar.ui.h:5
 msgid "Notify me!"
-msgstr ""
+msgstr "Signale moi!"
 
 #: tmp/Calendar.ui.h:6
 msgid "Number of days in advance:"
-msgstr ""
+msgstr "Nombre de jours en avance"
 
 #: tmp/DataManager.ui.h:1
 msgid "<b>Add items</b>"
@@ -1213,30 +1203,30 @@ msgid "Item"
 msgstr "Article"
 
 #: tmp/DatabaseTool.ui.h:1
-#, fuzzy
 msgid "Check"
-msgstr "Verification !"
+msgstr "Vérifier"
 
 #: tmp/DatabaseTool.ui.h:2
 msgid "Check the database for errors and try to repair them."
-msgstr ""
+msgstr "Verification et réparation de la base"
 
 #: tmp/DatabaseTool.ui.h:3
 msgid ""
 "Delete the entire database from your hard drive. You will loose all pigeons, "
 "results and other data."
-msgstr ""
+msgstr "Suppression de la base , RAZ des données"
 
 #: tmp/DatabaseTool.ui.h:5
-#, fuzzy
 msgid "Logfile"
-msgstr "Visualisation du fichier des acces"
+msgstr "Fichier de log"
 
 #: tmp/DatabaseTool.ui.h:6
 msgid ""
 "Only execute SQL statements if you know what you are doing! Entering invalid "
 "or wrong statements may cause data loss!"
 msgstr ""
+"Si vous savez ce que vous faites , executé les traitements SQL ! ATTENTION "
+"VOUS POUVEZ PERDRE VOS DONNEES"
 
 #: tmp/DatabaseTool.ui.h:7
 msgid "Optimize"
@@ -1246,20 +1236,19 @@ msgstr "Optimiser"
 msgid ""
 "Optimze the database tables. This will defragment the data and free unused "
 "space."
-msgstr ""
+msgstr "Optimisation de la base."
 
 #: tmp/DatabaseTool.ui.h:9
 msgid "Pigeon Planner database tool"
-msgstr ""
+msgstr "Outils de la base de données de Pigeon Planner"
 
 #: tmp/DatabaseTool.ui.h:10
 msgid "SQL"
-msgstr ""
+msgstr "SQL"
 
 #: tmp/DatabaseTool.ui.h:11
-#, fuzzy
 msgid "Warning:"
-msgstr "Attention"
+msgstr "AVERTISSEMENT:"
 
 #: tmp/DetailsView.ui.h:1
 msgid "<b>Details of pigeon</b>"
@@ -1303,31 +1292,31 @@ msgstr "Le statut actuel est :"
 
 #: tmp/Dialogs.ui.h:1
 msgid "<b>Attached file:</b>"
-msgstr ""
+msgstr "<b> file joint : </b>"
 
 #: tmp/Dialogs.ui.h:2
 msgid "<b>Message:</b>"
-msgstr ""
+msgstr "<b>Message:</b>"
 
 #: tmp/Dialogs.ui.h:3
 msgid "<b>Send to:</b>"
-msgstr ""
+msgstr "<b>Envoyer a :</b>"
 
 #: tmp/Dialogs.ui.h:4
 msgid "<b>Subject:</b>"
-msgstr ""
+msgstr "<b>Sujet:</b>"
 
 #: tmp/Dialogs.ui.h:5
 msgid "<b>Your e-mailaddress:</b>"
-msgstr ""
+msgstr "<b> Votre email :</b>"
 
 #: tmp/Dialogs.ui.h:6
 msgid "<b>Your name:</b>"
-msgstr ""
+msgstr "<b>Votre nom :</b>"
 
 #: tmp/Dialogs.ui.h:8
 msgid "Sending..."
-msgstr ""
+msgstr "Envoi..."
 
 #: tmp/MainWindow.ui.h:3
 msgid "Cocks"
@@ -1371,15 +1360,15 @@ msgstr "Jeunes"
 
 #: tmp/MedicationView.ui.h:4
 msgid "Done by"
-msgstr ""
+msgstr "Terminé par"
 
 #: tmp/MedicationView.ui.h:5
 msgid "Dosage"
-msgstr ""
+msgstr "Dosage"
 
 #: tmp/MedicationView.ui.h:8
 msgid "Vaccination"
-msgstr ""
+msgstr "Vaccination"
 
 #: tmp/OptionsDialog.ui.h:1
 msgid "<b>Backup</b>"
@@ -1391,7 +1380,7 @@ msgstr "<b>Colonnes</b>"
 
 #: tmp/OptionsDialog.ui.h:3
 msgid "<b>General</b>"
-msgstr ""
+msgstr "<b>Général</b>"
 
 #: tmp/OptionsDialog.ui.h:4
 msgid "<b>Language</b>"
@@ -1411,7 +1400,7 @@ msgstr "<b>Papier</b>"
 
 #: tmp/OptionsDialog.ui.h:8
 msgid "<b>Personal</b>"
-msgstr ""
+msgstr "<b>Personnel</b>"
 
 #: tmp/OptionsDialog.ui.h:9
 msgid "<b>Pigeon</b>"
@@ -1427,7 +1416,7 @@ msgstr "<b>Mise à jour</b>"
 
 #: tmp/OptionsDialog.ui.h:12
 msgid "A4"
-msgstr ""
+msgstr "A4"
 
 #: tmp/OptionsDialog.ui.h:13
 msgid "Address"
@@ -1459,7 +1448,7 @@ msgstr "Durée"
 
 #: tmp/OptionsDialog.ui.h:26
 msgid "Letter"
-msgstr ""
+msgstr "Lettre US"
 
 #: tmp/OptionsDialog.ui.h:27
 msgid "Location"
@@ -1487,11 +1476,11 @@ msgstr "Mise en page du pedigree"
 
 #: tmp/OptionsDialog.ui.h:42
 msgid "Show the column names"
-msgstr ""
+msgstr "Voir le nom des colonnes"
 
 #: tmp/OptionsDialog.ui.h:43
 msgid "Show the date"
-msgstr ""
+msgstr "Montrer la date"
 
 #: tmp/PhotoAlbum.ui.h:1
 msgid "Photo Album"
@@ -1503,7 +1492,7 @@ msgstr "Pas de photos trouvées"
 
 #: tmp/PreviewWindow.ui.h:1
 msgid "Print Preview"
-msgstr ""
+msgstr "Aperçu avant impression"
 
 #: tmp/ResultWindow.ui.h:1
 msgid "View all results"
@@ -1523,141 +1512,30 @@ msgstr "Calculer"
 
 #: tmp/VelocityCalculator.ui.h:3
 msgid "Hours"
-msgstr ""
+msgstr "Heures"
 
 #: tmp/VelocityCalculator.ui.h:4
 msgid "Minutes"
-msgstr ""
+msgstr "Minutes"
 
 #: tmp/VelocityCalculator.ui.h:5
 msgid "Prognosis"
-msgstr ""
+msgstr "Pronostics"
 
 #: tmp/VelocityCalculator.ui.h:6
 msgid "Range"
-msgstr ""
+msgstr "Plage"
 
 #: tmp/VelocityCalculator.ui.h:8
 msgid "Seconds"
-msgstr ""
+msgstr "Secondes"
 
 #: tmp/VelocityCalculator.ui.h:9
 msgid "Time"
-msgstr ""
+msgstr "Durée"
 
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>Créer Sauvegarde</b>"
-
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>Optimiser la base de données</b>"
-
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>supprimer la base de données</b>"
-
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>Restaurer la sauvegarde</b>"
-
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>Attention!</b>"
-
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>Click sur le bouton </i>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "Ajouter ou supprimer des éléments de votre ensemble de données"
-
-#~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
-#~ msgstr ""
-#~ "Création et restauration des sauvegardes de\n"
-#~ "vos pigeons et résultats"
-
-#~ msgid "Downloadpage"
-#~ msgstr "Chargement"
-
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr "Ici vous pouvez verifier si une mise a jour est disponible"
-
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "Ici vous pouvez voir les statistiques de votre base de données"
-
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr ""
-#~ "Si vous supprimez la base de données, toutes vos données seront perdues"
-
-#~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
-#~ msgstr ""
-#~ "Optimise votre base de données\n"
-#~ "(patientez, cela peut prendre quelques minutes)"
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "Téléphone / Email"
-
-#~ msgid "Tools"
-#~ msgstr "Outils"
-
-#~ msgid "Check now!"
-#~ msgstr "Verification !"
-
-#~ msgid "Search database"
-#~ msgstr "recherche dans la base"
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
-#~ msgstr ""
-#~ "Clic \"OK\" pour fermer le programme. Une nouvelle base de données sera "
-#~ "crée au prochain démarrage du programme."
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "Une nouvelle version est disponible. Allez sur le site web de Pigeon "
-#~ "Planner en cliquant sur le lien et télécharger la dernière version."
-
-#~ msgid "Insert a pigeon"
-#~ msgstr "entrer un pigeon"
-
-#~ msgid "Datasets"
-#~ msgstr "Données"
-
-#~ msgid "Addresses"
-#~ msgstr "Adresses"
-
-#~ msgid "Update"
-#~ msgstr "Mise à jour"
-
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Entrer le numéro de bague du pigeon"
-
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Entrer l'année du pigeon"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Cliquez ici pour définir le statut du pigeon"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Entrer le nom du pigeon"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Clique ICI pour ajouter une photo"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Rechercher dans la liste des mâles"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Rechercher dans la liste des femelles"
-
-#~ msgid "Various tools"
-#~ msgstr "Outils divers"
-
-#, fuzzy
-#~ msgid "Multiple pigeons"
-#~ msgstr "Filtrer les pigeons"
+#~ msgid "All fields have to be entered."
+#~ msgstr "Tous les champs doivent être remplis."
 
 #~ msgid "Make a donation"
 #~ msgstr "Faire un don"
@@ -1665,20 +1543,45 @@ msgstr ""
 #~ msgid "Remove address"
 #~ msgstr "Supprimer cette adresse"
 
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "Supprimer '%(item)s' de '%(dataset)s'."
+
 #~ msgid "Remove item"
 #~ msgstr "Supprimer cet élément"
 
 #~ msgid "Personal"
 #~ msgstr "Personnel"
 
+#~ msgid "Update"
+#~ msgstr "Mise à jour"
+
 #~ msgid "Click to close this window"
 #~ msgstr "Clic pour fermer cette fenetre"
+
+#~ msgid "Tools"
+#~ msgstr "Outils"
+
+#~ msgid "Datasets"
+#~ msgstr "Données"
+
+#~ msgid "Addresses"
+#~ msgstr "Adresses"
+
+#~ msgid "Database"
+#~ msgstr "Base de données"
 
 #~ msgid "young bird"
 #~ msgstr "Jeune"
 
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "Entrer le nom du pigeon"
+
 #~ msgid "_Search"
 #~ msgstr "_Rechercher"
+
+#~ msgid "_Filter pigeons"
+#~ msgstr "_Filtre piegeons"
 
 #~ msgid "_Quit"
 #~ msgstr "_Quitter"
@@ -1688,6 +1591,9 @@ msgstr ""
 
 #~ msgid "_Remove"
 #~ msgstr "_Supprimer"
+
+#~ msgid "Various tools"
+#~ msgstr "Outils divers"
 
 #~ msgid "_Preferences"
 #~ msgstr "_Préférences"
@@ -1703,6 +1609,9 @@ msgstr ""
 
 #~ msgid "_Hens"
 #~ msgstr "Femelles"
+
+#~ msgid "Only show hens"
+#~ msgstr "Montrer les femelles"
 
 #~ msgid "_Young birds"
 #~ msgstr "Jeunes"
@@ -1725,26 +1634,383 @@ msgstr ""
 #~ msgid "View detail"
 #~ msgstr "Voir les détails"
 
+#~ msgid "Insert a pigeon"
+#~ msgstr "entrer un pigeon"
+
+#~ msgid "Pigeon"
+#~ msgstr "Pigeon"
+
 #~ msgid "Results:"
 #~ msgstr "Résultats :"
 
 #~ msgid "<b><i><big>Backup</big></i></b>"
 #~ msgstr "<b><i><big>Sauvegarde</big></i></b>"
 
+#~ msgid "<b><i><big>Statistics</big></i></b>"
+#~ msgstr "<b><i><big>Statistiques</big></i></b>"
+
 #~ msgid "<b><i><big>Update</big></i></b>"
 #~ msgstr "<b><i><big>Mise a jour</big></i></b>"
+
+#~ msgid "<b>Restore backup</b>"
+#~ msgstr "<b>Restaurer la sauvegarde</b>"
+
+#~ msgid "<b>Warning!</b>"
+#~ msgstr "<b>Attention!</b>"
+
+#~ msgid "<i>Click the button below</i>"
+#~ msgstr "<i>Click sur le bouton </i>"
+
+#~ msgid "Check now!"
+#~ msgstr "Verification !"
 
 #~ msgid "Distance (km)"
 #~ msgstr "Distance (km)"
 
+#~ msgid "Downloadpage"
+#~ msgstr "Chargement"
+
 #~ msgid "From - To (meter/min)"
 #~ msgstr "De - A ( Metre/Minute)"
+
+#~ msgid "Here you can check if there is a program update available."
+#~ msgstr "Ici vous pouvez verifier si une mise a jour est disponible"
+
+#~ msgid "Search database"
+#~ msgstr "recherche dans la base"
+
+#~ msgid "Error loading this image. Probably you have moved it on your disk."
+#~ msgstr ""
+#~ "Erreur lors du chargement de cette image. Vous l'avez probablement déplacé "
+#~ "sur votre disque."
+
+#~ msgid ""
+#~ "You have not entered your personal information.\n"
+#~ "This will be shown on top of the printed pedigree.\n"
+#~ "Do you want to add it now?"
+#~ msgstr ""
+#~ "Vous n'avez pas entré vos informations personnelles.\n"
+#~ "Ce texte sera présenté au sommet du pédigrée imprimés.\n"
+#~ "Voulez-vous l'ajouter maintenant?"
+
+#~ msgid "pigeon"
+#~ msgstr "pigeon"
+
+#~ msgid "Date: "
+#~ msgstr "Date: "
+
+#~ msgid "#Pigeon Planner configuration file"
+#~ msgstr "#Pigeon Planner fichier de configuration"
+
+#~ msgid "<b>Add a new result</b>"
+#~ msgstr "<b>Ajouter un nouveau résultat</b>"
+
+#~ msgid "PP Backups"
+#~ msgstr "Sauvegardes PP"
+
+#~ msgid "pigeons"
+#~ msgstr "pigeons"
+
+#~ msgid "<b>Edit this result</b>"
+#~ msgstr "<b>Modifier ce résultat</b>"
+
+#~ msgid "Released: "
+#~ msgstr "Paru: "
+
+#~ msgid "Distance: "
+#~ msgstr "Distance: "
+
+#~ msgid "All birds"
+#~ msgstr "Tous les oiseaux"
+
+#~ msgid "Add result"
+#~ msgstr "Ajouter un résultat"
+
+#~ msgid "Add a single pigeon"
+#~ msgstr "Ajouter un pigeon unique"
+
+#~ msgid "Add a series of pigeons"
+#~ msgstr "Ajouter une série de pigeons"
+
+#~ msgid "Enter a name for this pigeon..."
+#~ msgstr "Entrez un nom pour ce pigeon..."
+
+#~ msgid "Filter"
+#~ msgstr "Filtrer"
+
+#~ msgid ""
+#~ "Enter some information about yourself.\n"
+#~ "This will be shown on a printed pedigree."
+#~ msgstr ""
+#~ "Entrez des informations sur vous-même.\n"
+#~ "Ce texte sera présenté sur un pédigrée imprimés."
+
+#~ msgid "City"
+#~ msgstr "Ville"
+
+#~ msgid "At position:"
+#~ msgstr "À la position:"
+
+#~ msgid "Edit result"
+#~ msgstr "Modifier le resulat"
+
+#~ msgid "First & last name"
+#~ msgstr "Nom & prénom"
+
+#~ msgid "Remove items from your datasets"
+#~ msgstr "Supprimer les éléments de vos jeux de données"
+
+#~ msgid "Een map selecteren"
+#~ msgstr "Sélectionner un dossier"
 
 #~ msgid "<b>Sort options</b>"
 #~ msgstr "<b>Options de tri</b>"
 
+#~ msgid "Zipcode"
+#~ msgstr "Code postal"
+
+#~ msgid "Value of column:"
+#~ msgstr "Valeur de la colonne:"
+
+#~ msgid "Telephone number"
+#~ msgstr "Numéro de téléphone"
+
+#~ msgid "Street & number"
+#~ msgstr "Rue & numéro"
+
+#~ msgid "Show navigation arrows"
+#~ msgstr "Afficher les flèches de navigation"
+
+#~ msgid "Show an extra column"
+#~ msgstr "Afficher une colonne supplémentaire"
+
+#~ msgid "If there are any errors, mail the entire text to:"
+#~ msgstr "S'il y a des erreurs, envoyer le texte entier par mail à :"
+
+#~ msgid "Year pigeons"
+#~ msgstr "Année de naissance"
+
+#~ msgid "Year race"
+#~ msgstr "Année du concours"
+
+#~ msgid "All"
+#~ msgstr "Tous"
+
+#~ msgid "Could not find the original image, full size image is not available."
+#~ msgstr ""
+#~ "Impossible de trouver l'image originale, l'image en taille réelle n'est pas "
+#~ "disponible."
+
 #~ msgid "cock"
 #~ msgstr "mâle"
 
+#~ msgid "Click here to add an image"
+#~ msgstr "Clique ICI pour ajouter une photo"
+
+#~ msgid "Enter the bandnumber of the pigeon"
+#~ msgstr "Entrer le numéro de bague du pigeon"
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "Cliquez ici pour définir le statut du pigeon"
+
+#~ msgid "Enter the year of the pigeon"
+#~ msgstr "Entrer l'année du pigeon"
+
+#~ msgid "<b><i><big>Update failed</big></i></b>"
+#~ msgstr "<b><i><big>Mise a jour échouée</big></i></b>"
+
+#~ msgid "<b><i><big>Update complete</big></i></b>"
+#~ msgstr "<b><i><big>Mise a jour complétée</big></i></b>"
+
+#~ msgid "<b><i><big>Updating database...</big></i></b>"
+#~ msgstr "<b><i><big>Mise a jour base de données...</big></i></b>"
+
+#~ msgid ""
+#~ "Pigeon Planner needs to update the current database.\n"
+#~ "\n"
+#~ "This can take a while depending on the operation and the amount of data.\n"
+#~ "\n"
+#~ "\n"
+#~ "Note: Older versions of Pigeon Planner won't work anymore."
+#~ msgstr ""
+#~ "Pigeon Planner a besoin de mettre à jour la base de données\n"
+#~ "Cela peut prendre un certain temps en fonction de l'opération et de la "
+#~ "quantité de données\n"
+#~ "Note : Les anciennes versions de Pigeon Planner ne fonctionneront plus"
+
+#~ msgid "Making a backup..."
+#~ msgstr "Fait une sauvegarde"
+
+#~ msgid ""
+#~ "Pigeon Planner failed to upgrade the database.\n"
+#~ "\n"
+#~ "A backup has been restored so you can keep using the previous version.\n"
+#~ "\n"
+#~ "An errorlog will be created when you close this window."
+#~ msgstr ""
+#~ "Pigeon Planner ne parvient pas à mettre à niveau la base de donnée.\n"
+#~ "Une sauvegarde a été restaurée pour que vous puissiez continuer d'utiliser "
+#~ "la version précédente.\n"
+#~ "Un journal d'erreur sera créé lorsque vous fermerez cette fenêtre."
+
+#~ msgid "Doing the database operations..."
+#~ msgstr "Effectue les opérations sur la base de données"
+
+#~ msgid ""
+#~ "Dead\n"
+#~ "Active\n"
+#~ "Sold\n"
+#~ "Lost"
+#~ msgstr ""
+#~ "Mort\n"
+#~ "Actif\n"
+#~ "Vendu\n"
+#~ "Perdu"
+
+#~ msgid "active"
+#~ msgstr "actif"
+
+#~ msgid "dead"
+#~ msgstr "mort"
+
+#~ msgid "lost"
+#~ msgstr "perdu"
+
+#~ msgid "sold"
+#~ msgstr "vendu"
+
+#~ msgid "<b><i><big>Manage data</big></i></b>"
+#~ msgstr "b><i><big>Gestion des données</big></i></b>"
+
+#~ msgid "<b><i><big>Database</big></i></b>"
+#~ msgstr "<b><i><big>Base de Données</big></i></b>"
+
+#~ msgid "<b><i><big>Addresses</big></i></b>"
+#~ msgstr "<b><i><big>Adresses</big></i></b>"
+
+#~ msgid "<b>Create backup</b>"
+#~ msgstr "<b>Créer Sauvegarde</b>"
+
+#~ msgid "<b><i><big>Velocity calculator</big></i></b>"
+#~ msgstr "<b><i><big>Calcul de vitesse</big></i></b>"
+
+#~ msgid "<b>Optimize database</b>"
+#~ msgstr "<b>Optimiser la base de données</b>"
+
+#~ msgid "<b>Remove database</b>"
+#~ msgstr "<b>supprimer la base de données</b>"
+
+#~ msgid ""
+#~ "Create and restore backups from\n"
+#~ "your pigeons and results."
+#~ msgstr ""
+#~ "Création et restauration des sauvegardes de\n"
+#~ "vos pigeons et résultats"
+
+#~ msgid "Calculate velocity"
+#~ msgstr "Calcul de vitesse"
+
+#~ msgid "Add and remove items from your datasets"
+#~ msgstr "Ajouter ou supprimer des éléments de votre ensemble de données"
+
+#~ msgid "If you remove the database, all your data will be lost."
+#~ msgstr ""
+#~ "Si vous supprimez la base de données, toutes vos données seront perdues"
+
+#~ msgid "Released (hh : mm)"
+#~ msgstr "Lâché (hh : mm)"
+
+#~ msgid ""
+#~ "Optimize your database.\n"
+#~ "(Please wait, this can take some time)"
+#~ msgstr ""
+#~ "Optimise votre base de données\n"
+#~ "(patientez, cela peut prendre quelques minutes)"
+
+#~ msgid "Here you can see some statistics of your database"
+#~ msgstr "Ici vous pouvez voir les statistiques de votre base de données"
+
+#~ msgid "Phone / E-mail"
+#~ msgstr "Téléphone / Email"
+
+#~ msgid "Remove result"
+#~ msgstr "Supprimer le résultat"
+
+#~ msgid "Remove database"
+#~ msgstr "Supprimer la base de donnée"
+
+#~ msgid "Optimization has been completed."
+#~ msgstr "L'optimisation est  terminée"
+
+#~ msgid ""
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
+#~ msgstr ""
+#~ "Clic \"OK\" pour fermer le programme. Une nouvelle base de données sera crée "
+#~ "au prochain démarrage du programme."
+
+#~ msgid ""
+#~ "This will set back all the settings to the default values.\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Cela ramènera tous les paramètres aux valeurs par défaut \n"
+#~ "Êtes-vous sûr(e) ?"
+
+#~ msgid ""
+#~ "A new version is available. Please go to the Pigeon Planner website by "
+#~ "clicking the link below and download the latest version"
+#~ msgstr ""
+#~ "Une nouvelle version est disponible. Allez sur le site web de Pigeon Planner "
+#~ "en cliquant sur le lien et télécharger la dernière version."
+
+#~ msgid "View image: "
+#~ msgstr "Visualiser l'image: "
+
+#~ msgid "Search through the list of cocks"
+#~ msgstr "Rechercher dans la liste des mâles"
+
+#~ msgid "Search through the list of hens"
+#~ msgstr "Rechercher dans la liste des femelles"
+
 #~ msgid "hen"
 #~ msgstr "femelle"
+
+#~ msgid "The database update is complete. Pigeon Planner will now start."
+#~ msgstr ""
+#~ "La mise à jour de la base de données est terminée.\r\n"
+#~ "Pigeon Planner peut maintenant démarrer"
+
+#~ msgid "Database update"
+#~ msgstr "Base de donnees mise à jour"
+
+#~ msgid "Database operations:"
+#~ msgstr "Opérations sur la base de donnees :"
+
+#, python-format
+#~ msgid ""
+#~ "Warning: The '%(option)s' option is not set in the '%(section)s' section of "
+#~ "the configuration file, using the default '%(default)s'."
+#~ msgstr ""
+#~ "Attention : l'option '%(option)s'  n'est pas définie dans la "
+#~ "section'%(section)s du fichier de configuration, utilisation par défaut de "
+#~ "'%(default)s."
+
+#, python-format
+#~ msgid ""
+#~ "Warning: There is no section '%(section)s' in the configuration file; an "
+#~ "error occured parsing its option '%(option)s', using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "Attention : il n'y a pas de section'%(section)s dans le fichier de "
+#~ "configuration ; une erreur est apparue lors de l'analyse de son option "
+#~ "'%(option)s', utilisation par défaut de '%(default)s."
+
+#, python-format
+#~ msgid ""
+#~ "Error: There went something wrong parsing the '%(option)s' option in the "
+#~ "'%(section)s' section of the configuration file, using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "Erreur : quelque chose s'est mal passé lors de l'analyse de l'option "
+#~ "'%(option)s' dans la section'%(section)s du fichier de configuration, "
+#~ "utilisation par défaut de '%(default)s."

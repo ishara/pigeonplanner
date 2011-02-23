@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-12 14:48+0100\n"
-"PO-Revision-Date: 2011-02-08 20:13+0100\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2011-02-09 04:50+0000\n"
+"Last-Translator: Timo <timovwb@gmail.com>\n"
 "Language-Team: none <>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-07-11 03:43+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-13 04:41+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: \n"
 
 #: ../pigeonplanner/common.py:39
 msgid "Cock"
@@ -131,7 +131,8 @@ msgstr "Controleer de lengte van het jaartal."
 
 #: ../pigeonplanner/messages.py:65
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr "Alleen cijfers zijn toegestaan bij het toevoegen van meerdere duiven."
+msgstr ""
+"Alleen cijfers zijn toegestaan bij het toevoegen van meerdere duiven."
 
 #: ../pigeonplanner/messages.py:69
 msgid "At least the date and racepoint have to be entered."
@@ -275,7 +276,8 @@ msgstr "Het e-mailadres van de verzender en ontvanger is verplicht."
 
 #: ../pigeonplanner/messages.py:139
 msgid "Error trying to get information. Are you connected to the internet?"
-msgstr "Fout bij het ophalen van de informatie. Bent u verbonden met internet?"
+msgstr ""
+"Fout bij het ophalen van de informatie. Bent u verbonden met internet?"
 
 #: ../pigeonplanner/messages.py:140
 msgid "A new version is available."
@@ -1530,129 +1532,29 @@ msgstr "Seconden"
 msgid "Time"
 msgstr "Tijd"
 
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>Backup maken</b>"
-
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>Database optimaliseren</b>"
-
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>Database verwijderen</b>"
-
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>Backup terugzetten</b>"
-
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>Waarschuwing!</b>"
-
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>Klik op onderstaande knop</i>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "Verwijder en voeg items toe aan de datasets"
+#~ msgid "All fields have to be entered."
+#~ msgstr "Alle velden moeten ingevuld worden"
 
 #~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
+#~ "You have not entered your personal information.\n"
+#~ "This will be shown on top of the printed pedigree.\n"
+#~ "Do you want to add it now?"
 #~ msgstr ""
-#~ "Maak en herstel backups van\n"
-#~ "uw duiven en uitslagen."
+#~ "U hebt nog geen persoonlijke info ingegeven.\n"
+#~ "Dit komt op een geprintte stamboom te staan.\n"
+#~ "Wilt u dit nu ingeven?"
 
-#~ msgid "Downloadpage"
-#~ msgstr "Downloadpagina"
+#~ msgid "dam"
+#~ msgstr "moeder"
 
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr "Hier kan u controleren of er een update beschikbaar is."
+#~ msgid "sire"
+#~ msgstr "vader"
 
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "Bekijk hier enkele statistieken van uw database"
+#~ msgid "Year pigeons"
+#~ msgstr "Jaar duiven"
 
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr "Als u de database verwijderd, zal alle data verdwijnen."
-
-#~ msgid "NOTE: You will only be notified when the program starts!"
-#~ msgstr "NOTA: U zal enkel verwittigd worden als het programma start!"
-
-#~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
-#~ msgstr ""
-#~ "Optimaliseer uw database.\n"
-#~ "(Even geduld, dit kan een tijdje duren)"
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "Telefoon / E-mail"
-
-#~ msgid "Tools"
-#~ msgstr "Gereedschappen"
-
-#~ msgid "Check now!"
-#~ msgstr "Controleer nu!"
-
-#~ msgid "Search database"
-#~ msgstr "Doorzoek database"
-
-#~ msgid "Removing '%(item)s' from '%(dataset)s'."
-#~ msgstr "'%(item)s' uit '%(dataset)s' verwijderen."
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
-#~ msgstr ""
-#~ "Klik op \"OK\" om het programma te sluiten. De volgende keer dat u het "
-#~ "programma opnieuw opstart, zal er een nieuwe database aangemaakt worden."
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "Een nieuwe versie is beschikbaar. Bezoek de Pigeon Planner website door "
-#~ "op de onderstaande link te klikken en download de laatste versie"
-
-#~ msgid "Insert a pigeon"
-#~ msgstr "Een duif invoegen"
-
-#~ msgid "Datasets"
-#~ msgstr "Datasets"
-
-#~ msgid "Addresses"
-#~ msgstr "Adressen"
-
-#~ msgid "Update"
-#~ msgstr "Update"
-
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Vul het ringnummer van de duif in"
-
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Vul het jaartal van de duif in"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Klik hier om een status in te geven voor deze duif"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Vul een naam voor de duif in"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Klik hier om een afbeelding toe te voegen"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Zoek door de lijst met duivers"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Zoek door de lijst met duivinnen"
-
-#~ msgid "Result has been removed"
-#~ msgstr "Uitslag is verwijderd"
-
-#~ msgid "Result has been added"
-#~ msgstr "Uitslag is toegevoegd"
-
-#~ msgid "Various tools"
-#~ msgstr "Verschillende gereedschappen"
-
-#~ msgid "Multiple pigeons"
-#~ msgstr "Meerdere duiven"
+#~ msgid "Year race"
+#~ msgstr "Jaar vlucht"
 
 #~ msgid "cock"
 #~ msgstr "duiver"
@@ -1666,30 +1568,39 @@ msgstr "Tijd"
 #~ msgid "PP Backups"
 #~ msgstr "PP Backups"
 
+#~ msgid "pigeons"
+#~ msgstr "duiven"
+
+#~ msgid "#Pigeon Planner configuration file"
+#~ msgstr "#Pigeon Planner configuratie bestand"
+
+#, python-format
 #~ msgid ""
-#~ "Warning: The '%(option)s' option is not set in the '%(section)s' section "
-#~ "of the configuration file, using the default '%(default)s'."
+#~ "Warning: The '%(option)s' option is not set in the '%(section)s' section of "
+#~ "the configuration file, using the default '%(default)s'."
 #~ msgstr ""
 #~ "Waarschuwing: De '%(option)s' optie is niet ingesteld in de '%(section)s' "
-#~ "sectie van het configuratiebestand, de standaardwaarde '%(default)s' "
-#~ "wordt gebruikt."
+#~ "sectie van het configuratiebestand, de standaardwaarde '%(default)s' wordt "
+#~ "gebruikt."
 
+#, python-format
 #~ msgid ""
 #~ "Warning: There is no section '%(section)s' in the configuration file; an "
 #~ "error occured parsing its option '%(option)s', using the default "
 #~ "'%(default)s'."
 #~ msgstr ""
-#~ "Waarschuwing: Er is geen sectie '%(section)s' in het configuratiebestand; "
-#~ "er is een fout opgetreden bij het afhandelen van de optie '%(option)s', "
-#~ "de standaardwaarde '%(default)s' wordt gebruikt."
+#~ "Waarschuwing: Er is geen sectie '%(section)s' in het configuratiebestand; er "
+#~ "is een fout opgetreden bij het afhandelen van de optie '%(option)s', de "
+#~ "standaardwaarde '%(default)s' wordt gebruikt."
 
+#, python-format
 #~ msgid ""
 #~ "Error: There went something wrong parsing the '%(option)s' option in the "
 #~ "'%(section)s' section of the configuration file, using the default "
 #~ "'%(default)s'."
 #~ msgstr ""
-#~ "Fout: Er ging iets fout bij het afhandelen van de '%(option)s' optie in "
-#~ "de '%(section)s' sectie van het configuratiebestand, de standaardwaarde "
+#~ "Fout: Er ging iets fout bij het afhandelen van de '%(option)s' optie in de "
+#~ "'%(section)s' sectie van het configuratiebestand, de standaardwaarde "
 #~ "'%(default)s' wordt gebruikt."
 
 #~ msgid "All"
@@ -1698,20 +1609,94 @@ msgstr "Tijd"
 #~ msgid "<b>Add a new result</b>"
 #~ msgstr "<b>Voeg een nieuwe uitslag toe</b>"
 
+#~ msgid "<b>Create backup</b>"
+#~ msgstr "<b>Backup maken</b>"
+
+#~ msgid "Add result"
+#~ msgstr "Voeg uitslag toe"
+
+#~ msgid "Add a single pigeon"
+#~ msgstr "Voeg een enkele duif toe"
+
+#~ msgid "Add a series of pigeons"
+#~ msgstr "Voeg een reeks duiven toe"
+
+#~ msgid "<b>Restore backup</b>"
+#~ msgstr "<b>Backup terugzetten</b>"
+
+#~ msgid "All birds"
+#~ msgstr "Alle duiven"
+
+#~ msgid ""
+#~ "Create and restore backups from\n"
+#~ "your pigeons and results."
+#~ msgstr ""
+#~ "Maak en herstel backups van\n"
+#~ "uw duiven en uitslagen."
+
+#~ msgid "Click here to add an image"
+#~ msgstr "Klik hier om een afbeelding toe te voegen"
+
 #~ msgid "Go to pigeon"
 #~ msgstr "Ga naar duif"
+
+#~ msgid "Keep this pigeon (and parents) in the pedigree"
+#~ msgstr "Bewaar deze duif (en ouders) in de stamboom"
+
+#~ msgid "Enter a name for this pigeon..."
+#~ msgstr "Vul een naam voor deze duif in..."
+
+#~ msgid "Filter"
+#~ msgstr "Filteren"
+
+#~ msgid "Search through the list of cocks"
+#~ msgstr "Zoek door de lijst met duivers"
+
+#~ msgid "Search through the list of hens"
+#~ msgstr "Zoek door de lijst met duivinnen"
+
+#~ msgid "Remove result"
+#~ msgstr "Verwijder uitslag"
+
+#~ msgid "First & last name"
+#~ msgstr "Voor & achternaam"
 
 #~ msgid "View detail"
 #~ msgstr "Bekijk detail"
 
+#~ msgid ""
+#~ "Enter some information about yourself.\n"
+#~ "This will be shown on a printed pedigree."
+#~ msgstr ""
+#~ "Vul informatie over uzelf in.\n"
+#~ "Deze zal staan op een geprintte stamboom."
+
+#~ msgid "City"
+#~ msgstr "Stad"
+
 #~ msgid "At position:"
 #~ msgstr "Op positie:"
+
+#~ msgid "Pigeon"
+#~ msgstr "Duif"
 
 #~ msgid "<b>Sort options</b>"
 #~ msgstr "<b>Sorteer opties</b>"
 
+#~ msgid "Zipcode"
+#~ msgstr "Zipcode"
+
 #~ msgid "Value of column:"
 #~ msgstr "Waarde van kolom"
+
+#~ msgid "Telephone number"
+#~ msgstr "Telefoon nummer"
+
+#~ msgid "Street & number"
+#~ msgstr "Straat & nummer"
+
+#~ msgid "Show an extra column"
+#~ msgstr "Laat een extra kolom zien"
 
 #~ msgid "Personal"
 #~ msgstr "Persoonlijk"
@@ -1719,8 +1704,85 @@ msgstr "Tijd"
 #~ msgid "Results:"
 #~ msgstr "Uitslagen:"
 
+#~ msgid "Error loading this image. Probably you have moved it on your disk."
+#~ msgstr ""
+#~ "Fout bij het laden van deze afbeelding. Waarschijnlijk is deze verplaatst op "
+#~ "de schijf."
+
+#, python-format
+#~ msgid ""
+#~ "The ringnumber and year of the %s are necessary.\n"
+#~ "\n"
+#~ "Check if these are entered."
+#~ msgstr ""
+#~ "Het ringnummer en jaartal van de %s zijn vereist.\n"
+#~ "\n"
+#~ "Controleer of deze zijn ingevuld."
+
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the ringnumber or year of the %s.\n"
+#~ "\n"
+#~ "Only numbers are accepted."
+#~ msgstr ""
+#~ "Foute ingave van het ringnummer of jaartal van de %s.\n"
+#~ "\n"
+#~ "Alleen cijfers zijn toegelaten."
+
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the ringnumber or year of the %s.\n"
+#~ "\n"
+#~ "Check the length."
+#~ msgstr ""
+#~ "Foute ingave van het ringnummer of jaartal van de %s.\n"
+#~ "\n"
+#~ "Controleer de lengte."
+
+#~ msgid ""
+#~ "This will set back all the settings to the default values.\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Dit zal alle opties terugzetten naar de standaard waarden.\n"
+#~ "bent u zeker?"
+
+#~ msgid ""
+#~ "A new version is available. Please go to the Pigeon Planner website by "
+#~ "clicking the link below and download the latest version"
+#~ msgstr ""
+#~ "Een nieuwe versie is beschikbaar. Bezoek de Pigeon Planner website door op "
+#~ "de onderstaande link te klikken en download de laatste versie"
+
+#, python-format
+#~ msgid ""
+#~ "Removing item '%(item)s' from '%(dataset)s'.\n"
+#~ "\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Verwijderen van '%(item)s' uit '%(dataset)s'.\n"
+#~ "\n"
+#~ "Bent u zeker?"
+
+#~ msgid "pigeon"
+#~ msgstr "Duif"
+
 #~ msgid "Date: "
 #~ msgstr "Datum: "
+
+#~ msgid "Released: "
+#~ msgstr "Gelost: "
+
+#~ msgid "Distance: "
+#~ msgstr "Afstand: "
+
+#~ msgid "Tools"
+#~ msgstr "Gereedschappen"
+
+#~ msgid "Datasets"
+#~ msgstr "Datasets"
+
+#~ msgid "Update"
+#~ msgstr "Update"
 
 #~ msgid "View image: "
 #~ msgstr "Bekijk afbeelding: "
@@ -1730,6 +1792,12 @@ msgstr "Tijd"
 
 #~ msgid "<b>Edit this result</b>"
 #~ msgstr "<b>Bewerk deze uitslag</b>"
+
+#~ msgid "Edit result"
+#~ msgstr "Bewerk uitslag"
+
+#~ msgid "Show navigation arrows"
+#~ msgstr "Laat navigatiepijlen zien"
 
 #~ msgid "<b><i><big>Backup</big></i></b>"
 #~ msgstr "<b><i><big>Backup</big></i></b>"
@@ -1743,17 +1811,76 @@ msgstr "Tijd"
 #~ msgid "<b><i><big>Velocity calculator</big></i></b>"
 #~ msgstr "<b><i><big>Snelheid meter</big></i></b>"
 
+#~ msgid "<i>Click the button below</i>"
+#~ msgstr "<i>Klik op onderstaande knop</i>"
+
+#~ msgid "Calculate velocity"
+#~ msgstr "Bereken snelheid"
+
+#~ msgid "Check now!"
+#~ msgstr "Controleer nu!"
+
 #~ msgid "Distance (km)"
 #~ msgstr "Afstand (km)"
+
+#~ msgid "Downloadpage"
+#~ msgstr "Downloadpagina"
 
 #~ msgid "From - To (meter/min)"
 #~ msgstr "Van - Tot (meter/min)"
 
+#~ msgid "Here you can check if there is a program update available."
+#~ msgstr "Hier kan u controleren of er een update beschikbaar is."
+
 #~ msgid "Released (hh : mm)"
 #~ msgstr "Gelost (uu : mm)"
 
+#~ msgid "Remove items from your datasets"
+#~ msgstr "Verwijder opties uit datasets"
+
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the year of the %s.\n"
+#~ "\n"
+#~ "Only numbers are accepted."
+#~ msgstr ""
+#~ "Foute ingave van het jaartal van de %s.\n"
+#~ "\n"
+#~ "Alleen cijfers zijn toegelaten."
+
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the year of the %s.\n"
+#~ "\n"
+#~ "Check the length."
+#~ msgstr ""
+#~ "Foute ingave van het jaartal van de %s.\n"
+#~ "\n"
+#~ "Controleer de lengte."
+
+#~ msgid ""
+#~ "Incorrect input. Only numbers are allowed when adding multiple pigeons."
+#~ msgstr ""
+#~ "Foute ingave. Alleen cijfers zij toegestaan bij het toevoegen van meerdere "
+#~ "duiven."
+
+#~ msgid "Remove data"
+#~ msgstr "Verwijder data"
+
+#~ msgid "Website"
+#~ msgstr "Website"
+
 #~ msgid "<b><i><big>Statistics</big></i></b>"
 #~ msgstr "<b><i><big>Statistieken</big></i></b>"
+
+#~ msgid "Here you can see some statistics of your database"
+#~ msgstr "Bekijk hier enkele statistieken van uw database"
+
+#~ msgid "Search database"
+#~ msgstr "Doorzoek database"
+
+#~ msgid "Show toolbar"
+#~ msgstr "Laat werkbalk zien"
 
 #~ msgid "_Quit"
 #~ msgstr "A_fsluiten"
@@ -1770,6 +1897,15 @@ msgstr "Tijd"
 #~ msgid "_Remove"
 #~ msgstr "_Verwijderen"
 
+#~ msgid "Add _serie"
+#~ msgstr "Voeg _reeks toe"
+
+#~ msgid "_Filter pigeons"
+#~ msgstr "Duiven _filteren"
+
+#~ msgid "Various tools"
+#~ msgstr "Verschillende gereedschappen"
+
 #~ msgid "_All"
 #~ msgstr "_Alles"
 
@@ -1785,14 +1921,38 @@ msgstr "Tijd"
 #~ msgid "_Hens"
 #~ msgstr "Dui_vinnen"
 
+#~ msgid "Only show hens"
+#~ msgstr "Laat alleen de duivinnen zien"
+
 #~ msgid "_Young birds"
 #~ msgstr "_Jonge duiven"
 
 #~ msgid "Only show young birds"
 #~ msgstr "Laat alleen de jonge duiven zien"
 
+#~ msgid "Please restart the program for the changes to take effect"
+#~ msgstr "Herstart het programma om de veranderingen door te voeren"
+
+#~ msgid "Enter the bandnumber of the pigeon"
+#~ msgstr "Vul het ringnummer van de duif in"
+
+#~ msgid "Enter the year of the pigeon"
+#~ msgstr "Vul het jaartal van de duif in"
+
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "Vul een naam voor de duif in"
+
+#~ msgid "Add and remove items from your datasets"
+#~ msgstr "Verwijder en voeg items toe aan de datasets"
+
+#~ msgid "Addresses"
+#~ msgstr "Adressen"
+
 #~ msgid "<b><i><big>Addresses</big></i></b>"
 #~ msgstr "<b><i><big>Adressen</big></i></b>"
+
+#~ msgid "Phone / E-mail"
+#~ msgstr "Telefoon / E-mail"
 
 #~ msgid "Remove address"
 #~ msgstr "Verwijder adres"
@@ -1800,20 +1960,79 @@ msgstr "Tijd"
 #~ msgid "_Search"
 #~ msgstr "_Zoeken"
 
+#~ msgid "Insert a pigeon"
+#~ msgstr "Een duif invoegen"
+
+#~ msgid ""
+#~ "If there are any errors, make sure the box above\n"
+#~ "is set to \"DEBUG\" and mail the entire text to:\n"
+#~ "\n"
+#~ "timovwb@gmail.com"
+#~ msgstr ""
+#~ "Als er foutmeldingen zijn, zorg ervoor dat de bovenstaande\n"
+#~ "optie op \"DEBUG\" staat en mail de volledige tekst naar:\n"
+#~ "\n"
+#~ "timovwb@gmail.com"
+
+#~ msgid ""
+#~ "If there are any errors, mail the entire text to:\n"
+#~ "\n"
+#~ "timovwb@gmail.com"
+#~ msgstr ""
+#~ "Als er foutmeldingen zijn, mail de volledige tekst naar:\n"
+#~ "\n"
+#~ "timovwb@gmail.com"
+
 #~ msgid "Remove item"
 #~ msgstr "Item verwijderen"
 
 #~ msgid "Remove database"
 #~ msgstr "Database verwijderen"
 
+#~ msgid ""
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
+#~ msgstr ""
+#~ "Klik op \"OK\" om het programma te sluiten. De volgende keer dat u het "
+#~ "programma opnieuw opstart, zal er een nieuwe database aangemaakt worden."
+
+#~ msgid "Optimization has been completed."
+#~ msgstr "Optimaliseren is voltooid."
+
 #~ msgid "If there are any errors, mail the entire text to:"
 #~ msgstr "Als er foutmeldingen zijn, mail de volledige tekst naar:"
+
+#~ msgid "Database"
+#~ msgstr "Database"
 
 #~ msgid "<b><i><big>Database</big></i></b>"
 #~ msgstr "<b><i><big>Database</big></i></b>"
 
+#~ msgid "<b>Optimize database</b>"
+#~ msgstr "<b>Database optimaliseren</b>"
+
+#~ msgid "<b>Remove database</b>"
+#~ msgstr "<b>Database verwijderen</b>"
+
+#~ msgid "<b>Warning!</b>"
+#~ msgstr "<b>Waarschuwing!</b>"
+
+#~ msgid "If you remove the database, all your data will be lost."
+#~ msgstr "Als u de database verwijderd, zal alle data verdwijnen."
+
+#~ msgid ""
+#~ "Optimize your database.\n"
+#~ "(Please wait, this can take some time)"
+#~ msgstr ""
+#~ "Optimaliseer uw database.\n"
+#~ "(Even geduld, dit kan een tijdje duren)"
+
 #~ msgid "Make a donation"
 #~ msgstr "Een donatie doen"
+
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "'%(item)s' uit '%(dataset)s' verwijderen."
 
 #~ msgid "<b><i><big>Update complete</big></i></b>"
 #~ msgstr "<b><i><big>Opwaardering voltooid</big></i></b>"
@@ -1826,6 +2045,9 @@ msgstr "Tijd"
 
 #~ msgid "Cleaning up..."
 #~ msgstr "Opschonen..."
+
+#~ msgid "Database operations:"
+#~ msgstr "Database bewerkingen:"
 
 #~ msgid "Database update"
 #~ msgstr "Database opwaardering"
@@ -1846,8 +2068,7 @@ msgstr "Tijd"
 #~ msgstr ""
 #~ "Pigeon Planner moet de huidige database opwaarderen.\n"
 #~ "\n"
-#~ "Dit kan een tijdje duren afhankelijk van de bewerking en hoeveelheid "
-#~ "data.\n"
+#~ "Dit kan een tijdje duren afhankelijk van de bewerking en hoeveelheid data.\n"
 #~ "\n"
 #~ "\n"
 #~ "Opmerking: Oudere versies van Pigeon Planner zullen niet meer werken."
@@ -1857,8 +2078,7 @@ msgstr "Tijd"
 
 #~ msgid "The database update is complete. Pigeon Planner will now start."
 #~ msgstr ""
-#~ "Het opwaarderen van de database is voltooid. Pigeon Planner zal nu "
-#~ "starten."
+#~ "Het opwaarderen van de database is voltooid. Pigeon Planner zal nu starten."
 
 #~ msgid "<b><i><big>Update failed</big></i></b>"
 #~ msgstr "<b><i><big>Update mislukt</big></i></b>"
@@ -1876,6 +2096,9 @@ msgstr "Tijd"
 #~ "gebruiken.\n"
 #~ "\n"
 #~ "Een foutenlog zal gemaakt worden als u dit venster sluit."
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "Klik hier om een status in te geven voor deze duif"
 
 #~ msgid ""
 #~ "Dead\n"
@@ -1911,5 +2134,33 @@ msgstr "Tijd"
 #~ msgid "Remove entry"
 #~ msgstr "Verwijder ingave"
 
+#, python-format
+#~ msgid "Pigeon %s/%s has been removed"
+#~ msgstr "Duif %s/%s is verwijderd"
+
+#~ msgid "Result has been removed"
+#~ msgstr "Uitslag is verwijderd"
+
+#~ msgid "Result has been added"
+#~ msgstr "Uitslag is toegevoegd"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been added"
+#~ msgstr "Duif %s/%s is toegevoegd"
+
+#, python-format
+#~ msgid "Notification is set on %s days in advance"
+#~ msgstr "Verwittiging is ingesteld op %s dagen op voorhand"
+
 #~ msgid "<b><i><big>Calendar</big></i></b>"
 #~ msgstr "<b><i><big>Kalender</big></i></b>"
+
+#~ msgid "NOTE: You will only be notified when the program starts!"
+#~ msgstr "NOTA: U zal enkel verwittigd worden als het programma start!"
+
+#, python-format
+#~ msgid "Details of %s/%s"
+#~ msgstr "Details van %s/%s"
+
+#~ msgid "Multiple pigeons"
+#~ msgstr "Meerdere duiven"

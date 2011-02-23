@@ -8,22 +8,26 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION CZ\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-12 14:48+0100\n"
-"PO-Revision-Date: 2011-02-09 19:22+0100\n"
-"Last-Translator: Jindra <sidloj@volny.cz>\n"
+"PO-Revision-Date: 2011-02-11 05:23+0000\n"
+"Last-Translator: Jindra <Unknown>\n"
 "Language-Team: Jindra <sidloj@volny.cz>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-08 05:15+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-13 04:41+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
+"Language: \n"
+"X-Poedit-SearchPath-1: ..\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
 "X-Poedit-Basepath: c:\\translate\\wp\\wp-content\\plugins\\advanced-cate\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: ..\n"
+
+#, python-format
+#~ msgid "Notification is set on %s days in advance"
+#~ msgstr "Oznámení je nastaveno  na%  dní předem"
 
 #: ../pigeonplanner/common.py:39
 msgid "Cock"
@@ -532,6 +536,7 @@ msgstr ""
 "Překladatel\n"
 "\n"
 "Launchpad Contributions:\n"
+"  Jindra https://launchpad.net/~sidloj\n"
 "  Timo https://launchpad.net/~timovwb"
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
@@ -1532,81 +1537,8 @@ msgstr "Vetřiny"
 msgid "Time"
 msgstr "Čas"
 
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>Vytvořit zálohu</b>"
-
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>Optimalizace databáze</b>"
-
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>Odebrat databázi</b>"
-
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>Obnovit zálohu</b>"
-
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>Upozornění!</b>"
-
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>Klikněte na tlačítko níže</i>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "Přidání a odebrání položek z datové sady"
-
-#~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
-#~ msgstr ""
-#~ "Vytvářet a obnovovat zálohy z\n"
-#~ "Moji holubi a výsledky."
-
-#~ msgid "Downloadpage"
-#~ msgstr "Download stránky"
-
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr "Zde si můžeš zkontrolovat, zda je k programu aktualizace."
-
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "Zde můžeš vidět některé statistiky databáze"
-
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr "Pokud odstraníš databázi, budou všechna vaše data ztracena."
-
-#~ msgid "NOTE: You will only be notified when the program starts!"
-#~ msgstr "Poznámka:  oznámení, program začíná!"
-
-#~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
-#~ msgstr ""
-#~ "Optimalizuj databázi.\n"
-#~ "(Počkej prosím, to může chvíli trvat)"
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "Telefon/e-mail"
-
-#~ msgid "Tools"
-#~ msgstr "Nástroje"
-
-#~ msgid "Check now!"
-#~ msgstr "Zkontrolovat"
-
-#~ msgid "Search database"
-#~ msgstr "Databáze pro vyhledávání"
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
-#~ msgstr ""
-#~ "Klepněte na tlačítko \"OK \" pro zavření programu. Nová databáze bude "
-#~ "vytvořena při příštím spuštění programu znovu."
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "Nová verze je  k dispozici. Prosím, jdi na webové stránky Pigeon Planner "
-#~ "a klepnutím na odkaz níže a stáhneš nejnovější verzi"
+#~ msgid "Optimization has been completed."
+#~ msgstr "Optimalizace byla dokončena."
 
 #~ msgid "Insert a pigeon"
 #~ msgstr "Vložit holuba"
@@ -1617,8 +1549,20 @@ msgstr "Čas"
 #~ msgid "Addresses"
 #~ msgstr "Adresy"
 
+#~ msgid "Database"
+#~ msgstr "Databáze"
+
 #~ msgid "Update"
 #~ msgstr "Aktualizace"
+
+#~ msgid "cock"
+#~ msgstr "Holub"
+
+#~ msgid "hen"
+#~ msgstr "Holubice"
+
+#~ msgid "young bird"
+#~ msgstr "Holoubě"
 
 #~ msgid "Enter the bandnumber of the pigeon"
 #~ msgstr "Zadej číslo kroužku holuba"
@@ -1629,20 +1573,15 @@ msgstr "Čas"
 #~ msgid "Click here to set the status of the pigeon"
 #~ msgstr "Klikni zde pro nastavení stavu holubů"
 
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Zadej jméno holuba"
-
 #~ msgid "Click here to add an image"
 #~ msgstr "Klikni zde pro přidání obrázku"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Hledání v seznamu holubů"
 
 #~ msgid "Search through the list of hens"
 #~ msgstr "Hledání v seznamu holubic"
 
-#~ msgid "Result has been removed"
-#~ msgstr "Výsledek byl odebrán"
+#, python-format
+#~ msgid "Pigeon %s/%s has been removed"
+#~ msgstr "Holub %s/%s byl odebrán"
 
 #~ msgid "Result has been added"
 #~ msgstr "Výsledek byl přidán"
@@ -1650,15 +1589,95 @@ msgstr "Čas"
 #~ msgid "Various tools"
 #~ msgstr "Různé nástroje"
 
-#, fuzzy
-#~ msgid "Multiple pigeons"
-#~ msgstr "Filtr holubů"
+#~ msgid "Search database"
+#~ msgstr "Databáze pro vyhledávání"
 
-#~ msgid "cock"
-#~ msgstr "Holub"
+#~ msgid "<b>Create backup</b>"
+#~ msgstr "<b>Vytvořit zálohu</b>"
 
-#~ msgid "hen"
-#~ msgstr "Holubice"
+#~ msgid "<b>Optimize database</b>"
+#~ msgstr "<b>Optimalizace databáze</b>"
 
-#~ msgid "young bird"
-#~ msgstr "Holoubě"
+#~ msgid "<b>Remove database</b>"
+#~ msgstr "<b>Odebrat databázi</b>"
+
+#~ msgid "<b>Warning!</b>"
+#~ msgstr "<b>Upozornění!</b>"
+
+#~ msgid "<i>Click the button below</i>"
+#~ msgstr "<i>Klikněte na tlačítko níže</i>"
+
+#~ msgid "Add and remove items from your datasets"
+#~ msgstr "Přidání a odebrání položek z datové sady"
+
+#~ msgid "Downloadpage"
+#~ msgstr "Download stránky"
+
+#~ msgid "NOTE: You will only be notified when the program starts!"
+#~ msgstr "Poznámka:  oznámení, program začíná!"
+
+#~ msgid "Phone / E-mail"
+#~ msgstr "Telefon/e-mail"
+
+#~ msgid "Tools"
+#~ msgstr "Nástroje"
+
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "Odstranění '%(item)s' z '%(dataset)s'."
+
+#~ msgid ""
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
+#~ msgstr ""
+#~ "Klepněte na tlačítko \"OK \" pro zavření programu. Nová databáze bude "
+#~ "vytvořena při příštím spuštění programu znovu."
+
+#~ msgid ""
+#~ "A new version is available. Please go to the Pigeon Planner website by "
+#~ "clicking the link below and download the latest version"
+#~ msgstr ""
+#~ "Nová verze je  k dispozici. Prosím, jdi na webové stránky Pigeon Planner a "
+#~ "klepnutím na odkaz níže a stáhneš nejnovější verzi"
+
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "Zadej jméno holuba"
+
+#~ msgid "Search through the list of cocks"
+#~ msgstr "Hledání v seznamu holubů"
+
+#~ msgid "Result has been removed"
+#~ msgstr "Výsledek byl odebrán"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been added"
+#~ msgstr "Holub% s /% s byl přidán"
+
+#~ msgid "Check now!"
+#~ msgstr "Zkontrolovat"
+
+#~ msgid "<b>Restore backup</b>"
+#~ msgstr "<b>Obnovit zálohu</b>"
+
+#~ msgid ""
+#~ "Create and restore backups from\n"
+#~ "your pigeons and results."
+#~ msgstr ""
+#~ "Vytvářet a obnovovat zálohy z\n"
+#~ "Moji holubi a výsledky."
+
+#~ msgid "Here you can check if there is a program update available."
+#~ msgstr "Zde si můžeš zkontrolovat, zda je k programu aktualizace."
+
+#~ msgid "Here you can see some statistics of your database"
+#~ msgstr "Zde můžeš vidět některé statistiky databáze"
+
+#~ msgid "If you remove the database, all your data will be lost."
+#~ msgstr "Pokud odstraníš databázi, budou všechna vaše data ztracena."
+
+#~ msgid ""
+#~ "Optimize your database.\n"
+#~ "(Please wait, this can take some time)"
+#~ msgstr ""
+#~ "Optimalizuj databázi.\n"
+#~ "(Počkej prosím, to může chvíli trvat)"

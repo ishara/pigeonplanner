@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-12 14:48+0100\n"
-"PO-Revision-Date: 2010-11-07 18:12+0000\n"
+"PO-Revision-Date: 2010-12-06 22:04+0000\n"
 "Last-Translator: Timo <timovwb@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-08 05:15+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-13 04:41+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: \n"
 
 #: ../pigeonplanner/common.py:39
 msgid "Cock"
@@ -70,7 +70,8 @@ msgstr "Érvénytelen kép!"
 #: ../pigeonplanner/messages.py:36
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
-msgstr "A kiválasztott kép típusa nem támogatott vagy hibás, válassz másikat."
+msgstr ""
+"A kiválasztott kép típusa nem támogatott vagy hibás, válassz másikat."
 
 #: ../pigeonplanner/messages.py:38
 msgid "Loading image failed!"
@@ -100,9 +101,8 @@ msgid "Adding pigeon"
 msgstr "Galamb hozzáadása"
 
 #: ../pigeonplanner/messages.py:51
-#, fuzzy
 msgid "The selected pigeon can't be found."
-msgstr "Kiválaszott galamb szerkesztése"
+msgstr ""
 
 #: ../pigeonplanner/messages.py:53
 msgid "Not found!"
@@ -173,9 +173,9 @@ msgid "Are you sure you want to remove this person from your addresses?"
 msgstr "Biztosan törölni szeretnéd ezt a személyt a címek közül?"
 
 #: ../pigeonplanner/messages.py:91
-#, fuzzy, python-format
+#, python-format
 msgid "Removing '%s' from '%s'."
-msgstr "'%(item)s' törlése innen: '%(dataset)s'."
+msgstr ""
 
 #: ../pigeonplanner/messages.py:92
 msgid "Are you sure you want to remove this item?"
@@ -275,9 +275,8 @@ msgid "Error trying to get information. Are you connected to the internet?"
 msgstr "Kapcsolódási hiba. Ellenőrizd az internet kapcsolatot!"
 
 #: ../pigeonplanner/messages.py:140
-#, fuzzy
 msgid "A new version is available."
-msgstr "Nincsen extra információ."
+msgstr ""
 
 #: ../pigeonplanner/messages.py:141
 msgid "You already have the latest version installed."
@@ -400,9 +399,9 @@ msgid "Wind"
 msgstr "Szél"
 
 #: ../pigeonplanner/ui/tools/calendar.py:129
-#, fuzzy, python-format
+#, python-format
 msgid "Notification set on %s days"
-msgstr "Emlékeztető beállítva erre a napra: %s"
+msgstr ""
 
 #: ../pigeonplanner/ui/tools/calendar.py:132
 msgid "No notification set"
@@ -504,23 +503,21 @@ msgid "Zooms to fit the whole page"
 msgstr "Legjobb kitöltés"
 
 #: ../pigeonplanner/ui/detailsview.py:45
-#, fuzzy
 msgid "Details of pigeon"
-msgstr "<b>Galamb adatai</b>"
+msgstr ""
 
 #: ../pigeonplanner/ui/detailsview.py:47
-#, fuzzy, python-format
+#, python-format
 msgid "Details of %s"
-msgstr "<b>Galamb adatai</b>"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:81
 msgid "Choose an image..."
 msgstr "Kép tallózása..."
 
 #: ../pigeonplanner/ui/dialogs.py:90
-#, fuzzy
 msgid "No image"
-msgstr "Kép"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:126
 msgid "translator-credits"
@@ -532,9 +529,8 @@ msgstr ""
 "  tichy https://launchpad.net/~tihameri"
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
-#, fuzzy
 msgid "General information"
-msgstr "Nincs beállítva elérhetőség."
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:162
 msgid "Technical details"
@@ -777,14 +773,14 @@ msgid "<b>Pedigree dam</b>"
 msgstr "<b>Anyai ág</b>"
 
 #: ../pigeonplanner/ui/mainwindow.py:177
-#, fuzzy, python-format
+#, python-format
 msgid "Pigeon %s has been added"
-msgstr "%s/%s galamb hozzáadva"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:266
-#, fuzzy, python-format
+#, python-format
 msgid "Pigeon %s has been removed"
-msgstr "%s/%s galamb törölve"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:275
 #, python-format
@@ -792,9 +788,8 @@ msgid "%s pigeons have been removed"
 msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:404 ../pigeonplanner/ui/mainwindow.py:663
-#, fuzzy
 msgid "Search for updates..."
-msgstr "Kulcsszó:"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:602
 msgid "_File"
@@ -921,28 +916,24 @@ msgid "View the images of your pigeons"
 msgstr "Galambok képeinek megtekintése"
 
 #: ../pigeonplanner/ui/mainwindow.py:651 tmp/AddressBook.ui.h:1
-#, fuzzy
 msgid "Address book"
-msgstr "Cím"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:652
-#, fuzzy
 msgid "View the address book"
-msgstr "Eredmények megtekintése"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:653 tmp/Calendar.ui.h:1
 msgid "Calendar"
 msgstr "Naptár"
 
 #: ../pigeonplanner/ui/mainwindow.py:654
-#, fuzzy
 msgid "View the calendar"
-msgstr "Naptár megnyitása"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:655 tmp/DataManager.ui.h:3
-#, fuzzy
 msgid "Data manager"
-msgstr "Adatbázis"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:656
 msgid "Manage your data"
@@ -1005,23 +996,20 @@ msgid "Show or hide the statusbar"
 msgstr "Állapotsáv mutatása/elrejtése"
 
 #: ../pigeonplanner/ui/databasetool.py:38
-#, fuzzy
 msgid "Executing..."
-msgstr "Küldés..."
+msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:40
-#, fuzzy
 msgid "Error: see the logfile for more info."
-msgstr "További információért nyisd meg a naplófájlt (Fájl->Log fájl)"
+msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:41
 msgid "Operation cancelled"
 msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:42
-#, fuzzy
 msgid "Operation completed"
-msgstr "Az optimalizálás elkészült."
+msgstr ""
 
 #: ../pigeonplanner/ui/widgets/treeview.py:169
 msgid "Filter pigeons"
@@ -1204,9 +1192,8 @@ msgid "Item"
 msgstr "Bejegyzés"
 
 #: tmp/DatabaseTool.ui.h:1
-#, fuzzy
 msgid "Check"
-msgstr "Ellenőriz!"
+msgstr ""
 
 #: tmp/DatabaseTool.ui.h:2
 msgid "Check the database for errors and try to repair them."
@@ -1219,9 +1206,8 @@ msgid ""
 msgstr ""
 
 #: tmp/DatabaseTool.ui.h:5
-#, fuzzy
 msgid "Logfile"
-msgstr "Logfájl"
+msgstr ""
 
 #: tmp/DatabaseTool.ui.h:6
 msgid ""
@@ -1248,9 +1234,8 @@ msgid "SQL"
 msgstr ""
 
 #: tmp/DatabaseTool.ui.h:11
-#, fuzzy
 msgid "Warning:"
-msgstr "Figyelmeztetés"
+msgstr ""
 
 #: tmp/DetailsView.ui.h:1
 msgid "<b>Details of pigeon</b>"
@@ -1536,6 +1521,99 @@ msgstr "Másodperc"
 msgid "Time"
 msgstr "Idő"
 
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "'%(item)s' törlése innen: '%(dataset)s'."
+
+#~ msgid ""
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
+#~ msgstr ""
+#~ "Kattints az \"OK\" -ra a program bezárásához. Az új adatbázis a program "
+#~ "következő indításkor jön létre."
+
+#~ msgid "Optimization has been completed."
+#~ msgstr "Az optimalizálás elkészült."
+
+#~ msgid ""
+#~ "A new version is available. Please go to the Pigeon Planner website by "
+#~ "clicking the link below and download the latest version"
+#~ msgstr ""
+#~ "Elérhető a program új verziója. Kattints az alábbi linkre a legfrissebb "
+#~ "verzió letöltéséhez."
+
+#~ msgid "Insert a pigeon"
+#~ msgstr "Galamb beillesztése"
+
+#~ msgid "Datasets"
+#~ msgstr "Adattípusok"
+
+#~ msgid "Addresses"
+#~ msgstr "Címjegyzék"
+
+#~ msgid "Database"
+#~ msgstr "Adatbázis"
+
+#~ msgid "Update"
+#~ msgstr "Frissítés"
+
+#, python-format
+#~ msgid "Notification is set on %s days in advance"
+#~ msgstr "Emlékeztető beállítva erre a napra: %s"
+
+#~ msgid "cock"
+#~ msgstr "hím"
+
+#~ msgid "hen"
+#~ msgstr "tojó"
+
+#~ msgid "young bird"
+#~ msgstr "fióka"
+
+#~ msgid "Enter the bandnumber of the pigeon"
+#~ msgstr "Írd be a galamb gyűrűszámát"
+
+#~ msgid "Enter the year of the pigeon"
+#~ msgstr "Írd be a galamb gyűrűzési évét"
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "Kattints a galamb állapotának beállításához"
+
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "Írd be a galamb nevét"
+
+#~ msgid "Click here to add an image"
+#~ msgstr "Kép hozzáadásához kattints ide"
+
+#~ msgid "Search through the list of cocks"
+#~ msgstr "Keresés a hímek listája alapján"
+
+#~ msgid "Search through the list of hens"
+#~ msgstr "Keresés a tojók listája alapján"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been removed"
+#~ msgstr "%s/%s galamb törölve"
+
+#~ msgid "Result has been removed"
+#~ msgstr "Eredmény törölve"
+
+#~ msgid "Result has been added"
+#~ msgstr "Eredmény hozzáadva"
+
+#~ msgid "Various tools"
+#~ msgstr "Különböző eszközök"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been added"
+#~ msgstr "%s/%s galamb hozzáadva"
+
+#~ msgid "Search database"
+#~ msgstr "Adatbázis vizsgálata"
+
+#~ msgid "Check now!"
+#~ msgstr "Ellenőriz!"
+
 #~ msgid "<b>Create backup</b>"
 #~ msgstr "<b>Biztonsági mentés készítése</b>"
 
@@ -1591,78 +1669,3 @@ msgstr "Idő"
 
 #~ msgid "Tools"
 #~ msgstr "Eszközök"
-
-#~ msgid "Check now!"
-#~ msgstr "Ellenőriz!"
-
-#~ msgid "Search database"
-#~ msgstr "Adatbázis vizsgálata"
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
-#~ msgstr ""
-#~ "Kattints az \"OK\" -ra a program bezárásához. Az új adatbázis a program "
-#~ "következő indításkor jön létre."
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "Elérhető a program új verziója. Kattints az alábbi linkre a legfrissebb "
-#~ "verzió letöltéséhez."
-
-#~ msgid "Insert a pigeon"
-#~ msgstr "Galamb beillesztése"
-
-#~ msgid "Datasets"
-#~ msgstr "Adattípusok"
-
-#~ msgid "Addresses"
-#~ msgstr "Címjegyzék"
-
-#~ msgid "Update"
-#~ msgstr "Frissítés"
-
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Írd be a galamb gyűrűszámát"
-
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Írd be a galamb gyűrűzési évét"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Kattints a galamb állapotának beállításához"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Írd be a galamb nevét"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Kép hozzáadásához kattints ide"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Keresés a hímek listája alapján"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Keresés a tojók listája alapján"
-
-#~ msgid "Result has been removed"
-#~ msgstr "Eredmény törölve"
-
-#~ msgid "Result has been added"
-#~ msgstr "Eredmény hozzáadva"
-
-#~ msgid "Various tools"
-#~ msgstr "Különböző eszközök"
-
-#, fuzzy
-#~ msgid "Multiple pigeons"
-#~ msgstr "Galambok szűrése"
-
-#~ msgid "cock"
-#~ msgstr "hím"
-
-#~ msgid "hen"
-#~ msgstr "tojó"
-
-#~ msgid "young bird"
-#~ msgstr "fióka"

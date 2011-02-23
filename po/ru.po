@@ -9,12 +9,12 @@ msgstr ""
 "PO-Revision-Date: 2010-11-07 18:18+0000\n"
 "Last-Translator: Timo <timovwb@gmail.com>\n"
 "Language-Team: none <>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-08 05:16+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-13 04:41+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: \n"
 
 #: ../pigeonplanner/common.py:39
 msgid "Cock"
@@ -99,9 +99,8 @@ msgid "Adding pigeon"
 msgstr "Добавление голубя"
 
 #: ../pigeonplanner/messages.py:51
-#, fuzzy
 msgid "The selected pigeon can't be found."
-msgstr "Редактировать выбранного голубя"
+msgstr ""
 
 #: ../pigeonplanner/messages.py:53
 msgid "Not found!"
@@ -173,9 +172,9 @@ msgid "Are you sure you want to remove this person from your addresses?"
 msgstr "Вы уверены, что хотите удалить эту персону с ваших адресов?"
 
 #: ../pigeonplanner/messages.py:91
-#, fuzzy, python-format
+#, python-format
 msgid "Removing '%s' from '%s'."
-msgstr "Удаление '%(item)s' из '%(dataset)s'."
+msgstr "Удаление  '%s' из '%s'."
 
 #: ../pigeonplanner/messages.py:92
 msgid "Are you sure you want to remove this item?"
@@ -187,7 +186,8 @@ msgstr "Удаление базы данных"
 
 #: ../pigeonplanner/messages.py:96
 msgid "Are you sure you want to remove the database? All data will be lost."
-msgstr "Вы уверены, что хотите удалить базу данных? Все данные будут потеряны."
+msgstr ""
+"Вы уверены, что хотите удалить базу данных? Все данные будут потеряны."
 
 #: ../pigeonplanner/messages.py:99
 msgid "The backup was successfully created."
@@ -274,9 +274,8 @@ msgid "Error trying to get information. Are you connected to the internet?"
 msgstr "Ошибка при получении информации. Вы подключены к Интернет?"
 
 #: ../pigeonplanner/messages.py:140
-#, fuzzy
 msgid "A new version is available."
-msgstr "Нет дополнительной информации."
+msgstr ""
 
 #: ../pigeonplanner/messages.py:141
 msgid "You already have the latest version installed."
@@ -399,9 +398,9 @@ msgid "Wind"
 msgstr "Ветер"
 
 #: ../pigeonplanner/ui/tools/calendar.py:129
-#, fuzzy, python-format
+#, python-format
 msgid "Notification set on %s days"
-msgstr "Уведомление для '%s'"
+msgstr ""
 
 #: ../pigeonplanner/ui/tools/calendar.py:132
 msgid "No notification set"
@@ -503,23 +502,21 @@ msgid "Zooms to fit the whole page"
 msgstr "Поместить всю страницу"
 
 #: ../pigeonplanner/ui/detailsview.py:45
-#, fuzzy
 msgid "Details of pigeon"
-msgstr "<b>Подробно о голубе</b>"
+msgstr ""
 
 #: ../pigeonplanner/ui/detailsview.py:47
-#, fuzzy, python-format
+#, python-format
 msgid "Details of %s"
-msgstr "<b>Подробно о голубе</b>"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:81
 msgid "Choose an image..."
 msgstr "Выбрать изображение..."
 
 #: ../pigeonplanner/ui/dialogs.py:90
-#, fuzzy
 msgid "No image"
-msgstr "Изображение"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:126
 msgid "translator-credits"
@@ -537,18 +534,16 @@ msgstr ""
 "  korisk https://launchpad.net/~korisk-yandex"
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
-#, fuzzy
 msgid "General information"
-msgstr "Персональная информация не найдена."
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:162
 msgid "Technical details"
 msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:165
-#, fuzzy
 msgid "Data information"
-msgstr "Операции с базой данных:"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:189
 msgid "Number of pigeons"
@@ -798,9 +793,8 @@ msgid "%s pigeons have been removed"
 msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:404 ../pigeonplanner/ui/mainwindow.py:663
-#, fuzzy
 msgid "Search for updates..."
-msgstr "Искать:"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:602
 msgid "_File"
@@ -915,9 +909,8 @@ msgid "Velocity calculator"
 msgstr "Калькулятор скорости"
 
 #: ../pigeonplanner/ui/mainwindow.py:646
-#, fuzzy
 msgid "Calculate the velocity of flights"
-msgstr "Посчитать скорость"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:648
 msgid "_Photo Album"
@@ -928,28 +921,24 @@ msgid "View the images of your pigeons"
 msgstr "Смотереть изображения ваших голубей"
 
 #: ../pigeonplanner/ui/mainwindow.py:651 tmp/AddressBook.ui.h:1
-#, fuzzy
 msgid "Address book"
-msgstr "Адрес"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:652
-#, fuzzy
 msgid "View the address book"
-msgstr "Просмотреть эти результаты"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:653 tmp/Calendar.ui.h:1
 msgid "Calendar"
 msgstr "Календарь"
 
 #: ../pigeonplanner/ui/mainwindow.py:654
-#, fuzzy
 msgid "View the calendar"
-msgstr "Перейти к календарю?"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:655 tmp/DataManager.ui.h:3
-#, fuzzy
 msgid "Data manager"
-msgstr "База данных"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:656
 msgid "Manage your data"
@@ -1016,18 +1005,16 @@ msgid "Executing..."
 msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:40
-#, fuzzy
 msgid "Error: see the logfile for more info."
-msgstr "Сходить на сайт проектся за дополнительной информацией"
+msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:41
 msgid "Operation cancelled"
 msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:42
-#, fuzzy
 msgid "Operation completed"
-msgstr "Оптимизация завершена."
+msgstr ""
 
 #: ../pigeonplanner/ui/widgets/treeview.py:169
 msgid "Filter pigeons"
@@ -1210,9 +1197,8 @@ msgid "Item"
 msgstr "Экземпляр"
 
 #: tmp/DatabaseTool.ui.h:1
-#, fuzzy
 msgid "Check"
-msgstr "Проверить сейчас!"
+msgstr ""
 
 #: tmp/DatabaseTool.ui.h:2
 msgid "Check the database for errors and try to repair them."
@@ -1225,9 +1211,8 @@ msgid ""
 msgstr ""
 
 #: tmp/DatabaseTool.ui.h:5
-#, fuzzy
 msgid "Logfile"
-msgstr "Просмотровщик журналов"
+msgstr ""
 
 #: tmp/DatabaseTool.ui.h:6
 msgid ""
@@ -1246,18 +1231,16 @@ msgid ""
 msgstr ""
 
 #: tmp/DatabaseTool.ui.h:9
-#, fuzzy
 msgid "Pigeon Planner database tool"
-msgstr "Конфигурационный файл #Pigeon Planner"
+msgstr ""
 
 #: tmp/DatabaseTool.ui.h:10
 msgid "SQL"
 msgstr ""
 
 #: tmp/DatabaseTool.ui.h:11
-#, fuzzy
 msgid "Warning:"
-msgstr "Предупреждение"
+msgstr ""
 
 #: tmp/DetailsView.ui.h:1
 msgid "<b>Details of pigeon</b>"
@@ -1543,124 +1526,20 @@ msgstr ""
 msgid "Time"
 msgstr ""
 
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>Создать резервную копию</b>"
-
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>Оптимизировать базу данных</b>"
-
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>Удалить базу данных</b>"
-
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>Восстановить резервную копию</b>"
-
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>Предупреждение!</b>"
-
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>Нажмите лежащую ниже кнопку</i>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "Добавить и удалить из базы данных"
-
-#~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
-#~ msgstr ""
-#~ "Создать и восстановить резервные копии из\n"
-#~ "выши голуби и результаты."
-
-#~ msgid "Downloadpage"
-#~ msgstr "Страница загрузки"
-
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr "Здесь вы можете проверить доступно ли обновление программы."
-
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "Здесь вы можете посмотреть статистику базы данных"
-
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr "Еилс вы удалите базу данных, все выши данные будут потеряны."
-
-#~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
-#~ msgstr ""
-#~ "Оптимизирую вашу  базу данных\n"
-#~ "(Пожалуйста, подождите. Это может занять некоторое время."
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "Телефон / E-mail"
-
-#~ msgid "Tools"
-#~ msgstr "Инструменты"
-
-#~ msgid "Check now!"
-#~ msgstr "Проверить сейчас!"
-
-#~ msgid "Search database"
-#~ msgstr "Поиск базы данных"
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
-#~ msgstr ""
-#~ "Нажмите \"ОК\" для закрытия програмы. При следующем запуске прогрммы "
-#~ "будет создана новая база данных"
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "Доступна новая версия. Пожалуйста, скачайте новую версию на сайте "
-#~ "\"Pigeon Planner\""
-
-#~ msgid "Insert a pigeon"
-#~ msgstr "Вставить голубя"
-
-#~ msgid "Datasets"
-#~ msgstr "Множества"
-
-#~ msgid "Addresses"
-#~ msgstr "Адреса"
-
-#~ msgid "Update"
-#~ msgstr "Обновить"
-
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Введите номер кольца голубя"
-
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Введите год голубя"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Нажмите здесь, чтобы установить статус"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Введите имя голубя"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Нажмите сюда для добавления изображения"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Искать в списке голубей самцов"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Искать в списке голубок"
-
-#~ msgid "Various tools"
-#~ msgstr "Различные инструменты"
-
-#, fuzzy
-#~ msgid "Multiple pigeons"
-#~ msgstr "Фильтровать голубей"
+#~ msgid "Remove result"
+#~ msgstr "Удалить результат"
 
 #~ msgid "Remove address"
 #~ msgstr "Удалить адрес"
 
+#~ msgid "Update"
+#~ msgstr "Обновить"
+
 #~ msgid "Make a donation"
 #~ msgstr "Сделать пожертвование"
+
+#~ msgid "All fields have to be entered."
+#~ msgstr "Все поля должны быть заполнены"
 
 #~ msgid "Remove item"
 #~ msgstr "Удалить это"
@@ -1668,8 +1547,50 @@ msgstr ""
 #~ msgid "Remove database"
 #~ msgstr "Удалить базу данных"
 
+#~ msgid "Optimization has been completed."
+#~ msgstr "Оптимизация завершена."
+
+#~ msgid ""
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
+#~ msgstr ""
+#~ "Нажмите \"ОК\" для закрытия програмы. При следующем запуске прогрммы будет "
+#~ "создана новая база данных"
+
+#~ msgid ""
+#~ "This will set back all the settings to the default values.\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Произойдет откат всех настроек к первоначальным.\n"
+#~ "Вы уверены?"
+
 #~ msgid "Personal"
 #~ msgstr "Личное"
+
+#~ msgid "Database"
+#~ msgstr "База данных"
+
+#~ msgid "Tools"
+#~ msgstr "Инструменты"
+
+#~ msgid "Addresses"
+#~ msgstr "Адреса"
+
+#~ msgid "Click here to add an image"
+#~ msgstr "Нажмите сюда для добавления изображения"
+
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "Введите имя голубя"
+
+#~ msgid ""
+#~ "A new version is available. Please go to the Pigeon Planner website by "
+#~ "clicking the link below and download the latest version"
+#~ msgstr ""
+#~ "Доступна новая версия. Пожалуйста, скачайте новую версию на сайте \"Pigeon "
+#~ "Planner\""
+
+#~ msgid "#Pigeon Planner configuration file"
+#~ msgstr "Конфигурационный файл #Pigeon Planner"
 
 #~ msgid "_Search"
 #~ msgstr "_Поиск"
@@ -1679,6 +1600,9 @@ msgstr ""
 
 #~ msgid "If there are any errors, mail the entire text to:"
 #~ msgstr "Если есть ошибки, перешлите их текс по адресу:"
+
+#~ msgid "Year pigeons"
+#~ msgstr "Голуби года"
 
 #~ msgid "_About"
 #~ msgstr "_О программе"
@@ -1701,6 +1625,15 @@ msgstr ""
 #~ msgid "All"
 #~ msgstr "Все"
 
+#~ msgid "Datasets"
+#~ msgstr "Множества"
+
+#~ msgid "Search through the list of cocks"
+#~ msgstr "Искать в списке голубей самцов"
+
+#~ msgid "Search through the list of hens"
+#~ msgstr "Искать в списке голубок"
+
 #~ msgid "cock"
 #~ msgstr "голубь"
 
@@ -1710,11 +1643,17 @@ msgstr ""
 #~ msgid "hen"
 #~ msgstr "голубка"
 
+#~ msgid "_Filter pigeons"
+#~ msgstr "_Фильт голубей"
+
 #~ msgid "_Add"
 #~ msgstr "Д_обавить"
 
 #~ msgid "_Quit"
 #~ msgstr "В_ыйти"
+
+#~ msgid "Various tools"
+#~ msgstr "Различные инструменты"
 
 #~ msgid "Only show young birds"
 #~ msgstr "Только птенцы"
@@ -1725,11 +1664,20 @@ msgstr ""
 #~ msgid "_Hens"
 #~ msgstr "Гол_убки"
 
+#~ msgid "Only show hens"
+#~ msgstr "Только голубки"
+
 #~ msgid "_Young birds"
 #~ msgstr "_Птенцы"
 
 #~ msgid "_Cocks"
 #~ msgstr "_Голуби"
+
+#~ msgid "Add result"
+#~ msgstr "Добавить результат"
+
+#~ msgid "Edit result"
+#~ msgstr "Редактировать результаты"
 
 #~ msgid "Go to pigeon"
 #~ msgstr "К голубю"
@@ -1737,14 +1685,74 @@ msgstr ""
 #~ msgid "View detail"
 #~ msgstr "Смотреть подробности"
 
+#, python-format
+#~ msgid ""
+#~ "Warning: There is no section '%(section)s' in the configuration file; an "
+#~ "error occured parsing its option '%(option)s', using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "Предупреждение: В конфигурационном файле не существует секции  "
+#~ "'%(section)s';В процессе разбра файла произошла ошибка. Для параметра "
+#~ "'%(option)s'    будет использовано значение '%(default)s'."
+
+#, python-format
+#~ msgid ""
+#~ "Error: There went something wrong parsing the '%(option)s' option in the "
+#~ "'%(section)s' section of the configuration file, using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "Ошибка: Er ging iets fout bij het afhandelen van de '%(option)s' optie in de "
+#~ "'%(section)s' sectie van het configuratiebestand, de standaardwaarde "
+#~ "'%(default)s' wordt gebruikt."
+
+#~ msgid "Year race"
+#~ msgstr "Ежегодная гонка:"
+
+#~ msgid "PP Backups"
+#~ msgstr "PP Возврат"
+
+#, python-format
+#~ msgid ""
+#~ "Removing item '%(item)s' from '%(dataset)s'.\n"
+#~ "\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Удалить  '%(item)s' из '%(dataset)s'.\n"
+#~ "\n"
+#~ "Вы уверенны?"
+
+#~ msgid "Remove data"
+#~ msgstr "Удалить данные"
+
+#~ msgid "Enter the bandnumber of the pigeon"
+#~ msgstr "Введите номер кольца голубя"
+
+#~ msgid "Enter the year of the pigeon"
+#~ msgstr "Введите год голубя"
+
 #~ msgid "<b>Edit this result</b>"
 #~ msgstr "<b>Редактировать результат</b>"
 
 #~ msgid "<b>Add a new result</b>"
 #~ msgstr "<b>Добавить новый результат</b>"
 
+#~ msgid "At position:"
+#~ msgstr "В позиции:"
+
+#~ msgid "Show an extra column"
+#~ msgstr "Показать дополнительные столбцы"
+
+#~ msgid "Value of column:"
+#~ msgstr "Зачение столбца:"
+
+#~ msgid "Insert a pigeon"
+#~ msgstr "Вставить голубя"
+
 #~ msgid "<b>Sort options</b>"
 #~ msgstr "<b>Параметры сортировки</b>"
+
+#~ msgid "Pigeon"
+#~ msgstr "Голубь"
 
 #~ msgid "Results:"
 #~ msgstr "Результаты:"
@@ -1767,17 +1775,79 @@ msgstr ""
 #~ msgid "<b><i><big>Velocity calculator</big></i></b>"
 #~ msgstr "<b><i><big>Калькулятор скорости</big></i></b>"
 
+#~ msgid "<b>Create backup</b>"
+#~ msgstr "<b>Создать резервную копию</b>"
+
+#~ msgid "<b>Restore backup</b>"
+#~ msgstr "<b>Восстановить резервную копию</b>"
+
+#~ msgid "<i>Click the button below</i>"
+#~ msgstr "<i>Нажмите лежащую ниже кнопку</i>"
+
+#~ msgid "Add and remove items from your datasets"
+#~ msgstr "Добавить и удалить из базы данных"
+
+#~ msgid "Calculate velocity"
+#~ msgstr "Посчитать скорость"
+
+#~ msgid "Check now!"
+#~ msgstr "Проверить сейчас!"
+
+#~ msgid ""
+#~ "Create and restore backups from\n"
+#~ "your pigeons and results."
+#~ msgstr ""
+#~ "Создать и восстановить резервные копии из\n"
+#~ "выши голуби и результаты."
+
 #~ msgid "Distance (km)"
 #~ msgstr "Расстояние (км)"
+
+#~ msgid "Downloadpage"
+#~ msgstr "Страница загрузки"
 
 #~ msgid "From - To (meter/min)"
 #~ msgstr "Из - В (метры/мин)"
 
+#~ msgid "Here you can check if there is a program update available."
+#~ msgstr "Здесь вы можете проверить доступно ли обновление программы."
+
+#~ msgid "Here you can see some statistics of your database"
+#~ msgstr "Здесь вы можете посмотреть статистику базы данных"
+
+#~ msgid "Phone / E-mail"
+#~ msgstr "Телефон / E-mail"
+
 #~ msgid "Released (hh : mm)"
 #~ msgstr "Отказ  (чч : мм)"
 
+#~ msgid "Search database"
+#~ msgstr "Поиск базы данных"
+
+#~ msgid "Date: "
+#~ msgstr "Datum: "
+
 #~ msgid "<b><i><big>Database</big></i></b>"
 #~ msgstr "<b><i><big>База данных</big></i></b>"
+
+#~ msgid "If you remove the database, all your data will be lost."
+#~ msgstr "Еилс вы удалите базу данных, все выши данные будут потеряны."
+
+#~ msgid ""
+#~ "Optimize your database.\n"
+#~ "(Please wait, this can take some time)"
+#~ msgstr ""
+#~ "Оптимизирую вашу  базу данных\n"
+#~ "(Пожалуйста, подождите. Это может занять некоторое время."
+
+#~ msgid "<b>Optimize database</b>"
+#~ msgstr "<b>Оптимизировать базу данных</b>"
+
+#~ msgid "<b>Warning!</b>"
+#~ msgstr "<b>Предупреждение!</b>"
+
+#~ msgid "<b>Remove database</b>"
+#~ msgstr "<b>Удалить базу данных</b>"
 
 #~ msgid "Making a backup..."
 #~ msgstr "Идёт резервное копирование..."
@@ -1797,6 +1867,9 @@ msgstr ""
 #~ msgid "<b><i><big>Update required</big></i></b>"
 #~ msgstr "<b><i><big>Требуется обновление</big></i></b>"
 
+#~ msgid "Database operations:"
+#~ msgstr "Операции с базой данных:"
+
 #~ msgid "<b><i><big>Update failed</big></i></b>"
 #~ msgstr "<b><i><big>Обновление не удалось</big></i></b>"
 
@@ -1808,6 +1881,10 @@ msgstr ""
 
 #~ msgid "<b><i><big>Update complete</big></i></b>"
 #~ msgstr "<b><i><big>Обновление выполнено</big></i></b>"
+
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "Удаление '%(item)s' из '%(dataset)s'."
 
 #~ msgid ""
 #~ "Pigeon Planner needs to update the current database.\n"
@@ -1838,3 +1915,49 @@ msgstr ""
 #~ "использовать предыдущую версию. \n"
 #~ "\n"
 #~ "Журнал ошибок будет создан, когда вы закроете это окно."
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "Нажмите здесь, чтобы установить статус"
+
+#~ msgid "lost"
+#~ msgstr "потерян"
+
+#~ msgid "active"
+#~ msgstr "активен"
+
+#~ msgid "dead"
+#~ msgstr "мертв"
+
+#~ msgid ""
+#~ "Dead\n"
+#~ "Active\n"
+#~ "Sold\n"
+#~ "Lost"
+#~ msgstr ""
+#~ "Мертв\n"
+#~ "Активен\n"
+#~ "Продан\n"
+#~ "Потерян"
+
+#~ msgid "sold"
+#~ msgstr "продан"
+
+#~ msgid "Could not find the original image, full size image is not available."
+#~ msgstr ""
+#~ "Невозможно найти оригинал изображения, полноразмерное изображение будет "
+#~ "недоступно."
+
+#~ msgid "Distance: "
+#~ msgstr "Расстояние: "
+
+#~ msgid "Filter"
+#~ msgstr "Фильтр"
+
+#~ msgid "City"
+#~ msgstr "Город"
+
+#~ msgid "Zipcode"
+#~ msgstr "Индекс"
+
+#~ msgid "Telephone number"
+#~ msgstr "Телефон"

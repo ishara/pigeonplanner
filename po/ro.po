@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-12 14:48+0100\n"
-"PO-Revision-Date: 2010-11-07 18:16+0000\n"
-"Last-Translator: Timo <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2011-01-10 19:04+0000\n"
+"Last-Translator: afloarei ciprian <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
-"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-08 05:15+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-13 04:41+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: ro\n"
 
 #: ../pigeonplanner/common.py:39
 msgid "Cock"
@@ -101,9 +101,8 @@ msgid "Adding pigeon"
 msgstr "Adaugare porumbel"
 
 #: ../pigeonplanner/messages.py:51
-#, fuzzy
 msgid "The selected pigeon can't be found."
-msgstr "Editeaza porumbelul selectat"
+msgstr ""
 
 #: ../pigeonplanner/messages.py:53
 msgid "Not found!"
@@ -176,9 +175,9 @@ msgid "Are you sure you want to remove this person from your addresses?"
 msgstr "Esti sigur ca vrei sa inlaturi aceasta persoana din adresele tale?"
 
 #: ../pigeonplanner/messages.py:91
-#, fuzzy, python-format
+#, python-format
 msgid "Removing '%s' from '%s'."
-msgstr "Inlaturare'%(item)s' din'%(dataset)s'."
+msgstr ""
 
 #: ../pigeonplanner/messages.py:92
 msgid "Are you sure you want to remove this item?"
@@ -243,7 +242,8 @@ msgstr "A intervenit o eroare in operatia de imprimare."
 
 #: ../pigeonplanner/messages.py:120
 msgid "See the logfile (File->Logfile viewer) for more info."
-msgstr "Vizualizeaza fisierul de logare (Fisier->Vizualizare fisier de logare)"
+msgstr ""
+"Vizualizeaza fisierul de logare (Fisier->Vizualizare fisier de logare)"
 
 #: ../pigeonplanner/messages.py:123
 msgid "This will set back all the settings to the default values."
@@ -279,9 +279,8 @@ msgstr ""
 "A intervenit o eroare in gasirea informatiei. Esti conectat la internet?"
 
 #: ../pigeonplanner/messages.py:140
-#, fuzzy
 msgid "A new version is available."
-msgstr "Informatii suplimentare indisponibile."
+msgstr ""
 
 #: ../pigeonplanner/messages.py:141
 msgid "You already have the latest version installed."
@@ -404,9 +403,9 @@ msgid "Wind"
 msgstr "Vânt"
 
 #: ../pigeonplanner/ui/tools/calendar.py:129
-#, fuzzy, python-format
+#, python-format
 msgid "Notification set on %s days"
-msgstr "Notificarea este reglata cu %s i avans"
+msgstr ""
 
 #: ../pigeonplanner/ui/tools/calendar.py:132
 msgid "No notification set"
@@ -508,23 +507,21 @@ msgid "Zooms to fit the whole page"
 msgstr "Potriveşte la mărimea paginii"
 
 #: ../pigeonplanner/ui/detailsview.py:45
-#, fuzzy
 msgid "Details of pigeon"
-msgstr "<b>Detaliile porumbelului</b>"
+msgstr ""
 
 #: ../pigeonplanner/ui/detailsview.py:47
-#, fuzzy, python-format
+#, python-format
 msgid "Details of %s"
-msgstr "<b>Detaliile porumbelului</b>"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:81
 msgid "Choose an image..."
 msgstr "Alege o imagine"
 
 #: ../pigeonplanner/ui/dialogs.py:90
-#, fuzzy
 msgid "No image"
-msgstr "Imagine"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:126
 msgid "translator-credits"
@@ -534,9 +531,8 @@ msgstr ""
 "  Timo https://launchpad.net/~timovwb"
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
-#, fuzzy
 msgid "General information"
-msgstr "Nu s-au gasit informatii personale."
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:162
 msgid "Technical details"
@@ -779,14 +775,14 @@ msgid "<b>Pedigree dam</b>"
 msgstr "<b>Arbore genealogic mama</b>"
 
 #: ../pigeonplanner/ui/mainwindow.py:177
-#, fuzzy, python-format
+#, python-format
 msgid "Pigeon %s has been added"
-msgstr "Pormbelul %s/%s a fost adaugat"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:266
-#, fuzzy, python-format
+#, python-format
 msgid "Pigeon %s has been removed"
-msgstr "Porumbelul %s/%s a fost indepartat"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:275
 #, python-format
@@ -794,9 +790,8 @@ msgid "%s pigeons have been removed"
 msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:404 ../pigeonplanner/ui/mainwindow.py:663
-#, fuzzy
 msgid "Search for updates..."
-msgstr "Căutare pentru:"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:602
 msgid "_File"
@@ -923,28 +918,24 @@ msgid "View the images of your pigeons"
 msgstr "Vizualizeaza imaginile porumbeilor tai"
 
 #: ../pigeonplanner/ui/mainwindow.py:651 tmp/AddressBook.ui.h:1
-#, fuzzy
 msgid "Address book"
-msgstr "Adresă"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:652
-#, fuzzy
 msgid "View the address book"
-msgstr "Vizualizeaza aceste rezultate"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:653 tmp/Calendar.ui.h:1
 msgid "Calendar"
 msgstr "Calendar"
 
 #: ../pigeonplanner/ui/mainwindow.py:654
-#, fuzzy
 msgid "View the calendar"
-msgstr "Mergi la calendar?"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:655 tmp/DataManager.ui.h:3
-#, fuzzy
 msgid "Data manager"
-msgstr "Baza de date"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:656
 msgid "Manage your data"
@@ -1007,23 +998,20 @@ msgid "Show or hide the statusbar"
 msgstr "Afișează sau ascunde bara de stare"
 
 #: ../pigeonplanner/ui/databasetool.py:38
-#, fuzzy
 msgid "Executing..."
-msgstr "Se trimite..."
+msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:40
-#, fuzzy
 msgid "Error: see the logfile for more info."
-msgstr "Vizualizeaza fisierul de logare (Fisier->Vizualizare fisier de logare)"
+msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:41
 msgid "Operation cancelled"
 msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:42
-#, fuzzy
 msgid "Operation completed"
-msgstr "Optimizarea s-a incheiat."
+msgstr ""
 
 #: ../pigeonplanner/ui/widgets/treeview.py:169
 msgid "Filter pigeons"
@@ -1206,9 +1194,8 @@ msgid "Item"
 msgstr "Element"
 
 #: tmp/DatabaseTool.ui.h:1
-#, fuzzy
 msgid "Check"
-msgstr "Verifica acum!"
+msgstr ""
 
 #: tmp/DatabaseTool.ui.h:2
 msgid "Check the database for errors and try to repair them."
@@ -1221,9 +1208,8 @@ msgid ""
 msgstr ""
 
 #: tmp/DatabaseTool.ui.h:5
-#, fuzzy
 msgid "Logfile"
-msgstr "Vizualizare fisier de logare"
+msgstr ""
 
 #: tmp/DatabaseTool.ui.h:6
 msgid ""
@@ -1250,9 +1236,8 @@ msgid "SQL"
 msgstr ""
 
 #: tmp/DatabaseTool.ui.h:11
-#, fuzzy
 msgid "Warning:"
-msgstr "Avertizare"
+msgstr ""
 
 #: tmp/DetailsView.ui.h:1
 msgid "<b>Details of pigeon</b>"
@@ -1538,75 +1523,15 @@ msgstr "Secunde"
 msgid "Time"
 msgstr "Timp"
 
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>Creaza copie de rezerva</b>"
-
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>Optimizeaza baza de date</b>"
-
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>Inlatura baza de date</b>"
-
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>Restaureaza copia de rezerva</b>"
-
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>Avertizare!</b>"
-
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>Apasa butonul de mai jos</i>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "Adauga sau inlatura elemente din baza ta de date"
+#~ msgid "Optimization has been completed."
+#~ msgstr "Optimizarea s-a incheiat."
 
 #~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
 #~ msgstr ""
-#~ "Creaza si restaureaza copii de rezerva din\n"
-#~ "porumbeii si rezultatele tale"
-
-#~ msgid "Downloadpage"
-#~ msgstr "Pagina de descarcare"
-
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr ""
-#~ "Aici poti verifica daca exista o actualizare a programului disponibila"
-
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "Aici poti vedea cateva statistici ale bazei tale de date"
-
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr "Daca inlaturi baza de date, toate informatiile vor fi pierdute."
-
-#~ msgid "NOTE: You will only be notified when the program starts!"
-#~ msgstr "NOTA: Vei fi notificat numai la pornirea programului!"
-
-#~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
-#~ msgstr ""
-#~ "Optimizam baza ta de date\n"
-#~ "(Te rog sa astepti, acest lucru necesita ceva timp)"
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "Telefon / Email"
-
-#~ msgid "Tools"
-#~ msgstr "Unelte"
-
-#~ msgid "Check now!"
-#~ msgstr "Verifica acum!"
-
-#~ msgid "Search database"
-#~ msgstr "Cauta baza de date"
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
-#~ msgstr ""
-#~ "Apasa \"OK\" pentru a inchide programul. O noua baza de date va fi creata "
-#~ "la repornirea programului."
+#~ "Apasa \"OK\" pentru a inchide programul. O noua baza de date va fi creata la "
+#~ "repornirea programului."
 
 #~ msgid ""
 #~ "A new version is available. Please go to the Pigeon Planner website by "
@@ -1618,26 +1543,21 @@ msgstr "Timp"
 #~ msgid "Insert a pigeon"
 #~ msgstr "Introduce un porumbel"
 
+#~ msgid "Database"
+#~ msgstr "Baza de date"
+
 #~ msgid "Datasets"
 #~ msgstr "Seturi de date"
-
-#~ msgid "Addresses"
-#~ msgstr "Adrese"
 
 #~ msgid "Update"
 #~ msgstr "Actualizează"
 
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Introduce numarul matricol al porumbelui"
+#~ msgid "Addresses"
+#~ msgstr "Adrese"
 
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Introduce anul de nastere al porumbelului"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Apasa aici pentru a regla starea porumbelului"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Introduce numele porumbelului"
+#, python-format
+#~ msgid "Notification is set on %s days in advance"
+#~ msgstr "Notificarea este reglata cu %s i avans"
 
 #~ msgid "Click here to add an image"
 #~ msgstr "Apasa aici pentru a adauga o imagine"
@@ -1645,11 +1565,30 @@ msgstr "Timp"
 #~ msgid "Search through the list of cocks"
 #~ msgstr "Cauta in lista de masculi"
 
+#~ msgid "cock"
+#~ msgstr "Mascul"
+
+#~ msgid "Enter the bandnumber of the pigeon"
+#~ msgstr "Introduce numarul matricol al porumbelui"
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "Apasa aici pentru a regla starea porumbelului"
+
 #~ msgid "Search through the list of hens"
 #~ msgstr "Cauta in lista de femele"
 
-#~ msgid "Result has been removed"
-#~ msgstr "Rezultatul a fost indepartat"
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "Introduce numele porumbelului"
+
+#~ msgid "Enter the year of the pigeon"
+#~ msgstr "Introduce anul de nastere al porumbelului"
+
+#~ msgid "hen"
+#~ msgstr "Femela"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been removed"
+#~ msgstr "Porumbelul %s/%s a fost indepartat"
 
 #~ msgid "Result has been added"
 #~ msgstr "Rezultatul a fost adaugat"
@@ -1657,15 +1596,79 @@ msgstr "Timp"
 #~ msgid "Various tools"
 #~ msgstr "Instrumente diferite"
 
-#, fuzzy
-#~ msgid "Multiple pigeons"
-#~ msgstr "Filtreaza porumbeii"
+#, python-format
+#~ msgid "Pigeon %s/%s has been added"
+#~ msgstr "Pormbelul %s/%s a fost adaugat"
 
-#~ msgid "cock"
-#~ msgstr "Mascul"
+#~ msgid "Check now!"
+#~ msgstr "Verifica acum!"
 
-#~ msgid "hen"
-#~ msgstr "Femela"
+#~ msgid "Search database"
+#~ msgstr "Cauta baza de date"
+
+#~ msgid "<b>Create backup</b>"
+#~ msgstr "<b>Creaza copie de rezerva</b>"
+
+#~ msgid "<b>Optimize database</b>"
+#~ msgstr "<b>Optimizeaza baza de date</b>"
+
+#~ msgid ""
+#~ "Create and restore backups from\n"
+#~ "your pigeons and results."
+#~ msgstr ""
+#~ "Creaza si restaureaza copii de rezerva din\n"
+#~ "porumbeii si rezultatele tale"
+
+#~ msgid "Downloadpage"
+#~ msgstr "Pagina de descarcare"
+
+#~ msgid "<i>Click the button below</i>"
+#~ msgstr "<i>Apasa butonul de mai jos</i>"
+
+#~ msgid "Add and remove items from your datasets"
+#~ msgstr "Adauga sau inlatura elemente din baza ta de date"
+
+#~ msgid "<b>Warning!</b>"
+#~ msgstr "<b>Avertizare!</b>"
+
+#~ msgid "<b>Remove database</b>"
+#~ msgstr "<b>Inlatura baza de date</b>"
+
+#~ msgid "<b>Restore backup</b>"
+#~ msgstr "<b>Restaureaza copia de rezerva</b>"
+
+#~ msgid "If you remove the database, all your data will be lost."
+#~ msgstr "Daca inlaturi baza de date, toate informatiile vor fi pierdute."
+
+#~ msgid "Here you can check if there is a program update available."
+#~ msgstr ""
+#~ "Aici poti verifica daca exista o actualizare a programului disponibila"
+
+#~ msgid ""
+#~ "Optimize your database.\n"
+#~ "(Please wait, this can take some time)"
+#~ msgstr ""
+#~ "Optimizam baza ta de date\n"
+#~ "(Te rog sa astepti, acest lucru necesita ceva timp)"
+
+#~ msgid "Here you can see some statistics of your database"
+#~ msgstr "Aici poti vedea cateva statistici ale bazei tale de date"
+
+#~ msgid "Tools"
+#~ msgstr "Unelte"
+
+#~ msgid "Phone / E-mail"
+#~ msgstr "Telefon / Email"
+
+#~ msgid "NOTE: You will only be notified when the program starts!"
+#~ msgstr "NOTA: Vei fi notificat numai la pornirea programului!"
+
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "Inlaturare'%(item)s' din'%(dataset)s'."
+
+#~ msgid "Result has been removed"
+#~ msgstr "Rezultatul a fost indepartat"
 
 #~ msgid "young bird"
 #~ msgstr "Pui"

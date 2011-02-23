@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2010-11-07 18:03+0000\n"
 "Last-Translator: jaha <almir.jahic@bih.net.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
-"Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-08 05:15+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-13 04:41+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: bs\n"
 
 #: ../pigeonplanner/common.py:39
 msgid "Cock"
@@ -71,7 +71,8 @@ msgstr "Pogrešna slika!"
 #: ../pigeonplanner/messages.py:36
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
-msgstr "Ova slika nije podržana ili je oštećena, molimo izaberite neku drugu."
+msgstr ""
+"Ova slika nije podržana ili je oštećena, molimo izaberite neku drugu."
 
 #: ../pigeonplanner/messages.py:38
 msgid "Loading image failed!"
@@ -100,9 +101,8 @@ msgid "Adding pigeon"
 msgstr "Dodavanje golubova."
 
 #: ../pigeonplanner/messages.py:51
-#, fuzzy
 msgid "The selected pigeon can't be found."
-msgstr "Uredi označenog goluba"
+msgstr ""
 
 #: ../pigeonplanner/messages.py:53
 msgid "Not found!"
@@ -175,9 +175,9 @@ msgid "Are you sure you want to remove this person from your addresses?"
 msgstr "Da li ste sigurni da želite ukloniti tu osobu iz baze?"
 
 #: ../pigeonplanner/messages.py:91
-#, fuzzy, python-format
+#, python-format
 msgid "Removing '%s' from '%s'."
-msgstr "Uklanjanje '%(item)s' iz '%(dataset)s'."
+msgstr ""
 
 #: ../pigeonplanner/messages.py:92
 msgid "Are you sure you want to remove this item?"
@@ -279,9 +279,8 @@ msgstr ""
 "Greška u pokušaju da dobijete informacije. Jeste li spojeni na internet?"
 
 #: ../pigeonplanner/messages.py:140
-#, fuzzy
 msgid "A new version is available."
-msgstr "Nema dodatnih informacija"
+msgstr ""
 
 #: ../pigeonplanner/messages.py:141
 msgid "You already have the latest version installed."
@@ -404,9 +403,9 @@ msgid "Wind"
 msgstr "Vjetar"
 
 #: ../pigeonplanner/ui/tools/calendar.py:129
-#, fuzzy, python-format
+#, python-format
 msgid "Notification set on %s days"
-msgstr "Obavijest je postavljen na%s dana unaprijed"
+msgstr ""
 
 #: ../pigeonplanner/ui/tools/calendar.py:132
 msgid "No notification set"
@@ -508,23 +507,21 @@ msgid "Zooms to fit the whole page"
 msgstr "Zoomira da prilagodi cijelu stranicu"
 
 #: ../pigeonplanner/ui/detailsview.py:45
-#, fuzzy
 msgid "Details of pigeon"
-msgstr "<b>Detalji o golubu</b>"
+msgstr ""
 
 #: ../pigeonplanner/ui/detailsview.py:47
-#, fuzzy, python-format
+#, python-format
 msgid "Details of %s"
-msgstr "<b>Detalji o golubu</b>"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:81
 msgid "Choose an image..."
 msgstr "Izaberi sliku"
 
 #: ../pigeonplanner/ui/dialogs.py:90
-#, fuzzy
 msgid "No image"
-msgstr "Slika"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:126
 msgid "translator-credits"
@@ -533,18 +530,16 @@ msgstr ""
 "  jaha https://launchpad.net/~almir-jahic"
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
-#, fuzzy
 msgid "General information"
-msgstr "Nisu pronađene personalne informacije"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:162
 msgid "Technical details"
 msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:165
-#, fuzzy
 msgid "Data information"
-msgstr "Operacije nad bazom podataka"
+msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:189
 msgid "Number of pigeons"
@@ -779,14 +774,14 @@ msgid "<b>Pedigree dam</b>"
 msgstr "<b>Pedigre ženke</b>"
 
 #: ../pigeonplanner/ui/mainwindow.py:177
-#, fuzzy, python-format
+#, python-format
 msgid "Pigeon %s has been added"
-msgstr "Golub %s/%s je dodan"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:266
-#, fuzzy, python-format
+#, python-format
 msgid "Pigeon %s has been removed"
-msgstr "Golub %s/%s je uklonjen"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:275
 #, python-format
@@ -794,9 +789,8 @@ msgid "%s pigeons have been removed"
 msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:404 ../pigeonplanner/ui/mainwindow.py:663
-#, fuzzy
 msgid "Search for updates..."
-msgstr "Traži za:"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:602
 msgid "_File"
@@ -911,9 +905,8 @@ msgid "Velocity calculator"
 msgstr "Kalkulator brzine"
 
 #: ../pigeonplanner/ui/mainwindow.py:646
-#, fuzzy
 msgid "Calculate the velocity of flights"
-msgstr "Izračunaj brzinu"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:648
 msgid "_Photo Album"
@@ -924,28 +917,24 @@ msgid "View the images of your pigeons"
 msgstr "Pregled slika vaših golubova"
 
 #: ../pigeonplanner/ui/mainwindow.py:651 tmp/AddressBook.ui.h:1
-#, fuzzy
 msgid "Address book"
-msgstr "Adresa"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:652
-#, fuzzy
 msgid "View the address book"
-msgstr "Pogledaj ove rezultate"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:653 tmp/Calendar.ui.h:1
 msgid "Calendar"
 msgstr "Kalendar"
 
 #: ../pigeonplanner/ui/mainwindow.py:654
-#, fuzzy
 msgid "View the calendar"
-msgstr "Kalendar?"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:655 tmp/DataManager.ui.h:3
-#, fuzzy
 msgid "Data manager"
-msgstr "Baza podataka"
+msgstr ""
 
 #: ../pigeonplanner/ui/mainwindow.py:656
 msgid "Manage your data"
@@ -1008,23 +997,20 @@ msgid "Show or hide the statusbar"
 msgstr "Pokaži ili sakrij traku sa alatima"
 
 #: ../pigeonplanner/ui/databasetool.py:38
-#, fuzzy
 msgid "Executing..."
-msgstr "Šaljem..."
+msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:40
-#, fuzzy
 msgid "Error: see the logfile for more info."
-msgstr "Pogledaj log fajl (File->Logfile viewer) a više informacija."
+msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:41
 msgid "Operation cancelled"
 msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:42
-#, fuzzy
 msgid "Operation completed"
-msgstr "Optimizacija je kompletirana."
+msgstr ""
 
 #: ../pigeonplanner/ui/widgets/treeview.py:169
 msgid "Filter pigeons"
@@ -1207,9 +1193,8 @@ msgid "Item"
 msgstr "Stavka"
 
 #: tmp/DatabaseTool.ui.h:1
-#, fuzzy
 msgid "Check"
-msgstr "Provjeri sada"
+msgstr ""
 
 #: tmp/DatabaseTool.ui.h:2
 msgid "Check the database for errors and try to repair them."
@@ -1222,9 +1207,8 @@ msgid ""
 msgstr ""
 
 #: tmp/DatabaseTool.ui.h:5
-#, fuzzy
 msgid "Logfile"
-msgstr "Preglednik log fajla."
+msgstr ""
 
 #: tmp/DatabaseTool.ui.h:6
 msgid ""
@@ -1251,9 +1235,8 @@ msgid "SQL"
 msgstr ""
 
 #: tmp/DatabaseTool.ui.h:11
-#, fuzzy
 msgid "Warning:"
-msgstr "Upozorenje"
+msgstr ""
 
 #: tmp/DetailsView.ui.h:1
 msgid "<b>Details of pigeon</b>"
@@ -1539,127 +1522,109 @@ msgstr "Sekundi"
 msgid "Time"
 msgstr "Vrijeme"
 
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>Kreiraj zaštitnu kopiju</b>"
+#~ msgid "Error loading this image. Probably you have moved it on your disk."
+#~ msgstr ""
+#~ "Greška prilikom učitavanjna slike. Moguće je da ste je uklonili sa vašeg "
+#~ "diska."
 
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>Optimiziraj bazu podataka</b>"
-
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>Ukloni bazu podataka</b>"
-
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>Vrati sa rezervne kopije</b>"
-
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>Upozorenje!</b>"
-
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>Klikni na dugme ispod</i>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "Dodaj i ukloni stavke iz baze podataka"
+#~ msgid "All fields have to be entered."
+#~ msgstr "Sva polja moraju biti unesena."
 
 #~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
+#~ "You have not entered your personal information.\n"
+#~ "This will be shown on top of the printed pedigree.\n"
+#~ "Do you want to add it now?"
 #~ msgstr ""
-#~ "Snimanje i vraćanje sigurnosne kopije za\n"
-#~ "vaše rezultate."
-
-#~ msgid "Downloadpage"
-#~ msgstr "Download"
-
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr "Ovde možete provjeriti da li je dostupan update za program"
-
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "Ovdje možete vidjeti neke statistike važe baze podataka"
-
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr "Ako uklonite bazu podataka, svi podaci će biti izbrisani"
-
-#~ msgid "NOTE: You will only be notified when the program starts!"
-#~ msgstr "NAPOMENA: Bit ćete obaviješteni kada program počinje!"
+#~ "Niste unijeli vaše lične informacije.\n"
+#~ "One će biti printane na vrhu pedigrea.\n"
+#~ "Želite li ih dodati sada?"
 
 #~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
+#~ "This will set back all the settings to the default values.\n"
+#~ "Are you sure?"
 #~ msgstr ""
-#~ "Optimiziranje vaše baze podataka.\n"
-#~ "(Molimo sačekajte, ovo može potrajati)"
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "Telefon / E-mail"
-
-#~ msgid "Tools"
-#~ msgstr "Alatke"
-
-#~ msgid "Check now!"
-#~ msgstr "Provjeri sada"
-
-#~ msgid "Search database"
-#~ msgstr "Traži bazu podataka"
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
-#~ msgstr ""
-#~ "Klikni na \"OK\" za zatvaranje programa. Nova baza podataka će biti "
-#~ "kreirana kada sledeći pu startujete program."
+#~ "Sve postavke će se vratiti na pretpostavljene početne vrijednosti.\n"
+#~ "Jeste li sigurni da to želite?"
 
 #~ msgid ""
 #~ "A new version is available. Please go to the Pigeon Planner website by "
 #~ "clicking the link below and download the latest version"
 #~ msgstr ""
-#~ "Nova verzija je dostupna. Molimo vas idite na Pigeon Planner web stranicu "
-#~ "i kliknite na link za skidanje zadnje verzije programa."
+#~ "Nova verzija je dostupna. Molimo vas idite na Pigeon Planner web stranicu i "
+#~ "kliknite na link za skidanje zadnje verzije programa."
 
-#~ msgid "Insert a pigeon"
-#~ msgstr "Unesi goluba"
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the ringnumber or year of the %s.\n"
+#~ "\n"
+#~ "Check the length."
+#~ msgstr ""
+#~ "Pogrešan unos broja prstena ili godine %s.\n"
+#~ "\n"
+#~ "Provjerite dužinu unosa."
 
-#~ msgid "Datasets"
-#~ msgstr "Postavka podataka"
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the ringnumber or year of the %s.\n"
+#~ "\n"
+#~ "Only numbers are accepted."
+#~ msgstr ""
+#~ "Pogrešan unos broja prstrena ili godine %s.\n"
+#~ "\n"
+#~ "Moguć je unos samo brojeva."
 
-#~ msgid "Addresses"
-#~ msgstr "Adrese"
+#, python-format
+#~ msgid ""
+#~ "The ringnumber and year of the %s are necessary.\n"
+#~ "\n"
+#~ "Check if these are entered."
+#~ msgstr ""
+#~ "Broj prstena i godina %s su obavezni za unijeti.\n"
+#~ "\n"
+#~ "Provjerite da li ste ih unijeli."
+
+#~ msgid "pigeon"
+#~ msgstr "golub"
+
+#~ msgid "dam"
+#~ msgstr "ženka"
+
+#~ msgid "sire"
+#~ msgstr "mužijak"
+
+#, python-format
+#~ msgid ""
+#~ "Removing item '%(item)s' from '%(dataset)s'.\n"
+#~ "\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "Uklanjanje stavki '%(item)s' iz '%(dataset)s'.\n"
+#~ "\n"
+#~ "Jeste li sigurni?"
+
+#~ msgid "Year pigeons"
+#~ msgstr "Godina goluba"
+
+#~ msgid "Year race"
+#~ msgstr "Godina trke"
+
+#~ msgid "Date: "
+#~ msgstr "Datum: "
+
+#~ msgid "PP Backups"
+#~ msgstr "PP Backups"
+
+#~ msgid "Tools"
+#~ msgstr "Alatke"
 
 #~ msgid "Update"
 #~ msgstr "Ažuriranje"
 
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Unesite broj prstena"
+#~ msgid "Released: "
+#~ msgstr "Izdanje: "
 
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Unesite godinu goluba"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Klikni ovdje za postavljanje statusa goluba"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Unesite ime goluba"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Klikni ovdje za dodavanje slike"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Pretraga u listi mužijaka"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Pretraga u listi ženki"
-
-#~ msgid "Result has been removed"
-#~ msgstr "Rezultat je uklonjen"
-
-#~ msgid "Result has been added"
-#~ msgstr "Rezultat je dodan"
-
-#~ msgid "Various tools"
-#~ msgstr "Razni alati"
-
-#, fuzzy
-#~ msgid "Multiple pigeons"
-#~ msgstr "Filter po golubu"
+#~ msgid "Distance: "
+#~ msgstr "Rastojanje: "
 
 #~ msgid "cock"
 #~ msgstr "Mužijak"
@@ -1676,14 +1641,109 @@ msgstr "Vrijeme"
 #~ msgid "hen"
 #~ msgstr "ženka"
 
+#~ msgid "#Pigeon Planner configuration file"
+#~ msgstr "#Pigeon Planner konfiguracijski fajl"
+
+#, python-format
+#~ msgid ""
+#~ "Warning: The '%(option)s' option is not set in the '%(section)s' section of "
+#~ "the configuration file, using the default '%(default)s'."
+#~ msgstr ""
+#~ "Upozorenje: Opcija '%(option)s' nije postavljena u '%(section)s' sekciji u "
+#~ "konfiguracijskom fajlu, koristiće se početna '%(default)s'."
+
+#~ msgid "<b>Add a new result</b>"
+#~ msgstr "<b>Dodaj novi rezultat</b>"
+
+#~ msgid "pigeons"
+#~ msgstr "Golubovi"
+
+#~ msgid "<b>Edit this result</b>"
+#~ msgstr "<b>Uredi ovaj rezultat</b>"
+
+#, python-format
+#~ msgid ""
+#~ "Warning: There is no section '%(section)s' in the configuration file; an "
+#~ "error occured parsing its option '%(option)s', using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "Upozorenje: Ne postoji sekcija '%(section)s' u konfiguracijskom fajlu; došlo "
+#~ "je do pogreške obrade ovih opcija '%(option)s', koristiće se default "
+#~ "'%(default)s'."
+
+#, python-format
+#~ msgid ""
+#~ "Error: There went something wrong parsing the '%(option)s' option in the "
+#~ "'%(section)s' section of the configuration file, using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "Greška: Došlo je do greške u parsiranju opcije '%(option)s' u sekcji "
+#~ "'%(section)s' konfiguracijskog fajla, koristiće se default vrijednosti "
+#~ "'%(default)s'."
+
 #~ msgid "All"
 #~ msgstr "Svi"
+
+#~ msgid "Click here to add an image"
+#~ msgstr "Klikni ovdje za dodavanje slike"
+
+#~ msgid "All birds"
+#~ msgstr "Svi golubovi"
+
+#~ msgid "Add result"
+#~ msgstr "Dodaj rezultat"
+
+#~ msgid "Add a series of pigeons"
+#~ msgstr "Dodaj seriju golubova"
+
+#~ msgid "Edit result"
+#~ msgstr "Uredi rezultate"
+
+#~ msgid "Add a single pigeon"
+#~ msgstr "Dodavanje pojedinačnog goluba"
+
+#~ msgid "Enter a name for this pigeon..."
+#~ msgstr "Unesite ime za ovog goluba..."
+
+#~ msgid "Filter"
+#~ msgstr "Filter"
+
+#~ msgid "Remove result"
+#~ msgstr "Ukloni rezultate"
 
 #~ msgid "Go to pigeon"
 #~ msgstr "Prelazak na goluba"
 
+#~ msgid "Search through the list of cocks"
+#~ msgstr "Pretraga u listi mužijaka"
+
+#~ msgid "Search through the list of hens"
+#~ msgstr "Pretraga u listi ženki"
+
 #~ msgid "View detail"
 #~ msgstr "Pregled detalja"
+
+#~ msgid "First & last name"
+#~ msgstr "Prezime i ime"
+
+#~ msgid ""
+#~ "Enter some information about yourself.\n"
+#~ "This will be shown on a printed pedigree."
+#~ msgstr ""
+#~ "Unesite neke informacije o sebi.\n"
+#~ "Ovo će se prikazati na pedigreu."
+
+#~ msgid "City"
+#~ msgstr "Grad"
+
+#~ msgid "At position:"
+#~ msgstr "Na poziciju:"
+
+#~ msgid "Show navigation arrows"
+#~ msgstr "Prikaži strelice za navigaciju"
+
+#~ msgid "Show an extra column"
+#~ msgstr "Prikazi dodatne kolone"
 
 #~ msgid "Personal"
 #~ msgstr "Vaši lični podaci"
@@ -1700,8 +1760,26 @@ msgstr "Vrijeme"
 #~ msgid "<b><i><big>Backup</big></i></b>"
 #~ msgstr "<b><i><big>Zaštitna kopija</big></i></b>"
 
+#~ msgid "Value of column:"
+#~ msgstr "Vrijednost kolone:"
+
+#~ msgid "Pigeon"
+#~ msgstr "Golub"
+
 #~ msgid "<b>Sort options</b>"
 #~ msgstr "<b>Opcija za sortiranje</b>"
+
+#~ msgid "Zipcode"
+#~ msgstr "Poštanski broj"
+
+#~ msgid "Telephone number"
+#~ msgstr "Broj telefona"
+
+#~ msgid "Street & number"
+#~ msgstr "Ulica i broj"
+
+#~ msgid "Remove items from your datasets"
+#~ msgstr "Ukloniti stvake iz vaših postavki"
 
 #~ msgid "Released (hh : mm)"
 #~ msgstr "Izdano (hh:mm)"
@@ -1709,11 +1787,39 @@ msgstr "Vrijeme"
 #~ msgid "From - To (meter/min)"
 #~ msgstr "Od - do (metara/minuti)"
 
+#~ msgid "Here you can check if there is a program update available."
+#~ msgstr "Ovde možete provjeriti da li je dostupan update za program"
+
+#~ msgid "Check now!"
+#~ msgstr "Provjeri sada"
+
+#~ msgid "Calculate velocity"
+#~ msgstr "Izračunaj brzinu"
+
+#~ msgid "<b>Create backup</b>"
+#~ msgstr "<b>Kreiraj zaštitnu kopiju</b>"
+
+#~ msgid "<i>Click the button below</i>"
+#~ msgstr "<i>Klikni na dugme ispod</i>"
+
 #~ msgid "<b><i><big>Velocity calculator</big></i></b>"
 #~ msgstr "<b><i><big>Kalkulator brzine</big></i></b>"
 
+#~ msgid "<b>Restore backup</b>"
+#~ msgstr "<b>Vrati sa rezervne kopije</b>"
+
+#~ msgid ""
+#~ "Create and restore backups from\n"
+#~ "your pigeons and results."
+#~ msgstr ""
+#~ "Snimanje i vraćanje sigurnosne kopije za\n"
+#~ "vaše rezultate."
+
 #~ msgid "Distance (km)"
 #~ msgstr "Udaljenost (km)"
+
+#~ msgid "Downloadpage"
+#~ msgstr "Download"
 
 #~ msgid "Make a donation"
 #~ msgstr "Doniraj"
@@ -1721,17 +1827,55 @@ msgstr "Vrijeme"
 #~ msgid "Remove address"
 #~ msgstr "Ukloni adresu"
 
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "Uklanjanje '%(item)s' iz '%(dataset)s'."
+
 #~ msgid "Remove item"
 #~ msgstr "Ukloni stavku"
 
 #~ msgid "Remove database"
 #~ msgstr "Ukloni bazu podatka"
 
+#~ msgid "Optimization has been completed."
+#~ msgstr "Optimizacija je kompletirana."
+
+#~ msgid ""
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
+#~ msgstr ""
+#~ "Klikni na \"OK\" za zatvaranje programa. Nova baza podataka će biti kreirana "
+#~ "kada sledeći pu startujete program."
+
+#~ msgid "Datasets"
+#~ msgstr "Postavka podataka"
+
+#~ msgid "Een map selecteren"
+#~ msgstr "Een map selecteren"
+
 #~ msgid "If there are any errors, mail the entire text to:"
 #~ msgstr "Ako postoje bilo kakve pogreške, pošaljite cijeli tekst na mail:"
 
+#~ msgid "Database"
+#~ msgstr "Baza podataka"
+
+#~ msgid "Addresses"
+#~ msgstr "Adrese"
+
+#~ msgid "Enter the bandnumber of the pigeon"
+#~ msgstr "Unesite broj prstena"
+
+#~ msgid "Enter the year of the pigeon"
+#~ msgstr "Unesite godinu goluba"
+
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "Unesite ime goluba"
+
 #~ msgid "_Search"
 #~ msgstr "_Pretraži"
+
+#~ msgid "_Filter pigeons"
+#~ msgstr "_Filter golubova"
 
 #~ msgid "_Remove"
 #~ msgstr "_Ukloni"
@@ -1741,6 +1885,9 @@ msgstr "Vrijeme"
 
 #~ msgid "_Preferences"
 #~ msgstr "_Postavke"
+
+#~ msgid "Various tools"
+#~ msgstr "Razni alati"
 
 #~ msgid "Only show cocks"
 #~ msgstr "Samo pokaži mužijake"
@@ -1760,6 +1907,9 @@ msgstr "Vrijeme"
 #~ msgid "_Hens"
 #~ msgstr "_Ženke"
 
+#~ msgid "Only show hens"
+#~ msgstr "Samo pokaži ženke"
+
 #~ msgid "_Young birds"
 #~ msgstr "_Mladi golubovi"
 
@@ -1771,6 +1921,9 @@ msgstr "Vrijeme"
 
 #~ msgid "<b><i><big>Update required</big></i></b>"
 #~ msgstr "<b><i><big>Zahtjeva se update</big></i></b>"
+
+#~ msgid "Database operations:"
+#~ msgstr "Operacije nad bazom podataka"
 
 #~ msgid "The database update is complete. Pigeon Planner will now start."
 #~ msgstr ""
@@ -1822,8 +1975,23 @@ msgstr "Vrijeme"
 #~ msgid "<b><i><big>Updating database...</big></i></b>"
 #~ msgstr "<b><i><big>Osvježavanje baze podataka...</big></i></b>"
 
+#~ msgid "Insert a pigeon"
+#~ msgstr "Unesi goluba"
+
+#~ msgid "Add and remove items from your datasets"
+#~ msgstr "Dodaj i ukloni stavke iz baze podataka"
+
+#~ msgid "<b>Optimize database</b>"
+#~ msgstr "<b>Optimiziraj bazu podataka</b>"
+
 #~ msgid "<b><i><big>Database</big></i></b>"
 #~ msgstr "<b><i><big>Baza podataka</big></i></b>"
+
+#~ msgid "<b>Warning!</b>"
+#~ msgstr "<b>Upozorenje!</b>"
+
+#~ msgid "<b>Remove database</b>"
+#~ msgstr "<b>Ukloni bazu podataka</b>"
 
 #~ msgid "<b><i><big>Statistics</big></i></b>"
 #~ msgstr "<b><i><big>Statistika</big></i></b>"
@@ -1831,8 +1999,51 @@ msgstr "Vrijeme"
 #~ msgid "<b><i><big>Addresses</big></i></b>"
 #~ msgstr "<b><i><big>Adrese</big></i></b>"
 
+#~ msgid "If you remove the database, all your data will be lost."
+#~ msgstr "Ako uklonite bazu podataka, svi podaci će biti izbrisani"
+
+#~ msgid ""
+#~ "Optimize your database.\n"
+#~ "(Please wait, this can take some time)"
+#~ msgstr ""
+#~ "Optimiziranje vaše baze podataka.\n"
+#~ "(Molimo sačekajte, ovo može potrajati)"
+
+#~ msgid "Here you can see some statistics of your database"
+#~ msgstr "Ovdje možete vidjeti neke statistike važe baze podataka"
+
+#~ msgid "Search database"
+#~ msgstr "Traži bazu podataka"
+
+#~ msgid "Phone / E-mail"
+#~ msgstr "Telefon / E-mail"
+
 #~ msgid "_Add"
 #~ msgstr "_Dodaj"
 
 #~ msgid "_Quit"
 #~ msgstr "_Izlaz"
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "Klikni ovdje za postavljanje statusa goluba"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been removed"
+#~ msgstr "Golub %s/%s je uklonjen"
+
+#~ msgid "Result has been removed"
+#~ msgstr "Rezultat je uklonjen"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been added"
+#~ msgstr "Golub %s/%s je dodan"
+
+#~ msgid "Result has been added"
+#~ msgstr "Rezultat je dodan"
+
+#, python-format
+#~ msgid "Notification is set on %s days in advance"
+#~ msgstr "Obavijest je postavljen na%s dana unaprijed"
+
+#~ msgid "NOTE: You will only be notified when the program starts!"
+#~ msgstr "NAPOMENA: Bit ćete obaviješteni kada program počinje!"
