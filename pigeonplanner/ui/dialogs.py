@@ -19,7 +19,6 @@
 import os
 import os.path
 import sys
-import platform
 
 import gtk
 import gtk.gdk
@@ -171,19 +170,7 @@ class InfoDialog(gtk.Dialog):
         self.destroy()
 
     def get_versions(self):
-        operatingsystem = platform.system()
-        if operatingsystem == "Windows":
-            release, version, csd, ptype = platform.win32_ver()
-            distribution = "%s %s" %(release, csd)
-        elif operatingsystem == "Linux":
-            distname, version, nick = platform.linux_distribution()
-            distribution = "%s %s" %(distname, version)
-        elif operatingsystem == "Darwin":
-            release, versioninfo, machine = platform.mac_ver()
-            distribution = release
-        else:
-            distribution = ''
-
+        operatingsystem, distribution = common.get_operating_system()
         return (("Pigeon Planner", str(const.VERSION)),
                 ("Python", str(sys.version).replace('\n','')),
                 ("LANG", os.environ.get('LANG','')),
@@ -192,7 +179,6 @@ class InfoDialog(gtk.Dialog):
 
     def get_data(self):
         total, cocks, hens, ybirds = common.count_active_pigeons(self.database)
-
         return ((_("Number of pigeons"), total),
                 (_("Number of cocks"), "%s (%s %%)"
                                 %(cocks, self.get_percentage(cocks, total))),
