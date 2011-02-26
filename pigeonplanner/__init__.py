@@ -20,7 +20,6 @@ from datetime import datetime
 
 
 name = "Pigeon Planner"
-versionbase = "1.1.0"
 version = "1.1.0"
 copyright = "(C)opyright 2009-%s Timo Vanwynsberghe" %datetime.now().year
 authors = ["Timo Vanwynsberghe <timovwb@gmail.com>"]

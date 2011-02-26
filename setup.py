@@ -58,7 +58,7 @@ for mofile in glob.glob('languages/*/LC_MESSAGES/pigeonplanner.mo'):
 
 def run_setup():
     setup(name = 'pigeonplanner',
-          version = pigeonplanner.versionbase,
+          version = pigeonplanner.version,
           description = pigeonplanner.description,
           long_description = """
                 Pigeon Planner is a pigeon organiser which lets the user 
