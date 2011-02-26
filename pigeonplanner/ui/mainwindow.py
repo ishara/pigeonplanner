@@ -93,6 +93,7 @@ class MainWindow(builder.GtkBuilder):
         self.pedigreetab.draw_pedigree()
         self.treeview.fill_treeview()
         self._set_statistics()
+        self.current_pigeon = 0
         self.pigeon_no = len(self.treeview.get_model())
 
         self.MenuArrows.set_active(self.options.arrows)
