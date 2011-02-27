@@ -310,7 +310,6 @@ class DetailsView(builder.GtkBuilder):
             show = 0 if self.pedigree_mode else 1
         else:
             show = self.pigeon.get_visible()
-        print show
         datalist = [ring, year,
                     self.combosex.get_active_text(),
                     show,
