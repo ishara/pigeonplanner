@@ -42,6 +42,9 @@ class MailDialog(builder.GtkBuilder):
         self.kind = kind
         self.sending = False
 
+        self.textbuffer = gtk.TextBuffer()
+        self.textview_message.set_buffer(self.textbuffer)
+
         if kind == 'pdf':
             self.frame_to.show()
             self.frame_subject.show()
@@ -50,10 +53,10 @@ class MailDialog(builder.GtkBuilder):
             self.entry_subject.set_text("Pigeon Planner errorlog [%s]"
                                         %str(uuid.uuid1()))
             self.entry_to.set_text(const.REPORTMAIL)
+            desc = _("Please provide a brief description of what you were "
+                     "doing when the error occurred...")
+            self.textbuffer.set_text(desc)
             self.rename.hide()
-
-        self.textbuffer = gtk.TextBuffer()
-        self.textview_message.set_buffer(self.textbuffer)
 
         name, email = '', ''
         if database:
