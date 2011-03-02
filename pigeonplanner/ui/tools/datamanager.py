@@ -41,7 +41,6 @@ class DataManager(builder.GtkBuilder):
                        unicode(_("Weather")): self.database.WEATHER,
                        unicode(_("Wind")): self.database.WIND}
         comboboxes.fill_combobox(self.comboset, self.tables.keys())
-        comboboxes.fill_combobox(self.combosetadd, self.tables.keys())
 
         self.managerwindow.set_transient_for(parent)
         self.managerwindow.show()
@@ -62,14 +61,13 @@ class DataManager(builder.GtkBuilder):
             self.comboitem.set_active(0)
 
     def on_buttonadd_clicked(self, widget):
-        dataset = unicode(self.combosetadd.get_active_text())
+        dataset = unicode(self.comboset.get_active_text())
         item = (self.entryitem.get_text(), )
         if dataset == _("Racepoints"):
             item = item+("", "", "")
         self.database.insert_into_table(self.tables[dataset], item)
         self.entryitem.set_text('')
-        if dataset == self.comboset.get_active_text():
-            self._fill_item_combobox(dataset)
+        self._fill_item_combobox(dataset)
 
     def on_comboset_changed(self, widget):
         dataset = unicode(widget.get_active_text())
