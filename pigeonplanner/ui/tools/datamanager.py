@@ -16,6 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import gtk
+
 from pigeonplanner import const
 from pigeonplanner import builder
 from pigeonplanner import messages
@@ -24,10 +26,11 @@ from pigeonplanner.ui.widgets import comboboxes
 
 
 class DataManager(builder.GtkBuilder):
-    def __init__(self, parent, database):
+    def __init__(self, parent, database, parser):
         builder.GtkBuilder.__init__(self, const.GLADEDATAMGR)
 
         self.database = database
+        self.parser = parser
 
         # XXX: Translated strings are not unicode on some Windows XP systems
         # that were tested.
@@ -42,6 +45,7 @@ class DataManager(builder.GtkBuilder):
                        unicode(_("Wind")): self.database.WIND}
         comboboxes.fill_combobox(self.comboset, self.tables.keys())
 
+        self._build_treeview()
         self.managerwindow.set_transient_for(parent)
         self.managerwindow.show()
 
@@ -77,10 +81,75 @@ class DataManager(builder.GtkBuilder):
         value = len(widget.get_text()) > 0
         self.buttonadd.set_sensitive(value)
 
+    def on_buttonsearch_clicked(self, widget):
+        self.liststore.clear()
+        for pindex, pigeon in self.parser.pigeons.iteritems():
+            if pigeon.get_visible(): continue
+            sex = int(pigeon.get_sex())
+            if sex == const.YOUNG: continue
+            is_parent = self.database.has_parent(sex, *pigeon.get_band())
+            if not is_parent:
+                self.liststore.insert(0, [pigeon, False, pigeon.get_band_string()])
+
+    def on_buttoninfo_clicked(self, widget):
+        model, node = self.selection.get_selected()
+        pigeon = self.liststore.get_value(node, 0)
+        if not pigeon.get_pindex() in self.parser.pigeons:
+            return
+        from pigeonplanner.ui.detailsview import DetailsDialog
+        DetailsDialog(self.database, self.parser, pigeon, self.managerwindow)
+
+    def on_buttondelete_clicked(self, widget):
+        for row_num in range(len(self.liststore)-1, -1, -1):
+            row = self.liststore[row_num]
+            if not row[1]: continue
+            pindex = row[0].get_pindex()
+            self.parser.remove_pigeon(pindex)
+            self.database.delete_from_table(self.database.PIGEONS, pindex)
+            self.liststore.remove(row.iter)
+        self.buttondelete.set_sensitive(False)
+
+    def on_selection_changed(self, selection):
+        model, node = selection.get_selected()
+        value = False if node is None else True
+        self.buttoninfo.set_sensitive(value)
+
+    def on_selection_toggled(self, cell, path):
+        row = self.liststore[path]
+        row[1] = not row[1]
+        value = row[1]
+        if not value:
+            for row in self.liststore:
+                if row[1]:
+                    value = True
+                    break
+        self.buttondelete.set_sensitive(value)
+
     # Private methods
     def _fill_item_combobox(self, dataset):
         data = self.database.select_from_table(self.tables[dataset])
         comboboxes.fill_combobox(self.comboitem, data)
         value = self.comboitem.get_active_text() is not None
         self.buttonremove.set_sensitive(value)
+
+    def _build_treeview(self):
+        self.selection = self.treeview.get_selection()
+        self.selection.connect('changed', self.on_selection_changed)
+        self.liststore = gtk.ListStore(object, bool, str)
+        self.treeview.set_model(self.liststore)
+
+        textrenderer = gtk.CellRendererText()
+        boolrenderer = gtk.CellRendererToggle()
+        boolrenderer.connect('toggled', self.on_selection_toggled)
+
+        check = gtk.CheckButton()
+        check.set_active(True)
+        check.show()
+        mark_column = gtk.TreeViewColumn(None, boolrenderer, active=1)
+        mark_column.set_widget(check)
+        mark_column.set_sort_column_id(1)
+        self.treeview.append_column(mark_column)
+        band_column = gtk.TreeViewColumn(None, textrenderer, text=2)
+        band_column.set_sort_column_id(2)
+        self.treeview.append_column(band_column)
 

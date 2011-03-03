@@ -385,7 +385,7 @@ class MainWindow(builder.GtkBuilder):
 
     def menudata_activate(self, widget):
         logger.info(common.get_function_name())
-        tools.DataManager(self.mainwindow, self.database)
+        tools.DataManager(self.mainwindow, self.database, self.parser)
 
     def menuhome_activate(self, widget):
         logger.info(common.get_function_name())

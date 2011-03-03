@@ -365,6 +365,11 @@ class DatabaseOperations(object):
         sql = 'SELECT COUNT(*) FROM Pigeons WHERE pindex=?'
         return self.__db_execute_select(sql, (band,), RET_FIRSTCOL)
 
+    def has_parent(self, sex, band, year):
+        cols = ('sire', 'yearsire') if sex == const.SIRE else ('dam', 'yeardam')
+        sql = 'SELECT COUNT(*) FROM Pigeons WHERE %s=? AND %s=?' %cols
+        return self.__db_execute_select(sql, (band, year), RET_ONEROW)[0]
+
     def get_all_images(self):
         sql = 'SELECT pindex, band, year, image FROM Pigeons'
         return self.__db_execute_select(sql, None, RET_ALLCOL)
