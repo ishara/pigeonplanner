@@ -105,7 +105,6 @@ class DataManager(builder.GtkBuilder):
             if not row[1]: continue
             pindex = row[0].get_pindex()
             self.parser.remove_pigeon(pindex)
-            self.database.delete_from_table(self.database.PIGEONS, pindex)
             self.liststore.remove(row.iter)
         self.buttondelete.set_sensitive(False)
 

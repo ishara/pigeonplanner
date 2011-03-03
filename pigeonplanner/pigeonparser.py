@@ -83,6 +83,7 @@ class PigeonParser(object):
         return pobj
 
     def remove_pigeon(self, pindex):
+        self.database.delete_from_table(self.database.PIGEONS, pindex)
         del self.pigeons[pindex]
 
 

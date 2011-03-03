@@ -297,7 +297,6 @@ class MainWindow(builder.GtkBuilder):
                 logger.info("Remove: Removing the pigeon(s)")
                 for pigeon in pigeons:
                     pindex = pigeon.get_pindex()
-                    self.database.delete_from_table(self.database.PIGEONS, pindex)
                     # Only remove status when pigeon is completely removed
                     status = pigeon.get_active()
                     if status != const.ACTIVE:
@@ -450,11 +449,7 @@ class MainWindow(builder.GtkBuilder):
                                           self.mainwindow)
                 if not d.yes:
                     continue
-            data = [pindex, band, rangeyear, rangesex, 1, 1, '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '', '']
-            rowid = self.database.insert_into_table(self.database.PIGEONS, data)
-            data.insert(0, rowid)
-            pigeon = self.parser.add_pigeon(data)
+            pigeon = self.parser.add_empty_pigeon(pindex, rangesex)
             row = [pigeon, pindex, band, rangeyear, '', '',
                    pigeon.get_sex_string(), '', '']
             self.treeview.add_row(row)

@@ -244,9 +244,7 @@ class DrawPedigree(object):
         self._redraw()
 
     def _remove_pigeon(self, widget, pigeon, child):
-        pindex = pigeon.get_pindex()
-        self.database.delete_from_table(self.database.PIGEONS, pindex)
-        self.parser.remove_pigeon(pindex)
+        self.parser.remove_pigeon(pigeon.get_pindex())
         self._edit_child(pigeon, child, True)
         self._redraw()
 
