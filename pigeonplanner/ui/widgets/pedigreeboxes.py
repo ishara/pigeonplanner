@@ -62,11 +62,11 @@ class PedigreeBox_cairo(gtk.DrawingArea):
                 self.bordercolor = (135/256.0, 32/256.0, 106/256.0)
         else:
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
-            self.bordercolor = (0,0,0)
+            self.bordercolor = (0, 0, 0)
             if detailed and child is not None:
                 self.editable = True
                 tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
-                self.text = tform %format_text(_("<edit>"))
+                self.text = tform % format_text(_("<edit>"))
 
     def get_sex(self):
         return self.sex
@@ -83,7 +83,7 @@ class PedigreeBox_cairo(gtk.DrawingArea):
 
     def state_changed(self, widget, prev_state):
         if widget.state == gtk.STATE_INSENSITIVE:
-            self.text = "<span foreground='#6a6a6a'>%s</span>" %self.text
+            self.text = "<span foreground='#6a6a6a'>%s</span>" % self.text
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
         self.queue_draw()
 
@@ -99,8 +99,8 @@ class PedigreeBox_cairo(gtk.DrawingArea):
         self.textlayout.set_markup(self.text)
 
         self.context.move_to(0, 5)
-        self.context.curve_to(0, 2, 2,0, 5,0)
-        self.context.line_to(alloc.width-8,0)
+        self.context.curve_to(0, 2, 2, 0, 5, 0)
+        self.context.line_to(alloc.width-8, 0)
         self.context.curve_to(alloc.width-5, 0, alloc.width-3, 2,
                               alloc.width-3, 5)
         self.context.line_to(alloc.width-3, alloc.height-8)
@@ -153,10 +153,10 @@ class ExtraBox_cairo(gtk.DrawingArea):
             extra = pigeon.get_extra()
             self.text = format_text('\n'.join(extra[:lines]))
             self.bgcolor = (240/256.0, 230/256.0, 140/256.0)
-            self.bordercolor = (0,0,0)
+            self.bordercolor = (0, 0, 0)
         else:
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
-            self.bordercolor = (0,0,0)
+            self.bordercolor = (0, 0, 0)
 
     def realize(self, widget):
         self.set_size_request(max(12, 220), max(28, 25))
@@ -170,8 +170,8 @@ class ExtraBox_cairo(gtk.DrawingArea):
         self.textlayout.set_markup(self.text)
 
         self.context.move_to(0, 5)
-        self.context.curve_to(0, 2, 2,0, 5,0)
-        self.context.line_to(alloc.width-8,0)
+        self.context.curve_to(0, 2, 2, 0, 5, 0)
+        self.context.line_to(alloc.width-8, 0)
         self.context.curve_to(alloc.width-5, 0, alloc.width-3, 2,
                               alloc.width-3, 5)
         self.context.line_to(alloc.width-3, alloc.height-8)
@@ -237,7 +237,7 @@ class PedigreeBox(gtk.DrawingArea):
             if detailed and child is not None:
                 self.editable = True
                 tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
-                text = tform %format_text(_("<edit>"))
+                text = tform % format_text(_("<edit>"))
 
         self.textlayout = self.create_pango_layout('')
         self.textlayout.set_markup(text)
@@ -293,7 +293,7 @@ class PedigreeBox(gtk.DrawingArea):
         self.shadow_gc.set_foreground(
                         self.get_colormap().alloc_color("#999999"))
 
-    def expose(self,widget,event):
+    def expose(self, widget, event):
         alloc = self.get_allocation()
 
         self.window.draw_line(self.shadow_gc, 3, alloc.height-1,
@@ -362,7 +362,7 @@ class ExtraBox(gtk.DrawingArea):
         self.shadow_gc.set_foreground(
                             self.get_colormap().alloc_color("#999999"))
 
-    def expose(self,widget,event):
+    def expose(self, widget, event):
         alloc = self.get_allocation()
 
         self.window.draw_line(self.shadow_gc, 3, alloc.height-1,
@@ -387,7 +387,7 @@ class ExtraBox(gtk.DrawingArea):
 class PedigreeCross(gtk.DrawingArea):
     def __init__(self):
         gtk.DrawingArea.__init__(self)
-        self.set_size_request(20,-1)
+        self.set_size_request(20, -1)
         self.connect("expose_event", self.expose)
 
     def expose(self, area, event):
@@ -408,7 +408,7 @@ class PedigreeCross(gtk.DrawingArea):
 class PedigreeLine(gtk.DrawingArea):
     def __init__(self):
         gtk.DrawingArea.__init__(self)
-        self.set_size_request(20,-1)
+        self.set_size_request(20, -1)
         self.connect("expose_event", self.expose)
 
     def expose(self, area, event):
@@ -418,7 +418,7 @@ class PedigreeLine(gtk.DrawingArea):
         gc.line_style = gtk.gdk.LINE_SOLID
         gc.line_width = 2
         x1 = 0 if gtk.widget_get_default_direction() == gtk.TEXT_DIR_RTL else alloc.width
-        if idx %2 == 0:
+        if idx % 2 == 0:
             area.window.draw_line(gc, x1, alloc.height/2, alloc.width/2,
                                   alloc.height/2)
             area.window.draw_line(gc, alloc.width/2, 0, alloc.width/2,

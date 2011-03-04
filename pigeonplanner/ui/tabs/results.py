@@ -112,7 +112,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonsave_clicked(self, widget):
         data = self._get_data()
         if data is None: return
-        date, point, place, out, sector, ftype, category, weather, wind,\
+        date, point, place, out, sector, ftype, category, weather, wind, \
                                                                 comment = data
         cof = common.calculate_coefficient(place, out)
         # Not implemented yet, but have a database column

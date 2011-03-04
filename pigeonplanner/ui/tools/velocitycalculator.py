@@ -133,10 +133,10 @@ class VelocityCalculator(builder.GtkBuilder):
                 for row in self.ls_velocity]
         if data:
             date = datetime.datetime.now()
-            distance = "%s %s" %(
+            distance = "%s %s" % (
                         self.spinbutton_prognosis_distance.get_value_as_int(),
                         self.combobox_prognosis_distance.get_active_text())
-            release = "%s:%s:%s" %(self.spinbutton_prognosis_hours.get_text(),
+            release = "%s:%s:%s" % (self.spinbutton_prognosis_hours.get_text(),
                                  self.spinbutton_prognosis_minutes.get_text(),
                                  self.spinbutton_prognosis_seconds.get_text())
             info = [date.strftime("%Y-%m-%d"), release, distance]

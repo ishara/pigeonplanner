@@ -169,7 +169,7 @@ class DrawPedigree(object):
             if cairo_available:
                 box = pedigreeboxes.PedigreeBox_cairo(pigeon, child, detailed)
             else:
-                 box = pedigreeboxes.PedigreeBox(pigeon, child, detailed)
+                box = pedigreeboxes.PedigreeBox(pigeon, child, detailed)
             box.set_sex(0 if (index%2 == 1 or (index == 0 and sex == const.SIRE)) else 1)
             box.connect("button-press-event", self.on_button_press, detailed)
             table.attach(box, x, y, w, h)

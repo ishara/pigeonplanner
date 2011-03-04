@@ -213,10 +213,10 @@ class PrintPedigree(BasePrinting):
         sex = ''
         if self.options.pigName and self.pigeon is not None and\
             self.pigeon.get_name():
-            name = "%s - " %self.pigeon.get_name()
+            name = "%s - " % self.pigeon.get_name()
         if self.options.pigColour and self.pigeon is not None and\
             self.pigeon.get_colour():
-            colour = "%s - " %self.pigeon.get_colour()
+            colour = "%s - " % self.pigeon.get_colour()
         if self.options.pigSex and self.pigeon is not None:
             sex = self.pigeon.get_sex_string()
         info = name + colour + sex
@@ -402,14 +402,14 @@ class PrintResults(BasePrinting):
 
         header = ''
         if self.options.perName:
-            header += '%s\n' %self.userinfo['name']
+            header += '%s\n' % self.userinfo['name']
         if self.options.perAddress:
-            header += '%s\n' %self.userinfo['street']
-            header += '%s %s\n' %(self.userinfo['code'], self.userinfo['city'])
+            header += '%s\n' % self.userinfo['street']
+            header += '%s %s\n' %( self.userinfo['code'], self.userinfo['city'])
         if self.options.perPhone:
-            header += '%s\n' %self.userinfo['phone']
+            header += '%s\n' % self.userinfo['phone']
         if self.options.perEmail:
-            header += '%s' %self.userinfo['email']
+            header += '%s' % self.userinfo['email']
         self.header_layout = context.create_pango_layout()
         font = pango.FontDescription("Arial "+str(self.header_font_size))
         self.header_layout.set_font_description(font)
@@ -481,10 +481,10 @@ class PrintResults(BasePrinting):
         cr.set_source_rgb(0, 0, 0)
         cr.move_to(0, 0)
 
-        date_page = "%s %s / %s" %(_("Page"), page_number+1,
-                                   operation.props.n_pages)
+        date_page = "%s %s / %s" % (_("Page"), page_number+1,
+                                    operation.props.n_pages)
         if self.options.resDate:
-            date_page += "\n\n%s" %datetime.date.today()
+            date_page += "\n\n%s" % datetime.date.today()
         self.pagenr_layout.set_text(date_page)
         cr.show_layout(self.pagenr_layout)
         cr.show_layout(self.header_layout)
@@ -546,7 +546,7 @@ class PrintResults(BasePrinting):
     def create_layout(self, context, column):
         text = ''
         for result in self.results:
-            text += '%s\n' %result[column]
+            text += '%s\n' % result[column]
         layout = context.create_pango_layout()
         font = pango.FontDescription("Arial "+str(self.text_font_size))
         layout.set_font_description(font)

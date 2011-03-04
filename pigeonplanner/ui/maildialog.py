@@ -130,8 +130,8 @@ class MailDialog(builder.GtkBuilder):
         recipient = self.entry_to.get_text()
         subject = self.entry_subject.get_text()
         body = self.textbuffer.get_text(*self.textbuffer.get_bounds()).strip()
-        sender = "%s <%s>" %(self.entry_name.get_text(),
-                             self.entry_mail.get_text())
+        sender = "%s <%s>" % (self.entry_name.get_text(),
+                              self.entry_mail.get_text())
 
         mailing.send_email(recipient, sender, subject, body, self.attachment)
 

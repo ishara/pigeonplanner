@@ -42,7 +42,7 @@ class PedigreeWindow(builder.GtkBuilder):
         self.parser = parser
         self.pigeon = pigeon
         ring, year = pigeon.get_band()
-        self.pdfname = "%s_%s_%s.pdf" %(_("Pedigree"), ring, year)
+        self.pdfname = "%s_%s_%s.pdf" % (_("Pedigree"), ring, year)
         self.build_toolbar()
 
         self.labelRing.set_text(pigeon.get_band_string(True))

@@ -271,10 +271,10 @@ class MainWindow(builder.GtkBuilder):
         else:
             logger.info("Remove: Removing multiple pigeons")
             pigeons = [pobj for pobj in self.treeview.get_selected_pigeon()]
-            bands = ['%s' %pigeon.get_band_string() for pigeon in
+            bands = ['%s' % pigeon.get_band_string() for pigeon in
                      self.treeview.get_selected_pigeon()]
             pigeonlabel = ", ".join(bands)
-            statusbarmsg = _("%s pigeons have been removed") %len(pigeons)
+            statusbarmsg = _("%s pigeons have been removed") % len(pigeons)
             show_result_option = False
             for pigeon in pigeons:
                 if self.database.has_results(pigeon.get_pindex()):

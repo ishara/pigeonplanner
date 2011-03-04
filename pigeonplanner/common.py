@@ -67,10 +67,10 @@ def get_operating_system():
     operatingsystem = platform.system()
     if operatingsystem == "Windows":
         release, version, csd, ptype = platform.win32_ver()
-        distribution = "%s %s" %(release, csd)
+        distribution = "%s %s" % (release, csd)
     elif operatingsystem == "Linux":
         distname, version, nick = platform.linux_distribution()
-        distribution = "%s %s" %(distname, version)
+        distribution = "%s %s" % (distname, version)
     elif operatingsystem == "Darwin":
         release, versioninfo, machine = platform.mac_ver()
         distribution = release
@@ -184,7 +184,7 @@ def add_zero_to_time(value):
     """
 
     if value >= 0 and value < 10:
-        return '0%s' %value
+        return '0%s' % value
     return str(value)
 
 def get_random_number(value):

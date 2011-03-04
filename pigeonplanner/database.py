@@ -179,7 +179,7 @@ class DatabaseOperations(object):
     def create_sql_from_names(self, colnames):
         sql = ""
         for name in colnames:
-            sql += " %s=?," %name
+            sql += " %s=?," % name
         return sql.lstrip(' (').rstrip(',')
 
     def close(self):
@@ -248,22 +248,22 @@ class DatabaseOperations(object):
 
 #### General methods for SQL queries
     def insert_into_table(self, table, data):
-        sql = 'INSERT INTO %s VALUES (null%s)' %(table, ", ?"*len(data))
+        sql = 'INSERT INTO %s VALUES (null%s)' % (table, ", ?"*len(data))
         return self.__db_execute(sql, data)
 
     def select_from_table(self, table):
-        sql = 'SELECT * FROM %s' %table
+        sql = 'SELECT * FROM %s' % table
         return self.__db_execute_select(sql, None, RET_SECCOL)
 
     def update_table(self, table, data, startcol, idcol=1):
         collist = self.get_n_column_name(table, startcol, startcol+(len(data)-1))
         colsql = self.create_sql_from_names(collist)
         idcolname = self.get_n_column_name(table, idcol)[0]
-        sql = 'UPDATE %s SET %s WHERE %s=?' %(table, colsql, idcolname)
+        sql = 'UPDATE %s SET %s WHERE %s=?' % (table, colsql, idcolname)
         self.__db_execute(sql, data)
 
     def delete_from_table(self, table, item, col=1):
-        sql = 'DELETE FROM %s WHERE %s=?' %(table,
+        sql = 'DELETE FROM %s WHERE %s=?' % (table,
                                             self.get_n_column_name(table, col)[0])
         self.__db_execute(sql, (item,))
 
@@ -273,24 +273,24 @@ class DatabaseOperations(object):
         return self.__db_execute_select(sql, None, RET_FIRSTCOL)
 
     def get_columnnames(self, table):
-        sql = "PRAGMA table_info(%s)" %table
+        sql = "PRAGMA table_info(%s)" % table
         return self.__db_execute_select(sql, None, RET_SECCOL)
 
     def add_column(self, table, column):
-        sql = "ALTER TABLE %s ADD COLUMN %s" %(table, column)
+        sql = "ALTER TABLE %s ADD COLUMN %s" % (table, column)
         self.__db_execute(sql)
 
     def add_table_from_schema(self, table):
-        sql = "CREATE TABLE IF NOT EXISTS %s %s" %(table, self.SCHEMA[table])
+        sql = "CREATE TABLE IF NOT EXISTS %s %s" % (table, self.SCHEMA[table])
         self.__db_execute(sql)
 
     def change_column_name(self, table):
         self.cursor.execute("CREATE TEMP TABLE tmp_%s AS SELECT * FROM %s"
-                                        %(table, table))
+                                        % (table, table))
         self.cursor.execute("DROP TABLE %s" %table)
         self.cursor.execute("CREATE TABLE IF NOT EXISTS %s %s"
-                                        %(table, self.SCHEMA[table]))
-        self.cursor.execute("INSERT INTO %s SELECT * FROM tmp_%s" %(table, table))
+                                        % (table, self.SCHEMA[table]))
+        self.cursor.execute("INSERT INTO %s SELECT * FROM tmp_%s" % (table, table))
         # No need to drop the temporary table. From the SQLite docs:
         # If the "TEMP" or "TEMPORARY" keyword occurs (...) the table is only
         # visible within that same database connection and is automatically
@@ -305,14 +305,14 @@ class DatabaseOperations(object):
         return self.__db_execute_select("PRAGMA integrity_check")
 
     def check_empty_column(self, table, column):
-        sql = "SELECT * FROM %s WHERE %s=''" %(table, column)
+        sql = "SELECT * FROM %s WHERE %s=''" % (table, column)
         return self.__db_execute_select(sql, None, RET_ALLCOL)
 
     def check_schema(self):
         # Check if all tables are present
         for s_table, s_columns in self.SCHEMA.items():
             if not s_table in self.get_tablenames():
-                logger.info("Adding table '%s'" %s_table)
+                logger.info("Adding table '%s'", s_table)
                 self.add_table_from_schema(s_table)
 
         # Check if all columns are present
@@ -334,8 +334,8 @@ class DatabaseOperations(object):
                     # independent of the amount of data in the table.
                     # The ALTER TABLE command runs as quickly on a table
                     # with 10 million rows as it does on a table with 1 row.
-                    logger.info("Adding column '%s' to table '%s'"
-                                %(column, table))
+                    logger.info("Adding column '%s' to table '%s'",
+                                (column, table))
                     self.add_column(table, column_def)
 
 #### Pigeons
@@ -359,7 +359,7 @@ class DatabaseOperations(object):
 
     def has_parent(self, sex, band, year):
         cols = ('sire', 'yearsire') if sex == const.SIRE else ('dam', 'yeardam')
-        sql = 'SELECT COUNT(*) FROM Pigeons WHERE %s=? AND %s=?' %cols
+        sql = 'SELECT COUNT(*) FROM Pigeons WHERE %s=? AND %s=?' % cols
         return self.__db_execute_select(sql, (band, year), RET_ONEROW)[0]
 
     def get_all_images(self):
@@ -397,7 +397,7 @@ class DatabaseOperations(object):
 #### Medication
     def delete_medication_from_id_pindex(self, ID, pindex):
         sql = 'DELETE FROM Medication WHERE medid=? AND pindex=?'
-        self.__db_execute(sql, (ID,pindex))
+        self.__db_execute(sql, (ID, pindex))
 
     def get_pigeon_medication(self, pindex):
         sql = 'SELECT * FROM Medication WHERE pindex=?'

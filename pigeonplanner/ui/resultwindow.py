@@ -61,7 +61,7 @@ class ResultWindow(builder.GtkBuilder):
         self.database = database
         self.parser = parser
         self.options = options
-        self.pdfname = "%s_%s.pdf" %(_("Results"), datetime.date.today())
+        self.pdfname = "%s_%s.pdf" % (_("Results"), datetime.date.today())
 
         self.filters = []
         self.filter_pigeons = []
@@ -188,7 +188,7 @@ class ResultWindow(builder.GtkBuilder):
         store = gtk.ListStore(str, str)
         for pindex in self.filter_pigeons:
             ring, year = common.get_band_from_pindex(pindex)
-            band = "%s/%s" %(ring, year)
+            band = "%s/%s" % (ring, year)
             store.append([pindex, band])
         cell = gtk.CellRendererText()
         combobox = gtk.ComboBox(store)
@@ -242,10 +242,10 @@ class ResultWindow(builder.GtkBuilder):
                 if value == None:
                     value = ''
                 if x == 2:
-                    value = "%s / %s" %(self.liststore.get_value(item.iter, 1),
-                                        value[2:])
+                    value = "%s / %s" % (self.liststore.get_value(item.iter, 1),
+                                         value[2:])
                 if x == 7:
-                    value = '%3.2f' %value
+                    value = '%3.2f' % value
                 values.append(str(value))
             results.append(values)
 

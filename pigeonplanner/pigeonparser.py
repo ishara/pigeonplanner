@@ -121,7 +121,7 @@ class Pigeon(object):
 
     def get_band_string(self, short=False):
         year = self.year if not short else self.year[2:]
-        return "%s / %s" %(self.ring, year)
+        return "%s / %s" % (self.ring, year)
 
     def get_ring(self):
         return self.ring
@@ -161,7 +161,7 @@ class Pigeon(object):
 
     def get_sire_string(self, short=False):
         year = self.yearsire if not short else self.yearsire[2:]
-        return "%s / %s" %(self.sire, year)
+        return "%s / %s" % (self.sire, year)
 
     def get_dam(self):
         return self.dam, self.yeardam
@@ -171,7 +171,7 @@ class Pigeon(object):
 
     def get_dam_string(self, short=False):
         year = self.yeardam if not short else self.yeardam[2:]
-        return "%s / %s" %(self.dam, year)
+        return "%s / %s" % (self.dam, year)
 
     def get_extra(self):
         return (self.extra1, self.extra2, self.extra3,

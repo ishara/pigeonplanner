@@ -34,7 +34,7 @@ class UpdateError(Exception):
         self.msg = msg
 
     def __str__(self):
-        return "Updater: %s" %self.msg
+        return "Updater: %s" % self.msg
 
 def update():
     local = os.path.join(const.TEMPDIR, 'pigeonplanner_update')

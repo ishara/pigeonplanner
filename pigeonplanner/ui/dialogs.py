@@ -46,7 +46,7 @@ class MessageDialog(gtk.MessageDialog):
 
         head, text, title = data
         if extra:
-            head = head %extra
+            head = head % extra
 
         if msgtype == const.ERROR:
             msgtype = gtk.MESSAGE_ERROR
@@ -191,7 +191,7 @@ class InfoDialog(gtk.Dialog):
 
     def get_percentage(self, value, total):
         if total == 0: return "0"
-        return "%.2f" %((value/float(total))*100)
+        return "%.2f" % ((value/float(total))*100)
 
     def _select_func(self, data):
         return False

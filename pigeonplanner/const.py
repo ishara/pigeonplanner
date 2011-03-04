@@ -54,11 +54,11 @@ UNIX = False
 WINDOWS = False
 OSX = False
 if sys.platform.startswith("win"):
-	WINDOWS = True
+    WINDOWS = True
 elif "darwin" in sys.platform:
-	OSX = True
+    OSX = True
 else:
-	UNIX = True
+    UNIX = True
 
 
 if WINDOWS:
@@ -126,7 +126,7 @@ REPORTMAIL = "timovwb@gmail.com"
 
 DOMAIN = 'pigeonplanner'
 
-USER_AGENT = {"User-Agent": "Pigeon Planner/%s" %VERSION}
+USER_AGENT = {"User-Agent": "Pigeon Planner/%s" % VERSION}
 
 LOG_FORMAT = '[%(asctime)s] %(name)s %(levelname)s: %(message)s'
 DATE_FORMAT = '%Y-%m-%d'
