@@ -308,14 +308,6 @@ class DatabaseOperations(object):
         sql = "SELECT * FROM %s WHERE %s=''" %(table, column)
         return self.__db_execute_select(sql, None, RET_ALLCOL)
 
-    def has_parent(self, band, year, sex):
-        if sex == const.SIRE:
-            col1, col2 = 'sire', 'yearsire'
-        else:
-            col1, col2 = 'dam', 'yeardam'
-        sql = "select count(*) from Pigeons where %s=? and %s=?" %(col1, col2)
-        return self.__db_execute_select(sql, (band, year), RET_ALLCOL)
-
     def check_schema(self):
         # Check if all tables are present
         for s_table, s_columns in self.SCHEMA.items():

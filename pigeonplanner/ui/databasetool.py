@@ -103,9 +103,9 @@ class DBWindow(builder.GtkBuilder):
                 data.append(pindex)
                 # Try to detect the correct sex, set a fallback first
                 sex = const.YOUNG
-                if self.database.has_parent(band, year, const.SIRE) == 0:
+                if self.database.has_parent(const.SIRE, band, year) == 0:
                     # No pigeon has it set as sire, try as dam
-                    if self.database.has_parent(band, year, const.DAM) > 0:
+                    if self.database.has_parent(const.DAM, band, year) > 0:
                         # Found atleast once as dam
                         sex = const.DAM
                 else:
