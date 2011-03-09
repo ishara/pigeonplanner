@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-12 14:48+0100\n"
-"PO-Revision-Date: 2011-03-12 19:39-0000\n"
-"Last-Translator: Belmiro Pinto <belpinto@gmail.com>\n"
+"PO-Revision-Date: 2011-02-13 07:28+0000\n"
+"Last-Translator: Belmiro Pinto <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-11-30 04:56+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-14 04:54+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
+"Language: \n"
 
 #: ../pigeonplanner/common.py:39
 msgid "Cock"
@@ -169,7 +169,8 @@ msgstr "Removendo '%s'"
 
 #: ../pigeonplanner/messages.py:88
 msgid "Are you sure you want to remove this person from your addresses?"
-msgstr "Tem a certeza que quer remover esta pessoa da sua lista de endereços?"
+msgstr ""
+"Tem a certeza que quer remover esta pessoa da sua lista de endereços?"
 
 #: ../pigeonplanner/messages.py:91
 #, python-format
@@ -529,7 +530,9 @@ msgstr ""
 "Créditos da tradução\n"
 "\n"
 "Launchpad Contributions:\n"
-"  Belmiro Pinto https://launchpad.net/~belpinto"
+"  Almufadado https://launchpad.net/~almufadado\n"
+"  Belmiro Pinto https://launchpad.net/~belpinto\n"
+"  Timo https://launchpad.net/~timovwb"
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
 msgid "General information"
@@ -699,7 +702,7 @@ msgstr "Escolha as opções do filtro"
 
 #: ../pigeonplanner/ui/optionsdialog.py:50 tmp/DatabaseTool.ui.h:4
 msgid "General"
-msgstr "General"
+msgstr "Geral"
 
 #: ../pigeonplanner/ui/optionsdialog.py:52
 msgid "Appearance"
@@ -1530,6 +1533,84 @@ msgstr "Segundos"
 msgid "Time"
 msgstr "Tempo"
 
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "Removendo '%(item)s' de '%(dataset)s'."
+
+#~ msgid ""
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
+#~ msgstr ""
+#~ "Click \"OK\" para fechar o programa. Uma nova base de dados será criada "
+#~ "assim que reiniciar o programa."
+
+#~ msgid "Optimization has been completed."
+#~ msgstr "A optimização foi concluida."
+
+#~ msgid ""
+#~ "A new version is available. Please go to the Pigeon Planner website by "
+#~ "clicking the link below and download the latest version"
+#~ msgstr ""
+#~ "Uma nova versão está dísponível. Por favor vá à página web do Pigeon Planner "
+#~ "clicando na ligação seguinte e descarregue a última versão"
+
+#~ msgid "Insert a pigeon"
+#~ msgstr "Insira um pombo"
+
+#~ msgid "Datasets"
+#~ msgstr "Conjunto de dados"
+
+#~ msgid "Addresses"
+#~ msgstr "Endereços"
+
+#~ msgid "Database"
+#~ msgstr "Base de Dados"
+
+#~ msgid "Update"
+#~ msgstr "Actualização"
+
+#, python-format
+#~ msgid "Notification is set on %s days in advance"
+#~ msgstr "Notificação configurada para %s de dias de avanço"
+
+#~ msgid "Enter the bandnumber of the pigeon"
+#~ msgstr "Escreva o número da anilha do pombo"
+
+#~ msgid "Enter the year of the pigeon"
+#~ msgstr "Escreva o ano do pombo"
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "Click aqui para definir o estado do pombo"
+
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "Escreva um nome para o pombo"
+
+#~ msgid "Click here to add an image"
+#~ msgstr "Click aqui para adicionar uma imagem"
+
+#~ msgid "Search through the list of cocks"
+#~ msgstr "Procura na lista de machos"
+
+#~ msgid "Search through the list of hens"
+#~ msgstr "Procura na lista de fêmeas"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been removed"
+#~ msgstr "Pombo %s/%s foi removido"
+
+#~ msgid "Result has been removed"
+#~ msgstr "O resultado foi apagado"
+
+#~ msgid "Result has been added"
+#~ msgstr "Foi adicionado o resultado"
+
+#~ msgid "Various tools"
+#~ msgstr "Várias ferramentas"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been added"
+#~ msgstr "O pombo %s/%s foi adicionado"
+
 #~ msgid "<b>Create backup</b>"
 #~ msgstr "<b>Criar cópia de segurança</b>"
 
@@ -1587,68 +1668,8 @@ msgstr "Tempo"
 #~ msgid "Tools"
 #~ msgstr "Ferramentas"
 
-#~ msgid "Check now!"
-#~ msgstr "Verificar agora!"
-
 #~ msgid "Search database"
 #~ msgstr "Procurar na base de dados"
 
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
-#~ msgstr ""
-#~ "Click \"OK\" para fechar o programa. Uma nova base de dados será criada "
-#~ "assim que reiniciar o programa."
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "Uma nova versão está dísponível. Por favor vá à página web do Pigeon "
-#~ "Planner clicando na ligação seguinte e descarregue a última versão"
-
-#~ msgid "Insert a pigeon"
-#~ msgstr "Insira um pombo"
-
-#~ msgid "Datasets"
-#~ msgstr "Conjunto de dados"
-
-#~ msgid "Addresses"
-#~ msgstr "Endereços"
-
-#~ msgid "Update"
-#~ msgstr "Actualização"
-
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Escreva o número da anilha do pombo"
-
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Escreva o ano do pombo"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Click aqui para definir o estado do pombo"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Escreva um nome para o pombo"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Click aqui para adicionar uma imagem"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Procura na lista de machos"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Procura na lista de fêmeas"
-
-#~ msgid "Result has been removed"
-#~ msgstr "O resultado foi apagado"
-
-#~ msgid "Result has been added"
-#~ msgstr "Foi adicionado o resultado"
-
-#~ msgid "Various tools"
-#~ msgstr "Várias ferramentas"
-
-#, fuzzy
-#~ msgid "Multiple pigeons"
-#~ msgstr "Filtrar os pombos"
+#~ msgid "Check now!"
+#~ msgstr "Verificar agora!"

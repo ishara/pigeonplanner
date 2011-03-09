@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-12 14:48+0100\n"
-"PO-Revision-Date: 2010-12-05 23:43+0000\n"
+"PO-Revision-Date: 2011-02-09 16:17+0000\n"
 "Last-Translator: egyptian <Unknown>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-06 04:53+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-02-13 04:41+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "X-Poedit-Country: EGYPT\n"
+"Language: \n"
 "X-Poedit-Language: Arabic\n"
 
 #: ../pigeonplanner/common.py:39
@@ -47,7 +47,7 @@ msgstr "البرنامج قيد التشغيل بالفعل."
 
 #: ../pigeonplanner/messages.py:27 ../pigeonplanner/ui/mainwindow.py:407
 msgid "Go to the website?"
-msgstr "إذهب الى الموقع الالكترونى؟"
+msgstr "إذهب الى الموقع الالكتروني؟"
 
 #: ../pigeonplanner/messages.py:28
 msgid ""
@@ -60,7 +60,7 @@ msgstr ""
 #: ../pigeonplanner/messages.py:31
 #, python-format
 msgid "Notification for '%s'"
-msgstr "تنبية '%s'"
+msgstr "تنبية حول '%s'"
 
 #: ../pigeonplanner/messages.py:32
 msgid "Go to the calendar?"
@@ -73,7 +73,7 @@ msgstr "صورة غير صحيحة !"
 #: ../pigeonplanner/messages.py:36
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
-msgstr "هذه الصورة هي إما غير معتمد أو معطوبة ، يرجى اختيار صورة اخرى."
+msgstr "هذه الصورة غير معتمد أو معطوبة ، يرجى اختيار صورة اخرى."
 
 #: ../pigeonplanner/messages.py:38
 msgid "Loading image failed!"
@@ -91,7 +91,7 @@ msgstr "هذه الحمامة موجودة بالفعل, ولكن لم تظهر 
 
 #: ../pigeonplanner/messages.py:45
 msgid "This pigeon already exists. Overwrite it?"
-msgstr "هذه الحمامة موجوده بالفعل . الكتابه عليها ؟"
+msgstr "هذه الحمامة موجوده بالفعل . استبدالها ؟"
 
 #: ../pigeonplanner/messages.py:48
 msgid "This pigeon doesn't exist. Do you want to add it?"
@@ -102,13 +102,12 @@ msgid "Adding pigeon"
 msgstr "إضافة حمام"
 
 #: ../pigeonplanner/messages.py:51
-#, fuzzy
 msgid "The selected pigeon can't be found."
-msgstr "تعديل الحمامة المختاره"
+msgstr "الحمامة المختارة غير موجودة."
 
 #: ../pigeonplanner/messages.py:53
 msgid "Not found!"
-msgstr ""
+msgstr "غير موجود!"
 
 #: ../pigeonplanner/messages.py:55 ../pigeonplanner/messages.py:58
 #: ../pigeonplanner/messages.py:61 ../pigeonplanner/messages.py:64
@@ -120,7 +119,7 @@ msgstr "مدخلات غير صحيح !"
 
 #: ../pigeonplanner/messages.py:56
 msgid "The ringnumber and year are necessary."
-msgstr "رقم الدبلة و السنة ضروريين."
+msgstr "يجب ادخال رقم الدبلة و السنة."
 
 #: ../pigeonplanner/messages.py:59
 msgid "Only numbers are accepted as year input."
@@ -132,7 +131,7 @@ msgstr "التحقق من طول السنة."
 
 #: ../pigeonplanner/messages.py:65
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr "مسموح بالأرقام فقط عند إضافة مجموعه من الحمام"
+msgstr "مسموح بالأرقام فقط عند إضافة عدد من الحمام"
 
 #: ../pigeonplanner/messages.py:69
 msgid "At least the date and racepoint have to be entered."
@@ -159,7 +158,7 @@ msgstr "هل أنت متأكد؟"
 
 #: ../pigeonplanner/messages.py:82
 msgid "The name has to be entered."
-msgstr "لابد من إدخال الأسم."
+msgstr "لابد من إدخال الاسم."
 
 #: ../pigeonplanner/messages.py:85
 msgid "The persoon you want to add already exists."
@@ -168,16 +167,16 @@ msgstr "الشخص الذي تريد إضافته موجود بالفعل."
 #: ../pigeonplanner/messages.py:87
 #, python-format
 msgid "Removing '%s'"
-msgstr "'%s' جارى الحذف"
+msgstr "'%s' جارى حذف"
 
 #: ../pigeonplanner/messages.py:88
 msgid "Are you sure you want to remove this person from your addresses?"
 msgstr "هل أنت متأكد أنك تريد إزالة هذا الشخص من العناوين الخاصة بك؟"
 
 #: ../pigeonplanner/messages.py:91
-#, fuzzy, python-format
+#, python-format
 msgid "Removing '%s' from '%s'."
-msgstr "حذف '%(item)s' من '%(dataset)s'."
+msgstr "حذف '%s' من '%s'."
 
 #: ../pigeonplanner/messages.py:92
 msgid "Are you sure you want to remove this item?"
@@ -213,7 +212,7 @@ msgid ""
 "Restart the program."
 msgstr ""
 "تم إستعادة النسخة الإحتياطية بنجاح.\n"
-"إعادة تشغيل البرنامج."
+"اعد تشغيل البرنامج."
 
 #: ../pigeonplanner/messages.py:108
 msgid "There was an error restoring the backup."
@@ -249,7 +248,7 @@ msgstr "هذا الخيار سيعيد كافة الإعدادات إلى الق
 
 #: ../pigeonplanner/messages.py:125
 msgid "Default settings"
-msgstr "البرنامج يحتاج إلى إعادة تشغيله لتفعيل التغييرات."
+msgstr "الاعدادات الافتراضية"
 
 #: ../pigeonplanner/messages.py:127
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
@@ -276,9 +275,8 @@ msgid "Error trying to get information. Are you connected to the internet?"
 msgstr "خطأ في محاولة الحصول على البيانات. هل أنت متصلا بالإنترنت؟"
 
 #: ../pigeonplanner/messages.py:140
-#, fuzzy
 msgid "A new version is available."
-msgstr "لا توجد معلومات إضافية متاحة"
+msgstr "يتوفر إصدار جديد."
 
 #: ../pigeonplanner/messages.py:141
 msgid "You already have the latest version installed."
@@ -318,15 +316,15 @@ msgstr "البوصات"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:42
 msgid "Feet"
-msgstr "قدم"
+msgstr "الأقدام"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:43
 msgid "Miles"
-msgstr "أميال"
+msgstr "الأميال"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:44
 msgid "Nautical Miles"
-msgstr "ميل بحري"
+msgstr "الاميال البحرية"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:47
 msgid "Yard per Minute"
@@ -334,11 +332,11 @@ msgstr "ياردة فى الدقيقة"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:48
 msgid "Metres per Minute"
-msgstr "متر فى الدقيقة"
+msgstr "الأمتار فى الدقيقة"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:49
 msgid "Metres per Second"
-msgstr "متر فى الثانية"
+msgstr "الامتار فى الثانية"
 
 #: ../pigeonplanner/ui/tools/velocitycalculator.py:50
 msgid "Kilometre per Hour"
@@ -371,7 +369,7 @@ msgstr "الأنواع"
 
 #: ../pigeonplanner/ui/tools/datamanager.py:35
 msgid "Categories"
-msgstr "الفئات"
+msgstr "الأقسام"
 
 #: ../pigeonplanner/ui/tools/datamanager.py:36
 #: ../pigeonplanner/ui/tools/datamanager.py:65
@@ -401,9 +399,9 @@ msgid "Wind"
 msgstr "الرياح"
 
 #: ../pigeonplanner/ui/tools/calendar.py:129
-#, fuzzy, python-format
+#, python-format
 msgid "Notification set on %s days"
-msgstr "التنبيهات تم تعيينها فى %s يوم مقدماً"
+msgstr "التنبية تم تعيينة فى %s ايام"
 
 #: ../pigeonplanner/ui/tools/calendar.py:132
 msgid "No notification set"
@@ -411,19 +409,19 @@ msgstr "لم يتم تعيين تنبيهات"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:110
 msgid "Shows the first picture"
-msgstr "يعرض اول صورة"
+msgstr "عرض اول صورة"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:112
 msgid "Shows previous picture"
-msgstr "يعرض الصوة السابقة"
+msgstr "عرض الصوة السابقة"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:114
 msgid "Shows the next picture"
-msgstr "يعرض الصورة التالية"
+msgstr "عرض الصورة التالية"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:116
 msgid "Shows the last picture"
-msgstr "يعرض آخر صورة"
+msgstr "عرض آخر صورة"
 
 #: ../pigeonplanner/ui/tools/photoalbum.py:118
 msgid "Zooms the picture in"
@@ -478,7 +476,7 @@ msgstr "طباعة هذه الشجرة"
 
 #: ../pigeonplanner/ui/printpreview.py:85
 msgid "Shows the first page"
-msgstr "يعرض الصفحة الأولى"
+msgstr "عرض الصفحة الأولى"
 
 #: ../pigeonplanner/ui/printpreview.py:87
 msgid "Shows previous page"
@@ -490,7 +488,7 @@ msgstr "يعرض الصفحة التالية"
 
 #: ../pigeonplanner/ui/printpreview.py:91
 msgid "Shows the last page"
-msgstr "يعرض الصفحة الأخيرة"
+msgstr "عرض الصفحة الأخيرة"
 
 #: ../pigeonplanner/ui/printpreview.py:93
 msgid "Zooms the page in"
@@ -502,26 +500,24 @@ msgstr "تصغير الصفحة"
 
 #: ../pigeonplanner/ui/printpreview.py:101
 msgid "Zooms to fit the whole page"
-msgstr "تكبيير لملائمة حجم الصفحة"
+msgstr "تكبيير لملائمة كامل الصفحة"
 
 #: ../pigeonplanner/ui/detailsview.py:45
-#, fuzzy
 msgid "Details of pigeon"
-msgstr "<b>تفاصيل عن الحمامة</b>"
+msgstr "تفاصيل عن الحمامة"
 
 #: ../pigeonplanner/ui/detailsview.py:47
-#, fuzzy, python-format
+#, python-format
 msgid "Details of %s"
-msgstr "تفاصيل الـ %s/%s"
+msgstr "تفاصيل عن %s"
 
 #: ../pigeonplanner/ui/dialogs.py:81
 msgid "Choose an image..."
 msgstr "إختار صورة ..."
 
 #: ../pigeonplanner/ui/dialogs.py:90
-#, fuzzy
 msgid "No image"
-msgstr "الصورة"
+msgstr "بدون صورة"
 
 #: ../pigeonplanner/ui/dialogs.py:126
 msgid "translator-credits"
@@ -533,18 +529,16 @@ msgstr ""
 "  egyptian https://launchpad.net/~oepc-org"
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
-#, fuzzy
 msgid "General information"
-msgstr "لا توجد معلومات شخصية."
+msgstr "معلومات عامة"
 
 #: ../pigeonplanner/ui/dialogs.py:162
 msgid "Technical details"
-msgstr ""
+msgstr "تفاصيل تقنية"
 
 #: ../pigeonplanner/ui/dialogs.py:165
-#, fuzzy
 msgid "Data information"
-msgstr "عمليات قاعدة البيانات :"
+msgstr "بيانات ومعلومات"
 
 #: ../pigeonplanner/ui/dialogs.py:189
 msgid "Number of pigeons"
@@ -672,7 +666,7 @@ msgstr "الدرجة"
 
 #: ../pigeonplanner/ui/resultwindow.py:110
 msgid "Place"
-msgstr "المكان"
+msgstr "المركز"
 
 #: ../pigeonplanner/ui/resultwindow.py:173
 msgid "Save these results"
@@ -718,7 +712,7 @@ msgstr "ايام"
 
 #: ../pigeonplanner/ui/optionsdialog.py:105
 msgid "day"
-msgstr "يوم"
+msgstr "اليوم"
 
 #: ../pigeonplanner/ui/tabs/relatives.py:30
 msgid "Relatives"
@@ -749,7 +743,7 @@ msgstr "السنة"
 
 #: ../pigeonplanner/ui/tabs/relatives.py:160
 msgid "Common parent"
-msgstr "الأصول"
+msgstr "الأصول المشتركة"
 
 #: ../pigeonplanner/ui/tabs/relatives.py:172
 #: ../pigeonplanner/ui/widgets/treeview.py:174
@@ -779,14 +773,14 @@ msgid "<b>Pedigree dam</b>"
 msgstr "<b>شجرة نسب الأم</b>"
 
 #: ../pigeonplanner/ui/mainwindow.py:177
-#, fuzzy, python-format
+#, python-format
 msgid "Pigeon %s has been added"
-msgstr "الحمامة %s/%s تم إضافتها"
+msgstr "تم اضافة الحمامة %s"
 
 #: ../pigeonplanner/ui/mainwindow.py:266
-#, fuzzy, python-format
+#, python-format
 msgid "Pigeon %s has been removed"
-msgstr "تم حذف الحمامة %s/%s"
+msgstr "تم حذف الحمامة %s"
 
 #: ../pigeonplanner/ui/mainwindow.py:275
 #, python-format
@@ -794,9 +788,8 @@ msgid "%s pigeons have been removed"
 msgstr "%s تم حذفة"
 
 #: ../pigeonplanner/ui/mainwindow.py:404 ../pigeonplanner/ui/mainwindow.py:663
-#, fuzzy
 msgid "Search for updates..."
-msgstr "البحث عن:"
+msgstr "البحث عن تحديثات"
 
 #: ../pigeonplanner/ui/mainwindow.py:602
 msgid "_File"
@@ -904,16 +897,15 @@ msgstr "إضافة نتيجة جديدة لهذة الحمامة"
 
 #: ../pigeonplanner/ui/mainwindow.py:642
 msgid "Configure the application"
-msgstr "إعداد  البرنامج"
+msgstr "ضبط البرنامج"
 
 #: ../pigeonplanner/ui/mainwindow.py:645 tmp/VelocityCalculator.ui.h:11
 msgid "Velocity calculator"
 msgstr "حاسبة السرعة"
 
 #: ../pigeonplanner/ui/mainwindow.py:646
-#, fuzzy
 msgid "Calculate the velocity of flights"
-msgstr "حساب السرعة"
+msgstr "حساب سرعة الطيران"
 
 #: ../pigeonplanner/ui/mainwindow.py:648
 msgid "_Photo Album"
@@ -924,32 +916,28 @@ msgid "View the images of your pigeons"
 msgstr "عرض الصور الخاصة بحمامك"
 
 #: ../pigeonplanner/ui/mainwindow.py:651 tmp/AddressBook.ui.h:1
-#, fuzzy
 msgid "Address book"
-msgstr "العنوان"
+msgstr "دفتر العناوين"
 
 #: ../pigeonplanner/ui/mainwindow.py:652
-#, fuzzy
 msgid "View the address book"
-msgstr "مشاهدة هذه النتيجة"
+msgstr "معاينة دفتر العناوين"
 
 #: ../pigeonplanner/ui/mainwindow.py:653 tmp/Calendar.ui.h:1
 msgid "Calendar"
 msgstr "الأجندة"
 
 #: ../pigeonplanner/ui/mainwindow.py:654
-#, fuzzy
 msgid "View the calendar"
-msgstr "اذهب الى الأجندة"
+msgstr "معاينة الأجندة"
 
 #: ../pigeonplanner/ui/mainwindow.py:655 tmp/DataManager.ui.h:3
-#, fuzzy
 msgid "Data manager"
-msgstr "قاعدة البيانات"
+msgstr "إدارة البيانات"
 
 #: ../pigeonplanner/ui/mainwindow.py:656
 msgid "Manage your data"
-msgstr ""
+msgstr "إدارة بياناتك"
 
 #: ../pigeonplanner/ui/mainwindow.py:657
 msgid "_Website"
@@ -969,7 +957,7 @@ msgstr "إذهب اللى المنتدى لطب الدعم الفنى"
 
 #: ../pigeonplanner/ui/mainwindow.py:664
 msgid "Search online for program updates"
-msgstr ""
+msgstr "البحث عن تحديثات للبرنامج"
 
 #: ../pigeonplanner/ui/mainwindow.py:669
 msgid "About this application"
@@ -981,7 +969,7 @@ msgstr "أسهم التصفح"
 
 #: ../pigeonplanner/ui/mainwindow.py:673 tmp/OptionsDialog.ui.h:39
 msgid "Show or hide the navigation arrows"
-msgstr "إظهار أو إخفاء اسهم التصفح"
+msgstr "إظهار / إخفاء اسهم التصفح"
 
 #: ../pigeonplanner/ui/mainwindow.py:675
 msgid "Statistics"
@@ -989,7 +977,7 @@ msgstr "الأحصائيات"
 
 #: ../pigeonplanner/ui/mainwindow.py:676 tmp/OptionsDialog.ui.h:38
 msgid "Show or hide pigeon statistics"
-msgstr "اظهار او اخفاء احصائيات الحمام"
+msgstr "اظهار / اخفاء احصائيات الحمام"
 
 #: ../pigeonplanner/ui/mainwindow.py:678
 msgid "Toolbar"
@@ -1005,26 +993,23 @@ msgstr "شريط الحالة"
 
 #: ../pigeonplanner/ui/mainwindow.py:682 tmp/OptionsDialog.ui.h:40
 msgid "Show or hide the statusbar"
-msgstr "إظهار أو إخفاء شريط الحالة"
+msgstr "إظهار / إخفاء شريط الحالة"
 
 #: ../pigeonplanner/ui/databasetool.py:38
-#, fuzzy
 msgid "Executing..."
-msgstr "جاري الإرسال ...."
+msgstr "تنفيذ ..."
 
 #: ../pigeonplanner/ui/databasetool.py:40
-#, fuzzy
 msgid "Error: see the logfile for more info."
-msgstr "راجع ملف السجل من قائمة (ملف >> عرض ملف السجل ) لمزيد من المعلومات."
+msgstr "خطأ : لمزيد من المعلومات انظر فى ملف السجل."
 
 #: ../pigeonplanner/ui/databasetool.py:41
 msgid "Operation cancelled"
-msgstr ""
+msgstr "تم الغاء العملية"
 
 #: ../pigeonplanner/ui/databasetool.py:42
-#, fuzzy
 msgid "Operation completed"
-msgstr "عملية التحسين تمت."
+msgstr "تمت العملية"
 
 #: ../pigeonplanner/ui/widgets/treeview.py:169
 msgid "Filter pigeons"
@@ -1099,7 +1084,7 @@ msgstr "المركز"
 
 #: ../pigeonplanner/printing.py:386 tmp/ResultsView.ui.h:5
 msgid "Out of"
-msgstr "من"
+msgstr "من أصل"
 
 #: ../pigeonplanner/printing.py:387
 msgid "Coef."
@@ -1131,7 +1116,7 @@ msgstr "السرعة"
 
 #: ../pigeonplanner/printing.py:609 tmp/VelocityCalculator.ui.h:7
 msgid "Released"
-msgstr "الإطلاق"
+msgstr "وقت الإطلاق"
 
 #: ../pigeonplanner/printing.py:611 tmp/VelocityCalculator.ui.h:2
 msgid "Distance"
@@ -1192,7 +1177,7 @@ msgstr "عدد الأيام سلفاً"
 
 #: tmp/DataManager.ui.h:1
 msgid "<b>Add items</b>"
-msgstr "<b>إضافة بند</b>"
+msgstr "<b>إضافة بنود</b>"
 
 #: tmp/DataManager.ui.h:2
 msgid "<b>Remove items</b>"
@@ -1207,30 +1192,32 @@ msgid "Item"
 msgstr "بند"
 
 #: tmp/DatabaseTool.ui.h:1
-#, fuzzy
 msgid "Check"
-msgstr "تحقق الان !"
+msgstr "تحقق"
 
 #: tmp/DatabaseTool.ui.h:2
 msgid "Check the database for errors and try to repair them."
-msgstr ""
+msgstr "تحقق من أخطاء قاعده بيانات وحاول اصلاحها"
 
 #: tmp/DatabaseTool.ui.h:3
 msgid ""
 "Delete the entire database from your hard drive. You will loose all pigeons, "
 "results and other data."
 msgstr ""
+"بحذف قاعدة البيانات بأكملها من القرص الصلب. سوف تفقدك كل بيانات الحمام، "
+"والنتائج وغيرها من البيانات."
 
 #: tmp/DatabaseTool.ui.h:5
-#, fuzzy
 msgid "Logfile"
-msgstr "عارض ملف السجل"
+msgstr "ملف السجل"
 
 #: tmp/DatabaseTool.ui.h:6
 msgid ""
 "Only execute SQL statements if you know what you are doing! Entering invalid "
 "or wrong statements may cause data loss!"
 msgstr ""
+"نفذ اوامر SQL فقط اذا كان لديك معرفة بها ! وتنفيذ اوامر خاطئة او غير صحيحة "
+"قد يؤدى الى فقد بياناتك!"
 
 #: tmp/DatabaseTool.ui.h:7
 msgid "Optimize"
@@ -1241,20 +1228,20 @@ msgid ""
 "Optimze the database tables. This will defragment the data and free unused "
 "space."
 msgstr ""
+"تحسين جداول قاعدة البيانات . هذه العملية ستنظم البيانات وتحرر المساحات غير "
+"المستخدمه."
 
 #: tmp/DatabaseTool.ui.h:9
-#, fuzzy
 msgid "Pigeon Planner database tool"
-msgstr "#عارض ملف السجل"
+msgstr "أداة قاعدة بيانات البرنامج"
 
 #: tmp/DatabaseTool.ui.h:10
 msgid "SQL"
-msgstr ""
+msgstr "لغة الاستعلام SQL"
 
 #: tmp/DatabaseTool.ui.h:11
-#, fuzzy
 msgid "Warning:"
-msgstr "تحذير"
+msgstr "تحذير:"
 
 #: tmp/DetailsView.ui.h:1
 msgid "<b>Details of pigeon</b>"
@@ -1266,7 +1253,7 @@ msgstr "المشتري"
 
 #: tmp/DetailsView.ui.h:4
 msgid "Choose a status for this pigeon:"
-msgstr "اختيار حالة هذاالطائر :"
+msgstr "تعيين حالة هذاالطائر :"
 
 #: tmp/DetailsView.ui.h:6 tmp/PedigreeWindow.ui.h:1
 msgid "Dam"
@@ -1274,7 +1261,7 @@ msgstr "الأم"
 
 #: tmp/DetailsView.ui.h:9 tmp/OptionsDialog.ui.h:23
 msgid "Extra"
-msgstr "معلومات إضافية"
+msgstr "إضافي"
 
 #: tmp/DetailsView.ui.h:10
 msgid "Extra info"
@@ -1286,7 +1273,7 @@ msgstr "لا توجد معلومات إضافية متاحة"
 
 #: tmp/DetailsView.ui.h:14
 msgid "Pigeon status"
-msgstr "حالة الطائر"
+msgstr "حالة الحمام"
 
 #: tmp/DetailsView.ui.h:18 tmp/PedigreeWindow.ui.h:4
 msgid "Sire"
@@ -1450,7 +1437,7 @@ msgstr "الصورة"
 
 #: tmp/OptionsDialog.ui.h:25
 msgid "Interval"
-msgstr "إستراحة"
+msgstr "الفاصل الزمني"
 
 #: tmp/OptionsDialog.ui.h:26
 msgid "Letter"
@@ -1470,11 +1457,11 @@ msgstr "الخيارات"
 
 #: tmp/OptionsDialog.ui.h:32
 msgid "Original"
-msgstr "اصلي"
+msgstr "الأصلي"
 
 #: tmp/OptionsDialog.ui.h:33
 msgid "Paper format:"
-msgstr "شكل الورقة:"
+msgstr "تنسيق الورق:"
 
 #: tmp/OptionsDialog.ui.h:34
 msgid "Pedigree layout:"
@@ -1518,11 +1505,11 @@ msgstr "إحسب"
 
 #: tmp/VelocityCalculator.ui.h:3
 msgid "Hours"
-msgstr "ساعات"
+msgstr "الساعات"
 
 #: tmp/VelocityCalculator.ui.h:4
 msgid "Minutes"
-msgstr "دقائق"
+msgstr "الدقائق"
 
 #: tmp/VelocityCalculator.ui.h:5
 msgid "Prognosis"
@@ -1534,78 +1521,50 @@ msgstr "النطاق"
 
 #: tmp/VelocityCalculator.ui.h:8
 msgid "Seconds"
-msgstr "ثوانٍ"
+msgstr "الثوانى"
 
 #: tmp/VelocityCalculator.ui.h:9
 msgid "Time"
 msgstr "الوقت"
 
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>إنشاء نسخة إحتياطية</b>"
+#~ msgid "Make a donation"
+#~ msgstr "تقديم تبرع"
 
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>تحسين قاعدة البيانات</b>"
+#~ msgid "All fields have to be entered."
+#~ msgstr "لابد من إدخال جميع الحقول."
 
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>حذف قاعدة البيانات</b>"
+#~ msgid "Remove result"
+#~ msgstr "حذف نتيجة"
 
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>إستعادة النسخة الإحتياطية</b>"
+#~ msgid "Remove address"
+#~ msgstr "حذف العنوان"
 
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>تحذير !</b>"
+#~ msgid "Remove item"
+#~ msgstr "حذف بند"
 
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>إضغط على الزر بالاسفل</i>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "إضافة وحذف بنود من مجموعة بياناتك"
+#~ msgid "Remove database"
+#~ msgstr "حذف قاعدة البيانات"
 
 #~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
-#~ msgstr "إنشاء وإستعادة نسخة إحتياطية من بيانات حمامك ونتائجك"
-
-#~ msgid "Downloadpage"
-#~ msgstr "صفحة التحميل"
-
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr "هنا يمكنك التحقق من وجود تحديثات للبرنامج."
-
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "هنا يمكنك مشاهدة  بعض الإحصاءات من قاعدة بياناتك"
-
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr "إذا قمت بحذف قاعدة البيانات ، ستفقد جميع بياناتك."
-
-#~ msgid "NOTE: You will only be notified when the program starts!"
-#~ msgstr "ملاحظة : سوف يتم إعلامك فقط عند بدء تشغيل البرنامج!"
-
-#~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
-#~ msgstr ""
-#~ "تحسين قاعدة البيانات الخاصة بك. \n"
-#~ "(يرجى الانتظار ، وهذا قد يستغرق بعض الوقت)"
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "التليفون/البريد الإلكترونى"
-
-#~ msgid "Tools"
-#~ msgstr "الأدوات"
-
-#~ msgid "Check now!"
-#~ msgstr "تحقق الان !"
-
-#~ msgid "Search database"
-#~ msgstr "البحث فى قاعدة البيانات"
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
 #~ msgstr ""
 #~ "انقر \"موافق \" لإغلاق البرنامج. سيتم إنشاء قاعدة بيانات جديدة عند تشغيل "
 #~ "البرنامج مرة أخرى."
+
+#~ msgid "Optimization has been completed."
+#~ msgstr "عملية التحسين تمت."
+
+#~ msgid "Personal"
+#~ msgstr "شخصى"
+
+#~ msgid ""
+#~ "This will set back all the settings to the default values.\n"
+#~ "Are you sure?"
+#~ msgstr "الإعدادات الافتراضية"
+
+#~ msgid "Update"
+#~ msgstr "تحديث"
 
 #~ msgid ""
 #~ "A new version is available. Please go to the Pigeon Planner website by "
@@ -1614,8 +1573,29 @@ msgstr "الوقت"
 #~ "نسخة جديدة متوفرة. يرجى الدخول إلى موقع البرنامج من خلال النقر على الرابط "
 #~ "أدناه وتنزيل أحدث إصدار"
 
-#~ msgid "Insert a pigeon"
-#~ msgstr "إدخال حمامة"
+#~ msgid "#Pigeon Planner configuration file"
+#~ msgstr "#عارض ملف السجل"
+
+#~ msgid "If there are any errors, mail the entire text to:"
+#~ msgstr "إذا كان هناك أية أخطاء, ارسل نص الخطأ الى :"
+
+#~ msgid "Year race"
+#~ msgstr "سنة السباق"
+
+#~ msgid "Year pigeons"
+#~ msgstr "سنة الحمام"
+
+#~ msgid "View image: "
+#~ msgstr "معاينة الصوره: "
+
+#~ msgid "Click to close this window"
+#~ msgstr "إضغط لإغلاق هذه النافذة"
+
+#~ msgid "All"
+#~ msgstr "الكل"
+
+#~ msgid "Tools"
+#~ msgstr "الأدوات"
 
 #~ msgid "Datasets"
 #~ msgstr "مجموعات البيانات"
@@ -1623,17 +1603,23 @@ msgstr "الوقت"
 #~ msgid "Addresses"
 #~ msgstr "العناوين"
 
-#~ msgid "Update"
-#~ msgstr "تحديث"
+#~ msgid "Database"
+#~ msgstr "قاعدة البيانات"
+
+#~ msgid "cock"
+#~ msgstr "ذكر"
+
+#~ msgid "hen"
+#~ msgstr "انثى"
+
+#~ msgid "young bird"
+#~ msgstr "يافع"
 
 #~ msgid "Enter the bandnumber of the pigeon"
 #~ msgstr "أدخل رقم دبلة الحمامة"
 
 #~ msgid "Enter the year of the pigeon"
 #~ msgstr "أدخل سنة ميلاد الحمامة"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "انقر هنا لضبط الحالة للحمام"
 
 #~ msgid "Enter a name for the pigeon"
 #~ msgstr "أدخل اسماً للحمامة"
@@ -1647,55 +1633,6 @@ msgstr "الوقت"
 #~ msgid "Search through the list of hens"
 #~ msgstr "البحث خلال قائمة الإناث"
 
-#~ msgid "Result has been removed"
-#~ msgstr "تم حذف النتيجة"
-
-#~ msgid "Result has been added"
-#~ msgstr "تم إضافة نتيجة"
-
-#~ msgid "Various tools"
-#~ msgstr "أدوات متنوعة"
-
-#, fuzzy
-#~ msgid "Multiple pigeons"
-#~ msgstr "فلترة الحمام"
-
-#~ msgid "Make a donation"
-#~ msgstr "تقديم تبرع"
-
-#~ msgid "Remove address"
-#~ msgstr "حذف العنوان"
-
-#~ msgid "Remove item"
-#~ msgstr "حذف بند"
-
-#~ msgid "Remove database"
-#~ msgstr "حذف قاعدة البيانات"
-
-#~ msgid "Personal"
-#~ msgstr "شخصى"
-
-#~ msgid "If there are any errors, mail the entire text to:"
-#~ msgstr "إذا كان هناك أية أخطاء, ارسل نص الخطأ الى :"
-
-#~ msgid "View image: "
-#~ msgstr "معاينة الصوره: "
-
-#~ msgid "Click to close this window"
-#~ msgstr "إضغط لإغلاق هذه النافذة"
-
-#~ msgid "All"
-#~ msgstr "الكل"
-
-#~ msgid "cock"
-#~ msgstr "ذكر"
-
-#~ msgid "hen"
-#~ msgstr "انثى"
-
-#~ msgid "young bird"
-#~ msgstr "يافع"
-
 #~ msgid "<b>Edit this result</b>"
 #~ msgstr "<b>تعديل هذه النتيجة</b>"
 
@@ -1705,6 +1642,9 @@ msgstr "الوقت"
 #~ msgid "_Search"
 #~ msgstr "_بحث"
 
+#~ msgid "_Filter pigeons"
+#~ msgstr "_فلترة الحمام"
+
 #~ msgid "_Quit"
 #~ msgstr "_إنهاء"
 
@@ -1713,6 +1653,9 @@ msgstr "الوقت"
 
 #~ msgid "_Remove"
 #~ msgstr "_حذف"
+
+#~ msgid "Various tools"
+#~ msgstr "أدوات متنوعة"
 
 #~ msgid "_Preferences"
 #~ msgstr "_التفضيلات"
@@ -1735,11 +1678,20 @@ msgstr "الوقت"
 #~ msgid "_Hens"
 #~ msgstr "_الإناث"
 
+#~ msgid "Only show hens"
+#~ msgstr "عرض الإناث فقط"
+
 #~ msgid "_Young birds"
 #~ msgstr "_الطيور اليافعة"
 
 #~ msgid "Only show young birds"
 #~ msgstr "إعرض الحمام اليافع فقط"
+
+#~ msgid "Add result"
+#~ msgstr "إضافة نتيجة"
+
+#~ msgid "Edit result"
+#~ msgstr "تعديل النتيجة"
 
 #~ msgid "Go to pigeon"
 #~ msgstr "إيجاد حمامة"
@@ -1747,8 +1699,14 @@ msgstr "الوقت"
 #~ msgid "View detail"
 #~ msgstr "مشاهدة التفاصيل"
 
+#~ msgid "Insert a pigeon"
+#~ msgstr "إدخال حمامة"
+
 #~ msgid "<b>Sort options</b>"
 #~ msgstr "<b>خيارات الترتيب</b>"
+
+#~ msgid "Pigeon"
+#~ msgstr "الحمام"
 
 #~ msgid "Results:"
 #~ msgstr "النتائج:"
@@ -1774,17 +1732,81 @@ msgstr "الوقت"
 #~ msgid "<b><i><big>Velocity calculator</big></i></b>"
 #~ msgstr "<b><i><big>حاسبة السرعة</big></i></b>"
 
+#~ msgid "<b>Create backup</b>"
+#~ msgstr "<b>إنشاء نسخة إحتياطية</b>"
+
+#~ msgid "<b>Optimize database</b>"
+#~ msgstr "<b>تحسين قاعدة البيانات</b>"
+
+#~ msgid "<b>Remove database</b>"
+#~ msgstr "<b>حذف قاعدة البيانات</b>"
+
+#~ msgid "<b>Restore backup</b>"
+#~ msgstr "<b>إستعادة النسخة الإحتياطية</b>"
+
+#~ msgid "<b>Warning!</b>"
+#~ msgstr "<b>تحذير !</b>"
+
+#~ msgid "<i>Click the button below</i>"
+#~ msgstr "<i>إضغط على الزر بالاسفل</i>"
+
+#~ msgid "Add and remove items from your datasets"
+#~ msgstr "إضافة وحذف بنود من مجموعة بياناتك"
+
+#~ msgid "Calculate velocity"
+#~ msgstr "حساب السرعة"
+
+#~ msgid "Check now!"
+#~ msgstr "تحقق الان !"
+
+#~ msgid ""
+#~ "Create and restore backups from\n"
+#~ "your pigeons and results."
+#~ msgstr "إنشاء وإستعادة نسخة إحتياطية من بيانات حمامك ونتائجك"
+
 #~ msgid "Distance (km)"
 #~ msgstr "المسافة (كم)"
+
+#~ msgid "Downloadpage"
+#~ msgstr "صفحة التحميل"
 
 #~ msgid "From - To (meter/min)"
 #~ msgstr "من -  إلى (متر/دقيقة)"
 
+#~ msgid "Here you can check if there is a program update available."
+#~ msgstr "هنا يمكنك التحقق من وجود تحديثات للبرنامج."
+
+#~ msgid "Here you can see some statistics of your database"
+#~ msgstr "هنا يمكنك مشاهدة  بعض الإحصاءات من قاعدة بياناتك"
+
+#~ msgid "If you remove the database, all your data will be lost."
+#~ msgstr "إذا قمت بحذف قاعدة البيانات ، ستفقد جميع بياناتك."
+
+#~ msgid ""
+#~ "Optimize your database.\n"
+#~ "(Please wait, this can take some time)"
+#~ msgstr ""
+#~ "تحسين قاعدة البيانات الخاصة بك. \n"
+#~ "(يرجى الانتظار ، وهذا قد يستغرق بعض الوقت)"
+
+#~ msgid "Phone / E-mail"
+#~ msgstr "التليفون/البريد الإلكترونى"
+
 #~ msgid "Released (hh : mm)"
 #~ msgstr "وقت الإطلاق (ساعة : دقيقة)"
 
+#~ msgid "Search database"
+#~ msgstr "البحث فى قاعدة البيانات"
+
 #~ msgid "Could not find the original image, full size image is not available."
 #~ msgstr "تعذر العثور على الصورة الأصلية ، والصورة بالحجم الكامل غير متوفرة."
+
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "حذف '%(item)s' من '%(dataset)s'."
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "انقر هنا لضبط الحالة للحمام"
 
 #~ msgid "<b><i><big>Update failed</big></i></b>"
 #~ msgstr "<b><i><big>فشل التحديث</big></i></b>"
@@ -1822,8 +1844,7 @@ msgstr "الوقت"
 #~ msgstr ""
 #~ "البرنامج فشل فى تحديث قاعدة البيانات.\\n\n"
 #~ "\\n\n"
-#~ "تم استعادة نسخة البيانات الاحتياطية وعلية يمكنك استخدام الاصدار السابق."
-#~ "\\n\n"
+#~ "تم استعادة نسخة البيانات الاحتياطية وعلية يمكنك استخدام الاصدار السابق.\\n\n"
 #~ "\\n\n"
 #~ "سيتم إنشاء سجل للخطأ عند إغلاق هذه النافذة."
 
@@ -1835,6 +1856,9 @@ msgstr "الوقت"
 
 #~ msgid "Cleaning up..."
 #~ msgstr "تنظيف..."
+
+#~ msgid "Database operations:"
+#~ msgstr "عمليات قاعدة البيانات :"
 
 #~ msgid "<b><i><big>Update required</big></i></b>"
 #~ msgstr "<b><i><big>التحديث مطلوب</big></i></b>"
@@ -1867,3 +1891,188 @@ msgstr "الوقت"
 
 #~ msgid "sold"
 #~ msgstr "تم بيعة"
+
+#~ msgid "Error loading this image. Probably you have moved it on your disk."
+#~ msgstr "خطأ في تحميل هذه الصورة. ربما كنت قد نقلتها من مكانها على القرص."
+
+#, python-format
+#~ msgid ""
+#~ "The ringnumber and year of the %s are necessary.\n"
+#~ "\n"
+#~ "Check if these are entered."
+#~ msgstr ""
+#~ "رقم الدبلة والسنة لـ %s ضروري.\n"
+#~ "\n"
+#~ "تحقق من ادخال هذه البيانات."
+
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the ringnumber or year of the %s.\n"
+#~ "\n"
+#~ "Only numbers are accepted."
+#~ msgstr ""
+#~ "مدخلات غير صحيحة لرقم الدبلة والسنة لـ %s.\n"
+#~ "\n"
+#~ "هذا الحقل يقبل ارقام فقط."
+
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the ringnumber or year of the %s.\n"
+#~ "\n"
+#~ "Check the length."
+#~ msgstr ""
+#~ "مدخلات غير صحيحة لرقم الدبلة والسنة لـ %s.\n"
+#~ "\n"
+#~ "تحقق من الطول."
+
+#~ msgid ""
+#~ "You have not entered your personal information.\n"
+#~ "This will be shown on top of the printed pedigree.\n"
+#~ "Do you want to add it now?"
+#~ msgstr ""
+#~ "لم تقم بإدخال بياناتك الشخصية.\n"
+#~ "هذه البيانات ستظهر فى اعلى الشهاداة عن طباعتها.\n"
+#~ "هل تريد اضافتها الان؟"
+
+#, python-format
+#~ msgid ""
+#~ "Removing item '%(item)s' from '%(dataset)s'.\n"
+#~ "\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "حذف البند '%(item)s' من '%(dataset)s'.\n"
+#~ "\n"
+#~ "هل انت متاكد؟"
+
+#~ msgid "sire"
+#~ msgstr "الأب"
+
+#~ msgid "dam"
+#~ msgstr "الأم"
+
+#~ msgid "pigeon"
+#~ msgstr "حمامة"
+
+#~ msgid "Date: "
+#~ msgstr "التاريخ: "
+
+#~ msgid "Released: "
+#~ msgstr "الإطلاق "
+
+#~ msgid "Distance: "
+#~ msgstr "المسافة: "
+
+#~ msgid "PP Backups"
+#~ msgstr "عمل نسخة احتياطية للبرنامج"
+
+#~ msgid "pigeons"
+#~ msgstr "الحمام"
+
+#, python-format
+#~ msgid ""
+#~ "Warning: The '%(option)s' option is not set in the '%(section)s' section of "
+#~ "the configuration file, using the default '%(default)s'."
+#~ msgstr ""
+#~ "تحذير : الخيار '%(option)s' لم يتم تحديدة فى القسم '%(section)s' فى ملف "
+#~ "الاعدادات, استخدم الافتراضى '%(default)s'."
+
+#, python-format
+#~ msgid ""
+#~ "Warning: There is no section '%(section)s' in the configuration file; an "
+#~ "error occured parsing its option '%(option)s', using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "تحذير: لا يوجد قسم  '%(section)s'  فى ملف الاعدادات; حدث خطأ عند تحليل "
+#~ "الخيار '%(option)s', استخدم الافتراضى '%(default)s'."
+
+#, python-format
+#~ msgid ""
+#~ "Error: There went something wrong parsing the '%(option)s' option in the "
+#~ "'%(section)s' section of the configuration file, using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "خطأ: حدث شىء ما خطأ اثناء تحليل خيار '%(option)s'  فى قسم '%(section)s'  فى "
+#~ "ملف الاعدادات, استخدم الافتراضى  '%(default)s'."
+
+#~ msgid "Add a series of pigeons"
+#~ msgstr "إضافة مجموعة من الحمام"
+
+#~ msgid "Add a single pigeon"
+#~ msgstr "إضافة حمامة واحدة"
+
+#~ msgid "All birds"
+#~ msgstr "كل الطيور"
+
+#~ msgid "Enter a name for this pigeon..."
+#~ msgstr "أدخل اسما لهذا الطائر..."
+
+#~ msgid "Filter"
+#~ msgstr "فلترة"
+
+#~ msgid "At position:"
+#~ msgstr "في الموقف :"
+
+#~ msgid "City"
+#~ msgstr "المدينة"
+
+#~ msgid ""
+#~ "Enter some information about yourself.\n"
+#~ "This will be shown on a printed pedigree."
+#~ msgstr ""
+#~ "إدخل بعض البيانات عن نفسك.\n"
+#~ "هذه البيانات ستظهر فى شهادة النسب عند الطباعة."
+
+#~ msgid "First & last name"
+#~ msgstr "الاسم الاول والاخير"
+
+#~ msgid "Show an extra column"
+#~ msgstr "اظهار عمود إضافي"
+
+#~ msgid "Show navigation arrows"
+#~ msgstr "إظهار اسهم التنقل"
+
+#~ msgid "Street & number"
+#~ msgstr "الشارع والرقم"
+
+#~ msgid "Telephone number"
+#~ msgstr "رقم التليفون"
+
+#~ msgid "Value of column:"
+#~ msgstr "قيمة العمود :"
+
+#~ msgid "Zipcode"
+#~ msgstr "الرقم البريدي"
+
+#~ msgid "Remove items from your datasets"
+#~ msgstr "إزالة عناصر من مجموعات البيانات الخاصة بك"
+
+#~ msgid "Een map selecteren"
+#~ msgstr "اختيار مجلد"
+
+#, python-format
+#~ msgid "Notification is set on %s days in advance"
+#~ msgstr "التنبيهات تم تعيينها فى %s يوم مقدماً"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been removed"
+#~ msgstr "تم حذف الحمامة %s/%s"
+
+#~ msgid "Result has been removed"
+#~ msgstr "تم حذف النتيجة"
+
+#~ msgid "Result has been added"
+#~ msgstr "تم إضافة نتيجة"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been added"
+#~ msgstr "الحمامة %s/%s تم إضافتها"
+
+#, python-format
+#~ msgid "Details of %s/%s"
+#~ msgstr "تفاصيل الـ %s/%s"
+
+#~ msgid "NOTE: You will only be notified when the program starts!"
+#~ msgstr "ملاحظة : سوف يتم إعلامك فقط عند بدء تشغيل البرنامج!"
+
+#~ msgid "Multiple pigeons"
+#~ msgstr "مجموعه حمام"
