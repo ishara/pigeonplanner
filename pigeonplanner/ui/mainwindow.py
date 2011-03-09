@@ -262,12 +262,13 @@ class MainWindow(builder.GtkBuilder):
         model, paths = self.selection.get_selected_rows()
 
         if self.selection.count_selected_rows() == 1:
-            logger.info("Remove: Removing one pigeon")
             pigeon = self.treeview.get_selected_pigeon()
+            pindex = pigeon.get_pindex()
             pigeonlabel = pigeon.get_band_string()
             statusbarmsg = _("Pigeon %s has been removed") %pigeonlabel
-            show_result_option = self.database.has_results(pigeon.get_pindex())
+            show_result_option = self.database.has_results(pindex)
             pigeons = [pigeon]
+            logger.info("Remove: Removing pigeon '%s'", pindex)
         else:
             logger.info("Remove: Removing multiple pigeons")
             pigeons = [pobj for pobj in self.treeview.get_selected_pigeon()]
