@@ -198,17 +198,12 @@ class Startup(object):
         except NameError:
             self.setup_locale()
 
-        from pigeonplanner.ui import logdialog
-
         tb = "".join(traceback.format_exception(type_, value, tb))
         print >> sys.stderr, tb
-
-        tbtext = ''
         for line in tb.split('\n'):
             if line:
-                tbtext += "TRACEBACK: %s\n" % line
-        logfile = open(const.LOGFILE, "a")
-        logfile.write(tbtext)
-        logfile.close()
+                self.logger.critical(line)
+
+        from pigeonplanner.ui import logdialog
         logdialog.LogDialog(self.db)
 
