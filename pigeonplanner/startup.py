@@ -200,9 +200,18 @@ class Startup(object):
 
         tb = "".join(traceback.format_exception(type_, value, tb))
         print >> sys.stderr, tb
+        use_logger = True
+        if self.logger is None:
+            use_logger = False
+            logfile = open(const.LOGFILE, 'a')
         for line in tb.split('\n'):
             if line:
-                self.logger.critical(line)
+                if use_logger:
+                    self.logger.critical(line)
+                else:
+                    logfile.write("TRACEBACK: %s\n" % line)
+        if not use_logger:
+            logfile.close()
 
         from pigeonplanner.ui import logdialog
         logdialog.LogDialog(self.db)
