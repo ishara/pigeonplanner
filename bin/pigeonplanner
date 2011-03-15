@@ -49,7 +49,16 @@ if __name__ == "__main__":
 
     from pigeonplanner import startup
     app = startup.Startup()
-    app.setup_logging()
+    #TODO: find a better (and crossplatform) way
+    try:
+        app.setup_logging()
+    except WindowsError, exc:
+        text = "The program or database tool is already running!"
+        dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, text)
+        dialog.set_title("Already running - Pigeon Planner")
+        dialog.run()
+        dialog.destroy()
+        raise SystemExit(text)
     app.setup_locale()
     app.setup_theme()
     app.setup_database()
