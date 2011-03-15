@@ -101,6 +101,13 @@ class Startup(object):
                             filemode='w')
         self.logger = logging.getLogger(self.__class__.__name__)
 
+        #TODO: Add command-line arguments to enable console logging and set level
+        console = logging.StreamHandler()
+        console.setLevel(logging.DEBUG)
+        formatter = logging.Formatter(const.LOG_FORMAT_CLI)
+        console.setFormatter(formatter)
+        logging.getLogger('').addHandler(console)
+
         self.logger.info("Version: %s" % const.VERSION)
         self.logger.debug("Home path: %s" % const.HOMEDIR)
         self.logger.debug("Prefs path: %s" % const.PREFDIR)

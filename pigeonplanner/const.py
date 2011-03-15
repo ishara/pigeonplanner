@@ -129,6 +129,7 @@ DOMAIN = 'pigeonplanner'
 USER_AGENT = {"User-Agent": "Pigeon Planner/%s" % VERSION}
 
 LOG_FORMAT = '[%(asctime)s] %(name)s %(levelname)s: %(message)s'
+LOG_FORMAT_CLI = '%(name)s %(levelname)s: %(message)s'
 DATE_FORMAT = '%Y-%m-%d'
 
 LOGO_IMG = gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(
