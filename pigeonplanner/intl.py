@@ -479,7 +479,7 @@ def install(domain, localedir, language):
     use :func:`elib.intl.install_module` to make _() available to your module.
     '''
     # Normalize the given language
-    if language == 'Default':
+    if language in ('def', 'Default'):
         language = ''
     else:
         language = locale.normalize(language).split('.')[0]+'.UTF-8'
@@ -490,6 +490,6 @@ def install(domain, localedir, language):
         langTranslation.install(unicode=True)
     except IOError, exc:
         if language != '':
-            logger.error(exc)
+            logger.error("Couldn't set language for '%s': %s" % (language, exc))
         gettext.install(domain, localedir, unicode=True)
 
