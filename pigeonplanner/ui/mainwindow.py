@@ -196,7 +196,7 @@ class MainWindow(builder.GtkBuilder):
         self.statusbar.pop(-1)
 
     def menuprintpedigree_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         pigeon = self.treeview.get_selected_pigeon()
         if pigeon is None: return
         userinfo = common.get_own_address(self.database)
@@ -204,46 +204,45 @@ class MainWindow(builder.GtkBuilder):
                                self.options, const.PRINT, '', self.parser)
 
     def menuprintblank_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         userinfo = common.get_own_address(self.database)
         printing.PrintPedigree(self.mainwindow, None, userinfo,
                                self.options, const.PRINT, '', self.parser)
 
     def menubackup_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         dialog = dialogs.BackupDialog(self.mainwindow, const.CREATE)
         dialog.run()
         dialog.destroy()
 
     def menurestore_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         dialog = dialogs.BackupDialog(self.mainwindow, const.RESTORE)
         dialog.run()
         dialog.destroy()
 
     def menuclose_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         self.quit_program()
 
     def menusearch_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         self.treeview.run_searchdialog(self.mainwindow)
 
     def menualbum_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         tools.PhotoAlbum(self.mainwindow, self.parser, self.database)
 
     def menulog_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         logdialog.LogDialog(self.database)
 
     def menuadd_activate(self, widget):
-        logger.info(common.get_function_name())
         self._clear_pigeon_data()
         self._start_edit(const.ADD)
 
     def menuaddrange_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         self.entryRangeFrom.set_text('')
         self.entryRangeTo.set_text('')
         self.entryRangeYear.set_text('')
@@ -252,13 +251,11 @@ class MainWindow(builder.GtkBuilder):
         self.rangedialog.show()
 
     def menuedit_activate(self, widget):
-        logger.info(common.get_function_name())
         model, paths = self.selection.get_selected_rows()
         if len(paths) != 1: return
         self._start_edit(const.EDIT)
 
     def menuremove_activate(self, widget):
-        logger.info(common.get_function_name())
         model, paths = self.selection.get_selected_rows()
 
         if self.selection.count_selected_rows() == 1:
@@ -268,9 +265,9 @@ class MainWindow(builder.GtkBuilder):
             statusbarmsg = _("Pigeon %s has been removed") %pigeonlabel
             show_result_option = self.database.has_results(pindex)
             pigeons = [pigeon]
-            logger.info("Remove: Removing pigeon '%s'", pindex)
+            logger.debug("Start removing pigeon '%s'", pindex)
         else:
-            logger.info("Remove: Removing multiple pigeons")
+            logger.debug("Start removing multiple pigeons")
             pigeons = [pobj for pobj in self.treeview.get_selected_pigeon()]
             bands = ['%s' %pigeon.get_band_string() for pigeon in
                      self.treeview.get_selected_pigeon()]
@@ -290,12 +287,12 @@ class MainWindow(builder.GtkBuilder):
         answer = self.removedialog.run()
         if answer == 2:
             if self.chkKeep.get_active():
-                logger.info("Remove: Hiding the pigeon(s)")
+                logger.debug("Remove: Hiding the pigeon(s)")
                 for pigeon in pigeons:
                     self.database.update_table(self.database.PIGEONS,
                                                (0, pigeon.get_pindex()), 5, 1)
             else:
-                logger.info("Remove: Removing the pigeon(s)")
+                logger.debug("Remove: Removing the pigeon(s)")
                 for pigeon in pigeons:
                     pindex = pigeon.get_pindex()
                     self.database.delete_from_table(self.database.PIGEONS, pindex)
@@ -313,7 +310,7 @@ class MainWindow(builder.GtkBuilder):
                     self.parser.remove_pigeon(pindex)
 
             if not self.chkResults.get_active():
-                logger.info("Remove: Removing the results")
+                logger.debug("Remove: Removing the results")
                 for pigeon in pigeons:
                     self.database.delete_from_table(self.database.RESULTS,
                                                     pigeon.get_pindex())
@@ -326,78 +323,76 @@ class MainWindow(builder.GtkBuilder):
             self.selection.select_path(paths[-1])
             self._set_statistics()
             common.add_statusbar_message(self.statusbar, statusbarmsg)
+        else:
+            logger.debug("Remove operation cancelled")
         self.removedialog.hide()
 
     def menupedigree_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         pigeon = self.treeview.get_selected_pigeon()
         pedigreewindow.PedigreeWindow(self.mainwindow, self.database, self.options,
                                       self.parser, self.pedigree, pigeon)
 
     def menuaddresult_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         self.notebook.set_current_page(2)
         self.resultstab.add_new_result()
 
     def menufilter_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         self.treeview.run_filterdialog(self.mainwindow, self.database)
 
     def menupref_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         dialog = optionsdialog.OptionsDialog(self.mainwindow, self.options)
         dialog.connect('interface-changed', self.on_interface_changed)
 
     def menuarrows_toggled(self, widget):
-        logger.info(common.get_function_name())
         value = widget.get_active()
         self.set_multiple_visible([self.vboxButtons], value)
         self.options.set_option('Options', 'arrows', str(value))
 
     def menustats_toggled(self, widget):
-        logger.info(common.get_function_name())
         value = widget.get_active()
         self.set_multiple_visible([self.alignStats], value)
         self.options.set_option('Options', 'stats', str(value))
 
     def menutoolbar_toggled(self, widget):
-        logger.info(common.get_function_name())
         value = widget.get_active()
         self.set_multiple_visible([self.toolbar], value)
         self.options.set_option('Options', 'toolbar', str(value))
 
     def menustatusbar_toggled(self, widget):
-        logger.info(common.get_function_name())
         value = widget.get_active()
         self.set_multiple_visible([self.statusbar], value)
         self.options.set_option('Options', 'statusbar', str(value))
 
     def menuvelocity_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         tools.VelocityCalculator(self.mainwindow, self.database, self.options)
 
     def menuaddresses_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         tools.AddressBook(self.mainwindow, self.database)
 
     def menucalendar_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         tools.Calendar(self.mainwindow, self.database)
 
     def menudata_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         tools.DataManager(self.mainwindow, self.database)
 
     def menuhome_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         webbrowser.open(const.WEBSITE)
 
     def menuforum_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         webbrowser.open(const.FORUMURL)
 
     def menuupdate_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         try:
             new, msg = update.update()
         except update.UpdateError, exc:
@@ -416,11 +411,11 @@ class MainWindow(builder.GtkBuilder):
                                   self.mainwindow)
 
     def menuinfo_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         dialogs.InfoDialog(self.mainwindow, self.database)
 
     def menuabout_activate(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         dialogs.AboutDialog(self.mainwindow)
 
     # range callbacks
@@ -441,10 +436,12 @@ class MainWindow(builder.GtkBuilder):
                                   self.mainwindow)
             return
 
+        logger.debug("Adding a range of pigeons")
         value = int(rangefrom)
         while value <= int(rangeto):
             band = str(value)
             pindex = common.get_pindex_from_band(band, rangeyear)
+            logger.debug("Range: adding '%s'", pindex)
             if self.database.has_pigeon(pindex):
                 d = dialogs.MessageDialog(const.WARNING,
                                           messages.MSG_OVERWRITE_PIGEON,

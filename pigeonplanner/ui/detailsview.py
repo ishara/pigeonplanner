@@ -162,8 +162,10 @@ class DetailsView(builder.GtkBuilder):
             self.pigeon = self.parser.add_pigeon(pindex=data[0])
         self.emit('edit-finished', self.pigeon, self._operation)
         self._finish_edit(data)
+        logger.debug("Operation '%s' finished", self._operation)
 
     def on_buttoncancel_clicked(self, widget):
+        logger.debug("Operation '%s' cancelled", self._operation)
         self.emit('edit-cancelled')
         self._finish_edit()
 
@@ -359,6 +361,7 @@ class DetailsView(builder.GtkBuilder):
     def start_edit(self, operation):
         self._operation = operation
         if operation == const.EDIT:
+            logger.debug("Start editing pigeon '%s'", self.pigeon.get_pindex())
             self.entrybandedit.set_band(*self.entryband.get_band())
             self.entrysireedit.set_band(*self.entrysire.get_band())
             self.entrydamedit.set_band(*self.entrydam.get_band())
@@ -384,6 +387,8 @@ class DetailsView(builder.GtkBuilder):
             else:
                 pixbuf = self._get_pigeon_thumbnail(image)
                 self.imagepigeonedit.set_from_pixbuf(pixbuf)
+        else:
+            logger.debug("Start adding a pigeon")
 
         self.detailbook.set_current_page(1)
         self.entrybandedit.grab_focus()
