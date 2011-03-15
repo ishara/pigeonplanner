@@ -28,6 +28,8 @@ import urllib2
 import os.path
 import datetime
 import webbrowser
+import logging
+logger = logging.getLogger(__name__)
 
 import gtk
 import gobject
@@ -207,8 +209,12 @@ def image_to_thumb(img_path):
     @param img_path: the full path to the image
     """
 
-    pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img_path, 200, 200)
-    pixbuf.save(get_thumb_path(img_path), 'png')
+    try:
+        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img_path, 200, 200)
+    except gobject.GError:
+        logger.error("Couldn't create thumbnail from: %s", img_path)
+    else:
+        pixbuf.save(get_thumb_path(img_path), 'png')
 
 def get_thumb_path(image):
     """
