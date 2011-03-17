@@ -31,6 +31,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from pigeonplanner import const
+from pigeonplanner import common
 from pigeonplanner import messages
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui import pedigree
@@ -85,7 +86,7 @@ class BasePrinting(object):
             fc.add_filter(filefilters.PdfFilter())
 
             fc.set_current_name(pdf_name)
-            fc.set_current_folder(const.HOMEDIR)
+            fc.set_current_folder(common.get_unicode_path(const.HOMEDIR))
 
             response = fc.run()
             save_path = None
