@@ -96,6 +96,34 @@ def encode_string(string):
 
     return string.decode(const.ENCODING).encode("utf-8")
 
+def get_unicode_path(path):
+    """
+    Return the Unicode version of a path string.
+
+    @param path: The path to be converted to Unicode
+    @type path: str
+    @returns: The Unicode version of path
+    @rtype: unicode
+    """
+
+    if not isinstance(path, str):
+        return path
+
+    if const.WINDOWS:
+        # In Windows path/filename returned from an environment variable
+        # is in filesystemencoding
+        try:
+            return unicode(path, sys.getfilesystemencoding())
+        except:
+            print "Problem encountered converting string: %s." % path
+            return unicode(path, sys.getfilesystemencoding(), errors='replace')
+    else:
+        try:
+            return unicode(path)
+        except:
+            print "Problem encountered converting string: %s." % path
+            return unicode(path, sys.getfilesystemencoding(), errors='replace')
+
 def count_active_pigeons(database):
     """
     Count the active pigeons as total and seperate sexes
@@ -223,11 +251,8 @@ def get_thumb_path(image):
     @param image: the full path to the image
     """
 
-    path = os.path.join(const.THUMBDIR, "%s.png") %get_image_name(image)
-
-    if not const.ENCODING == 'utf-8':
-        return encode_string(path)
-    return path
+    path = os.path.join(const.THUMBDIR, "%s.png") % get_image_name(image)
+    return get_unicode_path(path)
 
 def get_image_name(name):
     """
