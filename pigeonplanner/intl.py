@@ -489,7 +489,7 @@ def install(domain, localedir, language):
         langTranslation = gettext.translation(domain, localedir, [language])
         langTranslation.install(unicode=True)
     except IOError, exc:
-        if language != '':
-            logger.error("Couldn't set language for '%s': %s" % (language, exc))
+        if language not in ('', 'en_US.UTF-8'):
+            logger.info("Couldn't set language for '%s': %s" % (language, exc))
         gettext.install(domain, localedir, unicode=True)
 
