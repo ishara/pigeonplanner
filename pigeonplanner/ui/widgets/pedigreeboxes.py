@@ -325,15 +325,6 @@ class ExtraBox(gtk.DrawingArea):
         if pigeon is not None:
             extra = pigeon.get_extra()
             self.text = format_text('\n'.join(extra[:lines]))
-
-#        self.connect("expose_event", self.expose)
-#        self.connect("realize", self.realize)
-
-#        self.text = '\n'.join(details[:rows])
-
-#        if self.text != '':
-#            self.text = format_text(self.text)
-
         self.textlayout = self.create_pango_layout(self.text)
         s = self.textlayout.get_pixel_size()
         xmin = s[0] + 12
