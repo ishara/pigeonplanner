@@ -45,6 +45,9 @@ MSG_SHOW_PIGEON = (_("This pigeon already exists, but isn't showing. Do you want
 MSG_OVERWRITE_PIGEON = (_("This pigeon already exists. Overwrite it?"),
                         None,
                         WARNING)
+MSG_PIGEON_EXISTS = (_("This pigeon already exists."),
+                     None,
+                     ERROR)
 MSG_ADD_PIGEON = (_("This pigeon doesn't exist. Do you want to add it?"),
                   None,
                   _("Adding pigeon"))

@@ -37,6 +37,9 @@ from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.widgets import comboboxes
 
 
+class PigeonAlreadyExists(Exception): pass
+
+
 class DetailsDialog(gtk.Dialog):
     def __init__(self, database, parser, pigeon=None, parent=None, mode=None):
         gtk.Dialog.__init__(self, None, parent, gtk.DIALOG_MODAL,
@@ -151,14 +154,17 @@ class DetailsView(builder.GtkBuilder):
             except checks.InvalidInputError, msg:
                 dialogs.MessageDialog(const.ERROR, msg.value, self.parent)
                 return
-
         data = self.get_details()
         if self._operation == const.EDIT:
             self._update_pigeon_data(data)
             old_pindex = self.pigeon.get_pindex()
             self.pigeon = self.parser.update_pigeon(data[0], old_pindex)
         elif self._operation == const.ADD:
-            self._add_pigeon_data(data)
+            try:
+                self._add_pigeon_data(data)
+            except PigeonAlreadyExists, msg:
+                logger.debug("Pigeon already exists '%s'", msg)
+                return
             self.pigeon = self.parser.add_pigeon(pindex=data[0])
         self.emit('edit-finished', self.pigeon, self._operation)
         self._finish_edit(data)
@@ -573,32 +579,29 @@ class DetailsView(builder.GtkBuilder):
         datalist.insert(0, pindex)
 
         # First we do some checks
-        really_add = True
         if self.database.has_pigeon(pindex):
             if self.parser.pigeons[pindex].show == 1:
-                # The pigeon already exists, ask the user to overwrite
-                d = dialogs.MessageDialog(const.WARNING,
-                                          messages.MSG_OVERWRITE_PIGEON,
-                                          self.parent)
-                if not d.yes:
-                    return
+                # The pigeon already exists, don't add it
+                dialogs.MessageDialog(const.ERROR, messages.MSG_PIGEON_EXISTS,
+                                      self.parent)
+                raise PigeonAlreadyExists(pindex)
             else:
                 # The pigeon exists, but doesn't show, ask to show again
                 d = dialogs.MessageDialog(const.WARNING,
                                           messages.MSG_SHOW_PIGEON,
                                           self.parent)
                 if d.yes:
+                    self.parser.show = 1
                     self.database.update_table(self.database.PIGEONS,
                                                (1, pindex), 5, 1)
-                    really_add = False
-                else:
-                    return
+                # Always return here. Either way the user doesn't want it
+                # to show, or it is already set to visible, so don't add it.
+                return
         # Checks say that this is really a none existing pigeon, so add it
-        if really_add:
-            self.database.insert_into_table(self.database.PIGEONS, datalist)
-            image = datalist[10]
-            if image:
-                common.image_to_thumb(image)
-            status = self.combostatus.get_active()
-            self._insert_status_data(status, pindex)
+        self.database.insert_into_table(self.database.PIGEONS, datalist)
+        image = datalist[10]
+        if image:
+            common.image_to_thumb(image)
+        status = self.combostatus.get_active()
+        self._insert_status_data(status, pindex)
 
