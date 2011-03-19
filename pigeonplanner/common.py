@@ -21,6 +21,7 @@ Functions for some common tasks
 
 
 import os
+import sys
 import random
 import inspect
 import urllib2
