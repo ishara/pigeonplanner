@@ -289,6 +289,7 @@ class MainWindow(builder.GtkBuilder):
             if self.chkKeep.get_active():
                 logger.debug("Remove: Hiding the pigeon(s)")
                 for pigeon in pigeons:
+                    pigeon.show = 0
                     self.database.update_table(self.database.PIGEONS,
                                                (0, pigeon.get_pindex()), 5, 1)
             else:
