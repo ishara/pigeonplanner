@@ -26,6 +26,7 @@ import os.path
 import sys
 import logging
 import webbrowser
+from optparse import OptionParser
 
 import gtk
 import gobject
@@ -76,6 +77,13 @@ class Startup(object):
         # Detect if program is running for the first time
         self.firstrun = not os.path.isdir(const.PREFDIR)
 
+        # Parse arguments
+        parser = OptionParser(version=const.VERSION)
+        parser.add_option("-d", action="store_true", dest="debug",
+                          help="Print debug messages to the console")
+        options, args = parser.parse_args()
+        self._loglevel = logging.DEBUG if options.debug else logging.WARNING
+
         # Initialize options
         from pigeonplanner import options
         self.options = options.GetOptions()
@@ -101,9 +109,8 @@ class Startup(object):
                             filemode='w')
         self.logger = logging.getLogger(self.__class__.__name__)
 
-        #TODO: Add command-line arguments to enable console logging and set level
         console = logging.StreamHandler()
-        console.setLevel(logging.DEBUG)
+        console.setLevel(self._loglevel)
         formatter = logging.Formatter(const.LOG_FORMAT_CLI)
         console.setFormatter(formatter)
         logging.getLogger('').addHandler(console)
