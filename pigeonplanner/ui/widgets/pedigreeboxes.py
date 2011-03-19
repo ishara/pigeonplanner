@@ -40,9 +40,12 @@ class PedigreeBox_cairo(gtk.DrawingArea):
         if not detailed:
             self.set_property("can-focus", True)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
+        self.add_events(gtk.gdk.ENTER_NOTIFY_MASK)
+        self.add_events(gtk.gdk.LEAVE_NOTIFY_MASK)
         self.connect("expose_event", self.expose)
         self.connect("realize", self.realize)
-        self.connect("focus-out-event", self.focus_out)
+        self.connect('enter-notify-event', self.on_enter_event)
+        self.connect('leave-notify-event', self.on_leave_event)
         self.connect("state_changed", self.state_changed)
         self.pigeon = pigeon
         self.child = child
@@ -74,12 +77,16 @@ class PedigreeBox_cairo(gtk.DrawingArea):
     def set_sex(self, value):
         self.sex = value
 
-    def focus_out(self, widget, event):
-        self.set_highlight(False)
-
     def set_highlight(self, value):
         self.highlight = value
         self.queue_draw()
+
+    def on_enter_event(self, widget, event):
+        if self.editable:
+            self.set_highlight(True)
+
+    def on_leave_event(self, widget, event):
+        self.set_highlight(False)
 
     def state_changed(self, widget, prev_state):
         if widget.state == gtk.STATE_INSENSITIVE:
@@ -219,9 +226,12 @@ class PedigreeBox(gtk.DrawingArea):
         if not detailed:
             self.set_property("can-focus", True)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
+        self.add_events(gtk.gdk.ENTER_NOTIFY_MASK)
+        self.add_events(gtk.gdk.LEAVE_NOTIFY_MASK)
         self.connect("expose_event", self.expose)
         self.connect("realize", self.realize)
-        self.connect("focus-out-event", self.focus_out)
+        self.connect('enter-notify-event', self.on_enter_event)
+        self.connect('leave-notify-event', self.on_leave_event)
         self.connect("state_changed", self.state_changed)
         self.pigeon = pigeon
         self.child = child
@@ -258,12 +268,16 @@ class PedigreeBox(gtk.DrawingArea):
         self.border_gc.line_width = width
         self.queue_draw()
 
+    def on_enter_event(self, widget, event):
+        if self.editable:
+            self.set_highlight(True)
+
+    def on_leave_event(self, widget, event):
+        self.set_highlight(False)
+
     def state_changed(self, widget, prev_state):
         #TODO
         pass
-
-    def focus_out(self, widget, event):
-        self.set_highlight(False)
     
     def realize(self, widget):
         self.bg_gc = self.window.new_gc()

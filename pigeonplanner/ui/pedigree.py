@@ -87,9 +87,7 @@ class DrawPedigree(object):
         else:
             if box.textlayout.get_text() == '':
                 return
-            box.set_highlight(True)
-            box.grab_focus()
-            if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            if event.button == 1:
                 self._show_pigeon_details(None, box.pigeon, parent)
             elif event.button == 3:
                 entries = [
