@@ -127,15 +127,16 @@ class DBWindow(builder.GtkBuilder):
                                   self.dbwindow)
         if d.yes:
             try:
+                self.database.close()
                 os.remove(const.DATABASE)
                 for img_thumb in os.listdir(const.THUMBDIR):
                     os.remove(os.path.join(const.THUMBDIR, img_thumb))
             except Exception, msg:
                 logger.error("Deleting database failed: %s" % msg)
-
             self.__set_buttons()
             self.__set_image(self.image_delete, OK)
-        self.__set_image(self.image_delete, CANCEL)
+        else:
+            self.__set_image(self.image_delete, CANCEL)
 
     def on_button_execute_clicked(self, widget):
         logger.info(common.get_function_name())
