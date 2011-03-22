@@ -66,13 +66,13 @@ class DBWindow(builder.GtkBuilder):
         gtk.main_quit()
 
     def on_button_optimize_clicked(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         self.__set_image(self.image_optimize, EXECUTE)
         self.database.optimize_db()
         self.__set_image(self.image_optimize, OK)
 
     def on_button_check_clicked(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         self.__set_image(self.image_check, EXECUTE)
         # Start with an integrity check
         output = self.database.check_db()
@@ -121,7 +121,7 @@ class DBWindow(builder.GtkBuilder):
         self.__set_image(self.image_check, OK)
 
     def on_button_delete_clicked(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
         self.__set_image(self.image_delete, EXECUTE)
         d = dialogs.MessageDialog(const.WARNING, messages.MSG_REMOVE_DATABASE,
                                   self.dbwindow)
@@ -139,7 +139,7 @@ class DBWindow(builder.GtkBuilder):
             self.__set_image(self.image_delete, CANCEL)
 
     def on_button_execute_clicked(self, widget):
-        logger.info(common.get_function_name())
+        logger.debug(common.get_function_name())
 
         sql = self.textbuffer_sql.get_text(*self.textbuffer_sql.get_bounds())
         sql = sql.strip(" \"';")
