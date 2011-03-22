@@ -320,7 +320,7 @@ class DatabaseOperations(object):
         # Check if all tables are present
         for s_table, s_columns in self.SCHEMA.items():
             if not s_table in self.get_tablenames():
-                logger.info("Adding table '%s'" %s_table)
+                logger.debug("Adding table '%s'" %s_table)
                 self.add_table_from_schema(s_table)
 
         # Check if all columns are present
@@ -329,7 +329,7 @@ class DatabaseOperations(object):
             if table == 'Pigeons' and 'alive' in columns:
                 # This column has been renamed somewhere
                 # between version 0.4.0 and 0.6.0
-                logger.info("Renaming 'alive' column")
+                logger.debug("Renaming 'alive' column")
                 self.change_column_name(table)
                 # Get all columns again in this table
                 columns = self.get_columnnames(table)
@@ -342,8 +342,8 @@ class DatabaseOperations(object):
                     # independent of the amount of data in the table.
                     # The ALTER TABLE command runs as quickly on a table
                     # with 10 million rows as it does on a table with 1 row.
-                    logger.info("Adding column '%s' to table '%s'"
-                                %(column, table))
+                    logger.debug("Adding column '%s' to table '%s'"
+                                 %(column, table))
                     self.add_column(table, column_def)
 
 #### Pigeons
