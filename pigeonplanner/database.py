@@ -187,7 +187,7 @@ class DatabaseOperations(object):
 
     def __db_connect(self):
         try:
-            conn = sqlite3.connect(common.encode_string(const.DATABASE))
+            conn = sqlite3.connect(const.DATABASE)
         except Exception, e:
             from pigeonplanner.ui import logdialog
 

@@ -103,11 +103,12 @@ class Startup(object):
             if os.path.exists("%s.old" % const.LOGFILE):
                 os.remove("%s.old" % const.LOGFILE)
             os.rename(const.LOGFILE, "%s.old" % const.LOGFILE)
-        logging.basicConfig(level=logging.DEBUG,
-                            format=const.LOG_FORMAT,
-                            filename=const.LOGFILE,
-                            filemode='w')
-        self.logger = logging.getLogger(self.__class__.__name__)
+        formatter = logging.Formatter(const.LOG_FORMAT)
+        handler = logging.FileHandler(const.LOGFILE, encoding='UTF-8')
+        handler.setFormatter(formatter)
+        self.logger = logging.getLogger()
+        self.logger.addHandler(handler)
+        self.logger.setLevel(logging.DEBUG)
 
         console = logging.StreamHandler()
         console.setLevel(self._loglevel)
@@ -118,7 +119,7 @@ class Startup(object):
         self.logger.info("Version: %s" % const.VERSION)
         self.logger.debug("Home path: %s" % const.HOMEDIR)
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
-        cur_path = os.getcwd() if WIN32 else const.topPath
+        cur_path = os.getcwdu() if WIN32 else const.topPath
         self.logger.debug("Current path: %s" % cur_path)
         self.logger.debug("Running on: %s %s" % (common.get_operating_system()))
         self.logger.debug("Python version: %s" % sys.version)

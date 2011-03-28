@@ -67,6 +67,8 @@ if WINDOWS:
         PREFDIR = os.path.join(os.environ['APPDATA'], 'pigeonplanner')
     else:
         PREFDIR = os.path.join(HOMEDIR, 'pigeonplanner')
+    PREFDIR = unicode(PREFDIR, sys.getfilesystemencoding())
+    HOMEDIR = unicode(HOMEDIR, sys.getfilesystemencoding())
     if hasattr(sys, 'frozen'):
         # Exe is in topdir
         GLADEDIR = './glade/'

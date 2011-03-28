@@ -131,7 +131,7 @@ class LogDialog(gtk.Dialog):
             logfile = const.LOGFILE
         self.file = open(logfile, "r")
         self.back_buffer = gtk.TextBuffer()
-        self.back_buffer.set_text(common.encode_string(self.file.read()))
+        self.back_buffer.set_text(self.file.read())
 
     def report_log(self, widget):
         logfile = os.path.join(const.PREFDIR, self.combo_logs.get_active_text())
