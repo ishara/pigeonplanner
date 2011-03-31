@@ -1,3 +1,18 @@
+1.0.4:
+ * Fixed bug where first pigeon won't show up
+ * Fixed error when using navigation arrows on empty list
+ * Fixed and improved adding an existing pigeon
+ * Fixed error when removing the database
+ * Fixed wrong language detection when updated from a previous version
+ * Fixed some thumbnail problems
+ * Fixed error when saving the pedigree on some systems
+ * Improved and fixed logmessages
+ * Improved exception logging
+ * Show dialog when the program is already running (Windows only)
+ * Don't show error in the logs when no translation is found
+ * Updated translations
+ * Added Polish translation
+
 1.0.2:
  * Fixed untranslated treeview columns
  * Fixed error in photo album
