@@ -8,27 +8,27 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-12 14:48+0100\n"
-"PO-Revision-Date: 2011-01-10 19:04+0000\n"
-"Last-Translator: afloarei ciprian <Unknown>\n"
+"PO-Revision-Date: 2011-03-23 09:12+0000\n"
+"Last-Translator: Iacob Catalin <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-13 04:41+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-03-24 04:56+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
 "Language: ro\n"
 
 #: ../pigeonplanner/common.py:39
 msgid "Cock"
-msgstr ""
+msgstr "Mascul"
 
 #: ../pigeonplanner/common.py:39
 msgid "Hen"
-msgstr ""
+msgstr "Femela"
 
 #: ../pigeonplanner/common.py:39
 msgid "Young bird"
-msgstr ""
+msgstr "Pui"
 
 #: ../pigeonplanner/messages.py:19
 msgid "Error"
@@ -36,7 +36,7 @@ msgstr "Eroare"
 
 #: ../pigeonplanner/messages.py:20
 msgid "Warning"
-msgstr "Avertizare"
+msgstr "Avertisment"
 
 #: ../pigeonplanner/messages.py:23
 msgid "Pigeon Planner is already running."
@@ -102,11 +102,11 @@ msgstr "Adaugare porumbel"
 
 #: ../pigeonplanner/messages.py:51
 msgid "The selected pigeon can't be found."
-msgstr ""
+msgstr "Porumbelul cautat nu poate fi localizat."
 
 #: ../pigeonplanner/messages.py:53
 msgid "Not found!"
-msgstr ""
+msgstr "Nu a fost gasit!"
 
 #: ../pigeonplanner/messages.py:55 ../pigeonplanner/messages.py:58
 #: ../pigeonplanner/messages.py:61 ../pigeonplanner/messages.py:64
@@ -177,7 +177,7 @@ msgstr "Esti sigur ca vrei sa inlaturi aceasta persoana din adresele tale?"
 #: ../pigeonplanner/messages.py:91
 #, python-format
 msgid "Removing '%s' from '%s'."
-msgstr ""
+msgstr "Inlaturare '%s' din '%s'"
 
 #: ../pigeonplanner/messages.py:92
 msgid "Are you sure you want to remove this item?"
@@ -280,7 +280,7 @@ msgstr ""
 
 #: ../pigeonplanner/messages.py:140
 msgid "A new version is available."
-msgstr ""
+msgstr "O noua versiune este disponibila!"
 
 #: ../pigeonplanner/messages.py:141
 msgid "You already have the latest version installed."
@@ -405,7 +405,7 @@ msgstr "Vânt"
 #: ../pigeonplanner/ui/tools/calendar.py:129
 #, python-format
 msgid "Notification set on %s days"
-msgstr ""
+msgstr "Notificarea este setata in '%s' zile"
 
 #: ../pigeonplanner/ui/tools/calendar.py:132
 msgid "No notification set"
@@ -459,7 +459,7 @@ msgstr "Vizualizeaza pe tot ecranul"
 #: ../pigeonplanner/ui/tabs/pedigree.py:26 ../pigeonplanner/startup.py:132
 #: tmp/PedigreeWindow.ui.h:2
 msgid "Pedigree"
-msgstr "Arborele genealogic"
+msgstr "Certificat de origine"
 
 #: ../pigeonplanner/ui/pedigreewindow.py:78
 msgid "Save this pedigree"
@@ -496,11 +496,11 @@ msgstr "Arată ultima pagină"
 
 #: ../pigeonplanner/ui/printpreview.py:93
 msgid "Zooms the page in"
-msgstr "Măreşte pagina"
+msgstr "Micsoreaza pagina"
 
 #: ../pigeonplanner/ui/printpreview.py:95
 msgid "Zooms the page out"
-msgstr "Micşorează pagina"
+msgstr "Mareste pagina"
 
 #: ../pigeonplanner/ui/printpreview.py:101
 msgid "Zooms to fit the whole page"
@@ -508,12 +508,12 @@ msgstr "Potriveşte la mărimea paginii"
 
 #: ../pigeonplanner/ui/detailsview.py:45
 msgid "Details of pigeon"
-msgstr ""
+msgstr "Detalii despre porumbel"
 
 #: ../pigeonplanner/ui/detailsview.py:47
 #, python-format
 msgid "Details of %s"
-msgstr ""
+msgstr "Detalii ale '%s'"
 
 #: ../pigeonplanner/ui/dialogs.py:81
 msgid "Choose an image..."
@@ -521,7 +521,7 @@ msgstr "Alege o imagine"
 
 #: ../pigeonplanner/ui/dialogs.py:90
 msgid "No image"
-msgstr ""
+msgstr "Fără imagine"
 
 #: ../pigeonplanner/ui/dialogs.py:126
 msgid "translator-credits"
@@ -532,15 +532,15 @@ msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
 msgid "General information"
-msgstr ""
+msgstr "Informaţii generale"
 
 #: ../pigeonplanner/ui/dialogs.py:162
 msgid "Technical details"
-msgstr ""
+msgstr "Detalii tehnice"
 
 #: ../pigeonplanner/ui/dialogs.py:165
 msgid "Data information"
-msgstr ""
+msgstr "Informatie date"
 
 #: ../pigeonplanner/ui/dialogs.py:189
 msgid "Number of pigeons"
@@ -628,7 +628,7 @@ msgstr "Sterge medicatia introdusa"
 
 #: ../pigeonplanner/ui/dialogs.py:445
 msgid "Remove this entry for all pigeons?"
-msgstr ""
+msgstr "Inlatura aceasta introducere la toti porumbeii"
 
 #: ../pigeonplanner/ui/resultwindow.py:64
 #: ../pigeonplanner/ui/optionsdialog.py:56
@@ -777,21 +777,21 @@ msgstr "<b>Arbore genealogic mama</b>"
 #: ../pigeonplanner/ui/mainwindow.py:177
 #, python-format
 msgid "Pigeon %s has been added"
-msgstr ""
+msgstr "Porumbeul '%s' a fost adaugat"
 
 #: ../pigeonplanner/ui/mainwindow.py:266
 #, python-format
 msgid "Pigeon %s has been removed"
-msgstr ""
+msgstr "Porumbelul '%s' a fost inlaturat"
 
 #: ../pigeonplanner/ui/mainwindow.py:275
 #, python-format
 msgid "%s pigeons have been removed"
-msgstr ""
+msgstr "'%s' au fost inlaturati"
 
 #: ../pigeonplanner/ui/mainwindow.py:404 ../pigeonplanner/ui/mainwindow.py:663
 msgid "Search for updates..."
-msgstr ""
+msgstr "Cauta inbunatatiri"
 
 #: ../pigeonplanner/ui/mainwindow.py:602
 msgid "_File"
@@ -907,7 +907,7 @@ msgstr "Claculator de viteza"
 
 #: ../pigeonplanner/ui/mainwindow.py:646
 msgid "Calculate the velocity of flights"
-msgstr ""
+msgstr "Calculeaza viteza de zbor"
 
 #: ../pigeonplanner/ui/mainwindow.py:648
 msgid "_Photo Album"
@@ -919,11 +919,11 @@ msgstr "Vizualizeaza imaginile porumbeilor tai"
 
 #: ../pigeonplanner/ui/mainwindow.py:651 tmp/AddressBook.ui.h:1
 msgid "Address book"
-msgstr ""
+msgstr "Agendă"
 
 #: ../pigeonplanner/ui/mainwindow.py:652
 msgid "View the address book"
-msgstr ""
+msgstr "Cauta in agenda"
 
 #: ../pigeonplanner/ui/mainwindow.py:653 tmp/Calendar.ui.h:1
 msgid "Calendar"
@@ -931,15 +931,15 @@ msgstr "Calendar"
 
 #: ../pigeonplanner/ui/mainwindow.py:654
 msgid "View the calendar"
-msgstr ""
+msgstr "Vizualizeaza calendarul"
 
 #: ../pigeonplanner/ui/mainwindow.py:655 tmp/DataManager.ui.h:3
 msgid "Data manager"
-msgstr ""
+msgstr "Administrator date"
 
 #: ../pigeonplanner/ui/mainwindow.py:656
 msgid "Manage your data"
-msgstr ""
+msgstr "Administreaza datele"
 
 #: ../pigeonplanner/ui/mainwindow.py:657
 msgid "_Website"
@@ -959,7 +959,7 @@ msgstr "Mergi la forum pentru ajutor online"
 
 #: ../pigeonplanner/ui/mainwindow.py:664
 msgid "Search online for program updates"
-msgstr ""
+msgstr "Cauta online imbunatatiri"
 
 #: ../pigeonplanner/ui/mainwindow.py:669
 msgid "About this application"
@@ -999,19 +999,19 @@ msgstr "Afișează sau ascunde bara de stare"
 
 #: ../pigeonplanner/ui/databasetool.py:38
 msgid "Executing..."
-msgstr ""
+msgstr "Executare"
 
 #: ../pigeonplanner/ui/databasetool.py:40
 msgid "Error: see the logfile for more info."
-msgstr ""
+msgstr "Eroare: vezi fisa de logare pentru mai multe detalii."
 
 #: ../pigeonplanner/ui/databasetool.py:41
 msgid "Operation cancelled"
-msgstr ""
+msgstr "Operație anulată"
 
 #: ../pigeonplanner/ui/databasetool.py:42
 msgid "Operation completed"
-msgstr ""
+msgstr "Operatie completa"
 
 #: ../pigeonplanner/ui/widgets/treeview.py:169
 msgid "Filter pigeons"
@@ -1072,7 +1072,7 @@ msgstr "Salveaza ca..."
 
 #: ../pigeonplanner/printing.py:176 tmp/PedigreeWindow.ui.h:3
 msgid "Pedigree of:"
-msgstr "Arborele genealogic al"
+msgstr "Certificat de origine pentru:"
 
 #: ../pigeonplanner/printing.py:383 ../pigeonplanner/printing.py:607
 #: tmp/Calendar.ui.h:3 tmp/DetailsView.ui.h:7 tmp/MedicationView.ui.h:2
@@ -1195,27 +1195,31 @@ msgstr "Element"
 
 #: tmp/DatabaseTool.ui.h:1
 msgid "Check"
-msgstr ""
+msgstr "Verifică"
 
 #: tmp/DatabaseTool.ui.h:2
 msgid "Check the database for errors and try to repair them."
-msgstr ""
+msgstr "Cauta erori in baza de date si incearca sa le repari."
 
 #: tmp/DatabaseTool.ui.h:3
 msgid ""
 "Delete the entire database from your hard drive. You will loose all pigeons, "
 "results and other data."
 msgstr ""
+"Sterge toata baza de date de pe disc. Vei pierde toti porumbeii, rezultatele "
+"si alte date introduse."
 
 #: tmp/DatabaseTool.ui.h:5
 msgid "Logfile"
-msgstr ""
+msgstr "Fisa logare"
 
 #: tmp/DatabaseTool.ui.h:6
 msgid ""
 "Only execute SQL statements if you know what you are doing! Entering invalid "
 "or wrong statements may cause data loss!"
 msgstr ""
+"Executa numai declaraţii SQL daca stii ce faci! Introducerea declaraţiilor "
+"incorecte poate cauza pierderi de date!"
 
 #: tmp/DatabaseTool.ui.h:7
 msgid "Optimize"
@@ -1226,18 +1230,20 @@ msgid ""
 "Optimze the database tables. This will defragment the data and free unused "
 "space."
 msgstr ""
+"Optimizeaza seturile de date. Se va defragmenta si vei folosi spatiul ramas "
+"disponibil."
 
 #: tmp/DatabaseTool.ui.h:9
 msgid "Pigeon Planner database tool"
-msgstr ""
+msgstr "Unealta baza de date"
 
 #: tmp/DatabaseTool.ui.h:10
 msgid "SQL"
-msgstr ""
+msgstr "SQL"
 
 #: tmp/DatabaseTool.ui.h:11
 msgid "Warning:"
-msgstr ""
+msgstr "Atenție:"
 
 #: tmp/DetailsView.ui.h:1
 msgid "<b>Details of pigeon</b>"

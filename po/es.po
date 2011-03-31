@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-12 14:48+0100\n"
-"PO-Revision-Date: 2011-02-18 07:06+0000\n"
-"Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
+"PO-Revision-Date: 2011-03-06 10:42+0000\n"
+"Last-Translator: Paco Molinero <paco@byasl.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-02-19 05:12+0000\n"
+"X-Launchpad-Export-Date: 2011-03-07 04:53+0000\n"
 "X-Generator: Launchpad (build 12351)\n"
 "Language: \n"
 
@@ -253,11 +253,11 @@ msgstr "Añadiendo paloma"
 
 #: ../pigeonplanner/messages.py:51
 msgid "The selected pigeon can't be found."
-msgstr ""
+msgstr "La paloma seleccionada no se encuentra"
 
 #: ../pigeonplanner/messages.py:53
 msgid "Not found!"
-msgstr ""
+msgstr "No encontrado"
 
 #: ../pigeonplanner/messages.py:55 ../pigeonplanner/messages.py:58
 #: ../pigeonplanner/messages.py:61 ../pigeonplanner/messages.py:64
@@ -422,7 +422,7 @@ msgstr ""
 
 #: ../pigeonplanner/messages.py:140
 msgid "A new version is available."
-msgstr ""
+msgstr "Hay una nueva versión disponible."
 
 #: ../pigeonplanner/ui/logdialog.py:40
 msgid "Logfile Viewer"
@@ -632,12 +632,12 @@ msgstr "Amplía hasta encajar la página completa"
 
 #: ../pigeonplanner/ui/detailsview.py:45
 msgid "Details of pigeon"
-msgstr ""
+msgstr "Detalles de paloma"
 
 #: ../pigeonplanner/ui/detailsview.py:47
 #, python-format
 msgid "Details of %s"
-msgstr ""
+msgstr "Detalles de %s"
 
 #: ../pigeonplanner/ui/dialogs.py:81
 msgid "Choose an image..."
@@ -674,11 +674,11 @@ msgstr ""
 
 #: ../pigeonplanner/ui/dialogs.py:136 ../pigeonplanner/ui/mainwindow.py:667
 msgid "General information"
-msgstr ""
+msgstr "Información general"
 
 #: ../pigeonplanner/ui/dialogs.py:162
 msgid "Technical details"
-msgstr ""
+msgstr "Detalles técnicos"
 
 #: ../pigeonplanner/ui/dialogs.py:165
 msgid "Data information"
@@ -901,12 +901,12 @@ msgstr "Añadir resultado de:"
 #: ../pigeonplanner/ui/mainwindow.py:177
 #, python-format
 msgid "Pigeon %s has been added"
-msgstr ""
+msgstr "La paloma %s se ha añadido"
 
 #: ../pigeonplanner/ui/mainwindow.py:266
 #, python-format
 msgid "Pigeon %s has been removed"
-msgstr ""
+msgstr "La paloma %s se ha eliminado"
 
 #: ../pigeonplanner/ui/mainwindow.py:275
 #, python-format
@@ -915,7 +915,7 @@ msgstr "%s palomas han sido removidas"
 
 #: ../pigeonplanner/ui/mainwindow.py:404 ../pigeonplanner/ui/mainwindow.py:663
 msgid "Search for updates..."
-msgstr ""
+msgstr "Buscar actualizaciones..."
 
 #: ../pigeonplanner/ui/mainwindow.py:602
 msgid "_File"
@@ -1023,7 +1023,7 @@ msgstr "Calculadora de velocidad"
 
 #: ../pigeonplanner/ui/mainwindow.py:646
 msgid "Calculate the velocity of flights"
-msgstr ""
+msgstr "Calcular la velocidad del vuelo"
 
 #: ../pigeonplanner/ui/mainwindow.py:648
 msgid "_Photo Album"
@@ -1035,11 +1035,11 @@ msgstr "Ver las imágenes de sus pigeons"
 
 #: ../pigeonplanner/ui/mainwindow.py:651 tmp/AddressBook.ui.h:1
 msgid "Address book"
-msgstr ""
+msgstr "Libreta de direcciones"
 
 #: ../pigeonplanner/ui/mainwindow.py:652
 msgid "View the address book"
-msgstr ""
+msgstr "Ver la libreta de direcciones"
 
 #: ../pigeonplanner/ui/mainwindow.py:653 tmp/Calendar.ui.h:1
 msgid "Calendar"
@@ -1047,15 +1047,15 @@ msgstr "Calendario"
 
 #: ../pigeonplanner/ui/mainwindow.py:654
 msgid "View the calendar"
-msgstr ""
+msgstr "Ver el calendario"
 
 #: ../pigeonplanner/ui/mainwindow.py:655 tmp/DataManager.ui.h:3
 msgid "Data manager"
-msgstr ""
+msgstr "Gestor de datos"
 
 #: ../pigeonplanner/ui/mainwindow.py:656
 msgid "Manage your data"
-msgstr ""
+msgstr "Gestionar sus datos"
 
 #: ../pigeonplanner/ui/mainwindow.py:657
 msgid "_Website"
@@ -1071,7 +1071,7 @@ msgstr "Foro"
 
 #: ../pigeonplanner/ui/mainwindow.py:664
 msgid "Search online for program updates"
-msgstr ""
+msgstr "Buscar actualizaciones de programa en línea"
 
 #: ../pigeonplanner/ui/mainwindow.py:669
 msgid "About this application"
@@ -1103,7 +1103,7 @@ msgstr "Mostrar o esconder la barra de estado"
 
 #: ../pigeonplanner/ui/databasetool.py:38
 msgid "Executing..."
-msgstr ""
+msgstr "Ejecutando..."
 
 #: ../pigeonplanner/ui/databasetool.py:40
 msgid "Error: see the logfile for more info."
@@ -1111,11 +1111,11 @@ msgstr ""
 
 #: ../pigeonplanner/ui/databasetool.py:41
 msgid "Operation cancelled"
-msgstr ""
+msgstr "Operación cancelada"
 
 #: ../pigeonplanner/ui/databasetool.py:42
 msgid "Operation completed"
-msgstr ""
+msgstr "Operación completada"
 
 #: ../pigeonplanner/ui/widgets/treeview.py:169
 msgid "Filter pigeons"
@@ -1294,7 +1294,7 @@ msgstr "Item"
 
 #: tmp/DatabaseTool.ui.h:1
 msgid "Check"
-msgstr ""
+msgstr "Comprobar"
 
 #: tmp/DatabaseTool.ui.h:2
 msgid "Check the database for errors and try to repair them."
@@ -1308,7 +1308,7 @@ msgstr ""
 
 #: tmp/DatabaseTool.ui.h:5
 msgid "Logfile"
-msgstr ""
+msgstr "Archivo de registro"
 
 #: tmp/DatabaseTool.ui.h:6
 msgid ""
@@ -1328,15 +1328,15 @@ msgstr ""
 
 #: tmp/DatabaseTool.ui.h:9
 msgid "Pigeon Planner database tool"
-msgstr ""
+msgstr "Herramienta de base de datos Pigeon Planner"
 
 #: tmp/DatabaseTool.ui.h:10
 msgid "SQL"
-msgstr ""
+msgstr "SQL"
 
 #: tmp/DatabaseTool.ui.h:11
 msgid "Warning:"
-msgstr ""
+msgstr "Aviso:"
 
 #: tmp/DetailsView.ui.h:1
 msgid "<b>Details of pigeon</b>"
