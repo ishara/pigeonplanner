@@ -389,8 +389,8 @@ class PrintResults(BasePrinting):
                     6: _("Sector"),
                     7: _("Type"),
                     8: _("Category"),
-                    9: _("Weather"),
-                    10: _("Wind"),
+                    9: _("Wind"),
+                    10: _("Weather"),
                     11: _("Comment")
                 }
 

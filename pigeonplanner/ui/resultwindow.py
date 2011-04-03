@@ -147,8 +147,8 @@ class ResultWindow(builder.GtkBuilder):
             ring, year = common.get_band_from_pindex(pindex)
             self.liststore.insert(0, [pindex, ring, year, date, point,
                                       place, out, cof, sector, result[TYPE],
-                                      result[CATEGORY], result[WEATHER],
-                                      result[WIND], result[COMMENT]])
+                                      result[CATEGORY], result[WIND],
+                                      result[WEATHER], result[COMMENT]])
             self._add_filter_data(pindex, year, date, point, sector)
         self.treeview.set_model(self._modelsort)
         self.treeview.thaw_child_notify()
