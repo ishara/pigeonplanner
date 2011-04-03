@@ -2,34 +2,6 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkListStore" id="liststore">
-    <columns>
-      <!-- column-name id -->
-      <column type="gchararray"/>
-      <!-- column-name date -->
-      <column type="gchararray"/>
-      <!-- column-name racepoint -->
-      <column type="gchararray"/>
-      <!-- column-name placed -->
-      <column type="gint"/>
-      <!-- column-name out -->
-      <column type="gint"/>
-      <!-- column-name coef -->
-      <column type="gfloat"/>
-      <!-- column-name sector -->
-      <column type="gchararray"/>
-      <!-- column-name type -->
-      <column type="gchararray"/>
-      <!-- column-name category -->
-      <column type="gchararray"/>
-      <!-- column-name weather -->
-      <column type="gchararray"/>
-      <!-- column-name wind -->
-      <column type="gchararray"/>
-      <!-- column-name comment -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkDialog" id="dialog">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Results</property>
@@ -485,6 +457,34 @@
       <column type="gchararray"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+      <!-- column-name date -->
+      <column type="gchararray"/>
+      <!-- column-name racepoint -->
+      <column type="gchararray"/>
+      <!-- column-name placed -->
+      <column type="gint"/>
+      <!-- column-name out -->
+      <column type="gint"/>
+      <!-- column-name coef -->
+      <column type="gfloat"/>
+      <!-- column-name sector -->
+      <column type="gchararray"/>
+      <!-- column-name type -->
+      <column type="gchararray"/>
+      <!-- column-name category -->
+      <column type="gchararray"/>
+      <!-- column-name wind -->
+      <column type="gchararray"/>
+      <!-- column-name weather -->
+      <column type="gchararray"/>
+      <!-- column-name comment -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="window1">
     <child>
       <object class="GtkHBox" id="_root">
@@ -617,7 +617,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn9">
-                            <property name="title" translatable="yes">Weather</property>
+                            <property name="title" translatable="yes">Wind</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">9</property>
                             <child>
@@ -630,7 +630,7 @@
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn10">
-                            <property name="title" translatable="yes">Wind</property>
+                            <property name="title" translatable="yes">Weather</property>
                             <property name="sort_indicator">True</property>
                             <property name="sort_column_id">10</property>
                             <child>

@@ -32,6 +32,19 @@ from pigeonplanner.ui.widgets import comboboxes
 
 
 class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
+    (COL_ID,
+     COL_DATE,
+     COL_RACEPOINT,
+     COL_PLACED,
+     COL_OUT,
+     COL_COEF,
+     COL_SECTOR,
+     COL_TYPE,
+     COL_CATEGORY,
+     COL_WIND,
+     COL_WEATHER,
+     COL_COMMENT) = range(12)
+
     def __init__(self, parent, database, options, parser):
         basetab.BaseTab.__init__(self, _("Results"), "icon_result.png")
         builder.GtkBuilder.__init__(self, const.GLADERESVIEW)
@@ -87,14 +100,14 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                 result[index] = ''
 
         self._mode = const.EDIT
-        del result[5] # Delete the coefficient
-        del result[0] # Delete the row id
+        del result[self.COL_COEF] # Delete the coefficient
+        del result[self.COL_ID] # Delete the row id
         self._set_dialog(self._mode, result)
 
     def on_buttonremove_clicked(self, widget):
         model, rowiter = self._selection.get_selected()
         path = self.liststore.get_path(rowiter)
-        rowid = model[rowiter][0]
+        rowid = model[rowiter][self.COL_ID]
 
         d = dialogs.MessageDialog(const.QUESTION,
                                   messages.MSG_REMOVE_RESULT,
@@ -112,8 +125,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonsave_clicked(self, widget):
         data = self._get_data()
         if data is None: return
-        date, point, place, out, sector, ftype, category, weather, wind, \
-                                                                comment = data
+        (date, point, place, out, sector, ftype, category, wind, weather,
+            comment) = data
         cof = common.calculate_coefficient(place, out)
         # Not implemented yet, but have a database column
         values = ['', '', 0, 0]
@@ -123,14 +136,13 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         if self._mode == const.ADD:
             data.insert(0, self.pindex)
             if self.database.has_result(data):
-                dialogs.MessageDialog(const.ERROR,
-                                      messages.MSG_RESULT_EXISTS,
+                dialogs.MessageDialog(const.ERROR, messages.MSG_RESULT_EXISTS,
                                       self.parent)
                 return
             rowid = self.database.insert_into_table(self.database.RESULTS, data)
             rowiter = self.liststore.insert(0, [rowid, date, point, place,
                                                 out, cof, sector, ftype,
-                                                category, weather, wind, comment])
+                                                category, wind, weather, comment])
             self._selection.select_iter(rowiter)
             path = self.liststore.get_path(rowiter)
             self.treeview.scroll_to_cell(path)
@@ -140,7 +152,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             self.database.update_table(self.database.RESULTS, data, 2, 0)
             self.liststore.set(node, 1, date, 2, point, 3, place, 4, out,
                                      5, cof, 6, sector, 7, ftype, 8, category,
-                                     9, weather, 10, wind, 11, comment)
+                                     9, wind, 10, weather, 11, comment)
             self._selection.emit('changed')
             self.dialog.hide()
 
