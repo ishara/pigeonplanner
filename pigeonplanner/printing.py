@@ -429,19 +429,19 @@ class PrintResults(BasePrinting):
         self.results_layouts = []
         self.column_layouts = []
         for x in xrange(12):
-            if x == 5 and not self.options.resCoef:
+            if x == 5 and not self.options.colcoef:
                 continue
-            if x == 6 and not self.options.resSector:
+            if x == 6 and not self.options.colsector:
                 continue
-            if x == 7 and not self.options.resType:
+            if x == 7 and not self.options.coltype:
                 continue
-            if x == 8 and not self.options.resCategory:
+            if x == 8 and not self.options.colcategory:
                 continue
-            if x == 9 and not self.options.resWeather:
+            if x == 9 and not self.options.colweather:
                 continue
-            if x == 10 and not self.options.resWind:
+            if x == 10 and not self.options.colwind:
                 continue
-            if x == 11 and not self.options.resComment:
+            if x == 11 and not self.options.colcomment:
                 continue
 
             self.results_layouts.append(self.create_layout(context, x))

@@ -57,6 +57,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.table.attach(self.entrydate, 1, 2, 0, 1, 0)
         self._selection = self.treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)
+        self.set_columns()
         combos = {self.combosector: self.database.SECTORS,
                   self.combotype: self.database.TYPES,
                   self.combocategory: self.database.CATEGORIES,
@@ -201,6 +202,17 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
 
     def add_new_result(self):
         self.buttonadd.clicked()
+
+    def set_columns(self):
+        columnsdic = {4: self.options.colcoef,
+                      5: self.options.colsector,
+                      6: self.options.coltype,
+                      7: self.options.colcategory,
+                      8: self.options.colwind,
+                      9: self.options.colweather,
+                      10: self.options.colcomment}
+        for key, value in columnsdic.items():
+            self.treeview.get_column(key).set_visible(value)
 
     # Internal methods
     def _get_selected_result(self):

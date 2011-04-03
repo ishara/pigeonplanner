@@ -79,6 +79,7 @@ class ResultWindow(builder.GtkBuilder):
         self._modelfilter = self._modelsort.get_model()
         self._modelfilter.set_visible_func(self._visible_func)
         self.fill_treeview()
+        self.set_columns()
 
         self.resultwindow.set_transient_for(parent)
         self.resultwindow.show()
@@ -151,6 +152,17 @@ class ResultWindow(builder.GtkBuilder):
             self._add_filter_data(pindex, year, date, point, sector)
         self.treeview.set_model(self._modelsort)
         self.treeview.thaw_child_notify()
+
+    def set_columns(self):
+        columnsdic = {6: self.options.colcoef,
+                      7: self.options.colsector,
+                      8: self.options.coltype,
+                      9: self.options.colcategory,
+                      10: self.options.colwind,
+                      11: self.options.colweather,
+                      12: self.options.colcomment}
+        for key, value in columnsdic.items():
+            self.treeview.get_column(key).set_visible(value)
 
     # Private methods
     def _build_toolbar(self):

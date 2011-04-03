@@ -156,6 +156,7 @@ class MainWindow(builder.GtkBuilder):
         self.MenuStatusbar.set_active(statusbar)
 
         self.treeview.set_columns()
+        self.resultstab.set_columns()
 
     def on_edit_finished(self, detailsview, pigeon, operation):
         self._finish_edit()

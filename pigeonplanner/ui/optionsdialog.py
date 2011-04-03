@@ -148,7 +148,14 @@ class OptionsDialog(builder.GtkBuilder):
                            'colour': str(self.chkColour.get_active()),
                            'sex': str(self.chkSex.get_active()),
                            'loft': str(self.chkLoft.get_active()),
-                           'strain': str(self.chkStrain.get_active())
+                           'strain': str(self.chkStrain.get_active()),
+                           'coef': str(self.chkCoef.get_active()),
+                           'sector': str(self.chkSector.get_active()),
+                           'category': str(self.chkCategory.get_active()),
+                           'type': str(self.chkType.get_active()),
+                           'weather': str(self.chkWeather.get_active()),
+                           'wind': str(self.chkWind.get_active()),
+                           'comment': str(self.chkComment.get_active()),
                           },
                "Printing": {
                     "paper": self.cbPaper.get_active(),
@@ -162,13 +169,6 @@ class OptionsDialog(builder.GtkBuilder):
                     "pigSex": str(self.chkPigSex.get_active()),
                     "pigExtra": str(self.chkPigExtra.get_active()),
                     "pigImage": str(self.chkPigImage.get_active()),
-                    "resCoef": str(self.chkResCoef.get_active()),
-                    "resSector": str(self.chkResSector.get_active()),
-                    "resCategory": str(self.chkResCategory.get_active()),
-                    "resType": str(self.chkResType.get_active()),
-                    "resWeather": str(self.chkResWeather.get_active()),
-                    "resWind": str(self.chkResWind.get_active()),
-                    "resComment": str(self.chkResComment.get_active()),
                     "resColumnNames": str(self.chkResColumnNames.get_active()),
                     "resDate": str(self.chkResDate.get_active()),
                    }
@@ -197,6 +197,13 @@ class OptionsDialog(builder.GtkBuilder):
         self.chkSex.set_active(self.options.colsex)
         self.chkLoft.set_active(self.options.colloft)
         self.chkStrain.set_active(self.options.colstrain)
+        self.chkCoef.set_active(self.options.colcoef)
+        self.chkSector.set_active(self.options.colsector)
+        self.chkCategory.set_active(self.options.colcategory)
+        self.chkType.set_active(self.options.coltype)
+        self.chkWeather.set_active(self.options.colweather)
+        self.chkWind.set_active(self.options.colwind)
+        self.chkComment.set_active(self.options.colcomment)
 
         self.combothemes.set_active(self.options.theme)
 
@@ -220,13 +227,6 @@ class OptionsDialog(builder.GtkBuilder):
         self.chkPigExtra.set_active(self.options.pigExtra)
         self.chkPigImage.set_active(self.options.pigImage)
 
-        self.chkResCoef.set_active(self.options.resCoef)
-        self.chkResSector.set_active(self.options.resSector)
-        self.chkResCategory.set_active(self.options.resCategory)
-        self.chkResType.set_active(self.options.resType)
-        self.chkResWeather.set_active(self.options.resWeather)
-        self.chkResWind.set_active(self.options.resWind)
-        self.chkResComment.set_active(self.options.resComment)
         self.chkResColumnNames.set_active(self.options.resColumnNames)
         self.chkResDate.set_active(self.options.resDate)
 
