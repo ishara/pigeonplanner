@@ -392,7 +392,7 @@ class ExtraBox(gtk.DrawingArea):
 class PedigreeCross(gtk.DrawingArea):
     def __init__(self):
         gtk.DrawingArea.__init__(self)
-        self.set_size_request(20, -1)
+        self.set_size_request(12, -1)
         self.connect("expose_event", self.expose)
 
     def expose(self, area, event):
@@ -413,7 +413,7 @@ class PedigreeCross(gtk.DrawingArea):
 class PedigreeLine(gtk.DrawingArea):
     def __init__(self):
         gtk.DrawingArea.__init__(self)
-        self.set_size_request(20, -1)
+        self.set_size_request(12, -1)
         self.connect("expose_event", self.expose)
 
     def expose(self, area, event):
