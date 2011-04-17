@@ -418,6 +418,7 @@ class DetailsView(builder.GtkBuilder):
         image = os.path.join(const.IMAGEDIR,
                                     '%s.png' %self.statusdic[status].lower())
         self.imagestatus.set_from_file(image)
+        self.imagestatus.set_tooltip_text(_(self.statusdic[status]))
         self.imagestatusedit.set_from_file(image)
 
     def _set_status(self, pindex, status):
