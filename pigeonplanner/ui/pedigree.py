@@ -98,6 +98,7 @@ class DrawPedigree(object):
                           ]
         if entries is not None:
             menus.popup_menu(event, entries)
+        return True
 
     def on_edit_finished(self, detailsview, pigeon, operation):
         child = detailsview.get_child()
