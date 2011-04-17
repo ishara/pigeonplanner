@@ -95,7 +95,7 @@ class PedigreeBox_cairo(gtk.DrawingArea):
         self.queue_draw()
 
     def realize(self, widget):
-        self.set_size_request(max(12, 150), max(28, 25))
+        self.set_size_request(max(12, 155), max(28, 25))
 
     def expose(self, widget, event):
         alloc = self.get_allocation()
