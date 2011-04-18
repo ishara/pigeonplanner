@@ -33,7 +33,8 @@ MARGIN = 6
  ZOOM_FIT_WIDTH,
  ZOOM_FREE,) = range(3)
 
-class PrintPreview(builder.GtkBuilder):
+
+class PrintPreview(gtk.Window):
     zoom_factors = {
         0.50: '50%',
         0.75: '75%',
@@ -47,13 +48,27 @@ class PrintPreview(builder.GtkBuilder):
     }
 
     def __init__(self, operation, preview, context, parent):
-        builder.GtkBuilder.__init__(self, const.GLADEPREVIEW)
-
-        self.previewwindow.set_transient_for(parent)
+        gtk.Window.__init__(self)
+        self.connect('delete-event', self.on_window_delete)
+        self.set_transient_for(parent)
+        self.set_title(_("Print Preview"))
+        self.resize(800, 600)
+        self.set_position(gtk.WIN_POS_CENTER)
+        self.set_modal(True)
 
         self.operation = operation
         self.preview = preview
         self.context = context
+
+        self.drawingarea = gtk.DrawingArea()
+        self.drawingarea.connect('expose-event', self.on_drawingarea_expose)
+        self.swin = gtk.ScrolledWindow()
+        self.swin.connect('size-allocate', self.on_swin_size_allocate)
+        self.swin.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self.swin.add_with_viewport(self.drawingarea)
+        self.vbox = gtk.VBox()
+        self.vbox.pack_end(self.swin)
+        self.add(self.vbox)
 
         self.build_toolbar()
         self.current_page = None
@@ -63,7 +78,7 @@ class PrintPreview(builder.GtkBuilder):
         uimanager.add_ui_from_string(menus.ui_printpreview)
         uimanager.insert_action_group(self.create_action_group(), 0)
         accelgroup = uimanager.get_accel_group()
-        self.previewwindow.add_accel_group(accelgroup)
+        self.add_accel_group(accelgroup)
 
         self.zoom_in_button = uimanager.get_widget('/Toolbar/In')
         self.zoom_out_button = uimanager.get_widget('/Toolbar/Out')
@@ -76,7 +91,6 @@ class PrintPreview(builder.GtkBuilder):
         toolbar = uimanager.get_widget('/Toolbar')
         toolbar.set_style(gtk.TOOLBAR_ICONS)
         self.vbox.pack_start(toolbar, False, False)
-        self.vbox.reorder_child(toolbar, 0)
 
     def create_action_group(self):
         action_group = gtk.ActionGroup("PreviewWindowActions")
@@ -180,7 +194,7 @@ class PrintPreview(builder.GtkBuilder):
 
     def on_close_clicked(self, widget):
         self.end_preview()
-        self.previewwindow.destroy()
+        self.destroy()
 
     def on_first_clicked(self, widget):
         self.set_page(0)
@@ -268,5 +282,5 @@ class PrintPreview(builder.GtkBuilder):
         self.set_zoom(1.0)
         self.set_page(0)
 
-        self.previewwindow.show()
+        self.show_all()
 
