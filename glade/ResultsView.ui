@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
+  <requires lib="gtk+" version="2.22"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="lower">1</property>
+    <property name="upper">200000</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment2">
+    <property name="lower">1</property>
+    <property name="upper">200000</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+  </object>
   <object class="GtkDialog" id="dialog">
+    <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Results</property>
     <property name="window_position">center-on-parent</property>
@@ -11,48 +24,106 @@
     <property name="destroy_with_parent">True</property>
     <property name="icon">../images/icon_logo.png</property>
     <property name="type_hint">dialog</property>
-    <signal name="delete_event" handler="on_dialog_delete"/>
+    <signal name="delete-event" handler="on_dialog_delete" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox8">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
         <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area8">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="buttonclose">
+                <property name="label">gtk-close</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_buttonclose_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="buttonsave">
+                <property name="label">gtk-save</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="has_default">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_buttonsave_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
         <child>
           <object class="GtkVBox" id="vbox7">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="spacing">8</property>
             <child>
               <object class="GtkHBox" id="hbox10">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <child>
                   <object class="GtkLabel" id="labelmode">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="labelpigeon">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
+                <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
               <object class="GtkTable" id="table">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="n_rows">9</property>
                 <property name="n_columns">2</property>
                 <property name="column_spacing">8</property>
@@ -60,10 +131,20 @@
                 <child>
                   <object class="GtkComboBoxEntry" id="combosector">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="model">liststore1</property>
                     <property name="text_column">0</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext6"/>
+                    </child>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="comboboxentry-entry2">
+                        <property name="can_focus">False</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -78,6 +159,7 @@
                 <child>
                   <object class="GtkLabel" id="label60">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Sector</property>
                   </object>
@@ -91,6 +173,7 @@
                 <child>
                   <object class="GtkHBox" id="hbox32">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="spacing">10</property>
                     <child>
                       <object class="GtkSpinButton" id="spinplaced">
@@ -99,21 +182,29 @@
                         <property name="invisible_char">●</property>
                         <property name="activates_default">True</property>
                         <property name="width_chars">6</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment1</property>
                         <property name="numeric">True</property>
-                        <signal name="value_changed" handler="on_spinplaced_changed"/>
+                        <signal name="value-changed" handler="on_spinplaced_changed" swapped="no"/>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkHBox" id="hbox11">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="spacing">4</property>
                         <child>
                           <object class="GtkLabel" id="label62">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Out of</property>
                           </object>
                           <packing>
@@ -129,15 +220,23 @@
                             <property name="invisible_char">●</property>
                             <property name="activates_default">True</property>
                             <property name="width_chars">6</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
                             <property name="adjustment">adjustment2</property>
                             <property name="numeric">True</property>
                           </object>
                           <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -154,6 +253,7 @@
                 <child>
                   <object class="GtkLabel" id="label61">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Placed</property>
                   </object>
@@ -167,10 +267,20 @@
                 <child>
                   <object class="GtkComboBoxEntry" id="comboracepoint">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="model">liststore2</property>
                     <property name="text_column">0</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext5"/>
+                    </child>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="comboboxentry-entry4">
+                        <property name="can_focus">False</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -184,6 +294,7 @@
                 <child>
                   <object class="GtkLabel" id="label63">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Date</property>
                   </object>
@@ -195,6 +306,7 @@
                 <child>
                   <object class="GtkLabel" id="label64">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Racepoint</property>
                   </object>
@@ -208,6 +320,7 @@
                 <child>
                   <object class="GtkLabel" id="label67">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Weather</property>
                   </object>
@@ -221,6 +334,7 @@
                 <child>
                   <object class="GtkLabel" id="label68">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Wind</property>
                   </object>
@@ -234,6 +348,7 @@
                 <child>
                   <object class="GtkLabel" id="label69">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Comment</property>
                   </object>
@@ -247,10 +362,20 @@
                 <child>
                   <object class="GtkComboBoxEntry" id="comboweather">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="model">liststore3</property>
                     <property name="text_column">0</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext7"/>
+                    </child>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="comboboxentry-entry6">
+                        <property name="can_focus">False</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -265,10 +390,20 @@
                 <child>
                   <object class="GtkComboBoxEntry" id="combowind">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="model">liststore4</property>
                     <property name="text_column">0</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                    </child>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="comboboxentry-entry8">
+                        <property name="can_focus">False</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -286,6 +421,10 @@
                     <property name="can_focus">True</property>
                     <property name="invisible_char">●</property>
                     <property name="activates_default">True</property>
+                    <property name="primary_icon_activatable">False</property>
+                    <property name="secondary_icon_activatable">False</property>
+                    <property name="primary_icon_sensitive">True</property>
+                    <property name="secondary_icon_sensitive">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -299,6 +438,7 @@
                 <child>
                   <object class="GtkLabel" id="label70">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Type</property>
                   </object>
@@ -312,10 +452,20 @@
                 <child>
                   <object class="GtkComboBoxEntry" id="combotype">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="model">liststore5</property>
                     <property name="text_column">0</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext8"/>
+                    </child>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="comboboxentry-entry10">
+                        <property name="can_focus">False</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -330,6 +480,7 @@
                 <child>
                   <object class="GtkLabel" id="label71">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Category</property>
                   </object>
@@ -343,10 +494,20 @@
                 <child>
                   <object class="GtkComboBoxEntry" id="combocategory">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="model">liststore6</property>
                     <property name="text_column">0</property>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext9"/>
+                    </child>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="comboboxentry-entry12">
+                        <property name="can_focus">False</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
                     </child>
                   </object>
                   <packing>
@@ -363,55 +524,16 @@
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">1</property>
-          </packing>
-        </child>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area8">
-            <property name="visible">True</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="buttonclose">
-                <property name="label">gtk-close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_buttonclose_clicked"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="buttonsave">
-                <property name="label">gtk-save</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_buttonsave_clicked"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
           </packing>
         </child>
       </object>
@@ -420,6 +542,44 @@
       <action-widget response="0">buttonclose</action-widget>
       <action-widget response="0">buttonsave</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-find</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-file</property>
+  </object>
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+      <!-- column-name date -->
+      <column type="gchararray"/>
+      <!-- column-name racepoint -->
+      <column type="gchararray"/>
+      <!-- column-name placed -->
+      <column type="gint"/>
+      <!-- column-name out -->
+      <column type="gint"/>
+      <!-- column-name coef -->
+      <column type="gfloat"/>
+      <!-- column-name sector -->
+      <column type="gchararray"/>
+      <!-- column-name type -->
+      <column type="gchararray"/>
+      <!-- column-name category -->
+      <column type="gchararray"/>
+      <!-- column-name wind -->
+      <column type="gchararray"/>
+      <!-- column-name weather -->
+      <column type="gchararray"/>
+      <!-- column-name comment -->
+      <column type="gchararray"/>
+    </columns>
   </object>
   <object class="GtkListStore" id="liststore1">
     <columns>
@@ -457,46 +617,22 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkListStore" id="liststore">
-    <columns>
-      <!-- column-name id -->
-      <column type="gchararray"/>
-      <!-- column-name date -->
-      <column type="gchararray"/>
-      <!-- column-name racepoint -->
-      <column type="gchararray"/>
-      <!-- column-name placed -->
-      <column type="gint"/>
-      <!-- column-name out -->
-      <column type="gint"/>
-      <!-- column-name coef -->
-      <column type="gfloat"/>
-      <!-- column-name sector -->
-      <column type="gchararray"/>
-      <!-- column-name type -->
-      <column type="gchararray"/>
-      <!-- column-name category -->
-      <column type="gchararray"/>
-      <!-- column-name wind -->
-      <column type="gchararray"/>
-      <!-- column-name weather -->
-      <column type="gchararray"/>
-      <!-- column-name comment -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkWindow" id="window1">
+    <property name="can_focus">False</property>
     <child>
       <object class="GtkHBox" id="_root">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
         <child>
           <object class="GtkFrame" id="frame1">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label_xalign">0</property>
             <property name="shadow_type">none</property>
             <child>
               <object class="GtkAlignment" id="alignment1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <child>
                   <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
@@ -510,7 +646,7 @@
                         <property name="can_focus">True</property>
                         <property name="model">liststore</property>
                         <property name="rules_hint">True</property>
-                        <signal name="button_press_event" handler="on_treeview_press"/>
+                        <signal name="button-press-event" handler="on_treeview_press" swapped="no"/>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn1">
                             <property name="title" translatable="yes">Date</property>
@@ -663,18 +799,22 @@
             <child type="label">
               <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="label" translatable="yes">&lt;b&gt;Results of pigeon&lt;/b&gt;</property>
                 <property name="use_markup">True</property>
               </object>
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
           <object class="GtkVButtonBox" id="vbuttonbox1">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="spacing">4</property>
             <property name="layout_style">end</property>
             <child>
@@ -683,8 +823,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="image">image1</property>
-                <signal name="clicked" handler="on_buttonall_clicked"/>
+                <signal name="clicked" handler="on_buttonall_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -694,19 +835,36 @@
               </packing>
             </child>
             <child>
+              <object class="GtkButton" id="buttonimport">
+                <property name="label" translatable="yes">Import</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="image">image2</property>
+                <signal name="clicked" handler="on_buttonimport_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkButton" id="buttonadd">
                 <property name="label">gtk-add</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_buttonadd_clicked"/>
+                <signal name="clicked" handler="on_buttonadd_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -716,13 +874,14 @@
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_buttonedit_clicked"/>
+                <signal name="clicked" handler="on_buttonedit_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
             <child>
@@ -732,13 +891,14 @@
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_buttonremove_clicked"/>
+                <signal name="clicked" handler="on_buttonremove_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">3</property>
+                <property name="position">4</property>
               </packing>
             </child>
           </object>
@@ -751,21 +911,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="stock">gtk-find</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment1">
-    <property name="value">1</property>
-    <property name="lower">1</property>
-    <property name="upper">200000</property>
-    <property name="step_increment">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment2">
-    <property name="value">1</property>
-    <property name="lower">1</property>
-    <property name="upper">200000</property>
-    <property name="step_increment">1</property>
   </object>
 </interface>

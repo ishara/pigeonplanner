@@ -43,3 +43,12 @@ class PdfFilter(gtk.FileFilter):
         self.set_name("PDF")
         self.add_pattern("*.pdf")
 
+
+class TxtFilter(gtk.FileFilter):
+    def __init__(self):
+        gtk.FileFilter.__init__(self)
+
+        self.set_name("Text (.txt)")
+        self.add_pattern("*.txt")
+        self.add_pattern("*.TXT")
+

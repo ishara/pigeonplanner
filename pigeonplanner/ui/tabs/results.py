@@ -25,6 +25,7 @@ from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui import resultwindow
+from pigeonplanner.ui import resultparser
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import date
 from pigeonplanner.ui.widgets import menus
@@ -87,6 +88,10 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonall_clicked(self, widget):
         resultwindow.ResultWindow(self.parent, self.parser,
                                   self.database, self.options)
+
+    def on_buttonimport_clicked(self, widget):
+        resultparser.ResultParser(self.parent, self.database, 
+                                  self.parser.pigeons.keys())
 
     def on_buttonadd_clicked(self, widget):
         self._mode = const.ADD
