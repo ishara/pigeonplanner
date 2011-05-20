@@ -26,7 +26,7 @@ import glob
 from distutils.core import setup
 
 import i18n
-import pigeonplanner
+from pigeonplanner import const
 
 
 # Common data files
@@ -40,6 +40,7 @@ data_files = [
 
 packages = [
             "pigeonplanner",
+            "pigeonplanner.resultparsers",
             "pigeonplanner.ui",
             "pigeonplanner.ui.tabs",
             "pigeonplanner.ui.tools",
@@ -58,8 +59,8 @@ for mofile in glob.glob('languages/*/LC_MESSAGES/pigeonplanner.mo'):
 
 def run_setup():
     setup(name = 'pigeonplanner',
-          version = pigeonplanner.version,
-          description = pigeonplanner.description,
+          version = const.VERSION,
+          description = const.DESCRIPTION,
           long_description = """
                 Pigeon Planner is a pigeon organiser which lets the user 
                 manage their pigeons with their details, pedigree, 
@@ -68,7 +69,7 @@ def run_setup():
           author_email = "timovwb@gmail.com",
           download_url = "http://www.pigeonplanner.com/download",
           license = "GPLv3",
-          url = pigeonplanner.website,
+          url = const.WEBSITE,
           packages = packages,
           scripts = ["bin/pigeonplanner", "bin/pigeonplanner-db"],
           data_files = data_files + translation_files,
