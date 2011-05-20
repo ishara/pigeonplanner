@@ -20,9 +20,9 @@ import datetime
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import builder
+import const
+import common
+import builder
 
 
 class VelocityCalculator(builder.GtkBuilder):
@@ -140,7 +140,7 @@ class VelocityCalculator(builder.GtkBuilder):
                                  self.spinbutton_prognosis_minutes.get_text(),
                                  self.spinbutton_prognosis_seconds.get_text())
             info = [date.strftime("%Y-%m-%d"), release, distance]
-            from pigeonplanner import printing
+            import printing
             printing.PrintVelocity(self.parent, data, info,
                                    self.options, const.PRINT)
 

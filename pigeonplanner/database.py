@@ -26,8 +26,8 @@ import sqlite3
 import logging
 logger = logging.getLogger(__name__)
 
-from pigeonplanner import const
-from pigeonplanner import common
+import const
+import common
 
 
 (RET_FIRSTCOL,
@@ -189,7 +189,7 @@ class DatabaseOperations(object):
         try:
             conn = sqlite3.connect(const.DATABASE)
         except Exception, e:
-            from pigeonplanner.ui import logdialog
+            from ui import logdialog
 
             logger.critical("Could not connect to database")
             logger.critical(e)

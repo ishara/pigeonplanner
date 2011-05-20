@@ -24,17 +24,17 @@ import gtk
 import gtk.gdk
 import gobject
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import checks
-from pigeonplanner import builder
-from pigeonplanner import messages
-from pigeonplanner.ui import tools
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui.widgets import date
-from pigeonplanner.ui.widgets import menus
-from pigeonplanner.ui.widgets import bandentry
-from pigeonplanner.ui.widgets import comboboxes
+import const
+import common
+import checks
+import builder
+import messages
+from ui import tools
+from ui import dialogs
+from ui.widgets import date
+from ui.widgets import menus
+from ui.widgets import bandentry
+from ui.widgets import comboboxes
 
 
 class PigeonAlreadyExists(Exception): pass

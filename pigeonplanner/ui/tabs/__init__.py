@@ -16,8 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner.ui.tabs.pedigree import PedigreeTab
-from pigeonplanner.ui.tabs.relatives import RelativesTab
-from pigeonplanner.ui.tabs.results import ResultsTab
-from pigeonplanner.ui.tabs.medication import MedicationTab
+from ui.tabs.pedigree import PedigreeTab
+from ui.tabs.relatives import RelativesTab
+from ui.tabs.results import ResultsTab
+from ui.tabs.medication import MedicationTab
 

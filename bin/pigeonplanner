@@ -42,12 +42,13 @@ except:
 
 if __name__ == "__main__":
     # Detect our module path
-    pp_dir = os.path.join(os.path.dirname(sys.argv[0]), '..')
+    pp_dir = os.path.join(os.path.dirname(sys.argv[0]), '../pigeonplanner')
     prefix = os.path.abspath(os.path.normpath(pp_dir))
+    print prefix
     if not prefix.startswith('/usr'):
         sys.path.insert(0, pp_dir)
 
-    from pigeonplanner import startup
+    import startup
     app = startup.Startup()
     #TODO: find a better (and crossplatform) way
     try:
@@ -68,7 +69,7 @@ if __name__ == "__main__":
         updatethread = Thread(None, app.search_updates, None)
         updatethread.start()
 
-    from pigeonplanner.ui import mainwindow
+    from ui import mainwindow
     pigeonplanner = mainwindow.MainWindow(app.options, app.db, app.parser)
 
     gtk.main()

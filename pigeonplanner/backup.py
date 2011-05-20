@@ -25,7 +25,7 @@ from os.path import isdir, join, normpath, split
 import logging
 logger = logging.getLogger(__name__)
 
-from pigeonplanner import const
+import const
 
 
 def make_backup(folder):

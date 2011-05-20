@@ -22,7 +22,7 @@ import datetime
 import gtk
 import gtk.gdk
 
-from pigeonplanner import const
+import const
 
 
 class DateEntry(gtk.Viewport):

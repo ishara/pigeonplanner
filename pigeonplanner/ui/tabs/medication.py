@@ -18,14 +18,14 @@
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import builder
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui.tabs import basetab
-from pigeonplanner.ui.widgets import date
-from pigeonplanner.ui.widgets import menus
-from pigeonplanner.ui.widgets import comboboxes
+import const
+import common
+import builder
+from ui import dialogs
+from ui.tabs import basetab
+from ui.widgets import date
+from ui.widgets import menus
+from ui.widgets import comboboxes
 
 
 class VaccinationCheck(gtk.CheckButton):

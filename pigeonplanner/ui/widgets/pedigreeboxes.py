@@ -24,7 +24,7 @@ Pedigree widgets
 import gtk
 import glib
 
-from pigeonplanner import const
+import const
 
 
 def format_text(text):

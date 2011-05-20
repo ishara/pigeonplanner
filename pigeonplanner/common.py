@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 import gtk
 import gobject
 
-from pigeonplanner import const
+import const
 
 
 def get_sexdic():

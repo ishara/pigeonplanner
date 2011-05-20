@@ -25,11 +25,11 @@ import os
 import gtk
 import gobject
 
-from pigeonplanner import const
-from pigeonplanner import builder
-from pigeonplanner import messages
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui.widgets import comboboxes
+import const
+import builder
+import messages
+from ui import dialogs
+from ui.widgets import comboboxes
 
 
 class OptionsDialog(builder.GtkBuilder):

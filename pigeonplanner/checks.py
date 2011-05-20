@@ -22,8 +22,8 @@ Provides functions to check band and year entries
 
 import datetime
 
-from pigeonplanner import const
-from pigeonplanner import messages
+import const
+import messages
 
 
 class InvalidInputError(Exception):

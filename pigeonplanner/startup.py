@@ -31,8 +31,8 @@ from optparse import OptionParser
 import gtk
 import gobject
 
-from pigeonplanner import const
-from pigeonplanner import common
+import const
+import common
 
 
 WIN32 = sys.platform.startswith("win")
@@ -85,11 +85,11 @@ class Startup(object):
         self._loglevel = logging.DEBUG if options.debug else logging.WARNING
 
         # Initialize options
-        from pigeonplanner import options
+        import options
         self.options = options.GetOptions()
 
     def setup_locale(self):
-        from pigeonplanner import intl
+        import intl
 
         language = self.options.language
         intl.install(const.DOMAIN, const.LANGDIR, language)
@@ -156,7 +156,7 @@ class Startup(object):
         Setup the database and check if it needs an update
         """
 
-        from pigeonplanner import database
+        import database
 
         self.db = database.DatabaseOperations()
         self.db.check_schema()
@@ -167,7 +167,7 @@ class Startup(object):
         build the image thumbnails if needed.
         """
 
-        from pigeonplanner import pigeonparser
+        import pigeonparser
 
         self.parser = pigeonparser.PigeonParser(self.db)
         self.parser.build_pigeons()
@@ -177,7 +177,7 @@ class Startup(object):
             common.build_thumbnails(self.parser.pigeons)
 
     def search_updates(self):
-        from pigeonplanner import update
+        import update
 
         try:
             new, msg = update.update()
@@ -191,8 +191,8 @@ class Startup(object):
             self.logger.info("AutoUpdate: %s" %msg)
 
     def update_dialog(self):
-        from pigeonplanner import messages
-        from pigeonplanner.ui.dialogs import MessageDialog
+        import messages
+        from ui.dialogs import MessageDialog
 
         d = MessageDialog(const.QUESTION, messages.MSG_UPDATE_NOW, None)
         if d.yes:
@@ -225,6 +225,6 @@ class Startup(object):
         if not use_logger:
             logfile.close()
 
-        from pigeonplanner.ui import logdialog
+        from ui import logdialog
         logdialog.LogDialog(self.db)
 

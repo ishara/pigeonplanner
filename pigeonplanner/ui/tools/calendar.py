@@ -20,11 +20,11 @@ import time
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import checks
-from pigeonplanner import builder
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui.widgets import date
+import const
+import checks
+import builder
+from ui import dialogs
+from ui.widgets import date
 
 
 class Calendar(builder.GtkBuilder):

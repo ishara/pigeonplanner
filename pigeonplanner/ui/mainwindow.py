@@ -29,25 +29,25 @@ logger = logging.getLogger(__name__)
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import backup
-from pigeonplanner import checks
-from pigeonplanner import update
-from pigeonplanner import builder
-from pigeonplanner import printing
-from pigeonplanner import messages
-from pigeonplanner.ui import tabs
-from pigeonplanner.ui import tools
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui import pedigree
-from pigeonplanner.ui import logdialog
-from pigeonplanner.ui import detailsview
-from pigeonplanner.ui import optionsdialog
-from pigeonplanner.ui import pedigreewindow
-from pigeonplanner.ui.widgets import menus
-from pigeonplanner.ui.widgets import treeview
-from pigeonplanner.ui.widgets import comboboxes
+import const
+import common
+import backup
+import checks
+import update
+import builder
+import printing
+import messages
+from ui import tabs
+from ui import tools
+from ui import dialogs
+from ui import pedigree
+from ui import logdialog
+from ui import detailsview
+from ui import optionsdialog
+from ui import pedigreewindow
+from ui.widgets import menus
+from ui.widgets import treeview
+from ui.widgets import comboboxes
 
 
 class MainWindow(builder.GtkBuilder):

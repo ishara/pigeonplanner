@@ -19,10 +19,10 @@
 import gtk
 import gtk.gdk
 
-from pigeonplanner import const
-from pigeonplanner.ui.tabs import basetab
-from pigeonplanner.ui.widgets import menus
-from pigeonplanner.ui.detailsview import DetailsDialog
+import const
+from ui.tabs import basetab
+from ui.widgets import menus
+from ui.detailsview import DetailsDialog
 
 
 class RelativesTab(basetab.BaseTab):

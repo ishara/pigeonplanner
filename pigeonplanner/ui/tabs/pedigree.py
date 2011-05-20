@@ -18,7 +18,7 @@
 
 import gtk
 
-from pigeonplanner.ui.tabs import basetab
+from ui.tabs import basetab
 
 
 class PedigreeTab(basetab.BaseTab):

@@ -20,9 +20,9 @@ import math
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import builder
-from pigeonplanner.ui.widgets import menus
+import const
+import builder
+from ui.widgets import menus
 
 
 PRINTER_DPI = 72.0

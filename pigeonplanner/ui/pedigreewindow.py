@@ -24,13 +24,13 @@ import os.path
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import builder
-from pigeonplanner import printing
-from pigeonplanner.ui import tools
-from pigeonplanner.ui import maildialog
-from pigeonplanner.ui.widgets import menus
+import const
+import common
+import builder
+import printing
+from ui import tools
+from ui import maildialog
+from ui.widgets import menus
 
 
 class PedigreeWindow(builder.GtkBuilder):

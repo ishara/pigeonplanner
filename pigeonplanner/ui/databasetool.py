@@ -22,12 +22,12 @@ logger = logging.getLogger(__name__)
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import builder
-from pigeonplanner import messages
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui import logdialog
+import const
+import common
+import builder
+import messages
+from ui import dialogs
+from ui import logdialog
 
 
 (EXECUTE,

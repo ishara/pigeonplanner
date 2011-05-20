@@ -41,19 +41,19 @@ except:
 
 if __name__ == "__main__":
     # Detect our module path
-    pp_dir = os.path.join(os.path.dirname(sys.argv[0]), '..')
+    pp_dir = os.path.join(os.path.dirname(sys.argv[0]), '../pigeonplanner')
     prefix = os.path.abspath(os.path.normpath(pp_dir))
     if not prefix.startswith('/usr'):
         sys.path.insert(0, pp_dir)
 
-    from pigeonplanner import startup
+    import startup
     app = startup.Startup()
     app.setup_logging()
     app.setup_locale()
     app.setup_theme()
     app.setup_database()
 
-    from pigeonplanner.ui import databasetool
+    from ui import databasetool
     dbtool = databasetool.DBWindow(app.db)
 
     gtk.main()

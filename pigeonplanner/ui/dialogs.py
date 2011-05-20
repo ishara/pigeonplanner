@@ -25,12 +25,12 @@ import gtk.gdk
 import glib
 import gobject
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import backup
-from pigeonplanner import messages
-from pigeonplanner.ui.widgets import comboboxes
-from pigeonplanner.ui.widgets import filefilters
+import const
+import common
+import backup
+import messages
+from ui.widgets import comboboxes
+from ui.widgets import filefilters
 
 
 class MessageDialog(gtk.MessageDialog):

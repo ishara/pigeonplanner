@@ -30,13 +30,13 @@ import pango
 import logging
 logger = logging.getLogger(__name__)
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import messages
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui import pedigree
-from pigeonplanner.ui import printpreview
-from pigeonplanner.ui.widgets import filefilters
+import const
+import common
+import messages
+from ui import dialogs
+from ui import pedigree
+from ui import printpreview
+from ui.widgets import filefilters
 
 
 PRINTER_DPI = 72.0

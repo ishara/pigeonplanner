@@ -18,8 +18,8 @@
 
 import gtk
 
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui.widgets import comboboxes
+from ui import dialogs
+from ui.widgets import comboboxes
 
 
 FILTER = 0

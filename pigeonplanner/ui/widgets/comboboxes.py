@@ -20,7 +20,7 @@
 
 import gtk
 
-from pigeonplanner import common
+import common
 
 
 def set_entry_completion(widget):

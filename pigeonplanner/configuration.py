@@ -27,7 +27,7 @@ import ConfigParser
 import logging
 logger = logging.getLogger(__name__)
 
-from pigeonplanner import const
+import const
 
 
 class Configuration(object):

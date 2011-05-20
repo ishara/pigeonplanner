@@ -20,8 +20,8 @@ Parser to get all pigeons
 """
 
 
-from pigeonplanner import const
-from pigeonplanner import common
+import const
+import common
 
 
 class PigeonParser(object):

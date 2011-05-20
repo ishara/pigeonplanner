@@ -20,7 +20,7 @@ Interface for Gtkbuilder
 
 import gtk
 
-from pigeonplanner import const
+import const
 
 
 class GtkBuilder(gtk.Builder, object):

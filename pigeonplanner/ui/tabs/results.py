@@ -18,18 +18,18 @@
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import checks
-from pigeonplanner import builder
-from pigeonplanner import messages
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui import resultwindow
-from pigeonplanner.ui import resultparser
-from pigeonplanner.ui.tabs import basetab
-from pigeonplanner.ui.widgets import date
-from pigeonplanner.ui.widgets import menus
-from pigeonplanner.ui.widgets import comboboxes
+import const
+import common
+import checks
+import builder
+import messages
+from ui import dialogs
+from ui import resultwindow
+from ui import resultparser
+from ui.tabs import basetab
+from ui.widgets import date
+from ui.widgets import menus
+from ui.widgets import comboboxes
 
 
 class ResultsTab(builder.GtkBuilder, basetab.BaseTab):

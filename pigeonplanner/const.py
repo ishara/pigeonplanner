@@ -23,20 +23,32 @@ Definies all constants
 import os
 import sys
 import tempfile
+from datetime import datetime
 
 import gtk.gdk
 
-import pigeonplanner
 
+NAME = "Pigeon Planner"
+VERSION = "1.1.0"
+COPYRIGHT = "(C)opyright 2009-%s Timo Vanwynsberghe" % datetime.now().year
+AUTHORS = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
+ARTISTS = ["Timo Vanwynsberghe <timovwb@gmail.com>",
+           "http://www.openclipart.org"]
+WEBSITE = "http://www.pigeonplanner.com"
+DESCRIPTION = "Organise and manage your pigeons"
+LICENSE = """
+Pigeon Planner is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-NAME = pigeonplanner.name
-VERSION = pigeonplanner.version
-AUTHORS = pigeonplanner.authors
-ARTISTS = pigeonplanner.artists
-WEBSITE = pigeonplanner.website
-COPYRIGHT = pigeonplanner.copyright
-DESCRIPTION = pigeonplanner.description
-LICENSE = pigeonplanner.license
+Pigeon Planner is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>"""
 
 
 DATABASE_VERSION = 3

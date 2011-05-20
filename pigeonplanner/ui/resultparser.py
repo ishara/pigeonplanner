@@ -21,12 +21,12 @@ logger = logging.getLogger(__name__)
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import builder
-from pigeonplanner import mailing
-from pigeonplanner.resultparsers import get_all_parsers
-from pigeonplanner.ui.widgets.filefilters import TxtFilter
+import const
+import common
+import builder
+import mailing
+from resultparsers import get_all_parsers
+from ui.widgets.filefilters import TxtFilter
 
 
 class ResultParser(builder.GtkBuilder):

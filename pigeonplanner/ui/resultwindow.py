@@ -25,15 +25,15 @@ import datetime
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import builder
-from pigeonplanner import printing
-from pigeonplanner.ui import tools
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui import maildialog
-from pigeonplanner.ui.widgets import menus
-from pigeonplanner.ui.widgets import comboboxes
+import const
+import common
+import builder
+import printing
+from ui import tools
+from ui import dialogs
+from ui import maildialog
+from ui.widgets import menus
+from ui.widgets import comboboxes
 
 
 (KEY,

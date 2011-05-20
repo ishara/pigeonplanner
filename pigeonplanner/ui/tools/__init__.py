@@ -16,9 +16,9 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner.ui.tools.addressbook import AddressBook, check_user_info
-from pigeonplanner.ui.tools.velocitycalculator import VelocityCalculator
-from pigeonplanner.ui.tools.calendar import Calendar
-from pigeonplanner.ui.tools.photoalbum import PhotoAlbum
-from pigeonplanner.ui.tools.datamanager import DataManager
+from ui.tools.addressbook import AddressBook, check_user_info
+from ui.tools.velocitycalculator import VelocityCalculator
+from ui.tools.calendar import Calendar
+from ui.tools.photoalbum import PhotoAlbum
+from ui.tools.datamanager import DataManager
 

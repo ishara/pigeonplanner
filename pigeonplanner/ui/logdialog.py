@@ -26,9 +26,9 @@ import os.path
 import gtk
 import gobject
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner.ui import maildialog
+import const
+import common
+from ui import maildialog
 
 SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]
 COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow",

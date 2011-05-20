@@ -18,11 +18,11 @@
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import builder
-from pigeonplanner import messages
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui.widgets import comboboxes
+import const
+import builder
+import messages
+from ui import dialogs
+from ui.widgets import comboboxes
 
 
 class DataManager(builder.GtkBuilder):
@@ -96,7 +96,7 @@ class DataManager(builder.GtkBuilder):
         pigeon = self.liststore.get_value(node, 0)
         if not pigeon.get_pindex() in self.parser.pigeons:
             return
-        from pigeonplanner.ui.detailsview import DetailsDialog
+        from ui.detailsview import DetailsDialog
         DetailsDialog(self.database, self.parser, pigeon, self.managerwindow)
 
     def on_buttondelete_clicked(self, widget):

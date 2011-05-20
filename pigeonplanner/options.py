@@ -20,7 +20,7 @@ Interface to get and set configuration options
 """
 
 
-from pigeonplanner import configuration
+import configuration
 
 
 class GetOptions(object):

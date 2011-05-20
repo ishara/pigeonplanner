@@ -29,12 +29,12 @@ try:
 except:
     cairo_available = False
 
-from pigeonplanner import const
-from pigeonplanner import messages
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui.widgets import menus
-from pigeonplanner.ui.widgets import pedigreeboxes
-from pigeonplanner.ui.detailsview import DetailsDialog
+import const
+import messages
+from ui import dialogs
+from ui.widgets import menus
+from ui.widgets import pedigreeboxes
+from ui.detailsview import DetailsDialog
 
 
 #FIXME: Cairo-drawn boxes don't show up on Mac OS X
