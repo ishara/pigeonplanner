@@ -33,6 +33,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import gtk
+import glib
 import gobject
 
 import const
@@ -240,6 +241,15 @@ def image_to_thumb(img_path):
         logger.error("Couldn't create thumbnail from: %s", img_path)
     else:
         pixbuf.save(get_thumb_path(img_path), 'png')
+        return pixbuf
+
+def get_thumbnail(image):
+    try:
+        pixbuf = gtk.gdk.pixbuf_new_from_file(get_thumb_path(image))
+    except gobject.GError, msg:
+        logger.warning("Thumbnail not found: %s", msg)
+        pixbuf = image_to_thumb(image)
+    return pixbuf
 
 def get_thumb_path(image):
     """
@@ -271,6 +281,37 @@ def url_hook(about, link):
 
 def email_hook(about, email):
     webbrowser.open("mailto:%s" % email)
+
+def escape_text(text):
+    if not text:
+        return ""
+    return glib.markup_escape_text(text)
+
+def open_file(path):
+    from ui.dialogs import MessageDialog
+
+    norm_path = os.path.normpath(path)
+    if not os.path.exists(norm_path):
+        MessageDialog(const.ERROR, (_("Error: This file does not exist"), None, _("Error")))
+        return
+
+    if const.WINDOWS:
+        try:
+            os.startfile(norm_path)
+        except WindowsError, exc:
+            MessageDialog(const.ERROR, (_("Error opening file:"), str(exc), _("Error")))
+    else:
+        if const.OSX:
+            utility = 'open'
+        else:
+            utility = 'xdg-open'
+        search = os.environ['PATH'].split(':')
+        for lpath in search:
+            prog = os.path.join(lpath, utility)
+            if os.path.isfile(prog):
+                import subprocess
+                subprocess.call((prog, norm_path))
+                return
 
 
 class URLOpen:

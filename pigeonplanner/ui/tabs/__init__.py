@@ -19,5 +19,6 @@
 from ui.tabs.pedigree import PedigreeTab
 from ui.tabs.relatives import RelativesTab
 from ui.tabs.results import ResultsTab
+from ui.tabs.media import MediaTab
 from ui.tabs.medication import MedicationTab
 

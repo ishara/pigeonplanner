@@ -126,6 +126,7 @@ GLADECALENDAR = os.path.join(GLADEDIR, "Calendar.ui")
 GLADEDATAMGR = os.path.join(GLADEDIR, "DataManager.ui")
 GLADEMEDVIEW = os.path.join(GLADEDIR, "MedicationView.ui")
 GLADERESVIEW = os.path.join(GLADEDIR, "ResultsView.ui")
+GLADEMEDIAVIEW = os.path.join(GLADEDIR, "MediaView.ui")
 GLADEDETAILS = os.path.join(GLADEDIR, "DetailsView.ui")
 
 DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')

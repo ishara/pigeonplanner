@@ -39,6 +39,7 @@ import common
 class DatabaseOperations(object):
     PIGEONS = "Pigeons"
     RESULTS = "Results"
+    MEDIA = "Media"
     MED = "Medication"
     ADDR = "Addresses"
     EVENTS = "Events"
@@ -96,6 +97,12 @@ class DatabaseOperations(object):
              ' ownplace INTEGER,'
              ' ownout INTEGER,'
              ' comment TEXT)',
+    MEDIA: '(Mediakey INTEGER PRIMARY KEY,'
+           ' pindex TEXT,'
+           ' type TEXT,'
+           ' path TEXT,'
+           ' title TEXT,'
+           ' description TEXT)',
     MED: '(Medicationkey INTEGER PRIMARY KEY,'
          ' medid TEXT,'
          ' pindex TEXT,'
@@ -393,6 +400,11 @@ class DatabaseOperations(object):
             return False
         else:
             return True
+
+#### Media
+    def get_pigeon_media(self, pindex):
+        sql = 'SELECT * FROM Media WHERE pindex=?'
+        return self.__db_execute_select(sql, (pindex,), RET_ALLCOL)
 
 #### Medication
     def delete_medication_from_id_pindex(self, ID, pindex):

@@ -303,7 +303,7 @@ class DetailsView(builder.GtkBuilder):
 
         imagepath = pigeon.get_image()
         if imagepath:
-            pixbuf = self._get_pigeon_thumbnail(imagepath)
+            pixbuf = common.get_thumbnail(imagepath)
             self.imagepigeon.set_data('image-path', imagepath)
         else:
             pixbuf = const.LOGO_IMG
@@ -391,7 +391,7 @@ class DetailsView(builder.GtkBuilder):
             if image is None:
                 self.set_default_image(edit=True)
             else:
-                pixbuf = self._get_pigeon_thumbnail(image)
+                pixbuf = common.get_thumbnail(image)
                 self.imagepigeonedit.set_from_pixbuf(pixbuf)
         else:
             logger.debug("Start adding a pigeon")
@@ -401,19 +401,6 @@ class DetailsView(builder.GtkBuilder):
         self.buttonsave.grab_default()
 
     # Internal methods
-    def _get_pigeon_thumbnail(self, image):
-        try:
-            pixbuf = gtk.gdk.pixbuf_new_from_file(common.get_thumb_path(image))
-        except gobject.GError, msg:
-            # Something went wrong with the thumbnail filenames.
-            # Delete all and rebuild.
-            logger.warning("Thumb not found, rebuild complete list. %s", msg)
-            for img_thumb in os.listdir(const.THUMBDIR):
-                os.remove(os.path.join(const.THUMBDIR, img_thumb))
-            common.build_thumbnails(self.parser.pigeons)
-            pixbuf = self._get_pigeon_thumbnail(image)
-        return pixbuf
-
     def _set_status_image(self, status):
         image = os.path.join(const.IMAGEDIR,
                                     '%s.png' %self.statusdic[status].lower())

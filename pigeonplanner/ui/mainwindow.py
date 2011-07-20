@@ -82,6 +82,9 @@ class MainWindow(builder.GtkBuilder):
         self.resultstab = tabs.ResultsTab(self.mainwindow, self.database,
                                           self.options, self.parser)
         self.notebook.append_page(*self.resultstab.get_tab_widgets())
+        self.mediatab = tabs.MediaTab(self.mainwindow, self.database,
+                                      self.options, self.parser)
+        self.notebook.append_page(*self.mediatab.get_tab_widgets())
         self.medicationtab = tabs.MedicationTab(self.mainwindow, self.database,
                                                 self.parser, self)
         self.notebook.append_page(*self.medicationtab.get_tab_widgets())
@@ -497,6 +500,7 @@ class MainWindow(builder.GtkBuilder):
         self.pedigreetab.draw_pedigree(pigeon)
         self.relativestab.fill_treeviews(pigeon)
         self.resultstab.fill_treeview(pigeon)
+        self.mediatab.fill_treeview(pigeon)
         self.medicationtab.fill_treeview(pigeon)
         self.detailsview.set_details(pigeon)
 

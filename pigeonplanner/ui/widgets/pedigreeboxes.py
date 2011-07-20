@@ -22,15 +22,9 @@ Pedigree widgets
 """
 
 import gtk
-import glib
 
 import const
-
-
-def format_text(text):
-    if not text:
-        return ""
-    return glib.markup_escape_text(text)
+import common
 
 
 class PedigreeBox_cairo(gtk.DrawingArea):
@@ -69,7 +63,7 @@ class PedigreeBox_cairo(gtk.DrawingArea):
             if detailed and child is not None:
                 self.editable = True
                 tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
-                self.text = tform % format_text(_("<edit>"))
+                self.text = tform % common.escape_text(_("<edit>"))
 
     def get_sex(self):
         return self.sex
@@ -158,7 +152,7 @@ class ExtraBox_cairo(gtk.DrawingArea):
         self.text = ''
         if pigeon is not None:
             extra = pigeon.get_extra()
-            self.text = format_text('\n'.join(extra[:lines]))
+            self.text = common.escape_text('\n'.join(extra[:lines]))
             self.bgcolor = (240/256.0, 230/256.0, 140/256.0)
             self.bordercolor = (0, 0, 0)
         else:
@@ -247,7 +241,7 @@ class PedigreeBox(gtk.DrawingArea):
             if detailed and child is not None:
                 self.editable = True
                 tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
-                text = tform % format_text(_("<edit>"))
+                text = tform % common.escape_text(_("<edit>"))
 
         self.textlayout = self.create_pango_layout('')
         self.textlayout.set_markup(text)
@@ -338,7 +332,7 @@ class ExtraBox(gtk.DrawingArea):
         self.text = ''
         if pigeon is not None:
             extra = pigeon.get_extra()
-            self.text = format_text('\n'.join(extra[:lines]))
+            self.text = common.escape_text('\n'.join(extra[:lines]))
         self.textlayout = self.create_pango_layout(self.text)
         s = self.textlayout.get_pixel_size()
         xmin = s[0] + 12
