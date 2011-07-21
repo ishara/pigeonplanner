@@ -21,4 +21,5 @@ from ui.tools.velocitycalculator import VelocityCalculator
 from ui.tools.calendar import Calendar
 from ui.tools.photoalbum import PhotoAlbum
 from ui.tools.datamanager import DataManager
+from ui.tools.racepointmanager import RacepointManager
 

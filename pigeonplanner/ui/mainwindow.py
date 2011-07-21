@@ -375,6 +375,10 @@ class MainWindow(builder.GtkBuilder):
         logger.debug(common.get_function_name())
         tools.VelocityCalculator(self.mainwindow, self.database, self.options)
 
+    def menurace_activate(self, widget):
+        logger.debug(common.get_function_name())
+        tools.RacepointManager(self.mainwindow, self.database)
+
     def menuaddresses_activate(self, widget):
         logger.debug(common.get_function_name())
         tools.AddressBook(self.mainwindow, self.database)
@@ -632,6 +636,9 @@ class MainWindow(builder.GtkBuilder):
             ("Velocity", None, _("Velocity calculator"), None,
                     _("Calculate the velocity of flights"),
                     self.menuvelocity_activate),
+            ("Racepoints", None, _("Racepoint manager"), None,
+                    _("Manage the racepoints and distances"),
+                    self.menurace_activate),
             ("Album", None, _("_Photo Album"), None,
                     _("View the images of your pigeons"),
                     self.menualbum_activate),

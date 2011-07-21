@@ -458,6 +458,11 @@ class DatabaseOperations(object):
         sql = 'SELECT * FROM Addresses WHERE me=1'
         return self.__db_execute_select(sql, None, RET_ONEROW)
 
+#### Racepoints
+    def get_racepoint_data(self, racepoint):
+        sql = 'SELECT xco, yco, distance FROM Racepoints WHERE racepoint=?'
+        return self.__db_execute_select(sql, (racepoint,), RET_ONEROW)
+
 #### Sold
     def get_sold_data(self, pindex):
         sql = 'SELECT person, date, info FROM Sold WHERE pindex=?'
