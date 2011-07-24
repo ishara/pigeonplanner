@@ -86,7 +86,7 @@ class BasePrinting(object):
             fc.add_filter(filefilters.PdfFilter())
 
             fc.set_current_name(pdf_name)
-            fc.set_current_folder(common.get_unicode_path(const.HOMEDIR))
+            fc.set_current_folder(const.HOMEDIR)
 
             response = fc.run()
             save_path = None

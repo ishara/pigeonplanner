@@ -135,6 +135,7 @@ class MediaChooser(gtk.FileChooserDialog):
         table.set_col_spacings(8)
         self.set_extra_widget(table)
         self.set_use_preview_label(False)
+        self.set_current_folder(const.HOMEDIR)
         self.connect('selection-changed', self.on_selection_changed)
         self.connect('update-preview', self.on_update_preview)
 

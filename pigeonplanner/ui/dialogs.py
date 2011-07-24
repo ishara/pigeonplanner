@@ -215,6 +215,7 @@ class BackupDialog(gtk.Dialog):
             self.fcButtonCreate = gtk.FileChooserButton(title)
             self.fcButtonCreate.set_action(
                                         gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+            self.fcButtonCreate.set_current_folder(const.HOMEDIR)
 
             self.vbox.pack_start(label, False, True, 8)
             self.vbox.pack_start(self.fcButtonCreate, False, True, 12)
@@ -238,6 +239,7 @@ class BackupDialog(gtk.Dialog):
             title = _("Select a valid backup file")
             self.fcButtonRestore = gtk.FileChooserButton(title)
             self.fcButtonRestore.set_action(gtk.FILE_CHOOSER_ACTION_OPEN)
+            self.fcButtonRestore.set_current_folder(const.HOMEDIR)
             self.fcButtonRestore.add_filter(filefilters.BackupFilter())
 
             self.vbox.pack_start(label, False, True, 8)
