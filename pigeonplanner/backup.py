@@ -58,7 +58,8 @@ def makezip(path, zipper):
         for filename in filenames:
             if not filename.endswith('.lock') and not\
                    filename.endswith('.log') and not\
-                   filename.endswith('.old'):
+                   filename.endswith('.old') and not\
+                   filename == 'Thumbs.db':
                 zipper.write(os.path.join(dirpath, filename),            
                 os.path.join(dirpath[len(path):], filename)) 
 
