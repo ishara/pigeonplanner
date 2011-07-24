@@ -22,9 +22,10 @@ Provides access to the database
 
 import sys
 import os.path
-import sqlite3
 import logging
 logger = logging.getLogger(__name__)
+import sqlite3
+sqlite3.register_adapter(str, lambda s: s.decode('utf-8'))
 
 import const
 import common
@@ -214,7 +215,6 @@ class DatabaseOperations(object):
             logdialog.LogDialog()
             sys.exit()
 
-        conn.text_factory = str
         cursor = conn.cursor()
         return (conn, cursor)
 
