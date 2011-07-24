@@ -255,7 +255,7 @@ class BackupDialog(gtk.Dialog):
         self.show_all()
 
     def makebackup_clicked(self, widget):
-        folder = self.fcButtonCreate.get_current_folder()
+        folder = unicode(self.fcButtonCreate.get_current_folder())
         if folder:
             if backup.make_backup(folder):
                 msg = messages.MSG_BACKUP_SUCCES
@@ -264,7 +264,7 @@ class BackupDialog(gtk.Dialog):
             MessageDialog(const.INFO, msg, self.par)
 
     def restorebackup_clicked(self, widget):
-        zipfile = self.fcButtonRestore.get_filename()
+        zipfile = unicode(self.fcButtonRestore.get_filename())
         if zipfile:
             if backup.restore_backup(zipfile):
                 msg = messages.MSG_RESTORE_SUCCES

@@ -46,7 +46,7 @@ class ResultParser(builder.GtkBuilder):
         return False
 
     def on_parsebutton_clicked(self, widget):
-        self.resultfilename = self.filebutton.get_filename()
+        self.resultfilename = unicode(self.filebutton.get_filename())
         if self.resultfilename is None:
             return
         resultfile = open(self.resultfilename, 'r')

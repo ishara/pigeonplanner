@@ -290,7 +290,7 @@ def escape_text(text):
 def open_file(path):
     from ui.dialogs import MessageDialog
 
-    norm_path = os.path.normpath(path)
+    norm_path = unicode(os.path.normpath(path), 'utf-8')
     if not os.path.exists(norm_path):
         MessageDialog(const.ERROR, (_("Error: This file does not exist"), None, _("Error")))
         return
