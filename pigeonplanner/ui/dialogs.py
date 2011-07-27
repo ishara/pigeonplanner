@@ -219,7 +219,6 @@ class BackupDialog(gtk.Dialog):
 
     def makebackup_clicked(self, widget):
         folder = self.fcButtonCreate.get_current_folder()
-        print type(folder)
         if folder:
             if backup.make_backup(folder):
                 msg = messages.MSG_BACKUP_SUCCES
