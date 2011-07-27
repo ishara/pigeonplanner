@@ -26,7 +26,7 @@ import common
 import builder
 import mailing
 from resultparsers import get_all_parsers
-from ui.widgets.filefilters import TxtFilter
+from ui import filechooser
 
 
 class ResultParser(builder.GtkBuilder):
@@ -39,14 +39,14 @@ class ResultParser(builder.GtkBuilder):
         self._build_interface()
         self._build_parsers()
         self.parserdialog.set_transient_for(parent)
-        self.parserdialog.show()
+        self.parserdialog.show_all()
 
     def close_window(self, widget=None, event=None):
         self.parserdialog.destroy()
         return False
 
     def on_parsebutton_clicked(self, widget):
-        self.resultfilename = unicode(self.filebutton.get_filename())
+        self.resultfilename = self.filebutton.get_filename()
         if self.resultfilename is None:
             return
         resultfile = open(self.resultfilename, 'r')
@@ -125,8 +125,8 @@ class ResultParser(builder.GtkBuilder):
         self.parserstore = gtk.ListStore(object, str)
         self.parsercombo.set_model(self.parserstore)
 
-        self.filebutton.add_filter(TxtFilter())
-        self.filebutton.set_current_folder(common.get_unicode_path(const.HOMEDIR))
+        self.filebutton = filechooser.ResultChooser()
+        self.table.attach(self.filebutton, 1, 2, 0, 1)
 
     def _build_parsers(self):
         parsers = get_all_parsers()

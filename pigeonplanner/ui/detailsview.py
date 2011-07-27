@@ -31,6 +31,7 @@ import builder
 import messages
 from ui import tools
 from ui import dialogs
+from ui import filechooser
 from ui.widgets import date
 from ui.widgets import menus
 from ui.widgets import bandentry
@@ -191,9 +192,9 @@ class DetailsView(builder.GtkBuilder):
             self.on_open_imagechooser()
 
     def on_open_imagechooser(self, widget=None):
-        chooser = dialogs.ImageChooser(self.parent)
+        chooser = filechooser.ImageChooser(self.parent)
         response = chooser.run()
-        if response == chooser.RESPONSE_OPEN:
+        if response == gtk.RESPONSE_OK:
             filename = chooser.get_filename()
             try:
                 pb = gtk.gdk.pixbuf_new_from_file_at_size(filename, 200, 200)

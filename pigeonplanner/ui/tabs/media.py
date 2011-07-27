@@ -17,7 +17,6 @@
 
 
 import os
-import mimetypes
 
 import gtk
 import glib
@@ -27,6 +26,7 @@ import common
 import builder
 import messages
 from ui import dialogs
+from ui import filechooser
 from ui.tabs import basetab
 
 
@@ -70,15 +70,15 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         common.open_file(model.get_value(rowiter, 2))
 
     def on_buttonadd_clicked(self, widget):
-        chooser = MediaChooser(self.parent)
+        chooser = filechooser.MediaChooser(self.parent)
         response = chooser.run()
         if response == gtk.RESPONSE_OK:
             filepath = chooser.get_filename()
-            filetype = chooser.get_file_type()
+            filetype = chooser.get_filetype()
             if get_type_from_mime(filetype) == 'image':
                 common.image_to_thumb(filepath)
             data = [self.pigeon.get_pindex(), filetype, filepath,
-                    chooser.get_file_title(), chooser.get_file_description()]
+                    chooser.get_filetitle(), chooser.get_filedescription()]
             rowid = self.database.insert_into_table(self.database.MEDIA, data)
             text = self._format_text(data[3], data[4])
             rowiter = self.liststore.insert(0, [rowid, filetype, filepath, text])
@@ -120,58 +120,4 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
             text += " - <span style='italic' size='smaller'>%s</span>"\
                         % common.escape_text(description)
         return text
-
-
-class MediaChooser(gtk.FileChooserDialog):
-    def __init__(self, parent):
-        super(MediaChooser, self).__init__(parent=parent,
-                                title=_("Select a file..."),
-                                buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                                         gtk.STOCK_OK, gtk.RESPONSE_OK))
-        self.preview_image = gtk.Image()
-        self.set_preview_widget(self.preview_image)
-        table = gtk.Table(2, 2, False)
-        table.set_row_spacings(4)
-        table.set_col_spacings(8)
-        self.set_extra_widget(table)
-        self.set_use_preview_label(False)
-        self.set_current_folder(const.HOMEDIR)
-        self.connect('selection-changed', self.on_selection_changed)
-        self.connect('update-preview', self.on_update_preview)
-
-        label = gtk.Label(_("Title"))
-        label.set_alignment(0, .5)
-        self.entrytitle = gtk.Entry()
-        table.attach(label, 0, 1, 0, 1, gtk.FILL, 0)
-        table.attach(self.entrytitle, 1, 2, 0, 1)
-        label = gtk.Label(_("Description"))
-        label.set_alignment(0, .5)
-        self.entrydescription = gtk.Entry()
-        table.attach(label, 0, 1, 1, 2, gtk.FILL, 0)
-        table.attach(self.entrydescription, 1, 2, 1, 2)
-        table.show_all()
-
-    def on_selection_changed(self, filechooser):
-        fname = self.get_filename()
-        if fname is None: return
-        self.entrytitle.set_text(os.path.splitext(os.path.basename(fname))[0])
-
-    def on_update_preview(self, filechooser):
-        filename = filechooser.get_preview_filename()
-        try:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128, 128)
-            self.preview_image.set_from_pixbuf(pixbuf)
-        except:
-            self.preview_image.set_from_stock(gtk.STOCK_DIALOG_ERROR,
-                                              gtk.ICON_SIZE_DIALOG)
-        filechooser.set_preview_widget_active(True)
-
-    def get_file_title(self):
-        return self.entrytitle.get_text()
-
-    def get_file_description(self):
-        return self.entrydescription.get_text()
-
-    def get_file_type(self):
-        return mimetypes.guess_type(self.get_filename())[0]
 

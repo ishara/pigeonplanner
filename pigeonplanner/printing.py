@@ -35,8 +35,8 @@ import common
 import messages
 from ui import dialogs
 from ui import pedigree
+from ui import filechooser
 from ui import printpreview
-from ui.widgets import filefilters
 
 
 PRINTER_DPI = 72.0
@@ -78,28 +78,19 @@ class BasePrinting(object):
             print_.set_export_filename(os.path.join(const.TEMPDIR, pdf_name))
             action = gtk.PRINT_OPERATION_ACTION_EXPORT
         elif print_action == const.SAVE:
-            fc = gtk.FileChooserDialog(title=_("Save as..."), 
-                        parent=self.parent,
-                        action=gtk.FILE_CHOOSER_ACTION_SAVE,
-                        buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                                 gtk.STOCK_SAVE, gtk.RESPONSE_OK))
-            fc.add_filter(filefilters.PdfFilter())
-
-            fc.set_current_name(pdf_name)
-            fc.set_current_folder(const.HOMEDIR)
-
-            response = fc.run()
+            chooser = filechooser.PdfSaver(self.parent, pdf_name)
+            response = chooser.run()
             save_path = None
             if response == gtk.RESPONSE_OK:
-                save_path = fc.get_filename()
-            fc.destroy()
+                save_path = chooser.get_filename()
+            chooser.destroy()
             if save_path:
                 if not save_path.endswith(".pdf"):
                     save_path += ".pdf"
                 print_.set_export_filename(save_path)
                 action = gtk.PRINT_OPERATION_ACTION_EXPORT
 
-        if action != None:
+        if action is not None:
             try:
                 response = print_.run(action, self.parent)
             except gobject.GError, e:

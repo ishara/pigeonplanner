@@ -29,8 +29,8 @@ import const
 import common
 import backup
 import messages
+from ui import filechooser
 from ui.widgets import comboboxes
-from ui.widgets import filefilters
 
 
 class MessageDialog(gtk.MessageDialog):
@@ -72,35 +72,6 @@ class MessageDialog(gtk.MessageDialog):
         response = self.run()
         self.yes = response == gtk.RESPONSE_YES
         self.destroy()
-
-
-class ImageChooser(gtk.FileChooserDialog):
-    RESPONSE_OPEN = 1
-    RESPONSE_CLEAR = 2
-    def __init__(self, parent):
-        gtk.FileChooserDialog.__init__(self, _("Choose an image..."), parent,
-                                                gtk.FILE_CHOOSER_ACTION_OPEN)
-        self.connect('update-preview', self.on_update_preview)
-        preview = gtk.Image()
-        self.set_preview_widget(preview)
-        self.add_filter(filefilters.ImageFilter())
-        image_folder = glib.get_user_special_dir(glib.USER_DIRECTORY_PICTURES)
-        self.set_current_folder(image_folder)
-        image = gtk.image_new_from_stock(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
-        buttonclear = self.add_button(_("No image"), self.RESPONSE_CLEAR)
-        buttonclear.set_image(image)
-        self.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
-        self.add_button(gtk.STOCK_OPEN, self.RESPONSE_OPEN)
-
-    def on_update_preview(self, widget):
-        filename = self.get_preview_filename()
-        try:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128, 128)
-            self.get_preview_widget().set_from_pixbuf(pixbuf)
-            have_preview = True
-        except:
-            have_preview = False
-        self.set_preview_widget_active(have_preview)
 
 
 class AboutDialog(gtk.AboutDialog):
@@ -211,12 +182,7 @@ class BackupDialog(gtk.Dialog):
             self.set_title(_("Create backup"))
             label = gtk.Label(_("Choose a directory where to save the backup"))
             label.set_padding(30, 0)
-            title = _("Select a directory")
-            self.fcButtonCreate = gtk.FileChooserButton(title)
-            self.fcButtonCreate.set_action(
-                                        gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
-            self.fcButtonCreate.set_current_folder(const.HOMEDIR)
-
+            self.fcButtonCreate = filechooser.BackupSaver()
             self.vbox.pack_start(label, False, True, 8)
             self.vbox.pack_start(self.fcButtonCreate, False, True, 12)
 
@@ -236,12 +202,7 @@ class BackupDialog(gtk.Dialog):
             text2 = _("Warning! This will overwrite the existing database!")
             label2 = gtk.Label(text2)
             label2.set_padding(30, 0)
-            title = _("Select a valid backup file")
-            self.fcButtonRestore = gtk.FileChooserButton(title)
-            self.fcButtonRestore.set_action(gtk.FILE_CHOOSER_ACTION_OPEN)
-            self.fcButtonRestore.set_current_folder(const.HOMEDIR)
-            self.fcButtonRestore.add_filter(filefilters.BackupFilter())
-
+            self.fcButtonRestore = filechooser.BackupChooser()
             self.vbox.pack_start(label, False, True, 8)
             self.vbox.pack_start(label2, False, True, 8)
             self.vbox.pack_start(self.fcButtonRestore, False, True, 12)
@@ -257,7 +218,8 @@ class BackupDialog(gtk.Dialog):
         self.show_all()
 
     def makebackup_clicked(self, widget):
-        folder = unicode(self.fcButtonCreate.get_current_folder())
+        folder = self.fcButtonCreate.get_current_folder()
+        print type(folder)
         if folder:
             if backup.make_backup(folder):
                 msg = messages.MSG_BACKUP_SUCCES
@@ -266,7 +228,7 @@ class BackupDialog(gtk.Dialog):
             MessageDialog(const.INFO, msg, self.par)
 
     def restorebackup_clicked(self, widget):
-        zipfile = unicode(self.fcButtonRestore.get_filename())
+        zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             if backup.restore_backup(zipfile):
                 msg = messages.MSG_RESTORE_SUCCES
