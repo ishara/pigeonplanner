@@ -37,6 +37,7 @@ import update
 import builder
 import printing
 import messages
+import thumbnail
 from ui import tabs
 from ui import tools
 from ui import dialogs
@@ -308,7 +309,7 @@ class MainWindow(builder.GtkBuilder):
                     # Same for the picture
                     image = pigeon.get_image()
                     if image:
-                        os.remove(common.get_thumb_path(image))
+                        os.remove(thumbnail.get_path(image))
                     # And medication
                     self.database.delete_from_table(self.database.MED, pindex, 2)
                     self.parser.remove_pigeon(pindex)

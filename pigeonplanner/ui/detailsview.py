@@ -29,6 +29,7 @@ import common
 import checks
 import builder
 import messages
+import thumbnail
 from ui import tools
 from ui import dialogs
 from ui import filechooser
@@ -304,7 +305,7 @@ class DetailsView(builder.GtkBuilder):
 
         imagepath = pigeon.get_image()
         if imagepath:
-            pixbuf = common.get_thumbnail(imagepath)
+            pixbuf = thumbnail.get_image(imagepath)
             self.imagepigeon.set_data('image-path', imagepath)
         else:
             pixbuf = const.LOGO_IMG
@@ -392,7 +393,7 @@ class DetailsView(builder.GtkBuilder):
             if image is None:
                 self.set_default_image(edit=True)
             else:
-                pixbuf = common.get_thumbnail(image)
+                pixbuf = thumbnail.get_image(image)
                 self.imagepigeonedit.set_from_pixbuf(pixbuf)
         else:
             logger.debug("Start adding a pigeon")
@@ -535,14 +536,11 @@ class DetailsView(builder.GtkBuilder):
                                        (pindex_new, pindex), 2, 2)
         # Update the data in the pigeon table
         self.database.update_table(self.database.PIGEONS, datalist, 1, 1)
-        # Remove the old thumbnail (if exists) and build the new one
+        # Remove the old thumbnail (if exists)
         image = datalist[10]
         prev_image = self.pigeon.get_image()
-        if image != prev_image:
-            if prev_image:
-                os.remove(common.get_thumb_path(prev_image))
-            if image:
-                common.image_to_thumb(image)
+        if image != prev_image and prev_image:
+            os.remove(thumbnail.get_path(prev_image))
         # Update the status or create a new record
         status = self.combostatus.get_active()
         old_status = self.pigeon.get_active()
@@ -588,9 +586,6 @@ class DetailsView(builder.GtkBuilder):
                 return
         # Checks say that this is really a none existing pigeon, so add it
         self.database.insert_into_table(self.database.PIGEONS, datalist)
-        image = datalist[10]
-        if image:
-            common.image_to_thumb(image)
         status = self.combostatus.get_active()
         self._insert_status_data(status, pindex)
 

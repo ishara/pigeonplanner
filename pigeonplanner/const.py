@@ -130,9 +130,9 @@ GLADERESVIEW = os.path.join(GLADEDIR, "ResultsView.ui")
 GLADEMEDIAVIEW = os.path.join(GLADEDIR, "MediaView.ui")
 GLADEDETAILS = os.path.join(GLADEDIR, "DetailsView.ui")
 
-DATABASE = os.path.join(PREFDIR, 'pigeonplanner.db')
-LOGFILE = os.path.join(PREFDIR, 'pigeonplanner.log')
-THUMBDIR = os.path.join(PREFDIR, 'thumbs')
+DATABASE = os.path.join(PREFDIR, u'pigeonplanner.db')
+LOGFILE = os.path.join(PREFDIR, u'pigeonplanner.log')
+THUMBDIR = os.path.join(PREFDIR, u'thumbs')
 
 UPDATEURL = 'http://www.pigeonplanner.com/CURRENT'
 DOWNLOADURL = 'http://www.pigeonplanner.com/download'

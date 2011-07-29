@@ -26,6 +26,7 @@ import const
 import common
 import builder
 import messages
+import thumbnail
 from ui import dialogs
 from ui import filechooser
 from ui.tabs import basetab
@@ -53,8 +54,8 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
 
         mimetype = model.get_value(rowiter, 1)
         if mime.is_image(mimetype):
-            path = model.get_value(rowiter, 2)
-            self.image.set_from_pixbuf(common.get_thumbnail(path))
+            path = unicode(model.get_value(rowiter, 2))
+            self.image.set_from_pixbuf(thumbnail.get_image(path))
         else:
             try:
                 image = mime.get_pixbuf(mimetype)
@@ -72,8 +73,6 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         if response == gtk.RESPONSE_OK:
             filepath = chooser.get_filename()
             filetype = chooser.get_filetype()
-            if mime.is_image(filetype):
-                common.image_to_thumb(filepath)
             data = [self.pigeon.get_pindex(), filetype, filepath,
                     chooser.get_filetitle(), chooser.get_filedescription()]
             rowid = self.database.insert_into_table(self.database.MEDIA, data)
@@ -97,7 +96,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         filetype = model.get_value(rowiter, 1)
         filepath = model.get_value(rowiter, 2)
         if mime.is_image(filetype):
-            os.remove(common.get_thumb_path(filepath))
+            os.remove(thumbnail.get_path(filepath))
         self.database.delete_from_table(self.database.MEDIA, rowid, 0)
         self.liststore.remove(rowiter)
         self._selection.select_path(path)

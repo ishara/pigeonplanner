@@ -88,6 +88,9 @@ class Startup(object):
         import options
         self.options = options.GetOptions()
 
+        if not os.path.isdir(const.THUMBDIR):
+            os.mkdir(const.THUMBDIR)
+
     def setup_locale(self):
         import intl
 
@@ -163,18 +166,13 @@ class Startup(object):
 
     def setup_pigeons(self):
         """
-        Setup the pigeon parser object which will hold all the pigeons and
-        build the image thumbnails if needed.
+        Setup the pigeon parser object which will hold all the pigeons
         """
 
         import pigeonparser
 
         self.parser = pigeonparser.PigeonParser(self.db)
         self.parser.build_pigeons()
-        if not os.path.isdir(const.THUMBDIR):
-            self.logger.debug("Make thumbnail folder and building thumbnails")
-            os.mkdir(const.THUMBDIR)
-            common.build_thumbnails(self.parser.pigeons)
 
     def search_updates(self):
         import update

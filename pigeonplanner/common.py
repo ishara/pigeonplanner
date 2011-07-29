@@ -228,54 +228,6 @@ def get_random_number(value):
 
     return ''.join([random.choice('0123456789') for x in range(value)])
 
-def image_to_thumb(img_path):
-    """
-    Convert an image to a thumbnail
-
-    @param img_path: the full path to the image
-    """
-
-    try:
-        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img_path, 200, 200)
-    except gobject.GError:
-        logger.error("Couldn't create thumbnail from: %s", img_path)
-    else:
-        pixbuf.save(get_thumb_path(img_path), 'png')
-        return pixbuf
-
-def get_thumbnail(image):
-    try:
-        pixbuf = gtk.gdk.pixbuf_new_from_file(get_thumb_path(image))
-    except gobject.GError, msg:
-        logger.warning("Thumbnail not found: %s", msg)
-        pixbuf = image_to_thumb(image)
-    return pixbuf
-
-def get_thumb_path(image):
-    """
-    Get the thumbnail from an image
-
-    @param image: the full path to the image
-    """
-
-    path = os.path.join(const.THUMBDIR, "%s.png") % get_image_name(image)
-    return get_unicode_path(path)
-
-def get_image_name(name):
-    """
-    Get the filename from a full image path
-
-    @param name: the full path to the image
-    """
-
-    return os.path.splitext(os.path.basename(name))[0]
-
-def build_thumbnails(pigeons):
-    for pigeon in pigeons.values():
-        img_path = pigeon.get_image()
-        if img_path != '' and img_path is not None:
-            image_to_thumb(img_path)
-
 def url_hook(about, link):
     webbrowser.open(link)
 
