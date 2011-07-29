@@ -105,7 +105,7 @@ class MainWindow(builder.GtkBuilder):
         self.MenuToolbar.set_active(self.options.toolbar)
         self.MenuStatusbar.set_active(self.options.statusbar)
 
-        self.mainwindow.set_title("%s %s" %(const.NAME, const.VERSION))
+        self.mainwindow.set_title(const.NAME)
         self.mainwindow.resize(self.options.window_w, self.options.window_h)
         self.mainwindow.move(self.options.window_x, self.options.window_y)
         self.mainwindow.show()
