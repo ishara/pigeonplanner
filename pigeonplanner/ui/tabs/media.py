@@ -21,6 +21,7 @@ import os
 import gtk
 import glib
 
+import mime
 import const
 import common
 import builder
@@ -28,16 +29,6 @@ import messages
 from ui import dialogs
 from ui import filechooser
 from ui.tabs import basetab
-
-
-def get_type_from_mime(mime):
-    """
-    Get the type from a mimetype of format type/subtype
-    """
-
-    if mime is None:
-        return ""
-    return mime.split('/')[0]
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
@@ -61,9 +52,15 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         if rowiter is None: return
 
         mimetype = model.get_value(rowiter, 1)
-        if get_type_from_mime(mimetype) == 'image':
+        if mime.is_image(mimetype):
             path = model.get_value(rowiter, 2)
             self.image.set_from_pixbuf(common.get_thumbnail(path))
+        else:
+            try:
+                image = mime.get_pixbuf(mimetype)
+                self.image.set_from_pixbuf(image)
+            except mime.MimeIconError:
+                self.image.set_from_stock(gtk.STOCK_FILE, gtk.ICON_SIZE_DIALOG)
 
     def on_buttonopen_clicked(self, widget):
         model, rowiter = self._selection.get_selected()
@@ -75,7 +72,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         if response == gtk.RESPONSE_OK:
             filepath = chooser.get_filename()
             filetype = chooser.get_filetype()
-            if get_type_from_mime(filetype) == 'image':
+            if mime.is_image(filetype):
                 common.image_to_thumb(filepath)
             data = [self.pigeon.get_pindex(), filetype, filepath,
                     chooser.get_filetitle(), chooser.get_filedescription()]
@@ -99,7 +96,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         rowid = model.get_value(rowiter, 0)
         filetype = model.get_value(rowiter, 1)
         filepath = model.get_value(rowiter, 2)
-        if get_type_from_mime(filetype) == 'image':
+        if mime.is_image(filetype):
             os.remove(common.get_thumb_path(filepath))
         self.database.delete_from_table(self.database.MEDIA, rowid, 0)
         self.liststore.remove(rowiter)

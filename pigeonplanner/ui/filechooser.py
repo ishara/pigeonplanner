@@ -17,11 +17,11 @@
 
 
 import os
-import mimetypes
 
 import gtk
 import glib
 
+import mime
 import const
 
 
@@ -33,8 +33,16 @@ class _FileChooser(gtk.FileChooser):
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128, 128)
             self.preview_image.set_from_pixbuf(pixbuf)
         except:
-            self.preview_image.set_from_stock(gtk.STOCK_DIALOG_ERROR,
-                                              gtk.ICON_SIZE_DIALOG)
+            mimetype = mime.get_type(filename)
+            try:
+                image = mime.get_pixbuf(mimetype)
+                self.preview_image.set_from_pixbuf(image)
+            except mime.MimeIconError:
+                if filename is None: return
+                stock = gtk.STOCK_FILE
+                if os.path.isdir(filename):
+                    stock = gtk.STOCK_DIRECTORY
+                self.preview_image.set_from_stock(stock, gtk.ICON_SIZE_DIALOG)
         filechooser.set_preview_widget_active(True)
 
     def _create_preview_widget(self):
@@ -146,7 +154,7 @@ class MediaChooser(_FileChooserDialog):
         return self.entrydescription.get_text()
 
     def get_filetype(self):
-        return mimetypes.guess_type(self.get_filename())[0]
+        return mime.get_type(self.get_filename())
 
 
 class PdfSaver(_FileChooserDialog):
