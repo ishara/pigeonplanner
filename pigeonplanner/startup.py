@@ -122,8 +122,7 @@ class Startup(object):
         self.logger.info("Version: %s" % const.VERSION)
         self.logger.debug("Home path: %s" % const.HOMEDIR)
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
-        cur_path = os.getcwdu() if WIN32 else const.topPath
-        self.logger.debug("Current path: %s" % cur_path)
+        self.logger.debug("Current path: %s" % const.ROOTDIR)
         self.logger.debug("Running on: %s %s" % (common.get_operating_system()))
         self.logger.debug("Python version: %s" % sys.version)
         self.logger.debug("GTK+ version: %s" % ".".join(str(n) for n in

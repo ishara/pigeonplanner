@@ -74,43 +74,39 @@ else:
 
 
 if WINDOWS:
-    HOMEDIR = os.environ['USERPROFILE'] 
-    if os.environ.has_key('APPDATA'):
-        PREFDIR = os.path.join(os.environ['APPDATA'], 'pigeonplanner')
-    else:
-        PREFDIR = os.path.join(HOMEDIR, 'pigeonplanner')
+    HOMEDIR = os.environ['USERPROFILE']
+    PREFDIR = os.path.join(os.environ.get('APPDATA', HOMEDIR), 'pigeonplanner')
     PREFDIR = unicode(PREFDIR, sys.getfilesystemencoding())
     HOMEDIR = unicode(HOMEDIR, sys.getfilesystemencoding())
-    if hasattr(sys, 'frozen'):
-        # Exe is in topdir
-        GLADEDIR = './glade/'
-        IMAGEDIR = './images/'
-        LANGDIR = './languages/'
-    else:
-        # Startup script is in /bin
-        GLADEDIR = '../glade/'
-        IMAGEDIR = '../images/'
-        LANGDIR = '../languages/'
 else:
     HOMEDIR = os.environ['HOME']
     PREFDIR = os.path.join(HOMEDIR, '.pigeonplanner')
-    topPath = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
-    if topPath.startswith('/usr'):
-        if os.path.exists('/usr/share/pigeonplanner'):
-            prefix = '/usr/share/'
-        elif os.path.exists('/usr/local/share/pigeonplanner'):
-            prefix = '/usr/local/share/'
-        else:
-            prefix = sys.prefix
-        GLADEDIR = os.path.join(prefix, 'pigeonplanner/glade/')
-        IMAGEDIR = os.path.join(prefix, 'pigeonplanner/images/')
-        LANGDIR = '/usr/share/locale/'
-    else:
-        GLADEDIR = os.path.join(topPath, 'glade')
-        IMAGEDIR = os.path.join(topPath, 'images')
-        LANGDIR = os.path.join(topPath, 'languages')
 
-TEMPDIR = tempfile.gettempdir()
+#XXX: For some reason, GtkBuilder translations on Windows don't work when
+#     building the languages folder path from the ROOTDIR.
+#     Looks like a unicode problem:
+#           * os.path.join(ROOTDIR, 'languages') => unicode, doesn't work
+#           * os.path.abspath(u'languages') => unicode, doesn't work
+#           * os.path.abspath('languages') => str, does work
+if hasattr(sys, "frozen"):
+    ROOTDIR = os.path.abspath(os.path.dirname(
+                unicode(sys.executable, sys.getfilesystemencoding())))
+    LANGDIR = os.path.abspath('languages')
+else:
+    ROOTDIR = os.path.abspath(os.path.dirname(
+                unicode(__file__, sys.getfilesystemencoding())))
+    if not ROOTDIR.startswith('/usr'):
+        # When running from the source folder, the root is one dir up
+        ROOTDIR = os.path.normpath(os.path.join(ROOTDIR, '..'))
+        LANGDIR = os.path.join(ROOTDIR, 'languages')
+        if WINDOWS:
+            LANGDIR = os.path.abspath('../languages')
+    else:
+        # Running the installed program, use the system's locale dir
+        LANGDIR = '/usr/share/locale/'
+
+IMAGEDIR = os.path.join(ROOTDIR, 'images')
+GLADEDIR = os.path.join(ROOTDIR, 'glade')
 
 GLADEMAIN = os.path.join(GLADEDIR, "MainWindow.ui")
 GLADEOPTIONS = os.path.join(GLADEDIR, "OptionsDialog.ui")
@@ -130,9 +126,11 @@ GLADERESVIEW = os.path.join(GLADEDIR, "ResultsView.ui")
 GLADEMEDIAVIEW = os.path.join(GLADEDIR, "MediaView.ui")
 GLADEDETAILS = os.path.join(GLADEDIR, "DetailsView.ui")
 
+THUMBDIR = os.path.join(PREFDIR, u'thumbs')
 DATABASE = os.path.join(PREFDIR, u'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, u'pigeonplanner.log')
-THUMBDIR = os.path.join(PREFDIR, u'thumbs')
+
+TEMPDIR = tempfile.gettempdir()
 
 UPDATEURL = 'http://www.pigeonplanner.com/CURRENT'
 DOWNLOADURL = 'http://www.pigeonplanner.com/download'
