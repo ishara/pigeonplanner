@@ -39,12 +39,24 @@ except:
     sys.exit(1)
 
 
+def __detect_package():
+    if hasattr(sys, 'frozen'):
+        # py2exe'd package, sys.prefix is set to the program's lib/
+        return os.path.join(sys.prefix, 'library.zip', 'pigeonplanner')
+    else:
+        exec_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
+        if exec_dir.startswith('/usr'):
+            # Program is installed, use a common prefix to locate the package
+            for prefix in [sys.prefix, "/usr", "/usr/local"]:
+                package = os.path.join(prefix, "pigeonplanner")
+                if os.path.exists(package):
+                    return package
+        # We are running from the source folder
+        return os.path.normpath(os.path.join(exec_dir, '../pigeonplanner'))
+
+
 if __name__ == "__main__":
-    # Detect our module path
-    pp_dir = os.path.join(os.path.dirname(sys.argv[0]), '../pigeonplanner')
-    prefix = os.path.abspath(os.path.normpath(pp_dir))
-    if not prefix.startswith('/usr'):
-        sys.path.insert(0, pp_dir)
+    sys.path.insert(0, __detect_package())
 
     import startup
     app = startup.Startup()
