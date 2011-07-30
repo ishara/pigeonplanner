@@ -53,7 +53,7 @@ from ui.widgets import comboboxes
 
 class MainWindow(builder.GtkBuilder):
     def __init__(self, options, database, parser):
-        builder.GtkBuilder.__init__(self, const.GLADEMAIN)
+        builder.GtkBuilder.__init__(self, "MainWindow.ui")
 
         self.options = options
         self.database = database

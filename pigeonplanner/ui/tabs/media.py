@@ -35,7 +35,7 @@ from ui.tabs import basetab
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def __init__(self, parent, database, options, parser):
         basetab.BaseTab.__init__(self, _("Media"), "icon_media.png")
-        builder.GtkBuilder.__init__(self, const.GLADEMEDIAVIEW)
+        builder.GtkBuilder.__init__(self, "MediaView.ui")
         self._root.unparent()
 
         self.parent = parent

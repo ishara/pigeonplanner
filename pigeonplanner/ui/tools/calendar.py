@@ -29,7 +29,7 @@ from ui.widgets import date
 
 class Calendar(builder.GtkBuilder):
     def __init__(self, parent, database, notification_id=None):
-        builder.GtkBuilder.__init__(self, const.GLADECALENDAR)
+        builder.GtkBuilder.__init__(self, "Calendar.ui")
 
         self.db = database
 

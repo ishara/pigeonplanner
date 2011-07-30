@@ -48,7 +48,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
 
     def __init__(self, parent, database, options, parser):
         basetab.BaseTab.__init__(self, _("Results"), "icon_result.png")
-        builder.GtkBuilder.__init__(self, const.GLADERESVIEW)
+        builder.GtkBuilder.__init__(self, "ResultsView.ui")
 
         self.parent = parent
         self.database = database

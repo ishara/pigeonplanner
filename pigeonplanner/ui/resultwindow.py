@@ -56,7 +56,7 @@ from ui.widgets import comboboxes
 
 class ResultWindow(builder.GtkBuilder):
     def __init__(self, parent, parser, database, options):
-        builder.GtkBuilder.__init__(self, const.GLADERESULT)
+        builder.GtkBuilder.__init__(self, "ResultWindow.ui")
 
         self.database = database
         self.parser = parser

@@ -54,7 +54,7 @@ class VaccinationCheck(gtk.CheckButton):
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
     def __init__(self, parent, database, parser, main):
         basetab.BaseTab.__init__(self, _("Medication"), "icon_medication.png")
-        builder.GtkBuilder.__init__(self, const.GLADEMEDVIEW)
+        builder.GtkBuilder.__init__(self, "MedicationView.ui")
 
         self.parent = parent
         self.database = database

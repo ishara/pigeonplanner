@@ -18,22 +18,24 @@ Interface for Gtkbuilder
 """
 
 
+import os
+
 import gtk
 
 import const
 
 
 class GtkBuilder(gtk.Builder, object):
-    def __init__(self, path):
+    def __init__(self, uifile):
         """
         Initialize Gtkbuilder, connect all signals and get all widgets
 
-        @param path: Path to the Glade file
+        @param uifile: Filename of the Glade file
         """
 
         gtk.Builder.__init__(self)
         self.set_translation_domain(const.DOMAIN)
-        self.add_from_file(path)
+        self.add_from_file(os.path.join(const.GLADEDIR, uifile))
         self.connect_signals(self)
         for obj in self.get_objects():
             if issubclass(type(obj), gtk.Buildable):

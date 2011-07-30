@@ -44,7 +44,7 @@ IMAGES = {EXECUTE: (gtk.STOCK_EXECUTE, _("Executing...")),
 
 class DBWindow(builder.GtkBuilder):
     def __init__(self, database):
-        builder.GtkBuilder.__init__(self, const.GLADEDBTOOL)
+        builder.GtkBuilder.__init__(self, "DatabaseTool.ui")
 
         self.database = database
 

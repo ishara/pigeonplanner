@@ -27,7 +27,7 @@ import builder
 
 class VelocityCalculator(builder.GtkBuilder):
     def __init__(self, parent, database, options):
-        builder.GtkBuilder.__init__(self, const.GLADEVELOCITY)
+        builder.GtkBuilder.__init__(self, "VelocityCalculator.ui")
 
         self.parent = parent
         self.database = database

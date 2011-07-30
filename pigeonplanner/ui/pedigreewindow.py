@@ -35,7 +35,7 @@ from ui.widgets import menus
 
 class PedigreeWindow(builder.GtkBuilder):
     def __init__(self, parent, database, options, parser, pedigree, pigeon):
-        builder.GtkBuilder.__init__(self, const.GLADEPEDIGREE)
+        builder.GtkBuilder.__init__(self, "PedigreeWindow.ui")
 
         self.database = database
         self.options = options

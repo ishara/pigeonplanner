@@ -31,7 +31,7 @@ from ui import filechooser
 
 class ResultParser(builder.GtkBuilder):
     def __init__(self, parent, database, pigeons):
-        builder.GtkBuilder.__init__(self, const.GLADERESULTPARSER)
+        builder.GtkBuilder.__init__(self, "ResultParser.ui")
         self.pigeons = pigeons
         self.database = database
         self.data = None

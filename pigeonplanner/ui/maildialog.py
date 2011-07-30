@@ -33,7 +33,7 @@ from ui import dialogs
 
 class MailDialog(builder.GtkBuilder):
     def __init__(self, parent, database, attachment, kind='pdf'):
-        builder.GtkBuilder.__init__(self, const.GLADEDIALOGS)
+        builder.GtkBuilder.__init__(self, "Dialogs.ui")
 
         self.maildialog.set_transient_for(parent)
 

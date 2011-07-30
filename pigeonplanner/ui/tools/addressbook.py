@@ -45,7 +45,7 @@ def check_user_info(parent, database, name):
 
 class AddressBook(builder.GtkBuilder):
     def __init__(self, parent, database):
-        builder.GtkBuilder.__init__(self, const.GLADEADDRESSES)
+        builder.GtkBuilder.__init__(self, "AddressBook.ui")
 
         self.db = database
 

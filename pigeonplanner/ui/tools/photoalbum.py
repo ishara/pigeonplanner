@@ -51,7 +51,7 @@ class PhotoAlbum(builder.GtkBuilder):
     }
 
     def __init__(self, parent, parser, database, pindex=None):
-        builder.GtkBuilder.__init__(self, const.GLADEPHOTOALBUM)
+        builder.GtkBuilder.__init__(self, "PhotoAlbum.ui")
 
         self.photoalbum.set_transient_for(parent)
 

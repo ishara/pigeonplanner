@@ -27,7 +27,7 @@ from ui.widgets import comboboxes
 
 class DataManager(builder.GtkBuilder):
     def __init__(self, parent, database, parser):
-        builder.GtkBuilder.__init__(self, const.GLADEDATAMGR)
+        builder.GtkBuilder.__init__(self, "DataManager.ui")
 
         self.database = database
         self.parser = parser

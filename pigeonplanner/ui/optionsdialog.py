@@ -37,7 +37,7 @@ class OptionsDialog(builder.GtkBuilder):
                                       None, (bool, bool, bool, bool)),
                     }
     def __init__(self, parent, options):
-        builder.GtkBuilder.__init__(self, const.GLADEOPTIONS)
+        builder.GtkBuilder.__init__(self, "OptionsDialog.ui")
 
         self.options = options
 

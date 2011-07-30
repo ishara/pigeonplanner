@@ -90,7 +90,7 @@ class DetailsView(builder.GtkBuilder):
                                        None, ()),
                     }
     def __init__(self, parent, database, parser, in_dialog=False):
-        builder.GtkBuilder.__init__(self, const.GLADEDETAILS)
+        builder.GtkBuilder.__init__(self, "DetailsView.ui")
 
         self.parent = parent
         self.database = database

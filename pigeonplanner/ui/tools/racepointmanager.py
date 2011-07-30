@@ -26,7 +26,7 @@ from ui.widgets import comboboxes
 
 class RacepointManager(builder.GtkBuilder):
     def __init__(self, parent, database):
-        builder.GtkBuilder.__init__(self, const.GLADERACEMGR)
+        builder.GtkBuilder.__init__(self, "RaceManager.ui")
 
         self.database = database
 
