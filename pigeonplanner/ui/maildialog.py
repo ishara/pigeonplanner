@@ -53,9 +53,6 @@ class MailDialog(builder.GtkBuilder):
             self.entry_subject.set_text("Pigeon Planner errorlog [%s]"
                                         %str(uuid.uuid1()))
             self.entry_to.set_text(const.REPORTMAIL)
-            desc = _("Please provide a brief description of what you were "
-                     "doing when the error occurred...")
-            self.textbuffer.set_text(desc)
             self.rename.hide()
 
         name, email = '', ''
