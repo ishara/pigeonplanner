@@ -99,7 +99,6 @@ class DetailsView(builder.GtkBuilder):
         self.pedigree_mode = False
         self.pigeon = None
         self.child = None
-        self.statusdic = {0: 'Dead', 1: 'Active', 2: 'Sold', 3: 'Lost'}
 
         self.entryband = bandentry.BandEntry()
         self.hbox.pack_start(self.entryband)
@@ -219,7 +218,7 @@ class DetailsView(builder.GtkBuilder):
     def on_buttonstatus_clicked(self, widget):
         if self.pigeon is None: return
         status = self.pigeon.get_active()
-        self.labelstatus.set_markup("<b>%s</b>" %_(self.statusdic[status]))
+        self.labelstatus.set_markup("<b>%s</b>" %_(common.statusdic[status]))
         self.notebookstatus.set_current_page(status)
         self._set_status_editable(False)
         self.hboxstatusedit.hide()
@@ -405,9 +404,9 @@ class DetailsView(builder.GtkBuilder):
     # Internal methods
     def _set_status_image(self, status):
         image = os.path.join(const.IMAGEDIR,
-                                    '%s.png' %self.statusdic[status].lower())
+                                    '%s.png' % common.statusdic[status].lower())
         self.imagestatus.set_from_file(image)
-        self.imagestatus.set_tooltip_text(_(self.statusdic[status]))
+        self.imagestatus.set_tooltip_text(_(common.statusdic[status]))
         self.imagestatusedit.set_from_file(image)
 
     def _set_status(self, pindex, status):
@@ -547,7 +546,7 @@ class DetailsView(builder.GtkBuilder):
         dead, sold, lost = self._get_status_info()
         if status != old_status:
             if old_status != const.ACTIVE:
-                self.database.delete_from_table(self.statusdic[old_status],
+                self.database.delete_from_table(common.statusdic[old_status],
                                                 pindex)
             self._insert_status_data(status, pindex, (dead, sold, lost))
         else:

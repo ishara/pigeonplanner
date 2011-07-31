@@ -304,7 +304,7 @@ class MainWindow(builder.GtkBuilder):
                     # Only remove status when pigeon is completely removed
                     status = pigeon.get_active()
                     if status != const.ACTIVE:
-                        self.database.delete_from_table(self.statusdic[status],
+                        self.database.delete_from_table(common.statusdic[status],
                                                         pindex)
                     # Same for the picture
                     image = pigeon.get_image()
