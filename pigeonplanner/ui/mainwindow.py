@@ -203,7 +203,7 @@ class MainWindow(builder.GtkBuilder):
     def menuprintpedigree_activate(self, widget):
         logger.debug(common.get_function_name())
         pigeon = self.treeview.get_selected_pigeon()
-        if pigeon is None: return
+        if pigeon is None or isinstance(pigeon, list): return
         userinfo = common.get_own_address(self.database)
         printing.PrintPedigree(self.mainwindow, pigeon, userinfo,
                                self.options, const.PRINT, '', self.parser)
