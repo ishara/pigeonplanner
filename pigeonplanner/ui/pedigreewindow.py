@@ -45,16 +45,18 @@ class PedigreeWindow(builder.GtkBuilder):
         self.pdfname = "%s_%s_%s.pdf" % (_("Pedigree"), ring, year)
         self.build_toolbar()
 
-        self.labelRing.set_text(pigeon.get_band_string(True))
-        self.labelSex.set_text(pigeon.get_sex_string())
-        self.labelName.set_text(pigeon.get_name())
-
         tableSire = gtk.Table(20, 7)
         self.alignSire.add(tableSire)
         tableDam = gtk.Table(20, 7)
         self.alignDam.add(tableDam)
         pedigree.draw_pedigree([tableSire, tableDam], pigeon, True)
 
+        name = pigeon.get_name()
+        if name:
+            name = ", " + name
+        title = "%s: %s%s - %s" % (_("Pedigree"), pigeon.get_band_string(True),
+                                   name, pigeon.get_sex_string())
+        self.pedigreewindow.set_title(title)
         self.pedigreewindow.set_transient_for(parent)
         self.pedigreewindow.show()
 
