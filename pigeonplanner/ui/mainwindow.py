@@ -697,6 +697,7 @@ class MainWindow(builder.GtkBuilder):
         self.relativestab.clear_treeviews()
         self.medicationtab.liststore.clear()
         self.resultstab.liststore.clear()
+        self.mediatab.liststore.clear()
 
     def _set_statistics(self):
         """
