@@ -39,6 +39,27 @@ import gobject
 import const
 
 
+def get_distance_units():
+    return [(_('Yards'), 0.9144),
+            (_('Kilometres'), 1000),
+            (_('Metres'), 1),
+            (_('Centimetres'), 0.01),
+            (_('Inches'), 0.025),
+            (_('Feet'), 0.3048),
+            (_('Miles'), 1609.344),
+            (_('Nautical Miles'), 1852)
+            ]
+
+def get_speed_units():
+    return [(_('Yard per Minute'), 0.01524),
+            (_('Metres per Minute'), 0.0166666666),
+            (_('Metres per Second'), 1),
+            (_('Kilometre per Hour'), 0.27777777777777777777777777777777),
+            (_('Feet per Second'), 0.3048),
+            (_('Feet per Minute'), 0.00508),
+            (_('Mile per Hour'), 0.44704)
+            ]
+
 def get_sexdic():
     return {'0': _('Cock'), '1': _('Hen'), '2': _('Young bird')}
 

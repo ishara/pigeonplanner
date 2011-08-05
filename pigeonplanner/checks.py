@@ -57,3 +57,56 @@ def check_date_input(date):
     except ValueError:
         raise InvalidInputError(messages.MSG_INVALID_FORMAT)
 
+def check_lat_long(value):
+    # Accepted values are:
+    #    DD.dddddd°
+    #    DD°MM.mmm’
+    #    DD°MM’SS.s”
+    value = value.replace(u',', u'.')
+    for char in u' -+':
+        value = value.replace(char, u'')
+    if __check_float_repr(value) is not None:
+        return
+    if __check_dms_repr(value) is not None: 
+        return
+    raise InvalidInputError(value)
+
+def __check_float_repr(value):
+    value = value.replace(u'°', u'')
+    try : 
+        return float(value)      
+    except ValueError:
+        return None
+
+def __check_dms_repr(value):
+    # Replace the degree and quotes by colons...
+    for char in u"°'\"":
+        value = value.replace(char, u':')
+    value = value.rstrip(u':')
+    # ... so we can easily split the value up
+    splitted = value.split(u':')
+
+    # First value always should be all digits
+    if not splitted[0].isdigit():
+        return
+    # Depending on format...
+    if len(splitted) == 2:
+        # ... minutes should be a valid float
+        try:
+            float(splitted[1])
+        except ValueError:
+            return
+    elif len(splitted) == 3:
+        # ... minutes should be all digits ...
+        if not splitted[1].isdigit():
+            return
+        # ... and seconds a valid float
+        try:
+            float(splitted[2])
+        except ValueError:
+            return
+    else:
+        # Too many or little splitted values
+        return
+    return value
+

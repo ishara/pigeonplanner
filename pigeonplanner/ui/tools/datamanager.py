@@ -31,6 +31,8 @@ class DataManager(builder.GtkBuilder):
 
         self.database = database
         self.parser = parser
+        if parser is None:
+            self.frameobjects.set_sensitive(False)
 
         # XXX: Translated strings are not unicode on some Windows XP systems
         # that were tested.
@@ -46,18 +48,18 @@ class DataManager(builder.GtkBuilder):
         comboboxes.fill_combobox(self.comboset, self.tables.keys())
 
         self._build_treeview()
-        self.managerwindow.set_transient_for(parent)
-        self.managerwindow.show()
+        self.window.set_transient_for(parent)
+        self.window.show()
 
     # Callbacks
     def close_window(self, widget, event=None):
-        self.managerwindow.destroy()
+        self.window.destroy()
 
     def on_buttonremove_clicked(self, widget):
         dataset = unicode(self.comboset.get_active_text())
         item = self.comboitem.get_active_text()
         d = dialogs.MessageDialog(const.QUESTION, messages.MSG_REMOVE_ITEM,
-                                  self.managerwindow, (item, dataset))
+                                  self.window, (item, dataset))
         if d.yes:
             self.database.delete_from_table(self.tables[dataset], item)
             index = self.comboitem.get_active()
@@ -97,7 +99,7 @@ class DataManager(builder.GtkBuilder):
         if not pigeon.get_pindex() in self.parser.pigeons:
             return
         from ui.detailsview import DetailsDialog
-        DetailsDialog(self.database, self.parser, pigeon, self.managerwindow)
+        DetailsDialog(self.database, self.parser, pigeon, self.window)
 
     def on_buttondelete_clicked(self, widget):
         for row_num in range(len(self.liststore)-1, -1, -1):

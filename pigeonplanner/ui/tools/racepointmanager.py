@@ -20,8 +20,11 @@ import gtk
 import gobject
 
 import const
+import common
+import checks
 import builder
 from ui.widgets import comboboxes
+from datamanager import DataManager
 
 
 class RacepointManager(builder.GtkBuilder):
@@ -30,6 +33,14 @@ class RacepointManager(builder.GtkBuilder):
 
         self.database = database
 
+        tip = _("Input should be in one of these formats:\n  "
+                "DD.dddddd°\n  "
+                "DD°MM.mmm’\n  "
+                "DD°MM’SS.s”")
+        self.imagelat.set_tooltip_text(tip)
+        self.imagelong.set_tooltip_text(tip)
+        for item in common.get_distance_units():
+            self.liststoreunits.append(item)
         self._fill_racepoints_combo()
         self.window.set_transient_for(parent)
         self.window.show()
@@ -39,22 +50,54 @@ class RacepointManager(builder.GtkBuilder):
 
     def on_combopoint_changed(self, widget):
         rp = widget.get_active_text()
-        latitude, longitude, distance = self.database.get_racepoint_data(rp)
+        if rp is None: return
+        latitude, longitude, distance, unit = self.database.get_racepoint_data(rp)
         self.entrylatitude.set_text(latitude)
         self.entrylongitude.set_text(longitude)
-        self.entrydistance.set_text(distance)
+        try:
+            distance = float(distance)
+        except ValueError:
+            distance = 0.0
+        self.spindistance.set_value(distance)
+        if not unit: unit = 0
+        self.combodistance.set_active(unit)
+
+    def on_buttonadd_clicked(self, widget):
+        manager = DataManager(self.window, self.database, None)
+        response = manager.window.run()
+        if response == gtk.RESPONSE_CLOSE:
+            self._fill_racepoints_combo()
+        manager.window.destroy()
 
     def on_buttonsave_clicked(self, widget):
-        data = (self.entrylatitude.get_text(),
-                self.entrylongitude.get_text(),
-                self.entrydistance.get_text(),
+        latitude = self.entrylatitude.get_text()
+        longitude = self.entrylongitude.get_text()
+
+        if latitude != '':
+            try:
+                checks.check_lat_long(latitude)
+            except checks.InvalidInputError:
+                self.imagelat.show()
+                return
+        self.imagelat.hide()
+        if longitude != '':
+            try:
+                checks.check_lat_long(longitude)
+            except checks.InvalidInputError:
+                self.imagelong.show()
+                return
+        self.imagelong.hide()
+
+        data = (latitude, longitude,
+                self.spindistance.get_value(),
+                self.combodistance.get_active(),
                 self.combopoint.get_active_text())
         self.database.update_table(self.database.RACEPOINTS, data, 2)
         def clear_image():
             self.image.clear()
             return False
         self.image.set_from_stock(gtk.STOCK_OK, gtk.ICON_SIZE_BUTTON)
-        gobject.timeout_add(4000, clear_image)
+        gobject.timeout_add(3000, clear_image)
 
     def _fill_racepoints_combo(self):
         data = self.database.select_from_table(self.database.RACEPOINTS)
@@ -62,6 +105,6 @@ class RacepointManager(builder.GtkBuilder):
         value = self.combopoint.get_active_text() is not None
         self.entrylatitude.set_sensitive(value)
         self.entrylongitude.set_sensitive(value)
-        self.entrydistance.set_sensitive(value)
+        self.hboxdistance.set_sensitive(value)
         self.buttonsave.set_sensitive(value)
 

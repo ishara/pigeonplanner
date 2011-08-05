@@ -138,7 +138,8 @@ class DatabaseOperations(object):
                 ' racepoint TEXT UNIQUE,'
                 ' xco TEXT,'
                 ' yco TEXT,'
-                ' distance TEXT)',
+                ' distance TEXT,'
+                ' unit INTEGER)',
     SECTORS: '(Sectorkey INTEGER PRIMARY KEY,'
              ' sector TEXT UNIQUE)',
     TYPES: '(Typekey INTEGER PRIMARY KEY,'
@@ -460,7 +461,7 @@ class DatabaseOperations(object):
 
 #### Racepoints
     def get_racepoint_data(self, racepoint):
-        sql = 'SELECT xco, yco, distance FROM Racepoints WHERE racepoint=?'
+        sql = 'SELECT xco, yco, distance, unit FROM Racepoints WHERE racepoint=?'
         return self.__db_execute_select(sql, (racepoint,), RET_ONEROW)
 
 #### Sold

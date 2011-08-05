@@ -33,29 +33,9 @@ class VelocityCalculator(builder.GtkBuilder):
         self.database = database
         self.options = options
 
-        distance_units = [
-                    (_('Yards'), 0.9144),
-                    (_('Kilometres'), 1000),
-                    (_('Metres'), 1),
-                    (_('Centimetres'), 0.01),
-                    (_('Inches'), 0.025),
-                    (_('Feet'), 0.3048),
-                    (_('Miles'), 1609.344),
-                    (_('Nautical Miles'), 1852)
-            ]
-        speed_units = [
-                (_('Yard per Minute'), 0.01524),
-                (_('Metres per Minute'), 0.0166666666),
-                (_('Metres per Second'), 1),
-                (_('Kilometre per Hour'), 0.27777777777777777777777777777777),
-                (_('Feet per Second'), 0.3048),
-                (_('Feet per Minute'), 0.00508),
-                (_('Mile per Hour'), 0.44704)
-            ]
-
-        for item in distance_units:
+        for item in common.get_distance_units():
             self.ls_dist_units.append(item)
-        for item in speed_units:
+        for item in common.get_speed_units():
             self.ls_speed_units.append(item)
         self.combobox_velocity_distance.set_active(0)
         self.combobox_velocity_speed.set_active(0)
