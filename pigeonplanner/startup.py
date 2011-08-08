@@ -81,8 +81,8 @@ class Startup(object):
         parser = OptionParser(version=const.VERSION)
         parser.add_option("-d", action="store_true", dest="debug",
                           help="Print debug messages to the console")
-        options, args = parser.parse_args()
-        self._loglevel = logging.DEBUG if options.debug else logging.WARNING
+        opts, args = parser.parse_args()
+        self._loglevel = logging.DEBUG if opts.debug else logging.WARNING
 
         # Initialize options
         import options

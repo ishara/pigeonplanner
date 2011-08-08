@@ -22,7 +22,6 @@ import sys
 
 import gtk
 import gtk.gdk
-import glib
 import gobject
 
 import const

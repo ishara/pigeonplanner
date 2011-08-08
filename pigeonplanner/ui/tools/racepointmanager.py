@@ -19,7 +19,6 @@
 import gtk
 import gobject
 
-import const
 import common
 import checks
 import builder

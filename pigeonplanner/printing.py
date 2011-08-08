@@ -31,7 +31,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 import const
-import common
 import messages
 from ui import dialogs
 from ui import pedigree

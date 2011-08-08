@@ -27,7 +27,6 @@ import gtk
 import gobject
 
 import const
-import common
 from ui import maildialog
 
 SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]

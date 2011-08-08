@@ -19,7 +19,6 @@
 import os
 
 import gtk
-import glib
 
 import mime
 import const

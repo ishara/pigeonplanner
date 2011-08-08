@@ -191,9 +191,9 @@ class ConfigurationParser(ConfigParser.ConfigParser):
                 fileToWrite = self.defaultFile
 
         if fileToWrite:
-            file = open(self.prefFile, 'w')
-            file.write(fileToWrite)
-            file.close()
+            fout = open(self.prefFile, 'w')
+            fout.write(fileToWrite)
+            fout.close()
 
     def set_option(self, section, option, value):
         """
@@ -206,9 +206,9 @@ class ConfigurationParser(ConfigParser.ConfigParser):
 
         ConfigParser.ConfigParser.set(self, section, option, value)
 
-        file = open(self.prefFile, 'w')
-        ConfigParser.ConfigParser.write(self, file)
-        file.close()
+        fout = open(self.prefFile, 'w')
+        ConfigParser.ConfigParser.write(self, fout)
+        fout.close()
 
     def get(self, section, option):
         """

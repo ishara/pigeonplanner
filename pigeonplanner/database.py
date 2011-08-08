@@ -28,7 +28,6 @@ import sqlite3
 sqlite3.register_adapter(str, lambda s: s.decode('utf-8'))
 
 import const
-import common
 
 
 (RET_FIRSTCOL,

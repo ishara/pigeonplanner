@@ -25,7 +25,9 @@ MSG_ALREADY_RUNNING = (_("Pigeon Planner is already running."),
                        ERROR)
 
 MSG_MAKE_DONATION = (_("Go to the website?"),
-                     _("Pigeon Planner is free software. You don’t need to pay for using it. But if you like it, please consider donating to help improving it."),
+                     _("Pigeon Planner is free software. You don’t need to pay "
+                       "for using it. But if you like it, please consider "
+                       "donating to help improving it."),
                      "")
 
 MSG_EVENT_NOTIFY = (_("Notification for '%s'"),
@@ -33,13 +35,15 @@ MSG_EVENT_NOTIFY = (_("Notification for '%s'"),
                     "")
 
 MSG_INVALID_IMAGE = (_("Invalid image!"),
-                     _("This image is either not supported or corrupt, please choose another one."),
+                     _("This image is either not supported or corrupt, "
+                       "please choose another one."),
                      ERROR)
 MSG_IMAGE_MISSING = (_("Loading image failed!"),
                      _("Maybe you have renamed the image or moved it on your disk."),
                      ERROR)
 
-MSG_SHOW_PIGEON = (_("This pigeon already exists, but isn't showing. Do you want to show it again?"),
+MSG_SHOW_PIGEON = (_("This pigeon already exists, but isn't showing. "
+                     "Do you want to show it again?"),
                    None,
                    WARNING)
 MSG_OVERWRITE_PIGEON = (_("This pigeon already exists. Overwrite it?"),
@@ -72,7 +76,8 @@ MSG_EMPTY_DATA = (_("Invalid input!"),
                   _("At least the date and racepoint have to be entered."),
                   ERROR)
 MSG_INVALID_FORMAT = (_("Invalid input!"),
-                      _("The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."),
+                      _("The date you entered has the wrong format. "
+                        "It should be ISO-format (YYYY-MM-DD)."),
                       ERROR)
 MSG_RESULT_EXISTS = (_("Invalid input!"),
                      _("The result you want to add already exists."),
@@ -91,7 +96,8 @@ MSG_NAME_EXISTS = (_("Invalid input!"),
                    _("The persoon you want to add already exists."),
                    ERROR)
 MSG_REMOVE_ADDRESS = (_("Removing '%s'"),
-                      _("Are you sure you want to remove this person from your addresses?"),
+                      _("Are you sure you want to remove this person from "
+                        "your addresses?"),
                       "")
 
 MSG_REMOVE_ITEM = (_("Removing '%s' from '%s'."),
@@ -99,7 +105,8 @@ MSG_REMOVE_ITEM = (_("Removing '%s' from '%s'."),
                    "")
 
 MSG_REMOVE_DATABASE = (_("Removing database"),
-                       _("Are you sure you want to remove the database? All data will be lost."),
+                       _("Are you sure you want to remove the database? "
+                         "All data will be lost."),
                        _("Removing database"))
 
 MSG_BACKUP_SUCCES = (_("The backup was successfully created."),
@@ -116,7 +123,8 @@ MSG_RESTORE_FAILED = (_("There was an error restoring the backup."),
                       _("Failed!"))
 
 MSG_NO_INFO = (_("No personal information found."),
-               _("This will be shown on top of the printed pedigree.\nDo you want to add it now?"),
+               _("This will be shown on top of the printed pedigree.\n"
+                 "Do you want to add it now?"),
                "")
 
 MSG_PRINT_ERROR = (_("Error printing the pedigree"),
@@ -130,7 +138,8 @@ MSG_DEFAULT_OPTIONS = (_("This will set back all the settings to the default val
                        _("Are you sure?"),
                        _("Default settings"))
 
-MSG_RESTART_APP = (_("Pigeon Planner needs to be restarted for the changes to take effect."),
+MSG_RESTART_APP = (_("Pigeon Planner needs to be restarted for the changes "
+                     "to take effect."),
                    None,
                    _("Restart required"))
 

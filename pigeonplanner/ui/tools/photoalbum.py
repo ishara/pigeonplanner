@@ -25,7 +25,6 @@ import gobject
 import logging
 logger = logging.getLogger(__name__)
 
-import const
 import builder
 from ui.widgets import menus
 

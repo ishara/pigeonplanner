@@ -20,8 +20,6 @@ import mimetypes
 
 import gtk
 
-import const
-
 
 class MimeIconError(Exception): pass
 

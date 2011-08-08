@@ -20,8 +20,6 @@ import math
 
 import gtk
 
-import const
-import builder
 from ui.widgets import menus
 
 
