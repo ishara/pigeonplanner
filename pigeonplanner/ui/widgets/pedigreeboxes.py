@@ -25,6 +25,7 @@ import gtk
 
 import const
 import common
+import thumbnail
 
 
 class PedigreeBox_cairo(gtk.DrawingArea):
@@ -33,6 +34,7 @@ class PedigreeBox_cairo(gtk.DrawingArea):
 
         if not detailed:
             self.set_property("can-focus", True)
+        self.set_has_tooltip(True)
         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
         self.add_events(gtk.gdk.ENTER_NOTIFY_MASK)
         self.add_events(gtk.gdk.LEAVE_NOTIFY_MASK)
@@ -41,6 +43,7 @@ class PedigreeBox_cairo(gtk.DrawingArea):
         self.connect('enter-notify-event', self.on_enter_event)
         self.connect('leave-notify-event', self.on_leave_event)
         self.connect("state_changed", self.state_changed)
+        self.connect("query-tooltip", self.on_query_tooltip)
         self.pigeon = pigeon
         self.child = child
         self.sex = None
@@ -87,6 +90,16 @@ class PedigreeBox_cairo(gtk.DrawingArea):
             self.text = "<span foreground='#6a6a6a'>%s</span>" % self.text
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
         self.queue_draw()
+
+    def on_query_tooltip(self, widget, x, y, keyboard, tooltip):
+        if self.pigeon is None:
+            return False
+        path = self.pigeon.get_image()
+        # Path can be None or '', ignore both
+        if path:
+            tooltip.set_icon(thumbnail.get_image(path))
+            return True
+        return False
 
     def realize(self, widget):
         self.set_size_request(max(12, 155), max(28, 25))
