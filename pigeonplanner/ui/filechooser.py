@@ -60,7 +60,11 @@ class _FileChooser(gtk.FileChooser):
         self.set_use_preview_label(False)
 
     def get_filename(self):
-        return unicode(gtk.FileChooser.get_filename(self))
+        filename = gtk.FileChooser.get_filename(self)
+        # filename is None when no file is selected. So prevent returning
+        # u'None' by only converting when needed.
+        if filename is not None:
+            return unicode(filename)
 
     def get_current_folder(self):
         return unicode(gtk.FileChooser.get_current_folder(self))
