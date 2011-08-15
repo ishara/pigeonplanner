@@ -279,7 +279,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     def _insert_combo_data(self, combo, data, table):
         if not data: return
         # Racepoint table has more columns
-        row = (data,) if not table == self.database.RACEPOINTS else (data, "", "", "")
+        row = (data,) if not table == self.database.RACEPOINTS else (data, "", "", "", "")
         self.database.insert_into_table(table, row)
         model = combo.get_model()
         for treerow in model:

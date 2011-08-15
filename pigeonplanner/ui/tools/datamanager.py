@@ -70,7 +70,7 @@ class DataManager(builder.GtkBuilder):
         dataset = unicode(self.comboset.get_active_text())
         item = (self.entryitem.get_text(), )
         if dataset == _("Racepoints"):
-            item = item+("", "", "")
+            item = item+("", "", "", "")
         self.database.insert_into_table(self.tables[dataset], item)
         self.entryitem.set_text('')
         self._fill_item_combobox(dataset)
