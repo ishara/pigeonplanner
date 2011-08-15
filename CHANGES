@@ -1,3 +1,20 @@
+1.2.0:
+ * Added a media tab
+ * Added a racepoint manager
+ * Added a resultsheet parser
+ * Added option to remove unused objects
+ * Added option to show/hide result columns
+ * Added parameter to enable console logging
+ * Added image popup for pedigree boxes
+ * Fixed bug when removing a pigeon with non-active status
+ * Fixed mixed up weather and wind column names
+ * Improved filechoosers
+ * Improved thumbnails
+ * Pedigree boxes now highlight on mouseover
+ * Various little GUI improvements
+ * Various unicode improvements
+ * Various code fixes and improvements
+
 1.0.4:
  * Fixed bug where first pigeon won't show up
  * Fixed error when using navigation arrows on empty list
