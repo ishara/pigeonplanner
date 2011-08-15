@@ -29,7 +29,7 @@ import gtk.gdk
 
 
 NAME = "Pigeon Planner"
-VERSION = "1.1.0"
+VERSION = "1.3.0"
 COPYRIGHT = "(C)opyright 2009-%s Timo Vanwynsberghe" % datetime.now().year
 AUTHORS = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
 ARTISTS = ["Timo Vanwynsberghe <timovwb@gmail.com>",
