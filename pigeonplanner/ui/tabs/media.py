@@ -95,7 +95,10 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         filetype = model.get_value(rowiter, 1)
         filepath = model.get_value(rowiter, 2)
         if mime.is_image(filetype):
-            os.remove(thumbnail.get_path(filepath))
+            try:
+                os.remove(thumbnail.get_path(filepath))
+            except:
+                pass
         self.database.delete_from_table(self.database.MEDIA, rowid, 0)
         self.liststore.remove(rowiter)
         self._selection.select_path(path)

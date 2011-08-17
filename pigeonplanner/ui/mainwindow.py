@@ -309,7 +309,10 @@ class MainWindow(builder.GtkBuilder):
                     # Same for the picture
                     image = pigeon.get_image()
                     if image:
-                        os.remove(thumbnail.get_path(image))
+                        try:
+                            os.remove(thumbnail.get_path(image))
+                        except:
+                            pass
                     # And medication
                     self.database.delete_from_table(self.database.MED, pindex, 2)
                     self.parser.remove_pigeon(pindex)

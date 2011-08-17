@@ -539,7 +539,10 @@ class DetailsView(builder.GtkBuilder):
         image = datalist[10]
         prev_image = self.pigeon.get_image()
         if image != prev_image and prev_image:
-            os.remove(thumbnail.get_path(prev_image))
+            try:
+                os.remove(thumbnail.get_path(prev_image))
+            except:
+                pass
         # Update the status or create a new record
         status = self.combostatus.get_active()
         old_status = self.pigeon.get_active()
