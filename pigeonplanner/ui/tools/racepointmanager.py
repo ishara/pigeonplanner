@@ -51,6 +51,10 @@ class RacepointManager(builder.GtkBuilder):
         rp = widget.get_active_text()
         if rp is None: return
         latitude, longitude, distance, unit = self.database.get_racepoint_data(rp)
+        # Older versions stored these values as None instead of ''
+        if latitude is None: latitude = ''
+        if longitude is None: longitude = ''
+        if distance is None: distance = '0.0'
         self.entrylatitude.set_text(latitude)
         self.entrylongitude.set_text(longitude)
         try:
