@@ -490,6 +490,7 @@ class MainWindow(builder.GtkBuilder):
         widgets = [self.ToolEdit, self.ToolPedigree, self.MenuEdit,
                    self.MenuPedigree, self.MenuAddresult,
                    self.resultstab.buttonadd, self.medicationtab.buttonadd,
+                   self.mediatab.buttonadd,
                    self.ToolRemove, self.MenuRemove]
         if n_rows_selected == 1:
             tree_iter = model.get_iter(paths[0])
