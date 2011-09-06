@@ -64,6 +64,9 @@ MSG_ADD_PIGEON = (_("This pigeon doesn't exist. Do you want to add it?"),
 MSG_NO_PIGEON = (_("The selected pigeon can't be found."),
                  None,
                  _("Not found!"))
+MSG_NO_PARENT = (_("Can't search for parents, enter the pigeon band first."),
+                 None,
+                 ERROR)
 
 MSG_EMPTY_FIELDS = (_("Invalid input!"),
                     _("The ringnumber and year are necessary."),

@@ -465,7 +465,7 @@ class PigeonListDialog(gtk.Dialog):
             if sex is not None and not sex == int(pigeon.get_sex()):
                 continue
             # If year is given, exclude older pigeons
-            if year is not None and year >= int(pigeon.year):
+            if year is not None and int(year) < int(pigeon.year):
                 continue
             self._liststore.insert(0, [pigeon, pigeon.ring, pigeon.year,
                                        pigeon.get_name()])

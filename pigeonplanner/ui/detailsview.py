@@ -27,6 +27,7 @@ import gobject
 import const
 import common
 import checks
+import errors
 import builder
 import messages
 import thumbnail
@@ -137,7 +138,6 @@ class DetailsView(builder.GtkBuilder):
                                                      gtk.ACCEL_VISIBLE)
         self.parent.add_accel_group(ag)
 
-        self.finddialog.set_transient_for(parent)
         self.statusdialog.set_transient_for(parent)
         self.root.unparent()
         self.root.show_all()
@@ -241,25 +241,10 @@ class DetailsView(builder.GtkBuilder):
         self.statusdialog.hide()
 
     def on_findsire_clicked(self, widget):
-        self._fill_find_treeview(const.SIRE, self.entrybandedit.get_band())
+        self._run_pigeondialog(const.SIRE)
 
     def on_finddam_clicked(self, widget):
-        self._fill_find_treeview(const.DAM, self.entrybandedit.get_band())
-
-    def on_findadd_clicked(self, widget):
-        model, rowiter = self.treeviewfind.get_selection().get_selected()
-        if not rowiter: return
-        pindex = model[rowiter][0]
-        ring = model[rowiter][1]
-        year = model[rowiter][2]
-        if int(self.parser.pigeons[pindex].sex) == const.SIRE:
-            self.entrysireedit.set_band(ring, year)
-        else:
-            self.entrydamedit.set_band(ring, year)
-        self.finddialog.hide()
-
-    def on_findcancel_clicked(self, widget):
-        self.finddialog.hide()
+        self._run_pigeondialog(const.DAM)
 
     # Public methods
     def get_widget(self):
@@ -441,28 +426,6 @@ class DetailsView(builder.GtkBuilder):
         self.entrypointlost.set_editable(value)
         self.textinfolost.set_editable(value)
 
-    def _fill_find_treeview(self, sex, band):
-        """
-        Fill the 'find'-treeview with pigeons of the wanted sex
-
-        @param sex: sex of the pigeons
-        @param band: bandand year tuple of the pigeon
-        """
-
-        ring, year = band
-        self.liststorefind.clear()
-        for pigeon in self.parser.pigeons.values():
-            ring_new, year_new = pigeon.get_band()
-            if str(sex) == pigeon.get_sex()and \
-               ring != ring_new and year >= year_new:
-                self.liststorefind.insert(0, [pigeon.get_pindex(),
-                                              ring_new, year_new,
-                                              pigeon.get_name()])
-        self.liststorefind.set_sort_column_id(1, gtk.SORT_ASCENDING)
-        self.liststorefind.set_sort_column_id(2, gtk.SORT_ASCENDING)
-        self.treeviewfind.get_selection().select_path(0)
-        self.finddialog.show()
-
     def _finish_edit(self, datalist=None):
         self.detailbook.set_current_page(0)
         if datalist is not None:
@@ -514,6 +477,24 @@ class DetailsView(builder.GtkBuilder):
         elif status == const.LOST:
             lost.insert(0, pindex)
             self.database.insert_into_table(self.database.LOST, lost)
+
+    def _run_pigeondialog(self, sex):
+        try:
+            pindex = self.entrybandedit.get_pindex()
+        except errors.InvalidInputError:
+            dialogs.MessageDialog(const.ERROR, messages.MSG_NO_PARENT, self.parent)
+            return
+        band, year = self.entrybandedit.get_band()
+        dialog = dialogs.PigeonListDialog(self.parent)
+        dialog.fill_treeview(self.parser, pindex, sex, year)
+        response = dialog.run()
+        if response == gtk.RESPONSE_APPLY:
+            pigeon = dialog.get_selected()
+            if pigeon.is_cock():
+                self.entrysireedit.set_pindex(pigeon.get_pindex())
+            else:
+                self.entrydamedit.set_pindex(pigeon.get_pindex())
+        dialog.destroy()
 
     def _update_pigeon_data(self, datalist):
         """
