@@ -24,6 +24,12 @@ MSG_ALREADY_RUNNING = (_("Pigeon Planner is already running."),
                        None,
                        ERROR)
 
+MSG_NEW_DATABASE = (_("The database you are trying to open is too new "
+                      "for your version of Pigeon Planner. You need to "
+                      "reinstall the latest version to continue."),
+                    None,
+                    ERROR+" - Pigeon Planner")
+
 MSG_MAKE_DONATION = (_("Go to the website?"),
                      _("Pigeon Planner is free software. You don’t need to pay "
                        "for using it. But if you like it, please consider "

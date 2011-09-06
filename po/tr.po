@@ -1,43 +1,31 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Turkish translation for pigeonplanner
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the pigeonplanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION CZ\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pigeonplanner\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-08-08 12:02+0200\n"
-"PO-Revision-Date: 2011-03-10 18:57+0000\n"
-"Last-Translator: Timo <timovwb@gmail.com>\n"
-"Language-Team: Jindra <sidloj@volny.cz>\n"
+"PO-Revision-Date: 2011-05-27 12:59+0000\n"
+"Last-Translator: Melih Odaman <Unknown>\n"
+"Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-09 04:51+0000\n"
+"X-Launchpad-Export-Date: 2011-08-09 04:52+0000\n"
 "X-Generator: Launchpad (build 13628)\n"
-"X-Poedit-Country: CZECH REPUBLIC\n"
-"Language: \n"
-"X-Poedit-SearchPath-1: ..\n"
-"X-Poedit-Language: Czech\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-Basepath: c:\\translate\\wp\\wp-content\\plugins\\advanced-cate\n"
-"X-Poedit-KeywordsList: __;_e\n"
-
-#, python-format
-#~ msgid "Notification is set on %s days in advance"
-#~ msgstr "Oznámení je nastaveno  na%  dní předem"
 
 #: pigeonplanner/printing.py:167
 msgid "Pedigree of:"
-msgstr "Rodokmen:"
+msgstr "Soyağacı:"
 
 #: pigeonplanner/printing.py:373 pigeonplanner/ui/widgets/treeview.py:190
 #: pigeonplanner/ui/tabs/relatives.py:156 glade/ResultWindow.ui:81
 #: glade/ResultParser.ui:306
 msgid "Band no."
-msgstr "Číslo kroužku"
+msgstr "Marka Numarası"
 
 #: pigeonplanner/printing.py:374 pigeonplanner/printing.py:598
 #: glade/ResultsView.ui:299 glade/ResultsView.ui:652 glade/ResultWindow.ui:107
@@ -45,172 +33,173 @@ msgstr "Číslo kroužku"
 #: glade/Calendar.ui:95 glade/MedicationView.ui:144
 #: glade/MedicationView.ui:476 glade/MedicationView.ui:547
 msgid "Date"
-msgstr "Datum"
+msgstr "Tarih"
 
 #: pigeonplanner/printing.py:375 pigeonplanner/ui/resultwindow.py:108
 #: glade/ResultsView.ui:311 glade/ResultsView.ui:665 glade/RaceManager.ui:123
 #: glade/ResultWindow.ui:120 glade/DetailsView.ui:536
 msgid "Racepoint"
-msgstr "Vypouštěcí místo"
+msgstr "Yarış Noktası"
 
 #: pigeonplanner/printing.py:376 glade/ResultsView.ui:258
 #: glade/ResultsView.ui:678 glade/ResultWindow.ui:133
 msgid "Placed"
-msgstr "Umístění"
+msgstr "Yerleştirilmiş"
 
 #: pigeonplanner/printing.py:377 glade/ResultsView.ui:208
 #: glade/ResultsView.ui:691 glade/ResultWindow.ui:146
 msgid "Out of"
-msgstr "Z"
+msgstr "Dışında"
 
 #: pigeonplanner/printing.py:378
 msgid "Coef."
-msgstr "Koeficient"
+msgstr "Katsayısı."
 
 #: pigeonplanner/printing.py:379 pigeonplanner/ui/resultwindow.py:109
 #: glade/ResultsView.ui:164 glade/ResultsView.ui:717 glade/ResultWindow.ui:172
 #: glade/OptionsDialog.ui:534
 msgid "Sector"
-msgstr "Odvětví"
+msgstr "Sektör"
 
 #: pigeonplanner/printing.py:380 glade/ResultsView.ui:443
 #: glade/ResultsView.ui:730 glade/ResultWindow.ui:185
 #: glade/OptionsDialog.ui:560 glade/Calendar.ui:129
 msgid "Type"
-msgstr "Druh"
+msgstr "Tür"
 
 #: pigeonplanner/printing.py:381 glade/ResultsView.ui:485
 #: glade/ResultsView.ui:743 glade/ResultWindow.ui:198
 #: glade/OptionsDialog.ui:547
 msgid "Category"
-msgstr "Kategorie"
+msgstr "Kategori"
 
 #: pigeonplanner/printing.py:382 pigeonplanner/ui/tools/datamanager.py:47
 #: glade/ResultsView.ui:339 glade/ResultsView.ui:756 glade/ResultWindow.ui:211
 #: glade/OptionsDialog.ui:588
 msgid "Wind"
-msgstr "Vítr"
+msgstr "Rüzgar"
 
 #: pigeonplanner/printing.py:383 pigeonplanner/ui/tools/datamanager.py:46
 #: glade/ResultsView.ui:325 glade/ResultsView.ui:769 glade/ResultWindow.ui:224
 #: glade/OptionsDialog.ui:575
 msgid "Weather"
-msgstr "Počasí"
+msgstr "Hava"
 
 #: pigeonplanner/printing.py:384 glade/ResultsView.ui:353
 #: glade/ResultsView.ui:782 glade/ResultWindow.ui:237
 #: glade/OptionsDialog.ui:603 glade/AddressBook.ui:323 glade/Calendar.ui:204
 #: glade/MedicationView.ui:207 glade/MedicationView.ui:785
 msgid "Comment"
-msgstr "Komentář"
+msgstr "Açıklama"
 
 #: pigeonplanner/printing.py:475
 msgid "Page"
-msgstr "Stránka"
+msgstr "Sayfa"
 
 #: pigeonplanner/printing.py:589 pigeonplanner/printing.py:611
 #: pigeonplanner/printing.py:612 glade/VelocityCalculator.ui:136
 #: glade/VelocityCalculator.ui:393 glade/VelocityCalculator.ui:775
 msgid "Velocity"
-msgstr "Rychlost"
+msgstr "Hız"
 
 #: pigeonplanner/printing.py:600 glade/VelocityCalculator.ui:450
 msgid "Released"
-msgstr "Zveřejněno"
+msgstr "Serbest"
 
 #: pigeonplanner/printing.py:602 glade/RaceManager.ui:222
 #: glade/VelocityCalculator.ui:112 glade/VelocityCalculator.ui:414
 msgid "Distance"
-msgstr "Vzdálenost"
+msgstr "Mesafe"
 
 #: pigeonplanner/printing.py:617 pigeonplanner/printing.py:619
 #: glade/VelocityCalculator.ui:786
 msgid "Flight Time"
-msgstr "Čas letu"
+msgstr "Uçuş süresi"
 
 #: pigeonplanner/printing.py:624 pigeonplanner/printing.py:626
 #: glade/VelocityCalculator.ui:797
 msgid "Time of Arrival"
-msgstr "Čas příletu"
+msgstr "Varış Zaman"
 
 #: pigeonplanner/startup.py:150 pigeonplanner/ui/pedigreewindow.py:45
 #: pigeonplanner/ui/pedigreewindow.py:57 pigeonplanner/ui/optionsdialog.py:55
 #: pigeonplanner/ui/tabs/pedigree.py:26
 msgid "Pedigree"
-msgstr "Rodokmen"
+msgstr "Soyağacı / Seçere"
 
 #: pigeonplanner/startup.py:151 glade/Dialogs.ui:8 glade/OptionsDialog.ui:836
 #: glade/AddressBook.ui:289
 msgid "E-mail"
-msgstr "e-mail"
+msgstr "E-Posta"
 
 #: pigeonplanner/startup.py:152
 msgid "Send"
-msgstr "Poslat"
+msgstr "Gönder"
 
 #: pigeonplanner/startup.py:153
 msgid "Report"
-msgstr "Zpráva"
+msgstr "Rapor"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/common.py:272
 #: pigeonplanner/common.py:279
 msgid "Error"
-msgstr "Chyba"
+msgstr "Hata"
 
 #: pigeonplanner/messages.py:20
 msgid "Warning"
-msgstr "Varování"
+msgstr "Uyarı"
 
 #: pigeonplanner/messages.py:23
 msgid "Pigeon Planner is already running."
-msgstr "Pigeon Planner je již spuštěn."
+msgstr "Güvercin Planner zaten çalışıyor."
 
 #: pigeonplanner/messages.py:27 pigeonplanner/ui/mainwindow.py:414
 msgid "Go to the website?"
-msgstr "Chceš na webové stránky?"
+msgstr "web sitesine gidin?"
 
 #: pigeonplanner/messages.py:28
 msgid ""
 "Pigeon Planner is free software. You don’t need to pay for using it. But if "
 "you like it, please consider donating to help improving it."
 msgstr ""
-"Pigeon Planner je svobodný software. Nemusíš platit za jeho používání. Ale "
-"pokud se ti líbí, prosím zvaž dar pro zlepšení."
+"Güvercin Planner ücretsiz bir yazılımdır. Bunun için herhangi bir ödeme "
+"gerekmez. Eğer bu gibi Ancak, geliştirmeye yardım bağış düşünün lütfen."
 
 #: pigeonplanner/messages.py:33
 #, python-format
 msgid "Notification for '%s'"
-msgstr "Oznámení pro '%s'"
+msgstr "Bildirimi için '%s'"
 
 #: pigeonplanner/messages.py:34
 msgid "Go to the calendar?"
-msgstr "Chceš do kalendáře?"
+msgstr "Takvime git"
 
 #: pigeonplanner/messages.py:37
 msgid "Invalid image!"
-msgstr "Neplatný obrázek!"
+msgstr "Geçersiz görüntü!"
 
 #: pigeonplanner/messages.py:38
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
-msgstr "Tento obrázek  buď není podporován nebo je poškozen, zvol jiný."
+msgstr "Bu resmi ya desteklenmiyor ya da bozuk, başka birini seçiniz."
 
 #: pigeonplanner/messages.py:41
 msgid "Loading image failed!"
-msgstr "Načítání obrázků selhalo!"
+msgstr "Resim yükleme başarısız!"
 
 #: pigeonplanner/messages.py:42
 msgid "Maybe you have renamed the image or moved it on your disk."
-msgstr "Možná jsi přejmenoval obrázek nebo jsi ho přesunul jinam na disk."
+msgstr "Belki görüntü adını veya disk üzerine taşındı."
 
 #: pigeonplanner/messages.py:45
 msgid ""
 "This pigeon already exists, but isn't showing. Do you want to show it again?"
-msgstr "Tento holub již existuje, ale není zobrazen. Chceš ho ukázat?"
+msgstr ""
+"Bu güvercin zaten var , ama gösterilmiyor. Yeniden göstermek istiyor musunuz?"
 
 #: pigeonplanner/messages.py:49
 msgid "This pigeon already exists. Overwrite it?"
-msgstr "Tento holub již existuje. Chceš ho přepsat?"
+msgstr "Bu güvercin zaten var. Üzerine yazılsın mı?"
 
 #: pigeonplanner/messages.py:52
 msgid "This pigeon already exists."
@@ -218,19 +207,19 @@ msgstr ""
 
 #: pigeonplanner/messages.py:55
 msgid "This pigeon doesn't exist. Do you want to add it?"
-msgstr "Tento holub neexistuje. Chceš ho přidat?"
+msgstr "Bu güvercin yok. Bunu eklemek ister misiniz?"
 
 #: pigeonplanner/messages.py:57
 msgid "Adding pigeon"
-msgstr "Přidat holuba"
+msgstr "Güvercin ekleme"
 
 #: pigeonplanner/messages.py:58
 msgid "The selected pigeon can't be found."
-msgstr "Vybraný holub není k  nalezení"
+msgstr "Seçilen güvercin bulunamıyor."
 
 #: pigeonplanner/messages.py:60
 msgid "Not found!"
-msgstr "Není k nalezení!"
+msgstr "Bulunamadı"
 
 #: pigeonplanner/messages.py:62 pigeonplanner/messages.py:65
 #: pigeonplanner/messages.py:68 pigeonplanner/messages.py:71
@@ -238,48 +227,48 @@ msgstr "Není k nalezení!"
 #: pigeonplanner/messages.py:82 pigeonplanner/messages.py:92
 #: pigeonplanner/messages.py:95
 msgid "Invalid input!"
-msgstr "Neplatný vstup!"
+msgstr "Geçersiz girdi!"
 
 #: pigeonplanner/messages.py:63
 msgid "The ringnumber and year are necessary."
-msgstr "Musíš zadat číslo kroužku a rok"
+msgstr "yüzük numarası ve yıl gereklidir."
 
 #: pigeonplanner/messages.py:66
 msgid "Only numbers are accepted as year input."
-msgstr "Pouze čísla jsou přijímána jako rok vstupu."
+msgstr "Sadece rakamlar yıl girdi olarak kabul edilir."
 
 #: pigeonplanner/messages.py:69
 msgid "Check the length of the year."
-msgstr "Podívej se na délku roku"
+msgstr "yılın uzunluğunu kontrol edin."
 
 #: pigeonplanner/messages.py:72
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr "Pouze čísla jsou přijímána jako rok vstupu"
+msgstr "Yalnızca sayı birden fazla güvercin eklerken izin verilir."
 
 #: pigeonplanner/messages.py:76
 msgid "At least the date and racepoint have to be entered."
-msgstr "Musíš zadat datum a místo závodu"
+msgstr "En azından tarih ve racepoint girilmesi gerekir."
 
 #: pigeonplanner/messages.py:79
 msgid ""
 "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
 "DD)."
 msgstr ""
-"Datum, vstupu má špatný formát. To by mělo být ve formátu (RRRR-MM-DD)."
+"Girdiğiniz tarih yanlış biçimi vardır. ISO-biçimi (YYYY-AA-GG) olmalı .."
 
 #: pigeonplanner/messages.py:83
 msgid "The result you want to add already exists."
-msgstr "Výsledek, který chceš přidat již existuje."
+msgstr "Zaten eklemek istediğiniz sonucu var."
 
 #: pigeonplanner/messages.py:85
 msgid "Removing the selected result"
-msgstr "Odstranit vybraný výsledek"
+msgstr "Seçilen sonuç çıkarma"
 
 #: pigeonplanner/messages.py:86 pigeonplanner/messages.py:89
 #: pigeonplanner/messages.py:138 pigeonplanner/ui/dialogs.py:405
 #: glade/MainWindow.ui:305
 msgid "Are you sure?"
-msgstr "Jseš si jist?"
+msgstr "Emin misiniz?"
 
 #: pigeonplanner/messages.py:88
 msgid "Removing the selected media file"
@@ -287,208 +276,209 @@ msgstr ""
 
 #: pigeonplanner/messages.py:93
 msgid "The name has to be entered."
-msgstr "Je třeba zadat jméno"
+msgstr "ismi girilmesi gerekir."
 
 #: pigeonplanner/messages.py:96
 msgid "The persoon you want to add already exists."
-msgstr "Již existuje."
+msgstr "Zaten eklemek istediğiniz kişi var."
 
 #: pigeonplanner/messages.py:98
 #, python-format
 msgid "Removing '%s'"
-msgstr "Odstranění '%s'"
+msgstr "Çıkarmadan '%s'"
 
 #: pigeonplanner/messages.py:99
 msgid "Are you sure you want to remove this person from your addresses?"
-msgstr "Jseš si jist, že chceš odstranit tuto osobu ze svého adresáře?"
+msgstr "Kişisel adreslerden bu kişiyi kaldırmak istediğinizden emin misiniz?"
 
 #: pigeonplanner/messages.py:103
 #, python-format
 msgid "Removing '%s' from '%s'."
-msgstr "Odstranit '%s' z '%s'."
+msgstr "Çıkarmadan '%s' den '%s'."
 
 #: pigeonplanner/messages.py:104
 msgid "Are you sure you want to remove this item?"
-msgstr "Jseš si jist, že chceš odstranit tuto položku?"
+msgstr "Bu öğeyi kaldırmak istediğinize emin misiniz?"
 
 #: pigeonplanner/messages.py:107 pigeonplanner/messages.py:110
 msgid "Removing database"
-msgstr "Odstranění databáze"
+msgstr "Veritabanı Çıkarma"
 
 #: pigeonplanner/messages.py:108
 msgid "Are you sure you want to remove the database? All data will be lost."
 msgstr ""
-"Jseš si jist, že chceš odstranit databázi? Všechna data budou ztracena."
+"Veritabanını kaldırmak istediğinizden emin misiniz? Tüm veriler "
+"kaybolacaktır."
 
 #: pigeonplanner/messages.py:112
 msgid "The backup was successfully created."
-msgstr "Záloha byla úspěšně vytvořena."
+msgstr "Yedekleme başarıyla oluşturuldu."
 
 #: pigeonplanner/messages.py:114 pigeonplanner/messages.py:120
 msgid "Completed!"
-msgstr "Dokončeno!"
+msgstr "Tamamlandı!"
 
 #: pigeonplanner/messages.py:115
 msgid "There was an error making the backup."
-msgstr "Došlo k chybě při vytváření zálohy."
+msgstr "Yedekleme bir hata oluştu."
 
 #: pigeonplanner/messages.py:117 pigeonplanner/messages.py:123
 msgid "Failed!"
-msgstr "Selhání!"
+msgstr "Başarısız!"
 
 #: pigeonplanner/messages.py:118
 msgid ""
 "The backup was successfully restored.\n"
 "Restart the program."
 msgstr ""
-"Záloha byla úspěšně obnovena. \n"
-"Restartování programu."
+"Yedekleme başarıyla onarıldı.\n"
+"programını yeniden başlatın."
 
 #: pigeonplanner/messages.py:121
 msgid "There was an error restoring the backup."
-msgstr "Došlo k chybě při obnovení zálohy"
+msgstr "yedeğini geri yükleme bir hata oluştu."
 
 #: pigeonplanner/messages.py:125
 msgid "No personal information found."
-msgstr "Žádné  informace nelze nalézt."
+msgstr "hiçbir kişisel bilgi bulunamadı."
 
 #: pigeonplanner/messages.py:126
 msgid ""
 "This will be shown on top of the printed pedigree.\n"
 "Do you want to add it now?"
 msgstr ""
-"Bude zobrazen v horní části vytištěného rodokmenu.\n"
-"Chceš jej přidat nyní?"
+"Bu basılı pedigree üstünde görünecek.\n"
+"Şimdi eklemek ister misiniz?"
 
 #: pigeonplanner/messages.py:130
 msgid "Error printing the pedigree"
-msgstr "Chyba tisku rodokmenu"
+msgstr "Baskı hatası pedigree"
 
 #: pigeonplanner/messages.py:133
 msgid "An error occured in the print operation!"
-msgstr "Došlo k chybě při tisku !"
+msgstr "Bir hata baskı operasyonda oluştu!"
 
 #: pigeonplanner/messages.py:134
 msgid "See the logfile (File->Logfile viewer) for more info."
-msgstr ""
-"Nalezneš v souboru protokolu (Soubor-> Protokol prohlížeč souborů) pro více "
-"informací."
+msgstr "Daha fazla bilgi için Logfile (Dosya-> Logfile görüntüleyici) Bkz."
 
 #: pigeonplanner/messages.py:137
 msgid "This will set back all the settings to the default values."
-msgstr "Všechna nastavení budou nastavena na výchozí hodnoty."
+msgstr "varsayılan değerler tüm ayarları geri almak olacaktır."
 
 #: pigeonplanner/messages.py:139
 msgid "Default settings"
-msgstr "Výchozí nastavení"
+msgstr "Varsayılan ayarları"
 
 #: pigeonplanner/messages.py:141
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
-msgstr "Pro projevení změn je třeba program restartovat"
+msgstr ""
+"Güvercin Planner değişikliklerin etkili olması için yeniden başlatılması "
+"gerekir."
 
 #: pigeonplanner/messages.py:144
 msgid "Restart required"
-msgstr "Je nutný restart!"
+msgstr "Yeniden başlatma gerekiyor"
 
 #: pigeonplanner/messages.py:146
 msgid "Update available!"
-msgstr "Je k dispozici aktualizace"
+msgstr "Kullanılabilen güncelleştirme!"
 
 #: pigeonplanner/messages.py:147
 msgid "There is an update available, do you want to download it now?"
-msgstr "Je k dispozici aktualizace, chceš ji nyní stáhnout?"
+msgstr "Şimdi yüklemek ister misiniz, bir güncelleştirme mevcut değil?"
 
 #: pigeonplanner/messages.py:150
 msgid "The recipient and sender's e-mailaddress are required."
-msgstr "E-mailová adresa příjemce a odesílatele je povinná"
+msgstr "alıcı ve gönderenin e-posta adresi gereklidir."
 
 #: pigeonplanner/messages.py:154
 msgid "Error trying to get information. Are you connected to the internet?"
-msgstr "Chyba při pokusu o získání informací. Jseš připojen k internetu?"
+msgstr "Bilgi almaya çalışırken hata oluştu. Eğer internete bağlı mı?"
 
 #: pigeonplanner/messages.py:155
 msgid "A new version is available."
-msgstr "Nová verze je k dispozici."
+msgstr "Yeni bir sürüm bulundu"
 
 #: pigeonplanner/messages.py:156
 msgid "You already have the latest version installed."
-msgstr "Již máš nainstalovanou nejnovější verzi."
+msgstr "Zaten son sürümü yüklü."
 
 #: pigeonplanner/messages.py:157
 msgid "This isn't normal, or you must be running a development version"
-msgstr "To není normální, nebo musíš mít spuštěnu verzi ve vývoji"
+msgstr "Bu normal değil, ya da bir geliştirme sürümü çalışıyor olmalıdır"
 
 #: pigeonplanner/common.py:43
 msgid "Yards"
-msgstr "Yardy"
+msgstr "Yarda"
 
 #: pigeonplanner/common.py:44
 msgid "Kilometres"
-msgstr "Kilometry"
+msgstr "Kilometre"
 
 #: pigeonplanner/common.py:45
 msgid "Metres"
-msgstr "Metry"
+msgstr "Metre"
 
 #: pigeonplanner/common.py:46
 msgid "Centimetres"
-msgstr "Centimetry"
+msgstr "Santimetre"
 
 #: pigeonplanner/common.py:47
 msgid "Inches"
-msgstr "Inche"
+msgstr "İnç"
 
 #: pigeonplanner/common.py:48
 msgid "Feet"
-msgstr "Stopy"
+msgstr "Adım"
 
 #: pigeonplanner/common.py:49
 msgid "Miles"
-msgstr "Míle"
+msgstr "Mil"
 
 #: pigeonplanner/common.py:50
 msgid "Nautical Miles"
-msgstr "Námořní míle"
+msgstr "Deniz Mili"
 
 #: pigeonplanner/common.py:54
 msgid "Yard per Minute"
-msgstr "Yardů za minutu"
+msgstr "Dakikada Yard"
 
 #: pigeonplanner/common.py:55
 msgid "Metres per Minute"
-msgstr "Metrů za minutu"
+msgstr "Dakikada Metre"
 
 #: pigeonplanner/common.py:56
 msgid "Metres per Second"
-msgstr "Metrů z vteřinu"
+msgstr "Saniyede Metre"
 
 #: pigeonplanner/common.py:57
 msgid "Kilometre per Hour"
-msgstr "Kilometrů za hodinu"
+msgstr "Saatte Kilometre"
 
 #: pigeonplanner/common.py:58
 msgid "Feet per Second"
-msgstr "Stop za vteřinu"
+msgstr "Saniyede Feet"
 
 #: pigeonplanner/common.py:59
 msgid "Feet per Minute"
-msgstr "Stop za minutu"
+msgstr "Dakikada Feet"
 
 #: pigeonplanner/common.py:60
 msgid "Mile per Hour"
-msgstr "Mil za hodinu"
+msgstr "Saatte Mile"
 
 #: pigeonplanner/common.py:64
 msgid "Cock"
-msgstr "H"
+msgstr "Erkek"
 
 #: pigeonplanner/common.py:64
 msgid "Hen"
-msgstr "HE"
+msgstr "Dişi"
 
 #: pigeonplanner/common.py:64
 msgid "Young bird"
-msgstr "Holoubě"
+msgstr "Genç Kuş"
 
 #: pigeonplanner/common.py:272
 msgid "Error: This file does not exist"
@@ -500,208 +490,204 @@ msgstr ""
 
 #: pigeonplanner/ui/databasetool.py:38
 msgid "Executing..."
-msgstr "Provádím ..."
+msgstr "Yürütme ..."
 
 #: pigeonplanner/ui/databasetool.py:40
 msgid "Error: see the logfile for more info."
-msgstr "Chyba: víc informací nalezneš v log souboru"
+msgstr "Hata: Daha fazla bilgi için logfile bkz."
 
 #: pigeonplanner/ui/databasetool.py:41
 msgid "Operation cancelled"
-msgstr "Operace byla zrušena"
+msgstr "İşlem iptal edildi"
 
 #: pigeonplanner/ui/databasetool.py:42
 msgid "Operation completed"
-msgstr "Operace byla dokončena"
+msgstr "İşlem tamamlandı"
 
 #: pigeonplanner/ui/printpreview.py:52
 msgid "Print Preview"
-msgstr "Náhled tisku"
+msgstr "Baskı Önizleme"
 
 #: pigeonplanner/ui/printpreview.py:97
 msgid "Shows the first page"
-msgstr "První stránka"
+msgstr "İlk sayfayı göster"
 
 #: pigeonplanner/ui/printpreview.py:99
 msgid "Shows previous page"
-msgstr "Předchozí stránka"
+msgstr "Önceki sayfayı göster"
 
 #: pigeonplanner/ui/printpreview.py:101
 msgid "Shows the next page"
-msgstr "Další stránka"
+msgstr "Sonraki sayfayı gösterir"
 
 #: pigeonplanner/ui/printpreview.py:103
 msgid "Shows the last page"
-msgstr "Poslední stránka"
+msgstr "Son sayfayı gösterir"
 
 #: pigeonplanner/ui/printpreview.py:105
 msgid "Zooms the page in"
-msgstr "Zvětšit stránku"
+msgstr "Sayfayı yaklaştır"
 
 #: pigeonplanner/ui/printpreview.py:107
 msgid "Zooms the page out"
-msgstr "Zmenšit stránku"
+msgstr "Sayfayı uzaklaştır"
 
 #: pigeonplanner/ui/printpreview.py:109 pigeonplanner/ui/pedigreewindow.py:88
 #: pigeonplanner/ui/resultwindow.py:195
 #: pigeonplanner/ui/tools/photoalbum.py:121
 msgid "Close this window"
-msgstr "Zavřít okno"
+msgstr "Bu pencereyi kapat"
 
 #: pigeonplanner/ui/printpreview.py:113
 msgid "Zooms to fit the whole page"
-msgstr "Na celou stránku"
+msgstr "Tam sayfayı oturtacak kadar yaklaştır"
 
 #: pigeonplanner/ui/pedigreewindow.py:80
 msgid "Save this pedigree"
-msgstr "Uložit tento rodokmen"
+msgstr "Bu soyağacı kaydet"
 
 #: pigeonplanner/ui/pedigreewindow.py:82
 msgid "Email this pedigree"
-msgstr "Poslat rodokmen"
+msgstr "Bu soyağacı Email"
 
 #: pigeonplanner/ui/pedigreewindow.py:84
 msgid "View this pedigree"
-msgstr "Zobrazit tento rodokmen"
+msgstr "Bu Soyağacı Göster"
 
 #: pigeonplanner/ui/pedigreewindow.py:86 pigeonplanner/ui/mainwindow.py:603
 msgid "Print this pedigree"
-msgstr "Tisknout rodokmen"
+msgstr "Bu Soyağacı yazdır"
 
 #: pigeonplanner/ui/maildialog.py:145
 msgid "The e-mail has been sent succesfully!"
-msgstr "E-mail byl úspěšně odeslán!"
+msgstr "E-posta başarıyla gönderildi!"
 
 #: pigeonplanner/ui/optionsdialog.py:50 glade/DatabaseTool.ui:175
 msgid "General"
-msgstr "Obecné"
+msgstr "Genel"
 
 #: pigeonplanner/ui/optionsdialog.py:52
 msgid "Appearance"
-msgstr "Vzhled"
+msgstr "Görünüm"
 
 #: pigeonplanner/ui/optionsdialog.py:54
 msgid "Printing"
-msgstr "Tisk"
+msgstr "Yazdır"
 
 #: pigeonplanner/ui/optionsdialog.py:56 pigeonplanner/ui/resultwindow.py:64
 #: pigeonplanner/ui/tabs/results.py:50 glade/ResultsView.ui:20
 msgid "Results"
-msgstr "Výsledek"
+msgstr "Sonuçlar"
 
 #: pigeonplanner/ui/optionsdialog.py:109
 msgid "days"
-msgstr "Dny"
+msgstr "Günler"
 
 #: pigeonplanner/ui/optionsdialog.py:109
 msgid "day"
-msgstr "Den"
+msgstr "Gün"
 
 #: pigeonplanner/ui/dialogs.py:96
 msgid "translator-credits"
 msgstr ""
-"Překladatel\n"
-"\n"
 "Launchpad Contributions:\n"
-"  Jindra https://launchpad.net/~sidloj\n"
-"  Timo https://launchpad.net/~timovwb\n"
-"  johnny jebb https://launchpad.net/~bee88"
+"  Melih Odaman https://launchpad.net/~melihodaman"
 
 #: pigeonplanner/ui/dialogs.py:106 pigeonplanner/ui/mainwindow.py:662
 msgid "General information"
-msgstr "Obecné informace"
+msgstr "Genel Bilgiler"
 
 #: pigeonplanner/ui/dialogs.py:132
 msgid "Technical details"
-msgstr "Technické detaily"
+msgstr "Teknik detaylar"
 
 #: pigeonplanner/ui/dialogs.py:135
 msgid "Data information"
-msgstr "Informace"
+msgstr "Veri bilgisi"
 
 #: pigeonplanner/ui/dialogs.py:152
 msgid "Number of pigeons"
-msgstr "Číslo holubů"
+msgstr "Güvercin sayısı"
 
 #: pigeonplanner/ui/dialogs.py:153
 msgid "Number of cocks"
-msgstr "Číslo holuba"
+msgstr "Erkek sayısı"
 
 #: pigeonplanner/ui/dialogs.py:155
 msgid "Number of hens"
-msgstr "Číslo holubice"
+msgstr "Dişi Sayısı"
 
 #: pigeonplanner/ui/dialogs.py:157
 msgid "Number of young birds"
-msgstr "Číslo holouběte"
+msgstr "Genç Kuş Sayısı"
 
 #: pigeonplanner/ui/dialogs.py:159
 msgid "Number of results"
-msgstr "Číslo výsledku"
+msgstr "Sonuç sayısı"
 
 #: pigeonplanner/ui/dialogs.py:181
 msgid "Create backup"
-msgstr "Vytvořit zálohu"
+msgstr "Yedek oluştur"
 
 #: pigeonplanner/ui/dialogs.py:182
 msgid "Choose a directory where to save the backup"
-msgstr "Vyber si adresář kam uložit zálohu"
+msgstr "Burada yedek kaydetmek için bir dizin seçin"
 
 #: pigeonplanner/ui/dialogs.py:188
 msgid "Backup"
-msgstr "Záloha"
+msgstr "Yedekle"
 
 #: pigeonplanner/ui/dialogs.py:197
 msgid "Restore backup"
-msgstr "Obnovit zálohu"
+msgstr "Yedek Geri Yükleme"
 
 #: pigeonplanner/ui/dialogs.py:198
 msgid "Choose a Pigeon Planner backup file to restore"
-msgstr "Vyber si záložní soubor pro obnovu Pigeon Planner"
+msgstr "Geri yüklemek için bir Güvercin Planner yedekleme dosyası seçin"
 
 #: pigeonplanner/ui/dialogs.py:201
 msgid "Warning! This will overwrite the existing database!"
-msgstr "Upozornění! Tím se přepíše stávající databáze!"
+msgstr "Uyarı! Bu mevcut veritabanı üzerine yazılır!"
 
 #: pigeonplanner/ui/dialogs.py:209
 msgid "Restore"
-msgstr "Obnovit"
+msgstr "Geri Yükle"
 
 #: pigeonplanner/ui/dialogs.py:316
 msgid "Only show:"
-msgstr "Jen zobrazit"
+msgstr "Sadece göster:"
 
 #: pigeonplanner/ui/dialogs.py:339 glade/DetailsView.ui:57
 msgid "Search a pigeon"
-msgstr "Hledat holuba"
+msgstr "Güvercin Ara"
 
 #: pigeonplanner/ui/dialogs.py:351
 msgid "Search for:"
-msgstr "Hledat:"
+msgstr "Bunun için ara:"
 
 #: pigeonplanner/ui/dialogs.py:359
 msgid "Search in:"
-msgstr "Hledat v:"
+msgstr "Burada ara:"
 
 #: pigeonplanner/ui/dialogs.py:360
 msgid "Band numbers"
-msgstr "Čísla kroužku"
+msgstr "Marka Numarası"
 
 #: pigeonplanner/ui/dialogs.py:361
 msgid "Names"
-msgstr "Jména"
+msgstr "İsimler"
 
 #: pigeonplanner/ui/dialogs.py:399
 msgid "Removing the selected medication entry"
-msgstr "Smazat vybraný lék"
+msgstr "Seçilen ilaç girişi çıkarma"
 
 #: pigeonplanner/ui/dialogs.py:401
 msgid "Remove this entry for all pigeons?"
-msgstr "Smazat  záznamy  pro všechny holuby?"
+msgstr "Bütün güvercinler için bu giriş kaldırılsın mı?"
 
 #: pigeonplanner/ui/logdialog.py:39
 msgid "Logfile Viewer"
-msgstr "Prohlížeč log souborů"
+msgstr "Logfile Göster"
 
 #: pigeonplanner/ui/filechooser.py:50
 msgid "Preview"
@@ -709,7 +695,7 @@ msgstr ""
 
 #: pigeonplanner/ui/filechooser.py:70
 msgid "Images"
-msgstr "Obrázky"
+msgstr "Resimler"
 
 #: pigeonplanner/ui/filechooser.py:110
 msgid "Select an image..."
@@ -717,7 +703,7 @@ msgstr ""
 
 #: pigeonplanner/ui/filechooser.py:113
 msgid "No image"
-msgstr "Obrázek není k dispozici"
+msgstr "Resim yok"
 
 #: pigeonplanner/ui/filechooser.py:122 pigeonplanner/ui/filechooser.py:183
 #: pigeonplanner/ui/filechooser.py:197
@@ -732,11 +718,11 @@ msgstr ""
 #: glade/MedicationView.ui:155 glade/MedicationView.ui:489
 #: glade/MedicationView.ui:630
 msgid "Description"
-msgstr "Popis"
+msgstr "Açıklama"
 
 #: pigeonplanner/ui/filechooser.py:164
 msgid "Save as..."
-msgstr "Uložit jako ..."
+msgstr "Farklı kaydet..."
 
 #: pigeonplanner/ui/filechooser.py:191
 msgid "Select a folder..."
@@ -744,187 +730,187 @@ msgstr ""
 
 #: pigeonplanner/ui/resultwindow.py:100
 msgid "Filter results"
-msgstr "Filtrovat výsledky"
+msgstr "Sonuçları filtrele"
 
 #: pigeonplanner/ui/resultwindow.py:105
 msgid "Pigeons"
-msgstr "Holubi"
+msgstr "Güvercinler"
 
 #: pigeonplanner/ui/resultwindow.py:106
 msgid "Year of pigeon"
-msgstr "Ročník holuba"
+msgstr "Güvercin Yılı"
 
 #: pigeonplanner/ui/resultwindow.py:107
 msgid "Year of race"
-msgstr "Ročník závodu"
+msgstr "Yarış Yılı"
 
 #: pigeonplanner/ui/resultwindow.py:110 glade/ResultsView.ui:704
 #: glade/ResultWindow.ui:159 glade/OptionsDialog.ui:525
 msgid "Coefficient"
-msgstr "Koeficient"
+msgstr "Katsayı"
 
 #: pigeonplanner/ui/resultwindow.py:111 glade/ResultParser.ui:334
 msgid "Place"
-msgstr "Místo"
+msgstr "Yer"
 
 #: pigeonplanner/ui/resultwindow.py:185
 msgid "Save these results"
-msgstr "Uložit  výsledky"
+msgstr "Bu sonuçları kaydet"
 
 #: pigeonplanner/ui/resultwindow.py:187
 msgid "Email these results"
-msgstr "Výsledky e-mailem"
+msgstr "Bu sonuçlar Email"
 
 #: pigeonplanner/ui/resultwindow.py:189
 msgid "View these results"
-msgstr "Prohlédnout výsledky"
+msgstr "Sonuçları gör"
 
 #: pigeonplanner/ui/resultwindow.py:191
 msgid "Print these results"
-msgstr "Tisk výsledků"
+msgstr "Sonuçları yazdır"
 
 #: pigeonplanner/ui/resultwindow.py:192 pigeonplanner/ui/mainwindow.py:635
 msgid "_Filter..."
-msgstr "_Filter ..."
+msgstr "_Filtre..."
 
 #: pigeonplanner/ui/resultwindow.py:193 pigeonplanner/ui/mainwindow.py:636
 msgid "Set filter options"
-msgstr "Nastavit možnosti filtru"
+msgstr "filtre seçenekleri"
 
 #: pigeonplanner/ui/mainwindow.py:184
 #, python-format
 msgid "Pigeon %s has been added"
-msgstr "Holub% s byl přidán"
+msgstr "Güvercin %s eklendi"
 
 #: pigeonplanner/ui/mainwindow.py:270
 #, python-format
 msgid "Pigeon %s has been removed"
-msgstr "Holub %s byl odebrán"
+msgstr "Güvercin %s kaldırıldı"
 
 #: pigeonplanner/ui/mainwindow.py:280
 #, python-format
 msgid "%s pigeons have been removed"
-msgstr "%s holubi byli odstaněni"
+msgstr "%s güvercinler çıkarıldı"
 
 #: pigeonplanner/ui/mainwindow.py:411 pigeonplanner/ui/mainwindow.py:658
 msgid "Search for updates..."
-msgstr "Hledat aktualizace..."
+msgstr "Güncelleştirmelerini arayın ..."
 
 #: pigeonplanner/ui/mainwindow.py:594
 msgid "_File"
-msgstr "_Soubor"
+msgstr "_Dosya"
 
 #: pigeonplanner/ui/mainwindow.py:596 pigeonplanner/ui/mainwindow.py:606
 msgid "_Backup"
-msgstr "_Záloha"
+msgstr "_Yedek"
 
 #: pigeonplanner/ui/mainwindow.py:597
 msgid "_Pigeon"
-msgstr "_Holub"
+msgstr "_Güvercin"
 
 #: pigeonplanner/ui/mainwindow.py:598
 msgid "_Edit"
-msgstr "_Upravit"
+msgstr "_Düzenle"
 
 #: pigeonplanner/ui/mainwindow.py:599
 msgid "_View"
-msgstr "_Zobrazit"
+msgstr "_Görünüm"
 
 #: pigeonplanner/ui/mainwindow.py:600
 msgid "_Tools"
-msgstr "_Nástroje"
+msgstr "_Araçlar"
 
 #: pigeonplanner/ui/mainwindow.py:601
 msgid "_Help"
-msgstr "_Pomoc"
+msgstr "_Yardım"
 
 #: pigeonplanner/ui/mainwindow.py:602 pigeonplanner/ui/mainwindow.py:627
 msgid "_Pedigree"
-msgstr "_Rodokmen"
+msgstr "_Safkan"
 
 #: pigeonplanner/ui/mainwindow.py:604
 msgid "Blank pedigree"
-msgstr "Prázdný rodokmen"
+msgstr "Boş soyağacı"
 
 #: pigeonplanner/ui/mainwindow.py:605
 msgid "Print a blank pedigree"
-msgstr "Tisk prázdného rodokmenu"
+msgstr "Boş soyağacı yazdır"
 
 #: pigeonplanner/ui/mainwindow.py:607
 msgid "Create a backup of your database"
-msgstr "Vytvořit zálohu databáze"
+msgstr "Veritabanı yedeğini oluşturma"
 
 #: pigeonplanner/ui/mainwindow.py:609
 msgid "_Restore"
-msgstr "_Obnovit"
+msgstr "_Geri Yükle"
 
 #: pigeonplanner/ui/mainwindow.py:610
 msgid "Restore a backup of your database"
-msgstr "Obnovit zálohu databáze"
+msgstr "Veritabanı yedeğini geri yükleme"
 
 #: pigeonplanner/ui/mainwindow.py:613
 msgid "Quit the program"
-msgstr "Konec programu"
+msgstr "Programdan çık"
 
 #: pigeonplanner/ui/mainwindow.py:615
 msgid "Add a new pigeon"
-msgstr "Přidat nového holuba"
+msgstr "Yeni bir güvercin ekle"
 
 #: pigeonplanner/ui/mainwindow.py:616
 msgid "Add ran_ge"
-msgstr "Přidat _řadu"
+msgstr "Aralığı ekle"
 
 #: pigeonplanner/ui/mainwindow.py:617 glade/MainWindow.ui:7
 msgid "Add a range of pigeons"
-msgstr "Přdat řadu holubů"
+msgstr "Güvercinden oluşan bir aralığı ekle"
 
 #: pigeonplanner/ui/mainwindow.py:618
 msgid "_Logfile Viewer"
-msgstr "Prohlížet log soubor"
+msgstr "_Log Dosyası Göster"
 
 #: pigeonplanner/ui/mainwindow.py:619
 msgid "See the logfile"
-msgstr "Nalezneš v souboru protokolu"
+msgstr "logdosyası bak"
 
 #: pigeonplanner/ui/mainwindow.py:620
 msgid "_Find..."
-msgstr "_Najít..."
+msgstr "_Bul..."
 
 #: pigeonplanner/ui/mainwindow.py:621
 msgid "Search through the list of pigeons"
-msgstr "Vyhledávání v seznamu holubů"
+msgstr "Güvercin listesinde ara"
 
 #: pigeonplanner/ui/mainwindow.py:624
 msgid "Edit the selected pigeon"
-msgstr "Upravit vybraného holuba"
+msgstr "Seçilen güvercin Düzenle"
 
 #: pigeonplanner/ui/mainwindow.py:626
 msgid "Remove the selected pigeon"
-msgstr "Vyjmout vybraného holuba"
+msgstr "Seçilen güvercin sil"
 
 #: pigeonplanner/ui/mainwindow.py:628
 msgid "View the detailed pedigree of this pigeon"
-msgstr "Zobrazit detailní rodokmen  holuba"
+msgstr "Bu güvercin ayrıntılı soyağacı Profili"
 
 #: pigeonplanner/ui/mainwindow.py:630
 msgid "Add resul_t"
-msgstr "Přidat _výsledek"
+msgstr "Sonuç Ekle"
 
 #: pigeonplanner/ui/mainwindow.py:631
 msgid "Add a new result for this pigeon"
-msgstr "Přidat nový výsledek  holuba"
+msgstr "Bu güvercin için yeni bir sonuc ekle"
 
 #: pigeonplanner/ui/mainwindow.py:634
 msgid "Configure the application"
-msgstr "Konfigurace aplikace"
+msgstr "Uygulamayı yapılandır"
 
 #: pigeonplanner/ui/mainwindow.py:637 glade/VelocityCalculator.ui:84
 msgid "Velocity calculator"
-msgstr "Kalkulačka rychlosti"
+msgstr "Hız hesap makinesi"
 
 #: pigeonplanner/ui/mainwindow.py:638
 msgid "Calculate the velocity of flights"
-msgstr "Vypočítat rychlost letu"
+msgstr "Uçuş hesaplama hızı"
 
 #: pigeonplanner/ui/mainwindow.py:640 glade/RaceManager.ui:27
 msgid "Racepoint manager"
@@ -936,125 +922,125 @@ msgstr ""
 
 #: pigeonplanner/ui/mainwindow.py:643
 msgid "_Photo Album"
-msgstr "_Fotoalbum"
+msgstr "_Resim Albümü"
 
 #: pigeonplanner/ui/mainwindow.py:644
 msgid "View the images of your pigeons"
-msgstr "Zobrazit snímky  holubů"
+msgstr "Senin güvercin görüntüleri Profili"
 
 #: pigeonplanner/ui/mainwindow.py:646 glade/AddressBook.ui:15
 msgid "Address book"
-msgstr "Adresář"
+msgstr "Adres Defteri"
 
 #: pigeonplanner/ui/mainwindow.py:647
 msgid "View the address book"
-msgstr "Zobrazit adresář"
+msgstr "Adres Defteri göster"
 
 #: pigeonplanner/ui/mainwindow.py:648 glade/Calendar.ui:17
 msgid "Calendar"
-msgstr "Kalendář"
+msgstr "Takvim"
 
 #: pigeonplanner/ui/mainwindow.py:649
 msgid "View the calendar"
-msgstr "Zobrazit kalendář"
+msgstr "takvim göster"
 
 #: pigeonplanner/ui/mainwindow.py:650 glade/DataManager.ui:26
 msgid "Data manager"
-msgstr "Správce dat"
+msgstr "Veri yöneticisi"
 
 #: pigeonplanner/ui/mainwindow.py:651
 msgid "Manage your data"
-msgstr "Správa dat"
+msgstr "Verilerinizi yönetin"
 
 #: pigeonplanner/ui/mainwindow.py:652
 msgid "_Website"
-msgstr "_Internetové stránky"
+msgstr "_Web Sitesi"
 
 #: pigeonplanner/ui/mainwindow.py:653
 msgid "Go to the website for more information"
-msgstr "Jdi na webové stránky pro více informací"
+msgstr "Daha fazla bilgi için web sitesine gidin"
 
 #: pigeonplanner/ui/mainwindow.py:655
 msgid "Forum"
-msgstr "Fórum"
+msgstr "Forum"
 
 #: pigeonplanner/ui/mainwindow.py:656
 msgid "Go to the forum for online help"
-msgstr "Přejít na fórum pro on-line pomoc"
+msgstr "Online yardım için forum git"
 
 #: pigeonplanner/ui/mainwindow.py:659
 msgid "Search online for program updates"
-msgstr "Vyhledat online aktualizace programu"
+msgstr "Program güncelleştirmelerini arayın online"
 
 #: pigeonplanner/ui/mainwindow.py:664
 msgid "About this application"
-msgstr "O  aplikaci"
+msgstr "Bu program hakkında"
 
 #: pigeonplanner/ui/mainwindow.py:667
 msgid "Navigation arrows"
-msgstr "Navigační šipky"
+msgstr "Navigasyon okları"
 
 #: pigeonplanner/ui/mainwindow.py:668 glade/OptionsDialog.ui:647
 msgid "Show or hide the navigation arrows"
-msgstr "Zobrazit nebo skrýt navigační šipky"
+msgstr "navigasyon okları göster veya gizle"
 
 #: pigeonplanner/ui/mainwindow.py:670
 msgid "Statistics"
-msgstr "Statistika"
+msgstr "İstatistikler"
 
 #: pigeonplanner/ui/mainwindow.py:671 glade/OptionsDialog.ui:659
 msgid "Show or hide pigeon statistics"
-msgstr "Ukázat nebo skrýt statistiku holuba"
+msgstr "güvercin istatistiklerini göster veya gizle"
 
 #: pigeonplanner/ui/mainwindow.py:673
 msgid "Toolbar"
-msgstr "Panel nástrojů"
+msgstr "Araç Çubuğu"
 
 #: pigeonplanner/ui/mainwindow.py:674 glade/OptionsDialog.ui:671
 msgid "Show or hide the toolbar"
-msgstr "Zobrazit  nebo skrýt panelu nástrojů"
+msgstr "Araç çubuğunu göster veya gizle"
 
 #: pigeonplanner/ui/mainwindow.py:676
 msgid "Statusbar"
-msgstr "Stavový  řádek"
+msgstr "Durum Çubuğu"
 
 #: pigeonplanner/ui/mainwindow.py:677 glade/OptionsDialog.ui:683
 msgid "Show or hide the statusbar"
-msgstr "Zobrazit nebo skrýt stavový řádek"
+msgstr "Durum çubuğunu gizle ya da göster"
 
 #: pigeonplanner/ui/detailsview.py:50
 msgid "Details of pigeon"
-msgstr "Podrobnosti holuba"
+msgstr "Güvercin Detayları"
 
 #: pigeonplanner/ui/detailsview.py:52
 #, python-format
 msgid "Details of %s"
-msgstr "Podrobnosti o %s"
+msgstr "Detaylar %s"
 
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:66
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:244
 msgid "<edit>"
-msgstr "<Upravit>"
+msgstr "<Düzenle>"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:92 glade/DetailsView.ui:358
 msgid "Dead"
-msgstr "Mrtvý"
+msgstr "Ölülerin sayısı"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:92 glade/DetailsView.ui:377
 msgid "Active"
-msgstr "Aktivní"
+msgstr "Aktif"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:92 glade/DetailsView.ui:480
 msgid "Sold"
-msgstr "Prodáno"
+msgstr "Satıldı"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:92 glade/DetailsView.ui:583
 msgid "Lost"
-msgstr "Ztraceno"
+msgstr "Kayıp"
 
 #: pigeonplanner/ui/widgets/treeview.py:169
 msgid "Filter pigeons"
-msgstr "Filtr holubů"
+msgstr "Güvercinleri Filtrele"
 
 #: pigeonplanner/ui/widgets/treeview.py:174
 #: pigeonplanner/ui/widgets/treeview.py:190
@@ -1062,60 +1048,60 @@ msgstr "Filtr holubů"
 #: glade/OptionsDialog.ui:999 glade/DetailsView.ui:810
 #: glade/DetailsView.ui:1285 glade/MainWindow.ui:53
 msgid "Sex"
-msgstr "Pohlaví"
+msgstr "Cinsiyet"
 
 #: pigeonplanner/ui/widgets/treeview.py:175
 #: pigeonplanner/ui/tools/datamanager.py:39
 msgid "Colours"
-msgstr "Barvy"
+msgstr "Renkler"
 
 #: pigeonplanner/ui/widgets/treeview.py:177
 #: pigeonplanner/ui/tools/datamanager.py:44
 msgid "Strains"
-msgstr "Kmeny"
+msgstr "Suşları"
 
 #: pigeonplanner/ui/widgets/treeview.py:179
 #: pigeonplanner/ui/tools/datamanager.py:45
 msgid "Lofts"
-msgstr "Holubníky"
+msgstr "Yuva"
 
 #: pigeonplanner/ui/widgets/treeview.py:182
 msgid "Status"
-msgstr "Stav"
+msgstr "Durum"
 
 #: pigeonplanner/ui/widgets/treeview.py:190
 #: pigeonplanner/ui/tabs/relatives.py:156 glade/ResultWindow.ui:94
 #: glade/MainWindow.ui:95 glade/ResultParser.ui:320
 msgid "Year"
-msgstr "Ročník"
+msgstr "Yıl"
 
 #: pigeonplanner/ui/widgets/treeview.py:190 glade/OptionsDialog.ui:429
 #: glade/OptionsDialog.ui:801 glade/OptionsDialog.ui:977
 #: glade/AddressBook.ui:91
 msgid "Name"
-msgstr "Jméno"
+msgstr "İsim"
 
 #: pigeonplanner/ui/widgets/treeview.py:190 glade/OptionsDialog.ui:453
 #: glade/OptionsDialog.ui:986 glade/DetailsView.ui:800
 #: glade/DetailsView.ui:1275
 msgid "Colour"
-msgstr "Barva"
+msgstr "Renk"
 
 #: pigeonplanner/ui/widgets/treeview.py:191 glade/OptionsDialog.ui:466
 #: glade/DetailsView.ui:776 glade/DetailsView.ui:1127
 #: glade/MedicationView.ui:287
 msgid "Loft"
-msgstr "Holubník"
+msgstr "Yuva"
 
 #: pigeonplanner/ui/widgets/treeview.py:191 glade/OptionsDialog.ui:438
 #: glade/DetailsView.ui:822 glade/DetailsView.ui:1313
 msgid "Strain"
-msgstr "Kmen"
+msgstr "5.soy"
 
 #: pigeonplanner/ui/tabs/medication.py:56 glade/MedicationView.ui:37
 #: glade/MedicationView.ui:181 glade/MedicationView.ui:672
 msgid "Medication"
-msgstr "Lék"
+msgstr "Ilaç"
 
 #: pigeonplanner/ui/tabs/media.py:36
 msgid "Media"
@@ -1123,84 +1109,84 @@ msgstr ""
 
 #: pigeonplanner/ui/tabs/pedigree.py:33
 msgid "<b>Pedigree sire</b>"
-msgstr "<b>Rodokmen holuba</b>"
+msgstr "<b>Safkan baba</b>"
 
 #: pigeonplanner/ui/tabs/pedigree.py:45
 msgid "<b>Pedigree dam</b>"
-msgstr "<b>Rodokmen holubice</b>"
+msgstr "<b>Safkan Anne</b>"
 
 #: pigeonplanner/ui/tabs/relatives.py:30
 msgid "Relatives"
-msgstr "Příbuzní"
+msgstr "Akrabalar"
 
 #: pigeonplanner/ui/tabs/relatives.py:43
 msgid "<b>Brothers and sisters</b>"
-msgstr "<b>Bratři a sestry</b>"
+msgstr "Kardeşler"
 
 #: pigeonplanner/ui/tabs/relatives.py:56
 msgid "<b>Half brothers and sisters</b>"
-msgstr "<b>Nevlastní bratři a sestry</b>"
+msgstr "Kuzenler"
 
 #: pigeonplanner/ui/tabs/relatives.py:69
 msgid "<b>Offspring</b>"
-msgstr "<b>Potomci</b>"
+msgstr "Yavrular"
 
 #: pigeonplanner/ui/tabs/relatives.py:160
 msgid "Common parent"
-msgstr "Společný rodič"
+msgstr "Ortak ebeveyn"
 
 #: pigeonplanner/ui/tabs/results.py:261
 msgid "Edit result for:"
-msgstr "Upravit výsledek pro:"
+msgstr "Sonuç Için Düzenle:"
 
 #: pigeonplanner/ui/tabs/results.py:261
 msgid "Add result for:"
-msgstr "Přidat výsledek pro:"
+msgstr "Sonuç için ekle:"
 
 #: pigeonplanner/ui/tools/photoalbum.py:109
 msgid "Shows the first picture"
-msgstr "Zobrazí se první snímek"
+msgstr "ilk resmi göster"
 
 #: pigeonplanner/ui/tools/photoalbum.py:111
 msgid "Shows previous picture"
-msgstr "Předchozí obrázek"
+msgstr "Önceki resmi göster"
 
 #: pigeonplanner/ui/tools/photoalbum.py:113
 msgid "Shows the next picture"
-msgstr "Následující obrázek"
+msgstr "Sonraki resmi göster"
 
 #: pigeonplanner/ui/tools/photoalbum.py:115
 msgid "Shows the last picture"
-msgstr "Poslední obrázek"
+msgstr "Son resmi göster"
 
 #: pigeonplanner/ui/tools/photoalbum.py:117
 msgid "Zooms the picture in"
-msgstr "Zvětšení obrázku"
+msgstr "Resimi yakınlaştır"
 
 #: pigeonplanner/ui/tools/photoalbum.py:119
 msgid "Zooms the picture out"
-msgstr "Zvětšení obrázku v"
+msgstr "Resmi Uzaklaştır"
 
 #: pigeonplanner/ui/tools/photoalbum.py:125
 msgid "Zooms to fit the whole picture"
-msgstr "Zvětšit obrázek na plnou velikost"
+msgstr "Bütün resmi uygun yakınlaştır"
 
 #: pigeonplanner/ui/tools/photoalbum.py:128
 msgid "View slideshow"
-msgstr "Prohlížení obrázků"
+msgstr "Slayt gösterisi"
 
 #: pigeonplanner/ui/tools/photoalbum.py:130
 msgid "View in fullscreen"
-msgstr "Zobrazit na celou obrazovku"
+msgstr "Tam ekran göster"
 
 #: pigeonplanner/ui/tools/calendar.py:129
 #, python-format
 msgid "Notification set on %s days"
-msgstr "Oznámení nastavit na '%s' dny"
+msgstr "Bildirim %s gün ayarlanır"
 
 #: pigeonplanner/ui/tools/calendar.py:132
 msgid "No notification set"
-msgstr "Žádné oznámení není nastaveno"
+msgstr "Set bildirimi yok"
 
 #: pigeonplanner/ui/tools/racepointmanager.py:35
 msgid ""
@@ -1212,20 +1198,20 @@ msgstr ""
 
 #: pigeonplanner/ui/tools/datamanager.py:40
 msgid "Sectors"
-msgstr "Sektory"
+msgstr "Sektör"
 
 #: pigeonplanner/ui/tools/datamanager.py:41
 msgid "Types"
-msgstr "Druhy"
+msgstr "Tipler"
 
 #: pigeonplanner/ui/tools/datamanager.py:42
 msgid "Categories"
-msgstr "Kategorie"
+msgstr "Kategoriler"
 
 #: pigeonplanner/ui/tools/datamanager.py:43
 #: pigeonplanner/ui/tools/datamanager.py:72
 msgid "Racepoints"
-msgstr "Závodní body"
+msgstr "Yarış Noktası"
 
 #: pigeonplanner/resultparsers/dtd.py:34
 msgid "Data Technology-Deerlijk - Belgium"
@@ -1237,11 +1223,11 @@ msgstr ""
 
 #: glade/ResultsView.ui:803
 msgid "<b>Results of pigeon</b>"
-msgstr "<b>Výsledky holuba</b>"
+msgstr "<b>Güvercin Sonuçları</b>"
 
 #: glade/ResultsView.ui:822
 msgid "View all"
-msgstr "Zobrazit všechny"
+msgstr "Tümünü göster"
 
 #: glade/ResultsView.ui:839
 msgid "Import"
@@ -1253,41 +1239,41 @@ msgstr ""
 
 #: glade/Dialogs.ui:154
 msgid "<b>Send to:</b>"
-msgstr "<b>Zasílejte na adresu:</b>"
+msgstr "<b>Gönder</b>"
 
 #: glade/Dialogs.ui:187
 msgid "<b>Your name:</b>"
-msgstr "<b>Tvoje jméno:</b>"
+msgstr "<b>İsminiz:</b>"
 
 #: glade/Dialogs.ui:220
 msgid "<b>Your e-mailaddress:</b>"
-msgstr "<b>Váš e-mail:</b>"
+msgstr "<b>E-mail adresiniz:</b>"
 
 #: glade/Dialogs.ui:252
 msgid "<b>Subject:</b>"
-msgstr "<b>Předmět:</b>"
+msgstr "<b>Konu:</ b>"
 
 #: glade/Dialogs.ui:289
 msgid "<b>Message:</b>"
-msgstr "<b>Zpráva:</b>"
+msgstr "<b>İleti:</b>"
 
 #: glade/Dialogs.ui:410
 msgid "<b>Attached file:</b>"
-msgstr "<b>Přiložený soubor:</b>"
+msgstr "<b>Ekli dosya:</b>"
 
 #: glade/Dialogs.ui:431
 msgid "Sending..."
-msgstr "Odeslat ..."
+msgstr "Gönderiliyor..."
 
 #: glade/PedigreeWindow.ui:61 glade/DetailsView.ui:764
 #: glade/DetailsView.ui:1080
 msgid "Sire"
-msgstr "Holub"
+msgstr "Baba"
 
 #: glade/PedigreeWindow.ui:112 glade/DetailsView.ui:752
 #: glade/DetailsView.ui:1068
 msgid "Dam"
-msgstr "Holubice"
+msgstr "Anne"
 
 #: glade/RaceManager.ui:135
 msgid "Latitude"
@@ -1303,7 +1289,7 @@ msgstr ""
 
 #: glade/ResultWindow.ui:44
 msgid "View all results"
-msgstr "Zobrazit všechny výsledky"
+msgstr "Tüm sonuçları görüntüle"
 
 #: glade/MediaView.ui:69
 msgid "<b>Media</b>"
@@ -1311,47 +1297,47 @@ msgstr ""
 
 #: glade/OptionsDialog.ui:73
 msgid "Options"
-msgstr "Nastavení"
+msgstr "Seçenekler"
 
 #: glade/OptionsDialog.ui:153
 msgid "Check for updates on startup"
-msgstr "Kontrola aktualizací při spuštění"
+msgstr "Başlangıçta güncellemeleri kontrol et"
 
 #: glade/OptionsDialog.ui:165
 msgid "<b>Update</b>"
-msgstr "<b>Aktualizace</b>"
+msgstr "<b>Güncelle</b>"
 
 #: glade/OptionsDialog.ui:188
 msgid "Make an automatic backup"
-msgstr "Zkontroluj, automatické zálohování"
+msgstr "Otomatik bir yedekleme yapın"
 
 #: glade/OptionsDialog.ui:228
 msgid "Location"
-msgstr "Místo"
+msgstr "Konumu"
 
 #: glade/OptionsDialog.ui:241
 msgid "Interval"
-msgstr "Interval"
+msgstr "Aralık"
 
 #: glade/OptionsDialog.ui:275
 msgid "<b>Backup</b>"
-msgstr "<b>Záloha</b>"
+msgstr "<b>Yedek</b>"
 
 #: glade/OptionsDialog.ui:301
 msgid "Change the language to"
-msgstr "Změna jazyka"
+msgstr "Dilini değiştir"
 
 #: glade/OptionsDialog.ui:330
 msgid "<b>Language</b>"
-msgstr "<b>Jazyk</b>"
+msgstr "<b>Dil</b>"
 
 #: glade/OptionsDialog.ui:373
 msgid "Change the theme"
-msgstr "Změnit vzhled"
+msgstr "Tema Değiştir"
 
 #: glade/OptionsDialog.ui:404
 msgid "<b>Theme</b>"
-msgstr "<b>Vzhled programu</b>"
+msgstr "<b>Tema</b>"
 
 #: glade/OptionsDialog.ui:500
 msgid "<b>Main Columns</b>"
@@ -1363,19 +1349,19 @@ msgstr ""
 
 #: glade/OptionsDialog.ui:700
 msgid "<b>Other</b>"
-msgstr "<b>Ostatní</b>"
+msgstr "<b>Diğer</b>"
 
 #: glade/OptionsDialog.ui:746
 msgid "Paper format:"
-msgstr "Formát papíru"
+msgstr "Kağıt biçimi:"
 
 #: glade/OptionsDialog.ui:774
 msgid "<b>Paper</b>"
-msgstr "<b>Papír</b>"
+msgstr "<b>Kağıt</b>"
 
 #: glade/OptionsDialog.ui:810
 msgid "Address"
-msgstr "Adresa"
+msgstr "Adres"
 
 #: glade/OptionsDialog.ui:823 glade/AddressBook.ui:255
 msgid "Phone"
@@ -1383,52 +1369,52 @@ msgstr "Telefon"
 
 #: glade/OptionsDialog.ui:856
 msgid "<b>Personal</b>"
-msgstr "<b>Osobní</b>"
+msgstr "<b>Kişisel</b>"
 
 #: glade/OptionsDialog.ui:903
 msgid "Pedigree layout:"
-msgstr "Uspořádání rodokmenu"
+msgstr "Pedigree düzeni:"
 
 #: glade/OptionsDialog.ui:950
 msgid "<b>Layout</b>"
-msgstr "<b>Projekt</b>"
+msgstr "<b>Düzen</b>"
 
 #: glade/OptionsDialog.ui:1012 glade/DetailsView.ui:789
 #: glade/DetailsView.ui:1247
 msgid "Extra"
-msgstr "Více"
+msgstr "Ekstra"
 
 #: glade/OptionsDialog.ui:1027
 msgid "Image"
-msgstr "Obrázek"
+msgstr "Resim"
 
 #: glade/OptionsDialog.ui:1047
 msgid "<b>Pigeon</b>"
-msgstr "<b>Holub</b>"
+msgstr "<b>Güvercin</b>"
 
 #: glade/OptionsDialog.ui:1093
 msgid "Show the column names"
-msgstr "Zobrazit názvy sloupců"
+msgstr "Sütun adlarını göster"
 
 #: glade/OptionsDialog.ui:1105
 msgid "Show the date"
-msgstr "Zobrazit den"
+msgstr "Tarih göster"
 
 #: glade/OptionsDialog.ui:1122
 msgid "<b>General</b>"
-msgstr "<b>Obecné</b>"
+msgstr "<b>Genel</b>"
 
 #: glade/OptionsDialog.ui:1157
 msgid "Default"
-msgstr "Výchozí nastavení"
+msgstr "Varsayılan"
 
 #: glade/DataManager.ui:98
 msgid "Dataset"
-msgstr "Soubor dat"
+msgstr "Veri seti"
 
 #: glade/DataManager.ui:109 glade/DataManager.ui:217
 msgid "Item"
-msgstr "Položka"
+msgstr "Öğe"
 
 #: glade/DataManager.ui:236
 msgid "<b>Manage items</b>"
@@ -1440,123 +1426,123 @@ msgstr ""
 
 #: glade/DetailsView.ui:198
 msgid "Pigeon status"
-msgstr "Stav holuba"
+msgstr "Güvercin durumu"
 
 #: glade/DetailsView.ui:221
 msgid "Choose a status for this pigeon:"
-msgstr "Vyber si pro holuba postavení:"
+msgstr "Bu güvercin bir durum seçin:"
 
 #: glade/DetailsView.ui:256
 msgid "The current status is:"
-msgstr "Současný stav:"
+msgstr "Mevcut durumu:"
 
 #: glade/DetailsView.ui:315 glade/DetailsView.ui:407 glade/DetailsView.ui:510
 msgid "Extra info"
-msgstr "Více info"
+msgstr "Ek Bilgi"
 
 #: glade/DetailsView.ui:368
 msgid "No extra information available."
-msgstr "Žádné další informace k dispozici."
+msgstr "Ekstra bilgi bulunmamaktadır."
 
 #: glade/DetailsView.ui:433
 msgid "Buyer"
-msgstr "Kupující"
+msgstr "Alıcı"
 
 #: glade/DetailsView.ui:1542
 msgid "<b>Details of pigeon</b>"
-msgstr "<b>Podrobnosti o  holubovi</b>"
+msgstr "<b>Güvercin Detayları</b>"
 
 #: glade/MainWindow.ui:120
 msgid "To"
-msgstr "Komu..."
+msgstr "Kime"
 
 #: glade/MainWindow.ui:163
 msgid "From"
-msgstr "Z"
+msgstr "Kimden"
 
 #: glade/MainWindow.ui:248
 msgid "Remove pigeon"
-msgstr "Odebrat holuba"
+msgstr "Güvercin Kaldır"
 
 #: glade/MainWindow.ui:287
 msgid "The following pigeon will be removed:"
-msgstr "Následující holub bude odstraněn:"
+msgstr "Aşağıdaki güvercin kaldırılacaktır:"
 
 #: glade/MainWindow.ui:316
 msgid "Keep this pigeon in the pedigree"
-msgstr "Ponechat holuba v rodokmenu"
+msgstr "safkan bu güvercin tutun"
 
 #: glade/MainWindow.ui:329
 msgid "Keep results of this pigeon"
-msgstr "Máš výsledky tohoto holuba"
+msgstr "Bu güvercin sonuçları tutun"
 
 #: glade/MainWindow.ui:472
 msgid "Total"
-msgstr "Celkem"
+msgstr "Toplam"
 
 #: glade/MainWindow.ui:496
 msgid "Cocks"
-msgstr "Holub"
+msgstr "Erkekler"
 
 #: glade/MainWindow.ui:524
 msgid "Hens"
-msgstr "Holubice"
+msgstr "Dişiler"
 
 #: glade/MainWindow.ui:552
 msgid "Young birds"
-msgstr "Holoubě"
+msgstr "Genç kuşlar"
 
 #: glade/AddressBook.ui:125
 msgid "Street"
-msgstr "Ulice"
+msgstr "Sokak"
 
 #: glade/AddressBook.ui:187
 msgid "Zipcode / City"
-msgstr "Směrovací číslo/Město"
+msgstr "Posta Kodu / Şehir"
 
 #: glade/AddressBook.ui:221
 msgid "Country"
-msgstr "Země"
+msgstr "Ülke"
 
 #: glade/AddressBook.ui:412
 msgid "This is me"
-msgstr "To jsem já"
+msgstr "Bu benim"
 
 #: glade/Calendar.ui:246
 msgid "Notify me!"
-msgstr "Informujte mě!"
+msgstr "Erken uyarı!"
 
 #: glade/Calendar.ui:274
 msgid "Number of days in advance:"
-msgstr "Počet dní dopředu:"
+msgstr "Önceden gün sayısı:"
 
 #: glade/VelocityCalculator.ui:125
 msgid "Time"
-msgstr "Čas"
+msgstr "Süre"
 
 #: glade/VelocityCalculator.ui:147 glade/VelocityCalculator.ui:474
 msgid "Calculate"
-msgstr "Spočítat"
+msgstr "Hesapla"
 
 #: glade/VelocityCalculator.ui:284 glade/VelocityCalculator.ui:598
 msgid "Hours"
-msgstr "Hodiny"
+msgstr "Saatler"
 
 #: glade/VelocityCalculator.ui:304 glade/VelocityCalculator.ui:618
 msgid "Minutes"
-msgstr "Minuty"
+msgstr "Dakikalar"
 
 #: glade/VelocityCalculator.ui:324 glade/VelocityCalculator.ui:638
 msgid "Seconds"
-msgstr "Vetřiny"
+msgstr "Saniyeler"
 
 #: glade/VelocityCalculator.ui:462
 msgid "Range"
-msgstr "Rozsah"
+msgstr "Aralık"
 
 #: glade/VelocityCalculator.ui:821
 msgid "Prognosis"
-msgstr "Prognóza"
+msgstr "Prognoz"
 
 #: glade/ResultParser.ui:29
 msgid "Import results"
@@ -1603,46 +1589,47 @@ msgstr ""
 
 #: glade/DatabaseTool.ui:7
 msgid "Pigeon Planner database tool"
-msgstr "Pigeon Planner nástroj databáze"
+msgstr "Güvercin Planner veritabanı aracı"
 
 #: glade/DatabaseTool.ui:35
 msgid "Optimize"
-msgstr "Optimalizovat"
+msgstr "Eniyileme"
 
 #: glade/DatabaseTool.ui:51
 msgid "Check"
-msgstr "Zkontroluj"
+msgstr "Kontrol Et"
 
 #: glade/DatabaseTool.ui:90
 msgid ""
 "Optimze the database tables. This will defragment the data and free unused "
 "space."
 msgstr ""
-"Optimizace databázových tabulek. Budou defragmentována data a volné  místo."
+"Optimze veritabanı tabloları. Bu veri ve kullanılmayan alanı birleştirmek "
+"olacaktır."
 
 #: glade/DatabaseTool.ui:104
 msgid "Check the database for errors and try to repair them."
-msgstr "Databáze má chyby, program se pokusí zkotrolovat databázy a opravit"
+msgstr "Hataları veritabanı kontrol edin ve onları tamir etmeye."
 
 #: glade/DatabaseTool.ui:120
 msgid ""
 "Delete the entire database from your hard drive. You will loose all pigeons, "
 "results and other data."
 msgstr ""
-"Odstranit celou databázi z  pevného disku. Ztratíš všechny holuby, výsledky "
-"a další údaje."
+"Sabit diskinizdeki tüm veritabanı Silerseniz, Tüm güvercinler, sonuçlar ve "
+"diğer veriler kaybedilecektir."
 
 #: glade/DatabaseTool.ui:205
 msgid "Warning:"
-msgstr "Varování:"
+msgstr "Uyarı:"
 
 #: glade/DatabaseTool.ui:218
 msgid ""
 "Only execute SQL statements if you know what you are doing! Entering invalid "
 "or wrong statements may cause data loss!"
 msgstr ""
-"Pouze spustit SQL, pokud víš, co děláš! Po chybném zadání může dojít ke "
-"ztrátě dat!"
+"Eğer ne yaptığınızı biliyorsanız, sadece SQL cümleleri! Veri kaybına neden "
+"olabilir geçersiz ya da yanlış ifadeler girme!"
 
 #: glade/DatabaseTool.ui:322
 msgid "SQL"
@@ -1650,196 +1637,51 @@ msgstr "SQL"
 
 #: glade/DatabaseTool.ui:340
 msgid "Logfile"
-msgstr "Log soubor"
+msgstr "Log Dosyası"
 
 #: glade/MedicationView.ui:168 glade/MedicationView.ui:586
 msgid "Done by"
-msgstr "Provádí se"
+msgstr "Yapıldı"
 
 #: glade/MedicationView.ui:194 glade/MedicationView.ui:711
 msgid "Dosage"
-msgstr "Dávkování"
+msgstr "Dozaj"
 
 #: glade/MedicationView.ui:221 glade/MedicationView.ui:739
 msgid "Vaccination"
-msgstr "Očkování"
+msgstr "Aşılama"
 
 #: glade/PhotoAlbum.ui:7
 msgid "Photo Album"
-msgstr "Fotoalbum"
+msgstr "Fotoğraf Albümü"
 
 #: glade/PhotoAlbum.ui:51
 msgid "There are no images found."
-msgstr "Nejsou nalezeny žádné obrázky"
-
-#~ msgid "Optimization has been completed."
-#~ msgstr "Optimalizace byla dokončena."
-
-#~ msgid "Select a directory"
-#~ msgstr "Vyber adresář"
-
-#~ msgid "Select a valid backup file"
-#~ msgstr "Vyber platný soubor zálohy"
-
-#~ msgid "Insert a pigeon"
-#~ msgstr "Vložit holuba"
-
-#~ msgid "Datasets"
-#~ msgstr "Datové soubory"
-
-#~ msgid "Addresses"
-#~ msgstr "Adresy"
-
-#~ msgid "Database"
-#~ msgstr "Databáze"
-
-#~ msgid "Update"
-#~ msgstr "Aktualizace"
-
-#~ msgid "cock"
-#~ msgstr "Holub"
-
-#~ msgid "hen"
-#~ msgstr "Holubice"
-
-#~ msgid "young bird"
-#~ msgstr "Holoubě"
-
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Zadej číslo kroužku holuba"
-
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Zadej ročník holuba"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Klikni zde pro nastavení stavu holubů"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Klikni zde pro přidání obrázku"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Hledání v seznamu holubic"
-
-#, python-format
-#~ msgid "Pigeon %s/%s has been removed"
-#~ msgstr "Holub %s/%s byl odebrán"
-
-#~ msgid "Result has been added"
-#~ msgstr "Výsledek byl přidán"
-
-#~ msgid "Various tools"
-#~ msgstr "Různé nástroje"
-
-#~ msgid "Search database"
-#~ msgstr "Databáze pro vyhledávání"
+msgstr "Hiçbir resim bulunmamaktadır."
 
 #~ msgid "Choose an image..."
-#~ msgstr "Vyber si obrázek ..."
+#~ msgstr "Bir resim seçin ..."
+
+#~ msgid "Select a directory"
+#~ msgstr "Dizin seçiniz"
+
+#~ msgid "Select a valid backup file"
+#~ msgstr "Geçerli bir yedekleme dosyasını seçin"
+
+#~ msgid "<b>Remove items</b>"
+#~ msgstr "<b>Bileşen Sil</b>"
+
+#~ msgid "<b>Add items</b>"
+#~ msgstr "<b>Bileşen ekle</b>"
 
 #~ msgid "<b>Columns</b>"
-#~ msgstr "<b>Sloupce</b>"
+#~ msgstr "<b>Sütunlar</b>"
 
 #~ msgid "A4"
 #~ msgstr "A4"
 
-#~ msgid "Letter"
-#~ msgstr "Dopis"
-
 #~ msgid "Original"
-#~ msgstr "Původní"
+#~ msgstr "Orijinal"
 
-#~ msgid "<b>Add items</b>"
-#~ msgstr "<b>Přidat položky</b>"
-
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>Vytvořit zálohu</b>"
-
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>Optimalizace databáze</b>"
-
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>Odebrat databázi</b>"
-
-#~ msgid "<b>Remove items</b>"
-#~ msgstr "<b>Odstranit položky</b>"
-
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>Upozornění!</b>"
-
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>Klikněte na tlačítko níže</i>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "Přidání a odebrání položek z datové sady"
-
-#~ msgid "Downloadpage"
-#~ msgstr "Download stránky"
-
-#~ msgid "NOTE: You will only be notified when the program starts!"
-#~ msgstr "Poznámka:  oznámení, program začíná!"
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "Telefon/e-mail"
-
-#~ msgid "Tools"
-#~ msgstr "Nástroje"
-
-#, python-format
-#~ msgid "Removing '%(item)s' from '%(dataset)s'."
-#~ msgstr "Odstranění '%(item)s' z '%(dataset)s'."
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the next "
-#~ "time you start the program again."
-#~ msgstr ""
-#~ "Klepněte na tlačítko \"OK \" pro zavření programu. Nová databáze bude "
-#~ "vytvořena při příštím spuštění programu znovu."
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "Nová verze je  k dispozici. Prosím, jdi na webové stránky Pigeon Planner a "
-#~ "klepnutím na odkaz níže a stáhneš nejnovější verzi"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Zadej jméno holuba"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Hledání v seznamu holubů"
-
-#~ msgid "Result has been removed"
-#~ msgstr "Výsledek byl odebrán"
-
-#, python-format
-#~ msgid "Pigeon %s/%s has been added"
-#~ msgstr "Holub% s /% s byl přidán"
-
-#~ msgid "Check now!"
-#~ msgstr "Zkontrolovat"
-
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>Obnovit zálohu</b>"
-
-#~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
-#~ msgstr ""
-#~ "Vytvářet a obnovovat zálohy z\n"
-#~ "Moji holubi a výsledky."
-
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr "Zde si můžeš zkontrolovat, zda je k programu aktualizace."
-
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "Zde můžeš vidět některé statistiky databáze"
-
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr "Pokud odstraníš databázi, budou všechna vaše data ztracena."
-
-#~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
-#~ msgstr ""
-#~ "Optimalizuj databázi.\n"
-#~ "(Počkej prosím, to může chvíli trvat)"
+#~ msgid "Letter"
+#~ msgstr "Harf"

@@ -7,48 +7,158 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-12 14:48+0100\n"
+"POT-Creation-Date: 2011-08-08 12:02+0200\n"
 "PO-Revision-Date: 2011-03-04 23:35+0000\n"
-"Last-Translator: Tichy <tihameri@gmail.com>\n"
+"Last-Translator: tichy <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-06 04:52+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-08-09 04:52+0000\n"
+"X-Generator: Launchpad (build 13628)\n"
 "Language: \n"
 
-#: ../pigeonplanner/common.py:39
-msgid "Cock"
-msgstr "Hím"
+#: pigeonplanner/printing.py:167
+msgid "Pedigree of:"
+msgstr "Családfa:"
 
-#: ../pigeonplanner/common.py:39
-msgid "Hen"
-msgstr "Tojó"
+#: pigeonplanner/printing.py:373 pigeonplanner/ui/widgets/treeview.py:190
+#: pigeonplanner/ui/tabs/relatives.py:156 glade/ResultWindow.ui:81
+#: glade/ResultParser.ui:306
+msgid "Band no."
+msgstr "Gyűrűszám"
 
-#: ../pigeonplanner/common.py:39
-msgid "Young bird"
-msgstr "Fióka"
+#: pigeonplanner/printing.py:374 pigeonplanner/printing.py:598
+#: glade/ResultsView.ui:299 glade/ResultsView.ui:652 glade/ResultWindow.ui:107
+#: glade/DetailsView.ui:303 glade/DetailsView.ui:395 glade/DetailsView.ui:498
+#: glade/Calendar.ui:95 glade/MedicationView.ui:144
+#: glade/MedicationView.ui:476 glade/MedicationView.ui:547
+msgid "Date"
+msgstr "Dátum"
 
-#: ../pigeonplanner/messages.py:19
+#: pigeonplanner/printing.py:375 pigeonplanner/ui/resultwindow.py:108
+#: glade/ResultsView.ui:311 glade/ResultsView.ui:665 glade/RaceManager.ui:123
+#: glade/ResultWindow.ui:120 glade/DetailsView.ui:536
+msgid "Racepoint"
+msgstr "Helyszín"
+
+#: pigeonplanner/printing.py:376 glade/ResultsView.ui:258
+#: glade/ResultsView.ui:678 glade/ResultWindow.ui:133
+msgid "Placed"
+msgstr "Helyezés"
+
+#: pigeonplanner/printing.py:377 glade/ResultsView.ui:208
+#: glade/ResultsView.ui:691 glade/ResultWindow.ui:146
+msgid "Out of"
+msgstr "Indított g."
+
+#: pigeonplanner/printing.py:378
+msgid "Coef."
+msgstr "Koef."
+
+#: pigeonplanner/printing.py:379 pigeonplanner/ui/resultwindow.py:109
+#: glade/ResultsView.ui:164 glade/ResultsView.ui:717 glade/ResultWindow.ui:172
+#: glade/OptionsDialog.ui:534
+msgid "Sector"
+msgstr "Szektor"
+
+#: pigeonplanner/printing.py:380 glade/ResultsView.ui:443
+#: glade/ResultsView.ui:730 glade/ResultWindow.ui:185
+#: glade/OptionsDialog.ui:560 glade/Calendar.ui:129
+msgid "Type"
+msgstr "Típus"
+
+#: pigeonplanner/printing.py:381 glade/ResultsView.ui:485
+#: glade/ResultsView.ui:743 glade/ResultWindow.ui:198
+#: glade/OptionsDialog.ui:547
+msgid "Category"
+msgstr "Kategória"
+
+#: pigeonplanner/printing.py:382 pigeonplanner/ui/tools/datamanager.py:47
+#: glade/ResultsView.ui:339 glade/ResultsView.ui:756 glade/ResultWindow.ui:211
+#: glade/OptionsDialog.ui:588
+msgid "Wind"
+msgstr "Szél"
+
+#: pigeonplanner/printing.py:383 pigeonplanner/ui/tools/datamanager.py:46
+#: glade/ResultsView.ui:325 glade/ResultsView.ui:769 glade/ResultWindow.ui:224
+#: glade/OptionsDialog.ui:575
+msgid "Weather"
+msgstr "Időjárás"
+
+#: pigeonplanner/printing.py:384 glade/ResultsView.ui:353
+#: glade/ResultsView.ui:782 glade/ResultWindow.ui:237
+#: glade/OptionsDialog.ui:603 glade/AddressBook.ui:323 glade/Calendar.ui:204
+#: glade/MedicationView.ui:207 glade/MedicationView.ui:785
+msgid "Comment"
+msgstr "Megjegyzés"
+
+#: pigeonplanner/printing.py:475
+msgid "Page"
+msgstr "Oldal"
+
+#: pigeonplanner/printing.py:589 pigeonplanner/printing.py:611
+#: pigeonplanner/printing.py:612 glade/VelocityCalculator.ui:136
+#: glade/VelocityCalculator.ui:393 glade/VelocityCalculator.ui:775
+msgid "Velocity"
+msgstr "Sebesség"
+
+#: pigeonplanner/printing.py:600 glade/VelocityCalculator.ui:450
+msgid "Released"
+msgstr "Feleresztés ideje"
+
+#: pigeonplanner/printing.py:602 glade/RaceManager.ui:222
+#: glade/VelocityCalculator.ui:112 glade/VelocityCalculator.ui:414
+msgid "Distance"
+msgstr "Távolság"
+
+#: pigeonplanner/printing.py:617 pigeonplanner/printing.py:619
+#: glade/VelocityCalculator.ui:786
+msgid "Flight Time"
+msgstr "Repült idő"
+
+#: pigeonplanner/printing.py:624 pigeonplanner/printing.py:626
+#: glade/VelocityCalculator.ui:797
+msgid "Time of Arrival"
+msgstr "Érkezési idő"
+
+#: pigeonplanner/startup.py:150 pigeonplanner/ui/pedigreewindow.py:45
+#: pigeonplanner/ui/pedigreewindow.py:57 pigeonplanner/ui/optionsdialog.py:55
+#: pigeonplanner/ui/tabs/pedigree.py:26
+msgid "Pedigree"
+msgstr "Családfa"
+
+#: pigeonplanner/startup.py:151 glade/Dialogs.ui:8 glade/OptionsDialog.ui:836
+#: glade/AddressBook.ui:289
+msgid "E-mail"
+msgstr "E-mail"
+
+#: pigeonplanner/startup.py:152
+msgid "Send"
+msgstr "Küldés"
+
+#: pigeonplanner/startup.py:153
+msgid "Report"
+msgstr "Jelentés"
+
+#: pigeonplanner/messages.py:19 pigeonplanner/common.py:272
+#: pigeonplanner/common.py:279
 msgid "Error"
 msgstr "Hiba"
 
-#: ../pigeonplanner/messages.py:20
+#: pigeonplanner/messages.py:20
 msgid "Warning"
 msgstr "Figyelmeztetés"
 
-#: ../pigeonplanner/messages.py:23
+#: pigeonplanner/messages.py:23
 msgid "Pigeon Planner is already running."
 msgstr "A program már fut."
 
-#: ../pigeonplanner/messages.py:27
-#: ../pigeonplanner/ui/mainwindow.py:407
+#: pigeonplanner/messages.py:27 pigeonplanner/ui/mainwindow.py:414
 msgid "Go to the website?"
 msgstr "Honlap megtekintése"
 
-#: ../pigeonplanner/messages.py:28
+#: pigeonplanner/messages.py:28
 msgid ""
 "Pigeon Planner is free software. You don’t need to pay for using it. But if "
 "you like it, please consider donating to help improving it."
@@ -56,163 +166,168 @@ msgstr ""
 "A Piegon Planner program egy szabad szoftver, nem kell fizetned a "
 "használatáért. De ha tetszik, hozzájárulhatsz anyagilag a fejlesztéséhez."
 
-#: ../pigeonplanner/messages.py:31
+#: pigeonplanner/messages.py:33
 #, python-format
 msgid "Notification for '%s'"
 msgstr "Emlékeztető: '%s'"
 
-#: ../pigeonplanner/messages.py:32
+#: pigeonplanner/messages.py:34
 msgid "Go to the calendar?"
 msgstr "Naptár megnyitása"
 
-#: ../pigeonplanner/messages.py:35
+#: pigeonplanner/messages.py:37
 msgid "Invalid image!"
 msgstr "Érvénytelen kép!"
 
-#: ../pigeonplanner/messages.py:36
-msgid "This image is either not supported or corrupt, please choose another one."
-msgstr "A kiválasztott kép típusa nem támogatott vagy hibás, válassz másikat."
+#: pigeonplanner/messages.py:38
+msgid ""
+"This image is either not supported or corrupt, please choose another one."
+msgstr ""
+"A kiválasztott kép típusa nem támogatott vagy hibás, válassz másikat."
 
-#: ../pigeonplanner/messages.py:38
+#: pigeonplanner/messages.py:41
 msgid "Loading image failed!"
 msgstr "A kép betöltése sikertelen!"
 
-#: ../pigeonplanner/messages.py:39
+#: pigeonplanner/messages.py:42
 msgid "Maybe you have renamed the image or moved it on your disk."
 msgstr "Lehet, hogy átnevezted a képet vagy áthelyezted máshova."
 
-#: ../pigeonplanner/messages.py:42
+#: pigeonplanner/messages.py:45
 msgid ""
 "This pigeon already exists, but isn't showing. Do you want to show it again?"
 msgstr ""
 "Ez a galamb már létezik az adatbázisban, de nem látható. Szeretnéd újra "
 "megjeleníteni?"
 
-#: ../pigeonplanner/messages.py:45
+#: pigeonplanner/messages.py:49
 msgid "This pigeon already exists. Overwrite it?"
 msgstr "Ez a galamb már szerepel az adatbázisban. Felülírod?"
 
-#: ../pigeonplanner/messages.py:48
+#: pigeonplanner/messages.py:52
+msgid "This pigeon already exists."
+msgstr ""
+
+#: pigeonplanner/messages.py:55
 msgid "This pigeon doesn't exist. Do you want to add it?"
 msgstr "Ez a galamb nem létezik. Szeretnéd hozzáadni?"
 
-#: ../pigeonplanner/messages.py:50
+#: pigeonplanner/messages.py:57
 msgid "Adding pigeon"
 msgstr "Galamb hozzáadása"
 
-#: ../pigeonplanner/messages.py:51
+#: pigeonplanner/messages.py:58
 msgid "The selected pigeon can't be found."
 msgstr "A kiválasztott galamb nem található."
 
-#: ../pigeonplanner/messages.py:53
+#: pigeonplanner/messages.py:60
 msgid "Not found!"
 msgstr "Nem található!"
 
-#: ../pigeonplanner/messages.py:55
-#: ../pigeonplanner/messages.py:58
-#: ../pigeonplanner/messages.py:61
-#: ../pigeonplanner/messages.py:64
-#: ../pigeonplanner/messages.py:68
-#: ../pigeonplanner/messages.py:71
-#: ../pigeonplanner/messages.py:74
-#: ../pigeonplanner/messages.py:81
-#: ../pigeonplanner/messages.py:84
+#: pigeonplanner/messages.py:62 pigeonplanner/messages.py:65
+#: pigeonplanner/messages.py:68 pigeonplanner/messages.py:71
+#: pigeonplanner/messages.py:75 pigeonplanner/messages.py:78
+#: pigeonplanner/messages.py:82 pigeonplanner/messages.py:92
+#: pigeonplanner/messages.py:95
 msgid "Invalid input!"
 msgstr "Érvénytelen adat!"
 
-#: ../pigeonplanner/messages.py:56
+#: pigeonplanner/messages.py:63
 msgid "The ringnumber and year are necessary."
 msgstr "A gyűrűszámot és az évet szükséges megadni."
 
-#: ../pigeonplanner/messages.py:59
+#: pigeonplanner/messages.py:66
 msgid "Only numbers are accepted as year input."
 msgstr "A galamb gyűrűzési éve."
 
-#: ../pigeonplanner/messages.py:62
+#: pigeonplanner/messages.py:69
 msgid "Check the length of the year."
 msgstr "Ellenőrizd az évszám hosszát."
 
-#: ../pigeonplanner/messages.py:65
+#: pigeonplanner/messages.py:72
 msgid "Only numbers are allowed when adding multiple pigeons."
 msgstr "Több galamb hozzáadásánál csak számot lehet megadni."
 
-#: ../pigeonplanner/messages.py:69
+#: pigeonplanner/messages.py:76
 msgid "At least the date and racepoint have to be entered."
 msgstr "Legalább a dátumot és a helyszínt meg kell adni."
 
-#: ../pigeonplanner/messages.py:72
-msgid "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-DD)."
+#: pigeonplanner/messages.py:79
+msgid ""
+"The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
+"DD)."
 msgstr "A beírt dátum formátuma hibás. ISO formátumot használj (ÉÉÉÉ-HH-NN)"
 
-#: ../pigeonplanner/messages.py:75
+#: pigeonplanner/messages.py:83
 msgid "The result you want to add already exists."
 msgstr "A hozzáadandó eredmény már létezik."
 
-#: ../pigeonplanner/messages.py:77
+#: pigeonplanner/messages.py:85
 msgid "Removing the selected result"
 msgstr "Kiválasztott eredmény törlése"
 
-#: ../pigeonplanner/messages.py:78
-#: ../pigeonplanner/messages.py:124
-#: ../pigeonplanner/ui/dialogs.py:449
-#: tmp/MainWindow.ui.h:2
+#: pigeonplanner/messages.py:86 pigeonplanner/messages.py:89
+#: pigeonplanner/messages.py:138 pigeonplanner/ui/dialogs.py:405
+#: glade/MainWindow.ui:305
 msgid "Are you sure?"
 msgstr "Biztos vagy benne?"
 
-#: ../pigeonplanner/messages.py:82
+#: pigeonplanner/messages.py:88
+msgid "Removing the selected media file"
+msgstr ""
+
+#: pigeonplanner/messages.py:93
 msgid "The name has to be entered."
 msgstr "A név beírása szükséges."
 
-#: ../pigeonplanner/messages.py:85
+#: pigeonplanner/messages.py:96
 msgid "The persoon you want to add already exists."
 msgstr "A hozzáadni kívánt személy már létezik."
 
-#: ../pigeonplanner/messages.py:87
+#: pigeonplanner/messages.py:98
 #, python-format
 msgid "Removing '%s'"
 msgstr "'%s' törlése"
 
-#: ../pigeonplanner/messages.py:88
+#: pigeonplanner/messages.py:99
 msgid "Are you sure you want to remove this person from your addresses?"
 msgstr "Biztosan törölni szeretnéd ezt a személyt a címjegyzékből?"
 
-#: ../pigeonplanner/messages.py:91
+#: pigeonplanner/messages.py:103
 #, python-format
 msgid "Removing '%s' from '%s'."
 msgstr "'%s' törlése innen: '%s'."
 
-#: ../pigeonplanner/messages.py:92
+#: pigeonplanner/messages.py:104
 msgid "Are you sure you want to remove this item?"
 msgstr "Biztosan törölni akarod ezt a bejegyzést?"
 
-#: ../pigeonplanner/messages.py:95
-#: ../pigeonplanner/messages.py:97
+#: pigeonplanner/messages.py:107 pigeonplanner/messages.py:110
 msgid "Removing database"
 msgstr "Adatbázis törlése"
 
-#: ../pigeonplanner/messages.py:96
+#: pigeonplanner/messages.py:108
 msgid "Are you sure you want to remove the database? All data will be lost."
-msgstr "Biztosan törölni akarod az adatbázist? FIGYELEM! Minden adat törlődni fog."
+msgstr ""
+"Biztosan törölni akarod az adatbázist? FIGYELEM! Minden adat törlődni fog."
 
-#: ../pigeonplanner/messages.py:99
+#: pigeonplanner/messages.py:112
 msgid "The backup was successfully created."
 msgstr "Biztonsági mentés sikeresen létrehozva!"
 
-#: ../pigeonplanner/messages.py:101
-#: ../pigeonplanner/messages.py:107
+#: pigeonplanner/messages.py:114 pigeonplanner/messages.py:120
 msgid "Completed!"
 msgstr "Kész!"
 
-#: ../pigeonplanner/messages.py:102
+#: pigeonplanner/messages.py:115
 msgid "There was an error making the backup."
 msgstr "Hiba történt a biztonsági mentés létrehozásakor."
 
-#: ../pigeonplanner/messages.py:104
-#: ../pigeonplanner/messages.py:110
+#: pigeonplanner/messages.py:117 pigeonplanner/messages.py:123
 msgid "Failed!"
 msgstr "Hiba!"
 
-#: ../pigeonplanner/messages.py:105
+#: pigeonplanner/messages.py:118
 msgid ""
 "The backup was successfully restored.\n"
 "Restart the program."
@@ -220,15 +335,15 @@ msgstr ""
 "Biztonsági mentés visszaállítva.\n"
 "Indítsd újra a programot."
 
-#: ../pigeonplanner/messages.py:108
+#: pigeonplanner/messages.py:121
 msgid "There was an error restoring the backup."
 msgstr "Hiba történt a biztonsági mentés létrehozása közben."
 
-#: ../pigeonplanner/messages.py:112
+#: pigeonplanner/messages.py:125
 msgid "No personal information found."
 msgstr "Nincs beállítva elérhetőség."
 
-#: ../pigeonplanner/messages.py:113
+#: pigeonplanner/messages.py:126
 msgid ""
 "This will be shown on top of the printed pedigree.\n"
 "Do you want to add it now?"
@@ -236,299 +351,242 @@ msgstr ""
 "Ez a kinyomtatott családfa felső részében jelenik meg.\n"
 "Szeretnéd most hozzáadni?"
 
-#: ../pigeonplanner/messages.py:116
+#: pigeonplanner/messages.py:130
 msgid "Error printing the pedigree"
 msgstr "Hiba történt a családfa kinyomtatása közben"
 
-#: ../pigeonplanner/messages.py:119
+#: pigeonplanner/messages.py:133
 msgid "An error occured in the print operation!"
 msgstr "Hiba történt a nyomtatás során!"
 
-#: ../pigeonplanner/messages.py:120
+#: pigeonplanner/messages.py:134
 msgid "See the logfile (File->Logfile viewer) for more info."
 msgstr "További információért nyisd meg a naplófájlt (Fájl->Log fájl)"
 
-#: ../pigeonplanner/messages.py:123
+#: pigeonplanner/messages.py:137
 msgid "This will set back all the settings to the default values."
 msgstr "Minden beállítás visszaállítása az eredetire."
 
-#: ../pigeonplanner/messages.py:125
+#: pigeonplanner/messages.py:139
 msgid "Default settings"
 msgstr "Alapbeállítások"
 
-#: ../pigeonplanner/messages.py:127
+#: pigeonplanner/messages.py:141
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
 msgstr "A változtatások életbelépéséhez a program újraindítása szükséges."
 
-#: ../pigeonplanner/messages.py:129
+#: pigeonplanner/messages.py:144
 msgid "Restart required"
 msgstr "Újraindítás szükséges"
 
-#: ../pigeonplanner/messages.py:131
+#: pigeonplanner/messages.py:146
 msgid "Update available!"
 msgstr "Frissítés elérhető!"
 
-#: ../pigeonplanner/messages.py:132
+#: pigeonplanner/messages.py:147
 msgid "There is an update available, do you want to download it now?"
 msgstr "Frissítés elérhető, szeretnéd letölteni?"
 
-#: ../pigeonplanner/messages.py:135
+#: pigeonplanner/messages.py:150
 msgid "The recipient and sender's e-mailaddress are required."
 msgstr "A feladó és a címzett e-mail címe szükséges."
 
-#: ../pigeonplanner/messages.py:139
+#: pigeonplanner/messages.py:154
 msgid "Error trying to get information. Are you connected to the internet?"
 msgstr "Kapcsolódási hiba. Ellenőrizd az internet kapcsolatot!"
 
-#: ../pigeonplanner/messages.py:140
+#: pigeonplanner/messages.py:155
 msgid "A new version is available."
 msgstr "Nincsen extra információ."
 
-#: ../pigeonplanner/messages.py:141
+#: pigeonplanner/messages.py:156
 msgid "You already have the latest version installed."
 msgstr "Jelenleg a legfrissebb verziót használod."
 
-#: ../pigeonplanner/messages.py:142
+#: pigeonplanner/messages.py:157
 msgid "This isn't normal, or you must be running a development version"
 msgstr "Ez még nem végleges, vagy használd a fejlesztői verziót"
 
-#: ../pigeonplanner/ui/logdialog.py:40
-msgid "Logfile Viewer"
-msgstr "Logfájl"
-
-#: ../pigeonplanner/ui/maildialog.py:145
-msgid "The e-mail has been sent succesfully!"
-msgstr "E-mail sikeresen elküldve!"
-
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:37
+#: pigeonplanner/common.py:43
 msgid "Yards"
 msgstr "Yard"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:38
+#: pigeonplanner/common.py:44
 msgid "Kilometres"
 msgstr "Kilométer"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:39
+#: pigeonplanner/common.py:45
 msgid "Metres"
 msgstr "Méter"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:40
+#: pigeonplanner/common.py:46
 msgid "Centimetres"
 msgstr "Centiméter"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:41
+#: pigeonplanner/common.py:47
 msgid "Inches"
 msgstr "Hüvelyk"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:42
+#: pigeonplanner/common.py:48
 msgid "Feet"
 msgstr "Láb"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:43
+#: pigeonplanner/common.py:49
 msgid "Miles"
 msgstr "Mérföld"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:44
+#: pigeonplanner/common.py:50
 msgid "Nautical Miles"
 msgstr "Tengeri mérföld"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:47
+#: pigeonplanner/common.py:54
 msgid "Yard per Minute"
 msgstr "Yard / perc"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:48
+#: pigeonplanner/common.py:55
 msgid "Metres per Minute"
 msgstr "Méter / perc"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:49
+#: pigeonplanner/common.py:56
 msgid "Metres per Second"
 msgstr "Méter / másodperc"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:50
+#: pigeonplanner/common.py:57
 msgid "Kilometre per Hour"
 msgstr "Kilométer / óra"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:51
+#: pigeonplanner/common.py:58
 msgid "Feet per Second"
 msgstr "Láb / másodperc"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:52
+#: pigeonplanner/common.py:59
 msgid "Feet per Minute"
 msgstr "Láb / perc"
 
-#: ../pigeonplanner/ui/tools/velocitycalculator.py:53
+#: pigeonplanner/common.py:60
 msgid "Mile per Hour"
 msgstr "Mérföld / óra"
 
-#: ../pigeonplanner/ui/tools/datamanager.py:32
-#: ../pigeonplanner/ui/widgets/treeview.py:175
-msgid "Colours"
-msgstr "Színek"
+#: pigeonplanner/common.py:64
+msgid "Cock"
+msgstr "Hím"
 
-#: ../pigeonplanner/ui/tools/datamanager.py:33
-msgid "Sectors"
-msgstr "Szektor"
+#: pigeonplanner/common.py:64
+msgid "Hen"
+msgstr "Tojó"
 
-#: ../pigeonplanner/ui/tools/datamanager.py:34
-msgid "Types"
-msgstr "Tpus"
+#: pigeonplanner/common.py:64
+msgid "Young bird"
+msgstr "Fióka"
 
-#: ../pigeonplanner/ui/tools/datamanager.py:35
-msgid "Categories"
-msgstr "Kategória"
+#: pigeonplanner/common.py:272
+msgid "Error: This file does not exist"
+msgstr ""
 
-#: ../pigeonplanner/ui/tools/datamanager.py:36
-#: ../pigeonplanner/ui/tools/datamanager.py:65
-msgid "Racepoints"
-msgstr "Helyszín"
+#: pigeonplanner/common.py:279
+msgid "Error opening file:"
+msgstr ""
 
-#: ../pigeonplanner/ui/tools/datamanager.py:37
-#: ../pigeonplanner/ui/widgets/treeview.py:177
-msgid "Strains"
-msgstr "Származás"
+#: pigeonplanner/ui/databasetool.py:38
+msgid "Executing..."
+msgstr "Alkalmaz..."
 
-#: ../pigeonplanner/ui/tools/datamanager.py:38
-#: ../pigeonplanner/ui/widgets/treeview.py:179
-msgid "Lofts"
-msgstr "Dúc"
+#: pigeonplanner/ui/databasetool.py:40
+msgid "Error: see the logfile for more info."
+msgstr "Hiba: További információért nyisd meg a naplófájlt (Fájl->Log fájl)"
 
-#: ../pigeonplanner/ui/tools/datamanager.py:39
-#: ../pigeonplanner/printing.py:391
-#: tmp/OptionsDialog.ui.h:46
-#: tmp/ResultsView.ui.h:12
-msgid "Weather"
-msgstr "Időjárás"
+#: pigeonplanner/ui/databasetool.py:41
+msgid "Operation cancelled"
+msgstr "Művelet megszakítva"
 
-#: ../pigeonplanner/ui/tools/datamanager.py:40
-#: ../pigeonplanner/printing.py:392
-#: tmp/OptionsDialog.ui.h:47
-#: tmp/ResultsView.ui.h:13
-msgid "Wind"
-msgstr "Szél"
+#: pigeonplanner/ui/databasetool.py:42
+msgid "Operation completed"
+msgstr "A művelet befejeződött."
 
-#: ../pigeonplanner/ui/tools/calendar.py:129
-#, python-format
-msgid "Notification set on %s days"
-msgstr "Emlékeztető beállítva %s napra."
+#: pigeonplanner/ui/printpreview.py:52
+msgid "Print Preview"
+msgstr "Nyomtatási kép"
 
-#: ../pigeonplanner/ui/tools/calendar.py:132
-msgid "No notification set"
-msgstr "Nincs emlékeztetés."
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:110
-msgid "Shows the first picture"
-msgstr "Első kép megjelenítése"
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:112
-msgid "Shows previous picture"
-msgstr "Előző kép megjelenítése"
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:114
-msgid "Shows the next picture"
-msgstr "Következő kép megjelenítése"
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:116
-msgid "Shows the last picture"
-msgstr "Utolsó kép megjelenítése"
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:118
-msgid "Zooms the picture in"
-msgstr "Nagyítás"
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:120
-msgid "Zooms the picture out"
-msgstr "Kicsinyítés"
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:122
-#: ../pigeonplanner/ui/pedigreewindow.py:86
-#: ../pigeonplanner/ui/printpreview.py:97
-#: ../pigeonplanner/ui/resultwindow.py:183
-msgid "Close this window"
-msgstr "Ablak bezárása"
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:126
-msgid "Zooms to fit the whole picture"
-msgstr "Legjobb kitöltés"
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:129
-msgid "View slideshow"
-msgstr "Diavetítés indítása"
-
-#: ../pigeonplanner/ui/tools/photoalbum.py:131
-msgid "View in fullscreen"
-msgstr "Megtekintés teljes képernyőn"
-
-#: ../pigeonplanner/ui/pedigreewindow.py:45
-#: ../pigeonplanner/ui/optionsdialog.py:55
-#: ../pigeonplanner/ui/tabs/pedigree.py:26
-#: ../pigeonplanner/startup.py:132
-#: tmp/PedigreeWindow.ui.h:2
-msgid "Pedigree"
-msgstr "Családfa"
-
-#: ../pigeonplanner/ui/pedigreewindow.py:78
-msgid "Save this pedigree"
-msgstr "Családfa mentése"
-
-#: ../pigeonplanner/ui/pedigreewindow.py:80
-msgid "Email this pedigree"
-msgstr "Családfa elküldése e-mail-ben"
-
-#: ../pigeonplanner/ui/pedigreewindow.py:82
-msgid "View this pedigree"
-msgstr "Családfa megtekintése"
-
-#: ../pigeonplanner/ui/pedigreewindow.py:84
-#: ../pigeonplanner/ui/mainwindow.py:611
-msgid "Print this pedigree"
-msgstr "Családfa nyomtatása"
-
-#: ../pigeonplanner/ui/printpreview.py:85
+#: pigeonplanner/ui/printpreview.py:97
 msgid "Shows the first page"
 msgstr "Első lap mutatása"
 
-#: ../pigeonplanner/ui/printpreview.py:87
+#: pigeonplanner/ui/printpreview.py:99
 msgid "Shows previous page"
 msgstr "Előző lap mutatása"
 
-#: ../pigeonplanner/ui/printpreview.py:89
+#: pigeonplanner/ui/printpreview.py:101
 msgid "Shows the next page"
 msgstr "Következő lap mutatása"
 
-#: ../pigeonplanner/ui/printpreview.py:91
+#: pigeonplanner/ui/printpreview.py:103
 msgid "Shows the last page"
 msgstr "Utolsó lap mutatása"
 
-#: ../pigeonplanner/ui/printpreview.py:93
+#: pigeonplanner/ui/printpreview.py:105
 msgid "Zooms the page in"
 msgstr "Oldal nagyítása"
 
-#: ../pigeonplanner/ui/printpreview.py:95
+#: pigeonplanner/ui/printpreview.py:107
 msgid "Zooms the page out"
 msgstr "Oldal kicsinyítése"
 
-#: ../pigeonplanner/ui/printpreview.py:101
+#: pigeonplanner/ui/printpreview.py:109 pigeonplanner/ui/pedigreewindow.py:88
+#: pigeonplanner/ui/resultwindow.py:195
+#: pigeonplanner/ui/tools/photoalbum.py:121
+msgid "Close this window"
+msgstr "Ablak bezárása"
+
+#: pigeonplanner/ui/printpreview.py:113
 msgid "Zooms to fit the whole page"
 msgstr "Legjobb kitöltés"
 
-#: ../pigeonplanner/ui/detailsview.py:45
-msgid "Details of pigeon"
-msgstr "Galamb adatai"
+#: pigeonplanner/ui/pedigreewindow.py:80
+msgid "Save this pedigree"
+msgstr "Családfa mentése"
 
-#: ../pigeonplanner/ui/detailsview.py:47
-#, python-format
-msgid "Details of %s"
-msgstr "%s galamb adatai"
+#: pigeonplanner/ui/pedigreewindow.py:82
+msgid "Email this pedigree"
+msgstr "Családfa elküldése e-mail-ben"
 
-#: ../pigeonplanner/ui/dialogs.py:81
-msgid "Choose an image..."
-msgstr "Kép tallózása..."
+#: pigeonplanner/ui/pedigreewindow.py:84
+msgid "View this pedigree"
+msgstr "Családfa megtekintése"
 
-#: ../pigeonplanner/ui/dialogs.py:90
-msgid "No image"
-msgstr "Nincsen fénykép"
+#: pigeonplanner/ui/pedigreewindow.py:86 pigeonplanner/ui/mainwindow.py:603
+msgid "Print this pedigree"
+msgstr "Családfa nyomtatása"
 
-#: ../pigeonplanner/ui/dialogs.py:126
+#: pigeonplanner/ui/maildialog.py:145
+msgid "The e-mail has been sent succesfully!"
+msgstr "E-mail sikeresen elküldve!"
+
+#: pigeonplanner/ui/optionsdialog.py:50 glade/DatabaseTool.ui:175
+msgid "General"
+msgstr "Általános"
+
+#: pigeonplanner/ui/optionsdialog.py:52
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#: pigeonplanner/ui/optionsdialog.py:54
+msgid "Printing"
+msgstr "Nyomtatás"
+
+#: pigeonplanner/ui/optionsdialog.py:56 pigeonplanner/ui/resultwindow.py:64
+#: pigeonplanner/ui/tabs/results.py:50 glade/ResultsView.ui:20
+msgid "Results"
+msgstr "Eredmények"
+
+#: pigeonplanner/ui/optionsdialog.py:109
+msgid "days"
+msgstr "nap"
+
+#: pigeonplanner/ui/optionsdialog.py:109
+msgid "day"
+msgstr "nap"
+
+#: pigeonplanner/ui/dialogs.py:96
 msgid "translator-credits"
 msgstr ""
 "Tichy <tihameri@gmail.com>\n"
@@ -537,759 +595,1013 @@ msgstr ""
 "  Timo https://launchpad.net/~timovwb\n"
 "  tichy https://launchpad.net/~tihameri"
 
-#: ../pigeonplanner/ui/dialogs.py:136
-#: ../pigeonplanner/ui/mainwindow.py:667
+#: pigeonplanner/ui/dialogs.py:106 pigeonplanner/ui/mainwindow.py:662
 msgid "General information"
 msgstr "Általános információk"
 
-#: ../pigeonplanner/ui/dialogs.py:162
+#: pigeonplanner/ui/dialogs.py:132
 msgid "Technical details"
 msgstr "Technikai adatok"
 
-#: ../pigeonplanner/ui/dialogs.py:165
+#: pigeonplanner/ui/dialogs.py:135
 msgid "Data information"
 msgstr "Adatbázis adatai"
 
-#: ../pigeonplanner/ui/dialogs.py:189
+#: pigeonplanner/ui/dialogs.py:152
 msgid "Number of pigeons"
 msgstr "Galambok száma"
 
-#: ../pigeonplanner/ui/dialogs.py:190
+#: pigeonplanner/ui/dialogs.py:153
 msgid "Number of cocks"
 msgstr "Hímek száma"
 
-#: ../pigeonplanner/ui/dialogs.py:192
+#: pigeonplanner/ui/dialogs.py:155
 msgid "Number of hens"
 msgstr "Tojók  száma"
 
-#: ../pigeonplanner/ui/dialogs.py:194
+#: pigeonplanner/ui/dialogs.py:157
 msgid "Number of young birds"
 msgstr "Fiókák száma"
 
-#: ../pigeonplanner/ui/dialogs.py:196
+#: pigeonplanner/ui/dialogs.py:159
 msgid "Number of results"
 msgstr "Eredmények száma"
 
-#: ../pigeonplanner/ui/dialogs.py:217
+#: pigeonplanner/ui/dialogs.py:181
 msgid "Create backup"
 msgstr "Biztonsági mentés létrehozása"
 
-#: ../pigeonplanner/ui/dialogs.py:218
+#: pigeonplanner/ui/dialogs.py:182
 msgid "Choose a directory where to save the backup"
 msgstr "Biztonsági mentés helye"
 
-#: ../pigeonplanner/ui/dialogs.py:220
-msgid "Select a directory"
-msgstr "Mappa kiválasztása"
-
-#: ../pigeonplanner/ui/dialogs.py:228
+#: pigeonplanner/ui/dialogs.py:188
 msgid "Backup"
 msgstr "Biztonsági mentés"
 
-#: ../pigeonplanner/ui/dialogs.py:237
+#: pigeonplanner/ui/dialogs.py:197
 msgid "Restore backup"
 msgstr "Biztonsági mentés visszaállítása"
 
-#: ../pigeonplanner/ui/dialogs.py:238
+#: pigeonplanner/ui/dialogs.py:198
 msgid "Choose a Pigeon Planner backup file to restore"
 msgstr "Válassz ki egy biztonsági mentést a visszaállításhoz"
 
-#: ../pigeonplanner/ui/dialogs.py:241
+#: pigeonplanner/ui/dialogs.py:201
 msgid "Warning! This will overwrite the existing database!"
 msgstr "FIGYELEM! A létező adatbázis adatait felül fogja írni!"
 
-#: ../pigeonplanner/ui/dialogs.py:244
-msgid "Select a valid backup file"
-msgstr "Biztonsági mentés kiválasztása"
-
-#: ../pigeonplanner/ui/dialogs.py:253
+#: pigeonplanner/ui/dialogs.py:209
 msgid "Restore"
 msgstr "Visszaállítás"
 
-#: ../pigeonplanner/ui/dialogs.py:360
+#: pigeonplanner/ui/dialogs.py:316
 msgid "Only show:"
 msgstr "Csak ezeket:"
 
-#: ../pigeonplanner/ui/dialogs.py:383
-#: tmp/DetailsView.ui.h:16
+#: pigeonplanner/ui/dialogs.py:339 glade/DetailsView.ui:57
 msgid "Search a pigeon"
 msgstr "Galamb keresése"
 
-#: ../pigeonplanner/ui/dialogs.py:395
+#: pigeonplanner/ui/dialogs.py:351
 msgid "Search for:"
 msgstr "Kulcsszó:"
 
-#: ../pigeonplanner/ui/dialogs.py:403
+#: pigeonplanner/ui/dialogs.py:359
 msgid "Search in:"
 msgstr "Ezekben:"
 
-#: ../pigeonplanner/ui/dialogs.py:404
+#: pigeonplanner/ui/dialogs.py:360
 msgid "Band numbers"
 msgstr "Gyűrűszám"
 
-#: ../pigeonplanner/ui/dialogs.py:405
+#: pigeonplanner/ui/dialogs.py:361
 msgid "Names"
 msgstr "Név"
 
-#: ../pigeonplanner/ui/dialogs.py:443
+#: pigeonplanner/ui/dialogs.py:399
 msgid "Removing the selected medication entry"
 msgstr "Kiválaszott gyógykezelés törlése"
 
-#: ../pigeonplanner/ui/dialogs.py:445
+#: pigeonplanner/ui/dialogs.py:401
 msgid "Remove this entry for all pigeons?"
 msgstr "Törlöd ezt a bejegyzést az összes galambnál?"
 
-#: ../pigeonplanner/ui/resultwindow.py:64
-#: ../pigeonplanner/ui/optionsdialog.py:56
-#: ../pigeonplanner/ui/tabs/results.py:36
-#: tmp/ResultsView.ui.h:8
-msgid "Results"
-msgstr "Eredmények"
+#: pigeonplanner/ui/logdialog.py:39
+msgid "Logfile Viewer"
+msgstr "Logfájl"
 
-#: ../pigeonplanner/ui/resultwindow.py:99
+#: pigeonplanner/ui/filechooser.py:50
+msgid "Preview"
+msgstr ""
+
+#: pigeonplanner/ui/filechooser.py:70
+msgid "Images"
+msgstr "Képek"
+
+#: pigeonplanner/ui/filechooser.py:110
+msgid "Select an image..."
+msgstr ""
+
+#: pigeonplanner/ui/filechooser.py:113
+msgid "No image"
+msgstr "Nincsen fénykép"
+
+#: pigeonplanner/ui/filechooser.py:122 pigeonplanner/ui/filechooser.py:183
+#: pigeonplanner/ui/filechooser.py:197
+msgid "Select a file..."
+msgstr ""
+
+#: pigeonplanner/ui/filechooser.py:132
+msgid "Title"
+msgstr ""
+
+#: pigeonplanner/ui/filechooser.py:136 glade/Calendar.ui:170
+#: glade/MedicationView.ui:155 glade/MedicationView.ui:489
+#: glade/MedicationView.ui:630
+msgid "Description"
+msgstr "Leírás"
+
+#: pigeonplanner/ui/filechooser.py:164
+msgid "Save as..."
+msgstr "Mentés másként..."
+
+#: pigeonplanner/ui/filechooser.py:191
+msgid "Select a folder..."
+msgstr ""
+
+#: pigeonplanner/ui/resultwindow.py:100
 msgid "Filter results"
 msgstr "Eredmények szűrése"
 
-#: ../pigeonplanner/ui/resultwindow.py:104
+#: pigeonplanner/ui/resultwindow.py:105
 msgid "Pigeons"
 msgstr "Galambok"
 
-#: ../pigeonplanner/ui/resultwindow.py:105
+#: pigeonplanner/ui/resultwindow.py:106
 msgid "Year of pigeon"
 msgstr "Galamb gyűrűzési éve"
 
-#: ../pigeonplanner/ui/resultwindow.py:106
+#: pigeonplanner/ui/resultwindow.py:107
 msgid "Year of race"
 msgstr "Verseny éve"
 
-#: ../pigeonplanner/ui/resultwindow.py:107
-#: ../pigeonplanner/printing.py:384
-#: tmp/DetailsView.ui.h:15
-#: tmp/ResultsView.ui.h:7
-msgid "Racepoint"
-msgstr "Helyszín"
-
-#: ../pigeonplanner/ui/resultwindow.py:108
-#: ../pigeonplanner/printing.py:388
-#: tmp/OptionsDialog.ui.h:36
-#: tmp/ResultsView.ui.h:9
-msgid "Sector"
-msgstr "Szektor"
-
-#: ../pigeonplanner/ui/resultwindow.py:109
-#: tmp/OptionsDialog.ui.h:18
+#: pigeonplanner/ui/resultwindow.py:110 glade/ResultsView.ui:704
+#: glade/ResultWindow.ui:159 glade/OptionsDialog.ui:525
 msgid "Coefficient"
 msgstr "Koef."
 
-#: ../pigeonplanner/ui/resultwindow.py:110
+#: pigeonplanner/ui/resultwindow.py:111 glade/ResultParser.ui:334
 msgid "Place"
 msgstr "Helyszín"
 
-#: ../pigeonplanner/ui/resultwindow.py:173
+#: pigeonplanner/ui/resultwindow.py:185
 msgid "Save these results"
 msgstr "Eredmények mentése"
 
-#: ../pigeonplanner/ui/resultwindow.py:175
+#: pigeonplanner/ui/resultwindow.py:187
 msgid "Email these results"
 msgstr "Eredmények küldése e-mail-ben"
 
-#: ../pigeonplanner/ui/resultwindow.py:177
+#: pigeonplanner/ui/resultwindow.py:189
 msgid "View these results"
 msgstr "Eredmények megtekintése"
 
-#: ../pigeonplanner/ui/resultwindow.py:179
+#: pigeonplanner/ui/resultwindow.py:191
 msgid "Print these results"
 msgstr "Eredmények nyomtatása"
 
-#: ../pigeonplanner/ui/resultwindow.py:180
-#: ../pigeonplanner/ui/mainwindow.py:643
+#: pigeonplanner/ui/resultwindow.py:192 pigeonplanner/ui/mainwindow.py:635
 msgid "_Filter..."
 msgstr "_Szűrő..."
 
-#: ../pigeonplanner/ui/resultwindow.py:181
-#: ../pigeonplanner/ui/mainwindow.py:644
+#: pigeonplanner/ui/resultwindow.py:193 pigeonplanner/ui/mainwindow.py:636
 msgid "Set filter options"
 msgstr "Szűrési lehetőségek beállítása"
 
-#: ../pigeonplanner/ui/optionsdialog.py:50
-#: tmp/DatabaseTool.ui.h:4
-msgid "General"
-msgstr "Általános"
-
-#: ../pigeonplanner/ui/optionsdialog.py:52
-msgid "Appearance"
-msgstr "Megjelenés"
-
-#: ../pigeonplanner/ui/optionsdialog.py:54
-msgid "Printing"
-msgstr "Nyomtatás"
-
-#: ../pigeonplanner/ui/optionsdialog.py:105
-msgid "days"
-msgstr "nap"
-
-#: ../pigeonplanner/ui/optionsdialog.py:105
-msgid "day"
-msgstr "nap"
-
-#: ../pigeonplanner/ui/tabs/relatives.py:30
-msgid "Relatives"
-msgstr "Rokonok"
-
-#: ../pigeonplanner/ui/tabs/relatives.py:43
-msgid "<b>Brothers and sisters</b>"
-msgstr "<b>Testvérek</b>"
-
-#: ../pigeonplanner/ui/tabs/relatives.py:56
-msgid "<b>Half brothers and sisters</b>"
-msgstr "<b>Féltestvérek</b>"
-
-#: ../pigeonplanner/ui/tabs/relatives.py:69
-msgid "<b>Offspring</b>"
-msgstr "<b>Utód</b>"
-
-#: ../pigeonplanner/ui/tabs/relatives.py:156
-#: ../pigeonplanner/ui/widgets/treeview.py:190
-#: ../pigeonplanner/printing.py:382
-msgid "Band no."
-msgstr "Gyűrűszám"
-
-#: ../pigeonplanner/ui/tabs/relatives.py:156
-#: ../pigeonplanner/ui/widgets/treeview.py:190
-#: tmp/MainWindow.ui.h:13
-msgid "Year"
-msgstr "Év"
-
-#: ../pigeonplanner/ui/tabs/relatives.py:160
-msgid "Common parent"
-msgstr "Közös szülő"
-
-#: ../pigeonplanner/ui/tabs/relatives.py:172
-#: ../pigeonplanner/ui/widgets/treeview.py:174
-#: ../pigeonplanner/ui/widgets/treeview.py:190
-#: tmp/DetailsView.ui.h:17
-#: tmp/MainWindow.ui.h:9
-#: tmp/OptionsDialog.ui.h:37
-msgid "Sex"
-msgstr "Neme"
-
-#: ../pigeonplanner/ui/tabs/medication.py:56
-#: tmp/MedicationView.ui.h:7
-msgid "Medication"
-msgstr "Gyógykezelés"
-
-#: ../pigeonplanner/ui/tabs/results.py:232
-msgid "Edit result for:"
-msgstr "Eredmény szerkesztése:"
-
-#: ../pigeonplanner/ui/tabs/results.py:232
-msgid "Add result for:"
-msgstr "Eredmény hozzáadása:"
-
-#: ../pigeonplanner/ui/tabs/pedigree.py:33
-msgid "<b>Pedigree sire</b>"
-msgstr "<b>Apai ág</b>"
-
-#: ../pigeonplanner/ui/tabs/pedigree.py:45
-msgid "<b>Pedigree dam</b>"
-msgstr "<b>Anyai ág</b>"
-
-#: ../pigeonplanner/ui/mainwindow.py:177
+#: pigeonplanner/ui/mainwindow.py:184
 #, python-format
 msgid "Pigeon %s has been added"
 msgstr "%s galamb hozzáadva"
 
-#: ../pigeonplanner/ui/mainwindow.py:266
+#: pigeonplanner/ui/mainwindow.py:270
 #, python-format
 msgid "Pigeon %s has been removed"
 msgstr "%s galamb törölve"
 
-#: ../pigeonplanner/ui/mainwindow.py:275
+#: pigeonplanner/ui/mainwindow.py:280
 #, python-format
 msgid "%s pigeons have been removed"
 msgstr "%s galamb törölve"
 
-#: ../pigeonplanner/ui/mainwindow.py:404
-#: ../pigeonplanner/ui/mainwindow.py:663
+#: pigeonplanner/ui/mainwindow.py:411 pigeonplanner/ui/mainwindow.py:658
 msgid "Search for updates..."
 msgstr "Frissítések keresése..."
 
-#: ../pigeonplanner/ui/mainwindow.py:602
+#: pigeonplanner/ui/mainwindow.py:594
 msgid "_File"
 msgstr "_Fájl"
 
-#: ../pigeonplanner/ui/mainwindow.py:604
-#: ../pigeonplanner/ui/mainwindow.py:614
+#: pigeonplanner/ui/mainwindow.py:596 pigeonplanner/ui/mainwindow.py:606
 msgid "_Backup"
 msgstr "_Biztonsági mentés"
 
-#: ../pigeonplanner/ui/mainwindow.py:605
+#: pigeonplanner/ui/mainwindow.py:597
 msgid "_Pigeon"
 msgstr "_Galamb"
 
-#: ../pigeonplanner/ui/mainwindow.py:606
+#: pigeonplanner/ui/mainwindow.py:598
 msgid "_Edit"
 msgstr "_Szerkesztés"
 
-#: ../pigeonplanner/ui/mainwindow.py:607
+#: pigeonplanner/ui/mainwindow.py:599
 msgid "_View"
 msgstr "_Nézet"
 
-#: ../pigeonplanner/ui/mainwindow.py:608
+#: pigeonplanner/ui/mainwindow.py:600
 msgid "_Tools"
 msgstr "_Eszközök"
 
-#: ../pigeonplanner/ui/mainwindow.py:609
+#: pigeonplanner/ui/mainwindow.py:601
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../pigeonplanner/ui/mainwindow.py:610
-#: ../pigeonplanner/ui/mainwindow.py:635
+#: pigeonplanner/ui/mainwindow.py:602 pigeonplanner/ui/mainwindow.py:627
 msgid "_Pedigree"
 msgstr "_Családfa"
 
-#: ../pigeonplanner/ui/mainwindow.py:612
+#: pigeonplanner/ui/mainwindow.py:604
 msgid "Blank pedigree"
 msgstr "Üres családfa"
 
-#: ../pigeonplanner/ui/mainwindow.py:613
+#: pigeonplanner/ui/mainwindow.py:605
 msgid "Print a blank pedigree"
 msgstr "Üres családfa nyomtatása"
 
-#: ../pigeonplanner/ui/mainwindow.py:615
+#: pigeonplanner/ui/mainwindow.py:607
 msgid "Create a backup of your database"
 msgstr "Biztonsági mentés létrehozása az adatbázisról"
 
-#: ../pigeonplanner/ui/mainwindow.py:617
+#: pigeonplanner/ui/mainwindow.py:609
 msgid "_Restore"
 msgstr "_Visszaállítás"
 
-#: ../pigeonplanner/ui/mainwindow.py:618
+#: pigeonplanner/ui/mainwindow.py:610
 msgid "Restore a backup of your database"
 msgstr "Visszaállít egy korábbi adatbázist"
 
-#: ../pigeonplanner/ui/mainwindow.py:621
+#: pigeonplanner/ui/mainwindow.py:613
 msgid "Quit the program"
 msgstr "Kilépés a programból"
 
-#: ../pigeonplanner/ui/mainwindow.py:623
+#: pigeonplanner/ui/mainwindow.py:615
 msgid "Add a new pigeon"
 msgstr "Új galamb hozzáadása"
 
-#: ../pigeonplanner/ui/mainwindow.py:624
+#: pigeonplanner/ui/mainwindow.py:616
 msgid "Add ran_ge"
 msgstr "Új sorozat"
 
-#: ../pigeonplanner/ui/mainwindow.py:625
-#: tmp/MainWindow.ui.h:1
+#: pigeonplanner/ui/mainwindow.py:617 glade/MainWindow.ui:7
 msgid "Add a range of pigeons"
 msgstr "Új sorozat hozzáadása"
 
-#: ../pigeonplanner/ui/mainwindow.py:626
+#: pigeonplanner/ui/mainwindow.py:618
 msgid "_Logfile Viewer"
 msgstr "_Logfájl"
 
-#: ../pigeonplanner/ui/mainwindow.py:627
+#: pigeonplanner/ui/mainwindow.py:619
 msgid "See the logfile"
 msgstr "Naplófájl megtekintése"
 
-#: ../pigeonplanner/ui/mainwindow.py:628
+#: pigeonplanner/ui/mainwindow.py:620
 msgid "_Find..."
 msgstr "_Keresés..."
 
-#: ../pigeonplanner/ui/mainwindow.py:629
+#: pigeonplanner/ui/mainwindow.py:621
 msgid "Search through the list of pigeons"
 msgstr "Keresés a galambok listája alapján"
 
-#: ../pigeonplanner/ui/mainwindow.py:632
+#: pigeonplanner/ui/mainwindow.py:624
 msgid "Edit the selected pigeon"
 msgstr "Kiválaszott galamb szerkesztése"
 
-#: ../pigeonplanner/ui/mainwindow.py:634
+#: pigeonplanner/ui/mainwindow.py:626
 msgid "Remove the selected pigeon"
 msgstr "Kiválasztott galamb törlése"
 
-#: ../pigeonplanner/ui/mainwindow.py:636
+#: pigeonplanner/ui/mainwindow.py:628
 msgid "View the detailed pedigree of this pigeon"
 msgstr "Családfa adatainak megtekintése"
 
-#: ../pigeonplanner/ui/mainwindow.py:638
+#: pigeonplanner/ui/mainwindow.py:630
 msgid "Add resul_t"
 msgstr "Eredmény hozzáadása"
 
-#: ../pigeonplanner/ui/mainwindow.py:639
+#: pigeonplanner/ui/mainwindow.py:631
 msgid "Add a new result for this pigeon"
 msgstr "Új eredmény hozzáadása a galambhoz"
 
-#: ../pigeonplanner/ui/mainwindow.py:642
+#: pigeonplanner/ui/mainwindow.py:634
 msgid "Configure the application"
 msgstr "Alkalmazás beállítása"
 
-#: ../pigeonplanner/ui/mainwindow.py:645
-#: tmp/VelocityCalculator.ui.h:11
+#: pigeonplanner/ui/mainwindow.py:637 glade/VelocityCalculator.ui:84
 msgid "Velocity calculator"
 msgstr "Sebesség kalkulátor"
 
-#: ../pigeonplanner/ui/mainwindow.py:646
+#: pigeonplanner/ui/mainwindow.py:638
 msgid "Calculate the velocity of flights"
 msgstr "Repülési sebesség kiszámítása"
 
-#: ../pigeonplanner/ui/mainwindow.py:648
+#: pigeonplanner/ui/mainwindow.py:640 glade/RaceManager.ui:27
+msgid "Racepoint manager"
+msgstr ""
+
+#: pigeonplanner/ui/mainwindow.py:641
+msgid "Manage the racepoints and distances"
+msgstr ""
+
+#: pigeonplanner/ui/mainwindow.py:643
 msgid "_Photo Album"
 msgstr "_Fotóalbum"
 
-#: ../pigeonplanner/ui/mainwindow.py:649
+#: pigeonplanner/ui/mainwindow.py:644
 msgid "View the images of your pigeons"
 msgstr "Galambok képeinek megtekintése"
 
-#: ../pigeonplanner/ui/mainwindow.py:651
-#: tmp/AddressBook.ui.h:1
+#: pigeonplanner/ui/mainwindow.py:646 glade/AddressBook.ui:15
 msgid "Address book"
 msgstr "Címjegyzék"
 
-#: ../pigeonplanner/ui/mainwindow.py:652
+#: pigeonplanner/ui/mainwindow.py:647
 msgid "View the address book"
 msgstr "Címjegyzék megtekintése"
 
-#: ../pigeonplanner/ui/mainwindow.py:653
-#: tmp/Calendar.ui.h:1
+#: pigeonplanner/ui/mainwindow.py:648 glade/Calendar.ui:17
 msgid "Calendar"
 msgstr "Naptár"
 
-#: ../pigeonplanner/ui/mainwindow.py:654
+#: pigeonplanner/ui/mainwindow.py:649
 msgid "View the calendar"
 msgstr "Naptár megnyitása"
 
-#: ../pigeonplanner/ui/mainwindow.py:655
-#: tmp/DataManager.ui.h:3
+#: pigeonplanner/ui/mainwindow.py:650 glade/DataManager.ui:26
 msgid "Data manager"
 msgstr "Adatbázis"
 
-#: ../pigeonplanner/ui/mainwindow.py:656
+#: pigeonplanner/ui/mainwindow.py:651
 msgid "Manage your data"
 msgstr "Bejegyzések kezelése"
 
-#: ../pigeonplanner/ui/mainwindow.py:657
+#: pigeonplanner/ui/mainwindow.py:652
 msgid "_Website"
 msgstr "_Honlap"
 
-#: ../pigeonplanner/ui/mainwindow.py:658
+#: pigeonplanner/ui/mainwindow.py:653
 msgid "Go to the website for more information"
 msgstr "Honlap megnyitása további információért"
 
-#: ../pigeonplanner/ui/mainwindow.py:660
+#: pigeonplanner/ui/mainwindow.py:655
 msgid "Forum"
 msgstr "Fórum"
 
-#: ../pigeonplanner/ui/mainwindow.py:661
+#: pigeonplanner/ui/mainwindow.py:656
 msgid "Go to the forum for online help"
 msgstr "Segítség kérése a fórumon"
 
-#: ../pigeonplanner/ui/mainwindow.py:664
+#: pigeonplanner/ui/mainwindow.py:659
 msgid "Search online for program updates"
 msgstr "Frissítések keresése az interneten"
 
-#: ../pigeonplanner/ui/mainwindow.py:669
+#: pigeonplanner/ui/mainwindow.py:664
 msgid "About this application"
 msgstr "Névjegy"
 
-#: ../pigeonplanner/ui/mainwindow.py:672
+#: pigeonplanner/ui/mainwindow.py:667
 msgid "Navigation arrows"
 msgstr "Navigációs nyilak"
 
-#: ../pigeonplanner/ui/mainwindow.py:673
-#: tmp/OptionsDialog.ui.h:39
+#: pigeonplanner/ui/mainwindow.py:668 glade/OptionsDialog.ui:647
 msgid "Show or hide the navigation arrows"
 msgstr "Navigációs nyilak mutatása/elrejtése"
 
-#: ../pigeonplanner/ui/mainwindow.py:675
+#: pigeonplanner/ui/mainwindow.py:670
 msgid "Statistics"
 msgstr "Statisztika"
 
-#: ../pigeonplanner/ui/mainwindow.py:676
-#: tmp/OptionsDialog.ui.h:38
+#: pigeonplanner/ui/mainwindow.py:671 glade/OptionsDialog.ui:659
 msgid "Show or hide pigeon statistics"
 msgstr "Galamb eredményeinek mutatása/elrejtése"
 
-#: ../pigeonplanner/ui/mainwindow.py:678
+#: pigeonplanner/ui/mainwindow.py:673
 msgid "Toolbar"
 msgstr "Eszköztár"
 
-#: ../pigeonplanner/ui/mainwindow.py:679
-#: tmp/OptionsDialog.ui.h:41
+#: pigeonplanner/ui/mainwindow.py:674 glade/OptionsDialog.ui:671
 msgid "Show or hide the toolbar"
 msgstr "Eszköztár mutatása/elrejtése"
 
-#: ../pigeonplanner/ui/mainwindow.py:681
+#: pigeonplanner/ui/mainwindow.py:676
 msgid "Statusbar"
 msgstr "Állapotsáv"
 
-#: ../pigeonplanner/ui/mainwindow.py:682
-#: tmp/OptionsDialog.ui.h:40
+#: pigeonplanner/ui/mainwindow.py:677 glade/OptionsDialog.ui:683
 msgid "Show or hide the statusbar"
 msgstr "Állapotsáv mutatása/elrejtése"
 
-#: ../pigeonplanner/ui/databasetool.py:38
-msgid "Executing..."
-msgstr "Alkalmaz..."
+#: pigeonplanner/ui/detailsview.py:50
+msgid "Details of pigeon"
+msgstr "Galamb adatai"
 
-#: ../pigeonplanner/ui/databasetool.py:40
-msgid "Error: see the logfile for more info."
-msgstr "Hiba: További információért nyisd meg a naplófájlt (Fájl->Log fájl)"
+#: pigeonplanner/ui/detailsview.py:52
+#, python-format
+msgid "Details of %s"
+msgstr "%s galamb adatai"
 
-#: ../pigeonplanner/ui/databasetool.py:41
-msgid "Operation cancelled"
-msgstr "Művelet megszakítva"
-
-#: ../pigeonplanner/ui/databasetool.py:42
-msgid "Operation completed"
-msgstr "A művelet befejeződött."
-
-#: ../pigeonplanner/ui/widgets/treeview.py:169
-msgid "Filter pigeons"
-msgstr "Galambok szűrése"
-
-#: ../pigeonplanner/ui/widgets/treeview.py:182
-msgid "Status"
-msgstr "Állapot"
-
-#: ../pigeonplanner/ui/widgets/treeview.py:190
-#: tmp/AddressBook.ui.h:5
-#: tmp/OptionsDialog.ui.h:30
-msgid "Name"
-msgstr "Név"
-
-#: ../pigeonplanner/ui/widgets/treeview.py:190
-#: tmp/DetailsView.ui.h:5
-#: tmp/OptionsDialog.ui.h:19
-msgid "Colour"
-msgstr "Szín"
-
-#: ../pigeonplanner/ui/widgets/treeview.py:191
-#: tmp/DetailsView.ui.h:11
-#: tmp/MedicationView.ui.h:6
-#: tmp/OptionsDialog.ui.h:28
-msgid "Loft"
-msgstr "Dúc"
-
-#: ../pigeonplanner/ui/widgets/treeview.py:191
-#: tmp/DetailsView.ui.h:20
-#: tmp/OptionsDialog.ui.h:44
-msgid "Strain"
-msgstr "Származás"
-
-#: ../pigeonplanner/ui/widgets/pedigreeboxes.py:69
-#: ../pigeonplanner/ui/widgets/pedigreeboxes.py:240
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:66
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:244
 msgid "<edit>"
 msgstr "<edit>"
 
-#: ../pigeonplanner/ui/widgets/filefilters.py:35
-msgid "Images"
-msgstr "Képek"
-
-#: ../pigeonplanner/ui/widgets/comboboxes.py:92
-#: tmp/DetailsView.ui.h:8
+#: pigeonplanner/ui/widgets/comboboxes.py:92 glade/DetailsView.ui:358
 msgid "Dead"
 msgstr "Elpusztult"
 
-#: ../pigeonplanner/ui/widgets/comboboxes.py:92
-#: tmp/DetailsView.ui.h:2
+#: pigeonplanner/ui/widgets/comboboxes.py:92 glade/DetailsView.ui:377
 msgid "Active"
 msgstr "Aktív"
 
-#: ../pigeonplanner/ui/widgets/comboboxes.py:92
-#: tmp/DetailsView.ui.h:19
+#: pigeonplanner/ui/widgets/comboboxes.py:92 glade/DetailsView.ui:480
 msgid "Sold"
 msgstr "Eladott"
 
-#: ../pigeonplanner/ui/widgets/comboboxes.py:92
-#: tmp/DetailsView.ui.h:12
+#: pigeonplanner/ui/widgets/comboboxes.py:92 glade/DetailsView.ui:583
 msgid "Lost"
 msgstr "Elveszett"
 
-#: ../pigeonplanner/printing.py:80
-msgid "Save as..."
-msgstr "Mentés másként..."
+#: pigeonplanner/ui/widgets/treeview.py:169
+msgid "Filter pigeons"
+msgstr "Galambok szűrése"
 
-#: ../pigeonplanner/printing.py:176
-#: tmp/PedigreeWindow.ui.h:3
-msgid "Pedigree of:"
-msgstr "Családfa:"
+#: pigeonplanner/ui/widgets/treeview.py:174
+#: pigeonplanner/ui/widgets/treeview.py:190
+#: pigeonplanner/ui/tabs/relatives.py:172 glade/OptionsDialog.ui:479
+#: glade/OptionsDialog.ui:999 glade/DetailsView.ui:810
+#: glade/DetailsView.ui:1285 glade/MainWindow.ui:53
+msgid "Sex"
+msgstr "Neme"
 
-#: ../pigeonplanner/printing.py:383
-#: ../pigeonplanner/printing.py:607
-#: tmp/Calendar.ui.h:3
-#: tmp/DetailsView.ui.h:7
-#: tmp/MedicationView.ui.h:2
-#: tmp/ResultsView.ui.h:4
-msgid "Date"
-msgstr "Dátum"
+#: pigeonplanner/ui/widgets/treeview.py:175
+#: pigeonplanner/ui/tools/datamanager.py:39
+msgid "Colours"
+msgstr "Színek"
 
-#: ../pigeonplanner/printing.py:385
-#: tmp/ResultsView.ui.h:6
-msgid "Placed"
-msgstr "Helyezés"
+#: pigeonplanner/ui/widgets/treeview.py:177
+#: pigeonplanner/ui/tools/datamanager.py:44
+msgid "Strains"
+msgstr "Származás"
 
-#: ../pigeonplanner/printing.py:386
-#: tmp/ResultsView.ui.h:5
-msgid "Out of"
-msgstr "Indított g."
+#: pigeonplanner/ui/widgets/treeview.py:179
+#: pigeonplanner/ui/tools/datamanager.py:45
+msgid "Lofts"
+msgstr "Dúc"
 
-#: ../pigeonplanner/printing.py:387
-msgid "Coef."
-msgstr "Koef."
+#: pigeonplanner/ui/widgets/treeview.py:182
+msgid "Status"
+msgstr "Állapot"
 
-#: ../pigeonplanner/printing.py:389
-#: tmp/Calendar.ui.h:7
-#: tmp/OptionsDialog.ui.h:45
-#: tmp/ResultsView.ui.h:10
-msgid "Type"
-msgstr "Típus"
+#: pigeonplanner/ui/widgets/treeview.py:190
+#: pigeonplanner/ui/tabs/relatives.py:156 glade/ResultWindow.ui:94
+#: glade/MainWindow.ui:95 glade/ResultParser.ui:320
+msgid "Year"
+msgstr "Év"
 
-#: ../pigeonplanner/printing.py:390
-#: tmp/OptionsDialog.ui.h:14
-#: tmp/ResultsView.ui.h:2
-msgid "Category"
+#: pigeonplanner/ui/widgets/treeview.py:190 glade/OptionsDialog.ui:429
+#: glade/OptionsDialog.ui:801 glade/OptionsDialog.ui:977
+#: glade/AddressBook.ui:91
+msgid "Name"
+msgstr "Név"
+
+#: pigeonplanner/ui/widgets/treeview.py:190 glade/OptionsDialog.ui:453
+#: glade/OptionsDialog.ui:986 glade/DetailsView.ui:800
+#: glade/DetailsView.ui:1275
+msgid "Colour"
+msgstr "Szín"
+
+#: pigeonplanner/ui/widgets/treeview.py:191 glade/OptionsDialog.ui:466
+#: glade/DetailsView.ui:776 glade/DetailsView.ui:1127
+#: glade/MedicationView.ui:287
+msgid "Loft"
+msgstr "Dúc"
+
+#: pigeonplanner/ui/widgets/treeview.py:191 glade/OptionsDialog.ui:438
+#: glade/DetailsView.ui:822 glade/DetailsView.ui:1313
+msgid "Strain"
+msgstr "Származás"
+
+#: pigeonplanner/ui/tabs/medication.py:56 glade/MedicationView.ui:37
+#: glade/MedicationView.ui:181 glade/MedicationView.ui:672
+msgid "Medication"
+msgstr "Gyógykezelés"
+
+#: pigeonplanner/ui/tabs/media.py:36
+msgid "Media"
+msgstr ""
+
+#: pigeonplanner/ui/tabs/pedigree.py:33
+msgid "<b>Pedigree sire</b>"
+msgstr "<b>Apai ág</b>"
+
+#: pigeonplanner/ui/tabs/pedigree.py:45
+msgid "<b>Pedigree dam</b>"
+msgstr "<b>Anyai ág</b>"
+
+#: pigeonplanner/ui/tabs/relatives.py:30
+msgid "Relatives"
+msgstr "Rokonok"
+
+#: pigeonplanner/ui/tabs/relatives.py:43
+msgid "<b>Brothers and sisters</b>"
+msgstr "<b>Testvérek</b>"
+
+#: pigeonplanner/ui/tabs/relatives.py:56
+msgid "<b>Half brothers and sisters</b>"
+msgstr "<b>Féltestvérek</b>"
+
+#: pigeonplanner/ui/tabs/relatives.py:69
+msgid "<b>Offspring</b>"
+msgstr "<b>Utód</b>"
+
+#: pigeonplanner/ui/tabs/relatives.py:160
+msgid "Common parent"
+msgstr "Közös szülő"
+
+#: pigeonplanner/ui/tabs/results.py:261
+msgid "Edit result for:"
+msgstr "Eredmény szerkesztése:"
+
+#: pigeonplanner/ui/tabs/results.py:261
+msgid "Add result for:"
+msgstr "Eredmény hozzáadása:"
+
+#: pigeonplanner/ui/tools/photoalbum.py:109
+msgid "Shows the first picture"
+msgstr "Első kép megjelenítése"
+
+#: pigeonplanner/ui/tools/photoalbum.py:111
+msgid "Shows previous picture"
+msgstr "Előző kép megjelenítése"
+
+#: pigeonplanner/ui/tools/photoalbum.py:113
+msgid "Shows the next picture"
+msgstr "Következő kép megjelenítése"
+
+#: pigeonplanner/ui/tools/photoalbum.py:115
+msgid "Shows the last picture"
+msgstr "Utolsó kép megjelenítése"
+
+#: pigeonplanner/ui/tools/photoalbum.py:117
+msgid "Zooms the picture in"
+msgstr "Nagyítás"
+
+#: pigeonplanner/ui/tools/photoalbum.py:119
+msgid "Zooms the picture out"
+msgstr "Kicsinyítés"
+
+#: pigeonplanner/ui/tools/photoalbum.py:125
+msgid "Zooms to fit the whole picture"
+msgstr "Legjobb kitöltés"
+
+#: pigeonplanner/ui/tools/photoalbum.py:128
+msgid "View slideshow"
+msgstr "Diavetítés indítása"
+
+#: pigeonplanner/ui/tools/photoalbum.py:130
+msgid "View in fullscreen"
+msgstr "Megtekintés teljes képernyőn"
+
+#: pigeonplanner/ui/tools/calendar.py:129
+#, python-format
+msgid "Notification set on %s days"
+msgstr "Emlékeztető beállítva %s napra."
+
+#: pigeonplanner/ui/tools/calendar.py:132
+msgid "No notification set"
+msgstr "Nincs emlékeztetés."
+
+#: pigeonplanner/ui/tools/racepointmanager.py:35
+msgid ""
+"Input should be in one of these formats:\n"
+"  DD.dddddd°\n"
+"  DD°MM.mmm’\n"
+"  DD°MM’SS.s”"
+msgstr ""
+
+#: pigeonplanner/ui/tools/datamanager.py:40
+msgid "Sectors"
+msgstr "Szektor"
+
+#: pigeonplanner/ui/tools/datamanager.py:41
+msgid "Types"
+msgstr "Tpus"
+
+#: pigeonplanner/ui/tools/datamanager.py:42
+msgid "Categories"
 msgstr "Kategória"
 
-#: ../pigeonplanner/printing.py:393
-#: tmp/AddressBook.ui.h:2
-#: tmp/Calendar.ui.h:2
-#: tmp/MedicationView.ui.h:1
-#: tmp/OptionsDialog.ui.h:20
-#: tmp/ResultsView.ui.h:3
-msgid "Comment"
-msgstr "Megjegyzés"
+#: pigeonplanner/ui/tools/datamanager.py:43
+#: pigeonplanner/ui/tools/datamanager.py:72
+msgid "Racepoints"
+msgstr "Helyszín"
 
-#: ../pigeonplanner/printing.py:484
-msgid "Page"
-msgstr "Oldal"
+#: pigeonplanner/resultparsers/dtd.py:34
+msgid "Data Technology-Deerlijk - Belgium"
+msgstr ""
 
-#: ../pigeonplanner/printing.py:598
-#: ../pigeonplanner/printing.py:620
-#: ../pigeonplanner/printing.py:621
-#: tmp/VelocityCalculator.ui.h:10
-msgid "Velocity"
-msgstr "Sebesség"
+#: pigeonplanner/resultparsers/dtd.py:35
+msgid "Data Technology-Deerlijk"
+msgstr ""
 
-#: ../pigeonplanner/printing.py:609
-#: tmp/VelocityCalculator.ui.h:7
-msgid "Released"
-msgstr "Feleresztés ideje"
+#: glade/ResultsView.ui:803
+msgid "<b>Results of pigeon</b>"
+msgstr "<b>Galamb eredményei</b>"
 
-#: ../pigeonplanner/printing.py:611
-#: tmp/VelocityCalculator.ui.h:2
-msgid "Distance"
-msgstr "Távolság"
+#: glade/ResultsView.ui:822
+msgid "View all"
+msgstr "Mind megtekint"
 
-#: ../pigeonplanner/printing.py:626
-#: ../pigeonplanner/printing.py:628
-msgid "Flight Time"
-msgstr "Repült idő"
+#: glade/ResultsView.ui:839
+msgid "Import"
+msgstr ""
 
-#: ../pigeonplanner/printing.py:633
-#: ../pigeonplanner/printing.py:635
-msgid "Time of Arrival"
-msgstr "Érkezési idő"
+#: glade/Dialogs.ui:117
+msgid "Only report this logfile if an unexpected error has happened."
+msgstr ""
 
-#: ../pigeonplanner/startup.py:133
-#: tmp/AddressBook.ui.h:4
-#: tmp/Dialogs.ui.h:7
-#: tmp/OptionsDialog.ui.h:22
-msgid "E-mail"
-msgstr "E-mail"
+#: glade/Dialogs.ui:154
+msgid "<b>Send to:</b>"
+msgstr "<b>Címzett:</b>"
 
-#: ../pigeonplanner/startup.py:134
-msgid "Send"
-msgstr "Küldés"
+#: glade/Dialogs.ui:187
+msgid "<b>Your name:</b>"
+msgstr "<b>Neved:</b>"
 
-#: ../pigeonplanner/startup.py:135
-msgid "Report"
-msgstr "Jelentés"
+#: glade/Dialogs.ui:220
+msgid "<b>Your e-mailaddress:</b>"
+msgstr "<b>E-mail címed:</b>"
 
-#: tmp/AddressBook.ui.h:3
-msgid "Country"
-msgstr "Ország"
+#: glade/Dialogs.ui:252
+msgid "<b>Subject:</b>"
+msgstr "<b>Tárgy:</b>"
 
-#: tmp/AddressBook.ui.h:6
-#: tmp/OptionsDialog.ui.h:35
+#: glade/Dialogs.ui:289
+msgid "<b>Message:</b>"
+msgstr "<b>Üzenet:</b>"
+
+#: glade/Dialogs.ui:410
+msgid "<b>Attached file:</b>"
+msgstr "<b>Csatolt fájl:</b>"
+
+#: glade/Dialogs.ui:431
+msgid "Sending..."
+msgstr "Küldés..."
+
+#: glade/PedigreeWindow.ui:61 glade/DetailsView.ui:764
+#: glade/DetailsView.ui:1080
+msgid "Sire"
+msgstr "Apa"
+
+#: glade/PedigreeWindow.ui:112 glade/DetailsView.ui:752
+#: glade/DetailsView.ui:1068
+msgid "Dam"
+msgstr "Anya"
+
+#: glade/RaceManager.ui:135
+msgid "Latitude"
+msgstr ""
+
+#: glade/RaceManager.ui:149
+msgid "Longitude"
+msgstr ""
+
+#: glade/RaceManager.ui:236
+msgid "Click here to add more racepoints"
+msgstr ""
+
+#: glade/ResultWindow.ui:44
+msgid "View all results"
+msgstr "Összes eredmény megtekintése"
+
+#: glade/MediaView.ui:69
+msgid "<b>Media</b>"
+msgstr ""
+
+#: glade/OptionsDialog.ui:73
+msgid "Options"
+msgstr "Beállítások"
+
+#: glade/OptionsDialog.ui:153
+msgid "Check for updates on startup"
+msgstr "Frissítés ellenőrzése a program indításakor"
+
+#: glade/OptionsDialog.ui:165
+msgid "<b>Update</b>"
+msgstr "<b>Frissítés</b>"
+
+#: glade/OptionsDialog.ui:188
+msgid "Make an automatic backup"
+msgstr "Automatikus biztonsági mentés készítése"
+
+#: glade/OptionsDialog.ui:228
+msgid "Location"
+msgstr "Hely"
+
+#: glade/OptionsDialog.ui:241
+msgid "Interval"
+msgstr "Időtartam"
+
+#: glade/OptionsDialog.ui:275
+msgid "<b>Backup</b>"
+msgstr "<b>Biztonsági mentés</b>"
+
+#: glade/OptionsDialog.ui:301
+msgid "Change the language to"
+msgstr "Nyelv kiválasztása"
+
+#: glade/OptionsDialog.ui:330
+msgid "<b>Language</b>"
+msgstr "<b>Nyelv</b>"
+
+#: glade/OptionsDialog.ui:373
+msgid "Change the theme"
+msgstr "Kiválasztott téma"
+
+#: glade/OptionsDialog.ui:404
+msgid "<b>Theme</b>"
+msgstr "<b>Téma</b>"
+
+#: glade/OptionsDialog.ui:500
+msgid "<b>Main Columns</b>"
+msgstr ""
+
+#: glade/OptionsDialog.ui:624
+msgid "<b>Results Columns</b>"
+msgstr ""
+
+#: glade/OptionsDialog.ui:700
+msgid "<b>Other</b>"
+msgstr "<b>Egyéb</b>"
+
+#: glade/OptionsDialog.ui:746
+msgid "Paper format:"
+msgstr "Papírtípus"
+
+#: glade/OptionsDialog.ui:774
+msgid "<b>Paper</b>"
+msgstr "<b>Papír</b>"
+
+#: glade/OptionsDialog.ui:810
+msgid "Address"
+msgstr "Cím"
+
+#: glade/OptionsDialog.ui:823 glade/AddressBook.ui:255
 msgid "Phone"
 msgstr "Telefon"
 
-#: tmp/AddressBook.ui.h:7
-msgid "Street"
-msgstr "Utca"
+#: glade/OptionsDialog.ui:856
+msgid "<b>Personal</b>"
+msgstr "<b>Személyes</b>"
 
-#: tmp/AddressBook.ui.h:8
-msgid "This is me"
-msgstr "Én vagyok"
+#: glade/OptionsDialog.ui:903
+msgid "Pedigree layout:"
+msgstr "Családfa szerkezet:"
 
-#: tmp/AddressBook.ui.h:9
-msgid "Zipcode / City"
-msgstr "Irányítószám / város"
+#: glade/OptionsDialog.ui:950
+msgid "<b>Layout</b>"
+msgstr "<b>Szerkezet</b>"
 
-#: tmp/Calendar.ui.h:4
-#: tmp/MedicationView.ui.h:3
-msgid "Description"
-msgstr "Leírás"
+#: glade/OptionsDialog.ui:1012 glade/DetailsView.ui:789
+#: glade/DetailsView.ui:1247
+msgid "Extra"
+msgstr "Extra"
 
-#: tmp/Calendar.ui.h:5
-msgid "Notify me!"
-msgstr "Emlékeztess!"
+#: glade/OptionsDialog.ui:1027
+msgid "Image"
+msgstr "Kép"
 
-#: tmp/Calendar.ui.h:6
-msgid "Number of days in advance:"
-msgstr "Napok megadása előre:"
+#: glade/OptionsDialog.ui:1047
+msgid "<b>Pigeon</b>"
+msgstr "<b>Galamb</b>"
 
-#: tmp/DataManager.ui.h:1
-msgid "<b>Add items</b>"
-msgstr "<b>Bejegyzések hozzáadása</b>"
+#: glade/OptionsDialog.ui:1093
+msgid "Show the column names"
+msgstr "Oszlop neveinek mutatása"
 
-#: tmp/DataManager.ui.h:2
-msgid "<b>Remove items</b>"
-msgstr "<b>Bejegyzések törlése</b>"
+#: glade/OptionsDialog.ui:1105
+msgid "Show the date"
+msgstr "Dátum mutatása"
 
-#: tmp/DataManager.ui.h:4
+#: glade/OptionsDialog.ui:1122
+msgid "<b>General</b>"
+msgstr "<b>Általános</b>"
+
+#: glade/OptionsDialog.ui:1157
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#: glade/DataManager.ui:98
 msgid "Dataset"
 msgstr "Adattípus"
 
-#: tmp/DataManager.ui.h:5
+#: glade/DataManager.ui:109 glade/DataManager.ui:217
 msgid "Item"
 msgstr "Bejegyzés"
 
-#: tmp/DatabaseTool.ui.h:1
-msgid "Check"
-msgstr "Ellenőrzés"
-
-#: tmp/DatabaseTool.ui.h:2
-msgid "Check the database for errors and try to repair them."
-msgstr "Adatbázis hibaellenőrzése és kísérlet a javítására."
-
-#: tmp/DatabaseTool.ui.h:3
-msgid ""
-"Delete the entire database from your hard drive. You will loose all pigeons, "
-"results and other data."
+#: glade/DataManager.ui:236
+msgid "<b>Manage items</b>"
 msgstr ""
-"A teljes adatbázis törlése a merevlemezről. Minden galamb, eredmény és egyéb "
-"adatok elvesznek."
 
-#: tmp/DatabaseTool.ui.h:5
-msgid "Logfile"
-msgstr "Logfájl"
-
-#: tmp/DatabaseTool.ui.h:6
-msgid ""
-"Only execute SQL statements if you know what you are doing! Entering invalid "
-"or wrong statements may cause data loss!"
+#: glade/DataManager.ui:356
+msgid "<b>Unused objects</b>"
 msgstr ""
-"Az SQL parancsok használata csak szakértőknek ajánlott. Helytelen parancsok "
-"esetén adatvesztés történhet."
 
-#: tmp/DatabaseTool.ui.h:7
+#: glade/DetailsView.ui:198
+msgid "Pigeon status"
+msgstr "Galamb állapota"
+
+#: glade/DetailsView.ui:221
+msgid "Choose a status for this pigeon:"
+msgstr "Állapot kiválasztása:"
+
+#: glade/DetailsView.ui:256
+msgid "The current status is:"
+msgstr "Aktuális állapot:"
+
+#: glade/DetailsView.ui:315 glade/DetailsView.ui:407 glade/DetailsView.ui:510
+msgid "Extra info"
+msgstr "Extra információ"
+
+#: glade/DetailsView.ui:368
+msgid "No extra information available."
+msgstr "Nincsen extra információ."
+
+#: glade/DetailsView.ui:433
+msgid "Buyer"
+msgstr "Vevő"
+
+#: glade/DetailsView.ui:1542
+msgid "<b>Details of pigeon</b>"
+msgstr "<b>Galamb adatai</b>"
+
+#: glade/MainWindow.ui:120
+msgid "To"
+msgstr "-ig"
+
+#: glade/MainWindow.ui:163
+msgid "From"
+msgstr "-tól"
+
+#: glade/MainWindow.ui:248
+msgid "Remove pigeon"
+msgstr "Galamb törlése"
+
+#: glade/MainWindow.ui:287
+msgid "The following pigeon will be removed:"
+msgstr "A követlező galamb törlése:"
+
+#: glade/MainWindow.ui:316
+msgid "Keep this pigeon in the pedigree"
+msgstr "Galamb családfában tartása"
+
+#: glade/MainWindow.ui:329
+msgid "Keep results of this pigeon"
+msgstr "Galamb eredményeinek megtartása"
+
+#: glade/MainWindow.ui:472
+msgid "Total"
+msgstr "Összesen"
+
+#: glade/MainWindow.ui:496
+msgid "Cocks"
+msgstr "Hímek"
+
+#: glade/MainWindow.ui:524
+msgid "Hens"
+msgstr "Tojók"
+
+#: glade/MainWindow.ui:552
+msgid "Young birds"
+msgstr "Fiókák"
+
+#: glade/AddressBook.ui:125
+msgid "Street"
+msgstr "Utca"
+
+#: glade/AddressBook.ui:187
+msgid "Zipcode / City"
+msgstr "Irányítószám / város"
+
+#: glade/AddressBook.ui:221
+msgid "Country"
+msgstr "Ország"
+
+#: glade/AddressBook.ui:412
+msgid "This is me"
+msgstr "Én vagyok"
+
+#: glade/Calendar.ui:246
+msgid "Notify me!"
+msgstr "Emlékeztess!"
+
+#: glade/Calendar.ui:274
+msgid "Number of days in advance:"
+msgstr "Napok megadása előre:"
+
+#: glade/VelocityCalculator.ui:125
+msgid "Time"
+msgstr "Idő"
+
+#: glade/VelocityCalculator.ui:147 glade/VelocityCalculator.ui:474
+msgid "Calculate"
+msgstr "Becslés"
+
+#: glade/VelocityCalculator.ui:284 glade/VelocityCalculator.ui:598
+msgid "Hours"
+msgstr "Óra"
+
+#: glade/VelocityCalculator.ui:304 glade/VelocityCalculator.ui:618
+msgid "Minutes"
+msgstr "Perc"
+
+#: glade/VelocityCalculator.ui:324 glade/VelocityCalculator.ui:638
+msgid "Seconds"
+msgstr "Másodperc"
+
+#: glade/VelocityCalculator.ui:462
+msgid "Range"
+msgstr "Sorozat"
+
+#: glade/VelocityCalculator.ui:821
+msgid "Prognosis"
+msgstr "Előrejelzés"
+
+#: glade/ResultParser.ui:29
+msgid "Import results"
+msgstr ""
+
+#: glade/ResultParser.ui:60
+msgid "File:"
+msgstr ""
+
+#: glade/ResultParser.ui:72
+msgid "Parser:"
+msgstr ""
+
+#: glade/ResultParser.ui:107
+msgid "Parse"
+msgstr ""
+
+#: glade/ResultParser.ui:155
+msgid "Date:"
+msgstr ""
+
+#: glade/ResultParser.ui:167
+msgid "Racepoint:"
+msgstr ""
+
+#: glade/ResultParser.ui:181
+msgid "Pigeons:"
+msgstr ""
+
+#: glade/ResultParser.ui:260
+msgid "No results were found for your pigeons"
+msgstr ""
+
+#: glade/ResultParser.ui:427
+msgid "Parser error"
+msgstr ""
+
+#: glade/ResultParser.ui:489
+msgid ""
+"The file you selected could not be parsed correctly. Try selecting another "
+"parser that matches your file and try again. Or send the developers some "
+"useful data shown below, so they can work on this issue."
+msgstr ""
+
+#: glade/DatabaseTool.ui:7
+msgid "Pigeon Planner database tool"
+msgstr "Pigeon Planner adatbázis kezelő"
+
+#: glade/DatabaseTool.ui:35
 msgid "Optimize"
 msgstr "Optimalizálás"
 
-#: tmp/DatabaseTool.ui.h:8
+#: glade/DatabaseTool.ui:51
+msgid "Check"
+msgstr "Ellenőrzés"
+
+#: glade/DatabaseTool.ui:90
 msgid ""
 "Optimze the database tables. This will defragment the data and free unused "
 "space."
@@ -1297,304 +1609,174 @@ msgstr ""
 "Adatbázis optimalizálása. Töredezettség mentesíti az adatokat, ezzel helyet "
 "szabadítva fel."
 
-#: tmp/DatabaseTool.ui.h:9
-msgid "Pigeon Planner database tool"
-msgstr "Pigeon Planner adatbázis kezelő"
+#: glade/DatabaseTool.ui:104
+msgid "Check the database for errors and try to repair them."
+msgstr "Adatbázis hibaellenőrzése és kísérlet a javítására."
 
-#: tmp/DatabaseTool.ui.h:10
-msgid "SQL"
-msgstr "SQL"
+#: glade/DatabaseTool.ui:120
+msgid ""
+"Delete the entire database from your hard drive. You will loose all pigeons, "
+"results and other data."
+msgstr ""
+"A teljes adatbázis törlése a merevlemezről. Minden galamb, eredmény és egyéb "
+"adatok elvesznek."
 
-#: tmp/DatabaseTool.ui.h:11
+#: glade/DatabaseTool.ui:205
 msgid "Warning:"
 msgstr "Figyelmeztetés"
 
-#: tmp/DetailsView.ui.h:1
-msgid "<b>Details of pigeon</b>"
-msgstr "<b>Galamb adatai</b>"
+#: glade/DatabaseTool.ui:218
+msgid ""
+"Only execute SQL statements if you know what you are doing! Entering invalid "
+"or wrong statements may cause data loss!"
+msgstr ""
+"Az SQL parancsok használata csak szakértőknek ajánlott. Helytelen parancsok "
+"esetén adatvesztés történhet."
 
-#: tmp/DetailsView.ui.h:3
-msgid "Buyer"
-msgstr "Vevő"
+#: glade/DatabaseTool.ui:322
+msgid "SQL"
+msgstr "SQL"
 
-#: tmp/DetailsView.ui.h:4
-msgid "Choose a status for this pigeon:"
-msgstr "Állapot kiválasztása:"
+#: glade/DatabaseTool.ui:340
+msgid "Logfile"
+msgstr "Logfájl"
 
-#: tmp/DetailsView.ui.h:6
-#: tmp/PedigreeWindow.ui.h:1
-msgid "Dam"
-msgstr "Anya"
-
-#: tmp/DetailsView.ui.h:9
-#: tmp/OptionsDialog.ui.h:23
-msgid "Extra"
-msgstr "Extra"
-
-#: tmp/DetailsView.ui.h:10
-msgid "Extra info"
-msgstr "Extra információ"
-
-#: tmp/DetailsView.ui.h:13
-msgid "No extra information available."
-msgstr "Nincsen extra információ."
-
-#: tmp/DetailsView.ui.h:14
-msgid "Pigeon status"
-msgstr "Galamb állapota"
-
-#: tmp/DetailsView.ui.h:18
-#: tmp/PedigreeWindow.ui.h:4
-msgid "Sire"
-msgstr "Apa"
-
-#: tmp/DetailsView.ui.h:21
-msgid "The current status is:"
-msgstr "Aktuális állapot:"
-
-#: tmp/Dialogs.ui.h:1
-msgid "<b>Attached file:</b>"
-msgstr "<b>Csatolt fájl:</b>"
-
-#: tmp/Dialogs.ui.h:2
-msgid "<b>Message:</b>"
-msgstr "<b>Üzenet:</b>"
-
-#: tmp/Dialogs.ui.h:3
-msgid "<b>Send to:</b>"
-msgstr "<b>Címzett:</b>"
-
-#: tmp/Dialogs.ui.h:4
-msgid "<b>Subject:</b>"
-msgstr "<b>Tárgy:</b>"
-
-#: tmp/Dialogs.ui.h:5
-msgid "<b>Your e-mailaddress:</b>"
-msgstr "<b>E-mail címed:</b>"
-
-#: tmp/Dialogs.ui.h:6
-msgid "<b>Your name:</b>"
-msgstr "<b>Neved:</b>"
-
-#: tmp/Dialogs.ui.h:8
-msgid "Sending..."
-msgstr "Küldés..."
-
-#: tmp/MainWindow.ui.h:3
-msgid "Cocks"
-msgstr "Hímek"
-
-#: tmp/MainWindow.ui.h:4
-msgid "From"
-msgstr "-tól"
-
-#: tmp/MainWindow.ui.h:5
-msgid "Hens"
-msgstr "Tojók"
-
-#: tmp/MainWindow.ui.h:6
-msgid "Keep results of this pigeon"
-msgstr "Galamb eredményeinek megtartása"
-
-#: tmp/MainWindow.ui.h:7
-msgid "Keep this pigeon in the pedigree"
-msgstr "Galamb családfában tartása"
-
-#: tmp/MainWindow.ui.h:8
-msgid "Remove pigeon"
-msgstr "Galamb törlése"
-
-#: tmp/MainWindow.ui.h:10
-msgid "The following pigeon will be removed:"
-msgstr "A követlező galamb törlése:"
-
-#: tmp/MainWindow.ui.h:11
-msgid "To"
-msgstr "-ig"
-
-#: tmp/MainWindow.ui.h:12
-msgid "Total"
-msgstr "Összesen"
-
-#: tmp/MainWindow.ui.h:14
-msgid "Young birds"
-msgstr "Fiókák"
-
-#: tmp/MedicationView.ui.h:4
+#: glade/MedicationView.ui:168 glade/MedicationView.ui:586
 msgid "Done by"
 msgstr "Kezelte"
 
-#: tmp/MedicationView.ui.h:5
+#: glade/MedicationView.ui:194 glade/MedicationView.ui:711
 msgid "Dosage"
 msgstr "Dózis"
 
-#: tmp/MedicationView.ui.h:8
+#: glade/MedicationView.ui:221 glade/MedicationView.ui:739
 msgid "Vaccination"
 msgstr "Oltás"
 
-#: tmp/OptionsDialog.ui.h:1
-msgid "<b>Backup</b>"
-msgstr "<b>Biztonsági mentés</b>"
-
-#: tmp/OptionsDialog.ui.h:2
-msgid "<b>Columns</b>"
-msgstr "<b>Oszlopok</b>"
-
-#: tmp/OptionsDialog.ui.h:3
-msgid "<b>General</b>"
-msgstr "<b>Általános</b>"
-
-#: tmp/OptionsDialog.ui.h:4
-msgid "<b>Language</b>"
-msgstr "<b>Nyelv</b>"
-
-#: tmp/OptionsDialog.ui.h:5
-msgid "<b>Layout</b>"
-msgstr "<b>Szerkezet</b>"
-
-#: tmp/OptionsDialog.ui.h:6
-msgid "<b>Other</b>"
-msgstr "<b>Egyéb</b>"
-
-#: tmp/OptionsDialog.ui.h:7
-msgid "<b>Paper</b>"
-msgstr "<b>Papír</b>"
-
-#: tmp/OptionsDialog.ui.h:8
-msgid "<b>Personal</b>"
-msgstr "<b>Személyes</b>"
-
-#: tmp/OptionsDialog.ui.h:9
-msgid "<b>Pigeon</b>"
-msgstr "<b>Galamb</b>"
-
-#: tmp/OptionsDialog.ui.h:10
-msgid "<b>Theme</b>"
-msgstr "<b>Téma</b>"
-
-#: tmp/OptionsDialog.ui.h:11
-msgid "<b>Update</b>"
-msgstr "<b>Frissítés</b>"
-
-#: tmp/OptionsDialog.ui.h:12
-msgid "A4"
-msgstr "A4"
-
-#: tmp/OptionsDialog.ui.h:13
-msgid "Address"
-msgstr "Cím"
-
-#: tmp/OptionsDialog.ui.h:15
-msgid "Change the language to"
-msgstr "Nyelv kiválasztása"
-
-#: tmp/OptionsDialog.ui.h:16
-msgid "Change the theme"
-msgstr "Kiválasztott téma"
-
-#: tmp/OptionsDialog.ui.h:17
-msgid "Check for updates on startup"
-msgstr "Frissítés ellenőrzése a program indításakor"
-
-#: tmp/OptionsDialog.ui.h:21
-msgid "Default"
-msgstr "Alapértelmezett"
-
-#: tmp/OptionsDialog.ui.h:24
-msgid "Image"
-msgstr "Kép"
-
-#: tmp/OptionsDialog.ui.h:25
-msgid "Interval"
-msgstr "Időtartam"
-
-#: tmp/OptionsDialog.ui.h:26
-msgid "Letter"
-msgstr "Levél"
-
-#: tmp/OptionsDialog.ui.h:27
-msgid "Location"
-msgstr "Hely"
-
-#: tmp/OptionsDialog.ui.h:29
-msgid "Make an automatic backup"
-msgstr "Automatikus biztonsági mentés készítése"
-
-#: tmp/OptionsDialog.ui.h:31
-msgid "Options"
-msgstr "Beállítások"
-
-#: tmp/OptionsDialog.ui.h:32
-msgid "Original"
-msgstr "Eredeti"
-
-#: tmp/OptionsDialog.ui.h:33
-msgid "Paper format:"
-msgstr "Papírtípus"
-
-#: tmp/OptionsDialog.ui.h:34
-msgid "Pedigree layout:"
-msgstr "Családfa szerkezet:"
-
-#: tmp/OptionsDialog.ui.h:42
-msgid "Show the column names"
-msgstr "Oszlop neveinek mutatása"
-
-#: tmp/OptionsDialog.ui.h:43
-msgid "Show the date"
-msgstr "Dátum mutatása"
-
-#: tmp/PhotoAlbum.ui.h:1
+#: glade/PhotoAlbum.ui:7
 msgid "Photo Album"
 msgstr "Fotóalbum"
 
-#: tmp/PhotoAlbum.ui.h:2
+#: glade/PhotoAlbum.ui:51
 msgid "There are no images found."
 msgstr "Nem található fénykép."
 
-#: tmp/PreviewWindow.ui.h:1
-msgid "Print Preview"
-msgstr "Nyomtatási kép"
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "'%(item)s' törlése innen: '%(dataset)s'."
 
-#: tmp/ResultWindow.ui.h:1
-msgid "View all results"
-msgstr "Összes eredmény megtekintése"
+#~ msgid ""
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
+#~ msgstr ""
+#~ "Kattints az \"OK\" -ra a program bezárásához. Az új adatbázis a program "
+#~ "következő indításkor jön létre."
 
-#: tmp/ResultsView.ui.h:1
-msgid "<b>Results of pigeon</b>"
-msgstr "<b>Galamb eredményei</b>"
+#~ msgid "Optimization has been completed."
+#~ msgstr "Az optimalizálás elkészült."
 
-#: tmp/ResultsView.ui.h:11
-msgid "View all"
-msgstr "Mind megtekint"
+#~ msgid ""
+#~ "A new version is available. Please go to the Pigeon Planner website by "
+#~ "clicking the link below and download the latest version"
+#~ msgstr ""
+#~ "Elérhető a program új verziója. Kattints az alábbi linkre a legfrissebb "
+#~ "verzió letöltéséhez."
 
-#: tmp/VelocityCalculator.ui.h:1
-msgid "Calculate"
-msgstr "Becslés"
+#~ msgid "Select a directory"
+#~ msgstr "Mappa kiválasztása"
 
-#: tmp/VelocityCalculator.ui.h:3
-msgid "Hours"
-msgstr "Óra"
+#~ msgid "Select a valid backup file"
+#~ msgstr "Biztonsági mentés kiválasztása"
 
-#: tmp/VelocityCalculator.ui.h:4
-msgid "Minutes"
-msgstr "Perc"
+#~ msgid "Insert a pigeon"
+#~ msgstr "Galamb beillesztése"
 
-#: tmp/VelocityCalculator.ui.h:5
-msgid "Prognosis"
-msgstr "Előrejelzés"
+#~ msgid "Datasets"
+#~ msgstr "Adattípusok"
 
-#: tmp/VelocityCalculator.ui.h:6
-msgid "Range"
-msgstr "Sorozat"
+#~ msgid "Addresses"
+#~ msgstr "Címjegyzék"
 
-#: tmp/VelocityCalculator.ui.h:8
-msgid "Seconds"
-msgstr "Másodperc"
+#~ msgid "Database"
+#~ msgstr "Adatbázis"
 
-#: tmp/VelocityCalculator.ui.h:9
-msgid "Time"
-msgstr "Idő"
+#~ msgid "Update"
+#~ msgstr "Frissítés"
+
+#, python-format
+#~ msgid "Notification is set on %s days in advance"
+#~ msgstr "Emlékeztető beállítva erre a napra: %s"
+
+#~ msgid "cock"
+#~ msgstr "hím"
+
+#~ msgid "hen"
+#~ msgstr "tojó"
+
+#~ msgid "young bird"
+#~ msgstr "fióka"
+
+#~ msgid "Enter the bandnumber of the pigeon"
+#~ msgstr "Írd be a galamb gyűrűszámát"
+
+#~ msgid "Enter the year of the pigeon"
+#~ msgstr "Írd be a galamb gyűrűzési évét"
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "Kattints a galamb állapotának beállításához"
+
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "Írd be a galamb nevét"
+
+#~ msgid "Click here to add an image"
+#~ msgstr "Kép hozzáadásához kattints ide"
+
+#~ msgid "Search through the list of cocks"
+#~ msgstr "Keresés a hímek listája alapján"
+
+#~ msgid "Search through the list of hens"
+#~ msgstr "Keresés a tojók listája alapján"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been removed"
+#~ msgstr "%s/%s galamb törölve"
+
+#~ msgid "Result has been removed"
+#~ msgstr "Eredmény törölve"
+
+#~ msgid "Result has been added"
+#~ msgstr "Eredmény hozzáadva"
+
+#~ msgid "Various tools"
+#~ msgstr "Különböző eszközök"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been added"
+#~ msgstr "%s/%s galamb hozzáadva"
+
+#~ msgid "Search database"
+#~ msgstr "Adatbázis vizsgálata"
+
+#~ msgid "Check now!"
+#~ msgstr "Ellenőriz!"
+
+#~ msgid "Choose an image..."
+#~ msgstr "Kép tallózása..."
+
+#~ msgid "<b>Columns</b>"
+#~ msgstr "<b>Oszlopok</b>"
+
+#~ msgid "A4"
+#~ msgstr "A4"
+
+#~ msgid "Letter"
+#~ msgstr "Levél"
+
+#~ msgid "Original"
+#~ msgstr "Eredeti"
+
+#~ msgid "<b>Add items</b>"
+#~ msgstr "<b>Bejegyzések hozzáadása</b>"
 
 #~ msgid "<b>Create backup</b>"
 #~ msgstr "<b>Biztonsági mentés készítése</b>"
@@ -1604,6 +1786,9 @@ msgstr "Idő"
 
 #~ msgid "<b>Remove database</b>"
 #~ msgstr "<b>Adatbázis törlése</b>"
+
+#~ msgid "<b>Remove items</b>"
+#~ msgstr "<b>Bejegyzések törlése</b>"
 
 #~ msgid "<b>Restore backup</b>"
 #~ msgstr "<b>Biztonsági mentés visszaállítása</b>"
@@ -1651,78 +1836,3 @@ msgstr "Idő"
 
 #~ msgid "Tools"
 #~ msgstr "Eszközök"
-
-#~ msgid "Check now!"
-#~ msgstr "Ellenőriz!"
-
-#~ msgid "Search database"
-#~ msgstr "Adatbázis vizsgálata"
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
-#~ msgstr ""
-#~ "Kattints az \"OK\" -ra a program bezárásához. Az új adatbázis a program "
-#~ "következő indításkor jön létre."
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "Elérhető a program új verziója. Kattints az alábbi linkre a legfrissebb "
-#~ "verzió letöltéséhez."
-
-#~ msgid "Insert a pigeon"
-#~ msgstr "Galamb beillesztése"
-
-#~ msgid "Datasets"
-#~ msgstr "Adattípusok"
-
-#~ msgid "Addresses"
-#~ msgstr "Címjegyzék"
-
-#~ msgid "Update"
-#~ msgstr "Frissítés"
-
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Írd be a galamb gyűrűszámát"
-
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Írd be a galamb gyűrűzési évét"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Kattints a galamb állapotának beállításához"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Írd be a galamb nevét"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Kép hozzáadásához kattints ide"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Keresés a hímek listája alapján"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Keresés a tojók listája alapján"
-
-#~ msgid "Result has been removed"
-#~ msgstr "Eredmény törölve"
-
-#~ msgid "Result has been added"
-#~ msgstr "Eredmény hozzáadva"
-
-#~ msgid "Various tools"
-#~ msgstr "Különböző eszközök"
-
-#, fuzzy
-#~ msgid "Multiple pigeons"
-#~ msgstr "Galambok szűrése"
-
-#~ msgid "cock"
-#~ msgstr "hím"
-
-#~ msgid "hen"
-#~ msgstr "tojó"
-
-#~ msgid "young bird"
-#~ msgstr "fióka"
