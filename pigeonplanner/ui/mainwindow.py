@@ -83,6 +83,9 @@ class MainWindow(builder.GtkBuilder):
         self.resultstab = tabs.ResultsTab(self.mainwindow, self.database,
                                           self.options, self.parser)
         self.notebook.append_page(*self.resultstab.get_tab_widgets())
+        self.breedingtab = tabs.BreedingTab(self.mainwindow, self.database,
+                                            self.parser, self.treeview)
+        self.notebook.append_page(*self.breedingtab.get_tab_widgets())
         self.mediatab = tabs.MediaTab(self.mainwindow, self.database,
                                       self.options, self.parser)
         self.notebook.append_page(*self.mediatab.get_tab_widgets())
@@ -490,7 +493,7 @@ class MainWindow(builder.GtkBuilder):
         widgets = [self.ToolEdit, self.ToolPedigree, self.MenuEdit,
                    self.MenuPedigree, self.MenuAddresult,
                    self.resultstab.buttonadd, self.medicationtab.buttonadd,
-                   self.mediatab.buttonadd,
+                   self.mediatab.buttonadd, self.breedingtab.buttonadd,
                    self.ToolRemove, self.MenuRemove]
         if n_rows_selected == 1:
             tree_iter = model.get_iter(paths[0])
@@ -509,6 +512,7 @@ class MainWindow(builder.GtkBuilder):
         self.pedigreetab.draw_pedigree(pigeon)
         self.relativestab.fill_treeviews(pigeon)
         self.resultstab.fill_treeview(pigeon)
+        self.breedingtab.fill_treeview(pigeon)
         self.mediatab.fill_treeview(pigeon)
         self.medicationtab.fill_treeview(pigeon)
         self.detailsview.set_details(pigeon)
@@ -699,6 +703,7 @@ class MainWindow(builder.GtkBuilder):
         self.detailsview.clear_details()
         self.pedigreetab.draw_pedigree()
         self.relativestab.clear_treeviews()
+        self.breedingtab.liststore.clear()
         self.medicationtab.liststore.clear()
         self.resultstab.liststore.clear()
         self.mediatab.liststore.clear()

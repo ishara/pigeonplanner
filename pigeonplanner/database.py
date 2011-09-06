@@ -36,9 +36,13 @@ import const
  RET_ONEROW) = range(4)
 
 
+class InvalidValueError(Exception): pass
+
+
 class DatabaseOperations(object):
     PIGEONS = "Pigeons"
     RESULTS = "Results"
+    BREEDING = "Breeding"
     MEDIA = "Media"
     MED = "Medication"
     ADDR = "Addresses"
@@ -97,6 +101,21 @@ class DatabaseOperations(object):
              ' ownplace INTEGER,'
              ' ownout INTEGER,'
              ' comment TEXT)',
+    BREEDING: '(Breedingkey INTEGER PRIMARY KEY,'
+              ' sire TEXT,'
+              ' dam TEXT,'
+              ' date TEXT,'
+              ' laid1 TEXT,'
+              ' hatched1 TEXT,'
+              ' pindex1 TEXT,'
+              ' success1 INTEGER,'
+              ' laid2 TEXT,'
+              ' hatched2 TEXT,'
+              ' pindex2 TEXT,'
+              ' success2 INTEGER,'
+              ' clutch TEXT,'
+              ' box TEXT,'
+              ' comment TEXT)',
     MEDIA: '(Mediakey INTEGER PRIMARY KEY,'
            ' pindex TEXT,'
            ' type TEXT,'
@@ -224,8 +243,8 @@ class DatabaseOperations(object):
                 self.cursor.execute(sql)
             else:
                 self.cursor.execute(sql, args)
-        except sqlite3.IntegrityError:
-            pass
+        except sqlite3.IntegrityError, exc:
+            raise InvalidValueError(exc)
         self.conn.commit()
         return self.cursor.lastrowid
 
@@ -400,6 +419,15 @@ class DatabaseOperations(object):
             return False
         else:
             return True
+
+#### Breeding
+    def get_pigeon_breeding(self, pindex):
+        sql = 'SELECT * FROM Breeding WHERE sire=? OR dam=?'
+        return self.__db_execute_select(sql, (pindex,pindex), RET_ALLCOL)
+
+    def get_breeding_from_id(self, ID):
+        sql = 'SELECT * FROM Breeding WHERE Breedingkey=?'
+        return self.__db_execute_select(sql, (ID,), RET_ONEROW)
 
 #### Media
     def get_pigeon_media(self, pindex):

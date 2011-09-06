@@ -85,12 +85,13 @@ class TreeView(gtk.TreeView):
         filterpath = self._modelsort.convert_path_to_child_path(path)
         return self._modelfilter.convert_path_to_child_path(filterpath)
 
-    def add_row(self, row):
+    def add_row(self, row, select=True):
         rowiter = self._liststore.insert(0, row)
-        path = self._liststore.get_path(rowiter)
-        self._selection.unselect_all()
-        self._selection.select_iter(self.get_top_iter(rowiter))
-        self.scroll_to_cell(self.get_top_path(path))
+        if select:
+            path = self._liststore.get_path(rowiter)
+            self._selection.unselect_all()
+            self._selection.select_iter(self.get_top_iter(rowiter))
+            self.scroll_to_cell(self.get_top_path(path))
 
     def update_row(self, data, rowiter=None, path=None):
         if rowiter is None and path is None:
@@ -117,6 +118,13 @@ class TreeView(gtk.TreeView):
                                        pigeon.get_sex_string(),
                                        pigeon.get_loft(), pigeon.get_strain()])
         self._selection.select_path(path)
+
+    def add_pigeon(self, pigeon, select=True):
+        ring, year = pigeon.get_band()
+        row = [pigeon, pigeon.get_pindex(), ring, year, pigeon.get_name(),
+               pigeon.get_colour(), pigeon.get_sex_string(),
+               pigeon.get_loft(), pigeon.get_strain()]
+        self.add_row(row, select)
 
     def select_pigeon(self, widget, pindex):
         """

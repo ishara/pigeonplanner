@@ -16,10 +16,28 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from ui.tabs.pedigree import PedigreeTab
-from ui.tabs.relatives import RelativesTab
-from ui.tabs.results import ResultsTab
-from ui.tabs.breeding import BreedingTab
-from ui.tabs.media import MediaTab
-from ui.tabs.medication import MedicationTab
+import gtk
+
+
+class DisplayCheckButton(gtk.CheckButton):
+    """
+    This class subclasses gtk.CheckButton which we will use to display
+    the status of some data. Because this is just an indicator,
+    the user isn't allowed to change its state.
+
+    We achieve this by overriding the "pressed" and "released" signals
+    and do nothing in them.
+    """
+
+    __gtype_name__ = 'DisplayCheckButton'
+
+    def __init__(self, label=None):
+        gtk.CheckButton.__init__(self, label)
+        self.show()
+
+    def do_pressed(self):
+        pass
+
+    def do_released(self):
+        pass
 

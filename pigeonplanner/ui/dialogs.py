@@ -417,3 +417,64 @@ class MedicationRemoveDialog(gtk.Dialog):
         self.vbox.pack_start(hbox, False, False)
         self.vbox.show_all()
 
+
+class PigeonListDialog(gtk.Dialog):
+    def __init__(self, parent):
+        gtk.Dialog.__init__(self, _('Search a pigeon'), parent,
+                            gtk.DIALOG_DESTROY_WITH_PARENT,
+                            (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL))
+        self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        self.set_modal(True)
+        self.set_skip_taskbar_hint(True)
+        self.resize(400, 400)
+        self.buttonadd = self.add_button(gtk.STOCK_ADD, gtk.RESPONSE_APPLY)
+        self.buttonadd.set_sensitive(False)
+
+        self._liststore = gtk.ListStore(object, str, str, str)
+        self._treeview = gtk.TreeView(self._liststore)
+        columns = (_("Band no."), _("Year"), _("Name"))
+        for index, column in enumerate(columns):
+            textrenderer = gtk.CellRendererText()
+            tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+1)
+            tvcolumn.set_sort_column_id(index+1)
+            tvcolumn.set_resizable(True)
+            self._treeview.append_column(tvcolumn)
+        self._selection = self._treeview.get_selection()
+        self._selection.connect('changed', self.on_selection_changed)
+
+        sw = gtk.ScrolledWindow()
+        sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        sw.add(self._treeview)
+
+        frame = gtk.Frame()
+        frame.add(sw)
+        self.vbox.pack_start(frame)
+        self.show_all()
+
+    def on_selection_changed(self, selection):
+        model, rowiter = selection.get_selected()
+        self.buttonadd.set_sensitive(not rowiter is None)
+
+    def fill_treeview(self, parser, pindex=None, sex=None, year=None):
+        self._liststore.clear()
+        for pigeon in parser.pigeons.values():
+            # If pindex is given, exclude it
+            if pindex is not None and pindex == pigeon.get_pindex():
+                continue
+            # If sex is given, only include these
+            if sex is not None and not sex == int(pigeon.get_sex()):
+                continue
+            # If year is given, exclude older pigeons
+            if year is not None and year >= int(pigeon.year):
+                continue
+            self._liststore.insert(0, [pigeon, pigeon.ring, pigeon.year,
+                                       pigeon.get_name()])
+        self._liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        self._liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
+        self._treeview.get_selection().select_path(0)
+
+    def get_selected(self):
+        model, rowiter = self._treeview.get_selection().get_selected()
+        if not rowiter: return
+        return model[rowiter][0]
+

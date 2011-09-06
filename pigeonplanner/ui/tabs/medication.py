@@ -26,29 +26,7 @@ from ui.tabs import basetab
 from ui.widgets import date
 from ui.widgets import menus
 from ui.widgets import comboboxes
-
-
-class VaccinationCheck(gtk.CheckButton):
-    """
-    This class subclasses gtk.CheckButton which we will use to display
-    if a pigeon is vaccinated or not. Because this is just an indicator,
-    the user isn't allowed to change its state.
-
-    We achieve this by overriding the "pressed" and "released" signals
-    and do nothing in them.
-    """
-
-    __gtype_name__ = 'VaccinationCheck'
-
-    def __init__(self):
-        gtk.CheckButton.__init__(self)
-        self.show()
-
-    def do_pressed(self):
-        pass
-
-    def do_released(self):
-        pass
+from ui.widgets import checkbutton
 
 
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
@@ -71,7 +49,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self._selection.connect('changed', self.on_selection_changed)
         self._root.unparent()
         self.dialog.set_transient_for(parent)
-        self.checkvaccination = VaccinationCheck()
+        self.checkvaccination = checkbutton.DisplayCheckButton()
         self.alignvaccination.add(self.checkvaccination)
 
     # Callbacks

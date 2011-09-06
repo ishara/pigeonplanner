@@ -23,10 +23,12 @@ import gtk
 import gtk.gdk
 
 import const
+import errors
+import messages
 
 
 class DateEntry(gtk.Viewport):
-    def __init__(self, editable=True):
+    def __init__(self, editable=True, clear=False):
         gtk.Viewport.__init__(self)
 
         self._entry = gtk.Entry()
@@ -35,8 +37,9 @@ class DateEntry(gtk.Viewport):
         self._entry.set_alignment(.5)
         self._entry.connect('icon-press', self.on_icon_pressed)
 
-        today = datetime.datetime.today()
-        self._entry.set_text(today.strftime(const.DATE_FORMAT))
+        if not clear:
+            today = datetime.datetime.today()
+            self._entry.set_text(today.strftime(const.DATE_FORMAT))
 
         self.set_editable(editable)
         self.add(self._entry)
@@ -56,12 +59,23 @@ class DateEntry(gtk.Viewport):
     def set_text(self, text):
         self._entry.set_text(text)
 
-    def get_text(self):
-        return self._entry.get_text()
+    def get_text(self, validate=True, can_empty=False):
+        date = self._entry.get_text()
+        if validate:
+            self.__validate(date, can_empty)
+        return date
 
     def grab_focus(self):
         self._entry.grab_focus()
         self._entry.set_position(-1)
+
+    def __validate(self, date, can_empty=False):
+        if can_empty and date == '':
+            return
+        try:
+            datetime.datetime.strptime(date, const.DATE_FORMAT)
+        except ValueError:
+            raise errors.InvalidInputError(messages.MSG_INVALID_FORMAT)
 
 
 class CalendarPopup(gtk.Window):

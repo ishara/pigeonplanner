@@ -212,6 +212,16 @@ def get_pindex_from_band(band, year):
 
     return band+year
 
+def get_pindex_from_band_string(bandstring):
+    """
+    Create the pindex from a pigeons bandstring
+
+    @param bandstring: The pigeons bandstring
+    """
+
+    band, year = bandstring.split('/')
+    return get_pindex_from_band(band.strip(), year.strip())
+
 def get_band_from_pindex(pindex):
     """
     Retrieve the pigeons band and year from a pindex

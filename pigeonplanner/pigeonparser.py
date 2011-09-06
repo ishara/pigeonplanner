@@ -66,10 +66,14 @@ class PigeonParser(object):
         self.pigeons[pobj.pindex] = pobj
         return pobj
 
-    def add_empty_pigeon(self, pindex, sex, visible=True):
+    def add_empty_pigeon(self, pindex, sex, visible=True, sire='', dam=''):
+        if pindex == '':
+            raise ValueError
         band, year = common.get_band_from_pindex(pindex)
+        sband, syear = common.get_band_from_pindex(sire)
+        dband, dyear = common.get_band_from_pindex(dam)
         data = [pindex, band, year, str(sex), int(visible), 1, '', '', '', '',
-                '', '', '', '', '', '', '', '', '', '', '']
+                '', sband, syear, dband, dyear, '', '', '', '', '', '']
         rowid = self.database.insert_into_table(self.database.PIGEONS, data)
         data.insert(0, rowid)
         pobj = self.add_pigeon(data)
@@ -131,6 +135,12 @@ class Pigeon(object):
 
     def get_sex_string(self):
         return common.get_sex(self.sex)
+
+    def is_cock(self):
+        return int(self.sex) == const.SIRE
+
+    def is_hen(self):
+        return int(self.sex) == const.DAM
 
     def get_visible(self):
         return self.show

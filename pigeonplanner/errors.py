@@ -16,10 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from ui.tabs.pedigree import PedigreeTab
-from ui.tabs.relatives import RelativesTab
-from ui.tabs.results import ResultsTab
-from ui.tabs.breeding import BreedingTab
-from ui.tabs.media import MediaTab
-from ui.tabs.medication import MedicationTab
+class InvalidInputError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
 

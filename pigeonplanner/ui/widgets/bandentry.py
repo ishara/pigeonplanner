@@ -18,6 +18,10 @@
 
 import gtk
 
+import common
+import errors
+import messages
+
 
 class BandEntry(gtk.Viewport):
     def __init__(self, editable=False):
@@ -49,14 +53,37 @@ class BandEntry(gtk.Viewport):
         self._entryyear.set_has_frame(editable)
         self._entryyear.set_editable(editable)
 
+    def set_pindex(self, pindex):
+        self.set_band(*common.get_band_from_pindex(pindex))
+
     def set_band(self, band, year):
         self._entryband.set_text(band)
         self._entryyear.set_text(year)
 
-    def get_band(self):
-        return self._entryband.get_text(), self._entryyear.get_text()
+    def get_pindex(self, validate=True, can_empty=False):
+        band, year = self.get_band(validate, can_empty)
+        return common.get_pindex_from_band(band, year)
+
+    def get_band(self, validate=True, can_empty=False):
+        band, year = self._entryband.get_text(), self._entryyear.get_text()
+        if validate:
+            self.__validate(band, year, can_empty)
+        return band, year
 
     def grab_focus(self):
         self._entryband.grab_focus()
         self._entryband.set_position(-1)
+
+    def __validate(self, band, year, can_empty=False):
+        if can_empty and (band == '' and year == ''):
+            return
+
+        if not band or not year:
+            raise errors.InvalidInputError(messages.MSG_EMPTY_FIELDS)
+
+        elif not year.isdigit():
+            raise errors.InvalidInputError(messages.MSG_INVALID_NUMBER)
+
+        elif not len(year) == 4:
+            raise errors.InvalidInputError(messages.MSG_INVALID_LENGTH)
 
