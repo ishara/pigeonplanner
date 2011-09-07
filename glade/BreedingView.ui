@@ -95,7 +95,7 @@
                               <object class="GtkLabel" id="label24">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Date</property>
+                                <property name="label" translatable="yes">Date*</property>
                                 <property name="use_markup">True</property>
                               </object>
                             </child>
@@ -148,7 +148,7 @@
                               <object class="GtkLabel" id="label25">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Mate</property>
+                                <property name="label" translatable="yes">Mate*</property>
                                 <property name="use_markup">True</property>
                               </object>
                             </child>
