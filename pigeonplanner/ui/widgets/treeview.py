@@ -26,7 +26,10 @@ FILTER = 0
 SEARCH = 1
 
 
-class TreeView(gtk.TreeView):
+class MainTreeView(gtk.TreeView):
+
+    __gtype_name__ = 'MainTreeView'
+
     def __init__(self, parser, options):
         gtk.TreeView.__init__(self)
 

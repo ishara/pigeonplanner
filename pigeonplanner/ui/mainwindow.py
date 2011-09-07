@@ -59,7 +59,7 @@ class MainWindow(builder.GtkBuilder):
         self.database = database
         self.parser = parser
 
-        self.treeview = treeview.TreeView(self.parser, self.options)
+        self.treeview = treeview.MainTreeView(self.parser, self.options)
         self.treeview.connect('button-press-event', self.on_treeview_press)
         self.scrolledwindow.add(self.treeview)
         self.selection = self.treeview.get_selection()

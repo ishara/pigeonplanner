@@ -24,6 +24,9 @@ import messages
 
 
 class BandEntry(gtk.Viewport):
+
+    __gtype_name__ = 'BandEntry'
+
     def __init__(self, editable=False):
         gtk.Viewport.__init__(self)
         self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)

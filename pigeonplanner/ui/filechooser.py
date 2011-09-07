@@ -107,6 +107,9 @@ class _FileChooserDialog(gtk.FileChooserDialog, _FileChooser):
 
 
 class ImageChooser(_FileChooserDialog):
+
+    __gtype_name__ = 'ImageChooser'
+
     RESPONSE_CLEAR = -40
     def __init__(self, parent):
         super(ImageChooser, self).__init__(parent, glib.get_user_special_dir(
@@ -120,6 +123,9 @@ class ImageChooser(_FileChooserDialog):
 
 
 class MediaChooser(_FileChooserDialog):
+
+    __gtype_name__ = 'MediaChooser'
+
     def __init__(self, parent):
         super(MediaChooser, self).__init__(parent)
         self.connect('selection-changed', self._selection_changed_cb)
@@ -162,6 +168,9 @@ class MediaChooser(_FileChooserDialog):
 
 
 class PdfSaver(_FileChooserDialog):
+
+    __gtype_name__ = 'PdfSaver'
+
     def __init__(self, parent, pdf_name):
         super(PdfSaver, self).__init__(parent, preview=False,
                                        action=gtk.FILE_CHOOSER_ACTION_SAVE)
@@ -182,6 +191,9 @@ class _FileChooserButton(gtk.FileChooserButton, _FileChooser):
 
 
 class ResultChooser(_FileChooserButton):
+
+    __gtype_name__ = 'ResultChooser'
+
     def __init__(self):
         super(ResultChooser, self).__init__(preview=False)
         self.set_title(_("Select a file..."))
@@ -189,6 +201,9 @@ class ResultChooser(_FileChooserButton):
 
 
 class BackupSaver(_FileChooserButton):
+
+    __gtype_name__ = 'BackupSaver'
+
     def __init__(self):
         super(BackupSaver, self).__init__(preview=False,
                                 action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
@@ -196,6 +211,9 @@ class BackupSaver(_FileChooserButton):
 
 
 class BackupChooser(_FileChooserButton):
+
+    __gtype_name__ = 'BackupChooser'
+
     def __init__(self):
         super(BackupChooser, self).__init__(preview=False)
         self.set_title(_("Select a file..."))

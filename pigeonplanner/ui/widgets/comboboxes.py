@@ -71,6 +71,9 @@ def fill_combobox(combobox, items, active=0, sort=True):
 
 
 class SexCombobox(gtk.ComboBox):
+
+    __gtype_name__ = 'SexCombobox'
+
     def __init__(self):
         store = gtk.ListStore(str, str)
         gtk.ComboBox.__init__(self, store)
@@ -85,6 +88,9 @@ class SexCombobox(gtk.ComboBox):
 
 
 class StatusCombobox(gtk.ComboBox):
+
+    __gtype_name__ = 'StatusCombobox'
+
     def __init__(self):
         store = gtk.ListStore(str)
         gtk.ComboBox.__init__(self, store)

@@ -28,6 +28,9 @@ import messages
 
 
 class DateEntry(gtk.Viewport):
+
+    __gtype_name__ = 'DateEntry'
+
     def __init__(self, editable=True, clear=False):
         gtk.Viewport.__init__(self)
 
@@ -79,6 +82,9 @@ class DateEntry(gtk.Viewport):
 
 
 class CalendarPopup(gtk.Window):
+
+    __gtype_name__ = 'CalendarPopup'
+
     def __init__(self, entry):
         gtk.Window.__init__(self, gtk.WINDOW_POPUP)
         self.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_DIALOG)
