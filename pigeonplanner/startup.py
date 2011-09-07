@@ -92,10 +92,8 @@ class Startup(object):
             os.mkdir(const.THUMBDIR)
 
     def setup_locale(self):
-        import intl
-
-        language = self.options.language
-        intl.install(const.DOMAIN, const.LANGDIR, language)
+        import translation
+        translation.setup(self.options.language)
 
     def setup_logging(self):
         """
@@ -145,6 +143,7 @@ class Startup(object):
             themefile = os.path.join(themedir, theme, 'gtk-2.0\\gtkrc')
             gtk.rc_parse(themefile)
 
+        from translation import gettext as _
         # Register custom stock icons
         common.create_stock_button([
                 ('icon_pedigree_detail.png', 'pedigree-detail', _('Pedigree')),

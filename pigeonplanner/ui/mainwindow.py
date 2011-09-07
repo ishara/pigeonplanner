@@ -49,6 +49,7 @@ from ui import pedigreewindow
 from ui.widgets import menus
 from ui.widgets import treeview
 from ui.widgets import comboboxes
+from translation import gettext as _
 
 
 class MainWindow(builder.GtkBuilder):

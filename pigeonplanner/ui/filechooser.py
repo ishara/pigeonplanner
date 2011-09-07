@@ -23,6 +23,7 @@ import glib
 
 import mime
 import const
+from translation import gettext as _
 
 
 #### Main filechooser

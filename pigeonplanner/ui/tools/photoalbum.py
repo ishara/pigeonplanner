@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 
 import builder
 from ui.widgets import menus
+from translation import gettext as _
 
 
 MARGIN = 6

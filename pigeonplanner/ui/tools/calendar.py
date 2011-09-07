@@ -25,6 +25,7 @@ import checks
 import builder
 from ui import dialogs
 from ui.widgets import date
+from translation import gettext as _
 
 
 class Calendar(builder.GtkBuilder):

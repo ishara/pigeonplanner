@@ -23,6 +23,7 @@ import const
 from ui.tabs import basetab
 from ui.widgets import menus
 from ui.detailsview import DetailsDialog
+from translation import gettext as _
 
 
 class RelativesTab(basetab.BaseTab):

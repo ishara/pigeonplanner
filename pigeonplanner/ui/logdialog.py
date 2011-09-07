@@ -28,6 +28,8 @@ import gobject
 
 import const
 from ui import maildialog
+from translation import gettext as _
+
 
 SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]
 COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow",

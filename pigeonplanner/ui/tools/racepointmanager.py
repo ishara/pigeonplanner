@@ -24,6 +24,7 @@ import checks
 import builder
 from ui.widgets import comboboxes
 from datamanager import DataManager
+from translation import gettext as _
 
 
 class RacepointManager(builder.GtkBuilder):

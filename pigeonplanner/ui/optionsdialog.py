@@ -30,6 +30,7 @@ import builder
 import messages
 from ui import dialogs
 from ui.widgets import comboboxes
+from translation import gettext as _
 
 
 class OptionsDialog(builder.GtkBuilder):

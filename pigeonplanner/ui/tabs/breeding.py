@@ -30,6 +30,7 @@ from ui.widgets import bandentry
 from ui.widgets import checkbutton
 from ui.dialogs import PigeonListDialog
 from ui.detailsview import DetailsDialog
+from translation import gettext as _
 
 
 class BreedingTab(builder.GtkBuilder, basetab.BaseTab):

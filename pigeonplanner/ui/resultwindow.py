@@ -34,6 +34,7 @@ from ui import dialogs
 from ui import maildialog
 from ui.widgets import menus
 from ui.widgets import comboboxes
+from translation import gettext as _
 
 
 (KEY,

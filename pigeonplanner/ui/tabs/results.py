@@ -30,6 +30,7 @@ from ui.tabs import basetab
 from ui.widgets import date
 from ui.widgets import menus
 from ui.widgets import comboboxes
+from translation import gettext as _
 
 
 class ResultsTab(builder.GtkBuilder, basetab.BaseTab):

@@ -29,6 +29,7 @@ import thumbnail
 from ui import dialogs
 from ui import filechooser
 from ui.tabs import basetab
+from translation import gettext as _
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):

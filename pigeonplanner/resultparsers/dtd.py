@@ -21,6 +21,7 @@ import datetime
 import const
 import common
 from baseparser import BaseParser
+from translation import gettext as _
 
 
 def expand_year(year):

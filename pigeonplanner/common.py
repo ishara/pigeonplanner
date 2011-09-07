@@ -37,6 +37,7 @@ import glib
 import gobject
 
 import const
+from translation import gettext as _
 
 
 def get_distance_units():

@@ -38,6 +38,7 @@ from ui.widgets import date
 from ui.widgets import menus
 from ui.widgets import bandentry
 from ui.widgets import comboboxes
+from translation import gettext as _
 
 
 class PigeonAlreadyExists(Exception): pass

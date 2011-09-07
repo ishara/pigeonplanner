@@ -21,6 +21,7 @@ import math
 import gtk
 
 from ui.widgets import menus
+from translation import gettext as _
 
 
 PRINTER_DPI = 72.0

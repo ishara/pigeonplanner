@@ -27,6 +27,7 @@ from ui.widgets import date
 from ui.widgets import menus
 from ui.widgets import comboboxes
 from ui.widgets import checkbutton
+from translation import gettext as _
 
 
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):

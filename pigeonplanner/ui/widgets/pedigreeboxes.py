@@ -26,6 +26,7 @@ import gtk
 import const
 import common
 import thumbnail
+from translation import gettext as _
 
 
 class PedigreeBox_cairo(gtk.DrawingArea):

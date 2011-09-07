@@ -21,6 +21,7 @@
 import gtk
 
 import common
+from translation import gettext as _
 
 
 def set_entry_completion(widget):

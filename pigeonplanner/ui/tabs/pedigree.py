@@ -19,6 +19,7 @@
 import gtk
 
 from ui.tabs import basetab
+from translation import gettext as _
 
 
 class PedigreeTab(basetab.BaseTab):

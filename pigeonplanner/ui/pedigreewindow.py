@@ -31,6 +31,7 @@ import printing
 from ui import tools
 from ui import maildialog
 from ui.widgets import menus
+from translation import gettext as _
 
 
 class PedigreeWindow(builder.GtkBuilder):

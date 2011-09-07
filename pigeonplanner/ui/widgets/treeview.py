@@ -20,6 +20,7 @@ import gtk
 
 from ui import dialogs
 from ui.widgets import comboboxes
+from translation import gettext as _
 
 
 FILTER = 0

@@ -30,6 +30,7 @@ import backup
 import messages
 from ui import filechooser
 from ui.widgets import comboboxes
+from translation import gettext as _
 
 
 class MessageDialog(gtk.MessageDialog):
