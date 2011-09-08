@@ -16,22 +16,13 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 """
-Provides functions to check band and year entries
+Provides functions to check various entries
 """
 
 
-import datetime
-
 import const
+import errors
 import messages
-
-
-class InvalidInputError(Exception):
-    def __init__(self, value):
-        self.value = value
-
-    def __str__(self):
-        return repr(self.value)
 
 
 def check_ring_entry(inputRing, inputYear):
@@ -43,19 +34,13 @@ def check_ring_entry(inputRing, inputYear):
     """
 
     if not inputRing or not inputYear:
-        raise InvalidInputError(messages.MSG_EMPTY_FIELDS)
+        raise errors.InvalidInputError(messages.MSG_EMPTY_FIELDS)
 
     elif not inputYear.isdigit():
-        raise InvalidInputError(messages.MSG_INVALID_NUMBER)
+        raise errors.InvalidInputError(messages.MSG_INVALID_NUMBER)
 
     elif not len(inputYear) == 4:
-        raise InvalidInputError(messages.MSG_INVALID_LENGTH)
-
-def check_date_input(date):
-    try:
-        datetime.datetime.strptime(date, const.DATE_FORMAT)
-    except ValueError:
-        raise InvalidInputError(messages.MSG_INVALID_FORMAT)
+        raise errors.InvalidInputError(messages.MSG_INVALID_LENGTH)
 
 def check_lat_long(value):
     # Accepted values are:
@@ -69,7 +54,7 @@ def check_lat_long(value):
         return
     if __check_dms_repr(value) is not None: 
         return
-    raise InvalidInputError(value)
+    raise errors.InvalidInputError(value)
 
 def __check_float_repr(value):
     value = value.replace(u'°', u'')

@@ -20,7 +20,7 @@ import gtk
 
 import const
 import common
-import checks
+import errors
 import builder
 import messages
 from ui import dialogs
@@ -227,7 +227,11 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         return list(model[rowiter])
 
     def _get_data(self):
-        date = self.entrydate.get_text()
+        try:
+            date = self.entrydate.get_text()
+        except errors.InvalidInputError, msg:
+            dialogs.MessageDialog(const.ERROR, msg.value, self.dialog)
+            return
         point = self.comboracepoint.child.get_text()
         place = self.spinplaced.get_value_as_int()
         out = self.spinoutof.get_value_as_int()
@@ -241,12 +245,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         if not date or not point or not place or not out:
             dialogs.MessageDialog(const.ERROR, messages.MSG_EMPTY_DATA,
                                   self.dialog)
-            return None
-        try:
-            checks.check_date_input(date)
-        except checks.InvalidInputError, msg:
-            dialogs.MessageDialog(const.ERROR, msg.value, self.dialog)
-            return None
+            return
         return [date, point, place, out, sector, ftype, category,
                 wind, weather, comment]
 

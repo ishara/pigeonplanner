@@ -21,7 +21,7 @@ import time
 import gtk
 
 import const
-import checks
+import errors
 import builder
 from ui import dialogs
 from ui.widgets import date
@@ -83,13 +83,12 @@ class Calendar(builder.GtkBuilder):
         self._selection.select_path(path)
 
     def on_buttonsave_clicked(self, widget):
-        data = self._get_entry_data()
-        date_, type_ = data[0], data[1]
         try:
-            checks.check_date_input(date_)
-        except checks.InvalidInputError, msg:
+            data = self._get_entry_data()
+        except errors.InvalidInputError, msg:
             dialogs.MessageDialog(const.ERROR, msg.value, self.calendarwindow)
             return
+        date_, type_ = data[0], data[1]
         self._set_widgets(False)
         if self._mode == const.ADD:
             rowid = self.db.insert_into_table(self.db.EVENTS, data)

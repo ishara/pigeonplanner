@@ -26,7 +26,6 @@ import gobject
 
 import const
 import common
-import checks
 import errors
 import builder
 import messages
@@ -145,18 +144,11 @@ class DetailsView(builder.GtkBuilder):
 
     # Callbacks
     def on_buttonsave_clicked(self, widget):
-        entries = [self.entrybandedit, self.entrysireedit, self.entrydamedit]
-        for entry in entries:
-            ring, year = entry.get_band()
-            # Sire and dam input are not required
-            if (ring == '' and year == '') and entry != self.entrybandedit:
-                continue
-            try:
-                checks.check_ring_entry(ring, year)
-            except checks.InvalidInputError, msg:
-                dialogs.MessageDialog(const.ERROR, msg.value, self.parent)
-                return
-        data = self.get_details()
+        try:
+            data = self.get_details()
+        except errors.InvalidInputError, msg:
+            dialogs.MessageDialog(const.ERROR, msg.value, self.parent)
+            return
         if self._operation == const.EDIT:
             self._update_pigeon_data(data)
             old_pindex = self.pigeon.get_pindex()
@@ -299,8 +291,8 @@ class DetailsView(builder.GtkBuilder):
 
     def get_details(self):
         ring, year = self.entrybandedit.get_band()
-        ringsire, yearsire = self.entrysireedit.get_band()
-        ringdam, yeardam = self.entrydamedit.get_band()
+        ringsire, yearsire = self.entrysireedit.get_band(can_empty=True)
+        ringdam, yeardam = self.entrydamedit.get_band(can_empty=True)
         if self.pigeon is None:
             show = 0 if self.pedigree_mode else 1
         else:
@@ -355,9 +347,9 @@ class DetailsView(builder.GtkBuilder):
         self._operation = operation
         if operation == const.EDIT:
             logger.debug("Start editing pigeon '%s'", self.pigeon.get_pindex())
-            self.entrybandedit.set_band(*self.entryband.get_band())
-            self.entrysireedit.set_band(*self.entrysire.get_band())
-            self.entrydamedit.set_band(*self.entrydam.get_band())
+            self.entrybandedit.set_band(*self.entryband.get_band(validate=False))
+            self.entrysireedit.set_band(*self.entrysire.get_band(validate=False))
+            self.entrydamedit.set_band(*self.entrydam.get_band(validate=False))
             self.entrynameedit.set_text(self.entryname.get_text())
             self.entryextraedit1.set_text(self.entryextra1.get_text())
             self.entryextraedit2.set_text(self.entryextra2.get_text())
