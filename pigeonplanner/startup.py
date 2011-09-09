@@ -164,8 +164,8 @@ class Startup(object):
             self.db.check_schema()
         except KeyError:
             import messages
-            from ui.dialogs import MessageDialog
-            MessageDialog(const.ERROR, messages.MSG_NEW_DATABASE, None)
+            from ui.messagedialog import ErrorDialog
+            ErrorDialog(messages.MSG_NEW_DATABASE)
             raise SystemExit()
 
     def setup_pigeons(self):
@@ -194,10 +194,9 @@ class Startup(object):
 
     def update_dialog(self):
         import messages
-        from ui.dialogs import MessageDialog
+        from ui.messagedialog import QuestionDialog
 
-        d = MessageDialog(const.QUESTION, messages.MSG_UPDATE_NOW, None)
-        if d.yes:
+        if QuestionDialog(messages.MSG_UPDATE_NOW).run():
             webbrowser.open(const.DOWNLOADURL)
 
         return False

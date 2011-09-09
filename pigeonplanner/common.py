@@ -255,18 +255,18 @@ def escape_text(text):
     return glib.markup_escape_text(text)
 
 def open_file(path):
-    from ui.dialogs import MessageDialog
+    from ui.messagedialog import ErrorDialog
 
     norm_path = unicode(os.path.normpath(path), 'utf-8')
     if not os.path.exists(norm_path):
-        MessageDialog(const.ERROR, (_("Error: This file does not exist"), None, _("Error")))
+        ErrorDialog((_("Error: This file does not exist"), None, _("Error")))
         return
 
     if const.WINDOWS:
         try:
             os.startfile(norm_path)
         except WindowsError, exc:
-            MessageDialog(const.ERROR, (_("Error opening file:"), str(exc), _("Error")))
+            ErrorDialog((_("Error opening file:"), str(exc), _("Error")))
     else:
         if const.OSX:
             utility = 'open'

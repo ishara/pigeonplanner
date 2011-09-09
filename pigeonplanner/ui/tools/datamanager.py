@@ -21,8 +21,8 @@ import gtk
 import const
 import builder
 import messages
-from ui import dialogs
 from ui.widgets import comboboxes
+from ui.messagedialog import QuestionDialog
 from translation import gettext as _
 
 
@@ -59,9 +59,8 @@ class DataManager(builder.GtkBuilder):
     def on_buttonremove_clicked(self, widget):
         dataset = unicode(self.comboset.get_active_text())
         item = self.comboitem.get_active_text()
-        d = dialogs.MessageDialog(const.QUESTION, messages.MSG_REMOVE_ITEM,
-                                  self.window, (item, dataset))
-        if d.yes:
+        if QuestionDialog(messages.MSG_REMOVE_ITEM,
+                          self.window, (item, dataset)).run():
             self.database.delete_from_table(self.tables[dataset], item)
             index = self.comboitem.get_active()
             self.comboitem.remove_text(index)

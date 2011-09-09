@@ -23,7 +23,7 @@ import gtk
 import const
 import errors
 import builder
-from ui import dialogs
+from ui.messagedialog import ErrorDialog
 from translation import gettext as _
 
 
@@ -82,7 +82,7 @@ class Calendar(builder.GtkBuilder):
         try:
             data = self._get_entry_data()
         except errors.InvalidInputError, msg:
-            dialogs.MessageDialog(const.ERROR, msg.value, self.calendarwindow)
+            ErrorDialog(msg.value, self.calendarwindow)
             return
         date_, type_ = data[0], data[1]
         self._set_widgets(False)

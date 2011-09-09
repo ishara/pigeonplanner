@@ -31,10 +31,10 @@ except:
 
 import const
 import messages
-from ui import dialogs
 from ui.widgets import menus
 from ui.widgets import pedigreeboxes
 from ui.detailsview import DetailsDialog
+from ui.messagedialog import InfoDialog
 
 
 #FIXME: Cairo-drawn boxes don't show up on Mac OS X
@@ -225,7 +225,7 @@ class DrawPedigree(object):
     def _select_pigeon(self, widget, pigeon, parent):
         pindex = pigeon.get_pindex()
         if not self.treeview.select_pigeon(None, pindex):
-            dialogs.MessageDialog(const.INFO, messages.MSG_NO_PIGEON, parent)
+            InfoDialog(messages.MSG_NO_PIGEON, parent)
 
     def _edit_child(self, pigeon, child, clear=False):
         if clear:

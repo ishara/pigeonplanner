@@ -23,12 +23,12 @@ import common
 import errors
 import builder
 import messages
-from ui import dialogs
 from ui import resultwindow
 from ui import resultparser
 from ui.tabs import basetab
 from ui.widgets import menus
 from ui.widgets import comboboxes
+from ui.messagedialog import ErrorDialog, QuestionDialog
 from translation import gettext as _
 
 
@@ -113,10 +113,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         path = self.liststore.get_path(rowiter)
         rowid = model[rowiter][self.COL_ID]
 
-        d = dialogs.MessageDialog(const.QUESTION,
-                                  messages.MSG_REMOVE_RESULT,
-                                  self.parent)
-        if not d.yes:
+        if not QuestionDialog(messages.MSG_REMOVE_RESULT, self.parent).run():
             return
 
         self.database.delete_from_table(self.database.RESULTS, rowid, 0)
@@ -140,8 +137,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         if self._mode == const.ADD:
             data.insert(0, self.pindex)
             if self.database.has_result(data):
-                dialogs.MessageDialog(const.ERROR, messages.MSG_RESULT_EXISTS,
-                                      self.parent)
+                ErrorDialog(messages.MSG_RESULT_EXISTS, self.parent)
                 return
             rowid = self.database.insert_into_table(self.database.RESULTS, data)
             rowiter = self.liststore.insert(0, [rowid, date, point, place,
@@ -227,7 +223,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         try:
             date = self.entrydate.get_text()
         except errors.InvalidInputError, msg:
-            dialogs.MessageDialog(const.ERROR, msg.value, self.dialog)
+            ErrorDialog(msg.value, self.dialog)
             return
         point = self.comboracepoint.child.get_text()
         place = self.spinplaced.get_value_as_int()
@@ -240,8 +236,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         comment = self.entrycomment.get_text()
 
         if not date or not point or not place or not out:
-            dialogs.MessageDialog(const.ERROR, messages.MSG_EMPTY_DATA,
-                                  self.dialog)
+            ErrorDialog(messages.MSG_EMPTY_DATA, self.dialog)
             return
         return [date, point, place, out, sector, ftype, category,
                 wind, weather, comment]

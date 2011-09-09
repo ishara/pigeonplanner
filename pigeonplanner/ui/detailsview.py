@@ -37,6 +37,7 @@ from ui.widgets import date
 from ui.widgets import menus
 from ui.widgets import bandentry
 from ui.widgets import comboboxes
+from ui.messagedialog import ErrorDialog, WarningDialog
 from translation import gettext as _
 
 
@@ -124,7 +125,7 @@ class DetailsView(builder.GtkBuilder):
         try:
             data = self.get_details()
         except errors.InvalidInputError, msg:
-            dialogs.MessageDialog(const.ERROR, msg.value, self.parent)
+            ErrorDialog(msg.value, self.parent)
             return
         if self._operation == const.EDIT:
             self._update_pigeon_data(data)
@@ -170,8 +171,7 @@ class DetailsView(builder.GtkBuilder):
                 pb = gtk.gdk.pixbuf_new_from_file_at_size(filename, 200, 200)
             except gobject.GError, exc:
                 logger.error("Can't set image '%s':%s", filename, exc)
-                dialogs.MessageDialog(const.ERROR, messages.MSG_INVALID_IMAGE,
-                                      self.parent)
+                ErrorDialog(messages.MSG_INVALID_IMAGE, self.parent)
             else:
                 self.imagepigeon.set_from_pixbuf(pb)
                 self.imagepigeonedit.set_from_pixbuf(pb)
@@ -453,7 +453,7 @@ class DetailsView(builder.GtkBuilder):
         try:
             pindex = self.entrybandedit.get_pindex()
         except errors.InvalidInputError:
-            dialogs.MessageDialog(const.ERROR, messages.MSG_NO_PARENT, self.parent)
+            ErrorDialog(messages.MSG_NO_PARENT, self.parent)
             return
         band, year = self.entrybandedit.get_band()
         dialog = dialogs.PigeonListDialog(self.parent)
@@ -523,15 +523,11 @@ class DetailsView(builder.GtkBuilder):
         if self.database.has_pigeon(pindex):
             if self.parser.pigeons[pindex].show == 1:
                 # The pigeon already exists, don't add it
-                dialogs.MessageDialog(const.ERROR, messages.MSG_PIGEON_EXISTS,
-                                      self.parent)
+                ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
                 raise PigeonAlreadyExists(pindex)
             else:
                 # The pigeon exists, but doesn't show, ask to show again
-                d = dialogs.MessageDialog(const.WARNING,
-                                          messages.MSG_SHOW_PIGEON,
-                                          self.parent)
-                if d.yes:
+                if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
                     self.parser.show = 1
                     self.database.update_table(self.database.PIGEONS,
                                                (1, pindex), 5, 1)

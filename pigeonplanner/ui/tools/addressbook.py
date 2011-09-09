@@ -21,7 +21,7 @@ import gtk
 import const
 import builder
 import messages
-from ui import dialogs
+from ui.messagedialog import QuestionDialog
 
 
 def check_user_info(parent, database, name):
@@ -34,8 +34,7 @@ def check_user_info(parent, database, name):
     """
 
     if name == '':
-        d = dialogs.MessageDialog(const.QUESTION, messages.MSG_NO_INFO, parent)
-        if d.yes:
+        if QuestionDialog(messages.MSG_NO_INFO, parent).run():
             book = AddressBook(parent, database)
             book.on_buttonadd_clicked(None)
             book.checkme.set_active(True)
@@ -79,10 +78,8 @@ class AddressBook(builder.GtkBuilder):
         path = self.liststore.get_path(rowiter)
         key, name = model[rowiter][0], model[rowiter][1]
 
-        d = dialogs.MessageDialog(const.QUESTION,
-                                  messages.MSG_REMOVE_ADDRESS,
-                                  self.addressbookwindow, name)
-        if not d.yes:
+        if not QuestionDialog(messages.MSG_REMOVE_ADDRESS,
+                              self.addressbookwindow, name).run():
             return
 
         self.db.delete_from_table(self.db.ADDR, key, 0)

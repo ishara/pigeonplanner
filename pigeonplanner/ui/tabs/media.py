@@ -21,14 +21,13 @@ import os
 import gtk
 
 import mime
-import const
 import common
 import builder
 import messages
 import thumbnail
-from ui import dialogs
 from ui import filechooser
 from ui.tabs import basetab
+from ui.messagedialog import QuestionDialog
 from translation import gettext as _
 
 
@@ -84,10 +83,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         chooser.destroy()
 
     def on_buttonremove_clicked(self, widget):
-        d = dialogs.MessageDialog(const.QUESTION,
-                                  messages.MSG_REMOVE_MEDIA,
-                                  self.parent)
-        if not d.yes:
+        if QuestionDialog(messages.MSG_REMOVE_MEDIA, self.parent).run():
             return
 
         model, rowiter = self._selection.get_selected()

@@ -28,7 +28,7 @@ import common
 import builder
 import messages
 import mailing
-from ui import dialogs
+from ui.messagedialog import ErrorDialog
 from translation import gettext as _
 
 
@@ -111,8 +111,7 @@ class MailDialog(builder.GtkBuilder):
 
     def on_send_clicked(self, widget):
         if not self.entry_to.get_text() or not self.entry_mail.get_text():
-            dialogs.MessageDialog(const.ERROR, messages.MSG_NEED_EMAIL,
-                                  self.maildialog)
+            ErrorDialog(messages.MSG_NEED_EMAIL, self.maildialog)
             return
 
         self.progressbar.show()

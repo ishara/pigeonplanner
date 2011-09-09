@@ -26,8 +26,8 @@ import const
 import common
 import builder
 import messages
-from ui import dialogs
 from ui import logdialog
+from ui.messagedialog import WarningDialog
 from translation import gettext as _
 
 
@@ -124,9 +124,7 @@ class DBWindow(builder.GtkBuilder):
     def on_button_delete_clicked(self, widget):
         logger.debug(common.get_function_name())
         self.__set_image(self.image_delete, EXECUTE)
-        d = dialogs.MessageDialog(const.WARNING, messages.MSG_REMOVE_DATABASE,
-                                  self.dbwindow)
-        if d.yes:
+        if WarningDialog(messages.MSG_REMOVE_DATABASE, self.dbwindow).run():
             try:
                 self.database.close()
                 os.remove(const.DATABASE)

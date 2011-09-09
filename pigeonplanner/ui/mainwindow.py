@@ -48,6 +48,7 @@ from ui import optionsdialog
 from ui import pedigreewindow
 from ui.widgets import menus
 from ui.widgets import treeview
+from ui.messagedialog import ErrorDialog, InfoDialog, WarningDialog, QuestionDialog
 from translation import gettext as _
 
 
@@ -116,9 +117,8 @@ class MainWindow(builder.GtkBuilder):
             description = events[0][2]
             if len(description) > 25:
                 description = description[:24]+"..."
-            d = dialogs.MessageDialog(const.QUESTION, messages.MSG_EVENT_NOTIFY,
-                                      self.mainwindow, description)
-            if d.yes:
+            if QuestionDialog(messages.MSG_EVENT_NOTIFY,
+                              self.mainwindow, description).run():
                 tools.Calendar(self.mainwindow, self.database, events[0][0])
 
     def quit_program(self, widget=None, event=None, bckp=True):
@@ -135,13 +135,9 @@ class MainWindow(builder.GtkBuilder):
             daysInSeconds = self.options.interval * 24 * 60 * 60
             if time.time() - self.options.last >= daysInSeconds:
                 if backup.make_backup(self.options.location):
-                    dialogs.MessageDialog(const.INFO,
-                                          messages.MSG_BACKUP_SUCCES,
-                                          self.mainwindow)
+                    InfoDialog(messages.MSG_BACKUP_SUCCES, self.mainwindow)
                 else:
-                    dialogs.MessageDialog(const.INFO,
-                                          messages.MSG_BACKUP_FAILED,
-                                          self.mainwindow)
+                    InfoDialog(messages.MSG_BACKUP_FAILED, self.mainwindow)
                 self.options.set_option('Backup', 'last', time.time())
         gtk.main_quit()
 
@@ -413,18 +409,15 @@ class MainWindow(builder.GtkBuilder):
 
         title = _("Search for updates...")
         if new:
-            d = dialogs.MessageDialog(const.QUESTION,
-                                      (msg, _("Go to the website?"), title),
-                                      self.mainwindow)
-            if d.yes:
+            if QuestionDialog((msg, _("Go to the website?"), title),
+                                      self.mainwindow).run():
                 webbrowser.open(const.DOWNLOADURL)
         else:
-            dialogs.MessageDialog(const.INFO, (msg, None, title),
-                                  self.mainwindow)
+            InfoDialog((msg, None, title), self.mainwindow)
 
     def menuinfo_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialogs.InfoDialog(self.mainwindow, self.database)
+        dialogs.InformationDialog(self.mainwindow, self.database)
 
     def menuabout_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -441,11 +434,10 @@ class MainWindow(builder.GtkBuilder):
             checks.check_ring_entry(rangefrom, rangeyear)
             checks.check_ring_entry(rangeto, rangeyear)
         except checks.InvalidInputError, msg:
-            dialogs.MessageDialog(const.ERROR, msg.value, self.mainwindow)
+            ErrorDialog(msg.value, self.mainwindow)
             return
         if not rangefrom.isdigit() or not rangeto.isdigit():
-            dialogs.MessageDialog(const.ERROR, messages.MSG_INVALID_RANGE,
-                                  self.mainwindow)
+            ErrorDialog(messages.MSG_INVALID_RANGE, self.mainwindow)
             return
 
         logger.debug("Adding a range of pigeons")
@@ -455,10 +447,8 @@ class MainWindow(builder.GtkBuilder):
             pindex = common.get_pindex_from_band(band, rangeyear)
             logger.debug("Range: adding '%s'", pindex)
             if self.database.has_pigeon(pindex):
-                d = dialogs.MessageDialog(const.WARNING,
-                                          messages.MSG_OVERWRITE_PIGEON,
-                                          self.mainwindow)
-                if not d.yes:
+                if not WarningDialog(messages.MSG_OVERWRITE_PIGEON,
+                                     self.mainwindow).run():
                     continue
             pigeon = self.parser.add_empty_pigeon(pindex, rangesex)
             row = [pigeon, pindex, band, rangeyear, '', '',

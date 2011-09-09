@@ -23,11 +23,11 @@ import common
 import errors
 import builder
 import database
-from ui import dialogs
 from ui.tabs import basetab
 from ui.widgets import checkbutton
 from ui.dialogs import PigeonListDialog
 from ui.detailsview import DetailsDialog
+from ui.messagedialog import ErrorDialog
 from translation import gettext as _
 
 
@@ -126,7 +126,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             pindex1 = self.bandentryedit1.get_pindex(can_empty=True)
             pindex2 = self.bandentryedit2.get_pindex(can_empty=True)
         except errors.InvalidInputError, msg:
-            dialogs.MessageDialog(const.ERROR, msg.value, self.editdialog)
+            ErrorDialog(msg.value, self.editdialog)
             return
         # Get and check dates
         try:
@@ -136,7 +136,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             laid2 = self.datelaidedit2.get_text(can_empty=True)
             hatched2 = self.datehatchededit2.get_text(can_empty=True)
         except errors.InvalidInputError, msg:
-            dialogs.MessageDialog(const.ERROR, msg.value, self.editdialog)
+            ErrorDialog(msg.value, self.editdialog)
             return
 
         if self.pigeon.is_cock():

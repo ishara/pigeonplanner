@@ -30,48 +30,8 @@ import backup
 import messages
 from ui import filechooser
 from ui.widgets import comboboxes
+from ui.messagedialog import InfoDialog
 from translation import gettext as _
-
-
-class MessageDialog(gtk.MessageDialog):
-    def __init__(self, msgtype, data, parent=None, extra=None):
-        """
-        Display a message dialog.
-
-        @param parent: The parent window
-        @param msgtype: The sort of dialog
-        @param data: Tuple of primary text, secondary text and dialog title
-        @param extra: Extra data to use with a string formatter
-        """
-
-        head, text, title = data
-        if extra:
-            head = head % extra
-
-        if msgtype == const.ERROR:
-            msgtype = gtk.MESSAGE_ERROR
-            buttons = (gtk.STOCK_OK, gtk.RESPONSE_OK)
-        elif msgtype == const.WARNING:
-            msgtype = gtk.MESSAGE_WARNING
-            buttons = (gtk.STOCK_NO, gtk.RESPONSE_NO,
-                       gtk.STOCK_YES, gtk.RESPONSE_YES)
-        elif msgtype == const.QUESTION:
-            msgtype = gtk.MESSAGE_QUESTION
-            buttons = (gtk.STOCK_NO, gtk.RESPONSE_NO,
-                       gtk.STOCK_YES, gtk.RESPONSE_YES)
-            title = head + " - Pigeon Planner"
-        elif msgtype == const.INFO:
-            msgtype = gtk.MESSAGE_INFO
-            buttons = (gtk.STOCK_OK, gtk.RESPONSE_OK)
-
-        gtk.MessageDialog.__init__(self, parent, 0, msgtype, message_format=head)
-        self.format_secondary_text(text)
-        self.set_title(title)
-        self.add_buttons(*buttons)
-
-        response = self.run()
-        self.yes = response == gtk.RESPONSE_YES
-        self.destroy()
 
 
 class AboutDialog(gtk.AboutDialog):
@@ -102,7 +62,7 @@ class AboutDialog(gtk.AboutDialog):
         self.destroy()
 
 
-class InfoDialog(gtk.Dialog):
+class InformationDialog(gtk.Dialog):
     def __init__(self, parent, database):
         gtk.Dialog.__init__(self, _("General information"), parent,
                             gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
@@ -224,7 +184,7 @@ class BackupDialog(gtk.Dialog):
                 msg = messages.MSG_BACKUP_SUCCES
             else:
                 msg = messages.MSG_BACKUP_FAILED
-            MessageDialog(const.INFO, msg, self.par)
+            InfoDialog(msg, self.par)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
@@ -233,7 +193,7 @@ class BackupDialog(gtk.Dialog):
                 msg = messages.MSG_RESTORE_SUCCES
             else:
                 msg = messages.MSG_RESTORE_FAILED
-            MessageDialog(const.INFO, msg, self.par)
+            InfoDialog(msg, self.par)
 
 
 class FilterDialog(gtk.Dialog):

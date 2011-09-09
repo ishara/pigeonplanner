@@ -32,10 +32,10 @@ logger = logging.getLogger(__name__)
 
 import const
 import messages
-from ui import dialogs
 from ui import pedigree
 from ui import filechooser
 from ui import printpreview
+from ui.messagedialog import ErrorDialog
 from translation import gettext as _
 
 
@@ -95,15 +95,12 @@ class BasePrinting(object):
                 response = print_.run(action, self.parent)
             except gobject.GError, e:
                 logger.error("Error in print operation: %s" %e)
-                dialogs.MessageDialog(const.ERROR,
-                                      messages.MSG_PRINTOP_ERROR,
-                                      self.parent)
+                ErrorDialog(messages.MSG_PRINTOP_ERROR, self.parent)
             else:
                 if response == gtk.PRINT_OPERATION_RESULT_ERROR:
                     print_error = print_.get_error()
                     logger.error("Error printing: %s" %print_error)
-                    dialogs.MessageDialog(const.ERROR,
-                                          messages.MSG_PRINT_ERROR)
+                    ErrorDialog(messages.MSG_PRINT_ERROR, self.parent)
                 elif response == gtk.PRINT_OPERATION_RESULT_APPLY:
                     settings = print_.get_print_settings()
 

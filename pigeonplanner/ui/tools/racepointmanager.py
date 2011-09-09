@@ -19,7 +19,6 @@
 import gtk
 import gobject
 
-import common
 import errors
 import builder
 from ui.widgets import comboboxes

@@ -28,8 +28,8 @@ import gobject
 import const
 import builder
 import messages
-from ui import dialogs
 from ui.widgets import comboboxes
+from ui.messagedialog import InfoDialog, WarningDialog
 from translation import gettext as _
 
 
@@ -111,10 +111,7 @@ class OptionsDialog(builder.GtkBuilder):
         widget.set_text('%s %s' % (value, dstring))
 
     def on_buttondefault_clicked(self, widget):
-        d = dialogs.MessageDialog(const.WARNING,
-                                  messages.MSG_DEFAULT_OPTIONS,
-                                  self.optionsdialog)
-        if d.yes:
+        if WarningDialog(messages.MSG_DEFAULT_OPTIONS, self.optionsdialog).run():
             self.options.write_default()
             self._set_options()
             self._finish_options(False, True)
@@ -239,8 +236,7 @@ class OptionsDialog(builder.GtkBuilder):
         self.emit('interface-changed', arrows, stats, toolbar, statusbar)
 
         if restart:
-            dialogs.MessageDialog(const.INFO, messages.MSG_RESTART_APP,
-                                  self.optionsdialog)
+            InfoDialog(messages.MSG_RESTART_APP, self.optionsdialog)
 
         if not set_default:
             self.optionsdialog.destroy()
