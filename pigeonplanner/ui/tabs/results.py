@@ -27,7 +27,6 @@ from ui import dialogs
 from ui import resultwindow
 from ui import resultparser
 from ui.tabs import basetab
-from ui.widgets import date
 from ui.widgets import menus
 from ui.widgets import comboboxes
 from translation import gettext as _
@@ -55,8 +54,6 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.database = database
         self.options = options
         self.parser = parser
-        self.entrydate = date.DateEntry(True)
-        self.table.attach(self.entrydate, 1, 2, 0, 1, 0)
         self._selection = self.treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)
         self.set_columns()

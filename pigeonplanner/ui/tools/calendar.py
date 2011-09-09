@@ -24,7 +24,6 @@ import const
 import errors
 import builder
 from ui import dialogs
-from ui.widgets import date
 from translation import gettext as _
 
 
@@ -40,9 +39,6 @@ class Calendar(builder.GtkBuilder):
         self._entries.append(self._textbuffer)
         self._normalbuttons = [self.buttonadd, self.buttonedit, self.buttonremove]
         self._editbuttons = [self.buttonsave, self.buttoncancel]
-        self.entrydate = date.DateEntry(False)
-        self.entrydate.set_text('')
-        self.framedate.add(self.entrydate)
         self._selection = self.treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)
         self._fill_treeview(notification_id)

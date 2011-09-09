@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
+  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <requires lib="gtk+" version="2.22"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="liststore1">
@@ -245,7 +246,16 @@
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
+                      <object class="DateEntry" id="entrydatedead">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
                     </child>
                     <child>
                       <placeholder/>
@@ -375,7 +385,16 @@
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
+                      <object class="DateEntry" id="entrydatesold">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
                     </child>
                     <child>
                       <placeholder/>
@@ -487,7 +506,16 @@
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
+                      <object class="DateEntry" id="entrydatelost">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
                     </child>
                     <child>
                       <placeholder/>
@@ -987,7 +1015,15 @@
                           </packing>
                         </child>
                         <child>
-                          <placeholder/>
+                          <object class="BandEntry" id="entryband">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </object>
                       <packing>
@@ -998,10 +1034,32 @@
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
+                      <object class="BandEntry" id="entrysire">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">4</property>
+                        <property name="bottom_attach">5</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
                     </child>
                     <child>
-                      <placeholder/>
+                      <object class="BandEntry" id="entrydam">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">5</property>
+                        <property name="bottom_attach">6</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
                     </child>
                     <child>
                       <placeholder/>
@@ -1086,7 +1144,16 @@
                           </packing>
                         </child>
                         <child>
-                          <placeholder/>
+                          <object class="BandEntry" id="entrybandedit">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="editable">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </object>
                       <packing>
@@ -1170,7 +1237,16 @@
                           </packing>
                         </child>
                         <child>
-                          <placeholder/>
+                          <object class="BandEntry" id="entrysireedit">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="editable">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </object>
                       <packing>
@@ -1212,7 +1288,16 @@
                           </packing>
                         </child>
                         <child>
-                          <placeholder/>
+                          <object class="BandEntry" id="entrydamedit">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="editable">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </object>
                       <packing>
@@ -1578,7 +1663,18 @@
                       <placeholder/>
                     </child>
                     <child>
-                      <placeholder/>
+                      <object class="SexCombobox" id="combosex">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
                     </child>
                   </object>
                 </child>

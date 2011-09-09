@@ -1,0 +1,38 @@
+<glade-catalog name="pigeonplannerwidgets" library="gladepython" domain="glade-3" depends="gtk+">
+  <init-function>glade_python_init</init-function>
+
+  <glade-widget-classes>
+    <glade-widget-class title="Band Entry" name="BandEntry" generic-name="bandentry">
+      <properties>
+        <property id="shadow-type" save="False" visible="False"/>
+        <property id="hadjustment" save="False" visible="False"/>
+        <property id="vadjustment" save="False" visible="False"/>
+        <property id="editable" name="Editable" default="False"/>
+      </properties>
+    </glade-widget-class>
+    <glade-widget-class title="Date Entry" name="DateEntry" generic-name="dateentry">
+      <properties>
+        <property id="shadow-type" save="False" visible="False"/>
+        <property id="hadjustment" save="False" visible="False"/>
+        <property id="vadjustment" save="False" visible="False"/>
+        <property id="editable" name="Editable" default="False"/>
+        <property id="clear" name="Clear" default="False"/>
+      </properties>
+    </glade-widget-class>
+    <glade-widget-class title="Display Check" name="DisplayCheckButton" generic-name="displaycheck">
+    </glade-widget-class>
+    <glade-widget-class title="Sex Combobox" name="SexCombobox" generic-name="sexcombo">
+    </glade-widget-class>
+    <glade-widget-class title="Status Combobox" name="StatusCombobox" generic-name="statuscombo">
+    </glade-widget-class>
+  </glade-widget-classes>
+
+  <glade-widget-group name="pigeonplanner" title="Pigeon Planner">
+    <glade-widget-class-ref name="BandEntry"/>
+    <glade-widget-class-ref name="DateEntry"/>
+    <glade-widget-class-ref name="DisplayCheckButton"/>
+    <glade-widget-class-ref name="SexCombobox"/>
+    <glade-widget-class-ref name="StatusCombobox"/>
+  </glade-widget-group>
+
+</glade-catalog>

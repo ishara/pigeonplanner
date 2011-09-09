@@ -23,10 +23,8 @@ import common
 import builder
 from ui import dialogs
 from ui.tabs import basetab
-from ui.widgets import date
 from ui.widgets import menus
 from ui.widgets import comboboxes
-from ui.widgets import checkbutton
 from translation import gettext as _
 
 
@@ -41,17 +39,10 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.main = main
         self._mode = None
         self._expanded = False
-        self.entrydate = date.DateEntry(False)
-        self.entrydate.set_text('')
-        self.alignmentdate.add(self.entrydate)
-        self.entrydate2 = date.DateEntry()
-        self.table.attach(self.entrydate2, 1, 2, 0, 1, 0)
         self._selection = self.treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)
         self._root.unparent()
         self.dialog.set_transient_for(parent)
-        self.checkvaccination = checkbutton.DisplayCheckButton()
-        self.alignvaccination.add(self.checkvaccination)
 
     # Callbacks
     def on_dialog_delete(self, widget, event):

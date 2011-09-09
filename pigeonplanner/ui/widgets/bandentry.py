@@ -17,6 +17,7 @@
 
 
 import gtk
+import gobject
 
 import common
 import errors
@@ -24,22 +25,15 @@ import messages
 
 
 class BandEntry(gtk.Viewport):
-
     __gtype_name__ = 'BandEntry'
-
     def __init__(self, editable=False):
         gtk.Viewport.__init__(self)
-        self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
 
         self._entryband = gtk.Entry()
         self._entryband.set_width_chars(15)
         self._entryband.set_alignment(.5)
         self._entryyear = gtk.Entry(4)
         self._entryyear.set_width_chars(4)
-        if editable:
-            self._entryband.set_activates_default(True)
-            self._entryyear.set_activates_default(True)
-        self.set_editable(editable)
         label = gtk.Label("/")
 
         hbox = gtk.HBox()
@@ -47,14 +41,23 @@ class BandEntry(gtk.Viewport):
         hbox.pack_start(label, False, True, 4)
         hbox.pack_start(self._entryyear, False, True, 0)
 
+        self.editable = editable
         self.add(hbox)
         self.show_all()
 
+    def get_editable(self):
+        return self._editable
+
     def set_editable(self, editable):
+        self._editable = editable
+        self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
+        self._entryband.set_activates_default(editable)
+        self._entryyear.set_activates_default(editable)
         self._entryband.set_has_frame(editable)
         self._entryband.set_editable(editable)
         self._entryyear.set_has_frame(editable)
         self._entryyear.set_editable(editable)
+    editable = gobject.property(get_editable, set_editable, bool, False)
 
     def set_pindex(self, pindex):
         self.set_band(*common.get_band_from_pindex(pindex))

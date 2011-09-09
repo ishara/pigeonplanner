@@ -48,7 +48,6 @@ from ui import optionsdialog
 from ui import pedigreewindow
 from ui.widgets import menus
 from ui.widgets import treeview
-from ui.widgets import comboboxes
 from translation import gettext as _
 
 
@@ -93,9 +92,6 @@ class MainWindow(builder.GtkBuilder):
         self.medicationtab = tabs.MedicationTab(self.mainwindow, self.database,
                                                 self.parser, self)
         self.notebook.append_page(*self.medicationtab.get_tab_widgets())
-
-        self.combosexrange = comboboxes.SexCombobox()
-        self.tablerange.attach(self.combosexrange, 6, 7, 1, 2, gtk.SHRINK, gtk.FILL)
 
         self._build_menubar()
         self.pedigreetab.draw_pedigree()

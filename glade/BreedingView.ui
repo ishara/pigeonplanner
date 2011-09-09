@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
+  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <requires lib="gtk+" version="2.22"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkDialog" id="editdialog">
@@ -89,7 +90,11 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DateEntry" id="dateedit">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="editable">True</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label24">
@@ -118,7 +123,16 @@
                                 <property name="can_focus">False</property>
                                 <property name="spacing">2</property>
                                 <child>
-                                  <placeholder/>
+                                  <object class="BandEntry" id="bandmateedit">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="editable">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">0</property>
+                                  </packing>
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="buttonsearchmate">
@@ -328,7 +342,12 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DateEntry" id="datelaidedit1">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="clear">True</property>
+                                <property name="editable">True</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label16">
@@ -352,7 +371,12 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DateEntry" id="datehatchededit1">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="clear">True</property>
+                                <property name="editable">True</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label123">
@@ -398,7 +422,11 @@
                                 <property name="label_xalign">0</property>
                                 <property name="shadow_type">none</property>
                                 <child>
-                                  <placeholder/>
+                                  <object class="BandEntry" id="bandentryedit1">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="editable">True</property>
+                                  </object>
                                 </child>
                                 <child type="label">
                                   <object class="GtkLabel" id="label18">
@@ -481,7 +509,12 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DateEntry" id="datelaidedit2">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="clear">True</property>
+                                <property name="editable">True</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label17">
@@ -505,7 +538,12 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DateEntry" id="datehatchededit2">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="clear">True</property>
+                                <property name="editable">True</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label124">
@@ -551,7 +589,11 @@
                                 <property name="label_xalign">0</property>
                                 <property name="shadow_type">none</property>
                                 <child>
-                                  <placeholder/>
+                                  <object class="BandEntry" id="bandentryedit2">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="editable">True</property>
+                                  </object>
                                 </child>
                                 <child type="label">
                                   <object class="GtkLabel" id="label19">
@@ -742,7 +784,11 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DateEntry" id="datelaid1">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="clear">True</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label5">
@@ -766,7 +812,11 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DateEntry" id="datehatched1">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="clear">True</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label6">
@@ -790,7 +840,10 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="BandEntry" id="bandentry1">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label7">
@@ -813,7 +866,14 @@
                             <property name="can_focus">False</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DisplayCheckButton" id="successcheck1">
+                                <property name="label" translatable="yes">Successful</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="draw_indicator">True</property>
+                              </object>
                             </child>
                           </object>
                           <packing>
@@ -924,7 +984,11 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DateEntry" id="datelaid2">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="clear">True</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label8">
@@ -948,7 +1012,11 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DateEntry" id="datehatched2">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="clear">True</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label9">
@@ -972,7 +1040,10 @@
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="BandEntry" id="bandentry2">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
                             </child>
                             <child type="label">
                               <object class="GtkLabel" id="label10">
@@ -995,7 +1066,14 @@
                             <property name="can_focus">False</property>
                             <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
+                              <object class="DisplayCheckButton" id="successcheck2">
+                                <property name="label" translatable="yes">Successful</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="draw_indicator">True</property>
+                              </object>
                             </child>
                           </object>
                           <packing>

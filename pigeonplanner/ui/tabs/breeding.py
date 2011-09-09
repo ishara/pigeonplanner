@@ -25,8 +25,6 @@ import builder
 import database
 from ui import dialogs
 from ui.tabs import basetab
-from ui.widgets import date
-from ui.widgets import bandentry
 from ui.widgets import checkbutton
 from ui.dialogs import PigeonListDialog
 from ui.detailsview import DetailsDialog
@@ -43,50 +41,8 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.database = database
         self.parser = parser
         self.maintreeview = treeview
-        self._build_ui()
         self._selection = self.treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)
-
-    def _build_ui(self):
-        # Tab
-        self.datelaid1 = date.DateEntry(False, True)
-        self.framelaid1.add(self.datelaid1)
-        self.datehatched1 = date.DateEntry(False, True)
-        self.framehatched1.add(self.datehatched1)
-        self.bandentry1 = bandentry.BandEntry()
-        self.frameband1.add(self.bandentry1)
-        self.successcheck1 = checkbutton.DisplayCheckButton(_("Successful"))
-        self.binsuccess1.add(self.successcheck1)
-
-        self.datelaid2 = date.DateEntry(False, True)
-        self.framelaid2.add(self.datelaid2)
-        self.datehatched2 = date.DateEntry(False, True)
-        self.framehatched2.add(self.datehatched2)
-        self.bandentry2 = bandentry.BandEntry()
-        self.frameband2.add(self.bandentry2)
-        self.successcheck2 = checkbutton.DisplayCheckButton(_("Successful"))
-        self.binsuccess2.add(self.successcheck2)
-
-        # Dialog
-        self.dateedit = date.DateEntry()
-        self.framedateedit.add(self.dateedit)
-        self.bandmateedit = bandentry.BandEntry(True)
-        self.hboxmate.pack_start(self.bandmateedit, False, False)
-
-        self.datelaidedit1 = date.DateEntry()
-        self.framelaidedit1.add(self.datelaidedit1)
-        self.datehatchededit1 = date.DateEntry()
-        self.framehatchededit1.add(self.datehatchededit1)
-        self.bandentryedit1 = bandentry.BandEntry(True)
-        self.framebandedit1.add(self.bandentryedit1)
-
-        self.datelaidedit2 = date.DateEntry()
-        self.framelaidedit2.add(self.datelaidedit2)
-        self.datehatchededit2 = date.DateEntry()
-        self.framehatchededit2.add(self.datehatchededit2)
-        self.bandentryedit2 = bandentry.BandEntry(True)
-        self.framebandedit2.add(self.bandentryedit2)
-
         self.editdialog.set_transient_for(self.parent)
 
     ## Tab

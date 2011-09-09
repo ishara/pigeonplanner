@@ -21,6 +21,7 @@ import datetime
 
 import gtk
 import gtk.gdk
+import gobject
 
 import const
 import errors
@@ -28,10 +29,8 @@ import messages
 
 
 class DateEntry(gtk.Viewport):
-
     __gtype_name__ = 'DateEntry'
-
-    def __init__(self, editable=True, clear=False):
+    def __init__(self, editable=False, clear=False):
         gtk.Viewport.__init__(self)
 
         self._entry = gtk.Entry()
@@ -40,24 +39,39 @@ class DateEntry(gtk.Viewport):
         self._entry.set_alignment(.5)
         self._entry.connect('icon-press', self.on_icon_pressed)
 
-        if not clear:
-            today = datetime.datetime.today()
-            self._entry.set_text(today.strftime(const.DATE_FORMAT))
-
-        self.set_editable(editable)
+        self.clear = clear
+        self.editable = editable
         self.add(self._entry)
         self.show_all()
 
     def on_icon_pressed(self, widget, icon, event):
         CalendarPopup(widget)
 
+    def get_editable(self):
+        return self._editable
+
     def set_editable(self, editable):
+        self._editable = editable
         self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
         self._entry.set_has_frame(editable)
         self._entry.set_editable(editable)
         icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
         pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if editable else None
         self._entry.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
+    editable = gobject.property(get_editable, set_editable, bool, False)
+
+    def get_clear(self):
+        return self._clear
+
+    def set_clear(self, clear):
+        self._clear = clear
+        if clear:
+            text = ""
+        else:
+            today = datetime.datetime.today()
+            text = today.strftime(const.DATE_FORMAT)
+        self._entry.set_text(text)
+    clear = gobject.property(get_clear, set_clear, bool, False)
 
     def set_text(self, text):
         self._entry.set_text(text)

@@ -101,22 +101,6 @@ class DetailsView(builder.GtkBuilder):
         self.pigeon = None
         self.child = None
 
-        self.entryband = bandentry.BandEntry()
-        self.hbox.pack_start(self.entryband)
-        self.entrysire = bandentry.BandEntry()
-        self.table.attach(self.entrysire, 1, 2, 4, 5, 0, 0)
-        self.entrydam = bandentry.BandEntry()
-        self.table.attach(self.entrydam, 1, 2, 5, 6, 0, 0)
-        self.entrybandedit = bandentry.BandEntry(True)
-        self.hboxedit.pack_start(self.entrybandedit)
-        self.entrysireedit = bandentry.BandEntry(True)
-        self.hboxsire.pack_start(self.entrysireedit)
-        self.entrydamedit = bandentry.BandEntry(True)
-        self.hboxdam.pack_start(self.entrydamedit)
-
-        self.combosex = comboboxes.SexCombobox()
-        self.tableedit.attach(self.combosex, 1, 2, 1, 2, gtk.SHRINK, gtk.FILL)
-
         combos = {self.combocolour: self.database.COLOURS,
                   self.combostrain: self.database.STRAINS,
                   self.comboloft: self.database.LOFTS}
@@ -124,13 +108,6 @@ class DetailsView(builder.GtkBuilder):
             comboboxes.fill_combobox(combo, self.database.select_from_table(value))
             comboboxes.set_entry_completion(combo)
             combo.child.set_activates_default(True)
-
-        self.entrydatedead = date.DateEntry()
-        self.tabledead.attach(self.entrydatedead, 1, 2, 0, 1, 0, 0)
-        self.entrydatesold = date.DateEntry()
-        self.tablesold.attach(self.entrydatesold, 1, 2, 0, 1, 0, 0)
-        self.entrydatelost = date.DateEntry()
-        self.tablelost.attach(self.entrydatelost, 1, 2, 0, 1, 0, 0)
 
         ag = gtk.AccelGroup()
         key, modifier = gtk.accelerator_parse('Escape')
@@ -339,6 +316,7 @@ class DetailsView(builder.GtkBuilder):
         self.set_default_image()
 
         for entry in self.get_objects_from_prefix("entry"):
+            if isinstance(entry, bandentry.BandEntry): continue
             entry.set_text('')
         for text in self.get_objects_from_prefix("text"):
             text.get_buffer().set_text('')
