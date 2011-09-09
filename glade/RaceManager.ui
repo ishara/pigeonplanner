@@ -14,14 +14,6 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkListStore" id="liststoreunits">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchararray"/>
-      <!-- column-name value -->
-      <column type="gfloat"/>
-    </columns>
-  </object>
   <object class="GtkDialog" id="window">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -239,17 +231,9 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="combodistance">
+                          <object class="DistanceCombobox" id="combodistance">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="model">liststoreunits</property>
-                            <property name="active">0</property>
-                            <child>
-                              <object class="GtkCellRendererText" id="cellrenderertext13"/>
-                              <attributes>
-                                <attribute name="text">0</attribute>
-                              </attributes>
-                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -285,15 +269,6 @@
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
                       <object class="LatLongEntry" id="entrylongitude">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -310,6 +285,15 @@
                         <property name="top_attach">2</property>
                         <property name="bottom_attach">3</property>
                       </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
                     </child>
                   </object>
                 </child>

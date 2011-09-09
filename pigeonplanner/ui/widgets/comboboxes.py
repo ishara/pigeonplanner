@@ -104,3 +104,61 @@ class StatusCombobox(gtk.ComboBox):
         self.set_active(0)
 
 
+class DistanceCombobox(gtk.ComboBox):
+
+    __gtype_name__ = 'DistanceCombobox'
+
+    def __init__(self):
+        store = gtk.ListStore(str, float)
+        gtk.ComboBox.__init__(self, store)
+
+        units = ((_('Yards'), 0.9144),
+                 (_('Kilometres'), 1000.),
+                 (_('Metres'), 1.),
+                 (_('Centimetres'), 0.01),
+                 (_('Inches'), 0.025),
+                 (_('Feet'), 0.3048),
+                 (_('Miles'), 1609.344),
+                 (_('Nautical Miles'), 1852.)
+            )
+        for unit in units:
+            store.append(unit)
+        cell = gtk.CellRendererText()
+        self.pack_start(cell, True)
+        self.add_attribute(cell, 'text', 0)
+        self.set_active(0)
+        self.show()
+
+    def get_unit(self):
+        ls_iter = self.get_active_iter()
+        return self.get_model().get(ls_iter, 1)[0]
+
+
+class SpeedCombobox(gtk.ComboBox):
+
+    __gtype_name__ = 'SpeedCombobox'
+
+    def __init__(self):
+        store = gtk.ListStore(str, float)
+        gtk.ComboBox.__init__(self, store)
+
+        units = ((_('Yard per Minute'), 0.01524),
+                 (_('Metres per Minute'), 0.0166666666),
+                 (_('Metres per Second'), 1.),
+                 (_('Kilometre per Hour'), 0.27777777777777777777777777777777),
+                 (_('Feet per Second'), 0.3048),
+                 (_('Feet per Minute'), 0.00508),
+                 (_('Mile per Hour'), 0.44704)
+            )
+        for unit in units:
+            store.append(unit)
+        cell = gtk.CellRendererText()
+        self.pack_start(cell, True)
+        self.add_attribute(cell, 'text', 0)
+        self.set_active(0)
+        self.show()
+
+    def get_unit(self):
+        ls_iter = self.get_active_iter()
+        return self.get_model().get(ls_iter, 1)[0]
+

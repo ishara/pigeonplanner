@@ -33,8 +33,6 @@ class RacepointManager(builder.GtkBuilder):
 
         self.database = database
 
-        for item in common.get_distance_units():
-            self.liststoreunits.append(item)
         self._fill_racepoints_combo()
         self.window.set_transient_for(parent)
         self.window.show()

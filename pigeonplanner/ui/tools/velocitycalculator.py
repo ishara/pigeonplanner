@@ -33,15 +33,6 @@ class VelocityCalculator(builder.GtkBuilder):
         self.database = database
         self.options = options
 
-        for item in common.get_distance_units():
-            self.ls_dist_units.append(item)
-        for item in common.get_speed_units():
-            self.ls_speed_units.append(item)
-        self.combobox_velocity_distance.set_active(0)
-        self.combobox_velocity_speed.set_active(0)
-        self.combobox_prognosis_distance.set_active(0)
-        self.combobox_prognosis_speed.set_active(0)
-
         dt = datetime.datetime.now()
         self.spinbutton_prognosis_hours.set_value(dt.hour)
         self.spinbutton_prognosis_minutes.set_value(dt.minute)
@@ -62,10 +53,8 @@ class VelocityCalculator(builder.GtkBuilder):
 
     ## Exact
     def on_button_velocity_calculate_clicked(self, widget):
-        dist_iter = self.combobox_velocity_distance.get_active_iter()
-        distunit = self.ls_dist_units.get(dist_iter, 1)[0]
-        speed_iter = self.combobox_velocity_speed.get_active_iter()
-        speedunit = self.ls_speed_units.get(speed_iter, 1)[0]
+        distunit = self.combobox_velocity_distance.get_unit()
+        speedunit = self.combobox_velocity_speed.get_unit()
 
         distance = self.spinbutton_velocity_distance.get_value()
         hours = self.spinbutton_velocity_hours.get_value_as_int()
@@ -86,10 +75,8 @@ class VelocityCalculator(builder.GtkBuilder):
         self.spinbutton_prognosis_to.set_range(spinmin, spinmax)
 
     def on_calculate_clicked(self, widget):
-        dist_iter = self.combobox_prognosis_distance.get_active_iter()
-        distunit = self.ls_dist_units.get(dist_iter, 1)[0]
-        speed_iter = self.combobox_prognosis_speed.get_active_iter()
-        speedunit = self.ls_speed_units.get(speed_iter, 1)[0]
+        distunit = self.combobox_prognosis_distance.get_unit()
+        speedunit = self.combobox_prognosis_speed.get_unit()
 
         begin = self.spinbutton_prognosis_from.get_value_as_int()
         end = self.spinbutton_prognosis_to.get_value_as_int()
