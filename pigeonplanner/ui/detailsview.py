@@ -317,6 +317,7 @@ class DetailsView(builder.GtkBuilder):
 
         for entry in self.get_objects_from_prefix("entry"):
             if isinstance(entry, bandentry.BandEntry): continue
+            if isinstance(entry, date.DateEntry): continue
             entry.set_text('')
         for text in self.get_objects_from_prefix("text"):
             text.get_buffer().set_text('')
