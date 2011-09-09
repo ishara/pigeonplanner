@@ -28,6 +28,7 @@ import builder
 import messages
 from ui import dialogs
 from ui import logdialog
+from translation import gettext as _
 
 
 (EXECUTE,

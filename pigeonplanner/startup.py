@@ -207,9 +207,10 @@ class Startup(object):
 
         # Just fallback when an exception is raised before locale setup
         try:
+            from translation import gettext as _
             s = ""
             _(s)
-        except NameError:
+        except:
             self.setup_locale()
 
         tb = "".join(traceback.format_exception(type_, value, tb))

@@ -36,6 +36,7 @@ from ui import dialogs
 from ui import pedigree
 from ui import filechooser
 from ui import printpreview
+from translation import gettext as _
 
 
 PRINTER_DPI = 72.0

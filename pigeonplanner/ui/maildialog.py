@@ -29,6 +29,7 @@ import builder
 import messages
 import mailing
 from ui import dialogs
+from translation import gettext as _
 
 
 class MailDialog(builder.GtkBuilder):
