@@ -25,6 +25,8 @@
     </glade-widget-class>
     <glade-widget-class title="Status Combobox" name="StatusCombobox" generic-name="statuscombo">
     </glade-widget-class>
+    <glade-widget-class title="LatLong Entry" name="LatLongEntry" generic-name="latlongentry">
+    </glade-widget-class>
   </glade-widget-classes>
 
   <glade-widget-group name="pigeonplanner" title="Pigeon Planner">
@@ -33,6 +35,7 @@
     <glade-widget-class-ref name="DisplayCheckButton"/>
     <glade-widget-class-ref name="SexCombobox"/>
     <glade-widget-class-ref name="StatusCombobox"/>
+    <glade-widget-class-ref name="LatLongEntry"/>
   </glade-widget-group>
 
 </glade-catalog>

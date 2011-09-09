@@ -24,3 +24,4 @@ from ui.widgets import bandentry
 from ui.widgets import date
 from ui.widgets import checkbutton
 from ui.widgets import comboboxes
+from ui.widgets import latlongentry

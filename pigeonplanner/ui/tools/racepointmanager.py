@@ -20,11 +20,11 @@ import gtk
 import gobject
 
 import common
-import checks
+import errors
 import builder
 from ui.widgets import comboboxes
+from ui.widgets import latlongentry
 from datamanager import DataManager
-from translation import gettext as _
 
 
 class RacepointManager(builder.GtkBuilder):
@@ -33,12 +33,6 @@ class RacepointManager(builder.GtkBuilder):
 
         self.database = database
 
-        tip = _("Input should be in one of these formats:\n  "
-                "DD.dddddd°\n  "
-                "DD°MM.mmm’\n  "
-                "DD°MM’SS.s”")
-        self.imagelat.set_tooltip_text(tip)
-        self.imagelong.set_tooltip_text(tip)
         for item in common.get_distance_units():
             self.liststoreunits.append(item)
         self._fill_racepoints_combo()
@@ -74,23 +68,18 @@ class RacepointManager(builder.GtkBuilder):
         manager.window.destroy()
 
     def on_buttonsave_clicked(self, widget):
-        latitude = self.entrylatitude.get_text()
-        longitude = self.entrylongitude.get_text()
-
-        if latitude != '':
-            try:
-                checks.check_lat_long(latitude)
-            except checks.InvalidInputError:
-                self.imagelat.show()
-                return
-        self.imagelat.hide()
-        if longitude != '':
-            try:
-                checks.check_lat_long(longitude)
-            except checks.InvalidInputError:
-                self.imagelong.show()
-                return
-        self.imagelong.hide()
+        try:
+            latitude = self.entrylatitude.get_text(can_empty=True)
+        except errors.InvalidInputError:
+            self.entrylatitude.warn()
+            return
+        self.entrylatitude.unwarn()
+        try:
+            longitude = self.entrylongitude.get_text(can_empty=True)
+        except errors.InvalidInputError:
+            self.entrylongitude.warn()
+            return
+        self.entrylongitude.unwarn()
 
         data = (latitude, longitude,
                 self.spindistance.get_value(),
