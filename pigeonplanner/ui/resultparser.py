@@ -122,9 +122,6 @@ class ResultParser(builder.GtkBuilder):
     def _build_interface(self):
         self.sendbutton.set_use_stock(True)
 
-        self.parserstore = gtk.ListStore(object, str)
-        self.parsercombo.set_model(self.parserstore)
-
         self.filebutton = filechooser.ResultChooser()
         self.table.attach(self.filebutton, 1, 2, 0, 1)
 

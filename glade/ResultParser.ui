@@ -82,6 +82,7 @@
                   <object class="GtkComboBox" id="parsercombo">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="model">parserstore</property>
                     <signal name="changed" handler="on_parsercombo_changed" swapped="no"/>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext1"/>
@@ -420,6 +421,14 @@
       <action-widget response="0">cancelbutton</action-widget>
       <action-widget response="0">addbutton</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkListStore" id="parserstore">
+    <columns>
+      <!-- column-name parser -->
+      <column type="PyObject"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
   </object>
   <object class="GtkDialog" id="reportdialog">
     <property name="can_focus">False</property>
