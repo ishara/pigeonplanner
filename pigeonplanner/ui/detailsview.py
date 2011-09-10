@@ -207,7 +207,23 @@ class DetailsView(builder.GtkBuilder):
         self.notebookstatus.set_current_page(status)
         self._set_status_image(status)
 
-    def on_buttonstatusclose_clicked(self, widget):
+    def on_buttonstatusok_clicked(self, widget):
+        entry = None
+        page = self.notebookstatus.get_current_page()
+        table = self.notebookstatus.get_nth_page(page)
+        for child in table.get_children():
+            if isinstance(child, date.DateEntry):
+                entry = child
+                break
+        try:
+            # Just check the date, the value is used elsewhere
+            entry.get_text()
+        except AttributeError:
+            # No date entry on this tab, nothing to check
+            pass
+        except errors.InvalidInputError, msg:
+            ErrorDialog(msg.value, self.parent)
+            return
         self.statusdialog.hide()
 
     def on_findsire_clicked(self, widget):

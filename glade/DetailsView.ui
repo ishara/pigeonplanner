@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <requires lib="gtk+" version="2.22"/>
+  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="liststore1">
     <columns>
@@ -66,14 +66,14 @@
               <placeholder/>
             </child>
             <child>
-              <object class="GtkButton" id="buttonstatusclose">
-                <property name="label">gtk-close</property>
+              <object class="GtkButton" id="buttonstatusok">
+                <property name="label">gtk-ok</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_buttonstatusclose_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_buttonstatusok_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -276,11 +276,17 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label77">
+                  <object class="GtkTable" id="table1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="yalign">0.079999998211860657</property>
-                    <property name="label" translatable="yes">No extra information available.</property>
+                    <child>
+                      <object class="GtkLabel" id="label77">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="yalign">0.079999998211860657</property>
+                        <property name="label" translatable="yes">No extra information available.</property>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="position">1</property>
@@ -556,7 +562,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">buttonstatusclose</action-widget>
+      <action-widget response="0">buttonstatusok</action-widget>
     </action-widgets>
   </object>
   <object class="GtkWindow" id="window1">
@@ -1654,15 +1660,6 @@
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
                       <object class="SexCombobox" id="combosex">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -1675,6 +1672,15 @@
                         <property name="x_options"></property>
                         <property name="y_options"></property>
                       </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
                     </child>
                   </object>
                 </child>
