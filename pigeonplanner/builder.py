@@ -91,14 +91,8 @@ class GtkBuilder(gtk.Builder, object):
 
         if isinstance(widgets, dict):
             for widget, visible in widgets.items():
-                if visible:
-                    widget.show()
-                else:
-                    widget.hide()
+                widget.set_visible(visible)
         else:
             for widget in widgets:
-                if value:
-                    widget.show()
-                else:
-                    widget.hide()
+                widget.set_visible(value)
 
