@@ -61,6 +61,7 @@ class MainWindow(builder.GtkBuilder):
         self.parser = parser
 
         self.treeview = treeview.MainTreeView(self.parser, self.options)
+        self.treeview.connect('key-press-event', self.on_treeview_key_press)
         self.treeview.connect('button-press-event', self.on_treeview_press)
         self.scrolledwindow.add(self.treeview)
         self.selection = self.treeview.get_selection()
@@ -259,7 +260,9 @@ class MainWindow(builder.GtkBuilder):
     def menuremove_activate(self, widget):
         model, paths = self.selection.get_selected_rows()
 
-        if self.selection.count_selected_rows() == 1:
+        if self.selection.count_selected_rows() == 0:
+            return
+        elif self.selection.count_selected_rows() == 1:
             pigeon = self.treeview.get_selected_pigeon()
             pindex = pigeon.get_pindex()
             pigeonlabel = pigeon.get_band_string()
@@ -473,6 +476,13 @@ class MainWindow(builder.GtkBuilder):
                 (gtk.STOCK_REMOVE, self.menuremove_activate, None),
                 ("pedigree-detail", self.menupedigree_activate, None)]
             menus.popup_menu(event, entries)
+
+    def on_treeview_key_press(self, treeview, event):
+        keyname = gtk.gdk.keyval_name(event.keyval)
+        if keyname == "Delete":
+            self.menuremove_activate(None)
+        elif keyname == "Insert":
+            self.menuadd_activate(None)
 
     def on_selection_changed(self, selection):
         n_rows_selected = selection.count_selected_rows()
