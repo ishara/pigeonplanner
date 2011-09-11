@@ -27,7 +27,9 @@ import gtk
 import gobject
 
 import const
+import update
 from ui import maildialog
+from ui.messagedialog import QuestionDialog
 from translation import gettext as _
 
 
@@ -135,6 +137,15 @@ class LogDialog(gtk.Dialog):
         self.back_buffer.set_text(self.file.read())
 
     def report_log(self, widget):
+        try:
+            new, msg = update.update()
+        except update.UpdateError, exc:
+            new = False
+        if new:
+            desc = _("Chances are that your problem is already fixed in "
+                     "this new version. Send a report anyway?")
+            if not QuestionDialog((msg, desc, msg), self).run():
+                return
         logfile = os.path.join(const.PREFDIR, self.combo_logs.get_active_text())
         maildialog.MailDialog(self, self.database, logfile, 'log')
 
