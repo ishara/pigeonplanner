@@ -191,9 +191,11 @@ class BackupDialog(gtk.Dialog):
         if zipfile:
             if backup.restore_backup(zipfile):
                 msg = messages.MSG_RESTORE_SUCCES
+                InfoDialog(msg, self.par)
+                gtk.main_quit()
             else:
                 msg = messages.MSG_RESTORE_FAILED
-            InfoDialog(msg, self.par)
+                InfoDialog(msg, self.par)
 
 
 class FilterDialog(gtk.Dialog):

@@ -127,8 +127,8 @@ MSG_BACKUP_SUCCES = (_("The backup was successfully created."),
 MSG_BACKUP_FAILED = (_("There was an error making the backup."),
                      None,
                      _("Failed!"))
-MSG_RESTORE_SUCCES = (_("The backup was successfully restored.\nRestart the program."),
-                      None,
+MSG_RESTORE_SUCCES = (_("The backup was successfully restored."),
+                      _("The program will now quit automaticly."),
                       _("Completed!"))
 MSG_RESTORE_FAILED = (_("There was an error restoring the backup."),
                       None,
