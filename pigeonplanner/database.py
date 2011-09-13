@@ -59,6 +59,8 @@ class DatabaseOperations(object):
     SOLD = "Sold"
     LOST = "Lost"
     DEAD = "Dead"
+    BREEDER = "Breeder"
+    LOANED = "Onloan"
 
     SCHEMA = {
     'Version': '(Versionkey INTEGER PRIMARY KEY,'
@@ -186,6 +188,17 @@ class DatabaseOperations(object):
           ' pindex TEXT,'
           ' date TEXT,'
           ' info TEXT)',
+    BREEDER: '(Breederkey INTEGER PRIMARY KEY,'
+             ' pindex TEXT,'
+             ' start TEXT,'
+             ' end TEXT,'
+             ' info TEXT)',
+    LOANED: '(Onloankey INTEGER PRIMARY KEY,'
+            ' pindex TEXT,'
+            ' loaned TEXT,'
+            ' back TEXT,'
+            ' person TEXT,'
+            ' info TEXT)',
     }
 
     def __init__(self):
@@ -504,5 +517,15 @@ class DatabaseOperations(object):
 #### Dead
     def get_dead_data(self, pindex):
         sql = 'SELECT date, info FROM Dead WHERE pindex=?'
+        return self.__db_execute_select(sql, (pindex,), RET_ONEROW)
+
+#### Breeder
+    def get_breeder_data(self, pindex):
+        sql = 'SELECT start, end, info FROM Breeder WHERE pindex=?'
+        return self.__db_execute_select(sql, (pindex,), RET_ONEROW)
+
+#### On loan
+    def get_loan_data(self, pindex):
+        sql = 'SELECT loaned, back, person, info FROM Onloan WHERE pindex=?'
         return self.__db_execute_select(sql, (pindex,), RET_ONEROW)
 

@@ -96,7 +96,8 @@ class StatusCombobox(gtk.ComboBox):
         store = gtk.ListStore(str)
         gtk.ComboBox.__init__(self, store)
 
-        for item in [_("Dead"), _("Active"), _("Sold"), _("Lost")]:
+        for item in [_("Dead"), _("Active"), _("Sold"), _("Lost"),
+                     _("Breeder"), _("On loan")]:
             store.append([item])
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)

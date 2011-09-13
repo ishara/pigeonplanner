@@ -149,7 +149,9 @@ SEX_IMGS = {'0': gtk.gdk.pixbuf_new_from_file(os.path.join(
 (DEAD,
  ACTIVE,
  SOLD,
- LOST) = range(4)
+ LOST,
+ BREEDER,
+ LOANED) = range(6)
 
 (ERROR,
  WARNING,

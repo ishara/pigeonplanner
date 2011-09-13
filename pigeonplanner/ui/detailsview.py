@@ -209,22 +209,16 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self._set_status_image(status)
 
     def on_buttonstatusok_clicked(self, widget):
-        entry = None
         page = self.notebookstatus.get_current_page()
         table = self.notebookstatus.get_nth_page(page)
         for child in table.get_children():
             if isinstance(child, date.DateEntry):
-                entry = child
-                break
-        try:
-            # Just check the date, the value is used elsewhere
-            entry.get_text()
-        except AttributeError:
-            # No date entry on this tab, nothing to check
-            pass
-        except errors.InvalidInputError, msg:
-            ErrorDialog(msg.value, self.parent)
-            return
+                try:
+                    # Just check the date, the value is used elsewhere
+                    child.get_text()
+                except errors.InvalidInputError, msg:
+                    ErrorDialog(msg.value, self.parent)
+                    return
         self.statusdialog.hide()
 
     def on_findsire_clicked(self, widget):
@@ -402,18 +396,30 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 self.entrydatelost.set_text(data[1])
                 self.entrypointlost.set_text(data[0])
                 self.textinfolost.get_buffer().set_text(data[2])
+        elif status == const.BREEDER:
+            data = self.database.get_breeder_data(pindex)
+            if data:
+                self.entrydatebreedfrom.set_text(data[0])
+                self.entrydatebreedto.set_text(data[1])
+                self.textinfobreeder.get_buffer().set_text(data[2])
+        elif status == const.LOANED:
+            data = self.database.get_loan_data(pindex)
+            if data:
+                self.entrydateloan.set_text(data[0])
+                self.entrydateloanback.set_text(data[1])
+                self.entrypersonloan.set_text(data[2])
+                self.textinfoloan.get_buffer().set_text(data[3])
 
     def _set_status_editable(self, value):
-        self.entrydatedead.set_editable(value)
-        self.textinfodead.set_editable(value)
-
-        self.entrydatesold.set_editable(value)
-        self.entrybuyersold.set_editable(value)
-        self.textinfosold.set_editable(value)
-
-        self.entrydatelost.set_editable(value)
-        self.entrypointlost.set_editable(value)
-        self.textinfolost.set_editable(value)
+        def set_editable(widget, value):
+            if isinstance(widget, gtk.ScrolledWindow):
+                set_editable(widget.get_child(), value)
+            try:
+                widget.set_editable(value)
+            except:
+                pass
+        for table in self.notebookstatus.get_children():
+            table.foreach(set_editable, value)
 
     def _finish_edit(self, datalist=None):
         self.detailbook.set_current_page(0)
@@ -449,13 +455,24 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 self.entrydatelost.get_text(),
                 bffr.get_text(*bffr.get_bounds())]
 
-        return dead, sold, lost
+        bffr = self.textinfobreeder.get_buffer()
+        breed = [self.entrydatebreedfrom.get_text(),
+                 self.entrydatebreedto.get_text(),
+                 bffr.get_text(*bffr.get_bounds())]
+
+        bffr = self.textinfoloan.get_buffer()
+        loan = [self.entrydateloan.get_text(),
+                self.entrydateloanback.get_text(),
+                self.entrypersonloan.get_text(),
+                bffr.get_text(*bffr.get_bounds())]
+
+        return dead, sold, lost, breed, loan
 
     def _insert_status_data(self, status, pindex, data=None):
         if data is None:
-            dead, sold, lost = self._get_status_info()
+            dead, sold, lost, breed, loan = self._get_status_info()
         else:
-            dead, sold, lost = data
+            dead, sold, lost, breed, loan = data
 
         if status == const.DEAD:
             dead.insert(0, pindex)
@@ -466,6 +483,12 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         elif status == const.LOST:
             lost.insert(0, pindex)
             self.database.insert_into_table(self.database.LOST, lost)
+        elif status == const.BREEDER:
+            breed.insert(0, pindex)
+            self.database.insert_into_table(self.database.BREEDER, breed)
+        elif status == const.LOANED:
+            loan.insert(0, pindex)
+            self.database.insert_into_table(self.database.LOANED, loan)
 
     def _run_pigeondialog(self, sex):
         try:
@@ -516,12 +539,13 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         # Update the status or create a new record
         status = self.combostatus.get_active()
         old_status = self.pigeon.get_active()
-        dead, sold, lost = self._get_status_info()
+        dead, sold, lost, breed, loan = self._get_status_info()
         if status != old_status:
             if old_status != const.ACTIVE:
                 self.database.delete_from_table(common.statusdic[old_status],
                                                 pindex)
-            self._insert_status_data(status, pindex, (dead, sold, lost))
+            self._insert_status_data(status, pindex,
+                                     (dead, sold, lost, breed, loan))
         else:
             if status == const.DEAD:
                 dead.append(pindex)
@@ -532,6 +556,12 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             elif status == const.LOST:
                 lost.append(pindex)
                 self.database.update_table(self.database.LOST, lost, 2, 1)
+            elif status == const.BREEDER:
+                breed.append(pindex)
+                self.database.update_table(self.database.BREEDER, breed, 2, 1)
+            elif status == const.LOANED:
+                loan.append(pindex)
+                self.database.update_table(self.database.LOANED, loan, 2, 1)
 
     def _add_pigeon_data(self, datalist):
         pindex = common.get_pindex_from_band(datalist[0], datalist[1])
