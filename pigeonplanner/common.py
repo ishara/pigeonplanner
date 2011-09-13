@@ -34,7 +34,6 @@ logger = logging.getLogger(__name__)
 
 import gtk
 import glib
-import gobject
 
 import const
 from translation import gettext as _
@@ -151,15 +150,6 @@ def count_active_pigeons(database):
             ybirds += 1
 
     return total, cocks, hens, ybirds
-
-def add_statusbar_message(statusbar, message):
-    statusbar.pop(0)
-    statusbar.push(0, message)
-    gobject.timeout_add_seconds(4, pop_statusbar_message, statusbar)
-
-def pop_statusbar_message(statusbar):
-    statusbar.pop(0)
-    return False
 
 def get_own_address(database):
     """

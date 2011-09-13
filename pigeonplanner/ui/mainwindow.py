@@ -48,6 +48,7 @@ from ui import optionsdialog
 from ui import pedigreewindow
 from ui.widgets import menus
 from ui.widgets import treeview
+from ui.widgets import statusbar
 from ui.messagedialog import ErrorDialog, InfoDialog, WarningDialog, QuestionDialog
 from translation import gettext as _
 
@@ -60,7 +61,8 @@ class MainWindow(builder.GtkBuilder):
         self.database = database
         self.parser = parser
 
-        self.treeview = treeview.MainTreeView(self.parser, self.options)
+        self.treeview = treeview.MainTreeView(self.parser, self.options,
+                                              self.statusbar)
         self.treeview.connect('key-press-event', self.on_treeview_key_press)
         self.treeview.connect('button-press-event', self.on_treeview_press)
         self.scrolledwindow.add(self.treeview)
@@ -177,7 +179,7 @@ class MainWindow(builder.GtkBuilder):
                    pigeon.get_colour(), pigeon.get_sex_string(),
                    pigeon.get_loft(), pigeon.get_strain()]
             self.treeview.add_row(row)
-            common.add_statusbar_message(self.statusbar,
+            self.statusbar.display_message(
                         _("Pigeon %s has been added") %pigeon.get_band_string())
 
     def on_edit_cancelled(self, detailsview):
@@ -329,7 +331,7 @@ class MainWindow(builder.GtkBuilder):
                 self.treeview.remove_row(path)
             self.selection.select_path(paths[-1])
             self._set_statistics()
-            common.add_statusbar_message(self.statusbar, statusbarmsg)
+            self.statusbar.display_message(statusbarmsg)
         else:
             logger.debug("Remove operation cancelled")
         self.removedialog.hide()
@@ -715,6 +717,7 @@ class MainWindow(builder.GtkBuilder):
         self.labelStatCocks.set_markup("<b>%i</b>" %cocks)
         self.labelStatHens.set_markup("<b>%i</b>" %hens)
         self.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
+        self.statusbar.set_total(total)
 
     def _set_pigeon(self, pigeon_no):
         if pigeon_no < 0 or pigeon_no >= self.pigeon_no:

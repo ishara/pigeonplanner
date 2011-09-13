@@ -31,11 +31,13 @@ class MainTreeView(gtk.TreeView):
 
     __gtype_name__ = 'MainTreeView'
 
-    def __init__(self, parser, options):
+    def __init__(self, parser, options, statusbar):
         gtk.TreeView.__init__(self)
 
         self.parser = parser
         self.options = options
+        self.statusbar = statusbar
+        self.statusbar.set_filter(False)
         self.filters = []
         self.searchopts = None
         self.keyword = None
@@ -57,10 +59,12 @@ class MainTreeView(gtk.TreeView):
     def on_filterapply_clicked(self, widget):
         self.filters = widget.get_filters()
         self._modelfilter.refilter()
+        self.statusbar.set_filter(True)
 
     def on_filterclear_clicked(self, widget):
         self.filters = widget.get_filters()
         self._modelfilter.refilter()
+        self.statusbar.set_filter(False)
 
     def on_search_results(self, widget, opts, keyword):
         self.searchopts = opts

@@ -25,3 +25,5 @@ from ui.widgets import date
 from ui.widgets import checkbutton
 from ui.widgets import comboboxes
 from ui.widgets import latlongentry
+from ui.widgets import statusbar
+
