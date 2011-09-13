@@ -1009,7 +1009,7 @@
                               <object class="GtkImage" id="imagestatus">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">../images/active.png</property>
+                                <property name="pixbuf">../images/status_active.png</property>
                               </object>
                             </child>
                           </object>
