@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <requires lib="gtk+" version="2.22"/>
+  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <!-- interface-naming-policy project-wide -->
   <object class="GtkAdjustment" id="adjustment1">
     <property name="upper">999999</property>
@@ -260,6 +260,7 @@
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="can_empty">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -278,6 +279,7 @@
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="can_empty">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

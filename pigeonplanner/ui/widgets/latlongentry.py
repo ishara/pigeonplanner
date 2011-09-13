@@ -17,6 +17,7 @@
 
 
 import gtk
+import gobject
 
 import errors
 from translation import gettext as _
@@ -24,18 +25,20 @@ from translation import gettext as _
 
 class LatLongEntry(gtk.Entry):
     __gtype_name__ = 'LatLongEntry'
-    def __init__(self):
+    can_empty = gobject.property(type=bool, default=False, nick="Can empty")
+    def __init__(self, can_empty=False):
         gtk.Entry.__init__(self)
 
+        self.can_empty = can_empty
         self._tooltip = _("Input should be in one of these formats:\n  "
                           "DD.dddddd°\n  "
                           "DD°MM.mmm’\n  "
                           "DD°MM’SS.s”")
 
-    def get_text(self, validate=True, can_empty=False):
+    def get_text(self, validate=True):
         value = gtk.Entry.get_text(self)
         if validate:
-            self.__validate(value, can_empty)
+            self.__validate(value)
         return value
 
     def warn(self):
@@ -45,8 +48,8 @@ class LatLongEntry(gtk.Entry):
     def unwarn(self):
         self.set_icon_from_stock(gtk.ENTRY_ICON_SECONDARY, None)
 
-    def __validate(self, value, can_empty=False):
-        if can_empty and value == '':
+    def __validate(self, value):
+        if self.can_empty and value == '':
             return
         # Accepted values are:
         #    DD.dddddd°

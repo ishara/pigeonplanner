@@ -1524,6 +1524,7 @@
                           <object class="BandEntry" id="entrysireedit">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="can_empty">True</property>
                             <property name="editable">True</property>
                           </object>
                           <packing>
@@ -1575,6 +1576,7 @@
                           <object class="BandEntry" id="entrydamedit">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="can_empty">True</property>
                             <property name="editable">True</property>
                           </object>
                           <packing>

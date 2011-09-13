@@ -26,7 +26,8 @@ import messages
 
 class BandEntry(gtk.Viewport):
     __gtype_name__ = 'BandEntry'
-    def __init__(self, editable=False):
+    can_empty = gobject.property(type=bool, default=False, nick="Can empty")
+    def __init__(self, editable=False, can_empty=False):
         gtk.Viewport.__init__(self)
 
         self._entryband = gtk.Entry()
@@ -42,6 +43,7 @@ class BandEntry(gtk.Viewport):
         hbox.pack_start(self._entryyear, False, True, 0)
 
         self.editable = editable
+        self.can_empty = can_empty
         self.add(hbox)
         self.show_all()
 
@@ -66,22 +68,22 @@ class BandEntry(gtk.Viewport):
         self._entryband.set_text(band)
         self._entryyear.set_text(year)
 
-    def get_pindex(self, validate=True, can_empty=False):
-        band, year = self.get_band(validate, can_empty)
+    def get_pindex(self, validate=True):
+        band, year = self.get_band(validate)
         return common.get_pindex_from_band(band, year)
 
-    def get_band(self, validate=True, can_empty=False):
+    def get_band(self, validate=True):
         band, year = self._entryband.get_text(), self._entryyear.get_text()
         if validate:
-            self.__validate(band, year, can_empty)
+            self.__validate(band, year)
         return band, year
 
     def grab_focus(self):
         self._entryband.grab_focus()
         self._entryband.set_position(-1)
 
-    def __validate(self, band, year, can_empty=False):
-        if can_empty and (band == '' and year == ''):
+    def __validate(self, band, year):
+        if self.can_empty and (band == '' and year == ''):
             return
 
         if not band or not year:

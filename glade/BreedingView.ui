@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <requires lib="gtk+" version="2.22"/>
+  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <!-- interface-naming-policy project-wide -->
   <object class="GtkDialog" id="editdialog">
     <property name="can_focus">False</property>
@@ -345,6 +345,7 @@
                               <object class="DateEntry" id="datelaidedit1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="can_empty">True</property>
                                 <property name="clear">True</property>
                                 <property name="editable">True</property>
                               </object>
@@ -374,6 +375,7 @@
                               <object class="DateEntry" id="datehatchededit1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="can_empty">True</property>
                                 <property name="clear">True</property>
                                 <property name="editable">True</property>
                               </object>
@@ -425,6 +427,7 @@
                                   <object class="BandEntry" id="bandentryedit1">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <property name="can_empty">True</property>
                                     <property name="editable">True</property>
                                   </object>
                                 </child>
@@ -432,7 +435,7 @@
                                   <object class="GtkLabel" id="label18">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">Band</property>
+                                    <property name="label" translatable="yes">Band no.</property>
                                     <property name="use_markup">True</property>
                                   </object>
                                 </child>
@@ -512,6 +515,7 @@
                               <object class="DateEntry" id="datelaidedit2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="can_empty">True</property>
                                 <property name="clear">True</property>
                                 <property name="editable">True</property>
                               </object>
@@ -541,6 +545,7 @@
                               <object class="DateEntry" id="datehatchededit2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="can_empty">True</property>
                                 <property name="clear">True</property>
                                 <property name="editable">True</property>
                               </object>
@@ -592,6 +597,7 @@
                                   <object class="BandEntry" id="bandentryedit2">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <property name="can_empty">True</property>
                                     <property name="editable">True</property>
                                   </object>
                                 </child>
@@ -599,7 +605,7 @@
                                   <object class="GtkLabel" id="label19">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">Band</property>
+                                    <property name="label" translatable="yes">Band no.</property>
                                     <property name="use_markup">True</property>
                                   </object>
                                 </child>

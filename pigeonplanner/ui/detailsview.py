@@ -279,8 +279,8 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
     def get_details(self):
         ring, year = self.entrybandedit.get_band()
-        ringsire, yearsire = self.entrysireedit.get_band(can_empty=True)
-        ringdam, yeardam = self.entrydamedit.get_band(can_empty=True)
+        ringsire, yearsire = self.entrysireedit.get_band()
+        ringdam, yeardam = self.entrydamedit.get_band()
         if self.pigeon is None:
             show = 0 if self.pedigree_mode else 1
         else:

@@ -123,18 +123,18 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         # Get and check bands
         try:
             mate = self.bandmateedit.get_pindex()
-            pindex1 = self.bandentryedit1.get_pindex(can_empty=True)
-            pindex2 = self.bandentryedit2.get_pindex(can_empty=True)
+            pindex1 = self.bandentryedit1.get_pindex()
+            pindex2 = self.bandentryedit2.get_pindex()
         except errors.InvalidInputError, msg:
             ErrorDialog(msg.value, self.editdialog)
             return
         # Get and check dates
         try:
             date = self.dateedit.get_text()
-            laid1 = self.datelaidedit1.get_text(can_empty=True)
-            hatched1 = self.datehatchededit1.get_text(can_empty=True)
-            laid2 = self.datelaidedit2.get_text(can_empty=True)
-            hatched2 = self.datehatchededit2.get_text(can_empty=True)
+            laid1 = self.datelaidedit1.get_text()
+            hatched1 = self.datehatchededit1.get_text()
+            laid2 = self.datelaidedit2.get_text()
+            hatched2 = self.datehatchededit2.get_text()
         except errors.InvalidInputError, msg:
             ErrorDialog(msg.value, self.editdialog)
             return
