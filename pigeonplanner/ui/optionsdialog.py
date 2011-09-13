@@ -33,12 +33,13 @@ from ui.messagedialog import InfoDialog, WarningDialog
 from translation import gettext as _
 
 
-class OptionsDialog(builder.GtkBuilder):
+class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     __gsignals__ = {'interface-changed': (gobject.SIGNAL_RUN_LAST,
                                       None, (bool, bool, bool, bool)),
                     }
     def __init__(self, parent, options):
         builder.GtkBuilder.__init__(self, "OptionsDialog.ui")
+        gobject.GObject.__init__(self)
 
         self.options = options
 

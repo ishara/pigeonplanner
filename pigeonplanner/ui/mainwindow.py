@@ -53,8 +53,9 @@ from ui.messagedialog import ErrorDialog, InfoDialog, WarningDialog, QuestionDia
 from translation import gettext as _
 
 
-class MainWindow(builder.GtkBuilder):
+class MainWindow(gtk.Window, builder.GtkBuilder):
     def __init__(self, options, database, parser):
+        gtk.Window.__init__(self)
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
 
         self.options = options
@@ -72,7 +73,7 @@ class MainWindow(builder.GtkBuilder):
         self.pedigree = pedigree.DrawPedigree(self.database, self.parser,
                                               self.treeview)
 
-        self.detailsview = detailsview.DetailsView(self.mainwindow,
+        self.detailsview = detailsview.DetailsView(self,
                                                    self.database, self.parser)
         self.detailsview.connect('edit-finished', self.on_edit_finished)
         self.detailsview.connect('edit-cancelled', self.on_edit_cancelled)
@@ -81,19 +82,19 @@ class MainWindow(builder.GtkBuilder):
 
         self.pedigreetab = tabs.PedigreeTab(self.pedigree)
         self.notebook.append_page(*self.pedigreetab.get_tab_widgets())
-        self.relativestab = tabs.RelativesTab(self.mainwindow, self.treeview,
+        self.relativestab = tabs.RelativesTab(self, self.treeview,
                                               self.database, self.parser)
         self.notebook.append_page(*self.relativestab.get_tab_widgets())
-        self.resultstab = tabs.ResultsTab(self.mainwindow, self.database,
+        self.resultstab = tabs.ResultsTab(self, self.database,
                                           self.options, self.parser)
         self.notebook.append_page(*self.resultstab.get_tab_widgets())
-        self.breedingtab = tabs.BreedingTab(self.mainwindow, self.database,
+        self.breedingtab = tabs.BreedingTab(self, self.database,
                                             self.parser, self.treeview)
         self.notebook.append_page(*self.breedingtab.get_tab_widgets())
-        self.mediatab = tabs.MediaTab(self.mainwindow, self.database,
+        self.mediatab = tabs.MediaTab(self, self.database,
                                       self.options, self.parser)
         self.notebook.append_page(*self.mediatab.get_tab_widgets())
-        self.medicationtab = tabs.MedicationTab(self.mainwindow, self.database,
+        self.medicationtab = tabs.MedicationTab(self, self.database,
                                                 self.parser, self)
         self.notebook.append_page(*self.medicationtab.get_tab_widgets())
 
@@ -109,10 +110,13 @@ class MainWindow(builder.GtkBuilder):
         self.MenuToolbar.set_active(self.options.toolbar)
         self.MenuStatusbar.set_active(self.options.statusbar)
 
-        self.mainwindow.set_title(const.NAME)
-        self.mainwindow.resize(self.options.window_w, self.options.window_h)
-        self.mainwindow.move(self.options.window_x, self.options.window_y)
-        self.mainwindow.show()
+        self.connect('delete-event', self.quit_program)
+        self.set_title(const.NAME)
+        self.set_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
+        self.add(self.mainvbox)
+        self.resize(self.options.window_w, self.options.window_h)
+        self.move(self.options.window_x, self.options.window_y)
+        self.show()
         self.treeview.grab_focus()
 
         events = self.database.get_notification(time.time())
@@ -120,15 +124,14 @@ class MainWindow(builder.GtkBuilder):
             description = events[0][2]
             if len(description) > 25:
                 description = description[:24]+"..."
-            if QuestionDialog(messages.MSG_EVENT_NOTIFY,
-                              self.mainwindow, description).run():
-                tools.Calendar(self.mainwindow, self.database, events[0][0])
+            if QuestionDialog(messages.MSG_EVENT_NOTIFY, self, description).run():
+                tools.Calendar(self, self.database, events[0][0])
 
     def quit_program(self, widget=None, event=None, bckp=True):
         self.database.close()
 
-        x, y = self.mainwindow.get_position()
-        w, h = self.mainwindow.get_size()
+        x, y = self.get_position()
+        w, h = self.get_size()
         self.options.set_option('Window', 'window_x', x)
         self.options.set_option('Window', 'window_y', y)
         self.options.set_option('Window', 'window_w', w)
@@ -138,9 +141,9 @@ class MainWindow(builder.GtkBuilder):
             daysInSeconds = self.options.interval * 24 * 60 * 60
             if time.time() - self.options.last >= daysInSeconds:
                 if backup.make_backup(self.options.location):
-                    InfoDialog(messages.MSG_BACKUP_SUCCES, self.mainwindow)
+                    InfoDialog(messages.MSG_BACKUP_SUCCES, self)
                 else:
-                    InfoDialog(messages.MSG_BACKUP_FAILED, self.mainwindow)
+                    InfoDialog(messages.MSG_BACKUP_FAILED, self)
                 self.options.set_option('Backup', 'last', time.time())
         gtk.main_quit()
 
@@ -204,24 +207,24 @@ class MainWindow(builder.GtkBuilder):
         pigeon = self.treeview.get_selected_pigeon()
         if pigeon is None or isinstance(pigeon, list): return
         userinfo = common.get_own_address(self.database)
-        printing.PrintPedigree(self.mainwindow, pigeon, userinfo,
+        printing.PrintPedigree(self, pigeon, userinfo,
                                self.options, const.PRINT, '', self.parser)
 
     def menuprintblank_activate(self, widget):
         logger.debug(common.get_function_name())
         userinfo = common.get_own_address(self.database)
-        printing.PrintPedigree(self.mainwindow, None, userinfo,
+        printing.PrintPedigree(self, None, userinfo,
                                self.options, const.PRINT, '', self.parser)
 
     def menubackup_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = dialogs.BackupDialog(self.mainwindow, const.CREATE)
+        dialog = dialogs.BackupDialog(self, const.CREATE)
         dialog.run()
         dialog.destroy()
 
     def menurestore_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = dialogs.BackupDialog(self.mainwindow, const.RESTORE)
+        dialog = dialogs.BackupDialog(self, const.RESTORE)
         dialog.run()
         dialog.destroy()
 
@@ -231,11 +234,11 @@ class MainWindow(builder.GtkBuilder):
 
     def menusearch_activate(self, widget):
         logger.debug(common.get_function_name())
-        self.treeview.run_searchdialog(self.mainwindow)
+        self.treeview.run_searchdialog(self)
 
     def menualbum_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.PhotoAlbum(self.mainwindow, self.parser, self.database)
+        tools.PhotoAlbum(self, self.parser, self.database)
 
     def menulog_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -339,7 +342,7 @@ class MainWindow(builder.GtkBuilder):
     def menupedigree_activate(self, widget):
         logger.debug(common.get_function_name())
         pigeon = self.treeview.get_selected_pigeon()
-        pedigreewindow.PedigreeWindow(self.mainwindow, self.database, self.options,
+        pedigreewindow.PedigreeWindow(self, self.database, self.options,
                                       self.parser, self.pedigree, pigeon)
 
     def menuaddresult_activate(self, widget):
@@ -349,11 +352,11 @@ class MainWindow(builder.GtkBuilder):
 
     def menufilter_activate(self, widget):
         logger.debug(common.get_function_name())
-        self.treeview.run_filterdialog(self.mainwindow, self.database)
+        self.treeview.run_filterdialog(self, self.database)
 
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = optionsdialog.OptionsDialog(self.mainwindow, self.options)
+        dialog = optionsdialog.OptionsDialog(self, self.options)
         dialog.connect('interface-changed', self.on_interface_changed)
 
     def menuarrows_toggled(self, widget):
@@ -378,23 +381,23 @@ class MainWindow(builder.GtkBuilder):
 
     def menuvelocity_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.VelocityCalculator(self.mainwindow, self.database, self.options)
+        tools.VelocityCalculator(self, self.database, self.options)
 
     def menurace_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.RacepointManager(self.mainwindow, self.database)
+        tools.RacepointManager(self, self.database)
 
     def menuaddresses_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.AddressBook(self.mainwindow, self.database)
+        tools.AddressBook(self, self.database)
 
     def menucalendar_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.Calendar(self.mainwindow, self.database)
+        tools.Calendar(self, self.database)
 
     def menudata_activate(self, widget):
         logger.info(common.get_function_name())
-        tools.DataManager(self.mainwindow, self.database, self.parser)
+        tools.DataManager(self, self.database, self.parser)
 
     def menuhome_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -414,19 +417,18 @@ class MainWindow(builder.GtkBuilder):
 
         title = _("Search for updates...")
         if new:
-            if QuestionDialog((msg, _("Go to the website?"), title),
-                                      self.mainwindow).run():
+            if QuestionDialog((msg, _("Go to the website?"), title), self).run():
                 webbrowser.open(const.DOWNLOADURL)
         else:
-            InfoDialog((msg, None, title), self.mainwindow)
+            InfoDialog((msg, None, title), self)
 
     def menuinfo_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialogs.InformationDialog(self.mainwindow, self.database)
+        dialogs.InformationDialog(self, self.database)
 
     def menuabout_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialogs.AboutDialog(self.mainwindow)
+        dialogs.AboutDialog(self)
 
     # range callbacks
     def on_rangeadd_clicked(self, widget):
@@ -439,10 +441,10 @@ class MainWindow(builder.GtkBuilder):
             checks.check_ring_entry(rangefrom, rangeyear)
             checks.check_ring_entry(rangeto, rangeyear)
         except checks.InvalidInputError, msg:
-            ErrorDialog(msg.value, self.mainwindow)
+            ErrorDialog(msg.value, self)
             return
         if not rangefrom.isdigit() or not rangeto.isdigit():
-            ErrorDialog(messages.MSG_INVALID_RANGE, self.mainwindow)
+            ErrorDialog(messages.MSG_INVALID_RANGE, self)
             return
 
         logger.debug("Adding a range of pigeons")
@@ -453,7 +455,7 @@ class MainWindow(builder.GtkBuilder):
             logger.debug("Range: adding '%s'", pindex)
             if self.database.has_pigeon(pindex):
                 if not WarningDialog(messages.MSG_OVERWRITE_PIGEON,
-                                     self.mainwindow).run():
+                                     self).run():
                     continue
             pigeon = self.parser.add_empty_pigeon(pindex, rangesex)
             row = [pigeon, pindex, band, rangeyear, '', '',
@@ -543,7 +545,7 @@ class MainWindow(builder.GtkBuilder):
         uimanager.insert_action_group(self._create_action_group(), 0)
         uimanager.connect('connect-proxy', self.on_uimanager_connect_proxy)
         accelgroup = uimanager.get_accel_group()
-        self.mainwindow.add_accel_group(accelgroup)
+        self.add_accel_group(accelgroup)
 
         widgetDic = {
             "menubar": uimanager.get_widget('/MenuBar'),
@@ -572,8 +574,8 @@ class MainWindow(builder.GtkBuilder):
                                      self.ToolEdit, self.ToolRemove,
                                      self.ToolPedigree], False)
 
-        self.vbox.pack_start(self.menubar, False, False)
-        self.vbox.pack_start(self.toolbar, False, False)
+        self.mainvbox.pack_start(self.menubar, False, False)
+        self.mainvbox.pack_start(self.toolbar, False, False)
 
         if const.OSX:
             try:

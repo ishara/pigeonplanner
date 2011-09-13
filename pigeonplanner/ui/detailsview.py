@@ -85,7 +85,7 @@ class DetailsDialog(gtk.Dialog):
         self.destroy()
 
 
-class DetailsView(builder.GtkBuilder):
+class DetailsView(builder.GtkBuilder, gobject.GObject):
     __gsignals__ = {'edit-finished': (gobject.SIGNAL_RUN_LAST,
                                       None, (object, int)),
                     'edit-cancelled': (gobject.SIGNAL_RUN_LAST,
@@ -93,6 +93,7 @@ class DetailsView(builder.GtkBuilder):
                     }
     def __init__(self, parent, database, parser, in_dialog=False):
         builder.GtkBuilder.__init__(self, "DetailsView.ui")
+        gobject.GObject.__init__(self)
 
         self.parent = parent
         self.database = database

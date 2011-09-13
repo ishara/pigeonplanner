@@ -56,7 +56,7 @@ class Configuration(object):
         self.__addOption('Window', 'window_x', 0)
         self.__addOption('Window', 'window_y', 0)
         self.__addOption('Window', 'window_w', 1)
-        self.__addOption('Window', 'window_h', 720)
+        self.__addOption('Window', 'window_h', 680)
         self.__addSection('Backup')
         self.__addOption('Backup', 'backup', 'True')
         self.__addOption('Backup', 'interval', 30)
