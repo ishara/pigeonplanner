@@ -195,7 +195,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.hboxstatusedit.hide()
         self.hboxstatusnormal.show()
         self.statusdialog.show()
-        self.buttonstatusclose.grab_focus()
+        self.buttonstatusok.grab_focus()
 
     def on_buttonstatusedit_clicked(self, widget):
         self._set_status_editable(True)
