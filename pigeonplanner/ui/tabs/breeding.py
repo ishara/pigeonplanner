@@ -32,18 +32,18 @@ from translation import gettext as _
 
 
 class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, parent, database, parser, treeview):
+    def __init__(self, mainwindow, database, parser):
         basetab.BaseTab.__init__(self, _("Breeding"), "icon_breeding.png")
         builder.GtkBuilder.__init__(self, "BreedingView.ui")
         self._root.unparent()
 
-        self.parent = parent
+        self.mainwindow = mainwindow
         self.database = database
         self.parser = parser
-        self.maintreeview = treeview
+        self.maintreeview = mainwindow.get_treeview()
         self._selection = self.treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)
-        self.editdialog.set_transient_for(self.parent)
+        self.editdialog.set_transient_for(self.mainwindow)
 
     ## Tab
     def on_selection_changed(self, selection):
@@ -97,7 +97,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_buttoninfo1_clicked(self, widget):
         pigeon = self.parser.get_pigeon(self.bandentry1.get_pindex())
-        DetailsDialog(self.database, self.parser, pigeon, self.parent)
+        DetailsDialog(self.database, self.parser, pigeon, self.mainwindow)
 
     def on_buttongoto1_clicked(self, widget):
         pindex = self.bandentry1.get_pindex()
@@ -105,7 +105,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_buttoninfo2_clicked(self, widget):
         pigeon = self.parser.get_pigeon(self.bandentry1.get_pindex())
-        DetailsDialog(self.database, self.parser, pigeon, self.parent)
+        DetailsDialog(self.database, self.parser, pigeon, self.mainwindow)
 
     def on_buttongoto2_clicked(self, widget):
         pindex = self.bandentry1.get_pindex()

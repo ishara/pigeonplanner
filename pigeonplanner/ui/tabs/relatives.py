@@ -27,10 +27,9 @@ from translation import gettext as _
 
 
 class RelativesTab(basetab.BaseTab):
-    def __init__(self, parent, treeview, database, parser):
+    def __init__(self, mainwindow, database, parser):
         basetab.BaseTab.__init__(self, _("Relatives"), "icon_relatives.png")
-        self.parent = parent
-        self.treeview = treeview
+        self.mainwindow = mainwindow
         self.database = database
         self.parser = parser
 
@@ -99,10 +98,10 @@ class RelativesTab(basetab.BaseTab):
     def on_show_details(self, widget, pigeon):
         if not pigeon.get_pindex() in self.parser.pigeons:
             return
-        DetailsDialog(self.database, self.parser, pigeon, self.parent)
+        DetailsDialog(self.database, self.parser, pigeon, self.mainwindow)
 
     def on_goto_pigeon(self, widget, pigeon):
-        self.treeview.select_pigeon(None, pigeon.get_pindex())
+        self.mainwindow.get_treeview().select_pigeon(None, pigeon.get_pindex())
 
     # Public methods
     def fill_treeviews(self, pigeon):

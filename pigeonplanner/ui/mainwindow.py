@@ -82,14 +82,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
         self.pedigreetab = tabs.PedigreeTab(self.pedigree)
         self.notebook.append_page(*self.pedigreetab.get_tab_widgets())
-        self.relativestab = tabs.RelativesTab(self, self.treeview,
-                                              self.database, self.parser)
+        self.relativestab = tabs.RelativesTab(self, self.database, self.parser)
         self.notebook.append_page(*self.relativestab.get_tab_widgets())
         self.resultstab = tabs.ResultsTab(self, self.database,
                                           self.options, self.parser)
         self.notebook.append_page(*self.resultstab.get_tab_widgets())
-        self.breedingtab = tabs.BreedingTab(self, self.database,
-                                            self.parser, self.treeview)
+        self.breedingtab = tabs.BreedingTab(self, self.database, self.parser)
         self.notebook.append_page(*self.breedingtab.get_tab_widgets())
         self.mediatab = tabs.MediaTab(self, self.database,
                                       self.options, self.parser)
@@ -534,7 +532,11 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     ####################
     # Public methods
     ####################
+    def get_treeview(self):
+        return self.treeview
 
+    def get_statusbar(self):
+        return self.statusbar
 
     ####################
     # Internal methods
