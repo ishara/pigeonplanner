@@ -67,16 +67,9 @@ class RacepointManager(builder.GtkBuilder):
     def on_buttonsave_clicked(self, widget):
         try:
             latitude = self.entrylatitude.get_text()
-        except errors.InvalidInputError:
-            self.entrylatitude.warn()
-            return
-        self.entrylatitude.unwarn()
-        try:
             longitude = self.entrylongitude.get_text()
         except errors.InvalidInputError:
-            self.entrylongitude.warn()
             return
-        self.entrylongitude.unwarn()
 
         data = (latitude, longitude,
                 self.spindistance.get_value(),

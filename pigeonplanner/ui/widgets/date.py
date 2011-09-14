@@ -46,8 +46,9 @@ class DateEntry(gtk.Viewport):
         self.add(self._entry)
         self.show_all()
 
-    def on_icon_pressed(self, widget, icon, event):
-        CalendarPopup(widget)
+    def on_icon_pressed(self, widget, icon_pos, event):
+        if icon_pos == gtk.ENTRY_ICON_SECONDARY:
+            CalendarPopup(widget)
 
     def get_editable(self):
         return self._editable
@@ -59,7 +60,7 @@ class DateEntry(gtk.Viewport):
         self._entry.set_editable(editable)
         icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
         pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if editable else None
-        self._entry.set_icon_from_pixbuf(gtk.ENTRY_ICON_PRIMARY, pixbuf)
+        self._entry.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
     editable = gobject.property(get_editable, set_editable, bool, False)
 
     def get_clear(self):
@@ -94,7 +95,9 @@ class DateEntry(gtk.Viewport):
         try:
             datetime.datetime.strptime(date, const.DATE_FORMAT)
         except ValueError:
+            self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
             raise errors.InvalidInputError(messages.MSG_INVALID_FORMAT)
+        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
 
 
 class CalendarPopup(gtk.Window):

@@ -87,11 +87,18 @@ class BandEntry(gtk.Viewport):
             return
 
         if not band or not year:
+            self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
+                                                gtk.STOCK_STOP)
             raise errors.InvalidInputError(messages.MSG_EMPTY_FIELDS)
 
         elif not year.isdigit():
+            self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
+                                                gtk.STOCK_STOP)
             raise errors.InvalidInputError(messages.MSG_INVALID_NUMBER)
 
         elif not len(year) == 4:
+            self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
+                                                gtk.STOCK_STOP)
             raise errors.InvalidInputError(messages.MSG_INVALID_LENGTH)
+        self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
 

@@ -42,11 +42,11 @@ class LatLongEntry(gtk.Entry):
         return value
 
     def warn(self):
-        self.set_icon_from_stock(gtk.ENTRY_ICON_SECONDARY, gtk.STOCK_STOP)
-        self.set_icon_tooltip_text(gtk.ENTRY_ICON_SECONDARY, self._tooltip)
+        self.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
+        self.set_icon_tooltip_text(gtk.ENTRY_ICON_PRIMARY, self._tooltip)
 
     def unwarn(self):
-        self.set_icon_from_stock(gtk.ENTRY_ICON_SECONDARY, None)
+        self.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
 
     def __validate(self, value):
         if self.can_empty and value == '':
@@ -59,9 +59,13 @@ class LatLongEntry(gtk.Entry):
         for char in u' -+':
             value = value.replace(char, u'')
         if self.__check_float_repr(value) is not None:
+            self.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
             return
         if self.__check_dms_repr(value) is not None: 
+            self.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
             return
+        self.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
+        self.set_icon_tooltip_text(gtk.ENTRY_ICON_PRIMARY, self._tooltip)
         raise errors.InvalidInputError(value)
 
     def __check_float_repr(self, value):
