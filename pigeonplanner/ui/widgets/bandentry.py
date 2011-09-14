@@ -65,6 +65,7 @@ class BandEntry(gtk.Viewport):
         self.set_band(*common.get_band_from_pindex(pindex))
 
     def set_band(self, band, year):
+        self._unwarn()
         self._entryband.set_text(band)
         self._entryyear.set_text(year)
 
@@ -78,27 +79,34 @@ class BandEntry(gtk.Viewport):
             self.__validate(band, year)
         return band, year
 
+    def clear(self):
+        self.set_band('', '')
+
     def grab_focus(self):
         self._entryband.grab_focus()
         self._entryband.set_position(-1)
+
+    def _warn(self):
+        self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
+                                            gtk.STOCK_STOP)
+
+    def _unwarn(self):
+        self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
 
     def __validate(self, band, year):
         if self.can_empty and (band == '' and year == ''):
             return
 
         if not band or not year:
-            self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
-                                                gtk.STOCK_STOP)
+            self._warn()
             raise errors.InvalidInputError(messages.MSG_EMPTY_FIELDS)
 
         elif not year.isdigit():
-            self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
-                                                gtk.STOCK_STOP)
+            self._warn()
             raise errors.InvalidInputError(messages.MSG_INVALID_NUMBER)
 
         elif not len(year) == 4:
-            self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
-                                                gtk.STOCK_STOP)
+            self._warn()
             raise errors.InvalidInputError(messages.MSG_INVALID_LENGTH)
-        self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
+        self._unwarn()
 

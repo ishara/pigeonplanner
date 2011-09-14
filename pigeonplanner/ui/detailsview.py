@@ -311,12 +311,12 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             self.imagepigeon.set_from_pixbuf(const.LOGO_IMG)
 
     def clear_details(self):
-        self.entryband.set_band('', '')
-        self.entrybandedit.set_band('', '')
-        self.entrysire.set_band('', '')
-        self.entrysireedit.set_band('', '')
-        self.entrydam.set_band('', '')
-        self.entrydamedit.set_band('', '')
+        self.entryband.clear()
+        self.entrybandedit.clear()
+        self.entrysire.clear()
+        self.entrysireedit.clear()
+        self.entrydam.clear()
+        self.entrydamedit.clear()
 
         self.combocolour.child.set_text('')
         self.combostrain.child.set_text('')

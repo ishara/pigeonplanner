@@ -89,15 +89,23 @@ class DateEntry(gtk.Viewport):
         self._entry.grab_focus()
         self._entry.set_position(-1)
 
+    def _warn(self):
+        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
+                                            gtk.STOCK_STOP)
+
+    def _unwarn(self):
+        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
+
+
     def __validate(self, date):
         if self.can_empty and date == '':
             return
         try:
             datetime.datetime.strptime(date, const.DATE_FORMAT)
         except ValueError:
-            self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
+            self._warn()
             raise errors.InvalidInputError(messages.MSG_INVALID_FORMAT)
-        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
+        self._unwarn()
 
 
 class CalendarPopup(gtk.Window):
