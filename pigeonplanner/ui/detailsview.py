@@ -30,6 +30,7 @@ import errors
 import builder
 import messages
 import thumbnail
+import database
 from ui import tools
 from ui import dialogs
 from ui import filechooser
@@ -432,7 +433,10 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
     def _update_combo_data(self, combo, data, table):
         if not data: return
-        self.database.insert_into_table(table, (data,))
+        try:
+            self.database.insert_into_table(table, (data,))
+        except database.InvalidValueError:
+            return
         model = combo.get_model()
         for treerow in model:
             if data in treerow:
