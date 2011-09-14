@@ -30,6 +30,11 @@
     <glade-widget-class title="Speed Combobox" name="SpeedCombobox" generic-name="speedcombo">
     </glade-widget-class>
     <glade-widget-class title="LatLong Entry" name="LatLongEntry" generic-name="latlongentry">
+      <properties>
+        <property id="shadow-type" save="False" visible="False"/>
+        <property id="hadjustment" save="False" visible="False"/>
+        <property id="vadjustment" save="False" visible="False"/>
+      </properties>
     </glade-widget-class>
     <glade-widget-class title="Statusbar" name="StatusBar" generic-name="statusbar">
       <properties>

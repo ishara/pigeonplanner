@@ -23,33 +23,54 @@ import errors
 from translation import gettext as _
 
 
-class LatLongEntry(gtk.Entry):
+class LatLongEntry(gtk.Viewport):
     __gtype_name__ = 'LatLongEntry'
     can_empty = gobject.property(type=bool, default=False, nick="Can empty")
-    def __init__(self, can_empty=False):
-        gtk.Entry.__init__(self)
+    def __init__(self, editable=False, can_empty=False):
+        gtk.Viewport.__init__(self)
+
+        self._entry = gtk.Entry()
 
         self.can_empty = can_empty
+        self.editable = editable
+        self.add(self._entry)
+        self.show_all()
+
         self._tooltip = _("Input should be in one of these formats:\n  "
                           "DD.dddddd°\n  "
                           "DD°MM.mmm’\n  "
                           "DD°MM’SS.s”")
 
+    def get_editable(self):
+        return self._editable
+
+    def set_editable(self, editable):
+        self._editable = editable
+        self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
+        self._entry.set_has_frame(editable)
+        self._entry.set_editable(editable)
+        self._entry.set_activates_default(editable)
+    editable = gobject.property(get_editable, set_editable, bool, False, "Editable")
+
+    def set_text(self, text):
+        self._entry.set_text(text)
+
     def get_text(self, validate=True):
-        value = gtk.Entry.get_text(self)
+        value = self._entry.get_text()
         if validate:
             self.__validate(value)
         return value
 
     def _warn(self):
-        self.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
-        self.set_icon_tooltip_text(gtk.ENTRY_ICON_PRIMARY, self._tooltip)
+        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
+        self._entry.set_icon_tooltip_text(gtk.ENTRY_ICON_PRIMARY, self._tooltip)
 
     def _unwarn(self):
-        self.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
+        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
 
     def __validate(self, value):
         if self.can_empty and value == '':
+            self._unwarn()
             return
         # Accepted values are:
         #    DD.dddddd°
