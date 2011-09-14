@@ -26,6 +26,9 @@ import const
 from translation import gettext as _
 
 
+LAST_FOLDER = None
+
+
 #### Main filechooser
 class _FileChooser(gtk.FileChooser):
     def _update_preview_cb(self, filechooser):
@@ -104,7 +107,14 @@ class _FileChooserDialog(gtk.FileChooserDialog, _FileChooser):
         super(_FileChooserDialog, self).__init__(parent=parent, action=action)
         self.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
         self.set_preview(preview)
+        if LAST_FOLDER is not None:
+            folder = LAST_FOLDER
         self.set_current_folder(folder)
+
+    def do_response(self, response):
+        if response == gtk.RESPONSE_OK:
+            global LAST_FOLDER
+            LAST_FOLDER = self.get_current_folder()
 
 
 class ImageChooser(_FileChooserDialog):
