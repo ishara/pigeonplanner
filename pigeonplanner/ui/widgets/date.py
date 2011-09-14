@@ -59,7 +59,7 @@ class DateEntry(gtk.Viewport):
         self._entry.set_editable(editable)
         icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
         pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if editable else None
-        self._entry.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
+        self._entry.set_icon_from_pixbuf(gtk.ENTRY_ICON_PRIMARY, pixbuf)
     editable = gobject.property(get_editable, set_editable, bool, False)
 
     def get_clear(self):
