@@ -83,7 +83,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         chooser.destroy()
 
     def on_buttonremove_clicked(self, widget):
-        if QuestionDialog(messages.MSG_REMOVE_MEDIA, self.parent).run():
+        if not QuestionDialog(messages.MSG_REMOVE_MEDIA, self.parent).run():
             return
 
         model, rowiter = self._selection.get_selected()
