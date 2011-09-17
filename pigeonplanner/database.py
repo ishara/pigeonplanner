@@ -143,7 +143,9 @@ class DatabaseOperations(object):
           ' phone TEXT,'
           ' email TEXT,'
           ' comment TEXT,'
-          ' me INTEGER)',
+          ' me INTEGER,'
+          ' latitude TEXT DEFAULT "",'
+          ' longitude TEXT DEFAULT "")',
     EVENTS: '(Eventskey INTEGER PRIMARY KEY,'
             ' date TEXT,'
             ' type TEXT,'

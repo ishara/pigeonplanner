@@ -19,8 +19,10 @@
 import gtk
 
 import const
+import errors
 import builder
 import messages
+from ui.widgets import latlongentry
 from ui.messagedialog import QuestionDialog
 
 
@@ -87,8 +89,11 @@ class AddressBook(builder.GtkBuilder):
         self._selection.select_path(path)
 
     def on_buttonsave_clicked(self, widget):
+        try:
+            data = self._get_entry_data()
+        except errors.InvalidInputError:
+            return
         self._set_widgets(False)
-        data = self._get_entry_data()
         name = data[0]
         if self._mode == const.ADD:
             rowid = self.db.insert_into_table(self.db.ADDR, data)
@@ -128,6 +133,8 @@ class AddressBook(builder.GtkBuilder):
         self.entryemail.set_text(data[7])
         self.entrycomment.set_text(data[8])
         self.checkme.set_active(data[9])
+        self.entrylat.set_text(data[10])
+        self.entrylong.set_text(data[11])
 
     # Internal methods
     def _fill_treeview(self):
@@ -153,8 +160,11 @@ class AddressBook(builder.GtkBuilder):
 
         shadow = gtk.SHADOW_NONE if value else gtk.SHADOW_IN
         for entry in self._entries:
-            entry.set_has_frame(value)
             entry.set_editable(value)
+            if isinstance(entry, latlongentry.LatLongEntry):
+                # These will handle the frame itself by setting it editable
+                continue
+            entry.set_has_frame(value)
             entry.get_parent().set_shadow_type(shadow)
 
         self.entryname.grab_focus()
@@ -169,7 +179,9 @@ class AddressBook(builder.GtkBuilder):
                 self.entryphone.get_text(),
                 self.entryemail.get_text(),
                 self.entrycomment.get_text(),
-                int(self.checkme.get_active())
+                int(self.checkme.get_active()),
+                self.entrylat.get_text(),
+                self.entrylong.get_text(),
                 )
 
     def _get_address_key(self):
