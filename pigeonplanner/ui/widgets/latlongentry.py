@@ -55,10 +55,12 @@ class LatLongEntry(gtk.Viewport):
     def set_text(self, text):
         self._entry.set_text(text)
 
-    def get_text(self, validate=True):
+    def get_text(self, validate=True, as_float=False):
         value = self._entry.get_text()
         if validate:
-            self.__validate(value)
+            self.__validate(value, as_float)
+        if as_float:
+            return float(value)
         return value
 
     def _warn(self):
@@ -68,7 +70,7 @@ class LatLongEntry(gtk.Viewport):
     def _unwarn(self):
         self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
 
-    def __validate(self, value):
+    def __validate(self, value, as_float=False):
         if self.can_empty and value == '':
             self._unwarn()
             return
@@ -82,6 +84,9 @@ class LatLongEntry(gtk.Viewport):
         if self.__check_float_repr(value) is not None:
             self._unwarn()
             return
+        if as_float:
+            # We need the float repr, above float check failed
+            raise errors.InvalidInputError(value)
         if self.__check_dms_repr(value) is not None: 
             self._unwarn()
             return

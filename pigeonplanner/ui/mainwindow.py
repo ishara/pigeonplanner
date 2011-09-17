@@ -381,6 +381,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         logger.debug(common.get_function_name())
         tools.VelocityCalculator(self, self.database, self.options)
 
+    def menudistance_activate(self, widget):
+        logger.debug(common.get_function_name())
+        tools.DistanceCalculator(self, self.database)
+
     def menurace_activate(self, widget):
         logger.debug(common.get_function_name())
         tools.RacepointManager(self, self.database)
@@ -648,6 +652,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             ("Velocity", None, _("Velocity calculator"), None,
                     _("Calculate the velocity of flights"),
                     self.menuvelocity_activate),
+            ("Distance", None, _("Distance calculator"), None,
+                    _("Calculate the distance between locations"),
+                    self.menudistance_activate),
             ("Racepoints", None, _("Racepoint manager"), None,
                     _("Manage the racepoints and distances"),
                     self.menurace_activate),

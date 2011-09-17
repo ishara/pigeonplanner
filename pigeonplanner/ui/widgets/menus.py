@@ -61,6 +61,7 @@ ui_mainwindow = """
       </menu>
       <menu action="ToolsMenu">
          <menuitem action="Velocity"/>
+         <menuitem action="Distance"/>
          <menuitem action="Racepoints"/>
          <menuitem action="Album"/>
          <menuitem action="Addresses"/>

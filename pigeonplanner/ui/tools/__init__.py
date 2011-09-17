@@ -18,6 +18,7 @@
 
 from ui.tools.addressbook import AddressBook, check_user_info
 from ui.tools.velocitycalculator import VelocityCalculator
+from ui.tools.distancecalculator import DistanceCalculator
 from ui.tools.calendar import Calendar
 from ui.tools.photoalbum import PhotoAlbum
 from ui.tools.datamanager import DataManager
