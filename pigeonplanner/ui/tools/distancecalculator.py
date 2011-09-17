@@ -43,7 +43,7 @@ class DistanceCalculator(builder.GtkBuilder):
 
     def close_window(self, widget, event=None):
         self._unit = self.combounit.get_active()
-        self._distance = self.entryresult.get_text()
+        self._distance = self.entryresult.get_text() or 0.0
         self.window.destroy()
         return False
 
