@@ -24,6 +24,7 @@ import builder
 from ui.widgets import comboboxes
 from ui.widgets import latlongentry
 from datamanager import DataManager
+from distancecalculator import DistanceCalculator
 
 
 class RacepointManager(builder.GtkBuilder):
@@ -63,6 +64,14 @@ class RacepointManager(builder.GtkBuilder):
         if response == gtk.RESPONSE_CLOSE:
             self._fill_racepoints_combo()
         manager.window.destroy()
+
+    def on_buttoncalculate_clicked(self, widget):
+        calculator = DistanceCalculator(self.window, self.database)
+        response = calculator.window.run()
+        if response == gtk.RESPONSE_CLOSE:
+            self.spindistance.set_value(float(calculator.get_distance()))
+            self.combodistance.set_active(calculator.get_unit())
+        calculator.window.destroy()
 
     def on_buttonsave_clicked(self, widget):
         try:

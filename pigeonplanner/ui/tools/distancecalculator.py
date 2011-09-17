@@ -35,11 +35,15 @@ class DistanceCalculator(builder.GtkBuilder):
 
         self.database = database
 
+        self._distance = 0.0
+        self._unit = 0
         self._fill_location_combos()
         self.window.set_transient_for(parent)
         self.window.show()
 
     def close_window(self, widget, event=None):
+        self._unit = self.combounit.get_active()
+        self._distance = self.entryresult.get_text()
         self.window.destroy()
         return False
 
@@ -107,6 +111,12 @@ class DistanceCalculator(builder.GtkBuilder):
         self.entrylongto.set_editable(editable)
         self.entrylatto.set_text(latitude)
         self.entrylongto.set_text(longitude)
+
+    def get_unit(self):
+        return self._unit
+
+    def get_distance(self):
+        return self._distance
 
     def _fill_location_combos(self):
         data = self.database.select_from_table(self.database.RACEPOINTS)
