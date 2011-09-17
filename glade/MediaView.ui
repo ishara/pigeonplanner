@@ -12,6 +12,10 @@
       <column type="gchararray"/>
       <!-- column-name title -->
       <column type="gchararray"/>
+      <!-- column-name color -->
+      <column type="gchararray"/>
+      <!-- column-name select -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkWindow" id="window1">
@@ -50,8 +54,8 @@
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext1"/>
                               <attributes>
+                                <attribute name="background">4</attribute>
                                 <attribute name="markup">3</attribute>
-                                <attribute name="text">3</attribute>
                               </attributes>
                             </child>
                           </object>

@@ -17,6 +17,7 @@
 
 
 import os
+import operator
 
 import gtk
 
@@ -42,6 +43,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         self.options = options
         self.parser = parser
         self._selection = self.treeview.get_selection()
+        self._selection.set_select_function(self._select_func, full=True)
         self._selection.connect('changed', self.on_selection_changed)
 
     def on_selection_changed(self, selection):
@@ -75,11 +77,8 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
             data = [self.pigeon.get_pindex(), filetype, filepath,
                     chooser.get_filetitle(), chooser.get_filedescription()]
             rowid = self.database.insert_into_table(self.database.MEDIA, data)
-            text = self._format_text(data[3], data[4])
-            rowiter = self.liststore.insert(0, [rowid, filetype, filepath, text])
-            self._selection.select_iter(rowiter)
-            path = self.liststore.get_path(rowiter)
-            self.treeview.scroll_to_cell(path)
+            # Hackish... Fill whole treeview again
+            self.fill_treeview(self.pigeon)
         chooser.destroy()
 
     def on_buttonremove_clicked(self, widget):
@@ -103,11 +102,26 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def fill_treeview(self, pigeon):
         self.pigeon = pigeon
 
+        images = []
+        other = []
         self.liststore.clear()
         for media in self.database.get_pigeon_media(pigeon.pindex):
+            if mime.is_image(media[2]):
+                images.append(media)
+            else:
+                other.append(media)
+        images.sort(key=operator.itemgetter(4))
+        other.sort(key=operator.itemgetter(4))
+
+        normal = ["#ffffff", True]
+        self.liststore.append(['', '', '', _('Images'), "#dcdcdc", False])
+        for media in images:
             text = self._format_text(media[4], media[5])
-            self.liststore.insert(0, [media[0], media[2], media[3], text])
-        self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+            self.liststore.append([media[0], media[2], media[3], text]+normal)
+        self.liststore.append(['', '', '', _('Other'), "#dcdcdc", False])
+        for media in other:
+            text = self._format_text(media[4], media[5])
+            self.liststore.append([media[0], media[2], media[3], text]+normal)
 
     def _format_text(self, title, description):
         text = common.escape_text(title)
@@ -115,4 +129,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
             text += " - <span style='italic' size='smaller'>%s</span>"\
                         % common.escape_text(description)
         return text
+
+    def _select_func(self, selection, model, path, is_selected):
+        return model[path][5]
 
