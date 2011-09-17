@@ -501,6 +501,10 @@ class DatabaseOperations(object):
         sql = 'SELECT * FROM Addresses WHERE me=1'
         return self.__db_execute_select(sql, None, RET_ONEROW)
 
+    def get_loft_latlong(self):
+        sql = 'SELECT latitude, longitude FROM Addresses WHERE me=1'
+        return self.__db_execute_select(sql, None, RET_ONEROW)
+
 #### Racepoints
     def get_racepoint_data(self, racepoint):
         sql = 'SELECT xco, yco, distance, unit FROM Racepoints WHERE racepoint=?'

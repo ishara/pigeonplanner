@@ -82,6 +82,10 @@ class DistanceCalculator(builder.GtkBuilder):
             editable = True
             latitude = ''
             longitude = ''
+        elif widget.get_active() == 1:
+            # Loft selected
+            editable = False
+            latitude, longitude = self.database.get_loft_latlong()
         else:
             editable = False
             rp = widget.get_active_text()
@@ -100,6 +104,10 @@ class DistanceCalculator(builder.GtkBuilder):
             editable = True
             latitude = ''
             longitude = ''
+        elif widget.get_active() == 1:
+            # Loft selected
+            editable = False
+            latitude, longitude = self.database.get_loft_latlong()
         else:
             editable = False
             rp = widget.get_active_text()
@@ -122,6 +130,7 @@ class DistanceCalculator(builder.GtkBuilder):
         data = self.database.select_from_table(self.database.RACEPOINTS)
         data.sort()
         data.insert(0, _("Custom"))
+        data.insert(1, _("Loft"))
         comboboxes.fill_combobox(self.combolocationfrom, data, sort=False)
         comboboxes.fill_combobox(self.combolocationto, data, sort=False)
 
