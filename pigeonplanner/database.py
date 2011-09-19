@@ -350,11 +350,13 @@ class DatabaseOperations(object):
         return self.__db_execute_select(sql, None, RET_ALLCOL)
 
     def check_schema(self):
+        changed = False
         # Check if all tables are present
         for s_table, s_columns in self.SCHEMA.items():
             if not s_table in self.get_tablenames():
                 logger.debug("Adding table '%s'" %s_table)
                 self.add_table_from_schema(s_table)
+                changed = True
 
         # Check if all columns are present
         for table in self.get_tablenames(): # Get all tables again
@@ -378,6 +380,8 @@ class DatabaseOperations(object):
                     logger.debug("Adding column '%s' to table '%s'"
                                  %(column, table))
                     self.add_column(table, column_def)
+                    changed = True
+        return changed
 
 #### Pigeons
     def update_pedigree_pigeon(self, data):

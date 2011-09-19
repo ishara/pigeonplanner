@@ -161,12 +161,17 @@ class Startup(object):
 
         self.db = database.DatabaseOperations()
         try:
-            self.db.check_schema()
+            changed = self.db.check_schema()
         except KeyError:
             import messages
             from ui.messagedialog import ErrorDialog
             ErrorDialog(messages.MSG_NEW_DATABASE)
             raise SystemExit()
+
+        if changed:
+            import messages
+            from ui.messagedialog import InfoDialog
+            InfoDialog(messages.MSG_UPDATED_DATABASE)
 
     def setup_pigeons(self):
         """

@@ -32,6 +32,12 @@ MSG_NEW_DATABASE = (_("The database you are trying to open is too new "
                       "reinstall the latest version to continue."),
                     None,
                     ERROR+" - Pigeon Planner")
+MSG_UPDATED_DATABASE = (_("The Pigeon Planner databases has been updated "
+                          "to match the current version. Note that it is "
+                          "not advised to run an older version, which can "
+                          "lead to data corruption."),
+                        None,
+                        "Database updated")
 
 MSG_MAKE_DONATION = (_("Go to the website?"),
                      _("Pigeon Planner is free software. You don’t need to pay "
