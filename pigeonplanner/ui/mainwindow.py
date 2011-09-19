@@ -232,7 +232,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menusearch_activate(self, widget):
         logger.debug(common.get_function_name())
-        self.treeview.run_searchdialog(self)
+        dialog = dialogs.SearchDialog(self)
+        dialog.run()
 
     def menualbum_activate(self, widget):
         logger.debug(common.get_function_name())

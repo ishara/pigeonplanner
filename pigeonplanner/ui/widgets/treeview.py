@@ -24,7 +24,6 @@ from translation import gettext as _
 
 
 FILTER = 0
-SEARCH = 1
 
 
 class MainTreeView(gtk.TreeView):
@@ -39,8 +38,6 @@ class MainTreeView(gtk.TreeView):
         self.statusbar = statusbar
         self.statusbar.set_filter(False)
         self.filters = []
-        self.searchopts = None
-        self.keyword = None
         self._filter = None
         self._liststore = self._build_treeview()
         self._modelfilter = self._liststore.filter_new()
@@ -65,16 +62,6 @@ class MainTreeView(gtk.TreeView):
         self.filters = widget.get_filters()
         self._modelfilter.refilter()
         self.statusbar.set_filter(False)
-
-    def on_search_results(self, widget, opts, keyword):
-        self.searchopts = opts
-        self.keyword = keyword
-        self._modelfilter.refilter()
-
-    def on_clear_results(self, widget):
-        self.searchopts = None
-        self.keyword = None
-        self._modelfilter.refilter()
 
     # Public methods
     def get_top_iter(self, rowiter):
@@ -146,10 +133,14 @@ class MainTreeView(gtk.TreeView):
             if self._liststore.get_value(row.iter, 1) == pindex:
                 self._selection.unselect_all()
                 self._selection.select_iter(self.get_top_iter(row.iter))
+                #TODO: doesn't always work correctly
                 self.scroll_to_cell(row.path)
                 self.grab_focus()
                 return True
         return False
+
+    def get_pigeons(self):
+        return [row[0] for row in self._liststore]
 
     def get_selected_pigeon(self):
         model, paths = self._selection.get_selected_rows()
@@ -169,17 +160,6 @@ class MainTreeView(gtk.TreeView):
                       6: self.options.colstrain}
         for key, value in columnsdic.items():
             self.get_column(key).set_visible(value)
-
-    def run_searchdialog(self, parent):
-        self._filter = SEARCH
-        dialog = dialogs.SearchDialog(parent)
-        dialog.connect('search', self.on_search_results)
-        dialog.connect('clear', self.on_clear_results)
-        dialog.run()
-        dialog.destroy()
-        self.searchopts = None
-        self.keyword = None
-        self._modelfilter.refilter()
 
     def run_filterdialog(self, parent, database):
         dialog = dialogs.FilterDialog(parent, _("Filter pigeons"))
@@ -217,9 +197,6 @@ class MainTreeView(gtk.TreeView):
         if self._filter == FILTER:
             pigeon = model.get_value(treeiter, 0)
             return self._filter_func(pigeon)
-        elif self._filter == SEARCH:
-            pigeon = model.get_value(treeiter, 0)
-            return self._search_func(pigeon)
         return True
 
     def _filter_func(self, pigeon):
@@ -231,15 +208,6 @@ class MainTreeView(gtk.TreeView):
             if check.get_active() and not data == widget.get_data():
                 return False
         return True
-
-    def _search_func(self, pigeon):
-        if self.searchopts is None:
-            return True
-        checkring, checkname = self.searchopts
-        if (checkring.get_active() and self.keyword in pigeon.get_ring()) or\
-           (checkname.get_active() and self.keyword in pigeon.get_name()):
-            return True
-        return False
 
     def _sort_func(self, model, iter1, iter2):
         data1 = model.get_value(iter1, 3)

@@ -295,16 +295,17 @@ class FilterDialog(gtk.Dialog):
 
 
 class SearchDialog(gtk.Dialog):
-    __gsignals__ = {'search': (gobject.SIGNAL_RUN_LAST, None, (object, str)),
-                    'clear': (gobject.SIGNAL_RUN_LAST, None, ()),
-                    }
-    def __init__(self, parent):
-        gtk.Dialog.__init__(self, _("Search a pigeon"), parent,
-                            gtk.DIALOG_DESTROY_WITH_PARENT,
-                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+    def __init__(self, mainwindow):
+        gtk.Dialog.__init__(self, _("Search a pigeon"), mainwindow,
+                            0, (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        self.set_modal(False)
         self.set_resizable(False)
         self.set_skip_taskbar_hint(True)
+        self.treeview = mainwindow.get_treeview()
+        self.pigeons = self.treeview.get_pigeons()
+        self.counter = 0
+        self.results = []
 
         self.button = gtk.Button(stock=gtk.STOCK_FIND)
         self.button.set_sensitive(False)
@@ -320,33 +321,60 @@ class SearchDialog(gtk.Dialog):
         hbox.pack_start(self.entry, False, True, 0)
 
         label = gtk.Label(_("Search in:"))
-        check1 = gtk.CheckButton(_("Band numbers"))
-        check2 = gtk.CheckButton(_("Names"))
+        check1 = self.checkring = gtk.CheckButton(_("Band numbers"))
+        check1.set_active(True)
+        check2 = self.checkname = gtk.CheckButton(_("Names"))
         table = gtk.Table(2, 2)
         table.set_col_spacings(12)
         table.attach(label, 0, 1, 0, 1, gtk.FILL)
         table.attach(check1, 1, 2, 0, 1)
         table.attach(check2, 1, 2, 1, 2)
-        self.results = [check1, check2]
 
         self.vbox.set_spacing(8)
         self.vbox.pack_start(hbox, False, False, 0)
         self.vbox.pack_start(table, False, True, 0)
         self.vbox.show_all()
 
+    def run(self):
+        self.connect('response', self.on_dialog_response)
+        self.show_all()
+
+    def on_dialog_response(self, dialog, response_id):
+        if response_id == gtk.RESPONSE_CLOSE or \
+           response_id == gtk.RESPONSE_DELETE_EVENT:
+            dialog.destroy()
+
     def on_entry_changed(self, widget):
+        self.counter = 0
+        self.results = []
         has_text = widget.get_text() != ''
         icon = gtk.STOCK_CLEAR if has_text else None
         self.button.set_sensitive(has_text)
         widget.set_icon_from_stock(gtk.ENTRY_ICON_SECONDARY, icon)
 
     def on_entryicon_press(self, widget, icon, event):
-        self.emit('clear')
+        self.counter = 0
+        self.results = []
         widget.set_text('')
         widget.grab_focus()
 
     def on_button_clicked(self, widget):
-        self.emit('search', self.results, self.entry.get_text())
+        if len(self.results) == 0:
+            keyword = self.entry.get_text()
+            for pigeon in self.pigeons:
+                if (self.checkring.get_active() and keyword in pigeon.get_ring()) or\
+                   (self.checkname.get_active() and keyword in pigeon.get_name()):
+                    self.results.append(pigeon.get_pindex())
+
+        try:
+            self.treeview.select_pigeon(None, self.results[self.counter])
+        except IndexError:
+            # No results found
+            pass
+        else:
+            self.counter += 1
+            if self.counter == len(self.results):
+                self.counter = 0
 
 
 class MedicationRemoveDialog(gtk.Dialog):
