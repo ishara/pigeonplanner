@@ -30,11 +30,23 @@ import builder
 import printing
 from ui import tools
 from ui import maildialog
-from ui.widgets import menus
 from translation import gettext as _
 
 
 class PedigreeWindow(builder.GtkBuilder):
+    ui = """
+<ui>
+   <toolbar name="Toolbar">
+      <toolitem action="Save"/>
+      <toolitem action="Mail"/>
+      <separator/>
+      <toolitem action="Preview"/>
+      <toolitem action="Print"/>
+      <separator/>
+      <toolitem action="Close"/>
+   </toolbar>
+</ui>
+"""
     def __init__(self, parent, database, options, parser, pedigree, pigeon):
         builder.GtkBuilder.__init__(self, "PedigreeWindow.ui")
 
@@ -63,7 +75,7 @@ class PedigreeWindow(builder.GtkBuilder):
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(menus.ui_pedigreewindow)
+        uimanager.add_ui_from_string(self.ui)
         uimanager.insert_action_group(self.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.pedigreewindow.add_accel_group(accelgroup)

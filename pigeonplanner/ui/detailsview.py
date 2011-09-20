@@ -32,10 +32,10 @@ import messages
 import thumbnail
 import database
 from ui import tools
+from ui import utils
 from ui import dialogs
 from ui import filechooser
 from ui.widgets import date
-from ui.widgets import menus
 from ui.widgets import bandentry
 from ui.widgets import comboboxes
 from ui.messagedialog import ErrorDialog, WarningDialog
@@ -160,7 +160,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             entries = [
                 (gtk.STOCK_ADD, self.on_open_imagechooser, None),
                 (gtk.STOCK_REMOVE, self.set_default_image, None)]
-            menus.popup_menu(event, entries)
+            utils.popup_menu(event, entries)
         else:
             self.on_open_imagechooser()
 

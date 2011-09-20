@@ -20,8 +20,8 @@ import gtk
 import gtk.gdk
 
 import const
+from ui import utils
 from ui.tabs import basetab
-from ui.widgets import menus
 from ui.detailsview import DetailsDialog
 from translation import gettext as _
 
@@ -86,7 +86,7 @@ class RelativesTab(basetab.BaseTab):
         pigeon = treeview.get_model()[path][0]
 
         if event.button == 3:
-            menus.popup_menu(event, [
+            utils.popup_menu(event, [
                                      (gtk.STOCK_INFO,
                                       self.on_show_details, (pigeon,)),
                                      (gtk.STOCK_JUMP_TO,

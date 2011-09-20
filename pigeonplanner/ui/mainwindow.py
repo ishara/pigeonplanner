@@ -40,13 +40,13 @@ import messages
 import thumbnail
 from ui import tabs
 from ui import tools
+from ui import utils
 from ui import dialogs
 from ui import pedigree
 from ui import logdialog
 from ui import detailsview
 from ui import optionsdialog
 from ui import pedigreewindow
-from ui.widgets import menus
 from ui.widgets import treeview
 from ui.widgets import statusbar
 from ui.messagedialog import ErrorDialog, InfoDialog, WarningDialog, QuestionDialog
@@ -54,6 +54,81 @@ from translation import gettext as _
 
 
 class MainWindow(gtk.Window, builder.GtkBuilder):
+    ui = """
+<ui>
+   <menubar name="MenuBar">
+      <menu action="FileMenu">
+         <menuitem action="Add"/>
+         <menuitem action="Addrange"/>
+         <separator/>
+         <menuitem action="Log"/>
+         <separator/>
+         <menu action="PrintMenu">
+            <menuitem action="PrintPedigree"/>
+            <menuitem action="PrintBlank"/>
+         </menu>
+         <separator/>
+         <menu action="BackupMenu">
+            <menuitem action="Backup"/>
+            <menuitem action="Restore"/>
+         </menu>
+         <separator/>
+         <menuitem action="Quit"/>
+      </menu>
+      <menu action="EditMenu">
+         <menuitem action="Search"/>
+         <separator/>
+         <menuitem action="Preferences"/>
+      </menu>
+      <menu action="ViewMenu">
+         <menuitem action="Filter"/>
+         <separator/>
+         <menuitem action="Arrows"/>
+         <menuitem action="Stats"/>
+         <menuitem action="Toolbar"/>
+         <menuitem action="Statusbar"/>
+      </menu>
+      <menu action="PigeonMenu">
+         <menuitem action="Edit"/>
+         <menuitem action="Remove"/>
+         <menuitem action="Pedigree"/>
+         <menuitem action="Addresult"/>
+      </menu>
+      <menu action="ToolsMenu">
+         <menuitem action="Velocity"/>
+         <menuitem action="Distance"/>
+         <menuitem action="Racepoints"/>
+         <menuitem action="Album"/>
+         <menuitem action="Addresses"/>
+         <menuitem action="Calendar"/>
+         <menuitem action="Data"/>
+      </menu>
+      <menu action="HelpMenu">
+         <menuitem action="Home"/>
+         <menuitem action="Forum"/>
+         <separator/>
+         <menuitem action="Update"/>
+         <separator/>
+         <menuitem action="Info"/>
+         <separator/>
+         <menuitem action="About"/>
+      </menu>
+   </menubar>
+
+   <toolbar name="Toolbar">
+      <toolitem action="Add"/>
+      <separator/>
+      <toolitem action="Edit"/>
+      <toolitem action="Remove"/>
+      <toolitem action="Pedigree"/>
+      <separator/>
+      <toolitem action="Preferences"/>
+      <separator/>
+      <toolitem action="About"/>
+      <toolitem action="Quit"/>
+   </toolbar>
+</ui>
+"""
     def __init__(self, options, database, parser):
         gtk.Window.__init__(self)
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
@@ -482,7 +557,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                 (gtk.STOCK_EDIT, self.menuedit_activate, None),
                 (gtk.STOCK_REMOVE, self.menuremove_activate, None),
                 ("pedigree-detail", self.menupedigree_activate, None)]
-            menus.popup_menu(event, entries)
+            utils.popup_menu(event, entries)
 
     def on_treeview_key_press(self, treeview, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
@@ -548,7 +623,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     ####################
     def _build_menubar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(menus.ui_mainwindow)
+        uimanager.add_ui_from_string(self.ui)
         uimanager.insert_action_group(self.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.add_accel_group(accelgroup)

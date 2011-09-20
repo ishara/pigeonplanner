@@ -23,10 +23,10 @@ import common
 import errors
 import builder
 import messages
+from ui import utils
 from ui import resultwindow
 from ui import resultparser
 from ui.tabs import basetab
-from ui.widgets import menus
 from ui.widgets import comboboxes
 from ui.messagedialog import ErrorDialog, QuestionDialog
 from translation import gettext as _
@@ -81,7 +81,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             entries = [
                 (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None),
                 (gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None)]
-            menus.popup_menu(event, entries)
+            utils.popup_menu(event, entries)
 
     def on_buttonall_clicked(self, widget):
         resultwindow.ResultWindow(self.parent, self.parser,

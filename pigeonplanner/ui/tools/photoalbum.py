@@ -26,7 +26,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 import builder
-from ui.widgets import menus
 from translation import gettext as _
 
 
@@ -38,6 +37,26 @@ MARGIN = 6
 
 
 class PhotoAlbum(builder.GtkBuilder):
+    ui = """
+<ui>
+   <toolbar name="Toolbar">
+      <toolitem action="First"/>
+      <toolitem action="Prev"/>
+      <toolitem action="Next"/>
+      <toolitem action="Last"/>
+      <separator/>
+      <toolitem action="Slide"/>
+      <separator/>
+      <toolitem action="Screen"/>
+      <separator/>
+      <toolitem action="Fit"/>
+      <toolitem action="In"/>
+      <toolitem action="Out"/>
+      <separator/>
+      <toolitem action="Close"/>
+   </toolbar>
+</ui>
+"""
 
     zoom_factors = {
         0.25: '25%',
@@ -84,7 +103,7 @@ class PhotoAlbum(builder.GtkBuilder):
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(menus.ui_photoalbum)
+        uimanager.add_ui_from_string(self.ui)
         uimanager.insert_action_group(self.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.photoalbum.add_accel_group(accelgroup)

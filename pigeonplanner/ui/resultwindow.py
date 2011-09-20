@@ -32,7 +32,6 @@ import printing
 from ui import tools
 from ui import dialogs
 from ui import maildialog
-from ui.widgets import menus
 from ui.widgets import comboboxes
 from translation import gettext as _
 
@@ -56,6 +55,21 @@ from translation import gettext as _
 
 
 class ResultWindow(builder.GtkBuilder):
+    ui = """
+<ui>
+   <toolbar name="Toolbar">
+      <toolitem action="Save"/>
+      <toolitem action="Mail"/>
+      <separator/>
+      <toolitem action="Preview"/>
+      <toolitem action="Print"/>
+      <separator/>
+      <toolitem action="Filter"/>
+      <separator/>
+      <toolitem action="Close"/>
+   </toolbar>
+</ui>
+"""
     def __init__(self, parent, parser, database, options):
         builder.GtkBuilder.__init__(self, "ResultWindow.ui")
 
@@ -168,7 +182,7 @@ class ResultWindow(builder.GtkBuilder):
     # Private methods
     def _build_toolbar(self):
         uimanager = gtk.UIManager()
-        uimanager.add_ui_from_string(menus.ui_resultwindow)
+        uimanager.add_ui_from_string(self.ui)
         uimanager.insert_action_group(self.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.resultwindow.add_accel_group(accelgroup)

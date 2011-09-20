@@ -31,7 +31,7 @@ except:
 
 import const
 import messages
-from ui.widgets import menus
+from ui import utils
 from ui.widgets import pedigreeboxes
 from ui.detailsview import DetailsDialog
 from ui.messagedialog import InfoDialog
@@ -97,7 +97,7 @@ class DrawPedigree(object):
                                                (box.pigeon, parent)),
                           ]
         if entries is not None:
-            menus.popup_menu(event, entries)
+            utils.popup_menu(event, entries)
         return True
 
     def on_edit_finished(self, detailsview, pigeon, operation):

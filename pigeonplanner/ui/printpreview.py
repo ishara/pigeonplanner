@@ -20,7 +20,6 @@ import math
 
 import gtk
 
-from ui.widgets import menus
 from translation import gettext as _
 
 
@@ -34,6 +33,23 @@ MARGIN = 6
 
 
 class PrintPreview(gtk.Window):
+    ui = """
+<ui>
+   <toolbar name="Toolbar">
+      <toolitem action="First"/>
+      <toolitem action="Prev"/>
+      <toolitem action="Next"/>
+      <toolitem action="Last"/>
+      <separator/>
+      <toolitem action="Fit"/>
+      <toolitem action="In"/>
+      <toolitem action="Out"/>
+      <separator/>
+      <toolitem action="Close"/>
+   </toolbar>
+</ui>
+"""
+
     zoom_factors = {
         0.50: '50%',
         0.75: '75%',

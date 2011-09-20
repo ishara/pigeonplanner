@@ -21,9 +21,9 @@ import gtk
 import const
 import common
 import builder
+from ui import utils
 from ui import dialogs
 from ui.tabs import basetab
-from ui.widgets import menus
 from ui.widgets import comboboxes
 from translation import gettext as _
 
@@ -57,7 +57,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
                 (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None),
                 (gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None)]
 
-            menus.popup_menu(event, entries)
+            utils.popup_menu(event, entries)
 
     def on_treeviewselect_press(self, treeview, event):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
@@ -69,7 +69,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
                 (gtk.STOCK_INFO, self.main.show_pigeon_details, (pindex,))
                 ]
 
-            menus.popup_menu(event, entries)
+            utils.popup_menu(event, entries)
 
     def on_buttonadd_clicked(self, widget):
         self._mode = const.ADD
