@@ -169,33 +169,12 @@ class ResultWindow(builder.GtkBuilder):
     def _build_toolbar(self):
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(menus.ui_resultwindow)
-        uimanager.insert_action_group(self._create_action_group(), 0)
+        uimanager.insert_action_group(self.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.resultwindow.add_accel_group(accelgroup)
 
-        # Hide the Mail feature for now
-        uimanager.get_widget('/Toolbar/Mail').hide()
-
         toolbar = uimanager.get_widget('/Toolbar')
         self.vbox.pack_start(toolbar, False, False)
-
-    def _create_action_group(self):
-        action_group = gtk.ActionGroup("ResultWindowActions")
-        action_group.add_actions((
-            ("Save", gtk.STOCK_SAVE, None, None,
-                    _("Save these results"), self.on_save_clicked),
-            ("Mail", 'email', None, None,
-                    _("Email these results"), self.on_mail_clicked),
-            ("Preview", gtk.STOCK_PRINT_PREVIEW, None, None,
-                    _("View these results"), self.on_preview_clicked),
-            ("Print", gtk.STOCK_PRINT, None, None,
-                    _("Print these results"), self.on_print_clicked),
-            ("Filter", gtk.STOCK_CLEAR, _("_Filter..."), None,
-                    _("Set filter options"), self.on_filter_clicked),
-            ("Close", gtk.STOCK_CLOSE, None, None,
-                    _("Close this window"), self.on_close_window),
-           ))
-        return action_group
 
     def _get_pigeons_combobox(self):
         store = gtk.ListStore(str, str)

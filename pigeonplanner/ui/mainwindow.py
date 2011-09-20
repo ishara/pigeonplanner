@@ -549,8 +549,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def _build_menubar(self):
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(menus.ui_mainwindow)
-        uimanager.insert_action_group(self._create_action_group(), 0)
-        uimanager.connect('connect-proxy', self.on_uimanager_connect_proxy)
+        uimanager.insert_action_group(self.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.add_accel_group(accelgroup)
 
@@ -603,100 +602,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
                 quit_item = uimanager.get_widget('/MenuBar/FileMenu/Quit')
                 igemi.ige_mac_menu_set_quit_menu_item(quit_item)
-
-    def _create_action_group(self):
-        action_group = gtk.ActionGroup("MainWindowActions")
-        action_group.add_actions((
-            ("FileMenu", None, _("_File")),
-            ("PrintMenu", gtk.STOCK_PRINT, None),
-            ("BackupMenu", None, _("_Backup")),
-            ("PigeonMenu", None, _("_Pigeon")),
-            ("EditMenu", None, _("_Edit")),
-            ("ViewMenu", None, _("_View")),
-            ("ToolsMenu", None, _("_Tools")),
-            ("HelpMenu", None, _("_Help")),
-            ("PrintPedigree", None, _("_Pedigree"), None,
-                    _("Print this pedigree"), self.menuprintpedigree_activate),
-            ("PrintBlank", None, _("Blank pedigree"), None,
-                    _("Print a blank pedigree"), self.menuprintblank_activate),
-            ("Backup", gtk.STOCK_FLOPPY, _("_Backup"), None,
-                    _("Create a backup of your database"),
-                    self.menubackup_activate),
-            ("Restore", gtk.STOCK_REVERT_TO_SAVED, _("_Restore"), None,
-                    _("Restore a backup of your database"),
-                    self.menurestore_activate),
-            ("Quit", gtk.STOCK_QUIT, None, "<control>Q",
-                    _("Quit the program"), self.quit_program),
-            ("Add", gtk.STOCK_ADD, None, "<control>A",
-                    _("Add a new pigeon"), self.menuadd_activate),
-            ("Addrange", gtk.STOCK_ADD, _("Add ran_ge"), "<control><shift>A",
-                    _("Add a range of pigeons"), self.menuaddrange_activate),
-            ("Log", gtk.STOCK_FILE, _("_Logfile Viewer"), "<control>L",
-                    _("See the logfile"), self.menulog_activate),
-            ("Search", gtk.STOCK_FIND, _("_Find..."), "<control>F",
-                    _("Search through the list of pigeons"),
-                    self.menusearch_activate),
-            ("Edit", gtk.STOCK_EDIT, None, "<control>E",
-                    _("Edit the selected pigeon"), self.menuedit_activate),
-            ("Remove", gtk.STOCK_REMOVE, None, "<control>R",
-                    _("Remove the selected pigeon"), self.menuremove_activate),
-            ("Pedigree", "pedigree-detail", _("_Pedigree"), "<control>G",
-                    _("View the detailed pedigree of this pigeon"),
-                    self.menupedigree_activate),
-            ("Addresult", gtk.STOCK_ADD, _("Add resul_t"), None,
-                    _("Add a new result for this pigeon"),
-                    self.menuaddresult_activate),
-            ("Preferences", gtk.STOCK_PREFERENCES, None, "<control>P",
-                    _("Configure the application"), self.menupref_activate),
-            ("Filter", None, _("_Filter..."), None,
-                    _("Set filter options"), self.menufilter_activate),
-            ("Velocity", None, _("Velocity calculator"), None,
-                    _("Calculate the velocity of flights"),
-                    self.menuvelocity_activate),
-            ("Distance", None, _("Distance calculator"), None,
-                    _("Calculate the distance between locations"),
-                    self.menudistance_activate),
-            ("Racepoints", None, _("Racepoint manager"), None,
-                    _("Manage the racepoints and distances"),
-                    self.menurace_activate),
-            ("Album", None, _("_Photo Album"), None,
-                    _("View the images of your pigeons"),
-                    self.menualbum_activate),
-            ("Addresses", None, _("Address book"), None,
-                    _("View the address book"),  self.menuaddresses_activate),
-            ("Calendar", None, _("Calendar"), None,
-                    _("View the calendar"),  self.menucalendar_activate),
-            ("Data", None, _("Data manager"), None,
-                    _("Manage your data"),  self.menudata_activate),
-            ("Home", gtk.STOCK_HOME, _("_Website"), None,
-                    _("Go to the website for more information"),
-                    self.menuhome_activate),
-            ("Forum", gtk.STOCK_INFO, _("Forum"), None,
-                    _("Go to the forum for online help"),
-                    self.menuforum_activate),
-            ("Update", gtk.STOCK_CONNECT, _("Search for updates..."), None,
-                    _("Search online for program updates"),
-                    self.menuupdate_activate),
-            ("Info", gtk.STOCK_INFO, None, None,
-                    _("General information"), self.menuinfo_activate),
-            ("About", gtk.STOCK_ABOUT, None, None,
-                    _("About this application"), self.menuabout_activate)
-           ))
-        action_group.add_toggle_actions((
-            ("Arrows",  None, _("Navigation arrows"), None,
-                    _("Show or hide the navigation arrows"),
-                    self.menuarrows_toggled, False),
-            ("Stats",  None, _("Statistics"), None,
-                    _("Show or hide pigeon statistics"),
-                    self.menustats_toggled, False),
-            ("Toolbar",  None, _("Toolbar"), None,
-                    _("Show or hide the toolbar"),
-                    self.menutoolbar_toggled, False),
-            ("Statusbar",  None, _("Statusbar"), None,
-                    _("Show or hide the statusbar"),
-                    self.menustatusbar_toggled, False)
-           ))
-        return action_group
 
     def _start_edit(self, operation):
         self.set_multiple_sensitive([self.menubar, self.toolbar, self.notebook,

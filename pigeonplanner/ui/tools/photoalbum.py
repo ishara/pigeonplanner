@@ -85,7 +85,7 @@ class PhotoAlbum(builder.GtkBuilder):
     def build_toolbar(self):
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(menus.ui_photoalbum)
-        uimanager.insert_action_group(self.create_action_group(), 0)
+        uimanager.insert_action_group(self.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.photoalbum.add_accel_group(accelgroup)
 
@@ -102,36 +102,6 @@ class PhotoAlbum(builder.GtkBuilder):
         toolbar.set_style(gtk.TOOLBAR_ICONS)
         self.vbox.pack_start(toolbar, False, False)
         self.vbox.reorder_child(toolbar, 0)
-
-    def create_action_group(self):
-        action_group = gtk.ActionGroup("PhotoAlbumActions")
-        action_group.add_actions((
-            ("First", gtk.STOCK_GOTO_FIRST, None, None,
-                    _("Shows the first picture"), self.on_first_clicked),
-            ("Prev", gtk.STOCK_GO_BACK, None, None,
-                    _("Shows previous picture"), self.on_prev_clicked),
-            ("Next", gtk.STOCK_GO_FORWARD, None, None,
-                    _("Shows the next picture"), self.on_next_clicked),
-            ("Last", gtk.STOCK_GOTO_LAST, None, None,
-                    _("Shows the last picture"), self.on_last_clicked),
-            ("In", gtk.STOCK_ZOOM_IN, None, None,
-                    _("Zooms the picture in"), self.on_zoom_in_clicked),
-            ("Out", gtk.STOCK_ZOOM_OUT, None, None,
-                    _("Zooms the picture out"), self.on_zoom_out_clicked),
-            ("Close", gtk.STOCK_CLOSE, None, None,
-                    _("Close this window"), self.on_close_clicked),
-           ))
-        action_group.add_toggle_actions((
-            ("Fit", gtk.STOCK_ZOOM_FIT, None, None,
-                    _("Zooms to fit the whole picture"),
-                    self.on_zoom_fit_toggled),
-            ("Slide", gtk.STOCK_MEDIA_PLAY, None, None,
-                    _("View slideshow"), self.on_slideshow_toggled),
-            ("Screen", gtk.STOCK_FULLSCREEN, None, None,
-                    _("View in fullscreen"), self.on_fullscreen_toggled),
-           ))
-
-        return action_group
 
     def fill_iconview(self):
         store = gtk.ListStore(str, str, str, gtk.gdk.Pixbuf)

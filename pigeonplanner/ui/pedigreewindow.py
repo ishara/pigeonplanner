@@ -64,32 +64,12 @@ class PedigreeWindow(builder.GtkBuilder):
     def build_toolbar(self):
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(menus.ui_pedigreewindow)
-        uimanager.insert_action_group(self.create_action_group(), 0)
+        uimanager.insert_action_group(self.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.pedigreewindow.add_accel_group(accelgroup)
 
-        # Hide the Mail feature for now
-        uimanager.get_widget('/Toolbar/Mail').hide()
-
         toolbar = uimanager.get_widget('/Toolbar')
         self.vbox.pack_start(toolbar, False, False)
-
-    def create_action_group(self):
-        action_group = gtk.ActionGroup("PedigreeWindowActions")
-        action_group.add_actions((
-            ("Save", gtk.STOCK_SAVE, None, None,
-                    _("Save this pedigree"), self.on_save_clicked),
-            ("Mail", 'email', None, None,
-                    _("Email this pedigree"), self.on_mail_clicked),
-            ("Preview", gtk.STOCK_PRINT_PREVIEW, None, None,
-                    _("View this pedigree"), self.on_preview_clicked),
-            ("Print", gtk.STOCK_PRINT, None, None,
-                    _("Print this pedigree"), self.on_print_clicked),
-            ("Close", gtk.STOCK_CLOSE, None, None,
-                    _("Close this window"), self.on_close_dialog)
-           ))
-
-        return action_group
 
     def on_close_dialog(self, widget=None, event=None):
         self.pedigreewindow.destroy()

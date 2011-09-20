@@ -2,6 +2,44 @@
 <interface>
   <requires lib="gtk+" version="2.22"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkActionGroup" id="actiongroup">
+    <child>
+      <object class="GtkAction" id="Close">
+        <property name="tooltip" translatable="yes">Close this window</property>
+        <property name="stock_id">gtk-close</property>
+        <signal name="activate" handler="on_close_dialog" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Print">
+        <property name="tooltip" translatable="yes">Print this pedigree</property>
+        <property name="stock_id">gtk-print</property>
+        <signal name="activate" handler="on_print_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Preview">
+        <property name="tooltip" translatable="yes">View this pedigree</property>
+        <property name="stock_id">gtk-print-preview</property>
+        <signal name="activate" handler="on_preview_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Mail">
+        <property name="tooltip" translatable="yes">Email this pedigree</property>
+        <property name="stock_id">email</property>
+        <property name="visible">False</property>
+        <signal name="activate" handler="on_mail_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Save">
+        <property name="tooltip" translatable="yes">Save this pedigree</property>
+        <property name="stock_id">gtk-save</property>
+        <signal name="activate" handler="on_save_clicked" swapped="no"/>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="pedigreewindow">
     <property name="can_focus">False</property>
     <property name="modal">True</property>
