@@ -26,6 +26,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import builder
+from ui import utils
 from translation import gettext as _
 
 
@@ -343,7 +344,7 @@ class PhotoAlbum(builder.GtkBuilder):
         self.set_pixbuf(image)
         self.current_picture = path[0]
 
-        self.set_multiple_sensitive(
+        utils.set_multiple_sensitive(
             {self.first_button: self.current_picture,
              self.prev_button: self.current_picture,
              self.next_button: self.current_picture < self.picture_no - 1,
@@ -385,7 +386,7 @@ class PhotoAlbum(builder.GtkBuilder):
         return width, height
 
     def disable_toolbuttons(self):
-        self.set_multiple_sensitive(
+        utils.set_multiple_sensitive(
             [self.first_button,
              self.prev_button,
              self.next_button,

@@ -26,6 +26,7 @@ import const
 import common
 import builder
 import messages
+from ui import utils
 from ui import logdialog
 from ui.messagedialog import WarningDialog
 from translation import gettext as _
@@ -176,5 +177,5 @@ class DBWindow(builder.GtkBuilder):
     def __set_buttons(self):
         value = os.path.exists(const.DATABASE)
         widgets = [self.button_optimize, self.button_check, self.button_delete]
-        self.set_multiple_sensitive(widgets, value)
+        utils.set_multiple_sensitive(widgets, value)
 

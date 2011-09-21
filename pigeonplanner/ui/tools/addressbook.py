@@ -22,6 +22,7 @@ import const
 import errors
 import builder
 import messages
+from ui import utils
 from ui.widgets import latlongentry
 from ui.messagedialog import QuestionDialog
 
@@ -117,9 +118,9 @@ class AddressBook(builder.GtkBuilder):
 
         widgets = [self.buttonremove, self.buttonedit]
         if rowiter:
-            self.set_multiple_sensitive(widgets, True)
+            utils.set_multiple_sensitive(widgets, True)
         else:
-            self.set_multiple_sensitive(widgets, False)
+            utils.set_multiple_sensitive(widgets, False)
             self._empty_entries()
             return
 
@@ -150,13 +151,13 @@ class AddressBook(builder.GtkBuilder):
         @param value: True for edit mode, False for normal
         """
 
-        self.set_multiple_sensitive([self.treeview], not value)
-        self.set_multiple_visible(self._normalbuttons, not value)
-        self.set_multiple_visible(self._editbuttons, value)
+        utils.set_multiple_sensitive([self.treeview], not value)
+        utils.set_multiple_visible(self._normalbuttons, not value)
+        utils.set_multiple_visible(self._editbuttons, value)
         show_me = self.db.get_own_address() is None or \
                     (self._mode == const.EDIT and
                      self.db.get_own_address()[0] == self._get_address_key())
-        self.set_multiple_visible([self.checkme], show_me if value else False)
+        utils.set_multiple_visible([self.checkme], show_me if value else False)
 
         shadow = gtk.SHADOW_NONE if value else gtk.SHADOW_IN
         for entry in self._entries:

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# This file is part of Pigeon Planner.
+
 # Pigeon Planner is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -25,7 +27,6 @@ import gtk
 import const
 
 
-#class GtkBuilder(gtk.Builder, object):
 class GtkBuilder(object):
     def __init__(self, uifile):
         """
@@ -34,7 +35,6 @@ class GtkBuilder(object):
         @param uifile: Filename of the Glade file
         """
 
-#        gtk.Builder.__init__(self)
         self._builder = gtk.Builder()
         self._builder.set_translation_domain(const.DOMAIN)
         self._builder.add_from_file(os.path.join(const.GLADEDIR, uifile))
@@ -67,34 +67,4 @@ class GtkBuilder(object):
         """
 
         return gtk.Buildable.get_name(obj)
-
-    def set_multiple_sensitive(self, widgets, value=None):
-        """ 
-        Set multiple widgets sensitive at once
-
-        @param widgets: dic or list of widgets
-        @param value: bool to indicate the state
-        """
-
-        if isinstance(widgets, dict):
-            for widget, sensitive in widgets.items():
-                widget.set_sensitive(sensitive)
-        else:
-            for widget in widgets:
-                widget.set_sensitive(value)
-
-    def set_multiple_visible(self, widgets, value=None):
-        """ 
-        Set multiple widgets visible at once
-
-        @param widgets: dic or list of widgets
-        @param value: bool to indicate the state
-        """
-
-        if isinstance(widgets, dict):
-            for widget, visible in widgets.items():
-                widget.set_visible(visible)
-        else:
-            for widget in widgets:
-                widget.set_visible(value)
 

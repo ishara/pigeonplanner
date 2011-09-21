@@ -26,6 +26,7 @@ import common
 import builder
 import messages
 import thumbnail
+from ui import utils
 from ui import filechooser
 from ui.tabs import basetab
 from ui.messagedialog import QuestionDialog
@@ -49,7 +50,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
         widgets = [self.buttonremove, self.buttonopen]
-        self.set_multiple_sensitive(widgets, not rowiter is None)
+        utils.set_multiple_sensitive(widgets, not rowiter is None)
         self.image.clear()
         if rowiter is None: return
 

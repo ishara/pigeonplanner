@@ -23,6 +23,7 @@ import common
 import errors
 import builder
 import database
+from ui import utils
 from ui.tabs import basetab
 from ui.widgets import checkbutton
 from ui.dialogs import PigeonListDialog
@@ -49,7 +50,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
         widgets = [self.buttonremove, self.buttonedit]
-        self.set_multiple_sensitive(widgets, not rowiter is None)
+        utils.set_multiple_sensitive(widgets, not rowiter is None)
         try:
             (key, sire, dam, date, laid1, hatched1, pindex1, success1,
              laid2, hatched2, pindex2, success2, clutch, 

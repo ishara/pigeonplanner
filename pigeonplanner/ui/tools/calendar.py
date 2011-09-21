@@ -23,6 +23,7 @@ import gtk
 import const
 import errors
 import builder
+from ui import utils
 from ui.messagedialog import ErrorDialog
 from translation import gettext as _
 
@@ -108,9 +109,9 @@ class Calendar(builder.GtkBuilder):
 
         widgets = [self.buttonremove, self.buttonedit]
         if rowiter:
-            self.set_multiple_sensitive(widgets, True)
+            utils.set_multiple_sensitive(widgets, True)
         else:
-            self.set_multiple_sensitive(widgets, False)
+            utils.set_multiple_sensitive(widgets, False)
             self._empty_entries()
             return
 
@@ -129,7 +130,7 @@ class Calendar(builder.GtkBuilder):
             self.labelnotify.set_text("-1")
 
     def on_checknotify_toggled(self, widget):
-        self.set_multiple_sensitive([self.alignnotify], widget.get_active())
+        utils.set_multiple_sensitive([self.alignnotify], widget.get_active())
 
     # Internal methods
     def _fill_treeview(self, notification_id=None):
@@ -148,9 +149,9 @@ class Calendar(builder.GtkBuilder):
         @param value: True for edit mode, False for normal
         """
 
-        self.set_multiple_sensitive([self.treeview], not value)
-        self.set_multiple_visible(self._normalbuttons+[self.hboxnotify], not value)
-        self.set_multiple_visible(self._editbuttons+[self.vboxnotify], value)
+        utils.set_multiple_sensitive([self.treeview], not value)
+        utils.set_multiple_visible(self._normalbuttons+[self.hboxnotify], not value)
+        utils.set_multiple_visible(self._editbuttons+[self.vboxnotify], value)
 
         shadow = gtk.SHADOW_NONE if value else gtk.SHADOW_IN
         for entry in self._entries:

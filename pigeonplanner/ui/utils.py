@@ -19,6 +19,36 @@
 import gtk
 
 
+def set_multiple_sensitive(widgets, value=None):
+    """ 
+    Set multiple widgets sensitive at once
+
+    @param widgets: dic or list of widgets
+    @param value: bool to indicate the state
+    """
+
+    if isinstance(widgets, dict):
+        for widget, sensitive in widgets.items():
+            widget.set_sensitive(sensitive)
+    else:
+        for widget in widgets:
+            widget.set_sensitive(value)
+
+def set_multiple_visible(widgets, value=None):
+    """ 
+    Set multiple widgets visible at once
+
+    @param widgets: dic or list of widgets
+    @param value: bool to indicate the state
+    """
+
+    if isinstance(widgets, dict):
+        for widget, visible in widgets.items():
+            widget.set_visible(visible)
+    else:
+        for widget in widgets:
+            widget.set_visible(value)
+
 def popup_menu(event, entries):
     """
     Make a right click menu

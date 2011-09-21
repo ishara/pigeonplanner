@@ -178,9 +178,9 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         model, rowiter = selection.get_selected()
         widgets = [self.buttonremove, self.buttonedit]
         if rowiter is not None:
-            self.set_multiple_sensitive(widgets, True)
+            utils.set_multiple_sensitive(widgets, True)
         else:
-            self.set_multiple_sensitive(widgets, False)
+            utils.set_multiple_sensitive(widgets, False)
 
             for entry in self.get_objects_from_prefix('entry'):
                 entry.set_text('')
@@ -220,7 +220,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
 
     def _set_pigeon_list(self, value):
         self._expanded = value
-        self.set_multiple_visible([self.seperator, self.vboxexpand], value)
+        utils.set_multiple_visible([self.seperator, self.vboxexpand], value)
         img = gtk.STOCK_GO_BACK if value else gtk.STOCK_GO_FORWARD
         self.imageexpand.set_from_stock(img, gtk.ICON_SIZE_BUTTON)
 

@@ -365,7 +365,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.labelPigeon.set_text(pigeonlabel)
         self.chkKeep.set_active(True)
         self.chkResults.set_active(False)
-        self.set_multiple_visible([self.chkResults], show_result_option)
+        utils.set_multiple_visible([self.chkResults], show_result_option)
 
         answer = self.removedialog.run()
         if answer == 2:
@@ -435,22 +435,22 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menuarrows_toggled(self, widget):
         value = widget.get_active()
-        self.set_multiple_visible([self.vboxButtons], value)
+        utils.set_multiple_visible([self.vboxButtons], value)
         self.options.set_option('Options', 'arrows', str(value))
 
     def menustats_toggled(self, widget):
         value = widget.get_active()
-        self.set_multiple_visible([self.alignStats], value)
+        utils.set_multiple_visible([self.alignStats], value)
         self.options.set_option('Options', 'stats', str(value))
 
     def menutoolbar_toggled(self, widget):
         value = widget.get_active()
-        self.set_multiple_visible([self.toolbar], value)
+        utils.set_multiple_visible([self.toolbar], value)
         self.options.set_option('Options', 'toolbar', str(value))
 
     def menustatusbar_toggled(self, widget):
         value = widget.get_active()
-        self.set_multiple_visible([self.statusbar], value)
+        utils.set_multiple_visible([self.statusbar], value)
         self.options.set_option('Options', 'statusbar', str(value))
 
     def menuvelocity_activate(self, widget):
@@ -576,15 +576,15 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                    self.ToolRemove, self.MenuRemove]
         if n_rows_selected == 1:
             tree_iter = model.get_iter(paths[0])
-            self.set_multiple_sensitive(widgets, True)
+            utils.set_multiple_sensitive(widgets, True)
         elif n_rows_selected == 0:
             self._clear_pigeon_data()
-            self.set_multiple_sensitive(widgets, False)
+            utils.set_multiple_sensitive(widgets, False)
             return
         elif n_rows_selected > 1:
             # Disable everything except the remove buttons
             self._clear_pigeon_data()
-            self.set_multiple_sensitive(widgets[:-2], False)
+            utils.set_multiple_sensitive(widgets[:-2], False)
             return
         self.current_pigeon = paths[0][0]
         pigeon = model.get_value(tree_iter, 0)
@@ -650,10 +650,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         for name, widget in widgetDic.items():
             setattr(self, name, widget)
 
-        self.set_multiple_sensitive([self.MenuEdit, self.MenuRemove,
-                                     self.MenuPedigree, self.MenuAddresult,
-                                     self.ToolEdit, self.ToolRemove,
-                                     self.ToolPedigree], False)
+        utils.set_multiple_sensitive([self.MenuEdit, self.MenuRemove,
+                                      self.MenuPedigree, self.MenuAddresult,
+                                      self.ToolEdit, self.ToolRemove,
+                                      self.ToolPedigree], False)
 
         self.mainvbox.pack_start(self.menubar, False, False)
         self.mainvbox.pack_start(self.toolbar, False, False)
@@ -679,15 +679,15 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                 igemi.ige_mac_menu_set_quit_menu_item(quit_item)
 
     def _start_edit(self, operation):
-        self.set_multiple_sensitive([self.menubar, self.toolbar, self.notebook,
-                                     self.treeview, self.vboxButtons], False)
+        utils.set_multiple_sensitive([self.menubar, self.toolbar, self.notebook,
+                                      self.treeview, self.vboxButtons], False)
         self.detailsview.start_edit(operation)
 
     def _finish_edit(self, cancelled=False):
         if not cancelled:
             self._set_statistics()
-        self.set_multiple_sensitive([self.menubar, self.toolbar, self.notebook,
-                                     self.treeview, self.vboxButtons], True)
+        utils.set_multiple_sensitive([self.menubar, self.toolbar, self.notebook,
+                                      self.treeview, self.vboxButtons], True)
         self.treeview.grab_focus()
 
     def _clear_pigeon_data(self):

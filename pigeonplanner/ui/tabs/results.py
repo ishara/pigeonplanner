@@ -169,7 +169,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
         widgets = [self.buttonremove, self.buttonedit]
-        self.set_multiple_sensitive(widgets, not rowiter is None)
+        utils.set_multiple_sensitive(widgets, not rowiter is None)
 
     def on_spinplaced_changed(self, widget):
         self.spinoutof.set_range(widget.get_value_as_int(),
