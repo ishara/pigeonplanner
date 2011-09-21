@@ -78,6 +78,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
       <menu action="EditMenu">
          <menuitem action="Search"/>
          <separator/>
+         <menuitem action="SelectAll"/>
+         <separator/>
          <menuitem action="Preferences"/>
       </menu>
       <menu action="ViewMenu">
@@ -309,6 +311,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         logger.debug(common.get_function_name())
         dialog = dialogs.SearchDialog(self)
         dialog.run()
+
+    def menuselectall_activate(self, widget):
+        logger.debug(common.get_function_name())
+        self.treeview.select_all_pigeons()
 
     def menualbum_activate(self, widget):
         logger.debug(common.get_function_name())

@@ -139,6 +139,9 @@ class MainTreeView(gtk.TreeView):
                 return True
         return False
 
+    def select_all_pigeons(self):
+        self._selection.select_all()
+
     def get_pigeons(self):
         return [row[0] for row in self._liststore]
 
