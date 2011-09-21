@@ -66,7 +66,8 @@ class RacepointManager(builder.GtkBuilder):
         manager.window.destroy()
 
     def on_buttoncalculate_clicked(self, widget):
-        calculator = DistanceCalculator(self.window, self.database)
+        point = self.combopoint.get_active()
+        calculator = DistanceCalculator(self.window, self.database, point)
         response = calculator.window.run()
         if response == gtk.RESPONSE_CLOSE:
             self.spindistance.set_value(float(calculator.get_distance()))

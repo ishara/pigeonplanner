@@ -30,14 +30,14 @@ from translation import gettext as _
 
 
 class DistanceCalculator(builder.GtkBuilder):
-    def __init__(self, parent, database):
+    def __init__(self, parent, database, racepoint=None):
         builder.GtkBuilder.__init__(self, "DistanceCalculator.ui")
 
         self.database = database
 
         self._distance = 0.0
         self._unit = 0
-        self._fill_location_combos()
+        self._fill_location_combos(racepoint)
         self.window.set_transient_for(parent)
         self.window.show()
 
@@ -126,11 +126,13 @@ class DistanceCalculator(builder.GtkBuilder):
     def get_distance(self):
         return self._distance
 
-    def _fill_location_combos(self):
+    def _fill_location_combos(self, racepoint):
         data = self.database.select_from_table(self.database.RACEPOINTS)
         data.sort()
         data.insert(0, _("Custom"))
         data.insert(1, _("Loft"))
-        comboboxes.fill_combobox(self.combolocationfrom, data, sort=False)
-        comboboxes.fill_combobox(self.combolocationto, data, sort=False)
+        activefrom = 1 if racepoint is not None else 0
+        activeto = racepoint+2 if racepoint is not None else 0
+        comboboxes.fill_combobox(self.combolocationfrom, data, activefrom, False)
+        comboboxes.fill_combobox(self.combolocationto, data, activeto, False)
 
