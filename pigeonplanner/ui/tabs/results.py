@@ -23,6 +23,7 @@ import common
 import errors
 import builder
 import messages
+import database
 from ui import utils
 from ui import resultwindow
 from ui import resultparser
@@ -272,7 +273,10 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         if not data: return
         # Racepoint table has more columns
         row = (data,) if not table == self.database.RACEPOINTS else (data, "", "", "", "")
-        self.database.insert_into_table(table, row)
+        try:
+            self.database.insert_into_table(table, row)
+        except database.InvalidValueError:
+            return
         model = combo.get_model()
         for treerow in model:
             if data in treerow:
