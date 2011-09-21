@@ -108,7 +108,7 @@
     </child>
     <child>
       <object class="GtkAction" id="Log">
-        <property name="label" translatable="yes">_Logfile viewer</property>
+        <property name="label" translatable="yes">_Logfile Viewer</property>
         <property name="tooltip" translatable="yes">See the logfile</property>
         <property name="stock_id">gtk-file</property>
         <signal name="activate" handler="menulog_activate" swapped="no"/>
@@ -159,7 +159,7 @@
     </child>
     <child>
       <object class="GtkAction" id="Preferences">
-        <property name="tooltip" translatable="yes">Configure this application</property>
+        <property name="tooltip" translatable="yes">Configure the application</property>
         <property name="stock_id">gtk-preferences</property>
         <signal name="activate" handler="menupref_activate" swapped="no"/>
       </object>
