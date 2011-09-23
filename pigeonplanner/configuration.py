@@ -67,6 +67,7 @@ class Configuration(object):
         self.__addOption('Columns', 'colour', 'False')
         self.__addOption('Columns', 'sex', 'False')
         self.__addOption('Columns', 'strain', 'False')
+        self.__addOption('Columns', 'status', 'False')
         self.__addOption('Columns', 'loft', 'False')
         self.__addOption('Columns', 'coef', 'True')
         self.__addOption('Columns', 'sector', 'True')

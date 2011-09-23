@@ -53,6 +53,7 @@ class GetOptions(object):
         self.colsex = self.conf.getboolean('Columns', 'sex')
         self.colloft = self.conf.getboolean('Columns', 'loft')
         self.colstrain = self.conf.getboolean('Columns', 'strain')
+        self.colstatus = self.conf.getboolean('Columns', 'status')
         self.colcoef = self.conf.getboolean('Columns', 'coef')
         self.colsector = self.conf.getboolean('Columns', 'sector')
         self.colcategory = self.conf.getboolean('Columns', 'category')

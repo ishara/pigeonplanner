@@ -148,6 +148,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                            'sex': str(self.chkSex.get_active()),
                            'loft': str(self.chkLoft.get_active()),
                            'strain': str(self.chkStrain.get_active()),
+                           'status': str(self.chkStatus.get_active()),
                            'coef': str(self.chkCoef.get_active()),
                            'sector': str(self.chkSector.get_active()),
                            'category': str(self.chkCategory.get_active()),
@@ -196,6 +197,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.chkSex.set_active(self.options.colsex)
         self.chkLoft.set_active(self.options.colloft)
         self.chkStrain.set_active(self.options.colstrain)
+        self.chkStatus.set_active(self.options.colstatus)
         self.chkCoef.set_active(self.options.colcoef)
         self.chkSector.set_active(self.options.colsector)
         self.chkCategory.set_active(self.options.colcategory)

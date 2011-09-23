@@ -18,6 +18,7 @@
 
 import gtk
 
+import common
 from ui import dialogs
 from ui.widgets import comboboxes
 from translation import gettext as _
@@ -111,14 +112,16 @@ class MainTreeView(gtk.TreeView):
             self._liststore.insert(0, [pigeon, pindex, ring, year,
                                        pigeon.get_name(), pigeon.get_colour(),
                                        pigeon.get_sex_string(),
-                                       pigeon.get_loft(), pigeon.get_strain()])
+                                       pigeon.get_loft(), pigeon.get_strain(),
+                                       _(common.get_status(pigeon.get_active()))])
         self._selection.select_path(path)
 
     def add_pigeon(self, pigeon, select=True):
         ring, year = pigeon.get_band()
         row = [pigeon, pigeon.get_pindex(), ring, year, pigeon.get_name(),
                pigeon.get_colour(), pigeon.get_sex_string(),
-               pigeon.get_loft(), pigeon.get_strain()]
+               pigeon.get_loft(), pigeon.get_strain(),
+               _(common.get_status(pigeon.get_active()))]
         self.add_row(row, select)
 
     def select_pigeon(self, widget, pindex):
@@ -160,7 +163,8 @@ class MainTreeView(gtk.TreeView):
                       3: self.options.colcolour,
                       4: self.options.colsex,
                       5: self.options.colloft,
-                      6: self.options.colstrain}
+                      6: self.options.colstrain,
+                      7: self.options.colstatus}
         for key, value in columnsdic.items():
             self.get_column(key).set_visible(value)
 
@@ -185,9 +189,9 @@ class MainTreeView(gtk.TreeView):
 
     # Internal methods
     def _build_treeview(self):
-        liststore = gtk.ListStore(object, str, str, str, str, str, str, str, str)
+        liststore = gtk.ListStore(object, str, str, str, str, str, str, str, str, str)
         columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"),
-                   _("Loft"), _("Strain")]
+                   _("Loft"), _("Strain"), _("Status")]
         for index, column in enumerate(columns):
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+2)
