@@ -1,4 +1,4 @@
-# Romanian translation for pigeonplanner
+# Chinese (Traditional) translation for pigeonplanner
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the pigeonplanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-22 10:34+0200\n"
-"PO-Revision-Date: 2011-03-23 09:12+0000\n"
-"Last-Translator: Iacob Catalin <Unknown>\n"
-"Language-Team: Romanian <ro@li.org>\n"
+"PO-Revision-Date: 2011-09-23 16:00+0000\n"
+"Last-Translator: 426 <Unknown>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-23 04:40+0000\n"
+"X-Launchpad-Export-Date: 2011-09-24 05:00+0000\n"
 "X-Generator: Launchpad (build 14012)\n"
-"Language: ro\n"
+"Language: \n"
 
 #: pigeonplanner/printing.py:165
 msgid "Pedigree of:"
-msgstr "Certificat de origine pentru:"
+msgstr "血統書："
 
 #: pigeonplanner/printing.py:371 pigeonplanner/ui/dialogs.py:426
 #: pigeonplanner/ui/widgets/treeview.py:189
@@ -29,7 +29,7 @@ msgstr "Certificat de origine pentru:"
 #: glade/BreedingView.ui:1058 glade/ResultWindow.ui:131
 #: glade/ResultParser.ui:307
 msgid "Band no."
-msgstr "Inelul nr."
+msgstr "環號："
 
 #: pigeonplanner/printing.py:372 pigeonplanner/printing.py:596
 #: glade/ResultsView.ui:663 glade/BreedingView.ui:719
@@ -37,57 +37,57 @@ msgstr "Inelul nr."
 #: glade/DetailsView.ui:446 glade/Calendar.ui:136 glade/MedicationView.ui:546
 #: glade/MedicationView.ui:631
 msgid "Date"
-msgstr "Dată"
+msgstr "日期"
 
 #: pigeonplanner/printing.py:373 pigeonplanner/ui/resultwindow.py:123
 #: glade/ResultsView.ui:676 glade/RaceManager.ui:116 glade/ResultWindow.ui:170
 #: glade/DetailsView.ui:490
 msgid "Racepoint"
-msgstr "Punct de lansare"
+msgstr "放鴿地點"
 
 #: pigeonplanner/printing.py:374 glade/ResultsView.ui:259
 #: glade/ResultsView.ui:689 glade/ResultWindow.ui:183
 msgid "Placed"
-msgstr "Loc"
+msgstr "名次"
 
 #: pigeonplanner/printing.py:375 glade/ResultsView.ui:209
 #: glade/ResultsView.ui:702 glade/ResultWindow.ui:196
 msgid "Out of"
-msgstr "Din"
+msgstr "於總數"
 
 #: pigeonplanner/printing.py:376
 msgid "Coef."
-msgstr "Punctaj"
+msgstr "系數"
 
 #: pigeonplanner/printing.py:377 pigeonplanner/ui/resultwindow.py:124
 #: glade/ResultsView.ui:165 glade/ResultsView.ui:728 glade/ResultWindow.ui:222
 #: glade/OptionsDialog.ui:672
 msgid "Sector"
-msgstr "Zona"
+msgstr "分區"
 
 #: pigeonplanner/printing.py:378 glade/ResultsView.ui:444
 #: glade/ResultsView.ui:741 glade/ResultWindow.ui:235
 #: glade/OptionsDialog.ui:700 glade/Calendar.ui:177
 msgid "Type"
-msgstr "Tip:"
+msgstr "類型"
 
 #: pigeonplanner/printing.py:379 glade/ResultsView.ui:486
 #: glade/ResultsView.ui:754 glade/ResultWindow.ui:248
 #: glade/OptionsDialog.ui:686
 msgid "Category"
-msgstr "Categorie"
+msgstr "分類"
 
 #: pigeonplanner/printing.py:380 pigeonplanner/ui/tools/datamanager.py:48
 #: glade/ResultsView.ui:340 glade/ResultsView.ui:767 glade/ResultWindow.ui:261
 #: glade/OptionsDialog.ui:730
 msgid "Wind"
-msgstr "Vânt"
+msgstr "風向"
 
 #: pigeonplanner/printing.py:381 pigeonplanner/ui/tools/datamanager.py:47
 #: glade/ResultsView.ui:326 glade/ResultsView.ui:780 glade/ResultWindow.ui:274
 #: glade/OptionsDialog.ui:716
 msgid "Weather"
-msgstr "Vreme"
+msgstr "天氣"
 
 #: pigeonplanner/printing.py:382 glade/ResultsView.ui:354
 #: glade/ResultsView.ui:793 glade/BreedingView.ui:285
@@ -95,156 +95,151 @@ msgstr "Vreme"
 #: glade/OptionsDialog.ui:746 glade/AddressBook.ui:413 glade/Calendar.ui:261
 #: glade/MedicationView.ui:255 glade/MedicationView.ui:921
 msgid "Comment"
-msgstr "Comentariu"
+msgstr "備註"
 
 #: pigeonplanner/printing.py:473
 msgid "Page"
-msgstr "Pagină"
+msgstr "頁"
 
 #: pigeonplanner/printing.py:587 pigeonplanner/printing.py:609
 #: pigeonplanner/printing.py:610 glade/VelocityCalculator.ui:176
 #: glade/VelocityCalculator.ui:463 glade/VelocityCalculator.ui:896
 msgid "Velocity"
-msgstr "Viteza"
+msgstr "速度"
 
 #: pigeonplanner/printing.py:598 glade/VelocityCalculator.ui:528
 msgid "Released"
-msgstr "Lansare"
+msgstr "發佈"
 
 #: pigeonplanner/printing.py:600 glade/RaceManager.ui:175
 #: glade/DistanceCalculator.ui:355 glade/VelocityCalculator.ui:150
 #: glade/VelocityCalculator.ui:487
 msgid "Distance"
-msgstr "Distanța"
+msgstr "距離"
 
 #: pigeonplanner/printing.py:615 pigeonplanner/printing.py:617
 #: glade/VelocityCalculator.ui:907
 msgid "Flight Time"
-msgstr "Timp de zbor"
+msgstr "飛行時間"
 
 #: pigeonplanner/printing.py:622 pigeonplanner/printing.py:624
 #: glade/VelocityCalculator.ui:918
 msgid "Time of Arrival"
-msgstr "Timp de sosire"
+msgstr "到達時間"
 
 #: pigeonplanner/startup.py:149 pigeonplanner/ui/pedigreewindow.py:58
 #: pigeonplanner/ui/pedigreewindow.py:70 pigeonplanner/ui/optionsdialog.py:57
 #: pigeonplanner/ui/tabs/pedigree.py:27
 msgid "Pedigree"
-msgstr "Certificat de origine"
+msgstr "血統書"
 
 #: pigeonplanner/startup.py:150 glade/Dialogs.ui:8 glade/OptionsDialog.ui:1025
 #: glade/AddressBook.ui:372
 msgid "E-mail"
-msgstr "E-mail"
+msgstr "電子郵件"
 
 #: pigeonplanner/startup.py:151
 msgid "Send"
-msgstr "Trimite"
+msgstr "送出"
 
 #: pigeonplanner/startup.py:152
 msgid "Report"
-msgstr "Raport"
+msgstr "回報"
 
 #: pigeonplanner/messages.py:22 pigeonplanner/common.py:252
 #: pigeonplanner/common.py:259 pigeonplanner/ui/tools/distancecalculator.py:59
 msgid "Error"
-msgstr "Eroare"
+msgstr "錯誤"
 
 #: pigeonplanner/messages.py:23
 msgid "Warning"
-msgstr "Avertisment"
+msgstr "警告"
 
 #: pigeonplanner/messages.py:26
 msgid "Pigeon Planner is already running."
-msgstr "Pigeon Planner ruleaza deja."
+msgstr "Pigeon Planner 已運行中"
 
 #: pigeonplanner/messages.py:30
 msgid ""
 "The database you are trying to open is too new for your version of Pigeon "
 "Planner. You need to reinstall the latest version to continue."
-msgstr ""
+msgstr "您嘗試導入Pigeon Planner的資料庫版本太新。您必須重新安裝最新版本之後再嘗試。"
 
 #: pigeonplanner/messages.py:35
 msgid ""
 "The Pigeon Planner databases has been updated to match the current version. "
 "Note that it is not advised to run an older version, which can lead to data "
 "corruption."
-msgstr ""
+msgstr "資料庫已更新並吻合最新版本的Pigeon Planner。請注意，請勿再用舊版程式執行此資料庫，以免造成資料庫損毀。"
 
 #: pigeonplanner/messages.py:42 pigeonplanner/ui/mainwindow.py:504
 msgid "Go to the website?"
-msgstr "Mergi catre pagina de internet?"
+msgstr "前往官方網站"
 
 #: pigeonplanner/messages.py:43
 msgid ""
 "Pigeon Planner is free software. You don’t need to pay for using it. But if "
 "you like it, please consider donating to help improving it."
-msgstr ""
-"Pigeon Planner este un program gratuit. Nu trebuie sa platesti pentru a-l "
-"folosi. Daca doresti, poti contribui printr-o donatie la imbunatatire "
-"programului."
+msgstr "Pigeon Planner 是免費的，您無需支付任何費用使用此軟體。但請捐款並支持作者持續開發此好用的免費軟體，感謝各位朋友。"
 
 #: pigeonplanner/messages.py:48
 #, python-format
 msgid "Notification for '%s'"
-msgstr "Notificare pentru '%s'"
+msgstr "'%s' 通知"
 
 #: pigeonplanner/messages.py:49
 msgid "Go to the calendar?"
-msgstr "Mergi la calendar?"
+msgstr "開啟月曆?"
 
 #: pigeonplanner/messages.py:52
 msgid "Invalid image!"
-msgstr "Imagine nealocata!"
+msgstr "無效圖片檔！"
 
 #: pigeonplanner/messages.py:53
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
-msgstr "Aceasta imagine nu este intr-un format agreat, alege alta."
+msgstr "圖片可能已損毀或本程式不支援此圖檔類型。"
 
 #: pigeonplanner/messages.py:56
 msgid "Loading image failed!"
-msgstr "Incarcarea imaginii nu a reusit!"
+msgstr "載入圖檔失敗！"
 
 #: pigeonplanner/messages.py:57
 msgid "Maybe you have renamed the image or moved it on your disk."
-msgstr "Poate ai redenumit imaginea sau ai sters-o de pe disc."
+msgstr "也許您移動/或重新命名了該圖檔。"
 
 #: pigeonplanner/messages.py:60
 msgid ""
 "This pigeon already exists, but isn't showing. Do you want to show it again?"
-msgstr ""
-"Acest porumbel exista deja in aplicatie, dar nu se afiseaza. Vrei sa il "
-"afisezi din nou?"
+msgstr "此鴿子已存在於資料庫，但是未顯示。 您想要再次顯示它？"
 
 #: pigeonplanner/messages.py:64
 msgid "This pigeon already exists. Overwrite it?"
-msgstr "Acest porumbel exista deja in aplicatie. Vrei sa il inlocuiesti?"
+msgstr "此鴿子資料已存在。用新資料覆蓋？"
 
 #: pigeonplanner/messages.py:67
 msgid "This pigeon already exists."
-msgstr ""
+msgstr "此鴿子資料已存在。"
 
 #: pigeonplanner/messages.py:70
 msgid "This pigeon doesn't exist. Do you want to add it?"
-msgstr "Acest porumbel nu exista in aplicatie. Vrei sa il adaugi?"
+msgstr "此鴿子不存在於資料庫。您想要新增到資料庫嗎？"
 
 #: pigeonplanner/messages.py:72
 msgid "Adding pigeon"
-msgstr "Adaugare porumbel"
+msgstr "添加鴿子"
 
 #: pigeonplanner/messages.py:73
 msgid "The selected pigeon can't be found."
-msgstr "Porumbelul cautat nu poate fi localizat."
+msgstr "無法找到所選擇的鴿子。"
 
 #: pigeonplanner/messages.py:75
 msgid "Not found!"
-msgstr "Nu a fost gasit!"
+msgstr "未找到！"
 
 #: pigeonplanner/messages.py:76
 msgid "Can't search for parents, enter the pigeon band first."
-msgstr ""
+msgstr "無法找到父母鴿，請先輸入鴿子環號。"
 
 #: pigeonplanner/messages.py:80 pigeonplanner/messages.py:83
 #: pigeonplanner/messages.py:86 pigeonplanner/messages.py:89
@@ -252,596 +247,592 @@ msgstr ""
 #: pigeonplanner/messages.py:100 pigeonplanner/messages.py:110
 #: pigeonplanner/messages.py:113
 msgid "Invalid input!"
-msgstr "Introducere invalida!"
+msgstr "無效的輸入！"
 
 #: pigeonplanner/messages.py:81
 msgid "The ringnumber and year are necessary."
-msgstr "Seria de inel si anul sunt necesare."
+msgstr "鴿子年份及腳環號為必填項目。"
 
 #: pigeonplanner/messages.py:84
 msgid "Only numbers are accepted as year input."
-msgstr "Doar cifrele sunt acceptate la introducerea anului!"
+msgstr "年份必須為4位數數字。"
 
 #: pigeonplanner/messages.py:87
 msgid "Check the length of the year."
-msgstr "Verifica lungimea anului."
+msgstr "請檢查年份是否為4位數。"
 
 #: pigeonplanner/messages.py:90
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr "Doar cifrele sunt acceptate cand adaugi mai multi porumbei."
+msgstr "添加多個鴿子時僅允許使用數字。"
 
 #: pigeonplanner/messages.py:94
 msgid "At least the date and racepoint have to be entered."
-msgstr "Macar data si localitatea de lansare trebuiesc a fi introduse."
+msgstr "您至少必須輸入放鴿地及日期。"
 
 #: pigeonplanner/messages.py:97
 msgid ""
 "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
 "DD)."
-msgstr ""
-"Data pe care ai introdus-o este intr-un format gresit. Trebuie sa fie in "
-"format ISO (AAAA-LL-ZZ)"
+msgstr "您輸入日期的格式不正確，請用 (年-月-日)。"
 
 #: pigeonplanner/messages.py:101
 msgid "The result you want to add already exists."
-msgstr "Rezultatul pe care vrei sa il adaugi exista deja."
+msgstr "您輸入的成績表已存在於資料庫。"
 
 #: pigeonplanner/messages.py:103
 msgid "Removing the selected result"
-msgstr "Sterge rezultatul selectat."
+msgstr "刪除所選成績"
 
 #: pigeonplanner/messages.py:104 pigeonplanner/messages.py:107
 #: pigeonplanner/messages.py:156 pigeonplanner/ui/dialogs.py:396
 #: glade/MainWindow.ui:1103
 msgid "Are you sure?"
-msgstr "Eşti sigur?"
+msgstr "您確定嗎？"
 
 #: pigeonplanner/messages.py:106
 msgid "Removing the selected media file"
-msgstr ""
+msgstr "移除所選的圖片/文件檔案"
 
 #: pigeonplanner/messages.py:111
 msgid "The name has to be entered."
-msgstr "Numele trebuie introdus"
+msgstr "必須輸入名稱"
 
 #: pigeonplanner/messages.py:114
 msgid "The persoon you want to add already exists."
-msgstr "Persoana pe care vrei sa o adaugi deja exista."
+msgstr "您欲添加的聯絡人已存在於通訊錄"
 
 #: pigeonplanner/messages.py:116
 #, python-format
 msgid "Removing '%s'"
-msgstr "Inlaturare '%s'"
+msgstr "移除 '%s'"
 
 #: pigeonplanner/messages.py:117
 msgid "Are you sure you want to remove this person from your addresses?"
-msgstr "Esti sigur ca vrei sa inlaturi aceasta persoana din adresele tale?"
+msgstr "您確定要在通訊錄裡移除此聯絡人？"
 
 #: pigeonplanner/messages.py:121
 #, python-format
 msgid "Removing '%s' from '%s'."
-msgstr "Inlaturare '%s' din '%s'"
+msgstr "移除 '%s' 位置 '%s'."
 
 #: pigeonplanner/messages.py:122
 msgid "Are you sure you want to remove this item?"
-msgstr "Esti sigur ca vrei sa inlaturi acest element?"
+msgstr "您確定要移除這個項目嗎？"
 
 #: pigeonplanner/messages.py:125 pigeonplanner/messages.py:128
 msgid "Removing database"
-msgstr "Inlaturare baza de date"
+msgstr "移除資料庫"
 
 #: pigeonplanner/messages.py:126
 msgid "Are you sure you want to remove the database? All data will be lost."
-msgstr ""
-"Esti sigur ca vrei sa stergi baza de date? Toate datele vor fi pierdute."
+msgstr "您確定要移除資料庫？所有資料將會遺失。"
 
 #: pigeonplanner/messages.py:130
 msgid "The backup was successfully created."
-msgstr "Copia de rezerva a fost creata cu succes."
+msgstr "已成功備份資料庫"
 
 #: pigeonplanner/messages.py:132 pigeonplanner/messages.py:138
 msgid "Completed!"
-msgstr "Incheiat!"
+msgstr "完成！"
 
 #: pigeonplanner/messages.py:133
 msgid "There was an error making the backup."
-msgstr "A aparut o eroare la crearea copiei de rezerva."
+msgstr "備份時發生錯誤。"
 
 #: pigeonplanner/messages.py:135 pigeonplanner/messages.py:141
 msgid "Failed!"
-msgstr "Nereusit!"
+msgstr "失敗！"
 
 #: pigeonplanner/messages.py:136
 msgid "The backup was successfully restored."
-msgstr ""
+msgstr "資料庫已成功還原。"
 
 #: pigeonplanner/messages.py:137
 msgid "The program will now quit automaticly."
-msgstr ""
+msgstr "程式將自動關閉。"
 
 #: pigeonplanner/messages.py:139
 msgid "There was an error restoring the backup."
-msgstr "A aparut o eroare la restaurarea copiei de rezerva."
+msgstr "還原資料庫時發生錯誤。"
 
 #: pigeonplanner/messages.py:143
 msgid "No personal information found."
-msgstr "Nu s-au gasit informatii personale."
+msgstr "未找到個人資料。"
 
 #: pigeonplanner/messages.py:144
 msgid ""
 "This will be shown on top of the printed pedigree.\n"
 "Do you want to add it now?"
 msgstr ""
-"Acesta va aparea in partea de sus a pedigree-lui la imprimare.\n"
-"Vrei sa il adaugi acum?"
+"此資料將顯示於列印的血統輸上方。\n"
+"您想要添加您的資料嗎？"
 
 #: pigeonplanner/messages.py:148
 msgid "Error printing the pedigree"
-msgstr "Eroare la imprimarea pedigree-ului."
+msgstr "列印血統書發生錯誤"
 
 #: pigeonplanner/messages.py:151
 msgid "An error occured in the print operation!"
-msgstr "A intervenit o eroare in operatia de imprimare."
+msgstr "列印時發生錯誤！"
 
 #: pigeonplanner/messages.py:152
 msgid "See the logfile (File->Logfile viewer) for more info."
-msgstr ""
-"Vizualizeaza fisierul de logare (Fisier->Vizualizare fisier de logare)"
+msgstr "查看日誌文件（文件 - >日誌文件查看器）以獲取更多信息。"
 
 #: pigeonplanner/messages.py:155
 msgid "This will set back all the settings to the default values."
-msgstr "Aceasta va readuce toate setarile la valorile de baza."
+msgstr "重設為預設設定。"
 
 #: pigeonplanner/messages.py:157
 msgid "Default settings"
-msgstr "Setari de baza"
+msgstr "預設設定"
 
 #: pigeonplanner/messages.py:159
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
-msgstr "Pentru ca schimbarile sa aiba efect programul trebuie repornit."
+msgstr "Pigeon Planner 需要重新啟動使更改生效。"
 
 #: pigeonplanner/messages.py:162
 msgid "Restart required"
-msgstr "Este necesară repornirea"
+msgstr "需要重新啟動程式"
 
 #: pigeonplanner/messages.py:164
 msgid "Update available!"
-msgstr "Imbunatatire disponibila!"
+msgstr "已有新的官方更新檔！"
 
 #: pigeonplanner/messages.py:165
 msgid "There is an update available, do you want to download it now?"
-msgstr "Aici gasesti o imbunatatire disponibila, vrei sa o descarci acum?"
+msgstr "已有新的官方更新檔，您要馬上下載嗎？"
 
 #: pigeonplanner/messages.py:168
 msgid "The recipient and sender's e-mailaddress are required."
-msgstr "Destinatarul si mailul expeditorului sunt  necesare."
+msgstr "收件人及寄件人的電子郵件為必填項目"
 
 #: pigeonplanner/messages.py:172
 msgid "Error trying to get information. Are you connected to the internet?"
-msgstr ""
-"A intervenit o eroare in gasirea informatiei. Esti conectat la internet?"
+msgstr "取得資料時發生錯誤，請確定您已連上網路？"
 
 #: pigeonplanner/messages.py:173
 msgid "A new version is available."
-msgstr "O noua versiune este disponibila!"
+msgstr "程式有新的版本。"
 
 #: pigeonplanner/messages.py:174
 msgid "You already have the latest version installed."
-msgstr "Ai deja ultima versiune instalata."
+msgstr "您正在使用最新的版本。"
 
 #: pigeonplanner/messages.py:175
 msgid "This isn't normal, or you must be running a development version"
-msgstr "Acest lucru nu este normal, sau folositi o versiune de dezvoltare"
+msgstr "這是不正常的，或者您正在使用的是一個開發版本。"
 
 #: pigeonplanner/common.py:43
 msgid "Cock"
-msgstr "Mascul"
+msgstr "公"
 
 #: pigeonplanner/common.py:43
 msgid "Hen"
-msgstr "Femela"
+msgstr "母"
 
 #: pigeonplanner/common.py:43
 msgid "Young bird"
-msgstr "Pui"
+msgstr "幼鴿"
 
 #: pigeonplanner/common.py:252
 msgid "Error: This file does not exist"
-msgstr ""
+msgstr "錯誤：檔案不存在"
 
 #: pigeonplanner/common.py:259
 msgid "Error opening file:"
-msgstr ""
+msgstr "開啟檔案時發生錯誤："
 
 #: pigeonplanner/ui/databasetool.py:40
 msgid "Executing..."
-msgstr "Executare"
+msgstr "執行中..."
 
 #: pigeonplanner/ui/databasetool.py:42
 msgid "Error: see the logfile for more info."
-msgstr "Eroare: vezi fisa de logare pentru mai multe detalii."
+msgstr "錯誤：詳細資訊請查看錯誤日誌。"
 
 #: pigeonplanner/ui/databasetool.py:43
 msgid "Operation cancelled"
-msgstr "Operație anulată"
+msgstr "作業已取消"
 
 #: pigeonplanner/ui/databasetool.py:44
 msgid "Operation completed"
-msgstr "Operatie completa"
+msgstr "作業已完成"
 
 #: pigeonplanner/ui/printpreview.py:69
 msgid "Print Preview"
-msgstr "Previzualizare imprimare"
+msgstr "預覽列印"
 
 #: pigeonplanner/ui/printpreview.py:114
 msgid "Shows the first page"
-msgstr "Arată prima pagină"
+msgstr "顯示第一頁"
 
 #: pigeonplanner/ui/printpreview.py:116
 msgid "Shows previous page"
-msgstr "Arată pagina precedentă"
+msgstr "顯示上一頁"
 
 #: pigeonplanner/ui/printpreview.py:118
 msgid "Shows the next page"
-msgstr "Arată pagina următoare"
+msgstr "顯示下一頁"
 
 #: pigeonplanner/ui/printpreview.py:120
 msgid "Shows the last page"
-msgstr "Arată ultima pagină"
+msgstr "顯示最後一頁"
 
 #: pigeonplanner/ui/printpreview.py:122
 msgid "Zooms the page in"
-msgstr "Micsoreaza pagina"
+msgstr "將頁面放大"
 
 #: pigeonplanner/ui/printpreview.py:124
 msgid "Zooms the page out"
-msgstr "Mareste pagina"
+msgstr "將頁面縮小"
 
 #: pigeonplanner/ui/printpreview.py:126 glade/PedigreeWindow.ui:8
 #: glade/ResultWindow.ui:15 glade/PhotoAlbum.ui:50
 msgid "Close this window"
-msgstr "Închide această fereastră"
+msgstr "關閉此視窗"
 
 #: pigeonplanner/ui/printpreview.py:130
 msgid "Zooms to fit the whole page"
-msgstr "Potriveşte la mărimea paginii"
+msgstr "縮放成符合整頁大小"
 
 #: pigeonplanner/ui/maildialog.py:145
 msgid "The e-mail has been sent succesfully!"
-msgstr "E-mailul a fost trimis cu succes!"
+msgstr "已成功寄出郵件"
 
 #: pigeonplanner/ui/optionsdialog.py:52 glade/BreedingView.ui:304
 #: glade/BreedingView.ui:1321 glade/OptionsDialog.ui:1354
 #: glade/DatabaseTool.ui:234
 msgid "General"
-msgstr "General"
+msgstr "一般設定"
 
 #: pigeonplanner/ui/optionsdialog.py:54
 msgid "Appearance"
-msgstr "Înfățișare"
+msgstr "界面外觀"
 
 #: pigeonplanner/ui/optionsdialog.py:56
 msgid "Printing"
-msgstr "Imprimare"
+msgstr "正在列印"
 
 #: pigeonplanner/ui/optionsdialog.py:58 pigeonplanner/ui/resultwindow.py:79
 #: pigeonplanner/ui/tabs/results.py:51 glade/ResultsView.ui:21
 msgid "Results"
-msgstr "Rezultate"
+msgstr "成績"
 
 #: pigeonplanner/ui/optionsdialog.py:111
 msgid "days"
-msgstr "zile"
+msgstr "天"
 
 #: pigeonplanner/ui/optionsdialog.py:111
 msgid "day"
-msgstr "zi"
+msgstr "天"
 
 #: pigeonplanner/ui/dialogs.py:57
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Iacob Catalin https://launchpad.net/~catalin-iacob25\n"
-"  Timo https://launchpad.net/~timovwb"
+"  426 https://launchpad.net/~426-r\n"
+"  Timo https://launchpad.net/~timovwb\n"
+"  Walter Cheuk https://launchpad.net/~wwycheuk"
 
 #: pigeonplanner/ui/dialogs.py:67 glade/MainWindow.ui:250
 msgid "General information"
-msgstr "Informaţii generale"
+msgstr "一般資訊"
 
 #: pigeonplanner/ui/dialogs.py:93
 msgid "Technical details"
-msgstr "Detalii tehnice"
+msgstr "系統資料"
 
 #: pigeonplanner/ui/dialogs.py:96
 msgid "Data information"
-msgstr "Informatie date"
+msgstr "鴿舍資料"
 
 #: pigeonplanner/ui/dialogs.py:113
 msgid "Number of pigeons"
-msgstr "Numar de porumbei"
+msgstr "總鴿數"
 
 #: pigeonplanner/ui/dialogs.py:114
 msgid "Number of cocks"
-msgstr "Numar de masculi"
+msgstr "公鴿數"
 
 #: pigeonplanner/ui/dialogs.py:116
 msgid "Number of hens"
-msgstr "Numar de femele"
+msgstr "母鴿數"
 
 #: pigeonplanner/ui/dialogs.py:118
 msgid "Number of young birds"
-msgstr "Numar de pasari tinere"
+msgstr "幼鴿數"
 
 #: pigeonplanner/ui/dialogs.py:120
 msgid "Number of results"
-msgstr "Numar de clasari"
+msgstr "成績表"
 
 #: pigeonplanner/ui/dialogs.py:142
 msgid "Create backup"
-msgstr "Creează o copie de rezerva"
+msgstr "建立備份"
 
 #: pigeonplanner/ui/dialogs.py:143
 msgid "Choose a directory where to save the backup"
-msgstr "Alege un director unde sa salvezi copia de rezerva"
+msgstr "選擇備份位置"
 
 #: pigeonplanner/ui/dialogs.py:149 glade/OptionsDialog.ui:365
 msgid "Backup"
-msgstr "Copie de rezerva"
+msgstr "備份"
 
 #: pigeonplanner/ui/dialogs.py:158
 msgid "Restore backup"
-msgstr "Restaureaza copia de rezerva"
+msgstr "還原備份"
 
 #: pigeonplanner/ui/dialogs.py:159
 msgid "Choose a Pigeon Planner backup file to restore"
-msgstr "Alege o copie de rezerva a Pigeon Planner pentru a o restaura"
+msgstr "選擇一個備份檔進行還原"
 
 #: pigeonplanner/ui/dialogs.py:162
 msgid "Warning! This will overwrite the existing database!"
-msgstr "Atentie! Aceasta va inlocui baza de date existenta!"
+msgstr "警告！此動作將覆蓋您現有資料庫！"
 
 #: pigeonplanner/ui/dialogs.py:170
 msgid "Restore"
-msgstr "Restaurează"
+msgstr "還原"
 
 #: pigeonplanner/ui/dialogs.py:279
 msgid "Only show:"
-msgstr "Afișează doar:"
+msgstr "只顯示："
 
 #: pigeonplanner/ui/dialogs.py:299 pigeonplanner/ui/dialogs.py:414
 msgid "Search a pigeon"
-msgstr "Cauta un porumbel"
+msgstr "搜尋鴿子"
 
 #: pigeonplanner/ui/dialogs.py:315
 msgid "Search for:"
-msgstr "Căutare pentru:"
+msgstr "搜尋條件："
 
 #: pigeonplanner/ui/dialogs.py:323
 msgid "Search in:"
-msgstr "Caută în:"
+msgstr "搜尋位置："
 
 #: pigeonplanner/ui/dialogs.py:324
 msgid "Band numbers"
-msgstr "Serie inel"
+msgstr "環號"
 
 #: pigeonplanner/ui/dialogs.py:326
 msgid "Names"
-msgstr "Nume"
+msgstr "名稱"
 
 #: pigeonplanner/ui/dialogs.py:390
 msgid "Removing the selected medication entry"
-msgstr "Sterge medicatia introdusa"
+msgstr "移除所選的藥物項目"
 
 #: pigeonplanner/ui/dialogs.py:392
 msgid "Remove this entry for all pigeons?"
-msgstr "Inlatura aceasta introducere la toti porumbeii"
+msgstr "移除所有鴿子的此項項目？"
 
 #: pigeonplanner/ui/dialogs.py:426 pigeonplanner/ui/widgets/treeview.py:189
 #: pigeonplanner/ui/tabs/relatives.py:156 glade/ResultWindow.ui:144
 #: glade/MainWindow.ui:854 glade/ResultParser.ui:321
 msgid "Year"
-msgstr "An"
+msgstr "年份"
 
 #: pigeonplanner/ui/dialogs.py:426 pigeonplanner/ui/widgets/treeview.py:189
 #: glade/OptionsDialog.ui:553 glade/OptionsDialog.ui:987
 #: glade/OptionsDialog.ui:1189 glade/AddressBook.ui:129
 msgid "Name"
-msgstr "Nume"
+msgstr "名稱"
 
 #: pigeonplanner/ui/logdialog.py:43
 msgid "Logfile Viewer"
-msgstr "Vizualizare fisier de logare"
+msgstr "日誌瀏覽器"
 
 #: pigeonplanner/ui/logdialog.py:145
 msgid ""
 "Chances are that your problem is already fixed in this new version. Send a "
 "report anyway?"
-msgstr ""
+msgstr "很有可能此問題已於最新版中修復。仍然要回報問題？"
 
 #: pigeonplanner/ui/filechooser.py:54
 msgid "Preview"
-msgstr ""
+msgstr "預覽"
 
 #: pigeonplanner/ui/filechooser.py:78 pigeonplanner/ui/tabs/media.py:118
 msgid "Images"
-msgstr "Imagini"
+msgstr "圖片"
 
 #: pigeonplanner/ui/filechooser.py:128
 msgid "Select an image..."
-msgstr ""
+msgstr "選擇圖片"
 
 #: pigeonplanner/ui/filechooser.py:131
 msgid "No image"
-msgstr "Fără imagine"
+msgstr "沒有圖片"
 
 #: pigeonplanner/ui/filechooser.py:143 pigeonplanner/ui/filechooser.py:210
 #: pigeonplanner/ui/filechooser.py:230
 msgid "Select a file..."
-msgstr ""
+msgstr "選擇檔案..."
 
 #: pigeonplanner/ui/filechooser.py:153
 msgid "Title"
-msgstr ""
+msgstr "標題"
 
 #: pigeonplanner/ui/filechooser.py:157 glade/Calendar.ui:225
 #: glade/MedicationView.ui:199 glade/MedicationView.ui:559
 #: glade/MedicationView.ui:732
 msgid "Description"
-msgstr "Descriere"
+msgstr "描述"
 
 #: pigeonplanner/ui/filechooser.py:188
 msgid "Save as..."
-msgstr "Salveaza ca..."
+msgstr "另存新檔..."
 
 #: pigeonplanner/ui/filechooser.py:221
 msgid "Select a folder..."
-msgstr ""
+msgstr "選擇資料夾..."
 
 #: pigeonplanner/ui/resultwindow.py:115
 msgid "Filter results"
-msgstr "Rezultatele filtrarii"
+msgstr "過濾結果"
 
 #: pigeonplanner/ui/resultwindow.py:120
 msgid "Pigeons"
-msgstr "Porumbei"
+msgstr "鴿子"
 
 #: pigeonplanner/ui/resultwindow.py:121
 msgid "Year of pigeon"
-msgstr "Anul porumbelului"
+msgstr "鴿子年份"
 
 #: pigeonplanner/ui/resultwindow.py:122
 msgid "Year of race"
-msgstr "Anul cursei"
+msgstr "比賽年份"
 
 #: pigeonplanner/ui/resultwindow.py:125 glade/ResultsView.ui:715
 #: glade/ResultWindow.ui:209 glade/OptionsDialog.ui:662
 msgid "Coefficient"
-msgstr "Punctaj"
+msgstr "系數"
 
 #: pigeonplanner/ui/resultwindow.py:126 glade/ResultParser.ui:335
 msgid "Place"
-msgstr "Loc"
+msgstr "地方"
 
 #: pigeonplanner/ui/mainwindow.py:261
 #, python-format
 msgid "Pigeon %s has been added"
-msgstr "Porumbeul '%s' a fost adaugat"
+msgstr "鴿子 %s 已添加"
 
 #: pigeonplanner/ui/mainwindow.py:354
 #, python-format
 msgid "Pigeon %s has been removed"
-msgstr "Porumbelul '%s' a fost inlaturat"
+msgstr "鴿子 %s 已移除"
 
 #: pigeonplanner/ui/mainwindow.py:364
 #, python-format
 msgid "%s pigeons have been removed"
-msgstr "'%s' au fost inlaturati"
+msgstr "%s 鴿子已移除"
 
 #: pigeonplanner/ui/mainwindow.py:502 glade/MainWindow.ui:242
 msgid "Search for updates..."
-msgstr "Cauta inbunatatiri"
+msgstr "搜尋更新..."
 
 #: pigeonplanner/ui/detailsview.py:53 glade/DetailsView.ui:1981
 msgid "Details of pigeon"
-msgstr "Detalii despre porumbel"
+msgstr "鴿子詳細資料"
 
 #: pigeonplanner/ui/detailsview.py:55
 #, python-format
 msgid "Details of %s"
-msgstr "Detalii ale '%s'"
+msgstr "%s 詳細資料"
 
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:70
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:258
 msgid "<edit>"
-msgstr "<modifica>"
+msgstr "編輯"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:278
 msgid "Dead"
-msgstr "Mort"
+msgstr "死亡"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:305
 msgid "Active"
-msgstr "Activ"
+msgstr "正常"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:426
 msgid "Sold"
-msgstr "Vândut"
+msgstr "已售出"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:547
 msgid "Lost"
-msgstr "Pierdut"
+msgstr "遺失"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:666
 msgid "Breeder"
-msgstr ""
+msgstr "作種者"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:819
 msgid "On loan"
-msgstr ""
+msgstr "借用"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:116
 msgid "Yards"
-msgstr "Yarzi"
+msgstr "碼"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:117
 msgid "Kilometres"
-msgstr "Kilometri"
+msgstr "公里"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:118
 msgid "Metres"
-msgstr "Metri"
+msgstr "公尺"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:119
 msgid "Centimetres"
-msgstr "Centimetri"
+msgstr "公分"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:120
 msgid "Inches"
-msgstr "Inci"
+msgstr "英吋"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:121
 msgid "Feet"
-msgstr "Picior"
+msgstr "英尺"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:122
 msgid "Miles"
-msgstr "Mile"
+msgstr "英哩"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:123
 msgid "Nautical Miles"
-msgstr "Mile marine"
+msgstr "海哩"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:146
 msgid "Yard per Minute"
-msgstr "Yard pe minut"
+msgstr "碼/每分鐘"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:147
 msgid "Metres per Minute"
-msgstr "Metri pe minut"
+msgstr "公尺/每分鐘"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:148
 msgid "Metres per Second"
-msgstr "Metri pe secunda"
+msgstr "公尺/每秒"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:149
 msgid "Kilometre per Hour"
-msgstr "Kilometri la Ora"
+msgstr "公里/每小時"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:150
 msgid "Feet per Second"
-msgstr "Picioare pe secunda"
+msgstr "英尺/每秒"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:151
 msgid "Feet per Minute"
-msgstr "Picioare pe Minut"
+msgstr "英尺/每分鐘"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:152
 msgid "Mile per Hour"
-msgstr "Mile la Ora"
+msgstr "英哩/每小時"
 
 #: pigeonplanner/ui/widgets/treeview.py:168
 msgid "Filter pigeons"
-msgstr "Filtreaza porumbeii"
+msgstr "過濾鴿子"
 
 #: pigeonplanner/ui/widgets/treeview.py:173
 #: pigeonplanner/ui/widgets/treeview.py:189
@@ -849,44 +840,44 @@ msgstr "Filtreaza porumbeii"
 #: glade/OptionsDialog.ui:1213 glade/DetailsView.ui:1052
 #: glade/DetailsView.ui:1648 glade/MainWindow.ui:806
 msgid "Sex"
-msgstr "Sex"
+msgstr "性別"
 
 #: pigeonplanner/ui/widgets/treeview.py:174
 #: pigeonplanner/ui/tools/datamanager.py:40
 msgid "Colours"
-msgstr "Culori"
+msgstr "顏色"
 
 #: pigeonplanner/ui/widgets/treeview.py:176
 #: pigeonplanner/ui/tools/datamanager.py:45
 msgid "Strains"
-msgstr "Linii"
+msgstr "鴿系"
 
 #: pigeonplanner/ui/widgets/treeview.py:178
 #: pigeonplanner/ui/tools/datamanager.py:46
 msgid "Lofts"
-msgstr "Compartimente"
+msgstr "鴿舍"
 
 #: pigeonplanner/ui/widgets/treeview.py:181
 msgid "Status"
-msgstr "Statut"
+msgstr "狀態"
 
 #: pigeonplanner/ui/widgets/treeview.py:189 glade/OptionsDialog.ui:579
 #: glade/OptionsDialog.ui:1199 glade/DetailsView.ui:1041
 #: glade/DetailsView.ui:1637
 msgid "Colour"
-msgstr "Culoare"
+msgstr "顏色"
 
 #: pigeonplanner/ui/widgets/treeview.py:190
 #: pigeonplanner/ui/tools/distancecalculator.py:133 glade/OptionsDialog.ui:593
 #: glade/DetailsView.ui:1015 glade/DetailsView.ui:1454
 #: glade/MedicationView.ui:356
 msgid "Loft"
-msgstr "Compartiment"
+msgstr "鴿舍"
 
 #: pigeonplanner/ui/widgets/treeview.py:190 glade/OptionsDialog.ui:563
 #: glade/DetailsView.ui:1065 glade/DetailsView.ui:1687
 msgid "Strain"
-msgstr "Rasa"
+msgstr "品種"
 
 #: pigeonplanner/ui/widgets/latlongentry.py:39
 msgid ""
@@ -895,113 +886,117 @@ msgid ""
 "  DD°MM.mmm’\n"
 "  DD°MM’SS.s”"
 msgstr ""
+"日期輸入必須為以下格式：\n"
+"DD.dddddd°\n"
+"DD°MM.mmm’\n"
+"DD°MM’SS.s”"
 
 #: pigeonplanner/ui/widgets/statusbar.py:27
 #, python-format
 msgid "Pigeons: %s"
-msgstr ""
+msgstr "鴿數：%s"
 
 #: pigeonplanner/ui/widgets/statusbar.py:42
 #, python-format
 msgid "Filter: %s"
-msgstr ""
+msgstr "過濾：%s"
 
 #: pigeonplanner/ui/widgets/statusbar.py:43
 msgid "On"
-msgstr ""
+msgstr "開啟"
 
 #: pigeonplanner/ui/widgets/statusbar.py:44
 msgid "Off"
-msgstr ""
+msgstr "關閉"
 
 #: pigeonplanner/ui/tabs/medication.py:33 glade/MedicationView.ui:9
 #: glade/MedicationView.ui:227 glade/MedicationView.ui:783
 msgid "Medication"
-msgstr "Medicatie"
+msgstr "藥物"
 
 #: pigeonplanner/ui/tabs/media.py:38 glade/MediaView.ui:73
 msgid "Media"
-msgstr ""
+msgstr "媒體檔案"
 
 #: pigeonplanner/ui/tabs/media.py:122 glade/OptionsDialog.ui:865
 msgid "Other"
-msgstr ""
+msgstr "其他"
 
 #: pigeonplanner/ui/tabs/pedigree.py:34
 msgid "<b>Pedigree sire</b>"
-msgstr "<b>Arbore genealogic tata</b>"
+msgstr "<b>父系血統</b>"
 
 #: pigeonplanner/ui/tabs/pedigree.py:46
 msgid "<b>Pedigree dam</b>"
-msgstr "<b>Arbore genealogic mama</b>"
+msgstr "<b>母系血統</b>"
 
 #: pigeonplanner/ui/tabs/relatives.py:31
 msgid "Relatives"
-msgstr "Rude"
+msgstr "血源"
 
 #: pigeonplanner/ui/tabs/relatives.py:43
 msgid "<b>Brothers and sisters</b>"
-msgstr "<b>Frati si surori</b"
+msgstr "<b>兄弟姊妹</b>"
 
 #: pigeonplanner/ui/tabs/relatives.py:56
 msgid "<b>Half brothers and sisters</b>"
-msgstr "<b>Frati si surori vitregi</b>"
+msgstr "<b>半兄弟姊妹</b>"
 
 #: pigeonplanner/ui/tabs/relatives.py:69
 msgid "<b>Offspring</b>"
-msgstr "<b>Produsi</b>"
+msgstr "<b>子孫</b>"
 
 #: pigeonplanner/ui/tabs/relatives.py:160
 msgid "Common parent"
-msgstr "Parinte comun"
+msgstr "共同父母"
 
 #: pigeonplanner/ui/tabs/results.py:254
 msgid "Edit result for:"
-msgstr "Modifica rezultat pentru:"
+msgstr "編輯成績："
 
 #: pigeonplanner/ui/tabs/results.py:254
 msgid "Add result for:"
-msgstr "Adauga rezultate pentru:"
+msgstr "添加成績："
 
 #: pigeonplanner/ui/tabs/breeding.py:37
 msgid "Breeding"
-msgstr ""
+msgstr "育種中"
 
 #: pigeonplanner/ui/tools/calendar.py:126
 #, python-format
 msgid "Notification set on %s days"
-msgstr "Notificarea este setata in '%s' zile"
+msgstr "設定通知於 %s 日"
 
 #: pigeonplanner/ui/tools/calendar.py:129
 msgid "No notification set"
-msgstr "Nicio notificare reglata"
+msgstr "尚未設定通知"
 
 #: pigeonplanner/ui/tools/distancecalculator.py:57
 msgid ""
 "The latitude and longitude need to be in DD.dddddd° format to use this "
 "function."
-msgstr ""
+msgstr "經緯度必須為 DD.dddddd° 格式。"
 
 #: pigeonplanner/ui/tools/distancecalculator.py:132
 msgid "Custom"
-msgstr ""
+msgstr "使用者定義"
 
 #: pigeonplanner/ui/tools/datamanager.py:41
 msgid "Sectors"
-msgstr "Zone"
+msgstr "磁區"
 
 #: pigeonplanner/ui/tools/datamanager.py:42
 msgid "Types"
-msgstr "Tipuri"
+msgstr "類型"
 
 #: pigeonplanner/ui/tools/datamanager.py:43
 msgid "Categories"
-msgstr "Categorii"
+msgstr "分類"
 
 #: pigeonplanner/ui/tools/datamanager.py:44
 #: pigeonplanner/ui/tools/datamanager.py:72
 msgid "Racepoints"
-msgstr "Puncte de lansare"
+msgstr "放鴿地"
 
 #: pigeonplanner/resultparsers/dtd.py:35
 msgid "Data Technology-Deerlijk - Belgium"
@@ -1014,1044 +1009,874 @@ msgstr ""
 #: glade/ResultsView.ui:300 glade/BreedingView.ui:103
 #: glade/MedicationView.ui:187
 msgid "Date*"
-msgstr ""
+msgstr "日期*"
 
 #: glade/ResultsView.ui:312
 msgid "Racepoint*"
-msgstr ""
+msgstr "放鴿地*"
 
 #: glade/ResultsView.ui:814
 msgid "Results of pigeon"
-msgstr ""
+msgstr "賽鴿成績表"
 
 #: glade/ResultsView.ui:835
 msgid "View all"
-msgstr "Vizualizare totala"
+msgstr "查看全部"
 
 #: glade/ResultsView.ui:852
 msgid "Import"
-msgstr ""
+msgstr "匯入"
 
 #: glade/BreedingView.ui:9
 msgid "Breeding data"
-msgstr ""
+msgstr "育種資料"
 
 #: glade/BreedingView.ui:165
 msgid "Mate*"
-msgstr ""
+msgstr "配對*"
 
 #: glade/BreedingView.ui:209 glade/BreedingView.ui:1223
 msgid "Clutch"
-msgstr ""
+msgstr "孵蛋"
 
 #: glade/BreedingView.ui:241 glade/BreedingView.ui:1264
 msgid "Nestbox"
-msgstr ""
+msgstr "巢箱"
 
 #: glade/BreedingView.ui:357 glade/BreedingView.ui:527
 #: glade/BreedingView.ui:803 glade/BreedingView.ui:1003
 msgid "Laid"
-msgstr ""
+msgstr "孵化"
 
 #: glade/BreedingView.ui:387 glade/BreedingView.ui:557
 #: glade/BreedingView.ui:831 glade/BreedingView.ui:1031
 msgid "Hatched"
-msgstr ""
+msgstr "已孵出"
 
 #: glade/BreedingView.ui:400 glade/BreedingView.ui:570
 #: glade/BreedingView.ui:876 glade/BreedingView.ui:1076
 msgid "Successful"
-msgstr ""
+msgstr "成功"
 
 #: glade/BreedingView.ui:451 glade/BreedingView.ui:621
 msgid "Add pigeon to list"
-msgstr ""
+msgstr "添加鴿子到列表"
 
 #: glade/BreedingView.ui:479 glade/BreedingView.ui:956
 msgid "Egg 1"
-msgstr ""
+msgstr "蛋一"
 
 #: glade/BreedingView.ui:649 glade/BreedingView.ui:1156
 msgid "Egg 2"
-msgstr ""
+msgstr "蛋二"
 
 #: glade/BreedingView.ui:733
 msgid "Mate"
-msgstr ""
+msgstr "配對"
 
 #: glade/Dialogs.ui:117
 msgid "Only report this logfile if an unexpected error has happened."
-msgstr ""
+msgstr "僅於程式發生意外錯誤時再回報此日誌檔。"
 
 #: glade/Dialogs.ui:154
 msgid "Send to:"
-msgstr ""
+msgstr "傳送到："
 
 #: glade/Dialogs.ui:189
 msgid "Your name:"
-msgstr ""
+msgstr "您的名稱："
 
 #: glade/Dialogs.ui:224
 msgid "Your e-mailaddress:"
-msgstr ""
+msgstr "您的電子信箱："
 
 #: glade/Dialogs.ui:258
 msgid "Subject:"
-msgstr ""
+msgstr "主旨："
 
 #: glade/Dialogs.ui:297
 msgid "Message:"
-msgstr ""
+msgstr "訊息："
 
 #: glade/Dialogs.ui:420
 msgid "Attached file:"
-msgstr ""
+msgstr "添加附件："
 
 #: glade/Dialogs.ui:443
 msgid "Sending..."
-msgstr "Se trimite..."
+msgstr "傳送中..."
 
 #: glade/PedigreeWindow.ui:15 glade/MainWindow.ui:58
 msgid "Print this pedigree"
-msgstr "Imprima acest certificat de origine"
+msgstr "列印此血統書"
 
 #: glade/PedigreeWindow.ui:22
 msgid "View this pedigree"
-msgstr "Afiseaza acest certificat de origine"
+msgstr "瀏覽此血統書"
 
 #: glade/PedigreeWindow.ui:29
 msgid "Email this pedigree"
-msgstr "Trimite pe mail acest certificat de origine"
+msgstr "用電子郵件寄出此血統書"
 
 #: glade/PedigreeWindow.ui:37
 msgid "Save this pedigree"
-msgstr "Salveaza acest certificat de origine"
+msgstr "儲存此血統書"
 
 #: glade/PedigreeWindow.ui:99 glade/DetailsView.ui:1002
 #: glade/DetailsView.ui:1394
 msgid "Sire"
-msgstr "Tata"
+msgstr "父環"
 
 #: glade/PedigreeWindow.ui:150 glade/DetailsView.ui:989
 #: glade/DetailsView.ui:1381
 msgid "Dam"
-msgstr "Mama"
+msgstr "母環"
 
 #: glade/RaceManager.ui:20 glade/MainWindow.ui:191
 msgid "Racepoint manager"
-msgstr ""
+msgstr "管理放鴿地"
 
 #: glade/RaceManager.ui:128 glade/DistanceCalculator.ui:111
 #: glade/DistanceCalculator.ui:239 glade/AddressBook.ui:441
 msgid "Latitude"
-msgstr ""
+msgstr "緯度"
 
 #: glade/RaceManager.ui:142 glade/DistanceCalculator.ui:125
 #: glade/DistanceCalculator.ui:253 glade/AddressBook.ui:469
 msgid "Longitude"
-msgstr ""
+msgstr "經度"
 
 #: glade/RaceManager.ui:189
 msgid "Click here to add more racepoints"
-msgstr ""
+msgstr "點擊這裡添加更多放鴿地"
 
 #: glade/ResultWindow.ui:8
 msgid "Print these results"
-msgstr "Imprima aceste rezultate"
+msgstr "列印成績"
 
 #: glade/ResultWindow.ui:22
 msgid "Filter"
-msgstr ""
+msgstr "過濾"
 
 #: glade/ResultWindow.ui:23 glade/MainWindow.ui:171
 msgid "Set filter options"
-msgstr "Regleaza optiunile de filtrare"
+msgstr "設定過濾項目"
 
 #: glade/ResultWindow.ui:30
 msgid "View these results"
-msgstr "Vizualizeaza aceste rezultate"
+msgstr "查看成績"
 
 #: glade/ResultWindow.ui:37
 msgid "Email these results"
-msgstr "Trimite pe e-mail aceste rezultate"
+msgstr "寄出成績"
 
 #: glade/ResultWindow.ui:45
 msgid "Save these results"
-msgstr "Salveaza aceste rezultate"
+msgstr "儲存成績"
 
 #: glade/ResultWindow.ui:91
 msgid "View all results"
-msgstr "Vizualizeaza toate rezultatele"
+msgstr "查看所有成績"
 
 #: glade/OptionsDialog.ui:69
 msgid "Options"
-msgstr "Optiuni"
+msgstr "選項"
 
 #: glade/OptionsDialog.ui:90
 msgid "Default"
-msgstr "Implicit"
+msgstr "預設"
 
 #: glade/OptionsDialog.ui:219
 msgid "Check for updates on startup"
-msgstr "La pornire, verifică existența unor versiuni mai noi"
+msgstr "在啟動時檢查是否有更新可用"
 
 #: glade/OptionsDialog.ui:233
 msgid "Update"
-msgstr "Actualizează"
+msgstr "更新"
 
 #: glade/OptionsDialog.ui:263
 msgid "Make an automatic backup"
-msgstr "Realizeaza automat o baza de date"
+msgstr "製作自動備份"
 
 #: glade/OptionsDialog.ui:310 glade/DistanceCalculator.ui:99
 #: glade/DistanceCalculator.ui:227
 msgid "Location"
-msgstr "Locație"
+msgstr "位置"
 
 #: glade/OptionsDialog.ui:324
 msgid "Interval"
-msgstr "Interval"
+msgstr "間隔時間"
 
 #: glade/OptionsDialog.ui:399
 msgid "Change the language to"
-msgstr "Schimba limba in"
+msgstr "變更語系為"
 
 #: glade/OptionsDialog.ui:433
 msgid "Language"
-msgstr ""
+msgstr "語系"
 
 #: glade/OptionsDialog.ui:486
 msgid "Change the theme"
-msgstr "Schimba infatisarea"
+msgstr "更換佈景主題"
 
 #: glade/OptionsDialog.ui:521
 msgid "Theme"
-msgstr ""
+msgstr "佈景主題"
 
 #: glade/OptionsDialog.ui:630
 msgid "Main Columns"
-msgstr ""
+msgstr "主要欄位"
 
 #: glade/OptionsDialog.ui:769
 msgid "Results Columns"
-msgstr ""
+msgstr "結果欄位"
 
 #: glade/OptionsDialog.ui:799 glade/MainWindow.ui:265
 msgid "Show or hide the navigation arrows"
-msgstr "Arata sau ascunde sagetile de navigare"
+msgstr "顯示/隱藏導覽箭頭"
 
 #: glade/OptionsDialog.ui:814 glade/MainWindow.ui:272
 msgid "Show or hide pigeon statistics"
-msgstr "Arata sau ascunde statisticile porumbelului"
+msgstr "顯示/隱藏鴿子統計資料"
 
 #: glade/OptionsDialog.ui:829 glade/MainWindow.ui:279
 msgid "Show or hide the toolbar"
-msgstr "Afișează sau ascunde bara de unelte"
+msgstr "顯示/隱藏工具列"
 
 #: glade/OptionsDialog.ui:844 glade/MainWindow.ui:286
 msgid "Show or hide the statusbar"
-msgstr "Afișează sau ascunde bara de stare"
+msgstr "顯示/隱藏狀態列"
 
 #: glade/OptionsDialog.ui:921
 msgid "Paper format:"
-msgstr "Format foaie:"
+msgstr "紙張格式"
 
 #: glade/OptionsDialog.ui:955
 msgid "Paper"
-msgstr ""
+msgstr "紙張"
 
 #: glade/OptionsDialog.ui:997
 msgid "Address"
-msgstr "Adresă"
+msgstr "地址"
 
 #: glade/OptionsDialog.ui:1011 glade/AddressBook.ui:331
 msgid "Phone"
-msgstr "Telefon"
+msgstr "電話"
 
 #: glade/OptionsDialog.ui:1047
 msgid "Personal"
-msgstr ""
+msgstr "個人化設定"
 
 #: glade/OptionsDialog.ui:1102
 msgid "Pedigree layout:"
-msgstr "Aspect arbore genealogic:"
+msgstr "血統書版面:"
 
 #: glade/OptionsDialog.ui:1157
 msgid "Layout"
-msgstr ""
+msgstr "版面格局"
 
 #: glade/OptionsDialog.ui:1227 glade/DetailsView.ui:1029
 #: glade/DetailsView.ui:1604
 msgid "Extra"
-msgstr "Suplimentar"
+msgstr "註記"
 
 #: glade/OptionsDialog.ui:1243
 msgid "Image"
-msgstr "Imagine"
+msgstr "圖片"
 
 #: glade/OptionsDialog.ui:1265
 msgid "Pigeon"
-msgstr ""
+msgstr "鴿子"
 
 #: glade/OptionsDialog.ui:1318
 msgid "Show the column names"
-msgstr "Afiseaza numele coloanei"
+msgstr "顯示欄位名稱"
 
 #: glade/OptionsDialog.ui:1333
 msgid "Show the date"
-msgstr "Afiseaza data"
+msgstr "顯示日期"
 
 #: glade/DataManager.ui:26 glade/MainWindow.ui:219
 msgid "Data manager"
-msgstr "Administrator date"
+msgstr "資料管理員"
 
 #: glade/DataManager.ui:98
 msgid "Dataset"
-msgstr "Set de date"
+msgstr "數據集"
 
 #: glade/DataManager.ui:109 glade/DataManager.ui:217
 msgid "Item"
-msgstr "Element"
+msgstr "項目"
 
 #: glade/DataManager.ui:236
 msgid "Manage items"
-msgstr ""
+msgstr "管理物件"
 
 #: glade/DataManager.ui:358
 msgid "Unused objects"
-msgstr ""
+msgstr "未使用物件"
 
 #: glade/DetailsView.ui:53
 msgid "Pigeon status"
-msgstr "Stare porumbel"
+msgstr "鴿子狀態"
 
 #: glade/DetailsView.ui:112
 msgid "Choose a status for this pigeon:"
-msgstr "Alege o stare pentru acest porumbel:"
+msgstr "選擇鴿子狀態："
 
 #: glade/DetailsView.ui:155
 msgid "The current status is:"
-msgstr "Starea curenta este:"
+msgstr "目前狀態："
 
 #: glade/DetailsView.ui:225 glade/DetailsView.ui:338 glade/DetailsView.ui:459
 #: glade/DetailsView.ui:580 glade/DetailsView.ui:699
 msgid "Extra info"
-msgstr "Informaţii suplimentare"
+msgstr "額外資訊"
 
 #: glade/DetailsView.ui:293
 msgid "No extra information available."
-msgstr "Informatii suplimentare indisponibile."
+msgstr "沒有額外資訊."
 
 #: glade/DetailsView.ui:369
 msgid "Buyer"
-msgstr "Cumpărător"
+msgstr "購買者"
 
 #: glade/DetailsView.ui:567 glade/DistanceCalculator.ui:189
 #: glade/MainWindow.ui:933
 msgid "From"
-msgstr "De la"
+msgstr "環號由"
 
 #: glade/DetailsView.ui:626 glade/DistanceCalculator.ui:317
 #: glade/MainWindow.ui:881
 msgid "To"
-msgstr "Către"
+msgstr "到"
 
 #: glade/DetailsView.ui:686
 msgid "Loaned"
-msgstr ""
+msgstr "已借出"
 
 #: glade/DetailsView.ui:732
 msgid "Person"
-msgstr ""
+msgstr "人"
 
 #: glade/DetailsView.ui:779
 msgid "Back"
-msgstr ""
+msgstr "上一頁"
 
 #: glade/DistanceCalculator.ui:26 glade/MainWindow.ui:184
 msgid "Distance calculator"
-msgstr ""
+msgstr "距離計算機"
 
 #: glade/DistanceCalculator.ui:401 glade/VelocityCalculator.ui:187
 #: glade/VelocityCalculator.ui:553
 msgid "Calculate"
-msgstr "Calculează"
+msgstr "計算"
 
 #: glade/DistanceCalculator.ui:432
 msgid "Result"
-msgstr ""
+msgstr "結果"
 
 #: glade/MainWindow.ui:10
 msgid "Select all"
-msgstr ""
+msgstr "全部選取"
 
 #: glade/MainWindow.ui:11
 msgid "Select all pigeons"
-msgstr ""
+msgstr "選取全部鴿子"
 
 #: glade/MainWindow.ui:17
 msgid "_File"
-msgstr "_Fisier"
+msgstr "檔案 (_F)"
 
 #: glade/MainWindow.ui:27 glade/MainWindow.ui:71
 msgid "_Backup"
-msgstr "_Copie de rezervă"
+msgstr "備份(_B)"
 
 #: glade/MainWindow.ui:32
 msgid "_Pigeon"
-msgstr "_Porumbel"
+msgstr "鴿子 (_P)"
 
 #: glade/MainWindow.ui:37
 msgid "_Edit"
-msgstr "_Modifică"
+msgstr "編輯(_E)"
 
 #: glade/MainWindow.ui:42
 msgid "_View"
-msgstr "_Vizualizare"
+msgstr "檢視 (_V)"
 
 #: glade/MainWindow.ui:47
 msgid "_Tools"
-msgstr "_Instrumente"
+msgstr "工具(_T)"
 
 #: glade/MainWindow.ui:52
 msgid "_Help"
-msgstr "_Ajutor"
+msgstr "幫助(_H)"
 
 #: glade/MainWindow.ui:57 glade/MainWindow.ui:145
 msgid "_Pedigree"
-msgstr "_Certificat de origine"
+msgstr "血統書 (_p)"
 
 #: glade/MainWindow.ui:64
 msgid "Blank pedigree"
-msgstr "Certificat de origine necompletat"
+msgstr "空白的血統書"
 
 #: glade/MainWindow.ui:65
 msgid "Print a blank pedigree"
-msgstr "Imprima un certificat de origine necompletat"
+msgstr "列印一份空白血統書"
 
 #: glade/MainWindow.ui:72
 msgid "Create a backup of your database"
-msgstr "Creaza o copie de rezerva pentru baza ta de date"
+msgstr "備份您的資料庫"
 
 #: glade/MainWindow.ui:79
 msgid "_Restore"
-msgstr "_Restaurează"
+msgstr "還原(_R)"
 
 #: glade/MainWindow.ui:80
 msgid "Restore a backup of your database"
-msgstr "Restaureaza o copie de rezerva a bazei tale de date"
+msgstr "還原備份資料庫"
 
 #: glade/MainWindow.ui:87
 msgid "Quit the program"
-msgstr "Inchide programul"
+msgstr "結束程式"
 
 #: glade/MainWindow.ui:95
 msgid "Add a new pigeon"
-msgstr "Adauga un porumbel nou"
+msgstr "添加鴿子"
 
 #: glade/MainWindow.ui:103 glade/MainWindow.ui:708
 msgid "Add a range of pigeons"
-msgstr "Adauga o gama de porumbei"
+msgstr "批量添加鴿子"
 
 #: glade/MainWindow.ui:111
 msgid "_Logfile Viewer"
-msgstr "_ Fisier de logare"
+msgstr "日誌檔瀏覽器 (_L)"
 
 #: glade/MainWindow.ui:112
 msgid "See the logfile"
-msgstr "Vezi fisierul de logare"
+msgstr "查閱日誌檔"
 
 #: glade/MainWindow.ui:120
 msgid "_Find..."
-msgstr "_Gaseste"
+msgstr "尋找(_F)..."
 
 #: glade/MainWindow.ui:121
 msgid "Search through the list of pigeons"
-msgstr "Cauta in lista de porumbei"
+msgstr "搜尋所有列表內的鴿子"
 
 #: glade/MainWindow.ui:129
 msgid "Edit the selected pigeon"
-msgstr "Editeaza porumbelul selectat"
+msgstr "編輯所選鴿子"
 
 #: glade/MainWindow.ui:137
 msgid "Remove the selected pigeon"
-msgstr "Inlatura porumbelul selectat"
+msgstr "移除所選鴿子"
 
 #: glade/MainWindow.ui:146
 msgid "View the detailed pedigree of this pigeon"
-msgstr "Vizualizeaza certificatul de origine detaliat al acestui porumbel"
+msgstr "查閱所選鴿子完整血統書"
 
 #: glade/MainWindow.ui:154
 msgid "Add resul_t"
-msgstr "Adauga rezul_t"
+msgstr "添加成績"
 
 #: glade/MainWindow.ui:155
 msgid "Add a new result for this pigeon"
-msgstr "Adauga un nou rezultat al acestui porumbel"
+msgstr "添加新成績"
 
 #: glade/MainWindow.ui:162
 msgid "Configure the application"
-msgstr "Configurați aplicația"
+msgstr "設定此程式"
 
 #: glade/MainWindow.ui:170
 msgid "_Filter..."
-msgstr "_Filtrează..."
+msgstr "過濾項目(_F)..."
 
 #: glade/MainWindow.ui:177 glade/VelocityCalculator.ui:87
 msgid "Velocity calculator"
-msgstr "Claculator de viteza"
+msgstr "速率計算機"
 
 #: glade/MainWindow.ui:178
 msgid "Calculate the velocity of flights"
-msgstr "Calculeaza viteza de zbor"
+msgstr "計算飛行速率"
 
 #: glade/MainWindow.ui:185
 msgid "Calculate the distance between locations"
-msgstr ""
+msgstr "計算兩地之間空中距離"
 
 #: glade/MainWindow.ui:192
 msgid "Manage the racepoints and distances"
-msgstr ""
+msgstr "管理放鴿地及距離"
 
 #: glade/MainWindow.ui:198
 msgid "Photo album"
-msgstr ""
+msgstr "相簿"
 
 #: glade/MainWindow.ui:199
 msgid "View the images of your pigeons"
-msgstr "Vizualizeaza imaginile porumbeilor tai"
+msgstr "查看所有鴿子相片"
 
 #: glade/MainWindow.ui:205 glade/AddressBook.ui:9
 msgid "Address book"
-msgstr "Agendă"
+msgstr "通訊錄"
 
 #: glade/MainWindow.ui:206
 msgid "View the address book"
-msgstr "Cauta in agenda"
+msgstr "查看通訊錄"
 
 #: glade/MainWindow.ui:212 glade/Calendar.ui:14
 msgid "Calendar"
-msgstr "Calendar"
+msgstr "日曆"
 
 #: glade/MainWindow.ui:213
 msgid "View the calendar"
-msgstr "Vizualizeaza calendarul"
+msgstr "查看日曆"
 
 #: glade/MainWindow.ui:220
 msgid "Manage your data"
-msgstr "Administreaza datele"
+msgstr "管理資料"
 
 #: glade/MainWindow.ui:226
 msgid "Website"
-msgstr ""
+msgstr "網址"
 
 #: glade/MainWindow.ui:227
 msgid "Go to the website for more information"
-msgstr "Mergi la pagina de internet pentru mai multe informatii"
+msgstr "更多資訊請前往官方網站"
 
 #: glade/MainWindow.ui:234
 msgid "Forum"
-msgstr "Forum"
+msgstr "官方論壇"
 
 #: glade/MainWindow.ui:235
 msgid "Go to the forum for online help"
-msgstr "Mergi la forum pentru ajutor online"
+msgstr "前往官方論壇取得線上幫助"
 
 #: glade/MainWindow.ui:243
 msgid "Search online for program updates"
-msgstr "Cauta online imbunatatiri"
+msgstr "搜尋線上更新檔"
 
 #: glade/MainWindow.ui:257
 msgid "About this application"
-msgstr "Despre această aplicaţie"
+msgstr "關於此程式"
 
 #: glade/MainWindow.ui:264
 msgid "Navigation arrows"
-msgstr "Sageti de navigare"
+msgstr "導覽箭頭"
 
 #: glade/MainWindow.ui:271
 msgid "Statistics"
-msgstr "Statistici"
+msgstr "統計資料"
 
 #: glade/MainWindow.ui:278
 msgid "Toolbar"
-msgstr "Bara de unelte"
+msgstr "工具列"
 
 #: glade/MainWindow.ui:285
 msgid "Statusbar"
-msgstr "Bara de stare"
+msgstr "狀態列"
 
 #: glade/MainWindow.ui:376
 msgid "Total"
-msgstr "Total"
+msgstr "總計"
 
 #: glade/MainWindow.ui:404
 msgid "Cocks"
-msgstr "Masculi"
+msgstr "公鴿"
 
 #: glade/MainWindow.ui:436
 msgid "Hens"
-msgstr "Femele"
+msgstr "母鴿"
 
 #: glade/MainWindow.ui:468
 msgid "Young birds"
-msgstr "Pui"
+msgstr "幼鴿"
 
 #: glade/MainWindow.ui:990
 msgid "Remove pigeon"
-msgstr "Inlatura porumbelul"
+msgstr "移除鴿子"
 
 #: glade/MainWindow.ui:1079
 msgid "The following pigeon will be removed:"
-msgstr "Urmatorul porumbel va fi inlaturat:"
+msgstr "以下鴿子將被移除"
 
 #: glade/MainWindow.ui:1117
 msgid "Keep this pigeon in the pedigree"
-msgstr "Pastreaza acest porumbel in arborele genealogic"
+msgstr "保留此鴿子在此血統書"
 
 #: glade/MainWindow.ui:1133
 msgid "Keep results of this pigeon"
-msgstr "Pastreaza rezultatele acestui porumbel"
+msgstr "保留此鴿子成績"
 
 #: glade/AddressBook.ui:170
 msgid "Street"
-msgstr "Strada"
+msgstr "街區地址"
 
 #: glade/AddressBook.ui:249
 msgid "Zipcode / City"
-msgstr "Cod postal / Oras"
+msgstr "郵遞區號/城市"
 
 #: glade/AddressBook.ui:290
 msgid "Country"
-msgstr "Tara"
+msgstr "國家/地區"
 
 #: glade/AddressBook.ui:571
 msgid "This is me"
-msgstr "Acesta sunt eu"
+msgstr "這是我的資料"
 
 #: glade/Calendar.ui:309
 msgid "Notify me!"
-msgstr "Notifica-ma!"
+msgstr "通知我！"
 
 #: glade/Calendar.ui:341
 msgid "Number of days in advance:"
-msgstr "Numar de zile in avans:"
+msgstr "於多少天數以前！"
 
 #: glade/VelocityCalculator.ui:164
 msgid "Time"
-msgstr "Timp"
+msgstr "時間"
 
 #: glade/VelocityCalculator.ui:306 glade/VelocityCalculator.ui:706
 msgid "Hours"
-msgstr "Ore"
+msgstr "小時"
 
 #: glade/VelocityCalculator.ui:330 glade/VelocityCalculator.ui:730
 msgid "Minutes"
-msgstr "Minute"
+msgstr "分鐘"
 
 #: glade/VelocityCalculator.ui:354 glade/VelocityCalculator.ui:754
 msgid "Seconds"
-msgstr "Secunde"
+msgstr "秒"
 
 #: glade/VelocityCalculator.ui:541
 msgid "Range"
-msgstr "Interval"
+msgstr "範圍"
 
 #: glade/VelocityCalculator.ui:945
 msgid "Prognosis"
-msgstr "Prognoza"
+msgstr "預測"
 
 #: glade/ResultParser.ui:29
 msgid "Import results"
-msgstr ""
+msgstr "導入成績"
 
 #: glade/ResultParser.ui:60
 msgid "File:"
-msgstr ""
+msgstr "檔案："
 
 #: glade/ResultParser.ui:72
 msgid "Parser:"
-msgstr ""
+msgstr "分析器："
 
 #: glade/ResultParser.ui:108
 msgid "Parse"
-msgstr ""
+msgstr "基數"
 
 #: glade/ResultParser.ui:156
 msgid "Date:"
-msgstr ""
+msgstr "日期："
 
 #: glade/ResultParser.ui:168
 msgid "Racepoint:"
-msgstr ""
+msgstr "放鴿地："
 
 #: glade/ResultParser.ui:182
 msgid "Pigeons:"
-msgstr ""
+msgstr "鴿子："
 
 #: glade/ResultParser.ui:261
 msgid "No results were found for your pigeons"
-msgstr ""
+msgstr "您的鴿子尚未有成績"
 
 #: glade/ResultParser.ui:436
 msgid "Parser error"
-msgstr ""
+msgstr "分析器錯誤"
 
 #: glade/ResultParser.ui:498
 msgid ""
 "The file you selected could not be parsed correctly. Try selecting another "
 "parser that matches your file and try again. Or send the developers some "
 "useful data shown below, so they can work on this issue."
-msgstr ""
+msgstr "您選擇的文件不能正確地分析。嘗試選擇另一個分析器，然後再試一次。或者給開發商以下的數據，這樣他們可以嘗試解決這個問題。"
 
 #: glade/DatabaseTool.ui:8
 msgid "Pigeon Planner database tool"
-msgstr "Unealta baza de date"
+msgstr "Pigeon Planner 資料庫工具"
 
 #: glade/DatabaseTool.ui:24
 msgid "Logfile"
-msgstr "Fisa logare"
+msgstr "日誌檔"
 
 #: glade/DatabaseTool.ui:84
 msgid "Optimize"
-msgstr "Optimizează"
+msgstr "最佳化"
 
 #: glade/DatabaseTool.ui:101
 msgid "Check"
-msgstr "Verifică"
+msgstr "檢查"
 
 #: glade/DatabaseTool.ui:143
 msgid ""
 "Optimze the database tables. This will defragment the data and free unused "
 "space."
-msgstr ""
-"Optimizeaza seturile de date. Se va defragmenta si vei folosi spatiul ramas "
-"disponibil."
+msgstr "最佳化數據庫資料表。這將整理數據和釋放未使用的空間。"
 
 #: glade/DatabaseTool.ui:158
 msgid "Check the database for errors and try to repair them."
-msgstr "Cauta erori in baza de date si incearca sa le repari."
+msgstr "檢查資料庫錯誤並嘗試修復問題。"
 
 #: glade/DatabaseTool.ui:175
 msgid ""
 "Delete the entire database from your hard drive. You will loose all pigeons, "
 "results and other data."
-msgstr ""
-"Sterge toata baza de date de pe disc. Vei pierde toti porumbeii, rezultatele "
-"si alte date introduse."
+msgstr "移除整個資料庫內容。您將會失去所有鴿子成績及其他重要資料。"
 
 #: glade/DatabaseTool.ui:268
 msgid "Warning:"
-msgstr "Atenție:"
+msgstr "警告："
 
 #: glade/DatabaseTool.ui:282
 msgid ""
 "Only execute SQL statements if you know what you are doing! Entering invalid "
 "or wrong statements may cause data loss!"
-msgstr ""
-"Executa numai declaraţii SQL daca stii ce faci! Introducerea declaraţiilor "
-"incorecte poate cauza pierderi de date!"
+msgstr "如果你知道自己在做什麼！再執行 SQL語句。輸入無效或錯誤的語法可能會導致數據遺失！"
 
 #: glade/DatabaseTool.ui:394
 msgid "SQL"
-msgstr "SQL"
+msgstr ""
 
 #: glade/MedicationView.ui:213 glade/MedicationView.ui:678
 msgid "Done by"
-msgstr "Realizat de"
+msgstr "執行者"
 
 #: glade/MedicationView.ui:241 glade/MedicationView.ui:830
 msgid "Dosage"
-msgstr "Dozare"
+msgstr "劑量"
 
 #: glade/MedicationView.ui:270 glade/MedicationView.ui:867
 msgid "Vaccination"
-msgstr "Vaccinare"
+msgstr "接種疫苗"
 
 #: glade/PhotoAlbum.ui:8
 msgid "Shows the first picture"
-msgstr "Arata prima imagine"
+msgstr "顯示首張照片"
 
 #: glade/PhotoAlbum.ui:15
 msgid "Shows previous picture"
-msgstr "Arata precedenta imagine"
+msgstr "顯示上一張照片"
 
 #: glade/PhotoAlbum.ui:22
 msgid "Shows the next picture"
-msgstr "Arata urmatoarea imagine"
+msgstr "顯示下一張照片"
 
 #: glade/PhotoAlbum.ui:29
 msgid "Shows the last picture"
-msgstr "Arata ultima imgine"
+msgstr "顯示最新照片"
 
 #: glade/PhotoAlbum.ui:36
 msgid "Zooms the picture in"
-msgstr "Micsoreaza imaginea"
+msgstr "放大照片"
 
 #: glade/PhotoAlbum.ui:43
 msgid "Zooms the picture out"
-msgstr "Mareste imaginea"
+msgstr "縮小照片"
 
 #: glade/PhotoAlbum.ui:57
 msgid "View in fullscreen"
-msgstr "Vizualizeaza pe tot ecranul"
+msgstr "在全螢幕中觀賞"
 
 #: glade/PhotoAlbum.ui:64
 msgid "View slideshow"
-msgstr "Vizualizeaza in slideshow"
+msgstr "觀賞換燈片"
 
 #: glade/PhotoAlbum.ui:71
 msgid "Zooms to fit the whole picture"
-msgstr "Mareste pentru a potrivi intreaga imagine"
+msgstr "縮放以適合整張照片"
 
 #: glade/PhotoAlbum.ui:80
 msgid "Photo Album"
-msgstr "Album foto"
+msgstr "相片集"
 
 #: glade/PhotoAlbum.ui:128
 msgid "There are no images found."
-msgstr "Aici nu s-au gasit imagini."
+msgstr "未找到圖片。"
 
-#~ msgid "Optimization has been completed."
-#~ msgstr "Optimizarea s-a incheiat."
+#~ msgid "Select a directory"
+#~ msgstr "選擇資料夾"
 
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the next "
-#~ "time you start the program again."
-#~ msgstr ""
-#~ "Apasa \"OK\" pentru a inchide programul. O noua baza de date va fi creata la "
-#~ "repornirea programului."
+#~ msgid "Database"
+#~ msgstr "數據庫"
+
+#~ msgid "Addresses"
+#~ msgstr "地址"
+
+#~ msgid "<b>General</b>"
+#~ msgstr "<b>一般</b>"
+
+#~ msgid "<b>Other</b>"
+#~ msgstr "<b>其它</b>"
+
+#~ msgid "<b>Theme</b>"
+#~ msgstr "<b>佈景主題</b>"
+
+#~ msgid "<b>Update</b>"
+#~ msgstr "<b>更新</b>"
+
+#~ msgid "Tools"
+#~ msgstr "工具"
+
+#~ msgid "_Photo Album"
+#~ msgstr "相冊 (_P)"
+
+#~ msgid "_Website"
+#~ msgstr "官方網站(_W)"
+
+#~ msgid "<b>Results of pigeon</b>"
+#~ msgstr "<b>鴿子成績</b>"
+
+#~ msgid "<b>Language</b>"
+#~ msgstr "<b>語系</b>"
+
+#~ msgid "<b>Paper</b>"
+#~ msgstr "<b>紙張</b>"
+
+#~ msgid "<b>Backup</b>"
+#~ msgstr "<b>備份</b>"
+
+#~ msgid "<b>Pigeon</b>"
+#~ msgstr "<b>鴿子</b>"
+
+#~ msgid "<b>Personal</b>"
+#~ msgstr "<b>私人</b>"
+
+#~ msgid "<b>Layout</b>"
+#~ msgstr "<b>版面</b>"
+
+#~ msgid "<b>Details of pigeon</b>"
+#~ msgstr "<b>鴿子詳細資料</b>"
 
 #~ msgid ""
 #~ "The backup was successfully restored.\n"
 #~ "Restart the program."
-#~ msgstr ""
-#~ "Copia de rezerva a fost restaurata cu succes.\n"
-#~ "Reporneste programul."
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "O noua versiune este disponibila. Viziteaza pagina de internet a Pigeon "
-#~ "Planner urmand legatura de mai jos si descarca ultima versiune."
-
-#~ msgid "Select a directory"
-#~ msgstr "Selectați un director"
-
-#~ msgid "Insert a pigeon"
-#~ msgstr "Introduce un porumbel"
-
-#~ msgid "Select a valid backup file"
-#~ msgstr "Selecteaza o copie de rezerva valida"
-
-#~ msgid "Database"
-#~ msgstr "Baza de date"
-
-#~ msgid "Datasets"
-#~ msgstr "Seturi de date"
-
-#~ msgid "Addresses"
-#~ msgstr "Adrese"
-
-#, python-format
-#~ msgid "Notification is set on %s days in advance"
-#~ msgstr "Notificarea este reglata cu %s i avans"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Apasa aici pentru a adauga o imagine"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Cauta in lista de masculi"
-
-#~ msgid "cock"
-#~ msgstr "Mascul"
-
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Introduce numarul matricol al porumbelui"
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Apasa aici pentru a regla starea porumbelului"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Cauta in lista de femele"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Introduce numele porumbelului"
-
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Introduce anul de nastere al porumbelului"
-
-#~ msgid "hen"
-#~ msgstr "Femela"
-
-#, python-format
-#~ msgid "Pigeon %s/%s has been removed"
-#~ msgstr "Porumbelul %s/%s a fost indepartat"
-
-#~ msgid "Result has been added"
-#~ msgstr "Rezultatul a fost adaugat"
+#~ msgstr "已成功還原資料庫。"
 
 #~ msgid "Add ran_ge"
-#~ msgstr "Adauga gama"
-
-#~ msgid "_Photo Album"
-#~ msgstr "_Album foto"
-
-#~ msgid "Various tools"
-#~ msgstr "Instrumente diferite"
-
-#~ msgid "_Website"
-#~ msgstr "_Pagina de internet"
-
-#, python-format
-#~ msgid "Pigeon %s/%s has been added"
-#~ msgstr "Pormbelul %s/%s a fost adaugat"
-
-#~ msgid "Check now!"
-#~ msgstr "Verifica acum!"
+#~ msgstr "批量添加"
 
 #~ msgid "<b>Your name:</b>"
-#~ msgstr "<b>Numele tau:</b>"
+#~ msgstr "<b>您的名字：</b>"
 
 #~ msgid "<b>Your e-mailaddress:</b>"
-#~ msgstr "<b>Adresa ta de mail:</b>"
-
-#~ msgid "<b>Send to:</b>"
-#~ msgstr "<b>Trimite catre:</b>"
-
-#~ msgid "<b>Message:</b>"
-#~ msgstr "<b>Mesaj:</b>"
-
-#~ msgid "<b>Attached file:</b>"
-#~ msgstr "<b>Fisier atasat:</b>"
+#~ msgstr "<b>您的電子郵件：</b>"
 
 #~ msgid "<b>Subject:</b>"
-#~ msgstr "<b>Subiect:</b>"
+#~ msgstr "<b>主旨：</b>"
 
-#~ msgid "Search database"
-#~ msgstr "Cauta baza de date"
+#~ msgid "<b>Send to:</b>"
+#~ msgstr "<b>寄給：</b>"
 
-#~ msgid "<b>Results of pigeon</b>"
-#~ msgstr "<b>Rezultatele porumbelului</b>"
+#~ msgid "<b>Message:</b>"
+#~ msgstr "<b>訊息內容：</b>"
 
-#~ msgid "Choose an image..."
-#~ msgstr "Alege o imagine"
-
-#~ msgid "<b>General</b>"
-#~ msgstr "<b>General</b>"
-
-#~ msgid "<b>Language</b>"
-#~ msgstr "<b>Limbă</b>"
-
-#~ msgid "<b>Layout</b>"
-#~ msgstr "<b>Aranjament</b>"
-
-#~ msgid "<b>Backup</b>"
-#~ msgstr "<b>Copie de rezerva</b>"
-
-#~ msgid "<b>Columns</b>"
-#~ msgstr "<b>Coloane</b>"
-
-#~ msgid "<b>Other</b>"
-#~ msgstr "<b>Alta</b>"
-
-#~ msgid "<b>Personal</b>"
-#~ msgstr "<b>Personal</b>"
-
-#~ msgid "<b>Pigeon</b>"
-#~ msgstr "<b>Porumbel</b>"
-
-#~ msgid "<b>Theme</b>"
-#~ msgstr "<b>Temă</b>"
-
-#~ msgid "<b>Update</b>"
-#~ msgstr "<b>Actualizare</b>"
-
-#~ msgid "A4"
-#~ msgstr "A4"
-
-#~ msgid "Original"
-#~ msgstr "Original"
-
-#~ msgid "Letter"
-#~ msgstr "Scrisoare"
-
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>Creaza copie de rezerva</b>"
-
-#~ msgid "<b>Add items</b>"
-#~ msgstr "<b>Adauga elemente</b>"
-
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>Optimizeaza baza de date</b>"
-
-#~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
-#~ msgstr ""
-#~ "Creaza si restaureaza copii de rezerva din\n"
-#~ "porumbeii si rezultatele tale"
-
-#~ msgid "Downloadpage"
-#~ msgstr "Pagina de descarcare"
-
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>Apasa butonul de mai jos</i>"
-
-#~ msgid "<b>Remove items</b>"
-#~ msgstr "<b>Inlatura elementele</b>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "Adauga sau inlatura elemente din baza ta de date"
-
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>Avertizare!</b>"
-
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>Inlatura baza de date</b>"
-
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>Restaureaza copia de rezerva</b>"
-
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr "Daca inlaturi baza de date, toate informatiile vor fi pierdute."
-
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr ""
-#~ "Aici poti verifica daca exista o actualizare a programului disponibila"
-
-#~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
-#~ msgstr ""
-#~ "Optimizam baza ta de date\n"
-#~ "(Te rog sa astepti, acest lucru necesita ceva timp)"
-
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "Aici poti vedea cateva statistici ale bazei tale de date"
-
-#~ msgid "Tools"
-#~ msgstr "Unelte"
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "Telefon / Email"
-
-#~ msgid "NOTE: You will only be notified when the program starts!"
-#~ msgstr "NOTA: Vei fi notificat numai la pornirea programului!"
-
-#, python-format
-#~ msgid "Removing '%(item)s' from '%(dataset)s'."
-#~ msgstr "Inlaturare'%(item)s' din'%(dataset)s'."
-
-#~ msgid "Result has been removed"
-#~ msgstr "Rezultatul a fost indepartat"
-
-#~ msgid "young bird"
-#~ msgstr "Pui"
-
-#~ msgid "<b>Details of pigeon</b>"
-#~ msgstr "<b>Detaliile porumbelului</b>"
-
-#~ msgid "<b>Paper</b>"
-#~ msgstr "<b>Hartie</b>"
+#~ msgid "<b>Attached file:</b>"
+#~ msgstr "<b>附加文件：</b>"
