@@ -248,14 +248,16 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             data = (0, pigeon, 1, pigeon.get_pindex(), 2, band, 3, year,
                     4, pigeon.get_name(), 5, pigeon.get_colour(),
                     6, pigeon.get_sex_string(), 7, pigeon.get_loft(),
-                    8, pigeon.get_strain())
+                    8, pigeon.get_strain(),
+                    9, _(common.get_status(pigeon.get_active())))
             self.treeview.update_row(data, path=path)
             self.selection.emit('changed')
         elif operation == const.ADD:
             if not pigeon.get_visible(): return
             row = [pigeon, pigeon.get_pindex(), band, year, pigeon.get_name(),
                    pigeon.get_colour(), pigeon.get_sex_string(),
-                   pigeon.get_loft(), pigeon.get_strain()]
+                   pigeon.get_loft(), pigeon.get_strain(),
+                   _(common.get_status(pigeon.get_active()))]
             self.treeview.add_row(row)
             self.statusbar.display_message(
                         _("Pigeon %s has been added") %pigeon.get_band_string())
