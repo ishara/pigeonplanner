@@ -60,6 +60,9 @@ def setup(language):
         # locale has no bindtextdomain on Windows, fall back to intl.dll
         if const.WINDOWS:
             from ctypes import cdll
+            cdll.msvcrt._putenv('LANG=%s' % language)
+            cdll.msvcrt._putenv('LANGUAGE=%s' % language)
+
             libintl = cdll.intl
             libintl.bindtextdomain(LOCALEDOMAIN, LOCALEDIR)
             libintl.bind_textdomain_codeset(LOCALEDOMAIN, 'UTF-8')
