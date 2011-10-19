@@ -30,7 +30,7 @@ def get_image(src_file):
         filename = get_path(src_file)
         return gtk.gdk.pixbuf_new_from_file(filename)
     except (gobject.GError, OSError):
-        return const.LOGO_IMG
+        return gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
 
 def get_path(src_file):
     filename = __build_path(src_file)

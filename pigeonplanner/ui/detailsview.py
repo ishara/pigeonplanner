@@ -274,7 +274,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             pixbuf = thumbnail.get_image(imagepath)
             self.imagepigeon.set_data('image-path', imagepath)
         else:
-            pixbuf = const.LOGO_IMG
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
             self.imagepigeon.set_data('image-path', None)
         self.imagepigeon.set_from_pixbuf(pixbuf)
 
@@ -305,10 +305,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         return datalist
 
     def set_default_image(self, widget=None, edit=False):
-        self.imagepigeonedit.set_from_pixbuf(const.LOGO_IMG)
+        logo = gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
+        self.imagepigeonedit.set_from_pixbuf(logo)
         self.imagepigeon.set_data('image-path', None)
         if not edit:
-            self.imagepigeon.set_from_pixbuf(const.LOGO_IMG)
+            self.imagepigeon.set_from_pixbuf(logo)
 
     def clear_details(self):
         self.entryband.clear()

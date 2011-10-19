@@ -25,8 +25,6 @@ import sys
 import tempfile
 from datetime import datetime
 
-import gtk.gdk
-
 
 NAME = "Pigeon Planner"
 VERSION = "1.3.0"
@@ -49,17 +47,6 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>"""
-
-
-DATABASE_VERSION = 3
-
-
-SMALL_SCREEN = False
-if gtk.gdk.screen_height() <= 768:
-    SMALL_SCREEN = True
-
-
-ENCODING = sys.getfilesystemencoding() or 'utf-8'
 
 
 UNIX = False
@@ -127,14 +114,10 @@ LOG_FORMAT = '[%(asctime)s] %(name)s %(levelname)s: %(message)s'
 LOG_FORMAT_CLI = '%(name)s %(levelname)s: %(message)s'
 DATE_FORMAT = '%Y-%m-%d'
 
-LOGO_IMG = gtk.gdk.pixbuf_new_from_file_at_size(os.path.join(
-                                        IMAGEDIR, 'icon_logo.png'), 75, 75)
-SEX_IMGS = {'0': gtk.gdk.pixbuf_new_from_file(os.path.join(
-                                        IMAGEDIR, "symbol_male.png")),
-            '1': gtk.gdk.pixbuf_new_from_file(os.path.join(
-                                        IMAGEDIR, "symbol_female.png")),
-            '2': gtk.gdk.pixbuf_new_from_file(os.path.join(
-                                        IMAGEDIR, "symbol_young.png"))}
+LOGO_IMG = os.path.join(IMAGEDIR, 'icon_logo.png')
+SEX_IMGS = {'0': os.path.join(IMAGEDIR, "symbol_male.png"),
+            '1': os.path.join(IMAGEDIR, "symbol_female.png"),
+            '2': os.path.join(IMAGEDIR, "symbol_young.png")}
 
 (SIRE,
  DAM,

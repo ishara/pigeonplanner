@@ -31,7 +31,7 @@ class BaseTab(object):
 
         self._label = gtk.VBox()
         img = os.path.join(const.IMAGEDIR, img)
-        if const.SMALL_SCREEN:
+        if gtk.gdk.screen_height() <= 768:
             self._label.set_orientation(gtk.ORIENTATION_HORIZONTAL)
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img, 18, 18)
         else:

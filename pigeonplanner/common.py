@@ -96,7 +96,7 @@ def encode_string(string):
     @param string: A string which needs to be encoded
     """
 
-    return string.decode(const.ENCODING).encode("utf-8")
+    return string.decode(sys.getfilesystemencoding()).encode("utf-8")
 
 def get_unicode_path(path):
     """
