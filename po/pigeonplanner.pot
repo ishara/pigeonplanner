@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-22 10:34+0200\n"
+"POT-Creation-Date: 2011-10-19 14:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "Pedigree of:"
 msgstr ""
 
 #: pigeonplanner/printing.py:371 pigeonplanner/ui/dialogs.py:426
-#: pigeonplanner/ui/widgets/treeview.py:189
+#: pigeonplanner/ui/widgets/treeview.py:193
 #: pigeonplanner/ui/tabs/relatives.py:156 glade/BreedingView.ui:438
 #: glade/BreedingView.ui:608 glade/BreedingView.ui:858
 #: glade/BreedingView.ui:1058 glade/ResultWindow.ui:131
@@ -60,38 +60,38 @@ msgstr ""
 
 #: pigeonplanner/printing.py:377 pigeonplanner/ui/resultwindow.py:124
 #: glade/ResultsView.ui:165 glade/ResultsView.ui:728 glade/ResultWindow.ui:222
-#: glade/OptionsDialog.ui:672
+#: glade/OptionsDialog.ui:685
 msgid "Sector"
 msgstr ""
 
 #: pigeonplanner/printing.py:378 glade/ResultsView.ui:444
 #: glade/ResultsView.ui:741 glade/ResultWindow.ui:235
-#: glade/OptionsDialog.ui:700 glade/Calendar.ui:177
+#: glade/OptionsDialog.ui:713 glade/Calendar.ui:177
 msgid "Type"
 msgstr ""
 
 #: pigeonplanner/printing.py:379 glade/ResultsView.ui:486
 #: glade/ResultsView.ui:754 glade/ResultWindow.ui:248
-#: glade/OptionsDialog.ui:686
+#: glade/OptionsDialog.ui:699
 msgid "Category"
 msgstr ""
 
 #: pigeonplanner/printing.py:380 pigeonplanner/ui/tools/datamanager.py:48
 #: glade/ResultsView.ui:340 glade/ResultsView.ui:767 glade/ResultWindow.ui:261
-#: glade/OptionsDialog.ui:730
+#: glade/OptionsDialog.ui:743
 msgid "Wind"
 msgstr ""
 
 #: pigeonplanner/printing.py:381 pigeonplanner/ui/tools/datamanager.py:47
 #: glade/ResultsView.ui:326 glade/ResultsView.ui:780 glade/ResultWindow.ui:274
-#: glade/OptionsDialog.ui:716
+#: glade/OptionsDialog.ui:729
 msgid "Weather"
 msgstr ""
 
 #: pigeonplanner/printing.py:382 glade/ResultsView.ui:354
 #: glade/ResultsView.ui:793 glade/BreedingView.ui:285
 #: glade/BreedingView.ui:1302 glade/ResultWindow.ui:287
-#: glade/OptionsDialog.ui:746 glade/AddressBook.ui:413 glade/Calendar.ui:261
+#: glade/OptionsDialog.ui:759 glade/AddressBook.ui:413 glade/Calendar.ui:261
 #: glade/MedicationView.ui:255 glade/MedicationView.ui:921
 msgid "Comment"
 msgstr ""
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Pedigree"
 msgstr ""
 
-#: pigeonplanner/startup.py:150 glade/Dialogs.ui:8 glade/OptionsDialog.ui:1025
+#: pigeonplanner/startup.py:150 glade/Dialogs.ui:8 glade/OptionsDialog.ui:1038
 #: glade/AddressBook.ui:372
 msgid "E-mail"
 msgstr ""
@@ -171,7 +171,7 @@ msgid ""
 "corruption."
 msgstr ""
 
-#: pigeonplanner/messages.py:42 pigeonplanner/ui/mainwindow.py:504
+#: pigeonplanner/messages.py:42 pigeonplanner/ui/mainwindow.py:506
 msgid "Go to the website?"
 msgstr ""
 
@@ -498,7 +498,7 @@ msgid "The e-mail has been sent succesfully!"
 msgstr ""
 
 #: pigeonplanner/ui/optionsdialog.py:52 glade/BreedingView.ui:304
-#: glade/BreedingView.ui:1321 glade/OptionsDialog.ui:1354
+#: glade/BreedingView.ui:1321 glade/OptionsDialog.ui:1367
 #: glade/DatabaseTool.ui:234
 msgid "General"
 msgstr ""
@@ -620,15 +620,15 @@ msgstr ""
 msgid "Remove this entry for all pigeons?"
 msgstr ""
 
-#: pigeonplanner/ui/dialogs.py:426 pigeonplanner/ui/widgets/treeview.py:189
+#: pigeonplanner/ui/dialogs.py:426 pigeonplanner/ui/widgets/treeview.py:193
 #: pigeonplanner/ui/tabs/relatives.py:156 glade/ResultWindow.ui:144
 #: glade/MainWindow.ui:854 glade/ResultParser.ui:321
 msgid "Year"
 msgstr ""
 
-#: pigeonplanner/ui/dialogs.py:426 pigeonplanner/ui/widgets/treeview.py:189
-#: glade/OptionsDialog.ui:553 glade/OptionsDialog.ui:987
-#: glade/OptionsDialog.ui:1189 glade/AddressBook.ui:129
+#: pigeonplanner/ui/dialogs.py:426 pigeonplanner/ui/widgets/treeview.py:193
+#: glade/OptionsDialog.ui:553 glade/OptionsDialog.ui:1000
+#: glade/OptionsDialog.ui:1202 glade/AddressBook.ui:129
 msgid "Name"
 msgstr ""
 
@@ -698,7 +698,7 @@ msgid "Year of race"
 msgstr ""
 
 #: pigeonplanner/ui/resultwindow.py:125 glade/ResultsView.ui:715
-#: glade/ResultWindow.ui:209 glade/OptionsDialog.ui:662
+#: glade/ResultWindow.ui:209 glade/OptionsDialog.ui:675
 msgid "Coefficient"
 msgstr ""
 
@@ -706,22 +706,22 @@ msgstr ""
 msgid "Place"
 msgstr ""
 
-#: pigeonplanner/ui/mainwindow.py:261
+#: pigeonplanner/ui/mainwindow.py:263
 #, python-format
 msgid "Pigeon %s has been added"
 msgstr ""
 
-#: pigeonplanner/ui/mainwindow.py:354
+#: pigeonplanner/ui/mainwindow.py:356
 #, python-format
 msgid "Pigeon %s has been removed"
 msgstr ""
 
-#: pigeonplanner/ui/mainwindow.py:364
+#: pigeonplanner/ui/mainwindow.py:366
 #, python-format
 msgid "%s pigeons have been removed"
 msgstr ""
 
-#: pigeonplanner/ui/mainwindow.py:502 glade/MainWindow.ui:242
+#: pigeonplanner/ui/mainwindow.py:504 glade/MainWindow.ui:242
 msgid "Search for updates..."
 msgstr ""
 
@@ -823,51 +823,52 @@ msgstr ""
 msgid "Mile per Hour"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/treeview.py:168
+#: pigeonplanner/ui/widgets/treeview.py:172
 msgid "Filter pigeons"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/treeview.py:173
-#: pigeonplanner/ui/widgets/treeview.py:189
+#: pigeonplanner/ui/widgets/treeview.py:177
+#: pigeonplanner/ui/widgets/treeview.py:193
 #: pigeonplanner/ui/tabs/relatives.py:172 glade/OptionsDialog.ui:607
-#: glade/OptionsDialog.ui:1213 glade/DetailsView.ui:1052
+#: glade/OptionsDialog.ui:1226 glade/DetailsView.ui:1052
 #: glade/DetailsView.ui:1648 glade/MainWindow.ui:806
 msgid "Sex"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/treeview.py:174
+#: pigeonplanner/ui/widgets/treeview.py:178
 #: pigeonplanner/ui/tools/datamanager.py:40
 msgid "Colours"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/treeview.py:176
+#: pigeonplanner/ui/widgets/treeview.py:180
 #: pigeonplanner/ui/tools/datamanager.py:45
 msgid "Strains"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/treeview.py:178
+#: pigeonplanner/ui/widgets/treeview.py:182
 #: pigeonplanner/ui/tools/datamanager.py:46
 msgid "Lofts"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/treeview.py:181
+#: pigeonplanner/ui/widgets/treeview.py:185
+#: pigeonplanner/ui/widgets/treeview.py:194 glade/OptionsDialog.ui:621
 msgid "Status"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/treeview.py:189 glade/OptionsDialog.ui:579
-#: glade/OptionsDialog.ui:1199 glade/DetailsView.ui:1041
+#: pigeonplanner/ui/widgets/treeview.py:193 glade/OptionsDialog.ui:579
+#: glade/OptionsDialog.ui:1212 glade/DetailsView.ui:1041
 #: glade/DetailsView.ui:1637
 msgid "Colour"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/treeview.py:190
+#: pigeonplanner/ui/widgets/treeview.py:194
 #: pigeonplanner/ui/tools/distancecalculator.py:133 glade/OptionsDialog.ui:593
 #: glade/DetailsView.ui:1015 glade/DetailsView.ui:1454
 #: glade/MedicationView.ui:356
 msgid "Loft"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/treeview.py:190 glade/OptionsDialog.ui:563
+#: pigeonplanner/ui/widgets/treeview.py:194 glade/OptionsDialog.ui:563
 #: glade/DetailsView.ui:1065 glade/DetailsView.ui:1687
 msgid "Strain"
 msgstr ""
@@ -907,7 +908,7 @@ msgstr ""
 msgid "Media"
 msgstr ""
 
-#: pigeonplanner/ui/tabs/media.py:122 glade/OptionsDialog.ui:865
+#: pigeonplanner/ui/tabs/media.py:122 glade/OptionsDialog.ui:878
 msgid "Other"
 msgstr ""
 
@@ -1025,7 +1026,7 @@ msgid "Mate*"
 msgstr ""
 
 #: glade/BreedingView.ui:209 glade/BreedingView.ui:1223
-msgid "Clutch"
+msgid "Series"
 msgstr ""
 
 #: glade/BreedingView.ui:241 glade/BreedingView.ui:1264
@@ -1212,76 +1213,76 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
-#: glade/OptionsDialog.ui:630
+#: glade/OptionsDialog.ui:643
 msgid "Main Columns"
 msgstr ""
 
-#: glade/OptionsDialog.ui:769
+#: glade/OptionsDialog.ui:782
 msgid "Results Columns"
 msgstr ""
 
-#: glade/OptionsDialog.ui:799 glade/MainWindow.ui:265
+#: glade/OptionsDialog.ui:812 glade/MainWindow.ui:265
 msgid "Show or hide the navigation arrows"
 msgstr ""
 
-#: glade/OptionsDialog.ui:814 glade/MainWindow.ui:272
+#: glade/OptionsDialog.ui:827 glade/MainWindow.ui:272
 msgid "Show or hide pigeon statistics"
 msgstr ""
 
-#: glade/OptionsDialog.ui:829 glade/MainWindow.ui:279
+#: glade/OptionsDialog.ui:842 glade/MainWindow.ui:279
 msgid "Show or hide the toolbar"
 msgstr ""
 
-#: glade/OptionsDialog.ui:844 glade/MainWindow.ui:286
+#: glade/OptionsDialog.ui:857 glade/MainWindow.ui:286
 msgid "Show or hide the statusbar"
 msgstr ""
 
-#: glade/OptionsDialog.ui:921
+#: glade/OptionsDialog.ui:934
 msgid "Paper format:"
 msgstr ""
 
-#: glade/OptionsDialog.ui:955
+#: glade/OptionsDialog.ui:968
 msgid "Paper"
 msgstr ""
 
-#: glade/OptionsDialog.ui:997
+#: glade/OptionsDialog.ui:1010
 msgid "Address"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1011 glade/AddressBook.ui:331
+#: glade/OptionsDialog.ui:1024 glade/AddressBook.ui:331
 msgid "Phone"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1047
+#: glade/OptionsDialog.ui:1060
 msgid "Personal"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1102
+#: glade/OptionsDialog.ui:1115
 msgid "Pedigree layout:"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1157
+#: glade/OptionsDialog.ui:1170
 msgid "Layout"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1227 glade/DetailsView.ui:1029
+#: glade/OptionsDialog.ui:1240 glade/DetailsView.ui:1029
 #: glade/DetailsView.ui:1604
 msgid "Extra"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1243
+#: glade/OptionsDialog.ui:1256
 msgid "Image"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1265
+#: glade/OptionsDialog.ui:1278
 msgid "Pigeon"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1318
+#: glade/OptionsDialog.ui:1331
 msgid "Show the column names"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1333
+#: glade/OptionsDialog.ui:1346
 msgid "Show the date"
 msgstr ""
 
