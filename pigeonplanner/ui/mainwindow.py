@@ -45,6 +45,7 @@ from ui import dialogs
 from ui import pedigree
 from ui import logdialog
 from ui import detailsview
+from ui import exportwindow
 from ui import optionsdialog
 from ui import pedigreewindow
 from ui.widgets import treeview
@@ -63,6 +64,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
          <separator/>
          <menuitem action="Log"/>
          <separator/>
+         <menuitem action="Export"/>
          <menu action="PrintMenu">
             <menuitem action="PrintPedigree"/>
             <menuitem action="PrintBlank"/>
@@ -278,6 +280,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def on_menuitem_deselect(self, menuitem):
         self.statusbar.pop(-1)
+
+    def menuexport_activate(self, widget):
+        exportwindow.ExportWindow(self, self.parser)
 
     def menuprintpedigree_activate(self, widget):
         logger.debug(common.get_function_name())

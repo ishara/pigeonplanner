@@ -69,6 +69,7 @@ class _FileChooser(gtk.FileChooser):
         # u'None' by only converting when needed.
         if filename is not None:
             return unicode(filename)
+        return u''
 
     def get_current_folder(self):
         return unicode(gtk.FileChooser.get_current_folder(self))
@@ -98,6 +99,16 @@ class _FileChooser(gtk.FileChooser):
         filter_.add_mime_type("zip/zip")
         filter_.add_pattern("*PigeonPlannerBackup.zip")
         self.add_filter(filter_)
+
+    def add_custom_filter(self, filter_):
+        class Filter(gtk.FileFilter):
+            def __init__(self, name, pattern):
+                gtk.FileFilter.__init__(self)
+                self.set_name(name)
+                self.add_pattern(pattern)
+        name, pattern = filter_
+        filefilter = Filter(name, pattern)
+        self.add_filter(filefilter)
 
 
 #### Dialogs
@@ -189,6 +200,19 @@ class PdfSaver(_FileChooserDialog):
         self.add_pdf_filter()
         self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
         self.set_current_name(pdf_name)
+
+
+class ExportChooser(_FileChooserDialog):
+
+    __gtype_name__ = 'ExportChooser'
+
+    def __init__(self, parent, filename, filter_):
+        super(ExportChooser, self).__init__(parent, preview=False,
+                                            action=gtk.FILE_CHOOSER_ACTION_SAVE)
+        self.set_title(_("Save as..."))
+        self.add_custom_filter(filter_)
+        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+        self.set_current_name(filename)
 
 
 #### Buttons
