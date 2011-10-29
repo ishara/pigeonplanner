@@ -69,7 +69,6 @@ class _FileChooser(gtk.FileChooser):
         # u'None' by only converting when needed.
         if filename is not None:
             return unicode(filename)
-        return u''
 
     def get_current_folder(self):
         return unicode(gtk.FileChooser.get_current_folder(self))
