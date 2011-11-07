@@ -241,14 +241,14 @@ class ResultWindow(builder.GtkBuilder):
             return
 
         results = []
-        for item in self.liststore:
+        for item in self._modelfilter:
             values = []
             for x in range(2, 14):
-                value = self.liststore.get_value(item.iter, x)
+                value = self._modelfilter.get_value(item.iter, x)
                 if value == None:
                     value = ''
                 if x == 2:
-                    value = "%s / %s" % (self.liststore.get_value(item.iter, 1),
+                    value = "%s / %s" % (self._modelfilter.get_value(item.iter, 1),
                                          value[2:])
                 if x == 7:
                     value = '%3.2f' % value
