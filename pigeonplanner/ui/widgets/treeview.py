@@ -145,8 +145,9 @@ class MainTreeView(gtk.TreeView):
     def select_all_pigeons(self):
         self._selection.select_all()
 
-    def get_pigeons(self):
-        return [row[0] for row in self._liststore]
+    def get_pigeons(self, filtered=False):
+        model = self._modelfilter if filtered else self._liststore
+        return [row[0] for row in model]
 
     def get_selected_pigeon(self):
         model, paths = self._selection.get_selected_rows()

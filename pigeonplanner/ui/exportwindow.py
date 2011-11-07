@@ -63,7 +63,7 @@ class ExportWindow(builder.GtkBuilder):
         if self.radioselected.get_active():
             pigeons = [treeview.get_selected_pigeon()]
         elif self.radiovisible.get_active():
-            pigeons = treeview.get_pigeons()
+            pigeons = treeview.get_pigeons(True)
         else:
             pigeons = self.parser.pigeons.values()
         exporter = self.__get_exporter()
