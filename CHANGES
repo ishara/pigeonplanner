@@ -1,3 +1,27 @@
+1.4.0:
+ * Added a breeding tab
+ * Added a breeder and on loan status
+ * Added a distance calculator
+ * Added latitude/longitude entries to the addressbook
+ * Added an export function
+ * Improved pigeon search dialog
+ * Categorize files in media tab
+ * Added option to show a status column
+ * Checking for an update before reporting an error
+ * Remember last directory in filechoosers
+ * Added new shortcuts
+ * Added message when the database has been upgraded
+ * Added menu entry to select all pigeons
+ * Fixed thumbnail errors
+ * Fixed racepoint manager error
+ * Fixed printing filtered results
+ * Don't allow adding media when no pigeon is selected
+ * Show error when the database is too new
+ * Mark required fields
+ * Updated Python version in Windows installer
+ * Updated and added translations
+ * Lots of code changes, improvements and cleanup
+
 1.2.0:
  * Added a media tab
  * Added a racepoint manager
