@@ -60,6 +60,7 @@ class LatLongEntry(gtk.Viewport):
         if validate:
             self.__validate(value, as_float)
         if as_float:
+            value = value.replace(u',', u'.')
             return float(value)
         return value
 
