@@ -183,10 +183,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         chooser.destroy()
 
     ## Status
-    def on_dialog_delete(self, dialog, event):
-        dialog.hide()
-        return True
-
     def on_buttonstatus_clicked(self, widget):
         if self.pigeon is None: return
         status = self.pigeon.get_active()
@@ -209,7 +205,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.notebookstatus.set_current_page(status)
         self._set_status_image(status)
 
-    def on_buttonstatusok_clicked(self, widget):
+    def on_statusdialog_close(self, widget, event=None):
         page = self.notebookstatus.get_current_page()
         table = self.notebookstatus.get_nth_page(page)
         for child in table.get_children():
@@ -219,8 +215,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                     child.get_text()
                 except errors.InvalidInputError, msg:
                     ErrorDialog(msg.value, self.parent)
-                    return
+                    return True
         self.statusdialog.hide()
+        return True
 
     def on_findsire_clicked(self, widget):
         self._run_pigeondialog(const.SIRE)
