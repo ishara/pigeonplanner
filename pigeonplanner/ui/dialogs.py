@@ -118,7 +118,9 @@ class InformationDialog(gtk.Dialog):
                 (_("Number of young birds"), "%s (%s %%)"
                                 %(ybirds, self.get_percentage(ybirds, total))),
                 (_("Number of results"),
-                                    len(self.database.get_all_results())))
+                                    len(self.database.get_all_results())),
+                (_("Number of couples"), self.database.get_breeding_count()),
+            )
 
     def get_percentage(self, value, total):
         if total == 0: return "0"
