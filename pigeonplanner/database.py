@@ -448,6 +448,10 @@ class DatabaseOperations(object):
         sql = 'SELECT * FROM Breeding WHERE Breedingkey=?'
         return self.__db_execute_select(sql, (ID,), RET_ONEROW)
 
+    def get_breeding_count(self):
+        sql = 'SELECT COUNT(*) FROM Breeding'
+        return self.__db_execute_select(sql, None, RET_ONEROW)[0]
+
 #### Media
     def get_pigeon_media(self, pindex):
         sql = 'SELECT * FROM Media WHERE pindex=?'
