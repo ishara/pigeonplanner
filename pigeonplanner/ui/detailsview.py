@@ -130,7 +130,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             ErrorDialog(msg.value, self.parent)
             return
         if self._operation == const.EDIT:
-            self._update_pigeon_data(data)
+            try:
+                self._update_pigeon_data(data)
+            except database.InvalidValueError:
+                ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
+                return
             old_pindex = self.pigeon.get_pindex()
             self.pigeon = self.parser.update_pigeon(data[0], old_pindex)
         elif self._operation == const.ADD:
@@ -520,6 +524,10 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         datalist.insert(0, pindex_new)
         datalist.append(pindex)
 
+        # Update the data in the pigeon table
+        # Raises an exception when the pigeon is a duplicate. We catch this in
+        # the calling method so be sure this database call is the first!
+        self.database.update_table(self.database.PIGEONS, datalist, 1, 1)
         # Update pindex in the results table
         if self.database.has_results(pindex):
             self.database.update_table(self.database.RESULTS,
@@ -528,8 +536,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         if self.database.has_medication(pindex):
             self.database.update_table(self.database.MED,
                                        (pindex_new, pindex), 2, 2)
-        # Update the data in the pigeon table
-        self.database.update_table(self.database.PIGEONS, datalist, 1, 1)
         # Remove the old thumbnail (if exists)
         image = datalist[10]
         prev_image = self.pigeon.get_image()
