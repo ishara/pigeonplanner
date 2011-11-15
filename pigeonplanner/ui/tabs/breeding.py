@@ -105,11 +105,11 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.maintreeview.select_pigeon(None, pindex)
 
     def on_buttoninfo2_clicked(self, widget):
-        pigeon = self.parser.get_pigeon(self.bandentry1.get_pindex())
+        pigeon = self.parser.get_pigeon(self.bandentry2.get_pindex())
         DetailsDialog(self.database, self.parser, pigeon, self.mainwindow)
 
     def on_buttongoto2_clicked(self, widget):
-        pindex = self.bandentry1.get_pindex()
+        pindex = self.bandentry2.get_pindex()
         self.maintreeview.select_pigeon(None, pindex)
 
     ## Edit dialog
