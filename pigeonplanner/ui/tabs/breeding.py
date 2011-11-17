@@ -249,5 +249,9 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
     def _format_mate(self, pindex):
         pigeon = self.parser.get_pigeon(pindex)
-        return pigeon.get_band_string()
+        try:
+            return pigeon.get_band_string()
+        except AttributeError:
+            # This pigeon was removed from the database
+            return "%s / %s" % common.get_band_from_pindex(pindex)
 
