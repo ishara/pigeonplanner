@@ -105,6 +105,7 @@ DOWNLOADURL = 'http://www.pigeonplanner.com/download'
 FORUMURL = 'http://forum.pigeonplanner.com'
 MAILURL = "http://www.pigeonplanner.com/cgi-bin/pigeonplanner_mailing.py"
 REPORTMAIL = "timovwb@gmail.com"
+DOCURL = WEBSITE + "/index.php?option=com_content&view=article&catid=9&id=%s"
 
 DOMAIN = 'pigeonplanner'
 

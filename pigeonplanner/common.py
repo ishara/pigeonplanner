@@ -270,6 +270,9 @@ def open_file(path):
                 subprocess.call((prog, norm_path))
                 return
 
+def open_help(article):
+    webbrowser.open(const.DOCURL % article)
+
 
 class URLOpen:
     """

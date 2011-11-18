@@ -49,6 +49,9 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.dialog.hide()
         return True
 
+    def on_buttonhelp_clicked(self, widget):
+        common.open_help(15)
+
     def on_treeview_press(self, treeview, event):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
         if pthinfo is None: return
