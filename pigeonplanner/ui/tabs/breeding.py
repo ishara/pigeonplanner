@@ -117,6 +117,9 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.editdialog.hide()
         return True
 
+    def on_buttonhelp_clicked(self, widget):
+        common.open_help(14)
+
     def on_buttoncancel_clicked(self, widget):
         self.editdialog.hide()
 

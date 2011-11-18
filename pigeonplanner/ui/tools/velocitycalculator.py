@@ -47,6 +47,9 @@ class VelocityCalculator(builder.GtkBuilder):
     def close_window(self, widget, event=None):
         self.velocitywindow.destroy()
 
+    def on_buttonhelp_clicked(self, widget):
+        common.open_help(11)
+
     def on_spinbutton_time_changed(self, widget):
         value = widget.get_value_as_int()
         widget.set_text(common.add_zero_to_time(value))

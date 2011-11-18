@@ -22,6 +22,7 @@ import gtk
 import gobject
 
 import errors
+import common
 import builder
 from ui.widgets import comboboxes
 from ui.widgets import latlongentry
@@ -46,6 +47,9 @@ class DistanceCalculator(builder.GtkBuilder):
         self._distance = self.entryresult.get_text() or 0.0
         self.window.destroy()
         return False
+
+    def on_buttonhelp_clicked(self, widget):
+        common.open_help(12)
 
     def on_buttoncalculate_clicked(self, widget):
         try:

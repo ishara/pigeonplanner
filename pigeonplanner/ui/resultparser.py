@@ -79,6 +79,9 @@ class ResultParser(builder.GtkBuilder):
             row.insert(0, True)
             self.liststore.append(row)
 
+    def on_helpbutton_clicked(self, widget):
+        common.open_help(9)
+
     def on_cancelbutton_clicked(self, widget):
         self.close_window()
 

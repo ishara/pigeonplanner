@@ -102,7 +102,21 @@
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <placeholder/>
+              <object class="GtkButton" id="buttonhelp">
+                <property name="label">gtk-help</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_buttonhelp_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+                <property name="secondary">True</property>
+              </packing>
             </child>
             <child>
               <object class="GtkButton" id="buttonclose">
@@ -957,6 +971,7 @@
       </object>
     </child>
     <action-widgets>
+      <action-widget response="0">buttonhelp</action-widget>
       <action-widget response="0">buttonclose</action-widget>
     </action-widgets>
   </object>

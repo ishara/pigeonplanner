@@ -20,6 +20,7 @@ import gtk
 import gobject
 
 import errors
+import common
 import builder
 from ui.widgets import comboboxes
 from ui.widgets import latlongentry
@@ -57,6 +58,9 @@ class RacepointManager(builder.GtkBuilder):
         self.spindistance.set_value(distance)
         if not unit: unit = 0
         self.combodistance.set_active(unit)
+
+    def on_buttonhelp_clicked(self, widget):
+        common.open_help(13)
 
     def on_buttonadd_clicked(self, widget):
         manager = DataManager(self.window, self.database, None)

@@ -19,6 +19,7 @@
 import gtk
 
 import const
+import common
 import builder
 import messages
 from ui.widgets import comboboxes
@@ -55,6 +56,9 @@ class DataManager(builder.GtkBuilder):
     # Callbacks
     def close_window(self, widget, event=None):
         self.window.destroy()
+
+    def on_buttonhelp_clicked(self, widget):
+        common.open_help(10)
 
     def on_buttonremove_clicked(self, widget):
         dataset = unicode(self.comboset.get_active_text())
