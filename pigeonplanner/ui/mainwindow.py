@@ -108,6 +108,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
          <menuitem action="Data"/>
       </menu>
       <menu action="HelpMenu">
+         <menuitem action="Help"/>
          <menuitem action="Home"/>
          <menuitem action="Forum"/>
          <separator/>
@@ -489,6 +490,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def menudata_activate(self, widget):
         logger.info(common.get_function_name())
         tools.DataManager(self, self.database, self.parser)
+
+    def menuhelp_activate(self, widget):
+        logger.debug(common.get_function_name())
+        webbrowser.open(const.DOCURLMAIN)
 
     def menuhome_activate(self, widget):
         logger.debug(common.get_function_name())
