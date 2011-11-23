@@ -394,6 +394,10 @@ class DatabaseOperations(object):
         sql = 'SELECT * FROM Pigeons'
         return self.__db_execute_select(sql, None, RET_ALLCOL)
 
+    def get_visible_pigeons(self):
+        sql = 'SELECT * FROM Pigeons WHERE show=1'
+        return self.__db_execute_select(sql, None, RET_ALLCOL)
+
     def get_pigeon_data(self, pindex):
         sql = 'SELECT * FROM Pigeons WHERE pindex=?'
         return self.__db_execute_select(sql, (pindex,), RET_ONEROW)
@@ -517,6 +521,11 @@ class DatabaseOperations(object):
     def get_racepoint_data(self, racepoint):
         sql = 'SELECT xco, yco, distance, unit FROM Racepoints WHERE racepoint=?'
         return self.__db_execute_select(sql, (racepoint,), RET_ONEROW)
+
+#### Status
+    def count_pigeon_with_status(self, status):
+        sql = 'SELECT COUNT(*) FROM Pigeons WHERE show=1 AND active=?'
+        return self.__db_execute_select(sql, (status,), RET_ONEROW)[0]
 
 #### Sold
     def get_sold_data(self, pindex):
