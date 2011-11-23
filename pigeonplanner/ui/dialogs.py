@@ -110,17 +110,21 @@ class InformationDialog(gtk.Dialog):
 
     def get_data(self):
         total, cocks, hens, ybirds = common.count_active_pigeons(self.database)
-        return ((_("Number of pigeons"), total),
-                (_("Number of cocks"), "%s (%s %%)"
-                                %(cocks, self.get_percentage(cocks, total))),
-                (_("Number of hens"), "%s (%s %%)"
-                                %(hens, self.get_percentage(hens, total))),
-                (_("Number of young birds"), "%s (%s %%)"
-                                %(ybirds, self.get_percentage(ybirds, total))),
-                (_("Number of results"),
-                                    len(self.database.get_all_results())),
-                (_("Number of couples"), self.database.get_breeding_count()),
-            )
+        data = [(_("Number of pigeons"), total)]
+        data.append((_("    Cocks"), "%s\t(%s %%)"
+                                %(cocks, self.get_percentage(cocks, total))))
+        data.append((_("    Hens"), "%s\t(%s %%)"
+                                %(hens, self.get_percentage(hens, total))))
+        data.append((_("    Young birds"), "%s\t(%s %%)"
+                                %(ybirds, self.get_percentage(ybirds, total))))
+        for status in range(6):
+            n_status = self.database.count_pigeon_with_status(status)
+            data.append(("    %s" % _(common.statusdic[status]), "%s\t(%s %%)"
+                            % (n_status, self.get_percentage(n_status, total))))
+        data.append((_("Number of results"),
+                                    len(self.database.get_all_results())))
+        data.append((_("Number of couples"), self.database.get_breeding_count()))
+        return data
 
     def get_percentage(self, value, total):
         if total == 0: return "0"
