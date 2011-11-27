@@ -21,6 +21,7 @@ import gtk
 import const
 import common
 import builder
+import database
 import messages
 from ui.widgets import comboboxes
 from ui.messagedialog import QuestionDialog
@@ -75,7 +76,11 @@ class DataManager(builder.GtkBuilder):
         item = (self.entryitem.get_text(), )
         if dataset == _("Racepoints"):
             item = item+("", "", "", "")
-        self.database.insert_into_table(self.tables[dataset], item)
+        try:
+            self.database.insert_into_table(self.tables[dataset], item)
+        except database.InvalidValueError:
+            # Item already exists in dataset. No need for an error message.
+            return
         self.entryitem.set_text('')
         self._fill_item_combobox(dataset)
 
