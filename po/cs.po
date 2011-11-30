@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION CZ\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-05 17:07+0100\n"
-"PO-Revision-Date: 2011-11-07 08:43+0000\n"
+"PO-Revision-Date: 2011-11-24 16:18+0000\n"
 "Last-Translator: Jindra <Unknown>\n"
 "Language-Team: Jindra <sidloj@volny.cz>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-08 05:51+0000\n"
-"X-Generator: Launchpad (build 14231)\n"
+"X-Launchpad-Export-Date: 2011-11-25 05:23+0000\n"
+"X-Generator: Launchpad (build 14376)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: \n"
 "X-Poedit-SearchPath-1: ..\n"
@@ -1059,7 +1059,7 @@ msgstr "Chovná data"
 
 #: glade/BreedingView.ui:165
 msgid "Mate*"
-msgstr "Datum páření*"
+msgstr "Partner*"
 
 #: glade/BreedingView.ui:209 glade/BreedingView.ui:1223
 msgid "Series"
@@ -1098,7 +1098,7 @@ msgstr "2. Vajíčko"
 
 #: glade/BreedingView.ui:733
 msgid "Mate"
-msgstr "Pářeno"
+msgstr "Partner"
 
 #: glade/Dialogs.ui:117
 msgid "Only report this logfile if an unexpected error has happened."

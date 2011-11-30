@@ -1,3 +1,17 @@
+1.4.2:
+ * Added more statistics
+ * Added help buttons
+ * Rewrite of pedigree window which fixes strange crashes
+ * Fixed problem with entering pigeon details
+ * Fixed problem when calculating distances
+ * Fixed error when status date is wrong
+ * Fixed showing wrong pigeon in breeding view
+ * Fixed error when a mate is removed
+ * Fixed error when adding an existing item to dataset
+ * Show message when editing band number to existing pigeon
+ * Fixed rare breeding dialog issue
+ * Updated translations
+
 1.4.0:
  * Added a breeding tab
  * Added a breeder and on loan status

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-05 17:07+0100\n"
-"PO-Revision-Date: 2011-09-25 11:51+0000\n"
+"PO-Revision-Date: 2011-11-21 20:33+0000\n"
 "Last-Translator: 426 <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-06 05:25+0000\n"
-"X-Generator: Launchpad (build 14231)\n"
+"X-Launchpad-Export-Date: 2011-11-22 05:03+0000\n"
+"X-Generator: Launchpad (build 14299)\n"
 "Language: \n"
 
 #: glade/OptionsDialog.ui:310 glade/DistanceCalculator.ui:99
@@ -1187,27 +1187,27 @@ msgstr "查看所有成績"
 
 #: glade/ExportWindow.ui:21
 msgid "Export data"
-msgstr ""
+msgstr "匯出資料"
 
 #: glade/ExportWindow.ui:90
 msgid "Export"
-msgstr ""
+msgstr "匯出"
 
 #: glade/ExportWindow.ui:138
 msgid "Path"
-msgstr ""
+msgstr "路徑"
 
 #: glade/ExportWindow.ui:193
 msgid "Selected"
-msgstr ""
+msgstr "已選取"
 
 #: glade/ExportWindow.ui:209
 msgid "Visible"
-msgstr ""
+msgstr "可見的"
 
 #: glade/ExportWindow.ui:225
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: glade/OptionsDialog.ui:69
 msgid "Options"
@@ -1404,7 +1404,7 @@ msgstr "結果"
 
 #: glade/MainWindow.ui:10
 msgid "Export..."
-msgstr ""
+msgstr "匯出..."
 
 #: glade/MainWindow.ui:11
 msgid "Export data to other formats"
