@@ -132,7 +132,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         if self._operation == const.EDIT:
             try:
                 self._update_pigeon_data(data)
-            except database.InvalidValueError:
+            except database.InvalidValueError, errors.InvalidInputError:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
                 return
             old_pindex = self.pigeon.get_pindex()
