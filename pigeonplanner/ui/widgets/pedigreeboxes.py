@@ -58,9 +58,12 @@ class PedigreeBox_cairo(gtk.DrawingArea):
             if int(self.pigeon.get_sex()) == const.SIRE:
                 self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
                 self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
-            else:
+            elif int(self.pigeon.get_sex()) == const.DAM:
                 self.bgcolor = (255/256.0, 205/256.0, 241/256.0)
                 self.bordercolor = (135/256.0, 32/256.0, 106/256.0)
+            else:
+                self.bgcolor = (200/256.0, 200/256.0, 200/256.0)
+                self.bordercolor = (100/256.0, 100/256.0, 100/256.0)
         else:
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
             self.bordercolor = (0, 0, 0)

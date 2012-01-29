@@ -117,6 +117,9 @@ class Pigeon(object):
         self.extra5 = extra5
         self.extra6 = extra6
 
+    def __repr__(self):
+        return "<Pigeon %s>" % self.pindex
+
     def get_pindex(self):
         return self.pindex
 

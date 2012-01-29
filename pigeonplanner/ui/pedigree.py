@@ -62,6 +62,7 @@ class DrawPedigree(object):
 
         self.tables = None
         self.pigeon = None
+        self.draw_cb = None
 
     # Callbacks
     def on_button_press(self, box, event, detailed):
@@ -106,13 +107,15 @@ class DrawPedigree(object):
         self._redraw()
 
     # Public methods
-    def draw_pedigree(self, tables, pigeon=None, detailed=False):
+    def draw_pedigree(self, tables, pigeon=None, detailed=False, draw_cb=None):
         self.pigeon = pigeon
         if detailed:
             # Only save the tables when in the detailed window. Otherwise
             # these will be overwritten when a reselect of a pigeon happens
             # in the _redraw method.
             self.tables = tables
+            if self.draw_cb is None:
+                self.draw_cb = draw_cb
             pos = [
                    ((0, 7, 8), ((0,7),(8,7))),
                    ((2, 3, 4), ((0,3),(4,3))),
@@ -130,6 +133,10 @@ class DrawPedigree(object):
                    ((6, 12, 13), (None)),
                    ((6, 14, 15), (None)),
                 ]
+
+            lst = [None]*len(pos)
+            build_tree(self.parser, pigeon, 0, 1, lst)
+            self._draw(tables, pos, lst, int(pigeon.sex), detailed)
         else:
             pos = [
                    ((0, 4, 5), ((0,3),(5,3))),
@@ -139,23 +146,24 @@ class DrawPedigree(object):
                    ((4, 5, 6), None), ((4, 7, 8), None),
                 ]
 
-        lstsire = [None]*len(pos)
-        lstdam = [None]*len(pos)
-        if pigeon is not None:
-            sire , dam = self.parser.get_parents(pigeon)
-            build_tree(self.parser, sire, 0, 1, lstsire)
-            build_tree(self.parser, dam, 0, 1, lstdam)
-        self._draw(tables[0], pos, lstsire, const.SIRE, detailed)
-        self._draw(tables[1], pos, lstdam, const.DAM, detailed)
+            lstsire = [None]*len(pos)
+            lstdam = [None]*len(pos)
+            if pigeon is not None:
+                sire , dam = self.parser.get_parents(pigeon)
+                build_tree(self.parser, sire, 0, 1, lstsire)
+                build_tree(self.parser, dam, 0, 1, lstdam)
+            self._draw(tables[0], pos, lstsire, const.SIRE, detailed)
+            self._draw(tables[1], pos, lstdam, const.DAM, detailed)
 
     # Internal methods
     def _draw(self, table, positions, lst, sex, detailed):
         for child in table.get_children():
-            child.destroy()
+            if isinstance(child, gtk.DrawingArea):
+                child.destroy()
 
         for index, position in enumerate(positions):
             try:
-                x = position[0][0]
+                x = position[0][0]+1
                 y = x + 1
                 w = position[0][1]
                 h = position[0][2]
@@ -163,13 +171,20 @@ class DrawPedigree(object):
                 continue
 
             pigeon = lst[index]
-            child = self.pigeon if index == 0 else lst[(index - 1) / 2]
+            if pigeon is self.pigeon:
+                child = None
+            else:
+                child = self.pigeon if index == 0 else lst[(index - 1) / 2]
 
             if cairo_available:
                 box = pedigreeboxes.PedigreeBox_cairo(pigeon, child, detailed)
             else:
                 box = pedigreeboxes.PedigreeBox(pigeon, child, detailed)
-            box.set_sex(0 if (index%2 == 1 or (index == 0 and sex == const.SIRE)) else 1)
+            try:
+                sex = int(pigeon.sex)
+            except AttributeError:
+                sex = 0 if (index%2 == 1 or (index == 0 and sex == const.SIRE)) else 1
+            box.set_sex(sex)
             box.connect("button-press-event", self.on_button_press, detailed)
             table.attach(box, x, y, w, h)
 
@@ -208,6 +223,8 @@ class DrawPedigree(object):
                 table.attach(line_down, left, right, y, y+h)
 
         table.show_all()
+        if detailed and callable(self.draw_cb):
+            self.draw_cb()
 
     def _show_pigeon_details(self, widget, pigeon, parent):
         if not pigeon.get_pindex() in self.parser.pigeons:
@@ -228,6 +245,8 @@ class DrawPedigree(object):
             InfoDialog(messages.MSG_NO_PIGEON, parent)
 
     def _edit_child(self, pigeon, child, clear=False):
+        if child is None:
+            return
         if clear:
             band, year = '', ''
         else:

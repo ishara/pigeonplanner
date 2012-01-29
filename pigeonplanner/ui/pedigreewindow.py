@@ -32,6 +32,11 @@ from ui import maildialog
 from translation import gettext as _
 
 
+(PREVIOUS,
+ NEXT_SIRE,
+ NEXT_DAM) = range(3)
+
+
 class PedigreeWindow(gtk.Window):
     ui = """
 <ui>
@@ -57,11 +62,15 @@ class PedigreeWindow(gtk.Window):
         self.database = database
         self.options = options
         self.parser = parser
+        self.pedigree = pedigree
         self.pigeon = pigeon
+        self._current_pigeon = pigeon
+        self._previous_pigeons = []
         ring, year = pigeon.get_band()
         self.pdfname = "%s_%s_%s.pdf" % (_("Pedigree"), ring, year)
         self._build_ui()
-        pedigree.draw_pedigree(self._get_pedigree_tables(), pigeon, True)
+        pedigree.draw_pedigree(self._get_pedigree_table(), pigeon, True,
+                               self.on_pedigree_draw)
 
         name = pigeon.get_name()
         if name:
@@ -96,35 +105,59 @@ class PedigreeWindow(gtk.Window):
         toolbar = uimanager.get_widget('/Toolbar')
         vbox.pack_start(toolbar, False, False)
 
-        self.notebook = notebook = gtk.Notebook()
-        notebook.append_page(*self._create_notebook_page(0))
-        notebook.append_page(*self._create_notebook_page(1))
-        vbox.pack_start(notebook)
-        self.add(vbox)
+        self.table = table = gtk.Table(20, 7)
 
-    def _create_notebook_page(self, num):
-        labeltext = _("Sire") if num == 0 else _("Dam")
-        imagename = "symbol_male.png" if num == 0 else "symbol_female.png"
+        image = gtk.image_new_from_stock(gtk.STOCK_GO_BACK, gtk.ICON_SIZE_BUTTON)
+        self.buttonprev = gtk.Button()
+        self.buttonprev.add(image)
+        self.buttonprev.connect('clicked', self.on_navbutton_clicked, PREVIOUS)
+        table.attach(self.buttonprev, 0, 1, 7, 8, 0, 0)
+        image = gtk.image_new_from_stock(gtk.STOCK_GO_FORWARD, gtk.ICON_SIZE_BUTTON)
+        self.buttonnextsire = gtk.Button()
+        self.buttonnextsire.add(image)
+        self.buttonnextsire.connect('clicked', self.on_navbutton_clicked, NEXT_SIRE)
+        table.attach(self.buttonnextsire, 8, 9, 3, 4, 0, 0)
+        image = gtk.image_new_from_stock(gtk.STOCK_GO_FORWARD, gtk.ICON_SIZE_BUTTON)
+        self.buttonnextdam = gtk.Button()
+        self.buttonnextdam.add(image)
+        self.buttonnextdam.connect('clicked', self.on_navbutton_clicked, NEXT_DAM)
+        table.attach(self.buttonnextdam, 8, 9, 11, 12, 0, 0)
 
-        image = gtk.image_new_from_file(os.path.join(const.IMAGEDIR, imagename))
-        label = gtk.Label(labeltext)
-        hbox = gtk.HBox()
-        hbox.pack_start(image, False)
-        hbox.pack_start(label, False)
-        hbox.show_all()
-
-        table = gtk.Table(20, 7)
         alignment = gtk.Alignment(.5, .5)
         alignment.set_padding(4, 4, 8, 8)
         alignment.add(table)
 
-        return alignment, hbox
+        vbox.pack_start(alignment)
+        self.add(vbox)
 
-    def _get_pedigree_tables(self):
-        return [self.notebook.get_nth_page(x).get_child() for x in (0, 1)]
+    def _get_pedigree_table(self):
+        return self.table
 
     def on_close_dialog(self, widget, event=None):
         self.destroy()
+        self.pedigree.draw_cb = None
+        return False
+
+    def on_navbutton_clicked(self, widget, nav):
+        if nav == PREVIOUS:
+            pigeon = self._previous_pigeons.pop()
+        else:
+            sire, dam = self.parser.get_parents(self._current_pigeon)
+            self._previous_pigeons.append(self._current_pigeon)
+            pigeon = sire if nav == NEXT_SIRE else dam
+
+        self._current_pigeon = pigeon
+        self.pedigree.draw_pedigree(self._get_pedigree_table(), pigeon, True)
+
+    def on_pedigree_draw(self):
+        can_prev = self._current_pigeon.pindex != self.pigeon.pindex
+        self.buttonprev.set_sensitive(can_prev)
+
+        sire, dam = self.parser.get_parents(self._current_pigeon)
+        can_next_sire = sire is not None
+        self.buttonnextsire.set_sensitive(can_next_sire)
+        can_next_dam = dam is not None
+        self.buttonnextdam.set_sensitive(can_next_dam)
 
     def on_mail_clicked(self, widget):
         self.do_operation(const.MAIL)
