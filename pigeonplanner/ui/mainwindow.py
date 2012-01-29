@@ -550,9 +550,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             pindex = common.get_pindex_from_band(band, rangeyear)
             logger.debug("Range: adding '%s'", pindex)
             if self.database.has_pigeon(pindex):
-                if not WarningDialog(messages.MSG_OVERWRITE_PIGEON,
-                                     self).run():
-                    continue
+                value += 1
+                continue
             pigeon = self.parser.add_empty_pigeon(pindex, rangesex)
             row = [pigeon, pindex, band, rangeyear, '', '', pigeon.get_sex_string(),
                    '', '', _(common.get_status(pigeon.get_active()))]
