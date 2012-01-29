@@ -89,7 +89,10 @@ class DistanceCalculator(builder.GtkBuilder):
         elif widget.get_active() == 1:
             # Loft selected
             editable = False
-            latitude, longitude = self.database.get_loft_latlong()
+            try:
+                latitude, longitude = self.database.get_loft_latlong()
+            except TypeError:
+                latitude, longitude = '', ''
         else:
             editable = False
             rp = widget.get_active_text()
