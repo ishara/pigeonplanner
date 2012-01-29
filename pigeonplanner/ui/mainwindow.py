@@ -554,8 +554,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                                      self).run():
                     continue
             pigeon = self.parser.add_empty_pigeon(pindex, rangesex)
-            row = [pigeon, pindex, band, rangeyear, '', '',
-                   pigeon.get_sex_string(), '', '']
+            row = [pigeon, pindex, band, rangeyear, '', '', pigeon.get_sex_string(),
+                   '', '', _(common.get_status(pigeon.get_active()))]
             self.treeview.add_row(row)
             value += 1
 
