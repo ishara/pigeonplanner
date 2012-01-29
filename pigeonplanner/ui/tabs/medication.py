@@ -20,11 +20,13 @@ import gtk
 
 import const
 import common
+import errors
 import builder
 from ui import utils
 from ui import dialogs
 from ui.tabs import basetab
 from ui.widgets import comboboxes
+from ui.messagedialog import ErrorDialog
 from translation import gettext as _
 
 
@@ -127,7 +129,11 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self._selection.select_path(path)
 
     def on_buttonsave_clicked(self, widget):
-        data = self._get_entry_data()
+        try:
+            data = self._get_entry_data()
+        except errors.InvalidInputError, msg:
+            ErrorDialog(msg.value, self.parent)
+            return
         pigeons = [row[2] for row in self.liststoreselect if row[1]]
         if self._mode == const.ADD:
             medid = data[0] + common.get_random_number(10)
