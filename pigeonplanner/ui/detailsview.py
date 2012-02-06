@@ -132,9 +132,13 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         if self._operation == const.EDIT:
             try:
                 self._update_pigeon_data(data)
-            except database.InvalidValueError, errors.InvalidInputError:
+            except database.InvalidValueError:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
                 return
+            except errors.InvalidInputError:
+                # This is a corner case. Some status date is incorrect, but the
+                # user choose another one. Don't bother him with this.
+                pass
             old_pindex = self.pigeon.get_pindex()
             self.pigeon = self.parser.update_pigeon(data[0], old_pindex)
         elif self._operation == const.ADD:
@@ -143,6 +147,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             except PigeonAlreadyExists, msg:
                 logger.debug("Pigeon already exists '%s'", msg)
                 return
+            except errors.InvalidInputError:
+                # See comment above
+                pass
             self.pigeon = self.parser.add_pigeon(pindex=data[0])
         self.emit('edit-finished', self.pigeon, self._operation)
         self._finish_edit(data)
