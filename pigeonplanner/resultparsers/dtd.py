@@ -22,6 +22,8 @@ import const
 import common
 from baseparser import BaseParser
 from translation import gettext as _
+from test.test_strptime import StrptimeTests
+from symbol import except_clause
 
 
 def expand_year(year):
@@ -39,15 +41,57 @@ class DTDParser(BaseParser):
         data = {}
         results = {}
         for number, line in enumerate(resultfile):
+            if number == 0:
+                # Get Sector of the race. 
+#                sector, garbage = line.split(None, 1)
+                data['sector'] = line[:21]
             if number == 2:
                 #TODO: This doesn't work if racepoint has multiple words
-                racepoint, date, n_pigeons, garbage = line.split(None, 3)
-                day, month, year = date.split('-')
-                dt = datetime.date(int("20"+year), int(month), int(day))
+                # If an error occurs, it's mean that racepoint is composed of two words
+#                racepoint, date, n_pigeons, catgory, garbage = line.split(None, 4)
+#                try :
+#                    day, month, year = date.split('-')
+#                    dt = datetime.date(int("20"+year), int(month), int(day))
+#                    data['racepoint'] = racepoint
+#                    data['date'] = dt.strftime(const.DATE_FORMAT)
+#                    data['n_pigeons'] = n_pigeons
+#                    data['category'] = category
+#                except ValueError:
+#                    racepoint, racepoint2, date, n_pigeons, category, garbage = line.split(None, 5)
+#                    day, month, year = date.split('-')
+#                    dt = datetime.date(int("20"+year), int(month), int(day))
+#                    data['racepoint'] = racepoint + " " + racepoint2
+#                    data['date'] = dt.strftime(const.DATE_FORMAT)
+#                    data['n_pigeons'] = n_pigeons
+#                continue
+                words= line.split()
+                try :
+                    racepoint = words[0]
+                    date = words[1]
+                    day, month, year = date.split('-')
+                    dt = datetime.date(int("20"+year), int(month), int(day))
+                    n_pigeons = words[2]
+                    if words[4] == "LOS":
+                        category = words[3]
+                    else:
+                        category = words[3] + " " + words[4]
+                except ValueError:
+                    racepoint = words[0]+" "+words[1]
+                    date = words[2]
+                    day, month, year = date.split('-')
+                    dt = datetime.date(int("20"+year), int(month), int(day))
+                    n_pigeons = words[3]
+                    if words[5] == "LOS":
+                        category = words[4]
+                    else:
+                        category = words[4] + " " + words[5]
+                    
+                    
                 data['racepoint'] = racepoint
                 data['date'] = dt.strftime(const.DATE_FORMAT)
                 data['n_pigeons'] = n_pigeons
-                continue
+                data['category'] = category
+
             line = line.split()
             # Only parse lines that start with a number (place)
             try:

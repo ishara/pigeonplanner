@@ -65,6 +65,8 @@ class ResultParser(builder.GtkBuilder):
             return
         self.datelabel.set_markup('<b>%s</b>' % self.data['date'])
         self.racepointlabel.set_markup('<b>%s</b>' % self.data['racepoint'])
+        self.sectorlabel.set_markup('<b>%s</b>' % self.data['sector'])
+        self.categorylabel.set_markup('<b>%s</b>' % self.data['category'])
         self.pigeonslabel.set_markup('<b>%s</b>' % self.data['n_pigeons'])
         self.liststore.clear()
         if not results:
@@ -89,11 +91,13 @@ class ResultParser(builder.GtkBuilder):
         date = self.data['date']
         point = self.data['racepoint']
         out = self.data['n_pigeons']
+        sector = self.data['sector']
+        category = self.data['category']
         for row in self.liststore:
             toggle, pindex, ring, year, place = row
             if not toggle: continue
             cof = common.calculate_coefficient(place, out)
-            data = [pindex, date, point, place, out, '', '', '',
+            data = [pindex, date, point, place, out, sector, category, '',
                     '', '', '', '', 0, 0, '']
             if self.database.has_result(data):
                 logger.info('Pigeon %s already has the selected result' % pindex)
