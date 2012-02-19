@@ -97,7 +97,7 @@ class ResultParser(builder.GtkBuilder):
             toggle, pindex, ring, year, place = row
             if not toggle: continue
             cof = common.calculate_coefficient(place, out)
-            data = [pindex, date, point, place, out, sector, category, '',
+            data = [pindex, date, point, place, out, sector, '', category,
                     '', '', '', '', 0, 0, '']
             if self.database.has_result(data):
                 logger.info('Pigeon %s already has the selected result' % pindex)
