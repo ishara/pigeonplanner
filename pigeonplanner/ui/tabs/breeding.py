@@ -160,24 +160,8 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
                 textbuffer.get_text(*textbuffer.get_bounds())]
 
         # Add the child pigeons if needed
-        try:
-            pigeon = self.parser.add_empty_pigeon(pindex1, const.YOUNG,
-                                            self.listcheckedit1.get_active(),
-                                            sire, dam)
-        except (ValueError, database.InvalidValueError):
-            pass
-        else:
-            if pigeon.get_visible():
-                self.maintreeview.add_pigeon(pigeon, False)
-        try:
-            pigeon = self.parser.add_empty_pigeon(pindex2, const.YOUNG,
-                                            self.listcheckedit2.get_active(),
-                                            sire, dam)
-        except (ValueError, database.InvalidValueError):
-            pass
-        else:
-            if pigeon.get_visible():
-                self.maintreeview.add_pigeon(pigeon, False)
+        self._add_child_pigeon(pindex1, sire, dam, self.listcheckedit1.get_active())
+        self._add_child_pigeon(pindex2, sire, dam, self.listcheckedit2.get_active())
 
         # Update when editing record
         if self._mode == const.EDIT:
@@ -257,4 +241,33 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         except AttributeError:
             # This pigeon was removed from the database
             return "%s / %s" % common.get_band_from_pindex(pindex)
+
+    def _add_child_pigeon(self, pindex, sire, dam, active):
+        pigeon = None
+        try:
+            pigeon = self.parser.add_empty_pigeon(pindex, const.YOUNG,
+                                                  active, sire, dam)
+        except ValueError:
+            # Empty bandnumber
+            return
+        except database.InvalidValueError:
+            # Pigeon does exist, update parents
+            pigeon = self.parser.get_pigeon(pindex)
+
+            s, sy = common.get_band_from_pindex(sire)
+            d, dy = common.get_band_from_pindex(dam)
+            pigeon.sire = s
+            pigeon.yearsire = sy
+            pigeon.dam = d
+            pigeon.yeardam = dy
+            self.database.update_table(self.database.PIGEONS,
+                                       (s, sy, d, dy, pigeon.get_pindex()), 12, 1)
+            if active:
+                # Pigeon isn't visible, but user checked the "add to list" option
+                pigeon.show = 1
+                self.database.update_table(self.database.PIGEONS,
+                                           (1, pigeon.get_pindex()), 5, 1)
+
+        if pigeon.get_visible() and not self.maintreeview.has_pigeon(pigeon):
+            self.maintreeview.add_pigeon(pigeon, False)
 

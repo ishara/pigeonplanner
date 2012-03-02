@@ -124,6 +124,12 @@ class MainTreeView(gtk.TreeView):
                _(common.get_status(pigeon.get_active()))]
         self.add_row(row, select)
 
+    def has_pigeon(self, pigeon):
+        for row in self._liststore:
+            if self._liststore.get_value(row.iter, 0) == pigeon:
+                return True
+        return False
+
     def select_pigeon(self, widget, pindex):
         """
         Select the pigeon in the main treeview
