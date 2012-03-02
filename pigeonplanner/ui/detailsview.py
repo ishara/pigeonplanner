@@ -257,6 +257,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.combosex.set_active(value)
 
     def set_details(self, pigeon):
+        if pigeon is None:
+            self.errorlabel.show()
+            self.detailbook.set_sensitive(False)
+            return
+
         self.pigeon = pigeon
 
         self.entryband.set_band(*pigeon.get_band())
