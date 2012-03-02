@@ -189,7 +189,7 @@ def get_pindex_from_band_string(bandstring):
     @param bandstring: The pigeons bandstring
     """
 
-    band, year = bandstring.split('/')
+    band, year = bandstring.rsplit('/', 1)
     return get_pindex_from_band(band.strip(), year.strip())
 
 def get_band_from_pindex(pindex):
