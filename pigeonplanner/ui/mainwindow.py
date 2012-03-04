@@ -34,6 +34,7 @@ import common
 import backup
 import checks
 import update
+import errors
 import builder
 import printing
 import messages
@@ -536,7 +537,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         try:
             checks.check_ring_entry(rangefrom, rangeyear)
             checks.check_ring_entry(rangeto, rangeyear)
-        except checks.InvalidInputError, msg:
+        except errors.InvalidInputError, msg:
             ErrorDialog(msg.value, self)
             return
         if not rangefrom.isdigit() or not rangeto.isdigit():
