@@ -113,6 +113,8 @@ def main():
                       help="Compile mo-files if the po-file was changed")
     options, args = parser.parse_args()
     if options.pot:
+        # Remove existing pot-file to start with a clean template.
+        os.remove(POTFILE)
         create_potfiles_in()
         create_potfile()
     if options.mo:

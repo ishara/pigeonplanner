@@ -111,11 +111,11 @@ class InformationDialog(gtk.Dialog):
     def get_data(self):
         total, cocks, hens, ybirds = common.count_active_pigeons(self.database)
         data = [(_("Number of pigeons"), total)]
-        data.append((_("    Cocks"), "%s\t(%s %%)"
+        data.append(("    %s" % _("Cocks"), "%s\t(%s %%)"
                                 %(cocks, self.get_percentage(cocks, total))))
-        data.append((_("    Hens"), "%s\t(%s %%)"
+        data.append(("    %s" % _("Hens"), "%s\t(%s %%)"
                                 %(hens, self.get_percentage(hens, total))))
-        data.append((_("    Young birds"), "%s\t(%s %%)"
+        data.append(("    %s" % _("Young birds"), "%s\t(%s %%)"
                                 %(ybirds, self.get_percentage(ybirds, total))))
         for status in range(6):
             n_status = self.database.count_pigeon_with_status(status)
