@@ -27,9 +27,6 @@ import gtk
 import gobject
 
 import const
-import update
-from ui import maildialog
-from ui.messagedialog import QuestionDialog
 from translation import gettext as _
 
 
@@ -79,30 +76,26 @@ class LogDialog(gtk.Dialog):
             table.add(tag)
 
         #combo
-        hbox = gtk.HBox()
-        self.vbox.pack_start(hbox, False, False, 10)
-        buttonbox = gtk.HButtonBox()
-        hbox.pack_start(buttonbox, False, False, 10)
-        label = gtk.Label("Minimum severity shown.")
-        label.set_no_show_all(True)
-        hbox.pack_start(label, False, False, 10)
-        aspect = gtk.AspectFrame()
-        aspect.set_shadow_type(gtk.SHADOW_NONE)
-        hbox.pack_start(aspect)
+        vbox = gtk.VBox(False, 4)
+        align = gtk.Alignment(.0, .0, .0, .0)
+        align.add(vbox)
+        self.vbox.pack_start(align, False, False, 0)
+        label = gtk.Label("Minimum severity shown:")
+        label.set_alignment(0, .5)
+        vbox.pack_start(label, False, False, 0)
 
         ##severity
         self.combo = gtk.combo_box_new_text()
-        buttonbox.pack_start(self.combo)
+        vbox.pack_start(self.combo, False, False, 0)
         self.combo.connect("changed", self.reload_view)
 
         for s in SEVERITY:
             self.combo.append_text(s)
         self.combo.set_active(0)
-        self.combo.set_no_show_all(True)
 
         ##logs
         self.combo_logs = gtk.combo_box_new_text()
-        buttonbox.pack_start(self.combo_logs)
+        vbox.pack_start(self.combo_logs, False, False, 0)
         self.combo_logs.connect("changed", self.set_logfile)
         self.combo_logs.connect("changed", self.reload_view)
 
@@ -114,9 +107,6 @@ class LogDialog(gtk.Dialog):
         self.combo_logs.set_active(0)
 
         #action area
-        button_report = gtk.Button(None, 'report')
-        button_report.connect("clicked", self.report_log)
-        self.action_area.pack_start(button_report)
         button_close = gtk.Button(None, gtk.STOCK_CLOSE)
         button_close.connect("clicked", self.close)
         self.action_area.pack_start(button_close)
@@ -135,19 +125,6 @@ class LogDialog(gtk.Dialog):
         self.file = open(logfile, "r")
         self.back_buffer = gtk.TextBuffer()
         self.back_buffer.set_text(self.file.read())
-
-    def report_log(self, widget):
-        try:
-            new, msg = update.update()
-        except update.UpdateError, exc:
-            new = False
-        if new:
-            desc = _("Chances are that your problem is already fixed in "
-                     "this new version. Send a report anyway?")
-            if not QuestionDialog((msg, desc, msg), self).run():
-                return
-        logfile = os.path.join(const.PREFDIR, self.combo_logs.get_active_text())
-        maildialog.MailDialog(self, self.database, logfile, 'log')
 
     def insert_color(self, bffr, line):
         for s in SEVERITY[self.combo.get_active():]:

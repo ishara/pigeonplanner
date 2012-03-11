@@ -25,6 +25,7 @@ import gobject
 
 import const
 import common
+import errors
 import builder
 import messages
 import mailing
@@ -130,19 +131,24 @@ class MailDialog(builder.GtkBuilder):
         sender = "%s <%s>" % (self.entry_name.get_text(),
                               self.entry_mail.get_text())
 
-        mailing.send_email(recipient, sender, subject, body, self.attachment)
+        try:
+            mailing.send_email(recipient, sender, subject, body, self.attachment)
+            error = False
+        except errors.UrlTimeout:
+            error = True
 
         self.sending = False
-        gobject.idle_add(self.send_finished)
+        gobject.idle_add(self.send_finished, error)
 
-    def send_finished(self):
+    def send_finished(self, error):
         self.progressbar.hide()
         self.send.hide()
         self.cancel.hide()
         self.close.show()
         self.action_area.set_sensitive(True)
-        self.label_result.set_markup("<b>%s</b>"
-                                %_("The e-mail has been sent succesfully!"))
+        msg = _("The e-mail has been sent succesfully!") if not error else \
+                    _("Connection to server failed!")
+        self.label_result.set_markup("<b>%s</b>" % msg)
         self.label_result.show()
 
     def pulse_progressbar(self):

@@ -16,6 +16,12 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import socket
+
+
+UrlTimeout = socket.timeout
+
+
 class InvalidInputError(Exception):
     def __init__(self, value):
         self.value = value

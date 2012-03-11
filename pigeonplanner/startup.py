@@ -115,14 +115,15 @@ class Startup(object):
         console.setLevel(self._loglevel)
         formatter = logging.Formatter(const.LOG_FORMAT_CLI)
         console.setFormatter(formatter)
-        logging.getLogger('').addHandler(console)
+        self.logger.addHandler(console)
 
         self.logger.info("Version: %s" % const.VERSION)
         self.logger.debug("Home path: %s" % const.HOMEDIR)
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
         self.logger.debug("Current path: %s" % const.ROOTDIR)
         self.logger.debug("Running on: %s %s" % (common.get_operating_system()))
-        self.logger.debug("Python version: %s" % sys.version)
+        self.logger.debug("Python version: %s" % ".".join(str(n) for n in
+                                                        sys.version_info[:3]))
         self.logger.debug("GTK+ version: %s" % ".".join(str(n) for n in
                                                         gtk.gtk_version))
         self.logger.debug("PyGTK version: %s" % ".".join(str(n) for n in
@@ -209,29 +210,9 @@ class Startup(object):
     def exception_hook(self, type_, value, tb):
         import traceback
 
-        # Just fallback when an exception is raised before locale setup
-        try:
-            from translation import gettext as _
-            s = ""
-            _(s)
-        except:
-            self.setup_locale()
-
         tb = "".join(traceback.format_exception(type_, value, tb))
-        print >> sys.stderr, tb
-        use_logger = True
-        if self.logger is None:
-            use_logger = False
-            logfile = open(const.LOGFILE, 'a')
-        for line in tb.split('\n'):
-            if line:
-                if use_logger:
-                    self.logger.critical(line)
-                else:
-                    logfile.write("TRACEBACK: %s\n" % line)
-        if not use_logger:
-            logfile.close()
+        self.logger.critical("Unhandled exception\n%s" % tb)
 
-        from ui import logdialog
-        logdialog.LogDialog(self.db)
+        from ui import exceptiondialog
+        exceptiondialog.ExceptionDialog(self.db, tb)
 

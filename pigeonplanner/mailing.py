@@ -44,7 +44,7 @@ def post_multipart(url, fields, files):
     content_type, body = encode_multipart_formdata(fields, files)
     headers = {'Content-type': content_type, 'Content-length': str(len(body))}
 
-    return common.URLOpen().open(url, body, headers).read().strip()
+    return common.URLOpen().open(url, body, headers, 40).read().strip()
 
 def encode_multipart_formdata(fields, files):
     BOUNDARY = '----------%s' % common.get_random_number(20)

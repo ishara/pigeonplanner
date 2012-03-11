@@ -287,13 +287,14 @@ class URLOpen:
 
         self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
 
-    def open(self, url, body, headers=None):
+    def open(self, url, body, headers=None, timeout=8):
         """
         Open a given url
 
         @param url: The url to open
         @param body: Extra data to send along
         @param headers: Optional header
+        @param timeout: timeout in seconds
         """
 
         if not headers:
@@ -302,5 +303,5 @@ class URLOpen:
             if not "User-Agent" in headers:
                 headers.update(const.USER_AGENT)
 
-        return self.opener.open(urllib2.Request(url, body, headers))
+        return self.opener.open(urllib2.Request(url, body, headers), timeout=timeout)
 
