@@ -7,39 +7,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-11-05 17:07+0100\n"
+"POT-Creation-Date: 2012-03-11 13:59+0100\n"
 "PO-Revision-Date: 2011-11-08 15:34+0000\n"
 "Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-09 04:52+0000\n"
-"X-Generator: Launchpad (build 14263)\n"
+"X-Launchpad-Export-Date: 2012-03-12 04:40+0000\n"
+"X-Generator: Launchpad (build 14933)\n"
 
 #: pigeonplanner/printing.py:165
 msgid "Pedigree of:"
 msgstr "Soyağacı:"
 
-#: pigeonplanner/printing.py:371 pigeonplanner/ui/dialogs.py:426
-#: pigeonplanner/ui/widgets/treeview.py:193
-#: pigeonplanner/ui/tabs/relatives.py:156 glade/BreedingView.ui:438
-#: glade/BreedingView.ui:608 glade/BreedingView.ui:858
-#: glade/BreedingView.ui:1058 glade/ResultWindow.ui:131
-#: glade/ResultParser.ui:307
+#: pigeonplanner/printing.py:371 pigeonplanner/ui/dialogs.py:432
+#: pigeonplanner/ui/widgets/treeview.py:200
+#: pigeonplanner/ui/tabs/relatives.py:156 glade/BreedingView.ui:456
+#: glade/BreedingView.ui:626 glade/BreedingView.ui:877
+#: glade/BreedingView.ui:1077 glade/ResultWindow.ui:131
+#: glade/ResultParser.ui:362
 msgid "Band no."
 msgstr "Marka Numarası"
 
 #: pigeonplanner/printing.py:372 pigeonplanner/printing.py:596
-#: glade/ResultsView.ui:663 glade/BreedingView.ui:719
+#: glade/ResultsView.ui:663 glade/BreedingView.ui:738
 #: glade/ResultWindow.ui:157 glade/DetailsView.ui:212 glade/DetailsView.ui:325
-#: glade/DetailsView.ui:446 glade/Calendar.ui:136 glade/MedicationView.ui:546
-#: glade/MedicationView.ui:631
+#: glade/DetailsView.ui:446 glade/Calendar.ui:136 glade/MedicationView.ui:564
+#: glade/MedicationView.ui:649
 msgid "Date"
 msgstr "Tarih"
 
 #: pigeonplanner/printing.py:373 pigeonplanner/ui/resultwindow.py:123
-#: glade/ResultsView.ui:676 glade/RaceManager.ui:116 glade/ResultWindow.ui:170
+#: glade/ResultsView.ui:676 glade/RaceManager.ui:132 glade/ResultWindow.ui:170
 #: glade/DetailsView.ui:490
 msgid "Racepoint"
 msgstr "Yarış Noktası"
@@ -76,23 +76,23 @@ msgstr "Tür"
 msgid "Category"
 msgstr "Kategori"
 
-#: pigeonplanner/printing.py:380 pigeonplanner/ui/tools/datamanager.py:48
+#: pigeonplanner/printing.py:380 pigeonplanner/ui/tools/datamanager.py:50
 #: glade/ResultsView.ui:340 glade/ResultsView.ui:767 glade/ResultWindow.ui:261
 #: glade/OptionsDialog.ui:743
 msgid "Wind"
 msgstr "Rüzgar"
 
-#: pigeonplanner/printing.py:381 pigeonplanner/ui/tools/datamanager.py:47
+#: pigeonplanner/printing.py:381 pigeonplanner/ui/tools/datamanager.py:49
 #: glade/ResultsView.ui:326 glade/ResultsView.ui:780 glade/ResultWindow.ui:274
 #: glade/OptionsDialog.ui:729
 msgid "Weather"
 msgstr "Hava"
 
 #: pigeonplanner/printing.py:382 glade/ResultsView.ui:354
-#: glade/ResultsView.ui:793 glade/BreedingView.ui:285
-#: glade/BreedingView.ui:1302 glade/ResultWindow.ui:287
+#: glade/ResultsView.ui:793 glade/BreedingView.ui:303
+#: glade/BreedingView.ui:1321 glade/ResultWindow.ui:287
 #: glade/OptionsDialog.ui:759 glade/AddressBook.ui:413 glade/Calendar.ui:261
-#: glade/MedicationView.ui:255 glade/MedicationView.ui:921
+#: glade/MedicationView.ui:272 glade/MedicationView.ui:939
 msgid "Comment"
 msgstr "Açıklama"
 
@@ -101,53 +101,53 @@ msgid "Page"
 msgstr "Sayfa"
 
 #: pigeonplanner/printing.py:587 pigeonplanner/printing.py:609
-#: pigeonplanner/printing.py:610 glade/VelocityCalculator.ui:174
-#: glade/VelocityCalculator.ui:461 glade/VelocityCalculator.ui:894
+#: pigeonplanner/printing.py:610 glade/VelocityCalculator.ui:188
+#: glade/VelocityCalculator.ui:475 glade/VelocityCalculator.ui:908
 msgid "Velocity"
 msgstr "Hız"
 
-#: pigeonplanner/printing.py:598 glade/VelocityCalculator.ui:526
+#: pigeonplanner/printing.py:598 glade/VelocityCalculator.ui:540
 msgid "Released"
 msgstr "Serbest"
 
-#: pigeonplanner/printing.py:600 glade/RaceManager.ui:175
-#: glade/DistanceCalculator.ui:355 glade/VelocityCalculator.ui:148
-#: glade/VelocityCalculator.ui:485
+#: pigeonplanner/printing.py:600 glade/RaceManager.ui:191
+#: glade/DistanceCalculator.ui:369 glade/VelocityCalculator.ui:162
+#: glade/VelocityCalculator.ui:499
 msgid "Distance"
 msgstr "Mesafe"
 
 #: pigeonplanner/printing.py:615 pigeonplanner/printing.py:617
-#: glade/VelocityCalculator.ui:905
+#: glade/VelocityCalculator.ui:919
 msgid "Flight Time"
 msgstr "Uçuş süresi"
 
 #: pigeonplanner/printing.py:622 pigeonplanner/printing.py:624
-#: glade/VelocityCalculator.ui:916
+#: glade/VelocityCalculator.ui:930
 msgid "Time of Arrival"
 msgstr "Varış Zaman"
 
-#: pigeonplanner/startup.py:149 pigeonplanner/ui/pedigreewindow.py:58
-#: pigeonplanner/ui/pedigreewindow.py:70 pigeonplanner/ui/optionsdialog.py:57
+#: pigeonplanner/startup.py:150 pigeonplanner/ui/pedigreewindow.py:70
+#: pigeonplanner/ui/pedigreewindow.py:78 pigeonplanner/ui/optionsdialog.py:57
 #: pigeonplanner/ui/tabs/pedigree.py:27
 msgid "Pedigree"
 msgstr "Soyağacı / Seçere"
 
-#: pigeonplanner/startup.py:150 glade/Dialogs.ui:8 glade/OptionsDialog.ui:1038
+#: pigeonplanner/startup.py:151 glade/Dialogs.ui:8 glade/OptionsDialog.ui:1038
 #: glade/AddressBook.ui:372
 msgid "E-mail"
 msgstr "E-Posta"
 
-#: pigeonplanner/startup.py:151
+#: pigeonplanner/startup.py:152
 msgid "Send"
 msgstr "Gönder"
 
-#: pigeonplanner/startup.py:152
+#: pigeonplanner/startup.py:153
 msgid "Report"
 msgstr "Rapor"
 
 #: pigeonplanner/messages.py:22 pigeonplanner/common.py:252
 #: pigeonplanner/common.py:259 pigeonplanner/ui/exportwindow.py:56
-#: pigeonplanner/ui/tools/distancecalculator.py:59
+#: pigeonplanner/ui/tools/distancecalculator.py:63
 msgid "Error"
 msgstr "Hata"
 
@@ -172,7 +172,7 @@ msgid ""
 "corruption."
 msgstr ""
 
-#: pigeonplanner/messages.py:42 pigeonplanner/ui/mainwindow.py:511
+#: pigeonplanner/messages.py:42 pigeonplanner/ui/mainwindow.py:517
 msgid "Go to the website?"
 msgstr "web sitesine gidin?"
 
@@ -288,8 +288,8 @@ msgid "Removing the selected result"
 msgstr "Seçilen sonuç çıkarma"
 
 #: pigeonplanner/messages.py:104 pigeonplanner/messages.py:107
-#: pigeonplanner/messages.py:156 pigeonplanner/ui/dialogs.py:396
-#: glade/MainWindow.ui:1110
+#: pigeonplanner/messages.py:156 pigeonplanner/ui/dialogs.py:402
+#: glade/MainWindow.ui:1118
 msgid "Are you sure?"
 msgstr "Emin misiniz?"
 
@@ -495,7 +495,7 @@ msgstr "Sayfayı yaklaştır"
 msgid "Zooms the page out"
 msgstr "Sayfayı uzaklaştır"
 
-#: pigeonplanner/ui/printpreview.py:126 glade/PedigreeWindow.ui:8
+#: pigeonplanner/ui/printpreview.py:126 pigeonplanner/ui/pedigreewindow.py:97
 #: glade/ResultWindow.ui:15 glade/PhotoAlbum.ui:50
 msgid "Close this window"
 msgstr "Bu pencereyi kapat"
@@ -504,12 +504,28 @@ msgstr "Bu pencereyi kapat"
 msgid "Zooms to fit the whole page"
 msgstr "Tam sayfayı oturtacak kadar yaklaştır"
 
-#: pigeonplanner/ui/maildialog.py:145
+#: pigeonplanner/ui/pedigreewindow.py:89
+msgid "Save this pedigree"
+msgstr "Bu soyağacı kaydet"
+
+#: pigeonplanner/ui/pedigreewindow.py:93
+msgid "View this pedigree"
+msgstr "Bu Soyağacı Göster"
+
+#: pigeonplanner/ui/pedigreewindow.py:95 glade/MainWindow.ui:66
+msgid "Print this pedigree"
+msgstr "Bu Soyağacı yazdır"
+
+#: pigeonplanner/ui/maildialog.py:149
 msgid "The e-mail has been sent succesfully!"
 msgstr "E-posta başarıyla gönderildi!"
 
-#: pigeonplanner/ui/optionsdialog.py:52 glade/BreedingView.ui:304
-#: glade/BreedingView.ui:1321 glade/OptionsDialog.ui:1367
+#: pigeonplanner/ui/maildialog.py:150
+msgid "Connection to server failed!"
+msgstr ""
+
+#: pigeonplanner/ui/optionsdialog.py:52 glade/BreedingView.ui:322
+#: glade/BreedingView.ui:1340 glade/OptionsDialog.ui:1367
 #: glade/DatabaseTool.ui:234
 msgid "General"
 msgstr "Genel"
@@ -542,7 +558,7 @@ msgstr ""
 "  Melih Odaman https://launchpad.net/~melihodaman\n"
 "  Timo Vanwynsberghe https://launchpad.net/~timovwb"
 
-#: pigeonplanner/ui/dialogs.py:67 glade/MainWindow.ui:52
+#: pigeonplanner/ui/dialogs.py:67 glade/MainWindow.ui:258
 msgid "General information"
 msgstr "Genel Bilgiler"
 
@@ -558,103 +574,101 @@ msgstr "Veri bilgisi"
 msgid "Number of pigeons"
 msgstr "Güvercin sayısı"
 
-#: pigeonplanner/ui/dialogs.py:114
-msgid "Number of cocks"
-msgstr "Erkek sayısı"
+#: pigeonplanner/ui/dialogs.py:114 glade/MainWindow.ui:419
+msgid "Cocks"
+msgstr "Erkekler"
 
-#: pigeonplanner/ui/dialogs.py:116
-msgid "Number of hens"
-msgstr "Dişi Sayısı"
+#: pigeonplanner/ui/dialogs.py:116 glade/MainWindow.ui:451
+msgid "Hens"
+msgstr "Dişiler"
 
-#: pigeonplanner/ui/dialogs.py:118
-msgid "Number of young birds"
-msgstr "Genç Kuş Sayısı"
+#: pigeonplanner/ui/dialogs.py:118 glade/MainWindow.ui:483
+msgid "Young birds"
+msgstr "Genç kuşlar"
 
-#: pigeonplanner/ui/dialogs.py:120
+#: pigeonplanner/ui/dialogs.py:124
 msgid "Number of results"
 msgstr "Sonuç sayısı"
 
-#: pigeonplanner/ui/dialogs.py:142
+#: pigeonplanner/ui/dialogs.py:126
+msgid "Number of couples"
+msgstr ""
+
+#: pigeonplanner/ui/dialogs.py:148
 msgid "Create backup"
 msgstr "Yedek oluştur"
 
-#: pigeonplanner/ui/dialogs.py:143
+#: pigeonplanner/ui/dialogs.py:149
 msgid "Choose a directory where to save the backup"
 msgstr "Burada yedek kaydetmek için bir dizin seçin"
 
-#: pigeonplanner/ui/dialogs.py:149 glade/OptionsDialog.ui:365
+#: pigeonplanner/ui/dialogs.py:155 glade/OptionsDialog.ui:365
 msgid "Backup"
 msgstr "Yedekle"
 
-#: pigeonplanner/ui/dialogs.py:158
+#: pigeonplanner/ui/dialogs.py:164
 msgid "Restore backup"
 msgstr "Yedek Geri Yükleme"
 
-#: pigeonplanner/ui/dialogs.py:159
+#: pigeonplanner/ui/dialogs.py:165
 msgid "Choose a Pigeon Planner backup file to restore"
 msgstr "Geri yüklemek için bir Güvercin Planner yedekleme dosyası seçin"
 
-#: pigeonplanner/ui/dialogs.py:162
+#: pigeonplanner/ui/dialogs.py:168
 msgid "Warning! This will overwrite the existing database!"
 msgstr "Uyarı! Bu mevcut veritabanı üzerine yazılır!"
 
-#: pigeonplanner/ui/dialogs.py:170
+#: pigeonplanner/ui/dialogs.py:176
 msgid "Restore"
 msgstr "Geri Yükle"
 
-#: pigeonplanner/ui/dialogs.py:279
+#: pigeonplanner/ui/dialogs.py:285
 msgid "Only show:"
 msgstr "Sadece göster:"
 
-#: pigeonplanner/ui/dialogs.py:299 pigeonplanner/ui/dialogs.py:414
+#: pigeonplanner/ui/dialogs.py:305 pigeonplanner/ui/dialogs.py:420
 msgid "Search a pigeon"
 msgstr "Güvercin Ara"
 
-#: pigeonplanner/ui/dialogs.py:315
+#: pigeonplanner/ui/dialogs.py:321
 msgid "Search for:"
 msgstr "Bunun için ara:"
 
-#: pigeonplanner/ui/dialogs.py:323
+#: pigeonplanner/ui/dialogs.py:329
 msgid "Search in:"
 msgstr "Burada ara:"
 
-#: pigeonplanner/ui/dialogs.py:324
+#: pigeonplanner/ui/dialogs.py:330
 msgid "Band numbers"
 msgstr "Marka Numarası"
 
-#: pigeonplanner/ui/dialogs.py:326
+#: pigeonplanner/ui/dialogs.py:332
 msgid "Names"
 msgstr "İsimler"
 
-#: pigeonplanner/ui/dialogs.py:390
+#: pigeonplanner/ui/dialogs.py:396
 msgid "Removing the selected medication entry"
 msgstr "Seçilen ilaç girişi çıkarma"
 
-#: pigeonplanner/ui/dialogs.py:392
+#: pigeonplanner/ui/dialogs.py:398
 msgid "Remove this entry for all pigeons?"
 msgstr "Bütün güvercinler için bu giriş kaldırılsın mı?"
 
-#: pigeonplanner/ui/dialogs.py:426 pigeonplanner/ui/widgets/treeview.py:193
+#: pigeonplanner/ui/dialogs.py:432 pigeonplanner/ui/widgets/treeview.py:200
 #: pigeonplanner/ui/tabs/relatives.py:156 glade/ResultWindow.ui:144
-#: glade/MainWindow.ui:861 glade/ResultParser.ui:321
+#: glade/MainWindow.ui:869 glade/ResultParser.ui:376
 msgid "Year"
 msgstr "Yıl"
 
-#: pigeonplanner/ui/dialogs.py:426 pigeonplanner/ui/widgets/treeview.py:193
+#: pigeonplanner/ui/dialogs.py:432 pigeonplanner/ui/widgets/treeview.py:200
 #: glade/OptionsDialog.ui:553 glade/OptionsDialog.ui:1000
 #: glade/OptionsDialog.ui:1202 glade/AddressBook.ui:129
 msgid "Name"
 msgstr "İsim"
 
-#: pigeonplanner/ui/logdialog.py:43
+#: pigeonplanner/ui/logdialog.py:40
 msgid "Logfile Viewer"
 msgstr "Logfile Göster"
-
-#: pigeonplanner/ui/logdialog.py:145
-msgid ""
-"Chances are that your problem is already fixed in this new version. Send a "
-"report anyway?"
-msgstr ""
 
 #: pigeonplanner/ui/filechooser.py:54
 msgid "Preview"
@@ -682,8 +696,8 @@ msgid "Title"
 msgstr ""
 
 #: pigeonplanner/ui/filechooser.py:167 glade/Calendar.ui:225
-#: glade/MedicationView.ui:199 glade/MedicationView.ui:559
-#: glade/MedicationView.ui:732
+#: glade/MedicationView.ui:216 glade/MedicationView.ui:577
+#: glade/MedicationView.ui:750
 msgid "Description"
 msgstr "Açıklama"
 
@@ -716,30 +730,30 @@ msgstr "Yarış Yılı"
 msgid "Coefficient"
 msgstr "Katsayı"
 
-#: pigeonplanner/ui/resultwindow.py:126 glade/ResultParser.ui:335
+#: pigeonplanner/ui/resultwindow.py:126 glade/ResultParser.ui:390
 msgid "Place"
 msgstr "Yer"
 
-#: pigeonplanner/ui/mainwindow.py:265
+#: pigeonplanner/ui/mainwindow.py:267
 #, python-format
 msgid "Pigeon %s has been added"
 msgstr "Güvercin %s eklendi"
 
-#: pigeonplanner/ui/mainwindow.py:361
+#: pigeonplanner/ui/mainwindow.py:363
 #, python-format
 msgid "Pigeon %s has been removed"
 msgstr "Güvercin %s kaldırıldı"
 
-#: pigeonplanner/ui/mainwindow.py:371
+#: pigeonplanner/ui/mainwindow.py:373
 #, python-format
 msgid "%s pigeons have been removed"
 msgstr "%s güvercinler çıkarıldı"
 
-#: pigeonplanner/ui/mainwindow.py:509 glade/MainWindow.ui:59
+#: pigeonplanner/ui/mainwindow.py:515 glade/MainWindow.ui:250
 msgid "Search for updates..."
 msgstr "Güncelleştirmelerini arayın ..."
 
-#: pigeonplanner/ui/detailsview.py:53 glade/DetailsView.ui:1981
+#: pigeonplanner/ui/detailsview.py:53 glade/DetailsView.ui:2027
 msgid "Details of pigeon"
 msgstr "Güvercin Detayları"
 
@@ -748,8 +762,28 @@ msgstr "Güvercin Detayları"
 msgid "Details of %s"
 msgstr "Detaylar %s"
 
-#: pigeonplanner/ui/widgets/pedigreeboxes.py:70
-#: pigeonplanner/ui/widgets/pedigreeboxes.py:258
+#: pigeonplanner/ui/exceptiondialog.py:48
+msgid ""
+"Chances are that your problem is already fixed in this new version. Send a "
+"report anyway?"
+msgstr ""
+
+#: pigeonplanner/ui/exceptiondialog.py:74
+msgid "Pigeon Planner has experienced an unexpected error"
+msgstr ""
+
+#: pigeonplanner/ui/exceptiondialog.py:82
+msgid ""
+"You can help the Pigeon Planner developers by taking the time to report this "
+"bug."
+msgstr ""
+
+#: pigeonplanner/ui/exceptiondialog.py:100
+msgid "Error Detail"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:73
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:261
 msgid "<edit>"
 msgstr "<Düzenle>"
 
@@ -837,53 +871,53 @@ msgstr "Dakikada Feet"
 msgid "Mile per Hour"
 msgstr "Saatte Mile"
 
-#: pigeonplanner/ui/widgets/treeview.py:172
+#: pigeonplanner/ui/widgets/treeview.py:179
 msgid "Filter pigeons"
 msgstr "Güvercinleri Filtrele"
 
-#: pigeonplanner/ui/widgets/treeview.py:177
-#: pigeonplanner/ui/widgets/treeview.py:193
+#: pigeonplanner/ui/widgets/treeview.py:184
+#: pigeonplanner/ui/widgets/treeview.py:200
 #: pigeonplanner/ui/tabs/relatives.py:172 glade/OptionsDialog.ui:607
-#: glade/OptionsDialog.ui:1226 glade/DetailsView.ui:1052
-#: glade/DetailsView.ui:1648 glade/MainWindow.ui:813
+#: glade/OptionsDialog.ui:1226 glade/DetailsView.ui:1077
+#: glade/DetailsView.ui:1681 glade/MainWindow.ui:821
 msgid "Sex"
 msgstr "Cinsiyet"
 
-#: pigeonplanner/ui/widgets/treeview.py:178
-#: pigeonplanner/ui/tools/datamanager.py:40
+#: pigeonplanner/ui/widgets/treeview.py:185
+#: pigeonplanner/ui/tools/datamanager.py:42
 msgid "Colours"
 msgstr "Renkler"
 
-#: pigeonplanner/ui/widgets/treeview.py:180
-#: pigeonplanner/ui/tools/datamanager.py:45
+#: pigeonplanner/ui/widgets/treeview.py:187
+#: pigeonplanner/ui/tools/datamanager.py:47
 msgid "Strains"
 msgstr "Suşları"
 
-#: pigeonplanner/ui/widgets/treeview.py:182
-#: pigeonplanner/ui/tools/datamanager.py:46
+#: pigeonplanner/ui/widgets/treeview.py:189
+#: pigeonplanner/ui/tools/datamanager.py:48
 msgid "Lofts"
 msgstr "Yuva"
 
-#: pigeonplanner/ui/widgets/treeview.py:185
-#: pigeonplanner/ui/widgets/treeview.py:194 glade/OptionsDialog.ui:621
+#: pigeonplanner/ui/widgets/treeview.py:192
+#: pigeonplanner/ui/widgets/treeview.py:201 glade/OptionsDialog.ui:621
 msgid "Status"
 msgstr "Durum"
 
-#: pigeonplanner/ui/widgets/treeview.py:193 glade/OptionsDialog.ui:579
-#: glade/OptionsDialog.ui:1212 glade/DetailsView.ui:1041
-#: glade/DetailsView.ui:1637
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:579
+#: glade/OptionsDialog.ui:1212 glade/DetailsView.ui:1066
+#: glade/DetailsView.ui:1670
 msgid "Colour"
 msgstr "Renk"
 
-#: pigeonplanner/ui/widgets/treeview.py:194
-#: pigeonplanner/ui/tools/distancecalculator.py:133 glade/OptionsDialog.ui:593
-#: glade/DetailsView.ui:1015 glade/DetailsView.ui:1454
-#: glade/MedicationView.ui:356
+#: pigeonplanner/ui/widgets/treeview.py:201
+#: pigeonplanner/ui/tools/distancecalculator.py:140 glade/OptionsDialog.ui:593
+#: glade/DetailsView.ui:1040 glade/DetailsView.ui:1486
+#: glade/MedicationView.ui:373
 msgid "Loft"
 msgstr "Yuva"
 
-#: pigeonplanner/ui/widgets/treeview.py:194 glade/OptionsDialog.ui:563
-#: glade/DetailsView.ui:1065 glade/DetailsView.ui:1687
+#: pigeonplanner/ui/widgets/treeview.py:201 glade/OptionsDialog.ui:563
+#: glade/DetailsView.ui:1090 glade/DetailsView.ui:1720
 msgid "Strain"
 msgstr "5.soy"
 
@@ -913,8 +947,8 @@ msgstr ""
 msgid "Off"
 msgstr ""
 
-#: pigeonplanner/ui/tabs/medication.py:33 glade/MedicationView.ui:9
-#: glade/MedicationView.ui:227 glade/MedicationView.ui:783
+#: pigeonplanner/ui/tabs/medication.py:35 glade/MedicationView.ui:9
+#: glade/MedicationView.ui:244 glade/MedicationView.ui:801
 msgid "Medication"
 msgstr "Ilaç"
 
@@ -975,30 +1009,30 @@ msgstr "Bildirim %s gün ayarlanır"
 msgid "No notification set"
 msgstr "Set bildirimi yok"
 
-#: pigeonplanner/ui/tools/distancecalculator.py:57
+#: pigeonplanner/ui/tools/distancecalculator.py:61
 msgid ""
 "The latitude and longitude need to be in DD.dddddd° format to use this "
 "function."
 msgstr ""
 
-#: pigeonplanner/ui/tools/distancecalculator.py:132
+#: pigeonplanner/ui/tools/distancecalculator.py:139
 msgid "Custom"
 msgstr ""
 
-#: pigeonplanner/ui/tools/datamanager.py:41
+#: pigeonplanner/ui/tools/datamanager.py:43
 msgid "Sectors"
 msgstr "Sektör"
 
-#: pigeonplanner/ui/tools/datamanager.py:42
+#: pigeonplanner/ui/tools/datamanager.py:44
 msgid "Types"
 msgstr "Tipler"
 
-#: pigeonplanner/ui/tools/datamanager.py:43
+#: pigeonplanner/ui/tools/datamanager.py:45
 msgid "Categories"
 msgstr "Kategoriler"
 
-#: pigeonplanner/ui/tools/datamanager.py:44
-#: pigeonplanner/ui/tools/datamanager.py:72
+#: pigeonplanner/ui/tools/datamanager.py:46
+#: pigeonplanner/ui/tools/datamanager.py:77
 msgid "Racepoints"
 msgstr "Yarış Noktası"
 
@@ -1010,8 +1044,8 @@ msgstr ""
 msgid "Data Technology-Deerlijk"
 msgstr ""
 
-#: glade/ResultsView.ui:300 glade/BreedingView.ui:103
-#: glade/MedicationView.ui:187
+#: glade/ResultsView.ui:300 glade/BreedingView.ui:120
+#: glade/MedicationView.ui:204
 msgid "Date*"
 msgstr ""
 
@@ -1035,122 +1069,92 @@ msgstr ""
 msgid "Breeding data"
 msgstr ""
 
-#: glade/BreedingView.ui:165
+#: glade/BreedingView.ui:182
 msgid "Mate*"
 msgstr ""
 
-#: glade/BreedingView.ui:209 glade/BreedingView.ui:1223
+#: glade/BreedingView.ui:226 glade/BreedingView.ui:1242
 msgid "Series"
 msgstr ""
 
-#: glade/BreedingView.ui:241 glade/BreedingView.ui:1264
+#: glade/BreedingView.ui:258 glade/BreedingView.ui:1283
 msgid "Nestbox"
 msgstr ""
 
-#: glade/BreedingView.ui:357 glade/BreedingView.ui:527
-#: glade/BreedingView.ui:803 glade/BreedingView.ui:1003
+#: glade/BreedingView.ui:375 glade/BreedingView.ui:545
+#: glade/BreedingView.ui:822 glade/BreedingView.ui:1022
 msgid "Laid"
 msgstr ""
 
-#: glade/BreedingView.ui:387 glade/BreedingView.ui:557
-#: glade/BreedingView.ui:831 glade/BreedingView.ui:1031
+#: glade/BreedingView.ui:405 glade/BreedingView.ui:575
+#: glade/BreedingView.ui:850 glade/BreedingView.ui:1050
 msgid "Hatched"
 msgstr ""
 
-#: glade/BreedingView.ui:400 glade/BreedingView.ui:570
-#: glade/BreedingView.ui:876 glade/BreedingView.ui:1076
+#: glade/BreedingView.ui:418 glade/BreedingView.ui:588
+#: glade/BreedingView.ui:895 glade/BreedingView.ui:1095
 msgid "Successful"
 msgstr ""
 
-#: glade/BreedingView.ui:451 glade/BreedingView.ui:621
+#: glade/BreedingView.ui:469 glade/BreedingView.ui:639
 msgid "Add pigeon to list"
 msgstr ""
 
-#: glade/BreedingView.ui:479 glade/BreedingView.ui:956
+#: glade/BreedingView.ui:497 glade/BreedingView.ui:975
 msgid "Egg 1"
 msgstr ""
 
-#: glade/BreedingView.ui:649 glade/BreedingView.ui:1156
+#: glade/BreedingView.ui:667 glade/BreedingView.ui:1175
 msgid "Egg 2"
 msgstr ""
 
-#: glade/BreedingView.ui:733
+#: glade/BreedingView.ui:752
 msgid "Mate"
 msgstr ""
 
-#: glade/Dialogs.ui:117
-msgid "Only report this logfile if an unexpected error has happened."
-msgstr ""
-
-#: glade/Dialogs.ui:154
+#: glade/Dialogs.ui:114
 msgid "Send to:"
 msgstr ""
 
-#: glade/Dialogs.ui:189
+#: glade/Dialogs.ui:149
 msgid "Your name:"
 msgstr ""
 
-#: glade/Dialogs.ui:224
+#: glade/Dialogs.ui:184
 msgid "Your e-mailaddress:"
 msgstr ""
 
-#: glade/Dialogs.ui:258
+#: glade/Dialogs.ui:218
 msgid "Subject:"
 msgstr ""
 
-#: glade/Dialogs.ui:297
+#: glade/Dialogs.ui:257
 msgid "Message:"
 msgstr ""
 
-#: glade/Dialogs.ui:420
+#: glade/Dialogs.ui:380
 msgid "Attached file:"
 msgstr ""
 
-#: glade/Dialogs.ui:443
+#: glade/Dialogs.ui:403
 msgid "Sending..."
 msgstr "Gönderiliyor..."
 
-#: glade/PedigreeWindow.ui:15 glade/MainWindow.ui:246
-msgid "Print this pedigree"
-msgstr "Bu Soyağacı yazdır"
-
-#: glade/PedigreeWindow.ui:22
-msgid "View this pedigree"
-msgstr "Bu Soyağacı Göster"
-
-#: glade/PedigreeWindow.ui:29
-msgid "Email this pedigree"
-msgstr "Bu soyağacı Email"
-
-#: glade/PedigreeWindow.ui:37
-msgid "Save this pedigree"
-msgstr "Bu soyağacı kaydet"
-
-#: glade/PedigreeWindow.ui:99 glade/DetailsView.ui:1002
-#: glade/DetailsView.ui:1394
-msgid "Sire"
-msgstr "Baba"
-
-#: glade/PedigreeWindow.ui:150 glade/DetailsView.ui:989
-#: glade/DetailsView.ui:1381
-msgid "Dam"
-msgstr "Anne"
-
-#: glade/RaceManager.ui:20 glade/MainWindow.ui:111
+#: glade/RaceManager.ui:20 glade/MainWindow.ui:199
 msgid "Racepoint manager"
 msgstr ""
 
-#: glade/RaceManager.ui:128 glade/DistanceCalculator.ui:111
-#: glade/DistanceCalculator.ui:239 glade/AddressBook.ui:441
+#: glade/RaceManager.ui:144 glade/DistanceCalculator.ui:125
+#: glade/DistanceCalculator.ui:253 glade/AddressBook.ui:441
 msgid "Latitude"
 msgstr ""
 
-#: glade/RaceManager.ui:142 glade/DistanceCalculator.ui:125
-#: glade/DistanceCalculator.ui:253 glade/AddressBook.ui:469
+#: glade/RaceManager.ui:158 glade/DistanceCalculator.ui:139
+#: glade/DistanceCalculator.ui:267 glade/AddressBook.ui:469
 msgid "Longitude"
 msgstr ""
 
-#: glade/RaceManager.ui:189
+#: glade/RaceManager.ui:205
 msgid "Click here to add more racepoints"
 msgstr ""
 
@@ -1162,7 +1166,7 @@ msgstr "Sonuçları yazdır"
 msgid "Filter"
 msgstr ""
 
-#: glade/ResultWindow.ui:23 glade/MainWindow.ui:133
+#: glade/ResultWindow.ui:23 glade/MainWindow.ui:179
 msgid "Set filter options"
 msgstr "filtre seçenekleri"
 
@@ -1226,8 +1230,8 @@ msgstr ""
 msgid "Make an automatic backup"
 msgstr "Otomatik bir yedekleme yapın"
 
-#: glade/OptionsDialog.ui:310 glade/DistanceCalculator.ui:99
-#: glade/DistanceCalculator.ui:227
+#: glade/OptionsDialog.ui:310 glade/DistanceCalculator.ui:113
+#: glade/DistanceCalculator.ui:241
 msgid "Location"
 msgstr "Konumu"
 
@@ -1259,19 +1263,19 @@ msgstr ""
 msgid "Results Columns"
 msgstr ""
 
-#: glade/OptionsDialog.ui:812 glade/MainWindow.ui:39
+#: glade/OptionsDialog.ui:812 glade/MainWindow.ui:273
 msgid "Show or hide the navigation arrows"
 msgstr "navigasyon okları göster veya gizle"
 
-#: glade/OptionsDialog.ui:827 glade/MainWindow.ui:32
+#: glade/OptionsDialog.ui:827 glade/MainWindow.ui:280
 msgid "Show or hide pigeon statistics"
 msgstr "güvercin istatistiklerini göster veya gizle"
 
-#: glade/OptionsDialog.ui:842 glade/MainWindow.ui:25
+#: glade/OptionsDialog.ui:842 glade/MainWindow.ui:287
 msgid "Show or hide the toolbar"
 msgstr "Araç çubuğunu göster veya gizle"
 
-#: glade/OptionsDialog.ui:857 glade/MainWindow.ui:18
+#: glade/OptionsDialog.ui:857 glade/MainWindow.ui:294
 msgid "Show or hide the statusbar"
 msgstr "Durum çubuğunu gizle ya da göster"
 
@@ -1303,8 +1307,8 @@ msgstr "Pedigree düzeni:"
 msgid "Layout"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1240 glade/DetailsView.ui:1029
-#: glade/DetailsView.ui:1604
+#: glade/OptionsDialog.ui:1240 glade/DetailsView.ui:1054
+#: glade/DetailsView.ui:1636
 msgid "Extra"
 msgstr "Ekstra"
 
@@ -1324,23 +1328,23 @@ msgstr "Sütun adlarını göster"
 msgid "Show the date"
 msgstr "Tarih göster"
 
-#: glade/DataManager.ui:26 glade/MainWindow.ui:83
+#: glade/DataManager.ui:26 glade/MainWindow.ui:227
 msgid "Data manager"
 msgstr "Veri yöneticisi"
 
-#: glade/DataManager.ui:98
+#: glade/DataManager.ui:112
 msgid "Dataset"
 msgstr "Veri seti"
 
-#: glade/DataManager.ui:109 glade/DataManager.ui:217
+#: glade/DataManager.ui:123 glade/DataManager.ui:231
 msgid "Item"
 msgstr "Öğe"
 
-#: glade/DataManager.ui:236
+#: glade/DataManager.ui:250
 msgid "Manage items"
 msgstr ""
 
-#: glade/DataManager.ui:358
+#: glade/DataManager.ui:372
 msgid "Unused objects"
 msgstr ""
 
@@ -1369,13 +1373,13 @@ msgstr "Ekstra bilgi bulunmamaktadır."
 msgid "Buyer"
 msgstr "Alıcı"
 
-#: glade/DetailsView.ui:567 glade/DistanceCalculator.ui:189
-#: glade/MainWindow.ui:940
+#: glade/DetailsView.ui:567 glade/DistanceCalculator.ui:203
+#: glade/MainWindow.ui:948
 msgid "From"
 msgstr "Kimden"
 
-#: glade/DetailsView.ui:626 glade/DistanceCalculator.ui:317
-#: glade/MainWindow.ui:888
+#: glade/DetailsView.ui:626 glade/DistanceCalculator.ui:331
+#: glade/MainWindow.ui:896
 msgid "To"
 msgstr "Kime"
 
@@ -1391,256 +1395,262 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: glade/DistanceCalculator.ui:26 glade/MainWindow.ui:118
+#: glade/DetailsView.ui:861
+msgid ""
+"Unable to retrieve data. The requested pigeon is probably removed from the "
+"database."
+msgstr ""
+
+#: glade/DetailsView.ui:1014 glade/DetailsView.ui:1413
+msgid "Dam"
+msgstr "Anne"
+
+#: glade/DetailsView.ui:1027 glade/DetailsView.ui:1426
+msgid "Sire"
+msgstr "Baba"
+
+#: glade/DistanceCalculator.ui:26 glade/MainWindow.ui:192
 msgid "Distance calculator"
 msgstr ""
 
-#: glade/DistanceCalculator.ui:401 glade/VelocityCalculator.ui:185
-#: glade/VelocityCalculator.ui:551
+#: glade/DistanceCalculator.ui:415 glade/VelocityCalculator.ui:199
+#: glade/VelocityCalculator.ui:565
 msgid "Calculate"
 msgstr "Hesapla"
 
-#: glade/DistanceCalculator.ui:432
+#: glade/DistanceCalculator.ui:446
 msgid "Result"
 msgstr ""
 
 #: glade/MainWindow.ui:10
-msgid "Export..."
+msgid "View online help"
 msgstr ""
 
-#: glade/MainWindow.ui:11
-msgid "Export data to other formats"
-msgstr ""
-
-#: glade/MainWindow.ui:17
-msgid "Statusbar"
-msgstr "Durum Çubuğu"
-
-#: glade/MainWindow.ui:24
-msgid "Toolbar"
-msgstr "Araç Çubuğu"
-
-#: glade/MainWindow.ui:31
-msgid "Statistics"
-msgstr "İstatistikler"
-
-#: glade/MainWindow.ui:38
-msgid "Navigation arrows"
-msgstr "Navigasyon okları"
-
-#: glade/MainWindow.ui:45
-msgid "About this application"
-msgstr "Bu program hakkında"
-
-#: glade/MainWindow.ui:60
-msgid "Search online for program updates"
-msgstr "Program güncelleştirmelerini arayın online"
-
-#: glade/MainWindow.ui:67
-msgid "Forum"
-msgstr "Forum"
-
-#: glade/MainWindow.ui:68
-msgid "Go to the forum for online help"
-msgstr "Online yardım için forum git"
-
-#: glade/MainWindow.ui:75
-msgid "Website"
-msgstr ""
-
-#: glade/MainWindow.ui:76
-msgid "Go to the website for more information"
-msgstr "Daha fazla bilgi için web sitesine gidin"
-
-#: glade/MainWindow.ui:84
-msgid "Manage your data"
-msgstr "Verilerinizi yönetin"
-
-#: glade/MainWindow.ui:90 glade/Calendar.ui:14
-msgid "Calendar"
-msgstr "Takvim"
-
-#: glade/MainWindow.ui:91
-msgid "View the calendar"
-msgstr "takvim göster"
-
-#: glade/MainWindow.ui:97 glade/AddressBook.ui:9
-msgid "Address book"
-msgstr "Adres Defteri"
-
-#: glade/MainWindow.ui:98
-msgid "View the address book"
-msgstr "Adres Defteri göster"
-
-#: glade/MainWindow.ui:104
-msgid "Photo album"
-msgstr ""
-
-#: glade/MainWindow.ui:105
-msgid "View the images of your pigeons"
-msgstr "Senin güvercin görüntüleri Profili"
-
-#: glade/MainWindow.ui:112
-msgid "Manage the racepoints and distances"
-msgstr ""
-
-#: glade/MainWindow.ui:119
-msgid "Calculate the distance between locations"
-msgstr ""
-
-#: glade/MainWindow.ui:125 glade/VelocityCalculator.ui:85
-msgid "Velocity calculator"
-msgstr "Hız hesap makinesi"
-
-#: glade/MainWindow.ui:126
-msgid "Calculate the velocity of flights"
-msgstr "Uçuş hesaplama hızı"
-
-#: glade/MainWindow.ui:132
-msgid "_Filter..."
-msgstr "_Filtre..."
-
-#: glade/MainWindow.ui:139
-msgid "Configure the application"
-msgstr "Uygulamayı yapılandır"
-
-#: glade/MainWindow.ui:147
-msgid "Add resul_t"
-msgstr "Sonuç Ekle"
-
-#: glade/MainWindow.ui:148
-msgid "Add a new result for this pigeon"
-msgstr "Bu güvercin için yeni bir sonuc ekle"
-
-#: glade/MainWindow.ui:155 glade/MainWindow.ui:245
-msgid "_Pedigree"
-msgstr "_Safkan"
-
-#: glade/MainWindow.ui:156
-msgid "View the detailed pedigree of this pigeon"
-msgstr "Bu güvercin ayrıntılı soyağacı Profili"
-
-#: glade/MainWindow.ui:164
-msgid "Remove the selected pigeon"
-msgstr "Seçilen güvercin sil"
-
-#: glade/MainWindow.ui:172
-msgid "Edit the selected pigeon"
-msgstr "Seçilen güvercin Düzenle"
-
-#: glade/MainWindow.ui:180
-msgid "_Find..."
-msgstr "_Bul..."
-
-#: glade/MainWindow.ui:181
-msgid "Search through the list of pigeons"
-msgstr "Güvercin listesinde ara"
-
-#: glade/MainWindow.ui:189
-msgid "_Logfile Viewer"
-msgstr "_Log Dosyası Göster"
-
-#: glade/MainWindow.ui:190
-msgid "See the logfile"
-msgstr "logdosyası bak"
-
-#: glade/MainWindow.ui:198 glade/MainWindow.ui:715
-msgid "Add a range of pigeons"
-msgstr "Güvercinden oluşan bir aralığı ekle"
-
-#: glade/MainWindow.ui:206
-msgid "Add a new pigeon"
-msgstr "Yeni bir güvercin ekle"
-
-#: glade/MainWindow.ui:214
-msgid "Quit the program"
-msgstr "Programdan çık"
-
-#: glade/MainWindow.ui:222
-msgid "_Restore"
-msgstr "_Geri Yükle"
-
-#: glade/MainWindow.ui:223
-msgid "Restore a backup of your database"
-msgstr "Veritabanı yedeğini geri yükleme"
-
-#: glade/MainWindow.ui:230 glade/MainWindow.ui:277
-msgid "_Backup"
-msgstr "_Yedek"
-
-#: glade/MainWindow.ui:231
-msgid "Create a backup of your database"
-msgstr "Veritabanı yedeğini oluşturma"
-
-#: glade/MainWindow.ui:238
-msgid "Blank pedigree"
-msgstr "Boş soyağacı"
-
-#: glade/MainWindow.ui:239
-msgid "Print a blank pedigree"
-msgstr "Boş soyağacı yazdır"
-
-#: glade/MainWindow.ui:252
-msgid "_Help"
-msgstr "_Yardım"
-
-#: glade/MainWindow.ui:257
-msgid "_Tools"
-msgstr "_Araçlar"
-
-#: glade/MainWindow.ui:262
-msgid "_View"
-msgstr "_Görünüm"
-
-#: glade/MainWindow.ui:267
-msgid "_Edit"
-msgstr "_Düzenle"
-
-#: glade/MainWindow.ui:272
-msgid "_Pigeon"
-msgstr "_Güvercin"
-
-#: glade/MainWindow.ui:287
-msgid "_File"
-msgstr "_Dosya"
-
-#: glade/MainWindow.ui:292
+#: glade/MainWindow.ui:18
 msgid "Select all"
 msgstr ""
 
-#: glade/MainWindow.ui:293
+#: glade/MainWindow.ui:19
 msgid "Select all pigeons"
 msgstr ""
 
-#: glade/MainWindow.ui:383
+#: glade/MainWindow.ui:25
+msgid "_File"
+msgstr "_Dosya"
+
+#: glade/MainWindow.ui:35 glade/MainWindow.ui:79
+msgid "_Backup"
+msgstr "_Yedek"
+
+#: glade/MainWindow.ui:40
+msgid "_Pigeon"
+msgstr "_Güvercin"
+
+#: glade/MainWindow.ui:45
+msgid "_Edit"
+msgstr "_Düzenle"
+
+#: glade/MainWindow.ui:50
+msgid "_View"
+msgstr "_Görünüm"
+
+#: glade/MainWindow.ui:55
+msgid "_Tools"
+msgstr "_Araçlar"
+
+#: glade/MainWindow.ui:60
+msgid "_Help"
+msgstr "_Yardım"
+
+#: glade/MainWindow.ui:65 glade/MainWindow.ui:153
+msgid "_Pedigree"
+msgstr "_Safkan"
+
+#: glade/MainWindow.ui:72
+msgid "Blank pedigree"
+msgstr "Boş soyağacı"
+
+#: glade/MainWindow.ui:73
+msgid "Print a blank pedigree"
+msgstr "Boş soyağacı yazdır"
+
+#: glade/MainWindow.ui:80
+msgid "Create a backup of your database"
+msgstr "Veritabanı yedeğini oluşturma"
+
+#: glade/MainWindow.ui:87
+msgid "_Restore"
+msgstr "_Geri Yükle"
+
+#: glade/MainWindow.ui:88
+msgid "Restore a backup of your database"
+msgstr "Veritabanı yedeğini geri yükleme"
+
+#: glade/MainWindow.ui:95
+msgid "Quit the program"
+msgstr "Programdan çık"
+
+#: glade/MainWindow.ui:103
+msgid "Add a new pigeon"
+msgstr "Yeni bir güvercin ekle"
+
+#: glade/MainWindow.ui:111 glade/MainWindow.ui:723
+msgid "Add a range of pigeons"
+msgstr "Güvercinden oluşan bir aralığı ekle"
+
+#: glade/MainWindow.ui:119
+msgid "_Logfile Viewer"
+msgstr "_Log Dosyası Göster"
+
+#: glade/MainWindow.ui:120
+msgid "See the logfile"
+msgstr "logdosyası bak"
+
+#: glade/MainWindow.ui:128
+msgid "_Find..."
+msgstr "_Bul..."
+
+#: glade/MainWindow.ui:129
+msgid "Search through the list of pigeons"
+msgstr "Güvercin listesinde ara"
+
+#: glade/MainWindow.ui:137
+msgid "Edit the selected pigeon"
+msgstr "Seçilen güvercin Düzenle"
+
+#: glade/MainWindow.ui:145
+msgid "Remove the selected pigeon"
+msgstr "Seçilen güvercin sil"
+
+#: glade/MainWindow.ui:154
+msgid "View the detailed pedigree of this pigeon"
+msgstr "Bu güvercin ayrıntılı soyağacı Profili"
+
+#: glade/MainWindow.ui:162
+msgid "Add resul_t"
+msgstr "Sonuç Ekle"
+
+#: glade/MainWindow.ui:163
+msgid "Add a new result for this pigeon"
+msgstr "Bu güvercin için yeni bir sonuc ekle"
+
+#: glade/MainWindow.ui:170
+msgid "Configure the application"
+msgstr "Uygulamayı yapılandır"
+
+#: glade/MainWindow.ui:178
+msgid "_Filter..."
+msgstr "_Filtre..."
+
+#: glade/MainWindow.ui:185 glade/VelocityCalculator.ui:85
+msgid "Velocity calculator"
+msgstr "Hız hesap makinesi"
+
+#: glade/MainWindow.ui:186
+msgid "Calculate the velocity of flights"
+msgstr "Uçuş hesaplama hızı"
+
+#: glade/MainWindow.ui:193
+msgid "Calculate the distance between locations"
+msgstr ""
+
+#: glade/MainWindow.ui:200
+msgid "Manage the racepoints and distances"
+msgstr ""
+
+#: glade/MainWindow.ui:206
+msgid "Photo album"
+msgstr ""
+
+#: glade/MainWindow.ui:207
+msgid "View the images of your pigeons"
+msgstr "Senin güvercin görüntüleri Profili"
+
+#: glade/MainWindow.ui:213 glade/AddressBook.ui:9
+msgid "Address book"
+msgstr "Adres Defteri"
+
+#: glade/MainWindow.ui:214
+msgid "View the address book"
+msgstr "Adres Defteri göster"
+
+#: glade/MainWindow.ui:220 glade/Calendar.ui:14
+msgid "Calendar"
+msgstr "Takvim"
+
+#: glade/MainWindow.ui:221
+msgid "View the calendar"
+msgstr "takvim göster"
+
+#: glade/MainWindow.ui:228
+msgid "Manage your data"
+msgstr "Verilerinizi yönetin"
+
+#: glade/MainWindow.ui:234
+msgid "Website"
+msgstr ""
+
+#: glade/MainWindow.ui:235
+msgid "Go to the website for more information"
+msgstr "Daha fazla bilgi için web sitesine gidin"
+
+#: glade/MainWindow.ui:242
+msgid "Forum"
+msgstr "Forum"
+
+#: glade/MainWindow.ui:243
+msgid "Go to the forum for online help"
+msgstr "Online yardım için forum git"
+
+#: glade/MainWindow.ui:251
+msgid "Search online for program updates"
+msgstr "Program güncelleştirmelerini arayın online"
+
+#: glade/MainWindow.ui:265
+msgid "About this application"
+msgstr "Bu program hakkında"
+
+#: glade/MainWindow.ui:272
+msgid "Navigation arrows"
+msgstr "Navigasyon okları"
+
+#: glade/MainWindow.ui:279
+msgid "Statistics"
+msgstr "İstatistikler"
+
+#: glade/MainWindow.ui:286
+msgid "Toolbar"
+msgstr "Araç Çubuğu"
+
+#: glade/MainWindow.ui:293
+msgid "Statusbar"
+msgstr "Durum Çubuğu"
+
+#: glade/MainWindow.ui:300
+msgid "Export..."
+msgstr ""
+
+#: glade/MainWindow.ui:301
+msgid "Export data to other formats"
+msgstr ""
+
+#: glade/MainWindow.ui:391
 msgid "Total"
 msgstr "Toplam"
 
-#: glade/MainWindow.ui:411
-msgid "Cocks"
-msgstr "Erkekler"
-
-#: glade/MainWindow.ui:443
-msgid "Hens"
-msgstr "Dişiler"
-
-#: glade/MainWindow.ui:475
-msgid "Young birds"
-msgstr "Genç kuşlar"
-
-#: glade/MainWindow.ui:997
+#: glade/MainWindow.ui:1005
 msgid "Remove pigeon"
 msgstr "Güvercin Kaldır"
 
-#: glade/MainWindow.ui:1086
+#: glade/MainWindow.ui:1094
 msgid "The following pigeon will be removed:"
 msgstr "Aşağıdaki güvercin kaldırılacaktır:"
 
-#: glade/MainWindow.ui:1124
+#: glade/MainWindow.ui:1132
 msgid "Keep this pigeon in the pedigree"
 msgstr "safkan bu güvercin tutun"
 
-#: glade/MainWindow.ui:1140
+#: glade/MainWindow.ui:1148
 msgid "Keep results of this pigeon"
 msgstr "Bu güvercin sonuçları tutun"
 
@@ -1668,27 +1678,27 @@ msgstr "Erken uyarı!"
 msgid "Number of days in advance:"
 msgstr "Önceden gün sayısı:"
 
-#: glade/VelocityCalculator.ui:162
+#: glade/VelocityCalculator.ui:176
 msgid "Time"
 msgstr "Süre"
 
-#: glade/VelocityCalculator.ui:304 glade/VelocityCalculator.ui:704
+#: glade/VelocityCalculator.ui:318 glade/VelocityCalculator.ui:718
 msgid "Hours"
 msgstr "Saatler"
 
-#: glade/VelocityCalculator.ui:328 glade/VelocityCalculator.ui:728
+#: glade/VelocityCalculator.ui:342 glade/VelocityCalculator.ui:742
 msgid "Minutes"
 msgstr "Dakikalar"
 
-#: glade/VelocityCalculator.ui:352 glade/VelocityCalculator.ui:752
+#: glade/VelocityCalculator.ui:366 glade/VelocityCalculator.ui:766
 msgid "Seconds"
 msgstr "Saniyeler"
 
-#: glade/VelocityCalculator.ui:539
+#: glade/VelocityCalculator.ui:553
 msgid "Range"
 msgstr "Aralık"
 
-#: glade/VelocityCalculator.ui:943
+#: glade/VelocityCalculator.ui:957
 msgid "Prognosis"
 msgstr "Prognoz"
 
@@ -1717,18 +1727,26 @@ msgid "Racepoint:"
 msgstr ""
 
 #: glade/ResultParser.ui:182
+msgid "Sector:"
+msgstr ""
+
+#: glade/ResultParser.ui:196
+msgid "Category:"
+msgstr ""
+
+#: glade/ResultParser.ui:210
 msgid "Pigeons:"
 msgstr ""
 
-#: glade/ResultParser.ui:261
+#: glade/ResultParser.ui:316
 msgid "No results were found for your pigeons"
 msgstr ""
 
-#: glade/ResultParser.ui:436
+#: glade/ResultParser.ui:509
 msgid "Parser error"
 msgstr ""
 
-#: glade/ResultParser.ui:498
+#: glade/ResultParser.ui:571
 msgid ""
 "The file you selected could not be parsed correctly. Try selecting another "
 "parser that matches your file and try again. Or send the developers some "
@@ -1787,15 +1805,15 @@ msgstr ""
 msgid "SQL"
 msgstr "SQL"
 
-#: glade/MedicationView.ui:213 glade/MedicationView.ui:678
+#: glade/MedicationView.ui:230 glade/MedicationView.ui:696
 msgid "Done by"
 msgstr "Yapıldı"
 
-#: glade/MedicationView.ui:241 glade/MedicationView.ui:830
+#: glade/MedicationView.ui:258 glade/MedicationView.ui:848
 msgid "Dosage"
 msgstr "Dozaj"
 
-#: glade/MedicationView.ui:270 glade/MedicationView.ui:867
+#: glade/MedicationView.ui:287 glade/MedicationView.ui:885
 msgid "Vaccination"
 msgstr "Aşılama"
 
@@ -1850,8 +1868,20 @@ msgstr "Hiçbir resim bulunmamaktadır."
 #~ "Yedekleme başarıyla onarıldı.\n"
 #~ "programını yeniden başlatın."
 
+#~ msgid "Email this pedigree"
+#~ msgstr "Bu soyağacı Email"
+
 #~ msgid "Choose an image..."
 #~ msgstr "Bir resim seçin ..."
+
+#~ msgid "Number of cocks"
+#~ msgstr "Erkek sayısı"
+
+#~ msgid "Number of young birds"
+#~ msgstr "Genç Kuş Sayısı"
+
+#~ msgid "Number of hens"
+#~ msgstr "Dişi Sayısı"
 
 #~ msgid "Select a directory"
 #~ msgstr "Dizin seçiniz"
