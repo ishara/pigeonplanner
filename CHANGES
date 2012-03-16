@@ -1,3 +1,17 @@
+1.6.0:
+ * Added pedigree navigation arrows
+ * Added support for sector and category in result parser
+ * Added new exception dialog
+ * Fixed problems with adding young birds in breeding section
+ * Fixed error when adding a range
+ * Fixed error when calculating distance without loft coordinates
+ * Fixed unhandled date exception
+ * Fixed unhandled medication exception
+ * Fixed unhandled status exception
+ * Fixed handling bandnumbers with a slash
+ * Fixed unhandled exception with removed pigeon details
+ * Added and updated various languages
+
 1.4.2:
  * Added more statistics
  * Added help buttons
