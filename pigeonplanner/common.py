@@ -45,7 +45,7 @@ def get_sexdic():
 def get_sex(sex):
     return get_sexdic()[sex]
 
-statusdic = {0: 'Dead', 1: 'Active', 2: 'Sold', 3: 'Lost', 4: 'Breeder', 5: 'Loan'}
+statusdic = {0: 'Dead', 1: 'Active', 2: 'Sold', 3: 'Lost', 4: 'Breeder', 5: 'Onloan'}
 def get_status(status):
     return statusdic[status]
 
