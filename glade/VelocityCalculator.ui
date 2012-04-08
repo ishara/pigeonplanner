@@ -259,7 +259,7 @@
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment8</property>
                         <property name="numeric">True</property>
-                        <signal name="changed" handler="on_spinbutton_time_changed" swapped="no"/>
+                        <signal name="value-changed" handler="on_spinbutton_time_changed" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -290,7 +290,7 @@
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment9</property>
                         <property name="numeric">True</property>
-                        <signal name="changed" handler="on_spinbutton_time_changed" swapped="no"/>
+                        <signal name="value-changed" handler="on_spinbutton_time_changed" swapped="no"/>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -654,7 +654,7 @@
                             <property name="numeric">True</property>
                             <property name="wrap">True</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="changed" handler="on_spinbutton_time_changed" swapped="no"/>
+                            <signal name="value-changed" handler="on_spinbutton_time_changed" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -690,7 +690,7 @@
                             <property name="numeric">True</property>
                             <property name="wrap">True</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="changed" handler="on_spinbutton_time_changed" swapped="no"/>
+                            <signal name="value-changed" handler="on_spinbutton_time_changed" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">True</property>
