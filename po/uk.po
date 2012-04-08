@@ -6,14 +6,14 @@ msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-11 13:59+0100\n"
-"PO-Revision-Date: 2012-02-29 18:36+0000\n"
+"PO-Revision-Date: 2012-04-04 18:57+0000\n"
 "Last-Translator: Viktor <ksviktor@gmail.com>\n"
 "Language-Team: none <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-12 04:40+0000\n"
-"X-Generator: Launchpad (build 14933)\n"
+"X-Launchpad-Export-Date: 2012-04-05 04:44+0000\n"
+"X-Generator: Launchpad (build 15060)\n"
 "Language: \n"
 
 #: pigeonplanner/printing.py:165
@@ -526,7 +526,7 @@ msgstr "Електронна пошта успішно надіслана!"
 
 #: pigeonplanner/ui/maildialog.py:150
 msgid "Connection to server failed!"
-msgstr ""
+msgstr "Підключитись до сервера не вдалося!"
 
 #: pigeonplanner/ui/optionsdialog.py:52 glade/BreedingView.ui:322
 #: glade/BreedingView.ui:1340 glade/OptionsDialog.ui:1367
@@ -595,7 +595,7 @@ msgstr "Кількість результатів"
 
 #: pigeonplanner/ui/dialogs.py:126
 msgid "Number of couples"
-msgstr ""
+msgstr "Кількість пар"
 
 #: pigeonplanner/ui/dialogs.py:148
 msgid "Create backup"
@@ -775,17 +775,19 @@ msgstr ""
 
 #: pigeonplanner/ui/exceptiondialog.py:74
 msgid "Pigeon Planner has experienced an unexpected error"
-msgstr ""
+msgstr "Pigeon Planner - виникла непередбачувана помилка"
 
 #: pigeonplanner/ui/exceptiondialog.py:82
 msgid ""
 "You can help the Pigeon Planner developers by taking the time to report this "
 "bug."
 msgstr ""
+"Ви можете допомогти розробникам Pigeon Planner, якщо знайдете час, щоб "
+"рапортувати про цю помилку."
 
 #: pigeonplanner/ui/exceptiondialog.py:100
 msgid "Error Detail"
-msgstr ""
+msgstr "Деталі помилки."
 
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:73
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:261
@@ -1411,6 +1413,8 @@ msgid ""
 "Unable to retrieve data. The requested pigeon is probably removed from the "
 "database."
 msgstr ""
+"Не вдалося отримати дані. Запитуваний голуб, ймовірно, видалений з бази "
+"даних."
 
 #: glade/DetailsView.ui:1014 glade/DetailsView.ui:1413
 msgid "Dam"
@@ -1435,7 +1439,7 @@ msgstr "Результат"
 
 #: glade/MainWindow.ui:10
 msgid "View online help"
-msgstr ""
+msgstr "Допомога в Інтернеті"
 
 #: glade/MainWindow.ui:18
 msgid "Select all"
@@ -1739,11 +1743,11 @@ msgstr "Місце випуску:"
 
 #: glade/ResultParser.ui:182
 msgid "Sector:"
-msgstr ""
+msgstr "Сектор:"
 
 #: glade/ResultParser.ui:196
 msgid "Category:"
-msgstr ""
+msgstr "Категорія:"
 
 #: glade/ResultParser.ui:210
 msgid "Pigeons:"
