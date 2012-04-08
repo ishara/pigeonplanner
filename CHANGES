@@ -1,3 +1,10 @@
+1.6.2:
+ * Fixed focus issues in detailsview
+ * Fixed time input in velocity calculator
+ * Fixed exporting multiple selected pigeons
+ * Fixed error when changing from on loan status
+ * Updated translations
+
 1.6.0:
  * Added pedigree navigation arrows
  * Added support for sector and category in result parser
