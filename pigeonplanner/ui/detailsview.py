@@ -118,6 +118,14 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                                                      gtk.ACCEL_VISIBLE)
         self.parent.add_accel_group(ag)
 
+        icons = gtk.icon_theme_get_default()
+        try:
+            zoom_pb = icons.load_icon("gtk-find", 22, 0)
+            self._zoom_cursor = gtk.gdk.Cursor(gtk.gdk.display_get_default(),
+                                               zoom_pb, 0, 0)
+        except:
+            self._zoom_cursor = None
+
         self.statusdialog.set_transient_for(parent)
         self.root.unparent()
         self.root.show_all()
@@ -161,6 +169,13 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self._finish_edit()
 
     ## Image
+    def on_eventbox_enter_notify_event(self, widget, event):
+        if self.pigeon.get_image() is not None:
+            self.eventbox.get_window().set_cursor(self._zoom_cursor)
+
+    def on_eventbox_leave_notify_event(self, widget, event):
+        self.eventbox.get_window().set_cursor(None)
+
     def on_eventbox_press(self, widget, event):
         if self.pigeon is None or self.in_dialog: return
         tools.PhotoAlbum(self.parent, self.parser, self.database,
