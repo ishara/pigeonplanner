@@ -20,16 +20,15 @@ A detailed pedigree of the selected pigeon.
 """
 
 
-import os.path
-
 import gtk
 
-import const
 import common
-import printing
 from ui import tools
-from ui import maildialog
+from ui.filechooser import PdfSaver
 from translation import gettext as _
+from reportlib import (report, PRINT_ACTION_DIALOG,
+                       PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
+from reports import get_pedigree
 
 
 (PREVIOUS,
@@ -163,24 +162,35 @@ class PedigreeWindow(gtk.Window):
         self.buttonnextdam.set_sensitive(can_next_dam)
 
     def on_mail_clicked(self, widget):
-        self.do_operation(const.MAIL)
-        pedigree = os.path.join(const.TEMPDIR, self.pdfname)
-        maildialog.MailDialog(self, self.database, pedigree)
+        #TODO: disabled for now. Remove?
+        ##self.do_operation(const.MAIL)
+        ##pedigree = os.path.join(const.TEMPDIR, self.pdfname)
+        ##maildialog.MailDialog(self, self.database, pedigree)
+        pass
 
     def on_save_clicked(self, widget):
-        self.do_operation(const.SAVE)
+        chooser = PdfSaver(self, self.pdfname)
+        response = chooser.run()
+        if response == gtk.RESPONSE_OK:
+            save_path = chooser.get_filename()
+            self.do_operation(PRINT_ACTION_EXPORT, save_path)
+        chooser.destroy()
 
     def on_preview_clicked(self, widget):
-        self.do_operation(const.PREVIEW)
+        self.do_operation(PRINT_ACTION_PREVIEW)
 
     def on_print_clicked(self, widget):
-        self.do_operation(const.PRINT)
+        self.do_operation(PRINT_ACTION_DIALOG)
 
-    def do_operation(self, op):
+    def do_operation(self, print_action, save_path=None):
         userinfo = common.get_own_address(self.database)
         if not tools.check_user_info(self, self.database, userinfo['name']):
             return
 
-        printing.PrintPedigree(self, self.pigeon, userinfo,
-                               self.options, op, self.pdfname, self.parser)
+        PedigreeReport, PedigreeReportOptions = get_pedigree(self.options)
+        psize = common.get_pagesize_from_opts(self.options.paper)
+        opts = PedigreeReportOptions(psize, print_action=print_action,
+                                            filename=save_path, parent=self)
+        report(PedigreeReport, opts, self.parser, self.pigeon,
+                                            userinfo, self.options)
 

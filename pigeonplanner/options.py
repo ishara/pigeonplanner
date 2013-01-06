@@ -63,6 +63,7 @@ class GetOptions(object):
         self.colcomment = self.conf.getboolean('Columns', 'comment')
         self.paper = self.conf.getint('Printing', 'paper')
         self.layout = self.conf.getint('Printing', 'layout')
+        self.pigOptColour = self.conf.getboolean('Printing', 'pigOptColour')
         self.perName = self.conf.getboolean('Printing', 'perName')
         self.perAddress = self.conf.getboolean('Printing', 'perAddress')
         self.perPhone = self.conf.getboolean('Printing', 'perPhone')
@@ -72,6 +73,8 @@ class GetOptions(object):
         self.pigSex = self.conf.getboolean('Printing', 'pigSex')
         self.pigExtra = self.conf.getboolean('Printing', 'pigExtra')
         self.pigImage = self.conf.getboolean('Printing', 'pigImage')
+        self.pigColumnNames = self.conf.getboolean('Printing', 'pigColumnNames')
+        self.pigOptSex = self.conf.getboolean('Printing', 'pigOptSex')
         self.resColumnNames = self.conf.getboolean('Printing', 'resColumnNames')
         self.resDate = self.conf.getboolean('Printing', 'resDate')
 

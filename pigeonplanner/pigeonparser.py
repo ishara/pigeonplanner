@@ -151,6 +151,9 @@ class Pigeon(object):
     def get_active(self):
         return self.active
 
+    def get_status(self):
+        return common.get_status(self.active)
+
     def get_colour(self):
         return self.colour
 

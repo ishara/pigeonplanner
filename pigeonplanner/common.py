@@ -273,6 +273,13 @@ def open_file(path):
 def open_help(article):
     webbrowser.open(const.DOCURL % article)
 
+def get_pagesize_from_opts(optvalue):
+    if optvalue == 0:
+        psize = "A4"
+    elif optvalue == 1:
+        psize = "Letter"
+    return psize
+
 
 class URLOpen:
     """

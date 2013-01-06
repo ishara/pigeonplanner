@@ -36,7 +36,6 @@ import checks
 import update
 import errors
 import builder
-import printing
 import messages
 import thumbnail
 from ui import tabs
@@ -51,7 +50,10 @@ from ui import optionsdialog
 from ui import pedigreewindow
 from ui.widgets import treeview
 from ui.widgets import statusbar
-from ui.messagedialog import ErrorDialog, InfoDialog, WarningDialog, QuestionDialog
+from ui.messagedialog import ErrorDialog, InfoDialog, QuestionDialog
+from reportlib import report
+from reports import get_pedigree
+from reports.pigeons import PigeonsReport, PigeonsReportOptions
 from translation import gettext as _
 
 
@@ -67,6 +69,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
          <separator/>
          <menuitem action="Export"/>
          <menu action="PrintMenu">
+            <menuitem action="PrintPigeons"/>
             <menuitem action="PrintPedigree"/>
             <menuitem action="PrintBlank"/>
          </menu>
@@ -286,19 +289,38 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def menuexport_activate(self, widget):
         exportwindow.ExportWindow(self, self.parser)
 
+    def menuprintpigeons_activate(self, widget):
+        logger.debug(common.get_function_name())
+
+        userinfo = common.get_own_address(self.database)
+
+        if not tools.check_user_info(self, self.database, userinfo['name']):
+            return
+
+        pigeons = self.treeview.get_pigeons(True)
+        psize = common.get_pagesize_from_opts(self.options.paper)
+        reportopts = PigeonsReportOptions(psize)
+        report(PigeonsReport, reportopts, pigeons, userinfo, self.options)
+
     def menuprintpedigree_activate(self, widget):
         logger.debug(common.get_function_name())
         pigeon = self.treeview.get_selected_pigeon()
         if pigeon is None or isinstance(pigeon, list): return
         userinfo = common.get_own_address(self.database)
-        printing.PrintPedigree(self, pigeon, userinfo,
-                               self.options, const.PRINT, '', self.parser)
+
+        PedigreeReport, PedigreeReportOptions = get_pedigree(self.options)
+        psize = common.get_pagesize_from_opts(self.options.paper)
+        opts = PedigreeReportOptions(psize)
+        report(PedigreeReport, opts, self.parser, pigeon, userinfo, self.options)
 
     def menuprintblank_activate(self, widget):
         logger.debug(common.get_function_name())
         userinfo = common.get_own_address(self.database)
-        printing.PrintPedigree(self, None, userinfo,
-                               self.options, const.PRINT, '', self.parser)
+
+        PedigreeReport, PedigreeReportOptions = get_pedigree(self.options)
+        psize = common.get_pagesize_from_opts(self.options.paper)
+        opts = PedigreeReportOptions(psize)
+        report(PedigreeReport, opts, self.parser, None, userinfo, self.options)
 
     def menubackup_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -445,7 +467,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = optionsdialog.OptionsDialog(self, self.options)
+        dialog = optionsdialog.OptionsDialog(self, self.options,
+                                             self.parser, self.database)
         dialog.connect('interface-changed', self.on_interface_changed)
 
     def menuarrows_toggled(self, widget):

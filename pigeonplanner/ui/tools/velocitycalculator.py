@@ -20,9 +20,10 @@ import datetime
 
 import gtk
 
-import const
 import common
 import builder
+from reportlib import report
+from reports.velocity import VelocityReport, VelocityReportOptions
 
 
 class VelocityCalculator(builder.GtkBuilder):
@@ -110,7 +111,8 @@ class VelocityCalculator(builder.GtkBuilder):
                                  self.spinbutton_prognosis_minutes.get_text(),
                                  self.spinbutton_prognosis_seconds.get_text())
             info = [date.strftime("%Y-%m-%d"), release, distance]
-            import printing
-            printing.PrintVelocity(self.parent, data, info,
-                                   self.options, const.PRINT)
+
+            psize = common.get_pagesize_from_opts(self.options.paper)
+            reportopts = VelocityReportOptions(psize)
+            report(VelocityReport, reportopts, data, info)
 

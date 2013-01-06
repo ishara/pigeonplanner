@@ -26,22 +26,27 @@ import gtk
 import gobject
 
 import const
+import common
 import builder
 import messages
 from ui.widgets import comboboxes
 from ui.messagedialog import InfoDialog, WarningDialog
 from translation import gettext as _
+from reportlib import report, PRINT_ACTION_PREVIEW
+from reports import get_pedigree
 
 
 class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     __gsignals__ = {'interface-changed': (gobject.SIGNAL_RUN_LAST,
                                       None, (bool, bool, bool, bool)),
                     }
-    def __init__(self, parent, options):
+    def __init__(self, parent, options, parser, database):
         builder.GtkBuilder.__init__(self, "OptionsDialog.ui")
         gobject.GObject.__init__(self)
 
         self.options = options
+        self.parser = parser
+        self.database = database
 
         # Build main treeview
         self._selection = self.treeview.get_selection()
@@ -55,6 +60,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                             []),
                       (_("Printing"), gtk.STOCK_PRINT,
                             [_("Pedigree"),
+                             _("Pigeons"),
                              _("Results"),
                             ]),
                     ]
@@ -111,6 +117,15 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         dstring = _("days") if value == 1 else _("day")
         widget.set_text('%s %s' % (value, dstring))
 
+    def on_btnPreview_clicked(self, widget):
+        selected = self.cbLayout.get_active()
+        userinfo = common.get_own_address(self.database)
+        PedigreeReport, PedigreeReportOptions = get_pedigree(pedigree=selected)
+        psize = common.get_pagesize_from_opts(self.options.paper)
+        opts = PedigreeReportOptions(psize, print_action=PRINT_ACTION_PREVIEW,
+                                            parent=self.optionsdialog)
+        report(PedigreeReport, opts, self.parser, None, userinfo, self.options)
+
     def on_buttondefault_clicked(self, widget):
         if WarningDialog(messages.MSG_DEFAULT_OPTIONS, self.optionsdialog).run():
             self.options.write_default()
@@ -160,6 +175,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                "Printing": {
                     "paper": self.cbPaper.get_active(),
                     "layout": self.cbLayout.get_active(),
+                    "pigOptColour": str(self.chkPigOptColour.get_active()),
                     "perName": str(self.chkPerName.get_active()),
                     "perAddress": str(self.chkPerAddress.get_active()),
                     "perPhone": str(self.chkPerPhone.get_active()),
@@ -169,6 +185,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                     "pigSex": str(self.chkPigSex.get_active()),
                     "pigExtra": str(self.chkPigExtra.get_active()),
                     "pigImage": str(self.chkPigImage.get_active()),
+                    "pigColumnNames": str(self.chkPigColumnNames.get_active()),
+                    "pigOptSex": str(self.chkPigOptSex.get_active()),
                     "resColumnNames": str(self.chkResColumnNames.get_active()),
                     "resDate": str(self.chkResDate.get_active()),
                    }
@@ -216,6 +234,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         # Printing
         self.cbPaper.set_active(self.options.paper)
         self.cbLayout.set_active(self.options.layout)
+        self.chkPigOptColour.set_active(self.options.pigOptColour)
 
         self.chkPerName.set_active(self.options.perName)
         self.chkPerAddress.set_active(self.options.perAddress)
@@ -227,6 +246,9 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.chkPigSex.set_active(self.options.pigSex)
         self.chkPigExtra.set_active(self.options.pigExtra)
         self.chkPigImage.set_active(self.options.pigImage)
+
+        self.chkPigColumnNames.set_active(self.options.pigColumnNames)
+        self.chkPigOptSex.set_active(self.options.pigOptSex)
 
         self.chkResColumnNames.set_active(self.options.resColumnNames)
         self.chkResDate.set_active(self.options.resDate)

@@ -79,6 +79,7 @@ class Configuration(object):
         self.__addSection('Printing')
         self.__addOption('Printing', 'paper', 0)
         self.__addOption('Printing', 'layout', 0)
+        self.__addOption('Printing', 'pigOptColour', 'False')
         self.__addOption('Printing', 'perName', 'True')
         self.__addOption('Printing', 'perAddress', 'True')
         self.__addOption('Printing', 'perPhone', 'True')
@@ -88,6 +89,8 @@ class Configuration(object):
         self.__addOption('Printing', 'pigSex', 'True')
         self.__addOption('Printing', 'pigExtra', 'True')
         self.__addOption('Printing', 'pigImage', 'False')
+        self.__addOption('Printing', 'pigColumnNames', 'True')
+        self.__addOption('Printing', 'pigOptSex', 'True')
         self.__addOption('Printing', 'resColumnNames', 'True')
         self.__addOption('Printing', 'resDate', 'True')
 

@@ -20,20 +20,20 @@ Results window class
 """
 
 
-import os.path
 import datetime
 
 import gtk
 
-import const
 import common
 import builder
-import printing
 from ui import tools
 from ui import dialogs
-from ui import maildialog
 from ui.widgets import comboboxes
+from ui.filechooser import PdfSaver
 from translation import gettext as _
+from reportlib import (report, PRINT_ACTION_DIALOG,
+                       PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
+from reports.results import ResultsReport, ResultsReportOptions
 
 
 (KEY,
@@ -129,19 +129,25 @@ class ResultWindow(builder.GtkBuilder):
         dialog.run()
 
     def on_mail_clicked(self, widget):
-        self._do_operation(const.MAIL)
-        results = os.path.join(const.TEMPDIR, self.pdfname)
-
-        maildialog.MailDialog(self.resultwindow, self.database, results)
+        #TODO: disabled for now. Remove?
+        ##self._do_operation(const.MAIL)
+        ##results = os.path.join(const.TEMPDIR, self.pdfname)
+        ##maildialog.MailDialog(self.resultwindow, self.database, results)
+        pass
 
     def on_save_clicked(self, widget):
-        self._do_operation(const.SAVE)
+        chooser = PdfSaver(self.resultwindow, self.pdfname)
+        response = chooser.run()
+        if response == gtk.RESPONSE_OK:
+            save_path = chooser.get_filename()
+            self._do_operation(PRINT_ACTION_EXPORT, save_path)
+        chooser.destroy()
 
     def on_preview_clicked(self, widget):
-        self._do_operation(const.PREVIEW)
+        self._do_operation(PRINT_ACTION_PREVIEW)
 
     def on_print_clicked(self, widget):
-        self._do_operation(const.PRINT)
+        self._do_operation(PRINT_ACTION_DIALOG)
 
     # Public methods
     def fill_treeview(self):
@@ -233,28 +239,29 @@ class ResultWindow(builder.GtkBuilder):
             data2 = model.get_value(iter2, 1)
         return cmp(data1, data2)
 
-    def _do_operation(self, op):
+    def _do_operation(self, print_action, save_path=None):
         userinfo = common.get_own_address(self.database)
-
         if not tools.check_user_info(self.resultwindow, self.database,
                                      userinfo['name']):
             return
 
         results = []
-        for item in self._modelfilter:
+        for item in self._modelsort:
             values = []
             for x in range(2, 14):
-                value = self._modelfilter.get_value(item.iter, x)
+                value = self._modelsort.get_value(item.iter, x)
                 if value == None:
                     value = ''
                 if x == 2:
-                    value = "%s / %s" % (self._modelfilter.get_value(item.iter, 1),
+                    value = "%s / %s" % (self._modelsort.get_value(item.iter, 1),
                                          value[2:])
                 if x == 7:
                     value = '%3.2f' % value
                 values.append(str(value))
             results.append(values)
 
-        printing.PrintResults(self.resultwindow, results, userinfo,
-                              self.options, op, self.pdfname)
+        psize = common.get_pagesize_from_opts(self.options.paper)
+        opts = ResultsReportOptions(psize, None, print_action, save_path,
+                                           parent=self.resultwindow)
+        report(ResultsReport, opts, results, userinfo, self.options)
 
