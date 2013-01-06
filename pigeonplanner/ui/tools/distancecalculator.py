@@ -18,14 +18,10 @@
 
 import math
 
-import gtk
-import gobject
-
 import errors
 import common
 import builder
 from ui.widgets import comboboxes
-from ui.widgets import latlongentry
 from ui.messagedialog import ErrorDialog
 from translation import gettext as _
 
@@ -114,7 +110,10 @@ class DistanceCalculator(builder.GtkBuilder):
         elif widget.get_active() == 1:
             # Loft selected
             editable = False
-            latitude, longitude = self.database.get_loft_latlong()
+            try:
+                latitude, longitude = self.database.get_loft_latlong()
+            except TypeError:
+                latitude, longitude = '', ''
         else:
             editable = False
             rp = widget.get_active_text()
