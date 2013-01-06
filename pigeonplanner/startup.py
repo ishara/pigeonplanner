@@ -153,6 +153,10 @@ class Startup(object):
                 ('icon_report.png', 'report', _('Report')),
             ])
 
+        # Set default icon for all windows
+        gtk.window_set_default_icon_from_file(os.path.join(const.IMAGEDIR,
+                                                           "icon_logo.png"))
+
     def setup_database(self):
         """
         Setup the database and check if it needs an update
