@@ -430,7 +430,7 @@
                                       <object class="GtkLabel" id="label1">
                                         <property name="can_focus">False</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Custom date format</property>
+                                        <property name="label">Custom date format</property>
                                       </object>
                                       <packing>
                                         <property name="top_attach">1</property>
@@ -442,7 +442,7 @@
                                     <child>
                                       <object class="GtkEntry" id="entrydate">
                                         <property name="can_focus">True</property>
-                                        <property name="tooltip_text" translatable="yes">%d (Day of the month as a decimal number)
+                                        <property name="tooltip_text">%d (Day of the month as a decimal number)
 %m (Month as a decimal number)
 %y (Year without century as a decimal number)
 %Y (Year with century as a decimal number)
