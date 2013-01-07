@@ -52,6 +52,7 @@ class Configuration(object):
         self.__addOption('Options', 'statusbar', 'True')
         self.__addOption('Options', 'update', 'True')
         self.__addOption('Options', 'language', 'def')
+        self.__addOption('Options', 'dateformat', '%Y-%m-%d')
         self.__addSection('Window')
         self.__addOption('Window', 'window_x', 0)
         self.__addOption('Window', 'window_y', 0)

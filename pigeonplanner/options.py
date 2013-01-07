@@ -40,6 +40,7 @@ class GetOptions(object):
         self.statusbar = self.conf.getboolean('Options', 'statusbar')
         self.update = self.conf.getboolean('Options', 'update')
         self.language = self.conf.get('Options', 'language')
+        self.dateformat = self.conf.get('Options', 'dateformat')
         self.window_x = self.conf.getint('Window', 'window_x')
         self.window_y = self.conf.getint('Window', 'window_y')
         self.window_w = self.conf.getint('Window', 'window_w')

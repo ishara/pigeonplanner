@@ -146,7 +146,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                            'toolbar': str(self.chkToolbar.get_active()),
                            'statusbar': str(self.chkStatusbar.get_active()),
                            'update': str(self.chkUpdate.get_active()),
-                           'language': self.combolangs.get_active_text()
+                           'language': self.combolangs.get_active_text(),
+                           'dateformat': self.entrydate.get_text()
                           },
                "Window": {'window_x': self.options.window_x,
                           'window_y': self.options.window_y,
@@ -208,6 +209,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.checkbackup.set_active(self.options.backup)
         self.spinday.set_value(self.options.interval)
         self.fcbutton.set_current_folder(self.options.location)
+        self.entrydate.set_text(self.options.dateformat)
 
         # Appearance
         self.chkName.set_active(self.options.colname)
