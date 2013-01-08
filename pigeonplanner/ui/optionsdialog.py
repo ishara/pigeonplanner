@@ -63,6 +63,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                              _("Pigeons"),
                              _("Results"),
                             ]),
+                      (_("Advanced"), gtk.STOCK_PREFERENCES,
+                            []),
                     ]
         i = 0
         for par, img, children in categories:
@@ -147,7 +149,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                            'statusbar': str(self.chkStatusbar.get_active()),
                            'update': str(self.chkUpdate.get_active()),
                            'language': self.combolangs.get_active_text(),
-                           'dateformat': self.entrydate.get_text()
+                           ##'coefformat': self.entrycoef.get_text(),
+                           ##'dateformat': self.entrydate.get_text()
                           },
                "Window": {'window_x': self.options.window_x,
                           'window_y': self.options.window_y,
@@ -209,7 +212,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.checkbackup.set_active(self.options.backup)
         self.spinday.set_value(self.options.interval)
         self.fcbutton.set_current_folder(self.options.location)
-        self.entrydate.set_text(self.options.dateformat)
+        ##self.entrycoef.set_text(self.options.coefformat)
+        ##self.entrydate.set_text(self.options.dateformat)
 
         # Appearance
         self.chkName.set_active(self.options.colname)
