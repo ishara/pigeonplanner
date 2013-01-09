@@ -31,6 +31,7 @@ import gtk
 
 import const
 import common
+import config
 import backup
 import checks
 import update
@@ -138,16 +139,14 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
    </toolbar>
 </ui>
 """
-    def __init__(self, options, database, parser):
+    def __init__(self, database, parser):
         gtk.Window.__init__(self)
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
 
-        self.options = options
         self.database = database
         self.parser = parser
 
-        self.treeview = treeview.MainTreeView(self.parser, self.options,
-                                              self.statusbar)
+        self.treeview = treeview.MainTreeView(self.parser, self.statusbar)
         self.treeview.connect('key-press-event', self.on_treeview_key_press)
         self.treeview.connect('button-press-event', self.on_treeview_press)
         self.scrolledwindow.add(self.treeview)
@@ -168,13 +167,11 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.notebook.append_page(*self.pedigreetab.get_tab_widgets())
         self.relativestab = tabs.RelativesTab(self, self.database, self.parser)
         self.notebook.append_page(*self.relativestab.get_tab_widgets())
-        self.resultstab = tabs.ResultsTab(self, self.database,
-                                          self.options, self.parser)
+        self.resultstab = tabs.ResultsTab(self, self.database, self.parser)
         self.notebook.append_page(*self.resultstab.get_tab_widgets())
         self.breedingtab = tabs.BreedingTab(self, self.database, self.parser)
         self.notebook.append_page(*self.breedingtab.get_tab_widgets())
-        self.mediatab = tabs.MediaTab(self, self.database,
-                                      self.options, self.parser)
+        self.mediatab = tabs.MediaTab(self, self.database, self.parser)
         self.notebook.append_page(*self.mediatab.get_tab_widgets())
         self.medicationtab = tabs.MedicationTab(self, self.database,
                                                 self.parser, self)
@@ -187,17 +184,19 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.current_pigeon = 0
         self.pigeon_no = len(self.treeview.get_model())
 
-        self.MenuArrows.set_active(self.options.arrows)
-        self.MenuStats.set_active(self.options.stats)
-        self.MenuToolbar.set_active(self.options.toolbar)
-        self.MenuStatusbar.set_active(self.options.statusbar)
+        self.MenuArrows.set_active(config.get('interface.arrows'))
+        self.MenuStats.set_active(config.get('interface.stats'))
+        self.MenuToolbar.set_active(config.get('interface.toolbar'))
+        self.MenuStatusbar.set_active(config.get('interface.statusbar'))
 
         self.connect('delete-event', self.quit_program)
         self.set_title(const.NAME)
         self.set_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
         self.add(self.mainvbox)
-        self.resize(self.options.window_w, self.options.window_h)
-        self.move(self.options.window_x, self.options.window_y)
+        self.resize(config.get('interface.window-w'),
+                    config.get('interface.window-h'))
+        self.move(config.get('interface.window-x'),
+                  config.get('interface.window-y'))
         self.show()
         self.treeview.grab_focus()
 
@@ -214,19 +213,20 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
         x, y = self.get_position()
         w, h = self.get_size()
-        self.options.set_option('Window', 'window_x', x)
-        self.options.set_option('Window', 'window_y', y)
-        self.options.set_option('Window', 'window_w', w)
-        self.options.set_option('Window', 'window_h', h)
+        config.set('interface.window-x', x)
+        config.set('interface.window-y', y)
+        config.set('interface.window-w', w)
+        config.set('interface.window-h', h)
 
-        if self.options.backup and bckp:
-            daysInSeconds = self.options.interval * 24 * 60 * 60
-            if time.time() - self.options.last >= daysInSeconds:
-                if backup.make_backup(self.options.location):
+        if config.get('backup.automatic-backup') and bckp:
+            daysInSeconds = config.get('backup.interval') * 24 * 60 * 60
+            if time.time() - config.get('backup.last') >= daysInSeconds:
+                if backup.make_backup(config.get('backup.location')):
                     InfoDialog(messages.MSG_BACKUP_SUCCES, self)
                 else:
                     InfoDialog(messages.MSG_BACKUP_FAILED, self)
-                self.options.set_option('Backup', 'last', time.time())
+                config.set('backup.last', time.time())
+        config.save()
         gtk.main_quit()
 
     ####################
@@ -298,9 +298,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             return
 
         pigeons = self.treeview.get_pigeons(True)
-        psize = common.get_pagesize_from_opts(self.options.paper)
+        psize = common.get_pagesize_from_opts()
         reportopts = PigeonsReportOptions(psize)
-        report(PigeonsReport, reportopts, pigeons, userinfo, self.options)
+        report(PigeonsReport, reportopts, pigeons, userinfo)
 
     def menuprintpedigree_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -308,19 +308,19 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         if pigeon is None or isinstance(pigeon, list): return
         userinfo = common.get_own_address(self.database)
 
-        PedigreeReport, PedigreeReportOptions = get_pedigree(self.options)
-        psize = common.get_pagesize_from_opts(self.options.paper)
+        PedigreeReport, PedigreeReportOptions = get_pedigree()
+        psize = common.get_pagesize_from_opts()
         opts = PedigreeReportOptions(psize)
-        report(PedigreeReport, opts, self.parser, pigeon, userinfo, self.options)
+        report(PedigreeReport, opts, self.parser, pigeon, userinfo)
 
     def menuprintblank_activate(self, widget):
         logger.debug(common.get_function_name())
         userinfo = common.get_own_address(self.database)
 
-        PedigreeReport, PedigreeReportOptions = get_pedigree(self.options)
-        psize = common.get_pagesize_from_opts(self.options.paper)
+        PedigreeReport, PedigreeReportOptions = get_pedigree()
+        psize = common.get_pagesize_from_opts()
         opts = PedigreeReportOptions(psize)
-        report(PedigreeReport, opts, self.parser, None, userinfo, self.options)
+        report(PedigreeReport, opts, self.parser, None, userinfo)
 
     def menubackup_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -453,7 +453,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def menupedigree_activate(self, widget):
         logger.debug(common.get_function_name())
         pigeon = self.treeview.get_selected_pigeon()
-        pedigreewindow.PedigreeWindow(self, self.database, self.options,
+        pedigreewindow.PedigreeWindow(self, self.database,
                                       self.parser, self.pedigree, pigeon)
 
     def menuaddresult_activate(self, widget):
@@ -467,33 +467,32 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = optionsdialog.OptionsDialog(self, self.options,
-                                             self.parser, self.database)
+        dialog = optionsdialog.OptionsDialog(self, self.parser, self.database)
         dialog.connect('interface-changed', self.on_interface_changed)
 
     def menuarrows_toggled(self, widget):
         value = widget.get_active()
         utils.set_multiple_visible([self.vboxButtons], value)
-        self.options.set_option('Options', 'arrows', str(value))
+        config.set('interface.arrows', value)
 
     def menustats_toggled(self, widget):
         value = widget.get_active()
         utils.set_multiple_visible([self.alignStats], value)
-        self.options.set_option('Options', 'stats', str(value))
+        config.set('interface.stats', value)
 
     def menutoolbar_toggled(self, widget):
         value = widget.get_active()
         utils.set_multiple_visible([self.toolbar], value)
-        self.options.set_option('Options', 'toolbar', str(value))
+        config.set('interface.toolbar', value)
 
     def menustatusbar_toggled(self, widget):
         value = widget.get_active()
         utils.set_multiple_visible([self.statusbar], value)
-        self.options.set_option('Options', 'statusbar', str(value))
+        config.set('interface.statusbar', value)
 
     def menuvelocity_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.VelocityCalculator(self, self.database, self.options)
+        tools.VelocityCalculator(self, self.database)
 
     def menudistance_activate(self, widget):
         logger.debug(common.get_function_name())

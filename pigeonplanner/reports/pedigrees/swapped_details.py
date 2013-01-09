@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import config
 from ui import pedigree
 from translation import gettext as _
 from reportlib.utils import pt2cm as PT2CM
@@ -25,12 +26,11 @@ from reportlib.styles import (ParagraphStyle, FontStyle, GraphicsStyle,
 
 
 class PedigreeReport(Report):
-    def __init__(self, reportopts, parser, pigeon, userinfo, options):
+    def __init__(self, reportopts, parser, pigeon, userinfo):
         Report.__init__(self, "My_pedigree", reportopts)
 
         self._parser = parser
         self._pigeon = pigeon
-        self._options = options
         self._userinfo = userinfo
 
     def get_right_align_x(self, style, text):
@@ -57,24 +57,24 @@ class PedigreeReport(Report):
         header_x = .1
         header_y = 1.2
         header_y_offset = .4
-        if self._options.perName:
+        if config.get('printing.user-name'):
             self.doc.draw_text("Header", self._userinfo['name'], header_x, header_y)
             header_y += header_y_offset
-        if self._options.perAddress:
+        if config.get('printing.user-address'):
             self.doc.draw_text("Header", self._userinfo['street'], header_x, header_y)
             header_y += header_y_offset
             self.doc.draw_text("Header", '%s %s' % (self._userinfo['code'],
                                                       self._userinfo['city']),
                                 header_x, header_y)
             header_y += header_y_offset
-        if self._options.perPhone:
+        if config.get('printing.user-phone'):
             self.doc.draw_text("Header", self._userinfo['phone'], header_x, header_y)
             header_y += header_y_offset
-        if self._options.perEmail:
+        if config.get('printing.user-email'):
             self.doc.draw_text("Header", self._userinfo['email'], header_x, header_y)
 
         ## Draw image
-        if self._options.pigImage and self._pigeon is not None and\
+        if config.get('printing.pedigree-image') and self._pigeon is not None and\
                                       self._pigeon.image is not None:
             img_x = self.doc.get_usable_width()
             img_y = 1
@@ -99,7 +99,7 @@ class PedigreeReport(Report):
         h_total = self.doc.get_usable_height() - (header_bottom + .2)
         y_start = header_bottom + .2
         y_div = (h_total / 16) + y_start
-        if self._options.pigOptColour:
+        if config.get('printing.pedigree-box-colour'):
             h0, h1, h2, h3, h4 = 3.4, 3.1, 3.1, 1.9, 0.9
         else:
             h0, h1, h2, h3, h4 = 3.1, 2.8, 2.8, 1.6, 0.9
@@ -168,7 +168,7 @@ class PedigreeReport(Report):
                 ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.get_extra()
                 if first:
                     text += "\n" + pigeon.get_sex_string()
-                if not last and self._options.pigOptColour:
+                if not last and config.get('printing.pedigree-box-colour'):
                     text += "\n" + pigeon.get_colour()
             else:
                 text = ""

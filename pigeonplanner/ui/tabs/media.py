@@ -34,14 +34,13 @@ from translation import gettext as _
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, parent, database, options, parser):
+    def __init__(self, parent, database, parser):
         basetab.BaseTab.__init__(self, _("Media"), "icon_media.png")
         builder.GtkBuilder.__init__(self, "MediaView.ui")
         self._root.unparent()
 
         self.parent = parent
         self.database = database
-        self.options = options
         self.parser = parser
         self._selection = self.treeview.get_selection()
         self._selection.set_select_function(self._select_func, full=True)

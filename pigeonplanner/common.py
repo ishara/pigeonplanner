@@ -36,6 +36,7 @@ import gtk
 import glib
 
 import const
+import config
 from translation import gettext as _
 
 
@@ -70,21 +71,6 @@ def get_function_name():
     """
 
     return inspect.stack()[1][3]
-
-def get_operating_system():
-    operatingsystem = platform.system()
-    if operatingsystem == "Windows":
-        release, version, csd, ptype = platform.win32_ver()
-        distribution = "%s %s" % (release, csd)
-    elif operatingsystem == "Linux":
-        distname, version, nick = platform.linux_distribution()
-        distribution = "%s %s" % (distname, version)
-    elif operatingsystem == "Darwin":
-        release, versioninfo, machine = platform.mac_ver()
-        distribution = release
-    else:
-        distribution = ''
-    return operatingsystem, distribution
 
 def get_date():
     return datetime.date.today().strftime(const.DATE_FORMAT)
@@ -273,7 +259,8 @@ def open_file(path):
 def open_help(article):
     webbrowser.open(const.DOCURL % article)
 
-def get_pagesize_from_opts(optvalue):
+def get_pagesize_from_opts():
+    optvalue = config.get('printing.general-paper')
     if optvalue == 0:
         psize = "A4"
     elif optvalue == 1:

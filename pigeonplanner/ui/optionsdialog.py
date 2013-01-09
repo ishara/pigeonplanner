@@ -27,6 +27,7 @@ import gobject
 
 import const
 import common
+import config
 import builder
 import messages
 from ui.widgets import comboboxes
@@ -40,11 +41,10 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     __gsignals__ = {'interface-changed': (gobject.SIGNAL_RUN_LAST,
                                       None, (bool, bool, bool, bool)),
                     }
-    def __init__(self, parent, options, parser, database):
+    def __init__(self, parent, parser, database):
         builder.GtkBuilder.__init__(self, "OptionsDialog.ui")
         gobject.GObject.__init__(self)
 
-        self.options = options
         self.parser = parser
         self.database = database
 
@@ -122,15 +122,16 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     def on_btnPreview_clicked(self, widget):
         selected = self.cbLayout.get_active()
         userinfo = common.get_own_address(self.database)
-        PedigreeReport, PedigreeReportOptions = get_pedigree(pedigree=selected)
-        psize = common.get_pagesize_from_opts(self.options.paper)
+        PedigreeReport, PedigreeReportOptions = get_pedigree(layout=selected)
+        psize = common.get_pagesize_from_opts()
         opts = PedigreeReportOptions(psize, print_action=PRINT_ACTION_PREVIEW,
                                             parent=self.optionsdialog)
-        report(PedigreeReport, opts, self.parser, None, userinfo, self.options)
+        report(PedigreeReport, opts, self.parser, None, userinfo)
 
     def on_buttondefault_clicked(self, widget):
         if WarningDialog(messages.MSG_DEFAULT_OPTIONS, self.optionsdialog).run():
-            self.options.write_default()
+            config.save(default=True)
+            config.load()
             self._set_options()
             self._finish_options(False, True)
 
@@ -138,126 +139,122 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.optionsdialog.destroy()
 
     def on_buttonok_clicked(self, widget):
-        restart = self.combolangs.get_active_text() != self.options.language or\
+        restart = self.combolangs.get_active_text() != config.get('options.language') or\
                     (const.WINDOWS and
-                     self.combothemes.get_active() != self.options.theme)
+                     self.combothemes.get_active() != config.get('interface.theme'))
 
-        dic = {"Options": {'theme': self.combothemes.get_active(),
-                           'arrows': str(self.chkArrows.get_active()),
-                           'stats': str(self.chkStats.get_active()),
-                           'toolbar': str(self.chkToolbar.get_active()),
-                           'statusbar': str(self.chkStatusbar.get_active()),
-                           'update': str(self.chkUpdate.get_active()),
-                           'language': self.combolangs.get_active_text(),
-                           ##'coefformat': self.entrycoef.get_text(),
-                           ##'dateformat': self.entrydate.get_text()
-                          },
-               "Window": {'window_x': self.options.window_x,
-                          'window_y': self.options.window_y,
-                          'window_w': self.options.window_w,
-                          'window_h': self.options.window_h
-                         },
-               "Backup": {'backup': str(self.checkbackup.get_active()),
-                          'interval': self.spinday.get_value_as_int(),
-                          'location': self.fcbutton.get_current_folder(),
-                          'last': self.options.last
-                         },
-               "Columns": {'name': str(self.chkName.get_active()),
-                           'colour': str(self.chkColour.get_active()),
-                           'sex': str(self.chkSex.get_active()),
-                           'loft': str(self.chkLoft.get_active()),
-                           'strain': str(self.chkStrain.get_active()),
-                           'status': str(self.chkStatus.get_active()),
-                           'coef': str(self.chkCoef.get_active()),
-                           'sector': str(self.chkSector.get_active()),
-                           'category': str(self.chkCategory.get_active()),
-                           'type': str(self.chkType.get_active()),
-                           'weather': str(self.chkWeather.get_active()),
-                           'wind': str(self.chkWind.get_active()),
-                           'comment': str(self.chkComment.get_active()),
-                          },
-               "Printing": {
-                    "paper": self.cbPaper.get_active(),
-                    "layout": self.cbLayout.get_active(),
-                    "pigOptColour": str(self.chkPigOptColour.get_active()),
-                    "perName": str(self.chkPerName.get_active()),
-                    "perAddress": str(self.chkPerAddress.get_active()),
-                    "perPhone": str(self.chkPerPhone.get_active()),
-                    "perEmail": str(self.chkPerEmail.get_active()),
-                    "pigName": str(self.chkPigName.get_active()),
-                    "pigColour": str(self.chkPigColour.get_active()),
-                    "pigSex": str(self.chkPigSex.get_active()),
-                    "pigExtra": str(self.chkPigExtra.get_active()),
-                    "pigImage": str(self.chkPigImage.get_active()),
-                    "pigColumnNames": str(self.chkPigColumnNames.get_active()),
-                    "pigOptSex": str(self.chkPigOptSex.get_active()),
-                    "resColumnNames": str(self.chkResColumnNames.get_active()),
-                    "resDate": str(self.chkResDate.get_active()),
-                   }
-              }
+        settings = [
+                ('options.check-for-updates', self.chkUpdate.get_active()),
+                ('options.language', self.combolangs.get_active_text()),
+                ##('options.format-coef', self.entrycoef.get_text()),
+                ##('options.format-date', self.entrydate.get_text()),
 
-        self.options.write_options(dic)
+                ('interface.arrows', self.chkArrows.get_active()),
+                ('interface.stats', self.chkStats.get_active()),
+                ('interface.theme', self.combothemes.get_active()),
+                ('interface.toolbar', self.chkToolbar.get_active()),
+                ('interface.statusbar', self.chkStatusbar.get_active()),
+
+                ('backup.automatic-backup', self.checkbackup.get_active()),
+                ('backup.interval', self.spinday.get_value_as_int()),
+                ('backup.location', self.fcbutton.get_current_folder()),
+
+                ('columns.pigeon-name', self.chkName.get_active()),
+                ('columns.pigeon-colour', self.chkColour.get_active()),
+                ('columns.pigeon-sex', self.chkSex.get_active()),
+                ('columns.pigeon-strain', self.chkStrain.get_active()),
+                ('columns.pigeon-status', self.chkStatus.get_active()),
+                ('columns.pigeon-loft', self.chkLoft.get_active()),
+                ('columns.result-coef', self.chkCoef.get_active()),
+                ('columns.result-sector', self.chkSector.get_active()),
+                ('columns.result-category', self.chkCategory.get_active()),
+                ('columns.result-type', self.chkType.get_active()),
+                ('columns.result-weather', self.chkWeather.get_active()),
+                ('columns.result-wind', self.chkWind.get_active()),
+                ('columns.result-comment', self.chkComment.get_active()),
+
+                ('printing.general-paper', self.cbPaper.get_active()),
+                ('printing.pedigree-layout', self.cbLayout.get_active()),
+                ('printing.pedigree-box-colour', self.chkPigOptColour.get_active()),
+                ('printing.pedigree-name', self.chkPigName.get_active()),
+                ('printing.pedigree-colour', self.chkPigColour.get_active()),
+                ('printing.pedigree-sex', self.chkPigSex.get_active()),
+                ('printing.pedigree-extra', self.chkPigExtra.get_active()),
+                ('printing.pedigree-image', self.chkPigImage.get_active()),
+                ('printing.pigeon-colnames', self.chkPigColumnNames.get_active()),
+                ('printing.pigeon-sex', self.chkPigOptSex.get_active()),
+                ('printing.result-colnames', self.chkResColumnNames.get_active()),
+                ('printing.result-date', self.chkResDate.get_active()),
+                ('printing.user-name', self.chkPerName.get_active()),
+                ('printing.user-address', self.chkPerAddress.get_active()),
+                ('printing.user-phone', self.chkPerPhone.get_active()),
+                ('printing.user-email', self.chkPerEmail.get_active()),
+            ]
+
+        for option, value in settings:
+            config.set(option, value)
+        config.save()
         self._finish_options(restart)
 
     # Internal methods
     def _set_options(self):
         # General
-        self.chkUpdate.set_active(self.options.update)
+        self.chkUpdate.set_active(config.get('options.check-for-updates'))
 
         for index, lang in enumerate(self.languages):
-            if self.options.language == lang:
+            if config.get('options.language') == lang:
                 self.combolangs.set_active(index)
                 break
 
-        self.checkbackup.set_active(self.options.backup)
-        self.spinday.set_value(self.options.interval)
-        self.fcbutton.set_current_folder(self.options.location)
-        ##self.entrycoef.set_text(self.options.coefformat)
-        ##self.entrydate.set_text(self.options.dateformat)
+        self.checkbackup.set_active(config.get('backup.automatic-backup'))
+        self.spinday.set_value(config.get('backup.interval'))
+        self.fcbutton.set_current_folder(config.get('backup.location'))
+        ##self.entrycoef.set_text(config.get('options.format-coef'))
+        ##self.entrydate.set_text(config.get('options.format-date'))
 
         # Appearance
-        self.chkName.set_active(self.options.colname)
-        self.chkColour.set_active(self.options.colcolour)
-        self.chkSex.set_active(self.options.colsex)
-        self.chkLoft.set_active(self.options.colloft)
-        self.chkStrain.set_active(self.options.colstrain)
-        self.chkStatus.set_active(self.options.colstatus)
-        self.chkCoef.set_active(self.options.colcoef)
-        self.chkSector.set_active(self.options.colsector)
-        self.chkCategory.set_active(self.options.colcategory)
-        self.chkType.set_active(self.options.coltype)
-        self.chkWeather.set_active(self.options.colweather)
-        self.chkWind.set_active(self.options.colwind)
-        self.chkComment.set_active(self.options.colcomment)
+        self.chkName.set_active(config.get('columns.pigeon-name'))
+        self.chkColour.set_active(config.get('columns.pigeon-colour'))
+        self.chkSex.set_active(config.get('columns.pigeon-sex'))
+        self.chkLoft.set_active(config.get('columns.pigeon-loft'))
+        self.chkStrain.set_active(config.get('columns.pigeon-strain'))
+        self.chkStatus.set_active(config.get('columns.pigeon-status'))
+        self.chkCoef.set_active(config.get('columns.result-coef'))
+        self.chkSector.set_active(config.get('columns.result-sector'))
+        self.chkCategory.set_active(config.get('columns.result-category'))
+        self.chkType.set_active(config.get('columns.result-type'))
+        self.chkWeather.set_active(config.get('columns.result-weather'))
+        self.chkWind.set_active(config.get('columns.result-wind'))
+        self.chkComment.set_active(config.get('columns.result-comment'))
 
-        self.combothemes.set_active(self.options.theme)
+        self.combothemes.set_active(config.get('interface.theme'))
 
-        self.chkArrows.set_active(self.options.arrows)
-        self.chkStats.set_active(self.options.stats)
-        self.chkToolbar.set_active(self.options.toolbar)
-        self.chkStatusbar.set_active(self.options.statusbar)
+        self.chkArrows.set_active(config.get('interface.arrows'))
+        self.chkStats.set_active(config.get('interface.stats'))
+        self.chkToolbar.set_active(config.get('interface.toolbar'))
+        self.chkStatusbar.set_active(config.get('interface.statusbar'))
 
         # Printing
-        self.cbPaper.set_active(self.options.paper)
-        self.cbLayout.set_active(self.options.layout)
-        self.chkPigOptColour.set_active(self.options.pigOptColour)
+        self.cbPaper.set_active(config.get('printing.general-paper'))
+        self.cbLayout.set_active(config.get('printing.pedigree-layout'))
+        self.chkPigOptColour.set_active(config.get('printing.pedigree-box-colour'))
 
-        self.chkPerName.set_active(self.options.perName)
-        self.chkPerAddress.set_active(self.options.perAddress)
-        self.chkPerPhone.set_active(self.options.perPhone)
-        self.chkPerEmail.set_active(self.options.perEmail)
+        self.chkPerName.set_active(config.get('printing.user-name'))
+        self.chkPerAddress.set_active(config.get('printing.user-address'))
+        self.chkPerPhone.set_active(config.get('printing.user-phone'))
+        self.chkPerEmail.set_active(config.get('printing.user-email'))
 
-        self.chkPigName.set_active(self.options.pigName)
-        self.chkPigColour.set_active(self.options.pigColour)
-        self.chkPigSex.set_active(self.options.pigSex)
-        self.chkPigExtra.set_active(self.options.pigExtra)
-        self.chkPigImage.set_active(self.options.pigImage)
+        self.chkPigName.set_active(config.get('printing.pedigree-name'))
+        self.chkPigColour.set_active(config.get('printing.pedigree-colour'))
+        self.chkPigSex.set_active(config.get('printing.pedigree-sex'))
+        self.chkPigExtra.set_active(config.get('printing.pedigree-extra'))
+        self.chkPigImage.set_active(config.get('printing.pedigree-image'))
 
-        self.chkPigColumnNames.set_active(self.options.pigColumnNames)
-        self.chkPigOptSex.set_active(self.options.pigOptSex)
+        self.chkPigColumnNames.set_active(config.get('printing.pigeon-colnames'))
+        self.chkPigOptSex.set_active(config.get('printing.pigeon-sex'))
 
-        self.chkResColumnNames.set_active(self.options.resColumnNames)
-        self.chkResDate.set_active(self.options.resDate)
+        self.chkResColumnNames.set_active(config.get('printing.result-colnames'))
+        self.chkResDate.set_active(config.get('printing.result-date'))
 
     def _finish_options(self, restart=False, set_default=False):
         arrows = self.chkArrows.get_active()

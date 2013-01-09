@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import config
 from translation import gettext as _
 from reports.common import HelperMethods
 from reportlib.basereport import Report, ReportOptions
@@ -25,11 +26,10 @@ from reportlib.styles import (ParagraphStyle, FontStyle,
 
 
 class ResultsReport(Report, HelperMethods):
-    def __init__(self, reportopts, results, userinfo, options):
+    def __init__(self, reportopts, results, userinfo):
         Report.__init__(self, "My results", reportopts)
 
         self._results = results
-        self._options = options
         self._userinfo = userinfo
 
     def write_report(self):
@@ -52,24 +52,24 @@ class ResultsReport(Report, HelperMethods):
                     4: _("Out of")
                 }
 
-        if self._options.colcoef:
+        if config.get('columns.result-coef'):
             columns[5] = _("Coef.")
-        if self._options.colsector:
+        if config.get('columns.result-sector'):
             columns[6] = _("Sector")
-        if self._options.coltype:
+        if config.get('columns.result-type'):
             columns[7] = _("Type")
-        if self._options.colcategory:
+        if config.get('columns.result-category'):
             columns[8] = _("Category")
-        if self._options.colweather:
+        if config.get('columns.result-weather'):
             columns[9] = _("Wind")
-        if self._options.colwind:
+        if config.get('columns.result-wind'):
             columns[10] = _("Weather")
-        if self._options.colcomment:
+        if config.get('columns.result-comment'):
             columns[11] = _("Comment")
 
         self.doc.start_table("my_table", "table")
 
-        if self._options.resColumnNames:
+        if config.get('printing.result-colnames'):
             self.doc.start_row()
             for name in columns.values():
                 self.add_cell(name, "headercell", "colheader")

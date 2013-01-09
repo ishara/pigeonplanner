@@ -25,6 +25,7 @@ import os
 import os.path
 import sys
 import logging
+import platform
 import webbrowser
 from optparse import OptionParser
 
@@ -32,10 +33,25 @@ import gtk
 import gobject
 
 import const
-import common
 
 
 WIN32 = sys.platform.startswith("win")
+
+
+def get_operating_system():
+    operatingsystem = platform.system()
+    if operatingsystem == "Windows":
+        release, version, csd, ptype = platform.win32_ver()
+        distribution = "%s %s" % (release, csd)
+    elif operatingsystem == "Linux":
+        distname, version, nick = platform.linux_distribution()
+        distribution = "%s %s" % (distname, version)
+    elif operatingsystem == "Darwin":
+        release, versioninfo, machine = platform.mac_ver()
+        distribution = release
+    else:
+        distribution = ''
+    return operatingsystem, distribution
 
 
 class  NullFile(object):
@@ -84,16 +100,25 @@ class Startup(object):
         opts, args = parser.parse_args()
         self._loglevel = logging.DEBUG if opts.debug else logging.WARNING
 
-        # Initialize options
-        import options
-        self.options = options.GetOptions()
-
         if not os.path.isdir(const.THUMBDIR):
             os.mkdir(const.THUMBDIR)
 
+        # Always setup logging
+        #TODO: find a better (and crossplatform) way
+        try:
+            self.setup_logging()
+        except WindowsError:
+            text = "The program or database tool is already running!"
+            dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, text)
+            dialog.set_title("Already running - Pigeon Planner")
+            dialog.run()
+            dialog.destroy()
+            raise SystemExit(text)
+
     def setup_locale(self):
+        import config
         import translation
-        translation.setup(self.options.language)
+        translation.setup(config.get('options.language'))
 
     def setup_logging(self):
         """
@@ -121,7 +146,7 @@ class Startup(object):
         self.logger.debug("Home path: %s" % const.HOMEDIR)
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
         self.logger.debug("Current path: %s" % const.ROOTDIR)
-        self.logger.debug("Running on: %s %s" % (common.get_operating_system()))
+        self.logger.debug("Running on: %s %s" % (get_operating_system()))
         self.logger.debug("Python version: %s" % ".".join(str(n) for n in
                                                         sys.version_info[:3]))
         self.logger.debug("GTK+ version: %s" % ".".join(str(n) for n in
@@ -132,18 +157,20 @@ class Startup(object):
             self.logger.debug("First run")
 
     def setup_theme(self):
+        import config
         # Set theme
         themedir = '.\\share\\themes'
         if WIN32 and os.path.exists(themedir):
             themes = os.listdir(themedir)
             try:
-                theme = themes[self.options.theme]
+                theme = themes[config.get('interface.theme')]
             except IndexError:
                 theme = themes[1]
-                self.options.set_option('Options', 'theme', 1)
+                config.set('interface.theme', 1)
             themefile = os.path.join(themedir, theme, 'gtk-2.0\\gtkrc')
             gtk.rc_parse(themefile)
 
+        import common
         from translation import gettext as _
         # Register custom stock icons
         common.create_stock_button([

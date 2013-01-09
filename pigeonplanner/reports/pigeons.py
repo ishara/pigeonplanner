@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import config
 from translation import gettext as _
 from reports.common import HelperMethods
 from reportlib.basereport import Report, ReportOptions
@@ -24,11 +25,10 @@ from reportlib.styles import (ParagraphStyle, FontStyle, TableStyle, TableCellSt
 
 
 class PigeonsReport(Report, HelperMethods):
-    def __init__(self, reportopts, pigeons, userinfo, options):
+    def __init__(self, reportopts, pigeons, userinfo):
         Report.__init__(self, "My_pigeons", reportopts)
 
         self._pigeons = pigeons
-        self._options = options
         self._userinfo = userinfo
 
     def write_report(self):
@@ -39,22 +39,22 @@ class PigeonsReport(Report, HelperMethods):
         #TODO: column size with different columns
         columns = [(_("Band no."), "get_band_string")]
 
-        if self._options.colsex or self._options.pigOptSex:
+        if config.get('columns.pigeon-sex') or config.get('printing.pigeon-sex'):
             columns.append((_("Sex"), "get_sex_string"))
-        if self._options.colname:
+        if config.get('columns.pigeon-name'):
             columns.append((_("Name"), "get_name"))
-        if self._options.colcolour:
+        if config.get('columns.pigeon-colour'):
             columns.append((_("Colour"), "get_colour"))
-        if self._options.colloft:
+        if config.get('columns.pigeon-loft'):
             columns.append((_("Loft"), "get_loft"))
-        if self._options.colstrain:
+        if config.get('columns.pigeon-strain'):
             columns.append((_("Strain"), "get_strain"))
-        if self._options.colstatus:
+        if config.get('columns.pigeon-status'):
             columns.append((_("Status"), "get_status"))
 
         self.doc.start_table("my_table", "table")
 
-        if self._options.pigColumnNames:
+        if config.get('printing.pigeon-colnames'):
             self.doc.start_row()
             for name, method in columns:
                 self.add_cell(name, "headercell", "colheader")

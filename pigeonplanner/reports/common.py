@@ -16,23 +16,26 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import config
+
+
 class HelperMethods(object):
     def add_header(self):
         """
         Add a header with user info to the report.
 
-        Note: this method assumes there is a self._options and self._userinfo
+        Note: this method assumes there is a self._userinfo
         """
         self.doc.start_paragraph("header")
-        if self._options.perName:
+        if config.get('printing.user-name'):
             self.doc.write_text(self._userinfo['name'] + "\n")
-        if self._options.perAddress:
+        if config.get('printing.user-address'):
             self.doc.write_text(self._userinfo['street'] + "\n")
             self.doc.write_text('%s %s\n' % (self._userinfo['code'],
                                              self._userinfo['city']))
-        if self._options.perPhone:
+        if config.get('printing.user-phone'):
             self.doc.write_text(self._userinfo['phone'] + "\n")
-        if self._options.perEmail:
+        if config.get('printing.user-email'):
             self.doc.write_text(self._userinfo['email'])
         self.doc.end_paragraph()
 

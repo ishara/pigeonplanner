@@ -20,6 +20,7 @@ import gtk
 
 import const
 import common
+import config
 import errors
 import builder
 import messages
@@ -47,13 +48,12 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
      COL_WEATHER,
      COL_COMMENT) = range(12)
 
-    def __init__(self, parent, database, options, parser):
+    def __init__(self, parent, database, parser):
         basetab.BaseTab.__init__(self, _("Results"), "icon_result.png")
         builder.GtkBuilder.__init__(self, "ResultsView.ui")
 
         self.parent = parent
         self.database = database
-        self.options = options
         self.parser = parser
         self._selection = self.treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)
@@ -85,8 +85,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             utils.popup_menu(event, entries)
 
     def on_buttonall_clicked(self, widget):
-        resultwindow.ResultWindow(self.parent, self.parser,
-                                  self.database, self.options)
+        resultwindow.ResultWindow(self.parent, self.parser, self.database)
 
     def on_buttonimport_clicked(self, widget):
         resultparser.ResultParser(self.parent, self.database, 
@@ -204,13 +203,13 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.buttonadd.clicked()
 
     def set_columns(self):
-        columnsdic = {4: self.options.colcoef,
-                      5: self.options.colsector,
-                      6: self.options.coltype,
-                      7: self.options.colcategory,
-                      8: self.options.colwind,
-                      9: self.options.colweather,
-                      10: self.options.colcomment}
+        columnsdic = {4: config.get('columns.result-coef'),
+                      5: config.get('columns.result-sector'),
+                      6: config.get('columns.result-type'),
+                      7: config.get('columns.result-category'),
+                      8: config.get('columns.result-wind'),
+                      9: config.get('columns.result-weather'),
+                      10: config.get('columns.result-comment')}
         for key, value in columnsdic.items():
             self.treeview.get_column(key).set_visible(value)
 

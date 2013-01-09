@@ -19,6 +19,7 @@
 import gtk
 
 import common
+import config
 from ui import dialogs
 from ui.widgets import comboboxes
 from translation import gettext as _
@@ -31,11 +32,10 @@ class MainTreeView(gtk.TreeView):
 
     __gtype_name__ = 'MainTreeView'
 
-    def __init__(self, parser, options, statusbar):
+    def __init__(self, parser, statusbar):
         gtk.TreeView.__init__(self)
 
         self.parser = parser
-        self.options = options
         self.statusbar = statusbar
         self.statusbar.set_filter(False)
         self.filters = []
@@ -166,12 +166,12 @@ class MainTreeView(gtk.TreeView):
             return None
 
     def set_columns(self):
-        columnsdic = {2: self.options.colname,
-                      3: self.options.colcolour,
-                      4: self.options.colsex,
-                      5: self.options.colloft,
-                      6: self.options.colstrain,
-                      7: self.options.colstatus}
+        columnsdic = {2: config.get('columns.pigeon-name'),
+                      3: config.get('columns.pigeon-colour'),
+                      4: config.get('columns.pigeon-sex'),
+                      5: config.get('columns.pigeon-loft'),
+                      6: config.get('columns.pigeon-strain'),
+                      7: config.get('columns.pigeon-status')}
         for key, value in columnsdic.items():
             self.get_column(key).set_visible(value)
 

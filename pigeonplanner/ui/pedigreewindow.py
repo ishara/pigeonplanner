@@ -49,7 +49,7 @@ class PedigreeWindow(gtk.Window):
    </toolbar>
 </ui>
 """
-    def __init__(self, parent, database, options, parser, pedigree, pigeon):
+    def __init__(self, parent, database, parser, pedigree, pigeon):
         gtk.Window.__init__(self)
         self.connect('delete-event', self.on_close_dialog)
         self.set_modal(True)
@@ -59,7 +59,6 @@ class PedigreeWindow(gtk.Window):
         self.set_skip_taskbar_hint(True)
 
         self.database = database
-        self.options = options
         self.parser = parser
         self.pedigree = pedigree
         self.pigeon = pigeon
@@ -187,10 +186,9 @@ class PedigreeWindow(gtk.Window):
         if not tools.check_user_info(self, self.database, userinfo['name']):
             return
 
-        PedigreeReport, PedigreeReportOptions = get_pedigree(self.options)
-        psize = common.get_pagesize_from_opts(self.options.paper)
+        PedigreeReport, PedigreeReportOptions = get_pedigree()
+        psize = common.get_pagesize_from_opts()
         opts = PedigreeReportOptions(psize, print_action=print_action,
                                             filename=save_path, parent=self)
-        report(PedigreeReport, opts, self.parser, self.pigeon,
-                                            userinfo, self.options)
+        report(PedigreeReport, opts, self.parser, self.pigeon, userinfo)
 

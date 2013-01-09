@@ -25,6 +25,8 @@ import sys
 import tempfile
 from datetime import datetime
 
+# No application imports!
+
 
 NAME = "Pigeon Planner"
 VERSION = "1.7.0"
@@ -97,6 +99,7 @@ GLADEDIR = os.path.join(ROOTDIR, 'glade')
 THUMBDIR = os.path.join(PREFDIR, u'thumbs')
 DATABASE = os.path.join(PREFDIR, u'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, u'pigeonplanner.log')
+CONFIGFILE = os.path.join(PREFDIR, 'pigeonplanner.cfg')
 
 TEMPDIR = tempfile.gettempdir()
 

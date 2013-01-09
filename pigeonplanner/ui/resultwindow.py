@@ -25,6 +25,7 @@ import datetime
 import gtk
 
 import common
+import config
 import builder
 from ui import tools
 from ui import dialogs
@@ -70,12 +71,11 @@ class ResultWindow(builder.GtkBuilder):
    </toolbar>
 </ui>
 """
-    def __init__(self, parent, parser, database, options):
+    def __init__(self, parent, parser, database):
         builder.GtkBuilder.__init__(self, "ResultWindow.ui")
 
         self.database = database
         self.parser = parser
-        self.options = options
         self.pdfname = "%s_%s.pdf" % (_("Results"), datetime.date.today())
 
         self.filters = []
@@ -175,13 +175,13 @@ class ResultWindow(builder.GtkBuilder):
         self.treeview.thaw_child_notify()
 
     def set_columns(self):
-        columnsdic = {6: self.options.colcoef,
-                      7: self.options.colsector,
-                      8: self.options.coltype,
-                      9: self.options.colcategory,
-                      10: self.options.colwind,
-                      11: self.options.colweather,
-                      12: self.options.colcomment}
+        columnsdic = {6: config.get('columns.result-coef'),
+                      7: config.get('columns.result-sector'),
+                      8: config.get('columns.result-type'),
+                      9: config.get('columns.result-category'),
+                      10: config.get('columns.result-wind'),
+                      11: config.get('columns.result-weather'),
+                      12: config.get('columns.result-comment')}
         for key, value in columnsdic.items():
             self.treeview.get_column(key).set_visible(value)
 
@@ -260,8 +260,8 @@ class ResultWindow(builder.GtkBuilder):
                 values.append(str(value))
             results.append(values)
 
-        psize = common.get_pagesize_from_opts(self.options.paper)
+        psize = common.get_pagesize_from_opts()
         opts = ResultsReportOptions(psize, None, print_action, save_path,
                                            parent=self.resultwindow)
-        report(ResultsReport, opts, results, userinfo, self.options)
+        report(ResultsReport, opts, results, userinfo)
 

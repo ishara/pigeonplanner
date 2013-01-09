@@ -27,12 +27,11 @@ from reports.velocity import VelocityReport, VelocityReportOptions
 
 
 class VelocityCalculator(builder.GtkBuilder):
-    def __init__(self, parent, database, options):
+    def __init__(self, parent, database):
         builder.GtkBuilder.__init__(self, "VelocityCalculator.ui")
 
         self.parent = parent
         self.database = database
-        self.options = options
 
         dt = datetime.datetime.now()
         self.spinbutton_prognosis_hours.set_value(dt.hour)
@@ -112,7 +111,7 @@ class VelocityCalculator(builder.GtkBuilder):
                                  self.spinbutton_prognosis_seconds.get_text())
             info = [date.strftime("%Y-%m-%d"), release, distance]
 
-            psize = common.get_pagesize_from_opts(self.options.paper)
+            psize = common.get_pagesize_from_opts()
             reportopts = VelocityReportOptions(psize)
             report(VelocityReport, reportopts, data, info)
 

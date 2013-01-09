@@ -27,6 +27,7 @@ import gobject
 import const
 import common
 import backup
+import startup
 import messages
 from ui import filechooser
 from ui.widgets import comboboxes
@@ -101,7 +102,7 @@ class InformationDialog(gtk.Dialog):
         self.destroy()
 
     def get_versions(self):
-        operatingsystem, distribution = common.get_operating_system()
+        operatingsystem, distribution = startup.get_operating_system()
         return (("Pigeon Planner", str(const.VERSION)),
                 ("Python", str(sys.version).replace('\n','')),
                 ("LANG", os.environ.get('LANG','')),
