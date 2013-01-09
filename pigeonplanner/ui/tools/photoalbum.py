@@ -27,7 +27,6 @@ logger = logging.getLogger(__name__)
 
 import builder
 from ui import utils
-from translation import gettext as _
 
 
 MARGIN = 6
@@ -101,6 +100,8 @@ class PhotoAlbum(builder.GtkBuilder):
             pass
         self.set_zoom(1.0)
         self.zoom_fit_button.set_active(True)
+
+        self.photoalbum.show()
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
@@ -181,6 +182,10 @@ class PhotoAlbum(builder.GtkBuilder):
 
         screen_width = int(self.pixbuf.get_width() * self.zoom + 2 * MARGIN)
         screen_height = int(self.pixbuf.get_height() * self.zoom + 2 * MARGIN)
+        if screen_width < 1:
+            screen_width = 1
+        if screen_height < 1:
+            screen_height = 1
         self.drawingarea.set_size_request(screen_width, screen_height)
         self.drawingarea.queue_draw()
         

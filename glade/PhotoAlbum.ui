@@ -4,59 +4,10 @@
   <!-- interface-naming-policy project-wide -->
   <object class="GtkActionGroup" id="actiongroup">
     <child>
-      <object class="GtkAction" id="First">
-        <property name="tooltip" translatable="yes">Shows the first picture</property>
-        <property name="stock_id">gtk-goto-first</property>
-        <signal name="activate" handler="on_first_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Prev">
-        <property name="tooltip" translatable="yes">Shows previous picture</property>
-        <property name="stock_id">gtk-go-back</property>
-        <signal name="activate" handler="on_prev_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Next">
-        <property name="tooltip" translatable="yes">Shows the next picture</property>
-        <property name="stock_id">gtk-go-forward</property>
-        <signal name="activate" handler="on_next_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Last">
-        <property name="tooltip" translatable="yes">Shows the last picture</property>
-        <property name="stock_id">gtk-goto-last</property>
-        <signal name="activate" handler="on_last_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="In">
-        <property name="tooltip" translatable="yes">Zooms the picture in</property>
-        <property name="stock_id">gtk-zoom-in</property>
-        <signal name="activate" handler="on_zoom_in_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Out">
-        <property name="tooltip" translatable="yes">Zooms the picture out</property>
-        <property name="stock_id">gtk-zoom-out</property>
-        <signal name="activate" handler="on_zoom_out_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Close">
-        <property name="tooltip" translatable="yes">Close this window</property>
-        <property name="stock_id">gtk-close</property>
-        <signal name="activate" handler="on_close_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkToggleAction" id="Screen">
-        <property name="tooltip" translatable="yes">View in fullscreen</property>
-        <property name="stock_id">gtk-fullscreen</property>
-        <signal name="toggled" handler="on_fullscreen_toggled" swapped="no"/>
+      <object class="GtkToggleAction" id="Fit">
+        <property name="tooltip" translatable="yes">Zooms to fit the whole picture</property>
+        <property name="stock_id">gtk-zoom-fit</property>
+        <signal name="toggled" handler="on_zoom_fit_toggled" swapped="no"/>
       </object>
     </child>
     <child>
@@ -67,15 +18,63 @@
       </object>
     </child>
     <child>
-      <object class="GtkToggleAction" id="Fit">
-        <property name="tooltip" translatable="yes">Zooms to fit the whole picture</property>
-        <property name="stock_id">gtk-zoom-fit</property>
-        <signal name="toggled" handler="on_zoom_fit_toggled" swapped="no"/>
+      <object class="GtkToggleAction" id="Screen">
+        <property name="tooltip" translatable="yes">View in fullscreen</property>
+        <property name="stock_id">gtk-fullscreen</property>
+        <signal name="toggled" handler="on_fullscreen_toggled" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Close">
+        <property name="tooltip" translatable="yes">Close this window</property>
+        <property name="stock_id">gtk-close</property>
+        <signal name="activate" handler="on_close_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Out">
+        <property name="tooltip" translatable="yes">Zooms the picture out</property>
+        <property name="stock_id">gtk-zoom-out</property>
+        <signal name="activate" handler="on_zoom_out_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="In">
+        <property name="tooltip" translatable="yes">Zooms the picture in</property>
+        <property name="stock_id">gtk-zoom-in</property>
+        <signal name="activate" handler="on_zoom_in_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Last">
+        <property name="tooltip" translatable="yes">Shows the last picture</property>
+        <property name="stock_id">gtk-goto-last</property>
+        <signal name="activate" handler="on_last_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Next">
+        <property name="tooltip" translatable="yes">Shows the next picture</property>
+        <property name="stock_id">gtk-go-forward</property>
+        <signal name="activate" handler="on_next_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Prev">
+        <property name="tooltip" translatable="yes">Shows previous picture</property>
+        <property name="stock_id">gtk-go-back</property>
+        <signal name="activate" handler="on_prev_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="First">
+        <property name="tooltip" translatable="yes">Shows the first picture</property>
+        <property name="stock_id">gtk-goto-first</property>
+        <signal name="activate" handler="on_first_clicked" swapped="no"/>
       </object>
     </child>
   </object>
   <object class="GtkWindow" id="photoalbum">
-    <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Photo Album</property>
     <property name="window_position">center-on-parent</property>
