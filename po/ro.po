@@ -7,148 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-11 13:59+0100\n"
-"PO-Revision-Date: 2012-03-19 07:06+0000\n"
-"Last-Translator: Iacob Catalin <Unknown>\n"
+"POT-Creation-Date: 2013-01-07 18:29+0100\n"
+"PO-Revision-Date: 2012-05-20 14:17+0000\n"
+"Last-Translator: angelescu <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-20 04:56+0000\n"
-"X-Generator: Launchpad (build 14969)\n"
+"X-Launchpad-Export-Date: 2013-01-08 04:55+0000\n"
+"X-Generator: Launchpad (build 16402)\n"
 "Language: ro\n"
-
-#: pigeonplanner/printing.py:165
-msgid "Pedigree of:"
-msgstr "Pedigree porumbel"
-
-#: pigeonplanner/printing.py:371 pigeonplanner/ui/dialogs.py:432
-#: pigeonplanner/ui/widgets/treeview.py:200
-#: pigeonplanner/ui/tabs/relatives.py:156 glade/BreedingView.ui:456
-#: glade/BreedingView.ui:626 glade/BreedingView.ui:877
-#: glade/BreedingView.ui:1077 glade/ResultWindow.ui:131
-#: glade/ResultParser.ui:362
-msgid "Band no."
-msgstr "Inelul nr."
-
-#: pigeonplanner/printing.py:372 pigeonplanner/printing.py:596
-#: glade/ResultsView.ui:663 glade/BreedingView.ui:738
-#: glade/ResultWindow.ui:157 glade/DetailsView.ui:212 glade/DetailsView.ui:325
-#: glade/DetailsView.ui:446 glade/Calendar.ui:136 glade/MedicationView.ui:564
-#: glade/MedicationView.ui:649
-msgid "Date"
-msgstr "Dată"
-
-#: pigeonplanner/printing.py:373 pigeonplanner/ui/resultwindow.py:123
-#: glade/ResultsView.ui:676 glade/RaceManager.ui:132 glade/ResultWindow.ui:170
-#: glade/DetailsView.ui:490
-msgid "Racepoint"
-msgstr "Punct de lansare"
-
-#: pigeonplanner/printing.py:374 glade/ResultsView.ui:259
-#: glade/ResultsView.ui:689 glade/ResultWindow.ui:183
-msgid "Placed"
-msgstr "Loc"
-
-#: pigeonplanner/printing.py:375 glade/ResultsView.ui:209
-#: glade/ResultsView.ui:702 glade/ResultWindow.ui:196
-msgid "Out of"
-msgstr "Din"
-
-#: pigeonplanner/printing.py:376
-msgid "Coef."
-msgstr "Punctaj"
-
-#: pigeonplanner/printing.py:377 pigeonplanner/ui/resultwindow.py:124
-#: glade/ResultsView.ui:165 glade/ResultsView.ui:728 glade/ResultWindow.ui:222
-#: glade/OptionsDialog.ui:685
-msgid "Sector"
-msgstr "Zona"
-
-#: pigeonplanner/printing.py:378 glade/ResultsView.ui:444
-#: glade/ResultsView.ui:741 glade/ResultWindow.ui:235
-#: glade/ExportWindow.ui:126 glade/OptionsDialog.ui:713 glade/Calendar.ui:177
-msgid "Type"
-msgstr "Tip:"
-
-#: pigeonplanner/printing.py:379 glade/ResultsView.ui:486
-#: glade/ResultsView.ui:754 glade/ResultWindow.ui:248
-#: glade/OptionsDialog.ui:699
-msgid "Category"
-msgstr "Categorie"
-
-#: pigeonplanner/printing.py:380 pigeonplanner/ui/tools/datamanager.py:50
-#: glade/ResultsView.ui:340 glade/ResultsView.ui:767 glade/ResultWindow.ui:261
-#: glade/OptionsDialog.ui:743
-msgid "Wind"
-msgstr "Vânt"
-
-#: pigeonplanner/printing.py:381 pigeonplanner/ui/tools/datamanager.py:49
-#: glade/ResultsView.ui:326 glade/ResultsView.ui:780 glade/ResultWindow.ui:274
-#: glade/OptionsDialog.ui:729
-msgid "Weather"
-msgstr "Vreme"
-
-#: pigeonplanner/printing.py:382 glade/ResultsView.ui:354
-#: glade/ResultsView.ui:793 glade/BreedingView.ui:303
-#: glade/BreedingView.ui:1321 glade/ResultWindow.ui:287
-#: glade/OptionsDialog.ui:759 glade/AddressBook.ui:413 glade/Calendar.ui:261
-#: glade/MedicationView.ui:272 glade/MedicationView.ui:939
-msgid "Comment"
-msgstr "Comentariu"
-
-#: pigeonplanner/printing.py:473
-msgid "Page"
-msgstr "Pagină"
-
-#: pigeonplanner/printing.py:587 pigeonplanner/printing.py:609
-#: pigeonplanner/printing.py:610 glade/VelocityCalculator.ui:188
-#: glade/VelocityCalculator.ui:475 glade/VelocityCalculator.ui:908
-msgid "Velocity"
-msgstr "Viteza"
-
-#: pigeonplanner/printing.py:598 glade/VelocityCalculator.ui:540
-msgid "Released"
-msgstr "Lansare"
-
-#: pigeonplanner/printing.py:600 glade/RaceManager.ui:191
-#: glade/DistanceCalculator.ui:369 glade/VelocityCalculator.ui:162
-#: glade/VelocityCalculator.ui:499
-msgid "Distance"
-msgstr "Distanța"
-
-#: pigeonplanner/printing.py:615 pigeonplanner/printing.py:617
-#: glade/VelocityCalculator.ui:919
-msgid "Flight Time"
-msgstr "Timp de zbor"
-
-#: pigeonplanner/printing.py:622 pigeonplanner/printing.py:624
-#: glade/VelocityCalculator.ui:930
-msgid "Time of Arrival"
-msgstr "Timp de sosire"
-
-#: pigeonplanner/startup.py:150 pigeonplanner/ui/pedigreewindow.py:70
-#: pigeonplanner/ui/pedigreewindow.py:78 pigeonplanner/ui/optionsdialog.py:57
-#: pigeonplanner/ui/tabs/pedigree.py:27
-msgid "Pedigree"
-msgstr "Certificat de origine"
-
-#: pigeonplanner/startup.py:151 glade/Dialogs.ui:8 glade/OptionsDialog.ui:1038
-#: glade/AddressBook.ui:372
-msgid "E-mail"
-msgstr "E-mail"
-
-#: pigeonplanner/startup.py:152
-msgid "Send"
-msgstr "Trimite"
-
-#: pigeonplanner/startup.py:153
-msgid "Report"
-msgstr "Raport"
 
 #: pigeonplanner/messages.py:22 pigeonplanner/common.py:252
 #: pigeonplanner/common.py:259 pigeonplanner/ui/exportwindow.py:56
-#: pigeonplanner/ui/tools/distancecalculator.py:63
+#: pigeonplanner/ui/tools/distancecalculator.py:59
 msgid "Error"
 msgstr "Eroare"
 
@@ -178,7 +50,7 @@ msgstr ""
 "curenta. Nu este intelept sa rulezi o versiune mai veche, intrucat acest "
 "lucru conduce la alterarea datelor."
 
-#: pigeonplanner/messages.py:42 pigeonplanner/ui/mainwindow.py:517
+#: pigeonplanner/messages.py:42 pigeonplanner/ui/mainwindow.py:540
 msgid "Go to the website?"
 msgstr "Mergi catre pagina de internet?"
 
@@ -298,7 +170,7 @@ msgstr "Sterge rezultatul selectat."
 
 #: pigeonplanner/messages.py:104 pigeonplanner/messages.py:107
 #: pigeonplanner/messages.py:156 pigeonplanner/ui/dialogs.py:402
-#: glade/MainWindow.ui:1118
+#: glade/MainWindow.ui:1125
 msgid "Are you sure?"
 msgstr "Eşti sigur?"
 
@@ -459,6 +331,324 @@ msgstr "Eroare: Acest fisier nu exista."
 msgid "Error opening file:"
 msgstr "Eroare in deschiderea fisierului."
 
+#: pigeonplanner/startup.py:150 pigeonplanner/ui/optionsdialog.py:62
+#: pigeonplanner/ui/pedigreewindow.py:69 pigeonplanner/ui/pedigreewindow.py:77
+#: pigeonplanner/ui/tabs/pedigree.py:27
+msgid "Pedigree"
+msgstr "Certificat de origine"
+
+#: pigeonplanner/startup.py:151 glade/OptionsDialog.ui:1077 glade/Dialogs.ui:8
+#: glade/AddressBook.ui:372
+msgid "E-mail"
+msgstr "E-mail"
+
+#: pigeonplanner/startup.py:152
+msgid "Send"
+msgstr "Trimite"
+
+#: pigeonplanner/startup.py:153
+msgid "Report"
+msgstr "Raport"
+
+#: pigeonplanner/reports/pigeons.py:40 pigeonplanner/reports/results.py:48
+#: pigeonplanner/ui/dialogs.py:432 pigeonplanner/ui/tabs/relatives.py:156
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/BreedingView.ui:456
+#: glade/BreedingView.ui:626 glade/BreedingView.ui:877
+#: glade/BreedingView.ui:1077 glade/ResultWindow.ui:131
+#: glade/ResultParser.ui:362
+msgid "Band no."
+msgstr "Inelul nr."
+
+#: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:172
+#: pigeonplanner/ui/widgets/treeview.py:184
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/MainWindow.ui:828
+#: glade/OptionsDialog.ui:646 glade/OptionsDialog.ui:1293
+#: glade/DetailsView.ui:1077 glade/DetailsView.ui:1683
+msgid "Sex"
+msgstr "Sex"
+
+#: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dialogs.py:432
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:592
+#: glade/OptionsDialog.ui:1039 glade/OptionsDialog.ui:1269
+#: glade/AddressBook.ui:129
+msgid "Name"
+msgstr "Nume"
+
+#: pigeonplanner/reports/pigeons.py:47
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:618
+#: glade/OptionsDialog.ui:1279 glade/DetailsView.ui:1066
+#: glade/DetailsView.ui:1672
+msgid "Colour"
+msgstr "Culoare"
+
+#: pigeonplanner/reports/pigeons.py:49
+#: pigeonplanner/ui/widgets/treeview.py:201
+#: pigeonplanner/ui/tools/distancecalculator.py:139 glade/OptionsDialog.ui:632
+#: glade/DetailsView.ui:1040 glade/DetailsView.ui:1488
+#: glade/MedicationView.ui:373
+msgid "Loft"
+msgstr "Compartiment"
+
+#: pigeonplanner/reports/pigeons.py:51
+#: pigeonplanner/ui/widgets/treeview.py:201 glade/OptionsDialog.ui:602
+#: glade/DetailsView.ui:1090 glade/DetailsView.ui:1722
+msgid "Strain"
+msgstr "Rasa"
+
+#: pigeonplanner/reports/pigeons.py:53
+#: pigeonplanner/ui/widgets/treeview.py:192
+#: pigeonplanner/ui/widgets/treeview.py:201 glade/OptionsDialog.ui:660
+msgid "Status"
+msgstr "Statut"
+
+#: pigeonplanner/reports/results.py:49 pigeonplanner/reports/velocity.py:38
+#: glade/ResultsView.ui:663 glade/Calendar.ui:136 glade/BreedingView.ui:738
+#: glade/ResultWindow.ui:157 glade/DetailsView.ui:212 glade/DetailsView.ui:325
+#: glade/DetailsView.ui:446 glade/MedicationView.ui:564
+#: glade/MedicationView.ui:649
+msgid "Date"
+msgstr "Dată"
+
+#: pigeonplanner/reports/results.py:50 pigeonplanner/ui/resultwindow.py:123
+#: glade/ResultsView.ui:676 glade/ResultWindow.ui:170 glade/DetailsView.ui:490
+#: glade/RaceManager.ui:132
+msgid "Racepoint"
+msgstr "Punct de lansare"
+
+#: pigeonplanner/reports/results.py:51 glade/ResultsView.ui:259
+#: glade/ResultsView.ui:689 glade/ResultWindow.ui:183
+msgid "Placed"
+msgstr "Loc"
+
+#: pigeonplanner/reports/results.py:52 glade/ResultsView.ui:209
+#: glade/ResultsView.ui:702 glade/ResultWindow.ui:196
+msgid "Out of"
+msgstr "Din"
+
+#: pigeonplanner/reports/results.py:56
+msgid "Coef."
+msgstr "Punctaj"
+
+#: pigeonplanner/reports/results.py:58 pigeonplanner/ui/resultwindow.py:124
+#: glade/ResultsView.ui:165 glade/ResultsView.ui:728
+#: glade/OptionsDialog.ui:724 glade/ResultWindow.ui:222
+msgid "Sector"
+msgstr "Zona"
+
+#: pigeonplanner/reports/results.py:60 glade/ResultsView.ui:444
+#: glade/ResultsView.ui:741 glade/Calendar.ui:177 glade/OptionsDialog.ui:752
+#: glade/ResultWindow.ui:235 glade/ExportWindow.ui:126
+msgid "Type"
+msgstr "Tip:"
+
+#: pigeonplanner/reports/results.py:62 glade/ResultsView.ui:486
+#: glade/ResultsView.ui:754 glade/OptionsDialog.ui:738
+#: glade/ResultWindow.ui:248
+msgid "Category"
+msgstr "Categorie"
+
+#: pigeonplanner/reports/results.py:64
+#: pigeonplanner/ui/tools/datamanager.py:50 glade/ResultsView.ui:340
+#: glade/ResultsView.ui:767 glade/OptionsDialog.ui:782
+#: glade/ResultWindow.ui:261
+msgid "Wind"
+msgstr "Vânt"
+
+#: pigeonplanner/reports/results.py:66
+#: pigeonplanner/ui/tools/datamanager.py:49 glade/ResultsView.ui:326
+#: glade/ResultsView.ui:780 glade/OptionsDialog.ui:768
+#: glade/ResultWindow.ui:274
+msgid "Weather"
+msgstr "Vreme"
+
+#: pigeonplanner/reports/results.py:68 glade/ResultsView.ui:354
+#: glade/ResultsView.ui:793 glade/Calendar.ui:261 glade/BreedingView.ui:303
+#: glade/BreedingView.ui:1321 glade/OptionsDialog.ui:798
+#: glade/ResultWindow.ui:287 glade/MedicationView.ui:272
+#: glade/MedicationView.ui:939 glade/AddressBook.ui:413
+msgid "Comment"
+msgstr "Comentariu"
+
+#: pigeonplanner/reports/velocity.py:34 pigeonplanner/reports/velocity.py:45
+#: glade/VelocityCalculator.ui:188 glade/VelocityCalculator.ui:475
+#: glade/VelocityCalculator.ui:908
+msgid "Velocity"
+msgstr "Viteza"
+
+#: pigeonplanner/reports/velocity.py:39 glade/VelocityCalculator.ui:540
+msgid "Released"
+msgstr "Lansare"
+
+#: pigeonplanner/reports/velocity.py:40 glade/VelocityCalculator.ui:162
+#: glade/VelocityCalculator.ui:499 glade/DistanceCalculator.ui:369
+#: glade/RaceManager.ui:191
+msgid "Distance"
+msgstr "Distanța"
+
+#: pigeonplanner/reports/velocity.py:46 glade/VelocityCalculator.ui:919
+msgid "Flight Time"
+msgstr "Timp de zbor"
+
+#: pigeonplanner/reports/velocity.py:47 glade/VelocityCalculator.ui:930
+msgid "Time of Arrival"
+msgstr "Timp de sosire"
+
+#: pigeonplanner/reports/pedigrees/swapped_details.py:51
+#: pigeonplanner/reports/pedigrees/original.py:65
+msgid "Pedigree of:"
+msgstr "Pedigree porumbel"
+
+#: pigeonplanner/ui/filechooser.py:54
+msgid "Preview"
+msgstr "Previzualizare"
+
+#: pigeonplanner/ui/filechooser.py:78 pigeonplanner/ui/tabs/media.py:118
+msgid "Images"
+msgstr "Imagini"
+
+#: pigeonplanner/ui/filechooser.py:138
+msgid "Select an image..."
+msgstr "Selectati o imagine..."
+
+#: pigeonplanner/ui/filechooser.py:141
+msgid "No image"
+msgstr "Fără imagine"
+
+#: pigeonplanner/ui/filechooser.py:153 pigeonplanner/ui/filechooser.py:233
+#: pigeonplanner/ui/filechooser.py:253
+msgid "Select a file..."
+msgstr "Selectaţi un fişier..."
+
+#: pigeonplanner/ui/filechooser.py:163
+msgid "Title"
+msgstr "Titlu"
+
+#: pigeonplanner/ui/filechooser.py:167 glade/Calendar.ui:225
+#: glade/MedicationView.ui:216 glade/MedicationView.ui:577
+#: glade/MedicationView.ui:750
+msgid "Description"
+msgstr "Descriere"
+
+#: pigeonplanner/ui/filechooser.py:198 pigeonplanner/ui/filechooser.py:211
+msgid "Save as..."
+msgstr "Salveaza ca..."
+
+#: pigeonplanner/ui/filechooser.py:244
+msgid "Select a folder..."
+msgstr "Selectati un dosar"
+
+#: pigeonplanner/ui/optionsdialog.py:57 glade/BreedingView.ui:322
+#: glade/BreedingView.ui:1340 glade/OptionsDialog.ui:1435
+#: glade/OptionsDialog.ui:1523 glade/DatabaseTool.ui:234
+msgid "General"
+msgstr "General"
+
+#: pigeonplanner/ui/optionsdialog.py:59
+msgid "Appearance"
+msgstr "Înfățișare"
+
+#: pigeonplanner/ui/optionsdialog.py:61
+msgid "Printing"
+msgstr "Imprimare"
+
+#: pigeonplanner/ui/optionsdialog.py:63 pigeonplanner/ui/resultwindow.py:120
+#: glade/MainWindow.ui:10 glade/ExportWindow.ui:254
+msgid "Pigeons"
+msgstr "Porumbei"
+
+#: pigeonplanner/ui/optionsdialog.py:64 pigeonplanner/ui/resultwindow.py:79
+#: pigeonplanner/ui/tabs/results.py:51 glade/ResultsView.ui:21
+msgid "Results"
+msgstr "Rezultate"
+
+#: pigeonplanner/ui/optionsdialog.py:117
+msgid "days"
+msgstr "zile"
+
+#: pigeonplanner/ui/optionsdialog.py:117
+msgid "day"
+msgstr "zi"
+
+#: pigeonplanner/ui/exceptiondialog.py:48
+msgid ""
+"Chances are that your problem is already fixed in this new version. Send a "
+"report anyway?"
+msgstr ""
+"Exista posibilitatea ca problema intalnita sa fi fost remediata in aceasta "
+"noua versiune. Trimiteti totusi un raport ?"
+
+#: pigeonplanner/ui/exceptiondialog.py:74
+msgid "Pigeon Planner has experienced an unexpected error"
+msgstr "Pigeon Planner a inregistrat o eroare neasteptata"
+
+#: pigeonplanner/ui/exceptiondialog.py:82
+msgid ""
+"You can help the Pigeon Planner developers by taking the time to report this "
+"bug."
+msgstr ""
+"Poti ajuta dezvoltatorii Pigeon Planner prin a gasi timpul necesar in a "
+"raporta acest defect."
+
+#: pigeonplanner/ui/exceptiondialog.py:100
+msgid "Error Detail"
+msgstr "Detalii eroare"
+
+#: pigeonplanner/ui/pedigreewindow.py:88
+msgid "Save this pedigree"
+msgstr "Salveaza acest certificat de origine"
+
+#: pigeonplanner/ui/pedigreewindow.py:92
+msgid "View this pedigree"
+msgstr "Afiseaza acest certificat de origine"
+
+#: pigeonplanner/ui/pedigreewindow.py:94 glade/MainWindow.ui:253
+msgid "Print this pedigree"
+msgstr "Imprima acest certificat de origine"
+
+#: pigeonplanner/ui/pedigreewindow.py:96
+#: pigeonplanner/reportlib/gui/printpreview.py:65 glade/ResultWindow.ui:15
+#: glade/PhotoAlbum.ui:50
+msgid "Close this window"
+msgstr "Închide această fereastră"
+
+#: pigeonplanner/ui/resultwindow.py:115
+msgid "Filter results"
+msgstr "Rezultatele filtrarii"
+
+#: pigeonplanner/ui/resultwindow.py:121
+msgid "Year of pigeon"
+msgstr "Anul porumbelului"
+
+#: pigeonplanner/ui/resultwindow.py:122
+msgid "Year of race"
+msgstr "Anul cursei"
+
+#: pigeonplanner/ui/resultwindow.py:125 glade/ResultsView.ui:715
+#: glade/OptionsDialog.ui:714 glade/ResultWindow.ui:209
+msgid "Coefficient"
+msgstr "Punctaj"
+
+#: pigeonplanner/ui/resultwindow.py:126 glade/ResultParser.ui:390
+msgid "Place"
+msgstr "Loc"
+
+#: pigeonplanner/ui/maildialog.py:149
+msgid "The e-mail has been sent succesfully!"
+msgstr "E-mailul a fost trimis cu succes!"
+
+#: pigeonplanner/ui/maildialog.py:150
+msgid "Connection to server failed!"
+msgstr "Conexiunea cu serverul a esuat!"
+
+#: pigeonplanner/ui/detailsview.py:53 glade/DetailsView.ui:2029
+msgid "Details of pigeon"
+msgstr "Detalii despre porumbel"
+
+#: pigeonplanner/ui/detailsview.py:55
+#, python-format
+msgid "Details of %s"
+msgstr "Detalii ale '%s'"
+
 #: pigeonplanner/ui/databasetool.py:40
 msgid "Executing..."
 msgstr "Executare"
@@ -475,89 +665,28 @@ msgstr "Operație anulată"
 msgid "Operation completed"
 msgstr "Operatie completa"
 
-#: pigeonplanner/ui/printpreview.py:69
-msgid "Print Preview"
-msgstr "Previzualizare imprimare"
+#: pigeonplanner/ui/mainwindow.py:270
+#, python-format
+msgid "Pigeon %s has been added"
+msgstr "Porumbeul '%s' a fost adaugat"
 
-#: pigeonplanner/ui/printpreview.py:114
-msgid "Shows the first page"
-msgstr "Arată prima pagină"
+#: pigeonplanner/ui/mainwindow.py:385
+#, python-format
+msgid "Pigeon %s has been removed"
+msgstr "Porumbelul '%s' a fost inlaturat"
 
-#: pigeonplanner/ui/printpreview.py:116
-msgid "Shows previous page"
-msgstr "Arată pagina precedentă"
+#: pigeonplanner/ui/mainwindow.py:395
+#, python-format
+msgid "%s pigeons have been removed"
+msgstr "'%s' au fost inlaturati"
 
-#: pigeonplanner/ui/printpreview.py:118
-msgid "Shows the next page"
-msgstr "Arată pagina următoare"
+#: pigeonplanner/ui/mainwindow.py:538 glade/MainWindow.ui:66
+msgid "Search for updates..."
+msgstr "Cauta inbunatatiri"
 
-#: pigeonplanner/ui/printpreview.py:120
-msgid "Shows the last page"
-msgstr "Arată ultima pagină"
-
-#: pigeonplanner/ui/printpreview.py:122
-msgid "Zooms the page in"
-msgstr "Micsoreaza pagina"
-
-#: pigeonplanner/ui/printpreview.py:124
-msgid "Zooms the page out"
-msgstr "Mareste pagina"
-
-#: pigeonplanner/ui/printpreview.py:126 pigeonplanner/ui/pedigreewindow.py:97
-#: glade/ResultWindow.ui:15 glade/PhotoAlbum.ui:50
-msgid "Close this window"
-msgstr "Închide această fereastră"
-
-#: pigeonplanner/ui/printpreview.py:130
-msgid "Zooms to fit the whole page"
-msgstr "Potriveşte la mărimea paginii"
-
-#: pigeonplanner/ui/pedigreewindow.py:89
-msgid "Save this pedigree"
-msgstr "Salveaza acest certificat de origine"
-
-#: pigeonplanner/ui/pedigreewindow.py:93
-msgid "View this pedigree"
-msgstr "Afiseaza acest certificat de origine"
-
-#: pigeonplanner/ui/pedigreewindow.py:95 glade/MainWindow.ui:66
-msgid "Print this pedigree"
-msgstr "Imprima acest certificat de origine"
-
-#: pigeonplanner/ui/maildialog.py:149
-msgid "The e-mail has been sent succesfully!"
-msgstr "E-mailul a fost trimis cu succes!"
-
-#: pigeonplanner/ui/maildialog.py:150
-msgid "Connection to server failed!"
-msgstr "Conexiunea cu serverul a esuat!"
-
-#: pigeonplanner/ui/optionsdialog.py:52 glade/BreedingView.ui:322
-#: glade/BreedingView.ui:1340 glade/OptionsDialog.ui:1367
-#: glade/DatabaseTool.ui:234
-msgid "General"
-msgstr "General"
-
-#: pigeonplanner/ui/optionsdialog.py:54
-msgid "Appearance"
-msgstr "Înfățișare"
-
-#: pigeonplanner/ui/optionsdialog.py:56
-msgid "Printing"
-msgstr "Imprimare"
-
-#: pigeonplanner/ui/optionsdialog.py:58 pigeonplanner/ui/resultwindow.py:79
-#: pigeonplanner/ui/tabs/results.py:51 glade/ResultsView.ui:21
-msgid "Results"
-msgstr "Rezultate"
-
-#: pigeonplanner/ui/optionsdialog.py:111
-msgid "days"
-msgstr "zile"
-
-#: pigeonplanner/ui/optionsdialog.py:111
-msgid "day"
-msgstr "zi"
+#: pigeonplanner/ui/logdialog.py:40
+msgid "Logfile Viewer"
+msgstr "Vizualizare fisier de logare"
 
 #: pigeonplanner/ui/dialogs.py:57
 msgid "translator-credits"
@@ -565,9 +694,10 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Iacob Catalin https://launchpad.net/~catalin-iacob25\n"
 "  Marian D https://launchpad.net/~porumbei-albi-nunti\n"
-"  Timo Vanwynsberghe https://launchpad.net/~timovwb"
+"  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
+"  angelescu https://launchpad.net/~titus0818"
 
-#: pigeonplanner/ui/dialogs.py:67 glade/MainWindow.ui:258
+#: pigeonplanner/ui/dialogs.py:67 glade/MainWindow.ui:59
 msgid "General information"
 msgstr "Informaţii generale"
 
@@ -583,15 +713,15 @@ msgstr "Informatie date"
 msgid "Number of pigeons"
 msgstr "Numar de porumbei"
 
-#: pigeonplanner/ui/dialogs.py:114 glade/MainWindow.ui:419
+#: pigeonplanner/ui/dialogs.py:114 glade/MainWindow.ui:426
 msgid "Cocks"
 msgstr "Masculi"
 
-#: pigeonplanner/ui/dialogs.py:116 glade/MainWindow.ui:451
+#: pigeonplanner/ui/dialogs.py:116 glade/MainWindow.ui:458
 msgid "Hens"
 msgstr "Femele"
 
-#: pigeonplanner/ui/dialogs.py:118 glade/MainWindow.ui:483
+#: pigeonplanner/ui/dialogs.py:118 glade/MainWindow.ui:490
 msgid "Young birds"
 msgstr "Pui"
 
@@ -611,7 +741,7 @@ msgstr "Creează o copie de rezerva"
 msgid "Choose a directory where to save the backup"
 msgstr "Alege un director unde sa salvezi copia de rezerva"
 
-#: pigeonplanner/ui/dialogs.py:155 glade/OptionsDialog.ui:365
+#: pigeonplanner/ui/dialogs.py:155 glade/OptionsDialog.ui:368
 msgid "Backup"
 msgstr "Copie de rezerva"
 
@@ -663,142 +793,83 @@ msgstr "Sterge medicatia introdusa"
 msgid "Remove this entry for all pigeons?"
 msgstr "Inlatura aceasta introducere la toti porumbeii"
 
-#: pigeonplanner/ui/dialogs.py:432 pigeonplanner/ui/widgets/treeview.py:200
-#: pigeonplanner/ui/tabs/relatives.py:156 glade/ResultWindow.ui:144
-#: glade/MainWindow.ui:869 glade/ResultParser.ui:376
+#: pigeonplanner/ui/dialogs.py:432 pigeonplanner/ui/tabs/relatives.py:156
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/MainWindow.ui:876
+#: glade/ResultWindow.ui:144 glade/ResultParser.ui:376
 msgid "Year"
 msgstr "An"
 
-#: pigeonplanner/ui/dialogs.py:432 pigeonplanner/ui/widgets/treeview.py:200
-#: glade/OptionsDialog.ui:553 glade/OptionsDialog.ui:1000
-#: glade/OptionsDialog.ui:1202 glade/AddressBook.ui:129
-msgid "Name"
-msgstr "Nume"
+#: pigeonplanner/ui/tabs/media.py:38 glade/MediaView.ui:73
+msgid "Media"
+msgstr "Media"
 
-#: pigeonplanner/ui/logdialog.py:40
-msgid "Logfile Viewer"
-msgstr "Vizualizare fisier de logare"
+#: pigeonplanner/ui/tabs/media.py:122 glade/OptionsDialog.ui:917
+msgid "Other"
+msgstr "Alta"
 
-#: pigeonplanner/ui/filechooser.py:54
-msgid "Preview"
-msgstr "Previzualizare"
+#: pigeonplanner/ui/tabs/pedigree.py:34
+msgid "<b>Pedigree sire</b>"
+msgstr "<b>Arbore genealogic tata</b>"
 
-#: pigeonplanner/ui/filechooser.py:78 pigeonplanner/ui/tabs/media.py:118
-msgid "Images"
-msgstr "Imagini"
+#: pigeonplanner/ui/tabs/pedigree.py:46
+msgid "<b>Pedigree dam</b>"
+msgstr "<b>Arbore genealogic mama</b>"
 
-#: pigeonplanner/ui/filechooser.py:138
-msgid "Select an image..."
-msgstr "Selectati o imagine..."
+#: pigeonplanner/ui/tabs/medication.py:35 glade/MedicationView.ui:9
+#: glade/MedicationView.ui:244 glade/MedicationView.ui:801
+msgid "Medication"
+msgstr "Medicatie"
 
-#: pigeonplanner/ui/filechooser.py:141
-msgid "No image"
-msgstr "Fără imagine"
+#: pigeonplanner/ui/tabs/breeding.py:37
+msgid "Breeding"
+msgstr "Reproducere"
 
-#: pigeonplanner/ui/filechooser.py:153 pigeonplanner/ui/filechooser.py:233
-#: pigeonplanner/ui/filechooser.py:253
-msgid "Select a file..."
-msgstr "Selectaţi un fişier..."
+#: pigeonplanner/ui/tabs/results.py:254
+msgid "Edit result for:"
+msgstr "Modifica rezultat pentru:"
 
-#: pigeonplanner/ui/filechooser.py:163
-msgid "Title"
-msgstr "Titlu"
+#: pigeonplanner/ui/tabs/results.py:254
+msgid "Add result for:"
+msgstr "Adauga rezultate pentru:"
 
-#: pigeonplanner/ui/filechooser.py:167 glade/Calendar.ui:225
-#: glade/MedicationView.ui:216 glade/MedicationView.ui:577
-#: glade/MedicationView.ui:750
-msgid "Description"
-msgstr "Descriere"
+#: pigeonplanner/ui/tabs/relatives.py:31
+msgid "Relatives"
+msgstr "Rude"
 
-#: pigeonplanner/ui/filechooser.py:198 pigeonplanner/ui/filechooser.py:211
-msgid "Save as..."
-msgstr "Salveaza ca..."
+#: pigeonplanner/ui/tabs/relatives.py:43
+msgid "<b>Brothers and sisters</b>"
+msgstr "<b>Frati si surori</b>"
 
-#: pigeonplanner/ui/filechooser.py:244
-msgid "Select a folder..."
-msgstr "Selectati un dosar"
+#: pigeonplanner/ui/tabs/relatives.py:56
+msgid "<b>Half brothers and sisters</b>"
+msgstr "<b>Frati si surori vitregi</b>"
 
-#: pigeonplanner/ui/resultwindow.py:115
-msgid "Filter results"
-msgstr "Rezultatele filtrarii"
+#: pigeonplanner/ui/tabs/relatives.py:69
+msgid "<b>Offspring</b>"
+msgstr "<b>Produsi</b>"
 
-#: pigeonplanner/ui/resultwindow.py:120 glade/ExportWindow.ui:254
-msgid "Pigeons"
-msgstr "Porumbei"
+#: pigeonplanner/ui/tabs/relatives.py:160
+msgid "Common parent"
+msgstr "Parinte comun"
 
-#: pigeonplanner/ui/resultwindow.py:121
-msgid "Year of pigeon"
-msgstr "Anul porumbelului"
+#: pigeonplanner/ui/widgets/treeview.py:179
+msgid "Filter pigeons"
+msgstr "Filtreaza porumbeii"
 
-#: pigeonplanner/ui/resultwindow.py:122
-msgid "Year of race"
-msgstr "Anul cursei"
+#: pigeonplanner/ui/widgets/treeview.py:185
+#: pigeonplanner/ui/tools/datamanager.py:42
+msgid "Colours"
+msgstr "Culori"
 
-#: pigeonplanner/ui/resultwindow.py:125 glade/ResultsView.ui:715
-#: glade/ResultWindow.ui:209 glade/OptionsDialog.ui:675
-msgid "Coefficient"
-msgstr "Punctaj"
+#: pigeonplanner/ui/widgets/treeview.py:187
+#: pigeonplanner/ui/tools/datamanager.py:47
+msgid "Strains"
+msgstr "Linii"
 
-#: pigeonplanner/ui/resultwindow.py:126 glade/ResultParser.ui:390
-msgid "Place"
-msgstr "Loc"
-
-#: pigeonplanner/ui/mainwindow.py:267
-#, python-format
-msgid "Pigeon %s has been added"
-msgstr "Porumbeul '%s' a fost adaugat"
-
-#: pigeonplanner/ui/mainwindow.py:363
-#, python-format
-msgid "Pigeon %s has been removed"
-msgstr "Porumbelul '%s' a fost inlaturat"
-
-#: pigeonplanner/ui/mainwindow.py:373
-#, python-format
-msgid "%s pigeons have been removed"
-msgstr "'%s' au fost inlaturati"
-
-#: pigeonplanner/ui/mainwindow.py:515 glade/MainWindow.ui:250
-msgid "Search for updates..."
-msgstr "Cauta inbunatatiri"
-
-#: pigeonplanner/ui/detailsview.py:53 glade/DetailsView.ui:2027
-msgid "Details of pigeon"
-msgstr "Detalii despre porumbel"
-
-#: pigeonplanner/ui/detailsview.py:55
-#, python-format
-msgid "Details of %s"
-msgstr "Detalii ale '%s'"
-
-#: pigeonplanner/ui/exceptiondialog.py:48
-msgid ""
-"Chances are that your problem is already fixed in this new version. Send a "
-"report anyway?"
-msgstr ""
-"Exista posibilitatea ca problema intalnita sa fi fost remediata in aceasta "
-"noua versiune. Trimiteti totusi un raport ?"
-
-#: pigeonplanner/ui/exceptiondialog.py:74
-msgid "Pigeon Planner has experienced an unexpected error"
-msgstr "Pigeon Planner a inregistrat o eroare neasteptata"
-
-#: pigeonplanner/ui/exceptiondialog.py:82
-msgid ""
-"You can help the Pigeon Planner developers by taking the time to report this "
-"bug."
-msgstr ""
-"Poti ajuta dezvoltatorii Pigeon Planner prin a gasi timpul necesar in a "
-"raporta acest defect."
-
-#: pigeonplanner/ui/exceptiondialog.py:100
-msgid "Error Detail"
-msgstr "Detalii eroare"
-
-#: pigeonplanner/ui/widgets/pedigreeboxes.py:73
-#: pigeonplanner/ui/widgets/pedigreeboxes.py:261
-msgid "<edit>"
-msgstr "<modifica>"
+#: pigeonplanner/ui/widgets/treeview.py:189
+#: pigeonplanner/ui/tools/datamanager.py:48
+msgid "Lofts"
+msgstr "Compartimente"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:278
 msgid "Dead"
@@ -822,7 +893,7 @@ msgstr "Reproducator"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:819
 msgid "On loan"
-msgstr ""
+msgstr "De împrumut"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:116
 msgid "Yards"
@@ -884,56 +955,6 @@ msgstr "Picioare pe Minut"
 msgid "Mile per Hour"
 msgstr "Mile la Ora"
 
-#: pigeonplanner/ui/widgets/treeview.py:179
-msgid "Filter pigeons"
-msgstr "Filtreaza porumbeii"
-
-#: pigeonplanner/ui/widgets/treeview.py:184
-#: pigeonplanner/ui/widgets/treeview.py:200
-#: pigeonplanner/ui/tabs/relatives.py:172 glade/OptionsDialog.ui:607
-#: glade/OptionsDialog.ui:1226 glade/DetailsView.ui:1077
-#: glade/DetailsView.ui:1681 glade/MainWindow.ui:821
-msgid "Sex"
-msgstr "Sex"
-
-#: pigeonplanner/ui/widgets/treeview.py:185
-#: pigeonplanner/ui/tools/datamanager.py:42
-msgid "Colours"
-msgstr "Culori"
-
-#: pigeonplanner/ui/widgets/treeview.py:187
-#: pigeonplanner/ui/tools/datamanager.py:47
-msgid "Strains"
-msgstr "Linii"
-
-#: pigeonplanner/ui/widgets/treeview.py:189
-#: pigeonplanner/ui/tools/datamanager.py:48
-msgid "Lofts"
-msgstr "Compartimente"
-
-#: pigeonplanner/ui/widgets/treeview.py:192
-#: pigeonplanner/ui/widgets/treeview.py:201 glade/OptionsDialog.ui:621
-msgid "Status"
-msgstr "Statut"
-
-#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:579
-#: glade/OptionsDialog.ui:1212 glade/DetailsView.ui:1066
-#: glade/DetailsView.ui:1670
-msgid "Colour"
-msgstr "Culoare"
-
-#: pigeonplanner/ui/widgets/treeview.py:201
-#: pigeonplanner/ui/tools/distancecalculator.py:140 glade/OptionsDialog.ui:593
-#: glade/DetailsView.ui:1040 glade/DetailsView.ui:1486
-#: glade/MedicationView.ui:373
-msgid "Loft"
-msgstr "Compartiment"
-
-#: pigeonplanner/ui/widgets/treeview.py:201 glade/OptionsDialog.ui:563
-#: glade/DetailsView.ui:1090 glade/DetailsView.ui:1720
-msgid "Strain"
-msgstr "Rasa"
-
 #: pigeonplanner/ui/widgets/latlongentry.py:39
 msgid ""
 "Input should be in one of these formats:\n"
@@ -964,58 +985,10 @@ msgstr "Activat"
 msgid "Off"
 msgstr "Dezactivat"
 
-#: pigeonplanner/ui/tabs/medication.py:35 glade/MedicationView.ui:9
-#: glade/MedicationView.ui:244 glade/MedicationView.ui:801
-msgid "Medication"
-msgstr "Medicatie"
-
-#: pigeonplanner/ui/tabs/media.py:38 glade/MediaView.ui:73
-msgid "Media"
-msgstr "Media"
-
-#: pigeonplanner/ui/tabs/media.py:122 glade/OptionsDialog.ui:878
-msgid "Other"
-msgstr "Alta"
-
-#: pigeonplanner/ui/tabs/pedigree.py:34
-msgid "<b>Pedigree sire</b>"
-msgstr "<b>Arbore genealogic tata</b>"
-
-#: pigeonplanner/ui/tabs/pedigree.py:46
-msgid "<b>Pedigree dam</b>"
-msgstr "<b>Arbore genealogic mama</b>"
-
-#: pigeonplanner/ui/tabs/relatives.py:31
-msgid "Relatives"
-msgstr "Rude"
-
-#: pigeonplanner/ui/tabs/relatives.py:43
-msgid "<b>Brothers and sisters</b>"
-msgstr "<b>Frati si surori</b>"
-
-#: pigeonplanner/ui/tabs/relatives.py:56
-msgid "<b>Half brothers and sisters</b>"
-msgstr "<b>Frati si surori vitregi</b>"
-
-#: pigeonplanner/ui/tabs/relatives.py:69
-msgid "<b>Offspring</b>"
-msgstr "<b>Produsi</b>"
-
-#: pigeonplanner/ui/tabs/relatives.py:160
-msgid "Common parent"
-msgstr "Parinte comun"
-
-#: pigeonplanner/ui/tabs/results.py:254
-msgid "Edit result for:"
-msgstr "Modifica rezultat pentru:"
-
-#: pigeonplanner/ui/tabs/results.py:254
-msgid "Add result for:"
-msgstr "Adauga rezultate pentru:"
-
-#: pigeonplanner/ui/tabs/breeding.py:37
-msgid "Breeding"
-msgstr "Reproducere"
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:73
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:261
+msgid "<edit>"
+msgstr "<modifica>"
 
 #: pigeonplanner/ui/tools/calendar.py:126
 #, python-format
@@ -1025,18 +998,6 @@ msgstr "Notificarea este setata in '%s' zile"
 #: pigeonplanner/ui/tools/calendar.py:129
 msgid "No notification set"
 msgstr "Nicio notificare reglata"
-
-#: pigeonplanner/ui/tools/distancecalculator.py:61
-msgid ""
-"The latitude and longitude need to be in DD.dddddd° format to use this "
-"function."
-msgstr ""
-"Latitudinea si longitudinea se introduc in formatul DD.dddddd° pentru a "
-"putea folosi aceasta functie."
-
-#: pigeonplanner/ui/tools/distancecalculator.py:139
-msgid "Custom"
-msgstr "Personalizat"
 
 #: pigeonplanner/ui/tools/datamanager.py:43
 msgid "Sectors"
@@ -1055,13 +1016,405 @@ msgstr "Categorii"
 msgid "Racepoints"
 msgstr "Puncte de lansare"
 
+#: pigeonplanner/ui/tools/distancecalculator.py:57
+msgid ""
+"The latitude and longitude need to be in DD.dddddd° format to use this "
+"function."
+msgstr ""
+"Latitudinea si longitudinea se introduc in formatul DD.dddddd° pentru a "
+"putea folosi aceasta functie."
+
+#: pigeonplanner/ui/tools/distancecalculator.py:138
+msgid "Custom"
+msgstr "Personalizat"
+
+#: pigeonplanner/reportlib/GtkPrint.py:65
+msgid "PyGtk 2.10 or later is required"
+msgstr ""
+
+#: pigeonplanner/reportlib/PdfDoc.py:110 pigeonplanner/reportlib/PdfDoc.py:113
+#: pigeonplanner/reportlib/backend/docbackend.py:160
+#: pigeonplanner/reportlib/backend/docbackend.py:163
+#, python-format
+msgid "Could not create %s"
+msgstr ""
+
+#: pigeonplanner/reportlib/PdfDoc.py:249
+msgid "Contents"
+msgstr ""
+
+#: pigeonplanner/reportlib/PdfDoc.py:282
+msgid "Index"
+msgstr ""
+
+#: pigeonplanner/reportlib/backend/docbackend.py:142
+msgid "Close file first"
+msgstr ""
+
+#: pigeonplanner/reportlib/backend/docbackend.py:152
+msgid "No filename given"
+msgstr ""
+
+#: pigeonplanner/reportlib/backend/docbackend.py:154
+#, python-format
+msgid "File %s already open, close it first."
+msgstr ""
+
+#: pigeonplanner/reportlib/gui/printpreview.py:35
+msgid "Print Preview"
+msgstr "Previzualizare imprimare"
+
+#: pigeonplanner/reportlib/gui/printpreview.py:73
+msgid "Shows the first page"
+msgstr "Arată prima pagină"
+
+#: pigeonplanner/reportlib/gui/printpreview.py:77
+msgid "Shows previous page"
+msgstr "Arată pagina precedentă"
+
+#: pigeonplanner/reportlib/gui/printpreview.py:81
+msgid "Shows the next page"
+msgstr "Arată pagina următoare"
+
+#: pigeonplanner/reportlib/gui/printpreview.py:85
+msgid "Shows the last page"
+msgstr "Arată ultima pagină"
+
+#: pigeonplanner/reportlib/gui/printpreview.py:108
+msgid "Zooms to fit the page width"
+msgstr ""
+
+#: pigeonplanner/reportlib/gui/printpreview.py:112
+msgid "Zooms to fit the whole page"
+msgstr "Potriveşte la mărimea paginii"
+
+#: pigeonplanner/reportlib/gui/printpreview.py:116
+msgid "Zooms the page in"
+msgstr "Micsoreaza pagina"
+
+#: pigeonplanner/reportlib/gui/printpreview.py:120
+msgid "Zooms the page out"
+msgstr "Mareste pagina"
+
+#: pigeonplanner/reportlib/gui/printpreview.py:348
+#, python-format
+msgid "of %d"
+msgstr ""
+
 #: pigeonplanner/resultparsers/dtd.py:35
 msgid "Data Technology-Deerlijk - Belgium"
-msgstr ""
+msgstr "Data Technology-Deerlijk - Belgium"
 
 #: pigeonplanner/resultparsers/dtd.py:36
 msgid "Data Technology-Deerlijk"
+msgstr "Data Technology-Deerlijk"
+
+#: glade/MainWindow.ui:11
+msgid "Print a list of pigeons"
 msgstr ""
+
+#: glade/MainWindow.ui:17
+msgid "Export..."
+msgstr "Exporta..."
+
+#: glade/MainWindow.ui:18
+msgid "Export data to other formats"
+msgstr "Exportă datele în alte formate"
+
+#: glade/MainWindow.ui:24
+msgid "Statusbar"
+msgstr "Bara de stare"
+
+#: glade/MainWindow.ui:25 glade/OptionsDialog.ui:896
+msgid "Show or hide the statusbar"
+msgstr "Afișează sau ascunde bara de stare"
+
+#: glade/MainWindow.ui:31
+msgid "Toolbar"
+msgstr "Bara de unelte"
+
+#: glade/MainWindow.ui:32 glade/OptionsDialog.ui:881
+msgid "Show or hide the toolbar"
+msgstr "Afișează sau ascunde bara de unelte"
+
+#: glade/MainWindow.ui:38
+msgid "Statistics"
+msgstr "Statistici"
+
+#: glade/MainWindow.ui:39 glade/OptionsDialog.ui:866
+msgid "Show or hide pigeon statistics"
+msgstr "Arata sau ascunde statisticile porumbelului"
+
+#: glade/MainWindow.ui:45
+msgid "Navigation arrows"
+msgstr "Sageti de navigare"
+
+#: glade/MainWindow.ui:46 glade/OptionsDialog.ui:851
+msgid "Show or hide the navigation arrows"
+msgstr "Arata sau ascunde sagetile de navigare"
+
+#: glade/MainWindow.ui:52
+msgid "About this application"
+msgstr "Despre această aplicaţie"
+
+#: glade/MainWindow.ui:67
+msgid "Search online for program updates"
+msgstr "Cauta online imbunatatiri"
+
+#: glade/MainWindow.ui:74
+msgid "Forum"
+msgstr "Forum"
+
+#: glade/MainWindow.ui:75
+msgid "Go to the forum for online help"
+msgstr "Mergi la forum pentru ajutor online"
+
+#: glade/MainWindow.ui:82
+msgid "Website"
+msgstr "Pagina internet"
+
+#: glade/MainWindow.ui:83
+msgid "Go to the website for more information"
+msgstr "Mergi la pagina de internet pentru mai multe informatii"
+
+#: glade/MainWindow.ui:90 glade/DataManager.ui:26
+msgid "Data manager"
+msgstr "Administrator date"
+
+#: glade/MainWindow.ui:91
+msgid "Manage your data"
+msgstr "Administreaza datele"
+
+#: glade/MainWindow.ui:97 glade/Calendar.ui:14
+msgid "Calendar"
+msgstr "Calendar"
+
+#: glade/MainWindow.ui:98
+msgid "View the calendar"
+msgstr "Vizualizeaza calendarul"
+
+#: glade/MainWindow.ui:104 glade/AddressBook.ui:9
+msgid "Address book"
+msgstr "Agendă"
+
+#: glade/MainWindow.ui:105
+msgid "View the address book"
+msgstr "Cauta in agenda"
+
+#: glade/MainWindow.ui:111
+msgid "Photo album"
+msgstr "Album foto"
+
+#: glade/MainWindow.ui:112
+msgid "View the images of your pigeons"
+msgstr "Vizualizeaza imaginile porumbeilor tai"
+
+#: glade/MainWindow.ui:118 glade/RaceManager.ui:20
+msgid "Racepoint manager"
+msgstr "Localitati de lansare"
+
+#: glade/MainWindow.ui:119
+msgid "Manage the racepoints and distances"
+msgstr "Administreaza punctele de lansare si distantele"
+
+#: glade/MainWindow.ui:125 glade/DistanceCalculator.ui:26
+msgid "Distance calculator"
+msgstr "Calculator de distanta"
+
+#: glade/MainWindow.ui:126
+msgid "Calculate the distance between locations"
+msgstr "Calculeaza distanta dintre locatii"
+
+#: glade/MainWindow.ui:132 glade/VelocityCalculator.ui:85
+msgid "Velocity calculator"
+msgstr "Claculator de viteza"
+
+#: glade/MainWindow.ui:133
+msgid "Calculate the velocity of flights"
+msgstr "Calculeaza viteza de zbor"
+
+#: glade/MainWindow.ui:139
+msgid "_Filter..."
+msgstr "_Filtrează..."
+
+#: glade/MainWindow.ui:140 glade/ResultWindow.ui:23
+msgid "Set filter options"
+msgstr "Regleaza optiunile de filtrare"
+
+#: glade/MainWindow.ui:146
+msgid "Configure the application"
+msgstr "Configurați aplicația"
+
+#: glade/MainWindow.ui:154
+msgid "Add resul_t"
+msgstr "Adauga rezul_t"
+
+#: glade/MainWindow.ui:155
+msgid "Add a new result for this pigeon"
+msgstr "Adauga un nou rezultat al acestui porumbel"
+
+#: glade/MainWindow.ui:162 glade/MainWindow.ui:252
+msgid "_Pedigree"
+msgstr "_Certificat de origine"
+
+#: glade/MainWindow.ui:163
+msgid "View the detailed pedigree of this pigeon"
+msgstr "Vizualizeaza certificatul de origine detaliat al acestui porumbel"
+
+#: glade/MainWindow.ui:171
+msgid "Remove the selected pigeon"
+msgstr "Inlatura porumbelul selectat"
+
+#: glade/MainWindow.ui:179
+msgid "Edit the selected pigeon"
+msgstr "Editeaza porumbelul selectat"
+
+#: glade/MainWindow.ui:187
+msgid "_Find..."
+msgstr "_Gaseste"
+
+#: glade/MainWindow.ui:188
+msgid "Search through the list of pigeons"
+msgstr "Cauta in lista de porumbei"
+
+#: glade/MainWindow.ui:196
+msgid "_Logfile Viewer"
+msgstr "_ Fisier de logare"
+
+#: glade/MainWindow.ui:197
+msgid "See the logfile"
+msgstr "Vezi fisierul de logare"
+
+#: glade/MainWindow.ui:205 glade/MainWindow.ui:730
+msgid "Add a range of pigeons"
+msgstr "Adauga o gama de porumbei"
+
+#: glade/MainWindow.ui:213
+msgid "Add a new pigeon"
+msgstr "Adauga un porumbel nou"
+
+#: glade/MainWindow.ui:221
+msgid "Quit the program"
+msgstr "Inchide programul"
+
+#: glade/MainWindow.ui:229
+msgid "_Restore"
+msgstr "_Restaurează"
+
+#: glade/MainWindow.ui:230
+msgid "Restore a backup of your database"
+msgstr "Restaureaza o copie de rezerva a bazei tale de date"
+
+#: glade/MainWindow.ui:237 glade/MainWindow.ui:284
+msgid "_Backup"
+msgstr "_Copie de rezervă"
+
+#: glade/MainWindow.ui:238
+msgid "Create a backup of your database"
+msgstr "Creaza o copie de rezerva pentru baza ta de date"
+
+#: glade/MainWindow.ui:245
+msgid "Blank pedigree"
+msgstr "Certificat de origine necompletat"
+
+#: glade/MainWindow.ui:246
+msgid "Print a blank pedigree"
+msgstr "Imprima un certificat de origine necompletat"
+
+#: glade/MainWindow.ui:259
+msgid "_Help"
+msgstr "_Ajutor"
+
+#: glade/MainWindow.ui:264
+msgid "_Tools"
+msgstr "_Instrumente"
+
+#: glade/MainWindow.ui:269
+msgid "_View"
+msgstr "_Vizualizare"
+
+#: glade/MainWindow.ui:274
+msgid "_Edit"
+msgstr "_Modifică"
+
+#: glade/MainWindow.ui:279
+msgid "_Pigeon"
+msgstr "_Porumbel"
+
+#: glade/MainWindow.ui:294
+msgid "_File"
+msgstr "_Fisier"
+
+#: glade/MainWindow.ui:299
+msgid "Select all"
+msgstr "Selectaţi tot"
+
+#: glade/MainWindow.ui:300
+msgid "Select all pigeons"
+msgstr "Selecteaza toti porumbeii"
+
+#: glade/MainWindow.ui:306
+msgid "View online help"
+msgstr "Consulta ajutor online"
+
+#: glade/MainWindow.ui:398
+msgid "Total"
+msgstr "Total"
+
+#: glade/MainWindow.ui:903 glade/DetailsView.ui:626
+#: glade/DistanceCalculator.ui:331
+msgid "To"
+msgstr "Către"
+
+#: glade/MainWindow.ui:955 glade/DetailsView.ui:567
+#: glade/DistanceCalculator.ui:203
+msgid "From"
+msgstr "De la"
+
+#: glade/MainWindow.ui:1012
+msgid "Remove pigeon"
+msgstr "Inlatura porumbelul"
+
+#: glade/MainWindow.ui:1101
+msgid "The following pigeon will be removed:"
+msgstr "Urmatorul porumbel va fi inlaturat:"
+
+#: glade/MainWindow.ui:1139
+msgid "Keep this pigeon in the pedigree"
+msgstr "Pastreaza acest porumbel in arborele genealogic"
+
+#: glade/MainWindow.ui:1155
+msgid "Keep results of this pigeon"
+msgstr "Pastreaza rezultatele acestui porumbel"
+
+#: glade/VelocityCalculator.ui:176
+msgid "Time"
+msgstr "Timp"
+
+#: glade/VelocityCalculator.ui:199 glade/VelocityCalculator.ui:565
+#: glade/DistanceCalculator.ui:415
+msgid "Calculate"
+msgstr "Calculează"
+
+#: glade/VelocityCalculator.ui:318 glade/VelocityCalculator.ui:718
+msgid "Hours"
+msgstr "Ore"
+
+#: glade/VelocityCalculator.ui:342 glade/VelocityCalculator.ui:742
+msgid "Minutes"
+msgstr "Minute"
+
+#: glade/VelocityCalculator.ui:366 glade/VelocityCalculator.ui:766
+msgid "Seconds"
+msgstr "Secunde"
+
+#: glade/VelocityCalculator.ui:553
+msgid "Range"
+msgstr "Interval"
+
+#: glade/VelocityCalculator.ui:957
+msgid "Prognosis"
+msgstr "Prognoza"
 
 #: glade/ResultsView.ui:300 glade/BreedingView.ui:120
 #: glade/MedicationView.ui:204
@@ -1083,6 +1436,14 @@ msgstr "Vizualizare totala"
 #: glade/ResultsView.ui:852
 msgid "Import"
 msgstr "Importa"
+
+#: glade/Calendar.ui:309
+msgid "Notify me!"
+msgstr "Notifica-ma!"
+
+#: glade/Calendar.ui:341
+msgid "Number of days in advance:"
+msgstr "Numar de zile in avans:"
 
 #: glade/BreedingView.ui:9
 msgid "Breeding data"
@@ -1131,6 +1492,193 @@ msgstr "Ou 2"
 msgid "Mate"
 msgstr "Ou 2"
 
+#: glade/OptionsDialog.ui:72
+msgid "Options"
+msgstr "Optiuni"
+
+#: glade/OptionsDialog.ui:93
+msgid "Default"
+msgstr "Implicit"
+
+#: glade/OptionsDialog.ui:222
+msgid "Check for updates on startup"
+msgstr "La pornire, verifică existența unor versiuni mai noi"
+
+#: glade/OptionsDialog.ui:236
+msgid "Update"
+msgstr "Actualizează"
+
+#: glade/OptionsDialog.ui:266
+msgid "Make an automatic backup"
+msgstr "Realizeaza automat o baza de date"
+
+#: glade/OptionsDialog.ui:313 glade/DistanceCalculator.ui:113
+#: glade/DistanceCalculator.ui:241
+msgid "Location"
+msgstr "Locație"
+
+#: glade/OptionsDialog.ui:327
+msgid "Interval"
+msgstr "Interval"
+
+#: glade/OptionsDialog.ui:422
+msgid "Change the language to"
+msgstr "Schimba limba in"
+
+#: glade/OptionsDialog.ui:472
+msgid "Language"
+msgstr "Limba"
+
+#: glade/OptionsDialog.ui:525
+msgid "Change the theme"
+msgstr "Schimba infatisarea"
+
+#: glade/OptionsDialog.ui:560
+msgid "Theme"
+msgstr "Temă"
+
+#: glade/OptionsDialog.ui:682
+msgid "Main Columns"
+msgstr "Coloane principale"
+
+#: glade/OptionsDialog.ui:821
+msgid "Results Columns"
+msgstr "Coloane rezultate"
+
+#: glade/OptionsDialog.ui:973
+msgid "Paper format:"
+msgstr "Format foaie:"
+
+#: glade/OptionsDialog.ui:1007
+msgid "Paper"
+msgstr "Hartie"
+
+#: glade/OptionsDialog.ui:1049
+msgid "Address"
+msgstr "Adresă"
+
+#: glade/OptionsDialog.ui:1063 glade/AddressBook.ui:331
+msgid "Phone"
+msgstr "Telefon"
+
+#: glade/OptionsDialog.ui:1099
+msgid "Personal"
+msgstr "Personal"
+
+#: glade/OptionsDialog.ui:1159
+msgid "Pedigree layout:"
+msgstr "Aspect arbore genealogic:"
+
+#: glade/OptionsDialog.ui:1216
+msgid "Show pigeon colour in pedigree"
+msgstr ""
+
+#: glade/OptionsDialog.ui:1237
+msgid "Layout"
+msgstr "Aspect"
+
+#: glade/OptionsDialog.ui:1307 glade/DetailsView.ui:1054
+#: glade/DetailsView.ui:1638
+msgid "Extra"
+msgstr "Suplimentar"
+
+#: glade/OptionsDialog.ui:1323
+msgid "Image"
+msgstr "Imagine"
+
+#: glade/OptionsDialog.ui:1346
+msgid "Pigeon"
+msgstr "Porumbel"
+
+#: glade/OptionsDialog.ui:1399 glade/OptionsDialog.ui:1488
+msgid "Show the column names"
+msgstr "Afiseaza numele coloanei"
+
+#: glade/OptionsDialog.ui:1414
+msgid "Always show the sex column"
+msgstr ""
+
+#: glade/OptionsDialog.ui:1503
+msgid "Show the date"
+msgstr "Afiseaza data"
+
+#: glade/ResultWindow.ui:8
+msgid "Print these results"
+msgstr "Imprima aceste rezultate"
+
+#: glade/ResultWindow.ui:22
+msgid "Filter"
+msgstr "Filtru"
+
+#: glade/ResultWindow.ui:30
+msgid "View these results"
+msgstr "Vizualizeaza aceste rezultate"
+
+#: glade/ResultWindow.ui:37
+msgid "Email these results"
+msgstr "Trimite pe e-mail aceste rezultate"
+
+#: glade/ResultWindow.ui:45
+msgid "Save these results"
+msgstr "Salveaza aceste rezultate"
+
+#: glade/ResultWindow.ui:91
+msgid "View all results"
+msgstr "Vizualizeaza toate rezultatele"
+
+#: glade/DetailsView.ui:53
+msgid "Pigeon status"
+msgstr "Stare porumbel"
+
+#: glade/DetailsView.ui:112
+msgid "Choose a status for this pigeon:"
+msgstr "Alege o stare pentru acest porumbel:"
+
+#: glade/DetailsView.ui:155
+msgid "The current status is:"
+msgstr "Starea curenta este:"
+
+#: glade/DetailsView.ui:225 glade/DetailsView.ui:338 glade/DetailsView.ui:459
+#: glade/DetailsView.ui:580 glade/DetailsView.ui:699
+msgid "Extra info"
+msgstr "Informaţii suplimentare"
+
+#: glade/DetailsView.ui:293
+msgid "No extra information available."
+msgstr "Informatii suplimentare indisponibile."
+
+#: glade/DetailsView.ui:369
+msgid "Buyer"
+msgstr "Cumpărător"
+
+#: glade/DetailsView.ui:686
+msgid "Loaned"
+msgstr "Imprumutat"
+
+#: glade/DetailsView.ui:732
+msgid "Person"
+msgstr "Persoana"
+
+#: glade/DetailsView.ui:779
+msgid "Back"
+msgstr "Inapoi"
+
+#: glade/DetailsView.ui:861
+msgid ""
+"Unable to retrieve data. The requested pigeon is probably removed from the "
+"database."
+msgstr ""
+"Nu se pot obține date. Porumbelul solicitat este probabil eliminat din baza "
+"de date."
+
+#: glade/DetailsView.ui:1014 glade/DetailsView.ui:1415
+msgid "Dam"
+msgstr "Mama"
+
+#: glade/DetailsView.ui:1027 glade/DetailsView.ui:1428
+msgid "Sire"
+msgstr "Tata"
+
 #: glade/Dialogs.ui:114
 msgid "Send to:"
 msgstr "Trimite la:"
@@ -1159,52 +1707,6 @@ msgstr "Fisiere atasate:"
 msgid "Sending..."
 msgstr "Se trimite..."
 
-#: glade/RaceManager.ui:20 glade/MainWindow.ui:199
-msgid "Racepoint manager"
-msgstr "Localitati de lansare"
-
-#: glade/RaceManager.ui:144 glade/DistanceCalculator.ui:125
-#: glade/DistanceCalculator.ui:253 glade/AddressBook.ui:441
-msgid "Latitude"
-msgstr "Latitudine"
-
-#: glade/RaceManager.ui:158 glade/DistanceCalculator.ui:139
-#: glade/DistanceCalculator.ui:267 glade/AddressBook.ui:469
-msgid "Longitude"
-msgstr "Longitudine"
-
-#: glade/RaceManager.ui:205
-msgid "Click here to add more racepoints"
-msgstr "Click pentru a adauga alte puncte de lansare"
-
-#: glade/ResultWindow.ui:8
-msgid "Print these results"
-msgstr "Imprima aceste rezultate"
-
-#: glade/ResultWindow.ui:22
-msgid "Filter"
-msgstr "Filtru"
-
-#: glade/ResultWindow.ui:23 glade/MainWindow.ui:179
-msgid "Set filter options"
-msgstr "Regleaza optiunile de filtrare"
-
-#: glade/ResultWindow.ui:30
-msgid "View these results"
-msgstr "Vizualizeaza aceste rezultate"
-
-#: glade/ResultWindow.ui:37
-msgid "Email these results"
-msgstr "Trimite pe e-mail aceste rezultate"
-
-#: glade/ResultWindow.ui:45
-msgid "Save these results"
-msgstr "Salveaza aceste rezultate"
-
-#: glade/ResultWindow.ui:91
-msgid "View all results"
-msgstr "Vizualizeaza toate rezultatele"
-
 #: glade/ExportWindow.ui:21
 msgid "Export data"
 msgstr "Exportare date"
@@ -1229,497 +1731,31 @@ msgstr "Vizibil"
 msgid "All"
 msgstr "Toate"
 
-#: glade/OptionsDialog.ui:69
-msgid "Options"
-msgstr "Optiuni"
+#: glade/DistanceCalculator.ui:125 glade/DistanceCalculator.ui:253
+#: glade/RaceManager.ui:144 glade/AddressBook.ui:441
+msgid "Latitude"
+msgstr "Latitudine"
 
-#: glade/OptionsDialog.ui:90
-msgid "Default"
-msgstr "Implicit"
-
-#: glade/OptionsDialog.ui:219
-msgid "Check for updates on startup"
-msgstr "La pornire, verifică existența unor versiuni mai noi"
-
-#: glade/OptionsDialog.ui:233
-msgid "Update"
-msgstr "Actualizează"
-
-#: glade/OptionsDialog.ui:263
-msgid "Make an automatic backup"
-msgstr "Realizeaza automat o baza de date"
-
-#: glade/OptionsDialog.ui:310 glade/DistanceCalculator.ui:113
-#: glade/DistanceCalculator.ui:241
-msgid "Location"
-msgstr "Locație"
-
-#: glade/OptionsDialog.ui:324
-msgid "Interval"
-msgstr "Interval"
-
-#: glade/OptionsDialog.ui:399
-msgid "Change the language to"
-msgstr "Schimba limba in"
-
-#: glade/OptionsDialog.ui:433
-msgid "Language"
-msgstr "Limba"
-
-#: glade/OptionsDialog.ui:486
-msgid "Change the theme"
-msgstr "Schimba infatisarea"
-
-#: glade/OptionsDialog.ui:521
-msgid "Theme"
-msgstr "Temă"
-
-#: glade/OptionsDialog.ui:643
-msgid "Main Columns"
-msgstr "Coloane principale"
-
-#: glade/OptionsDialog.ui:782
-msgid "Results Columns"
-msgstr "Coloane rezultate"
-
-#: glade/OptionsDialog.ui:812 glade/MainWindow.ui:273
-msgid "Show or hide the navigation arrows"
-msgstr "Arata sau ascunde sagetile de navigare"
-
-#: glade/OptionsDialog.ui:827 glade/MainWindow.ui:280
-msgid "Show or hide pigeon statistics"
-msgstr "Arata sau ascunde statisticile porumbelului"
-
-#: glade/OptionsDialog.ui:842 glade/MainWindow.ui:287
-msgid "Show or hide the toolbar"
-msgstr "Afișează sau ascunde bara de unelte"
-
-#: glade/OptionsDialog.ui:857 glade/MainWindow.ui:294
-msgid "Show or hide the statusbar"
-msgstr "Afișează sau ascunde bara de stare"
-
-#: glade/OptionsDialog.ui:934
-msgid "Paper format:"
-msgstr "Format foaie:"
-
-#: glade/OptionsDialog.ui:968
-msgid "Paper"
-msgstr "Hartie"
-
-#: glade/OptionsDialog.ui:1010
-msgid "Address"
-msgstr "Adresă"
-
-#: glade/OptionsDialog.ui:1024 glade/AddressBook.ui:331
-msgid "Phone"
-msgstr "Telefon"
-
-#: glade/OptionsDialog.ui:1060
-msgid "Personal"
-msgstr "Personal"
-
-#: glade/OptionsDialog.ui:1115
-msgid "Pedigree layout:"
-msgstr "Aspect arbore genealogic:"
-
-#: glade/OptionsDialog.ui:1170
-msgid "Layout"
-msgstr "Aspect"
-
-#: glade/OptionsDialog.ui:1240 glade/DetailsView.ui:1054
-#: glade/DetailsView.ui:1636
-msgid "Extra"
-msgstr "Suplimentar"
-
-#: glade/OptionsDialog.ui:1256
-msgid "Image"
-msgstr "Imagine"
-
-#: glade/OptionsDialog.ui:1278
-msgid "Pigeon"
-msgstr "Porumbel"
-
-#: glade/OptionsDialog.ui:1331
-msgid "Show the column names"
-msgstr "Afiseaza numele coloanei"
-
-#: glade/OptionsDialog.ui:1346
-msgid "Show the date"
-msgstr "Afiseaza data"
-
-#: glade/DataManager.ui:26 glade/MainWindow.ui:227
-msgid "Data manager"
-msgstr "Administrator date"
-
-#: glade/DataManager.ui:112
-msgid "Dataset"
-msgstr "Set de date"
-
-#: glade/DataManager.ui:123 glade/DataManager.ui:231
-msgid "Item"
-msgstr "Element"
-
-#: glade/DataManager.ui:250
-msgid "Manage items"
-msgstr "Administreaza articolele"
-
-#: glade/DataManager.ui:372
-msgid "Unused objects"
-msgstr "Obiecte neutilizate"
-
-#: glade/DetailsView.ui:53
-msgid "Pigeon status"
-msgstr "Stare porumbel"
-
-#: glade/DetailsView.ui:112
-msgid "Choose a status for this pigeon:"
-msgstr "Alege o stare pentru acest porumbel:"
-
-#: glade/DetailsView.ui:155
-msgid "The current status is:"
-msgstr "Starea curenta este:"
-
-#: glade/DetailsView.ui:225 glade/DetailsView.ui:338 glade/DetailsView.ui:459
-#: glade/DetailsView.ui:580 glade/DetailsView.ui:699
-msgid "Extra info"
-msgstr "Informaţii suplimentare"
-
-#: glade/DetailsView.ui:293
-msgid "No extra information available."
-msgstr "Informatii suplimentare indisponibile."
-
-#: glade/DetailsView.ui:369
-msgid "Buyer"
-msgstr "Cumpărător"
-
-#: glade/DetailsView.ui:567 glade/DistanceCalculator.ui:203
-#: glade/MainWindow.ui:948
-msgid "From"
-msgstr "De la"
-
-#: glade/DetailsView.ui:626 glade/DistanceCalculator.ui:331
-#: glade/MainWindow.ui:896
-msgid "To"
-msgstr "Către"
-
-#: glade/DetailsView.ui:686
-msgid "Loaned"
-msgstr "Imprumutat"
-
-#: glade/DetailsView.ui:732
-msgid "Person"
-msgstr "Persoana"
-
-#: glade/DetailsView.ui:779
-msgid "Back"
-msgstr "Inapoi"
-
-#: glade/DetailsView.ui:861
-msgid ""
-"Unable to retrieve data. The requested pigeon is probably removed from the "
-"database."
-msgstr ""
-
-#: glade/DetailsView.ui:1014 glade/DetailsView.ui:1413
-msgid "Dam"
-msgstr "Mama"
-
-#: glade/DetailsView.ui:1027 glade/DetailsView.ui:1426
-msgid "Sire"
-msgstr "Tata"
-
-#: glade/DistanceCalculator.ui:26 glade/MainWindow.ui:192
-msgid "Distance calculator"
-msgstr "Calculator de distanta"
-
-#: glade/DistanceCalculator.ui:415 glade/VelocityCalculator.ui:199
-#: glade/VelocityCalculator.ui:565
-msgid "Calculate"
-msgstr "Calculează"
+#: glade/DistanceCalculator.ui:139 glade/DistanceCalculator.ui:267
+#: glade/RaceManager.ui:158 glade/AddressBook.ui:469
+msgid "Longitude"
+msgstr "Longitudine"
 
 #: glade/DistanceCalculator.ui:446
 msgid "Result"
 msgstr "Rezultat"
 
-#: glade/MainWindow.ui:10
-msgid "View online help"
-msgstr "Consulta ajutor online"
-
-#: glade/MainWindow.ui:18
-msgid "Select all"
-msgstr "Selectaţi tot"
-
-#: glade/MainWindow.ui:19
-msgid "Select all pigeons"
-msgstr "Selecteaza toti porumbeii"
-
-#: glade/MainWindow.ui:25
-msgid "_File"
-msgstr "_Fisier"
-
-#: glade/MainWindow.ui:35 glade/MainWindow.ui:79
-msgid "_Backup"
-msgstr "_Copie de rezervă"
-
-#: glade/MainWindow.ui:40
-msgid "_Pigeon"
-msgstr "_Porumbel"
-
-#: glade/MainWindow.ui:45
-msgid "_Edit"
-msgstr "_Modifică"
-
-#: glade/MainWindow.ui:50
-msgid "_View"
-msgstr "_Vizualizare"
-
-#: glade/MainWindow.ui:55
-msgid "_Tools"
-msgstr "_Instrumente"
-
-#: glade/MainWindow.ui:60
-msgid "_Help"
-msgstr "_Ajutor"
-
-#: glade/MainWindow.ui:65 glade/MainWindow.ui:153
-msgid "_Pedigree"
-msgstr "_Certificat de origine"
-
-#: glade/MainWindow.ui:72
-msgid "Blank pedigree"
-msgstr "Certificat de origine necompletat"
-
-#: glade/MainWindow.ui:73
-msgid "Print a blank pedigree"
-msgstr "Imprima un certificat de origine necompletat"
-
-#: glade/MainWindow.ui:80
-msgid "Create a backup of your database"
-msgstr "Creaza o copie de rezerva pentru baza ta de date"
-
-#: glade/MainWindow.ui:87
-msgid "_Restore"
-msgstr "_Restaurează"
-
-#: glade/MainWindow.ui:88
-msgid "Restore a backup of your database"
-msgstr "Restaureaza o copie de rezerva a bazei tale de date"
-
-#: glade/MainWindow.ui:95
-msgid "Quit the program"
-msgstr "Inchide programul"
-
-#: glade/MainWindow.ui:103
-msgid "Add a new pigeon"
-msgstr "Adauga un porumbel nou"
-
-#: glade/MainWindow.ui:111 glade/MainWindow.ui:723
-msgid "Add a range of pigeons"
-msgstr "Adauga o gama de porumbei"
-
-#: glade/MainWindow.ui:119
-msgid "_Logfile Viewer"
-msgstr "_ Fisier de logare"
-
-#: glade/MainWindow.ui:120
-msgid "See the logfile"
-msgstr "Vezi fisierul de logare"
-
-#: glade/MainWindow.ui:128
-msgid "_Find..."
-msgstr "_Gaseste"
-
-#: glade/MainWindow.ui:129
-msgid "Search through the list of pigeons"
-msgstr "Cauta in lista de porumbei"
-
-#: glade/MainWindow.ui:137
-msgid "Edit the selected pigeon"
-msgstr "Editeaza porumbelul selectat"
-
-#: glade/MainWindow.ui:145
-msgid "Remove the selected pigeon"
-msgstr "Inlatura porumbelul selectat"
-
-#: glade/MainWindow.ui:154
-msgid "View the detailed pedigree of this pigeon"
-msgstr "Vizualizeaza certificatul de origine detaliat al acestui porumbel"
-
-#: glade/MainWindow.ui:162
-msgid "Add resul_t"
-msgstr "Adauga rezul_t"
-
-#: glade/MainWindow.ui:163
-msgid "Add a new result for this pigeon"
-msgstr "Adauga un nou rezultat al acestui porumbel"
-
-#: glade/MainWindow.ui:170
-msgid "Configure the application"
-msgstr "Configurați aplicația"
-
-#: glade/MainWindow.ui:178
-msgid "_Filter..."
-msgstr "_Filtrează..."
-
-#: glade/MainWindow.ui:185 glade/VelocityCalculator.ui:85
-msgid "Velocity calculator"
-msgstr "Claculator de viteza"
-
-#: glade/MainWindow.ui:186
-msgid "Calculate the velocity of flights"
-msgstr "Calculeaza viteza de zbor"
-
-#: glade/MainWindow.ui:193
-msgid "Calculate the distance between locations"
-msgstr "Calculeaza distanta dintre locatii"
-
-#: glade/MainWindow.ui:200
-msgid "Manage the racepoints and distances"
-msgstr "Administreaza punctele de lansare si distantele"
-
-#: glade/MainWindow.ui:206
-msgid "Photo album"
-msgstr "Album foto"
-
-#: glade/MainWindow.ui:207
-msgid "View the images of your pigeons"
-msgstr "Vizualizeaza imaginile porumbeilor tai"
-
-#: glade/MainWindow.ui:213 glade/AddressBook.ui:9
-msgid "Address book"
-msgstr "Agendă"
-
-#: glade/MainWindow.ui:214
-msgid "View the address book"
-msgstr "Cauta in agenda"
-
-#: glade/MainWindow.ui:220 glade/Calendar.ui:14
-msgid "Calendar"
-msgstr "Calendar"
-
-#: glade/MainWindow.ui:221
-msgid "View the calendar"
-msgstr "Vizualizeaza calendarul"
-
-#: glade/MainWindow.ui:228
-msgid "Manage your data"
-msgstr "Administreaza datele"
-
-#: glade/MainWindow.ui:234
-msgid "Website"
-msgstr "Pagina internet"
-
-#: glade/MainWindow.ui:235
-msgid "Go to the website for more information"
-msgstr "Mergi la pagina de internet pentru mai multe informatii"
-
-#: glade/MainWindow.ui:242
-msgid "Forum"
-msgstr "Forum"
-
-#: glade/MainWindow.ui:243
-msgid "Go to the forum for online help"
-msgstr "Mergi la forum pentru ajutor online"
-
-#: glade/MainWindow.ui:251
-msgid "Search online for program updates"
-msgstr "Cauta online imbunatatiri"
-
-#: glade/MainWindow.ui:265
-msgid "About this application"
-msgstr "Despre această aplicaţie"
-
-#: glade/MainWindow.ui:272
-msgid "Navigation arrows"
-msgstr "Sageti de navigare"
-
-#: glade/MainWindow.ui:279
-msgid "Statistics"
-msgstr "Statistici"
-
-#: glade/MainWindow.ui:286
-msgid "Toolbar"
-msgstr "Bara de unelte"
-
-#: glade/MainWindow.ui:293
-msgid "Statusbar"
-msgstr "Bara de stare"
-
-#: glade/MainWindow.ui:300
-msgid "Export..."
-msgstr "Exporta..."
-
-#: glade/MainWindow.ui:301
-msgid "Export data to other formats"
-msgstr ""
-
-#: glade/MainWindow.ui:391
-msgid "Total"
-msgstr "Total"
-
-#: glade/MainWindow.ui:1005
-msgid "Remove pigeon"
-msgstr "Inlatura porumbelul"
-
-#: glade/MainWindow.ui:1094
-msgid "The following pigeon will be removed:"
-msgstr "Urmatorul porumbel va fi inlaturat:"
-
-#: glade/MainWindow.ui:1132
-msgid "Keep this pigeon in the pedigree"
-msgstr "Pastreaza acest porumbel in arborele genealogic"
-
-#: glade/MainWindow.ui:1148
-msgid "Keep results of this pigeon"
-msgstr "Pastreaza rezultatele acestui porumbel"
-
-#: glade/AddressBook.ui:170
-msgid "Street"
-msgstr "Strada"
-
-#: glade/AddressBook.ui:249
-msgid "Zipcode / City"
-msgstr "Cod postal / Oras"
-
-#: glade/AddressBook.ui:290
-msgid "Country"
-msgstr "Tara"
-
-#: glade/AddressBook.ui:571
-msgid "This is me"
-msgstr "Acesta sunt eu"
-
-#: glade/Calendar.ui:309
-msgid "Notify me!"
-msgstr "Notifica-ma!"
-
-#: glade/Calendar.ui:341
-msgid "Number of days in advance:"
-msgstr "Numar de zile in avans:"
-
-#: glade/VelocityCalculator.ui:176
-msgid "Time"
-msgstr "Timp"
-
-#: glade/VelocityCalculator.ui:318 glade/VelocityCalculator.ui:718
-msgid "Hours"
-msgstr "Ore"
-
-#: glade/VelocityCalculator.ui:342 glade/VelocityCalculator.ui:742
-msgid "Minutes"
-msgstr "Minute"
-
-#: glade/VelocityCalculator.ui:366 glade/VelocityCalculator.ui:766
-msgid "Seconds"
-msgstr "Secunde"
-
-#: glade/VelocityCalculator.ui:553
-msgid "Range"
-msgstr "Interval"
-
-#: glade/VelocityCalculator.ui:957
-msgid "Prognosis"
-msgstr "Prognoza"
+#: glade/MedicationView.ui:230 glade/MedicationView.ui:696
+msgid "Done by"
+msgstr "Realizat de"
+
+#: glade/MedicationView.ui:258 glade/MedicationView.ui:848
+msgid "Dosage"
+msgstr "Dozare"
+
+#: glade/MedicationView.ui:287 glade/MedicationView.ui:885
+msgid "Vaccination"
+msgstr "Vaccinare"
 
 #: glade/ResultParser.ui:29
 msgid "Import results"
@@ -1731,11 +1767,11 @@ msgstr "Fișier:"
 
 #: glade/ResultParser.ui:72
 msgid "Parser:"
-msgstr ""
+msgstr "Analizor:"
 
 #: glade/ResultParser.ui:108
 msgid "Parse"
-msgstr ""
+msgstr "Analiză"
 
 #: glade/ResultParser.ui:156
 msgid "Date:"
@@ -1763,7 +1799,7 @@ msgstr "Nu s-au gasit rezultate pentru acest porumbel"
 
 #: glade/ResultParser.ui:509
 msgid "Parser error"
-msgstr ""
+msgstr "Eroare analizor"
 
 #: glade/ResultParser.ui:571
 msgid ""
@@ -1771,6 +1807,74 @@ msgid ""
 "parser that matches your file and try again. Or send the developers some "
 "useful data shown below, so they can work on this issue."
 msgstr ""
+"Fișierul pe care l-ați selectat nu se poate analiza corect. Încercați "
+"selectarea altui analizor care se potrivește fișierului și reâncercați. Sau "
+"trimiteți dezvoltatorilor câteva date folositoare arătate mai jos, astfel "
+"aceștia pot lucra la problemă."
+
+#: glade/PhotoAlbum.ui:8
+msgid "Shows the first picture"
+msgstr "Arata prima imagine"
+
+#: glade/PhotoAlbum.ui:15
+msgid "Shows previous picture"
+msgstr "Arata precedenta imagine"
+
+#: glade/PhotoAlbum.ui:22
+msgid "Shows the next picture"
+msgstr "Arata urmatoarea imagine"
+
+#: glade/PhotoAlbum.ui:29
+msgid "Shows the last picture"
+msgstr "Arata ultima imgine"
+
+#: glade/PhotoAlbum.ui:36
+msgid "Zooms the picture in"
+msgstr "Micsoreaza imaginea"
+
+#: glade/PhotoAlbum.ui:43
+msgid "Zooms the picture out"
+msgstr "Mareste imaginea"
+
+#: glade/PhotoAlbum.ui:57
+msgid "View in fullscreen"
+msgstr "Vizualizeaza pe tot ecranul"
+
+#: glade/PhotoAlbum.ui:64
+msgid "View slideshow"
+msgstr "Vizualizeaza in slideshow"
+
+#: glade/PhotoAlbum.ui:71
+msgid "Zooms to fit the whole picture"
+msgstr "Mareste pentru a potrivi intreaga imagine"
+
+#: glade/PhotoAlbum.ui:80
+msgid "Photo Album"
+msgstr "Album foto"
+
+#: glade/PhotoAlbum.ui:128
+msgid "There are no images found."
+msgstr "Aici nu s-au gasit imagini."
+
+#: glade/DataManager.ui:112
+msgid "Dataset"
+msgstr "Set de date"
+
+#: glade/DataManager.ui:123 glade/DataManager.ui:231
+msgid "Item"
+msgstr "Element"
+
+#: glade/DataManager.ui:250
+msgid "Manage items"
+msgstr "Administreaza articolele"
+
+#: glade/DataManager.ui:372
+msgid "Unused objects"
+msgstr "Obiecte neutilizate"
+
+#: glade/RaceManager.ui:205
+msgid "Click here to add more racepoints"
+msgstr "Click pentru a adauga alte puncte de lansare"
 
 #: glade/DatabaseTool.ui:8
 msgid "Pigeon Planner database tool"
@@ -1824,61 +1928,21 @@ msgstr ""
 msgid "SQL"
 msgstr "SQL"
 
-#: glade/MedicationView.ui:230 glade/MedicationView.ui:696
-msgid "Done by"
-msgstr "Realizat de"
+#: glade/AddressBook.ui:170
+msgid "Street"
+msgstr "Strada"
 
-#: glade/MedicationView.ui:258 glade/MedicationView.ui:848
-msgid "Dosage"
-msgstr "Dozare"
+#: glade/AddressBook.ui:249
+msgid "Zipcode / City"
+msgstr "Cod postal / Oras"
 
-#: glade/MedicationView.ui:287 glade/MedicationView.ui:885
-msgid "Vaccination"
-msgstr "Vaccinare"
+#: glade/AddressBook.ui:290
+msgid "Country"
+msgstr "Tara"
 
-#: glade/PhotoAlbum.ui:8
-msgid "Shows the first picture"
-msgstr "Arata prima imagine"
-
-#: glade/PhotoAlbum.ui:15
-msgid "Shows previous picture"
-msgstr "Arata precedenta imagine"
-
-#: glade/PhotoAlbum.ui:22
-msgid "Shows the next picture"
-msgstr "Arata urmatoarea imagine"
-
-#: glade/PhotoAlbum.ui:29
-msgid "Shows the last picture"
-msgstr "Arata ultima imgine"
-
-#: glade/PhotoAlbum.ui:36
-msgid "Zooms the picture in"
-msgstr "Micsoreaza imaginea"
-
-#: glade/PhotoAlbum.ui:43
-msgid "Zooms the picture out"
-msgstr "Mareste imaginea"
-
-#: glade/PhotoAlbum.ui:57
-msgid "View in fullscreen"
-msgstr "Vizualizeaza pe tot ecranul"
-
-#: glade/PhotoAlbum.ui:64
-msgid "View slideshow"
-msgstr "Vizualizeaza in slideshow"
-
-#: glade/PhotoAlbum.ui:71
-msgid "Zooms to fit the whole picture"
-msgstr "Mareste pentru a potrivi intreaga imagine"
-
-#: glade/PhotoAlbum.ui:80
-msgid "Photo Album"
-msgstr "Album foto"
-
-#: glade/PhotoAlbum.ui:128
-msgid "There are no images found."
-msgstr "Aici nu s-au gasit imagini."
+#: glade/AddressBook.ui:571
+msgid "This is me"
+msgstr "Acesta sunt eu"
 
 #~ msgid "Optimization has been completed."
 #~ msgstr "Optimizarea s-a incheiat."
@@ -1903,6 +1967,9 @@ msgstr "Aici nu s-au gasit imagini."
 #~ msgstr ""
 #~ "O noua versiune este disponibila. Viziteaza pagina de internet a Pigeon "
 #~ "Planner urmand legatura de mai jos si descarca ultima versiune."
+
+#~ msgid "Page"
+#~ msgstr "Pagină"
 
 #~ msgid "Select a directory"
 #~ msgstr "Selectați un director"
