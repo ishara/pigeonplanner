@@ -99,7 +99,8 @@ GLADEDIR = os.path.join(ROOTDIR, 'glade')
 THUMBDIR = os.path.join(PREFDIR, u'thumbs')
 DATABASE = os.path.join(PREFDIR, u'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, u'pigeonplanner.log')
-CONFIGFILE = os.path.join(PREFDIR, 'pigeonplanner.cfg')
+CONFIGFILE_OLD = os.path.join(PREFDIR, 'pigeonplanner.cfg')
+CONFIGFILE = os.path.join(PREFDIR, 'pigeonplanner.json')
 
 TEMPDIR = tempfile.gettempdir()
 
