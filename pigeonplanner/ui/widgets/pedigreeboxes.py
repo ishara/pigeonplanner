@@ -120,6 +120,10 @@ class PedigreeBox(gtk.DrawingArea):
         alloc = self.get_allocation()
         context = self.window.cairo_create()
 
+        self.textlayout = self.context.create_layout()
+        self.textlayout.set_font_description(self.get_style().font_desc)
+        self.textlayout.set_markup(self.text)
+
         context.move_to(0, 5)
         context.curve_to(0, 2, 2, 0, 5, 0)
         context.line_to(alloc.width-8, 0)
@@ -181,57 +185,64 @@ class ExtraBox(gtk.DrawingArea):
             self.bordercolor = (0, 0, 0)
 
     def realize(self, widget):
-        self.set_size_request(max(12, 220), max(28, 25))
-        
-    def expose(self, widget, event):
-        alloc = self.get_allocation()
         self.context = self.window.cairo_create()
-
         self.textlayout = self.context.create_layout()
         self.textlayout.set_font_description(self.get_style().font_desc)
         self.textlayout.set_markup(self.text)
+        size = self.textlayout.get_pixel_size()
+        xmin = size[0] + 12
+        ymin = size[1] + 8
+        self.set_size_request(max(xmin, 220), max(ymin, 25))
+        
+    def expose(self, widget, event):
+        alloc = self.get_allocation()
+        context = self.window.cairo_create()
 
-        self.context.move_to(0, 5)
-        self.context.curve_to(0, 2, 2, 0, 5, 0)
-        self.context.line_to(alloc.width-8, 0)
-        self.context.curve_to(alloc.width-5, 0, alloc.width-3, 2,
-                              alloc.width-3, 5)
-        self.context.line_to(alloc.width-3, alloc.height-8)
-        self.context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5,
-                              alloc.height-3, alloc.width-8, alloc.height-3)
-        self.context.line_to(5, alloc.height-3)
-        self.context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0,
-                              alloc.height-8)
-        self.context.close_path()
-        path = self.context.copy_path()
+        self.textlayout = context.create_layout()
+        self.textlayout.set_font_description(self.get_style().font_desc)
+        self.textlayout.set_markup(self.text)
 
-        self.context.save()
-        self.context.translate(3, 3)
-        self.context.new_path()
-        self.context.append_path(path)
-        self.context.set_source_rgba(self.bordercolor[0], self.bordercolor[1],
-                                     self.bordercolor[2], 0.4)
-        self.context.fill_preserve()
-        self.context.set_line_width(0)
-        self.context.stroke()
-        self.context.restore()
+        context.move_to(0, 5)
+        context.curve_to(0, 2, 2, 0, 5, 0)
+        context.line_to(alloc.width-8, 0)
+        context.curve_to(alloc.width-5, 0, alloc.width-3, 2,
+                         alloc.width-3, 5)
+        context.line_to(alloc.width-3, alloc.height-8)
+        context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5,
+                         alloc.height-3, alloc.width-8, alloc.height-3)
+        context.line_to(5, alloc.height-3)
+        context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0,
+                            alloc.height-8)
+        context.close_path()
+        path = context.copy_path()
 
-        self.context.append_path(path)
-        self.context.clip()
+        context.save()
+        context.translate(3, 3)
+        context.new_path()
+        context.append_path(path)
+        context.set_source_rgba(self.bordercolor[0], self.bordercolor[1],
+                                self.bordercolor[2], 0.4)
+        context.fill_preserve()
+        context.set_line_width(0)
+        context.stroke()
+        context.restore()
 
-        self.context.append_path(path)
-        self.context.set_source_rgb(*self.bgcolor)
-        self.context.fill_preserve()
-        self.context.stroke()
+        context.append_path(path)
+        context.clip()
 
-        self.context.move_to(5, 4)
-        self.context.set_source_rgb(0, 0, 0)
-        self.context.show_layout(self.textlayout)
+        context.append_path(path)
+        context.set_source_rgb(*self.bgcolor)
+        context.fill_preserve()
+        context.stroke()
 
-        self.context.set_line_width(2)
-        self.context.append_path(path)
-        self.context.set_source_rgb(*self.bordercolor)
-        self.context.stroke()
+        context.move_to(5, 4)
+        context.set_source_rgb(0, 0, 0)
+        context.show_layout(self.textlayout)
+
+        context.set_line_width(2)
+        context.append_path(path)
+        context.set_source_rgb(*self.bordercolor)
+        context.stroke()
 
 
 class PedigreeCross(gtk.DrawingArea):
