@@ -453,6 +453,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def menupedigree_activate(self, widget):
         logger.debug(common.get_function_name())
         pigeon = self.treeview.get_selected_pigeon()
+        if pigeon is None:
+            # Disable pedigree shortcut when no pigeon is selected
+            return
         pedigreewindow.PedigreeWindow(self, self.database,
                                       self.parser, self.pedigree, pigeon)
 
