@@ -204,6 +204,7 @@ class Config(object):
 
 default_config = [
                 ('options.check-for-updates', True),
+                ('options.check-for-dev-updates', False),
                 ('options.language', 'def'),
                 ##('options.format-coef', '%(place)s / %(out)s * 100'),
                 ##('options.format-date', '%Y-%m-%d'),
@@ -262,7 +263,8 @@ register = CONFIG.register
 save = CONFIG.save
 load = CONFIG.load
 
+# Make sure to load the config first before registering defaults
+load()
 for option, value in default_config:
     register(option, value)
 
-load()

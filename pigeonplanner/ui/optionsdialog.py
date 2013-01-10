@@ -145,6 +145,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
 
         settings = [
                 ('options.check-for-updates', self.chkUpdate.get_active()),
+                ('options.check-for-dev-updates', self.chkDevUpdate.get_active()),
                 ('options.language', self.combolangs.get_active_text()),
                 ##('options.format-coef', self.entrycoef.get_text()),
                 ##('options.format-date', self.entrydate.get_text()),
@@ -200,6 +201,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     def _set_options(self):
         # General
         self.chkUpdate.set_active(config.get('options.check-for-updates'))
+        self.chkDevUpdate.set_active(config.get('options.check-for-dev-updates'))
 
         for index, lang in enumerate(self.languages):
             if config.get('options.language') == lang:

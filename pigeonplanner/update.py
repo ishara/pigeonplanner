@@ -21,11 +21,13 @@ Interface for checking program updates
 
 
 import os
+import json
 import urllib
 import logging
 logger = logging.getLogger(__name__)
 
 import const
+import config
 import messages
 
 
@@ -36,14 +38,14 @@ class UpdateError(Exception):
     def __str__(self):
         return "Updater: %s" % self.msg
 
+
 def update():
     local = os.path.join(const.TEMPDIR, 'pigeonplanner_update')
 
     try:
         urllib.urlretrieve(const.UPDATEURL, local)
-        versionfile = open(local, 'r')
-        version = versionfile.readline().strip()
-        versionfile.close()
+        with open(local, 'r') as versionfile:
+            versiondict = json.load(versionfile)
     except IOError, e:
         logger.error(e)
         raise UpdateError(messages.MSG_UPDATE_ERROR)
@@ -52,6 +54,17 @@ def update():
         os.remove(local)
     except:
         pass
+
+    # See what version we need to check for
+    dev = versiondict["dev"]
+    stable = versiondict["stable"]
+    if config.get('options.check-for-dev-updates'):
+        if stable > dev:
+            version = stable
+        else:
+            version = dev
+    else:
+        version = stable
 
     new = False
     if const.VERSION < version:
