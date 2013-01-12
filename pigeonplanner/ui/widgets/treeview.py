@@ -138,11 +138,10 @@ class MainTreeView(gtk.TreeView):
         @param pindex: The index of the pigeon to search
         """
 
-        for row in self._liststore:
-            if self._liststore.get_value(row.iter, 1) == pindex:
+        for row in self._modelsort:
+            if self._modelsort.get_value(row.iter, 1) == pindex:
                 self._selection.unselect_all()
-                self._selection.select_iter(self.get_top_iter(row.iter))
-                #TODO: doesn't always work correctly
+                self._selection.select_iter(row.iter)
                 self.scroll_to_cell(row.path)
                 self.grab_focus()
                 return True
