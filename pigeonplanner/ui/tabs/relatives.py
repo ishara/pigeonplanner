@@ -20,6 +20,7 @@ import gtk
 import gtk.gdk
 
 import const
+import messages
 from ui import utils
 from ui.tabs import basetab
 from ui.detailsview import DetailsDialog
@@ -113,9 +114,7 @@ class RelativesTab(basetab.BaseTab):
 
     def on_goto_pigeon(self, widget, pigeon):
         if not self.mainwindow.get_treeview().select_pigeon(None, pigeon.get_pindex()):
-            msg = (_("Pigeon %s can't be found.") % pigeon.get_band_string(),
-                    None, _("Not found!"))
-            InfoDialog(msg, self.mainwindow)
+            InfoDialog(messages.MSG_NO_PIGEON, self.mainwindow)
 
     # Public methods
     def fill_treeviews(self, pigeon):
