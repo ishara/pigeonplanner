@@ -75,6 +75,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 self.treestore.append(p_iter, [i, None, child])
             i += 1
         self._selection.select_path(0)
+        self.treeview.expand_all()
 
         # Show the theme changer on Windows
         if const.WINDOWS and os.path.exists('.\\share\\themes'):
