@@ -89,6 +89,8 @@ class RelativesTab(basetab.BaseTab):
             utils.popup_menu(event, [
                                      (gtk.STOCK_INFO,
                                       self.on_show_details, (pigeon,)),
+                                     (gtk.STOCK_EDIT,
+                                      self.on_edit_details, (pigeon,)),
                                      (gtk.STOCK_JUMP_TO,
                                       self.on_goto_pigeon, (pigeon,)),
                                     ])
@@ -99,6 +101,14 @@ class RelativesTab(basetab.BaseTab):
         if not pigeon.get_pindex() in self.parser.pigeons:
             return
         DetailsDialog(self.database, self.parser, pigeon, self.mainwindow)
+
+    def on_edit_details(self, widget, pigeon):
+        if not pigeon.get_pindex() in self.parser.pigeons:
+            return
+
+        dialog = DetailsDialog(self.database, self.parser, pigeon,
+                               self.mainwindow, const.EDIT)
+        dialog.details.set_details(pigeon)
 
     def on_goto_pigeon(self, widget, pigeon):
         self.mainwindow.get_treeview().select_pigeon(None, pigeon.get_pindex())
