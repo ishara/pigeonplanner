@@ -59,110 +59,7 @@ class Config(object):
                 copy.deepcopy(self.default[section][setting])
 
     def load(self):
-        if os.path.exists(const.CONFIGFILE_OLD):
-            with open(const.CONFIGFILE_OLD) as cfg:
-                logger.debug('Convert old config file to new format')
-                import ConfigParser
-                parser = ConfigParser.RawConfigParser()
-                parser.readfp(cfg)
-                cfg_transform = [
-                        ('options.check-for-updates',
-                            parser.getboolean, 'Options', 'update'),
-                        ('options.language',
-                            parser.get, 'Options', 'language'),
-                        ('interface.arrows',
-                            parser.getboolean, 'Options', 'arrows'),
-                        ('interface.stats',
-                            parser.getboolean, 'Options', 'stats'),
-                        ('interface.theme',
-                            parser.getint, 'Options', 'theme'),
-                        ('interface.toolbar',
-                            parser.getboolean, 'Options', 'toolbar'),
-                        ('interface.statusbar',
-                            parser.getboolean, 'Options', 'statusbar'),
-                        ('interface.window-x',
-                            parser.getint, 'Window', 'window_x'),
-                        ('interface.window-y',
-                            parser.getint, 'Window', 'window_y'),
-                        ('interface.window-w',
-                            parser.getint, 'Window', 'window_w'),
-                        ('interface.window-h',
-                            parser.getint, 'Window', 'window_h'),
-                        ('backup.automatic-backup',
-                            parser.getboolean, 'Backup', 'backup'),
-                        ('backup.interval',
-                            parser.getint, 'Backup', 'interval'),
-                        ('backup.location',
-                            parser.get, 'Backup', 'location'),
-                        ('backup.last',
-                            parser.getfloat, 'Backup', 'last'),
-                        ('columns.pigeon-name',
-                            parser.getboolean, 'Columns', 'name'),
-                        ('columns.pigeon-colour',
-                            parser.getboolean, 'Columns', 'colour'),
-                        ('columns.pigeon-sex',
-                            parser.getboolean, 'Columns', 'sex'),
-                        ('columns.pigeon-strain',
-                            parser.getboolean, 'Columns', 'strain'),
-                        ('columns.pigeon-status',
-                            parser.getboolean, 'Columns', 'status'),
-                        ('columns.pigeon-loft',
-                            parser.getboolean, 'Columns', 'loft'),
-                        ('columns.result-coef',
-                            parser.getboolean, 'Columns', 'coef'),
-                        ('columns.result-sector',
-                            parser.getboolean, 'Columns', 'sector'),
-                        ('columns.result-category',
-                            parser.getboolean, 'Columns', 'category'),
-                        ('columns.result-type',
-                            parser.getboolean, 'Columns', 'type'),
-                        ('columns.result-weather',
-                            parser.getboolean, 'Columns', 'weather'),
-                        ('columns.result-wind',
-                            parser.getboolean, 'Columns', 'wind'),
-                        ('columns.result-comment',
-                            parser.getboolean, 'Columns', 'comment'),
-                        ('printing.general-paper',
-                            parser.getint, 'Printing', 'paper'),
-                        ('printing.pedigree-layout',
-                            parser.getint, 'Printing', 'layout'),
-                        ('printing.pedigree-name',
-                            parser.getboolean, 'Printing', 'pigName'),
-                        ('printing.pedigree-colour',
-                            parser.getboolean, 'Printing', 'pigColour'),
-                        ('printing.pedigree-sex',
-                            parser.getboolean, 'Printing', 'pigSex'),
-                        ('printing.pedigree-extra',
-                            parser.getboolean, 'Printing', 'pigExtra'),
-                        ('printing.result-colnames',
-                            parser.getboolean, 'Printing', 'resColumnNames'),
-                        ('printing.result-date',
-                            parser.getboolean, 'Printing', 'resDate'),
-                        ('printing.user-name',
-                            parser.getboolean, 'Printing', 'perName'),
-                        ('printing.user-address',
-                            parser.getboolean, 'Printing', 'perAddress'),
-                        ('printing.user-phone',
-                            parser.getboolean, 'Printing', 'perPhone'),
-                        ('printing.user-email',
-                            parser.getboolean, 'Printing', 'perEmail'),
-                    ]
-                for new, method, old_section, old_option in cfg_transform:
-                    try:
-                        old = method(old_section, old_option)
-                    except:
-                        logger.debug('Skipping option %s.%s' %
-                                                (old_section, old_option))
-                        continue
-                    self.set(new, old)
-
-            # Remove old config
-            try:
-                os.remove(const.CONFIGFILE_OLD)
-            except Exception as exc:
-                logger.error("Couldn't remove old config file:", exc)
-
-        elif os.path.exists(const.CONFIGFILE):
+        if os.path.exists(const.CONFIGFILE):
             with open(const.CONFIGFILE) as cfg:
                 self.settings = json.load(cfg)
 
@@ -263,8 +160,113 @@ register = CONFIG.register
 save = CONFIG.save
 load = CONFIG.load
 
-# Make sure to load the config first before registering defaults
-load()
+# Register default settings
 for option, value in default_config:
     register(option, value)
 
+# Upgrade old config
+if os.path.exists(const.CONFIGFILE_OLD):
+    with open(const.CONFIGFILE_OLD) as cfg:
+        logger.debug('Convert old config file to new format')
+        import ConfigParser
+        parser = ConfigParser.RawConfigParser()
+        parser.readfp(cfg)
+        cfg_transform = [
+                ('options.check-for-updates',
+                    parser.getboolean, 'Options', 'update'),
+                ('options.language',
+                    parser.get, 'Options', 'language'),
+                ('interface.arrows',
+                    parser.getboolean, 'Options', 'arrows'),
+                ('interface.stats',
+                    parser.getboolean, 'Options', 'stats'),
+                ('interface.theme',
+                    parser.getint, 'Options', 'theme'),
+                ('interface.toolbar',
+                    parser.getboolean, 'Options', 'toolbar'),
+                ('interface.statusbar',
+                    parser.getboolean, 'Options', 'statusbar'),
+                ('interface.window-x',
+                    parser.getint, 'Window', 'window_x'),
+                ('interface.window-y',
+                    parser.getint, 'Window', 'window_y'),
+                ('interface.window-w',
+                    parser.getint, 'Window', 'window_w'),
+                ('interface.window-h',
+                    parser.getint, 'Window', 'window_h'),
+                ('backup.automatic-backup',
+                    parser.getboolean, 'Backup', 'backup'),
+                ('backup.interval',
+                    parser.getint, 'Backup', 'interval'),
+                ('backup.location',
+                    parser.get, 'Backup', 'location'),
+                ('backup.last',
+                    parser.getfloat, 'Backup', 'last'),
+                ('columns.pigeon-name',
+                    parser.getboolean, 'Columns', 'name'),
+                ('columns.pigeon-colour',
+                    parser.getboolean, 'Columns', 'colour'),
+                ('columns.pigeon-sex',
+                    parser.getboolean, 'Columns', 'sex'),
+                ('columns.pigeon-strain',
+                    parser.getboolean, 'Columns', 'strain'),
+                ('columns.pigeon-status',
+                    parser.getboolean, 'Columns', 'status'),
+                ('columns.pigeon-loft',
+                    parser.getboolean, 'Columns', 'loft'),
+                ('columns.result-coef',
+                    parser.getboolean, 'Columns', 'coef'),
+                ('columns.result-sector',
+                    parser.getboolean, 'Columns', 'sector'),
+                ('columns.result-category',
+                    parser.getboolean, 'Columns', 'category'),
+                ('columns.result-type',
+                    parser.getboolean, 'Columns', 'type'),
+                ('columns.result-weather',
+                    parser.getboolean, 'Columns', 'weather'),
+                ('columns.result-wind',
+                    parser.getboolean, 'Columns', 'wind'),
+                ('columns.result-comment',
+                    parser.getboolean, 'Columns', 'comment'),
+                ('printing.general-paper',
+                    parser.getint, 'Printing', 'paper'),
+                ('printing.pedigree-layout',
+                    parser.getint, 'Printing', 'layout'),
+                ('printing.pedigree-name',
+                    parser.getboolean, 'Printing', 'pigName'),
+                ('printing.pedigree-colour',
+                    parser.getboolean, 'Printing', 'pigColour'),
+                ('printing.pedigree-sex',
+                    parser.getboolean, 'Printing', 'pigSex'),
+                ('printing.pedigree-extra',
+                    parser.getboolean, 'Printing', 'pigExtra'),
+                ('printing.result-colnames',
+                    parser.getboolean, 'Printing', 'resColumnNames'),
+                ('printing.result-date',
+                    parser.getboolean, 'Printing', 'resDate'),
+                ('printing.user-name',
+                    parser.getboolean, 'Printing', 'perName'),
+                ('printing.user-address',
+                    parser.getboolean, 'Printing', 'perAddress'),
+                ('printing.user-phone',
+                    parser.getboolean, 'Printing', 'perPhone'),
+                ('printing.user-email',
+                    parser.getboolean, 'Printing', 'perEmail'),
+            ]
+        for new, method, old_section, old_option in cfg_transform:
+            try:
+                old = method(old_section, old_option)
+            except:
+                logger.debug('Skipping option %s.%s' %
+                                        (old_section, old_option))
+                continue
+            set(new, old)
+
+    # Remove old config
+    try:
+        os.remove(const.CONFIGFILE_OLD)
+    except Exception as exc:
+        logger.error("Couldn't remove old config file:", exc)
+
+# Load the config file
+load()
