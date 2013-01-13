@@ -1,0 +1,2 @@
+include AUTHORS CHANGES COPYING INSTALL
+include i18n.py msgfmt.py

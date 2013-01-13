@@ -30,22 +30,22 @@ from pigeonplanner import const
 
 
 # Common data files
+glade_files = glob.glob('glade/*.ui')
+glade_files.extend(['glade/pigeonplannerwidgets.py', 'glade/pigeonplannerwidgets.xml'])
 data_files = [
             ('share/applications', ['data/pigeonplanner.desktop']),
             ('share/icons/hicolor/scalable/apps', ['images/pigeonplanner.svg']),
             ('share/pixmaps/', ['images/pigeonplanner.png']),
-            ('share/pigeonplanner/glade', glob.glob('glade/*.ui')),
+            ('share/pigeonplanner/glade', glade_files),
             ('share/pigeonplanner/images', glob.glob('images/*.png')),
         ]
 
-packages = [
-            "pigeonplanner",
-            "pigeonplanner.resultparsers",
-            "pigeonplanner.ui",
-            "pigeonplanner.ui.tabs",
-            "pigeonplanner.ui.tools",
-            "pigeonplanner.ui.widgets",
-        ]
+# Find all packages
+packages = []
+for folder, subfolders, files in os.walk('pigeonplanner'):
+    if '__init__.py' in files:
+        # It's only a package when it contains a __init__.py file
+        packages.append(folder)
 
 # Compile translation files
 i18n.create_mo()

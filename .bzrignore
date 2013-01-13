@@ -1,3 +1,5 @@
 ./po/POTFILES_PY.in
 ./po/POTFILES_GLADE.in
 ./languages
+./MANIFEST
+./dist
