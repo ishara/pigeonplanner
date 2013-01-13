@@ -26,7 +26,6 @@ import random
 import inspect
 import urllib2
 import os.path
-import platform
 import datetime
 import webbrowser
 import logging
@@ -197,7 +196,7 @@ def calculate_coefficient(place, out):
     @param out: The total number of pigeons
     """
 
-    return (float(place)/float(out))*100
+    return (float(place)/float(out))*config.get('options.coef-multiplier')
 
 def add_zero_to_time(value):
     """

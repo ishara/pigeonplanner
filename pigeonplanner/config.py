@@ -206,7 +206,7 @@ default_config = [
                 ('options.check-for-updates', True),
                 ('options.check-for-dev-updates', False),
                 ('options.language', 'def'),
-                ##('options.format-coef', '%(place)s / %(out)s * 100'),
+                ('options.coef-multiplier', 100),
                 ##('options.format-date', '%Y-%m-%d'),
 
                 ('interface.arrows', False),
