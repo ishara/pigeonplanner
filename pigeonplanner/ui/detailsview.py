@@ -170,7 +170,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
     ## Image
     def on_eventbox_enter_notify_event(self, widget, event):
-        if self.pigeon.get_image() is not None:
+        if self.pigeon is not None and self.pigeon.get_image() is not None:
             self.eventbox.get_window().set_cursor(self._zoom_cursor)
 
     def on_eventbox_leave_notify_event(self, widget, event):

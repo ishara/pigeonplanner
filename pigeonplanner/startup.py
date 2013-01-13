@@ -91,7 +91,10 @@ class Startup(object):
                 sys.stderr = NullFile()
 
         # Detect if program is running for the first time
-        self.firstrun = not os.path.isdir(const.PREFDIR)
+        self.firstrun = False
+        if not os.path.exists(const.PREFDIR):
+            os.makedirs(const.PREFDIR, 0755)
+            self.firstrun = True
 
         # Parse arguments
         parser = OptionParser(version=const.VERSION)

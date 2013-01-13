@@ -64,10 +64,6 @@ class Config(object):
                 self.settings = json.load(cfg)
 
     def save(self, default=False):
-        if not os.path.exists(const.CONFIGFILE):
-            if not os.path.exists(const.PREFDIR):
-                os.makedirs(const.PREFDIR, 0755)
-
         with open(const.CONFIGFILE, 'w') as cfg:
             settings = self.settings if not default else self.default
             json.dump(settings, cfg, indent=4)

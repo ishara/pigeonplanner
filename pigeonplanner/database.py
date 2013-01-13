@@ -350,6 +350,7 @@ class DatabaseOperations(object):
         return self.__db_execute_select(sql, None, RET_ALLCOL)
 
     def check_schema(self):
+        new_db = os.path.exists(const.DATABASE)
         changed = False
         # Check if all tables are present
         for s_table, s_columns in self.SCHEMA.items():
@@ -381,6 +382,10 @@ class DatabaseOperations(object):
                                  %(column, table))
                     self.add_column(table, column_def)
                     changed = True
+        # If it's a new database, the schema always changes. But we only
+        # want to report changes to an existing database.
+        if new_db:
+            return False
         return changed
 
 #### Pigeons
