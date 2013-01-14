@@ -61,7 +61,9 @@ class Config(object):
     def load(self):
         if os.path.exists(const.CONFIGFILE):
             with open(const.CONFIGFILE) as cfg:
-                self.settings = json.load(cfg)
+                loaded = json.load(cfg)
+            for section in self.settings.keys():
+                self.settings[section].update(loaded[section])
 
     def save(self, default=False):
         with open(const.CONFIGFILE, 'w') as cfg:
