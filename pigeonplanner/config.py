@@ -168,7 +168,15 @@ if os.path.exists(const.CONFIGFILE_OLD):
         logger.debug('Convert old config file to new format')
         import ConfigParser
         parser = ConfigParser.RawConfigParser()
-        parser.readfp(cfg)
+        try:
+            do_transform = True
+            parser.readfp(cfg)
+        except ConfigParser.MissingSectionHeaderError:
+            # This is a rare situation when the new config gets written to
+            # the old config file. This can happen in some 1.7 versions.
+            do_transform = False
+
+    if do_transform:
         cfg_transform = [
                 ('options.check-for-updates',
                     parser.getboolean, 'Options', 'update'),
