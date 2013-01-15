@@ -131,8 +131,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
 
     def on_buttondefault_clicked(self, widget):
         if WarningDialog(messages.MSG_DEFAULT_OPTIONS, self.optionsdialog).run():
-            config.save(default=True)
-            config.load()
+            config.reset()
             self._set_options()
             self._finish_options(False, True)
 

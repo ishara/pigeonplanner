@@ -157,6 +157,7 @@ set = CONFIG.set
 register = CONFIG.register
 save = CONFIG.save
 load = CONFIG.load
+reset = CONFIG.reset
 
 # Register default settings
 for option, value in default_config:
