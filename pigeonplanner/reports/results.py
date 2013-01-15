@@ -89,6 +89,8 @@ class ResultsReportOptions(ReportOptions):
 
     def set_values(self):
         self.orientation = PAPER_LANDSCAPE
+        self.margins = {"lmargin": 1., "rmargin": 1.,
+                        "tmargin": 1., "bmargin": 1.}
 
     def make_default_style(self, default_style):
         font = FontStyle()
@@ -117,8 +119,8 @@ class ResultsReportOptions(ReportOptions):
 
         table = TableStyle()
         table.set_width(100)
-        table.set_column_widths([8, 7, 8, 5, 5, 6, 10,
-                                 6, 7, 6.5, 6.5, 25])
+        table.set_column_widths([8, 7, 12, 5, 5, 6, 10,
+                                 6, 7, 6.5, 6.5, 21])
         default_style.add_table_style('table', table)
 
         cell = TableCellStyle()
