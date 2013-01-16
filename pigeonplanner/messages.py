@@ -39,12 +39,6 @@ MSG_UPDATED_DATABASE = (_("The Pigeon Planner databases has been updated "
                         None,
                         "Database updated")
 
-MSG_MAKE_DONATION = (_("Go to the website?"),
-                     _("Pigeon Planner is free software. You don’t need to pay "
-                       "for using it. But if you like it, please consider "
-                       "donating to help improving it."),
-                     "")
-
 MSG_EVENT_NOTIFY = (_("Notification for '%s'"),
                     _("Go to the calendar?"),
                     "")
