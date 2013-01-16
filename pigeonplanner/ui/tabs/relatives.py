@@ -23,12 +23,13 @@ import const
 import messages
 from ui import utils
 from ui.tabs import basetab
+from ui.utils import HiddenPigeonsMixin
 from ui.detailsview import DetailsDialog
 from ui.messagedialog import InfoDialog
 from translation import gettext as _
 
 
-class RelativesTab(basetab.BaseTab):
+class RelativesTab(basetab.BaseTab, HiddenPigeonsMixin):
     def __init__(self, mainwindow, database, parser):
         basetab.BaseTab.__init__(self, _("Relatives"), "icon_relatives.png")
         self.mainwindow = mainwindow
@@ -88,14 +89,11 @@ class RelativesTab(basetab.BaseTab):
         pigeon = treeview.get_model()[path][0]
 
         if event.button == 3:
-            utils.popup_menu(event, [
-                                     (gtk.STOCK_INFO,
-                                      self.on_show_details, (pigeon,)),
-                                     (gtk.STOCK_EDIT,
-                                      self.on_edit_details, (pigeon,)),
-                                     (gtk.STOCK_JUMP_TO,
-                                      self.on_goto_pigeon, (pigeon,)),
-                                    ])
+            items = [(gtk.STOCK_INFO, self.on_show_details, (pigeon,)),
+                     (gtk.STOCK_EDIT, self.on_edit_details, (pigeon,))]
+            if pigeon.show:
+                items.append((gtk.STOCK_JUMP_TO, self.on_goto_pigeon, (pigeon,)))
+            utils.popup_menu(event, items)
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
             self.on_show_details(None, pigeon)
 
@@ -172,19 +170,23 @@ class RelativesTab(basetab.BaseTab):
             store.insert(1, str)
             columns.append(_("Common parent"))
         liststore = gtk.ListStore(*store)
-        treeview.set_model(liststore)
+        modelfilter = liststore.filter_new()
+        modelfilter.set_visible_func(self._visible_func)
+        treeview.set_model(modelfilter)
         treeview.connect('button-press-event', self.on_treeview_press)
         for index, column in enumerate(columns):
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+1)
             tvcolumn.set_sort_column_id(index+1)
             tvcolumn.set_resizable(True)
+            tvcolumn.set_cell_data_func(textrenderer, self._cell_func)
             treeview.append_column(tvcolumn)
         pbrenderer = gtk.CellRendererPixbuf()
         pbrenderer.set_property('xalign', 0.0)
         tvcolumn = gtk.TreeViewColumn(_("Sex"), pbrenderer, pixbuf=pb_id)
         tvcolumn.set_sort_column_id(pb_id-1)
         tvcolumn.set_resizable(True)
+        tvcolumn.set_cell_data_func(pbrenderer, self._cell_func)
         treeview.append_column(tvcolumn)
 
         return liststore

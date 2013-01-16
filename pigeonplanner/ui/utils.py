@@ -18,6 +18,8 @@
 
 import gtk
 
+import config
+
 
 def set_multiple_sensitive(widgets, value=None):
     """ 
@@ -66,4 +68,21 @@ def popup_menu(event, entries):
         item.show()
         menu.append(item)
     menu.popup(None, None, None, event.button, event.time)
+
+
+class HiddenPigeonsMixin(object):
+    def _visible_func(self, model, rowiter):
+        show = model.get_value(rowiter, 0).show
+        if not show:
+            return not config.get('interface.missing-pigeon-hide')
+        return True
+
+    def _cell_func(self, column, cell, model, rowiter):
+        show = model.get_value(rowiter, 0).show
+
+        color = "white"
+        if config.get('interface.missing-pigeon-color'):
+            if not show:
+                color = "#FAD9D9"
+        cell.set_property("cell-background", color)
 

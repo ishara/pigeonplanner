@@ -30,6 +30,7 @@ import backup
 import startup
 import messages
 from ui import filechooser
+from ui.utils import HiddenPigeonsMixin
 from ui.widgets import comboboxes
 from ui.messagedialog import InfoDialog
 from translation import gettext as _
@@ -416,7 +417,7 @@ class MedicationRemoveDialog(gtk.Dialog):
         self.vbox.show_all()
 
 
-class PigeonListDialog(gtk.Dialog):
+class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
     def __init__(self, parent):
         gtk.Dialog.__init__(self, _('Search a pigeon'), parent,
                             gtk.DIALOG_DESTROY_WITH_PARENT,
@@ -429,13 +430,16 @@ class PigeonListDialog(gtk.Dialog):
         self.buttonadd.set_sensitive(False)
 
         self._liststore = gtk.ListStore(object, str, str, str)
-        self._treeview = gtk.TreeView(self._liststore)
+        modelfilter = self._liststore.filter_new()
+        modelfilter.set_visible_func(self._visible_func)
+        self._treeview = gtk.TreeView(modelfilter)
         columns = (_("Band no."), _("Year"), _("Name"))
         for index, column in enumerate(columns):
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+1)
             tvcolumn.set_sort_column_id(index+1)
             tvcolumn.set_resizable(True)
+            tvcolumn.set_cell_data_func(textrenderer, self._cell_func)
             self._treeview.append_column(tvcolumn)
         self._selection = self._treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)

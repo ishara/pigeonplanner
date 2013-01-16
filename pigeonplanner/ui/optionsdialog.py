@@ -120,6 +120,9 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         dstring = _("days") if value == 1 else _("day")
         widget.set_text('%s %s' % (value, dstring))
 
+    def on_chkShowHidden_toggled(self, widget):
+        self.chkColorHidden.set_sensitive(not widget.get_active())
+
     def on_btnPreview_clicked(self, widget):
         selected = self.cbLayout.get_active()
         userinfo = common.get_own_address(self.database)
@@ -155,6 +158,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ('interface.theme', self.combothemes.get_active()),
                 ('interface.toolbar', self.chkToolbar.get_active()),
                 ('interface.statusbar', self.chkStatusbar.get_active()),
+                ('interface.missing-pigeon-hide', self.chkShowHidden.get_active()),
+                ('interface.missing-pigeon-color', self.chkColorHidden.get_active()),
 
                 ('backup.automatic-backup', self.checkbackup.get_active()),
                 ('backup.interval', self.spinday.get_value_as_int()),
@@ -235,6 +240,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.chkStats.set_active(config.get('interface.stats'))
         self.chkToolbar.set_active(config.get('interface.toolbar'))
         self.chkStatusbar.set_active(config.get('interface.statusbar'))
+        self.chkShowHidden.set_active(config.get('interface.missing-pigeon-hide'))
+        self.chkColorHidden.set_active(config.get('interface.missing-pigeon-color'))
 
         # Printing
         self.cbPaper.set_active(config.get('printing.general-paper'))

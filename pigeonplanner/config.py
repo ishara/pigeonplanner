@@ -113,6 +113,8 @@ default_config = [
                 ('interface.window-y', 0),
                 ('interface.window-w', 1),
                 ('interface.window-h', 680),
+                ('interface.missing-pigeon-hide', False),
+                ('interface.missing-pigeon-color', False),
 
                 ('backup.automatic-backup', True),
                 ('backup.interval', 30),
