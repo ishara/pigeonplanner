@@ -181,6 +181,7 @@ class Startup(object):
                 ('icon_email.png', 'email', _('E-mail')),
                 ('icon_send.png', 'send', _('Send')),
                 ('icon_report.png', 'report', _('Report')),
+                ('icon_columns.png', 'columns', 'columns'),
             ])
 
         # Set default icon for all windows

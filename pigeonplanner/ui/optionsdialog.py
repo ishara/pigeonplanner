@@ -58,6 +58,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                             []),
                       (_("Appearance"), gtk.STOCK_PAGE_SETUP,
                             []),
+                      (_("Columns"), 'columns',
+                            []),
                       (_("Printing"), gtk.STOCK_PRINT,
                             [_("Pedigree"),
                              _("Pigeons"),
