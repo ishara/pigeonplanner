@@ -83,6 +83,6 @@ class HiddenPigeonsMixin(object):
         color = "white"
         if config.get('interface.missing-pigeon-color'):
             if not show:
-                color = "#FAD9D9"
+                color = config.get('interface.missing-pigeon-color-value')
         cell.set_property("cell-background", color)
 

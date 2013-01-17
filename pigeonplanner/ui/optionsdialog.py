@@ -123,7 +123,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         widget.set_text('%s %s' % (value, dstring))
 
     def on_chkShowHidden_toggled(self, widget):
-        self.chkColorHidden.set_sensitive(not widget.get_active())
+        self.hboxColorHidden.set_sensitive(not widget.get_active())
 
     def on_btnPreview_clicked(self, widget):
         selected = self.cbLayout.get_active()
@@ -162,6 +162,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ('interface.statusbar', self.chkStatusbar.get_active()),
                 ('interface.missing-pigeon-hide', self.chkShowHidden.get_active()),
                 ('interface.missing-pigeon-color', self.chkColorHidden.get_active()),
+                ('interface.missing-pigeon-color-value',
+                                    self.chkColorHiddenValue.get_color().to_string()),
 
                 ('backup.automatic-backup', self.checkbackup.get_active()),
                 ('backup.interval', self.spinday.get_value_as_int()),
@@ -244,6 +246,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.chkStatusbar.set_active(config.get('interface.statusbar'))
         self.chkShowHidden.set_active(config.get('interface.missing-pigeon-hide'))
         self.chkColorHidden.set_active(config.get('interface.missing-pigeon-color'))
+        self.chkColorHiddenValue.set_color(
+                gtk.gdk.color_parse(config.get('interface.missing-pigeon-color-value')))
 
         # Printing
         self.cbPaper.set_active(config.get('printing.general-paper'))
