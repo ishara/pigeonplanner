@@ -100,7 +100,7 @@ class Config(object):
 default_config = [
                 ('options.check-for-updates', True),
                 ('options.check-for-dev-updates', False),
-                ('options.language', 'def'),
+                ('options.language', 'Default'),
                 ('options.coef-multiplier', 100),
                 ##('options.format-date', '%Y-%m-%d'),
 
