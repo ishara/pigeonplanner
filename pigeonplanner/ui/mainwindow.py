@@ -158,8 +158,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
         self.detailsview = detailsview.DetailsView(self,
                                                    self.database, self.parser)
-        self.detailsview.connect('edit-finished', self.on_edit_finished)
-        self.detailsview.connect('edit-cancelled', self.on_edit_cancelled)
         self.detailsview.set_default_image()
         self.aligndetails.add(self.detailsview.get_widget())
 
@@ -245,7 +243,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.resultstab.set_columns()
 
     def on_edit_finished(self, detailsview, pigeon, operation):
-        self._finish_edit()
         band, year = pigeon.get_band()
         if operation == const.EDIT:
             model, paths = self.selection.get_selected_rows()
@@ -254,7 +251,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                     4, pigeon.get_name(), 5, pigeon.get_colour(),
                     6, pigeon.get_sex_string(), 7, pigeon.get_loft(),
                     8, pigeon.get_strain(),
-                    9, _(common.get_status(pigeon.get_active())))
+                    9, _(pigeon.get_status()))
             self.treeview.update_row(data, path=path)
             self.selection.emit('changed')
         elif operation == const.ADD:
@@ -262,14 +259,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             row = [pigeon, pigeon.get_pindex(), band, year, pigeon.get_name(),
                    pigeon.get_colour(), pigeon.get_sex_string(),
                    pigeon.get_loft(), pigeon.get_strain(),
-                   _(common.get_status(pigeon.get_active()))]
+                   _(pigeon.get_status())]
             self.treeview.add_row(row)
             self.statusbar.display_message(
                         _("Pigeon %s has been added") %pigeon.get_band_string())
-
-    def on_edit_cancelled(self, detailsview):
-        self._finish_edit(True)
-        self.selection.emit('changed')
+        self._set_statistics()
+        self.treeview.grab_focus()
 
     # Menu callbacks
     def on_uimanager_connect_proxy(self, uimgr, action, widget):
@@ -354,8 +349,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         logdialog.LogDialog(self.database)
 
     def menuadd_activate(self, widget):
-        self._clear_pigeon_data()
-        self._start_edit(const.ADD)
+        dialog = detailsview.DetailsDialog(self.database, self.parser,
+                                           None, self, const.ADD)
+        dialog.details.connect('edit-finished', self.on_edit_finished)
 
     def menuaddrange_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -369,7 +365,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def menuedit_activate(self, widget):
         model, paths = self.selection.get_selected_rows()
         if len(paths) != 1: return
-        self._start_edit(const.EDIT)
+        pigeon = self.treeview.get_selected_pigeon()
+        dialog = detailsview.DetailsDialog(self.database, self.parser,
+                                           pigeon, self, const.EDIT)
+        dialog.details.connect('edit-finished', self.on_edit_finished)
 
     def menuremove_activate(self, widget):
         model, paths = self.selection.get_selected_rows()
@@ -715,18 +714,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
                 quit_item = uimanager.get_widget('/MenuBar/FileMenu/Quit')
                 igemi.ige_mac_menu_set_quit_menu_item(quit_item)
-
-    def _start_edit(self, operation):
-        utils.set_multiple_sensitive([self.menubar, self.toolbar, self.notebook,
-                                      self.treeview, self.vboxButtons], False)
-        self.detailsview.start_edit(operation)
-
-    def _finish_edit(self, cancelled=False):
-        if not cancelled:
-            self._set_statistics()
-        utils.set_multiple_sensitive([self.menubar, self.toolbar, self.notebook,
-                                      self.treeview, self.vboxButtons], True)
-        self.treeview.grab_focus()
 
     def _clear_pigeon_data(self):
         self.detailsview.clear_details()

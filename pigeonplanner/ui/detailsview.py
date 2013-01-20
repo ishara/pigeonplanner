@@ -41,18 +41,22 @@ from ui.messagedialog import ErrorDialog, WarningDialog
 from translation import gettext as _
 
 
+RESPONSE_EDIT = 10
+RESPONSE_SAVE = 12
+
 class PigeonAlreadyExists(Exception): pass
 
 
 class DetailsDialog(gtk.Dialog):
     def __init__(self, database, parser, pigeon=None, parent=None, mode=None):
-        gtk.Dialog.__init__(self, None, parent, gtk.DIALOG_MODAL,
-                            (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+        gtk.Dialog.__init__(self, None, parent, gtk.DIALOG_MODAL)
         if pigeon is None:
             title = _("Details of pigeon")
         else:
             title = _("Details of %s") %pigeon.get_band_string()
         self.set_title(title)
+        self.set_resizable(False)
+        self.set_modal(True)
         if parent is None:
             self.set_position(gtk.WIN_POS_MOUSE)
 
@@ -64,8 +68,12 @@ class DetailsDialog(gtk.Dialog):
             self.details.set_details(pigeon)
         if mode in (const.EDIT, const.ADD):
             self.details.start_edit(mode)
-            self.details.connect('edit-finished', self.on_edit_finished)
-            self.details.connect('edit-cancelled', self.on_edit_cancelled)
+            self.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+                             gtk.STOCK_SAVE, RESPONSE_SAVE)
+            self.set_default_response(RESPONSE_SAVE)
+        else:
+            self.add_buttons(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
+            self.set_default_response(gtk.RESPONSE_CLOSE)
         self.run()
 
     def run(self):
@@ -73,16 +81,13 @@ class DetailsDialog(gtk.Dialog):
         self.show_all()
 
     def on_dialog_response(self, dialog, response_id):
-        if response_id == gtk.RESPONSE_CLOSE or \
-           response_id == gtk.RESPONSE_DELETE_EVENT:
-            dialog.destroy()
-
-    def on_edit_finished(self, detailsview, pigeon, operation):
-        detailsview.set_details(pigeon)
-        self.destroy()
-
-    def on_edit_cancelled(self, detailsview):
-        self.destroy()
+        if response_id in (gtk.RESPONSE_CLOSE, gtk.RESPONSE_DELETE_EVENT):
+            pass
+        elif response_id == RESPONSE_SAVE:
+            self.details.operation_saved()
+        elif response_id == gtk.RESPONSE_CANCEL:
+            self.details.operation_cancelled()
+        dialog.destroy()
 
 
 class DetailsView(builder.GtkBuilder, gobject.GObject):
@@ -107,12 +112,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.combostrain.set_data(self.database, self.database.STRAINS)
         self.comboloft.set_data(self.database, self.database.LOFTS)
 
-        ag = gtk.AccelGroup()
-        key, modifier = gtk.accelerator_parse('Escape')
-        self.buttoncancel.add_accelerator('clicked', ag, key, modifier,
-                                                     gtk.ACCEL_VISIBLE)
-        self.parent.add_accel_group(ag)
-
         icons = gtk.icon_theme_get_default()
         try:
             zoom_pb = icons.load_icon("gtk-find", 22, 0)
@@ -126,43 +125,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.root.show_all()
 
     # Callbacks
-    def on_buttonsave_clicked(self, widget):
-        try:
-            data = self.get_details()
-        except errors.InvalidInputError, msg:
-            ErrorDialog(msg.value, self.parent)
-            return
-        if self._operation == const.EDIT:
-            try:
-                self._update_pigeon_data(data)
-            except database.InvalidValueError:
-                ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
-                return
-            except errors.InvalidInputError:
-                # This is a corner case. Some status date is incorrect, but the
-                # user choose another one. Don't bother him with this.
-                pass
-            old_pindex = self.pigeon.get_pindex()
-            self.pigeon = self.parser.update_pigeon(data[0], old_pindex)
-        elif self._operation == const.ADD:
-            try:
-                self._add_pigeon_data(data)
-            except PigeonAlreadyExists, msg:
-                logger.debug("Pigeon already exists '%s'", msg)
-                return
-            except errors.InvalidInputError:
-                # See comment above
-                pass
-            self.pigeon = self.parser.add_pigeon(pindex=data[0])
-        self.emit('edit-finished', self.pigeon, self._operation)
-        self._finish_edit(data)
-        logger.debug("Operation '%s' finished", self._operation)
-
-    def on_buttoncancel_clicked(self, widget):
-        logger.debug("Operation '%s' cancelled", self._operation)
-        self.emit('edit-cancelled')
-        self._finish_edit()
-
     ## Image
     def on_eventbox_enter_notify_event(self, widget, event):
         if self.pigeon is not None and self.pigeon.get_image() is not None:
@@ -392,7 +354,47 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
         self.detailbook.set_current_page(1)
         self.entrybandedit.grab_focus()
-        self.buttonsave.grab_default()
+
+    def operation_saved(self):
+        try:
+            data = self.get_details()
+        except errors.InvalidInputError, msg:
+            ErrorDialog(msg.value, self.parent)
+            return
+        if self._operation == const.EDIT:
+            try:
+                self._update_pigeon_data(data)
+            except database.InvalidValueError:
+                ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
+                return
+            except errors.InvalidInputError:
+                # This is a corner case. Some status date is incorrect, but the
+                # user choose another one. Don't bother him with this.
+                pass
+            old_pindex = self.pigeon.get_pindex()
+            self.pigeon = self.parser.update_pigeon(data[0], old_pindex)
+        elif self._operation == const.ADD:
+            try:
+                self._add_pigeon_data(data)
+            except PigeonAlreadyExists, msg:
+                logger.debug("Pigeon already exists '%s'", msg)
+                return
+            except errors.InvalidInputError:
+                # See comment above
+                pass
+            self.pigeon = self.parser.add_pigeon(pindex=data[0])
+        self.set_details(self.pigeon)
+        self.emit('edit-finished', self.pigeon, self._operation)
+        combodata = [(self.combocolour, data[6], self.database.COLOURS),
+                     (self.combostrain, data[8], self.database.STRAINS),
+                     (self.comboloft, data[9], self.database.LOFTS)]
+        for combo, value, table in combodata:
+            self._update_combo_data(combo, value, table)
+        logger.debug("Operation '%s' finished", self._operation)
+
+    def operation_cancelled(self):
+        logger.debug("Operation '%s' cancelled", self._operation)
+        self.emit('edit-cancelled')
 
     # Internal methods
     def _set_status_image(self, status):
@@ -445,15 +447,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 pass
         for table in self.notebookstatus.get_children():
             table.foreach(set_editable, value)
-
-    def _finish_edit(self, datalist=None):
-        self.detailbook.set_current_page(0)
-        if datalist is not None:
-            data = [(self.combocolour, datalist[6], self.database.COLOURS),
-                    (self.combostrain, datalist[8], self.database.STRAINS),
-                    (self.comboloft, datalist[9], self.database.LOFTS)]
-            for combo, value, table in data:
-                self._update_combo_data(combo, value, table)
 
     def _update_combo_data(self, combo, data, table):
         if not data: return
