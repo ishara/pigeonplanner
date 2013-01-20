@@ -29,7 +29,6 @@ from ui import utils
 from ui import resultwindow
 from ui import resultparser
 from ui.tabs import basetab
-from ui.widgets import comboboxes
 from ui.messagedialog import ErrorDialog, QuestionDialog
 from translation import gettext as _
 
@@ -58,15 +57,14 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self._selection = self.treeview.get_selection()
         self._selection.connect('changed', self.on_selection_changed)
         self.set_columns()
-        combos = {self.combosector: self.database.SECTORS,
-                  self.combotype: self.database.TYPES,
-                  self.combocategory: self.database.CATEGORIES,
-                  self.comboracepoint: self.database.RACEPOINTS,
-                  self.comboweather: self.database.WEATHER,
-                  self.combowind: self.database.WIND}
-        for combo, data in combos.items():
-            comboboxes.fill_combobox(combo, self.database.select_from_table(data))
-            comboboxes.set_entry_completion(combo)
+
+        self.comboracepoint.set_data(self.database, self.database.RACEPOINTS)
+        self.combosector.set_data(self.database, self.database.SECTORS)
+        self.combotype.set_data(self.database, self.database.TYPES)
+        self.combocategory.set_data(self.database, self.database.CATEGORIES)
+        self.comboweather.set_data(self.database, self.database.WEATHER)
+        self.combowind.set_data(self.database, self.database.WIND)
+
         self._root.unparent()
         self.dialog.set_transient_for(parent)
 

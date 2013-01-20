@@ -37,7 +37,6 @@ from ui import dialogs
 from ui import filechooser
 from ui.widgets import date
 from ui.widgets import bandentry
-from ui.widgets import comboboxes
 from ui.messagedialog import ErrorDialog, WarningDialog
 from translation import gettext as _
 
@@ -104,13 +103,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.pigeon = None
         self.child = None
 
-        combos = {self.combocolour: self.database.COLOURS,
-                  self.combostrain: self.database.STRAINS,
-                  self.comboloft: self.database.LOFTS}
-        for combo, value in combos.items():
-            comboboxes.fill_combobox(combo, self.database.select_from_table(value))
-            comboboxes.set_entry_completion(combo)
-            combo.child.set_activates_default(True)
+        self.combocolour.set_data(self.database, self.database.COLOURS)
+        self.combostrain.set_data(self.database, self.database.STRAINS)
+        self.comboloft.set_data(self.database, self.database.LOFTS)
 
         ag = gtk.AccelGroup()
         key, modifier = gtk.accelerator_parse('Escape')

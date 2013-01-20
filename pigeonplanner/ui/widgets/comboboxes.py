@@ -105,6 +105,19 @@ class StatusCombobox(gtk.ComboBox):
         self.set_active(0)
 
 
+class DataComboboxEntry(gtk.ComboBoxEntry):
+
+    __gtype_name__ = 'DataComboboxEntry'
+
+    def __init__(self):
+        store = gtk.ListStore(str)
+        gtk.ComboBoxEntry.__init__(self, store, 0)
+        set_entry_completion(self)
+
+    def set_data(self, database, dbtable):
+        fill_combobox(self, database.select_from_table(dbtable))
+
+
 class DistanceCombobox(gtk.ComboBox):
 
     __gtype_name__ = 'DistanceCombobox'
