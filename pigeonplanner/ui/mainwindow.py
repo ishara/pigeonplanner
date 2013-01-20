@@ -163,16 +163,16 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.detailsview.set_default_image()
         self.aligndetails.add(self.detailsview.get_widget())
 
-        self.pedigreetab = tabs.PedigreeTab(self.pedigree)
-        self.relativestab = tabs.RelativesTab(self, self.database, self.parser)
+        pedigreetab = tabs.PedigreeTab(self.pedigree)
+        relativestab = tabs.RelativesTab(self, self.database, self.parser)
         self.resultstab = tabs.ResultsTab(self, self.database, self.parser)
-        self.breedingtab = tabs.BreedingTab(self, self.database, self.parser)
-        self.mediatab = tabs.MediaTab(self, self.database, self.parser)
-        self.medicationtab = tabs.MedicationTab(self, self.database,
+        breedingtab = tabs.BreedingTab(self, self.database, self.parser)
+        mediatab = tabs.MediaTab(self, self.database, self.parser)
+        medicationtab = tabs.MedicationTab(self, self.database,
                                                 self.parser, self)
-        self._loaded_tabs = [self.pedigreetab, self.relativestab,
-                             self.resultstab, self.breedingtab,
-                             self.mediatab, self.medicationtab]
+        self._loaded_tabs = [pedigreetab, relativestab,
+                             self.resultstab, breedingtab,
+                             mediatab, medicationtab]
         for tab in self._loaded_tabs:
             self.notebook.append_page(*tab.get_tab_widgets())
 
