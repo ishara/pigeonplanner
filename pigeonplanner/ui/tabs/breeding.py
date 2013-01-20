@@ -197,7 +197,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.vboxpigeonedit2.set_sensitive(widget.get_active())
 
     # Public methods
-    def fill_treeview(self, pigeon):
+    def set_pigeon(self, pigeon):
         self.pigeon = pigeon
 
         matecol = 1 if pigeon.is_hen() else 2
@@ -206,6 +206,12 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             self.liststore.insert(0, [data[0], data[3],
                                       self._format_mate(data[matecol])])
         self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+
+    def clear_pigeon(self):
+        self.liststore.clear()
+
+    def get_pigeon_state_widgets(self):
+        return [self.buttonadd]
 
     # Private methods
     def _set_dialog_fields(self, key=None, mate=''):

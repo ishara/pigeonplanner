@@ -207,12 +207,18 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.checkvaccination.set_active(data[9])
 
     # Public methods
-    def fill_treeview(self, pigeon):
+    def set_pigeon(self, pigeon):
         self.pindex = pigeon.get_pindex()
         self.liststore.clear()
         for med in self.database.get_pigeon_medication(self.pindex):
             self.liststore.insert(0, [med[1], med[3], med[4]])
         self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+
+    def clear_pigeon(self):
+        self.liststore.clear()
+
+    def get_pigeon_state_widgets(self):
+        return [self.buttonadd]
 
     # Internal methods
     def _fill_select_treeview(self):

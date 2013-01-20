@@ -173,7 +173,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                                  widget.get_range()[1])
 
     # Public methods
-    def fill_treeview(self, pigeon):
+    def set_pigeon(self, pigeon):
         band = pigeon.get_band_string()
         self.labelpigeon.set_text(band)
         self.pindex = pigeon.get_pindex()
@@ -196,6 +196,12 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
 
         self.treeview.set_model(self.liststore)
         self.treeview.thaw_child_notify()
+
+    def clear_pigeon(self):
+        self.liststore.clear()
+
+    def get_pigeon_state_widgets(self):
+        return [self.buttonadd]
 
     def add_new_result(self):
         self.buttonadd.clicked()

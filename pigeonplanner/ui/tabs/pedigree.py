@@ -57,8 +57,13 @@ class PedigreeTab(basetab.BaseTab):
         self._root.show_all()
 
         self._tables = [tablesire, tabledam]
+        # Start immediately with an empty pedigree
+        self.clear_pigeon()
 
     # Public methods
-    def draw_pedigree(self, pigeon=None):
+    def set_pigeon(self, pigeon=None):
         self.pedigree.draw_pedigree(self._tables, pigeon)
+
+    def clear_pigeon(self):
+        self.set_pigeon()
 

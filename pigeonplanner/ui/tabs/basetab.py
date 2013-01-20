@@ -45,3 +45,15 @@ class BaseTab(object):
     def get_tab_widgets(self):
         return self._root, self._label
 
+    def set_pigeon(self, pigeon):
+        pass
+
+    def clear_pigeon(self):
+        pass
+
+    def get_pigeon_state_widgets(self):
+        """ List of widgets that need a 'sensitive' property update whenever
+        a pigeon is selected/deselected in the main treeview.
+        """
+        return []
+

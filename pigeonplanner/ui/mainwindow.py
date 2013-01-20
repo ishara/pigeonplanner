@@ -164,21 +164,19 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.aligndetails.add(self.detailsview.get_widget())
 
         self.pedigreetab = tabs.PedigreeTab(self.pedigree)
-        self.notebook.append_page(*self.pedigreetab.get_tab_widgets())
         self.relativestab = tabs.RelativesTab(self, self.database, self.parser)
-        self.notebook.append_page(*self.relativestab.get_tab_widgets())
         self.resultstab = tabs.ResultsTab(self, self.database, self.parser)
-        self.notebook.append_page(*self.resultstab.get_tab_widgets())
         self.breedingtab = tabs.BreedingTab(self, self.database, self.parser)
-        self.notebook.append_page(*self.breedingtab.get_tab_widgets())
         self.mediatab = tabs.MediaTab(self, self.database, self.parser)
-        self.notebook.append_page(*self.mediatab.get_tab_widgets())
         self.medicationtab = tabs.MedicationTab(self, self.database,
                                                 self.parser, self)
-        self.notebook.append_page(*self.medicationtab.get_tab_widgets())
+        self._loaded_tabs = [self.pedigreetab, self.relativestab,
+                             self.resultstab, self.breedingtab,
+                             self.mediatab, self.medicationtab]
+        for tab in self._loaded_tabs:
+            self.notebook.append_page(*tab.get_tab_widgets())
 
         self._build_menubar()
-        self.pedigreetab.draw_pedigree()
         self.treeview.fill_treeview()
         self._set_statistics()
         self.current_pigeon = 0
@@ -612,11 +610,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def on_selection_changed(self, selection):
         n_rows_selected = selection.count_selected_rows()
         model, paths = selection.get_selected_rows()
-        widgets = [self.ToolEdit, self.ToolPedigree, self.MenuEdit,
-                   self.MenuPedigree, self.MenuAddresult,
-                   self.resultstab.buttonadd, self.medicationtab.buttonadd,
-                   self.mediatab.buttonadd, self.breedingtab.buttonadd,
-                   self.ToolRemove, self.MenuRemove]
+        widgets = [self.ToolRemove, self.MenuRemove,
+                   self.ToolEdit, self.ToolPedigree, self.MenuEdit,
+                   self.MenuPedigree, self.MenuAddresult]
+        for tab in self._loaded_tabs:
+            widgets.extend(tab.get_pigeon_state_widgets())
+
         if n_rows_selected == 1:
             tree_iter = model.get_iter(paths[0])
             utils.set_multiple_sensitive(widgets, True)
@@ -627,17 +626,13 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         elif n_rows_selected > 1:
             # Disable everything except the remove buttons
             self._clear_pigeon_data()
-            utils.set_multiple_sensitive(widgets[:-2], False)
+            utils.set_multiple_sensitive(widgets[2:], False)
             return
         self.current_pigeon = paths[0][0]
         pigeon = model.get_value(tree_iter, 0)
-        self.pedigreetab.draw_pedigree(pigeon)
-        self.relativestab.fill_treeviews(pigeon)
-        self.resultstab.fill_treeview(pigeon)
-        self.breedingtab.fill_treeview(pigeon)
-        self.mediatab.fill_treeview(pigeon)
-        self.medicationtab.fill_treeview(pigeon)
         self.detailsview.set_details(pigeon)
+        for tab in self._loaded_tabs:
+            tab.set_pigeon(pigeon)
 
     # Navigation arrows callbacks
     def on_button_top_clicked(self, widget):
@@ -735,12 +730,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def _clear_pigeon_data(self):
         self.detailsview.clear_details()
-        self.pedigreetab.draw_pedigree()
-        self.relativestab.clear_treeviews()
-        self.breedingtab.liststore.clear()
-        self.medicationtab.liststore.clear()
-        self.resultstab.liststore.clear()
-        self.mediatab.liststore.clear()
+        for tab in self._loaded_tabs:
+            tab.clear_pigeon()
 
     def _set_statistics(self):
         """

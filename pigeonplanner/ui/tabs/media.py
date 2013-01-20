@@ -99,7 +99,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         self.liststore.remove(rowiter)
         self._selection.select_path(path)
 
-    def fill_treeview(self, pigeon):
+    def set_pigeon(self, pigeon):
         self.pigeon = pigeon
 
         images = []
@@ -122,6 +122,12 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         for media in other:
             text = self._format_text(media[4], media[5])
             self.liststore.append([media[0], media[2], media[3], text]+normal)
+
+    def clear_pigeon(self):
+        self.liststore.clear()
+
+    def get_pigeon_state_widgets(self):
+        return [self.buttonadd]
 
     def _format_text(self, title, description):
         text = common.escape_text(title)

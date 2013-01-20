@@ -115,8 +115,8 @@ class RelativesTab(basetab.BaseTab, HiddenPigeonsMixin):
             InfoDialog(messages.MSG_NO_PIGEON, self.mainwindow)
 
     # Public methods
-    def fill_treeviews(self, pigeon):
-        self.clear_treeviews()
+    def set_pigeon(self, pigeon):
+        self.clear_pigeon()
         pindex_selected = pigeon.get_pindex()
         pindex_sire_sel = pigeon.get_sire_pindex()
         pindex_dam_sel = pigeon.get_dam_pindex()
@@ -155,7 +155,7 @@ class RelativesTab(basetab.BaseTab, HiddenPigeonsMixin):
         self._liststoreoff.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self._liststoreoff.set_sort_column_id(2, gtk.SORT_ASCENDING)
 
-    def clear_treeviews(self):
+    def clear_pigeon(self):
         self._liststoredirect.clear()
         self._liststorehalf.clear()
         self._liststoreoff.clear()
