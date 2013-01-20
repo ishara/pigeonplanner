@@ -56,7 +56,6 @@ class DetailsDialog(gtk.Dialog):
             title = _("Details of %s") %pigeon.get_band_string()
         self.set_title(title)
         self.set_resizable(False)
-        self.set_modal(True)
         if parent is None:
             self.set_position(gtk.WIN_POS_MOUSE)
 
@@ -81,13 +80,16 @@ class DetailsDialog(gtk.Dialog):
         self.show_all()
 
     def on_dialog_response(self, dialog, response_id):
+        keep_alive = False
         if response_id in (gtk.RESPONSE_CLOSE, gtk.RESPONSE_DELETE_EVENT):
             pass
         elif response_id == RESPONSE_SAVE:
-            self.details.operation_saved()
+            keep_alive = self.details.operation_saved()
         elif response_id == gtk.RESPONSE_CANCEL:
             self.details.operation_cancelled()
-        dialog.destroy()
+
+        if not keep_alive:
+            dialog.destroy()
 
 
 class DetailsView(builder.GtkBuilder, gobject.GObject):
@@ -356,17 +358,22 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.entrybandedit.grab_focus()
 
     def operation_saved(self):
+        """ Collect pigeon data, save it to the database and do the required
+            steps for saving extra data.
+
+            Return True to keep dialog open, False to close it
+        """
         try:
             data = self.get_details()
         except errors.InvalidInputError, msg:
             ErrorDialog(msg.value, self.parent)
-            return
+            return True
         if self._operation == const.EDIT:
             try:
                 self._update_pigeon_data(data)
             except database.InvalidValueError:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
-                return
+                return True
             except errors.InvalidInputError:
                 # This is a corner case. Some status date is incorrect, but the
                 # user choose another one. Don't bother him with this.
@@ -378,7 +385,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 self._add_pigeon_data(data)
             except PigeonAlreadyExists, msg:
                 logger.debug("Pigeon already exists '%s'", msg)
-                return
+                return False
             except errors.InvalidInputError:
                 # See comment above
                 pass
@@ -391,6 +398,8 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         for combo, value, table in combodata:
             self._update_combo_data(combo, value, table)
         logger.debug("Operation '%s' finished", self._operation)
+
+        return False
 
     def operation_cancelled(self):
         logger.debug("Operation '%s' cancelled", self._operation)
