@@ -44,6 +44,16 @@ from translation import gettext as _
 RESPONSE_EDIT = 10
 RESPONSE_SAVE = 12
 
+
+_ICONTHEME = gtk.icon_theme_get_default()
+try:
+    _ICON_ZOOM = _ICONTHEME.load_icon("gtk-find", 22, 0)
+    CURSOR_ZOOM = gtk.gdk.Cursor(gtk.gdk.display_get_default(), _ICON_ZOOM, 0, 0)
+except Exception as exc:
+    logger.warning("Can't load zoom cursor icon:", exc)
+    CURSOR_ZOOM = None
+
+
 class PigeonAlreadyExists(Exception): pass
 
 
@@ -92,6 +102,78 @@ class DetailsDialog(gtk.Dialog):
             dialog.destroy()
 
 
+class PigeonImageWidget(gtk.EventBox):
+    def __init__(self, editable, parent=None):
+        gtk.EventBox.__init__(self)
+        if editable:
+            self.connect('button-press-event', self.on_editable_button_press_event)
+        else:
+            self.connect('enter-notify-event', self.on_enter_notify_event)
+            self.connect('leave-notify-event', self.on_leave_notify_event)
+            #TODO
+            ##self.connect('button-press-event', self.on_button_press_event)
+
+        self._parent = parent
+        self._imagewidget = gtk.Image()
+        self._imagewidget.set_size_request(200, 200)
+        self.add(self._imagewidget)
+        self._imagepath = None
+        self.set_default_image()
+
+    def on_enter_notify_event(self, widget, event):
+        if self._imagepath:
+            self.get_window().set_cursor(CURSOR_ZOOM)
+
+    def on_leave_notify_event(self, widget, event):
+        self.get_window().set_cursor(None)
+
+    def on_button_press_event(self, widget, event):
+        tools.PhotoAlbum(self._parent, self.parser, self.database,
+                         self._pigeon.get_pindex())
+
+    def on_editable_button_press_event(self, widget, event):
+        if event.button == 3:
+            entries = [
+                (gtk.STOCK_ADD, self.on_open_imagechooser, None),
+                (gtk.STOCK_REMOVE, self.set_default_image, None)]
+            utils.popup_menu(event, entries)
+        else:
+            self.on_open_imagechooser()
+
+    def on_open_imagechooser(self, widget=None):
+        chooser = filechooser.ImageChooser(self._parent)
+        response = chooser.run()
+        if response == gtk.RESPONSE_OK:
+            filename = chooser.get_filename()
+            try:
+                pb = gtk.gdk.pixbuf_new_from_file_at_size(filename, 200, 200)
+            except gobject.GError, exc:
+                logger.error("Can't set image '%s':%s", filename, exc)
+                ErrorDialog(messages.MSG_INVALID_IMAGE, self._parent)
+            else:
+                self._imagewidget.set_from_pixbuf(pb)
+                self._imagepath = filename
+        elif response == chooser.RESPONSE_CLEAR:
+            self.set_default_image()
+        chooser.destroy()
+
+    def set_default_image(self, widget=None):
+        logo = gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
+        self._imagewidget.set_from_pixbuf(logo)
+        self._imagepath = None
+
+    def set_image(self, path=None):
+        if path:
+            pixbuf = thumbnail.get_image(path)
+        else:
+            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
+        self._imagewidget.set_from_pixbuf(pixbuf)
+        self._imagepath = path
+
+    def get_image_path(self):
+        return self._imagepath
+
+
 class DetailsView(builder.GtkBuilder, gobject.GObject):
     __gsignals__ = {'edit-finished': (gobject.SIGNAL_RUN_LAST,
                                       None, (object, int)),
@@ -110,63 +192,20 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.pigeon = None
         self.child = None
 
+        self.pigeonimage = PigeonImageWidget(False, parent)
+        self.viewportImage.add(self.pigeonimage)
+        self.pigeonimage_edit = PigeonImageWidget(True, parent)
+        self.viewportImageEdit.add(self.pigeonimage_edit)
+
         self.combocolour.set_data(self.database, self.database.COLOURS)
         self.combostrain.set_data(self.database, self.database.STRAINS)
         self.comboloft.set_data(self.database, self.database.LOFTS)
-
-        icons = gtk.icon_theme_get_default()
-        try:
-            zoom_pb = icons.load_icon("gtk-find", 22, 0)
-            self._zoom_cursor = gtk.gdk.Cursor(gtk.gdk.display_get_default(),
-                                               zoom_pb, 0, 0)
-        except:
-            self._zoom_cursor = None
 
         self.statusdialog.set_transient_for(parent)
         self.root.unparent()
         self.root.show_all()
 
     # Callbacks
-    ## Image
-    def on_eventbox_enter_notify_event(self, widget, event):
-        if self.pigeon is not None and self.pigeon.get_image() is not None:
-            self.eventbox.get_window().set_cursor(self._zoom_cursor)
-
-    def on_eventbox_leave_notify_event(self, widget, event):
-        self.eventbox.get_window().set_cursor(None)
-
-    def on_eventbox_press(self, widget, event):
-        if self.pigeon is None or self.in_dialog: return
-        tools.PhotoAlbum(self.parent, self.parser, self.database,
-                         self.pigeon.get_pindex())
-
-    def on_eventimage_press(self, widget, event):
-        if event.button == 3:
-            entries = [
-                (gtk.STOCK_ADD, self.on_open_imagechooser, None),
-                (gtk.STOCK_REMOVE, self.set_default_image, None)]
-            utils.popup_menu(event, entries)
-        else:
-            self.on_open_imagechooser()
-
-    def on_open_imagechooser(self, widget=None):
-        chooser = filechooser.ImageChooser(self.parent)
-        response = chooser.run()
-        if response == gtk.RESPONSE_OK:
-            filename = chooser.get_filename()
-            try:
-                pb = gtk.gdk.pixbuf_new_from_file_at_size(filename, 200, 200)
-            except gobject.GError, exc:
-                logger.error("Can't set image '%s':%s", filename, exc)
-                ErrorDialog(messages.MSG_INVALID_IMAGE, self.parent)
-            else:
-                self.imagepigeon.set_from_pixbuf(pb)
-                self.imagepigeonedit.set_from_pixbuf(pb)
-                self.imagepigeon.set_data('image-path', filename)
-        elif response == chooser.RESPONSE_CLEAR:
-            self.set_default_image()
-        chooser.destroy()
-
     ## Status
     def on_buttonstatus_clicked(self, widget):
         if self.pigeon is None: return
@@ -256,16 +295,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
         self._set_status(pigeon.get_pindex(), pigeon.get_active())
 
-        imagepath = pigeon.get_image()
-        if imagepath:
-            pixbuf = thumbnail.get_image(imagepath)
-            self.imagepigeon.set_data('image-path', imagepath)
-        else:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
-            self.imagepigeon.set_data('image-path', None)
-        self.imagepigeon.set_from_pixbuf(pixbuf)
+        self.pigeonimage.set_image(pigeon.get_image())
 
-    def get_details(self):
+    def get_edit_details(self):
         ring, year = self.entrybandedit.get_band()
         ringsire, yearsire = self.entrysireedit.get_band()
         ringdam, yeardam = self.entrydamedit.get_band()
@@ -281,7 +313,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                     self.entrynameedit.get_text(),
                     self.combostrain.child.get_text(),
                     self.comboloft.child.get_text(),
-                    self.imagepigeon.get_data('image-path'),
+                    self.pigeonimage_edit.get_image_path(),
                     ringsire, yearsire, ringdam, yeardam,
                     self.entryextraedit1.get_text(),
                     self.entryextraedit2.get_text(),
@@ -290,13 +322,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                     self.entryextraedit5.get_text(),
                     self.entryextraedit6.get_text()]
         return datalist
-
-    def set_default_image(self, widget=None, edit=False):
-        logo = gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
-        self.imagepigeonedit.set_from_pixbuf(logo)
-        self.imagepigeon.set_data('image-path', None)
-        if not edit:
-            self.imagepigeon.set_from_pixbuf(logo)
 
     def clear_details(self):
         self.entryband.clear()
@@ -313,7 +338,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.combostatus.set_active(1)
         self.combostatus.emit('changed')
 
-        self.set_default_image()
+        self.pigeonimage.set_default_image()
 
         for entry in self.get_objects_from_prefix("entry"):
             if isinstance(entry, bandentry.BandEntry): continue
@@ -345,12 +370,8 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             self.combostatus.set_active(status)
             self.notebookstatus.set_current_page(status)
 
-            image = self.imagepigeon.get_data('image-path')
-            if image is None:
-                self.set_default_image(edit=True)
-            else:
-                pixbuf = thumbnail.get_image(image)
-                self.imagepigeonedit.set_from_pixbuf(pixbuf)
+            image = self.pigeonimage.get_image_path()
+            self.pigeonimage_edit.set_image(image)
         else:
             logger.debug("Start adding a pigeon")
 
@@ -364,7 +385,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             Return True to keep dialog open, False to close it
         """
         try:
-            data = self.get_details()
+            data = self.get_edit_details()
         except errors.InvalidInputError, msg:
             ErrorDialog(msg.value, self.parent)
             return True

@@ -1253,28 +1253,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkViewport" id="viewport2">
+                          <object class="GtkViewport" id="viewportImage">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="resize_mode">queue</property>
                             <child>
-                              <object class="GtkEventBox" id="eventbox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_BUTTON_RELEASE_MASK | GDK_STRUCTURE_MASK</property>
-                                <signal name="button-press-event" handler="on_eventbox_press" swapped="no"/>
-                                <signal name="enter-notify-event" handler="on_eventbox_enter_notify_event" swapped="no"/>
-                                <signal name="leave-notify-event" handler="on_eventbox_leave_notify_event" swapped="no"/>
-                                <child>
-                                  <object class="GtkImage" id="imagepigeon">
-                                    <property name="width_request">200</property>
-                                    <property name="height_request">200</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="stock">gtk-missing-image</property>
-                                  </object>
-                                </child>
-                              </object>
+                              <placeholder/>
                             </child>
                           </object>
                           <packing>
@@ -1476,26 +1460,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkViewport" id="viewport3">
+                          <object class="GtkViewport" id="viewportImageEdit">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="resize_mode">queue</property>
                             <child>
-                              <object class="GtkEventBox" id="eventimage">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_BUTTON_RELEASE_MASK | GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
-                                <signal name="button-press-event" handler="on_eventimage_press" swapped="no"/>
-                                <child>
-                                  <object class="GtkImage" id="imagepigeonedit">
-                                    <property name="width_request">200</property>
-                                    <property name="height_request">200</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="stock">gtk-missing-image</property>
-                                  </object>
-                                </child>
-                              </object>
+                              <placeholder/>
                             </child>
                           </object>
                           <packing>

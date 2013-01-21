@@ -158,7 +158,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
         self.detailsview = detailsview.DetailsView(self,
                                                    self.database, self.parser)
-        self.detailsview.set_default_image()
         self.aligndetails.add(self.detailsview.get_widget())
 
         pedigreetab = tabs.PedigreeTab(self.pedigree)
