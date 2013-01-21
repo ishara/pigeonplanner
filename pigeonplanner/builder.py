@@ -28,16 +28,21 @@ import const
 
 
 class GtkBuilder(object):
-    def __init__(self, uifile):
+    def __init__(self, uifile, objects=None):
         """
         Initialize Gtkbuilder, connect all signals and get all widgets
 
         @param uifile: Filename of the Glade file
+        @param objects: List of root widgets
         """
 
         self._builder = gtk.Builder()
         self._builder.set_translation_domain(const.DOMAIN)
-        self._builder.add_from_file(os.path.join(const.GLADEDIR, uifile))
+        uipath = os.path.join(const.GLADEDIR, uifile)
+        if objects is None:
+            self._builder.add_from_file(uipath)
+        else:
+            self._builder.add_objects_from_file(uipath, objects)
         self._builder.connect_signals(self)
         for obj in self._builder.get_objects():
             if issubclass(type(obj), gtk.Buildable):
