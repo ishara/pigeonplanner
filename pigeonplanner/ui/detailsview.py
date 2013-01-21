@@ -69,8 +69,8 @@ class DetailsDialog(gtk.Dialog):
         if parent is None:
             self.set_position(gtk.WIN_POS_MOUSE)
 
-        self.details = DetailsView(self, database, parser, True)
-        self.vbox.pack_start(self.details.get_widget(), False, False)
+        self.details = DetailsView(self, database, parser)
+        self.vbox.pack_start(self.details.root, False, False)
         if mode == const.ADD:
             self.details.clear_details()
         else:
@@ -180,14 +180,13 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                     'edit-cancelled': (gobject.SIGNAL_RUN_LAST,
                                        None, ()),
                     }
-    def __init__(self, parent, database, parser, in_dialog=False):
+    def __init__(self, parent, database, parser):
         builder.GtkBuilder.__init__(self, "DetailsView.ui")
         gobject.GObject.__init__(self)
 
         self.parent = parent
         self.database = database
         self.parser = parser
-        self.in_dialog = in_dialog
         self.pedigree_mode = False
         self.pigeon = None
         self.child = None
@@ -202,7 +201,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.comboloft.set_data(self.database, self.database.LOFTS)
 
         self.statusdialog.set_transient_for(parent)
-        self.root.unparent()
         self.root.show_all()
 
     # Callbacks
@@ -250,9 +248,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self._run_pigeondialog(const.DAM)
 
     # Public methods
-    def get_widget(self):
-        return self.root
-
     def get_child(self):
         return self.child
 

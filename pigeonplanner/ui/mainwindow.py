@@ -158,7 +158,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
         self.detailsview = detailsview.DetailsView(self,
                                                    self.database, self.parser)
-        self.aligndetails.add(self.detailsview.get_widget())
+        self.aligndetails.add(self.detailsview.root)
 
         pedigreetab = tabs.PedigreeTab(self.pedigree)
         relativestab = tabs.RelativesTab(self, self.database, self.parser)
