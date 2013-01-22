@@ -1022,7 +1022,7 @@
                         <property name="can_focus">False</property>
                         <child internal-child="entry">
                           <object class="GtkEntry" id="comboboxentry-entry">
-                            <property name="can_focus">False</property>
+                            <property name="can_focus">True</property>
                             <property name="primary_icon_activatable">False</property>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="primary_icon_sensitive">True</property>
@@ -1043,7 +1043,7 @@
                         <property name="can_focus">False</property>
                         <child internal-child="entry">
                           <object class="GtkEntry" id="comboboxentry-entry1">
-                            <property name="can_focus">False</property>
+                            <property name="can_focus">True</property>
                             <property name="primary_icon_activatable">False</property>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="primary_icon_sensitive">True</property>
@@ -1066,7 +1066,7 @@
                         <property name="can_focus">False</property>
                         <child internal-child="entry">
                           <object class="GtkEntry" id="comboboxentry-entry2">
-                            <property name="can_focus">False</property>
+                            <property name="can_focus">True</property>
                             <property name="primary_icon_activatable">False</property>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="primary_icon_sensitive">True</property>
