@@ -35,54 +35,54 @@ class ExportWindow(builder.GtkBuilder):
         self.parser = parser
 
         for exporter in get_exporters():
-            self.typelist.append([exporter, exporter.name])
-        self.combotype.set_active(0)
+            self.widgets.typelist.append([exporter, exporter.name])
+        self.widgets.combotype.set_active(0)
 
-        self.window.set_transient_for(parent)
-        self.window.show_all()
+        self.widgets.window.set_transient_for(parent)
+        self.widgets.window.show_all()
 
     def on_window_delete_event(self, widget, event):
-        self.window.destroy()
+        self.widgets.window.destroy()
         return False
 
     def on_buttonclose_clicked(self, widget):
-        self.window.destroy()
+        self.widgets.window.destroy()
         return False
 
     def on_buttonexport_clicked(self, widget):
-        filepath = self.entrypath.get_text()
+        filepath = self.widgets.entrypath.get_text()
         path = os.path.dirname(filepath)
         if not os.path.exists(path) or os.path.isdir(filepath):
-            ErrorDialog((_('Invalid input!'), None, _('Error')), self.window)
+            ErrorDialog((_('Invalid input!'), None, _('Error')), self.widgets.window)
             return
-        self.imageprogress.hide()
-        self.spinner.show()
-        self.spinner.start()
+        self.widgets.imageprogress.hide()
+        self.widgets.spinner.show()
+        self.widgets.spinner.start()
 
         treeview = self._parent.get_treeview()
-        if self.radioselected.get_active():
+        if self.widgets.radioselected.get_active():
             pigeons = treeview.get_selected_pigeon()
             # pigeons can be a list of selected or just one pigeon object.
             if not isinstance(pigeons, list):
                 pigeons = [pigeons]
-        elif self.radiovisible.get_active():
+        elif self.widgets.radiovisible.get_active():
             pigeons = treeview.get_pigeons(True)
         else:
             pigeons = self.parser.pigeons.values()
         exporter = self.__get_exporter()
         exporter.run(filepath, pigeons)
 
-        self.spinner.hide()
-        self.spinner.stop()
-        self.imageprogress.show()
+        self.widgets.spinner.hide()
+        self.widgets.spinner.stop()
+        self.widgets.imageprogress.show()
 
     def on_entrypath_changed(self, widget):
         value = widget.get_text_length() != 0
-        self.buttonexport.set_sensitive(value)
+        self.widgets.buttonexport.set_sensitive(value)
 
     def on_entrypath_icon_press(self, widget, icon_pos, event):
         exporter = self.__get_exporter()
-        dialog = filechooser.ExportChooser(self.window, exporter.extension,
+        dialog = filechooser.ExportChooser(self.widgets.window, exporter.extension,
                                                         exporter.filefilter)
         response = dialog.run()
         if response == gtk.RESPONSE_OK:
@@ -90,6 +90,6 @@ class ExportWindow(builder.GtkBuilder):
         dialog.destroy()
 
     def __get_exporter(self):
-        ls_iter = self.combotype.get_active_iter()
-        return self.typelist.get(ls_iter, 0)[0]
+        ls_iter = self.widgets.combotype.get_active_iter()
+        return self.widgets.typelist.get(ls_iter, 0)[0]
 

@@ -35,13 +35,13 @@ class DistanceCalculator(builder.GtkBuilder):
         self._distance = 0.0
         self._unit = 0
         self._fill_location_combos(racepoint)
-        self.window.set_transient_for(parent)
-        self.window.show()
+        self.widgets.window.set_transient_for(parent)
+        self.widgets.window.show()
 
     def close_window(self, widget, event=None):
-        self._unit = self.combounit.get_active()
-        self._distance = self.entryresult.get_text() or 0.0
-        self.window.destroy()
+        self._unit = self.widgets.combounit.get_active()
+        self._distance = self.widgets.entryresult.get_text() or 0.0
+        self.widgets.window.destroy()
         return False
 
     def on_buttonhelp_clicked(self, widget):
@@ -49,14 +49,14 @@ class DistanceCalculator(builder.GtkBuilder):
 
     def on_buttoncalculate_clicked(self, widget):
         try:
-            latitudefrom = self.entrylatfrom.get_text(as_float=True)
-            longitudefrom = self.entrylongfrom.get_text(as_float=True)
-            latitudeto = self.entrylatto.get_text(as_float=True)
-            longitudeto = self.entrylongto.get_text(as_float=True)
+            latitudefrom = self.widgets.entrylatfrom.get_text(as_float=True)
+            longitudefrom = self.widgets.entrylongfrom.get_text(as_float=True)
+            latitudeto = self.widgets.entrylatto.get_text(as_float=True)
+            longitudeto = self.widgets.entrylongto.get_text(as_float=True)
         except errors.InvalidInputError:
             ErrorDialog((_("The latitude and longitude need to be in "
                            "DD.dddddd° format to use this function."),
-                         None, _("Error")), self.window)
+                         None, _("Error")), self.widgets.window)
             return
 
         # Code taken from:
@@ -73,8 +73,8 @@ class DistanceCalculator(builder.GtkBuilder):
         # Multiply the arc by the radius of the earth in meters, just 
         # because our distance units combobox holds meters as 1
         dist_meters = arc*6373000
-        distance = dist_meters/self.combounit.get_unit()
-        self.entryresult.set_text(str(round(distance, 2)))
+        distance = dist_meters/self.widgets.combounit.get_unit()
+        self.widgets.entryresult.set_text(str(round(distance, 2)))
 
     def on_combolocationfrom_changed(self, widget):
         if widget.get_active() == 0:
@@ -96,10 +96,10 @@ class DistanceCalculator(builder.GtkBuilder):
             # Older versions stored these values as None instead of ''
             if latitude is None: latitude = ''
             if longitude is None: longitude = ''
-        self.entrylatfrom.set_editable(editable)
-        self.entrylongfrom.set_editable(editable)
-        self.entrylatfrom.set_text(latitude)
-        self.entrylongfrom.set_text(longitude)
+        self.widgets.entrylatfrom.set_editable(editable)
+        self.widgets.entrylongfrom.set_editable(editable)
+        self.widgets.entrylatfrom.set_text(latitude)
+        self.widgets.entrylongfrom.set_text(longitude)
 
     def on_combolocationto_changed(self, widget):
         if widget.get_active() == 0:
@@ -121,10 +121,10 @@ class DistanceCalculator(builder.GtkBuilder):
             # Older versions stored these values as None instead of ''
             if latitude is None: latitude = ''
             if longitude is None: longitude = ''
-        self.entrylatto.set_editable(editable)
-        self.entrylongto.set_editable(editable)
-        self.entrylatto.set_text(latitude)
-        self.entrylongto.set_text(longitude)
+        self.widgets.entrylatto.set_editable(editable)
+        self.widgets.entrylongto.set_editable(editable)
+        self.widgets.entrylatto.set_text(latitude)
+        self.widgets.entrylongto.set_text(longitude)
 
     def get_unit(self):
         return self._unit
@@ -139,6 +139,6 @@ class DistanceCalculator(builder.GtkBuilder):
         data.insert(1, _("Loft"))
         activefrom = 1 if racepoint is not None else 0
         activeto = racepoint+2 if racepoint is not None else 0
-        comboboxes.fill_combobox(self.combolocationfrom, data, activefrom, False)
-        comboboxes.fill_combobox(self.combolocationto, data, activeto, False)
+        comboboxes.fill_combobox(self.widgets.combolocationfrom, data, activefrom, False)
+        comboboxes.fill_combobox(self.widgets.combolocationto, data, activeto, False)
 

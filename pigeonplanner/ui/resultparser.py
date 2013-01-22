@@ -19,8 +19,6 @@
 import logging
 logger = logging.getLogger(__name__)
 
-import gtk
-
 import const
 import common
 import builder
@@ -38,48 +36,48 @@ class ResultParser(builder.GtkBuilder):
 
         self._build_interface()
         self._build_parsers()
-        self.parserdialog.set_transient_for(parent)
-        self.parserdialog.show_all()
+        self.widgets.parserdialog.set_transient_for(parent)
+        self.widgets.parserdialog.show_all()
 
     def close_window(self, widget=None, event=None):
-        self.parserdialog.destroy()
+        self.widgets.parserdialog.destroy()
         return False
 
     def on_parsebutton_clicked(self, widget):
-        self.resultfilename = self.filebutton.get_filename()
+        self.resultfilename = self.widgets.filebutton.get_filename()
         if self.resultfilename is None:
             return
         resultfile = open(self.resultfilename, 'r')
         parser = self._get_active_parser()
         try:
             self.data, results = parser.parse_file(resultfile, self.pigeons)
-        except Exception, exc:
+        except Exception as exc:
             import traceback
             data = [" **** File:", self.resultfilename,
                     "\n **** Parser:", parser.get_name(),
                     "\n **** Exception:", traceback.format_exc()]
             text = '\n'.join(data)
-            textbuffer = self.textview.get_buffer()
+            textbuffer = self.widgets.textview.get_buffer()
             textbuffer.set_text(text)
-            self.reportdialog.show()
+            self.widgets.reportdialog.show()
             return
-        self.datelabel.set_markup('<b>%s</b>' % self.data['date'])
-        self.racepointlabel.set_markup('<b>%s</b>' % self.data['racepoint'])
-        self.sectorlabel.set_markup('<b>%s</b>' % self.data['sector'])
-        self.categorylabel.set_markup('<b>%s</b>' % self.data['category'])
-        self.pigeonslabel.set_markup('<b>%s</b>' % self.data['n_pigeons'])
-        self.liststore.clear()
+        self.widgets.datelabel.set_markup('<b>%s</b>' % self.data['date'])
+        self.widgets.racepointlabel.set_markup('<b>%s</b>' % self.data['racepoint'])
+        self.widgets.sectorlabel.set_markup('<b>%s</b>' % self.data['sector'])
+        self.widgets.categorylabel.set_markup('<b>%s</b>' % self.data['category'])
+        self.widgets.pigeonslabel.set_markup('<b>%s</b>' % self.data['n_pigeons'])
+        self.widgets.liststore.clear()
         if not results:
-            self.infobar.show()
-            self.addbutton.set_sensitive(False)
+            self.widgets.infobar.show()
+            self.widgets.addbutton.set_sensitive(False)
             return
-        self.infobar.hide()
-        self.addbutton.set_sensitive(True)
+        self.widgets.infobar.hide()
+        self.widgets.addbutton.set_sensitive(True)
         for pindex, result in results.items():
             row = result
             row.insert(0, pindex)
             row.insert(0, True)
-            self.liststore.append(row)
+            self.widgets.liststore.append(row)
 
     def on_helpbutton_clicked(self, widget):
         common.open_help(9)
@@ -93,10 +91,9 @@ class ResultParser(builder.GtkBuilder):
         out = self.data['n_pigeons']
         sector = self.data['sector']
         category = self.data['category']
-        for row in self.liststore:
+        for row in self.widgets.liststore:
             toggle, pindex, ring, year, place = row
             if not toggle: continue
-            cof = common.calculate_coefficient(place, out)
             data = [pindex, date, point, place, out, sector, '', category,
                     '', '', '', '', 0, 0, '']
             if self.database.has_result(data):
@@ -106,7 +103,7 @@ class ResultParser(builder.GtkBuilder):
         self.close_window()
 
     def on_celltoggle_toggled(self, cell, path):
-        self.liststore[path][0] = not self.liststore[path][0]
+        self.widgets.liststore[path][0] = not self.widgets.liststore[path][0]
 
     def on_parsercombo_changed(self, widget):
         parser = self._get_active_parser()
@@ -116,30 +113,30 @@ class ResultParser(builder.GtkBuilder):
         return True
 
     def on_closebutton_clicked(self, widget):
-        self.reportdialog.hide()
+        self.widgets.reportdialog.hide()
 
     def on_sendbutton_clicked(self, widget):
-        self.reportdialog.hide()
-        textbuffer = self.textview.get_buffer()
+        self.widgets.reportdialog.hide()
+        textbuffer = self.widgets.textview.get_buffer()
         body = textbuffer.get_text(*textbuffer.get_bounds())
         subject = "[Pigeon Planner] Resultparser exception"
         mailing.send_email(const.REPORTMAIL, '', subject, body,
                            self.resultfilename)
 
     def _build_interface(self):
-        self.sendbutton.set_use_stock(True)
+        self.widgets.sendbutton.set_use_stock(True)
 
-        self.filebutton = filechooser.ResultChooser()
-        self.table.attach(self.filebutton, 1, 2, 0, 1)
+        self.widgets.filebutton = filechooser.ResultChooser()
+        self.widgets.table.attach(self.widgets.filebutton, 1, 2, 0, 1)
 
     def _build_parsers(self):
         parsers = get_all_parsers()
         for parser in parsers:
             parser = parser()
-            self.parserstore.append([parser, parser.get_name()])
-        self.parsercombo.set_active(0)
+            self.widgets.parserstore.append([parser, parser.get_name()])
+        self.widgets.parsercombo.set_active(0)
 
     def _get_active_parser(self):
-        comboiter = self.parsercombo.get_active_iter()
-        return self.parserstore.get_value(comboiter, 0)
+        comboiter = self.widgets.parsercombo.get_active_iter()
+        return self.widgets.parserstore.get_value(comboiter, 0)
 

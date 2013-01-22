@@ -146,19 +146,19 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.database = database
         self.parser = parser
 
-        self.treeview = treeview.MainTreeView(self.parser, self.statusbar)
-        self.treeview.connect('key-press-event', self.on_treeview_key_press)
-        self.treeview.connect('button-press-event', self.on_treeview_press)
-        self.scrolledwindow.add(self.treeview)
-        self.selection = self.treeview.get_selection()
-        self.selection.connect('changed', self.on_selection_changed)
+        self.widgets.treeview = treeview.MainTreeView(self.parser, self.widgets.statusbar)
+        self.widgets.treeview.connect('key-press-event', self.on_treeview_key_press)
+        self.widgets.treeview.connect('button-press-event', self.on_treeview_press)
+        self.widgets.scrolledwindow.add(self.widgets.treeview)
+        self.widgets.selection = self.widgets.treeview.get_selection()
+        self.widgets.selection.connect('changed', self.on_selection_changed)
 
         self.pedigree = pedigree.DrawPedigree(self.database, self.parser,
-                                              self.treeview)
+                                              self.widgets.treeview)
 
         self.detailsview = detailsview.DetailsView(self,
                                                    self.database, self.parser)
-        self.aligndetails.add(self.detailsview.root)
+        self.widgets.aligndetails.add(self.detailsview.get_root_widget())
 
         pedigreetab = tabs.PedigreeTab(self.pedigree)
         relativestab = tabs.RelativesTab(self, self.database, self.parser)
@@ -171,29 +171,29 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                              self.resultstab, breedingtab,
                              mediatab, medicationtab]
         for tab in self._loaded_tabs:
-            self.notebook.append_page(*tab.get_tab_widgets())
+            self.widgets.notebook.append_page(*tab.get_tab_widgets())
 
         self._build_menubar()
-        self.treeview.fill_treeview()
+        self.widgets.treeview.fill_treeview()
         self._set_statistics()
         self.current_pigeon = 0
-        self.pigeon_no = len(self.treeview.get_model())
+        self.pigeon_no = len(self.widgets.treeview.get_model())
 
-        self.MenuArrows.set_active(config.get('interface.arrows'))
-        self.MenuStats.set_active(config.get('interface.stats'))
-        self.MenuToolbar.set_active(config.get('interface.toolbar'))
-        self.MenuStatusbar.set_active(config.get('interface.statusbar'))
+        self.widgets.MenuArrows.set_active(config.get('interface.arrows'))
+        self.widgets.MenuStats.set_active(config.get('interface.stats'))
+        self.widgets.MenuToolbar.set_active(config.get('interface.toolbar'))
+        self.widgets.MenuStatusbar.set_active(config.get('interface.statusbar'))
 
         self.connect('delete-event', self.quit_program)
         self.set_title(const.NAME)
         self.set_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
-        self.add(self.mainvbox)
+        self.add(self.widgets.mainvbox)
         self.resize(config.get('interface.window-w'),
                     config.get('interface.window-h'))
         self.move(config.get('interface.window-x'),
                   config.get('interface.window-y'))
         self.show()
-        self.treeview.grab_focus()
+        self.widgets.treeview.grab_focus()
 
         events = self.database.get_notification(time.time())
         if events:
@@ -233,37 +233,37 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         return True
 
     def on_interface_changed(self, dialog, arrows, stats, toolbar, statusbar):
-        self.MenuArrows.set_active(arrows)
-        self.MenuStats.set_active(stats)
-        self.MenuToolbar.set_active(toolbar)
-        self.MenuStatusbar.set_active(statusbar)
+        self.widgets.MenuArrows.set_active(arrows)
+        self.widgets.MenuStats.set_active(stats)
+        self.widgets.MenuToolbar.set_active(toolbar)
+        self.widgets.MenuStatusbar.set_active(statusbar)
 
-        self.treeview.set_columns()
+        self.widgets.treeview.set_columns()
         self.resultstab.set_columns()
 
     def on_edit_finished(self, detailsview, pigeon, operation):
         band, year = pigeon.get_band()
         if operation == const.EDIT:
-            model, paths = self.selection.get_selected_rows()
-            path = self.treeview.get_child_path(paths[0])
+            model, paths = self.widgets.selection.get_selected_rows()
+            path = self.widgets.treeview.get_child_path(paths[0])
             data = (0, pigeon, 1, pigeon.get_pindex(), 2, band, 3, year,
                     4, pigeon.get_name(), 5, pigeon.get_colour(),
                     6, pigeon.get_sex_string(), 7, pigeon.get_loft(),
                     8, pigeon.get_strain(),
                     9, _(pigeon.get_status()))
-            self.treeview.update_row(data, path=path)
-            self.selection.emit('changed')
+            self.widgets.treeview.update_row(data, path=path)
+            self.widgets.selection.emit('changed')
         elif operation == const.ADD:
             if not pigeon.get_visible(): return
             row = [pigeon, pigeon.get_pindex(), band, year, pigeon.get_name(),
                    pigeon.get_colour(), pigeon.get_sex_string(),
                    pigeon.get_loft(), pigeon.get_strain(),
                    _(pigeon.get_status())]
-            self.treeview.add_row(row)
-            self.statusbar.display_message(
+            self.widgets.treeview.add_row(row)
+            self.widgets.statusbar.display_message(
                         _("Pigeon %s has been added") %pigeon.get_band_string())
         self._set_statistics()
-        self.treeview.grab_focus()
+        self.widgets.treeview.grab_focus()
 
     # Menu callbacks
     def on_uimanager_connect_proxy(self, uimgr, action, widget):
@@ -273,10 +273,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             widget.connect('deselect', self.on_menuitem_deselect)
 
     def on_menuitem_select(self, menuitem, tooltip):
-        self.statusbar.push(-1, tooltip)
+        self.widgets.statusbar.push(-1, tooltip)
 
     def on_menuitem_deselect(self, menuitem):
-        self.statusbar.pop(-1)
+        self.widgets.statusbar.pop(-1)
 
     def menuexport_activate(self, widget):
         exportwindow.ExportWindow(self, self.parser)
@@ -289,14 +289,14 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         if not tools.check_user_info(self, self.database, userinfo['name']):
             return
 
-        pigeons = self.treeview.get_pigeons(True)
+        pigeons = self.widgets.treeview.get_pigeons(True)
         psize = common.get_pagesize_from_opts()
         reportopts = PigeonsReportOptions(psize)
         report(PigeonsReport, reportopts, pigeons, userinfo)
 
     def menuprintpedigree_activate(self, widget):
         logger.debug(common.get_function_name())
-        pigeon = self.treeview.get_selected_pigeon()
+        pigeon = self.widgets.treeview.get_selected_pigeon()
         if pigeon is None or isinstance(pigeon, list): return
         userinfo = common.get_own_address(self.database)
 
@@ -337,7 +337,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menuselectall_activate(self, widget):
         logger.debug(common.get_function_name())
-        self.treeview.select_all_pigeons()
+        self.widgets.treeview.select_all_pigeons()
 
     def menualbum_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -354,28 +354,28 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menuaddrange_activate(self, widget):
         logger.debug(common.get_function_name())
-        self.entryRangeFrom.set_text('')
-        self.entryRangeTo.set_text('')
-        self.entryRangeYear.set_text('')
-        self.combosexrange.set_active(2)
-        self.entryRangeFrom.grab_focus()
-        self.rangedialog.show()
+        self.widgets.entryRangeFrom.set_text('')
+        self.widgets.entryRangeTo.set_text('')
+        self.widgets.entryRangeYear.set_text('')
+        self.widgets.combosexrange.set_active(2)
+        self.widgets.entryRangeFrom.grab_focus()
+        self.widgets.rangedialog.show()
 
     def menuedit_activate(self, widget):
-        model, paths = self.selection.get_selected_rows()
+        model, paths = self.widgets.selection.get_selected_rows()
         if len(paths) != 1: return
-        pigeon = self.treeview.get_selected_pigeon()
+        pigeon = self.widgets.treeview.get_selected_pigeon()
         dialog = detailsview.DetailsDialog(self.database, self.parser,
                                            pigeon, self, const.EDIT)
         dialog.details.connect('edit-finished', self.on_edit_finished)
 
     def menuremove_activate(self, widget):
-        model, paths = self.selection.get_selected_rows()
+        model, paths = self.widgets.selection.get_selected_rows()
 
-        if self.selection.count_selected_rows() == 0:
+        if self.widgets.selection.count_selected_rows() == 0:
             return
-        elif self.selection.count_selected_rows() == 1:
-            pigeon = self.treeview.get_selected_pigeon()
+        elif self.widgets.selection.count_selected_rows() == 1:
+            pigeon = self.widgets.treeview.get_selected_pigeon()
             pindex = pigeon.get_pindex()
             pigeonlabel = pigeon.get_band_string()
             statusbarmsg = _("Pigeon %s has been removed") %pigeonlabel
@@ -384,9 +384,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             logger.debug("Start removing pigeon '%s'", pindex)
         else:
             logger.debug("Start removing multiple pigeons")
-            pigeons = [pobj for pobj in self.treeview.get_selected_pigeon()]
+            pigeons = [pobj for pobj in self.widgets.treeview.get_selected_pigeon()]
             bands = ['%s' % pigeon.get_band_string() for pigeon in
-                     self.treeview.get_selected_pigeon()]
+                     self.widgets.treeview.get_selected_pigeon()]
             pigeonlabel = ", ".join(bands)
             statusbarmsg = _("%s pigeons have been removed") % len(pigeons)
             show_result_option = False
@@ -395,14 +395,14 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                     show_result_option = True
                     break
 
-        self.labelPigeon.set_text(pigeonlabel)
-        self.chkKeep.set_active(True)
-        self.chkResults.set_active(False)
-        utils.set_multiple_visible([self.chkResults], show_result_option)
+        self.widgets.labelPigeon.set_text(pigeonlabel)
+        self.widgets.chkKeep.set_active(True)
+        self.widgets.chkResults.set_active(False)
+        utils.set_multiple_visible([self.widgets.chkResults], show_result_option)
 
-        answer = self.removedialog.run()
+        answer = self.widgets.removedialog.run()
         if answer == 2:
-            if self.chkKeep.get_active():
+            if self.widgets.chkKeep.get_active():
                 logger.debug("Remove: Hiding the pigeon(s)")
                 for pigeon in pigeons:
                     pigeon.show = 0
@@ -438,17 +438,17 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             # having problems with invalid paths.
             paths.reverse()
             for path in paths:
-                self.treeview.remove_row(path)
-            self.selection.select_path(paths[-1])
+                self.widgets.treeview.remove_row(path)
+            self.widgets.selection.select_path(paths[-1])
             self._set_statistics()
-            self.statusbar.display_message(statusbarmsg)
+            self.widgets.statusbar.display_message(statusbarmsg)
         else:
             logger.debug("Remove operation cancelled")
-        self.removedialog.hide()
+        self.widgets.removedialog.hide()
 
     def menupedigree_activate(self, widget):
         logger.debug(common.get_function_name())
-        pigeon = self.treeview.get_selected_pigeon()
+        pigeon = self.widgets.treeview.get_selected_pigeon()
         if pigeon is None:
             # Disable pedigree shortcut when no pigeon is selected
             return
@@ -457,12 +457,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menuaddresult_activate(self, widget):
         logger.debug(common.get_function_name())
-        self.notebook.set_current_page(2)
+        self.widgets.notebook.set_current_page(2)
         self.resultstab.add_new_result()
 
     def menufilter_activate(self, widget):
         logger.debug(common.get_function_name())
-        self.treeview.run_filterdialog(self, self.database)
+        self.widgets.treeview.run_filterdialog(self, self.database)
 
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -471,22 +471,22 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menuarrows_toggled(self, widget):
         value = widget.get_active()
-        utils.set_multiple_visible([self.vboxButtons], value)
+        utils.set_multiple_visible([self.widgets.vboxButtons], value)
         config.set('interface.arrows', value)
 
     def menustats_toggled(self, widget):
         value = widget.get_active()
-        utils.set_multiple_visible([self.alignStats], value)
+        utils.set_multiple_visible([self.widgets.alignStats], value)
         config.set('interface.stats', value)
 
     def menutoolbar_toggled(self, widget):
         value = widget.get_active()
-        utils.set_multiple_visible([self.toolbar], value)
+        utils.set_multiple_visible([self.widgets.toolbar], value)
         config.set('interface.toolbar', value)
 
     def menustatusbar_toggled(self, widget):
         value = widget.get_active()
-        utils.set_multiple_visible([self.statusbar], value)
+        utils.set_multiple_visible([self.widgets.statusbar], value)
         config.set('interface.statusbar', value)
 
     def menuvelocity_activate(self, widget):
@@ -550,10 +550,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     # range callbacks
     def on_rangeadd_clicked(self, widget):
-        rangefrom = self.entryRangeFrom.get_text()
-        rangeto = self.entryRangeTo.get_text()
-        rangeyear = self.entryRangeYear.get_text()
-        rangesex = self.combosexrange.get_active_text()
+        rangefrom = self.widgets.entryRangeFrom.get_text()
+        rangeto = self.widgets.entryRangeTo.get_text()
+        rangeyear = self.widgets.entryRangeYear.get_text()
+        rangesex = self.widgets.combosexrange.get_active_text()
 
         try:
             checks.check_ring_entry(rangefrom, rangeyear)
@@ -577,14 +577,14 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             pigeon = self.parser.add_empty_pigeon(pindex, rangesex)
             row = [pigeon, pindex, band, rangeyear, '', '', pigeon.get_sex_string(),
                    '', '', _(common.get_status(pigeon.get_active()))]
-            self.treeview.add_row(row)
+            self.widgets.treeview.add_row(row)
             value += 1
 
         self._set_statistics()
-        self.rangedialog.hide()
+        self.widgets.rangedialog.hide()
 
     def on_rangecancel_clicked(self, widget):
-        self.rangedialog.hide()
+        self.widgets.rangedialog.hide()
 
     # Main treeview callbacks
     def on_treeview_press(self, treeview, event):
@@ -608,9 +608,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def on_selection_changed(self, selection):
         n_rows_selected = selection.count_selected_rows()
         model, paths = selection.get_selected_rows()
-        widgets = [self.ToolRemove, self.MenuRemove,
-                   self.ToolEdit, self.ToolPedigree, self.MenuEdit,
-                   self.MenuPedigree, self.MenuAddresult]
+        widgets = [self.widgets.ToolRemove, self.widgets.MenuRemove,
+                   self.widgets.ToolEdit, self.widgets.ToolPedigree,
+                   self.widgets.MenuEdit,
+                   self.widgets.MenuPedigree, self.widgets.MenuAddresult]
         for tab in self._loaded_tabs:
             widgets.extend(tab.get_pigeon_state_widgets())
 
@@ -649,10 +650,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     # Public methods
     ####################
     def get_treeview(self):
-        return self.treeview
+        return self.widgets.treeview
 
     def get_statusbar(self):
-        return self.statusbar
+        return self.widgets.statusbar
 
     ####################
     # Internal methods
@@ -660,7 +661,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def _build_menubar(self):
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(self.ui)
-        uimanager.insert_action_group(self.actiongroup, 0)
+        uimanager.insert_action_group(self.widgets.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.add_accel_group(accelgroup)
 
@@ -684,15 +685,16 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             "ToolPedigree": uimanager.get_widget('/Toolbar/Pedigree')
             }
         for name, widget in widgetDic.items():
-            setattr(self, name, widget)
+            setattr(self.widgets, name, widget)
 
-        utils.set_multiple_sensitive([self.MenuEdit, self.MenuRemove,
-                                      self.MenuPedigree, self.MenuAddresult,
-                                      self.ToolEdit, self.ToolRemove,
-                                      self.ToolPedigree], False)
+        utils.set_multiple_sensitive([
+                            self.widgets.MenuEdit, self.widgets.MenuRemove,
+                            self.widgets.MenuPedigree, self.widgets.MenuAddresult,
+                            self.widgets.ToolEdit, self.widgets.ToolRemove,
+                            self.widgets.ToolPedigree], False)
 
-        self.mainvbox.pack_start(self.menubar, False, False)
-        self.mainvbox.pack_start(self.toolbar, False, False)
+        self.widgets.mainvbox.pack_start(self.widgets.menubar, False, False)
+        self.widgets.mainvbox.pack_start(self.widgets.toolbar, False, False)
 
         if const.OSX:
             try:
@@ -725,17 +727,17 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         """
 
         total, cocks, hens, ybirds = common.count_active_pigeons(self.database)
-        self.labelStatTotal.set_markup("<b>%i</b>" %total)
-        self.labelStatCocks.set_markup("<b>%i</b>" %cocks)
-        self.labelStatHens.set_markup("<b>%i</b>" %hens)
-        self.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
-        self.statusbar.set_total(total)
+        self.widgets.labelStatTotal.set_markup("<b>%i</b>" %total)
+        self.widgets.labelStatCocks.set_markup("<b>%i</b>" %cocks)
+        self.widgets.labelStatHens.set_markup("<b>%i</b>" %hens)
+        self.widgets.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
+        self.widgets.statusbar.set_total(total)
 
     def _set_pigeon(self, pigeon_no):
         if pigeon_no < 0 or pigeon_no >= self.pigeon_no:
             return
 
         if self.current_pigeon != pigeon_no:
-            self.selection.unselect_all()
-            self.selection.select_path(pigeon_no)
+            self.widgets.selection.unselect_all()
+            self.widgets.selection.select_path(pigeon_no)
 

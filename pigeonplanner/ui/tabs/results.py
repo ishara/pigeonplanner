@@ -48,29 +48,28 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
      COL_COMMENT) = range(12)
 
     def __init__(self, parent, database, parser):
-        basetab.BaseTab.__init__(self, _("Results"), "icon_result.png")
         builder.GtkBuilder.__init__(self, "ResultsView.ui")
+        basetab.BaseTab.__init__(self, _("Results"), "icon_result.png")
 
         self.parent = parent
         self.database = database
         self.parser = parser
-        self._selection = self.treeview.get_selection()
-        self._selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection = self.widgets.treeview.get_selection()
+        self.widgets.selection.connect('changed', self.on_selection_changed)
         self.set_columns()
 
-        self.comboracepoint.set_data(self.database, self.database.RACEPOINTS)
-        self.combosector.set_data(self.database, self.database.SECTORS)
-        self.combotype.set_data(self.database, self.database.TYPES)
-        self.combocategory.set_data(self.database, self.database.CATEGORIES)
-        self.comboweather.set_data(self.database, self.database.WEATHER)
-        self.combowind.set_data(self.database, self.database.WIND)
+        self.widgets.comboracepoint.set_data(self.database, self.database.RACEPOINTS)
+        self.widgets.combosector.set_data(self.database, self.database.SECTORS)
+        self.widgets.combotype.set_data(self.database, self.database.TYPES)
+        self.widgets.combocategory.set_data(self.database, self.database.CATEGORIES)
+        self.widgets.comboweather.set_data(self.database, self.database.WEATHER)
+        self.widgets.combowind.set_data(self.database, self.database.WIND)
 
-        self._root.unparent()
-        self.dialog.set_transient_for(parent)
+        self.widgets.dialog.set_transient_for(parent)
 
     # Callbacks
     def on_dialog_delete(self, widget, event):
-        self.dialog.hide()
+        self.widgets.dialog.hide()
         return True
 
     def on_treeview_press(self, treeview, event):
@@ -107,19 +106,19 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self._set_dialog(self._mode, result)
 
     def on_buttonremove_clicked(self, widget):
-        model, rowiter = self._selection.get_selected()
-        path = self.liststore.get_path(rowiter)
+        model, rowiter = self.widgets.selection.get_selected()
+        path = self.widgets.liststore.get_path(rowiter)
         rowid = model[rowiter][self.COL_ID]
 
         if not QuestionDialog(messages.MSG_REMOVE_RESULT, self.parent).run():
             return
 
         self.database.delete_from_table(self.database.RESULTS, rowid, 0)
-        self.liststore.remove(rowiter)
-        self._selection.select_path(path)
+        self.widgets.liststore.remove(rowiter)
+        self.widgets.selection.select_path(path)
 
     def on_buttonclose_clicked(self, widget):
-        self.dialog.hide()
+        self.widgets.dialog.hide()
 
     def on_buttonsave_clicked(self, widget):
         data = self._get_data()
@@ -138,73 +137,73 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                 ErrorDialog(messages.MSG_RESULT_EXISTS, self.parent)
                 return
             rowid = self.database.insert_into_table(self.database.RESULTS, data)
-            rowiter = self.liststore.insert(0, [rowid, date, point, place,
+            rowiter = self.widgets.liststore.insert(0, [rowid, date, point, place,
                                                 out, cof, sector, ftype,
                                                 category, wind, weather, comment])
-            self._selection.select_iter(rowiter)
-            path = self.liststore.get_path(rowiter)
-            self.treeview.scroll_to_cell(path)
+            self.widgets.selection.select_iter(rowiter)
+            path = self.widgets.liststore.get_path(rowiter)
+            self.widgets.treeview.scroll_to_cell(path)
         elif self._mode == const.EDIT:
-            model, node = self._selection.get_selected()
-            data.append(self.liststore.get_value(node, 0))
+            model, node = self.widgets.selection.get_selected()
+            data.append(self.widgets.liststore.get_value(node, 0))
             self.database.update_table(self.database.RESULTS, data, 2, 0)
-            self.liststore.set(node, 1, date, 2, point, 3, place, 4, out,
-                                     5, cof, 6, sector, 7, ftype, 8, category,
-                                     9, wind, 10, weather, 11, comment)
-            self._selection.emit('changed')
-            self.dialog.hide()
+            self.widgets.liststore.set(node, 1, date, 2, point, 3, place, 4, out,
+                                             5, cof, 6, sector, 7, ftype, 8, category,
+                                             9, wind, 10, weather, 11, comment)
+            self.widgets.selection.emit('changed')
+            self.widgets.dialog.hide()
 
-        data = [(self.comboracepoint, point, self.database.RACEPOINTS),
-                (self.combosector, sector, self.database.SECTORS),
-                (self.combotype, ftype, self.database.TYPES),
-                (self.combocategory, category, self.database.CATEGORIES),
-                (self.comboweather, weather, self.database.WEATHER),
-                (self.combowind, wind, self.database.WIND)]
+        data = [(self.widgets.comboracepoint, point, self.database.RACEPOINTS),
+                (self.widgets.combosector, sector, self.database.SECTORS),
+                (self.widgets.combotype, ftype, self.database.TYPES),
+                (self.widgets.combocategory, category, self.database.CATEGORIES),
+                (self.widgets.comboweather, weather, self.database.WEATHER),
+                (self.widgets.combowind, wind, self.database.WIND)]
         for combo, value, table in data:
             self._insert_combo_data(combo, value, table)
 
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
-        widgets = [self.buttonremove, self.buttonedit]
+        widgets = [self.widgets.buttonremove, self.widgets.buttonedit]
         utils.set_multiple_sensitive(widgets, not rowiter is None)
 
     def on_spinplaced_changed(self, widget):
-        self.spinoutof.set_range(widget.get_value_as_int(),
-                                 widget.get_range()[1])
+        self.widgets.spinoutof.set_range(widget.get_value_as_int(),
+                                         widget.get_range()[1])
 
     # Public methods
     def set_pigeon(self, pigeon):
         band = pigeon.get_band_string()
-        self.labelpigeon.set_text(band)
+        self.widgets.labelpigeon.set_text(band)
         self.pindex = pigeon.get_pindex()
-        self.treeview.freeze_child_notify()
-        self.treeview.set_model(None)
+        self.widgets.treeview.freeze_child_notify()
+        self.widgets.treeview.set_model(None)
 
-        self.liststore.set_default_sort_func(lambda *args: -1) 
-        self.liststore.set_sort_column_id(-1, gtk.SORT_ASCENDING)
+        self.widgets.liststore.set_default_sort_func(lambda *args: -1) 
+        self.widgets.liststore.set_sort_column_id(-1, gtk.SORT_ASCENDING)
 
-        self.liststore.clear()
+        self.widgets.liststore.clear()
         for result in self.database.get_pigeon_results(self.pindex):
             place = result[4]
             out = result[5]
             cof = common.calculate_coefficient(place, out)
-            self.liststore.insert(0, [result[0], result[2], result[3],
-                                      place, out, cof,
-                                      result[6], result[7], result[8],
-                                      result[9], result[10], result[15]])
-        self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+            self.widgets.liststore.insert(0, [result[0], result[2], result[3],
+                                              place, out, cof,
+                                              result[6], result[7], result[8],
+                                              result[9], result[10], result[15]])
+        self.widgets.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
-        self.treeview.set_model(self.liststore)
-        self.treeview.thaw_child_notify()
+        self.widgets.treeview.set_model(self.widgets.liststore)
+        self.widgets.treeview.thaw_child_notify()
 
     def clear_pigeon(self):
-        self.liststore.clear()
+        self.widgets.liststore.clear()
 
     def get_pigeon_state_widgets(self):
-        return [self.buttonadd]
+        return [self.widgets.buttonadd]
 
     def add_new_result(self):
-        self.buttonadd.clicked()
+        self.widgets.buttonadd.clicked()
 
     def set_columns(self):
         columnsdic = {4: config.get('columns.result-coef'),
@@ -215,29 +214,29 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                       9: config.get('columns.result-weather'),
                       10: config.get('columns.result-comment')}
         for key, value in columnsdic.items():
-            self.treeview.get_column(key).set_visible(value)
+            self.widgets.treeview.get_column(key).set_visible(value)
 
     # Internal methods
     def _get_selected_result(self):
-        model, rowiter = self._selection.get_selected()
+        model, rowiter = self.widgets.selection.get_selected()
         if not rowiter: return
         return list(model[rowiter])
 
     def _get_data(self):
         try:
-            date = self.entrydate.get_text()
+            date = self.widgets.entrydate.get_text()
         except errors.InvalidInputError, msg:
-            ErrorDialog(msg.value, self.dialog)
+            ErrorDialog(msg.value, self.widgets.dialog)
             return
-        point = self.comboracepoint.child.get_text()
-        place = self.spinplaced.get_value_as_int()
-        out = self.spinoutof.get_value_as_int()
-        sector = self.combosector.child.get_text()
-        ftype = self.combotype.child.get_text()
-        category = self.combocategory.child.get_text()
-        weather = self.comboweather.child.get_text()
-        wind = self.combowind.child.get_text()
-        comment = self.entrycomment.get_text()
+        point = self.widgets.comboracepoint.child.get_text()
+        place = self.widgets.spinplaced.get_value_as_int()
+        out = self.widgets.spinoutof.get_value_as_int()
+        sector = self.widgets.combosector.child.get_text()
+        ftype = self.widgets.combotype.child.get_text()
+        category = self.widgets.combocategory.child.get_text()
+        weather = self.widgets.comboweather.child.get_text()
+        wind = self.widgets.combowind.child.get_text()
+        comment = self.widgets.entrycomment.get_text()
 
         if not date or not point or not place or not out:
             ErrorDialog(messages.MSG_EMPTY_DATA, self.dialog)
@@ -255,22 +254,22 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
 
         self._set_entry_values(values)
         text = _('Edit result for:') if mode == const.EDIT else _('Add result for:')
-        self.labelmode.set_text(text)
-        self.dialog.set_modal(mode == const.EDIT)
-        self.dialog.show()
-        self.entrydate.grab_focus()
+        self.widgets.labelmode.set_text(text)
+        self.widgets.dialog.set_modal(mode == const.EDIT)
+        self.widgets.dialog.show()
+        self.widgets.entrydate.grab_focus()
 
     def _set_entry_values(self, values):
-        self.entrydate.set_text(values[0])
-        self.comboracepoint.child.set_text(values[1])
-        self.spinplaced.set_value(values[2])
-        self.spinoutof.set_value(values[3])
-        self.combosector.child.set_text(values[4])
-        self.combotype.child.set_text(values[5])
-        self.combocategory.child.set_text(values[6])
-        self.comboweather.child.set_text(values[7])
-        self.combowind.child.set_text(values[8])
-        self.entrycomment.set_text(values[9])
+        self.widgets.entrydate.set_text(values[0])
+        self.widgets.comboracepoint.child.set_text(values[1])
+        self.widgets.spinplaced.set_value(values[2])
+        self.widgets.spinoutof.set_value(values[3])
+        self.widgets.combosector.child.set_text(values[4])
+        self.widgets.combotype.child.set_text(values[5])
+        self.widgets.combocategory.child.set_text(values[6])
+        self.widgets.comboweather.child.set_text(values[7])
+        self.widgets.combowind.child.set_text(values[8])
+        self.widgets.entrycomment.set_text(values[9])
 
     def _insert_combo_data(self, combo, data, table):
         if not data: return

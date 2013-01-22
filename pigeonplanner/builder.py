@@ -25,9 +25,10 @@ import os
 import gtk
 
 import const
+from ui import WidgetFactory
 
 
-class GtkBuilder(object):
+class GtkBuilder(WidgetFactory):
     def __init__(self, uifile, objects=None):
         """
         Initialize Gtkbuilder, connect all signals and get all widgets
@@ -35,6 +36,8 @@ class GtkBuilder(object):
         @param uifile: Filename of the Glade file
         @param objects: List of root widgets
         """
+
+        WidgetFactory.__init__(self)
 
         self._builder = gtk.Builder()
         self._builder.set_translation_domain(const.DOMAIN)
@@ -44,9 +47,7 @@ class GtkBuilder(object):
         else:
             self._builder.add_objects_from_file(uipath, objects)
         self._builder.connect_signals(self)
-        for obj in self._builder.get_objects():
-            if issubclass(type(obj), gtk.Buildable):
-                setattr(self, gtk.Buildable.get_name(obj), obj)
+        self.set_builder_objects(self._builder.get_objects())
 
     def get_objects_from_prefix(self, prefix):
         """
@@ -56,12 +57,9 @@ class GtkBuilder(object):
         """
 
         objects = []
-        for obj in self._builder.get_objects():
-            if issubclass(type(obj), gtk.Buildable):
-                name = gtk.Buildable.get_name(obj)
-                if name.startswith(prefix):
-                    objects.append(getattr(self, name))
-
+        for name, obj in self.widgets.items():
+            if name.startswith(prefix):
+                objects.append(obj)
         return objects
 
     def get_object_name(self, obj):

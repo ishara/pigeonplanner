@@ -88,31 +88,31 @@ class ResultWindow(builder.GtkBuilder):
                      'place': 5, 'coef': 7, 'sector': 8}
 
         self._build_toolbar()
-        self._modelsort = self.treeview.get_model()
-        self._modelsort.set_sort_func(2, self._sort_func)
-        self._modelsort.set_sort_column_id(2, gtk.SORT_ASCENDING)
-        self._modelfilter = self._modelsort.get_model()
-        self._modelfilter.set_visible_func(self._visible_func)
+        self.widgets.modelsort = self.widgets.treeview.get_model()
+        self.widgets.modelsort.set_sort_func(2, self._sort_func)
+        self.widgets.modelsort.set_sort_column_id(2, gtk.SORT_ASCENDING)
+        self.widgets.modelfilter = self.widgets.modelsort.get_model()
+        self.widgets.modelfilter.set_visible_func(self._visible_func)
         self.fill_treeview()
         self.set_columns()
 
-        self.resultwindow.set_transient_for(parent)
-        self.resultwindow.show()
+        self.widgets.resultwindow.set_transient_for(parent)
+        self.widgets.resultwindow.show()
 
     # Callbacks
     def on_close_window(self, widget, event=None):
-        self.resultwindow.destroy()
+        self.widgets.resultwindow.destroy()
 
     def on_filterapply_clicked(self, widget):
         self.filters = widget.get_filters()
-        self._modelfilter.refilter()
+        self.widgets.modelfilter.refilter()
 
     def on_filterclear_clicked(self, widget):
         self.filters = widget.get_filters()
-        self._modelfilter.refilter()
+        self.widgets.modelfilter.refilter()
 
     def on_filter_clicked(self, widget):
-        dialog = dialogs.FilterDialog(self.resultwindow, _("Filter results"))
+        dialog = dialogs.FilterDialog(self.widgets.resultwindow, _("Filter results"))
         dialog.connect('apply-clicked', self.on_filterapply_clicked)
         dialog.connect('clear-clicked', self.on_filterclear_clicked)
 
@@ -136,7 +136,7 @@ class ResultWindow(builder.GtkBuilder):
         pass
 
     def on_save_clicked(self, widget):
-        chooser = PdfSaver(self.resultwindow, self.pdfname)
+        chooser = PdfSaver(self.widgets.resultwindow, self.pdfname)
         response = chooser.run()
         if response == gtk.RESPONSE_OK:
             save_path = chooser.get_filename()
@@ -151,12 +151,12 @@ class ResultWindow(builder.GtkBuilder):
 
     # Public methods
     def fill_treeview(self):
-        self.treeview.freeze_child_notify()
-        self.treeview.set_model(None)
+        self.widgets.treeview.freeze_child_notify()
+        self.widgets.treeview.set_model(None)
 
-        self.liststore.set_default_sort_func(lambda *args: -1) 
-        self.liststore.set_sort_column_id(-1, gtk.SORT_ASCENDING)
-        self.liststore.clear()
+        self.widgets.liststore.set_default_sort_func(lambda *args: -1) 
+        self.widgets.liststore.set_sort_column_id(-1, gtk.SORT_ASCENDING)
+        self.widgets.liststore.clear()
         for result in self.database.get_all_results():
             pindex = result[PINDEX]
             date = result[DATE]
@@ -166,13 +166,13 @@ class ResultWindow(builder.GtkBuilder):
             out = result[OUT]
             cof = common.calculate_coefficient(place, out)
             ring, year = common.get_band_from_pindex(pindex)
-            self.liststore.insert(0, [pindex, ring, year, date, point,
+            self.widgets.liststore.insert(0, [pindex, ring, year, date, point,
                                       place, out, cof, sector, result[TYPE],
                                       result[CATEGORY], result[WIND],
                                       result[WEATHER], result[COMMENT]])
             self._add_filter_data(pindex, year, date, point, sector)
-        self.treeview.set_model(self._modelsort)
-        self.treeview.thaw_child_notify()
+        self.widgets.treeview.set_model(self.widgets.modelsort)
+        self.widgets.treeview.thaw_child_notify()
 
     def set_columns(self):
         columnsdic = {6: config.get('columns.result-coef'),
@@ -183,18 +183,18 @@ class ResultWindow(builder.GtkBuilder):
                       11: config.get('columns.result-weather'),
                       12: config.get('columns.result-comment')}
         for key, value in columnsdic.items():
-            self.treeview.get_column(key).set_visible(value)
+            self.widgets.treeview.get_column(key).set_visible(value)
 
     # Private methods
     def _build_toolbar(self):
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(self.ui)
-        uimanager.insert_action_group(self.actiongroup, 0)
+        uimanager.insert_action_group(self.widgets.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
-        self.resultwindow.add_accel_group(accelgroup)
+        self.widgets.resultwindow.add_accel_group(accelgroup)
 
         toolbar = uimanager.get_widget('/Toolbar')
-        self.vbox.pack_start(toolbar, False, False)
+        self.widgets.vbox.pack_start(toolbar, False, False)
 
     def _get_pigeons_combobox(self):
         store = gtk.ListStore(str, str)
@@ -241,19 +241,19 @@ class ResultWindow(builder.GtkBuilder):
 
     def _do_operation(self, print_action, save_path=None):
         userinfo = common.get_own_address(self.database)
-        if not tools.check_user_info(self.resultwindow, self.database,
+        if not tools.check_user_info(self.widgets.resultwindow, self.database,
                                      userinfo['name']):
             return
 
         results = []
-        for item in self._modelsort:
+        for item in self.widgets.modelsort:
             values = []
             for x in range(2, 14):
-                value = self._modelsort.get_value(item.iter, x)
+                value = self.widgets.modelsort.get_value(item.iter, x)
                 if value == None:
                     value = ''
                 if x == 2:
-                    value = "%s / %s" % (self._modelsort.get_value(item.iter, 1),
+                    value = "%s / %s" % (self.widgets.modelsort.get_value(item.iter, 1),
                                          value[2:])
                 if x == 7:
                     value = '%3.2f' % value
@@ -262,6 +262,6 @@ class ResultWindow(builder.GtkBuilder):
 
         psize = common.get_pagesize_from_opts()
         opts = ResultsReportOptions(psize, None, print_action, save_path,
-                                           parent=self.resultwindow)
+                                           parent=self.widgets.resultwindow)
         report(ResultsReport, opts, results, userinfo)
 

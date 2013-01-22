@@ -72,7 +72,7 @@ class PhotoAlbum(builder.GtkBuilder):
     def __init__(self, parent, parser, database, pindex=None):
         builder.GtkBuilder.__init__(self, "PhotoAlbum.ui")
 
-        self.photoalbum.set_transient_for(parent)
+        self.widgets.photoalbum.set_transient_for(parent)
 
         self.parser = parser
         self.database = database
@@ -83,53 +83,53 @@ class PhotoAlbum(builder.GtkBuilder):
         self.pixbuf = None
         self.interp = gtk.gdk.INTERP_BILINEAR
         self.max = (1600, 1200)
-        self.picture_no = len(self.iconview.get_model())
+        self.picture_no = len(self.widgets.iconview.get_model())
         self.current_picture = 0
         self.zoom = 1.0
         self.zoom_mode = ZOOM_FREE
         if pindex:
             path = tuple(index for index, row in
-                         enumerate(self.iconview.get_model()) if
+                         enumerate(self.widgets.iconview.get_model()) if
                          row[1] == pindex)
         else:
             path = (0,)
         try:
-            self.iconview.select_path(path)
+            self.widgets.iconview.select_path(path)
         except:
             # Original image is missing
             pass
         self.set_zoom(1.0)
-        self.zoom_fit_button.set_active(True)
+        self.widgets.zoom_fit_button.set_active(True)
 
-        self.photoalbum.show()
+        self.widgets.photoalbum.show()
 
     def build_toolbar(self):
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(self.ui)
-        uimanager.insert_action_group(self.actiongroup, 0)
+        uimanager.insert_action_group(self.widgets.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
-        self.photoalbum.add_accel_group(accelgroup)
+        self.widgets.photoalbum.add_accel_group(accelgroup)
 
-        self.zoom_in_button = uimanager.get_widget('/Toolbar/In')
-        self.zoom_out_button = uimanager.get_widget('/Toolbar/Out')
-        self.zoom_fit_button = uimanager.get_widget('/Toolbar/Fit')
-        self.first_button = uimanager.get_widget('/Toolbar/First')
-        self.prev_button = uimanager.get_widget('/Toolbar/Prev')
-        self.next_button = uimanager.get_widget('/Toolbar/Next')
-        self.last_button = uimanager.get_widget('/Toolbar/Last')
-        self.slide_button = uimanager.get_widget('/Toolbar/Slide')
+        self.widgets.zoom_in_button = uimanager.get_widget('/Toolbar/In')
+        self.widgets.zoom_out_button = uimanager.get_widget('/Toolbar/Out')
+        self.widgets.zoom_fit_button = uimanager.get_widget('/Toolbar/Fit')
+        self.widgets.first_button = uimanager.get_widget('/Toolbar/First')
+        self.widgets.prev_button = uimanager.get_widget('/Toolbar/Prev')
+        self.widgets.next_button = uimanager.get_widget('/Toolbar/Next')
+        self.widgets.last_button = uimanager.get_widget('/Toolbar/Last')
+        self.widgets.slide_button = uimanager.get_widget('/Toolbar/Slide')
 
         toolbar = uimanager.get_widget('/Toolbar')
         toolbar.set_style(gtk.TOOLBAR_ICONS)
-        self.vbox.pack_start(toolbar, False, False)
-        self.vbox.reorder_child(toolbar, 0)
+        self.widgets.vbox.pack_start(toolbar, False, False)
+        self.widgets.vbox.reorder_child(toolbar, 0)
 
     def fill_iconview(self):
         store = gtk.ListStore(str, str, str, gtk.gdk.Pixbuf)
         store.set_sort_column_id(0, gtk.SORT_ASCENDING)
-        self.iconview.set_model(store)
-        self.iconview.set_text_column(2)
-        self.iconview.set_pixbuf_column(3)
+        self.widgets.iconview.set_model(store)
+        self.widgets.iconview.set_text_column(2)
+        self.widgets.iconview.set_pixbuf_column(3)
 
         for pigeon in self.database.get_all_images():
             if not pigeon[3]: continue
@@ -144,25 +144,25 @@ class PhotoAlbum(builder.GtkBuilder):
                              %(pigeon[1], pigeon[2]))
 
         if len(store) > 0:
-            self.labelImage.hide()
+            self.widgets.labelImage.hide()
         else:
             self.disable_toolbuttons()
-            self.labelImage.show()
+            self.widgets.labelImage.show()
 
     def get_view_size(self):
-        width = self.swin.allocation.width - 2 * MARGIN
-        height = self.swin.allocation.height - 2 * MARGIN
+        width = self.widgets.swin.allocation.width - 2 * MARGIN
+        height = self.widgets.swin.allocation.height - 2 * MARGIN
 
-        if self.swin.get_shadow_type() != gtk.SHADOW_NONE:
-            width -= 2 * self.swin.style.xthickness
-            height -= 2 * self.swin.style.ythickness
+        if self.widgets.swin.get_shadow_type() != gtk.SHADOW_NONE:
+            width -= 2 * self.widgets.swin.style.xthickness
+            height -= 2 * self.widgets.swin.style.ythickness
 
-        spacing = self.swin.style_get_property('scrollbar-spacing')
+        spacing = self.widgets.swin.style_get_property('scrollbar-spacing')
         
-        vsb_w, vsb_h = self.swin.get_vscrollbar().size_request()
+        vsb_w, vsb_h = self.widgets.swin.get_vscrollbar().size_request()
         vsb_w += spacing
         
-        hsb_w, hsb_h = self.swin.get_hscrollbar().size_request()
+        hsb_w, hsb_h = self.widgets.swin.get_hscrollbar().size_request()
         hsb_h += spacing
         
         return width, height, vsb_w, hsb_h
@@ -172,7 +172,7 @@ class PhotoAlbum(builder.GtkBuilder):
             return
 
         if self.current_picture != picture_no:
-            self.iconview.select_path((picture_no,))
+            self.widgets.iconview.select_path((picture_no,))
 
     def set_zoom(self, zoom):
         if not self.pixbuf:
@@ -186,12 +186,12 @@ class PhotoAlbum(builder.GtkBuilder):
             screen_width = 1
         if screen_height < 1:
             screen_height = 1
-        self.drawingarea.set_size_request(screen_width, screen_height)
-        self.drawingarea.queue_draw()
+        self.widgets.drawingarea.set_size_request(screen_width, screen_height)
+        self.widgets.drawingarea.queue_draw()
         
-        self.zoom_in_button.set_sensitive(self.zoom !=
+        self.widgets.zoom_in_button.set_sensitive(self.zoom !=
                                           max(self.zoom_factors.keys()))
-        self.zoom_out_button.set_sensitive(self.zoom !=
+        self.widgets.zoom_out_button.set_sensitive(self.zoom !=
                                            min(self.zoom_factors.keys()))
         
     def zoom_in(self):
@@ -224,7 +224,7 @@ class PhotoAlbum(builder.GtkBuilder):
         return False
 
     def on_close_clicked(self, widget):
-        self.photoalbum.destroy()
+        self.widgets.photoalbum.destroy()
 
     def on_first_clicked(self, widget):
         self.set_picture(0)
@@ -246,27 +246,27 @@ class PhotoAlbum(builder.GtkBuilder):
             self.zoom_mode = ZOOM_FREE
 
     def on_zoom_in_clicked(self, widget):
-        self.zoom_fit_button.set_active(False)
+        self.widgets.zoom_fit_button.set_active(False)
         self.zoom_mode = ZOOM_FREE
         self.set_zoom(self.zoom_in())
     
     def on_zoom_out_clicked(self, widget):
-        self.zoom_fit_button.set_active(False)
+        self.widgets.zoom_fit_button.set_active(False)
         self.zoom_mode = ZOOM_FREE
         self.set_zoom(self.zoom_out())
 
     def on_fullscreen_toggled(self, widget):
         if widget.get_active():
-            self.photoalbum.fullscreen()
+            self.widgets.photoalbum.fullscreen()
         else:
-            self.photoalbum.unfullscreen()
+            self.widgets.photoalbum.unfullscreen()
 
     def on_slideshow_toggled(self, widget):
         if widget.get_active():
-            self.slide_button.set_stock_id(gtk.STOCK_MEDIA_STOP)
+            self.widgets.slide_button.set_stock_id(gtk.STOCK_MEDIA_STOP)
             self.slideshow_timer = gobject.timeout_add(3000, self.slideshow)
         else:
-            self.slide_button.set_stock_id(gtk.STOCK_MEDIA_PLAY)
+            self.widgets.slide_button.set_stock_id(gtk.STOCK_MEDIA_PLAY)
             gobject.source_remove(self.slideshow_timer)
 
     def slideshow(self):
@@ -315,15 +315,15 @@ class PhotoAlbum(builder.GtkBuilder):
 
     def on_drawingarea_press(self, widget, event):
         if event.button == 2:
-            self.zoom_fit_button.set_active(True)
+            self.widgets.zoom_fit_button.set_active(True)
 
     def on_drawingarea_scroll(self, widget, event):
         if event.direction == gtk.gdk.SCROLL_UP:
-            self.zoom_fit_button.set_active(False)
+            self.widgets.zoom_fit_button.set_active(False)
             self.zoom_mode = ZOOM_FREE
             self.set_zoom(self.zoom_in())
         elif event.direction == gtk.gdk.SCROLL_DOWN:
-            self.zoom_fit_button.set_active(False)
+            self.widgets.zoom_fit_button.set_active(False)
             self.zoom_mode = ZOOM_FREE
             self.set_zoom(self.zoom_out())
 
@@ -350,19 +350,19 @@ class PhotoAlbum(builder.GtkBuilder):
         self.current_picture = path[0]
 
         utils.set_multiple_sensitive(
-            {self.first_button: self.current_picture,
-             self.prev_button: self.current_picture,
-             self.next_button: self.current_picture < self.picture_no - 1,
-             self.last_button: self.current_picture < self.picture_no - 1,
-             self.zoom_in_button: True,
-             self.zoom_out_button: True,
-             self.zoom_fit_button: True,
-             self.slide_button: True})
+            {self.widgets.first_button: self.current_picture,
+             self.widgets.prev_button: self.current_picture,
+             self.widgets.next_button: self.current_picture < self.picture_no - 1,
+             self.widgets.last_button: self.current_picture < self.picture_no - 1,
+             self.widgets.zoom_in_button: True,
+             self.widgets.zoom_out_button: True,
+             self.widgets.zoom_fit_button: True,
+             self.widgets.slide_button: True})
 
     def set_pixbuf(self, filename):
         if not filename:
             self.pixbuf = None
-            self.drawingarea.queue_draw()
+            self.widgets.drawingarea.queue_draw()
             return
 
         pixbuf = gtk.gdk.pixbuf_new_from_file(filename)
@@ -373,7 +373,7 @@ class PhotoAlbum(builder.GtkBuilder):
         else:
             width, height = self.scale_to_fit((width, height), self.max)
             self.pixbuf = pixbuf.scale_simple(width, height, self.interp)
-        self.drawingarea.queue_draw()
+        self.widgets.drawingarea.queue_draw()
 
     def scale_to_fit(self, image, frame):
         image_width, image_height = image
@@ -392,12 +392,12 @@ class PhotoAlbum(builder.GtkBuilder):
 
     def disable_toolbuttons(self):
         utils.set_multiple_sensitive(
-            [self.first_button,
-             self.prev_button,
-             self.next_button,
-             self.last_button,
-             self.zoom_in_button,
-             self.zoom_out_button,
-             self.zoom_fit_button,
-             self.slide_button], False)
+            [self.widgets.first_button,
+             self.widgets.prev_button,
+             self.widgets.next_button,
+             self.widgets.last_button,
+             self.widgets.zoom_in_button,
+             self.widgets.zoom_out_button,
+             self.widgets.zoom_fit_button,
+             self.widgets.slide_button], False)
 

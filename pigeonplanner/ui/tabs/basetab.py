@@ -27,23 +27,23 @@ import const
 class BaseTab(object):
     def __init__(self, name, img):
 
-        self._root = None
+#        self.widgets._root = None
 
-        self._label = gtk.VBox()
+        self.widgets._label = gtk.VBox()
         img = os.path.join(const.IMAGEDIR, img)
         if gtk.gdk.screen_height() <= 768:
-            self._label.set_orientation(gtk.ORIENTATION_HORIZONTAL)
+            self.widgets._label.set_orientation(gtk.ORIENTATION_HORIZONTAL)
             pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img, 18, 18)
         else:
             pixbuf = gtk.gdk.pixbuf_new_from_file(img)
         image = gtk.image_new_from_pixbuf(pixbuf)
         label = gtk.Label(name)
-        self._label.pack_start(image)
-        self._label.pack_start(label)
-        self._label.show_all()
+        self.widgets._label.pack_start(image)
+        self.widgets._label.pack_start(label)
+        self.widgets._label.show_all()
 
     def get_tab_widgets(self):
-        return self._root, self._label
+        return self.widgets._root, self.widgets._label
 
     def set_pigeon(self, pigeon):
         pass

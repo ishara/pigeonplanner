@@ -55,11 +55,11 @@ class DBWindow(builder.GtkBuilder):
         # Set the buttons sensitive
         self.__set_buttons()
         # Get the textview buffers
-        self.textbuffer_sql = self.textview_sql.get_buffer()
-        self.textbuffer_sql.connect('changed', self.on_textbuffer_sql_changed)
-        self.textbuffer_output = self.textview_output.get_buffer()
+        self.widgets.textbuffer_sql = self.widgets.textview_sql.get_buffer()
+        self.widgets.textbuffer_sql.connect('changed', self.on_textbuffer_sql_changed)
+        self.widgets.textbuffer_output = self.widgets.textview_output.get_buffer()
 
-        self.dbwindow.show()
+        self.widgets.dbwindow.show()
 
     def quit_program(self, widget, event=None):
         if not self.__can_quit:
@@ -69,13 +69,13 @@ class DBWindow(builder.GtkBuilder):
 
     def on_button_optimize_clicked(self, widget):
         logger.debug(common.get_function_name())
-        self.__set_image(self.image_optimize, EXECUTE)
+        self.__set_image(self.widgets.image_optimize, EXECUTE)
         self.database.optimize_db()
-        self.__set_image(self.image_optimize, OK)
+        self.__set_image(self.widgets.image_optimize, OK)
 
     def on_button_check_clicked(self, widget):
         logger.debug(common.get_function_name())
-        self.__set_image(self.image_check, EXECUTE)
+        self.__set_image(self.widgets.image_check, EXECUTE)
         # Start with an integrity check
         output = self.database.check_db()
         if output[0][0] == 'ok':
@@ -87,7 +87,7 @@ class DBWindow(builder.GtkBuilder):
             for error in output:
                 logger.error("  %s" %error[0])
             # Don't do remaining checks
-            self.__set_image(self.image_check, ERROR)
+            self.__set_image(self.widgets.image_check, ERROR)
             return
 
         # Check some columns so they contain the right data
@@ -120,12 +120,12 @@ class DBWindow(builder.GtkBuilder):
                 logger.debug("Fixed empty sex value for '%s' with value '%s'"
                              %(pindex, sex))
 
-        self.__set_image(self.image_check, OK)
+        self.__set_image(self.widgets.image_check, OK)
 
     def on_button_delete_clicked(self, widget):
         logger.debug(common.get_function_name())
-        self.__set_image(self.image_delete, EXECUTE)
-        if WarningDialog(messages.MSG_REMOVE_DATABASE, self.dbwindow).run():
+        self.__set_image(self.widgets.image_delete, EXECUTE)
+        if WarningDialog(messages.MSG_REMOVE_DATABASE, self.widgets.dbwindow).run():
             try:
                 self.database.close()
                 os.remove(const.DATABASE)
@@ -134,26 +134,27 @@ class DBWindow(builder.GtkBuilder):
             except Exception, msg:
                 logger.error("Deleting database failed: %s" % msg)
             self.__set_buttons()
-            self.__set_image(self.image_delete, OK)
+            self.__set_image(self.widgets.image_delete, OK)
         else:
-            self.__set_image(self.image_delete, CANCEL)
+            self.__set_image(self.widgets.image_delete, CANCEL)
 
     def on_button_execute_clicked(self, widget):
         logger.debug(common.get_function_name())
 
-        sql = self.textbuffer_sql.get_text(*self.textbuffer_sql.get_bounds())
+        sql = self.widgets.textbuffer_sql.get_text(
+                                *self.widgets.textbuffer_sql.get_bounds())
         sql = sql.strip(" \"';")
         is_select = sql.lower().startswith('select')
         output = self.database.execute(sql, is_select)
-        self.textbuffer_output.set_text(str(output))
+        self.widgets.textbuffer_output.set_text(str(output))
 
     def on_button_clear_clicked(self, widget):
-        self.textbuffer_sql.set_text("")
-        self.textbuffer_output.set_text("")
+        self.widgets.textbuffer_sql.set_text("")
+        self.widgets.textbuffer_output.set_text("")
 
     def on_textbuffer_sql_changed(self, widget):
         value = widget.get_char_count() == 0
-        self.button_execute.set_sensitive(not value)
+        self.widgets.button_execute.set_sensitive(not value)
 
     def on_button_log_clicked(self, widget):
         logdialog.LogDialog(self.database)
@@ -161,10 +162,10 @@ class DBWindow(builder.GtkBuilder):
     def __set_image(self, imagewidget, action):
         if action == EXECUTE:
             self.__can_quit = False
-            self.dbwindow.set_sensitive(False)
+            self.widgets.dbwindow.set_sensitive(False)
         else:
             self.__can_quit = True
-            self.dbwindow.set_sensitive(True)
+            self.widgets.dbwindow.set_sensitive(True)
         while gtk.events_pending():
             gtk.main_iteration()
 
@@ -176,6 +177,8 @@ class DBWindow(builder.GtkBuilder):
 
     def __set_buttons(self):
         value = os.path.exists(const.DATABASE)
-        widgets = [self.button_optimize, self.button_check, self.button_delete]
+        widgets = [self.widgets.button_optimize,
+                   self.widgets.button_check,
+                   self.widgets.button_delete]
         utils.set_multiple_sensitive(widgets, value)
 

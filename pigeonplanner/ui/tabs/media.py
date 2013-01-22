@@ -35,37 +35,37 @@ from translation import gettext as _
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def __init__(self, parent, database, parser):
-        basetab.BaseTab.__init__(self, _("Media"), "icon_media.png")
         builder.GtkBuilder.__init__(self, "MediaView.ui")
-        self._root.unparent()
+        basetab.BaseTab.__init__(self, _("Media"), "icon_media.png")
 
         self.parent = parent
         self.database = database
         self.parser = parser
-        self._selection = self.treeview.get_selection()
-        self._selection.set_select_function(self._select_func, full=True)
-        self._selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection = self.widgets.treeview.get_selection()
+        self.widgets.selection.set_select_function(self._select_func, full=True)
+        self.widgets.selection.connect('changed', self.on_selection_changed)
 
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
-        widgets = [self.buttonremove, self.buttonopen]
+        widgets = [self.widgets.buttonremove, self.widgets.buttonopen]
         utils.set_multiple_sensitive(widgets, not rowiter is None)
-        self.image.clear()
+        self.widgets.image.clear()
         if rowiter is None: return
 
         mimetype = model.get_value(rowiter, 1)
         if mime.is_image(mimetype):
             path = unicode(model.get_value(rowiter, 2))
-            self.image.set_from_pixbuf(thumbnail.get_image(path))
+            self.widgets.image.set_from_pixbuf(thumbnail.get_image(path))
         else:
             try:
                 image = mime.get_pixbuf(mimetype)
-                self.image.set_from_pixbuf(image)
+                self.widgets.image.set_from_pixbuf(image)
             except mime.MimeIconError:
-                self.image.set_from_stock(gtk.STOCK_FILE, gtk.ICON_SIZE_DIALOG)
+                self.widgets.image.set_from_stock(gtk.STOCK_FILE,
+                                                  gtk.ICON_SIZE_DIALOG)
 
     def on_buttonopen_clicked(self, widget):
-        model, rowiter = self._selection.get_selected()
+        model, rowiter = self.widgets.selection.get_selected()
         common.open_file(model.get_value(rowiter, 2))
 
     def on_buttonadd_clicked(self, widget):
@@ -78,15 +78,15 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
                     chooser.get_filetitle(), chooser.get_filedescription()]
             rowid = self.database.insert_into_table(self.database.MEDIA, data)
             # Hackish... Fill whole treeview again
-            self.fill_treeview(self.pigeon)
+            self.set_pigeon(self.pigeon)
         chooser.destroy()
 
     def on_buttonremove_clicked(self, widget):
         if not QuestionDialog(messages.MSG_REMOVE_MEDIA, self.parent).run():
             return
 
-        model, rowiter = self._selection.get_selected()
-        path = self.liststore.get_path(rowiter)
+        model, rowiter = self.widgets.selection.get_selected()
+        path = self.widgets.liststore.get_path(rowiter)
         rowid = model.get_value(rowiter, 0)
         filetype = model.get_value(rowiter, 1)
         filepath = model.get_value(rowiter, 2)
@@ -96,15 +96,15 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
             except:
                 pass
         self.database.delete_from_table(self.database.MEDIA, rowid, 0)
-        self.liststore.remove(rowiter)
-        self._selection.select_path(path)
+        self.widgets.liststore.remove(rowiter)
+        self.widgets.selection.select_path(path)
 
     def set_pigeon(self, pigeon):
         self.pigeon = pigeon
 
         images = []
         other = []
-        self.liststore.clear()
+        self.widgets.liststore.clear()
         for media in self.database.get_pigeon_media(pigeon.pindex):
             if mime.is_image(media[2]):
                 images.append(media)
@@ -114,20 +114,20 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         other.sort(key=operator.itemgetter(4))
 
         normal = ["#ffffff", True]
-        self.liststore.append(['', '', '', _('Images'), "#dcdcdc", False])
+        self.widgets.liststore.append(['', '', '', _('Images'), "#dcdcdc", False])
         for media in images:
             text = self._format_text(media[4], media[5])
-            self.liststore.append([media[0], media[2], media[3], text]+normal)
-        self.liststore.append(['', '', '', _('Other'), "#dcdcdc", False])
+            self.widgets.liststore.append([media[0], media[2], media[3], text]+normal)
+        self.widgets.liststore.append(['', '', '', _('Other'), "#dcdcdc", False])
         for media in other:
             text = self._format_text(media[4], media[5])
-            self.liststore.append([media[0], media[2], media[3], text]+normal)
+            self.widgets.liststore.append([media[0], media[2], media[3], text]+normal)
 
     def clear_pigeon(self):
-        self.liststore.clear()
+        self.widgets.liststore.clear()
 
     def get_pigeon_state_widgets(self):
-        return [self.buttonadd]
+        return [self.widgets.buttonadd]
 
     def _format_text(self, title, description):
         text = common.escape_text(title)

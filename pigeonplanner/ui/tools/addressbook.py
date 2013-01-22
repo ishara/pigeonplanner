@@ -53,19 +53,21 @@ class AddressBook(builder.GtkBuilder):
 
         self._mode = None
         self._entries = self.get_objects_from_prefix("entry")
-        self._normalbuttons = [self.buttonadd, self.buttonedit, self.buttonremove]
-        self._editbuttons = [self.buttonsave, self.buttoncancel]
+        self._normalbuttons = [self.widgets.buttonadd,
+                               self.widgets.buttonedit,
+                               self.widgets.buttonremove]
+        self._editbuttons = [self.widgets.buttonsave, self.widgets.buttoncancel]
         self._fill_treeview()
-        self._selection = self.treeview.get_selection()
-        self._selection.connect('changed', self.on_selection_changed)
-        self._selection.select_path(0)
+        self.widgets.selection = self.widgets.treeview.get_selection()
+        self.widgets.selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection.select_path(0)
 
-        self.addressbookwindow.set_transient_for(parent)
-        self.addressbookwindow.show()
+        self.widgets.addressbookwindow.set_transient_for(parent)
+        self.widgets.addressbookwindow.show()
 
     # Callbacks
     def close_window(self, widget, event=None):
-        self.addressbookwindow.destroy()
+        self.widgets.addressbookwindow.destroy()
 
     def on_buttonadd_clicked(self, widget):
         self._mode = const.ADD
@@ -77,17 +79,17 @@ class AddressBook(builder.GtkBuilder):
         self._set_widgets(True)
 
     def on_buttonremove_clicked(self, widget):
-        model, rowiter = self._selection.get_selected()
-        path = self.liststore.get_path(rowiter)
+        model, rowiter = self.widgets.selection.get_selected()
+        path = self.widgets.liststore.get_path(rowiter)
         key, name = model[rowiter][0], model[rowiter][1]
 
         if not QuestionDialog(messages.MSG_REMOVE_ADDRESS,
-                              self.addressbookwindow, name).run():
+                              self.widgets.addressbookwindow, name).run():
             return
 
         self.db.delete_from_table(self.db.ADDR, key, 0)
-        self.liststore.remove(rowiter)
-        self._selection.select_path(path)
+        self.widgets.liststore.remove(rowiter)
+        self.widgets.selection.select_path(path)
 
     def on_buttonsave_clicked(self, widget):
         try:
@@ -98,25 +100,25 @@ class AddressBook(builder.GtkBuilder):
         name = data[0]
         if self._mode == const.ADD:
             rowid = self.db.insert_into_table(self.db.ADDR, data)
-            rowiter = self.liststore.insert(0, [rowid, name])
-            self._selection.select_iter(rowiter)
-            path = self.liststore.get_path(rowiter)
-            self.treeview.scroll_to_cell(path)
+            rowiter = self.widgets.liststore.insert(0, [rowid, name])
+            self.widgets.selection.select_iter(rowiter)
+            path = self.widgets.liststore.get_path(rowiter)
+            self.widgets.treeview.scroll_to_cell(path)
         else:
             data = data + (self._get_address_key(),)
             self.db.update_table(self.db.ADDR, data, 1, 0)
-            model, rowiter = self._selection.get_selected()
-            self.liststore.set_value(rowiter, 1, name)
-            self._selection.emit('changed')
+            model, rowiter = self.widgets.selection.get_selected()
+            self.widgets.liststore.set_value(rowiter, 1, name)
+            self.widgets.selection.emit('changed')
 
     def on_buttoncancel_clicked(self, widget):
         self._set_widgets(False)
-        self._selection.emit('changed')
+        self.widgets.selection.emit('changed')
 
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
 
-        widgets = [self.buttonremove, self.buttonedit]
+        widgets = [self.widgets.buttonremove, self.widgets.buttonedit]
         if rowiter:
             utils.set_multiple_sensitive(widgets, True)
         else:
@@ -125,24 +127,24 @@ class AddressBook(builder.GtkBuilder):
             return
 
         data = self.db.get_address(model[rowiter][0])
-        self.entryname.set_text(data[1])
-        self.entrystreet.set_text(data[2])
-        self.entryzip.set_text(data[3])
-        self.entrycity.set_text(data[4])
-        self.entrycountry.set_text(data[5])
-        self.entryphone.set_text(data[6])
-        self.entryemail.set_text(data[7])
-        self.entrycomment.set_text(data[8])
-        self.checkme.set_active(data[9])
-        self.entrylat.set_text(data[10])
-        self.entrylong.set_text(data[11])
+        self.widgets.entryname.set_text(data[1])
+        self.widgets.entrystreet.set_text(data[2])
+        self.widgets.entryzip.set_text(data[3])
+        self.widgets.entrycity.set_text(data[4])
+        self.widgets.entrycountry.set_text(data[5])
+        self.widgets.entryphone.set_text(data[6])
+        self.widgets.entryemail.set_text(data[7])
+        self.widgets.entrycomment.set_text(data[8])
+        self.widgets.checkme.set_active(data[9])
+        self.widgets.entrylat.set_text(data[10])
+        self.widgets.entrylong.set_text(data[11])
 
     # Internal methods
     def _fill_treeview(self):
-        self.liststore.clear()
+        self.widgets.liststore.clear()
         for item in self.db.get_all_addresses():
-            self.liststore.insert(0, [item[0], item[1]])
-        self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+            self.widgets.liststore.insert(0, [item[0], item[1]])
+        self.widgets.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
     def _set_widgets(self, value):
         """
@@ -151,13 +153,13 @@ class AddressBook(builder.GtkBuilder):
         @param value: True for edit mode, False for normal
         """
 
-        utils.set_multiple_sensitive([self.treeview], not value)
+        utils.set_multiple_sensitive([self.widgets.treeview], not value)
         utils.set_multiple_visible(self._normalbuttons, not value)
         utils.set_multiple_visible(self._editbuttons, value)
         show_me = self.db.get_own_address() is None or \
                     (self._mode == const.EDIT and
                      self.db.get_own_address()[0] == self._get_address_key())
-        utils.set_multiple_visible([self.checkme], show_me if value else False)
+        utils.set_multiple_visible([self.widgets.checkme], show_me if value else False)
 
         shadow = gtk.SHADOW_NONE if value else gtk.SHADOW_IN
         for entry in self._entries:
@@ -168,25 +170,25 @@ class AddressBook(builder.GtkBuilder):
             entry.set_has_frame(value)
             entry.get_parent().set_shadow_type(shadow)
 
-        self.entryname.grab_focus()
-        self.entryname.set_position(-1)
+        self.widgets.entryname.grab_focus()
+        self.widgets.entryname.set_position(-1)
 
     def _get_entry_data(self):
-        return (self.entryname.get_text(),
-                self.entrystreet.get_text(),
-                self.entryzip.get_text(),
-                self.entrycity.get_text(),
-                self.entrycountry.get_text(),
-                self.entryphone.get_text(),
-                self.entryemail.get_text(),
-                self.entrycomment.get_text(),
-                int(self.checkme.get_active()),
-                self.entrylat.get_text(),
-                self.entrylong.get_text(),
+        return (self.widgets.entryname.get_text(),
+                self.widgets.entrystreet.get_text(),
+                self.widgets.entryzip.get_text(),
+                self.widgets.entrycity.get_text(),
+                self.widgets.entrycountry.get_text(),
+                self.widgets.entryphone.get_text(),
+                self.widgets.entryemail.get_text(),
+                self.widgets.entrycomment.get_text(),
+                int(self.widgets.checkme.get_active()),
+                self.widgets.entrylat.get_text(),
+                self.widgets.entrylong.get_text(),
                 )
 
     def _get_address_key(self):
-        model, rowiter = self._selection.get_selected()
+        model, rowiter = self.widgets.selection.get_selected()
         return model[rowiter][0]
 
     def _empty_entries(self):

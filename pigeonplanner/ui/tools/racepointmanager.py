@@ -35,11 +35,11 @@ class RacepointManager(builder.GtkBuilder):
         self.database = database
 
         self._fill_racepoints_combo()
-        self.window.set_transient_for(parent)
-        self.window.show()
+        self.widgets.window.set_transient_for(parent)
+        self.widgets.window.show()
 
     def close_window(self, widget, event=None):
-        self.window.destroy()
+        self.widgets.window.destroy()
 
     def on_combopoint_changed(self, widget):
         rp = widget.get_active_text()
@@ -49,59 +49,59 @@ class RacepointManager(builder.GtkBuilder):
         if latitude is None: latitude = ''
         if longitude is None: longitude = ''
         if distance is None: distance = '0.0'
-        self.entrylatitude.set_text(latitude)
-        self.entrylongitude.set_text(longitude)
+        self.widgets.entrylatitude.set_text(latitude)
+        self.widgets.entrylongitude.set_text(longitude)
         try:
             distance = float(distance)
         except ValueError:
             distance = 0.0
-        self.spindistance.set_value(distance)
+        self.widgets.spindistance.set_value(distance)
         if not unit: unit = 0
-        self.combodistance.set_active(unit)
+        self.widgets.combodistance.set_active(unit)
 
     def on_buttonhelp_clicked(self, widget):
         common.open_help(13)
 
     def on_buttonadd_clicked(self, widget):
-        manager = DataManager(self.window, self.database, None)
-        response = manager.window.run()
+        manager = DataManager(self.widgets.window, self.database, None)
+        response = manager.widgets.window.run()
         if response == gtk.RESPONSE_CLOSE:
             self._fill_racepoints_combo()
-        manager.window.destroy()
+        manager.widgets.window.destroy()
 
     def on_buttoncalculate_clicked(self, widget):
-        point = self.combopoint.get_active()
-        calculator = DistanceCalculator(self.window, self.database, point)
+        point = self.widgets.combopoint.get_active()
+        calculator = DistanceCalculator(self.widgets.window, self.database, point)
         response = calculator.window.run()
         if response == gtk.RESPONSE_CLOSE:
-            self.spindistance.set_value(float(calculator.get_distance()))
-            self.combodistance.set_active(calculator.get_unit())
+            self.widgets.spindistance.set_value(float(calculator.get_distance()))
+            self.widgets.combodistance.set_active(calculator.get_unit())
         calculator.window.destroy()
 
     def on_buttonsave_clicked(self, widget):
         try:
-            latitude = self.entrylatitude.get_text()
-            longitude = self.entrylongitude.get_text()
+            latitude = self.widgets.entrylatitude.get_text()
+            longitude = self.widgets.entrylongitude.get_text()
         except errors.InvalidInputError:
             return
 
         data = (latitude, longitude,
-                self.spindistance.get_value(),
-                self.combodistance.get_active(),
-                self.combopoint.get_active_text())
+                self.widgets.spindistance.get_value(),
+                self.widgets.combodistance.get_active(),
+                self.widgets.combopoint.get_active_text())
         self.database.update_table(self.database.RACEPOINTS, data, 2)
         def clear_image():
-            self.image.clear()
+            self.widgets.image.clear()
             return False
-        self.image.set_from_stock(gtk.STOCK_OK, gtk.ICON_SIZE_BUTTON)
+        self.widgets.image.set_from_stock(gtk.STOCK_OK, gtk.ICON_SIZE_BUTTON)
         gobject.timeout_add(3000, clear_image)
 
     def _fill_racepoints_combo(self):
         data = self.database.select_from_table(self.database.RACEPOINTS)
-        comboboxes.fill_combobox(self.combopoint, data)
-        value = self.combopoint.get_active_text() is not None
-        self.entrylatitude.set_sensitive(value)
-        self.entrylongitude.set_sensitive(value)
-        self.hboxdistance.set_sensitive(value)
-        self.buttonsave.set_sensitive(value)
+        comboboxes.fill_combobox(self.widgets.combopoint, data)
+        value = self.widgets.combopoint.get_active_text() is not None
+        self.widgets.entrylatitude.set_sensitive(value)
+        self.widgets.entrylongitude.set_sensitive(value)
+        self.widgets.hboxdistance.set_sensitive(value)
+        self.widgets.buttonsave.set_sensitive(value)
 

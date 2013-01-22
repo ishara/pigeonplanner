@@ -22,6 +22,7 @@ import gtk.gdk
 import const
 import messages
 from ui import utils
+from ui import WidgetFactory
 from ui.tabs import basetab
 from ui.utils import HiddenPigeonsMixin
 from ui.detailsview import DetailsDialog
@@ -29,8 +30,9 @@ from ui.messagedialog import InfoDialog
 from translation import gettext as _
 
 
-class RelativesTab(basetab.BaseTab, HiddenPigeonsMixin):
+class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
     def __init__(self, mainwindow, database, parser):
+        WidgetFactory.__init__(self)
         basetab.BaseTab.__init__(self, _("Relatives"), "icon_relatives.png")
         self.mainwindow = mainwindow
         self.database = database
@@ -75,11 +77,11 @@ class RelativesTab(basetab.BaseTab, HiddenPigeonsMixin):
         frameoff.add(alignoff)
         self._liststoreoff = self._build_treeview(treeviewoff)
 
-        self._root = gtk.HBox(True)
-        self._root.pack_start(framedirect, True, True, 4)
-        self._root.pack_start(framehalf, True, True, 0)
-        self._root.pack_start(frameoff, True, True, 4)
-        self._root.show_all()
+        self.widgets._root = gtk.HBox(True)
+        self.widgets._root.pack_start(framedirect, True, True, 4)
+        self.widgets._root.pack_start(framehalf, True, True, 0)
+        self.widgets._root.pack_start(frameoff, True, True, 4)
+        self.widgets._root.show_all()
 
     # Callbacks
     def on_treeview_press(self, treeview, event):

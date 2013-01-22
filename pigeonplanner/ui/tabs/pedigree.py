@@ -18,12 +18,14 @@
 
 import gtk
 
+from ui import WidgetFactory
 from ui.tabs import basetab
 from translation import gettext as _
 
 
-class PedigreeTab(basetab.BaseTab):
+class PedigreeTab(WidgetFactory, basetab.BaseTab):
     def __init__(self, pedigree):
+        WidgetFactory.__init__(self)
         basetab.BaseTab.__init__(self, _("Pedigree"), "icon_pedigree.png")
         self.pedigree = pedigree
 
@@ -51,10 +53,10 @@ class PedigreeTab(basetab.BaseTab):
         aligndamtop.set_padding(2, 2, 2, 2)
         aligndamtop.add(framedam)
 
-        self._root = gtk.HBox()
-        self._root.pack_start(alignsiretop, True, True, 0)
-        self._root.pack_start(aligndamtop, True, True, 0)
-        self._root.show_all()
+        self.widgets._root = gtk.HBox()
+        self.widgets._root.pack_start(alignsiretop, True, True, 0)
+        self.widgets._root.pack_start(aligndamtop, True, True, 0)
+        self.widgets._root.show_all()
 
         self._tables = [tablesire, tabledam]
         # Start immediately with an empty pedigree

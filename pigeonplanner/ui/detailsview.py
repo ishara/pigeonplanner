@@ -70,7 +70,7 @@ class DetailsDialog(gtk.Dialog):
             self.set_position(gtk.WIN_POS_MOUSE)
 
         self.details = DetailsView(self, database, parser)
-        self.vbox.pack_start(self.details.root, False, False)
+        self.vbox.pack_start(self.details.get_root_widget(), False, False)
         if mode == const.ADD:
             self.details.clear_details()
         else:
@@ -191,45 +191,45 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.pigeon = None
         self.child = None
 
-        self.pigeonimage = PigeonImageWidget(False, parent)
-        self.viewportImage.add(self.pigeonimage)
-        self.pigeonimage_edit = PigeonImageWidget(True, parent)
-        self.viewportImageEdit.add(self.pigeonimage_edit)
+        self.widgets.pigeonimage = PigeonImageWidget(False, parent)
+        self.widgets.viewportImage.add(self.widgets.pigeonimage)
+        self.widgets.pigeonimage_edit = PigeonImageWidget(True, parent)
+        self.widgets.viewportImageEdit.add(self.widgets.pigeonimage_edit)
 
-        self.combocolour.set_data(self.database, self.database.COLOURS)
-        self.combostrain.set_data(self.database, self.database.STRAINS)
-        self.comboloft.set_data(self.database, self.database.LOFTS)
+        self.widgets.combocolour.set_data(self.database, self.database.COLOURS)
+        self.widgets.combostrain.set_data(self.database, self.database.STRAINS)
+        self.widgets.comboloft.set_data(self.database, self.database.LOFTS)
 
-        self.statusdialog.set_transient_for(parent)
-        self.root.show_all()
+        self.widgets.statusdialog.set_transient_for(parent)
+        self.widgets.root.show_all()
 
     # Callbacks
     ## Status
     def on_buttonstatus_clicked(self, widget):
         if self.pigeon is None: return
         status = self.pigeon.get_active()
-        self.labelstatus.set_markup("<b>%s</b>" %_(common.statusdic[status]))
-        self.notebookstatus.set_current_page(status)
+        self.widgets.labelstatus.set_markup("<b>%s</b>" %_(common.statusdic[status]))
+        self.widgets.notebookstatus.set_current_page(status)
         self._set_status_editable(False)
-        self.hboxstatusedit.hide()
-        self.hboxstatusnormal.show()
-        self.statusdialog.show()
-        self.buttonstatusok.grab_focus()
+        self.widgets.hboxstatusedit.hide()
+        self.widgets.hboxstatusnormal.show()
+        self.widgets.statusdialog.show()
+        self.widgets.buttonstatusok.grab_focus()
 
     def on_buttonstatusedit_clicked(self, widget):
         self._set_status_editable(True)
-        self.hboxstatusedit.show()
-        self.hboxstatusnormal.hide()
-        self.statusdialog.show()
+        self.widgets.hboxstatusedit.show()
+        self.widgets.hboxstatusnormal.hide()
+        self.widgets.statusdialog.show()
 
     def on_combostatus_changed(self, widget):
         status = widget.get_active()
-        self.notebookstatus.set_current_page(status)
+        self.widgets.notebookstatus.set_current_page(status)
         self._set_status_image(status)
 
     def on_statusdialog_close(self, widget, event=None):
-        page = self.notebookstatus.get_current_page()
-        table = self.notebookstatus.get_nth_page(page)
+        page = self.widgets.notebookstatus.get_current_page()
+        table = self.widgets.notebookstatus.get_nth_page(page)
         for child in table.get_children():
             if isinstance(child, date.DateEntry):
                 try:
@@ -238,7 +238,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 except errors.InvalidInputError, msg:
                     ErrorDialog(msg.value, self.parent)
                     return True
-        self.statusdialog.hide()
+        self.widgets.statusdialog.hide()
         return True
 
     def on_findsire_clicked(self, widget):
@@ -248,6 +248,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self._run_pigeondialog(const.DAM)
 
     # Public methods
+    def get_root_widget(self):
+        return self.widgets.root
+
     def get_child(self):
         return self.child
 
@@ -259,81 +262,81 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
     def set_pedigree_mode(self, mode):
         self.pedigree_mode = mode
-        self.combosex.set_sensitive(not mode)
+        self.widgets.combosex.set_sensitive(not mode)
 
     def set_sex(self, value):
-        self.combosex.set_active(value)
+        self.widgets.combosex.set_active(value)
 
     def set_details(self, pigeon):
         if pigeon is None:
-            self.errorlabel.show()
-            self.detailbook.set_sensitive(False)
+            self.widgets.errorlabel.show()
+            self.widgets.detailbook.set_sensitive(False)
             return
 
         self.pigeon = pigeon
 
-        self.entryband.set_band(*pigeon.get_band())
-        self.entrysire.set_band(*pigeon.get_sire())
-        self.entrydam.set_band(*pigeon.get_dam())
-        self.entrysex.set_text(pigeon.get_sex_string())
-        self.entrystrain.set_text(pigeon.get_strain())
-        self.entryloft.set_text(pigeon.get_loft())
-        self.entrycolour.set_text(pigeon.get_colour())
-        self.entryname.set_text(pigeon.get_name())
+        self.widgets.entryband.set_band(*pigeon.get_band())
+        self.widgets.entrysire.set_band(*pigeon.get_sire())
+        self.widgets.entrydam.set_band(*pigeon.get_dam())
+        self.widgets.entrysex.set_text(pigeon.get_sex_string())
+        self.widgets.entrystrain.set_text(pigeon.get_strain())
+        self.widgets.entryloft.set_text(pigeon.get_loft())
+        self.widgets.entrycolour.set_text(pigeon.get_colour())
+        self.widgets.entryname.set_text(pigeon.get_name())
         extra1, extra2, extra3, extra4, extra5, extra6 = pigeon.get_extra()
-        self.entryextra1.set_text(extra1)
-        self.entryextra2.set_text(extra2)
-        self.entryextra3.set_text(extra3)
-        self.entryextra4.set_text(extra4)
-        self.entryextra5.set_text(extra5)
-        self.entryextra6.set_text(extra6)
+        self.widgets.entryextra1.set_text(extra1)
+        self.widgets.entryextra2.set_text(extra2)
+        self.widgets.entryextra3.set_text(extra3)
+        self.widgets.entryextra4.set_text(extra4)
+        self.widgets.entryextra5.set_text(extra5)
+        self.widgets.entryextra6.set_text(extra6)
 
         self._set_status(pigeon.get_pindex(), pigeon.get_active())
 
-        self.pigeonimage.set_image(pigeon.get_image())
+        self.widgets.pigeonimage.set_image(pigeon.get_image())
 
     def get_edit_details(self):
-        ring, year = self.entrybandedit.get_band()
-        ringsire, yearsire = self.entrysireedit.get_band()
-        ringdam, yeardam = self.entrydamedit.get_band()
+        ring, year = self.widgets.entrybandedit.get_band()
+        ringsire, yearsire = self.widgets.entrysireedit.get_band()
+        ringdam, yeardam = self.widgets.entrydamedit.get_band()
         if self.pigeon is None:
             show = 0 if self.pedigree_mode else 1
         else:
             show = self.pigeon.get_visible()
         datalist = [ring, year,
-                    self.combosex.get_active_text(),
+                    self.widgets.combosex.get_active_text(),
                     show,
-                    self.combostatus.get_active(),
-                    self.combocolour.child.get_text(),
-                    self.entrynameedit.get_text(),
-                    self.combostrain.child.get_text(),
-                    self.comboloft.child.get_text(),
-                    self.pigeonimage_edit.get_image_path(),
+                    self.widgets.combostatus.get_active(),
+                    self.widgets.combocolour.child.get_text(),
+                    self.widgets.entrynameedit.get_text(),
+                    self.widgets.combostrain.child.get_text(),
+                    self.widgets.comboloft.child.get_text(),
+                    self.widgets.pigeonimage_edit.get_image_path(),
                     ringsire, yearsire, ringdam, yeardam,
-                    self.entryextraedit1.get_text(),
-                    self.entryextraedit2.get_text(),
-                    self.entryextraedit3.get_text(),
-                    self.entryextraedit4.get_text(),
-                    self.entryextraedit5.get_text(),
-                    self.entryextraedit6.get_text()]
+                    self.widgets.entryextraedit1.get_text(),
+                    self.widgets.entryextraedit2.get_text(),
+                    self.widgets.entryextraedit3.get_text(),
+                    self.widgets.entryextraedit4.get_text(),
+                    self.widgets.entryextraedit5.get_text(),
+                    self.widgets.entryextraedit6.get_text()]
         return datalist
 
     def clear_details(self):
-        self.entryband.clear()
-        self.entrybandedit.clear()
-        self.entrysire.clear()
-        self.entrysireedit.clear()
-        self.entrydam.clear()
-        self.entrydamedit.clear()
+        self.widgets.entryband.clear()
+        self.widgets.entrybandedit.clear()
+        self.widgets.entrysire.clear()
+        self.widgets.entrysireedit.clear()
+        self.widgets.entrydam.clear()
+        self.widgets.entrydamedit.clear()
 
-        self.combocolour.child.set_text('')
-        self.combostrain.child.set_text('')
-        self.comboloft.child.set_text('')
-        self.combosex.set_active(0)
-        self.combostatus.set_active(1)
-        self.combostatus.emit('changed')
+        self.widgets.combocolour.child.set_text('')
+        self.widgets.combostrain.child.set_text('')
+        self.widgets.comboloft.child.set_text('')
+        self.widgets.combosex.set_active(0)
+        self.widgets.combostatus.set_active(1)
+        self.widgets.combostatus.emit('changed')
 
-        self.pigeonimage.set_default_image()
+        self.widgets.pigeonimage.set_default_image()
 
         for entry in self.get_objects_from_prefix("entry"):
             if isinstance(entry, bandentry.BandEntry): continue
@@ -346,32 +349,35 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self._operation = operation
         if operation == const.EDIT:
             logger.debug("Start editing pigeon '%s'", self.pigeon.get_pindex())
-            self.entrybandedit.set_band(*self.entryband.get_band(validate=False))
-            self.entrysireedit.set_band(*self.entrysire.get_band(validate=False))
-            self.entrydamedit.set_band(*self.entrydam.get_band(validate=False))
-            self.entrynameedit.set_text(self.entryname.get_text())
-            self.entryextraedit1.set_text(self.entryextra1.get_text())
-            self.entryextraedit2.set_text(self.entryextra2.get_text())
-            self.entryextraedit3.set_text(self.entryextra3.get_text())
-            self.entryextraedit4.set_text(self.entryextra4.get_text())
-            self.entryextraedit5.set_text(self.entryextra5.get_text())
-            self.entryextraedit6.set_text(self.entryextra6.get_text())
-            self.combocolour.child.set_text(self.entrycolour.get_text())
-            self.combostrain.child.set_text(self.entrystrain.get_text())
-            self.comboloft.child.set_text(self.entryloft.get_text())
-            self.combosex.set_active(int(self.pigeon.get_sex()))
+            self.widgets.entrybandedit.set_band(
+                                *self.widgets.entryband.get_band(validate=False))
+            self.widgets.entrysireedit.set_band(
+                                *self.widgets.entrysire.get_band(validate=False))
+            self.widgets.entrydamedit.set_band(
+                                *self.widgets.entrydam.get_band(validate=False))
+            self.widgets.entrynameedit.set_text(self.widgets.entryname.get_text())
+            self.widgets.entryextraedit1.set_text(self.widgets.entryextra1.get_text())
+            self.widgets.entryextraedit2.set_text(self.widgets.entryextra2.get_text())
+            self.widgets.entryextraedit3.set_text(self.widgets.entryextra3.get_text())
+            self.widgets.entryextraedit4.set_text(self.widgets.entryextra4.get_text())
+            self.widgets.entryextraedit5.set_text(self.widgets.entryextra5.get_text())
+            self.widgets.entryextraedit6.set_text(self.widgets.entryextra6.get_text())
+            self.widgets.combocolour.child.set_text(self.widgets.entrycolour.get_text())
+            self.widgets.combostrain.child.set_text(self.widgets.entrystrain.get_text())
+            self.widgets.comboloft.child.set_text(self.widgets.entryloft.get_text())
+            self.widgets.combosex.set_active(int(self.pigeon.get_sex()))
 
             status = self.pigeon.get_active()
-            self.combostatus.set_active(status)
-            self.notebookstatus.set_current_page(status)
+            self.widgets.combostatus.set_active(status)
+            self.widgets.notebookstatus.set_current_page(status)
 
-            image = self.pigeonimage.get_image_path()
-            self.pigeonimage_edit.set_image(image)
+            image = self.widgets.pigeonimage.get_image_path()
+            self.widgets.pigeonimage_edit.set_image(image)
         else:
             logger.debug("Start adding a pigeon")
 
-        self.detailbook.set_current_page(1)
-        self.entrybandedit.grab_focus()
+        self.widgets.detailbook.set_current_page(1)
+        self.widgets.entrybandedit.grab_focus()
 
     def operation_saved(self):
         """ Collect pigeon data, save it to the database and do the required
@@ -408,9 +414,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             self.pigeon = self.parser.add_pigeon(pindex=data[0])
         self.set_details(self.pigeon)
         self.emit('edit-finished', self.pigeon, self._operation)
-        combodata = [(self.combocolour, data[6], self.database.COLOURS),
-                     (self.combostrain, data[8], self.database.STRAINS),
-                     (self.comboloft, data[9], self.database.LOFTS)]
+        combodata = [(self.widgets.combocolour, data[6], self.database.COLOURS),
+                     (self.widgets.combostrain, data[8], self.database.STRAINS),
+                     (self.widgets.comboloft, data[9], self.database.LOFTS)]
         for combo, value, table in combodata:
             self._update_combo_data(combo, value, table)
         logger.debug("Operation '%s' finished", self._operation)
@@ -425,42 +431,42 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
     def _set_status_image(self, status):
         image = os.path.join(const.IMAGEDIR,
                              'status_%s.png' % common.statusdic[status].lower())
-        self.imagestatus.set_from_file(image)
-        self.imagestatus.set_tooltip_text(_(common.statusdic[status]))
-        self.imagestatusedit.set_from_file(image)
+        self.widgets.imagestatus.set_from_file(image)
+        self.widgets.imagestatus.set_tooltip_text(_(common.statusdic[status]))
+        self.widgets.imagestatusedit.set_from_file(image)
 
     def _set_status(self, pindex, status):
         self._set_status_image(status)
         if status == const.DEAD:
             data = self.database.get_dead_data(pindex)
             if data:
-                self.entrydatedead.set_text(data[0])
-                self.textinfodead.get_buffer().set_text(data[1])
+                self.widgets.entrydatedead.set_text(data[0])
+                self.widgets.textinfodead.get_buffer().set_text(data[1])
         elif status == const.SOLD:
             data = self.database.get_sold_data(pindex)
             if data:
-                self.entrydatesold.set_text(data[1])
-                self.entrybuyersold.set_text(data[0])
-                self.textinfosold.get_buffer().set_text(data[2])
+                self.widgets.entrydatesold.set_text(data[1])
+                self.widgets.entrybuyersold.set_text(data[0])
+                self.widgets.textinfosold.get_buffer().set_text(data[2])
         elif status == const.LOST:
             data = self.database.get_lost_data(pindex)
             if data:
-                self.entrydatelost.set_text(data[1])
-                self.entrypointlost.set_text(data[0])
-                self.textinfolost.get_buffer().set_text(data[2])
+                self.widgets.entrydatelost.set_text(data[1])
+                self.widgets.entrypointlost.set_text(data[0])
+                self.widgets.textinfolost.get_buffer().set_text(data[2])
         elif status == const.BREEDER:
             data = self.database.get_breeder_data(pindex)
             if data:
-                self.entrydatebreedfrom.set_text(data[0])
-                self.entrydatebreedto.set_text(data[1])
-                self.textinfobreeder.get_buffer().set_text(data[2])
+                self.widgets.entrydatebreedfrom.set_text(data[0])
+                self.widgets.entrydatebreedto.set_text(data[1])
+                self.widgets.textinfobreeder.get_buffer().set_text(data[2])
         elif status == const.LOANED:
             data = self.database.get_loan_data(pindex)
             if data:
-                self.entrydateloan.set_text(data[0])
-                self.entrydateloanback.set_text(data[1])
-                self.entrypersonloan.set_text(data[2])
-                self.textinfoloan.get_buffer().set_text(data[3])
+                self.widgets.entrydateloan.set_text(data[0])
+                self.widgets.entrydateloanback.set_text(data[1])
+                self.widgets.entrypersonloan.set_text(data[2])
+                self.widgets.textinfoloan.get_buffer().set_text(data[3])
 
     def _set_status_editable(self, value):
         def set_editable(widget, value):
@@ -470,7 +476,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 widget.set_editable(value)
             except:
                 pass
-        for table in self.notebookstatus.get_children():
+        for table in self.widgets.notebookstatus.get_children():
             table.foreach(set_editable, value)
 
     def _update_combo_data(self, combo, data, table):
@@ -487,29 +493,29 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         model.set_sort_column_id(0, gtk.SORT_ASCENDING)
 
     def _get_status_info(self):
-        bffr = self.textinfodead.get_buffer()
-        dead = [self.entrydatedead.get_text(),
+        bffr = self.widgets.textinfodead.get_buffer()
+        dead = [self.widgets.entrydatedead.get_text(),
                 bffr.get_text(*bffr.get_bounds())]
 
-        bffr = self.textinfosold.get_buffer()
-        sold = [self.entrybuyersold.get_text(),
-                self.entrydatesold.get_text(),
+        bffr = self.widgets.textinfosold.get_buffer()
+        sold = [self.widgets.entrybuyersold.get_text(),
+                self.widgets.entrydatesold.get_text(),
                 bffr.get_text(*bffr.get_bounds())]
 
-        bffr = self.textinfolost.get_buffer()
-        lost = [self.entrypointlost.get_text(),
-                self.entrydatelost.get_text(),
+        bffr = self.widgets.textinfolost.get_buffer()
+        lost = [self.widgets.entrypointlost.get_text(),
+                self.widgets.entrydatelost.get_text(),
                 bffr.get_text(*bffr.get_bounds())]
 
-        bffr = self.textinfobreeder.get_buffer()
-        breed = [self.entrydatebreedfrom.get_text(),
-                 self.entrydatebreedto.get_text(),
+        bffr = self.widgets.textinfobreeder.get_buffer()
+        breed = [self.widgets.entrydatebreedfrom.get_text(),
+                 self.widgets.entrydatebreedto.get_text(),
                  bffr.get_text(*bffr.get_bounds())]
 
-        bffr = self.textinfoloan.get_buffer()
-        loan = [self.entrydateloan.get_text(),
-                self.entrydateloanback.get_text(),
-                self.entrypersonloan.get_text(),
+        bffr = self.widgets.textinfoloan.get_buffer()
+        loan = [self.widgets.entrydateloan.get_text(),
+                self.widgets.entrydateloanback.get_text(),
+                self.widgets.entrypersonloan.get_text(),
                 bffr.get_text(*bffr.get_bounds())]
 
         return dead, sold, lost, breed, loan
@@ -538,20 +544,20 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
     def _run_pigeondialog(self, sex):
         try:
-            pindex = self.entrybandedit.get_pindex()
+            pindex = self.widgets.entrybandedit.get_pindex()
         except errors.InvalidInputError:
             ErrorDialog(messages.MSG_NO_PARENT, self.parent)
             return
-        band, year = self.entrybandedit.get_band()
+        band, year = self.widgets.entrybandedit.get_band()
         dialog = dialogs.PigeonListDialog(self.parent)
         dialog.fill_treeview(self.parser, pindex, sex, year)
         response = dialog.run()
         if response == gtk.RESPONSE_APPLY:
             pigeon = dialog.get_selected()
             if pigeon.is_cock():
-                self.entrysireedit.set_pindex(pigeon.get_pindex())
+                self.widgets.entrysireedit.set_pindex(pigeon.get_pindex())
             else:
-                self.entrydamedit.set_pindex(pigeon.get_pindex())
+                self.widgets.entrydamedit.set_pindex(pigeon.get_pindex())
         dialog.destroy()
 
     def _update_pigeon_data(self, datalist):
@@ -585,7 +591,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             except:
                 pass
         # Update the status or create a new record
-        status = self.combostatus.get_active()
+        status = self.widgets.combostatus.get_active()
         old_status = self.pigeon.get_active()
         dead, sold, lost, breed, loan = self._get_status_info()
         if status != old_status:
@@ -632,6 +638,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 return
         # Checks say that this is really a none existing pigeon, so add it
         self.database.insert_into_table(self.database.PIGEONS, datalist)
-        status = self.combostatus.get_active()
+        status = self.widgets.combostatus.get_active()
         self._insert_status_data(status, pindex)
 
