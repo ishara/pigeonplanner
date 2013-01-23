@@ -65,6 +65,7 @@ log = logging.getLogger(".libcairodoc")
 # GTK modules
 #
 #-------------------------------------------------------------------------
+import gobject
 import pango
 
 #------------------------------------------------------------------------
@@ -1076,9 +1077,13 @@ class GtkDocPictureDraw(GtkDocBaseElement):
         img_height = self._height * dpi_y / 2.54
         
         # load the image
-        pixbuf = ReportUtils.resize_to_buffer(self._filename,
-                                              [img_width, img_height],
-                                              self._crop)
+        try:
+            pixbuf = ReportUtils.resize_to_buffer(self._filename,
+                                                  [img_width, img_height],
+                                                  self._crop)
+        except gobject.GError:
+            log.error("Couldn't load image %s", self._filename)
+            return
         pixbuf_width = pixbuf.get_width()
         pixbuf_height = pixbuf.get_height()
 
