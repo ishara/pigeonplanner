@@ -19,15 +19,24 @@
 
 import os
 import os.path
+import glob
 import subprocess
 from optparse import OptionParser
-
-import msgfmt
 
 
 POTFILE = "po/pigeonplanner.pot"
 POTFILES = {"Python": "po/POTFILES_PY.in",
             "Glade": "po/POTFILES_GLADE.in"}
+FORMATS = {"Python": [('bin', None),
+                      ('pigeonplanner', ['.py'])],
+           "Glade": [('glade', ['.ui']),
+                     ('data', ['.ui'])]}
+GLADE_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkDialog" id="dialog1">
+%s
+  </object>
+</interface>"""
 
 
 def _get_files(folder, ext=None):
@@ -46,11 +55,7 @@ def create_potfiles_in():
     be searched for translatable strings.
     """
 
-    formats = {"Python": [('bin', None),
-                          ('pigeonplanner', ['.py'])],
-               "Glade": [('glade', ['.ui'])]}
-
-    for format, folders in formats.items(): 
+    for format, folders in FORMATS.items():
         potfile = POTFILES[format]
         print "Creating %s" %potfile
         to_translate = []
@@ -95,13 +100,50 @@ def create_mo():
                 os.makedirs(dest_path)
             if not os.path.exists(dest):
                 print('Compiling %s' %src)
-                msgfmt.make(src, dest)
+                subprocess.call(["msgfmt", src, "-o", dest])
             else:
                 src_mtime = os.stat(src)[8]
                 dest_mtime = os.stat(dest)[8]
                 if src_mtime > dest_mtime:
                     print('Compiling %s' %src)
-                    msgfmt.make(src, dest)
+                    subprocess.call(["msgfmt", src, "-o", dest])
+
+def bug_workaround():
+    # There's a bug in xgettext which doesn't extract translatable rows added
+    # to a liststore in Glade. Like the following:
+    #  <object class="GtkListStore" id="liststore1">
+    #    <columns>
+    #      <!-- column-name item -->
+    #      <column type="gchararray"/>
+    #    </columns>
+    #    <data>
+    #      <row>
+    #        <col id="0" translatable="yes">Spam</col>
+    #      </row>
+    #      <row>
+    #        <col id="0" translatable="yes">Eggs</col>
+    #      </row>
+    #    </data>
+    #  </object>
+    # Bugreport: https://savannah.gnu.org/bugs/index.php?29216
+    #
+    # We're going to extract these fields ourself and create a new Glade file
+    # with the same strings, but in a field xgettext does parse.
+
+    import xml.etree.ElementTree as ET
+
+    corrected = []
+    for gladefile in glob.glob("glade/*.ui"):
+        tree = ET.parse(gladefile)
+        root = tree.getroot()
+        for col in root.iter('col'):
+            if col.attrib["translatable"] == "yes":
+                corrected.append('    <property translatable="yes">%s</property>'
+                                 % col.text)
+
+    twfile = open("data/TranslationWorkaround.ui", "w")
+    twfile.write(GLADE_TEMPLATE % '\n'.join(corrected))
+    twfile.close()
 
 def main():
     parser = OptionParser()
@@ -114,7 +156,11 @@ def main():
     options, args = parser.parse_args()
     if options.pot:
         # Remove existing pot-file to start with a clean template.
-        os.remove(POTFILE)
+        try:
+            os.remove(POTFILE)
+        except:
+            pass
+        bug_workaround()
         create_potfiles_in()
         create_potfile()
     if options.mo:
