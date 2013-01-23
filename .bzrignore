@@ -3,3 +3,4 @@
 ./languages
 ./MANIFEST
 ./dist
+./data/TranslationWorkaround.ui

@@ -1,3 +1,27 @@
+1.8.0:
+ * Complete report rewrite
+ * Complete rewrite of configuration backend
+ * Added option to hide deleted pigeons in lists
+ * Added option to color row of deleted pigeons in lists
+ * Added option to check for development updates
+ * Added option to set custom coefficient multiplier
+ * Added edit option to relatives
+ * Added message when no pigeon is found in relatives
+ * Added default icon for all windows
+ * Change cursor when hovering over image
+ * Fixed unhandled exception when loft coordinates are not set
+ * Fixed missing pedigreeboxes on recent GTK+
+ * Fixed photoalbum window position
+ * Fixed error on pedigree shortcut when no pigeon is selected
+ * Fixed automatic selection of pigeon
+ * Fixed add range label in menu
+ * Fixed default language value
+ * Expand all settings categories by default
+ * Don't show database upgrade message on new database
+ * Split column options into seperate category
+ * Updated setup files
+ * Updated translations
+
 1.6.2:
  * Fixed focus issues in detailsview
  * Fixed time input in velocity calculator
