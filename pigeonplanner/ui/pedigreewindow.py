@@ -19,12 +19,15 @@
 A detailed pedigree of the selected pigeon.
 """
 
+import os
 
 import gtk
 
 from pigeonplanner import common
+from pigeonplanner import config
 from pigeonplanner.ui import tools
 from pigeonplanner.ui.filechooser import PdfSaver
+from pigeonplanner.ui.messagedialog import InfoDialog
 from pigeonplanner.reportlib import (report, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports import get_pedigree
@@ -184,6 +187,21 @@ class PedigreeWindow(gtk.Window):
         userinfo = common.get_own_address(self.database)
         if not tools.check_user_info(self, self.database, userinfo['name']):
             return
+
+        # Show a message to the user if the original image is not found and
+        # can't be shown on the pedigree
+        if config.get('printing.pedigree-image') and self.pigeon.image is not None:
+            if not os.path.exists(self.pigeon.image):
+                msg = (_("Cannot find image '%s'"),
+                       _("You need to edit the pigeon and select the correct "
+                         "path or restore the original image on your computer."),
+                       '')
+                # In some very old versions, an empty image was stored as an
+                # empty string instead of None. Don't show this message in cases
+                # like this ofcourse.
+                if not self.pigeon.image == '':
+                    InfoDialog(msg, self, self.pigeon.image)
+                self.pigeon.image = None
 
         PedigreeReport, PedigreeReportOptions = get_pedigree()
         psize = common.get_pagesize_from_opts()
