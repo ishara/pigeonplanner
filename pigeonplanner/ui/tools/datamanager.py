@@ -18,14 +18,13 @@
 
 import gtk
 
-import const
-import common
-import builder
-import database
-import messages
-from ui.widgets import comboboxes
-from ui.messagedialog import QuestionDialog
-from translation import gettext as _
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import builder
+from pigeonplanner import database
+from pigeonplanner import messages
+from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 class DataManager(builder.GtkBuilder):

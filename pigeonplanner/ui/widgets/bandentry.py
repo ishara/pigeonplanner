@@ -19,9 +19,9 @@
 import gtk
 import gobject
 
-import common
-import errors
-import messages
+from pigeonplanner import common
+from pigeonplanner import errors
+from pigeonplanner import messages
 
 
 class BandEntry(gtk.Viewport):

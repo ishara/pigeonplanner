@@ -20,11 +20,10 @@ import os.path
 
 import gtk
 
-import builder
-import filechooser
-from export import get_exporters
-from ui.messagedialog import ErrorDialog
-from translation import gettext as _
+from pigeonplanner import builder
+from pigeonplanner.export import get_exporters
+from pigeonplanner.ui import filechooser
+from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class ExportWindow(builder.GtkBuilder):

@@ -16,9 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from translation import gettext as _
-
-
 ERROR = _("Error")
 WARNING = _("Warning")
 

@@ -29,33 +29,42 @@ logger = logging.getLogger(__name__)
 
 import gtk
 
-import const
-import common
-import config
-import backup
-import checks
-import update
-import errors
-import builder
-import messages
-import thumbnail
-from ui import tabs
-from ui import tools
-from ui import utils
-from ui import dialogs
-from ui import pedigree
-from ui import logdialog
-from ui import detailsview
-from ui import exportwindow
-from ui import optionsdialog
-from ui import pedigreewindow
-from ui.widgets import treeview
-from ui.widgets import statusbar
-from ui.messagedialog import ErrorDialog, InfoDialog, QuestionDialog
-from reportlib import report
-from reports import get_pedigree
-from reports.pigeons import PigeonsReport, PigeonsReportOptions
-from translation import gettext as _
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import config
+from pigeonplanner import backup
+from pigeonplanner import checks
+from pigeonplanner import update
+from pigeonplanner import errors
+from pigeonplanner import builder
+from pigeonplanner import messages
+from pigeonplanner import thumbnail
+from pigeonplanner.ui import tabs
+from pigeonplanner.ui import tools
+from pigeonplanner.ui import utils
+from pigeonplanner.ui import dialogs
+from pigeonplanner.ui import pedigree
+from pigeonplanner.ui import logdialog
+from pigeonplanner.ui import detailsview
+from pigeonplanner.ui import exportwindow
+from pigeonplanner.ui import optionsdialog
+from pigeonplanner.ui import pedigreewindow
+from pigeonplanner.ui.widgets import treeview
+from pigeonplanner.ui.widgets import statusbar
+from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog, QuestionDialog
+from pigeonplanner.reportlib import report
+from pigeonplanner.reports import get_pedigree
+from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions
+
+try:
+    from gtkosx_application import Application
+except ImportError:
+    gtkosx = None
+    if const.OSX:
+        logger.error("Unable to import gtkosx_application")
+else:
+    # Need to be called as early as possible
+    gtkosx = Application()
 
 
 class MainWindow(gtk.Window, builder.GtkBuilder):
@@ -194,6 +203,13 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                   config.get('interface.window-y'))
         self.show()
         self.widgets.treeview.grab_focus()
+
+        if gtkosx is not None:
+            def osx_quit(*args):
+                self.quit_program(bckp=False)
+                return False
+            gtkosx.connect("NSApplicationBlockTermination", osx_quit)
+            gtkosx.ready()
 
         events = self.database.get_notification(time.time())
         if events:
@@ -696,25 +712,21 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.widgets.mainvbox.pack_start(self.widgets.menubar, False, False)
         self.widgets.mainvbox.pack_start(self.widgets.toolbar, False, False)
 
-        if const.OSX:
-            try:
-                import igemacintegration as igemi
-            except ImportError:
-                logger.warning("ige-mac-integration not found")
-            else:
-                # Move the menu bar from the window to the Mac menu bar
-                self.menubar.hide()
-                igemi.ige_mac_menu_set_menu_bar(self.menubar)
+        if gtkosx is not None:
+            logger.debug("Setting up Mac menubar")
+            self.widgets.menubar.hide()
+            gtkosx.set_menu_bar(self.widgets.menubar)
 
-                # Reparent some items to the "Application" menu
-                for widget in ('/MenuBar/HelpMenu/About',
-                               '/MenuBar/EditMenu/Preferences'):
-                    item = uimanager.get_widget(widget)
-                    group = igemi.ige_mac_menu_add_app_menu_group()
-                    igemi.ige_mac_menu_add_app_menu_item(group, item, None)
+            quit = uimanager.get_widget('/MenuBar/FileMenu/Quit')
+            quit.hide()
 
-                quit_item = uimanager.get_widget('/MenuBar/FileMenu/Quit')
-                igemi.ige_mac_menu_set_quit_menu_item(quit_item)
+            about = uimanager.get_widget('/MenuBar/HelpMenu/About')
+            upd = uimanager.get_widget('/MenuBar/HelpMenu/Update')
+            prefs = uimanager.get_widget('/MenuBar/EditMenu/Preferences')
+            gtkosx.insert_app_menu_item(about, 0)
+            gtkosx.insert_app_menu_item(gtk.SeparatorMenuItem(), 1)
+            gtkosx.insert_app_menu_item(upd, 2)
+            gtkosx.insert_app_menu_item(prefs, 3)
 
     def _clear_pigeon_data(self):
         self.detailsview.clear_details()

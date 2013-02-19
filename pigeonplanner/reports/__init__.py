@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import config
+from pigeonplanner import config
 
 
 def get_pedigree(layout=None):
@@ -24,9 +24,9 @@ def get_pedigree(layout=None):
         layout = config.get('printing.pedigree-layout')
 
     if layout == 0:
-        from pedigrees.original import PedigreeReport, PedigreeReportOptions
+        from .pedigrees.original import PedigreeReport, PedigreeReportOptions
     elif layout == 1:
-        from pedigrees.swapped_details import PedigreeReport, PedigreeReportOptions
+        from .pedigrees.swapped_details import PedigreeReport, PedigreeReportOptions
 
     return PedigreeReport, PedigreeReportOptions
 

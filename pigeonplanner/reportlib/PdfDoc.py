@@ -38,7 +38,7 @@ import sys
 #
 #------------------------------------------------------------------------
 import libcairodoc
-from reportlib.docgen import INDEX_TYPE_ALP, INDEX_TYPE_TOC
+from .docgen import INDEX_TYPE_ALP, INDEX_TYPE_TOC
 
 #------------------------------------------------------------------------
 #

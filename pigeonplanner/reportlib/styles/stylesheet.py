@@ -44,10 +44,10 @@ def escxml(string):
 # GRAMPS modules
 #
 #-------------------------------------------------------------------------
-from paragraphstyle import ParagraphStyle
-from fontstyle import FontStyle
-from tablestyle import TableStyle, TableCellStyle
-from graphicstyle import GraphicsStyle
+from .paragraphstyle import ParagraphStyle
+from .fontstyle import FontStyle
+from .tablestyle import TableStyle, TableCellStyle
+from .graphicstyle import GraphicsStyle
 
 #-------------------------------------------------------------------------
 #

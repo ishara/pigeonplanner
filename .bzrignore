@@ -4,3 +4,5 @@
 ./MANIFEST
 ./dist
 ./data/TranslationWorkaround.ui
+./dev
+./pigeonplanner.egg-info

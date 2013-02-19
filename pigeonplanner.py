@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # This file is part of Pigeon Planner.
@@ -16,9 +17,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from .dtd import DTDParser
+""" Simple script to start Pigeon Planner from the source directory. """
 
 
-def get_all_parsers():
-    return [DTDParser]
-
+from pigeonplanner import main
+main.start_ui()

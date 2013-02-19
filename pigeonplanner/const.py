@@ -78,9 +78,17 @@ else:
 #           * os.path.abspath(u'languages') => unicode, doesn't work
 #           * os.path.abspath('languages') => str, does work
 if hasattr(sys, "frozen"):
-    ROOTDIR = os.path.abspath(os.path.dirname(
-                unicode(sys.executable, sys.getfilesystemencoding())))
-    LANGDIR = os.path.abspath('languages')
+    if WINDOWS:
+        ROOTDIR = os.path.abspath(os.path.dirname(
+                    unicode(sys.executable, sys.getfilesystemencoding())))
+        LANGDIR = os.path.abspath('languages')
+    elif OSX:
+        launcher = os.path.dirname(
+                            unicode(sys.executable, sys.getfilesystemencoding()))
+        data = os.path.join(launcher, '..', 'Resources', 'share', 'pigeonplanner')
+        ROOTDIR = os.path.abspath(data)
+        LANGDIR = os.path.join(ROOTDIR, 'languages')
+        del launcher, data
 else:
     ROOTDIR = os.path.abspath(os.path.dirname(
                 unicode(__file__, sys.getfilesystemencoding())))

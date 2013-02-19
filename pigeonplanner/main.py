@@ -24,18 +24,30 @@ main Pigeon Planner program and the database tool script.
 import os
 import os.path
 import sys
+import locale
+import gettext
 import logging
 import platform
 import webbrowser
 from optparse import OptionParser
+from threading import Thread
 
-import gtk
+try:
+    import pygtk; pygtk.require('2.0')
+except:
+    print "The Python GTK (PyGTK) bindings are required to run this program."
+    sys.exit(1)
+
 import gobject
+gobject.threads_init()
 
-import const
+try:
+    import gtk
+except:
+    print "The GTK+ runtime is required to run this program."
+    sys.exit(1)
 
-
-WIN32 = sys.platform.startswith("win")
+from pigeonplanner import const
 
 
 def get_operating_system():
@@ -47,6 +59,7 @@ def get_operating_system():
         distname, version, nick = platform.linux_distribution()
         distribution = "%s %s" % (distname, version)
     elif operatingsystem == "Darwin":
+        operatingsystem = "Mac OS X"
         release, versioninfo, machine = platform.mac_ver()
         distribution = release
     else:
@@ -77,11 +90,11 @@ class Startup(object):
 
         # py2exe detection
         py2exe = False
-        if WIN32 and hasattr(sys, 'frozen'):
+        if const.WINDOWS and hasattr(sys, 'frozen'):
             py2exe = True
 	
         # Disable py2exe log feature
-        if WIN32 and py2exe:
+        if const.WINDOWS and py2exe:
             try:
                 sys.stdout = open("nul", "w")
                 sys.stderr = open("nul", "w")
@@ -119,9 +132,53 @@ class Startup(object):
             raise SystemExit(text)
 
     def setup_locale(self):
-        import config
-        import translation
-        translation.setup(config.get('options.language'))
+        from pigeonplanner import config
+        language = config.get('options.language')
+        localedomain = const.DOMAIN
+        localedir = const.LANGDIR
+
+        if language in ('def', 'Default'):
+            language = ''
+            try:
+                language = os.environ["LANG"]
+            except KeyError:
+                language = locale.getlocale()[0]
+                if not language:
+                    try:
+                        language = locale.getdefaultlocale()[0] + '.UTF-8'
+                    except (TypeError, ValueError):
+                        pass
+        else:
+            language = locale.normalize(language).split('.')[0] + '.UTF-8'
+
+##        if const.OSX and 'LANG' not in os.environ:
+##            import subprocess
+##            loc_cmd = ('defaults', 'read', 'NSGlobalDomain', 'AppleLocale')
+##            process = subprocess.Popen(loc_cmd, stdout=subprocess.PIPE)
+##            output, error_output = process.communicate()
+##            language = output.strip() + '.UTF-8'
+
+        os.environ["LANG"] = language
+        os.environ["LANGUAGE"] = language
+
+        gettext.bindtextdomain(localedomain, localedir)
+        gettext.bind_textdomain_codeset(localedomain, 'UTF-8')
+        gettext.textdomain(localedomain)
+        gettext.install(localedomain, localedir, unicode=True)
+        try:
+            locale.bindtextdomain(localedomain, localedir)
+        except AttributeError:
+            # locale has no bindtextdomain on Windows, fall back to intl.dll
+            if const.WINDOWS:
+                from ctypes import cdll
+                cdll.msvcrt._putenv('LANG=%s' % language)
+                cdll.msvcrt._putenv('LANGUAGE=%s' % language)
+
+                libintl = cdll.intl
+                libintl.bindtextdomain(localedomain, localedir)
+                libintl.bind_textdomain_codeset(localedomain, 'UTF-8')
+                libintl.textdomain(localedomain)
+                del libintl
 
     def setup_logging(self):
         """
@@ -160,10 +217,10 @@ class Startup(object):
             self.logger.debug("First run")
 
     def setup_theme(self):
-        import config
+        from pigeonplanner import config
         # Set theme
         themedir = '.\\share\\themes'
-        if WIN32 and os.path.exists(themedir):
+        if const.WINDOWS and os.path.exists(themedir):
             themes = os.listdir(themedir)
             try:
                 theme = themes[config.get('interface.theme')]
@@ -173,8 +230,7 @@ class Startup(object):
             themefile = os.path.join(themedir, theme, 'gtk-2.0\\gtkrc')
             gtk.rc_parse(themefile)
 
-        import common
-        from translation import gettext as _
+        from pigeonplanner import common
         # Register custom stock icons
         common.create_stock_button([
                 ('icon_pedigree_detail.png', 'pedigree-detail', _('Pedigree')),
@@ -193,20 +249,20 @@ class Startup(object):
         Setup the database and check if it needs an update
         """
 
-        import database
+        from pigeonplanner import database
 
         self.db = database.DatabaseOperations()
         try:
             changed = self.db.check_schema()
         except KeyError:
-            import messages
-            from ui.messagedialog import ErrorDialog
+            from pigeonplanner import messages
+            from pigeonplanner.ui.messagedialog import ErrorDialog
             ErrorDialog(messages.MSG_NEW_DATABASE)
             raise SystemExit()
 
         if changed:
-            import messages
-            from ui.messagedialog import InfoDialog
+            from pigeonplanner import messages
+            from pigeonplanner.ui.messagedialog import InfoDialog
             InfoDialog(messages.MSG_UPDATED_DATABASE)
 
     def setup_pigeons(self):
@@ -214,13 +270,13 @@ class Startup(object):
         Setup the pigeon parser object which will hold all the pigeons
         """
 
-        import pigeonparser
+        from pigeonplanner import pigeonparser
 
         self.parser = pigeonparser.PigeonParser(self.db)
         self.parser.build_pigeons()
 
     def search_updates(self):
-        import update
+        from pigeonplanner import update
 
         try:
             new, msg = update.update()
@@ -234,8 +290,8 @@ class Startup(object):
             self.logger.info("AutoUpdate: %s" %msg)
 
     def update_dialog(self):
-        import messages
-        from ui.messagedialog import QuestionDialog
+        from pigeonplanner import messages
+        from pigeonplanner.ui.messagedialog import QuestionDialog
 
         if QuestionDialog(messages.MSG_UPDATE_NOW).run():
             webbrowser.open(const.DOWNLOADURL)
@@ -248,6 +304,38 @@ class Startup(object):
         tb = "".join(traceback.format_exception(type_, value, tb))
         self.logger.critical("Unhandled exception\n%s" % tb)
 
-        from ui import exceptiondialog
+        from pigeonplanner.ui import exceptiondialog
         exceptiondialog.ExceptionDialog(self.db, tb)
+
+
+def start_ui():
+    app = Startup()
+    app.setup_locale()
+    app.setup_theme()
+    app.setup_database()
+    app.setup_pigeons()
+
+    from pigeonplanner import config
+    if config.get('options.check-for-updates'):
+        updatethread = Thread(None, app.search_updates, None)
+        updatethread.start()
+
+    from pigeonplanner.ui import mainwindow
+    mainwindow.MainWindow(app.db, app.parser)
+
+    gtk.main()
+
+def start_dbtool():
+    app = Startup()
+    app.setup_locale()
+    app.setup_theme()
+    app.setup_database()
+
+    from pigeonplanner.ui import databasetool
+    databasetool.DBWindow(app.db)
+
+    gtk.main()
+
+if __name__ == '__main__':
+    start_ui()
 

@@ -19,13 +19,13 @@
 import gtk
 import gobject
 
-import errors
-import common
-import builder
-from ui.widgets import comboboxes
-from ui.widgets import latlongentry
-from datamanager import DataManager
-from distancecalculator import DistanceCalculator
+from pigeonplanner import errors
+from pigeonplanner import common
+from pigeonplanner import builder
+from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui.widgets import latlongentry
+from .datamanager import DataManager
+from .distancecalculator import DistanceCalculator
 
 
 class RacepointManager(builder.GtkBuilder):

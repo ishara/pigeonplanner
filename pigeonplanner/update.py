@@ -26,9 +26,9 @@ import urllib
 import logging
 logger = logging.getLogger(__name__)
 
-import const
-import config
-import messages
+from pigeonplanner import const
+from pigeonplanner import config
+from pigeonplanner import messages
 
 
 class UpdateError(Exception):

@@ -42,8 +42,8 @@ from gettext import gettext as _
 #
 #------------------------------------------------------------------------
 import libcairodoc
-from styles.paperstyle import PAPER_PORTRAIT
-from gui.printpreview import PrintPreview
+from .styles.paperstyle import PAPER_PORTRAIT
+from .gui.printpreview import PrintPreview
 
 #------------------------------------------------------------------------
 #

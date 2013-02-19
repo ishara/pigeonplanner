@@ -18,11 +18,10 @@
 
 import gtk
 
-import common
-import config
-from ui import dialogs
-from ui.widgets import comboboxes
-from translation import gettext as _
+from pigeonplanner import common
+from pigeonplanner import config
+from pigeonplanner.ui import dialogs
+from pigeonplanner.ui.widgets import comboboxes
 
 
 FILTER = 0

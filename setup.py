@@ -22,59 +22,103 @@ This is the Pigeon Planner setup script
 """
 
 import os
+import sys
 import glob
-from distutils.core import setup
+import shutil
+from setuptools import setup, find_packages
 
-import i18n
 from pigeonplanner import const
 
 
 # Common data files
 glade_files = glob.glob('glade/*.ui')
 glade_files.extend(['glade/pigeonplannerwidgets.py', 'glade/pigeonplannerwidgets.xml'])
-data_files = [
+
+translation_files = []
+if sys.platform != 'darwin':
+    if sys.platform != 'win32':
+        import i18n
+        i18n.create_mo()
+    # Search for the translation files
+    for mofile in glob.glob('languages/*/LC_MESSAGES/pigeonplanner.mo'):
+        _, lang, _ = mofile.split(os.sep, 2)
+
+        modir = os.path.dirname(mofile)
+        if sys.platform != 'win32':
+            modir = modir.replace('languages', 'share/locale')
+        translation_files.append((modir, [mofile]))
+
+options = {"py2exe": {"compressed": 2,
+                      "optimize": 2,
+                      "includes": ['atk', 'cairo', 'gio', 'gobject',
+                                                    'pango', 'pangocairo'],
+                      "excludes": ['_gtkagg', '_tkagg', 'bsddb', 'curses',
+                                   'email', 'pywin.debugger',
+                                   'pywin.debugger.dbgcon', 'pywin.dialogs',
+                                   'tcl', 'Tkconstants', 'Tkinter'],
+                      "packages": ['encodings', 'pigeonplanner'],
+                      "dll_excludes": ['tcl84.dll', 'tk84.dll', 'w9xpopen.exe'],
+                      "bundle_files": 3,
+                      "dist_dir": "dist",
+                      "xref": False,
+                      "skip_archive": False,
+                      "ascii": False,
+                     }
+          }
+
+if sys.platform == "win32":
+    import py2exe
+
+    data_files = [
+            ('glade', glade_files),
+            ('images', glob.glob('images/*.png')),
+            ('.', ['AUTHORS', 'CHANGES', 'COPYING', 'README', 'README.dev'])]
+
+    platform_options = dict(
+                    zipfile = r"lib/library.zip",
+                    windows = [{"script" : "pigeonplanner.py",
+                                "icon_resources": [(1, "win/pigeonplanner.ico")],
+                            }]
+                        )
+else:
+    data_files = [
+            ('share/pigeonplanner/glade', glade_files),
+            ('share/pigeonplanner/images', glob.glob('images/*.png')),
             ('share/applications', ['data/pigeonplanner.desktop']),
             ('share/icons/hicolor/scalable/apps', ['images/pigeonplanner.svg']),
             ('share/pixmaps/', ['images/pigeonplanner.png']),
-            ('share/pigeonplanner/glade', glade_files),
-            ('share/pigeonplanner/images', glob.glob('images/*.png')),
-        ]
+            ]
+    platform_options = {}
 
-# Find all packages
-packages = []
-for folder, subfolders, files in os.walk('pigeonplanner'):
-    if '__init__.py' in files:
-        # It's only a package when it contains a __init__.py file
-        packages.append(folder)
 
-# Compile translation files
-i18n.create_mo()
-# Search for the translation files
-translation_files = []
-for mofile in glob.glob('languages/*/LC_MESSAGES/pigeonplanner.mo'):
-    _, lang, _ = mofile.split('/', 2)
+entry_points = {
+        "gui_scripts": [
+            "pigeonplanner = pigeonplanner.main:start_ui",
+            "pigeonplanner-db = pigeonplanner.main:start_dbtool"
+            ]
+        }
 
-    modir = os.path.dirname(mofile).replace('languages', 'share/locale')
-    translation_files.append((modir, [mofile]))
+setup(name = 'pigeonplanner',
+      version = const.VERSION,
+      description = const.DESCRIPTION,
+      long_description = """
+            Pigeon Planner is a pigeon organiser which lets the user 
+            manage their pigeons with their details, pedigree, 
+            results and more.""",
+      author = "Timo Vanwynsberghe",
+      author_email = "timovwb@gmail.com",
+      download_url = "http://www.pigeonplanner.com/download",
+      license = "GPLv3",
+      url = const.WEBSITE,
+      packages = find_packages(),
+      data_files = data_files + translation_files,
+      entry_points = entry_points,
+      options = options,
+      **platform_options
+    )
 
-def run_setup():
-    setup(name = 'pigeonplanner',
-          version = const.VERSION,
-          description = const.DESCRIPTION,
-          long_description = """
-                Pigeon Planner is a pigeon organiser which lets the user 
-                manage their pigeons with their details, pedigree, 
-                results and more.""",
-          author = "Timo Vanwynsberghe",
-          author_email = "timovwb@gmail.com",
-          download_url = "http://www.pigeonplanner.com/download",
-          license = "GPLv3",
-          url = const.WEBSITE,
-          packages = packages,
-          scripts = ["bin/pigeonplanner", "bin/pigeonplanner-db"],
-          data_files = data_files + translation_files,
-        )
-
-if __name__ == '__main__':
-    run_setup()
-
+# Remove egg-info directory which is no longer needed
+try:
+    shutil.rmtree('pigeonplanner.egg-info')
+except:
+    pass

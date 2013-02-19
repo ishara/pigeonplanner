@@ -19,12 +19,12 @@
 import logging
 logger = logging.getLogger(__name__)
 
-import const
-import common
-import builder
-import mailing
-from resultparsers import get_all_parsers
-from ui import filechooser
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import builder
+from pigeonplanner import mailing
+from pigeonplanner.resultparsers import get_all_parsers
+from pigeonplanner.ui import filechooser
 
 
 class ResultParser(builder.GtkBuilder):

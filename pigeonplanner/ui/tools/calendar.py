@@ -20,12 +20,11 @@ import time
 
 import gtk
 
-import const
-import errors
-import builder
-from ui import utils
-from ui.messagedialog import ErrorDialog
-from translation import gettext as _
+from pigeonplanner import const
+from pigeonplanner import errors
+from pigeonplanner import builder
+from pigeonplanner.ui import utils
+from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class Calendar(builder.GtkBuilder):

@@ -21,16 +21,15 @@ import operator
 
 import gtk
 
-import mime
-import common
-import builder
-import messages
-import thumbnail
-from ui import utils
-from ui import filechooser
-from ui.tabs import basetab
-from ui.messagedialog import QuestionDialog
-from translation import gettext as _
+from pigeonplanner import mime
+from pigeonplanner import common
+from pigeonplanner import builder
+from pigeonplanner import messages
+from pigeonplanner import thumbnail
+from pigeonplanner.ui import utils
+from pigeonplanner.ui import filechooser
+from pigeonplanner.ui.tabs import basetab
+from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):

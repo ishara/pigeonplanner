@@ -1,0 +1,26 @@
+-= Translations =-
+Create/update translation template:
+    python i18n.py -p
+
+Create/update compiled mo languages:
+    python i18n.py -m
+
+-= Packaging =-
+Linux:
+    python setup.py sdist
+
+Windows:
+    python setup.py py2exe
+    cd win
+    python build_installer.py
+
+Mac OS X:
+    (Not completed!)
+    jhbuild shell
+    python setup.py py2app
+    gtk-mac-bundler mac/pigeonplanner.bundle
+
+-= Other =-
+    export PYTHONPATH=dev
+    python setup.py develop --install-dir dev
+

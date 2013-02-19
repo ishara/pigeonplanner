@@ -18,12 +18,11 @@
 
 import math
 
-import errors
-import common
-import builder
-from ui.widgets import comboboxes
-from ui.messagedialog import ErrorDialog
-from translation import gettext as _
+from pigeonplanner import errors
+from pigeonplanner import common
+from pigeonplanner import builder
+from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class DistanceCalculator(builder.GtkBuilder):

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+    <repository type="git" name="github.com"
+        href="git://github.com/"/>
+
+    <metamodule id="pigeonplanner">
+        <dependencies>
+            <dep package="gtk-mac-bundler"/>
+            <dep package="pigeonplanner-python-deps"/>
+        </dependencies>
+    </metamodule>
+
+    <autotools id="gtk-mac-bundler" autogen-template="echo no configure">
+        <branch repo="github.com" module="jralls/gtk-mac-bundler.git"/>
+    </autotools>
+
+    <metamodule id="pigeonplanner-python-deps">
+        <dependencies>
+            <dep package="setuptools"/>
+            <dep package="py2app"/>
+        </dependencies>
+    </metamodule>
+    <repository type="tarball" name="pypi"
+        href="http://pypi.python.org/packages/source/"/>
+    <distutils id="setuptools">
+        <branch repo="pypi" version="0.6c11"
+            module="s/setuptools/setuptools-0.6c11.tar.gz"/>
+    </distutils>
+    <distutils id="py2app">
+        <branch repo="pypi" version="0.7.3"
+            module="p/py2app/py2app-0.7.3.tar.gz"/>
+    </distutils>
+</moduleset>

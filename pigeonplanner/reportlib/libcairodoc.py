@@ -42,13 +42,13 @@ import re
 # Gramps modules
 #
 #------------------------------------------------------------------------
-from docgen import BaseDoc, TextDoc, DrawDoc
-from styles.paragraphstyle import ParagraphStyle, PARA_ALIGN_CENTER, PARA_ALIGN_LEFT
-from styles.graphicstyle import SOLID
-from styles.tablestyle import TableCellStyle
-from styles.fontstyle import FONT_SERIF, FONT_SANS_SERIF, FONT_MONOSPACE
+from .docgen import BaseDoc, TextDoc, DrawDoc
+from .styles.paragraphstyle import ParagraphStyle, PARA_ALIGN_CENTER, PARA_ALIGN_LEFT
+from .styles.graphicstyle import SOLID
+from .styles.tablestyle import TableCellStyle
+from .styles.fontstyle import FONT_SERIF, FONT_SANS_SERIF, FONT_MONOSPACE
 import utils as ReportUtils
-from backend.cairobackend import CairoBackend
+from .backend.cairobackend import CairoBackend
 
 class PluginError(Exception): pass
 

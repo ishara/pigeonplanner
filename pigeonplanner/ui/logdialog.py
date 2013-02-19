@@ -26,8 +26,7 @@ import os.path
 import gtk
 import gobject
 
-import const
-from translation import gettext as _
+from pigeonplanner import const
 
 
 SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]

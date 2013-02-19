@@ -24,12 +24,18 @@ Provides an interface to draw the pedigree
 
 import gtk
 
-import const
-import messages
-from ui import utils
-from ui.widgets import pedigreeboxes
-from ui.detailsview import DetailsDialog
-from ui.messagedialog import InfoDialog
+from pigeonplanner import const
+from pigeonplanner import messages
+from pigeonplanner.ui import utils
+from pigeonplanner.ui.widgets import pedigreeboxes
+from pigeonplanner.ui.detailsview import DetailsDialog
+from pigeonplanner.ui.messagedialog import InfoDialog
+
+
+#TODO: Cairo-drawn boxes mess up window drawing on Mac OS X
+cairo_available = True
+if const.OSX:
+    cairo_available = False
 
 
 def build_tree(parser, pigeon, index, depth, lst):
@@ -166,7 +172,10 @@ class DrawPedigree(object):
             else:
                 child = self.pigeon if index == 0 else lst[(index - 1) / 2]
 
-            box = pedigreeboxes.PedigreeBox(pigeon, child, detailed)
+            if cairo_available:
+                box = pedigreeboxes.PedigreeBox(pigeon, child, detailed)
+            else:
+                box = pedigreeboxes.PedigreeBox_gdk(pigeon, child, detailed)
             try:
                 sex = int(pigeon.sex)
             except AttributeError:
@@ -185,7 +194,10 @@ class DrawPedigree(object):
                 else:
                     lines = 1
                     attach = 1
-                extrabox = pedigreeboxes.ExtraBox(pigeon, lines)
+                if cairo_available:
+                    extrabox = pedigreeboxes.ExtraBox(pigeon, lines)
+                else:
+                    extrabox = pedigreeboxes.ExtraBox_gdk(pigeon, lines)
                 table.attach(extrabox, x, y, w+1, h+attach)
 
             if position[1]:

@@ -21,9 +21,8 @@ import os
 import gtk
 import glib
 
-import mime
-import const
-from translation import gettext as _
+from pigeonplanner import mime
+from pigeonplanner import const
 
 
 LAST_FOLDER = None

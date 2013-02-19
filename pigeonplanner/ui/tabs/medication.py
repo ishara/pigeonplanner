@@ -18,16 +18,15 @@
 
 import gtk
 
-import const
-import common
-import errors
-import builder
-from ui import utils
-from ui import dialogs
-from ui.tabs import basetab
-from ui.widgets import comboboxes
-from ui.messagedialog import ErrorDialog
-from translation import gettext as _
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import errors
+from pigeonplanner import builder
+from pigeonplanner.ui import utils
+from pigeonplanner.ui import dialogs
+from pigeonplanner.ui.tabs import basetab
+from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):

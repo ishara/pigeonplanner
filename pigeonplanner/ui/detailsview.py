@@ -24,21 +24,20 @@ import gtk
 import gtk.gdk
 import gobject
 
-import const
-import common
-import errors
-import builder
-import messages
-import thumbnail
-import database
-from ui import tools
-from ui import utils
-from ui import dialogs
-from ui import filechooser
-from ui.widgets import date
-from ui.widgets import bandentry
-from ui.messagedialog import ErrorDialog, WarningDialog
-from translation import gettext as _
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import errors
+from pigeonplanner import builder
+from pigeonplanner import messages
+from pigeonplanner import thumbnail
+from pigeonplanner import database
+from pigeonplanner.ui import tools
+from pigeonplanner.ui import utils
+from pigeonplanner.ui import dialogs
+from pigeonplanner.ui import filechooser
+from pigeonplanner.ui.widgets import date
+from pigeonplanner.ui.widgets import bandentry
+from pigeonplanner.ui.messagedialog import ErrorDialog, WarningDialog
 
 
 RESPONSE_EDIT = 10
@@ -50,7 +49,9 @@ try:
     _ICON_ZOOM = _ICONTHEME.load_icon("gtk-find", 22, 0)
     CURSOR_ZOOM = gtk.gdk.Cursor(gtk.gdk.display_get_default(), _ICON_ZOOM, 0, 0)
 except Exception as exc:
-    logger.warning("Can't load zoom cursor icon:", exc)
+    #TODO: logging the exception causes trouble on OS X
+    ##logger.warning("Can't load zoom cursor icon:", exc)
+    logger.warning("Can't load zoom cursor icon")
     CURSOR_ZOOM = None
 
 

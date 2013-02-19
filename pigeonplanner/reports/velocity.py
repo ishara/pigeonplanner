@@ -16,10 +16,11 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from translation import gettext as _
-from reportlib.basereport import Report, ReportOptions
-from reportlib.styles import (ParagraphStyle, FontStyle, TableStyle, TableCellStyle,
-                              FONT_SANS_SERIF, PARA_ALIGN_LEFT, PARA_ALIGN_CENTER)
+from pigeonplanner.reportlib.basereport import Report, ReportOptions
+from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
+                                            TableStyle, TableCellStyle,
+                                            FONT_SANS_SERIF, PARA_ALIGN_LEFT,
+                                            PARA_ALIGN_CENTER)
 
 
 class VelocityReport(Report):

@@ -22,13 +22,12 @@ A detailed pedigree of the selected pigeon.
 
 import gtk
 
-import common
-from ui import tools
-from ui.filechooser import PdfSaver
-from translation import gettext as _
-from reportlib import (report, PRINT_ACTION_DIALOG,
-                       PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
-from reports import get_pedigree
+from pigeonplanner import common
+from pigeonplanner.ui import tools
+from pigeonplanner.ui.filechooser import PdfSaver
+from pigeonplanner.reportlib import (report, PRINT_ACTION_DIALOG,
+                                     PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
+from pigeonplanner.reports import get_pedigree
 
 
 (PREVIOUS,

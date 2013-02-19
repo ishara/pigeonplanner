@@ -18,13 +18,13 @@
 
 import gtk
 
-import const
-import errors
-import builder
-import messages
-from ui import utils
-from ui.widgets import latlongentry
-from ui.messagedialog import QuestionDialog
+from pigeonplanner import const
+from pigeonplanner import errors
+from pigeonplanner import builder
+from pigeonplanner import messages
+from pigeonplanner.ui import utils
+from pigeonplanner.ui.widgets import latlongentry
+from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 def check_user_info(parent, database, name):

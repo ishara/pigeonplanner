@@ -20,11 +20,10 @@
 import gtk
 import gobject
 
-import const
-import update
-from ui import maildialog
-from ui.messagedialog import QuestionDialog
-from translation import gettext as _
+from pigeonplanner import const
+from pigeonplanner import update
+from pigeonplanner.ui import maildialog
+from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 class ExceptionDialog(gtk.Dialog):

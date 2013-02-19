@@ -19,8 +19,6 @@
 import gtk
 import gobject
 
-from translation import gettext as _
-
 
 class _TotalLabel(gtk.Label):
     __gtype_name__ = "_TotalLabel"

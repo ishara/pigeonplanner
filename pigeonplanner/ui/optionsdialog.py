@@ -25,16 +25,15 @@ import os
 import gtk
 import gobject
 
-import const
-import common
-import config
-import builder
-import messages
-from ui.widgets import comboboxes
-from ui.messagedialog import InfoDialog, WarningDialog
-from translation import gettext as _
-from reportlib import report, PRINT_ACTION_PREVIEW
-from reports import get_pedigree
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import config
+from pigeonplanner import builder
+from pigeonplanner import messages
+from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui.messagedialog import InfoDialog, WarningDialog
+from pigeonplanner.reportlib import report, PRINT_ACTION_PREVIEW
+from pigeonplanner.reports import get_pedigree
 
 
 class OptionsDialog(builder.GtkBuilder, gobject.GObject):

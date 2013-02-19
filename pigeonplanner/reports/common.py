@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import config
+from pigeonplanner import config
 
 
 class HelperMethods(object):

@@ -20,9 +20,8 @@ Provides functions to check various entries
 """
 
 
-import const
-import errors
-import messages
+from pigeonplanner import errors
+from pigeonplanner import messages
 
 
 def check_ring_entry(inputRing, inputYear):

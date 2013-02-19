@@ -20,10 +20,10 @@ import datetime
 
 import gtk
 
-import common
-import builder
-from reportlib import report
-from reports.velocity import VelocityReport, VelocityReportOptions
+from pigeonplanner import common
+from pigeonplanner import builder
+from pigeonplanner.reportlib import report
+from pigeonplanner.reports.velocity import VelocityReport, VelocityReportOptions
 
 
 class VelocityCalculator(builder.GtkBuilder):

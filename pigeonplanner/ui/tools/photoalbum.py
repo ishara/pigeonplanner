@@ -25,8 +25,8 @@ import gobject
 import logging
 logger = logging.getLogger(__name__)
 
-import builder
-from ui import utils
+from pigeonplanner import builder
+from pigeonplanner.ui import utils
 
 
 MARGIN = 6

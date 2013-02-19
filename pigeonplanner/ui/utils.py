@@ -18,7 +18,7 @@
 
 import gtk
 
-import config
+from pigeonplanner import config
 
 
 def set_multiple_sensitive(widgets, value=None):

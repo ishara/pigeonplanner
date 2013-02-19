@@ -18,19 +18,18 @@
 
 import gtk
 
-import const
-import common
-import config
-import errors
-import builder
-import messages
-import database
-from ui import utils
-from ui import resultwindow
-from ui import resultparser
-from ui.tabs import basetab
-from ui.messagedialog import ErrorDialog, QuestionDialog
-from translation import gettext as _
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import config
+from pigeonplanner import errors
+from pigeonplanner import builder
+from pigeonplanner import messages
+from pigeonplanner import database
+from pigeonplanner.ui import utils
+from pigeonplanner.ui import resultwindow
+from pigeonplanner.ui import resultparser
+from pigeonplanner.ui.tabs import basetab
+from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog
 
 
 class ResultsTab(builder.GtkBuilder, basetab.BaseTab):

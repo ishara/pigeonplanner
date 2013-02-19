@@ -24,17 +24,16 @@ import datetime
 
 import gtk
 
-import common
-import config
-import builder
-from ui import tools
-from ui import dialogs
-from ui.widgets import comboboxes
-from ui.filechooser import PdfSaver
-from translation import gettext as _
-from reportlib import (report, PRINT_ACTION_DIALOG,
-                       PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
-from reports.results import ResultsReport, ResultsReportOptions
+from pigeonplanner import common
+from pigeonplanner import config
+from pigeonplanner import builder
+from pigeonplanner.ui import tools
+from pigeonplanner.ui import dialogs
+from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui.filechooser import PdfSaver
+from pigeonplanner.reportlib import (report, PRINT_ACTION_DIALOG,
+                                     PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
+from pigeonplanner.reports.results import ResultsReport, ResultsReportOptions
 
 
 (KEY,

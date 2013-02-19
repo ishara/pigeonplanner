@@ -19,15 +19,14 @@
 import gtk
 import gtk.gdk
 
-import const
-import messages
-from ui import utils
-from ui import WidgetFactory
-from ui.tabs import basetab
-from ui.utils import HiddenPigeonsMixin
-from ui.detailsview import DetailsDialog
-from ui.messagedialog import InfoDialog
-from translation import gettext as _
+from pigeonplanner import const
+from pigeonplanner import messages
+from pigeonplanner.ui import utils
+from pigeonplanner.ui import WidgetFactory
+from pigeonplanner.ui.tabs import basetab
+from pigeonplanner.ui.utils import HiddenPigeonsMixin
+from pigeonplanner.ui.detailsview import DetailsDialog
+from pigeonplanner.ui.messagedialog import InfoDialog
 
 
 class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):

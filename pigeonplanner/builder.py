@@ -24,8 +24,8 @@ import os
 
 import gtk
 
-import const
-from ui import WidgetFactory
+from pigeonplanner import const
+from pigeonplanner.ui import WidgetFactory
 
 
 class GtkBuilder(WidgetFactory):

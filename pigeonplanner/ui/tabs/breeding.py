@@ -18,18 +18,17 @@
 
 import gtk
 
-import const
-import common
-import errors
-import builder
-import database
-from ui import utils
-from ui.tabs import basetab
-from ui.widgets import checkbutton
-from ui.dialogs import PigeonListDialog
-from ui.detailsview import DetailsDialog
-from ui.messagedialog import ErrorDialog
-from translation import gettext as _
+from pigeonplanner import const
+from pigeonplanner import common
+from pigeonplanner import errors
+from pigeonplanner import builder
+from pigeonplanner import database
+from pigeonplanner.ui import utils
+from pigeonplanner.ui.tabs import basetab
+from pigeonplanner.ui.widgets import checkbutton
+from pigeonplanner.ui.dialogs import PigeonListDialog
+from pigeonplanner.ui.detailsview import DetailsDialog
+from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class BreedingTab(builder.GtkBuilder, basetab.BaseTab):

@@ -17,7 +17,17 @@ according to some parameters.
 
 -= Running Pigeon Planner =-
 
-See INSTALL for instructions.
+*Linux:
+Pigeon Planner can be started directly from the source directory
+without installation.
+There's a very basic script in the root directory called pigeonplanner.py
+which will start the application directly.
+To install Pigeon Planner onto your system, run:
+sudo python setup.py install
+
+*Windows
+Run the setup file and install the program. Start Pigeon Planner by
+the shortcut in the startmenu or on the desktop (optional).
 
 
 -= I need you! =-

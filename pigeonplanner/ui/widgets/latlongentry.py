@@ -19,8 +19,7 @@
 import gtk
 import gobject
 
-import errors
-from translation import gettext as _
+from pigeonplanner import errors
 
 
 class LatLongEntry(gtk.Viewport):

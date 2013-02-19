@@ -18,9 +18,8 @@
 
 import gtk
 
-from ui import WidgetFactory
-from ui.tabs import basetab
-from translation import gettext as _
+from pigeonplanner.ui import WidgetFactory
+from pigeonplanner.ui.tabs import basetab
 
 
 class PedigreeTab(WidgetFactory, basetab.BaseTab):

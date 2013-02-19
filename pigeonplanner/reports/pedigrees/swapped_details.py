@@ -16,13 +16,12 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import config
-from ui import pedigree
-from translation import gettext as _
-from reportlib.utils import pt2cm as PT2CM
-from reportlib.basereport import Report, ReportOptions
-from reportlib.styles import (ParagraphStyle, FontStyle, GraphicsStyle,
-                              FONT_SANS_SERIF)
+from pigeonplanner import config
+from pigeonplanner.ui import pedigree
+from pigeonplanner.reportlib.utils import pt2cm as PT2CM
+from pigeonplanner.reportlib.basereport import Report, ReportOptions
+from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
+                                            GraphicsStyle, FONT_SANS_SERIF)
 
 
 class PedigreeReport(Report):
