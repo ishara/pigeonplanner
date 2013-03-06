@@ -67,6 +67,9 @@ if WINDOWS:
     PREFDIR = os.path.join(os.environ.get('APPDATA', HOMEDIR), 'pigeonplanner')
     PREFDIR = unicode(PREFDIR, sys.getfilesystemencoding())
     HOMEDIR = unicode(HOMEDIR, sys.getfilesystemencoding())
+elif OSX:
+    HOMEDIR = os.environ['HOME']
+    PREFDIR = os.path.join(HOMEDIR, 'Library', 'Application Support', 'pigeonplanner')
 else:
     HOMEDIR = os.environ['HOME']
     PREFDIR = os.path.join(HOMEDIR, '.pigeonplanner')
@@ -95,6 +98,9 @@ else:
     if not ROOTDIR.startswith('/usr'):
         # When running from the source folder, the root is one dir up
         ROOTDIR = os.path.normpath(os.path.join(ROOTDIR, '..'))
+        if ROOTDIR.endswith(".egg"):
+            #TODO: can be improved?
+            ROOTDIR = os.path.join(ROOTDIR, "share", "pigeonplanner")
         LANGDIR = os.path.join(ROOTDIR, 'languages')
         if WINDOWS:
             LANGDIR = os.path.abspath('../languages')
