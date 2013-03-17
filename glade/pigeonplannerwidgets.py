@@ -18,12 +18,15 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../pigeonplanner'))
+sys.path.insert(0, os.path.abspath('..'))
 
-from ui.widgets import bandentry
-from ui.widgets import date
-from ui.widgets import checkbutton
-from ui.widgets import comboboxes
-from ui.widgets import latlongentry
-from ui.widgets import statusbar
+import __builtin__
+__builtin__._ = lambda x: x
+
+from pigeonplanner.ui.widgets import bandentry
+from pigeonplanner.ui.widgets import date
+from pigeonplanner.ui.widgets import checkbutton
+from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui.widgets import latlongentry
+from pigeonplanner.ui.widgets import statusbar
 
