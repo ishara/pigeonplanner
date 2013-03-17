@@ -104,16 +104,16 @@ class DetailsDialog(gtk.Dialog):
 
 
 class PigeonImageWidget(gtk.EventBox):
-    def __init__(self, editable, parent=None):
+    def __init__(self, editable, view, parent=None):
         gtk.EventBox.__init__(self)
         if editable:
             self.connect('button-press-event', self.on_editable_button_press_event)
         else:
             self.connect('enter-notify-event', self.on_enter_notify_event)
             self.connect('leave-notify-event', self.on_leave_notify_event)
-            #TODO
-            ##self.connect('button-press-event', self.on_button_press_event)
+            self.connect('button-press-event', self.on_button_press_event)
 
+        self._view = view
         self._parent = parent
         self._imagewidget = gtk.Image()
         self._imagewidget.set_size_request(200, 200)
@@ -129,8 +129,8 @@ class PigeonImageWidget(gtk.EventBox):
         self.get_window().set_cursor(None)
 
     def on_button_press_event(self, widget, event):
-        tools.PhotoAlbum(self._parent, self.parser, self.database,
-                         self._pigeon.get_pindex())
+        tools.PhotoAlbum(self._parent, self._view.parser, self._view.database,
+                         self._view.pigeon.get_pindex())
 
     def on_editable_button_press_event(self, widget, event):
         if event.button == 3:
@@ -192,9 +192,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.pigeon = None
         self.child = None
 
-        self.widgets.pigeonimage = PigeonImageWidget(False, parent)
+        self.widgets.pigeonimage = PigeonImageWidget(False, self, parent)
         self.widgets.viewportImage.add(self.widgets.pigeonimage)
-        self.widgets.pigeonimage_edit = PigeonImageWidget(True, parent)
+        self.widgets.pigeonimage_edit = PigeonImageWidget(True, self, parent)
         self.widgets.viewportImageEdit.add(self.widgets.pigeonimage_edit)
 
         self.widgets.combocolour.set_data(self.database, self.database.COLOURS)
