@@ -15,9 +15,11 @@ Windows:
     python build_installer.py
 
 Mac OS X:
-    (Not completed!)
+    Build GTK from source, see http://www.gtk.org/download/macos.php
+    Use mac/jhbuild-custom and mac/pigeonplanner.modules for a complete build.
+
     jhbuild shell
-    python setup.py py2app
+    python setup.py install
     gtk-mac-bundler mac/pigeonplanner.bundle
 
 -= Other =-
