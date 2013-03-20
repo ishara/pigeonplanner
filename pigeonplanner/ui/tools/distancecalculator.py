@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import math
+from geopy import distance as gdistance
 
 from pigeonplanner import errors
 from pigeonplanner import common
@@ -48,31 +48,30 @@ class DistanceCalculator(builder.GtkBuilder):
 
     def on_buttoncalculate_clicked(self, widget):
         try:
-            latitudefrom = self.widgets.entrylatfrom.get_text(as_float=True)
-            longitudefrom = self.widgets.entrylongfrom.get_text(as_float=True)
-            latitudeto = self.widgets.entrylatto.get_text(as_float=True)
-            longitudeto = self.widgets.entrylongto.get_text(as_float=True)
+            latfrom = self.widgets.entrylatfrom.get_text(as_float=True)
+            lngfrom = self.widgets.entrylongfrom.get_text(as_float=True)
+            latto = self.widgets.entrylatto.get_text(as_float=True)
+            lngto = self.widgets.entrylongto.get_text(as_float=True)
         except errors.InvalidInputError:
             ErrorDialog((_("The latitude and longitude need to be in "
                            "DD.dddddd° format to use this function."),
                          None, _("Error")), self.widgets.window)
             return
 
-        # Code taken from:
-        # http://www.johndcook.com/python_longitude_latitude.html
-        degrees_to_radians = math.pi/180.0
-        phi1 = (90.0 - latitudefrom)*degrees_to_radians
-        phi2 = (90.0 - latitudeto)*degrees_to_radians
-        theta1 = longitudefrom*degrees_to_radians
-        theta2 = longitudeto*degrees_to_radians
-
-        cos = (math.sin(phi1)*math.sin(phi2)*math.cos(theta1 - theta2) + 
-               math.cos(phi1)*math.cos(phi2))
-        arc = math.acos(cos)
-        # Multiply the arc by the radius of the earth in meters, just 
-        # because our distance units combobox holds meters as 1
-        dist_meters = arc*6373000
-        distance = dist_meters/self.widgets.combounit.get_unit()
+        dist = gdistance.distance((latfrom, lngfrom), (latto, lngto))
+        unit = self.widgets.combounit.get_active()
+        if unit == 1:
+            distance = dist.kilometers
+        elif unit == 2:
+            distance = dist.meters
+        elif unit == 5:
+            distance = dist.feet
+        elif unit == 6:
+            distance = dist.miles
+        elif unit == 7:
+            distance = dist.nautical
+        else:
+            distance = dist.meters / self.widgets.combounit.get_unit()
         self.widgets.entryresult.set_text(str(round(distance, 2)))
 
     def on_combolocationfrom_changed(self, widget):

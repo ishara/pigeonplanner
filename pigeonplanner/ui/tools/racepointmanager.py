@@ -22,6 +22,7 @@ import gobject
 from pigeonplanner import errors
 from pigeonplanner import common
 from pigeonplanner import builder
+from pigeonplanner.ui import locationchooser
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.widgets import latlongentry
 from .datamanager import DataManager
@@ -69,14 +70,24 @@ class RacepointManager(builder.GtkBuilder):
             self._fill_racepoints_combo()
         manager.widgets.window.destroy()
 
+    def on_buttonsearch_clicked(self, widget):
+        racepoint = self.widgets.combopoint.get_active_text()
+        dialog = locationchooser.LocationChooser(self.widgets.window, racepoint)
+        response = dialog.run()
+        if response == gtk.RESPONSE_OK:
+            lat, lng = dialog.get_latlng()
+            self.widgets.entrylatitude.set_text(lat)
+            self.widgets.entrylongitude.set_text(lng)
+        dialog.destroy()
+
     def on_buttoncalculate_clicked(self, widget):
         point = self.widgets.combopoint.get_active()
         calculator = DistanceCalculator(self.widgets.window, self.database, point)
-        response = calculator.window.run()
+        response = calculator.widgets.window.run()
         if response == gtk.RESPONSE_CLOSE:
             self.widgets.spindistance.set_value(float(calculator.get_distance()))
             self.widgets.combodistance.set_active(calculator.get_unit())
-        calculator.window.destroy()
+        calculator.widgets.window.destroy()
 
     def on_buttonsave_clicked(self, widget):
         try:
