@@ -312,6 +312,15 @@ def start_ui():
     app.setup_database()
     app.setup_pigeons()
 
+    try:
+        import geopy
+        if not geopy.VERSION >= (0, 95, 0):
+            raise ValueError
+    except (ImportError, ValueError):
+        from pigeonplanner.ui.messagedialog import ErrorDialog
+        ErrorDialog((_("Pigeon Planner needs geopy 0.95.0 or higher to run."), None, ""))
+        return
+
     from pigeonplanner import config
     if config.get('options.check-for-updates'):
         updatethread = Thread(None, app.search_updates, None)

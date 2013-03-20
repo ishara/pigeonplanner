@@ -20,6 +20,7 @@
         <dependencies>
             <dep package="setuptools"/>
             <dep package="py2app"/>
+            <dep package="geopy"/>
         </dependencies>
     </metamodule>
     <repository type="tarball" name="pypi"
@@ -31,5 +32,9 @@
     <distutils id="py2app">
         <branch repo="pypi" version="0.7.3"
             module="p/py2app/py2app-0.7.3.tar.gz"/>
+    </distutils>
+    <distutils id="geopy">
+        <branch repo="pypi" version="0.95"
+            module="g/geopy/geopy-0.95.tar.gz"/>
     </distutils>
 </moduleset>
