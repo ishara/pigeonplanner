@@ -118,6 +118,8 @@ class _FileChooserDialog(gtk.FileChooserDialog, _FileChooser):
         self.set_preview(preview)
         if LAST_FOLDER is not None:
             folder = LAST_FOLDER
+        if folder is None:
+            folder = const.HOMEDIR
         self.set_current_folder(folder)
 
     def do_response(self, response):
