@@ -31,7 +31,7 @@ class MainTreeView(gtk.TreeView):
 
     __gtype_name__ = 'MainTreeView'
 
-    def __init__(self, parser, statusbar):
+    def __init__(self, database, parser, statusbar):
         gtk.TreeView.__init__(self)
 
         self.parser = parser
@@ -49,6 +49,7 @@ class MainTreeView(gtk.TreeView):
         self.set_rules_hint(True)
         self._selection = self.get_selection()
         self._selection.set_mode(gtk.SELECTION_MULTIPLE)
+        self._filterdialog = self._build_filterdialog(database)
         self.set_columns()
         self.show_all()
 
@@ -173,8 +174,25 @@ class MainTreeView(gtk.TreeView):
         for key, value in columnsdic.items():
             self.get_column(key).set_visible(value)
 
-    def run_filterdialog(self, parent, database):
-        dialog = dialogs.FilterDialog(parent, _("Filter pigeons"))
+    def run_filterdialog(self, parent):
+        self._filterdialog.set_transient_for(parent)
+        self._filterdialog.run()
+
+    # Internal methods
+    def _build_treeview(self):
+        liststore = gtk.ListStore(object, str, str, str, str, str, str, str, str, str)
+        columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"),
+                   _("Loft"), _("Strain"), _("Status")]
+        for index, column in enumerate(columns):
+            textrenderer = gtk.CellRendererText()
+            tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+2)
+            tvcolumn.set_sort_column_id(index+2)
+            tvcolumn.set_resizable(True)
+            self.append_column(tvcolumn)
+        return liststore
+
+    def _build_filterdialog(self, database):
+        dialog = dialogs.FilterDialog(None, _("Filter pigeons"))
         dialog.connect('apply-clicked', self.on_filterapply_clicked)
         dialog.connect('clear-clicked', self.on_filterclear_clicked)
 
@@ -190,20 +208,7 @@ class MainTreeView(gtk.TreeView):
         dialog.add_custom('status', _("Status"), combo, combo.get_active)
         self._filter = FILTER
         self.filters = dialog.get_filters()
-        dialog.run()
-
-    # Internal methods
-    def _build_treeview(self):
-        liststore = gtk.ListStore(object, str, str, str, str, str, str, str, str, str)
-        columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"),
-                   _("Loft"), _("Strain"), _("Status")]
-        for index, column in enumerate(columns):
-            textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+2)
-            tvcolumn.set_sort_column_id(index+2)
-            tvcolumn.set_resizable(True)
-            self.append_column(tvcolumn)
-        return liststore
+        return dialog
 
     def _visible_func(self, model, treeiter):
         if self._filter == FILTER:

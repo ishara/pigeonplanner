@@ -155,7 +155,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.database = database
         self.parser = parser
 
-        self.widgets.treeview = treeview.MainTreeView(self.parser, self.widgets.statusbar)
+        self.widgets.treeview = treeview.MainTreeView(database, parser,
+                                                      self.widgets.statusbar)
         self.widgets.treeview.connect('key-press-event', self.on_treeview_key_press)
         self.widgets.treeview.connect('button-press-event', self.on_treeview_press)
         self.widgets.scrolledwindow.add(self.widgets.treeview)
@@ -478,7 +479,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menufilter_activate(self, widget):
         logger.debug(common.get_function_name())
-        self.widgets.treeview.run_filterdialog(self, self.database)
+        self.widgets.treeview.run_filterdialog(self)
 
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())

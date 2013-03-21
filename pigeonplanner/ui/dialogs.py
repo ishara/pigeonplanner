@@ -235,11 +235,7 @@ class FilterDialog(gtk.Dialog):
 
     # Callbacks
     def on_dialog_response(self, dialog, response_id):
-        if response_id == gtk.RESPONSE_CLOSE or \
-           response_id == gtk.RESPONSE_DELETE_EVENT:
-            self._clear_filters()
-            self.emit('clear-clicked')
-            dialog.destroy()
+        dialog.hide()
 
     def on_btnclear_clicked(self, widget):
         self._clear_filters()
