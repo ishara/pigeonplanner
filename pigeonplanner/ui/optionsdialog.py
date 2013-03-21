@@ -82,7 +82,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         if const.WINDOWS and os.path.exists('.\\share\\themes'):
             self.widgets.framethemes.show()
             themes = os.listdir('.\\share\\themes\\')
-            comboboxes.fill_combobox(self.combothemes, themes)
+            comboboxes.fill_combobox(self.widgets.combothemes, themes)
 
         # Fill language combobox with available languages
         try:
