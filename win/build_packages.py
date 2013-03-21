@@ -3,7 +3,10 @@ import os
 import sys
 import glob
 import shutil
+import zipfile
 import subprocess
+
+from pigeonplanner.const import VERSION
 
 
 package_root = '..\\dist\\'
@@ -58,4 +61,13 @@ for dll_dir in os.listdir(dlls_dir):
 # Call the InnoSetup compiler to create the setup file
 iss_compiler = "C:\\Program Files\\Inno Setup 5\\ISCC.exe"
 subprocess.call([iss_compiler, "/cc", "setup.iss"])
+
+# Create a portable zip package
+ziproot = "Pigeon Planner %s" % VERSION
+zfile = zipfile.ZipFile('pigeonplanner-%s-win32.zip' % VERSION, 'w', zipfile.ZIP_DEFLATED)
+for root, dirs, files in os.walk(package_root):
+    for file in files:
+        filepath = os.path.join(root, file)
+        zfile.write(filepath, filepath.replace("..\\dist", ziproot))
+zfile.close()
 

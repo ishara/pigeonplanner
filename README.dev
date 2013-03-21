@@ -12,7 +12,7 @@ Linux:
 Windows:
     python setup.py py2exe
     cd win
-    python build_installer.py
+    python build_packages.py
 
 Mac OS X:
     Build GTK from source, see http://www.gtk.org/download/macos.php
