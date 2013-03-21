@@ -129,7 +129,8 @@ class PigeonImageWidget(gtk.EventBox):
         self.get_window().set_cursor(None)
 
     def on_button_press_event(self, widget, event):
-        tools.PhotoAlbum(self._parent, self._view.parser, self._view.database,
+        parent = None if isinstance(self._parent, gtk.Dialog) else self._parent
+        tools.PhotoAlbum(parent, self._view.parser, self._view.database,
                          self._view.pigeon.get_pindex())
 
     def on_editable_button_press_event(self, widget, event):
