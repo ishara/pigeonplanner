@@ -66,7 +66,11 @@ class StatusBar(gtk.Statusbar):
         filterbox = gtk.EventBox()
         filterbox.connect('button-press-event', self.on_filterbox_clicked)
         filterbox.add(self._filter)
-        box = self.get_message_area()
+        try:
+            box = self.get_message_area()
+        except AttributeError:
+            # PyGTK < 2.22
+            return
         box.pack_start(total, False, False)
         box.pack_start(filterbox, False, False, 4)
 
