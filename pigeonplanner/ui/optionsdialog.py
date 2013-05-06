@@ -154,6 +154,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ('options.check-for-dev-updates', self.widgets.chkDevUpdate.get_active()),
                 ('options.language', self.widgets.combolangs.get_active_text()),
                 ('options.coef-multiplier', self.widgets.spincoef.get_value_as_int()),
+                ('options.distance-unit', self.widgets.combodistance.get_active()),
+                ('options.speed-unit', self.widgets.combospeed.get_active()),
                 ##('options.format-date', self.entrydate.get_text()),
 
                 ('interface.arrows', self.widgets.chkArrows.get_active()),
@@ -221,6 +223,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.widgets.checkbackup.set_active(config.get('backup.automatic-backup'))
         self.widgets.spinday.set_value(config.get('backup.interval'))
         self.widgets.fcbutton.set_current_folder(config.get('backup.location'))
+        self.widgets.combodistance.set_active(config.get('options.distance-unit'))
+        self.widgets.combospeed.set_active(config.get('options.speed-unit'))
         self.widgets.spincoef.set_value(config.get('options.coef-multiplier'))
         ##self.widgets.entrydate.set_text(config.get('options.format-date'))
 

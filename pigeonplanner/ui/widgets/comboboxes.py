@@ -20,6 +20,7 @@
 
 import gtk
 
+from pigeonplanner import config
 from pigeonplanner import common
 
 
@@ -139,7 +140,7 @@ class DistanceCombobox(gtk.ComboBox):
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, 'text', 0)
-        self.set_active(0)
+        self.set_active(config.get("options.distance-unit"))
         self.show()
 
     def get_unit(self):
@@ -168,7 +169,7 @@ class SpeedCombobox(gtk.ComboBox):
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, 'text', 0)
-        self.set_active(0)
+        self.set_active(config.get("options.speed-unit"))
         self.show()
 
     def get_unit(self):
