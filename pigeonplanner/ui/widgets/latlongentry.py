@@ -52,7 +52,7 @@ class LatLongEntry(gtk.Viewport):
     editable = gobject.property(get_editable, set_editable, bool, False, "Editable")
 
     def set_text(self, text):
-        self._entry.set_text(text)
+        self._entry.set_text(str(text))
 
     def get_text(self, validate=True, as_float=False):
         value = self._entry.get_text()
