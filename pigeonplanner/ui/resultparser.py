@@ -68,13 +68,16 @@ class ResultParser(builder.GtkBuilder):
         self.widgets.categoryentry.set_text(self.data['category'].title())
         self.widgets.pigeonsentry.set_text(self.data['n_pigeons'])
 
+        self.widgets.datatable.set_sensitive(True)
         self.widgets.liststore.clear()
         if not results:
             self.widgets.infobar.show()
             self.widgets.addbutton.set_sensitive(False)
+            self.widgets.pigeonsw.set_sensitive(False)
             return
         self.widgets.infobar.hide()
         self.widgets.addbutton.set_sensitive(True)
+        self.widgets.pigeonsw.set_sensitive(True)
         for pindex, result in results.items():
             row = result
             row.insert(0, pindex)
