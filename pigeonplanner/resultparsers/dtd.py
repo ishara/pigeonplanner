@@ -52,7 +52,7 @@ class DTDParser(BaseParser):
             # The first line contains:
             #    Name of club      Location of club      DATA TECHNOLOGY-DEERLIJK
             if linenumber == firstline:
-                data['sector'] = line[:21]
+                data['sector'] = line.split("  ")[0]
 
             # Split each line by a space
             items = line.split()
