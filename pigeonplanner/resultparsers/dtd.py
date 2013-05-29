@@ -26,8 +26,7 @@ from .baseparser import BaseParser
 def expand_year(year):
     if len(year) == 4:
         return year
-    year = int(year)
-    return str(year+2000)
+    return str(int(year) + 2000)
 
 
 class DTDParser(BaseParser):
@@ -37,46 +36,53 @@ class DTDParser(BaseParser):
     def parse_file(self, resultfile, pindexlist):
         data = {}
         results = {}
-        for number, line in enumerate(resultfile):
-            if number == 0:
-                # Get Sector of the race. 
-                data['sector'] = line[:21]
-            if number == 2:
-                words = line.split()
-                try:
-                    racepoint = words[0]
-                    date = words[1]
-                    day, month, year = date.split('-')
-                    dt = datetime.date(int("20"+year), int(month), int(day))
-                    n_pigeons = words[2]
-                    if words[4] == "LOS":
-                        category = words[3]
-                    else:
-                        category = words[3] + " " + words[4]
-                except ValueError:
-                    racepoint = words[0] + " " + words[1]
-                    date = words[2]
-                    day, month, year = date.split('-')
-                    dt = datetime.date(int("20"+year), int(month), int(day))
-                    n_pigeons = words[3]
-                    if words[5] == "LOS":
-                        category = words[4]
-                    else:
-                        category = words[4] + " " + words[5]
-                    
-                    
-                data['racepoint'] = racepoint
-                data['date'] = dt.strftime(const.DATE_FORMAT)
-                data['n_pigeons'] = n_pigeons
-                data['category'] = category
+        firstline = -1
+        for linenumber, line in enumerate(resultfile):
+            # Remove all whitspace
+            line = line.strip()
 
-            line = line.split()
+            # Don't parse empty lines or dashed lines(sometimes in front of file)
+            if line == "" or line.startswith("----"):
+                continue
+
+            # Save the linenumber for the first real line
+            if firstline < 0:
+                firstline = linenumber
+
+            # The first line contains:
+            #    Name of club      Location of club      DATA TECHNOLOGY-DEERLIJK
+            if linenumber == firstline:
+                data['sector'] = line[:21]
+
+            # Split each line by a space
+            items = line.split()
+
+            # Information is on the third line:
+            #    Racepoint       Date Pigeons Category     LOS TE-LACHES A : Hour
+            if linenumber == firstline + 2:
+                # Go backwards through the line. The racepoint can have multiple
+                # words, but "LOS" is a fixed word.
+                losindex = items.index("LOS")
+                category = items[losindex - 1]
+                pigeonsindex = losindex - 2
+                if not items[losindex - 2].isdigit():
+                    # This is not the number of pigeons, but a category with 2 words
+                    category = "%s %s" % (items[losindex - 2], category)
+                    pigeonsindex = losindex - 3
+                data['category'] = category
+                data['n_pigeons'] = items[pigeonsindex]
+                day, month, year = items[pigeonsindex - 1].split('-')
+                dt = datetime.date(int(expand_year(year)), int(month), int(day))
+                data['date'] = dt.strftime(const.DATE_FORMAT)
+                # The remaining items before the date form the racepoint
+                data['racepoint'] = " ".join(items[:pigeonsindex - 1])
+
             # Only parse lines that start with a number (place)
             try:
-                place = int(line[0])
+                place = int(items[0])
             except ValueError:
                 continue
-            ring, year = line[-4], line[-3]
+            ring, year = items[-4], items[-3]
             # If the year is 2 digits, no space exists between the ring and year
             if len(year) > 1:
                 ring, year = year[:-2], year[-2:]
