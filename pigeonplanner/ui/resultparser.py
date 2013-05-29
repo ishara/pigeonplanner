@@ -61,11 +61,13 @@ class ResultParser(builder.GtkBuilder):
             textbuffer.set_text(text)
             self.widgets.reportdialog.show()
             return
-        self.widgets.datelabel.set_markup('<b>%s</b>' % self.data['date'])
-        self.widgets.racepointlabel.set_markup('<b>%s</b>' % self.data['racepoint'])
-        self.widgets.sectorlabel.set_markup('<b>%s</b>' % self.data['sector'])
-        self.widgets.categorylabel.set_markup('<b>%s</b>' % self.data['category'])
-        self.widgets.pigeonslabel.set_markup('<b>%s</b>' % self.data['n_pigeons'])
+
+        self.widgets.dateentry.set_text(self.data['date'])
+        self.widgets.racepointentry.set_text(self.data['racepoint'].title())
+        self.widgets.sectorentry.set_text(self.data['sector'].title())
+        self.widgets.categoryentry.set_text(self.data['category'].title())
+        self.widgets.pigeonsentry.set_text(self.data['n_pigeons'])
+
         self.widgets.liststore.clear()
         if not results:
             self.widgets.infobar.show()
@@ -86,11 +88,11 @@ class ResultParser(builder.GtkBuilder):
         self.close_window()
 
     def on_addbutton_clicked(self, widget):
-        date = self.data['date']
-        point = self.data['racepoint']
-        out = self.data['n_pigeons']
-        sector = self.data['sector']
-        category = self.data['category']
+        date = self.widgets.dateentry.get_text()
+        point = self.widgets.racepointentry.get_text()
+        out = self.widgets.pigeonsentry.get_text()
+        sector = self.widgets.sectorentry.get_text()
+        category = self.widgets.categoryentry.get_text()
         for row in self.widgets.liststore:
             toggle, pindex, ring, year, place = row
             if not toggle: continue
