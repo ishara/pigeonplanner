@@ -445,7 +445,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                     self.database.delete_from_table(self.database.MED, pindex, 2)
                     self.parser.remove_pigeon(pindex)
 
-            if not self.chkResults.get_active():
+            if not self.widgets.chkResults.get_active():
                 logger.debug("Remove: Removing the results")
                 for pigeon in pigeons:
                     self.database.delete_from_table(self.database.RESULTS,
