@@ -33,6 +33,12 @@ class DTDParser(BaseParser):
     name = _("Data Technology-Deerlijk - Belgium")
     description = _("Data Technology-Deerlijk")
 
+    def check(self, resultfile):
+        for line in resultfile:
+            if "DATA TECHNOLOGY-DEERLIJK" in line:
+                return True
+        return False
+
     def parse_file(self, resultfile, pindexlist):
         data = {}
         results = {}

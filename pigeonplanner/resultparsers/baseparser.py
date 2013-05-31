@@ -25,6 +25,9 @@ class BaseParser(object):
     def get_description(self):
         return self.description
 
+    def check(self, resultfile):
+        raise NotImplementedError
+
     def parse_file(self, resultfile, pindexlist):
         raise NotImplementedError
 

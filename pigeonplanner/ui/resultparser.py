@@ -25,6 +25,7 @@ from pigeonplanner import builder
 from pigeonplanner import mailing
 from pigeonplanner.resultparsers import get_all_parsers
 from pigeonplanner.ui import filechooser
+from pigeonplanner.ui.messagedialog import WarningDialog
 
 
 class ResultParser(builder.GtkBuilder):
@@ -49,6 +50,12 @@ class ResultParser(builder.GtkBuilder):
             return
         resultfile = open(self.resultfilename, 'r')
         parser = self._get_active_parser()
+        if not parser.check(resultfile):
+            msg = (_("This result is not in the '%s' format. Do you want to continue?") % 
+                   parser.get_name(), None, None)
+            if not WarningDialog(msg, self.widgets.parserdialog).run():
+                return
+        resultfile.seek(0)
         try:
             self.data, results = parser.parse_file(resultfile, self.pigeons)
         except Exception as exc:
