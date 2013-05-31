@@ -18,9 +18,10 @@
 
 import datetime
 
+from yapsy.IPlugin import IPlugin
+
 from pigeonplanner import const
 from pigeonplanner import common
-from .baseparser import BaseParser
 
 
 def expand_year(year):
@@ -29,9 +30,7 @@ def expand_year(year):
     return str(int(year) + 2000)
 
 
-class DTDParser(BaseParser):
-    name = _("Data Technology-Deerlijk - Belgium")
-    description = _("Data Technology-Deerlijk")
+class DTDParser(IPlugin):
 
     def check(self, resultfile):
         for line in resultfile:

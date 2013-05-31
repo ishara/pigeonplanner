@@ -48,6 +48,9 @@ if sys.platform != 'darwin':
             modir = modir.replace('languages', 'share/locale')
         translation_files.append((modir, [mofile]))
 
+resultparsers = glob.glob('resultparsers/*.py')
+resultparsers.extend(glob.glob('resultparsers/*.yapsy-plugin'))
+
 options = {"py2exe": {"compressed": 2,
                       "optimize": 2,
                       "includes": ['atk', 'cairo', 'gio', 'gobject',
@@ -72,6 +75,7 @@ if sys.platform == "win32":
     data_files = [
             ('glade', glade_files),
             ('images', glob.glob('images/*.png')),
+            ('resultparsers', resultparsers),
             ('.', ['AUTHORS', 'CHANGES', 'COPYING', 'README', 'README.dev'])]
 
     platform_options = dict(
@@ -84,6 +88,7 @@ else:
     data_files = [
             ('share/pigeonplanner/glade', glade_files),
             ('share/pigeonplanner/images', glob.glob('images/*.png')),
+            ('share/pigeonplanner/resultparsers', resultparsers),
             ('share/applications', ['data/pigeonplanner.desktop']),
             ('share/icons/hicolor/scalable/apps', ['images/pigeonplanner.svg']),
             ('share/pixmaps/', ['images/pigeonplanner.png']),

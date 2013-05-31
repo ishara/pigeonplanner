@@ -110,7 +110,10 @@ else:
 
 IMAGEDIR = os.path.join(ROOTDIR, 'images')
 GLADEDIR = os.path.join(ROOTDIR, 'glade')
+RESULTPARSERDIR = os.path.join(ROOTDIR, 'resultparsers')
+
 THUMBDIR = os.path.join(PREFDIR, u'thumbs')
+PLUGINDIR = os.path.join(PREFDIR, u'plugins')
 DATABASE = os.path.join(PREFDIR, u'pigeonplanner.db')
 LOGFILE = os.path.join(PREFDIR, u'pigeonplanner.log')
 CONFIGFILE_OLD = os.path.join(PREFDIR, 'pigeonplanner.cfg')

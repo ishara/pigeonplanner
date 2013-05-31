@@ -16,14 +16,16 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os
 import logging
 logger = logging.getLogger(__name__)
+
+from yapsy.PluginManager import PluginManager
 
 from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import builder
 from pigeonplanner import mailing
-from pigeonplanner.resultparsers import get_all_parsers
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import WarningDialog
 
@@ -36,7 +38,7 @@ class ResultParser(builder.GtkBuilder):
         self.data = None
 
         self._build_interface()
-        self._build_parsers()
+        self._find_parsers()
         self.widgets.parserdialog.set_transient_for(parent)
         self.widgets.parserdialog.show_all()
 
@@ -49,16 +51,17 @@ class ResultParser(builder.GtkBuilder):
         if self.resultfilename is None:
             return
         resultfile = open(self.resultfilename, 'r')
-        parser = self._get_active_parser()
+        parserplugin = self._get_active_parserplugin()
+        parser = parserplugin.plugin_object
         if not parser.check(resultfile):
             msg = (_("This result is not in the '%s' format. Do you want to continue?") % 
-                   parser.get_name(), None, None)
+                   parserplugin.name, None, None)
             if not WarningDialog(msg, self.widgets.parserdialog).run():
                 return
         resultfile.seek(0)
         try:
             self.data, results = parser.parse_file(resultfile, self.pigeons)
-        except Exception as exc:
+        except Exception:
             import traceback
             data = [" **** File:", self.resultfilename,
                     "\n **** Parser:", parser.get_name(),
@@ -118,8 +121,8 @@ class ResultParser(builder.GtkBuilder):
         self.widgets.liststore[path][0] = not self.widgets.liststore[path][0]
 
     def on_parsercombo_changed(self, widget):
-        parser = self._get_active_parser()
-        widget.set_tooltip_text(parser.get_description())
+        parserplugin = self._get_active_parserplugin()
+        widget.set_tooltip_text(parserplugin.description)
 
     def on_reportdialog_delete_event(self, widget, event):
         return True
@@ -141,14 +144,18 @@ class ResultParser(builder.GtkBuilder):
         self.widgets.filebutton = filechooser.ResultChooser()
         self.widgets.table.attach(self.widgets.filebutton, 1, 2, 0, 1)
 
-    def _build_parsers(self):
-        parsers = get_all_parsers()
-        for parser in parsers:
-            parser = parser()
-            self.widgets.parserstore.append([parser, parser.get_name()])
+    def _find_parsers(self):
+        manager = PluginManager()
+        manager.setPluginPlaces([const.RESULTPARSERDIR,
+                                 os.path.join(const.PLUGINDIR, "resultparsers")])
+        manager.collectPlugins()
+
+        for plugin in manager.getAllPlugins():
+            name = "%s - %s" % (plugin.name, plugin.version)
+            self.widgets.parserstore.append([plugin, name])
         self.widgets.parsercombo.set_active(0)
 
-    def _get_active_parser(self):
+    def _get_active_parserplugin(self):
         comboiter = self.widgets.parsercombo.get_active_iter()
         return self.widgets.parserstore.get_value(comboiter, 0)
 

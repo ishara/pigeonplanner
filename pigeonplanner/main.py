@@ -119,6 +119,9 @@ class Startup(object):
         if not os.path.isdir(const.THUMBDIR):
             os.mkdir(const.THUMBDIR)
 
+        if not os.path.isdir(os.path.join(const.PLUGINDIR, "resultparsers")):
+            os.makedirs(os.path.join(const.PLUGINDIR, "resultparsers"))
+
         # Always setup logging
         #TODO: find a better (and crossplatform) way
         try:
@@ -319,6 +322,13 @@ def start_ui():
     except (ImportError, ValueError):
         from pigeonplanner.ui.messagedialog import ErrorDialog
         ErrorDialog((_("Pigeon Planner needs geopy 0.95.0 or higher to run."), None, ""))
+        return
+
+    try:
+        import yapsy
+    except ImportError:
+        from pigeonplanner.ui.messagedialog import ErrorDialog
+        ErrorDialog((_("Pigeon Planner needs Yapsy to run."), None, ""))
         return
 
     from pigeonplanner import config

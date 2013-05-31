@@ -21,6 +21,7 @@
             <dep package="setuptools"/>
             <dep package="py2app"/>
             <dep package="geopy"/>
+            <dep package="yapsy"/>
         </dependencies>
     </metamodule>
     <repository type="tarball" name="pypi"
@@ -36,5 +37,9 @@
     <distutils id="geopy">
         <branch repo="pypi" version="0.95"
             module="g/geopy/geopy-0.95.tar.gz"/>
+    </distutils>
+    <distutils id="yapsy">
+        <branch repo="pypi" version="1.10.2-pythons2n3"
+            module="Y/Yapsy/Yapsy-1.10.2-pythons2n3.tar.gz"/>
     </distutils>
 </moduleset>
