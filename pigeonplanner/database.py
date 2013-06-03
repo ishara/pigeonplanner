@@ -449,9 +449,11 @@ class DatabaseOperations(object):
             return True
 
 #### Breeding
-    def get_pigeon_breeding(self, pindex):
-        sql = 'SELECT * FROM Breeding WHERE sire=? OR dam=?'
-        return self.__db_execute_select(sql, (pindex,pindex), RET_ALLCOL)
+    def get_pigeon_breeding(self, pindex, cock):
+        pigeon, mate = ("sire", "dam") if cock else ("dam", "sire")
+        sql = 'SELECT Breedingkey, %s, date FROM Breeding WHERE %s=? ORDER BY %s, date'\
+                % (mate, pigeon, mate)
+        return self.__db_execute_select(sql, (pindex,), RET_ALLCOL)
 
     def get_breeding_from_id(self, ID):
         sql = 'SELECT * FROM Breeding WHERE Breedingkey=?'

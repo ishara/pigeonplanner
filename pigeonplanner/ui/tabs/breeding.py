@@ -31,6 +31,11 @@ from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
+(COL_ID,
+ COL_PINDEX,
+ COL_DATA) = range(3)
+
+
 class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def __init__(self, mainwindow, database, parser):
         builder.GtkBuilder.__init__(self, "BreedingView.ui")
@@ -47,6 +52,14 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     ## Tab
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
+
+        # Never select parent rows. Expand them and select first child row.
+        if rowiter is not None and self.widgets.treestore.iter_depth(rowiter) == 0:
+            path = self.widgets.treestore.get_path(rowiter)
+            self.widgets.treeview.expand_row(path, False)
+            rowiter = self.widgets.treestore.iter_children(rowiter)
+            selection.select_iter(rowiter)
+
         widgets = [self.widgets.buttonremove, self.widgets.buttonedit]
         utils.set_multiple_sensitive(widgets, not rowiter is None)
         try:
@@ -82,16 +95,16 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonedit_clicked(self, widget):
         self._mode = const.EDIT
         model, rowiter = self.widgets.selection.get_selected()
-        self._set_dialog_fields(model[rowiter][0],
-                        common.get_pindex_from_band_string(model[rowiter][2]))
+        self._set_dialog_fields(model[rowiter][COL_ID],
+                                model[rowiter][COL_PINDEX])
         self.widgets.editdialog.show()
 
     def on_buttonremove_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
-        path = self.widgets.liststore.get_path(rowiter)
-        rowid = model.get_value(rowiter, 0)
+        path = self.widgets.treestore.get_path(rowiter)
+        rowid = model.get_value(rowiter, COL_ID)
         self.database.delete_from_table(self.database.BREEDING, rowid, 0)
-        self.widgets.liststore.remove(rowiter)
+        self._remove_record(rowiter)
         self.widgets.selection.select_path(path)
 
     def on_buttoninfo1_clicked(self, widget):
@@ -166,18 +179,29 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         # Update when editing record
         if self._mode == const.EDIT:
             model, rowiter = self.widgets.selection.get_selected()
-            data.append(self.widgets.liststore.get_value(rowiter, 0))
+            rowid = self.widgets.treestore.get_value(rowiter, COL_ID)
+            data.append(rowid)
             self.database.update_table(self.database.BREEDING, data, 1, 0)
-            self.widgets.liststore.set(rowiter, 1, date, 2, self._format_mate(mate))
+            parent = self._get_or_create_parent_record(mate)
+            if not self.widgets.treestore.is_ancestor(parent, rowiter):
+                # It is not possible to move a row to another parent.
+                self._remove_record(rowiter)
+                rowiter = self.widgets.treestore.append(parent, [rowid, mate, date])
+            else:
+                self.widgets.treestore.set(rowiter, 2, date)
+
             self.widgets.selection.emit('changed')
         # Insert when adding record
         elif self._mode == const.ADD:
             rowid = self.database.insert_into_table(self.database.BREEDING, data)
-            rowiter = self.widgets.liststore.insert(0, [rowid, date,
-                                                self._format_mate(mate)])
-            self.widgets.selection.select_iter(rowiter)
-            path = self.widgets.liststore.get_path(rowiter)
-            self.widgets.treeview.scroll_to_cell(path)
+            parent = self._get_or_create_parent_record(mate)
+            rowiter = self.widgets.treestore.append(parent, [rowid, mate, date])
+
+        parent_path = self.widgets.treestore.get_path(parent)
+        self.widgets.treeview.expand_row(parent_path, False)
+        self.widgets.selection.select_iter(rowiter)
+        path = self.widgets.treestore.get_path(rowiter)
+        self.widgets.treeview.scroll_to_cell(path)
         self.widgets.editdialog.hide()
 
     def on_buttonsearchmate_clicked(self, widget):
@@ -200,15 +224,18 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def set_pigeon(self, pigeon):
         self.pigeon = pigeon
 
-        matecol = 1 if pigeon.is_hen() else 2
-        self.widgets.liststore.clear()
-        for data in self.database.get_pigeon_breeding(pigeon.pindex):
-            self.widgets.liststore.insert(0, [data[0], data[3],
-                                      self._format_mate(data[matecol])])
-        self.widgets.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        parent = None
+        last = None
+        self.widgets.treestore.clear()
+        for data in self.database.get_pigeon_breeding(pigeon.pindex, pigeon.is_cock()):
+            if parent is None or data[1] != last:
+                parent = self._add_parent_record(data[1])
+            self.widgets.treestore.append(parent, [data[0], data[1], data[2]])
+            last = data[1]
+        self.widgets.treestore.set_sort_column_id(COL_DATA, gtk.SORT_ASCENDING)
 
     def clear_pigeon(self):
-        self.widgets.liststore.clear()
+        self.widgets.treestore.clear()
 
     def get_pigeon_state_widgets(self):
         return [self.widgets.buttonadd]
@@ -276,4 +303,21 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
         if pigeon.get_visible() and not self.maintreeview.has_pigeon(pigeon):
             self.maintreeview.add_pigeon(pigeon, False)
+
+    def _add_parent_record(self, pindex):
+        rowiter = self.widgets.treestore.append(None,
+                                        [None, pindex, self._format_mate(pindex)])
+        return rowiter
+
+    def _get_or_create_parent_record(self, pindex):
+        for row in self.widgets.treestore:
+            if row[COL_PINDEX] == pindex:
+                return row.iter
+        return self._add_parent_record(pindex)
+
+    def _remove_record(self, rowiter):
+        parent = self.widgets.treestore.iter_parent(rowiter)
+        self.widgets.treestore.remove(rowiter)
+        if not self.widgets.treestore.iter_has_child(parent):
+            self.widgets.treestore.remove(parent)
 
