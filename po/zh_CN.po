@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-16 20:21+0100\n"
-"PO-Revision-Date: 2012-04-09 00:37+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
-"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"POT-Creation-Date: 2013-01-23 17:38+0100\n"
+"PO-Revision-Date: 2013-03-01 01:13+0000\n"
+"Last-Translator: 426 <Unknown>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-17 04:39+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-03-02 04:58+0000\n"
+"X-Generator: Launchpad (build 16514)\n"
 "Language: \n"
 
 #: pigeonplanner/messages.py:22 pigeonplanner/common.py:237
@@ -248,7 +248,7 @@ msgstr "重设为预设设定。"
 
 #: pigeonplanner/messages.py:151
 msgid "Default settings"
-msgstr "默认设置"
+msgstr "预设设定"
 
 #: pigeonplanner/messages.py:153
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
@@ -312,7 +312,7 @@ msgstr "开启档案时发生错误："
 msgid "Pedigree"
 msgstr "血统书"
 
-#: pigeonplanner/startup.py:181 glade/OptionsDialog.ui:1136 glade/Dialogs.ui:8
+#: pigeonplanner/startup.py:181 glade/OptionsDialog.ui:1162 glade/Dialogs.ui:8
 #: glade/AddressBook.ui:372
 msgid "E-mail"
 msgstr "电子邮件"
@@ -337,42 +337,42 @@ msgstr "环号："
 #: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:186
 #: pigeonplanner/ui/widgets/treeview.py:183
 #: pigeonplanner/ui/widgets/treeview.py:199 glade/MainWindow.ui:829
-#: glade/OptionsDialog.ui:801 glade/OptionsDialog.ui:1352
+#: glade/OptionsDialog.ui:827 glade/OptionsDialog.ui:1378
 #: glade/DetailsView.ui:1077 glade/DetailsView.ui:1683
 msgid "Sex"
 msgstr "性别"
 
 #: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dialogs.py:436
-#: pigeonplanner/ui/widgets/treeview.py:199 glade/OptionsDialog.ui:747
-#: glade/OptionsDialog.ui:1098 glade/OptionsDialog.ui:1328
+#: pigeonplanner/ui/widgets/treeview.py:199 glade/OptionsDialog.ui:773
+#: glade/OptionsDialog.ui:1124 glade/OptionsDialog.ui:1354
 #: glade/AddressBook.ui:129
 msgid "Name"
 msgstr "名称"
 
 #: pigeonplanner/reports/pigeons.py:47
-#: pigeonplanner/ui/widgets/treeview.py:199 glade/OptionsDialog.ui:773
-#: glade/OptionsDialog.ui:1338 glade/DetailsView.ui:1066
+#: pigeonplanner/ui/widgets/treeview.py:199 glade/OptionsDialog.ui:799
+#: glade/OptionsDialog.ui:1364 glade/DetailsView.ui:1066
 #: glade/DetailsView.ui:1672
 msgid "Colour"
 msgstr "颜色"
 
 #: pigeonplanner/reports/pigeons.py:49
 #: pigeonplanner/ui/widgets/treeview.py:200
-#: pigeonplanner/ui/tools/distancecalculator.py:139 glade/OptionsDialog.ui:787
+#: pigeonplanner/ui/tools/distancecalculator.py:139 glade/OptionsDialog.ui:813
 #: glade/DetailsView.ui:1040 glade/DetailsView.ui:1488
 #: glade/MedicationView.ui:373
 msgid "Loft"
 msgstr "鸽舍"
 
 #: pigeonplanner/reports/pigeons.py:51
-#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:757
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:783
 #: glade/DetailsView.ui:1090 glade/DetailsView.ui:1722
 msgid "Strain"
 msgstr "鸽系"
 
 #: pigeonplanner/reports/pigeons.py:53
 #: pigeonplanner/ui/widgets/treeview.py:191
-#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:815
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:841
 msgid "Status"
 msgstr "状态"
 
@@ -406,39 +406,39 @@ msgstr "归返率"
 
 #: pigeonplanner/reports/results.py:58 pigeonplanner/ui/resultwindow.py:124
 #: glade/ResultsView.ui:165 glade/ResultsView.ui:728
-#: glade/OptionsDialog.ui:879 glade/ResultWindow.ui:222
+#: glade/OptionsDialog.ui:905 glade/ResultWindow.ui:222
 msgid "Sector"
 msgstr "分区"
 
 #: pigeonplanner/reports/results.py:60 glade/ResultsView.ui:444
-#: glade/ResultsView.ui:741 glade/Calendar.ui:177 glade/OptionsDialog.ui:907
+#: glade/ResultsView.ui:741 glade/Calendar.ui:177 glade/OptionsDialog.ui:933
 #: glade/ResultWindow.ui:235 glade/ExportWindow.ui:126
 msgid "Type"
 msgstr "类型"
 
 #: pigeonplanner/reports/results.py:62 glade/ResultsView.ui:486
-#: glade/ResultsView.ui:754 glade/OptionsDialog.ui:893
+#: glade/ResultsView.ui:754 glade/OptionsDialog.ui:919
 #: glade/ResultWindow.ui:248
 msgid "Category"
 msgstr "分类"
 
 #: pigeonplanner/reports/results.py:64
 #: pigeonplanner/ui/tools/datamanager.py:50 glade/ResultsView.ui:340
-#: glade/ResultsView.ui:767 glade/OptionsDialog.ui:937
+#: glade/ResultsView.ui:767 glade/OptionsDialog.ui:963
 #: glade/ResultWindow.ui:261
 msgid "Wind"
 msgstr "风向"
 
 #: pigeonplanner/reports/results.py:66
 #: pigeonplanner/ui/tools/datamanager.py:49 glade/ResultsView.ui:326
-#: glade/ResultsView.ui:780 glade/OptionsDialog.ui:923
+#: glade/ResultsView.ui:780 glade/OptionsDialog.ui:949
 #: glade/ResultWindow.ui:274
 msgid "Weather"
 msgstr "天气"
 
 #: pigeonplanner/reports/results.py:68 glade/ResultsView.ui:354
 #: glade/ResultsView.ui:793 glade/Calendar.ui:261 glade/BreedingView.ui:303
-#: glade/BreedingView.ui:1321 glade/OptionsDialog.ui:953
+#: glade/BreedingView.ui:1321 glade/OptionsDialog.ui:979
 #: glade/ResultWindow.ui:287 glade/MedicationView.ui:272
 #: glade/MedicationView.ui:939 glade/AddressBook.ui:413
 msgid "Comment"
@@ -513,8 +513,8 @@ msgid "Select a folder..."
 msgstr "选择文件夹..."
 
 #: pigeonplanner/ui/optionsdialog.py:57 glade/BreedingView.ui:322
-#: glade/BreedingView.ui:1340 glade/OptionsDialog.ui:1494
-#: glade/OptionsDialog.ui:1582 glade/OptionsDialog.ui:1730
+#: glade/BreedingView.ui:1340 glade/OptionsDialog.ui:1520
+#: glade/OptionsDialog.ui:1608 glade/OptionsDialog.ui:1756
 #: glade/DatabaseTool.ui:234
 msgid "General"
 msgstr "基本数据"
@@ -525,7 +525,7 @@ msgstr "界面外观"
 
 #: pigeonplanner/ui/optionsdialog.py:61
 msgid "Columns"
-msgstr ""
+msgstr "字段显示"
 
 #: pigeonplanner/ui/optionsdialog.py:63
 msgid "Printing"
@@ -543,7 +543,7 @@ msgstr "成绩"
 
 #: pigeonplanner/ui/optionsdialog.py:68
 msgid "Advanced"
-msgstr ""
+msgstr "进阶设定"
 
 #: pigeonplanner/ui/optionsdialog.py:122
 msgid "days"
@@ -561,17 +561,17 @@ msgstr "很有可能此问题已于最新版中修复。仍然要回报问题？
 
 #: pigeonplanner/ui/exceptiondialog.py:74
 msgid "Pigeon Planner has experienced an unexpected error"
-msgstr ""
+msgstr "Pigeon Planner 发生未知错误"
 
 #: pigeonplanner/ui/exceptiondialog.py:82
 msgid ""
 "You can help the Pigeon Planner developers by taking the time to report this "
 "bug."
-msgstr ""
+msgstr "请您花一点时间回报此错误给 Pigeon Planner 作者修正此错误。"
 
 #: pigeonplanner/ui/exceptiondialog.py:100
 msgid "Error Detail"
-msgstr ""
+msgstr "错误信息"
 
 #: pigeonplanner/ui/pedigreewindow.py:87
 msgid "Save this pedigree"
@@ -604,7 +604,7 @@ msgid "Year of race"
 msgstr "比赛年份"
 
 #: pigeonplanner/ui/resultwindow.py:125 glade/ResultsView.ui:715
-#: glade/OptionsDialog.ui:869 glade/ResultWindow.ui:209
+#: glade/OptionsDialog.ui:895 glade/ResultWindow.ui:209
 msgid "Coefficient"
 msgstr "归返率"
 
@@ -618,7 +618,7 @@ msgstr "已成功寄出邮件"
 
 #: pigeonplanner/ui/maildialog.py:150
 msgid "Connection to server failed!"
-msgstr ""
+msgstr "联机至伺服失败！"
 
 #: pigeonplanner/ui/detailsview.py:53 glade/DetailsView.ui:2029
 msgid "Details of pigeon"
@@ -714,7 +714,7 @@ msgstr "成绩表"
 
 #: pigeonplanner/ui/dialogs.py:128
 msgid "Number of couples"
-msgstr ""
+msgstr "已配对总数"
 
 #: pigeonplanner/ui/dialogs.py:150
 msgid "Create backup"
@@ -786,7 +786,7 @@ msgstr "年份"
 msgid "Media"
 msgstr "媒体档案"
 
-#: pigeonplanner/ui/tabs/media.py:121 glade/OptionsDialog.ui:692
+#: pigeonplanner/ui/tabs/media.py:121 glade/OptionsDialog.ui:718
 msgid "Other"
 msgstr "其他"
 
@@ -855,26 +855,32 @@ msgid "Lofts"
 msgstr "鸽舍"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:278
+#: data/TranslationWorkaround.ui:8
 msgid "Dead"
 msgstr "死亡"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:305
+#: data/TranslationWorkaround.ui:9
 msgid "Active"
 msgstr "正常"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:426
+#: data/TranslationWorkaround.ui:10
 msgid "Sold"
 msgstr "已售出"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:547
+#: data/TranslationWorkaround.ui:11
 msgid "Lost"
 msgstr "遗失"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:666
+#: data/TranslationWorkaround.ui:12
 msgid "Breeder"
 msgstr "育种中"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:819
+#: data/TranslationWorkaround.ui:13
 msgid "On loan"
 msgstr "借出"
 
@@ -1017,28 +1023,28 @@ msgstr ""
 #: pigeonplanner/reportlib/backend/docbackend.py:163
 #, python-format
 msgid "Could not create %s"
-msgstr ""
+msgstr "无法创建 %s"
 
 #: pigeonplanner/reportlib/PdfDoc.py:249
 msgid "Contents"
-msgstr ""
+msgstr "内容"
 
 #: pigeonplanner/reportlib/PdfDoc.py:282
 msgid "Index"
-msgstr ""
+msgstr "索引"
 
 #: pigeonplanner/reportlib/backend/docbackend.py:142
 msgid "Close file first"
-msgstr ""
+msgstr "请先关闭档案"
 
 #: pigeonplanner/reportlib/backend/docbackend.py:152
 msgid "No filename given"
-msgstr ""
+msgstr "未提供文件名"
 
 #: pigeonplanner/reportlib/backend/docbackend.py:154
 #, python-format
 msgid "File %s already open, close it first."
-msgstr ""
+msgstr "档案 %s 已开启，请先关闭此档案。"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:35
 msgid "Print Preview"
@@ -1062,7 +1068,7 @@ msgstr "显示最后一页"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:108
 msgid "Zooms to fit the page width"
-msgstr ""
+msgstr "缩放以适应页面的宽度"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:112
 msgid "Zooms to fit the whole page"
@@ -1091,7 +1097,7 @@ msgstr ""
 
 #: glade/MainWindow.ui:10
 msgid "View online help"
-msgstr ""
+msgstr "查看在线帮助档"
 
 #: glade/MainWindow.ui:18
 msgid "Select all"
@@ -1163,7 +1169,7 @@ msgstr "添加鸽子"
 
 #: glade/MainWindow.ui:111
 msgid "Add range"
-msgstr ""
+msgstr "批量添加鸽子"
 
 #: glade/MainWindow.ui:112 glade/MainWindow.ui:731
 msgid "Add a range of pigeons"
@@ -1331,15 +1337,15 @@ msgstr "显示/隐藏状态栏"
 
 #: glade/MainWindow.ui:301
 msgid "Export..."
-msgstr ""
+msgstr "汇出..."
 
 #: glade/MainWindow.ui:302
 msgid "Export data to other formats"
-msgstr ""
+msgstr "将数据库导出为其他格式"
 
 #: glade/MainWindow.ui:309
 msgid "Print a list of pigeons"
-msgstr ""
+msgstr "打印种鸽列表"
 
 #: glade/MainWindow.ui:399
 msgid "Total"
@@ -1394,7 +1400,7 @@ msgstr "秒钟"
 
 #: glade/VelocityCalculator.ui:553
 msgid "Range"
-msgstr "范围"
+msgstr "批量添加鸽子"
 
 #: glade/VelocityCalculator.ui:957
 msgid "Prognosis"
@@ -1439,7 +1445,7 @@ msgstr "配对*"
 
 #: glade/BreedingView.ui:226 glade/BreedingView.ui:1242
 msgid "Series"
-msgstr ""
+msgstr "系列"
 
 #: glade/BreedingView.ui:258 glade/BreedingView.ui:1283
 msgid "Nestbox"
@@ -1523,88 +1529,88 @@ msgstr "主题"
 
 #: glade/OptionsDialog.ui:625
 msgid "Window"
-msgstr ""
+msgstr "窗口"
 
 #: glade/OptionsDialog.ui:655
 msgid "Hide deleted pigeons in lists"
-msgstr ""
+msgstr "由列表中隐藏已删除种鸽"
 
-#: glade/OptionsDialog.ui:671
+#: glade/OptionsDialog.ui:675
 msgid "Color row of deleted pigeons in lists"
-msgstr ""
+msgstr "将列表中已删除种鸽显示颜色列"
 
-#: glade/OptionsDialog.ui:837
+#: glade/OptionsDialog.ui:863
 msgid "Main Columns"
 msgstr "主要字段"
 
-#: glade/OptionsDialog.ui:976
+#: glade/OptionsDialog.ui:1002
 msgid "Results Columns"
 msgstr "赛绩字段"
 
-#: glade/OptionsDialog.ui:1032
+#: glade/OptionsDialog.ui:1058
 msgid "Paper format:"
 msgstr "纸张格式"
 
-#: glade/OptionsDialog.ui:1066
+#: glade/OptionsDialog.ui:1092
 msgid "Paper"
 msgstr "纸张"
 
-#: glade/OptionsDialog.ui:1108
+#: glade/OptionsDialog.ui:1134
 msgid "Address"
 msgstr "地址"
 
-#: glade/OptionsDialog.ui:1122 glade/AddressBook.ui:331
+#: glade/OptionsDialog.ui:1148 glade/AddressBook.ui:331
 msgid "Phone"
 msgstr "电话"
 
-#: glade/OptionsDialog.ui:1158
+#: glade/OptionsDialog.ui:1184
 msgid "Personal"
 msgstr "个人化设定"
 
-#: glade/OptionsDialog.ui:1218
+#: glade/OptionsDialog.ui:1244
 msgid "Pedigree layout:"
 msgstr "血统书版面："
 
-#: glade/OptionsDialog.ui:1275
+#: glade/OptionsDialog.ui:1301
 msgid "Show pigeon colour in pedigree"
-msgstr ""
+msgstr "于血统书中显示种鸽颜色"
 
-#: glade/OptionsDialog.ui:1296
+#: glade/OptionsDialog.ui:1322
 msgid "Layout"
 msgstr "版面布局"
 
-#: glade/OptionsDialog.ui:1366 glade/DetailsView.ui:1054
+#: glade/OptionsDialog.ui:1392 glade/DetailsView.ui:1054
 #: glade/DetailsView.ui:1638
 msgid "Extra"
 msgstr "注记"
 
-#: glade/OptionsDialog.ui:1382
+#: glade/OptionsDialog.ui:1408
 msgid "Image"
 msgstr "图片"
 
-#: glade/OptionsDialog.ui:1405
+#: glade/OptionsDialog.ui:1431
 msgid "Pigeon"
 msgstr "鸽子"
 
-#: glade/OptionsDialog.ui:1458 glade/OptionsDialog.ui:1547
+#: glade/OptionsDialog.ui:1484 glade/OptionsDialog.ui:1573
 msgid "Show the column names"
 msgstr "显示域名"
 
-#: glade/OptionsDialog.ui:1473
+#: glade/OptionsDialog.ui:1499
 msgid "Always show the sex column"
-msgstr ""
+msgstr "永久显示性别栏"
 
-#: glade/OptionsDialog.ui:1562
+#: glade/OptionsDialog.ui:1588
 msgid "Show the date"
 msgstr "显示日期"
 
-#: glade/OptionsDialog.ui:1641
+#: glade/OptionsDialog.ui:1667
 msgid "Custom coefficient multiplier"
-msgstr ""
+msgstr "自定义系数乘法器"
 
-#: glade/OptionsDialog.ui:1688
+#: glade/OptionsDialog.ui:1714
 msgid "Check for development updates"
-msgstr ""
+msgstr "检查开发版本更新"
 
 #: glade/ResultWindow.ui:8
 msgid "Print these results"
@@ -1671,7 +1677,7 @@ msgstr "归还日期"
 msgid ""
 "Unable to retrieve data. The requested pigeon is probably removed from the "
 "database."
-msgstr ""
+msgstr "无法汲取数据。可能所选择的鸽子已由数据库中移除。"
 
 #: glade/DetailsView.ui:1014 glade/DetailsView.ui:1415
 msgid "Dam"
@@ -1711,27 +1717,27 @@ msgstr "传送中..."
 
 #: glade/ExportWindow.ui:21
 msgid "Export data"
-msgstr ""
+msgstr "导出资料"
 
 #: glade/ExportWindow.ui:90
 msgid "Export"
-msgstr ""
+msgstr "汇出"
 
 #: glade/ExportWindow.ui:138
 msgid "Path"
-msgstr ""
+msgstr "路径"
 
 #: glade/ExportWindow.ui:193
 msgid "Selected"
-msgstr ""
+msgstr "已选取"
 
 #: glade/ExportWindow.ui:209
 msgid "Visible"
-msgstr ""
+msgstr "可见的"
 
 #: glade/ExportWindow.ui:225
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: glade/DistanceCalculator.ui:125 glade/DistanceCalculator.ui:253
 #: glade/RaceManager.ui:144 glade/AddressBook.ui:441
@@ -1785,11 +1791,11 @@ msgstr "放鸽地："
 
 #: glade/ResultParser.ui:182
 msgid "Sector:"
-msgstr ""
+msgstr "分区："
 
 #: glade/ResultParser.ui:196
 msgid "Category:"
-msgstr ""
+msgstr "分类："
 
 #: glade/ResultParser.ui:210
 msgid "Pigeons:"
@@ -1935,6 +1941,22 @@ msgstr "国家/地区"
 #: glade/AddressBook.ui:571
 msgid "This is me"
 msgstr "这是我的资料"
+
+#: data/TranslationWorkaround.ui:4
+msgid "Original"
+msgstr "原始"
+
+#: data/TranslationWorkaround.ui:5
+msgid "Swapped details"
+msgstr "交换的细节"
+
+#: data/TranslationWorkaround.ui:6
+msgid "A4"
+msgstr "A4大小"
+
+#: data/TranslationWorkaround.ui:7
+msgid "Letter"
+msgstr "美规信纸尺寸(Letter)"
 
 #~ msgid "Page"
 #~ msgstr "页"

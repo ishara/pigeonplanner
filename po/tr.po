@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-01-16 20:21+0100\n"
-"PO-Revision-Date: 2012-04-09 00:37+0000\n"
+"POT-Creation-Date: 2013-01-23 17:38+0100\n"
+"PO-Revision-Date: 2013-03-27 11:24+0000\n"
 "Last-Translator: Gokhan Uresin <girnelibob@yahoo.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-17 04:39+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-03-28 04:43+0000\n"
+"X-Generator: Launchpad (build 16546)\n"
 
 #: pigeonplanner/messages.py:22 pigeonplanner/common.py:237
 #: pigeonplanner/common.py:244 pigeonplanner/ui/exportwindow.py:56
@@ -323,7 +323,7 @@ msgstr "Dosya açılırken hata oluştu"
 msgid "Pedigree"
 msgstr "Soyağacı / Seçere"
 
-#: pigeonplanner/startup.py:181 glade/OptionsDialog.ui:1136 glade/Dialogs.ui:8
+#: pigeonplanner/startup.py:181 glade/OptionsDialog.ui:1162 glade/Dialogs.ui:8
 #: glade/AddressBook.ui:372
 msgid "E-mail"
 msgstr "E-Posta"
@@ -348,42 +348,42 @@ msgstr "Künye Numarası"
 #: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:186
 #: pigeonplanner/ui/widgets/treeview.py:183
 #: pigeonplanner/ui/widgets/treeview.py:199 glade/MainWindow.ui:829
-#: glade/OptionsDialog.ui:801 glade/OptionsDialog.ui:1352
+#: glade/OptionsDialog.ui:827 glade/OptionsDialog.ui:1378
 #: glade/DetailsView.ui:1077 glade/DetailsView.ui:1683
 msgid "Sex"
 msgstr "Cinsiyet"
 
 #: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dialogs.py:436
-#: pigeonplanner/ui/widgets/treeview.py:199 glade/OptionsDialog.ui:747
-#: glade/OptionsDialog.ui:1098 glade/OptionsDialog.ui:1328
+#: pigeonplanner/ui/widgets/treeview.py:199 glade/OptionsDialog.ui:773
+#: glade/OptionsDialog.ui:1124 glade/OptionsDialog.ui:1354
 #: glade/AddressBook.ui:129
 msgid "Name"
 msgstr "İsim"
 
 #: pigeonplanner/reports/pigeons.py:47
-#: pigeonplanner/ui/widgets/treeview.py:199 glade/OptionsDialog.ui:773
-#: glade/OptionsDialog.ui:1338 glade/DetailsView.ui:1066
+#: pigeonplanner/ui/widgets/treeview.py:199 glade/OptionsDialog.ui:799
+#: glade/OptionsDialog.ui:1364 glade/DetailsView.ui:1066
 #: glade/DetailsView.ui:1672
 msgid "Colour"
 msgstr "Renk"
 
 #: pigeonplanner/reports/pigeons.py:49
 #: pigeonplanner/ui/widgets/treeview.py:200
-#: pigeonplanner/ui/tools/distancecalculator.py:139 glade/OptionsDialog.ui:787
+#: pigeonplanner/ui/tools/distancecalculator.py:139 glade/OptionsDialog.ui:813
 #: glade/DetailsView.ui:1040 glade/DetailsView.ui:1488
 #: glade/MedicationView.ui:373
 msgid "Loft"
 msgstr "Yuva"
 
 #: pigeonplanner/reports/pigeons.py:51
-#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:757
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:783
 #: glade/DetailsView.ui:1090 glade/DetailsView.ui:1722
 msgid "Strain"
 msgstr "5.soy"
 
 #: pigeonplanner/reports/pigeons.py:53
 #: pigeonplanner/ui/widgets/treeview.py:191
-#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:815
+#: pigeonplanner/ui/widgets/treeview.py:200 glade/OptionsDialog.ui:841
 msgid "Status"
 msgstr "Durum"
 
@@ -417,39 +417,39 @@ msgstr "Katsayısı."
 
 #: pigeonplanner/reports/results.py:58 pigeonplanner/ui/resultwindow.py:124
 #: glade/ResultsView.ui:165 glade/ResultsView.ui:728
-#: glade/OptionsDialog.ui:879 glade/ResultWindow.ui:222
+#: glade/OptionsDialog.ui:905 glade/ResultWindow.ui:222
 msgid "Sector"
 msgstr "Sektör"
 
 #: pigeonplanner/reports/results.py:60 glade/ResultsView.ui:444
-#: glade/ResultsView.ui:741 glade/Calendar.ui:177 glade/OptionsDialog.ui:907
+#: glade/ResultsView.ui:741 glade/Calendar.ui:177 glade/OptionsDialog.ui:933
 #: glade/ResultWindow.ui:235 glade/ExportWindow.ui:126
 msgid "Type"
 msgstr "Tür"
 
 #: pigeonplanner/reports/results.py:62 glade/ResultsView.ui:486
-#: glade/ResultsView.ui:754 glade/OptionsDialog.ui:893
+#: glade/ResultsView.ui:754 glade/OptionsDialog.ui:919
 #: glade/ResultWindow.ui:248
 msgid "Category"
 msgstr "Kategori"
 
 #: pigeonplanner/reports/results.py:64
 #: pigeonplanner/ui/tools/datamanager.py:50 glade/ResultsView.ui:340
-#: glade/ResultsView.ui:767 glade/OptionsDialog.ui:937
+#: glade/ResultsView.ui:767 glade/OptionsDialog.ui:963
 #: glade/ResultWindow.ui:261
 msgid "Wind"
 msgstr "Rüzgar"
 
 #: pigeonplanner/reports/results.py:66
 #: pigeonplanner/ui/tools/datamanager.py:49 glade/ResultsView.ui:326
-#: glade/ResultsView.ui:780 glade/OptionsDialog.ui:923
+#: glade/ResultsView.ui:780 glade/OptionsDialog.ui:949
 #: glade/ResultWindow.ui:274
 msgid "Weather"
 msgstr "Hava"
 
 #: pigeonplanner/reports/results.py:68 glade/ResultsView.ui:354
 #: glade/ResultsView.ui:793 glade/Calendar.ui:261 glade/BreedingView.ui:303
-#: glade/BreedingView.ui:1321 glade/OptionsDialog.ui:953
+#: glade/BreedingView.ui:1321 glade/OptionsDialog.ui:979
 #: glade/ResultWindow.ui:287 glade/MedicationView.ui:272
 #: glade/MedicationView.ui:939 glade/AddressBook.ui:413
 msgid "Comment"
@@ -524,8 +524,8 @@ msgid "Select a folder..."
 msgstr "Klasör Seç..."
 
 #: pigeonplanner/ui/optionsdialog.py:57 glade/BreedingView.ui:322
-#: glade/BreedingView.ui:1340 glade/OptionsDialog.ui:1494
-#: glade/OptionsDialog.ui:1582 glade/OptionsDialog.ui:1730
+#: glade/BreedingView.ui:1340 glade/OptionsDialog.ui:1520
+#: glade/OptionsDialog.ui:1608 glade/OptionsDialog.ui:1756
 #: glade/DatabaseTool.ui:234
 msgid "General"
 msgstr "Genel"
@@ -536,7 +536,7 @@ msgstr "Görünüm"
 
 #: pigeonplanner/ui/optionsdialog.py:61
 msgid "Columns"
-msgstr ""
+msgstr "Sütunlar"
 
 #: pigeonplanner/ui/optionsdialog.py:63
 msgid "Printing"
@@ -554,7 +554,7 @@ msgstr "Sonuçlar"
 
 #: pigeonplanner/ui/optionsdialog.py:68
 msgid "Advanced"
-msgstr ""
+msgstr "Gelişmiş"
 
 #: pigeonplanner/ui/optionsdialog.py:122
 msgid "days"
@@ -619,7 +619,7 @@ msgid "Year of race"
 msgstr "Yarış Yılı"
 
 #: pigeonplanner/ui/resultwindow.py:125 glade/ResultsView.ui:715
-#: glade/OptionsDialog.ui:869 glade/ResultWindow.ui:209
+#: glade/OptionsDialog.ui:895 glade/ResultWindow.ui:209
 msgid "Coefficient"
 msgstr "Katsayı"
 
@@ -801,7 +801,7 @@ msgstr "Yıl"
 msgid "Media"
 msgstr "Ortam"
 
-#: pigeonplanner/ui/tabs/media.py:121 glade/OptionsDialog.ui:692
+#: pigeonplanner/ui/tabs/media.py:121 glade/OptionsDialog.ui:718
 msgid "Other"
 msgstr "Diğeri"
 
@@ -870,26 +870,32 @@ msgid "Lofts"
 msgstr "Yuva"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:278
+#: data/TranslationWorkaround.ui:8
 msgid "Dead"
 msgstr "Ölülerin sayısı"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:305
+#: data/TranslationWorkaround.ui:9
 msgid "Active"
 msgstr "Aktif"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:426
+#: data/TranslationWorkaround.ui:10
 msgid "Sold"
 msgstr "Satıldı"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:547
+#: data/TranslationWorkaround.ui:11
 msgid "Lost"
 msgstr "Kayıp"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:666
+#: data/TranslationWorkaround.ui:12
 msgid "Breeder"
 msgstr "Yetiştirici"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:819
+#: data/TranslationWorkaround.ui:13
 msgid "On loan"
 msgstr "Ödünç olarak"
 
@@ -1027,35 +1033,35 @@ msgstr "Özel Ayarlar"
 
 #: pigeonplanner/reportlib/GtkPrint.py:65
 msgid "PyGtk 2.10 or later is required"
-msgstr ""
+msgstr "PyGtk 2.10 veya üst versiyonu yüklemeniz gerekiyor"
 
 #: pigeonplanner/reportlib/PdfDoc.py:110 pigeonplanner/reportlib/PdfDoc.py:113
 #: pigeonplanner/reportlib/backend/docbackend.py:160
 #: pigeonplanner/reportlib/backend/docbackend.py:163
 #, python-format
 msgid "Could not create %s"
-msgstr ""
+msgstr "%s Oluşturulamadı"
 
 #: pigeonplanner/reportlib/PdfDoc.py:249
 msgid "Contents"
-msgstr ""
+msgstr "İçerik"
 
 #: pigeonplanner/reportlib/PdfDoc.py:282
 msgid "Index"
-msgstr ""
+msgstr "Dizin"
 
 #: pigeonplanner/reportlib/backend/docbackend.py:142
 msgid "Close file first"
-msgstr ""
+msgstr "Önce dosyayı kapatınız"
 
 #: pigeonplanner/reportlib/backend/docbackend.py:152
 msgid "No filename given"
-msgstr ""
+msgstr "Dosya adı verilmedi"
 
 #: pigeonplanner/reportlib/backend/docbackend.py:154
 #, python-format
 msgid "File %s already open, close it first."
-msgstr ""
+msgstr "%s dosya zaten açık. Önce onu kapatınız."
 
 #: pigeonplanner/reportlib/gui/printpreview.py:35
 msgid "Print Preview"
@@ -1079,7 +1085,7 @@ msgstr "Son sayfayı gösterir"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:108
 msgid "Zooms to fit the page width"
-msgstr ""
+msgstr "Sayfa ölçüsünü uygun hale getirmek için yakınlaştırın"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:112
 msgid "Zooms to fit the whole page"
@@ -1096,7 +1102,7 @@ msgstr "Sayfayı uzaklaştır"
 #: pigeonplanner/reportlib/gui/printpreview.py:348
 #, python-format
 msgid "of %d"
-msgstr ""
+msgstr "%d si"
 
 #: pigeonplanner/resultparsers/dtd.py:35
 msgid "Data Technology-Deerlijk - Belgium"
@@ -1180,7 +1186,7 @@ msgstr "Yeni bir güvercin ekle"
 
 #: glade/MainWindow.ui:111
 msgid "Add range"
-msgstr ""
+msgstr "Mesafe gir"
 
 #: glade/MainWindow.ui:112 glade/MainWindow.ui:731
 msgid "Add a range of pigeons"
@@ -1356,7 +1362,7 @@ msgstr "Veriyi diğer formatta dışa aktar"
 
 #: glade/MainWindow.ui:309
 msgid "Print a list of pigeons"
-msgstr ""
+msgstr "Güvercin listesi yazdır"
 
 #: glade/MainWindow.ui:399
 msgid "Total"
@@ -1540,88 +1546,88 @@ msgstr "Tema"
 
 #: glade/OptionsDialog.ui:625
 msgid "Window"
-msgstr ""
+msgstr "Pencere"
 
 #: glade/OptionsDialog.ui:655
 msgid "Hide deleted pigeons in lists"
-msgstr ""
+msgstr "Silinmiş Güvercinleri gizle"
 
-#: glade/OptionsDialog.ui:671
+#: glade/OptionsDialog.ui:675
 msgid "Color row of deleted pigeons in lists"
-msgstr ""
+msgstr "Silinmiş Güvercinleri renklendir"
 
-#: glade/OptionsDialog.ui:837
+#: glade/OptionsDialog.ui:863
 msgid "Main Columns"
 msgstr "Ana Sütunlar"
 
-#: glade/OptionsDialog.ui:976
+#: glade/OptionsDialog.ui:1002
 msgid "Results Columns"
 msgstr "Sonuç Sütunları"
 
-#: glade/OptionsDialog.ui:1032
+#: glade/OptionsDialog.ui:1058
 msgid "Paper format:"
 msgstr "Kağıt biçimi:"
 
-#: glade/OptionsDialog.ui:1066
+#: glade/OptionsDialog.ui:1092
 msgid "Paper"
 msgstr "Kağıt"
 
-#: glade/OptionsDialog.ui:1108
+#: glade/OptionsDialog.ui:1134
 msgid "Address"
 msgstr "Adres"
 
-#: glade/OptionsDialog.ui:1122 glade/AddressBook.ui:331
+#: glade/OptionsDialog.ui:1148 glade/AddressBook.ui:331
 msgid "Phone"
 msgstr "Telefon"
 
-#: glade/OptionsDialog.ui:1158
+#: glade/OptionsDialog.ui:1184
 msgid "Personal"
 msgstr "Kişisel"
 
-#: glade/OptionsDialog.ui:1218
+#: glade/OptionsDialog.ui:1244
 msgid "Pedigree layout:"
 msgstr "Pedigree düzeni:"
 
-#: glade/OptionsDialog.ui:1275
+#: glade/OptionsDialog.ui:1301
 msgid "Show pigeon colour in pedigree"
-msgstr ""
+msgstr "Soyağacında Güvercinin rengini göster"
 
-#: glade/OptionsDialog.ui:1296
+#: glade/OptionsDialog.ui:1322
 msgid "Layout"
 msgstr "Düzen"
 
-#: glade/OptionsDialog.ui:1366 glade/DetailsView.ui:1054
+#: glade/OptionsDialog.ui:1392 glade/DetailsView.ui:1054
 #: glade/DetailsView.ui:1638
 msgid "Extra"
 msgstr "Ekstra"
 
-#: glade/OptionsDialog.ui:1382
+#: glade/OptionsDialog.ui:1408
 msgid "Image"
 msgstr "Resim"
 
-#: glade/OptionsDialog.ui:1405
+#: glade/OptionsDialog.ui:1431
 msgid "Pigeon"
 msgstr "Güvercin"
 
-#: glade/OptionsDialog.ui:1458 glade/OptionsDialog.ui:1547
+#: glade/OptionsDialog.ui:1484 glade/OptionsDialog.ui:1573
 msgid "Show the column names"
 msgstr "Sütun adlarını göster"
 
-#: glade/OptionsDialog.ui:1473
+#: glade/OptionsDialog.ui:1499
 msgid "Always show the sex column"
-msgstr ""
+msgstr "Cinsiyet sütununu her zaman göster"
 
-#: glade/OptionsDialog.ui:1562
+#: glade/OptionsDialog.ui:1588
 msgid "Show the date"
 msgstr "Tarih göster"
 
-#: glade/OptionsDialog.ui:1641
+#: glade/OptionsDialog.ui:1667
 msgid "Custom coefficient multiplier"
-msgstr ""
+msgstr "Özel çarpan katsayısı"
 
-#: glade/OptionsDialog.ui:1688
+#: glade/OptionsDialog.ui:1714
 msgid "Check for development updates"
-msgstr ""
+msgstr "Gelişim güncellemelerini kontrol et"
 
 #: glade/ResultWindow.ui:8
 msgid "Print these results"
@@ -1964,6 +1970,22 @@ msgstr "Ülke"
 msgid "This is me"
 msgstr "Bu benim"
 
+#: data/TranslationWorkaround.ui:4
+msgid "Original"
+msgstr "Orijinal"
+
+#: data/TranslationWorkaround.ui:5
+msgid "Swapped details"
+msgstr "Yer değişmiş ayrıntılar"
+
+#: data/TranslationWorkaround.ui:6
+msgid "A4"
+msgstr "A4"
+
+#: data/TranslationWorkaround.ui:7
+msgid "Letter"
+msgstr "Harf"
+
 #~ msgid ""
 #~ "Pigeon Planner is free software. You don’t need to pay for using it. But if "
 #~ "you like it, please consider donating to help improving it."
@@ -2070,15 +2092,6 @@ msgstr "Bu benim"
 
 #~ msgid "<b>Update</b>"
 #~ msgstr "<b>Güncelle</b>"
-
-#~ msgid "A4"
-#~ msgstr "A4"
-
-#~ msgid "Original"
-#~ msgstr "Orijinal"
-
-#~ msgid "Letter"
-#~ msgstr "Harf"
 
 #~ msgid "<b>Results of pigeon</b>"
 #~ msgstr "<b>Güvercin Sonuçları</b>"
