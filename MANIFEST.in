@@ -5,6 +5,7 @@ include pigeonplanner.py
 recursive-include data *
 recursive-include glade *
 recursive-include images *
+recursive-include resultparsers *
 recursive-include languages *
 recursive-include mac *
 recursive-include po *
@@ -12,3 +13,4 @@ recursive-include win *
 
 global-exclude *.pyc
 global-exclude *.pyo
+global-exclude *~
