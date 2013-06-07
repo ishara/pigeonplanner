@@ -1,3 +1,22 @@
+1.10.0:
+ * Always add and edit pigeons in a seperate dialog
+ * Added a location latitude/longitude chooser
+ * Added options to set default distance and speed units
+ * Keep filter active after closing it
+ * General fields in resultparser are editable
+ * Group breeding records by mate
+ * Fixed reporterror on missing image
+ * Fixed rare error in filechoosers
+ * Fixed missing translation strings
+ * Fixed and improved the Data-Deerlijk result parser
+ * Lowered required GTK version
+ * Hold widgets in seperate class
+ * Changed application imports
+ * Greatly improved buildscripts
+ * General improvements to code and GUI
+ * Moved to a plugin system for resultparsers
+ * Updated translations
+
 1.8.0:
  * Complete report rewrite
  * Complete rewrite of configuration backend
