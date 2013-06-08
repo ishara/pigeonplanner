@@ -121,7 +121,7 @@ CONFIGFILE = os.path.join(PREFDIR, 'pigeonplanner.json')
 
 TEMPDIR = tempfile.gettempdir()
 
-UPDATEURL = 'http://www.pigeonplanner.com/VERSION'
+UPDATEURL = 'http://www.pigeonplanner.com/version.json'
 DOWNLOADURL = 'http://www.pigeonplanner.com/download'
 FORUMURL = 'http://forum.pigeonplanner.com'
 MAILURL = "http://www.pigeonplanner.com/cgi-bin/pigeonplanner_mailing.py"
