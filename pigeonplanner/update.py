@@ -39,6 +39,10 @@ class UpdateError(Exception):
         return "Updater: %s" % self.msg
 
 
+def versiontuple(version):
+    """ Convert version string to tuple """
+    return tuple(map(int, (version.split("."))))
+
 def update():
     local = os.path.join(const.TEMPDIR, 'pigeonplanner_update')
 
@@ -46,8 +50,8 @@ def update():
         urllib.urlretrieve(const.UPDATEURL, local)
         with open(local, 'r') as versionfile:
             versiondict = json.load(versionfile)
-    except IOError, e:
-        logger.error(e)
+    except IOError as exc:
+        logger.error(exc)
         raise UpdateError(messages.MSG_UPDATE_ERROR)
 
     try:
@@ -56,8 +60,8 @@ def update():
         pass
 
     # See what version we need to check for
-    dev = versiondict["dev"]
-    stable = versiondict["stable"]
+    dev = versiontuple(versiondict["dev"])
+    stable = versiontuple(versiondict["stable"])
     if config.get('options.check-for-dev-updates'):
         if stable > dev:
             version = stable
@@ -67,12 +71,13 @@ def update():
         version = stable
 
     new = False
-    if const.VERSION < version:
+    current = versiontuple(const.VERSION)
+    if current < version:
         msg = messages.MSG_UPDATE_AVAILABLE
         new = True
-    elif const.VERSION == version:
+    elif current == version:
         msg = messages.MSG_NO_UPDATE
-    elif const.VERSION > version:
+    elif current > version:
         msg = messages.MSG_UPDATE_DEVELOPMENT
 
     return new, msg
