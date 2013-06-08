@@ -52,7 +52,7 @@ def update():
             versiondict = json.load(versionfile)
     except IOError as exc:
         logger.error(exc)
-        raise UpdateError(messages.MSG_UPDATE_ERROR)
+        raise UpdateError(messages.MSG_CONNECTION_ERROR)
 
     try:
         os.remove(local)
