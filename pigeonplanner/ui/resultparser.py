@@ -64,7 +64,7 @@ class ResultParser(builder.GtkBuilder):
         except Exception:
             import traceback
             data = [" **** File:", self.resultfilename,
-                    "\n **** Parser:", parser.get_name(),
+                    "\n **** Parser:", "%s %s" % (parserplugin.name, parserplugin.version),
                     "\n **** Exception:", traceback.format_exc()]
             text = '\n'.join(data)
             textbuffer = self.widgets.textview.get_buffer()
