@@ -316,6 +316,8 @@ def start_ui():
     app.setup_pigeons()
 
     try:
+        geopy_log = logging.getLogger("geopy")
+        geopy_log.setLevel(logging.ERROR)
         import geopy
         if not geopy.VERSION >= (0, 95, 0):
             raise ValueError
