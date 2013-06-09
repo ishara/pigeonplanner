@@ -1,3 +1,9 @@
+1.10.1:
+ * Fixed version comparison in updater
+ * Fixed unhandled error when connection fails in location chooser
+ * Include parser version on parsing error
+ * Disable Geopy logmessages lower than ERROR
+
 1.10.0:
  * Always add and edit pigeons in a seperate dialog
  * Added a location latitude/longitude chooser
