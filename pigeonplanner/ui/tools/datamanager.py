@@ -106,7 +106,7 @@ class DataManager(builder.GtkBuilder):
         pigeon = self.widgets.liststore.get_value(node, 0)
         if not pigeon.get_pindex() in self.parser.pigeons:
             return
-        from ui.detailsview import DetailsDialog
+        from pigeonplanner.ui.detailsview import DetailsDialog
         DetailsDialog(self.database, self.parser, pigeon, self.widgets.window)
 
     def on_buttondelete_clicked(self, widget):
