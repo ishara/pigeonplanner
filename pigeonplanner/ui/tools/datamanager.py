@@ -92,6 +92,7 @@ class DataManager(builder.GtkBuilder):
         self.widgets.buttonadd.set_sensitive(value)
 
     def on_buttonsearch_clicked(self, widget):
+        self.widgets.messagebox.hide()
         self.widgets.liststore.clear()
         for pindex, pigeon in self.parser.pigeons.iteritems():
             if pigeon.get_visible(): continue
@@ -100,6 +101,9 @@ class DataManager(builder.GtkBuilder):
             is_parent = self.database.has_parent(sex, *pigeon.get_band())
             if not is_parent:
                 self.widgets.liststore.insert(0, [pigeon, False, pigeon.get_band_string()])
+
+        if len(self.widgets.liststore) == 0:
+            self.widgets.messagebox.show()
 
     def on_buttoninfo_clicked(self, widget):
         model, node = self.widgets.selection.get_selected()
