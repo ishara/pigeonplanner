@@ -40,7 +40,7 @@ def check_user_info(parent, database, name):
         if QuestionDialog(messages.MSG_NO_INFO, parent).run():
             book = AddressBook(parent, database)
             book.on_buttonadd_clicked(None)
-            book.checkme.set_active(True)
+            book.widgets.checkme.set_active(True)
             return False
     return True
 
