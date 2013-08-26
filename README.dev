@@ -15,12 +15,18 @@ Windows:
     python build_packages.py
 
 Mac OS X:
-    Build GTK from source, see http://www.gtk.org/download/macos.php
-    Use mac/jhbuild-custom and mac/pigeonplanner.modules for a complete build.
+    These steps will build a complete working GTK environment and need to be run
+    only once (or again to update packages):
+        ln -sf mac/jhbuildrc-custom ~/.jhbuildrc-custom
+        jhbuild bootstrap
+        jhbuild
+        jhbuild -m mac/pigeonplanner.modules build pigeonplanner
 
-    jhbuild shell
-    python setup.py install
-    gtk-mac-bundler mac/pigeonplanner.bundle
+    The following steps will actually produce an appbundle located on your desktop:
+        jhbuild shell
+        python setup.py install
+        chmod +w $PREFIX/lib/libpython2.7.dylib
+        gtk-mac-bundler mac/pigeonplanner.bundle
 
 -= Other =-
     export PYTHONPATH=dev
