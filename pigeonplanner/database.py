@@ -203,10 +203,12 @@ class DatabaseOperations(object):
             ' info TEXT)',
     }
 
-    def __init__(self):
+    def __init__(self, dbfile=None):
+        self.dbfile = dbfile or const.DATABASE
+
         self.conn, self.cursor = self.__db_connect()
 
-        if not os.path.exists(const.DATABASE):
+        if not os.path.exists(self.dbfile):
             for table_name, sql in self.SCHEMA.items():
                 self.cursor.execute('CREATE TABLE IF NOT EXISTS %s %s' 
                                                     %(table_name, sql))
@@ -229,21 +231,21 @@ class DatabaseOperations(object):
 
     def __db_connect(self):
         try:
-            conn = sqlite3.connect(const.DATABASE)
+            conn = sqlite3.connect(self.dbfile)
         except Exception, e:
             from ui import logdialog
 
             logger.critical("Could not connect to database")
             logger.critical(e)
             logger.debug("Databasedir: %s" %const.PREFDIR)
-            logger.debug("Database: %s" %const.DATABASE)
+            logger.debug("Database: %s" %self.dbfile)
             logger.debug("Databasedir exists: %s"
                                         %os.path.exists(const.PREFDIR))
-            logger.debug("Database exists: %s" %os.path.exists(const.DATABASE))
+            logger.debug("Database exists: %s" %os.path.exists(self.dbfile))
             logger.debug("Databasedir writable: %s"
                                         %os.access(const.PREFDIR, os.W_OK))
             logger.debug("Database writable: %s"
-                                        %os.access(const.DATABASE, os.W_OK))
+                                        %os.access(self.dbfile, os.W_OK))
             logger.debug("Encoding: %s" %sys.getfilesystemencoding())
 
             logdialog.LogDialog()
@@ -350,7 +352,7 @@ class DatabaseOperations(object):
         return self.__db_execute_select(sql, None, RET_ALLCOL)
 
     def check_schema(self):
-        new_db = os.path.exists(const.DATABASE)
+        new_db = os.path.exists(self.dbfile)
         changed = False
         # Check if all tables are present
         for s_table, s_columns in self.SCHEMA.items():
