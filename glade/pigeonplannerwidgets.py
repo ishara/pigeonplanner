@@ -28,5 +28,6 @@ from pigeonplanner.ui.widgets import date
 from pigeonplanner.ui.widgets import checkbutton
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.widgets import latlongentry
+from pigeonplanner.ui.widgets import sexentry
 from pigeonplanner.ui.widgets import statusbar
 
