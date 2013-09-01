@@ -188,6 +188,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self._set_statistics()
         self.current_pigeon = 0
         self.pigeon_no = len(self.widgets.treeview.get_model())
+        self.widgets.removedialog.set_transient_for(self)
+        self.widgets.rangedialog.set_transient_for(self)
 
         self.widgets.MenuArrows.set_active(config.get('interface.arrows'))
         self.widgets.MenuStats.set_active(config.get('interface.stats'))
