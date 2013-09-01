@@ -42,6 +42,8 @@
         <property id="vadjustment" save="False" visible="False"/>
       </properties>
     </glade-widget-class>
+    <glade-widget-class title="Sex Entry" name="SexEntry" generic-name="sexentry">
+    </glade-widget-class>
     <glade-widget-class title="Statusbar" name="StatusBar" generic-name="statusbar">
       <properties>
         <property id="size" query="False" default="0" visible="False" />
@@ -59,6 +61,7 @@
     <glade-widget-class-ref name="DistanceCombobox"/>
     <glade-widget-class-ref name="SpeedCombobox"/>
     <glade-widget-class-ref name="LatLongEntry"/>
+    <glade-widget-class-ref name="SexEntry"/>
     <glade-widget-class-ref name="StatusBar"/>
   </glade-widget-group>
 

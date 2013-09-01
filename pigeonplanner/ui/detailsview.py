@@ -36,6 +36,7 @@ from pigeonplanner.ui import utils
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.widgets import date
+from pigeonplanner.ui.widgets import sexentry
 from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.messagedialog import ErrorDialog, WarningDialog
 
@@ -282,7 +283,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.widgets.entryband.set_band(*pigeon.get_band())
         self.widgets.entrysire.set_band(*pigeon.get_sire())
         self.widgets.entrydam.set_band(*pigeon.get_dam())
-        self.widgets.entrysex.set_text(pigeon.get_sex_string())
+        self.widgets.entrysex.set_sex(pigeon.get_sex())
         self.widgets.entrystrain.set_text(pigeon.get_strain())
         self.widgets.entryloft.set_text(pigeon.get_loft())
         self.widgets.entrycolour.set_text(pigeon.get_colour())
@@ -345,6 +346,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         for entry in self.get_objects_from_prefix("entry"):
             if isinstance(entry, bandentry.BandEntry): continue
             if isinstance(entry, date.DateEntry): continue
+            if isinstance(entry, sexentry.SexEntry):
+                entry.set_sex(None)
+                continue
             entry.set_text('')
         for text in self.get_objects_from_prefix("text"):
             text.get_buffer().set_text('')
