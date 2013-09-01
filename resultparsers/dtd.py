@@ -39,7 +39,7 @@ class DTDParser(IPlugin):
         return False
 
     def parse_file(self, resultfile, pindexlist):
-        data = {}
+        data = {"sector": "", "category": "", "n_pigeons": "", "date": "", "racepoint": ""}
         results = {}
         firstline = -1
         for linenumber, line in enumerate(resultfile):
@@ -57,7 +57,7 @@ class DTDParser(IPlugin):
             # The first line contains:
             #    Name of club      Location of club      DATA TECHNOLOGY-DEERLIJK
             if linenumber == firstline:
-                data['sector'] = line.split("  ")[0]
+                data["sector"] = line.split("  ")[0]
 
             # Split each line by a space
             items = line.split()
@@ -74,13 +74,13 @@ class DTDParser(IPlugin):
                     # This is not the number of pigeons, but a category with 2 words
                     category = "%s %s" % (items[losindex - 2], category)
                     pigeonsindex = losindex - 3
-                data['category'] = category
-                data['n_pigeons'] = items[pigeonsindex]
+                data["category"] = category
+                data["n_pigeons"] = items[pigeonsindex]
                 day, month, year = items[pigeonsindex - 1].split('-')
                 dt = datetime.date(int(expand_year(year)), int(month), int(day))
-                data['date'] = dt.strftime(const.DATE_FORMAT)
+                data["date"] = dt.strftime(const.DATE_FORMAT)
                 # The remaining items before the date form the racepoint
-                data['racepoint'] = " ".join(items[:pigeonsindex - 1])
+                data["racepoint"] = " ".join(items[:pigeonsindex - 1])
 
             # Only parse lines that start with a number (place)
             try:
