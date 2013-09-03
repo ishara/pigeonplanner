@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-06-05 21:08+0200\n"
-"PO-Revision-Date: 2013-06-06 07:41+0000\n"
+"PO-Revision-Date: 2013-09-02 20:12+0000\n"
 "Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
 "Language-Team: none <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-07 05:57+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-03 05:51+0000\n"
+"X-Generator: Launchpad (build 16753)\n"
 "Language: \n"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/common.py:236
@@ -1269,7 +1269,7 @@ msgstr "Filter opties installen"
 
 #: glade/MainWindow.ui:186 glade/VelocityCalculator.ui:85
 msgid "Velocity calculator"
-msgstr "Snelheid meter"
+msgstr "Snelheidsmeter"
 
 #: glade/MainWindow.ui:187
 msgid "Calculate the velocity of flights"
@@ -1285,7 +1285,7 @@ msgstr "Bereken de afstand tussen locaties"
 
 #: glade/MainWindow.ui:200 glade/RaceManager.ui:20
 msgid "Racepoint manager"
-msgstr "Vlucht beheerder"
+msgstr "Vluchtbeheer"
 
 #: glade/MainWindow.ui:201
 msgid "Manage the racepoints and distances"
@@ -1293,7 +1293,7 @@ msgstr "Beheer de vluchten en afstanden"
 
 #: glade/MainWindow.ui:207
 msgid "Photo album"
-msgstr "Foto album"
+msgstr "Fotoalbum"
 
 #: glade/MainWindow.ui:208
 msgid "View the images of your pigeons"
@@ -1317,7 +1317,7 @@ msgstr "Bekijk de kalender"
 
 #: glade/MainWindow.ui:228 glade/DataManager.ui:26
 msgid "Data manager"
-msgstr "Data beheerder"
+msgstr "Databeheer"
 
 #: glade/MainWindow.ui:229
 msgid "Manage your data"
@@ -2518,9 +2518,3 @@ msgstr "Letter"
 
 #~ msgid "NOTE: You will only be notified when the program starts!"
 #~ msgstr "NOTA: U zal enkel verwittigd worden als het programma start!"
-
-#~ msgid "Data Technology-Deerlijk - Belgium"
-#~ msgstr "Data Technology-Deerlijk - België"
-
-#~ msgid "Data Technology-Deerlijk"
-#~ msgstr "Data Technology-Deerlijk"

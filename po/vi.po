@@ -1,6 +1,5 @@
 # Vietnamese translation for pigeonplanner
 # Copyright (c) 2013
-
 # This file is distributed under the same license as the pigeonplanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 #
@@ -9,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-06-05 21:08+0200\n"
-"PO-Revision-Date: 2013-06-22 18:30+70000\n"
-"Last-Translator: Zongke <nguyenpigeon@hotmail.com>\n"
-"Language-Team: Vietnamese \n"
+"PO-Revision-Date: 2013-06-24 04:12+0000\n"
+"Last-Translator: Ha Nguyen <nguyenpigeon@hotmail.com>\n"
+"Language-Team: Vietnamese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-22 19:00+70000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-06-25 05:16+0000\n"
+"X-Generator: Launchpad (build 16677)\n"
 "Language: vi\n"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/common.py:236
@@ -38,8 +37,8 @@ msgid ""
 "The database you are trying to open is too new for your version of Pigeon "
 "Planner. You need to reinstall the latest version to continue."
 msgstr ""
-"Cơ sở dữ liệu bạn đang mở quá mới so với phiên bản Pigeon "
-"Planner trên máy bạn. Bạn cần cài đặt lại phiên bản mới nhất để tiếp tục!"
+"Cơ sở dữ liệu bạn đang mở quá mới so với phiên bản Pigeon Planner trên máy "
+"bạn. Bạn cần cài đặt lại phiên bản mới nhất để tiếp tục!"
 
 #: pigeonplanner/messages.py:32
 msgid ""
@@ -47,8 +46,8 @@ msgid ""
 "Note that it is not advised to run an older version, which can lead to data "
 "corruption."
 msgstr ""
-"Cơ sở dữ liệu đã được cập nhật phù hợp với bản hiện tại "
-"Lưu ý không chạy với bản cũ hơn có thể dẫn đến dữ liệu bị lỗi"
+"Cơ sở dữ liệu đã được cập nhật phù hợp với bản hiện tại Lưu ý không chạy với "
+"bản cũ hơn có thể dẫn đến dữ liệu bị lỗi"
 
 #: pigeonplanner/messages.py:39
 #, python-format
@@ -61,13 +60,12 @@ msgstr "Chuyển sang lịch?"
 
 #: pigeonplanner/messages.py:43
 msgid "Invalid image!"
-msgstr "Hình ảnh không có giá trị !"
+msgstr "Ảnh không hợp lệ!"
 
 #: pigeonplanner/messages.py:44
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
-msgstr ""
-"Ảnh này không được hỗ trợ hoặc bị hỏng, xin chọn ảnh khác."
+msgstr "Ảnh này không được hỗ trợ hoặc bị hỏng, xin chọn ảnh khác."
 
 #: pigeonplanner/messages.py:47
 msgid "Loading image failed!"
@@ -80,8 +78,7 @@ msgstr "Có thể bạn đã đổi tên hoặc di chuyển ảnh qua nơi khác
 #: pigeonplanner/messages.py:51
 msgid ""
 "This pigeon already exists, but isn't showing. Do you want to show it again?"
-msgstr ""
-"Chiến binh này đã tồn tại nhưng không hiển thị. Bạn muốn xem nó? "
+msgstr "Chiến binh này đã tồn tại nhưng không hiển thị. Bạn muốn xem nó?"
 
 #: pigeonplanner/messages.py:55
 msgid "This pigeon already exists. Overwrite it?"
@@ -120,8 +117,8 @@ msgid "Invalid input!"
 msgstr "Nhập sai"
 
 #: pigeonplanner/messages.py:72
-msgid "The ring number and year are necessary."
-msgstr "Cần số kiềng & năm sinh."
+msgid "The ringnumber and year are necessary."
+msgstr "Yêu cầu số kiềng và năm"
 
 #: pigeonplanner/messages.py:75
 msgid "Only numbers are accepted as year input."
@@ -133,8 +130,7 @@ msgstr "Năm là 4 chữ số"
 
 #: pigeonplanner/messages.py:81
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr ""
-"Chỉ chấp nhận số khi thêm chiến binh"
+msgstr "Chỉ chấp nhận số khi thêm chiến binh"
 
 #: pigeonplanner/messages.py:85
 msgid "At least the date and racepoint have to be entered."
@@ -144,8 +140,7 @@ msgstr "Ít nhất phải nhập ngày & điểm thả"
 msgid ""
 "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
 "DD)."
-msgstr ""
-"Ngày nhập vào không đúng định dạng (Năm-Tháng-Ngày)."
+msgstr "Ngày nhập vào không đúng định dạng (Năm-Tháng-Ngày)."
 
 #: pigeonplanner/messages.py:92
 msgid "The result you want to add already exists."
@@ -180,8 +175,7 @@ msgstr "Xóa '%s'"
 
 #: pigeonplanner/messages.py:108
 msgid "Are you sure you want to remove this person from your addresses?"
-msgstr ""
-"Bạn chắc chắn xóa người này khỏi danh sách?"
+msgstr "Bạn chắc chắn xóa người này khỏi danh sách?"
 
 #: pigeonplanner/messages.py:112
 #, python-format
@@ -198,8 +192,7 @@ msgstr "Xóa dữ liệu"
 
 #: pigeonplanner/messages.py:117
 msgid "Are you sure you want to remove the database? All data will be lost."
-msgstr ""
-"Bạn chắc chắn xóa? Tất cả dữ liệu sẽ mất!"
+msgstr "Bạn chắc chắn xóa? Tất cả dữ liệu sẽ mất!"
 
 #: pigeonplanner/messages.py:121
 msgid "The backup was successfully created."
@@ -263,8 +256,7 @@ msgstr "Thiết lập mặc định."
 
 #: pigeonplanner/messages.py:150
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
-msgstr ""
-"Pigeon Planner cần khởi động lại để các thay đổi có hiệu lực"
+msgstr "Pigeon Planner cần khởi động lại để các thay đổi có hiệu lực"
 
 #: pigeonplanner/messages.py:153
 msgid "Restart required"
@@ -276,8 +268,7 @@ msgstr "Có bản cập nhật mới!"
 
 #: pigeonplanner/messages.py:156
 msgid "There is an update available, do you want to download it now?"
-msgstr ""
-"Có bản cập nhật mới, bạn muốn tải về?"
+msgstr "Có bản cập nhật mới, bạn muốn tải về?"
 
 #: pigeonplanner/messages.py:159
 msgid "The recipient and sender's e-mailaddress are required."
@@ -285,8 +276,7 @@ msgstr "Yêu cầu email người gửi & người nhận"
 
 #: pigeonplanner/messages.py:163
 msgid "Error trying to get information. Are you connected to the internet?"
-msgstr ""
-"Không thể lấy thông tin. Bạn đã kết nối internet?"
+msgstr "Không thể lấy thông tin. Bạn đã kết nối internet?"
 
 #: pigeonplanner/messages.py:164
 msgid "A new version is available."
@@ -321,11 +311,11 @@ msgstr "Báo cáo"
 
 #: pigeonplanner/main.py:324
 msgid "Pigeon Planner needs geopy 0.95.0 or higher to run."
-msgstr ""
+msgstr "Pigeon Planner cần Geopy phiên bản 0.95.0 hoặc cao hơn"
 
 #: pigeonplanner/main.py:331
 msgid "Pigeon Planner needs Yapsy to run."
-msgstr ""
+msgstr "Pigeon Planner cần Yapsy để chạy"
 
 #: pigeonplanner/common.py:42
 msgid "Cock"
@@ -579,8 +569,7 @@ msgstr "Ngày"
 msgid ""
 "Chances are that your problem is already fixed in this new version. Send a "
 "report anyway?"
-msgstr ""
-"Có thể vấn đề được giải quyết trong phiên bản mới. Gửi báo cáo?"
+msgstr "Có thể vấn đề được giải quyết trong phiên bản mới. Gửi báo cáo?"
 
 #: pigeonplanner/ui/exceptiondialog.py:73
 msgid "Pigeon Planner has experienced an unexpected error"
@@ -590,8 +579,7 @@ msgstr "Chương trình hết hạn hhoa85c bị lỗi không mong muốn"
 msgid ""
 "You can help the Pigeon Planner developers by taking the time to report this "
 "bug."
-msgstr ""
-"Bạn có thể báo lỗi này để giúp đỡ các nhà phát triển Pigeon Planner."
+msgstr "Bạn có thể báo lỗi này để giúp đỡ các nhà phát triển Pigeon Planner."
 
 #: pigeonplanner/ui/exceptiondialog.py:99
 msgid "Error Detail"
@@ -625,8 +613,8 @@ msgid ""
 "You need to edit the pigeon and select the correct path or restore the "
 "original image on your computer."
 msgstr ""
-"Bạn cần chỉnh sửa chiến binh và chọn lại đường dẫn "
-"hoặc khôi phục lại ảnh ban đầu trên máy tính của bạn."
+"Bạn cần chỉnh sửa chiến binh và chọn lại đường dẫn hoặc khôi phục lại ảnh "
+"ban đầu trên máy tính của bạn."
 
 #: pigeonplanner/ui/resultwindow.py:114
 msgid "Filter results"
@@ -723,15 +711,7 @@ msgstr "Logfile"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Hélion du Mas des Bourboux https://launchpad.net/~helion331990\n"
-"  Jokomolo https://launchpad.net/~jokomolo\n"
-"  LEROY Jean-Christophe https://launchpad.net/~celtic2-deactivatedaccount\n"
-"  Sorkin https://launchpad.net/~kosnila\n"
-"  Stanislas Michalak https://launchpad.net/~stanislas-michalak\n"
-"  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
-"  fredericlandreau https://launchpad.net/~fredericlandreau\n"
-"  pierre3 https://launchpad.net/~pierre3\n"
-"  prometee https://launchpad.net/~prometee"
+"  Ha Nguyen https://launchpad.net/~nguyenpigeon"
 
 #: pigeonplanner/ui/dialogs.py:68 glade/MainWindow.ui:259
 msgid "General information"
@@ -823,7 +803,7 @@ msgstr "Tên"
 
 #: pigeonplanner/ui/dialogs.py:393
 msgid "Removing the selected medication entry"
-msgstr "Xóa bỏ các loại thuốc được chọn "
+msgstr "Xóa bỏ các loại thuốc được chọn"
 
 #: pigeonplanner/ui/dialogs.py:395
 msgid "Remove this entry for all pigeons?"
@@ -1878,9 +1858,9 @@ msgid ""
 "parser that matches your file and try again. Or send the developers some "
 "useful data shown below, so they can work on this issue."
 msgstr ""
-"Tập tin bạn chọn không thể phân tích một cách chính xác. "
-"Thử chọn một cách phân tích phù hợp, hoặc gửi các nhà phát triển một số dữ liệu hữu ích, "
-"để họ có thể giải quyết vấn đề này."
+"Tập tin bạn chọn không thể phân tích một cách chính xác. Thử chọn một cách "
+"phân tích phù hợp, hoặc gửi các nhà phát triển một số dữ liệu hữu ích, để họ "
+"có thể giải quyết vấn đề này."
 
 #: glade/PhotoAlbum.ui:8
 msgid "Zooms to fit the whole picture"
@@ -1987,7 +1967,8 @@ msgid ""
 "Only execute SQL statements if you know what you are doing! Entering invalid "
 "or wrong statements may cause data loss!"
 msgstr ""
-"Chỉ thực hiện các lệnh SQL nếu bạn hiểu rõ! SỬ DỤNG SAI CÚ PHÁP SẼ LÀM HỎNG DỮ LIỆU"
+"Chỉ thực hiện các lệnh SQL nếu bạn hiểu rõ! SỬ DỤNG SAI CÚ PHÁP SẼ LÀM HỎNG "
+"DỮ LIỆU"
 
 #: glade/DatabaseTool.ui:394
 msgid "SQL"
@@ -2135,8 +2116,7 @@ msgstr "Letter"
 #~ msgstr "Tìm cơ sở dữ liệu"
 
 #~ msgid "Error loading this image. Probably you have moved it on your disk."
-#~ msgstr ""
-#~ "Lỗi tải ảnh. Có thể bạn đã xóa nó."
+#~ msgstr "Lỗi tải ảnh. Có thể bạn đã xóa nó."
 
 #~ msgid ""
 #~ "You have not entered your personal information.\n"
@@ -2267,7 +2247,7 @@ msgstr "Letter"
 #~ msgstr "Click vào đây để đặt trạng thái chiến binh"
 
 #~ msgid "Enter the year of the pigeon"
-#~ msgstr "Nhập năm của chiến binh "
+#~ msgstr "Nhập năm của chiến binh"
 
 #~ msgid "_Photo Album"
 #~ msgstr "_Album Ảnh"
@@ -2319,8 +2299,7 @@ msgstr "Letter"
 #~ msgstr "Thêm và xóa các mục từ bảng dữ liệu"
 
 #~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr ""
-#~ "Nếu xóa, tất cả dữ liệu của bạn sẽ mất"
+#~ msgstr "Nếu xóa, tất cả dữ liệu của bạn sẽ mất"
 
 #~ msgid "Released (hh : mm)"
 #~ msgstr "Thả (giờ : phút)"
@@ -2342,8 +2321,8 @@ msgstr "Letter"
 #~ "Pigeon Planner is free software. You don’t need to pay for using it. But if "
 #~ "you like it, please consider donating to help improving it."
 #~ msgstr ""
-#~ "Pigeon Planner là phần mềm miễn phí. Bạn không cần trả phí sử dụng, "
-#~ "nhưng nếu bạn thích, có thể đóng góp để phát triển nó tốt hơn."
+#~ "Pigeon Planner là phần mềm miễn phí. Bạn không cần trả phí sử dụng, nhưng "
+#~ "nếu bạn thích, có thể đóng góp để phát triển nó tốt hơn."
 
 #~ msgid "Remove result"
 #~ msgstr "Xóa kết quả"
@@ -2369,8 +2348,8 @@ msgstr "Letter"
 #~ "A new version is available. Please go to the Pigeon Planner website by "
 #~ "clicking the link below and download the latest version"
 #~ msgstr ""
-#~ "Có phiên bản mới. Hãy vào website Pigeon Planner "
-#~ "và click vào link bên dưới để tải về phiên bản mới nhất."
+#~ "Có phiên bản mới. Hãy vào website Pigeon Planner và click vào link bên dưới "
+#~ "để tải về phiên bản mới nhất."
 
 #~ msgid "Select a directory"
 #~ msgstr "Chọn thư mục"
@@ -2398,8 +2377,8 @@ msgstr "Letter"
 #~ "Warning: The '%(option)s' option is not set in the '%(section)s' section of "
 #~ "the configuration file, using the default '%(default)s'."
 #~ msgstr ""
-#~ "Chú ý: Tùy chọn '%(option)s' không được đặt trong phần '%(section)s' "
-#~ "của tập tin cấu hình, dùng mặc định '%(default)s'."
+#~ "Chú ý: Tùy chọn '%(option)s' không được đặt trong phần '%(section)s' của tập "
+#~ "tin cấu hình, dùng mặc định '%(default)s'."
 
 #, python-format
 #~ msgid ""
@@ -2407,9 +2386,8 @@ msgstr "Letter"
 #~ "error occured parsing its option '%(option)s', using the default "
 #~ "'%(default)s'."
 #~ msgstr ""
-#~ "Chú ý: Không có phần '%(section)s' trong tập tin cấu hình "
-#~ "lỗi xảy ra khi phân tích tùy chọn '%(option)s', dùng mặc định "
-#~ "'%(default)s'."
+#~ "Chú ý: Không có phần '%(section)s' trong tập tin cấu hình lỗi xảy ra khi "
+#~ "phân tích tùy chọn '%(option)s', dùng mặc định '%(default)s'."
 
 #, python-format
 #~ msgid ""
@@ -2417,8 +2395,8 @@ msgstr "Letter"
 #~ "'%(section)s' section of the configuration file, using the default "
 #~ "'%(default)s'."
 #~ msgstr ""
-#~ "Lỗi: Có lỗi khi phân tích tùy chọn '%(option)s' trong phần '%(section)s' "
-#~ "của tập tin cấu hình, dùng mặc định '%(default)s'."
+#~ "Lỗi: Có lỗi khi phân tích tùy chọn '%(option)s' trong phần '%(section)s' của "
+#~ "tập tin cấu hình, dùng mặc định '%(default)s'."
 
 #~ msgid "Email this pedigree"
 #~ msgstr "Email gia phả này"
@@ -2446,12 +2424,3 @@ msgstr "Letter"
 
 #~ msgid "<b>General</b>"
 #~ msgstr "<b>Tổng quát</b>"
-
-#~ msgid "Data Technology-Deerlijk - Belgium"
-#~ msgstr "Data Technology-Deerlijk - Belgique"
-
-#~ msgid "Data Technology-Deerlijk"
-#~ msgstr "Data Technology-Deerlijk"
-
-#~ msgid "Mate"
-#~ msgstr "Ghép cặp"
