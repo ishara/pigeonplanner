@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-05 21:08+0200\n"
+"POT-Creation-Date: 2013-09-03 12:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -302,11 +302,11 @@ msgstr ""
 msgid "Report"
 msgstr ""
 
-#: pigeonplanner/main.py:324
+#: pigeonplanner/main.py:326
 msgid "Pigeon Planner needs geopy 0.95.0 or higher to run."
 msgstr ""
 
-#: pigeonplanner/main.py:331
+#: pigeonplanner/main.py:333
 msgid "Pigeon Planner needs Yapsy to run."
 msgstr ""
 
@@ -343,7 +343,7 @@ msgstr ""
 #: pigeonplanner/ui/widgets/treeview.py:184
 #: pigeonplanner/ui/widgets/treeview.py:200 glade/MainWindow.ui:829
 #: glade/OptionsDialog.ui:915 glade/OptionsDialog.ui:1466
-#: glade/DetailsView.ui:260 glade/DetailsView.ui:836
+#: glade/DetailsView.ui:261 glade/DetailsView.ui:815
 msgid "Sex"
 msgstr ""
 
@@ -356,22 +356,22 @@ msgstr ""
 
 #: pigeonplanner/reports/pigeons.py:47
 #: pigeonplanner/ui/widgets/treeview.py:184 glade/OptionsDialog.ui:887
-#: glade/OptionsDialog.ui:1452 glade/DetailsView.ui:249
-#: glade/DetailsView.ui:825
+#: glade/OptionsDialog.ui:1452 glade/DetailsView.ui:250
+#: glade/DetailsView.ui:804
 msgid "Colour"
 msgstr ""
 
 #: pigeonplanner/reports/pigeons.py:49
 #: pigeonplanner/ui/widgets/treeview.py:185
 #: pigeonplanner/ui/tools/distancecalculator.py:137 glade/OptionsDialog.ui:901
-#: glade/DetailsView.ui:223 glade/DetailsView.ui:655
+#: glade/DetailsView.ui:224 glade/DetailsView.ui:634
 #: glade/MedicationView.ui:880
 msgid "Loft"
 msgstr ""
 
 #: pigeonplanner/reports/pigeons.py:51
 #: pigeonplanner/ui/widgets/treeview.py:185 glade/OptionsDialog.ui:871
-#: glade/DetailsView.ui:273 glade/DetailsView.ui:849
+#: glade/DetailsView.ui:274 glade/DetailsView.ui:828
 msgid "Strain"
 msgstr ""
 
@@ -383,14 +383,14 @@ msgstr ""
 
 #: pigeonplanner/reports/results.py:49 pigeonplanner/reports/velocity.py:39
 #: glade/ResultsView.ui:36 glade/Calendar.ui:136 glade/ResultWindow.ui:157
-#: glade/DetailsView.ui:1281 glade/DetailsView.ui:1394
-#: glade/DetailsView.ui:1515 glade/MedicationView.ui:36
+#: glade/DetailsView.ui:1254 glade/DetailsView.ui:1367
+#: glade/DetailsView.ui:1488 glade/MedicationView.ui:36
 #: glade/MedicationView.ui:123
 msgid "Date"
 msgstr ""
 
 #: pigeonplanner/reports/results.py:50 pigeonplanner/ui/resultwindow.py:122
-#: glade/ResultsView.ui:50 glade/ResultWindow.ui:170 glade/DetailsView.ui:1559
+#: glade/ResultsView.ui:50 glade/ResultWindow.ui:170 glade/DetailsView.ui:1532
 #: glade/RaceManager.ui:132
 msgid "Racepoint"
 msgstr ""
@@ -641,11 +641,11 @@ msgstr ""
 msgid "This result is not in the '%s' format. Do you want to continue?"
 msgstr ""
 
-#: pigeonplanner/ui/detailsview.py:65 glade/DetailsView.ui:1112
+#: pigeonplanner/ui/detailsview.py:66 glade/DetailsView.ui:1085
 msgid "Details of pigeon"
 msgstr ""
 
-#: pigeonplanner/ui/detailsview.py:67
+#: pigeonplanner/ui/detailsview.py:68
 #, python-format
 msgid "Details of %s"
 msgstr ""
@@ -666,30 +666,30 @@ msgstr ""
 msgid "Operation completed"
 msgstr ""
 
-#: pigeonplanner/ui/mainwindow.py:281
+#: pigeonplanner/ui/mainwindow.py:283
 #, python-format
 msgid "Pigeon %s has been added"
 msgstr ""
 
-#: pigeonplanner/ui/mainwindow.py:398
+#: pigeonplanner/ui/mainwindow.py:400
 #, python-format
 msgid "Pigeon %s has been removed"
 msgstr ""
 
-#: pigeonplanner/ui/mainwindow.py:408
+#: pigeonplanner/ui/mainwindow.py:410
 #, python-format
 msgid "%s pigeons have been removed"
 msgstr ""
 
-#: pigeonplanner/ui/mainwindow.py:553 glade/MainWindow.ui:251
+#: pigeonplanner/ui/mainwindow.py:555 glade/MainWindow.ui:251
 msgid "Search for updates..."
 msgstr ""
 
-#: pigeonplanner/ui/mainwindow.py:555
+#: pigeonplanner/ui/mainwindow.py:557
 msgid "Go to the website?"
 msgstr ""
 
-#: pigeonplanner/ui/locationchooser.py:50
+#: pigeonplanner/ui/locationchooser.py:51
 #, python-format
 msgid "Can't find location '%s'"
 msgstr ""
@@ -876,32 +876,32 @@ msgstr ""
 msgid "Lofts"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1347
+#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1320
 #: data/TranslationWorkaround.ui:8
 msgid "Dead"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1374
+#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1347
 #: data/TranslationWorkaround.ui:9
 msgid "Active"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1495
+#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1468
 #: data/TranslationWorkaround.ui:10
 msgid "Sold"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1616
+#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1589
 #: data/TranslationWorkaround.ui:11
 msgid "Lost"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:1735
+#: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:1708
 #: data/TranslationWorkaround.ui:12
 msgid "Breeder"
 msgstr ""
 
-#: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:1888
+#: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:1861
 #: data/TranslationWorkaround.ui:13
 msgid "On loan"
 msgstr ""
@@ -1362,12 +1362,12 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: glade/MainWindow.ui:904 glade/DetailsView.ui:1695
+#: glade/MainWindow.ui:904 glade/DetailsView.ui:1668
 #: glade/DistanceCalculator.ui:331
 msgid "To"
 msgstr ""
 
-#: glade/MainWindow.ui:956 glade/DetailsView.ui:1636
+#: glade/MainWindow.ui:956 glade/DetailsView.ui:1609
 #: glade/DistanceCalculator.ui:203
 msgid "From"
 msgstr ""
@@ -1599,8 +1599,8 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-#: glade/OptionsDialog.ui:1480 glade/DetailsView.ui:237
-#: glade/DetailsView.ui:791
+#: glade/OptionsDialog.ui:1480 glade/DetailsView.ui:238
+#: glade/DetailsView.ui:770
 msgid "Extra"
 msgstr ""
 
@@ -1662,49 +1662,49 @@ msgid ""
 "database."
 msgstr ""
 
-#: glade/DetailsView.ui:197 glade/DetailsView.ui:582
+#: glade/DetailsView.ui:198 glade/DetailsView.ui:561
 msgid "Dam"
 msgstr ""
 
-#: glade/DetailsView.ui:210 glade/DetailsView.ui:595
+#: glade/DetailsView.ui:211 glade/DetailsView.ui:574
 msgid "Sire"
 msgstr ""
 
-#: glade/DetailsView.ui:1122
+#: glade/DetailsView.ui:1095
 msgid "Pigeon status"
 msgstr ""
 
-#: glade/DetailsView.ui:1181
+#: glade/DetailsView.ui:1154
 msgid "Choose a status for this pigeon:"
 msgstr ""
 
-#: glade/DetailsView.ui:1224
+#: glade/DetailsView.ui:1197
 msgid "The current status is:"
 msgstr ""
 
-#: glade/DetailsView.ui:1294 glade/DetailsView.ui:1407
-#: glade/DetailsView.ui:1528 glade/DetailsView.ui:1649
-#: glade/DetailsView.ui:1768
+#: glade/DetailsView.ui:1267 glade/DetailsView.ui:1380
+#: glade/DetailsView.ui:1501 glade/DetailsView.ui:1622
+#: glade/DetailsView.ui:1741
 msgid "Extra info"
 msgstr ""
 
-#: glade/DetailsView.ui:1362
+#: glade/DetailsView.ui:1335
 msgid "No extra information available."
 msgstr ""
 
-#: glade/DetailsView.ui:1438
+#: glade/DetailsView.ui:1411
 msgid "Buyer"
 msgstr ""
 
-#: glade/DetailsView.ui:1755
+#: glade/DetailsView.ui:1728
 msgid "Loaned"
 msgstr ""
 
-#: glade/DetailsView.ui:1801
+#: glade/DetailsView.ui:1774
 msgid "Person"
 msgstr ""
 
-#: glade/DetailsView.ui:1848
+#: glade/DetailsView.ui:1821
 msgid "Back"
 msgstr ""
 
@@ -1899,7 +1899,11 @@ msgstr ""
 msgid "Manage items"
 msgstr ""
 
-#: glade/DataManager.ui:372
+#: glade/DataManager.ui:321
+msgid "No unused objects found!"
+msgstr ""
+
+#: glade/DataManager.ui:407
 msgid "Unused objects"
 msgstr ""
 
