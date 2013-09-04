@@ -32,20 +32,22 @@ from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog
 
 
-class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
-    (COL_ID,
-     COL_DATE,
-     COL_RACEPOINT,
-     COL_PLACED,
-     COL_OUT,
-     COL_COEF,
-     COL_SECTOR,
-     COL_TYPE,
-     COL_CATEGORY,
-     COL_WIND,
-     COL_WEATHER,
-     COL_COMMENT) = range(12)
+(COL_DATE,
+ COL_RACEPOINT,
+ COL_TYPE,
+ COL_WIND,
+ COL_WEATHER) = range(5)
 
+(COL_ID,
+ COL_PLACED,
+ COL_OUT,
+ COL_COEF,
+ COL_SECTOR,
+ COL_CATEGORY,
+ COL_COMMENT) = range(7)
+
+
+class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     def __init__(self, parent, database, parser):
         builder.GtkBuilder.__init__(self, "ResultsView.ui")
         basetab.BaseTab.__init__(self, _("Results"), "icon_result.png")
@@ -55,6 +57,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.parser = parser
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect('changed', self.on_selection_changed)
+        self.widgets.race_sel = self.widgets.race_tv.get_selection()
+        self.widgets.race_sel.connect('changed', self.on_race_sel_changed)
         self.set_columns()
 
         self.widgets.comboracepoint.set_data(self.database, self.database.RACEPOINTS)
@@ -93,21 +97,27 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self._set_dialog(self._mode, values)
 
     def on_buttonedit_clicked(self, widget):
-        result = self._get_selected_result()
-        for index, item in enumerate(result):
-            # Happens on conversion from 0.6.0 to 0.7.0
-            if item is None:
-                result[index] = ''
-
+        # Columns could contain None prior to 0.7.0, convert to empty string
+        model, rowiter = self.widgets.selection.get_selected()
+        model_race, rowiter_race = self.widgets.race_sel.get_selected()
+        result = [model_race.get_value(rowiter_race, COL_DATE) or "",
+                  model_race.get_value(rowiter_race, COL_RACEPOINT) or "",
+                  model.get_value(rowiter, COL_PLACED) or "",
+                  model.get_value(rowiter, COL_OUT) or "",
+                  model.get_value(rowiter, COL_SECTOR) or "",
+                  model_race.get_value(rowiter_race, COL_TYPE) or "",
+                  model.get_value(rowiter, COL_CATEGORY) or "",
+                  model_race.get_value(rowiter_race, COL_WEATHER) or "",
+                  model_race.get_value(rowiter_race, COL_WIND) or "",
+                  model.get_value(rowiter, COL_COMMENT) or "",
+                  ]
         self._mode = const.EDIT
-        del result[self.COL_COEF] # Delete the coefficient
-        del result[self.COL_ID] # Delete the row id
         self._set_dialog(self._mode, result)
 
     def on_buttonremove_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.liststore.get_path(rowiter)
-        rowid = model[rowiter][self.COL_ID]
+        rowid = model[rowiter][COL_ID]
 
         if not QuestionDialog(messages.MSG_REMOVE_RESULT, self.parent).run():
             return
@@ -115,6 +125,10 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.database.delete_from_table(self.database.RESULTS, rowid, 0)
         self.widgets.liststore.remove(rowiter)
         self.widgets.selection.select_path(path)
+
+        if len(self.widgets.liststore) == 0:
+            model, rowiter = self.widgets.race_sel.get_selected()
+            self.widgets.race_ls.remove(rowiter)
 
     def on_buttonclose_clicked(self, widget):
         self.widgets.dialog.hide()
@@ -135,22 +149,33 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             if self.database.has_result(data):
                 ErrorDialog(messages.MSG_RESULT_EXISTS, self.parent)
                 return
-            rowid = self.database.insert_into_table(self.database.RESULTS, data)
-            rowiter = self.widgets.liststore.insert(0, [rowid, date, point, place,
-                                                out, cof, sector, ftype,
-                                                category, wind, weather, comment])
-            self.widgets.selection.select_iter(rowiter)
-            path = self.widgets.liststore.get_path(rowiter)
-            self.widgets.treeview.scroll_to_cell(path)
+
+            if not self.database.get_pigeon_results_for_data(self.pindex, date, point):
+                rowiter = self.widgets.race_ls.insert(0, [date, point, ftype, wind, weather])
+                self.widgets.race_ls.set_sort_column_id(0, gtk.SORT_ASCENDING)
+                self.widgets.race_sel.select_iter(rowiter)
+                path = self.widgets.race_ls.get_path(rowiter)
+                self.widgets.race_tv.scroll_to_cell(path)
+            else:
+                model, node = self.widgets.race_sel.get_selected()
+                self.widgets.race_ls.set(node, COL_DATE, date, COL_RACEPOINT, point,
+                                    COL_TYPE, ftype, COL_WIND, wind, COL_WEATHER, weather)
+            self.database.insert_into_table(self.database.RESULTS, data)
         elif self._mode == const.EDIT:
             model, node = self.widgets.selection.get_selected()
             data.append(self.widgets.liststore.get_value(node, 0))
             self.database.update_table(self.database.RESULTS, data, 2, 0)
-            self.widgets.liststore.set(node, 1, date, 2, point, 3, place, 4, out,
-                                             5, cof, 6, sector, 7, ftype, 8, category,
-                                             9, wind, 10, weather, 11, comment)
-            self.widgets.selection.emit('changed')
+            self.widgets.liststore.set(node, COL_PLACED, place, COL_OUT, out,
+                                             COL_COEF, cof, COL_SECTOR, sector,
+                                             COL_CATEGORY, category,
+                                             COL_COMMENT, comment)
+            model, node = self.widgets.race_sel.get_selected()
+            self.widgets.race_ls.set(node, COL_DATE, date, COL_RACEPOINT, point,
+                                COL_TYPE, ftype, COL_WIND, wind, COL_WEATHER, weather)
             self.widgets.dialog.hide()
+
+        self.database.update_race(date, point, sector, wind, weather)
+        self.widgets.race_sel.emit("changed")
 
         data = [(self.widgets.comboracepoint, point, self.database.RACEPOINTS),
                 (self.widgets.combosector, sector, self.database.SECTORS),
@@ -166,34 +191,42 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         widgets = [self.widgets.buttonremove, self.widgets.buttonedit]
         utils.set_multiple_sensitive(widgets, not rowiter is None)
 
+    def on_race_sel_changed(self, selection):
+        model, rowiter = selection.get_selected()
+        if rowiter is None:
+            return
+
+        date = model.get_value(rowiter, 0)
+        racepoint = model.get_value(rowiter, 1)
+        self.widgets.liststore.clear()
+        for result in self.database.get_pigeon_results_for_data(self.pindex,
+                                                                date, racepoint):
+            place = result[4]
+            out = result[5]
+            cof = common.calculate_coefficient(place, out)
+            self.widgets.liststore.append([result[0], place, out, cof,
+                                           result[6], result[8], result[15]])
+
     def on_spinplaced_changed(self, widget):
         self.widgets.spinoutof.set_range(widget.get_value_as_int(),
                                          widget.get_range()[1])
+
+    def on_entrydate_changed(self, widget):
+        self._autofill_race()
+
+    def on_comboracepoint_changed(self, widget):
+        self._autofill_race()
 
     # Public methods
     def set_pigeon(self, pigeon):
         band = pigeon.get_band_string()
         self.widgets.labelpigeon.set_text(band)
         self.pindex = pigeon.get_pindex()
-        self.widgets.treeview.freeze_child_notify()
-        self.widgets.treeview.set_model(None)
-
-        self.widgets.liststore.set_default_sort_func(lambda *args: -1) 
-        self.widgets.liststore.set_sort_column_id(-1, gtk.SORT_ASCENDING)
 
         self.widgets.liststore.clear()
-        for result in self.database.get_pigeon_results(self.pindex):
-            place = result[4]
-            out = result[5]
-            cof = common.calculate_coefficient(place, out)
-            self.widgets.liststore.insert(0, [result[0], result[2], result[3],
-                                              place, out, cof,
-                                              result[6], result[7], result[8],
-                                              result[9], result[10], result[15]])
-        self.widgets.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
-
-        self.widgets.treeview.set_model(self.widgets.liststore)
-        self.widgets.treeview.thaw_child_notify()
+        self.widgets.race_ls.clear()
+        for race in self.database.get_pigeon_results_as_race(self.pindex):
+            self.widgets.race_ls.append([race[2], race[3], race[7], race[9], race[10]])
 
     def clear_pigeon(self):
         self.widgets.liststore.clear()
@@ -205,22 +238,20 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.buttonadd.clicked()
 
     def set_columns(self):
-        columnsdic = {4: config.get('columns.result-coef'),
-                      5: config.get('columns.result-sector'),
-                      6: config.get('columns.result-type'),
-                      7: config.get('columns.result-category'),
-                      8: config.get('columns.result-wind'),
-                      9: config.get('columns.result-weather'),
-                      10: config.get('columns.result-comment')}
+        columnsdic = {2: config.get('columns.result-coef'),
+                      3: config.get('columns.result-sector'),
+                      4: config.get('columns.result-category'),
+                      5: config.get('columns.result-comment')}
         for key, value in columnsdic.items():
             self.widgets.treeview.get_column(key).set_visible(value)
 
-    # Internal methods
-    def _get_selected_result(self):
-        model, rowiter = self.widgets.selection.get_selected()
-        if not rowiter: return
-        return list(model[rowiter])
+        columnsdic = {2: config.get('columns.result-type'),
+                      3: config.get('columns.result-wind'),
+                      4: config.get('columns.result-weather')}
+        for key, value in columnsdic.items():
+            self.widgets.race_tv.get_column(key).set_visible(value)
 
+    # Internal methods
     def _get_data(self):
         try:
             date = self.widgets.entrydate.get_text()
@@ -254,6 +285,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self._set_entry_values(values)
         text = _('Edit result for:') if mode == const.EDIT else _('Add result for:')
         self.widgets.labelmode.set_text(text)
+        #TODO: Setting modal doesn't work
         self.widgets.dialog.set_modal(mode == const.EDIT)
         self.widgets.dialog.show()
         self.widgets.entrydate.grab_focus()
@@ -284,4 +316,19 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                 return
         model.append([data])
         model.set_sort_column_id(0, gtk.SORT_ASCENDING)
+
+    def _autofill_race(self):
+        date = self.widgets.entrydate.get_text()
+        racepoint = self.widgets.comboracepoint.child.get_text()
+        if date == "" or racepoint == "":
+            # Don't bother checking
+            return
+        race = self.database.get_race_info(date, racepoint)
+        if race is not None:
+            ftype, wind, weather = race[7], race[9], race[10]
+        else:
+            ftype, wind, weather = "", "", ""
+        self.widgets.combotype.child.set_text(ftype)
+        self.widgets.combowind.child.set_text(wind)
+        self.widgets.comboweather.child.set_text(weather)
 

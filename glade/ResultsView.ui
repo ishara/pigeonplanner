@@ -7,6 +7,121 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
+      <object class="GtkFrame" id="frame4">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label_xalign">0</property>
+        <property name="shadow_type">none</property>
+        <child>
+          <object class="GtkAlignment" id="alignment4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="left_padding">4</property>
+            <child>
+              <object class="GtkScrolledWindow" id="scrolledwindow2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hscrollbar_policy">automatic</property>
+                <property name="vscrollbar_policy">automatic</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="race_tv">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">race_ls</property>
+                    <property name="headers_clickable">False</property>
+                    <property name="rules_hint">True</property>
+                    <property name="enable_search">False</property>
+                    <property name="search_column">0</property>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn12">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Date</property>
+                        <property name="sort_column_id">0</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn13">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Racepoint</property>
+                        <property name="sort_column_id">1</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext5"/>
+                          <attributes>
+                            <attribute name="text">1</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn7">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Type</property>
+                        <property name="sort_column_id">2</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext13"/>
+                          <attributes>
+                            <attribute name="text">2</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn14">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Wind</property>
+                        <property name="sort_column_id">3</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext7"/>
+                          <attributes>
+                            <attribute name="text">3</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn15">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Weather</property>
+                        <property name="sort_column_id">4</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext6"/>
+                          <attributes>
+                            <attribute name="text">4</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child type="label">
+          <object class="GtkLabel" id="label9">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Races</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
       <object class="GtkFrame" id="frame1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
@@ -16,6 +131,7 @@
           <object class="GtkAlignment" id="alignment1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="left_padding">4</property>
             <child>
               <object class="GtkScrolledWindow" id="scrolledwindow1">
                 <property name="visible">True</property>
@@ -29,16 +145,18 @@
                     <property name="can_focus">True</property>
                     <property name="model">liststore</property>
                     <property name="rules_hint">True</property>
+                    <property name="enable_search">False</property>
                     <property name="search_column">0</property>
                     <signal name="button-press-event" handler="on_treeview_press" swapped="no"/>
                     <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn1">
-                        <property name="title" translatable="yes">Date</property>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Placed</property>
                         <property name="clickable">True</property>
                         <property name="sort_indicator">True</property>
                         <property name="sort_column_id">1</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                          <object class="GtkCellRendererText" id="cellrenderertext4"/>
                           <attributes>
                             <attribute name="text">1</attribute>
                           </attributes>
@@ -46,13 +164,14 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn2">
-                        <property name="title" translatable="yes">Racepoint</property>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn4">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Out of</property>
                         <property name="clickable">True</property>
                         <property name="sort_indicator">True</property>
                         <property name="sort_column_id">2</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                          <object class="GtkCellRendererText" id="cellrenderertext10"/>
                           <attributes>
                             <attribute name="text">2</attribute>
                           </attributes>
@@ -60,13 +179,14 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn3">
-                        <property name="title" translatable="yes">Placed</property>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn5">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Coefficient</property>
                         <property name="clickable">True</property>
                         <property name="sort_indicator">True</property>
                         <property name="sort_column_id">3</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext4"/>
+                          <object class="GtkCellRendererText" id="cellrenderertext11"/>
                           <attributes>
                             <attribute name="text">3</attribute>
                           </attributes>
@@ -74,13 +194,14 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn4">
-                        <property name="title" translatable="yes">Out of</property>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn6">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Sector</property>
                         <property name="clickable">True</property>
                         <property name="sort_indicator">True</property>
                         <property name="sort_column_id">4</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext10"/>
+                          <object class="GtkCellRendererText" id="cellrenderertext12"/>
                           <attributes>
                             <attribute name="text">4</attribute>
                           </attributes>
@@ -88,13 +209,14 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn5">
-                        <property name="title" translatable="yes">Coefficient</property>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn8">
+                        <property name="sizing">autosize</property>
+                        <property name="title" translatable="yes">Category</property>
                         <property name="clickable">True</property>
                         <property name="sort_indicator">True</property>
                         <property name="sort_column_id">5</property>
                         <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext11"/>
+                          <object class="GtkCellRendererText" id="cellrenderertext14"/>
                           <attributes>
                             <attribute name="text">5</attribute>
                           </attributes>
@@ -102,85 +224,14 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn6">
-                        <property name="title" translatable="yes">Sector</property>
-                        <property name="clickable">True</property>
-                        <property name="sort_indicator">True</property>
-                        <property name="sort_column_id">6</property>
-                        <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext12"/>
-                          <attributes>
-                            <attribute name="text">6</attribute>
-                          </attributes>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn7">
-                        <property name="title" translatable="yes">Type</property>
-                        <property name="clickable">True</property>
-                        <property name="sort_indicator">True</property>
-                        <property name="sort_column_id">7</property>
-                        <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext13"/>
-                          <attributes>
-                            <attribute name="text">7</attribute>
-                          </attributes>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn8">
-                        <property name="title" translatable="yes">Category</property>
-                        <property name="clickable">True</property>
-                        <property name="sort_indicator">True</property>
-                        <property name="sort_column_id">8</property>
-                        <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext14"/>
-                          <attributes>
-                            <attribute name="text">8</attribute>
-                          </attributes>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn9">
-                        <property name="title" translatable="yes">Wind</property>
-                        <property name="clickable">True</property>
-                        <property name="sort_indicator">True</property>
-                        <property name="sort_column_id">9</property>
-                        <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext15"/>
-                          <attributes>
-                            <attribute name="text">9</attribute>
-                          </attributes>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkTreeViewColumn" id="treeviewcolumn10">
-                        <property name="title" translatable="yes">Weather</property>
-                        <property name="clickable">True</property>
-                        <property name="sort_indicator">True</property>
-                        <property name="sort_column_id">10</property>
-                        <child>
-                          <object class="GtkCellRendererText" id="cellrenderertext16"/>
-                          <attributes>
-                            <attribute name="text">10</attribute>
-                          </attributes>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn11">
+                        <property name="sizing">autosize</property>
                         <property name="title" translatable="yes">Comment</property>
-                        <property name="clickable">True</property>
-                        <property name="sort_indicator">True</property>
-                        <property name="sort_column_id">11</property>
+                        <property name="sort_column_id">6</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext17"/>
                           <attributes>
-                            <attribute name="text">11</attribute>
+                            <attribute name="text">6</attribute>
                           </attributes>
                         </child>
                       </object>
@@ -205,7 +256,7 @@
       <packing>
         <property name="expand">True</property>
         <property name="fill">True</property>
-        <property name="position">0</property>
+        <property name="position">1</property>
       </packing>
     </child>
     <child>
@@ -303,7 +354,7 @@
         <property name="expand">False</property>
         <property name="fill">False</property>
         <property name="padding">4</property>
-        <property name="position">1</property>
+        <property name="position">2</property>
       </packing>
     </child>
   </object>
@@ -315,6 +366,12 @@
   </object>
   <object class="GtkAdjustment" id="adjustment2">
     <property name="lower">1</property>
+    <property name="upper">400000</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment3">
+    <property name="lower">1</property>
     <property name="upper">200000</property>
     <property name="value">1</property>
     <property name="step_increment">1</property>
@@ -324,7 +381,7 @@
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Results</property>
     <property name="window_position">center-on-parent</property>
-    <property name="default_width">320</property>
+    <property name="default_width">460</property>
     <property name="default_height">260</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon">../images/icon_logo.png</property>
@@ -441,102 +498,8 @@
                     <property name="label" translatable="yes">Sector</property>
                   </object>
                   <packing>
-                    <property name="top_attach">2</property>
-                    <property name="bottom_attach">3</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"/>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkHBox" id="hbox32">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="spacing">10</property>
-                    <child>
-                      <object class="GtkSpinButton" id="spinplaced">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">●</property>
-                        <property name="activates_default">True</property>
-                        <property name="width_chars">6</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                        <property name="adjustment">adjustment1</property>
-                        <property name="numeric">True</property>
-                        <signal name="value-changed" handler="on_spinplaced_changed" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkHBox" id="hbox11">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="spacing">4</property>
-                        <child>
-                          <object class="GtkLabel" id="label62">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Out of</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSpinButton" id="spinoutof">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="invisible_char">●</property>
-                            <property name="activates_default">True</property>
-                            <property name="width_chars">6</property>
-                            <property name="primary_icon_activatable">False</property>
-                            <property name="secondary_icon_activatable">False</property>
-                            <property name="primary_icon_sensitive">True</property>
-                            <property name="secondary_icon_sensitive">True</property>
-                            <property name="adjustment">adjustment2</property>
-                            <property name="numeric">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">5</property>
-                    <property name="bottom_attach">6</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"/>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label61">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Placed</property>
-                  </object>
-                  <packing>
-                    <property name="top_attach">5</property>
-                    <property name="bottom_attach">6</property>
+                    <property name="top_attach">6</property>
+                    <property name="bottom_attach">7</property>
                     <property name="x_options">GTK_FILL</property>
                     <property name="y_options"/>
                   </packing>
@@ -575,8 +538,8 @@
                     <property name="label" translatable="yes">Weather</property>
                   </object>
                   <packing>
-                    <property name="top_attach">6</property>
-                    <property name="bottom_attach">7</property>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
                     <property name="x_options">GTK_FILL</property>
                     <property name="y_options"/>
                   </packing>
@@ -589,8 +552,8 @@
                     <property name="label" translatable="yes">Wind</property>
                   </object>
                   <packing>
-                    <property name="top_attach">7</property>
-                    <property name="bottom_attach">8</property>
+                    <property name="top_attach">4</property>
+                    <property name="bottom_attach">5</property>
                     <property name="x_options">GTK_FILL</property>
                     <property name="y_options"/>
                   </packing>
@@ -615,6 +578,7 @@
                     <property name="can_focus">True</property>
                     <property name="invisible_char">●</property>
                     <property name="activates_default">True</property>
+                    <property name="invisible_char_set">True</property>
                     <property name="primary_icon_activatable">False</property>
                     <property name="secondary_icon_activatable">False</property>
                     <property name="primary_icon_sensitive">True</property>
@@ -637,8 +601,8 @@
                     <property name="label" translatable="yes">Type</property>
                   </object>
                   <packing>
-                    <property name="top_attach">3</property>
-                    <property name="bottom_attach">4</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
                     <property name="x_options">GTK_FILL</property>
                     <property name="y_options"/>
                   </packing>
@@ -651,8 +615,8 @@
                     <property name="label" translatable="yes">Category</property>
                   </object>
                   <packing>
-                    <property name="top_attach">4</property>
-                    <property name="bottom_attach">5</property>
+                    <property name="top_attach">7</property>
+                    <property name="bottom_attach">8</property>
                     <property name="x_options">GTK_FILL</property>
                     <property name="y_options"/>
                   </packing>
@@ -662,6 +626,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="editable">True</property>
+                    <signal name="changed" handler="on_entrydate_changed" swapped="no"/>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -674,11 +639,10 @@
                   <object class="DataComboboxEntry" id="comboracepoint">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <signal name="changed" handler="on_comboracepoint_changed" swapped="no"/>
                     <child internal-child="entry">
-                      <object class="GtkEntry" id="comboboxentry-entry1">
-                        <property name="visible">True</property>
+                      <object class="GtkEntry" id="comboboxentry-entry">
                         <property name="can_focus">True</property>
-                        <property name="invisible_char">•</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
@@ -699,85 +663,8 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child internal-child="entry">
-                      <object class="GtkEntry" id="comboboxentry-entry2">
-                        <property name="visible">True</property>
+                      <object class="GtkEntry" id="comboboxentry-entry1">
                         <property name="can_focus">True</property>
-                        <property name="invisible_char">•</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">2</property>
-                    <property name="bottom_attach">3</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"/>
-                  </packing>
-                </child>
-                <child>
-                  <object class="DataComboboxEntry" id="combotype">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child internal-child="entry">
-                      <object class="GtkEntry" id="comboboxentry-entry3">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">•</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">3</property>
-                    <property name="bottom_attach">4</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"/>
-                  </packing>
-                </child>
-                <child>
-                  <object class="DataComboboxEntry" id="combocategory">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child internal-child="entry">
-                      <object class="GtkEntry" id="comboboxentry-entry4">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">•</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">4</property>
-                    <property name="bottom_attach">5</property>
-                    <property name="x_options">GTK_FILL</property>
-                    <property name="y_options"/>
-                  </packing>
-                </child>
-                <child>
-                  <object class="DataComboboxEntry" id="comboweather">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child internal-child="entry">
-                      <object class="GtkEntry" id="comboboxentry-entry5">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">•</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
@@ -795,14 +682,35 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="DataComboboxEntry" id="combowind">
+                  <object class="DataComboboxEntry" id="combotype">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child internal-child="entry">
-                      <object class="GtkEntry" id="comboboxentry-entry6">
-                        <property name="visible">True</property>
+                      <object class="GtkEntry" id="comboboxentry-entry2">
                         <property name="can_focus">True</property>
-                        <property name="invisible_char">•</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"/>
+                  </packing>
+                </child>
+                <child>
+                  <object class="DataComboboxEntry" id="combocategory">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="comboboxentry-entry3">
+                        <property name="can_focus">True</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
@@ -815,6 +723,149 @@
                     <property name="right_attach">2</property>
                     <property name="top_attach">7</property>
                     <property name="bottom_attach">8</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"/>
+                  </packing>
+                </child>
+                <child>
+                  <object class="DataComboboxEntry" id="comboweather">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="comboboxentry-entry4">
+                        <property name="can_focus">True</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"/>
+                  </packing>
+                </child>
+                <child>
+                  <object class="DataComboboxEntry" id="combowind">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="comboboxentry-entry5">
+                        <property name="can_focus">True</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">4</property>
+                    <property name="bottom_attach">5</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"/>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">Placed</property>
+                  </object>
+                  <packing>
+                    <property name="top_attach">5</property>
+                    <property name="bottom_attach">6</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"/>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkHBox" id="hbox1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkSpinButton" id="spinplaced">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">●</property>
+                        <property name="activates_default">True</property>
+                        <property name="width_chars">6</property>
+                        <property name="invisible_char_set">True</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">adjustment1</property>
+                        <property name="numeric">True</property>
+                        <signal name="value-changed" handler="on_spinplaced_changed" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkHBox" id="hbox2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="spacing">4</property>
+                        <child>
+                          <object class="GtkLabel" id="label8">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Out of</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSpinButton" id="spinoutof">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="invisible_char">●</property>
+                            <property name="activates_default">True</property>
+                            <property name="width_chars">6</property>
+                            <property name="invisible_char_set">True</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
+                            <property name="adjustment">adjustment2</property>
+                            <property name="numeric">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">5</property>
+                    <property name="bottom_attach">6</property>
                     <property name="x_options">GTK_FILL</property>
                     <property name="y_options"/>
                   </packing>
@@ -864,10 +915,6 @@
     <columns>
       <!-- column-name id -->
       <column type="gchararray"/>
-      <!-- column-name date -->
-      <column type="gchararray"/>
-      <!-- column-name racepoint -->
-      <column type="gchararray"/>
       <!-- column-name placed -->
       <column type="gint"/>
       <!-- column-name out -->
@@ -876,15 +923,23 @@
       <column type="gfloat"/>
       <!-- column-name sector -->
       <column type="gchararray"/>
-      <!-- column-name type -->
-      <column type="gchararray"/>
       <!-- column-name category -->
+      <column type="gchararray"/>
+      <!-- column-name comment -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="race_ls">
+    <columns>
+      <!-- column-name date -->
+      <column type="gchararray"/>
+      <!-- column-name racepoint -->
+      <column type="gchararray"/>
+      <!-- column-name type -->
       <column type="gchararray"/>
       <!-- column-name wind -->
       <column type="gchararray"/>
       <!-- column-name weather -->
-      <column type="gchararray"/>
-      <!-- column-name comment -->
       <column type="gchararray"/>
     </columns>
   </object>

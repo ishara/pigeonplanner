@@ -435,6 +435,16 @@ class DatabaseOperations(object):
         sql = 'SELECT * FROM Results WHERE pindex=? AND date=?'
         return self.__db_execute_select(sql, data, RET_ALLCOL)
 
+    def get_pigeon_results_as_race(self, data):
+        sql = 'SELECT * FROM Results WHERE pindex=? GROUP BY date,point \
+               ORDER BY date ASC'
+        return self.__db_execute_select(sql, (data,), RET_ALLCOL)
+
+    def get_pigeon_results_for_data(self, pindex, date, racepoint):
+        sql = 'SELECT * FROM Results WHERE pindex=? AND date=? AND point=? \
+               ORDER BY place ASC'
+        return self.__db_execute_select(sql, (pindex, date, racepoint), RET_ALLCOL)
+
     def has_result(self, data):
         sql = 'SELECT COUNT(*) FROM Results WHERE pindex=? and date=? \
                and point=? and place=? and out=? and sector=? \
@@ -449,6 +459,15 @@ class DatabaseOperations(object):
             return False
         else:
             return True
+
+    def get_race_info(self, date, racepoint):
+        sql = 'SELECT * FROM Results WHERE date=? AND point=? LIMIT 1'
+        return self.__db_execute_select(sql, (date, racepoint), RET_ONEROW)
+
+    def update_race(self, date, racepoint, sector, wind, weather):
+        sql = 'UPDATE Results SET sector=?, wind=?, weather=? \
+               WHERE date=? AND point=?'
+        self.__db_execute(sql, (sector, wind, weather, date, racepoint))
 
 #### Breeding
     def get_pigeon_breeding(self, pindex, cock):

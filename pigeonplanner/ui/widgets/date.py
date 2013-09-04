@@ -30,6 +30,7 @@ from pigeonplanner import messages
 
 class DateEntry(gtk.Viewport):
     __gtype_name__ = 'DateEntry'
+    __gsignals__ = {'changed' : (gobject.SIGNAL_RUN_LAST, None, ())}
     can_empty = gobject.property(type=bool, default=False, nick="Can empty")
     def __init__(self, editable=False, clear=False, can_empty=False):
         gtk.Viewport.__init__(self)
@@ -48,7 +49,7 @@ class DateEntry(gtk.Viewport):
 
     def on_icon_pressed(self, widget, icon_pos, event):
         if icon_pos == gtk.ENTRY_ICON_SECONDARY:
-            CalendarPopup(widget)
+            CalendarPopup(self)
 
     def get_editable(self):
         return self._editable
@@ -78,6 +79,7 @@ class DateEntry(gtk.Viewport):
 
     def set_text(self, text):
         self._entry.set_text(text)
+        self.emit("changed")
 
     def get_text(self, validate=True):
         date = self._entry.get_text()
