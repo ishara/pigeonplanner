@@ -755,4 +755,5 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         if self.current_pigeon != pigeon_no:
             self.widgets.selection.unselect_all()
             self.widgets.selection.select_path(pigeon_no)
+            self.widgets.treeview.scroll_to_cell(pigeon_no)
 
