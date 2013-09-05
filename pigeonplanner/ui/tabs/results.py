@@ -138,7 +138,11 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         if data is None: return
         (date, point, place, out, sector, ftype, category, wind, weather,
             comment) = data
-        cof = common.calculate_coefficient(place, out)
+        if place == 0:
+            cof = "-"
+            place = "-"
+        else:
+            cof = common.calculate_coefficient(place, out, True)
         # Not implemented yet, but have a database column
         values = ['', '', 0, 0]
         values.reverse()
@@ -165,8 +169,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             model, node = self.widgets.selection.get_selected()
             data.append(self.widgets.liststore.get_value(node, 0))
             self.database.update_table(self.database.RESULTS, data, 2, 0)
-            self.widgets.liststore.set(node, COL_PLACED, place, COL_OUT, out,
-                                             COL_COEF, cof, COL_SECTOR, sector,
+            self.widgets.liststore.set(node, COL_PLACED, str(place), COL_OUT, out,
+                                             COL_COEF, str(cof), COL_SECTOR, sector,
                                              COL_CATEGORY, category,
                                              COL_COMMENT, comment)
             model, node = self.widgets.race_sel.get_selected()
@@ -203,9 +207,17 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                                                                 date, racepoint):
             place = result[4]
             out = result[5]
-            cof = common.calculate_coefficient(place, out)
-            self.widgets.liststore.append([result[0], place, out, cof,
+            if place == 0:
+                cof = "-"
+                place = "-"
+            else:
+                cof = common.calculate_coefficient(place, out, True)
+            self.widgets.liststore.append([result[0], str(place), out, str(cof),
                                            result[6], result[8], result[15]])
+
+    def on_checkplaced_toggled(self, widget):
+        sensitive = widget.get_active()
+        self.widgets.spinplaced.set_sensitive(sensitive)
 
     def on_spinplaced_changed(self, widget):
         self.widgets.spinoutof.set_range(widget.get_value_as_int(),
@@ -259,7 +271,10 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             ErrorDialog(msg.value, self.widgets.dialog)
             return
         point = self.widgets.comboracepoint.child.get_text()
-        place = self.widgets.spinplaced.get_value_as_int()
+        if self.widgets.checkplaced.get_active():
+            place = self.widgets.spinplaced.get_value_as_int()
+        else:
+            place = 0
         out = self.widgets.spinoutof.get_value_as_int()
         sector = self.widgets.combosector.child.get_text()
         ftype = self.widgets.combotype.child.get_text()
@@ -268,8 +283,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         wind = self.widgets.combowind.child.get_text()
         comment = self.widgets.entrycomment.get_text()
 
-        if not date or not point or not place or not out:
-            ErrorDialog(messages.MSG_EMPTY_DATA, self.dialog)
+        if not date or not point or not out:
+            ErrorDialog(messages.MSG_EMPTY_DATA, self.widgets.dialog)
             return
         return [date, point, place, out, sector, ftype, category,
                 wind, weather, comment]
@@ -291,9 +306,16 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.entrydate.grab_focus()
 
     def _set_entry_values(self, values):
+        placed = values[2]
+        if placed == "0" or placed == "-":
+            self.widgets.checkplaced.set_active(False)
+            placed = 1
+        else:
+            self.widgets.checkplaced.set_active(True)
+
         self.widgets.entrydate.set_text(values[0])
         self.widgets.comboracepoint.child.set_text(values[1])
-        self.widgets.spinplaced.set_value(values[2])
+        self.widgets.spinplaced.set_value(int(placed))
         self.widgets.spinoutof.set_value(values[3])
         self.widgets.combosector.child.set_text(values[4])
         self.widgets.combotype.child.set_text(values[5])

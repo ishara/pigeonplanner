@@ -23,6 +23,7 @@ Functions for some common tasks
 import os
 import sys
 import random
+import locale
 import inspect
 import urllib2
 import os.path
@@ -187,15 +188,19 @@ def get_band_from_pindex(pindex):
     year = pindex[-4:]
     return band, year
 
-def calculate_coefficient(place, out):
+def calculate_coefficient(place, out, as_string=False):
     """
     Calculate the coefficient of a result
 
     @param place: The pigeons place
     @param out: The total number of pigeons
+    @param as_string: Return a localized string
     """
 
-    return (float(place)/float(out))*config.get('options.coef-multiplier')
+    coef = (float(place)/float(out))*config.get('options.coef-multiplier')
+    if as_string:
+        return locale.format_string("%.4f", coef)
+    return coef
 
 def add_zero_to_time(value):
     """
