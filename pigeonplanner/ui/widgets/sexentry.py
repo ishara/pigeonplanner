@@ -18,7 +18,6 @@
 
 import gtk
 
-from pigeonplanner import const
 from pigeonplanner import common
 
 
@@ -36,7 +35,7 @@ class SexEntry(gtk.Viewport):
 
     def set_sex(self, sex):
         try:
-            img = gtk.gdk.pixbuf_new_from_file(const.SEX_IMGS[sex])
+            img = common.get_sex_image(sex)
         except KeyError:
             img = None
             self._entry.set_text("")

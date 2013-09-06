@@ -261,26 +261,16 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.resultstab.set_columns()
 
     def on_edit_finished(self, detailsview, pigeon, operation):
-        band, year = pigeon.get_band()
         if operation == const.EDIT:
             model, paths = self.widgets.selection.get_selected_rows()
             path = self.widgets.treeview.get_child_path(paths[0])
-            data = (0, pigeon, 1, pigeon.get_pindex(), 2, band, 3, year,
-                    4, pigeon.get_name(), 5, pigeon.get_colour(),
-                    6, pigeon.get_sex_string(), 7, pigeon.get_loft(),
-                    8, pigeon.get_strain(),
-                    9, _(pigeon.get_status()))
-            self.widgets.treeview.update_row(data, path=path)
+            self.widgets.treeview.update_pigeon(pigeon, path=path)
             self.widgets.selection.emit('changed')
         elif operation == const.ADD:
             if not pigeon.get_visible(): return
-            row = [pigeon, pigeon.get_pindex(), band, year, pigeon.get_name(),
-                   pigeon.get_colour(), pigeon.get_sex_string(),
-                   pigeon.get_loft(), pigeon.get_strain(),
-                   _(pigeon.get_status())]
-            self.widgets.treeview.add_row(row)
+            self.widgets.treeview.add_pigeon(pigeon)
             self.widgets.statusbar.display_message(
-                        _("Pigeon %s has been added") %pigeon.get_band_string())
+                        _("Pigeon %s has been added") % pigeon.get_band_string())
         self._set_statistics()
         self.widgets.treeview.grab_focus()
 
@@ -594,9 +584,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                 value += 1
                 continue
             pigeon = self.parser.add_empty_pigeon(pindex, rangesex)
-            row = [pigeon, pindex, band, rangeyear, '', '', pigeon.get_sex_string(),
-                   '', '', _(common.get_status(pigeon.get_active()))]
-            self.widgets.treeview.add_row(row)
+            self.widgets.treeview.add_pigeon(pigeon)
             value += 1
 
         self._set_statistics()

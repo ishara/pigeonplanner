@@ -124,6 +124,9 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     def on_chkShowHidden_toggled(self, widget):
         self.widgets.hboxColorHidden.set_sensitive(not widget.get_active())
 
+    def on_chkSex_toggled(self, widget):
+        self.widgets.vboxSexCol.set_sensitive(widget.get_active())
+
     def on_btnPreview_clicked(self, widget):
         selected = self.widgets.cbLayout.get_active()
         userinfo = common.get_own_address(self.database)
@@ -148,6 +151,13 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                     (const.WINDOWS and
                      self.widgets.combothemes.get_active() !=\
                      config.get('interface.theme'))
+
+        if self.widgets.radioSexText.get_active():
+            sexcoltype = 1
+        elif self.widgets.radioSexImage.get_active():
+            sexcoltype = 2
+        elif self.widgets.radioSexTextImage.get_active():
+            sexcoltype = 3
 
         settings = [
                 ('options.check-for-updates', self.widgets.chkUpdate.get_active()),
@@ -175,6 +185,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ('columns.pigeon-name', self.widgets.chkName.get_active()),
                 ('columns.pigeon-colour', self.widgets.chkColour.get_active()),
                 ('columns.pigeon-sex', self.widgets.chkSex.get_active()),
+                ('columns.pigeon-sex-type', sexcoltype),
                 ('columns.pigeon-strain', self.widgets.chkStrain.get_active()),
                 ('columns.pigeon-status', self.widgets.chkStatus.get_active()),
                 ('columns.pigeon-loft', self.widgets.chkLoft.get_active()),
@@ -242,6 +253,14 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.widgets.chkWeather.set_active(config.get('columns.result-weather'))
         self.widgets.chkWind.set_active(config.get('columns.result-wind'))
         self.widgets.chkComment.set_active(config.get('columns.result-comment'))
+
+        sexcoltype = config.get('columns.pigeon-sex-type')
+        if sexcoltype == 1:
+            self.widgets.radioSexText.set_active(True)
+        elif sexcoltype == 2:
+            self.widgets.radioSexImage.set_active(True)
+        elif sexcoltype == 3:
+            self.widgets.radioSexTextImage.set_active(True)
 
         self.widgets.combothemes.set_active(config.get('interface.theme'))
 

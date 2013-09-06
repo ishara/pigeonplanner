@@ -113,7 +113,8 @@ class MainTreeView(gtk.TreeView):
                                        pigeon.get_name(), pigeon.get_colour(),
                                        pigeon.get_sex_string(),
                                        pigeon.get_loft(), pigeon.get_strain(),
-                                       _(common.get_status(pigeon.get_active()))])
+                                       _(common.get_status(pigeon.get_active())),
+                                       common.get_sex_image(pigeon.sex)])
         self._selection.select_path(path)
 
     def add_pigeon(self, pigeon, select=True):
@@ -121,8 +122,18 @@ class MainTreeView(gtk.TreeView):
         row = [pigeon, pigeon.get_pindex(), ring, year, pigeon.get_name(),
                pigeon.get_colour(), pigeon.get_sex_string(),
                pigeon.get_loft(), pigeon.get_strain(),
-               _(common.get_status(pigeon.get_active()))]
+               _(common.get_status(pigeon.get_active())),
+               common.get_sex_image(pigeon.sex)]
         self.add_row(row, select)
+
+    def update_pigeon(self, pigeon, rowiter=None, path=None):
+        band, year = pigeon.get_band()
+        data = (0, pigeon, 1, pigeon.get_pindex(), 2, band, 3, year,
+                4, pigeon.get_name(), 5, pigeon.get_colour(),
+                6, pigeon.get_sex_string(), 7, pigeon.get_loft(),
+                8, pigeon.get_strain(), 9, _(pigeon.get_status()),
+                10, common.get_sex_image(pigeon.sex))
+        self.update_row(data, rowiter=rowiter, path=path)
 
     def has_pigeon(self, pigeon):
         for row in self._liststore:
@@ -173,6 +184,15 @@ class MainTreeView(gtk.TreeView):
                       7: config.get('columns.pigeon-status')}
         for key, value in columnsdic.items():
             self.get_column(key).set_visible(value)
+            if key == 4:
+                sexcoltype = config.get('columns.pigeon-sex-type')
+                for renderer in self.get_column(key).get_cell_renderers():
+                    if isinstance(renderer, gtk.CellRendererText):
+                        text = renderer
+                    else:
+                        pixbuf = renderer
+                text.set_visible(sexcoltype == 1 or sexcoltype == 3)
+                pixbuf.set_visible(sexcoltype == 2 or sexcoltype == 3)
 
     def run_filterdialog(self, parent):
         self._filterdialog.set_transient_for(parent)
@@ -180,12 +200,18 @@ class MainTreeView(gtk.TreeView):
 
     # Internal methods
     def _build_treeview(self):
-        liststore = gtk.ListStore(object, str, str, str, str, str, str, str, str, str)
+        liststore = gtk.ListStore(object, str, str, str, str, str, str, str, str, str, gtk.gdk.Pixbuf)
         columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"),
                    _("Loft"), _("Strain"), _("Status")]
         for index, column in enumerate(columns):
+            tvcolumn = gtk.TreeViewColumn(column)
+            if index == 4:
+                renderer = gtk.CellRendererPixbuf()
+                tvcolumn.pack_start(renderer, expand=False)
+                tvcolumn.add_attribute(renderer, "pixbuf", 10)
             textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+2)
+            tvcolumn.pack_start(textrenderer, expand=False)
+            tvcolumn.add_attribute(textrenderer, "text", index+2)
             tvcolumn.set_sort_column_id(index+2)
             tvcolumn.set_resizable(True)
             self.append_column(tvcolumn)
