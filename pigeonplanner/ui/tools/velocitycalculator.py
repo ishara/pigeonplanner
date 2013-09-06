@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import locale
 import datetime
 
 import gtk
@@ -69,7 +70,7 @@ class VelocityCalculator(builder.GtkBuilder):
             seconds_total = 1
 
         speed = (distance * distunit) / (seconds_total * speedunit)
-        self.widgets.entry_velocity_result.set_text("%.6f" %speed)
+        self.widgets.entry_velocity_result.set_text(locale.format_string("%.4f", speed))
 
     ## Prognosis
     def on_spinbutton_prognosis_from_changed(self, widget):
