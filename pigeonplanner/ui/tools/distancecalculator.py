@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+from geopy import point
 from geopy import distance as gdistance
 
 from pigeonplanner import errors
@@ -57,6 +58,12 @@ class DistanceCalculator(builder.GtkBuilder):
                            "DD.dddddd° format to use this function."),
                          None, _("Error")), self.widgets.window)
             return
+
+        if latfrom > 90 or latfrom < -90:
+            latfrom, lngfrom = self.wgs84_to_latlon(latfrom, lngfrom)
+
+        if latto > 90 or latto < -90:
+            latto, lngto = self.wgs84_to_latlon(latto, lngto)
 
         dist = gdistance.distance((latfrom, lngfrom), (latto, lngto))
         unit = self.widgets.combounit.get_active()
@@ -129,6 +136,22 @@ class DistanceCalculator(builder.GtkBuilder):
 
     def get_distance(self):
         return self._distance
+
+    def wgs84_to_latlon(self, lat, lon):
+        def split(number):
+            nstr = str(number)
+            gap2 = 2
+            if "." in nstr:
+                gap2 = 3 + len(nstr.split(".")[1])
+            gap1 = gap2 + 2
+            return nstr[:-gap1] or "0", nstr[-gap1:-gap2], nstr[-gap2:] 
+
+        lat1, lat2, lat3 = split(lat)
+        lon1, lon2, lon3 = split(lon)
+        lat = "%s %s' %s\" %s" % (lat1, lat2, lat3, "N" if lat > 0 else "S")
+        lon = "%s %s' %s\" %s" % (lon1, lon2, lon3, "E" if lon > 0 else "W")
+        lat, lon, alt = point.Point("%s; %s" % (lat, lon))
+        return lat, lon
 
     def _fill_location_combos(self, racepoint):
         data = self.database.select_from_table(self.database.RACEPOINTS)
