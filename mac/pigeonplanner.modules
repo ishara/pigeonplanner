@@ -19,7 +19,6 @@
     <metamodule id="pigeonplanner-python-deps">
         <dependencies>
             <dep package="setuptools"/>
-            <dep package="py2app"/>
             <dep package="geopy"/>
             <dep package="yapsy"/>
         </dependencies>
@@ -27,16 +26,12 @@
     <repository type="tarball" name="pypi"
         href="http://pypi.python.org/packages/source/"/>
     <distutils id="setuptools">
-        <branch repo="pypi" version="0.6c11"
-            module="s/setuptools/setuptools-0.6c11.tar.gz"/>
-    </distutils>
-    <distutils id="py2app">
-        <branch repo="pypi" version="0.7.3"
-            module="p/py2app/py2app-0.7.3.tar.gz"/>
+        <branch repo="pypi" version="1.1.3"
+            module="s/setuptools/setuptools-1.1.3.tar.gz"/>
     </distutils>
     <distutils id="geopy">
-        <branch repo="pypi" version="0.95"
-            module="g/geopy/geopy-0.95.tar.gz"/>
+        <branch repo="pypi" version="0.95.1"
+            module="g/geopy/geopy-0.95.1.tar.gz"/>
     </distutils>
     <distutils id="yapsy">
         <branch repo="pypi" version="1.10.2-pythons2n3"

@@ -18,15 +18,16 @@ Mac OS X:
     These steps will build a complete working GTK environment and need to be run
     only once (or again to update packages):
         ln -sf mac/jhbuildrc-custom ~/.jhbuildrc-custom
-        jhbuild bootstrap
+        jhbuild bootstrap --skip=cmake
         jhbuild
         jhbuild -m mac/pigeonplanner.modules build pigeonplanner
+        chmod +w $PREFIX/lib/libpython2.7.dylib
+        chmod +w $PREFIX/lib/libreadline.6.2.dylib
 
     The following steps will actually produce an appbundle located on your desktop:
         jhbuild shell
         python setup.py install
-        chmod +w $PREFIX/lib/libpython2.7.dylib
-        gtk-mac-bundler mac/pigeonplanner.bundle
+        python mac/build_package.py
 
 -= Other =-
     export PYTHONPATH=dev

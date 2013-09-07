@@ -3,7 +3,7 @@
 
   <meta>
     <prefix name="default">${env:JHBUILD_PREFIX}</prefix>
-    <destination overwrite="yes">${env:HOME}/Desktop</destination>
+    <destination overwrite="yes">${project}</destination>
     <run-install-name-tool/>
     <launcher-script>${project}/pigeonplanner.launcher</launcher-script >
   </meta>
@@ -101,9 +101,10 @@
     ${prefix}/include/python2.7/pyconfig.h
   </data>
 
-  <data>
-    ${prefix}/etc/pango/
-  </data>
+<!--TODO: This doesn't work anymore with a recent build-->
+<!--  <data>-->
+<!--    ${prefix}/etc/pango/-->
+<!--  </data>-->
 
   <!-- Copy in the themes data. You may want to trim this to save space
        in your bundle. -->
