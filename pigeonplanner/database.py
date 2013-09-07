@@ -550,6 +550,10 @@ class DatabaseOperations(object):
         sql = 'SELECT xco, yco, distance, unit FROM Racepoints WHERE racepoint=?'
         return self.__db_execute_select(sql, (racepoint,), RET_ONEROW)
 
+    def get_racepoints(self):
+        sql = 'SELECT racepoint, distance, unit FROM Racepoints ORDER BY racepoint ASC'
+        return self.__db_execute_select(sql, None, RET_ALLCOL)
+
 #### Status
     def count_pigeon_with_status(self, status):
         sql = 'SELECT COUNT(*) FROM Pigeons WHERE show=1 AND active=?'

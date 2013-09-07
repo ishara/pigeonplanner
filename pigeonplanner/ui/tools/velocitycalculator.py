@@ -41,6 +41,9 @@ class VelocityCalculator(builder.GtkBuilder):
         self.widgets.spinbutton_prognosis_from.set_value(800)
         self.widgets.spinbutton_prognosis_to.set_value(1800)
 
+        self.widgets.sel_distance = self.widgets.tv_distance.get_selection()
+        self.widgets.sel_distance.connect('changed', self.on_sel_distance_changed)
+
         self.widgets.velocitywindow.set_transient_for(parent)
         self.widgets.velocitywindow.show()
 
@@ -56,6 +59,39 @@ class VelocityCalculator(builder.GtkBuilder):
         widget.set_text(common.add_zero_to_time(value))
 
     ## Exact
+    def on_button_racepoint_clicked(self, widget):
+        self._distance = self.widgets.spinbutton_velocity_distance
+        self._distance_unit = self.widgets.combobox_velocity_distance
+        self._show_distance_dialog()
+
+    def on_button_racepoint2_clicked(self, widget):
+        self._distance = self.widgets.spinbutton_prognosis_distance
+        self._distance_unit = self.widgets.combobox_prognosis_distance
+        self._show_distance_dialog()
+
+    def on_sel_distance_changed(self, selection):
+        model, rowiter = selection.get_selected()
+        self.widgets.button_ok.set_sensitive(not rowiter is None)
+
+    def on_dialog_delete_event(self, widget, event):
+        self.widgets.dialog.hide()
+        return True
+
+    def on_button_cancel_clicked(self, widget):
+        self.widgets.dialog.hide()
+
+    def on_button_ok_clicked(self, widget):
+        model, rowiter = self.widgets.sel_distance.get_selected()
+        distance = model[rowiter][1]
+        try:
+            distance = float(distance)
+        except ValueError:
+            distance = 0.0
+        self._distance.set_value(distance)
+        self._distance_unit.set_active(model[rowiter][2])
+
+        self.widgets.dialog.hide()
+
     def on_button_velocity_calculate_clicked(self, widget):
         distunit = self.widgets.combobox_velocity_distance.get_unit()
         speedunit = self.widgets.combobox_velocity_speed.get_unit()
@@ -115,4 +151,12 @@ class VelocityCalculator(builder.GtkBuilder):
             psize = common.get_pagesize_from_opts()
             reportopts = VelocityReportOptions(psize)
             report(VelocityReport, reportopts, data, info)
+
+    # Private methods
+    def _show_distance_dialog(self):
+        self.widgets.ls_distance.clear()
+        for racepoint, distance, unit in self.database.get_racepoints():
+            self.widgets.ls_distance.append([racepoint, distance, unit])
+
+        self.widgets.dialog.show()
 
