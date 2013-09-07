@@ -184,7 +184,7 @@ class MainTreeView(gtk.TreeView):
                       7: config.get('columns.pigeon-status')}
         for key, value in columnsdic.items():
             self.get_column(key).set_visible(value)
-            if key == 4:
+            if key == 4 and value:
                 sexcoltype = config.get('columns.pigeon-sex-type')
                 for renderer in self.get_column(key).get_cell_renderers():
                     if isinstance(renderer, gtk.CellRendererText):
