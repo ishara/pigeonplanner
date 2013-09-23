@@ -71,10 +71,9 @@ class ResultWindow(builder.GtkBuilder):
    </toolbar>
 </ui>
 """
-    def __init__(self, parent, parser):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "ResultWindow.ui")
 
-        self.parser = parser
         self.pdfname = "%s_%s.pdf" % (_("Results"), datetime.date.today())
 
         self.filters = []

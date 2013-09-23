@@ -30,6 +30,7 @@ from pigeonplanner import common
 from pigeonplanner import backup
 from pigeonplanner import messages
 from pigeonplanner import database
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.utils import HiddenPigeonsMixin
 from pigeonplanner.ui.widgets import comboboxes
@@ -452,9 +453,9 @@ class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
         model, rowiter = selection.get_selected()
         self.buttonadd.set_sensitive(not rowiter is None)
 
-    def fill_treeview(self, parser, pindex=None, sex=None, year=None):
+    def fill_treeview(self, pindex=None, sex=None, year=None):
         self._liststore.clear()
-        for pigeon in parser.pigeons.values():
+        for pigeon in pigeonparser.parser.pigeons.values():
             # If pindex is given, exclude it
             if pindex is not None and pindex == pigeon.get_pindex():
                 continue

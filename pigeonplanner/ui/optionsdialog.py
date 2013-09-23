@@ -40,11 +40,9 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     __gsignals__ = {'interface-changed': (gobject.SIGNAL_RUN_LAST,
                                       None, (bool, bool, bool, bool)),
                     }
-    def __init__(self, parent, parser):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "OptionsDialog.ui")
         gobject.GObject.__init__(self)
-
-        self.parser = parser
 
         # Build main treeview
         self.widgets.selection = self.widgets.treeview.get_selection()
@@ -133,7 +131,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         psize = common.get_pagesize_from_opts()
         opts = PedigreeReportOptions(psize, print_action=PRINT_ACTION_PREVIEW,
                                             parent=self.widgets.optionsdialog)
-        report(PedigreeReport, opts, self.parser, None, userinfo)
+        report(PedigreeReport, opts, None, userinfo)
 
     def on_buttondefault_clicked(self, widget):
         if WarningDialog(messages.MSG_DEFAULT_OPTIONS, self.widgets.optionsdialog).run():

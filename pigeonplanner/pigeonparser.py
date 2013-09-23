@@ -93,6 +93,10 @@ class PigeonParser(object):
         del self.pigeons[pindex]
 
 
+# Keep a global parser instance
+parser = PigeonParser()
+
+
 class Pigeon(object):
     def set_data(self, Pigeonskey, pindex, band, year, sex, show, active, colour,
                  name, strain, loft, image, sire, yearsire, dam, yeardam,

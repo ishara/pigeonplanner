@@ -40,6 +40,7 @@ from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
 from pigeonplanner import database
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import tabs
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
@@ -148,29 +149,27 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
    </toolbar>
 </ui>
 """
-    def __init__(self, parser):
+    def __init__(self):
         gtk.Window.__init__(self)
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
 
-        self.parser = parser
-
-        self.widgets.treeview = treeview.MainTreeView(parser, self.widgets.statusbar)
+        self.widgets.treeview = treeview.MainTreeView(self.widgets.statusbar)
         self.widgets.treeview.connect('key-press-event', self.on_treeview_key_press)
         self.widgets.treeview.connect('button-press-event', self.on_treeview_press)
         self.widgets.scrolledwindow.add(self.widgets.treeview)
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect('changed', self.on_selection_changed)
 
-        self.pedigree = pedigree.DrawPedigree(self.parser, self.widgets.treeview)
-        self.detailsview = detailsview.DetailsView(self, self.parser)
+        self.pedigree = pedigree.DrawPedigree(self.widgets.treeview)
+        self.detailsview = detailsview.DetailsView(self)
         self.widgets.aligndetails.add(self.detailsview.get_root_widget())
 
         pedigreetab = tabs.PedigreeTab(self.pedigree)
-        relativestab = tabs.RelativesTab(self, self.parser)
-        self.resultstab = tabs.ResultsTab(self, self.parser)
-        breedingtab = tabs.BreedingTab(self, self.parser)
-        mediatab = tabs.MediaTab(self, self.parser)
-        medicationtab = tabs.MedicationTab(self, self.parser, self)
+        relativestab = tabs.RelativesTab(self)
+        self.resultstab = tabs.ResultsTab(self)
+        breedingtab = tabs.BreedingTab(self)
+        mediatab = tabs.MediaTab(self)
+        medicationtab = tabs.MedicationTab(self, self)
         self._loaded_tabs = [pedigreetab, relativestab,
                              self.resultstab, breedingtab,
                              mediatab, medicationtab]
@@ -275,7 +274,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.widgets.statusbar.pop(-1)
 
     def menuexport_activate(self, widget):
-        exportwindow.ExportWindow(self, self.parser)
+        exportwindow.ExportWindow(self)
 
     def menuprintpigeons_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -299,7 +298,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         PedigreeReport, PedigreeReportOptions = get_pedigree()
         psize = common.get_pagesize_from_opts()
         opts = PedigreeReportOptions(psize)
-        report(PedigreeReport, opts, self.parser, pigeon, userinfo)
+        report(PedigreeReport, opts, pigeon, userinfo)
 
     def menuprintblank_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -308,7 +307,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         PedigreeReport, PedigreeReportOptions = get_pedigree()
         psize = common.get_pagesize_from_opts()
         opts = PedigreeReportOptions(psize)
-        report(PedigreeReport, opts, self.parser, None, userinfo)
+        report(PedigreeReport, opts, None, userinfo)
 
     def menubackup_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -337,14 +336,14 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menualbum_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.PhotoAlbum(self, self.parser)
+        tools.PhotoAlbum(self)
 
     def menulog_activate(self, widget):
         logger.debug(common.get_function_name())
         logdialog.LogDialog()
 
     def menuadd_activate(self, widget):
-        dialog = detailsview.DetailsDialog(self.parser, None, self, const.ADD)
+        dialog = detailsview.DetailsDialog(None, self, const.ADD)
         dialog.details.connect('edit-finished', self.on_edit_finished)
 
     def menuaddrange_activate(self, widget):
@@ -360,7 +359,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         model, paths = self.widgets.selection.get_selected_rows()
         if len(paths) != 1: return
         pigeon = self.widgets.treeview.get_selected_pigeon()
-        dialog = detailsview.DetailsDialog(self.parser, pigeon, self, const.EDIT)
+        dialog = detailsview.DetailsDialog(pigeon, self, const.EDIT)
         dialog.details.connect('edit-finished', self.on_edit_finished)
 
     def menuremove_activate(self, widget):
@@ -422,7 +421,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
                     # And finally the pigeon itself
                     database.remove_pigeon(pindex)
-                    self.parser.remove_pigeon(pindex)
+                    pigeonparser.parser.remove_pigeon(pindex)
 
             if not self.widgets.chkResults.get_active():
                 logger.debug("Remove: Removing the results")
@@ -447,7 +446,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         if pigeon is None:
             # Disable pedigree shortcut when no pigeon is selected
             return
-        pedigreewindow.PedigreeWindow(self, self.parser, self.pedigree, pigeon)
+        pedigreewindow.PedigreeWindow(self, self.pedigree, pigeon)
 
     def menuaddresult_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -460,7 +459,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = optionsdialog.OptionsDialog(self, self.parser)
+        dialog = optionsdialog.OptionsDialog(self)
         dialog.connect('interface-changed', self.on_interface_changed)
 
     def menuarrows_toggled(self, widget):
@@ -501,7 +500,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menudata_activate(self, widget):
         logger.info(common.get_function_name())
-        tools.DataManager(self, self.parser)
+        tools.DataManager(self)
 
     def menuhelp_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -564,7 +563,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             if database.pigeon_exists(pindex):
                 value += 1
                 continue
-            pigeon = self.parser.add_empty_pigeon(pindex, rangesex)
+            pigeon = pigeonparser.parser.add_empty_pigeon(pindex, rangesex)
             self.widgets.treeview.add_pigeon(pigeon)
             value += 1
 

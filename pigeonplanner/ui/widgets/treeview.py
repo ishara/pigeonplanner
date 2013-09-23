@@ -21,6 +21,7 @@ import gtk
 from pigeonplanner import common
 from pigeonplanner import config
 from pigeonplanner import database
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import comboboxes
 
@@ -32,10 +33,9 @@ class MainTreeView(gtk.TreeView):
 
     __gtype_name__ = 'MainTreeView'
 
-    def __init__(self, parser, statusbar):
+    def __init__(self, statusbar):
         gtk.TreeView.__init__(self)
 
-        self.parser = parser
         self.statusbar = statusbar
         self.statusbar.set_filter(False)
         self.filters = []
@@ -107,7 +107,7 @@ class MainTreeView(gtk.TreeView):
 
     def fill_treeview(self, path=0):
         self._liststore.clear()
-        for pindex, pigeon in self.parser.pigeons.items():
+        for pindex, pigeon in pigeonparser.parser.pigeons.items():
             if not pigeon.get_visible(): continue
             ring, year = pigeon.get_band()
             self._liststore.insert(0, [pigeon, pindex, ring, year,

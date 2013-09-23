@@ -21,6 +21,7 @@ import gtk.gdk
 
 from pigeonplanner import const
 from pigeonplanner import messages
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import WidgetFactory
 from pigeonplanner.ui.tabs import basetab
@@ -30,11 +31,10 @@ from pigeonplanner.ui.messagedialog import InfoDialog
 
 
 class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
-    def __init__(self, mainwindow, parser):
+    def __init__(self, mainwindow):
         WidgetFactory.__init__(self)
         basetab.BaseTab.__init__(self, _("Relatives"), "icon_relatives.png")
         self.mainwindow = mainwindow
-        self.parser = parser
 
         treeviewdirect = gtk.TreeView()
         swdirect = gtk.ScrolledWindow()
@@ -98,15 +98,15 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             self.on_show_details(None, pigeon)
 
     def on_show_details(self, widget, pigeon):
-        if not pigeon.get_pindex() in self.parser.pigeons:
+        if not pigeon.get_pindex() in pigeonparser.parser.pigeons:
             return
-        DetailsDialog(self.parser, pigeon, self.mainwindow)
+        DetailsDialog(pigeon, self.mainwindow)
 
     def on_edit_details(self, widget, pigeon):
-        if not pigeon.get_pindex() in self.parser.pigeons:
+        if not pigeon.get_pindex() in pigeonparser.parser.pigeons:
             return
 
-        dialog = DetailsDialog(self.parser, pigeon, self.mainwindow, const.EDIT)
+        dialog = DetailsDialog(pigeon, self.mainwindow, const.EDIT)
         dialog.details.set_details(pigeon)
 
     def on_goto_pigeon(self, widget, pigeon):
@@ -119,7 +119,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         pindex_selected = pigeon.get_pindex()
         pindex_sire_sel = pigeon.get_sire_pindex()
         pindex_dam_sel = pigeon.get_dam_pindex()
-        for pindex, pigeon in self.parser.pigeons.items():
+        for pindex, pigeon in pigeonparser.parser.pigeons.items():
             ring, year = pigeon.get_band()
             pindex_sire = pigeon.get_sire_pindex()
             pindex_dam = pigeon.get_dam_pindex()

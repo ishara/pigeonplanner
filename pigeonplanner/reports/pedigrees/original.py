@@ -17,6 +17,7 @@
 
 
 from pigeonplanner import config
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import pedigree
 from pigeonplanner.reportlib.utils import pt2cm as PT2CM
 from pigeonplanner.reportlib.basereport import Report, ReportOptions
@@ -25,10 +26,9 @@ from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
 
 
 class PedigreeReport(Report):
-    def __init__(self, reportopts, parser, pigeon, userinfo):
+    def __init__(self, reportopts, pigeon, userinfo):
         Report.__init__(self, "My_pedigree", reportopts)
 
-        self._parser = parser
         self._pigeon = pigeon
         self._userinfo = userinfo
 
@@ -135,7 +135,7 @@ class PedigreeReport(Report):
 
         # Pedigree
         lst = [None]*31
-        pedigree.build_tree(self._parser, self._pigeon, 0, 1, lst)
+        pedigree.build_tree(pigeonparser.parser, self._pigeon, 0, 1, lst)
 
         h_sep = .2
         w_sep = .2

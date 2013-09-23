@@ -23,6 +23,7 @@ from pigeonplanner import common
 from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import database
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.tabs import basetab
@@ -31,12 +32,11 @@ from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, parent, parser, main):
+    def __init__(self, parent, main):
         builder.GtkBuilder.__init__(self, "MedicationView.ui")
         basetab.BaseTab.__init__(self, _("Medication"), "icon_medication.png")
 
         self.parent = parent
-        self.parser = parser
         self.main = main
         self._mode = None
         self._expanded = False
@@ -223,7 +223,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
     # Internal methods
     def _fill_select_treeview(self):
         self.widgets.liststoreselect.clear()
-        for pindex, pigeon in self.parser.pigeons.items():
+        for pindex, pigeon in pigeonparser.parser.pigeons.items():
             if not pigeon.get_visible():
                 continue
             active = not self.pindex == pindex
@@ -244,7 +244,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         loft = self.widgets.comboloft.get_active_text()
         for row in self.widgets.liststoreselect:
             if not row[0]: continue
-            pigeon = self.parser.get_pigeon(row[2])
+            pigeon = pigeonparser.parser.get_pigeon(row[2])
             row[1] = pigeon.get_loft() == loft
 
     def _clear_dialog_widgets(self):

@@ -25,6 +25,7 @@ from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import database
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import resultwindow
 from pigeonplanner.ui import resultparser
@@ -48,12 +49,11 @@ from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog
 
 
 class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, parent, parser):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "ResultsView.ui")
         basetab.BaseTab.__init__(self, _("Results"), "icon_result.png")
 
         self.parent = parent
-        self.parser = parser
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect('changed', self.on_selection_changed)
         self.widgets.race_sel = self.widgets.race_tv.get_selection()
@@ -84,10 +84,10 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             utils.popup_menu(event, entries)
 
     def on_buttonall_clicked(self, widget):
-        resultwindow.ResultWindow(self.parent, self.parser)
+        resultwindow.ResultWindow(self.parent)
 
     def on_buttonimport_clicked(self, widget):
-        resultparser.ResultParser(self.parent, self.parser.pigeons.keys())
+        resultparser.ResultParser(self.parent, pigeonparser.parser.pigeons.keys())
 
     def on_buttonadd_clicked(self, widget):
         self._mode = const.ADD

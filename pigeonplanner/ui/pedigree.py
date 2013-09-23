@@ -27,6 +27,7 @@ import gtk
 from pigeonplanner import const
 from pigeonplanner import messages
 from pigeonplanner import database
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
 from pigeonplanner.ui.widgets import pedigreeboxes
 from pigeonplanner.ui.detailsview import DetailsDialog
@@ -52,8 +53,7 @@ def build_tree(parser, pigeon, index, depth, lst):
 
 
 class DrawPedigree(object):
-    def __init__(self, parser, treeview=None):
-        self.parser = parser
+    def __init__(self, treeview=None):
         self.treeview = treeview
 
         self.tables = None
@@ -131,7 +131,7 @@ class DrawPedigree(object):
                 ]
 
             lst = [None]*len(pos)
-            build_tree(self.parser, pigeon, 0, 1, lst)
+            build_tree(pigeonparser.parser, pigeon, 0, 1, lst)
             self._draw(tables, pos, lst, int(pigeon.sex), detailed)
         else:
             pos = [
@@ -145,9 +145,9 @@ class DrawPedigree(object):
             lstsire = [None]*len(pos)
             lstdam = [None]*len(pos)
             if pigeon is not None:
-                sire , dam = self.parser.get_parents(pigeon)
-                build_tree(self.parser, sire, 0, 1, lstsire)
-                build_tree(self.parser, dam, 0, 1, lstdam)
+                sire , dam = pigeonparser.parser.get_parents(pigeon)
+                build_tree(pigeonparser.parser, sire, 0, 1, lstsire)
+                build_tree(pigeonparser.parser, dam, 0, 1, lstdam)
             self._draw(tables[0], pos, lstsire, const.SIRE, detailed)
             self._draw(tables[1], pos, lstdam, const.DAM, detailed)
 
@@ -223,13 +223,13 @@ class DrawPedigree(object):
             self.draw_cb()
 
     def _show_pigeon_details(self, widget, pigeon, parent):
-        if not pigeon.get_pindex() in self.parser.pigeons:
+        if not pigeon.get_pindex() in pigeonparser.parser.pigeons:
             return
-        DetailsDialog(self.parser, pigeon, parent)
+        DetailsDialog(pigeon, parent)
 
     def _edit_pigeon_details(self, widget, pigeon, child, sex, parent):
         mode = const.ADD if pigeon is None else const.EDIT
-        dialog = DetailsDialog(self.parser, pigeon, parent, mode)
+        dialog = DetailsDialog(pigeon, parent, mode)
         dialog.details.set_child(child)
         dialog.details.set_pedigree_mode(True)
         dialog.details.set_sex(sex)
@@ -252,7 +252,7 @@ class DrawPedigree(object):
         else:
             data = {"dam": band, "yeardam": year}
         database.update_pigeon(child.get_pindex(), data)
-        self.parser.update_pigeon(child.get_pindex())
+        pigeonparser.parser.update_pigeon(child.get_pindex())
 
     def _clear_box(self, widget, pigeon, child):
         self._edit_child(pigeon, child, True)
@@ -260,7 +260,7 @@ class DrawPedigree(object):
 
     def _remove_pigeon(self, widget, pigeon, child):
         database.remove_pigeon(pigeon.get_pindex())
-        self.parser.remove_pigeon(pigeon.get_pindex())
+        pigeonparser.parser.remove_pigeon(pigeon.get_pindex())
         self._edit_child(pigeon, child, True)
         self._redraw()
 

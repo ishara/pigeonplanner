@@ -25,6 +25,7 @@ import gtk
 
 from pigeonplanner import common
 from pigeonplanner import config
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import tools
 from pigeonplanner.ui.filechooser import PdfSaver
 from pigeonplanner.ui.messagedialog import InfoDialog
@@ -51,7 +52,7 @@ class PedigreeWindow(gtk.Window):
    </toolbar>
 </ui>
 """
-    def __init__(self, parent, parser, pedigree, pigeon):
+    def __init__(self, parent, pedigree, pigeon):
         gtk.Window.__init__(self)
         self.connect('delete-event', self.on_close_dialog)
         self.set_modal(True)
@@ -60,7 +61,6 @@ class PedigreeWindow(gtk.Window):
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
         self.set_skip_taskbar_hint(True)
 
-        self.parser = parser
         self.pedigree = pedigree
         self.pigeon = pigeon
         self._current_pigeon = pigeon
@@ -144,7 +144,7 @@ class PedigreeWindow(gtk.Window):
         if nav == PREVIOUS:
             pigeon = self._previous_pigeons.pop()
         else:
-            sire, dam = self.parser.get_parents(self._current_pigeon)
+            sire, dam = pigeonparser.parser.get_parents(self._current_pigeon)
             self._previous_pigeons.append(self._current_pigeon)
             pigeon = sire if nav == NEXT_SIRE else dam
 
@@ -155,7 +155,7 @@ class PedigreeWindow(gtk.Window):
         can_prev = self._current_pigeon.pindex != self.pigeon.pindex
         self.buttonprev.set_sensitive(can_prev)
 
-        sire, dam = self.parser.get_parents(self._current_pigeon)
+        sire, dam = pigeonparser.parser.get_parents(self._current_pigeon)
         can_next_sire = sire is not None
         self.buttonnextsire.set_sensitive(can_next_sire)
         can_next_dam = dam is not None
@@ -206,5 +206,5 @@ class PedigreeWindow(gtk.Window):
         psize = common.get_pagesize_from_opts()
         opts = PedigreeReportOptions(psize, print_action=print_action,
                                             filename=save_path, parent=self)
-        report(PedigreeReport, opts, self.parser, self.pigeon, userinfo)
+        report(PedigreeReport, opts, self.pigeon, userinfo)
 

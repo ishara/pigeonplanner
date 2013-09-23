@@ -34,12 +34,11 @@ from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, parent, parser):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "MediaView.ui")
         basetab.BaseTab.__init__(self, _("Media"), "icon_media.png")
 
         self.parent = parent
-        self.parser = parser
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.set_select_function(self._select_func, full=True)
         self.widgets.selection.connect('changed', self.on_selection_changed)

@@ -23,6 +23,7 @@ from pigeonplanner import common
 from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import database
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import checkbutton
@@ -37,12 +38,11 @@ from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, mainwindow, parser):
+    def __init__(self, mainwindow):
         builder.GtkBuilder.__init__(self, "BreedingView.ui")
         basetab.BaseTab.__init__(self, _("Breeding"), "icon_breeding.png")
 
         self.mainwindow = mainwindow
-        self.parser = parser
         self.maintreeview = mainwindow.get_treeview()
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect('changed', self.on_selection_changed)
@@ -105,16 +105,16 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.selection.select_path(path)
 
     def on_buttoninfo1_clicked(self, widget):
-        pigeon = self.parser.get_pigeon(self.widgets.bandentry1.get_pindex())
-        DetailsDialog(self.parser, pigeon, self.mainwindow)
+        pigeon = pigeonparser.parser.get_pigeon(self.widgets.bandentry1.get_pindex())
+        DetailsDialog(pigeon, self.mainwindow)
 
     def on_buttongoto1_clicked(self, widget):
         pindex = self.widgets.bandentry1.get_pindex()
         self.maintreeview.select_pigeon(None, pindex)
 
     def on_buttoninfo2_clicked(self, widget):
-        pigeon = self.parser.get_pigeon(self.widgets.bandentry2.get_pindex())
-        DetailsDialog(self.parser, pigeon, self.mainwindow)
+        pigeon = pigeonparser.parser.get_pigeon(self.widgets.bandentry2.get_pindex())
+        DetailsDialog(pigeon, self.mainwindow)
 
     def on_buttongoto2_clicked(self, widget):
         pindex = self.widgets.bandentry2.get_pindex()
@@ -203,7 +203,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonsearchmate_clicked(self, widget):
         sex = const.SIRE if self.pigeon.is_hen() else const.DAM
         dialog = PigeonListDialog(self.widgets.editdialog)
-        dialog.fill_treeview(self.parser, sex=sex)
+        dialog.fill_treeview(sex=sex)
         response = dialog.run()
         if response == gtk.RESPONSE_APPLY:
             pigeon = dialog.get_selected()
@@ -264,7 +264,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.successcheckedit2.set_active(success2)
 
     def _format_mate(self, pindex):
-        pigeon = self.parser.get_pigeon(pindex)
+        pigeon = pigeonparser.parser.get_pigeon(pindex)
         try:
             return pigeon.get_band_string()
         except AttributeError:
@@ -274,14 +274,14 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def _add_child_pigeon(self, pindex, sire, dam, active):
         pigeon = None
         try:
-            pigeon = self.parser.add_empty_pigeon(pindex, const.YOUNG,
-                                                  active, sire, dam)
+            pigeon = pigeonparser.parser.add_empty_pigeon(pindex, const.YOUNG,
+                                                          active, sire, dam)
         except ValueError:
             # Empty bandnumber
             return
         except database.InvalidValueError:
             # Pigeon does exist, update parents
-            pigeon = self.parser.get_pigeon(pindex)
+            pigeon = pigeonparser.parser.get_pigeon(pindex)
 
             s, sy = common.get_band_from_pindex(sire)
             d, dy = common.get_band_from_pindex(dam)

@@ -31,6 +31,7 @@ from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
 from pigeonplanner import database
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import dialogs
@@ -60,7 +61,7 @@ class PigeonAlreadyExists(Exception): pass
 
 
 class DetailsDialog(gtk.Dialog):
-    def __init__(self, parser, pigeon=None, parent=None, mode=None):
+    def __init__(self, pigeon=None, parent=None, mode=None):
         gtk.Dialog.__init__(self, None, parent, gtk.DIALOG_MODAL)
         if pigeon is None:
             title = _("Details of pigeon")
@@ -71,7 +72,7 @@ class DetailsDialog(gtk.Dialog):
         if parent is None:
             self.set_position(gtk.WIN_POS_MOUSE)
 
-        self.details = DetailsView(self, parser)
+        self.details = DetailsView(self)
         self.vbox.pack_start(self.details.get_root_widget(), False, False)
         if mode == const.ADD:
             self.details.clear_details()
@@ -133,7 +134,7 @@ class PigeonImageWidget(gtk.EventBox):
         if self._view.pigeon is None:
             return
         parent = None if isinstance(self._parent, gtk.Dialog) else self._parent
-        tools.PhotoAlbum(parent, self._view.parser, self._view.pigeon.get_pindex())
+        tools.PhotoAlbum(parent, self._view.pigeon.get_pindex())
 
     def on_editable_button_press_event(self, widget, event):
         if event.button == 3:
@@ -184,12 +185,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                     'edit-cancelled': (gobject.SIGNAL_RUN_LAST,
                                        None, ()),
                     }
-    def __init__(self, parent, parser):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "DetailsView.ui")
         gobject.GObject.__init__(self)
 
         self.parent = parent
-        self.parser = parser
         self.pedigree_mode = False
         self.pigeon = None
         self.child = None
@@ -406,7 +406,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 # user choose another one. Don't bother him with this.
                 pass
             old_pindex = self.pigeon.get_pindex()
-            self.pigeon = self.parser.update_pigeon(data["pindex"], old_pindex)
+            self.pigeon = pigeonparser.parser.update_pigeon(data["pindex"], old_pindex)
         elif self._operation == const.ADD:
             try:
                 self._add_pigeon_data(data)
@@ -416,7 +416,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             except errors.InvalidInputError:
                 # See comment above
                 pass
-            self.pigeon = self.parser.add_pigeon(pindex=data["pindex"])
+            self.pigeon = pigeonparser.parser.add_pigeon(pindex=data["pindex"])
         self.set_details(self.pigeon)
         self.emit('edit-finished', self.pigeon, self._operation)
         combodata = [(self.widgets.combocolour, data["colour"], database.Tables.COLOURS),
@@ -545,7 +545,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             return
         band, year = self.widgets.entrybandedit.get_band()
         dialog = dialogs.PigeonListDialog(self.parent)
-        dialog.fill_treeview(self.parser, pindex, sex, year)
+        dialog.fill_treeview(pindex, sex, year)
         response = dialog.run()
         if response == gtk.RESPONSE_APPLY:
             pigeon = dialog.get_selected()
@@ -608,14 +608,15 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
         # First we do some checks
         if database.pigeon_exists(pindex):
-            if self.parser.pigeons[pindex].show == 1:
+            if pigeonparser.parser.pigeons[pindex].show == 1:
                 # The pigeon already exists, don't add it
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
                 raise PigeonAlreadyExists(pindex)
             else:
                 # The pigeon exists, but doesn't show, ask to show again
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
-                    self.parser.show = 1
+                    #TODO: review! This can't be right.
+                    pigeonparser.parser.show = 1
                     database.update_pigeon(pindex, show=True)
                 # Always return here. Either way the user doesn't want it
                 # to show, or it is already set to visible, so don't add it.

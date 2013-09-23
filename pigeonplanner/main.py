@@ -80,7 +80,6 @@ class  NullFile(object):
 
 class Startup(object):
     def __init__(self):
-        self.parser = None
         self.logger = None
 
         # Customized exception hook
@@ -268,8 +267,7 @@ class Startup(object):
 
         from pigeonplanner import pigeonparser
 
-        self.parser = pigeonparser.PigeonParser()
-        self.parser.build_pigeons()
+        pigeonparser.parser.build_pigeons()
 
     def search_updates(self):
         from pigeonplanner import update
@@ -335,7 +333,7 @@ def start_ui():
         updatethread.start()
 
     from pigeonplanner.ui import mainwindow
-    mainwindow.MainWindow(app.parser)
+    mainwindow.MainWindow()
 
     gtk.main()
 

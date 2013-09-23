@@ -23,17 +23,14 @@ from pigeonplanner import common
 from pigeonplanner import builder
 from pigeonplanner import database
 from pigeonplanner import messages
+from pigeonplanner import pigeonparser
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 class DataManager(builder.GtkBuilder):
-    def __init__(self, parent, parser):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "DataManager.ui")
-
-        self.parser = parser
-        if parser is None:
-            self.widgets.frameobjects.set_sensitive(False)
 
         # XXX: Translated strings are not unicode on some Windows XP systems
         # that were tested.
@@ -91,7 +88,7 @@ class DataManager(builder.GtkBuilder):
     def on_buttonsearch_clicked(self, widget):
         self.widgets.messagebox.hide()
         self.widgets.liststore.clear()
-        for pindex, pigeon in self.parser.pigeons.iteritems():
+        for pindex, pigeon in pigeonparser.parser.pigeons.iteritems():
             if pigeon.get_visible(): continue
             if int(pigeon.get_sex()) == const.YOUNG: continue
             is_parent = database.pigeon_is_a_parent(*pigeon.get_band())
@@ -104,10 +101,10 @@ class DataManager(builder.GtkBuilder):
     def on_buttoninfo_clicked(self, widget):
         model, node = self.widgets.selection.get_selected()
         pigeon = self.widgets.liststore.get_value(node, 0)
-        if not pigeon.get_pindex() in self.parser.pigeons:
+        if not pigeon.get_pindex() in pigeonparser.parser.pigeons:
             return
         from pigeonplanner.ui.detailsview import DetailsDialog
-        DetailsDialog(self.parser, pigeon, self.widgets.window)
+        DetailsDialog(pigeon, self.widgets.window)
 
     def on_buttondelete_clicked(self, widget):
         for row_num in range(len(self.widgets.liststore)-1, -1, -1):
@@ -115,7 +112,7 @@ class DataManager(builder.GtkBuilder):
             if not row[1]: continue
             pindex = row[0].get_pindex()
             database.remove_pigeon(pindex)
-            self.parser.remove_pigeon(pindex)
+            pigeonparser.parser.remove_pigeon(pindex)
             self.widgets.liststore.remove(row.iter)
         self.widgets.buttondelete.set_sensitive(False)
 

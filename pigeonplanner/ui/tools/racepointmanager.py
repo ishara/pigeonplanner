@@ -61,7 +61,7 @@ class RacepointManager(builder.GtkBuilder):
         common.open_help(13)
 
     def on_buttonadd_clicked(self, widget):
-        manager = DataManager(self.widgets.window, None)
+        manager = DataManager(self.widgets.window)
         response = manager.widgets.window.run()
         if response == gtk.RESPONSE_CLOSE:
             self._fill_racepoints_combo()
