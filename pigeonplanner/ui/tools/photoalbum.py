@@ -26,6 +26,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from pigeonplanner import builder
+from pigeonplanner import database
 from pigeonplanner.ui import utils
 
 
@@ -69,13 +70,12 @@ class PhotoAlbum(builder.GtkBuilder):
         2.00: '200%',
     }
 
-    def __init__(self, parent, parser, database, pindex=None):
+    def __init__(self, parent, parser, pindex=None):
         builder.GtkBuilder.__init__(self, "PhotoAlbum.ui")
 
         self.widgets.photoalbum.set_transient_for(parent)
 
         self.parser = parser
-        self.database = database
 
         self.build_toolbar()
         self.fill_iconview()
@@ -131,7 +131,7 @@ class PhotoAlbum(builder.GtkBuilder):
         self.widgets.iconview.set_text_column(2)
         self.widgets.iconview.set_pixbuf_column(3)
 
-        for pigeon in self.database.get_all_images():
+        for pigeon in database.get_all_images():
             if not pigeon[3]: continue
 
             try:

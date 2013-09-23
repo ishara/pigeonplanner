@@ -30,11 +30,10 @@ from pigeonplanner.ui.messagedialog import InfoDialog
 
 
 class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
-    def __init__(self, mainwindow, database, parser):
+    def __init__(self, mainwindow, parser):
         WidgetFactory.__init__(self)
         basetab.BaseTab.__init__(self, _("Relatives"), "icon_relatives.png")
         self.mainwindow = mainwindow
-        self.database = database
         self.parser = parser
 
         treeviewdirect = gtk.TreeView()
@@ -101,14 +100,13 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
     def on_show_details(self, widget, pigeon):
         if not pigeon.get_pindex() in self.parser.pigeons:
             return
-        DetailsDialog(self.database, self.parser, pigeon, self.mainwindow)
+        DetailsDialog(self.parser, pigeon, self.mainwindow)
 
     def on_edit_details(self, widget, pigeon):
         if not pigeon.get_pindex() in self.parser.pigeons:
             return
 
-        dialog = DetailsDialog(self.database, self.parser, pigeon,
-                               self.mainwindow, const.EDIT)
+        dialog = DetailsDialog(self.parser, pigeon, self.mainwindow, const.EDIT)
         dialog.details.set_details(pigeon)
 
     def on_goto_pigeon(self, widget, pigeon):

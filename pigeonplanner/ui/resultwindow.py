@@ -27,6 +27,7 @@ import gtk
 from pigeonplanner import common
 from pigeonplanner import config
 from pigeonplanner import builder
+from pigeonplanner import database
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import comboboxes
@@ -70,10 +71,9 @@ class ResultWindow(builder.GtkBuilder):
    </toolbar>
 </ui>
 """
-    def __init__(self, parent, parser, database):
+    def __init__(self, parent, parser):
         builder.GtkBuilder.__init__(self, "ResultWindow.ui")
 
-        self.database = database
         self.parser = parser
         self.pdfname = "%s_%s.pdf" % (_("Results"), datetime.date.today())
 
@@ -131,7 +131,7 @@ class ResultWindow(builder.GtkBuilder):
         #TODO: disabled for now. Remove?
         ##self._do_operation(const.MAIL)
         ##results = os.path.join(const.TEMPDIR, self.pdfname)
-        ##maildialog.MailDialog(self.resultwindow, self.database, results)
+        ##maildialog.MailDialog(self.resultwindow, results)
         pass
 
     def on_save_clicked(self, widget):
@@ -156,7 +156,7 @@ class ResultWindow(builder.GtkBuilder):
         self.widgets.liststore.set_default_sort_func(lambda *args: -1) 
         self.widgets.liststore.set_sort_column_id(-1, gtk.SORT_ASCENDING)
         self.widgets.liststore.clear()
-        for result in self.database.get_all_results():
+        for result in database.get_all_results():
             pindex = result[PINDEX]
             date = result[DATE]
             point = result[POINT]
@@ -239,9 +239,8 @@ class ResultWindow(builder.GtkBuilder):
         return cmp(data1, data2)
 
     def _do_operation(self, print_action, save_path=None):
-        userinfo = common.get_own_address(self.database)
-        if not tools.check_user_info(self.widgets.resultwindow, self.database,
-                                     userinfo['name']):
+        userinfo = common.get_own_address()
+        if not tools.check_user_info(self.widgets.resultwindow, userinfo['name']):
             return
 
         results = []

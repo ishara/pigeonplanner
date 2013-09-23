@@ -51,7 +51,7 @@ class PedigreeWindow(gtk.Window):
    </toolbar>
 </ui>
 """
-    def __init__(self, parent, database, parser, pedigree, pigeon):
+    def __init__(self, parent, parser, pedigree, pigeon):
         gtk.Window.__init__(self)
         self.connect('delete-event', self.on_close_dialog)
         self.set_modal(True)
@@ -60,7 +60,6 @@ class PedigreeWindow(gtk.Window):
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
         self.set_skip_taskbar_hint(True)
 
-        self.database = database
         self.parser = parser
         self.pedigree = pedigree
         self.pigeon = pigeon
@@ -166,7 +165,7 @@ class PedigreeWindow(gtk.Window):
         #TODO: disabled for now. Remove?
         ##self.do_operation(const.MAIL)
         ##pedigree = os.path.join(const.TEMPDIR, self.pdfname)
-        ##maildialog.MailDialog(self, self.database, pedigree)
+        ##maildialog.MailDialog(self, pedigree)
         pass
 
     def on_save_clicked(self, widget):
@@ -184,8 +183,8 @@ class PedigreeWindow(gtk.Window):
         self.do_operation(PRINT_ACTION_DIALOG)
 
     def do_operation(self, print_action, save_path=None):
-        userinfo = common.get_own_address(self.database)
-        if not tools.check_user_info(self, self.database, userinfo['name']):
+        userinfo = common.get_own_address()
+        if not tools.check_user_info(self, userinfo['name']):
             return
 
         # Show a message to the user if the original image is not found and

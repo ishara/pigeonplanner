@@ -23,16 +23,16 @@ import gtk
 
 from pigeonplanner import common
 from pigeonplanner import builder
+from pigeonplanner import database
 from pigeonplanner.reportlib import report
 from pigeonplanner.reports.velocity import VelocityReport, VelocityReportOptions
 
 
 class VelocityCalculator(builder.GtkBuilder):
-    def __init__(self, parent, database):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "VelocityCalculator.ui")
 
         self.parent = parent
-        self.database = database
 
         dt = datetime.datetime.now()
         self.widgets.spinbutton_prognosis_hours.set_value(dt.hour)
@@ -155,8 +155,9 @@ class VelocityCalculator(builder.GtkBuilder):
     # Private methods
     def _show_distance_dialog(self):
         self.widgets.ls_distance.clear()
-        for racepoint, distance, unit in self.database.get_racepoints():
-            self.widgets.ls_distance.append([racepoint, distance, unit])
+        for data in database.get_all_racepoints():
+            self.widgets.ls_distance.append(
+                            [data["racepoint"], data["distance"], data["unit"]])
 
         self.widgets.dialog.show()
 

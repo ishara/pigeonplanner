@@ -37,12 +37,11 @@ from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, mainwindow, database, parser):
+    def __init__(self, mainwindow, parser):
         builder.GtkBuilder.__init__(self, "BreedingView.ui")
         basetab.BaseTab.__init__(self, _("Breeding"), "icon_breeding.png")
 
         self.mainwindow = mainwindow
-        self.database = database
         self.parser = parser
         self.maintreeview = mainwindow.get_treeview()
         self.widgets.selection = self.widgets.treeview.get_selection()
@@ -63,24 +62,23 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         widgets = [self.widgets.buttonremove, self.widgets.buttonedit]
         utils.set_multiple_sensitive(widgets, not rowiter is None)
         try:
-            (key, sire, dam, date, laid1, hatched1, pindex1, success1,
-             laid2, hatched2, pindex2, success2, clutch, 
-             box, comment) = self.database.get_breeding_from_id(model[rowiter][0])
+            data = dict(database.get_breeding_for_key(model[rowiter][0]))
         except TypeError:
-            (laid1, hatched1, pindex1, success1,
-             laid2, hatched2, pindex2, success2,
-             clutch, box, comment) = '', '', '', 0, '', '', '', 0, '', '', ''
-        self.widgets.datelaid1.set_text(laid1)
-        self.widgets.datehatched1.set_text(hatched1)
-        self.widgets.bandentry1.set_pindex(pindex1)
+            data = {}
+        success1 = data.get("success1", 0)
+        success2 = data.get("success2", 0)
+
+        self.widgets.datelaid1.set_text(data.get("laid1", ""))
+        self.widgets.datehatched1.set_text(data.get("hatched1", ""))
+        self.widgets.bandentry1.set_pindex(data.get("pindex1", ""))
         self.widgets.successcheck1.set_active(success1)
-        self.widgets.datelaid2.set_text(laid2)
-        self.widgets.datehatched2.set_text(hatched2)
-        self.widgets.bandentry2.set_pindex(pindex2)
+        self.widgets.datelaid2.set_text(data.get("laid2", ""))
+        self.widgets.datehatched2.set_text(data.get("hatched2", ""))
+        self.widgets.bandentry2.set_pindex(data.get("pindex2", ""))
         self.widgets.successcheck2.set_active(success2)
-        self.widgets.entryclutch.set_text(clutch)
-        self.widgets.entrybox.set_text(box)
-        self.widgets.textviewcomment.get_buffer().set_text(comment)
+        self.widgets.entryclutch.set_text(data.get("clutch", ""))
+        self.widgets.entrybox.set_text(data.get("box", ""))
+        self.widgets.textviewcomment.get_buffer().set_text(data.get("comment", ""))
 
         self.widgets.buttoninfo1.set_sensitive(success1)
         self.widgets.buttongoto1.set_sensitive(success1)
@@ -102,14 +100,13 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonremove_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.treestore.get_path(rowiter)
-        rowid = model.get_value(rowiter, COL_ID)
-        self.database.delete_from_table(self.database.BREEDING, rowid, 0)
+        database.remove_breeding(model.get_value(rowiter, COL_ID))
         self._remove_record(rowiter)
         self.widgets.selection.select_path(path)
 
     def on_buttoninfo1_clicked(self, widget):
         pigeon = self.parser.get_pigeon(self.widgets.bandentry1.get_pindex())
-        DetailsDialog(self.database, self.parser, pigeon, self.mainwindow)
+        DetailsDialog(self.parser, pigeon, self.mainwindow)
 
     def on_buttongoto1_clicked(self, widget):
         pindex = self.widgets.bandentry1.get_pindex()
@@ -117,7 +114,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_buttoninfo2_clicked(self, widget):
         pigeon = self.parser.get_pigeon(self.widgets.bandentry2.get_pindex())
-        DetailsDialog(self.database, self.parser, pigeon, self.mainwindow)
+        DetailsDialog(self.parser, pigeon, self.mainwindow)
 
     def on_buttongoto2_clicked(self, widget):
         pindex = self.widgets.bandentry2.get_pindex()
@@ -161,14 +158,14 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             sire = mate
             dam = self.pigeon.get_pindex()
         textbuffer = self.widgets.textviewcommentedit.get_buffer()
-        data = [sire, dam, date,
-                laid1, hatched1, pindex1,
-                int(self.widgets.successcheckedit1.get_active()),
-                laid2, hatched2, pindex2,
-                int(self.widgets.successcheckedit2.get_active()),
-                self.widgets.entryclutchedit.get_text(),
-                self.widgets.entryboxedit.get_text(),
-                textbuffer.get_text(*textbuffer.get_bounds())]
+        data = {"sire": sire, "dam": dam, "date": date,
+                "laid1": laid1, "hatched1": hatched1, "pindex1": pindex1,
+                "success1": int(self.widgets.successcheckedit1.get_active()),
+                "laid2": laid2, "hatched2": hatched2, "pindex2": pindex2,
+                "success2": int(self.widgets.successcheckedit2.get_active()),
+                "clutch": self.widgets.entryclutchedit.get_text(),
+                "box": self.widgets.entryboxedit.get_text(),
+                "comment": textbuffer.get_text(*textbuffer.get_bounds())}
 
         # Add the child pigeons if needed
         self._add_child_pigeon(pindex1, sire, dam,
@@ -180,8 +177,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         if self._mode == const.EDIT:
             model, rowiter = self.widgets.selection.get_selected()
             rowid = self.widgets.treestore.get_value(rowiter, COL_ID)
-            data.append(rowid)
-            self.database.update_table(self.database.BREEDING, data, 1, 0)
+            database.update_breeding(rowid, data)
             parent = self._get_or_create_parent_record(mate)
             if not self.widgets.treestore.is_ancestor(parent, rowiter):
                 # It is not possible to move a row to another parent.
@@ -193,7 +189,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             self.widgets.selection.emit('changed')
         # Insert when adding record
         elif self._mode == const.ADD:
-            rowid = self.database.insert_into_table(self.database.BREEDING, data)
+            rowid = database.add_breeding(data)
             parent = self._get_or_create_parent_record(mate)
             rowiter = self.widgets.treestore.append(parent, [rowid, mate, date])
 
@@ -227,7 +223,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         parent = None
         last = None
         self.widgets.treestore.clear()
-        for data in self.database.get_pigeon_breeding(pigeon.pindex, pigeon.is_cock()):
+        for data in database.get_breeding_for_pigeon(pigeon.pindex, pigeon.is_cock()):
             if parent is None or data[1] != last:
                 parent = self._add_parent_record(data[1])
             self.widgets.treestore.append(parent, [data[0], data[1], data[2]])
@@ -245,7 +241,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         if key is not None:
             (key, sire, dam, date, laid1, hatched1, pindex1, success1,
              laid2, hatched2, pindex2, success2, clutch, 
-             box, comment) = self.database.get_breeding_from_id(key)
+             box, comment) = database.get_breeding_for_key(key)
         else:
             (sire, dam, date, clutch, box, comment,
              laid1, hatched1, pindex1, success1,
@@ -293,13 +289,12 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             pigeon.yearsire = sy
             pigeon.dam = d
             pigeon.yeardam = dy
-            self.database.update_table(self.database.PIGEONS,
-                                       (s, sy, d, dy, pigeon.get_pindex()), 12, 1)
+            database.update_pigeon(pigeon.get_pindex(),
+                                   {"sire": s, "yearsire": sy, "dam": d, "yeardam": dy})
             if active:
                 # Pigeon isn't visible, but user checked the "add to list" option
                 pigeon.show = 1
-                self.database.update_table(self.database.PIGEONS,
-                                           (1, pigeon.get_pindex()), 5, 1)
+                database.update_pigeon(pigeon.get_pindex(), {"show": 1})
 
         if pigeon.get_visible() and not self.maintreeview.has_pigeon(pigeon):
             self.maintreeview.add_pigeon(pigeon, False)

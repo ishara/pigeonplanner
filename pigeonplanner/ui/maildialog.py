@@ -33,7 +33,7 @@ from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class MailDialog(builder.GtkBuilder):
-    def __init__(self, parent, database, attachment, kind='pdf'):
+    def __init__(self, parent, attachment, kind='pdf'):
         builder.GtkBuilder.__init__(self, "Dialogs.ui")
 
         self.widgets.maildialog.set_transient_for(parent)
@@ -57,11 +57,10 @@ class MailDialog(builder.GtkBuilder):
             self.widgets.rename.hide()
 
         name, email = '', ''
-        if database:
-            info = common.get_own_address(database)
-            if info:
-                name = info['name']
-                email = info['email']
+        info = common.get_own_address()
+        if info:
+            name = info['name']
+            email = info['email']
 
         self.widgets.entry_name.set_text(name)
         self.widgets.entry_mail.set_text(email)

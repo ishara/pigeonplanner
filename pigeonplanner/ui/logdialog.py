@@ -34,13 +34,12 @@ COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow",
           "ERROR": "red", "CRITICAL": "white", "TRACEBACK": "white"}
 
 class LogDialog(gtk.Dialog):
-    def __init__(self, database=None):
+    def __init__(self,):
         gtk.Dialog.__init__(self)
         self.set_title(_("Logfile Viewer"))
         self.set_size_request(700,500)
         self.set_icon(self.render_icon(gtk.STOCK_FILE, gtk.ICON_SIZE_MENU))
 
-        self.database = database
         self.set_logfile()
 
         frame = gtk.Frame()

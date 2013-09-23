@@ -37,6 +37,7 @@ import glib
 
 from pigeonplanner import const
 from pigeonplanner import config
+from pigeonplanner import database
 
 
 def get_sexdic():
@@ -48,7 +49,9 @@ def get_sex(sex):
 def get_sex_image(sex):
     return gtk.gdk.pixbuf_new_from_file(const.SEX_IMGS[sex])
 
-statusdic = {0: 'Dead', 1: 'Active', 2: 'Sold', 3: 'Lost', 4: 'Breeder', 5: 'Onloan'}
+statusdic = {0: database.Tables.DEAD, 1: "Active",
+             2: database.Tables.SOLD, 3: database.Tables.LOST,
+             4: database.Tables.BREEDER, 5: database.Tables.LOANED}
 def get_status(status):
     return statusdic[status]
 
@@ -114,18 +117,16 @@ def get_unicode_path(path):
             print "Problem encountered converting string: %s." % path
             return unicode(path, sys.getfilesystemencoding(), errors='replace')
 
-def count_active_pigeons(database):
+def count_active_pigeons():
     """
     Count the active pigeons as total and seperate sexes
-
-    @param database: A Pigeon Planner database instance
     """
 
     cocks = 0
     hens = 0
     ybirds = 0
     total = 0
-    for pigeon in database.get_pigeons():
+    for pigeon in database.get_all_pigeons():
         if not pigeon[5]: continue
 
         total += 1
@@ -139,25 +140,23 @@ def count_active_pigeons(database):
 
     return total, cocks, hens, ybirds
 
-def get_own_address(database):
+def get_own_address():
     """
     Retrieve the users personal info
-
-    @param database: A Pigeon Planner database instance
     """
 
-    userinfo = dict(name='', street='', code='', city='', country='',
-                    phone='', email='', comment='')
-    info = database.get_own_address()
+    userinfo = dict(name="", street="", code="", city="", country="",
+                    phone="", email="", comment="")
+    info = database.get_address_data({"me": 1})
     if info:
-        userinfo['name'] = info[1]
-        userinfo['street'] = info[2]
-        userinfo['code'] = info[3]
-        userinfo['city'] = info[4]
-        userinfo['country'] = info[5]
-        userinfo['phone'] = info[6]
-        userinfo['email'] = info[7]
-        userinfo['comment'] = info[8]
+        userinfo["name"] = info["name"]
+        userinfo["street"] = info["street"]
+        userinfo["code"] = info["code"]
+        userinfo["city"] = info["city"]
+        userinfo["country"] = info["country"]
+        userinfo["phone"] = info["phone"]
+        userinfo["email"] = info["email"]
+        userinfo["comment"] = info["comment"]
     return userinfo
 
 def get_pindex_from_band(band, year):

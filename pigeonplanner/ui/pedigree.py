@@ -26,6 +26,7 @@ import gtk
 
 from pigeonplanner import const
 from pigeonplanner import messages
+from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui.widgets import pedigreeboxes
 from pigeonplanner.ui.detailsview import DetailsDialog
@@ -51,8 +52,7 @@ def build_tree(parser, pigeon, index, depth, lst):
 
 
 class DrawPedigree(object):
-    def __init__(self, database, parser, treeview=None):
-        self.database = database
+    def __init__(self, parser, treeview=None):
         self.parser = parser
         self.treeview = treeview
 
@@ -225,11 +225,11 @@ class DrawPedigree(object):
     def _show_pigeon_details(self, widget, pigeon, parent):
         if not pigeon.get_pindex() in self.parser.pigeons:
             return
-        DetailsDialog(self.database, self.parser, pigeon, parent)
+        DetailsDialog(self.parser, pigeon, parent)
 
     def _edit_pigeon_details(self, widget, pigeon, child, sex, parent):
         mode = const.ADD if pigeon is None else const.EDIT
-        dialog = DetailsDialog(self.database, self.parser, pigeon, parent, mode)
+        dialog = DetailsDialog(self.parser, pigeon, parent, mode)
         dialog.details.set_child(child)
         dialog.details.set_pedigree_mode(True)
         dialog.details.set_sex(sex)
@@ -247,17 +247,19 @@ class DrawPedigree(object):
             band, year = '', ''
         else:
             band, year = pigeon.get_band()
-        startcol = 12 if pigeon.get_sex() == '0' else 14
-        pindex = child.get_pindex()
-        self.database.update_table(self.database.PIGEONS,
-                                   (band, year, pindex), startcol, 1)
-        self.parser.update_pigeon(pindex)
+        if pigeon.get_sex() == '0':
+            data = {"sire": band, "yearsire": year}
+        else:
+            data = {"dam": band, "yeardam": year}
+        database.update_pigeon(child.get_pindex(), data)
+        self.parser.update_pigeon(child.get_pindex())
 
     def _clear_box(self, widget, pigeon, child):
         self._edit_child(pigeon, child, True)
         self._redraw()
 
     def _remove_pigeon(self, widget, pigeon, child):
+        database.remove_pigeon(pigeon.get_pindex())
         self.parser.remove_pigeon(pigeon.get_pindex())
         self._edit_child(pigeon, child, True)
         self._redraw()

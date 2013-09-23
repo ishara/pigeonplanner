@@ -110,12 +110,21 @@ class DataComboboxEntry(gtk.ComboBoxEntry):
     __gtype_name__ = 'DataComboboxEntry'
 
     def __init__(self):
-        store = gtk.ListStore(str)
-        gtk.ComboBoxEntry.__init__(self, store, 0)
+        self.store = gtk.ListStore(str)
+        gtk.ComboBoxEntry.__init__(self, self.store, 0)
         set_entry_completion(self)
 
-    def set_data(self, database, dbtable):
-        fill_combobox(self, database.select_from_table(dbtable))
+    def set_data(self, data, sort=True):
+        fill_combobox(self, data, sort)
+
+    def add_item(self, item):
+        if not item: return
+
+        for treerow in self.store:
+            if item in treerow:
+                return
+        self.store.append([item])
+        self.store.set_sort_column_id(0, gtk.SORT_ASCENDING)
 
 
 class DistanceCombobox(gtk.ComboBox):

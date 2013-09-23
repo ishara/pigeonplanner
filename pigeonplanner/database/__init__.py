@@ -16,10 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner.ui.tools.addressbook import AddressBook, check_user_info
-from pigeonplanner.ui.tools.velocitycalculator import VelocityCalculator
-from pigeonplanner.ui.tools.distancecalculator import DistanceCalculator
-from pigeonplanner.ui.tools.photoalbum import PhotoAlbum
-from pigeonplanner.ui.tools.datamanager import DataManager
-from pigeonplanner.ui.tools.racepointmanager import RacepointManager
+from pigeonplanner.database.main import *
+
+session = DatabaseSession()
+
+from pigeonplanner.database.data import *
+from pigeonplanner.database.pigeon import *
 

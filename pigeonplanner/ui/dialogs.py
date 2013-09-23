@@ -29,6 +29,7 @@ from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import backup
 from pigeonplanner import messages
+from pigeonplanner import database
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.utils import HiddenPigeonsMixin
 from pigeonplanner.ui.widgets import comboboxes
@@ -64,13 +65,12 @@ class AboutDialog(gtk.AboutDialog):
 
 
 class InformationDialog(gtk.Dialog):
-    def __init__(self, parent, database):
+    def __init__(self, parent):
         gtk.Dialog.__init__(self, _("General information"), parent,
                             gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
                             ("gtk-close", gtk.RESPONSE_CLOSE))
         self.set_default_response(gtk.RESPONSE_CLOSE)
         self.resize(440, 380)
-        self.database = database
 
         treeview = gtk.TreeView()
         treeview.set_headers_visible(False)
@@ -110,7 +110,7 @@ class InformationDialog(gtk.Dialog):
                 ("Distribution", distribution))
 
     def get_data(self):
-        total, cocks, hens, ybirds = common.count_active_pigeons(self.database)
+        total, cocks, hens, ybirds = common.count_active_pigeons()
         data = [(_("Number of pigeons"), str(total))]
         data.append(("    %s" % _("Cocks"), "%s\t(%s %%)"
                                 %(cocks, self.get_percentage(cocks, total))))
@@ -119,12 +119,12 @@ class InformationDialog(gtk.Dialog):
         data.append(("    %s" % _("Young birds"), "%s\t(%s %%)"
                                 %(ybirds, self.get_percentage(ybirds, total))))
         for status in range(6):
-            n_status = self.database.count_pigeon_with_status(status)
+            n_status = database.count_pigeons_with_status(status)
             data.append(("    %s" % _(common.statusdic[status]), "%s\t(%s %%)"
                             % (n_status, self.get_percentage(n_status, total))))
         data.append((_("Number of results"),
-                                    str(len(self.database.get_all_results()))))
-        data.append((_("Number of couples"), str(self.database.get_breeding_count())))
+                                    str(database.count_results())))
+        data.append((_("Number of couples"), str(database.count_breeding_records())))
         return data
 
     def get_percentage(self, value, total):

@@ -22,6 +22,7 @@ import gobject
 from pigeonplanner import errors
 from pigeonplanner import common
 from pigeonplanner import builder
+from pigeonplanner import database
 from pigeonplanner.ui import locationchooser
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.widgets import latlongentry
@@ -30,10 +31,8 @@ from .distancecalculator import DistanceCalculator
 
 
 class RacepointManager(builder.GtkBuilder):
-    def __init__(self, parent, database):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "RaceManager.ui")
-
-        self.database = database
 
         self._fill_racepoints_combo()
         self.widgets.window.set_transient_for(parent)
@@ -45,26 +44,24 @@ class RacepointManager(builder.GtkBuilder):
     def on_combopoint_changed(self, widget):
         rp = widget.get_active_text()
         if rp is None: return
-        latitude, longitude, distance, unit = self.database.get_racepoint_data(rp)
-        # Older versions stored these values as None instead of ''
-        if latitude is None: latitude = ''
-        if longitude is None: longitude = ''
-        if distance is None: distance = '0.0'
-        self.widgets.entrylatitude.set_text(latitude)
-        self.widgets.entrylongitude.set_text(longitude)
+        data = database.get_racepoint_data(rp)
+        self.widgets.entrylatitude.set_text(data["xco"])
+        self.widgets.entrylongitude.set_text(data["yco"])
         try:
-            distance = float(distance)
+            distance = float(data["distance"])
         except ValueError:
             distance = 0.0
         self.widgets.spindistance.set_value(distance)
-        if not unit: unit = 0
+        unit = data["unit"]
+        if not unit:
+            unit = 0
         self.widgets.combodistance.set_active(unit)
 
     def on_buttonhelp_clicked(self, widget):
         common.open_help(13)
 
     def on_buttonadd_clicked(self, widget):
-        manager = DataManager(self.widgets.window, self.database, None)
+        manager = DataManager(self.widgets.window, None)
         response = manager.widgets.window.run()
         if response == gtk.RESPONSE_CLOSE:
             self._fill_racepoints_combo()
@@ -82,7 +79,7 @@ class RacepointManager(builder.GtkBuilder):
 
     def on_buttoncalculate_clicked(self, widget):
         point = self.widgets.combopoint.get_active()
-        calculator = DistanceCalculator(self.widgets.window, self.database, point)
+        calculator = DistanceCalculator(self.widgets.window, point)
         response = calculator.widgets.window.run()
         if response == gtk.RESPONSE_CLOSE:
             self.widgets.spindistance.set_value(float(calculator.get_distance()))
@@ -96,11 +93,10 @@ class RacepointManager(builder.GtkBuilder):
         except errors.InvalidInputError:
             return
 
-        data = (latitude, longitude,
-                self.widgets.spindistance.get_value(),
-                self.widgets.combodistance.get_active(),
-                self.widgets.combopoint.get_active_text())
-        self.database.update_table(self.database.RACEPOINTS, data, 2)
+        database.update_racepoint(self.widgets.combopoint.get_active_text(),
+                                  {"xco": latitude, "yco": longitude,
+                                   "distance": self.widgets.spindistance.get_value(),
+                                   "unit": self.widgets.combodistance.get_active()})
         def clear_image():
             self.widgets.image.clear()
             return False
@@ -108,7 +104,7 @@ class RacepointManager(builder.GtkBuilder):
         gobject.timeout_add(3000, clear_image)
 
     def _fill_racepoints_combo(self):
-        data = self.database.select_from_table(self.database.RACEPOINTS)
+        data = database.get_all_data(database.Tables.RACEPOINTS)
         comboboxes.fill_combobox(self.widgets.combopoint, data)
         value = self.widgets.combopoint.get_active_text() is not None
         self.widgets.entrylatitude.set_sensitive(value)

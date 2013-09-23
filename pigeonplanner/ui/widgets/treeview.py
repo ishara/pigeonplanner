@@ -20,6 +20,7 @@ import gtk
 
 from pigeonplanner import common
 from pigeonplanner import config
+from pigeonplanner import database
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import comboboxes
 
@@ -31,7 +32,7 @@ class MainTreeView(gtk.TreeView):
 
     __gtype_name__ = 'MainTreeView'
 
-    def __init__(self, database, parser, statusbar):
+    def __init__(self, parser, statusbar):
         gtk.TreeView.__init__(self)
 
         self.parser = parser
@@ -49,7 +50,7 @@ class MainTreeView(gtk.TreeView):
         self.set_rules_hint(True)
         self._selection = self.get_selection()
         self._selection.set_mode(gtk.SELECTION_MULTIPLE)
-        self._filterdialog = self._build_filterdialog(database)
+        self._filterdialog = self._build_filterdialog()
         self.set_columns()
         self.show_all()
 
@@ -217,19 +218,16 @@ class MainTreeView(gtk.TreeView):
             self.append_column(tvcolumn)
         return liststore
 
-    def _build_filterdialog(self, database):
+    def _build_filterdialog(self):
         dialog = dialogs.FilterDialog(None, _("Filter pigeons"))
         dialog.connect('apply-clicked', self.on_filterapply_clicked)
         dialog.connect('clear-clicked', self.on_filterclear_clicked)
 
         combo = comboboxes.SexCombobox()
         dialog.add_custom('sex', _("Sex"), combo, combo.get_active_text)
-        dialog.add_combobox('colour', _("Colours"),
-                                database.select_from_table(database.COLOURS))
-        dialog.add_combobox('strain', _("Strains"),
-                                database.select_from_table(database.STRAINS))
-        dialog.add_combobox('loft', _("Lofts"),
-                                database.select_from_table(database.LOFTS))
+        dialog.add_combobox('colour', _("Colours"), database.get_all_data(database.Tables.COLOURS))
+        dialog.add_combobox('strain', _("Strains"), database.get_all_data(database.Tables.STRAINS))
+        dialog.add_combobox('loft', _("Lofts"), database.get_all_data(database.Tables.LOFTS))
         combo = comboboxes.StatusCombobox()
         dialog.add_custom('status', _("Status"), combo, combo.get_active)
         self._filter = FILTER

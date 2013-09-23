@@ -26,15 +26,15 @@ from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import builder
 from pigeonplanner import mailing
+from pigeonplanner import database
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import WarningDialog
 
 
 class ResultParser(builder.GtkBuilder):
-    def __init__(self, parent, database, pigeons):
+    def __init__(self, parent, pigeons):
         builder.GtkBuilder.__init__(self, "ResultParser.ui")
         self.pigeons = pigeons
-        self.database = database
         self.data = None
 
         self._build_interface()
@@ -109,12 +109,14 @@ class ResultParser(builder.GtkBuilder):
         for row in self.widgets.liststore:
             toggle, pindex, ring, year, place = row
             if not toggle: continue
-            data = [pindex, date, point, place, out, sector, '', category,
-                    '', '', '', '', 0, 0, '']
-            if self.database.has_result(data):
+            data = {"pindex": pindex, "date": date, "point": point, "place": place,
+                    "out": out, "sector": sector, "type": "", "category": category,
+                    "wind": "", "weather": "", "put": "", "back": "",
+                    "ownplace": 0, "ownout": 0, "comment": ""}
+            if database.result_exists(data):
                 logger.info('Pigeon %s already has the selected result' % pindex)
             else:
-                self.database.insert_into_table(self.database.RESULTS, data)
+                database.add_result(data)
         self.close_window()
 
     def on_celltoggle_toggled(self, cell, path):

@@ -16,10 +16,22 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner.ui.tools.addressbook import AddressBook, check_user_info
-from pigeonplanner.ui.tools.velocitycalculator import VelocityCalculator
-from pigeonplanner.ui.tools.distancecalculator import DistanceCalculator
-from pigeonplanner.ui.tools.photoalbum import PhotoAlbum
-from pigeonplanner.ui.tools.datamanager import DataManager
-from pigeonplanner.ui.tools.racepointmanager import RacepointManager
+OR = " OR "
+AND = " AND "
+
+def build_sql_insert_cols(data):
+    cols = []
+    values = []
+    for key in data.keys():
+        cols.append(key)
+        values.append(":%s" % key)
+    cols = ", ".join(cols)
+    values = ", ".join(values)
+    return {"columns": cols, "values": values}
+
+def build_sql_cols(data, delimiter=", "):
+    cols = []
+    for key in data.keys():
+        cols.append("%s=:%s" % (key, key))
+    return delimiter.join(cols)
 

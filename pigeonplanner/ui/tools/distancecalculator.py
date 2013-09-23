@@ -22,15 +22,14 @@ from geopy import distance as gdistance
 from pigeonplanner import errors
 from pigeonplanner import common
 from pigeonplanner import builder
+from pigeonplanner import database
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class DistanceCalculator(builder.GtkBuilder):
-    def __init__(self, parent, database, racepoint=None):
+    def __init__(self, parent, racepoint=None):
         builder.GtkBuilder.__init__(self, "DistanceCalculator.ui")
-
-        self.database = database
 
         self._distance = 0.0
         self._unit = 0
@@ -85,22 +84,23 @@ class DistanceCalculator(builder.GtkBuilder):
         if widget.get_active() == 0:
             # Custom selected
             editable = True
-            latitude = ''
-            longitude = ''
+            latitude = ""
+            longitude = ""
         elif widget.get_active() == 1:
             # Loft selected
             editable = False
             try:
-                latitude, longitude = self.database.get_loft_latlong()
+                data = database.get_address_data({"me": 1})
+                latitude = data["latitude"]
+                longitude = data["longitude"]
             except TypeError:
-                latitude, longitude = '', ''
+                latitude, longitude = "", ""
         else:
             editable = False
             rp = widget.get_active_text()
-            latitude, longitude, dist, unit = self.database.get_racepoint_data(rp)
-            # Older versions stored these values as None instead of ''
-            if latitude is None: latitude = ''
-            if longitude is None: longitude = ''
+            data = database.get_racepoint_data(rp)
+            latitude = data["xco"]
+            longitude = data["yco"]
         self.widgets.entrylatfrom.set_editable(editable)
         self.widgets.entrylongfrom.set_editable(editable)
         self.widgets.entrylatfrom.set_text(latitude)
@@ -110,22 +110,23 @@ class DistanceCalculator(builder.GtkBuilder):
         if widget.get_active() == 0:
             # Custom selected
             editable = True
-            latitude = ''
-            longitude = ''
+            latitude = ""
+            longitude = ""
         elif widget.get_active() == 1:
             # Loft selected
             editable = False
             try:
-                latitude, longitude = self.database.get_loft_latlong()
+                data = database.get_address_data({"me": 1})
+                latitude = data["latitude"]
+                longitude = data["longitude"]
             except TypeError:
-                latitude, longitude = '', ''
+                latitude, longitude = "", ""
         else:
             editable = False
             rp = widget.get_active_text()
-            latitude, longitude, dist, unit = self.database.get_racepoint_data(rp)
-            # Older versions stored these values as None instead of ''
-            if latitude is None: latitude = ''
-            if longitude is None: longitude = ''
+            data = database.get_racepoint_data(rp)
+            latitude = data["xco"]
+            longitude = data["yco"]
         self.widgets.entrylatto.set_editable(editable)
         self.widgets.entrylongto.set_editable(editable)
         self.widgets.entrylatto.set_text(latitude)
@@ -154,8 +155,7 @@ class DistanceCalculator(builder.GtkBuilder):
         return lat, lon
 
     def _fill_location_combos(self, racepoint):
-        data = self.database.select_from_table(self.database.RACEPOINTS)
-        data.sort()
+        data = database.get_all_data(database.Tables.RACEPOINTS)
         data.insert(0, _("Custom"))
         data.insert(1, _("Loft"))
         activefrom = 1 if racepoint is not None else 0

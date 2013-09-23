@@ -80,7 +80,6 @@ class  NullFile(object):
 
 class Startup(object):
     def __init__(self):
-        self.db = None
         self.parser = None
         self.logger = None
 
@@ -241,8 +240,7 @@ class Startup(object):
             ])
 
         # Set default icon for all windows
-        gtk.window_set_default_icon_from_file(os.path.join(const.IMAGEDIR,
-                                                           "icon_logo.png"))
+        gtk.window_set_default_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
 
     def setup_database(self):
         """
@@ -251,15 +249,13 @@ class Startup(object):
 
         from pigeonplanner import database
 
-        self.db = database.DatabaseOperations()
-        try:
-            changed = self.db.check_schema()
-        except KeyError:
+        if database.session.get_database_version() > database.SCHEMA_VERSION:
             from pigeonplanner import messages
             from pigeonplanner.ui.messagedialog import ErrorDialog
             ErrorDialog(messages.MSG_NEW_DATABASE)
             raise SystemExit()
 
+        changed = database.session.check_schema()
         if changed:
             from pigeonplanner import messages
             from pigeonplanner.ui.messagedialog import InfoDialog
@@ -272,7 +268,7 @@ class Startup(object):
 
         from pigeonplanner import pigeonparser
 
-        self.parser = pigeonparser.PigeonParser(self.db)
+        self.parser = pigeonparser.PigeonParser()
         self.parser.build_pigeons()
 
     def search_updates(self):
@@ -305,7 +301,7 @@ class Startup(object):
         self.logger.critical("Unhandled exception\n%s" % tb)
 
         from pigeonplanner.ui import exceptiondialog
-        exceptiondialog.ExceptionDialog(self.db, tb)
+        exceptiondialog.ExceptionDialog(tb)
 
 
 def start_ui():
@@ -339,20 +335,10 @@ def start_ui():
         updatethread.start()
 
     from pigeonplanner.ui import mainwindow
-    mainwindow.MainWindow(app.db, app.parser)
+    mainwindow.MainWindow(app.parser)
 
     gtk.main()
 
-def start_dbtool():
-    app = Startup()
-    app.setup_locale()
-    app.setup_theme()
-    app.setup_database()
-
-    from pigeonplanner.ui import databasetool
-    databasetool.DBWindow(app.db)
-
-    gtk.main()
 
 if __name__ == '__main__':
     start_ui()

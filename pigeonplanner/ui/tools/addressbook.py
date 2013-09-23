@@ -22,23 +22,23 @@ from pigeonplanner import const
 from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import messages
+from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui.widgets import latlongentry
 from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
-def check_user_info(parent, database, name):
+def check_user_info(parent, name):
     """
     Check if the user has entered his personal info
 
     @param parent: A parent window
-    @param database: The database instance
     @param name: The name of the user
     """
 
     if name == '':
         if QuestionDialog(messages.MSG_NO_INFO, parent).run():
-            book = AddressBook(parent, database)
+            book = AddressBook(parent)
             book.on_buttonadd_clicked(None)
             book.widgets.checkme.set_active(True)
             return False
@@ -46,10 +46,8 @@ def check_user_info(parent, database, name):
 
 
 class AddressBook(builder.GtkBuilder):
-    def __init__(self, parent, database):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "AddressBook.ui")
-
-        self.db = database
 
         self._mode = None
         self._entries = self.get_objects_from_prefix("entry")
@@ -87,7 +85,7 @@ class AddressBook(builder.GtkBuilder):
                               self.widgets.addressbookwindow, name).run():
             return
 
-        self.db.delete_from_table(self.db.ADDR, key, 0)
+        database.remove_address(key)
         self.widgets.liststore.remove(rowiter)
         self.widgets.selection.select_path(path)
 
@@ -97,18 +95,16 @@ class AddressBook(builder.GtkBuilder):
         except errors.InvalidInputError:
             return
         self._set_widgets(False)
-        name = data[0]
         if self._mode == const.ADD:
-            rowid = self.db.insert_into_table(self.db.ADDR, data)
-            rowiter = self.widgets.liststore.insert(0, [rowid, name])
+            rowid = database.add_address(data)
+            rowiter = self.widgets.liststore.insert(0, [rowid, data["name"]])
             self.widgets.selection.select_iter(rowiter)
             path = self.widgets.liststore.get_path(rowiter)
             self.widgets.treeview.scroll_to_cell(path)
         else:
-            data = data + (self._get_address_key(),)
-            self.db.update_table(self.db.ADDR, data, 1, 0)
+            database.update_address(self._get_address_key(), data)
             model, rowiter = self.widgets.selection.get_selected()
-            self.widgets.liststore.set_value(rowiter, 1, name)
+            self.widgets.liststore.set_value(rowiter, 1, data["name"])
             self.widgets.selection.emit('changed')
 
     def on_buttoncancel_clicked(self, widget):
@@ -126,24 +122,24 @@ class AddressBook(builder.GtkBuilder):
             self._empty_entries()
             return
 
-        data = self.db.get_address(model[rowiter][0])
-        self.widgets.entryname.set_text(data[1])
-        self.widgets.entrystreet.set_text(data[2])
-        self.widgets.entryzip.set_text(data[3])
-        self.widgets.entrycity.set_text(data[4])
-        self.widgets.entrycountry.set_text(data[5])
-        self.widgets.entryphone.set_text(data[6])
-        self.widgets.entryemail.set_text(data[7])
-        self.widgets.entrycomment.set_text(data[8])
-        self.widgets.checkme.set_active(data[9])
-        self.widgets.entrylat.set_text(data[10])
-        self.widgets.entrylong.set_text(data[11])
+        data = database.get_address_data({"Addresskey": model[rowiter][0]})
+        self.widgets.entryname.set_text(data["name"])
+        self.widgets.entrystreet.set_text(data["street"])
+        self.widgets.entryzip.set_text(data["code"])
+        self.widgets.entrycity.set_text(data["city"])
+        self.widgets.entrycountry.set_text(data["country"])
+        self.widgets.entryphone.set_text(data["phone"])
+        self.widgets.entryemail.set_text(data["email"])
+        self.widgets.entrycomment.set_text(data["comment"])
+        self.widgets.checkme.set_active(data["me"])
+        self.widgets.entrylat.set_text(data["latitude"])
+        self.widgets.entrylong.set_text(data["longitude"])
 
     # Internal methods
     def _fill_treeview(self):
         self.widgets.liststore.clear()
-        for item in self.db.get_all_addresses():
-            self.widgets.liststore.insert(0, [item[0], item[1]])
+        for item in database.get_all_addresses():
+            self.widgets.liststore.insert(0, [item["Addresskey"], item["name"]])
         self.widgets.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
 
     def _set_widgets(self, value):
@@ -156,9 +152,9 @@ class AddressBook(builder.GtkBuilder):
         utils.set_multiple_sensitive([self.widgets.treeview], not value)
         utils.set_multiple_visible(self._normalbuttons, not value)
         utils.set_multiple_visible(self._editbuttons, value)
-        show_me = self.db.get_own_address() is None or \
+        show_me = database.get_address_data({"me": 1}) is None or \
                     (self._mode == const.EDIT and
-                     self.db.get_own_address()[0] == self._get_address_key())
+                     database.get_address_data({"me": 1})[0] == self._get_address_key())
         utils.set_multiple_visible([self.widgets.checkme], show_me if value else False)
 
         shadow = gtk.SHADOW_NONE if value else gtk.SHADOW_IN
@@ -174,18 +170,17 @@ class AddressBook(builder.GtkBuilder):
         self.widgets.entryname.set_position(-1)
 
     def _get_entry_data(self):
-        return (self.widgets.entryname.get_text(),
-                self.widgets.entrystreet.get_text(),
-                self.widgets.entryzip.get_text(),
-                self.widgets.entrycity.get_text(),
-                self.widgets.entrycountry.get_text(),
-                self.widgets.entryphone.get_text(),
-                self.widgets.entryemail.get_text(),
-                self.widgets.entrycomment.get_text(),
-                int(self.widgets.checkme.get_active()),
-                self.widgets.entrylat.get_text(),
-                self.widgets.entrylong.get_text(),
-                )
+        return {"name": self.widgets.entryname.get_text(),
+                "street": self.widgets.entrystreet.get_text(),
+                "code": self.widgets.entryzip.get_text(),
+                "city": self.widgets.entrycity.get_text(),
+                "country": self.widgets.entrycountry.get_text(),
+                "phone": self.widgets.entryphone.get_text(),
+                "email": self.widgets.entryemail.get_text(),
+                "comment": self.widgets.entrycomment.get_text(),
+                "me": int(self.widgets.checkme.get_active()),
+                "latitude": self.widgets.entrylat.get_text(),
+                "longitude": self.widgets.entrylong.get_text()}
 
     def _get_address_key(self):
         model, rowiter = self.widgets.selection.get_selected()

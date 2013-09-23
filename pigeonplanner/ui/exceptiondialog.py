@@ -27,10 +27,9 @@ from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 class ExceptionDialog(gtk.Dialog):
-    def __init__(self, db, errortext):
+    def __init__(self, errortext):
         gtk.Dialog.__init__(self)
 
-        self.database = db
         self._errortext = errortext
         
         self._create_dialog()
@@ -41,14 +40,14 @@ class ExceptionDialog(gtk.Dialog):
     def report_log(self, widget):
         try:
             new, msg = update.update()
-        except update.UpdateError, exc:
+        except update.UpdateError as exc:
             new = False
         if new:
             desc = _("Chances are that your problem is already fixed in "
                      "this new version. Send a report anyway?")
             if not QuestionDialog((msg, desc, msg), self).run():
                 return
-        maildialog.MailDialog(self, self.database, const.LOGFILE, 'log')
+        maildialog.MailDialog(self, const.LOGFILE, 'log')
 
     def on_expander_activate(self, widget):
         def resize_timeout():

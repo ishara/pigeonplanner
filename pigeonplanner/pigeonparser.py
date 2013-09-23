@@ -22,15 +22,15 @@ Parser to get all pigeons
 
 from pigeonplanner import const
 from pigeonplanner import common
+from pigeonplanner import database
 
 
 class PigeonParser(object):
-    def __init__(self, database):
-        self.database = database
+    def __init__(self):
         self.pigeons = {}
 
     def build_pigeons(self):
-        for pigeon in self.database.get_pigeons():
+        for pigeon in database.get_all_pigeons():
             self.add_pigeon(pigeon)
 
     def get_pigeons(self):
@@ -48,34 +48,37 @@ class PigeonParser(object):
     def get_parents(self, pigeon):
         sire_pindex = common.get_pindex_from_band(*pigeon.get_sire())
         sire = self.get_pigeon(sire_pindex)
-        if sire is None and sire_pindex != '':
+        if sire is None and sire_pindex != "":
             sire = self.add_empty_pigeon(sire_pindex, const.SIRE, False)
 
         dam_pindex = common.get_pindex_from_band(*pigeon.get_dam())
         dam = self.get_pigeon(dam_pindex)
-        if dam is None and dam_pindex != '':
+        if dam is None and dam_pindex != "":
             dam = self.add_empty_pigeon(dam_pindex, const.DAM, False)
 
         return sire, dam
 
     def add_pigeon(self, data=None, pindex=None):
         if data is None and pindex is not None:
-            data = self.database.get_pigeon_data(pindex)
+            data = database.get_pigeon_data(pindex)
         pobj = Pigeon()
-        pobj.set_data(*data)
+        pobj.set_data(**data)
         self.pigeons[pobj.pindex] = pobj
         return pobj
 
-    def add_empty_pigeon(self, pindex, sex, visible=True, sire='', dam=''):
-        if pindex == '':
+    def add_empty_pigeon(self, pindex, sex, visible=True, sire="", dam=""):
+        if pindex == "":
             raise ValueError
         band, year = common.get_band_from_pindex(pindex)
         sband, syear = common.get_band_from_pindex(sire)
         dband, dyear = common.get_band_from_pindex(dam)
-        data = [pindex, band, year, str(sex), int(visible), 1, '', '', '', '',
-                '', sband, syear, dband, dyear, '', '', '', '', '', '']
-        rowid = self.database.insert_into_table(self.database.PIGEONS, data)
-        data.insert(0, rowid)
+        data = {"pindex": pindex, "band": band, "year": year, "sex": str(sex),
+                "show": int(visible), "sire": sband, "yearsire": syear,
+                "dam": dband, "yeardam": dyear}
+        rowid = database.add_pigeon(data)
+        data.update({"Pigeonskey": rowid, "active": 1, "colour": "", "name": "",
+                     "strain": "", "loft": "", "image": "", "extra1": "", "extra2": "",
+                     "extra3": "", "extra4": "", "extra5": "", "extra6": ""})
         pobj = self.add_pigeon(data)
         return pobj
 
@@ -83,20 +86,19 @@ class PigeonParser(object):
         if old_pindex is not None and old_pindex != pindex:
             self.pigeons[pindex] = self.pigeons.pop(old_pindex)
         pobj = self.pigeons[pindex]
-        pobj.set_data(*self.database.get_pigeon_data(pindex))
+        pobj.set_data(**database.get_pigeon_data(pindex))
         return pobj
 
     def remove_pigeon(self, pindex):
-        self.database.delete_from_table(self.database.PIGEONS, pindex)
         del self.pigeons[pindex]
 
 
 class Pigeon(object):
-    def set_data(self, key, pindex, ring, year, sex, show, active, colour,
+    def set_data(self, Pigeonskey, pindex, band, year, sex, show, active, colour,
                  name, strain, loft, image, sire, yearsire, dam, yeardam,
                  extra1, extra2, extra3, extra4, extra5, extra6):
         self.pindex = pindex
-        self.ring = ring
+        self.ring = band
         self.year = year
         self.sex = sex
         self.show = show

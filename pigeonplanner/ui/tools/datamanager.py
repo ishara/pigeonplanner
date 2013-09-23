@@ -28,25 +28,24 @@ from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 class DataManager(builder.GtkBuilder):
-    def __init__(self, parent, database, parser):
+    def __init__(self, parent, parser):
         builder.GtkBuilder.__init__(self, "DataManager.ui")
 
-        self.database = database
         self.parser = parser
         if parser is None:
             self.widgets.frameobjects.set_sensitive(False)
 
         # XXX: Translated strings are not unicode on some Windows XP systems
         # that were tested.
-        self.tables = {unicode(_("Colours")): self.database.COLOURS,
-                       unicode(_("Sectors")): self.database.SECTORS,
-                       unicode(_("Types")): self.database.TYPES,
-                       unicode(_("Categories")): self.database.CATEGORIES,
-                       unicode(_("Racepoints")): self.database.RACEPOINTS,
-                       unicode(_("Strains")): self.database.STRAINS,
-                       unicode(_("Lofts")): self.database.LOFTS,
-                       unicode(_("Weather")): self.database.WEATHER,
-                       unicode(_("Wind")): self.database.WIND}
+        self.tables = {unicode(_("Colours")): database.Tables.COLOURS,
+                       unicode(_("Sectors")): database.Tables.SECTORS,
+                       unicode(_("Types")): database.Tables.TYPES,
+                       unicode(_("Categories")): database.Tables.CATEGORIES,
+                       unicode(_("Racepoints")): database.Tables.RACEPOINTS,
+                       unicode(_("Strains")): database.Tables.STRAINS,
+                       unicode(_("Lofts")): database.Tables.LOFTS,
+                       unicode(_("Weather")): database.Tables.WEATHER,
+                       unicode(_("Wind")): database.Tables.WIND}
         comboboxes.fill_combobox(self.widgets.comboset, self.tables.keys())
 
         self._build_treeview()
@@ -65,22 +64,20 @@ class DataManager(builder.GtkBuilder):
         item = self.widgets.comboitem.get_active_text()
         if QuestionDialog(messages.MSG_REMOVE_ITEM,
                           self.widgets.window, (item, dataset)).run():
-            self.database.delete_from_table(self.tables[dataset], item)
+            database.remove_data(self.tables[dataset], item)
             index = self.widgets.comboitem.get_active()
             self.widgets.comboitem.remove_text(index)
             self.widgets.comboitem.set_active(0)
 
     def on_buttonadd_clicked(self, widget):
         dataset = unicode(self.widgets.comboset.get_active_text())
-        item = (self.widgets.entryitem.get_text(), )
+        item = self.widgets.entryitem.get_text()
         if dataset == _("Racepoints"):
-            item = item+("", "", "", "")
-        try:
-            self.database.insert_into_table(self.tables[dataset], item)
-        except database.InvalidValueError:
-            # Item already exists in dataset. No need for an error message.
-            return
-        self.widgets.entryitem.set_text('')
+            data = {"racepoint": item, "xco": "", "yco": "", "distance": "", "unit": ""}
+            database.add_racepoint(data)
+        else:
+            database.add_data(self.tables[dataset], item)
+        self.widgets.entryitem.set_text("")
         self._fill_item_combobox(dataset)
 
     def on_comboset_changed(self, widget):
@@ -96,9 +93,8 @@ class DataManager(builder.GtkBuilder):
         self.widgets.liststore.clear()
         for pindex, pigeon in self.parser.pigeons.iteritems():
             if pigeon.get_visible(): continue
-            sex = int(pigeon.get_sex())
-            if sex == const.YOUNG: continue
-            is_parent = self.database.has_parent(sex, *pigeon.get_band())
+            if int(pigeon.get_sex()) == const.YOUNG: continue
+            is_parent = database.pigeon_is_a_parent(*pigeon.get_band())
             if not is_parent:
                 self.widgets.liststore.insert(0, [pigeon, False, pigeon.get_band_string()])
 
@@ -111,13 +107,14 @@ class DataManager(builder.GtkBuilder):
         if not pigeon.get_pindex() in self.parser.pigeons:
             return
         from pigeonplanner.ui.detailsview import DetailsDialog
-        DetailsDialog(self.database, self.parser, pigeon, self.widgets.window)
+        DetailsDialog(self.parser, pigeon, self.widgets.window)
 
     def on_buttondelete_clicked(self, widget):
         for row_num in range(len(self.widgets.liststore)-1, -1, -1):
             row = self.widgets.liststore[row_num]
             if not row[1]: continue
             pindex = row[0].get_pindex()
+            database.remove_pigeon(pindex)
             self.parser.remove_pigeon(pindex)
             self.widgets.liststore.remove(row.iter)
         self.widgets.buttondelete.set_sensitive(False)
@@ -140,7 +137,7 @@ class DataManager(builder.GtkBuilder):
 
     # Private methods
     def _fill_item_combobox(self, dataset):
-        data = self.database.select_from_table(self.tables[dataset])
+        data = database.get_all_data(self.tables[dataset])
         comboboxes.fill_combobox(self.widgets.comboitem, data)
         value = self.widgets.comboitem.get_active_text() is not None
         self.widgets.buttonremove.set_sensitive(value)

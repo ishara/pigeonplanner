@@ -25,6 +25,7 @@ from pigeonplanner import mime
 from pigeonplanner import common
 from pigeonplanner import builder
 from pigeonplanner import messages
+from pigeonplanner import database
 from pigeonplanner import thumbnail
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import filechooser
@@ -33,12 +34,11 @@ from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, parent, database, parser):
+    def __init__(self, parent, parser):
         builder.GtkBuilder.__init__(self, "MediaView.ui")
         basetab.BaseTab.__init__(self, _("Media"), "icon_media.png")
 
         self.parent = parent
-        self.database = database
         self.parser = parser
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.set_select_function(self._select_func, full=True)
@@ -71,11 +71,10 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         chooser = filechooser.MediaChooser(self.parent)
         response = chooser.run()
         if response == gtk.RESPONSE_OK:
-            filepath = chooser.get_filename()
-            filetype = chooser.get_filetype()
-            data = [self.pigeon.get_pindex(), filetype, filepath,
-                    chooser.get_filetitle(), chooser.get_filedescription()]
-            rowid = self.database.insert_into_table(self.database.MEDIA, data)
+            data = {"pindex":self.pigeon.get_pindex(), "type": chooser.get_filetype(),
+                    "path": chooser.get_filename(), "title": chooser.get_filetitle(),
+                    "description": chooser.get_filedescription()}
+            database.add_media(data)
             # Hackish... Fill whole treeview again
             self.set_pigeon(self.pigeon)
         chooser.destroy()
@@ -85,17 +84,14 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
             return
 
         model, rowiter = self.widgets.selection.get_selected()
-        path = self.widgets.liststore.get_path(rowiter)
-        rowid = model.get_value(rowiter, 0)
-        filetype = model.get_value(rowiter, 1)
-        filepath = model.get_value(rowiter, 2)
-        if mime.is_image(filetype):
+        if mime.is_image(model.get_value(rowiter, 1)):
             try:
-                os.remove(thumbnail.get_path(filepath))
+                os.remove(thumbnail.get_path(model.get_value(rowiter, 2)))
             except:
                 pass
-        self.database.delete_from_table(self.database.MEDIA, rowid, 0)
+        database.remove_media({"Mediakey": model.get_value(rowiter, 0)})
         self.widgets.liststore.remove(rowiter)
+        path = self.widgets.liststore.get_path(rowiter)
         self.widgets.selection.select_path(path)
 
     def set_pigeon(self, pigeon):
@@ -104,7 +100,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         images = []
         other = []
         self.widgets.liststore.clear()
-        for media in self.database.get_pigeon_media(pigeon.pindex):
+        for media in database.get_media_for_pigeon(pigeon.pindex):
             if mime.is_image(media[2]):
                 images.append(media)
             else:

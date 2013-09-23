@@ -39,6 +39,7 @@ from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
+from pigeonplanner import database
 from pigeonplanner.ui import tabs
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
@@ -118,7 +119,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
          <menuitem action="Racepoints"/>
          <menuitem action="Album"/>
          <menuitem action="Addresses"/>
-         <menuitem action="Calendar"/>
          <menuitem action="Data"/>
       </menu>
       <menu action="HelpMenu">
@@ -148,35 +148,29 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
    </toolbar>
 </ui>
 """
-    def __init__(self, database, parser):
+    def __init__(self, parser):
         gtk.Window.__init__(self)
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
 
-        self.database = database
         self.parser = parser
 
-        self.widgets.treeview = treeview.MainTreeView(database, parser,
-                                                      self.widgets.statusbar)
+        self.widgets.treeview = treeview.MainTreeView(parser, self.widgets.statusbar)
         self.widgets.treeview.connect('key-press-event', self.on_treeview_key_press)
         self.widgets.treeview.connect('button-press-event', self.on_treeview_press)
         self.widgets.scrolledwindow.add(self.widgets.treeview)
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect('changed', self.on_selection_changed)
 
-        self.pedigree = pedigree.DrawPedigree(self.database, self.parser,
-                                              self.widgets.treeview)
-
-        self.detailsview = detailsview.DetailsView(self,
-                                                   self.database, self.parser)
+        self.pedigree = pedigree.DrawPedigree(self.parser, self.widgets.treeview)
+        self.detailsview = detailsview.DetailsView(self, self.parser)
         self.widgets.aligndetails.add(self.detailsview.get_root_widget())
 
         pedigreetab = tabs.PedigreeTab(self.pedigree)
-        relativestab = tabs.RelativesTab(self, self.database, self.parser)
-        self.resultstab = tabs.ResultsTab(self, self.database, self.parser)
-        breedingtab = tabs.BreedingTab(self, self.database, self.parser)
-        mediatab = tabs.MediaTab(self, self.database, self.parser)
-        medicationtab = tabs.MedicationTab(self, self.database,
-                                                self.parser, self)
+        relativestab = tabs.RelativesTab(self, self.parser)
+        self.resultstab = tabs.ResultsTab(self, self.parser)
+        breedingtab = tabs.BreedingTab(self, self.parser)
+        mediatab = tabs.MediaTab(self, self.parser)
+        medicationtab = tabs.MedicationTab(self, self.parser, self)
         self._loaded_tabs = [pedigreetab, relativestab,
                              self.resultstab, breedingtab,
                              mediatab, medicationtab]
@@ -214,16 +208,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             gtkosx.connect("NSApplicationBlockTermination", osx_quit)
             gtkosx.ready()
 
-        events = self.database.get_notification(time.time())
-        if events:
-            description = events[0][2]
-            if len(description) > 25:
-                description = description[:24]+"..."
-            if QuestionDialog(messages.MSG_EVENT_NOTIFY, self, description).run():
-                tools.Calendar(self, self.database, events[0][0])
-
     def quit_program(self, widget=None, event=None, bckp=True):
-        self.database.close()
+        database.session.optimize_database()
+        database.session.close()
 
         x, y = self.get_position()
         w, h = self.get_size()
@@ -293,9 +280,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def menuprintpigeons_activate(self, widget):
         logger.debug(common.get_function_name())
 
-        userinfo = common.get_own_address(self.database)
+        userinfo = common.get_own_address()
 
-        if not tools.check_user_info(self, self.database, userinfo['name']):
+        if not tools.check_user_info(self, userinfo['name']):
             return
 
         pigeons = self.widgets.treeview.get_pigeons(True)
@@ -307,7 +294,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         logger.debug(common.get_function_name())
         pigeon = self.widgets.treeview.get_selected_pigeon()
         if pigeon is None or isinstance(pigeon, list): return
-        userinfo = common.get_own_address(self.database)
+        userinfo = common.get_own_address()
 
         PedigreeReport, PedigreeReportOptions = get_pedigree()
         psize = common.get_pagesize_from_opts()
@@ -316,7 +303,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menuprintblank_activate(self, widget):
         logger.debug(common.get_function_name())
-        userinfo = common.get_own_address(self.database)
+        userinfo = common.get_own_address()
 
         PedigreeReport, PedigreeReportOptions = get_pedigree()
         psize = common.get_pagesize_from_opts()
@@ -350,15 +337,14 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menualbum_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.PhotoAlbum(self, self.parser, self.database)
+        tools.PhotoAlbum(self, self.parser)
 
     def menulog_activate(self, widget):
         logger.debug(common.get_function_name())
-        logdialog.LogDialog(self.database)
+        logdialog.LogDialog()
 
     def menuadd_activate(self, widget):
-        dialog = detailsview.DetailsDialog(self.database, self.parser,
-                                           None, self, const.ADD)
+        dialog = detailsview.DetailsDialog(self.parser, None, self, const.ADD)
         dialog.details.connect('edit-finished', self.on_edit_finished)
 
     def menuaddrange_activate(self, widget):
@@ -374,8 +360,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         model, paths = self.widgets.selection.get_selected_rows()
         if len(paths) != 1: return
         pigeon = self.widgets.treeview.get_selected_pigeon()
-        dialog = detailsview.DetailsDialog(self.database, self.parser,
-                                           pigeon, self, const.EDIT)
+        dialog = detailsview.DetailsDialog(self.parser, pigeon, self, const.EDIT)
         dialog.details.connect('edit-finished', self.on_edit_finished)
 
     def menuremove_activate(self, widget):
@@ -388,7 +373,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             pindex = pigeon.get_pindex()
             pigeonlabel = pigeon.get_band_string()
             statusbarmsg = _("Pigeon %s has been removed") %pigeonlabel
-            show_result_option = self.database.has_results(pindex)
+            show_result_option = database.pigeon_has_results(pindex)
             pigeons = [pigeon]
             logger.debug("Start removing pigeon '%s'", pindex)
         else:
@@ -400,7 +385,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             statusbarmsg = _("%s pigeons have been removed") % len(pigeons)
             show_result_option = False
             for pigeon in pigeons:
-                if self.database.has_results(pigeon.get_pindex()):
+                if database.pigeon_has_results(pigeon.get_pindex()):
                     show_result_option = True
                     break
 
@@ -415,8 +400,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                 logger.debug("Remove: Hiding the pigeon(s)")
                 for pigeon in pigeons:
                     pigeon.show = 0
-                    self.database.update_table(self.database.PIGEONS,
-                                               (0, pigeon.get_pindex()), 5, 1)
+                    database.update_pigeon(pigeon.get_pindex(), {"show": 0})
             else:
                 logger.debug("Remove: Removing the pigeon(s)")
                 for pigeon in pigeons:
@@ -424,8 +408,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                     # Only remove status when pigeon is completely removed
                     status = pigeon.get_active()
                     if status != const.ACTIVE:
-                        self.database.delete_from_table(common.statusdic[status],
-                                                        pindex)
+                        database.remove_status(common.get_status(status), pindex)
                     # Same for the picture
                     image = pigeon.get_image()
                     if image:
@@ -433,15 +416,18 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                             os.remove(thumbnail.get_path(image))
                         except:
                             pass
-                    # And medication
-                    self.database.delete_from_table(self.database.MED, pindex, 2)
+                    # Medication and media
+                    database.remove_medication({"pindex": pindex})
+                    database.remove_media({"pindex": pindex})
+
+                    # And finally the pigeon itself
+                    database.remove_pigeon(pindex)
                     self.parser.remove_pigeon(pindex)
 
             if not self.widgets.chkResults.get_active():
                 logger.debug("Remove: Removing the results")
                 for pigeon in pigeons:
-                    self.database.delete_from_table(self.database.RESULTS,
-                                                    pigeon.get_pindex())
+                    database.remove_result_for_pigeon(pigeon.get_pindex())
 
             # Reverse the pathlist so we can safely remove each row without
             # having problems with invalid paths.
@@ -461,8 +447,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         if pigeon is None:
             # Disable pedigree shortcut when no pigeon is selected
             return
-        pedigreewindow.PedigreeWindow(self, self.database,
-                                      self.parser, self.pedigree, pigeon)
+        pedigreewindow.PedigreeWindow(self, self.parser, self.pedigree, pigeon)
 
     def menuaddresult_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -475,7 +460,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = optionsdialog.OptionsDialog(self, self.parser, self.database)
+        dialog = optionsdialog.OptionsDialog(self, self.parser)
         dialog.connect('interface-changed', self.on_interface_changed)
 
     def menuarrows_toggled(self, widget):
@@ -500,27 +485,23 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menuvelocity_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.VelocityCalculator(self, self.database)
+        tools.VelocityCalculator(self)
 
     def menudistance_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.DistanceCalculator(self, self.database)
+        tools.DistanceCalculator(self)
 
     def menurace_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.RacepointManager(self, self.database)
+        tools.RacepointManager(self)
 
     def menuaddresses_activate(self, widget):
         logger.debug(common.get_function_name())
-        tools.AddressBook(self, self.database)
-
-    def menucalendar_activate(self, widget):
-        logger.debug(common.get_function_name())
-        tools.Calendar(self, self.database)
+        tools.AddressBook(self)
 
     def menudata_activate(self, widget):
         logger.info(common.get_function_name())
-        tools.DataManager(self, self.database, self.parser)
+        tools.DataManager(self, self.parser)
 
     def menuhelp_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -551,7 +532,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menuinfo_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialogs.InformationDialog(self, self.database)
+        dialogs.InformationDialog(self)
 
     def menuabout_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -580,7 +561,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             band = str(value)
             pindex = common.get_pindex_from_band(band, rangeyear)
             logger.debug("Range: adding '%s'", pindex)
-            if self.database.has_pigeon(pindex):
+            if database.pigeon_exists(pindex):
                 value += 1
                 continue
             pigeon = self.parser.add_empty_pigeon(pindex, rangesex)
@@ -729,7 +710,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         Count all active pigeons and set the statistics labels
         """
 
-        total, cocks, hens, ybirds = common.count_active_pigeons(self.database)
+        total, cocks, hens, ybirds = common.count_active_pigeons()
         self.widgets.labelStatTotal.set_markup("<b>%i</b>" %total)
         self.widgets.labelStatCocks.set_markup("<b>%i</b>" %cocks)
         self.widgets.labelStatHens.set_markup("<b>%i</b>" %hens)
