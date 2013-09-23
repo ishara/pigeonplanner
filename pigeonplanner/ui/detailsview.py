@@ -615,9 +615,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             else:
                 # The pigeon exists, but doesn't show, ask to show again
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
-                    #TODO: review! This can't be right.
-                    pigeonparser.parser.show = 1
-                    database.update_pigeon(pindex, show=True)
+                    database.update_pigeon(pindex, {"show": 1})
                 # Always return here. Either way the user doesn't want it
                 # to show, or it is already set to visible, so don't add it.
                 return
