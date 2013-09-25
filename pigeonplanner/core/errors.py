@@ -29,3 +29,11 @@ class InvalidInputError(Exception):
     def __str__(self):
         return repr(self.value)
 
+
+class PigeonAlreadyExists(Exception):
+    pass
+
+
+class PigeonAlreadyExistsHidden(Exception):
+    pass
+

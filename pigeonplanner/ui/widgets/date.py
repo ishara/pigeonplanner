@@ -24,8 +24,8 @@ import gtk.gdk
 import gobject
 
 from pigeonplanner import const
-from pigeonplanner import errors
 from pigeonplanner import messages
+from pigeonplanner.core import errors
 
 
 class DateEntry(gtk.Viewport):

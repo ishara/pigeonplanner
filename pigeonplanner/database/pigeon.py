@@ -260,6 +260,12 @@ def add_media(data):
     session.connection.commit()
     return session.cursor.lastrowid
 
+def update_media_for_pindex(pindex, data):
+    cols = utils.build_sql_cols(data)
+    data["pindex_old"] = pindex
+    session.cursor.execute("UPDATE Media SET %s WHERE pindex=:pindex_old" % cols, data)
+    session.connection.commit()
+
 def remove_media(data):
     cols = utils.build_sql_cols(data, delimiter=utils.AND)
     session.cursor.execute("DELETE FROM Media WHERE %s" %cols, data)

@@ -29,16 +29,13 @@ logger = logging.getLogger(__name__)
 
 import gtk
 
+from pigeonplanner import core
 from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import config
-from pigeonplanner import backup
 from pigeonplanner import checks
-from pigeonplanner import update
-from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import messages
-from pigeonplanner import thumbnail
 from pigeonplanner import database
 from pigeonplanner import pigeonparser
 from pigeonplanner.ui import tabs
@@ -54,6 +51,9 @@ from pigeonplanner.ui import pedigreewindow
 from pigeonplanner.ui.widgets import treeview
 from pigeonplanner.ui.widgets import statusbar
 from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog, QuestionDialog
+from pigeonplanner.core import errors
+from pigeonplanner.core import update
+from pigeonplanner.core import backup
 from pigeonplanner.reportlib import report
 from pigeonplanner.reports import get_pedigree
 from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions
@@ -369,18 +369,13 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             return
         elif self.widgets.selection.count_selected_rows() == 1:
             pigeon = self.widgets.treeview.get_selected_pigeon()
-            pindex = pigeon.get_pindex()
-            pigeonlabel = pigeon.get_band_string()
-            statusbarmsg = _("Pigeon %s has been removed") %pigeonlabel
-            show_result_option = database.pigeon_has_results(pindex)
             pigeons = [pigeon]
-            logger.debug("Start removing pigeon '%s'", pindex)
+            pigeonlabel = pigeon.get_band_string()
+            statusbarmsg = _("Pigeon %s has been removed") % pigeonlabel
+            show_result_option = database.pigeon_has_results(pigeon.get_pindex())
         else:
-            logger.debug("Start removing multiple pigeons")
             pigeons = [pobj for pobj in self.widgets.treeview.get_selected_pigeon()]
-            bands = ['%s' % pigeon.get_band_string() for pigeon in
-                     self.widgets.treeview.get_selected_pigeon()]
-            pigeonlabel = ", ".join(bands)
+            pigeonlabel = ", ".join([pigeon.get_band_string() for pigeon in pigeons])
             statusbarmsg = _("%s pigeons have been removed") % len(pigeons)
             show_result_option = False
             for pigeon in pigeons:
@@ -391,7 +386,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.widgets.labelPigeon.set_text(pigeonlabel)
         self.widgets.chkKeep.set_active(True)
         self.widgets.chkResults.set_active(False)
-        utils.set_multiple_visible([self.widgets.chkResults], show_result_option)
+        self.widgets.chkResults.set_visible(show_result_option)
 
         answer = self.widgets.removedialog.run()
         if answer == 2:
@@ -401,32 +396,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
                     pigeon.show = 0
                     database.update_pigeon(pigeon.get_pindex(), {"show": 0})
             else:
-                logger.debug("Remove: Removing the pigeon(s)")
+                remove_results = not self.widgets.chkResults.get_active()
                 for pigeon in pigeons:
-                    pindex = pigeon.get_pindex()
-                    # Only remove status when pigeon is completely removed
-                    status = pigeon.get_active()
-                    if status != const.ACTIVE:
-                        database.remove_status(common.get_status(status), pindex)
-                    # Same for the picture
-                    image = pigeon.get_image()
-                    if image:
-                        try:
-                            os.remove(thumbnail.get_path(image))
-                        except:
-                            pass
-                    # Medication and media
-                    database.remove_medication({"pindex": pindex})
-                    database.remove_media({"pindex": pindex})
-
-                    # And finally the pigeon itself
-                    database.remove_pigeon(pindex)
-                    pigeonparser.parser.remove_pigeon(pindex)
-
-            if not self.widgets.chkResults.get_active():
-                logger.debug("Remove: Removing the results")
-                for pigeon in pigeons:
-                    database.remove_result_for_pigeon(pigeon.get_pindex())
+                    core.pigeon.remove_pigeon(pigeon, remove_results)
 
             # Reverse the pathlist so we can safely remove each row without
             # having problems with invalid paths.
@@ -436,8 +408,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             self.widgets.selection.select_path(paths[-1])
             self._set_statistics()
             self.widgets.statusbar.display_message(statusbarmsg)
-        else:
-            logger.debug("Remove operation cancelled")
+
         self.widgets.removedialog.hide()
 
     def menupedigree_activate(self, widget):

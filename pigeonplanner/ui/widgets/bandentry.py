@@ -20,8 +20,8 @@ import gtk
 import gobject
 
 from pigeonplanner import common
-from pigeonplanner import errors
 from pigeonplanner import messages
+from pigeonplanner.core import errors
 
 
 class BandEntry(gtk.Viewport):

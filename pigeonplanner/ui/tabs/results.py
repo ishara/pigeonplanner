@@ -21,7 +21,6 @@ import gtk
 from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import config
-from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import database
@@ -31,6 +30,7 @@ from pigeonplanner.ui import resultwindow
 from pigeonplanner.ui import resultparser
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog
+from pigeonplanner.core import errors
 
 
 (COL_DATE,

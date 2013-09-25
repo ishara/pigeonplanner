@@ -19,7 +19,7 @@
 import gtk
 import gobject
 
-from pigeonplanner import errors
+from pigeonplanner.core import errors
 
 
 class LatLongEntry(gtk.Viewport):

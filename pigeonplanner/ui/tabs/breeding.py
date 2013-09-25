@@ -20,7 +20,6 @@ import gtk
 
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import database
 from pigeonplanner import pigeonparser
@@ -30,6 +29,7 @@ from pigeonplanner.ui.widgets import checkbutton
 from pigeonplanner.ui.dialogs import PigeonListDialog
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import ErrorDialog
+from pigeonplanner.core import errors
 
 
 (COL_ID,

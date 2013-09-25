@@ -24,14 +24,13 @@ import gtk
 import gtk.gdk
 import gobject
 
+from pigeonplanner import core
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
 from pigeonplanner import database
-from pigeonplanner import pigeonparser
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import dialogs
@@ -40,6 +39,7 @@ from pigeonplanner.ui.widgets import date
 from pigeonplanner.ui.widgets import sexentry
 from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.messagedialog import ErrorDialog, WarningDialog
+from pigeonplanner.core import errors
 
 
 RESPONSE_EDIT = 10
@@ -55,9 +55,6 @@ except Exception as exc:
     ##logger.warning("Can't load zoom cursor icon:", exc)
     logger.warning("Can't load zoom cursor icon")
     CURSOR_ZOOM = None
-
-
-class PigeonAlreadyExists(Exception): pass
 
 
 class DetailsDialog(gtk.Dialog):
@@ -307,7 +304,8 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         else:
             show = self.pigeon.get_visible()
         data = {"band": ring, "year": year, "show": show,
-                "sire": ringsire, "yearsire": yearsire, "dam": ringdam, "yeardam": yeardam,
+                "sire": ringsire, "yearsire": yearsire,
+                "dam": ringdam, "yeardam": yeardam,
                 "sex": self.widgets.combosex.get_active_text(),
                 "active": self.widgets.combostatus.get_active(),
                 "colour": self.widgets.combocolour.child.get_text(),
@@ -395,35 +393,47 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         except errors.InvalidInputError, msg:
             ErrorDialog(msg.value, self.parent)
             return True
+
         if self._operation == const.EDIT:
+            pindex = self.pigeon.get_pindex()
+            data["pindex"] = common.get_pindex_from_band(data["band"], data["year"])
+            status = self.widgets.combostatus.get_active()
+            statusdata = self._get_info_for_status(status, pindex)
             try:
-                self._update_pigeon_data(data)
-            except database.InvalidValueError:
+                pigeon = core.pigeon.update_pigeon(self.pigeon, data, status, statusdata)
+            except core.errors.PigeonAlreadyExists:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
-                return True
+                return False
+            except core.errors.PigeonAlreadyExistsHidden:
+                if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
+                    database.update_pigeon(pindex, {"show": 1})
             except errors.InvalidInputError:
                 # This is a corner case. Some status date is incorrect, but the
                 # user choose another one. Don't bother him with this.
                 pass
-            old_pindex = self.pigeon.get_pindex()
-            self.pigeon = pigeonparser.parser.update_pigeon(data["pindex"], old_pindex)
         elif self._operation == const.ADD:
+            pindex = common.get_pindex_from_band(data["band"], data["year"])
+            data["pindex"] = pindex
+            status = self.widgets.combostatus.get_active()
+            statusdata = self._get_info_for_status(status, pindex)
             try:
-                self._add_pigeon_data(data)
-            except PigeonAlreadyExists, msg:
-                logger.debug("Pigeon already exists '%s'", msg)
+                pigeon = core.pigeon.add_pigeon(data, status, statusdata)
+            except core.errors.PigeonAlreadyExists:
+                ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
                 return False
+            except core.errors.PigeonAlreadyExistsHidden:
+                if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
+                    database.update_pigeon(pindex, {"show": 1})
             except errors.InvalidInputError:
                 # See comment above
                 pass
-            self.pigeon = pigeonparser.parser.add_pigeon(pindex=data["pindex"])
-        self.set_details(self.pigeon)
-        self.emit('edit-finished', self.pigeon, self._operation)
-        combodata = [(self.widgets.combocolour, data["colour"], database.Tables.COLOURS),
-                     (self.widgets.combostrain, data["strain"], database.Tables.STRAINS),
-                     (self.widgets.comboloft, data["loft"], database.Tables.LOFTS)]
-        for combo, value, table in combodata:
-            database.add_data(table, value)
+
+        self.set_details(pigeon)
+        self.emit('edit-finished', pigeon, self._operation)
+        combodata = [(self.widgets.combocolour, data["colour"]),
+                     (self.widgets.combostrain, data["strain"]),
+                     (self.widgets.comboloft, data["loft"])]
+        for combo, value in combodata:
             combo.add_item(value)
         logger.debug("Operation '%s' finished", self._operation)
 
@@ -485,57 +495,43 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         for table in self.widgets.notebookstatus.get_children():
             table.foreach(set_editable, value)
 
-    def _get_status_info(self, pindex=None):
+    def _get_info_for_status(self, status, pindex=None):
         pindex = pindex or self.pigeon.get_pindex()
 
-        bffr = self.widgets.textinfodead.get_buffer()
-        dead = {"date": self.widgets.entrydatedead.get_text(),
-                "info": bffr.get_text(*bffr.get_bounds()),
-                "pindex": pindex}
-
-        bffr = self.widgets.textinfosold.get_buffer()
-        sold = {"person": self.widgets.entrybuyersold.get_text(),
-                "date": self.widgets.entrydatesold.get_text(),
-                "info": bffr.get_text(*bffr.get_bounds()),
-                "pindex": pindex}
-
-        bffr = self.widgets.textinfolost.get_buffer()
-        lost = {"racepoint": self.widgets.entrypointlost.get_text(),
-                "date": self.widgets.entrydatelost.get_text(),
-                "info": bffr.get_text(*bffr.get_bounds()),
-                "pindex": pindex}
-
-        bffr = self.widgets.textinfobreeder.get_buffer()
-        breed = {"start": self.widgets.entrydatebreedfrom.get_text(),
-                 "end": self.widgets.entrydatebreedto.get_text(),
-                 "info": bffr.get_text(*bffr.get_bounds()),
-                "pindex": pindex}
-
-        bffr = self.widgets.textinfoloan.get_buffer()
-        loan = {"loaned": self.widgets.entrydateloan.get_text(),
-                "back": self.widgets.entrydateloanback.get_text(),
-                "person": self.widgets.entrypersonloan.get_text(),
-                "info": bffr.get_text(*bffr.get_bounds()),
-                "pindex": pindex}
-
-        return dead, sold, lost, breed, loan
-
-    def _insert_status_data(self, status, pindex, data=None):
-        if data is None:
-            dead, sold, lost, breed, loan = self._get_status_info(pindex)
-        else:
-            dead, sold, lost, breed, loan = data
-
         if status == const.DEAD:
-            database.add_status(database.Tables.DEAD, dead)
-        elif status == const.SOLD:
-            database.add_status(database.Tables.SOLD, sold)
-        elif status == const.LOST:
-            database.add_status(database.Tables.LOST, lost)
-        elif status == const.BREEDER:
-            database.add_status(database.Tables.BREEDER, breed)
-        elif status == const.LOANED:
-            database.add_status(database.Tables.LOANED, loan)
+            bffr = self.widgets.textinfodead.get_buffer()
+            return {"date": self.widgets.entrydatedead.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds()),
+                    "pindex": pindex}
+
+        if status == const.SOLD:
+            bffr = self.widgets.textinfosold.get_buffer()
+            return {"person": self.widgets.entrybuyersold.get_text(),
+                    "date": self.widgets.entrydatesold.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds()),
+                    "pindex": pindex}
+
+        if status == const.LOST:
+            bffr = self.widgets.textinfolost.get_buffer()
+            return {"racepoint": self.widgets.entrypointlost.get_text(),
+                    "date": self.widgets.entrydatelost.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds()),
+                    "pindex": pindex}
+
+        if status == const.BREEDER:
+            bffr = self.widgets.textinfobreeder.get_buffer()
+            return {"start": self.widgets.entrydatebreedfrom.get_text(),
+                    "end": self.widgets.entrydatebreedto.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds()),
+                    "pindex": pindex}
+
+        if status == const.LOANED:
+            bffr = self.widgets.textinfoloan.get_buffer()
+            return {"loaned": self.widgets.entrydateloan.get_text(),
+                    "back": self.widgets.entrydateloanback.get_text(),
+                    "person": self.widgets.entrypersonloan.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds()),
+                    "pindex": pindex}
 
     def _run_pigeondialog(self, sex):
         try:
@@ -554,73 +550,4 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             else:
                 self.widgets.entrydamedit.set_pindex(pigeon.get_pindex())
         dialog.destroy()
-
-    def _update_pigeon_data(self, data):
-        """
-        Update the data when a pigeon is edited
-        """
-
-        pindex = self.pigeon.get_pindex()
-        pindex_new = common.get_pindex_from_band(data["band"], data["year"])
-        data["pindex"] = pindex_new
-
-        # Update the data in the pigeon table
-        # Raises an exception when the pigeon is a duplicate. We catch this in
-        # the calling method so be sure this database call is the first!
-        database.update_pigeon(pindex, data)
-        # Update pindex in the results table
-        if database.pigeon_has_results(pindex):
-            database.update_result_for_pindex(pindex, {"pindex": pindex_new})
-        # Update pindex in the medication table
-        if database.pigeon_has_medication(pindex):
-            database.update_medication_for_pindex(pindex, {"pindex": pindex_new})
-        # Remove the old thumbnail (if exists)
-        image = data["image"]
-        prev_image = self.pigeon.get_image()
-        if image != prev_image and prev_image:
-            try:
-                os.remove(thumbnail.get_path(prev_image))
-            except:
-                pass
-        # Update the status or create a new record
-        status = self.widgets.combostatus.get_active()
-        old_status = self.pigeon.get_active()
-        dead, sold, lost, breed, loan = self._get_status_info(pindex_new)
-        if status != old_status:
-            if old_status != const.ACTIVE:
-                database.remove_status(common.get_status(old_status), pindex)
-            self._insert_status_data(status, pindex, (dead, sold, lost, breed, loan))
-        else:
-            if status == const.DEAD:
-                database.update_status(database.Tables.DEAD, pindex, dead)
-            elif status == const.SOLD:
-                database.update_status(database.Tables.SOLD, pindex, sold)
-            elif status == const.LOST:
-                database.update_status(database.Tables.LOST, pindex, lost)
-            elif status == const.BREEDER:
-                database.update_status(database.Tables.BREEDER, pindex, breed)
-            elif status == const.LOANED:
-                database.update_status(database.Tables.LOANED, pindex, loan)
-
-    def _add_pigeon_data(self, data):
-        pindex = common.get_pindex_from_band(data["band"], data["year"])
-        data["pindex"] = pindex
-
-        # First we do some checks
-        if database.pigeon_exists(pindex):
-            if pigeonparser.parser.pigeons[pindex].show == 1:
-                # The pigeon already exists, don't add it
-                ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
-                raise PigeonAlreadyExists(pindex)
-            else:
-                # The pigeon exists, but doesn't show, ask to show again
-                if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
-                    database.update_pigeon(pindex, {"show": 1})
-                # Always return here. Either way the user doesn't want it
-                # to show, or it is already set to visible, so don't add it.
-                return
-        # Checks say that this is really a none existing pigeon, so add it
-        database.add_pigeon(data)
-        status = self.widgets.combostatus.get_active()
-        self._insert_status_data(status, pindex)
 

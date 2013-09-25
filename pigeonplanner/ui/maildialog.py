@@ -25,11 +25,11 @@ import gobject
 
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import mailing
 from pigeonplanner.ui.messagedialog import ErrorDialog
+from pigeonplanner.core import errors
 
 
 class MailDialog(builder.GtkBuilder):

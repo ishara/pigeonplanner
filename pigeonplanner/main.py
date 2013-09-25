@@ -270,7 +270,7 @@ class Startup(object):
         pigeonparser.parser.build_pigeons()
 
     def search_updates(self):
-        from pigeonplanner import update
+        from pigeonplanner.core import update
 
         try:
             new, msg = update.update()

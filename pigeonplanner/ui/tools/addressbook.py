@@ -19,13 +19,13 @@
 import gtk
 
 from pigeonplanner import const
-from pigeonplanner import errors
 from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui.widgets import latlongentry
 from pigeonplanner.ui.messagedialog import QuestionDialog
+from pigeonplanner.core import errors
 
 
 def check_user_info(parent, name):

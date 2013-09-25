@@ -21,7 +21,7 @@ import gtk
 import gobject
 
 from pigeonplanner import const
-from pigeonplanner import update
+from pigeonplanner.core import update
 from pigeonplanner.ui import maildialog
 from pigeonplanner.ui.messagedialog import QuestionDialog
 
