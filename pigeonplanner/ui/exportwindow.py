@@ -52,7 +52,7 @@ class ExportWindow(builder.GtkBuilder):
         filepath = self.widgets.entrypath.get_text()
         path = os.path.dirname(filepath)
         if not os.path.exists(path) or os.path.isdir(filepath):
-            ErrorDialog((_('Invalid input!'), None, _('Error')), self.widgets.window)
+            ErrorDialog((_("Invalid input!"), None, _("Error")), self.widgets.window)
             return
         self.widgets.imageprogress.hide()
         self.widgets.spinner.show()

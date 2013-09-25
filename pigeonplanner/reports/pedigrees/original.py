@@ -41,16 +41,16 @@ class PedigreeReport(Report):
         return self.doc.get_usable_width() - PT2CM(width)
 
     def begin_report(self):
-        name = ''
-        colour = ''
-        sex = ''
-        if config.get('printing.pedigree-name') and self._pigeon is not None and\
+        name = ""
+        colour = ""
+        sex = ""
+        if config.get("printing.pedigree-name") and self._pigeon is not None and\
             self._pigeon.get_name():
             name = "%s - " % self._pigeon.get_name()
-        if config.get('printing.pedigree-colour') and self._pigeon is not None and\
+        if config.get("printing.pedigree-colour") and self._pigeon is not None and\
             self._pigeon.get_colour():
             colour = "%s - " % self._pigeon.get_colour()
-        if config.get('printing.pedigree-sex') and self._pigeon is not None:
+        if config.get("printing.pedigree-sex") and self._pigeon is not None:
             sex = self._pigeon.get_sex_string()
         self.pigeoninfo = name + colour + sex
 
@@ -58,7 +58,7 @@ class PedigreeReport(Report):
         self.doc.start_page()
 
         # Title line
-        band = self._pigeon.get_band_string(True) if self._pigeon is not None else ''
+        band = self._pigeon.get_band_string(True) if self._pigeon is not None else ""
         x_cm = self.get_right_align_x("Title", band)
 
         self.doc.draw_text("Title", _("Pedigree of:"), .1, 0)
@@ -71,21 +71,21 @@ class PedigreeReport(Report):
         header_x = .1
         header_y = 1.2
         header_y_offset = .4
-        if config.get('printing.user-name'):
-            self.doc.draw_text("Header", self._userinfo['name'], header_x, header_y)
+        if config.get("printing.user-name"):
+            self.doc.draw_text("Header", self._userinfo["name"], header_x, header_y)
             header_y += header_y_offset
-        if config.get('printing.user-address'):
-            self.doc.draw_text("Header", self._userinfo['street'], header_x, header_y)
+        if config.get("printing.user-address"):
+            self.doc.draw_text("Header", self._userinfo["street"], header_x, header_y)
             header_y += header_y_offset
-            self.doc.draw_text("Header", '%s %s' % (self._userinfo['code'],
-                                                      self._userinfo['city']),
+            self.doc.draw_text("Header", "%s %s" % (self._userinfo["code"],
+                                                      self._userinfo["city"]),
                                 header_x, header_y)
             header_y += header_y_offset
-        if config.get('printing.user-phone'):
-            self.doc.draw_text("Header", self._userinfo['phone'], header_x, header_y)
+        if config.get("printing.user-phone"):
+            self.doc.draw_text("Header", self._userinfo["phone"], header_x, header_y)
             header_y += header_y_offset
-        if config.get('printing.user-email'):
-            self.doc.draw_text("Header", self._userinfo['email'], header_x, header_y)
+        if config.get("printing.user-email"):
+            self.doc.draw_text("Header", self._userinfo["email"], header_x, header_y)
             header_y += header_y_offset
         header_bottom = header_y
 
@@ -96,9 +96,9 @@ class PedigreeReport(Report):
         self.doc.draw_text("Header", self.pigeoninfo, x_cm, header_y)
         header_y += header_y_offset
 
-        if config.get('printing.pedigree-extra'):
+        if config.get("printing.pedigree-extra"):
             ex1, ex2, ex3, ex4, ex5, ex6 = self._pigeon.get_extra() if\
-                self._pigeon is not None else ('', '', '', '', '', '')
+                self._pigeon is not None else ("", "", "", "", "", "")
 
             if ex1:
                 x_cm = self.get_right_align_x("Header", ex1)
@@ -143,7 +143,7 @@ class PedigreeReport(Report):
         h_total = self.doc.get_usable_height() - (header_bottom + .2)
         y_start = header_bottom + .2
         y_div = (h_total / 16) + y_start
-        if config.get('printing.pedigree-box-colour'):
+        if config.get("printing.pedigree-box-colour"):
             h1, h2, h3, h4 = 3.1, 3.1, 1.9, 0.9
         else:
             h1, h2, h3, h4 = 2.8, 2.8, 1.6, 0.9
@@ -199,7 +199,7 @@ class PedigreeReport(Report):
             if pigeon is not None:
                 text = pigeon.get_band_string(True)
                 ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.get_extra()
-                if not last and config.get('printing.pedigree-box-colour'):
+                if not last and config.get("printing.pedigree-box-colour"):
                     text += "\n" + pigeon.get_colour()
             else:
                 text = ""
@@ -229,7 +229,7 @@ class PedigreeReport(Report):
                                                        x - (w_sep / 2), y_mid + y_offset)
 
             # Draw image
-            if index == 22 and config.get('printing.pedigree-image') and\
+            if index == 22 and config.get("printing.pedigree-image") and\
                                          self._pigeon is not None and\
                                          self._pigeon.image is not None:
                 # index 22 is last box of first part
@@ -238,7 +238,7 @@ class PedigreeReport(Report):
                 img_h = 5
 
                 self.doc.draw_image(self._pigeon.image, w/2, img_y, img_w, img_h,
-                                    xalign='center', yalign='center')
+                                    xalign="center", yalign="center")
 
             # Increase y position for next box
             y += y_offset

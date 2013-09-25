@@ -82,7 +82,7 @@ class DrawPedigree(object):
                         entries.append((gtk.STOCK_REMOVE, self._remove_pigeon,
                                         (box.pigeon, box.child)))
         else:
-            if box.textlayout.get_text() == '':
+            if box.textlayout.get_text() == "":
                 return
             if event.button == 1:
                 self._show_pigeon_details(None, box.pigeon, parent)
@@ -233,7 +233,7 @@ class DrawPedigree(object):
         dialog.details.set_child(child)
         dialog.details.set_pedigree_mode(True)
         dialog.details.set_sex(sex)
-        dialog.details.connect('edit-finished', self.on_edit_finished)
+        dialog.details.connect("edit-finished", self.on_edit_finished)
 
     def _select_pigeon(self, widget, pigeon, parent):
         pindex = pigeon.get_pindex()
@@ -244,10 +244,10 @@ class DrawPedigree(object):
         if child is None:
             return
         if clear:
-            band, year = '', ''
+            band, year = "", ""
         else:
             band, year = pigeon.get_band()
-        if pigeon.get_sex() == '0':
+        if pigeon.get_sex() == "0":
             data = {"sire": band, "yearsire": year}
         else:
             data = {"dam": band, "yeardam": year}
@@ -266,5 +266,5 @@ class DrawPedigree(object):
 
     def _redraw(self):
         self.draw_pedigree(self.tables, self.pigeon, True)
-        self.treeview.get_selection().emit('changed')
+        self.treeview.get_selection().emit("changed")
 

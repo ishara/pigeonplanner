@@ -50,7 +50,7 @@ class ResultParser(builder.GtkBuilder):
         self.resultfilename = self.widgets.filebutton.get_filename()
         if self.resultfilename is None:
             return
-        resultfile = open(self.resultfilename, 'r')
+        resultfile = open(self.resultfilename, "r")
         parserplugin = self._get_active_parserplugin()
         parser = parserplugin.plugin_object
         if not parser.check(resultfile):
@@ -66,17 +66,17 @@ class ResultParser(builder.GtkBuilder):
             data = [" **** File:", self.resultfilename,
                     "\n **** Parser:", "%s %s" % (parserplugin.name, parserplugin.version),
                     "\n **** Exception:", traceback.format_exc()]
-            text = '\n'.join(data)
+            text = "\n".join(data)
             textbuffer = self.widgets.textview.get_buffer()
             textbuffer.set_text(text)
             self.widgets.reportdialog.show()
             return
 
-        self.widgets.dateentry.set_text(self.data['date'])
-        self.widgets.racepointentry.set_text(self.data['racepoint'].title())
-        self.widgets.sectorentry.set_text(self.data['sector'].title())
-        self.widgets.categoryentry.set_text(self.data['category'].title())
-        self.widgets.pigeonsentry.set_text(self.data['n_pigeons'])
+        self.widgets.dateentry.set_text(self.data["date"])
+        self.widgets.racepointentry.set_text(self.data["racepoint"].title())
+        self.widgets.sectorentry.set_text(self.data["sector"].title())
+        self.widgets.categoryentry.set_text(self.data["category"].title())
+        self.widgets.pigeonsentry.set_text(self.data["n_pigeons"])
 
         self.widgets.datatable.set_sensitive(True)
         self.widgets.liststore.clear()
@@ -114,7 +114,7 @@ class ResultParser(builder.GtkBuilder):
                     "wind": "", "weather": "", "put": "", "back": "",
                     "ownplace": 0, "ownout": 0, "comment": ""}
             if database.result_exists(data):
-                logger.info('Pigeon %s already has the selected result' % pindex)
+                logger.info("Pigeon %s already has the selected result" % pindex)
             else:
                 database.add_result(data)
         self.close_window()
@@ -137,7 +137,7 @@ class ResultParser(builder.GtkBuilder):
         textbuffer = self.widgets.textview.get_buffer()
         body = textbuffer.get_text(*textbuffer.get_bounds())
         subject = "[Pigeon Planner] Resultparser exception"
-        mailing.send_email(const.REPORTMAIL, '', subject, body,
+        mailing.send_email(const.REPORTMAIL, "", subject, body,
                            self.resultfilename)
 
     def _build_interface(self):

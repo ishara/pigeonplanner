@@ -28,7 +28,7 @@ class _MessageDialog(gtk.MessageDialog):
         head, secondary, title = msg
         if extra:
             head = head % extra
-        self.set_markup('<span weight="bold" size="larger">%s</span>' % head)
+        self.set_markup("<span weight=\"bold\" size=\"larger\">%s</span>" % head)
         self.format_secondary_text(secondary)
         if title:
             self.set_title("%s - Pigeon Planner" % title)

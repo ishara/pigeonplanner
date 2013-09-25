@@ -27,7 +27,7 @@ from pigeonplanner import const
 from pigeonplanner import common
 
 
-def send_email(recipient='', sender='', subject='', body='', attachment=None):
+def send_email(recipient="", sender="", subject="", body="", attachment=None):
     files = []
     if attachment:
         files.append(("file", open(attachment, "rb")))
@@ -42,30 +42,29 @@ def send_email(recipient='', sender='', subject='', body='', attachment=None):
 
 def post_multipart(url, fields, files):
     content_type, body = encode_multipart_formdata(fields, files)
-    headers = {'Content-type': content_type, 'Content-length': str(len(body))}
+    headers = {"Content-type": content_type, "Content-length": str(len(body))}
 
     return common.URLOpen().open(url, body, headers, 40).read().strip()
 
 def encode_multipart_formdata(fields, files):
-    BOUNDARY = '----------%s' % common.get_random_number(20)
+    BOUNDARY = "----------%s" % common.get_random_number(20)
     body = []
     for (key, value) in fields:
-        body.append('--' + BOUNDARY)
-        body.append('Content-Disposition: form-data; name="%s"' % key)
-        body.append('')
+        body.append("--" + BOUNDARY)
+        body.append("Content-Disposition: form-data; name=\"%s\"" % key)
+        body.append("")
         body.append(value)
     for (key, fd) in files:
-        filename = fd.name.split('/')[-1]
-        contenttype = (mimetypes.guess_type(filename)[0] or 
-                       'application/octet-stream')
-        body.append('--%s' % BOUNDARY)
-        body.append('Content-Disposition: form-data; name="%s"; filename="%s"'
+        filename = fd.name.split("/")[-1]
+        contenttype = (mimetypes.guess_type(filename)[0] or "application/octet-stream")
+        body.append("--%s" % BOUNDARY)
+        body.append("Content-Disposition: form-data; name=\"%s\"; filename=\"%s\""
                     %(key, filename))
-        body.append('Content-Type: %s' % contenttype)
+        body.append("Content-Type: %s" % contenttype)
         fd.seek(0)
-        body.append('\r\n' + fd.read())
-    body.append('--' + BOUNDARY + '--')
-    body.append('')
+        body.append("\r\n" + fd.read())
+    body.append("--" + BOUNDARY + "--")
+    body.append("")
 
-    return 'multipart/form-data; boundary=%s' % BOUNDARY, '\r\n'.join(body)
+    return "multipart/form-data; boundary=%s" % BOUNDARY, "\r\n".join(body)
 

@@ -64,7 +64,7 @@ class StatusBar(gtk.Statusbar):
         total = self._total = _TotalLabel()
         self._filter = _FilterLabel()
         filterbox = gtk.EventBox()
-        filterbox.connect('button-press-event', self.on_filterbox_clicked)
+        filterbox.connect("button-press-event", self.on_filterbox_clicked)
         filterbox.add(self._filter)
         try:
             box = self.get_message_area()

@@ -31,7 +31,7 @@ FILTER = 0
 
 class MainTreeView(gtk.TreeView):
 
-    __gtype_name__ = 'MainTreeView'
+    __gtype_name__ = "MainTreeView"
 
     def __init__(self, statusbar):
         gtk.TreeView.__init__(self)
@@ -177,16 +177,16 @@ class MainTreeView(gtk.TreeView):
             return None
 
     def set_columns(self):
-        columnsdic = {2: config.get('columns.pigeon-name'),
-                      3: config.get('columns.pigeon-colour'),
-                      4: config.get('columns.pigeon-sex'),
-                      5: config.get('columns.pigeon-loft'),
-                      6: config.get('columns.pigeon-strain'),
-                      7: config.get('columns.pigeon-status')}
+        columnsdic = {2: config.get("columns.pigeon-name"),
+                      3: config.get("columns.pigeon-colour"),
+                      4: config.get("columns.pigeon-sex"),
+                      5: config.get("columns.pigeon-loft"),
+                      6: config.get("columns.pigeon-strain"),
+                      7: config.get("columns.pigeon-status")}
         for key, value in columnsdic.items():
             self.get_column(key).set_visible(value)
             if key == 4 and value:
-                sexcoltype = config.get('columns.pigeon-sex-type')
+                sexcoltype = config.get("columns.pigeon-sex-type")
                 for renderer in self.get_column(key).get_cell_renderers():
                     if isinstance(renderer, gtk.CellRendererText):
                         text = renderer
@@ -220,16 +220,16 @@ class MainTreeView(gtk.TreeView):
 
     def _build_filterdialog(self):
         dialog = dialogs.FilterDialog(None, _("Filter pigeons"))
-        dialog.connect('apply-clicked', self.on_filterapply_clicked)
-        dialog.connect('clear-clicked', self.on_filterclear_clicked)
+        dialog.connect("apply-clicked", self.on_filterapply_clicked)
+        dialog.connect("clear-clicked", self.on_filterclear_clicked)
 
         combo = comboboxes.SexCombobox()
-        dialog.add_custom('sex', _("Sex"), combo, combo.get_active_text)
-        dialog.add_combobox('colour', _("Colours"), database.get_all_data(database.Tables.COLOURS))
-        dialog.add_combobox('strain', _("Strains"), database.get_all_data(database.Tables.STRAINS))
-        dialog.add_combobox('loft', _("Lofts"), database.get_all_data(database.Tables.LOFTS))
+        dialog.add_custom("sex", _("Sex"), combo, combo.get_active_text)
+        dialog.add_combobox("colour", _("Colours"), database.get_all_data(database.Tables.COLOURS))
+        dialog.add_combobox("strain", _("Strains"), database.get_all_data(database.Tables.STRAINS))
+        dialog.add_combobox("loft", _("Lofts"), database.get_all_data(database.Tables.LOFTS))
         combo = comboboxes.StatusCombobox()
-        dialog.add_custom('status', _("Status"), combo, combo.get_active)
+        dialog.add_custom("status", _("Status"), combo, combo.get_active)
         self._filter = FILTER
         self.filters = dialog.get_filters()
         return dialog
@@ -241,9 +241,9 @@ class MainTreeView(gtk.TreeView):
         return True
 
     def _filter_func(self, pigeon):
-        info = {'sex': pigeon.get_sex, 'colour': pigeon.get_colour,
-                'strain': pigeon.get_strain, 'loft': pigeon.get_loft,
-                'status': pigeon.get_active}
+        info = {"sex": pigeon.get_sex, "colour": pigeon.get_colour,
+                "strain": pigeon.get_strain, "loft": pigeon.get_loft,
+                "status": pigeon.get_active}
         for name, check, widget in self.filters:
             data = info[name]()
             if check.get_active() and not data == widget.get_data():

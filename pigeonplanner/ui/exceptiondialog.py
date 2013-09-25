@@ -47,7 +47,7 @@ class ExceptionDialog(gtk.Dialog):
                      "this new version. Send a report anyway?")
             if not QuestionDialog((msg, desc, msg), self).run():
                 return
-        maildialog.MailDialog(self, const.LOGFILE, 'log')
+        maildialog.MailDialog(self, const.LOGFILE, "log")
 
     def on_expander_activate(self, widget):
         def resize_timeout():
@@ -68,7 +68,7 @@ class ExceptionDialog(gtk.Dialog):
         hbox.set_spacing(12)
         image = gtk.Image()
         image.set_from_stock(gtk.STOCK_DIALOG_ERROR, gtk.ICON_SIZE_DIALOG)
-        label = gtk.Label('<span size="larger" weight="bold">%s</span>'
+        label = gtk.Label("<span size=\"larger\" weight=\"bold\">%s</span>"
                           % _("Pigeon Planner has experienced an unexpected error"))
         label.set_use_markup(True)
 
@@ -95,14 +95,14 @@ class ExceptionDialog(gtk.Dialog):
         scroll.set_size_request(-1, 240)
         scroll.add(textview)
 
-        expander = gtk.Expander('<b>%s</b>' % _("Error Detail"))
-        expander.connect('activate', self.on_expander_activate)
+        expander = gtk.Expander("<b>%s</b>" % _("Error Detail"))
+        expander.connect("activate", self.on_expander_activate)
         expander.set_use_markup(True)
         expander.add(scroll)
 
         self.vbox.pack_start(expander, True, True, 4)
 
-        button_report = gtk.Button(None, 'report')
+        button_report = gtk.Button(None, "report")
         button_report.connect("clicked", self.report_log)
         self.action_area.pack_start(button_report)
         button_close = gtk.Button(None, gtk.STOCK_CLOSE)

@@ -82,8 +82,8 @@ class ResultWindow(builder.GtkBuilder):
         self.filter_race_years = []
         self.filter_points = []
         self.filter_sectors = []
-        self.cols = {'pigeon': 0, 'pyear': 2, 'ryear': 3, 'race': 4,
-                     'place': 5, 'coef': 7, 'sector': 8}
+        self.cols = {"pigeon": 0, "pyear": 2, "ryear": 3, "race": 4,
+                     "place": 5, "coef": 7, "sector": 8}
 
         self._build_toolbar()
         self.widgets.modelsort = self.widgets.treeview.get_model()
@@ -111,17 +111,17 @@ class ResultWindow(builder.GtkBuilder):
 
     def on_filter_clicked(self, widget):
         dialog = dialogs.FilterDialog(self.widgets.resultwindow, _("Filter results"))
-        dialog.connect('apply-clicked', self.on_filterapply_clicked)
-        dialog.connect('clear-clicked', self.on_filterclear_clicked)
+        dialog.connect("apply-clicked", self.on_filterapply_clicked)
+        dialog.connect("clear-clicked", self.on_filterclear_clicked)
 
         combo = self._get_pigeons_combobox()
-        dialog.add_custom('pigeon', _("Pigeons"), combo, combo.get_active_text)
-        dialog.add_combobox('pyear', _("Year of pigeon"), self.filter_pigeon_years)
-        dialog.add_combobox('ryear', _("Year of race"), self.filter_race_years)
-        dialog.add_combobox('race', _("Racepoint"), self.filter_points)
-        dialog.add_combobox('sector', _("Sector"), self.filter_sectors)
-        dialog.add_spinbutton('coef', _("Coefficient"))
-        dialog.add_spinbutton('place', _("Place"), 1)
+        dialog.add_custom("pigeon", _("Pigeons"), combo, combo.get_active_text)
+        dialog.add_combobox("pyear", _("Year of pigeon"), self.filter_pigeon_years)
+        dialog.add_combobox("ryear", _("Year of race"), self.filter_race_years)
+        dialog.add_combobox("race", _("Racepoint"), self.filter_points)
+        dialog.add_combobox("sector", _("Sector"), self.filter_sectors)
+        dialog.add_spinbutton("coef", _("Coefficient"))
+        dialog.add_spinbutton("place", _("Place"), 1)
 
         self.filters = dialog.get_filters()
         dialog.run()
@@ -173,13 +173,13 @@ class ResultWindow(builder.GtkBuilder):
         self.widgets.treeview.thaw_child_notify()
 
     def set_columns(self):
-        columnsdic = {6: config.get('columns.result-coef'),
-                      7: config.get('columns.result-sector'),
-                      8: config.get('columns.result-type'),
-                      9: config.get('columns.result-category'),
-                      10: config.get('columns.result-wind'),
-                      11: config.get('columns.result-weather'),
-                      12: config.get('columns.result-comment')}
+        columnsdic = {6: config.get("columns.result-coef"),
+                      7: config.get("columns.result-sector"),
+                      8: config.get("columns.result-type"),
+                      9: config.get("columns.result-category"),
+                      10: config.get("columns.result-wind"),
+                      11: config.get("columns.result-weather"),
+                      12: config.get("columns.result-comment")}
         for key, value in columnsdic.items():
             self.widgets.treeview.get_column(key).set_visible(value)
 
@@ -191,7 +191,7 @@ class ResultWindow(builder.GtkBuilder):
         accelgroup = uimanager.get_accel_group()
         self.widgets.resultwindow.add_accel_group(accelgroup)
 
-        toolbar = uimanager.get_widget('/Toolbar')
+        toolbar = uimanager.get_widget("/Toolbar")
         self.widgets.vbox.pack_start(toolbar, False, False)
 
     def _get_pigeons_combobox(self):
@@ -203,7 +203,7 @@ class ResultWindow(builder.GtkBuilder):
         cell = gtk.CellRendererText()
         combobox = gtk.ComboBox(store)
         combobox.pack_start(cell, True)
-        combobox.add_attribute(cell, 'text', 1)
+        combobox.add_attribute(cell, "text", 1)
         combobox.set_active(0)
         comboboxes.set_combobox_wrap(combobox)
         return combobox
@@ -223,7 +223,7 @@ class ResultWindow(builder.GtkBuilder):
     def _visible_func(self, model, treeiter):
         for name, check, widget in self.filters:
             data = model.get_value(treeiter, self.cols[name])
-            if name == 'ryear':
+            if name == "ryear":
                 data = data[:4]
             if check.get_active() and not data == widget.get_data():
                 return False
@@ -239,7 +239,7 @@ class ResultWindow(builder.GtkBuilder):
 
     def _do_operation(self, print_action, save_path=None):
         userinfo = common.get_own_address()
-        if not tools.check_user_info(self.widgets.resultwindow, userinfo['name']):
+        if not tools.check_user_info(self.widgets.resultwindow, userinfo["name"]):
             return
 
         results = []
@@ -248,12 +248,12 @@ class ResultWindow(builder.GtkBuilder):
             for x in range(2, 14):
                 value = self.widgets.modelsort.get_value(item.iter, x)
                 if value == None:
-                    value = ''
+                    value = ""
                 if x == 2:
                     value = "%s / %s" % (self.widgets.modelsort.get_value(item.iter, 1),
                                          value[2:])
                 if x == 7:
-                    value = '%3.2f' % value
+                    value = "%3.2f" % value
                 values.append(str(value))
             results.append(values)
 

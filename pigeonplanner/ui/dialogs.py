@@ -45,7 +45,7 @@ class AboutDialog(gtk.AboutDialog):
         gtk.about_dialog_set_email_hook(common.email_hook)
 
         self.set_transient_for(parent)
-        self.set_icon_from_file(os.path.join(const.IMAGEDIR, 'icon_logo.png'))
+        self.set_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
         self.set_modal(True)
         self.set_property("skip-taskbar-hint", True)
 
@@ -57,10 +57,10 @@ class AboutDialog(gtk.AboutDialog):
         self.set_website_label("Pigeon Planner website")
         self.set_authors(const.AUTHORS)
         self.set_artists(const.ARTISTS)
-        self.set_translator_credits(_('translator-credits'))
+        self.set_translator_credits(_("translator-credits"))
         self.set_license(const.LICENSE)
         self.set_logo(gtk.gdk.pixbuf_new_from_file_at_size(
-                        os.path.join(const.IMAGEDIR, 'icon_logo.png'), 80, 80))
+                        os.path.join(const.IMAGEDIR, "icon_logo.png"), 80, 80))
         self.run()
         self.destroy()
 
@@ -105,8 +105,8 @@ class InformationDialog(gtk.Dialog):
     def get_versions(self):
         operatingsystem, distribution = main.get_operating_system()
         return (("Pigeon Planner", str(const.VERSION)),
-                ("Python", str(sys.version).replace('\n','')),
-                ("LANG", os.environ.get('LANG','')),
+                ("Python", str(sys.version).replace("\n", "")),
+                ("LANG", os.environ.get("LANG", "")),
                 ("OS", operatingsystem),
                 ("Distribution", distribution))
 
@@ -114,23 +114,23 @@ class InformationDialog(gtk.Dialog):
         total, cocks, hens, ybirds = common.count_active_pigeons()
         data = [(_("Number of pigeons"), str(total))]
         data.append(("    %s" % _("Cocks"), "%s\t(%s %%)"
-                                %(cocks, self.get_percentage(cocks, total))))
+                                % (cocks, self.get_percentage(cocks, total))))
         data.append(("    %s" % _("Hens"), "%s\t(%s %%)"
-                                %(hens, self.get_percentage(hens, total))))
+                                % (hens, self.get_percentage(hens, total))))
         data.append(("    %s" % _("Young birds"), "%s\t(%s %%)"
-                                %(ybirds, self.get_percentage(ybirds, total))))
+                                % (ybirds, self.get_percentage(ybirds, total))))
         for status in range(6):
             n_status = database.count_pigeons_with_status(status)
             data.append(("    %s" % _(common.statusdic[status]), "%s\t(%s %%)"
                             % (n_status, self.get_percentage(n_status, total))))
-        data.append((_("Number of results"),
-                                    str(database.count_results())))
+        data.append((_("Number of results"), str(database.count_results())))
         data.append((_("Number of couples"), str(database.count_breeding_records())))
         return data
 
     def get_percentage(self, value, total):
-        if total == 0: return "0"
-        return "%.2f" % ((value/float(total))*100)
+        if total == 0:
+            return "0"
+        return "%.2f" % ((value / float(total)) * 100)
 
     def _select_func(self, data):
         return False
@@ -141,7 +141,7 @@ class BackupDialog(gtk.Dialog):
         gtk.Dialog.__init__(self, None, parent,
                             gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
                             ("gtk-close", gtk.RESPONSE_CLOSE))
-        self.par = parent
+        self.parent = parent
 
         self.set_resizable(False)
         self.set_has_separator(False)
@@ -155,7 +155,7 @@ class BackupDialog(gtk.Dialog):
             self.vbox.pack_start(self.fcButtonCreate, False, True, 12)
 
             button = gtk.Button(_("Backup"))
-            button.connect('clicked', self.makebackup_clicked)
+            button.connect("clicked", self.makebackup_clicked)
             image = gtk.Image()
             image.set_from_stock(gtk.STOCK_REDO, gtk.ICON_SIZE_BUTTON)
             button.set_image(image)
@@ -176,7 +176,7 @@ class BackupDialog(gtk.Dialog):
             self.vbox.pack_start(self.fcButtonRestore, False, True, 12)
 
             button = gtk.Button(_("Restore"))
-            button.connect('clicked', self.restorebackup_clicked)
+            button.connect("clicked", self.restorebackup_clicked)
             image = gtk.Image()
             image.set_from_stock(gtk.STOCK_UNDO, gtk.ICON_SIZE_BUTTON)
             button.set_image(image)
@@ -192,24 +192,24 @@ class BackupDialog(gtk.Dialog):
                 msg = messages.MSG_BACKUP_SUCCES
             else:
                 msg = messages.MSG_BACKUP_FAILED
-            InfoDialog(msg, self.par)
+            InfoDialog(msg, self.parent)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             if backup.restore_backup(zipfile):
                 msg = messages.MSG_RESTORE_SUCCES
-                InfoDialog(msg, self.par)
+                InfoDialog(msg, self.parent)
                 gtk.main_quit()
             else:
                 msg = messages.MSG_RESTORE_FAILED
-                InfoDialog(msg, self.par)
+                InfoDialog(msg, self.parent)
 
 
 class FilterDialog(gtk.Dialog):
-    __gsignals__ = {'apply-clicked': (gobject.SIGNAL_RUN_LAST,
+    __gsignals__ = {"apply-clicked": (gobject.SIGNAL_RUN_LAST,
                                       None, ()),
-                    'clear-clicked': (gobject.SIGNAL_RUN_LAST,
+                    "clear-clicked": (gobject.SIGNAL_RUN_LAST,
                                       None, ()),
                     }
     def __init__(self, parent, title):
@@ -240,10 +240,10 @@ class FilterDialog(gtk.Dialog):
 
     def on_btnclear_clicked(self, widget):
         self._clear_filters()
-        self.emit('clear-clicked')
+        self.emit("clear-clicked")
 
     def on_btnapply_clicked(self, widget):
-        self.emit('apply-clicked')
+        self.emit("apply-clicked")
 
     def on_spinbutton_changed(self, widget, value, text):
         if widget.get_value_as_int() == value:
@@ -251,7 +251,7 @@ class FilterDialog(gtk.Dialog):
 
     # Public methods
     def run(self):
-        self.connect('response', self.on_dialog_response)
+        self.connect("response", self.on_dialog_response)
         self.show_all()
 
     def get_filters(self):
@@ -273,7 +273,7 @@ class FilterDialog(gtk.Dialog):
         spinbutton.get_data = spinbutton.get_value_as_int
         if lowest_text:
             spinbutton.set_text(lowest_text)
-            spinbutton.connect('changed', self.on_spinbutton_changed, lowest,
+            spinbutton.connect("changed", self.on_spinbutton_changed, lowest,
                                lowest_text)
         self._add_filter(name, label, spinbutton)
 
@@ -313,13 +313,13 @@ class SearchDialog(gtk.Dialog):
 
         self.button = gtk.Button(stock=gtk.STOCK_FIND)
         self.button.set_sensitive(False)
-        self.button.connect('clicked', self.on_button_clicked)
+        self.button.connect("clicked", self.on_button_clicked)
         self.action_area.pack_start(self.button)
 
         label = gtk.Label(_("Search for:"))
         self.entry = gtk.Entry()
-        self.entry.connect('changed', self.on_entry_changed)
-        self.entry.connect('icon-press', self.on_entryicon_press)
+        self.entry.connect("changed", self.on_entry_changed)
+        self.entry.connect("icon-press", self.on_entryicon_press)
         hbox = gtk.HBox(False, 8)
         hbox.pack_start(label, False, True, 0)
         hbox.pack_start(self.entry, False, True, 0)
@@ -340,7 +340,7 @@ class SearchDialog(gtk.Dialog):
         self.vbox.show_all()
 
     def run(self):
-        self.connect('response', self.on_dialog_response)
+        self.connect("response", self.on_dialog_response)
         self.show_all()
 
     def on_dialog_response(self, dialog, response_id):
@@ -351,7 +351,7 @@ class SearchDialog(gtk.Dialog):
     def on_entry_changed(self, widget):
         self.counter = 0
         self.results = []
-        has_text = widget.get_text() != ''
+        has_text = widget.get_text() != ""
         icon = gtk.STOCK_CLEAR if has_text else None
         self.button.set_sensitive(has_text)
         widget.set_icon_from_stock(gtk.ENTRY_ICON_SECONDARY, icon)
@@ -359,7 +359,7 @@ class SearchDialog(gtk.Dialog):
     def on_entryicon_press(self, widget, icon, event):
         self.counter = 0
         self.results = []
-        widget.set_text('')
+        widget.set_text("")
         widget.grab_focus()
 
     def on_button_clicked(self, widget):
@@ -383,7 +383,7 @@ class SearchDialog(gtk.Dialog):
 
 class MedicationRemoveDialog(gtk.Dialog):
     def __init__(self, parent, multiple=False):
-        gtk.Dialog.__init__(self, '', parent, gtk.DIALOG_DESTROY_WITH_PARENT,
+        gtk.Dialog.__init__(self, "", parent, gtk.DIALOG_DESTROY_WITH_PARENT,
                             (gtk.STOCK_NO, gtk.RESPONSE_NO,
                              gtk.STOCK_YES, gtk.RESPONSE_YES))
 
@@ -415,7 +415,7 @@ class MedicationRemoveDialog(gtk.Dialog):
 
 class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
     def __init__(self, parent):
-        gtk.Dialog.__init__(self, _('Search a pigeon'), parent,
+        gtk.Dialog.__init__(self, _("Search a pigeon"), parent,
                             gtk.DIALOG_DESTROY_WITH_PARENT,
                             (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL))
         self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
@@ -438,7 +438,7 @@ class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
             tvcolumn.set_cell_data_func(textrenderer, self._cell_func)
             self._treeview.append_column(tvcolumn)
         self._selection = self._treeview.get_selection()
-        self._selection.connect('changed', self.on_selection_changed)
+        self._selection.connect("changed", self.on_selection_changed)
 
         sw = gtk.ScrolledWindow()
         sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)

@@ -29,8 +29,8 @@ from pigeonplanner.core import errors
 
 
 class DateEntry(gtk.Viewport):
-    __gtype_name__ = 'DateEntry'
-    __gsignals__ = {'changed' : (gobject.SIGNAL_RUN_LAST, None, ())}
+    __gtype_name__ = "DateEntry"
+    __gsignals__ = {"changed" : (gobject.SIGNAL_RUN_LAST, None, ())}
     can_empty = gobject.property(type=bool, default=False, nick="Can empty")
     def __init__(self, editable=False, clear=False, can_empty=False):
         gtk.Viewport.__init__(self)
@@ -39,7 +39,7 @@ class DateEntry(gtk.Viewport):
         self._entry.set_max_length(10)
         self._entry.set_width_chars(16)
         self._entry.set_alignment(.5)
-        self._entry.connect('icon-press', self.on_icon_pressed)
+        self._entry.connect("icon-press", self.on_icon_pressed)
 
         self.can_empty = can_empty
         self.clear = clear
@@ -59,7 +59,7 @@ class DateEntry(gtk.Viewport):
         self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
         self._entry.set_has_frame(editable)
         self._entry.set_editable(editable)
-        icon = os.path.join(const.IMAGEDIR, 'icon_calendar.png')
+        icon = os.path.join(const.IMAGEDIR, "icon_calendar.png")
         pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if editable else None
         self._entry.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
     editable = gobject.property(get_editable, set_editable, bool, False)
@@ -100,7 +100,7 @@ class DateEntry(gtk.Viewport):
 
 
     def __validate(self, date):
-        if self.can_empty and date == '':
+        if self.can_empty and date == "":
             return
         try:
             datetime.datetime.strptime(date, const.DATE_FORMAT)
@@ -112,7 +112,7 @@ class DateEntry(gtk.Viewport):
 
 class CalendarPopup(gtk.Window):
 
-    __gtype_name__ = 'CalendarPopup'
+    __gtype_name__ = "CalendarPopup"
 
     def __init__(self, entry):
         gtk.Window.__init__(self, gtk.WINDOW_POPUP)
@@ -123,18 +123,18 @@ class CalendarPopup(gtk.Window):
         buttonapply = gtk.Button()
         img = gtk.image_new_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
         buttonapply.set_image(img)
-        buttonapply.connect('clicked', self.on_buttonapply_clicked)
+        buttonapply.connect("clicked", self.on_buttonapply_clicked)
         buttoncancel = gtk.Button()
         img = gtk.image_new_from_stock(gtk.STOCK_CANCEL, gtk.ICON_SIZE_BUTTON)
         buttoncancel.set_image(img)
-        buttoncancel.connect('clicked', self.on_buttoncancel_clicked)
+        buttoncancel.connect("clicked", self.on_buttoncancel_clicked)
         vbox = gtk.VBox(False, 8)
         vbox.pack_start(buttonapply, False, False, 0)
         vbox.pack_start(buttoncancel, False, False, 0)
 
         calendar = gtk.Calendar()
-        calendar.connect('day-selected', self.on_day_selected)
-        calendar.connect('day-selected-double-click', self.on_day_clicked)
+        calendar.connect("day-selected", self.on_day_selected)
+        calendar.connect("day-selected-double-click", self.on_day_clicked)
         hbox = gtk.HBox()
         hbox.pack_start(vbox, False, False, 0)
         hbox.pack_start(calendar, False, False, 0)
@@ -164,7 +164,7 @@ class CalendarPopup(gtk.Window):
         if the_date:
             self._entry.set_text(the_date.strftime(const.DATE_FORMAT))
         else:
-            self._entry.set_text('')
+            self._entry.set_text("")
 
     def on_day_clicked(self, widget):
         self.destroy()

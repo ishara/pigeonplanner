@@ -74,15 +74,15 @@ class HiddenPigeonsMixin(object):
     def _visible_func(self, model, rowiter):
         show = model.get_value(rowiter, 0).show
         if not show:
-            return not config.get('interface.missing-pigeon-hide')
+            return not config.get("interface.missing-pigeon-hide")
         return True
 
     def _cell_func(self, column, cell, model, rowiter):
         show = model.get_value(rowiter, 0).show
 
         color = "white"
-        if config.get('interface.missing-pigeon-color'):
+        if config.get("interface.missing-pigeon-color"):
             if not show:
-                color = config.get('interface.missing-pigeon-color-value')
+                color = config.get("interface.missing-pigeon-color-value")
         cell.set_property("cell-background", color)
 

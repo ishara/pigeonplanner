@@ -154,11 +154,11 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
 
         self.widgets.treeview = treeview.MainTreeView(self.widgets.statusbar)
-        self.widgets.treeview.connect('key-press-event', self.on_treeview_key_press)
-        self.widgets.treeview.connect('button-press-event', self.on_treeview_press)
+        self.widgets.treeview.connect("key-press-event", self.on_treeview_key_press)
+        self.widgets.treeview.connect("button-press-event", self.on_treeview_press)
         self.widgets.scrolledwindow.add(self.widgets.treeview)
         self.widgets.selection = self.widgets.treeview.get_selection()
-        self.widgets.selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection.connect("changed", self.on_selection_changed)
 
         self.pedigree = pedigree.DrawPedigree(self.widgets.treeview)
         self.detailsview = detailsview.DetailsView(self)
@@ -184,19 +184,19 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.widgets.removedialog.set_transient_for(self)
         self.widgets.rangedialog.set_transient_for(self)
 
-        self.widgets.MenuArrows.set_active(config.get('interface.arrows'))
-        self.widgets.MenuStats.set_active(config.get('interface.stats'))
-        self.widgets.MenuToolbar.set_active(config.get('interface.toolbar'))
-        self.widgets.MenuStatusbar.set_active(config.get('interface.statusbar'))
+        self.widgets.MenuArrows.set_active(config.get("interface.arrows"))
+        self.widgets.MenuStats.set_active(config.get("interface.stats"))
+        self.widgets.MenuToolbar.set_active(config.get("interface.toolbar"))
+        self.widgets.MenuStatusbar.set_active(config.get("interface.statusbar"))
 
-        self.connect('delete-event', self.quit_program)
+        self.connect("delete-event", self.quit_program)
         self.set_title(const.NAME)
         self.set_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
         self.add(self.widgets.mainvbox)
-        self.resize(config.get('interface.window-w'),
-                    config.get('interface.window-h'))
-        self.move(config.get('interface.window-x'),
-                  config.get('interface.window-y'))
+        self.resize(config.get("interface.window-w"),
+                    config.get("interface.window-h"))
+        self.move(config.get("interface.window-x"),
+                  config.get("interface.window-y"))
         self.show()
         self.widgets.treeview.grab_focus()
 
@@ -213,19 +213,19 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
         x, y = self.get_position()
         w, h = self.get_size()
-        config.set('interface.window-x', x)
-        config.set('interface.window-y', y)
-        config.set('interface.window-w', w)
-        config.set('interface.window-h', h)
+        config.set("interface.window-x", x)
+        config.set("interface.window-y", y)
+        config.set("interface.window-w", w)
+        config.set("interface.window-h", h)
 
-        if config.get('backup.automatic-backup') and bckp:
-            daysInSeconds = config.get('backup.interval') * 24 * 60 * 60
-            if time.time() - config.get('backup.last') >= daysInSeconds:
-                if backup.make_backup(config.get('backup.location')):
+        if config.get("backup.automatic-backup") and bckp:
+            daysInSeconds = config.get("backup.interval") * 24 * 60 * 60
+            if time.time() - config.get("backup.last") >= daysInSeconds:
+                if backup.make_backup(config.get("backup.location")):
                     InfoDialog(messages.MSG_BACKUP_SUCCES, self)
                 else:
                     InfoDialog(messages.MSG_BACKUP_FAILED, self)
-                config.set('backup.last', time.time())
+                config.set("backup.last", time.time())
         config.save()
         gtk.main_quit()
 
@@ -251,7 +251,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             model, paths = self.widgets.selection.get_selected_rows()
             path = self.widgets.treeview.get_child_path(paths[0])
             self.widgets.treeview.update_pigeon(pigeon, path=path)
-            self.widgets.selection.emit('changed')
+            self.widgets.selection.emit("changed")
         elif operation == const.ADD:
             if not pigeon.get_visible(): return
             self.widgets.treeview.add_pigeon(pigeon)
@@ -262,10 +262,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     # Menu callbacks
     def on_uimanager_connect_proxy(self, uimgr, action, widget):
-        tooltip = action.get_property('tooltip')
+        tooltip = action.get_property("tooltip")
         if isinstance(widget, gtk.MenuItem) and tooltip:
-            widget.connect('select', self.on_menuitem_select, tooltip)
-            widget.connect('deselect', self.on_menuitem_deselect)
+            widget.connect("select", self.on_menuitem_select, tooltip)
+            widget.connect("deselect", self.on_menuitem_deselect)
 
     def on_menuitem_select(self, menuitem, tooltip):
         self.widgets.statusbar.push(-1, tooltip)
@@ -281,7 +281,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
         userinfo = common.get_own_address()
 
-        if not tools.check_user_info(self, userinfo['name']):
+        if not tools.check_user_info(self, userinfo["name"]):
             return
 
         pigeons = self.widgets.treeview.get_pigeons(True)
@@ -344,13 +344,13 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menuadd_activate(self, widget):
         dialog = detailsview.DetailsDialog(None, self, const.ADD)
-        dialog.details.connect('edit-finished', self.on_edit_finished)
+        dialog.details.connect("edit-finished", self.on_edit_finished)
 
     def menuaddrange_activate(self, widget):
         logger.debug(common.get_function_name())
-        self.widgets.entryRangeFrom.set_text('')
-        self.widgets.entryRangeTo.set_text('')
-        self.widgets.entryRangeYear.set_text('')
+        self.widgets.entryRangeFrom.set_text("")
+        self.widgets.entryRangeTo.set_text("")
+        self.widgets.entryRangeYear.set_text("")
         self.widgets.combosexrange.set_active(2)
         self.widgets.entryRangeFrom.grab_focus()
         self.widgets.rangedialog.show()
@@ -360,7 +360,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         if len(paths) != 1: return
         pigeon = self.widgets.treeview.get_selected_pigeon()
         dialog = detailsview.DetailsDialog(pigeon, self, const.EDIT)
-        dialog.details.connect('edit-finished', self.on_edit_finished)
+        dialog.details.connect("edit-finished", self.on_edit_finished)
 
     def menuremove_activate(self, widget):
         model, paths = self.widgets.selection.get_selected_rows()
@@ -431,27 +431,27 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())
         dialog = optionsdialog.OptionsDialog(self)
-        dialog.connect('interface-changed', self.on_interface_changed)
+        dialog.connect("interface-changed", self.on_interface_changed)
 
     def menuarrows_toggled(self, widget):
         value = widget.get_active()
         utils.set_multiple_visible([self.widgets.vboxButtons], value)
-        config.set('interface.arrows', value)
+        config.set("interface.arrows", value)
 
     def menustats_toggled(self, widget):
         value = widget.get_active()
         utils.set_multiple_visible([self.widgets.alignStats], value)
-        config.set('interface.stats', value)
+        config.set("interface.stats", value)
 
     def menutoolbar_toggled(self, widget):
         value = widget.get_active()
         utils.set_multiple_visible([self.widgets.toolbar], value)
-        config.set('interface.toolbar', value)
+        config.set("interface.toolbar", value)
 
     def menustatusbar_toggled(self, widget):
         value = widget.get_active()
         utils.set_multiple_visible([self.widgets.statusbar], value)
-        config.set('interface.statusbar', value)
+        config.set("interface.statusbar", value)
 
     def menuvelocity_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -624,23 +624,23 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.add_accel_group(accelgroup)
 
         widgetDic = {
-            "menubar": uimanager.get_widget('/MenuBar'),
-            "toolbar": uimanager.get_widget('/Toolbar'),
-            "MenuArrows": uimanager.get_widget('/MenuBar/ViewMenu/Arrows'),
-            "MenuStats": uimanager.get_widget('/MenuBar/ViewMenu/Stats'),
-            "MenuToolbar": uimanager.get_widget('/MenuBar/ViewMenu/Toolbar'),
+            "menubar": uimanager.get_widget("/MenuBar"),
+            "toolbar": uimanager.get_widget("/Toolbar"),
+            "MenuArrows": uimanager.get_widget("/MenuBar/ViewMenu/Arrows"),
+            "MenuStats": uimanager.get_widget("/MenuBar/ViewMenu/Stats"),
+            "MenuToolbar": uimanager.get_widget("/MenuBar/ViewMenu/Toolbar"),
             "MenuStatusbar": \
-                uimanager.get_widget('/MenuBar/ViewMenu/Statusbar'),
-            "Filtermenu": uimanager.get_widget('/MenuBar/ViewMenu/FilterMenu'),
-            "MenuEdit": uimanager.get_widget('/MenuBar/PigeonMenu/Edit'),
-            "MenuRemove": uimanager.get_widget('/MenuBar/PigeonMenu/Remove'),
+                uimanager.get_widget("/MenuBar/ViewMenu/Statusbar"),
+            "Filtermenu": uimanager.get_widget("/MenuBar/ViewMenu/FilterMenu"),
+            "MenuEdit": uimanager.get_widget("/MenuBar/PigeonMenu/Edit"),
+            "MenuRemove": uimanager.get_widget("/MenuBar/PigeonMenu/Remove"),
             "MenuPedigree": \
-                uimanager.get_widget('/MenuBar/PigeonMenu/Pedigree'),
+                uimanager.get_widget("/MenuBar/PigeonMenu/Pedigree"),
             "MenuAddresult": \
-                uimanager.get_widget('/MenuBar/PigeonMenu/Addresult'),
-            "ToolEdit": uimanager.get_widget('/Toolbar/Edit'),
-            "ToolRemove": uimanager.get_widget('/Toolbar/Remove'),
-            "ToolPedigree": uimanager.get_widget('/Toolbar/Pedigree')
+                uimanager.get_widget("/MenuBar/PigeonMenu/Addresult"),
+            "ToolEdit": uimanager.get_widget("/Toolbar/Edit"),
+            "ToolRemove": uimanager.get_widget("/Toolbar/Remove"),
+            "ToolPedigree": uimanager.get_widget("/Toolbar/Pedigree")
             }
         for name, widget in widgetDic.items():
             setattr(self.widgets, name, widget)
@@ -659,12 +659,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             self.widgets.menubar.hide()
             gtkosx.set_menu_bar(self.widgets.menubar)
 
-            quit = uimanager.get_widget('/MenuBar/FileMenu/Quit')
+            quit = uimanager.get_widget("/MenuBar/FileMenu/Quit")
             quit.hide()
 
-            about = uimanager.get_widget('/MenuBar/HelpMenu/About')
-            upd = uimanager.get_widget('/MenuBar/HelpMenu/Update')
-            prefs = uimanager.get_widget('/MenuBar/EditMenu/Preferences')
+            about = uimanager.get_widget("/MenuBar/HelpMenu/About")
+            upd = uimanager.get_widget("/MenuBar/HelpMenu/Update")
+            prefs = uimanager.get_widget("/MenuBar/EditMenu/Preferences")
             gtkosx.insert_app_menu_item(about, 0)
             gtkosx.insert_app_menu_item(gtk.SeparatorMenuItem(), 1)
             gtkosx.insert_app_menu_item(upd, 2)

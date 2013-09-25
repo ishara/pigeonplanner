@@ -172,7 +172,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         modelfilter = liststore.filter_new()
         modelfilter.set_visible_func(self._visible_func)
         treeview.set_model(modelfilter)
-        treeview.connect('button-press-event', self.on_treeview_press)
+        treeview.connect("button-press-event", self.on_treeview_press)
         for index, column in enumerate(columns):
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+1)
@@ -181,7 +181,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             tvcolumn.set_cell_data_func(textrenderer, self._cell_func)
             treeview.append_column(tvcolumn)
         pbrenderer = gtk.CellRendererPixbuf()
-        pbrenderer.set_property('xalign', 0.0)
+        pbrenderer.set_property("xalign", 0.0)
         tvcolumn = gtk.TreeViewColumn(_("Sex"), pbrenderer, pixbuf=pb_id)
         tvcolumn.set_sort_column_id(pb_id-1)
         tvcolumn.set_resizable(True)

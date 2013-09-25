@@ -214,7 +214,7 @@ class Schema(BaseSchema):
         # Make sure all tables from the current schema exist
         for table_name in cls.get_table_names():
             column_sql = cls.get_columns_sql(table_name)
-            session.cursor.execute('CREATE TABLE IF NOT EXISTS %s (%s)' % (table_name, column_sql))
+            session.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table_name, column_sql))
         session.connection.commit()
 
         # Column constraints were added for all tables

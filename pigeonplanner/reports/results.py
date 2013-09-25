@@ -52,24 +52,24 @@ class ResultsReport(Report, HelperMethods):
                     4: _("Out of")
                 }
 
-        if config.get('columns.result-coef'):
+        if config.get("columns.result-coef"):
             columns[5] = _("Coef.")
-        if config.get('columns.result-sector'):
+        if config.get("columns.result-sector"):
             columns[6] = _("Sector")
-        if config.get('columns.result-type'):
+        if config.get("columns.result-type"):
             columns[7] = _("Type")
-        if config.get('columns.result-category'):
+        if config.get("columns.result-category"):
             columns[8] = _("Category")
-        if config.get('columns.result-weather'):
+        if config.get("columns.result-weather"):
             columns[9] = _("Wind")
-        if config.get('columns.result-wind'):
+        if config.get("columns.result-wind"):
             columns[10] = _("Weather")
-        if config.get('columns.result-comment'):
+        if config.get("columns.result-comment"):
             columns[11] = _("Comment")
 
         self.doc.start_table("my_table", "table")
 
-        if config.get('printing.result-colnames'):
+        if config.get("printing.result-colnames"):
             self.doc.start_row()
             for name in columns.values():
                 self.add_cell(name, "headercell", "colheader")
@@ -121,7 +121,7 @@ class ResultsReportOptions(ReportOptions):
         table.set_width(100)
         table.set_column_widths([8, 7, 12, 5, 5, 6, 10,
                                  6, 7, 6.5, 6.5, 21])
-        default_style.add_table_style('table', table)
+        default_style.add_table_style("table", table)
 
         cell = TableCellStyle()
         cell.set_padding(0.1)

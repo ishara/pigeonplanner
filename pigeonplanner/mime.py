@@ -42,12 +42,12 @@ def get_basetype(mime):
 
     if mime is None:
         return ""
-    return mime.split('/')[0]
+    return mime.split("/")[0]
 
 _icontheme = gtk.icon_theme_get_default()
 def get_pixbuf(mime):
     try:
-        icon = "gnome-mime-%s" % mime.replace('/', '-')
+        icon = "gnome-mime-%s" % mime.replace("/", "-")
         try:
             return _icontheme.load_icon(icon, 48, 0)
         except:

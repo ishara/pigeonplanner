@@ -73,7 +73,7 @@ def fill_combobox(combobox, items, active=0, sort=True):
 
 class SexCombobox(gtk.ComboBox):
 
-    __gtype_name__ = 'SexCombobox'
+    __gtype_name__ = "SexCombobox"
 
     def __init__(self):
         store = gtk.ListStore(str, str)
@@ -83,14 +83,14 @@ class SexCombobox(gtk.ComboBox):
             store.insert(int(key), [key, value])
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)
-        self.add_attribute(cell, 'text', 1)
+        self.add_attribute(cell, "text", 1)
         self.set_active(0)
         self.show()
 
 
 class StatusCombobox(gtk.ComboBox):
 
-    __gtype_name__ = 'StatusCombobox'
+    __gtype_name__ = "StatusCombobox"
 
     def __init__(self):
         store = gtk.ListStore(str)
@@ -101,13 +101,13 @@ class StatusCombobox(gtk.ComboBox):
             store.append([item])
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)
-        self.add_attribute(cell, 'text', 0)
+        self.add_attribute(cell, "text", 0)
         self.set_active(0)
 
 
 class DataComboboxEntry(gtk.ComboBoxEntry):
 
-    __gtype_name__ = 'DataComboboxEntry'
+    __gtype_name__ = "DataComboboxEntry"
 
     def __init__(self):
         self.store = gtk.ListStore(str)
@@ -129,26 +129,26 @@ class DataComboboxEntry(gtk.ComboBoxEntry):
 
 class DistanceCombobox(gtk.ComboBox):
 
-    __gtype_name__ = 'DistanceCombobox'
+    __gtype_name__ = "DistanceCombobox"
 
     def __init__(self):
         store = gtk.ListStore(str, float)
         gtk.ComboBox.__init__(self, store)
 
-        units = ((_('Yards'), 0.9144),
-                 (_('Kilometres'), 1000.),
-                 (_('Metres'), 1.),
-                 (_('Centimetres'), 0.01),
-                 (_('Inches'), 0.025),
-                 (_('Feet'), 0.3048),
-                 (_('Miles'), 1609.344),
-                 (_('Nautical Miles'), 1852.)
+        units = ((_("Yards"), 0.9144),
+                 (_("Kilometres"), 1000.),
+                 (_("Metres"), 1.),
+                 (_("Centimetres"), 0.01),
+                 (_("Inches"), 0.025),
+                 (_("Feet"), 0.3048),
+                 (_("Miles"), 1609.344),
+                 (_("Nautical Miles"), 1852.)
             )
         for unit in units:
             store.append(unit)
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)
-        self.add_attribute(cell, 'text', 0)
+        self.add_attribute(cell, "text", 0)
         self.set_active(config.get("options.distance-unit"))
         self.show()
 
@@ -159,25 +159,25 @@ class DistanceCombobox(gtk.ComboBox):
 
 class SpeedCombobox(gtk.ComboBox):
 
-    __gtype_name__ = 'SpeedCombobox'
+    __gtype_name__ = "SpeedCombobox"
 
     def __init__(self):
         store = gtk.ListStore(str, float)
         gtk.ComboBox.__init__(self, store)
 
-        units = ((_('Yard per Minute'), 0.01524),
-                 (_('Metres per Minute'), 0.0166666666),
-                 (_('Metres per Second'), 1.),
-                 (_('Kilometre per Hour'), 0.27777777777777777777777777777777),
-                 (_('Feet per Second'), 0.3048),
-                 (_('Feet per Minute'), 0.00508),
-                 (_('Mile per Hour'), 0.44704)
+        units = ((_("Yard per Minute"), 0.01524),
+                 (_("Metres per Minute"), 0.0166666666),
+                 (_("Metres per Second"), 1.),
+                 (_("Kilometre per Hour"), 0.27777777777777777777777777777777),
+                 (_("Feet per Second"), 0.3048),
+                 (_("Feet per Minute"), 0.00508),
+                 (_("Mile per Hour"), 0.44704)
             )
         for unit in units:
             store.append(unit)
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)
-        self.add_attribute(cell, 'text', 0)
+        self.add_attribute(cell, "text", 0)
         self.set_active(config.get("options.speed-unit"))
         self.show()
 

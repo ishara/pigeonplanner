@@ -41,7 +41,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         self.parent = parent
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.set_select_function(self._select_func, full=True)
-        self.widgets.selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection.connect("changed", self.on_selection_changed)
 
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
@@ -108,11 +108,11 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         other.sort(key=operator.itemgetter(4))
 
         normal = ["#ffffff", True]
-        self.widgets.liststore.append(['', '', '', _('Images'), "#dcdcdc", False])
+        self.widgets.liststore.append(["", "", "", _("Images"), "#dcdcdc", False])
         for media in images:
             text = self._format_text(media[4], media[5])
             self.widgets.liststore.append([media[0], media[2], media[3], text]+normal)
-        self.widgets.liststore.append(['', '', '', _('Other'), "#dcdcdc", False])
+        self.widgets.liststore.append(["", "", "", _("Other"), "#dcdcdc", False])
         for media in other:
             text = self._format_text(media[4], media[5])
             self.widgets.liststore.append([media[0], media[2], media[3], text]+normal)
@@ -126,7 +126,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def _format_text(self, title, description):
         text = common.escape_text(title)
         if description:
-            text += " - <span style='italic' size='smaller'>%s</span>"\
+            text += " - <span style=\"italic\" size=\"smaller\">%s</span>"\
                         % common.escape_text(description)
         return text
 

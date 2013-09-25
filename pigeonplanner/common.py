@@ -41,7 +41,7 @@ from pigeonplanner import database
 
 
 def get_sexdic():
-    return {'0': _('Cock'), '1': _('Hen'), '2': _('Young bird')}
+    return {"0": _("Cock"), "1": _("Hen"), "2": _("Young bird")}
 
 def get_sex(sex):
     return get_sexdic()[sex]
@@ -68,7 +68,7 @@ def create_stock_button(icons):
         pb = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR, img))
         iconset = gtk.IconSet(pb)
         factory.add(name, iconset)
-        gtk.stock_add([(name, description, 0, 0, 'pigeonplanner')])
+        gtk.stock_add([(name, description, 0, 0, "pigeonplanner")])
 
 def get_function_name():
     """
@@ -109,13 +109,13 @@ def get_unicode_path(path):
             return unicode(path, sys.getfilesystemencoding())
         except:
             print "Problem encountered converting string: %s." % path
-            return unicode(path, sys.getfilesystemencoding(), errors='replace')
+            return unicode(path, sys.getfilesystemencoding(), errors="replace")
     else:
         try:
             return unicode(path)
         except:
             print "Problem encountered converting string: %s." % path
-            return unicode(path, sys.getfilesystemencoding(), errors='replace')
+            return unicode(path, sys.getfilesystemencoding(), errors="replace")
 
 def count_active_pigeons():
     """
@@ -127,15 +127,15 @@ def count_active_pigeons():
     ybirds = 0
     total = 0
     for pigeon in database.get_all_pigeons():
-        if not pigeon[5]: continue
+        if not pigeon["show"]: continue
 
         total += 1
 
-        if pigeon[4] == '0':
+        if pigeon["sex"] == "0":
             cocks += 1
-        elif pigeon[4] == '1':
+        elif pigeon["sex"] == "1":
             hens += 1
-        elif pigeon[4] == '2':
+        elif pigeon["sex"] == "2":
             ybirds += 1
 
     return total, cocks, hens, ybirds
@@ -176,7 +176,7 @@ def get_pindex_from_band_string(bandstring):
     @param bandstring: The pigeons bandstring
     """
 
-    band, year = bandstring.rsplit('/', 1)
+    band, year = bandstring.rsplit("/", 1)
     return get_pindex_from_band(band.strip(), year.strip())
 
 def get_band_from_pindex(pindex):
@@ -199,7 +199,7 @@ def calculate_coefficient(place, out, as_string=False):
     @param as_string: Return a localized string
     """
 
-    coef = (float(place)/float(out))*config.get('options.coef-multiplier')
+    coef = (float(place)/float(out))*config.get("options.coef-multiplier")
     if as_string:
         return locale.format_string("%.4f", coef)
     return coef
@@ -212,7 +212,7 @@ def add_zero_to_time(value):
     """
 
     if value >= 0 and value < 10:
-        return '0%s' % value
+        return "0%s" % value
     return str(value)
 
 def get_random_number(value):
@@ -222,7 +222,7 @@ def get_random_number(value):
     @param value: The length of the number
     """
 
-    return ''.join([random.choice('0123456789') for x in range(value)])
+    return "".join([random.choice("0123456789") for x in range(value)])
 
 def url_hook(about, link):
     webbrowser.open(link)
@@ -238,7 +238,7 @@ def escape_text(text):
 def open_file(path):
     from ui.messagedialog import ErrorDialog
 
-    norm_path = unicode(os.path.normpath(path), 'utf-8')
+    norm_path = unicode(os.path.normpath(path), "utf-8")
     if not os.path.exists(norm_path):
         ErrorDialog((_("Error: This file does not exist"), None, _("Error")))
         return
@@ -250,10 +250,10 @@ def open_file(path):
             ErrorDialog((_("Error opening file:"), str(exc), _("Error")))
     else:
         if const.OSX:
-            utility = 'open'
+            utility = "open"
         else:
-            utility = 'xdg-open'
-        search = os.environ['PATH'].split(':')
+            utility = "xdg-open"
+        search = os.environ["PATH"].split(":")
         for lpath in search:
             prog = os.path.join(lpath, utility)
             if os.path.isfile(prog):
@@ -265,7 +265,7 @@ def open_help(article):
     webbrowser.open(const.DOCURL % article)
 
 def get_pagesize_from_opts():
-    optvalue = config.get('printing.general-paper')
+    optvalue = config.get("printing.general-paper")
     if optvalue == 0:
         psize = "A4"
     elif optvalue == 1:

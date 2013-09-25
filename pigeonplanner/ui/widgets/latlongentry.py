@@ -23,7 +23,7 @@ from pigeonplanner.core import errors
 
 
 class LatLongEntry(gtk.Viewport):
-    __gtype_name__ = 'LatLongEntry'
+    __gtype_name__ = "LatLongEntry"
     can_empty = gobject.property(type=bool, default=False, nick="Can empty")
     def __init__(self, editable=False, can_empty=False):
         gtk.Viewport.__init__(self)
@@ -59,7 +59,7 @@ class LatLongEntry(gtk.Viewport):
         if validate:
             self.__validate(value, as_float)
         if as_float:
-            value = value.replace(u',', u'.')
+            value = value.replace(u",", u".")
             return float(value)
         return value
 
@@ -71,16 +71,16 @@ class LatLongEntry(gtk.Viewport):
         self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
 
     def __validate(self, value, as_float=False):
-        if self.can_empty and value == '':
+        if self.can_empty and value == "":
             self._unwarn()
             return
         # Accepted values are:
         #    DD.dddddd°
         #    DD°MM.mmm’
         #    DD°MM’SS.s”
-        value = value.replace(u',', u'.')
-        for char in u' -+':
-            value = value.replace(char, u'')
+        value = value.replace(u",", u".")
+        for char in u" -+":
+            value = value.replace(char, u"")
         if self.__check_float_repr(value) is not None:
             self._unwarn()
             return
@@ -94,7 +94,7 @@ class LatLongEntry(gtk.Viewport):
         raise errors.InvalidInputError(value)
 
     def __check_float_repr(self, value):
-        value = value.replace(u'°', u'')
+        value = value.replace(u"°", u"")
         try : 
             return float(value)      
         except ValueError:
@@ -103,10 +103,10 @@ class LatLongEntry(gtk.Viewport):
     def __check_dms_repr(self, value):
         # Replace the degree and quotes by colons...
         for char in u"°'\"":
-            value = value.replace(char, u':')
-        value = value.rstrip(u':')
+            value = value.replace(char, u":")
+        value = value.rstrip(u":")
         # ... so we can easily split the value up
-        splitted = value.split(u':')
+        splitted = value.split(u":")
 
         # First value always should be all digits
         if not splitted[0].isdigit():

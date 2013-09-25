@@ -54,7 +54,7 @@ class PedigreeWindow(gtk.Window):
 """
     def __init__(self, parent, pedigree, pigeon):
         gtk.Window.__init__(self)
-        self.connect('delete-event', self.on_close_dialog)
+        self.connect("delete-event", self.on_close_dialog)
         self.set_modal(True)
         self.resize(960, 600)
         self.set_transient_for(parent)
@@ -86,7 +86,7 @@ class PedigreeWindow(gtk.Window):
         actiongroup.add_actions((
             ("Save", gtk.STOCK_SAVE, None, None,
                     _("Save this pedigree"), self.on_save_clicked),
-            ##("Mail", 'email', None, None,
+            ##("Mail", "email", None, None,
             ##        _("Email this pedigree"), self.on_mail_clicked),
             ("Preview", gtk.STOCK_PRINT_PREVIEW, None, None,
                     _("View this pedigree"), self.on_preview_clicked),
@@ -101,7 +101,7 @@ class PedigreeWindow(gtk.Window):
         accelgroup = uimanager.get_accel_group()
         self.add_accel_group(accelgroup)
 
-        toolbar = uimanager.get_widget('/Toolbar')
+        toolbar = uimanager.get_widget("/Toolbar")
         vbox.pack_start(toolbar, False, False)
 
         self.table = table = gtk.Table(20, 7)
@@ -110,19 +110,19 @@ class PedigreeWindow(gtk.Window):
         self.buttonprev = gtk.Button()
         self.buttonprev.add(image)
         self.buttonprev.set_relief(gtk.RELIEF_NONE)
-        self.buttonprev.connect('clicked', self.on_navbutton_clicked, PREVIOUS)
+        self.buttonprev.connect("clicked", self.on_navbutton_clicked, PREVIOUS)
         table.attach(self.buttonprev, 0, 1, 7, 8, 0, 0)
         image = gtk.image_new_from_stock(gtk.STOCK_GO_FORWARD, gtk.ICON_SIZE_BUTTON)
         self.buttonnextsire = gtk.Button()
         self.buttonnextsire.add(image)
         self.buttonnextsire.set_relief(gtk.RELIEF_NONE)
-        self.buttonnextsire.connect('clicked', self.on_navbutton_clicked, NEXT_SIRE)
+        self.buttonnextsire.connect("clicked", self.on_navbutton_clicked, NEXT_SIRE)
         table.attach(self.buttonnextsire, 8, 9, 3, 4, 0, 0)
         image = gtk.image_new_from_stock(gtk.STOCK_GO_FORWARD, gtk.ICON_SIZE_BUTTON)
         self.buttonnextdam = gtk.Button()
         self.buttonnextdam.add(image)
         self.buttonnextdam.set_relief(gtk.RELIEF_NONE)
-        self.buttonnextdam.connect('clicked', self.on_navbutton_clicked, NEXT_DAM)
+        self.buttonnextdam.connect("clicked", self.on_navbutton_clicked, NEXT_DAM)
         table.attach(self.buttonnextdam, 8, 9, 11, 12, 0, 0)
 
         alignment = gtk.Alignment(.5, .5)
@@ -184,21 +184,21 @@ class PedigreeWindow(gtk.Window):
 
     def do_operation(self, print_action, save_path=None):
         userinfo = common.get_own_address()
-        if not tools.check_user_info(self, userinfo['name']):
+        if not tools.check_user_info(self, userinfo["name"]):
             return
 
         # Show a message to the user if the original image is not found and
         # can't be shown on the pedigree
-        if config.get('printing.pedigree-image') and self.pigeon.image is not None:
+        if config.get("printing.pedigree-image") and self.pigeon.image is not None:
             if not os.path.exists(self.pigeon.image):
                 msg = (_("Cannot find image '%s'"),
                        _("You need to edit the pigeon and select the correct "
                          "path or restore the original image on your computer."),
-                       '')
+                       "")
                 # In some very old versions, an empty image was stored as an
                 # empty string instead of None. Don't show this message in cases
                 # like this ofcourse.
-                if not self.pigeon.image == '':
+                if not self.pigeon.image == "":
                     InfoDialog(msg, self, self.pigeon.image)
                 self.pigeon.image = None
 

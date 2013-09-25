@@ -42,7 +42,7 @@ class VelocityCalculator(builder.GtkBuilder):
         self.widgets.spinbutton_prognosis_to.set_value(1800)
 
         self.widgets.sel_distance = self.widgets.tv_distance.get_selection()
-        self.widgets.sel_distance.connect('changed', self.on_sel_distance_changed)
+        self.widgets.sel_distance.connect("changed", self.on_sel_distance_changed)
 
         self.widgets.velocitywindow.set_transient_for(parent)
         self.widgets.velocitywindow.show()

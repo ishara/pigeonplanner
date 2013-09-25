@@ -39,22 +39,22 @@ class PigeonsReport(Report, HelperMethods):
         #TODO: column size with different columns
         columns = [(_("Band no."), "get_band_string")]
 
-        if config.get('columns.pigeon-sex') or config.get('printing.pigeon-sex'):
+        if config.get("columns.pigeon-sex") or config.get("printing.pigeon-sex"):
             columns.append((_("Sex"), "get_sex_string"))
-        if config.get('columns.pigeon-name'):
+        if config.get("columns.pigeon-name"):
             columns.append((_("Name"), "get_name"))
-        if config.get('columns.pigeon-colour'):
+        if config.get("columns.pigeon-colour"):
             columns.append((_("Colour"), "get_colour"))
-        if config.get('columns.pigeon-loft'):
+        if config.get("columns.pigeon-loft"):
             columns.append((_("Loft"), "get_loft"))
-        if config.get('columns.pigeon-strain'):
+        if config.get("columns.pigeon-strain"):
             columns.append((_("Strain"), "get_strain"))
-        if config.get('columns.pigeon-status'):
+        if config.get("columns.pigeon-status"):
             columns.append((_("Status"), "get_status"))
 
         self.doc.start_table("my_table", "table")
 
-        if config.get('printing.pigeon-colnames'):
+        if config.get("printing.pigeon-colnames"):
             self.doc.start_row()
             for name, method in columns:
                 self.add_cell(name, "headercell", "colheader")
@@ -92,7 +92,7 @@ class PigeonsReportOptions(ReportOptions):
         table = TableStyle()
         table.set_width(100)
         table.set_column_widths([20, 15, 15, 10, 15, 15, 10])
-        default_style.add_table_style('table', table)
+        default_style.add_table_style("table", table)
 
         cell = TableCellStyle()
         cell.set_padding(0.1)

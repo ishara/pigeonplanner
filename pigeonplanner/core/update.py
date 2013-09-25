@@ -44,11 +44,11 @@ def versiontuple(version):
     return tuple(map(int, (version.split("."))))
 
 def update():
-    local = os.path.join(const.TEMPDIR, 'pigeonplanner_update')
+    local = os.path.join(const.TEMPDIR, "pigeonplanner_update")
 
     try:
         urllib.urlretrieve(const.UPDATEURL, local)
-        with open(local, 'r') as versionfile:
+        with open(local, "r") as versionfile:
             versiondict = json.load(versionfile)
     except IOError as exc:
         logger.error(exc)
@@ -62,7 +62,7 @@ def update():
     # See what version we need to check for
     dev = versiontuple(versiondict["dev"])
     stable = versiontuple(versiondict["stable"])
-    if config.get('options.check-for-dev-updates'):
+    if config.get("options.check-for-dev-updates"):
         if stable > dev:
             version = stable
         else:

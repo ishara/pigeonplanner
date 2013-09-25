@@ -92,7 +92,7 @@ class VelocityReportOptions(ReportOptions):
         table = TableStyle()
         table.set_width(100)
         table.set_column_widths([30, 35, 35])
-        default_style.add_table_style('table', table)
+        default_style.add_table_style("table", table)
 
         cell = TableCellStyle()
         cell.set_padding(0.1)

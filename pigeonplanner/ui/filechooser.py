@@ -58,14 +58,14 @@ class _FileChooser(gtk.FileChooser):
 
     def set_preview(self, value):
         if not value: return
-        self.connect('update-preview', self._update_preview_cb)
+        self.connect("update-preview", self._update_preview_cb)
         self.set_preview_widget(self._create_preview_widget())
         self.set_use_preview_label(False)
 
     def get_filename(self):
         filename = gtk.FileChooser.get_filename(self)
         # filename is None when no file is selected. So prevent returning
-        # u'None' by only converting when needed.
+        # u"None" by only converting when needed.
         if filename is not None:
             return unicode(filename)
 
@@ -130,7 +130,7 @@ class _FileChooserDialog(gtk.FileChooserDialog, _FileChooser):
 
 class ImageChooser(_FileChooserDialog):
 
-    __gtype_name__ = 'ImageChooser'
+    __gtype_name__ = "ImageChooser"
 
     RESPONSE_CLEAR = -40
     def __init__(self, parent):
@@ -146,11 +146,11 @@ class ImageChooser(_FileChooserDialog):
 
 class MediaChooser(_FileChooserDialog):
 
-    __gtype_name__ = 'MediaChooser'
+    __gtype_name__ = "MediaChooser"
 
     def __init__(self, parent):
         super(MediaChooser, self).__init__(parent)
-        self.connect('selection-changed', self._selection_changed_cb)
+        self.connect("selection-changed", self._selection_changed_cb)
         self.set_title(_("Select a file..."))
         self.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
         self.set_extra_widget(self._create_extra_widget())
@@ -191,7 +191,7 @@ class MediaChooser(_FileChooserDialog):
 
 class PdfSaver(_FileChooserDialog):
 
-    __gtype_name__ = 'PdfSaver'
+    __gtype_name__ = "PdfSaver"
 
     def __init__(self, parent, pdf_name):
         super(PdfSaver, self).__init__(parent, preview=False,
@@ -204,7 +204,7 @@ class PdfSaver(_FileChooserDialog):
 
 class ExportChooser(_FileChooserDialog):
 
-    __gtype_name__ = 'ExportChooser'
+    __gtype_name__ = "ExportChooser"
 
     def __init__(self, parent, filename, filter_):
         super(ExportChooser, self).__init__(parent, preview=False,
@@ -227,7 +227,7 @@ class _FileChooserButton(gtk.FileChooserButton, _FileChooser):
 
 class ResultChooser(_FileChooserButton):
 
-    __gtype_name__ = 'ResultChooser'
+    __gtype_name__ = "ResultChooser"
 
     def __init__(self):
         super(ResultChooser, self).__init__(preview=False)
@@ -237,7 +237,7 @@ class ResultChooser(_FileChooserButton):
 
 class BackupSaver(_FileChooserButton):
 
-    __gtype_name__ = 'BackupSaver'
+    __gtype_name__ = "BackupSaver"
 
     def __init__(self):
         super(BackupSaver, self).__init__(preview=False,
@@ -247,7 +247,7 @@ class BackupSaver(_FileChooserButton):
 
 class BackupChooser(_FileChooserButton):
 
-    __gtype_name__ = 'BackupChooser'
+    __gtype_name__ = "BackupChooser"
 
     def __init__(self):
         super(BackupChooser, self).__init__(preview=False)

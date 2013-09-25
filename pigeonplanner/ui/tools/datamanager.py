@@ -141,13 +141,13 @@ class DataManager(builder.GtkBuilder):
 
     def _build_treeview(self):
         self.widgets.selection = self.widgets.treeview.get_selection()
-        self.widgets.selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection.connect("changed", self.on_selection_changed)
         self.widgets.liststore = gtk.ListStore(object, bool, str)
         self.widgets.treeview.set_model(self.widgets.liststore)
 
         textrenderer = gtk.CellRendererText()
         boolrenderer = gtk.CellRendererToggle()
-        boolrenderer.connect('toggled', self.on_selection_toggled)
+        boolrenderer.connect("toggled", self.on_selection_toggled)
 
         check = gtk.CheckButton()
         check.set_active(True)

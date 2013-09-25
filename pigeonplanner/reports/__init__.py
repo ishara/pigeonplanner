@@ -21,7 +21,7 @@ from pigeonplanner import config
 
 def get_pedigree(layout=None):
     if layout is None:
-        layout = config.get('printing.pedigree-layout')
+        layout = config.get("printing.pedigree-layout")
 
     if layout == 0:
         from .pedigrees.original import PedigreeReport, PedigreeReportOptions

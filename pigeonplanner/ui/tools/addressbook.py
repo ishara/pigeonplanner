@@ -36,7 +36,7 @@ def check_user_info(parent, name):
     @param name: The name of the user
     """
 
-    if name == '':
+    if name == "":
         if QuestionDialog(messages.MSG_NO_INFO, parent).run():
             book = AddressBook(parent)
             book.on_buttonadd_clicked(None)
@@ -57,7 +57,7 @@ class AddressBook(builder.GtkBuilder):
         self._editbuttons = [self.widgets.buttonsave, self.widgets.buttoncancel]
         self._fill_treeview()
         self.widgets.selection = self.widgets.treeview.get_selection()
-        self.widgets.selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection.connect("changed", self.on_selection_changed)
         self.widgets.selection.select_path(0)
 
         self.widgets.addressbookwindow.set_transient_for(parent)
@@ -105,11 +105,11 @@ class AddressBook(builder.GtkBuilder):
             database.update_address(self._get_address_key(), data)
             model, rowiter = self.widgets.selection.get_selected()
             self.widgets.liststore.set_value(rowiter, 1, data["name"])
-            self.widgets.selection.emit('changed')
+            self.widgets.selection.emit("changed")
 
     def on_buttoncancel_clicked(self, widget):
         self._set_widgets(False)
-        self.widgets.selection.emit('changed')
+        self.widgets.selection.emit("changed")
 
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
@@ -188,5 +188,5 @@ class AddressBook(builder.GtkBuilder):
 
     def _empty_entries(self):
         for entry in self._entries:
-            entry.set_text('')
+            entry.set_text("")
 

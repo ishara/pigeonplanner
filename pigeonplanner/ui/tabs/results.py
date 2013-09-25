@@ -55,9 +55,9 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
 
         self.parent = parent
         self.widgets.selection = self.widgets.treeview.get_selection()
-        self.widgets.selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection.connect("changed", self.on_selection_changed)
         self.widgets.race_sel = self.widgets.race_tv.get_selection()
-        self.widgets.race_sel.connect('changed', self.on_race_sel_changed)
+        self.widgets.race_sel.connect("changed", self.on_race_sel_changed)
         self.set_columns()
 
         self.widgets.comboracepoint.set_data(database.get_all_data(database.Tables.RACEPOINTS), sort=False)
@@ -91,7 +91,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_buttonadd_clicked(self, widget):
         self._mode = const.ADD
-        values = [common.get_date(), '', 1, 1, '', '', '', '', '', '']
+        values = [common.get_date(), "", 1, 1, "", "", "", "", "", ""]
         self._set_dialog(self._mode, values)
 
     def on_buttonedit_clicked(self, widget):
@@ -250,16 +250,16 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.buttonadd.clicked()
 
     def set_columns(self):
-        columnsdic = {2: config.get('columns.result-coef'),
-                      3: config.get('columns.result-sector'),
-                      4: config.get('columns.result-category'),
-                      5: config.get('columns.result-comment')}
+        columnsdic = {2: config.get("columns.result-coef"),
+                      3: config.get("columns.result-sector"),
+                      4: config.get("columns.result-category"),
+                      5: config.get("columns.result-comment")}
         for key, value in columnsdic.items():
             self.widgets.treeview.get_column(key).set_visible(value)
 
-        columnsdic = {2: config.get('columns.result-type'),
-                      3: config.get('columns.result-wind'),
-                      4: config.get('columns.result-weather')}
+        columnsdic = {2: config.get("columns.result-type"),
+                      3: config.get("columns.result-wind"),
+                      4: config.get("columns.result-weather")}
         for key, value in columnsdic.items():
             self.widgets.race_tv.get_column(key).set_visible(value)
 
@@ -299,7 +299,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         """
 
         self._set_entry_values(values)
-        text = _('Edit result for:') if mode == const.EDIT else _('Add result for:')
+        text = _("Edit result for:") if mode == const.EDIT else _("Add result for:")
         self.widgets.labelmode.set_text(text)
         #TODO: Setting modal doesn't work
         self.widgets.dialog.set_modal(mode == const.EDIT)

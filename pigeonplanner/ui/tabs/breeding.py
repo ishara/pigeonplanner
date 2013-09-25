@@ -45,7 +45,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.mainwindow = mainwindow
         self.maintreeview = mainwindow.get_treeview()
         self.widgets.selection = self.widgets.treeview.get_selection()
-        self.widgets.selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection.connect("changed", self.on_selection_changed)
         self.widgets.editdialog.set_transient_for(self.mainwindow)
 
     ## Tab
@@ -186,7 +186,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             else:
                 self.widgets.treestore.set(rowiter, 2, date)
 
-            self.widgets.selection.emit('changed')
+            self.widgets.selection.emit("changed")
         # Insert when adding record
         elif self._mode == const.ADD:
             rowid = database.add_breeding(data)
@@ -237,7 +237,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         return [self.widgets.buttonadd]
 
     # Private methods
-    def _set_dialog_fields(self, key=None, mate=''):
+    def _set_dialog_fields(self, key=None, mate=""):
         if key is not None:
             (key, sire, dam, date, laid1, hatched1, pindex1, success1,
              laid2, hatched2, pindex2, success2, clutch, 
@@ -246,7 +246,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             (sire, dam, date, clutch, box, comment,
              laid1, hatched1, pindex1, success1,
              laid2, hatched2, pindex2, success2) = (
-                        '', '', '', '', '', '', '', '', '', 0, '', '', '', 0)
+                        "", "", "", "", "", "", "", "", "", 0, "", "", "", 0)
 
         self.widgets.dateedit.set_text(date)
         self.widgets.bandmateedit.set_pindex(mate)

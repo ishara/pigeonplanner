@@ -33,7 +33,7 @@ from optparse import OptionParser
 from threading import Thread
 
 try:
-    import pygtk; pygtk.require('2.0')
+    import pygtk; pygtk.require("2.0")
 except:
     print "The Python GTK (PyGTK) bindings are required to run this program."
     sys.exit(1)
@@ -63,7 +63,7 @@ def get_operating_system():
         release, versioninfo, machine = platform.mac_ver()
         distribution = release
     else:
-        distribution = ''
+        distribution = ""
     return operatingsystem, distribution
 
 
@@ -88,7 +88,7 @@ class Startup(object):
 
         # py2exe detection
         py2exe = False
-        if const.WINDOWS and hasattr(sys, 'frozen'):
+        if const.WINDOWS and hasattr(sys, "frozen"):
             py2exe = True
 	
         # Disable py2exe log feature
@@ -134,33 +134,33 @@ class Startup(object):
 
     def setup_locale(self):
         from pigeonplanner import config
-        language = config.get('options.language')
+        language = config.get("options.language")
         localedomain = const.DOMAIN
         localedir = const.LANGDIR
 
-        if language in ('def', 'Default'):
+        if language in ("def", "Default"):
             if const.OSX:
                 #TODO: get default language
-                language = 'C'
+                language = "C"
             else:
-                language = ''
+                language = ""
                 try:
                     language = os.environ["LANG"]
                 except KeyError:
                     language = locale.getlocale()[0]
                     if not language:
                         try:
-                            language = locale.getdefaultlocale()[0] + '.UTF-8'
+                            language = locale.getdefaultlocale()[0] + ".UTF-8"
                         except (TypeError, ValueError):
                             pass
         else:
-            language = locale.normalize(language).split('.')[0] + '.UTF-8'
+            language = locale.normalize(language).split(".")[0] + ".UTF-8"
 
         os.environ["LANG"] = language
         os.environ["LANGUAGE"] = language
 
         gettext.bindtextdomain(localedomain, localedir)
-        gettext.bind_textdomain_codeset(localedomain, 'UTF-8')
+        gettext.bind_textdomain_codeset(localedomain, "UTF-8")
         gettext.textdomain(localedomain)
         gettext.install(localedomain, localedir, unicode=True)
         try:
@@ -169,12 +169,12 @@ class Startup(object):
             # locale has no bindtextdomain on Windows, fall back to intl.dll
             if const.WINDOWS:
                 from ctypes import cdll
-                cdll.msvcrt._putenv('LANG=%s' % language)
-                cdll.msvcrt._putenv('LANGUAGE=%s' % language)
+                cdll.msvcrt._putenv("LANG=%s" % language)
+                cdll.msvcrt._putenv("LANGUAGE=%s" % language)
 
                 libintl = cdll.intl
                 libintl.bindtextdomain(localedomain, localedir)
-                libintl.bind_textdomain_codeset(localedomain, 'UTF-8')
+                libintl.bind_textdomain_codeset(localedomain, "UTF-8")
                 libintl.textdomain(localedomain)
                 del libintl
 
@@ -188,7 +188,7 @@ class Startup(object):
                 os.remove("%s.old" % const.LOGFILE)
             os.rename(const.LOGFILE, "%s.old" % const.LOGFILE)
         formatter = logging.Formatter(const.LOG_FORMAT)
-        handler = logging.FileHandler(const.LOGFILE, encoding='UTF-8')
+        handler = logging.FileHandler(const.LOGFILE, encoding="UTF-8")
         handler.setFormatter(formatter)
         self.logger = logging.getLogger()
         self.logger.addHandler(handler)
@@ -217,25 +217,25 @@ class Startup(object):
     def setup_theme(self):
         from pigeonplanner import config
         # Set theme
-        themedir = '.\\share\\themes'
+        themedir = ".\\share\\themes"
         if const.WINDOWS and os.path.exists(themedir):
             themes = os.listdir(themedir)
             try:
-                theme = themes[config.get('interface.theme')]
+                theme = themes[config.get("interface.theme")]
             except IndexError:
                 theme = themes[1]
-                config.set('interface.theme', 1)
-            themefile = os.path.join(themedir, theme, 'gtk-2.0\\gtkrc')
+                config.set("interface.theme", 1)
+            themefile = os.path.join(themedir, theme, "gtk-2.0\\gtkrc")
             gtk.rc_parse(themefile)
 
         from pigeonplanner import common
         # Register custom stock icons
         common.create_stock_button([
-                ('icon_pedigree_detail.png', 'pedigree-detail', _('Pedigree')),
-                ('icon_email.png', 'email', _('E-mail')),
-                ('icon_send.png', 'send', _('Send')),
-                ('icon_report.png', 'report', _('Report')),
-                ('icon_columns.png', 'columns', 'columns'),
+                ("icon_pedigree_detail.png", "pedigree-detail", _("Pedigree")),
+                ("icon_email.png", "email", _("E-mail")),
+                ("icon_send.png", "send", _("Send")),
+                ("icon_report.png", "report", _("Report")),
+                ("icon_columns.png", "columns", "columns"),
             ])
 
         # Set default icon for all windows
@@ -328,7 +328,7 @@ def start_ui():
         return
 
     from pigeonplanner import config
-    if config.get('options.check-for-updates'):
+    if config.get("options.check-for-updates"):
         updatethread = Thread(None, app.search_updates, None)
         updatethread.start()
 
@@ -338,6 +338,6 @@ def start_ui():
     gtk.main()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     start_ui()
 

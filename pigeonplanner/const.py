@@ -63,84 +63,84 @@ else:
 
 
 if WINDOWS:
-    HOMEDIR = os.environ['USERPROFILE']
-    PREFDIR = os.path.join(os.environ.get('APPDATA', HOMEDIR), 'pigeonplanner')
+    HOMEDIR = os.environ["USERPROFILE"]
+    PREFDIR = os.path.join(os.environ.get("APPDATA", HOMEDIR), "pigeonplanner")
     PREFDIR = unicode(PREFDIR, sys.getfilesystemencoding())
     HOMEDIR = unicode(HOMEDIR, sys.getfilesystemencoding())
 elif OSX:
-    HOMEDIR = os.environ['HOME']
-    PREFDIR = os.path.join(HOMEDIR, 'Library', 'Application Support', 'pigeonplanner')
+    HOMEDIR = os.environ["HOME"]
+    PREFDIR = os.path.join(HOMEDIR, "Library", "Application Support", "pigeonplanner")
 else:
-    HOMEDIR = os.environ['HOME']
-    PREFDIR = os.path.join(HOMEDIR, '.pigeonplanner')
+    HOMEDIR = os.environ["HOME"]
+    PREFDIR = os.path.join(HOMEDIR, ".pigeonplanner")
 
 #XXX: For some reason, GtkBuilder translations on Windows don't work when
 #     building the languages folder path from the ROOTDIR.
 #     Looks like a unicode problem:
-#           * os.path.join(ROOTDIR, 'languages') => unicode, doesn't work
-#           * os.path.abspath(u'languages') => unicode, doesn't work
-#           * os.path.abspath('languages') => str, does work
+#           * os.path.join(ROOTDIR, "languages") => unicode, doesn't work
+#           * os.path.abspath(u"languages") => unicode, doesn't work
+#           * os.path.abspath("languages") => str, does work
 if hasattr(sys, "frozen"):
     if WINDOWS:
         ROOTDIR = os.path.abspath(os.path.dirname(
                     unicode(sys.executable, sys.getfilesystemencoding())))
-        LANGDIR = os.path.abspath('languages')
+        LANGDIR = os.path.abspath("languages")
     elif OSX:
         launcher = os.path.dirname(
                             unicode(sys.executable, sys.getfilesystemencoding()))
-        data = os.path.join(launcher, '..', 'Resources', 'share', 'pigeonplanner')
+        data = os.path.join(launcher, "..", "Resources", "share", "pigeonplanner")
         ROOTDIR = os.path.abspath(data)
-        LANGDIR = os.path.join(ROOTDIR, 'languages')
+        LANGDIR = os.path.join(ROOTDIR, "languages")
         del launcher, data
 else:
     ROOTDIR = os.path.abspath(os.path.dirname(
                 unicode(__file__, sys.getfilesystemencoding())))
-    if not ROOTDIR.startswith('/usr'):
+    if not ROOTDIR.startswith("/usr"):
         # When running from the source folder, the root is one dir up
-        ROOTDIR = os.path.normpath(os.path.join(ROOTDIR, '..'))
+        ROOTDIR = os.path.normpath(os.path.join(ROOTDIR, ".."))
         if ROOTDIR.endswith(".egg"):
             #TODO: can be improved?
             ROOTDIR = os.path.join(ROOTDIR, "share", "pigeonplanner")
-        LANGDIR = os.path.join(ROOTDIR, 'languages')
+        LANGDIR = os.path.join(ROOTDIR, "languages")
         if WINDOWS:
-            LANGDIR = os.path.abspath('../languages')
+            LANGDIR = os.path.abspath("../languages")
     else:
         # Running the installed program, use the system's locale dir
-        LANGDIR = '/usr/share/locale/'
+        LANGDIR = "/usr/share/locale/"
 
-IMAGEDIR = os.path.join(ROOTDIR, 'images')
-GLADEDIR = os.path.join(ROOTDIR, 'glade')
-RESULTPARSERDIR = os.path.join(ROOTDIR, 'resultparsers')
+IMAGEDIR = os.path.join(ROOTDIR, "images")
+GLADEDIR = os.path.join(ROOTDIR, "glade")
+RESULTPARSERDIR = os.path.join(ROOTDIR, "resultparsers")
 
-THUMBDIR = os.path.join(PREFDIR, u'thumbs')
-PLUGINDIR = os.path.join(PREFDIR, u'plugins')
-DATABASE = os.path.join(PREFDIR, u'pigeonplanner.db')
-LOGFILE = os.path.join(PREFDIR, u'pigeonplanner.log')
-CONFIGFILE_OLD = os.path.join(PREFDIR, 'pigeonplanner.cfg')
-CONFIGFILE = os.path.join(PREFDIR, 'pigeonplanner.json')
+THUMBDIR = os.path.join(PREFDIR, u"thumbs")
+PLUGINDIR = os.path.join(PREFDIR, u"plugins")
+DATABASE = os.path.join(PREFDIR, u"pigeonplanner.db")
+LOGFILE = os.path.join(PREFDIR, u"pigeonplanner.log")
+CONFIGFILE_OLD = os.path.join(PREFDIR, "pigeonplanner.cfg")
+CONFIGFILE = os.path.join(PREFDIR, "pigeonplanner.json")
 
 TEMPDIR = tempfile.gettempdir()
 
-UPDATEURL = 'http://www.pigeonplanner.com/version.json'
-DOWNLOADURL = 'http://www.pigeonplanner.com/download'
-FORUMURL = 'http://forum.pigeonplanner.com'
+UPDATEURL = "http://www.pigeonplanner.com/version.json"
+DOWNLOADURL = "http://www.pigeonplanner.com/download"
+FORUMURL = "http://forum.pigeonplanner.com"
 MAILURL = "http://www.pigeonplanner.com/cgi-bin/pigeonplanner_mailing.py"
 REPORTMAIL = "timovwb@gmail.com"
 DOCURL = WEBSITE + "/index.php?option=com_content&view=article&catid=9&id=%s"
 DOCURLMAIN = WEBSITE + "/support/documentation"
 
-DOMAIN = 'pigeonplanner'
+DOMAIN = "pigeonplanner"
 
 USER_AGENT = {"User-Agent": "Pigeon Planner/%s" % VERSION}
 
-LOG_FORMAT = '[%(asctime)s] %(name)s %(levelname)s: %(message)s'
-LOG_FORMAT_CLI = '%(name)s %(levelname)s: %(message)s'
-DATE_FORMAT = '%Y-%m-%d'
+LOG_FORMAT = "[%(asctime)s] %(name)s %(levelname)s: %(message)s"
+LOG_FORMAT_CLI = "%(name)s %(levelname)s: %(message)s"
+DATE_FORMAT = "%Y-%m-%d"
 
-LOGO_IMG = os.path.join(IMAGEDIR, 'icon_logo.png')
-SEX_IMGS = {'0': os.path.join(IMAGEDIR, "symbol_male.png"),
-            '1': os.path.join(IMAGEDIR, "symbol_female.png"),
-            '2': os.path.join(IMAGEDIR, "symbol_young.png")}
+LOGO_IMG = os.path.join(IMAGEDIR, "icon_logo.png")
+SEX_IMGS = {"0": os.path.join(IMAGEDIR, "symbol_male.png"),
+            "1": os.path.join(IMAGEDIR, "symbol_female.png"),
+            "2": os.path.join(IMAGEDIR, "symbol_young.png")}
 
 (SIRE,
  DAM,

@@ -86,7 +86,7 @@ class DetailsDialog(gtk.Dialog):
         self.run()
 
     def run(self):
-        self.connect('response', self.on_dialog_response)
+        self.connect("response", self.on_dialog_response)
         self.show_all()
 
     def on_dialog_response(self, dialog, response_id):
@@ -106,11 +106,11 @@ class PigeonImageWidget(gtk.EventBox):
     def __init__(self, editable, view, parent=None):
         gtk.EventBox.__init__(self)
         if editable:
-            self.connect('button-press-event', self.on_editable_button_press_event)
+            self.connect("button-press-event", self.on_editable_button_press_event)
         else:
-            self.connect('enter-notify-event', self.on_enter_notify_event)
-            self.connect('leave-notify-event', self.on_leave_notify_event)
-            self.connect('button-press-event', self.on_button_press_event)
+            self.connect("enter-notify-event", self.on_enter_notify_event)
+            self.connect("leave-notify-event", self.on_leave_notify_event)
+            self.connect("button-press-event", self.on_button_press_event)
 
         self._view = view
         self._parent = parent
@@ -177,9 +177,9 @@ class PigeonImageWidget(gtk.EventBox):
 
 
 class DetailsView(builder.GtkBuilder, gobject.GObject):
-    __gsignals__ = {'edit-finished': (gobject.SIGNAL_RUN_LAST,
+    __gsignals__ = {"edit-finished": (gobject.SIGNAL_RUN_LAST,
                                       None, (object, int)),
-                    'edit-cancelled': (gobject.SIGNAL_RUN_LAST,
+                    "edit-cancelled": (gobject.SIGNAL_RUN_LAST,
                                        None, ()),
                     }
     def __init__(self, parent):
@@ -329,12 +329,12 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.widgets.entrydam.clear()
         self.widgets.entrydamedit.clear()
 
-        self.widgets.combocolour.child.set_text('')
-        self.widgets.combostrain.child.set_text('')
-        self.widgets.comboloft.child.set_text('')
+        self.widgets.combocolour.child.set_text("")
+        self.widgets.combostrain.child.set_text("")
+        self.widgets.comboloft.child.set_text("")
         self.widgets.combosex.set_active(0)
         self.widgets.combostatus.set_active(1)
-        self.widgets.combostatus.emit('changed')
+        self.widgets.combostatus.emit("changed")
 
         self.widgets.pigeonimage.set_default_image()
 
@@ -344,9 +344,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             if isinstance(entry, sexentry.SexEntry):
                 entry.set_sex(None)
                 continue
-            entry.set_text('')
+            entry.set_text("")
         for text in self.get_objects_from_prefix("text"):
-            text.get_buffer().set_text('')
+            text.get_buffer().set_text("")
 
     def start_edit(self, operation):
         self._operation = operation
@@ -429,7 +429,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 pass
 
         self.set_details(pigeon)
-        self.emit('edit-finished', pigeon, self._operation)
+        self.emit("edit-finished", pigeon, self._operation)
         combodata = [(self.widgets.combocolour, data["colour"]),
                      (self.widgets.combostrain, data["strain"]),
                      (self.widgets.comboloft, data["loft"])]
@@ -441,12 +441,12 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
     def operation_cancelled(self):
         logger.debug("Operation '%s' cancelled", self._operation)
-        self.emit('edit-cancelled')
+        self.emit("edit-cancelled")
 
     # Internal methods
     def _set_status_image(self, status):
         image = os.path.join(const.IMAGEDIR,
-                             'status_%s.png' % common.statusdic[status].lower())
+                             "status_%s.png" % common.statusdic[status].lower())
         self.widgets.imagestatus.set_from_file(image)
         self.widgets.imagestatus.set_tooltip_text(_(common.statusdic[status]))
         self.widgets.imagestatusedit.set_from_file(image)

@@ -22,7 +22,7 @@ from pigeonplanner import common
 
 
 class SexEntry(gtk.Viewport):
-    __gtype_name__ = 'SexEntry'
+    __gtype_name__ = "SexEntry"
     def __init__(self):
         gtk.Viewport.__init__(self)
 

@@ -42,13 +42,13 @@ def get_path(src_file):
 
 def __build_path(path):
     md5_hash = hashlib.md5(path)
-    return os.path.join(const.THUMBDIR, md5_hash.hexdigest()+'.png')
+    return os.path.join(const.THUMBDIR, md5_hash.hexdigest()+".png")
 
 def __create_image(src_file):
     filename = __build_path(src_file)
     try:
         pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(src_file, 200, 200)
-        pixbuf.save(filename, 'png')
+        pixbuf.save(filename, "png")
     except:
         pass
 

@@ -25,7 +25,7 @@ from pigeonplanner.core import errors
 
 
 class BandEntry(gtk.Viewport):
-    __gtype_name__ = 'BandEntry'
+    __gtype_name__ = "BandEntry"
     can_empty = gobject.property(type=bool, default=False, nick="Can empty")
     def __init__(self, editable=False, can_empty=False):
         gtk.Viewport.__init__(self)
@@ -80,7 +80,7 @@ class BandEntry(gtk.Viewport):
         return band, year
 
     def clear(self):
-        self.set_band('', '')
+        self.set_band("", "")
 
     def grab_focus(self):
         self._entryband.grab_focus()
@@ -94,7 +94,7 @@ class BandEntry(gtk.Viewport):
         self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
 
     def __validate(self, band, year):
-        if self.can_empty and (band == '' and year == ''):
+        if self.can_empty and (band == "" and year == ""):
             return
 
         if not band or not year:

@@ -29,7 +29,7 @@ class DisplayCheckButton(gtk.CheckButton):
     and do nothing in them.
     """
 
-    __gtype_name__ = 'DisplayCheckButton'
+    __gtype_name__ = "DisplayCheckButton"
 
     def __init__(self, label=None):
         gtk.CheckButton.__init__(self, label)

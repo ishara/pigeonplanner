@@ -33,7 +33,7 @@ from pigeonplanner.core import errors
 
 
 class MailDialog(builder.GtkBuilder):
-    def __init__(self, parent, attachment, kind='pdf'):
+    def __init__(self, parent, attachment, kind="pdf"):
         builder.GtkBuilder.__init__(self, "Dialogs.ui")
 
         self.widgets.maildialog.set_transient_for(parent)
@@ -46,7 +46,7 @@ class MailDialog(builder.GtkBuilder):
         self.widgets.textbuffer = gtk.TextBuffer()
         self.widgets.textview_message.set_buffer(self.widgets.textbuffer)
 
-        if kind == 'pdf':
+        if kind == "pdf":
             self.widgets.frame_to.show()
             self.widgets.frame_subject.show()
         else:
@@ -56,24 +56,24 @@ class MailDialog(builder.GtkBuilder):
             self.widgets.entry_to.set_text(const.REPORTMAIL)
             self.widgets.rename.hide()
 
-        name, email = '', ''
+        name, email = "", ""
         info = common.get_own_address()
         if info:
-            name = info['name']
-            email = info['email']
+            name = info["name"]
+            email = info["email"]
 
         self.widgets.entry_name.set_text(name)
         self.widgets.entry_mail.set_text(email)
         self.widgets.label_attachment.set_text(os.path.basename(attachment))
 
-        if kind == 'log':
+        if kind == "log":
             self.widgets.entry_name.grab_focus()
             self.widgets.entry_name.set_position(-1)
         self.widgets.maildialog.show()
 
     def close_dialog(self, widget=None, event=None):
         if not self.sending:
-            if self.kind == 'pdf':
+            if self.kind == "pdf":
                 try:
                     os.remove(self.attachment)
                 except:
@@ -95,8 +95,8 @@ class MailDialog(builder.GtkBuilder):
 
     def on_apply_clicked(self, widget):
         filename = self.widgets.entry_attachment.get_text()
-        if not filename.endswith('.pdf'):
-            filename += '.pdf'
+        if not filename.endswith(".pdf"):
+            filename += ".pdf"
 
         new_attachment = os.path.join(const.TEMPDIR, filename)
 

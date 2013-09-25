@@ -61,14 +61,14 @@ class PhotoAlbum(builder.GtkBuilder):
 """
 
     zoom_factors = {
-        0.25: '25%',
-        0.50: '50%',
-        0.75: '75%',
-        1.00: '100%',
-        1.25: '125%',
-        1.50: '150%',
-        1.75: '175%',
-        2.00: '200%',
+        0.25: "25%",
+        0.50: "50%",
+        0.75: "75%",
+        1.00: "100%",
+        1.25: "125%",
+        1.50: "150%",
+        1.75: "175%",
+        2.00: "200%",
     }
 
     def __init__(self, parent, pindex=None):
@@ -109,16 +109,16 @@ class PhotoAlbum(builder.GtkBuilder):
         accelgroup = uimanager.get_accel_group()
         self.widgets.photoalbum.add_accel_group(accelgroup)
 
-        self.widgets.zoom_in_button = uimanager.get_widget('/Toolbar/In')
-        self.widgets.zoom_out_button = uimanager.get_widget('/Toolbar/Out')
-        self.widgets.zoom_fit_button = uimanager.get_widget('/Toolbar/Fit')
-        self.widgets.first_button = uimanager.get_widget('/Toolbar/First')
-        self.widgets.prev_button = uimanager.get_widget('/Toolbar/Prev')
-        self.widgets.next_button = uimanager.get_widget('/Toolbar/Next')
-        self.widgets.last_button = uimanager.get_widget('/Toolbar/Last')
-        self.widgets.slide_button = uimanager.get_widget('/Toolbar/Slide')
+        self.widgets.zoom_in_button = uimanager.get_widget("/Toolbar/In")
+        self.widgets.zoom_out_button = uimanager.get_widget("/Toolbar/Out")
+        self.widgets.zoom_fit_button = uimanager.get_widget("/Toolbar/Fit")
+        self.widgets.first_button = uimanager.get_widget("/Toolbar/First")
+        self.widgets.prev_button = uimanager.get_widget("/Toolbar/Prev")
+        self.widgets.next_button = uimanager.get_widget("/Toolbar/Next")
+        self.widgets.last_button = uimanager.get_widget("/Toolbar/Last")
+        self.widgets.slide_button = uimanager.get_widget("/Toolbar/Slide")
 
-        toolbar = uimanager.get_widget('/Toolbar')
+        toolbar = uimanager.get_widget("/Toolbar")
         toolbar.set_style(gtk.TOOLBAR_ICONS)
         self.widgets.vbox.pack_start(toolbar, False, False)
         self.widgets.vbox.reorder_child(toolbar, 0)
@@ -156,7 +156,7 @@ class PhotoAlbum(builder.GtkBuilder):
             width -= 2 * self.widgets.swin.style.xthickness
             height -= 2 * self.widgets.swin.style.ythickness
 
-        spacing = self.widgets.swin.style_get_property('scrollbar-spacing')
+        spacing = self.widgets.swin.style_get_property("scrollbar-spacing")
         
         vsb_w, vsb_h = self.widgets.swin.get_vscrollbar().size_request()
         vsb_w += spacing

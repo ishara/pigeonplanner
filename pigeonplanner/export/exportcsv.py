@@ -23,7 +23,7 @@ import codecs
 import utils
 
 
-__all__ = ['ExportCSV']
+__all__ = ["ExportCSV"]
 
 
 # Unicode classes taken from http://docs.python.org/library/csv.html
@@ -91,35 +91,35 @@ class UnicodeWriter:
 
 
 class ExportCSV(object):
-    name = 'CSV'
-    extension = '.csv'
-    filefilter = ('CSV', '*.csv')
+    name = "CSV"
+    extension = ".csv"
+    filefilter = ("CSV", "*.csv")
 
     @classmethod
     def run(self, filepath, pigeons):
-        with open(filepath, 'wb') as output:
+        with open(filepath, "wb") as output:
             writer = UnicodeWriter(output, fieldnames=utils.COLS_PIGEON)
             writer.writerow(dict((name, name) for name in utils.COLS_PIGEON))
             for pigeon in pigeons:
-                writer.writerow({'pindex': pigeon.pindex,
-                                 'band': pigeon.ring,
-                                 'year': pigeon.year,
-                                 'sex': pigeon.sex,
-                                 'visible': pigeon.show,
-                                 'status': pigeon.active,
-                                 'colour': pigeon.colour,
-                                 'name': pigeon.name,
-                                 'strain': pigeon.strain,
-                                 'loft': pigeon.loft,
-                                 'image': pigeon.image,
-                                 'sire band': pigeon.sire,
-                                 'sire year': pigeon.yearsire,
-                                 'dam band': pigeon.dam,
-                                 'dam year': pigeon.yeardam,
-                                 'extra1': pigeon.extra1,
-                                 'extra2': pigeon.extra2,
-                                 'extra3': pigeon.extra3,
-                                 'extra4': pigeon.extra4,
-                                 'extra5': pigeon.extra5,
-                                 'extra6': pigeon.extra6})
+                writer.writerow({"pindex": pigeon.pindex,
+                                 "band": pigeon.ring,
+                                 "year": pigeon.year,
+                                 "sex": pigeon.sex,
+                                 "visible": pigeon.show,
+                                 "status": pigeon.active,
+                                 "colour": pigeon.colour,
+                                 "name": pigeon.name,
+                                 "strain": pigeon.strain,
+                                 "loft": pigeon.loft,
+                                 "image": pigeon.image,
+                                 "sire band": pigeon.sire,
+                                 "sire year": pigeon.yearsire,
+                                 "dam band": pigeon.dam,
+                                 "dam year": pigeon.yeardam,
+                                 "extra1": pigeon.extra1,
+                                 "extra2": pigeon.extra2,
+                                 "extra3": pigeon.extra3,
+                                 "extra4": pigeon.extra4,
+                                 "extra5": pigeon.extra5,
+                                 "extra6": pigeon.extra6})
 

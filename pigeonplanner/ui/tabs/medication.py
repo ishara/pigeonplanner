@@ -41,7 +41,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self._mode = None
         self._expanded = False
         self.widgets.selection = self.widgets.treeview.get_selection()
-        self.widgets.selection.connect('changed', self.on_selection_changed)
+        self.widgets.selection.connect("changed", self.on_selection_changed)
         self.widgets.dialog.set_transient_for(parent)
 
     # Callbacks
@@ -248,8 +248,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             row[1] = pigeon.get_loft() == loft
 
     def _clear_dialog_widgets(self):
-        for entry in self.get_objects_from_prefix('entry'):
-            entry.set_text('')
+        for entry in self.get_objects_from_prefix("entry"):
+            entry.set_text("")
         self.widgets.entrydate2.set_text(common.get_date())
         self.widgets.checkvaccination2.set_active(False)
 

@@ -50,7 +50,7 @@ class PedigreeBox(gtk.DrawingArea):
         self.editable = False
         self.highlight = False
 
-        self.text = ''
+        self.text = ""
         if self.pigeon:
             self.editable = True
             self.text = self.pigeon.get_band_string(True)
@@ -68,7 +68,7 @@ class PedigreeBox(gtk.DrawingArea):
             self.bordercolor = (0, 0, 0)
             if detailed and child is not None:
                 self.editable = True
-                tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
+                tform = "<span style=\"italic\" foreground=\"#6a6a6a\">%s</span>"
                 self.text = tform % common.escape_text(_("<edit>"))
 
     def get_sex(self):
@@ -90,7 +90,7 @@ class PedigreeBox(gtk.DrawingArea):
 
     def state_changed(self, widget, prev_state):
         if widget.state == gtk.STATE_INSENSITIVE:
-            self.text = "<span foreground='#6a6a6a'>%s</span>" % self.text
+            self.text = "<span foreground=\"#6a6a6a\">%s</span>" % self.text
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
         self.queue_draw()
 
@@ -98,7 +98,7 @@ class PedigreeBox(gtk.DrawingArea):
         if self.pigeon is None:
             return False
         path = self.pigeon.get_image()
-        # Path can be None or '', ignore both
+        # Path can be None or "", ignore both
         if path:
             tooltip.set_icon(thumbnail.get_image(path))
             return True
@@ -173,10 +173,10 @@ class ExtraBox(gtk.DrawingArea):
         self.connect("expose-event", self.expose)
         self.connect("realize", self.realize)
 
-        self.text = ''
+        self.text = ""
         if pigeon is not None:
             extra = pigeon.get_extra()
-            self.text = common.escape_text('\n'.join(extra[:lines]))
+            self.text = common.escape_text("\n".join(extra[:lines]))
             self.bgcolor = (240/256.0, 230/256.0, 140/256.0)
             self.bordercolor = (0, 0, 0)
         else:
@@ -255,8 +255,8 @@ class PedigreeBox_gdk(gtk.DrawingArea):
         self.add_events(gtk.gdk.LEAVE_NOTIFY_MASK)
         self.connect("expose_event", self.expose)
         self.connect("realize", self.realize)
-        self.connect('enter-notify-event', self.on_enter_event)
-        self.connect('leave-notify-event', self.on_leave_event)
+        self.connect("enter-notify-event", self.on_enter_event)
+        self.connect("leave-notify-event", self.on_leave_event)
         self.connect("state_changed", self.state_changed)
         self.pigeon = pigeon
         self.child = child
@@ -264,17 +264,17 @@ class PedigreeBox_gdk(gtk.DrawingArea):
         self.editable = False
         self.highlight = False
 
-        text = ''
+        text = ""
         if self.pigeon:
             self.editable = True
             text = self.pigeon.get_band_string(True)
         else:
             if detailed and child is not None:
                 self.editable = True
-                tform = "<span style='italic' foreground='#6a6a6a'>%s</span>"
+                tform = "<span style=\"italic\" foreground=\"#6a6a6a\">%s</span>"
                 text = tform % common.escape_text(_("<edit>"))
 
-        self.textlayout = self.create_pango_layout('')
+        self.textlayout = self.create_pango_layout("")
         self.textlayout.set_markup(text)
         s = self.textlayout.get_pixel_size()
         xmin = s[0] + 12
@@ -314,7 +314,7 @@ class PedigreeBox_gdk(gtk.DrawingArea):
         self.shadow_gc.line_style = gtk.gdk.LINE_SOLID
         self.shadow_gc.line_width = 4
         if self.pigeon:
-            if self.pigeon.get_sex() == '0':
+            if self.pigeon.get_sex() == "0":
                 self.bg_gc.set_foreground(
                         self.get_colormap().alloc_color("#b9cfe7"))
                 self.border_gc.set_foreground(
@@ -360,10 +360,10 @@ class ExtraBox_gdk(gtk.DrawingArea):
         self.connect("expose_event", self.expose)
         self.connect("realize", self.realize)
 
-        self.text = ''
+        self.text = ""
         if pigeon is not None:
             extra = pigeon.get_extra()
-            self.text = common.escape_text('\n'.join(extra[:lines]))
+            self.text = common.escape_text("\n".join(extra[:lines]))
         self.textlayout = self.create_pango_layout(self.text)
         s = self.textlayout.get_pixel_size()
         xmin = s[0] + 12
@@ -379,7 +379,7 @@ class ExtraBox_gdk(gtk.DrawingArea):
         self.shadow_gc = self.window.new_gc()
         self.shadow_gc.line_style = gtk.gdk.LINE_SOLID
         self.shadow_gc.line_width = 4
-        if self.text != '':
+        if self.text != "":
             self.bg_gc.set_foreground(
                             self.get_colormap().alloc_color("#f0e68c"))
             self.border_gc.set_foreground(
