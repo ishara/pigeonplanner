@@ -115,7 +115,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
 
     def on_spinday_changed(self, widget):
         value = widget.get_value_as_int()
-        dstring = _("days") if value == 1 else _("day")
+        dstring = _("day") if value == 1 else _("days")
         widget.set_text("%s %s" % (value, dstring))
 
     def on_chkShowHidden_toggled(self, widget):
