@@ -248,7 +248,7 @@ class Startup(object):
 
         from pigeonplanner import database
 
-        if database.session.get_database_version() > database.SCHEMA_VERSION:
+        if database.session.get_database_version() > database.Schema.VERSION:
             from pigeonplanner import messages
             from pigeonplanner.ui.messagedialog import ErrorDialog
             ErrorDialog(messages.MSG_NEW_DATABASE)

@@ -79,14 +79,14 @@ def get_all_images():
 ##############
 def get_status(table, pindex):
     try:
-        columns = ", ".join(main.get_column_names(table))
+        columns = ", ".join(main.Schema.get_column_names(table))
     except KeyError:
         raise ValueError("Invalid table name '%s'" % table)
     session.cursor.execute("SELECT %s FROM %s WHERE pindex=?" % (columns, table), (pindex,))
     return session.cursor.fetchone()
 
 def add_status(table, data):
-    if not table in main.get_table_names():
+    if not table in main.Schema.get_table_names():
         raise ValueError("Invalid table name '%s'" % table)
     sqldata = utils.build_sql_insert_cols(data)
     sqldata["table"] = table
@@ -101,7 +101,7 @@ def update_status(table, pindex, data):
     session.connection.commit()
 
 def remove_status(table, pindex):
-    if not table in main.get_table_names():
+    if not table in main.Schema.get_table_names():
         raise ValueError("Invalid table name '%s'" % table)
     session.cursor.execute("DELETE FROM %s WHERE pindex=?" % table, (pindex,))
     session.connection.commit()

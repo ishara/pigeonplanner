@@ -77,7 +77,7 @@ def update_racepoint(racepoint, data):
 ##############
 def get_all_data(table):
     try:
-        column = main.get_column_names(table)[1]
+        column = main.Schema.get_column_names(table)[1]
     except KeyError:
         raise ValueError("Invalid table name '%s'" % table)
     session.cursor.execute("SELECT %s FROM %s ORDER BY %s ASC" % (column, table, column))
@@ -86,7 +86,7 @@ def get_all_data(table):
 def add_data(table, item):
     if not item: return
     try:
-        column = main.get_column_names(table)[1]
+        column = main.Schema.get_column_names(table)[1]
     except KeyError:
         raise ValueError("Invalid table name '%s'" % table)
     session.cursor.execute("INSERT OR IGNORE INTO %s(%s) VALUES(?)" % (table, column), (item,))
@@ -94,7 +94,7 @@ def add_data(table, item):
 
 def remove_data(table, item):
     try:
-        column = main.get_column_names(table)[1]
+        column = main.Schema.get_column_names(table)[1]
     except KeyError:
         raise ValueError("Invalid table name '%s'" % table)
     session.cursor.execute("DELETE FROM %s WHERE %s=?" % (table, column), (item,))
