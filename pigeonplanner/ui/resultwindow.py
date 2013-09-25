@@ -25,13 +25,13 @@ import datetime
 import gtk
 
 from pigeonplanner import common
-from pigeonplanner import config
 from pigeonplanner import builder
 from pigeonplanner import database
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.filechooser import PdfSaver
+from pigeonplanner.core import config
 from pigeonplanner.reportlib import (report, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports.results import ResultsReport, ResultsReportOptions

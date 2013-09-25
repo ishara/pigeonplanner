@@ -32,7 +32,6 @@ import gtk
 from pigeonplanner import core
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import config
 from pigeonplanner import checks
 from pigeonplanner import builder
 from pigeonplanner import messages
@@ -54,6 +53,7 @@ from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog, QuestionDial
 from pigeonplanner.core import errors
 from pigeonplanner.core import update
 from pigeonplanner.core import backup
+from pigeonplanner.core import config
 from pigeonplanner.reportlib import report
 from pigeonplanner.reports import get_pedigree
 from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions

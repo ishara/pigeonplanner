@@ -19,11 +19,11 @@
 import gtk
 
 from pigeonplanner import common
-from pigeonplanner import config
 from pigeonplanner import database
 from pigeonplanner import pigeonparser
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.core import config
 
 
 FILTER = 0

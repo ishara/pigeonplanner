@@ -36,8 +36,8 @@ import gtk
 import glib
 
 from pigeonplanner import const
-from pigeonplanner import config
 from pigeonplanner import database
+from pigeonplanner.core import config
 
 
 def get_sexdic():

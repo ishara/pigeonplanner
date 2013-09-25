@@ -133,7 +133,7 @@ class Startup(object):
             raise SystemExit(text)
 
     def setup_locale(self):
-        from pigeonplanner import config
+        from pigeonplanner.core import config
         language = config.get("options.language")
         localedomain = const.DOMAIN
         localedir = const.LANGDIR
@@ -215,7 +215,7 @@ class Startup(object):
             self.logger.debug("First run")
 
     def setup_theme(self):
-        from pigeonplanner import config
+        from pigeonplanner.core import config
         # Set theme
         themedir = ".\\share\\themes"
         if const.WINDOWS and os.path.exists(themedir):
@@ -327,7 +327,7 @@ def start_ui():
         ErrorDialog((_("Pigeon Planner needs Yapsy to run."), None, ""))
         return
 
-    from pigeonplanner import config
+    from pigeonplanner.core import config
     if config.get("options.check-for-updates"):
         updatethread = Thread(None, app.search_updates, None)
         updatethread.start()

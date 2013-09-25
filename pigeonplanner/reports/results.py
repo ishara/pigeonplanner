@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner import config
+from pigeonplanner.core import config
 from pigeonplanner.reports.common import HelperMethods
 from pigeonplanner.reportlib.basereport import Report, ReportOptions
 from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,

@@ -27,8 +27,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 from pigeonplanner import const
-from pigeonplanner import config
 from pigeonplanner import messages
+from pigeonplanner.core import config
 
 
 class UpdateError(Exception):
