@@ -32,6 +32,7 @@ from pigeonplanner.ui import utils
 from pigeonplanner.ui.widgets import pedigreeboxes
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import InfoDialog
+from pigeonplanner.core import enums
 
 
 #TODO: Cairo-drawn boxes mess up window drawing on Mac OS X
@@ -132,7 +133,7 @@ class DrawPedigree(object):
 
             lst = [None]*len(pos)
             build_tree(pigeonparser.parser, pigeon, 0, 1, lst)
-            self._draw(tables, pos, lst, int(pigeon.sex), detailed)
+            self._draw(tables, pos, lst, pigeon.get_sex(), detailed)
         else:
             pos = [
                    ((0, 4, 5), ((0,3),(5,3))),
@@ -148,8 +149,8 @@ class DrawPedigree(object):
                 sire , dam = pigeonparser.parser.get_parents(pigeon)
                 build_tree(pigeonparser.parser, sire, 0, 1, lstsire)
                 build_tree(pigeonparser.parser, dam, 0, 1, lstdam)
-            self._draw(tables[0], pos, lstsire, const.SIRE, detailed)
-            self._draw(tables[1], pos, lstdam, const.DAM, detailed)
+            self._draw(tables[0], pos, lstsire, enums.Sex.cock, detailed)
+            self._draw(tables[1], pos, lstdam, enums.Sex.hen, detailed)
 
     # Internal methods
     def _draw(self, table, positions, lst, sex, detailed):
@@ -177,9 +178,9 @@ class DrawPedigree(object):
             else:
                 box = pedigreeboxes.PedigreeBox_gdk(pigeon, child, detailed)
             try:
-                sex = int(pigeon.sex)
+                sex = pigeon.get_sex()
             except AttributeError:
-                sex = 0 if (index%2 == 1 or (index == 0 and sex == const.SIRE)) else 1
+                sex = 0 if (index%2 == 1 or (index == 0 and sex == enums.Sex.cock)) else 1
             box.set_sex(sex)
             box.connect("button-press-event", self.on_button_press, detailed)
             table.attach(box, x, y, w, h)
@@ -228,7 +229,7 @@ class DrawPedigree(object):
         DetailsDialog(pigeon, parent)
 
     def _edit_pigeon_details(self, widget, pigeon, child, sex, parent):
-        mode = const.ADD if pigeon is None else const.EDIT
+        mode = enums.Action.add if pigeon is None else enums.Action.edit
         dialog = DetailsDialog(pigeon, parent, mode)
         dialog.details.set_child(child)
         dialog.details.set_pedigree_mode(True)
@@ -247,7 +248,7 @@ class DrawPedigree(object):
             band, year = "", ""
         else:
             band, year = pigeon.get_band()
-        if pigeon.get_sex() == "0":
+        if pigeon.get_sex() == enums.Sex.cock:
             data = {"sire": band, "yearsire": year}
         else:
             data = {"dam": band, "yeardam": year}

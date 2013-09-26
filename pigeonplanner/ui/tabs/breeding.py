@@ -18,7 +18,6 @@
 
 import gtk
 
-from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import builder
 from pigeonplanner import database
@@ -30,6 +29,7 @@ from pigeonplanner.ui.dialogs import PigeonListDialog
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import errors
+from pigeonplanner.core import enums
 
 
 (COL_ID,
@@ -86,12 +86,12 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.buttongoto2.set_sensitive(success2)
 
     def on_buttonadd_clicked(self, widget):
-        self._mode = const.ADD
+        self._mode = enums.Action.add
         self._set_dialog_fields()
         self.widgets.editdialog.show()
 
     def on_buttonedit_clicked(self, widget):
-        self._mode = const.EDIT
+        self._mode = enums.Action.edit
         model, rowiter = self.widgets.selection.get_selected()
         self._set_dialog_fields(model[rowiter][COL_ID],
                                 model[rowiter][COL_PINDEX])
@@ -174,7 +174,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
                                self.widgets.listcheckedit2.get_active())
 
         # Update when editing record
-        if self._mode == const.EDIT:
+        if self._mode == enums.Action.edit:
             model, rowiter = self.widgets.selection.get_selected()
             rowid = self.widgets.treestore.get_value(rowiter, COL_ID)
             database.update_breeding(rowid, data)
@@ -188,7 +188,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
             self.widgets.selection.emit("changed")
         # Insert when adding record
-        elif self._mode == const.ADD:
+        elif self._mode == enums.Action.add:
             rowid = database.add_breeding(data)
             parent = self._get_or_create_parent_record(mate)
             rowiter = self.widgets.treestore.append(parent, [rowid, mate, date])
@@ -201,7 +201,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.editdialog.hide()
 
     def on_buttonsearchmate_clicked(self, widget):
-        sex = const.SIRE if self.pigeon.is_hen() else const.DAM
+        sex = enums.Sex.cock if self.pigeon.is_hen() else enums.Sex.hen
         dialog = PigeonListDialog(self.widgets.editdialog)
         dialog.fill_treeview(sex=sex)
         response = dialog.run()
@@ -274,7 +274,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def _add_child_pigeon(self, pindex, sire, dam, active):
         pigeon = None
         try:
-            pigeon = pigeonparser.parser.add_empty_pigeon(pindex, const.YOUNG,
+            pigeon = pigeonparser.parser.add_empty_pigeon(pindex, enums.Sex.unknown,
                                                           active, sire, dam)
         except ValueError:
             # Empty bandnumber

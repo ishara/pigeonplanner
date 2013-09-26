@@ -20,8 +20,8 @@ import os
 import logging
 logger = logging.getLogger(__name__)
 
+from . import enums
 from . import errors
-from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import database
 from pigeonplanner import thumbnail
@@ -47,7 +47,7 @@ def add_pigeon(data, status, statusdata):
         else:
             raise errors.PigeonAlreadyExistsHidden(pindex)
 
-    if status != const.ACTIVE:
+    if status != enums.Status.active:
         database.add_status(common.get_status(status), statusdata)
 
     # Save the data values
@@ -89,13 +89,13 @@ def update_pigeon(pigeon, data, status, statusdata):
     old_status = pigeon.get_active()
     if status != old_status:
         # Status has changed. Remove the old status and add the new data.
-        if old_status != const.ACTIVE:
+        if old_status != enums.Status.active:
             database.remove_status(common.get_status(old_status), pigeon.pindex)
-        if status != const.ACTIVE:
+        if status != enums.Status.active:
             database.add_status(common.get_status(status), statusdata)
     else:
         # Status stayed the same, just update those values
-        if status != const.ACTIVE:
+        if status != enums.Status.active:
             database.update_status(common.get_status(status), pigeon.pindex, statusdata)
 
     # Save the data values
@@ -110,7 +110,7 @@ def remove_pigeon(pigeon, remove_results=True):
     logger.debug("Start removing pigeon '%s'", pindex)
 
     status = pigeon.get_active()
-    if status != const.ACTIVE:
+    if status != enums.Status.active:
         database.remove_status(common.get_status(status), pindex)
 
     try:

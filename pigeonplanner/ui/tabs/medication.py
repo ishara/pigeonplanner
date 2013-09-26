@@ -18,7 +18,6 @@
 
 import gtk
 
-from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import builder
 from pigeonplanner import database
@@ -28,6 +27,7 @@ from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import ErrorDialog
+from pigeonplanner.core import enums
 from pigeonplanner.core import errors
 
 
@@ -75,7 +75,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             utils.popup_menu(event, entries)
 
     def on_buttonadd_clicked(self, widget):
-        self._mode = const.ADD
+        self._mode = enums.Action.add
         self._clear_dialog_widgets()
         self._fill_select_treeview()
         comboboxes.fill_combobox(self.widgets.comboloft,
@@ -84,7 +84,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.entrydate2.grab_focus()
 
     def on_buttonedit_clicked(self, widget):
-        self._mode = const.EDIT
+        self._mode = enums.Action.edit
         self._fill_select_treeview()
         comboboxes.fill_combobox(self.widgets.comboloft,
                                  database.get_all_data(database.Tables.LOFTS))
@@ -134,7 +134,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             ErrorDialog(msg.value, self.parent)
             return
         pigeons = [row[2] for row in self.widgets.liststoreselect if row[1]]
-        if self._mode == const.ADD:
+        if self._mode == enums.Action.add:
             data["medid"] = data["date"] + common.get_random_number(10)
             for pindex in pigeons:
                 data["pindex"] = pindex

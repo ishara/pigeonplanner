@@ -18,13 +18,13 @@
 
 import gtk
 
-from pigeonplanner import const
 from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui.widgets import latlongentry
 from pigeonplanner.ui.messagedialog import QuestionDialog
+from pigeonplanner.core import enums
 from pigeonplanner.core import errors
 
 
@@ -68,12 +68,12 @@ class AddressBook(builder.GtkBuilder):
         self.widgets.addressbookwindow.destroy()
 
     def on_buttonadd_clicked(self, widget):
-        self._mode = const.ADD
+        self._mode = enums.Action.add
         self._set_widgets(True)
         self._empty_entries()
 
     def on_buttonedit_clicked(self, widget):
-        self._mode = const.EDIT
+        self._mode = enums.Action.edit
         self._set_widgets(True)
 
     def on_buttonremove_clicked(self, widget):
@@ -95,7 +95,7 @@ class AddressBook(builder.GtkBuilder):
         except errors.InvalidInputError:
             return
         self._set_widgets(False)
-        if self._mode == const.ADD:
+        if self._mode == enums.Action.add:
             rowid = database.add_address(data)
             rowiter = self.widgets.liststore.insert(0, [rowid, data["name"]])
             self.widgets.selection.select_iter(rowiter)
@@ -153,7 +153,7 @@ class AddressBook(builder.GtkBuilder):
         utils.set_multiple_visible(self._normalbuttons, not value)
         utils.set_multiple_visible(self._editbuttons, value)
         show_me = database.get_address_data({"me": 1}) is None or \
-                    (self._mode == const.EDIT and
+                    (self._mode == enums.Action.edit and
                      database.get_address_data({"me": 1})[0] == self._get_address_key())
         utils.set_multiple_visible([self.widgets.checkme], show_me if value else False)
 

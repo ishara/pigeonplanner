@@ -18,7 +18,6 @@
 
 import gtk
 
-from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import builder
 from pigeonplanner import database
@@ -26,6 +25,7 @@ from pigeonplanner import messages
 from pigeonplanner import pigeonparser
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import QuestionDialog
+from pigeonplanner.core import enums
 
 
 class DataManager(builder.GtkBuilder):
@@ -90,7 +90,7 @@ class DataManager(builder.GtkBuilder):
         self.widgets.liststore.clear()
         for pindex, pigeon in pigeonparser.parser.pigeons.iteritems():
             if pigeon.get_visible(): continue
-            if int(pigeon.get_sex()) == const.YOUNG: continue
+            if pigeon.get_sex() == enums.Sex.unknown: continue
             is_parent = database.pigeon_is_a_parent(*pigeon.get_band())
             if not is_parent:
                 self.widgets.liststore.insert(0, [pigeon, False, pigeon.get_band_string()])

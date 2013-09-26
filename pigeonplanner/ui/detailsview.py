@@ -39,6 +39,7 @@ from pigeonplanner.ui.widgets import date
 from pigeonplanner.ui.widgets import sexentry
 from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.messagedialog import ErrorDialog, WarningDialog
+from pigeonplanner.core import enums
 from pigeonplanner.core import errors
 
 
@@ -71,11 +72,11 @@ class DetailsDialog(gtk.Dialog):
 
         self.details = DetailsView(self)
         self.vbox.pack_start(self.details.get_root_widget(), False, False)
-        if mode == const.ADD:
+        if mode == enums.Action.add:
             self.details.clear_details()
         else:
             self.details.set_details(pigeon)
-        if mode in (const.EDIT, const.ADD):
+        if mode in (enums.Action.edit, enums.Action.add):
             self.details.start_edit(mode)
             self.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                              gtk.STOCK_SAVE, RESPONSE_SAVE)
@@ -242,10 +243,10 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         return True
 
     def on_findsire_clicked(self, widget):
-        self._run_pigeondialog(const.SIRE)
+        self._run_pigeondialog(enums.Sex.cock)
 
     def on_finddam_clicked(self, widget):
-        self._run_pigeondialog(const.DAM)
+        self._run_pigeondialog(enums.Sex.hen)
 
     # Public methods
     def get_root_widget(self):
@@ -350,7 +351,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
     def start_edit(self, operation):
         self._operation = operation
-        if operation == const.EDIT:
+        if operation == enums.Action.edit:
             logger.debug("Start editing pigeon '%s'", self.pigeon.get_pindex())
             self.widgets.entrybandedit.set_band(
                                 *self.widgets.entryband.get_band(validate=False))
@@ -368,7 +369,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             self.widgets.combocolour.child.set_text(self.widgets.entrycolour.get_text())
             self.widgets.combostrain.child.set_text(self.widgets.entrystrain.get_text())
             self.widgets.comboloft.child.set_text(self.widgets.entryloft.get_text())
-            self.widgets.combosex.set_active(int(self.pigeon.get_sex()))
+            self.widgets.combosex.set_active(self.pigeon.get_sex())
 
             status = self.pigeon.get_active()
             self.widgets.combostatus.set_active(status)
@@ -394,7 +395,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             ErrorDialog(msg.value, self.parent)
             return True
 
-        if self._operation == const.EDIT:
+        if self._operation == enums.Action.edit:
             pindex = self.pigeon.get_pindex()
             data["pindex"] = common.get_pindex_from_band(data["band"], data["year"])
             status = self.widgets.combostatus.get_active()
@@ -411,7 +412,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 # This is a corner case. Some status date is incorrect, but the
                 # user choose another one. Don't bother him with this.
                 pass
-        elif self._operation == const.ADD:
+        elif self._operation == enums.Action.add:
             pindex = common.get_pindex_from_band(data["band"], data["year"])
             data["pindex"] = pindex
             status = self.widgets.combostatus.get_active()
@@ -453,30 +454,30 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
     def _set_status(self, pindex, status):
         self._set_status_image(status)
-        if status == const.DEAD:
+        if status == enums.Status.dead:
             data = database.get_status(database.Tables.DEAD, pindex)
             if data:
                 self.widgets.entrydatedead.set_text(data["date"])
                 self.widgets.textinfodead.get_buffer().set_text(data["info"])
-        elif status == const.SOLD:
+        elif status == enums.Status.sold:
             data = database.get_status(database.Tables.SOLD, pindex)
             if data:
                 self.widgets.entrydatesold.set_text(data["date"])
                 self.widgets.entrybuyersold.set_text(data["person"])
                 self.widgets.textinfosold.get_buffer().set_text(data["info"])
-        elif status == const.LOST:
+        elif status == enums.Status.lost:
             data = database.get_status(database.Tables.LOST, pindex)
             if data:
                 self.widgets.entrydatelost.set_text(data["date"])
                 self.widgets.entrypointlost.set_text(data["racepoint"])
                 self.widgets.textinfolost.get_buffer().set_text(data["info"])
-        elif status == const.BREEDER:
+        elif status == enums.Status.breeder:
             data = database.get_status(database.Tables.BREEDER, pindex)
             if data:
                 self.widgets.entrydatebreedfrom.set_text(data["start"])
                 self.widgets.entrydatebreedto.set_text(data["end"])
                 self.widgets.textinfobreeder.get_buffer().set_text(data["info"])
-        elif status == const.LOANED:
+        elif status == enums.Status.loaned:
             data = database.get_status(database.Tables.LOANED, pindex)
             if data:
                 self.widgets.entrydateloan.set_text(data["loaned"])
@@ -498,34 +499,34 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
     def _get_info_for_status(self, status, pindex=None):
         pindex = pindex or self.pigeon.get_pindex()
 
-        if status == const.DEAD:
+        if status == enums.Status.dead:
             bffr = self.widgets.textinfodead.get_buffer()
             return {"date": self.widgets.entrydatedead.get_text(),
                     "info": bffr.get_text(*bffr.get_bounds()),
                     "pindex": pindex}
 
-        if status == const.SOLD:
+        if status == enums.Status.sold:
             bffr = self.widgets.textinfosold.get_buffer()
             return {"person": self.widgets.entrybuyersold.get_text(),
                     "date": self.widgets.entrydatesold.get_text(),
                     "info": bffr.get_text(*bffr.get_bounds()),
                     "pindex": pindex}
 
-        if status == const.LOST:
+        if status == enums.Status.lost:
             bffr = self.widgets.textinfolost.get_buffer()
             return {"racepoint": self.widgets.entrypointlost.get_text(),
                     "date": self.widgets.entrydatelost.get_text(),
                     "info": bffr.get_text(*bffr.get_bounds()),
                     "pindex": pindex}
 
-        if status == const.BREEDER:
+        if status == enums.Status.breeder:
             bffr = self.widgets.textinfobreeder.get_buffer()
             return {"start": self.widgets.entrydatebreedfrom.get_text(),
                     "end": self.widgets.entrydatebreedto.get_text(),
                     "info": bffr.get_text(*bffr.get_bounds()),
                     "pindex": pindex}
 
-        if status == const.LOANED:
+        if status == enums.Status.loaned:
             bffr = self.widgets.textinfoloan.get_buffer()
             return {"loaned": self.widgets.entrydateloan.get_text(),
                     "back": self.widgets.entrydateloanback.get_text(),

@@ -142,30 +142,3 @@ SEX_IMGS = {"0": os.path.join(IMAGEDIR, "symbol_male.png"),
             "1": os.path.join(IMAGEDIR, "symbol_female.png"),
             "2": os.path.join(IMAGEDIR, "symbol_young.png")}
 
-(SIRE,
- DAM,
- YOUNG) = range(3)
-
-(ADD,
- EDIT) = range(2)
-
-(CREATE,
- RESTORE) = range(2)
-
-(DEAD,
- ACTIVE,
- SOLD,
- LOST,
- BREEDER,
- LOANED) = range(6)
-
-(ERROR,
- WARNING,
- QUESTION,
- INFO) = range(4)
-
-(PRINT,
- PREVIEW,
- MAIL,
- SAVE) = range(4)
-

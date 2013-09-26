@@ -50,6 +50,7 @@ from pigeonplanner.ui import pedigreewindow
 from pigeonplanner.ui.widgets import treeview
 from pigeonplanner.ui.widgets import statusbar
 from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog, QuestionDialog
+from pigeonplanner.core import enums
 from pigeonplanner.core import errors
 from pigeonplanner.core import update
 from pigeonplanner.core import backup
@@ -247,12 +248,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.resultstab.set_columns()
 
     def on_edit_finished(self, detailsview, pigeon, operation):
-        if operation == const.EDIT:
+        if operation == enums.Action.edit:
             model, paths = self.widgets.selection.get_selected_rows()
             path = self.widgets.treeview.get_child_path(paths[0])
             self.widgets.treeview.update_pigeon(pigeon, path=path)
             self.widgets.selection.emit("changed")
-        elif operation == const.ADD:
+        elif operation == enums.Action.add:
             if not pigeon.get_visible(): return
             self.widgets.treeview.add_pigeon(pigeon)
             self.widgets.statusbar.display_message(
@@ -311,13 +312,13 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
     def menubackup_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = dialogs.BackupDialog(self, const.CREATE)
+        dialog = dialogs.BackupDialog(self, enums.Backup.create)
         dialog.run()
         dialog.destroy()
 
     def menurestore_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = dialogs.BackupDialog(self, const.RESTORE)
+        dialog = dialogs.BackupDialog(self, enums.Backup.restore)
         dialog.run()
         dialog.destroy()
 
@@ -343,7 +344,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         logdialog.LogDialog()
 
     def menuadd_activate(self, widget):
-        dialog = detailsview.DetailsDialog(None, self, const.ADD)
+        dialog = detailsview.DetailsDialog(None, self, enums.Action.add)
         dialog.details.connect("edit-finished", self.on_edit_finished)
 
     def menuaddrange_activate(self, widget):
@@ -359,7 +360,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         model, paths = self.widgets.selection.get_selected_rows()
         if len(paths) != 1: return
         pigeon = self.widgets.treeview.get_selected_pigeon()
-        dialog = detailsview.DetailsDialog(pigeon, self, const.EDIT)
+        dialog = detailsview.DetailsDialog(pigeon, self, enums.Action.edit)
         dialog.details.connect("edit-finished", self.on_edit_finished)
 
     def menuremove_activate(self, widget):

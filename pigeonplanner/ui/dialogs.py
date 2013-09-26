@@ -35,6 +35,7 @@ from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.utils import HiddenPigeonsMixin
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import InfoDialog
+from pigeonplanner.core import enums
 
 
 class AboutDialog(gtk.AboutDialog):
@@ -146,7 +147,7 @@ class BackupDialog(gtk.Dialog):
         self.set_resizable(False)
         self.set_has_separator(False)
 
-        if backuptype == const.CREATE:
+        if backuptype == enums.Backup.create:
             self.set_title(_("Create backup"))
             label = gtk.Label(_("Choose a directory where to save the backup"))
             label.set_padding(30, 0)
@@ -460,7 +461,7 @@ class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
             if pindex is not None and pindex == pigeon.get_pindex():
                 continue
             # If sex is given, only include these
-            if sex is not None and not sex == int(pigeon.get_sex()):
+            if sex is not None and not sex == pigeon.get_sex():
                 continue
             # If year is given, exclude older pigeons
             if year is not None and int(year) < int(pigeon.year):

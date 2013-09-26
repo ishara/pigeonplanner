@@ -18,7 +18,6 @@
 
 import gtk
 
-from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import builder
 from pigeonplanner import messages
@@ -29,6 +28,7 @@ from pigeonplanner.ui import resultwindow
 from pigeonplanner.ui import resultparser
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog
+from pigeonplanner.core import enums
 from pigeonplanner.core import errors
 from pigeonplanner.core import config
 
@@ -90,7 +90,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         resultparser.ResultParser(self.parent, pigeonparser.parser.pigeons.keys())
 
     def on_buttonadd_clicked(self, widget):
-        self._mode = const.ADD
+        self._mode = enums.Action.add
         values = [common.get_date(), "", 1, 1, "", "", "", "", "", ""]
         self._set_dialog(self._mode, values)
 
@@ -109,7 +109,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                   model_race.get_value(rowiter_race, COL_WIND) or "",
                   model.get_value(rowiter, COL_COMMENT) or "",
                   ]
-        self._mode = const.EDIT
+        self._mode = enums.Action.edit
         self._set_dialog(self._mode, result)
 
     def on_buttonremove_clicked(self, widget):
@@ -138,7 +138,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             place = "-"
         else:
             cof = common.calculate_coefficient(place, data["out"], True)
-        if self._mode == const.ADD:
+        if self._mode == enums.Action.add:
             data["pindex"] = self.pindex
             if database.result_exists(data):
                 ErrorDialog(messages.MSG_RESULT_EXISTS, self.parent)
@@ -159,7 +159,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                                                COL_WIND, data["wind"],
                                                COL_WEATHER, data["weather"])
             database.add_result(data)
-        elif self._mode == const.EDIT:
+        elif self._mode == enums.Action.edit:
             model, node = self.widgets.selection.get_selected()
             key = self.widgets.liststore.get_value(node, 0)
             database.update_result_for_key(key, data)
@@ -299,10 +299,10 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         """
 
         self._set_entry_values(values)
-        text = _("Edit result for:") if mode == const.EDIT else _("Add result for:")
+        text = _("Edit result for:") if mode == enums.Action.edit else _("Add result for:")
         self.widgets.labelmode.set_text(text)
         #TODO: Setting modal doesn't work
-        self.widgets.dialog.set_modal(mode == const.EDIT)
+        self.widgets.dialog.set_modal(mode == enums.Action.edit)
         self.widgets.dialog.show()
         self.widgets.entrydate.grab_focus()
 

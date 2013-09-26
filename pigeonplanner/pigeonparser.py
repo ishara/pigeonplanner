@@ -20,9 +20,9 @@ Parser to get all pigeons
 """
 
 
-from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import database
+from pigeonplanner.core import enums
 
 
 class PigeonParser(object):
@@ -49,12 +49,12 @@ class PigeonParser(object):
         sire_pindex = common.get_pindex_from_band(*pigeon.get_sire())
         sire = self.get_pigeon(sire_pindex)
         if sire is None and sire_pindex != "":
-            sire = self.add_empty_pigeon(sire_pindex, const.SIRE, False)
+            sire = self.add_empty_pigeon(sire_pindex, enums.Sex.cock, False)
 
         dam_pindex = common.get_pindex_from_band(*pigeon.get_dam())
         dam = self.get_pigeon(dam_pindex)
         if dam is None and dam_pindex != "":
-            dam = self.add_empty_pigeon(dam_pindex, const.DAM, False)
+            dam = self.add_empty_pigeon(dam_pindex, enums.Sex.hen, False)
 
         return sire, dam
 
@@ -146,10 +146,10 @@ class Pigeon(object):
         return common.get_sex(self.sex)
 
     def is_cock(self):
-        return int(self.sex) == const.SIRE
+        return int(self.sex) == enums.Sex.cock
 
     def is_hen(self):
-        return int(self.sex) == const.DAM
+        return int(self.sex) == enums.Sex.hen
 
     def get_visible(self):
         return self.show

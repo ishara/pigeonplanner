@@ -23,9 +23,9 @@ Pedigree widgets
 
 import gtk
 
-from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import thumbnail
+from pigeonplanner.core import enums
 
 
 class PedigreeBox(gtk.DrawingArea):
@@ -54,10 +54,10 @@ class PedigreeBox(gtk.DrawingArea):
         if self.pigeon:
             self.editable = True
             self.text = self.pigeon.get_band_string(True)
-            if int(self.pigeon.get_sex()) == const.SIRE:
+            if self.pigeon.get_sex() == enums.Sex.cock:
                 self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
                 self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
-            elif int(self.pigeon.get_sex()) == const.DAM:
+            elif self.pigeon.get_sex() == enums.Sex.hen:
                 self.bgcolor = (255/256.0, 205/256.0, 241/256.0)
                 self.bordercolor = (135/256.0, 32/256.0, 106/256.0)
             else:
@@ -314,7 +314,7 @@ class PedigreeBox_gdk(gtk.DrawingArea):
         self.shadow_gc.line_style = gtk.gdk.LINE_SOLID
         self.shadow_gc.line_width = 4
         if self.pigeon:
-            if self.pigeon.get_sex() == "0":
+            if self.pigeon.get_sex() == enums.Sex.cock:
                 self.bg_gc.set_foreground(
                         self.get_colormap().alloc_color("#b9cfe7"))
                 self.border_gc.set_foreground(

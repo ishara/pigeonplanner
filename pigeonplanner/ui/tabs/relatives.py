@@ -28,6 +28,7 @@ from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.utils import HiddenPigeonsMixin
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import InfoDialog
+from pigeonplanner.core import enums
 
 
 class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
@@ -106,7 +107,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         if not pigeon.get_pindex() in pigeonparser.parser.pigeons:
             return
 
-        dialog = DetailsDialog(pigeon, self.mainwindow, const.EDIT)
+        dialog = DetailsDialog(pigeon, self.mainwindow, enums.Action.edit)
         dialog.details.set_details(pigeon)
 
     def on_goto_pigeon(self, widget, pigeon):
