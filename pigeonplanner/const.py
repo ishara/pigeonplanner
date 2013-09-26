@@ -138,7 +138,4 @@ LOG_FORMAT_CLI = "%(name)s %(levelname)s: %(message)s"
 DATE_FORMAT = "%Y-%m-%d"
 
 LOGO_IMG = os.path.join(IMAGEDIR, "icon_logo.png")
-SEX_IMGS = {"0": os.path.join(IMAGEDIR, "symbol_male.png"),
-            "1": os.path.join(IMAGEDIR, "symbol_female.png"),
-            "2": os.path.join(IMAGEDIR, "symbol_young.png")}
 

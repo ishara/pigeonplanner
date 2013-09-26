@@ -118,7 +118,7 @@ class PigeonImageWidget(gtk.EventBox):
         self._imagewidget = gtk.Image()
         self._imagewidget.set_size_request(200, 200)
         self.add(self._imagewidget)
-        self._imagepath = None
+        self._imagepath = ""
         self.set_default_image()
 
     def on_enter_notify_event(self, widget, event):
@@ -163,9 +163,9 @@ class PigeonImageWidget(gtk.EventBox):
     def set_default_image(self, widget=None):
         logo = gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
         self._imagewidget.set_from_pixbuf(logo)
-        self._imagepath = None
+        self._imagepath = ""
 
-    def set_image(self, path=None):
+    def set_image(self, path=""):
         if path:
             pixbuf = thumbnail.get_image(path)
         else:

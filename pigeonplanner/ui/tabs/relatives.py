@@ -19,7 +19,7 @@
 import gtk
 import gtk.gdk
 
-from pigeonplanner import const
+from pigeonplanner import common
 from pigeonplanner import messages
 from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
@@ -125,28 +125,25 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             pindex_sire = pigeon.get_sire_pindex()
             pindex_dam = pigeon.get_dam_pindex()
             sex = pigeon.get_sex()
+            seximg = common.get_sex_image(sex)
             # Offspring
             if pindex_sire == pindex_selected or pindex_dam == pindex_selected:
-                self._liststoreoff.insert(0, [pigeon, ring, year, sex,
-                            gtk.gdk.pixbuf_new_from_file(const.SEX_IMGS[sex])])
+                self._liststoreoff.insert(0, [pigeon, ring, year, sex, seximg])
             # Half relatives
             if pindex_sire_sel and pindex_sire_sel == pindex_sire and not\
                (pindex_sire_sel == pindex_sire and pindex_dam_sel == pindex_dam):
                 self._liststorehalf.insert(0, [pigeon, ring, year,
-                                               pigeon.get_sire_string(True), sex,
-                            gtk.gdk.pixbuf_new_from_file(const.SEX_IMGS[sex])])
+                                               pigeon.get_sire_string(True), sex, seximg])
             if pindex_dam_sel and pindex_dam_sel == pindex_dam and not\
                (pindex_sire_sel == pindex_sire and pindex_dam_sel == pindex_dam):
                 self._liststorehalf.insert(0, [pigeon, ring, year,
-                                               pigeon.get_dam_string(True), sex,
-                            gtk.gdk.pixbuf_new_from_file(const.SEX_IMGS[sex])])
+                                               pigeon.get_dam_string(True), sex, seximg])
             # Direct relatives
             # We need both sire and dam to retrieve these
             if not pindex_sire_sel or not pindex_dam_sel: continue
             if pindex_sire_sel == pindex_sire and pindex_dam_sel == pindex_dam\
                and not pindex == pindex_selected:
-                self._liststoredirect.insert(0, [pigeon, ring, year, sex,
-                            gtk.gdk.pixbuf_new_from_file(const.SEX_IMGS[sex])])
+                self._liststoredirect.insert(0, [pigeon, ring, year, sex, seximg])
 
         self._liststoredirect.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self._liststoredirect.set_sort_column_id(2, gtk.SORT_ASCENDING)

@@ -52,7 +52,7 @@ class Schema(BaseSchema):
                          ("pindex", "TEXT", "UNIQUE NOT NULL"),
                          ("band", "TEXT", "NOT NULL"),
                          ("year", "TEXT", "NOT NULL"),
-                         ("sex", "TEXT", "NOT NULL"),
+                         ("sex", "INTEGER", "NOT NULL"),
                          ("show", "INTEGER", "DEFAULT 1"),
                          ("active", "INTEGER", "DEFAULT 1"),
                          ("colour", "TEXT", "DEFAULT ''"),
@@ -221,4 +221,23 @@ class Schema(BaseSchema):
         for table in cls.get_table_names():
             logger.debug("Recreating %s table" % table)
             session.recreate_table(table)
+
+        # Make sure all data have the correct type. This should fix an issues where
+        # the pigeon sex was sometimes stored as a str instead of an int.
+        logger.debug("Updating the sexcolumn values to integers")
+        session.cursor.execute("UPDATE Pigeons SET sex=cast(sex AS integer)")
+
+        # Because there were no default values in the past, it could happen that
+        # NULL was inserted.
+        # The database matches the schema by now, so we can use the local schema
+        # functions instead of querying the database.
+        logger.debug("Update NULL values to the default value")
+        for tablename, columndata in cls.SCHEMA.items():
+            for columnname, datatype, constraints in columndata:
+                if not "DEFAULT" in constraints:
+                    continue
+                clist = constraints.split()
+                default = clist[clist.index("DEFAULT")+1]
+                session.cursor.execute("UPDATE %s SET %s=%s WHERE %s IS NULL" % (tablename, columnname, default, columnname))
+        session.connection.commit()
 

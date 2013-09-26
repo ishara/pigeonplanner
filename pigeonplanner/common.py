@@ -37,21 +37,30 @@ import glib
 
 from pigeonplanner import const
 from pigeonplanner import database
+from pigeonplanner.core import enums
 from pigeonplanner.core import config
 
 
 def get_sexdic():
-    return {"0": _("Cock"), "1": _("Hen"), "2": _("Young bird")}
+    return {enums.Sex.cock: _("Cock"),
+            enums.Sex.hen: _("Hen"),
+            enums.Sex.unknown: _("Young bird")}
 
 def get_sex(sex):
     return get_sexdic()[sex]
 
+SEX_IMGS = {enums.Sex.cock: os.path.join(const.IMAGEDIR, "symbol_male.png"),
+            enums.Sex.hen: os.path.join(const.IMAGEDIR, "symbol_female.png"),
+            enums.Sex.unknown: os.path.join(const.IMAGEDIR, "symbol_young.png")}
 def get_sex_image(sex):
-    return gtk.gdk.pixbuf_new_from_file(const.SEX_IMGS[sex])
+    return gtk.gdk.pixbuf_new_from_file(SEX_IMGS[sex])
 
-statusdic = {0: database.Tables.DEAD, 1: "Active",
-             2: database.Tables.SOLD, 3: database.Tables.LOST,
-             4: database.Tables.BREEDER, 5: database.Tables.LOANED}
+statusdic = {enums.Status.dead: database.Tables.DEAD,
+             enums.Status.active: "Active",
+             enums.Status.sold: database.Tables.SOLD,
+             enums.Status.lost: database.Tables.LOST,
+             enums.Status.breeder: database.Tables.BREEDER,
+             enums.Status.loaned: database.Tables.LOANED}
 def get_status(status):
     return statusdic[status]
 
@@ -131,11 +140,11 @@ def count_active_pigeons():
 
         total += 1
 
-        if pigeon["sex"] == "0":
+        if pigeon["sex"] == enums.Sex.cock:
             cocks += 1
-        elif pigeon["sex"] == "1":
+        elif pigeon["sex"] == enums.Sex.hen:
             hens += 1
-        elif pigeon["sex"] == "2":
+        elif pigeon["sex"] == enums.Sex.unknown:
             ybirds += 1
 
     return total, cocks, hens, ybirds

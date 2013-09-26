@@ -16,16 +16,13 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from enum import Enum
-
-
-class Sex(Enum):
+class Sex:
     cock = 0
     hen = 1
     unknown = 2
 
 
-class Status(Enum):
+class Status:
     dead = 0
     active = 1
     sold = 2
@@ -34,12 +31,12 @@ class Status(Enum):
     loaned = 5
 
 
-class Action(Enum):
+class Action:
     add = 1
     edit = 2
 
 
-class Backup(Enum):
+class Backup:
     create = 1
     restore = 2
 
