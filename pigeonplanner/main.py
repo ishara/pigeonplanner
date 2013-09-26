@@ -327,6 +327,13 @@ def start_ui():
         ErrorDialog((_("Pigeon Planner needs Yapsy to run."), None, ""))
         return
 
+    try:
+        import enum
+    except ImportError:
+        from pigeonplanner.ui.messagedialog import ErrorDialog
+        ErrorDialog((_("Pigeon Planner needs enum34 to run."), None, ""))
+        return
+
     from pigeonplanner.core import config
     if config.get("options.check-for-updates"):
         updatethread = Thread(None, app.search_updates, None)

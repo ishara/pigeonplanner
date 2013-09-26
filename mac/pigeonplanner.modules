@@ -21,6 +21,7 @@
             <dep package="setuptools"/>
             <dep package="geopy"/>
             <dep package="yapsy"/>
+            <dep package="enum34"/>
         </dependencies>
     </metamodule>
     <repository type="tarball" name="pypi"
@@ -36,5 +37,9 @@
     <distutils id="yapsy">
         <branch repo="pypi" version="1.10.2-pythons2n3"
             module="Y/Yapsy/Yapsy-1.10.2-pythons2n3.tar.gz"/>
+    </distutils>
+    <distutils id="enum34">
+        <branch repo="pypi" version="0.9.18"
+            module="e/enum34/enum34-0.9.18.tar.gz"/>
     </distutils>
 </moduleset>
