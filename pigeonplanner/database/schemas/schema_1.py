@@ -181,8 +181,21 @@ class Schema(BaseSchema):
     }
 
     @classmethod
+    def create_new(cls, session):
+        for table_name in cls.get_table_names():
+            column_sql = cls.get_columns_sql(table_name)
+            session.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table_name, column_sql))
+        session.set_database_version(cls.VERSION)
+
+    @classmethod
     def migrate(cls, session):
         logger.debug("Migrating from 0 to 1")
+
+        # Make sure all tables from the current schema exist.
+        # Do this first in case a table is missing.
+        for table_name in cls.get_table_names():
+            column_sql = cls.get_columns_sql(table_name)
+            session.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table_name, column_sql))
 
         # These are some migrations normally done by the old check method.
         # They are from old Pigeon Planner versions, but we better make sure these
@@ -211,12 +224,6 @@ class Schema(BaseSchema):
         logger.debug("Removing Events table")
         session.remove_table("Events")
 
-        # Make sure all tables from the current schema exist
-        for table_name in cls.get_table_names():
-            column_sql = cls.get_columns_sql(table_name)
-            session.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table_name, column_sql))
-        session.connection.commit()
-
         # Column constraints were added for all tables
         for table in cls.get_table_names():
             logger.debug("Recreating %s table" % table)
@@ -239,5 +246,7 @@ class Schema(BaseSchema):
                 clist = constraints.split()
                 default = clist[clist.index("DEFAULT")+1]
                 session.cursor.execute("UPDATE %s SET %s=%s WHERE %s IS NULL" % (tablename, columnname, default, columnname))
+
+        # Commit all migration changes
         session.connection.commit()
 

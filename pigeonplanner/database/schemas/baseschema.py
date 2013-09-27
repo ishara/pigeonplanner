@@ -29,6 +29,10 @@ class BaseSchema(object):
         raise NotImplementedError
 
     @classmethod
+    def create_new(cls, session):
+        raise NotImplementedError
+
+    @classmethod
     def get_table_names(cls):
         return cls.SCHEMA.keys()
 

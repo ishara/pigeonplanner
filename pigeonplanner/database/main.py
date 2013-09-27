@@ -39,6 +39,9 @@ class DatabaseSession(object):
         self.is_new_db = not os.path.exists(self.dbfile)
         self.connection, self.cursor = self.__db_connect()
 
+        if self.is_new_db:
+            Schema.create_new(self)
+
     def __db_connect(self):
         try:
             conn = sqlite3.connect(self.dbfile,
