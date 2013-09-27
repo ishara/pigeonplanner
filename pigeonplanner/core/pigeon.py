@@ -37,6 +37,9 @@ def add_pigeon(data, status, statusdata):
     @param statusdata:
     """
 
+    if not data["sex"] in (enums.Sex.cock, enums.Sex.hen, enums.Sex.unknown):
+        raise ValueError("Sex value has to be of type enums.Sex, but got '%r'" % data["sex"])
+
     try:
         database.add_pigeon(data)
     except database.InvalidValueError:
@@ -66,6 +69,9 @@ def update_pigeon(pigeon, data, status, statusdata):
     @param status: One of the status constants
     @param statusdata:
     """
+
+    if not data["sex"] in (enums.Sex.cock, enums.Sex.hen, enums.Sex.unknown):
+        raise ValueError("Sex value has to be of type enums.Sex, but got '%r'" % data["sex"])
 
     try:
         database.update_pigeon(pigeon.pindex, data)

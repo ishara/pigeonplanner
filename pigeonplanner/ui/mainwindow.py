@@ -514,7 +514,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         rangefrom = self.widgets.entryRangeFrom.get_text()
         rangeto = self.widgets.entryRangeTo.get_text()
         rangeyear = self.widgets.entryRangeYear.get_text()
-        rangesex = self.widgets.combosexrange.get_active_text()
+        rangesex = self.widgets.combosexrange.get_sex()
 
         try:
             checks.check_ring_entry(rangefrom, rangeyear)

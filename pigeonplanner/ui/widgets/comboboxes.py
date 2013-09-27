@@ -76,11 +76,11 @@ class SexCombobox(gtk.ComboBox):
     __gtype_name__ = "SexCombobox"
 
     def __init__(self):
-        store = gtk.ListStore(str, str, gtk.gdk.Pixbuf)
+        store = gtk.ListStore(int, str, gtk.gdk.Pixbuf)
         gtk.ComboBox.__init__(self, store)
 
         for key, value in common.get_sexdic().items():
-            store.insert(int(key), [key, value, common.get_sex_image(key)])
+            store.insert(key, [key, value, common.get_sex_image(key)])
 
         pb = gtk.CellRendererPixbuf()
         self.pack_start(pb, expand=False)
@@ -91,6 +91,9 @@ class SexCombobox(gtk.ComboBox):
 
         self.set_active(0)
         self.show()
+
+    def get_sex(self):
+        return self.get_active()
 
 
 class StatusCombobox(gtk.ComboBox):

@@ -72,7 +72,7 @@ class PigeonParser(object):
         band, year = common.get_band_from_pindex(pindex)
         sband, syear = common.get_band_from_pindex(sire)
         dband, dyear = common.get_band_from_pindex(dam)
-        data = {"pindex": pindex, "band": band, "year": year, "sex": str(sex),
+        data = {"pindex": pindex, "band": band, "year": year, "sex": sex,
                 "show": int(visible), "sire": sband, "yearsire": syear,
                 "dam": dband, "yeardam": dyear}
         rowid = database.add_pigeon(data)
@@ -146,10 +146,10 @@ class Pigeon(object):
         return common.get_sex(self.sex)
 
     def is_cock(self):
-        return int(self.sex) == enums.Sex.cock
+        return self.sex == enums.Sex.cock
 
     def is_hen(self):
-        return int(self.sex) == enums.Sex.hen
+        return self.sex == enums.Sex.hen
 
     def get_visible(self):
         return self.show

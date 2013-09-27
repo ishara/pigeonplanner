@@ -307,7 +307,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         data = {"band": ring, "year": year, "show": show,
                 "sire": ringsire, "yearsire": yearsire,
                 "dam": ringdam, "yeardam": yeardam,
-                "sex": self.widgets.combosex.get_active_text(),
+                "sex": self.widgets.combosex.get_sex(),
                 "active": self.widgets.combostatus.get_active(),
                 "colour": self.widgets.combocolour.child.get_text(),
                 "name": self.widgets.entrynameedit.get_text(),
