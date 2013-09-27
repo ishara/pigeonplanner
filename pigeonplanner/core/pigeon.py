@@ -54,9 +54,9 @@ def add_pigeon(data, status, statusdata):
         database.add_status(common.get_status(status), statusdata)
 
     # Save the data values
-    database.add_data(database.Tables.COLOURS, data["colour"])
-    database.add_data(database.Tables.STRAINS, data["strain"])
-    database.add_data(database.Tables.LOFTS, data["loft"])
+    database.add_data(database.Tables.COLOURS, data.get("colour", ""))
+    database.add_data(database.Tables.STRAINS, data.get("strain", ""))
+    database.add_data(database.Tables.LOFTS, data.get("loft", ""))
 
     return pigeonparser.parser.add_pigeon(pindex=data["pindex"])
 
@@ -105,9 +105,9 @@ def update_pigeon(pigeon, data, status, statusdata):
             database.update_status(common.get_status(status), pigeon.pindex, statusdata)
 
     # Save the data values
-    database.add_data(database.Tables.COLOURS, data["colour"])
-    database.add_data(database.Tables.STRAINS, data["strain"])
-    database.add_data(database.Tables.LOFTS, data["loft"])
+    database.add_data(database.Tables.COLOURS, data.get("colour", ""))
+    database.add_data(database.Tables.STRAINS, data.get("strain", ""))
+    database.add_data(database.Tables.LOFTS, data.get("loft", ""))
 
     return pigeonparser.parser.update_pigeon(pigeon.pindex, data["pindex"])
 
