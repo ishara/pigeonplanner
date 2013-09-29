@@ -29,7 +29,6 @@ logger = logging.getLogger(__name__)
 
 import gtk
 
-from pigeonplanner import core
 from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import checks
@@ -55,6 +54,7 @@ from pigeonplanner.core import errors
 from pigeonplanner.core import update
 from pigeonplanner.core import backup
 from pigeonplanner.core import config
+from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.reportlib import report
 from pigeonplanner.reports import get_pedigree
 from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions
@@ -399,7 +399,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             else:
                 remove_results = not self.widgets.chkResults.get_active()
                 for pigeon in pigeons:
-                    core.pigeon.remove_pigeon(pigeon, remove_results)
+                    corepigeon.remove_pigeon(pigeon, remove_results)
 
             # Reverse the pathlist so we can safely remove each row without
             # having problems with invalid paths.

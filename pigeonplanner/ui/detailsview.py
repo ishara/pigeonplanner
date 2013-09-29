@@ -24,7 +24,6 @@ import gtk
 import gtk.gdk
 import gobject
 
-from pigeonplanner import core
 from pigeonplanner import const
 from pigeonplanner import common
 from pigeonplanner import builder
@@ -41,6 +40,7 @@ from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.messagedialog import ErrorDialog, WarningDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import errors
+from pigeonplanner.core import pigeon as corepigeon
 
 
 RESPONSE_EDIT = 10
@@ -401,11 +401,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             status = self.widgets.combostatus.get_active()
             statusdata = self._get_info_for_status(status, pindex)
             try:
-                pigeon = core.pigeon.update_pigeon(self.pigeon, data, status, statusdata)
-            except core.errors.PigeonAlreadyExists:
+                pigeon = corepigeon.update_pigeon(self.pigeon, data, status, statusdata)
+            except errors.PigeonAlreadyExists:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
                 return False
-            except core.errors.PigeonAlreadyExistsHidden:
+            except errors.PigeonAlreadyExistsHidden:
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
                     database.update_pigeon(pindex, {"show": 1})
             except errors.InvalidInputError:
@@ -418,11 +418,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             status = self.widgets.combostatus.get_active()
             statusdata = self._get_info_for_status(status, pindex)
             try:
-                pigeon = core.pigeon.add_pigeon(data, status, statusdata)
-            except core.errors.PigeonAlreadyExists:
+                pigeon = corepigeon.add_pigeon(data, status, statusdata)
+            except errors.PigeonAlreadyExists:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
                 return False
-            except core.errors.PigeonAlreadyExistsHidden:
+            except errors.PigeonAlreadyExistsHidden:
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
                     database.update_pigeon(pindex, {"show": 1})
             except errors.InvalidInputError:
