@@ -34,13 +34,21 @@ class InvalidValueError(Exception): pass
 
 
 class DatabaseSession(object):
-    def __init__(self, dbfile=None):
+    def __init__(self):
+        self.dbfile = None
+        self.connection = None
+        self.cursor = None
+
+    def open(self, dbfile=None):
         self.dbfile = dbfile or const.DATABASE
         self.is_new_db = not os.path.exists(self.dbfile)
         self.connection, self.cursor = self.__db_connect()
 
         if self.is_new_db:
             Schema.create_new(self)
+
+    def close(self):
+        self.connection.close()
 
     def __db_connect(self):
         try:
@@ -99,9 +107,6 @@ class DatabaseSession(object):
     ##############
     ##  Maintenance
     ##############
-    def close(self):
-        self.connection.close()
-
     def get_database_version(self):
         self.cursor.execute("PRAGMA user_version")
         return self.cursor.fetchone()[0]
