@@ -10,6 +10,7 @@ recursive-include languages *
 recursive-include mac *
 recursive-include po *
 recursive-include win *
+recursive-include tests *
 
 global-exclude *.pyc
 global-exclude *.pyo
