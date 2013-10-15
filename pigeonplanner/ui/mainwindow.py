@@ -95,8 +95,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
          <menuitem action="Quit"/>
       </menu>
       <menu action="EditMenu">
-         <menuitem action="Search"/>
-         <separator/>
          <menuitem action="SelectAll"/>
          <separator/>
          <menuitem action="Preferences"/>
@@ -325,11 +323,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def menuclose_activate(self, widget):
         logger.debug(common.get_function_name())
         self.quit_program()
-
-    def menusearch_activate(self, widget):
-        logger.debug(common.get_function_name())
-        dialog = dialogs.SearchDialog(self)
-        dialog.run()
 
     def menuselectall_activate(self, widget):
         logger.debug(common.get_function_name())

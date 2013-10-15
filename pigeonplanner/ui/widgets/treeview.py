@@ -22,12 +22,76 @@ from pigeonplanner import common
 from pigeonplanner import database
 from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
-from pigeonplanner.ui import dialogs
-from pigeonplanner.ui.widgets import comboboxes
+from pigeonplanner.ui import builder
 from pigeonplanner.core import config
 
 
-FILTER = 0
+class FilterDialog(builder.GtkBuilder):
+    def __init__(self, treeview):
+        builder.GtkBuilder.__init__(self, "FilterDialog.ui")
+        self.treeview = treeview
+
+        self.filter = utils.TreeviewFilter()
+
+        self.widgets.combocolour.set_data(database.get_all_data(database.Tables.COLOURS), sort=False, active=None)
+        self.widgets.combostrain.set_data(database.get_all_data(database.Tables.STRAINS), sort=False, active=None)
+        self.widgets.comboloft.set_data(database.get_all_data(database.Tables.LOFTS), sort=False, active=None)
+
+    def show(self, parent):
+        self.widgets.filterdialog.set_transient_for(parent)
+        self.widgets.filterdialog.show_all()
+
+    def hide(self):
+        self.widgets.filterdialog.hide()
+
+    def on_close(self, widget, event=None):
+        self.widgets.filterdialog.hide()
+        return True
+
+    def on_spinbutton_output(self, widget):
+        value = widget.get_value_as_int()
+        text = "" if value == 0 else str(value)
+        widget.set_text(text)
+        return True
+
+    def on_checksex_toggled(self, widget):
+        self.widgets.combosex.set_sensitive(widget.get_active())
+
+    def on_clear_clicked(self, widget):
+        for combo in ["year", "sex"]:
+            getattr(self.widgets, "combo"+combo).set_active(0)
+        for spin in ["year"]:
+            getattr(self.widgets, "spin"+spin).set_value(0)
+        for combo in ["colour", "strain", "loft"]:
+            getattr(self.widgets, "combo"+combo).child.set_text("")
+        self.widgets.checksex.set_active(False)
+
+        self.filter.clear()
+        self.treeview._modelfilter.refilter()
+        self.treeview.statusbar.set_filter(False)
+
+    def on_search_clicked(self, widget):
+        self.filter.clear()
+
+        year = self.widgets.spinyear.get_value_as_int()
+        yearop = self.widgets.comboyear.get_operator()
+        self.filter.add("year", year, yearop, int)
+
+        if self.widgets.checksex.get_active():
+            sex = self.widgets.combosex.get_sex()
+            self.filter.add("sex", sex, type_=int, allow_empty_value=True)
+
+        colour = self.widgets.combocolour.child.get_text()
+        self.filter.add("colour", colour)
+
+        strain = self.widgets.combostrain.child.get_text()
+        self.filter.add("strain", strain)
+
+        loft = self.widgets.comboloft.child.get_text()
+        self.filter.add("loft", loft)
+
+        self.treeview._modelfilter.refilter()
+        self.treeview.statusbar.set_filter(self.filter.has_filters())
 
 
 class MainTreeView(gtk.TreeView):
@@ -39,8 +103,6 @@ class MainTreeView(gtk.TreeView):
 
         self.statusbar = statusbar
         self.statusbar.set_filter(False)
-        self.filters = []
-        self._filter = None
         self._liststore = self._build_treeview()
         self._modelfilter = self._liststore.filter_new()
         self._modelfilter.set_visible_func(self._visible_func)
@@ -51,20 +113,9 @@ class MainTreeView(gtk.TreeView):
         self.set_rules_hint(True)
         self._selection = self.get_selection()
         self._selection.set_mode(gtk.SELECTION_MULTIPLE)
-        self._filterdialog = self._build_filterdialog()
+        self._filterdialog = FilterDialog(self)
         self.set_columns()
         self.show_all()
-
-    # Callbacks
-    def on_filterapply_clicked(self, widget):
-        self.filters = widget.get_filters()
-        self._modelfilter.refilter()
-        self.statusbar.set_filter(True)
-
-    def on_filterclear_clicked(self, widget):
-        self.filters = widget.get_filters()
-        self._modelfilter.refilter()
-        self.statusbar.set_filter(False)
 
     # Public methods
     def get_top_iter(self, rowiter):
@@ -197,8 +248,7 @@ class MainTreeView(gtk.TreeView):
                 pixbuf.set_visible(sexcoltype == 2 or sexcoltype == 3)
 
     def run_filterdialog(self, parent):
-        self._filterdialog.set_transient_for(parent)
-        self._filterdialog.run()
+        self._filterdialog.show(parent)
 
     # Internal methods
     def _build_treeview(self):
@@ -219,35 +269,11 @@ class MainTreeView(gtk.TreeView):
             self.append_column(tvcolumn)
         return liststore
 
-    def _build_filterdialog(self):
-        dialog = dialogs.FilterDialog(None, _("Filter pigeons"))
-        dialog.connect("apply-clicked", self.on_filterapply_clicked)
-        dialog.connect("clear-clicked", self.on_filterclear_clicked)
-
-        combo = comboboxes.SexCombobox()
-        dialog.add_custom("sex", _("Sex"), combo, combo.get_active_text)
-        dialog.add_combobox("colour", _("Colours"), database.get_all_data(database.Tables.COLOURS))
-        dialog.add_combobox("strain", _("Strains"), database.get_all_data(database.Tables.STRAINS))
-        dialog.add_combobox("loft", _("Lofts"), database.get_all_data(database.Tables.LOFTS))
-        combo = comboboxes.StatusCombobox()
-        dialog.add_custom("status", _("Status"), combo, combo.get_active)
-        self._filter = FILTER
-        self.filters = dialog.get_filters()
-        return dialog
-
     def _visible_func(self, model, treeiter):
-        if self._filter == FILTER:
-            pigeon = model.get_value(treeiter, 0)
-            return self._filter_func(pigeon)
-        return True
-
-    def _filter_func(self, pigeon):
-        info = {"sex": pigeon.get_sex, "colour": pigeon.get_colour,
-                "strain": pigeon.get_strain, "loft": pigeon.get_loft,
-                "status": pigeon.get_active}
-        for name, check, widget in self.filters:
-            data = info[name]()
-            if check.get_active() and not data == widget.get_data():
+        pigeon = model[treeiter][0]
+        for item in self._filterdialog.filter:
+            pvalue = getattr(pigeon, item.name)
+            if not item.operator(item.type(pvalue), item.type(item.value)):
                 return False
         return True
 
