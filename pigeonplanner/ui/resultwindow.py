@@ -26,10 +26,10 @@ import datetime
 import gtk
 
 from pigeonplanner import common
-from pigeonplanner import builder
 from pigeonplanner import database
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
+from pigeonplanner.ui import builder
 from pigeonplanner.ui.filechooser import PdfSaver
 from pigeonplanner.core import config
 from pigeonplanner.reportlib import (report, PRINT_ACTION_DIALOG,

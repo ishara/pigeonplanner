@@ -19,10 +19,10 @@
 import gtk
 
 from pigeonplanner import common
-from pigeonplanner import builder
 from pigeonplanner import database
 from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
+from pigeonplanner.ui import builder
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import checkbutton
 from pigeonplanner.ui.dialogs import PigeonListDialog

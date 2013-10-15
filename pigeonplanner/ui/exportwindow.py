@@ -20,9 +20,9 @@ import os.path
 
 import gtk
 
-from pigeonplanner import builder
 from pigeonplanner import pigeonparser
 from pigeonplanner.export import get_exporters
+from pigeonplanner.ui import builder
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import ErrorDialog
 

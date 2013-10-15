@@ -20,8 +20,8 @@ from geopy import point
 from geopy import distance as gdistance
 
 from pigeonplanner import common
-from pigeonplanner import builder
 from pigeonplanner import database
+from pigeonplanner.ui import builder
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import errors

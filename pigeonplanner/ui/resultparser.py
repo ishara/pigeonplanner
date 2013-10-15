@@ -24,9 +24,9 @@ from yapsy.PluginManager import PluginManager
 
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import builder
 from pigeonplanner import mailing
 from pigeonplanner import database
+from pigeonplanner.ui import builder
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import WarningDialog
 

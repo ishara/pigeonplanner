@@ -18,10 +18,10 @@
 
 import gtk
 
-from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import database
 from pigeonplanner.ui import utils
+from pigeonplanner.ui import builder
 from pigeonplanner.ui.widgets import latlongentry
 from pigeonplanner.ui.messagedialog import QuestionDialog
 from pigeonplanner.core import enums

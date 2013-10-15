@@ -26,12 +26,12 @@ import gobject
 
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import builder
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
 from pigeonplanner import database
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
+from pigeonplanner.ui import builder
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.widgets import date

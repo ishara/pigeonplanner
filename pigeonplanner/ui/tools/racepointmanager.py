@@ -20,8 +20,8 @@ import gtk
 import gobject
 
 from pigeonplanner import common
-from pigeonplanner import builder
 from pigeonplanner import database
+from pigeonplanner.ui import builder
 from pigeonplanner.ui import locationchooser
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.widgets import latlongentry

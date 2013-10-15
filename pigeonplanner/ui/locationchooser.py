@@ -21,8 +21,8 @@ import geopy
 
 import gtk
 
-from pigeonplanner import builder
 from pigeonplanner import messages
+from pigeonplanner.ui import builder
 from pigeonplanner.ui.widgets import latlongentry
 
 

@@ -27,8 +27,8 @@ import gobject
 
 from pigeonplanner import const
 from pigeonplanner import common
-from pigeonplanner import builder
 from pigeonplanner import messages
+from pigeonplanner.ui import builder
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import InfoDialog, WarningDialog
 from pigeonplanner.core import config

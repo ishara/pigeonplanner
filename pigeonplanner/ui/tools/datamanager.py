@@ -19,10 +19,10 @@
 import gtk
 
 from pigeonplanner import common
-from pigeonplanner import builder
 from pigeonplanner import database
 from pigeonplanner import messages
 from pigeonplanner import pigeonparser
+from pigeonplanner.ui import builder
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import QuestionDialog
 from pigeonplanner.core import enums
