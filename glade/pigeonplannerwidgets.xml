@@ -25,6 +25,8 @@
     </glade-widget-class>
     <glade-widget-class title="Status Combobox" name="StatusCombobox" generic-name="statuscombo">
     </glade-widget-class>
+    <glade-widget-class title="Operator Combobox" name="OperatorCombobox" generic-name="operatorcombo">
+    </glade-widget-class>
     <glade-widget-class title="Data Combobox Entry" name="DataComboboxEntry" generic-name="datacomboentry">
       <properties>
         <property id="text-column" save="False" visible="False"/>
@@ -57,6 +59,7 @@
     <glade-widget-class-ref name="DisplayCheckButton"/>
     <glade-widget-class-ref name="SexCombobox"/>
     <glade-widget-class-ref name="StatusCombobox"/>
+    <glade-widget-class-ref name="OperatorCombobox"/>
     <glade-widget-class-ref name="DataComboboxEntry"/>
     <glade-widget-class-ref name="DistanceCombobox"/>
     <glade-widget-class-ref name="SpeedCombobox"/>

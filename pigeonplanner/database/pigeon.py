@@ -122,6 +122,10 @@ def get_all_results():
     session.cursor.execute("SELECT * FROM Results")
     return session.cursor.fetchall()
 
+def get_all_races():
+    session.cursor.execute("SELECT * FROM Results GROUP BY date, point ORDER BY date ASC")
+    return session.cursor.fetchall()
+
 def get_races_for_pigeon(pindex):
     session.cursor.execute("SELECT * FROM Results WHERE pindex=? GROUP BY date, point ORDER BY date ASC", (pindex,))
     return session.cursor.fetchall()
@@ -130,8 +134,9 @@ def get_race_info(date, racepoint):
     session.cursor.execute("SELECT * FROM Results WHERE date=? AND point=? LIMIT 1", (date, racepoint))
     return session.cursor.fetchone()
 
-def get_results_for_pigeon(pindex, date, point):
-    session.cursor.execute("SELECT * FROM Results WHERE pindex=? AND date=? AND point=? ORDER BY place ASC", (pindex, date, point))
+def get_results_for_data(data):
+    cols = utils.build_sql_cols(data, delimiter=utils.AND)
+    session.cursor.execute("SELECT * FROM Results WHERE %s ORDER BY place ASC" % cols, data)
     return session.cursor.fetchall()
 
 def add_result(data):

@@ -144,7 +144,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                 ErrorDialog(messages.MSG_RESULT_EXISTS, self.parent)
                 return
 
-            if not database.get_results_for_pigeon(self.pindex, data["date"], data["point"]):
+            seldata = {"pindex": self.pindex, "date": data["date"], "point": data["point"]}
+            if not database.get_results_for_data(seldata):
                 rowiter = self.widgets.race_ls.insert(0, [data["date"], data["point"],
                                             data["type"], data["wind"], data["weather"]])
                 self.widgets.race_ls.set_sort_column_id(0, gtk.SORT_ASCENDING)
@@ -204,7 +205,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         date = model.get_value(rowiter, 0)
         racepoint = model.get_value(rowiter, 1)
         self.widgets.liststore.clear()
-        for result in database.get_results_for_pigeon(self.pindex, date, racepoint):
+        data = {"pindex": self.pindex, "date": date, "point": racepoint}
+        for result in database.get_results_for_data(data):
             place = result[4]
             out = result[5]
             if place == 0:

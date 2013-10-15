@@ -18,6 +18,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import operator
+
 import gtk
 
 from pigeonplanner import common
@@ -68,7 +70,8 @@ def fill_combobox(combobox, items, active=0, sort=True):
         model.append([item])
 
     set_combobox_wrap(combobox)
-    combobox.set_active(active)
+    if active is not None:
+        combobox.set_active(active)
 
 
 class SexCombobox(gtk.ComboBox):
@@ -113,6 +116,32 @@ class StatusCombobox(gtk.ComboBox):
         self.set_active(0)
 
 
+class OperatorCombobox(gtk.ComboBox):
+
+    __gtype_name__ = "OperatorCombobox"
+
+    def __init__(self):
+        store = gtk.ListStore(str, object)
+        gtk.ComboBox.__init__(self, store)
+
+        items = [("<", operator.lt),
+                 ("<=", operator.le),
+                 ("=", operator.eq),
+                 ("!=", operator.ne),
+                 (">=", operator.ge),
+                 (">", operator.gt)]
+        for item in items:
+            store.append(item)
+        cell = gtk.CellRendererText()
+        self.pack_start(cell, True)
+        self.add_attribute(cell, "text", 0)
+        self.set_active(0)
+
+    def get_operator(self):
+        ls_iter = self.get_active_iter()
+        return self.get_model().get(ls_iter, 1)[0]
+
+
 class DataComboboxEntry(gtk.ComboBoxEntry):
 
     __gtype_name__ = "DataComboboxEntry"
@@ -122,8 +151,8 @@ class DataComboboxEntry(gtk.ComboBoxEntry):
         gtk.ComboBoxEntry.__init__(self, self.store, 0)
         set_entry_completion(self)
 
-    def set_data(self, data, sort=True):
-        fill_combobox(self, data, sort)
+    def set_data(self, data, sort=True, active=0):
+        fill_combobox(self, data, active, sort)
 
     def add_item(self, item):
         if not item: return

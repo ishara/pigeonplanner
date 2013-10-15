@@ -16,6 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import operator
+
 import gtk
 
 from pigeonplanner.core import config
@@ -85,4 +87,32 @@ class HiddenPigeonsMixin(object):
             if not show:
                 color = config.get("interface.missing-pigeon-color-value")
         cell.set_property("cell-background", color)
+
+
+class TreeviewFilter(object):
+    class FilterItem(object):
+        def __init__(self, name, value, operator_, type_):
+            self.name = name
+            self.value = value
+            self.operator = operator_
+            self.type = type_
+
+    def __init__(self, name=""):
+        self.name = name
+        self._items = []
+
+    def __iter__(self):
+        return iter(self._items)
+
+    def clear(self):
+        self._items = []
+
+    def has_filters(self):
+        return len(self._items) > 0
+
+    def add(self, name, value, operator_=operator.eq, type_=str, allow_empty_value=False):
+        if not value and not allow_empty_value:
+            return
+        item = self.FilterItem(name, value, operator_, type_)
+        self._items.append(item)
 

@@ -26,10 +26,10 @@ from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
 
 
 class ResultsReport(Report, HelperMethods):
-    def __init__(self, reportopts, results, userinfo):
+    def __init__(self, reportopts, data, userinfo):
         Report.__init__(self, "My results", reportopts)
 
-        self._results = results
+        self._data = data
         self._userinfo = userinfo
 
     def write_report(self):
@@ -43,45 +43,72 @@ class ResultsReport(Report, HelperMethods):
 #        self.doc.end_paragraph()
 
         # Actual results
-        #TODO: column size with different columns
-        columns = {
-                    0: _("Band no."),
-                    1: _("Date"),
-                    2: _("Racepoint"),
-                    3: _("Placed"),
-                    4: _("Out of")
+        headermap = {"date": _("Date"),
+                     "point": _("Racepoint"),
+                     "ring": _("Band no."),
+                     "placestr": _("Placed"),
+                     "out": _("Out of"),
+                     "type": _("Type"),
+                     "wind": _("Wind"),
+                     "weather": _("Weather"),
+                     "coefstr": _("Coef."),
+                     "sector": _("Sector"),
+                     "category": _("Category"),
+                     "comment": _("Comment")
                 }
 
-        if config.get("columns.result-coef"):
-            columns[5] = _("Coef.")
-        if config.get("columns.result-sector"):
-            columns[6] = _("Sector")
+        racecolumns = ["date", "point"]
         if config.get("columns.result-type"):
-            columns[7] = _("Type")
-        if config.get("columns.result-category"):
-            columns[8] = _("Category")
+            racecolumns.append("type")
         if config.get("columns.result-weather"):
-            columns[9] = _("Wind")
+            racecolumns.append("wind")
         if config.get("columns.result-wind"):
-            columns[10] = _("Weather")
+            racecolumns.append("weather")
+        resultcolumns = ["ring", "placestr", "out"]
+        if config.get("columns.result-coef"):
+            resultcolumns.append("coefstr")
+        if config.get("columns.result-sector"):
+            resultcolumns.append("sector")
+        if config.get("columns.result-category"):
+            resultcolumns.append("category")
         if config.get("columns.result-comment"):
-            columns[11] = _("Comment")
+            resultcolumns.append("comment")
+
+        dummyrace = {"date": "",
+                     "point": "",
+                     "type": "",
+                     "wind": "",
+                     "weather": ""}
 
         self.doc.start_table("my_table", "table")
 
         if config.get("printing.result-colnames"):
             self.doc.start_row()
-            for name in columns.values():
-                self.add_cell(name, "headercell", "colheader")
+            for name in racecolumns + resultcolumns:
+                self.add_cell(headermap[name], "headercell", "colheader")
             self.doc.end_row()
 
-        for row in self._results:
+        # data = [{"race": {}, "results": [{}, {}]}]
+        for item in self._data:
             self.doc.start_row()
-            for index, cell in enumerate(row):
-                if index not in columns.keys():
-                    continue
-                self.add_cell(cell, "cell", "celltext")
+            for name in racecolumns:
+                value = item["race"][name]
+                self.add_cell(str(value), "cell", "celltext")
+            for name in resultcolumns:
+                value = item["results"][0][name]
+                self.add_cell(str(value), "cell", "celltext")
             self.doc.end_row()
+
+            for result in item["results"][1:]:
+                self.doc.start_row()
+                for name in racecolumns:
+                    value = dummyrace[name]
+                    self.add_cell(str(value), "cell", "celltext")
+                for name in resultcolumns:
+                    value = result[name]
+                    self.add_cell(str(value), "cell", "celltext")
+                self.doc.end_row()
+
         self.doc.end_table()
 
 
@@ -112,15 +139,15 @@ class ResultsReportOptions(ReportOptions):
         default_style.add_paragraph_style("colheader", para)
 
         font = FontStyle()
-        font.set(face=FONT_SANS_SERIF, size=8)
+        font.set(face=FONT_SANS_SERIF, size=7)
         para = ParagraphStyle()
         para.set(font=font)
         default_style.add_paragraph_style("celltext", para)
 
         table = TableStyle()
         table.set_width(100)
-        table.set_column_widths([8, 7, 12, 5, 5, 6, 10,
-                                 6, 7, 6.5, 6.5, 21])
+        #TODO: column size with different columns
+        table.set_column_widths([7, 12, 6, 6.5, 6.5, 8, 5, 5, 6, 10, 7, 21])
         default_style.add_table_style("table", table)
 
         cell = TableCellStyle()
