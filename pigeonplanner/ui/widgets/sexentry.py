@@ -19,6 +19,7 @@
 import gtk
 
 from pigeonplanner import common
+from pigeonplanner.ui import utils
 
 
 class SexEntry(gtk.Viewport):
@@ -35,7 +36,7 @@ class SexEntry(gtk.Viewport):
 
     def set_sex(self, sex):
         try:
-            img = common.get_sex_image(sex)
+            img = utils.get_sex_image(sex)
         except KeyError:
             img = None
             self._entry.set_text("")

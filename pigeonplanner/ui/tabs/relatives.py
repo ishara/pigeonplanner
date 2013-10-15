@@ -19,7 +19,6 @@
 import gtk
 import gtk.gdk
 
-from pigeonplanner import common
 from pigeonplanner import messages
 from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
@@ -125,7 +124,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             pindex_sire = pigeon.get_sire_pindex()
             pindex_dam = pigeon.get_dam_pindex()
             sex = pigeon.get_sex()
-            seximg = common.get_sex_image(sex)
+            seximg = utils.get_sex_image(sex)
             # Offspring
             if pindex_sire == pindex_selected or pindex_dam == pindex_selected:
                 self._liststoreoff.insert(0, [pigeon, ring, year, sex, seximg])

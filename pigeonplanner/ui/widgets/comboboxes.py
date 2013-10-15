@@ -23,6 +23,7 @@ import operator
 import gtk
 
 from pigeonplanner import common
+from pigeonplanner.ui import utils
 from pigeonplanner.core import config
 
 
@@ -83,7 +84,7 @@ class SexCombobox(gtk.ComboBox):
         gtk.ComboBox.__init__(self, store)
 
         for key, value in common.get_sexdic().items():
-            store.insert(key, [key, value, common.get_sex_image(key)])
+            store.insert(key, [key, value, utils.get_sex_image(key)])
 
         pb = gtk.CellRendererPixbuf()
         self.pack_start(pb, expand=False)

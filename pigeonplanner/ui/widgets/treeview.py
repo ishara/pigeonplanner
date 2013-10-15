@@ -21,6 +21,7 @@ import gtk
 from pigeonplanner import common
 from pigeonplanner import database
 from pigeonplanner import pigeonparser
+from pigeonplanner.ui import utils
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.core import config
@@ -115,7 +116,7 @@ class MainTreeView(gtk.TreeView):
                                        pigeon.get_sex_string(),
                                        pigeon.get_loft(), pigeon.get_strain(),
                                        _(common.get_status(pigeon.get_active())),
-                                       common.get_sex_image(pigeon.sex)])
+                                       utils.get_sex_image(pigeon.sex)])
         self._selection.select_path(path)
 
     def add_pigeon(self, pigeon, select=True):
@@ -124,7 +125,7 @@ class MainTreeView(gtk.TreeView):
                pigeon.get_colour(), pigeon.get_sex_string(),
                pigeon.get_loft(), pigeon.get_strain(),
                _(common.get_status(pigeon.get_active())),
-               common.get_sex_image(pigeon.sex)]
+               utils.get_sex_image(pigeon.sex)]
         self.add_row(row, select)
 
     def update_pigeon(self, pigeon, rowiter=None, path=None):
@@ -133,7 +134,7 @@ class MainTreeView(gtk.TreeView):
                 4, pigeon.get_name(), 5, pigeon.get_colour(),
                 6, pigeon.get_sex_string(), 7, pigeon.get_loft(),
                 8, pigeon.get_strain(), 9, _(pigeon.get_status()),
-                10, common.get_sex_image(pigeon.sex))
+                10, utils.get_sex_image(pigeon.sex))
         self.update_row(data, rowiter=rowiter, path=path)
 
     def has_pigeon(self, pigeon):

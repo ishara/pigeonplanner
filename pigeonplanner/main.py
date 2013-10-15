@@ -228,9 +228,9 @@ class Startup(object):
             themefile = os.path.join(themedir, theme, "gtk-2.0\\gtkrc")
             gtk.rc_parse(themefile)
 
-        from pigeonplanner import common
+        from pigeonplanner.ui import utils
         # Register custom stock icons
-        common.create_stock_button([
+        utils.create_stock_button([
                 ("icon_pedigree_detail.png", "pedigree-detail", _("Pedigree")),
                 ("icon_email.png", "email", _("E-mail")),
                 ("icon_send.png", "send", _("Send")),

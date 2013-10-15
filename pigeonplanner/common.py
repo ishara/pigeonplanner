@@ -22,6 +22,7 @@ Functions for some common tasks
 
 import os
 import sys
+import cgi
 import random
 import locale
 import inspect
@@ -31,9 +32,6 @@ import datetime
 import webbrowser
 import logging
 logger = logging.getLogger(__name__)
-
-import gtk
-import glib
 
 from pigeonplanner import const
 from pigeonplanner import database
@@ -52,8 +50,6 @@ def get_sex(sex):
 SEX_IMGS = {enums.Sex.cock: os.path.join(const.IMAGEDIR, "symbol_male.png"),
             enums.Sex.hen: os.path.join(const.IMAGEDIR, "symbol_female.png"),
             enums.Sex.unknown: os.path.join(const.IMAGEDIR, "symbol_young.png")}
-def get_sex_image(sex):
-    return gtk.gdk.pixbuf_new_from_file(SEX_IMGS[sex])
 
 statusdic = {enums.Status.dead: database.Tables.DEAD,
              enums.Status.active: "Active",
@@ -63,21 +59,6 @@ statusdic = {enums.Status.dead: database.Tables.DEAD,
              enums.Status.loaned: database.Tables.LOANED}
 def get_status(status):
     return statusdic[status]
-
-def create_stock_button(icons):
-    """
-    Register stock buttons from custom images.
-
-    @param icons: A list of tuples containing filename, name and description
-    """
-
-    factory = gtk.IconFactory()
-    factory.add_default()
-    for img, name, description in icons:
-        pb = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR, img))
-        iconset = gtk.IconSet(pb)
-        factory.add(name, iconset)
-        gtk.stock_add([(name, description, 0, 0, "pigeonplanner")])
 
 def get_function_name():
     """
@@ -242,7 +223,7 @@ def email_hook(about, email):
 def escape_text(text):
     if not text:
         return ""
-    return glib.markup_escape_text(text)
+    return cgi.escape(text, True)
 
 def open_file(path):
     from ui.messagedialog import ErrorDialog

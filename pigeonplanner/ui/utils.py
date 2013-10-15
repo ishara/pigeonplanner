@@ -16,12 +16,33 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os
 import operator
 
 import gtk
 
+from pigeonplanner import const
+from pigeonplanner import common
 from pigeonplanner.core import config
 
+
+def get_sex_image(sex):
+    return gtk.gdk.pixbuf_new_from_file(common.SEX_IMGS[sex])
+
+def create_stock_button(icons):
+    """
+    Register stock buttons from custom images.
+
+    @param icons: A list of tuples containing filename, name and description
+    """
+
+    factory = gtk.IconFactory()
+    factory.add_default()
+    for img, name, description in icons:
+        pb = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR, img))
+        iconset = gtk.IconSet(pb)
+        factory.add(name, iconset)
+        gtk.stock_add([(name, description, 0, 0, "pigeonplanner")])
 
 def set_multiple_sensitive(widgets, value=None):
     """ 
