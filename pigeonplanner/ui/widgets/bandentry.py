@@ -20,7 +20,7 @@ import gtk
 import gobject
 
 from pigeonplanner import common
-from pigeonplanner import messages
+from pigeonplanner import checks
 from pigeonplanner.core import errors
 
 
@@ -87,8 +87,7 @@ class BandEntry(gtk.Viewport):
         self._entryband.set_position(-1)
 
     def _warn(self):
-        self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
-                                            gtk.STOCK_STOP)
+        self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
 
     def _unwarn(self):
         self._entryband.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
@@ -97,16 +96,11 @@ class BandEntry(gtk.Viewport):
         if self.can_empty and (band == "" and year == ""):
             return
 
-        if not band or not year:
+        try:
+            checks.check_ring_entry(band, year)
+        except errors.InvalidInputError:
             self._warn()
-            raise errors.InvalidInputError(messages.MSG_EMPTY_FIELDS)
+            raise
 
-        elif not year.isdigit():
-            self._warn()
-            raise errors.InvalidInputError(messages.MSG_INVALID_NUMBER)
-
-        elif not len(year) == 4:
-            self._warn()
-            raise errors.InvalidInputError(messages.MSG_INVALID_LENGTH)
         self._unwarn()
 
