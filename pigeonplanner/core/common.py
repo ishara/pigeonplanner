@@ -33,8 +33,8 @@ import webbrowser
 import logging
 logger = logging.getLogger(__name__)
 
-from pigeonplanner import const
 from pigeonplanner import database
+from pigeonplanner.core import const
 from pigeonplanner.core import enums
 from pigeonplanner.core import config
 

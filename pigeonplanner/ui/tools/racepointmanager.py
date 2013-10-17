@@ -19,12 +19,12 @@
 import gtk
 import gobject
 
-from pigeonplanner import common
 from pigeonplanner import database
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import locationchooser
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.widgets import latlongentry
+from pigeonplanner.core import common
 from pigeonplanner.core import errors
 from .datamanager import DataManager
 from .distancecalculator import DistanceCalculator

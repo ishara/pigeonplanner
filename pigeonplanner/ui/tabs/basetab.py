@@ -21,7 +21,7 @@ import os.path
 import gtk
 import gtk.gdk
 
-from pigeonplanner import const
+from pigeonplanner.core import const
 
 
 class BaseTab(object):

@@ -16,9 +16,9 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner import pigeonparser
 from pigeonplanner.ui import pedigree
 from pigeonplanner.core import config
+from pigeonplanner.core import pigeonparser
 from pigeonplanner.reportlib.basereport import Report, ReportOptions
 from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
                                             GraphicsStyle, FONT_SANS_SERIF,

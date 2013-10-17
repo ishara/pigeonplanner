@@ -23,13 +23,13 @@ import threading
 import gtk
 import gobject
 
-from pigeonplanner import const
-from pigeonplanner import common
 from pigeonplanner import messages
-from pigeonplanner import mailing
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.messagedialog import ErrorDialog
+from pigeonplanner.core import const
+from pigeonplanner.core import common
 from pigeonplanner.core import errors
+from pigeonplanner.core import mailing
 
 
 class MailDialog(builder.GtkBuilder):

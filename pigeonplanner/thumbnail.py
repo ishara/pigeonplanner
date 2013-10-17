@@ -22,7 +22,7 @@ import hashlib
 import gtk
 import gobject
 
-from pigeonplanner import const
+from pigeonplanner.core import const
 
 
 def get_image(src_file):

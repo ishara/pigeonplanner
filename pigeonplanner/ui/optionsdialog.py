@@ -25,12 +25,12 @@ import os
 import gtk
 import gobject
 
-from pigeonplanner import const
-from pigeonplanner import common
 from pigeonplanner import messages
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import InfoDialog, WarningDialog
+from pigeonplanner.core import const
+from pigeonplanner.core import common
 from pigeonplanner.core import config
 from pigeonplanner.reportlib import report, PRINT_ACTION_PREVIEW
 from pigeonplanner.reports import get_pedigree

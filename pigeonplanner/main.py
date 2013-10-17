@@ -47,7 +47,7 @@ except:
     print "The GTK+ runtime is required to run this program."
     sys.exit(1)
 
-from pigeonplanner import const
+from pigeonplanner.core import const
 
 
 def get_operating_system():
@@ -267,7 +267,7 @@ class Startup(object):
         Setup the pigeon parser object which will hold all the pigeons
         """
 
-        from pigeonplanner import pigeonparser
+        from pigeonplanner.core import pigeonparser
 
         pigeonparser.parser.build_pigeons()
 

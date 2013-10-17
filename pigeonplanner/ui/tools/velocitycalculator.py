@@ -21,9 +21,9 @@ import datetime
 
 import gtk
 
-from pigeonplanner import common
 from pigeonplanner import database
 from pigeonplanner.ui import builder
+from pigeonplanner.core import common
 from pigeonplanner.reportlib import report
 from pigeonplanner.reports.velocity import VelocityReport, VelocityReportOptions
 

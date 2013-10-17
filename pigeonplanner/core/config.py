@@ -23,7 +23,7 @@ import time
 import logging
 logger = logging.getLogger(__name__)
 
-from pigeonplanner import const
+from pigeonplanner.core import const
 
 
 class Config(object):

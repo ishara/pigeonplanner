@@ -18,8 +18,8 @@
 
 import gtk
 
-from pigeonplanner import common
 from pigeonplanner.ui import utils
+from pigeonplanner.core import common
 
 
 class SexEntry(gtk.Viewport):

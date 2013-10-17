@@ -20,9 +20,9 @@ Parser to get all pigeons
 """
 
 
-from pigeonplanner import common
 from pigeonplanner import database
 from pigeonplanner.core import enums
+from pigeonplanner.core import common
 
 
 class PigeonParser(object):

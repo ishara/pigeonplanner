@@ -26,13 +26,13 @@ try:
 except ImportError:
     yapsy_available = False
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import mailing
 from pigeonplanner import database
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import WarningDialog, ErrorDialog
+from pigeonplanner.core import const
+from pigeonplanner.core import common
+from pigeonplanner.core import mailing
 
 
 class ResultParser(builder.GtkBuilder):

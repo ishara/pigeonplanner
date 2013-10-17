@@ -23,8 +23,8 @@ import gtk
 import gtk.gdk
 import gobject
 
-from pigeonplanner import const
 from pigeonplanner import messages
+from pigeonplanner.core import const
 from pigeonplanner.core import errors
 
 

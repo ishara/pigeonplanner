@@ -18,10 +18,8 @@
 
 import gtk
 
-from pigeonplanner import common
 from pigeonplanner import messages
 from pigeonplanner import database
-from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import resultwindow
@@ -29,8 +27,10 @@ from pigeonplanner.ui import resultparser
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog
 from pigeonplanner.core import enums
+from pigeonplanner.core import common
 from pigeonplanner.core import errors
 from pigeonplanner.core import config
+from pigeonplanner.core import pigeonparser
 
 
 (COL_DATE,

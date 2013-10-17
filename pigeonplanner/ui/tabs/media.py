@@ -22,7 +22,6 @@ import operator
 import gtk
 
 from pigeonplanner import mime
-from pigeonplanner import common
 from pigeonplanner import messages
 from pigeonplanner import database
 from pigeonplanner import thumbnail
@@ -31,6 +30,7 @@ from pigeonplanner.ui import builder
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.messagedialog import QuestionDialog
+from pigeonplanner.core import common
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):

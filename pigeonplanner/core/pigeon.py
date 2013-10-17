@@ -22,10 +22,10 @@ logger = logging.getLogger(__name__)
 
 from . import enums
 from . import errors
-from pigeonplanner import common
 from pigeonplanner import database
 from pigeonplanner import thumbnail
-from pigeonplanner import pigeonparser
+from pigeonplanner.core import common
+from pigeonplanner.core import pigeonparser
 
 
 def add_pigeon(data, status, statusdata):

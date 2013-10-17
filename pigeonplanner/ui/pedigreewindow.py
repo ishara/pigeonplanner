@@ -23,12 +23,12 @@ import os
 
 import gtk
 
-from pigeonplanner import common
-from pigeonplanner import pigeonparser
 from pigeonplanner.ui import tools
 from pigeonplanner.ui.filechooser import PdfSaver
 from pigeonplanner.ui.messagedialog import InfoDialog
+from pigeonplanner.core import common
 from pigeonplanner.core import config
+from pigeonplanner.core import pigeonparser
 from pigeonplanner.reportlib import (report, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports import get_pedigree

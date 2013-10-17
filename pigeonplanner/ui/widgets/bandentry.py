@@ -19,8 +19,8 @@
 import gtk
 import gobject
 
-from pigeonplanner import common
-from pigeonplanner import checks
+from pigeonplanner.core import common
+from pigeonplanner.core import checks
 from pigeonplanner.core import errors
 
 

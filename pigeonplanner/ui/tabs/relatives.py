@@ -20,7 +20,6 @@ import gtk
 import gtk.gdk
 
 from pigeonplanner import messages
-from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import WidgetFactory
 from pigeonplanner.ui.tabs import basetab
@@ -28,6 +27,7 @@ from pigeonplanner.ui.utils import HiddenPigeonsMixin
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import InfoDialog
 from pigeonplanner.core import enums
+from pigeonplanner.core import pigeonparser
 
 
 class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):

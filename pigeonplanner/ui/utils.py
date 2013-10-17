@@ -21,8 +21,8 @@ import operator
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
+from pigeonplanner.core import const
+from pigeonplanner.core import common
 from pigeonplanner.core import config
 
 

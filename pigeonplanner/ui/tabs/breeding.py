@@ -18,9 +18,7 @@
 
 import gtk
 
-from pigeonplanner import common
 from pigeonplanner import database
-from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.tabs import basetab
@@ -28,8 +26,10 @@ from pigeonplanner.ui.widgets import checkbutton
 from pigeonplanner.ui.dialogs import PigeonListDialog
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import ErrorDialog
-from pigeonplanner.core import errors
 from pigeonplanner.core import enums
+from pigeonplanner.core import common
+from pigeonplanner.core import errors
+from pigeonplanner.core import pigeonparser
 
 
 (COL_ID,

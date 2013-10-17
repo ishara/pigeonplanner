@@ -23,9 +23,9 @@ Pedigree widgets
 
 import gtk
 
-from pigeonplanner import common
 from pigeonplanner import thumbnail
 from pigeonplanner.core import enums
+from pigeonplanner.core import common
 
 
 class PedigreeBox(gtk.DrawingArea):

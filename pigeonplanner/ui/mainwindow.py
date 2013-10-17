@@ -29,12 +29,8 @@ logger = logging.getLogger(__name__)
 
 import gtk
 
-from pigeonplanner import const
-from pigeonplanner import common
-from pigeonplanner import checks
 from pigeonplanner import messages
 from pigeonplanner import database
-from pigeonplanner import pigeonparser
 from pigeonplanner.ui import tabs
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
@@ -50,11 +46,15 @@ from pigeonplanner.ui.widgets import treeview
 from pigeonplanner.ui.widgets import statusbar
 from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog, QuestionDialog
 from pigeonplanner.core import enums
+from pigeonplanner.core import const
+from pigeonplanner.core import common
+from pigeonplanner.core import checks
 from pigeonplanner.core import errors
 from pigeonplanner.core import update
 from pigeonplanner.core import backup
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeon as corepigeon
+from pigeonplanner.core import pigeonparser
 from pigeonplanner.reportlib import report
 from pigeonplanner.reports import get_pedigree
 from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions

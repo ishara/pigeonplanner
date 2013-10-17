@@ -22,7 +22,7 @@ import gtk
 import glib
 
 from pigeonplanner import mime
-from pigeonplanner import const
+from pigeonplanner.core import const
 
 
 LAST_FOLDER = None

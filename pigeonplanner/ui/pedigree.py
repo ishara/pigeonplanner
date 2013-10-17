@@ -24,15 +24,15 @@ Provides an interface to draw the pedigree
 
 import gtk
 
-from pigeonplanner import const
 from pigeonplanner import messages
 from pigeonplanner import database
-from pigeonplanner import pigeonparser
 from pigeonplanner.ui import utils
 from pigeonplanner.ui.widgets import pedigreeboxes
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import InfoDialog
+from pigeonplanner.core import const
 from pigeonplanner.core import enums
+from pigeonplanner.core import pigeonparser
 
 
 #TODO: Cairo-drawn boxes mess up window drawing on Mac OS X

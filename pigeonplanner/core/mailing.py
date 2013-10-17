@@ -23,8 +23,8 @@ Interface for sending mails
 import urllib
 import mimetypes
 
-from pigeonplanner import const
-from pigeonplanner import common
+from pigeonplanner.core import const
+from pigeonplanner.core import common
 
 
 def send_email(recipient="", sender="", subject="", body="", attachment=None):

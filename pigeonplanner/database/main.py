@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 import sqlite3
 sqlite3.register_adapter(str, lambda s: s.decode("utf-8"))
 
-from pigeonplanner import const
+from pigeonplanner.core import const
 from .schemas import Tables, Schema
 
 

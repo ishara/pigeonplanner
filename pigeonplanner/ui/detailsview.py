@@ -24,8 +24,6 @@ import gtk
 import gtk.gdk
 import gobject
 
-from pigeonplanner import const
-from pigeonplanner import common
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
 from pigeonplanner import database
@@ -39,6 +37,8 @@ from pigeonplanner.ui.widgets import sexentry
 from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.messagedialog import ErrorDialog, WarningDialog
 from pigeonplanner.core import enums
+from pigeonplanner.core import const
+from pigeonplanner.core import common
 from pigeonplanner.core import errors
 from pigeonplanner.core import pigeon as corepigeon
 

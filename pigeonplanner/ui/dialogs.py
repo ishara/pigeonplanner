@@ -24,16 +24,16 @@ import gtk
 import gtk.gdk
 
 from pigeonplanner import main
-from pigeonplanner import const
-from pigeonplanner import common
 from pigeonplanner import messages
 from pigeonplanner import database
-from pigeonplanner import pigeonparser
-from pigeonplanner.core import backup
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.utils import HiddenPigeonsMixin
 from pigeonplanner.ui.messagedialog import InfoDialog
 from pigeonplanner.core import enums
+from pigeonplanner.core import const
+from pigeonplanner.core import common
+from pigeonplanner.core import backup
+from pigeonplanner.core import pigeonparser
 
 
 class AboutDialog(gtk.AboutDialog):

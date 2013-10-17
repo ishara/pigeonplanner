@@ -26,8 +26,8 @@ import urllib
 import logging
 logger = logging.getLogger(__name__)
 
-from pigeonplanner import const
 from pigeonplanner import messages
+from pigeonplanner.core import const
 from pigeonplanner.core import config
 
 
