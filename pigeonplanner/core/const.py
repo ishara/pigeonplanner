@@ -65,59 +65,42 @@ else:
 if WINDOWS:
     HOMEDIR = os.environ["USERPROFILE"]
     PREFDIR = os.path.join(os.environ.get("APPDATA", HOMEDIR), "pigeonplanner")
-    PREFDIR = unicode(PREFDIR, sys.getfilesystemencoding())
-    HOMEDIR = unicode(HOMEDIR, sys.getfilesystemencoding())
 elif OSX:
     HOMEDIR = os.environ["HOME"]
     PREFDIR = os.path.join(HOMEDIR, "Library", "Application Support", "pigeonplanner")
 else:
     HOMEDIR = os.environ["HOME"]
     PREFDIR = os.path.join(HOMEDIR, ".pigeonplanner")
+# Make sure these directories are unicode
+if not isinstance(HOMEDIR, unicode):
+    HOMEDIR = unicode(HOMEDIR, sys.getfilesystemencoding())
+if not isinstance(PREFDIR, unicode):
+    PREFDIR = unicode(PREFDIR, sys.getfilesystemencoding())
 
-#XXX: For some reason, GtkBuilder translations on Windows don't work when
-#     building the languages folder path from the ROOTDIR.
-#     Looks like a unicode problem:
-#           * os.path.join(ROOTDIR, "languages") => unicode, doesn't work
-#           * os.path.abspath(u"languages") => unicode, doesn't work
-#           * os.path.abspath("languages") => str, does work
 if hasattr(sys, "frozen"):
-    if WINDOWS:
-        ROOTDIR = os.path.abspath(os.path.dirname(
-                    unicode(sys.executable, sys.getfilesystemencoding())))
-        LANGDIR = os.path.abspath("languages")
-    elif OSX:
-        launcher = os.path.dirname(
-                            unicode(sys.executable, sys.getfilesystemencoding()))
-        data = os.path.join(launcher, "..", "Resources", "share", "pigeonplanner")
-        ROOTDIR = os.path.abspath(data)
-        LANGDIR = os.path.join(ROOTDIR, "languages")
-        del launcher, data
-else:
+    # Most likely a py2exe package on Windows
     ROOTDIR = os.path.abspath(os.path.dirname(
-                unicode(__file__, sys.getfilesystemencoding())))
-    if not ROOTDIR.startswith("/usr"):
-        # When running from the source folder, the root is one dir up
-        ROOTDIR = os.path.normpath(os.path.join(ROOTDIR, ".."))
-        if ROOTDIR.endswith(".egg"):
-            #TODO: can be improved?
-            ROOTDIR = os.path.join(ROOTDIR, "share", "pigeonplanner")
-        LANGDIR = os.path.join(ROOTDIR, "languages")
-        if WINDOWS:
-            LANGDIR = os.path.abspath("../languages")
-    else:
-        # Running the installed program, use the system's locale dir
-        LANGDIR = "/usr/share/locale/"
+        unicode(sys.executable, sys.getfilesystemencoding())))
+    LANGDIR = os.path.abspath("languages")
+else:
+    # This file is in pigeonplanner.core, so go 2 directories up
+    ROOTDIR = os.path.abspath(os.path.join(os.path.dirname(
+        unicode(__file__, sys.getfilesystemencoding())), os.pardir, os.pardir))
+    if ROOTDIR.endswith(".egg"):
+        #TODO: Used in Mac OS X package. Can be improved?
+        ROOTDIR = os.path.join(ROOTDIR, u"share", u"pigeonplanner")
+    LANGDIR = os.path.join(ROOTDIR, u"languages")
 
-IMAGEDIR = os.path.join(ROOTDIR, "images")
-GLADEDIR = os.path.join(ROOTDIR, "glade")
-RESULTPARSERDIR = os.path.join(ROOTDIR, "resultparsers")
+IMAGEDIR = os.path.join(ROOTDIR, u"images")
+GLADEDIR = os.path.join(ROOTDIR, u"glade")
+RESULTPARSERDIR = os.path.join(ROOTDIR, u"resultparsers")
 
 THUMBDIR = os.path.join(PREFDIR, u"thumbs")
 PLUGINDIR = os.path.join(PREFDIR, u"plugins")
 DATABASE = os.path.join(PREFDIR, u"pigeonplanner.db")
 LOGFILE = os.path.join(PREFDIR, u"pigeonplanner.log")
-CONFIGFILE_OLD = os.path.join(PREFDIR, "pigeonplanner.cfg")
-CONFIGFILE = os.path.join(PREFDIR, "pigeonplanner.json")
+CONFIGFILE_OLD = os.path.join(PREFDIR, u"pigeonplanner.cfg")
+CONFIGFILE = os.path.join(PREFDIR, u"pigeonplanner.json")
 
 TEMPDIR = tempfile.gettempdir()
 

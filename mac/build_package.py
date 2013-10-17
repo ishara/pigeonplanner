@@ -1,10 +1,9 @@
 
-import os
 import shutil
 import datetime
 import subprocess
 
-from pigeonplanner.const import VERSION
+from pigeonplanner.core.const import VERSION
 
 print "Setting correct values for Info.plist..."
 with open("mac/Info.plist.in") as plist_in:

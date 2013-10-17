@@ -6,7 +6,7 @@ import shutil
 import zipfile
 import subprocess
 
-from pigeonplanner.const import VERSION
+from pigeonplanner.core.const import VERSION
 
 
 package_root = '..\\dist\\'

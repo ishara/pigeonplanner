@@ -21,8 +21,8 @@ import sqlite3
 import nose.tools as nt
 from . import utils
 
-from pigeonplanner import const
 from pigeonplanner import database
+from pigeonplanner.core import const
 
 
 def test_connection():

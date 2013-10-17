@@ -27,7 +27,7 @@ import glob
 import shutil
 from setuptools import setup, find_packages
 
-from pigeonplanner import const
+from pigeonplanner.core import const
 
 
 # Common data files

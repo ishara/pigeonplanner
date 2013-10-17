@@ -19,10 +19,10 @@
 import nose.tools as nt
 from . import utils
 
-from pigeonplanner import pigeonparser
 from pigeonplanner.core import enums
 from pigeonplanner.core import errors
 from pigeonplanner.core import pigeon as corepigeon
+from pigeonplanner.core import pigeonparser
 
 
 def test_pigeon_helpers():
