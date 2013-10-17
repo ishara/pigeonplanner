@@ -20,7 +20,11 @@ import os
 import logging
 logger = logging.getLogger(__name__)
 
-from yapsy.PluginManager import PluginManager
+try:
+    from yapsy.PluginManager import PluginManager
+    yapsy_available = True
+except ImportError:
+    yapsy_available = False
 
 from pigeonplanner import const
 from pigeonplanner import common
@@ -28,7 +32,7 @@ from pigeonplanner import mailing
 from pigeonplanner import database
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import filechooser
-from pigeonplanner.ui.messagedialog import WarningDialog
+from pigeonplanner.ui.messagedialog import WarningDialog, ErrorDialog
 
 
 class ResultParser(builder.GtkBuilder):
@@ -38,9 +42,13 @@ class ResultParser(builder.GtkBuilder):
         self.data = None
 
         self._build_interface()
-        self._find_parsers()
         self.widgets.parserdialog.set_transient_for(parent)
         self.widgets.parserdialog.show_all()
+        if yapsy_available:
+            self._find_parsers()
+        else:
+            ErrorDialog((_("This tool needs Yapsy to run correctly."), None, ""),
+                        self.widgets.parserdialog)
 
     def close_window(self, widget=None, event=None):
         self.widgets.parserdialog.destroy()

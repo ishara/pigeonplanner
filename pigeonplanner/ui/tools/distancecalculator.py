@@ -16,8 +16,17 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from geopy import point
-from geopy import distance as gdistance
+import logging
+logger = logging.getLogger(__name__)
+
+try:
+    geopy_log = logging.getLogger("geopy")
+    geopy_log.setLevel(logging.ERROR)
+    from geopy import point
+    from geopy import distance as gdistance
+    geopy_available = True
+except ImportError:
+    geopy_available = False
 
 from pigeonplanner import common
 from pigeonplanner import database
@@ -36,6 +45,11 @@ class DistanceCalculator(builder.GtkBuilder):
         self._fill_location_combos(racepoint)
         self.widgets.window.set_transient_for(parent)
         self.widgets.window.show()
+
+        if not geopy_available:
+            self.widgets.window.set_sensitive(False)
+            ErrorDialog((_("This tool needs Geopy 0.95.0 or higher to run correctly."), None, ""),
+                        self.widgets.window)
 
     def close_window(self, widget, event=None):
         self._unit = self.widgets.combounit.get_active()

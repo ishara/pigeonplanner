@@ -17,13 +17,25 @@
 
 
 import urllib2
-import geopy
+import logging
+logger = logging.getLogger(__name__)
+
+try:
+    geopy_log = logging.getLogger("geopy")
+    geopy_log.setLevel(logging.ERROR)
+    import geopy
+    if not geopy.VERSION >= (0, 95, 0):
+        raise ValueError
+    geopy_available = True
+except (ImportError, ValueError):
+    geopy_available = False
 
 import gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.widgets import latlongentry
+from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
 class LocationChooser(builder.GtkBuilder):
@@ -43,6 +55,11 @@ class LocationChooser(builder.GtkBuilder):
 
     def on_entryloc_icon_press(self, widget, icon_pos, event):
         location = widget.get_text()
+
+        if not geopy_available:
+            ErrorDialog((_("This tool needs Geopy 0.95.0 or higher to run correctly."), None, ""),
+                        self.widgets.dialog)
+            return
 
         g = geopy.geocoders.GoogleV3()
         try:
