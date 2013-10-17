@@ -27,6 +27,8 @@ def get_pedigree(layout=None):
         from .pedigrees.original import PedigreeReport, PedigreeReportOptions
     elif layout == 1:
         from .pedigrees.swapped_details import PedigreeReport, PedigreeReportOptions
+    elif layout == 2:
+        from .pedigrees.middle import PedigreeReport, PedigreeReportOptions
 
     return PedigreeReport, PedigreeReportOptions
 
