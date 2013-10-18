@@ -21,4 +21,4 @@
 
 
 from pigeonplanner import main
-main.start_ui()
+main.run()

@@ -53,8 +53,7 @@ resultparsers.extend(glob.glob('resultparsers/*.yapsy-plugin'))
 
 options = {"py2exe": {"compressed": 2,
                       "optimize": 2,
-                      "includes": ['atk', 'cairo', 'gio', 'gobject',
-                                                    'pango', 'pangocairo'],
+                      "includes": ['atk', 'cairo', 'gio', 'gobject', 'pango', 'pangocairo'],
                       "excludes": ['_gtkagg', '_tkagg', 'bsddb', 'curses',
                                    'email', 'pywin.debugger',
                                    'pywin.debugger.dbgcon', 'pywin.dialogs',
@@ -98,8 +97,7 @@ else:
 
 entry_points = {
         "gui_scripts": [
-            "pigeonplanner = pigeonplanner.main:start_ui",
-            "pigeonplanner-db = pigeonplanner.main:start_dbtool"
+            "pigeonplanner = pigeonplanner.main:run"
             ]
         }
 

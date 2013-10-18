@@ -23,3 +23,6 @@ session = DatabaseSession()
 from pigeonplanner.database.data import *
 from pigeonplanner.database.pigeon import *
 
+DATABASE_OK = 0
+DATABASE_TOO_NEW = 1
+DATABASE_CHANGED = 2

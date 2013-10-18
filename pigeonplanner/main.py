@@ -22,30 +22,12 @@ main Pigeon Planner program and the database tool script.
 
 
 import os
-import os.path
 import sys
 import locale
 import gettext
 import logging
 import platform
-import webbrowser
 from optparse import OptionParser
-from threading import Thread
-
-try:
-    import pygtk; pygtk.require("2.0")
-except:
-    print "The Python GTK (PyGTK) bindings are required to run this program."
-    sys.exit(1)
-
-import gobject
-gobject.threads_init()
-
-try:
-    import gtk
-except:
-    print "The GTK+ runtime is required to run this program."
-    sys.exit(1)
 
 from pigeonplanner.core import const
 
@@ -80,32 +62,27 @@ class  NullFile(object):
 
 class Startup(object):
     def __init__(self):
-        self.logger = None
-
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
         sys.excepthook = self.exception_hook
-
-        # py2exe detection
-        py2exe = False
-        if const.WINDOWS and hasattr(sys, "frozen"):
-            py2exe = True
 	
         # Disable py2exe log feature
-        if const.WINDOWS and py2exe:
+        if const.WINDOWS and hasattr(sys, "frozen"):
             try:
-                sys.stdout = open("nul", "w")
-                sys.stderr = open("nul", "w")
+                sys.stdout = open(os.devnull, "w")
+                sys.stderr = open(os.devnull, "w")
             except IOError:
                 # "nul" doesn't exist, use our own class
                 sys.stdout = NullFile()
                 sys.stderr = NullFile()
 
-        # Detect if program is running for the first time
-        self.firstrun = False
+        # Create the needed configuration folders
         if not os.path.exists(const.PREFDIR):
             os.makedirs(const.PREFDIR, 0755)
-            self.firstrun = True
+        if not os.path.isdir(const.THUMBDIR):
+            os.mkdir(const.THUMBDIR)
+        if not os.path.isdir(os.path.join(const.PLUGINDIR, "resultparsers")):
+            os.makedirs(os.path.join(const.PLUGINDIR, "resultparsers"))
 
         # Parse arguments
         parser = OptionParser(version=const.VERSION)
@@ -114,25 +91,14 @@ class Startup(object):
         opts, args = parser.parse_args()
         self._loglevel = logging.DEBUG if opts.debug else logging.WARNING
 
-        if not os.path.isdir(const.THUMBDIR):
-            os.mkdir(const.THUMBDIR)
-
-        if not os.path.isdir(os.path.join(const.PLUGINDIR, "resultparsers")):
-            os.makedirs(os.path.join(const.PLUGINDIR, "resultparsers"))
-
         # Always setup logging
-        #TODO: find a better (and crossplatform) way
         try:
             self.setup_logging()
         except WindowsError:
-            text = "The program or database tool is already running!"
-            dialog = gtk.MessageDialog(None, 0, gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, text)
-            dialog.set_title("Already running - Pigeon Planner")
-            dialog.run()
-            dialog.destroy()
-            raise SystemExit(text)
+            # Pigeon Planner is already running
+            sys.exit(0)
 
-    def setup_locale(self):
+    def setup_locale(self, gtk_ui):
         from pigeonplanner.core import config
         language = config.get("options.language")
         localedomain = const.DOMAIN
@@ -168,6 +134,15 @@ class Startup(object):
         except AttributeError:
             # locale has no bindtextdomain on Windows, fall back to intl.dll
             if const.WINDOWS:
+                if gtk_ui and hasattr(sys, "frozen"):
+                    # There is a weird issue where cdll.intl throws an exception
+                    # when built with py2exe. Apparently GTK links some libraries
+                    # on import (details needed!). So this is a little workaround
+                    # to detect if we're running a py2exe'd package and the gtk
+                    # interface is requested.
+                    # Also shut up any code anaysers...
+                    import gtk; gtk
+
                 from ctypes import cdll
                 cdll.msvcrt._putenv("LANG=%s" % language)
                 cdll.msvcrt._putenv("LANGUAGE=%s" % language)
@@ -205,28 +180,6 @@ class Startup(object):
         self.logger.debug("Prefs path: %s" % const.PREFDIR)
         self.logger.debug("Current path: %s" % const.ROOTDIR)
         self.logger.debug("Running on: %s %s" % (get_operating_system()))
-        self.logger.debug("Python version: %s" % ".".join(str(n) for n in
-                                                        sys.version_info[:3]))
-        self.logger.debug("GTK+ version: %s" % ".".join(str(n) for n in
-                                                        gtk.gtk_version))
-        self.logger.debug("PyGTK version: %s" % ".".join(str(n) for n in
-                                                         gtk.pygtk_version))
-        if self.firstrun:
-            self.logger.debug("First run")
-
-    def setup_icons(self):
-        from pigeonplanner.ui import utils
-        # Register custom stock icons
-        utils.create_stock_button([
-                ("icon_pedigree_detail.png", "pedigree-detail", _("Pedigree")),
-                ("icon_email.png", "email", _("E-mail")),
-                ("icon_send.png", "send", _("Send")),
-                ("icon_report.png", "report", _("Report")),
-                ("icon_columns.png", "columns", "columns"),
-            ])
-
-        # Set default icon for all windows
-        gtk.window_set_default_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
 
     def setup_database(self):
         """
@@ -234,20 +187,16 @@ class Startup(object):
         """
 
         from pigeonplanner import database
-
         database.session.open()
 
         if database.session.get_database_version() > database.Schema.VERSION:
-            from pigeonplanner import messages
-            from pigeonplanner.ui.messagedialog import ErrorDialog
-            ErrorDialog(messages.MSG_NEW_DATABASE)
-            raise SystemExit()
+            return database.DATABASE_TOO_NEW
 
         changed = database.session.check_schema()
         if changed:
-            from pigeonplanner import messages
-            from pigeonplanner.ui.messagedialog import InfoDialog
-            InfoDialog(messages.MSG_UPDATED_DATABASE)
+            return database.DATABASE_CHANGED
+
+        return database.DATABASE_OK
 
     def setup_pigeons(self):
         """
@@ -258,57 +207,22 @@ class Startup(object):
 
         pigeonparser.parser.build_pigeons()
 
-    def search_updates(self):
-        from pigeonplanner.core import update
-
-        try:
-            new, msg = update.update()
-        except update.UpdateError, exc:
-            self.logger.error(exc)
-            return
-
-        if new:
-            gobject.idle_add(self.update_dialog)
-        else:
-            self.logger.info("AutoUpdate: %s" %msg)
-
-    def update_dialog(self):
-        from pigeonplanner import messages
-        from pigeonplanner.ui.messagedialog import QuestionDialog
-
-        if QuestionDialog(messages.MSG_UPDATE_NOW).run():
-            webbrowser.open(const.DOWNLOADURL)
-
-        return False
-
     def exception_hook(self, type_, value, tb):
         import traceback
-
         tb = "".join(traceback.format_exception(type_, value, tb))
         self.logger.critical("Unhandled exception\n%s" % tb)
 
-        from pigeonplanner.ui import exceptiondialog
-        exceptiondialog.ExceptionDialog(tb)
 
-
-def start_ui():
+def run(gtk_ui=True):
     app = Startup()
-    app.setup_locale()
-    app.setup_icons()
-    app.setup_database()
+    app.setup_locale(gtk_ui)
+    code = app.setup_database()
     app.setup_pigeons()
 
-    from pigeonplanner.core import config
-    if config.get("options.check-for-updates"):
-        updatethread = Thread(None, app.search_updates, None)
-        updatethread.start()
-
-    from pigeonplanner.ui import mainwindow
-    mainwindow.MainWindow()
-
-    gtk.main()
-
+    if gtk_ui:
+        from pigeonplanner.ui import gtkmain
+        gtkmain.run_ui(code)
 
 if __name__ == "__main__":
-    start_ui()
+    run()
 
