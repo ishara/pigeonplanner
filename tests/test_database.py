@@ -39,3 +39,36 @@ def test_new_database():
 test_new_database.setup = utils.open_test_db
 test_new_database.teardown = utils.close_test_db
 
+def test_database_version():
+    value = database.session.get_database_version()
+    nt.assert_equal(value, database.Schema.VERSION)
+    database.session.set_database_version(999)
+    value = database.session.get_database_version()
+    nt.assert_equal(value, 999)
+test_database_version.setup = utils.open_test_db
+test_database_version.teardown = utils.close_test_db
+
+def test_database_helper_methods():
+    # Check table names
+    schema_names = database.Schema.get_table_names()
+    database_names = database.session.get_table_names()
+    nt.assert_list_equal(schema_names, database_names)
+    # Check column names
+    schema_names = database.Schema.get_column_names(database.Tables.PIGEONS)
+    database_names = database.session.get_column_names(database.Tables.PIGEONS)
+    nt.assert_list_equal(schema_names, database_names)
+    # Add a new column
+    database.session.add_column(database.Tables.PIGEONS, "test TEXT")
+    column_names = database.session.get_column_names(database.Tables.PIGEONS)
+    nt.assert_in("test", column_names)
+    # Remove a table
+    database.session.remove_table(database.Tables.MEDIA)
+    table_names = database.session.get_table_names()
+    nt.assert_not_in(database.Tables.MEDIA, table_names)
+    # Add a table
+    database.session.add_table(database.Tables.MEDIA)
+    table_names = database.session.get_table_names()
+    nt.assert_in(database.Tables.MEDIA, table_names)
+test_database_helper_methods.setup = utils.open_test_db
+test_database_helper_methods.teardown = utils.close_test_db
+
