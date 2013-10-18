@@ -70,42 +70,6 @@ def get_function_name():
 def get_date():
     return datetime.date.today().strftime(const.DATE_FORMAT)
 
-def encode_string(string):
-    """
-    Encode a string to utf-8
-
-    @param string: A string which needs to be encoded
-    """
-
-    return string.decode(sys.getfilesystemencoding()).encode("utf-8")
-
-def get_unicode_path(path):
-    """
-    Return the Unicode version of a path string.
-
-    @param path: The path to be converted to Unicode
-    @type path: str
-    @returns: The Unicode version of path
-    @rtype: unicode
-    """
-
-    if not isinstance(path, str):
-        return path
-
-    if const.WINDOWS:
-        # In Windows path/filename returned from an environment variable
-        # is in filesystemencoding
-        try:
-            return unicode(path, sys.getfilesystemencoding())
-        except:
-            print "Problem encountered converting string: %s." % path
-            return unicode(path, sys.getfilesystemencoding(), errors="replace")
-    else:
-        try:
-            return unicode(path)
-        except:
-            print "Problem encountered converting string: %s." % path
-            return unicode(path, sys.getfilesystemencoding(), errors="replace")
 
 def count_active_pigeons():
     """
