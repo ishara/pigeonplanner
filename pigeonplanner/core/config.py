@@ -108,7 +108,6 @@ default_config = [
 
                 ("interface.arrows", False),
                 ("interface.stats", False),
-                ("interface.theme", 1),
                 ("interface.toolbar", True),
                 ("interface.statusbar", True),
                 ("interface.window-x", 0),

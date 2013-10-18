@@ -20,8 +20,6 @@ gtk_root = python_root + "Lib\\site-packages\\gtk-2.0\\runtime\\"
 # Copy the required theme files
 theme_files = [("etc\\gtk-2.0\\", "gtkrc"),
                ("lib\\gtk-2.0\\2.10.0\\engines\\", "libclearlooks.dll"),
-               ("share\\themes\\Clearlooks\\gtk-2.0\\", "gtkrc"),
-               ("share\\themes\\ClearlooksClassic\\gtk-2.0\\", "gtkrc"),
         ]
 for theme_path, theme_file in theme_files:
     dist_theme_path = package_root+theme_path

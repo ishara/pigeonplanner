@@ -214,20 +214,7 @@ class Startup(object):
         if self.firstrun:
             self.logger.debug("First run")
 
-    def setup_theme(self):
-        from pigeonplanner.core import config
-        # Set theme
-        themedir = ".\\share\\themes"
-        if const.WINDOWS and os.path.exists(themedir):
-            themes = os.listdir(themedir)
-            try:
-                theme = themes[config.get("interface.theme")]
-            except IndexError:
-                theme = themes[1]
-                config.set("interface.theme", 1)
-            themefile = os.path.join(themedir, theme, "gtk-2.0\\gtkrc")
-            gtk.rc_parse(themefile)
-
+    def setup_icons(self):
         from pigeonplanner.ui import utils
         # Register custom stock icons
         utils.create_stock_button([
@@ -307,7 +294,7 @@ class Startup(object):
 def start_ui():
     app = Startup()
     app.setup_locale()
-    app.setup_theme()
+    app.setup_icons()
     app.setup_database()
     app.setup_pigeons()
 

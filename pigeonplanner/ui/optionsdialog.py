@@ -75,12 +75,6 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.widgets.selection.select_path(0)
         self.widgets.treeview.expand_all()
 
-        # Show the theme changer on Windows
-        if const.WINDOWS and os.path.exists(".\\share\\themes"):
-            self.widgets.framethemes.show()
-            themes = os.listdir(".\\share\\themes\\")
-            comboboxes.fill_combobox(self.widgets.combothemes, themes)
-
         # Fill language combobox with available languages
         try:
             self.languages = os.listdir(const.LANGDIR)
@@ -143,11 +137,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.widgets.optionsdialog.destroy()
 
     def on_buttonok_clicked(self, widget):
-        restart = self.widgets.combolangs.get_active_text() !=\
-                     config.get("options.language") or\
-                    (const.WINDOWS and
-                     self.widgets.combothemes.get_active() !=\
-                     config.get("interface.theme"))
+        restart = self.widgets.combolangs.get_active_text() != config.get("options.language")
 
         if self.widgets.radioSexText.get_active():
             sexcoltype = 1
@@ -167,7 +157,6 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
 
                 ("interface.arrows", self.widgets.chkArrows.get_active()),
                 ("interface.stats", self.widgets.chkStats.get_active()),
-                ("interface.theme", self.widgets.combothemes.get_active()),
                 ("interface.toolbar", self.widgets.chkToolbar.get_active()),
                 ("interface.statusbar", self.widgets.chkStatusbar.get_active()),
                 ("interface.missing-pigeon-hide", self.widgets.chkShowHidden.get_active()),
@@ -258,8 +247,6 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
             self.widgets.radioSexImage.set_active(True)
         elif sexcoltype == 3:
             self.widgets.radioSexTextImage.set_active(True)
-
-        self.widgets.combothemes.set_active(config.get("interface.theme"))
 
         self.widgets.chkArrows.set_active(config.get("interface.arrows"))
         self.widgets.chkStats.set_active(config.get("interface.stats"))
