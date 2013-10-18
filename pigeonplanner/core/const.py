@@ -28,8 +28,10 @@ from datetime import datetime
 # No application imports!
 
 
+VERSION_TUPLE = (1, 99, 0)
+VERSION = ".".join(map(str, VERSION_TUPLE))
+
 NAME = "Pigeon Planner"
-VERSION = "1.11.0"
 COPYRIGHT = "(C)opyright 2009-%s Timo Vanwynsberghe" % datetime.now().year
 AUTHORS = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
 ARTISTS = ["Timo Vanwynsberghe <timovwb@gmail.com>",

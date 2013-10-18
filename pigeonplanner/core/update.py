@@ -71,7 +71,7 @@ def update():
         version = stable
 
     new = False
-    current = versiontuple(const.VERSION)
+    current = const.VERSION_TUPLE
     if current < version:
         msg = messages.MSG_UPDATE_AVAILABLE
         new = True
