@@ -16,9 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner.ui import pedigree
 from pigeonplanner.core import config
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.reportlib.utils import pt2cm as PT2CM
 from pigeonplanner.reportlib.basereport import Report, ReportOptions
 from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
@@ -135,7 +134,7 @@ class PedigreeReport(Report):
 
         # Pedigree
         lst = [None]*31
-        pedigree.build_tree(pigeonparser.parser, self._pigeon, 0, 1, lst)
+        corepigeon.build_pedigree_tree(self._pigeon, 0, 1, lst)
 
         h_sep = .2
         w_sep = .2

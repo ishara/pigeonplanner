@@ -32,6 +32,7 @@ from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import InfoDialog
 from pigeonplanner.core import const
 from pigeonplanner.core import enums
+from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.core import pigeonparser
 
 
@@ -39,18 +40,6 @@ from pigeonplanner.core import pigeonparser
 cairo_available = True
 if const.OSX:
     cairo_available = False
-
-
-def build_tree(parser, pigeon, index, depth, lst):
-    if depth > 5 or pigeon is None or index >= len(lst):
-        return
-
-    lst[index] = pigeon
-    pindex = pigeon.get_pindex()
-    if pindex in parser.get_pigeons():
-        sire , dam = parser.get_parents(pigeon)
-        build_tree(parser, sire, (2*index)+1, depth+1, lst)
-        build_tree(parser, dam, (2*index)+2, depth+1, lst)
 
 
 class DrawPedigree(object):
@@ -132,7 +121,7 @@ class DrawPedigree(object):
                 ]
 
             lst = [None]*len(pos)
-            build_tree(pigeonparser.parser, pigeon, 0, 1, lst)
+            corepigeon.build_pedigree_tree(pigeon, 0, 1, lst)
             self._draw(tables, pos, lst, pigeon.get_sex(), detailed)
         else:
             pos = [
@@ -147,8 +136,8 @@ class DrawPedigree(object):
             lstdam = [None]*len(pos)
             if pigeon is not None:
                 sire , dam = pigeonparser.parser.get_parents(pigeon)
-                build_tree(pigeonparser.parser, sire, 0, 1, lstsire)
-                build_tree(pigeonparser.parser, dam, 0, 1, lstdam)
+                corepigeon.build_pedigree_tree(sire, 0, 1, lstsire)
+                corepigeon.build_pedigree_tree(dam, 0, 1, lstdam)
             self._draw(tables[0], pos, lstsire, enums.Sex.cock, detailed)
             self._draw(tables[1], pos, lstdam, enums.Sex.hen, detailed)
 

@@ -21,17 +21,13 @@ Functions for some common tasks
 
 
 import os
-import sys
 import cgi
 import random
 import locale
 import inspect
 import urllib2
-import os.path
 import datetime
 import webbrowser
-import logging
-logger = logging.getLogger(__name__)
 
 from pigeonplanner import database
 from pigeonplanner.core import const
@@ -62,7 +58,7 @@ def get_status(status):
 
 def get_function_name():
     """
-    Retrieve the name of the fnction/method
+    Retrieve the name of the function/method
     """
 
     return inspect.stack()[1][3]

@@ -140,7 +140,7 @@ class Startup(object):
                     # on import (details needed!). So this is a little workaround
                     # to detect if we're running a py2exe'd package and the gtk
                     # interface is requested.
-                    # Also shut up any code anaysers...
+                    # Also shut up any code analysers...
                     import gtk; gtk
 
                 from ctypes import cdll

@@ -132,5 +132,14 @@ def remove_pigeon(pigeon, remove_results=True):
     if remove_results:
         database.remove_result_for_pigeon(pindex)
 
+def build_pedigree_tree(pigeon, index, depth, lst):
+    if depth > 5 or pigeon is None or index >= len(lst):
+        return
 
+    lst[index] = pigeon
+    pindex = pigeon.get_pindex()
+    if pindex in pigeonparser.parser.get_pigeons():
+        sire , dam = pigeonparser.parser.get_parents(pigeon)
+        build_pedigree_tree(sire, (2*index)+1, depth+1, lst)
+        build_pedigree_tree(dam, (2*index)+2, depth+1, lst)
 
