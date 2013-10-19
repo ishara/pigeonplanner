@@ -55,8 +55,6 @@ class DatabaseSession(object):
             conn = sqlite3.connect(self.dbfile,
                             detect_types=sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
         except Exception as e:
-            from pigeonplanner.ui import logdialog
-
             logger.critical("Could not connect to database")
             logger.critical(e)
             logger.debug("Databasedir: %s" % const.PREFDIR)
@@ -66,8 +64,6 @@ class DatabaseSession(object):
             logger.debug("Databasedir writable: %s" % os.access(const.PREFDIR, os.W_OK))
             logger.debug("Database writable: %s" % os.access(self.dbfile, os.W_OK))
             logger.debug("Encoding: %s" % sys.getfilesystemencoding())
-
-            logdialog.LogDialog()
             sys.exit()
 
         conn.row_factory = sqlite3.Row
