@@ -179,12 +179,22 @@ class Schema(BaseSchema):
         Tables.WIND: [("Windkey", "INTEGER", "PRIMARY KEY"),
                       ("wind", "TEXT", "UNIQUE NOT NULL")],
     }
+    INDEXES = [
+        ("pindex_pigeons", Tables.PIGEONS, ["pindex"]),
+        ("date_racepoint", Tables.RESULTS, ["date", "point"]),
+    ]
+
+    @classmethod
+    def _create_indexes(cls, session):
+        for name, table, columns in cls.INDEXES:
+            session.cursor.execute("CREATE INDEX IF NOT EXISTS %s ON %s (%s)" % (name, table, ", ".join(columns)))
 
     @classmethod
     def create_new(cls, session):
         for table_name in cls.get_table_names():
             column_sql = cls.get_columns_sql(table_name)
             session.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table_name, column_sql))
+        cls._create_indexes(session)
         session.set_database_version(cls.VERSION)
 
     @classmethod
@@ -246,6 +256,9 @@ class Schema(BaseSchema):
                 clist = constraints.split()
                 default = clist[clist.index("DEFAULT")+1]
                 session.cursor.execute("UPDATE %s SET %s=%s WHERE %s IS NULL" % (tablename, columnname, default, columnname))
+
+        logger.debug("Creating the indexes")
+        cls._create_indexes(session)
 
         # Commit all migration changes
         session.connection.commit()
