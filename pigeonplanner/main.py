@@ -158,6 +158,9 @@ class Startup(object):
         Setup logging and add some debug messages
         """
 
+        # Capture warnings and add them to the log, useful for GTK warnings.
+        logging.captureWarnings(True)
+
         if os.path.exists(const.LOGFILE):
             if os.path.exists("%s.old" % const.LOGFILE):
                 os.remove("%s.old" % const.LOGFILE)
