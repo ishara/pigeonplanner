@@ -98,7 +98,6 @@ class DateEntry(gtk.Viewport):
     def _unwarn(self):
         self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
 
-
     def __validate(self, date):
         if self.can_empty and date == "":
             return
@@ -142,6 +141,16 @@ class CalendarPopup(gtk.Window):
         self._calendar = calendar
         self._entry = entry
         self._saved_date = entry.get_text(validate=False)
+        if self._saved_date:
+            try:
+                year, month, day = self._saved_date.split("-")
+                calendar.select_month(int(month)-1, int(year))
+                calendar.select_day(int(day))
+            except ValueError:
+                # Raised by both splitting and setting an incorrect date
+                date = datetime.date.today().strftime(const.DATE_FORMAT)
+                self._saved_date = date
+                self._entry.set_text(date)
 
         vp = gtk.Viewport()
         vp.add(hbox)
