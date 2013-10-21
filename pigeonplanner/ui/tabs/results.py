@@ -207,15 +207,15 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.liststore.clear()
         data = {"pindex": self.pindex, "date": date, "point": racepoint}
         for result in database.get_results_for_data(data):
-            place = result[4]
-            out = result[5]
+            place = result["place"]
+            out = result["out"]
             if place == 0:
                 cof = "-"
                 place = "-"
             else:
                 cof = common.calculate_coefficient(place, out, True)
-            self.widgets.liststore.append([result[0], str(place), out, str(cof),
-                                           result[6], result[8], result[15]])
+            self.widgets.liststore.append([result["Resultkey"], str(place), out, str(cof),
+                                           result["sector"], result["category"], result["comment"]])
 
     def on_checkplaced_toggled(self, widget):
         sensitive = widget.get_active()
@@ -240,7 +240,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.liststore.clear()
         self.widgets.race_ls.clear()
         for race in database.get_races_for_pigeon(self.pindex):
-            self.widgets.race_ls.append([race[2], race[3], race[7], race[9], race[10]])
+            self.widgets.race_ls.append([race["date"], race["point"], race["type"],
+                                         race["wind"], race["weather"]])
 
     def clear_pigeon(self):
         self.widgets.liststore.clear()
