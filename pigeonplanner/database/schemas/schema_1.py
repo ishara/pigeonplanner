@@ -48,6 +48,16 @@ class Tables:
 class Schema(BaseSchema):
     VERSION = 1
     SCHEMA = {
+        # The upgrade_dummy table is very important and shouldn't be removed!
+        # The 1.x serie of Pigeon Planner had a schema checking function which
+        # updated the database to the latest schema and raised a KeyError by
+        # one of the helper methods which indicated that the database contained
+        # a table that didn't exist in the schema. The main startup script would
+        # catch this error and show a nice dialog that told the user the database
+        # was too new. The 2.x series changed all of this behaviour, but we'd still
+        # like to show this dialog instead of an unexpected exception dialog when
+        # the user tries to open this database in the 1.x series.
+        "upgrade_dummy": [("dummy", "TEXT", "")],
         Tables.PIGEONS: [("Pigeonskey", "INTEGER", "PRIMARY KEY"),
                          ("pindex", "TEXT", "UNIQUE NOT NULL"),
                          ("band", "TEXT", "NOT NULL"),
