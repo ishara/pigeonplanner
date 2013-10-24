@@ -20,8 +20,8 @@ import datetime
 
 from yapsy.IPlugin import IPlugin
 
-from pigeonplanner import const
-from pigeonplanner import common
+from pigeonplanner.core import const
+from pigeonplanner.core import common
 
 
 def expand_year(year):
