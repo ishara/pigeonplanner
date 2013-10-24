@@ -78,7 +78,7 @@ class DateEntry(gtk.Viewport):
     clear = gobject.property(get_clear, set_clear, bool, False)
 
     def set_text(self, text):
-        self._entry.set_text(text)
+        self._entry.set_text(str(text))
         self.emit("changed")
 
     def get_text(self, validate=True):
