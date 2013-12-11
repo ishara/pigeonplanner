@@ -114,6 +114,7 @@ default_config = [
                 ("interface.window-y", 0),
                 ("interface.window-w", 1),
                 ("interface.window-h", 680),
+                ("interface.show-all-pigeons", False),
                 ("interface.missing-pigeon-hide", False),
                 ("interface.missing-pigeon-color", False),
                 ("interface.missing-pigeon-color-value", "#FAD9D9"),

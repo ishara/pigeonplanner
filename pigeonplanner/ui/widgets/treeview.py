@@ -160,7 +160,8 @@ class MainTreeView(gtk.TreeView):
     def fill_treeview(self, path=0):
         self._liststore.clear()
         for pindex, pigeon in pigeonparser.parser.pigeons.items():
-            if not pigeon.get_visible(): continue
+            if not config.get("interface.show-all-pigeons") and not pigeon.get_visible():
+                continue
             ring, year = pigeon.get_band()
             self._liststore.insert(0, [pigeon, pindex, ring, year,
                                        pigeon.get_name(), pigeon.get_colour(),

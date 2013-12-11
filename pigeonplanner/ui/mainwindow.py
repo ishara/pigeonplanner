@@ -101,6 +101,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
       </menu>
       <menu action="ViewMenu">
          <menuitem action="Filter"/>
+         <menuitem action="ShowAll"/>
          <separator/>
          <menuitem action="Arrows"/>
          <menuitem action="Stats"/>
@@ -421,6 +422,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def menufilter_activate(self, widget):
         logger.debug(common.get_function_name())
         self.widgets.treeview.run_filterdialog(self)
+
+    def menushowall_toggled(self, widget):
+        config.set("interface.show-all-pigeons", widget.get_active())
+        self.widgets.treeview.fill_treeview()
 
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())
