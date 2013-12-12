@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-05 21:08+0200\n"
-"PO-Revision-Date: 2013-06-24 04:12+0000\n"
+"POT-Creation-Date: 2013-12-11 22:44+0100\n"
+"PO-Revision-Date: 2013-09-05 01:52+0000\n"
 "Last-Translator: Ha Nguyen <nguyenpigeon@hotmail.com>\n"
 "Language-Team: Vietnamese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-25 05:16+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-12-12 05:17+0000\n"
+"X-Generator: Launchpad (build 16869)\n"
 "Language: vi\n"
 
-#: pigeonplanner/messages.py:19 pigeonplanner/common.py:236
-#: pigeonplanner/common.py:243 pigeonplanner/ui/exportwindow.py:55
-#: pigeonplanner/ui/tools/distancecalculator.py:58
+#: pigeonplanner/messages.py:19 pigeonplanner/ui/exportwindow.py:55
+#: pigeonplanner/ui/tools/distancecalculator.py:72
+#: pigeonplanner/core/common.py:193 pigeonplanner/core/common.py:200
 msgid "Error"
 msgstr "Lỗi"
 
@@ -151,8 +151,8 @@ msgid "Removing the selected result"
 msgstr "Xóa các kết quả được lựa chọn"
 
 #: pigeonplanner/messages.py:95 pigeonplanner/messages.py:98
-#: pigeonplanner/messages.py:147 pigeonplanner/ui/dialogs.py:399
-#: glade/MainWindow.ui:1126
+#: pigeonplanner/messages.py:147 pigeonplanner/ui/dialogs.py:224
+#: glade/MainWindow.ui:1110
 msgid "Are you sure?"
 msgstr "Bạn chắc chắn?"
 
@@ -290,198 +290,155 @@ msgstr "Bạn đã cài đặt phiên bản mới nhất."
 msgid "This isn't normal, or you must be running a development version"
 msgstr "Có vấn đề, hoặc bạn phải chạy phiên bản phát triển!"
 
-#: pigeonplanner/main.py:236 pigeonplanner/ui/optionsdialog.py:63
-#: pigeonplanner/ui/pedigreewindow.py:70 pigeonplanner/ui/pedigreewindow.py:78
-#: pigeonplanner/ui/tabs/pedigree.py:28
-msgid "Pedigree"
-msgstr "Gia phả"
-
-#: pigeonplanner/main.py:237 glade/OptionsDialog.ui:1250 glade/Dialogs.ui:8
-#: glade/AddressBook.ui:372
-msgid "E-mail"
-msgstr "E-mail"
-
-#: pigeonplanner/main.py:238
-msgid "Send"
-msgstr "Gửi"
-
-#: pigeonplanner/main.py:239
-msgid "Report"
-msgstr "Báo cáo"
-
-#: pigeonplanner/main.py:324
-msgid "Pigeon Planner needs geopy 0.95.0 or higher to run."
-msgstr "Pigeon Planner cần Geopy phiên bản 0.95.0 hoặc cao hơn"
-
-#: pigeonplanner/main.py:331
-msgid "Pigeon Planner needs Yapsy to run."
-msgstr "Pigeon Planner cần Yapsy để chạy"
-
-#: pigeonplanner/common.py:42
-msgid "Cock"
-msgstr "Trống"
-
-#: pigeonplanner/common.py:42
-msgid "Hen"
-msgstr "Mái"
-
-#: pigeonplanner/common.py:42
-msgid "Young bird"
-msgstr "Chim trẻ"
-
-#: pigeonplanner/common.py:236
-msgid "Error: This file does not exist"
-msgstr "Lỗi: tập tin này không tồn tại"
-
-#: pigeonplanner/common.py:243
-msgid "Error opening file:"
-msgstr "Lỗi tập tin:"
-
 #: pigeonplanner/reports/pigeons.py:40 pigeonplanner/reports/results.py:48
-#: pigeonplanner/ui/dialogs.py:431 pigeonplanner/ui/tabs/relatives.py:168
-#: pigeonplanner/ui/widgets/treeview.py:184 glade/BreedingView.ui:140
+#: pigeonplanner/ui/dialogs.py:256 pigeonplanner/ui/tabs/relatives.py:163
+#: pigeonplanner/ui/widgets/treeview.py:257 glade/BreedingView.ui:140
 #: glade/BreedingView.ui:340 glade/BreedingView.ui:1132
-#: glade/BreedingView.ui:1302 glade/ResultWindow.ui:131
+#: glade/BreedingView.ui:1302 glade/ResultWindow.ui:1003
 #: glade/ResultParser.ui:389
 msgid "Band no."
 msgstr "Số kiềng"
 
-#: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:187
-#: pigeonplanner/ui/widgets/treeview.py:184
-#: pigeonplanner/ui/widgets/treeview.py:200 glade/MainWindow.ui:829
-#: glade/OptionsDialog.ui:915 glade/OptionsDialog.ui:1466
-#: glade/DetailsView.ui:260 glade/DetailsView.ui:836
+#: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:182
+#: pigeonplanner/ui/widgets/treeview.py:257 glade/MainWindow.ui:818
+#: glade/FilterDialog.ui:121 glade/OptionsDialog.ui:852
+#: glade/OptionsDialog.ui:1439 glade/DetailsView.ui:261
+#: glade/DetailsView.ui:815
 msgid "Sex"
 msgstr "Giới tính"
 
-#: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dialogs.py:431
-#: pigeonplanner/ui/widgets/treeview.py:184 glade/OptionsDialog.ui:861
-#: glade/OptionsDialog.ui:1212 glade/OptionsDialog.ui:1442
+#: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dialogs.py:256
+#: pigeonplanner/ui/widgets/treeview.py:257 glade/OptionsDialog.ui:787
+#: glade/OptionsDialog.ui:1190 glade/OptionsDialog.ui:1417
 #: glade/AddressBook.ui:129
 msgid "Name"
 msgstr "Tên"
 
 #: pigeonplanner/reports/pigeons.py:47
-#: pigeonplanner/ui/widgets/treeview.py:184 glade/OptionsDialog.ui:887
-#: glade/OptionsDialog.ui:1452 glade/DetailsView.ui:249
-#: glade/DetailsView.ui:825
+#: pigeonplanner/ui/widgets/treeview.py:257 glade/FilterDialog.ui:135
+#: glade/OptionsDialog.ui:811 glade/OptionsDialog.ui:1426
+#: glade/DetailsView.ui:250 glade/DetailsView.ui:804
 msgid "Colour"
 msgstr "Màu sắc"
 
 #: pigeonplanner/reports/pigeons.py:49
-#: pigeonplanner/ui/widgets/treeview.py:185
-#: pigeonplanner/ui/tools/distancecalculator.py:137 glade/OptionsDialog.ui:901
-#: glade/DetailsView.ui:223 glade/DetailsView.ui:655
-#: glade/MedicationView.ui:880
+#: pigeonplanner/ui/widgets/treeview.py:258
+#: pigeonplanner/ui/tools/distancecalculator.py:174 glade/FilterDialog.ui:163
+#: glade/OptionsDialog.ui:824 glade/DetailsView.ui:224
+#: glade/DetailsView.ui:634 glade/MedicationView.ui:880
 msgid "Loft"
 msgstr "Căn cứ"
 
 #: pigeonplanner/reports/pigeons.py:51
-#: pigeonplanner/ui/widgets/treeview.py:185 glade/OptionsDialog.ui:871
-#: glade/DetailsView.ui:273 glade/DetailsView.ui:849
+#: pigeonplanner/ui/widgets/treeview.py:258 glade/FilterDialog.ui:149
+#: glade/OptionsDialog.ui:796 glade/DetailsView.ui:274
+#: glade/DetailsView.ui:828
 msgid "Strain"
 msgstr "Dòng chim"
 
 #: pigeonplanner/reports/pigeons.py:53
-#: pigeonplanner/ui/widgets/treeview.py:185
-#: pigeonplanner/ui/widgets/treeview.py:208 glade/OptionsDialog.ui:929
+#: pigeonplanner/ui/widgets/treeview.py:258 glade/OptionsDialog.ui:837
 msgid "Status"
 msgstr "Trạng thái"
 
-#: pigeonplanner/reports/results.py:49 pigeonplanner/reports/velocity.py:39
-#: glade/ResultsView.ui:36 glade/Calendar.ui:136 glade/ResultWindow.ui:157
-#: glade/DetailsView.ui:1281 glade/DetailsView.ui:1394
-#: glade/DetailsView.ui:1515 glade/MedicationView.ui:36
+#: pigeonplanner/reports/results.py:46 pigeonplanner/reports/velocity.py:39
+#: glade/ResultsView.ui:39 glade/ResultWindow.ui:216 glade/ResultWindow.ui:890
+#: glade/DetailsView.ui:1251 glade/DetailsView.ui:1364
+#: glade/DetailsView.ui:1485 glade/MedicationView.ui:36
 #: glade/MedicationView.ui:123
 msgid "Date"
 msgstr "Ngày"
 
-#: pigeonplanner/reports/results.py:50 pigeonplanner/ui/resultwindow.py:122
-#: glade/ResultsView.ui:50 glade/ResultWindow.ui:170 glade/DetailsView.ui:1559
-#: glade/RaceManager.ui:132
+#: pigeonplanner/reports/results.py:47 glade/VelocityCalculator.ui:154
+#: glade/ResultsView.ui:52 glade/ResultWindow.ui:228 glade/ResultWindow.ui:903
+#: glade/DetailsView.ui:1529 glade/RaceManager.ui:132
 msgid "Racepoint"
 msgstr "Điểm đua"
 
-#: pigeonplanner/reports/results.py:51 glade/ResultsView.ui:64
-#: glade/ResultsView.ui:535 glade/ResultWindow.ui:183
+#: pigeonplanner/reports/results.py:49 glade/ResultsView.ui:154
+#: glade/ResultsView.ui:781 glade/ResultWindow.ui:486
+#: glade/ResultWindow.ui:1029
 msgid "Placed"
 msgstr "Vị trí"
 
-#: pigeonplanner/reports/results.py:52 glade/ResultsView.ui:78
-#: glade/ResultsView.ui:485 glade/ResultWindow.ui:196
+#: pigeonplanner/reports/results.py:50 glade/ResultsView.ui:169
+#: glade/ResultsView.ui:855 glade/ResultWindow.ui:500
+#: glade/ResultWindow.ui:1042
 msgid "Out of"
 msgstr "của"
 
-#: pigeonplanner/reports/results.py:56
-msgid "Coef."
-msgstr "Hệ số"
-
-#: pigeonplanner/reports/results.py:58 pigeonplanner/ui/resultwindow.py:123
-#: glade/ResultsView.ui:106 glade/ResultsView.ui:441
-#: glade/OptionsDialog.ui:993 glade/ResultWindow.ui:222
-msgid "Sector"
-msgstr "Khu vực"
-
-#: pigeonplanner/reports/results.py:60 glade/ResultsView.ui:120
-#: glade/ResultsView.ui:637 glade/Calendar.ui:177 glade/OptionsDialog.ui:1021
-#: glade/ResultWindow.ui:235 glade/ExportWindow.ui:126
+#: pigeonplanner/reports/results.py:51 glade/ResultsView.ui:65
+#: glade/ResultsView.ui:601 glade/OptionsDialog.ui:997
+#: glade/ResultWindow.ui:242 glade/ResultWindow.ui:916
+#: glade/ExportWindow.ui:126
 msgid "Type"
 msgstr "Loại"
 
-#: pigeonplanner/reports/results.py:62 glade/ResultsView.ui:134
-#: glade/ResultsView.ui:651 glade/OptionsDialog.ui:1007
-#: glade/ResultWindow.ui:248
-msgid "Category"
-msgstr "Nhóm"
-
-#: pigeonplanner/reports/results.py:64
-#: pigeonplanner/ui/tools/datamanager.py:49 glade/ResultsView.ui:148
-#: glade/ResultsView.ui:589 glade/OptionsDialog.ui:1051
-#: glade/ResultWindow.ui:261
+#: pigeonplanner/reports/results.py:52
+#: pigeonplanner/ui/tools/datamanager.py:45 glade/ResultsView.ui:78
+#: glade/ResultsView.ui:552 glade/OptionsDialog.ui:1049
+#: glade/ResultWindow.ui:256 glade/ResultWindow.ui:929
 msgid "Wind"
 msgstr "Gió"
 
-#: pigeonplanner/reports/results.py:66
-#: pigeonplanner/ui/tools/datamanager.py:48 glade/ResultsView.ui:162
-#: glade/ResultsView.ui:575 glade/OptionsDialog.ui:1037
-#: glade/ResultWindow.ui:274
+#: pigeonplanner/reports/results.py:53
+#: pigeonplanner/ui/tools/datamanager.py:44 glade/ResultsView.ui:91
+#: glade/ResultsView.ui:538 glade/OptionsDialog.ui:1006
+#: glade/ResultWindow.ui:270 glade/ResultWindow.ui:942
 msgid "Weather"
 msgstr "Thời tiết"
 
-#: pigeonplanner/reports/results.py:68 glade/ResultsView.ui:176
-#: glade/ResultsView.ui:603 glade/Calendar.ui:261 glade/BreedingView.ui:584
-#: glade/BreedingView.ui:979 glade/OptionsDialog.ui:1067
-#: glade/ResultWindow.ui:287 glade/MedicationView.ui:418
+#: pigeonplanner/reports/results.py:54
+msgid "Coef."
+msgstr "Hệ số"
+
+#: pigeonplanner/reports/results.py:55 glade/ResultsView.ui:199
+#: glade/ResultsView.ui:498 glade/OptionsDialog.ui:982
+#: glade/ResultWindow.ui:528 glade/ResultWindow.ui:1068
+msgid "Sector"
+msgstr "Khu vực"
+
+#: pigeonplanner/reports/results.py:56 glade/ResultsView.ui:214
+#: glade/ResultsView.ui:615 glade/OptionsDialog.ui:1034
+#: glade/ResultWindow.ui:542 glade/ResultWindow.ui:1081
+msgid "Category"
+msgstr "Nhóm"
+
+#: pigeonplanner/reports/results.py:57 glade/ResultsView.ui:229
+#: glade/ResultsView.ui:566 glade/BreedingView.ui:584
+#: glade/BreedingView.ui:979 glade/OptionsDialog.ui:1019
+#: glade/ResultWindow.ui:1094 glade/MedicationView.ui:418
 #: glade/MedicationView.ui:779 glade/AddressBook.ui:413
 msgid "Comment"
 msgstr "Chú thích"
 
 #: pigeonplanner/reports/velocity.py:35 pigeonplanner/reports/velocity.py:46
-#: glade/VelocityCalculator.ui:188 glade/VelocityCalculator.ui:475
-#: glade/VelocityCalculator.ui:908
+#: glade/VelocityCalculator.ui:341 glade/VelocityCalculator.ui:661
+#: glade/VelocityCalculator.ui:1125
 msgid "Velocity"
 msgstr "Vận tốc"
 
-#: pigeonplanner/reports/velocity.py:40 glade/VelocityCalculator.ui:540
+#: pigeonplanner/reports/velocity.py:40 glade/VelocityCalculator.ui:700
 msgid "Released"
 msgstr "Thả"
 
-#: pigeonplanner/reports/velocity.py:41 glade/VelocityCalculator.ui:162
-#: glade/VelocityCalculator.ui:499 glade/DistanceCalculator.ui:369
-#: glade/RaceManager.ui:191
+#: pigeonplanner/reports/velocity.py:41 glade/VelocityCalculator.ui:166
+#: glade/VelocityCalculator.ui:315 glade/VelocityCalculator.ui:685
+#: glade/DistanceCalculator.ui:369 glade/RaceManager.ui:191
 msgid "Distance"
 msgstr "Khoảng cách"
 
-#: pigeonplanner/reports/velocity.py:47 glade/VelocityCalculator.ui:919
+#: pigeonplanner/reports/velocity.py:47 glade/VelocityCalculator.ui:1136
 msgid "Flight Time"
 msgstr "Thời gian bay"
 
-#: pigeonplanner/reports/velocity.py:48 glade/VelocityCalculator.ui:930
+#: pigeonplanner/reports/velocity.py:48 glade/VelocityCalculator.ui:1147
 msgid "Time of Arrival"
 msgstr "Giờ về"
 
-#: pigeonplanner/reports/pedigrees/swapped_details.py:50
-#: pigeonplanner/reports/pedigrees/original.py:64
+#: pigeonplanner/reports/pedigrees/swapped_details.py:49
+#: pigeonplanner/reports/pedigrees/original.py:63
+#: pigeonplanner/reports/pedigrees/middle.py:42
 msgid "Pedigree of:"
 msgstr "Gia phả của:"
 
@@ -489,7 +446,7 @@ msgstr "Gia phả của:"
 msgid "Preview"
 msgstr "Xem trước"
 
-#: pigeonplanner/ui/filechooser.py:77 pigeonplanner/ui/tabs/media.py:116
+#: pigeonplanner/ui/filechooser.py:77 pigeonplanner/ui/tabs/media.py:111
 msgid "Images"
 msgstr "Ảnh"
 
@@ -510,9 +467,8 @@ msgstr "Chọn tập tin..."
 msgid "Title"
 msgstr "Tiêu đề"
 
-#: pigeonplanner/ui/filechooser.py:168 glade/Calendar.ui:225
-#: glade/MedicationView.ui:50 glade/MedicationView.ui:226
-#: glade/MedicationView.ui:723
+#: pigeonplanner/ui/filechooser.py:168 glade/MedicationView.ui:50
+#: glade/MedicationView.ui:226 glade/MedicationView.ui:723
 msgid "Description"
 msgstr "Miêu tả"
 
@@ -524,91 +480,111 @@ msgstr "Lưu"
 msgid "Select a folder..."
 msgstr "Chọn thư mục"
 
-#: pigeonplanner/ui/optionsdialog.py:56 glade/BreedingView.ui:603
-#: glade/BreedingView.ui:998 glade/OptionsDialog.ui:1608
-#: glade/OptionsDialog.ui:1696 glade/OptionsDialog.ui:1844
-#: glade/DatabaseTool.ui:234
+#: pigeonplanner/ui/optionsdialog.py:53 glade/BreedingView.ui:603
+#: glade/BreedingView.ui:998 glade/OptionsDialog.ui:1573
+#: glade/OptionsDialog.ui:1659 glade/OptionsDialog.ui:1806
 msgid "General"
 msgstr "Tổng quát"
 
-#: pigeonplanner/ui/optionsdialog.py:58
+#: pigeonplanner/ui/optionsdialog.py:55
 msgid "Appearance"
 msgstr "Xuất hiện"
 
-#: pigeonplanner/ui/optionsdialog.py:60
+#: pigeonplanner/ui/optionsdialog.py:57
 msgid "Columns"
 msgstr "Cột"
 
-#: pigeonplanner/ui/optionsdialog.py:62
+#: pigeonplanner/ui/optionsdialog.py:59
 msgid "Printing"
 msgstr "In"
 
-#: pigeonplanner/ui/optionsdialog.py:64 pigeonplanner/ui/resultwindow.py:119
-#: glade/MainWindow.ui:308 glade/ExportWindow.ui:254
+#: pigeonplanner/ui/optionsdialog.py:60 pigeonplanner/ui/gtkmain.py:57
+#: pigeonplanner/ui/pedigreewindow.py:69 pigeonplanner/ui/pedigreewindow.py:77
+#: pigeonplanner/ui/tabs/pedigree.py:28
+msgid "Pedigree"
+msgstr "Gia phả"
+
+#: pigeonplanner/ui/optionsdialog.py:61 glade/MainWindow.ui:17
+#: glade/ExportWindow.ui:254
 msgid "Pigeons"
 msgstr "Chiến binh"
 
-#: pigeonplanner/ui/optionsdialog.py:65 pigeonplanner/ui/resultwindow.py:78
-#: pigeonplanner/ui/tabs/results.py:51 glade/ResultsView.ui:325
+#: pigeonplanner/ui/optionsdialog.py:62 pigeonplanner/ui/resultwindow.py:94
+#: pigeonplanner/ui/tabs/results.py:54 glade/ResultsView.ui:382
+#: glade/ResultWindow.ui:813 glade/ResultWindow.ui:1114
 msgid "Results"
 msgstr "Kết quả"
 
-#: pigeonplanner/ui/optionsdialog.py:67
+#: pigeonplanner/ui/optionsdialog.py:64
 msgid "Advanced"
 msgstr "Tiên tiến"
 
-#: pigeonplanner/ui/optionsdialog.py:121
-msgid "days"
-msgstr "Ngày"
-
-#: pigeonplanner/ui/optionsdialog.py:121
+#: pigeonplanner/ui/optionsdialog.py:112
 msgid "day"
 msgstr "Ngày"
 
-#: pigeonplanner/ui/exceptiondialog.py:47
+#: pigeonplanner/ui/optionsdialog.py:112
+msgid "days"
+msgstr "Ngày"
+
+#: pigeonplanner/ui/exceptiondialog.py:46
 msgid ""
 "Chances are that your problem is already fixed in this new version. Send a "
 "report anyway?"
 msgstr "Có thể vấn đề được giải quyết trong phiên bản mới. Gửi báo cáo?"
 
-#: pigeonplanner/ui/exceptiondialog.py:73
+#: pigeonplanner/ui/exceptiondialog.py:72
 msgid "Pigeon Planner has experienced an unexpected error"
-msgstr "Chương trình hết hạn hhoa85c bị lỗi không mong muốn"
+msgstr "Chương trình hết hạn hoặc bị lỗi không mong muốn"
 
-#: pigeonplanner/ui/exceptiondialog.py:81
+#: pigeonplanner/ui/exceptiondialog.py:80
 msgid ""
 "You can help the Pigeon Planner developers by taking the time to report this "
 "bug."
-msgstr "Bạn có thể báo lỗi này để giúp đỡ các nhà phát triển Pigeon Planner."
+msgstr ""
+"Cảnh báo lỗi này tới những nhà phát triển Pigeon Planner để hoàn thiện nó."
 
-#: pigeonplanner/ui/exceptiondialog.py:99
+#: pigeonplanner/ui/exceptiondialog.py:98
 msgid "Error Detail"
 msgstr "Lỗi chi tiết"
 
-#: pigeonplanner/ui/pedigreewindow.py:89
+#: pigeonplanner/ui/gtkmain.py:58 glade/OptionsDialog.ui:1225
+#: glade/Dialogs.ui:8 glade/AddressBook.ui:372
+msgid "E-mail"
+msgstr "E-mail"
+
+#: pigeonplanner/ui/gtkmain.py:59
+msgid "Send"
+msgstr "Gửi"
+
+#: pigeonplanner/ui/gtkmain.py:60
+msgid "Report"
+msgstr "Báo cáo"
+
+#: pigeonplanner/ui/pedigreewindow.py:88
 msgid "Save this pedigree"
 msgstr "Lưu gia phả"
 
-#: pigeonplanner/ui/pedigreewindow.py:93
+#: pigeonplanner/ui/pedigreewindow.py:92
 msgid "View this pedigree"
 msgstr "Xem gia phả"
 
-#: pigeonplanner/ui/pedigreewindow.py:95 glade/MainWindow.ui:66
+#: pigeonplanner/ui/pedigreewindow.py:94 glade/MainWindow.ui:246
 msgid "Print this pedigree"
 msgstr "In gia phả"
 
-#: pigeonplanner/ui/pedigreewindow.py:97
-#: pigeonplanner/reportlib/gui/printpreview.py:65 glade/ResultWindow.ui:15
+#: pigeonplanner/ui/pedigreewindow.py:96
+#: pigeonplanner/reportlib/gui/printpreview.py:65 glade/ResultWindow.ui:39
 #: glade/PhotoAlbum.ui:29
 msgid "Close this window"
 msgstr "Đóng cửa sổ"
 
-#: pigeonplanner/ui/pedigreewindow.py:195
+#: pigeonplanner/ui/pedigreewindow.py:194
 #, python-format
 msgid "Cannot find image '%s'"
 msgstr "Không thể tìm ảnh '%s'"
 
-#: pigeonplanner/ui/pedigreewindow.py:196
+#: pigeonplanner/ui/pedigreewindow.py:195
 msgid ""
 "You need to edit the pigeon and select the correct path or restore the "
 "original image on your computer."
@@ -616,41 +592,24 @@ msgstr ""
 "Bạn cần chỉnh sửa chiến binh và chọn lại đường dẫn hoặc khôi phục lại ảnh "
 "ban đầu trên máy tính của bạn."
 
-#: pigeonplanner/ui/resultwindow.py:114
-msgid "Filter results"
-msgstr "Lọc kết quả"
-
-#: pigeonplanner/ui/resultwindow.py:120
-msgid "Year of pigeon"
-msgstr "Năm sinh"
-
-#: pigeonplanner/ui/resultwindow.py:121
-msgid "Year of race"
-msgstr "Năm đua"
-
-#: pigeonplanner/ui/resultwindow.py:124 glade/ResultsView.ui:92
-#: glade/OptionsDialog.ui:983 glade/ResultWindow.ui:209
-msgid "Coefficient"
-msgstr "Hệ số"
-
-#: pigeonplanner/ui/resultwindow.py:125 glade/ResultParser.ui:417
-msgid "Place"
-msgstr "Vị trí"
-
-#: pigeonplanner/ui/maildialog.py:150
+#: pigeonplanner/ui/maildialog.py:149
 msgid "The e-mail has been sent succesfully!"
 msgstr "Thư đã được gửi thành công"
 
-#: pigeonplanner/ui/maildialog.py:151
+#: pigeonplanner/ui/maildialog.py:150
 msgid "Connection to server failed!"
 msgstr "Mất kết nối với server!"
 
-#: pigeonplanner/ui/resultparser.py:57
+#: pigeonplanner/ui/resultparser.py:50
+msgid "This tool needs Yapsy to run correctly."
+msgstr ""
+
+#: pigeonplanner/ui/resultparser.py:65
 #, python-format
 msgid "This result is not in the '%s' format. Do you want to continue?"
 msgstr "Kết quả không theo định dạng '%s'. Bạn muốn tiếp tục?"
 
-#: pigeonplanner/ui/detailsview.py:65 glade/DetailsView.ui:1112
+#: pigeonplanner/ui/detailsview.py:65 glade/DetailsView.ui:1082
 msgid "Details of pigeon"
 msgstr "Chi tiết bồ câu"
 
@@ -659,46 +618,35 @@ msgstr "Chi tiết bồ câu"
 msgid "Details of %s"
 msgstr "Chi tiết của %s"
 
-#: pigeonplanner/ui/databasetool.py:39
-msgid "Executing..."
-msgstr "Đang thực hiện..."
-
-#: pigeonplanner/ui/databasetool.py:41
-msgid "Error: see the logfile for more info."
-msgstr "Lỗi: xem logfile để biết thêm thông tin"
-
-#: pigeonplanner/ui/databasetool.py:42
-msgid "Operation cancelled"
-msgstr "Hành động bị hủy"
-
-#: pigeonplanner/ui/databasetool.py:43
-msgid "Operation completed"
-msgstr "Hoạt động hoàn thành"
-
-#: pigeonplanner/ui/mainwindow.py:281
+#: pigeonplanner/ui/mainwindow.py:259
 #, python-format
 msgid "Pigeon %s has been added"
 msgstr "Chiến binh %s đã được thêm"
 
-#: pigeonplanner/ui/mainwindow.py:398
+#: pigeonplanner/ui/mainwindow.py:369
 #, python-format
 msgid "Pigeon %s has been removed"
 msgstr "Chiến binh %s đã xóa"
 
-#: pigeonplanner/ui/mainwindow.py:408
+#: pigeonplanner/ui/mainwindow.py:374
 #, python-format
 msgid "%s pigeons have been removed"
 msgstr "%s chiến binh đã xóa"
 
-#: pigeonplanner/ui/mainwindow.py:553 glade/MainWindow.ui:251
+#: pigeonplanner/ui/mainwindow.py:495 glade/MainWindow.ui:73
 msgid "Search for updates..."
 msgstr "Tìm bản cập nhật..."
 
-#: pigeonplanner/ui/mainwindow.py:555
+#: pigeonplanner/ui/mainwindow.py:497
 msgid "Go to the website?"
 msgstr "Vào website?"
 
-#: pigeonplanner/ui/locationchooser.py:50
+#: pigeonplanner/ui/locationchooser.py:60
+#: pigeonplanner/ui/tools/distancecalculator.py:51
+msgid "This tool needs Geopy 0.95.0 or higher to run correctly."
+msgstr ""
+
+#: pigeonplanner/ui/locationchooser.py:68
 #, python-format
 msgid "Can't find location '%s'"
 msgstr "Không thể tìm vị trí '%s'"
@@ -707,13 +655,13 @@ msgstr "Không thể tìm vị trí '%s'"
 msgid "Logfile Viewer"
 msgstr "Logfile"
 
-#: pigeonplanner/ui/dialogs.py:58
+#: pigeonplanner/ui/dialogs.py:59
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  Ha Nguyen https://launchpad.net/~nguyenpigeon"
 
-#: pigeonplanner/ui/dialogs.py:68 glade/MainWindow.ui:259
+#: pigeonplanner/ui/dialogs.py:69 glade/MainWindow.ui:66
 msgid "General information"
 msgstr "Thông tin tổng quát"
 
@@ -729,15 +677,15 @@ msgstr "Thông tin dữ liệu"
 msgid "Number of pigeons"
 msgstr "Số chiến binh"
 
-#: pigeonplanner/ui/dialogs.py:115 glade/MainWindow.ui:427
+#: pigeonplanner/ui/dialogs.py:115 glade/MainWindow.ui:419
 msgid "Cocks"
 msgstr "Trống"
 
-#: pigeonplanner/ui/dialogs.py:117 glade/MainWindow.ui:459
+#: pigeonplanner/ui/dialogs.py:117 glade/MainWindow.ui:451
 msgid "Hens"
 msgstr "Mái"
 
-#: pigeonplanner/ui/dialogs.py:119 glade/MainWindow.ui:491
+#: pigeonplanner/ui/dialogs.py:119 glade/MainWindow.ui:483
 msgid "Young birds"
 msgstr "Chim trẻ"
 
@@ -745,7 +693,7 @@ msgstr "Chim trẻ"
 msgid "Number of results"
 msgstr "Kết quả"
 
-#: pigeonplanner/ui/dialogs.py:127
+#: pigeonplanner/ui/dialogs.py:126
 msgid "Number of couples"
 msgstr "Số đôi"
 
@@ -755,9 +703,9 @@ msgstr "Tạo sao lưu"
 
 #: pigeonplanner/ui/dialogs.py:150
 msgid "Choose a directory where to save the backup"
-msgstr "Ch5on thư mục lưu bản sao"
+msgstr "Chọn thư mục lưu bản sao"
 
-#: pigeonplanner/ui/dialogs.py:156 glade/OptionsDialog.ui:374
+#: pigeonplanner/ui/dialogs.py:156 glade/OptionsDialog.ui:372
 msgid "Backup"
 msgstr "Sao lưu"
 
@@ -777,49 +725,29 @@ msgstr "Chú ý! Ghi đè lên dữ liệu cũ"
 msgid "Restore"
 msgstr "Phục hồi"
 
-#: pigeonplanner/ui/dialogs.py:282
-msgid "Only show:"
-msgstr "Hiện:"
-
-#: pigeonplanner/ui/dialogs.py:302 pigeonplanner/ui/dialogs.py:417
-msgid "Search a pigeon"
-msgstr "Tìm chiến binh"
-
-#: pigeonplanner/ui/dialogs.py:318
-msgid "Search for:"
-msgstr "Tìm:"
-
-#: pigeonplanner/ui/dialogs.py:326
-msgid "Search in:"
-msgstr "Tìm:"
-
-#: pigeonplanner/ui/dialogs.py:327
-msgid "Band numbers"
-msgstr "Số kiềng"
-
-#: pigeonplanner/ui/dialogs.py:329
-msgid "Names"
-msgstr "Tên"
-
-#: pigeonplanner/ui/dialogs.py:393
+#: pigeonplanner/ui/dialogs.py:218
 msgid "Removing the selected medication entry"
 msgstr "Xóa bỏ các loại thuốc được chọn"
 
-#: pigeonplanner/ui/dialogs.py:395
+#: pigeonplanner/ui/dialogs.py:220
 msgid "Remove this entry for all pigeons?"
 msgstr "Xóa bỏ mục này cho tất cả chiến binh?"
 
-#: pigeonplanner/ui/dialogs.py:431 pigeonplanner/ui/tabs/relatives.py:168
-#: pigeonplanner/ui/widgets/treeview.py:184 glade/MainWindow.ui:877
-#: glade/ResultWindow.ui:144 glade/ResultParser.ui:403
+#: pigeonplanner/ui/dialogs.py:242
+msgid "Search a pigeon"
+msgstr "Tìm chiến binh"
+
+#: pigeonplanner/ui/dialogs.py:256 pigeonplanner/ui/tabs/relatives.py:163
+#: pigeonplanner/ui/widgets/treeview.py:257 glade/MainWindow.ui:869
+#: glade/ResultWindow.ui:1016 glade/ResultParser.ui:403
 msgid "Year"
 msgstr "Năm"
 
-#: pigeonplanner/ui/tabs/media.py:38 glade/MediaView.ui:56
+#: pigeonplanner/ui/tabs/media.py:39 glade/MediaView.ui:56
 msgid "Media"
-msgstr "Âm thanh"
+msgstr "Ảnh/nhạc"
 
-#: pigeonplanner/ui/tabs/media.py:120 glade/OptionsDialog.ui:806
+#: pigeonplanner/ui/tabs/media.py:115 glade/OptionsDialog.ui:729
 msgid "Other"
 msgstr "Khác"
 
@@ -831,149 +759,130 @@ msgstr "<b>Gia phả trống</b>"
 msgid "<b>Pedigree dam</b>"
 msgstr "<b>Gia phả mái</b>"
 
-#: pigeonplanner/ui/tabs/medication.py:35 glade/MedicationView.ui:278
+#: pigeonplanner/ui/tabs/medication.py:37 glade/MedicationView.ui:278
 #: glade/MedicationView.ui:516 glade/MedicationView.ui:751
 msgid "Medication"
 msgstr "Thuốc"
 
-#: pigeonplanner/ui/tabs/breeding.py:42
+#: pigeonplanner/ui/tabs/breeding.py:43
 msgid "Breeding"
 msgstr "Sinh sản"
 
-#: pigeonplanner/ui/tabs/results.py:255
+#: pigeonplanner/ui/tabs/results.py:305
 msgid "Edit result for:"
 msgstr "Chỉnh sửa kết quả:"
 
-#: pigeonplanner/ui/tabs/results.py:255
+#: pigeonplanner/ui/tabs/results.py:305
 msgid "Add result for:"
 msgstr "Thêm kết quả:"
 
-#: pigeonplanner/ui/tabs/relatives.py:35
+#: pigeonplanner/ui/tabs/relatives.py:36
 msgid "Relatives"
 msgstr "Quan hệ"
 
-#: pigeonplanner/ui/tabs/relatives.py:47
+#: pigeonplanner/ui/tabs/relatives.py:46
 msgid "<b>Brothers and sisters</b>"
 msgstr "<b>Anh Chị Em</b>"
 
-#: pigeonplanner/ui/tabs/relatives.py:60
+#: pigeonplanner/ui/tabs/relatives.py:59
 msgid "<b>Half brothers and sisters</b>"
 msgstr "<b>Nửa Anh Chị Em</b>"
 
-#: pigeonplanner/ui/tabs/relatives.py:73
+#: pigeonplanner/ui/tabs/relatives.py:72
 msgid "<b>Offspring</b>"
 msgstr "<b>Con</b>"
 
-#: pigeonplanner/ui/tabs/relatives.py:172
+#: pigeonplanner/ui/tabs/relatives.py:167
 msgid "Common parent"
 msgstr "Cha Mẹ"
 
-#: pigeonplanner/ui/widgets/treeview.py:195
-msgid "Filter pigeons"
-msgstr "Lọc chiến binh"
-
-#: pigeonplanner/ui/widgets/treeview.py:201
-#: pigeonplanner/ui/tools/datamanager.py:41
-msgid "Colours"
-msgstr "Màu"
-
-#: pigeonplanner/ui/widgets/treeview.py:203
-#: pigeonplanner/ui/tools/datamanager.py:46
-msgid "Strains"
-msgstr "Dòng"
-
-#: pigeonplanner/ui/widgets/treeview.py:205
-#: pigeonplanner/ui/tools/datamanager.py:47
-msgid "Lofts"
-msgstr "Căn cứ"
-
-#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1347
-#: data/TranslationWorkaround.ui:8
+#: pigeonplanner/ui/widgets/comboboxes.py:111 glade/DetailsView.ui:1317
+#: data/TranslationWorkaround.ui:9
 msgid "Dead"
 msgstr "Chết"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1374
-#: data/TranslationWorkaround.ui:9
+#: pigeonplanner/ui/widgets/comboboxes.py:111 glade/DetailsView.ui:1344
+#: data/TranslationWorkaround.ui:10
 msgid "Active"
 msgstr "Sống"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1495
-#: data/TranslationWorkaround.ui:10
+#: pigeonplanner/ui/widgets/comboboxes.py:111 glade/DetailsView.ui:1465
+#: data/TranslationWorkaround.ui:11
 msgid "Sold"
 msgstr "Bán"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:99 glade/DetailsView.ui:1616
-#: data/TranslationWorkaround.ui:11
-msgid "Lost"
-msgstr "Căn cứ"
-
-#: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:1735
+#: pigeonplanner/ui/widgets/comboboxes.py:111 glade/DetailsView.ui:1586
 #: data/TranslationWorkaround.ui:12
+msgid "Lost"
+msgstr "Mất/Lạc"
+
+#: pigeonplanner/ui/widgets/comboboxes.py:112 glade/DetailsView.ui:1705
+#: data/TranslationWorkaround.ui:13
 msgid "Breeder"
 msgstr "Giống"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:100 glade/DetailsView.ui:1888
-#: data/TranslationWorkaround.ui:13
+#: pigeonplanner/ui/widgets/comboboxes.py:112 glade/DetailsView.ui:1858
+#: data/TranslationWorkaround.ui:14
 msgid "On loan"
 msgstr "Cho thuê"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:129
+#: pigeonplanner/ui/widgets/comboboxes.py:176
 msgid "Yards"
 msgstr "Yards"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:130
+#: pigeonplanner/ui/widgets/comboboxes.py:177
 msgid "Kilometres"
 msgstr "Ki-lo-met"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:131
+#: pigeonplanner/ui/widgets/comboboxes.py:178
 msgid "Metres"
 msgstr "Mét"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:132
+#: pigeonplanner/ui/widgets/comboboxes.py:179
 msgid "Centimetres"
 msgstr "Cen-ti-met"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:133
+#: pigeonplanner/ui/widgets/comboboxes.py:180
 msgid "Inches"
 msgstr "Inches"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:134
+#: pigeonplanner/ui/widgets/comboboxes.py:181
 msgid "Feet"
 msgstr "Feet"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:135
+#: pigeonplanner/ui/widgets/comboboxes.py:182
 msgid "Miles"
 msgstr "Miles"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:136
+#: pigeonplanner/ui/widgets/comboboxes.py:183
 msgid "Nautical Miles"
 msgstr "Hải lý"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:159
+#: pigeonplanner/ui/widgets/comboboxes.py:206
 msgid "Yard per Minute"
 msgstr "Yard/phút"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:160
+#: pigeonplanner/ui/widgets/comboboxes.py:207
 msgid "Metres per Minute"
 msgstr "Mét/phút"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:161
+#: pigeonplanner/ui/widgets/comboboxes.py:208
 msgid "Metres per Second"
 msgstr "Mét/giây"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:162
+#: pigeonplanner/ui/widgets/comboboxes.py:209
 msgid "Kilometre per Hour"
 msgstr "Km/giờ"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:163
+#: pigeonplanner/ui/widgets/comboboxes.py:210
 msgid "Feet per Second"
 msgstr "Feet/giây"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:164
+#: pigeonplanner/ui/widgets/comboboxes.py:211
 msgid "Feet per Minute"
 msgstr "Feet/phút"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:165
+#: pigeonplanner/ui/widgets/comboboxes.py:212
 msgid "Mile per Hour"
 msgstr "Mile/giờ"
 
@@ -1012,40 +921,43 @@ msgstr "Tắt"
 msgid "<edit>"
 msgstr "<Chỉnh>"
 
-#: pigeonplanner/ui/tools/calendar.py:127
-#, python-format
-msgid "Notification set on %s days"
-msgstr "Thông báo vào %s ngày"
+#: pigeonplanner/ui/tools/datamanager.py:37
+msgid "Colours"
+msgstr "Màu"
 
-#: pigeonplanner/ui/tools/calendar.py:130
-msgid "No notification set"
-msgstr "Không có thông báo"
-
-#: pigeonplanner/ui/tools/datamanager.py:42
+#: pigeonplanner/ui/tools/datamanager.py:38
 msgid "Sectors"
 msgstr "Khu vực"
 
-#: pigeonplanner/ui/tools/datamanager.py:43
+#: pigeonplanner/ui/tools/datamanager.py:39
 msgid "Types"
 msgstr "Loại"
 
-#: pigeonplanner/ui/tools/datamanager.py:44
+#: pigeonplanner/ui/tools/datamanager.py:40
 msgid "Categories"
 msgstr "Nhóm"
 
-#: pigeonplanner/ui/tools/datamanager.py:45
-#: pigeonplanner/ui/tools/datamanager.py:76
+#: pigeonplanner/ui/tools/datamanager.py:41
+#: pigeonplanner/ui/tools/datamanager.py:72 glade/VelocityCalculator.ui:65
 msgid "Racepoints"
 msgstr "Điểm đua"
 
-#: pigeonplanner/ui/tools/distancecalculator.py:56
+#: pigeonplanner/ui/tools/datamanager.py:42
+msgid "Strains"
+msgstr "Dòng"
+
+#: pigeonplanner/ui/tools/datamanager.py:43
+msgid "Lofts"
+msgstr "Căn cứ"
+
+#: pigeonplanner/ui/tools/distancecalculator.py:70
 msgid ""
 "The latitude and longitude need to be in DD.dddddd° format to use this "
 "function."
 msgstr ""
 "Đặt kinh độ, vĩ độ theo định dạng DD.dddddd° để sử dụng chức năng này"
 
-#: pigeonplanner/ui/tools/distancecalculator.py:136
+#: pigeonplanner/ui/tools/distancecalculator.py:173
 msgid "Custom"
 msgstr "Tùy chọn"
 
@@ -1122,345 +1034,359 @@ msgstr "Thu nhỏ"
 msgid "of %d"
 msgstr "của %d"
 
+#: pigeonplanner/core/common.py:39
+msgid "Cock"
+msgstr "Trống"
+
+#: pigeonplanner/core/common.py:40
+msgid "Hen"
+msgstr "Mái"
+
+#: pigeonplanner/core/common.py:41
+msgid "Young bird"
+msgstr "Chim trẻ"
+
+#: pigeonplanner/core/common.py:193
+msgid "Error: This file does not exist"
+msgstr "Lỗi: tập tin này không tồn tại"
+
+#: pigeonplanner/core/common.py:200
+msgid "Error opening file:"
+msgstr "Lỗi tập tin:"
+
 #: glade/MainWindow.ui:10
-msgid "View online help"
-msgstr "Xem trợ giúp trực tuyến"
+msgid "Show all pigeons"
+msgstr ""
+
+#: glade/MainWindow.ui:11
+msgid "Show all pigeons in the list"
+msgstr ""
 
 #: glade/MainWindow.ui:18
-msgid "Select all"
-msgstr "Chọn tất cả"
-
-#: glade/MainWindow.ui:19
-msgid "Select all pigeons"
-msgstr "Chọn tất cả chiến binh"
-
-#: glade/MainWindow.ui:25
-msgid "_File"
-msgstr "_Tập tin"
-
-#: glade/MainWindow.ui:35 glade/MainWindow.ui:79
-msgid "_Backup"
-msgstr "_Sao lưu"
-
-#: glade/MainWindow.ui:40
-msgid "_Pigeon"
-msgstr "_Chiến binh"
-
-#: glade/MainWindow.ui:45
-msgid "_Edit"
-msgstr "_Điều chỉnh"
-
-#: glade/MainWindow.ui:50
-msgid "_View"
-msgstr "_Xem"
-
-#: glade/MainWindow.ui:55
-msgid "_Tools"
-msgstr "_Công cụ"
-
-#: glade/MainWindow.ui:60
-msgid "_Help"
-msgstr "_Trợ giúp"
-
-#: glade/MainWindow.ui:65 glade/MainWindow.ui:154
-msgid "_Pedigree"
-msgstr "_Gia phả"
-
-#: glade/MainWindow.ui:72
-msgid "Blank pedigree"
-msgstr "Gia phả trống"
-
-#: glade/MainWindow.ui:73
-msgid "Print a blank pedigree"
-msgstr "In gia phả trống"
-
-#: glade/MainWindow.ui:80
-msgid "Create a backup of your database"
-msgstr "Tạo bản sao lưu cho dữ liệu của bạn"
-
-#: glade/MainWindow.ui:87
-msgid "_Restore"
-msgstr "_Phục hồi"
-
-#: glade/MainWindow.ui:88
-msgid "Restore a backup of your database"
-msgstr "Phục hồi dữ liệu"
-
-#: glade/MainWindow.ui:95
-msgid "Quit the program"
-msgstr "Thoát chương trình"
-
-#: glade/MainWindow.ui:103
-msgid "Add a new pigeon"
-msgstr "Thêm chiến binh mới"
-
-#: glade/MainWindow.ui:111
-msgid "Add range"
-msgstr "Thêm phạm vi"
-
-#: glade/MainWindow.ui:112 glade/MainWindow.ui:731
-msgid "Add a range of pigeons"
-msgstr "Thêm phạm vi bồ câu"
-
-#: glade/MainWindow.ui:120
-msgid "_Logfile Viewer"
-msgstr "Tập tin truy cập"
-
-#: glade/MainWindow.ui:121
-msgid "See the logfile"
-msgstr "Xem tập tin truy cập"
-
-#: glade/MainWindow.ui:129
-msgid "_Find..."
-msgstr "_Tìm..."
-
-#: glade/MainWindow.ui:130
-msgid "Search through the list of pigeons"
-msgstr "Tìm trong danh sách chiến binh"
-
-#: glade/MainWindow.ui:138
-msgid "Edit the selected pigeon"
-msgstr "Điều chỉnh chiến binh được chọn"
-
-#: glade/MainWindow.ui:146
-msgid "Remove the selected pigeon"
-msgstr "Xóa chiến binh được chọn"
-
-#: glade/MainWindow.ui:155
-msgid "View the detailed pedigree of this pigeon"
-msgstr "Xem gia phả chi tiết"
-
-#: glade/MainWindow.ui:163
-msgid "Add resul_t"
-msgstr "Thêm kết quả"
-
-#: glade/MainWindow.ui:164
-msgid "Add a new result for this pigeon"
-msgstr "Thêm kết quả mới cho chiến binh"
-
-#: glade/MainWindow.ui:171
-msgid "Configure the application"
-msgstr "Cấu hình ứng dụng"
-
-#: glade/MainWindow.ui:179
-msgid "_Filter..."
-msgstr "_Lọc..."
-
-#: glade/MainWindow.ui:180 glade/ResultWindow.ui:23
-msgid "Set filter options"
-msgstr "Chọn chức năng lọc"
-
-#: glade/MainWindow.ui:186 glade/VelocityCalculator.ui:85
-msgid "Velocity calculator"
-msgstr "Tính vận tốc"
-
-#: glade/MainWindow.ui:187
-msgid "Calculate the velocity of flights"
-msgstr "Tính vận tốc bay"
-
-#: glade/MainWindow.ui:193 glade/DistanceCalculator.ui:26
-msgid "Distance calculator"
-msgstr "Tính khoảng cách"
-
-#: glade/MainWindow.ui:194
-msgid "Calculate the distance between locations"
-msgstr "Tính khoảng cách giữa các điểm"
-
-#: glade/MainWindow.ui:200 glade/RaceManager.ui:20
-msgid "Racepoint manager"
-msgstr "Quản lý điểm đua"
-
-#: glade/MainWindow.ui:201
-msgid "Manage the racepoints and distances"
-msgstr "Quản lý điểm đua & khoảng cách"
-
-#: glade/MainWindow.ui:207
-msgid "Photo album"
-msgstr "Album ảnh"
-
-#: glade/MainWindow.ui:208
-msgid "View the images of your pigeons"
-msgstr "Xem ảnh chiến binh"
-
-#: glade/MainWindow.ui:214 glade/AddressBook.ui:9
-msgid "Address book"
-msgstr "Sổ địa chỉ"
-
-#: glade/MainWindow.ui:215
-msgid "View the address book"
-msgstr "Xem sổ địa chỉ"
-
-#: glade/MainWindow.ui:221 glade/Calendar.ui:14
-msgid "Calendar"
-msgstr "Lịch"
-
-#: glade/MainWindow.ui:222
-msgid "View the calendar"
-msgstr "Xem lịch"
-
-#: glade/MainWindow.ui:228 glade/DataManager.ui:26
-msgid "Data manager"
-msgstr "Quản lý dữ liệu"
-
-#: glade/MainWindow.ui:229
-msgid "Manage your data"
-msgstr "Quản lý dữ liệu"
-
-#: glade/MainWindow.ui:235
-msgid "Website"
-msgstr "Trang web"
-
-#: glade/MainWindow.ui:236
-msgid "Go to the website for more information"
-msgstr "Vào trang web để biết thêm thông tin"
-
-#: glade/MainWindow.ui:243
-msgid "Forum"
-msgstr "Diễn đàn"
-
-#: glade/MainWindow.ui:244
-msgid "Go to the forum for online help"
-msgstr "Vào diễn đàn để được trợ giúp trực tuyến"
-
-#: glade/MainWindow.ui:252
-msgid "Search online for program updates"
-msgstr "Tìm cập nhật chương trình trực tuyến"
-
-#: glade/MainWindow.ui:266
-msgid "About this application"
-msgstr "Thông tin ứng dụng"
-
-#: glade/MainWindow.ui:273
-msgid "Navigation arrows"
-msgstr "Mũi tên điều hướng"
-
-#: glade/MainWindow.ui:274 glade/OptionsDialog.ui:647
-msgid "Show or hide the navigation arrows"
-msgstr "Ẩn/Hiện mũi tên điều hướng"
-
-#: glade/MainWindow.ui:280
-msgid "Statistics"
-msgstr "Thống kê"
-
-#: glade/MainWindow.ui:281 glade/OptionsDialog.ui:662
-msgid "Show or hide pigeon statistics"
-msgstr "Ẩn/Hiện thống kê chiến binh"
-
-#: glade/MainWindow.ui:287
-msgid "Toolbar"
-msgstr "Thanh công cụ"
-
-#: glade/MainWindow.ui:288 glade/OptionsDialog.ui:677
-msgid "Show or hide the toolbar"
-msgstr "Ẩn/Hiện thanh công cụ"
-
-#: glade/MainWindow.ui:294
-msgid "Statusbar"
-msgstr "Thanh trạng thái"
-
-#: glade/MainWindow.ui:295 glade/OptionsDialog.ui:692
-msgid "Show or hide the statusbar"
-msgstr "Ẩn/Hiện thanh trạng thái"
-
-#: glade/MainWindow.ui:301
-msgid "Export..."
-msgstr "Xuất..."
-
-#: glade/MainWindow.ui:302
-msgid "Export data to other formats"
-msgstr "Xuất dữ liệu ra định dạng khác"
-
-#: glade/MainWindow.ui:309
 msgid "Print a list of pigeons"
 msgstr "In danh sách chiến binh"
 
-#: glade/MainWindow.ui:399
+#: glade/MainWindow.ui:24
+msgid "Export..."
+msgstr "Xuất..."
+
+#: glade/MainWindow.ui:25
+msgid "Export data to other formats"
+msgstr "Xuất dữ liệu ra định dạng khác"
+
+#: glade/MainWindow.ui:31
+msgid "Statusbar"
+msgstr "Thanh trạng thái"
+
+#: glade/MainWindow.ui:32 glade/OptionsDialog.ui:619
+msgid "Show or hide the statusbar"
+msgstr "Ẩn/Hiện thanh trạng thái"
+
+#: glade/MainWindow.ui:38
+msgid "Toolbar"
+msgstr "Thanh công cụ"
+
+#: glade/MainWindow.ui:39 glade/OptionsDialog.ui:605
+msgid "Show or hide the toolbar"
+msgstr "Ẩn/Hiện thanh công cụ"
+
+#: glade/MainWindow.ui:45
+msgid "Statistics"
+msgstr "Thống kê"
+
+#: glade/MainWindow.ui:46 glade/OptionsDialog.ui:591
+msgid "Show or hide pigeon statistics"
+msgstr "Ẩn/Hiện thống kê chiến binh"
+
+#: glade/MainWindow.ui:52
+msgid "Navigation arrows"
+msgstr "Mũi tên điều hướng"
+
+#: glade/MainWindow.ui:53 glade/OptionsDialog.ui:577
+msgid "Show or hide the navigation arrows"
+msgstr "Ẩn/Hiện mũi tên điều hướng"
+
+#: glade/MainWindow.ui:59
+msgid "About this application"
+msgstr "Thông tin ứng dụng"
+
+#: glade/MainWindow.ui:74
+msgid "Search online for program updates"
+msgstr "Tìm cập nhật chương trình trực tuyến"
+
+#: glade/MainWindow.ui:81
+msgid "Forum"
+msgstr "Diễn đàn"
+
+#: glade/MainWindow.ui:82
+msgid "Go to the forum for online help"
+msgstr "Vào diễn đàn để được trợ giúp trực tuyến"
+
+#: glade/MainWindow.ui:89
+msgid "Website"
+msgstr "Trang web"
+
+#: glade/MainWindow.ui:90
+msgid "Go to the website for more information"
+msgstr "Vào trang web để biết thêm thông tin"
+
+#: glade/MainWindow.ui:97 glade/DataManager.ui:26
+msgid "Data manager"
+msgstr "Quản lý dữ liệu"
+
+#: glade/MainWindow.ui:98
+msgid "Manage your data"
+msgstr "Quản lý dữ liệu"
+
+#: glade/MainWindow.ui:104 glade/AddressBook.ui:9
+msgid "Address book"
+msgstr "Sổ địa chỉ"
+
+#: glade/MainWindow.ui:105
+msgid "View the address book"
+msgstr "Xem sổ địa chỉ"
+
+#: glade/MainWindow.ui:111
+msgid "Photo album"
+msgstr "Album ảnh"
+
+#: glade/MainWindow.ui:112
+msgid "View the images of your pigeons"
+msgstr "Xem ảnh chiến binh"
+
+#: glade/MainWindow.ui:118 glade/RaceManager.ui:20
+msgid "Racepoint manager"
+msgstr "Quản lý điểm đua"
+
+#: glade/MainWindow.ui:119
+msgid "Manage the racepoints and distances"
+msgstr "Quản lý điểm đua & khoảng cách"
+
+#: glade/MainWindow.ui:125 glade/DistanceCalculator.ui:26
+msgid "Distance calculator"
+msgstr "Tính khoảng cách"
+
+#: glade/MainWindow.ui:126
+msgid "Calculate the distance between locations"
+msgstr "Tính khoảng cách giữa các điểm"
+
+#: glade/MainWindow.ui:132 glade/VelocityCalculator.ui:238
+msgid "Velocity calculator"
+msgstr "Tính vận tốc"
+
+#: glade/MainWindow.ui:133
+msgid "Calculate the velocity of flights"
+msgstr "Tính vận tốc bay"
+
+#: glade/MainWindow.ui:139
+msgid "_Filter..."
+msgstr "_Lọc..."
+
+#: glade/MainWindow.ui:140 glade/ResultWindow.ui:32
+msgid "Set filter options"
+msgstr "Chọn chức năng lọc"
+
+#: glade/MainWindow.ui:147
+msgid "Configure the application"
+msgstr "Cấu hình ứng dụng"
+
+#: glade/MainWindow.ui:155
+msgid "Add resul_t"
+msgstr "Thêm kết quả"
+
+#: glade/MainWindow.ui:156
+msgid "Add a new result for this pigeon"
+msgstr "Thêm kết quả mới cho chiến binh"
+
+#: glade/MainWindow.ui:163 glade/MainWindow.ui:245
+msgid "_Pedigree"
+msgstr "_Gia phả"
+
+#: glade/MainWindow.ui:164
+msgid "View the detailed pedigree of this pigeon"
+msgstr "Xem gia phả chi tiết"
+
+#: glade/MainWindow.ui:172
+msgid "Remove the selected pigeon"
+msgstr "Xóa chiến binh được chọn"
+
+#: glade/MainWindow.ui:180
+msgid "Edit the selected pigeon"
+msgstr "Điều chỉnh chiến binh được chọn"
+
+#: glade/MainWindow.ui:188
+msgid "_Logfile Viewer"
+msgstr "Tập tin truy cập"
+
+#: glade/MainWindow.ui:189
+msgid "See the logfile"
+msgstr "Xem tập tin truy cập"
+
+#: glade/MainWindow.ui:197
+msgid "Add range"
+msgstr "Thêm phạm vi"
+
+#: glade/MainWindow.ui:198 glade/MainWindow.ui:719
+msgid "Add a range of pigeons"
+msgstr "Thêm phạm vi bồ câu"
+
+#: glade/MainWindow.ui:206
+msgid "Add a new pigeon"
+msgstr "Thêm chiến binh mới"
+
+#: glade/MainWindow.ui:214
+msgid "Quit the program"
+msgstr "Thoát chương trình"
+
+#: glade/MainWindow.ui:222
+msgid "_Restore"
+msgstr "_Phục hồi"
+
+#: glade/MainWindow.ui:223
+msgid "Restore a backup of your database"
+msgstr "Phục hồi dữ liệu"
+
+#: glade/MainWindow.ui:230 glade/MainWindow.ui:277
+msgid "_Backup"
+msgstr "_Sao lưu"
+
+#: glade/MainWindow.ui:231
+msgid "Create a backup of your database"
+msgstr "Tạo bản sao lưu cho dữ liệu của bạn"
+
+#: glade/MainWindow.ui:238
+msgid "Blank pedigree"
+msgstr "Gia phả trống"
+
+#: glade/MainWindow.ui:239
+msgid "Print a blank pedigree"
+msgstr "In gia phả trống"
+
+#: glade/MainWindow.ui:252
+msgid "_Help"
+msgstr "_Trợ giúp"
+
+#: glade/MainWindow.ui:257
+msgid "_Tools"
+msgstr "_Công cụ"
+
+#: glade/MainWindow.ui:262
+msgid "_View"
+msgstr "_Xem"
+
+#: glade/MainWindow.ui:267
+msgid "_Edit"
+msgstr "_Điều chỉnh"
+
+#: glade/MainWindow.ui:272
+msgid "_Pigeon"
+msgstr "_Chiến binh"
+
+#: glade/MainWindow.ui:287
+msgid "_File"
+msgstr "_Tập tin"
+
+#: glade/MainWindow.ui:292
+msgid "Select all"
+msgstr "Chọn tất cả"
+
+#: glade/MainWindow.ui:293
+msgid "Select all pigeons"
+msgstr "Chọn tất cả chiến binh"
+
+#: glade/MainWindow.ui:299
+msgid "View online help"
+msgstr "Xem trợ giúp trực tuyến"
+
+#: glade/MainWindow.ui:391
 msgid "Total"
 msgstr "Tổng cộng"
 
-#: glade/MainWindow.ui:904 glade/DetailsView.ui:1695
+#: glade/MainWindow.ui:899 glade/DetailsView.ui:1665
 #: glade/DistanceCalculator.ui:331
 msgid "To"
 msgstr "Đến"
 
-#: glade/MainWindow.ui:956 glade/DetailsView.ui:1636
+#: glade/MainWindow.ui:951 glade/DetailsView.ui:1606
 #: glade/DistanceCalculator.ui:203
 msgid "From"
 msgstr "Từ"
 
-#: glade/MainWindow.ui:1013
+#: glade/MainWindow.ui:999
 msgid "Remove pigeon"
 msgstr "Xóa chiến binh"
 
-#: glade/MainWindow.ui:1102
+#: glade/MainWindow.ui:1086
 msgid "The following pigeon will be removed:"
 msgstr "Những chiến binh sau sẽ bị xóa:"
 
-#: glade/MainWindow.ui:1140
+#: glade/MainWindow.ui:1124
 msgid "Keep this pigeon in the pedigree"
 msgstr "Giữa chiến binh này trong gia phả"
 
-#: glade/MainWindow.ui:1156
+#: glade/MainWindow.ui:1139
 msgid "Keep results of this pigeon"
 msgstr "Giữ kết quả chiến binh này"
 
-#: glade/VelocityCalculator.ui:176
+#: glade/VelocityCalculator.ui:329
 msgid "Time"
 msgstr "Thời gian"
 
-#: glade/VelocityCalculator.ui:199 glade/VelocityCalculator.ui:565
+#: glade/VelocityCalculator.ui:352 glade/VelocityCalculator.ui:725
 #: glade/DistanceCalculator.ui:415
 msgid "Calculate"
 msgstr "Tính"
 
-#: glade/VelocityCalculator.ui:318 glade/VelocityCalculator.ui:718
+#: glade/VelocityCalculator.ui:471 glade/VelocityCalculator.ui:878
 msgid "Hours"
 msgstr "Giờ"
 
-#: glade/VelocityCalculator.ui:342 glade/VelocityCalculator.ui:742
+#: glade/VelocityCalculator.ui:495 glade/VelocityCalculator.ui:902
 msgid "Minutes"
 msgstr "Phút"
 
-#: glade/VelocityCalculator.ui:366 glade/VelocityCalculator.ui:766
+#: glade/VelocityCalculator.ui:519 glade/VelocityCalculator.ui:926
 msgid "Seconds"
 msgstr "Giây"
 
-#: glade/VelocityCalculator.ui:553
+#: glade/VelocityCalculator.ui:713
 msgid "Range"
 msgstr "Phạm vi"
 
-#: glade/VelocityCalculator.ui:957
+#: glade/VelocityCalculator.ui:1174
 msgid "Prognosis"
 msgstr "Ước lượng"
 
-#: glade/ResultsView.ui:198
+#: glade/ResultsView.ui:111 glade/ResultWindow.ui:420
+#: glade/ResultWindow.ui:962
+msgid "Races"
+msgstr ""
+
+#: glade/ResultsView.ui:184 glade/OptionsDialog.ui:969
+#: glade/ResultWindow.ui:514 glade/ResultWindow.ui:1055
+msgid "Coefficient"
+msgstr "Hệ số"
+
+#: glade/ResultsView.ui:249
 msgid "Results of pigeon"
 msgstr "Kết quả"
 
-#: glade/ResultsView.ui:219
+#: glade/ResultsView.ui:270
 msgid "View all"
 msgstr "Xem tất cả"
 
-#: glade/ResultsView.ui:236
+#: glade/ResultsView.ui:287
 msgid "Import"
 msgstr "Nhập"
 
-#: glade/ResultsView.ui:549 glade/BreedingView.ui:796
+#: glade/ResultsView.ui:512 glade/BreedingView.ui:796
 #: glade/MedicationView.ui:711
 msgid "Date*"
 msgstr "Ngày*"
 
-#: glade/ResultsView.ui:561
+#: glade/ResultsView.ui:524
 msgid "Racepoint*"
 msgstr "Điểm đua*"
-
-#: glade/Calendar.ui:309
-msgid "Notify me!"
-msgstr "Thông báo cho tôi!"
-
-#: glade/Calendar.ui:341
-msgid "Number of days in advance:"
-msgstr "Số ngày"
 
 #: glade/BreedingView.ui:85 glade/BreedingView.ui:285
 #: glade/BreedingView.ui:1051 glade/BreedingView.ui:1221
@@ -1505,170 +1431,186 @@ msgstr "Chim ghép*"
 msgid "Add pigeon to list"
 msgstr "Thêm chiến binh vào danh sách"
 
-#: glade/OptionsDialog.ui:78
-msgid "Options"
-msgstr "Chức năng"
+#: glade/FilterDialog.ui:13
+msgid "Filter pigeons"
+msgstr "Lọc chiến binh"
 
-#: glade/OptionsDialog.ui:99
+#: glade/FilterDialog.ui:109 glade/ResultWindow.ui:472
+msgid "Pigeon year"
+msgstr ""
+
+#: glade/OptionsDialog.ui:81
+msgid "Options"
+msgstr "Tùy chọn"
+
+#: glade/OptionsDialog.ui:102
 msgid "Default"
 msgstr "Mặc định"
 
 #: glade/OptionsDialog.ui:228
 msgid "Check for updates on startup"
-msgstr "Kiểm tra cập nhất khi khởi động"
+msgstr "Kiểm tra cập nhật khi khởi động"
 
-#: glade/OptionsDialog.ui:242
+#: glade/OptionsDialog.ui:241
 msgid "Update"
 msgstr "Cập nhật"
 
-#: glade/OptionsDialog.ui:272
+#: glade/OptionsDialog.ui:271
 msgid "Make an automatic backup"
 msgstr "Tự động sao lưu"
 
-#: glade/OptionsDialog.ui:319 glade/LocationChooser.ui:90
+#: glade/OptionsDialog.ui:317 glade/LocationChooser.ui:90
 #: glade/LocationChooser.ui:180 glade/DistanceCalculator.ui:113
 #: glade/DistanceCalculator.ui:241
 msgid "Location"
 msgstr "Vị trí"
 
-#: glade/OptionsDialog.ui:333
+#: glade/OptionsDialog.ui:331
 msgid "Interval"
 msgstr "Khoảng thời gian"
 
-#: glade/OptionsDialog.ui:427
+#: glade/OptionsDialog.ui:425
 msgid "Change the language to"
 msgstr "Chuyển sang ngôn ngữ"
 
-#: glade/OptionsDialog.ui:442
+#: glade/OptionsDialog.ui:440
 msgid "Language"
 msgstr "Ngôn ngữ"
 
-#: glade/OptionsDialog.ui:478
+#: glade/OptionsDialog.ui:476
 msgid "Default distance unit"
 msgstr "Đơn vị khoảng cách mặc định"
 
-#: glade/OptionsDialog.ui:490
+#: glade/OptionsDialog.ui:488
 msgid "Default speed unit"
-msgstr "Dơn vị tốc độ mặc định"
+msgstr "Đơn vị tốc độ mặc định"
 
-#: glade/OptionsDialog.ui:529
+#: glade/OptionsDialog.ui:527
 msgid "Units"
 msgstr "Đơn vị"
 
-#: glade/OptionsDialog.ui:582
-msgid "Change the theme"
-msgstr "Đổi chủ đề"
-
-#: glade/OptionsDialog.ui:617
-msgid "Theme"
-msgstr "Chủ đề"
-
-#: glade/OptionsDialog.ui:713
+#: glade/OptionsDialog.ui:639
 msgid "Window"
 msgstr "Cửa sổ"
 
-#: glade/OptionsDialog.ui:743
+#: glade/OptionsDialog.ui:669
 msgid "Hide deleted pigeons in lists"
 msgstr "Ẩn chiến binh bị xóa trong danh sách"
 
-#: glade/OptionsDialog.ui:763
+#: glade/OptionsDialog.ui:688
 msgid "Color row of deleted pigeons in lists"
 msgstr "Tô màu bồ câu bị xóa trong danh sách"
 
-#: glade/OptionsDialog.ui:951
-msgid "Main Columns"
-msgstr "Cột chính"
+#: glade/OptionsDialog.ui:876
+msgid "Text"
+msgstr ""
 
-#: glade/OptionsDialog.ui:1090
-msgid "Results Columns"
-msgstr "Cột kết quả"
-
-#: glade/OptionsDialog.ui:1146
-msgid "Paper format:"
-msgstr "Định dạng giấy:"
-
-#: glade/OptionsDialog.ui:1180
-msgid "Paper"
-msgstr "Giấy"
-
-#: glade/OptionsDialog.ui:1222
-msgid "Address"
-msgstr "Địa chỉ"
-
-#: glade/OptionsDialog.ui:1236 glade/AddressBook.ui:331
-msgid "Phone"
-msgstr "Điện thoại"
-
-#: glade/OptionsDialog.ui:1272
-msgid "Personal"
-msgstr "Cá nhân"
-
-#: glade/OptionsDialog.ui:1332
-msgid "Pedigree layout:"
-msgstr "Bố trí"
-
-#: glade/OptionsDialog.ui:1389
-msgid "Show pigeon colour in pedigree"
-msgstr "Hiện màu chiến binh trong gia phả"
-
-#: glade/OptionsDialog.ui:1410
-msgid "Layout"
-msgstr "Bố trí"
-
-#: glade/OptionsDialog.ui:1480 glade/DetailsView.ui:237
-#: glade/DetailsView.ui:791
-msgid "Extra"
-msgstr "Phụ"
-
-#: glade/OptionsDialog.ui:1496
+#: glade/OptionsDialog.ui:890 glade/OptionsDialog.ui:1467
 msgid "Image"
 msgstr "Ảnh"
 
-#: glade/OptionsDialog.ui:1519
+#: glade/OptionsDialog.ui:905
+msgid "Text and image"
+msgstr ""
+
+#: glade/OptionsDialog.ui:934
+msgid "Main Columns"
+msgstr "Cột chính"
+
+#: glade/OptionsDialog.ui:1068
+msgid "Results Columns"
+msgstr "Cột kết quả"
+
+#: glade/OptionsDialog.ui:1124
+msgid "Paper format:"
+msgstr "Định dạng giấy:"
+
+#: glade/OptionsDialog.ui:1158
+msgid "Paper"
+msgstr "Giấy"
+
+#: glade/OptionsDialog.ui:1199
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: glade/OptionsDialog.ui:1212 glade/AddressBook.ui:331
+msgid "Phone"
+msgstr "Điện thoại"
+
+#: glade/OptionsDialog.ui:1246
+msgid "Personal"
+msgstr "Cá nhân"
+
+#: glade/OptionsDialog.ui:1306
+msgid "Pedigree layout:"
+msgstr "Bố trí"
+
+#: glade/OptionsDialog.ui:1362
+msgid "Show pigeon colour in pedigree"
+msgstr "Hiện màu chiến binh trong gia phả"
+
+#: glade/OptionsDialog.ui:1382
+msgid "Layout"
+msgstr "Bố cục"
+
+#: glade/OptionsDialog.ui:1452 glade/DetailsView.ui:238
+#: glade/DetailsView.ui:770
+msgid "Extra"
+msgstr "Phụ"
+
+#: glade/OptionsDialog.ui:1486 glade/ResultWindow.ui:460
 msgid "Pigeon"
 msgstr "Chiến binh"
 
-#: glade/OptionsDialog.ui:1572 glade/OptionsDialog.ui:1661
+#: glade/OptionsDialog.ui:1539 glade/OptionsDialog.ui:1626
 msgid "Show the column names"
 msgstr "Hiện tên cột"
 
-#: glade/OptionsDialog.ui:1587
+#: glade/OptionsDialog.ui:1553
 msgid "Always show the sex column"
 msgstr "Luôn hiện cột giới tính"
 
-#: glade/OptionsDialog.ui:1676
+#: glade/OptionsDialog.ui:1640
 msgid "Show the date"
 msgstr "Hiện ngày"
 
-#: glade/OptionsDialog.ui:1755
+#: glade/OptionsDialog.ui:1718
 msgid "Custom coefficient multiplier"
 msgstr "Tùy chỉnh hệ số nhân"
 
-#: glade/OptionsDialog.ui:1802
+#: glade/OptionsDialog.ui:1765
 msgid "Check for development updates"
 msgstr "Kiểm tra cập nhật"
 
-#: glade/ResultWindow.ui:8
-msgid "Print these results"
-msgstr "In kết quả"
-
-#: glade/ResultWindow.ui:22
-msgid "Filter"
-msgstr "Lọc"
-
-#: glade/ResultWindow.ui:30
-msgid "View these results"
-msgstr "Xem kết quả"
-
-#: glade/ResultWindow.ui:37
-msgid "Email these results"
-msgstr "Email kết quả này"
-
-#: glade/ResultWindow.ui:45
+#: glade/ResultWindow.ui:9
 msgid "Save these results"
 msgstr "Lưu kết quả"
 
-#: glade/ResultWindow.ui:91
+#: glade/ResultWindow.ui:16
+msgid "Email these results"
+msgstr "Email kết quả này"
+
+#: glade/ResultWindow.ui:24
+msgid "View these results"
+msgstr "Xem kết quả"
+
+#: glade/ResultWindow.ui:31
+msgid "Filter"
+msgstr "Lọc"
+
+#: glade/ResultWindow.ui:46
+msgid "Print these results"
+msgstr "In kết quả"
+
+#: glade/ResultWindow.ui:117
+msgid "Filter results"
+msgstr "Lọc kết quả"
+
+#: glade/ResultWindow.ui:792
+msgid "Hide non-classified results"
+msgstr ""
+
+#: glade/ResultWindow.ui:843
 msgid "View all results"
 msgstr "Xem tất cả kết quả"
 
@@ -1678,49 +1620,49 @@ msgid ""
 "database."
 msgstr "Không tìm thấy dữ liệu. Chiến binh này có thể đã bị xóa!"
 
-#: glade/DetailsView.ui:197 glade/DetailsView.ui:582
+#: glade/DetailsView.ui:198 glade/DetailsView.ui:561
 msgid "Dam"
 msgstr "Mẹ"
 
-#: glade/DetailsView.ui:210 glade/DetailsView.ui:595
+#: glade/DetailsView.ui:211 glade/DetailsView.ui:574
 msgid "Sire"
 msgstr "Cha"
 
-#: glade/DetailsView.ui:1122
+#: glade/DetailsView.ui:1092
 msgid "Pigeon status"
 msgstr "Trạng thái chiến binh"
 
-#: glade/DetailsView.ui:1181
+#: glade/DetailsView.ui:1151
 msgid "Choose a status for this pigeon:"
 msgstr "Chọn trạng thái cho chiến binh"
 
-#: glade/DetailsView.ui:1224
+#: glade/DetailsView.ui:1194
 msgid "The current status is:"
 msgstr "Trạng thái hiện tại là:"
 
-#: glade/DetailsView.ui:1294 glade/DetailsView.ui:1407
-#: glade/DetailsView.ui:1528 glade/DetailsView.ui:1649
-#: glade/DetailsView.ui:1768
+#: glade/DetailsView.ui:1264 glade/DetailsView.ui:1377
+#: glade/DetailsView.ui:1498 glade/DetailsView.ui:1619
+#: glade/DetailsView.ui:1738
 msgid "Extra info"
 msgstr "Thông tin thêm"
 
-#: glade/DetailsView.ui:1362
+#: glade/DetailsView.ui:1332
 msgid "No extra information available."
 msgstr "Không có thông tin thêm"
 
-#: glade/DetailsView.ui:1438
+#: glade/DetailsView.ui:1408
 msgid "Buyer"
 msgstr "Người mua"
 
-#: glade/DetailsView.ui:1755
+#: glade/DetailsView.ui:1725
 msgid "Loaned"
 msgstr "Cho thuê/mượn"
 
-#: glade/DetailsView.ui:1801
+#: glade/DetailsView.ui:1771
 msgid "Person"
 msgstr "Người"
 
-#: glade/DetailsView.ui:1848
+#: glade/DetailsView.ui:1818
 msgid "Back"
 msgstr "Quay lại"
 
@@ -1848,6 +1790,10 @@ msgstr "Chiến binh:"
 msgid "No results were found for your pigeons"
 msgstr "Không tìm thấy kết quả"
 
+#: glade/ResultParser.ui:417
+msgid "Place"
+msgstr "Vị trí"
+
 #: glade/ResultParser.ui:536
 msgid "Parser error"
 msgstr "Lỗi phân tích"
@@ -1918,61 +1864,17 @@ msgstr "Mục"
 msgid "Manage items"
 msgstr "Quản lý danh mục"
 
-#: glade/DataManager.ui:372
+#: glade/DataManager.ui:321
+msgid "No unused objects found!"
+msgstr ""
+
+#: glade/DataManager.ui:407
 msgid "Unused objects"
 msgstr "Đối tượng không dùng"
 
 #: glade/RaceManager.ui:205
 msgid "Click here to add more racepoints"
 msgstr "Click vào đây để thêm điểm đua"
-
-#: glade/DatabaseTool.ui:8
-msgid "Pigeon Planner database tool"
-msgstr "Công cụ cơ sở dữ liệu Pigeon Planner"
-
-#: glade/DatabaseTool.ui:24
-msgid "Logfile"
-msgstr "Logfile"
-
-#: glade/DatabaseTool.ui:84
-msgid "Optimize"
-msgstr "Tối ưu"
-
-#: glade/DatabaseTool.ui:101
-msgid "Check"
-msgstr "Kiểm tra"
-
-#: glade/DatabaseTool.ui:143
-msgid ""
-"Optimze the database tables. This will defragment the data and free unused "
-"space."
-msgstr "Tối ưu bảng cơ sở dữ liệu. Việc này sẽ chống phân mảnh dữ liệu"
-
-#: glade/DatabaseTool.ui:158
-msgid "Check the database for errors and try to repair them."
-msgstr "Kiểm tra & sửa lỗi bảng cơ sở dữ liệu"
-
-#: glade/DatabaseTool.ui:175
-msgid ""
-"Delete the entire database from your hard drive. You will loose all pigeons, "
-"results and other data."
-msgstr "Xóa cơ sở dữ liệu. Bạn sẽ mất tất cả thông tin chiến binh"
-
-#: glade/DatabaseTool.ui:268
-msgid "Warning:"
-msgstr "Cảnh báo::"
-
-#: glade/DatabaseTool.ui:282
-msgid ""
-"Only execute SQL statements if you know what you are doing! Entering invalid "
-"or wrong statements may cause data loss!"
-msgstr ""
-"Chỉ thực hiện các lệnh SQL nếu bạn hiểu rõ! SỬ DỤNG SAI CÚ PHÁP SẼ LÀM HỎNG "
-"DỮ LIỆU"
-
-#: glade/DatabaseTool.ui:394
-msgid "SQL"
-msgstr "SQL"
 
 #: glade/AddressBook.ui:170
 msgid "Street"
@@ -1991,20 +1893,66 @@ msgid "This is me"
 msgstr "Đây là tôi"
 
 #: data/TranslationWorkaround.ui:4
-msgid "Original"
-msgstr "Nguyên gốc"
-
-#: data/TranslationWorkaround.ui:5
-msgid "Swapped details"
-msgstr "Hoán đổi chi tiết"
-
-#: data/TranslationWorkaround.ui:6
 msgid "A4"
 msgstr "A4"
 
-#: data/TranslationWorkaround.ui:7
+#: data/TranslationWorkaround.ui:5
 msgid "Letter"
 msgstr "Letter"
+
+#: data/TranslationWorkaround.ui:6
+msgid "Original"
+msgstr "Nguyên gốc"
+
+#: data/TranslationWorkaround.ui:7
+msgid "Swapped details"
+msgstr "Hoán đổi chi tiết"
+
+#: data/TranslationWorkaround.ui:8
+msgid "Middle"
+msgstr ""
+
+#~ msgid "Year of pigeon"
+#~ msgstr "Năm sinh"
+
+#~ msgid "Year of race"
+#~ msgstr "Năm đua"
+
+#~ msgid "Only show:"
+#~ msgstr "Hiện:"
+
+#~ msgid "Search for:"
+#~ msgstr "Tìm:"
+
+#~ msgid "Band numbers"
+#~ msgstr "Số kiềng"
+
+#~ msgid "Names"
+#~ msgstr "Tên"
+
+#~ msgid "No notification set"
+#~ msgstr "Không có thông báo"
+
+#~ msgid "_Find..."
+#~ msgstr "_Tìm..."
+
+#~ msgid "Search through the list of pigeons"
+#~ msgstr "Tìm trong danh sách chiến binh"
+
+#~ msgid "Calendar"
+#~ msgstr "Lịch"
+
+#~ msgid "Notify me!"
+#~ msgstr "Thông báo cho tôi!"
+
+#~ msgid "Number of days in advance:"
+#~ msgstr "Số ngày"
+
+#~ msgid "Change the theme"
+#~ msgstr "Đổi chủ đề"
+
+#~ msgid "Optimize"
+#~ msgstr "Tối ưu"
 
 #~ msgid "All fields have to be entered."
 #~ msgstr "Phải nhập đầy đủ."
@@ -2424,3 +2372,6 @@ msgstr "Letter"
 
 #~ msgid "<b>General</b>"
 #~ msgstr "<b>Tổng quát</b>"
+
+#~ msgid "Search in:"
+#~ msgstr "Tìm trong:"
