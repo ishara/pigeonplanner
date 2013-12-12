@@ -1,3 +1,29 @@
+2.0.0:
+ * Removed the calendar
+ * Removed the database tool
+ * Removed theme option on Windows
+ * Removed the pigeon search dialog
+ * Rewrite of the database backend
+ * Improved default database schema
+ * Split up results into races and results
+ * Allow an empty value as place in the results
+ * Added new filter dialog for the pigeons
+ * Added new filter dialog for the results
+ * Added new pedigree layout
+ * Added option to search for racepoint distance in the velocity calculator
+ * Added icon to the sex combobox
+ * Added menu option to show all pigeons in the list
+ * Show icon in sex column in the main treeview
+ * Localize all float numbers
+ * Report missing third-party modules on request instead of startup
+ * Fixed wrong date in calendar popup
+ * Fixed automated backup string in the options dialog
+ * Fixed distance calculation for some formats
+ * Fixed broken application icon in Windows Vista and newer
+ * Fixed treeview scrolling when using the navigation arrows
+ * Various interface changes
+ * Lots of code cleanup/reorganisation
+
 1.10.3:
  * Added icon to sex entry in detailsview
  * Fixed error clicking image widget when no pigeon is selected
