@@ -140,7 +140,7 @@ class BackupDialog(gtk.Dialog):
         gtk.Dialog.__init__(self, None, parent,
                             gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
                             ("gtk-close", gtk.RESPONSE_CLOSE))
-        self.parent = parent
+        self._parent = parent
 
         self.set_resizable(False)
         self.set_has_separator(False)
@@ -191,18 +191,18 @@ class BackupDialog(gtk.Dialog):
                 msg = messages.MSG_BACKUP_SUCCES
             else:
                 msg = messages.MSG_BACKUP_FAILED
-            InfoDialog(msg, self.parent)
+            InfoDialog(msg, self._parent)
 
     def restorebackup_clicked(self, widget):
         zipfile = self.fcButtonRestore.get_filename()
         if zipfile:
             if backup.restore_backup(zipfile):
                 msg = messages.MSG_RESTORE_SUCCES
-                InfoDialog(msg, self.parent)
+                InfoDialog(msg, self._parent)
                 gtk.main_quit()
             else:
                 msg = messages.MSG_RESTORE_FAILED
-                InfoDialog(msg, self.parent)
+                InfoDialog(msg, self._parent)
 
 
 class MedicationRemoveDialog(gtk.Dialog):
