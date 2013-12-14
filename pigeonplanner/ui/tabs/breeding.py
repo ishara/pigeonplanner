@@ -80,10 +80,12 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.entrybox.set_text(data.get("box", ""))
         self.widgets.textviewcomment.get_buffer().set_text(data.get("comment", ""))
 
-        self.widgets.buttoninfo1.set_sensitive(success1)
-        self.widgets.buttongoto1.set_sensitive(success1)
-        self.widgets.buttoninfo2.set_sensitive(success2)
-        self.widgets.buttongoto2.set_sensitive(success2)
+        p1 = not self.widgets.bandentry1.is_empty()
+        p2 = not self.widgets.bandentry2.is_empty()
+        self.widgets.buttoninfo1.set_sensitive(p1)
+        self.widgets.buttongoto1.set_sensitive(p1)
+        self.widgets.buttoninfo2.set_sensitive(p2)
+        self.widgets.buttongoto2.set_sensitive(p2)
 
     def on_buttonadd_clicked(self, widget):
         self._mode = enums.Action.add
