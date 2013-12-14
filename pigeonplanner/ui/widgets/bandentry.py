@@ -61,6 +61,9 @@ class BandEntry(gtk.Viewport):
         self._entryyear.set_editable(editable)
     editable = gobject.property(get_editable, set_editable, bool, False)
 
+    def is_empty(self):
+        return len(self.get_pindex(False)) == 0
+
     def set_pindex(self, pindex):
         self.set_band(*common.get_band_from_pindex(pindex))
 
