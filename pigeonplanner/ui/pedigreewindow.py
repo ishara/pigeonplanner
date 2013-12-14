@@ -66,7 +66,7 @@ class PedigreeWindow(gtk.Window):
         self._current_pigeon = pigeon
         self._previous_pigeons = []
         ring, year = pigeon.get_band()
-        self.pdfname = "%s_%s_%s.pdf" % (_("Pedigree"), ring, year)
+        self.pdfname = "%s_%s_%s.pdf" % (_("Pedigree"), year, ring)
         self._build_ui()
         pedigree.draw_pedigree(self._get_pedigree_table(), pigeon, True,
                                self.on_pedigree_draw)
