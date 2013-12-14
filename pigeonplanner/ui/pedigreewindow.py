@@ -25,11 +25,11 @@ import gtk
 
 from pigeonplanner.ui import tools
 from pigeonplanner.ui.filechooser import PdfSaver
-from pigeonplanner.ui.messagedialog import InfoDialog
+from pigeonplanner.ui.messagedialog import InfoDialog, ErrorDialog
 from pigeonplanner.core import common
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeonparser
-from pigeonplanner.reportlib import (report, PRINT_ACTION_DIALOG,
+from pigeonplanner.reportlib import (report, ReportError, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports import get_pedigree
 
@@ -206,5 +206,11 @@ class PedigreeWindow(gtk.Window):
         psize = common.get_pagesize_from_opts()
         opts = PedigreeReportOptions(psize, print_action=print_action,
                                             filename=save_path, parent=self)
-        report(PedigreeReport, opts, self.pigeon, userinfo)
+        try:
+            report(PedigreeReport, opts, self.pigeon, userinfo)
+        except ReportError as exc:
+            ErrorDialog((exc.value.split("\n")[0],
+                         _("You probably don't have write permissions on this folder."),
+                         _("Error"))
+                    )
 

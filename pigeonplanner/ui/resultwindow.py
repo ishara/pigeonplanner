@@ -30,9 +30,10 @@ from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.filechooser import PdfSaver
+from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import common
 from pigeonplanner.core import config
-from pigeonplanner.reportlib import (report, PRINT_ACTION_DIALOG,
+from pigeonplanner.reportlib import (report, ReportError, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports.results import ResultsReport, ResultsReportOptions
 
@@ -351,5 +352,11 @@ class ResultWindow(builder.GtkBuilder):
         psize = common.get_pagesize_from_opts()
         opts = ResultsReportOptions(psize, None, print_action, save_path,
                                            parent=self.widgets.resultwindow)
-        report(ResultsReport, opts, data, userinfo)
+        try:
+            report(ResultsReport, opts, data, userinfo)
+        except ReportError as exc:
+            ErrorDialog((exc.value.split("\n")[0],
+                         _("You probably don't have write permissions on this folder."),
+                         _("Error"))
+                    )
 
