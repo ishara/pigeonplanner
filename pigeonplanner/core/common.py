@@ -186,7 +186,7 @@ def escape_text(text):
     return cgi.escape(text, True)
 
 def open_file(path):
-    from ui.messagedialog import ErrorDialog
+    from pigeonplanner.ui.messagedialog import ErrorDialog
 
     norm_path = unicode(os.path.normpath(path), "utf-8")
     if not os.path.exists(norm_path):
