@@ -154,7 +154,6 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
                 database.add_medication(data)
             for pindex in [p for p in pigeons_current if p not in pigeons]:
                 database.remove_medication({"medid": medid, "pindex": pindex})
-            del data["pindex"]
             database.update_medication(medid, data)
             model, rowiter = self.widgets.selection.get_selected()
             self.widgets.liststore.set(rowiter, 1, data["date"], 2, data["description"])
