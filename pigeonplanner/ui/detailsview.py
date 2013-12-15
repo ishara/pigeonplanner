@@ -48,17 +48,6 @@ RESPONSE_EDIT = 10
 RESPONSE_SAVE = 12
 
 
-_ICONTHEME = gtk.icon_theme_get_default()
-try:
-    _ICON_ZOOM = _ICONTHEME.load_icon("gtk-find", 22, 0)
-    CURSOR_ZOOM = gtk.gdk.Cursor(gtk.gdk.display_get_default(), _ICON_ZOOM, 0, 0)
-except Exception as exc:
-    #TODO: logging the exception causes trouble on OS X
-    ##logger.warning("Can't load zoom cursor icon:", exc)
-    logger.warning("Can't load zoom cursor icon")
-    CURSOR_ZOOM = None
-
-
 class DetailsDialog(gtk.Dialog):
     def __init__(self, pigeon=None, parent=None, mode=None):
         gtk.Dialog.__init__(self, None, parent, gtk.DIALOG_MODAL)
@@ -110,7 +99,6 @@ class PigeonImageWidget(gtk.EventBox):
         if editable:
             self.connect("button-press-event", self.on_editable_button_press_event)
         else:
-            self.connect("enter-notify-event", self.on_enter_notify_event)
             self.connect("leave-notify-event", self.on_leave_notify_event)
             self.connect("button-press-event", self.on_button_press_event)
 
@@ -121,10 +109,6 @@ class PigeonImageWidget(gtk.EventBox):
         self.add(self._imagewidget)
         self._imagepath = ""
         self.set_default_image()
-
-    def on_enter_notify_event(self, widget, event):
-        if self._imagepath:
-            self.get_window().set_cursor(CURSOR_ZOOM)
 
     def on_leave_notify_event(self, widget, event):
         self.get_window().set_cursor(None)
