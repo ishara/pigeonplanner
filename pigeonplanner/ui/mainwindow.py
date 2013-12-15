@@ -184,6 +184,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.widgets.removedialog.set_transient_for(self)
         self.widgets.rangedialog.set_transient_for(self)
 
+        self.widgets.MenuShowAll.set_active(config.get("interface.show-all-pigeons"))
         self.widgets.MenuArrows.set_active(config.get("interface.arrows"))
         self.widgets.MenuStats.set_active(config.get("interface.stats"))
         self.widgets.MenuToolbar.set_active(config.get("interface.toolbar"))
@@ -625,6 +626,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         widgetDic = {
             "menubar": uimanager.get_widget("/MenuBar"),
             "toolbar": uimanager.get_widget("/Toolbar"),
+            "MenuShowAll": uimanager.get_widget("/MenuBar/ViewMenu/ShowAll"),
             "MenuArrows": uimanager.get_widget("/MenuBar/ViewMenu/Arrows"),
             "MenuStats": uimanager.get_widget("/MenuBar/ViewMenu/Stats"),
             "MenuToolbar": uimanager.get_widget("/MenuBar/ViewMenu/Toolbar"),
