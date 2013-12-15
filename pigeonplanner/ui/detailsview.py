@@ -40,6 +40,7 @@ from pigeonplanner.core import enums
 from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
+from pigeonplanner.core import pigeonparser
 from pigeonplanner.core import pigeon as corepigeon
 
 
@@ -389,6 +390,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
             Return True to keep dialog open, False to close it
         """
+
         try:
             data = self.get_edit_details()
         except errors.InvalidInputError, msg:
@@ -408,6 +410,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             except errors.PigeonAlreadyExistsHidden:
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
                     database.update_pigeon(pindex, {"show": 1})
+                pigeon = pigeonparser.parser.update_pigeon(pindex)
             except errors.InvalidInputError:
                 # This is a corner case. Some status date is incorrect, but the
                 # user choose another one. Don't bother him with this.
@@ -425,6 +428,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             except errors.PigeonAlreadyExistsHidden:
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
                     database.update_pigeon(pindex, {"show": 1})
+                pigeon = pigeonparser.parser.update_pigeon(pindex)
             except errors.InvalidInputError:
                 # See comment above
                 pass
