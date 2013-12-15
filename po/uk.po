@@ -6,13 +6,13 @@ msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-11 22:44+0100\n"
-"PO-Revision-Date: 2013-06-08 03:08+0000\n"
+"PO-Revision-Date: 2013-12-12 19:40+0000\n"
 "Last-Translator: Viktor <ksviktor@gmail.com>\n"
 "Language-Team: none <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-12 05:17+0000\n"
+"X-Launchpad-Export-Date: 2013-12-13 05:53+0000\n"
 "X-Generator: Launchpad (build 16869)\n"
 "Language: \n"
 
@@ -637,13 +637,15 @@ msgstr "Закрити це вікно"
 #: pigeonplanner/ui/pedigreewindow.py:194
 #, python-format
 msgid "Cannot find image '%s'"
-msgstr ""
+msgstr "Не вдається знайти зображення  '%s'"
 
 #: pigeonplanner/ui/pedigreewindow.py:195
 msgid ""
 "You need to edit the pigeon and select the correct path or restore the "
 "original image on your computer."
 msgstr ""
+"Вам необхідно відредагувати голуба і вибрати правильний шлях до зображення "
+"на комп'ютері."
 
 #: pigeonplanner/ui/maildialog.py:149
 msgid "The e-mail has been sent succesfully!"
@@ -660,7 +662,7 @@ msgstr ""
 #: pigeonplanner/ui/resultparser.py:65
 #, python-format
 msgid "This result is not in the '%s' format. Do you want to continue?"
-msgstr ""
+msgstr "Цей результат не у форматі '%s'. Бажаєте продовжити?"
 
 #: pigeonplanner/ui/detailsview.py:65 glade/DetailsView.ui:1082
 msgid "Details of pigeon"
@@ -702,7 +704,7 @@ msgstr ""
 #: pigeonplanner/ui/locationchooser.py:68
 #, python-format
 msgid "Can't find location '%s'"
-msgstr ""
+msgstr "Не вдається знайти місце розташування '%s'"
 
 #: pigeonplanner/ui/logdialog.py:39
 msgid "Logfile Viewer"
@@ -1094,11 +1096,11 @@ msgstr "Помилка при відкритті файлу:"
 
 #: glade/MainWindow.ui:10
 msgid "Show all pigeons"
-msgstr ""
+msgstr "Показати всіх голубів"
 
 #: glade/MainWindow.ui:11
 msgid "Show all pigeons in the list"
-msgstr ""
+msgstr "Показати всіх голубів у списку"
 
 #: glade/MainWindow.ui:18
 msgid "Print a list of pigeons"
@@ -1366,7 +1368,7 @@ msgstr "Прогноз"
 #: glade/ResultsView.ui:111 glade/ResultWindow.ui:420
 #: glade/ResultWindow.ui:962
 msgid "Races"
-msgstr ""
+msgstr "Перегони"
 
 #: glade/ResultsView.ui:184 glade/OptionsDialog.ui:969
 #: glade/ResultWindow.ui:514 glade/ResultWindow.ui:1055
@@ -1443,7 +1445,7 @@ msgstr "Фільтрувати голубів"
 
 #: glade/FilterDialog.ui:109 glade/ResultWindow.ui:472
 msgid "Pigeon year"
-msgstr ""
+msgstr "Голуб рік"
 
 #: glade/OptionsDialog.ui:81
 msgid "Options"
@@ -1485,15 +1487,15 @@ msgstr "Мова"
 
 #: glade/OptionsDialog.ui:476
 msgid "Default distance unit"
-msgstr ""
+msgstr "Одиниці дистанції по замовчуванню"
 
 #: glade/OptionsDialog.ui:488
 msgid "Default speed unit"
-msgstr ""
+msgstr "Одиниці швидкості по замовчуванню"
 
 #: glade/OptionsDialog.ui:527
 msgid "Units"
-msgstr ""
+msgstr "Одиниці"
 
 #: glade/OptionsDialog.ui:639
 msgid "Window"
@@ -1509,7 +1511,7 @@ msgstr "Колір рядків видалених голубів у списк�
 
 #: glade/OptionsDialog.ui:876
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 #: glade/OptionsDialog.ui:890 glade/OptionsDialog.ui:1467
 msgid "Image"
@@ -1517,7 +1519,7 @@ msgstr "Зображення"
 
 #: glade/OptionsDialog.ui:905
 msgid "Text and image"
-msgstr ""
+msgstr "Текст та зображення"
 
 #: glade/OptionsDialog.ui:934
 msgid "Main Columns"
@@ -1614,7 +1616,7 @@ msgstr "Фільтрувати результати"
 
 #: glade/ResultWindow.ui:792
 msgid "Hide non-classified results"
-msgstr ""
+msgstr "Приховати некласифіковані результати"
 
 #: glade/ResultWindow.ui:843
 msgid "View all results"
@@ -1704,7 +1706,7 @@ msgstr "Відправка ..."
 
 #: glade/LocationChooser.ui:9 glade/LocationChooser.ui:163
 msgid "Search coordinates"
-msgstr ""
+msgstr "Пошук координат"
 
 #: glade/LocationChooser.ui:102 glade/DistanceCalculator.ui:125
 #: glade/DistanceCalculator.ui:253 glade/RaceManager.ui:144
@@ -1874,7 +1876,7 @@ msgstr "Управління елементами"
 
 #: glade/DataManager.ui:321
 msgid "No unused objects found!"
-msgstr ""
+msgstr "Знайдені об'єкти не використовуються!"
 
 #: glade/DataManager.ui:407
 msgid "Unused objects"
@@ -1918,7 +1920,7 @@ msgstr "Переставлені деталі"
 
 #: data/TranslationWorkaround.ui:8
 msgid "Middle"
-msgstr ""
+msgstr "Середина"
 
 #~ msgid "Page"
 #~ msgstr "Сторінка"
