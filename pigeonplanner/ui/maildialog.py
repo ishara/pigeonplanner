@@ -19,6 +19,8 @@
 import os
 import os.path
 import threading
+import logging
+logger = logging.getLogger(__name__)
 
 import gtk
 import gobject
@@ -134,8 +136,9 @@ class MailDialog(builder.GtkBuilder):
         try:
             mailing.send_email(recipient, sender, subject, body, self.attachment)
             error = False
-        except errors.UrlTimeout:
+        except (errors.UrlTimeout, Exception) as exc:
             error = True
+            logger.error(exc)
 
         self.sending = False
         gobject.idle_add(self.send_finished, error)
