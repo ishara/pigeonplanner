@@ -253,6 +253,7 @@ class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
         modelfilter = self._liststore.filter_new()
         modelfilter.set_visible_func(self._visible_func)
         self._treeview = gtk.TreeView(modelfilter)
+        self._treeview.connect("button-press-event", self.on_treeview_press)
         columns = (_("Band no."), _("Year"), _("Name"))
         for index, column in enumerate(columns):
             textrenderer = gtk.CellRendererText()
@@ -276,6 +277,13 @@ class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
         self.buttonadd.set_sensitive(not rowiter is None)
+
+    def on_treeview_press(self, treeview, event):
+        pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if pthinfo is None: return
+
+        if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+            self.response(gtk.RESPONSE_APPLY)
 
     def fill_treeview(self, pindex=None, sex=None, year=None):
         self._liststore.clear()
