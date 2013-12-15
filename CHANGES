@@ -1,3 +1,17 @@
+2.0.1:
+ * Fixed error in backup and restore dialogs
+ * Fixed error when trying to make a pigeon visible again
+ * Fixed error when editing a breeding record
+ * Fixed error when opening a media file
+ * Show errordialog when saving a report to a non-writeable location
+ * Only enable info buttons in breeding tab if child bandnumber is given
+ * Select pigeon in pigeon list dialog with double click
+ * Log error when errorreporting fails
+ * Changed default pedigree save name
+ * Remove the custom cursor on the image widget
+ * Little code updates
+ * Updated translations
+
 2.0.0:
  * Removed the calendar
  * Removed the database tool
