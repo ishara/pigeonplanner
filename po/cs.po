@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION CZ\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-11 22:44+0100\n"
-"PO-Revision-Date: 2013-09-05 08:13+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2013-12-12 14:58+0000\n"
+"Last-Translator: Jindra <Unknown>\n"
 "Language-Team: Jindra <sidloj@volny.cz>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-12 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-12-13 05:53+0000\n"
 "X-Generator: Launchpad (build 16869)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: \n"
@@ -615,7 +615,7 @@ msgstr "Připojení k serveru se nezdařilo!"
 
 #: pigeonplanner/ui/resultparser.py:50
 msgid "This tool needs Yapsy to run correctly."
-msgstr ""
+msgstr "K tomuto nástroji je třeba Yapsy skript, aby správně fungoval."
 
 #: pigeonplanner/ui/resultparser.py:65
 #, python-format
@@ -658,6 +658,7 @@ msgstr "Chceš na webové stránky?"
 #: pigeonplanner/ui/tools/distancecalculator.py:51
 msgid "This tool needs Geopy 0.95.0 or higher to run correctly."
 msgstr ""
+"Pro tento nástroj je třeba Geopy 0.95.0 nebo vyšší, aby správně fungoval."
 
 #: pigeonplanner/ui/locationchooser.py:68
 #, python-format
@@ -1072,11 +1073,11 @@ msgstr "Chyba při otevírání souboru:"
 
 #: glade/MainWindow.ui:10
 msgid "Show all pigeons"
-msgstr ""
+msgstr "Zobrazit všechny holuby"
 
 #: glade/MainWindow.ui:11
 msgid "Show all pigeons in the list"
-msgstr ""
+msgstr "Zobrazit všechny holuby v seznamu"
 
 #: glade/MainWindow.ui:18
 msgid "Print a list of pigeons"
@@ -1376,7 +1377,7 @@ msgstr "Předpoklad"
 #: glade/ResultsView.ui:111 glade/ResultWindow.ui:420
 #: glade/ResultWindow.ui:962
 msgid "Races"
-msgstr ""
+msgstr "Závody"
 
 #: glade/ResultsView.ui:184 glade/OptionsDialog.ui:969
 #: glade/ResultWindow.ui:514 glade/ResultWindow.ui:1055
@@ -1453,7 +1454,7 @@ msgstr "Filtr holubů"
 
 #: glade/FilterDialog.ui:109 glade/ResultWindow.ui:472
 msgid "Pigeon year"
-msgstr ""
+msgstr "Rok holuba"
 
 #: glade/OptionsDialog.ui:81
 msgid "Options"
@@ -1519,7 +1520,7 @@ msgstr "Smazat barvu řádků v seznamu holubů"
 
 #: glade/OptionsDialog.ui:876
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: glade/OptionsDialog.ui:890 glade/OptionsDialog.ui:1467
 msgid "Image"
@@ -1527,7 +1528,7 @@ msgstr "Obrázek"
 
 #: glade/OptionsDialog.ui:905
 msgid "Text and image"
-msgstr ""
+msgstr "Text a obrázek"
 
 #: glade/OptionsDialog.ui:934
 msgid "Main Columns"
@@ -1624,7 +1625,7 @@ msgstr "Filtrovat výsledky"
 
 #: glade/ResultWindow.ui:792
 msgid "Hide non-classified results"
-msgstr ""
+msgstr "Skrýt výsledky"
 
 #: glade/ResultWindow.ui:843
 msgid "View all results"
@@ -1883,7 +1884,7 @@ msgstr "Správce položek"
 
 #: glade/DataManager.ui:321
 msgid "No unused objects found!"
-msgstr ""
+msgstr "Skrýt výsledky"
 
 #: glade/DataManager.ui:407
 msgid "Unused objects"
@@ -1927,7 +1928,7 @@ msgstr "Změnit umístění údajů"
 
 #: data/TranslationWorkaround.ui:8
 msgid "Middle"
-msgstr ""
+msgstr "Střední"
 
 #~ msgid "Optimization has been completed."
 #~ msgstr "Optimalizace byla dokončena."
