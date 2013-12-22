@@ -109,7 +109,7 @@ def update_pigeon(pigeon, data, status, statusdata):
     database.add_data(database.Tables.STRAINS, data.get("strain", ""))
     database.add_data(database.Tables.LOFTS, data.get("loft", ""))
 
-    return pigeonparser.parser.update_pigeon(pigeon.pindex, data["pindex"])
+    return pigeonparser.parser.update_pigeon(data["pindex"], pigeon.pindex)
 
 def remove_pigeon(pigeon, remove_results=True):
     pindex = pigeon.get_pindex()
