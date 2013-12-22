@@ -116,6 +116,9 @@ class StatusCombobox(gtk.ComboBox):
         self.add_attribute(cell, "text", 0)
         self.set_active(0)
 
+    def get_status(self):
+        return self.get_active()
+
 
 class OperatorCombobox(gtk.ComboBox):
 
