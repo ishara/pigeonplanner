@@ -150,8 +150,9 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             medid = self._get_selected_medid()
             pigeons_current = database.get_pigeons_for_medid(medid)
             for pindex in [pindex for pindex in pigeons if pindex not in pigeons_current]:
-                data.update({"medid": medid, "pindex": pindex})
-                database.add_medication(data)
+                tmpdata = {"medid": medid, "pindex": pindex}
+                tmpdata.update(data)
+                database.add_medication(tmpdata)
             for pindex in [p for p in pigeons_current if p not in pigeons]:
                 database.remove_medication({"medid": medid, "pindex": pindex})
             database.update_medication(medid, data)
