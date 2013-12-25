@@ -57,14 +57,18 @@ class FilterDialog(builder.GtkBuilder):
     def on_checksex_toggled(self, widget):
         self.widgets.combosex.set_sensitive(widget.get_active())
 
+    def on_checkstatus_toggled(self, widget):
+        self.widgets.combostatus.set_sensitive(widget.get_active())
+
     def on_clear_clicked(self, widget):
-        for combo in ["year", "sex"]:
+        for combo in ["year", "sex", "status"]:
             getattr(self.widgets, "combo"+combo).set_active(0)
         for spin in ["year"]:
             getattr(self.widgets, "spin"+spin).set_value(0)
         for combo in ["colour", "strain", "loft"]:
             getattr(self.widgets, "combo"+combo).child.set_text("")
-        self.widgets.checksex.set_active(False)
+        for check in ["sex", "status"]:
+            getattr(self.widgets, "check"+check).set_active(False)
 
         self.filter.clear()
         self.treeview._modelfilter.refilter()
@@ -80,6 +84,10 @@ class FilterDialog(builder.GtkBuilder):
         if self.widgets.checksex.get_active():
             sex = self.widgets.combosex.get_sex()
             self.filter.add("sex", sex, type_=int, allow_empty_value=True)
+
+        if self.widgets.checkstatus.get_active():
+            status = self.widgets.combostatus.get_status()
+            self.filter.add("active", status, type_=int, allow_empty_value=True)
 
         colour = self.widgets.combocolour.child.get_text()
         self.filter.add("colour", colour)
