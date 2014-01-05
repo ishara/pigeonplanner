@@ -154,6 +154,16 @@ def calculate_coefficient(place, out, as_string=False):
         return locale.format_string("%.4f", coef)
     return coef
 
+def format_place_coef(place, out):
+    coef = calculate_coefficient(place, out)
+    if place == 0:
+        coefstr = "-"
+        placestr = "-"
+    else:
+        coefstr = calculate_coefficient(place, out, as_string=True)
+        placestr = str(place)
+    return placestr, coef, coefstr
+
 def add_zero_to_time(value):
     """
     Add a zero in front of a one digit number

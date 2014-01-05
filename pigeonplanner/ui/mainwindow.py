@@ -244,6 +244,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.widgets.MenuToolbar.set_active(toolbar)
         self.widgets.MenuStatusbar.set_active(statusbar)
 
+        self.resultstab.reset_result_mode()
+
         self.widgets.treeview.set_columns()
         self.resultstab.set_columns()
 
