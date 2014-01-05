@@ -154,6 +154,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
 
         self.widgets.treeview = treeview.MainTreeView(self.widgets.statusbar)
+        self.widgets.treeview.connect("pigeons-changed", self.on_treeview_pigeons_changed)
         self.widgets.treeview.connect("key-press-event", self.on_treeview_key_press)
         self.widgets.treeview.connect("button-press-event", self.on_treeview_press)
         self.widgets.scrolledwindow.add(self.widgets.treeview)
@@ -178,7 +179,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
         self._build_menubar()
         self.widgets.treeview.fill_treeview()
-        self._set_statistics()
         self.current_pigeon = 0
         self.pigeon_no = len(self.widgets.treeview.get_model())
         self.widgets.removedialog.set_transient_for(self)
@@ -260,7 +260,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             self.widgets.treeview.add_pigeon(pigeon)
             self.widgets.statusbar.display_message(
                         _("Pigeon %s has been added") % pigeon.get_band_string())
-        self._set_statistics()
         self.widgets.treeview.grab_focus()
 
     # Menu callbacks
@@ -404,7 +403,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             for path in paths:
                 self.widgets.treeview.remove_row(path)
             self.widgets.selection.select_path(paths[-1])
-            self._set_statistics()
             self.widgets.statusbar.display_message(statusbarmsg)
 
         self.widgets.removedialog.hide()
@@ -540,13 +538,32 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
             self.widgets.treeview.add_pigeon(pigeon)
             value += 1
 
-        self._set_statistics()
         self.widgets.rangedialog.hide()
 
     def on_rangecancel_clicked(self, widget):
         self.widgets.rangedialog.hide()
 
     # Main treeview callbacks
+    def on_treeview_pigeons_changed(self, treeview):
+        pigeons = self.widgets.treeview.get_pigeons(filtered=True)
+        total = len(pigeons)
+        cocks = 0
+        hens = 0
+        ybirds = 0
+        for pigeon in pigeons:
+            if pigeon.sex == enums.Sex.cock:
+                cocks += 1
+            elif pigeon.sex == enums.Sex.hen:
+                hens += 1
+            elif pigeon.sex == enums.Sex.unknown:
+                ybirds += 1
+
+        self.widgets.labelStatTotal.set_markup("<b>%i</b>" %total)
+        self.widgets.labelStatCocks.set_markup("<b>%i</b>" %cocks)
+        self.widgets.labelStatHens.set_markup("<b>%i</b>" %hens)
+        self.widgets.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
+        self.widgets.statusbar.set_total(total)
+
     def on_treeview_press(self, treeview, event):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
         if pthinfo is None: return
@@ -677,18 +694,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.detailsview.clear_details()
         for tab in self._loaded_tabs:
             tab.clear_pigeon()
-
-    def _set_statistics(self):
-        """
-        Count all active pigeons and set the statistics labels
-        """
-
-        total, cocks, hens, ybirds = common.count_active_pigeons()
-        self.widgets.labelStatTotal.set_markup("<b>%i</b>" %total)
-        self.widgets.labelStatCocks.set_markup("<b>%i</b>" %cocks)
-        self.widgets.labelStatHens.set_markup("<b>%i</b>" %hens)
-        self.widgets.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
-        self.widgets.statusbar.set_total(total)
 
     def _set_pigeon(self, pigeon_no):
         if pigeon_no < 0 or pigeon_no >= self.pigeon_no:

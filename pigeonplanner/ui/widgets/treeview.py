@@ -17,6 +17,7 @@
 
 
 import gtk
+import gobject
 
 from pigeonplanner import database
 from pigeonplanner.ui import utils
@@ -73,6 +74,7 @@ class FilterDialog(builder.GtkBuilder):
         self.filter.clear()
         self.treeview._modelfilter.refilter()
         self.treeview.statusbar.set_filter(False)
+        self.treeview.emit("pigeons-changed")
 
     def on_search_clicked(self, widget):
         self.filter.clear()
@@ -100,11 +102,13 @@ class FilterDialog(builder.GtkBuilder):
 
         self.treeview._modelfilter.refilter()
         self.treeview.statusbar.set_filter(self.filter.has_filters())
+        self.treeview.emit("pigeons-changed")
 
 
 class MainTreeView(gtk.TreeView):
 
     __gtype_name__ = "MainTreeView"
+    __gsignals__ = {"pigeons-changed": (gobject.SIGNAL_RUN_LAST, None, ())}
 
     def __init__(self, statusbar):
         gtk.TreeView.__init__(self)
@@ -149,6 +153,7 @@ class MainTreeView(gtk.TreeView):
             self._selection.unselect_all()
             self._selection.select_iter(self.get_top_iter(rowiter))
             self.scroll_to_cell(self.get_top_path(path))
+        self.emit("pigeons-changed")
 
     def update_row(self, data, rowiter=None, path=None):
         if rowiter is None and path is None:
@@ -156,11 +161,13 @@ class MainTreeView(gtk.TreeView):
         if rowiter is None:
             rowiter = self._liststore.get_iter(path)
         self._liststore.set(rowiter, *data)
+        self.emit("pigeons-changed")
 
     def remove_row(self, path):
         sortiter = self._modelsort.get_iter(path)
         rowiter = self.get_child_iter(sortiter)
         self._liststore.remove(rowiter)
+        self.emit("pigeons-changed")
 
     def get_n_rows(self):
         return len(self._liststore)
@@ -178,6 +185,7 @@ class MainTreeView(gtk.TreeView):
                                        _(common.get_status(pigeon.get_active())),
                                        utils.get_sex_image(pigeon.sex)])
         self._selection.select_path(path)
+        self.emit("pigeons-changed")
 
     def add_pigeon(self, pigeon, select=True):
         ring, year = pigeon.get_band()
