@@ -52,6 +52,7 @@ class BaseView(object):
     def _build_parent_frame(self, label, child):
         sw = gtk.ScrolledWindow()
         sw.set_shadow_type(gtk.SHADOW_IN)
+        sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         sw.add(child)
         label = gtk.Label("<b>%s</b>" % label)
         label.set_use_markup(True)
