@@ -105,16 +105,20 @@ class StatusCombobox(gtk.ComboBox):
     __gtype_name__ = "StatusCombobox"
 
     def __init__(self):
-        store = gtk.ListStore(str)
+        store = gtk.ListStore(int, str, gtk.gdk.Pixbuf)
         gtk.ComboBox.__init__(self, store)
 
-        for item in [_("Dead"), _("Active"), _("Sold"), _("Lost"),
-                     _("Breeder"), _("On loan")]:
-            store.append([item])
+        for key, value in common.get_statusdic().items():
+            store.insert(key, [key, value, utils.get_status_image(key)])
+
+        pb = gtk.CellRendererPixbuf()
+        self.pack_start(pb, expand=False)
+        self.add_attribute(pb, "pixbuf", 2)
         cell = gtk.CellRendererText()
         self.pack_start(cell, True)
-        self.add_attribute(cell, "text", 0)
+        self.add_attribute(cell, "text", 1)
         self.set_active(0)
+        self.show()
 
     def get_status(self):
         return self.get_active()

@@ -29,6 +29,9 @@ from pigeonplanner.core import config
 def get_sex_image(sex):
     return gtk.gdk.pixbuf_new_from_file(common.SEX_IMGS[sex])
 
+def get_status_image(status):
+    return gtk.gdk.pixbuf_new_from_file(common.STATUS_IMGS[status])
+
 def create_stock_button(icons):
     """
     Register stock buttons from custom images.
