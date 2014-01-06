@@ -99,7 +99,6 @@ class PigeonImageWidget(gtk.EventBox):
         if editable:
             self.connect("button-press-event", self.on_editable_button_press_event)
         else:
-            self.connect("leave-notify-event", self.on_leave_notify_event)
             self.connect("button-press-event", self.on_button_press_event)
 
         self._view = view
@@ -109,9 +108,6 @@ class PigeonImageWidget(gtk.EventBox):
         self.add(self._imagewidget)
         self._imagepath = ""
         self.set_default_image()
-
-    def on_leave_notify_event(self, widget, event):
-        self.get_window().set_cursor(None)
 
     def on_button_press_event(self, widget, event):
         if self._view.pigeon is None:
