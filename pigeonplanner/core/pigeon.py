@@ -51,7 +51,7 @@ def add_pigeon(data, status, statusdata):
             raise errors.PigeonAlreadyExistsHidden(pindex)
 
     if status != enums.Status.active:
-        database.add_status(common.get_status(status), statusdata)
+        database.add_status(common.get_status_table(status), statusdata)
 
     # Save the data values
     database.add_data(database.Tables.COLOURS, data.get("colour", ""))
@@ -96,13 +96,13 @@ def update_pigeon(pigeon, data, status, statusdata):
     if status != old_status:
         # Status has changed. Remove the old status and add the new data.
         if old_status != enums.Status.active:
-            database.remove_status(common.get_status(old_status), pigeon.pindex)
+            database.remove_status(common.get_status_table(old_status), pigeon.pindex)
         if status != enums.Status.active:
-            database.add_status(common.get_status(status), statusdata)
+            database.add_status(common.get_status_table(status), statusdata)
     else:
         # Status stayed the same, just update those values
         if status != enums.Status.active:
-            database.update_status(common.get_status(status), pigeon.pindex, statusdata)
+            database.update_status(common.get_status_table(status), pigeon.pindex, statusdata)
 
     # Save the data values
     database.add_data(database.Tables.COLOURS, data.get("colour", ""))
@@ -117,7 +117,7 @@ def remove_pigeon(pigeon, remove_results=True):
 
     status = pigeon.get_active()
     if status != enums.Status.active:
-        database.remove_status(common.get_status(status), pindex)
+        database.remove_status(common.get_status_table(status), pindex)
 
     try:
         os.remove(thumbnail.get_path(pigeon.get_image()))

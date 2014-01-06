@@ -23,7 +23,6 @@ from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.core import config
-from pigeonplanner.core import common
 from pigeonplanner.core import pigeonparser
 
 
@@ -182,7 +181,7 @@ class MainTreeView(gtk.TreeView):
                                        pigeon.get_name(), pigeon.get_colour(),
                                        pigeon.get_sex_string(),
                                        pigeon.get_loft(), pigeon.get_strain(),
-                                       _(common.get_status(pigeon.get_active())),
+                                       pigeon.get_status(),
                                        utils.get_sex_image(pigeon.sex)])
         self._selection.select_path(path)
         self.emit("pigeons-changed")
@@ -192,7 +191,7 @@ class MainTreeView(gtk.TreeView):
         row = [pigeon, pigeon.get_pindex(), ring, year, pigeon.get_name(),
                pigeon.get_colour(), pigeon.get_sex_string(),
                pigeon.get_loft(), pigeon.get_strain(),
-               _(common.get_status(pigeon.get_active())),
+               pigeon.get_status(),
                utils.get_sex_image(pigeon.sex)]
         self.add_row(row, select)
 

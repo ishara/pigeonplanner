@@ -47,14 +47,32 @@ SEX_IMGS = {enums.Sex.cock: os.path.join(const.IMAGEDIR, "symbol_male.png"),
             enums.Sex.hen: os.path.join(const.IMAGEDIR, "symbol_female.png"),
             enums.Sex.unknown: os.path.join(const.IMAGEDIR, "symbol_young.png")}
 
-statusdic = {enums.Status.dead: database.Tables.DEAD,
-             enums.Status.active: "Active",
-             enums.Status.sold: database.Tables.SOLD,
-             enums.Status.lost: database.Tables.LOST,
-             enums.Status.breeder: database.Tables.BREEDER,
-             enums.Status.loaned: database.Tables.LOANED}
+def get_statusdic():
+    return {enums.Status.dead: _("Dead"),
+            enums.Status.active: _("Active"),
+            enums.Status.sold: _("Sold"),
+            enums.Status.lost: _("Lost"),
+            enums.Status.breeder: _("Breeder"),
+            enums.Status.loaned: _("On loan")}
+
 def get_status(status):
-    return statusdic[status]
+    return get_statusdic()[status]
+
+statustables = {enums.Status.dead: database.Tables.DEAD,
+                enums.Status.active: "Active",
+                enums.Status.sold: database.Tables.SOLD,
+                enums.Status.lost: database.Tables.LOST,
+                enums.Status.breeder: database.Tables.BREEDER,
+                enums.Status.loaned: database.Tables.LOANED}
+def get_status_table(status):
+    return statustables[status]
+
+STATUS_IMGS = {enums.Status.dead: os.path.join(const.IMAGEDIR, "status_dead.png"),
+               enums.Status.active: os.path.join(const.IMAGEDIR, "status_active.png"),
+               enums.Status.sold: os.path.join(const.IMAGEDIR, "status_sold.png"),
+               enums.Status.lost: os.path.join(const.IMAGEDIR, "status_lost.png"),
+               enums.Status.breeder: os.path.join(const.IMAGEDIR, "status_breeder.png"),
+               enums.Status.loaned: os.path.join(const.IMAGEDIR, "status_onloan.png")}
 
 def get_function_name():
     """
