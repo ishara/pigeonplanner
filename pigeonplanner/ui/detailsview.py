@@ -16,7 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import os
 import logging
 logger = logging.getLogger(__name__)
 
@@ -189,9 +188,8 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
     ## Status
     def on_buttonstatus_clicked(self, widget):
         if self.pigeon is None: return
-        status = self.pigeon.get_active()
-        self.widgets.labelstatus.set_markup("<b>%s</b>" %_(common.statusdic[status]))
-        self.widgets.notebookstatus.set_current_page(status)
+        self.widgets.labelstatus.set_markup("<b>%s</b>" % self.pigeon.get_status())
+        self.widgets.notebookstatus.set_current_page(self.pigeon.get_active())
         self._set_status_editable(False)
         self.widgets.hboxstatusedit.hide()
         self.widgets.hboxstatusnormal.show()

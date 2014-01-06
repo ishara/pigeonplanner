@@ -120,7 +120,7 @@ class InformationDialog(gtk.Dialog):
                                 % (ybirds, self.get_percentage(ybirds, total))))
         for status in range(6):
             n_status = database.count_pigeons_with_status(status)
-            data.append(("    %s" % _(common.statusdic[status]), "%s\t(%s %%)"
+            data.append(("    %s" % common.get_status(status), "%s\t(%s %%)"
                             % (n_status, self.get_percentage(n_status, total))))
         data.append((_("Number of results"), str(database.count_results())))
         data.append((_("Number of couples"), str(database.count_breeding_records())))
