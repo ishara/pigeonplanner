@@ -17,6 +17,6 @@
 
 
 # Always import the latest schema here
-from .schema_1 import Tables, Schema
+from .schema_2 import Tables, Schema
 
 
