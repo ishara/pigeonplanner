@@ -130,7 +130,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonsave_clicked(self, widget):
         try:
             data = self._get_entry_data()
-        except errors.InvalidInputError, msg:
+        except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self.parent)
             return
         pigeons = [row[2] for row in self.widgets.liststoreselect if row[1]]

@@ -489,7 +489,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         logger.debug(common.get_function_name())
         try:
             new, msg = update.update()
-        except update.UpdateError, exc:
+        except update.UpdateError as exc:
             new = False
             msg = str(exc)
 
@@ -518,7 +518,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         try:
             checks.check_ring_entry(rangefrom, rangeyear)
             checks.check_ring_entry(rangeto, rangeyear)
-        except errors.InvalidInputError, msg:
+        except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self)
             return
         if not rangefrom.isdigit() or not rangeto.isdigit():

@@ -45,7 +45,7 @@ def make_backup(folder):
         zipper = zipfile.ZipFile(outfile, "w", zipfile.ZIP_STORED)
         makezip(infolder, zipper)
         zipper.close()
-    except Exception, e:
+    except Exception as e:
         logger.exception(e)
         return False
 
@@ -73,7 +73,7 @@ def restore_backup(infile):
 
     try:
         unzip(outfol, zipper)
-    except Exception, e:
+    except Exception as e:
         logger.exception(e)
         return False
 
@@ -91,6 +91,7 @@ def unzip(path, zipper):
             directory = normpath(join(path, root))
             if not isdir(directory):
                 os.makedirs(directory)
-            file(join(directory, name), "wb").write(zipper.read(each))
-
+            outfile = open(join(directory, name), "wb")
+            outfile.write(zipper.read(each))
+            outfile.close()
 

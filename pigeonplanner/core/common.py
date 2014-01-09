@@ -229,7 +229,7 @@ def open_file(path):
     if const.WINDOWS:
         try:
             os.startfile(norm_path)
-        except WindowsError, exc:
+        except WindowsError as exc:
             ErrorDialog((_("Error opening file:"), str(exc), _("Error")))
     else:
         if const.OSX:

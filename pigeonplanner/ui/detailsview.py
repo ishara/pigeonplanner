@@ -130,7 +130,7 @@ class PigeonImageWidget(gtk.EventBox):
             filename = chooser.get_filename()
             try:
                 pb = gtk.gdk.pixbuf_new_from_file_at_size(filename, 200, 200)
-            except gobject.GError, exc:
+            except gobject.GError as exc:
                 logger.error("Can't set image '%s':%s", filename, exc)
                 ErrorDialog(messages.MSG_INVALID_IMAGE, self._parent)
             else:
@@ -215,7 +215,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 try:
                     # Just check the date, the value is used elsewhere
                     child.get_text()
-                except errors.InvalidInputError, msg:
+                except errors.InvalidInputError as msg:
                     ErrorDialog(msg.value, self.parent)
                     return True
         self.widgets.statusdialog.hide()
@@ -371,7 +371,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
 
         try:
             data = self.get_edit_details()
-        except errors.InvalidInputError, msg:
+        except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self.parent)
             return True
 

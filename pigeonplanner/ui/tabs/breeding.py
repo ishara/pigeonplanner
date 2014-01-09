@@ -139,7 +139,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             mate = self.widgets.bandmateedit.get_pindex()
             pindex1 = self.widgets.bandentryedit1.get_pindex()
             pindex2 = self.widgets.bandentryedit2.get_pindex()
-        except errors.InvalidInputError, msg:
+        except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self.widgets.editdialog)
             return
         # Get and check dates
@@ -149,7 +149,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             hatched1 = self.widgets.datehatchededit1.get_text()
             laid2 = self.widgets.datelaidedit2.get_text()
             hatched2 = self.widgets.datehatchededit2.get_text()
-        except errors.InvalidInputError, msg:
+        except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self.widgets.editdialog)
             return
 
