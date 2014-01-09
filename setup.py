@@ -35,18 +35,13 @@ glade_files = glob.glob("glade/*.ui")
 glade_files.extend(["glade/pigeonplannerwidgets.py", "glade/pigeonplannerwidgets.xml"])
 
 translation_files = []
-if sys.platform != "darwin":
+# Search for the translation files
+for mofile in glob.glob("languages/*/LC_MESSAGES/pigeonplanner.mo"):
+    _, lang, _ = mofile.split(os.sep, 2)
+    modir = os.path.dirname(mofile)
     if sys.platform != "win32":
-        import i18n
-        i18n.create_mo()
-    # Search for the translation files
-    for mofile in glob.glob("languages/*/LC_MESSAGES/pigeonplanner.mo"):
-        _, lang, _ = mofile.split(os.sep, 2)
-
-        modir = os.path.dirname(mofile)
-        if sys.platform != "win32":
-            modir = modir.replace("languages", "share/locale")
-        translation_files.append((modir, [mofile]))
+        modir = modir.replace("languages", "share/pigeonplanner/languages")
+    translation_files.append((modir, [mofile]))
 
 resultparsers = glob.glob("resultparsers/*.py")
 resultparsers.extend(glob.glob("resultparsers/*.yapsy-plugin"))
