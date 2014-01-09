@@ -205,7 +205,7 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
     def on_combostatus_changed(self, widget):
         status = widget.get_active()
         self.widgets.notebookstatus.set_current_page(status)
-        self._set_status_image(status)
+        self._set_status_button(status)
 
     def on_statusdialog_close(self, widget, event=None):
         page = self.widgets.notebookstatus.get_current_page()
@@ -427,14 +427,16 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.emit("edit-cancelled")
 
     # Internal methods
-    def _set_status_image(self, status):
+    def _set_status_button(self, status):
         image = common.STATUS_IMGS[status]
+        label = common.get_status(status)
+        self.widgets.btnlabelstatus.set_text(label)
         self.widgets.imagestatus.set_from_file(image)
-        self.widgets.imagestatus.set_tooltip_text(common.get_status(status))
+        self.widgets.btnlabelstatusedit.set_text(label)
         self.widgets.imagestatusedit.set_from_file(image)
 
     def _set_status(self, pindex, status):
-        self._set_status_image(status)
+        self._set_status_button(status)
         if status == enums.Status.dead:
             data = database.get_status(database.Tables.DEAD, pindex)
             if data:
