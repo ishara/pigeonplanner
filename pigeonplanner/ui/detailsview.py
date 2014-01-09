@@ -465,6 +465,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                 self.widgets.entrydateloanback.set_text(data["back"])
                 self.widgets.entrypersonloan.set_text(data["person"])
                 self.widgets.textinfoloan.get_buffer().set_text(data["info"])
+        elif status == enums.Status.widow:
+            data = database.get_status(database.Tables.WIDOW, pindex)
+            if data:
+                self.widgets.entrypartnerwidow.set_pindex(data["partner"])
+                self.widgets.textinfowidow.get_buffer().set_text(data["info"])
 
     def _set_status_editable(self, value):
         def set_editable(widget, value):
@@ -512,6 +517,12 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
             return {"loaned": self.widgets.entrydateloan.get_text(),
                     "back": self.widgets.entrydateloanback.get_text(),
                     "person": self.widgets.entrypersonloan.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds()),
+                    "pindex": pindex}
+
+        if status == enums.Status.widow:
+            bffr = self.widgets.textinfowidow.get_buffer()
+            return {"partner": self.widgets.entrypartnerwidow.get_pindex(),
                     "info": bffr.get_text(*bffr.get_bounds()),
                     "pindex": pindex}
 

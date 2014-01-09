@@ -29,6 +29,7 @@ class Status:
     lost = 3
     breeder = 4
     loaned = 5
+    widow = 6
 
 
 class Action:

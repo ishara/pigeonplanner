@@ -43,6 +43,7 @@ class Tables:
     DEAD = "Dead"
     BREEDER = "Breeder"
     LOANED = "Onloan"
+    WIDOW = "Widow"
 
 
 class Schema(BaseSchema):
@@ -153,6 +154,10 @@ class Schema(BaseSchema):
                         ("back", "TEXT", "DEFAULT ''"),
                         ("person", "TEXT", "DEFAULT ''"),
                         ("info", "TEXT", "DEFAULT ''")],
+        Tables.WIDOW: [("Widowkey", "INTEGER", "PRIMARY KEY"),
+                       ("pindex", "TEXT", "NOT NULL"),
+                       ("partner", "TEXT", "DEFAULT ''"),
+                       ("info", "TEXT", "DEFAULT ''")],
 
         Tables.ADDR: [("Addresskey", "INTEGER", "PRIMARY KEY"),
                       ("name", "TEXT", "NOT NULL"),
@@ -225,6 +230,12 @@ class Schema(BaseSchema):
                                     (table, cols, cols, table))
         ## 4. Drop old table
         session.cursor.execute("DROP TABLE %s_old" % table)
+
+        # Added widow status
+        logger.debug("Adding widow status table")
+        table_name = Tables.WIDOW
+        column_sql = cls.get_columns_sql(table_name)
+        session.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table_name, column_sql))
 
         # Commit all migration changes
         session.connection.commit()
