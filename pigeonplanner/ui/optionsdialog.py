@@ -177,11 +177,13 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ("columns.pigeon-status", self.widgets.chkStatus.get_active()),
                 ("columns.pigeon-loft", self.widgets.chkLoft.get_active()),
                 ("columns.result-coef", self.widgets.chkCoef.get_active()),
+                ("columns.result-speed", self.widgets.chkSpeed.get_active()),
                 ("columns.result-sector", self.widgets.chkSector.get_active()),
                 ("columns.result-category", self.widgets.chkCategory.get_active()),
                 ("columns.result-type", self.widgets.chkType.get_active()),
                 ("columns.result-weather", self.widgets.chkWeather.get_active()),
                 ("columns.result-wind", self.widgets.chkWind.get_active()),
+                ("columns.result-windspeed", self.widgets.chkWindspeed.get_active()),
                 ("columns.result-comment", self.widgets.chkComment.get_active()),
 
                 ("printing.general-paper", self.widgets.cbPaper.get_active()),
@@ -234,11 +236,13 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.widgets.chkStrain.set_active(config.get("columns.pigeon-strain"))
         self.widgets.chkStatus.set_active(config.get("columns.pigeon-status"))
         self.widgets.chkCoef.set_active(config.get("columns.result-coef"))
+        self.widgets.chkSpeed.set_active(config.get("columns.result-speed"))
         self.widgets.chkSector.set_active(config.get("columns.result-sector"))
         self.widgets.chkCategory.set_active(config.get("columns.result-category"))
         self.widgets.chkType.set_active(config.get("columns.result-type"))
         self.widgets.chkWeather.set_active(config.get("columns.result-weather"))
         self.widgets.chkWind.set_active(config.get("columns.result-wind"))
+        self.widgets.chkWindspeed.set_active(config.get("columns.result-windspeed"))
         self.widgets.chkComment.set_active(config.get("columns.result-comment"))
 
         sexcoltype = config.get("columns.pigeon-sex-type")

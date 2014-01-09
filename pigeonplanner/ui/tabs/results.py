@@ -101,20 +101,37 @@ class BaseView(object):
 class ClassicView(BaseView):
     ID = 0
 
-    (COL_ID,
-     COL_DATE,
+    (LS_COL_ID,
+     LS_COL_DATE,
+     LS_COL_RACEPOINT,
+     LS_COL_PLACED,
+     LS_COL_OUT,
+     LS_COL_COEF,
+     LS_COL_SPEED,
+     LS_COL_SECTOR,
+     LS_COL_TYPE,
+     LS_COL_CATEGORY,
+     LS_COL_WIND,
+     LS_COL_WINDSPEED,
+     LS_COL_WEATHER,
+     LS_COL_COMMENT,
+     LS_COL_PLACEDINT,
+     LS_COL_COEFFLOAT,
+     LS_COL_SPEEDFLOAT) = range(17)
+
+    (COL_DATE,
      COL_RACEPOINT,
      COL_PLACED,
      COL_OUT,
      COL_COEF,
+     COL_SPEED,
      COL_SECTOR,
      COL_TYPE,
      COL_CATEGORY,
      COL_WIND,
+     COL_WINDSPEED,
      COL_WEATHER,
-     COL_COMMENT,
-     COL_PLACEDINT,
-     COL_COEFFLOAT) = range(14)
+     COL_COMMENT) = range(13)
 
     def __init__(self, root):
         BaseView.__init__(self, root)
@@ -124,8 +141,8 @@ class ClassicView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.liststore = gtk.ListStore(str, str, str, str, int, str, str,
-                                       str, str, str, str, str, int, float)
+        self.liststore = gtk.ListStore(str, str, str, str, int, str, str, str, str,
+                                       str, str, str, str, str, int, float, float)
         self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.treeview = gtk.TreeView()
         self.treeview.set_model(self.liststore)
@@ -133,10 +150,12 @@ class ClassicView(BaseView):
         self.treeview.set_enable_search(False)
         self.selection = self.treeview.get_selection()
         colnames = [(_("Date"), None), (_("Racepoint"), None),
-                    (_("Placed"), 12), (_("Out of"), None),
-                    (_("Coefficient"), 13), (_("Sector"), None),
+                    (_("Placed"), self.LS_COL_PLACEDINT), (_("Out of"), None),
+                    (_("Coefficient"), self.LS_COL_COEFFLOAT),
+                    (_("Speed"), self.LS_COL_SPEEDFLOAT), (_("Sector"), None),
                     (_("Type"), None), (_("Category"), None),
-                    (_("Wind"), None), (_("Weather"), None), (_("Comment"), None)]
+                    (_("Wind"), None), (_("Windspeed"), None),
+                    (_("Weather"), None), (_("Comment"), None)]
         for index, (colname, sortid) in enumerate(colnames):
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(colname, textrenderer, text=index+1)
@@ -149,13 +168,15 @@ class ClassicView(BaseView):
         self._root.pack_start(self._frame, True, True, 0)
 
     def set_columns(self):
-        columnsdic = {4: config.get("columns.result-coef"),
-                      5: config.get("columns.result-sector"),
-                      6: config.get("columns.result-type"),
-                      7: config.get("columns.result-category"),
-                      8: config.get("columns.result-wind"),
-                      9: config.get("columns.result-weather"),
-                      10: config.get("columns.result-comment")}
+        columnsdic = {self.COL_COEF: config.get("columns.result-coef"),
+                      self.COL_SPEED: config.get("columns.result-speed"),
+                      self.COL_SECTOR: config.get("columns.result-sector"),
+                      self.COL_TYPE: config.get("columns.result-type"),
+                      self.COL_CATEGORY: config.get("columns.result-category"),
+                      self.COL_WIND: config.get("columns.result-wind"),
+                      self.COL_WINDSPEED: config.get("columns.result-windspeed"),
+                      self.COL_WEATHER: config.get("columns.result-weather"),
+                      self.COL_COMMENT: config.get("columns.result-comment")}
         for key, value in columnsdic.items():
             self.treeview.get_column(key).set_visible(value)
 
@@ -165,45 +186,48 @@ class ClassicView(BaseView):
         self.liststore.clear()
         for result in database.get_results_for_data({"pindex": pigeon.pindex}):
             placestr, coef, coefstr = common.format_place_coef(result["place"], result["out"])
+            speed = common.format_speed(result["speed"])
 
             self.liststore.append(
                 [result["Resultkey"], result["date"], result["point"],
-                 placestr, result["out"], coefstr, result["sector"], result["type"],
-                 result["category"], result["wind"], result["weather"], result["comment"],
-                 result["place"], coef
+                 placestr, result["out"], coefstr, speed, result["sector"], result["type"],
+                 result["category"], result["wind"], result["windspeed"], result["weather"],
+                 result["comment"], result["place"], coef, result["speed"]
                 ]
             )
 
     def get_selected(self):
-        # Columns could contain None prior to 0.7.0, convert to empty string
         model, rowiter = self.selection.get_selected()
-        return [model.get_value(rowiter, self.COL_DATE) or "",
-                model.get_value(rowiter, self.COL_RACEPOINT) or "",
-                model.get_value(rowiter, self.COL_PLACED) or "",
-                model.get_value(rowiter, self.COL_OUT) or "",
-                model.get_value(rowiter, self.COL_SECTOR) or "",
-                model.get_value(rowiter, self.COL_TYPE) or "",
-                model.get_value(rowiter, self.COL_CATEGORY) or "",
-                model.get_value(rowiter, self.COL_WEATHER) or "",
-                model.get_value(rowiter, self.COL_WIND) or "",
-                model.get_value(rowiter, self.COL_COMMENT) or "",
-            ]
+        return {"date": model.get_value(rowiter, self.LS_COL_DATE),
+                "point": model.get_value(rowiter, self.LS_COL_RACEPOINT),
+                "placed": model.get_value(rowiter, self.LS_COL_PLACEDINT),
+                "out": model.get_value(rowiter, self.LS_COL_OUT),
+                "speed": model.get_value(rowiter, self.LS_COL_SPEEDFLOAT),
+                "sector": model.get_value(rowiter, self.LS_COL_SECTOR),
+                "type": model.get_value(rowiter, self.LS_COL_TYPE),
+                "category": model.get_value(rowiter, self.LS_COL_CATEGORY),
+                "weather": model.get_value(rowiter, self.LS_COL_WEATHER),
+                "wind": model.get_value(rowiter, self.LS_COL_WIND),
+                "windspeed": model.get_value(rowiter, self.LS_COL_WINDSPEED),
+                "comment": model.get_value(rowiter, self.LS_COL_COMMENT),
+            }
 
     def remove_selected(self):
         model, rowiter = self.selection.get_selected()
         path = self.liststore.get_path(rowiter)
 
-        database.remove_result(model[rowiter][self.COL_ID])
+        database.remove_result(model[rowiter][self.LS_COL_ID])
         self.liststore.remove(rowiter)
         self.selection.select_path(path)
 
     def add_result(self, data, key):
         placestr, coef, coefstr = common.format_place_coef(data["place"], data["out"])
+        speed = common.format_speed(data["speed"])
         rowiter = self.liststore.insert(0,
                 [key, data["date"], data["point"],
-                 placestr, data["out"], coefstr, data["sector"], data["type"],
-                 data["category"], data["wind"], data["weather"], data["comment"],
-                 data["place"], coef
+                 placestr, data["out"], coefstr, speed, data["sector"], data["type"],
+                 data["category"], data["wind"], data["windspeed"], data["weather"],
+                 data["comment"], data["place"], coef, data["speed"]
                 ]
             )
         self.selection.select_iter(rowiter)
@@ -212,21 +236,25 @@ class ClassicView(BaseView):
 
     def update_result(self, data):
         placestr, coef, coefstr = common.format_place_coef(data["place"], data["out"])
+        speed = common.format_speed(data["speed"])
         model, node = self.selection.get_selected()
         key = self.liststore.get_value(node, 0)
-        self.liststore.set(node, self.COL_DATE, data["date"],
-                                 self.COL_RACEPOINT, data["point"],
-                                 self.COL_PLACED, placestr,
-                                 self.COL_OUT, data["out"],
-                                 self.COL_COEF, coefstr,
-                                 self.COL_SECTOR, data["sector"],
-                                 self.COL_TYPE, data["type"],
-                                 self.COL_CATEGORY, data["category"],
-                                 self.COL_WIND, data["wind"],
-                                 self.COL_WEATHER, data["weather"],
-                                 self.COL_COMMENT, data["comment"],
-                                 self.COL_PLACEDINT, data["place"],
-                                 self.COL_COEFFLOAT, coef)
+        self.liststore.set(node, self.LS_COL_DATE, data["date"],
+                                 self.LS_COL_RACEPOINT, data["point"],
+                                 self.LS_COL_PLACED, placestr,
+                                 self.LS_COL_OUT, data["out"],
+                                 self.LS_COL_COEF, coefstr,
+                                 self.LS_COL_SPEED, speed,
+                                 self.LS_COL_SECTOR, data["sector"],
+                                 self.LS_COL_TYPE, data["type"],
+                                 self.LS_COL_CATEGORY, data["category"],
+                                 self.LS_COL_WIND, data["wind"],
+                                 self.LS_COL_WINDSPEED, data["windspeed"],
+                                 self.LS_COL_WEATHER, data["weather"],
+                                 self.LS_COL_COMMENT, data["comment"],
+                                 self.LS_COL_PLACEDINT, data["place"],
+                                 self.LS_COL_COEFFLOAT, coef,
+                                 self.LS_COL_SPEEDFLOAT, data["speed"])
         return key
 
     def clear(self):
@@ -242,21 +270,39 @@ class ClassicView(BaseView):
 class SplittedView(BaseView):
     ID = 1
 
+    (LS_COL_DATE,
+     LS_COL_RACEPOINT,
+     LS_COL_TYPE,
+     LS_COL_WIND,
+     LS_COL_WINDSPEED,
+     LS_COL_WEATHER) = range(6)
+
+    (LS_COL_ID,
+     LS_COL_PLACED,
+     LS_COL_OUT,
+     LS_COL_COEF,
+     LS_COL_SPEED,
+     LS_COL_SECTOR,
+     LS_COL_CATEGORY,
+     LS_COL_COMMENT,
+     LS_COL_PLACEDINT,
+     LS_COL_COEFFLOAT,
+     LS_COL_SPEEDFLOAT) = range(11)
+
     (COL_DATE,
      COL_RACEPOINT,
      COL_TYPE,
      COL_WIND,
-     COL_WEATHER) = range(5)
+     COL_WINDSPEED,
+     COL_WEATHER) = range(6)
 
-    (COL_ID,
-     COL_PLACED,
+    (COL_PLACED,
      COL_OUT,
      COL_COEF,
+     COL_SPEED,
      COL_SECTOR,
      COL_CATEGORY,
-     COL_COMMENT,
-     COL_PLACEDINT,
-     COL_COEFFLOAT) = range(9)
+     COL_COMMENT) = range(7)
 
     def __init__(self, root):
         BaseView.__init__(self, root)
@@ -266,14 +312,14 @@ class SplittedView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.race_ls = gtk.ListStore(str, str, str, str, str)
+        self.race_ls = gtk.ListStore(str, str, str, str, str, str)
         self.race_tv = gtk.TreeView()
         self.race_tv.set_model(self.race_ls)
         self.race_tv.set_rules_hint(True)
         self.race_tv.set_enable_search(False)
         self.race_sel = self.race_tv.get_selection()
         self.race_sel.connect("changed", self.on_race_sel_changed)
-        colnames = [_("Date"), _("Racepoint"), _("Type"), _("Wind"), _("Weather")]
+        colnames = [_("Date"), _("Racepoint"), _("Type"), _("Wind"), _("Windspeed"), _("Weather")]
         for index, colname in enumerate(colnames):
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(colname, textrenderer, text=index)
@@ -285,14 +331,15 @@ class SplittedView(BaseView):
         self._frame1.show_all()
         self._root.pack_start(self._frame1, True, True, 0)
 
-        self.liststore = gtk.ListStore(str, str, int, str, str, str, str, int, float)
+        self.liststore = gtk.ListStore(str, str, int, str, str, str, str, str, int, float, float)
         self.treeview = gtk.TreeView()
         self.treeview.set_model(self.liststore)
         self.treeview.set_rules_hint(True)
         self.treeview.set_enable_search(False)
         self.selection = self.treeview.get_selection()
-        colnames = [(_("Placed"), 7), (_("Out of"), None),
-                    (_("Coefficient"), 8), (_("Sector"), None),
+        colnames = [(_("Placed"), self.LS_COL_PLACEDINT), (_("Out of"), None),
+                    (_("Coefficient"), self.LS_COL_COEFFLOAT),
+                    (_("Speed"), self.LS_COL_SPEEDFLOAT), (_("Sector"), None),
                     (_("Category"), None), (_("Comment"), None)]
         for index, (colname, sortid) in enumerate(colnames):
             textrenderer = gtk.CellRendererText()
@@ -306,16 +353,18 @@ class SplittedView(BaseView):
         self._root.pack_start(self._frame2, True, True, 0)
 
     def set_columns(self):
-        columnsdic = {2: config.get("columns.result-coef"),
-                      3: config.get("columns.result-sector"),
-                      4: config.get("columns.result-category"),
-                      5: config.get("columns.result-comment")}
+        columnsdic = {self.COL_COEF: config.get("columns.result-coef"),
+                      self.COL_SPEED: config.get("columns.result-speed"),
+                      self.COL_SECTOR: config.get("columns.result-sector"),
+                      self.COL_CATEGORY: config.get("columns.result-category"),
+                      self.COL_COMMENT: config.get("columns.result-comment")}
         for key, value in columnsdic.items():
             self.treeview.get_column(key).set_visible(value)
 
-        columnsdic = {2: config.get("columns.result-type"),
-                      3: config.get("columns.result-wind"),
-                      4: config.get("columns.result-weather")}
+        columnsdic = {self.COL_TYPE: config.get("columns.result-type"),
+                      self.COL_WIND: config.get("columns.result-wind"),
+                      self.COL_WINDSPEED: config.get("columns.result-windspeed"),
+                      self.COL_WEATHER: config.get("columns.result-weather")}
         for key, value in columnsdic.items():
             self.race_tv.get_column(key).set_visible(value)
 
@@ -326,29 +375,30 @@ class SplittedView(BaseView):
         self.race_ls.clear()
         for race in database.get_races_for_pigeon(pigeon.pindex):
             self.race_ls.append([race["date"], race["point"], race["type"],
-                                         race["wind"], race["weather"]])
+                                 race["wind"], race["windspeed"], race["weather"]])
 
     def get_selected(self):
-        # Columns could contain None prior to 0.7.0, convert to empty string
         model, rowiter = self.selection.get_selected()
         model_race, rowiter_race = self.race_sel.get_selected()
-        return [model_race.get_value(rowiter_race, self.COL_DATE) or "",
-                model_race.get_value(rowiter_race, self.COL_RACEPOINT) or "",
-                model.get_value(rowiter, self.COL_PLACED) or "",
-                model.get_value(rowiter, self.COL_OUT) or "",
-                model.get_value(rowiter, self.COL_SECTOR) or "",
-                model_race.get_value(rowiter_race, self.COL_TYPE) or "",
-                model.get_value(rowiter, self.COL_CATEGORY) or "",
-                model_race.get_value(rowiter_race, self.COL_WEATHER) or "",
-                model_race.get_value(rowiter_race, self.COL_WIND) or "",
-                model.get_value(rowiter, self.COL_COMMENT) or "",
-            ]
+        return {"date": model_race.get_value(rowiter_race, self.LS_COL_DATE),
+                "point": model_race.get_value(rowiter_race, self.LS_COL_RACEPOINT),
+                "placed": model.get_value(rowiter, self.LS_COL_PLACEDINT),
+                "out": model.get_value(rowiter, self.LS_COL_OUT),
+                "speed": model.get_value(rowiter, self.LS_COL_SPEEDFLOAT),
+                "sector": model.get_value(rowiter, self.LS_COL_SECTOR),
+                "type": model_race.get_value(rowiter_race, self.LS_COL_TYPE),
+                "category": model.get_value(rowiter, self.LS_COL_CATEGORY),
+                "weather": model_race.get_value(rowiter_race, self.LS_COL_WEATHER),
+                "wind": model_race.get_value(rowiter_race, self.LS_COL_WIND),
+                "windspeed": model_race.get_value(rowiter_race, self.LS_COL_WINDSPEED),
+                "comment": model.get_value(rowiter, self.LS_COL_COMMENT),
+            }
 
     def remove_selected(self):
         model, rowiter = self.selection.get_selected()
         path = self.liststore.get_path(rowiter)
 
-        database.remove_result(model[rowiter][self.COL_ID])
+        database.remove_result(model[rowiter][self.LS_COL_ID])
         self.liststore.remove(rowiter)
         self.selection.select_path(path)
 
@@ -359,38 +409,43 @@ class SplittedView(BaseView):
     def add_result(self, data, key):
         seldata = {"pindex": self.pigeon.pindex, "date": data["date"], "point": data["point"]}
         if not database.get_results_for_data(seldata):
-            rowiter = self.race_ls.insert(0, [data["date"], data["point"],
-                                        data["type"], data["wind"], data["weather"]])
+            rowiter = self.race_ls.insert(0, [data["date"], data["point"], data["type"],
+                                              data["wind"], data["windspeed"], data["weather"]])
             self.race_ls.set_sort_column_id(0, gtk.SORT_ASCENDING)
             self.race_sel.select_iter(rowiter)
             path = self.race_ls.get_path(rowiter)
             self.race_tv.scroll_to_cell(path)
         else:
             model, node = self.race_sel.get_selected()
-            self.race_ls.set(node, self.COL_DATE, data["date"],
-                                   self.COL_RACEPOINT, data["point"],
-                                   self.COL_TYPE, data["type"],
-                                   self.COL_WIND, data["wind"],
-                                   self.COL_WEATHER, data["weather"])
+            self.race_ls.set(node, self.LS_COL_DATE, data["date"],
+                                   self.LS_COL_RACEPOINT, data["point"],
+                                   self.LS_COL_TYPE, data["type"],
+                                   self.LS_COL_WIND, data["wind"],
+                                   self.LS_COL_WINDSPEED, data["windspeed"],
+                                   self.LS_COL_WEATHER, data["weather"])
 
     def update_result(self, data):
         placestr, coef, coefstr = common.format_place_coef(data["place"], data["out"])
+        speed = common.format_speed(data["speed"])
         model, node = self.selection.get_selected()
         key = self.liststore.get_value(node, 0)
-        self.liststore.set(node, self.COL_PLACED, placestr,
-                                 self.COL_OUT, data["out"],
-                                 self.COL_COEF, coefstr,
-                                 self.COL_SECTOR, data["sector"],
-                                 self.COL_CATEGORY, data["category"],
-                                 self.COL_COMMENT, data["comment"],
-                                 self.COL_PLACEDINT, data["place"],
-                                 self.COL_COEFFLOAT, coef)
+        self.liststore.set(node, self.LS_COL_PLACED, placestr,
+                                 self.LS_COL_OUT, data["out"],
+                                 self.LS_COL_COEF, coefstr,
+                                 self.LS_COL_SPEED, speed,
+                                 self.LS_COL_SECTOR, data["sector"],
+                                 self.LS_COL_CATEGORY, data["category"],
+                                 self.LS_COL_COMMENT, data["comment"],
+                                 self.LS_COL_PLACEDINT, data["place"],
+                                 self.LS_COL_COEFFLOAT, coef,
+                                 self.LS_COL_SPEEDFLOAT, data["speed"])
         model, node = self.race_sel.get_selected()
-        self.race_ls.set(node, self.COL_DATE, data["date"],
-                               self.COL_RACEPOINT, data["point"],
-                               self.COL_TYPE, data["type"],
-                               self.COL_WIND, data["wind"],
-                               self.COL_WEATHER, data["weather"])
+        self.race_ls.set(node, self.LS_COL_DATE, data["date"],
+                               self.LS_COL_RACEPOINT, data["point"],
+                               self.LS_COL_TYPE, data["type"],
+                               self.LS_COL_WIND, data["wind"],
+                               self.LS_COL_WINDSPEED, data["windspeed"],
+                               self.LS_COL_WEATHER, data["weather"])
         return key
 
     def clear(self):
@@ -415,9 +470,10 @@ class SplittedView(BaseView):
         data = {"pindex": self.pigeon.pindex, "date": date, "point": racepoint}
         for result in database.get_results_for_data(data):
             placestr, coef, coefstr = common.format_place_coef(result["place"], result["out"])
+            speed = common.format_speed(result["speed"])
             self.liststore.append([result["Resultkey"], placestr, result["out"], coefstr,
-                                   result["sector"], result["category"],
-                                   result["comment"], result["place"], coef])
+                                   speed, result["sector"], result["category"],
+                                   result["comment"], result["place"], coef, result["speed"]])
 
 
 class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
@@ -464,7 +520,10 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_buttonadd_clicked(self, widget):
         self._mode = enums.Action.add
-        values = [common.get_date(), "", 1, 1, "", "", "", "", "", ""]
+        values = {"date": common.get_date(), "point": "", "placed": 1, "out": 1,
+                  "speed": 0.0, "sector": "", "type": "", "category": "", "weather": "",
+                  "wind": "", "windspeed": "", "comment": "",
+            }
         self._set_dialog(self._mode, values)
 
     def on_buttonedit_clicked(self, widget):
@@ -498,8 +557,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             database.update_result_for_key(key, data)
             self.widgets.dialog.hide()
 
-        database.update_result_as_race(data["date"], data["point"],
-                                       data["sector"], data["wind"], data["weather"])
+        database.update_result_as_race(data["date"], data["point"], data["sector"],
+                                       data["wind"], data["windspeed"], data["weather"])
         self.widgets.resultview.refresh()
 
         data = [(self.widgets.comboracepoint, data["point"], database.Tables.RACEPOINTS),
@@ -561,7 +620,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     def _get_data(self):
         try:
             date = self.widgets.entrydate.get_text()
-        except errors.InvalidInputError, msg:
+        except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self.widgets.dialog)
             return
         point = self.widgets.comboracepoint.child.get_text()
@@ -570,11 +629,13 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         else:
             place = 0
         out = self.widgets.spinoutof.get_value_as_int()
+        speed = self.widgets.spinspeed.get_value()
         sector = self.widgets.combosector.child.get_text()
         ftype = self.widgets.combotype.child.get_text()
         category = self.widgets.combocategory.child.get_text()
         weather = self.widgets.comboweather.child.get_text()
         wind = self.widgets.combowind.child.get_text()
+        windspeed = self.widgets.entrywindspeed.get_text()
         comment = self.widgets.entrycomment.get_text()
 
         if not date or not point or not out:
@@ -582,7 +643,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             return
         return {"date": date, "point": point, "place": place, "out": out,
                 "sector": sector, "type": ftype, "category": category,
-                "wind": wind, "weather": weather, "comment": comment}
+                "wind": wind, "weather": weather, "comment": comment,
+                "speed": speed, "windspeed": windspeed}
 
     def _set_dialog(self, mode, values):
         """
@@ -601,23 +663,21 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.entrydate.grab_focus()
 
     def _set_entry_values(self, values):
-        placed = values[2]
-        if placed == "0" or placed == "-":
-            self.widgets.checkplaced.set_active(False)
-            placed = 1
-        else:
-            self.widgets.checkplaced.set_active(True)
+        placed = values["placed"]
+        self.widgets.checkplaced.set_active(bool(placed))
 
-        self.widgets.entrydate.set_text(values[0])
-        self.widgets.comboracepoint.child.set_text(values[1])
-        self.widgets.spinplaced.set_value(int(placed))
-        self.widgets.spinoutof.set_value(values[3])
-        self.widgets.combosector.child.set_text(values[4])
-        self.widgets.combotype.child.set_text(values[5])
-        self.widgets.combocategory.child.set_text(values[6])
-        self.widgets.comboweather.child.set_text(values[7])
-        self.widgets.combowind.child.set_text(values[8])
-        self.widgets.entrycomment.set_text(values[9])
+        self.widgets.entrydate.set_text(values["date"])
+        self.widgets.comboracepoint.child.set_text(values["point"])
+        self.widgets.spinplaced.set_value(placed)
+        self.widgets.spinoutof.set_value(values["out"])
+        self.widgets.spinspeed.set_value(values["speed"])
+        self.widgets.combosector.child.set_text(values["sector"])
+        self.widgets.combotype.child.set_text(values["type"])
+        self.widgets.combocategory.child.set_text(values["category"])
+        self.widgets.comboweather.child.set_text(values["weather"])
+        self.widgets.combowind.child.set_text(values["wind"])
+        self.widgets.entrywindspeed.set_text(values["windspeed"])
+        self.widgets.entrycomment.set_text(values["comment"])
 
     def _autofill_race(self):
         date = self.widgets.entrydate.get_text()
@@ -627,10 +687,12 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             return
         race = database.get_race_info(date, racepoint)
         if race is not None:
-            ftype, wind, weather = race["type"], race["wind"], race["weather"]
+            ftype, wind, windspeed, weather = \
+                    race["type"], race["wind"], race["windspeed"], race["weather"]
         else:
-            ftype, wind, weather = "", "", ""
+            ftype, wind, windspeed, weather = "", "", "", ""
         self.widgets.combotype.child.set_text(ftype)
         self.widgets.combowind.child.set_text(wind)
+        self.widgets.entrywindspeed.set_text(windspeed)
         self.widgets.comboweather.child.set_text(weather)
 

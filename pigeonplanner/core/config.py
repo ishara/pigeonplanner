@@ -133,11 +133,13 @@ default_config = [
                 ("columns.pigeon-status", False),
                 ("columns.pigeon-loft", False),
                 ("columns.result-coef", True),
+                ("columns.result-speed", True),
                 ("columns.result-sector", True),
                 ("columns.result-category", True),
                 ("columns.result-type", True),
                 ("columns.result-weather", True),
                 ("columns.result-wind", True),
+                ("columns.result-windspeed", True),
                 ("columns.result-comment", True),
 
                 ("printing.general-paper", 0),

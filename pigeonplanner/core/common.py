@@ -182,6 +182,11 @@ def format_place_coef(place, out):
         placestr = str(place)
     return placestr, coef, coefstr
 
+def format_speed(value):
+    if value <= 0.0:
+        return ""
+    return locale.format_string("%.2f", value)
+
 def add_zero_to_time(value):
     """
     Add a zero in front of a one digit number
