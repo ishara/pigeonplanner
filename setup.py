@@ -31,35 +31,35 @@ from pigeonplanner.core import const
 
 
 # Common data files
-glade_files = glob.glob('glade/*.ui')
-glade_files.extend(['glade/pigeonplannerwidgets.py', 'glade/pigeonplannerwidgets.xml'])
+glade_files = glob.glob("glade/*.ui")
+glade_files.extend(["glade/pigeonplannerwidgets.py", "glade/pigeonplannerwidgets.xml"])
 
 translation_files = []
-if sys.platform != 'darwin':
-    if sys.platform != 'win32':
+if sys.platform != "darwin":
+    if sys.platform != "win32":
         import i18n
         i18n.create_mo()
     # Search for the translation files
-    for mofile in glob.glob('languages/*/LC_MESSAGES/pigeonplanner.mo'):
+    for mofile in glob.glob("languages/*/LC_MESSAGES/pigeonplanner.mo"):
         _, lang, _ = mofile.split(os.sep, 2)
 
         modir = os.path.dirname(mofile)
-        if sys.platform != 'win32':
-            modir = modir.replace('languages', 'share/locale')
+        if sys.platform != "win32":
+            modir = modir.replace("languages", "share/locale")
         translation_files.append((modir, [mofile]))
 
-resultparsers = glob.glob('resultparsers/*.py')
-resultparsers.extend(glob.glob('resultparsers/*.yapsy-plugin'))
+resultparsers = glob.glob("resultparsers/*.py")
+resultparsers.extend(glob.glob("resultparsers/*.yapsy-plugin"))
 
 options = {"py2exe": {"compressed": 2,
                       "optimize": 2,
-                      "includes": ['atk', 'cairo', 'gio', 'gobject', 'pango', 'pangocairo'],
-                      "excludes": ['_gtkagg', '_tkagg', 'bsddb', 'curses',
-                                   'email', 'pywin.debugger',
-                                   'pywin.debugger.dbgcon', 'pywin.dialogs',
-                                   'tcl', 'Tkconstants', 'Tkinter'],
-                      "packages": ['encodings', 'pigeonplanner'],
-                      "dll_excludes": ['tcl84.dll', 'tk84.dll', 'w9xpopen.exe'],
+                      "includes": ["atk", "cairo", "gio", "gobject", "pango", "pangocairo"],
+                      "excludes": ["_gtkagg", "_tkagg", "bsddb", "curses",
+                                   "email", "pywin.debugger",
+                                   "pywin.debugger.dbgcon", "pywin.dialogs",
+                                   "tcl", "Tkconstants", "Tkinter"],
+                      "packages": ["encodings", "pigeonplanner"],
+                      "dll_excludes": ["tcl84.dll", "tk84.dll", "w9xpopen.exe"],
                       "bundle_files": 3,
                       "dist_dir": "dist",
                       "xref": False,
@@ -72,10 +72,10 @@ if sys.platform == "win32":
     import py2exe
 
     data_files = [
-            ('glade', glade_files),
-            ('images', glob.glob('images/*.png')),
-            ('resultparsers', resultparsers),
-            ('.', ['AUTHORS', 'CHANGES', 'COPYING', 'README', 'README.dev'])]
+            ("glade", glade_files),
+            ("images", glob.glob("images/*.png")),
+            ("resultparsers", resultparsers),
+            (".", ["AUTHORS", "CHANGES", "COPYING", "README", "README.dev"])]
 
     platform_options = dict(
                     zipfile = r"lib/library.zip",
@@ -85,12 +85,12 @@ if sys.platform == "win32":
                         )
 else:
     data_files = [
-            ('share/pigeonplanner/glade', glade_files),
-            ('share/pigeonplanner/images', glob.glob('images/*.png')),
-            ('share/pigeonplanner/resultparsers', resultparsers),
-            ('share/applications', ['data/pigeonplanner.desktop']),
-            ('share/icons/hicolor/scalable/apps', ['images/pigeonplanner.svg']),
-            ('share/pixmaps/', ['images/pigeonplanner.png']),
+            ("share/pigeonplanner/glade", glade_files),
+            ("share/pigeonplanner/images", glob.glob("images/*.png")),
+            ("share/pigeonplanner/resultparsers", resultparsers),
+            ("share/applications", ["data/pigeonplanner.desktop"]),
+            ("share/icons/hicolor/scalable/apps", ["images/pigeonplanner.svg"]),
+            ("share/pixmaps/", ["images/pigeonplanner.png"]),
             ]
     platform_options = {}
 
@@ -101,7 +101,7 @@ entry_points = {
             ]
         }
 
-setup(name = 'pigeonplanner',
+setup(name = "pigeonplanner",
       version = const.VERSION,
       description = const.DESCRIPTION,
       long_description = """
@@ -122,6 +122,6 @@ setup(name = 'pigeonplanner',
 
 # Remove egg-info directory which is no longer needed
 try:
-    shutil.rmtree('pigeonplanner.egg-info')
+    shutil.rmtree("pigeonplanner.egg-info")
 except:
     pass
