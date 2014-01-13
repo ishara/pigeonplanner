@@ -143,9 +143,11 @@ class CalendarPopup(gtk.Window):
         self._saved_date = entry.get_text(validate=False)
         if self._saved_date:
             try:
-                year, month, day = self._saved_date.split("-")
-                calendar.select_month(int(month)-1, int(year))
-                calendar.select_day(int(day))
+                year, month, day = map(int, self._saved_date.split("-"))
+                calendar.select_month(month-1, year)
+                calendar.select_day(day)
+                # Check for a valid date, mostly incorrect year
+                datetime.date(year, month, day).strftime(const.DATE_FORMAT)
             except ValueError:
                 # Raised by both splitting and setting an incorrect date
                 date = datetime.date.today().strftime(const.DATE_FORMAT)
@@ -163,7 +165,11 @@ class CalendarPopup(gtk.Window):
         self.destroy()
 
     def on_buttoncancel_clicked(self, widget):
-        self._entry.set_text(self._saved_date)
+        if not self._entry.can_empty and self._saved_date == "":
+            # Don't trigger the changed signal on the entry
+            pass
+        else:
+            self._entry.set_text(self._saved_date)
         self.destroy()
 
     def on_day_selected(self, widget):
@@ -171,7 +177,10 @@ class CalendarPopup(gtk.Window):
         the_date = datetime.date(year, month+1, day)
 
         if the_date:
-            self._entry.set_text(the_date.strftime(const.DATE_FORMAT))
+            try:
+                self._entry.set_text(the_date.strftime(const.DATE_FORMAT))
+            except ValueError:
+                pass
         else:
             self._entry.set_text("")
 
