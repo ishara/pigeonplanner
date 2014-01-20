@@ -1893,6 +1893,3 @@ msgstr ""
 #: data/TranslationWorkaround.ui:8
 msgid "Middle"
 msgstr ""
-
-#~ msgid "Page"
-#~ msgstr "Pagina"

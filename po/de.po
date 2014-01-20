@@ -1918,38 +1918,3 @@ msgstr ""
 #: data/TranslationWorkaround.ui:8
 msgid "Middle"
 msgstr ""
-
-#~ msgid "Page"
-#~ msgstr "Seite"
-
-#~ msgid ""
-#~ "Pigeon Planner is free software. You don’t need to pay for using it. But if "
-#~ "you like it, please consider donating to help improving it."
-#~ msgstr ""
-#~ "Pigeon Planner ist freie Software. Die Benutzung ist kostenlos. Aber wenn "
-#~ "sie mögen,  helfen sie uns mit einer kleinen Spende, um das Programm zu "
-#~ "verbessern."
-
-#~ msgid "Number of cocks"
-#~ msgstr "Anzahl der Hähne"
-
-#~ msgid "Number of hens"
-#~ msgstr "Anzahl der Hennen"
-
-#~ msgid "Number of young birds"
-#~ msgstr "Anzahl der Jungvögel"
-
-#~ msgid "Search in:"
-#~ msgstr "Suche in"
-
-#~ msgid "Search for:"
-#~ msgstr "Suche nach:"
-
-#~ msgid "Only show:"
-#~ msgstr "Nur anzeigen:"
-
-#~ msgid "Band numbers"
-#~ msgstr "Bandnummer"
-
-#~ msgid "Names"
-#~ msgstr "Namen"
