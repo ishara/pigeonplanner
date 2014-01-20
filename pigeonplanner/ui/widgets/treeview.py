@@ -148,10 +148,18 @@ class MainTreeView(gtk.TreeView):
     def add_row(self, row, select=True):
         rowiter = self._liststore.insert(0, row)
         if select:
-            path = self._liststore.get_path(rowiter)
-            self._selection.unselect_all()
-            self._selection.select_iter(self.get_top_iter(rowiter))
-            self.scroll_to_cell(self.get_top_path(path))
+            try:
+                topiter = self.get_top_iter(rowiter)
+            except RuntimeError:
+                # This happens when a pigeon is added which falls outside the current
+                # active filter. It means the pigeon shouldn't be shown and thus there
+                # is no iter for the row.
+                pass
+            else:
+                path = self._liststore.get_path(rowiter)
+                self._selection.unselect_all()
+                self._selection.select_iter(topiter)
+                self.scroll_to_cell(self.get_top_path(path))
         self.emit("pigeons-changed")
 
     def update_row(self, data, rowiter=None, path=None):
