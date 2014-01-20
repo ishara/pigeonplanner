@@ -13,7 +13,7 @@ clean:
 	find . -name '*~' -exec rm -f {} \;
 
 test:
-	nosetests tests
+	nosetests-2.7 tests
 
 po:
 	python i18n.py -p
