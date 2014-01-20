@@ -157,8 +157,8 @@ def update_result_for_key(key, data):
     session.cursor.execute("UPDATE Results SET %s WHERE Resultkey=:key" % cols, data)
     session.connection.commit()
 
-def update_result_as_race(date, racepoint, sector, wind, windspeed, weather):
-    session.cursor.execute("UPDATE Results SET sector=?, wind=?, windspeed=?, weather=? WHERE date=? AND point=?", (sector, wind, windspeed, weather, date, racepoint))
+def update_result_as_race(date, racepoint, type_, wind, windspeed, weather):
+    session.cursor.execute("UPDATE Results SET type=?, wind=?, windspeed=?, weather=? WHERE date=? AND point=?", (type_, wind, windspeed, weather, date, racepoint))
     session.connection.commit()
 
 def remove_result(key):

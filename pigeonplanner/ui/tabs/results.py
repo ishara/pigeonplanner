@@ -407,45 +407,61 @@ class SplittedView(BaseView):
             self.race_ls.remove(rowiter)
 
     def add_result(self, data, key):
-        seldata = {"pindex": self.pigeon.pindex, "date": data["date"], "point": data["point"]}
-        if not database.get_results_for_data(seldata):
+        racedata = {"pindex": self.pigeon.pindex, "date": data["date"], "point": data["point"]}
+        # The result is added to the database before this function is called.
+        if len(database.get_results_for_data(racedata)) > 1:
+            for row in self.race_ls:
+                if row[self.LS_COL_DATE] == data["date"] and \
+                   row[self.LS_COL_RACEPOINT] == data["point"]:
+                    self.race_sel.select_iter(row.iter)
+                    self.race_tv.scroll_to_cell(row.path)
+                    break
+            self.race_ls.set(row.iter, self.LS_COL_TYPE, data["type"],
+                                       self.LS_COL_WIND, data["wind"],
+                                       self.LS_COL_WINDSPEED, data["windspeed"],
+                                       self.LS_COL_WEATHER, data["weather"])
+        else:
             rowiter = self.race_ls.insert(0, [data["date"], data["point"], data["type"],
                                               data["wind"], data["windspeed"], data["weather"]])
             self.race_ls.set_sort_column_id(0, gtk.SORT_ASCENDING)
             self.race_sel.select_iter(rowiter)
             path = self.race_ls.get_path(rowiter)
             self.race_tv.scroll_to_cell(path)
-        else:
-            model, node = self.race_sel.get_selected()
-            self.race_ls.set(node, self.LS_COL_DATE, data["date"],
-                                   self.LS_COL_RACEPOINT, data["point"],
-                                   self.LS_COL_TYPE, data["type"],
-                                   self.LS_COL_WIND, data["wind"],
-                                   self.LS_COL_WINDSPEED, data["windspeed"],
-                                   self.LS_COL_WEATHER, data["weather"])
 
     def update_result(self, data):
-        placestr, coef, coefstr = common.format_place_coef(data["place"], data["out"])
-        speed = common.format_speed(data["speed"])
+        # Get the key of the selected result now, it might become invalid due to race changes
         model, node = self.selection.get_selected()
-        key = self.liststore.get_value(node, 0)
-        self.liststore.set(node, self.LS_COL_PLACED, placestr,
-                                 self.LS_COL_OUT, data["out"],
-                                 self.LS_COL_COEF, coefstr,
-                                 self.LS_COL_SPEED, speed,
-                                 self.LS_COL_SECTOR, data["sector"],
-                                 self.LS_COL_CATEGORY, data["category"],
-                                 self.LS_COL_COMMENT, data["comment"],
-                                 self.LS_COL_PLACEDINT, data["place"],
-                                 self.LS_COL_COEFFLOAT, coef,
-                                 self.LS_COL_SPEEDFLOAT, data["speed"])
-        model, node = self.race_sel.get_selected()
-        self.race_ls.set(node, self.LS_COL_DATE, data["date"],
-                               self.LS_COL_RACEPOINT, data["point"],
-                               self.LS_COL_TYPE, data["type"],
-                               self.LS_COL_WIND, data["wind"],
-                               self.LS_COL_WINDSPEED, data["windspeed"],
-                               self.LS_COL_WEATHER, data["weather"])
+        key = self.liststore.get_value(node, self.LS_COL_ID)
+
+        model, racenode = self.race_sel.get_selected()
+        date = self.race_ls.get_value(racenode, self.LS_COL_DATE)
+        point = self.race_ls.get_value(racenode, self.LS_COL_RACEPOINT)
+        if date != data["date"] or point != data["point"]:
+            if len(self.liststore) == 1:
+                # This is the only result for this race
+                self.race_ls.remove(racenode)
+            # The date or point is changed, this means that the result should
+            # be handled as a different race. Add a new one in this case.
+            racedata = {"pindex": self.pigeon.pindex, "date": data["date"], "point": data["point"]}
+            if len(database.get_results_for_data(racedata)) > 0:
+                # This race already exists for this pigeon
+                for row in self.race_ls:
+                    if row[self.LS_COL_DATE] == data["date"] and \
+                       row[self.LS_COL_RACEPOINT] == data["point"]:
+                        self.race_sel.select_iter(row.iter)
+                        self.race_tv.scroll_to_cell(row.path)
+                        break
+            else:
+                rowiter = self.race_ls.append([data["date"], data["point"], data["type"],
+                                               data["wind"], data["windspeed"], data["weather"]])
+                self.race_sel.select_iter(rowiter)
+                path = self.race_ls.get_path(rowiter)
+                self.race_tv.scroll_to_cell(path)
+        else:
+            self.race_ls.set(racenode, self.LS_COL_TYPE, data["type"],
+                                       self.LS_COL_WIND, data["wind"],
+                                       self.LS_COL_WINDSPEED, data["windspeed"],
+                                       self.LS_COL_WEATHER, data["weather"])
         return key
 
     def clear(self):
@@ -557,7 +573,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             database.update_result_for_key(key, data)
             self.widgets.dialog.hide()
 
-        database.update_result_as_race(data["date"], data["point"], data["sector"],
+        database.update_result_as_race(data["date"], data["point"], data["type"],
                                        data["wind"], data["windspeed"], data["weather"])
         self.widgets.resultview.refresh()
 
