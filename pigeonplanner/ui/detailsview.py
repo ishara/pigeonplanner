@@ -181,6 +181,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.widgets.combostrain.set_data(database.get_all_data(database.Tables.STRAINS), sort=False)
         self.widgets.comboloft.set_data(database.get_all_data(database.Tables.LOFTS), sort=False)
 
+        self.widgets.combostatus.set_active(1)
+        self.widgets.combostatus.emit("changed")
+
         self.widgets.statusdialog.set_transient_for(parent)
         self.widgets.root.show_all()
 
