@@ -129,12 +129,13 @@ class ResultParser(builder.GtkBuilder):
         weather = self.widgets.weatherentry.get_text()
         
         for row in self.widgets.liststore:
-            toggle, pindex, ring, year, place = row
+            toggle, pindex, ring, year, place, speed = row
             if not toggle: continue
+            speedfloat = float(speed.replace(",", "."))
             data = {"pindex": pindex, "date": date, "point": point, "place": place,
                     "out": out, "sector": sector, "type": ftype, "category": category,
                     "wind": wind, "weather": weather, "comment": "",
-                    "speed": 0.0, "windspeed": ""}
+                    "speed": speedfloat, "windspeed": ""}
             if database.result_exists(data):
                 logger.info("Pigeon %s already has the selected result" % pindex)
             else:

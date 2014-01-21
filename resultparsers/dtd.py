@@ -87,6 +87,7 @@ class DTDParser(IPlugin):
                 place = int(items[0])
             except ValueError:
                 continue
+            speed = items[-1]
             ring, year = items[-4], items[-3]
             # If the year is 2 digits, no space exists between the ring and year
             if len(year) > 1:
@@ -94,6 +95,6 @@ class DTDParser(IPlugin):
             year = expand_year(year)
             pindex = common.get_pindex_from_band(ring, year)
             if pindex in pindexlist:
-                results[pindex] = [ring, year, place]
+                results[pindex] = [ring, year, place, speed]
         return data, results
 

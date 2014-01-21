@@ -4,6 +4,6 @@ Module = dtd
 
 [Documentation]
 Author = Timo Vanwynsberghe
-Version = 1.0
+Version = 2.0
 Website = http://www.pigeonplanner.com
 Description = Data Technology-Deerlijk resultsheet format used in Belgium

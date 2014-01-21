@@ -21,6 +21,8 @@
       <column type="gchararray"/>
       <!-- column-name place -->
       <column type="gchararray"/>
+      <!-- column-name speed -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkListStore" id="parserstore">
@@ -505,7 +507,6 @@
                       <object class="GtkTreeViewColumn" id="treeviewcolumn2">
                         <property name="title" translatable="yes">Band no.</property>
                         <property name="clickable">True</property>
-                        <property name="sort_indicator">True</property>
                         <property name="sort_column_id">2</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext2"/>
@@ -519,7 +520,6 @@
                       <object class="GtkTreeViewColumn" id="treeviewcolumn3">
                         <property name="title" translatable="yes">Year</property>
                         <property name="clickable">True</property>
-                        <property name="sort_indicator">True</property>
                         <property name="sort_column_id">3</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext3"/>
@@ -533,12 +533,24 @@
                       <object class="GtkTreeViewColumn" id="treeviewcolumn4">
                         <property name="title" translatable="yes">Place</property>
                         <property name="clickable">True</property>
-                        <property name="sort_indicator">True</property>
                         <property name="sort_column_id">4</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext4"/>
                           <attributes>
                             <attribute name="text">4</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn5">
+                        <property name="title" translatable="yes">Speed</property>
+                        <property name="clickable">True</property>
+                        <property name="sort_column_id">5</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext5"/>
+                          <attributes>
+                            <attribute name="text">5</attribute>
                           </attributes>
                         </child>
                       </object>
