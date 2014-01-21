@@ -223,7 +223,7 @@ class Schema(BaseSchema):
         if "alive" in session.get_column_names(Tables.PIGEONS):
             # This column has been renamed somewhere between version 0.4.0 and 0.6.0
             logger.debug("Renaming 'alive' column")
-            session.recreate_table(Tables.PIGEONS)
+            session.recreate_table(Tables.PIGEONS, cls.get_columns_sql(Tables.PIGEONS))
 
         if not "latitude" in session.get_column_names(Tables.ADDR):
             # latitude and longiitude columns were added later on
@@ -247,7 +247,7 @@ class Schema(BaseSchema):
         # Column constraints were added for all tables
         for table in cls.get_table_names():
             logger.debug("Recreating %s table" % table)
-            session.recreate_table(table)
+            session.recreate_table(table, cls.get_columns_sql(table))
 
         # Make sure all data have the correct type. This should fix an issues where
         # the pigeon sex was sometimes stored as a str instead of an int.

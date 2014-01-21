@@ -88,14 +88,14 @@ class DatabaseSession(object):
         self.cursor.execute("DROP TABLE IF EXISTS %s" % table)
         self.connection.commit()
 
-    def add_table(self, table):
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table, Schema.get_columns_sql(table)))
+    def add_table(self, table, columns):
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table, columns))
         self.connection.commit()
 
-    def recreate_table(self, table):
+    def recreate_table(self, table, columns):
         self.cursor.execute("CREATE TEMP TABLE tmp_%s AS SELECT * FROM %s" % (table, table))
         self.cursor.execute("DROP TABLE %s" % table)
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table, Schema.get_columns_sql(table)))
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (table, columns))
         self.cursor.execute("INSERT INTO %s SELECT * FROM tmp_%s" % (table, table))
         self.cursor.execute("DROP TABLE tmp_%s" % table)
         self.connection.commit()

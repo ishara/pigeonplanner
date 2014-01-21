@@ -66,7 +66,8 @@ def test_database_helper_methods():
     table_names = database.session.get_table_names()
     nt.assert_not_in(database.Tables.MEDIA, table_names)
     # Add a table
-    database.session.add_table(database.Tables.MEDIA)
+    database.session.add_table(database.Tables.MEDIA,
+                               database.Schema.get_columns_sql(database.Tables.MEDIA))
     table_names = database.session.get_table_names()
     nt.assert_in(database.Tables.MEDIA, table_names)
 test_database_helper_methods.setup = utils.open_test_db
