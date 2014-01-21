@@ -119,8 +119,8 @@ class ResultParser(builder.GtkBuilder):
             if not toggle: continue
             data = {"pindex": pindex, "date": date, "point": point, "place": place,
                     "out": out, "sector": sector, "type": "", "category": category,
-                    "wind": "", "weather": "", "put": "", "back": "",
-                    "ownplace": 0, "ownout": 0, "comment": ""}
+                    "wind": "", "weather": "", "comment": "",
+                    "speed": 0.0, "windspeed": ""}
             if database.result_exists(data):
                 logger.info("Pigeon %s already has the selected result" % pindex)
             else:
