@@ -32,6 +32,7 @@ from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import WarningDialog, ErrorDialog
 from pigeonplanner.core import const
 from pigeonplanner.core import common
+from pigeonplanner.core import errors
 from pigeonplanner.core import mailing
 
 
@@ -109,11 +110,21 @@ class ResultParser(builder.GtkBuilder):
         self.close_window()
 
     def on_addbutton_clicked(self, widget):
-        date = self.widgets.dateentry.get_text()
         point = self.widgets.racepointentry.get_text()
         out = self.widgets.pigeonsentry.get_text()
+        try:
+            date = self.widgets.dateentry.get_text()
+            if point.strip() == "" or out.strip() == "":
+                raise ValueError
+            # Just raise a ValueError if it's not a number
+            int(out)
+        except (errors.InvalidInputError, ValueError):
+            ErrorDialog((_("The date, racepoint or number of pigeons is incorrect."),
+                         None, ""), self.widgets.parserdialog)
+            return
         sector = self.widgets.sectorentry.get_text()
         category = self.widgets.categoryentry.get_text()
+        
         for row in self.widgets.liststore:
             toggle, pindex, ring, year, place = row
             if not toggle: continue
