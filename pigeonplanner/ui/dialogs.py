@@ -27,7 +27,6 @@ from pigeonplanner import main
 from pigeonplanner import messages
 from pigeonplanner import database
 from pigeonplanner.ui import filechooser
-from pigeonplanner.ui.utils import HiddenPigeonsMixin
 from pigeonplanner.ui.messagedialog import InfoDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import const
@@ -237,7 +236,7 @@ class MedicationRemoveDialog(gtk.Dialog):
         self.vbox.show_all()
 
 
-class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
+class PigeonListDialog(gtk.Dialog):
     def __init__(self, parent):
         gtk.Dialog.__init__(self, _("Search a pigeon"), parent,
                             gtk.DIALOG_DESTROY_WITH_PARENT,
@@ -260,7 +259,6 @@ class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
             tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+1)
             tvcolumn.set_sort_column_id(index+1)
             tvcolumn.set_resizable(True)
-            tvcolumn.set_cell_data_func(textrenderer, self._cell_func)
             self._treeview.append_column(tvcolumn)
         self._selection = self._treeview.get_selection()
         self._selection.connect("changed", self.on_selection_changed)
@@ -271,7 +269,11 @@ class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
 
         frame = gtk.Frame()
         frame.add(sw)
-        self.vbox.pack_start(frame)
+        self.vbox.pack_start(frame, True, True, 0)
+
+        self.checkbutton = gtk.CheckButton("Show all pigeons")
+        self.checkbutton.connect("toggled", lambda widget: modelfilter.refilter())
+        self.vbox.pack_start(self.checkbutton, False, False, 0)
         self.show_all()
 
     def on_selection_changed(self, selection):
@@ -307,4 +309,11 @@ class PigeonListDialog(gtk.Dialog, HiddenPigeonsMixin):
         model, rowiter = self._treeview.get_selection().get_selected()
         if not rowiter: return
         return model[rowiter][0]
+
+    def _visible_func(self, model, rowiter):
+        if self.checkbutton.get_active():
+            # Show everything
+            return True
+        # Only show visible pigeons
+        return bool(model.get_value(rowiter, 0).show)
 
