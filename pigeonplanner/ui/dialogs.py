@@ -271,7 +271,7 @@ class PigeonListDialog(gtk.Dialog):
         frame.add(sw)
         self.vbox.pack_start(frame, True, True, 0)
 
-        self.checkbutton = gtk.CheckButton("Show all pigeons")
+        self.checkbutton = gtk.CheckButton(_("Show all pigeons"))
         self.checkbutton.connect("toggled", lambda widget: modelfilter.refilter())
         self.vbox.pack_start(self.checkbutton, False, False, 0)
         self.show_all()
