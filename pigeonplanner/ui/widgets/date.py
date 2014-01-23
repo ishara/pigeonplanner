@@ -78,6 +78,7 @@ class DateEntry(gtk.Viewport):
     clear = gobject.property(get_clear, set_clear, bool, False)
 
     def set_text(self, text):
+        self._unwarn()
         self._entry.set_text(str(text))
         self.emit("changed")
 
@@ -92,8 +93,7 @@ class DateEntry(gtk.Viewport):
         self._entry.set_position(-1)
 
     def _warn(self):
-        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY,
-                                            gtk.STOCK_STOP)
+        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
 
     def _unwarn(self):
         self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
