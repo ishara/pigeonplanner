@@ -26,6 +26,7 @@ import datetime
 import gtk
 
 from pigeonplanner import database
+from pigeonplanner import messages
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
@@ -33,6 +34,7 @@ from pigeonplanner.ui.filechooser import PdfSaver
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import common
 from pigeonplanner.core import config
+from pigeonplanner.core import errors
 from pigeonplanner.reportlib import (report, ReportError, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports.results import ResultsReport, ResultsReportOptions
@@ -149,7 +151,11 @@ class ResultWindow(builder.GtkBuilder):
     def on_filtersearch_clicked(self, widget):
         # Races filter
         self._filter_races.clear()
-        date = self.widgets.entrydate.get_text()
+        try:
+            date = self.widgets.entrydate.get_text()
+        except errors.InvalidInputError:
+            ErrorDialog(messages.MSG_INVALID_FORMAT, self.widgets.filterdialog)
+            return
         dateop = self.widgets.combodate.get_operator()
         self._filter_races.add(COL_RACE_DATE, date, dateop)
 
@@ -167,7 +173,11 @@ class ResultWindow(builder.GtkBuilder):
 
         # Results filter
         self._filter_results.clear()
-        pindex = self.widgets.entryband.get_pindex()
+        try:
+            pindex = self.widgets.entryband.get_pindex()
+        except errors.InvalidInputError:
+            ErrorDialog(messages.MSG_EMPTY_FIELDS, self.widgets.filterdialog)
+            return
         if pindex:
             band, year = common.get_band_from_pindex(pindex)
             self._filter_results.add(COL_RESULT_BAND, band)
