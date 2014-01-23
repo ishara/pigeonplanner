@@ -19,16 +19,18 @@
 import gtk
 import gobject
 
+from pigeonplanner.ui import dialogs
 from pigeonplanner.core import common
 from pigeonplanner.core import checks
 from pigeonplanner.core import errors
 
 
-class BandEntry(gtk.Viewport):
+class BandEntry(gtk.HBox):
     __gtype_name__ = "BandEntry"
+    __gsignals__ = {"search-clicked" : (gobject.SIGNAL_RUN_LAST, object, ())}
     can_empty = gobject.property(type=bool, default=False, nick="Can empty")
-    def __init__(self, editable=False, can_empty=False):
-        gtk.Viewport.__init__(self)
+    def __init__(self, editable=False, can_empty=False, has_search=False):
+        gtk.HBox.__init__(self)
 
         self._entryband = gtk.Entry()
         self._entryband.set_width_chars(15)
@@ -42,24 +44,47 @@ class BandEntry(gtk.Viewport):
         hbox.pack_start(label, False, True, 4)
         hbox.pack_start(self._entryyear, False, True, 0)
 
+        self._viewport = gtk.Viewport()
+        self._viewport.add(hbox)
+
+        image = gtk.image_new_from_stock(gtk.STOCK_FIND, gtk.ICON_SIZE_BUTTON)
+        self._button = gtk.Button()
+        self._button.add(image)
+        self._button.set_relief(gtk.RELIEF_NONE)
+        self._button.set_focus_on_click(False)
+        self._button.set_no_show_all(True)
+        self._button.connect("clicked", self.on_button_clicked)
+
+        self.pack_start(self._viewport, False, False, 0)
+        self.pack_start(self._button, False, False, 0)
+        self.show_all()
+
         self.editable = editable
         self.can_empty = can_empty
-        self.add(hbox)
-        self.show_all()
+        self.has_search = has_search
 
     def get_editable(self):
         return self._editable
 
     def set_editable(self, editable):
         self._editable = editable
-        self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
+        self._viewport.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
         self._entryband.set_activates_default(editable)
         self._entryyear.set_activates_default(editable)
         self._entryband.set_has_frame(editable)
         self._entryband.set_editable(editable)
         self._entryyear.set_has_frame(editable)
         self._entryyear.set_editable(editable)
-    editable = gobject.property(get_editable, set_editable, bool, False)
+    editable = gobject.property(get_editable, set_editable, bool, False, nick="Editable")
+
+    def get_has_search(self):
+        return self._has_search
+
+    def set_has_search(self, has_search):
+        self._has_search = has_search
+        self._button.set_visible(has_search)
+        self._button.child.set_visible(has_search)
+    has_search = gobject.property(get_has_search, set_has_search, bool, False, nick="Has search")
 
     def is_empty(self):
         return len(self.get_pindex(False)) == 0
@@ -106,4 +131,19 @@ class BandEntry(gtk.Viewport):
             raise
 
         self._unwarn()
+
+    def on_button_clicked(self, widget):
+        try:
+            pindex, sex, year = self.emit("search-clicked")
+        except TypeError:
+            return
+
+        parent = self.get_toplevel()
+        dialog = dialogs.PigeonListDialog(parent)
+        dialog.fill_treeview(pindex, sex, year)
+        response = dialog.run()
+        if response == gtk.RESPONSE_APPLY:
+            pigeon = dialog.get_selected()
+            self.set_pindex(pigeon.get_pindex())
+        dialog.destroy()
 

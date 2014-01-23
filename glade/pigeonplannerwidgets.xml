@@ -4,10 +4,8 @@
   <glade-widget-classes>
     <glade-widget-class title="Band Entry" name="BandEntry" generic-name="bandentry">
       <properties>
-        <property id="shadow-type" save="False" visible="False"/>
-        <property id="hadjustment" save="False" visible="False"/>
-        <property id="vadjustment" save="False" visible="False"/>
-        <property id="editable" name="Editable" default="False"/>
+        <property id="homogeneous" save="False" visible="False"/>
+	    <property id="size" query="False" default="2"/>
       </properties>
     </glade-widget-class>
     <glade-widget-class title="Date Entry" name="DateEntry" generic-name="dateentry">

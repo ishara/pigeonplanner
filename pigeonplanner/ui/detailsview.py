@@ -224,11 +224,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
         self.widgets.statusdialog.hide()
         return True
 
-    def on_findsire_clicked(self, widget):
-        self._run_pigeondialog(enums.Sex.cock)
+    def on_entrysireedit_search_clicked(self, widget):
+        return self._get_pigeonsearch_details(enums.Sex.cock)
 
-    def on_finddam_clicked(self, widget):
-        self._run_pigeondialog(enums.Sex.hen)
+    def on_entrydamedit_search_clicked(self, widget):
+        return self._get_pigeonsearch_details(enums.Sex.hen)
 
     # Public methods
     def get_root_widget(self):
@@ -531,21 +531,12 @@ class DetailsView(builder.GtkBuilder, gobject.GObject):
                     "info": bffr.get_text(*bffr.get_bounds()),
                     "pindex": pindex}
 
-    def _run_pigeondialog(self, sex):
+    def _get_pigeonsearch_details(self, sex):
         try:
             pindex = self.widgets.entrybandedit.get_pindex()
         except errors.InvalidInputError:
             ErrorDialog(messages.MSG_NO_PARENT, self.parent)
             return
         band, year = self.widgets.entrybandedit.get_band()
-        dialog = dialogs.PigeonListDialog(self.parent)
-        dialog.fill_treeview(pindex, sex, year)
-        response = dialog.run()
-        if response == gtk.RESPONSE_APPLY:
-            pigeon = dialog.get_selected()
-            if pigeon.is_cock():
-                self.widgets.entrysireedit.set_pindex(pigeon.get_pindex())
-            else:
-                self.widgets.entrydamedit.set_pindex(pigeon.get_pindex())
-        dialog.destroy()
+        return pindex, sex, year
 
