@@ -5,25 +5,17 @@
   <!-- interface-naming-policy project-wide -->
   <object class="GtkActionGroup" id="actiongroup">
     <child>
-      <object class="GtkAction" id="Save">
-        <property name="tooltip" translatable="yes">Save these results</property>
-        <property name="stock_id">gtk-save</property>
-        <signal name="activate" handler="on_save_clicked" swapped="no"/>
+      <object class="GtkAction" id="Print">
+        <property name="tooltip" translatable="yes">Print these results</property>
+        <property name="stock_id">gtk-print</property>
+        <signal name="activate" handler="on_print_clicked" swapped="no"/>
       </object>
     </child>
     <child>
-      <object class="GtkAction" id="Mail">
-        <property name="tooltip" translatable="yes">Email these results</property>
-        <property name="stock_id">email</property>
-        <property name="visible">False</property>
-        <signal name="activate" handler="on_mail_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Preview">
-        <property name="tooltip" translatable="yes">View these results</property>
-        <property name="stock_id">gtk-print-preview</property>
-        <signal name="activate" handler="on_preview_clicked" swapped="no"/>
+      <object class="GtkAction" id="Close">
+        <property name="tooltip" translatable="yes">Close this window</property>
+        <property name="stock_id">gtk-close</property>
+        <signal name="activate" handler="on_close_window" swapped="no"/>
       </object>
     </child>
     <child>
@@ -35,17 +27,25 @@
       </object>
     </child>
     <child>
-      <object class="GtkAction" id="Close">
-        <property name="tooltip" translatable="yes">Close this window</property>
-        <property name="stock_id">gtk-close</property>
-        <signal name="activate" handler="on_close_window" swapped="no"/>
+      <object class="GtkAction" id="Preview">
+        <property name="tooltip" translatable="yes">View these results</property>
+        <property name="stock_id">gtk-print-preview</property>
+        <signal name="activate" handler="on_preview_clicked" swapped="no"/>
       </object>
     </child>
     <child>
-      <object class="GtkAction" id="Print">
-        <property name="tooltip" translatable="yes">Print these results</property>
-        <property name="stock_id">gtk-print</property>
-        <signal name="activate" handler="on_print_clicked" swapped="no"/>
+      <object class="GtkAction" id="Mail">
+        <property name="tooltip" translatable="yes">Email these results</property>
+        <property name="stock_id">email</property>
+        <property name="visible">False</property>
+        <signal name="activate" handler="on_mail_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Save">
+        <property name="tooltip" translatable="yes">Save these results</property>
+        <property name="stock_id">gtk-save</property>
+        <signal name="activate" handler="on_save_clicked" swapped="no"/>
       </object>
     </child>
   </object>
@@ -554,6 +554,8 @@
                             <property name="can_focus">False</property>
                             <property name="can_empty">True</property>
                             <property name="editable">True</property>
+                            <property name="has_search">True</property>
+                            <signal name="search-clicked" handler="on_entryband_search_clicked" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>

@@ -217,6 +217,9 @@ class ResultWindow(builder.GtkBuilder):
         widget.set_text(text)
         return True
 
+    def on_entryband_search_clicked(self, widget):
+        return None, None, None
+
     def on_mail_clicked(self, widget):
         #TODO: disabled for now. Remove?
         ##self._do_operation(const.MAIL)
