@@ -22,6 +22,7 @@ import gobject
 from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
+from pigeonplanner.ui import component
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeonparser
 
@@ -104,13 +105,14 @@ class FilterDialog(builder.GtkBuilder):
         self.treeview.emit("pigeons-changed")
 
 
-class MainTreeView(gtk.TreeView):
+class MainTreeView(gtk.TreeView, component.Component):
 
     __gtype_name__ = "MainTreeView"
     __gsignals__ = {"pigeons-changed": (gobject.SIGNAL_RUN_LAST, None, ())}
 
     def __init__(self, statusbar):
         gtk.TreeView.__init__(self)
+        component.Component.__init__(self, "Treeview")
 
         self.statusbar = statusbar
         self.statusbar.set_filter(False)

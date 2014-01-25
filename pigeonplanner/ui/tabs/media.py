@@ -36,7 +36,7 @@ from pigeonplanner.core import common
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "MediaView.ui")
-        basetab.BaseTab.__init__(self, _("Media"), "icon_media.png")
+        basetab.BaseTab.__init__(self, "MediaTab", _("Media"), "icon_media.png")
 
         self.parent = parent
         self.widgets.selection = self.widgets.treeview.get_selection()

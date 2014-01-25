@@ -21,13 +21,13 @@ import os.path
 import gtk
 import gtk.gdk
 
+from pigeonplanner.ui import component
 from pigeonplanner.core import const
 
 
-class BaseTab(object):
-    def __init__(self, name, img):
-
-#        self.widgets._root = None
+class BaseTab(component.Component):
+    def __init__(self, name, title, img):
+        component.Component.__init__(self, name)
 
         self.widgets._label = gtk.VBox()
         img = os.path.join(const.IMAGEDIR, img)
@@ -37,7 +37,7 @@ class BaseTab(object):
         else:
             pixbuf = gtk.gdk.pixbuf_new_from_file(img)
         image = gtk.image_new_from_pixbuf(pixbuf)
-        label = gtk.Label(name)
+        label = gtk.Label(title)
         self.widgets._label.pack_start(image)
         self.widgets._label.pack_start(label)
         self.widgets._label.show_all()

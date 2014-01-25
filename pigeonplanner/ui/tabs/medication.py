@@ -34,7 +34,7 @@ from pigeonplanner.core import pigeonparser
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
     def __init__(self, parent, main):
         builder.GtkBuilder.__init__(self, "MedicationView.ui")
-        basetab.BaseTab.__init__(self, _("Medication"), "icon_medication.png")
+        basetab.BaseTab.__init__(self, "MedicationTab", _("Medication"), "icon_medication.png")
 
         self.parent = parent
         self.main = main

@@ -495,7 +495,7 @@ class SplittedView(BaseView):
 class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "ResultsView.ui")
-        basetab.BaseTab.__init__(self, _("Results"), "icon_result.png")
+        basetab.BaseTab.__init__(self, "ResultsTab", _("Results"), "icon_result.png")
 
         self.parent = parent
         view = get_view_for_current_config()

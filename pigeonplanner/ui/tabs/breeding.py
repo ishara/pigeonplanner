@@ -40,7 +40,7 @@ from pigeonplanner.core import pigeonparser
 class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def __init__(self, mainwindow):
         builder.GtkBuilder.__init__(self, "BreedingView.ui")
-        basetab.BaseTab.__init__(self, _("Breeding"), "icon_breeding.png")
+        basetab.BaseTab.__init__(self, "BreedingTab", _("Breeding"), "icon_breeding.png")
 
         self.mainwindow = mainwindow
         self.maintreeview = mainwindow.get_treeview()

@@ -19,6 +19,8 @@
 import gtk
 import gobject
 
+from pigeonplanner.ui import component
+
 
 class _TotalLabel(gtk.Label):
     __gtype_name__ = "_TotalLabel"
@@ -52,10 +54,11 @@ class _FilterLabel(gtk.Label):
         self.set_markup(self.TEMPLATE % (self.ON if value else self.OFF))
 
 
-class StatusBar(gtk.Statusbar):
+class StatusBar(gtk.Statusbar, component.Component):
     __gtype_name__ = "StatusBar"
     def __init__(self):
         gtk.Statusbar.__init__(self)
+        component.Component.__init__(self, "Statusbar")
 
         self._build_labels()
         self.show_all()

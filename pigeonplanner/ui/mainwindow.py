@@ -38,6 +38,7 @@ from pigeonplanner.ui import builder
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui import pedigree
 from pigeonplanner.ui import logdialog
+from pigeonplanner.ui import component
 from pigeonplanner.ui import detailsview
 from pigeonplanner.ui import exportwindow
 from pigeonplanner.ui import optionsdialog
@@ -70,7 +71,7 @@ else:
     gtkosx = Application()
 
 
-class MainWindow(gtk.Window, builder.GtkBuilder):
+class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     ui = """
 <ui>
    <menubar name="MenuBar">
@@ -152,6 +153,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
     def __init__(self):
         gtk.Window.__init__(self)
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
+        component.Component.__init__(self, "MainWindow")
 
         self.widgets.treeview = treeview.MainTreeView(self.widgets.statusbar)
         self.widgets.treeview.connect("pigeons-changed", self.on_treeview_pigeons_changed)
@@ -162,7 +164,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
         self.widgets.selection.connect("changed", self.on_selection_changed)
 
         self.pedigree = pedigree.DrawPedigree(self.widgets.treeview)
-        self.detailsview = detailsview.DetailsView(self)
+        self.detailsview = detailsview.DetailsView(self, True)
         self.widgets.aligndetails.add(self.detailsview.get_root_widget())
 
         pedigreetab = tabs.PedigreeTab(self.pedigree)

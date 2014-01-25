@@ -33,7 +33,7 @@ from pigeonplanner.core import pigeonparser
 class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
     def __init__(self, mainwindow):
         WidgetFactory.__init__(self)
-        basetab.BaseTab.__init__(self, _("Relatives"), "icon_relatives.png")
+        basetab.BaseTab.__init__(self, "RelativesTab", _("Relatives"), "icon_relatives.png")
         self.mainwindow = mainwindow
 
         treeviewdirect = gtk.TreeView()

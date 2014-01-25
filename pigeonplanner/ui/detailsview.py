@@ -29,7 +29,7 @@ from pigeonplanner import database
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
-from pigeonplanner.ui import dialogs
+from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.widgets import date
 from pigeonplanner.ui.widgets import sexentry
@@ -157,15 +157,17 @@ class PigeonImageWidget(gtk.EventBox):
         return self._imagepath
 
 
-class DetailsView(builder.GtkBuilder, gobject.GObject):
+class DetailsView(builder.GtkBuilder, gobject.GObject, component.Component):
     __gsignals__ = {"edit-finished": (gobject.SIGNAL_RUN_LAST,
                                       None, (object, int)),
                     "edit-cancelled": (gobject.SIGNAL_RUN_LAST,
                                        None, ()),
                     }
-    def __init__(self, parent):
+    def __init__(self, parent, register=False):
         builder.GtkBuilder.__init__(self, "DetailsView.ui")
         gobject.GObject.__init__(self)
+        if register:
+            component.Component.__init__(self, "DetailsView")
 
         self.parent = parent
         self.pedigree_mode = False

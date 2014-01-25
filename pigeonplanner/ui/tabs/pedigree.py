@@ -25,7 +25,7 @@ from pigeonplanner.ui.tabs import basetab
 class PedigreeTab(WidgetFactory, basetab.BaseTab):
     def __init__(self, pedigree):
         WidgetFactory.__init__(self)
-        basetab.BaseTab.__init__(self, _("Pedigree"), "icon_pedigree.png")
+        basetab.BaseTab.__init__(self, "PedigreeTab", _("Pedigree"), "icon_pedigree.png")
         self.pedigree = pedigree
 
         tablesire = gtk.Table(7, 5)
