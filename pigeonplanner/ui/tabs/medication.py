@@ -57,8 +57,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         if pthinfo is None: return
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None),
-                (gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None)]
+                (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
+                (gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None, None)]
 
             utils.popup_menu(event, entries)
 
@@ -69,7 +69,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         pindex = treeview.get_model()[path][2]
         if event.button == 3:
             entries = [
-                (gtk.STOCK_INFO, self.main.show_pigeon_details, (pindex,))
+                (gtk.STOCK_INFO, self.main.show_pigeon_details, (pindex,), None)
                 ]
 
             utils.popup_menu(event, entries)

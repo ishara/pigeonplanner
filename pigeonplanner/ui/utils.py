@@ -85,12 +85,14 @@ def popup_menu(event, entries):
     """
 
     menu = gtk.Menu()
-    for stock_id, callback, data in entries:
+    for stock_id, callback, data, label in entries:
         item = gtk.ImageMenuItem(stock_id)
         if data:
             item.connect("activate", callback, *data)
         else:
             item.connect("activate", callback)
+        if label is not None:
+            item.set_label(label)
         item.show()
         menu.append(item)
     menu.popup(None, None, None, event.button, event.time)

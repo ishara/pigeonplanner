@@ -62,15 +62,15 @@ class DrawPedigree(object):
                                           box.get_sex(), parent)
             elif event.button == 3:
                 entries = [(gtk.STOCK_EDIT, self._edit_pigeon_details,
-                            (box.pigeon, box.child, box.get_sex(), parent))]
+                            (box.pigeon, box.child, box.get_sex(), parent), None)]
                 if box.pigeon is not None:
                     entries.insert(0, (gtk.STOCK_INFO, self._show_pigeon_details,
-                                                       (box.pigeon, parent)))
+                                                       (box.pigeon, parent), None))
                     if not box.pigeon.get_visible():
                         entries.append((gtk.STOCK_CLEAR, self._clear_box,
-                                        (box.pigeon, box.child)))
+                                        (box.pigeon, box.child), None))
                         entries.append((gtk.STOCK_REMOVE, self._remove_pigeon,
-                                        (box.pigeon, box.child)))
+                                        (box.pigeon, box.child), None))
         else:
             if box.textlayout.get_text() == "":
                 return
@@ -79,9 +79,9 @@ class DrawPedigree(object):
             elif event.button == 3:
                 entries = [
                            (gtk.STOCK_INFO, self._show_pigeon_details,
-                                            (box.pigeon, parent)),
+                                            (box.pigeon, parent), None),
                            (gtk.STOCK_JUMP_TO, self._select_pigeon,
-                                               (box.pigeon, parent)),
+                                               (box.pigeon, parent), None),
                           ]
         if entries is not None:
             utils.popup_menu(event, entries)

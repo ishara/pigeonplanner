@@ -117,8 +117,8 @@ class PigeonImageWidget(gtk.EventBox):
     def on_editable_button_press_event(self, widget, event):
         if event.button == 3:
             entries = [
-                (gtk.STOCK_ADD, self.on_open_imagechooser, None),
-                (gtk.STOCK_REMOVE, self.set_default_image, None)]
+                (gtk.STOCK_ADD, self.on_open_imagechooser, None, None),
+                (gtk.STOCK_REMOVE, self.set_default_image, None, None)]
             utils.popup_menu(event, entries)
         else:
             self.on_open_imagechooser()

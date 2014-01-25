@@ -570,9 +570,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder):
 
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.menuedit_activate, None),
-                (gtk.STOCK_REMOVE, self.menuremove_activate, None),
-                ("pedigree-detail", self.menupedigree_activate, None)]
+                (gtk.STOCK_EDIT, self.menuedit_activate, None, None),
+                (gtk.STOCK_REMOVE, self.menuremove_activate, None, None),
+                ("pedigree-detail", self.menupedigree_activate, None, None)]
             utils.popup_menu(event, entries)
 
     def on_treeview_key_press(self, treeview, event):

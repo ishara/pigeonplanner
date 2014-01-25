@@ -25,7 +25,7 @@ from pigeonplanner.ui import builder
 from pigeonplanner.ui import resultwindow
 from pigeonplanner.ui import resultparser
 from pigeonplanner.ui.tabs import basetab
-from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog
+from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog, InfoDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
@@ -524,8 +524,9 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         if pthinfo is None: return
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None),
-                (gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None)]
+                (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
+                (gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None, None),
+                (gtk.STOCK_JUMP_TO, self.on_addtopedigree_clicked, None, _("Add to pedigree details"))]
             utils.popup_menu(event, entries)
 
     def on_buttonall_clicked(self, widget):
@@ -605,6 +606,20 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_comboracepoint_changed(self, widget):
         self._autofill_race()
+
+    def on_addtopedigree_clicked(self, widget):
+        result = self.widgets.resultview.get_selected()
+        text = "%se %s %s %s." % (result["placed"], result["point"],
+                                  result["out"], _("Pigeons")[0].lower())
+        for index, field in enumerate(self.pigeon.get_extra()):
+            if field == "":
+                database.update_pigeon(self.pigeon.pindex, {"extra%s" % (index+1): text})
+                pigeonparser.parser.update_pigeon(self.pigeon.pindex)
+                self.parent.widgets.treeview.select_pigeon(None, self.pigeon.pindex)
+                break
+        else:
+            InfoDialog((_("No empty space found in pedigree details."), "", ""),
+                       self.parent, None)
 
     # Public methods
     def set_pigeon(self, pigeon):
