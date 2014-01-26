@@ -615,7 +615,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             if field == "":
                 database.update_pigeon(self.pigeon.pindex, {"extra%s" % (index+1): text})
                 pigeonparser.parser.update_pigeon(self.pigeon.pindex)
-                component.get("Treeview").select_pigeon(None, self.pigeon.pindex)
+                component.get("DetailsView").set_details(self.pigeon)
                 break
         else:
             InfoDialog((_("No empty space found in pedigree details."), "", ""),
