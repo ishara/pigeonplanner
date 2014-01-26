@@ -29,6 +29,8 @@ class BaseTab(component.Component):
     def __init__(self, name, title, img):
         component.Component.__init__(self, name)
 
+        self._parent = component.get("MainWindow")
+
         self.widgets._label = gtk.VBox()
         img = os.path.join(const.IMAGEDIR, img)
         if gtk.gdk.screen_height() <= 768:

@@ -73,7 +73,7 @@ class FilterDialog(builder.GtkBuilder):
 
         self.filter.clear()
         self.treeview._modelfilter.refilter()
-        self.treeview.statusbar.set_filter(False)
+        component.get("Statusbar").set_filter(False)
         self.treeview.emit("pigeons-changed")
 
     def on_search_clicked(self, widget):
@@ -101,7 +101,7 @@ class FilterDialog(builder.GtkBuilder):
         self.filter.add("loft", loft)
 
         self.treeview._modelfilter.refilter()
-        self.treeview.statusbar.set_filter(self.filter.has_filters())
+        component.get("Statusbar").set_filter(self.filter.has_filters())
         self.treeview.emit("pigeons-changed")
 
 
@@ -110,12 +110,11 @@ class MainTreeView(gtk.TreeView, component.Component):
     __gtype_name__ = "MainTreeView"
     __gsignals__ = {"pigeons-changed": (gobject.SIGNAL_RUN_LAST, None, ())}
 
-    def __init__(self, statusbar):
+    def __init__(self):
         gtk.TreeView.__init__(self)
         component.Component.__init__(self, "Treeview")
 
-        self.statusbar = statusbar
-        self.statusbar.set_filter(False)
+        component.get("Statusbar").set_filter(False)
         self._liststore = self._build_treeview()
         self._modelfilter = self._liststore.filter_new()
         self._modelfilter.set_visible_func(self._visible_func)

@@ -155,7 +155,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
         component.Component.__init__(self, "MainWindow")
 
-        self.widgets.treeview = treeview.MainTreeView(self.widgets.statusbar)
+        self.widgets.treeview = treeview.MainTreeView()
         self.widgets.treeview.connect("pigeons-changed", self.on_treeview_pigeons_changed)
         self.widgets.treeview.connect("key-press-event", self.on_treeview_key_press)
         self.widgets.treeview.connect("button-press-event", self.on_treeview_press)
@@ -163,16 +163,16 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
 
-        self.pedigree = pedigree.DrawPedigree(self.widgets.treeview)
+        self.pedigree = pedigree.DrawPedigree()
         self.detailsview = detailsview.DetailsView(self, True)
         self.widgets.aligndetails.add(self.detailsview.get_root_widget())
 
         pedigreetab = tabs.PedigreeTab(self.pedigree)
-        relativestab = tabs.RelativesTab(self)
-        self.resultstab = tabs.ResultsTab(self)
-        breedingtab = tabs.BreedingTab(self)
-        mediatab = tabs.MediaTab(self)
-        medicationtab = tabs.MedicationTab(self, self)
+        relativestab = tabs.RelativesTab()
+        self.resultstab = tabs.ResultsTab()
+        breedingtab = tabs.BreedingTab()
+        mediatab = tabs.MediaTab()
+        medicationtab = tabs.MedicationTab()
         self._loaded_tabs = [pedigreetab, relativestab,
                              self.resultstab, breedingtab,
                              mediatab, medicationtab]
@@ -628,11 +628,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     ####################
     # Public methods
     ####################
-    def get_treeview(self):
-        return self.widgets.treeview
-
-    def get_statusbar(self):
-        return self.widgets.statusbar
 
     ####################
     # Internal methods

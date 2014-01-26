@@ -21,6 +21,7 @@ import gtk.gdk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
+from pigeonplanner.ui import component
 from pigeonplanner.ui import WidgetFactory
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.utils import HiddenPigeonsMixin
@@ -31,10 +32,9 @@ from pigeonplanner.core import pigeonparser
 
 
 class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
-    def __init__(self, mainwindow):
+    def __init__(self):
         WidgetFactory.__init__(self)
         basetab.BaseTab.__init__(self, "RelativesTab", _("Relatives"), "icon_relatives.png")
-        self.mainwindow = mainwindow
 
         treeviewdirect = gtk.TreeView()
         swdirect = gtk.ScrolledWindow()
@@ -100,18 +100,18 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
     def on_show_details(self, widget, pigeon):
         if not pigeon.get_pindex() in pigeonparser.parser.pigeons:
             return
-        DetailsDialog(pigeon, self.mainwindow)
+        DetailsDialog(pigeon, self._parent)
 
     def on_edit_details(self, widget, pigeon):
         if not pigeon.get_pindex() in pigeonparser.parser.pigeons:
             return
 
-        dialog = DetailsDialog(pigeon, self.mainwindow, enums.Action.edit)
+        dialog = DetailsDialog(pigeon, self._parent, enums.Action.edit)
         dialog.details.set_details(pigeon)
 
     def on_goto_pigeon(self, widget, pigeon):
-        if not self.mainwindow.get_treeview().select_pigeon(None, pigeon.get_pindex()):
-            InfoDialog(messages.MSG_NO_PIGEON, self.mainwindow)
+        if not component.get("Treeview").select_pigeon(None, pigeon.get_pindex()):
+            InfoDialog(messages.MSG_NO_PIGEON, self._parent)
 
     # Public methods
     def set_pigeon(self, pigeon):

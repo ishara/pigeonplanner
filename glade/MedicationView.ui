@@ -350,7 +350,6 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                             </child>
@@ -457,7 +456,6 @@
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
             <property name="use_stock">True</property>
             <signal name="clicked" handler="on_buttonadd_clicked" swapped="no"/>
           </object>
@@ -474,7 +472,6 @@
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
             <property name="use_stock">True</property>
             <signal name="clicked" handler="on_buttonedit_clicked" swapped="no"/>
           </object>
@@ -491,7 +488,6 @@
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
             <property name="use_stock">True</property>
             <signal name="clicked" handler="on_buttonremove_clicked" swapped="no"/>
           </object>
@@ -538,7 +534,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_buttonhelp_clicked" swapped="no"/>
               </object>
@@ -555,7 +550,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_buttoncancel_clicked" swapped="no"/>
               </object>
@@ -573,7 +567,6 @@
                 <property name="can_default">True</property>
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_buttonsave_clicked" swapped="no"/>
               </object>
@@ -604,6 +597,9 @@
                 <property name="n_columns">2</property>
                 <property name="column_spacing">10</property>
                 <property name="row_spacing">8</property>
+                <child>
+                  <placeholder/>
+                </child>
                 <child>
                   <object class="GtkEntry" id="entrydescription2">
                     <property name="visible">True</property>
@@ -795,7 +791,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="draw_indicator">True</property>
                       </object>
                       <packing>
@@ -809,7 +804,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="use_action_appearance">False</property>
                         <signal name="clicked" handler="on_buttonexpand_clicked" swapped="no"/>
                         <child>
                           <object class="GtkImage" id="imageexpand">
@@ -846,9 +840,6 @@
                     <property name="right_attach">2</property>
                   </packing>
                 </child>
-                <child>
-                  <placeholder/>
-                </child>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -881,7 +872,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="use_action_appearance">False</property>
                         <property name="draw_indicator">True</property>
                         <signal name="toggled" handler="on_checkloft_toggled" swapped="no"/>
                       </object>
@@ -933,7 +923,6 @@
                         <property name="headers_visible">False</property>
                         <property name="headers_clickable">False</property>
                         <property name="search_column">0</property>
-                        <signal name="button-press-event" handler="on_treeviewselect_press" swapped="no"/>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn31">
                             <child>

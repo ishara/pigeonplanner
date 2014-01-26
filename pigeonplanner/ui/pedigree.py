@@ -27,6 +27,7 @@ import gtk
 from pigeonplanner import messages
 from pigeonplanner import database
 from pigeonplanner.ui import utils
+from pigeonplanner.ui import component
 from pigeonplanner.ui.widgets import pedigreeboxes
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import InfoDialog
@@ -43,9 +44,7 @@ if const.OSX:
 
 
 class DrawPedigree(object):
-    def __init__(self, treeview=None):
-        self.treeview = treeview
-
+    def __init__(self):
         self.tables = None
         self.pigeon = None
         self.draw_cb = None
@@ -227,7 +226,7 @@ class DrawPedigree(object):
 
     def _select_pigeon(self, widget, pigeon, parent):
         pindex = pigeon.get_pindex()
-        if not self.treeview.select_pigeon(None, pindex):
+        if not component.get("Treeview").select_pigeon(None, pindex):
             InfoDialog(messages.MSG_NO_PIGEON, parent)
 
     def _edit_child(self, pigeon, child, clear=False):
@@ -256,5 +255,5 @@ class DrawPedigree(object):
 
     def _redraw(self):
         self.draw_pedigree(self.tables, self.pigeon, True)
-        self.treeview.get_selection().emit("changed")
+        component.get("Treeview").get_selection().emit("changed")
 

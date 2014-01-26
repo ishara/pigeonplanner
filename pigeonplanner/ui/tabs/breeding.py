@@ -21,6 +21,7 @@ import gtk
 from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
+from pigeonplanner.ui import component
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import checkbutton
 from pigeonplanner.ui.dialogs import PigeonListDialog
@@ -38,15 +39,14 @@ from pigeonplanner.core import pigeonparser
 
 
 class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, mainwindow):
+    def __init__(self):
         builder.GtkBuilder.__init__(self, "BreedingView.ui")
         basetab.BaseTab.__init__(self, "BreedingTab", _("Breeding"), "icon_breeding.png")
 
-        self.mainwindow = mainwindow
-        self.maintreeview = mainwindow.get_treeview()
+        self.maintreeview = component.get("Treeview")
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
-        self.widgets.editdialog.set_transient_for(self.mainwindow)
+        self.widgets.editdialog.set_transient_for(self._parent)
 
     ## Tab
     def on_selection_changed(self, selection):
@@ -108,7 +108,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_buttoninfo1_clicked(self, widget):
         pigeon = pigeonparser.parser.get_pigeon(self.widgets.bandentry1.get_pindex())
-        DetailsDialog(pigeon, self.mainwindow)
+        DetailsDialog(pigeon, self._parent)
 
     def on_buttongoto1_clicked(self, widget):
         pindex = self.widgets.bandentry1.get_pindex()
@@ -116,7 +116,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_buttoninfo2_clicked(self, widget):
         pigeon = pigeonparser.parser.get_pigeon(self.widgets.bandentry2.get_pindex())
-        DetailsDialog(pigeon, self.mainwindow)
+        DetailsDialog(pigeon, self._parent)
 
     def on_buttongoto2_clicked(self, widget):
         pindex = self.widgets.bandentry2.get_pindex()

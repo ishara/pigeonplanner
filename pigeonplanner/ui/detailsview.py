@@ -163,13 +163,13 @@ class DetailsView(builder.GtkBuilder, gobject.GObject, component.Component):
                     "edit-cancelled": (gobject.SIGNAL_RUN_LAST,
                                        None, ()),
                     }
-    def __init__(self, parent, register=False):
+    def __init__(self, parent=None, register=False):
         builder.GtkBuilder.__init__(self, "DetailsView.ui")
         gobject.GObject.__init__(self)
         if register:
             component.Component.__init__(self, "DetailsView")
 
-        self.parent = parent
+        self.parent = parent or component.get("MainWindow")
         self.pedigree_mode = False
         self.pigeon = None
         self.child = None

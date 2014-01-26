@@ -32,17 +32,15 @@ from pigeonplanner.core import pigeonparser
 
 
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, parent, main):
+    def __init__(self):
         builder.GtkBuilder.__init__(self, "MedicationView.ui")
         basetab.BaseTab.__init__(self, "MedicationTab", _("Medication"), "icon_medication.png")
 
-        self.parent = parent
-        self.main = main
         self._mode = None
         self._expanded = False
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
-        self.widgets.dialog.set_transient_for(parent)
+        self.widgets.dialog.set_transient_for(self._parent)
 
     # Callbacks
     def on_dialog_delete(self, widget, event):
@@ -59,18 +57,6 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             entries = [
                 (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
                 (gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None, None)]
-
-            utils.popup_menu(event, entries)
-
-    def on_treeviewselect_press(self, treeview, event):
-        pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
-        if pthinfo is None: return
-        path, col, cellx, celly = pthinfo
-        pindex = treeview.get_model()[path][2]
-        if event.button == 3:
-            entries = [
-                (gtk.STOCK_INFO, self.main.show_pigeon_details, (pindex,), None)
-                ]
 
             utils.popup_menu(event, entries)
 
@@ -110,7 +96,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         medid = model[rowiter][0]
 
         multiple = database.count_medication_records_for_medid(medid) > 1
-        dialog = dialogs.MedicationRemoveDialog(self.parent, multiple)
+        dialog = dialogs.MedicationRemoveDialog(self._parent, multiple)
         dialog.check.set_active(multiple)
         resp = dialog.run()
         if resp == gtk.RESPONSE_NO or resp == gtk.RESPONSE_DELETE_EVENT:
@@ -131,7 +117,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         try:
             data = self._get_entry_data()
         except errors.InvalidInputError as msg:
-            ErrorDialog(msg.value, self.parent)
+            ErrorDialog(msg.value, self._parent)
             return
         pigeons = [row[2] for row in self.widgets.liststoreselect if row[1]]
         if self._mode == enums.Action.add:

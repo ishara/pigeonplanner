@@ -22,6 +22,7 @@ from pigeonplanner import messages
 from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
+from pigeonplanner.ui import component
 from pigeonplanner.ui import resultwindow
 from pigeonplanner.ui import resultparser
 from pigeonplanner.ui.tabs import basetab
@@ -493,11 +494,10 @@ class SplittedView(BaseView):
 
 
 class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, parent):
+    def __init__(self):
         builder.GtkBuilder.__init__(self, "ResultsView.ui")
         basetab.BaseTab.__init__(self, "ResultsTab", _("Results"), "icon_result.png")
 
-        self.parent = parent
         view = get_view_for_current_config()
         self.widgets.resultview = view(self.widgets._root)
         self.widgets.resultview.set_columns()
@@ -512,7 +512,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.comboweather.set_data(database.get_all_data(database.Tables.WEATHER), sort=False)
         self.widgets.combowind.set_data(database.get_all_data(database.Tables.WIND), sort=False)
 
-        self.widgets.dialog.set_transient_for(parent)
+        self.widgets.dialog.set_transient_for(self._parent)
 
     # Callbacks
     def on_dialog_delete(self, widget, event):
@@ -530,10 +530,10 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             utils.popup_menu(event, entries)
 
     def on_buttonall_clicked(self, widget):
-        resultwindow.ResultWindow(self.parent)
+        resultwindow.ResultWindow(self._parent)
 
     def on_buttonimport_clicked(self, widget):
-        resultparser.ResultParser(self.parent, pigeonparser.parser.pigeons.keys())
+        resultparser.ResultParser(self._parent, pigeonparser.parser.pigeons.keys())
 
     def on_buttonadd_clicked(self, widget):
         self._mode = enums.Action.add
@@ -549,7 +549,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self._set_dialog(self._mode, result)
 
     def on_buttonremove_clicked(self, widget):
-        if not QuestionDialog(messages.MSG_REMOVE_RESULT, self.parent).run():
+        if not QuestionDialog(messages.MSG_REMOVE_RESULT, self._parent).run():
             return
 
         self.widgets.resultview.remove_selected()
@@ -564,7 +564,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         if self._mode == enums.Action.add:
             data["pindex"] = self.pigeon.pindex
             if database.result_exists(data):
-                ErrorDialog(messages.MSG_RESULT_EXISTS, self.parent)
+                ErrorDialog(messages.MSG_RESULT_EXISTS, self._parent)
                 return
 
             key = database.add_result(data)
@@ -615,11 +615,11 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             if field == "":
                 database.update_pigeon(self.pigeon.pindex, {"extra%s" % (index+1): text})
                 pigeonparser.parser.update_pigeon(self.pigeon.pindex)
-                self.parent.widgets.treeview.select_pigeon(None, self.pigeon.pindex)
+                component.get("Treeview").select_pigeon(None, self.pigeon.pindex)
                 break
         else:
             InfoDialog((_("No empty space found in pedigree details."), "", ""),
-                       self.parent, None)
+                       self._parent, None)
 
     # Public methods
     def set_pigeon(self, pigeon):

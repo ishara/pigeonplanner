@@ -34,11 +34,10 @@ from pigeonplanner.core import common
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
-    def __init__(self, parent):
+    def __init__(self):
         builder.GtkBuilder.__init__(self, "MediaView.ui")
         basetab.BaseTab.__init__(self, "MediaTab", _("Media"), "icon_media.png")
 
-        self.parent = parent
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.set_select_function(self._select_func, full=True)
         self.widgets.selection.connect("changed", self.on_selection_changed)
@@ -67,7 +66,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         common.open_file(model.get_value(rowiter, 2))
 
     def on_buttonadd_clicked(self, widget):
-        chooser = filechooser.MediaChooser(self.parent)
+        chooser = filechooser.MediaChooser(self._parent)
         response = chooser.run()
         if response == gtk.RESPONSE_OK:
             data = {"pindex":self.pigeon.get_pindex(), "type": chooser.get_filetype(),
@@ -79,7 +78,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         chooser.destroy()
 
     def on_buttonremove_clicked(self, widget):
-        if not QuestionDialog(messages.MSG_REMOVE_MEDIA, self.parent).run():
+        if not QuestionDialog(messages.MSG_REMOVE_MEDIA, self._parent).run():
             return
 
         model, rowiter = self.widgets.selection.get_selected()
