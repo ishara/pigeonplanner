@@ -59,7 +59,7 @@ class PedigreeReport(Report):
         self.doc.center_text("User", "\n".join(userinfo), w_center, header_y)
 
         if config.get("printing.pedigree-image") and self._pigeon is not None and\
-                                      self._pigeon.image is not None:
+                                self._pigeon.image:
             img_x = w_center
             img_y = 2
             img_w = 7

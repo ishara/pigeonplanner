@@ -230,7 +230,7 @@ class PedigreeReport(Report):
             # Draw image
             if index == 22 and config.get("printing.pedigree-image") and\
                                          self._pigeon is not None and\
-                                         self._pigeon.image is not None:
+                                         self._pigeon.image:
                 # index 22 is last box of first part
                 img_y = y + y_offset - (h_sep / 2)
                 img_w = w - .2

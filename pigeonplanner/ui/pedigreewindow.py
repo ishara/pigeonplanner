@@ -200,7 +200,6 @@ class PedigreeWindow(gtk.Window):
                 # like this ofcourse.
                 if not self.pigeon.image == "":
                     InfoDialog(msg, self, self.pigeon.image)
-                self.pigeon.image = None
 
         PedigreeReport, PedigreeReportOptions = get_pedigree()
         psize = common.get_pagesize_from_opts()
