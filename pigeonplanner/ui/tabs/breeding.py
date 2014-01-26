@@ -23,7 +23,6 @@ from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui.tabs import basetab
-from pigeonplanner.ui.widgets import checkbutton
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import enums

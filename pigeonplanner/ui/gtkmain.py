@@ -110,6 +110,11 @@ def run_ui(dbcode):
         from pigeonplanner.ui.messagedialog import InfoDialog
         InfoDialog(messages.MSG_UPDATED_DATABASE)
 
+    # Import widgets that are used in GtkBuilder files
+    from pigeonplanner.ui.widgets import statusbar
+    from pigeonplanner.ui.widgets import checkbutton
+    from pigeonplanner.ui.widgets import latlongentry
+
     from pigeonplanner.ui import mainwindow
     mainwindow.MainWindow()
 

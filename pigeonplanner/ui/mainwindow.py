@@ -44,7 +44,6 @@ from pigeonplanner.ui import exportwindow
 from pigeonplanner.ui import optionsdialog
 from pigeonplanner.ui import pedigreewindow
 from pigeonplanner.ui.widgets import treeview
-from pigeonplanner.ui.widgets import statusbar
 from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog, QuestionDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import const

@@ -32,7 +32,6 @@ import gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import builder
-from pigeonplanner.ui.widgets import latlongentry
 from pigeonplanner.ui.messagedialog import ErrorDialog
 
 
