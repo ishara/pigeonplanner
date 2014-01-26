@@ -24,7 +24,6 @@ from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import checkbutton
-from pigeonplanner.ui.dialogs import PigeonListDialog
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import enums
@@ -202,15 +201,9 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.treeview.scroll_to_cell(path)
         self.widgets.editdialog.hide()
 
-    def on_buttonsearchmate_clicked(self, widget):
+    def on_bandmateedit_search_clicked(self, widget):
         sex = enums.Sex.cock if self.pigeon.is_hen() else enums.Sex.hen
-        dialog = PigeonListDialog(self.widgets.editdialog)
-        dialog.fill_treeview(sex=sex)
-        response = dialog.run()
-        if response == gtk.RESPONSE_APPLY:
-            pigeon = dialog.get_selected()
-            self.widgets.bandmateedit.set_pindex(pigeon.get_pindex())
-        dialog.destroy()
+        return None, sex, None
 
     def on_successcheckedit1_toggled(self, widget):
         self.widgets.vboxpigeonedit1.set_sensitive(widget.get_active())
