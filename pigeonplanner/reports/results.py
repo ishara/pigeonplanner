@@ -25,6 +25,21 @@ from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
                                             PARA_ALIGN_LEFT)
 
 
+columnsize = {"date": 7,
+              "point": 12,
+              "ring": 8,
+              "placestr": 5,
+              "out": 5,
+              "type": 6,
+              "wind": 6.5,
+              "weather": 6.5,
+              "coefstr": 6,
+              "sector": 10,
+              "category": 7,
+              "comment": 21
+        }
+
+
 class ResultsReport(Report, HelperMethods):
     def __init__(self, reportopts, data, userinfo):
         Report.__init__(self, "My results", reportopts)
@@ -43,20 +58,74 @@ class ResultsReport(Report, HelperMethods):
 #        self.doc.end_paragraph()
 
         # Actual results
-        headermap = {"date": _("Date"),
-                     "point": _("Racepoint"),
-                     "ring": _("Band no."),
-                     "placestr": _("Placed"),
-                     "out": _("Out of"),
-                     "type": _("Type"),
-                     "wind": _("Wind"),
-                     "weather": _("Weather"),
-                     "coefstr": _("Coef."),
-                     "sector": _("Sector"),
-                     "category": _("Category"),
-                     "comment": _("Comment")
+        self.headermap = {"date": _("Date"),
+                          "point": _("Racepoint"),
+                          "ring": _("Band no."),
+                          "placestr": _("Placed"),
+                          "out": _("Out of"),
+                          "type": _("Type"),
+                          "wind": _("Wind"),
+                          "weather": _("Weather"),
+                          "coefstr": _("Coef."),
+                          "sector": _("Sector"),
+                          "category": _("Category"),
+                          "comment": _("Comment")
                 }
 
+        if config.get("interface.results-mode") == 0:
+            self._do_report_classic()
+        elif config.get("interface.results-mode") == 1:
+            self._do_report_splitted()
+
+    def _add_table_style(self, columns):
+        if sum(columns) != 100:
+            # If some columns are disabled, split those widths along the other columns
+            remaining = 100 - sum(columns)
+            foreach = remaining / len(columns)
+            columns = [val + foreach for val in columns]
+
+        style_sheet = self.doc.get_style_sheet()
+        table = TableStyle()
+        table.set_width(100)
+        table.set_column_widths(columns)
+        style_sheet.add_table_style("table", table)
+        self.doc.set_style_sheet(style_sheet)
+
+    def _do_report_classic(self):
+        columns = ["ring", "date", "point", "placestr", "out"]
+        if config.get("columns.result-coef"):
+            columns.append("coefstr")
+        if config.get("columns.result-sector"):
+            columns.append("sector")
+        if config.get("columns.result-type"):
+            columns.append("type")
+        if config.get("columns.result-category"):
+            columns.append("category")
+        if config.get("columns.result-weather"):
+            columns.append("wind")
+        if config.get("columns.result-wind"):
+            columns.append("weather")
+        if config.get("columns.result-comment"):
+            columns.append("comment")
+
+        self._add_table_style([columnsize[col] for col in columns])
+        self.doc.start_table("my_table", "table")
+
+        if config.get("printing.result-colnames"):
+            self.doc.start_row()
+            for name in columns:
+                self.add_cell(self.headermap[name], "headercell", "colheader")
+            self.doc.end_row()
+
+        # data = [{}]
+        for item in self._data:
+            self.doc.start_row()
+            for name in columns:
+                self.add_cell(str(item[name]), "cell", "celltext")
+            self.doc.end_row()
+        self.doc.end_table()
+
+    def _do_report_splitted(self):
         racecolumns = ["date", "point"]
         if config.get("columns.result-type"):
             racecolumns.append("type")
@@ -74,18 +143,20 @@ class ResultsReport(Report, HelperMethods):
         if config.get("columns.result-comment"):
             resultcolumns.append("comment")
 
+        columns = racecolumns + resultcolumns
         dummyrace = {"date": "",
                      "point": "",
                      "type": "",
                      "wind": "",
                      "weather": ""}
 
+        self._add_table_style([columnsize[col] for col in columns])
         self.doc.start_table("my_table", "table")
 
         if config.get("printing.result-colnames"):
             self.doc.start_row()
-            for name in racecolumns + resultcolumns:
-                self.add_cell(headermap[name], "headercell", "colheader")
+            for name in columns:
+                self.add_cell(self.headermap[name], "headercell", "colheader")
             self.doc.end_row()
 
         # data = [{"race": {}, "results": [{}, {}]}]
@@ -143,12 +214,6 @@ class ResultsReportOptions(ReportOptions):
         para = ParagraphStyle()
         para.set(font=font)
         default_style.add_paragraph_style("celltext", para)
-
-        table = TableStyle()
-        table.set_width(100)
-        #TODO: column size with different columns
-        table.set_column_widths([7, 12, 6, 6.5, 6.5, 8, 5, 5, 6, 10, 7, 21])
-        default_style.add_table_style("table", table)
 
         cell = TableCellStyle()
         cell.set_padding(0.1)

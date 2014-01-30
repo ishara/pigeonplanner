@@ -130,6 +130,10 @@ class TreeviewFilter(object):
     def __iter__(self):
         return iter(self._items)
 
+    def __add__(self, other):
+        self._items.extend(other._items)
+        return self._items
+
     def clear(self):
         self._items = []
 
