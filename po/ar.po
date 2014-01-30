@@ -8,22 +8,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 22:44+0100\n"
-"PO-Revision-Date: 2013-12-04 17:07+0000\n"
+"POT-Creation-Date: 2014-01-26 18:30+0100\n"
+"PO-Revision-Date: 2014-01-13 20:50+0000\n"
 "Last-Translator: egyptian <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-12 05:16+0000\n"
-"X-Generator: Launchpad (build 16869)\n"
+"X-Launchpad-Export-Date: 2014-01-27 05:19+0000\n"
+"X-Generator: Launchpad (build 16914)\n"
 "X-Poedit-Country: EGYPT\n"
 "Language: \n"
 "X-Poedit-Language: Arabic\n"
 
-#: pigeonplanner/messages.py:19 pigeonplanner/ui/exportwindow.py:55
+#: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:214
+#: pigeonplanner/ui/resultwindow.py:373 pigeonplanner/ui/exportwindow.py:55
 #: pigeonplanner/ui/tools/distancecalculator.py:72
-#: pigeonplanner/core/common.py:193 pigeonplanner/core/common.py:200
+#: pigeonplanner/core/common.py:229 pigeonplanner/core/common.py:236
 msgid "Error"
 msgstr "خطأ"
 
@@ -40,8 +41,8 @@ msgid ""
 "The database you are trying to open is too new for your version of Pigeon "
 "Planner. You need to reinstall the latest version to continue."
 msgstr ""
-"قاعدة البيانات التي تحاول اصدارها جديد عن إصدار برنامجك الحالى . تحتاج إلى "
-"إعادة تثبيت الإصدار الأخير للمتابعة."
+"قاعدة البيانات التي تحاول دخولها اصدارها جديد عن إصدار برنامجك الحالى . "
+"تحتاج إلى إعادة تثبيت الإصدار الأخير للمتابعة."
 
 #: pigeonplanner/messages.py:32
 msgid ""
@@ -155,8 +156,8 @@ msgid "Removing the selected result"
 msgstr "حذف النتيجة المختارة"
 
 #: pigeonplanner/messages.py:95 pigeonplanner/messages.py:98
-#: pigeonplanner/messages.py:147 pigeonplanner/ui/dialogs.py:224
-#: glade/MainWindow.ui:1110
+#: pigeonplanner/messages.py:147 pigeonplanner/ui/dialogs.py:223
+#: glade/MainWindow.ui:1111
 msgid "Are you sure?"
 msgstr "هل أنت متأكد؟"
 
@@ -296,99 +297,106 @@ msgstr "هذا امر غير طبيعي ، أو يجب أن تقوم بتشغي�
 
 #: pigeonplanner/reports/pigeons.py:40 pigeonplanner/reports/results.py:48
 #: pigeonplanner/ui/dialogs.py:256 pigeonplanner/ui/tabs/relatives.py:163
-#: pigeonplanner/ui/widgets/treeview.py:257 glade/BreedingView.ui:140
-#: glade/BreedingView.ui:340 glade/BreedingView.ui:1132
-#: glade/BreedingView.ui:1302 glade/ResultWindow.ui:1003
-#: glade/ResultParser.ui:389
+#: pigeonplanner/ui/widgets/treeview.py:281 glade/BreedingView.ui:140
+#: glade/BreedingView.ui:337 glade/BreedingView.ui:1087
+#: glade/BreedingView.ui:1255 glade/ResultWindow.ui:1005
+#: glade/ResultParser.ui:508
 msgid "Band no."
 msgstr "رقم الدبلة"
 
 #: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:182
-#: pigeonplanner/ui/widgets/treeview.py:257 glade/MainWindow.ui:818
-#: glade/FilterDialog.ui:121 glade/OptionsDialog.ui:852
-#: glade/OptionsDialog.ui:1439 glade/DetailsView.ui:261
-#: glade/DetailsView.ui:815
+#: pigeonplanner/ui/widgets/treeview.py:281 glade/MainWindow.ui:818
+#: glade/FilterDialog.ui:121 glade/OptionsDialog.ui:909
+#: glade/OptionsDialog.ui:1524 glade/DetailsView.ui:238
+#: glade/DetailsView.ui:650
 msgid "Sex"
 msgstr "الجنس"
 
 #: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dialogs.py:256
-#: pigeonplanner/ui/widgets/treeview.py:257 glade/OptionsDialog.ui:787
-#: glade/OptionsDialog.ui:1190 glade/OptionsDialog.ui:1417
+#: pigeonplanner/ui/widgets/treeview.py:281 glade/OptionsDialog.ui:844
+#: glade/OptionsDialog.ui:1275 glade/OptionsDialog.ui:1502
 #: glade/AddressBook.ui:129
 msgid "Name"
 msgstr "الاسم"
 
 #: pigeonplanner/reports/pigeons.py:47
-#: pigeonplanner/ui/widgets/treeview.py:257 glade/FilterDialog.ui:135
-#: glade/OptionsDialog.ui:811 glade/OptionsDialog.ui:1426
-#: glade/DetailsView.ui:250 glade/DetailsView.ui:804
+#: pigeonplanner/ui/widgets/treeview.py:281 glade/FilterDialog.ui:135
+#: glade/OptionsDialog.ui:868 glade/OptionsDialog.ui:1511
+#: glade/DetailsView.ui:227 glade/DetailsView.ui:639
 msgid "Colour"
 msgstr "اللون"
 
 #: pigeonplanner/reports/pigeons.py:49
-#: pigeonplanner/ui/widgets/treeview.py:258
+#: pigeonplanner/ui/widgets/treeview.py:282
 #: pigeonplanner/ui/tools/distancecalculator.py:174 glade/FilterDialog.ui:163
-#: glade/OptionsDialog.ui:824 glade/DetailsView.ui:224
-#: glade/DetailsView.ui:634 glade/MedicationView.ui:880
+#: glade/OptionsDialog.ui:881 glade/DetailsView.ui:201
+#: glade/DetailsView.ui:573 glade/MedicationView.ui:871
 msgid "Loft"
 msgstr "اللوفت"
 
 #: pigeonplanner/reports/pigeons.py:51
-#: pigeonplanner/ui/widgets/treeview.py:258 glade/FilterDialog.ui:149
-#: glade/OptionsDialog.ui:796 glade/DetailsView.ui:274
-#: glade/DetailsView.ui:828
+#: pigeonplanner/ui/widgets/treeview.py:282 glade/FilterDialog.ui:149
+#: glade/OptionsDialog.ui:853 glade/DetailsView.ui:251
+#: glade/DetailsView.ui:663
 msgid "Strain"
 msgstr "السلالة"
 
 #: pigeonplanner/reports/pigeons.py:53
-#: pigeonplanner/ui/widgets/treeview.py:258 glade/OptionsDialog.ui:837
+#: pigeonplanner/ui/widgets/treeview.py:282 glade/FilterDialog.ui:332
+#: glade/OptionsDialog.ui:894
 msgid "Status"
 msgstr "الحالة"
 
 #: pigeonplanner/reports/results.py:46 pigeonplanner/reports/velocity.py:39
-#: glade/ResultsView.ui:39 glade/ResultWindow.ui:216 glade/ResultWindow.ui:890
-#: glade/DetailsView.ui:1251 glade/DetailsView.ui:1364
-#: glade/DetailsView.ui:1485 glade/MedicationView.ui:36
-#: glade/MedicationView.ui:123
+#: pigeonplanner/ui/tabs/results.py:153 pigeonplanner/ui/tabs/results.py:323
+#: glade/ResultWindow.ui:216 glade/ResultWindow.ui:892
+#: glade/DetailsView.ui:1182 glade/DetailsView.ui:1282
+#: glade/DetailsView.ui:1397 glade/MedicationView.ui:36
+#: glade/MedicationView.ui:123 glade/ResultParser.ui:170
 msgid "Date"
 msgstr "التاريخ"
 
-#: pigeonplanner/reports/results.py:47 glade/VelocityCalculator.ui:154
-#: glade/ResultsView.ui:52 glade/ResultWindow.ui:228 glade/ResultWindow.ui:903
-#: glade/DetailsView.ui:1529 glade/RaceManager.ui:132
+#: pigeonplanner/reports/results.py:47 pigeonplanner/ui/tabs/results.py:153
+#: pigeonplanner/ui/tabs/results.py:323 glade/VelocityCalculator.ui:154
+#: glade/ResultWindow.ui:228 glade/ResultWindow.ui:905
+#: glade/DetailsView.ui:1441 glade/ResultParser.ui:182
+#: glade/RaceManager.ui:132
 msgid "Racepoint"
 msgstr "نقطة السباق"
 
-#: pigeonplanner/reports/results.py:49 glade/ResultsView.ui:154
-#: glade/ResultsView.ui:781 glade/ResultWindow.ui:486
-#: glade/ResultWindow.ui:1029
+#: pigeonplanner/reports/results.py:49 pigeonplanner/ui/tabs/results.py:154
+#: pigeonplanner/ui/tabs/results.py:341 glade/ResultsView.ui:532
+#: glade/ResultWindow.ui:486 glade/ResultWindow.ui:1031
 msgid "Placed"
 msgstr "المركز"
 
-#: pigeonplanner/reports/results.py:50 glade/ResultsView.ui:169
-#: glade/ResultsView.ui:855 glade/ResultWindow.ui:500
-#: glade/ResultWindow.ui:1042
+#: pigeonplanner/reports/results.py:50 pigeonplanner/ui/tabs/results.py:154
+#: pigeonplanner/ui/tabs/results.py:341 glade/ResultsView.ui:605
+#: glade/ResultWindow.ui:500 glade/ResultWindow.ui:1044
 msgid "Out of"
 msgstr "من أصل"
 
-#: pigeonplanner/reports/results.py:51 glade/ResultsView.ui:65
-#: glade/ResultsView.ui:601 glade/OptionsDialog.ui:997
-#: glade/ResultWindow.ui:242 glade/ResultWindow.ui:916
-#: glade/ExportWindow.ui:126
+#: pigeonplanner/reports/results.py:51 pigeonplanner/ui/tabs/results.py:157
+#: pigeonplanner/ui/tabs/results.py:323 glade/ResultsView.ui:352
+#: glade/OptionsDialog.ui:1051 glade/ResultWindow.ui:242
+#: glade/ResultWindow.ui:918 glade/ExportWindow.ui:126
+#: glade/ResultParser.ui:328
 msgid "Type"
 msgstr "النوع"
 
-#: pigeonplanner/reports/results.py:52
-#: pigeonplanner/ui/tools/datamanager.py:45 glade/ResultsView.ui:78
-#: glade/ResultsView.ui:552 glade/OptionsDialog.ui:1049
-#: glade/ResultWindow.ui:256 glade/ResultWindow.ui:929
+#: pigeonplanner/reports/results.py:52 pigeonplanner/ui/tabs/results.py:158
+#: pigeonplanner/ui/tabs/results.py:323
+#: pigeonplanner/ui/tools/datamanager.py:45 glade/ResultsView.ui:303
+#: glade/OptionsDialog.ui:1103 glade/ResultWindow.ui:256
+#: glade/ResultWindow.ui:931 glade/ResultParser.ui:342
 msgid "Wind"
 msgstr "الرياح"
 
-#: pigeonplanner/reports/results.py:53
-#: pigeonplanner/ui/tools/datamanager.py:44 glade/ResultsView.ui:91
-#: glade/ResultsView.ui:538 glade/OptionsDialog.ui:1006
-#: glade/ResultWindow.ui:270 glade/ResultWindow.ui:942
+#: pigeonplanner/reports/results.py:53 pigeonplanner/ui/tabs/results.py:159
+#: pigeonplanner/ui/tabs/results.py:323
+#: pigeonplanner/ui/tools/datamanager.py:44 glade/ResultsView.ui:289
+#: glade/OptionsDialog.ui:1060 glade/ResultWindow.ui:270
+#: glade/ResultWindow.ui:944 glade/ResultParser.ui:356
 msgid "Weather"
 msgstr "الطقس"
 
@@ -396,23 +404,26 @@ msgstr "الطقس"
 msgid "Coef."
 msgstr "الدرجة"
 
-#: pigeonplanner/reports/results.py:55 glade/ResultsView.ui:199
-#: glade/ResultsView.ui:498 glade/OptionsDialog.ui:982
-#: glade/ResultWindow.ui:528 glade/ResultWindow.ui:1068
+#: pigeonplanner/reports/results.py:55 pigeonplanner/ui/tabs/results.py:156
+#: pigeonplanner/ui/tabs/results.py:343 glade/ResultsView.ui:249
+#: glade/OptionsDialog.ui:1036 glade/ResultWindow.ui:528
+#: glade/ResultWindow.ui:1070 glade/ResultParser.ui:196
 msgid "Sector"
 msgstr "القطاع"
 
-#: pigeonplanner/reports/results.py:56 glade/ResultsView.ui:214
-#: glade/ResultsView.ui:615 glade/OptionsDialog.ui:1034
-#: glade/ResultWindow.ui:542 glade/ResultWindow.ui:1081
+#: pigeonplanner/reports/results.py:56 pigeonplanner/ui/tabs/results.py:157
+#: pigeonplanner/ui/tabs/results.py:344 glade/ResultsView.ui:366
+#: glade/OptionsDialog.ui:1088 glade/ResultWindow.ui:542
+#: glade/ResultWindow.ui:1083 glade/ResultParser.ui:210
 msgid "Category"
 msgstr "الفئة"
 
-#: pigeonplanner/reports/results.py:57 glade/ResultsView.ui:229
-#: glade/ResultsView.ui:566 glade/BreedingView.ui:584
-#: glade/BreedingView.ui:979 glade/OptionsDialog.ui:1019
-#: glade/ResultWindow.ui:1094 glade/MedicationView.ui:418
-#: glade/MedicationView.ui:779 glade/AddressBook.ui:413
+#: pigeonplanner/reports/results.py:57 pigeonplanner/ui/tabs/results.py:159
+#: pigeonplanner/ui/tabs/results.py:344 glade/ResultsView.ui:317
+#: glade/BreedingView.ui:578 glade/BreedingView.ui:935
+#: glade/OptionsDialog.ui:1073 glade/ResultWindow.ui:1096
+#: glade/MedicationView.ui:417 glade/MedicationView.ui:775
+#: glade/AddressBook.ui:413
 msgid "Comment"
 msgstr "تعليق"
 
@@ -450,7 +461,7 @@ msgstr "شجرة النسب لـ :"
 msgid "Preview"
 msgstr "معاينة"
 
-#: pigeonplanner/ui/filechooser.py:77 pigeonplanner/ui/tabs/media.py:111
+#: pigeonplanner/ui/filechooser.py:77 pigeonplanner/ui/tabs/media.py:110
 msgid "Images"
 msgstr "الصور"
 
@@ -472,7 +483,7 @@ msgid "Title"
 msgstr "العنوان"
 
 #: pigeonplanner/ui/filechooser.py:168 glade/MedicationView.ui:50
-#: glade/MedicationView.ui:226 glade/MedicationView.ui:723
+#: glade/MedicationView.ui:226 glade/MedicationView.ui:719
 msgid "Description"
 msgstr "الوصف"
 
@@ -484,9 +495,9 @@ msgstr "حفظ باسم ..."
 msgid "Select a folder..."
 msgstr "حدد مجلد..."
 
-#: pigeonplanner/ui/optionsdialog.py:53 glade/BreedingView.ui:603
-#: glade/BreedingView.ui:998 glade/OptionsDialog.ui:1573
-#: glade/OptionsDialog.ui:1659 glade/OptionsDialog.ui:1806
+#: pigeonplanner/ui/optionsdialog.py:53 glade/BreedingView.ui:597
+#: glade/BreedingView.ui:954 glade/OptionsDialog.ui:1658
+#: glade/OptionsDialog.ui:1744 glade/OptionsDialog.ui:1891
 msgid "General"
 msgstr "عام"
 
@@ -508,14 +519,14 @@ msgstr "الطباعة"
 msgid "Pedigree"
 msgstr "شهادة النسب"
 
-#: pigeonplanner/ui/optionsdialog.py:61 glade/MainWindow.ui:17
-#: glade/ExportWindow.ui:254
+#: pigeonplanner/ui/optionsdialog.py:61 pigeonplanner/ui/tabs/results.py:613
+#: glade/MainWindow.ui:293 glade/ExportWindow.ui:254 glade/ResultParser.ui:224
 msgid "Pigeons"
 msgstr "الحمام"
 
-#: pigeonplanner/ui/optionsdialog.py:62 pigeonplanner/ui/resultwindow.py:94
-#: pigeonplanner/ui/tabs/results.py:54 glade/ResultsView.ui:382
-#: glade/ResultWindow.ui:813 glade/ResultWindow.ui:1114
+#: pigeonplanner/ui/optionsdialog.py:62 pigeonplanner/ui/resultwindow.py:97
+#: pigeonplanner/ui/tabs/results.py:499 glade/ResultsView.ui:135
+#: glade/ResultWindow.ui:815 glade/ResultWindow.ui:1116
 msgid "Results"
 msgstr "نتائج السباقات"
 
@@ -552,7 +563,7 @@ msgstr "يمكنك مساعدة مطوري البرنامج من خلال الت
 msgid "Error Detail"
 msgstr "تفاصيل الخطأ"
 
-#: pigeonplanner/ui/gtkmain.py:58 glade/OptionsDialog.ui:1225
+#: pigeonplanner/ui/gtkmain.py:58 glade/OptionsDialog.ui:1310
 #: glade/Dialogs.ui:8 glade/AddressBook.ui:372
 msgid "E-mail"
 msgstr "البريد الالكتروني"
@@ -573,12 +584,12 @@ msgstr "حفظ هذه الشجرة"
 msgid "View this pedigree"
 msgstr "عرض هذه الشجرة"
 
-#: pigeonplanner/ui/pedigreewindow.py:94 glade/MainWindow.ui:246
+#: pigeonplanner/ui/pedigreewindow.py:94 glade/MainWindow.ui:66
 msgid "Print this pedigree"
 msgstr "طباعة هذه الشجرة"
 
 #: pigeonplanner/ui/pedigreewindow.py:96
-#: pigeonplanner/reportlib/gui/printpreview.py:65 glade/ResultWindow.ui:39
+#: pigeonplanner/reportlib/gui/printpreview.py:65 glade/ResultWindow.ui:16
 #: glade/PhotoAlbum.ui:29
 msgid "Close this window"
 msgstr "إغلاق هذه النافذة"
@@ -596,61 +607,69 @@ msgstr ""
 "تحتاج إلى تحرير بيانات الطير وتحديد المسار الصحيح أو استعادة الصورة الأصلية "
 "على الكمبيوتر الخاص بك."
 
-#: pigeonplanner/ui/maildialog.py:149
+#: pigeonplanner/ui/pedigreewindow.py:213 pigeonplanner/ui/resultwindow.py:372
+msgid "You probably don't have write permissions on this folder."
+msgstr "يبدوا انك لا تملك صلاحيات على هذا المجلد"
+
+#: pigeonplanner/ui/maildialog.py:152
 msgid "The e-mail has been sent succesfully!"
 msgstr "لقد تم ارسال البريد الإلكتروني بنجاح!"
 
-#: pigeonplanner/ui/maildialog.py:150
+#: pigeonplanner/ui/maildialog.py:153
 msgid "Connection to server failed!"
 msgstr "فشل الاتصال بالخادم!"
 
-#: pigeonplanner/ui/resultparser.py:50
+#: pigeonplanner/ui/resultparser.py:51
 msgid "This tool needs Yapsy to run correctly."
-msgstr ""
+msgstr "هذه الاداة تحتاج الى Yapsy لتعمل جيدا"
 
-#: pigeonplanner/ui/resultparser.py:65
+#: pigeonplanner/ui/resultparser.py:66
 #, python-format
 msgid "This result is not in the '%s' format. Do you want to continue?"
 msgstr "هذه النتيجة ليست في النسق '%s' . هل ترغب في الاستمرار؟"
 
-#: pigeonplanner/ui/detailsview.py:65 glade/DetailsView.ui:1082
+#: pigeonplanner/ui/resultparser.py:122
+msgid "The date, racepoint or number of pigeons is incorrect."
+msgstr ""
+
+#: pigeonplanner/ui/detailsview.py:54 glade/DetailsView.ui:1015
 msgid "Details of pigeon"
 msgstr "تفاصيل عن الطائر"
 
-#: pigeonplanner/ui/detailsview.py:67
+#: pigeonplanner/ui/detailsview.py:56
 #, python-format
 msgid "Details of %s"
 msgstr "تفاصيل عن %s"
 
-#: pigeonplanner/ui/mainwindow.py:259
+#: pigeonplanner/ui/mainwindow.py:263
 #, python-format
 msgid "Pigeon %s has been added"
 msgstr "تم اضافة الحمامة %s"
 
-#: pigeonplanner/ui/mainwindow.py:369
+#: pigeonplanner/ui/mainwindow.py:372
 #, python-format
 msgid "Pigeon %s has been removed"
 msgstr "تم حذف الحمامة %s"
 
-#: pigeonplanner/ui/mainwindow.py:374
+#: pigeonplanner/ui/mainwindow.py:377
 #, python-format
 msgid "%s pigeons have been removed"
 msgstr "%s تم حذفة"
 
-#: pigeonplanner/ui/mainwindow.py:495 glade/MainWindow.ui:73
+#: pigeonplanner/ui/mainwindow.py:497 glade/MainWindow.ui:236
 msgid "Search for updates..."
 msgstr "البحث عن تحديثات"
 
-#: pigeonplanner/ui/mainwindow.py:497
+#: pigeonplanner/ui/mainwindow.py:499
 msgid "Go to the website?"
 msgstr "إذهب الى الموقع الالكتروني؟"
 
-#: pigeonplanner/ui/locationchooser.py:60
+#: pigeonplanner/ui/locationchooser.py:57
 #: pigeonplanner/ui/tools/distancecalculator.py:51
 msgid "This tool needs Geopy 0.95.0 or higher to run correctly."
-msgstr ""
+msgstr "هذه الاداة تحتاج Geopy 0.95.0 او اعلى لتعمل جيدا"
 
-#: pigeonplanner/ui/locationchooser.py:68
+#: pigeonplanner/ui/locationchooser.py:65
 #, python-format
 msgid "Can't find location '%s'"
 msgstr "لا يمكن العثور على موقع '%s'"
@@ -659,7 +678,7 @@ msgstr "لا يمكن العثور على موقع '%s'"
 msgid "Logfile Viewer"
 msgstr "عارض ملف السجل"
 
-#: pigeonplanner/ui/dialogs.py:59
+#: pigeonplanner/ui/dialogs.py:58
 msgid "translator-credits"
 msgstr ""
 "Muhammad Mahmoud\n"
@@ -668,93 +687,97 @@ msgstr ""
 "  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
 "  egyptian https://launchpad.net/~oepc-org"
 
-#: pigeonplanner/ui/dialogs.py:69 glade/MainWindow.ui:66
+#: pigeonplanner/ui/dialogs.py:68 glade/MainWindow.ui:244
 msgid "General information"
 msgstr "معلومات عامة"
 
-#: pigeonplanner/ui/dialogs.py:94
+#: pigeonplanner/ui/dialogs.py:93
 msgid "Technical details"
 msgstr "تفاصيل تقنية"
 
-#: pigeonplanner/ui/dialogs.py:97
+#: pigeonplanner/ui/dialogs.py:96
 msgid "Data information"
 msgstr "بيانات ومعلومات"
 
-#: pigeonplanner/ui/dialogs.py:114
+#: pigeonplanner/ui/dialogs.py:113
 msgid "Number of pigeons"
 msgstr "عدد الحمام"
 
-#: pigeonplanner/ui/dialogs.py:115 glade/MainWindow.ui:419
+#: pigeonplanner/ui/dialogs.py:114 glade/MainWindow.ui:419
 msgid "Cocks"
 msgstr "الذكور"
 
-#: pigeonplanner/ui/dialogs.py:117 glade/MainWindow.ui:451
+#: pigeonplanner/ui/dialogs.py:116 glade/MainWindow.ui:451
 msgid "Hens"
 msgstr "الإناث"
 
-#: pigeonplanner/ui/dialogs.py:119 glade/MainWindow.ui:483
+#: pigeonplanner/ui/dialogs.py:118 glade/MainWindow.ui:483
 msgid "Young birds"
 msgstr "الطيور اليافعة"
 
-#: pigeonplanner/ui/dialogs.py:125
+#: pigeonplanner/ui/dialogs.py:124
 msgid "Number of results"
 msgstr "عدد النتائج"
 
-#: pigeonplanner/ui/dialogs.py:126
+#: pigeonplanner/ui/dialogs.py:125
 msgid "Number of couples"
 msgstr "عدد الأزواج"
 
-#: pigeonplanner/ui/dialogs.py:149
+#: pigeonplanner/ui/dialogs.py:148
 msgid "Create backup"
 msgstr "إنشاء نسخة احتياطية"
 
-#: pigeonplanner/ui/dialogs.py:150
+#: pigeonplanner/ui/dialogs.py:149
 msgid "Choose a directory where to save the backup"
 msgstr "إختر المجلد لحفظ النسخة الإحتياطية به"
 
-#: pigeonplanner/ui/dialogs.py:156 glade/OptionsDialog.ui:372
+#: pigeonplanner/ui/dialogs.py:155 glade/OptionsDialog.ui:386
 msgid "Backup"
 msgstr "عمل نسخ إحتياطى"
 
-#: pigeonplanner/ui/dialogs.py:165
+#: pigeonplanner/ui/dialogs.py:164
 msgid "Restore backup"
 msgstr "إستعادة النسخة الاحتياطية"
 
-#: pigeonplanner/ui/dialogs.py:166
+#: pigeonplanner/ui/dialogs.py:165
 msgid "Choose a Pigeon Planner backup file to restore"
 msgstr "إختر ملف النسخة الإحتياطية لإستعادتة"
 
-#: pigeonplanner/ui/dialogs.py:169
+#: pigeonplanner/ui/dialogs.py:168
 msgid "Warning! This will overwrite the existing database!"
 msgstr "تحذير! سيتم الكتابة فوق قاعدة البيانات الموجودة !"
 
-#: pigeonplanner/ui/dialogs.py:177
+#: pigeonplanner/ui/dialogs.py:176
 msgid "Restore"
 msgstr "إستعادة"
 
-#: pigeonplanner/ui/dialogs.py:218
+#: pigeonplanner/ui/dialogs.py:217
 msgid "Removing the selected medication entry"
 msgstr "حذف بند العلاج المختار"
 
-#: pigeonplanner/ui/dialogs.py:220
+#: pigeonplanner/ui/dialogs.py:219
 msgid "Remove this entry for all pigeons?"
 msgstr "حذف هذا البند لكل الحمام؟"
 
-#: pigeonplanner/ui/dialogs.py:242
+#: pigeonplanner/ui/dialogs.py:241
 msgid "Search a pigeon"
 msgstr "بحث عن حمامة"
 
 #: pigeonplanner/ui/dialogs.py:256 pigeonplanner/ui/tabs/relatives.py:163
-#: pigeonplanner/ui/widgets/treeview.py:257 glade/MainWindow.ui:869
-#: glade/ResultWindow.ui:1016 glade/ResultParser.ui:403
+#: pigeonplanner/ui/widgets/treeview.py:281 glade/MainWindow.ui:869
+#: glade/ResultWindow.ui:1018 glade/ResultParser.ui:521
 msgid "Year"
 msgstr "السنة"
+
+#: pigeonplanner/ui/dialogs.py:274 glade/MainWindow.ui:300
+msgid "Show all pigeons"
+msgstr "اظهار كل الطيور"
 
 #: pigeonplanner/ui/tabs/media.py:39 glade/MediaView.ui:56
 msgid "Media"
 msgstr "الوسائط"
 
-#: pigeonplanner/ui/tabs/media.py:115 glade/OptionsDialog.ui:729
+#: pigeonplanner/ui/tabs/media.py:114 glade/OptionsDialog.ui:786
 msgid "Other"
 msgstr "أخرى"
 
@@ -767,23 +790,57 @@ msgid "<b>Pedigree dam</b>"
 msgstr "<b>شجرة نسب الأم</b>"
 
 #: pigeonplanner/ui/tabs/medication.py:37 glade/MedicationView.ui:278
-#: glade/MedicationView.ui:516 glade/MedicationView.ui:751
+#: glade/MedicationView.ui:512 glade/MedicationView.ui:747
 msgid "Medication"
 msgstr "العلاج"
 
-#: pigeonplanner/ui/tabs/breeding.py:43
+#: pigeonplanner/ui/tabs/breeding.py:42
 msgid "Breeding"
 msgstr "التزويج"
 
-#: pigeonplanner/ui/tabs/results.py:305
+#: pigeonplanner/ui/tabs/results.py:155 pigeonplanner/ui/tabs/results.py:342
+#: glade/OptionsDialog.ui:1023 glade/ResultWindow.ui:514
+#: glade/ResultWindow.ui:1057
+msgid "Coefficient"
+msgstr "الدرجة"
+
+#: pigeonplanner/ui/tabs/results.py:156 pigeonplanner/ui/tabs/results.py:343
+#: glade/ResultsView.ui:690 glade/OptionsDialog.ui:1132
+#: glade/ResultParser.ui:547
+msgid "Speed"
+msgstr "السرعة"
+
+#: pigeonplanner/ui/tabs/results.py:158 pigeonplanner/ui/tabs/results.py:323
+#: glade/ResultsView.ui:656 glade/OptionsDialog.ui:1119
+msgid "Windspeed"
+msgstr "سرعة الرياح"
+
+#: pigeonplanner/ui/tabs/results.py:167 pigeonplanner/ui/tabs/results.py:352
+msgid "Results of pigeon"
+msgstr "نتائج الحمام"
+
+#: pigeonplanner/ui/tabs/results.py:331 glade/ResultWindow.ui:420
+#: glade/ResultWindow.ui:964
+msgid "Races"
+msgstr "السباقات"
+
+#: pigeonplanner/ui/tabs/results.py:529
+msgid "Add to pedigree details"
+msgstr ""
+
+#: pigeonplanner/ui/tabs/results.py:621
+msgid "No empty space found in pedigree details."
+msgstr ""
+
+#: pigeonplanner/ui/tabs/results.py:689
 msgid "Edit result for:"
 msgstr "تعديل النتيجة لـ:"
 
-#: pigeonplanner/ui/tabs/results.py:305
+#: pigeonplanner/ui/tabs/results.py:689
 msgid "Add result for:"
 msgstr "إضافة نتيجة لـ:"
 
-#: pigeonplanner/ui/tabs/relatives.py:36
+#: pigeonplanner/ui/tabs/relatives.py:37
 msgid "Relatives"
 msgstr "الأقارب"
 
@@ -803,93 +860,63 @@ msgstr "<b>النسل</b>"
 msgid "Common parent"
 msgstr "الأصول المشتركة"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:111 glade/DetailsView.ui:1317
-#: data/TranslationWorkaround.ui:9
-msgid "Dead"
-msgstr "ميت"
-
-#: pigeonplanner/ui/widgets/comboboxes.py:111 glade/DetailsView.ui:1344
-#: data/TranslationWorkaround.ui:10
-msgid "Active"
-msgstr "نشط"
-
-#: pigeonplanner/ui/widgets/comboboxes.py:111 glade/DetailsView.ui:1465
-#: data/TranslationWorkaround.ui:11
-msgid "Sold"
-msgstr "تم بيعة"
-
-#: pigeonplanner/ui/widgets/comboboxes.py:111 glade/DetailsView.ui:1586
-#: data/TranslationWorkaround.ui:12
-msgid "Lost"
-msgstr "مفقود"
-
-#: pigeonplanner/ui/widgets/comboboxes.py:112 glade/DetailsView.ui:1705
-#: data/TranslationWorkaround.ui:13
-msgid "Breeder"
-msgstr "مربى"
-
-#: pigeonplanner/ui/widgets/comboboxes.py:112 glade/DetailsView.ui:1858
-#: data/TranslationWorkaround.ui:14
-msgid "On loan"
-msgstr "على سبيل الاعارة"
-
-#: pigeonplanner/ui/widgets/comboboxes.py:176
+#: pigeonplanner/ui/widgets/comboboxes.py:183
 msgid "Yards"
 msgstr "الياردات"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:177
+#: pigeonplanner/ui/widgets/comboboxes.py:184
 msgid "Kilometres"
 msgstr "الكيلومترات"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:178
+#: pigeonplanner/ui/widgets/comboboxes.py:185
 msgid "Metres"
 msgstr "الأمتار"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:179
+#: pigeonplanner/ui/widgets/comboboxes.py:186
 msgid "Centimetres"
 msgstr "السنتيمترات"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:180
+#: pigeonplanner/ui/widgets/comboboxes.py:187
 msgid "Inches"
 msgstr "البوصات"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:181
+#: pigeonplanner/ui/widgets/comboboxes.py:188
 msgid "Feet"
 msgstr "الأقدام"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:182
+#: pigeonplanner/ui/widgets/comboboxes.py:189
 msgid "Miles"
 msgstr "الأميال"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:183
+#: pigeonplanner/ui/widgets/comboboxes.py:190
 msgid "Nautical Miles"
 msgstr "الاميال البحرية"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:206
+#: pigeonplanner/ui/widgets/comboboxes.py:213
 msgid "Yard per Minute"
 msgstr "ياردة فى الدقيقة"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:207
+#: pigeonplanner/ui/widgets/comboboxes.py:214
 msgid "Metres per Minute"
 msgstr "الأمتار فى الدقيقة"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:208
+#: pigeonplanner/ui/widgets/comboboxes.py:215
 msgid "Metres per Second"
 msgstr "الامتار فى الثانية"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:209
+#: pigeonplanner/ui/widgets/comboboxes.py:216
 msgid "Kilometre per Hour"
 msgstr "كيلومتر فى الساعة"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:210
+#: pigeonplanner/ui/widgets/comboboxes.py:217
 msgid "Feet per Second"
 msgstr "قدم فى الثانية"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:211
+#: pigeonplanner/ui/widgets/comboboxes.py:218
 msgid "Feet per Minute"
 msgstr "قدم بالدقيقة"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:212
+#: pigeonplanner/ui/widgets/comboboxes.py:219
 msgid "Mile per Hour"
 msgstr "ميل فى الساعة"
 
@@ -905,21 +932,21 @@ msgstr ""
 "  DD°MM.mmm’\n"
 "  DD°MM’SS.s”"
 
-#: pigeonplanner/ui/widgets/statusbar.py:25
+#: pigeonplanner/ui/widgets/statusbar.py:27
 #, python-format
 msgid "Pigeons: %s"
 msgstr "حمامة: %s"
 
-#: pigeonplanner/ui/widgets/statusbar.py:40
+#: pigeonplanner/ui/widgets/statusbar.py:42
 #, python-format
 msgid "Filter: %s"
 msgstr "فلترة: %s"
 
-#: pigeonplanner/ui/widgets/statusbar.py:41
+#: pigeonplanner/ui/widgets/statusbar.py:43
 msgid "On"
 msgstr "تشغيل"
 
-#: pigeonplanner/ui/widgets/statusbar.py:42
+#: pigeonplanner/ui/widgets/statusbar.py:44
 msgid "Off"
 msgstr "تعطيل"
 
@@ -1053,268 +1080,292 @@ msgstr "انثي"
 msgid "Young bird"
 msgstr "يافع"
 
-#: pigeonplanner/core/common.py:193
+#: pigeonplanner/core/common.py:51
+msgid "Dead"
+msgstr "ميت"
+
+#: pigeonplanner/core/common.py:52
+msgid "Active"
+msgstr "نشط"
+
+#: pigeonplanner/core/common.py:53
+msgid "Sold"
+msgstr "تم بيعة"
+
+#: pigeonplanner/core/common.py:54
+msgid "Lost"
+msgstr "مفقود"
+
+#: pigeonplanner/core/common.py:55
+msgid "Breeder"
+msgstr "مربى"
+
+#: pigeonplanner/core/common.py:56
+msgid "On loan"
+msgstr "على سبيل الاعارة"
+
+#: pigeonplanner/core/common.py:57
+msgid "Widow"
+msgstr "الارامل"
+
+#: pigeonplanner/core/common.py:229
 msgid "Error: This file does not exist"
 msgstr "خطأ : هذا الملف غير موجود"
 
-#: pigeonplanner/core/common.py:200
+#: pigeonplanner/core/common.py:236
 msgid "Error opening file:"
 msgstr "خطأ فى فتح الملف :"
 
 #: glade/MainWindow.ui:10
-msgid "Show all pigeons"
-msgstr ""
-
-#: glade/MainWindow.ui:11
-msgid "Show all pigeons in the list"
-msgstr ""
+msgid "View online help"
+msgstr "الذهاب للمساعدة اونلاين"
 
 #: glade/MainWindow.ui:18
-msgid "Print a list of pigeons"
-msgstr "طباعة قائمة من الحمام"
-
-#: glade/MainWindow.ui:24
-msgid "Export..."
-msgstr "تصدير..."
-
-#: glade/MainWindow.ui:25
-msgid "Export data to other formats"
-msgstr "تصدير البيانات إلى تنسيقات أخرى"
-
-#: glade/MainWindow.ui:31
-msgid "Statusbar"
-msgstr "شريط الحالة"
-
-#: glade/MainWindow.ui:32 glade/OptionsDialog.ui:619
-msgid "Show or hide the statusbar"
-msgstr "إظهار / إخفاء شريط الحالة"
-
-#: glade/MainWindow.ui:38
-msgid "Toolbar"
-msgstr "شريط الأدوات"
-
-#: glade/MainWindow.ui:39 glade/OptionsDialog.ui:605
-msgid "Show or hide the toolbar"
-msgstr "إظهار أو إخفاء شريط الأدوات"
-
-#: glade/MainWindow.ui:45
-msgid "Statistics"
-msgstr "الأحصائيات"
-
-#: glade/MainWindow.ui:46 glade/OptionsDialog.ui:591
-msgid "Show or hide pigeon statistics"
-msgstr "اظهار / اخفاء احصائيات الحمام"
-
-#: glade/MainWindow.ui:52
-msgid "Navigation arrows"
-msgstr "أسهم التصفح"
-
-#: glade/MainWindow.ui:53 glade/OptionsDialog.ui:577
-msgid "Show or hide the navigation arrows"
-msgstr "إظهار / إخفاء اسهم التصفح"
-
-#: glade/MainWindow.ui:59
-msgid "About this application"
-msgstr "عن البرنامج"
-
-#: glade/MainWindow.ui:74
-msgid "Search online for program updates"
-msgstr "البحث عن تحديثات للبرنامج"
-
-#: glade/MainWindow.ui:81
-msgid "Forum"
-msgstr "المنتدى"
-
-#: glade/MainWindow.ui:82
-msgid "Go to the forum for online help"
-msgstr "إذهب اللى المنتدى لطب الدعم الفنى"
-
-#: glade/MainWindow.ui:89
-msgid "Website"
-msgstr "الموقع الإلكتروني"
-
-#: glade/MainWindow.ui:90
-msgid "Go to the website for more information"
-msgstr "إذهب الى الموقع الالكترونى لمزيد من المعلومات"
-
-#: glade/MainWindow.ui:97 glade/DataManager.ui:26
-msgid "Data manager"
-msgstr "إدارة البيانات"
-
-#: glade/MainWindow.ui:98
-msgid "Manage your data"
-msgstr "إدارة بياناتك"
-
-#: glade/MainWindow.ui:104 glade/AddressBook.ui:9
-msgid "Address book"
-msgstr "دفتر العناوين"
-
-#: glade/MainWindow.ui:105
-msgid "View the address book"
-msgstr "معاينة دفتر العناوين"
-
-#: glade/MainWindow.ui:111
-msgid "Photo album"
-msgstr "البوم الصور"
-
-#: glade/MainWindow.ui:112
-msgid "View the images of your pigeons"
-msgstr "عرض الصور الخاصة بحمامك"
-
-#: glade/MainWindow.ui:118 glade/RaceManager.ui:20
-msgid "Racepoint manager"
-msgstr "ادارة نقاط السباق"
-
-#: glade/MainWindow.ui:119
-msgid "Manage the racepoints and distances"
-msgstr "إدارة نقاط السباق والمسافات"
-
-#: glade/MainWindow.ui:125 glade/DistanceCalculator.ui:26
-msgid "Distance calculator"
-msgstr "حاسبة المسافة"
-
-#: glade/MainWindow.ui:126
-msgid "Calculate the distance between locations"
-msgstr "حساب المسافة بين المواقع"
-
-#: glade/MainWindow.ui:132 glade/VelocityCalculator.ui:238
-msgid "Velocity calculator"
-msgstr "حاسبة السرعة"
-
-#: glade/MainWindow.ui:133
-msgid "Calculate the velocity of flights"
-msgstr "حساب سرعة الطيران"
-
-#: glade/MainWindow.ui:139
-msgid "_Filter..."
-msgstr "_فلترة"
-
-#: glade/MainWindow.ui:140 glade/ResultWindow.ui:32
-msgid "Set filter options"
-msgstr "تعيين خيارات الفلتر"
-
-#: glade/MainWindow.ui:147
-msgid "Configure the application"
-msgstr "ضبط البرنامج"
-
-#: glade/MainWindow.ui:155
-msgid "Add resul_t"
-msgstr "_إضافة نتيجة"
-
-#: glade/MainWindow.ui:156
-msgid "Add a new result for this pigeon"
-msgstr "إضافة نتيجة جديدة لهذة الحمامة"
-
-#: glade/MainWindow.ui:163 glade/MainWindow.ui:245
-msgid "_Pedigree"
-msgstr "_شجرة النسب"
-
-#: glade/MainWindow.ui:164
-msgid "View the detailed pedigree of this pigeon"
-msgstr "عرض شجرة النسب المفصلة لهذه الحمامة"
-
-#: glade/MainWindow.ui:172
-msgid "Remove the selected pigeon"
-msgstr "حذف الحمامة المختارة"
-
-#: glade/MainWindow.ui:180
-msgid "Edit the selected pigeon"
-msgstr "تعديل الحمامة المختاره"
-
-#: glade/MainWindow.ui:188
-msgid "_Logfile Viewer"
-msgstr "_عارض ملف السجل"
-
-#: glade/MainWindow.ui:189
-msgid "See the logfile"
-msgstr "معاينة ملف السجل"
-
-#: glade/MainWindow.ui:197
-msgid "Add range"
-msgstr "إضافة مجموعة"
-
-#: glade/MainWindow.ui:198 glade/MainWindow.ui:719
-msgid "Add a range of pigeons"
-msgstr "إضافة مجموعة من الحمام"
-
-#: glade/MainWindow.ui:206
-msgid "Add a new pigeon"
-msgstr "إضافة حمامة جديدة"
-
-#: glade/MainWindow.ui:214
-msgid "Quit the program"
-msgstr "إنهاء البرنامج"
-
-#: glade/MainWindow.ui:222
-msgid "_Restore"
-msgstr "_إستعادة"
-
-#: glade/MainWindow.ui:223
-msgid "Restore a backup of your database"
-msgstr "إستعادة نسخة احتياطية من قاعدة بياناتك"
-
-#: glade/MainWindow.ui:230 glade/MainWindow.ui:277
-msgid "_Backup"
-msgstr "_النسخ الاحتياطي"
-
-#: glade/MainWindow.ui:231
-msgid "Create a backup of your database"
-msgstr "إنشاء نسخة احتياطية من قاعدة بياناتك"
-
-#: glade/MainWindow.ui:238
-msgid "Blank pedigree"
-msgstr "شجرة نسب فارغة"
-
-#: glade/MainWindow.ui:239
-msgid "Print a blank pedigree"
-msgstr "طباعة شجرة نسب فارغة"
-
-#: glade/MainWindow.ui:252
-msgid "_Help"
-msgstr "_مساعدة"
-
-#: glade/MainWindow.ui:257
-msgid "_Tools"
-msgstr "_الأدوات"
-
-#: glade/MainWindow.ui:262
-msgid "_View"
-msgstr "_إظهار"
-
-#: glade/MainWindow.ui:267
-msgid "_Edit"
-msgstr "_تعديل"
-
-#: glade/MainWindow.ui:272
-msgid "_Pigeon"
-msgstr "_الحمام"
-
-#: glade/MainWindow.ui:287
-msgid "_File"
-msgstr "_ملف"
-
-#: glade/MainWindow.ui:292
 msgid "Select all"
 msgstr "إختيار الكل"
 
-#: glade/MainWindow.ui:293
+#: glade/MainWindow.ui:19
 msgid "Select all pigeons"
 msgstr "اختيار كل الطيور"
 
-#: glade/MainWindow.ui:299
-msgid "View online help"
-msgstr "الذهاب للمساعدة اونلاين"
+#: glade/MainWindow.ui:25
+msgid "_File"
+msgstr "_ملف"
+
+#: glade/MainWindow.ui:35 glade/MainWindow.ui:79
+msgid "_Backup"
+msgstr "_النسخ الاحتياطي"
+
+#: glade/MainWindow.ui:40
+msgid "_Pigeon"
+msgstr "_الحمام"
+
+#: glade/MainWindow.ui:45
+msgid "_Edit"
+msgstr "_تعديل"
+
+#: glade/MainWindow.ui:50
+msgid "_View"
+msgstr "_إظهار"
+
+#: glade/MainWindow.ui:55
+msgid "_Tools"
+msgstr "_الأدوات"
+
+#: glade/MainWindow.ui:60
+msgid "_Help"
+msgstr "_مساعدة"
+
+#: glade/MainWindow.ui:65 glade/MainWindow.ui:145
+msgid "_Pedigree"
+msgstr "_شجرة النسب"
+
+#: glade/MainWindow.ui:72
+msgid "Blank pedigree"
+msgstr "شجرة نسب فارغة"
+
+#: glade/MainWindow.ui:73
+msgid "Print a blank pedigree"
+msgstr "طباعة شجرة نسب فارغة"
+
+#: glade/MainWindow.ui:80
+msgid "Create a backup of your database"
+msgstr "إنشاء نسخة احتياطية من قاعدة بياناتك"
+
+#: glade/MainWindow.ui:87
+msgid "_Restore"
+msgstr "_إستعادة"
+
+#: glade/MainWindow.ui:88
+msgid "Restore a backup of your database"
+msgstr "إستعادة نسخة احتياطية من قاعدة بياناتك"
+
+#: glade/MainWindow.ui:95
+msgid "Quit the program"
+msgstr "إنهاء البرنامج"
+
+#: glade/MainWindow.ui:103
+msgid "Add a new pigeon"
+msgstr "إضافة حمامة جديدة"
+
+#: glade/MainWindow.ui:111
+msgid "Add range"
+msgstr "إضافة مجموعة"
+
+#: glade/MainWindow.ui:112 glade/MainWindow.ui:719
+msgid "Add a range of pigeons"
+msgstr "إضافة مجموعة من الحمام"
+
+#: glade/MainWindow.ui:120
+msgid "_Logfile Viewer"
+msgstr "_عارض ملف السجل"
+
+#: glade/MainWindow.ui:121
+msgid "See the logfile"
+msgstr "معاينة ملف السجل"
+
+#: glade/MainWindow.ui:129
+msgid "Edit the selected pigeon"
+msgstr "تعديل الحمامة المختاره"
+
+#: glade/MainWindow.ui:137
+msgid "Remove the selected pigeon"
+msgstr "حذف الحمامة المختارة"
+
+#: glade/MainWindow.ui:146
+msgid "View the detailed pedigree of this pigeon"
+msgstr "عرض شجرة النسب المفصلة لهذه الحمامة"
+
+#: glade/MainWindow.ui:154
+msgid "Add resul_t"
+msgstr "_إضافة نتيجة"
+
+#: glade/MainWindow.ui:155
+msgid "Add a new result for this pigeon"
+msgstr "إضافة نتيجة جديدة لهذة الحمامة"
+
+#: glade/MainWindow.ui:162
+msgid "Configure the application"
+msgstr "ضبط البرنامج"
+
+#: glade/MainWindow.ui:170
+msgid "_Filter..."
+msgstr "_فلترة"
+
+#: glade/MainWindow.ui:171 glade/ResultWindow.ui:24
+msgid "Set filter options"
+msgstr "تعيين خيارات الفلتر"
+
+#: glade/MainWindow.ui:178 glade/VelocityCalculator.ui:238
+msgid "Velocity calculator"
+msgstr "حاسبة السرعة"
+
+#: glade/MainWindow.ui:179
+msgid "Calculate the velocity of flights"
+msgstr "حساب سرعة الطيران"
+
+#: glade/MainWindow.ui:185 glade/DistanceCalculator.ui:26
+msgid "Distance calculator"
+msgstr "حاسبة المسافة"
+
+#: glade/MainWindow.ui:186
+msgid "Calculate the distance between locations"
+msgstr "حساب المسافة بين المواقع"
+
+#: glade/MainWindow.ui:192 glade/RaceManager.ui:20
+msgid "Racepoint manager"
+msgstr "ادارة نقاط السباق"
+
+#: glade/MainWindow.ui:193
+msgid "Manage the racepoints and distances"
+msgstr "إدارة نقاط السباق والمسافات"
+
+#: glade/MainWindow.ui:199
+msgid "Photo album"
+msgstr "البوم الصور"
+
+#: glade/MainWindow.ui:200
+msgid "View the images of your pigeons"
+msgstr "عرض الصور الخاصة بحمامك"
+
+#: glade/MainWindow.ui:206 glade/AddressBook.ui:9
+msgid "Address book"
+msgstr "دفتر العناوين"
+
+#: glade/MainWindow.ui:207
+msgid "View the address book"
+msgstr "معاينة دفتر العناوين"
+
+#: glade/MainWindow.ui:213 glade/DataManager.ui:26
+msgid "Data manager"
+msgstr "إدارة البيانات"
+
+#: glade/MainWindow.ui:214
+msgid "Manage your data"
+msgstr "إدارة بياناتك"
+
+#: glade/MainWindow.ui:220
+msgid "Website"
+msgstr "الموقع الإلكتروني"
+
+#: glade/MainWindow.ui:221
+msgid "Go to the website for more information"
+msgstr "إذهب الى الموقع الالكترونى لمزيد من المعلومات"
+
+#: glade/MainWindow.ui:228
+msgid "Forum"
+msgstr "المنتدى"
+
+#: glade/MainWindow.ui:229
+msgid "Go to the forum for online help"
+msgstr "إذهب اللى المنتدى لطب الدعم الفنى"
+
+#: glade/MainWindow.ui:237
+msgid "Search online for program updates"
+msgstr "البحث عن تحديثات للبرنامج"
+
+#: glade/MainWindow.ui:251
+msgid "About this application"
+msgstr "عن البرنامج"
+
+#: glade/MainWindow.ui:258
+msgid "Navigation arrows"
+msgstr "أسهم التصفح"
+
+#: glade/MainWindow.ui:259 glade/OptionsDialog.ui:591
+msgid "Show or hide the navigation arrows"
+msgstr "إظهار / إخفاء اسهم التصفح"
+
+#: glade/MainWindow.ui:265
+msgid "Statistics"
+msgstr "الأحصائيات"
+
+#: glade/MainWindow.ui:266 glade/OptionsDialog.ui:605
+msgid "Show or hide pigeon statistics"
+msgstr "اظهار / اخفاء احصائيات الحمام"
+
+#: glade/MainWindow.ui:272
+msgid "Toolbar"
+msgstr "شريط الأدوات"
+
+#: glade/MainWindow.ui:273 glade/OptionsDialog.ui:619
+msgid "Show or hide the toolbar"
+msgstr "إظهار أو إخفاء شريط الأدوات"
+
+#: glade/MainWindow.ui:279
+msgid "Statusbar"
+msgstr "شريط الحالة"
+
+#: glade/MainWindow.ui:280 glade/OptionsDialog.ui:633
+msgid "Show or hide the statusbar"
+msgstr "إظهار / إخفاء شريط الحالة"
+
+#: glade/MainWindow.ui:286
+msgid "Export..."
+msgstr "تصدير..."
+
+#: glade/MainWindow.ui:287
+msgid "Export data to other formats"
+msgstr "تصدير البيانات إلى تنسيقات أخرى"
+
+#: glade/MainWindow.ui:294
+msgid "Print a list of pigeons"
+msgstr "طباعة قائمة من الحمام"
+
+#: glade/MainWindow.ui:301
+msgid "Show all pigeons in the list"
+msgstr "عرض كل الطيور فى القائمة"
 
 #: glade/MainWindow.ui:391
 msgid "Total"
 msgstr "الإجمالي"
 
-#: glade/MainWindow.ui:899 glade/DetailsView.ui:1665
+#: glade/MainWindow.ui:899 glade/DetailsView.ui:1573
 #: glade/DistanceCalculator.ui:331
 msgid "To"
 msgstr "الى"
 
-#: glade/MainWindow.ui:951 glade/DetailsView.ui:1606
+#: glade/MainWindow.ui:951 glade/DetailsView.ui:1512
 #: glade/DistanceCalculator.ui:203
 msgid "From"
 msgstr "من"
@@ -1327,11 +1378,11 @@ msgstr "حذف حمامة"
 msgid "The following pigeon will be removed:"
 msgstr "الحمامة التالية سيتم حذفها"
 
-#: glade/MainWindow.ui:1124
+#: glade/MainWindow.ui:1125
 msgid "Keep this pigeon in the pedigree"
 msgstr "حفظ هذه الحمامة فى شجرة النسب"
 
-#: glade/MainWindow.ui:1139
+#: glade/MainWindow.ui:1140
 msgid "Keep results of this pigeon"
 msgstr "حفظ نتائج هذه الحمامة"
 
@@ -1364,77 +1415,63 @@ msgstr "النطاق"
 msgid "Prognosis"
 msgstr "تخمين"
 
-#: glade/ResultsView.ui:111 glade/ResultWindow.ui:420
-#: glade/ResultWindow.ui:962
-msgid "Races"
-msgstr ""
-
-#: glade/ResultsView.ui:184 glade/OptionsDialog.ui:969
-#: glade/ResultWindow.ui:514 glade/ResultWindow.ui:1055
-msgid "Coefficient"
-msgstr "الدرجة"
-
-#: glade/ResultsView.ui:249
-msgid "Results of pigeon"
-msgstr "نتائج الحمام"
-
-#: glade/ResultsView.ui:270
+#: glade/ResultsView.ui:23
 msgid "View all"
 msgstr "مشاهدة الكل"
 
-#: glade/ResultsView.ui:287
+#: glade/ResultsView.ui:39
 msgid "Import"
 msgstr "إستيراد"
 
-#: glade/ResultsView.ui:512 glade/BreedingView.ui:796
-#: glade/MedicationView.ui:711
+#: glade/ResultsView.ui:263 glade/BreedingView.ui:784
+#: glade/MedicationView.ui:707
 msgid "Date*"
 msgstr "التاريخ*"
 
-#: glade/ResultsView.ui:524
+#: glade/ResultsView.ui:275
 msgid "Racepoint*"
 msgstr "نقة السباق*"
 
-#: glade/BreedingView.ui:85 glade/BreedingView.ui:285
-#: glade/BreedingView.ui:1051 glade/BreedingView.ui:1221
+#: glade/BreedingView.ui:85 glade/BreedingView.ui:282
+#: glade/BreedingView.ui:1007 glade/BreedingView.ui:1175
 msgid "Laid"
 msgstr "وضع البيض"
 
-#: glade/BreedingView.ui:113 glade/BreedingView.ui:313
-#: glade/BreedingView.ui:1081 glade/BreedingView.ui:1251
+#: glade/BreedingView.ui:113 glade/BreedingView.ui:310
+#: glade/BreedingView.ui:1037 glade/BreedingView.ui:1205
 msgid "Hatched"
 msgstr "الفقس"
 
-#: glade/BreedingView.ui:158 glade/BreedingView.ui:358
-#: glade/BreedingView.ui:1094 glade/BreedingView.ui:1264
+#: glade/BreedingView.ui:158 glade/BreedingView.ui:355
+#: glade/BreedingView.ui:1050 glade/BreedingView.ui:1218
 msgid "Successful"
 msgstr "ناجح"
 
-#: glade/BreedingView.ui:238 glade/BreedingView.ui:1173
+#: glade/BreedingView.ui:235 glade/BreedingView.ui:1127
 msgid "Egg 1"
 msgstr "البيضة الاولى"
 
-#: glade/BreedingView.ui:438 glade/BreedingView.ui:1343
+#: glade/BreedingView.ui:432 glade/BreedingView.ui:1295
 msgid "Egg 2"
 msgstr "البيضة الثانية"
 
-#: glade/BreedingView.ui:505 glade/BreedingView.ui:902
+#: glade/BreedingView.ui:499 glade/BreedingView.ui:858
 msgid "Series"
 msgstr "المجموعة"
 
-#: glade/BreedingView.ui:546 glade/BreedingView.ui:934
+#: glade/BreedingView.ui:540 glade/BreedingView.ui:890
 msgid "Nestbox"
 msgstr "العش"
 
-#: glade/BreedingView.ui:685
+#: glade/BreedingView.ui:676
 msgid "Breeding data"
 msgstr "بيانات التزويج"
 
-#: glade/BreedingView.ui:858
+#: glade/BreedingView.ui:814
 msgid "Mate*"
 msgstr "الزوج*"
 
-#: glade/BreedingView.ui:1145 glade/BreedingView.ui:1315
+#: glade/BreedingView.ui:1100 glade/BreedingView.ui:1268
 msgid "Add pigeon to list"
 msgstr "اضافة الى القائمة"
 
@@ -1444,184 +1481,188 @@ msgstr "فلترة الحمام"
 
 #: glade/FilterDialog.ui:109 glade/ResultWindow.ui:472
 msgid "Pigeon year"
-msgstr ""
+msgstr "سنة الحمام"
 
-#: glade/OptionsDialog.ui:81
+#: glade/OptionsDialog.ui:95
 msgid "Options"
 msgstr "الخيارات"
 
-#: glade/OptionsDialog.ui:102
+#: glade/OptionsDialog.ui:116
 msgid "Default"
 msgstr "الوضع الإفتراضى"
 
-#: glade/OptionsDialog.ui:228
+#: glade/OptionsDialog.ui:242
 msgid "Check for updates on startup"
 msgstr "التحقق من التحديثات الجديدة عند بدء تشغيل البرنامج"
 
-#: glade/OptionsDialog.ui:241
+#: glade/OptionsDialog.ui:255
 msgid "Update"
 msgstr "تحديث"
 
-#: glade/OptionsDialog.ui:271
+#: glade/OptionsDialog.ui:285
 msgid "Make an automatic backup"
 msgstr "عمل نسخة إحتياطية بطريقة إوتوماتيكية"
 
-#: glade/OptionsDialog.ui:317 glade/LocationChooser.ui:90
+#: glade/OptionsDialog.ui:331 glade/LocationChooser.ui:90
 #: glade/LocationChooser.ui:180 glade/DistanceCalculator.ui:113
 #: glade/DistanceCalculator.ui:241
 msgid "Location"
 msgstr "الموقع"
 
-#: glade/OptionsDialog.ui:331
+#: glade/OptionsDialog.ui:345
 msgid "Interval"
 msgstr "الفاصل الزمني"
 
-#: glade/OptionsDialog.ui:425
+#: glade/OptionsDialog.ui:439
 msgid "Change the language to"
 msgstr "تغيير اللغة"
 
-#: glade/OptionsDialog.ui:440
+#: glade/OptionsDialog.ui:454
 msgid "Language"
 msgstr "اللغة"
 
-#: glade/OptionsDialog.ui:476
+#: glade/OptionsDialog.ui:490
 msgid "Default distance unit"
 msgstr "وحدة المسافة الافتراضية"
 
-#: glade/OptionsDialog.ui:488
+#: glade/OptionsDialog.ui:502
 msgid "Default speed unit"
 msgstr "وحدة السرعة الافتراضية"
 
-#: glade/OptionsDialog.ui:527
+#: glade/OptionsDialog.ui:541
 msgid "Units"
 msgstr "وحدات القياس"
 
-#: glade/OptionsDialog.ui:639
+#: glade/OptionsDialog.ui:653
 msgid "Window"
 msgstr "نافذة"
 
-#: glade/OptionsDialog.ui:669
+#: glade/OptionsDialog.ui:691
+msgid "Results mode"
+msgstr "مود النتائج"
+
+#: glade/OptionsDialog.ui:726
 msgid "Hide deleted pigeons in lists"
 msgstr "إخفاء الحمام المحذوف في القوائم"
 
-#: glade/OptionsDialog.ui:688
+#: glade/OptionsDialog.ui:745
 msgid "Color row of deleted pigeons in lists"
 msgstr "لون الصف للحمام المحذوف في قوائم"
 
-#: glade/OptionsDialog.ui:876
+#: glade/OptionsDialog.ui:933
 msgid "Text"
-msgstr ""
+msgstr "نص"
 
-#: glade/OptionsDialog.ui:890 glade/OptionsDialog.ui:1467
+#: glade/OptionsDialog.ui:947 glade/OptionsDialog.ui:1552
 msgid "Image"
 msgstr "الصورة"
 
-#: glade/OptionsDialog.ui:905
+#: glade/OptionsDialog.ui:962
 msgid "Text and image"
-msgstr ""
+msgstr "نص وصورة"
 
-#: glade/OptionsDialog.ui:934
+#: glade/OptionsDialog.ui:991
 msgid "Main Columns"
 msgstr "الأعمدة الرئيسية"
 
-#: glade/OptionsDialog.ui:1068
+#: glade/OptionsDialog.ui:1153
 msgid "Results Columns"
 msgstr "أعمدة النتائج"
 
-#: glade/OptionsDialog.ui:1124
+#: glade/OptionsDialog.ui:1209
 msgid "Paper format:"
 msgstr "تنسيق الورق:"
 
-#: glade/OptionsDialog.ui:1158
+#: glade/OptionsDialog.ui:1243
 msgid "Paper"
 msgstr "الورقة"
 
-#: glade/OptionsDialog.ui:1199
+#: glade/OptionsDialog.ui:1284
 msgid "Address"
 msgstr "العنوان"
 
-#: glade/OptionsDialog.ui:1212 glade/AddressBook.ui:331
+#: glade/OptionsDialog.ui:1297 glade/AddressBook.ui:331
 msgid "Phone"
 msgstr "التليفون"
 
-#: glade/OptionsDialog.ui:1246
+#: glade/OptionsDialog.ui:1331
 msgid "Personal"
 msgstr "شخصى"
 
-#: glade/OptionsDialog.ui:1306
+#: glade/OptionsDialog.ui:1391
 msgid "Pedigree layout:"
 msgstr "تصميم شجرة النسب:"
 
-#: glade/OptionsDialog.ui:1362
+#: glade/OptionsDialog.ui:1447
 msgid "Show pigeon colour in pedigree"
 msgstr "اظهار لون الحمامة في شهادة النسب"
 
-#: glade/OptionsDialog.ui:1382
+#: glade/OptionsDialog.ui:1467
 msgid "Layout"
 msgstr "التصميم"
 
-#: glade/OptionsDialog.ui:1452 glade/DetailsView.ui:238
-#: glade/DetailsView.ui:770
+#: glade/OptionsDialog.ui:1537 glade/DetailsView.ui:215
+#: glade/DetailsView.ui:605
 msgid "Extra"
 msgstr "معلومات إضافية"
 
-#: glade/OptionsDialog.ui:1486 glade/ResultWindow.ui:460
+#: glade/OptionsDialog.ui:1571 glade/ResultWindow.ui:460
 msgid "Pigeon"
 msgstr "الحمام"
 
-#: glade/OptionsDialog.ui:1539 glade/OptionsDialog.ui:1626
+#: glade/OptionsDialog.ui:1624 glade/OptionsDialog.ui:1711
 msgid "Show the column names"
 msgstr "عرض اسماء الأعمدة"
 
-#: glade/OptionsDialog.ui:1553
+#: glade/OptionsDialog.ui:1638
 msgid "Always show the sex column"
 msgstr "اظهر دائما عمود الجنس"
 
-#: glade/OptionsDialog.ui:1640
+#: glade/OptionsDialog.ui:1725
 msgid "Show the date"
 msgstr "إظهار التاريخ"
 
-#: glade/OptionsDialog.ui:1718
+#: glade/OptionsDialog.ui:1803
 msgid "Custom coefficient multiplier"
 msgstr "ممعامل مضاعف مخصص"
 
-#: glade/OptionsDialog.ui:1765
+#: glade/OptionsDialog.ui:1850
 msgid "Check for development updates"
 msgstr "معامل مضاعف مخصص"
 
 #: glade/ResultWindow.ui:9
-msgid "Save these results"
-msgstr "حفظ هذه النتيجة"
+msgid "Print these results"
+msgstr "طباعة هذه النتائج"
 
-#: glade/ResultWindow.ui:16
-msgid "Email these results"
-msgstr "إرسال هذه النتيجة بالبريد الألكتروني"
-
-#: glade/ResultWindow.ui:24
-msgid "View these results"
-msgstr "مشاهدة هذه النتيجة"
-
-#: glade/ResultWindow.ui:31
+#: glade/ResultWindow.ui:23
 msgid "Filter"
 msgstr "فلترة"
 
+#: glade/ResultWindow.ui:31
+msgid "View these results"
+msgstr "مشاهدة هذه النتيجة"
+
+#: glade/ResultWindow.ui:38
+msgid "Email these results"
+msgstr "إرسال هذه النتيجة بالبريد الألكتروني"
+
 #: glade/ResultWindow.ui:46
-msgid "Print these results"
-msgstr "طباعة هذه النتائج"
+msgid "Save these results"
+msgstr "حفظ هذه النتيجة"
 
 #: glade/ResultWindow.ui:117
 msgid "Filter results"
 msgstr "فلترة النتائج"
 
-#: glade/ResultWindow.ui:792
+#: glade/ResultWindow.ui:794
 msgid "Hide non-classified results"
-msgstr ""
+msgstr "اخفاء النتائج غير المصنفة"
 
-#: glade/ResultWindow.ui:843
+#: glade/ResultWindow.ui:845
 msgid "View all results"
 msgstr "مشاهدة كل النتائج"
 
-#: glade/DetailsView.ui:44
+#: glade/DetailsView.ui:18
 msgid ""
 "Unable to retrieve data. The requested pigeon is probably removed from the "
 "database."
@@ -1629,51 +1670,55 @@ msgstr ""
 "غير قادر على استرجاع البيانات. ربما تم إزالة الحمامة المطلوبة من قاعدة "
 "البيانات."
 
-#: glade/DetailsView.ui:198 glade/DetailsView.ui:561
+#: glade/DetailsView.ui:175 glade/DetailsView.ui:547
 msgid "Dam"
 msgstr "الأم"
 
-#: glade/DetailsView.ui:211 glade/DetailsView.ui:574
+#: glade/DetailsView.ui:188 glade/DetailsView.ui:560
 msgid "Sire"
 msgstr "الأب"
 
-#: glade/DetailsView.ui:1092
+#: glade/DetailsView.ui:1025
 msgid "Pigeon status"
 msgstr "حالة الحمام"
 
-#: glade/DetailsView.ui:1151
+#: glade/DetailsView.ui:1083
 msgid "Choose a status for this pigeon:"
 msgstr "تعيين حالة هذاالطائر :"
 
-#: glade/DetailsView.ui:1194
+#: glade/DetailsView.ui:1119
 msgid "The current status is:"
 msgstr "الوضع الحالي هو :"
 
-#: glade/DetailsView.ui:1264 glade/DetailsView.ui:1377
-#: glade/DetailsView.ui:1498 glade/DetailsView.ui:1619
-#: glade/DetailsView.ui:1738
+#: glade/DetailsView.ui:1195 glade/DetailsView.ui:1295
+#: glade/DetailsView.ui:1410 glade/DetailsView.ui:1525
+#: glade/DetailsView.ui:1638 glade/DetailsView.ui:1773
 msgid "Extra info"
 msgstr "معلومات إضافية"
 
-#: glade/DetailsView.ui:1332
+#: glade/DetailsView.ui:1252
 msgid "No extra information available."
 msgstr "لا توجد معلومات إضافية متاحة"
 
-#: glade/DetailsView.ui:1408
+#: glade/DetailsView.ui:1326
 msgid "Buyer"
 msgstr "المشتري"
 
-#: glade/DetailsView.ui:1725
+#: glade/DetailsView.ui:1625
 msgid "Loaned"
 msgstr "تم اعارتة"
 
-#: glade/DetailsView.ui:1771
+#: glade/DetailsView.ui:1671
 msgid "Person"
 msgstr "شخص"
 
-#: glade/DetailsView.ui:1818
+#: glade/DetailsView.ui:1720
 msgid "Back"
 msgstr "إلى الخلف"
+
+#: glade/DetailsView.ui:1786
+msgid "Partner"
+msgstr "شريك"
 
 #: glade/Dialogs.ui:114
 msgid "Send to:"
@@ -1747,67 +1792,51 @@ msgstr "الكل"
 msgid "Result"
 msgstr "النتيجة"
 
-#: glade/MedicationView.ui:171 glade/MedicationView.ui:737
+#: glade/MedicationView.ui:171 glade/MedicationView.ui:733
 msgid "Done by"
 msgstr "تم بواسطة"
 
-#: glade/MedicationView.ui:326 glade/MedicationView.ui:765
+#: glade/MedicationView.ui:326 glade/MedicationView.ui:761
 msgid "Dosage"
 msgstr "الجرعة"
 
-#: glade/MedicationView.ui:363 glade/MedicationView.ui:794
+#: glade/MedicationView.ui:362 glade/MedicationView.ui:790
 msgid "Vaccination"
 msgstr "اللقاح"
 
-#: glade/ResultParser.ui:29
+#: glade/ResultParser.ui:39
 msgid "Import results"
 msgstr "إستيراد نتائج"
 
-#: glade/ResultParser.ui:60
+#: glade/ResultParser.ui:73
 msgid "File:"
 msgstr "ملف:"
 
-#: glade/ResultParser.ui:72
+#: glade/ResultParser.ui:85
 msgid "Parser:"
 msgstr "المحلل :"
 
-#: glade/ResultParser.ui:108
+#: glade/ResultParser.ui:121
 msgid "Parse"
 msgstr "تحليل"
 
-#: glade/ResultParser.ui:157
-msgid "Date:"
-msgstr "التاريخ:"
+#: glade/ResultParser.ui:428
+msgid "Edit race details"
+msgstr ""
 
-#: glade/ResultParser.ui:169
-msgid "Racepoint:"
-msgstr "نقطة السباق:"
-
-#: glade/ResultParser.ui:183
-msgid "Sector:"
-msgstr "القطاع:"
-
-#: glade/ResultParser.ui:197
-msgid "Category:"
-msgstr "التصنيف:"
-
-#: glade/ResultParser.ui:211
-msgid "Pigeons:"
-msgstr "الطيور:"
-
-#: glade/ResultParser.ui:342
+#: glade/ResultParser.ui:461
 msgid "No results were found for your pigeons"
 msgstr "لم يتم العثور على نتائج للحمام الخاص بك :"
 
-#: glade/ResultParser.ui:417
+#: glade/ResultParser.ui:534
 msgid "Place"
 msgstr "المركز"
 
-#: glade/ResultParser.ui:536
+#: glade/ResultParser.ui:645
 msgid "Parser error"
 msgstr "خطأ المحلل"
 
-#: glade/ResultParser.ui:598
+#: glade/ResultParser.ui:705
 msgid ""
 "The file you selected could not be parsed correctly. Try selecting another "
 "parser that matches your file and try again. Or send the developers some "
@@ -1919,4 +1948,539 @@ msgstr "التفاصيل المتبادلة"
 
 #: data/TranslationWorkaround.ui:8
 msgid "Middle"
-msgstr ""
+msgstr "الاوسط"
+
+#: data/TranslationWorkaround.ui:9
+msgid "Classic"
+msgstr "كلاسيك"
+
+#: data/TranslationWorkaround.ui:10
+msgid "Splitted"
+msgstr "مقسم"
+
+#~ msgid ""
+#~ "Pigeon Planner is free software. You don’t need to pay for using it. But if "
+#~ "you like it, please consider donating to help improving it."
+#~ msgstr ""
+#~ "برنامج إدارة الحمام هو برنامج مجانى. ولا تحتاج للدفع مقابل استخدامة.ولكن لو "
+#~ "اعجبك البرنامج وترغب فى التبرع للمساعدة فى تطويره اكثر يمكنك ذلك."
+
+#~ msgid "All fields have to be entered."
+#~ msgstr "لابد من إدخال جميع الحقول."
+
+#~ msgid "Remove result"
+#~ msgstr "حذف نتيجة"
+
+#~ msgid ""
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
+#~ msgstr ""
+#~ "انقر \"موافق \" لإغلاق البرنامج. سيتم إنشاء قاعدة بيانات جديدة عند تشغيل "
+#~ "البرنامج مرة أخرى."
+
+#~ msgid "Optimization has been completed."
+#~ msgstr "عملية التحسين تمت."
+
+#~ msgid ""
+#~ "This will set back all the settings to the default values.\n"
+#~ "Are you sure?"
+#~ msgstr "الإعدادات الافتراضية"
+
+#~ msgid ""
+#~ "A new version is available. Please go to the Pigeon Planner website by "
+#~ "clicking the link below and download the latest version"
+#~ msgstr ""
+#~ "نسخة جديدة متوفرة. يرجى الدخول إلى موقع البرنامج من خلال النقر على الرابط "
+#~ "أدناه وتنزيل أحدث إصدار"
+
+#~ msgid "#Pigeon Planner configuration file"
+#~ msgstr "#عارض ملف السجل"
+
+#~ msgid "Year race"
+#~ msgstr "سنة السباق"
+
+#~ msgid "Year pigeons"
+#~ msgstr "سنة الحمام"
+
+#~ msgid "Select a directory"
+#~ msgstr "إختر مجلد"
+
+#~ msgid "Select a valid backup file"
+#~ msgstr "إختر ملف نسخة إحتياطية صحيح"
+
+#~ msgid "View image: "
+#~ msgstr "معاينة الصوره: "
+
+#~ msgid "Click to close this window"
+#~ msgstr "إضغط لإغلاق هذه النافذة"
+
+#~ msgid "Tools"
+#~ msgstr "الأدوات"
+
+#~ msgid "Datasets"
+#~ msgstr "مجموعات البيانات"
+
+#~ msgid "Addresses"
+#~ msgstr "العناوين"
+
+#~ msgid "Database"
+#~ msgstr "قاعدة البيانات"
+
+#~ msgid "Number of cocks"
+#~ msgstr "عدد الذكور"
+
+#~ msgid "Number of hens"
+#~ msgstr "عدد الاناث"
+
+#~ msgid "Number of young birds"
+#~ msgstr "عدد الطيور اليافعه"
+
+#~ msgid "cock"
+#~ msgstr "ذكر"
+
+#~ msgid "hen"
+#~ msgstr "انثى"
+
+#~ msgid "young bird"
+#~ msgstr "يافع"
+
+#~ msgid "Enter the bandnumber of the pigeon"
+#~ msgstr "أدخل رقم دبلة الحمامة"
+
+#~ msgid "Enter the year of the pigeon"
+#~ msgstr "أدخل سنة ميلاد الحمامة"
+
+#~ msgid "Enter a name for the pigeon"
+#~ msgstr "أدخل اسماً للحمامة"
+
+#~ msgid "Click here to add an image"
+#~ msgstr "انقر هنا لإضافة صورة"
+
+#~ msgid "Search through the list of cocks"
+#~ msgstr "البحث خلال قائمة الذكور"
+
+#~ msgid "Search through the list of hens"
+#~ msgstr "البحث خلال قائمة الإناث"
+
+#~ msgid "<b>Edit this result</b>"
+#~ msgstr "<b>تعديل هذه النتيجة</b>"
+
+#~ msgid "<b>Add a new result</b>"
+#~ msgstr "<b>إضافة نتيجة جديدة</b>"
+
+#~ msgid "Add ran_ge"
+#~ msgstr "_إضافة مجموعة"
+
+#~ msgid "_Photo Album"
+#~ msgstr "_ألبوم الصور"
+
+#~ msgid "_Find..."
+#~ msgstr "_بحث ..."
+
+#~ msgid "Search through the list of pigeons"
+#~ msgstr "البحث فى قائمة الحمام"
+
+#~ msgid "Various tools"
+#~ msgstr "أدوات متنوعة"
+
+#~ msgid "_Website"
+#~ msgstr "_الموقع الالكترونى"
+
+#~ msgid "<b>Details of pigeon</b>"
+#~ msgstr "<b>تفاصيل عن الحمامة</b>"
+
+#~ msgid "<b>Results of pigeon</b>"
+#~ msgstr "<b>نتائج الحمام</b>"
+
+#~ msgid "Add result"
+#~ msgstr "إضافة نتيجة"
+
+#~ msgid "Band numbers"
+#~ msgstr "رقم الدبلة"
+
+#~ msgid "Choose an image..."
+#~ msgstr "إختار صورة ..."
+
+#~ msgid "Edit result"
+#~ msgstr "تعديل النتيجة"
+
+#~ msgid "Go to pigeon"
+#~ msgstr "إيجاد حمامة"
+
+#~ msgid "Names"
+#~ msgstr "الأسماء"
+
+#~ msgid "Search for:"
+#~ msgstr "البحث عن:"
+
+#~ msgid "Search in:"
+#~ msgstr "البحث فى:"
+
+#~ msgid "View detail"
+#~ msgstr "مشاهدة التفاصيل"
+
+#~ msgid "<b>Backup</b>"
+#~ msgstr "<b>عمل نسخة إحتياطية</b>"
+
+#~ msgid "<b>Columns</b>"
+#~ msgstr "<b>الأعمدة</b>"
+
+#~ msgid "<b>Language</b>"
+#~ msgstr "<b>اللغة</b>"
+
+#~ msgid "<b>Other</b>"
+#~ msgstr "<b>أخرى</b>"
+
+#~ msgid "<b>Theme</b>"
+#~ msgstr "<b>الشكل</b>"
+
+#~ msgid "<b>Update</b>"
+#~ msgstr "<b>تحديث</b>"
+
+#~ msgid "Change the theme"
+#~ msgstr "تغيير الشكل"
+
+#~ msgid "Insert a pigeon"
+#~ msgstr "إدخال حمامة"
+
+#~ msgid "<b>Sort options</b>"
+#~ msgstr "<b>خيارات الترتيب</b>"
+
+#~ msgid "Results:"
+#~ msgstr "النتائج:"
+
+#~ msgid "<b><i><big>Backup</big></i></b>"
+#~ msgstr "<b><i><big>عمل نسخة إحتياطية</big></i></b>"
+
+#~ msgid "<b><i><big>Manage data</big></i></b>"
+#~ msgstr "<b><i><big>إدارة البيانات</big></i></b>"
+
+#~ msgid "<b><i><big>Update</big></i></b>"
+#~ msgstr "<b><i><big>تحديث</big></i></b>"
+
+#~ msgid "<b><i><big>Velocity calculator</big></i></b>"
+#~ msgstr "<b><i><big>حاسبة السرعة</big></i></b>"
+
+#~ msgid "<b>Create backup</b>"
+#~ msgstr "<b>إنشاء نسخة إحتياطية</b>"
+
+#~ msgid "<b>Optimize database</b>"
+#~ msgstr "<b>تحسين قاعدة البيانات</b>"
+
+#~ msgid "<b>Remove database</b>"
+#~ msgstr "<b>حذف قاعدة البيانات</b>"
+
+#~ msgid "<b>Remove items</b>"
+#~ msgstr "<b>حذف بنود</b>"
+
+#~ msgid "<b>Restore backup</b>"
+#~ msgstr "<b>إستعادة النسخة الإحتياطية</b>"
+
+#~ msgid "<b>Warning!</b>"
+#~ msgstr "<b>تحذير !</b>"
+
+#~ msgid "<i>Click the button below</i>"
+#~ msgstr "<i>إضغط على الزر بالاسفل</i>"
+
+#~ msgid "Add and remove items from your datasets"
+#~ msgstr "إضافة وحذف بنود من مجموعة بياناتك"
+
+#~ msgid "Calculate velocity"
+#~ msgstr "حساب السرعة"
+
+#~ msgid "Check now!"
+#~ msgstr "تحقق الان !"
+
+#~ msgid ""
+#~ "Create and restore backups from\n"
+#~ "your pigeons and results."
+#~ msgstr "إنشاء وإستعادة نسخة إحتياطية من بيانات حمامك ونتائجك"
+
+#~ msgid "Distance (km)"
+#~ msgstr "المسافة (كم)"
+
+#~ msgid "Downloadpage"
+#~ msgstr "صفحة التحميل"
+
+#~ msgid "From - To (meter/min)"
+#~ msgstr "من -  إلى (متر/دقيقة)"
+
+#~ msgid "Here you can check if there is a program update available."
+#~ msgstr "هنا يمكنك التحقق من وجود تحديثات للبرنامج."
+
+#~ msgid "Here you can see some statistics of your database"
+#~ msgstr "هنا يمكنك مشاهدة  بعض الإحصاءات من قاعدة بياناتك"
+
+#~ msgid "If you remove the database, all your data will be lost."
+#~ msgstr "إذا قمت بحذف قاعدة البيانات ، ستفقد جميع بياناتك."
+
+#~ msgid "Optimize"
+#~ msgstr "تحسين"
+
+#~ msgid ""
+#~ "Optimize your database.\n"
+#~ "(Please wait, this can take some time)"
+#~ msgstr ""
+#~ "تحسين قاعدة البيانات الخاصة بك. \n"
+#~ "(يرجى الانتظار ، وهذا قد يستغرق بعض الوقت)"
+
+#~ msgid "Phone / E-mail"
+#~ msgstr "التليفون/البريد الإلكترونى"
+
+#~ msgid "Released (hh : mm)"
+#~ msgstr "وقت الإطلاق (ساعة : دقيقة)"
+
+#~ msgid "Search database"
+#~ msgstr "البحث فى قاعدة البيانات"
+
+#, python-format
+#~ msgid "Removing '%(item)s' from '%(dataset)s'."
+#~ msgstr "حذف '%(item)s' من '%(dataset)s'."
+
+#~ msgid "Click here to set the status of the pigeon"
+#~ msgstr "انقر هنا لضبط الحالة للحمام"
+
+#~ msgid "<b>Layout</b>"
+#~ msgstr "<b>التصميم</b>"
+
+#~ msgid "<b>Paper</b>"
+#~ msgstr "<b>الورقة</b>"
+
+#~ msgid "<b>Personal</b>"
+#~ msgstr "<b>البيانات الشخصية</b>"
+
+#~ msgid "<b>Pigeon</b>"
+#~ msgstr "<b>بيانات الحمامة</b>"
+
+#~ msgid "Error loading this image. Probably you have moved it on your disk."
+#~ msgstr "خطأ في تحميل هذه الصورة. ربما كنت قد نقلتها من مكانها على القرص."
+
+#, python-format
+#~ msgid ""
+#~ "The ringnumber and year of the %s are necessary.\n"
+#~ "\n"
+#~ "Check if these are entered."
+#~ msgstr ""
+#~ "رقم الدبلة والسنة لـ %s ضروري.\n"
+#~ "\n"
+#~ "تحقق من ادخال هذه البيانات."
+
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the ringnumber or year of the %s.\n"
+#~ "\n"
+#~ "Only numbers are accepted."
+#~ msgstr ""
+#~ "مدخلات غير صحيحة لرقم الدبلة والسنة لـ %s.\n"
+#~ "\n"
+#~ "هذا الحقل يقبل ارقام فقط."
+
+#, python-format
+#~ msgid ""
+#~ "Incorrect input of the ringnumber or year of the %s.\n"
+#~ "\n"
+#~ "Check the length."
+#~ msgstr ""
+#~ "مدخلات غير صحيحة لرقم الدبلة والسنة لـ %s.\n"
+#~ "\n"
+#~ "تحقق من الطول."
+
+#~ msgid ""
+#~ "You have not entered your personal information.\n"
+#~ "This will be shown on top of the printed pedigree.\n"
+#~ "Do you want to add it now?"
+#~ msgstr ""
+#~ "لم تقم بإدخال بياناتك الشخصية.\n"
+#~ "هذه البيانات ستظهر فى اعلى الشهاداة عن طباعتها.\n"
+#~ "هل تريد اضافتها الان؟"
+
+#, python-format
+#~ msgid ""
+#~ "Removing item '%(item)s' from '%(dataset)s'.\n"
+#~ "\n"
+#~ "Are you sure?"
+#~ msgstr ""
+#~ "حذف البند '%(item)s' من '%(dataset)s'.\n"
+#~ "\n"
+#~ "هل انت متاكد؟"
+
+#~ msgid "sire"
+#~ msgstr "الأب"
+
+#~ msgid "dam"
+#~ msgstr "الأم"
+
+#~ msgid "pigeon"
+#~ msgstr "حمامة"
+
+#~ msgid "Date: "
+#~ msgstr "التاريخ: "
+
+#~ msgid "Released: "
+#~ msgstr "الإطلاق "
+
+#~ msgid "Distance: "
+#~ msgstr "المسافة: "
+
+#~ msgid "PP Backups"
+#~ msgstr "عمل نسخة احتياطية للبرنامج"
+
+#~ msgid "pigeons"
+#~ msgstr "الحمام"
+
+#, python-format
+#~ msgid ""
+#~ "Warning: The '%(option)s' option is not set in the '%(section)s' section of "
+#~ "the configuration file, using the default '%(default)s'."
+#~ msgstr ""
+#~ "تحذير : الخيار '%(option)s' لم يتم تحديدة فى القسم '%(section)s' فى ملف "
+#~ "الاعدادات, استخدم الافتراضى '%(default)s'."
+
+#, python-format
+#~ msgid ""
+#~ "Warning: There is no section '%(section)s' in the configuration file; an "
+#~ "error occured parsing its option '%(option)s', using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "تحذير: لا يوجد قسم  '%(section)s'  فى ملف الاعدادات; حدث خطأ عند تحليل "
+#~ "الخيار '%(option)s', استخدم الافتراضى '%(default)s'."
+
+#, python-format
+#~ msgid ""
+#~ "Error: There went something wrong parsing the '%(option)s' option in the "
+#~ "'%(section)s' section of the configuration file, using the default "
+#~ "'%(default)s'."
+#~ msgstr ""
+#~ "خطأ: حدث شىء ما خطأ اثناء تحليل خيار '%(option)s'  فى قسم '%(section)s'  فى "
+#~ "ملف الاعدادات, استخدم الافتراضى  '%(default)s'."
+
+#~ msgid "Add a series of pigeons"
+#~ msgstr "إضافة مجموعة من الحمام"
+
+#~ msgid "Add a single pigeon"
+#~ msgstr "إضافة حمامة واحدة"
+
+#~ msgid "All birds"
+#~ msgstr "كل الطيور"
+
+#~ msgid "Enter a name for this pigeon..."
+#~ msgstr "أدخل اسما لهذا الطائر..."
+
+#~ msgid "At position:"
+#~ msgstr "في الموقف :"
+
+#~ msgid "City"
+#~ msgstr "المدينة"
+
+#~ msgid ""
+#~ "Enter some information about yourself.\n"
+#~ "This will be shown on a printed pedigree."
+#~ msgstr ""
+#~ "إدخل بعض البيانات عن نفسك.\n"
+#~ "هذه البيانات ستظهر فى شهادة النسب عند الطباعة."
+
+#~ msgid "First & last name"
+#~ msgstr "الاسم الاول والاخير"
+
+#~ msgid "Show an extra column"
+#~ msgstr "اظهار عمود إضافي"
+
+#~ msgid "Show navigation arrows"
+#~ msgstr "إظهار اسهم التنقل"
+
+#~ msgid "Street & number"
+#~ msgstr "الشارع والرقم"
+
+#~ msgid "Telephone number"
+#~ msgstr "رقم التليفون"
+
+#~ msgid "Value of column:"
+#~ msgstr "قيمة العمود :"
+
+#~ msgid "Zipcode"
+#~ msgstr "الرقم البريدي"
+
+#~ msgid "Remove items from your datasets"
+#~ msgstr "إزالة عناصر من مجموعات البيانات الخاصة بك"
+
+#~ msgid "Een map selecteren"
+#~ msgstr "اختيار مجلد"
+
+#~ msgid "Only show:"
+#~ msgstr "إعرض فقط :"
+
+#~ msgid "Year of race"
+#~ msgstr "سنة السباق"
+
+#~ msgid "Year of pigeon"
+#~ msgstr "سنة الحمامة"
+
+#~ msgid "No notification set"
+#~ msgstr "لم يتم تعيين تنبيهات"
+
+#, python-format
+#~ msgid "Notification is set on %s days in advance"
+#~ msgstr "التنبيهات تم تعيينها فى %s يوم مقدماً"
+
+#~ msgid "Calendar"
+#~ msgstr "الأجندة"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been removed"
+#~ msgstr "تم حذف الحمامة %s/%s"
+
+#~ msgid "Result has been removed"
+#~ msgstr "تم حذف النتيجة"
+
+#~ msgid "Result has been added"
+#~ msgstr "تم إضافة نتيجة"
+
+#, python-format
+#~ msgid "Pigeon %s/%s has been added"
+#~ msgstr "الحمامة %s/%s تم إضافتها"
+
+#~ msgid "Page"
+#~ msgstr "الصفحة"
+
+#~ msgid "<b>Your name:</b>"
+#~ msgstr "<b>اسمك :</b>"
+
+#~ msgid "<b>Your e-mailaddress:</b>"
+#~ msgstr "<b>بريدك الالكتروني :</b>"
+
+#~ msgid "<b>Subject:</b>"
+#~ msgstr "<b>الموضوع :</b>"
+
+#~ msgid "<b>Send to:</b>"
+#~ msgstr "<b>ارسل الى :</b>"
+
+#~ msgid "<b>Attached file:</b>"
+#~ msgstr "<b>إرفاق ملف :</b>"
+
+#~ msgid "<b>Message:</b>"
+#~ msgstr "<b>رسالة :</b>"
+
+#~ msgid "<b>General</b>"
+#~ msgstr "<b>عام</b>"
+
+#~ msgid "Number of days in advance:"
+#~ msgstr "عدد الأيام سلفاً"
+
+#~ msgid "NOTE: You will only be notified when the program starts!"
+#~ msgstr "ملاحظة : سوف يتم إعلامك فقط عند بدء تشغيل البرنامج!"
+
+#~ msgid "Notify me!"
+#~ msgstr "نبهنى!"
+
+#~ msgid "Email this pedigree"
+#~ msgstr "ارسال شجرة النسب بالبريد الألكترونى"
+
+#~ msgid ""
+#~ "The backup was successfully restored.\n"
+#~ "Restart the program."
+#~ msgstr ""
+#~ "تم إستعادة النسخة الإحتياطية بنجاح.\n"
+#~ "اعد تشغيل البرنامج."
+
+#~ msgid "<b>Add items</b>"
+#~ msgstr "<b>إضافة بنود</b>"
