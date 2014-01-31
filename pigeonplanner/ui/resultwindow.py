@@ -30,7 +30,7 @@ from pigeonplanner import messages
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
-from pigeonplanner.ui.filechooser import PdfSaver
+from pigeonplanner.ui.filechooser import PdfSaver, ExportChooser
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import common
 from pigeonplanner.core import config
@@ -258,7 +258,7 @@ class ClassicView(BaseView):
         # Not used in this view
         pass
 
-    def get_report_data(self):
+    def get_report_data(self, flatten=False):
         data = []
         for row in self.sortmodel:
             temp = {}
@@ -266,7 +266,8 @@ class ClassicView(BaseView):
                         self.LS_COL_RACEPOINT, self.LS_COL_PLACED, self.LS_COL_OUT,
                         self.LS_COL_COEF, self.LS_COL_SPEED, self.LS_COL_SECTOR,
                         self.LS_COL_TYPE, self.LS_COL_CATEGORY, self.LS_COL_WIND,
-                        self.LS_COL_WINDSPEED, self.LS_COL_WEATHER, self.LS_COL_COMMENT):
+                        self.LS_COL_WINDSPEED, self.LS_COL_WEATHER, self.LS_COL_COMMENT,
+                        self.LS_COL_PLACEDINT, self.LS_COL_COEFFLOAT, self.LS_COL_SPEEDFLOAT):
                 name = self.column2name[col]
                 temp[name] = self.sortmodel.get_value(row.iter, col)
             temp["ring"] = "%s / %s" % (temp["band"], temp["year"][2:])
@@ -467,8 +468,9 @@ class SplittedView(BaseView):
                     filtered.append(result)
             self.results_cache[race_key]["filtered"] = filtered
 
-    def get_report_data(self):
-        # data = [{"race": {}, "results": [{}, {}]}]
+    def get_report_data(self, flatten=False):
+        # data = [{"race": {}, "results": [{}]}]
+        # data_flat = [{}]
         data = []
         for row in self.race_sort:
             temp = {"race": {}, "results": []}
@@ -481,6 +483,16 @@ class SplittedView(BaseView):
             race_key = self.race_sort.get_value(row.iter, self.LS_COL_KEY)
             temp["results"] = self.results_cache[race_key]["filtered"][:]
             data.append(temp)
+
+        if flatten:
+            tempdata = []
+            for item in data:
+                for result in item["results"]:
+                    temp = result.copy()
+                    temp.update(item["race"])
+                    tempdata.append(temp)
+            data = tempdata
+
         return data
 
     def on_race_sel_changed(self, selection):
@@ -514,6 +526,7 @@ class ResultWindow(builder.GtkBuilder):
     ui = """
 <ui>
    <toolbar name="Toolbar">
+      <toolitem action="Export"/>
       <toolitem action="Save"/>
       <toolitem action="Mail"/>
       <separator/>
@@ -529,7 +542,9 @@ class ResultWindow(builder.GtkBuilder):
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "ResultWindow.ui")
 
-        self.pdfname = "%s_%s.pdf" % (_("Results"), datetime.date.today())
+        filename = "%s_%s" % (_("Results"), datetime.date.today())
+        self.pdfname = filename + ".pdf"
+        self.csvname = filename + ".csv"
         self._filter_races = utils.TreeviewFilter()
         self._filter_results = utils.TreeviewFilter()
 
@@ -657,6 +672,21 @@ class ResultWindow(builder.GtkBuilder):
         ##results = os.path.join(const.TEMPDIR, self.pdfname)
         ##maildialog.MailDialog(self.resultwindow, results)
         pass
+
+    def on_export_clicked(self, widget):
+        chooser = ExportChooser(self.widgets.resultwindow, self.csvname, ("CSV", "*.csv"))
+        response = chooser.run()
+        if response == gtk.RESPONSE_OK:
+            save_path = chooser.get_filename()
+            data = self.widgets.resultview.get_report_data(flatten=True)
+            columns = ["band", "year", "date", "point", "place", "out", "coef", "speed",
+                       "sector", "type", "category", "wind", "windspeed", "weather", "comment"]
+            with open(save_path, "wb") as output:
+                writer = common.UnicodeWriter(output, fieldnames=columns,
+                                              extrasaction="ignore")
+                for row in data:
+                    writer.writerow(row)
+        chooser.destroy()
 
     def on_save_clicked(self, widget):
         chooser = PdfSaver(self.widgets.resultwindow, self.pdfname)
