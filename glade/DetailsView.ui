@@ -540,6 +540,9 @@
                     <property name="column_spacing">4</property>
                     <property name="row_spacing">2</property>
                     <child>
+                      <placeholder/>
+                    </child>
+                    <child>
                       <object class="GtkLabel" id="label47">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -967,9 +970,6 @@
                         <property name="x_options"/>
                         <property name="y_options"/>
                       </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
                     </child>
                     <child>
                       <object class="BandEntry" id="entrysireedit">
@@ -1817,6 +1817,7 @@
                         <property name="can_focus">False</property>
                         <property name="can_empty">True</property>
                         <property name="editable">True</property>
+                        <signal name="search-clicked" handler="on_entrypartnerwidow_search_clicked" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

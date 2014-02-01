@@ -232,6 +232,9 @@ class DetailsView(builder.GtkBuilder, gobject.GObject, component.Component):
     def on_entrydamedit_search_clicked(self, widget):
         return self._get_pigeonsearch_details(enums.Sex.hen)
 
+    def on_entrypartnerwidow_search_clicked(self, widget):
+        return None, enums.Sex.cock, None
+
     # Public methods
     def get_root_widget(self):
         return self.widgets.root
@@ -482,6 +485,8 @@ class DetailsView(builder.GtkBuilder, gobject.GObject, component.Component):
         def set_editable(widget, value):
             if isinstance(widget, gtk.ScrolledWindow):
                 set_editable(widget.get_child(), value)
+            if isinstance(widget, bandentry.BandEntry):
+                widget.set_has_search(value)
             try:
                 widget.set_editable(value)
             except:
