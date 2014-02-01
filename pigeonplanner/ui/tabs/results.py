@@ -48,6 +48,28 @@ class BaseView(object):
         self._root = root
         self.pigeon = None
 
+        self.colname2string = {
+            "date": _("Date"),
+            "point": _("Racepoint"),
+            "type": _("Type"),
+            "wind": _("Wind"),
+            "windspeed": _("Windspeed"),
+            "weather": _("Weather"),
+            "temperature": _("Temperature"),
+            "band": _("Band no."),
+            "year": _("Year"),
+            "placestr": _("Placed"),
+            "place": _("Placed"),
+            "out": _("Out of"),
+            "coefstr": _("Coefficient"),
+            "coef": _("Coefficient"),
+            "speedstr": _("Speed"),
+            "speed": _("Speed"),
+            "sector": _("Sector"),
+            "category": _("Category"),
+            "comment": _("Comment"),
+        }
+
         self.build_ui()
 
     def _build_parent_frame(self, label, child):
@@ -152,16 +174,17 @@ class ClassicView(BaseView):
         self.treeview.set_rules_hint(True)
         self.treeview.set_enable_search(False)
         self.selection = self.treeview.get_selection()
-        colnames = [(_("Date"), None), (_("Racepoint"), None),
-                    (_("Placed"), self.LS_COL_PLACEDINT), (_("Out of"), None),
-                    (_("Coefficient"), self.LS_COL_COEFFLOAT),
-                    (_("Speed"), self.LS_COL_SPEEDFLOAT), (_("Sector"), None),
-                    (_("Type"), None), (_("Category"), None),
-                    (_("Wind"), None), (_("Windspeed"), None),
-                    (_("Weather"), None), (_("Temperature"), None), (_("Comment"), None)]
+        colnames = [("date", None), ("point", None),
+                    ("place", self.LS_COL_PLACEDINT), ("out", None),
+                    ("coef", self.LS_COL_COEFFLOAT),
+                    ("speed", self.LS_COL_SPEEDFLOAT), ("sector", None),
+                    ("type", None), ("category", None),
+                    ("wind", None), ("windspeed", None),
+                    ("weather", None), ("temperature", None), ("comment", None)]
         for index, (colname, sortid) in enumerate(colnames):
             textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(colname, textrenderer, text=index+1)
+            tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
+                                          textrenderer, text=index+1)
             tvcolumn.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(sortid or index+1)
@@ -327,11 +350,12 @@ class SplittedView(BaseView):
         self.race_tv.set_enable_search(False)
         self.race_sel = self.race_tv.get_selection()
         self.race_sel.connect("changed", self.on_race_sel_changed)
-        colnames = [_("Date"), _("Racepoint"), _("Type"), _("Wind"), _("Windspeed"),
-                    _("Weather"), _("Temperature")]
+        colnames = ["date", "point", "type", "wind", 
+                    "windspeed", "weather", "temperature"]
         for index, colname in enumerate(colnames):
             textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(colname, textrenderer, text=index)
+            tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
+                                          textrenderer, text=index)
             tvcolumn.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(index)
@@ -346,13 +370,14 @@ class SplittedView(BaseView):
         self.treeview.set_rules_hint(True)
         self.treeview.set_enable_search(False)
         self.selection = self.treeview.get_selection()
-        colnames = [(_("Placed"), self.LS_COL_PLACEDINT), (_("Out of"), None),
-                    (_("Coefficient"), self.LS_COL_COEFFLOAT),
-                    (_("Speed"), self.LS_COL_SPEEDFLOAT), (_("Sector"), None),
-                    (_("Category"), None), (_("Comment"), None)]
+        colnames = [("place", self.LS_COL_PLACEDINT), ("out", None),
+                    ("coef", self.LS_COL_COEFFLOAT),
+                    ("speed", self.LS_COL_SPEEDFLOAT), ("sector", None),
+                    ("category", None), ("comment", None)]
         for index, (colname, sortid) in enumerate(colnames):
             textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(colname, textrenderer, text=index+1)
+            tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
+                                          textrenderer, text=index+1)
             tvcolumn.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(sortid or index+1)
