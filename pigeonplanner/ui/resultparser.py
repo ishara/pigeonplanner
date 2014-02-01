@@ -128,6 +128,7 @@ class ResultParser(builder.GtkBuilder):
         wind = self.widgets.windentry.get_text()
         windspeed = self.widgets.windspeedentry.get_text()
         weather = self.widgets.weatherentry.get_text()
+        temperature = self.widgets.temperatureentry.get_text()
         
         for row in self.widgets.liststore:
             toggle, pindex, ring, year, place, speed = row
@@ -136,7 +137,7 @@ class ResultParser(builder.GtkBuilder):
             data = {"pindex": pindex, "date": date, "point": point, "place": place,
                     "out": out, "sector": sector, "type": ftype, "category": category,
                     "wind": wind, "weather": weather, "comment": "",
-                    "speed": speedfloat, "windspeed": windspeed}
+                    "speed": speedfloat, "windspeed": windspeed, "temperature": temperature}
             if database.result_exists(data):
                 logger.info("Pigeon %s already has the selected result" % pindex)
             else:

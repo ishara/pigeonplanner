@@ -138,6 +138,7 @@ default_config = [
                 ("columns.result-category", True),
                 ("columns.result-type", True),
                 ("columns.result-weather", True),
+                ("columns.result-temperature", True),
                 ("columns.result-wind", True),
                 ("columns.result-windspeed", True),
                 ("columns.result-comment", True),

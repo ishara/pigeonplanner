@@ -83,6 +83,7 @@ class BaseView(object):
             self.LS_COL_WIND: "wind",
             self.LS_COL_WINDSPEED: "windspeed",
             self.LS_COL_WEATHER: "weather",
+            self.LS_COL_TEMPERATURE: "temperature",
             self.LS_COL_BAND: "band",
             self.LS_COL_YEAR: "year",
             self.LS_COL_PLACED: "placestr",
@@ -143,10 +144,11 @@ class ClassicView(BaseView):
      LS_COL_WIND,
      LS_COL_WINDSPEED,
      LS_COL_WEATHER,
+     LS_COL_TEMPERATURE,
      LS_COL_COMMENT,
      LS_COL_PLACEDINT,
      LS_COL_COEFFLOAT,
-     LS_COL_SPEEDFLOAT) = range(19)
+     LS_COL_SPEEDFLOAT) = range(20)
 
     (COL_BAND,
      COL_YEAR,
@@ -162,7 +164,8 @@ class ClassicView(BaseView):
      COL_WIND,
      COL_WINDSPEED,
      COL_WEATHER,
-     COL_COMMENT) = range(15)
+     COL_TEMPERATURE,
+     COL_COMMENT) = range(16)
 
     def __init__(self, root):
         BaseView.__init__(self, root)
@@ -173,7 +176,7 @@ class ClassicView(BaseView):
 
     def build_ui(self):
         self.liststore = gtk.ListStore(int, str, str, str, str, str, int, str, str, str, str,
-                                       str, str, str, str, str, int, float, float)
+                                       str, str, str, str, str, str, int, float, float)
 
         self.filtermodel = self.liststore.filter_new()
         self.filtermodel.set_visible_func(self._visible_func)
@@ -192,7 +195,7 @@ class ClassicView(BaseView):
                     (_("Speed"), self.LS_COL_SPEEDFLOAT), (_("Sector"), None),
                     (_("Type"), None), (_("Category"), None),
                     (_("Wind"), None), (_("Windspeed"), None),
-                    (_("Weather"), None), (_("Comment"), None)]
+                    (_("Weather"), None), (_("Temperature"), None), (_("Comment"), None)]
         for index, (colname, sortid) in enumerate(colnames):
             startcol = index + 1
             textrenderer = gtk.CellRendererText()
@@ -214,6 +217,7 @@ class ClassicView(BaseView):
                       self.COL_WIND: config.get("columns.result-wind"),
                       self.COL_WINDSPEED: config.get("columns.result-windspeed"),
                       self.COL_WEATHER: config.get("columns.result-weather"),
+                      self.COL_TEMPERATURE: config.get("columns.result-temperature"),
                       self.COL_COMMENT: config.get("columns.result-comment")}
         for key, value in columnsdic.items():
             self.treeview.get_column(key).set_visible(value)
@@ -234,7 +238,7 @@ class ClassicView(BaseView):
                 [result["Resultkey"], band, year, result["date"], result["point"],
                  placestr, result["out"], coefstr, speed, result["sector"], result["type"],
                  result["category"], result["wind"], result["windspeed"], result["weather"],
-                 result["comment"], result["place"], coef, result["speed"]
+                 result["temperature"], result["comment"], result["place"], coef, result["speed"]
                 ]
             )
 
@@ -266,8 +270,9 @@ class ClassicView(BaseView):
                         self.LS_COL_RACEPOINT, self.LS_COL_PLACED, self.LS_COL_OUT,
                         self.LS_COL_COEF, self.LS_COL_SPEED, self.LS_COL_SECTOR,
                         self.LS_COL_TYPE, self.LS_COL_CATEGORY, self.LS_COL_WIND,
-                        self.LS_COL_WINDSPEED, self.LS_COL_WEATHER, self.LS_COL_COMMENT,
-                        self.LS_COL_PLACEDINT, self.LS_COL_COEFFLOAT, self.LS_COL_SPEEDFLOAT):
+                        self.LS_COL_WINDSPEED, self.LS_COL_WEATHER, self.LS_COL_TEMPERATURE,
+                        self.LS_COL_COMMENT, self.LS_COL_PLACEDINT, self.LS_COL_COEFFLOAT, 
+                        self.LS_COL_SPEEDFLOAT):
                 name = self.column2name[col]
                 temp[name] = self.sortmodel.get_value(row.iter, col)
             temp["ring"] = "%s / %s" % (temp["band"], temp["year"][2:])
@@ -299,7 +304,8 @@ class SplittedView(BaseView):
      LS_COL_TYPE,
      LS_COL_WIND,
      LS_COL_WINDSPEED,
-     LS_COL_WEATHER) = range(7)
+     LS_COL_WEATHER,
+     LS_COL_TEMPERATURE) = range(8)
 
     (LS_COL_BAND,
      LS_COL_YEAR,
@@ -319,7 +325,8 @@ class SplittedView(BaseView):
      COL_TYPE,
      COL_WIND,
      COL_WINDSPEED,
-     COL_WEATHER) = range(6)
+     COL_WEATHER,
+     COL_TEMPERATURE) = range(7)
 
     (COL_BAND,
      COL_YEAR,
@@ -341,7 +348,7 @@ class SplittedView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.race_ls = gtk.ListStore(int, str, str, str, str, str, str)
+        self.race_ls = gtk.ListStore(int, str, str, str, str, str, str, str)
         self.race_filter = self.race_ls.filter_new()
         self.race_filter.set_visible_func(self._visible_races_func)
         self.race_sort = gtk.TreeModelSort(self.race_filter)
@@ -351,7 +358,8 @@ class SplittedView(BaseView):
         self.race_tv.set_enable_search(False)
         self.race_sel = self.race_tv.get_selection()
         self.race_sel.connect("changed", self.on_race_sel_changed)
-        colnames = [_("Date"), _("Racepoint"), _("Type"), _("Wind"), _("Windspeed"), _("Weather")]
+        colnames = [_("Date"), _("Racepoint"), _("Type"), _("Wind"),
+                    _("Windspeed"), _("Weather"), _("Temperature")]
         for index, colname in enumerate(colnames):
             startcol = index + 1
             textrenderer = gtk.CellRendererText()
@@ -398,7 +406,8 @@ class SplittedView(BaseView):
         columnsdic = {self.COL_TYPE: config.get("columns.result-type"),
                       self.COL_WIND: config.get("columns.result-wind"),
                       self.COL_WINDSPEED: config.get("columns.result-windspeed"),
-                      self.COL_WEATHER: config.get("columns.result-weather")}
+                      self.COL_WEATHER: config.get("columns.result-weather"),
+                      self.COL_TEMPERATURE: config.get("columns.result-temperature")}
         for key, value in columnsdic.items():
             self.race_tv.get_column(key).set_visible(value)
 
@@ -425,7 +434,8 @@ class SplittedView(BaseView):
                 self.results_cache[counter]["filtered"].append(result)
 
             self.race_ls.append([counter, race["date"], race["point"], race["type"],
-                                          race["wind"], race["windspeed"], race["weather"]])
+                                          race["wind"], race["windspeed"],
+                                          race["weather"], race["temperature"]])
             counter += 1
 
     def clear(self):
@@ -475,8 +485,8 @@ class SplittedView(BaseView):
         for row in self.race_sort:
             temp = {"race": {}, "results": []}
             # Get the wanted columns for the race
-            for col in (self.LS_COL_DATE, self.LS_COL_RACEPOINT,
-                        self.LS_COL_TYPE, self.LS_COL_WIND, self.LS_COL_WEATHER):
+            for col in (self.LS_COL_DATE, self.LS_COL_RACEPOINT, self.LS_COL_TYPE,
+                        self.LS_COL_WIND, self.LS_COL_WEATHER, self.LS_COL_TEMPERATURE):
                 name = self.column2name[col]
                 temp["race"][name] = self.race_sort.get_value(row.iter, col)
             # Get the filtered results for the race
@@ -680,7 +690,8 @@ class ResultWindow(builder.GtkBuilder):
             save_path = chooser.get_filename()
             data = self.widgets.resultview.get_report_data(flatten=True)
             columns = ["band", "year", "date", "point", "place", "out", "coef", "speed",
-                       "sector", "type", "category", "wind", "windspeed", "weather", "comment"]
+                       "sector", "type", "category", "wind", "windspeed", "weather",
+                       "temperature", "comment"]
             with open(save_path, "wb") as output:
                 writer = common.UnicodeWriter(output, fieldnames=columns,
                                               extrasaction="ignore")

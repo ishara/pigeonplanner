@@ -94,6 +94,7 @@ class Schema(BaseSchema):
                          ("wind", "TEXT", "DEFAULT ''"),
                          ("windspeed", "TEXT", "DEFAULT ''"),
                          ("weather", "TEXT", "DEFAULT ''"),
+                         ("temperature", "TEXT", "DEFAULT ''"),
                          ("ownplace", "INTEGER", "DEFAULT 0"),
                          ("ownout", "INTEGER", "DEFAULT 0"),
                          ("comment", "TEXT", "DEFAULT ''")],

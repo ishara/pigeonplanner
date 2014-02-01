@@ -182,6 +182,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ("columns.result-category", self.widgets.chkCategory.get_active()),
                 ("columns.result-type", self.widgets.chkType.get_active()),
                 ("columns.result-weather", self.widgets.chkWeather.get_active()),
+                ("columns.result-temperature", self.widgets.chkTemperature.get_active()),
                 ("columns.result-wind", self.widgets.chkWind.get_active()),
                 ("columns.result-windspeed", self.widgets.chkWindspeed.get_active()),
                 ("columns.result-comment", self.widgets.chkComment.get_active()),
@@ -241,6 +242,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.widgets.chkCategory.set_active(config.get("columns.result-category"))
         self.widgets.chkType.set_active(config.get("columns.result-type"))
         self.widgets.chkWeather.set_active(config.get("columns.result-weather"))
+        self.widgets.chkTemperature.set_active(config.get("columns.result-temperature"))
         self.widgets.chkWind.set_active(config.get("columns.result-wind"))
         self.widgets.chkWindspeed.set_active(config.get("columns.result-windspeed"))
         self.widgets.chkComment.set_active(config.get("columns.result-comment"))

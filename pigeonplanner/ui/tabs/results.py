@@ -115,10 +115,11 @@ class ClassicView(BaseView):
      LS_COL_WIND,
      LS_COL_WINDSPEED,
      LS_COL_WEATHER,
+     LS_COL_TEMPERATURE,
      LS_COL_COMMENT,
      LS_COL_PLACEDINT,
      LS_COL_COEFFLOAT,
-     LS_COL_SPEEDFLOAT) = range(17)
+     LS_COL_SPEEDFLOAT) = range(18)
 
     (COL_DATE,
      COL_RACEPOINT,
@@ -132,7 +133,8 @@ class ClassicView(BaseView):
      COL_WIND,
      COL_WINDSPEED,
      COL_WEATHER,
-     COL_COMMENT) = range(13)
+     COL_TEMPERATURE,
+     COL_COMMENT) = range(14)
 
     def __init__(self, root):
         BaseView.__init__(self, root)
@@ -143,7 +145,7 @@ class ClassicView(BaseView):
 
     def build_ui(self):
         self.liststore = gtk.ListStore(str, str, str, str, int, str, str, str, str,
-                                       str, str, str, str, str, int, float, float)
+                                       str, str, str, str, str, str, int, float, float)
         self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self.treeview = gtk.TreeView()
         self.treeview.set_model(self.liststore)
@@ -156,7 +158,7 @@ class ClassicView(BaseView):
                     (_("Speed"), self.LS_COL_SPEEDFLOAT), (_("Sector"), None),
                     (_("Type"), None), (_("Category"), None),
                     (_("Wind"), None), (_("Windspeed"), None),
-                    (_("Weather"), None), (_("Comment"), None)]
+                    (_("Weather"), None), (_("Temperature"), None), (_("Comment"), None)]
         for index, (colname, sortid) in enumerate(colnames):
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(colname, textrenderer, text=index+1)
@@ -177,6 +179,7 @@ class ClassicView(BaseView):
                       self.COL_WIND: config.get("columns.result-wind"),
                       self.COL_WINDSPEED: config.get("columns.result-windspeed"),
                       self.COL_WEATHER: config.get("columns.result-weather"),
+                      self.COL_TEMPERATURE: config.get("columns.result-temperature"),
                       self.COL_COMMENT: config.get("columns.result-comment")}
         for key, value in columnsdic.items():
             self.treeview.get_column(key).set_visible(value)
@@ -193,7 +196,7 @@ class ClassicView(BaseView):
                 [result["Resultkey"], result["date"], result["point"],
                  placestr, result["out"], coefstr, speed, result["sector"], result["type"],
                  result["category"], result["wind"], result["windspeed"], result["weather"],
-                 result["comment"], result["place"], coef, result["speed"]
+                 result["temperature"], result["comment"], result["place"], coef, result["speed"]
                 ]
             )
 
@@ -208,6 +211,7 @@ class ClassicView(BaseView):
                 "type": model.get_value(rowiter, self.LS_COL_TYPE),
                 "category": model.get_value(rowiter, self.LS_COL_CATEGORY),
                 "weather": model.get_value(rowiter, self.LS_COL_WEATHER),
+                "temperature": model.get_value(rowiter, self.LS_COL_TEMPERATURE),
                 "wind": model.get_value(rowiter, self.LS_COL_WIND),
                 "windspeed": model.get_value(rowiter, self.LS_COL_WINDSPEED),
                 "comment": model.get_value(rowiter, self.LS_COL_COMMENT),
@@ -228,7 +232,7 @@ class ClassicView(BaseView):
                 [key, data["date"], data["point"],
                  placestr, data["out"], coefstr, speed, data["sector"], data["type"],
                  data["category"], data["wind"], data["windspeed"], data["weather"],
-                 data["comment"], data["place"], coef, data["speed"]
+                 data["temperature"], data["comment"], data["place"], coef, data["speed"]
                 ]
             )
         self.selection.select_iter(rowiter)
@@ -252,6 +256,7 @@ class ClassicView(BaseView):
                                  self.LS_COL_WIND, data["wind"],
                                  self.LS_COL_WINDSPEED, data["windspeed"],
                                  self.LS_COL_WEATHER, data["weather"],
+                                 self.LS_COL_TEMPERATURE, data["temperature"],
                                  self.LS_COL_COMMENT, data["comment"],
                                  self.LS_COL_PLACEDINT, data["place"],
                                  self.LS_COL_COEFFLOAT, coef,
@@ -276,7 +281,8 @@ class SplittedView(BaseView):
      LS_COL_TYPE,
      LS_COL_WIND,
      LS_COL_WINDSPEED,
-     LS_COL_WEATHER) = range(6)
+     LS_COL_WEATHER,
+     LS_COL_TEMPERATURE) = range(7)
 
     (LS_COL_ID,
      LS_COL_PLACED,
@@ -295,7 +301,8 @@ class SplittedView(BaseView):
      COL_TYPE,
      COL_WIND,
      COL_WINDSPEED,
-     COL_WEATHER) = range(6)
+     COL_WEATHER,
+     COL_TEMPERATURE) = range(7)
 
     (COL_PLACED,
      COL_OUT,
@@ -313,14 +320,15 @@ class SplittedView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.race_ls = gtk.ListStore(str, str, str, str, str, str)
+        self.race_ls = gtk.ListStore(str, str, str, str, str, str, str)
         self.race_tv = gtk.TreeView()
         self.race_tv.set_model(self.race_ls)
         self.race_tv.set_rules_hint(True)
         self.race_tv.set_enable_search(False)
         self.race_sel = self.race_tv.get_selection()
         self.race_sel.connect("changed", self.on_race_sel_changed)
-        colnames = [_("Date"), _("Racepoint"), _("Type"), _("Wind"), _("Windspeed"), _("Weather")]
+        colnames = [_("Date"), _("Racepoint"), _("Type"), _("Wind"), _("Windspeed"),
+                    _("Weather"), _("Temperature")]
         for index, colname in enumerate(colnames):
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(colname, textrenderer, text=index)
@@ -365,7 +373,8 @@ class SplittedView(BaseView):
         columnsdic = {self.COL_TYPE: config.get("columns.result-type"),
                       self.COL_WIND: config.get("columns.result-wind"),
                       self.COL_WINDSPEED: config.get("columns.result-windspeed"),
-                      self.COL_WEATHER: config.get("columns.result-weather")}
+                      self.COL_WEATHER: config.get("columns.result-weather"),
+                      self.COL_TEMPERATURE: config.get("columns.result-temperature")}
         for key, value in columnsdic.items():
             self.race_tv.get_column(key).set_visible(value)
 
@@ -375,8 +384,8 @@ class SplittedView(BaseView):
         self.liststore.clear()
         self.race_ls.clear()
         for race in database.get_races_for_pigeon(pigeon.pindex):
-            self.race_ls.append([race["date"], race["point"], race["type"],
-                                 race["wind"], race["windspeed"], race["weather"]])
+            self.race_ls.append([race["date"], race["point"], race["type"], race["wind"],
+                                 race["windspeed"], race["weather"], race["temperature"]])
 
     def get_selected(self):
         model, rowiter = self.selection.get_selected()
@@ -390,6 +399,7 @@ class SplittedView(BaseView):
                 "type": model_race.get_value(rowiter_race, self.LS_COL_TYPE),
                 "category": model.get_value(rowiter, self.LS_COL_CATEGORY),
                 "weather": model_race.get_value(rowiter_race, self.LS_COL_WEATHER),
+                "temperature": model_race.get_value(rowiter_race, self.LS_COL_TEMPERATURE),
                 "wind": model_race.get_value(rowiter_race, self.LS_COL_WIND),
                 "windspeed": model_race.get_value(rowiter_race, self.LS_COL_WINDSPEED),
                 "comment": model.get_value(rowiter, self.LS_COL_COMMENT),
@@ -420,10 +430,12 @@ class SplittedView(BaseView):
             self.race_ls.set(row.iter, self.LS_COL_TYPE, data["type"],
                                        self.LS_COL_WIND, data["wind"],
                                        self.LS_COL_WINDSPEED, data["windspeed"],
-                                       self.LS_COL_WEATHER, data["weather"])
+                                       self.LS_COL_WEATHER, data["weather"],
+                                       self.LS_COL_TEMPERATURE, data["temperature"])
         else:
             rowiter = self.race_ls.insert(0, [data["date"], data["point"], data["type"],
-                                              data["wind"], data["windspeed"], data["weather"]])
+                                              data["wind"], data["windspeed"],
+                                              data["weather"], data["temperature"]])
             self.race_ls.set_sort_column_id(0, gtk.SORT_ASCENDING)
             self.race_sel.select_iter(rowiter)
             path = self.race_ls.get_path(rowiter)
@@ -454,7 +466,8 @@ class SplittedView(BaseView):
                         break
             else:
                 rowiter = self.race_ls.append([data["date"], data["point"], data["type"],
-                                               data["wind"], data["windspeed"], data["weather"]])
+                                               data["wind"], data["windspeed"],
+                                               data["weather"], data["temperature"]])
                 self.race_sel.select_iter(rowiter)
                 path = self.race_ls.get_path(rowiter)
                 self.race_tv.scroll_to_cell(path)
@@ -462,7 +475,8 @@ class SplittedView(BaseView):
             self.race_ls.set(racenode, self.LS_COL_TYPE, data["type"],
                                        self.LS_COL_WIND, data["wind"],
                                        self.LS_COL_WINDSPEED, data["windspeed"],
-                                       self.LS_COL_WEATHER, data["weather"])
+                                       self.LS_COL_WEATHER, data["weather"],
+                                       self.LS_COL_TEMPERATURE, data["temperature"])
         return key
 
     def clear(self):
@@ -539,7 +553,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self._mode = enums.Action.add
         values = {"date": common.get_date(), "point": "", "placed": 1, "out": 1,
                   "speed": 0.0, "sector": "", "type": "", "category": "", "weather": "",
-                  "wind": "", "windspeed": "", "comment": "",
+                  "wind": "", "windspeed": "", "comment": "", "temperature": ""
             }
         self._set_dialog(self._mode, values)
 
@@ -575,7 +589,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             self.widgets.dialog.hide()
 
         database.update_result_as_race(data["date"], data["point"], data["type"],
-                                       data["wind"], data["windspeed"], data["weather"])
+                                       data["wind"], data["windspeed"], data["weather"],
+                                       data["temperature"])
         self.widgets.resultview.refresh()
 
         data = [(self.widgets.comboracepoint, data["point"], database.Tables.RACEPOINTS),
@@ -665,6 +680,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         ftype = self.widgets.combotype.child.get_text()
         category = self.widgets.combocategory.child.get_text()
         weather = self.widgets.comboweather.child.get_text()
+        temperature = self.widgets.entrytemperature.get_text()
         wind = self.widgets.combowind.child.get_text()
         windspeed = self.widgets.entrywindspeed.get_text()
         comment = self.widgets.entrycomment.get_text()
@@ -675,7 +691,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         return {"date": date, "point": point, "place": place, "out": out,
                 "sector": sector, "type": ftype, "category": category,
                 "wind": wind, "weather": weather, "comment": comment,
-                "speed": speed, "windspeed": windspeed}
+                "speed": speed, "windspeed": windspeed, "temperature": temperature}
 
     def _set_dialog(self, mode, values):
         """
@@ -706,6 +722,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.combotype.child.set_text(values["type"])
         self.widgets.combocategory.child.set_text(values["category"])
         self.widgets.comboweather.child.set_text(values["weather"])
+        self.widgets.entrytemperature.set_text(values["temperature"])
         self.widgets.combowind.child.set_text(values["wind"])
         self.widgets.entrywindspeed.set_text(values["windspeed"])
         self.widgets.entrycomment.set_text(values["comment"])
@@ -718,12 +735,14 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             return
         race = database.get_race_info(date, racepoint)
         if race is not None:
-            ftype, wind, windspeed, weather = \
-                    race["type"], race["wind"], race["windspeed"], race["weather"]
+            ftype, wind, windspeed, weather, temperature = (
+                                    race["type"], race["wind"], race["windspeed"],
+                                    race["weather"], race["temperature"])
         else:
-            ftype, wind, windspeed, weather = "", "", "", ""
+            ftype, wind, windspeed, weather, temperature = "", "", "", "", ""
         self.widgets.combotype.child.set_text(ftype)
         self.widgets.combowind.child.set_text(wind)
         self.widgets.entrywindspeed.set_text(windspeed)
         self.widgets.comboweather.child.set_text(weather)
+        self.widgets.entrytemperature.set_text(temperature)
 
