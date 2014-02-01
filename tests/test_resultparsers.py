@@ -38,8 +38,8 @@ def test_dtd():
 
     filedata = {"sector": "HET LOKAAL", "category": "JONGE",
                 "racepoint": "FONTENAY SUR EURE", "date": "2013-05-25", "n_pigeons": "247"}
-    fileresults = {"12345672013": ["1234567", "2013", 1],
-                   "12345682013": ["1234568", "2013", 3]}
+    fileresults = {"12345672013": ["1234567", "2013", 1, "1397,00"],
+                   "12345682013": ["1234568", "2013", 3, "1369,40"]}
     # 2 word sector, 3 word racepoint
     with open("tests/data/result_dtd_1.txt") as resultfile:
         data, results = parser.parse_file(resultfile, pigeons)
