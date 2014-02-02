@@ -40,19 +40,6 @@ def set_entry_completion(widget):
     completion.set_text_column(0)
     widget.child.set_completion(completion)
 
-def set_combobox_wrap(combobox):
-    """
-    Wrap the columns of a combobox depending on the number of items
-
-    @param combobox: the combobox
-    """
-
-    length = len(combobox.get_model())
-    if length > 10 and length <= 30:
-        combobox.set_wrap_width(2)
-    elif length > 30:
-        combobox.set_wrap_width(3)
-
 def fill_combobox(combobox, items, active=0, sort=True):
     """
     Fill a combobox with the given data
@@ -70,7 +57,6 @@ def fill_combobox(combobox, items, active=0, sort=True):
     for item in items:
         model.append([item])
 
-    set_combobox_wrap(combobox)
     if active is not None:
         combobox.set_active(active)
 
