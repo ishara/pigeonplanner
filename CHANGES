@@ -1,3 +1,26 @@
+2.2.0:
+ * Added option to choose between old and new results view
+ * Added speed, windspeed and temperature to the results
+ * Added a new widow status
+ * Added option to add result directly into pigeon details
+ * Added image to the status combobox
+ * Added more fields to the resultparser
+ * Added pigeon search icon to the results filter band entry
+ * Added csv export to the results window
+ * Fixed the mainwindow statistics to match the current visible pigeons
+ * Fixed some errors in the date widget
+ * Fixed error on invalid date or bandnumber in results filter
+ * Fixed error when adding or updating pigeon when filter is active
+ * Fixed adding and updating results in splitted view
+ * Fixed error when printing pedigree from the menu
+ * Fixed translations on Mac OS X
+ * Improved location of the pigeon status
+ * Only show visible pigeons in pigeon search dialog
+ * Date is no longer required in the pigeon status
+ * Don't allow invalid values to be added through the resultparser
+ * Many code cleanups
+ * Updated translations
+
 2.0.2:
  * Fixed error when editing bandnumbers
  * Fixed adding pigeons to medication record
