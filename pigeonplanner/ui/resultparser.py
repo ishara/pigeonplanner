@@ -21,7 +21,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 try:
-    from yapsy.PluginManager import PluginManager
+    from yapsy.VersionedPluginManager import VersionedPluginManager
     yapsy_available = True
 except ImportError:
     yapsy_available = False
@@ -172,7 +172,7 @@ class ResultParser(builder.GtkBuilder):
         self.widgets.table.attach(self.widgets.filebutton, 1, 2, 0, 1)
 
     def _find_parsers(self):
-        manager = PluginManager()
+        manager = VersionedPluginManager()
         manager.setPluginPlaces([const.RESULTPARSERDIR,
                                  os.path.join(const.PLUGINDIR, "resultparsers")])
         manager.collectPlugins()
