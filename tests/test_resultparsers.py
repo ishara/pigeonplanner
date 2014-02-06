@@ -62,6 +62,13 @@ def test_dtd():
     with open("tests/data/result_dtd_5.txt") as resultfile:
         data, results = parser.parse_file(resultfile, pigeons)
     nt.assert_dict_equal(data, filedata)
+    # Extra column at the end
+    filedata["category"] = "JONGEN"
+    filedata["n_pigeons"] = "66"
+    filedata["racepoint"] = "LA SOUTERRAINE"
+    with open("tests/data/result_dtd_6.txt") as resultfile:
+        data, results = parser.parse_file(resultfile, pigeons)
+    nt.assert_dict_equal(data, filedata)
 
 test_dtd.setup = utils.open_test_db
 test_dtd.teardown = utils.close_test_db

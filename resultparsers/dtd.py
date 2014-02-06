@@ -42,6 +42,7 @@ class DTDParser(IPlugin):
         data = {"sector": "", "category": "", "n_pigeons": "", "date": "", "racepoint": ""}
         results = {}
         firstline = -1
+        revindex = -1
         for linenumber, line in enumerate(resultfile):
             # Remove all whitspace
             line = line.strip()
@@ -81,14 +82,25 @@ class DTDParser(IPlugin):
                 data["date"] = dt.strftime(const.DATE_FORMAT)
                 # The remaining items before the date form the racepoint
                 data["racepoint"] = " ".join(items[:pigeonsindex - 1])
+                continue
+
+            # We parse the lines from the end for easier column detection.
+            # Usually the last column is the speed, but in some cases the position
+            # column is duplicated at the end for readability. Detect this and move the
+            # searchindex by one.
+            #NR { }  NAAM { } GEMEENTE AD IG AFSTAND RING   JR BESTAT   SNELH.   {NR}  
+            if linenumber == firstline + 4:
+                if items[-1] == "NR":
+                    revindex -= 1
+                continue
 
             # Only parse lines that start with a number (place)
             try:
                 place = int(items[0])
             except ValueError:
                 continue
-            speed = items[-1]
-            ring, year = items[-4], items[-3]
+            speed = items[revindex]
+            ring, year = items[revindex-3], items[revindex-2]
             # If the year is 2 digits, no space exists between the ring and year
             if len(year) > 1:
                 ring, year = year[:-2], year[-2:]
