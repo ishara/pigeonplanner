@@ -148,6 +148,7 @@ class DatabaseSession(object):
                 mod.Schema.migrate(self)
             except:
                 # Catch any exception during migration!
+                logger.error("Database migration failed!", exc_info=True)
                 shutil.copy(backupdb, self.dbfile)
                 os.remove(backupdb)
                 raise MigrationError
