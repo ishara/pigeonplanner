@@ -195,7 +195,11 @@ class Startup(object):
         if database.session.get_database_version() > database.Schema.VERSION:
             return database.DATABASE_TOO_NEW
 
-        changed = database.session.check_schema()
+        try:
+            changed = database.session.check_schema()
+        except database.MigrationError:
+            return database.DATABASE_ERROR
+
         if changed:
             return database.DATABASE_CHANGED
 

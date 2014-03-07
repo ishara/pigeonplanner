@@ -109,6 +109,11 @@ def run_ui(dbcode):
         from pigeonplanner import messages
         from pigeonplanner.ui.messagedialog import InfoDialog
         InfoDialog(messages.MSG_UPDATED_DATABASE)
+    elif dbcode == database.DATABASE_ERROR:
+        from pigeonplanner import messages
+        from pigeonplanner.ui.messagedialog import ErrorDialog
+        ErrorDialog(messages.MSG_ERROR_DATABASE)
+        sys.exit(0)
 
     # Import widgets that are used in GtkBuilder files
     from pigeonplanner.ui.widgets import statusbar
