@@ -70,6 +70,7 @@ class _FileChooser(gtk.FileChooser):
             return unicode(filename)
 
     def get_current_folder(self):
+        #TODO: deprecate this, use get_filename() instead (even for folders!)
         return unicode(gtk.FileChooser.get_current_folder(self))
 
     def add_image_filter(self):
@@ -233,6 +234,16 @@ class ResultChooser(_FileChooserButton):
         super(ResultChooser, self).__init__(preview=False)
         self.set_title(_("Select a file..."))
         self.add_text_filter()
+
+
+class PathChooser(_FileChooserButton):
+
+    __gtype_name__ = "PathChooser"
+
+    def __init__(self, title):
+        super(PathChooser, self).__init__(preview=False,
+                                action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+        self.set_title(title)
 
 
 class BackupSaver(_FileChooserButton):

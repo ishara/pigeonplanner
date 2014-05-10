@@ -179,10 +179,6 @@ class DetailsView(builder.GtkBuilder, gobject.GObject, component.Component):
         self.widgets.pigeonimage_edit = PigeonImageWidget(True, self, parent)
         self.widgets.viewportImageEdit.add(self.widgets.pigeonimage_edit)
 
-        self.widgets.combocolour.set_data(database.get_all_data(database.Tables.COLOURS), sort=False)
-        self.widgets.combostrain.set_data(database.get_all_data(database.Tables.STRAINS), sort=False)
-        self.widgets.comboloft.set_data(database.get_all_data(database.Tables.LOFTS), sort=False)
-
         self.widgets.combostatus.set_active(1)
         self.widgets.combostatus.emit("changed")
 
@@ -236,6 +232,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject, component.Component):
         return None, enums.Sex.cock, None
 
     # Public methods
+    def after_database_init(self):
+        self.widgets.combocolour.set_data(database.get_all_data(database.Tables.COLOURS), sort=False)
+        self.widgets.combostrain.set_data(database.get_all_data(database.Tables.STRAINS), sort=False)
+        self.widgets.comboloft.set_data(database.get_all_data(database.Tables.LOFTS), sort=False)
+
     def get_root_widget(self):
         return self.widgets.root
 

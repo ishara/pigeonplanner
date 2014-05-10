@@ -37,6 +37,7 @@ from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui import pedigree
+from pigeonplanner.ui import dbmanager
 from pigeonplanner.ui import logdialog
 from pigeonplanner.ui import component
 from pigeonplanner.ui import detailsview
@@ -78,6 +79,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
          <menuitem action="Add"/>
          <menuitem action="Addrange"/>
          <separator/>
+         <menuitem action="DBMan"/>
          <menuitem action="Log"/>
          <separator/>
          <menuitem action="Export"/>
@@ -179,7 +181,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             self.widgets.notebook.append_page(*tab.get_tab_widgets())
 
         self._build_menubar()
-        self.widgets.treeview.fill_treeview()
         self.current_pigeon = 0
         self.pigeon_no = len(self.widgets.treeview.get_model())
         self.widgets.removedialog.set_transient_for(self)
@@ -202,6 +203,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         self.show()
         self.widgets.treeview.grab_focus()
 
+        self._dbman = dbmanager.DBManagerWindow(parent=self)
+        self._dbman.connect("database-loaded", self.on_database_loaded)
+        self._dbman.run(True)
+
         if gtkosx is not None:
             def osx_quit(*args):
                 self.quit_program(bckp=False)
@@ -210,8 +215,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             gtkosx.ready()
 
     def quit_program(self, widget=None, event=None, bckp=True):
-        database.session.optimize_database()
-        database.session.close()
+        if database.session.is_open():
+            database.session.optimize_database()
+            database.session.close()
 
         x, y = self.get_position()
         w, h = self.get_size()
@@ -238,6 +244,14 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     def on_dialog_delete(self, dialog, event):
         dialog.hide()
         return True
+
+    def on_database_loaded(self, dbman):
+        # Components init that need a database
+        component.get("Treeview").after_database_init()
+        component.get("DetailsView").after_database_init()
+        component.get("ResultsTab").after_database_init()
+
+        self.widgets.treeview.fill_treeview()
 
     def on_interface_changed(self, dialog, arrows, stats, toolbar, statusbar):
         self.widgets.MenuArrows.set_active(arrows)
@@ -275,6 +289,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 
     def on_menuitem_deselect(self, menuitem):
         self.widgets.statusbar.pop(-1)
+
+    def menudbman_activate(self, widget):
+        self._dbman.run()
 
     def menuexport_activate(self, widget):
         exportwindow.ExportWindow(self)

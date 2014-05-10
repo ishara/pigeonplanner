@@ -29,12 +29,23 @@ MSG_NEW_DATABASE = (_("The database you are trying to open is too new "
                       "reinstall the latest version to continue."),
                     None,
                     ERROR)
+MSG_UGRADE_DATABASE = (_("Database update required!"),
+                       _("This database needs an update before it can be used. "
+                         "Previous versions of Pigeon Planner won't work anymore. "
+                         "Do you want to continue?"),
+                       "")
+
 MSG_UPDATED_DATABASE = (_("The Pigeon Planner databases has been updated "
                           "to match the current version. Note that it is "
                           "not advised to run an older version, which can "
                           "lead to data corruption."),
                         None,
                         "Database updated")
+
+MSG_DELETE_DATABASE = (_("Removing database"),
+                       _("Are you sure you want to remove the database? "
+                         "All data will be lost."),
+                       _("Removing database"))
 
 MSG_EVENT_NOTIFY = (_("Notification for '%s'"),
                     _("Go to the calendar?"),
@@ -112,11 +123,6 @@ MSG_REMOVE_ADDRESS = (_("Removing '%s'"),
 MSG_REMOVE_ITEM = (_("Removing '%s' from '%s'."),
                    _("Are you sure you want to remove this item?"),
                    "")
-
-MSG_REMOVE_DATABASE = (_("Removing database"),
-                       _("Are you sure you want to remove the database? "
-                         "All data will be lost."),
-                       _("Removing database"))
 
 MSG_BACKUP_SUCCES = (_("The backup was successfully created."),
                      None,

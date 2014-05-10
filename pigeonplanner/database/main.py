@@ -27,9 +27,11 @@ from pigeonplanner.core import const
 from .schemas import Tables, Schema
 
 
-__all__ = ["DatabaseSession", "InvalidValueError", "Tables", "Schema"]
+__all__ = ["DatabaseSession", "DatabaseVersionError", "InvalidValueError",
+           "Tables", "Schema"]
 
 
+class DatabaseVersionError(Exception): pass
 class InvalidValueError(Exception): pass
 
 
@@ -47,8 +49,17 @@ class DatabaseSession(object):
         if self.is_new_db:
             Schema.create_new(self)
 
+        if self.get_database_version() > Schema.VERSION:
+            raise DatabaseVersionError
+
     def close(self):
+        self.connection.commit()
         self.connection.close()
+        self.connection = None
+        self.cursor = None
+
+    def is_open(self):
+        return self.connection is not None
 
     def __db_connect(self):
         try:
@@ -142,4 +153,8 @@ class DatabaseSession(object):
             changed = True
         self.set_database_version(db_version)
         return changed
+
+    def needs_update(self):
+        db_version = self.get_database_version()
+        return db_version < Schema.VERSION
 

@@ -26,13 +26,13 @@ logger = logging.getLogger()
 try:
     import pygtk; pygtk.require("2.0")
 except:
-    print "The Python GTK (PyGTK) bindings are required to run this program."
+    print("The Python GTK (PyGTK) bindings are required to run this program.")
     sys.exit(0)
 
 try:
     import gtk
 except:
-    print "The GTK+ runtime is required to run this program."
+    print("The GTK+ runtime is required to run this program.")
     sys.exit(0)
 
 import gobject
@@ -86,7 +86,7 @@ def update_dialog():
 
     return False
 
-def run_ui(dbcode):
+def run_ui():
     formatter = logging.Formatter(const.LOG_FORMAT)
     handler = GtkLogHandler()
     handler.setFormatter(formatter)
@@ -98,17 +98,6 @@ def run_ui(dbcode):
     logger.debug("PyGTK version: %s" % ".".join(map(str, gtk.pygtk_version)))
 
     setup_icons()
-
-    from pigeonplanner import database
-    if dbcode == database.DATABASE_TOO_NEW:
-        from pigeonplanner import messages
-        from pigeonplanner.ui.messagedialog import ErrorDialog
-        ErrorDialog(messages.MSG_NEW_DATABASE)
-        sys.exit(0)
-    elif dbcode == database.DATABASE_CHANGED:
-        from pigeonplanner import messages
-        from pigeonplanner.ui.messagedialog import InfoDialog
-        InfoDialog(messages.MSG_UPDATED_DATABASE)
 
     # Import widgets that are used in GtkBuilder files
     from pigeonplanner.ui.widgets import statusbar

@@ -125,7 +125,6 @@ class MainTreeView(gtk.TreeView, component.Component):
         self.set_rules_hint(True)
         self._selection = self.get_selection()
         self._selection.set_mode(gtk.SELECTION_MULTIPLE)
-        self._filterdialog = FilterDialog(self)
         self.set_columns()
         self.show_all()
 
@@ -271,6 +270,9 @@ class MainTreeView(gtk.TreeView, component.Component):
                         pixbuf = renderer
                 text.set_visible(sexcoltype == 1 or sexcoltype == 3)
                 pixbuf.set_visible(sexcoltype == 2 or sexcoltype == 3)
+
+    def after_database_init(self):
+        self._filterdialog = FilterDialog(self)
 
     def run_filterdialog(self, parent):
         self._filterdialog.show(parent)

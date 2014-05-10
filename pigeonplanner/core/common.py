@@ -23,6 +23,7 @@ Functions for some common tasks
 import os
 import cgi
 import csv
+import string
 import codecs
 import random
 import locale
@@ -212,6 +213,11 @@ def get_random_number(value):
     """
 
     return "".join([random.choice("0123456789") for x in range(value)])
+
+
+def get_random_string(length):
+    chars = string.ascii_letters + string.digits
+    return "".join(random.choice(chars) for x in range(length))
 
 def url_hook(about, link):
     webbrowser.open(link)

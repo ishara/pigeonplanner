@@ -184,32 +184,6 @@ class Startup(object):
         self.logger.debug("Current path: %s" % const.ROOTDIR)
         self.logger.debug("Running on: %s %s" % (get_operating_system()))
 
-    def setup_database(self):
-        """
-        Setup the database and check if it needs an update
-        """
-
-        from pigeonplanner import database
-        database.session.open()
-
-        if database.session.get_database_version() > database.Schema.VERSION:
-            return database.DATABASE_TOO_NEW
-
-        changed = database.session.check_schema()
-        if changed:
-            return database.DATABASE_CHANGED
-
-        return database.DATABASE_OK
-
-    def setup_pigeons(self):
-        """
-        Setup the pigeon parser object which will hold all the pigeons
-        """
-
-        from pigeonplanner.core import pigeonparser
-
-        pigeonparser.parser.build_pigeons()
-
     def exception_hook(self, type_, value, tb):
         import traceback
         tb = "".join(traceback.format_exception(type_, value, tb))
@@ -219,12 +193,13 @@ class Startup(object):
 def run(gtk_ui=True):
     app = Startup()
     app.setup_locale(gtk_ui)
-    code = app.setup_database()
-    app.setup_pigeons()
+
+    from pigeonplanner.database import manager
+    manager.init_manager()
 
     if gtk_ui:
         from pigeonplanner.ui import gtkmain
-        gtkmain.run_ui(code)
+        gtkmain.run_ui()
 
 if __name__ == "__main__":
     run()

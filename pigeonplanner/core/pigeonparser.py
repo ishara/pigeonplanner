@@ -29,6 +29,9 @@ class PigeonParser(object):
     def __init__(self):
         self.pigeons = {}
 
+    def clear(self):
+        self.pigeons = {}
+
     def build_pigeons(self):
         for pigeon in database.get_all_pigeons():
             self.add_pigeon(pigeon)

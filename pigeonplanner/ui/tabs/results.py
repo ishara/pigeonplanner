@@ -544,13 +544,6 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         mainsel = self.widgets.resultview.maintree.get_selection()
         mainsel.connect("changed", self.on_selection_changed)
 
-        self.widgets.comboracepoint.set_data(database.get_all_data(database.Tables.RACEPOINTS), sort=False)
-        self.widgets.combosector.set_data(database.get_all_data(database.Tables.SECTORS), sort=False)
-        self.widgets.combotype.set_data(database.get_all_data(database.Tables.TYPES), sort=False)
-        self.widgets.combocategory.set_data(database.get_all_data(database.Tables.CATEGORIES), sort=False)
-        self.widgets.comboweather.set_data(database.get_all_data(database.Tables.WEATHER), sort=False)
-        self.widgets.combowind.set_data(database.get_all_data(database.Tables.WIND), sort=False)
-
         self.widgets.dialog.set_transient_for(self._parent)
 
     # Callbacks
@@ -662,6 +655,14 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                        self._parent, None)
 
     # Public methods
+    def after_database_init(self):
+        self.widgets.comboracepoint.set_data(database.get_all_data(database.Tables.RACEPOINTS), sort=False)
+        self.widgets.combosector.set_data(database.get_all_data(database.Tables.SECTORS), sort=False)
+        self.widgets.combotype.set_data(database.get_all_data(database.Tables.TYPES), sort=False)
+        self.widgets.combocategory.set_data(database.get_all_data(database.Tables.CATEGORIES), sort=False)
+        self.widgets.comboweather.set_data(database.get_all_data(database.Tables.WEATHER), sort=False)
+        self.widgets.combowind.set_data(database.get_all_data(database.Tables.WIND), sort=False)
+
     def set_pigeon(self, pigeon):
         self.pigeon = pigeon
         self.widgets.labelpigeon.set_text(pigeon.get_band_string())
