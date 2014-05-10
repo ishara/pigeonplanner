@@ -39,7 +39,7 @@ class DatabaseOperationError(Exception):
 
 
 class DatabaseInfo(object):
-    def __init__(self, name, path, description, default):
+    def __init__(self, name, path, description, default, **kwargs):
         self.name = name
         self.path = path
         self.description = description
