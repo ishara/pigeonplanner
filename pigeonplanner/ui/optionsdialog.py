@@ -189,6 +189,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
 
                 ("printing.general-paper", self.widgets.cbPaper.get_active()),
                 ("printing.pedigree-layout", self.widgets.cbLayout.get_active()),
+                ("printing.pedigree-use-box-color", self.widgets.chkBoxColor.get_active()),
+                ("printing.pedigree-use-box-fill-color", self.widgets.chkBoxFillColor.get_active()),
                 ("printing.pedigree-box-colour", self.widgets.chkPigOptColour.get_active()),
                 ("printing.pedigree-name", self.widgets.chkPigName.get_active()),
                 ("printing.pedigree-colour", self.widgets.chkPigColour.get_active()),
@@ -269,6 +271,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.widgets.cbPaper.set_active(config.get("printing.general-paper"))
         self.widgets.cbLayout.set_active(config.get("printing.pedigree-layout"))
         self.widgets.chkPigOptColour.set_active(config.get("printing.pedigree-box-colour"))
+        self.widgets.chkBoxColor.set_active(config.get("printing.pedigree-use-box-color"))
+        self.widgets.chkBoxFillColor.set_active(config.get("printing.pedigree-use-box-fill-color"))
 
         self.widgets.chkPerName.set_active(config.get("printing.user-name"))
         self.widgets.chkPerAddress.set_active(config.get("printing.user-address"))

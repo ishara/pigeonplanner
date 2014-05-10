@@ -145,6 +145,8 @@ default_config = [
 
                 ("printing.general-paper", 0),
                 ("printing.pedigree-layout", 0),
+                ("printing.pedigree-use-box-color", False),
+                ("printing.pedigree-use-box-fill-color", False),
                 ("printing.pedigree-box-colour", False),
                 ("printing.pedigree-name", True),
                 ("printing.pedigree-colour", True),

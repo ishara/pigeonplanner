@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+from pigeonplanner.core import enums
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.reportlib.basereport import Report, ReportOptions
@@ -130,7 +131,16 @@ class PedigreeReport(Report):
             for ex in ex1, ex2, ex3, ex4, ex5, ex6:
                 text.append(ex)
 
-            self.doc.draw_box("Pedigree", "\n".join(text), x, y, w, h)
+            if pigeon is None:
+                boxstyle = "PedigreeNone"
+            elif pigeon.get_sex() == enums.Sex.cock:
+                boxstyle = "PedigreeCock"
+            elif pigeon.get_sex() == enums.Sex.hen:
+                boxstyle = "PedigreeHen"
+            else:
+                boxstyle = "PedigreeUnknown"
+
+            self.doc.draw_box(boxstyle, "\n".join(text), x, y, w, h)
 
         # Pedigree lines
         # Box 0 to 1 and 2
@@ -219,7 +229,31 @@ class PedigreeReportOptions(ReportOptions):
         g = GraphicsStyle()
         g.set_line_width(1)
         g.set_paragraph_style("Pedigree")
-        default_style.add_draw_style("Pedigree", g)
+        default_style.add_draw_style("PedigreeNone", g)
+        gc = GraphicsStyle()
+        gc.set_line_width(1)
+        if config.get("printing.pedigree-use-box-color"):
+            gc.set_color((32, 74, 135))
+        if config.get("printing.pedigree-use-box-fill-color"):
+            gc.set_fill_color((185, 207, 231))
+        gc.set_paragraph_style("Pedigree")
+        default_style.add_draw_style("PedigreeCock", gc)
+        gh = GraphicsStyle()
+        gh.set_line_width(1)
+        if config.get("printing.pedigree-use-box-color"):
+            gh.set_color((135, 32, 106))
+        if config.get("printing.pedigree-use-box-fill-color"):
+            gh.set_fill_color((255, 205, 241))
+        gh.set_paragraph_style("Pedigree")
+        default_style.add_draw_style("PedigreeHen", gh)
+        gu = GraphicsStyle()
+        gu.set_line_width(1)
+        if config.get("printing.pedigree-use-box-color"):
+            gu.set_color((100, 100, 100))
+        if config.get("printing.pedigree-use-box-fill-color"):
+            gu.set_fill_color((200, 200, 200))
+        gu.set_paragraph_style("Pedigree")
+        default_style.add_draw_style("PedigreeUnknown", gu)
 
         g = GraphicsStyle()
         g.set_line_width(.6)

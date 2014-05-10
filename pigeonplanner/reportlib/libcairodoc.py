@@ -1246,7 +1246,7 @@ class GtkDocBox(GtkDocBaseElement):
         box_width = self._width * dpi_x / 2.54
         box_height = self._height * dpi_y / 2.54
         
-        box_stroke_color = ReportUtils.rgb_color((0, 0, 0))
+        box_stroke_color = ReportUtils.rgb_color(self._style.get_color())
         box_fill_color = ReportUtils.rgb_color(self._style.get_fill_color())
         shadow_color = ReportUtils.rgb_color((192, 192, 192))
         
