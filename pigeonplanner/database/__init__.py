@@ -26,3 +26,4 @@ from pigeonplanner.database.pigeon import *
 DATABASE_OK = 0
 DATABASE_TOO_NEW = 1
 DATABASE_CHANGED = 2
+DATABASE_ERROR = 3

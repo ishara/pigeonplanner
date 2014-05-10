@@ -23,6 +23,7 @@ import gtk
 from pigeonplanner.core import pigeonparser
 from pigeonplanner.export import get_exporters
 from pigeonplanner.ui import builder
+from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import ErrorDialog
 
@@ -58,7 +59,7 @@ class ExportWindow(builder.GtkBuilder):
         self.widgets.spinner.show()
         self.widgets.spinner.start()
 
-        treeview = self._parent.get_treeview()
+        treeview = component.get("Treeview")
         if self.widgets.radioselected.get_active():
             pigeons = treeview.get_selected_pigeon()
             # pigeons can be a list of selected or just one pigeon object.

@@ -147,6 +147,9 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         except database.DatabaseVersionError:
             ErrorDialog(messages.MSG_NEW_DATABASE, self.widgets.dialog)
             return
+        except database.MigrationError:
+            ErrorDialog(messages.MSG_ERROR_DATABASE)
+            return
         except DatabaseInfoError:
             return
 

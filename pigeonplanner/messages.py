@@ -41,6 +41,11 @@ MSG_UPDATED_DATABASE = (_("The Pigeon Planner databases has been updated "
                           "lead to data corruption."),
                         None,
                         "Database updated")
+MSG_ERROR_DATABASE = (_("The database migration has failed! Any further actions are "
+                        "stopped to prevent data loss. Please contact the developers "
+                        "to fix this problem."),
+                      None,
+                      ERROR)
 
 MSG_DELETE_DATABASE = (_("Removing database"),
                        _("Are you sure you want to remove the database? "

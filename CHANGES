@@ -1,3 +1,8 @@
+2.2.1:
+ * Fixed exporting pigeons to csv
+ * Fixed DTD resultparser for results with an extra column at the end
+ * Make database backup before update and restore in case of error
+
 2.2.0:
  * Added option to choose between old and new results view
  * Added speed, windspeed and temperature to the results

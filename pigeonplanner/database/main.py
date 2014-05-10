@@ -16,8 +16,9 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import os
 import sys
-import os.path
+import shutil
 import logging
 logger = logging.getLogger(__name__)
 import sqlite3
@@ -27,11 +28,13 @@ from pigeonplanner.core import const
 from .schemas import Tables, Schema
 
 
-__all__ = ["DatabaseSession", "DatabaseVersionError", "InvalidValueError",
-           "Tables", "Schema"]
+__all__ = ["DatabaseSession", "DatabaseVersionError", "MigrationError",
+           "InvalidValueError", "Tables", "Schema"]
+
 
 
 class DatabaseVersionError(Exception): pass
+class MigrationError(Exception): pass
 class InvalidValueError(Exception): pass
 
 
@@ -144,14 +147,32 @@ class DatabaseSession(object):
     def check_schema(self):
         changed = False
         db_version = self.get_database_version()
+        backupdb = self.dbfile + "_bckp"
+        if db_version < Schema.VERSION:
+            # Make a backup of the database before migrating
+            shutil.copy(self.dbfile, backupdb)
+
         while db_version < Schema.VERSION:
             module = "pigeonplanner.database.schemas.schema_%s" % (db_version + 1)
             mod = __import__(module, fromlist=["Schema"])
-            mod.Schema.migrate(self)
+            try:
+                mod.Schema.migrate(self)
+            except:
+                # Catch any exception during migration!
+                logger.error("Database migration failed!", exc_info=True)
+                shutil.copy(backupdb, self.dbfile)
+                os.remove(backupdb)
+                raise MigrationError
 
             db_version += 1
             changed = True
         self.set_database_version(db_version)
+
+        try:
+            os.remove(backupdb)
+        except:
+            pass
+
         return changed
 
     def needs_update(self):
