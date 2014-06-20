@@ -217,6 +217,7 @@ class ExportChooser(_FileChooserDialog):
 
 
 #### Buttons
+## General
 class _FileChooserButton(gtk.FileChooserButton, _FileChooser):
     def __init__(self, folder=const.HOMEDIR,
                        action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True):
@@ -226,34 +227,37 @@ class _FileChooserButton(gtk.FileChooserButton, _FileChooser):
         self.set_action(action)
 
 
-class ResultChooser(_FileChooserButton):
-
-    __gtype_name__ = "ResultChooser"
-
-    def __init__(self):
-        super(ResultChooser, self).__init__(preview=False)
-        self.set_title(_("Select a file..."))
-        self.add_text_filter()
-
-
 class PathChooser(_FileChooserButton):
 
     __gtype_name__ = "PathChooser"
 
-    def __init__(self, title):
+    def __init__(self, title=None):
         super(PathChooser, self).__init__(preview=False,
                                 action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+        if title is None:
+            title = _("Select a folder...")
         self.set_title(title)
 
 
-class BackupSaver(_FileChooserButton):
+class FileChooser(_FileChooserButton):
 
-    __gtype_name__ = "BackupSaver"
+    __gtype_name__ = "FileChooser"
+
+    def __init__(self, title=None, preview=False):
+        super(FileChooser, self).__init__(preview=preview)
+        if title is None:
+            title = _("Select a file...")
+        self.set_title(title)
+
+
+## Custom
+class ResultChooser(FileChooser):
+
+    __gtype_name__ = "ResultChooser"
 
     def __init__(self):
-        super(BackupSaver, self).__init__(preview=False,
-                                action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
-        self.set_title(_("Select a folder..."))
+        super(ResultChooser, self).__init__()
+        self.add_text_filter()
 
 
 class BackupChooser(_FileChooserButton):
@@ -261,7 +265,6 @@ class BackupChooser(_FileChooserButton):
     __gtype_name__ = "BackupChooser"
 
     def __init__(self):
-        super(BackupChooser, self).__init__(preview=False)
-        self.set_title(_("Select a file..."))
+        super(BackupChooser, self).__init__()
         self.add_backup_filter()
 

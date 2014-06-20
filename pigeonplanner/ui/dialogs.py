@@ -148,7 +148,7 @@ class BackupDialog(gtk.Dialog):
             self.set_title(_("Create backup"))
             label = gtk.Label(_("Choose a directory where to save the backup"))
             label.set_padding(30, 0)
-            self.fcButtonCreate = filechooser.BackupSaver()
+            self.fcButtonCreate = filechooser.PathChooser()
             self.vbox.pack_start(label, False, True, 8)
             self.vbox.pack_start(self.fcButtonCreate, False, True, 12)
 

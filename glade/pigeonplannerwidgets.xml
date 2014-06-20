@@ -49,6 +49,10 @@
         <property id="size" query="False" default="0" visible="False" />
       </properties>
     </glade-widget-class>
+    <glade-widget-class title="Path Chooser" name="PathChooser" generic-name="pathchooser">
+    </glade-widget-class>
+    <glade-widget-class title="File Chooser" name="FileChooser" generic-name="filechooser">
+    </glade-widget-class>
   </glade-widget-classes>
 
   <glade-widget-group name="pigeonplanner" title="Pigeon Planner">
@@ -64,6 +68,8 @@
     <glade-widget-class-ref name="LatLongEntry"/>
     <glade-widget-class-ref name="SexEntry"/>
     <glade-widget-class-ref name="StatusBar"/>
+    <glade-widget-class-ref name="PathChooser"/>
+    <glade-widget-class-ref name="FileChooser"/>
   </glade-widget-group>
 
 </glade-catalog>

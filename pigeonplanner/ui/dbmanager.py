@@ -89,7 +89,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
 
-        self.widgets.pathchooser = pc = filechooser.PathChooser(_("Select a directory..."))
+        self.widgets.pathchooser = pc = filechooser.PathChooser()
         self.widgets.pathchooser.show()
         self.widgets.tableadvanced.attach(pc, 1, 2, 0, 1)
 

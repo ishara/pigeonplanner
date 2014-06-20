@@ -30,4 +30,5 @@ from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.widgets import latlongentry
 from pigeonplanner.ui.widgets import sexentry
 from pigeonplanner.ui.widgets import statusbar
-
+from pigeonplanner.ui.filechooser import PathChooser
+from pigeonplanner.ui.filechooser import FileChooser
