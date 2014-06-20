@@ -34,7 +34,9 @@ class DTDParser(IPlugin):
 
     def check(self, resultfile):
         for line in resultfile:
-            if "DATA TECHNOLOGY-DEERLIJK" in line:
+            line = line.lower()
+            if "data technology-deerlijk" in line or\
+               "data technology deerlijk" in line:
                 return True
         return False
 
@@ -65,10 +67,14 @@ class DTDParser(IPlugin):
 
             # Information is on the third line:
             #    Racepoint       Date Pigeons Category     LOS TE-LACHES A : Hour
+            # alt:  "              "     "       "         LOSTIJD/LACHER  :  "
             if linenumber == firstline + 2:
                 # Go backwards through the line. The racepoint can have multiple
-                # words, but "LOS" is a fixed word.
-                losindex = items.index("LOS")
+                # words, but "LOS" (or "LOSTIJD") is a fixed word.
+                try:
+                    losindex = items.index("LOS")
+                except ValueError:
+                    losindex = items.index("LOSTIJD/LACHER")
                 category = items[losindex - 1]
                 pigeonsindex = losindex - 2
                 if not items[losindex - 2].isdigit():
