@@ -63,6 +63,7 @@ try: # the Gramps-Connect server has no DISPLAY
     import gtk
     if gtk.pygtk_version < (2, 10, 0):
         raise SystemExit(_("PyGtk 2.10 or later is required"))
+    import gobject
 except:
     pass
 
@@ -209,7 +210,12 @@ class GtkPrint(libcairodoc.CairoDoc):
         # run print dialog
         while True:
             self.preview = None
-            res = operation.run(print_action, self._parent)
+            try:
+                res = operation.run(print_action, self._parent)
+            except gobject.GError:
+                # Windows only. Rare case where the user clicks cancel in the
+                # dialog to choose a filename for printing to a file.
+                res = None
             if self.preview is None or print_action != PRINT_ACTION_DIALOG:
                 # cancel, print or non-printing action
                 break
