@@ -162,8 +162,13 @@ class ResultParser(builder.GtkBuilder):
         textbuffer = self.widgets.textview.get_buffer()
         body = textbuffer.get_text(*textbuffer.get_bounds())
         subject = "[Pigeon Planner] Resultparser exception"
-        mailing.send_email(const.REPORTMAIL, "", subject, body,
-                           self.resultfilename)
+        try:
+            mailing.send_email(const.REPORTMAIL, "", subject, body,
+                               self.resultfilename)
+        except Exception as exc:
+            logger.error("Failed to send report: %s", exc)
+            ErrorDialog((_("Failed to send report."), None, ""),
+                        self.widgets.parserdialog)
 
     def _build_interface(self):
         self.widgets.sendbutton.set_use_stock(True)
