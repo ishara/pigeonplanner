@@ -754,7 +754,11 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.entrycomment.set_text(values["comment"])
 
     def _autofill_race(self):
-        date = self.widgets.entrydate.get_text()
+        try:
+            date = self.widgets.entrydate.get_text()
+        except errors.InvalidInputError as msg:
+            ErrorDialog(msg.value, self.widgets.dialog)
+            return
         racepoint = self.widgets.comboracepoint.child.get_text()
         if date == "" or racepoint == "":
             # Don't bother checking
