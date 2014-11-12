@@ -216,7 +216,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 
     def quit_program(self, widget=None, event=None, bckp=True):
         if database.session.is_open():
-            database.session.optimize_database()
+            try:
+                database.session.optimize_database()
+            except Exception as exc:
+                logger.error("Database optimizing failed: %s", exc)
             database.session.close()
 
         x, y = self.get_position()
