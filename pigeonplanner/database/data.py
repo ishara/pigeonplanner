@@ -62,7 +62,7 @@ def get_racepoint_data(racepoint):
 
 def add_racepoint(data):
     sqldata = utils.build_sql_insert_cols(data)
-    session.cursor.execute("INSERT INTO Racepoints(%(columns)s) VALUES(%(values)s)" % sqldata, data)
+    session.cursor.execute("INSERT OR IGNORE INTO Racepoints(%(columns)s) VALUES(%(values)s)" % sqldata, data)
     session.connection.commit()
     return session.cursor.lastrowid
 
