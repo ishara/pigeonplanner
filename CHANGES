@@ -1,3 +1,15 @@
+2.2.2:
+ * Fixed frequent error when deleting multiple pigeons
+ * Fixed error when trying to add an existing racepoint
+ * Fixed DTD resultparser for slightly different time identifiers
+ * Fixed error when cancelling print to file through the Windows fileprinter dialog
+ * Fixed error when entering a new result with a wrong date format
+ * Show message when reporting a failed result import throws an error
+ * Fixed possible hang during quit when database optimization fails
+ * Fixed rare error when using the distance chooser in the velocity calculator
+ * Added Persian translation
+ * Updated translations
+
 2.2.1:
  * Fixed exporting pigeons to csv
  * Fixed DTD resultparser for results with an extra column at the end
