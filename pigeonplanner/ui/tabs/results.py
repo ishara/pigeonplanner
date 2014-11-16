@@ -537,6 +537,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         builder.GtkBuilder.__init__(self, "ResultsView.ui")
         basetab.BaseTab.__init__(self, "ResultsTab", _("Results"), "icon_result.png")
 
+        self.pigeon = None
+
         view = get_view_for_current_config()
         self.widgets.resultview = view(self.widgets._root)
         self.widgets.resultview.set_columns()
@@ -686,7 +688,10 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             self.widgets.resultview.destroy()
             view = get_view_for_current_config()
             self.widgets.resultview = view(self.widgets._root)
-            self.widgets.resultview.set_pigeon(self.pigeon)
+            if self.pigeon is not None:
+                # The result mode is changed on an empty database and no pigeon
+                # has been set before.
+                self.widgets.resultview.set_pigeon(self.pigeon)
 
     # Internal methods
     def _get_data(self):
