@@ -23,6 +23,7 @@ from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
+from pigeonplanner.core import enums
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeonparser
 
@@ -61,6 +62,18 @@ class FilterDialog(builder.GtkBuilder):
     def on_checkstatus_toggled(self, widget):
         self.widgets.combostatus.set_sensitive(widget.get_active())
 
+    def on_checksire_toggled(self, widget):
+        self.widgets.bandentrysire.set_sensitive(widget.get_active())
+
+    def on_checkdam_toggled(self, widget):
+        self.widgets.bandentrydam.set_sensitive(widget.get_active())
+
+    def on_bandentrysire_search_clicked(self, widget):
+        return None, enums.Sex.cock, None
+
+    def on_bandentrydam_search_clicked(self, widget):
+        return None, enums.Sex.hen, None
+
     def on_clear_clicked(self, widget):
         for combo in ["year", "sex", "status"]:
             getattr(self.widgets, "combo"+combo).set_active(0)
@@ -68,8 +81,10 @@ class FilterDialog(builder.GtkBuilder):
             getattr(self.widgets, "spin"+spin).set_value(0)
         for combo in ["colour", "strain", "loft"]:
             getattr(self.widgets, "combo"+combo).child.set_text("")
-        for check in ["sex", "status"]:
+        for check in ["sex", "status", "sire", "dam"]:
             getattr(self.widgets, "check"+check).set_active(False)
+        self.widgets.bandentrysire.clear()
+        self.widgets.bandentrydam.clear()
 
         self.filter.clear()
         self.treeview._modelfilter.refilter()
@@ -90,6 +105,16 @@ class FilterDialog(builder.GtkBuilder):
         if self.widgets.checkstatus.get_active():
             status = self.widgets.combostatus.get_status()
             self.filter.add("active", status, type_=int, allow_empty_value=True)
+
+        if self.widgets.checksire.get_active():
+            sireband, sireyear = self.widgets.bandentrysire.get_band(False)
+            self.filter.add("sire", sireband, allow_empty_value=True)
+            self.filter.add("yearsire", sireyear, allow_empty_value=True)
+
+        if self.widgets.checkdam.get_active():
+            damband, damyear = self.widgets.bandentrydam.get_band(False)
+            self.filter.add("dam", damband, allow_empty_value=True)
+            self.filter.add("yeardam", damyear, allow_empty_value=True)
 
         colour = self.widgets.combocolour.child.get_text()
         self.filter.add("colour", colour)
