@@ -173,6 +173,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ("columns.pigeon-colour", self.widgets.chkColour.get_active()),
                 ("columns.pigeon-sex", self.widgets.chkSex.get_active()),
                 ("columns.pigeon-sex-type", sexcoltype),
+                ("columns.pigeon-sire", self.widgets.chkSire.get_active()),
+                ("columns.pigeon-dam", self.widgets.chkDam.get_active()),
                 ("columns.pigeon-strain", self.widgets.chkStrain.get_active()),
                 ("columns.pigeon-status", self.widgets.chkStatus.get_active()),
                 ("columns.pigeon-loft", self.widgets.chkLoft.get_active()),
@@ -236,6 +238,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.widgets.chkColour.set_active(config.get("columns.pigeon-colour"))
         self.widgets.chkSex.set_active(config.get("columns.pigeon-sex"))
         self.widgets.chkLoft.set_active(config.get("columns.pigeon-loft"))
+        self.widgets.chkSire.set_active(config.get("columns.pigeon-sire"))
+        self.widgets.chkDam.set_active(config.get("columns.pigeon-dam"))
         self.widgets.chkStrain.set_active(config.get("columns.pigeon-strain"))
         self.widgets.chkStatus.set_active(config.get("columns.pigeon-status"))
         self.widgets.chkCoef.set_active(config.get("columns.result-coef"))

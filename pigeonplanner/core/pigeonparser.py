@@ -185,6 +185,8 @@ class Pigeon(object):
         return common.get_pindex_from_band(self.sire, self.yearsire)
 
     def get_sire_string(self, short=False):
+        if self.yearsire == "":
+            return ""
         year = self.yearsire if not short else self.yearsire[2:]
         return "%s / %s" % (self.sire, year)
 
@@ -195,6 +197,8 @@ class Pigeon(object):
         return common.get_pindex_from_band(self.dam, self.yeardam)
 
     def get_dam_string(self, short=False):
+        if self.yeardam == "":
+            return ""
         year = self.yeardam if not short else self.yeardam[2:]
         return "%s / %s" % (self.dam, year)
 

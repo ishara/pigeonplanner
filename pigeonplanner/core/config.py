@@ -130,6 +130,8 @@ default_config = [
                 ("columns.pigeon-sex", False),
                 ("columns.pigeon-sex-type", 3),
                 ("columns.pigeon-strain", False),
+                ("columns.pigeon-sire", False),
+                ("columns.pigeon-dam", False),
                 ("columns.pigeon-status", False),
                 ("columns.pigeon-loft", False),
                 ("columns.result-coef", True),
