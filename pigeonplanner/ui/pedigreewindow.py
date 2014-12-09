@@ -24,6 +24,7 @@ import os
 import gtk
 
 from pigeonplanner.ui import tools
+from pigeonplanner.ui import component
 from pigeonplanner.ui.filechooser import PdfSaver
 from pigeonplanner.ui.messagedialog import InfoDialog, ErrorDialog
 from pigeonplanner.core import common
@@ -43,6 +44,10 @@ class PedigreeWindow(gtk.Window):
     ui = """
 <ui>
    <toolbar name="Toolbar">
+      <toolitem action="Previous"/>
+      <toolitem action="Home"/>
+      <toolitem action="Next"/>
+      <separator/>
       <toolitem action="Save"/>
       <separator/>
       <toolitem action="Preview"/>
@@ -62,28 +67,47 @@ class PedigreeWindow(gtk.Window):
         self.set_skip_taskbar_hint(True)
 
         self.pedigree = pedigree
+        self._original_pigeon = pigeon
+        self._treeview = component.get("Treeview")
+        self._build_ui()
+        self.set_pigeon(pigeon)
+        self.show_all()
+
+    def set_pigeon(self, pigeon):
         self.pigeon = pigeon
         self._current_pigeon = pigeon
+        self._current_pigeon_path = self._treeview.get_path_for_pigeon(pigeon)
         self._previous_pigeons = []
         ring, year = pigeon.get_band()
         self.pdfname = "%s_%s_%s.pdf" % (_("Pedigree"), year, ring)
-        self._build_ui()
-        pedigree.draw_pedigree(self._get_pedigree_table(), pigeon, True,
-                               self.on_pedigree_draw)
-
         name = pigeon.get_name()
         if name:
             name = ", " + name
         title = "%s: %s%s - %s" % (_("Pedigree"), pigeon.get_band_string(True),
                                    name, pigeon.get_sex_string())
         self.set_title(title)
-        self.show_all()
+
+        is_home = self._original_pigeon == pigeon
+        self._home_pedigree_button.set_sensitive(not is_home)
+        has_previous = self._current_pigeon_path != 0
+        self._previous_pedigree_button.set_sensitive(has_previous)
+        has_next = self._current_pigeon_path < len(self._treeview.get_model()) - 1
+        self._next_pedigree_button.set_sensitive(has_next)
+
+        self.pedigree.draw_pedigree(self._get_pedigree_table(), pigeon, True,
+                                    self.on_pedigree_draw)
 
     def _build_ui(self):
         vbox = gtk.VBox(False, 8)
 
         actiongroup = gtk.ActionGroup("PedigreeWindowActions")
         actiongroup.add_actions((
+            ("Previous", gtk.STOCK_GO_BACK, None, None,
+                    _("Go to the previous pedigree"), self.on_previous_clicked),
+            ("Home", gtk.STOCK_HOME, None, None,
+                    _("Go to the first selected pedigree"), self.on_home_clicked),
+            ("Next", gtk.STOCK_GO_FORWARD, None, None,
+                    _("Go to the next pedigree"), self.on_next_clicked),
             ("Save", gtk.STOCK_SAVE, None, None,
                     _("Save this pedigree"), self.on_save_clicked),
             ##("Mail", "email", None, None,
@@ -103,6 +127,10 @@ class PedigreeWindow(gtk.Window):
 
         toolbar = uimanager.get_widget("/Toolbar")
         vbox.pack_start(toolbar, False, False)
+
+        self._home_pedigree_button = uimanager.get_widget("/Toolbar/Home")
+        self._previous_pedigree_button = uimanager.get_widget("/Toolbar/Previous")
+        self._next_pedigree_button = uimanager.get_widget("/Toolbar/Next")
 
         self.table = table = gtk.Table(20, 7)
 
@@ -167,6 +195,17 @@ class PedigreeWindow(gtk.Window):
         ##pedigree = os.path.join(const.TEMPDIR, self.pdfname)
         ##maildialog.MailDialog(self, pedigree)
         pass
+
+    def on_home_clicked(self, widget):
+        self.set_pigeon(self._original_pigeon)
+
+    def on_previous_clicked(self, widget):
+        new_pigeon = self._treeview.get_pigeon_at_path(self._current_pigeon_path - 1)
+        self.set_pigeon(new_pigeon)
+
+    def on_next_clicked(self, widget):
+        new_pigeon = self._treeview.get_pigeon_at_path(self._current_pigeon_path + 1)
+        self.set_pigeon(new_pigeon)
 
     def on_save_clicked(self, widget):
         chooser = PdfSaver(self, self.pdfname)

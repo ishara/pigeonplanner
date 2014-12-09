@@ -315,6 +315,15 @@ class MainTreeView(gtk.TreeView, component.Component):
         else:
             return None
 
+    def get_path_for_pigeon(self, pigeon):
+        for row in self._liststore:
+            if row[self.LS_PINDEX] == pigeon.pindex:
+                return self.get_top_path(row.path)[0]
+
+    def get_pigeon_at_path(self, path):
+        path = self.get_child_path(path)
+        return self._liststore[path][self.LS_PIGEON]
+
     def set_columns(self):
         columnsdic = {self.COL_NAME: config.get("columns.pigeon-name"),
                       self.COL_COLOUR: config.get("columns.pigeon-colour"),
