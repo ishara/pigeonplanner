@@ -185,6 +185,11 @@ class DetailsView(builder.GtkBuilder, gobject.GObject, component.Component):
         self.widgets.statusdialog.set_transient_for(parent)
         self.widgets.root.show_all()
 
+        # Reduce the inner borders vertically for the extra entries
+        border = gtk.Border(top=1, bottom=1)
+        for x in range(1, 7):
+            getattr(self.widgets, "entryextra%s" % x).set_inner_border(border)
+
     # Callbacks
     ## Status
     def on_buttonstatus_clicked(self, widget):
