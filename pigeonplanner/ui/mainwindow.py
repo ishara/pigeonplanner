@@ -251,7 +251,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     def on_database_loaded(self, dbman):
         # Components init that need a database
         component.get("Treeview").after_database_init()
-        component.get("DetailsView").after_database_init()
         component.get("ResultsTab").after_database_init()
 
         self.widgets.treeview.fill_treeview()
