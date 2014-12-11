@@ -144,8 +144,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
       <toolitem action="Remove"/>
       <toolitem action="Pedigree"/>
       <separator/>
-      <toolitem action="Preferences"/>
+      <toolitem action="Filter"/>
       <separator/>
+      <toolitem action="Preferences"/>
       <toolitem action="About"/>
       <toolitem action="Quit"/>
    </toolbar>
