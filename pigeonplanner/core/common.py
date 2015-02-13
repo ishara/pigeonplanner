@@ -61,16 +61,19 @@ def get_function_name():
 def get_date():
     return datetime.date.today().strftime(const.DATE_FORMAT)
 
-def count_active_pigeons():
+def count_active_pigeons(pigeons=None):
     """
     Count the active pigeons as total and seperate sexes
     """
+
+    if pigeons is None:
+        pigeons = Pigeon.select().where(Pigeon.visible == True)
 
     cocks = 0
     hens = 0
     ybirds = 0
     total = 0
-    for pigeon in Pigeon.select().where(Pigeon.visible == True):
+    for pigeon in pigeons:
         total += 1
 
         if pigeon.is_cock():
