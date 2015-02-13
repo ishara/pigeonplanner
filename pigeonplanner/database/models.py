@@ -157,6 +157,9 @@ class Pigeon(BaseModel):
     def is_youngbird(self):
         return self.sex == enums.Sex.youngbird
 
+    def is_unknown(self):
+        return self.sex == enums.Sex.unknown
+
     @property
     def status(self):
         return Status.get(Status.pigeon == self)

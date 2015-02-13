@@ -108,7 +108,7 @@ class InformationDialog(gtk.Dialog):
                 ("Distribution", distribution))
 
     def get_data(self):
-        total, cocks, hens, ybirds = common.count_active_pigeons()
+        total, cocks, hens, ybirds, unknown = common.count_active_pigeons()
         data = [(_("Number of pigeons"), str(total))]
         data.append(("    %s" % _("Cocks"), "%s\t(%s %%)"
                                 % (cocks, self.get_percentage(cocks, total))))
@@ -116,6 +116,8 @@ class InformationDialog(gtk.Dialog):
                                 % (hens, self.get_percentage(hens, total))))
         data.append(("    %s" % _("Young birds"), "%s\t(%s %%)"
                                 % (ybirds, self.get_percentage(ybirds, total))))
+        data.append(("    %s" % _("Unknown"), "%s\t(%s %%)"
+                                % (unknown, self.get_percentage(unknown, total))))
         for status in range(7):
             n_status = (Status.select()
                         .join(Pigeon)

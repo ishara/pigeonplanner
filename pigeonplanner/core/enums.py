@@ -20,11 +20,13 @@ class Sex:
     cock = 0
     hen = 1
     youngbird = 2
+    unknown = 3
 
     mapping = {
         cock: _("Cock"),
         hen: _("Hen"),
-        youngbird: _("Young bird")
+        youngbird: _("Young bird"),
+        unknown: _("Unknown")
     }
 
     @classmethod

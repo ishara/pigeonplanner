@@ -569,11 +569,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     # Main treeview callbacks
     def on_treeview_pigeons_changed(self, treeview):
         pigeons = self.widgets.treeview.get_pigeons(filtered=True)
-        total, cocks, hens, ybirds = common.count_active_pigeons(pigeons)
-        self.widgets.labelStatTotal.set_markup("<b>%i</b>" %total)
-        self.widgets.labelStatCocks.set_markup("<b>%i</b>" %cocks)
-        self.widgets.labelStatHens.set_markup("<b>%i</b>" %hens)
-        self.widgets.labelStatYoung.set_markup("<b>%i</b>" %ybirds)
+        total, cocks, hens, ybirds, unknown = common.count_active_pigeons(pigeons)
+        self.widgets.labelStatTotal.set_markup("<b>%i</b>" % total)
+        self.widgets.labelStatCocks.set_markup("<b>%i</b>" % cocks)
+        self.widgets.labelStatHens.set_markup("<b>%i</b>" % hens)
+        self.widgets.labelStatYoung.set_markup("<b>%i</b>" % ybirds)
+        self.widgets.labelStatUnknown.set_markup("<b>%i</b>" % unknown)
         self.widgets.statusbar.set_total(total)
 
     def on_treeview_press(self, treeview, event):
