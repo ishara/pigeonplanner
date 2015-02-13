@@ -34,8 +34,7 @@ class ExportCSV(object):
             writer = common.UnicodeWriter(output, fieldnames=utils.COLS_PIGEON)
             writer.writerow(dict((name, name) for name in utils.COLS_PIGEON))
             for pigeon in pigeons:
-                writer.writerow({"pindex": pigeon.pindex,
-                                 "band": pigeon.ring,
+                writer.writerow({"band": pigeon.band,
                                  "year": pigeon.year,
                                  "sex": pigeon.sex,
                                  "visible": pigeon.show,

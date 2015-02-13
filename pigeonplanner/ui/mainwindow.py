@@ -30,7 +30,6 @@ logger = logging.getLogger(__name__)
 import gtk
 
 from pigeonplanner import messages
-from pigeonplanner import database
 from pigeonplanner.ui import tabs
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
@@ -55,7 +54,7 @@ from pigeonplanner.core import update
 from pigeonplanner.core import backup
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeon as corepigeon
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.database import session
 from pigeonplanner.reportlib import report
 from pigeonplanner.reports import get_pedigree
 from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions
@@ -183,7 +182,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 
         self._build_menubar()
         self.current_pigeon = 0
-        self.pigeon_no = len(self.widgets.treeview.get_model())
         self.widgets.removedialog.set_transient_for(self)
         self.widgets.rangedialog.set_transient_for(self)
 
@@ -216,12 +214,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             gtkosx.ready()
 
     def quit_program(self, widget=None, event=None, bckp=True):
-        if database.session.is_open():
+        if session.is_open():
             try:
-                database.session.optimize_database()
+                session.optimize_database()
             except Exception as exc:
                 logger.error("Database optimizing failed: %s", exc)
-            database.session.close()
+            session.close()
 
         x, y = self.get_position()
         w, h = self.get_size()
@@ -250,10 +248,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         return True
 
     def on_database_loaded(self, dbman):
-        # Components init that need a database
-        component.get("Treeview").after_database_init()
-        component.get("ResultsTab").after_database_init()
-
         self.widgets.treeview.fill_treeview()
 
     def on_interface_changed(self, dialog, arrows, stats, toolbar, statusbar):
@@ -274,7 +268,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             self.widgets.treeview.update_pigeon(pigeon, path=path)
             self.widgets.selection.emit("changed")
         elif operation == enums.Action.add:
-            if not pigeon.get_visible(): return
+            if not pigeon.visible: return
             self.widgets.treeview.add_pigeon(pigeon)
             self.widgets.statusbar.display_message(
                         _("Pigeon %s has been added") % pigeon.get_band_string())
@@ -303,8 +297,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         logger.debug(common.get_function_name())
 
         userinfo = common.get_own_address()
-
-        if not tools.check_user_info(self, userinfo["name"]):
+        if not tools.check_user_info(self, userinfo):
             return
 
         pigeons = self.widgets.treeview.get_pigeons(True)
@@ -388,35 +381,25 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         elif self.widgets.selection.count_selected_rows() == 1:
             pigeon = self.widgets.treeview.get_selected_pigeon()
             pigeons = [pigeon]
-            pigeonlabel = pigeon.get_band_string()
-            statusbarmsg = _("Pigeon %s has been removed") % pigeonlabel
-            show_result_option = database.pigeon_has_results(pigeon.get_pindex())
+            statusbarmsg = _("Pigeon %s has been removed") % pigeon.band_string
         else:
             pigeons = [pobj for pobj in self.widgets.treeview.get_selected_pigeon()]
-            pigeonlabel = ", ".join([pigeon.get_band_string() for pigeon in pigeons])
             statusbarmsg = _("%s pigeons have been removed") % len(pigeons)
-            show_result_option = False
-            for pigeon in pigeons:
-                if database.pigeon_has_results(pigeon.get_pindex()):
-                    show_result_option = True
-                    break
 
+        pigeonlabel = ", ".join([pobj.band_string for pobj in pigeons])
         self.widgets.labelPigeon.set_text(pigeonlabel)
         self.widgets.chkKeep.set_active(True)
-        self.widgets.chkResults.set_active(False)
-        self.widgets.chkResults.set_visible(show_result_option)
 
         answer = self.widgets.removedialog.run()
         if answer == 2:
             if self.widgets.chkKeep.get_active():
                 logger.debug("Remove: Hiding the pigeon(s)")
                 for pigeon in pigeons:
-                    pigeon.show = 0
-                    database.update_pigeon(pigeon.get_pindex(), {"show": 0})
+                    pigeon.visible = False
+                    pigeon.save()
             else:
-                remove_results = not self.widgets.chkResults.get_active()
                 for pigeon in pigeons:
-                    corepigeon.remove_pigeon(pigeon, remove_results)
+                    corepigeon.remove_pigeon(pigeon)
 
             # Reverse the pathlist so we can safely remove each row without
             # having problems with invalid paths.
@@ -430,6 +413,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
                 self.widgets.treeview.remove_row(path)
             self.widgets.selection.handler_unblock_by_func(self.on_selection_changed)
             self.widgets.selection.select_path(paths[-1])
+            self.widgets.selection.emit("changed")
             self.widgets.statusbar.display_message(statusbarmsg)
 
         self.widgets.removedialog.hide()
@@ -453,7 +437,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 
     def menushowall_toggled(self, widget):
         config.set("interface.show-all-pigeons", widget.get_active())
-        self.widgets.treeview.fill_treeview()
+        # This callback is already called on window creation, but it's
+        # possible no database has been opened yet.
+        if session.is_open():
+            self.widgets.treeview.fill_treeview()
 
     def menupref_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -556,12 +543,21 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         value = int(rangefrom)
         while value <= int(rangeto):
             band = str(value)
-            pindex = common.get_pindex_from_band(band, rangeyear)
-            logger.debug("Range: adding '%s'", pindex)
-            if database.pigeon_exists(pindex):
+            data = {
+                "band": band,
+                "year": rangeyear,
+                "sex": rangesex,
+                "sire": None,
+                "dam": None,
+                "image": None
+            }
+            logger.debug("Range: adding '%s'", (band, rangeyear))
+            try:
+                pigeon = corepigeon.add_pigeon(data, enums.Status.active, {})
+            except (errors.PigeonAlreadyExists,
+                    errors.PigeonAlreadyExistsHidden):
                 value += 1
                 continue
-            pigeon = pigeonparser.parser.add_empty_pigeon(pindex, rangesex)
             self.widgets.treeview.add_pigeon(pigeon)
             value += 1
 
@@ -648,7 +644,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         self._set_pigeon(self.current_pigeon + 1)
 
     def on_button_bottom_clicked(self, widget):
-        self._set_pigeon(self.pigeon_no - 1)
+        self._set_pigeon(len(self.widgets.treeview.get_model()) - 1)
 
     ####################
     # Public methods
@@ -718,7 +714,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             tab.clear_pigeon()
 
     def _set_pigeon(self, pigeon_no):
-        if pigeon_no < 0 or pigeon_no >= self.pigeon_no:
+        if pigeon_no < 0 or pigeon_no >= len(self.widgets.treeview.get_model()):
             return
 
         if self.current_pigeon != pigeon_no:

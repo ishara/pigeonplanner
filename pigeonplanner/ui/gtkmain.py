@@ -86,7 +86,15 @@ def update_dialog():
 
     return False
 
-def run_ui():
+def run_ui(missing_libs):
+    if len(missing_libs) > 0:
+        #TODO: create a helppage on the website? Link to PyPI?
+        libs_label = "\n".join(missing_libs)
+        help_label = "Pigeon Planner requires the following libraries to run correctly:"
+        from pigeonplanner.ui.messagedialog import ErrorDialog
+        ErrorDialog((help_label, libs_label, None))
+        return
+
     formatter = logging.Formatter(const.LOG_FORMAT)
     handler = GtkLogHandler()
     handler.setFormatter(formatter)
@@ -96,6 +104,8 @@ def run_ui():
     logger.debug("Python version: %s" % ".".join(map(str, sys.version_info[:3])))
     logger.debug("GTK+ version: %s" % ".".join(map(str, gtk.gtk_version)))
     logger.debug("PyGTK version: %s" % ".".join(map(str, gtk.pygtk_version)))
+    import peewee
+    logger.debug("Peewee version: %s" % peewee.__version__)
 
     setup_icons()
 

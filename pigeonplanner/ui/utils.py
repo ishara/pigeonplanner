@@ -100,17 +100,16 @@ def popup_menu(event, entries):
 
 class HiddenPigeonsMixin(object):
     def _visible_func(self, model, rowiter):
-        show = model.get_value(rowiter, 0).show
-        if not show:
+        pigeon = model.get_value(rowiter, 0)
+        if not pigeon.visible:
             return not config.get("interface.missing-pigeon-hide")
         return True
 
     def _cell_func(self, column, cell, model, rowiter):
-        show = model.get_value(rowiter, 0).show
-
+        pigeon = model.get_value(rowiter, 0)
         color = "white"
         if config.get("interface.missing-pigeon-color"):
-            if not show:
+            if not pigeon.visible:
                 color = config.get("interface.missing-pigeon-color-value")
         cell.set_property("cell-background", color)
 

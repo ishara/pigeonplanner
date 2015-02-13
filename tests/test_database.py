@@ -17,64 +17,39 @@
 
 
 import os
-import sqlite3
 
 import nose.tools as nt
-from . import utils
+from peewee import SqliteDatabase
 
-from pigeonplanner import database
-from pigeonplanner.database.manager import (DBManager, DatabaseInfo,
-                                            DatabaseInfoError, DatabaseOperationError)
+from . import utils
+from pigeonplanner.database import session
+from pigeonplanner.database import migrations
+from pigeonplanner.database.manager import DBManager, DatabaseInfo, DatabaseInfoError
 from pigeonplanner.core import const
 
 
 def test_connection():
-    nt.assert_equal(database.session.dbfile, const.DATABASE)
-    nt.assert_false(database.session.is_new_db)
-    nt.assert_is_instance(database.session.connection, sqlite3.Connection)
-    nt.assert_is_instance(database.session.cursor, sqlite3.Cursor)
-test_connection.setup = database.session.open
-test_connection.teardown = database.session.close
+    nt.assert_equal(session.dbfile, const.DATABASE)
+    nt.assert_false(session.is_new_db)
+    nt.assert_is_instance(session.connection, SqliteDatabase)
+test_connection.setup = session.open
+test_connection.teardown = session.close
 
 def test_new_database():
-    nt.assert_equal(database.session.dbfile, utils.DBFILE)
-    nt.assert_true(database.session.is_new_db)
+    nt.assert_equal(session.dbfile, utils.DBFILE)
+    nt.assert_true(session.is_new_db)
 test_new_database.setup = utils.open_test_db
 test_new_database.teardown = utils.close_test_db
 
 def test_database_version():
-    value = database.session.get_database_version()
-    nt.assert_equal(value, database.Schema.VERSION)
-    database.session.set_database_version(999)
-    value = database.session.get_database_version()
+    nt.assert_false(session.needs_update())
+    value = session.get_database_version()
+    nt.assert_equal(value, migrations.get_latest_version())
+    session.set_database_version(999)
+    value = session.get_database_version()
     nt.assert_equal(value, 999)
 test_database_version.setup = utils.open_test_db
 test_database_version.teardown = utils.close_test_db
-
-def test_database_helper_methods():
-    # Check table names
-    schema_names = database.Schema.get_table_names()
-    database_names = database.session.get_table_names()
-    nt.assert_list_equal(schema_names, database_names)
-    # Check column names
-    schema_names = database.Schema.get_column_names(database.Tables.PIGEONS)
-    database_names = database.session.get_column_names(database.Tables.PIGEONS)
-    nt.assert_list_equal(schema_names, database_names)
-    # Add a new column
-    database.session.add_column(database.Tables.PIGEONS, "test TEXT")
-    column_names = database.session.get_column_names(database.Tables.PIGEONS)
-    nt.assert_in("test", column_names)
-    # Remove a table
-    database.session.remove_table(database.Tables.MEDIA)
-    table_names = database.session.get_table_names()
-    nt.assert_not_in(database.Tables.MEDIA, table_names)
-    # Add a table
-    database.session.add_table(database.Tables.MEDIA,
-                               database.Schema.get_columns_sql(database.Tables.MEDIA))
-    table_names = database.session.get_table_names()
-    nt.assert_in(database.Tables.MEDIA, table_names)
-test_database_helper_methods.setup = utils.open_test_db
-test_database_helper_methods.teardown = utils.close_test_db
 
 
 class TestDatabaseManager:

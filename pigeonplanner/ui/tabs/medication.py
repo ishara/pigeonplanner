@@ -18,17 +18,57 @@
 
 import gtk
 
-from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
-from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.database.models import Pigeon, Medication, Loft
+
+
+(COL_OBJECT,
+ COL_DATE,
+ COL_DESCRIPTION) = range(3)
+
+(COL_SEL_CAN_ACTIVE,
+ COL_SEL_TOGGLED,
+ COL_SEL_PIGEON,
+ COL_SEL_BAND,
+ COL_SEL_YEAR) = range(5)
+
+
+class MedicationRemoveDialog(gtk.Dialog):
+    def __init__(self, parent, multiple=False):
+        gtk.Dialog.__init__(self, "", parent, gtk.DIALOG_DESTROY_WITH_PARENT,
+                            (gtk.STOCK_NO, gtk.RESPONSE_NO,
+                             gtk.STOCK_YES, gtk.RESPONSE_YES))
+
+        self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        self.set_resizable(False)
+        self.set_skip_taskbar_hint(True)
+
+        text = _("Removing the selected medication entry")
+        self.check = gtk.CheckButton(_("Remove this entry for all pigeons?"))
+        label1 = gtk.Label()
+        label1.set_markup("<b>%s</b>" % text)
+        label1.set_alignment(0.0, 0.5)
+        label2 = gtk.Label(_("Are you sure?"))
+        label2.set_alignment(0.0, 0.5)
+        vbox = gtk.VBox()
+        vbox.pack_start(label1, False, False, 8)
+        vbox.pack_start(label2, False, False, 8)
+        if multiple:
+            vbox.pack_start(self.check, False, False, 12)
+        image = gtk.Image()
+        image.set_from_stock(gtk.STOCK_DIALOG_WARNING, gtk.ICON_SIZE_DIALOG)
+        hbox = gtk.HBox()
+        hbox.pack_start(image, False, False, 12)
+        hbox.pack_start(vbox, False, False, 12)
+        self.vbox.pack_start(hbox, False, False)
+        self.vbox.show_all()
 
 
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
@@ -36,6 +76,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         builder.GtkBuilder.__init__(self, "MedicationView.ui")
         basetab.BaseTab.__init__(self, "MedicationTab", _("Medication"), "icon_medication.png")
 
+        self.pigeon = None
         self._mode = None
         self._expanded = False
         self.widgets.selection = self.widgets.treeview.get_selection()
@@ -64,28 +105,27 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self._mode = enums.Action.add
         self._clear_dialog_widgets()
         self._fill_select_treeview()
-        comboboxes.fill_combobox(self.widgets.comboloft,
-                                 database.get_all_data(database.Tables.LOFTS))
+        comboboxes.fill_combobox(self.widgets.comboloft, Loft.get_data_list())
         self.widgets.dialog.show()
         self.widgets.entrydate2.grab_focus()
 
     def on_buttonedit_clicked(self, widget):
         self._mode = enums.Action.edit
         self._fill_select_treeview()
-        comboboxes.fill_combobox(self.widgets.comboloft,
-                                 database.get_all_data(database.Tables.LOFTS))
-        med = database.get_medication_for_id(self._get_selected_medid())
-        self.widgets.entrydate2.set_text(med["date"])
-        self.widgets.entrydescription2.set_text(med["description"])
-        self.widgets.entryby2.set_text(med["doneby"])
-        self.widgets.entrymedication2.set_text(med["medication"])
-        self.widgets.entrydosage2.set_text(med["dosage"])
-        self.widgets.entrycomment2.set_text(med["comment"])
-        self.widgets.checkvaccination2.set_active(med["vaccination"])
+        comboboxes.fill_combobox(self.widgets.comboloft, Loft.get_data_list())
+        med = self._get_selected_medication()
+        self.widgets.entrydate2.set_text(med.date)
+        self.widgets.entrydescription2.set_text(med.description)
+        self.widgets.entryby2.set_text(med.doneby)
+        self.widgets.entrymedication2.set_text(med.medication)
+        self.widgets.entrydosage2.set_text(med.dosage)
+        self.widgets.entrycomment2.set_text(med.comment)
+        self.widgets.checkvaccination2.set_active(med.vaccination)
         for row in self.widgets.liststoreselect:
-            if not row[0]: continue
-            if row[2] in database.get_pigeons_for_medid(med["medid"]):
-                row[1] = True
+            if not row[COL_SEL_CAN_ACTIVE]:
+                continue
+            if row[COL_SEL_PIGEON] in med.pigeons:
+                row[COL_SEL_TOGGLED] = True
 
         self.widgets.dialog.show()
         self.widgets.entrydate2.grab_focus()
@@ -93,25 +133,24 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonremove_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.liststore.get_path(rowiter)
-        medid = model[rowiter][0]
+        med = model[rowiter][COL_OBJECT]
 
-        multiple = database.count_medication_records_for_medid(medid) > 1
-        dialog = dialogs.MedicationRemoveDialog(self._parent, multiple)
-        dialog.check.set_active(multiple)
+        has_multiple_pigeons = med.pigeons.count() > 1
+        dialog = MedicationRemoveDialog(self._parent, has_multiple_pigeons)
+        dialog.check.set_active(has_multiple_pigeons)
         resp = dialog.run()
-        if resp == gtk.RESPONSE_NO or resp == gtk.RESPONSE_DELETE_EVENT:
-            dialog.destroy()
-            return
-
-        if dialog.check.get_active():
-            data = {"medid": medid}
-        else:
-            data = {"medid": medid, "pindex": self.pindex}
-        database.remove_medication(data)
+        if resp == gtk.RESPONSE_YES:
+            if dialog.check.get_active():
+                med.pigeons.clear()
+                med.delete_instance()
+            else:
+                med.pigeons.remove(self.pigeon)
+                # Delete this medication entry completely when it has no pigeons
+                if med.pigeons.count() == 0:
+                    med.delete_instance()
+            self.widgets.liststore.remove(rowiter)
+            self.widgets.selection.select_path(path)
         dialog.destroy()
-
-        self.widgets.liststore.remove(rowiter)
-        self.widgets.selection.select_path(path)
 
     def on_buttonsave_clicked(self, widget):
         try:
@@ -119,31 +158,30 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self._parent)
             return
-        pigeons = [row[2] for row in self.widgets.liststoreselect if row[1]]
+        pigeons_toggled = [row[COL_SEL_PIGEON] for row in self.widgets.liststoreselect if row[COL_SEL_TOGGLED]]
         if self._mode == enums.Action.add:
-            data["medid"] = data["date"] + common.get_random_number(10)
-            for pindex in pigeons:
-                data["pindex"] = pindex
-                database.add_medication(data)
-                # Only fill med treeview on current pigeon
-                if not pindex == self.pindex: continue
-                rowiter = self.widgets.liststore.insert(0,
-                                        [data["medid"], data["date"], data["description"]])
-                self.widgets.selection.select_iter(rowiter)
-                path = self.widgets.liststore.get_path(rowiter)
-                self.widgets.treeview.scroll_to_cell(path)
+            record = Medication.create(**data)
+            record.pigeons.add(pigeons_toggled)
+            rowiter = self.widgets.liststore.insert(0,
+                [record, data["date"], data["description"]])
+            self.widgets.selection.select_iter(rowiter)
+            path = self.widgets.liststore.get_path(rowiter)
+            self.widgets.treeview.scroll_to_cell(path)
         else:
-            medid = self._get_selected_medid()
-            pigeons_current = database.get_pigeons_for_medid(medid)
-            for pindex in [pindex for pindex in pigeons if pindex not in pigeons_current]:
-                tmpdata = {"medid": medid, "pindex": pindex}
-                tmpdata.update(data)
-                database.add_medication(tmpdata)
-            for pindex in [p for p in pigeons_current if p not in pigeons]:
-                database.remove_medication({"medid": medid, "pindex": pindex})
-            database.update_medication(medid, data)
+            med = self._get_selected_medication()
+            # Replace all pigeons with the new selection
+            med.pigeons.add(pigeons_toggled, clear_existing=True)
+            med.date = data["date"]
+            med.description = data["description"]
+            med.doneby = data["doneby"]
+            med.medication = data["medication"]
+            med.dosage = data["dosage"]
+            med.comment = data["comment"]
+            med.vaccination = data["vaccination"]
+            med.save()
             model, rowiter = self.widgets.selection.get_selected()
-            self.widgets.liststore.set(rowiter, 1, data["date"], 2, data["description"])
+            self.widgets.liststore.set(rowiter,
+                COL_DATE, data["date"], COL_DESCRIPTION, data["description"])
             self.widgets.selection.emit("changed")
         self.widgets.dialog.hide()
 
@@ -151,23 +189,28 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.dialog.hide()
 
     def on_buttonexpand_clicked(self, widget):
-        self._set_pigeon_list(not self._expanded)
+        self._expanded = not self._expanded
+        utils.set_multiple_visible([self.widgets.seperator,
+                                    self.widgets.vboxexpand], self._expanded)
+        img = gtk.STOCK_GO_BACK if self._expanded else gtk.STOCK_GO_FORWARD
+        self.widgets.imageexpand.set_from_stock(img, gtk.ICON_SIZE_BUTTON)
 
     def on_checkloft_toggled(self, widget):
         if widget.get_active():
             self._select_loft()
         else:
             for row in self.widgets.liststoreselect:
-                if not row[0]: continue
-                row[1] = False
+                if not row[COL_SEL_CAN_ACTIVE]:
+                    continue
+                row[COL_SEL_TOGGLED] = False
 
     def on_comboloft_changed(self, widget):
         if self.widgets.checkloft.get_active():
             self._select_loft()
 
     def on_celltoggle_toggled(self, cell, path):
-        self.widgets.liststoreselect[path][1] =\
-                            not self.widgets.liststoreselect[path][1]
+        self.widgets.liststoreselect[path][COL_SEL_TOGGLED] =\
+                            not self.widgets.liststoreselect[path][COL_SEL_TOGGLED]
 
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
@@ -183,22 +226,23 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             self.widgets.checkvaccination.set_active(False)
             return
 
-        data = database.get_medication_for_id(model[rowiter][0])
-        self.widgets.entrydate.set_text(data["date"])
-        self.widgets.entrydescription.set_text(data["description"])
-        self.widgets.entryby.set_text(data["doneby"])
-        self.widgets.entrymedication.set_text(data["medication"])
-        self.widgets.entrydosage.set_text(data["dosage"])
-        self.widgets.entrycomment.set_text(data["comment"])
-        self.widgets.checkvaccination.set_active(data["vaccination"])
+        med = model[rowiter][COL_OBJECT]
+        self.widgets.entrydate.set_text(med.date)
+        self.widgets.entrydescription.set_text(med.description)
+        self.widgets.entryby.set_text(med.doneby)
+        self.widgets.entrymedication.set_text(med.medication)
+        self.widgets.entrydosage.set_text(med.dosage)
+        self.widgets.entrycomment.set_text(med.comment)
+        self.widgets.checkvaccination.set_active(med.vaccination)
 
     # Public methods
     def set_pigeon(self, pigeon):
-        self.pindex = pigeon.get_pindex()
+        self.pigeon = pigeon
+
         self.widgets.liststore.clear()
-        for med in database.get_medication_for_pigeon(self.pindex):
-            self.widgets.liststore.insert(0, [med["medid"], med["date"], med["description"]])
-        self.widgets.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        for med in pigeon.medication:
+            self.widgets.liststore.insert(0, [med, med.date, med.description])
+        self.widgets.liststore.set_sort_column_id(COL_DATE, gtk.SORT_ASCENDING)
 
     def clear_pigeon(self):
         self.widgets.liststore.clear()
@@ -209,29 +253,20 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
     # Internal methods
     def _fill_select_treeview(self):
         self.widgets.liststoreselect.clear()
-        for pindex, pigeon in pigeonparser.parser.pigeons.items():
-            if not pigeon.get_visible():
-                continue
-            active = not self.pindex == pindex
-            ring, year = pigeon.get_band()
-            self.widgets.liststoreselect.insert(0, [active, not active, pindex,
-                                                    ring, year])
-        self.widgets.liststoreselect.set_sort_column_id(3, gtk.SORT_ASCENDING)
-        self.widgets.liststoreselect.set_sort_column_id(4, gtk.SORT_ASCENDING)
-
-    def _set_pigeon_list(self, value):
-        self._expanded = value
-        utils.set_multiple_visible([self.widgets.seperator,
-                                    self.widgets.vboxexpand], value)
-        img = gtk.STOCK_GO_BACK if value else gtk.STOCK_GO_FORWARD
-        self.widgets.imageexpand.set_from_stock(img, gtk.ICON_SIZE_BUTTON)
+        for pigeon in Pigeon.select().where(Pigeon.visible == True):
+            active = not self.pigeon == pigeon
+            self.widgets.liststoreselect.insert(0,
+                [active, not active, pigeon, pigeon.band, pigeon.year])
+        self.widgets.liststoreselect.set_sort_column_id(COL_SEL_BAND, gtk.SORT_ASCENDING)
+        self.widgets.liststoreselect.set_sort_column_id(COL_SEL_YEAR, gtk.SORT_ASCENDING)
 
     def _select_loft(self):
         loft = self.widgets.comboloft.get_active_text()
         for row in self.widgets.liststoreselect:
-            if not row[0]: continue
-            pigeon = pigeonparser.parser.get_pigeon(row[2])
-            row[1] = pigeon.get_loft() == loft
+            if not row[COL_SEL_CAN_ACTIVE]:
+                continue
+            pigeon = row[COL_SEL_PIGEON]
+            row[COL_SEL_TOGGLED] = pigeon.loft == loft
 
     def _clear_dialog_widgets(self):
         for entry in self.get_objects_from_prefix("entry"):
@@ -239,9 +274,9 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.entrydate2.set_text(common.get_date())
         self.widgets.checkvaccination2.set_active(False)
 
-    def _get_selected_medid(self):
+    def _get_selected_medication(self):
         model, rowiter = self.widgets.selection.get_selected()
-        return model[rowiter][0]
+        return model[rowiter][COL_OBJECT]
 
     def _get_entry_data(self):
         return {"date": self.widgets.entrydate2.get_text(),
@@ -250,5 +285,5 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
                 "medication": self.widgets.entrymedication2.get_text(),
                 "dosage": self.widgets.entrydosage2.get_text(),
                 "comment": self.widgets.entrycomment2.get_text(),
-                "vaccination": int(self.widgets.checkvaccination2.get_active())}
+                "vaccination": self.widgets.checkvaccination2.get_active()}
 

@@ -23,8 +23,9 @@ import operator
 import gtk
 
 from pigeonplanner.ui import utils
-from pigeonplanner.core import common
+from pigeonplanner.core import enums
 from pigeonplanner.core import config
+from pigeonplanner.core import errors
 
 
 def set_entry_completion(widget):
@@ -69,7 +70,7 @@ class SexCombobox(gtk.ComboBox):
         store = gtk.ListStore(int, str, gtk.gdk.Pixbuf)
         gtk.ComboBox.__init__(self, store)
 
-        for key, value in common.get_sexdic().items():
+        for key, value in enums.Sex.mapping.items():
             store.insert(key, [key, value, utils.get_sex_image(key)])
 
         pb = gtk.CellRendererPixbuf()
@@ -94,7 +95,7 @@ class StatusCombobox(gtk.ComboBox):
         store = gtk.ListStore(int, str, gtk.gdk.Pixbuf)
         gtk.ComboBox.__init__(self, store)
 
-        for key, value in common.get_statusdic().items():
+        for key, value in enums.Status.mapping.items():
             store.insert(key, [key, value, utils.get_status_image(key)])
 
         pb = gtk.CellRendererPixbuf()
@@ -145,15 +146,18 @@ class DataComboboxEntry(gtk.ComboBoxEntry):
         gtk.ComboBoxEntry.__init__(self, self.store, 0)
         set_entry_completion(self)
 
-    def set_data(self, data, sort=True, active=0):
-        fill_combobox(self, data, active, sort)
+    def set_data(self, table, active=0):
+        self._table = table
+        fill_combobox(self, self._table.get_data_list(), active, False)
 
     def add_item(self, item):
-        if not item: return
+        try:
+            data = {self._table.get_item_column().name: item}
+            self._table.insert(**data).execute()
+        except errors.IntegrityError:
+            # This item already exists or is empty
+            return
 
-        for treerow in self.store:
-            if item in treerow:
-                return
         self.store.append([item])
         self.store.set_sort_column_id(0, gtk.SORT_ASCENDING)
 

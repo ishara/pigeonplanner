@@ -26,17 +26,21 @@ class HelperMethods(object):
 
         Note: this method assumes there is a self._userinfo
         """
+
+        if self._userinfo is None:
+            return
+
         self.doc.start_paragraph("header")
         if config.get("printing.user-name"):
-            self.doc.write_text(self._userinfo["name"] + "\n")
+            self.doc.write_text(self._userinfo.name + "\n")
         if config.get("printing.user-address"):
-            self.doc.write_text(self._userinfo["street"] + "\n")
-            self.doc.write_text("%s %s\n" % (self._userinfo["code"],
-                                             self._userinfo["city"]))
+            self.doc.write_text(self._userinfo.street + "\n")
+            self.doc.write_text("%s %s\n" % (self._userinfo.code,
+                                             self._userinfo.city))
         if config.get("printing.user-phone"):
-            self.doc.write_text(self._userinfo["phone"] + "\n")
+            self.doc.write_text(self._userinfo.phone + "\n")
         if config.get("printing.user-email"):
-            self.doc.write_text(self._userinfo["email"])
+            self.doc.write_text(self._userinfo.email)
         self.doc.end_paragraph()
 
     def add_cell(self, text, cellstyle, parastyle, span=1):

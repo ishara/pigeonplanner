@@ -20,12 +20,13 @@ import os
 import logging
 logger = logging.getLogger(__name__)
 
+import peewee
+
 from . import enums
 from . import errors
-from pigeonplanner import database
 from pigeonplanner import thumbnail
-from pigeonplanner.core import common
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.database import session
+from pigeonplanner.database.models import Pigeon, Image, Status
 
 
 def add_pigeon(data, status, statusdata):
@@ -37,28 +38,30 @@ def add_pigeon(data, status, statusdata):
     @param statusdata:
     """
 
-    if not data["sex"] in (enums.Sex.cock, enums.Sex.hen, enums.Sex.unknown):
-        raise ValueError("Sex value has to be of type enums.Sex, but got '%r'" % data["sex"])
+    _check_input_data(data)
 
+    # Handle sire and dam
+    data["sire"] = get_or_create_pigeon(data.get("sire", None), enums.Sex.cock, False)
+    data["dam"] = get_or_create_pigeon(data.get("dam", None), enums.Sex.hen, False)
+    # Handle these after pigeon creation
+    image = data.pop("image", None)
+    # Try to create the pigeon
     try:
-        database.add_pigeon(data)
-    except database.InvalidValueError:
-        pindex = data["pindex"]
-        if pigeonparser.parser.pigeons[pindex].show == 1:
-            logger.debug("Pigeon already exists '%s'", pindex)
-            raise errors.PigeonAlreadyExists(pindex)
+        with session.connection.transaction():
+            pigeon = Pigeon.create(**data)
+            query = Status.insert(pigeon=pigeon, status_id=status, **statusdata)
+            query.execute()
+    except peewee.IntegrityError:
+        pigeon = Pigeon.get_for_band((data["band"], data["year"]))
+        if pigeon.visible:
+            logger.debug("Pigeon already exists '%s'", pigeon.band_string)
+            raise errors.PigeonAlreadyExists(pigeon)
         else:
-            raise errors.PigeonAlreadyExistsHidden(pindex)
+            raise errors.PigeonAlreadyExistsHidden(pigeon)
 
-    if status != enums.Status.active:
-        database.add_status(common.get_status_table(status), statusdata)
+    _create_image(pigeon, image)
 
-    # Save the data values
-    database.add_data(database.Tables.COLOURS, data.get("colour", ""))
-    database.add_data(database.Tables.STRAINS, data.get("strain", ""))
-    database.add_data(database.Tables.LOFTS, data.get("loft", ""))
-
-    return pigeonparser.parser.add_pigeon(pindex=data["pindex"])
+    return pigeon
 
 def update_pigeon(pigeon, data, status, statusdata):
     """
@@ -70,76 +73,95 @@ def update_pigeon(pigeon, data, status, statusdata):
     @param statusdata:
     """
 
-    if not data["sex"] in (enums.Sex.cock, enums.Sex.hen, enums.Sex.unknown):
-        raise ValueError("Sex value has to be of type enums.Sex, but got '%r'" % data["sex"])
+    _check_input_data(data)
+
+    data["sire"] = get_or_create_pigeon(data.get("sire", None), enums.Sex.cock, False)
+    data["dam"] = get_or_create_pigeon(data.get("dam", None), enums.Sex.hen, False)
+    imagepath = data.pop("image", None)
 
     try:
-        database.update_pigeon(pigeon.pindex, data)
-    except database.InvalidValueError:
-        if pigeon.show == 1:
-            logger.debug("Pigeon already exists '%s'", pigeon.pindex)
-            raise errors.PigeonAlreadyExists(pigeon.pindex)
+        pigeon = pigeon.update_and_return(**data)
+    except peewee.IntegrityError:
+        pigeon = Pigeon.get_for_band((data["band"], data["year"]))
+        if pigeon.visible:
+            logger.debug("Pigeon already exists '%s'", pigeon.band_string)
+            raise errors.PigeonAlreadyExists(pigeon)
         else:
-            raise errors.PigeonAlreadyExistsHidden(pigeon.pindex)
+            raise errors.PigeonAlreadyExistsHidden(pigeon)
 
-    database.update_result_for_pindex(pigeon.pindex, {"pindex": data["pindex"]})
-    database.update_medication_for_pindex(pigeon.pindex, {"pindex": data["pindex"]})
-    database.update_media_for_pindex(pigeon.pindex, {"pindex": data["pindex"]})
-    # Remove the old thumbnail (if exists)
-    if pigeon.get_image() and data["image"] != pigeon.get_image():
-        try:
-            os.remove(thumbnail.get_path(pigeon.get_image()))
-        except:
-            pass
-
-    old_status = pigeon.get_active()
-    if status != old_status:
-        # Status has changed. Remove the old status and add the new data.
-        if old_status != enums.Status.active:
-            database.remove_status(common.get_status_table(old_status), pigeon.pindex)
-        if status != enums.Status.active:
-            database.add_status(common.get_status_table(status), statusdata)
+    # Update the images
+    if pigeon.main_image is None:
+        _create_image(pigeon, imagepath) 
     else:
-        # Status stayed the same, just update those values
-        if status != enums.Status.active:
-            database.update_status(common.get_status_table(status), pigeon.pindex, statusdata)
+        if imagepath != pigeon.main_image.path:
+            # Remove the old thumbnail (if exists)
+            try:
+                os.remove(thumbnail.get_path(pigeon.main_image.path))
+            except:
+                pass
+            if imagepath:
+                query = Image.update(path=imagepath).where(
+                    (Image.pigeon == pigeon) & (Image.main == True))
+                query.execute()
+            else:
+                pigeon.main_image.delete_instance()
 
-    # Save the data values
-    database.add_data(database.Tables.COLOURS, data.get("colour", ""))
-    database.add_data(database.Tables.STRAINS, data.get("strain", ""))
-    database.add_data(database.Tables.LOFTS, data.get("loft", ""))
+    # Update the status
+    query = Status.update(pigeon=pigeon, status_id=status, **statusdata).where(
+        Status.pigeon == pigeon)
+    query.execute()
 
-    return pigeonparser.parser.update_pigeon(data["pindex"], pigeon.pindex)
+    return pigeon
 
-def remove_pigeon(pigeon, remove_results=True):
-    pindex = pigeon.get_pindex()
-    logger.debug("Start removing pigeon '%s'", pindex)
-
-    status = pigeon.get_active()
-    if status != enums.Status.active:
-        database.remove_status(common.get_status_table(status), pindex)
+def remove_pigeon(pigeon):
+    logger.debug("Start removing pigeon '%s'", pigeon.band_string)
 
     try:
-        os.remove(thumbnail.get_path(pigeon.get_image()))
+        os.remove(thumbnail.get_path(pigeon.main_image))
     except:
         pass
 
-    database.remove_medication({"pindex": pindex})
-    database.remove_media({"pindex": pindex})
-    database.remove_pigeon(pindex)
-    pigeonparser.parser.remove_pigeon(pindex)
-
-    if remove_results:
-        database.remove_result_for_pigeon(pindex)
+    #TODO PW: this removes the pigeon_id in the through model. The medication table
+    #         entry will remain. How to make sure this is also deleted? Note: only
+    #         if this is the only remaining pigeon for this record.
+    pigeon.medication.clear()
+    pigeon.delete_instance()
 
 def build_pedigree_tree(pigeon, index, depth, lst):
     if depth > 5 or pigeon is None or index >= len(lst):
         return
 
     lst[index] = pigeon
-    pindex = pigeon.get_pindex()
-    if pindex in pigeonparser.parser.get_pigeons():
-        sire , dam = pigeonparser.parser.get_parents(pigeon)
-        build_pedigree_tree(sire, (2*index)+1, depth+1, lst)
-        build_pedigree_tree(dam, (2*index)+2, depth+1, lst)
+    build_pedigree_tree(pigeon.sire, (2*index)+1, depth+1, lst)
+    build_pedigree_tree(pigeon.dam, (2*index)+2, depth+1, lst)
+
+def get_or_create_pigeon(band_tuple, sex, visible):
+    """
+
+    @param band_tuple: tuple of (band, year) or None
+    @param sex: one of the sex constants
+    @param visible: boolean
+    """
+    if band_tuple is not None and band_tuple != ("", ""):
+        band, year = band_tuple
+        try:
+            with session.connection.transaction():
+                pigeon = Pigeon.create(band=band, year=year,
+                                       sex=sex, visible=visible)
+                query = Status.insert(pigeon=pigeon)
+                query.execute()
+        except peewee.IntegrityError:
+            pigeon = Pigeon.get_for_band(band_tuple)
+    else:
+        pigeon = None
+    return pigeon
+
+def _create_image(pigeon, path):
+    if path:
+        query = Image.insert(pigeon=pigeon, path=path, main=True)
+        query.execute()
+
+def _check_input_data(data):
+    if not data["sex"] in (enums.Sex.cock, enums.Sex.hen, enums.Sex.unknown):
+        raise ValueError("Sex value has to be of type enums.Sex, but got '%r'" % data["sex"])
 

@@ -21,7 +21,6 @@ import os
 import gtk
 import gobject
 
-from pigeonplanner import database
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
@@ -31,6 +30,8 @@ from pigeonplanner.ui.messagedialog import (InfoDialog, QuestionDialog,
                                             ErrorDialog, WarningDialog)
 from pigeonplanner.core import const
 from pigeonplanner.core import common
+from pigeonplanner.database import session
+from pigeonplanner.database.main import DatabaseVersionError, DatabaseMigrationError
 from pigeonplanner.database.manager import (dbmanager,
                                             DatabaseOperationError, DatabaseInfoError)
 
@@ -144,10 +145,10 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
 
         try:
             changed = dbmanager.open(dbobj)
-        except database.DatabaseVersionError:
+        except DatabaseVersionError:
             ErrorDialog(messages.MSG_NEW_DATABASE, self.widgets.dialog)
             return
-        except database.MigrationError:
+        except DatabaseMigrationError:
             ErrorDialog(messages.MSG_ERROR_DATABASE)
             return
         except DatabaseInfoError:
@@ -261,8 +262,10 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
     ## Public methods ##
     def run(self, startup=False):
         self.fill_treeview()
-        self.widgets.dialog.set_deletable(database.session.is_open())
-        self.widgets.close.set_sensitive(database.session.is_open())
+        #TODO: allow dbmanager to close even without database. Needs major
+        #      changes to prevent any database interaction.
+        self.widgets.dialog.set_deletable(session.is_open())
+        self.widgets.close.set_sensitive(session.is_open())
         self.widgets.dialog.show()
 
         # Load the default database only if this dialog is run on startup
@@ -291,7 +294,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
 
     ## Private methods ##
     def _close_dialog(self):
-        if database.session.is_open():
+        if session.is_open():
             self._save_list_order()
             self.widgets.dialog.hide()
         else:
@@ -319,7 +322,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         icon = None
         if not dbobj.exists or not dbobj.writable:
             icon = gtk.STOCK_DIALOG_ERROR
-        elif dbobj.path == database.session.dbfile:
+        elif dbobj.path == session.dbfile:
             icon = gtk.STOCK_YES
 
         info = self._format_info(dbobj.name, dbobj.description, dbobj.path)

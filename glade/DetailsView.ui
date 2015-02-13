@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <requires lib="gtk+" version="2.20"/>
+  <!-- interface-requires pigeonplannerwidgets 0.0 -->
   <!-- interface-naming-policy project-wide -->
   <object class="GtkFrame" id="root_edit">
     <property name="visible">True</property>
@@ -25,6 +25,9 @@
             <property name="n_columns">3</property>
             <property name="column_spacing">4</property>
             <property name="row_spacing">2</property>
+            <child>
+              <placeholder/>
+            </child>
             <child>
               <placeholder/>
             </child>
@@ -326,7 +329,7 @@
                 <property name="can_focus">False</property>
                 <child internal-child="entry">
                   <object class="GtkEntry" id="comboboxentry-entry">
-                    <property name="can_focus">False</property>
+                    <property name="can_focus">True</property>
                     <property name="primary_icon_activatable">False</property>
                     <property name="secondary_icon_activatable">False</property>
                     <property name="primary_icon_sensitive">True</property>
@@ -346,7 +349,7 @@
                 <property name="can_focus">False</property>
                 <child internal-child="entry">
                   <object class="GtkEntry" id="comboboxentry-entry1">
-                    <property name="can_focus">False</property>
+                    <property name="can_focus">True</property>
                     <property name="primary_icon_activatable">False</property>
                     <property name="secondary_icon_activatable">False</property>
                     <property name="primary_icon_sensitive">True</property>
@@ -368,7 +371,7 @@
                 <property name="can_focus">False</property>
                 <child internal-child="entry">
                   <object class="GtkEntry" id="comboboxentry-entry2">
-                    <property name="can_focus">False</property>
+                    <property name="can_focus">True</property>
                     <property name="primary_icon_activatable">False</property>
                     <property name="secondary_icon_activatable">False</property>
                     <property name="primary_icon_sensitive">True</property>
@@ -433,9 +436,6 @@
                 <property name="y_options"/>
               </packing>
             </child>
-            <child>
-              <placeholder/>
-            </child>
           </object>
         </child>
       </object>
@@ -494,6 +494,9 @@
                 <property name="n_columns">3</property>
                 <property name="column_spacing">4</property>
                 <property name="row_spacing">4</property>
+                <child>
+                  <placeholder/>
+                </child>
                 <child>
                   <placeholder/>
                 </child>
@@ -911,9 +914,6 @@
                     <property name="x_options"/>
                     <property name="y_options"/>
                   </packing>
-                </child>
-                <child>
-                  <placeholder/>
                 </child>
               </object>
             </child>

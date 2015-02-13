@@ -29,7 +29,6 @@ from pigeonplanner.ui.filechooser import PdfSaver
 from pigeonplanner.ui.messagedialog import InfoDialog, ErrorDialog
 from pigeonplanner.core import common
 from pigeonplanner.core import config
-from pigeonplanner.core import pigeonparser
 from pigeonplanner.reportlib import (report, ReportError, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports import get_pedigree
@@ -78,13 +77,12 @@ class PedigreeWindow(gtk.Window):
         self._current_pigeon = pigeon
         self._current_pigeon_path = self._treeview.get_path_for_pigeon(pigeon)
         self._previous_pigeons = []
-        ring, year = pigeon.get_band()
-        self.pdfname = "%s_%s_%s.pdf" % (_("Pedigree"), year, ring)
-        name = pigeon.get_name()
+        self.pdfname = "%s_%s_%s.pdf" % (_("Pedigree"), pigeon.year, pigeon.band)
+        name = pigeon.name
         if name:
             name = ", " + name
         title = "%s: %s%s - %s" % (_("Pedigree"), pigeon.get_band_string(True),
-                                   name, pigeon.get_sex_string())
+                                   name, pigeon.sex_string)
         self.set_title(title)
 
         is_home = self._original_pigeon == pigeon
@@ -172,21 +170,19 @@ class PedigreeWindow(gtk.Window):
         if nav == PREVIOUS:
             pigeon = self._previous_pigeons.pop()
         else:
-            sire, dam = pigeonparser.parser.get_parents(self._current_pigeon)
             self._previous_pigeons.append(self._current_pigeon)
-            pigeon = sire if nav == NEXT_SIRE else dam
+            pigeon = self._current_pigeon.sire if nav == NEXT_SIRE else self._current_pigeon.dam
 
         self._current_pigeon = pigeon
         self.pedigree.draw_pedigree(self._get_pedigree_table(), pigeon, True)
 
     def on_pedigree_draw(self):
-        can_prev = self._current_pigeon.pindex != self.pigeon.pindex
+        can_prev = self._current_pigeon != self.pigeon
         self.buttonprev.set_sensitive(can_prev)
 
-        sire, dam = pigeonparser.parser.get_parents(self._current_pigeon)
-        can_next_sire = sire is not None
+        can_next_sire = self._current_pigeon.sire is not None
         self.buttonnextsire.set_sensitive(can_next_sire)
-        can_next_dam = dam is not None
+        can_next_dam = self._current_pigeon.dam is not None
         self.buttonnextdam.set_sensitive(can_next_dam)
 
     def on_mail_clicked(self, widget):
@@ -223,13 +219,13 @@ class PedigreeWindow(gtk.Window):
 
     def do_operation(self, print_action, save_path=None):
         userinfo = common.get_own_address()
-        if not tools.check_user_info(self, userinfo["name"]):
+        if not tools.check_user_info(self, userinfo):
             return
 
         # Show a message to the user if the original image is not found and
         # can't be shown on the pedigree
-        if config.get("printing.pedigree-image") and self.pigeon.image is not None:
-            if not os.path.exists(self.pigeon.image):
+        if config.get("printing.pedigree-image") and self.pigeon.main_image is not None:
+            if not os.path.exists(self.pigeon.main_image.path):
                 msg = (_("Cannot find image '%s'"),
                        _("You need to edit the pigeon and select the correct "
                          "path or restore the original image on your computer."),
@@ -237,8 +233,8 @@ class PedigreeWindow(gtk.Window):
                 # In some very old versions, an empty image was stored as an
                 # empty string instead of None. Don't show this message in cases
                 # like this ofcourse.
-                if not self.pigeon.image == "":
-                    InfoDialog(msg, self, self.pigeon.image)
+                if not self.pigeon.main_image.path == "":
+                    InfoDialog(msg, self, self.pigeon.main_image.path)
 
         PedigreeReport, PedigreeReportOptions = get_pedigree()
         psize = common.get_pagesize_from_opts()

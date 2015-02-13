@@ -18,8 +18,11 @@
 
 import socket
 
+import peewee
+
 
 UrlTimeout = socket.timeout
+IntegrityError = peewee.IntegrityError
 
 
 class InvalidInputError(Exception):
@@ -31,9 +34,11 @@ class InvalidInputError(Exception):
 
 
 class PigeonAlreadyExists(Exception):
-    pass
+    def __init__(self, pigeon):
+        self.pigeon = pigeon
 
 
 class PigeonAlreadyExistsHidden(Exception):
-    pass
+    def __init__(self, pigeon):
+        self.pigeon = pigeon
 

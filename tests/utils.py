@@ -18,17 +18,17 @@
 
 import os
 
-from pigeonplanner import database
+from pigeonplanner.database import session
 
 
 DBFILE = "test.db"
 
 
 def open_test_db():
-    database.session.open(DBFILE)
+    session.open(DBFILE)
 
 def close_test_db():
-    database.session.close()
+    session.close()
     try:
         os.remove(DBFILE)
     except:

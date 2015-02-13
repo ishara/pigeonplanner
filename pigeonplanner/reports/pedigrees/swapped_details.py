@@ -16,7 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner.core import enums
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.reportlib.utils import pt2cm as PT2CM
@@ -53,34 +52,17 @@ class PedigreeReport(Report):
 
         # Header
         ## User info
-        header_x = .1
-        header_y = 1.2
-        header_y_offset = .4
-        if config.get("printing.user-name"):
-            self.doc.draw_text("Header", self._userinfo["name"], header_x, header_y)
-            header_y += header_y_offset
-        if config.get("printing.user-address"):
-            self.doc.draw_text("Header", self._userinfo["street"], header_x, header_y)
-            header_y += header_y_offset
-            self.doc.draw_text("Header", "%s %s" % (self._userinfo["code"],
-                                                      self._userinfo["city"]),
-                                header_x, header_y)
-            header_y += header_y_offset
-        if config.get("printing.user-phone"):
-            self.doc.draw_text("Header", self._userinfo["phone"], header_x, header_y)
-            header_y += header_y_offset
-        if config.get("printing.user-email"):
-            self.doc.draw_text("Header", self._userinfo["email"], header_x, header_y)
+        header_bottom = self._draw_user_info()
 
         ## Draw image
         if config.get("printing.pedigree-image") and self._pigeon is not None and\
-                                      self._pigeon.image:
+                                      self._pigeon.main_image is not None:
             img_x = self.doc.get_usable_width()
             img_y = 1
             img_w = 6
             img_h = 3
 
-            self.doc.draw_image(self._pigeon.image, img_x, img_y, img_w, img_h,
+            self.doc.draw_image(self._pigeon.main_image.path, img_x, img_y, img_w, img_h,
                                 xalign="right", yalign="top")
 
         ## Seperator
@@ -164,11 +146,11 @@ class PedigreeReport(Report):
             # Get the text
             if pigeon is not None:
                 text = pigeon.get_band_string(True)
-                ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.get_extra()
+                ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.extra
                 if first:
-                    text += "\n" + pigeon.get_sex_string()
+                    text += "\n" + pigeon.sex_string
                 if not last and config.get("printing.pedigree-box-colour"):
-                    text += "\n" + pigeon.get_colour()
+                    text += "\n" + pigeon.colour
             else:
                 text = ""
                 ex1, ex2, ex3, ex4, ex5, ex6 = ("", "", "", "", "", "")
@@ -186,9 +168,9 @@ class PedigreeReport(Report):
             # Draw box with text
             if pigeon is None:
                 boxstyle = "PedigreeNone"
-            elif pigeon.get_sex() == enums.Sex.cock:
+            elif pigeon.is_cock():
                 boxstyle = "PedigreeCock"
-            elif pigeon.get_sex() == enums.Sex.hen:
+            elif pigeon.is_hen():
                 boxstyle = "PedigreeHen"
             else:
                 boxstyle = "PedigreeUnknown"
@@ -217,6 +199,43 @@ class PedigreeReport(Report):
             y_mid += y_offset
 
         self.doc.end_page()
+
+    def _draw_user_info(self):
+        header_x = .1
+        header_y = 1.2
+        header_y_offset = .4
+
+        n_lines = [
+            config.get("printing.user-name"),
+            # Count the address twice as it draws two lines
+            config.get("printing.user-address"),
+            config.get("printing.user-address"),
+            config.get("printing.user-phone"),
+            config.get("printing.user-email")
+        ].count(True)
+        header_bottom = header_y + (n_lines * header_y_offset)
+
+        if self._userinfo is None:
+            return header_bottom
+
+        if config.get("printing.user-name"):
+            self.doc.draw_text("Header", self._userinfo.name, header_x, header_y)
+            header_y += header_y_offset
+        if config.get("printing.user-address"):
+            self.doc.draw_text("Header", self._userinfo.street, header_x, header_y)
+            header_y += header_y_offset
+            self.doc.draw_text("Header", "%s %s" % (self._userinfo.code,
+                                                    self._userinfo.city),
+                                header_x, header_y)
+            header_y += header_y_offset
+        if config.get("printing.user-phone"):
+            self.doc.draw_text("Header", self._userinfo.phone, header_x, header_y)
+            header_y += header_y_offset
+        if config.get("printing.user-email"):
+            self.doc.draw_text("Header", self._userinfo.email, header_x, header_y)
+            header_y += header_y_offset
+
+        return header_bottom
 
 
 class PedigreeReportOptions(ReportOptions):

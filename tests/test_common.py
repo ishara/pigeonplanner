@@ -25,22 +25,6 @@ def test_func_name():
     value = common.get_function_name()
     nt.assert_equal(value, "test_func_name")
 
-def test_pindex_conersions():
-    value = common.get_pindex_from_band("BE-1234567", "2014")
-    nt.assert_equal(value, "BE-12345672014")
-    value = common.get_pindex_from_band("87-CUST-2222", "2014")
-    nt.assert_equal(value, "87-CUST-22222014")
-
-    value = common.get_pindex_from_band_string("BE-1234567/2014")
-    nt.assert_equal(value, "BE-12345672014")
-    value = common.get_pindex_from_band_string("BE-1234567 / 2014")
-    nt.assert_equal(value, "BE-12345672014")
-
-    value = common.get_band_from_pindex("BE-12345672014")
-    nt.assert_tuple_equal(value, ("BE-1234567", "2014"))
-    value = common.get_band_from_pindex("87-CUST-22222014")
-    nt.assert_tuple_equal(value, ("87-CUST-2222", "2014"))
-
 def test_coefficient():
     value = common.calculate_coefficient(1, 100)
     nt.assert_equal(value, 1.0)

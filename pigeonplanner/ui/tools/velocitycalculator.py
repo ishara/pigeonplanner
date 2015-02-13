@@ -21,11 +21,11 @@ import datetime
 
 import gtk
 
-from pigeonplanner import database
 from pigeonplanner.ui import builder
 from pigeonplanner.core import common
 from pigeonplanner.reportlib import report
 from pigeonplanner.reports.velocity import VelocityReport, VelocityReportOptions
+from pigeonplanner.database.models import Racepoint
 
 
 class VelocityCalculator(builder.GtkBuilder):
@@ -82,13 +82,13 @@ class VelocityCalculator(builder.GtkBuilder):
 
     def on_button_ok_clicked(self, widget):
         model, rowiter = self.widgets.sel_distance.get_selected()
-        distance = model[rowiter][1]
+        racepoint = model[rowiter][0]
         try:
-            distance = float(distance)
+            distance = float(racepoint.distance)
         except ValueError:
             distance = 0.0
         self._distance.set_value(distance)
-        self._distance_unit.set_active(model[rowiter][2])
+        self._distance_unit.set_active(racepoint.unit)
 
         self.widgets.dialog.hide()
 
@@ -155,14 +155,16 @@ class VelocityCalculator(builder.GtkBuilder):
     # Private methods
     def _show_distance_dialog(self):
         self.widgets.ls_distance.clear()
-        for data in database.get_all_racepoints():
-            # Just 2 error reports mentioned a type error when loading the data
-            # into this treeview. Not sure what's wrong, perhaps some leftover
-            # data from an older database format. SQLite is not that strict when
-            # it comes to storing values with different types. Make sure they are
-            # converted to what the liststore expects.
-            self.widgets.ls_distance.append(
-                            [data["racepoint"], str(data["distance"]), int(data["unit"])])
+        for racepoint in Racepoint.select().order_by(Racepoint.racepoint.asc()):
+            self.widgets.ls_distance.append([racepoint, racepoint.racepoint, racepoint.distance])
+#        for data in database.get_all_racepoints():
+#            # Just 2 error reports mentioned a type error when loading the data
+#            # into this treeview. Not sure what's wrong, perhaps some leftover
+#            # data from an older database format. SQLite is not that strict when
+#            # it comes to storing values with different types. Make sure they are
+#            # converted to what the liststore expects.
+#            self.widgets.ls_distance.append(
+#                            [data["racepoint"], str(data["distance"]), int(data["unit"])])
 
         self.widgets.dialog.show()
 

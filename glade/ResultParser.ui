@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.20"/>
   <!-- interface-requires pigeonplannerwidgets 0.0 -->
+  <requires lib="gtk+" version="2.20"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkCheckButton" id="checkheader">
     <property name="visible">True</property>
@@ -13,8 +13,8 @@
     <columns>
       <!-- column-name toggle -->
       <column type="gboolean"/>
-      <!-- column-name pindex -->
-      <column type="gchararray"/>
+      <!-- column-name pigeon -->
+      <column type="PyObject"/>
       <!-- column-name band -->
       <column type="gchararray"/>
       <!-- column-name year -->
@@ -705,6 +705,7 @@
       <action-widget response="0">addbutton</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkTextBuffer" id="textbuffer"/>
   <object class="GtkDialog" id="reportdialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -807,5 +808,4 @@
       <action-widget response="0">closebutton</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkTextBuffer" id="textbuffer"/>
 </interface>

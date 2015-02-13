@@ -21,6 +21,16 @@ class Sex:
     hen = 1
     unknown = 2
 
+    mapping = {
+        cock: _("Cock"),
+        hen: _("Hen"),
+        unknown: _("Young bird")
+    }
+
+    @classmethod
+    def get_string(cls, sex):
+        return cls.mapping[sex]
+
 
 class Status:
     dead = 0
@@ -30,6 +40,20 @@ class Status:
     breeder = 4
     loaned = 5
     widow = 6
+
+    mapping = {
+        dead: _("Dead"),
+        active: _("Active"),
+        sold: _("Sold"),
+        lost: _("Lost"),
+        breeder: _("Breeder"),
+        loaned: _("On loan"),
+        widow: _("Widow")
+    }
+
+    @classmethod
+    def get_string(cls, status):
+        return cls.mapping[status]
 
 
 class Action:

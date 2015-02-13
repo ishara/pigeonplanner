@@ -28,7 +28,7 @@ from pigeonplanner.ui.utils import HiddenPigeonsMixin
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import InfoDialog
 from pigeonplanner.core import enums
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.database.models import Pigeon
 
 
 class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
@@ -84,65 +84,76 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
     # Callbacks
     def on_treeview_press(self, treeview, event):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
-        if pthinfo is None: return
+        if pthinfo is None:
+            return
         path, col, cellx, celly = pthinfo
         pigeon = treeview.get_model()[path][0]
 
         if event.button == 3:
             items = [(gtk.STOCK_INFO, self.on_show_details, (pigeon,), None),
                      (gtk.STOCK_EDIT, self.on_edit_details, (pigeon,), None)]
-            if pigeon.show:
+            if pigeon.visible:
                 items.append((gtk.STOCK_JUMP_TO, self.on_goto_pigeon, (pigeon,), None))
             utils.popup_menu(event, items)
         elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
             self.on_show_details(None, pigeon)
 
     def on_show_details(self, widget, pigeon):
-        if not pigeon.get_pindex() in pigeonparser.parser.pigeons:
-            return
         DetailsDialog(pigeon, self._parent)
 
     def on_edit_details(self, widget, pigeon):
-        if not pigeon.get_pindex() in pigeonparser.parser.pigeons:
-            return
-
-        dialog = DetailsDialog(pigeon, self._parent, enums.Action.edit)
-        dialog.details.set_details(pigeon)
+        DetailsDialog(pigeon, self._parent, enums.Action.edit)
 
     def on_goto_pigeon(self, widget, pigeon):
-        if not component.get("Treeview").select_pigeon(None, pigeon.get_pindex()):
+        if not component.get("Treeview").select_pigeon(None, pigeon):
             InfoDialog(messages.MSG_NO_PIGEON, self._parent)
 
     # Public methods
     def set_pigeon(self, pigeon):
         self.clear_pigeon()
-        pindex_selected = pigeon.get_pindex()
-        pindex_sire_sel = pigeon.get_sire_pindex()
-        pindex_dam_sel = pigeon.get_dam_pindex()
-        for pindex, pigeon in pigeonparser.parser.pigeons.items():
-            ring, year = pigeon.get_band()
-            pindex_sire = pigeon.get_sire_pindex()
-            pindex_dam = pigeon.get_dam_pindex()
-            sex = pigeon.get_sex()
-            seximg = utils.get_sex_image(sex)
-            # Offspring
-            if pindex_sire == pindex_selected or pindex_dam == pindex_selected:
-                self._liststoreoff.insert(0, [pigeon, ring, year, sex, seximg])
-            # Half relatives
-            if pindex_sire_sel and pindex_sire_sel == pindex_sire and not\
-               (pindex_sire_sel == pindex_sire and pindex_dam_sel == pindex_dam):
-                self._liststorehalf.insert(0, [pigeon, ring, year,
-                                               pigeon.get_sire_string(True), sex, seximg])
-            if pindex_dam_sel and pindex_dam_sel == pindex_dam and not\
-               (pindex_sire_sel == pindex_sire and pindex_dam_sel == pindex_dam):
-                self._liststorehalf.insert(0, [pigeon, ring, year,
-                                               pigeon.get_dam_string(True), sex, seximg])
-            # Direct relatives
-            # We need both sire and dam to retrieve these
-            if not pindex_sire_sel or not pindex_dam_sel: continue
-            if pindex_sire_sel == pindex_sire and pindex_dam_sel == pindex_dam\
-               and not pindex == pindex_selected:
-                self._liststoredirect.insert(0, [pigeon, ring, year, sex, seximg])
+
+        # Offspring
+        for children in [pigeon.children_sire, pigeon.children_dam]:
+            for child in children:
+                seximg = utils.get_sex_image(child.sex)
+                self._liststoreoff.insert(0,
+                        [child, child.band, child.year, child.sex, seximg])
+
+        # Direct siblings
+        direct_relatives = Pigeon.select().where(
+            (Pigeon.id != pigeon.id) & 
+            (Pigeon.sire != None) &
+            (Pigeon.dam != None) &
+            (Pigeon.sire == pigeon.sire) & 
+            (Pigeon.dam == pigeon.dam))
+        for p in direct_relatives:
+            seximg = utils.get_sex_image(p.sex)
+            self._liststoredirect.insert(0,
+                [p, p.band, p.year, p.sex, seximg])
+
+        # Half siblings
+        template = Pigeon.select().where(
+            # Not direct relative
+            ~((Pigeon.sire == pigeon.sire) & 
+            (Pigeon.dam == pigeon.dam)) &
+            # Not this selected pigeon
+            (Pigeon.id != pigeon.id))
+        half_relatives_sire = template.where(
+            # Only with a valid sire
+            (Pigeon.sire != None) &
+            # Both pigeon's sire must match
+            (Pigeon.sire == pigeon.sire))
+        for p in half_relatives_sire:
+            seximg = utils.get_sex_image(p.sex)
+            self._liststorehalf.insert(0,
+                [p, p.band, p.year, p.sire.get_band_string(True), p.sex, seximg])
+        half_relatives_dam = template.where(
+            (Pigeon.dam != None) &
+            (Pigeon.dam == pigeon.dam))
+        for p in half_relatives_dam:
+            seximg = utils.get_sex_image(p.sex)
+            self._liststorehalf.insert(0,
+                [p, p.band, p.year, p.dam.get_band_string(True), p.sex, seximg])
 
         self._liststoredirect.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self._liststoredirect.set_sort_column_id(2, gtk.SORT_ASCENDING)

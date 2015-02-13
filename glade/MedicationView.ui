@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.20"/>
   <!-- interface-requires pigeonplannerwidgets 0.0 -->
+  <requires lib="gtk+" version="2.20"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name object -->
+      <column type="PyObject"/>
+      <!-- column-name date -->
+      <column type="gchararray"/>
+      <!-- column-name description -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkHBox" id="_root">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -506,6 +516,26 @@
       </packing>
     </child>
   </object>
+  <object class="GtkListStore" id="liststore1">
+    <columns>
+      <!-- column-name loft -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststoreselect">
+    <columns>
+      <!-- column-name can_active -->
+      <column type="gboolean"/>
+      <!-- column-name can_toggle -->
+      <column type="gboolean"/>
+      <!-- column-name pigeon -->
+      <column type="PyObject"/>
+      <!-- column-name band -->
+      <column type="gchararray"/>
+      <!-- column-name year -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkDialog" id="dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -994,35 +1024,5 @@
       <action-widget response="0">buttoncancel</action-widget>
       <action-widget response="0">buttonsave</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkListStore" id="liststore">
-    <columns>
-      <!-- column-name id -->
-      <column type="gchararray"/>
-      <!-- column-name date -->
-      <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="liststore1">
-    <columns>
-      <!-- column-name loft -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkListStore" id="liststoreselect">
-    <columns>
-      <!-- column-name can_active -->
-      <column type="gboolean"/>
-      <!-- column-name can_toggle -->
-      <column type="gboolean"/>
-      <!-- column-name pindex -->
-      <column type="gchararray"/>
-      <!-- column-name band -->
-      <column type="gchararray"/>
-      <!-- column-name year -->
-      <column type="gchararray"/>
-    </columns>
   </object>
 </interface>

@@ -18,7 +18,6 @@
 
 import gtk
 
-from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
@@ -28,11 +27,12 @@ from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.core import pigeon as corepigeon
+from pigeonplanner.database.models import Pigeon, Breeding
 
 
-(COL_ID,
- COL_PINDEX,
+(COL_OBJ,
+ COL_MATE,
  COL_DATA) = range(3)
 
 
@@ -49,6 +49,27 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     ## Tab
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
+        if rowiter is None:
+            defaults = Breeding.get_fields_with_defaults()
+            self.widgets.datelaid1.set_text(defaults["laid1"])
+            self.widgets.datehatched1.set_text(defaults["hatched1"])
+            self.widgets.bandentry1.set_pigeon(defaults["child1"])
+            self.widgets.successcheck1.set_active(defaults["success1"])
+            self.widgets.datelaid2.set_text(defaults["laid2"])
+            self.widgets.datehatched2.set_text(defaults["hatched2"])
+            self.widgets.bandentry2.set_pigeon(defaults["child2"])
+            self.widgets.successcheck2.set_active(defaults["success2"])
+            self.widgets.entryclutch.set_text(defaults["clutch"])
+            self.widgets.entrybox.set_text(defaults["box"])
+            self.widgets.textviewcomment.get_buffer().set_text(defaults["comment"])
+
+            p1 = not self.widgets.bandentry1.is_empty()
+            p2 = not self.widgets.bandentry2.is_empty()
+            self.widgets.buttoninfo1.set_sensitive(p1)
+            self.widgets.buttongoto1.set_sensitive(p1)
+            self.widgets.buttoninfo2.set_sensitive(p2)
+            self.widgets.buttongoto2.set_sensitive(p2)
+            return
 
         # Never select parent rows. Expand them and select first child row.
         if rowiter is not None and self.widgets.treestore.iter_depth(rowiter) == 0:
@@ -59,31 +80,23 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
         widgets = [self.widgets.buttonremove, self.widgets.buttonedit]
         utils.set_multiple_sensitive(widgets, not rowiter is None)
-        try:
-            data = dict(database.get_breeding_for_key(model[rowiter][0]))
-        except TypeError:
-            data = {}
-        success1 = data.get("success1", 0)
-        success2 = data.get("success2", 0)
 
-        self.widgets.datelaid1.set_text(data.get("laid1", ""))
-        self.widgets.datehatched1.set_text(data.get("hatched1", ""))
-        self.widgets.bandentry1.set_pindex(data.get("pindex1", ""))
-        self.widgets.successcheck1.set_active(success1)
-        self.widgets.datelaid2.set_text(data.get("laid2", ""))
-        self.widgets.datehatched2.set_text(data.get("hatched2", ""))
-        self.widgets.bandentry2.set_pindex(data.get("pindex2", ""))
-        self.widgets.successcheck2.set_active(success2)
-        self.widgets.entryclutch.set_text(data.get("clutch", ""))
-        self.widgets.entrybox.set_text(data.get("box", ""))
-        self.widgets.textviewcomment.get_buffer().set_text(data.get("comment", ""))
-
-        p1 = not self.widgets.bandentry1.is_empty()
-        p2 = not self.widgets.bandentry2.is_empty()
-        self.widgets.buttoninfo1.set_sensitive(p1)
-        self.widgets.buttongoto1.set_sensitive(p1)
-        self.widgets.buttoninfo2.set_sensitive(p2)
-        self.widgets.buttongoto2.set_sensitive(p2)
+        record = model[rowiter][COL_OBJ]
+        self.widgets.datelaid1.set_text(record.laid1)
+        self.widgets.datehatched1.set_text(record.hatched1)
+        self.widgets.bandentry1.set_pigeon(record.child1)
+        self.widgets.successcheck1.set_active(record.success1)
+        self.widgets.datelaid2.set_text(record.laid2)
+        self.widgets.datehatched2.set_text(record.hatched2)
+        self.widgets.bandentry2.set_pigeon(record.child2)
+        self.widgets.successcheck2.set_active(record.success2)
+        self.widgets.entryclutch.set_text(record.clutch)
+        self.widgets.entrybox.set_text(record.box)
+        self.widgets.textviewcomment.get_buffer().set_text(record.comment)
+        self.widgets.buttoninfo1.set_sensitive(False)
+        self.widgets.buttongoto1.set_sensitive(False)
+        self.widgets.buttoninfo2.set_sensitive(False)
+        self.widgets.buttongoto2.set_sensitive(False)
 
     def on_buttonadd_clicked(self, widget):
         self._mode = enums.Action.add
@@ -93,32 +106,36 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonedit_clicked(self, widget):
         self._mode = enums.Action.edit
         model, rowiter = self.widgets.selection.get_selected()
-        self._set_dialog_fields(model[rowiter][COL_ID],
-                                model[rowiter][COL_PINDEX])
+        self._set_dialog_fields(model[rowiter][COL_OBJ], model[rowiter][COL_MATE])
         self.widgets.editdialog.show()
 
     def on_buttonremove_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.treestore.get_path(rowiter)
-        database.remove_breeding(model.get_value(rowiter, COL_ID))
+        obj = model.get_value(rowiter, COL_OBJ)
+        obj.delete_instance()
         self._remove_record(rowiter)
         self.widgets.selection.select_path(path)
 
     def on_buttoninfo1_clicked(self, widget):
-        pigeon = pigeonparser.parser.get_pigeon(self.widgets.bandentry1.get_pindex())
+        band_tuple = self.widgets.bandentry1.get_band()
+        pigeon = Pigeon.get_for_band(band_tuple)
         DetailsDialog(pigeon, self._parent)
 
     def on_buttongoto1_clicked(self, widget):
-        pindex = self.widgets.bandentry1.get_pindex()
-        self.maintreeview.select_pigeon(None, pindex)
+        band_tuple = self.widgets.bandentry1.get_band()
+        pigeon = Pigeon.get_for_band(band_tuple)
+        self.maintreeview.select_pigeon(None, pigeon)
 
     def on_buttoninfo2_clicked(self, widget):
-        pigeon = pigeonparser.parser.get_pigeon(self.widgets.bandentry2.get_pindex())
+        band_tuple = self.widgets.bandentry2.get_band()
+        pigeon = Pigeon.get_for_band(band_tuple)
         DetailsDialog(pigeon, self._parent)
 
     def on_buttongoto2_clicked(self, widget):
-        pindex = self.widgets.bandentry2.get_pindex()
-        self.maintreeview.select_pigeon(None, pindex)
+        band_tuple = self.widgets.bandentry2.get_band()
+        pigeon = Pigeon.get_for_band(band_tuple)
+        self.maintreeview.select_pigeon(None, pigeon)
 
     ## Edit dialog
     def on_editdialog_delete_event(self, widget, event):
@@ -134,9 +151,9 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonsave_clicked(self, widget):
         # Get and check bands
         try:
-            mate = self.widgets.bandmateedit.get_pindex()
-            pindex1 = self.widgets.bandentryedit1.get_pindex()
-            pindex2 = self.widgets.bandentryedit2.get_pindex()
+            band_tuple_mate = self.widgets.bandmateedit.get_band()
+            band_tuple1 = self.widgets.bandentryedit1.get_band()
+            band_tuple2 = self.widgets.bandentryedit2.get_band()
         except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self.widgets.editdialog)
             return
@@ -151,47 +168,47 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             ErrorDialog(msg.value, self.widgets.editdialog)
             return
 
+        mate = Pigeon.get_for_band(band_tuple_mate)
         if self.pigeon.is_cock():
-            sire = self.pigeon.get_pindex()
+            sire = self.pigeon
             dam = mate
         else:
             sire = mate
-            dam = self.pigeon.get_pindex()
+            dam = self.pigeon
+        child1 = self._add_child_pigeon(band_tuple1, sire, dam,
+                                        self.widgets.listcheckedit1.get_active())
+        child2 = self._add_child_pigeon(band_tuple2, sire, dam,
+                                        self.widgets.listcheckedit2.get_active())
+
         textbuffer = self.widgets.textviewcommentedit.get_buffer()
         data = {"sire": sire, "dam": dam, "date": date,
-                "laid1": laid1, "hatched1": hatched1, "pindex1": pindex1,
-                "success1": int(self.widgets.successcheckedit1.get_active()),
-                "laid2": laid2, "hatched2": hatched2, "pindex2": pindex2,
-                "success2": int(self.widgets.successcheckedit2.get_active()),
+                "laid1": laid1, "hatched1": hatched1, "child1": child1,
+                "success1": self.widgets.successcheckedit1.get_active(),
+                "laid2": laid2, "hatched2": hatched2, "child2": child2,
+                "success2": self.widgets.successcheckedit2.get_active(),
                 "clutch": self.widgets.entryclutchedit.get_text(),
                 "box": self.widgets.entryboxedit.get_text(),
                 "comment": textbuffer.get_text(*textbuffer.get_bounds())}
 
-        # Add the child pigeons if needed
-        self._add_child_pigeon(pindex1, sire, dam,
-                               self.widgets.listcheckedit1.get_active())
-        self._add_child_pigeon(pindex2, sire, dam,
-                               self.widgets.listcheckedit2.get_active())
-
         # Update when editing record
         if self._mode == enums.Action.edit:
             model, rowiter = self.widgets.selection.get_selected()
-            rowid = self.widgets.treestore.get_value(rowiter, COL_ID)
-            database.update_breeding(rowid, data)
+            old_record = self.widgets.treestore.get_value(rowiter, COL_OBJ)
+            record = old_record.update_and_return(**data)
             parent = self._get_or_create_parent_record(mate)
             if not self.widgets.treestore.is_ancestor(parent, rowiter):
                 # It is not possible to move a row to another parent.
                 self._remove_record(rowiter)
-                rowiter = self.widgets.treestore.append(parent, [rowid, mate, date])
+                rowiter = self.widgets.treestore.append(parent, [record, mate, date])
             else:
-                self.widgets.treestore.set(rowiter, 2, date)
+                self.widgets.treestore.set(rowiter, COL_OBJ, record, COL_DATA, date)
 
             self.widgets.selection.emit("changed")
         # Insert when adding record
         elif self._mode == enums.Action.add:
-            rowid = database.add_breeding(data)
+            record = Breeding.create(**data)
             parent = self._get_or_create_parent_record(mate)
-            rowiter = self.widgets.treestore.append(parent, [rowid, mate, date])
+            rowiter = self.widgets.treestore.append(parent, [record, mate, date])
 
         parent_path = self.widgets.treestore.get_path(parent)
         self.widgets.treeview.expand_row(parent_path, False)
@@ -217,11 +234,16 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         parent = None
         last = None
         self.widgets.treestore.clear()
-        for data in database.get_breeding_for_pigeon(pigeon.pindex, pigeon.is_cock()):
-            if parent is None or data[1] != last:
-                parent = self._add_parent_record(data[1])
-            self.widgets.treestore.append(parent, [data[0], data[1], data[2]])
-            last = data[1]
+        this, mate = (Breeding.sire, Breeding.dam) if pigeon.is_cock() else (Breeding.dam, Breeding.sire)
+        query = (Breeding.select()
+            .where(this == pigeon)
+            .order_by(mate, Breeding.date))
+        for record in query:
+            mate_obj = getattr(record, mate.name)
+            if parent is None or mate_obj.id != last:
+                parent = self._add_parent_record(mate_obj)
+            self.widgets.treestore.append(parent, [record, mate_obj, record.date])
+            last = mate_obj.id
         self.widgets.treestore.set_sort_column_id(COL_DATA, gtk.SORT_ASCENDING)
 
     def clear_pigeon(self):
@@ -231,78 +253,72 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         return [self.widgets.buttonadd]
 
     # Private methods
-    def _set_dialog_fields(self, key=None, mate=""):
-        if key is not None:
-            (key, sire, dam, date, laid1, hatched1, pindex1, success1,
-             laid2, hatched2, pindex2, success2, clutch, 
-             box, comment) = database.get_breeding_for_key(key)
+    def _set_dialog_fields(self, obj=None, mate=None):
+        if obj is None:
+            data = Breeding.get_fields_with_defaults()
+            data["mate"] = None
         else:
-            (sire, dam, date, clutch, box, comment,
-             laid1, hatched1, pindex1, success1,
-             laid2, hatched2, pindex2, success2) = (
-                        "", "", "", "", "", "", "", "", "", 0, "", "", "", 0)
+            data = {
+                "date": obj.date,
+                "clutch": obj.clutch,
+                "box": obj.box,
+                "comment": obj.comment,
+                "mate": mate,
+                "laid1": obj.laid1,
+                "hatched1": obj.hatched1,
+                "child1": obj.child1,
+                "success1": obj.success1,
+                "laid2": obj.laid2,
+                "hatched2": obj.hatched2,
+                "child2": obj.child2,
+                "success2": obj.success2
+            }
 
-        self.widgets.dateedit.set_text(date)
-        self.widgets.bandmateedit.set_pindex(mate)
-        self.widgets.entryclutchedit.set_text(clutch)
-        self.widgets.entryboxedit.set_text(box)
-        self.widgets.textviewcommentedit.get_buffer().set_text(comment)
+        self.widgets.dateedit.set_text(data["date"])
+        self.widgets.bandmateedit.set_pigeon(data["mate"])
+        self.widgets.entryclutchedit.set_text(data["clutch"])
+        self.widgets.entryboxedit.set_text(data["box"])
+        self.widgets.textviewcommentedit.get_buffer().set_text(data["comment"])
 
-        self.widgets.datelaidedit1.set_text(laid1)
-        self.widgets.datehatchededit1.set_text(hatched1)
-        self.widgets.bandentryedit1.set_pindex(pindex1)
-        self.widgets.successcheckedit1.set_active(success1)
-        self.widgets.datelaidedit2.set_text(laid2)
-        self.widgets.datehatchededit2.set_text(hatched2)
-        self.widgets.bandentryedit2.set_pindex(pindex2)
-        self.widgets.successcheckedit2.set_active(success2)
+        self.widgets.datelaidedit1.set_text(data["laid1"])
+        self.widgets.datehatchededit1.set_text(data["hatched1"])
+        self.widgets.bandentryedit1.set_pigeon(data["child1"])
+        self.widgets.successcheckedit1.set_active(data["success1"])
+        self.widgets.datelaidedit2.set_text(data["laid2"])
+        self.widgets.datehatchededit2.set_text(data["hatched2"])
+        self.widgets.bandentryedit2.set_pigeon(data["child2"])
+        self.widgets.successcheckedit2.set_active(data["success2"])
 
-    def _format_mate(self, pindex):
-        pigeon = pigeonparser.parser.get_pigeon(pindex)
-        try:
-            return pigeon.get_band_string()
-        except AttributeError:
-            # This pigeon was removed from the database
-            return "%s / %s" % common.get_band_from_pindex(pindex)
+        self.widgets.listcheckedit1.set_active(False)
+        self.widgets.listcheckedit2.set_active(False)
 
-    def _add_child_pigeon(self, pindex, sire, dam, active):
-        pigeon = None
-        try:
-            pigeon = pigeonparser.parser.add_empty_pigeon(pindex, enums.Sex.unknown,
-                                                          active, sire, dam)
-        except ValueError:
-            # Empty bandnumber
-            return
-        except database.InvalidValueError:
-            # Pigeon does exist, update parents
-            pigeon = pigeonparser.parser.get_pigeon(pindex)
+    def _add_child_pigeon(self, band_tuple, sire, dam, visible):
+        pigeon = corepigeon.get_or_create_pigeon(band_tuple, enums.Sex.unknown, visible)
+        if pigeon is None:
+            return None
 
-            s, sy = common.get_band_from_pindex(sire)
-            d, dy = common.get_band_from_pindex(dam)
-            pigeon.sire = s
-            pigeon.yearsire = sy
-            pigeon.dam = d
-            pigeon.yeardam = dy
-            database.update_pigeon(pigeon.get_pindex(),
-                                   {"sire": s, "yearsire": sy, "dam": d, "yeardam": dy})
-            if active:
-                # Pigeon isn't visible, but user checked the "add to list" option
-                pigeon.show = 1
-                database.update_pigeon(pigeon.get_pindex(), {"show": 1})
+        pigeon.sire = sire
+        pigeon.dam = dam
+        if visible:
+            # Only go from invisible to visible, not the other way around
+            pigeon.visible = visible
+        pigeon.save()
 
-        if pigeon.get_visible() and not self.maintreeview.has_pigeon(pigeon):
+        if pigeon.visible and not self.maintreeview.has_pigeon(pigeon):
             self.maintreeview.add_pigeon(pigeon, False)
 
-    def _add_parent_record(self, pindex):
+        return pigeon
+
+    def _add_parent_record(self, pigeon):
         rowiter = self.widgets.treestore.append(None,
-                                        [None, pindex, self._format_mate(pindex)])
+            [None, pigeon, pigeon.band_string])
         return rowiter
 
-    def _get_or_create_parent_record(self, pindex):
+    def _get_or_create_parent_record(self, pigeon):
         for row in self.widgets.treestore:
-            if row[COL_PINDEX] == pindex:
+            if row[COL_MATE] == pigeon:
                 return row.iter
-        return self._add_parent_record(pindex)
+        return self._add_parent_record(pigeon)
 
     def _remove_record(self, rowiter):
         parent = self.widgets.treestore.iter_parent(rowiter)

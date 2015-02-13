@@ -25,7 +25,6 @@ import datetime
 
 import gtk
 
-from pigeonplanner import database
 from pigeonplanner import messages
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
@@ -38,6 +37,8 @@ from pigeonplanner.core import errors
 from pigeonplanner.reportlib import (report, ReportError, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports.results import ResultsReport, ResultsReportOptions
+from pigeonplanner.database.models import (Pigeon, Result, Racepoint, Category,
+                                           Sector, Type, Weather, Wind)
 
 
 def get_view_for_current_config():
@@ -149,7 +150,7 @@ class BaseView(object):
 class ClassicView(BaseView):
     ID = 0
 
-    (LS_COL_ID,
+    (LS_COL_OBJECT,
      LS_COL_BAND,
      LS_COL_YEAR,
      LS_COL_DATE,
@@ -195,7 +196,7 @@ class ClassicView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.liststore = gtk.ListStore(int, str, str, str, str, str, int, str, str, str, str,
+        self.liststore = gtk.ListStore(object, str, str, str, str, str, int, str, str, str, str,
                                        str, str, str, str, str, str, int, float, float)
 
         self.filtermodel = self.liststore.filter_new()
@@ -250,16 +251,18 @@ class ClassicView(BaseView):
         self.liststore.set_sort_column_id(-1, gtk.SORT_ASCENDING)
 
         self.clear()
-        for result in database.get_all_results():
-            placestr, coef, coefstr = common.format_place_coef(result["place"], result["out"])
-            speed = common.format_speed(result["speed"])
-            band, year = common.get_band_from_pindex(result["pindex"])
+        for result in Result.select():
+            placestr, coef, coefstr = common.format_place_coef(result.place, result.out)
+            speed = common.format_speed(result.speed)
+            # A result can have None as pigeon.
+            band = "" if result.pigeon is None else result.pigeon.band
+            year = "" if result.pigeon is None else result.pigeon.year
 
             self.liststore.insert(0,
-                [result["Resultkey"], band, year, result["date"], result["point"],
-                 placestr, result["out"], coefstr, speed, result["sector"], result["type"],
-                 result["category"], result["wind"], result["windspeed"], result["weather"],
-                 result["temperature"], result["comment"], result["place"], coef, result["speed"]
+                [result, band, year, result.date, result.racepoint,
+                 placestr, result.out, coefstr, speed, result.sector, result.type,
+                 result.category, result.wind, result.windspeed, result.weather,
+                 result.temperature, result.comment, result.place, coef, result.speed
                 ]
             )
 
@@ -437,15 +440,21 @@ class SplittedView(BaseView):
     def fill_treeview(self):
         self.clear()
         counter = 0
-        for race in database.get_all_races():
+        for race in (Result.select()
+            .group_by(Result.date, Result.racepoint)
+            .order_by(Result.date.asc())):
             self.results_cache[counter] = {"results": [], "filtered": []}
-            resultstmp = database.get_results_for_data({"date": race["date"], "point": race["point"]})
+            resultstmp = (Result.select()
+                .where(
+                    (Result.date == race.date) & 
+                    (Result.racepoint == race.racepoint))
+                .order_by(Result.racepoint.asc())
+                .dicts())
             for result in resultstmp:
-                result = dict(result)
-                band, year = common.get_band_from_pindex(result["pindex"])
-                result["band"] = band
-                result["year"] = year
-                result["ring"] = "%s / %s" % (band, year[2:])
+                pigeon = Pigeon.get(Pigeon.id == result["pigeon"])
+                result["band"] = pigeon.band
+                result["year"] = pigeon.year
+                result["ring"] = pigeon.get_band_string(True)
 
                 placestr, coef, coefstr = common.format_place_coef(result["place"], result["out"])
                 result["speedstr"] = common.format_speed(result["speed"])
@@ -456,9 +465,9 @@ class SplittedView(BaseView):
                 self.results_cache[counter]["results"].append(result)
                 self.results_cache[counter]["filtered"].append(result)
 
-            self.race_ls.append([counter, race["date"], race["point"], race["type"],
-                                          race["wind"], race["windspeed"],
-                                          race["weather"], race["temperature"]])
+            self.race_ls.append([counter, race.date, race.racepoint, race.type,
+                                          race.wind, race.windspeed,
+                                          race.weather, race.temperature])
             counter += 1
 
     def clear(self):
@@ -589,12 +598,12 @@ class ResultWindow(builder.GtkBuilder):
         self.widgets.resultview.set_filter(self._filter_races, self._filter_results)
         self.widgets.resultview.fill_treeview()
 
-        self.widgets.combopoint.set_data(database.get_all_data(database.Tables.RACEPOINTS), sort=False, active=None)
-        self.widgets.combosector.set_data(database.get_all_data(database.Tables.SECTORS), sort=False, active=None)
-        self.widgets.combotype.set_data(database.get_all_data(database.Tables.TYPES), sort=False, active=None)
-        self.widgets.combocategory.set_data(database.get_all_data(database.Tables.CATEGORIES), sort=False, active=None)
-        self.widgets.comboweather.set_data(database.get_all_data(database.Tables.WEATHER), sort=False, active=None)
-        self.widgets.combowind.set_data(database.get_all_data(database.Tables.WIND), sort=False, active=None)
+        self.widgets.combopoint.set_data(Racepoint, active=None)
+        self.widgets.combosector.set_data(Sector, active=None)
+        self.widgets.combotype.set_data(Type, active=None)
+        self.widgets.combocategory.set_data(Category, active=None)
+        self.widgets.comboweather.set_data(Weather, active=None)
+        self.widgets.combowind.set_data(Wind, active=None)
 
         self.widgets.resultwindow.set_transient_for(parent)
         self.widgets.resultwindow.show()
@@ -653,12 +662,11 @@ class ResultWindow(builder.GtkBuilder):
         # Results filter
         self._filter_results.clear()
         try:
-            pindex = self.widgets.entryband.get_pindex()
+            band, year = self.widgets.entryband.get_band()
         except errors.InvalidInputError:
             ErrorDialog(messages.MSG_EMPTY_FIELDS, self.widgets.filterdialog)
             return
-        if pindex:
-            band, year = common.get_band_from_pindex(pindex)
+        if band and year:
             self._filter_results.add(self.widgets.resultview.LS_COL_BAND, band)
             self._filter_results.add(self.widgets.resultview.LS_COL_YEAR, year, type_=int)
 
@@ -755,7 +763,7 @@ class ResultWindow(builder.GtkBuilder):
 
     def _do_operation(self, print_action, save_path=None):
         userinfo = common.get_own_address()
-        if not tools.check_user_info(self.widgets.resultwindow, userinfo["name"]):
+        if not tools.check_user_info(self.widgets.resultwindow, userinfo):
             return
 
         data = self.widgets.resultview.get_report_data()

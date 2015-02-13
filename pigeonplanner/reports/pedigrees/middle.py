@@ -16,7 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner.core import enums
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.reportlib.basereport import Report, ReportOptions
@@ -46,27 +45,28 @@ class PedigreeReport(Report):
 
         # User info
         userinfo = []
-        if config.get("printing.user-name"):
-            userinfo.append(self._userinfo["name"])
-        if config.get("printing.user-address"):
-            userinfo.append(self._userinfo["street"])
-            userinfo.append("%s %s" % (self._userinfo["code"], self._userinfo["city"]))
-        if config.get("printing.user-phone"):
-            userinfo.append(self._userinfo["phone"])
-        if config.get("printing.user-email"):
-            userinfo.append(self._userinfo["email"])
+        if self._userinfo is not None:
+            if config.get("printing.user-name"):
+                userinfo.append(self._userinfo.name)
+            if config.get("printing.user-address"):
+                userinfo.append(self._userinfo.street)
+                userinfo.append("%s %s" % (self._userinfo.code, self._userinfo.city))
+            if config.get("printing.user-phone"):
+                userinfo.append(self._userinfo.phone)
+            if config.get("printing.user-email"):
+                userinfo.append(self._userinfo.email)
 
         header_y = self.doc.get_usable_height() - 3
         self.doc.center_text("User", "\n".join(userinfo), w_center, header_y)
 
         if config.get("printing.pedigree-image") and self._pigeon is not None and\
-                                self._pigeon.image:
+                                self._pigeon.main_image is not None:
             img_x = w_center
             img_y = 2
             img_w = 7
             img_h = 4
 
-            self.doc.draw_image(self._pigeon.image, img_x, img_y, img_w, img_h,
+            self.doc.draw_image(self._pigeon.main_image.path, img_x, img_y, img_w, img_h,
                                 xalign="center", yalign="top")
 
         # Pedigree
@@ -121,9 +121,9 @@ class PedigreeReport(Report):
             # Get the text
             if pigeon is not None:
                 text = [pigeon.get_band_string(True)]
-                ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.get_extra()
+                ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.extra
                 if config.get("printing.pedigree-box-colour"):
-                    text.append(pigeon.get_colour())
+                    text.append(pigeon.colour)
             else:
                 text = [""]
                 ex1, ex2, ex3, ex4, ex5, ex6 = ("", "", "", "", "", "")
@@ -133,9 +133,9 @@ class PedigreeReport(Report):
 
             if pigeon is None:
                 boxstyle = "PedigreeNone"
-            elif pigeon.get_sex() == enums.Sex.cock:
+            elif pigeon.is_cock():
                 boxstyle = "PedigreeCock"
-            elif pigeon.get_sex() == enums.Sex.hen:
+            elif pigeon.is_hen():
                 boxstyle = "PedigreeHen"
             else:
                 boxstyle = "PedigreeUnknown"

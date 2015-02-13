@@ -19,13 +19,12 @@
 import gtk
 import gobject
 
-from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.core import enums
 from pigeonplanner.core import config
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.database.models import Pigeon, Colour, Strain, Loft
 
 
 class FilterDialog(builder.GtkBuilder):
@@ -35,11 +34,11 @@ class FilterDialog(builder.GtkBuilder):
 
         self.filter = utils.TreeviewFilter()
 
-        self.widgets.combocolour.set_data(database.get_all_data(database.Tables.COLOURS), sort=False, active=None)
-        self.widgets.combostrain.set_data(database.get_all_data(database.Tables.STRAINS), sort=False, active=None)
-        self.widgets.comboloft.set_data(database.get_all_data(database.Tables.LOFTS), sort=False, active=None)
-
     def show(self, parent):
+        self.widgets.combocolour.set_data(Colour, active=None)
+        self.widgets.combostrain.set_data(Strain, active=None)
+        self.widgets.comboloft.set_data(Loft, active=None)
+
         self.widgets.filterdialog.set_transient_for(parent)
         self.widgets.filterdialog.show_all()
 
@@ -104,17 +103,15 @@ class FilterDialog(builder.GtkBuilder):
 
         if self.widgets.checkstatus.get_active():
             status = self.widgets.combostatus.get_status()
-            self.filter.add("active", status, type_=int, allow_empty_value=True)
+            self.filter.add("status_id", status, type_=int, allow_empty_value=True)
 
         if self.widgets.checksire.get_active():
-            sireband, sireyear = self.widgets.bandentrysire.get_band(False)
-            self.filter.add("sire", sireband, allow_empty_value=True)
-            self.filter.add("yearsire", sireyear, allow_empty_value=True)
+            sire = self.widgets.bandentrysire.get_band(False)
+            self.filter.add("sire_filter", sire, type_=tuple, allow_empty_value=True)
 
         if self.widgets.checkdam.get_active():
-            damband, damyear = self.widgets.bandentrydam.get_band(False)
-            self.filter.add("dam", damband, allow_empty_value=True)
-            self.filter.add("yeardam", damyear, allow_empty_value=True)
+            dam = self.widgets.bandentrydam.get_band(False)
+            self.filter.add("dam_filter", dam, type_=tuple, allow_empty_value=True)
 
         colour = self.widgets.combocolour.child.get_text()
         self.filter.add("colour", colour)
@@ -136,7 +133,6 @@ class MainTreeView(gtk.TreeView, component.Component):
     __gsignals__ = {"pigeons-changed": (gobject.SIGNAL_RUN_LAST, None, ())}
 
     (LS_PIGEON,
-     LS_PINDEX,
      LS_RING,
      LS_YEAR,
      LS_NAME,
@@ -147,7 +143,7 @@ class MainTreeView(gtk.TreeView, component.Component):
      LS_LOFT,
      LS_STRAIN,
      LS_STATUS,
-     LS_SEXIMG) = range(13)
+     LS_SEXIMG) = range(12)
 
     (COL_BAND,
      COL_YEAR,
@@ -177,6 +173,8 @@ class MainTreeView(gtk.TreeView, component.Component):
         self._selection.set_mode(gtk.SELECTION_MULTIPLE)
         self.set_columns()
         self.show_all()
+
+        self._filterdialog = FilterDialog(self)
 
     # Public methods
     def get_top_iter(self, rowiter):
@@ -231,46 +229,35 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     def fill_treeview(self, path=0):
         self._liststore.clear()
-        for pindex, pigeon in pigeonparser.parser.pigeons.items():
-            if not config.get("interface.show-all-pigeons") and not pigeon.get_visible():
+
+        for pigeon in Pigeon.select():
+            if not config.get("interface.show-all-pigeons") and not pigeon.visible:
                 continue
-            ring, year = pigeon.get_band()
-            self._liststore.insert(0, [pigeon, pindex, ring, year,
-                                       pigeon.get_name(), pigeon.get_colour(),
-                                       pigeon.get_sex_string(),
-                                       pigeon.get_sire_string(),
-                                       pigeon.get_dam_string(),
-                                       pigeon.get_loft(), pigeon.get_strain(),
-                                       pigeon.get_status(),
-                                       utils.get_sex_image(pigeon.sex)])
+            self._liststore.insert(0, self._row_for_pigeon(pigeon))
+
         self._selection.select_path(path)
         self.emit("pigeons-changed")
 
     def add_pigeon(self, pigeon, select=True):
-        ring, year = pigeon.get_band()
-        row = [pigeon, pigeon.get_pindex(), ring, year, pigeon.get_name(),
-               pigeon.get_colour(), pigeon.get_sex_string(),
-               pigeon.get_sire_string(), pigeon.get_dam_string(),
-               pigeon.get_loft(), pigeon.get_strain(),
-               pigeon.get_status(),
-               utils.get_sex_image(pigeon.sex)]
-        self.add_row(row, select)
+        self.add_row(self._row_for_pigeon(pigeon), select)
 
     def update_pigeon(self, pigeon, rowiter=None, path=None):
-        band, year = pigeon.get_band()
+        if rowiter is None and path is None:
+            path = self.get_path_for_pigeon(pigeon)
+            path = self.get_child_path(path)
+
         data = (
             self.LS_PIGEON, pigeon,
-            self.LS_PINDEX, pigeon.get_pindex(),
-            self.LS_RING, band,
-            self.LS_YEAR, year,
-            self.LS_NAME, pigeon.get_name(),
-            self.LS_COLOUR, pigeon.get_colour(),
-            self.LS_SEX, pigeon.get_sex_string(),
-            self.LS_SIRE, pigeon.get_sire_string(),
-            self.LS_DAM, pigeon.get_dam_string(),
-            self.LS_LOFT, pigeon.get_loft(),
-            self.LS_STRAIN, pigeon.get_strain(),
-            self.LS_STATUS, _(pigeon.get_status()),
+            self.LS_RING, pigeon.band,
+            self.LS_YEAR, pigeon.year,
+            self.LS_NAME, pigeon.name,
+            self.LS_COLOUR, pigeon.colour,
+            self.LS_SEX, pigeon.sex_string,
+            self.LS_SIRE, "" if pigeon.sire is None else pigeon.sire.band_string,
+            self.LS_DAM, "" if pigeon.dam is None else pigeon.dam.band_string,
+            self.LS_LOFT, pigeon.loft,
+            self.LS_STRAIN, pigeon.strain,
+            self.LS_STATUS, pigeon.status.status_string,
             self.LS_SEXIMG, utils.get_sex_image(pigeon.sex)
         )
         self.update_row(data, rowiter=rowiter, path=path)
@@ -281,16 +268,16 @@ class MainTreeView(gtk.TreeView, component.Component):
                 return True
         return False
 
-    def select_pigeon(self, widget, pindex):
+    def select_pigeon(self, widget, pigeon):
         """
         Select the pigeon in the main treeview
 
         @param widget: Only given when selected through menu
-        @param pindex: The index of the pigeon to search
+        @param pigeon: The pigeon object to search
         """
 
         for row in self._modelsort:
-            if self._modelsort.get_value(row.iter, self.LS_PINDEX) == pindex:
+            if self._modelsort.get_value(row.iter, self.LS_PIGEON) == pigeon:
                 self._selection.unselect_all()
                 self._selection.select_iter(row.iter)
                 self.scroll_to_cell(row.path)
@@ -317,7 +304,7 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     def get_path_for_pigeon(self, pigeon):
         for row in self._liststore:
-            if row[self.LS_PINDEX] == pigeon.pindex:
+            if row[self.LS_PIGEON] == pigeon:
                 return self.get_top_path(row.path)[0]
 
     def get_pigeon_at_path(self, path):
@@ -345,15 +332,12 @@ class MainTreeView(gtk.TreeView, component.Component):
                 text.set_visible(sexcoltype == 1 or sexcoltype == 3)
                 pixbuf.set_visible(sexcoltype == 2 or sexcoltype == 3)
 
-    def after_database_init(self):
-        self._filterdialog = FilterDialog(self)
-
     def run_filterdialog(self, parent):
         self._filterdialog.show(parent)
 
     # Internal methods
     def _build_treeview(self):
-        liststore = gtk.ListStore(object, str, str, str, str, str, str, str,
+        liststore = gtk.ListStore(object, str, str, str, str, str, str,
                                   str, str, str, str, gtk.gdk.Pixbuf)
         columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"),
                    _("Sire"), _("Dam"), _("Loft"), _("Strain"), _("Status")]
@@ -365,11 +349,27 @@ class MainTreeView(gtk.TreeView, component.Component):
                 tvcolumn.add_attribute(renderer, "pixbuf", self.LS_SEXIMG)
             textrenderer = gtk.CellRendererText()
             tvcolumn.pack_start(textrenderer, expand=False)
-            tvcolumn.add_attribute(textrenderer, "text", index+2)
-            tvcolumn.set_sort_column_id(index+2)
+            tvcolumn.add_attribute(textrenderer, "text", index+1)
+            tvcolumn.set_sort_column_id(index+1)
             tvcolumn.set_resizable(True)
             self.append_column(tvcolumn)
         return liststore
+
+    def _row_for_pigeon(self, pigeon):
+        return [
+            pigeon,
+            pigeon.band,
+            pigeon.year,
+            pigeon.name,
+            pigeon.colour,
+            pigeon.sex_string,
+            "" if pigeon.sire is None else pigeon.sire.band_string,
+            "" if pigeon.dam is None else pigeon.dam.band_string,
+            pigeon.loft,
+            pigeon.strain,
+            pigeon.status.status_string,
+            utils.get_sex_image(pigeon.sex)
+        ]
 
     def _visible_func(self, model, treeiter):
         pigeon = model[treeiter][self.LS_PIGEON]

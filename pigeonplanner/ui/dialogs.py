@@ -25,14 +25,13 @@ import gtk.gdk
 
 from pigeonplanner import main
 from pigeonplanner import messages
-from pigeonplanner import database
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import InfoDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.core import backup
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.database.models import Pigeon, Status, Result, Breeding
 
 
 class AboutDialog(gtk.AboutDialog):
@@ -117,12 +116,17 @@ class InformationDialog(gtk.Dialog):
                                 % (hens, self.get_percentage(hens, total))))
         data.append(("    %s" % _("Young birds"), "%s\t(%s %%)"
                                 % (ybirds, self.get_percentage(ybirds, total))))
-        for status in range(6):
-            n_status = database.count_pigeons_with_status(status)
-            data.append(("    %s" % common.get_status(status), "%s\t(%s %%)"
+        for status in range(7):
+            n_status = (Status.select()
+                        .join(Pigeon)
+                        .where((Status.status_id == status) & (Pigeon.visible == True))
+                        .count())
+            data.append(("    %s" % enums.Status.get_string(status), "%s\t(%s %%)"
                             % (n_status, self.get_percentage(n_status, total))))
-        data.append((_("Number of results"), str(database.count_results())))
-        data.append((_("Number of couples"), str(database.count_breeding_records())))
+        n_results = Result.select().count()
+        n_breeding = Breeding.select().count()
+        data.append((_("Number of results"), str(n_results)))
+        data.append((_("Number of couples"), str(n_breeding)))
         return data
 
     def get_percentage(self, value, total):
@@ -204,38 +208,6 @@ class BackupDialog(gtk.Dialog):
                 InfoDialog(msg, self._parent)
 
 
-class MedicationRemoveDialog(gtk.Dialog):
-    def __init__(self, parent, multiple=False):
-        gtk.Dialog.__init__(self, "", parent, gtk.DIALOG_DESTROY_WITH_PARENT,
-                            (gtk.STOCK_NO, gtk.RESPONSE_NO,
-                             gtk.STOCK_YES, gtk.RESPONSE_YES))
-
-        self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
-        self.set_resizable(False)
-        self.set_skip_taskbar_hint(True)
-
-        text = _("Removing the selected medication entry")
-        self.set_title(text + " - Pigeon Planner")
-        self.check = gtk.CheckButton(_("Remove this entry for all pigeons?"))
-        label1 = gtk.Label()
-        label1.set_markup("<b>%s</b>" %text)
-        label1.set_alignment(0.0, 0.5)
-        label2 = gtk.Label(_("Are you sure?"))
-        label2.set_alignment(0.0, 0.5)
-        vbox = gtk.VBox()
-        vbox.pack_start(label1, False, False, 8)
-        vbox.pack_start(label2, False, False, 8)
-        if multiple:
-            vbox.pack_start(self.check, False, False, 12)
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_DIALOG_WARNING, gtk.ICON_SIZE_DIALOG)
-        hbox = gtk.HBox()
-        hbox.pack_start(image, False, False, 12)
-        hbox.pack_start(vbox, False, False, 12)
-        self.vbox.pack_start(hbox, False, False)
-        self.vbox.show_all()
-
-
 class PigeonListDialog(gtk.Dialog):
     def __init__(self, parent):
         gtk.Dialog.__init__(self, _("Search a pigeon"), parent,
@@ -287,27 +259,28 @@ class PigeonListDialog(gtk.Dialog):
         if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
             self.response(gtk.RESPONSE_APPLY)
 
-    def fill_treeview(self, pindex=None, sex=None, year=None):
+    def fill_treeview(self, band_tuple=None, sex=None, year=None):
         self._liststore.clear()
-        for pigeon in pigeonparser.parser.pigeons.values():
-            # If pindex is given, exclude it
-            if pindex is not None and pindex == pigeon.get_pindex():
+        for pigeon in Pigeon.select():
+            # If a band_tuple is given, exclude it
+            if band_tuple is not None and band_tuple == (pigeon.band, pigeon.year):
                 continue
             # If sex is given, only include these
-            if sex is not None and not sex == pigeon.get_sex():
+            if sex is not None and not sex == pigeon.sex:
                 continue
             # If year is given, exclude older pigeons
             if year is not None and int(year) < int(pigeon.year):
                 continue
-            self._liststore.insert(0, [pigeon, pigeon.ring, pigeon.year,
-                                       pigeon.get_name()])
+            self._liststore.insert(0,
+                [pigeon, pigeon.band, pigeon.year, pigeon.name])
         self._liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self._liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
         self._treeview.get_selection().select_path(0)
 
     def get_selected(self):
         model, rowiter = self._treeview.get_selection().get_selected()
-        if not rowiter: return
+        if not rowiter:
+            return
         return model[rowiter][0]
 
     def _visible_func(self, model, rowiter):
@@ -315,5 +288,5 @@ class PigeonListDialog(gtk.Dialog):
             # Show everything
             return True
         # Only show visible pigeons
-        return bool(model.get_value(rowiter, 0).show)
-
+        pigeon = model.get_value(rowiter, 0)
+        return pigeon.visible

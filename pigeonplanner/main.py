@@ -194,12 +194,22 @@ def run(gtk_ui=True):
     app = Startup()
     app.setup_locale(gtk_ui)
 
-    from pigeonplanner.database import manager
-    manager.init_manager()
+    missing_libs = []
+    try:
+        # We use the ManyToManyField introduced in 2.4.6
+        import peewee
+        if not tuple([int(x) for x in peewee.__version__.split(".")]) >= (2, 4, 6):
+            raise ImportError
+    except ImportError:
+        app.logger.error("Peewee >= 2.4.6 not found!")
+        missing_libs.append("Peewee >= 2.4.6")
+    else:
+        from pigeonplanner.database import manager
+        manager.init_manager()
 
     if gtk_ui:
         from pigeonplanner.ui import gtkmain
-        gtkmain.run_ui()
+        gtkmain.run_ui(missing_libs)
 
 if __name__ == "__main__":
     run()

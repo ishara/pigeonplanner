@@ -21,7 +21,7 @@ import datetime
 from yapsy.IPlugin import IPlugin
 
 from pigeonplanner.core import const
-from pigeonplanner.core import common
+from pigeonplanner.database.models import Pigeon
 
 
 def expand_year(year):
@@ -40,7 +40,7 @@ class DTDParser(IPlugin):
                 return True
         return False
 
-    def parse_file(self, resultfile, pindexlist):
+    def parse_file(self, resultfile):
         data = {"sector": "", "category": "", "n_pigeons": "", "date": "", "racepoint": ""}
         results = {}
         firstline = -1
@@ -111,8 +111,10 @@ class DTDParser(IPlugin):
             if len(year) > 1:
                 ring, year = year[:-2], year[-2:]
             year = expand_year(year)
-            pindex = common.get_pindex_from_band(ring, year)
-            if pindex in pindexlist:
-                results[pindex] = [ring, year, place, speed]
+            try:
+                pigeon = Pigeon.get((Pigeon.band == ring) & (Pigeon.year == year))
+                results[pigeon] = [ring, year, place, speed]
+            except Pigeon.DoesNotExist:
+                pass
         return data, results
 

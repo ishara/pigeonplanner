@@ -37,20 +37,20 @@ class PigeonsReport(Report, HelperMethods):
 
         # Pigeon table
         #TODO: column size with different columns
-        columns = [(_("Band no."), "get_band_string")]
+        columns = [(_("Band no."), "band_string")]
 
         if config.get("columns.pigeon-sex") or config.get("printing.pigeon-sex"):
-            columns.append((_("Sex"), "get_sex_string"))
+            columns.append((_("Sex"), "sex_string"))
         if config.get("columns.pigeon-name"):
-            columns.append((_("Name"), "get_name"))
+            columns.append((_("Name"), "name"))
         if config.get("columns.pigeon-colour"):
-            columns.append((_("Colour"), "get_colour"))
+            columns.append((_("Colour"), "colour"))
         if config.get("columns.pigeon-loft"):
-            columns.append((_("Loft"), "get_loft"))
+            columns.append((_("Loft"), "loft"))
         if config.get("columns.pigeon-strain"):
-            columns.append((_("Strain"), "get_strain"))
+            columns.append((_("Strain"), "strain"))
         if config.get("columns.pigeon-status"):
-            columns.append((_("Status"), "get_status"))
+            columns.append((_("Status"), "status_string"))
 
         self.doc.start_table("my_table", "table")
 
@@ -63,7 +63,8 @@ class PigeonsReport(Report, HelperMethods):
         for pigeon in self._pigeons:
             self.doc.start_row()
             for name, method in columns:
-                self.add_cell(getattr(pigeon, method)(), "cell", "celltext")
+                instance = pigeon.status if method == "status_string" else pigeon
+                self.add_cell(getattr(instance, method), "cell", "celltext")
             self.doc.end_row()
         self.doc.end_table()
 

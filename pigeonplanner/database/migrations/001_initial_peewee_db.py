@@ -16,22 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-OR = " OR "
-AND = " AND "
+database_version = 3
 
-def build_sql_insert_cols(data):
-    cols = []
-    values = []
-    for key in data.keys():
-        cols.append(key)
-        values.append(":%s" % key)
-    cols = ", ".join(cols)
-    values = ", ".join(values)
-    return {"columns": cols, "values": values}
-
-def build_sql_cols(data, delimiter=", "):
-    cols = []
-    for key in data.keys():
-        cols.append("%s=:%s" % (key, key))
-    return delimiter.join(cols)
-
+def do_migration(connection):
+    print("TODO: migrations to the new Peewee database aren't implemented yet!")
+    #TODO PW: do the actual migration here...

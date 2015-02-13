@@ -16,14 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from pigeonplanner.database.main import *
-
+from .main import DatabaseSession
 session = DatabaseSession()
 
-from pigeonplanner.database.data import *
-from pigeonplanner.database.pigeon import *
-
-DATABASE_OK = 0
-DATABASE_TOO_NEW = 1
-DATABASE_CHANGED = 2
-DATABASE_ERROR = 3

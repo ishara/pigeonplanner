@@ -22,10 +22,9 @@ import errno
 import shutil
 from datetime import datetime
 
-from pigeonplanner import database
 from pigeonplanner.core import const
 from pigeonplanner.core import common
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.database import session
 
 
 class DatabaseInfoError(Exception):
@@ -136,18 +135,12 @@ class DBManager(object):
         """
 
         self._close_database()
-        database.session.open(dbobj.path)
-
-        if database.session.needs_update():
+        session.open(dbobj.path)
+        if session.needs_update():
             if not self.prompt_do_upgrade():
                 self._close_database()
                 raise DatabaseInfoError("")
-
-        changed = database.session.check_schema()
-
-        pigeonparser.parser.clear()
-        pigeonparser.parser.build_pigeons()
-
+        changed = session.do_migrations()
         return changed
 
     def add(self, name, description, path):
@@ -247,11 +240,9 @@ class DBManager(object):
 
     def _close_database(self):
         try:
-            database.session.close()
+            session.close()
         except:
             pass
-        else:
-            pigeonparser.parser.clear()
 
     def _get_new_db_path(self, path):
         # Keep checking for a unique filename

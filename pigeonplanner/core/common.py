@@ -33,45 +33,15 @@ import datetime
 import cStringIO
 import webbrowser
 
-from pigeonplanner import database
 from pigeonplanner.core import const
 from pigeonplanner.core import enums
 from pigeonplanner.core import config
+from pigeonplanner.database.models import Pigeon, Person
 
-
-def get_sexdic():
-    return {enums.Sex.cock: _("Cock"),
-            enums.Sex.hen: _("Hen"),
-            enums.Sex.unknown: _("Young bird")}
-
-def get_sex(sex):
-    return get_sexdic()[sex]
 
 SEX_IMGS = {enums.Sex.cock: os.path.join(const.IMAGEDIR, "symbol_male.png"),
             enums.Sex.hen: os.path.join(const.IMAGEDIR, "symbol_female.png"),
             enums.Sex.unknown: os.path.join(const.IMAGEDIR, "symbol_young.png")}
-
-def get_statusdic():
-    return {enums.Status.dead: _("Dead"),
-            enums.Status.active: _("Active"),
-            enums.Status.sold: _("Sold"),
-            enums.Status.lost: _("Lost"),
-            enums.Status.breeder: _("Breeder"),
-            enums.Status.loaned: _("On loan"),
-            enums.Status.widow: _("Widow")}
-
-def get_status(status):
-    return get_statusdic()[status]
-
-statustables = {enums.Status.dead: database.Tables.DEAD,
-                enums.Status.active: "Active",
-                enums.Status.sold: database.Tables.SOLD,
-                enums.Status.lost: database.Tables.LOST,
-                enums.Status.breeder: database.Tables.BREEDER,
-                enums.Status.loaned: database.Tables.LOANED,
-                enums.Status.widow: database.Tables.WIDOW}
-def get_status_table(status):
-    return statustables[status]
 
 STATUS_IMGS = {enums.Status.dead: os.path.join(const.IMAGEDIR, "status_dead.png"),
                enums.Status.active: os.path.join(const.IMAGEDIR, "status_active.png"),
@@ -91,7 +61,6 @@ def get_function_name():
 def get_date():
     return datetime.date.today().strftime(const.DATE_FORMAT)
 
-
 def count_active_pigeons():
     """
     Count the active pigeons as total and seperate sexes
@@ -101,16 +70,14 @@ def count_active_pigeons():
     hens = 0
     ybirds = 0
     total = 0
-    for pigeon in database.get_all_pigeons():
-        if not pigeon["show"]: continue
-
+    for pigeon in Pigeon.select().where(Pigeon.visible == True):
         total += 1
 
-        if pigeon["sex"] == enums.Sex.cock:
+        if pigeon.is_cock():
             cocks += 1
-        elif pigeon["sex"] == enums.Sex.hen:
+        elif pigeon.is_hen():
             hens += 1
-        elif pigeon["sex"] == enums.Sex.unknown:
+        elif pigeon.is_unknown():
             ybirds += 1
 
     return total, cocks, hens, ybirds
@@ -120,50 +87,11 @@ def get_own_address():
     Retrieve the users personal info
     """
 
-    userinfo = dict(name="", street="", code="", city="", country="",
-                    phone="", email="", comment="")
-    info = database.get_address_data({"me": 1})
-    if info:
-        userinfo["name"] = info["name"]
-        userinfo["street"] = info["street"]
-        userinfo["code"] = info["code"]
-        userinfo["city"] = info["city"]
-        userinfo["country"] = info["country"]
-        userinfo["phone"] = info["phone"]
-        userinfo["email"] = info["email"]
-        userinfo["comment"] = info["comment"]
-    return userinfo
-
-def get_pindex_from_band(band, year):
-    """
-    Create the pindex from the pigeons band and year
-
-    @param band: The pigeons band number
-    @param year: The year of the pigeon
-    """
-
-    return band+year
-
-def get_pindex_from_band_string(bandstring):
-    """
-    Create the pindex from a pigeons bandstring
-
-    @param bandstring: The pigeons bandstring
-    """
-
-    band, year = bandstring.rsplit("/", 1)
-    return get_pindex_from_band(band.strip(), year.strip())
-
-def get_band_from_pindex(pindex):
-    """
-    Retrieve the pigeons band and year from a pindex
-
-    @param pindex: The pindex of the pigeon
-    """
-
-    band = pindex[:-4]
-    year = pindex[-4:]
-    return band, year
+    try:
+        person = Person.get(Person.me == True)
+    except Person.DoesNotExist:
+        person = None
+    return person
 
 def calculate_coefficient(place, out, as_string=False):
     """
@@ -233,7 +161,12 @@ def escape_text(text):
 def open_file(path):
     from pigeonplanner.ui.messagedialog import ErrorDialog
 
-    norm_path = unicode(os.path.normpath(path), "utf-8")
+    norm_path = os.path.normpath(path)
+    try:
+        norm_path = unicode(norm_path, "utf-8")
+    except TypeError:
+        # String is already in unicode
+        pass
     if not os.path.exists(norm_path):
         ErrorDialog((_("Error: This file does not exist"), None, _("Error")))
         return

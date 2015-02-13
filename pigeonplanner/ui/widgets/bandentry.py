@@ -20,7 +20,6 @@ import gtk
 import gobject
 
 from pigeonplanner.ui import dialogs
-from pigeonplanner.core import common
 from pigeonplanner.core import checks
 from pigeonplanner.core import errors
 
@@ -87,19 +86,18 @@ class BandEntry(gtk.HBox):
     has_search = gobject.property(get_has_search, set_has_search, bool, False, nick="Has search")
 
     def is_empty(self):
-        return len(self.get_pindex(False)) == 0
+        return self.get_band(False) == ("", "")
 
-    def set_pindex(self, pindex):
-        self.set_band(*common.get_band_from_pindex(pindex))
+    def set_pigeon(self, pigeon):
+        if pigeon is None:
+            self.set_band("", "")
+        else:
+            self.set_band(pigeon.band, pigeon.year)
 
     def set_band(self, band, year):
         self._unwarn()
         self._entryband.set_text(band)
         self._entryyear.set_text(year)
-
-    def get_pindex(self, validate=True):
-        band, year = self.get_band(validate)
-        return common.get_pindex_from_band(band, year)
 
     def get_band(self, validate=True):
         band, year = self._entryband.get_text(), self._entryyear.get_text()
@@ -134,16 +132,16 @@ class BandEntry(gtk.HBox):
 
     def on_button_clicked(self, widget):
         try:
-            pindex, sex, year = self.emit("search-clicked")
+            band_tuple, sex, year = self.emit("search-clicked")
         except TypeError:
             return
 
         parent = self.get_toplevel()
         dialog = dialogs.PigeonListDialog(parent)
-        dialog.fill_treeview(pindex, sex, year)
+        dialog.fill_treeview(band_tuple, sex, year)
         response = dialog.run()
         if response == gtk.RESPONSE_APPLY:
             pigeon = dialog.get_selected()
-            self.set_pindex(pigeon.get_pindex())
+            self.set_pigeon(pigeon)
         dialog.destroy()
 

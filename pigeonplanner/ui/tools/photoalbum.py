@@ -25,10 +25,9 @@ import gobject
 import logging
 logger = logging.getLogger(__name__)
 
-from pigeonplanner import database
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
-from pigeonplanner.core import pigeonparser
+from pigeonplanner.database.models import Image
 
 
 MARGIN = 6
@@ -71,7 +70,7 @@ class PhotoAlbum(builder.GtkBuilder):
         2.00: "200%",
     }
 
-    def __init__(self, parent, pindex=None):
+    def __init__(self, parent, image=None):
         builder.GtkBuilder.__init__(self, "PhotoAlbum.ui")
 
         self.widgets.photoalbum.set_transient_for(parent)
@@ -82,14 +81,14 @@ class PhotoAlbum(builder.GtkBuilder):
         self.pixbuf = None
         self.interp = gtk.gdk.INTERP_BILINEAR
         self.max = (1600, 1200)
-        self.picture_no = len(self.widgets.iconview.get_model())
+        self.picture_no = len(self.widgets.liststore)
         self.current_picture = 0
         self.zoom = 1.0
         self.zoom_mode = ZOOM_FREE
-        if pindex:
+        if image is not None:
             path = tuple(index for index, row in
-                         enumerate(self.widgets.iconview.get_model()) if
-                         row[1] == pindex)
+                         enumerate(self.widgets.liststore) if
+                         row[1] == image)
         else:
             path = (0,)
         try:
@@ -124,25 +123,16 @@ class PhotoAlbum(builder.GtkBuilder):
         self.widgets.vbox.reorder_child(toolbar, 0)
 
     def fill_iconview(self):
-        store = gtk.ListStore(str, str, str, gtk.gdk.Pixbuf)
-        store.set_sort_column_id(0, gtk.SORT_ASCENDING)
-        self.widgets.iconview.set_model(store)
-        self.widgets.iconview.set_text_column(2)
-        self.widgets.iconview.set_pixbuf_column(3)
-
-        for pigeon in database.get_all_images():
-            if not pigeon[3]: continue
-
+        for image in Image.select():
             try:
-                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(pigeon[3],
-                                                              96, 96)
-                store.append(["%s%s" %(pigeon[2], pigeon[1]), pigeon[0],
-                              "%s/%s" %(pigeon[1], pigeon[2][2:]), pixbuf])
+                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(image.path, 96, 96)
+                self.widgets.liststore.append(
+                    [image.pigeon, image, image.pigeon.get_band_string(True), pixbuf])
             except gobject.GError:
-                logger.error("Could not find original image for: %s/%s"
-                             %(pigeon[1], pigeon[2]))
+                logger.error("Could not find original image for: %s"
+                             % (image.pigeon.get_band_string()))
 
-        if len(store) > 0:
+        if len(self.widgets.liststore) > 0:
             self.widgets.labelImage.hide()
         else:
             self.disable_toolbuttons()
@@ -333,8 +323,6 @@ class PhotoAlbum(builder.GtkBuilder):
             self.set_picture(self.current_picture + 1)
 
     def on_iconview_changed(self, widget):
-        model = widget.get_model()
-
         try:
             path = widget.get_selected_items()[0]
         except IndexError:
@@ -342,10 +330,8 @@ class PhotoAlbum(builder.GtkBuilder):
             self.disable_toolbuttons()
             return
 
-        pindex = model[path][1]
-        image = pigeonparser.parser.pigeons[pindex].get_image()
-
-        self.set_pixbuf(image)
+        image = self.widgets.liststore[path][1]
+        self.set_pixbuf(image.path)
         self.current_picture = path[0]
 
         utils.set_multiple_sensitive(

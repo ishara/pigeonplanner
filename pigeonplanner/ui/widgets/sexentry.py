@@ -19,7 +19,7 @@
 import gtk
 
 from pigeonplanner.ui import utils
-from pigeonplanner.core import common
+from pigeonplanner.core import enums
 
 
 class SexEntry(gtk.Viewport):
@@ -41,6 +41,6 @@ class SexEntry(gtk.Viewport):
             img = None
             self._entry.set_text("")
         else:
-            self._entry.set_text(common.get_sex(sex))
+            self._entry.set_text(enums.Sex.get_string(sex))
         self._entry.set_icon_from_pixbuf(0, img)
 

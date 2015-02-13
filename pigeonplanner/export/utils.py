@@ -16,8 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-COLS_PIGEON = ("pindex",
-               "band",
+COLS_PIGEON = ("band",
                "year",
                "sex",
                "visible",

@@ -25,7 +25,6 @@ import gobject
 
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
-from pigeonplanner import database
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
@@ -39,8 +38,8 @@ from pigeonplanner.core import enums
 from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
-from pigeonplanner.core import pigeonparser
 from pigeonplanner.core import pigeon as corepigeon
+from pigeonplanner.database.models import Status, Colour, Strain, Loft
 
 
 RESPONSE_EDIT = 10
@@ -116,7 +115,7 @@ class PigeonImageWidget(gtk.EventBox):
         if self._view.pigeon is None:
             return
         parent = None if isinstance(self._parent, gtk.Dialog) else self._parent
-        tools.PhotoAlbum(parent, self._view.pigeon.get_pindex())
+        tools.PhotoAlbum(parent, self._view.pigeon.main_image)
 
     def on_editable_button_press_event(self, widget, event):
         if event.button == 3:
@@ -149,13 +148,13 @@ class PigeonImageWidget(gtk.EventBox):
         self._imagewidget.set_from_pixbuf(logo)
         self._imagepath = ""
 
-    def set_image(self, path=""):
-        if path:
-            pixbuf = thumbnail.get_image(path)
+    def set_image(self, image=None):
+        if image is not None:
+            pixbuf = thumbnail.get_image(image.path)
+            self._imagewidget.set_from_pixbuf(pixbuf)
+            self._imagepath = image.path
         else:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
-        self._imagewidget.set_from_pixbuf(pixbuf)
-        self._imagepath = path
+            self.set_default_image()
 
     def get_image_path(self):
         return self._imagepath
@@ -193,14 +192,15 @@ class StatusButton(builder.GtkBuilder):
 
     def on_statusbutton_clicked(self, widget):
         if self.pigeon:
-            self.widgets.labelstatus.set_text(self.pigeon.get_status())
-            self.widgets.notebookstatus.set_current_page(self.pigeon.get_active())
+            status_id = self.pigeon.status.status_id
+            self.widgets.labelstatus.set_text(enums.Status.get_string(status_id))
+            self.widgets.notebookstatus.set_current_page(status_id)
         self.widgets.statusdialog.show()
         self.widgets.buttonstatusok.grab_focus()
 
     def _set_button_info(self, status):
         image = common.STATUS_IMGS[status]
-        label = common.get_status(status)
+        label = enums.Status.get_string(status)
         self.widgets.statuslabel.set_text(label)
         self.widgets.statusimage.set_from_file(image)
 
@@ -208,38 +208,47 @@ class StatusButton(builder.GtkBuilder):
         return self.widgets.combostatus.get_active()
 
     def get_current_data(self):
+        statusdata = Status.get_fields_with_defaults()
         status = self.widgets.combostatus.get_active()
         if status == enums.Status.active:
-            return {}
+            return statusdata
         if status == enums.Status.dead:
             bffr = self.widgets.textinfodead.get_buffer()
-            return {"date": self.widgets.entrydatedead.get_text(),
-                    "info": bffr.get_text(*bffr.get_bounds())}
+            statusdata.update({"date": self.widgets.entrydatedead.get_text(),
+                               "info": bffr.get_text(*bffr.get_bounds())})
+            return statusdata
         if status == enums.Status.sold:
             bffr = self.widgets.textinfosold.get_buffer()
-            return {"person": self.widgets.entrybuyersold.get_text(),
-                    "date": self.widgets.entrydatesold.get_text(),
-                    "info": bffr.get_text(*bffr.get_bounds())}
+            statusdata.update({"person": self.widgets.entrybuyersold.get_text(),
+                               "date": self.widgets.entrydatesold.get_text(),
+                               "info": bffr.get_text(*bffr.get_bounds())})
+            return statusdata
         if status == enums.Status.lost:
             bffr = self.widgets.textinfolost.get_buffer()
-            return {"racepoint": self.widgets.entrypointlost.get_text(),
-                    "date": self.widgets.entrydatelost.get_text(),
-                    "info": bffr.get_text(*bffr.get_bounds())}
+            statusdata.update({"racepoint": self.widgets.entrypointlost.get_text(),
+                               "date": self.widgets.entrydatelost.get_text(),
+                               "info": bffr.get_text(*bffr.get_bounds())})
+            return statusdata
         if status == enums.Status.breeder:
             bffr = self.widgets.textinfobreeder.get_buffer()
-            return {"start": self.widgets.entrydatebreedfrom.get_text(),
-                    "end": self.widgets.entrydatebreedto.get_text(),
-                    "info": bffr.get_text(*bffr.get_bounds())}
+            statusdata.update({"start": self.widgets.entrydatebreedfrom.get_text(),
+                               "end": self.widgets.entrydatebreedto.get_text(),
+                               "info": bffr.get_text(*bffr.get_bounds())})
+            return statusdata
         if status == enums.Status.loaned:
             bffr = self.widgets.textinfoloan.get_buffer()
-            return {"loaned": self.widgets.entrydateloan.get_text(),
-                    "back": self.widgets.entrydateloanback.get_text(),
-                    "person": self.widgets.entrypersonloan.get_text(),
-                    "info": bffr.get_text(*bffr.get_bounds())}
+            statusdata.update({"start": self.widgets.entrydateloan.get_text(),
+                               "end": self.widgets.entrydateloanback.get_text(),
+                               "person": self.widgets.entrypersonloan.get_text(),
+                               "info": bffr.get_text(*bffr.get_bounds())})
+            return statusdata
         if status == enums.Status.widow:
             bffr = self.widgets.textinfowidow.get_buffer()
-            return {"partner": self.widgets.entrypartnerwidow.get_pindex(),
-                    "info": bffr.get_text(*bffr.get_bounds())}
+            partner_band = self.widgets.entrypartnerwidow.get_band()
+            partner = corepigeon.get_or_create_pigeon(partner_band, enums.Sex.cock, False)
+            statusdata.update({"partner": partner,
+                               "info": bffr.get_text(*bffr.get_bounds())})
+            return statusdata
 
     def set_default(self):
         self.pigeon = None
@@ -251,45 +260,32 @@ class StatusButton(builder.GtkBuilder):
 
     def set_pigeon(self, pigeon):
         self.pigeon = pigeon
-        pindex = pigeon.get_pindex()
-        status = pigeon.get_active()
-        self._set_button_info(status)
-        self.widgets.combostatus.set_active(status)
-        if status == enums.Status.dead:
-            data = database.get_status(database.Tables.DEAD, pindex)
-            if data:
-                self.widgets.entrydatedead.set_text(data["date"])
-                self.widgets.textinfodead.get_buffer().set_text(data["info"])
-        elif status == enums.Status.sold:
-            data = database.get_status(database.Tables.SOLD, pindex)
-            if data:
-                self.widgets.entrydatesold.set_text(data["date"])
-                self.widgets.entrybuyersold.set_text(data["person"])
-                self.widgets.textinfosold.get_buffer().set_text(data["info"])
-        elif status == enums.Status.lost:
-            data = database.get_status(database.Tables.LOST, pindex)
-            if data:
-                self.widgets.entrydatelost.set_text(data["date"])
-                self.widgets.entrypointlost.set_text(data["racepoint"])
-                self.widgets.textinfolost.get_buffer().set_text(data["info"])
-        elif status == enums.Status.breeder:
-            data = database.get_status(database.Tables.BREEDER, pindex)
-            if data:
-                self.widgets.entrydatebreedfrom.set_text(data["start"])
-                self.widgets.entrydatebreedto.set_text(data["end"])
-                self.widgets.textinfobreeder.get_buffer().set_text(data["info"])
-        elif status == enums.Status.loaned:
-            data = database.get_status(database.Tables.LOANED, pindex)
-            if data:
-                self.widgets.entrydateloan.set_text(data["loaned"])
-                self.widgets.entrydateloanback.set_text(data["back"])
-                self.widgets.entrypersonloan.set_text(data["person"])
-                self.widgets.textinfoloan.get_buffer().set_text(data["info"])
-        elif status == enums.Status.widow:
-            data = database.get_status(database.Tables.WIDOW, pindex)
-            if data:
-                self.widgets.entrypartnerwidow.set_pindex(data["partner"])
-                self.widgets.textinfowidow.get_buffer().set_text(data["info"])
+        status_id = pigeon.status.status_id
+        self._set_button_info(status_id)
+        self.widgets.combostatus.set_active(status_id)
+        if status_id == enums.Status.dead:
+            self.widgets.entrydatedead.set_text(pigeon.status.date)
+            self.widgets.textinfodead.get_buffer().set_text(pigeon.status.info)
+        elif status_id == enums.Status.sold:
+            self.widgets.entrydatesold.set_text(pigeon.status.date)
+            self.widgets.entrybuyersold.set_text(pigeon.status.person)
+            self.widgets.textinfosold.get_buffer().set_text(pigeon.status.info)
+        elif status_id == enums.Status.lost:
+            self.widgets.entrydatelost.set_text(pigeon.status.date)
+            self.widgets.entrypointlost.set_text(pigeon.status.racepoint)
+            self.widgets.textinfolost.get_buffer().set_text(pigeon.status.info)
+        elif status_id == enums.Status.breeder:
+            self.widgets.entrydatebreedfrom.set_text(pigeon.status.start)
+            self.widgets.entrydatebreedto.set_text(pigeon.status.end)
+            self.widgets.textinfobreeder.get_buffer().set_text(pigeon.status.info)
+        elif status_id == enums.Status.loaned:
+            self.widgets.entrydateloan.set_text(pigeon.status.start)
+            self.widgets.entrydateloanback.set_text(pigeon.status.end)
+            self.widgets.entrypersonloan.set_text(pigeon.status.person)
+            self.widgets.textinfoloan.get_buffer().set_text(pigeon.status.info)
+        elif status_id == enums.Status.widow:
+            self.widgets.entrypartnerwidow.set_pigeon(pigeon.status.partner)
+            self.widgets.textinfowidow.get_buffer().set_text(pigeon.status.info)
 
     def set_editable(self, value):
         def set_editable(widget, value):
@@ -345,15 +341,15 @@ class DetailsView(builder.GtkBuilder, component.Component):
 
         self.pigeon = pigeon
 
-        self.widgets.entryband.set_band(*pigeon.get_band())
-        self.widgets.entrysire.set_band(*pigeon.get_sire())
-        self.widgets.entrydam.set_band(*pigeon.get_dam())
-        self.widgets.entrysex.set_sex(pigeon.get_sex())
-        self.widgets.entrystrain.set_text(pigeon.get_strain())
-        self.widgets.entryloft.set_text(pigeon.get_loft())
-        self.widgets.entrycolour.set_text(pigeon.get_colour())
-        self.widgets.entryname.set_text(pigeon.get_name())
-        extra1, extra2, extra3, extra4, extra5, extra6 = pigeon.get_extra()
+        self.widgets.entryband.set_pigeon(pigeon)
+        self.widgets.entrysire.set_pigeon(pigeon.sire)
+        self.widgets.entrydam.set_pigeon(pigeon.dam)
+        self.widgets.entrysex.set_sex(pigeon.sex)
+        self.widgets.entrystrain.set_text(pigeon.strain)
+        self.widgets.entryloft.set_text(pigeon.loft)
+        self.widgets.entrycolour.set_text(pigeon.colour)
+        self.widgets.entryname.set_text(pigeon.name)
+        extra1, extra2, extra3, extra4, extra5, extra6 = pigeon.extra
         self.widgets.entryextra1.set_text(extra1)
         self.widgets.entryextra2.set_text(extra2)
         self.widgets.entryextra3.set_text(extra3)
@@ -363,7 +359,7 @@ class DetailsView(builder.GtkBuilder, component.Component):
 
         self.widgets.statusbutton.set_sensitive(True)
         self.widgets.statusbutton.set_pigeon(pigeon)
-        self.widgets.pigeonimage.set_image(pigeon.get_image())
+        self.widgets.pigeonimage.set_image(pigeon.main_image)
 
     def clear_details(self):
         self.pigeon = None
@@ -409,9 +405,9 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
         self.widgets.statusbuttonedit.set_editable(True)
         self.widgets.tableedit.attach(sb.widget, 2, 3, 2, 3)
 
-        self.widgets.combocolour.set_data(database.get_all_data(database.Tables.COLOURS), sort=False)
-        self.widgets.combostrain.set_data(database.get_all_data(database.Tables.STRAINS), sort=False)
-        self.widgets.comboloft.set_data(database.get_all_data(database.Tables.LOFTS), sort=False)
+        self.widgets.combocolour.set_data(Colour)
+        self.widgets.combostrain.set_data(Strain)
+        self.widgets.comboloft.set_data(Loft)
 
         self.widgets.root_edit.show_all()
 
@@ -444,17 +440,18 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
 
     def get_edit_details(self):
         ring, year = self.widgets.entrybandedit.get_band()
-        ringsire, yearsire = self.widgets.entrysireedit.get_band()
-        ringdam, yeardam = self.widgets.entrydamedit.get_band()
+        sire = self.widgets.entrysireedit.get_band()
+        dam = self.widgets.entrydamedit.get_band()
         if self.pigeon is None:
-            show = 0 if self.pedigree_mode else 1
+            visible = False if self.pedigree_mode else True
         else:
-            show = self.pigeon.get_visible()
-        data = {"band": ring, "year": year, "show": show,
-                "sire": ringsire, "yearsire": yearsire,
-                "dam": ringdam, "yeardam": yeardam,
+            visible = self.pigeon.visible
+        data = {"band": ring, 
+                "year": year, 
+                "sire": sire,
+                "dam": dam,
+                "visible": visible,
                 "sex": self.widgets.combosex.get_sex(),
-                "active": self.widgets.statusbuttonedit.get_current_status(),
                 "colour": self.widgets.combocolour.child.get_text(),
                 "name": self.widgets.entrynameedit.get_text(),
                 "strain": self.widgets.combostrain.child.get_text(),
@@ -488,25 +485,25 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
     def start_edit(self, operation):
         self._operation = operation
         if operation == enums.Action.edit:
-            logger.debug("Start editing pigeon '%s'", self.pigeon.get_pindex())
-            self.widgets.entrybandedit.set_band(*self.pigeon.get_band())
-            self.widgets.entrysireedit.set_band(*self.pigeon.get_sire())
-            self.widgets.entrydamedit.set_band(*self.pigeon.get_dam())
-            self.widgets.entrynameedit.set_text(self.pigeon.get_name())
-            extra = self.pigeon.get_extra()
+            logger.debug("Start editing pigeon '%s'", self.pigeon.band_string)
+            self.widgets.entrybandedit.set_pigeon(self.pigeon)
+            self.widgets.entrysireedit.set_pigeon(self.pigeon.sire)
+            self.widgets.entrydamedit.set_pigeon(self.pigeon.dam)
+            self.widgets.entrynameedit.set_text(self.pigeon.name)
+            extra = self.pigeon.extra
             self.widgets.entryextraedit1.set_text(extra[0])
             self.widgets.entryextraedit2.set_text(extra[1])
             self.widgets.entryextraedit3.set_text(extra[2])
             self.widgets.entryextraedit4.set_text(extra[3])
             self.widgets.entryextraedit5.set_text(extra[4])
             self.widgets.entryextraedit6.set_text(extra[5])
-            self.widgets.combocolour.child.set_text(self.pigeon.get_colour())
-            self.widgets.combostrain.child.set_text(self.pigeon.get_strain())
-            self.widgets.comboloft.child.set_text(self.pigeon.get_loft())
-            self.widgets.combosex.set_active(self.pigeon.get_sex())
+            self.widgets.combocolour.child.set_text(self.pigeon.colour)
+            self.widgets.combostrain.child.set_text(self.pigeon.strain)
+            self.widgets.comboloft.child.set_text(self.pigeon.loft)
+            self.widgets.combosex.set_active(self.pigeon.sex)
 
             self.widgets.statusbuttonedit.set_pigeon(self.pigeon)
-            image = self.pigeon.get_image()
+            image = self.pigeon.main_image
             self.widgets.pigeonimage_edit.set_image(image)
         else:
             logger.debug("Start adding a pigeon")
@@ -531,46 +528,39 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
         statusdata = self.widgets.statusbuttonedit.get_current_data()
 
         if self._operation == enums.Action.edit:
-            old_pindex = self.pigeon.get_pindex()
-            new_pindex = common.get_pindex_from_band(data["band"], data["year"])
-            data["pindex"] = new_pindex
-            statusdata["pindex"] = new_pindex
             try:
                 pigeon = corepigeon.update_pigeon(self.pigeon, data, status, statusdata)
             except errors.PigeonAlreadyExists:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
                 return False
-            except errors.PigeonAlreadyExistsHidden:
+            except errors.PigeonAlreadyExistsHidden as exc:
+                pigeon = exc.pigeon
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
-                    database.update_pigeon(old_pindex, {"show": 1})
-                pigeon = pigeonparser.parser.update_pigeon(old_pindex)
+                    pigeon.visible = True
+                    pigeon.save()
             except errors.InvalidInputError:
                 # This is a corner case. Some status date is incorrect, but the
-                # user choose another one. Don't bother him with this.
+                # user chose another one. Don't bother him with this.
                 pass
         elif self._operation == enums.Action.add:
-            pindex = common.get_pindex_from_band(data["band"], data["year"])
-            data["pindex"] = pindex
-            statusdata["pindex"] = pindex
             try:
                 pigeon = corepigeon.add_pigeon(data, status, statusdata)
             except errors.PigeonAlreadyExists:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
                 return False
-            except errors.PigeonAlreadyExistsHidden:
+            except errors.PigeonAlreadyExistsHidden as exc:
+                pigeon = exc.pigeon
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
-                    database.update_pigeon(pindex, {"show": 1})
-                pigeon = pigeonparser.parser.update_pigeon(pindex)
+                    pigeon.visible = True
+                    pigeon.save()
             except errors.InvalidInputError:
                 # See comment above
                 pass
 
         self.emit("edit-finished", pigeon, self._operation)
-        combodata = [(self.widgets.combocolour, data["colour"]),
-                     (self.widgets.combostrain, data["strain"]),
-                     (self.widgets.comboloft, data["loft"])]
-        for combo, value in combodata:
-            combo.add_item(value)
+        self.widgets.combocolour.add_item(data["colour"])
+        self.widgets.combostrain.add_item(data["strain"])
+        self.widgets.comboloft.add_item(data["loft"])
         logger.debug("Operation '%s' finished", self._operation)
 
         return False
@@ -582,10 +572,9 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
     # Internal methods
     def _get_pigeonsearch_details(self, sex):
         try:
-            pindex = self.widgets.entrybandedit.get_pindex()
+            band, year = self.widgets.entrybandedit.get_band()
         except errors.InvalidInputError:
             ErrorDialog(messages.MSG_NO_PARENT, self.parent)
             return
-        band, year = self.widgets.entrybandedit.get_band()
-        return pindex, sex, year
+        return (band, year), sex, year
 

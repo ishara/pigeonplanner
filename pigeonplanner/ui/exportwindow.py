@@ -20,12 +20,12 @@ import os.path
 
 import gtk
 
-from pigeonplanner.core import pigeonparser
 from pigeonplanner.export import get_exporters
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import ErrorDialog
+from pigeonplanner.database.models import Pigeon
 
 
 class ExportWindow(builder.GtkBuilder):
@@ -68,7 +68,7 @@ class ExportWindow(builder.GtkBuilder):
         elif self.widgets.radiovisible.get_active():
             pigeons = treeview.get_pigeons(True)
         else:
-            pigeons = pigeonparser.parser.pigeons.values()
+            pigeons = Pigeon.select()
         exporter = self.__get_exporter()
         exporter.run(filepath, pigeons)
 

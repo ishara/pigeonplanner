@@ -26,7 +26,6 @@ try:
 except ImportError:
     yapsy_available = False
 
-from pigeonplanner import database
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import WarningDialog, ErrorDialog
@@ -34,12 +33,12 @@ from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
 from pigeonplanner.core import mailing
+from pigeonplanner.database.models import Result
 
 
 class ResultParser(builder.GtkBuilder):
-    def __init__(self, parent, pigeons):
+    def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "ResultParser.ui")
-        self.pigeons = pigeons
         self.data = None
 
         self._build_interface()
@@ -69,7 +68,7 @@ class ResultParser(builder.GtkBuilder):
                 return
         resultfile.seek(0)
         try:
-            self.data, results = parser.parse_file(resultfile, self.pigeons)
+            self.data, results = parser.parse_file(resultfile)
         except Exception:
             import traceback
             data = [" **** File:", self.resultfilename,
@@ -97,9 +96,9 @@ class ResultParser(builder.GtkBuilder):
         self.widgets.infobar.hide()
         self.widgets.addbutton.set_sensitive(True)
         self.widgets.pigeonsw.set_sensitive(True)
-        for pindex, result in results.items():
+        for pigeon, result in results.items():
             row = result
-            row.insert(0, pindex)
+            row.insert(0, pigeon)
             row.insert(0, True)
             self.widgets.liststore.append(row)
 
@@ -131,17 +130,20 @@ class ResultParser(builder.GtkBuilder):
         temperature = self.widgets.temperatureentry.get_text()
         
         for row in self.widgets.liststore:
-            toggle, pindex, ring, year, place, speed = row
-            if not toggle: continue
+            toggle, pigeon, ring, year, place, speed = row
+            if not toggle:
+                continue
             speedfloat = float(speed.replace(",", "."))
-            data = {"pindex": pindex, "date": date, "point": point, "place": place,
+            data = {"date": date, "racepoint": point, "place": place,
                     "out": out, "sector": sector, "type": ftype, "category": category,
                     "wind": wind, "weather": weather, "comment": "",
                     "speed": speedfloat, "windspeed": windspeed, "temperature": temperature}
-            if database.result_exists(data):
-                logger.info("Pigeon %s already has the selected result" % pindex)
-            else:
-                database.add_result(data)
+
+            try:
+                query = Result.insert(pigeon=pigeon, **data)
+                query.execute()
+            except errors.IntegrityError:
+                logger.info("Pigeon %s already has the selected result" % pigeon.band_string)
         self.close_window()
 
     def on_celltoggle_toggled(self, cell, path):

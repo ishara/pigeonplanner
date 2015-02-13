@@ -2,6 +2,18 @@
 <interface>
   <requires lib="gtk+" version="2.20"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="liststore">
+    <columns>
+      <!-- column-name object -->
+      <column type="PyObject"/>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+      <!-- column-name color -->
+      <column type="gchararray"/>
+      <!-- column-name select -->
+      <column type="gboolean"/>
+    </columns>
+  </object>
   <object class="GtkHBox" id="_root">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -37,8 +49,8 @@
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                           <attributes>
-                            <attribute name="background">4</attribute>
-                            <attribute name="markup">3</attribute>
+                            <attribute name="background">2</attribute>
+                            <attribute name="markup">1</attribute>
                           </attributes>
                         </child>
                       </object>
@@ -120,7 +132,6 @@
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
             <property name="use_stock">True</property>
             <signal name="clicked" handler="on_buttonopen_clicked" swapped="no"/>
           </object>
@@ -137,7 +148,6 @@
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
             <property name="use_stock">True</property>
             <signal name="clicked" handler="on_buttonadd_clicked" swapped="no"/>
           </object>
@@ -154,7 +164,6 @@
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
             <property name="use_stock">True</property>
             <signal name="clicked" handler="on_buttonremove_clicked" swapped="no"/>
           </object>
@@ -172,21 +181,5 @@
         <property name="position">2</property>
       </packing>
     </child>
-  </object>
-  <object class="GtkListStore" id="liststore">
-    <columns>
-      <!-- column-name id -->
-      <column type="gchararray"/>
-      <!-- column-name mtype -->
-      <column type="gchararray"/>
-      <!-- column-name path -->
-      <column type="gchararray"/>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-      <!-- column-name color -->
-      <column type="gchararray"/>
-      <!-- column-name select -->
-      <column type="gboolean"/>
-    </columns>
   </object>
 </interface>

@@ -17,13 +17,11 @@
 
 
 import os
-import operator
 
 import gtk
 
 from pigeonplanner import mime
 from pigeonplanner import messages
-from pigeonplanner import database
 from pigeonplanner import thumbnail
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
@@ -31,6 +29,13 @@ from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.messagedialog import QuestionDialog
 from pigeonplanner.core import common
+from pigeonplanner.database.models import Media
+
+
+(COL_OBJECT,
+ COL_TEXT,
+ COL_COLOR,
+ COL_SELECTABLE) = range(4)
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
@@ -47,15 +52,15 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         widgets = [self.widgets.buttonremove, self.widgets.buttonopen]
         utils.set_multiple_sensitive(widgets, not rowiter is None)
         self.widgets.image.clear()
-        if rowiter is None: return
+        if rowiter is None:
+            return
 
-        mimetype = model.get_value(rowiter, 1)
-        if mime.is_image(mimetype):
-            path = unicode(model.get_value(rowiter, 2))
-            self.widgets.image.set_from_pixbuf(thumbnail.get_image(path))
+        media = model.get_value(rowiter, COL_OBJECT)
+        if mime.is_image(media.type):
+            self.widgets.image.set_from_pixbuf(thumbnail.get_image(media.path))
         else:
             try:
-                image = mime.get_pixbuf(mimetype)
+                image = mime.get_pixbuf(media.type)
                 self.widgets.image.set_from_pixbuf(image)
             except mime.MimeIconError:
                 self.widgets.image.set_from_stock(gtk.STOCK_FILE,
@@ -63,16 +68,22 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_buttonopen_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
-        common.open_file(model.get_value(rowiter, 2))
+        media = model.get_value(rowiter, COL_OBJECT)
+        common.open_file(media.path)
 
     def on_buttonadd_clicked(self, widget):
         chooser = filechooser.MediaChooser(self._parent)
         response = chooser.run()
         if response == gtk.RESPONSE_OK:
-            data = {"pindex":self.pigeon.get_pindex(), "type": chooser.get_filetype(),
-                    "path": chooser.get_filename(), "title": chooser.get_filetitle(),
-                    "description": chooser.get_filedescription()}
-            database.add_media(data)
+            data = {
+                "pigeon": self.pigeon,
+                "path": chooser.get_filename(),
+                "type": chooser.get_filetype(),
+                "title": chooser.get_filetitle(),
+                "description": chooser.get_filedescription()
+            }
+            query = Media.insert(**data)
+            query.execute()
             # Hackish... Fill whole treeview again
             self.set_pigeon(self.pigeon)
         chooser.destroy()
@@ -82,14 +93,15 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
             return
 
         model, rowiter = self.widgets.selection.get_selected()
-        if mime.is_image(model.get_value(rowiter, 1)):
+        path = self.widgets.liststore.get_path(rowiter)
+        media = model.get_value(rowiter, COL_OBJECT)
+        if mime.is_image(media.type):
             try:
-                os.remove(thumbnail.get_path(model.get_value(rowiter, 2)))
+                os.remove(thumbnail.get_path(media.path))
             except:
                 pass
-        database.remove_media({"Mediakey": model.get_value(rowiter, 0)})
+        media.delete_instance()
         self.widgets.liststore.remove(rowiter)
-        path = self.widgets.liststore.get_path(rowiter)
         self.widgets.selection.select_path(path)
 
     def set_pigeon(self, pigeon):
@@ -98,23 +110,23 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         images = []
         other = []
         self.widgets.liststore.clear()
-        for media in database.get_media_for_pigeon(pigeon.pindex):
-            if mime.is_image(media[2]):
+        for media in (Media.select()
+            .where(Media.pigeon == pigeon)
+            .order_by(Media.title.asc())):
+            if mime.is_image(media.type):
                 images.append(media)
             else:
                 other.append(media)
-        images.sort(key=operator.itemgetter(4))
-        other.sort(key=operator.itemgetter(4))
 
         normal = ["#ffffff", True]
-        self.widgets.liststore.append(["", "", "", _("Images"), "#dcdcdc", False])
+        self.widgets.liststore.append([None, _("Images"), "#dcdcdc", False])
         for media in images:
-            text = self._format_text(media[4], media[5])
-            self.widgets.liststore.append([media[0], media[2], media[3], text]+normal)
-        self.widgets.liststore.append(["", "", "", _("Other"), "#dcdcdc", False])
+            text = self._format_text(media.title, media.description)
+            self.widgets.liststore.append([media, text]+normal)
+        self.widgets.liststore.append([None, _("Other"), "#dcdcdc", False])
         for media in other:
-            text = self._format_text(media[4], media[5])
-            self.widgets.liststore.append([media[0], media[2], media[3], text]+normal)
+            text = self._format_text(media.title, media.description)
+            self.widgets.liststore.append([media, text]+normal)
 
     def clear_pigeon(self):
         self.widgets.liststore.clear()
@@ -130,5 +142,5 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         return text
 
     def _select_func(self, selection, model, path, is_selected):
-        return model[path][5]
+        return model[path][COL_SELECTABLE]
 
