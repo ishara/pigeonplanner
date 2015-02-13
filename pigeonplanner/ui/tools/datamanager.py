@@ -95,7 +95,7 @@ class DataManager(builder.GtkBuilder):
         self.widgets.messagebox.hide()
         self.widgets.liststore.clear()
         for pigeon in Pigeon.select().where(
-                (Pigeon.visible == False) & (Pigeon.sex != enums.Sex.unknown)):
+                (Pigeon.visible == False) & (Pigeon.sex != enums.Sex.youngbird)):
             is_parent = Pigeon.select().where(
                 (Pigeon.sire == pigeon) |
                 (Pigeon.dam == pigeon)).exists()

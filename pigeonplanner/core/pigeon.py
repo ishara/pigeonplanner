@@ -162,6 +162,6 @@ def _create_image(pigeon, path):
         query.execute()
 
 def _check_input_data(data):
-    if not data["sex"] in (enums.Sex.cock, enums.Sex.hen, enums.Sex.unknown):
+    if not data["sex"] in (enums.Sex.cock, enums.Sex.hen, enums.Sex.youngbird):
         raise ValueError("Sex value has to be of type enums.Sex, but got '%r'" % data["sex"])
 

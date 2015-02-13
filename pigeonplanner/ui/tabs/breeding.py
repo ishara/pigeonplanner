@@ -293,7 +293,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.listcheckedit2.set_active(False)
 
     def _add_child_pigeon(self, band_tuple, sire, dam, visible):
-        pigeon = corepigeon.get_or_create_pigeon(band_tuple, enums.Sex.unknown, visible)
+        pigeon = corepigeon.get_or_create_pigeon(band_tuple, enums.Sex.youngbird, visible)
         if pigeon is None:
             return None
 

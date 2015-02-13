@@ -574,11 +574,11 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         hens = 0
         ybirds = 0
         for pigeon in pigeons:
-            if pigeon.sex == enums.Sex.cock:
+            if pigeon.is_cock():
                 cocks += 1
-            elif pigeon.sex == enums.Sex.hen:
+            elif pigeon.is_hen():
                 hens += 1
-            elif pigeon.sex == enums.Sex.unknown:
+            elif pigeon.is_youngbird():
                 ybirds += 1
 
         self.widgets.labelStatTotal.set_markup("<b>%i</b>" %total)

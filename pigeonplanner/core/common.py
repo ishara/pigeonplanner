@@ -41,7 +41,7 @@ from pigeonplanner.database.models import Pigeon, Person
 
 SEX_IMGS = {enums.Sex.cock: os.path.join(const.IMAGEDIR, "symbol_male.png"),
             enums.Sex.hen: os.path.join(const.IMAGEDIR, "symbol_female.png"),
-            enums.Sex.unknown: os.path.join(const.IMAGEDIR, "symbol_young.png")}
+            enums.Sex.youngbird: os.path.join(const.IMAGEDIR, "symbol_young.png")}
 
 STATUS_IMGS = {enums.Status.dead: os.path.join(const.IMAGEDIR, "status_dead.png"),
                enums.Status.active: os.path.join(const.IMAGEDIR, "status_active.png"),
@@ -77,7 +77,7 @@ def count_active_pigeons():
             cocks += 1
         elif pigeon.is_hen():
             hens += 1
-        elif pigeon.is_unknown():
+        elif pigeon.is_youngbird():
             ybirds += 1
 
     return total, cocks, hens, ybirds
