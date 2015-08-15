@@ -161,8 +161,14 @@ class VelocityCalculator(builder.GtkBuilder):
             # data from an older database format. SQLite is not that strict when
             # it comes to storing values with different types. Make sure they are
             # converted to what the liststore expects.
+            try:
+                unit = int(data["unit"])
+            except ValueError:
+                # Fallback. In some rare cases the value would be an empty string.
+                unit = 0
             self.widgets.ls_distance.append(
-                            [data["racepoint"], str(data["distance"]), int(data["unit"])])
+                [data["racepoint"], str(data["distance"]), unit]
+            )
 
         self.widgets.dialog.show()
 
