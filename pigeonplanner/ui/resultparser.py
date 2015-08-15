@@ -98,9 +98,15 @@ class ResultParser(builder.GtkBuilder):
         self.widgets.addbutton.set_sensitive(True)
         self.widgets.pigeonsw.set_sensitive(True)
         for pindex, result in results.items():
+            try:
+                speedfloat = float(result[-1].replace(",", "."))
+            except ValueError:
+                result[-1] = ""
+                speedfloat = 0.0
             row = result
             row.insert(0, pindex)
             row.insert(0, True)
+            row.append(speedfloat)
             self.widgets.liststore.append(row)
 
     def on_helpbutton_clicked(self, widget):
@@ -131,9 +137,8 @@ class ResultParser(builder.GtkBuilder):
         temperature = self.widgets.temperatureentry.get_text()
         
         for row in self.widgets.liststore:
-            toggle, pindex, ring, year, place, speed = row
+            toggle, pindex, ring, year, place, speed, speedfloat = row
             if not toggle: continue
-            speedfloat = float(speed.replace(",", "."))
             data = {"pindex": pindex, "date": date, "point": point, "place": place,
                     "out": out, "sector": sector, "type": ftype, "category": category,
                     "wind": wind, "weather": weather, "comment": "",
