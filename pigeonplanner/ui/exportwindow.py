@@ -17,6 +17,8 @@
 
 
 import os.path
+import logging
+logger = logging.getLogger(__name__)
 
 import gtk
 
@@ -70,11 +72,19 @@ class ExportWindow(builder.GtkBuilder):
         else:
             pigeons = pigeonparser.parser.pigeons.values()
         exporter = self.__get_exporter()
-        exporter.run(filepath, pigeons)
+        try:
+            exporter.run(filepath, pigeons)
+        except IOError as e:
+            logger.exception(e)
+            ErrorDialog(
+                (_("The selected path is not writeable."), None, _("Error")),
+                self.widgets.window
+            )
+        else:
+            self.widgets.imageprogress.show()
 
         self.widgets.spinner.hide()
         self.widgets.spinner.stop()
-        self.widgets.imageprogress.show()
 
     def on_entrypath_changed(self, widget):
         value = widget.get_text_length() != 0
