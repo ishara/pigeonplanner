@@ -69,7 +69,11 @@ def restore_backup(infile):
 
     outfol = const.PREFDIR
 
-    zipper = zipfile.ZipFile(infile, "r")
+    try:
+        zipper = zipfile.ZipFile(infile, "r")
+    except zipfile.BadZipfile as e:
+        logger.exception(e)
+        return False
 
     try:
         unzip(outfol, zipper)
