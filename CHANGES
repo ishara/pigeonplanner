@@ -1,3 +1,10 @@
+2.2.3:
+ * Fixed error on invalid speed value when importing results
+ * Fixed error when changing the results view mode on an empty database
+ * Fixed error in velocity calculator when selecting a distance with an invalid unit
+ * Fixed error when trying to restore an invalid zip file as backup
+ * Show a error dialog if the path is not writeable when exporting pigeons
+
 2.2.2:
  * Fixed frequent error when deleting multiple pigeons
  * Fixed error when trying to add an existing racepoint
