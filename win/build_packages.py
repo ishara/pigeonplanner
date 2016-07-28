@@ -6,12 +6,13 @@ import shutil
 import zipfile
 import subprocess
 
+sys.path.insert(0, os.path.abspath(".."))
 from pigeonplanner.core.const import VERSION
 
 
 package_root = '..\\dist\\'
 if not os.path.exists(package_root):
-    print "Dist directory not found. Did you py2exe'd?"
+    print("Dist directory not found. Did you py2exe'd?")
     sys.exit()
 
 python_root = os.path.dirname(sys.executable) + "\\"
