@@ -118,6 +118,9 @@ class CalendarPopup(gtk.Window):
         self.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_DIALOG)
         self.set_modal(True)
         self.set_resizable(False)
+        self.set_destroy_with_parent(True)
+        toplevel = entry.get_toplevel()
+        self.set_transient_for(toplevel)
 
         buttonapply = gtk.Button()
         img = gtk.image_new_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
