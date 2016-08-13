@@ -6,19 +6,15 @@ msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-10 22:39+0200\n"
-"PO-Revision-Date: 2014-02-04 11:11+0000\n"
+"PO-Revision-Date: 2016-01-01 21:38+0000\n"
 "Last-Translator: Viktor Kosenko <ksviktor@gmail.com>\n"
 "Language-Team: none <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-12 05:59+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2016-01-02 05:11+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 "Language: \n"
-
-#: pigeonplanner/messages.py:23
-msgid "Pigeon Planner is already running."
-msgstr "Pigeon Planner вже запущено."
 
 #: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:213
 #: pigeonplanner/ui/resultwindow.py:771 pigeonplanner/ui/exportwindow.py:56
@@ -29,7 +25,11 @@ msgstr "Помилка"
 
 #: pigeonplanner/messages.py:20
 msgid "Warning"
-msgstr "Попередження"
+msgstr "Застереження"
+
+#: pigeonplanner/messages.py:23
+msgid "Pigeon Planner is already running."
+msgstr "Pigeon Planner вже запущений"
 
 #: pigeonplanner/messages.py:27
 msgid ""
@@ -41,13 +41,15 @@ msgstr ""
 
 #: pigeonplanner/messages.py:32
 msgid "Database update required!"
-msgstr ""
+msgstr "Потрібно оновити бази!"
 
 #: pigeonplanner/messages.py:33
 msgid ""
 "This database needs an update before it can be used. Previous versions of "
 "Pigeon Planner won't work anymore. Do you want to continue?"
 msgstr ""
+"Ця база даних перед використанням потребує оновлення. Попередні версії "
+"Pigeon Planner більше не будуть працювати. Ви хочете продовжити?"
 
 #: pigeonplanner/messages.py:38
 msgid ""
@@ -64,6 +66,9 @@ msgid ""
 "The database migration has failed! Any further actions are stopped to "
 "prevent data loss. Please contact the developers to fix this problem."
 msgstr ""
+"Переміщення бази даних не вдалося! Будь-які подальші дії будуть зупинені, "
+"щоб запобігти втраті даних. Будь ласка, зв'яжіться з розробниками, щоб "
+"виправити цю проблему."
 
 #: pigeonplanner/messages.py:50 pigeonplanner/messages.py:53
 msgid "Removing database"
@@ -281,7 +286,7 @@ msgstr "Зміни вступлять в силу після перезапус�
 
 #: pigeonplanner/messages.py:164
 msgid "Restart required"
-msgstr "Потрібен перезапуск"
+msgstr "Необхідне перезавантаження"
 
 #: pigeonplanner/messages.py:166
 msgid "Update available!"
@@ -355,7 +360,7 @@ msgstr "Голубник"
 #: glade/OptionsDialog.ui:853 glade/DetailsView.ui:251
 #: glade/DetailsView.ui:666
 msgid "Strain"
-msgstr "Лінія"
+msgstr "Раса"
 
 #: pigeonplanner/reports/pigeons.py:53
 #: pigeonplanner/ui/widgets/treeview.py:284 glade/FilterDialog.ui:332
@@ -549,7 +554,7 @@ msgstr "Результати"
 
 #: pigeonplanner/ui/optionsdialog.py:64 glade/DBManager.ui:531
 msgid "Advanced"
-msgstr "Додатково"
+msgstr "Розширені"
 
 #: pigeonplanner/ui/optionsdialog.py:112
 msgid "day"
@@ -557,7 +562,7 @@ msgstr "день"
 
 #: pigeonplanner/ui/optionsdialog.py:112
 msgid "days"
-msgstr "дні"
+msgstr "дні(в)"
 
 #: pigeonplanner/ui/exceptiondialog.py:46
 msgid ""
@@ -590,7 +595,7 @@ msgstr "Електронна пошта"
 
 #: pigeonplanner/ui/gtkmain.py:59
 msgid "Send"
-msgstr "Надіслати"
+msgstr "Відправити"
 
 #: pigeonplanner/ui/gtkmain.py:60
 msgid "Report"
@@ -678,7 +683,7 @@ msgstr "Підключитись до сервера не вдалося!"
 
 #: pigeonplanner/ui/resultparser.py:51
 msgid "This tool needs Yapsy to run correctly."
-msgstr ""
+msgstr "Цей інструмент потребує  Yapsy  для коректної роботи."
 
 #: pigeonplanner/ui/resultparser.py:66
 #, python-format
@@ -725,6 +730,7 @@ msgstr "Перейти на домашню сторінку?"
 #: pigeonplanner/ui/tools/distancecalculator.py:51
 msgid "This tool needs Geopy 0.95.0 or higher to run correctly."
 msgstr ""
+"Цей інструмент потребує  Geopy 0.95.0  або вище, для правильного запуску."
 
 #: pigeonplanner/ui/locationchooser.py:65
 #, python-format
@@ -733,24 +739,25 @@ msgstr "Не вдається знайти місце розташування '
 
 #: pigeonplanner/ui/dbmanager.py:41
 msgid "Select a database file..."
-msgstr ""
+msgstr "Виберіть файл бази даних ..."
 
 #: pigeonplanner/ui/dbmanager.py:44
 msgid "Pigeon Planner database"
-msgstr ""
+msgstr "База даних Pigeon Planner."
 
 #: pigeonplanner/ui/dbmanager.py:92
 msgid "Select a directory..."
-msgstr ""
+msgstr "Виберіть каталог ..."
 
 #: pigeonplanner/ui/dbmanager.py:303
 msgid ""
 "It's not allowed to close the database manager when no database is opened."
 msgstr ""
+"Неможливо закрити менеджер баз даних, якщо не була відкрита жодна база даних."
 
 #: pigeonplanner/ui/logdialog.py:39
 msgid "Logfile Viewer"
-msgstr "Переглядач журналів"
+msgstr "Переглядач Logfile"
 
 #: pigeonplanner/ui/dialogs.py:58
 msgid "translator-credits"
@@ -840,7 +847,7 @@ msgstr "Показати всіх голубів"
 
 #: pigeonplanner/ui/tabs/media.py:39 glade/MediaView.ui:56
 msgid "Media"
-msgstr "Медіа"
+msgstr "Медіа-дані"
 
 #: pigeonplanner/ui/tabs/media.py:114 glade/OptionsDialog.ui:786
 msgid "Other"
@@ -925,11 +932,11 @@ msgstr "Дюйми"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:174
 msgid "Feet"
-msgstr "Фути"
+msgstr "Футів"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:175
 msgid "Miles"
-msgstr "Милі"
+msgstr "Миль"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:176
 msgid "Nautical Miles"
@@ -987,11 +994,11 @@ msgstr "Фільтр: %s"
 
 #: pigeonplanner/ui/widgets/statusbar.py:43
 msgid "On"
-msgstr "Увімкнути"
+msgstr "Увімкн."
 
 #: pigeonplanner/ui/widgets/statusbar.py:44
 msgid "Off"
-msgstr "Вимкнути"
+msgstr "Вимкн."
 
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:72
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:275
@@ -1021,7 +1028,7 @@ msgstr "Місця випуску"
 
 #: pigeonplanner/ui/tools/datamanager.py:42
 msgid "Strains"
-msgstr "Лінії"
+msgstr "Раси"
 
 #: pigeonplanner/ui/tools/datamanager.py:43
 msgid "Lofts"
@@ -1048,7 +1055,7 @@ msgstr "PyGtk 2.10 або пізнішої версії"
 #: pigeonplanner/reportlib/backend/docbackend.py:163
 #, python-format
 msgid "Could not create %s"
-msgstr "не можливо створити %s"
+msgstr "Не можливо створити %s"
 
 #: pigeonplanner/reportlib/PdfDoc.py:249
 msgid "Contents"
@@ -1114,20 +1121,20 @@ msgstr "з %d"
 
 #: pigeonplanner/database/manager.py:77
 msgid "My pigeons"
-msgstr ""
+msgstr "Мої голуби"
 
 #: pigeonplanner/database/manager.py:78
 msgid "My default database"
-msgstr ""
+msgstr "Моя база даних за замовчуванням"
 
 #: pigeonplanner/database/manager.py:161
 msgid "This database is already added."
-msgstr ""
+msgstr "Ця база даних вже додана."
 
 #: pigeonplanner/database/manager.py:180
 #, python-format
 msgid "Database path '%s' is not writeable."
-msgstr ""
+msgstr "База даних  '%s'  недоступна для запису."
 
 #: pigeonplanner/database/manager.py:201
 #, python-format
@@ -1135,19 +1142,21 @@ msgid ""
 "Moving the database failed with message:\n"
 "%s"
 msgstr ""
+"Переміщення бази даних не вдалося з повідомленням:\n"
+"%s"
 
 #: pigeonplanner/database/manager.py:221
 msgid "Unable to remove the database: permission denied"
-msgstr ""
+msgstr "Не вдається видалити базу даних: в дозволі відмовлено."
 
 #: pigeonplanner/database/manager.py:266
 msgid "Database name is required."
-msgstr ""
+msgstr "Ім'я бази даних не потрібно."
 
 #: pigeonplanner/database/manager.py:269
 #, python-format
 msgid "Database name '%s' already exists."
-msgstr ""
+msgstr "Ім'я бази даних '%s' вже існує."
 
 #: pigeonplanner/core/common.py:43
 msgid "Cock"
@@ -1203,11 +1212,11 @@ msgstr "Допомога в Інтернеті"
 
 #: glade/MainWindow.ui:18
 msgid "Select all"
-msgstr "Обрати всі"
+msgstr "Обрати все"
 
 #: glade/MainWindow.ui:19
 msgid "Select all pigeons"
-msgstr "Обрати всі голуби"
+msgstr "Обрати всіх голубів"
 
 #: glade/MainWindow.ui:25
 msgid "_File"
@@ -1227,7 +1236,7 @@ msgstr "_Редагувати"
 
 #: glade/MainWindow.ui:50
 msgid "_View"
-msgstr "_Перегляд"
+msgstr "Вид"
 
 #: glade/MainWindow.ui:55
 msgid "_Tools"
@@ -1279,11 +1288,11 @@ msgstr "Додати список голубів"
 
 #: glade/MainWindow.ui:120
 msgid "_Logfile Viewer"
-msgstr "_Переглядач журналу"
+msgstr "_Переглядач Logfile"
 
 #: glade/MainWindow.ui:121
 msgid "See the logfile"
-msgstr "Дивитися журнал"
+msgstr "Дивитися Logfile"
 
 #: glade/MainWindow.ui:129
 msgid "Edit the selected pigeon"
@@ -1291,7 +1300,7 @@ msgstr "Редагувати обраного голуба"
 
 #: glade/MainWindow.ui:137
 msgid "Remove the selected pigeon"
-msgstr "Видалити вибраного голуба"
+msgstr "Видалити обраного голуба"
 
 #: glade/MainWindow.ui:146
 msgid "View the detailed pedigree of this pigeon"
@@ -1303,7 +1312,7 @@ msgstr "Додати резул_т"
 
 #: glade/MainWindow.ui:155
 msgid "Add a new result for this pigeon"
-msgstr "Додати новий результат цьому голубу"
+msgstr "Додати новий результат цього голуба"
 
 #: glade/MainWindow.ui:162
 msgid "Configure the application"
@@ -1363,11 +1372,11 @@ msgstr "Управління даними"
 
 #: glade/MainWindow.ui:214
 msgid "Manage your data"
-msgstr "Керування твоїми даними"
+msgstr "Управління Вашими даними"
 
 #: glade/MainWindow.ui:220
 msgid "Website"
-msgstr "Веб-сайт"
+msgstr "Веб сайт"
 
 #: glade/MainWindow.ui:221
 msgid "Go to the website for more information"
@@ -1411,7 +1420,7 @@ msgstr "Панель інструментів"
 
 #: glade/MainWindow.ui:273 glade/OptionsDialog.ui:619
 msgid "Show or hide the toolbar"
-msgstr "Показати / заховати панель інструментів"
+msgstr "Показати чи сховати панель інструментів"
 
 #: glade/MainWindow.ui:279
 msgid "Statusbar"
@@ -1419,7 +1428,7 @@ msgstr "Рядок стану"
 
 #: glade/MainWindow.ui:280 glade/OptionsDialog.ui:633
 msgid "Show or hide the statusbar"
-msgstr "Відобразити або приховати рядок стану"
+msgstr "Показати чи сховати рядок стану"
 
 #: glade/MainWindow.ui:286
 msgid "Export..."
@@ -1439,11 +1448,11 @@ msgstr "Показати всіх голубів у списку"
 
 #: glade/MainWindow.ui:307 glade/DBManager.ui:8
 msgid "Database manager"
-msgstr ""
+msgstr "Менеджер баз даних"
 
 #: glade/MainWindow.ui:308
 msgid "Manage your databases"
-msgstr ""
+msgstr "Управління базами даних"
 
 #: glade/MainWindow.ui:399
 msgid "Total"
@@ -1482,7 +1491,7 @@ msgstr "Час"
 #: glade/VelocityCalculator.ui:352 glade/VelocityCalculator.ui:725
 #: glade/DistanceCalculator.ui:415
 msgid "Calculate"
-msgstr "Порахувати"
+msgstr "Вирахувати"
 
 #: glade/VelocityCalculator.ui:471 glade/VelocityCalculator.ui:878
 msgid "Hours"
@@ -1490,7 +1499,7 @@ msgstr "Години"
 
 #: glade/VelocityCalculator.ui:495 glade/VelocityCalculator.ui:902
 msgid "Minutes"
-msgstr "Минути"
+msgstr "Хвилини"
 
 #: glade/VelocityCalculator.ui:519 glade/VelocityCalculator.ui:926
 msgid "Seconds"
@@ -1510,7 +1519,7 @@ msgstr "Переглянути все"
 
 #: glade/ResultsView.ui:39
 msgid "Import"
-msgstr "Імпорт"
+msgstr "Імпортувати"
 
 #: glade/ResultsView.ui:263 glade/BreedingView.ui:784
 #: glade/MedicationView.ui:707
@@ -1586,7 +1595,7 @@ msgstr "Перевіряти оновлення при запуску"
 
 #: glade/OptionsDialog.ui:255
 msgid "Update"
-msgstr "Оновити"
+msgstr "Оновлення"
 
 #: glade/OptionsDialog.ui:285
 msgid "Make an automatic backup"
@@ -1596,7 +1605,7 @@ msgstr "Автоматично створювати резервну копію"
 #: glade/LocationChooser.ui:180 glade/DistanceCalculator.ui:113
 #: glade/DistanceCalculator.ui:241
 msgid "Location"
-msgstr "Розташування"
+msgstr "Місцезнаходження"
 
 #: glade/OptionsDialog.ui:345
 msgid "Interval"
@@ -1688,11 +1697,11 @@ msgstr "Показати колір голуба в родоводі"
 
 #: glade/OptionsDialog.ui:1471
 msgid "Enable box border color"
-msgstr ""
+msgstr "Включити колір границь вікон"
 
 #: glade/OptionsDialog.ui:1485
 msgid "Enable box fill color"
-msgstr ""
+msgstr "Включити колір заливки вікон"
 
 #: glade/OptionsDialog.ui:1505
 msgid "Layout"
@@ -1701,7 +1710,7 @@ msgstr "Планування"
 #: glade/OptionsDialog.ui:1575 glade/DetailsView.ui:215
 #: glade/DetailsView.ui:608
 msgid "Extra"
-msgstr "Екстра"
+msgstr "Додатково"
 
 #: glade/OptionsDialog.ui:1609 glade/ResultWindow.ui:422
 msgid "Pigeon"
@@ -1815,7 +1824,7 @@ msgstr "Позичений"
 
 #: glade/DetailsView.ui:1671
 msgid "Person"
-msgstr "Осіб"
+msgstr "Особа"
 
 #: glade/DetailsView.ui:1720
 msgid "Back"
@@ -1839,7 +1848,7 @@ msgstr "Ваша адреса електронної пошти:"
 
 #: glade/Dialogs.ui:218
 msgid "Subject:"
-msgstr "Суб'єкт:"
+msgstr "Тема:"
 
 #: glade/Dialogs.ui:257
 msgid "Message:"
@@ -1891,15 +1900,18 @@ msgstr "Все"
 
 #: glade/DBManager.ui:250
 msgid "Load this database as default on startup"
-msgstr ""
+msgstr "Завантажити цю базу даних за замовчуванням при запуску"
 
 #: glade/DBManager.ui:283
 msgid "Database information"
-msgstr ""
+msgstr "Інформація бази даних"
 
 #: glade/DBManager.ui:474
 msgid "For advanced use only. Use the default settings if you are in doubt."
 msgstr ""
+"Тільки для досвідчених користувачів.\r\n"
+"Якщо у вас є сумніви,будь ласка \r\n"
+"використовуйте налаштування за замовчуванням."
 
 #: glade/DistanceCalculator.ui:446
 msgid "Result"
@@ -2009,7 +2021,7 @@ msgstr "Набір даних"
 
 #: glade/DataManager.ui:123 glade/DataManager.ui:231
 msgid "Item"
-msgstr "елемент"
+msgstr "Елемент"
 
 #: glade/DataManager.ui:250
 msgid "Manage items"
@@ -2053,7 +2065,7 @@ msgstr "Letter"
 
 #: data/TranslationWorkaround.ui:6
 msgid "Original"
-msgstr "Оригинал"
+msgstr "Оригінал"
 
 #: data/TranslationWorkaround.ui:7
 msgid "Swapped details"
