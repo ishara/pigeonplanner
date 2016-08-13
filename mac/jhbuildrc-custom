@@ -12,6 +12,7 @@ modules = [
     "meta-gtk-osx-bootstrap",
     "meta-gtk-osx-core",
     "librsvg",
+    "shared-mime-info",
     "meta-gtk-osx-python",
     "meta-gtk-osx-themes",
     "gtk-quartz-engine"
