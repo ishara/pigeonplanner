@@ -24,27 +24,14 @@ def set_database_path(path):
     return database
 
 def all_tables():
-    return [
-        Breeding,
-        Category,
-        Colour,
-        Image,
-        Loft,
-        Media,
-        Medication,
-        Person,
-        Pigeon,
-        PigeonMedication,
-        Racepoint,
-        Result,
-        Sector ,
-        Status,
-        Strain,
-        Type,
-        Weather,
-        Wind,
-        UpgradeDummy
-    ]
+    tables = []
+    for name, obj in globals().items():
+        try:
+            if issubclass(obj, BaseModel):
+                tables.append(obj)
+        except TypeError:
+            continue
+    return tables
 
 
 class DataModelMixin(object):
