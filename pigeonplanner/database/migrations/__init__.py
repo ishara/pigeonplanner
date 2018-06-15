@@ -23,12 +23,14 @@ from importlib import import_module
 
 _migrations = None
 
+
 def get_filenames():
     """ Get a sorted list of migration filenames """
     folder = os.path.dirname(os.path.abspath(__file__))
     files = glob.glob(os.path.join(folder, "[0-9][0-9][0-9]_*.py"))
     filenames = [os.path.splitext(os.path.basename(f))[0] for f in files]
     return sorted(filenames, key=lambda fname: int(fname.split("_", 1)[0]))
+
 
 def get_migrations():
     """ Get a sorted list of dicts of migrations.
@@ -42,6 +44,7 @@ def get_migrations():
             module = import_module(module_path)
             _migrations.append({"version": module.database_version, "module": module})
     return _migrations
+
 
 def get_latest_version():
     return get_migrations()[-1]["version"]

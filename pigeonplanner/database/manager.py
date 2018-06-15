@@ -84,11 +84,14 @@ class DBManager(object):
             if os.path.exists(const.DATABASE):
                 # The default database exist, which means an older version of Pigeon Planner
                 # was already used before. Just add this database to the list.
-                self._dbs = [DatabaseInfo(self.default_name, 
-                                          const.DATABASE,
-                                          self.default_description,
-                                          False)
-                    ]
+                self._dbs = [
+                    DatabaseInfo(
+                        self.default_name,
+                        const.DATABASE,
+                        self.default_description,
+                        False
+                    )
+                ]
             else:
                 # First run, let the user create their own database.
                 self._dbs = []
@@ -153,7 +156,7 @@ class DBManager(object):
             if dbobj.path == path:
                 raise DatabaseInfoError(_("This database is already added."))
 
-        #TODO: check for writable path?
+        # TODO: check for writable path?
 
         info = DatabaseInfo(name, path, description, False)
         self._dbs.append(info)
@@ -220,7 +223,6 @@ class DBManager(object):
         self._dbs.remove(dbobj)
         self.save()
 
-    ## Private methods ##
     def _load_dbs(self):
         with open(const.DATABASEINFO) as infile:
             data = json.load(infile)
@@ -261,7 +263,8 @@ class DBManager(object):
 
 
 dbmanager = None
+
+
 def init_manager():
     global dbmanager
     dbmanager = DBManager()
-

@@ -19,9 +19,12 @@ SIGNAL_MAP = {
 }
 
 database = SqliteDatabase(None)
+
+
 def set_database_path(path):
     database.init(path)
     return database
+
 
 def all_tables():
     tables = []
@@ -39,12 +42,14 @@ class DataModelMixin(object):
     def get_data_list(cls):
         column = cls.get_item_column()
         data = (cls.select(column)
-            .order_by(column.asc())
-            .dicts())
+                .order_by(column.asc())
+                .dicts())
         return [item[column.name] for item in data]
 
 
 class BaseModel(Model):
+    defaults_fields_excludes = ["id"]
+
     class Meta:
         database = database
 
@@ -54,11 +59,10 @@ class BaseModel(Model):
         update_query.execute()
         return cls.get(cls.id == self.id)
 
-    defaults_fields_excludes = ["id"]
     @classmethod
     def get_fields_with_defaults(cls):
         data_fields = {name: field.default for (name, field) in
-            cls._meta.fields.items() if name not in cls.defaults_fields_excludes}
+                       cls._meta.fields.items() if name not in cls.defaults_fields_excludes}
         return data_fields
 
     # This will enable connecting signals directly on the class. Example:
@@ -99,9 +103,9 @@ class Pigeon(BaseModel):
     strain = CharField(default="")
     loft = CharField(default="")
     sire = ForeignKeyField("self", null=True, related_name="children_sire",
-        on_delete="SET NULL")
+                           on_delete="SET NULL")
     dam = ForeignKeyField("self", null=True, related_name="children_dam",
-        on_delete="SET NULL")
+                          on_delete="SET NULL")
     extra1 = CharField(default="")
     extra2 = CharField(default="")
     extra3 = CharField(default="")
@@ -159,14 +163,14 @@ class Pigeon(BaseModel):
     @property
     def sire_filter(self):
         try:
-            return (self.sire.band, self.sire.year)
+            return self.sire.band, self.sire.year
         except AttributeError:
             return ""
 
     @property
     def dam_filter(self):
         try:
-            return (self.dam.band, self.dam.year)
+            return self.dam.band, self.dam.year
         except AttributeError:
             return ""
 
@@ -193,7 +197,7 @@ class Status(BaseModel):
     racepoint = CharField(default="")
     person = CharField(default="")
     partner = ForeignKeyField(Pigeon, null=True, on_delete="SET NULL",
-        related_name="status_partner")
+                              related_name="status_partner")
 
     defaults_fields_excludes = ["id", "pigeon", "status_id"]
 
@@ -254,12 +258,12 @@ class Breeding(BaseModel):
     laid1 = DateField(default="")
     hatched1 = DateField(default="")
     child1 = ForeignKeyField(Pigeon, null=True, related_name="breeding_child1",
-        on_delete="SET NULL")
+                             on_delete="SET NULL")
     success1 = BooleanField(default=False)
     laid2 = DateField(default="")
     hatched2 = DateField(default="")
     child2 = ForeignKeyField(Pigeon, null=True, related_name="breeding_child2",
-        on_delete="SET NULL")
+                             on_delete="SET NULL")
     success2 = BooleanField(default=False)
     clutch = CharField(default="")
     box = CharField(default="")
@@ -427,4 +431,3 @@ class Wind(BaseModel, DataModelMixin):
     @classmethod
     def get_item_column(cls):
         return cls.wind
-

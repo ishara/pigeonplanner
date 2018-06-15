@@ -19,18 +19,20 @@
 import os
 import shutil
 import logging
-logger = logging.getLogger(__name__)
 
 from pigeonplanner.core import const
 from pigeonplanner.database import models
 from pigeonplanner.database import migrations
 
+logger = logging.getLogger(__name__)
 
 peewee_logger = logging.getLogger("peewee")
 peewee_logger.disabled = True
 
 
 class DatabaseVersionError(Exception): pass
+
+
 class DatabaseMigrationError(Exception): pass
 
 
@@ -42,7 +44,7 @@ class DatabaseSession(object):
     def open(self, dbfile=None):
         self.dbfile = dbfile or const.DATABASE
         self.is_new_db = (not os.path.exists(self.dbfile) or
-            os.path.getsize(self.dbfile) == 0)
+                          os.path.getsize(self.dbfile) == 0)
         self.connection = models.set_database_path(self.dbfile)
         self.connection.connect()
         # Set this explicitly to work with ON DELETE/UPDATE
@@ -94,7 +96,7 @@ class DatabaseSession(object):
             try:
                 logger.debug("Starting database migration %s", migration["version"])
                 migration["module"].do_migration(self.connection)
-            except:
+            except Exception:
                 # Catch any exception during migration!
                 logger.error("Database migration failed!", exc_info=True)
                 shutil.copy(backupdb, self.dbfile)
@@ -109,8 +111,7 @@ class DatabaseSession(object):
 
         try:
             os.remove(backupdb)
-        except:
+        except Exception:
             pass
 
         return True
-

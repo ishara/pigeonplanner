@@ -17,5 +17,6 @@
 
 
 from .main import DatabaseSession
-session = DatabaseSession()
 
+
+session = DatabaseSession()
