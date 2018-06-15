@@ -6,7 +6,7 @@ from peewee import (Check, ForeignKeyField, CharField, TextField,
                     IntegerField, BooleanField, FloatField, DateField)
 from playhouse.signals import (Model, pre_save, post_save, pre_delete, post_delete,
                                pre_init, post_init)
-from playhouse.shortcuts import ManyToManyField
+from playhouse.fields import ManyToManyField
 
 
 SIGNAL_MAP = {
