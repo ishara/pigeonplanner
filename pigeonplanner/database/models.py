@@ -34,6 +34,8 @@ def all_tables():
                 tables.append(obj)
         except TypeError:
             continue
+    # TODO: any way to detect ManyToMany tables?
+    tables.append(PigeonMedication)
     return tables
 
 
