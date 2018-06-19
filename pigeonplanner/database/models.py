@@ -155,7 +155,7 @@ class Pigeon(BaseModel):
 
     @property
     def status(self):
-        return Status.get(Status.pigeon == self)
+        return self.statuses.get()
 
     # Used for the pigeon filter
     @property
@@ -190,7 +190,7 @@ class Pigeon(BaseModel):
 
 
 class Status(BaseModel):
-    pigeon = ForeignKeyField(Pigeon, unique=True, on_delete="CASCADE")
+    pigeon = ForeignKeyField(Pigeon, unique=True, related_name="statuses", on_delete="CASCADE")
     status_id = IntegerField(default=enums.Status.active)
     info = TextField(default="")
     date = DateField(default="")
