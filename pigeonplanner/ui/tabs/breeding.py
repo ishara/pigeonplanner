@@ -93,10 +93,10 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.entryclutch.set_text(record.clutch)
         self.widgets.entrybox.set_text(record.box)
         self.widgets.textviewcomment.get_buffer().set_text(record.comment)
-        self.widgets.buttoninfo1.set_sensitive(False)
-        self.widgets.buttongoto1.set_sensitive(False)
-        self.widgets.buttoninfo2.set_sensitive(False)
-        self.widgets.buttongoto2.set_sensitive(False)
+        self.widgets.buttoninfo1.set_sensitive(record.child1 is not None)
+        self.widgets.buttongoto1.set_sensitive(record.child1 is not None and record.child1.visible)
+        self.widgets.buttoninfo2.set_sensitive(record.child2 is not None)
+        self.widgets.buttongoto2.set_sensitive(record.child2 is not None and record.child2.visible)
 
     def on_buttonadd_clicked(self, widget):
         self._mode = enums.Action.add
