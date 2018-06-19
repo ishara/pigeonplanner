@@ -66,4 +66,3 @@ class Action:
 class Backup:
     create = 1
     restore = 2
-

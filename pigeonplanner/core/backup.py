@@ -23,9 +23,10 @@ import os
 import zipfile
 from os.path import isdir, join, normpath, split
 import logging
-logger = logging.getLogger(__name__)
 
 from pigeonplanner.core import const
+
+logger = logging.getLogger(__name__)
 
 
 def make_backup(folder):
@@ -51,6 +52,7 @@ def make_backup(folder):
 
     return True
 
+
 def makezip(path, zipper):
     path = os.path.normpath(path)
 
@@ -60,8 +62,8 @@ def makezip(path, zipper):
                    filename.endswith(".log") and not\
                    filename.endswith(".old") and not\
                    filename == "Thumbs.db":
-                zipper.write(os.path.join(dirpath, filename),            
-                os.path.join(dirpath[len(path):], filename)) 
+                zipper.write(os.path.join(dirpath, filename), os.path.join(dirpath[len(path):], filename))
+
 
 def restore_backup(infile):
     if not infile.endswith("PigeonPlannerBackup.zip"):
@@ -81,6 +83,7 @@ def restore_backup(infile):
 
     return True
 
+
 def unzip(path, zipper):
     if not isdir(path):
         os.makedirs(path)    
@@ -94,4 +97,3 @@ def unzip(path, zipper):
             outfile = open(join(directory, name), "wb")
             outfile.write(zipper.read(each))
             outfile.close()
-

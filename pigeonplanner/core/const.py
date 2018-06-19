@@ -89,7 +89,7 @@ else:
     ROOTDIR = os.path.abspath(os.path.join(os.path.dirname(
         unicode(__file__, sys.getfilesystemencoding())), os.pardir, os.pardir))
     if ROOTDIR.endswith(".egg"):
-        #TODO: Used in Mac OS X package. Can be improved?
+        # TODO: Used in Mac OS X package. Can be improved?
         ROOTDIR = os.path.join(ROOTDIR, u"share", u"pigeonplanner")
     LANGDIR = os.path.join(ROOTDIR, u"languages")
 
@@ -124,4 +124,3 @@ LOG_FORMAT_CLI = "%(name)s %(levelname)s: %(message)s"
 DATE_FORMAT = "%Y-%m-%d"
 
 LOGO_IMG = os.path.join(IMAGEDIR, "icon_logo.png")
-

@@ -24,11 +24,12 @@ import os
 import json
 import urllib
 import logging
-logger = logging.getLogger(__name__)
 
 from pigeonplanner import messages
 from pigeonplanner.core import const
 from pigeonplanner.core import config
+
+logger = logging.getLogger(__name__)
 
 
 class UpdateError(Exception):
@@ -40,8 +41,9 @@ class UpdateError(Exception):
 
 
 def versiontuple(version):
-    """ Convert version string to tuple """
+    """Convert version string to tuple"""
     return tuple(map(int, (version.split("."))))
+
 
 def update():
     local = os.path.join(const.TEMPDIR, "pigeonplanner_update")
@@ -81,4 +83,3 @@ def update():
         msg = messages.MSG_UPDATE_DEVELOPMENT
 
     return new, msg
-

@@ -24,20 +24,19 @@ from pigeonplanner import messages
 from pigeonplanner.core import errors
 
 
-def check_ring_entry(inputRing, inputYear):
-    """
-    Check if the ring and year input are valid
+def check_ring_entry(input_ring, input_year):
+    """Check if the ring and year input are valid
     
-    @param inputRing: The ringnumber to check
-    @param inputYear: the year to check
+    :param input_ring: The ringnumber to check
+    :param input_year: the year to check
     """
 
-    if not inputRing or not inputYear:
+    if not input_ring or not input_year:
         raise errors.InvalidInputError(messages.MSG_EMPTY_FIELDS)
 
-    elif not inputYear.isdigit():
+    elif not input_year.isdigit():
         raise errors.InvalidInputError(messages.MSG_INVALID_NUMBER)
 
-    elif not len(inputYear) == 4:
+    elif not len(input_year) == 4:
         raise errors.InvalidInputError(messages.MSG_INVALID_LENGTH)
 

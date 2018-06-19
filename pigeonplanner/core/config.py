@@ -21,9 +21,10 @@ import json
 import copy
 import time
 import logging
-logger = logging.getLogger(__name__)
 
 from pigeonplanner.core import const
+
+logger = logging.getLogger(__name__)
 
 
 class Config(object):
@@ -38,7 +39,7 @@ class Config(object):
             setting = None
         elif "." in key:
             section, setting = key.split(".", 1)
-        else: # key is not None and doesn't have a "."
+        else:  # key is not None and doesn't have a "."
             section = key
             setting = None
         # Now, do the reset on the right parts:
@@ -76,8 +77,7 @@ class Config(object):
 
     def set(self, key, value):
         section, setting = key.split(".", 1)
-        if (setting in self.settings[section] and 
-            self.settings[section][setting] == value):
+        if setting in self.settings[section] and self.settings[section][setting] == value:
             # Do nothing if existed and is the same
             pass
         else:
@@ -104,7 +104,7 @@ default_config = [
                 ("options.coef-multiplier", 100),
                 ("options.distance-unit", 0),
                 ("options.speed-unit", 0),
-                ##("options.format-date", "%Y-%m-%d"),
+                # ("options.format-date", "%Y-%m-%d"),
 
                 ("interface.arrows", False),
                 ("interface.stats", False),
@@ -278,8 +278,7 @@ if os.path.exists(const.CONFIGFILE_OLD):
             try:
                 old = method(old_section, old_option)
             except:
-                logger.debug("Skipping option %s.%s" %
-                                        (old_section, old_option))
+                logger.debug("Skipping option %s.%s" % (old_section, old_option))
                 continue
             set(new, old)
 

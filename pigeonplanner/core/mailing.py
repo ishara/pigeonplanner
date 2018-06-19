@@ -33,12 +33,13 @@ def send_email(recipient="", sender="", subject="", body="", attachment=None):
         files.append(("file", open(attachment, "rb")))
 
     fields = [("mail_to", recipient),
-                ("mail_from", sender),
-                ("subject", urllib.quote(subject)),
-                ("comment", urllib.quote(body))
-            ]
+              ("mail_from", sender),
+              ("subject", urllib.quote(subject)),
+              ("comment", urllib.quote(body))
+              ]
 
     post_multipart(const.MAILURL, fields, files)
+
 
 def post_multipart(url, fields, files):
     content_type, body = encode_multipart_formdata(fields, files)
@@ -46,25 +47,25 @@ def post_multipart(url, fields, files):
 
     return common.URLOpen().open(url, body, headers, 40).read().strip()
 
+
 def encode_multipart_formdata(fields, files):
-    BOUNDARY = "----------%s" % common.get_random_number(20)
+    boundary = "----------%s" % common.get_random_number(20)
     body = []
     for (key, value) in fields:
-        body.append("--" + BOUNDARY)
+        body.append("--" + boundary)
         body.append("Content-Disposition: form-data; name=\"%s\"" % key)
         body.append("")
         body.append(value)
     for (key, fd) in files:
         filename = fd.name.split("/")[-1]
         contenttype = (mimetypes.guess_type(filename)[0] or "application/octet-stream")
-        body.append("--%s" % BOUNDARY)
+        body.append("--%s" % boundary)
         body.append("Content-Disposition: form-data; name=\"%s\"; filename=\"%s\""
-                    %(key, filename))
+                    % (key, filename))
         body.append("Content-Type: %s" % contenttype)
         fd.seek(0)
         body.append("\r\n" + fd.read())
-    body.append("--" + BOUNDARY + "--")
+    body.append("--" + boundary + "--")
     body.append("")
 
-    return "multipart/form-data; boundary=%s" % BOUNDARY, "\r\n".join(body)
-
+    return "multipart/form-data; boundary=%s" % boundary, "\r\n".join(body)

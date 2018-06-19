@@ -52,6 +52,7 @@ STATUS_IMGS = {enums.Status.dead: os.path.join(const.IMAGEDIR, "status_dead.png"
                enums.Status.loaned: os.path.join(const.IMAGEDIR, "status_onloan.png"),
                enums.Status.widow: os.path.join(const.IMAGEDIR, "status_widow.png")}
 
+
 def get_function_name():
     """
     Retrieve the name of the function/method
@@ -59,8 +60,10 @@ def get_function_name():
 
     return inspect.stack()[1][3]
 
+
 def get_date():
     return datetime.date.today().strftime(const.DATE_FORMAT)
+
 
 def count_active_pigeons(pigeons=None):
     """
@@ -88,6 +91,7 @@ def count_active_pigeons(pigeons=None):
 
     return total, cocks, hens, ybirds, unknown
 
+
 def get_own_address():
     """
     Retrieve the users personal info
@@ -99,19 +103,20 @@ def get_own_address():
         person = None
     return person
 
-def calculate_coefficient(place, out, as_string=False):
-    """
-    Calculate the coefficient of a result
 
-    @param place: The pigeons place
-    @param out: The total number of pigeons
-    @param as_string: Return a localized string
+def calculate_coefficient(place, out, as_string=False):
+    """Calculate the coefficient of a result
+
+    :param place: The pigeons place
+    :param out: The total number of pigeons
+    :param as_string: Return a localized string
     """
 
     coef = (float(place)/float(out))*config.get("options.coef-multiplier")
     if as_string:
         return locale.format_string("%.4f", coef)
     return coef
+
 
 def format_place_coef(place, out):
     coef = calculate_coefficient(place, out)
@@ -123,46 +128,51 @@ def format_place_coef(place, out):
         placestr = str(place)
     return placestr, coef, coefstr
 
+
 def format_speed(value):
     if value <= 0.0:
         return ""
     return locale.format_string("%.2f", value)
 
-def add_zero_to_time(value):
-    """
-    Add a zero in front of a one digit number
 
-    @param value: The value to be checked
+def add_zero_to_time(value):
+    """Add a zero in front of a one digit number
+
+    :param value: The value to be checked
     """
 
     if value >= 0 and value < 10:
         return "0%s" % value
     return str(value)
 
+
 def get_random_number(value):
-    """
-    Get a random number of the given length
+    """Get a random number of the given length
 
-    @param value: The length of the number
+    :param value: The length of the number
     """
 
-    return "".join([random.choice("0123456789") for x in range(value)])
+    return "".join([random.choice("0123456789") for _ in range(value)])
 
 
 def get_random_string(length):
     chars = string.ascii_letters + string.digits
-    return "".join(random.choice(chars) for x in range(length))
+    return "".join(random.choice(chars) for _ in range(length))
+
 
 def url_hook(about, link):
     webbrowser.open(link)
 
+
 def email_hook(about, email):
     webbrowser.open("mailto:%s" % email)
+
 
 def escape_text(text):
     if not text:
         return ""
     return cgi.escape(text, True)
+
 
 def open_file(path):
     from pigeonplanner.ui.messagedialog import ErrorDialog
@@ -195,8 +205,10 @@ def open_file(path):
                 subprocess.call((prog, norm_path))
                 return
 
+
 def open_help(article):
     webbrowser.open(const.DOCURL % article)
+
 
 def get_pagesize_from_opts():
     optvalue = config.get("printing.general-paper")
@@ -233,7 +245,7 @@ class URLOpen:
         if not headers:
             headers = const.USER_AGENT
         else:
-            if not "User-Agent" in headers:
+            if "User-Agent" not in headers:
                 headers.update(const.USER_AGENT)
 
         return self.opener.open(urllib2.Request(url, body, headers), timeout=timeout)
@@ -287,7 +299,7 @@ class UnicodeWriter:
         self.encoder = codecs.getincrementalencoder(encoding)()
 
     def writerow(self, row):
-        self.writer.writerow({k:str(v).encode("utf-8") for k,v in row.items()})
+        self.writer.writerow({k: str(v).encode("utf-8") for k, v in row.items()})
         # Fetch UTF-8 output from the queue ...
         data = self.queue.getvalue()
         data = data.decode("utf-8")

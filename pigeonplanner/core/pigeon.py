@@ -18,7 +18,6 @@
 
 import os
 import logging
-logger = logging.getLogger(__name__)
 
 import peewee
 
@@ -28,14 +27,15 @@ from pigeonplanner import thumbnail
 from pigeonplanner.database import session
 from pigeonplanner.database.models import Pigeon, Image, Status
 
+logger = logging.getLogger(__name__)
+
 
 def add_pigeon(data, status, statusdata):
-    """
-    Add a pigeon
+    """Add a pigeon
 
-    @param data:
-    @param status: One of the status constants
-    @param statusdata:
+    :param data:
+    :param status: One of the status constants
+    :param statusdata:
     """
 
     _check_input_data(data)
@@ -63,14 +63,14 @@ def add_pigeon(data, status, statusdata):
 
     return pigeon
 
-def update_pigeon(pigeon, data, status, statusdata):
-    """
-    Update the pigeon
 
-    @param pigeon: 
-    @param data:
-    @param status: One of the status constants
-    @param statusdata:
+def update_pigeon(pigeon, data, status, statusdata):
+    """Update the pigeon
+
+    :param pigeon:
+    :param data:
+    :param status: One of the status constants
+    :param statusdata:
     """
 
     _check_input_data(data)
@@ -113,6 +113,7 @@ def update_pigeon(pigeon, data, status, statusdata):
 
     return pigeon
 
+
 def remove_pigeon(pigeon):
     logger.debug("Start removing pigeon '%s'", pigeon.band_string)
 
@@ -121,11 +122,12 @@ def remove_pigeon(pigeon):
     except:
         pass
 
-    #TODO PW: this removes the pigeon_id in the through model. The medication table
+    # TODO PW: this removes the pigeon_id in the through model. The medication table
     #         entry will remain. How to make sure this is also deleted? Note: only
     #         if this is the only remaining pigeon for this record.
     pigeon.medication.clear()
     pigeon.delete_instance()
+
 
 def build_pedigree_tree(pigeon, index, depth, lst):
     if depth > 5 or pigeon is None or index >= len(lst):
@@ -135,12 +137,13 @@ def build_pedigree_tree(pigeon, index, depth, lst):
     build_pedigree_tree(pigeon.sire, (2*index)+1, depth+1, lst)
     build_pedigree_tree(pigeon.dam, (2*index)+2, depth+1, lst)
 
+
 def get_or_create_pigeon(band_tuple, sex, visible):
     """
 
-    @param band_tuple: tuple of (band, year) or None
-    @param sex: one of the sex constants
-    @param visible: boolean
+    :param band_tuple: tuple of (band, year) or None
+    :param sex: one of the sex constants
+    :param visible: boolean
     """
     if band_tuple is not None and band_tuple != ("", ""):
         band, year = band_tuple
@@ -156,12 +159,13 @@ def get_or_create_pigeon(band_tuple, sex, visible):
         pigeon = None
     return pigeon
 
+
 def _create_image(pigeon, path):
     if path:
         query = Image.insert(pigeon=pigeon, path=path, main=True)
         query.execute()
 
+
 def _check_input_data(data):
     if not data["sex"] in (enums.Sex.cock, enums.Sex.hen, enums.Sex.youngbird, enums.Sex.unknown):
         raise ValueError("Sex value has to be of type enums.Sex, but got '%r'" % data["sex"])
-

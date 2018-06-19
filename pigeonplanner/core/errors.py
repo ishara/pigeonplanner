@@ -41,4 +41,3 @@ class PigeonAlreadyExists(Exception):
 class PigeonAlreadyExistsHidden(Exception):
     def __init__(self, pigeon):
         self.pigeon = pigeon
-
