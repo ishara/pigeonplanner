@@ -230,9 +230,10 @@ class MainTreeView(gtk.TreeView, component.Component):
     def fill_treeview(self, path=0):
         self._liststore.clear()
 
-        for pigeon in Pigeon.select():
-            if not config.get("interface.show-all-pigeons") and not pigeon.visible:
-                continue
+        query = Pigeon.select()
+        if not config.get("interface.show-all-pigeons"):
+            query = query.where(Pigeon.visible == True)
+        for pigeon in query:
             self._liststore.insert(0, self._row_for_pigeon(pigeon))
 
         self._selection.select_path(path)
