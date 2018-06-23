@@ -86,6 +86,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         component.Component.__init__(self, "DBManager")
 
         dbmanager.prompt_do_upgrade = self._prompt_do_upgrade
+        dbmanager.upgrade_finished = self._upgrade_finished
 
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
@@ -144,7 +145,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         dbobj = model.get_value(rowiter, self.COL_OBJ)
 
         try:
-            changed = dbmanager.open(dbobj)
+            dbmanager.open(dbobj)
         except DatabaseVersionError:
             ErrorDialog(messages.MSG_NEW_DATABASE, self.widgets.dialog)
             return
@@ -153,9 +154,6 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             return
         except DatabaseInfoError:
             return
-
-        if changed:
-            InfoDialog(messages.MSG_UPDATED_DATABASE, self.widgets.dialog)
 
         self.emit("database-loaded")
         self._close_dialog()
@@ -335,3 +333,5 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             return False
         return True
 
+    def _upgrade_finished(self):
+        InfoDialog(messages.MSG_UPDATED_DATABASE, self.widgets.dialog)

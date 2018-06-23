@@ -131,6 +131,9 @@ class DBManager(object):
         """
         return True
 
+    def upgrade_finished(self):
+        pass
+
     def open(self, dbobj):
         """ Open the given database object.
 
@@ -143,8 +146,8 @@ class DBManager(object):
             if not self.prompt_do_upgrade():
                 self._close_database()
                 raise DatabaseInfoError("")
-        changed = session.do_migrations()
-        return changed
+            session.do_migrations()
+            self.upgrade_finished()
 
     def add(self, name, description, path):
         name = name.strip()
