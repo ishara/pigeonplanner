@@ -1,10 +1,7 @@
 # -*- mode: python -*-
 
 _gtk_osx_use_jhbuild_python = True
-branches["python"] = "http://www.python.org/ftp/python/2.7.11/Python-2.7.11.tar.bz2"
-setup_sdk(target="10.8", sdk_version="10.8", architectures=["i386"])
-os.environ["CC"] = "/usr/bin/gcc"
-os.environ["DYLD_LIBRARY_PATH"] = ""
+setup_sdk(target="10.12", sdk_version=None, architectures=["x86_64"])
 build_policy = "updated-deps"
 modules = [ 
     "sqlite",
@@ -15,6 +12,5 @@ modules = [
     "shared-mime-info",
     "meta-gtk-osx-python",
     "meta-gtk-osx-themes",
-    "gtk-quartz-engine"
 ]
 

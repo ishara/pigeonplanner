@@ -20,9 +20,10 @@ Mac OS X:
         ln -sf mac/jhbuildrc-custom ~/.jhbuildrc-custom
         jhbuild bootstrap --skip=cmake
         jhbuild
-        jhbuild -m mac/pigeonplanner.modules build pigeonplanner
-        chmod +w $PREFIX/lib/libpython2.7.dylib
-        chmod +w $PREFIX/lib/libreadline.6.2.dylib
+        jhbuild shell
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        python get-pip.py
+        pip install setuptools geopy==0.95.1 yapsy==1.10.223
 
     The following steps will actually produce an appbundle located on your desktop:
         jhbuild shell

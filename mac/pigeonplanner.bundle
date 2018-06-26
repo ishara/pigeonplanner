@@ -42,12 +42,6 @@
     ${prefix}/share/mime
   </data>
 
-  <!-- Not working anymore in newer versions
-  <binary>
-    ${prefix}/lib/pango/${pkg:pango:pango_module_version}/modules/
-  </binary>
-  -->
-
   <binary>
     ${prefix}/lib/libpython2.7.dylib
   </binary>
@@ -70,7 +64,7 @@
   </binary>
 
   <binary>
-     ${prefix}/lib/libgettextpo.0.dylib
+     ${prefix}/lib/libgettextpo.1.dylib
   </binary>
 
   <binary>
@@ -98,7 +92,7 @@
   </data>
 
   <!-- Make sure to get all data from our installed packages -->
-  <data recurse="True">
+  <data>
     ${prefix}/lib/python2.7/site-packages/
   </data>
 
@@ -109,11 +103,6 @@
   <data>
     ${prefix}/include/python2.7/pyconfig.h
   </data>
-
-<!--TODO: This doesn't work anymore with a recent build-->
-<!--  <data>-->
-<!--    ${prefix}/etc/pango/-->
-<!--  </data>-->
 
   <!-- Copy in the themes data. You may want to trim this to save space
        in your bundle. -->
