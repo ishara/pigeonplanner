@@ -21,7 +21,7 @@ import os
 from pigeonplanner.database import session
 
 
-DBFILE = "test.db"
+DBFILE = ":memory:"
 
 
 def open_test_db():
