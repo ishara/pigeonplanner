@@ -48,7 +48,7 @@ class DatabaseSession(object):
         self.connection = models.set_database_path(self.dbfile)
         self.connection.connect()
         # Set this explicitly to work with ON DELETE/UPDATE
-        self.connection.execute_sql("PRAGMA foreign_keys=ON")
+        self.connection.pragma("foreign_keys", 1)
 
         if self.is_new_db:
             logger.debug("Creating tables for the new database")
@@ -67,11 +67,10 @@ class DatabaseSession(object):
         return self.connection is not None
 
     def get_database_version(self):
-        cursor = self.connection.execute_sql("PRAGMA user_version")
-        return cursor.fetchone()[0]
+        return self.connection.pragma("user_version")
 
     def set_database_version(self, version):
-        self.connection.execute_sql("PRAGMA user_version=%s" % version)
+        self.connection.pragma("user_version", version)
 
     def optimize_database(self):
         self.connection.execute_sql("VACUUM")
