@@ -114,7 +114,7 @@ class Pigeon(BaseModel):
     extra6 = CharField(default="")
 
     class Meta:
-        table_name = "Pigeons"
+        table_name = "pigeon"
         indexes = (
             (("band", "year"), True),
         )
@@ -202,7 +202,7 @@ class Status(BaseModel):
     defaults_fields_excludes = ["id", "pigeon", "status_id"]
 
     class Meta:
-        table_name = "Statuses"
+        table_name = "status"
 
     def __repr__(self):
         return "<Status %s for %s>" % (self.status_id, self.pigeon.band_string)
@@ -218,7 +218,7 @@ class Image(BaseModel):
     main = BooleanField()
 
     class Meta:
-        table_name = "Images"
+        table_name = "image"
 
     def __repr__(self):
         return "<Image %s for %s>" % (self.path, self.pigeon.band_string)
@@ -241,7 +241,7 @@ class Result(BaseModel):
     comment = TextField(default="")
 
     class Meta:
-        table_name = "Results"
+        table_name = "result"
         indexes = (
             (("date", "racepoint"), False),
             (("pigeon", "date", "racepoint", "place", "out", "category", "sector"), True),
@@ -270,7 +270,7 @@ class Breeding(BaseModel):
     comment = TextField(default="")
 
     class Meta:
-        table_name = "Breeding"
+        table_name = "breeding"
 
     def __repr__(self):
         return "<Breeding %s on %s>" % (self.id, self.date)
@@ -284,7 +284,7 @@ class Media(BaseModel):
     description = TextField(default="")
 
     class Meta:
-        table_name = "Media"
+        table_name = "media"
 
     def __repr__(self):
         return "<Media %s (%s)>" % (self.title, self.path)
@@ -301,7 +301,7 @@ class Medication(BaseModel):
     vaccination = BooleanField(default=False)
 
     class Meta:
-        table_name = "Medication"
+        table_name = "medication"
 
 
 PigeonMedication = Medication.pigeons.get_through_model()
@@ -324,7 +324,7 @@ class Person(BaseModel):
     comment = TextField(default="")
 
     class Meta:
-        table_name = "People"
+        table_name = "person"
 
     def __repr__(self):
         return "<Person %s>" % self.name
@@ -334,7 +334,7 @@ class Category(BaseModel, DataModelMixin):
     category = CharField(unique=True, constraints=[Check("category != ''")])
 
     class Meta:
-        table_name = "Categories"
+        table_name = "category"
 
     @classmethod
     def get_item_column(cls):
@@ -345,7 +345,7 @@ class Colour(BaseModel, DataModelMixin):
     colour = CharField(unique=True, constraints=[Check("colour != ''")])
 
     class Meta:
-        table_name = "Colours"
+        table_name = "colour"
 
     @classmethod
     def get_item_column(cls):
@@ -356,7 +356,7 @@ class Loft(BaseModel, DataModelMixin):
     loft = CharField(unique=True, constraints=[Check("loft != ''")])
 
     class Meta:
-        table_name = "Lofts"
+        table_name = "loft"
 
     @classmethod
     def get_item_column(cls):
@@ -371,7 +371,7 @@ class Racepoint(BaseModel, DataModelMixin):
     yco = CharField(default="")
 
     class Meta:
-        table_name = "Racepoints"
+        table_name = "racepoint"
 
     @classmethod
     def get_item_column(cls):
@@ -382,7 +382,7 @@ class Sector(BaseModel, DataModelMixin):
     sector = CharField(unique=True, constraints=[Check("sector != ''")])
 
     class Meta:
-        table_name = "Sectors"
+        table_name = "sector"
 
     @classmethod
     def get_item_column(cls):
@@ -393,7 +393,7 @@ class Strain(BaseModel, DataModelMixin):
     strain = CharField(unique=True, constraints=[Check("strain != ''")])
 
     class Meta:
-        table_name = "Strains"
+        table_name = "strain"
 
     @classmethod
     def get_item_column(cls):
@@ -404,7 +404,7 @@ class Type(BaseModel, DataModelMixin):
     type = CharField(unique=True, constraints=[Check("type != ''")])
 
     class Meta:
-        table_name = "Types"
+        table_name = "type"
 
     @classmethod
     def get_item_column(cls):
@@ -415,7 +415,7 @@ class Weather(BaseModel, DataModelMixin):
     weather = CharField(unique=True, constraints=[Check("weather != ''")])
 
     class Meta:
-        table_name = "Weather"
+        table_name = "weather"
 
     @classmethod
     def get_item_column(cls):
@@ -426,7 +426,7 @@ class Wind(BaseModel, DataModelMixin):
     wind = CharField(unique=True, constraints=[Check("wind != ''")])
 
     class Meta:
-        table_name = "Wind"
+        table_name = "wind"
 
     @classmethod
     def get_item_column(cls):
