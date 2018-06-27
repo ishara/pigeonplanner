@@ -224,7 +224,7 @@ class PedigreeReport(Report):
         if config.get("printing.user-address"):
             self.doc.draw_text("Header", self._userinfo.street, header_x, header_y)
             header_y += header_y_offset
-            self.doc.draw_text("Header", "%s %s" % (self._userinfo.code,
+            self.doc.draw_text("Header", "%s %s" % (self._userinfo.zipcode,
                                                     self._userinfo.city),
                                 header_x, header_y)
             header_y += header_y_offset

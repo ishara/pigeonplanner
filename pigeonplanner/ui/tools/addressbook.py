@@ -105,7 +105,7 @@ class AddressBook(builder.GtkBuilder):
             person = self._get_person_object()
             person.name = data["name"]
             person.street = data["street"]
-            person.code = data["code"]
+            person.zipcode = data["code"]
             person.city = data["city"]
             person.country = data["country"]
             person.phone = data["phone"]
@@ -137,7 +137,7 @@ class AddressBook(builder.GtkBuilder):
         data = model[rowiter][0]
         self.widgets.entryname.set_text(data.name)
         self.widgets.entrystreet.set_text(data.street)
-        self.widgets.entryzip.set_text(data.code)
+        self.widgets.entryzip.set_text(data.zipcode)
         self.widgets.entrycity.set_text(data.city)
         self.widgets.entrycountry.set_text(data.country)
         self.widgets.entryphone.set_text(data.phone)

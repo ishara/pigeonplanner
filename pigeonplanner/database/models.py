@@ -314,7 +314,7 @@ class Person(BaseModel):
     name = CharField()
     me = BooleanField()
     street = CharField(default="")
-    code = CharField(default="")
+    zipcode = CharField(default="")
     city = CharField(default="")
     country = CharField(default="")
     phone = CharField(default="")

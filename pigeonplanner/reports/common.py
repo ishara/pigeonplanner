@@ -35,7 +35,7 @@ class HelperMethods(object):
             self.doc.write_text(self._userinfo.name + "\n")
         if config.get("printing.user-address"):
             self.doc.write_text(self._userinfo.street + "\n")
-            self.doc.write_text("%s %s\n" % (self._userinfo.code,
+            self.doc.write_text("%s %s\n" % (self._userinfo.zipcode,
                                              self._userinfo.city))
         if config.get("printing.user-phone"):
             self.doc.write_text(self._userinfo.phone + "\n")

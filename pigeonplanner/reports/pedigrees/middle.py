@@ -50,7 +50,7 @@ class PedigreeReport(Report):
                 userinfo.append(self._userinfo.name)
             if config.get("printing.user-address"):
                 userinfo.append(self._userinfo.street)
-                userinfo.append("%s %s" % (self._userinfo.code, self._userinfo.city))
+                userinfo.append("%s %s" % (self._userinfo.zipcode, self._userinfo.city))
             if config.get("printing.user-phone"):
                 userinfo.append(self._userinfo.phone)
             if config.get("printing.user-email"):
