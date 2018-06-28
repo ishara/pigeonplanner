@@ -28,7 +28,7 @@ def all_tables():
     tables = []
     for name, obj in globals().items():
         try:
-            if issubclass(obj, BaseModel):
+            if issubclass(obj, BaseModel) and obj != BaseModel:
                 tables.append(obj)
         except TypeError:
             continue
