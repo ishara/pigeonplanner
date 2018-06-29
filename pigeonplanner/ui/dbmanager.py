@@ -179,6 +179,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             else:
                 break
         dialog.destroy()
+        self.widgets.treeview.grab_focus()
 
     def on_new_clicked(self, widgets):
         name, description = "", ""
@@ -208,6 +209,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             else:
                 break
         self.widgets.editdialog.hide()
+        self.widgets.treeview.grab_focus()
 
     def on_edit_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
@@ -238,6 +240,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             else:
                 break
         self.widgets.editdialog.hide()
+        self.widgets.treeview.grab_focus()
 
     def on_remove_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
