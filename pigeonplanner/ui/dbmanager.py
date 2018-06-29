@@ -172,7 +172,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
                 except DatabaseInfoError as exc:
                     ErrorDialog((exc.msg, None, ""), dialog)
                 else:
-                    self.add_liststore_item(dbobj)
+                    self.add_liststore_item(dbobj, select=True)
                     break
             else:
                 break
@@ -201,7 +201,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
                 except DatabaseInfoError as exc:
                     ErrorDialog((exc.msg, None, ""), self.widgets.editdialog)
                 else:
-                    self.add_liststore_item(dbobj)
+                    self.add_liststore_item(dbobj, select=True)
                     break
             else:
                 break
@@ -281,9 +281,11 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         for dbobj in dbmanager.get_databases():
             self.add_liststore_item(dbobj)
 
-    def add_liststore_item(self, dbobj):
+    def add_liststore_item(self, dbobj, select=False):
         icon, info, modified = self._dbobj_liststore_info(dbobj)
-        self.widgets.liststore.append([dbobj, icon, info, modified])
+        rowiter = self.widgets.liststore.append([dbobj, icon, info, modified])
+        if select:
+            self.widgets.selection.select_iter(rowiter)
 
     def edit_liststore_item(self, rowiter, dbobj):
         icon, info, modified = self._dbobj_liststore_info(dbobj)
