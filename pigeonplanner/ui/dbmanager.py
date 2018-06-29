@@ -118,17 +118,19 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
 
     def on_treeview_button_press_event(self, treeview, event):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
-        if pthinfo is None: return
+        if pthinfo is None:
+            return
 
         if event.button == 3:
             entries = [
                 (gtk.STOCK_EDIT, self.on_edit_clicked, None, None),
                 (gtk.STOCK_REMOVE, self.on_remove_clicked, None, None)]
             utils.popup_menu(event, entries)
-        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
-            if self.widgets.open.get_sensitive():
-                # This avoids opening a non-existing database
-                self.on_open_clicked(None)
+
+    def on_treeview_row_activated(self, widget, path, view_column):
+        if self.widgets.open.get_sensitive():
+            # This avoids opening a non-existing database
+            self.on_open_clicked(None)
 
     def on_close_clicked(self, widget):
         self._close_dialog()
