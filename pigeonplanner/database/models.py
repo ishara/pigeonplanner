@@ -19,11 +19,6 @@ SIGNAL_MAP = {
 database = SqliteDatabase(None)
 
 
-def set_database_path(path):
-    database.init(path)
-    return database
-
-
 def all_tables():
     tables = []
     for name, obj in globals().items():

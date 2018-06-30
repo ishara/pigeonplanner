@@ -39,20 +39,19 @@ class DatabaseMigrationError(Exception): pass
 class DatabaseSession(object):
     def __init__(self):
         self.dbfile = None
-        self.connection = None
 
     def open(self, dbfile=None):
         self.dbfile = dbfile or const.DATABASE
         self.is_new_db = (not os.path.exists(self.dbfile) or
                           os.path.getsize(self.dbfile) == 0)
-        self.connection = models.set_database_path(self.dbfile)
-        self.connection.connect()
+        models.database.init(self.dbfile)
+        models.database.connect()
         # Set this explicitly to work with ON DELETE/UPDATE
-        self.connection.pragma("foreign_keys", 1)
+        models.database.pragma("foreign_keys", 1)
 
         if self.is_new_db:
             logger.debug("Creating tables for the new database")
-            self.connection.create_tables(models.all_tables())
+            models.database.create_tables(models.all_tables())
             latest_version = migrations.get_latest_version()
             self.set_database_version(latest_version)
 
@@ -60,20 +59,19 @@ class DatabaseSession(object):
             raise DatabaseVersionError
 
     def close(self):
-        self.connection.close()
-        self.connection = None
+        models.database.close()
 
     def is_open(self):
-        return self.connection is not None
+        return not models.database.is_closed()
 
     def get_database_version(self):
-        return self.connection.pragma("user_version")
+        return models.database.pragma("user_version")
 
     def set_database_version(self, version):
-        self.connection.pragma("user_version", version)
+        models.database.pragma("user_version", version)
 
     def optimize_database(self):
-        self.connection.execute_sql("VACUUM")
+        models.database.execute_sql("VACUUM")
 
     def needs_update(self):
         db_version = self.get_database_version()
@@ -94,7 +92,7 @@ class DatabaseSession(object):
                 continue
             try:
                 logger.debug("Starting database migration %s", migration["version"])
-                migration["module"].do_migration(self.connection)
+                migration["module"].do_migration(models.database)
             except Exception:
                 # Catch any exception during migration!
                 logger.error("Database migration failed!", exc_info=True)
