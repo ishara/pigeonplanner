@@ -107,6 +107,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         sensitive = rowiter is not None
         self.widgets.edit.set_sensitive(sensitive)
         self.widgets.remove.set_sensitive(sensitive)
+        self.widgets.copy_.set_sensitive(sensitive)
         self.widgets.open.set_sensitive(sensitive)
         self.widgets.default.set_sensitive(sensitive)
 
@@ -255,6 +256,12 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             return
 
         model.remove(rowiter)
+
+    def on_copy_clicked(self, widget):
+        model, rowiter = self.widgets.selection.get_selected()
+        dbobj = model.get_value(rowiter, self.COL_OBJ)
+        new_dbobj = dbmanager.copy(dbobj)
+        self.add_liststore_item(new_dbobj, select=True)
 
     def on_default_toggled(self, widget):
         model, rowiter = self.widgets.selection.get_selected()

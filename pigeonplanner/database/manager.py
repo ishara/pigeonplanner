@@ -226,6 +226,26 @@ class DBManager(object):
         self._dbs.remove(dbobj)
         self.save()
 
+    def copy(self, dbobj):
+        n_copy = 1
+        while True:
+            name = "%s (%s %s)" % (dbobj.name, _("copy"), n_copy)
+            description = "%s (%s %s)" % (dbobj.description, _("copy"), n_copy)
+            try:
+                self._check_input_name(name)
+            except DatabaseInfoError:
+                n_copy += 1
+            else:
+                break
+
+        new_db_path = self._get_new_db_path(os.path.dirname(dbobj.path))
+        shutil.copy(dbobj.path, new_db_path)
+
+        info = DatabaseInfo(name, new_db_path, description, False)
+        self._dbs.append(info)
+        self.save()
+        return info
+
     def _load_dbs(self):
         with open(const.DATABASEINFO) as infile:
             data = json.load(infile)
