@@ -175,4 +175,3 @@ MSG_CONNECTION_ERROR = _("Error trying to get information. Are you connected to 
 MSG_UPDATE_AVAILABLE = _("A new version is available.")
 MSG_NO_UPDATE = _("You already have the latest version installed.")
 MSG_UPDATE_DEVELOPMENT = _("This isn't normal, or you must be running a development version")
-

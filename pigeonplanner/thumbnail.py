@@ -32,6 +32,7 @@ def get_image(src_file):
     except (gobject.GError, OSError):
         return gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
 
+
 def get_path(src_file):
     filename = __build_path(src_file)
     if not os.path.isfile(filename):
@@ -40,9 +41,11 @@ def get_path(src_file):
         __create_image(src_file)
     return os.path.abspath(filename)
 
+
 def __build_path(path):
     md5_hash = hashlib.md5(path)
     return os.path.join(const.THUMBDIR, md5_hash.hexdigest()+".png")
+
 
 def __create_image(src_file):
     filename = __build_path(src_file)
@@ -51,4 +54,3 @@ def __create_image(src_file):
         pixbuf.save(filename, "png")
     except:
         pass
-

@@ -21,30 +21,34 @@ import mimetypes
 import gtk
 
 
-class MimeIconError(Exception): pass
+class MimeIconError(Exception):
+    pass
 
 
 def get_type(filename):
     """
     Get the mime type of the given file
     """
-
-    if filename is None: return ""
+    if filename is None:
+        return ""
     value = mimetypes.guess_type(filename)
     if value and value[0]:
         return value[0]
     return ""
 
+
 def get_basetype(mime):
     """
     Get the basetype from a mimetype of format basetype/subtype
     """
-
     if mime is None:
         return ""
     return mime.split("/")[0]
 
+
 _icontheme = gtk.icon_theme_get_default()
+
+
 def get_pixbuf(mime):
     try:
         icon = "gnome-mime-%s" % mime.replace("/", "-")
@@ -59,14 +63,16 @@ def get_pixbuf(mime):
     except:
         raise MimeIconError
 
+
 def get_stock(mime):
     if is_directory(mime):
         return gtk.STOCK_DIRECTORY
     return gtk.STOCK_FILE
 
+
 def is_image(mime):
     return get_basetype(mime) == "image"
 
+
 def is_directory(mime):
     return get_basetype(mime) == "x-directory"
-

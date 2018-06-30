@@ -49,7 +49,7 @@ def get_operating_system():
     return operatingsystem, distribution
 
 
-class  NullFile(object):
+class NullFile(object):
     def __init__(self, *arg, **kwarg):
         pass
 
@@ -65,7 +65,7 @@ class Startup(object):
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
         sys.excepthook = self.exception_hook
-	
+
         # Disable py2exe log feature
         if const.WINDOWS and hasattr(sys, "frozen"):
             try:
@@ -106,7 +106,7 @@ class Startup(object):
 
         if language in ("def", "Default"):
             if const.OSX:
-                #TODO: get default language
+                # TODO: get default language
                 language = "C"
             else:
                 language = ""
@@ -211,6 +211,6 @@ def run(gtk_ui=True):
         from pigeonplanner.ui import gtkmain
         gtkmain.run_ui(missing_libs)
 
+
 if __name__ == "__main__":
     run()
-
