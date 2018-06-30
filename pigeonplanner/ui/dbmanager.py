@@ -297,7 +297,9 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         icon, info, modified = self._dbobj_liststore_info(dbobj)
         rowiter = self.widgets.liststore.append([dbobj, icon, info, modified])
         if select:
+            path = self.widgets.liststore.get_path(rowiter)
             self.widgets.selection.select_iter(rowiter)
+            self.widgets.treeview.scroll_to_cell(path)
 
     def edit_liststore_item(self, rowiter, dbobj):
         icon, info, modified = self._dbobj_liststore_info(dbobj)
