@@ -196,13 +196,14 @@ def run(gtk_ui=True):
 
     missing_libs = []
     try:
-        # We use the ManyToManyField introduced in 2.4.6
+        # The initial migration uses a feature which had a bug <3.5.1
+        # https://github.com/coleifer/peewee/issues/1645
         import peewee
-        if not tuple([int(x) for x in peewee.__version__.split(".")]) >= (2, 4, 6):
+        if not tuple([int(x) for x in peewee.__version__.split(".")]) >= (3, 5, 1):
             raise ImportError
     except ImportError:
-        app.logger.error("Peewee >= 2.4.6 not found!")
-        missing_libs.append("Peewee >= 2.4.6")
+        app.logger.error("Peewee >= 3.5.1 not found!")
+        missing_libs.append("Peewee >= 3.5.1")
     else:
         from pigeonplanner.database import manager
         manager.init_manager()
