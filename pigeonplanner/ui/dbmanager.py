@@ -126,6 +126,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             self.widgets.remove.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
             self.widgets.copy_.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
             self.widgets.move.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
+            self.widgets.default.set_sensitive(dbobj.exists and dbobj.writable)
             self.widgets.default.set_active(dbobj.default)
             self.widgets.open.set_sensitive(dbobj.exists and dbobj.writable)
 
