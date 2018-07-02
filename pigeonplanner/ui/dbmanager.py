@@ -104,18 +104,20 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
 
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
-        sensitive = rowiter is not None
-        self.widgets.edit.set_sensitive(sensitive)
-        self.widgets.remove.set_sensitive(sensitive)
-        self.widgets.copy_.set_sensitive(sensitive)
-        self.widgets.open.set_sensitive(sensitive)
-        self.widgets.default.set_sensitive(sensitive)
-
-        if rowiter is not None:
+        if rowiter is None:
+            self.widgets.edit.set_sensitive(False)
+            self.widgets.remove.set_sensitive(False)
+            self.widgets.copy_.set_sensitive(False)
+            self.widgets.open.set_sensitive(False)
+            self.widgets.default.set_sensitive(False)
+        else:
             dbobj = model.get_value(rowiter, self.COL_OBJ)
+            is_open = dbobj.path == session.dbfile
+            self.widgets.edit.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
+            self.widgets.remove.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
+            self.widgets.copy_.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
             self.widgets.default.set_active(dbobj.default)
-            self.widgets.open.set_sensitive(dbobj.exists)
-            self.widgets.open.set_sensitive(dbobj.writable)
+            self.widgets.open.set_sensitive(dbobj.exists and dbobj.writable)
 
     def on_treeview_button_press_event(self, treeview, event):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
