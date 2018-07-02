@@ -70,6 +70,14 @@ class DBFileChooserDialog(filechooser._FileChooserDialog):
         return self.entrydescription.get_text()
 
 
+class FolderChooser(filechooser._FileChooserDialog):
+    def __init__(self, parent):
+        super(FolderChooser, self).__init__(parent, preview=False,
+                                            action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+        self.set_title(_("Select a folder..."))
+        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+
+
 class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
     __gsignals__ = {"database-loaded": (gobject.SIGNAL_RUN_LAST, None, ())}
 
@@ -108,6 +116,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             self.widgets.edit.set_sensitive(False)
             self.widgets.remove.set_sensitive(False)
             self.widgets.copy_.set_sensitive(False)
+            self.widgets.move.set_sensitive(False)
             self.widgets.open.set_sensitive(False)
             self.widgets.default.set_sensitive(False)
         else:
@@ -116,6 +125,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             self.widgets.edit.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
             self.widgets.remove.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
             self.widgets.copy_.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
+            self.widgets.move.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
             self.widgets.default.set_active(dbobj.default)
             self.widgets.open.set_sensitive(dbobj.exists and dbobj.writable)
 
@@ -264,6 +274,28 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         dbobj = model.get_value(rowiter, self.COL_OBJ)
         new_dbobj = dbmanager.copy(dbobj)
         self.add_liststore_item(new_dbobj, select=True)
+
+    def on_move_clicked(self, widget):
+        model, rowiter = self.widgets.selection.get_selected()
+        dbobj = model.get_value(rowiter, self.COL_OBJ)
+        dialog = FolderChooser(self.widgets.dialog)
+
+        while True:
+            response = dialog.run()
+            if response == gtk.RESPONSE_OK:
+                path = dialog.get_filename()
+                try:
+                    dbobj = dbmanager.move(dbobj, path)
+                except DatabaseOperationError as exc:
+                    ErrorDialog((exc.msg, None, ""), self.widgets.dialog)
+                else:
+                    self.edit_liststore_item(rowiter, dbobj)
+                    break
+            else:
+                break
+
+        dialog.destroy()
+        self.widgets.treeview.grab_focus()
 
     def on_default_toggled(self, widget):
         model, rowiter = self.widgets.selection.get_selected()

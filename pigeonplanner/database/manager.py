@@ -246,6 +246,17 @@ class DBManager(object):
         self.save()
         return info
 
+    def move(self, dbobj, new_path):
+        filename = os.path.basename(dbobj.path)
+        destination = os.path.join(new_path, filename)
+        try:
+            shutil.move(dbobj.path, destination)
+        except (shutil.Error, IOError) as exc:
+            raise DatabaseOperationError(_("Moving the database failed with message:\n%s") % exc)
+        dbobj.path = destination
+        self.save()
+        return dbobj
+
     def _load_dbs(self):
         with open(const.DATABASEINFO) as infile:
             data = json.load(infile)
