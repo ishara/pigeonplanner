@@ -43,6 +43,10 @@ class PigeonsReport(Report, HelperMethods):
             columns.append((_("Sex"), "sex_string"))
         if config.get("columns.pigeon-name"):
             columns.append((_("Name"), "name"))
+        if config.get("columns.pigeon-sire"):
+            columns.append((_("Sire"), "sire"))
+        if config.get("columns.pigeon-dam"):
+            columns.append((_("Dam"), "dam"))
         if config.get("columns.pigeon-colour"):
             columns.append((_("Colour"), "colour"))
         if config.get("columns.pigeon-loft"):
@@ -64,7 +68,12 @@ class PigeonsReport(Report, HelperMethods):
             self.doc.start_row()
             for name, method in columns:
                 instance = pigeon.status if method == "status_string" else pigeon
-                self.add_cell(getattr(instance, method), "cell", "celltext")
+                if method in ("sire", "dam"):
+                    obj = getattr(pigeon, method)
+                    text = "" if obj is None else obj.band_string
+                    self.add_cell(text, "cell", "celltext")
+                else:
+                    self.add_cell(getattr(instance, method), "cell", "celltext")
             self.doc.end_row()
         self.doc.end_table()
 
