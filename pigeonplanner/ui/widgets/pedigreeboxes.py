@@ -316,11 +316,16 @@ class PedigreeBox_gdk(gtk.DrawingArea):
                         self.get_colormap().alloc_color("#b9cfe7"))
                 self.border_gc.set_foreground(
                         self.get_colormap().alloc_color("#204a87"))
-            else:
+            elif self.pigeon.get_sex() == enums.Sex.hen:
                 self.bg_gc.set_foreground(
                         self.get_colormap().alloc_color("#ffcdf1"))
                 self.border_gc.set_foreground(
                         self.get_colormap().alloc_color("#87206a"))
+            else:
+                self.bg_gc.set_foreground(
+                        self.get_colormap().alloc_color("#c8c8c8"))
+                self.border_gc.set_foreground(
+                        self.get_colormap().alloc_color("#646464"))
         else:
             self.bg_gc.set_foreground(
                         self.get_colormap().alloc_color("#eeeeee"))

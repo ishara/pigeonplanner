@@ -36,9 +36,7 @@ from pigeonplanner.core import pigeon as corepigeon
 
 
 #TODO: Cairo-drawn boxes mess up window drawing on Mac OS X
-cairo_available = True
-if const.OSX:
-    cairo_available = False
+cairo_available = not const.OSX
 
 
 class DrawPedigree(object):

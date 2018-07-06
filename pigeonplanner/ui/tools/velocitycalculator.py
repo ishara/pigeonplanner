@@ -157,14 +157,5 @@ class VelocityCalculator(builder.GtkBuilder):
         self.widgets.ls_distance.clear()
         for racepoint in Racepoint.select().order_by(Racepoint.racepoint.asc()):
             self.widgets.ls_distance.append([racepoint, racepoint.racepoint, racepoint.distance])
-#        for data in database.get_all_racepoints():
-#            # Just 2 error reports mentioned a type error when loading the data
-#            # into this treeview. Not sure what's wrong, perhaps some leftover
-#            # data from an older database format. SQLite is not that strict when
-#            # it comes to storing values with different types. Make sure they are
-#            # converted to what the liststore expects.
-#            self.widgets.ls_distance.append(
-#                            [data["racepoint"], str(data["distance"]), int(data["unit"])])
-
         self.widgets.dialog.show()
 

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-10 22:39+0200\n"
-"PO-Revision-Date: 2013-06-08 02:59+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2015-12-02 07:03+0000\n"
+"Last-Translator: 426 <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-12 05:59+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2015-12-03 05:39+0000\n"
+"X-Generator: Launchpad (build 17856)\n"
 "Language: \n"
 
 #: glade/OptionsDialog.ui:331 glade/LocationChooser.ui:90
@@ -47,13 +47,13 @@ msgstr "您嘗試導入Pigeon Planner的資料庫版本太新。您必須重新�
 
 #: pigeonplanner/messages.py:32
 msgid "Database update required!"
-msgstr ""
+msgstr "資料庫需要更新！"
 
 #: pigeonplanner/messages.py:33
 msgid ""
 "This database needs an update before it can be used. Previous versions of "
 "Pigeon Planner won't work anymore. Do you want to continue?"
-msgstr ""
+msgstr "此資料庫必須更新才可在最新版本程式中使用。舊版本程式無法繼續使用，請問要繼續嗎?"
 
 #: pigeonplanner/messages.py:38
 msgid ""
@@ -66,7 +66,7 @@ msgstr "資料庫已更新並吻合最新版本的Pigeon Planner。請注意，�
 msgid ""
 "The database migration has failed! Any further actions are stopped to "
 "prevent data loss. Please contact the developers to fix this problem."
-msgstr ""
+msgstr "合併資料庫失敗！後續更新動作已停止以避免資料遺失。請聯絡開發者修正此問題。"
 
 #: pigeonplanner/messages.py:50 pigeonplanner/messages.py:53
 msgid "Removing database"
@@ -611,29 +611,29 @@ msgstr "關閉此視窗"
 #: pigeonplanner/ui/pedigreewindow.py:194
 #, python-format
 msgid "Cannot find image '%s'"
-msgstr ""
+msgstr "未找到圖片 '%s'"
 
 #: pigeonplanner/ui/pedigreewindow.py:195
 msgid ""
 "You need to edit the pigeon and select the correct path or restore the "
 "original image on your computer."
-msgstr ""
+msgstr "您需要編輯種鴿資料，並將電腦內正確圖片路徑填入，或回復原始圖片。"
 
 #: pigeonplanner/ui/pedigreewindow.py:212 pigeonplanner/ui/resultwindow.py:770
 msgid "You probably don't have write permissions on this folder."
-msgstr ""
+msgstr "您也許沒有寫入此資料夾的權限。"
 
 #: pigeonplanner/ui/resultwindow.py:84 pigeonplanner/ui/tabs/results.py:56
 #: glade/ResultsView.ui:656 glade/OptionsDialog.ui:1116
 #: glade/ResultParser.ui:427
 msgid "Windspeed"
-msgstr ""
+msgstr "風速"
 
 #: pigeonplanner/ui/resultwindow.py:86 pigeonplanner/ui/tabs/results.py:58
 #: glade/ResultsView.ui:727 glade/OptionsDialog.ui:1144
 #: glade/ResultParser.ui:460
 msgid "Temperature"
-msgstr ""
+msgstr "天氣溫度"
 
 #: pigeonplanner/ui/resultwindow.py:88 pigeonplanner/ui/dialogs.py:256
 #: pigeonplanner/ui/tabs/results.py:60 pigeonplanner/ui/tabs/relatives.py:163
@@ -653,12 +653,12 @@ msgstr "歸返率"
 #: glade/ResultsView.ui:690 glade/OptionsDialog.ui:1129
 #: glade/ResultParser.ui:613
 msgid "Speed"
-msgstr ""
+msgstr "飛行分速"
 
 #: pigeonplanner/ui/resultwindow.py:393 pigeonplanner/ui/tabs/results.py:363
 #: glade/ResultWindow.ui:382
 msgid "Races"
-msgstr ""
+msgstr "賽事資料"
 
 #: pigeonplanner/ui/maildialog.py:152
 msgid "The e-mail has been sent succesfully!"
@@ -670,16 +670,16 @@ msgstr "連線至伺服失敗！"
 
 #: pigeonplanner/ui/resultparser.py:51
 msgid "This tool needs Yapsy to run correctly."
-msgstr ""
+msgstr "此工具需要Yapsy才可正確運行。"
 
 #: pigeonplanner/ui/resultparser.py:66
 #, python-format
 msgid "This result is not in the '%s' format. Do you want to continue?"
-msgstr ""
+msgstr "此結果不是 '%s' 格式。您要繼續操作嗎？"
 
 #: pigeonplanner/ui/resultparser.py:122
 msgid "The date, racepoint or number of pigeons is incorrect."
-msgstr ""
+msgstr "日期的賽點或賽鴿數據不正確。"
 
 #: pigeonplanner/ui/detailsview.py:54 glade/DetailsView.ui:1015
 msgid "Details of pigeon"
@@ -716,29 +716,29 @@ msgstr "前往官方網站"
 #: pigeonplanner/ui/locationchooser.py:57
 #: pigeonplanner/ui/tools/distancecalculator.py:51
 msgid "This tool needs Geopy 0.95.0 or higher to run correctly."
-msgstr ""
+msgstr "此工具需要Geopy 0.95.0或更高才可正確運行。"
 
 #: pigeonplanner/ui/locationchooser.py:65
 #, python-format
 msgid "Can't find location '%s'"
-msgstr ""
+msgstr "未找到地點 '%s'"
 
 #: pigeonplanner/ui/dbmanager.py:41
 msgid "Select a database file..."
-msgstr ""
+msgstr "選擇資料庫檔案 ..."
 
 #: pigeonplanner/ui/dbmanager.py:44
 msgid "Pigeon Planner database"
-msgstr ""
+msgstr "Pigeon Planner 資料庫"
 
 #: pigeonplanner/ui/dbmanager.py:92
 msgid "Select a directory..."
-msgstr ""
+msgstr "選擇路徑 ..."
 
 #: pigeonplanner/ui/dbmanager.py:303
 msgid ""
 "It's not allowed to close the database manager when no database is opened."
-msgstr ""
+msgstr "資料庫管理程式無法關閉，因為沒有開啟中的資料庫。"
 
 #: pigeonplanner/ui/logdialog.py:39
 msgid "Logfile Viewer"
@@ -830,7 +830,7 @@ msgstr "搜尋鴿子"
 
 #: pigeonplanner/ui/dialogs.py:274 glade/MainWindow.ui:300
 msgid "Show all pigeons"
-msgstr ""
+msgstr "顯示所有種鴿"
 
 #: pigeonplanner/ui/tabs/media.py:39 glade/MediaView.ui:56
 msgid "Media"
@@ -863,11 +863,11 @@ msgstr "賽鴿成績表"
 
 #: pigeonplanner/ui/tabs/results.py:561
 msgid "Add to pedigree details"
-msgstr ""
+msgstr "新增到血統資料"
 
 #: pigeonplanner/ui/tabs/results.py:654
 msgid "No empty space found in pedigree details."
-msgstr ""
+msgstr "血統資料表未發現空白區"
 
 #: pigeonplanner/ui/tabs/results.py:731
 msgid "Edit result for:"
@@ -1033,7 +1033,7 @@ msgstr "使用者定義"
 
 #: pigeonplanner/reportlib/GtkPrint.py:65
 msgid "PyGtk 2.10 or later is required"
-msgstr ""
+msgstr "需要 PyGtk 2.10 或更高版本"
 
 #: pigeonplanner/reportlib/PdfDoc.py:110 pigeonplanner/reportlib/PdfDoc.py:113
 #: pigeonplanner/reportlib/backend/docbackend.py:160
@@ -1102,24 +1102,24 @@ msgstr "將頁面縮小"
 #: pigeonplanner/reportlib/gui/printpreview.py:348
 #, python-format
 msgid "of %d"
-msgstr ""
+msgstr "於 %d"
 
 #: pigeonplanner/database/manager.py:77
 msgid "My pigeons"
-msgstr ""
+msgstr "我的種鴿"
 
 #: pigeonplanner/database/manager.py:78
 msgid "My default database"
-msgstr ""
+msgstr "我的預設資料庫"
 
 #: pigeonplanner/database/manager.py:161
 msgid "This database is already added."
-msgstr ""
+msgstr "此資料庫已加入"
 
 #: pigeonplanner/database/manager.py:180
 #, python-format
 msgid "Database path '%s' is not writeable."
-msgstr ""
+msgstr "資料庫路徑 '%s' 無寫入權限"
 
 #: pigeonplanner/database/manager.py:201
 #, python-format
@@ -1127,19 +1127,21 @@ msgid ""
 "Moving the database failed with message:\n"
 "%s"
 msgstr ""
+"移動資料庫時錯誤訊息：\n"
+"%s"
 
 #: pigeonplanner/database/manager.py:221
 msgid "Unable to remove the database: permission denied"
-msgstr ""
+msgstr "無法移除資料庫：拒絕無效權限"
 
 #: pigeonplanner/database/manager.py:266
 msgid "Database name is required."
-msgstr ""
+msgstr "請將資料庫取名。"
 
 #: pigeonplanner/database/manager.py:269
 #, python-format
 msgid "Database name '%s' already exists."
-msgstr ""
+msgstr "資料庫名稱  '%s' 重覆。"
 
 #: pigeonplanner/core/common.py:43
 msgid "Cock"
@@ -1179,7 +1181,7 @@ msgstr "借出"
 
 #: pigeonplanner/core/common.py:61
 msgid "Widow"
-msgstr ""
+msgstr "遺孀"
 
 #: pigeonplanner/core/common.py:238
 msgid "Error: This file does not exist"
@@ -1427,15 +1429,15 @@ msgstr "列印種鴿列表"
 
 #: glade/MainWindow.ui:301
 msgid "Show all pigeons in the list"
-msgstr ""
+msgstr "顯示此列表中所有種鴿"
 
 #: glade/MainWindow.ui:307 glade/DBManager.ui:8
 msgid "Database manager"
-msgstr ""
+msgstr "資料庫管理"
 
 #: glade/MainWindow.ui:308
 msgid "Manage your databases"
-msgstr ""
+msgstr "管理您的資料庫"
 
 #: glade/MainWindow.ui:399
 msgid "Total"
@@ -1562,7 +1564,7 @@ msgstr "過濾鴿子"
 
 #: glade/FilterDialog.ui:109 glade/ResultWindow.ui:434
 msgid "Pigeon year"
-msgstr ""
+msgstr "種鴿年份"
 
 #: glade/OptionsDialog.ui:95
 msgid "Options"
@@ -1598,15 +1600,15 @@ msgstr "語系"
 
 #: glade/OptionsDialog.ui:490
 msgid "Default distance unit"
-msgstr ""
+msgstr "預設距離公制"
 
 #: glade/OptionsDialog.ui:502
 msgid "Default speed unit"
-msgstr ""
+msgstr "預設速率公制"
 
 #: glade/OptionsDialog.ui:541
 msgid "Units"
-msgstr ""
+msgstr "公制"
 
 #: glade/OptionsDialog.ui:653
 msgid "Window"
@@ -1614,7 +1616,7 @@ msgstr "視窗"
 
 #: glade/OptionsDialog.ui:691
 msgid "Results mode"
-msgstr ""
+msgstr "結果模式"
 
 #: glade/OptionsDialog.ui:726
 msgid "Hide deleted pigeons in lists"
@@ -1626,7 +1628,7 @@ msgstr "將列表中已刪除種鴿顯示顏色列"
 
 #: glade/OptionsDialog.ui:933
 msgid "Text"
-msgstr ""
+msgstr "內文"
 
 #: glade/OptionsDialog.ui:947 glade/OptionsDialog.ui:1590
 msgid "Image"
@@ -1634,7 +1636,7 @@ msgstr "圖片"
 
 #: glade/OptionsDialog.ui:962
 msgid "Text and image"
-msgstr ""
+msgstr "內文及圖片"
 
 #: glade/OptionsDialog.ui:991
 msgid "Main Columns"
@@ -1674,11 +1676,11 @@ msgstr "於血統書中顯示種鴿顏色"
 
 #: glade/OptionsDialog.ui:1471
 msgid "Enable box border color"
-msgstr ""
+msgstr "啟用邊線顏色"
 
 #: glade/OptionsDialog.ui:1485
 msgid "Enable box fill color"
-msgstr ""
+msgstr "啟用底色"
 
 #: glade/OptionsDialog.ui:1505
 msgid "Layout"
@@ -1719,7 +1721,7 @@ msgstr "匯出"
 
 #: glade/ResultWindow.ui:10
 msgid "Export these results"
-msgstr ""
+msgstr "導出成績"
 
 #: glade/ResultWindow.ui:17
 msgid "Save these results"
@@ -1747,7 +1749,7 @@ msgstr "過濾結果"
 
 #: glade/ResultWindow.ui:756
 msgid "Hide non-classified results"
-msgstr ""
+msgstr "隱藏非機密成績"
 
 #: glade/ResultWindow.ui:807
 msgid "View all results"
@@ -1807,7 +1809,7 @@ msgstr "歸還日期"
 
 #: glade/DetailsView.ui:1786
 msgid "Partner"
-msgstr ""
+msgstr "夥伴"
 
 #: glade/Dialogs.ui:114
 msgid "Send to:"
@@ -1839,7 +1841,7 @@ msgstr "傳送中..."
 
 #: glade/LocationChooser.ui:9 glade/LocationChooser.ui:163
 msgid "Search coordinates"
-msgstr ""
+msgstr "搜尋座標"
 
 #: glade/LocationChooser.ui:102 glade/DistanceCalculator.ui:125
 #: glade/DistanceCalculator.ui:253 glade/RaceManager.ui:144
@@ -1875,15 +1877,15 @@ msgstr "全部"
 
 #: glade/DBManager.ui:250
 msgid "Load this database as default on startup"
-msgstr ""
+msgstr "開啟程式時預設資料庫"
 
 #: glade/DBManager.ui:283
 msgid "Database information"
-msgstr ""
+msgstr "資料庫資訊"
 
 #: glade/DBManager.ui:474
 msgid "For advanced use only. Use the default settings if you are in doubt."
-msgstr ""
+msgstr "進階用戶專用。如有疑問請用預設設定即可。"
 
 #: glade/DistanceCalculator.ui:446
 msgid "Result"
@@ -1919,7 +1921,7 @@ msgstr "基數"
 
 #: glade/ResultParser.ui:494
 msgid "Edit race details"
-msgstr ""
+msgstr "編輯賽事資料"
 
 #: glade/ResultParser.ui:527
 msgid "No results were found for your pigeons"
@@ -1998,7 +2000,7 @@ msgstr "管理物件"
 
 #: glade/DataManager.ui:321
 msgid "No unused objects found!"
-msgstr ""
+msgstr "未發現無用物件！"
 
 #: glade/DataManager.ui:407
 msgid "Unused objects"
@@ -2042,15 +2044,15 @@ msgstr "交換的細節"
 
 #: data/TranslationWorkaround.ui:8
 msgid "Middle"
-msgstr ""
+msgstr "中間"
 
 #: data/TranslationWorkaround.ui:9
 msgid "Classic"
-msgstr ""
+msgstr "經典"
 
 #: data/TranslationWorkaround.ui:10
 msgid "Splitted"
-msgstr ""
+msgstr "已分開"
 
 #~ msgid "Select a directory"
 #~ msgstr "選擇資料夾"

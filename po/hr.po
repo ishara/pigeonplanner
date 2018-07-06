@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-10 22:39+0200\n"
-"PO-Revision-Date: 2013-01-10 00:58+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2016-02-04 19:13+0000\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-12 05:58+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2016-02-05 05:46+0000\n"
+"X-Generator: Launchpad (build 17908)\n"
 "Language: \n"
 
 #, python-format
@@ -758,6 +758,7 @@ msgstr ""
 "  Jakov Šredl https://launchpad.net/~br-pigeon\n"
 "  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
 "  freedomrun https://launchpad.net/~freedomrun\n"
+"  gogo https://launchpad.net/~trebelnik-stefina\n"
 "  jaha https://launchpad.net/~almir-jahic"
 
 #: pigeonplanner/ui/dialogs.py:68 glade/MainWindow.ui:244
@@ -1303,7 +1304,7 @@ msgstr "Dodaj novi rezultat za ovog goluba"
 
 #: glade/MainWindow.ui:162
 msgid "Configure the application"
-msgstr "Konfiguriraj program"
+msgstr "Podesi aplikaciju"
 
 #: glade/MainWindow.ui:170
 msgid "_Filter..."

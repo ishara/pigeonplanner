@@ -23,6 +23,8 @@
       <column type="gchararray"/>
       <!-- column-name speed -->
       <column type="gchararray"/>
+      <!-- column-name speedfloat -->
+      <column type="gfloat"/>
     </columns>
   </object>
   <object class="GtkListStore" id="parserstore">

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-10 22:39+0200\n"
-"PO-Revision-Date: 2015-02-08 19:27+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2015-12-18 11:15+0000\n"
+"Last-Translator: Piotr Strębski <strebski@o2.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-09 05:50+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
-"Language: \n"
+"X-Launchpad-Export-Date: 2015-12-19 04:38+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,-1,-1,-1,-1,-1,351\n"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:213
@@ -98,8 +98,7 @@ msgstr "Nieprawidłowy obraz!"
 #: pigeonplanner/messages.py:60
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
-msgstr ""
-"Ten obraz nie jest wspierany lub jest uszkodzony, proszę wybrać inny."
+msgstr "Ten obraz nie jest wspierany lub jest uszkodzony, proszę wybrać inny."
 
 #: pigeonplanner/messages.py:63
 msgid "Loading image failed!"
@@ -175,8 +174,7 @@ msgstr "Co najmniej data i miejsce startu muszą być wprowadzone."
 msgid ""
 "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
 "DD)."
-msgstr ""
-"Termin wprowadzony ma niewłaściwy format. Należy zapisać (RRRR-MM-DD)."
+msgstr "Termin wprowadzony ma niewłaściwy format. Należy zapisać (RRRR-MM-DD)."
 
 #: pigeonplanner/messages.py:108
 msgid "The result you want to add already exists."
@@ -349,31 +347,28 @@ msgstr "Płeć"
 msgid "Name"
 msgstr "Nazwa"
 
-#: pigeonplanner/reports/pigeons.py:47
-#: pigeonplanner/ui/widgets/treeview.py:283 glade/FilterDialog.ui:135
-#: glade/OptionsDialog.ui:868 glade/OptionsDialog.ui:1549
-#: glade/DetailsView.ui:227 glade/DetailsView.ui:642
+#: pigeonplanner/reports/pigeons.py:47 pigeonplanner/ui/widgets/treeview.py:283
+#: glade/FilterDialog.ui:135 glade/OptionsDialog.ui:868
+#: glade/OptionsDialog.ui:1549 glade/DetailsView.ui:227
+#: glade/DetailsView.ui:642
 msgid "Colour"
 msgstr "Kolor"
 
-#: pigeonplanner/reports/pigeons.py:49
-#: pigeonplanner/ui/widgets/treeview.py:284
+#: pigeonplanner/reports/pigeons.py:49 pigeonplanner/ui/widgets/treeview.py:284
 #: pigeonplanner/ui/tools/distancecalculator.py:174 glade/FilterDialog.ui:163
-#: glade/OptionsDialog.ui:881 glade/DetailsView.ui:201
-#: glade/DetailsView.ui:576 glade/MedicationView.ui:871
+#: glade/OptionsDialog.ui:881 glade/DetailsView.ui:201 glade/DetailsView.ui:576
+#: glade/MedicationView.ui:871
 msgid "Loft"
 msgstr "Gołębnik"
 
-#: pigeonplanner/reports/pigeons.py:51
-#: pigeonplanner/ui/widgets/treeview.py:284 glade/FilterDialog.ui:149
-#: glade/OptionsDialog.ui:853 glade/DetailsView.ui:251
-#: glade/DetailsView.ui:666
+#: pigeonplanner/reports/pigeons.py:51 pigeonplanner/ui/widgets/treeview.py:284
+#: glade/FilterDialog.ui:149 glade/OptionsDialog.ui:853
+#: glade/DetailsView.ui:251 glade/DetailsView.ui:666
 msgid "Strain"
 msgstr "Rasa"
 
-#: pigeonplanner/reports/pigeons.py:53
-#: pigeonplanner/ui/widgets/treeview.py:284 glade/FilterDialog.ui:332
-#: glade/OptionsDialog.ui:894
+#: pigeonplanner/reports/pigeons.py:53 pigeonplanner/ui/widgets/treeview.py:284
+#: glade/FilterDialog.ui:332 glade/OptionsDialog.ui:894
 msgid "Status"
 msgstr "Status"
 
@@ -414,18 +409,16 @@ msgid "Type"
 msgstr "Typ lotu"
 
 #: pigeonplanner/reports/results.py:67 pigeonplanner/ui/resultwindow.py:83
-#: pigeonplanner/ui/tabs/results.py:55
-#: pigeonplanner/ui/tools/datamanager.py:45 glade/ResultsView.ui:303
-#: glade/OptionsDialog.ui:1103 glade/ResultWindow.ui:218
-#: glade/ResultParser.ui:342
+#: pigeonplanner/ui/tabs/results.py:55 pigeonplanner/ui/tools/datamanager.py:45
+#: glade/ResultsView.ui:303 glade/OptionsDialog.ui:1103
+#: glade/ResultWindow.ui:218 glade/ResultParser.ui:342
 msgid "Wind"
 msgstr "Wiatr"
 
 #: pigeonplanner/reports/results.py:68 pigeonplanner/ui/resultwindow.py:85
-#: pigeonplanner/ui/tabs/results.py:57
-#: pigeonplanner/ui/tools/datamanager.py:44 glade/ResultsView.ui:289
-#: glade/OptionsDialog.ui:1060 glade/ResultWindow.ui:232
-#: glade/ResultParser.ui:356
+#: pigeonplanner/ui/tabs/results.py:57 pigeonplanner/ui/tools/datamanager.py:44
+#: glade/ResultsView.ui:289 glade/OptionsDialog.ui:1060
+#: glade/ResultWindow.ui:232 glade/ResultParser.ui:356
 msgid "Weather"
 msgstr "Pogoda"
 
@@ -773,7 +766,9 @@ msgstr ""
 "Tłumaczenie\n"
 "\n"
 "Launchpad Contributions:\n"
+"  Piotr Strębski https://launchpad.net/~strebski\n"
 "  Rafał https://launchpad.net/~rafal-szpuda-s\n"
+"  Seweryn Opyd https://launchpad.net/~sewerin\n"
 "  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
 "  dar12ek https://launchpad.net/~dar-tom-wgc"
 
@@ -1056,7 +1051,7 @@ msgstr ""
 
 #: pigeonplanner/ui/tools/distancecalculator.py:173
 msgid "Custom"
-msgstr "Niestandartowy"
+msgstr "Niestandardowy"
 
 #: pigeonplanner/reportlib/GtkPrint.py:65
 msgid "PyGtk 2.10 or later is required"
@@ -1172,15 +1167,15 @@ msgstr "Nazwa bazy danych '%s' już istnieje."
 
 #: pigeonplanner/core/common.py:43
 msgid "Cock"
-msgstr ""
+msgstr "Gołąb"
 
 #: pigeonplanner/core/common.py:44
 msgid "Hen"
-msgstr ""
+msgstr "Gołębica"
 
 #: pigeonplanner/core/common.py:45
 msgid "Young bird"
-msgstr ""
+msgstr "Młody ptak"
 
 #: pigeonplanner/core/common.py:55
 msgid "Dead"
@@ -2087,18 +2082,19 @@ msgstr "Środkowy"
 
 #: data/TranslationWorkaround.ui:9
 msgid "Classic"
-msgstr "Klasyczy"
+msgstr "Klasyczny"
 
 #: data/TranslationWorkaround.ui:10
 msgid "Splitted"
 msgstr "Podzielony"
 
 #~ msgid ""
-#~ "Pigeon Planner is free software. You don’t need to pay for using it. But if "
-#~ "you like it, please consider donating to help improving it."
+#~ "Pigeon Planner is free software. You don’t need to pay for using it. But "
+#~ "if you like it, please consider donating to help improving it."
 #~ msgstr ""
-#~ "Pigeon Planner jest wolnym oprogramowaniem. Nie musisz płacić za korzystanie "
-#~ "z niego. Ale jeśli chcesz to, rozważ dotację, aby pomóc jej poprawę"
+#~ "Pigeon Planner jest wolnym oprogramowaniem. Nie musisz płacić za "
+#~ "korzystanie z niego. Ale jeśli chcesz to, rozważ dotację, aby pomóc jej "
+#~ "poprawę"
 
 #~ msgid ""
 #~ "The backup was successfully restored.\n"
@@ -2308,18 +2304,18 @@ msgstr "Podzielony"
 #~ msgstr "Pretraži bazu podataka"
 
 #~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the next "
-#~ "time you start the program again."
+#~ "Click \"OK\" to close the program. A new database will be created the "
+#~ "next time you start the program again."
 #~ msgstr ""
-#~ "Pritisni \"OK\" za zatvaranje programa. Nova baza podataka bit će kreirana "
-#~ "sljedeći put kad pokreneš program."
+#~ "Pritisni \"OK\" za zatvaranje programa. Nova baza podataka bit će "
+#~ "kreirana sljedeći put kad pokreneš program."
 
 #~ msgid ""
 #~ "A new version is available. Please go to the Pigeon Planner website by "
 #~ "clicking the link below and download the latest version"
 #~ msgstr ""
-#~ "Dostupna je nova inačica. Klikni na poveznicu prema web stranici i pokreni "
-#~ "download posljednje inačice"
+#~ "Dostupna je nova inačica. Klikni na poveznicu prema web stranici i "
+#~ "pokreni download posljednje inačice"
 
 #~ msgid "Insert a pigeon"
 #~ msgstr "Unesi goluba"
