@@ -23,12 +23,12 @@ A photo album to display all pigeon pictures
 import gtk
 import gobject
 import logging
-logger = logging.getLogger(__name__)
 
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.database.models import Image
 
+logger = logging.getLogger(__name__)
 
 MARGIN = 6
 
@@ -178,10 +178,8 @@ class PhotoAlbum(builder.GtkBuilder):
         self.widgets.drawingarea.set_size_request(screen_width, screen_height)
         self.widgets.drawingarea.queue_draw()
         
-        self.widgets.zoom_in_button.set_sensitive(self.zoom !=
-                                          max(self.zoom_factors.keys()))
-        self.widgets.zoom_out_button.set_sensitive(self.zoom !=
-                                           min(self.zoom_factors.keys()))
+        self.widgets.zoom_in_button.set_sensitive(self.zoom != max(self.zoom_factors.keys()))
+        self.widgets.zoom_out_button.set_sensitive(self.zoom != min(self.zoom_factors.keys()))
         
     def zoom_in(self):
         zoom = [z for z in self.zoom_factors.keys() if z > self.zoom]
@@ -204,8 +202,7 @@ class PhotoAlbum(builder.GtkBuilder):
             return
 
         width, height, vsb_w, hsb_h = self.get_view_size()
-        zoom = min(width / float(self.pixbuf.get_width()), height /
-                                 float(self.pixbuf.get_height()))
+        zoom = min(width / float(self.pixbuf.get_width()), height / float(self.pixbuf.get_height()))
 
         return zoom
 
@@ -353,7 +350,7 @@ class PhotoAlbum(builder.GtkBuilder):
         pixbuf = gtk.gdk.pixbuf_new_from_file(filename)
         width, height = pixbuf.get_width(), pixbuf.get_height()
         max_w, max_h = self.max
-        if (width < max_w and height < max_h):
+        if width < max_w and height < max_h:
             self.pixbuf = pixbuf
         else:
             width, height = self.scale_to_fit((width, height), self.max)
@@ -385,4 +382,3 @@ class PhotoAlbum(builder.GtkBuilder):
              self.widgets.zoom_out_button,
              self.widgets.zoom_fit_button,
              self.widgets.slide_button], False)
-

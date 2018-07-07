@@ -124,14 +124,12 @@ class PedigreeBox(gtk.DrawingArea):
         context.move_to(0, 5)
         context.curve_to(0, 2, 2, 0, 5, 0)
         context.line_to(alloc.width-8, 0)
-        context.curve_to(alloc.width-5, 0, alloc.width-3, 2,
-                              alloc.width-3, 5)
+        context.curve_to(alloc.width-5, 0, alloc.width-3, 2, alloc.width-3, 5)
         context.line_to(alloc.width-3, alloc.height-8)
         context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5,
-                              alloc.height-3, alloc.width-8, alloc.height-3)
+                         alloc.height-3, alloc.width-8, alloc.height-3)
         context.line_to(5, alloc.height-3)
-        context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0,
-                              alloc.height-8)
+        context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0, alloc.height-8)
         context.close_path()
         path = context.copy_path()
 
@@ -201,14 +199,12 @@ class ExtraBox(gtk.DrawingArea):
         context.move_to(0, 5)
         context.curve_to(0, 2, 2, 0, 5, 0)
         context.line_to(alloc.width-8, 0)
-        context.curve_to(alloc.width-5, 0, alloc.width-3, 2,
-                         alloc.width-3, 5)
+        context.curve_to(alloc.width-5, 0, alloc.width-3, 2, alloc.width-3, 5)
         context.line_to(alloc.width-3, alloc.height-8)
         context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5,
                          alloc.height-3, alloc.width-8, alloc.height-3)
         context.line_to(5, alloc.height-3)
-        context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0,
-                            alloc.height-8)
+        context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0, alloc.height-8)
         context.close_path()
         path = context.copy_path()
 
@@ -316,7 +312,7 @@ class PedigreeBox_gdk(gtk.DrawingArea):
                         self.get_colormap().alloc_color("#b9cfe7"))
                 self.border_gc.set_foreground(
                         self.get_colormap().alloc_color("#204a87"))
-            elif self.pigeon.get_sex() == enums.Sex.hen:
+            elif self.pigeon.is_hen():
                 self.bg_gc.set_foreground(
                         self.get_colormap().alloc_color("#ffcdf1"))
                 self.border_gc.set_foreground(
@@ -459,5 +455,3 @@ class PedigreeLine(gtk.DrawingArea):
                                   alloc.height/2)
             area.window.draw_line(gc, alloc.width/2, alloc.height,
                                   alloc.width/2, alloc.height/2)
-
-

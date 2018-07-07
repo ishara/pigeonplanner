@@ -58,4 +58,3 @@ class BaseTab(component.Component):
         a pigeon is selected/deselected in the main treeview.
         """
         return []
-

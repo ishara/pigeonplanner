@@ -46,7 +46,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.selection.connect("changed", self.on_selection_changed)
         self.widgets.editdialog.set_transient_for(self._parent)
 
-    ## Tab
+    # Tab
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
         if rowiter is None:
@@ -137,7 +137,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         pigeon = Pigeon.get_for_band(band_tuple)
         self.maintreeview.select_pigeon(None, pigeon)
 
-    ## Edit dialog
+    # Edit dialog
     def on_editdialog_delete_event(self, widget, event):
         self.widgets.editdialog.hide()
         return True
@@ -236,8 +236,8 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.treestore.clear()
         this, mate = (Breeding.sire, Breeding.dam) if pigeon.is_cock() else (Breeding.dam, Breeding.sire)
         query = (Breeding.select()
-            .where(this == pigeon)
-            .order_by(mate, Breeding.date))
+                 .where(this == pigeon)
+                 .order_by(mate, Breeding.date))
         for record in query:
             mate_obj = getattr(record, mate.name)
             if parent is None or mate_obj.id != last:
@@ -325,4 +325,3 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.treestore.remove(rowiter)
         if not self.widgets.treestore.iter_has_child(parent):
             self.widgets.treestore.remove(parent)
-

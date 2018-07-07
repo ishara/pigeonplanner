@@ -25,6 +25,7 @@ from pigeonplanner.core import errors
 class LatLongEntry(gtk.Viewport):
     __gtype_name__ = "LatLongEntry"
     can_empty = gobject.property(type=bool, default=False, nick="Can empty")
+
     def __init__(self, editable=False, can_empty=False):
         gtk.Viewport.__init__(self)
 
@@ -95,7 +96,7 @@ class LatLongEntry(gtk.Viewport):
 
     def __check_float_repr(self, value):
         value = value.replace(u"°", u"")
-        try : 
+        try:
             return float(value)      
         except ValueError:
             return None
@@ -131,4 +132,3 @@ class LatLongEntry(gtk.Viewport):
             # Too many or little splitted values
             return
         return value
-

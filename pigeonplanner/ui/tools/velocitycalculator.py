@@ -58,7 +58,7 @@ class VelocityCalculator(builder.GtkBuilder):
         value = widget.get_value_as_int()
         widget.set_text(common.add_zero_to_time(value))
 
-    ## Exact
+    # Exact
     def on_button_racepoint_clicked(self, widget):
         self._distance = self.widgets.spinbutton_velocity_distance
         self._distance_unit = self.widgets.combobox_velocity_distance
@@ -71,7 +71,7 @@ class VelocityCalculator(builder.GtkBuilder):
 
     def on_sel_distance_changed(self, selection):
         model, rowiter = selection.get_selected()
-        self.widgets.button_ok.set_sensitive(not rowiter is None)
+        self.widgets.button_ok.set_sensitive(rowiter is not None)
 
     def on_dialog_delete_event(self, widget, event):
         self.widgets.dialog.hide()
@@ -108,7 +108,7 @@ class VelocityCalculator(builder.GtkBuilder):
         speed = (distance * distunit) / (seconds_total * speedunit)
         self.widgets.entry_velocity_result.set_text(locale.format_string("%.4f", speed))
 
-    ## Prognosis
+    # Prognosis
     def on_spinbutton_prognosis_from_changed(self, widget):
         spinmin = widget.get_value_as_int()
         spinmax = widget.get_range()[1]
@@ -130,9 +130,10 @@ class VelocityCalculator(builder.GtkBuilder):
         for speed in xrange(begin, end+50, 50):
             flight = int((distance*distunit) / (speed*speedunit))
             arrival = seconds_total + flight
-            self.widgets.ls_velocity.insert(0, [speed,
-                                        datetime.timedelta(seconds=flight),
-                                        datetime.timedelta(seconds=arrival)])
+            self.widgets.ls_velocity.insert(0, [
+                speed,
+                datetime.timedelta(seconds=flight),
+                datetime.timedelta(seconds=arrival)])
         self.widgets.ls_velocity.set_sort_column_id(0, gtk.SORT_ASCENDING)
 
     def on_printcalc_clicked(self, widget):
@@ -144,8 +145,8 @@ class VelocityCalculator(builder.GtkBuilder):
                         self.widgets.spinbutton_prognosis_distance.get_value_as_int(),
                         self.widgets.combobox_prognosis_distance.get_active_text())
             release = "%s:%s:%s" % (self.widgets.spinbutton_prognosis_hours.get_text(),
-                                 self.widgets.spinbutton_prognosis_minutes.get_text(),
-                                 self.widgets.spinbutton_prognosis_seconds.get_text())
+                                    self.widgets.spinbutton_prognosis_minutes.get_text(),
+                                    self.widgets.spinbutton_prognosis_seconds.get_text())
             info = [date.strftime("%Y-%m-%d"), release, distance]
 
             psize = common.get_pagesize_from_opts()
@@ -158,4 +159,3 @@ class VelocityCalculator(builder.GtkBuilder):
         for racepoint in Racepoint.select().order_by(Racepoint.racepoint.asc()):
             self.widgets.ls_distance.append([racepoint, racepoint.racepoint, racepoint.distance])
         self.widgets.dialog.show()
-

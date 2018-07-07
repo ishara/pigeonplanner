@@ -18,7 +18,6 @@
 
 import os
 import logging
-logger = logging.getLogger(__name__)
 
 try:
     from yapsy.VersionedPluginManager import VersionedPluginManager
@@ -34,6 +33,8 @@ from pigeonplanner.core import common
 from pigeonplanner.core import errors
 from pigeonplanner.core import mailing
 from pigeonplanner.database.models import Result
+
+logger = logging.getLogger(__name__)
 
 
 class ResultParser(builder.GtkBuilder):
@@ -197,4 +198,3 @@ class ResultParser(builder.GtkBuilder):
     def _get_active_parserplugin(self):
         comboiter = self.widgets.parsercombo.get_active_iter()
         return self.widgets.parserstore.get_value(comboiter, 0)
-

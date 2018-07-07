@@ -17,7 +17,6 @@
 
 
 import logging
-logger = logging.getLogger(__name__)
 
 import gtk
 import gtk.gdk
@@ -41,6 +40,7 @@ from pigeonplanner.core import errors
 from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.database.models import Status, Colour, Strain, Loft
 
+logger = logging.getLogger(__name__)
 
 RESPONSE_EDIT = 10
 RESPONSE_SAVE = 12
@@ -373,8 +373,10 @@ class DetailsView(builder.GtkBuilder, component.Component):
         self.widgets.pigeonimage.set_default_image()
 
         for entry in self.get_objects_from_prefix("entry"):
-            if isinstance(entry, bandentry.BandEntry): continue
-            if isinstance(entry, date.DateEntry): continue
+            if isinstance(entry, bandentry.BandEntry):
+                continue
+            if isinstance(entry, date.DateEntry):
+                continue
             if isinstance(entry, sexentry.SexEntry):
                 entry.set_sex(None)
                 continue
@@ -389,6 +391,7 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
                     "edit-cancelled": (gobject.SIGNAL_RUN_LAST,
                                        None, ()),
                     }
+
     def __init__(self, parent=None, pigeon=None):
         builder.GtkBuilder.__init__(self, "DetailsView.ui", ["root_edit"])
         gobject.GObject.__init__(self)
@@ -577,4 +580,3 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
             ErrorDialog(messages.MSG_NO_PARENT, self.parent)
             return
         return (band, year), sex, year
-

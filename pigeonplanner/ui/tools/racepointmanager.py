@@ -114,4 +114,3 @@ class RacepointManager(builder.GtkBuilder):
         self.widgets.entrylongitude.set_sensitive(value)
         self.widgets.hboxdistance.set_sensitive(value)
         self.widgets.buttonsave.set_sensitive(value)
-

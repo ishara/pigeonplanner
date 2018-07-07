@@ -29,16 +29,16 @@ from pigeonplanner.core import config
 def get_sex_image(sex):
     return gtk.gdk.pixbuf_new_from_file(common.SEX_IMGS[sex])
 
+
 def get_status_image(status):
     return gtk.gdk.pixbuf_new_from_file(common.STATUS_IMGS[status])
 
+
 def create_stock_button(icons):
-    """
-    Register stock buttons from custom images.
+    """Register stock buttons from custom images.
 
-    @param icons: A list of tuples containing filename, name and description
+    :param icons: A list of tuples containing filename, name and description
     """
-
     factory = gtk.IconFactory()
     factory.add_default()
     for img, name, description in icons:
@@ -47,14 +47,13 @@ def create_stock_button(icons):
         factory.add(name, iconset)
         gtk.stock_add([(name, description, 0, 0, "pigeonplanner")])
 
+
 def set_multiple_sensitive(widgets, value=None):
-    """ 
-    Set multiple widgets sensitive at once
+    """Set multiple widgets sensitive at once
 
-    @param widgets: dic or list of widgets
-    @param value: bool to indicate the state
+    :param widgets: dic or list of widgets
+    :param value: bool to indicate the state
     """
-
     if isinstance(widgets, dict):
         for widget, sensitive in widgets.items():
             widget.set_sensitive(sensitive)
@@ -62,14 +61,13 @@ def set_multiple_sensitive(widgets, value=None):
         for widget in widgets:
             widget.set_sensitive(value)
 
+
 def set_multiple_visible(widgets, value=None):
-    """ 
-    Set multiple widgets visible at once
+    """Set multiple widgets visible at once
 
-    @param widgets: dic or list of widgets
-    @param value: bool to indicate the state
+    :param widgets: dic or list of widgets
+    :param value: bool to indicate the state
     """
-
     if isinstance(widgets, dict):
         for widget, visible in widgets.items():
             widget.set_visible(visible)
@@ -77,13 +75,13 @@ def set_multiple_visible(widgets, value=None):
         for widget in widgets:
             widget.set_visible(value)
 
+
 def popup_menu(event, entries):
-    """
-    Make a right click menu
+    """Make a right click menu
 
-    @param entries: List of wanted menuentries
+    :param event: The GTK event
+    :param entries: List of wanted menuentries
     """
-
     menu = gtk.Menu()
     for stock_id, callback, data, label in entries:
         item = gtk.ImageMenuItem(stock_id)
@@ -144,4 +142,3 @@ class TreeviewFilter(object):
             return
         item = self.FilterItem(name, value, operator_, type_)
         self._items.append(item)
-

@@ -25,6 +25,7 @@ from pigeonplanner.ui import component
 class _TotalLabel(gtk.Label):
     __gtype_name__ = "_TotalLabel"
     TEMPLATE = _("Pigeons: %s")
+
     def __init__(self):
         gtk.Label.__init__(self)
         self._value = None
@@ -42,6 +43,7 @@ class _FilterLabel(gtk.Label):
     TEMPLATE = _("Filter: %s")
     ON = "<b>%s</b>" % _("On")
     OFF = _("Off")
+
     def __init__(self):
         gtk.Label.__init__(self)
         self._value = None
@@ -56,6 +58,7 @@ class _FilterLabel(gtk.Label):
 
 class StatusBar(gtk.Statusbar, component.Component):
     __gtype_name__ = "StatusBar"
+
     def __init__(self):
         gtk.Statusbar.__init__(self)
         component.Component.__init__(self, "Statusbar")
@@ -99,4 +102,3 @@ class StatusBar(gtk.Statusbar, component.Component):
 
     def set_filter(self, value):
         self._filter.set_value(value)
-

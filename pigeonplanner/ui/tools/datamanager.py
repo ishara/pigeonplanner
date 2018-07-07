@@ -164,4 +164,3 @@ class DataManager(builder.GtkBuilder):
         band_column = gtk.TreeViewColumn(None, textrenderer, text=2)
         band_column.set_sort_column_id(2)
         self.widgets.treeview.append_column(band_column)
-

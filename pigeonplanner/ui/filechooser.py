@@ -28,7 +28,8 @@ from pigeonplanner.core import const
 LAST_FOLDER = None
 
 
-#### Main filechooser
+########
+# Main filechooser
 class _FileChooser(gtk.FileChooser):
     def _update_preview_cb(self, filechooser):
         filename = filechooser.get_preview_filename()
@@ -41,7 +42,8 @@ class _FileChooser(gtk.FileChooser):
                 image = mime.get_pixbuf(mimetype)
                 self.preview_image.set_from_pixbuf(image)
             except mime.MimeIconError:
-                if filename is None: return
+                if filename is None:
+                    return
                 stock = gtk.STOCK_FILE
                 if os.path.isdir(filename):
                     stock = gtk.STOCK_DIRECTORY
@@ -57,7 +59,8 @@ class _FileChooser(gtk.FileChooser):
         return frame
 
     def set_preview(self, value):
-        if not value: return
+        if not value:
+            return
         self.connect("update-preview", self._update_preview_cb)
         self.set_preview_widget(self._create_preview_widget())
         self.set_use_preview_label(False)
@@ -70,7 +73,7 @@ class _FileChooser(gtk.FileChooser):
             return unicode(filename)
 
     def get_current_folder(self):
-        #TODO: deprecate this, use get_filename() instead (even for folders!)
+        # TODO: deprecate this, use get_filename() instead (even for folders!)
         return unicode(gtk.FileChooser.get_current_folder(self))
 
     def add_image_filter(self):
@@ -110,10 +113,11 @@ class _FileChooser(gtk.FileChooser):
         self.add_filter(filefilter)
 
 
-#### Dialogs
+########
+# Dialogs
 class _FileChooserDialog(gtk.FileChooserDialog, _FileChooser):
     def __init__(self, parent=None, folder=const.HOMEDIR,
-                       action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True):
+                 action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True):
         super(_FileChooserDialog, self).__init__(parent=parent, action=action)
         self.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
         self.set_preview(preview)
@@ -134,9 +138,9 @@ class ImageChooser(_FileChooserDialog):
     __gtype_name__ = "ImageChooser"
 
     RESPONSE_CLEAR = -40
+
     def __init__(self, parent):
-        super(ImageChooser, self).__init__(parent, glib.get_user_special_dir(
-                                                glib.USER_DIRECTORY_PICTURES))
+        super(ImageChooser, self).__init__(parent, glib.get_user_special_dir(glib.USER_DIRECTORY_PICTURES))
         self.set_title(_("Select an image..."))
         self.add_image_filter()
         image = gtk.image_new_from_stock(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
@@ -158,7 +162,8 @@ class MediaChooser(_FileChooserDialog):
 
     def _selection_changed_cb(self, filechooser):
         fname = self.get_filename()
-        if fname is None: return
+        if fname is None:
+            return
         self.entrytitle.set_text(os.path.splitext(os.path.basename(fname))[0])
 
     def _create_extra_widget(self):
@@ -216,11 +221,12 @@ class ExportChooser(_FileChooserDialog):
         self.set_current_name(filename)
 
 
-#### Buttons
-## General
+########
+# Buttons
+# General
 class _FileChooserButton(gtk.FileChooserButton, _FileChooser):
     def __init__(self, folder=const.HOMEDIR,
-                       action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True):
+                 action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True):
         super(_FileChooserButton, self).__init__("")
         self.set_current_folder(folder)
         self.set_preview(preview)
@@ -233,7 +239,7 @@ class PathChooser(_FileChooserButton):
 
     def __init__(self, title=None):
         super(PathChooser, self).__init__(preview=False,
-                                action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+                                          action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
         if title is None:
             title = _("Select a folder...")
         self.set_title(title)
@@ -250,7 +256,7 @@ class FileChooser(_FileChooserButton):
         self.set_title(title)
 
 
-## Custom
+# Custom
 class ResultChooser(FileChooser):
 
     __gtype_name__ = "ResultChooser"
@@ -267,4 +273,3 @@ class BackupChooser(_FileChooserButton):
     def __init__(self):
         super(BackupChooser, self).__init__()
         self.add_backup_filter()
-

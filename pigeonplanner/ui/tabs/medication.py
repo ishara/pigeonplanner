@@ -93,7 +93,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_treeview_press(self, treeview, event):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
-        if pthinfo is None: return
+        if pthinfo is None:
+            return
         if event.button == 3:
             entries = [
                 (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
@@ -162,8 +163,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         if self._mode == enums.Action.add:
             record = Medication.create(**data)
             record.pigeons.add(pigeons_toggled)
-            rowiter = self.widgets.liststore.insert(0,
-                [record, data["date"], data["description"]])
+            rowiter = self.widgets.liststore.insert(0, [record, data["date"], data["description"]])
             self.widgets.selection.select_iter(rowiter)
             path = self.widgets.liststore.get_path(rowiter)
             self.widgets.treeview.scroll_to_cell(path)
@@ -180,8 +180,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             med.vaccination = data["vaccination"]
             med.save()
             model, rowiter = self.widgets.selection.get_selected()
-            self.widgets.liststore.set(rowiter,
-                COL_DATE, data["date"], COL_DESCRIPTION, data["description"])
+            self.widgets.liststore.set(rowiter, COL_DATE, data["date"], COL_DESCRIPTION, data["description"])
             self.widgets.selection.emit("changed")
         self.widgets.dialog.hide()
 
@@ -255,8 +254,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.liststoreselect.clear()
         for pigeon in Pigeon.select().where(Pigeon.visible == True):
             active = not self.pigeon == pigeon
-            self.widgets.liststoreselect.insert(0,
-                [active, not active, pigeon, pigeon.band, pigeon.year])
+            self.widgets.liststoreselect.insert(0, [active, not active, pigeon, pigeon.band, pigeon.year])
         self.widgets.liststoreselect.set_sort_column_id(COL_SEL_BAND, gtk.SORT_ASCENDING)
         self.widgets.liststoreselect.set_sort_column_id(COL_SEL_YEAR, gtk.SORT_ASCENDING)
 
@@ -286,4 +284,3 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
                 "dosage": self.widgets.entrydosage2.get_text(),
                 "comment": self.widgets.entrycomment2.get_text(),
                 "vaccination": self.widgets.checkvaccination2.get_active()}
-

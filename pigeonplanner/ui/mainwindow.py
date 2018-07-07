@@ -25,7 +25,6 @@ import os.path
 import time
 import webbrowser
 import logging
-logger = logging.getLogger(__name__)
 
 import gtk
 
@@ -58,6 +57,8 @@ from pigeonplanner.database import session
 from pigeonplanner.reportlib import report
 from pigeonplanner.reports import get_pedigree
 from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions
+
+logger = logging.getLogger(__name__)
 
 try:
     from gtkosx_application import Application
@@ -151,6 +152,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
    </toolbar>
 </ui>
 """
+
     def __init__(self):
         gtk.Window.__init__(self)
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
@@ -229,8 +231,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         config.set("interface.window-h", h)
 
         if config.get("backup.automatic-backup") and bckp:
-            daysInSeconds = config.get("backup.interval") * 24 * 60 * 60
-            if time.time() - config.get("backup.last") >= daysInSeconds:
+            days_in_seconds = config.get("backup.interval") * 24 * 60 * 60
+            if time.time() - config.get("backup.last") >= days_in_seconds:
                 if backup.make_backup(config.get("backup.location")):
                     InfoDialog(messages.MSG_BACKUP_SUCCES, self)
                 else:
@@ -268,7 +270,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             self.widgets.treeview.update_pigeon(pigeon, path=path)
             self.widgets.selection.emit("changed")
         elif operation == enums.Action.add:
-            if not pigeon.visible: return
+            if not pigeon.visible:
+                return
             self.widgets.treeview.add_pigeon(pigeon)
             self.widgets.statusbar.display_message(
                         _("Pigeon %s has been added") % pigeon.get_band_string())
@@ -308,22 +311,23 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     def menuprintpedigree_activate(self, widget):
         logger.debug(common.get_function_name())
         pigeon = self.widgets.treeview.get_selected_pigeon()
-        if pigeon is None or isinstance(pigeon, list): return
+        if pigeon is None or isinstance(pigeon, list):
+            return
         userinfo = common.get_own_address()
 
-        PedigreeReport, PedigreeReportOptions = get_pedigree()
+        pedigree_report, pedigree_report_options = get_pedigree()
         psize = common.get_pagesize_from_opts()
-        opts = PedigreeReportOptions(psize)
-        report(PedigreeReport, opts, pigeon, userinfo)
+        opts = pedigree_report_options(psize)
+        report(pedigree_report, opts, pigeon, userinfo)
 
     def menuprintblank_activate(self, widget):
         logger.debug(common.get_function_name())
         userinfo = common.get_own_address()
 
-        PedigreeReport, PedigreeReportOptions = get_pedigree()
+        pedigree_report, pedigree_report_options = get_pedigree()
         psize = common.get_pagesize_from_opts()
-        opts = PedigreeReportOptions(psize)
-        report(PedigreeReport, opts, None, userinfo)
+        opts = pedigree_report_options(psize)
+        report(pedigree_report, opts, None, userinfo)
 
     def menubackup_activate(self, widget):
         logger.debug(common.get_function_name())
@@ -368,7 +372,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 
     def menuedit_activate(self, widget):
         model, paths = self.widgets.selection.get_selected_rows()
-        if len(paths) != 1: return
+        if len(paths) != 1:
+            return
         pigeon = self.widgets.treeview.get_selected_pigeon()
         dialog = detailsview.DetailsDialog(pigeon, self, enums.Action.edit)
         dialog.details.connect("edit-finished", self.on_edit_finished)
@@ -579,7 +584,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 
     def on_treeview_press(self, treeview, event):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
-        if pthinfo is None: return
+        if pthinfo is None:
+            return
 
         if event.button == 3:
             entries = [
@@ -650,27 +656,27 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         accelgroup = uimanager.get_accel_group()
         self.add_accel_group(accelgroup)
 
-        widgetDic = {
+        widget_dic = {
             "menubar": uimanager.get_widget("/MenuBar"),
             "toolbar": uimanager.get_widget("/Toolbar"),
             "MenuShowAll": uimanager.get_widget("/MenuBar/ViewMenu/ShowAll"),
             "MenuArrows": uimanager.get_widget("/MenuBar/ViewMenu/Arrows"),
             "MenuStats": uimanager.get_widget("/MenuBar/ViewMenu/Stats"),
             "MenuToolbar": uimanager.get_widget("/MenuBar/ViewMenu/Toolbar"),
-            "MenuStatusbar": \
+            "MenuStatusbar":
                 uimanager.get_widget("/MenuBar/ViewMenu/Statusbar"),
             "Filtermenu": uimanager.get_widget("/MenuBar/ViewMenu/FilterMenu"),
             "MenuEdit": uimanager.get_widget("/MenuBar/PigeonMenu/Edit"),
             "MenuRemove": uimanager.get_widget("/MenuBar/PigeonMenu/Remove"),
-            "MenuPedigree": \
+            "MenuPedigree":
                 uimanager.get_widget("/MenuBar/PigeonMenu/Pedigree"),
-            "MenuAddresult": \
+            "MenuAddresult":
                 uimanager.get_widget("/MenuBar/PigeonMenu/Addresult"),
             "ToolEdit": uimanager.get_widget("/Toolbar/Edit"),
             "ToolRemove": uimanager.get_widget("/Toolbar/Remove"),
             "ToolPedigree": uimanager.get_widget("/Toolbar/Pedigree")
             }
-        for name, widget in widgetDic.items():
+        for name, widget in widget_dic.items():
             setattr(self.widgets, name, widget)
 
         utils.set_multiple_sensitive([
@@ -711,4 +717,3 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             self.widgets.selection.unselect_all()
             self.widgets.selection.select_path(pigeon_no)
             self.widgets.treeview.scroll_to_cell(pigeon_no)
-

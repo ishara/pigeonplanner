@@ -29,28 +29,25 @@ from pigeonplanner.core import errors
 
 
 def set_entry_completion(widget):
-    """
-    Set entrycompletion on given widget
+    """Set entrycompletion on given widget
 
-    @param widget: the widget to set entrycompletion
+    :param widget: the widget to set entrycompletion
     """
-
     completion = gtk.EntryCompletion()
     completion.set_model(widget.get_model())
     completion.set_minimum_key_length(1)
     completion.set_text_column(0)
     widget.child.set_completion(completion)
 
+
 def fill_combobox(combobox, items, active=0, sort=True):
-    """
-    Fill a combobox with the given data
+    """Fill a combobox with the given data
 
-    @param widget: the combobox
-    @param items: list of items to add
-    @param active: index of the active value
-    @param sort: sort the data or not
+    :param combobox: the combobox
+    :param items: list of items to add
+    :param active: index of the active value
+    :param sort: sort the data or not
     """
-
     model = combobox.get_model()
     model.clear()
     if sort:
@@ -178,7 +175,7 @@ class DistanceCombobox(gtk.ComboBox):
                  (_("Feet"), 0.3048),
                  (_("Miles"), 1609.344),
                  (_("Nautical Miles"), 1852.)
-            )
+                 )
         for unit in units:
             store.append(unit)
         cell = gtk.CellRendererText()
@@ -207,7 +204,7 @@ class SpeedCombobox(gtk.ComboBox):
                  (_("Feet per Second"), 0.3048),
                  (_("Feet per Minute"), 0.00508),
                  (_("Mile per Hour"), 0.44704)
-            )
+                 )
         for unit in units:
             store.append(unit)
         cell = gtk.CellRendererText()
@@ -219,4 +216,3 @@ class SpeedCombobox(gtk.ComboBox):
     def get_unit(self):
         ls_iter = self.get_active_iter()
         return self.get_model().get(ls_iter, 1)[0]
-

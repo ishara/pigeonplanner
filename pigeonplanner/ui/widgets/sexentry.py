@@ -24,6 +24,7 @@ from pigeonplanner.core import enums
 
 class SexEntry(gtk.Viewport):
     __gtype_name__ = "SexEntry"
+
     def __init__(self):
         gtk.Viewport.__init__(self)
 
@@ -43,4 +44,3 @@ class SexEntry(gtk.Viewport):
         else:
             self._entry.set_text(enums.Sex.get_string(sex))
         self._entry.set_icon_from_pixbuf(0, img)
-

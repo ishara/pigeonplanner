@@ -22,4 +22,3 @@ from pigeonplanner.ui.tabs.results import ResultsTab
 from pigeonplanner.ui.tabs.breeding import BreedingTab
 from pigeonplanner.ui.tabs.media import MediaTab
 from pigeonplanner.ui.tabs.medication import MedicationTab
-

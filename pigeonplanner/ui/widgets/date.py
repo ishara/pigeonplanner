@@ -30,8 +30,9 @@ from pigeonplanner.core import errors
 
 class DateEntry(gtk.Viewport):
     __gtype_name__ = "DateEntry"
-    __gsignals__ = {"changed" : (gobject.SIGNAL_RUN_LAST, None, ())}
+    __gsignals__ = {"changed": (gobject.SIGNAL_RUN_LAST, None, ())}
     can_empty = gobject.property(type=bool, default=False, nick="Can empty")
+
     def __init__(self, editable=False, clear=False, can_empty=False):
         gtk.Viewport.__init__(self)
 
@@ -205,8 +206,9 @@ class CalendarPopup(gtk.Window):
         x += bwidth - self._entry.size_request()[0]
         y += bheight
 
-        if x < 0: x = 0
-        if y < 0: y = 0
+        if x < 0:
+            x = 0
+        if y < 0:
+            y = 0
         
         self.move(x, y)
-

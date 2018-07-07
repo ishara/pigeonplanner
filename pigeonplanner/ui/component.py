@@ -50,6 +50,6 @@ class ComponentRegistry(object):
 _ComponentRegistry = ComponentRegistry()
 deregister = _ComponentRegistry.deregister
 
+
 def get(name):
     return _ComponentRegistry.components[name]
-

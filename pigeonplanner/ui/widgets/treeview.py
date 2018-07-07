@@ -270,13 +270,11 @@ class MainTreeView(gtk.TreeView, component.Component):
         return False
 
     def select_pigeon(self, widget, pigeon):
-        """
-        Select the pigeon in the main treeview
+        """Select the pigeon in the main treeview
 
-        @param widget: Only given when selected through menu
-        @param pigeon: The pigeon object to search
+        :param widget: Only given when selected through menu
+        :param pigeon: The pigeon object to search
         """
-
         for row in self._modelsort:
             if self._modelsort.get_value(row.iter, self.LS_PIGEON) == pigeon:
                 self._selection.unselect_all()
@@ -387,4 +385,3 @@ class MainTreeView(gtk.TreeView, component.Component):
             data1 = model.get_value(iter1, self.LS_RING)
             data2 = model.get_value(iter2, self.LS_RING)
         return cmp(data1, data2)
-

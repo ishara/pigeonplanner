@@ -67,4 +67,3 @@ class PedigreeTab(WidgetFactory, basetab.BaseTab):
 
     def clear_pigeon(self):
         self.set_pigeon()
-

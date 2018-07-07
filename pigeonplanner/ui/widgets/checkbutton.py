@@ -40,4 +40,3 @@ class DisplayCheckButton(gtk.CheckButton):
 
     def do_released(self):
         pass
-

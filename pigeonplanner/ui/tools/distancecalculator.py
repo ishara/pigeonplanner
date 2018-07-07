@@ -17,7 +17,6 @@
 
 
 import logging
-logger = logging.getLogger(__name__)
 
 try:
     geopy_log = logging.getLogger("geopy")
@@ -34,6 +33,9 @@ from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
 from pigeonplanner.database.models import Person, Racepoint
+
+
+logger = logging.getLogger(__name__)
 
 
 class DistanceCalculator(builder.GtkBuilder):
@@ -176,4 +178,3 @@ class DistanceCalculator(builder.GtkBuilder):
         activeto = racepoint+2 if racepoint is not None else 0
         comboboxes.fill_combobox(self.widgets.combolocationfrom, data, activefrom, False)
         comboboxes.fill_combobox(self.widgets.combolocationto, data, activeto, False)
-

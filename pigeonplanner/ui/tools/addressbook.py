@@ -201,4 +201,3 @@ class AddressBook(builder.GtkBuilder):
     def _empty_entries(self):
         for entry in self._entries:
             entry.set_text("")
-

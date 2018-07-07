@@ -50,7 +50,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
         widgets = [self.widgets.buttonremove, self.widgets.buttonopen]
-        utils.set_multiple_sensitive(widgets, not rowiter is None)
+        utils.set_multiple_sensitive(widgets, rowiter is not None)
         self.widgets.image.clear()
         if rowiter is None:
             return
@@ -110,9 +110,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         images = []
         other = []
         self.widgets.liststore.clear()
-        for media in (Media.select()
-            .where(Media.pigeon == pigeon)
-            .order_by(Media.title.asc())):
+        for media in (Media.select().where(Media.pigeon == pigeon).order_by(Media.title.asc())):
             if mime.is_image(media.type):
                 images.append(media)
             else:
@@ -143,4 +141,3 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
 
     def _select_func(self, selection, model, path, is_selected):
         return model[path][COL_SELECTABLE]
-

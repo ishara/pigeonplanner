@@ -26,8 +26,9 @@ from pigeonplanner.core import errors
 
 class BandEntry(gtk.HBox):
     __gtype_name__ = "BandEntry"
-    __gsignals__ = {"search-clicked" : (gobject.SIGNAL_RUN_LAST, object, ())}
+    __gsignals__ = {"search-clicked": (gobject.SIGNAL_RUN_LAST, object, ())}
     can_empty = gobject.property(type=bool, default=False, nick="Can empty")
+
     def __init__(self, editable=False, can_empty=False, has_search=False):
         gtk.HBox.__init__(self)
 
@@ -144,4 +145,3 @@ class BandEntry(gtk.HBox):
             pigeon = dialog.get_selected()
             self.set_pigeon(pigeon)
         dialog.destroy()
-
