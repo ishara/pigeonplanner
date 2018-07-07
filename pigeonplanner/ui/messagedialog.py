@@ -22,7 +22,7 @@ import gtk
 class _MessageDialog(gtk.MessageDialog):
     def __init__(self, parent, msg, msgtype, buttons, extra):
         gtk.MessageDialog.__init__(self, parent,
-                                   flags=gtk.DIALOG_MODAL,
+                                   flags=gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
                                    type=msgtype)
 
         head, secondary, title = msg
