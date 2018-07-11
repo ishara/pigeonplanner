@@ -46,82 +46,82 @@ for mofile in glob.glob("languages/*/LC_MESSAGES/pigeonplanner.mo"):
 resultparsers = glob.glob("resultparsers/*.py")
 resultparsers.extend(glob.glob("resultparsers/*.yapsy-plugin"))
 
-options = {"py2exe": {"compressed": 2,
-                      "optimize": 2,
-                      "includes": ["atk", "cairo", "gio", "gobject", "pango", "pangocairo"],
-                      "excludes": ["_gtkagg", "_tkagg", "bsddb", "curses",
-                                   "email", "pywin.debugger",
-                                   "pywin.debugger.dbgcon", "pywin.dialogs",
-                                   "tcl", "Tkconstants", "Tkinter"],
-                      "packages": ["encodings", "pigeonplanner"],
-                      "dll_excludes": ["tcl84.dll", "tk84.dll", "w9xpopen.exe",
-                                       "MSVCP90.dll", "IPHLPAPI.dll", "NSI.dll",
-                                       "WINNSI.dll", "WTSAPI32.dll", "SHFOLDER.dll",
-                                       "PSAPI.dll", "MSVCR120.dll", "MSVCP120.dll",
-                                       "CRYPT32.dll", "GDI32.dll", "ADVAPI32.dll",
-                                       "CFGMGR32.dll", "USER32.dll", "POWRPROF.dll",
-                                       "MSIMG32.dll", "WINSTA.dll", "MSVCR90.dll",
-                                       "KERNEL32.dll", "MPR.dll", "Secur32.dll",
-                                       ],
-                      "bundle_files": 3,
-                      "dist_dir": "dist",
-                      "xref": False,
-                      "skip_archive": False,
-                      "ascii": False,
-                     }
-          }
-
 if sys.platform == "win32":
     import py2exe
 
     data_files = [
-            ("glade", glade_files),
-            ("images", glob.glob("images/*.png")),
-            ("resultparsers", resultparsers),
-            (".", ["AUTHORS", "CHANGES", "COPYING", "README", "README.dev"])]
+        ("glade", glade_files),
+        ("images", glob.glob("images/*.png")),
+        ("resultparsers", resultparsers),
+        (".", ["AUTHORS", "CHANGES", "COPYING", "README", "README.dev"])
+    ]
 
-    platform_options = dict(
-                    zipfile = r"lib/library.zip",
-                    windows = [{"script" : "pigeonplanner.py",
-                                "icon_resources": [(1, "win/pigeonplanner.ico")],
-                            }]
-                        )
+    platform_options = {
+        "options": {
+            "py2exe": {
+                "dist_dir": "dist",
+                "compressed": 2,
+                "optimize": 2,
+                "bundle_files": 3,
+                "xref": False,
+                "skip_archive": False,
+                "ascii": False,
+                "packages": ["encodings", "pigeonplanner"],
+                "includes": ["atk", "cairo", "gio", "gobject", "pango", "pangocairo"],
+                "excludes": [
+                    "_gtkagg", "_tkagg", "bsddb", "curses", "email", "pywin.debugger",
+                    "pywin.debugger.dbgcon", "pywin.dialogs", "tcl", "Tkconstants", "Tkinter"
+                ],
+                "dll_excludes": [
+                    "tcl84.dll", "tk84.dll", "w9xpopen.exe", "MSVCP90.dll", "IPHLPAPI.dll",
+                    "NSI.dll", "WINNSI.dll", "WTSAPI32.dll", "SHFOLDER.dll", "PSAPI.dll",
+                    "MSVCR120.dll", "MSVCP120.dll", "CRYPT32.dll", "GDI32.dll", "ADVAPI32.dll",
+                    "CFGMGR32.dll", "USER32.dll", "POWRPROF.dll", "MSIMG32.dll", "WINSTA.dll",
+                    "MSVCR90.dll", "KERNEL32.dll", "MPR.dll", "Secur32.dll",
+                ],
+            }
+        },
+        "zipfile": r"lib/library.zip",
+        "windows": [
+            {"script": "pigeonplanner.py", "icon_resources": [(1, "win/pigeonplanner.ico")]}
+        ]
+    }
 else:
     data_files = [
-            ("share/pigeonplanner/glade", glade_files),
-            ("share/pigeonplanner/images", glob.glob("images/*.png")),
-            ("share/pigeonplanner/resultparsers", resultparsers),
-            ("share/applications", ["data/pigeonplanner.desktop"]),
-            ("share/icons/hicolor/scalable/apps", ["images/pigeonplanner.svg"]),
-            ("share/pixmaps/", ["images/pigeonplanner.png"]),
-            ]
+        ("share/pigeonplanner/glade", glade_files),
+        ("share/pigeonplanner/images", glob.glob("images/*.png")),
+        ("share/pigeonplanner/resultparsers", resultparsers),
+        ("share/applications", ["data/pigeonplanner.desktop"]),
+        ("share/icons/hicolor/scalable/apps", ["images/pigeonplanner.svg"]),
+        ("share/pixmaps/", ["images/pigeonplanner.png"]),
+    ]
     platform_options = {}
 
 
 entry_points = {
-        "gui_scripts": [
-            "pigeonplanner = pigeonplanner.main:run"
-            ]
-        }
+    "gui_scripts": [
+        "pigeonplanner = pigeonplanner.main:run"
+    ]
+}
 
-setup(name = "pigeonplanner",
-      version = const.VERSION,
-      description = const.DESCRIPTION,
-      long_description = """
-            Pigeon Planner is a pigeon organiser which lets the user 
-            manage their pigeons with their details, pedigree, 
-            results and more.""",
-      author = "Timo Vanwynsberghe",
-      author_email = "timovwb@gmail.com",
-      download_url = "http://www.pigeonplanner.com/download",
-      license = "GPLv3",
-      url = const.WEBSITE,
-      packages = find_packages(),
-      data_files = data_files + translation_files,
-      entry_points = entry_points,
-      options = options,
-      **platform_options
-    )
+setup(
+    name="pigeonplanner",
+    version=const.VERSION,
+    description=const.DESCRIPTION,
+    long_description=(
+        "Pigeon Planner is a pigeon organiser which lets the user " 
+        "manage their pigeons with their details, pedigree, results and more."
+    ),
+    author="Timo Vanwynsberghe",
+    author_email="timovwb@gmail.com",
+    download_url="http://www.pigeonplanner.com/download",
+    license="GPLv3",
+    url=const.WEBSITE,
+    packages=find_packages(),
+    data_files=data_files + translation_files,
+    entry_points=entry_points,
+    **platform_options
+)
 
 # Remove egg-info directory which is no longer needed
 try:
