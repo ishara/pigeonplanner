@@ -58,8 +58,8 @@ for dll_dir in os.listdir(dlls_dir):
         break
 
 # Call the InnoSetup compiler to create the setup file
-iss_compiler = "C:\\Program Files\\Inno Setup 5\\ISCC.exe"
-subprocess.call([iss_compiler, "/cc", "setup.iss"])
+iss_compiler = "C:\\Program Files (x86)\\Inno Setup 5\\ISCC.exe"
+subprocess.call([iss_compiler, "setup.iss"])
 
 # Create a portable zip package
 ziproot = "Pigeon Planner %s" % VERSION
