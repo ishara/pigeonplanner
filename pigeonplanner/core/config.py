@@ -149,7 +149,7 @@ default_config = [
                 ("printing.pedigree-layout", 0),
                 ("printing.pedigree-use-box-color", False),
                 ("printing.pedigree-use-box-fill-color", False),
-                ("printing.pedigree-box-colour", False),
+                ("printing.pedigree-box-colour", True),
                 ("printing.pedigree-name", True),
                 ("printing.pedigree-colour", True),
                 ("printing.pedigree-sex", True),
