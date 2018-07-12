@@ -24,8 +24,7 @@ import peewee
 from . import enums
 from . import errors
 from pigeonplanner import thumbnail
-from pigeonplanner.database import session
-from pigeonplanner.database.models import Pigeon, Image, Status
+from pigeonplanner.database.models import Pigeon, Image, Status, database
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +46,7 @@ def add_pigeon(data, status, statusdata):
     image = data.pop("image", None)
     # Try to create the pigeon
     try:
-        with session.connection.transaction():
+        with database.transaction():
             pigeon = Pigeon.create(**data)
             query = Status.insert(pigeon=pigeon, status_id=status, **statusdata)
             query.execute()
@@ -148,7 +147,7 @@ def get_or_create_pigeon(band_tuple, sex, visible):
     if band_tuple is not None and band_tuple != ("", ""):
         band, year = band_tuple
         try:
-            with session.connection.transaction():
+            with database.transaction():
                 pigeon = Pigeon.create(band=band, year=year,
                                        sex=sex, visible=visible)
                 query = Status.insert(pigeon=pigeon)
