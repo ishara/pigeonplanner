@@ -588,11 +588,19 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             return
 
         if event.button == 3:
+            pigeon = self.widgets.treeview.get_selected_pigeon()
             entries = [
                 (gtk.STOCK_EDIT, self.menuedit_activate, None, None),
                 (gtk.STOCK_REMOVE, self.menuremove_activate, None, None),
-                ("pedigree-detail", self.menupedigree_activate, None, None)]
+                ("pedigree-detail", self.menupedigree_activate, None, None)
+            ]
+            if not pigeon.visible:
+                entries.append((gtk.STOCK_REVERT_TO_SAVED, self.restore_pigeon, (pigeon,), _("Restore")))
             utils.popup_menu(event, entries)
+
+    def restore_pigeon(self, widget, pigeon):
+        pigeon.visible = True
+        pigeon.save()
 
     def on_treeview_key_press(self, treeview, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
