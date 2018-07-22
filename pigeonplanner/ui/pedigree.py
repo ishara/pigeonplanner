@@ -35,7 +35,7 @@ from pigeonplanner.core import enums
 from pigeonplanner.core import pigeon as corepigeon
 
 
-#TODO: Cairo-drawn boxes mess up window drawing on Mac OS X
+# TODO: Cairo-drawn boxes mess up window drawing on Mac OS X
 cairo_available = not const.OSX
 
 
@@ -60,7 +60,7 @@ class DrawPedigree(object):
                             (box.pigeon, box.child, box.get_sex(), parent), None)]
                 if box.pigeon is not None:
                     entries.insert(0, (gtk.STOCK_INFO, self._show_pigeon_details,
-                                                       (box.pigeon, parent), None))
+                                   (box.pigeon, parent), None))
                     if not box.pigeon.visible:
                         entries.append((gtk.STOCK_CLEAR, self._clear_box,
                                         (box.pigeon, box.child), None))
@@ -73,11 +73,9 @@ class DrawPedigree(object):
                 self._show_pigeon_details(None, box.pigeon, parent)
             elif event.button == 3:
                 entries = [
-                           (gtk.STOCK_INFO, self._show_pigeon_details,
-                                            (box.pigeon, parent), None),
-                           (gtk.STOCK_JUMP_TO, self._select_pigeon,
-                                               (box.pigeon, parent), None),
-                          ]
+                    (gtk.STOCK_INFO, self._show_pigeon_details, (box.pigeon, parent), None),
+                    (gtk.STOCK_JUMP_TO, self._select_pigeon, (box.pigeon, parent), None),
+                ]
         if entries is not None:
             utils.popup_menu(event, entries)
         return True
@@ -98,21 +96,21 @@ class DrawPedigree(object):
             if self.draw_cb is None:
                 self.draw_cb = draw_cb
             pos = [
-                   ((0, 7, 8), ((0,7),(8,7))),
-                   ((2, 3, 4), ((0,3),(4,3))),
-                   ((2, 11, 12), ((8,3),(12,3))),
-                   ((4, 1, 2), ((0,1),(2,1))),
-                   ((4, 5, 6), ((4,1),(6,1))),
-                   ((4, 9, 10), ((8,1),(10,1))),
-                   ((4, 13, 14), ((12,1),(14,1))),
-                   ((6, 0, 1), (None)),
-                   ((6, 2, 3), (None)),
-                   ((6, 4, 5), (None)),
-                   ((6, 6, 7), (None)),
-                   ((6, 8, 9), (None)),
-                   ((6, 10, 11), (None)),
-                   ((6, 12, 13), (None)),
-                   ((6, 14, 15), (None)),
+                   ((0, 7, 8), ((0, 7), (8, 7))),
+                   ((2, 3, 4), ((0, 3), (4, 3))),
+                   ((2, 11, 12), ((8, 3), (12, 3))),
+                   ((4, 1, 2), ((0, 1), (2, 1))),
+                   ((4, 5, 6), ((4, 1), (6, 1))),
+                   ((4, 9, 10), ((8, 1), (10, 1))),
+                   ((4, 13, 14), ((12, 1), (14, 1))),
+                   ((6, 0, 1), None),
+                   ((6, 2, 3), None),
+                   ((6, 4, 5), None),
+                   ((6, 6, 7), None),
+                   ((6, 8, 9), None),
+                   ((6, 10, 11), None),
+                   ((6, 12, 13), None),
+                   ((6, 14, 15), None),
                 ]
 
             lst = [None]*len(pos)
@@ -120,9 +118,9 @@ class DrawPedigree(object):
             self._draw(tables, pos, lst, pigeon.sex, detailed)
         else:
             pos = [
-                   ((0, 4, 5), ((0,3),(5,3))),
-                   ((2, 1, 2), ((0,1),(2,1))),
-                   ((2, 6, 7), ((5,1),(7,1))),
+                   ((0, 4, 5), ((0, 3), (5, 3))),
+                   ((2, 1, 2), ((0, 1), (2, 1))),
+                   ((2, 6, 7), ((5, 1), (7, 1))),
                    ((4, 0, 1), None), ((4, 2, 3), None),
                    ((4, 5, 6), None), ((4, 7, 8), None),
                 ]
@@ -163,7 +161,7 @@ class DrawPedigree(object):
             try:
                 sex = pigeon.sex
             except AttributeError:
-                sex = 0 if (index%2 == 1 or (index == 0 and sex == enums.Sex.cock)) else 1
+                sex = 0 if (index % 2 == 1 or (index == 0 and sex == enums.Sex.cock)) else 1
             box.set_sex(sex)
             box.connect("button-press-event", self.on_button_press, detailed)
             table.attach(box, x, y, w, h)
@@ -172,7 +170,7 @@ class DrawPedigree(object):
                 if index <= 2:
                     lines = 6
                     attach = 4
-                elif index >= 3 and index <= 6:
+                elif 3 <= index <= 6:
                     lines = 3
                     attach = 2
                 else:
@@ -246,4 +244,3 @@ class DrawPedigree(object):
     def _redraw(self):
         self.draw_pedigree(self.tables, self.pigeon, True)
         component.get("Treeview").get_selection().emit("changed")
-
