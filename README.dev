@@ -5,6 +5,31 @@ Create/update translation template:
 Create/update compiled mo languages:
     python i18n.py -m
 
+
+-= Install build system =-
+Windows:
+    Install Python 2.7:
+        https://www.python.org/downloads/windows/
+    Install py2exe:
+        https://sourceforge.net/projects/py2exe/files/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe/download
+    Install PyGTK AIO:
+        http://ftp.gnome.org/pub/GNOME/binaries/win32/pygtk/2.24/pygtk-all-in-one-2.24.2.win32-py2.7.msi
+    Install GTK2 Themes:
+        https://sourceforge.net/projects/gtk-win/files/GTK%2B%20Themes%20Package/2009-09-07/gtk2-themes-2009-09-07-ash.exe/download
+    Install Inno Setup QuickStart Pack:
+        http://www.jrsoftware.org/isdl.php
+
+macOS:
+    wget https://git.gnome.org/browse/gtk-osx/plain/gtk-osx-build-setup.sh
+    sh gtk-osx-build-setup.sh
+    ln -sf mac/jhbuildrc-custom ~/.jhbuildrc-custom
+    jhbuild bootstrap --skip=cmake
+    jhbuild
+    jhbuild shell
+    python -m ensurepip
+    python -m pip install -r requirements.txt
+
+
 -= Packaging =-
 Linux:
     python setup.py sdist
@@ -14,21 +39,11 @@ Windows:
     cd win
     python build_packages.py
 
-Mac OS X:
-    These steps will build a complete working GTK environment and need to be run
-    only once (or again to update packages):
-        ln -sf mac/jhbuildrc-custom ~/.jhbuildrc-custom
-        jhbuild bootstrap --skip=cmake
-        jhbuild
-        jhbuild shell
-        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-        python get-pip.py
-        pip install setuptools geopy==0.95.1 yapsy==1.10.223
+macOS:
+    jhbuild shell
+    python setup.py install
+    python mac/build_package.py
 
-    The following steps will actually produce an appbundle located on your desktop:
-        jhbuild shell
-        python setup.py install
-        python mac/build_package.py
 
 -= Other =-
     export PYTHONPATH=dev
