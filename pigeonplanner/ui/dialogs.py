@@ -89,10 +89,10 @@ class InformationDialog(gtk.Dialog):
         self.vbox.show_all()
 
         template = "<b>%s</b>"
-        liststore.append([template %_("Technical details"), "", "#dcdcdc"])
+        liststore.append([template % _("Technical details"), "", "#dcdcdc"])
         for item, value in self.get_versions():
             liststore.append([item, value, "#ffffff"])
-        liststore.append([template %_("Data information"), "", "#dcdcdc"])
+        liststore.append([template % _("Data information"), "", "#dcdcdc"])
         for item, value in self.get_data():
             liststore.append([item, value, "#ffffff"])
 
@@ -110,21 +110,21 @@ class InformationDialog(gtk.Dialog):
     def get_data(self):
         total, cocks, hens, ybirds, unknown = common.count_active_pigeons()
         data = [(_("Number of pigeons"), str(total))]
-        data.append(("    %s" % _("Cocks"), "%s\t(%s %%)"
-                                % (cocks, self.get_percentage(cocks, total))))
-        data.append(("    %s" % _("Hens"), "%s\t(%s %%)"
-                                % (hens, self.get_percentage(hens, total))))
-        data.append(("    %s" % _("Young birds"), "%s\t(%s %%)"
-                                % (ybirds, self.get_percentage(ybirds, total))))
-        data.append(("    %s" % _("Unknown"), "%s\t(%s %%)"
-                                % (unknown, self.get_percentage(unknown, total))))
+        data.append(("    %s" % _("Cocks"),
+                     "%s\t(%s %%)" % (cocks, self.get_percentage(cocks, total))))
+        data.append(("    %s" % _("Hens"),
+                     "%s\t(%s %%)" % (hens, self.get_percentage(hens, total))))
+        data.append(("    %s" % _("Young birds"),
+                     "%s\t(%s %%)" % (ybirds, self.get_percentage(ybirds, total))))
+        data.append(("    %s" % _("Unknown"),
+                     "%s\t(%s %%)" % (unknown, self.get_percentage(unknown, total))))
         for status in range(7):
             n_status = (Status.select()
                         .join(Pigeon, on=Status.pigeon)
                         .where((Status.status_id == status) & (Pigeon.visible == True))
                         .count())
-            data.append(("    %s" % enums.Status.get_string(status), "%s\t(%s %%)"
-                            % (n_status, self.get_percentage(n_status, total))))
+            data.append(("    %s" % enums.Status.get_string(status),
+                         "%s\t(%s %%)" % (n_status, self.get_percentage(n_status, total))))
         n_results = Result.select().count()
         n_breeding = Breeding.select().count()
         data.append((_("Number of results"), str(n_results)))
@@ -252,11 +252,12 @@ class PigeonListDialog(gtk.Dialog):
 
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
-        self.buttonadd.set_sensitive(not rowiter is None)
+        self.buttonadd.set_sensitive(rowiter is not None)
 
     def on_treeview_press(self, treeview, event):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
-        if pthinfo is None: return
+        if pthinfo is None:
+            return
 
         if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
             self.response(gtk.RESPONSE_APPLY)
@@ -273,8 +274,7 @@ class PigeonListDialog(gtk.Dialog):
             # If year is given, exclude older pigeons
             if year is not None and int(year) < int(pigeon.band_year):
                 continue
-            self._liststore.insert(0,
-                [pigeon, pigeon.band, pigeon.band_year, pigeon.name])
+            self._liststore.insert(0, [pigeon, pigeon.band, pigeon.band_year, pigeon.name])
         self._liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self._liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
         self._treeview.get_selection().select_path(0)

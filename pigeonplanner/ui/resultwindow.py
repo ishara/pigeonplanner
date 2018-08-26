@@ -443,8 +443,8 @@ class SplittedView(BaseView):
         self.clear()
         counter = 0
         for race in (Result.select()
-            .group_by(Result.date, Result.racepoint)
-            .order_by(Result.date.asc())):
+                     .group_by(Result.date, Result.racepoint)
+                     .order_by(Result.date.asc())):
             self.results_cache[counter] = {"results": [], "filtered": []}
             resultstmp = (Result.select()
                 .where(
@@ -548,10 +548,11 @@ class SplittedView(BaseView):
         self.liststore.clear()
         key = model.get_value(rowiter, self.LS_COL_KEY)
         for result in self.results_cache[key]["filtered"]:
-            self.liststore.append([result["band_tuple"], result["band"],result["year"], result["placestr"],
-                                   result["out"], result["coefstr"], result["speedstr"], 
-                                   result["sector"], result["category"], result["comment"],
-                                   result["place"], result["coef"], result["speed"]])
+            self.liststore.append([
+                result["band_tuple"], result["band"],result["year"], result["placestr"],
+                result["out"], result["coefstr"], result["speedstr"],
+                result["sector"], result["category"], result["comment"],
+                result["place"], result["coef"], result["speed"]])
 
     def _visible_races_func(self, model, treeiter):
         for item in self._filter_races:
@@ -584,6 +585,7 @@ class ResultWindow(builder.GtkBuilder):
    </toolbar>
 </ui>
 """
+
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "ResultWindow.ui")
 
@@ -772,12 +774,12 @@ class ResultWindow(builder.GtkBuilder):
 
         psize = common.get_pagesize_from_opts()
         opts = ResultsReportOptions(psize, None, print_action, save_path,
-                                           parent=self.widgets.resultwindow)
+                                    parent=self.widgets.resultwindow)
         try:
             report(ResultsReport, opts, data, userinfo)
         except ReportError as exc:
-            ErrorDialog((exc.value.split("\n")[0],
-                         _("You probably don't have write permissions on this folder."),
-                         _("Error"))
-                    )
-
+            ErrorDialog(
+                (exc.value.split("\n")[0],
+                 _("You probably don't have write permissions on this folder."),
+                 _("Error"))
+            )

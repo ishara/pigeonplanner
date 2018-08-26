@@ -94,7 +94,7 @@ class DTDParser(IPlugin):
             # Usually the last column is the speed, but in some cases the position
             # column is duplicated at the end for readability. Detect this and move the
             # searchindex by one.
-            #NR { }  NAAM { } GEMEENTE AD IG AFSTAND RING   JR BESTAT   SNELH.   {NR}  
+            # NR { }  NAAM { } GEMEENTE AD IG AFSTAND RING   JR BESTAT   SNELH.   {NR}
             if linenumber == firstline + 4:
                 if items[-1] == "NR":
                     revindex -= 1
@@ -117,4 +117,3 @@ class DTDParser(IPlugin):
             except Pigeon.DoesNotExist:
                 pass
         return data, results
-
