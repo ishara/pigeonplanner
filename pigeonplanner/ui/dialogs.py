@@ -120,7 +120,7 @@ class InformationDialog(gtk.Dialog):
                                 % (unknown, self.get_percentage(unknown, total))))
         for status in range(7):
             n_status = (Status.select()
-                        .join(Pigeon)
+                        .join(Pigeon, on=Status.pigeon)
                         .where((Status.status_id == status) & (Pigeon.visible == True))
                         .count())
             data.append(("    %s" % enums.Status.get_string(status), "%s\t(%s %%)"
