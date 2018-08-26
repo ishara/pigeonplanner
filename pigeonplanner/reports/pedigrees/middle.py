@@ -38,7 +38,7 @@ class PedigreeReport(Report):
         h_center = self.doc.get_usable_height() / 2.
 
         # Header
-        band = self._pigeon.get_band_string(True) if self._pigeon is not None else ""
+        band = self._pigeon.band if self._pigeon is not None else ""
         title = _("Pedigree of:") + ("   %s" % band)
         self.doc.center_text("Title", title, w_center, 0)
         self.doc.draw_line("Seperator", 0, 1, self.doc.get_usable_width(), 1)
@@ -120,7 +120,7 @@ class PedigreeReport(Report):
 
             # Get the text
             if pigeon is not None:
-                text = [pigeon.get_band_string(True)]
+                text = [pigeon.band]
                 ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.extra
                 if config.get("printing.pedigree-box-colour"):
                     text.append(pigeon.colour)

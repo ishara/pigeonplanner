@@ -274,7 +274,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
                 return
             self.widgets.treeview.add_pigeon(pigeon)
             self.widgets.statusbar.display_message(
-                        _("Pigeon %s has been added") % pigeon.get_band_string())
+                        _("Pigeon %s has been added") % pigeon.band)
         self.widgets.treeview.grab_focus()
 
     # Menu callbacks
@@ -386,12 +386,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         elif self.widgets.selection.count_selected_rows() == 1:
             pigeon = self.widgets.treeview.get_selected_pigeon()
             pigeons = [pigeon]
-            statusbarmsg = _("Pigeon %s has been removed") % pigeon.band_string
+            statusbarmsg = _("Pigeon %s has been removed") % pigeon.band
         else:
             pigeons = [pobj for pobj in self.widgets.treeview.get_selected_pigeon()]
             statusbarmsg = _("%s pigeons have been removed") % len(pigeons)
 
-        pigeonlabel = ", ".join([pobj.band_string for pobj in pigeons])
+        pigeonlabel = ", ".join([pobj.band for pobj in pigeons])
         self.widgets.labelPigeon.set_text(pigeonlabel)
         self.widgets.chkKeep.set_active(True)
 

@@ -677,7 +677,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     # Public methods
     def set_pigeon(self, pigeon):
         self.pigeon = pigeon
-        self.widgets.labelpigeon.set_text(pigeon.get_band_string())
+        self.widgets.labelpigeon.set_text(pigeon.band)
 
         self.widgets.resultview.set_pigeon(pigeon)
 

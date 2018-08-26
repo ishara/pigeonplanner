@@ -77,11 +77,11 @@ class PedigreeWindow(gtk.Window):
         self._current_pigeon = pigeon
         self._current_pigeon_path = self._treeview.get_path_for_pigeon(pigeon)
         self._previous_pigeons = []
-        self.pdfname = "%s_%s_%s.pdf" % (_("Pedigree"), pigeon.year, pigeon.band)
+        self.pdfname = "%s_%s.pdf" % (_("Pedigree"), pigeon.band)
         name = pigeon.name
         if name:
             name = ", " + name
-        title = "%s: %s%s - %s" % (_("Pedigree"), pigeon.get_band_string(True),
+        title = "%s: %s%s - %s" % (_("Pedigree"), pigeon.band,
                                    name, pigeon.sex_string)
         self.set_title(title)
 

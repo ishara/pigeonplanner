@@ -101,7 +101,7 @@ class DataManager(builder.GtkBuilder):
                 (Pigeon.sire == pigeon) |
                 (Pigeon.dam == pigeon)).exists()
             if not is_parent:
-                self.widgets.liststore.insert(0, [pigeon, False, pigeon.get_band_string()])
+                self.widgets.liststore.insert(0, [pigeon, False, pigeon.band])
 
         if len(self.widgets.liststore) == 0:
             self.widgets.messagebox.show()

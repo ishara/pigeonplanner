@@ -105,8 +105,11 @@ class UpgradeDummy(BaseModel):
 # Pigeon
 ###################
 class Pigeon(BaseModel):
-    band = CharField()
-    year = CharField()
+    band_number = CharField()
+    band_year = CharField()
+    band_country = CharField(default="")
+    band_letters = CharField(default="")
+    band_format = CharField(default="{empty}{empty}{number} / {year}")
     sex = IntegerField()
     visible = BooleanField(default=True)
     colour = CharField(default="")
@@ -127,24 +130,34 @@ class Pigeon(BaseModel):
     class Meta:
         table_name = "pigeon"
         indexes = (
-            (("band", "year"), True),
+            (("band_number", "band_year"), True),
+            (("band_country", "band_letters", "band_number", "band_year"), False),
         )
 
     def __repr__(self):
-        return "<Pigeon %s/%s>" % (self.band, self.year)
+        return "<Pigeon %s>" % self.band
 
     @classmethod
     def get_for_band(cls, band_tuple):
-        band, year = band_tuple
-        return cls.get((cls.band == band) & (cls.year == year))
-
-    def get_band_string(self, short=False):
-        year = self.year if not short else self.year[2:]
-        return "%s / %s" % (self.band, year)
+        country, letters, number, year = band_tuple
+        return cls.get((cls.band_country == country) & (cls.band_letters == letters) &
+                       (cls.band_number == number) & (cls.band_year == year))
 
     @property
-    def band_string(self):
-        return self.get_band_string()
+    def band(self):
+        values = {
+            "country": self.band_country,
+            "letters": self.band_letters,
+            "number": self.band_number,
+            "year": self.band_year,
+            "year_short": self.band_year[2:],
+            "empty": "",
+        }
+        return self.band_format.format(**values)
+
+    @property
+    def band_tuple(self):
+        return self.band_country, self.band_letters, self.band_number, self.band_year
 
     @property
     def sex_string(self):
@@ -174,14 +187,14 @@ class Pigeon(BaseModel):
     @property
     def sire_filter(self):
         try:
-            return self.sire.band, self.sire.year
+            return self.sire.band_tuple
         except AttributeError:
             return ""
 
     @property
     def dam_filter(self):
         try:
-            return self.dam.band, self.dam.year
+            return self.dam.band_tuple
         except AttributeError:
             return ""
 
@@ -216,7 +229,7 @@ class Status(BaseModel):
         table_name = "status"
 
     def __repr__(self):
-        return "<Status %s for %s>" % (self.status_id, self.pigeon.band_string)
+        return "<Status %s for %s>" % (self.status_id, self.pigeon.band)
 
     @property
     def status_string(self):
@@ -232,7 +245,7 @@ class Image(BaseModel):
         table_name = "image"
 
     def __repr__(self):
-        return "<Image %s for %s>" % (self.path, self.pigeon.band_string)
+        return "<Image %s for %s>" % (self.path, self.pigeon.band)
 
 
 class Result(BaseModel):
@@ -259,7 +272,7 @@ class Result(BaseModel):
         )
 
     def __repr__(self):
-        return "<Result %s for %s>" % (self.id, self.pigeon.band_string)
+        return "<Result %s for %s>" % (self.id, self.pigeon.band)
 
 
 class Breeding(BaseModel):

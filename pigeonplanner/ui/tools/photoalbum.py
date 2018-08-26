@@ -127,10 +127,9 @@ class PhotoAlbum(builder.GtkBuilder):
             try:
                 pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(image.path, 96, 96)
                 self.widgets.liststore.append(
-                    [image.pigeon, image, image.pigeon.get_band_string(True), pixbuf])
+                    [image.pigeon, image, image.pigeon.band, pixbuf])
             except gobject.GError:
-                logger.error("Could not find original image for: %s"
-                             % (image.pigeon.get_band_string()))
+                logger.error("Could not find original image for: %s" % image.pigeon.band)
 
         if len(self.widgets.liststore) > 0:
             self.widgets.labelImage.hide()

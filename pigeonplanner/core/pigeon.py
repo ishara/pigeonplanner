@@ -51,9 +51,11 @@ def add_pigeon(data, status, statusdata):
             query = Status.insert(pigeon=pigeon, status_id=status, **statusdata)
             query.execute()
     except peewee.IntegrityError:
-        pigeon = Pigeon.get_for_band((data["band"], data["year"]))
+        pigeon = Pigeon.get_for_band(
+            (data["band_country"], data["band_letters"], data["band_number"], data["band_year"])
+        )
         if pigeon.visible:
-            logger.debug("Pigeon already exists '%s'", pigeon.band_string)
+            logger.debug("Pigeon already exists '%s'", pigeon.band)
             raise errors.PigeonAlreadyExists(pigeon)
         else:
             raise errors.PigeonAlreadyExistsHidden(pigeon)
@@ -81,9 +83,11 @@ def update_pigeon(pigeon, data, status, statusdata):
     try:
         pigeon = pigeon.update_and_return(**data)
     except peewee.IntegrityError:
-        pigeon = Pigeon.get_for_band((data["band"], data["year"]))
+        pigeon = Pigeon.get_for_band(
+            (data["band_country"], data["band_letters"], data["band_number"], data["band_year"])
+        )
         if pigeon.visible:
-            logger.debug("Pigeon already exists '%s'", pigeon.band_string)
+            logger.debug("Pigeon already exists '%s'", pigeon.band)
             raise errors.PigeonAlreadyExists(pigeon)
         else:
             raise errors.PigeonAlreadyExistsHidden(pigeon)
@@ -114,7 +118,7 @@ def update_pigeon(pigeon, data, status, statusdata):
 
 
 def remove_pigeon(pigeon):
-    logger.debug("Start removing pigeon '%s'", pigeon.band_string)
+    logger.debug("Start removing pigeon '%s'", pigeon.band)
 
     try:
         os.remove(thumbnail.get_path(pigeon.main_image))
@@ -140,15 +144,16 @@ def build_pedigree_tree(pigeon, index, depth, lst):
 def get_or_create_pigeon(band_tuple, sex, visible):
     """
 
-    :param band_tuple: tuple of (band, year) or None
+    :param band_tuple: tuple of (country, letters, number, year) or None
     :param sex: one of the sex constants
     :param visible: boolean
     """
-    if band_tuple is not None and band_tuple != ("", ""):
-        band, year = band_tuple
+    if band_tuple is not None and band_tuple != ("", "", "", ""):
+        country, letters, number, year = band_tuple
         try:
             with database.transaction():
-                pigeon = Pigeon.create(band=band, year=year,
+                pigeon = Pigeon.create(band_country=country, band_letters=letters,
+                                       band_number=number, band_year=year,
                                        sex=sex, visible=visible)
                 query = Status.insert(pigeon=pigeon)
                 query.execute()

@@ -433,6 +433,7 @@
                                 <property name="can_empty">True</property>
                                 <property name="editable">True</property>
                                 <property name="has_search">True</property>
+                                <property name="show_band_format">False</property>
                                 <signal name="search-clicked" handler="on_bandentrysire_search_clicked" swapped="no"/>
                               </object>
                               <packing>
@@ -476,6 +477,7 @@
                                 <property name="can_empty">True</property>
                                 <property name="editable">True</property>
                                 <property name="has_search">True</property>
+                                <property name="show_band_format">False</property>
                                 <signal name="search-clicked" handler="on_bandentrydam_search_clicked" swapped="no"/>
                               </object>
                               <packing>

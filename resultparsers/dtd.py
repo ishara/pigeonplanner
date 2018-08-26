@@ -112,7 +112,7 @@ class DTDParser(IPlugin):
                 ring, year = year[:-2], year[-2:]
             year = expand_year(year)
             try:
-                pigeon = Pigeon.get((Pigeon.band == ring) & (Pigeon.year == year))
+                pigeon = Pigeon.get_for_band(("", "", ring, year))
                 results[pigeon] = [ring, year, place, speed]
             except Pigeon.DoesNotExist:
                 pass

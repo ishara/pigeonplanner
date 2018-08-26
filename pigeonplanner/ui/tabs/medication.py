@@ -254,7 +254,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.liststoreselect.clear()
         for pigeon in Pigeon.select().where(Pigeon.visible == True):
             active = not self.pigeon == pigeon
-            self.widgets.liststoreselect.insert(0, [active, not active, pigeon, pigeon.band, pigeon.year])
+            self.widgets.liststoreselect.insert(0, [active, not active, pigeon, pigeon.band, pigeon.band_year])
         self.widgets.liststoreselect.set_sort_column_id(COL_SEL_BAND, gtk.SORT_ASCENDING)
         self.widgets.liststoreselect.set_sort_column_id(COL_SEL_YEAR, gtk.SORT_ASCENDING)
 

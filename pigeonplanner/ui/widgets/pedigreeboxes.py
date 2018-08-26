@@ -52,7 +52,7 @@ class PedigreeBox(gtk.DrawingArea):
         self.text = ""
         if self.pigeon:
             self.editable = True
-            self.text = self.pigeon.get_band_string(True)
+            self.text = self.pigeon.band
             if self.pigeon.is_cock():
                 self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
                 self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
@@ -260,7 +260,7 @@ class PedigreeBox_gdk(gtk.DrawingArea):
         text = ""
         if self.pigeon:
             self.editable = True
-            text = self.pigeon.get_band_string(True)
+            text = self.pigeon.band
         else:
             if detailed and child is not None:
                 self.editable = True

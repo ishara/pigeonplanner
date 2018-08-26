@@ -37,7 +37,7 @@ class PigeonsReport(Report, HelperMethods):
 
         # Pigeon table
         #TODO: column size with different columns
-        columns = [(_("Band no."), "band_string")]
+        columns = [(_("Band no."), "band")]
 
         if config.get("columns.pigeon-sex") or config.get("printing.pigeon-sex"):
             columns.append((_("Sex"), "sex_string"))
@@ -70,7 +70,7 @@ class PigeonsReport(Report, HelperMethods):
                 instance = pigeon.status if method == "status_string" else pigeon
                 if method in ("sire", "dam"):
                     obj = getattr(pigeon, method)
-                    text = "" if obj is None else obj.band_string
+                    text = "" if obj is None else obj.band
                     self.add_cell(text, "cell", "celltext")
                 else:
                     self.add_cell(getattr(instance, method), "cell", "celltext")

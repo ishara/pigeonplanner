@@ -95,7 +95,7 @@ class FilterDialog(builder.GtkBuilder):
 
         year = self.widgets.spinyear.get_value_as_int()
         yearop = self.widgets.comboyear.get_operator()
-        self.filter.add("year", year, yearop, int)
+        self.filter.add("band_year", year, yearop, int)
 
         if self.widgets.checksex.get_active():
             sex = self.widgets.combosex.get_sex()
@@ -250,12 +250,12 @@ class MainTreeView(gtk.TreeView, component.Component):
         data = (
             self.LS_PIGEON, pigeon,
             self.LS_RING, pigeon.band,
-            self.LS_YEAR, pigeon.year,
+            self.LS_YEAR, pigeon.band_year,
             self.LS_NAME, pigeon.name,
             self.LS_COLOUR, pigeon.colour,
             self.LS_SEX, pigeon.sex_string,
-            self.LS_SIRE, "" if pigeon.sire is None else pigeon.sire.band_string,
-            self.LS_DAM, "" if pigeon.dam is None else pigeon.dam.band_string,
+            self.LS_SIRE, "" if pigeon.sire is None else pigeon.sire.band,
+            self.LS_DAM, "" if pigeon.dam is None else pigeon.dam.band,
             self.LS_LOFT, pigeon.loft,
             self.LS_STRAIN, pigeon.strain,
             self.LS_STATUS, pigeon.status.status_string,
@@ -358,12 +358,12 @@ class MainTreeView(gtk.TreeView, component.Component):
         return [
             pigeon,
             pigeon.band,
-            pigeon.year,
+            pigeon.band_year,
             pigeon.name,
             pigeon.colour,
             pigeon.sex_string,
-            "" if pigeon.sire is None else pigeon.sire.band_string,
-            "" if pigeon.dam is None else pigeon.dam.band_string,
+            "" if pigeon.sire is None else pigeon.sire.band,
+            "" if pigeon.dam is None else pigeon.dam.band,
             pigeon.loft,
             pigeon.strain,
             pigeon.status.status_string,

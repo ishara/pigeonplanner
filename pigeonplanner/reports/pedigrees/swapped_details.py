@@ -43,7 +43,7 @@ class PedigreeReport(Report):
         self.doc.start_page()
 
         # Title line
-        band = self._pigeon.get_band_string(True) if self._pigeon is not None else ""
+        band = self._pigeon.band if self._pigeon is not None else ""
         x_cm = self.get_right_align_x("Title", band)
 
         self.doc.draw_text("Title", _("Pedigree of:"), .1, 0)
@@ -145,7 +145,7 @@ class PedigreeReport(Report):
 
             # Get the text
             if pigeon is not None:
-                text = pigeon.get_band_string(True)
+                text = pigeon.band
                 ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.extra
                 if first:
                     text += "\n" + pigeon.sex_string

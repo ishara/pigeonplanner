@@ -73,7 +73,7 @@ class DetailsDialog(gtk.Dialog):
             title = _("Details of pigeon")
             self.details.clear_details()
         else:
-            title = _("Details of %s") % pigeon.get_band_string()
+            title = _("Details of %s") % pigeon.band
         self.set_title(title)
 
         self.run()
@@ -442,30 +442,35 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
         self.widgets.combosex.set_active(value)
 
     def get_edit_details(self):
-        ring, year = self.widgets.entrybandedit.get_band()
+        country, letters, number, year = self.widgets.entrybandedit.get_band()
         sire = self.widgets.entrysireedit.get_band()
         dam = self.widgets.entrydamedit.get_band()
         if self.pigeon is None:
             visible = False if self.pedigree_mode else True
         else:
             visible = self.pigeon.visible
-        data = {"band": ring, 
-                "year": year, 
-                "sire": sire,
-                "dam": dam,
-                "visible": visible,
-                "sex": self.widgets.combosex.get_sex(),
-                "colour": self.widgets.combocolour.child.get_text(),
-                "name": self.widgets.entrynameedit.get_text(),
-                "strain": self.widgets.combostrain.child.get_text(),
-                "loft": self.widgets.comboloft.child.get_text(),
-                "image": self.widgets.pigeonimage_edit.get_image_path(),
-                "extra1": self.widgets.entryextraedit1.get_text(),
-                "extra2": self.widgets.entryextraedit2.get_text(),
-                "extra3": self.widgets.entryextraedit3.get_text(),
-                "extra4": self.widgets.entryextraedit4.get_text(),
-                "extra5": self.widgets.entryextraedit5.get_text(),
-                "extra6": self.widgets.entryextraedit6.get_text()}
+        data = {
+            "band_country": country,
+            "band_letters": letters,
+            "band_number": number,
+            "band_year": year,
+            "band_format": self.widgets.entrybandedit.band_format,
+            "sire": sire,
+            "dam": dam,
+            "visible": visible,
+            "sex": self.widgets.combosex.get_sex(),
+            "colour": self.widgets.combocolour.child.get_text(),
+            "name": self.widgets.entrynameedit.get_text(),
+            "strain": self.widgets.combostrain.child.get_text(),
+            "loft": self.widgets.comboloft.child.get_text(),
+            "image": self.widgets.pigeonimage_edit.get_image_path(),
+            "extra1": self.widgets.entryextraedit1.get_text(),
+            "extra2": self.widgets.entryextraedit2.get_text(),
+            "extra3": self.widgets.entryextraedit3.get_text(),
+            "extra4": self.widgets.entryextraedit4.get_text(),
+            "extra5": self.widgets.entryextraedit5.get_text(),
+            "extra6": self.widgets.entryextraedit6.get_text()
+        }
         return data
 
     def clear_details(self):
@@ -488,7 +493,7 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
     def start_edit(self, operation):
         self._operation = operation
         if operation == enums.Action.edit:
-            logger.debug("Start editing pigeon '%s'", self.pigeon.band_string)
+            logger.debug("Start editing pigeon '%s'", self.pigeon.band)
             self.widgets.entrybandedit.set_pigeon(self.pigeon)
             self.widgets.entrysireedit.set_pigeon(self.pigeon.sire)
             self.widgets.entrydamedit.set_pigeon(self.pigeon.dam)
@@ -575,8 +580,8 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
     # Internal methods
     def _get_pigeonsearch_details(self, sex):
         try:
-            band, year = self.widgets.entrybandedit.get_band()
+            country, letters, number, year = self.widgets.entrybandedit.get_band()
         except errors.InvalidInputError:
             ErrorDialog(messages.MSG_NO_PARENT, self.parent)
             return
-        return (band, year), sex, year
+        return (country, letters, number, year), sex, year

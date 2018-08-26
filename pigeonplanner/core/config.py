@@ -104,6 +104,7 @@ default_config = [
                 ("options.coef-multiplier", 100),
                 ("options.distance-unit", 0),
                 ("options.speed-unit", 0),
+                ("options.band-format", "{empty}{empty}{number} / {year}"),
                 # ("options.format-date", "%Y-%m-%d"),
 
                 ("interface.arrows", False),

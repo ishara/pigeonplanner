@@ -265,16 +265,16 @@ class PigeonListDialog(gtk.Dialog):
         self._liststore.clear()
         for pigeon in Pigeon.select():
             # If a band_tuple is given, exclude it
-            if band_tuple is not None and band_tuple == (pigeon.band, pigeon.year):
+            if band_tuple is not None and band_tuple == pigeon.band_tuple:
                 continue
             # If sex is given, only include these
             if sex is not None and not sex == pigeon.sex:
                 continue
             # If year is given, exclude older pigeons
-            if year is not None and int(year) < int(pigeon.year):
+            if year is not None and int(year) < int(pigeon.band_year):
                 continue
             self._liststore.insert(0,
-                [pigeon, pigeon.band, pigeon.year, pigeon.name])
+                [pigeon, pigeon.band, pigeon.band_year, pigeon.name])
         self._liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self._liststore.set_sort_column_id(2, gtk.SORT_ASCENDING)
         self._treeview.get_selection().select_path(0)

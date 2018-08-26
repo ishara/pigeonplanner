@@ -311,7 +311,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
     def _add_parent_record(self, pigeon):
         rowiter = self.widgets.treestore.append(None,
-            [None, pigeon, pigeon.band_string])
+            [None, pigeon, pigeon.band])
         return rowiter
 
     def _get_or_create_parent_record(self, pigeon):

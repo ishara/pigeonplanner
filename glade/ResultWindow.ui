@@ -1,37 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.20"/>
   <!-- interface-requires pigeonplannerwidgets 0.0 -->
+  <requires lib="gtk+" version="2.20"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkActionGroup" id="actiongroup">
     <child>
-      <object class="GtkAction" id="Export">
-        <property name="label" translatable="yes">Export</property>
-        <property name="tooltip" translatable="yes">Export these results</property>
-        <property name="stock_id">gtk-execute</property>
-        <signal name="activate" handler="on_export_clicked" swapped="no"/>
+      <object class="GtkAction" id="Print">
+        <property name="tooltip" translatable="yes">Print these results</property>
+        <property name="stock_id">gtk-print</property>
+        <signal name="activate" handler="on_print_clicked" swapped="no"/>
       </object>
     </child>
     <child>
-      <object class="GtkAction" id="Save">
-        <property name="tooltip" translatable="yes">Save these results</property>
-        <property name="stock_id">gtk-save</property>
-        <signal name="activate" handler="on_save_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Mail">
-        <property name="tooltip" translatable="yes">Email these results</property>
-        <property name="stock_id">email</property>
-        <property name="visible">False</property>
-        <signal name="activate" handler="on_mail_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Preview">
-        <property name="tooltip" translatable="yes">View these results</property>
-        <property name="stock_id">gtk-print-preview</property>
-        <signal name="activate" handler="on_preview_clicked" swapped="no"/>
+      <object class="GtkAction" id="Close">
+        <property name="tooltip" translatable="yes">Close this window</property>
+        <property name="stock_id">gtk-close</property>
+        <signal name="activate" handler="on_close_window" swapped="no"/>
       </object>
     </child>
     <child>
@@ -43,17 +27,33 @@
       </object>
     </child>
     <child>
-      <object class="GtkAction" id="Close">
-        <property name="tooltip" translatable="yes">Close this window</property>
-        <property name="stock_id">gtk-close</property>
-        <signal name="activate" handler="on_close_window" swapped="no"/>
+      <object class="GtkAction" id="Preview">
+        <property name="tooltip" translatable="yes">View these results</property>
+        <property name="stock_id">gtk-print-preview</property>
+        <signal name="activate" handler="on_preview_clicked" swapped="no"/>
       </object>
     </child>
     <child>
-      <object class="GtkAction" id="Print">
-        <property name="tooltip" translatable="yes">Print these results</property>
-        <property name="stock_id">gtk-print</property>
-        <signal name="activate" handler="on_print_clicked" swapped="no"/>
+      <object class="GtkAction" id="Mail">
+        <property name="tooltip" translatable="yes">Email these results</property>
+        <property name="stock_id">email</property>
+        <property name="visible">False</property>
+        <signal name="activate" handler="on_mail_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Save">
+        <property name="tooltip" translatable="yes">Save these results</property>
+        <property name="stock_id">gtk-save</property>
+        <signal name="activate" handler="on_save_clicked" swapped="no"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkAction" id="Export">
+        <property name="label" translatable="yes">Export</property>
+        <property name="tooltip" translatable="yes">Export these results</property>
+        <property name="stock_id">gtk-execute</property>
+        <signal name="activate" handler="on_export_clicked" swapped="no"/>
       </object>
     </child>
   </object>
@@ -72,6 +72,44 @@
   <object class="GtkAdjustment" id="adjyear">
     <property name="upper">3000</property>
     <property name="step_increment">1</property>
+  </object>
+  <object class="GtkWindow" id="resultwindow">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">View all results</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="default_width">980</property>
+    <property name="default_height">640</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="icon">../images/icon_logo.png</property>
+    <property name="skip_taskbar_hint">True</property>
+    <signal name="delete-event" handler="on_close_window" swapped="no"/>
+    <child>
+      <object class="GtkVBox" id="vbox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
   </object>
   <object class="GtkDialog" id="filterdialog">
     <property name="can_focus">False</property>
@@ -517,6 +555,7 @@
                             <property name="can_empty">True</property>
                             <property name="editable">True</property>
                             <property name="has_search">True</property>
+                            <property name="show_band_format">False</property>
                             <signal name="search-clicked" handler="on_entryband_search_clicked" swapped="no"/>
                           </object>
                           <packing>
@@ -801,43 +840,5 @@
       <action-widget response="0">filterclear</action-widget>
       <action-widget response="0">buttonclose</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkWindow" id="resultwindow">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">View all results</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="default_width">980</property>
-    <property name="default_height">640</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="icon">../images/icon_logo.png</property>
-    <property name="skip_taskbar_hint">True</property>
-    <signal name="delete-event" handler="on_close_window" swapped="no"/>
-    <child>
-      <object class="GtkVBox" id="vbox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <object class="GtkHBox" id="hbox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
   </object>
 </interface>

@@ -63,6 +63,7 @@ class BaseView(object):
             self.LS_COL_WINDSPEED: "windspeed",
             self.LS_COL_WEATHER: "weather",
             self.LS_COL_TEMPERATURE: "temperature",
+            self.LS_COL_BAND_TUPLE: "band_tuple",
             self.LS_COL_BAND: "band",
             self.LS_COL_YEAR: "year",
             self.LS_COL_PLACED: "placestr",
@@ -256,7 +257,7 @@ class ClassicView(BaseView):
             speed = common.format_speed(result.speed)
             # A result can have None as pigeon.
             band = "" if result.pigeon is None else result.pigeon.band
-            year = "" if result.pigeon is None else result.pigeon.year
+            year = "" if result.pigeon is None else result.pigeon.band_year
 
             self.liststore.insert(0,
                 [result, band, year, result.date, result.racepoint,
@@ -331,7 +332,8 @@ class SplittedView(BaseView):
      LS_COL_WEATHER,
      LS_COL_TEMPERATURE) = range(8)
 
-    (LS_COL_BAND,
+    (LS_COL_BAND_TUPLE,
+     LS_COL_BAND,
      LS_COL_YEAR,
      LS_COL_PLACED,
      LS_COL_OUT,
@@ -342,7 +344,7 @@ class SplittedView(BaseView):
      LS_COL_COMMENT,
      LS_COL_PLACEDINT,
      LS_COL_COEFFLOAT,
-     LS_COL_SPEEDFLOAT) = range(100, 112)
+     LS_COL_SPEEDFLOAT) = range(100, 113)
 
     (COL_DATE,
      COL_RACEPOINT,
@@ -397,7 +399,7 @@ class SplittedView(BaseView):
         self._frame1.show_all()
         self._root.pack_start(self._frame1, True, True, 0)
 
-        self.liststore = gtk.ListStore(str, str, str, int, str, str, str, str, str, int, float, float)
+        self.liststore = gtk.ListStore(object, str, str, str, int, str, str, str, str, str, int, float, float)
         self.treeview = gtk.TreeView()
         self.treeview.set_model(self.liststore)
         self.treeview.set_rules_hint(True)
@@ -408,7 +410,7 @@ class SplittedView(BaseView):
                     ("coef", self.LS_COL_COEFFLOAT),
                     ("speed", self.LS_COL_SPEEDFLOAT), ("sector", None),
                     ("category", None), ("comment", None)]
-        for index, (colname, sortid) in enumerate(colnames):
+        for index, (colname, sortid) in enumerate(colnames, start=1):
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
                                           textrenderer, text=index)
@@ -452,9 +454,10 @@ class SplittedView(BaseView):
                 .dicts())
             for result in resultstmp:
                 pigeon = Pigeon.get(Pigeon.id == result["pigeon"])
+                result["band_tuple"] = pigeon.band_tuple
                 result["band"] = pigeon.band
-                result["year"] = pigeon.year
-                result["ring"] = pigeon.get_band_string(True)
+                result["year"] = pigeon.band_year
+                result["ring"] = pigeon.band
 
                 placestr, coef, coefstr = common.format_place_coef(result["place"], result["out"])
                 result["speedstr"] = common.format_speed(result["speed"])
@@ -545,7 +548,7 @@ class SplittedView(BaseView):
         self.liststore.clear()
         key = model.get_value(rowiter, self.LS_COL_KEY)
         for result in self.results_cache[key]["filtered"]:
-            self.liststore.append([result["band"], result["year"], result["placestr"], 
+            self.liststore.append([result["band_tuple"], result["band"],result["year"], result["placestr"],
                                    result["out"], result["coefstr"], result["speedstr"], 
                                    result["sector"], result["category"], result["comment"],
                                    result["place"], result["coef"], result["speed"]])
@@ -662,13 +665,12 @@ class ResultWindow(builder.GtkBuilder):
         # Results filter
         self._filter_results.clear()
         try:
-            band, year = self.widgets.entryband.get_band()
+            band_tuple = self.widgets.entryband.get_band()
         except errors.InvalidInputError:
             ErrorDialog(messages.MSG_EMPTY_FIELDS, self.widgets.filterdialog)
             return
-        if band and year:
-            self._filter_results.add(self.widgets.resultview.LS_COL_BAND, band)
-            self._filter_results.add(self.widgets.resultview.LS_COL_YEAR, year, type_=int)
+        if band_tuple[2] and band_tuple[3]:
+            self._filter_results.add(self.widgets.resultview.LS_COL_BAND_TUPLE, band_tuple, type_=tuple)
 
         year = self.widgets.spinyear.get_value_as_int()
         yearop = self.widgets.comboyear.get_operator()

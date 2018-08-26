@@ -116,7 +116,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         for children in [pigeon.children_sire, pigeon.children_dam]:
             for child in children:
                 seximg = utils.get_sex_image(child.sex)
-                self._liststoreoff.insert(0, [child, child.band, child.year, child.sex, seximg])
+                self._liststoreoff.insert(0, [child, child.band, child.band_year, child.sex, seximg])
 
         # Direct siblings
         direct_relatives = Pigeon.select().where(
@@ -127,7 +127,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             (Pigeon.dam == pigeon.dam))
         for p in direct_relatives:
             seximg = utils.get_sex_image(p.sex)
-            self._liststoredirect.insert(0, [p, p.band, p.year, p.sex, seximg])
+            self._liststoredirect.insert(0, [p, p.band, p.band_year, p.sex, seximg])
 
         # Half siblings
         template = Pigeon.select().where(
@@ -144,13 +144,13 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         for p in half_relatives_sire:
             seximg = utils.get_sex_image(p.sex)
             self._liststorehalf.insert(0,
-                [p, p.band, p.year, p.sire.get_band_string(True), p.sex, seximg])
+                [p, p.band, p.band_year, p.sire.band, p.sex, seximg])
         half_relatives_dam = template.where(
             (Pigeon.dam != None) &
             (Pigeon.dam == pigeon.dam))
         for p in half_relatives_dam:
             seximg = utils.get_sex_image(p.sex)
-            self._liststorehalf.insert(0, [p, p.band, p.year, p.dam.get_band_string(True), p.sex, seximg])
+            self._liststorehalf.insert(0, [p, p.band, p.band_year, p.dam.band, p.sex, seximg])
 
         self._liststoredirect.set_sort_column_id(1, gtk.SORT_ASCENDING)
         self._liststoredirect.set_sort_column_id(2, gtk.SORT_ASCENDING)
