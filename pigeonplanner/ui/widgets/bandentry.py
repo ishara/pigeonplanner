@@ -16,10 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-# TODO: remove this
-import gettext; gettext.install("", "")
-
-
 import re
 
 import gtk
