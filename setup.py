@@ -95,7 +95,10 @@ else:
         ("share/icons/hicolor/scalable/apps", ["images/pigeonplanner.svg"]),
         ("share/pixmaps/", ["images/pigeonplanner.png"]),
     ]
-    platform_options = {}
+    dependencies = [dep.strip("\n'") for dep in open("requirements.txt").readlines()]
+    platform_options = {
+        "install_requires": dependencies,
+    }
 
 
 entry_points = {
