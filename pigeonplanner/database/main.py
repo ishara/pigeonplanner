@@ -44,6 +44,7 @@ class DatabaseSession(object):
         self.dbfile = dbfile or const.DATABASE
         self.is_new_db = (not os.path.exists(self.dbfile) or
                           os.path.getsize(self.dbfile) == 0)
+        logger.debug("Opening database %s (new db=%s)", self.dbfile, self.is_new_db)
         models.database.init(self.dbfile)
         models.database.connect()
         # Set this explicitly to work with ON DELETE/UPDATE
