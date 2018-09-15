@@ -32,7 +32,7 @@ MSG_NEW_DATABASE = (_("The database you are trying to open is too new "
 MSG_UGRADE_DATABASE = (_("Database update required!"),
                        _("This database needs an update before it can be used. "
                          "Previous versions of Pigeon Planner won't work anymore. "
-                         "Do you want to continue?"),
+                         "This may take a moment. Do you want to continue?"),
                        "")
 
 MSG_UPDATED_DATABASE = (_("The Pigeon Planner databases has been updated "
