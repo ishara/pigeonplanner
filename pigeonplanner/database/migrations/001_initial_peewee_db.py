@@ -20,6 +20,7 @@ import time
 import sqlite3
 import logging
 from datetime import datetime
+from collections import defaultdict
 
 from peewee import SQL
 from peewee import SqliteDatabase
@@ -180,22 +181,34 @@ def _migrate_status(pigeon, old_pindex):
     status_data = {"pigeon": pigeon, "status_id": status_id}
     if status_id == enums.Status.dead:
         data = database.execute_sql("SELECT * FROM Dead WHERE pindex=?;", (old_pindex,)).fetchone()
+        if data is None:
+            data = defaultdict(str)
         status_data.update(date=_to_date(data["date"]), info=data["info"])
     elif status_id == enums.Status.sold:
         data = database.execute_sql("SELECT * FROM Sold WHERE pindex=?;", (old_pindex,)).fetchone()
+        if data is None:
+            data = defaultdict(str)
         status_data.update(person=data["person"], date=_to_date(data["date"]), info=data["info"])
     elif status_id == enums.Status.lost:
         data = database.execute_sql("SELECT * FROM Lost WHERE pindex=?;", (old_pindex,)).fetchone()
+        if data is None:
+            data = defaultdict(str)
         status_data.update(racepoint=data["racepoint"], date=_to_date(data["date"]), info=data["info"])
     elif status_id == enums.Status.breeder:
         data = database.execute_sql("SELECT * FROM Breeder WHERE pindex=?;", (old_pindex,)).fetchone()
+        if data is None:
+            data = defaultdict(str)
         status_data.update(start=_to_date(data["start"]), end=_to_date(data["end"]), info=data["info"])
     elif status_id == enums.Status.loaned:
         data = database.execute_sql("SELECT * FROM Onloan WHERE pindex=?;", (old_pindex,)).fetchone()
+        if data is None:
+            data = defaultdict(str)
         status_data.update(start=_to_date(data["loaned"]), end=_to_date(data["back"]),
                            info=data["info"], person=data["person"])
     elif status_id == enums.Status.widow:
         data = database.execute_sql("SELECT * FROM Widow WHERE pindex=?;", (old_pindex,)).fetchone()
+        if data is None:
+            data = defaultdict(str)
         status_data.update(partner=_pigeon_for_pindex(data["partner"]), info=data["info"])
 
     Status.insert(**status_data).execute()
