@@ -380,8 +380,8 @@ class Pigeon(BaseModel):
     class Meta:
         table_name = "pigeon"
         indexes = (
-            (("band_number", "band_year"), True),
-            (("band_country", "band_letters", "band_number", "band_year"), False),
+            (("band_number", "band_year"), False),
+            (("band_country", "band_letters", "band_number", "band_year"), True),
         )
 
 
