@@ -540,7 +540,7 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
                 pigeon = corepigeon.update_pigeon(self.pigeon, data, status, statusdata)
             except errors.PigeonAlreadyExists:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
-                return False
+                return True
             except errors.PigeonAlreadyExistsHidden as exc:
                 pigeon = exc.pigeon
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
@@ -555,7 +555,7 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
                 pigeon = corepigeon.add_pigeon(data, status, statusdata)
             except errors.PigeonAlreadyExists:
                 ErrorDialog(messages.MSG_PIGEON_EXISTS, self.parent)
-                return False
+                return True
             except errors.PigeonAlreadyExistsHidden as exc:
                 pigeon = exc.pigeon
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
