@@ -7,22 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-10 22:39+0200\n"
-"PO-Revision-Date: 2015-12-18 11:15+0000\n"
-"Last-Translator: Piotr Strębski <strebski@o2.pl>\n"
+"POT-Creation-Date: 2018-09-15 21:13+0200\n"
+"PO-Revision-Date: 2018-07-19 10:58+0000\n"
+"Last-Translator: Piotr Strębski <strebski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-12-19 04:38+0000\n"
-"X-Generator: Launchpad (build 17865)\n"
+"X-Launchpad-Export-Date: 2018-09-16 05:27+0000\n"
+"X-Generator: Launchpad (build 18780)\n"
+"Language: \n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,-1,-1,-1,-1,-1,351\n"
 
-#: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:213
-#: pigeonplanner/ui/resultwindow.py:771 pigeonplanner/ui/exportwindow.py:56
-#: pigeonplanner/ui/tools/distancecalculator.py:72
-#: pigeonplanner/core/common.py:238 pigeonplanner/core/common.py:245
+#: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:248
+#: pigeonplanner/ui/resultwindow.py:784 pigeonplanner/ui/exportwindow.py:58
+#: pigeonplanner/ui/exportwindow.py:80
+#: pigeonplanner/ui/tools/distancecalculator.py:74
+#: pigeonplanner/core/common.py:187 pigeonplanner/core/common.py:194
 msgid "Error"
 msgstr "Błąd"
 
@@ -49,10 +50,9 @@ msgstr "Wymagana aktualizacja bazy danych!"
 #: pigeonplanner/messages.py:33
 msgid ""
 "This database needs an update before it can be used. Previous versions of "
-"Pigeon Planner won't work anymore. Do you want to continue?"
+"Pigeon Planner won't work anymore. This may take a moment. Do you want to "
+"continue?"
 msgstr ""
-"Ta baza danych wymaga aktualizacji, zanim może być używana. Poprzednie "
-"wersje Pigeon Planner nie będą już działać. Czy chcesz kontynuować?"
 
 #: pigeonplanner/messages.py:38
 msgid ""
@@ -98,7 +98,8 @@ msgstr "Nieprawidłowy obraz!"
 #: pigeonplanner/messages.py:60
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
-msgstr "Ten obraz nie jest wspierany lub jest uszkodzony, proszę wybrać inny."
+msgstr ""
+"Ten obraz nie jest wspierany lub jest uszkodzony, proszę wybrać inny."
 
 #: pigeonplanner/messages.py:63
 msgid "Loading image failed!"
@@ -146,7 +147,7 @@ msgstr "Nie można szukać rodziców, wprowadź nr obrączki gołębia."
 #: pigeonplanner/messages.py:93 pigeonplanner/messages.py:96
 #: pigeonplanner/messages.py:100 pigeonplanner/messages.py:103
 #: pigeonplanner/messages.py:107 pigeonplanner/messages.py:117
-#: pigeonplanner/messages.py:120 pigeonplanner/ui/exportwindow.py:56
+#: pigeonplanner/messages.py:120 pigeonplanner/ui/exportwindow.py:58
 msgid "Invalid input!"
 msgstr "Nieprawidłowe dane wejściowe!"
 
@@ -174,7 +175,8 @@ msgstr "Co najmniej data i miejsce startu muszą być wprowadzone."
 msgid ""
 "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
 "DD)."
-msgstr "Termin wprowadzony ma niewłaściwy format. Należy zapisać (RRRR-MM-DD)."
+msgstr ""
+"Termin wprowadzony ma niewłaściwy format. Należy zapisać (RRRR-MM-DD)."
 
 #: pigeonplanner/messages.py:108
 msgid "The result you want to add already exists."
@@ -185,8 +187,8 @@ msgid "Removing the selected result"
 msgstr "Usuwanie wybranych wyników."
 
 #: pigeonplanner/messages.py:111 pigeonplanner/messages.py:114
-#: pigeonplanner/messages.py:158 pigeonplanner/ui/dialogs.py:223
-#: glade/MainWindow.ui:1119
+#: pigeonplanner/messages.py:158 pigeonplanner/ui/tabs/medication.py:58
+#: glade/MainWindow.ui:1154
 msgid "Are you sure?"
 msgstr "Czy na pewno?"
 
@@ -324,101 +326,114 @@ msgid "This isn't normal, or you must be running a development version"
 msgstr "To nie jest normalne, czy należy zainstalować wersję rozwojową"
 
 #: pigeonplanner/reports/pigeons.py:40 pigeonplanner/reports/results.py:63
-#: pigeonplanner/ui/resultwindow.py:87 pigeonplanner/ui/dialogs.py:256
-#: pigeonplanner/ui/tabs/results.py:59 pigeonplanner/ui/tabs/relatives.py:163
-#: pigeonplanner/ui/widgets/treeview.py:283 glade/BreedingView.ui:140
-#: glade/BreedingView.ui:337 glade/BreedingView.ui:1087
-#: glade/BreedingView.ui:1255 glade/ResultParser.ui:574
+#: pigeonplanner/ui/resultwindow.py:89 pigeonplanner/ui/dialogs.py:230
+#: pigeonplanner/ui/tabs/results.py:59 pigeonplanner/ui/tabs/relatives.py:171
+#: pigeonplanner/ui/widgets/treeview.py:341 glade/BreedingView.ui:421
+#: glade/BreedingView.ui:589 glade/BreedingView.ui:801
+#: glade/BreedingView.ui:998 glade/ResultParser.ui:576
 msgid "Band no."
 msgstr "Nr. Obrączki"
 
-#: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:182
-#: pigeonplanner/ui/widgets/treeview.py:283 glade/MainWindow.ui:826
-#: glade/FilterDialog.ui:121 glade/OptionsDialog.ui:909
-#: glade/OptionsDialog.ui:1562 glade/DetailsView.ui:238
-#: glade/DetailsView.ui:653
+#: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:190
+#: pigeonplanner/ui/widgets/treeview.py:341 glade/MainWindow.ui:861
+#: glade/FilterDialog.ui:121 glade/OptionsDialog.ui:914
+#: glade/OptionsDialog.ui:1600 glade/DetailsView.ui:147
+#: glade/DetailsView.ui:686
 msgid "Sex"
 msgstr "Płeć"
 
-#: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dbmanager.py:47
-#: pigeonplanner/ui/dialogs.py:256 pigeonplanner/ui/widgets/treeview.py:283
-#: glade/OptionsDialog.ui:844 glade/OptionsDialog.ui:1285
-#: glade/OptionsDialog.ui:1540 glade/DBManager.ui:364 glade/AddressBook.ui:129
+#: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dbmanager.py:48
+#: pigeonplanner/ui/dialogs.py:230 pigeonplanner/ui/widgets/treeview.py:341
+#: glade/OptionsDialog.ui:851 glade/OptionsDialog.ui:1323
+#: glade/OptionsDialog.ui:1578 glade/DBManager.ui:427 glade/Backup.ui:146
+#: glade/AddressBook.ui:136
 msgid "Name"
 msgstr "Nazwa"
 
-#: pigeonplanner/reports/pigeons.py:47 pigeonplanner/ui/widgets/treeview.py:283
-#: glade/FilterDialog.ui:135 glade/OptionsDialog.ui:868
-#: glade/OptionsDialog.ui:1549 glade/DetailsView.ui:227
-#: glade/DetailsView.ui:642
+#: pigeonplanner/reports/pigeons.py:47 pigeonplanner/ui/widgets/treeview.py:342
+#: glade/FilterDialog.ui:386 glade/OptionsDialog.ui:990 glade/DetailsView.ui:53
+#: glade/DetailsView.ui:636
+msgid "Sire"
+msgstr "Ojciec"
+
+#: pigeonplanner/reports/pigeons.py:49 pigeonplanner/ui/widgets/treeview.py:342
+#: glade/FilterDialog.ui:400 glade/OptionsDialog.ui:1005
+#: glade/DetailsView.ui:39 glade/DetailsView.ui:623
+msgid "Dam"
+msgstr "Matka"
+
+#: pigeonplanner/reports/pigeons.py:51 pigeonplanner/ui/widgets/treeview.py:341
+#: glade/FilterDialog.ui:135 glade/OptionsDialog.ui:875
+#: glade/OptionsDialog.ui:1587 glade/DetailsView.ui:135
+#: glade/DetailsView.ui:675
 msgid "Colour"
 msgstr "Kolor"
 
-#: pigeonplanner/reports/pigeons.py:49 pigeonplanner/ui/widgets/treeview.py:284
-#: pigeonplanner/ui/tools/distancecalculator.py:174 glade/FilterDialog.ui:163
-#: glade/OptionsDialog.ui:881 glade/DetailsView.ui:201 glade/DetailsView.ui:576
-#: glade/MedicationView.ui:871
+#: pigeonplanner/reports/pigeons.py:53 pigeonplanner/ui/widgets/treeview.py:342
+#: pigeonplanner/ui/tools/distancecalculator.py:176 glade/FilterDialog.ui:163
+#: glade/OptionsDialog.ui:888 glade/DetailsView.ui:67 glade/DetailsView.ui:649
+#: glade/MedicationView.ui:901
 msgid "Loft"
 msgstr "Gołębnik"
 
-#: pigeonplanner/reports/pigeons.py:51 pigeonplanner/ui/widgets/treeview.py:284
-#: glade/FilterDialog.ui:149 glade/OptionsDialog.ui:853
-#: glade/DetailsView.ui:251 glade/DetailsView.ui:666
+#: pigeonplanner/reports/pigeons.py:55 pigeonplanner/ui/widgets/treeview.py:342
+#: glade/FilterDialog.ui:149 glade/OptionsDialog.ui:860
+#: glade/DetailsView.ui:161 glade/DetailsView.ui:699
 msgid "Strain"
 msgstr "Rasa"
 
-#: pigeonplanner/reports/pigeons.py:53 pigeonplanner/ui/widgets/treeview.py:284
-#: glade/FilterDialog.ui:332 glade/OptionsDialog.ui:894
+#: pigeonplanner/reports/pigeons.py:57 pigeonplanner/ui/widgets/treeview.py:342
+#: glade/FilterDialog.ui:332 glade/OptionsDialog.ui:901
 msgid "Status"
 msgstr "Status"
 
 #: pigeonplanner/reports/results.py:61 pigeonplanner/reports/velocity.py:39
-#: pigeonplanner/ui/resultwindow.py:80 pigeonplanner/ui/tabs/results.py:52
-#: glade/ResultWindow.ui:178 glade/DetailsView.ui:1182
-#: glade/DetailsView.ui:1282 glade/DetailsView.ui:1397
-#: glade/MedicationView.ui:36 glade/MedicationView.ui:123
-#: glade/ResultParser.ui:170
+#: pigeonplanner/ui/resultwindow.py:82 pigeonplanner/ui/tabs/results.py:52
+#: glade/ResultWindow.ui:216 glade/DetailsView.ui:1140
+#: glade/DetailsView.ui:1240 glade/DetailsView.ui:1355
+#: glade/MedicationView.ui:46 glade/MedicationView.ui:133
+#: glade/ResultParser.ui:172
 msgid "Date"
 msgstr "Data lotu"
 
-#: pigeonplanner/reports/results.py:62 pigeonplanner/ui/resultwindow.py:81
-#: pigeonplanner/ui/tabs/results.py:53 glade/VelocityCalculator.ui:154
-#: glade/ResultWindow.ui:190 glade/DetailsView.ui:1441
-#: glade/ResultParser.ui:182 glade/RaceManager.ui:132
+#: pigeonplanner/reports/results.py:62 pigeonplanner/ui/resultwindow.py:83
+#: pigeonplanner/ui/tabs/results.py:53 glade/VelocityCalculator.ui:1135
+#: glade/ResultWindow.ui:228 glade/DetailsView.ui:1399
+#: glade/ResultParser.ui:184 glade/RaceManager.ui:132
 msgid "Racepoint"
 msgstr "Miejsce startu"
 
-#: pigeonplanner/reports/results.py:64 pigeonplanner/ui/resultwindow.py:89
-#: pigeonplanner/ui/resultwindow.py:90 pigeonplanner/ui/tabs/results.py:61
+#: pigeonplanner/reports/results.py:64 pigeonplanner/ui/resultwindow.py:91
+#: pigeonplanner/ui/resultwindow.py:92 pigeonplanner/ui/tabs/results.py:61
 #: pigeonplanner/ui/tabs/results.py:62 glade/ResultsView.ui:532
-#: glade/ResultWindow.ui:448
+#: glade/ResultWindow.ui:486
 msgid "Placed"
 msgstr "Nr.Konk."
 
-#: pigeonplanner/reports/results.py:65 pigeonplanner/ui/resultwindow.py:91
+#: pigeonplanner/reports/results.py:65 pigeonplanner/ui/resultwindow.py:93
 #: pigeonplanner/ui/tabs/results.py:63 glade/ResultsView.ui:605
-#: glade/ResultWindow.ui:462
+#: glade/ResultWindow.ui:500
 msgid "Out of"
 msgstr "Z"
 
-#: pigeonplanner/reports/results.py:66 pigeonplanner/ui/resultwindow.py:82
+#: pigeonplanner/reports/results.py:66 pigeonplanner/ui/resultwindow.py:84
 #: pigeonplanner/ui/tabs/results.py:54 glade/ResultsView.ui:352
-#: glade/OptionsDialog.ui:1051 glade/ResultWindow.ui:204
-#: glade/ExportWindow.ui:126 glade/ResultParser.ui:328
+#: glade/OptionsDialog.ui:1089 glade/ResultWindow.ui:242
+#: glade/ExportWindow.ui:126 glade/ResultParser.ui:330
 msgid "Type"
 msgstr "Typ lotu"
 
-#: pigeonplanner/reports/results.py:67 pigeonplanner/ui/resultwindow.py:83
-#: pigeonplanner/ui/tabs/results.py:55 pigeonplanner/ui/tools/datamanager.py:45
-#: glade/ResultsView.ui:303 glade/OptionsDialog.ui:1103
-#: glade/ResultWindow.ui:218 glade/ResultParser.ui:342
+#: pigeonplanner/reports/results.py:67 pigeonplanner/ui/resultwindow.py:85
+#: pigeonplanner/ui/tabs/results.py:55 pigeonplanner/ui/tools/datamanager.py:47
+#: glade/ResultsView.ui:303 glade/OptionsDialog.ui:1141
+#: glade/ResultWindow.ui:256 glade/ResultParser.ui:344
 msgid "Wind"
 msgstr "Wiatr"
 
-#: pigeonplanner/reports/results.py:68 pigeonplanner/ui/resultwindow.py:85
-#: pigeonplanner/ui/tabs/results.py:57 pigeonplanner/ui/tools/datamanager.py:44
-#: glade/ResultsView.ui:289 glade/OptionsDialog.ui:1060
-#: glade/ResultWindow.ui:232 glade/ResultParser.ui:356
+#: pigeonplanner/reports/results.py:68 pigeonplanner/ui/resultwindow.py:87
+#: pigeonplanner/ui/tabs/results.py:57 pigeonplanner/ui/tools/datamanager.py:46
+#: glade/ResultsView.ui:289 glade/OptionsDialog.ui:1098
+#: glade/ResultWindow.ui:270 glade/ResultParser.ui:358
 msgid "Weather"
 msgstr "Pogoda"
 
@@ -426,101 +441,100 @@ msgstr "Pogoda"
 msgid "Coef."
 msgstr "Coef."
 
-#: pigeonplanner/reports/results.py:70 pigeonplanner/ui/resultwindow.py:96
+#: pigeonplanner/reports/results.py:70 pigeonplanner/ui/resultwindow.py:98
 #: pigeonplanner/ui/tabs/results.py:68 glade/ResultsView.ui:249
-#: glade/OptionsDialog.ui:1036 glade/ResultWindow.ui:490
-#: glade/ResultParser.ui:196
+#: glade/OptionsDialog.ui:1074 glade/ResultWindow.ui:528
+#: glade/ResultParser.ui:198
 msgid "Sector"
 msgstr "Sektor"
 
-#: pigeonplanner/reports/results.py:71 pigeonplanner/ui/resultwindow.py:97
+#: pigeonplanner/reports/results.py:71 pigeonplanner/ui/resultwindow.py:99
 #: pigeonplanner/ui/tabs/results.py:69 glade/ResultsView.ui:366
-#: glade/OptionsDialog.ui:1088 glade/ResultWindow.ui:504
-#: glade/ResultParser.ui:210
+#: glade/OptionsDialog.ui:1126 glade/ResultWindow.ui:542
+#: glade/ResultParser.ui:212
 msgid "Category"
 msgstr "Kategoria"
 
-#: pigeonplanner/reports/results.py:72 pigeonplanner/ui/resultwindow.py:98
+#: pigeonplanner/reports/results.py:72 pigeonplanner/ui/resultwindow.py:100
 #: pigeonplanner/ui/tabs/results.py:70 glade/ResultsView.ui:317
-#: glade/BreedingView.ui:578 glade/BreedingView.ui:935
-#: glade/OptionsDialog.ui:1073 glade/MedicationView.ui:417
-#: glade/MedicationView.ui:775 glade/AddressBook.ui:413
+#: glade/BreedingView.ui:269 glade/BreedingView.ui:1239
+#: glade/OptionsDialog.ui:1111 glade/MedicationView.ui:427
+#: glade/MedicationView.ui:805 glade/AddressBook.ui:420
 msgid "Comment"
 msgstr "Komentarz"
 
 #: pigeonplanner/reports/velocity.py:35 pigeonplanner/reports/velocity.py:46
-#: glade/VelocityCalculator.ui:341 glade/VelocityCalculator.ui:661
-#: glade/VelocityCalculator.ui:1125
+#: glade/VelocityCalculator.ui:202 glade/VelocityCalculator.ui:514
+#: glade/VelocityCalculator.ui:975
 msgid "Velocity"
 msgstr "Prędkość"
 
-#: pigeonplanner/reports/velocity.py:40 glade/VelocityCalculator.ui:700
+#: pigeonplanner/reports/velocity.py:40 glade/VelocityCalculator.ui:556
 msgid "Released"
 msgstr "Wydany"
 
-#: pigeonplanner/reports/velocity.py:41 glade/VelocityCalculator.ui:166
-#: glade/VelocityCalculator.ui:315 glade/VelocityCalculator.ui:685
+#: pigeonplanner/reports/velocity.py:41 glade/VelocityCalculator.ui:176
+#: glade/VelocityCalculator.ui:541 glade/VelocityCalculator.ui:1147
 #: glade/DistanceCalculator.ui:369 glade/RaceManager.ui:191
 msgid "Distance"
 msgstr "Odległość"
 
-#: pigeonplanner/reports/velocity.py:47 glade/VelocityCalculator.ui:1136
+#: pigeonplanner/reports/velocity.py:47 glade/VelocityCalculator.ui:986
 msgid "Flight Time"
 msgstr "Czas lotu"
 
-#: pigeonplanner/reports/velocity.py:48 glade/VelocityCalculator.ui:1147
+#: pigeonplanner/reports/velocity.py:48 glade/VelocityCalculator.ui:997
 msgid "Time of Arrival"
 msgstr "Przylot"
 
-#: pigeonplanner/reports/pedigrees/swapped_details.py:50
-#: pigeonplanner/reports/pedigrees/original.py:64
-#: pigeonplanner/reports/pedigrees/middle.py:43
+#: pigeonplanner/reports/pedigrees/swapped_details.py:49
+#: pigeonplanner/reports/pedigrees/original.py:63
+#: pigeonplanner/reports/pedigrees/middle.py:42
 msgid "Pedigree of:"
 msgstr "Rodowód:"
 
-#: pigeonplanner/ui/filechooser.py:53
+#: pigeonplanner/ui/filechooser.py:55
 msgid "Preview"
 msgstr "Podgląd"
 
-#: pigeonplanner/ui/filechooser.py:78 pigeonplanner/ui/tabs/media.py:110
+#: pigeonplanner/ui/filechooser.py:81 pigeonplanner/ui/tabs/media.py:120
 msgid "Images"
 msgstr "Zdjęcie"
 
-#: pigeonplanner/ui/filechooser.py:140
+#: pigeonplanner/ui/filechooser.py:144
 msgid "Select an image..."
 msgstr "Wybierz zdjęcie..."
 
-#: pigeonplanner/ui/filechooser.py:143
+#: pigeonplanner/ui/filechooser.py:147
 msgid "No image"
 msgstr "Brak zdjęcia"
 
-#: pigeonplanner/ui/filechooser.py:155 pigeonplanner/ui/filechooser.py:235
-#: pigeonplanner/ui/filechooser.py:265
+#: pigeonplanner/ui/filechooser.py:159 pigeonplanner/ui/filechooser.py:255
 msgid "Select a file..."
 msgstr "Wybierz plik..."
 
-#: pigeonplanner/ui/filechooser.py:165
+#: pigeonplanner/ui/filechooser.py:170
 msgid "Title"
 msgstr "Tytuł"
 
-#: pigeonplanner/ui/filechooser.py:169 pigeonplanner/ui/dbmanager.py:51
-#: glade/DBManager.ui:375 glade/MedicationView.ui:50
-#: glade/MedicationView.ui:226 glade/MedicationView.ui:719
+#: pigeonplanner/ui/filechooser.py:174 pigeonplanner/ui/dbmanager.py:52
+#: glade/DBManager.ui:438 glade/MedicationView.ui:60
+#: glade/MedicationView.ui:236 glade/MedicationView.ui:749
 msgid "Description"
 msgstr "Opis"
 
-#: pigeonplanner/ui/filechooser.py:200 pigeonplanner/ui/filechooser.py:213
+#: pigeonplanner/ui/filechooser.py:205 pigeonplanner/ui/filechooser.py:218
 msgid "Save as..."
 msgstr "Zapisz jako..."
 
-#: pigeonplanner/ui/filechooser.py:256
+#: pigeonplanner/ui/filechooser.py:244 pigeonplanner/ui/dbmanager.py:77
 msgid "Select a folder..."
 msgstr "Wybierz folder..."
 
-#: pigeonplanner/ui/optionsdialog.py:53 glade/BreedingView.ui:597
-#: glade/BreedingView.ui:954 glade/OptionsDialog.ui:1696
-#: glade/OptionsDialog.ui:1782 glade/OptionsDialog.ui:1929
-#: glade/DBManager.ui:423
+#: pigeonplanner/ui/optionsdialog.py:53 glade/BreedingView.ui:288
+#: glade/BreedingView.ui:1258 glade/OptionsDialog.ui:1734
+#: glade/OptionsDialog.ui:1820 glade/OptionsDialog.ui:1967
+#: glade/DBManager.ui:488
 msgid "General"
 msgstr "Ogólne"
 
@@ -537,24 +551,24 @@ msgid "Printing"
 msgstr "Drukowanie"
 
 #: pigeonplanner/ui/optionsdialog.py:60 pigeonplanner/ui/gtkmain.py:57
-#: pigeonplanner/ui/pedigreewindow.py:69 pigeonplanner/ui/pedigreewindow.py:77
+#: pigeonplanner/ui/pedigreewindow.py:80 pigeonplanner/ui/pedigreewindow.py:84
 #: pigeonplanner/ui/tabs/pedigree.py:28
 msgid "Pedigree"
 msgstr "Rodowód"
 
-#: pigeonplanner/ui/optionsdialog.py:61 pigeonplanner/ui/tabs/results.py:646
-#: glade/MainWindow.ui:293 glade/ExportWindow.ui:254 glade/ResultParser.ui:224
+#: pigeonplanner/ui/optionsdialog.py:61 pigeonplanner/ui/tabs/results.py:665
+#: glade/MainWindow.ui:25 glade/ExportWindow.ui:254 glade/ResultParser.ui:226
 msgid "Pigeons"
 msgstr "Gołębie"
 
-#: pigeonplanner/ui/optionsdialog.py:62 pigeonplanner/ui/resultwindow.py:228
-#: pigeonplanner/ui/resultwindow.py:416 pigeonplanner/ui/resultwindow.py:578
-#: pigeonplanner/ui/tabs/results.py:538 glade/ResultsView.ui:135
-#: glade/ResultWindow.ui:777
+#: pigeonplanner/ui/optionsdialog.py:62 pigeonplanner/ui/resultwindow.py:230
+#: pigeonplanner/ui/resultwindow.py:421 pigeonplanner/ui/resultwindow.py:592
+#: pigeonplanner/ui/tabs/results.py:549 glade/ResultsView.ui:135
+#: glade/ResultWindow.ui:816
 msgid "Results"
 msgstr "Wyniki"
 
-#: pigeonplanner/ui/optionsdialog.py:64 glade/DBManager.ui:531
+#: pigeonplanner/ui/optionsdialog.py:64 glade/DBManager.ui:596
 msgid "Advanced"
 msgstr "Zaawansowany"
 
@@ -589,8 +603,8 @@ msgstr ""
 msgid "Error Detail"
 msgstr "Szczegóły błędu"
 
-#: pigeonplanner/ui/gtkmain.py:58 glade/OptionsDialog.ui:1320
-#: glade/Dialogs.ui:8 glade/AddressBook.ui:372
+#: pigeonplanner/ui/gtkmain.py:58 glade/OptionsDialog.ui:1358
+#: glade/Dialogs.ui:8 glade/AddressBook.ui:379
 msgid "E-mail"
 msgstr "E-mail"
 
@@ -602,30 +616,42 @@ msgstr "Wyślij"
 msgid "Report"
 msgstr "Raport"
 
-#: pigeonplanner/ui/pedigreewindow.py:88
+#: pigeonplanner/ui/pedigreewindow.py:104
+msgid "Go to the previous pedigree"
+msgstr "Przejdź do poprzedniego rodowodu"
+
+#: pigeonplanner/ui/pedigreewindow.py:106
+msgid "Go to the first selected pedigree"
+msgstr "Przejdź do pierwszego wybranego rodowodu"
+
+#: pigeonplanner/ui/pedigreewindow.py:108
+msgid "Go to the next pedigree"
+msgstr "Przejdź do następnego rodowodu"
+
+#: pigeonplanner/ui/pedigreewindow.py:110
 msgid "Save this pedigree"
 msgstr "Zapisz rodowód"
 
-#: pigeonplanner/ui/pedigreewindow.py:92
+#: pigeonplanner/ui/pedigreewindow.py:114
 msgid "View this pedigree"
 msgstr "Zaobacz rodowód"
 
-#: pigeonplanner/ui/pedigreewindow.py:94 glade/MainWindow.ui:66
+#: pigeonplanner/ui/pedigreewindow.py:116 glade/MainWindow.ui:255
 msgid "Print this pedigree"
 msgstr "Drukuj rodowód"
 
-#: pigeonplanner/ui/pedigreewindow.py:96
-#: pigeonplanner/reportlib/gui/printpreview.py:65 glade/ResultWindow.ui:47
-#: glade/PhotoAlbum.ui:29
+#: pigeonplanner/ui/pedigreewindow.py:118
+#: pigeonplanner/reportlib/gui/printpreview.py:65 glade/ResultWindow.ui:16
+#: glade/PhotoAlbum.ui:50
 msgid "Close this window"
 msgstr "Zamknij okno"
 
-#: pigeonplanner/ui/pedigreewindow.py:194
+#: pigeonplanner/ui/pedigreewindow.py:229
 #, python-format
 msgid "Cannot find image '%s'"
 msgstr "Nie można znaleźć zdjęcia '%s'"
 
-#: pigeonplanner/ui/pedigreewindow.py:195
+#: pigeonplanner/ui/pedigreewindow.py:230
 msgid ""
 "You need to edit the pigeon and select the correct path or restore the "
 "original image on your computer."
@@ -633,44 +659,48 @@ msgstr ""
 "Musisz edytować gołębia i wybrać właściwą ścieżkę lub przywrócić oryginalny "
 "obraz na komputerze."
 
-#: pigeonplanner/ui/pedigreewindow.py:212 pigeonplanner/ui/resultwindow.py:770
+#: pigeonplanner/ui/pedigreewindow.py:247 pigeonplanner/ui/resultwindow.py:783
 msgid "You probably don't have write permissions on this folder."
 msgstr "Prawdopodobnie nie masz uprawnień do zapisu w tym folderze."
 
-#: pigeonplanner/ui/resultwindow.py:84 pigeonplanner/ui/tabs/results.py:56
-#: glade/ResultsView.ui:656 glade/OptionsDialog.ui:1116
-#: glade/ResultParser.ui:427
+#: pigeonplanner/ui/resultwindow.py:86 pigeonplanner/ui/tabs/results.py:56
+#: glade/ResultsView.ui:656 glade/OptionsDialog.ui:1154
+#: glade/ResultParser.ui:429
 msgid "Windspeed"
 msgstr "Prędkość wiatru"
 
-#: pigeonplanner/ui/resultwindow.py:86 pigeonplanner/ui/tabs/results.py:58
-#: glade/ResultsView.ui:727 glade/OptionsDialog.ui:1144
-#: glade/ResultParser.ui:460
+#: pigeonplanner/ui/resultwindow.py:88 pigeonplanner/ui/tabs/results.py:58
+#: glade/ResultsView.ui:727 glade/OptionsDialog.ui:1182
+#: glade/ResultParser.ui:462
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: pigeonplanner/ui/resultwindow.py:88 pigeonplanner/ui/dialogs.py:256
-#: pigeonplanner/ui/tabs/results.py:60 pigeonplanner/ui/tabs/relatives.py:163
-#: pigeonplanner/ui/widgets/treeview.py:283 glade/MainWindow.ui:877
-#: glade/ResultParser.ui:587
+#: pigeonplanner/ui/resultwindow.py:90 pigeonplanner/ui/dialogs.py:230
+#: pigeonplanner/ui/tabs/results.py:60 pigeonplanner/ui/tabs/relatives.py:171
+#: pigeonplanner/ui/widgets/bandentry.py:69
+#: pigeonplanner/ui/widgets/bandentry.py:203
+#: pigeonplanner/ui/widgets/bandentry.py:301
+#: pigeonplanner/ui/widgets/bandentry.py:323
+#: pigeonplanner/ui/widgets/treeview.py:341 glade/MainWindow.ui:912
+#: glade/ResultParser.ui:589
 msgid "Year"
 msgstr "Rok"
 
-#: pigeonplanner/ui/resultwindow.py:92 pigeonplanner/ui/resultwindow.py:93
+#: pigeonplanner/ui/resultwindow.py:94 pigeonplanner/ui/resultwindow.py:95
 #: pigeonplanner/ui/tabs/results.py:64 pigeonplanner/ui/tabs/results.py:65
-#: glade/OptionsDialog.ui:1023 glade/ResultWindow.ui:476
+#: glade/OptionsDialog.ui:1061 glade/ResultWindow.ui:514
 msgid "Coefficient"
 msgstr "Coefficient"
 
-#: pigeonplanner/ui/resultwindow.py:94 pigeonplanner/ui/resultwindow.py:95
+#: pigeonplanner/ui/resultwindow.py:96 pigeonplanner/ui/resultwindow.py:97
 #: pigeonplanner/ui/tabs/results.py:66 pigeonplanner/ui/tabs/results.py:67
-#: glade/ResultsView.ui:690 glade/OptionsDialog.ui:1129
-#: glade/ResultParser.ui:613
+#: glade/ResultsView.ui:690 glade/OptionsDialog.ui:1167
+#: glade/ResultParser.ui:615
 msgid "Speed"
 msgstr "Prędkość"
 
-#: pigeonplanner/ui/resultwindow.py:393 pigeonplanner/ui/tabs/results.py:363
-#: glade/ResultWindow.ui:382
+#: pigeonplanner/ui/resultwindow.py:398 pigeonplanner/ui/tabs/results.py:362
+#: glade/ResultWindow.ui:420
 msgid "Races"
 msgstr "Wyścigi"
 
@@ -691,15 +721,20 @@ msgstr "Narzędzie to wymaga Yapsy aby funkcjonować poprawnie."
 msgid "This result is not in the '%s' format. Do you want to continue?"
 msgstr "Wynik ten nie jest w formacie '%s'. Czy chcesz kontynuować?"
 
-#: pigeonplanner/ui/resultparser.py:122
+#: pigeonplanner/ui/resultparser.py:128
 msgid "The date, racepoint or number of pigeons is incorrect."
 msgstr "Data, punkt startu lub liczba gołębi jest nieprawidłowa."
 
-#: pigeonplanner/ui/detailsview.py:54 glade/DetailsView.ui:1015
+#: pigeonplanner/ui/resultparser.py:178
+msgid "Failed to send report."
+msgstr "Błąd wysłania raportu."
+
+#: pigeonplanner/ui/detailsview.py:73 glade/DetailsView.ui:447
+#: glade/DetailsView.ui:932
 msgid "Details of pigeon"
 msgstr "Szczegóły gołębia"
 
-#: pigeonplanner/ui/detailsview.py:56
+#: pigeonplanner/ui/detailsview.py:76
 #, python-format
 msgid "Details of %s"
 msgstr "Szczegóły %s"
@@ -714,21 +749,26 @@ msgstr "Gołąb %s został dodany"
 msgid "Pigeon %s has been removed"
 msgstr "Gołąb %s został usunięty."
 
-#: pigeonplanner/ui/mainwindow.py:394
+#: pigeonplanner/ui/mainwindow.py:392
 #, python-format
 msgid "%s pigeons have been removed"
 msgstr "%s gołębie zostały usunięte"
 
-#: pigeonplanner/ui/mainwindow.py:514 glade/MainWindow.ui:236
+#: pigeonplanner/ui/mainwindow.py:515 glade/MainWindow.ui:81
 msgid "Search for updates..."
 msgstr "Szukaj uaktualnień..."
 
-#: pigeonplanner/ui/mainwindow.py:516
+#: pigeonplanner/ui/mainwindow.py:517
 msgid "Go to the website?"
 msgstr "Strona www.?"
 
+#: pigeonplanner/ui/mainwindow.py:598 pigeonplanner/ui/dialogs.py:182
+#: glade/Backup.ui:55
+msgid "Restore"
+msgstr "Przywrócić"
+
 #: pigeonplanner/ui/locationchooser.py:57
-#: pigeonplanner/ui/tools/distancecalculator.py:51
+#: pigeonplanner/ui/tools/distancecalculator.py:53
 msgid "This tool needs Geopy 0.95.0 or higher to run correctly."
 msgstr ""
 "Narzędzie to wymaga Geopy 0.95.0 lub wyższej, aby funkcjonować poprawnie."
@@ -738,19 +778,19 @@ msgstr ""
 msgid "Can't find location '%s'"
 msgstr "Nie można znaleźć lokalizacji '%s'"
 
-#: pigeonplanner/ui/dbmanager.py:41
+#: pigeonplanner/ui/exportwindow.py:80
+msgid "The selected path is not writeable."
+msgstr "Wybrana ścieżka jest niezapisywalna."
+
+#: pigeonplanner/ui/dbmanager.py:42
 msgid "Select a database file..."
 msgstr "Wybierz plik bazy danych..."
 
-#: pigeonplanner/ui/dbmanager.py:44
+#: pigeonplanner/ui/dbmanager.py:45
 msgid "Pigeon Planner database"
 msgstr "Baza danych Pigeon Planner"
 
-#: pigeonplanner/ui/dbmanager.py:92
-msgid "Select a directory..."
-msgstr "Wybierz katalog..."
-
-#: pigeonplanner/ui/dbmanager.py:303
+#: pigeonplanner/ui/dbmanager.py:355
 msgid ""
 "It's not allowed to close the database manager when no database is opened."
 msgstr ""
@@ -760,7 +800,7 @@ msgstr ""
 msgid "Logfile Viewer"
 msgstr "Logfile Viewer"
 
-#: pigeonplanner/ui/dialogs.py:58
+#: pigeonplanner/ui/dialogs.py:57
 msgid "translator-credits"
 msgstr ""
 "Tłumaczenie\n"
@@ -772,91 +812,85 @@ msgstr ""
 "  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
 "  dar12ek https://launchpad.net/~dar-tom-wgc"
 
-#: pigeonplanner/ui/dialogs.py:68 glade/MainWindow.ui:244
+#: pigeonplanner/ui/dialogs.py:67 glade/MainWindow.ui:74
 msgid "General information"
 msgstr "Informacje ogólne"
 
-#: pigeonplanner/ui/dialogs.py:93
+#: pigeonplanner/ui/dialogs.py:92
 msgid "Technical details"
 msgstr "Dane techniczne"
 
-#: pigeonplanner/ui/dialogs.py:96
+#: pigeonplanner/ui/dialogs.py:95
 msgid "Data information"
 msgstr "Dane informacji"
 
-#: pigeonplanner/ui/dialogs.py:113
+#: pigeonplanner/ui/dialogs.py:112
 msgid "Number of pigeons"
 msgstr "Liczba gołębi"
 
-#: pigeonplanner/ui/dialogs.py:114 glade/MainWindow.ui:427
+#: pigeonplanner/ui/dialogs.py:113 glade/MainWindow.ui:430
 msgid "Cocks"
 msgstr "Samce"
 
-#: pigeonplanner/ui/dialogs.py:116 glade/MainWindow.ui:459
+#: pigeonplanner/ui/dialogs.py:115 glade/MainWindow.ui:462
 msgid "Hens"
 msgstr "Samice"
 
-#: pigeonplanner/ui/dialogs.py:118 glade/MainWindow.ui:491
+#: pigeonplanner/ui/dialogs.py:117 glade/MainWindow.ui:494
 msgid "Young birds"
 msgstr "Młode gołębie"
 
-#: pigeonplanner/ui/dialogs.py:124
+#: pigeonplanner/ui/dialogs.py:119 pigeonplanner/core/enums.py:29
+#: glade/MainWindow.ui:526
+msgid "Unknown"
+msgstr "Nieznany"
+
+#: pigeonplanner/ui/dialogs.py:130
 msgid "Number of results"
 msgstr "Liczba wyników"
 
-#: pigeonplanner/ui/dialogs.py:125
+#: pigeonplanner/ui/dialogs.py:131
 msgid "Number of couples"
 msgstr "Ilość par"
 
-#: pigeonplanner/ui/dialogs.py:148
+#: pigeonplanner/ui/dialogs.py:154 glade/Backup.ui:255
 msgid "Create backup"
 msgstr "Tworzenie kopii zapasowej"
 
-#: pigeonplanner/ui/dialogs.py:149
+#: pigeonplanner/ui/dialogs.py:155
 msgid "Choose a directory where to save the backup"
 msgstr "Wybierz katalog, w którym zapisać kopię zapasową"
 
-#: pigeonplanner/ui/dialogs.py:155 glade/OptionsDialog.ui:386
+#: pigeonplanner/ui/dialogs.py:161 glade/OptionsDialog.ui:396
+#: glade/Backup.ui:100 glade/Backup.ui:291
 msgid "Backup"
 msgstr "Kopia zapasowa"
 
-#: pigeonplanner/ui/dialogs.py:164
+#: pigeonplanner/ui/dialogs.py:170 glade/Backup.ui:19
 msgid "Restore backup"
 msgstr "Przywracanie kopii zapasowych"
 
-#: pigeonplanner/ui/dialogs.py:165
+#: pigeonplanner/ui/dialogs.py:171
 msgid "Choose a Pigeon Planner backup file to restore"
 msgstr "Wybierz plik kopii zapasowej Pigeon Planner, aby przywrócić"
 
-#: pigeonplanner/ui/dialogs.py:168
+#: pigeonplanner/ui/dialogs.py:174
 msgid "Warning! This will overwrite the existing database!"
 msgstr "Uwaga! Spowoduje to zastąpienie istniejącej bazy danych!"
 
-#: pigeonplanner/ui/dialogs.py:176
-msgid "Restore"
-msgstr "Przywrócić"
-
-#: pigeonplanner/ui/dialogs.py:217
-msgid "Removing the selected medication entry"
-msgstr "Usunięcie wybranej pozycji leków"
-
-#: pigeonplanner/ui/dialogs.py:219
-msgid "Remove this entry for all pigeons?"
-msgstr "Usuń ten wpis dla wszystkich gołębi?"
-
-#: pigeonplanner/ui/dialogs.py:241
+#: pigeonplanner/ui/dialogs.py:215
 msgid "Search a pigeon"
 msgstr "Szukaj gołębia"
 
-#: pigeonplanner/ui/dialogs.py:274 glade/MainWindow.ui:300
+#: pigeonplanner/ui/dialogs.py:248 glade/MainWindow.ui:18
 msgid "Show all pigeons"
 msgstr "Pokaż wszystkie gołębie"
 
-#: pigeonplanner/ui/tabs/media.py:39 glade/MediaView.ui:56
+#: pigeonplanner/ui/tabs/media.py:44 glade/MediaView.ui:68
 msgid "Media"
 msgstr "Media"
 
-#: pigeonplanner/ui/tabs/media.py:114 glade/OptionsDialog.ui:786
+#: pigeonplanner/ui/tabs/media.py:124 glade/OptionsDialog.ui:796
 msgid "Other"
 msgstr "Inne"
 
@@ -868,8 +902,16 @@ msgstr "<b>Rodowód ojca</b>"
 msgid "<b>Pedigree dam</b>"
 msgstr "<b>Rodowód matki</b>"
 
-#: pigeonplanner/ui/tabs/medication.py:37 glade/MedicationView.ui:278
-#: glade/MedicationView.ui:512 glade/MedicationView.ui:747
+#: pigeonplanner/ui/tabs/medication.py:53
+msgid "Removing the selected medication entry"
+msgstr "Usunięcie wybranej pozycji leków"
+
+#: pigeonplanner/ui/tabs/medication.py:54
+msgid "Remove this entry for all pigeons?"
+msgstr "Usuń ten wpis dla wszystkich gołębi?"
+
+#: pigeonplanner/ui/tabs/medication.py:77 glade/MedicationView.ui:288
+#: glade/MedicationView.ui:542 glade/MedicationView.ui:777
 msgid "Medication"
 msgstr "Leki"
 
@@ -877,23 +919,23 @@ msgstr "Leki"
 msgid "Breeding"
 msgstr "Rozpłód"
 
-#: pigeonplanner/ui/tabs/results.py:192 pigeonplanner/ui/tabs/results.py:385
+#: pigeonplanner/ui/tabs/results.py:202 pigeonplanner/ui/tabs/results.py:384
 msgid "Results of pigeon"
 msgstr "Wyniki gołębi"
 
-#: pigeonplanner/ui/tabs/results.py:561
+#: pigeonplanner/ui/tabs/results.py:575
 msgid "Add to pedigree details"
 msgstr "Dodaj do szczegółów rodowodowych"
 
-#: pigeonplanner/ui/tabs/results.py:654
+#: pigeonplanner/ui/tabs/results.py:674
 msgid "No empty space found in pedigree details."
 msgstr "Nie znaleziono pustej przestrzeni w szczegółach rodowodowych."
 
-#: pigeonplanner/ui/tabs/results.py:731
+#: pigeonplanner/ui/tabs/results.py:756
 msgid "Edit result for:"
 msgstr "Edytuj wynik:"
 
-#: pigeonplanner/ui/tabs/results.py:731
+#: pigeonplanner/ui/tabs/results.py:756
 msgid "Add result for:"
 msgstr "Dodaj wynik:"
 
@@ -913,71 +955,125 @@ msgstr "<b>Pół bracia i siostry</b>"
 msgid "<b>Offspring</b>"
 msgstr "<b>Potomstwo</b>"
 
-#: pigeonplanner/ui/tabs/relatives.py:167
+#: pigeonplanner/ui/tabs/relatives.py:175
 msgid "Common parent"
 msgstr "Wspólny rodzic"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:169
+#: pigeonplanner/ui/widgets/bandentry.py:60
+#: pigeonplanner/ui/widgets/bandentry.py:200
+#: pigeonplanner/ui/widgets/bandentry.py:292
+#: pigeonplanner/ui/widgets/bandentry.py:323 glade/AddressBook.ui:297
+msgid "Country"
+msgstr "Kraj"
+
+#: pigeonplanner/ui/widgets/bandentry.py:63
+#: pigeonplanner/ui/widgets/bandentry.py:201
+#: pigeonplanner/ui/widgets/bandentry.py:295
+#: pigeonplanner/ui/widgets/bandentry.py:323
+msgid "Letters"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:66
+#: pigeonplanner/ui/widgets/bandentry.py:202
+#: pigeonplanner/ui/widgets/bandentry.py:298
+#: pigeonplanner/ui/widgets/bandentry.py:323
+msgid "Number"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:84
+#: pigeonplanner/ui/widgets/bandentry.py:338
+msgid "Information"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:204
+msgid "Year (short)"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:205
+msgid "Empty"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:323
+msgid "The fields are:"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:325
+msgid "The number and year fields are required."
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:327
+msgid "The year has to be four digits long."
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:365
+msgid "Make this format the default"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:375
+msgid "Band format"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/comboboxes.py:170
 msgid "Yards"
 msgstr "Yards"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:170
+#: pigeonplanner/ui/widgets/comboboxes.py:171
 msgid "Kilometres"
 msgstr "Kilometr"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:171
+#: pigeonplanner/ui/widgets/comboboxes.py:172
 msgid "Metres"
 msgstr "Metr"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:172
+#: pigeonplanner/ui/widgets/comboboxes.py:173
 msgid "Centimetres"
 msgstr "Centymetr"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:173
+#: pigeonplanner/ui/widgets/comboboxes.py:174
 msgid "Inches"
 msgstr "Cale"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:174
+#: pigeonplanner/ui/widgets/comboboxes.py:175
 msgid "Feet"
 msgstr "Stopa"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:175
+#: pigeonplanner/ui/widgets/comboboxes.py:176
 msgid "Miles"
 msgstr "Mila"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:176
+#: pigeonplanner/ui/widgets/comboboxes.py:177
 msgid "Nautical Miles"
 msgstr "Mile morskie"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:199
+#: pigeonplanner/ui/widgets/comboboxes.py:200
 msgid "Yard per Minute"
 msgstr "Yard na minutę"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:200
+#: pigeonplanner/ui/widgets/comboboxes.py:201
 msgid "Metres per Minute"
 msgstr "Metrów na minutę"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:201
+#: pigeonplanner/ui/widgets/comboboxes.py:202
 msgid "Metres per Second"
 msgstr "Metrów na sekundę"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:202
+#: pigeonplanner/ui/widgets/comboboxes.py:203
 msgid "Kilometre per Hour"
 msgstr "Kilometry na godz"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:203
+#: pigeonplanner/ui/widgets/comboboxes.py:204
 msgid "Feet per Second"
 msgstr "Stopy na sekundę"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:204
+#: pigeonplanner/ui/widgets/comboboxes.py:205
 msgid "Feet per Minute"
 msgstr "Stopy na minute"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:205
+#: pigeonplanner/ui/widgets/comboboxes.py:206
 msgid "Mile per Hour"
 msgstr "Mile na godz"
 
-#: pigeonplanner/ui/widgets/latlongentry.py:38
+#: pigeonplanner/ui/widgets/latlongentry.py:39
 msgid ""
 "Input should be in one of these formats:\n"
 "  DD.dddddd°\n"
@@ -994,54 +1090,53 @@ msgstr ""
 msgid "Pigeons: %s"
 msgstr "Gołębie: %s"
 
-#: pigeonplanner/ui/widgets/statusbar.py:42
+#: pigeonplanner/ui/widgets/statusbar.py:43
 #, python-format
 msgid "Filter: %s"
 msgstr "Filtr: %s"
 
-#: pigeonplanner/ui/widgets/statusbar.py:43
+#: pigeonplanner/ui/widgets/statusbar.py:44
 msgid "On"
 msgstr "Wł"
 
-#: pigeonplanner/ui/widgets/statusbar.py:44
+#: pigeonplanner/ui/widgets/statusbar.py:45
 msgid "Off"
 msgstr "Wył"
 
-#: pigeonplanner/ui/widgets/pedigreeboxes.py:72
-#: pigeonplanner/ui/widgets/pedigreeboxes.py:275
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:71
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:268
 msgid "<edit>"
 msgstr "<edycja>"
 
-#: pigeonplanner/ui/tools/datamanager.py:37
+#: pigeonplanner/ui/tools/datamanager.py:39
 msgid "Colours"
 msgstr "Kolor"
 
-#: pigeonplanner/ui/tools/datamanager.py:38
+#: pigeonplanner/ui/tools/datamanager.py:40
 msgid "Sectors"
 msgstr "Sektory"
 
-#: pigeonplanner/ui/tools/datamanager.py:39
+#: pigeonplanner/ui/tools/datamanager.py:41
 msgid "Types"
 msgstr "Typ"
 
-#: pigeonplanner/ui/tools/datamanager.py:40
+#: pigeonplanner/ui/tools/datamanager.py:42
 msgid "Categories"
 msgstr "Kategoria"
 
-#: pigeonplanner/ui/tools/datamanager.py:41
-#: pigeonplanner/ui/tools/datamanager.py:72 glade/VelocityCalculator.ui:65
+#: pigeonplanner/ui/tools/datamanager.py:43 glade/VelocityCalculator.ui:1048
 msgid "Racepoints"
 msgstr "Miejsce puszczania"
 
-#: pigeonplanner/ui/tools/datamanager.py:42
+#: pigeonplanner/ui/tools/datamanager.py:44
 msgid "Strains"
 msgstr "Szczepy"
 
-#: pigeonplanner/ui/tools/datamanager.py:43
+#: pigeonplanner/ui/tools/datamanager.py:45
 msgid "Lofts"
 msgstr "Loty"
 
-#: pigeonplanner/ui/tools/distancecalculator.py:70
+#: pigeonplanner/ui/tools/distancecalculator.py:72
 msgid ""
 "The latitude and longitude need to be in DD.dddddd° format to use this "
 "function."
@@ -1049,7 +1144,7 @@ msgstr ""
 "Długość i szerokość geograficzna muszą być w formacie DD.dddddd° aby "
 "skorzystać z tej funkcji."
 
-#: pigeonplanner/ui/tools/distancecalculator.py:173
+#: pigeonplanner/ui/tools/distancecalculator.py:175
 msgid "Custom"
 msgstr "Niestandardowy"
 
@@ -1126,24 +1221,24 @@ msgstr "Powiększa się strona"
 msgid "of %d"
 msgstr "z %d"
 
-#: pigeonplanner/database/manager.py:77
+#: pigeonplanner/database/manager.py:76
 msgid "My pigeons"
 msgstr "Moje gołębie"
 
-#: pigeonplanner/database/manager.py:78
+#: pigeonplanner/database/manager.py:77
 msgid "My default database"
 msgstr "Moja domyślna baza danych"
 
-#: pigeonplanner/database/manager.py:161
+#: pigeonplanner/database/manager.py:160
 msgid "This database is already added."
 msgstr "Ta baza danych jest już dodana."
 
-#: pigeonplanner/database/manager.py:180
+#: pigeonplanner/database/manager.py:179
 #, python-format
 msgid "Database path '%s' is not writeable."
 msgstr "Ścieżka bazy danych '%s' nie jest zapisywalna."
 
-#: pigeonplanner/database/manager.py:201
+#: pigeonplanner/database/manager.py:200 pigeonplanner/database/manager.py:255
 #, python-format
 msgid ""
 "Moving the database failed with message:\n"
@@ -1152,371 +1247,371 @@ msgstr ""
 "Przenoszenie bazy danych nie powiodło się z komunikatem:\n"
 "%s"
 
-#: pigeonplanner/database/manager.py:221
+#: pigeonplanner/database/manager.py:220
 msgid "Unable to remove the database: permission denied"
 msgstr "Nie można usunąć bazy danych: brak uprawnień do zapisu"
 
-#: pigeonplanner/database/manager.py:266
+#: pigeonplanner/database/manager.py:232 pigeonplanner/database/manager.py:233
+msgid "copy"
+msgstr "kopia"
+
+#: pigeonplanner/database/manager.py:293
 msgid "Database name is required."
 msgstr "Wymagana jest nazwa bazy danych."
 
-#: pigeonplanner/database/manager.py:269
+#: pigeonplanner/database/manager.py:296
 #, python-format
 msgid "Database name '%s' already exists."
 msgstr "Nazwa bazy danych '%s' już istnieje."
 
-#: pigeonplanner/core/common.py:43
-msgid "Cock"
-msgstr "Gołąb"
-
-#: pigeonplanner/core/common.py:44
-msgid "Hen"
-msgstr "Gołębica"
-
-#: pigeonplanner/core/common.py:45
-msgid "Young bird"
-msgstr "Młody ptak"
-
-#: pigeonplanner/core/common.py:55
-msgid "Dead"
-msgstr "Zmarł"
-
-#: pigeonplanner/core/common.py:56
-msgid "Active"
-msgstr "Aktywny"
-
-#: pigeonplanner/core/common.py:57
-msgid "Sold"
-msgstr "Sprzedany"
-
-#: pigeonplanner/core/common.py:58
-msgid "Lost"
-msgstr "Zaginoł"
-
-#: pigeonplanner/core/common.py:59
-msgid "Breeder"
-msgstr "Rozpłód"
-
-#: pigeonplanner/core/common.py:60
-msgid "On loan"
-msgstr "Wypożyczony"
-
-#: pigeonplanner/core/common.py:61
-msgid "Widow"
-msgstr "Wdowa/wdowiec"
-
-#: pigeonplanner/core/common.py:238
+#: pigeonplanner/core/common.py:187
 msgid "Error: This file does not exist"
 msgstr "Błąd: Plik nie istnieje"
 
-#: pigeonplanner/core/common.py:245
+#: pigeonplanner/core/common.py:194
 msgid "Error opening file:"
 msgstr "Błąd podczas otwierania pliku:"
 
-#: glade/MainWindow.ui:10
-msgid "View online help"
-msgstr "Wyświetl pomoc on-line"
+#: pigeonplanner/core/enums.py:26
+msgid "Cock"
+msgstr "Gołąb"
 
-#: glade/MainWindow.ui:18
-msgid "Select all"
-msgstr "Zaznacz wszystko"
+#: pigeonplanner/core/enums.py:27
+msgid "Hen"
+msgstr "Gołębica"
 
-#: glade/MainWindow.ui:19
-msgid "Select all pigeons"
-msgstr "Zaznacz wszystkie gołębie"
+#: pigeonplanner/core/enums.py:28
+msgid "Young bird"
+msgstr "Młody ptak"
 
-#: glade/MainWindow.ui:25
-msgid "_File"
-msgstr "_Plik"
+#: pigeonplanner/core/enums.py:47
+msgid "Dead"
+msgstr "Zmarł"
 
-#: glade/MainWindow.ui:35 glade/MainWindow.ui:79
-msgid "_Backup"
-msgstr "_Kopia"
+#: pigeonplanner/core/enums.py:48
+msgid "Active"
+msgstr "Aktywny"
 
-#: glade/MainWindow.ui:40
-msgid "_Pigeon"
-msgstr "_Gołąb"
+#: pigeonplanner/core/enums.py:49
+msgid "Sold"
+msgstr "Sprzedany"
 
-#: glade/MainWindow.ui:45
-msgid "_Edit"
-msgstr "_Edytuj"
+#: pigeonplanner/core/enums.py:50
+msgid "Lost"
+msgstr "Zaginoł"
 
-#: glade/MainWindow.ui:50
-msgid "_View"
-msgstr "_Widok"
+#: pigeonplanner/core/enums.py:51
+msgid "Breeder"
+msgstr "Rozpłód"
 
-#: glade/MainWindow.ui:55
-msgid "_Tools"
-msgstr "_Narzędzia"
+#: pigeonplanner/core/enums.py:52
+msgid "On loan"
+msgstr "Wypożyczony"
 
-#: glade/MainWindow.ui:60
-msgid "_Help"
-msgstr "_Pomoc"
+#: pigeonplanner/core/enums.py:53
+msgid "Widow"
+msgstr "Wdowa/wdowiec"
 
-#: glade/MainWindow.ui:65 glade/MainWindow.ui:145
-msgid "_Pedigree"
-msgstr "_Rodowód"
-
-#: glade/MainWindow.ui:72
-msgid "Blank pedigree"
-msgstr "Czysty rodowód"
-
-#: glade/MainWindow.ui:73
-msgid "Print a blank pedigree"
-msgstr "Drukuj czysty rodowód"
-
-#: glade/MainWindow.ui:80
-msgid "Create a backup of your database"
-msgstr "Tworzenie kopii zapasowej bazy danych"
-
-#: glade/MainWindow.ui:87
-msgid "_Restore"
-msgstr "_Przywrócić"
-
-#: glade/MainWindow.ui:88
-msgid "Restore a backup of your database"
-msgstr "Przywracanie kopii zapasowej bazy danych"
-
-#: glade/MainWindow.ui:95
-msgid "Quit the program"
-msgstr "Zamknij program"
-
-#: glade/MainWindow.ui:103
-msgid "Add a new pigeon"
-msgstr "Dodaj nowego gołębia"
-
-#: glade/MainWindow.ui:111
-msgid "Add range"
-msgstr "Dodaj wybór"
-
-#: glade/MainWindow.ui:112 glade/MainWindow.ui:727
-msgid "Add a range of pigeons"
-msgstr "Dodaj szereg gołębi"
-
-#: glade/MainWindow.ui:120
-msgid "_Logfile Viewer"
-msgstr "_Przejrzyj logi"
-
-#: glade/MainWindow.ui:121
-msgid "See the logfile"
-msgstr "Zobacz logi"
-
-#: glade/MainWindow.ui:129
-msgid "Edit the selected pigeon"
-msgstr "Edycja wybranego gołębia"
-
-#: glade/MainWindow.ui:137
-msgid "Remove the selected pigeon"
-msgstr "Usuń wybrane gołębie"
-
-#: glade/MainWindow.ui:146
-msgid "View the detailed pedigree of this pigeon"
-msgstr "Zobacz szczegółowy rodowód tego gołębia"
-
-#: glade/MainWindow.ui:154
-msgid "Add resul_t"
-msgstr "Dodaj rezul_tat"
-
-#: glade/MainWindow.ui:155
-msgid "Add a new result for this pigeon"
-msgstr "Dodaj nowy wynik dla tego gołębia"
-
-#: glade/MainWindow.ui:162
-msgid "Configure the application"
-msgstr "Konfiguracja programu"
-
-#: glade/MainWindow.ui:170
-msgid "_Filter..."
-msgstr "_Filter..."
-
-#: glade/MainWindow.ui:171 glade/ResultWindow.ui:40
-msgid "Set filter options"
-msgstr "Ustaw opcje filtru"
-
-#: glade/MainWindow.ui:178 glade/VelocityCalculator.ui:238
-msgid "Velocity calculator"
-msgstr "Kalkulator prędkości"
-
-#: glade/MainWindow.ui:179
-msgid "Calculate the velocity of flights"
-msgstr "Obliczyć prędkość lotów"
-
-#: glade/MainWindow.ui:185 glade/DistanceCalculator.ui:26
-msgid "Distance calculator"
-msgstr "Kalkulator odległości"
-
-#: glade/MainWindow.ui:186
-msgid "Calculate the distance between locations"
-msgstr "Oblicz dystans miedzy lokalizacjami"
-
-#: glade/MainWindow.ui:192 glade/RaceManager.ui:20
-msgid "Racepoint manager"
-msgstr "Menadżer punktów startowych"
-
-#: glade/MainWindow.ui:193
-msgid "Manage the racepoints and distances"
-msgstr "Zarządzanie miejscami startu i odległościami"
-
-#: glade/MainWindow.ui:199
-msgid "Photo album"
-msgstr "Album zdjęć"
-
-#: glade/MainWindow.ui:200
-msgid "View the images of your pigeons"
-msgstr "Zobacz zdjęcia swoich gołębi"
-
-#: glade/MainWindow.ui:206 glade/AddressBook.ui:9
-msgid "Address book"
-msgstr "Książka adresowa"
-
-#: glade/MainWindow.ui:207
-msgid "View the address book"
-msgstr "Książka adresowa"
-
-#: glade/MainWindow.ui:213 glade/DataManager.ui:26
-msgid "Data manager"
-msgstr "Menedżer danych"
-
-#: glade/MainWindow.ui:214
-msgid "Manage your data"
-msgstr "Zarządzanie danymi"
-
-#: glade/MainWindow.ui:220
-msgid "Website"
-msgstr "Strona www"
-
-#: glade/MainWindow.ui:221
-msgid "Go to the website for more information"
-msgstr "Przejdź do witryny więcej informacji"
-
-#: glade/MainWindow.ui:228
-msgid "Forum"
-msgstr "Forum"
-
-#: glade/MainWindow.ui:229
-msgid "Go to the forum for online help"
-msgstr "Przejdź do forum do pomocy online"
-
-#: glade/MainWindow.ui:237
-msgid "Search online for program updates"
-msgstr "Szukaj w internecie  aktualizacji programu"
-
-#: glade/MainWindow.ui:251
-msgid "About this application"
-msgstr "O programie"
-
-#: glade/MainWindow.ui:258
-msgid "Navigation arrows"
-msgstr "Strzałki nawigacyjne"
-
-#: glade/MainWindow.ui:259 glade/OptionsDialog.ui:591
-msgid "Show or hide the navigation arrows"
-msgstr "Pokaż lub ukryj strzałki nawigacyjne"
-
-#: glade/MainWindow.ui:265
-msgid "Statistics"
-msgstr "Statystyka"
-
-#: glade/MainWindow.ui:266 glade/OptionsDialog.ui:605
-msgid "Show or hide pigeon statistics"
-msgstr "Pokazywanie lub ukrywanie statystyk gołębi"
-
-#: glade/MainWindow.ui:272
-msgid "Toolbar"
-msgstr "Pasek narzędzi"
-
-#: glade/MainWindow.ui:273 glade/OptionsDialog.ui:619
-msgid "Show or hide the toolbar"
-msgstr "Pokazywanie lub ukrywanie paska narzędzi"
-
-#: glade/MainWindow.ui:279
-msgid "Statusbar"
-msgstr "Pasek stanu"
-
-#: glade/MainWindow.ui:280 glade/OptionsDialog.ui:633
-msgid "Show or hide the statusbar"
-msgstr "Pokazywanie lub ukrywanie paska stanu"
-
-#: glade/MainWindow.ui:286
-msgid "Export..."
-msgstr "Eksportuj..."
-
-#: glade/MainWindow.ui:287
-msgid "Export data to other formats"
-msgstr "Eksport danych do innych formatów"
-
-#: glade/MainWindow.ui:294
-msgid "Print a list of pigeons"
-msgstr "Wydrukuj listę gołębi"
-
-#: glade/MainWindow.ui:301
-msgid "Show all pigeons in the list"
-msgstr "Pokaż wszystkie gołębie na liście"
-
-#: glade/MainWindow.ui:307 glade/DBManager.ui:8
+#: glade/MainWindow.ui:10 glade/DBManager.ui:25
 msgid "Database manager"
 msgstr "Menedżer bazy danych"
 
-#: glade/MainWindow.ui:308
+#: glade/MainWindow.ui:11
 msgid "Manage your databases"
 msgstr "Zarządzanie bazami danych"
 
-#: glade/MainWindow.ui:399
+#: glade/MainWindow.ui:19
+msgid "Show all pigeons in the list"
+msgstr "Pokaż wszystkie gołębie na liście"
+
+#: glade/MainWindow.ui:26
+msgid "Print a list of pigeons"
+msgstr "Wydrukuj listę gołębi"
+
+#: glade/MainWindow.ui:32
+msgid "Export..."
+msgstr "Eksportuj..."
+
+#: glade/MainWindow.ui:33
+msgid "Export data to other formats"
+msgstr "Eksport danych do innych formatów"
+
+#: glade/MainWindow.ui:39
+msgid "Statusbar"
+msgstr "Pasek stanu"
+
+#: glade/MainWindow.ui:40 glade/OptionsDialog.ui:643
+msgid "Show or hide the statusbar"
+msgstr "Pokazywanie lub ukrywanie paska stanu"
+
+#: glade/MainWindow.ui:46
+msgid "Toolbar"
+msgstr "Pasek narzędzi"
+
+#: glade/MainWindow.ui:47 glade/OptionsDialog.ui:629
+msgid "Show or hide the toolbar"
+msgstr "Pokazywanie lub ukrywanie paska narzędzi"
+
+#: glade/MainWindow.ui:53
+msgid "Statistics"
+msgstr "Statystyka"
+
+#: glade/MainWindow.ui:54 glade/OptionsDialog.ui:615
+msgid "Show or hide pigeon statistics"
+msgstr "Pokazywanie lub ukrywanie statystyk gołębi"
+
+#: glade/MainWindow.ui:60
+msgid "Navigation arrows"
+msgstr "Strzałki nawigacyjne"
+
+#: glade/MainWindow.ui:61 glade/OptionsDialog.ui:601
+msgid "Show or hide the navigation arrows"
+msgstr "Pokaż lub ukryj strzałki nawigacyjne"
+
+#: glade/MainWindow.ui:67
+msgid "About this application"
+msgstr "O programie"
+
+#: glade/MainWindow.ui:82
+msgid "Search online for program updates"
+msgstr "Szukaj w internecie  aktualizacji programu"
+
+#: glade/MainWindow.ui:89
+msgid "Forum"
+msgstr "Forum"
+
+#: glade/MainWindow.ui:90
+msgid "Go to the forum for online help"
+msgstr "Przejdź do forum do pomocy online"
+
+#: glade/MainWindow.ui:97
+msgid "Website"
+msgstr "Strona www"
+
+#: glade/MainWindow.ui:98
+msgid "Go to the website for more information"
+msgstr "Przejdź do witryny więcej informacji"
+
+#: glade/MainWindow.ui:105 glade/DataManager.ui:26
+msgid "Data manager"
+msgstr "Menedżer danych"
+
+#: glade/MainWindow.ui:106
+msgid "Manage your data"
+msgstr "Zarządzanie danymi"
+
+#: glade/MainWindow.ui:112 glade/AddressBook.ui:17
+msgid "Address book"
+msgstr "Książka adresowa"
+
+#: glade/MainWindow.ui:113
+msgid "View the address book"
+msgstr "Książka adresowa"
+
+#: glade/MainWindow.ui:119
+msgid "Photo album"
+msgstr "Album zdjęć"
+
+#: glade/MainWindow.ui:120
+msgid "View the images of your pigeons"
+msgstr "Zobacz zdjęcia swoich gołębi"
+
+#: glade/MainWindow.ui:126 glade/RaceManager.ui:20
+msgid "Racepoint manager"
+msgstr "Menadżer punktów startowych"
+
+#: glade/MainWindow.ui:127
+msgid "Manage the racepoints and distances"
+msgstr "Zarządzanie miejscami startu i odległościami"
+
+#: glade/MainWindow.ui:133 glade/DistanceCalculator.ui:26
+msgid "Distance calculator"
+msgstr "Kalkulator odległości"
+
+#: glade/MainWindow.ui:134
+msgid "Calculate the distance between locations"
+msgstr "Oblicz dystans miedzy lokalizacjami"
+
+#: glade/MainWindow.ui:140 glade/VelocityCalculator.ui:95
+msgid "Velocity calculator"
+msgstr "Kalkulator prędkości"
+
+#: glade/MainWindow.ui:141
+msgid "Calculate the velocity of flights"
+msgstr "Obliczyć prędkość lotów"
+
+#: glade/MainWindow.ui:147
+msgid "_Filter..."
+msgstr "_Filter..."
+
+#: glade/MainWindow.ui:148 glade/ResultWindow.ui:24
+msgid "Set filter options"
+msgstr "Ustaw opcje filtru"
+
+#: glade/MainWindow.ui:156
+msgid "Configure the application"
+msgstr "Konfiguracja programu"
+
+#: glade/MainWindow.ui:164
+msgid "Add resul_t"
+msgstr "Dodaj rezul_tat"
+
+#: glade/MainWindow.ui:165
+msgid "Add a new result for this pigeon"
+msgstr "Dodaj nowy wynik dla tego gołębia"
+
+#: glade/MainWindow.ui:172 glade/MainWindow.ui:254
+msgid "_Pedigree"
+msgstr "_Rodowód"
+
+#: glade/MainWindow.ui:173
+msgid "View the detailed pedigree of this pigeon"
+msgstr "Zobacz szczegółowy rodowód tego gołębia"
+
+#: glade/MainWindow.ui:181
+msgid "Remove the selected pigeon"
+msgstr "Usuń wybrane gołębie"
+
+#: glade/MainWindow.ui:189
+msgid "Edit the selected pigeon"
+msgstr "Edycja wybranego gołębia"
+
+#: glade/MainWindow.ui:197
+msgid "_Logfile Viewer"
+msgstr "_Przejrzyj logi"
+
+#: glade/MainWindow.ui:198
+msgid "See the logfile"
+msgstr "Zobacz logi"
+
+#: glade/MainWindow.ui:206
+msgid "Add range"
+msgstr "Dodaj wybór"
+
+#: glade/MainWindow.ui:207 glade/MainWindow.ui:762
+msgid "Add a range of pigeons"
+msgstr "Dodaj szereg gołębi"
+
+#: glade/MainWindow.ui:215
+msgid "Add a new pigeon"
+msgstr "Dodaj nowego gołębia"
+
+#: glade/MainWindow.ui:223
+msgid "Quit the program"
+msgstr "Zamknij program"
+
+#: glade/MainWindow.ui:231
+msgid "_Restore"
+msgstr "_Przywrócić"
+
+#: glade/MainWindow.ui:232
+msgid "Restore a backup of your database"
+msgstr "Przywracanie kopii zapasowej bazy danych"
+
+#: glade/MainWindow.ui:239 glade/MainWindow.ui:286
+msgid "_Backup"
+msgstr "_Kopia"
+
+#: glade/MainWindow.ui:240
+msgid "Create a backup of your database"
+msgstr "Tworzenie kopii zapasowej bazy danych"
+
+#: glade/MainWindow.ui:247
+msgid "Blank pedigree"
+msgstr "Czysty rodowód"
+
+#: glade/MainWindow.ui:248
+msgid "Print a blank pedigree"
+msgstr "Drukuj czysty rodowód"
+
+#: glade/MainWindow.ui:261
+msgid "_Help"
+msgstr "_Pomoc"
+
+#: glade/MainWindow.ui:266
+msgid "_Tools"
+msgstr "_Narzędzia"
+
+#: glade/MainWindow.ui:271
+msgid "_View"
+msgstr "_Widok"
+
+#: glade/MainWindow.ui:276
+msgid "_Edit"
+msgstr "_Edytuj"
+
+#: glade/MainWindow.ui:281
+msgid "_Pigeon"
+msgstr "_Gołąb"
+
+#: glade/MainWindow.ui:296
+msgid "_File"
+msgstr "_Plik"
+
+#: glade/MainWindow.ui:301
+msgid "Select all"
+msgstr "Zaznacz wszystko"
+
+#: glade/MainWindow.ui:302
+msgid "Select all pigeons"
+msgstr "Zaznacz wszystkie gołębie"
+
+#: glade/MainWindow.ui:308
+msgid "View online help"
+msgstr "Wyświetl pomoc on-line"
+
+#: glade/MainWindow.ui:402
 msgid "Total"
 msgstr "Razem"
 
-#: glade/MainWindow.ui:907 glade/DetailsView.ui:1573
+#: glade/MainWindow.ui:942 glade/DetailsView.ui:1531
 #: glade/DistanceCalculator.ui:331
 msgid "To"
 msgstr "Do"
 
-#: glade/MainWindow.ui:959 glade/DetailsView.ui:1512
+#: glade/MainWindow.ui:994 glade/DetailsView.ui:1470
 #: glade/DistanceCalculator.ui:203
 msgid "From"
 msgstr "Od"
 
-#: glade/MainWindow.ui:1007
+#: glade/MainWindow.ui:1042
 msgid "Remove pigeon"
 msgstr "Usuń gołębia"
 
-#: glade/MainWindow.ui:1094
+#: glade/MainWindow.ui:1129
 msgid "The following pigeon will be removed:"
 msgstr "Gołąb poniżej  zostanie usunięty:"
 
-#: glade/MainWindow.ui:1133
+#: glade/MainWindow.ui:1164
 msgid "Keep this pigeon in the pedigree"
 msgstr "Należy zachować tgo gołębia w rodowodzie"
 
-#: glade/MainWindow.ui:1148
-msgid "Keep results of this pigeon"
-msgstr "Zachowaj wyniki tego gołębia"
-
-#: glade/VelocityCalculator.ui:329
+#: glade/VelocityCalculator.ui:190
 msgid "Time"
 msgstr "Czas"
 
-#: glade/VelocityCalculator.ui:352 glade/VelocityCalculator.ui:725
+#: glade/VelocityCalculator.ui:213 glade/VelocityCalculator.ui:581
 #: glade/DistanceCalculator.ui:415
 msgid "Calculate"
 msgstr "Obliczać"
 
-#: glade/VelocityCalculator.ui:471 glade/VelocityCalculator.ui:878
+#: glade/VelocityCalculator.ui:331 glade/VelocityCalculator.ui:732
 msgid "Hours"
 msgstr "Godziny"
 
-#: glade/VelocityCalculator.ui:495 glade/VelocityCalculator.ui:902
+#: glade/VelocityCalculator.ui:355 glade/VelocityCalculator.ui:756
 msgid "Minutes"
 msgstr "Minuty"
 
-#: glade/VelocityCalculator.ui:519 glade/VelocityCalculator.ui:926
+#: glade/VelocityCalculator.ui:379 glade/VelocityCalculator.ui:780
 msgid "Seconds"
 msgstr "Sekundy"
 
-#: glade/VelocityCalculator.ui:713
+#: glade/VelocityCalculator.ui:569
 msgid "Range"
 msgstr "Zakres"
 
-#: glade/VelocityCalculator.ui:1174
+#: glade/VelocityCalculator.ui:1024
 msgid "Prognosis"
 msgstr "Pogoda"
 
@@ -1528,8 +1623,8 @@ msgstr "Zobacz wszystkie"
 msgid "Import"
 msgstr "Import"
 
-#: glade/ResultsView.ui:263 glade/BreedingView.ui:784
-#: glade/MedicationView.ui:707
+#: glade/ResultsView.ui:263 glade/BreedingView.ui:117
+#: glade/MedicationView.ui:737
 msgid "Date*"
 msgstr "Data*"
 
@@ -1537,306 +1632,326 @@ msgstr "Data*"
 msgid "Racepoint*"
 msgstr "Miejsce startu*"
 
-#: glade/BreedingView.ui:85 glade/BreedingView.ui:282
-#: glade/BreedingView.ui:1007 glade/BreedingView.ui:1175
-msgid "Laid"
-msgstr "Złożenie"
-
-#: glade/BreedingView.ui:113 glade/BreedingView.ui:310
-#: glade/BreedingView.ui:1037 glade/BreedingView.ui:1205
-msgid "Hatched"
-msgstr "Wykluty"
-
-#: glade/BreedingView.ui:158 glade/BreedingView.ui:355
-#: glade/BreedingView.ui:1050 glade/BreedingView.ui:1218
-msgid "Successful"
-msgstr "Udany"
-
-#: glade/BreedingView.ui:235 glade/BreedingView.ui:1127
-msgid "Egg 1"
-msgstr "Jajko 1"
-
-#: glade/BreedingView.ui:432 glade/BreedingView.ui:1295
-msgid "Egg 2"
-msgstr "Jajko 2"
-
-#: glade/BreedingView.ui:499 glade/BreedingView.ui:858
-msgid "Series"
-msgstr "Seria"
-
-#: glade/BreedingView.ui:540 glade/BreedingView.ui:890
-msgid "Nestbox"
-msgstr "Cela nr"
-
-#: glade/BreedingView.ui:676
+#: glade/BreedingView.ui:9
 msgid "Breeding data"
 msgstr "Dane dotyczące hodowli"
 
-#: glade/BreedingView.ui:814
+#: glade/BreedingView.ui:148
 msgid "Mate*"
 msgstr "Partner"
 
-#: glade/BreedingView.ui:1100 glade/BreedingView.ui:1268
+#: glade/BreedingView.ui:192 glade/BreedingView.ui:1160
+msgid "Series"
+msgstr "Seria"
+
+#: glade/BreedingView.ui:224 glade/BreedingView.ui:1201
+msgid "Nestbox"
+msgstr "Cela nr"
+
+#: glade/BreedingView.ui:341 glade/BreedingView.ui:509
+#: glade/BreedingView.ui:746 glade/BreedingView.ui:943
+msgid "Laid"
+msgstr "Złożenie"
+
+#: glade/BreedingView.ui:371 glade/BreedingView.ui:539
+#: glade/BreedingView.ui:774 glade/BreedingView.ui:971
+msgid "Hatched"
+msgstr "Wykluty"
+
+#: glade/BreedingView.ui:384 glade/BreedingView.ui:552
+#: glade/BreedingView.ui:819 glade/BreedingView.ui:1016
+msgid "Successful"
+msgstr "Udany"
+
+#: glade/BreedingView.ui:434 glade/BreedingView.ui:602
 msgid "Add pigeon to list"
 msgstr "Dodaj gołębia do listy"
+
+#: glade/BreedingView.ui:461 glade/BreedingView.ui:896
+msgid "Egg 1"
+msgstr "Jajko 1"
+
+#: glade/BreedingView.ui:629 glade/BreedingView.ui:1093
+msgid "Egg 2"
+msgstr "Jajko 2"
 
 #: glade/FilterDialog.ui:13
 msgid "Filter pigeons"
 msgstr "Filtr gołębi"
 
-#: glade/FilterDialog.ui:109 glade/ResultWindow.ui:434
+#: glade/FilterDialog.ui:109 glade/ResultWindow.ui:472
 msgid "Pigeon year"
 msgstr "Wiek gołębia"
 
-#: glade/OptionsDialog.ui:95
+#: glade/OptionsDialog.ui:52 data/TranslationWorkaround.ui:4
+msgid "A4"
+msgstr "A4"
+
+#: glade/OptionsDialog.ui:55 data/TranslationWorkaround.ui:5
+msgid "Letter"
+msgstr "List"
+
+#: glade/OptionsDialog.ui:66 data/TranslationWorkaround.ui:6
+msgid "Original"
+msgstr "Orginalny"
+
+#: glade/OptionsDialog.ui:69 data/TranslationWorkaround.ui:7
+msgid "Swapped details"
+msgstr "Zamienio szczegóły"
+
+#: glade/OptionsDialog.ui:72 data/TranslationWorkaround.ui:8
+msgid "Middle"
+msgstr "Środkowy"
+
+#: glade/OptionsDialog.ui:83 data/TranslationWorkaround.ui:9
+msgid "Classic"
+msgstr "Klasyczny"
+
+#: glade/OptionsDialog.ui:86 data/TranslationWorkaround.ui:10
+msgid "Splitted"
+msgstr "Podzielony"
+
+#: glade/OptionsDialog.ui:105 glade/Backup.ui:215 glade/Backup.ui:424
 msgid "Options"
 msgstr "Opcje"
 
-#: glade/OptionsDialog.ui:116
+#: glade/OptionsDialog.ui:126
 msgid "Default"
 msgstr "Domyślne"
 
-#: glade/OptionsDialog.ui:242
+#: glade/OptionsDialog.ui:252
 msgid "Check for updates on startup"
 msgstr "Sprawdź aktualizacje na starcie"
 
-#: glade/OptionsDialog.ui:255
+#: glade/OptionsDialog.ui:265
 msgid "Update"
 msgstr "Nadogradnja"
 
-#: glade/OptionsDialog.ui:285
+#: glade/OptionsDialog.ui:295
 msgid "Make an automatic backup"
 msgstr "Dodać do automatycznego tworzenia kopii zapasowych"
 
-#: glade/OptionsDialog.ui:331 glade/LocationChooser.ui:90
+#: glade/OptionsDialog.ui:341 glade/LocationChooser.ui:90
 #: glade/LocationChooser.ui:180 glade/DistanceCalculator.ui:113
-#: glade/DistanceCalculator.ui:241
+#: glade/DistanceCalculator.ui:241 glade/Backup.ui:457
 msgid "Location"
 msgstr "Lokalizacja"
 
-#: glade/OptionsDialog.ui:345
+#: glade/OptionsDialog.ui:355
 msgid "Interval"
 msgstr "Co ile dni"
 
-#: glade/OptionsDialog.ui:439
+#: glade/OptionsDialog.ui:449
 msgid "Change the language to"
 msgstr "Zmiana języka"
 
-#: glade/OptionsDialog.ui:454
+#: glade/OptionsDialog.ui:464
 msgid "Language"
 msgstr "Język"
 
-#: glade/OptionsDialog.ui:490
+#: glade/OptionsDialog.ui:500
 msgid "Default distance unit"
 msgstr "Domyślna jednostka odległości"
 
-#: glade/OptionsDialog.ui:502
+#: glade/OptionsDialog.ui:512
 msgid "Default speed unit"
 msgstr "Domyślna jednostka prędkości"
 
-#: glade/OptionsDialog.ui:541
+#: glade/OptionsDialog.ui:551
 msgid "Units"
 msgstr "Jednostki"
 
-#: glade/OptionsDialog.ui:653
+#: glade/OptionsDialog.ui:663
 msgid "Window"
 msgstr "Okno"
 
-#: glade/OptionsDialog.ui:691
+#: glade/OptionsDialog.ui:701
 msgid "Results mode"
 msgstr "Wyniki"
 
-#: glade/OptionsDialog.ui:726
+#: glade/OptionsDialog.ui:736
 msgid "Hide deleted pigeons in lists"
 msgstr "Ukryj skasowane gołębie z listy"
 
-#: glade/OptionsDialog.ui:745
+#: glade/OptionsDialog.ui:755
 msgid "Color row of deleted pigeons in lists"
 msgstr "Pokoloruj rzędy z usuniętymi gołębiami"
 
-#: glade/OptionsDialog.ui:933
+#: glade/OptionsDialog.ui:938
 msgid "Text"
 msgstr "Tekst"
 
-#: glade/OptionsDialog.ui:947 glade/OptionsDialog.ui:1590
+#: glade/OptionsDialog.ui:952 glade/OptionsDialog.ui:1628
 msgid "Image"
 msgstr "Zdjęcie"
 
-#: glade/OptionsDialog.ui:962
+#: glade/OptionsDialog.ui:967
 msgid "Text and image"
 msgstr "Tekst i zdjęcie"
 
-#: glade/OptionsDialog.ui:991
+#: glade/OptionsDialog.ui:1029
 msgid "Main Columns"
 msgstr "Główne kolumny"
 
-#: glade/OptionsDialog.ui:1163
+#: glade/OptionsDialog.ui:1201
 msgid "Results Columns"
 msgstr "Wyniki kolumny"
 
-#: glade/OptionsDialog.ui:1219
+#: glade/OptionsDialog.ui:1257
 msgid "Paper format:"
 msgstr "Format papieru:"
 
-#: glade/OptionsDialog.ui:1253
+#: glade/OptionsDialog.ui:1291
 msgid "Paper"
 msgstr "Papier"
 
-#: glade/OptionsDialog.ui:1294
+#: glade/OptionsDialog.ui:1332
 msgid "Address"
 msgstr "Adres"
 
-#: glade/OptionsDialog.ui:1307 glade/AddressBook.ui:331
+#: glade/OptionsDialog.ui:1345 glade/AddressBook.ui:338
 msgid "Phone"
 msgstr "Telefon"
 
-#: glade/OptionsDialog.ui:1341
+#: glade/OptionsDialog.ui:1379
 msgid "Personal"
 msgstr "Osobno"
 
-#: glade/OptionsDialog.ui:1401
+#: glade/OptionsDialog.ui:1439
 msgid "Pedigree layout:"
 msgstr "Układ Rodowodu:"
 
-#: glade/OptionsDialog.ui:1457
+#: glade/OptionsDialog.ui:1495
 msgid "Show pigeon colour in pedigree"
 msgstr "Pokaż kolor gołębia w rodowodzie"
 
-#: glade/OptionsDialog.ui:1471
+#: glade/OptionsDialog.ui:1509
 msgid "Enable box border color"
 msgstr "Włącz obramowanie pola kolorem"
 
-#: glade/OptionsDialog.ui:1485
+#: glade/OptionsDialog.ui:1523
 msgid "Enable box fill color"
 msgstr "Włącz wypełmienie kolorem"
 
-#: glade/OptionsDialog.ui:1505
+#: glade/OptionsDialog.ui:1543
 msgid "Layout"
 msgstr "Układ"
 
-#: glade/OptionsDialog.ui:1575 glade/DetailsView.ui:215
-#: glade/DetailsView.ui:608
+#: glade/OptionsDialog.ui:1613 glade/DetailsView.ui:100
+#: glade/DetailsView.ui:663
 msgid "Extra"
 msgstr "Informacja"
 
-#: glade/OptionsDialog.ui:1609 glade/ResultWindow.ui:422
+#: glade/OptionsDialog.ui:1647 glade/ResultWindow.ui:460
 msgid "Pigeon"
 msgstr "Gołąb"
 
-#: glade/OptionsDialog.ui:1662 glade/OptionsDialog.ui:1749
+#: glade/OptionsDialog.ui:1700 glade/OptionsDialog.ui:1787
 msgid "Show the column names"
 msgstr "Pokaż nazwy kolumn"
 
-#: glade/OptionsDialog.ui:1676
+#: glade/OptionsDialog.ui:1714
 msgid "Always show the sex column"
 msgstr "Zawsze pokazuj kolumnę płeć"
 
-#: glade/OptionsDialog.ui:1763
+#: glade/OptionsDialog.ui:1801
 msgid "Show the date"
 msgstr "Pokaż datę"
 
-#: glade/OptionsDialog.ui:1841
+#: glade/OptionsDialog.ui:1879
 msgid "Custom coefficient multiplier"
 msgstr "Współczynnik mnożnikowy niestandardowy"
 
-#: glade/OptionsDialog.ui:1888
+#: glade/OptionsDialog.ui:1926
 msgid "Check for development updates"
 msgstr "Sprawdź aktualizacje"
 
-#: glade/ResultWindow.ui:9 glade/ExportWindow.ui:90
-msgid "Export"
-msgstr "Eksport"
-
-#: glade/ResultWindow.ui:10
-msgid "Export these results"
-msgstr "Eksport wyników"
-
-#: glade/ResultWindow.ui:17
-msgid "Save these results"
-msgstr "Zapisz te wyniki"
-
-#: glade/ResultWindow.ui:24
-msgid "Email these results"
-msgstr "Wyślij te wyniki"
-
-#: glade/ResultWindow.ui:32
-msgid "View these results"
-msgstr "Zobacz te wyniki"
-
-#: glade/ResultWindow.ui:39
-msgid "Filter"
-msgstr "Filtr"
-
-#: glade/ResultWindow.ui:54
+#: glade/ResultWindow.ui:9
 msgid "Print these results"
 msgstr "Drukuj te wyniki"
 
-#: glade/ResultWindow.ui:79
-msgid "Filter results"
-msgstr "Filtrowanie wyników"
+#: glade/ResultWindow.ui:23
+msgid "Filter"
+msgstr "Filtr"
 
-#: glade/ResultWindow.ui:756
-msgid "Hide non-classified results"
-msgstr "Ukryj wyniki nieklasyfikowane"
+#: glade/ResultWindow.ui:31
+msgid "View these results"
+msgstr "Zobacz te wyniki"
 
-#: glade/ResultWindow.ui:807
+#: glade/ResultWindow.ui:38
+msgid "Email these results"
+msgstr "Wyślij te wyniki"
+
+#: glade/ResultWindow.ui:46
+msgid "Save these results"
+msgstr "Zapisz te wyniki"
+
+#: glade/ResultWindow.ui:53 glade/ExportWindow.ui:90
+msgid "Export"
+msgstr "Eksport"
+
+#: glade/ResultWindow.ui:54
+msgid "Export these results"
+msgstr "Eksport wyników"
+
+#: glade/ResultWindow.ui:78
 msgid "View all results"
 msgstr "Zobacz wszystkie wyniki"
 
-#: glade/DetailsView.ui:18
+#: glade/ResultWindow.ui:117
+msgid "Filter results"
+msgstr "Filtrowanie wyników"
+
+#: glade/ResultWindow.ui:795
+msgid "Hide non-classified results"
+msgstr "Ukryj wyniki nieklasyfikowane"
+
+#: glade/DetailsView.ui:466
 msgid ""
 "Unable to retrieve data. The requested pigeon is probably removed from the "
 "database."
 msgstr ""
 "Nie można pobrać danych.Gołąb jest prawdopodobnie usunięty z bazy danych."
 
-#: glade/DetailsView.ui:175 glade/DetailsView.ui:550
-msgid "Dam"
-msgstr "Matka"
-
-#: glade/DetailsView.ui:188 glade/DetailsView.ui:563
-msgid "Sire"
-msgstr "Ojciec"
-
-#: glade/DetailsView.ui:1025
+#: glade/DetailsView.ui:981
 msgid "Pigeon status"
 msgstr "Status gołębia"
 
-#: glade/DetailsView.ui:1083
+#: glade/DetailsView.ui:1039
 msgid "Choose a status for this pigeon:"
 msgstr "Wybierz status tego gołębia:"
 
-#: glade/DetailsView.ui:1119
+#: glade/DetailsView.ui:1075
 msgid "The current status is:"
 msgstr "Aktualny status:"
 
-#: glade/DetailsView.ui:1195 glade/DetailsView.ui:1295
-#: glade/DetailsView.ui:1410 glade/DetailsView.ui:1525
-#: glade/DetailsView.ui:1638 glade/DetailsView.ui:1773
+#: glade/DetailsView.ui:1153 glade/DetailsView.ui:1253
+#: glade/DetailsView.ui:1368 glade/DetailsView.ui:1483
+#: glade/DetailsView.ui:1596 glade/DetailsView.ui:1731
 msgid "Extra info"
 msgstr "Dodatkowe informacje"
 
-#: glade/DetailsView.ui:1252
+#: glade/DetailsView.ui:1210
 msgid "No extra information available."
 msgstr "Brak dodatkowych informacji."
 
-#: glade/DetailsView.ui:1326
+#: glade/DetailsView.ui:1284
 msgid "Buyer"
 msgstr "Kupujący"
 
-#: glade/DetailsView.ui:1625
+#: glade/DetailsView.ui:1583
 msgid "Loaned"
 msgstr "Wypożyczony"
 
-#: glade/DetailsView.ui:1671
+#: glade/DetailsView.ui:1629
 msgid "Person"
 msgstr "Osoba"
 
-#: glade/DetailsView.ui:1720
+#: glade/DetailsView.ui:1678
 msgid "Back"
 msgstr "Powrót"
 
-#: glade/DetailsView.ui:1786
+#: glade/DetailsView.ui:1744
 msgid "Partner"
 msgstr "Partner"
 
@@ -1874,13 +1989,13 @@ msgstr "Współrzędne wyszukiwania"
 
 #: glade/LocationChooser.ui:102 glade/DistanceCalculator.ui:125
 #: glade/DistanceCalculator.ui:253 glade/RaceManager.ui:144
-#: glade/AddressBook.ui:441
+#: glade/AddressBook.ui:448
 msgid "Latitude"
 msgstr "Szerokość"
 
 #: glade/LocationChooser.ui:116 glade/DistanceCalculator.ui:139
 #: glade/DistanceCalculator.ui:267 glade/RaceManager.ui:158
-#: glade/AddressBook.ui:469
+#: glade/AddressBook.ui:476
 msgid "Longitude"
 msgstr "Długość"
 
@@ -1888,7 +2003,7 @@ msgstr "Długość"
 msgid "Export data"
 msgstr "Eksportuj dane"
 
-#: glade/ExportWindow.ui:138 glade/DBManager.ui:507
+#: glade/ExportWindow.ui:138 glade/DBManager.ui:572
 msgid "Path"
 msgstr "Ścieżka"
 
@@ -1904,15 +2019,19 @@ msgstr "Widoczny"
 msgid "All"
 msgstr "Sve"
 
-#: glade/DBManager.ui:250
+#: glade/DBManager.ui:281
+msgid "Move"
+msgstr "Przenieś"
+
+#: glade/DBManager.ui:311
 msgid "Load this database as default on startup"
 msgstr "Załaduj tę bazę danych jako domyślną przy starcie"
 
-#: glade/DBManager.ui:283
+#: glade/DBManager.ui:344
 msgid "Database information"
 msgstr "Baza dantych informacje"
 
-#: glade/DBManager.ui:474
+#: glade/DBManager.ui:539
 msgid "For advanced use only. Use the default settings if you are in doubt."
 msgstr ""
 "Tylko dla zaawansowanych użytkowników. Użyj ustawień domyślnych, jeśli masz "
@@ -1922,51 +2041,67 @@ msgstr ""
 msgid "Result"
 msgstr "Wynik"
 
-#: glade/MedicationView.ui:171 glade/MedicationView.ui:733
+#: glade/Backup.ui:152
+msgid "Destination"
+msgstr "Punkt docelowy"
+
+#: glade/Backup.ui:165 glade/Backup.ui:373
+msgid "Database"
+msgstr "Baza danych"
+
+#: glade/Backup.ui:195
+msgid "Restore configuration file"
+msgstr "Przywróć plik konfiguracyjny"
+
+#: glade/Backup.ui:404
+msgid "Include configuration file"
+msgstr "Dołącz plik konfiguracyjny"
+
+#: glade/MedicationView.ui:181 glade/MedicationView.ui:763
 msgid "Done by"
 msgstr "Sporządzono w"
 
-#: glade/MedicationView.ui:326 glade/MedicationView.ui:761
+#: glade/MedicationView.ui:336 glade/MedicationView.ui:791
 msgid "Dosage"
 msgstr "Dawkowanie"
 
-#: glade/MedicationView.ui:362 glade/MedicationView.ui:790
+#: glade/MedicationView.ui:372 glade/MedicationView.ui:820
 msgid "Vaccination"
 msgstr "Szczepienia"
 
-#: glade/ResultParser.ui:39
+#: glade/ResultParser.ui:41
 msgid "Import results"
 msgstr "Importuj wyniki"
 
-#: glade/ResultParser.ui:73
+#: glade/ResultParser.ui:75
 msgid "File:"
 msgstr "Plik:"
 
-#: glade/ResultParser.ui:85
+#: glade/ResultParser.ui:87
 msgid "Parser:"
 msgstr "Analizator:"
 
-#: glade/ResultParser.ui:121
+#: glade/ResultParser.ui:123
 msgid "Parse"
 msgstr "Analizować"
 
-#: glade/ResultParser.ui:494
+#: glade/ResultParser.ui:496
 msgid "Edit race details"
 msgstr "Edycja szczegółów wyścigu"
 
-#: glade/ResultParser.ui:527
+#: glade/ResultParser.ui:529
 msgid "No results were found for your pigeons"
 msgstr "Nie znaleziono wyników dla gołębi"
 
-#: glade/ResultParser.ui:600
+#: glade/ResultParser.ui:602
 msgid "Place"
 msgstr "Miejsce"
 
-#: glade/ResultParser.ui:711
+#: glade/ResultParser.ui:714
 msgid "Parser error"
 msgstr "Błąd analizatora"
 
-#: glade/ResultParser.ui:771
+#: glade/ResultParser.ui:774
 msgid ""
 "The file you selected could not be parsed correctly. Try selecting another "
 "parser that matches your file and try again. Or send the developers some "
@@ -1977,46 +2112,46 @@ msgstr ""
 "deweloperom kilka przydatnych danych, aby mogli działać w tej sprawie."
 
 #: glade/PhotoAlbum.ui:8
-msgid "Zooms to fit the whole picture"
-msgstr "Zumiranje do pune veličine slike"
-
-#: glade/PhotoAlbum.ui:15
-msgid "View slideshow"
-msgstr "Pogledaj slideshow"
-
-#: glade/PhotoAlbum.ui:22
-msgid "View in fullscreen"
-msgstr "Podgląd całego rkranu"
-
-#: glade/PhotoAlbum.ui:36
-msgid "Zooms the picture out"
-msgstr "Powiększa się obraz"
-
-#: glade/PhotoAlbum.ui:43
-msgid "Zooms the picture in"
-msgstr "Powiększa obraz w"
-
-#: glade/PhotoAlbum.ui:50
-msgid "Shows the last picture"
-msgstr "Pokazuje ostatnie zdjęcie"
-
-#: glade/PhotoAlbum.ui:57
-msgid "Shows the next picture"
-msgstr "Pokazuje następne zdjęcie"
-
-#: glade/PhotoAlbum.ui:64
-msgid "Shows previous picture"
-msgstr "Pokazuje poprzednie zdjęcie"
-
-#: glade/PhotoAlbum.ui:71
 msgid "Shows the first picture"
 msgstr "Pokazuje pierwsze zdjęcie"
 
-#: glade/PhotoAlbum.ui:79
+#: glade/PhotoAlbum.ui:15
+msgid "Shows previous picture"
+msgstr "Pokazuje poprzednie zdjęcie"
+
+#: glade/PhotoAlbum.ui:22
+msgid "Shows the next picture"
+msgstr "Pokazuje następne zdjęcie"
+
+#: glade/PhotoAlbum.ui:29
+msgid "Shows the last picture"
+msgstr "Pokazuje ostatnie zdjęcie"
+
+#: glade/PhotoAlbum.ui:36
+msgid "Zooms the picture in"
+msgstr "Powiększa obraz w"
+
+#: glade/PhotoAlbum.ui:43
+msgid "Zooms the picture out"
+msgstr "Powiększa się obraz"
+
+#: glade/PhotoAlbum.ui:57
+msgid "View in fullscreen"
+msgstr "Podgląd całego rkranu"
+
+#: glade/PhotoAlbum.ui:64
+msgid "View slideshow"
+msgstr "Pogledaj slideshow"
+
+#: glade/PhotoAlbum.ui:71
+msgid "Zooms to fit the whole picture"
+msgstr "Zumiranje do pune veličine slike"
+
+#: glade/PhotoAlbum.ui:91
 msgid "Photo Album"
 msgstr "Foto album"
 
-#: glade/PhotoAlbum.ui:127
+#: glade/PhotoAlbum.ui:152
 msgid "There are no images found."
 msgstr "Nie znaleziono żadnych zdjęć"
 
@@ -2044,57 +2179,24 @@ msgstr "Niewykorzystane obiekty"
 msgid "Click here to add more racepoints"
 msgstr "Kliknij tutaj, aby dodać więcej miejsc startu"
 
-#: glade/AddressBook.ui:170
+#: glade/AddressBook.ui:177
 msgid "Street"
 msgstr "Ulica"
 
-#: glade/AddressBook.ui:249
+#: glade/AddressBook.ui:256
 msgid "Zipcode / City"
 msgstr "Kod pocztowy / Miasto"
 
-#: glade/AddressBook.ui:290
-msgid "Country"
-msgstr "Kraj"
-
-#: glade/AddressBook.ui:571
+#: glade/AddressBook.ui:572
 msgid "This is me"
 msgstr "To ja"
 
-#: data/TranslationWorkaround.ui:4
-msgid "A4"
-msgstr "A4"
-
-#: data/TranslationWorkaround.ui:5
-msgid "Letter"
-msgstr "List"
-
-#: data/TranslationWorkaround.ui:6
-msgid "Original"
-msgstr "Orginalny"
-
-#: data/TranslationWorkaround.ui:7
-msgid "Swapped details"
-msgstr "Zamienio szczegóły"
-
-#: data/TranslationWorkaround.ui:8
-msgid "Middle"
-msgstr "Środkowy"
-
-#: data/TranslationWorkaround.ui:9
-msgid "Classic"
-msgstr "Klasyczny"
-
-#: data/TranslationWorkaround.ui:10
-msgid "Splitted"
-msgstr "Podzielony"
-
 #~ msgid ""
-#~ "Pigeon Planner is free software. You don’t need to pay for using it. But "
-#~ "if you like it, please consider donating to help improving it."
+#~ "Pigeon Planner is free software. You don’t need to pay for using it. But if "
+#~ "you like it, please consider donating to help improving it."
 #~ msgstr ""
-#~ "Pigeon Planner jest wolnym oprogramowaniem. Nie musisz płacić za "
-#~ "korzystanie z niego. Ale jeśli chcesz to, rozważ dotację, aby pomóc jej "
-#~ "poprawę"
+#~ "Pigeon Planner jest wolnym oprogramowaniem. Nie musisz płacić za korzystanie "
+#~ "z niego. Ale jeśli chcesz to, rozważ dotację, aby pomóc jej poprawę"
 
 #~ msgid ""
 #~ "The backup was successfully restored.\n"
@@ -2205,6 +2307,9 @@ msgstr "Podzielony"
 #~ msgid "<b>Your name:</b>"
 #~ msgstr "<b>Twoje imię:</b>"
 
+#~ msgid "Keep results of this pigeon"
+#~ msgstr "Zachowaj wyniki tego gołębia"
+
 #~ msgid "<b>Backup</b>"
 #~ msgstr "<b>Kopia danych</b>"
 
@@ -2304,18 +2409,18 @@ msgstr "Podzielony"
 #~ msgstr "Pretraži bazu podataka"
 
 #~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the "
-#~ "next time you start the program again."
+#~ "Click \"OK\" to close the program. A new database will be created the next "
+#~ "time you start the program again."
 #~ msgstr ""
-#~ "Pritisni \"OK\" za zatvaranje programa. Nova baza podataka bit će "
-#~ "kreirana sljedeći put kad pokreneš program."
+#~ "Pritisni \"OK\" za zatvaranje programa. Nova baza podataka bit će kreirana "
+#~ "sljedeći put kad pokreneš program."
 
 #~ msgid ""
 #~ "A new version is available. Please go to the Pigeon Planner website by "
 #~ "clicking the link below and download the latest version"
 #~ msgstr ""
-#~ "Dostupna je nova inačica. Klikni na poveznicu prema web stranici i "
-#~ "pokreni download posljednje inačice"
+#~ "Dostupna je nova inačica. Klikni na poveznicu prema web stranici i pokreni "
+#~ "download posljednje inačice"
 
 #~ msgid "Insert a pigeon"
 #~ msgstr "Unesi goluba"

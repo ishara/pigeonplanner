@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION CZ\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-10 22:39+0200\n"
+"POT-Creation-Date: 2018-09-15 21:13+0200\n"
 "PO-Revision-Date: 2014-05-15 08:17+0000\n"
 "Last-Translator: Jindra <Unknown>\n"
 "Language-Team: Jindra <sidloj@volny.cz>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-12 05:58+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2018-09-16 05:27+0000\n"
+"X-Generator: Launchpad (build 18780)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: \n"
 "X-Poedit-SearchPath-1: ..\n"
@@ -29,10 +29,11 @@ msgstr ""
 #~ msgid "Notification is set on %s days in advance"
 #~ msgstr "Oznámení je nastaveno  na%  dní předem"
 
-#: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:213
-#: pigeonplanner/ui/resultwindow.py:771 pigeonplanner/ui/exportwindow.py:56
-#: pigeonplanner/ui/tools/distancecalculator.py:72
-#: pigeonplanner/core/common.py:238 pigeonplanner/core/common.py:245
+#: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:248
+#: pigeonplanner/ui/resultwindow.py:784 pigeonplanner/ui/exportwindow.py:58
+#: pigeonplanner/ui/exportwindow.py:80
+#: pigeonplanner/ui/tools/distancecalculator.py:74
+#: pigeonplanner/core/common.py:187 pigeonplanner/core/common.py:194
 msgid "Error"
 msgstr "Chyba"
 
@@ -59,10 +60,9 @@ msgstr "Je nutné aktualizovat databázi"
 #: pigeonplanner/messages.py:33
 msgid ""
 "This database needs an update before it can be used. Previous versions of "
-"Pigeon Planner won't work anymore. Do you want to continue?"
+"Pigeon Planner won't work anymore. This may take a moment. Do you want to "
+"continue?"
 msgstr ""
-"Tato databáze potřebuje aktualizaci před jejím použitím. Předchozí verze "
-"Pigeon Planner přestane fungovat. Chceš pokračovat?"
 
 #: pigeonplanner/messages.py:38
 msgid ""
@@ -155,7 +155,7 @@ msgstr "Nelze najít rodiče. Nejdříve zadej číslo kroužku."
 #: pigeonplanner/messages.py:93 pigeonplanner/messages.py:96
 #: pigeonplanner/messages.py:100 pigeonplanner/messages.py:103
 #: pigeonplanner/messages.py:107 pigeonplanner/messages.py:117
-#: pigeonplanner/messages.py:120 pigeonplanner/ui/exportwindow.py:56
+#: pigeonplanner/messages.py:120 pigeonplanner/ui/exportwindow.py:58
 msgid "Invalid input!"
 msgstr "Neplatný vstup!"
 
@@ -195,8 +195,8 @@ msgid "Removing the selected result"
 msgstr "Odstranit vybraný výsledek"
 
 #: pigeonplanner/messages.py:111 pigeonplanner/messages.py:114
-#: pigeonplanner/messages.py:158 pigeonplanner/ui/dialogs.py:223
-#: glade/MainWindow.ui:1119
+#: pigeonplanner/messages.py:158 pigeonplanner/ui/tabs/medication.py:58
+#: glade/MainWindow.ui:1154
 msgid "Are you sure?"
 msgstr "Jseš si jist?"
 
@@ -329,106 +329,114 @@ msgid "This isn't normal, or you must be running a development version"
 msgstr "To není normální, nebo musíš mít spuštěnu verzi ve vývoji"
 
 #: pigeonplanner/reports/pigeons.py:40 pigeonplanner/reports/results.py:63
-#: pigeonplanner/ui/resultwindow.py:87 pigeonplanner/ui/dialogs.py:256
-#: pigeonplanner/ui/tabs/results.py:59 pigeonplanner/ui/tabs/relatives.py:163
-#: pigeonplanner/ui/widgets/treeview.py:283 glade/BreedingView.ui:140
-#: glade/BreedingView.ui:337 glade/BreedingView.ui:1087
-#: glade/BreedingView.ui:1255 glade/ResultParser.ui:574
+#: pigeonplanner/ui/resultwindow.py:89 pigeonplanner/ui/dialogs.py:230
+#: pigeonplanner/ui/tabs/results.py:59 pigeonplanner/ui/tabs/relatives.py:171
+#: pigeonplanner/ui/widgets/treeview.py:341 glade/BreedingView.ui:421
+#: glade/BreedingView.ui:589 glade/BreedingView.ui:801
+#: glade/BreedingView.ui:998 glade/ResultParser.ui:576
 msgid "Band no."
 msgstr "Číslo kroužku"
 
-#: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:182
-#: pigeonplanner/ui/widgets/treeview.py:283 glade/MainWindow.ui:826
-#: glade/FilterDialog.ui:121 glade/OptionsDialog.ui:909
-#: glade/OptionsDialog.ui:1562 glade/DetailsView.ui:238
-#: glade/DetailsView.ui:653
+#: pigeonplanner/reports/pigeons.py:43 pigeonplanner/ui/tabs/relatives.py:190
+#: pigeonplanner/ui/widgets/treeview.py:341 glade/MainWindow.ui:861
+#: glade/FilterDialog.ui:121 glade/OptionsDialog.ui:914
+#: glade/OptionsDialog.ui:1600 glade/DetailsView.ui:147
+#: glade/DetailsView.ui:686
 msgid "Sex"
 msgstr "Pohlaví"
 
-#: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dbmanager.py:47
-#: pigeonplanner/ui/dialogs.py:256 pigeonplanner/ui/widgets/treeview.py:283
-#: glade/OptionsDialog.ui:844 glade/OptionsDialog.ui:1285
-#: glade/OptionsDialog.ui:1540 glade/DBManager.ui:364 glade/AddressBook.ui:129
+#: pigeonplanner/reports/pigeons.py:45 pigeonplanner/ui/dbmanager.py:48
+#: pigeonplanner/ui/dialogs.py:230 pigeonplanner/ui/widgets/treeview.py:341
+#: glade/OptionsDialog.ui:851 glade/OptionsDialog.ui:1323
+#: glade/OptionsDialog.ui:1578 glade/DBManager.ui:427 glade/Backup.ui:146
+#: glade/AddressBook.ui:136
 msgid "Name"
 msgstr "Jméno"
 
-#: pigeonplanner/reports/pigeons.py:47
-#: pigeonplanner/ui/widgets/treeview.py:283 glade/FilterDialog.ui:135
-#: glade/OptionsDialog.ui:868 glade/OptionsDialog.ui:1549
-#: glade/DetailsView.ui:227 glade/DetailsView.ui:642
+#: pigeonplanner/reports/pigeons.py:47 pigeonplanner/ui/widgets/treeview.py:342
+#: glade/FilterDialog.ui:386 glade/OptionsDialog.ui:990 glade/DetailsView.ui:53
+#: glade/DetailsView.ui:636
+msgid "Sire"
+msgstr "Holub"
+
+#: pigeonplanner/reports/pigeons.py:49 pigeonplanner/ui/widgets/treeview.py:342
+#: glade/FilterDialog.ui:400 glade/OptionsDialog.ui:1005
+#: glade/DetailsView.ui:39 glade/DetailsView.ui:623
+msgid "Dam"
+msgstr "Holubice"
+
+#: pigeonplanner/reports/pigeons.py:51 pigeonplanner/ui/widgets/treeview.py:341
+#: glade/FilterDialog.ui:135 glade/OptionsDialog.ui:875
+#: glade/OptionsDialog.ui:1587 glade/DetailsView.ui:135
+#: glade/DetailsView.ui:675
 msgid "Colour"
 msgstr "Barva"
 
-#: pigeonplanner/reports/pigeons.py:49
-#: pigeonplanner/ui/widgets/treeview.py:284
-#: pigeonplanner/ui/tools/distancecalculator.py:174 glade/FilterDialog.ui:163
-#: glade/OptionsDialog.ui:881 glade/DetailsView.ui:201
-#: glade/DetailsView.ui:576 glade/MedicationView.ui:871
+#: pigeonplanner/reports/pigeons.py:53 pigeonplanner/ui/widgets/treeview.py:342
+#: pigeonplanner/ui/tools/distancecalculator.py:176 glade/FilterDialog.ui:163
+#: glade/OptionsDialog.ui:888 glade/DetailsView.ui:67 glade/DetailsView.ui:649
+#: glade/MedicationView.ui:901
 msgid "Loft"
 msgstr "Holubník"
 
-#: pigeonplanner/reports/pigeons.py:51
-#: pigeonplanner/ui/widgets/treeview.py:284 glade/FilterDialog.ui:149
-#: glade/OptionsDialog.ui:853 glade/DetailsView.ui:251
-#: glade/DetailsView.ui:666
+#: pigeonplanner/reports/pigeons.py:55 pigeonplanner/ui/widgets/treeview.py:342
+#: glade/FilterDialog.ui:149 glade/OptionsDialog.ui:860
+#: glade/DetailsView.ui:161 glade/DetailsView.ui:699
 msgid "Strain"
 msgstr "Kmen"
 
-#: pigeonplanner/reports/pigeons.py:53
-#: pigeonplanner/ui/widgets/treeview.py:284 glade/FilterDialog.ui:332
-#: glade/OptionsDialog.ui:894
+#: pigeonplanner/reports/pigeons.py:57 pigeonplanner/ui/widgets/treeview.py:342
+#: glade/FilterDialog.ui:332 glade/OptionsDialog.ui:901
 msgid "Status"
 msgstr "Stav"
 
 #: pigeonplanner/reports/results.py:61 pigeonplanner/reports/velocity.py:39
-#: pigeonplanner/ui/resultwindow.py:80 pigeonplanner/ui/tabs/results.py:52
-#: glade/ResultWindow.ui:178 glade/DetailsView.ui:1182
-#: glade/DetailsView.ui:1282 glade/DetailsView.ui:1397
-#: glade/MedicationView.ui:36 glade/MedicationView.ui:123
-#: glade/ResultParser.ui:170
+#: pigeonplanner/ui/resultwindow.py:82 pigeonplanner/ui/tabs/results.py:52
+#: glade/ResultWindow.ui:216 glade/DetailsView.ui:1140
+#: glade/DetailsView.ui:1240 glade/DetailsView.ui:1355
+#: glade/MedicationView.ui:46 glade/MedicationView.ui:133
+#: glade/ResultParser.ui:172
 msgid "Date"
 msgstr "Datum"
 
-#: pigeonplanner/reports/results.py:62 pigeonplanner/ui/resultwindow.py:81
-#: pigeonplanner/ui/tabs/results.py:53 glade/VelocityCalculator.ui:154
-#: glade/ResultWindow.ui:190 glade/DetailsView.ui:1441
-#: glade/ResultParser.ui:182 glade/RaceManager.ui:132
+#: pigeonplanner/reports/results.py:62 pigeonplanner/ui/resultwindow.py:83
+#: pigeonplanner/ui/tabs/results.py:53 glade/VelocityCalculator.ui:1135
+#: glade/ResultWindow.ui:228 glade/DetailsView.ui:1399
+#: glade/ResultParser.ui:184 glade/RaceManager.ui:132
 msgid "Racepoint"
 msgstr "Vypouštěcí místo"
 
-#: pigeonplanner/reports/results.py:64 pigeonplanner/ui/resultwindow.py:89
-#: pigeonplanner/ui/resultwindow.py:90 pigeonplanner/ui/tabs/results.py:61
+#: pigeonplanner/reports/results.py:64 pigeonplanner/ui/resultwindow.py:91
+#: pigeonplanner/ui/resultwindow.py:92 pigeonplanner/ui/tabs/results.py:61
 #: pigeonplanner/ui/tabs/results.py:62 glade/ResultsView.ui:532
-#: glade/ResultWindow.ui:448
+#: glade/ResultWindow.ui:486
 msgid "Placed"
 msgstr "Umístění"
 
-#: pigeonplanner/reports/results.py:65 pigeonplanner/ui/resultwindow.py:91
+#: pigeonplanner/reports/results.py:65 pigeonplanner/ui/resultwindow.py:93
 #: pigeonplanner/ui/tabs/results.py:63 glade/ResultsView.ui:605
-#: glade/ResultWindow.ui:462
+#: glade/ResultWindow.ui:500
 msgid "Out of"
 msgstr "Z"
 
-#: pigeonplanner/reports/results.py:66 pigeonplanner/ui/resultwindow.py:82
+#: pigeonplanner/reports/results.py:66 pigeonplanner/ui/resultwindow.py:84
 #: pigeonplanner/ui/tabs/results.py:54 glade/ResultsView.ui:352
-#: glade/OptionsDialog.ui:1051 glade/ResultWindow.ui:204
-#: glade/ExportWindow.ui:126 glade/ResultParser.ui:328
+#: glade/OptionsDialog.ui:1089 glade/ResultWindow.ui:242
+#: glade/ExportWindow.ui:126 glade/ResultParser.ui:330
 msgid "Type"
 msgstr "Typ závodu"
 
-#: pigeonplanner/reports/results.py:67 pigeonplanner/ui/resultwindow.py:83
-#: pigeonplanner/ui/tabs/results.py:55
-#: pigeonplanner/ui/tools/datamanager.py:45 glade/ResultsView.ui:303
-#: glade/OptionsDialog.ui:1103 glade/ResultWindow.ui:218
-#: glade/ResultParser.ui:342
+#: pigeonplanner/reports/results.py:67 pigeonplanner/ui/resultwindow.py:85
+#: pigeonplanner/ui/tabs/results.py:55 pigeonplanner/ui/tools/datamanager.py:47
+#: glade/ResultsView.ui:303 glade/OptionsDialog.ui:1141
+#: glade/ResultWindow.ui:256 glade/ResultParser.ui:344
 msgid "Wind"
 msgstr "Vítr"
 
-#: pigeonplanner/reports/results.py:68 pigeonplanner/ui/resultwindow.py:85
-#: pigeonplanner/ui/tabs/results.py:57
-#: pigeonplanner/ui/tools/datamanager.py:44 glade/ResultsView.ui:289
-#: glade/OptionsDialog.ui:1060 glade/ResultWindow.ui:232
-#: glade/ResultParser.ui:356
+#: pigeonplanner/reports/results.py:68 pigeonplanner/ui/resultwindow.py:87
+#: pigeonplanner/ui/tabs/results.py:57 pigeonplanner/ui/tools/datamanager.py:46
+#: glade/ResultsView.ui:289 glade/OptionsDialog.ui:1098
+#: glade/ResultWindow.ui:270 glade/ResultParser.ui:358
 msgid "Weather"
 msgstr "Počasí"
 
@@ -436,101 +444,100 @@ msgstr "Počasí"
 msgid "Coef."
 msgstr "Koeficient"
 
-#: pigeonplanner/reports/results.py:70 pigeonplanner/ui/resultwindow.py:96
+#: pigeonplanner/reports/results.py:70 pigeonplanner/ui/resultwindow.py:98
 #: pigeonplanner/ui/tabs/results.py:68 glade/ResultsView.ui:249
-#: glade/OptionsDialog.ui:1036 glade/ResultWindow.ui:490
-#: glade/ResultParser.ui:196
+#: glade/OptionsDialog.ui:1074 glade/ResultWindow.ui:528
+#: glade/ResultParser.ui:198
 msgid "Sector"
 msgstr "Druh závodu"
 
-#: pigeonplanner/reports/results.py:71 pigeonplanner/ui/resultwindow.py:97
+#: pigeonplanner/reports/results.py:71 pigeonplanner/ui/resultwindow.py:99
 #: pigeonplanner/ui/tabs/results.py:69 glade/ResultsView.ui:366
-#: glade/OptionsDialog.ui:1088 glade/ResultWindow.ui:504
-#: glade/ResultParser.ui:210
+#: glade/OptionsDialog.ui:1126 glade/ResultWindow.ui:542
+#: glade/ResultParser.ui:212
 msgid "Category"
 msgstr "Kategorie"
 
-#: pigeonplanner/reports/results.py:72 pigeonplanner/ui/resultwindow.py:98
+#: pigeonplanner/reports/results.py:72 pigeonplanner/ui/resultwindow.py:100
 #: pigeonplanner/ui/tabs/results.py:70 glade/ResultsView.ui:317
-#: glade/BreedingView.ui:578 glade/BreedingView.ui:935
-#: glade/OptionsDialog.ui:1073 glade/MedicationView.ui:417
-#: glade/MedicationView.ui:775 glade/AddressBook.ui:413
+#: glade/BreedingView.ui:269 glade/BreedingView.ui:1239
+#: glade/OptionsDialog.ui:1111 glade/MedicationView.ui:427
+#: glade/MedicationView.ui:805 glade/AddressBook.ui:420
 msgid "Comment"
 msgstr "Komentář"
 
 #: pigeonplanner/reports/velocity.py:35 pigeonplanner/reports/velocity.py:46
-#: glade/VelocityCalculator.ui:341 glade/VelocityCalculator.ui:661
-#: glade/VelocityCalculator.ui:1125
+#: glade/VelocityCalculator.ui:202 glade/VelocityCalculator.ui:514
+#: glade/VelocityCalculator.ui:975
 msgid "Velocity"
 msgstr "Rychlost"
 
-#: pigeonplanner/reports/velocity.py:40 glade/VelocityCalculator.ui:700
+#: pigeonplanner/reports/velocity.py:40 glade/VelocityCalculator.ui:556
 msgid "Released"
 msgstr "Vypuštěno"
 
-#: pigeonplanner/reports/velocity.py:41 glade/VelocityCalculator.ui:166
-#: glade/VelocityCalculator.ui:315 glade/VelocityCalculator.ui:685
+#: pigeonplanner/reports/velocity.py:41 glade/VelocityCalculator.ui:176
+#: glade/VelocityCalculator.ui:541 glade/VelocityCalculator.ui:1147
 #: glade/DistanceCalculator.ui:369 glade/RaceManager.ui:191
 msgid "Distance"
 msgstr "Vzdálenost"
 
-#: pigeonplanner/reports/velocity.py:47 glade/VelocityCalculator.ui:1136
+#: pigeonplanner/reports/velocity.py:47 glade/VelocityCalculator.ui:986
 msgid "Flight Time"
 msgstr "Čas letu"
 
-#: pigeonplanner/reports/velocity.py:48 glade/VelocityCalculator.ui:1147
+#: pigeonplanner/reports/velocity.py:48 glade/VelocityCalculator.ui:997
 msgid "Time of Arrival"
 msgstr "Čas příletu"
 
-#: pigeonplanner/reports/pedigrees/swapped_details.py:50
-#: pigeonplanner/reports/pedigrees/original.py:64
-#: pigeonplanner/reports/pedigrees/middle.py:43
+#: pigeonplanner/reports/pedigrees/swapped_details.py:49
+#: pigeonplanner/reports/pedigrees/original.py:63
+#: pigeonplanner/reports/pedigrees/middle.py:42
 msgid "Pedigree of:"
 msgstr "Rodokmen:"
 
-#: pigeonplanner/ui/filechooser.py:53
+#: pigeonplanner/ui/filechooser.py:55
 msgid "Preview"
 msgstr "Náhled"
 
-#: pigeonplanner/ui/filechooser.py:78 pigeonplanner/ui/tabs/media.py:110
+#: pigeonplanner/ui/filechooser.py:81 pigeonplanner/ui/tabs/media.py:120
 msgid "Images"
 msgstr "Obrázky"
 
-#: pigeonplanner/ui/filechooser.py:140
+#: pigeonplanner/ui/filechooser.py:144
 msgid "Select an image..."
 msgstr "Vyber obrázek ..."
 
-#: pigeonplanner/ui/filechooser.py:143
+#: pigeonplanner/ui/filechooser.py:147
 msgid "No image"
 msgstr "Obrázek není k dispozici"
 
-#: pigeonplanner/ui/filechooser.py:155 pigeonplanner/ui/filechooser.py:235
-#: pigeonplanner/ui/filechooser.py:265
+#: pigeonplanner/ui/filechooser.py:159 pigeonplanner/ui/filechooser.py:255
 msgid "Select a file..."
 msgstr "Vyber soubor..."
 
-#: pigeonplanner/ui/filechooser.py:165
+#: pigeonplanner/ui/filechooser.py:170
 msgid "Title"
 msgstr "Název"
 
-#: pigeonplanner/ui/filechooser.py:169 pigeonplanner/ui/dbmanager.py:51
-#: glade/DBManager.ui:375 glade/MedicationView.ui:50
-#: glade/MedicationView.ui:226 glade/MedicationView.ui:719
+#: pigeonplanner/ui/filechooser.py:174 pigeonplanner/ui/dbmanager.py:52
+#: glade/DBManager.ui:438 glade/MedicationView.ui:60
+#: glade/MedicationView.ui:236 glade/MedicationView.ui:749
 msgid "Description"
 msgstr "Popis"
 
-#: pigeonplanner/ui/filechooser.py:200 pigeonplanner/ui/filechooser.py:213
+#: pigeonplanner/ui/filechooser.py:205 pigeonplanner/ui/filechooser.py:218
 msgid "Save as..."
 msgstr "Uložit jako ..."
 
-#: pigeonplanner/ui/filechooser.py:256
+#: pigeonplanner/ui/filechooser.py:244 pigeonplanner/ui/dbmanager.py:77
 msgid "Select a folder..."
 msgstr "Vyber složku ..."
 
-#: pigeonplanner/ui/optionsdialog.py:53 glade/BreedingView.ui:597
-#: glade/BreedingView.ui:954 glade/OptionsDialog.ui:1696
-#: glade/OptionsDialog.ui:1782 glade/OptionsDialog.ui:1929
-#: glade/DBManager.ui:423
+#: pigeonplanner/ui/optionsdialog.py:53 glade/BreedingView.ui:288
+#: glade/BreedingView.ui:1258 glade/OptionsDialog.ui:1734
+#: glade/OptionsDialog.ui:1820 glade/OptionsDialog.ui:1967
+#: glade/DBManager.ui:488
 msgid "General"
 msgstr "Obecné"
 
@@ -547,24 +554,24 @@ msgid "Printing"
 msgstr "Tisk"
 
 #: pigeonplanner/ui/optionsdialog.py:60 pigeonplanner/ui/gtkmain.py:57
-#: pigeonplanner/ui/pedigreewindow.py:69 pigeonplanner/ui/pedigreewindow.py:77
+#: pigeonplanner/ui/pedigreewindow.py:80 pigeonplanner/ui/pedigreewindow.py:84
 #: pigeonplanner/ui/tabs/pedigree.py:28
 msgid "Pedigree"
 msgstr "Rodokmen"
 
-#: pigeonplanner/ui/optionsdialog.py:61 pigeonplanner/ui/tabs/results.py:646
-#: glade/MainWindow.ui:293 glade/ExportWindow.ui:254 glade/ResultParser.ui:224
+#: pigeonplanner/ui/optionsdialog.py:61 pigeonplanner/ui/tabs/results.py:665
+#: glade/MainWindow.ui:25 glade/ExportWindow.ui:254 glade/ResultParser.ui:226
 msgid "Pigeons"
 msgstr "Holubi"
 
-#: pigeonplanner/ui/optionsdialog.py:62 pigeonplanner/ui/resultwindow.py:228
-#: pigeonplanner/ui/resultwindow.py:416 pigeonplanner/ui/resultwindow.py:578
-#: pigeonplanner/ui/tabs/results.py:538 glade/ResultsView.ui:135
-#: glade/ResultWindow.ui:777
+#: pigeonplanner/ui/optionsdialog.py:62 pigeonplanner/ui/resultwindow.py:230
+#: pigeonplanner/ui/resultwindow.py:421 pigeonplanner/ui/resultwindow.py:592
+#: pigeonplanner/ui/tabs/results.py:549 glade/ResultsView.ui:135
+#: glade/ResultWindow.ui:816
 msgid "Results"
 msgstr "Výsledek"
 
-#: pigeonplanner/ui/optionsdialog.py:64 glade/DBManager.ui:531
+#: pigeonplanner/ui/optionsdialog.py:64 glade/DBManager.ui:596
 msgid "Advanced"
 msgstr "Pokročilé"
 
@@ -596,8 +603,8 @@ msgstr "Můžete pomoci  vývojářům tím, že včas ohlásite tuto chybu."
 msgid "Error Detail"
 msgstr "Detail chyby"
 
-#: pigeonplanner/ui/gtkmain.py:58 glade/OptionsDialog.ui:1320
-#: glade/Dialogs.ui:8 glade/AddressBook.ui:372
+#: pigeonplanner/ui/gtkmain.py:58 glade/OptionsDialog.ui:1358
+#: glade/Dialogs.ui:8 glade/AddressBook.ui:379
 msgid "E-mail"
 msgstr "e-mail"
 
@@ -609,73 +616,89 @@ msgstr "Poslat"
 msgid "Report"
 msgstr "Zpráva"
 
-#: pigeonplanner/ui/pedigreewindow.py:88
+#: pigeonplanner/ui/pedigreewindow.py:104
+msgid "Go to the previous pedigree"
+msgstr ""
+
+#: pigeonplanner/ui/pedigreewindow.py:106
+msgid "Go to the first selected pedigree"
+msgstr ""
+
+#: pigeonplanner/ui/pedigreewindow.py:108
+msgid "Go to the next pedigree"
+msgstr ""
+
+#: pigeonplanner/ui/pedigreewindow.py:110
 msgid "Save this pedigree"
 msgstr "Uložit tento rodokmen"
 
-#: pigeonplanner/ui/pedigreewindow.py:92
+#: pigeonplanner/ui/pedigreewindow.py:114
 msgid "View this pedigree"
 msgstr "Zobrazit tento rodokmen"
 
-#: pigeonplanner/ui/pedigreewindow.py:94 glade/MainWindow.ui:66
+#: pigeonplanner/ui/pedigreewindow.py:116 glade/MainWindow.ui:255
 msgid "Print this pedigree"
 msgstr "Tisknout rodokmen"
 
-#: pigeonplanner/ui/pedigreewindow.py:96
-#: pigeonplanner/reportlib/gui/printpreview.py:65 glade/ResultWindow.ui:47
-#: glade/PhotoAlbum.ui:29
+#: pigeonplanner/ui/pedigreewindow.py:118
+#: pigeonplanner/reportlib/gui/printpreview.py:65 glade/ResultWindow.ui:16
+#: glade/PhotoAlbum.ui:50
 msgid "Close this window"
 msgstr "Zavřít okno"
 
-#: pigeonplanner/ui/pedigreewindow.py:194
+#: pigeonplanner/ui/pedigreewindow.py:229
 #, python-format
 msgid "Cannot find image '%s'"
 msgstr "Nelze najít obrázek '%s'"
 
-#: pigeonplanner/ui/pedigreewindow.py:195
+#: pigeonplanner/ui/pedigreewindow.py:230
 msgid ""
 "You need to edit the pigeon and select the correct path or restore the "
 "original image on your computer."
 msgstr "Vyber správnou cestu k obrázku"
 
-#: pigeonplanner/ui/pedigreewindow.py:212 pigeonplanner/ui/resultwindow.py:770
+#: pigeonplanner/ui/pedigreewindow.py:247 pigeonplanner/ui/resultwindow.py:783
 msgid "You probably don't have write permissions on this folder."
 msgstr "Asi nemáš oprávnění k zápisu do této složky."
 
-#: pigeonplanner/ui/resultwindow.py:84 pigeonplanner/ui/tabs/results.py:56
-#: glade/ResultsView.ui:656 glade/OptionsDialog.ui:1116
-#: glade/ResultParser.ui:427
+#: pigeonplanner/ui/resultwindow.py:86 pigeonplanner/ui/tabs/results.py:56
+#: glade/ResultsView.ui:656 glade/OptionsDialog.ui:1154
+#: glade/ResultParser.ui:429
 msgid "Windspeed"
 msgstr "Rychlost větru"
 
-#: pigeonplanner/ui/resultwindow.py:86 pigeonplanner/ui/tabs/results.py:58
-#: glade/ResultsView.ui:727 glade/OptionsDialog.ui:1144
-#: glade/ResultParser.ui:460
+#: pigeonplanner/ui/resultwindow.py:88 pigeonplanner/ui/tabs/results.py:58
+#: glade/ResultsView.ui:727 glade/OptionsDialog.ui:1182
+#: glade/ResultParser.ui:462
 msgid "Temperature"
 msgstr "Teplota"
 
-#: pigeonplanner/ui/resultwindow.py:88 pigeonplanner/ui/dialogs.py:256
-#: pigeonplanner/ui/tabs/results.py:60 pigeonplanner/ui/tabs/relatives.py:163
-#: pigeonplanner/ui/widgets/treeview.py:283 glade/MainWindow.ui:877
-#: glade/ResultParser.ui:587
+#: pigeonplanner/ui/resultwindow.py:90 pigeonplanner/ui/dialogs.py:230
+#: pigeonplanner/ui/tabs/results.py:60 pigeonplanner/ui/tabs/relatives.py:171
+#: pigeonplanner/ui/widgets/bandentry.py:69
+#: pigeonplanner/ui/widgets/bandentry.py:203
+#: pigeonplanner/ui/widgets/bandentry.py:301
+#: pigeonplanner/ui/widgets/bandentry.py:323
+#: pigeonplanner/ui/widgets/treeview.py:341 glade/MainWindow.ui:912
+#: glade/ResultParser.ui:589
 msgid "Year"
 msgstr "Ročník"
 
-#: pigeonplanner/ui/resultwindow.py:92 pigeonplanner/ui/resultwindow.py:93
+#: pigeonplanner/ui/resultwindow.py:94 pigeonplanner/ui/resultwindow.py:95
 #: pigeonplanner/ui/tabs/results.py:64 pigeonplanner/ui/tabs/results.py:65
-#: glade/OptionsDialog.ui:1023 glade/ResultWindow.ui:476
+#: glade/OptionsDialog.ui:1061 glade/ResultWindow.ui:514
 msgid "Coefficient"
 msgstr "Koeficient"
 
-#: pigeonplanner/ui/resultwindow.py:94 pigeonplanner/ui/resultwindow.py:95
+#: pigeonplanner/ui/resultwindow.py:96 pigeonplanner/ui/resultwindow.py:97
 #: pigeonplanner/ui/tabs/results.py:66 pigeonplanner/ui/tabs/results.py:67
-#: glade/ResultsView.ui:690 glade/OptionsDialog.ui:1129
-#: glade/ResultParser.ui:613
+#: glade/ResultsView.ui:690 glade/OptionsDialog.ui:1167
+#: glade/ResultParser.ui:615
 msgid "Speed"
 msgstr "Rychlost"
 
-#: pigeonplanner/ui/resultwindow.py:393 pigeonplanner/ui/tabs/results.py:363
-#: glade/ResultWindow.ui:382
+#: pigeonplanner/ui/resultwindow.py:398 pigeonplanner/ui/tabs/results.py:362
+#: glade/ResultWindow.ui:420
 msgid "Races"
 msgstr "Závody"
 
@@ -696,15 +719,20 @@ msgstr "K tomuto nástroji je třeba Yapsy skript, aby správně fungoval."
 msgid "This result is not in the '%s' format. Do you want to continue?"
 msgstr "Výsledek není ve  formátu '%s' . Chcete pokračovat?"
 
-#: pigeonplanner/ui/resultparser.py:122
+#: pigeonplanner/ui/resultparser.py:128
 msgid "The date, racepoint or number of pigeons is incorrect."
 msgstr "Špatné datum, nebo vypouštěcí místo, nebo počet holubů."
 
-#: pigeonplanner/ui/detailsview.py:54 glade/DetailsView.ui:1015
+#: pigeonplanner/ui/resultparser.py:178
+msgid "Failed to send report."
+msgstr ""
+
+#: pigeonplanner/ui/detailsview.py:73 glade/DetailsView.ui:447
+#: glade/DetailsView.ui:932
 msgid "Details of pigeon"
 msgstr "Podrobnosti holuba"
 
-#: pigeonplanner/ui/detailsview.py:56
+#: pigeonplanner/ui/detailsview.py:76
 #, python-format
 msgid "Details of %s"
 msgstr "Podrobnosti o %s"
@@ -719,21 +747,26 @@ msgstr "Holub% s byl přidán"
 msgid "Pigeon %s has been removed"
 msgstr "Holub %s byl odebrán"
 
-#: pigeonplanner/ui/mainwindow.py:394
+#: pigeonplanner/ui/mainwindow.py:392
 #, python-format
 msgid "%s pigeons have been removed"
 msgstr "%s Holubi byli odstaněni"
 
-#: pigeonplanner/ui/mainwindow.py:514 glade/MainWindow.ui:236
+#: pigeonplanner/ui/mainwindow.py:515 glade/MainWindow.ui:81
 msgid "Search for updates..."
 msgstr "Hledat aktualizace..."
 
-#: pigeonplanner/ui/mainwindow.py:516
+#: pigeonplanner/ui/mainwindow.py:517
 msgid "Go to the website?"
 msgstr "Chceš na webové stránky?"
 
+#: pigeonplanner/ui/mainwindow.py:598 pigeonplanner/ui/dialogs.py:182
+#: glade/Backup.ui:55
+msgid "Restore"
+msgstr "Obnovit"
+
 #: pigeonplanner/ui/locationchooser.py:57
-#: pigeonplanner/ui/tools/distancecalculator.py:51
+#: pigeonplanner/ui/tools/distancecalculator.py:53
 msgid "This tool needs Geopy 0.95.0 or higher to run correctly."
 msgstr ""
 "Pro tento nástroj je třeba Geopy 0.95.0 nebo vyšší, aby správně fungoval."
@@ -743,19 +776,19 @@ msgstr ""
 msgid "Can't find location '%s'"
 msgstr "Nelze najít umístění '%s'"
 
-#: pigeonplanner/ui/dbmanager.py:41
+#: pigeonplanner/ui/exportwindow.py:80
+msgid "The selected path is not writeable."
+msgstr ""
+
+#: pigeonplanner/ui/dbmanager.py:42
 msgid "Select a database file..."
 msgstr "Vyber soubor databáze ..."
 
-#: pigeonplanner/ui/dbmanager.py:44
+#: pigeonplanner/ui/dbmanager.py:45
 msgid "Pigeon Planner database"
 msgstr "Pigeon Planner databáze"
 
-#: pigeonplanner/ui/dbmanager.py:92
-msgid "Select a directory..."
-msgstr "Vyber adresář ..."
-
-#: pigeonplanner/ui/dbmanager.py:303
+#: pigeonplanner/ui/dbmanager.py:355
 msgid ""
 "It's not allowed to close the database manager when no database is opened."
 msgstr "Nejde ukončit správce databáze, když není žádná vybrána."
@@ -764,7 +797,7 @@ msgstr "Nejde ukončit správce databáze, když není žádná vybrána."
 msgid "Logfile Viewer"
 msgstr "Prohlížeč log souborů"
 
-#: pigeonplanner/ui/dialogs.py:58
+#: pigeonplanner/ui/dialogs.py:57
 msgid "translator-credits"
 msgstr ""
 "Překladatel\n"
@@ -774,91 +807,85 @@ msgstr ""
 "  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
 "  johnny jebb https://launchpad.net/~bee88"
 
-#: pigeonplanner/ui/dialogs.py:68 glade/MainWindow.ui:244
+#: pigeonplanner/ui/dialogs.py:67 glade/MainWindow.ui:74
 msgid "General information"
 msgstr "Obecné informace"
 
-#: pigeonplanner/ui/dialogs.py:93
+#: pigeonplanner/ui/dialogs.py:92
 msgid "Technical details"
 msgstr "Technické detaily"
 
-#: pigeonplanner/ui/dialogs.py:96
+#: pigeonplanner/ui/dialogs.py:95
 msgid "Data information"
 msgstr "Informace"
 
-#: pigeonplanner/ui/dialogs.py:113
+#: pigeonplanner/ui/dialogs.py:112
 msgid "Number of pigeons"
 msgstr "Počet holubů"
 
-#: pigeonplanner/ui/dialogs.py:114 glade/MainWindow.ui:427
+#: pigeonplanner/ui/dialogs.py:113 glade/MainWindow.ui:430
 msgid "Cocks"
 msgstr "Holubi"
 
-#: pigeonplanner/ui/dialogs.py:116 glade/MainWindow.ui:459
+#: pigeonplanner/ui/dialogs.py:115 glade/MainWindow.ui:462
 msgid "Hens"
 msgstr "Holubice"
 
-#: pigeonplanner/ui/dialogs.py:118 glade/MainWindow.ui:491
+#: pigeonplanner/ui/dialogs.py:117 glade/MainWindow.ui:494
 msgid "Young birds"
 msgstr "Holoubata"
 
-#: pigeonplanner/ui/dialogs.py:124
+#: pigeonplanner/ui/dialogs.py:119 pigeonplanner/core/enums.py:29
+#: glade/MainWindow.ui:526
+msgid "Unknown"
+msgstr ""
+
+#: pigeonplanner/ui/dialogs.py:130
 msgid "Number of results"
 msgstr "Číslo výsledku"
 
-#: pigeonplanner/ui/dialogs.py:125
+#: pigeonplanner/ui/dialogs.py:131
 msgid "Number of couples"
 msgstr "Číslo páru"
 
-#: pigeonplanner/ui/dialogs.py:148
+#: pigeonplanner/ui/dialogs.py:154 glade/Backup.ui:255
 msgid "Create backup"
 msgstr "Vytvořit zálohu"
 
-#: pigeonplanner/ui/dialogs.py:149
+#: pigeonplanner/ui/dialogs.py:155
 msgid "Choose a directory where to save the backup"
 msgstr "Vyber si adresář kam uložit zálohu"
 
-#: pigeonplanner/ui/dialogs.py:155 glade/OptionsDialog.ui:386
+#: pigeonplanner/ui/dialogs.py:161 glade/OptionsDialog.ui:396
+#: glade/Backup.ui:100 glade/Backup.ui:291
 msgid "Backup"
 msgstr "Záloha"
 
-#: pigeonplanner/ui/dialogs.py:164
+#: pigeonplanner/ui/dialogs.py:170 glade/Backup.ui:19
 msgid "Restore backup"
 msgstr "Obnovit zálohu"
 
-#: pigeonplanner/ui/dialogs.py:165
+#: pigeonplanner/ui/dialogs.py:171
 msgid "Choose a Pigeon Planner backup file to restore"
 msgstr "Vyber si záložní soubor pro obnovu Pigeon Planner"
 
-#: pigeonplanner/ui/dialogs.py:168
+#: pigeonplanner/ui/dialogs.py:174
 msgid "Warning! This will overwrite the existing database!"
 msgstr "Upozornění! Tím se přepíše stávající databáze!"
 
-#: pigeonplanner/ui/dialogs.py:176
-msgid "Restore"
-msgstr "Obnovit"
-
-#: pigeonplanner/ui/dialogs.py:217
-msgid "Removing the selected medication entry"
-msgstr "Smazat vybraný lék"
-
-#: pigeonplanner/ui/dialogs.py:219
-msgid "Remove this entry for all pigeons?"
-msgstr "Smazat  záznamy  pro všechny holuby?"
-
-#: pigeonplanner/ui/dialogs.py:241
+#: pigeonplanner/ui/dialogs.py:215
 msgid "Search a pigeon"
 msgstr "Hledat holuba"
 
-#: pigeonplanner/ui/dialogs.py:274 glade/MainWindow.ui:300
+#: pigeonplanner/ui/dialogs.py:248 glade/MainWindow.ui:18
 msgid "Show all pigeons"
 msgstr "Zobrazit všechny holuby"
 
-#: pigeonplanner/ui/tabs/media.py:39 glade/MediaView.ui:56
+#: pigeonplanner/ui/tabs/media.py:44 glade/MediaView.ui:68
 msgid "Media"
 msgstr "Mediální soubory"
 
-#: pigeonplanner/ui/tabs/media.py:114 glade/OptionsDialog.ui:786
+#: pigeonplanner/ui/tabs/media.py:124 glade/OptionsDialog.ui:796
 msgid "Other"
 msgstr "Další"
 
@@ -870,8 +897,16 @@ msgstr "<b>Rodokmen holuba</b>"
 msgid "<b>Pedigree dam</b>"
 msgstr "<b>Rodokmen holubice</b>"
 
-#: pigeonplanner/ui/tabs/medication.py:37 glade/MedicationView.ui:278
-#: glade/MedicationView.ui:512 glade/MedicationView.ui:747
+#: pigeonplanner/ui/tabs/medication.py:53
+msgid "Removing the selected medication entry"
+msgstr "Smazat vybraný lék"
+
+#: pigeonplanner/ui/tabs/medication.py:54
+msgid "Remove this entry for all pigeons?"
+msgstr "Smazat  záznamy  pro všechny holuby?"
+
+#: pigeonplanner/ui/tabs/medication.py:77 glade/MedicationView.ui:288
+#: glade/MedicationView.ui:542 glade/MedicationView.ui:777
 msgid "Medication"
 msgstr "Léky"
 
@@ -879,23 +914,23 @@ msgstr "Léky"
 msgid "Breeding"
 msgstr "Odchov"
 
-#: pigeonplanner/ui/tabs/results.py:192 pigeonplanner/ui/tabs/results.py:385
+#: pigeonplanner/ui/tabs/results.py:202 pigeonplanner/ui/tabs/results.py:384
 msgid "Results of pigeon"
 msgstr "Výsledky holuba"
 
-#: pigeonplanner/ui/tabs/results.py:561
+#: pigeonplanner/ui/tabs/results.py:575
 msgid "Add to pedigree details"
 msgstr "Přidat podrobnosti do rodokmenu"
 
-#: pigeonplanner/ui/tabs/results.py:654
+#: pigeonplanner/ui/tabs/results.py:674
 msgid "No empty space found in pedigree details."
 msgstr "Není  místo pro podrobnosti v rodokmenu"
 
-#: pigeonplanner/ui/tabs/results.py:731
+#: pigeonplanner/ui/tabs/results.py:756
 msgid "Edit result for:"
 msgstr "Upravit výsledek pro:"
 
-#: pigeonplanner/ui/tabs/results.py:731
+#: pigeonplanner/ui/tabs/results.py:756
 msgid "Add result for:"
 msgstr "Přidat výsledek pro:"
 
@@ -915,71 +950,125 @@ msgstr "<b>Nevlastní bratři a sestry</b>"
 msgid "<b>Offspring</b>"
 msgstr "<b>Potomci</b>"
 
-#: pigeonplanner/ui/tabs/relatives.py:167
+#: pigeonplanner/ui/tabs/relatives.py:175
 msgid "Common parent"
 msgstr "Společný rodič"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:169
+#: pigeonplanner/ui/widgets/bandentry.py:60
+#: pigeonplanner/ui/widgets/bandentry.py:200
+#: pigeonplanner/ui/widgets/bandentry.py:292
+#: pigeonplanner/ui/widgets/bandentry.py:323 glade/AddressBook.ui:297
+msgid "Country"
+msgstr "Země"
+
+#: pigeonplanner/ui/widgets/bandentry.py:63
+#: pigeonplanner/ui/widgets/bandentry.py:201
+#: pigeonplanner/ui/widgets/bandentry.py:295
+#: pigeonplanner/ui/widgets/bandentry.py:323
+msgid "Letters"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:66
+#: pigeonplanner/ui/widgets/bandentry.py:202
+#: pigeonplanner/ui/widgets/bandentry.py:298
+#: pigeonplanner/ui/widgets/bandentry.py:323
+msgid "Number"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:84
+#: pigeonplanner/ui/widgets/bandentry.py:338
+msgid "Information"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:204
+msgid "Year (short)"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:205
+msgid "Empty"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:323
+msgid "The fields are:"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:325
+msgid "The number and year fields are required."
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:327
+msgid "The year has to be four digits long."
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:365
+msgid "Make this format the default"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/bandentry.py:375
+msgid "Band format"
+msgstr ""
+
+#: pigeonplanner/ui/widgets/comboboxes.py:170
 msgid "Yards"
 msgstr "Yardy"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:170
+#: pigeonplanner/ui/widgets/comboboxes.py:171
 msgid "Kilometres"
 msgstr "Kilometry"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:171
+#: pigeonplanner/ui/widgets/comboboxes.py:172
 msgid "Metres"
 msgstr "Metry"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:172
+#: pigeonplanner/ui/widgets/comboboxes.py:173
 msgid "Centimetres"
 msgstr "Centimetry"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:173
+#: pigeonplanner/ui/widgets/comboboxes.py:174
 msgid "Inches"
 msgstr "Inche"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:174
+#: pigeonplanner/ui/widgets/comboboxes.py:175
 msgid "Feet"
 msgstr "Stopy"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:175
+#: pigeonplanner/ui/widgets/comboboxes.py:176
 msgid "Miles"
 msgstr "Míle"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:176
+#: pigeonplanner/ui/widgets/comboboxes.py:177
 msgid "Nautical Miles"
 msgstr "Námořní míle"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:199
+#: pigeonplanner/ui/widgets/comboboxes.py:200
 msgid "Yard per Minute"
 msgstr "Yardů za minutu"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:200
+#: pigeonplanner/ui/widgets/comboboxes.py:201
 msgid "Metres per Minute"
 msgstr "Metrů za minutu"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:201
+#: pigeonplanner/ui/widgets/comboboxes.py:202
 msgid "Metres per Second"
 msgstr "Metrů z vteřinu"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:202
+#: pigeonplanner/ui/widgets/comboboxes.py:203
 msgid "Kilometre per Hour"
 msgstr "Kilometrů za hodinu"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:203
+#: pigeonplanner/ui/widgets/comboboxes.py:204
 msgid "Feet per Second"
 msgstr "Stop za vteřinu"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:204
+#: pigeonplanner/ui/widgets/comboboxes.py:205
 msgid "Feet per Minute"
 msgstr "Stop za minutu"
 
-#: pigeonplanner/ui/widgets/comboboxes.py:205
+#: pigeonplanner/ui/widgets/comboboxes.py:206
 msgid "Mile per Hour"
 msgstr "Mil za hodinu"
 
-#: pigeonplanner/ui/widgets/latlongentry.py:38
+#: pigeonplanner/ui/widgets/latlongentry.py:39
 msgid ""
 "Input should be in one of these formats:\n"
 "  DD.dddddd°\n"
@@ -996,60 +1085,59 @@ msgstr ""
 msgid "Pigeons: %s"
 msgstr "Holubi: %s"
 
-#: pigeonplanner/ui/widgets/statusbar.py:42
+#: pigeonplanner/ui/widgets/statusbar.py:43
 #, python-format
 msgid "Filter: %s"
 msgstr "Filtr: %s"
 
-#: pigeonplanner/ui/widgets/statusbar.py:43
+#: pigeonplanner/ui/widgets/statusbar.py:44
 msgid "On"
 msgstr "Zapnuto"
 
-#: pigeonplanner/ui/widgets/statusbar.py:44
+#: pigeonplanner/ui/widgets/statusbar.py:45
 msgid "Off"
 msgstr "Vypnuto"
 
-#: pigeonplanner/ui/widgets/pedigreeboxes.py:72
-#: pigeonplanner/ui/widgets/pedigreeboxes.py:275
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:71
+#: pigeonplanner/ui/widgets/pedigreeboxes.py:268
 msgid "<edit>"
 msgstr "<Upravit>"
 
-#: pigeonplanner/ui/tools/datamanager.py:37
+#: pigeonplanner/ui/tools/datamanager.py:39
 msgid "Colours"
 msgstr "Barvy"
 
-#: pigeonplanner/ui/tools/datamanager.py:38
+#: pigeonplanner/ui/tools/datamanager.py:40
 msgid "Sectors"
 msgstr "Druhy závodů"
 
-#: pigeonplanner/ui/tools/datamanager.py:39
+#: pigeonplanner/ui/tools/datamanager.py:41
 msgid "Types"
 msgstr "Typy závodů"
 
-#: pigeonplanner/ui/tools/datamanager.py:40
+#: pigeonplanner/ui/tools/datamanager.py:42
 msgid "Categories"
 msgstr "Kategorie"
 
-#: pigeonplanner/ui/tools/datamanager.py:41
-#: pigeonplanner/ui/tools/datamanager.py:72 glade/VelocityCalculator.ui:65
+#: pigeonplanner/ui/tools/datamanager.py:43 glade/VelocityCalculator.ui:1048
 msgid "Racepoints"
 msgstr "¨Vypouštěcí místa"
 
-#: pigeonplanner/ui/tools/datamanager.py:42
+#: pigeonplanner/ui/tools/datamanager.py:44
 msgid "Strains"
 msgstr "Kmeny"
 
-#: pigeonplanner/ui/tools/datamanager.py:43
+#: pigeonplanner/ui/tools/datamanager.py:45
 msgid "Lofts"
 msgstr "Holubníky"
 
-#: pigeonplanner/ui/tools/distancecalculator.py:70
+#: pigeonplanner/ui/tools/distancecalculator.py:72
 msgid ""
 "The latitude and longitude need to be in DD.dddddd° format to use this "
 "function."
 msgstr "Zeměpisná šířka a délka musí být ve formátu DD.dddddd °"
 
-#: pigeonplanner/ui/tools/distancecalculator.py:173
+#: pigeonplanner/ui/tools/distancecalculator.py:175
 msgid "Custom"
 msgstr "Vyber místo"
 
@@ -1126,24 +1214,24 @@ msgstr "Zmenšit stránku"
 msgid "of %d"
 msgstr "z %d"
 
-#: pigeonplanner/database/manager.py:77
+#: pigeonplanner/database/manager.py:76
 msgid "My pigeons"
 msgstr "Moji holubi"
 
-#: pigeonplanner/database/manager.py:78
+#: pigeonplanner/database/manager.py:77
 msgid "My default database"
 msgstr "Moje základní databáze"
 
-#: pigeonplanner/database/manager.py:161
+#: pigeonplanner/database/manager.py:160
 msgid "This database is already added."
 msgstr "Tato databáze již byla přidána."
 
-#: pigeonplanner/database/manager.py:180
+#: pigeonplanner/database/manager.py:179
 #, python-format
 msgid "Database path '%s' is not writeable."
 msgstr "Cesta k databázi '%s' je chybná."
 
-#: pigeonplanner/database/manager.py:201
+#: pigeonplanner/database/manager.py:200 pigeonplanner/database/manager.py:255
 #, python-format
 msgid ""
 "Moving the database failed with message:\n"
@@ -1152,371 +1240,371 @@ msgstr ""
 "Přesunutí databáze se nezdařilo \n"
 "%s"
 
-#: pigeonplanner/database/manager.py:221
+#: pigeonplanner/database/manager.py:220
 msgid "Unable to remove the database: permission denied"
 msgstr "Nelze odstranit databázi: Přístup odmítnut"
 
-#: pigeonplanner/database/manager.py:266
+#: pigeonplanner/database/manager.py:232 pigeonplanner/database/manager.py:233
+msgid "copy"
+msgstr ""
+
+#: pigeonplanner/database/manager.py:293
 msgid "Database name is required."
 msgstr "Musí být zadán název databáze."
 
-#: pigeonplanner/database/manager.py:269
+#: pigeonplanner/database/manager.py:296
 #, python-format
 msgid "Database name '%s' already exists."
 msgstr "Název databáze '% s' již existuje."
 
-#: pigeonplanner/core/common.py:43
-msgid "Cock"
-msgstr "H"
-
-#: pigeonplanner/core/common.py:44
-msgid "Hen"
-msgstr "HE"
-
-#: pigeonplanner/core/common.py:45
-msgid "Young bird"
-msgstr "Holoubě"
-
-#: pigeonplanner/core/common.py:55
-msgid "Dead"
-msgstr "Mrtvý"
-
-#: pigeonplanner/core/common.py:56
-msgid "Active"
-msgstr "Živý"
-
-#: pigeonplanner/core/common.py:57
-msgid "Sold"
-msgstr "Prodán"
-
-#: pigeonplanner/core/common.py:58
-msgid "Lost"
-msgstr "Ztracen"
-
-#: pigeonplanner/core/common.py:59
-msgid "Breeder"
-msgstr "Chovný"
-
-#: pigeonplanner/core/common.py:60
-msgid "On loan"
-msgstr "Půjčený"
-
-#: pigeonplanner/core/common.py:61
-msgid "Widow"
-msgstr "Vdova"
-
-#: pigeonplanner/core/common.py:238
+#: pigeonplanner/core/common.py:187
 msgid "Error: This file does not exist"
 msgstr "Chyba: Tento soubor neexistuje"
 
-#: pigeonplanner/core/common.py:245
+#: pigeonplanner/core/common.py:194
 msgid "Error opening file:"
 msgstr "Chyba při otevírání souboru:"
 
-#: glade/MainWindow.ui:10
-msgid "View online help"
-msgstr "Zobrazit nápovědu"
+#: pigeonplanner/core/enums.py:26
+msgid "Cock"
+msgstr "H"
 
-#: glade/MainWindow.ui:18
-msgid "Select all"
-msgstr "Označit vše"
+#: pigeonplanner/core/enums.py:27
+msgid "Hen"
+msgstr "HE"
 
-#: glade/MainWindow.ui:19
-msgid "Select all pigeons"
-msgstr "Označit všechny holubi"
+#: pigeonplanner/core/enums.py:28
+msgid "Young bird"
+msgstr "Holoubě"
 
-#: glade/MainWindow.ui:25
-msgid "_File"
-msgstr "_Soubor"
+#: pigeonplanner/core/enums.py:47
+msgid "Dead"
+msgstr "Mrtvý"
 
-#: glade/MainWindow.ui:35 glade/MainWindow.ui:79
-msgid "_Backup"
-msgstr "_Záloha"
+#: pigeonplanner/core/enums.py:48
+msgid "Active"
+msgstr "Živý"
 
-#: glade/MainWindow.ui:40
-msgid "_Pigeon"
-msgstr "_Holub"
+#: pigeonplanner/core/enums.py:49
+msgid "Sold"
+msgstr "Prodán"
 
-#: glade/MainWindow.ui:45
-msgid "_Edit"
-msgstr "_Upravit"
+#: pigeonplanner/core/enums.py:50
+msgid "Lost"
+msgstr "Ztracen"
 
-#: glade/MainWindow.ui:50
-msgid "_View"
-msgstr "_Zobrazit"
+#: pigeonplanner/core/enums.py:51
+msgid "Breeder"
+msgstr "Chovný"
 
-#: glade/MainWindow.ui:55
-msgid "_Tools"
-msgstr "_Nástroje"
+#: pigeonplanner/core/enums.py:52
+msgid "On loan"
+msgstr "Půjčený"
 
-#: glade/MainWindow.ui:60
-msgid "_Help"
-msgstr "_Pomoc"
+#: pigeonplanner/core/enums.py:53
+msgid "Widow"
+msgstr "Vdova"
 
-#: glade/MainWindow.ui:65 glade/MainWindow.ui:145
-msgid "_Pedigree"
-msgstr "_Rodokmen"
-
-#: glade/MainWindow.ui:72
-msgid "Blank pedigree"
-msgstr "Prázdný rodokmen"
-
-#: glade/MainWindow.ui:73
-msgid "Print a blank pedigree"
-msgstr "Tisk prázdného rodokmenu"
-
-#: glade/MainWindow.ui:80
-msgid "Create a backup of your database"
-msgstr "Vytvořit zálohu databáze"
-
-#: glade/MainWindow.ui:87
-msgid "_Restore"
-msgstr "_Obnovit"
-
-#: glade/MainWindow.ui:88
-msgid "Restore a backup of your database"
-msgstr "Obnovit zálohu databáze"
-
-#: glade/MainWindow.ui:95
-msgid "Quit the program"
-msgstr "Konec programu"
-
-#: glade/MainWindow.ui:103
-msgid "Add a new pigeon"
-msgstr "Přidat nového holuba"
-
-#: glade/MainWindow.ui:111
-msgid "Add range"
-msgstr "Přidat rozsah"
-
-#: glade/MainWindow.ui:112 glade/MainWindow.ui:727
-msgid "Add a range of pigeons"
-msgstr "Přdat řadu holubů"
-
-#: glade/MainWindow.ui:120
-msgid "_Logfile Viewer"
-msgstr "Prohlížet log soubor"
-
-#: glade/MainWindow.ui:121
-msgid "See the logfile"
-msgstr "Nalezneš v souboru protokolu"
-
-#: glade/MainWindow.ui:129
-msgid "Edit the selected pigeon"
-msgstr "Upravit vybraného holuba"
-
-#: glade/MainWindow.ui:137
-msgid "Remove the selected pigeon"
-msgstr "Vyjmout vybraného holuba"
-
-#: glade/MainWindow.ui:146
-msgid "View the detailed pedigree of this pigeon"
-msgstr "Zobrazit detailní rodokmen  holuba"
-
-#: glade/MainWindow.ui:154
-msgid "Add resul_t"
-msgstr "Přidat _výsledek"
-
-#: glade/MainWindow.ui:155
-msgid "Add a new result for this pigeon"
-msgstr "Přidat nový výsledek  holuba"
-
-#: glade/MainWindow.ui:162
-msgid "Configure the application"
-msgstr "Konfigurace aplikace"
-
-#: glade/MainWindow.ui:170
-msgid "_Filter..."
-msgstr "_Filter ..."
-
-#: glade/MainWindow.ui:171 glade/ResultWindow.ui:40
-msgid "Set filter options"
-msgstr "Nastavit možnosti filtru"
-
-#: glade/MainWindow.ui:178 glade/VelocityCalculator.ui:238
-msgid "Velocity calculator"
-msgstr "Kalkulačka rychlosti"
-
-#: glade/MainWindow.ui:179
-msgid "Calculate the velocity of flights"
-msgstr "Vypočítat rychlost letu"
-
-#: glade/MainWindow.ui:185 glade/DistanceCalculator.ui:26
-msgid "Distance calculator"
-msgstr "Kalkulačka vzdálenosti"
-
-#: glade/MainWindow.ui:186
-msgid "Calculate the distance between locations"
-msgstr "Vypočítat vzdálenost mezi jednotlivými místy"
-
-#: glade/MainWindow.ui:192 glade/RaceManager.ui:20
-msgid "Racepoint manager"
-msgstr "Seznam vypouštěcích míst"
-
-#: glade/MainWindow.ui:193
-msgid "Manage the racepoints and distances"
-msgstr "Správce vypouštěcích míst a vzdáleností"
-
-#: glade/MainWindow.ui:199
-msgid "Photo album"
-msgstr "Fotoalbum"
-
-#: glade/MainWindow.ui:200
-msgid "View the images of your pigeons"
-msgstr "Zobrazit snímky  holubů"
-
-#: glade/MainWindow.ui:206 glade/AddressBook.ui:9
-msgid "Address book"
-msgstr "Adresář"
-
-#: glade/MainWindow.ui:207
-msgid "View the address book"
-msgstr "Zobrazit adresář"
-
-#: glade/MainWindow.ui:213 glade/DataManager.ui:26
-msgid "Data manager"
-msgstr "Správce dat"
-
-#: glade/MainWindow.ui:214
-msgid "Manage your data"
-msgstr "Správa dat"
-
-#: glade/MainWindow.ui:220
-msgid "Website"
-msgstr "Webová stránka"
-
-#: glade/MainWindow.ui:221
-msgid "Go to the website for more information"
-msgstr "Jdi na webové stránky pro více informací"
-
-#: glade/MainWindow.ui:228
-msgid "Forum"
-msgstr "Fórum"
-
-#: glade/MainWindow.ui:229
-msgid "Go to the forum for online help"
-msgstr "Přejít na fórum pro on-line pomoc"
-
-#: glade/MainWindow.ui:237
-msgid "Search online for program updates"
-msgstr "Vyhledat online aktualizace programu"
-
-#: glade/MainWindow.ui:251
-msgid "About this application"
-msgstr "O  aplikaci"
-
-#: glade/MainWindow.ui:258
-msgid "Navigation arrows"
-msgstr "Navigační šipky"
-
-#: glade/MainWindow.ui:259 glade/OptionsDialog.ui:591
-msgid "Show or hide the navigation arrows"
-msgstr "Zobrazit nebo skrýt navigační šipky"
-
-#: glade/MainWindow.ui:265
-msgid "Statistics"
-msgstr "Statistika"
-
-#: glade/MainWindow.ui:266 glade/OptionsDialog.ui:605
-msgid "Show or hide pigeon statistics"
-msgstr "Ukázat nebo skrýt statistiku holuba"
-
-#: glade/MainWindow.ui:272
-msgid "Toolbar"
-msgstr "Panel nástrojů"
-
-#: glade/MainWindow.ui:273 glade/OptionsDialog.ui:619
-msgid "Show or hide the toolbar"
-msgstr "Zobrazit  nebo skrýt panelu nástrojů"
-
-#: glade/MainWindow.ui:279
-msgid "Statusbar"
-msgstr "Stavový  řádek"
-
-#: glade/MainWindow.ui:280 glade/OptionsDialog.ui:633
-msgid "Show or hide the statusbar"
-msgstr "Zobrazit nebo skrýt stavový řádek"
-
-#: glade/MainWindow.ui:286
-msgid "Export..."
-msgstr "Export..."
-
-#: glade/MainWindow.ui:287
-msgid "Export data to other formats"
-msgstr "Export dat do jiných formátů"
-
-#: glade/MainWindow.ui:294
-msgid "Print a list of pigeons"
-msgstr "Tisk seznamu holubů"
-
-#: glade/MainWindow.ui:301
-msgid "Show all pigeons in the list"
-msgstr "Zobrazit všechny holuby v seznamu"
-
-#: glade/MainWindow.ui:307 glade/DBManager.ui:8
+#: glade/MainWindow.ui:10 glade/DBManager.ui:25
 msgid "Database manager"
 msgstr "Správce databáze"
 
-#: glade/MainWindow.ui:308
+#: glade/MainWindow.ui:11
 msgid "Manage your databases"
 msgstr "Správa databází"
 
-#: glade/MainWindow.ui:399
+#: glade/MainWindow.ui:19
+msgid "Show all pigeons in the list"
+msgstr "Zobrazit všechny holuby v seznamu"
+
+#: glade/MainWindow.ui:26
+msgid "Print a list of pigeons"
+msgstr "Tisk seznamu holubů"
+
+#: glade/MainWindow.ui:32
+msgid "Export..."
+msgstr "Export..."
+
+#: glade/MainWindow.ui:33
+msgid "Export data to other formats"
+msgstr "Export dat do jiných formátů"
+
+#: glade/MainWindow.ui:39
+msgid "Statusbar"
+msgstr "Stavový  řádek"
+
+#: glade/MainWindow.ui:40 glade/OptionsDialog.ui:643
+msgid "Show or hide the statusbar"
+msgstr "Zobrazit nebo skrýt stavový řádek"
+
+#: glade/MainWindow.ui:46
+msgid "Toolbar"
+msgstr "Panel nástrojů"
+
+#: glade/MainWindow.ui:47 glade/OptionsDialog.ui:629
+msgid "Show or hide the toolbar"
+msgstr "Zobrazit  nebo skrýt panelu nástrojů"
+
+#: glade/MainWindow.ui:53
+msgid "Statistics"
+msgstr "Statistika"
+
+#: glade/MainWindow.ui:54 glade/OptionsDialog.ui:615
+msgid "Show or hide pigeon statistics"
+msgstr "Ukázat nebo skrýt statistiku holuba"
+
+#: glade/MainWindow.ui:60
+msgid "Navigation arrows"
+msgstr "Navigační šipky"
+
+#: glade/MainWindow.ui:61 glade/OptionsDialog.ui:601
+msgid "Show or hide the navigation arrows"
+msgstr "Zobrazit nebo skrýt navigační šipky"
+
+#: glade/MainWindow.ui:67
+msgid "About this application"
+msgstr "O  aplikaci"
+
+#: glade/MainWindow.ui:82
+msgid "Search online for program updates"
+msgstr "Vyhledat online aktualizace programu"
+
+#: glade/MainWindow.ui:89
+msgid "Forum"
+msgstr "Fórum"
+
+#: glade/MainWindow.ui:90
+msgid "Go to the forum for online help"
+msgstr "Přejít na fórum pro on-line pomoc"
+
+#: glade/MainWindow.ui:97
+msgid "Website"
+msgstr "Webová stránka"
+
+#: glade/MainWindow.ui:98
+msgid "Go to the website for more information"
+msgstr "Jdi na webové stránky pro více informací"
+
+#: glade/MainWindow.ui:105 glade/DataManager.ui:26
+msgid "Data manager"
+msgstr "Správce dat"
+
+#: glade/MainWindow.ui:106
+msgid "Manage your data"
+msgstr "Správa dat"
+
+#: glade/MainWindow.ui:112 glade/AddressBook.ui:17
+msgid "Address book"
+msgstr "Adresář"
+
+#: glade/MainWindow.ui:113
+msgid "View the address book"
+msgstr "Zobrazit adresář"
+
+#: glade/MainWindow.ui:119
+msgid "Photo album"
+msgstr "Fotoalbum"
+
+#: glade/MainWindow.ui:120
+msgid "View the images of your pigeons"
+msgstr "Zobrazit snímky  holubů"
+
+#: glade/MainWindow.ui:126 glade/RaceManager.ui:20
+msgid "Racepoint manager"
+msgstr "Seznam vypouštěcích míst"
+
+#: glade/MainWindow.ui:127
+msgid "Manage the racepoints and distances"
+msgstr "Správce vypouštěcích míst a vzdáleností"
+
+#: glade/MainWindow.ui:133 glade/DistanceCalculator.ui:26
+msgid "Distance calculator"
+msgstr "Kalkulačka vzdálenosti"
+
+#: glade/MainWindow.ui:134
+msgid "Calculate the distance between locations"
+msgstr "Vypočítat vzdálenost mezi jednotlivými místy"
+
+#: glade/MainWindow.ui:140 glade/VelocityCalculator.ui:95
+msgid "Velocity calculator"
+msgstr "Kalkulačka rychlosti"
+
+#: glade/MainWindow.ui:141
+msgid "Calculate the velocity of flights"
+msgstr "Vypočítat rychlost letu"
+
+#: glade/MainWindow.ui:147
+msgid "_Filter..."
+msgstr "_Filter ..."
+
+#: glade/MainWindow.ui:148 glade/ResultWindow.ui:24
+msgid "Set filter options"
+msgstr "Nastavit možnosti filtru"
+
+#: glade/MainWindow.ui:156
+msgid "Configure the application"
+msgstr "Konfigurace aplikace"
+
+#: glade/MainWindow.ui:164
+msgid "Add resul_t"
+msgstr "Přidat _výsledek"
+
+#: glade/MainWindow.ui:165
+msgid "Add a new result for this pigeon"
+msgstr "Přidat nový výsledek  holuba"
+
+#: glade/MainWindow.ui:172 glade/MainWindow.ui:254
+msgid "_Pedigree"
+msgstr "_Rodokmen"
+
+#: glade/MainWindow.ui:173
+msgid "View the detailed pedigree of this pigeon"
+msgstr "Zobrazit detailní rodokmen  holuba"
+
+#: glade/MainWindow.ui:181
+msgid "Remove the selected pigeon"
+msgstr "Vyjmout vybraného holuba"
+
+#: glade/MainWindow.ui:189
+msgid "Edit the selected pigeon"
+msgstr "Upravit vybraného holuba"
+
+#: glade/MainWindow.ui:197
+msgid "_Logfile Viewer"
+msgstr "Prohlížet log soubor"
+
+#: glade/MainWindow.ui:198
+msgid "See the logfile"
+msgstr "Nalezneš v souboru protokolu"
+
+#: glade/MainWindow.ui:206
+msgid "Add range"
+msgstr "Přidat rozsah"
+
+#: glade/MainWindow.ui:207 glade/MainWindow.ui:762
+msgid "Add a range of pigeons"
+msgstr "Přdat řadu holubů"
+
+#: glade/MainWindow.ui:215
+msgid "Add a new pigeon"
+msgstr "Přidat nového holuba"
+
+#: glade/MainWindow.ui:223
+msgid "Quit the program"
+msgstr "Konec programu"
+
+#: glade/MainWindow.ui:231
+msgid "_Restore"
+msgstr "_Obnovit"
+
+#: glade/MainWindow.ui:232
+msgid "Restore a backup of your database"
+msgstr "Obnovit zálohu databáze"
+
+#: glade/MainWindow.ui:239 glade/MainWindow.ui:286
+msgid "_Backup"
+msgstr "_Záloha"
+
+#: glade/MainWindow.ui:240
+msgid "Create a backup of your database"
+msgstr "Vytvořit zálohu databáze"
+
+#: glade/MainWindow.ui:247
+msgid "Blank pedigree"
+msgstr "Prázdný rodokmen"
+
+#: glade/MainWindow.ui:248
+msgid "Print a blank pedigree"
+msgstr "Tisk prázdného rodokmenu"
+
+#: glade/MainWindow.ui:261
+msgid "_Help"
+msgstr "_Pomoc"
+
+#: glade/MainWindow.ui:266
+msgid "_Tools"
+msgstr "_Nástroje"
+
+#: glade/MainWindow.ui:271
+msgid "_View"
+msgstr "_Zobrazit"
+
+#: glade/MainWindow.ui:276
+msgid "_Edit"
+msgstr "_Upravit"
+
+#: glade/MainWindow.ui:281
+msgid "_Pigeon"
+msgstr "_Holub"
+
+#: glade/MainWindow.ui:296
+msgid "_File"
+msgstr "_Soubor"
+
+#: glade/MainWindow.ui:301
+msgid "Select all"
+msgstr "Označit vše"
+
+#: glade/MainWindow.ui:302
+msgid "Select all pigeons"
+msgstr "Označit všechny holubi"
+
+#: glade/MainWindow.ui:308
+msgid "View online help"
+msgstr "Zobrazit nápovědu"
+
+#: glade/MainWindow.ui:402
 msgid "Total"
 msgstr "Celkem"
 
-#: glade/MainWindow.ui:907 glade/DetailsView.ui:1573
+#: glade/MainWindow.ui:942 glade/DetailsView.ui:1531
 #: glade/DistanceCalculator.ui:331
 msgid "To"
 msgstr "Ke komu"
 
-#: glade/MainWindow.ui:959 glade/DetailsView.ui:1512
+#: glade/MainWindow.ui:994 glade/DetailsView.ui:1470
 #: glade/DistanceCalculator.ui:203
 msgid "From"
 msgstr "Z"
 
-#: glade/MainWindow.ui:1007
+#: glade/MainWindow.ui:1042
 msgid "Remove pigeon"
 msgstr "Odebrat holuba"
 
-#: glade/MainWindow.ui:1094
+#: glade/MainWindow.ui:1129
 msgid "The following pigeon will be removed:"
 msgstr "Následující holub bude odstraněn:"
 
-#: glade/MainWindow.ui:1133
+#: glade/MainWindow.ui:1164
 msgid "Keep this pigeon in the pedigree"
 msgstr "Ponechat holuba v rodokmenu"
 
-#: glade/MainWindow.ui:1148
-msgid "Keep results of this pigeon"
-msgstr "Máš výsledky tohoto holuba"
-
-#: glade/VelocityCalculator.ui:329
+#: glade/VelocityCalculator.ui:190
 msgid "Time"
 msgstr "Čas"
 
-#: glade/VelocityCalculator.ui:352 glade/VelocityCalculator.ui:725
+#: glade/VelocityCalculator.ui:213 glade/VelocityCalculator.ui:581
 #: glade/DistanceCalculator.ui:415
 msgid "Calculate"
 msgstr "Spočítat"
 
-#: glade/VelocityCalculator.ui:471 glade/VelocityCalculator.ui:878
+#: glade/VelocityCalculator.ui:331 glade/VelocityCalculator.ui:732
 msgid "Hours"
 msgstr "Hodiny"
 
-#: glade/VelocityCalculator.ui:495 glade/VelocityCalculator.ui:902
+#: glade/VelocityCalculator.ui:355 glade/VelocityCalculator.ui:756
 msgid "Minutes"
 msgstr "Minuty"
 
-#: glade/VelocityCalculator.ui:519 glade/VelocityCalculator.ui:926
+#: glade/VelocityCalculator.ui:379 glade/VelocityCalculator.ui:780
 msgid "Seconds"
 msgstr "Vteřiny"
 
-#: glade/VelocityCalculator.ui:713
+#: glade/VelocityCalculator.ui:569
 msgid "Range"
 msgstr "Rozsah"
 
-#: glade/VelocityCalculator.ui:1174
+#: glade/VelocityCalculator.ui:1024
 msgid "Prognosis"
 msgstr "Předpoklad"
 
@@ -1528,8 +1616,8 @@ msgstr "Zobrazit všechny"
 msgid "Import"
 msgstr "Import"
 
-#: glade/ResultsView.ui:263 glade/BreedingView.ui:784
-#: glade/MedicationView.ui:707
+#: glade/ResultsView.ui:263 glade/BreedingView.ui:117
+#: glade/MedicationView.ui:737
 msgid "Date*"
 msgstr "Datum*"
 
@@ -1537,306 +1625,326 @@ msgstr "Datum*"
 msgid "Racepoint*"
 msgstr "Vypouštěcí místo*"
 
-#: glade/BreedingView.ui:85 glade/BreedingView.ui:282
-#: glade/BreedingView.ui:1007 glade/BreedingView.ui:1175
-msgid "Laid"
-msgstr "Datum snášky"
-
-#: glade/BreedingView.ui:113 glade/BreedingView.ui:310
-#: glade/BreedingView.ui:1037 glade/BreedingView.ui:1205
-msgid "Hatched"
-msgstr "Vylíhnuto"
-
-#: glade/BreedingView.ui:158 glade/BreedingView.ui:355
-#: glade/BreedingView.ui:1050 glade/BreedingView.ui:1218
-msgid "Successful"
-msgstr "Kroužkováno"
-
-#: glade/BreedingView.ui:235 glade/BreedingView.ui:1127
-msgid "Egg 1"
-msgstr "1. Vajíčko"
-
-#: glade/BreedingView.ui:432 glade/BreedingView.ui:1295
-msgid "Egg 2"
-msgstr "2. Vajíčko"
-
-#: glade/BreedingView.ui:499 glade/BreedingView.ui:858
-msgid "Series"
-msgstr "Hnízdo č."
-
-#: glade/BreedingView.ui:540 glade/BreedingView.ui:890
-msgid "Nestbox"
-msgstr "Budník č."
-
-#: glade/BreedingView.ui:676
+#: glade/BreedingView.ui:9
 msgid "Breeding data"
 msgstr "Chovná data"
 
-#: glade/BreedingView.ui:814
+#: glade/BreedingView.ui:148
 msgid "Mate*"
 msgstr "Partner*"
 
-#: glade/BreedingView.ui:1100 glade/BreedingView.ui:1268
+#: glade/BreedingView.ui:192 glade/BreedingView.ui:1160
+msgid "Series"
+msgstr "Hnízdo č."
+
+#: glade/BreedingView.ui:224 glade/BreedingView.ui:1201
+msgid "Nestbox"
+msgstr "Budník č."
+
+#: glade/BreedingView.ui:341 glade/BreedingView.ui:509
+#: glade/BreedingView.ui:746 glade/BreedingView.ui:943
+msgid "Laid"
+msgstr "Datum snášky"
+
+#: glade/BreedingView.ui:371 glade/BreedingView.ui:539
+#: glade/BreedingView.ui:774 glade/BreedingView.ui:971
+msgid "Hatched"
+msgstr "Vylíhnuto"
+
+#: glade/BreedingView.ui:384 glade/BreedingView.ui:552
+#: glade/BreedingView.ui:819 glade/BreedingView.ui:1016
+msgid "Successful"
+msgstr "Kroužkováno"
+
+#: glade/BreedingView.ui:434 glade/BreedingView.ui:602
 msgid "Add pigeon to list"
 msgstr "Přidat holuba do seznamu"
+
+#: glade/BreedingView.ui:461 glade/BreedingView.ui:896
+msgid "Egg 1"
+msgstr "1. Vajíčko"
+
+#: glade/BreedingView.ui:629 glade/BreedingView.ui:1093
+msgid "Egg 2"
+msgstr "2. Vajíčko"
 
 #: glade/FilterDialog.ui:13
 msgid "Filter pigeons"
 msgstr "Filtr holubů"
 
-#: glade/FilterDialog.ui:109 glade/ResultWindow.ui:434
+#: glade/FilterDialog.ui:109 glade/ResultWindow.ui:472
 msgid "Pigeon year"
 msgstr "Rok holuba"
 
-#: glade/OptionsDialog.ui:95
+#: glade/OptionsDialog.ui:52 data/TranslationWorkaround.ui:4
+msgid "A4"
+msgstr "A4"
+
+#: glade/OptionsDialog.ui:55 data/TranslationWorkaround.ui:5
+msgid "Letter"
+msgstr "Dopis"
+
+#: glade/OptionsDialog.ui:66 data/TranslationWorkaround.ui:6
+msgid "Original"
+msgstr "Původní"
+
+#: glade/OptionsDialog.ui:69 data/TranslationWorkaround.ui:7
+msgid "Swapped details"
+msgstr "Změnit umístění údajů"
+
+#: glade/OptionsDialog.ui:72 data/TranslationWorkaround.ui:8
+msgid "Middle"
+msgstr "Střední"
+
+#: glade/OptionsDialog.ui:83 data/TranslationWorkaround.ui:9
+msgid "Classic"
+msgstr "Klasický"
+
+#: glade/OptionsDialog.ui:86 data/TranslationWorkaround.ui:10
+msgid "Splitted"
+msgstr "Rozdělené"
+
+#: glade/OptionsDialog.ui:105 glade/Backup.ui:215 glade/Backup.ui:424
 msgid "Options"
 msgstr "Nastavení"
 
-#: glade/OptionsDialog.ui:116
+#: glade/OptionsDialog.ui:126
 msgid "Default"
 msgstr "Výchozí nastavení"
 
-#: glade/OptionsDialog.ui:242
+#: glade/OptionsDialog.ui:252
 msgid "Check for updates on startup"
 msgstr "Kontrola aktualizací při spuštění"
 
-#: glade/OptionsDialog.ui:255
+#: glade/OptionsDialog.ui:265
 msgid "Update"
 msgstr "Aktualizace"
 
-#: glade/OptionsDialog.ui:285
+#: glade/OptionsDialog.ui:295
 msgid "Make an automatic backup"
 msgstr "Zkontroluj, automatické zálohování"
 
-#: glade/OptionsDialog.ui:331 glade/LocationChooser.ui:90
+#: glade/OptionsDialog.ui:341 glade/LocationChooser.ui:90
 #: glade/LocationChooser.ui:180 glade/DistanceCalculator.ui:113
-#: glade/DistanceCalculator.ui:241
+#: glade/DistanceCalculator.ui:241 glade/Backup.ui:457
 msgid "Location"
 msgstr "Zadej místo"
 
-#: glade/OptionsDialog.ui:345
+#: glade/OptionsDialog.ui:355
 msgid "Interval"
 msgstr "Interval"
 
-#: glade/OptionsDialog.ui:439
+#: glade/OptionsDialog.ui:449
 msgid "Change the language to"
 msgstr "Změna jazyka"
 
-#: glade/OptionsDialog.ui:454
+#: glade/OptionsDialog.ui:464
 msgid "Language"
 msgstr "Jazyk"
 
-#: glade/OptionsDialog.ui:490
+#: glade/OptionsDialog.ui:500
 msgid "Default distance unit"
 msgstr "Výchozí jednotka vzdálenosti"
 
-#: glade/OptionsDialog.ui:502
+#: glade/OptionsDialog.ui:512
 msgid "Default speed unit"
 msgstr "Výchozí jednotka rychlosti"
 
-#: glade/OptionsDialog.ui:541
+#: glade/OptionsDialog.ui:551
 msgid "Units"
 msgstr "Jednotky"
 
-#: glade/OptionsDialog.ui:653
+#: glade/OptionsDialog.ui:663
 msgid "Window"
 msgstr "Okno"
 
-#: glade/OptionsDialog.ui:691
+#: glade/OptionsDialog.ui:701
 msgid "Results mode"
 msgstr "Výsledky"
 
-#: glade/OptionsDialog.ui:726
+#: glade/OptionsDialog.ui:736
 msgid "Hide deleted pigeons in lists"
 msgstr "Skrýt smazané holubi v seznamu"
 
-#: glade/OptionsDialog.ui:745
+#: glade/OptionsDialog.ui:755
 msgid "Color row of deleted pigeons in lists"
 msgstr "Smazat barvu řádků v seznamu holubů"
 
-#: glade/OptionsDialog.ui:933
+#: glade/OptionsDialog.ui:938
 msgid "Text"
 msgstr "Text"
 
-#: glade/OptionsDialog.ui:947 glade/OptionsDialog.ui:1590
+#: glade/OptionsDialog.ui:952 glade/OptionsDialog.ui:1628
 msgid "Image"
 msgstr "Obrázek"
 
-#: glade/OptionsDialog.ui:962
+#: glade/OptionsDialog.ui:967
 msgid "Text and image"
 msgstr "Text a obrázek"
 
-#: glade/OptionsDialog.ui:991
+#: glade/OptionsDialog.ui:1029
 msgid "Main Columns"
 msgstr "Hlavní výběr zobrazení"
 
-#: glade/OptionsDialog.ui:1163
+#: glade/OptionsDialog.ui:1201
 msgid "Results Columns"
 msgstr "Výběr dalších zobrazení"
 
-#: glade/OptionsDialog.ui:1219
+#: glade/OptionsDialog.ui:1257
 msgid "Paper format:"
 msgstr "Formát papíru"
 
-#: glade/OptionsDialog.ui:1253
+#: glade/OptionsDialog.ui:1291
 msgid "Paper"
 msgstr "Papír"
 
-#: glade/OptionsDialog.ui:1294
+#: glade/OptionsDialog.ui:1332
 msgid "Address"
 msgstr "Adresa"
 
-#: glade/OptionsDialog.ui:1307 glade/AddressBook.ui:331
+#: glade/OptionsDialog.ui:1345 glade/AddressBook.ui:338
 msgid "Phone"
 msgstr "Telefon"
 
-#: glade/OptionsDialog.ui:1341
+#: glade/OptionsDialog.ui:1379
 msgid "Personal"
 msgstr "Výběr zobrazení dat chovatele"
 
-#: glade/OptionsDialog.ui:1401
+#: glade/OptionsDialog.ui:1439
 msgid "Pedigree layout:"
 msgstr "Uspořádání rodokmenu"
 
-#: glade/OptionsDialog.ui:1457
+#: glade/OptionsDialog.ui:1495
 msgid "Show pigeon colour in pedigree"
 msgstr "Zobrazit barvu holuba v rodokmenu"
 
-#: glade/OptionsDialog.ui:1471
+#: glade/OptionsDialog.ui:1509
 msgid "Enable box border color"
 msgstr "Povolit pole barvu ohraničení"
 
-#: glade/OptionsDialog.ui:1485
+#: glade/OptionsDialog.ui:1523
 msgid "Enable box fill color"
 msgstr "Povolit pole barvy výplně"
 
-#: glade/OptionsDialog.ui:1505
+#: glade/OptionsDialog.ui:1543
 msgid "Layout"
 msgstr "Rozvržení"
 
-#: glade/OptionsDialog.ui:1575 glade/DetailsView.ui:215
-#: glade/DetailsView.ui:608
+#: glade/OptionsDialog.ui:1613 glade/DetailsView.ui:100
+#: glade/DetailsView.ui:663
 msgid "Extra"
 msgstr "Více"
 
-#: glade/OptionsDialog.ui:1609 glade/ResultWindow.ui:422
+#: glade/OptionsDialog.ui:1647 glade/ResultWindow.ui:460
 msgid "Pigeon"
 msgstr "Holub"
 
-#: glade/OptionsDialog.ui:1662 glade/OptionsDialog.ui:1749
+#: glade/OptionsDialog.ui:1700 glade/OptionsDialog.ui:1787
 msgid "Show the column names"
 msgstr "Zobrazit názvy sloupců"
 
-#: glade/OptionsDialog.ui:1676
+#: glade/OptionsDialog.ui:1714
 msgid "Always show the sex column"
 msgstr "Zobrazit pohaví"
 
-#: glade/OptionsDialog.ui:1763
+#: glade/OptionsDialog.ui:1801
 msgid "Show the date"
 msgstr "Zobrazit den"
 
-#: glade/OptionsDialog.ui:1841
+#: glade/OptionsDialog.ui:1879
 msgid "Custom coefficient multiplier"
 msgstr "Nastavení vlastního násobiče koeficientu"
 
-#: glade/OptionsDialog.ui:1888
+#: glade/OptionsDialog.ui:1926
 msgid "Check for development updates"
 msgstr "Zkontroluj aktualizace"
 
-#: glade/ResultWindow.ui:9 glade/ExportWindow.ui:90
-msgid "Export"
-msgstr "Export"
-
-#: glade/ResultWindow.ui:10
-msgid "Export these results"
-msgstr "Export výsledků"
-
-#: glade/ResultWindow.ui:17
-msgid "Save these results"
-msgstr "Uložit  výsledky"
-
-#: glade/ResultWindow.ui:24
-msgid "Email these results"
-msgstr "Výsledky e-mailem"
-
-#: glade/ResultWindow.ui:32
-msgid "View these results"
-msgstr "Prohlédnout výsledky"
-
-#: glade/ResultWindow.ui:39
-msgid "Filter"
-msgstr "Filtr"
-
-#: glade/ResultWindow.ui:54
+#: glade/ResultWindow.ui:9
 msgid "Print these results"
 msgstr "Tisk výsledků"
 
-#: glade/ResultWindow.ui:79
-msgid "Filter results"
-msgstr "Filtrovat výsledky"
+#: glade/ResultWindow.ui:23
+msgid "Filter"
+msgstr "Filtr"
 
-#: glade/ResultWindow.ui:756
-msgid "Hide non-classified results"
-msgstr "Skrýt výsledky"
+#: glade/ResultWindow.ui:31
+msgid "View these results"
+msgstr "Prohlédnout výsledky"
 
-#: glade/ResultWindow.ui:807
+#: glade/ResultWindow.ui:38
+msgid "Email these results"
+msgstr "Výsledky e-mailem"
+
+#: glade/ResultWindow.ui:46
+msgid "Save these results"
+msgstr "Uložit  výsledky"
+
+#: glade/ResultWindow.ui:53 glade/ExportWindow.ui:90
+msgid "Export"
+msgstr "Export"
+
+#: glade/ResultWindow.ui:54
+msgid "Export these results"
+msgstr "Export výsledků"
+
+#: glade/ResultWindow.ui:78
 msgid "View all results"
 msgstr "Zobrazit všechny výsledky"
 
-#: glade/DetailsView.ui:18
+#: glade/ResultWindow.ui:117
+msgid "Filter results"
+msgstr "Filtrovat výsledky"
+
+#: glade/ResultWindow.ui:795
+msgid "Hide non-classified results"
+msgstr "Skrýt výsledky"
+
+#: glade/DetailsView.ui:466
 msgid ""
 "Unable to retrieve data. The requested pigeon is probably removed from the "
 "database."
 msgstr ""
 "Nelze načíst data. Požádovaný holub je pravděpodobně odstraněn z databáze."
 
-#: glade/DetailsView.ui:175 glade/DetailsView.ui:550
-msgid "Dam"
-msgstr "Holubice"
-
-#: glade/DetailsView.ui:188 glade/DetailsView.ui:563
-msgid "Sire"
-msgstr "Holub"
-
-#: glade/DetailsView.ui:1025
+#: glade/DetailsView.ui:981
 msgid "Pigeon status"
 msgstr "Stav holuba"
 
-#: glade/DetailsView.ui:1083
+#: glade/DetailsView.ui:1039
 msgid "Choose a status for this pigeon:"
 msgstr "Vyber si pro holuba postavení:"
 
-#: glade/DetailsView.ui:1119
+#: glade/DetailsView.ui:1075
 msgid "The current status is:"
 msgstr "Současný stav:"
 
-#: glade/DetailsView.ui:1195 glade/DetailsView.ui:1295
-#: glade/DetailsView.ui:1410 glade/DetailsView.ui:1525
-#: glade/DetailsView.ui:1638 glade/DetailsView.ui:1773
+#: glade/DetailsView.ui:1153 glade/DetailsView.ui:1253
+#: glade/DetailsView.ui:1368 glade/DetailsView.ui:1483
+#: glade/DetailsView.ui:1596 glade/DetailsView.ui:1731
 msgid "Extra info"
 msgstr "Více info"
 
-#: glade/DetailsView.ui:1252
+#: glade/DetailsView.ui:1210
 msgid "No extra information available."
 msgstr "Žádné další informace k dispozici."
 
-#: glade/DetailsView.ui:1326
+#: glade/DetailsView.ui:1284
 msgid "Buyer"
 msgstr "Kupující"
 
-#: glade/DetailsView.ui:1625
+#: glade/DetailsView.ui:1583
 msgid "Loaned"
 msgstr "Zapůjčil"
 
-#: glade/DetailsView.ui:1671
+#: glade/DetailsView.ui:1629
 msgid "Person"
 msgstr "Osoba"
 
-#: glade/DetailsView.ui:1720
+#: glade/DetailsView.ui:1678
 msgid "Back"
 msgstr "Zpět"
 
-#: glade/DetailsView.ui:1786
+#: glade/DetailsView.ui:1744
 msgid "Partner"
 msgstr "Partner"
 
@@ -1874,13 +1982,13 @@ msgstr "Hledání souřadnic"
 
 #: glade/LocationChooser.ui:102 glade/DistanceCalculator.ui:125
 #: glade/DistanceCalculator.ui:253 glade/RaceManager.ui:144
-#: glade/AddressBook.ui:441
+#: glade/AddressBook.ui:448
 msgid "Latitude"
 msgstr "Zeměpisná šířka"
 
 #: glade/LocationChooser.ui:116 glade/DistanceCalculator.ui:139
 #: glade/DistanceCalculator.ui:267 glade/RaceManager.ui:158
-#: glade/AddressBook.ui:469
+#: glade/AddressBook.ui:476
 msgid "Longitude"
 msgstr "Zeměpisná délka"
 
@@ -1888,7 +1996,7 @@ msgstr "Zeměpisná délka"
 msgid "Export data"
 msgstr "Export dat"
 
-#: glade/ExportWindow.ui:138 glade/DBManager.ui:507
+#: glade/ExportWindow.ui:138 glade/DBManager.ui:572
 msgid "Path"
 msgstr "Cesta"
 
@@ -1904,15 +2012,19 @@ msgstr "Viditelný"
 msgid "All"
 msgstr "Vše"
 
-#: glade/DBManager.ui:250
+#: glade/DBManager.ui:281
+msgid "Move"
+msgstr ""
+
+#: glade/DBManager.ui:311
 msgid "Load this database as default on startup"
 msgstr "Načíst tuto databázi jako výchozí při startu"
 
-#: glade/DBManager.ui:283
+#: glade/DBManager.ui:344
 msgid "Database information"
 msgstr "Informace o databázi"
 
-#: glade/DBManager.ui:474
+#: glade/DBManager.ui:539
 msgid "For advanced use only. Use the default settings if you are in doubt."
 msgstr ""
 "Pouze pro pokročilé !! Použijte výchozí nastavení, pokud jseš na pochybách."
@@ -1921,51 +2033,67 @@ msgstr ""
 msgid "Result"
 msgstr "Výsledky"
 
-#: glade/MedicationView.ui:171 glade/MedicationView.ui:733
+#: glade/Backup.ui:152
+msgid "Destination"
+msgstr ""
+
+#: glade/Backup.ui:165 glade/Backup.ui:373
+msgid "Database"
+msgstr "Databáze"
+
+#: glade/Backup.ui:195
+msgid "Restore configuration file"
+msgstr ""
+
+#: glade/Backup.ui:404
+msgid "Include configuration file"
+msgstr ""
+
+#: glade/MedicationView.ui:181 glade/MedicationView.ui:763
 msgid "Done by"
 msgstr "Provádí se"
 
-#: glade/MedicationView.ui:326 glade/MedicationView.ui:761
+#: glade/MedicationView.ui:336 glade/MedicationView.ui:791
 msgid "Dosage"
 msgstr "Dávkování"
 
-#: glade/MedicationView.ui:362 glade/MedicationView.ui:790
+#: glade/MedicationView.ui:372 glade/MedicationView.ui:820
 msgid "Vaccination"
 msgstr "Očkování"
 
-#: glade/ResultParser.ui:39
+#: glade/ResultParser.ui:41
 msgid "Import results"
 msgstr "Import výsledků"
 
-#: glade/ResultParser.ui:73
+#: glade/ResultParser.ui:75
 msgid "File:"
 msgstr "Soubor:"
 
-#: glade/ResultParser.ui:85
+#: glade/ResultParser.ui:87
 msgid "Parser:"
 msgstr "Analýza:"
 
-#: glade/ResultParser.ui:121
+#: glade/ResultParser.ui:123
 msgid "Parse"
 msgstr "Analýza"
 
-#: glade/ResultParser.ui:494
+#: glade/ResultParser.ui:496
 msgid "Edit race details"
 msgstr "Upravit data závodu"
 
-#: glade/ResultParser.ui:527
+#: glade/ResultParser.ui:529
 msgid "No results were found for your pigeons"
 msgstr "Nebyly nalezeny žádné výsledky holubů"
 
-#: glade/ResultParser.ui:600
+#: glade/ResultParser.ui:602
 msgid "Place"
 msgstr "Místo"
 
-#: glade/ResultParser.ui:711
+#: glade/ResultParser.ui:714
 msgid "Parser error"
 msgstr "Chyba analýzy"
 
-#: glade/ResultParser.ui:771
+#: glade/ResultParser.ui:774
 msgid ""
 "The file you selected could not be parsed correctly. Try selecting another "
 "parser that matches your file and try again. Or send the developers some "
@@ -1976,46 +2104,46 @@ msgstr ""
 "chybu opravit."
 
 #: glade/PhotoAlbum.ui:8
-msgid "Zooms to fit the whole picture"
-msgstr "Zvětšit obrázek na plnou velikost"
-
-#: glade/PhotoAlbum.ui:15
-msgid "View slideshow"
-msgstr "Prohlížení obrázků"
-
-#: glade/PhotoAlbum.ui:22
-msgid "View in fullscreen"
-msgstr "Zobrazit na celou obrazovku"
-
-#: glade/PhotoAlbum.ui:36
-msgid "Zooms the picture out"
-msgstr "Zvětšení obrázku v"
-
-#: glade/PhotoAlbum.ui:43
-msgid "Zooms the picture in"
-msgstr "Zvětšení obrázku"
-
-#: glade/PhotoAlbum.ui:50
-msgid "Shows the last picture"
-msgstr "Poslední obrázek"
-
-#: glade/PhotoAlbum.ui:57
-msgid "Shows the next picture"
-msgstr "Následující obrázek"
-
-#: glade/PhotoAlbum.ui:64
-msgid "Shows previous picture"
-msgstr "Předchozí obrázek"
-
-#: glade/PhotoAlbum.ui:71
 msgid "Shows the first picture"
 msgstr "Zobrazí se první snímek"
 
-#: glade/PhotoAlbum.ui:79
+#: glade/PhotoAlbum.ui:15
+msgid "Shows previous picture"
+msgstr "Předchozí obrázek"
+
+#: glade/PhotoAlbum.ui:22
+msgid "Shows the next picture"
+msgstr "Následující obrázek"
+
+#: glade/PhotoAlbum.ui:29
+msgid "Shows the last picture"
+msgstr "Poslední obrázek"
+
+#: glade/PhotoAlbum.ui:36
+msgid "Zooms the picture in"
+msgstr "Zvětšení obrázku"
+
+#: glade/PhotoAlbum.ui:43
+msgid "Zooms the picture out"
+msgstr "Zvětšení obrázku v"
+
+#: glade/PhotoAlbum.ui:57
+msgid "View in fullscreen"
+msgstr "Zobrazit na celou obrazovku"
+
+#: glade/PhotoAlbum.ui:64
+msgid "View slideshow"
+msgstr "Prohlížení obrázků"
+
+#: glade/PhotoAlbum.ui:71
+msgid "Zooms to fit the whole picture"
+msgstr "Zvětšit obrázek na plnou velikost"
+
+#: glade/PhotoAlbum.ui:91
 msgid "Photo Album"
 msgstr "Fotoalbum"
 
-#: glade/PhotoAlbum.ui:127
+#: glade/PhotoAlbum.ui:152
 msgid "There are no images found."
 msgstr "Nejsou nalezeny žádné obrázky"
 
@@ -2043,49 +2171,17 @@ msgstr "Nepoužívané názvy"
 msgid "Click here to add more racepoints"
 msgstr "Klikni pro přidání dalšího vypouštěcího místa"
 
-#: glade/AddressBook.ui:170
+#: glade/AddressBook.ui:177
 msgid "Street"
 msgstr "Ulice"
 
-#: glade/AddressBook.ui:249
+#: glade/AddressBook.ui:256
 msgid "Zipcode / City"
 msgstr "Směrovací číslo/Město"
 
-#: glade/AddressBook.ui:290
-msgid "Country"
-msgstr "Země"
-
-#: glade/AddressBook.ui:571
+#: glade/AddressBook.ui:572
 msgid "This is me"
 msgstr "To jsem já"
-
-#: data/TranslationWorkaround.ui:4
-msgid "A4"
-msgstr "A4"
-
-#: data/TranslationWorkaround.ui:5
-msgid "Letter"
-msgstr "Dopis"
-
-#: data/TranslationWorkaround.ui:6
-msgid "Original"
-msgstr "Původní"
-
-#: data/TranslationWorkaround.ui:7
-msgid "Swapped details"
-msgstr "Změnit umístění údajů"
-
-#: data/TranslationWorkaround.ui:8
-msgid "Middle"
-msgstr "Střední"
-
-#: data/TranslationWorkaround.ui:9
-msgid "Classic"
-msgstr "Klasický"
-
-#: data/TranslationWorkaround.ui:10
-msgid "Splitted"
-msgstr "Rozdělené"
 
 #~ msgid "Optimization has been completed."
 #~ msgstr "Optimalizace byla dokončena."
@@ -2126,9 +2222,6 @@ msgstr "Rozdělené"
 
 #~ msgid "Addresses"
 #~ msgstr "Adresy"
-
-#~ msgid "Database"
-#~ msgstr "Databáze"
 
 #~ msgid "No notification set"
 #~ msgstr "Žádné oznámení není nastaveno"
@@ -2226,6 +2319,9 @@ msgstr "Rozdělené"
 
 #~ msgid "Choose an image..."
 #~ msgstr "Vyber si obrázek ..."
+
+#~ msgid "Keep results of this pigeon"
+#~ msgstr "Máš výsledky tohoto holuba"
 
 #~ msgid "Names"
 #~ msgstr "Jména"
