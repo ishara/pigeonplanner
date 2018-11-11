@@ -1,3 +1,19 @@
+3.0.0:
+ * Added a database manager
+ * Added extra fields to the band entry
+ * Added option to choose a band format
+ * Rewrite of the database backend
+ * Added Unknown pigeon sex
+ * Added right-click Restore option for hidden pigeons
+ * Added option to colour the boxes on printed pedigrees
+ * Added pigeon filter to the toolbar
+ * Print the pigeon colours by default on the pedigree
+ * Updated the DTD result parser
+ * Updated build systems for macOS and Windows
+ * Various other small changes and improvements
+ * Bunch of code cleanups
+ * Updated translations
+
 2.2.4:
  * Fixed not being able to add images on Mac OSX
  * Fixed calendar popup on Mac OSX
