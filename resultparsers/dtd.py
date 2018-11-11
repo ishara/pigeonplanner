@@ -68,13 +68,18 @@ class DTDParser(IPlugin):
             # Information is on the third line:
             #    Racepoint       Date Pigeons Category     LOS TE-LACHES A : Hour
             # alt:  "              "     "       "         LOSTIJD/LACHER  :  "
+            # alt:  "              "     "       "         deelnemers:N LOSTIJD:HOUR
             if linenumber == firstline + 2:
                 # Go backwards through the line. The racepoint can have multiple
                 # words, but "LOS" (or "LOSTIJD") is a fixed word.
                 try:
                     losindex = items.index("LOS")
                 except ValueError:
-                    losindex = items.index("LOSTIJD/LACHER")
+                    try:
+                        losindex = items.index("LOSTIJD/LACHER")
+                    except ValueError:
+                        items2 = line.split(":")[0].split()
+                        losindex = items2.index("Deelnemers")
                 category = items[losindex - 1]
                 pigeonsindex = losindex - 2
                 if not items[losindex - 2].isdigit():
