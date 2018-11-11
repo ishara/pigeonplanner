@@ -27,7 +27,7 @@ from pigeonplanner.database.models import Pigeon
 
 def test_pigeon_helpers():
     # Correct, minimal data dict
-    data = {"band": "1234", "year": "2014", "sex": enums.Sex.cock}
+    data = {"band_number": "1234", "band_year": "2014", "band_country": "", "band_letters": "", "sex": enums.Sex.cock}
 
     # Try a minimal insert
     pigeon = corepigeon.add_pigeon(data, enums.Status.active, {})

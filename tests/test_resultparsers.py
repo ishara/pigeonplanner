@@ -29,9 +29,9 @@ manager.setPluginPlaces([const.RESULTPARSERDIR])
 manager.collectPlugins()
 
 def test_dtd():
-    data1 = {"band": "1234567", "year": "2013", "sex": enums.Sex.cock}
+    data1 = {"band_number": "1234567", "band_year": "2013", "sex": enums.Sex.cock}
     pigeon1 = Pigeon.create(**data1)
-    data2 = {"band": "1234568", "year": "2013", "sex": enums.Sex.cock}
+    data2 = {"band_number": "1234568", "band_year": "2013", "sex": enums.Sex.cock}
     pigeon2 = Pigeon.create(**data2)
 
     parser = manager.getPluginByName("Data Technology-Deerlijk").plugin_object
@@ -70,6 +70,14 @@ def test_dtd():
     with open("tests/data/result_dtd_6.txt") as resultfile:
         data, results = parser.parse_file(resultfile)
     nt.assert_dict_equal(data, filedata)
+    # Newer header with participants and different "LOSTIJD" in header
+    filedata["category"] = "Oude Duiven"
+    filedata["n_pigeons"] = "120"
+    filedata["racepoint"] = "CHIMAY-industrie"
+    with open("tests/data/result_dtd_7.txt") as resultfile:
+        data, results = parser.parse_file(resultfile)
+    nt.assert_dict_equal(data, filedata)
+
 
 test_dtd.setup = utils.open_test_db
 test_dtd.teardown = utils.close_test_db

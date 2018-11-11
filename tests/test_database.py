@@ -31,7 +31,6 @@ from pigeonplanner.core import const
 def test_connection():
     nt.assert_equal(session.dbfile, const.DATABASE)
     nt.assert_false(session.is_new_db)
-    nt.assert_is_instance(session.connection, SqliteDatabase)
 test_connection.setup = session.open
 test_connection.teardown = session.close
 
