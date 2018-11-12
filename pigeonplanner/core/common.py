@@ -33,6 +33,8 @@ import datetime
 import cStringIO
 import webbrowser
 
+import peewee
+
 from pigeonplanner.core import const
 from pigeonplanner.core import enums
 from pigeonplanner.core import config
@@ -100,6 +102,11 @@ def get_own_address():
     try:
         person = Person.get(Person.me == True)
     except Person.DoesNotExist:
+        person = None
+    except peewee.OperationalError:
+        # This function is called when an unexpected error occurs to get the
+        # user's email address for the report dialog. When the error happens
+        # during database creation or migration, there's no Person table yet.
         person = None
     return person
 
