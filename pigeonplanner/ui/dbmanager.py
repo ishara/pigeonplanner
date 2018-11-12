@@ -26,6 +26,7 @@ from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
+from pigeonplanner.ui import exceptiondialog
 from pigeonplanner.ui.messagedialog import (InfoDialog, QuestionDialog,
                                             ErrorDialog, WarningDialog)
 from pigeonplanner.core import const
@@ -166,7 +167,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
             ErrorDialog(messages.MSG_NEW_DATABASE, self.widgets.dialog)
             return
         except DatabaseMigrationError:
-            ErrorDialog(messages.MSG_ERROR_DATABASE)
+            exceptiondialog.ExceptionDialog(messages.MSG_ERROR_DATABASE[0])
             return
         except DatabaseInfoError:
             return
