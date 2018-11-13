@@ -111,6 +111,17 @@ def _pigeon_for_pindex(pindex):
     return pigeon
 
 
+def _insert_pigeon(band_number, band_year, sex, visible):
+    pigeon_id = Pigeon.insert(
+        band_number=band_number,
+        band_year=band_year,
+        sex=sex,
+        visible=visible
+    ).execute()
+    Status.insert(pigeon=pigeon_id).execute()
+    return pigeon_id
+
+
 def _migrate_pigeons():
     cursor = database.execute_sql("SELECT * FROM Pigeons_orig;")
     for row in cursor.fetchall():
@@ -141,14 +152,7 @@ def _migrate_parents(pigeon):
             sire = Pigeon.get((Pigeon.band_number == sire_row["sire"]) &
                               (Pigeon.band_year == sire_row["yearsire"]))
         except Pigeon.DoesNotExist:
-            data = {
-                "band_number": sire_row["sire"],
-                "band_year": sire_row["yearsire"],
-                "sex": enums.Sex.cock,
-                "visible": False,
-            }
-            p_id = Pigeon.insert(**data).execute()
-            Status.insert(pigeon=p_id).execute()
+            _insert_pigeon(sire_row["sire"], sire_row["yearsire"], enums.Sex.cock, False)
         else:
             pigeon.sire = sire
             pigeon.save()
@@ -160,14 +164,7 @@ def _migrate_parents(pigeon):
             dam = Pigeon.get((Pigeon.band_number == dam_row["dam"]) &
                              (Pigeon.band_year == dam_row["yeardam"]))
         except Pigeon.DoesNotExist:
-            data = {
-                "band_number": dam_row["dam"],
-                "band_year": dam_row["yeardam"],
-                "sex": enums.Sex.hen,
-                "visible": False,
-            }
-            p_id = Pigeon.insert(**data).execute()
-            Status.insert(pigeon=p_id).execute()
+            _insert_pigeon(dam_row["dam"], dam_row["yeardam"], enums.Sex.hen, False)
         else:
             pigeon.dam = dam
             pigeon.save()
@@ -273,9 +270,17 @@ def _migrate_breeding():
             "comment": row["comment"],
         }
         # Previous versions weren't so strict about the existence of a sire and dam
-        # in the database. The new schema requires them.
-        if breeding_data["sire"] is None or breeding_data["dam"] is None:
+        # in the database. The new schema requires them. If none of them exist in the
+        # the database, remove the breeding record. If only one of them doesn't exist,
+        # add it to the database as a hidden pigeon.
+        if breeding_data["sire"] is None and breeding_data["dam"] is None:
             continue
+        if breeding_data["sire"] is None:
+            band, year = _split_pindex(row["sire"])
+            breeding_data["sire"] = _insert_pigeon(band, year, enums.Sex.cock, False)
+        if breeding_data["dam"] is None:
+            band, year = _split_pindex(row["dam"])
+            breeding_data["dam"] = _insert_pigeon(band, year, enums.Sex.hen, False)
         Breeding.insert(**breeding_data).execute()
 
 
