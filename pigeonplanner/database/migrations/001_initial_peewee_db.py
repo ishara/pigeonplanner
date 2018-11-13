@@ -272,6 +272,10 @@ def _migrate_breeding():
             "box": row["box"],
             "comment": row["comment"],
         }
+        # Previous versions weren't so strict about the existence of a sire and dam
+        # in the database. The new schema requires them.
+        if breeding_data["sire"] is None or breeding_data["dam"] is None:
+            continue
         Breeding.insert(**breeding_data).execute()
 
 
@@ -312,6 +316,7 @@ def _migrate_data_tables():
         }
         Person.insert(**person_data).execute()
 
+    Category.insert_from(SQL("SELECT category FROM Categories_orig;"), ["category"]).execute()
     Colour.insert_from(SQL("SELECT colour FROM Colours_orig;"), ["colour"]).execute()
     Loft.insert_from(SQL("SELECT loft FROM Lofts_orig;"), ["loft"]).execute()
     Racepoint.insert_from(
