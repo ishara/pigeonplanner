@@ -272,6 +272,10 @@ def _migrate_breeding():
             "box": row["box"],
             "comment": row["comment"],
         }
+        # Previous versions weren't so strict about the existence of a sire and dam
+        # in the database. The new schema requires them.
+        if breeding_data["sire"] is None or breeding_data["dam"] is None:
+            continue
         Breeding.insert(**breeding_data).execute()
 
 
