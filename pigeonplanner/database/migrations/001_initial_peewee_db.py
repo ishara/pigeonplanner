@@ -152,14 +152,7 @@ def _migrate_parents(pigeon):
             sire = Pigeon.get((Pigeon.band_number == sire_row["sire"]) &
                               (Pigeon.band_year == sire_row["yearsire"]))
         except Pigeon.DoesNotExist:
-            data = {
-                "band_number": sire_row["sire"],
-                "band_year": sire_row["yearsire"],
-                "sex": enums.Sex.cock,
-                "visible": False,
-            }
-            p_id = Pigeon.insert(**data).execute()
-            Status.insert(pigeon=p_id).execute()
+            _insert_pigeon(sire_row["sire"], sire_row["yearsire"], enums.Sex.cock, False)
         else:
             pigeon.sire = sire
             pigeon.save()
@@ -171,14 +164,7 @@ def _migrate_parents(pigeon):
             dam = Pigeon.get((Pigeon.band_number == dam_row["dam"]) &
                              (Pigeon.band_year == dam_row["yeardam"]))
         except Pigeon.DoesNotExist:
-            data = {
-                "band_number": dam_row["dam"],
-                "band_year": dam_row["yeardam"],
-                "sex": enums.Sex.hen,
-                "visible": False,
-            }
-            p_id = Pigeon.insert(**data).execute()
-            Status.insert(pigeon=p_id).execute()
+            _insert_pigeon(dam_row["dam"], dam_row["yeardam"], enums.Sex.hen, False)
         else:
             pigeon.dam = dam
             pigeon.save()
