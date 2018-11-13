@@ -61,7 +61,7 @@ begin
 
   if RegKeyExists(HKEY_LOCAL_MACHINE,  'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{3F372268-0B73-46A8-9824-47849B983480}_is1') then
   begin
-   MsgBox('Setup needs to uninstall the previous version of Pigeon Planner. All your data will be saved automaticly.',
+   MsgBox('Setup needs to uninstall the previous version of Pigeon Planner. All your data will be saved automatically.',
            mbInformation, MB_OK);
 
       RegQueryStringValue(HKEY_LOCAL_MACHINE,
