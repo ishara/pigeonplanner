@@ -316,6 +316,7 @@ def _migrate_data_tables():
         }
         Person.insert(**person_data).execute()
 
+    Category.insert_from(SQL("SELECT category FROM Categories_orig;"), ["category"]).execute()
     Colour.insert_from(SQL("SELECT colour FROM Colours_orig;"), ["colour"]).execute()
     Loft.insert_from(SQL("SELECT loft FROM Lofts_orig;"), ["loft"]).execute()
     Racepoint.insert_from(
