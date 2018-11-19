@@ -152,6 +152,7 @@ class ClassicView(BaseView):
     ID = 0
 
     (LS_COL_OBJECT,
+     LS_COL_BAND_TUPLE,
      LS_COL_BAND,
      LS_COL_YEAR,
      LS_COL_DATE,
@@ -170,7 +171,7 @@ class ClassicView(BaseView):
      LS_COL_COMMENT,
      LS_COL_PLACEDINT,
      LS_COL_COEFFLOAT,
-     LS_COL_SPEEDFLOAT) = range(20)
+     LS_COL_SPEEDFLOAT) = range(21)
 
     (COL_BAND,
      COL_YEAR,
@@ -197,7 +198,7 @@ class ClassicView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.liststore = gtk.ListStore(object, str, str, str, str, str, int, str, str, str, str,
+        self.liststore = gtk.ListStore(object, object, str, str, str, str, str, int, str, str, str, str,
                                        str, str, str, str, str, str, int, float, float)
 
         self.filtermodel = self.liststore.filter_new()
@@ -219,7 +220,7 @@ class ClassicView(BaseView):
                     ("wind", None), ("windspeed", None),
                     ("weather", None), ("temperature", None), ("comment", None)]
         for index, (colname, sortid) in enumerate(colnames):
-            startcol = index + 1
+            startcol = index + 2
             textrenderer = gtk.CellRendererText()
             tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
                                           textrenderer, text=startcol)
@@ -256,11 +257,12 @@ class ClassicView(BaseView):
             placestr, coef, coefstr = common.format_place_coef(result.place, result.out)
             speed = common.format_speed(result.speed)
             # A result can have None as pigeon.
+            band_tuple = () if result.pigeon is None else result.pigeon.band_tuple
             band = "" if result.pigeon is None else result.pigeon.band
             year = "" if result.pigeon is None else result.pigeon.band_year
 
             self.liststore.insert(0,
-                [result, band, year, result.date, result.racepoint,
+                [result, band_tuple, band, year, result.date, result.racepoint,
                  placestr, result.out, coefstr, speed, result.sector, result.type,
                  result.category, result.wind, result.windspeed, result.weather,
                  result.temperature, result.comment, result.place, coef, result.speed
