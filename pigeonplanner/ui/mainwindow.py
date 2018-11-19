@@ -549,8 +549,10 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         while value <= int(rangeto):
             band = str(value)
             data = {
-                "band": band,
-                "year": rangeyear,
+                "band_number": band,
+                "band_year": rangeyear,
+                "band_country": "",
+                "band_letters": "",
                 "sex": rangesex,
                 "sire": None,
                 "dam": None,
