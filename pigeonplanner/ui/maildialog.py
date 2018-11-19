@@ -61,8 +61,8 @@ class MailDialog(builder.GtkBuilder):
         name, email = "", ""
         info = common.get_own_address()
         if info:
-            name = info["name"]
-            email = info["email"]
+            name = info.name
+            email = info.email
 
         self.widgets.entry_name.set_text(name)
         self.widgets.entry_mail.set_text(email)
