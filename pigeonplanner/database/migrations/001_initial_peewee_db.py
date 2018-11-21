@@ -24,6 +24,7 @@ from collections import defaultdict
 
 from peewee import SQL
 from peewee import SqliteDatabase
+from peewee import IntegrityError
 from peewee import (Check, ForeignKeyField, CharField, TextField,
                     IntegerField, BooleanField, FloatField, DateField, ManyToManyField)
 from playhouse.signals import Model
@@ -235,7 +236,12 @@ def _migrate_results(pigeon, old_pindex):
             "windspeed": result["windspeed"],
             "comment": result["comment"],
         }
-        Result.insert(pigeon=pigeon, **result_new).execute()
+        try:
+            Result.insert(pigeon=pigeon, **result_new).execute()
+        except IntegrityError:
+            # There is a new constraint on multiple columns to avoid duplicate results. This
+            # means we'll have to skip those here to avoid conflicts.
+            continue
 
 
 def _migrate_media(pigeon, old_pindex):
