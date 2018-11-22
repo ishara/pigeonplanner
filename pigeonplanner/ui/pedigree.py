@@ -237,7 +237,7 @@ class DrawPedigree(object):
         self._redraw()
 
     def _remove_pigeon(self, widget, pigeon, child):
-        pigeon.delete_instance()
+        corepigeon.remove_pigeon(pigeon)
         self._edit_child(pigeon, child, True)
         self._redraw()
 
