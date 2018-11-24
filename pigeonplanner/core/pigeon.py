@@ -158,7 +158,27 @@ def get_or_create_pigeon(band_tuple, sex, visible):
                 query = Status.insert(pigeon=pigeon)
                 query.execute()
         except peewee.IntegrityError:
-            pigeon = Pigeon.get_for_band(band_tuple)
+            # pigeon = Pigeon.get_for_band(band_tuple)
+            # TODO: This is a HACK, not a fix!
+            #       There's a bug since version 3.0.0 where there's a possibility that the
+            #       Pigeon and Status database tables become out of sync. They have a
+            #       one-to-one relationship with the Status having a UNIQUE backref to
+            #       the Pigeon. Some user reports show that a Status row is left behind
+            #       after removing a Pigeon row. Thus adding a Pigeon row with the same
+            #       ID will trigger an IntegrityError. The code above thinks it's a
+            #       duplicate row and tries to fetch the non-existent pigeon. The current
+            #       workaround is to remove the extra Status row(s) where the Pigeon ID
+            #       references to a non-existing Pigeon row and try again.
+            #       The reason why this problem happens was not found during some testing.
+            #       The Status row is deleted on database level (ON DELETE CASCADE).
+            #       Fix it as soon as possible.
+            try:
+                pigeon = Pigeon.get_for_band(band_tuple)
+            except Pigeon.DoesNotExist:
+                if Pigeon.select().count() < Status.select().count():
+                    pigeon_ids = Pigeon.select(Pigeon.id)
+                    Status.delete().where(Status.pigeon.not_in(pigeon_ids)).execute()
+                    get_or_create_pigeon(band_tuple, sex, visible)
     else:
         pigeon = None
     return pigeon
