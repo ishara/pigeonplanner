@@ -79,7 +79,10 @@ class DTDParser(IPlugin):
                         losindex = items.index("LOSTIJD/LACHER")
                     except ValueError:
                         items2 = line.split(":")[0].split()
-                        losindex = items2.index("Deelnemers")
+                        try:
+                            losindex = items2.index("Deelnemers")
+                        except ValueError:
+                            losindex = items2.index("Amateurs")
                 category = items[losindex - 1]
                 pigeonsindex = losindex - 2
                 if not items[losindex - 2].isdigit():

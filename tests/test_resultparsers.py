@@ -77,6 +77,13 @@ def test_dtd():
     with open("tests/data/result_dtd_7.txt") as resultfile:
         data, results = parser.parse_file(resultfile)
     nt.assert_dict_equal(data, filedata)
+    # French header
+    filedata["category"] = "JEUNES"
+    filedata["n_pigeons"] = "110"
+    filedata["racepoint"] = "ARGENTON"
+    with open("tests/data/result_dtd_8.txt") as resultfile:
+        data, results = parser.parse_file(resultfile)
+    nt.assert_dict_equal(data, filedata)
 
 
 test_dtd.setup = utils.open_test_db
