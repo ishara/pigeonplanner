@@ -16,22 +16,26 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-COLS_PIGEON = ("band",
-               "sex",
-               "visible",
-               "status",
-               "colour",
-               "name",
-               "strain",
-               "loft",
-               "image",
-               "sire",
-               "dam",
-               "extra1",
-               "extra2",
-               "extra3",
-               "extra4",
-               "extra5",
-               "extra6")
-
-
+COLS_PIGEON = (
+    "band",
+    "country",
+    "letters",
+    "number",
+    "year",
+    "sex",
+    "visible",
+    "status",
+    "colour",
+    "name",
+    "strain",
+    "loft",
+    "image",
+    "sire",
+    "dam",
+    "extra1",
+    "extra2",
+    "extra3",
+    "extra4",
+    "extra5",
+    "extra6"
+)

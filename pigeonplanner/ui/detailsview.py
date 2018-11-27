@@ -164,6 +164,7 @@ class StatusButton(builder.GtkBuilder):
     def __init__(self, parent=None):
         builder.GtkBuilder.__init__(self, "DetailsView.ui",
                                     ["statusbutton", "statusdialog"])
+        self.parent = parent
         self.widget = self.widgets.statusbutton
         self.widgets.statusdialog.set_transient_for(parent)
         self.set_default()
