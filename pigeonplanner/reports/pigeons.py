@@ -36,7 +36,18 @@ class PigeonsReport(Report, HelperMethods):
         self.add_header()
 
         # Pigeon table
-        #TODO: column size with different columns
+        default_column_sizes = {
+            "band": 16,
+            "sex_string": 10,
+            "name": 10,
+            "sire": 12,
+            "dam": 12,
+            "colour": 10,
+            "loft": 10,
+            "strain": 10,
+            "status_string": 10
+        }
+
         columns = [(_("Band no."), "band")]
 
         if config.get("columns.pigeon-sex") or config.get("printing.pigeon-sex"):
@@ -55,6 +66,8 @@ class PigeonsReport(Report, HelperMethods):
             columns.append((_("Strain"), "strain"))
         if config.get("columns.pigeon-status"):
             columns.append((_("Status"), "status_string"))
+
+        self._add_table_style([default_column_sizes[col[1]] for col in columns])
 
         self.doc.start_table("my_table", "table")
 
@@ -77,32 +90,45 @@ class PigeonsReport(Report, HelperMethods):
             self.doc.end_row()
         self.doc.end_table()
 
+    def _add_table_style(self, columns):
+        if sum(columns) != 100:
+            # If some columns are disabled, split those widths along the other columns
+            remaining = 100 - sum(columns)
+            foreach = remaining / len(columns)
+            columns = [val + foreach for val in columns]
+
+        style_sheet = self.doc.get_style_sheet()
+        table = TableStyle()
+        table.set_width(100)
+        table.set_column_widths(columns)
+        style_sheet.add_table_style("table", table)
+        self.doc.set_style_sheet(style_sheet)
+
 
 class PigeonsReportOptions(ReportOptions):
 
+    def set_values(self):
+        self.margins = {"lmargin": 1., "rmargin": 1.,
+                        "tmargin": 1., "bmargin": 1.}
+
     def make_default_style(self, default_style):
         font = FontStyle()
-        font.set(face=FONT_SANS_SERIF, size=12)
+        font.set(face=FONT_SANS_SERIF, size=11)
         para = ParagraphStyle()
         para.set(font=font, align=PARA_ALIGN_LEFT, bborder=1, bmargin=.5)
         default_style.add_paragraph_style("header", para)
 
         font = FontStyle()
-        font.set(face=FONT_SANS_SERIF, size=10, bold=1)
+        font.set(face=FONT_SANS_SERIF, size=9, bold=1)
         para = ParagraphStyle()
         para.set(font=font)
         default_style.add_paragraph_style("colheader", para)
 
         font = FontStyle()
-        font.set(face=FONT_SANS_SERIF, size=10)
+        font.set(face=FONT_SANS_SERIF, size=9)
         para = ParagraphStyle()
         para.set(font=font)
         default_style.add_paragraph_style("celltext", para)
-
-        table = TableStyle()
-        table.set_width(100)
-        table.set_column_widths([20, 15, 15, 10, 15, 15, 10])
-        default_style.add_table_style("table", table)
 
         cell = TableCellStyle()
         cell.set_padding(0.1)
