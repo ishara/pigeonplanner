@@ -295,6 +295,7 @@ def _migrate_medication():
                                   "FROM Medication_orig GROUP BY medid;")
     for row in cursor:
         pigeons = [_pigeon_for_pindex(pindex) for pindex in row["pindexes"].split(",")]
+        pigeons = [pigeon for pigeon in pigeons if pigeon is not None]
         medication_data = {
             "date": _to_date(row["date"]),
             "description": row["description"],
