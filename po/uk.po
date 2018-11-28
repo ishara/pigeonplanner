@@ -6,14 +6,14 @@ msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-15 21:13+0200\n"
-"PO-Revision-Date: 2016-11-16 14:11+0000\n"
+"PO-Revision-Date: 2018-11-18 08:09+0000\n"
 "Last-Translator: Viktor Kosenko <ksviktor@gmail.com>\n"
 "Language-Team: none <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-09-16 05:28+0000\n"
-"X-Generator: Launchpad (build 18780)\n"
+"X-Launchpad-Export-Date: 2018-11-19 05:29+0000\n"
+"X-Generator: Launchpad (build 18824)\n"
 "Language: \n"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:248
@@ -50,6 +50,9 @@ msgid ""
 "Pigeon Planner won't work anymore. This may take a moment. Do you want to "
 "continue?"
 msgstr ""
+"Ця база потребує оновлення, перш ніж вона може бути використана. Попередні "
+"версії програми Pigeon Planner більше не працюватимуть. Це може зайняти "
+"деякий час. Ви хочете продовжити?"
 
 #: pigeonplanner/messages.py:38
 msgid ""
@@ -610,15 +613,15 @@ msgstr "Звіт"
 
 #: pigeonplanner/ui/pedigreewindow.py:104
 msgid "Go to the previous pedigree"
-msgstr ""
+msgstr "Перейти до попереднього родоводу"
 
 #: pigeonplanner/ui/pedigreewindow.py:106
 msgid "Go to the first selected pedigree"
-msgstr ""
+msgstr "Перейдіть до першого вибраного родоводу"
 
 #: pigeonplanner/ui/pedigreewindow.py:108
 msgid "Go to the next pedigree"
-msgstr ""
+msgstr "Перейдіть до наступного родоводу"
 
 #: pigeonplanner/ui/pedigreewindow.py:110
 msgid "Save this pedigree"
@@ -719,7 +722,7 @@ msgstr "Данні, місце випуску або кількість голу
 
 #: pigeonplanner/ui/resultparser.py:178
 msgid "Failed to send report."
-msgstr ""
+msgstr "Не вдалося надіслати повідомлення."
 
 #: pigeonplanner/ui/detailsview.py:73 glade/DetailsView.ui:447
 #: glade/DetailsView.ui:932
@@ -772,7 +775,7 @@ msgstr "Не вдається знайти місце розташування '
 
 #: pigeonplanner/ui/exportwindow.py:80
 msgid "The selected path is not writeable."
-msgstr ""
+msgstr "Обраний шлях не коректний"
 
 #: pigeonplanner/ui/dbmanager.py:42
 msgid "Select a database file..."
@@ -829,7 +832,7 @@ msgstr "Молоді"
 #: pigeonplanner/ui/dialogs.py:119 pigeonplanner/core/enums.py:29
 #: glade/MainWindow.ui:526
 msgid "Unknown"
-msgstr ""
+msgstr "Невизначений"
 
 #: pigeonplanner/ui/dialogs.py:130
 msgid "Number of results"
@@ -957,47 +960,47 @@ msgstr "Країна"
 #: pigeonplanner/ui/widgets/bandentry.py:295
 #: pigeonplanner/ui/widgets/bandentry.py:323
 msgid "Letters"
-msgstr ""
+msgstr "Літери"
 
 #: pigeonplanner/ui/widgets/bandentry.py:66
 #: pigeonplanner/ui/widgets/bandentry.py:202
 #: pigeonplanner/ui/widgets/bandentry.py:298
 #: pigeonplanner/ui/widgets/bandentry.py:323
 msgid "Number"
-msgstr ""
+msgstr "Номер"
 
 #: pigeonplanner/ui/widgets/bandentry.py:84
 #: pigeonplanner/ui/widgets/bandentry.py:338
 msgid "Information"
-msgstr ""
+msgstr "інформація"
 
 #: pigeonplanner/ui/widgets/bandentry.py:204
 msgid "Year (short)"
-msgstr ""
+msgstr "Рік (короткий)"
 
 #: pigeonplanner/ui/widgets/bandentry.py:205
 msgid "Empty"
-msgstr ""
+msgstr "Порожня"
 
 #: pigeonplanner/ui/widgets/bandentry.py:323
 msgid "The fields are:"
-msgstr ""
+msgstr "Поля:"
 
 #: pigeonplanner/ui/widgets/bandentry.py:325
 msgid "The number and year fields are required."
-msgstr ""
+msgstr "Поля номерів та рік обов'язкові для заповнення."
 
 #: pigeonplanner/ui/widgets/bandentry.py:327
 msgid "The year has to be four digits long."
-msgstr ""
+msgstr "Рік має бути чотири цифри довжиною."
 
 #: pigeonplanner/ui/widgets/bandentry.py:365
 msgid "Make this format the default"
-msgstr ""
+msgstr "Зробити цей формат за замовчуванням"
 
 #: pigeonplanner/ui/widgets/bandentry.py:375
 msgid "Band format"
-msgstr ""
+msgstr "Формат діапазону"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:170
 msgid "Yards"
@@ -1239,7 +1242,7 @@ msgstr "Не вдається видалити базу даних: в дозв�
 
 #: pigeonplanner/database/manager.py:232 pigeonplanner/database/manager.py:233
 msgid "copy"
-msgstr ""
+msgstr "копіювати"
 
 #: pigeonplanner/database/manager.py:293
 msgid "Database name is required."
@@ -2031,7 +2034,7 @@ msgstr "Результат"
 
 #: glade/Backup.ui:152
 msgid "Destination"
-msgstr ""
+msgstr "Місце призначення"
 
 #: glade/Backup.ui:165 glade/Backup.ui:373
 msgid "Database"
@@ -2039,11 +2042,11 @@ msgstr "База данных"
 
 #: glade/Backup.ui:195
 msgid "Restore configuration file"
-msgstr ""
+msgstr "Відновити файл конфігурації"
 
 #: glade/Backup.ui:404
 msgid "Include configuration file"
-msgstr ""
+msgstr "Включити файл конфігурації"
 
 #: glade/MedicationView.ui:181 glade/MedicationView.ui:763
 msgid "Done by"
