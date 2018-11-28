@@ -1,3 +1,20 @@
+3.0.2:
+ * Fixed database migration with duplicate results
+ * Fixed database migration with orphaned medication records
+ * Fixed classic results view
+ * Fixed error in bugreport dialog
+ * Fixed adding a bandnumber range
+ * Fixed right-click with multiple pigeons selected
+ * Fixed pigeon report
+ * Fixed pigeon csv export
+ * Fixed error on wrong status date input
+ * Fixed default filename when saving a pedigree
+ * Fixed deleting pigeon through the pedigree
+ * Improved pigeon report
+ * Workaround for error on adding and updating pigeons
+ * Updated DTD resultparser
+ * Updated Ukrainian translation
+
 3.0.1:
  * Fix database migration issue where breeding records have missing parents
  * Fixed missing categories table on database migration
