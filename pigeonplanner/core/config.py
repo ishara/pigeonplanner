@@ -102,8 +102,8 @@ default_config = [
                 ("options.check-for-dev-updates", False),
                 ("options.language", "Default"),
                 ("options.coef-multiplier", 100),
-                ("options.distance-unit", 0),
-                ("options.speed-unit", 0),
+                ("options.distance-unit", 1),
+                ("options.speed-unit", 1),
                 ("options.band-format", "{empty}{empty}{number} / {year}"),
                 # ("options.format-date", "%Y-%m-%d"),
 
