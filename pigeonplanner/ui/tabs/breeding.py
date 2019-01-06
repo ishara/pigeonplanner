@@ -49,6 +49,10 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     # Tab
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
+
+        widgets = [self.widgets.buttonremove, self.widgets.buttonedit]
+        utils.set_multiple_sensitive(widgets, not rowiter is None)
+
         if rowiter is None:
             defaults = Breeding.get_fields_with_defaults()
             self.widgets.datelaid1.set_text(defaults["laid1"])
@@ -77,9 +81,6 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             self.widgets.treeview.expand_row(path, False)
             rowiter = self.widgets.treestore.iter_children(rowiter)
             selection.select_iter(rowiter)
-
-        widgets = [self.widgets.buttonremove, self.widgets.buttonedit]
-        utils.set_multiple_sensitive(widgets, not rowiter is None)
 
         record = model[rowiter][COL_OBJ]
         self.widgets.datelaid1.set_text(record.laid1)
