@@ -24,12 +24,15 @@ import subprocess
 from optparse import OptionParser
 
 
-POTFILE = "po/pigeonplanner.pot"
-POTFILES = {"Python": "po/POTFILES_PY.in",
-            "Glade": "po/POTFILES_GLADE.in"}
+GLADEDIR = os.path.join('pigeonplanner', 'ui', 'glade')
+LANGDIR = os.path.join('pigeonplanner', 'data', 'languages')
+PODIR = os.path.join('pigeonplanner', 'data', 'po')
+POTFILE = os.path.join(PODIR, "pigeonplanner.pot")
+POTFILES = {"Python": os.path.join(PODIR, "POTFILES_PY.in"),
+            "Glade": os.path.join(PODIR, "POTFILES_GLADE.in")}
 FORMATS = {"Python": [('bin', None),
                       ('pigeonplanner', ['.py'])],
-           "Glade": [('glade', ['.ui']),
+           "Glade": [(GLADEDIR, ['.ui']),
                      ('data', ['.ui'])]}
 GLADE_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
 <interface>
@@ -88,13 +91,12 @@ def create_mo():
     the po-file was updated.
     """
 
-    po_dir = os.path.join(os.path.dirname(__file__), 'po/')
-    for path, names, filenames in os.walk(po_dir):
+    for path, names, filenames in os.walk(PODIR):
         for filename in filenames:
             if not filename.endswith('.po'): continue
             lang = os.path.splitext(filename)[0]
             src = os.path.join(path, filename)
-            dest_path = os.path.join('languages', lang, 'LC_MESSAGES')
+            dest_path = os.path.join(LANGDIR, lang, 'LC_MESSAGES')
             dest = os.path.join(dest_path, 'pigeonplanner.mo')
             if not os.path.exists(dest_path):
                 os.makedirs(dest_path)

@@ -83,18 +83,20 @@ if hasattr(sys, "frozen"):
     # Most likely a py2exe package on Windows
     ROOTDIR = os.path.abspath(os.path.dirname(
         unicode(sys.executable, sys.getfilesystemencoding())))
+    IMAGEDIR = os.path.join(ROOTDIR, u"images")
+    GLADEDIR = os.path.join(ROOTDIR, u"glade")
     LANGDIR = os.path.abspath("languages")
+    # TODO: the following line should be much better, but for some reason translations
+    #       are only applied partially. Both paths look identical.
+    # LANGDIR = os.path.join(ROOTDIR, u"languages")
 else:
-    # This file is in pigeonplanner.core, so go 2 directories up
+    # This file is in pigeonplanner.core, so go 1 directory up
     ROOTDIR = os.path.abspath(os.path.join(os.path.dirname(
-        unicode(__file__, sys.getfilesystemencoding())), os.pardir, os.pardir))
-    if ROOTDIR.endswith(".egg"):
-        # TODO: Used in Mac OS X package. Can be improved?
-        ROOTDIR = os.path.join(ROOTDIR, u"share", u"pigeonplanner")
-    LANGDIR = os.path.join(ROOTDIR, u"languages")
+        unicode(__file__, sys.getfilesystemencoding())), os.pardir))
+    IMAGEDIR = os.path.join(ROOTDIR, u"data", u"images")
+    GLADEDIR = os.path.join(ROOTDIR, u"ui", u"glade")
+    LANGDIR = os.path.join(ROOTDIR, u"data", u"languages")
 
-IMAGEDIR = os.path.join(ROOTDIR, u"images")
-GLADEDIR = os.path.join(ROOTDIR, u"glade")
 RESULTPARSERDIR = os.path.join(ROOTDIR, u"resultparsers")
 
 THUMBDIR = os.path.join(PREFDIR, u"thumbs")

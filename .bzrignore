@@ -1,6 +1,6 @@
-./po/POTFILES_PY.in
-./po/POTFILES_GLADE.in
-./languages
+./pigeonplanner/data/po/POTFILES_PY.in
+./pigeonplanner/data/po/POTFILES_GLADE.in
+./pigeonplanner/data/languages
 ./MANIFEST
 ./dist
 ./data/TranslationWorkaround.ui

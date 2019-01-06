@@ -22,7 +22,6 @@ This is the Pigeon Planner setup script
 """
 
 import os
-import sys
 import glob
 import shutil
 from setuptools import setup, find_packages
@@ -30,31 +29,25 @@ from setuptools import setup, find_packages
 from pigeonplanner.core import const
 
 
-# Common data files
-glade_files = glob.glob("glade/*.ui")
-glade_files.extend(["glade/pigeonplannerwidgets.py", "glade/pigeonplannerwidgets.xml"])
+data_files = []
+package_data = {}
 
-translation_files = []
-# Search for the translation files
-for mofile in glob.glob("languages/*/LC_MESSAGES/pigeonplanner.mo"):
-    _, lang, _ = mofile.split(os.sep, 2)
-    modir = os.path.dirname(mofile)
-    if sys.platform != "win32":
-        modir = modir.replace("languages", "share/pigeonplanner/languages")
-    translation_files.append((modir, [mofile]))
-
-resultparsers = glob.glob("resultparsers/*.py")
-resultparsers.extend(glob.glob("resultparsers/*.yapsy-plugin"))
-
-if sys.platform == "win32":
+if const.WINDOWS:
     import py2exe
 
+    translation_files = []
+    for mofile in glob.glob("pigeonplanner/data/languages/*/LC_MESSAGES/pigeonplanner.mo"):
+        _, _, modir = os.path.dirname(mofile).split("/", 2)
+        translation_files.append((modir, [mofile]))
+
     data_files = [
-        ("glade", glade_files),
-        ("images", glob.glob("images/*.png")),
-        ("resultparsers", resultparsers),
+        ("glade", glob.glob("pigeonplanner/ui/glade/*.ui")),
+        ("images", glob.glob("pigeonplanner/data/images/*.png")),
+        ("resultparsers", glob.glob("pigeonplanner/resultparsers/*.py")),
+        ("resultparsers", glob.glob("pigeonplanner/resultparsers/*.yapsy-plugin")),
         (".", ["AUTHORS", "CHANGES", "COPYING", "README", "README.dev"])
     ]
+    data_files.extend(translation_files)
 
     platform_options = {
         "options": {
@@ -87,19 +80,28 @@ if sys.platform == "win32":
         ]
     }
 else:
-    data_files = [
-        ("share/pigeonplanner/glade", glade_files),
-        ("share/pigeonplanner/images", glob.glob("images/*.png")),
-        ("share/pigeonplanner/resultparsers", resultparsers),
-        ("share/applications", ["data/pigeonplanner.desktop"]),
-        ("share/icons/hicolor/scalable/apps", ["images/pigeonplanner.svg"]),
-        ("share/pixmaps/", ["images/pigeonplanner.png"]),
-    ]
     dependencies = [dep.strip("\n'") for dep in open("requirements.txt").readlines()]
     platform_options = {
         "install_requires": dependencies,
     }
+    package_data = {
+        "pigeonplanner": [
+            "data/images/*.png",
+            "data/languages/*/LC_MESSAGES/pigeonplanner.mo",
+            "resultparsers/*.py",
+            "resultparsers/*.yapsy-plugin",
+        ],
+        "pigeonplanner.ui": [
+            "glade/*.ui"
+        ]
+    }
 
+if const.UNIX:
+    data_files = [
+        ("share/applications", ["data/pigeonplanner.desktop"]),
+        ("share/icons/hicolor/scalable/apps", ["pigeonplanner/data/images/pigeonplanner.svg"]),
+        ("share/pixmaps/", ["pigeonplanner/data/images/pigeonplanner.png"]),
+    ]
 
 entry_points = {
     "gui_scripts": [
@@ -120,8 +122,9 @@ setup(
     download_url="http://www.pigeonplanner.com/download",
     license="GPLv3",
     url=const.WEBSITE,
-    packages=find_packages(),
-    data_files=data_files + translation_files,
+    packages=find_packages(exclude=["tests"]),
+    package_data=package_data,
+    data_files=data_files,
     entry_points=entry_points,
     **platform_options
 )

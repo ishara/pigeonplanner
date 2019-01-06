@@ -3,15 +3,14 @@ include Makefile
 include i18n.py
 include pigeonplanner.py
 
-recursive-include data *
-recursive-include glade *
-recursive-include images *
-recursive-include resultparsers *
-recursive-include languages *
-recursive-include mac *
-recursive-include po *
-recursive-include win *
-recursive-include tests *
+graft data
+graft mac
+graft win
+graft tests
+
+graft pigeonplanner/data/
+graft pigeonplanner/ui/glade
+graft pigeonplanner/resultparsers
 
 global-exclude *.pyc
 global-exclude *.pyo
