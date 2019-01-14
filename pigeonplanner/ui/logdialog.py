@@ -20,7 +20,7 @@
 Logdialog class
 """
 
-
+import glob
 import os.path
 
 import gtk
@@ -97,9 +97,7 @@ class LogDialog(gtk.Dialog):
         self.combo_logs.connect("changed", self.set_logfile)
         self.combo_logs.connect("changed", self.reload_view)
 
-        logs = [const.LOGFILE]
-        if os.path.exists("%s.old" % const.LOGFILE):
-            logs.append("%s.old" % const.LOGFILE)
+        logs = sorted(glob.glob(const.LOGFILE + "*"))
         for log in logs:
             self.combo_logs.append_text(os.path.basename(log))
         self.combo_logs.set_active(0)

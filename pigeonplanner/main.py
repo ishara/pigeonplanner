@@ -26,6 +26,7 @@ import sys
 import locale
 import gettext
 import logging
+import logging.handlers
 import platform
 from optparse import OptionParser
 
@@ -161,12 +162,9 @@ class Startup(object):
         # Capture warnings and add them to the log, useful for GTK warnings.
         logging.captureWarnings(True)
 
-        if os.path.exists(const.LOGFILE):
-            if os.path.exists("%s.old" % const.LOGFILE):
-                os.remove("%s.old" % const.LOGFILE)
-            os.rename(const.LOGFILE, "%s.old" % const.LOGFILE)
         formatter = logging.Formatter(const.LOG_FORMAT)
-        handler = logging.FileHandler(const.LOGFILE, encoding="UTF-8")
+        handler = logging.handlers.RotatingFileHandler(const.LOGFILE, encoding="UTF-8", backupCount=4)
+        handler.doRollover()
         handler.setFormatter(formatter)
         self.logger = logging.getLogger()
         self.logger.addHandler(handler)
