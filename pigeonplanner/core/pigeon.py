@@ -38,6 +38,7 @@ def add_pigeon(data, status, statusdata):
     """
 
     _check_input_data(data)
+    _apply_status_out_of_sync_workaround()
 
     # Handle sire and dam
     data["sire"] = get_or_create_pigeon(data.get("sire", None), enums.Sex.cock, False)
@@ -75,6 +76,7 @@ def update_pigeon(pigeon, data, status, statusdata):
     """
 
     _check_input_data(data)
+    _apply_status_out_of_sync_workaround()
 
     data["sire"] = get_or_create_pigeon(data.get("sire", None), enums.Sex.cock, False)
     data["dam"] = get_or_create_pigeon(data.get("dam", None), enums.Sex.hen, False)
@@ -173,3 +175,25 @@ def _create_image(pigeon, path):
 def _check_input_data(data):
     if not data["sex"] in (enums.Sex.cock, enums.Sex.hen, enums.Sex.youngbird, enums.Sex.unknown):
         raise ValueError("Sex value has to be of type enums.Sex, but got '%r'" % data["sex"])
+
+
+def _apply_status_out_of_sync_workaround():
+    # TODO: This is a HACK, not a fix!
+    #       There's a bug since version 3.0.0 where there's a possibility that the
+    #       Pigeon and Status database tables become out of sync. They have a
+    #       one-to-one relationship with the Status having a UNIQUE backref to
+    #       the Pigeon. Some user reports show that a Status row is left behind
+    #       after removing a Pigeon row. Thus adding a Pigeon row with the same
+    #       ID will trigger an IntegrityError. Especially messing up get or create
+    #       functionality. The current workaround is to remove the extra Status row(s)
+    #       where the Pigeon ID references to a non-existing Pigeon row. This
+    #       workaround is put here because it affects different parts in the code
+    #       and to keep this in one place only. The user has to re-open the database
+    #       though for having effect.
+    #       The reason why this problem happens was not found during some testing.
+    #       The Status row is deleted on database level (ON DELETE CASCADE).
+    #       Fix it as soon as possible.
+    if Pigeon.select().count() < Status.select().count():
+        logger.warning("The Pigeon and Status tables are out of sync, applying fix.")
+        pigeon_ids = Pigeon.select(Pigeon.id)
+        Status.delete().where(Status.pigeon.not_in(pigeon_ids)).execute()
