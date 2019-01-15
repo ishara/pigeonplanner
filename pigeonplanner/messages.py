@@ -83,6 +83,9 @@ MSG_NO_PIGEON = (_("The selected pigeon can't be found."),
 MSG_NO_PARENT = (_("Can't search for parents, enter the pigeon band first."),
                  None,
                  ERROR)
+MSG_INVALID_MATE = (_("Mate does not exist, enter or search for an existing pigeon."),
+                    None,
+                    ERROR)
 
 MSG_EMPTY_FIELDS = (_("Invalid input!"),
                     _("The ringnumber and year are necessary."),
