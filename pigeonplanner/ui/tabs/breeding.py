@@ -18,6 +18,7 @@
 
 import gtk
 
+from pigeonplanner import messages
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
@@ -169,7 +170,11 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             ErrorDialog(msg.value, self.widgets.editdialog)
             return
 
-        mate = Pigeon.get_for_band(band_tuple_mate)
+        try:
+            mate = Pigeon.get_for_band(band_tuple_mate)
+        except Pigeon.DoesNotExist:
+            ErrorDialog(messages.MSG_INVALID_MATE, self.widgets.editdialog)
+            return
         if self.pigeon.is_cock():
             sire = self.pigeon
             dam = mate
