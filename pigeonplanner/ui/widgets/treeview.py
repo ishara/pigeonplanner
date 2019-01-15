@@ -135,6 +135,7 @@ class MainTreeView(gtk.TreeView, component.Component):
     (LS_PIGEON,
      LS_RING,
      LS_YEAR,
+     LS_COUNTRY,
      LS_NAME,
      LS_COLOUR,
      LS_SEX,
@@ -143,10 +144,11 @@ class MainTreeView(gtk.TreeView, component.Component):
      LS_LOFT,
      LS_STRAIN,
      LS_STATUS,
-     LS_SEXIMG) = range(12)
+     LS_SEXIMG) = range(13)
 
     (COL_BAND,
      COL_YEAR,
+     COL_COUNTRY,
      COL_NAME,
      COL_COLOUR,
      COL_SEX,
@@ -154,7 +156,7 @@ class MainTreeView(gtk.TreeView, component.Component):
      COL_DAM,
      COL_LOFT,
      COL_STRAIN,
-     COL_STATUS) = range(10)
+     COL_STATUS) = range(11)
 
     def __init__(self):
         gtk.TreeView.__init__(self)
@@ -251,6 +253,7 @@ class MainTreeView(gtk.TreeView, component.Component):
             self.LS_PIGEON, pigeon,
             self.LS_RING, pigeon.band,
             self.LS_YEAR, pigeon.band_year,
+            self.LS_COUNTRY, pigeon.band_country,
             self.LS_NAME, pigeon.name,
             self.LS_COLOUR, pigeon.colour,
             self.LS_SEX, pigeon.sex_string,
@@ -311,7 +314,8 @@ class MainTreeView(gtk.TreeView, component.Component):
         return self._liststore[path][self.LS_PIGEON]
 
     def set_columns(self):
-        columnsdic = {self.COL_NAME: config.get("columns.pigeon-name"),
+        columnsdic = {self.COL_COUNTRY: config.get("columns.pigeon-band-country"),
+                      self.COL_NAME: config.get("columns.pigeon-name"),
                       self.COL_COLOUR: config.get("columns.pigeon-colour"),
                       self.COL_SEX: config.get("columns.pigeon-sex"),
                       self.COL_SIRE: config.get("columns.pigeon-sire"),
@@ -336,9 +340,9 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     # Internal methods
     def _build_treeview(self):
-        liststore = gtk.ListStore(object, str, str, str, str, str, str,
+        liststore = gtk.ListStore(object, str, str, str, str, str, str, str,
                                   str, str, str, str, gtk.gdk.Pixbuf)
-        columns = [_("Band no."), _("Year"), _("Name"), _("Colour"), _("Sex"),
+        columns = [_("Band no."), _("Year"), _("Country"), _("Name"), _("Colour"), _("Sex"),
                    _("Sire"), _("Dam"), _("Loft"), _("Strain"), _("Status")]
         for index, column in enumerate(columns):
             tvcolumn = gtk.TreeViewColumn(column)
@@ -359,6 +363,7 @@ class MainTreeView(gtk.TreeView, component.Component):
             pigeon,
             pigeon.band,
             pigeon.band_year,
+            pigeon.band_country,
             pigeon.name,
             pigeon.colour,
             pigeon.sex_string,

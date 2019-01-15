@@ -127,6 +127,7 @@ default_config = [
                 ("backup.last", time.time()),
 
                 ("columns.pigeon-name", True),
+                ("columns.pigeon-band-country", False),
                 ("columns.pigeon-colour", False),
                 ("columns.pigeon-sex", False),
                 ("columns.pigeon-sex-type", 3),

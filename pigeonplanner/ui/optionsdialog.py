@@ -170,6 +170,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ("backup.location", self.widgets.fcbutton.get_current_folder()),
 
                 ("columns.pigeon-name", self.widgets.chkName.get_active()),
+                ("columns.pigeon-band-country", self.widgets.chkCountry.get_active()),
                 ("columns.pigeon-colour", self.widgets.chkColour.get_active()),
                 ("columns.pigeon-sex", self.widgets.chkSex.get_active()),
                 ("columns.pigeon-sex-type", sexcoltype),
@@ -235,6 +236,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
 
         # Appearance
         self.widgets.chkName.set_active(config.get("columns.pigeon-name"))
+        self.widgets.chkCountry.set_active(config.get("columns.pigeon-band-country"))
         self.widgets.chkColour.set_active(config.get("columns.pigeon-colour"))
         self.widgets.chkSex.set_active(config.get("columns.pigeon-sex"))
         self.widgets.chkLoft.set_active(config.get("columns.pigeon-loft"))
