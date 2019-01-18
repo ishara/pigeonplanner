@@ -494,7 +494,7 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
     def start_edit(self, operation):
         self._operation = operation
         if operation == enums.Action.edit:
-            logger.debug("Start editing pigeon '%s'", self.pigeon.band)
+            logger.debug("Start editing pigeon %s", self.pigeon.band_tuple)
             self.widgets.entrybandedit.set_pigeon(self.pigeon)
             self.widgets.entrysireedit.set_pigeon(self.pigeon.sire)
             self.widgets.entrydamedit.set_pigeon(self.pigeon.dam)
