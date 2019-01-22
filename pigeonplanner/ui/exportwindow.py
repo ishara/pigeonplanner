@@ -64,6 +64,8 @@ class ExportWindow(builder.GtkBuilder):
         treeview = component.get("Treeview")
         if self.widgets.radioselected.get_active():
             pigeons = treeview.get_selected_pigeon()
+            if pigeons is None:
+                pigeons = []
             # pigeons can be a list of selected or just one pigeon object.
             if not isinstance(pigeons, list):
                 pigeons = [pigeons]

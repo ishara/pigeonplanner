@@ -56,7 +56,7 @@ def add_pigeon(data, status, statusdata):
             (data["band_country"], data["band_letters"], data["band_number"], data["band_year"])
         )
         if pigeon.visible:
-            logger.debug("Pigeon already exists '%s'", pigeon.band)
+            logger.debug("Pigeon already exists %s", pigeon.band_tuple)
             raise errors.PigeonAlreadyExists(pigeon)
         else:
             raise errors.PigeonAlreadyExistsHidden(pigeon)
@@ -89,7 +89,7 @@ def update_pigeon(pigeon, data, status, statusdata):
             (data["band_country"], data["band_letters"], data["band_number"], data["band_year"])
         )
         if pigeon.visible:
-            logger.debug("Pigeon already exists '%s'", pigeon.band)
+            logger.debug("Pigeon already exists %s", pigeon.band_tuple)
             raise errors.PigeonAlreadyExists(pigeon)
         else:
             raise errors.PigeonAlreadyExistsHidden(pigeon)
@@ -120,7 +120,7 @@ def update_pigeon(pigeon, data, status, statusdata):
 
 
 def remove_pigeon(pigeon):
-    logger.debug("Start removing pigeon '%s'", pigeon.band)
+    logger.debug("Start removing pigeon %s", pigeon.band_tuple)
 
     try:
         os.remove(thumbnail.get_path(pigeon.main_image))
