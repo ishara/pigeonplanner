@@ -185,7 +185,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 
         self._build_menubar()
         self.current_pigeon = 0
-        self.widgets.removedialog.set_transient_for(self)
         self.widgets.rangedialog.set_transient_for(self)
 
         self.widgets.MenuShowAll.set_active(config.get("interface.show-all-pigeons"))
@@ -392,20 +391,17 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             pigeons = [pobj for pobj in self.widgets.treeview.get_selected_pigeon()]
             statusbarmsg = _("%s pigeons have been removed") % len(pigeons)
 
-        pigeonlabel = ", ".join([pobj.band for pobj in pigeons])
-        self.widgets.labelPigeon.set_text(pigeonlabel)
-        self.widgets.chkKeep.set_active(True)
-
-        answer = self.widgets.removedialog.run()
-        if answer == 2:
-            if self.widgets.chkKeep.get_active():
+        removedialog = dialogs.RemovePigeonDialog(self, len(pigeons) > 1)
+        response = removedialog.run()
+        if response == removedialog.RESPONSE_REMOVE or response == removedialog.RESPONSE_HIDE:
+            if response == removedialog.RESPONSE_REMOVE:
+                for pigeon in pigeons:
+                    corepigeon.remove_pigeon(pigeon)
+            elif response == removedialog.RESPONSE_HIDE:
                 logger.debug("Remove: Hiding the pigeon(s)")
                 for pigeon in pigeons:
                     pigeon.visible = False
                     pigeon.save()
-            else:
-                for pigeon in pigeons:
-                    corepigeon.remove_pigeon(pigeon)
 
             # Reverse the pathlist so we can safely remove each row without
             # having problems with invalid paths.
@@ -422,7 +418,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             self.widgets.selection.emit("changed")
             self.widgets.statusbar.display_message(statusbarmsg)
 
-        self.widgets.removedialog.hide()
+        removedialog.hide()
 
     def menupedigree_activate(self, widget):
         logger.debug(common.get_function_name())

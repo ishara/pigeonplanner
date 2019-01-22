@@ -34,6 +34,50 @@ from pigeonplanner.core import backup
 from pigeonplanner.database.models import Pigeon, Status, Result, Breeding
 
 
+class RemovePigeonDialog(gtk.MessageDialog):
+    RESPONSE_CANCEL = 1
+    RESPONSE_REMOVE = 2
+    RESPONSE_HIDE = 3
+
+    def __init__(self, parent, multiple):
+        message = _("Remove selected pigeons?") if multiple else _("Remove selected pigeon?")
+        button_hide_label = _("Hide pigeons") if multiple else _("Hide pigeon")
+        gtk.MessageDialog.__init__(self, parent=parent,
+                                   flags=gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                                   type=gtk.MESSAGE_WARNING,
+                                   message_format=message)
+        self.set_transient_for(parent)
+        secondary_1 = _("Remove with data will permanently delete the pigeon with all its "
+                        "data like pedigree, results and breeding details.")
+        secondary_2 = _("Hide the pigeon to keep it in the pedigrees.")
+        self.format_secondary_text("%s\n\n%s" % (secondary_1, secondary_2))
+
+        button_cancel = gtk.Button(stock=gtk.STOCK_CANCEL)
+        button_cancel.connect("clicked", self.on_button_cancel_clicked)
+        button_remove = gtk.Button(label=_("Remove with data"))
+        button_remove.connect("clicked", self.on_button_remove_clicked)
+        button_remove.set_image(gtk.image_new_from_stock(gtk.STOCK_REMOVE, gtk.ICON_SIZE_BUTTON))
+        button_hide = gtk.Button(label=button_hide_label)
+        button_hide.connect("clicked", self.on_button_hide_clicked)
+        button_hide.set_image(gtk.image_new_from_stock(gtk.STOCK_REMOVE, gtk.ICON_SIZE_BUTTON))
+
+        action_area = self.get_action_area()
+        action_area.add(button_cancel)
+        action_area.add(button_remove)
+        action_area.add(button_hide)
+
+        self.show_all()
+
+    def on_button_cancel_clicked(self, widget):
+        self.response(self.RESPONSE_CANCEL)
+
+    def on_button_remove_clicked(self, widget):
+        self.response(self.RESPONSE_REMOVE)
+
+    def on_button_hide_clicked(self, widget):
+        self.response(self.RESPONSE_HIDE)
+
+
 class AboutDialog(gtk.AboutDialog):
     def __init__(self, parent):
         gtk.AboutDialog.__init__(self)
