@@ -80,9 +80,9 @@ def do_migration(db):
 
         logger.info("Deleting old tables")
         for table_name in status_tables:
-            database.execute_sql("DROP TABLE %s" % table_name)
+            database.execute_sql("DROP TABLE IF EXISTS %s" % table_name)
         for table_name in old_tables:
-            database.execute_sql("DROP TABLE %s_orig" % table_name)
+            database.execute_sql("DROP TABLE IF EXISTS %s_orig" % table_name)
 
     database.close()
     db.connect()

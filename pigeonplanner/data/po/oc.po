@@ -1,21 +1,22 @@
-# Hebrew translation for pigeonplanner
-# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
+# Occitan (post 1500) translation for pigeonplanner
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the pigeonplanner package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pigeonplanner\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-22 15:23+0100\n"
-"PO-Revision-Date: 2019-01-22 15:46+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
-"Language-Team: Hebrew <he@li.org>\n"
+"PO-Revision-Date: 2010-11-07 18:14+0000\n"
+"Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
+"Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2019-01-23 04:35+0000\n"
 "X-Generator: Launchpad (build 18857)\n"
+"Language: \n"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:248
 #: pigeonplanner/ui/resultwindow.py:786 pigeonplanner/ui/exportwindow.py:58
@@ -23,27 +24,25 @@ msgstr ""
 #: pigeonplanner/ui/tools/distancecalculator.py:74
 #: pigeonplanner/core/common.py:194 pigeonplanner/core/common.py:201
 msgid "Error"
-msgstr "שְׁגִיאָה"
+msgstr "Error"
 
 #: pigeonplanner/messages.py:20
 msgid "Warning"
-msgstr "אזהרה"
+msgstr "Avertiment"
 
 #: pigeonplanner/messages.py:23
 msgid "Pigeon Planner is already running."
-msgstr "אירגונית היונים כבר פועלת"
+msgstr ""
 
 #: pigeonplanner/messages.py:27
 msgid ""
 "The database you are trying to open is too new for your version of Pigeon "
 "Planner. You need to reinstall the latest version to continue."
 msgstr ""
-"קבוצת המידע שאתה מנסה לפתוח חדשה עבור גרסת התוכנה. בבקשה התקן את אירגונית "
-"היונים מחדש בגרסתה האחרונה והמשך."
 
 #: pigeonplanner/messages.py:32
 msgid "Database update required!"
-msgstr "עידכון מידע נדרש"
+msgstr ""
 
 #: pigeonplanner/messages.py:33
 msgid ""
@@ -58,26 +57,20 @@ msgid ""
 "Note that it is not advised to run an older version, which can lead to data "
 "corruption."
 msgstr ""
-"המידע של אירגונית היונים עודכן לגרסה חדשה. שים לב כי לא מומלץ להפעיל גרסה "
-"קודמת העלולה לגרום להשחתת המידע."
 
 #: pigeonplanner/messages.py:44
 msgid ""
 "The database migration has failed! Any further actions are stopped to "
 "prevent data loss. Please contact the developers to fix this problem."
 msgstr ""
-"תהליך נדידת המידע נכשל! פעולות נוספות הופסקו על מנת למנוע איבוד מידע. בבקשה "
-"פנה למפתחי התוכנה לתיקון הבעיה."
 
 #: pigeonplanner/messages.py:50 pigeonplanner/messages.py:53
 msgid "Removing database"
-msgstr "מסיר מידע."
+msgstr ""
 
 #: pigeonplanner/messages.py:51
 msgid "Are you sure you want to remove the database? All data will be lost."
 msgstr ""
-"האם אתה בטוח שברצונך להסיר את המידע? \r\n"
-"כל המידע יאבד."
 
 #: pigeonplanner/messages.py:55
 #, python-format
@@ -90,7 +83,7 @@ msgstr ""
 
 #: pigeonplanner/messages.py:59
 msgid "Invalid image!"
-msgstr ""
+msgstr "Imatge invalid !"
 
 #: pigeonplanner/messages.py:60
 msgid ""
@@ -187,7 +180,7 @@ msgstr ""
 #: pigeonplanner/messages.py:114 pigeonplanner/messages.py:117
 #: pigeonplanner/messages.py:161 pigeonplanner/ui/tabs/medication.py:58
 msgid "Are you sure?"
-msgstr ""
+msgstr "Sètz segur(a) ?"
 
 #: pigeonplanner/messages.py:116
 msgid "Removing the selected media file"
@@ -204,7 +197,7 @@ msgstr ""
 #: pigeonplanner/messages.py:126
 #, python-format
 msgid "Removing '%s'"
-msgstr ""
+msgstr "suprimir '%s'"
 
 #: pigeonplanner/messages.py:127
 msgid "Are you sure you want to remove this person from your addresses?"
@@ -225,7 +218,7 @@ msgstr ""
 
 #: pigeonplanner/messages.py:137 pigeonplanner/messages.py:143
 msgid "Completed!"
-msgstr ""
+msgstr "Acabat !"
 
 #: pigeonplanner/messages.py:138
 msgid "There was an error making the backup."
@@ -275,7 +268,7 @@ msgstr ""
 
 #: pigeonplanner/messages.py:162
 msgid "Default settings"
-msgstr ""
+msgstr "Paramètres per defaut"
 
 #: pigeonplanner/messages.py:164
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
@@ -283,7 +276,7 @@ msgstr ""
 
 #: pigeonplanner/messages.py:167
 msgid "Restart required"
-msgstr ""
+msgstr "Vos cal tornar amodar l'ordenador"
 
 #: pigeonplanner/messages.py:169
 msgid "Update available!"
@@ -323,7 +316,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/BreedingView.ui:998
 #: pigeonplanner/ui/glade/ResultParser.ui:576
 msgid "Band no."
-msgstr ""
+msgstr "N° de baga"
 
 #: pigeonplanner/reports/pigeons.py:54 pigeonplanner/ui/tabs/relatives.py:190
 #: pigeonplanner/ui/widgets/treeview.py:345
@@ -334,7 +327,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/DetailsView.ui:147
 #: pigeonplanner/ui/glade/DetailsView.ui:689
 msgid "Sex"
-msgstr ""
+msgstr "Sèxe"
 
 #: pigeonplanner/reports/pigeons.py:56 pigeonplanner/ui/dbmanager.py:49
 #: pigeonplanner/ui/dialogs.py:274 pigeonplanner/ui/widgets/treeview.py:345
@@ -344,7 +337,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/DBManager.ui:427 pigeonplanner/ui/glade/Backup.ui:146
 #: pigeonplanner/ui/glade/AddressBook.ui:136
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: pigeonplanner/reports/pigeons.py:58 pigeonplanner/ui/widgets/treeview.py:346
 #: pigeonplanner/ui/glade/FilterDialog.ui:386
@@ -369,7 +362,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/DetailsView.ui:135
 #: pigeonplanner/ui/glade/DetailsView.ui:678
 msgid "Colour"
-msgstr ""
+msgstr "Color"
 
 #: pigeonplanner/reports/pigeons.py:64 pigeonplanner/ui/widgets/treeview.py:346
 #: pigeonplanner/ui/tools/distancecalculator.py:176
@@ -387,7 +380,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/DetailsView.ui:161
 #: pigeonplanner/ui/glade/DetailsView.ui:702
 msgid "Strain"
-msgstr ""
+msgstr "Passar"
 
 #: pigeonplanner/reports/pigeons.py:68 pigeonplanner/ui/widgets/treeview.py:346
 #: pigeonplanner/ui/glade/FilterDialog.ui:332
@@ -405,7 +398,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/MedicationView.ui:133
 #: pigeonplanner/ui/glade/ResultParser.ui:172
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: pigeonplanner/reports/results.py:62 pigeonplanner/ui/resultwindow.py:83
 #: pigeonplanner/ui/tabs/results.py:53
@@ -415,7 +408,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultParser.ui:184
 #: pigeonplanner/ui/glade/RaceManager.ui:132
 msgid "Racepoint"
-msgstr ""
+msgstr "Raça"
 
 #: pigeonplanner/reports/results.py:64 pigeonplanner/ui/resultwindow.py:91
 #: pigeonplanner/ui/resultwindow.py:92 pigeonplanner/ui/tabs/results.py:61
@@ -430,7 +423,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultsView.ui:605
 #: pigeonplanner/ui/glade/ResultWindow.ui:500
 msgid "Out of"
-msgstr ""
+msgstr "de"
 
 #: pigeonplanner/reports/results.py:66 pigeonplanner/ui/resultwindow.py:84
 #: pigeonplanner/ui/tabs/results.py:54
@@ -440,7 +433,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ExportWindow.ui:126
 #: pigeonplanner/ui/glade/ResultParser.ui:330
 msgid "Type"
-msgstr ""
+msgstr "Tipe"
 
 #: pigeonplanner/reports/results.py:67 pigeonplanner/ui/resultwindow.py:85
 #: pigeonplanner/ui/tabs/results.py:55 pigeonplanner/ui/tools/datamanager.py:47
@@ -449,7 +442,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultWindow.ui:256
 #: pigeonplanner/ui/glade/ResultParser.ui:344
 msgid "Wind"
-msgstr ""
+msgstr "Vent"
 
 #: pigeonplanner/reports/results.py:68 pigeonplanner/ui/resultwindow.py:87
 #: pigeonplanner/ui/tabs/results.py:57 pigeonplanner/ui/tools/datamanager.py:46
@@ -458,11 +451,11 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultWindow.ui:270
 #: pigeonplanner/ui/glade/ResultParser.ui:358
 msgid "Weather"
-msgstr ""
+msgstr "Metèo"
 
 #: pigeonplanner/reports/results.py:69
 msgid "Coef."
-msgstr ""
+msgstr "Coef"
 
 #: pigeonplanner/reports/results.py:70 pigeonplanner/ui/resultwindow.py:98
 #: pigeonplanner/ui/tabs/results.py:68
@@ -471,7 +464,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultWindow.ui:528
 #: pigeonplanner/ui/glade/ResultParser.ui:198
 msgid "Sector"
-msgstr ""
+msgstr "Sector"
 
 #: pigeonplanner/reports/results.py:71 pigeonplanner/ui/resultwindow.py:99
 #: pigeonplanner/ui/tabs/results.py:69
@@ -480,7 +473,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultWindow.ui:542
 #: pigeonplanner/ui/glade/ResultParser.ui:212
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
 #: pigeonplanner/reports/results.py:72 pigeonplanner/ui/resultwindow.py:100
 #: pigeonplanner/ui/tabs/results.py:70
@@ -492,19 +485,19 @@ msgstr ""
 #: pigeonplanner/ui/glade/MedicationView.ui:805
 #: pigeonplanner/ui/glade/AddressBook.ui:420
 msgid "Comment"
-msgstr ""
+msgstr "Comentari"
 
 #: pigeonplanner/reports/velocity.py:35 pigeonplanner/reports/velocity.py:46
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:202
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:514
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:975
 msgid "Velocity"
-msgstr ""
+msgstr "Velocitat"
 
 #: pigeonplanner/reports/velocity.py:40
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:556
 msgid "Released"
-msgstr ""
+msgstr "Publicat"
 
 #: pigeonplanner/reports/velocity.py:41
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:176
@@ -513,23 +506,23 @@ msgstr ""
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:369
 #: pigeonplanner/ui/glade/RaceManager.ui:191
 msgid "Distance"
-msgstr ""
+msgstr "Distància"
 
 #: pigeonplanner/reports/velocity.py:47
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:986
 msgid "Flight Time"
-msgstr ""
+msgstr "Temps de vòl"
 
 #: pigeonplanner/reports/velocity.py:48
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:997
 msgid "Time of Arrival"
-msgstr ""
+msgstr "Ora d'arribada"
 
 #: pigeonplanner/reports/pedigrees/swapped_details.py:49
 #: pigeonplanner/reports/pedigrees/original.py:63
 #: pigeonplanner/reports/pedigrees/middle.py:42
 msgid "Pedigree of:"
-msgstr ""
+msgstr "Pedigree de :"
 
 #: pigeonplanner/ui/filechooser.py:55
 msgid "Preview"
@@ -537,7 +530,7 @@ msgstr ""
 
 #: pigeonplanner/ui/filechooser.py:81 pigeonplanner/ui/tabs/media.py:120
 msgid "Images"
-msgstr ""
+msgstr "Imatges"
 
 #: pigeonplanner/ui/filechooser.py:144
 msgid "Select an image..."
@@ -565,7 +558,7 @@ msgstr ""
 
 #: pigeonplanner/ui/filechooser.py:205 pigeonplanner/ui/filechooser.py:218
 msgid "Save as..."
-msgstr ""
+msgstr "Enregistrar jos..."
 
 #: pigeonplanner/ui/filechooser.py:244 pigeonplanner/ui/dbmanager.py:78
 msgid "Select a folder..."
@@ -579,11 +572,11 @@ msgstr ""
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1983
 #: pigeonplanner/ui/glade/DBManager.ui:488
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: pigeonplanner/ui/optionsdialog.py:55
 msgid "Appearance"
-msgstr ""
+msgstr "Aparéncia"
 
 #: pigeonplanner/ui/optionsdialog.py:57
 msgid "Columns"
@@ -591,7 +584,7 @@ msgstr ""
 
 #: pigeonplanner/ui/optionsdialog.py:59
 msgid "Printing"
-msgstr ""
+msgstr "Estampatge"
 
 #: pigeonplanner/ui/optionsdialog.py:60 pigeonplanner/ui/gtkmain.py:57
 #: pigeonplanner/ui/pedigreewindow.py:80 pigeonplanner/ui/pedigreewindow.py:84
@@ -612,7 +605,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultsView.ui:135
 #: pigeonplanner/ui/glade/ResultWindow.ui:816
 msgid "Results"
-msgstr ""
+msgstr "Resultats"
 
 #: pigeonplanner/ui/optionsdialog.py:64 pigeonplanner/ui/glade/DBManager.ui:596
 msgid "Advanced"
@@ -620,11 +613,11 @@ msgstr ""
 
 #: pigeonplanner/ui/optionsdialog.py:112
 msgid "day"
-msgstr ""
+msgstr "jorn"
 
 #: pigeonplanner/ui/optionsdialog.py:112
 msgid "days"
-msgstr ""
+msgstr "jorns"
 
 #: pigeonplanner/ui/exceptiondialog.py:46
 msgid ""
@@ -650,7 +643,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/Dialogs.ui:8
 #: pigeonplanner/ui/glade/AddressBook.ui:379
 msgid "E-mail"
-msgstr ""
+msgstr "Adreça electronica"
 
 #: pigeonplanner/ui/gtkmain.py:59
 msgid "Send"
@@ -690,7 +683,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultWindow.ui:16
 #: pigeonplanner/ui/glade/PhotoAlbum.ui:50
 msgid "Close this window"
-msgstr ""
+msgstr "Tampar aquesta fenèstra"
 
 #: pigeonplanner/ui/pedigreewindow.py:229
 #, python-format
@@ -731,14 +724,14 @@ msgstr ""
 #: pigeonplanner/ui/glade/MainWindow.ui:912
 #: pigeonplanner/ui/glade/ResultParser.ui:589
 msgid "Year"
-msgstr ""
+msgstr "Annada"
 
 #: pigeonplanner/ui/resultwindow.py:94 pigeonplanner/ui/resultwindow.py:95
 #: pigeonplanner/ui/tabs/results.py:64 pigeonplanner/ui/tabs/results.py:65
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1077
 #: pigeonplanner/ui/glade/ResultWindow.ui:514
 msgid "Coefficient"
-msgstr ""
+msgstr "Coeficient"
 
 #: pigeonplanner/ui/resultwindow.py:96 pigeonplanner/ui/resultwindow.py:97
 #: pigeonplanner/ui/tabs/results.py:66 pigeonplanner/ui/tabs/results.py:67
@@ -814,7 +807,7 @@ msgstr ""
 #: pigeonplanner/ui/mainwindow.py:597 pigeonplanner/ui/dialogs.py:226
 #: pigeonplanner/ui/glade/Backup.ui:55
 msgid "Restore"
-msgstr ""
+msgstr "Restablir"
 
 #: pigeonplanner/ui/locationchooser.py:57
 #: pigeonplanner/ui/tools/distancecalculator.py:53
@@ -881,8 +874,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Shai Netser https://launchpad.net/~shainetser\n"
-"  Timo Vanwynsberghe https://launchpad.net/~timovwb"
+"  Cédric VALMARY (Tot en òc) https://launchpad.net/~cvalmary"
 
 #: pigeonplanner/ui/dialogs.py:111 pigeonplanner/ui/glade/MainWindow.ui:245
 msgid "General information"
@@ -927,7 +919,7 @@ msgstr ""
 
 #: pigeonplanner/ui/dialogs.py:198 pigeonplanner/ui/glade/Backup.ui:255
 msgid "Create backup"
-msgstr ""
+msgstr "Crear un salvament"
 
 #: pigeonplanner/ui/dialogs.py:199
 msgid "Choose a directory where to save the backup"
@@ -936,7 +928,7 @@ msgstr ""
 #: pigeonplanner/ui/dialogs.py:205 pigeonplanner/ui/glade/OptionsDialog.ui:396
 #: pigeonplanner/ui/glade/Backup.ui:100 pigeonplanner/ui/glade/Backup.ui:291
 msgid "Backup"
-msgstr ""
+msgstr "Salvament"
 
 #: pigeonplanner/ui/dialogs.py:214 pigeonplanner/ui/glade/Backup.ui:19
 msgid "Restore backup"
@@ -1020,7 +1012,7 @@ msgstr ""
 
 #: pigeonplanner/ui/tabs/relatives.py:46
 msgid "<b>Brothers and sisters</b>"
-msgstr ""
+msgstr "<b>Fraires e sòrres</b>"
 
 #: pigeonplanner/ui/tabs/relatives.py:59
 msgid "<b>Half brothers and sisters</b>"
@@ -1032,7 +1024,7 @@ msgstr ""
 
 #: pigeonplanner/ui/tabs/relatives.py:175
 msgid "Common parent"
-msgstr ""
+msgstr "Parents"
 
 #: pigeonplanner/ui/widgets/bandentry.py:60
 #: pigeonplanner/ui/widgets/bandentry.py:204
@@ -1042,7 +1034,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1026
 #: pigeonplanner/ui/glade/AddressBook.ui:297
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #: pigeonplanner/ui/widgets/bandentry.py:64
 #: pigeonplanner/ui/widgets/bandentry.py:205
@@ -1184,28 +1176,28 @@ msgstr ""
 
 #: pigeonplanner/ui/tools/datamanager.py:39
 msgid "Colours"
-msgstr ""
+msgstr "Colors"
 
 #: pigeonplanner/ui/tools/datamanager.py:40
 msgid "Sectors"
-msgstr ""
+msgstr "Sectors"
 
 #: pigeonplanner/ui/tools/datamanager.py:41
 msgid "Types"
-msgstr ""
+msgstr "Tipes"
 
 #: pigeonplanner/ui/tools/datamanager.py:42
 msgid "Categories"
-msgstr ""
+msgstr "Categorias"
 
 #: pigeonplanner/ui/tools/datamanager.py:43
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:1048
 msgid "Racepoints"
-msgstr ""
+msgstr "Resultats de corsa"
 
 #: pigeonplanner/ui/tools/datamanager.py:44
 msgid "Strains"
-msgstr ""
+msgstr "tensions"
 
 #: pigeonplanner/ui/tools/datamanager.py:45
 msgid "Lofts"
@@ -1397,7 +1389,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/MainWindow.ui:25
 msgid "_File"
-msgstr ""
+msgstr "_Fichièr"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:35
 #: pigeonplanner/ui/glade/MainWindow.ui:79
@@ -1410,24 +1402,24 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/MainWindow.ui:45
 msgid "_Edit"
-msgstr ""
+msgstr "_Edicion"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:50
 msgid "_View"
-msgstr ""
+msgstr "_Afichatge"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:55
 msgid "_Tools"
-msgstr ""
+msgstr "_Espleches"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:60
 msgid "_Help"
-msgstr ""
+msgstr "_Ajuda"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:65
 #: pigeonplanner/ui/glade/MainWindow.ui:145
 msgid "_Pedigree"
-msgstr ""
+msgstr "_Pedigree"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:72
 msgid "Blank pedigree"
@@ -1443,7 +1435,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/MainWindow.ui:87
 msgid "_Restore"
-msgstr ""
+msgstr "_Restablir"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:88
 msgid "Restore a backup of your database"
@@ -1451,7 +1443,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/MainWindow.ui:95
 msgid "Quit the program"
-msgstr ""
+msgstr "Quitar lo programa"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:103
 msgid "Add a new pigeon"
@@ -1496,11 +1488,11 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/MainWindow.ui:162
 msgid "Configure the application"
-msgstr ""
+msgstr "Configuracion de l'aplicacion"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:170
 msgid "_Filter..."
-msgstr ""
+msgstr "_Filtrar…"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:171
 #: pigeonplanner/ui/glade/ResultWindow.ui:24
@@ -1510,7 +1502,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/MainWindow.ui:179
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:95
 msgid "Velocity calculator"
-msgstr ""
+msgstr "Calcul de velocitat"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:180
 msgid "Calculate the velocity of flights"
@@ -1582,7 +1574,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/MainWindow.ui:252
 msgid "About this application"
-msgstr ""
+msgstr "A prepaus d'aquesta aplicacion"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:259
 msgid "Navigation arrows"
@@ -1595,7 +1587,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/MainWindow.ui:266
 msgid "Statistics"
-msgstr ""
+msgstr "Estatisticas"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:267
 #: pigeonplanner/ui/glade/OptionsDialog.ui:615
@@ -1604,16 +1596,16 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/MainWindow.ui:273
 msgid "Toolbar"
-msgstr ""
+msgstr "Barra d'espleches"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:274
 #: pigeonplanner/ui/glade/OptionsDialog.ui:629
 msgid "Show or hide the toolbar"
-msgstr ""
+msgstr "Aficha o amaga la barra d'espleches"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:280
 msgid "Statusbar"
-msgstr ""
+msgstr "Barra d'estat"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:281
 #: pigeonplanner/ui/glade/OptionsDialog.ui:643
@@ -1647,13 +1639,13 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/MainWindow.ui:402
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:942
 #: pigeonplanner/ui/glade/DetailsView.ui:1534
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:331
 msgid "To"
-msgstr ""
+msgstr "A"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:994
 #: pigeonplanner/ui/glade/DetailsView.ui:1473
@@ -1669,7 +1661,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:581
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:415
 msgid "Calculate"
-msgstr ""
+msgstr "Calcular"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:331
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:732
@@ -1696,7 +1688,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/ResultsView.ui:23
 msgid "View all"
-msgstr ""
+msgstr "Veire tot"
 
 #: pigeonplanner/ui/glade/ResultsView.ui:39
 msgid "Import"
@@ -1785,7 +1777,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:66
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:69
 msgid "Swapped details"
@@ -1806,11 +1798,11 @@ msgstr ""
 #: pigeonplanner/ui/glade/OptionsDialog.ui:105
 #: pigeonplanner/ui/glade/Backup.ui:215 pigeonplanner/ui/glade/Backup.ui:424
 msgid "Options"
-msgstr ""
+msgstr "Opcions"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:126
 msgid "Default"
-msgstr ""
+msgstr "Per defaut"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:252
 msgid "Check for updates on startup"
@@ -1818,7 +1810,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:265
 msgid "Update"
-msgstr ""
+msgstr "Metre a jorn"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:295
 msgid "Make an automatic backup"
@@ -1831,11 +1823,11 @@ msgstr ""
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:241
 #: pigeonplanner/ui/glade/Backup.ui:457
 msgid "Location"
-msgstr ""
+msgstr "Emplaçament"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:355
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:449
 msgid "Change the language to"
@@ -1880,7 +1872,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/OptionsDialog.ui:955
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1644
 msgid "Image"
-msgstr ""
+msgstr "Imatge"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:970
 msgid "Text and image"
@@ -1896,7 +1888,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1273
 msgid "Paper format:"
-msgstr ""
+msgstr "Format del papièr :"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1307
 msgid "Paper"
@@ -1904,16 +1896,16 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1348
 msgid "Address"
-msgstr ""
+msgstr "Adreça"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1361
 #: pigeonplanner/ui/glade/AddressBook.ui:338
 msgid "Phone"
-msgstr ""
+msgstr "Telefòn"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1395
 msgid "Personal"
-msgstr ""
+msgstr "Personal"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1455
 msgid "Pedigree layout:"
@@ -2127,7 +2119,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/ExportWindow.ui:225
 msgid "All"
-msgstr ""
+msgstr "Tot"
 
 #: pigeonplanner/ui/glade/DBManager.ui:281
 msgid "Move"
@@ -2155,7 +2147,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/Backup.ui:165 pigeonplanner/ui/glade/Backup.ui:373
 msgid "Database"
-msgstr ""
+msgstr "Banca de donadas"
 
 #: pigeonplanner/ui/glade/Backup.ui:195
 msgid "Restore configuration file"
@@ -2206,7 +2198,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/ResultParser.ui:602
 msgid "Place"
-msgstr ""
+msgstr "Luòc"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:714
 msgid "Parser error"
@@ -2257,7 +2249,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/PhotoAlbum.ui:91
 msgid "Photo Album"
-msgstr ""
+msgstr "Album de fòtos"
 
 #: pigeonplanner/ui/glade/PhotoAlbum.ui:152
 msgid "There are no images found."
@@ -2270,7 +2262,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/DataManager.ui:123
 #: pigeonplanner/ui/glade/DataManager.ui:231
 msgid "Item"
-msgstr ""
+msgstr "Element"
 
 #: pigeonplanner/ui/glade/DataManager.ui:250
 msgid "Manage items"
@@ -2290,7 +2282,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/AddressBook.ui:177
 msgid "Street"
-msgstr ""
+msgstr "Carrièra"
 
 #: pigeonplanner/ui/glade/AddressBook.ui:256
 msgid "Zipcode / City"
@@ -2298,4 +2290,94 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/AddressBook.ui:572
 msgid "This is me"
-msgstr ""
+msgstr "Soi ieu"
+
+#~ msgid "Year race"
+#~ msgstr "Annada de naissença"
+
+#~ msgid "Select a directory"
+#~ msgstr "Seleccionatz un repertòri"
+
+#~ msgid "Tools"
+#~ msgstr "Espleches"
+
+#~ msgid "View image: "
+#~ msgstr "visualizar l'imatge "
+
+#~ msgid "Addresses"
+#~ msgstr "Adreças"
+
+#~ msgid "Datasets"
+#~ msgstr "Donadas"
+
+#~ msgid "cock"
+#~ msgstr "Mascle"
+
+#~ msgid "young bird"
+#~ msgstr "Jove"
+
+#~ msgid "hen"
+#~ msgstr "Femèla"
+
+#~ msgid "_Find..."
+#~ msgstr "_Recercar..."
+
+#~ msgid "_Website"
+#~ msgstr "Site _Web"
+
+#~ msgid "Choose an image..."
+#~ msgstr "Causir un imatge..."
+
+#~ msgid "Names"
+#~ msgstr "Noms"
+
+#~ msgid "Search in:"
+#~ msgstr "Recercar dins :"
+
+#~ msgid "Search for:"
+#~ msgstr "Recercar :"
+
+#~ msgid "<b>Personal</b>"
+#~ msgstr "<b>Personal</b>"
+
+#~ msgid "<b>Language</b>"
+#~ msgstr "<b>Lenga</b>"
+
+#~ msgid "<b>Columns</b>"
+#~ msgstr "<b>Colomnas</b>"
+
+#~ msgid "<b>Other</b>"
+#~ msgstr "<b>Autre</b>"
+
+#~ msgid "<b>Update</b>"
+#~ msgstr "<b>Mesa a jorn</b>"
+
+#~ msgid "<b>Theme</b>"
+#~ msgstr "<b>Tèma</b>"
+
+#~ msgid "<b><i><big>Manage data</big></i></b>"
+#~ msgstr "b><i><big>Gestion de las donadas</big></i></b>"
+
+#~ msgid "<b>Add items</b>"
+#~ msgstr "<b>Apondre</b>"
+
+#~ msgid "<b>Warning!</b>"
+#~ msgstr "<b>Atencion !</b>"
+
+#~ msgid "<b>Remove items</b>"
+#~ msgstr "<b>suprimir</b>"
+
+#~ msgid "Distance (km)"
+#~ msgstr "Distància (km)"
+
+#~ msgid "Downloadpage"
+#~ msgstr "Cargament"
+
+#~ msgid "Check now!"
+#~ msgstr "Verificacion !"
+
+#~ msgid "Optimize"
+#~ msgstr "Optimizar"
+
+#~ msgid "Released (hh : mm)"
+#~ msgstr "HH:MM"

@@ -1,16 +1,16 @@
-# Hebrew translation for pigeonplanner
-# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
+# Italian translation for pigeonplanner
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the pigeonplanner package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2019-01-22 15:23+0100\n"
-"PO-Revision-Date: 2019-01-22 15:46+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
-"Language-Team: Hebrew <he@li.org>\n"
+"PO-Revision-Date: 2011-11-08 15:33+0000\n"
+"Last-Translator: simone.sandri <lexluxsox@hotmail.it>\n"
+"Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,27 +23,25 @@ msgstr ""
 #: pigeonplanner/ui/tools/distancecalculator.py:74
 #: pigeonplanner/core/common.py:194 pigeonplanner/core/common.py:201
 msgid "Error"
-msgstr "שְׁגִיאָה"
+msgstr "Errore"
 
 #: pigeonplanner/messages.py:20
 msgid "Warning"
-msgstr "אזהרה"
+msgstr "Attenzione"
 
 #: pigeonplanner/messages.py:23
 msgid "Pigeon Planner is already running."
-msgstr "אירגונית היונים כבר פועלת"
+msgstr ""
 
 #: pigeonplanner/messages.py:27
 msgid ""
 "The database you are trying to open is too new for your version of Pigeon "
 "Planner. You need to reinstall the latest version to continue."
 msgstr ""
-"קבוצת המידע שאתה מנסה לפתוח חדשה עבור גרסת התוכנה. בבקשה התקן את אירגונית "
-"היונים מחדש בגרסתה האחרונה והמשך."
 
 #: pigeonplanner/messages.py:32
 msgid "Database update required!"
-msgstr "עידכון מידע נדרש"
+msgstr ""
 
 #: pigeonplanner/messages.py:33
 msgid ""
@@ -58,26 +56,20 @@ msgid ""
 "Note that it is not advised to run an older version, which can lead to data "
 "corruption."
 msgstr ""
-"המידע של אירגונית היונים עודכן לגרסה חדשה. שים לב כי לא מומלץ להפעיל גרסה "
-"קודמת העלולה לגרום להשחתת המידע."
 
 #: pigeonplanner/messages.py:44
 msgid ""
 "The database migration has failed! Any further actions are stopped to "
 "prevent data loss. Please contact the developers to fix this problem."
 msgstr ""
-"תהליך נדידת המידע נכשל! פעולות נוספות הופסקו על מנת למנוע איבוד מידע. בבקשה "
-"פנה למפתחי התוכנה לתיקון הבעיה."
 
 #: pigeonplanner/messages.py:50 pigeonplanner/messages.py:53
 msgid "Removing database"
-msgstr "מסיר מידע."
+msgstr ""
 
 #: pigeonplanner/messages.py:51
 msgid "Are you sure you want to remove the database? All data will be lost."
 msgstr ""
-"האם אתה בטוח שברצונך להסיר את המידע? \r\n"
-"כל המידע יאבד."
 
 #: pigeonplanner/messages.py:55
 #, python-format
@@ -86,11 +78,11 @@ msgstr ""
 
 #: pigeonplanner/messages.py:56
 msgid "Go to the calendar?"
-msgstr ""
+msgstr "Notifica per '%s'"
 
 #: pigeonplanner/messages.py:59
 msgid "Invalid image!"
-msgstr ""
+msgstr "Immagine non valida!"
 
 #: pigeonplanner/messages.py:60
 msgid ""
@@ -99,7 +91,7 @@ msgstr ""
 
 #: pigeonplanner/messages.py:63
 msgid "Loading image failed!"
-msgstr ""
+msgstr "Caricamento immagine fallito!"
 
 #: pigeonplanner/messages.py:64
 msgid "Maybe you have renamed the image or moved it on your disk."
@@ -124,15 +116,15 @@ msgstr ""
 
 #: pigeonplanner/messages.py:79
 msgid "Adding pigeon"
-msgstr ""
+msgstr "Aggiungendo piccione"
 
 #: pigeonplanner/messages.py:80
 msgid "The selected pigeon can't be found."
-msgstr ""
+msgstr "Il piccione selezionato non è stato trovato."
 
 #: pigeonplanner/messages.py:82
 msgid "Not found!"
-msgstr ""
+msgstr "Non trovato!"
 
 #: pigeonplanner/messages.py:83
 msgid "Can't search for parents, enter the pigeon band first."
@@ -148,7 +140,7 @@ msgstr ""
 #: pigeonplanner/messages.py:110 pigeonplanner/messages.py:120
 #: pigeonplanner/messages.py:123 pigeonplanner/ui/exportwindow.py:58
 msgid "Invalid input!"
-msgstr ""
+msgstr "Inserimento non valido!"
 
 #: pigeonplanner/messages.py:91
 msgid "The ringnumber and year are necessary."
@@ -187,7 +179,7 @@ msgstr ""
 #: pigeonplanner/messages.py:114 pigeonplanner/messages.py:117
 #: pigeonplanner/messages.py:161 pigeonplanner/ui/tabs/medication.py:58
 msgid "Are you sure?"
-msgstr ""
+msgstr "Sei sicuro?"
 
 #: pigeonplanner/messages.py:116
 msgid "Removing the selected media file"
@@ -195,16 +187,16 @@ msgstr ""
 
 #: pigeonplanner/messages.py:121
 msgid "The name has to be entered."
-msgstr ""
+msgstr "Il nome va inserito."
 
 #: pigeonplanner/messages.py:124
 msgid "The persoon you want to add already exists."
-msgstr ""
+msgstr "La persona che vuoi aggiungere esiste già."
 
 #: pigeonplanner/messages.py:126
 #, python-format
 msgid "Removing '%s'"
-msgstr ""
+msgstr "Rimuovendo '%s'"
 
 #: pigeonplanner/messages.py:127
 msgid "Are you sure you want to remove this person from your addresses?"
@@ -213,11 +205,11 @@ msgstr ""
 #: pigeonplanner/messages.py:131
 #, python-format
 msgid "Removing '%s' from '%s'."
-msgstr ""
+msgstr "Rimuovendo '%s' da '%s'."
 
 #: pigeonplanner/messages.py:132
 msgid "Are you sure you want to remove this item?"
-msgstr ""
+msgstr "Sei sicuro di voler rimuovere questo oggetto?"
 
 #: pigeonplanner/messages.py:135
 msgid "The backup was successfully created."
@@ -225,7 +217,7 @@ msgstr ""
 
 #: pigeonplanner/messages.py:137 pigeonplanner/messages.py:143
 msgid "Completed!"
-msgstr ""
+msgstr "Completato!"
 
 #: pigeonplanner/messages.py:138
 msgid "There was an error making the backup."
@@ -233,7 +225,7 @@ msgstr ""
 
 #: pigeonplanner/messages.py:140 pigeonplanner/messages.py:146
 msgid "Failed!"
-msgstr ""
+msgstr "Fallito!"
 
 #: pigeonplanner/messages.py:141
 msgid "The backup was successfully restored."
@@ -405,7 +397,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/MedicationView.ui:133
 #: pigeonplanner/ui/glade/ResultParser.ui:172
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: pigeonplanner/reports/results.py:62 pigeonplanner/ui/resultwindow.py:83
 #: pigeonplanner/ui/tabs/results.py:53
@@ -440,7 +432,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ExportWindow.ui:126
 #: pigeonplanner/ui/glade/ResultParser.ui:330
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: pigeonplanner/reports/results.py:67 pigeonplanner/ui/resultwindow.py:85
 #: pigeonplanner/ui/tabs/results.py:55 pigeonplanner/ui/tools/datamanager.py:47
@@ -449,7 +441,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultWindow.ui:256
 #: pigeonplanner/ui/glade/ResultParser.ui:344
 msgid "Wind"
-msgstr ""
+msgstr "Vento"
 
 #: pigeonplanner/reports/results.py:68 pigeonplanner/ui/resultwindow.py:87
 #: pigeonplanner/ui/tabs/results.py:57 pigeonplanner/ui/tools/datamanager.py:46
@@ -458,7 +450,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultWindow.ui:270
 #: pigeonplanner/ui/glade/ResultParser.ui:358
 msgid "Weather"
-msgstr ""
+msgstr "Meteo"
 
 #: pigeonplanner/reports/results.py:69
 msgid "Coef."
@@ -471,7 +463,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultWindow.ui:528
 #: pigeonplanner/ui/glade/ResultParser.ui:198
 msgid "Sector"
-msgstr ""
+msgstr "Settore"
 
 #: pigeonplanner/reports/results.py:71 pigeonplanner/ui/resultwindow.py:99
 #: pigeonplanner/ui/tabs/results.py:69
@@ -480,7 +472,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/ResultWindow.ui:542
 #: pigeonplanner/ui/glade/ResultParser.ui:212
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
 #: pigeonplanner/reports/results.py:72 pigeonplanner/ui/resultwindow.py:100
 #: pigeonplanner/ui/tabs/results.py:70
@@ -492,19 +484,19 @@ msgstr ""
 #: pigeonplanner/ui/glade/MedicationView.ui:805
 #: pigeonplanner/ui/glade/AddressBook.ui:420
 msgid "Comment"
-msgstr ""
+msgstr "Commento"
 
 #: pigeonplanner/reports/velocity.py:35 pigeonplanner/reports/velocity.py:46
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:202
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:514
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:975
 msgid "Velocity"
-msgstr ""
+msgstr "Velocità"
 
 #: pigeonplanner/reports/velocity.py:40
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:556
 msgid "Released"
-msgstr ""
+msgstr "Rilasciato"
 
 #: pigeonplanner/reports/velocity.py:41
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:176
@@ -513,7 +505,7 @@ msgstr ""
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:369
 #: pigeonplanner/ui/glade/RaceManager.ui:191
 msgid "Distance"
-msgstr ""
+msgstr "Distanza"
 
 #: pigeonplanner/reports/velocity.py:47
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:986
@@ -523,7 +515,7 @@ msgstr ""
 #: pigeonplanner/reports/velocity.py:48
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:997
 msgid "Time of Arrival"
-msgstr ""
+msgstr "Tempo di Arrivo"
 
 #: pigeonplanner/reports/pedigrees/swapped_details.py:49
 #: pigeonplanner/reports/pedigrees/original.py:63
@@ -650,15 +642,15 @@ msgstr ""
 #: pigeonplanner/ui/glade/Dialogs.ui:8
 #: pigeonplanner/ui/glade/AddressBook.ui:379
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
 #: pigeonplanner/ui/gtkmain.py:59
 msgid "Send"
-msgstr ""
+msgstr "Invia"
 
 #: pigeonplanner/ui/gtkmain.py:60
 msgid "Report"
-msgstr ""
+msgstr "Segnala"
 
 #: pigeonplanner/ui/pedigreewindow.py:104
 msgid "Go to the previous pedigree"
@@ -881,8 +873,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Shai Netser https://launchpad.net/~shainetser\n"
-"  Timo Vanwynsberghe https://launchpad.net/~timovwb"
+"  simone.sandri https://launchpad.net/~lexluxsox"
 
 #: pigeonplanner/ui/dialogs.py:111 pigeonplanner/ui/glade/MainWindow.ui:245
 msgid "General information"
@@ -2299,3 +2290,6 @@ msgstr ""
 #: pigeonplanner/ui/glade/AddressBook.ui:572
 msgid "This is me"
 msgstr ""
+
+#~ msgid "Page"
+#~ msgstr "Pagina"
