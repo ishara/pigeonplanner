@@ -20,11 +20,13 @@ import gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import builder
+from pigeonplanner.ui import component
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import QuestionDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
+from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.database.models import (Pigeon, Colour, Sector, Type, Category,
                                            Racepoint, Strain, Loft, Weather, Wind)
 
@@ -113,11 +115,17 @@ class DataManager(builder.GtkBuilder):
         DetailsDialog(pigeon, self.widgets.window)
 
     def on_buttondelete_clicked(self, widget):
+        main_treeview = component.get("Treeview")
         for row_num in range(len(self.widgets.liststore)-1, -1, -1):
             row = self.widgets.liststore[row_num]
-            if not row[1]: 
+            if not row[1]:
                 continue
-            row[0].delete_instance()
+            corepigeon.remove_pigeon(row[0])
+            # The path is only valid when the pigeon is actually shown
+            main_path = main_treeview.get_path_for_pigeon(row[0])
+            if main_path is not None:
+                main_treeview.remove_row(main_path)
+            # Do this last since we use row for other things as well
             self.widgets.liststore.remove(row.iter)
         self.widgets.buttondelete.set_sensitive(False)
 
