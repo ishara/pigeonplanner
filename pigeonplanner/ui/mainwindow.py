@@ -403,19 +403,24 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
                     pigeon.visible = False
                     pigeon.save()
 
-            # Reverse the pathlist so we can safely remove each row without
-            # having problems with invalid paths.
-            paths.reverse()
-            # Block the selection changed handler during deletion. In some cases
-            # while removing multiple rows the tree iters would get invalid in
-            # the handler. There's no need for it to be called anyway after each
-            # call, once at the end is enough.
-            self.widgets.selection.handler_block_by_func(self.on_selection_changed)
-            for path in paths:
-                self.widgets.treeview.remove_row(path)
-            self.widgets.selection.handler_unblock_by_func(self.on_selection_changed)
-            self.widgets.selection.select_path(paths[-1])
-            self.widgets.selection.emit("changed")
+            if response == removedialog.RESPONSE_HIDE and config.get("interface.show-all-pigeons"):
+                # Do not remove the pigeon(s) from the treeview when hiding and
+                # hidden pigeons are shown.
+                pass
+            else:
+                # Reverse the pathlist so we can safely remove each row without
+                # having problems with invalid paths.
+                paths.reverse()
+                # Block the selection changed handler during deletion. In some cases
+                # while removing multiple rows the tree iters would get invalid in
+                # the handler. There's no need for it to be called anyway after each
+                # call, once at the end is enough.
+                self.widgets.selection.handler_block_by_func(self.on_selection_changed)
+                for path in paths:
+                    self.widgets.treeview.remove_row(path)
+                self.widgets.selection.handler_unblock_by_func(self.on_selection_changed)
+                self.widgets.selection.select_path(paths[-1])
+                self.widgets.selection.emit("changed")
             self.widgets.statusbar.display_message(statusbarmsg)
 
         removedialog.hide()
