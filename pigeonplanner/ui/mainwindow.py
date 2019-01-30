@@ -624,7 +624,6 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             widgets.extend(tab.get_pigeon_state_widgets())
 
         if n_rows_selected == 1:
-            tree_iter = model.get_iter(paths[0])
             utils.set_multiple_sensitive(widgets, True)
         elif n_rows_selected == 0:
             self._clear_pigeon_data()
@@ -636,7 +635,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             utils.set_multiple_sensitive(widgets[2:], False)
             return
         self.current_pigeon = paths[0][0]
-        pigeon = model.get_value(tree_iter, 0)
+        pigeon = self.widgets.treeview.get_selected_pigeon()
         self.detailsview.set_details(pigeon)
         for tab in self._loaded_tabs:
             tab.set_pigeon(pigeon)

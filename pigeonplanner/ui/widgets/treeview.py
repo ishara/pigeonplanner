@@ -162,6 +162,8 @@ class MainTreeView(gtk.TreeView, component.Component):
         gtk.TreeView.__init__(self)
         component.Component.__init__(self, "Treeview")
 
+        self._block_visible_func = False
+
         component.get("Statusbar").set_filter(False)
         self._liststore = self._build_treeview()
         self._modelfilter = self._liststore.filter_new()
@@ -230,6 +232,11 @@ class MainTreeView(gtk.TreeView, component.Component):
         return len(self._liststore)
 
     def fill_treeview(self, path=0):
+        # Block the function that checks if a row needs to be shown or not.
+        # This is an expensive operation and is called on each insert. This slows
+        # down startup with many pigeons. The check is useless anyway when pigeons
+        # are inserted through this method as the database query will handle this.
+        self._block_visible_func = True
         self._liststore.clear()
 
         query = Pigeon.select()
@@ -241,6 +248,8 @@ class MainTreeView(gtk.TreeView, component.Component):
         self._selection.select_path(path)
         self.emit("pigeons-changed")
 
+        self._block_visible_func = False
+
     def add_pigeon(self, pigeon, select=True):
         self.add_row(self._row_for_pigeon(pigeon), select)
 
@@ -250,7 +259,7 @@ class MainTreeView(gtk.TreeView, component.Component):
             path = self.get_child_path(path)
 
         data = (
-            self.LS_PIGEON, pigeon,
+            self.LS_PIGEON, pigeon.id,
             self.LS_RING, pigeon.band,
             self.LS_YEAR, pigeon.band_year,
             self.LS_COUNTRY, pigeon.band_country,
@@ -268,7 +277,7 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     def has_pigeon(self, pigeon):
         for row in self._liststore:
-            if self._liststore.get_value(row.iter, self.LS_PIGEON) == pigeon:
+            if self._liststore.get_value(row.iter, self.LS_PIGEON) == pigeon.id:
                 return True
         return False
 
@@ -279,7 +288,7 @@ class MainTreeView(gtk.TreeView, component.Component):
         :param pigeon: The pigeon object to search
         """
         for row in self._modelsort:
-            if self._modelsort.get_value(row.iter, self.LS_PIGEON) == pigeon:
+            if self._modelsort.get_value(row.iter, self.LS_PIGEON) == pigeon.id:
                 self._selection.unselect_all()
                 self._selection.select_iter(row.iter)
                 self.scroll_to_cell(row.path)
@@ -292,26 +301,26 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     def get_pigeons(self, filtered=False):
         model = self._modelsort if filtered else self._liststore
-        return [row[self.LS_PIGEON] for row in model]
+        return [Pigeon.get_by_id(row[self.LS_PIGEON]) for row in model]
 
     def get_selected_pigeon(self):
         model, paths = self._selection.get_selected_rows()
         if len(paths) == 1:
             path = paths[0]
-            return model[path][self.LS_PIGEON]
+            return Pigeon.get_by_id(model[path][self.LS_PIGEON])
         elif len(paths) > 1:
-            return [model[path][self.LS_PIGEON] for path in paths]
+            return [Pigeon.get_by_id(model[path][self.LS_PIGEON]) for path in paths]
         else:
             return None
 
     def get_path_for_pigeon(self, pigeon):
         for row in self._liststore:
-            if row[self.LS_PIGEON] == pigeon:
+            if row[self.LS_PIGEON] == pigeon.id:
                 return self.get_top_path(row.path)[0]
 
     def get_pigeon_at_path(self, path):
         path = self.get_child_path(path)
-        return self._liststore[path][self.LS_PIGEON]
+        return Pigeon.get_by_id(self._liststore[path][self.LS_PIGEON])
 
     def set_columns(self):
         columnsdic = {self.COL_COUNTRY: config.get("columns.pigeon-band-country"),
@@ -340,7 +349,7 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     # Internal methods
     def _build_treeview(self):
-        liststore = gtk.ListStore(object, str, str, str, str, str, str, str,
+        liststore = gtk.ListStore(int, str, str, str, str, str, str, str,
                                   str, str, str, str, gtk.gdk.Pixbuf)
         columns = [_("Band no."), _("Year"), _("Country"), _("Name"), _("Colour"), _("Sex"),
                    _("Sire"), _("Dam"), _("Loft"), _("Strain"), _("Status")]
@@ -360,7 +369,7 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     def _row_for_pigeon(self, pigeon):
         return [
-            pigeon,
+            pigeon.id,
             pigeon.band,
             pigeon.band_year,
             pigeon.band_country,
@@ -376,7 +385,9 @@ class MainTreeView(gtk.TreeView, component.Component):
         ]
 
     def _visible_func(self, model, treeiter):
-        pigeon = model[treeiter][self.LS_PIGEON]
+        if self._block_visible_func:
+            return True
+        pigeon = Pigeon.get_by_id(model[treeiter][self.LS_PIGEON])
         for item in self._filterdialog.filter:
             pvalue = getattr(pigeon, item.name)
             if not item.operator(item.type(pvalue), item.type(item.value)):
