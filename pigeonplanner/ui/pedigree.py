@@ -81,6 +81,7 @@ class DrawPedigree(object):
         return True
 
     def on_edit_finished(self, detailsview, pigeon, operation):
+        self.pigeon = pigeon
         child = detailsview.get_child()
         self._edit_child(pigeon, child)
         self._redraw()
