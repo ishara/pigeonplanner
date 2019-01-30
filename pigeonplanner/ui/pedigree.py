@@ -238,6 +238,10 @@ class DrawPedigree(object):
 
     def _remove_pigeon(self, widget, pigeon, child):
         corepigeon.remove_pigeon(pigeon)
+        main_treeview = component.get("Treeview")
+        main_path = main_treeview.get_path_for_pigeon(pigeon)
+        if main_path is not None:
+            main_treeview.remove_row(main_path)
         self._edit_child(pigeon, child, True)
         self._redraw()
 
