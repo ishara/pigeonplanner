@@ -388,7 +388,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             pigeons = [pigeon]
             statusbarmsg = _("Pigeon %s has been removed") % pigeon.band
         else:
-            pigeons = [pobj for pobj in self.widgets.treeview.get_selected_pigeon()]
+            pigeons = self.widgets.treeview.get_selected_pigeon()
             statusbarmsg = _("%s pigeons have been removed") % len(pigeons)
 
         removedialog = dialogs.RemovePigeonDialog(self, len(pigeons) > 1)
