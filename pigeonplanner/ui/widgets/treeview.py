@@ -301,7 +301,8 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     def get_pigeons(self, filtered=False):
         model = self._modelsort if filtered else self._liststore
-        return [Pigeon.get_by_id(row[self.LS_PIGEON]) for row in model]
+        ids = [row[self.LS_PIGEON] for row in model]
+        return Pigeon.select().where(Pigeon.id.in_(ids))
 
     def get_selected_pigeon(self):
         model, paths = self._selection.get_selected_rows()
@@ -309,7 +310,8 @@ class MainTreeView(gtk.TreeView, component.Component):
             path = paths[0]
             return Pigeon.get_by_id(model[path][self.LS_PIGEON])
         elif len(paths) > 1:
-            return [Pigeon.get_by_id(model[path][self.LS_PIGEON]) for path in paths]
+            ids = [model[path][self.LS_PIGEON] for path in paths]
+            return Pigeon.select().where(Pigeon.id.in_(ids))
         else:
             return None
 
