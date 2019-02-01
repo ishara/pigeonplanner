@@ -37,9 +37,10 @@ from pigeonplanner.reports import get_pedigree
 
 
 class OptionsDialog(builder.GtkBuilder, gobject.GObject):
-    __gsignals__ = {"interface-changed": (gobject.SIGNAL_RUN_LAST,
-                                      None, (bool, bool, bool, bool)),
-                    }
+    __gsignals__ = {
+        "interface-changed": (gobject.SIGNAL_RUN_LAST, None, (bool, bool, bool, bool)),
+    }
+
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "OptionsDialog.ui")
         gobject.GObject.__init__(self)
@@ -50,20 +51,14 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
 
         # Add the categories
         # [(Category, image, [children]), ]
-        categories = [(_("General"), gtk.STOCK_PROPERTIES,
-                            []),
-                      (_("Appearance"), gtk.STOCK_PAGE_SETUP,
-                            []),
-                      (_("Columns"), "columns",
-                            []),
-                      (_("Printing"), gtk.STOCK_PRINT,
-                            [_("Pedigree"),
-                             _("Pigeons"),
-                             _("Results"),
-                            ]),
-                      (_("Advanced"), gtk.STOCK_PREFERENCES,
-                            []),
-                    ]
+        categories = [
+            (_("General"), gtk.STOCK_PROPERTIES, []),
+            (_("Appearance"), gtk.STOCK_PAGE_SETUP, []),
+            (_("Columns"), "columns", []),
+            (_("Printing"), gtk.STOCK_PRINT,
+                [_("Pedigree"), _("Pigeons"), _("Results")]),
+            (_("Advanced"), gtk.STOCK_PREFERENCES, []),
+        ]
         i = 0
         for par, img, children in categories:
             icon = self.widgets.treeview.render_icon(img, gtk.ICON_SIZE_LARGE_TOOLBAR)
@@ -94,7 +89,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     # Callbacks
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
-        if rowiter is None: return
+        if rowiter is None:
+            return
 
         try:
             self.widgets.notebook.set_current_page(model[rowiter][0])
@@ -163,7 +159,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ("interface.missing-pigeon-hide", self.widgets.chkShowHidden.get_active()),
                 ("interface.missing-pigeon-color", self.widgets.chkColorHidden.get_active()),
                 ("interface.missing-pigeon-color-value",
-                                    self.widgets.chkColorHiddenValue.get_color().to_string()),
+                    self.widgets.chkColorHiddenValue.get_color().to_string()),
 
                 ("backup.automatic-backup", self.widgets.checkbackup.get_active()),
                 ("backup.interval", self.widgets.spinday.get_value_as_int()),
@@ -309,4 +305,3 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
 
         if not set_default:
             self.widgets.optionsdialog.destroy()
-

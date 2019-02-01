@@ -30,14 +30,21 @@ from pigeonplanner.core import const
 
 
 SEVERITY = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "TRACEBACK"]
-COLORS = {"DEBUG": "grey", "INFO": "green", "WARNING": "yellow",
-          "ERROR": "red", "CRITICAL": "white", "TRACEBACK": "white"}
+COLORS = {
+    "DEBUG": "grey",
+    "INFO": "green",
+    "WARNING": "yellow",
+    "ERROR": "red",
+    "CRITICAL": "white",
+    "TRACEBACK": "white"
+}
+
 
 class LogDialog(gtk.Dialog):
     def __init__(self,):
         gtk.Dialog.__init__(self)
         self.set_title(_("Logfile Viewer"))
-        self.set_size_request(700,500)
+        self.set_size_request(700, 500)
         self.set_icon(self.render_icon(gtk.STOCK_FILE, gtk.ICON_SIZE_MENU))
 
         self.set_logfile()
@@ -48,14 +55,14 @@ class LogDialog(gtk.Dialog):
         hbox = gtk.HBox()
         frame.add(hbox)
 
-        #auto scroll 
+        # auto scroll
         scroll = gtk.ScrolledWindow()
         hbox.pack_start(scroll)
         scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         scroll.get_vadjustment().connect("changed", self.changed)
         scroll.get_vadjustment().connect("value-changed", self.value_changed)
 
-        #textview
+        # textview
         bffr = gtk.TextBuffer()
         self.textview = gtk.TextView(bffr)
         scroll.add(self.textview)
@@ -73,7 +80,7 @@ class LogDialog(gtk.Dialog):
             tag.set_property("right_margin", 10)
             table.add(tag)
 
-        #combo
+        # combo
         vbox = gtk.VBox(False, 4)
         align = gtk.Alignment(.0, .0, .0, .0)
         align.add(vbox)
@@ -82,7 +89,7 @@ class LogDialog(gtk.Dialog):
         label.set_alignment(0, .5)
         vbox.pack_start(label, False, False, 0)
 
-        ##severity
+        # combo severity
         self.combo = gtk.combo_box_new_text()
         vbox.pack_start(self.combo, False, False, 0)
         self.combo.connect("changed", self.reload_view)
@@ -91,7 +98,7 @@ class LogDialog(gtk.Dialog):
             self.combo.append_text(s)
         self.combo.set_active(0)
 
-        ##logs
+        # combo logs
         self.combo_logs = gtk.combo_box_new_text()
         vbox.pack_start(self.combo_logs, False, False, 0)
         self.combo_logs.connect("changed", self.set_logfile)
@@ -102,7 +109,7 @@ class LogDialog(gtk.Dialog):
             self.combo_logs.append_text(os.path.basename(log))
         self.combo_logs.set_active(0)
 
-        #action area
+        # action area
         button_close = gtk.Button(None, gtk.STOCK_CLOSE)
         button_close.connect("clicked", self.close)
         self.action_area.pack_start(button_close)
@@ -125,7 +132,7 @@ class LogDialog(gtk.Dialog):
     def insert_color(self, bffr, line):
         for s in SEVERITY[self.combo.get_active():]:
             if s in line:
-                bffr.insert_with_tags(bffr.get_end_iter(), "%s\n" %line,
+                bffr.insert_with_tags(bffr.get_end_iter(), "%s\n" % line,
                                       bffr.get_tag_table().lookup(s))
                 break
 
@@ -152,11 +159,10 @@ class LogDialog(gtk.Dialog):
             vadjust.set_value(vadjust.upper-vadjust.page_size)
             vadjust.need_scroll = True
 
-    def value_changed (self, vadjust):
+    def value_changed(self, vadjust):
         vadjust.need_scroll = abs(vadjust.value + vadjust.page_size -
                                   vadjust.upper) < vadjust.step_increment
 
     def close(self, widget=None, other=None):
         self.file.close()
         self.destroy()
-

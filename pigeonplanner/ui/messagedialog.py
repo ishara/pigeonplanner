@@ -73,4 +73,3 @@ class QuestionDialog(_MessageDialog):
         response = _MessageDialog.run(self)
         self.destroy()
         return response == gtk.RESPONSE_YES
-

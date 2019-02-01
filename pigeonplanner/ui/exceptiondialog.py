@@ -110,4 +110,3 @@ class ExceptionDialog(gtk.Dialog):
         self.action_area.pack_start(button_close)
 
         self.show_all()
-
