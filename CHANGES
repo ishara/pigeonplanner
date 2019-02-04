@@ -1,3 +1,20 @@
+3.2.0:
+ *
+ * Added option to show column with pigeon's country
+ * Added keyboard shortcut to show hidden pigeons
+ * Fixed data sync and refresh issues in various parts
+ * Fixed updating pigeon when editing through pedigree
+ * Fixed buttons not getting disabled in breeding view
+ * Fixed deleting pigeon from treeview when hiding and hidden pigeons shown
+ * Fixed deleting pigeon from treeview when removing from pedigree
+ * Fixed deleting pigeon from treeview when removing from data manager
+ * Redesigned pigeon remove dialog
+ * Improved rotation of logfiles
+ * Changed default speed and distance units
+ * Refactored package files
+ * Small code changes and cleanup
+ * Updated translations
+
 3.0.3:
  * Fixed database migration with missing original table
  * Fixed breeding tab buttons incorrect state
