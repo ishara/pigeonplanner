@@ -1,5 +1,4 @@
 3.2.0:
- *
  * Added option to show column with pigeon's country
  * Added keyboard shortcut to show hidden pigeons
  * Fixed data sync and refresh issues in various parts
