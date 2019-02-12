@@ -67,7 +67,7 @@ class ExportWindow(builder.GtkBuilder):
             if pigeons is None:
                 pigeons = []
             # pigeons can be a list of selected or just one pigeon object.
-            if not isinstance(pigeons, list):
+            if isinstance(pigeons, Pigeon):
                 pigeons = [pigeons]
         elif self.widgets.radiovisible.get_active():
             pigeons = treeview.get_pigeons(True)
