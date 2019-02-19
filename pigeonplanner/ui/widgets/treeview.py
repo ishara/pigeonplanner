@@ -23,6 +23,7 @@ from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.core import enums
+from pigeonplanner.core import const
 from pigeonplanner.core import config
 from pigeonplanner.database.models import Pigeon, Colour, Strain, Loft
 
@@ -302,6 +303,20 @@ class MainTreeView(gtk.TreeView, component.Component):
     def get_pigeons(self, filtered=False):
         model = self._modelsort if filtered else self._liststore
         ids = [row[self.LS_PIGEON] for row in model]
+        if const.WINDOWS and len(ids) > 998:
+            # SQLite has a limit on number of variables in a query, often denoted as a question mark. This
+            # is a compile time setting (SQLITE_MAX_VARIABLE_NUMBER) and cannot be changed during runtime.
+            # The default is 999 and is only kept on Windows. The value on macOS is 500000 and 250000 on
+            # Linux. The limit on Windows is quite easily reached, especially when hidden pigeons are shown
+            # as well. Multiple users reported this problem. The solution is to retrieve the Pigeon objects
+            # in chunks that are just under the limit. Since this workaround is slower than the original
+            # query, only apply this if the limited conditions are met.
+            chunk_size = 998
+            pigeons = []
+            for i in range(0, len(ids), chunk_size):
+                query = Pigeon.select().where(Pigeon.id.in_(ids[i:i + chunk_size]))
+                pigeons.extend([pigeon for pigeon in query])
+            return pigeons
         return Pigeon.select().where(Pigeon.id.in_(ids))
 
     def get_selected_pigeon(self):
