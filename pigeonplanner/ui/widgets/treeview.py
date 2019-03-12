@@ -300,7 +300,13 @@ class MainTreeView(gtk.TreeView, component.Component):
     def select_all_pigeons(self):
         self._selection.select_all()
 
-    def get_pigeons(self, filtered=False):
+    def get_pigeons(self, filtered=False, ordered=False):
+        """Get all pigeons loaded in the treeview.
+
+        :param filtered: return the pigeons as filtered in the treeview
+        :param ordered: return pigeons in the same order as in the treeview
+        :return: a list or peewee.ModelSelect
+        """
         model = self._modelsort if filtered else self._liststore
         ids = [row[self.LS_PIGEON] for row in model]
         if const.WINDOWS and len(ids) > 998:
@@ -316,8 +322,13 @@ class MainTreeView(gtk.TreeView, component.Component):
             for i in range(0, len(ids), chunk_size):
                 query = Pigeon.select().where(Pigeon.id.in_(ids[i:i + chunk_size]))
                 pigeons.extend([pigeon for pigeon in query])
-            return pigeons
-        return Pigeon.select().where(Pigeon.id.in_(ids))
+        else:
+            pigeons = Pigeon.select().where(Pigeon.id.in_(ids))
+        if ordered:
+            # Querying the database to get the actual Pigeon objects from the IDs loses the order of the
+            # rows in the treeview. Sort the fetched objects by the original list of IDs.
+            pigeons = sorted(pigeons, key=lambda pigeon: ids.index(pigeon.id))
+        return pigeons
 
     def get_selected_pigeon(self):
         model, paths = self._selection.get_selected_rows()
