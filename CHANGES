@@ -1,3 +1,8 @@
+3.2.2:
+ * Fixed pigeon sorting in export and report
+ * Removed icon paths that caused warnings in Windows
+ * Updated Ukrainian translation
+
 3.2.1:
  * Fixed error when there are more than 1000 pigeons on Windows
  * Fixed error when exporting multiple pigeons
