@@ -40,6 +40,7 @@ from pigeonplanner.ui import logdialog
 from pigeonplanner.ui import component
 from pigeonplanner.ui import detailsview
 from pigeonplanner.ui import exportwindow
+from pigeonplanner.ui import backupdialog
 from pigeonplanner.ui import optionsdialog
 from pigeonplanner.ui import pedigreewindow
 from pigeonplanner.ui.widgets import treeview
@@ -90,10 +91,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             <menuitem action="PrintBlank"/>
          </menu>
          <separator/>
-         <menu action="BackupMenu">
-            <menuitem action="Backup"/>
-            <menuitem action="Restore"/>
-         </menu>
+         <menuitem action="Backup"/>
          <separator/>
          <menuitem action="Quit"/>
       </menu>
@@ -233,10 +231,15 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         if config.get("backup.automatic-backup") and bckp:
             days_in_seconds = config.get("backup.interval") * 24 * 60 * 60
             if time.time() - config.get("backup.last") >= days_in_seconds:
-                if backup.make_backup(config.get("backup.location")):
-                    InfoDialog(messages.MSG_BACKUP_SUCCES, self)
+                save_path = os.path.join(config.get("backup.location"), backup.create_backup_filename())
+                try:
+                    backup.create_backup(save_path, overwrite=True, include_config=True)
+                except Exception as exc:
+                    logger.error(exc)
+                    msg = (_("There was an error making the backup."), str(exc), _("Failed!"))
+                    InfoDialog(msg, self)
                 else:
-                    InfoDialog(messages.MSG_BACKUP_FAILED, self)
+                    InfoDialog(messages.MSG_BACKUP_SUCCES, self)
                 config.set("backup.last", time.time())
         config.save()
         gtk.main_quit()
@@ -331,15 +334,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 
     def menubackup_activate(self, widget):
         logger.debug(common.get_function_name())
-        dialog = dialogs.BackupDialog(self, enums.Backup.create)
-        dialog.run()
-        dialog.destroy()
-
-    def menurestore_activate(self, widget):
-        logger.debug(common.get_function_name())
-        dialog = dialogs.BackupDialog(self, enums.Backup.restore)
-        dialog.run()
-        dialog.destroy()
+        backupdialog.BackupDialog(self)
 
     def menuclose_activate(self, widget):
         logger.debug(common.get_function_name())

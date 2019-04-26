@@ -97,9 +97,9 @@ class _FileChooser(gtk.FileChooser):
 
     def add_backup_filter(self):
         filter_ = gtk.FileFilter()
-        filter_.set_name("PP Backups")
+        filter_.set_name("Zip (.zip)")
         filter_.add_mime_type("zip/zip")
-        filter_.add_pattern("*PigeonPlannerBackup.zip")
+        filter_.add_pattern("*.zip")
         self.add_filter(filter_)
 
     def add_custom_filter(self, filter_):
@@ -208,6 +208,19 @@ class PdfSaver(_FileChooserDialog):
         self.set_current_name(pdf_name)
 
 
+class BackupSaver(_FileChooserDialog):
+
+    __gtype_name__ = "BackupSaver"
+
+    def __init__(self, parent, backup_name):
+        super(BackupSaver, self).__init__(parent, preview=False,
+                                          action=gtk.FILE_CHOOSER_ACTION_SAVE)
+        self.set_title(_("Save as..."))
+        self.add_backup_filter()
+        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+        self.set_current_name(backup_name)
+
+
 class ExportChooser(_FileChooserDialog):
 
     __gtype_name__ = "ExportChooser"
@@ -219,6 +232,17 @@ class ExportChooser(_FileChooserDialog):
         self.add_custom_filter(filter_)
         self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
         self.set_current_name(filename)
+
+
+class PathChooserDialog(_FileChooserDialog):
+
+    __gtype_name__ = "PathChooserDialog"
+
+    def __init__(self, parent, folder):
+        super(PathChooserDialog, self).__init__(parent, preview=False, folder=folder,
+                                                action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+        self.set_title(_("Select a folder..."))
+        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
 
 
 ########

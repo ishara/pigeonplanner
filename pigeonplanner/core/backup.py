@@ -21,83 +21,109 @@ Provides backup and restore functions
 
 import os
 import zipfile
-from os.path import isdir, join, normpath, split
 import logging
+from datetime import date
 
 from pigeonplanner.core import const
+from pigeonplanner.database.manager import dbmanager
 
 logger = logging.getLogger(__name__)
 
 
-def make_backup(folder):
-    if not isdir(folder):
-        return
-
-    infolder = const.PREFDIR
-    outfile = join(folder, "PigeonPlannerBackup.zip")
-
-    try:
-        zipper = zipfile.ZipFile(outfile, "w", zipfile.ZIP_DEFLATED)
-        makezip(infolder, zipper)
-        zipper.close()
-    except RuntimeError:
-        if os.path.exists(outfile):
-            os.unlink(outfile)
-        zipper = zipfile.ZipFile(outfile, "w", zipfile.ZIP_STORED)
-        makezip(infolder, zipper)
-        zipper.close()
-    except Exception as e:
-        logger.exception(e)
-        return False
-
-    return True
+class BackupError(Exception):
+    pass
 
 
-def makezip(path, zipper):
-    path = os.path.normpath(path)
-
-    for (dirpath, dirnames, filenames) in os.walk(path):
-        for filename in filenames:
-            if not filename.endswith(".lock") and not\
-                   filename.endswith(".log") and not\
-                   filename.endswith(".old") and not\
-                   filename == "Thumbs.db":
-                zipper.write(os.path.join(dirpath, filename), os.path.join(dirpath[len(path):], filename))
+class RestoreError(Exception):
+    pass
 
 
-def restore_backup(infile):
-    if not infile.endswith("PigeonPlannerBackup.zip"):
-        return
+def create_backup_filename():
+    return "pigeonplanner_backup_%s.zip" % date.today().strftime("%Y-%m-%d")
 
-    outfol = const.PREFDIR
+
+def create_backup(destination, overwrite=True, include_config=True):
+    """Create a backup file at the given destination.
+
+    :param destination: full path with filename
+    :param overwrite:
+    :param include_config:
+    :return:
+    """
+
+    logger.debug("Create backup %s (overwrite=%s, include_config=%s)", destination, overwrite, include_config)
+
+    if os.path.exists(destination):
+        if overwrite:
+            os.unlink(destination)
+        else:
+            raise BackupError("The backup file already exists.")
+
+    files = [
+        const.DATABASEINFO,
+    ]
+    if include_config:
+        files.append(const.CONFIGFILE)
+    files.extend([dbinfo.path for dbinfo in get_valid_databases()])
 
     try:
-        zipper = zipfile.ZipFile(infile, "r")
-    except zipfile.BadZipfile as e:
-        logger.exception(e)
-        return False
-
-    try:
-        unzip(outfol, zipper)
-    except Exception as e:
-        logger.exception(e)
-        return False
-
-    zipper.close()
-
-    return True
+        with zipfile.ZipFile(destination, "w", zipfile.ZIP_STORED) as zfile:
+            for filepath in files:
+                filename = os.path.basename(filepath)
+                zfile.write(filepath, filename)
+    except Exception as exc:
+        logger.exception(exc)
+        raise
 
 
-def unzip(path, zipper):
-    if not isdir(path):
-        os.makedirs(path)    
+def get_valid_databases():
+    dbs = []
+    for dbinfo in dbmanager.get_databases():
+        if not os.path.exists(dbinfo.path):
+            continue
+        dbs.append(dbinfo)
+    return dbs
 
-    for each in zipper.namelist():
-        if not each.endswith("/"): 
-            root, name = split(each)
-            directory = normpath(join(path, root))
-            if not isdir(directory):
-                os.makedirs(directory)
-            outfile = open(join(directory, name), "wb")
-            outfile.write(zipper.read(each))
-            outfile.close()
+
+class RestoreOperation:
+    def __init__(self, path):
+        self.path = path
+        with zipfile.ZipFile(path, "r") as zfile:
+            self.namelist = zfile.namelist()
+            try:
+                self.database_info = zfile.read(os.path.basename(const.DATABASEINFO))
+                self.old_backup = False
+            except KeyError:
+                # Old style backups don't have a list of databases
+                self.database_info = None
+                self.old_backup = True
+
+    def is_valid_archive(self):
+        if not zipfile.is_zipfile(self.path):
+            return False
+
+        if self.old_backup and "pigeonplanner.db" not in self.namelist:
+            return False
+
+        if not os.path.basename(const.DATABASEINFO) in self.namelist and not self.old_backup:
+            return False
+
+        return True
+
+    def has_config_file(self):
+        return os.path.basename(const.CONFIGFILE) in self.namelist
+
+    def restore_backup(self, dbobjs, configfile):
+        if not self.is_valid_archive():
+            raise RestoreError(_("The file '%s' is not a valid Pigeon Planner backup.") % self.path)
+
+        existing_paths = [dbobj.path for dbobj in dbmanager.get_databases()]
+
+        with zipfile.ZipFile(self.path, "r") as zfile:
+            if self.has_config_file() and configfile:
+                zfile.extract(os.path.basename(const.CONFIGFILE), const.PREFDIR)
+
+            for dbobj in dbobjs:
+                zfile.extract(dbobj.filename, dbobj.directory)
+                if dbobj.path not in existing_paths:
+                    dbmanager.add(dbobj.name, dbobj.description, dbobj.path)
