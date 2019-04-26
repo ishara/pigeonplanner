@@ -6,14 +6,14 @@ msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-22 15:23+0100\n"
-"PO-Revision-Date: 2018-11-18 08:09+0000\n"
+"PO-Revision-Date: 2019-03-07 19:21+0000\n"
 "Last-Translator: Viktor Kosenko <ksviktor@gmail.com>\n"
 "Language-Team: none <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-01-31 04:37+0000\n"
-"X-Generator: Launchpad (build 18862)\n"
+"X-Launchpad-Export-Date: 2019-03-08 05:34+0000\n"
+"X-Generator: Launchpad (build 18894)\n"
 "Language: \n"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:248
@@ -145,7 +145,7 @@ msgstr "Не можу знайти батьків, введіть голуба �
 
 #: pigeonplanner/messages.py:86
 msgid "Mate does not exist, enter or search for an existing pigeon."
-msgstr ""
+msgstr "Партнер не вказаний,  ввести або шукати в списку голуба."
 
 #: pigeonplanner/messages.py:90 pigeonplanner/messages.py:93
 #: pigeonplanner/messages.py:96 pigeonplanner/messages.py:99
@@ -866,33 +866,33 @@ msgstr "Переглядач Logfile"
 
 #: pigeonplanner/ui/dialogs.py:43
 msgid "Remove selected pigeons?"
-msgstr ""
+msgstr "Видалити вибраних голубів?"
 
 #: pigeonplanner/ui/dialogs.py:43
 msgid "Remove selected pigeon?"
-msgstr ""
+msgstr "Видалити вибраного голуба?"
 
 #: pigeonplanner/ui/dialogs.py:44
 msgid "Hide pigeons"
-msgstr ""
+msgstr "Приховати голубів"
 
 #: pigeonplanner/ui/dialogs.py:44
 msgid "Hide pigeon"
-msgstr ""
+msgstr "Приховати голуба"
 
 #: pigeonplanner/ui/dialogs.py:50
 msgid ""
 "Remove with data will permanently delete the pigeon with all its data like "
 "pedigree, results and breeding details."
-msgstr ""
+msgstr "Видалити голуба з усіма даними назавжди."
 
 #: pigeonplanner/ui/dialogs.py:52
 msgid "Hide the pigeon to keep it in the pedigrees."
-msgstr ""
+msgstr "Приховати голуба, але залишити у родоводах."
 
 #: pigeonplanner/ui/dialogs.py:57
 msgid "Remove with data"
-msgstr ""
+msgstr "Видалити з даними"
 
 #: pigeonplanner/ui/dialogs.py:101
 msgid "translator-credits"
@@ -2157,7 +2157,7 @@ msgstr "Все"
 
 #: pigeonplanner/ui/glade/DBManager.ui:281
 msgid "Move"
-msgstr ""
+msgstr "Перемістити"
 
 #: pigeonplanner/ui/glade/DBManager.ui:311
 msgid "Load this database as default on startup"

@@ -107,7 +107,6 @@
     <property name="window_position">center-on-parent</property>
     <property name="default_width">600</property>
     <property name="default_height">460</property>
-    <property name="icon">../../data/images/icon_logo.png</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <signal name="delete-event" handler="on_close_dialog" swapped="no"/>

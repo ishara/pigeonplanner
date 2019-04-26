@@ -80,7 +80,6 @@
     <property name="default_width">980</property>
     <property name="default_height">640</property>
     <property name="destroy_with_parent">True</property>
-    <property name="icon">../../data/images/icon_logo.png</property>
     <property name="skip_taskbar_hint">True</property>
     <signal name="delete-event" handler="on_close_window" swapped="no"/>
     <child>

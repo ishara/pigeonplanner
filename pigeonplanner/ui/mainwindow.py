@@ -306,7 +306,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         if not tools.check_user_info(self, userinfo):
             return
 
-        pigeons = self.widgets.treeview.get_pigeons(True)
+        pigeons = self.widgets.treeview.get_pigeons(True, True)
         psize = common.get_pagesize_from_opts()
         reportopts = PigeonsReportOptions(psize)
         report(PigeonsReport, reportopts, pigeons, userinfo)

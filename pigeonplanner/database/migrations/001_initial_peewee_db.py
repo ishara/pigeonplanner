@@ -222,6 +222,10 @@ def _migrate_images(pigeon, old_pindex):
 def _migrate_results(pigeon, old_pindex):
     cursor = database.execute_sql("SELECT * FROM Results_orig WHERE pindex=?;", (old_pindex,))
     for result in cursor.fetchall():
+        result = dict(result)  # To support the get() method
+        # Some very old database schemas don't have these columns.
+        speed = float(result.get("speed", 0.0))
+        windspeed = result.get("windspeed", "")
         result_new = {
             "date": _to_date(result["date"]),
             "racepoint": result["point"],
@@ -230,10 +234,10 @@ def _migrate_results(pigeon, old_pindex):
             "category": result["category"],
             "type": result["type"],
             "sector": result["sector"],
-            "speed": float(result["speed"]),
+            "speed": speed,
             "weather": result["weather"],
             "wind": result["wind"],
-            "windspeed": result["windspeed"],
+            "windspeed": windspeed,
             "comment": result["comment"],
         }
         try:
