@@ -17,6 +17,7 @@
 
 
 import os
+from xml.sax.saxutils import escape
 
 import gtk
 import gobject
@@ -361,10 +362,10 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         dbmanager.reorder(dbs)
 
     def _format_info(self, name, description, path):
-        head = "%s" % name
+        head = "%s" % escape(name)
         if description:
-            head += " - <small>%s</small>" % description
-        second = "<span style='italic' size='smaller' foreground='#B5B1B1'>%s</span>" % path
+            head += " - <small>%s</small>" % escape(description)
+        second = "<span style='italic' size='smaller' foreground='#B5B1B1'>%s</span>" % escape(path)
 
         return "%s\n%s" % (head, second)
 
