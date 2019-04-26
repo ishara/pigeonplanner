@@ -52,6 +52,14 @@ class DatabaseInfo(object):
         return u"<DatabaseInfo name=%s>" % self.name
 
     @property
+    def directory(self):
+        return os.path.dirname(self.path)
+
+    @property
+    def filename(self):
+        return os.path.basename(self.path)
+
+    @property
     def exists(self):
         return os.path.exists(self.path)
 
