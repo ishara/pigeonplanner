@@ -58,10 +58,10 @@ class LocationChooser(builder.GtkBuilder):
                         self.widgets.dialog)
             return
 
-        g = geopy.geocoders.GoogleV3()
+        g = geopy.geocoders.Yandex()
         try:
             place, (lat, lng) = g.geocode(location)
-        except (ValueError, geopy.geocoders.googlev3.GQueryError):
+        except ValueError:
             self._set_error(_("Can't find location '%s'") % location)
             return
         except urllib2.URLError:
