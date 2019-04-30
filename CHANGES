@@ -1,3 +1,12 @@
+3.4.0:
+ * Redesigned backup dialog
+ * Fixed backups to work with custom database paths
+ * Fixed displaying markup characters in database manager
+ * Fixed location calculator
+ * Fixed initial database migration for some old versions
+ * Minor code changes
+ * Updated Dutch translation
+
 3.2.2:
  * Fixed pigeon sorting in export and report
  * Removed icon paths that caused warnings in Windows
