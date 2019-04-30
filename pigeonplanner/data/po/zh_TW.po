@@ -7,29 +7,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-22 15:23+0100\n"
+"POT-Creation-Date: 2019-04-26 23:53+0200\n"
 "PO-Revision-Date: 2018-10-08 14:59+0000\n"
 "Last-Translator: 426 <Unknown>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-01-31 04:37+0000\n"
-"X-Generator: Launchpad (build 18862)\n"
+"X-Launchpad-Export-Date: 2019-04-27 05:33+0000\n"
+"X-Generator: Launchpad (build 18928)\n"
 "Language: \n"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:341
+#: pigeonplanner/ui/glade/OptionsDialog.ui:340
+#: pigeonplanner/ui/glade/BackupDialog.ui:382
 #: pigeonplanner/ui/glade/LocationChooser.ui:90
 #: pigeonplanner/ui/glade/LocationChooser.ui:180
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:113
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:241
-#: pigeonplanner/ui/glade/Backup.ui:457
 msgid "Location"
 msgstr "備份位置"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:248
-#: pigeonplanner/ui/resultwindow.py:786 pigeonplanner/ui/exportwindow.py:58
-#: pigeonplanner/ui/exportwindow.py:82
+#: pigeonplanner/ui/resultwindow.py:786 pigeonplanner/ui/backupdialog.py:141
+#: pigeonplanner/ui/exportwindow.py:58 pigeonplanner/ui/exportwindow.py:82
 #: pigeonplanner/ui/tools/distancecalculator.py:74
 #: pigeonplanner/core/common.py:194 pigeonplanner/core/common.py:201
 msgid "Error"
@@ -187,7 +187,7 @@ msgid "Removing the selected result"
 msgstr "刪除所選成績"
 
 #: pigeonplanner/messages.py:114 pigeonplanner/messages.py:117
-#: pigeonplanner/messages.py:161 pigeonplanner/ui/tabs/medication.py:58
+#: pigeonplanner/messages.py:155 pigeonplanner/ui/tabs/medication.py:58
 msgid "Are you sure?"
 msgstr "您確定嗎？"
 
@@ -225,35 +225,23 @@ msgstr "您確定要移除這個項目嗎？"
 msgid "The backup was successfully created."
 msgstr "已成功備份資料庫"
 
-#: pigeonplanner/messages.py:137 pigeonplanner/messages.py:143
+#: pigeonplanner/messages.py:137 pigeonplanner/messages.py:140
 msgid "Completed!"
 msgstr "完成！"
 
 #: pigeonplanner/messages.py:138
-msgid "There was an error making the backup."
-msgstr "備份時發生錯誤。"
-
-#: pigeonplanner/messages.py:140 pigeonplanner/messages.py:146
-msgid "Failed!"
-msgstr "失敗！"
-
-#: pigeonplanner/messages.py:141
 msgid "The backup was successfully restored."
 msgstr "資料庫已成功還原。"
 
+#: pigeonplanner/messages.py:139
+msgid "The program will now quit automatically to apply all changes."
+msgstr ""
+
 #: pigeonplanner/messages.py:142
-msgid "The program will now quit automaticly."
-msgstr "程式將自動關閉。"
-
-#: pigeonplanner/messages.py:144
-msgid "There was an error restoring the backup."
-msgstr "還原資料庫時發生錯誤。"
-
-#: pigeonplanner/messages.py:148
 msgid "No personal information found."
 msgstr "未找到個人資料。"
 
-#: pigeonplanner/messages.py:149
+#: pigeonplanner/messages.py:143
 msgid ""
 "This will be shown on top of the printed pedigree.\n"
 "Do you want to add it now?"
@@ -261,66 +249,66 @@ msgstr ""
 "此資料將顯示於列印的血統書右上方。\n"
 "您想要添加您的資料嗎？"
 
-#: pigeonplanner/messages.py:153
+#: pigeonplanner/messages.py:147
 msgid "Error printing the pedigree"
 msgstr "列印血統書發生錯誤"
 
-#: pigeonplanner/messages.py:156
+#: pigeonplanner/messages.py:150
 msgid "An error occured in the print operation!"
 msgstr "列印時發生錯誤！"
 
-#: pigeonplanner/messages.py:157
+#: pigeonplanner/messages.py:151
 msgid "See the logfile (File->Logfile viewer) for more info."
 msgstr "查看日誌文件（文件 - >日誌文件查看器）以獲取更多信息。"
 
-#: pigeonplanner/messages.py:160
+#: pigeonplanner/messages.py:154
 msgid "This will set back all the settings to the default values."
 msgstr "重設為預設設定。"
 
-#: pigeonplanner/messages.py:162
+#: pigeonplanner/messages.py:156
 msgid "Default settings"
 msgstr "預設設定"
 
-#: pigeonplanner/messages.py:164
+#: pigeonplanner/messages.py:158
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
 msgstr "Pigeon Planner 需要重新啟動使更改生效。"
 
-#: pigeonplanner/messages.py:167
+#: pigeonplanner/messages.py:161
 msgid "Restart required"
 msgstr "需要重新啟動程式"
 
-#: pigeonplanner/messages.py:169
+#: pigeonplanner/messages.py:163
 msgid "Update available!"
 msgstr "已有新的官方更新檔！"
 
-#: pigeonplanner/messages.py:170
+#: pigeonplanner/messages.py:164
 msgid "There is an update available, do you want to download it now?"
 msgstr "已有新的官方更新檔，您要馬上下載嗎？"
 
-#: pigeonplanner/messages.py:173
+#: pigeonplanner/messages.py:167
 msgid "The recipient and sender's e-mailaddress are required."
 msgstr "收件人及寄件人的電子郵件為必填項目"
 
-#: pigeonplanner/messages.py:177
+#: pigeonplanner/messages.py:171
 msgid "Error trying to get information. Are you connected to the internet?"
 msgstr "取得資料時發生錯誤，請確定您已連上網路？"
 
-#: pigeonplanner/messages.py:178
+#: pigeonplanner/messages.py:172
 msgid "A new version is available."
 msgstr "程式有新的版本。"
 
-#: pigeonplanner/messages.py:179
+#: pigeonplanner/messages.py:173
 msgid "You already have the latest version installed."
 msgstr "您正在使用最新的版本。"
 
-#: pigeonplanner/messages.py:180
+#: pigeonplanner/messages.py:174
 msgid "This isn't normal, or you must be running a development version"
 msgstr "這是不正常的，或者您正在使用的是一個開發版本。"
 
 #: pigeonplanner/reports/pigeons.py:51 pigeonplanner/reports/results.py:63
 #: pigeonplanner/ui/resultwindow.py:89 pigeonplanner/ui/dialogs.py:274
 #: pigeonplanner/ui/tabs/results.py:59 pigeonplanner/ui/tabs/relatives.py:171
-#: pigeonplanner/ui/widgets/treeview.py:345
+#: pigeonplanner/ui/widgets/treeview.py:382
 #: pigeonplanner/ui/glade/BreedingView.ui:421
 #: pigeonplanner/ui/glade/BreedingView.ui:589
 #: pigeonplanner/ui/glade/BreedingView.ui:801
@@ -330,78 +318,78 @@ msgid "Band no."
 msgstr "環號："
 
 #: pigeonplanner/reports/pigeons.py:54 pigeonplanner/ui/tabs/relatives.py:190
-#: pigeonplanner/ui/widgets/treeview.py:345
-#: pigeonplanner/ui/glade/MainWindow.ui:861
+#: pigeonplanner/ui/widgets/treeview.py:382
+#: pigeonplanner/ui/glade/MainWindow.ui:849
 #: pigeonplanner/ui/glade/FilterDialog.ui:121
-#: pigeonplanner/ui/glade/OptionsDialog.ui:917
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1616
+#: pigeonplanner/ui/glade/OptionsDialog.ui:916
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1615
 #: pigeonplanner/ui/glade/DetailsView.ui:147
 #: pigeonplanner/ui/glade/DetailsView.ui:689
 msgid "Sex"
 msgstr "性別"
 
 #: pigeonplanner/reports/pigeons.py:56 pigeonplanner/ui/dbmanager.py:49
-#: pigeonplanner/ui/dialogs.py:274 pigeonplanner/ui/widgets/treeview.py:345
-#: pigeonplanner/ui/glade/OptionsDialog.ui:854
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1339
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1594
-#: pigeonplanner/ui/glade/DBManager.ui:427 pigeonplanner/ui/glade/Backup.ui:146
+#: pigeonplanner/ui/dialogs.py:274 pigeonplanner/ui/widgets/treeview.py:382
+#: pigeonplanner/ui/glade/OptionsDialog.ui:853
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1338
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1593
+#: pigeonplanner/ui/glade/DBManager.ui:427
 #: pigeonplanner/ui/glade/AddressBook.ui:136
 msgid "Name"
 msgstr "名稱"
 
-#: pigeonplanner/reports/pigeons.py:58 pigeonplanner/ui/widgets/treeview.py:346
+#: pigeonplanner/reports/pigeons.py:58 pigeonplanner/ui/widgets/treeview.py:383
 #: pigeonplanner/ui/glade/FilterDialog.ui:386
-#: pigeonplanner/ui/glade/OptionsDialog.ui:993
+#: pigeonplanner/ui/glade/OptionsDialog.ui:992
 #: pigeonplanner/ui/glade/DetailsView.ui:53
 #: pigeonplanner/ui/glade/DetailsView.ui:639
 msgid "Sire"
 msgstr "父環"
 
-#: pigeonplanner/reports/pigeons.py:60 pigeonplanner/ui/widgets/treeview.py:346
+#: pigeonplanner/reports/pigeons.py:60 pigeonplanner/ui/widgets/treeview.py:383
 #: pigeonplanner/ui/glade/FilterDialog.ui:400
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1008
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1007
 #: pigeonplanner/ui/glade/DetailsView.ui:39
 #: pigeonplanner/ui/glade/DetailsView.ui:626
 msgid "Dam"
 msgstr "母環"
 
-#: pigeonplanner/reports/pigeons.py:62 pigeonplanner/ui/widgets/treeview.py:345
+#: pigeonplanner/reports/pigeons.py:62 pigeonplanner/ui/widgets/treeview.py:382
 #: pigeonplanner/ui/glade/FilterDialog.ui:135
-#: pigeonplanner/ui/glade/OptionsDialog.ui:878
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1603
+#: pigeonplanner/ui/glade/OptionsDialog.ui:877
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1602
 #: pigeonplanner/ui/glade/DetailsView.ui:135
 #: pigeonplanner/ui/glade/DetailsView.ui:678
 msgid "Colour"
 msgstr "顏色"
 
-#: pigeonplanner/reports/pigeons.py:64 pigeonplanner/ui/widgets/treeview.py:346
+#: pigeonplanner/reports/pigeons.py:64 pigeonplanner/ui/widgets/treeview.py:383
 #: pigeonplanner/ui/tools/distancecalculator.py:176
 #: pigeonplanner/ui/glade/FilterDialog.ui:163
-#: pigeonplanner/ui/glade/OptionsDialog.ui:891
+#: pigeonplanner/ui/glade/OptionsDialog.ui:890
 #: pigeonplanner/ui/glade/DetailsView.ui:67
 #: pigeonplanner/ui/glade/DetailsView.ui:652
 #: pigeonplanner/ui/glade/MedicationView.ui:901
 msgid "Loft"
 msgstr "鴿舍"
 
-#: pigeonplanner/reports/pigeons.py:66 pigeonplanner/ui/widgets/treeview.py:346
+#: pigeonplanner/reports/pigeons.py:66 pigeonplanner/ui/widgets/treeview.py:383
 #: pigeonplanner/ui/glade/FilterDialog.ui:149
-#: pigeonplanner/ui/glade/OptionsDialog.ui:863
+#: pigeonplanner/ui/glade/OptionsDialog.ui:862
 #: pigeonplanner/ui/glade/DetailsView.ui:161
 #: pigeonplanner/ui/glade/DetailsView.ui:702
 msgid "Strain"
 msgstr "鴿系"
 
-#: pigeonplanner/reports/pigeons.py:68 pigeonplanner/ui/widgets/treeview.py:346
+#: pigeonplanner/reports/pigeons.py:68 pigeonplanner/ui/widgets/treeview.py:383
 #: pigeonplanner/ui/glade/FilterDialog.ui:332
-#: pigeonplanner/ui/glade/OptionsDialog.ui:904
+#: pigeonplanner/ui/glade/OptionsDialog.ui:903
 msgid "Status"
 msgstr "狀態"
 
 #: pigeonplanner/reports/results.py:61 pigeonplanner/reports/velocity.py:39
 #: pigeonplanner/ui/resultwindow.py:82 pigeonplanner/ui/tabs/results.py:52
-#: pigeonplanner/ui/glade/ResultWindow.ui:216
+#: pigeonplanner/ui/glade/ResultWindow.ui:215
 #: pigeonplanner/ui/glade/DetailsView.ui:1143
 #: pigeonplanner/ui/glade/DetailsView.ui:1243
 #: pigeonplanner/ui/glade/DetailsView.ui:1358
@@ -413,8 +401,8 @@ msgstr "日期"
 
 #: pigeonplanner/reports/results.py:62 pigeonplanner/ui/resultwindow.py:83
 #: pigeonplanner/ui/tabs/results.py:53
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:1135
-#: pigeonplanner/ui/glade/ResultWindow.ui:228
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:1134
+#: pigeonplanner/ui/glade/ResultWindow.ui:227
 #: pigeonplanner/ui/glade/DetailsView.ui:1402
 #: pigeonplanner/ui/glade/ResultParser.ui:184
 #: pigeonplanner/ui/glade/RaceManager.ui:132
@@ -424,42 +412,42 @@ msgstr "放鴿地點"
 #: pigeonplanner/reports/results.py:64 pigeonplanner/ui/resultwindow.py:91
 #: pigeonplanner/ui/resultwindow.py:92 pigeonplanner/ui/tabs/results.py:61
 #: pigeonplanner/ui/tabs/results.py:62
-#: pigeonplanner/ui/glade/ResultsView.ui:532
-#: pigeonplanner/ui/glade/ResultWindow.ui:486
+#: pigeonplanner/ui/glade/ResultsView.ui:531
+#: pigeonplanner/ui/glade/ResultWindow.ui:485
 msgid "Placed"
 msgstr "歸返"
 
 #: pigeonplanner/reports/results.py:65 pigeonplanner/ui/resultwindow.py:93
 #: pigeonplanner/ui/tabs/results.py:63
-#: pigeonplanner/ui/glade/ResultsView.ui:605
-#: pigeonplanner/ui/glade/ResultWindow.ui:500
+#: pigeonplanner/ui/glade/ResultsView.ui:604
+#: pigeonplanner/ui/glade/ResultWindow.ui:499
 msgid "Out of"
 msgstr "總鴿數"
 
 #: pigeonplanner/reports/results.py:66 pigeonplanner/ui/resultwindow.py:84
 #: pigeonplanner/ui/tabs/results.py:54
-#: pigeonplanner/ui/glade/ResultsView.ui:352
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1105
-#: pigeonplanner/ui/glade/ResultWindow.ui:242
+#: pigeonplanner/ui/glade/ResultsView.ui:351
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1104
+#: pigeonplanner/ui/glade/ResultWindow.ui:241
 #: pigeonplanner/ui/glade/ExportWindow.ui:126
 #: pigeonplanner/ui/glade/ResultParser.ui:330
 msgid "Type"
 msgstr "類型"
 
 #: pigeonplanner/reports/results.py:67 pigeonplanner/ui/resultwindow.py:85
-#: pigeonplanner/ui/tabs/results.py:55 pigeonplanner/ui/tools/datamanager.py:47
-#: pigeonplanner/ui/glade/ResultsView.ui:303
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1157
-#: pigeonplanner/ui/glade/ResultWindow.ui:256
+#: pigeonplanner/ui/tabs/results.py:55 pigeonplanner/ui/tools/datamanager.py:49
+#: pigeonplanner/ui/glade/ResultsView.ui:302
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1156
+#: pigeonplanner/ui/glade/ResultWindow.ui:255
 #: pigeonplanner/ui/glade/ResultParser.ui:344
 msgid "Wind"
 msgstr "風向"
 
 #: pigeonplanner/reports/results.py:68 pigeonplanner/ui/resultwindow.py:87
-#: pigeonplanner/ui/tabs/results.py:57 pigeonplanner/ui/tools/datamanager.py:46
-#: pigeonplanner/ui/glade/ResultsView.ui:289
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1114
-#: pigeonplanner/ui/glade/ResultWindow.ui:270
+#: pigeonplanner/ui/tabs/results.py:57 pigeonplanner/ui/tools/datamanager.py:48
+#: pigeonplanner/ui/glade/ResultsView.ui:288
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1113
+#: pigeonplanner/ui/glade/ResultWindow.ui:269
 #: pigeonplanner/ui/glade/ResultParser.ui:358
 msgid "Weather"
 msgstr "天氣"
@@ -470,28 +458,28 @@ msgstr "歸返率"
 
 #: pigeonplanner/reports/results.py:70 pigeonplanner/ui/resultwindow.py:98
 #: pigeonplanner/ui/tabs/results.py:68
-#: pigeonplanner/ui/glade/ResultsView.ui:249
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1090
-#: pigeonplanner/ui/glade/ResultWindow.ui:528
+#: pigeonplanner/ui/glade/ResultsView.ui:248
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1089
+#: pigeonplanner/ui/glade/ResultWindow.ui:527
 #: pigeonplanner/ui/glade/ResultParser.ui:198
 msgid "Sector"
 msgstr "分區"
 
 #: pigeonplanner/reports/results.py:71 pigeonplanner/ui/resultwindow.py:99
 #: pigeonplanner/ui/tabs/results.py:69
-#: pigeonplanner/ui/glade/ResultsView.ui:366
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1142
-#: pigeonplanner/ui/glade/ResultWindow.ui:542
+#: pigeonplanner/ui/glade/ResultsView.ui:365
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1141
+#: pigeonplanner/ui/glade/ResultWindow.ui:541
 #: pigeonplanner/ui/glade/ResultParser.ui:212
 msgid "Category"
 msgstr "分類"
 
 #: pigeonplanner/reports/results.py:72 pigeonplanner/ui/resultwindow.py:100
 #: pigeonplanner/ui/tabs/results.py:70
-#: pigeonplanner/ui/glade/ResultsView.ui:317
+#: pigeonplanner/ui/glade/ResultsView.ui:316
 #: pigeonplanner/ui/glade/BreedingView.ui:269
 #: pigeonplanner/ui/glade/BreedingView.ui:1239
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1127
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1126
 #: pigeonplanner/ui/glade/MedicationView.ui:427
 #: pigeonplanner/ui/glade/MedicationView.ui:805
 #: pigeonplanner/ui/glade/AddressBook.ui:420
@@ -499,33 +487,33 @@ msgid "Comment"
 msgstr "備註"
 
 #: pigeonplanner/reports/velocity.py:35 pigeonplanner/reports/velocity.py:46
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:202
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:514
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:975
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:201
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:513
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:974
 msgid "Velocity"
 msgstr "速度"
 
 #: pigeonplanner/reports/velocity.py:40
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:556
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:555
 msgid "Released"
 msgstr "發佈"
 
 #: pigeonplanner/reports/velocity.py:41
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:176
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:541
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:1147
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:175
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:540
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:1146
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:369
 #: pigeonplanner/ui/glade/RaceManager.ui:191
 msgid "Distance"
 msgstr "距離"
 
 #: pigeonplanner/reports/velocity.py:47
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:986
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:985
 msgid "Flight Time"
 msgstr "飛行時間"
 
 #: pigeonplanner/reports/velocity.py:48
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:997
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:996
 msgid "Time of Arrival"
 msgstr "到達時間"
 
@@ -551,7 +539,7 @@ msgstr "選擇圖片"
 msgid "No image"
 msgstr "沒有圖片"
 
-#: pigeonplanner/ui/filechooser.py:159 pigeonplanner/ui/filechooser.py:255
+#: pigeonplanner/ui/filechooser.py:159 pigeonplanner/ui/filechooser.py:279
 msgid "Select a file..."
 msgstr "選擇檔案..."
 
@@ -568,24 +556,26 @@ msgid "Description"
 msgstr "描述"
 
 #: pigeonplanner/ui/filechooser.py:205 pigeonplanner/ui/filechooser.py:218
+#: pigeonplanner/ui/filechooser.py:231
 msgid "Save as..."
 msgstr "另存新檔..."
 
-#: pigeonplanner/ui/filechooser.py:244 pigeonplanner/ui/dbmanager.py:78
+#: pigeonplanner/ui/filechooser.py:244 pigeonplanner/ui/filechooser.py:268
+#: pigeonplanner/ui/dbmanager.py:78
 msgid "Select a folder..."
 msgstr "選擇資料夾..."
 
-#: pigeonplanner/ui/optionsdialog.py:53
+#: pigeonplanner/ui/optionsdialog.py:55
 #: pigeonplanner/ui/glade/BreedingView.ui:288
 #: pigeonplanner/ui/glade/BreedingView.ui:1258
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1750
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1836
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1983
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1749
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1835
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1982
 #: pigeonplanner/ui/glade/DBManager.ui:488
 msgid "General"
 msgstr "基本資料"
 
-#: pigeonplanner/ui/optionsdialog.py:55
+#: pigeonplanner/ui/optionsdialog.py:56
 msgid "Appearance"
 msgstr "界面外觀"
 
@@ -593,40 +583,40 @@ msgstr "界面外觀"
 msgid "Columns"
 msgstr "欄位顯示"
 
-#: pigeonplanner/ui/optionsdialog.py:59
+#: pigeonplanner/ui/optionsdialog.py:58
 msgid "Printing"
 msgstr "列印格式"
 
-#: pigeonplanner/ui/optionsdialog.py:60 pigeonplanner/ui/gtkmain.py:57
+#: pigeonplanner/ui/optionsdialog.py:59 pigeonplanner/ui/gtkmain.py:57
 #: pigeonplanner/ui/pedigreewindow.py:80 pigeonplanner/ui/pedigreewindow.py:84
 #: pigeonplanner/ui/tabs/pedigree.py:28
 msgid "Pedigree"
 msgstr "血統書"
 
-#: pigeonplanner/ui/optionsdialog.py:61 pigeonplanner/ui/tabs/results.py:665
-#: pigeonplanner/ui/glade/MainWindow.ui:294
+#: pigeonplanner/ui/optionsdialog.py:59 pigeonplanner/ui/tabs/results.py:665
+#: pigeonplanner/ui/glade/MainWindow.ui:281
 #: pigeonplanner/ui/glade/ExportWindow.ui:254
 #: pigeonplanner/ui/glade/ResultParser.ui:226
 msgid "Pigeons"
 msgstr "鴿子"
 
-#: pigeonplanner/ui/optionsdialog.py:62 pigeonplanner/ui/resultwindow.py:231
+#: pigeonplanner/ui/optionsdialog.py:59 pigeonplanner/ui/resultwindow.py:231
 #: pigeonplanner/ui/resultwindow.py:423 pigeonplanner/ui/resultwindow.py:594
 #: pigeonplanner/ui/tabs/results.py:549
 #: pigeonplanner/ui/glade/ResultsView.ui:135
-#: pigeonplanner/ui/glade/ResultWindow.ui:816
+#: pigeonplanner/ui/glade/ResultWindow.ui:815
 msgid "Results"
 msgstr "成績"
 
-#: pigeonplanner/ui/optionsdialog.py:64 pigeonplanner/ui/glade/DBManager.ui:596
+#: pigeonplanner/ui/optionsdialog.py:60 pigeonplanner/ui/glade/DBManager.ui:596
 msgid "Advanced"
 msgstr "進階設定"
 
-#: pigeonplanner/ui/optionsdialog.py:112
+#: pigeonplanner/ui/optionsdialog.py:108
 msgid "day"
 msgstr "天"
 
-#: pigeonplanner/ui/optionsdialog.py:112
+#: pigeonplanner/ui/optionsdialog.py:108
 msgid "days"
 msgstr "天"
 
@@ -650,7 +640,7 @@ msgstr "請您花一點時間回報此錯誤給 Pigeon Planner 作者修正此�
 msgid "Error Detail"
 msgstr "錯誤資訊"
 
-#: pigeonplanner/ui/gtkmain.py:58 pigeonplanner/ui/glade/OptionsDialog.ui:1374
+#: pigeonplanner/ui/gtkmain.py:58 pigeonplanner/ui/glade/OptionsDialog.ui:1373
 #: pigeonplanner/ui/glade/Dialogs.ui:8
 #: pigeonplanner/ui/glade/AddressBook.ui:379
 msgid "E-mail"
@@ -685,7 +675,7 @@ msgid "View this pedigree"
 msgstr "瀏覽此血統書"
 
 #: pigeonplanner/ui/pedigreewindow.py:116
-#: pigeonplanner/ui/glade/MainWindow.ui:66
+#: pigeonplanner/ui/glade/MainWindow.ui:61
 msgid "Print this pedigree"
 msgstr "列印此血統書"
 
@@ -712,15 +702,15 @@ msgid "You probably don't have write permissions on this folder."
 msgstr "您也許沒有寫入此資料夾的權限。"
 
 #: pigeonplanner/ui/resultwindow.py:86 pigeonplanner/ui/tabs/results.py:56
-#: pigeonplanner/ui/glade/ResultsView.ui:656
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1170
+#: pigeonplanner/ui/glade/ResultsView.ui:655
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1169
 #: pigeonplanner/ui/glade/ResultParser.ui:429
 msgid "Windspeed"
 msgstr "風速"
 
 #: pigeonplanner/ui/resultwindow.py:88 pigeonplanner/ui/tabs/results.py:58
-#: pigeonplanner/ui/glade/ResultsView.ui:727
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1198
+#: pigeonplanner/ui/glade/ResultsView.ui:726
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1197
 #: pigeonplanner/ui/glade/ResultParser.ui:462
 msgid "Temperature"
 msgstr "天氣溫度"
@@ -731,29 +721,29 @@ msgstr "天氣溫度"
 #: pigeonplanner/ui/widgets/bandentry.py:207
 #: pigeonplanner/ui/widgets/bandentry.py:305
 #: pigeonplanner/ui/widgets/bandentry.py:327
-#: pigeonplanner/ui/widgets/treeview.py:345
-#: pigeonplanner/ui/glade/MainWindow.ui:912
+#: pigeonplanner/ui/widgets/treeview.py:382
+#: pigeonplanner/ui/glade/MainWindow.ui:900
 #: pigeonplanner/ui/glade/ResultParser.ui:589
 msgid "Year"
 msgstr "年份"
 
 #: pigeonplanner/ui/resultwindow.py:94 pigeonplanner/ui/resultwindow.py:95
 #: pigeonplanner/ui/tabs/results.py:64 pigeonplanner/ui/tabs/results.py:65
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1077
-#: pigeonplanner/ui/glade/ResultWindow.ui:514
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1076
+#: pigeonplanner/ui/glade/ResultWindow.ui:513
 msgid "Coefficient"
 msgstr "歸返率"
 
 #: pigeonplanner/ui/resultwindow.py:96 pigeonplanner/ui/resultwindow.py:97
 #: pigeonplanner/ui/tabs/results.py:66 pigeonplanner/ui/tabs/results.py:67
-#: pigeonplanner/ui/glade/ResultsView.ui:690
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1183
+#: pigeonplanner/ui/glade/ResultsView.ui:689
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1182
 #: pigeonplanner/ui/glade/ResultParser.ui:615
 msgid "Speed"
 msgstr "飛行分速"
 
 #: pigeonplanner/ui/resultwindow.py:400 pigeonplanner/ui/tabs/results.py:362
-#: pigeonplanner/ui/glade/ResultWindow.ui:420
+#: pigeonplanner/ui/glade/ResultWindow.ui:419
 msgid "Races"
 msgstr "賽事資料"
 
@@ -792,22 +782,59 @@ msgstr "鴿子詳細資料"
 msgid "Details of %s"
 msgstr "%s 詳細資料"
 
-#: pigeonplanner/ui/mainwindow.py:277
+#: pigeonplanner/ui/backupdialog.py:102 pigeonplanner/ui/mainwindow.py:239
+msgid "There was an error making the backup."
+msgstr "備份時發生錯誤。"
+
+#: pigeonplanner/ui/backupdialog.py:102 pigeonplanner/ui/backupdialog.py:114
+#: pigeonplanner/ui/mainwindow.py:239
+msgid "Failed!"
+msgstr "失敗！"
+
+#: pigeonplanner/ui/backupdialog.py:114
+msgid "There was an error restoring the backup."
+msgstr "還原資料庫時發生錯誤。"
+
+#: pigeonplanner/ui/backupdialog.py:141
+msgid "The selected file is not a valid backup file."
+msgstr ""
+
+#: pigeonplanner/ui/backupdialog.py:168
+msgid "The default location is:"
+msgstr ""
+
+#: pigeonplanner/ui/backupdialog.py:169
+msgid "Select"
+msgstr ""
+
+#: pigeonplanner/ui/backupdialog.py:223
+msgid "Add"
+msgstr ""
+
+#: pigeonplanner/ui/backupdialog.py:224
+msgid "Overwrite"
+msgstr ""
+
+#: pigeonplanner/ui/backupdialog.py:225
+msgid "Invalid path"
+msgstr ""
+
+#: pigeonplanner/ui/mainwindow.py:280
 #, python-format
 msgid "Pigeon %s has been added"
 msgstr "鴿子 %s 已添加"
 
-#: pigeonplanner/ui/mainwindow.py:389
+#: pigeonplanner/ui/mainwindow.py:384
 #, python-format
 msgid "Pigeon %s has been removed"
 msgstr "鴿子 %s 已移除"
 
-#: pigeonplanner/ui/mainwindow.py:392
+#: pigeonplanner/ui/mainwindow.py:387
 #, python-format
 msgid "%s pigeons have been removed"
 msgstr "%s 鴿子已移除"
 
-#: pigeonplanner/ui/mainwindow.py:512 pigeonplanner/ui/glade/MainWindow.ui:237
+#: pigeonplanner/ui/mainwindow.py:512 pigeonplanner/ui/glade/MainWindow.ui:224
 msgid "Search for updates..."
 msgstr "檢查更新..."
 
@@ -816,7 +843,7 @@ msgid "Go to the website?"
 msgstr "前往官方網站"
 
 #: pigeonplanner/ui/mainwindow.py:597 pigeonplanner/ui/dialogs.py:226
-#: pigeonplanner/ui/glade/Backup.ui:55
+#: pigeonplanner/ui/glade/BackupDialog.ui:96
 msgid "Restore"
 msgstr "還原"
 
@@ -847,7 +874,7 @@ msgid ""
 "It's not allowed to close the database manager when no database is opened."
 msgstr "資料庫管理程式無法關閉，因為沒有開啟中的資料庫。"
 
-#: pigeonplanner/ui/logdialog.py:39
+#: pigeonplanner/ui/logdialog.py:46
 msgid "Logfile Viewer"
 msgstr "日誌瀏覽器"
 
@@ -889,7 +916,7 @@ msgstr ""
 "  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
 "  Walter Cheuk https://launchpad.net/~wwycheuk"
 
-#: pigeonplanner/ui/dialogs.py:111 pigeonplanner/ui/glade/MainWindow.ui:245
+#: pigeonplanner/ui/dialogs.py:111 pigeonplanner/ui/glade/MainWindow.ui:232
 msgid "General information"
 msgstr "一般資訊"
 
@@ -905,20 +932,20 @@ msgstr "鴿舍資料"
 msgid "Number of pigeons"
 msgstr "總鴿數"
 
-#: pigeonplanner/ui/dialogs.py:157 pigeonplanner/ui/glade/MainWindow.ui:430
+#: pigeonplanner/ui/dialogs.py:157 pigeonplanner/ui/glade/MainWindow.ui:418
 msgid "Cocks"
 msgstr "公鴿數"
 
-#: pigeonplanner/ui/dialogs.py:159 pigeonplanner/ui/glade/MainWindow.ui:462
+#: pigeonplanner/ui/dialogs.py:159 pigeonplanner/ui/glade/MainWindow.ui:450
 msgid "Hens"
 msgstr "母鴿數"
 
-#: pigeonplanner/ui/dialogs.py:161 pigeonplanner/ui/glade/MainWindow.ui:494
+#: pigeonplanner/ui/dialogs.py:161 pigeonplanner/ui/glade/MainWindow.ui:482
 msgid "Young birds"
 msgstr "幼鴿數"
 
 #: pigeonplanner/ui/dialogs.py:163 pigeonplanner/core/enums.py:29
-#: pigeonplanner/ui/glade/MainWindow.ui:526
+#: pigeonplanner/ui/glade/MainWindow.ui:514
 msgid "Unknown"
 msgstr "未知"
 
@@ -930,7 +957,7 @@ msgstr "成績表"
 msgid "Number of couples"
 msgstr "已配對總數"
 
-#: pigeonplanner/ui/dialogs.py:198 pigeonplanner/ui/glade/Backup.ui:255
+#: pigeonplanner/ui/dialogs.py:198 pigeonplanner/ui/glade/BackupDialog.ui:182
 msgid "Create backup"
 msgstr "建立備份"
 
@@ -938,12 +965,13 @@ msgstr "建立備份"
 msgid "Choose a directory where to save the backup"
 msgstr "選擇備份位置"
 
-#: pigeonplanner/ui/dialogs.py:205 pigeonplanner/ui/glade/OptionsDialog.ui:396
-#: pigeonplanner/ui/glade/Backup.ui:100 pigeonplanner/ui/glade/Backup.ui:291
+#: pigeonplanner/ui/dialogs.py:205 pigeonplanner/ui/glade/OptionsDialog.ui:395
+#: pigeonplanner/ui/glade/BackupDialog.ui:44
+#: pigeonplanner/ui/glade/BackupDialog.ui:80
 msgid "Backup"
 msgstr "備份"
 
-#: pigeonplanner/ui/dialogs.py:214 pigeonplanner/ui/glade/Backup.ui:19
+#: pigeonplanner/ui/dialogs.py:214 pigeonplanner/ui/glade/BackupDialog.ui:255
 msgid "Restore backup"
 msgstr "還原備份"
 
@@ -959,7 +987,7 @@ msgstr "警告！此動作將覆蓋您現有資料庫！"
 msgid "Search a pigeon"
 msgstr "搜尋鴿子"
 
-#: pigeonplanner/ui/dialogs.py:292 pigeonplanner/ui/glade/MainWindow.ui:301
+#: pigeonplanner/ui/dialogs.py:292 pigeonplanner/ui/glade/MainWindow.ui:288
 msgid "Show all pigeons"
 msgstr "顯示所有種鴿"
 
@@ -968,7 +996,7 @@ msgid "Media"
 msgstr "媒體檔案"
 
 #: pigeonplanner/ui/tabs/media.py:124
-#: pigeonplanner/ui/glade/OptionsDialog.ui:796
+#: pigeonplanner/ui/glade/OptionsDialog.ui:795
 msgid "Other"
 msgstr "其他"
 
@@ -1043,8 +1071,8 @@ msgstr "共同父母"
 #: pigeonplanner/ui/widgets/bandentry.py:204
 #: pigeonplanner/ui/widgets/bandentry.py:296
 #: pigeonplanner/ui/widgets/bandentry.py:327
-#: pigeonplanner/ui/widgets/treeview.py:345
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1026
+#: pigeonplanner/ui/widgets/treeview.py:382
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1025
 #: pigeonplanner/ui/glade/AddressBook.ui:297
 msgid "Country"
 msgstr "國家/地區"
@@ -1191,32 +1219,32 @@ msgstr "關閉"
 msgid "<edit>"
 msgstr "編輯"
 
-#: pigeonplanner/ui/tools/datamanager.py:39
+#: pigeonplanner/ui/tools/datamanager.py:41
 msgid "Colours"
 msgstr "顏色"
 
-#: pigeonplanner/ui/tools/datamanager.py:40
+#: pigeonplanner/ui/tools/datamanager.py:42
 msgid "Sectors"
 msgstr "磁區"
 
-#: pigeonplanner/ui/tools/datamanager.py:41
+#: pigeonplanner/ui/tools/datamanager.py:43
 msgid "Types"
 msgstr "類型"
 
-#: pigeonplanner/ui/tools/datamanager.py:42
+#: pigeonplanner/ui/tools/datamanager.py:44
 msgid "Categories"
 msgstr "分類"
 
-#: pigeonplanner/ui/tools/datamanager.py:43
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:1048
+#: pigeonplanner/ui/tools/datamanager.py:45
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:1047
 msgid "Racepoints"
 msgstr "放鴿地"
 
-#: pigeonplanner/ui/tools/datamanager.py:44
+#: pigeonplanner/ui/tools/datamanager.py:46
 msgid "Strains"
 msgstr "鴿系"
 
-#: pigeonplanner/ui/tools/datamanager.py:45
+#: pigeonplanner/ui/tools/datamanager.py:47
 msgid "Lofts"
 msgstr "鴿舍"
 
@@ -1303,24 +1331,24 @@ msgstr "將頁面縮小"
 msgid "of %d"
 msgstr "於 %d"
 
-#: pigeonplanner/database/manager.py:80
+#: pigeonplanner/database/manager.py:88
 msgid "My pigeons"
 msgstr "我的種鴿"
 
-#: pigeonplanner/database/manager.py:81
+#: pigeonplanner/database/manager.py:89
 msgid "My default database"
 msgstr "我的預設資料庫"
 
-#: pigeonplanner/database/manager.py:164
+#: pigeonplanner/database/manager.py:172
 msgid "This database is already added."
 msgstr "此資料庫已加入"
 
-#: pigeonplanner/database/manager.py:183
+#: pigeonplanner/database/manager.py:191
 #, python-format
 msgid "Database path '%s' is not writeable."
 msgstr "資料庫路徑 '%s' 無寫入權限"
 
-#: pigeonplanner/database/manager.py:204 pigeonplanner/database/manager.py:259
+#: pigeonplanner/database/manager.py:212 pigeonplanner/database/manager.py:267
 #, python-format
 msgid ""
 "Moving the database failed with message:\n"
@@ -1329,22 +1357,27 @@ msgstr ""
 "移動資料庫時錯誤訊息：\n"
 "%s"
 
-#: pigeonplanner/database/manager.py:224
+#: pigeonplanner/database/manager.py:232
 msgid "Unable to remove the database: permission denied"
 msgstr "無法移除資料庫：拒絕無效權限"
 
-#: pigeonplanner/database/manager.py:236 pigeonplanner/database/manager.py:237
+#: pigeonplanner/database/manager.py:244 pigeonplanner/database/manager.py:245
 msgid "copy"
 msgstr "複製"
 
-#: pigeonplanner/database/manager.py:297
+#: pigeonplanner/database/manager.py:305
 msgid "Database name is required."
 msgstr "請將資料庫取名。"
 
-#: pigeonplanner/database/manager.py:300
+#: pigeonplanner/database/manager.py:308
 #, python-format
 msgid "Database name '%s' already exists."
 msgstr "資料庫名稱  '%s' 重覆。"
+
+#: pigeonplanner/core/backup.py:118
+#, python-format
+msgid "The file '%s' is not a valid Pigeon Planner backup."
+msgstr ""
 
 #: pigeonplanner/core/common.py:194
 msgid "Error: This file does not exist"
@@ -1411,297 +1444,288 @@ msgid "_File"
 msgstr "檔案 (_F)"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:35
-#: pigeonplanner/ui/glade/MainWindow.ui:79
-msgid "_Backup"
-msgstr "備份(_B)"
-
-#: pigeonplanner/ui/glade/MainWindow.ui:40
 msgid "_Pigeon"
 msgstr "鴿子 (_P)"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:45
+#: pigeonplanner/ui/glade/MainWindow.ui:40
 msgid "_Edit"
 msgstr "編輯(_E)"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:50
+#: pigeonplanner/ui/glade/MainWindow.ui:45
 msgid "_View"
 msgstr "檢視 (_V)"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:55
+#: pigeonplanner/ui/glade/MainWindow.ui:50
 msgid "_Tools"
 msgstr "工具(_T)"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:60
+#: pigeonplanner/ui/glade/MainWindow.ui:55
 msgid "_Help"
 msgstr "幫助(_H)"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:65
-#: pigeonplanner/ui/glade/MainWindow.ui:145
+#: pigeonplanner/ui/glade/MainWindow.ui:60
+#: pigeonplanner/ui/glade/MainWindow.ui:132
 msgid "_Pedigree"
 msgstr "血統書 (_P)"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:72
+#: pigeonplanner/ui/glade/MainWindow.ui:67
 msgid "Blank pedigree"
 msgstr "空白的血統書"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:73
+#: pigeonplanner/ui/glade/MainWindow.ui:68
 msgid "Print a blank pedigree"
 msgstr "列印一份空白血統書"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:80
+#: pigeonplanner/ui/glade/MainWindow.ui:74
+msgid "_Backup"
+msgstr "備份(_B)"
+
+#: pigeonplanner/ui/glade/MainWindow.ui:75
 msgid "Create a backup of your database"
 msgstr "備份您的資料庫"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:87
-msgid "_Restore"
-msgstr "還原(_R)"
-
-#: pigeonplanner/ui/glade/MainWindow.ui:88
-msgid "Restore a backup of your database"
-msgstr "還原備份資料庫"
-
-#: pigeonplanner/ui/glade/MainWindow.ui:95
+#: pigeonplanner/ui/glade/MainWindow.ui:82
 msgid "Quit the program"
 msgstr "結束程式"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:103
+#: pigeonplanner/ui/glade/MainWindow.ui:90
 msgid "Add a new pigeon"
 msgstr "添加鴿子"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:111
+#: pigeonplanner/ui/glade/MainWindow.ui:98
 msgid "Add range"
 msgstr "批量添加鴿子"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:112
-#: pigeonplanner/ui/glade/MainWindow.ui:762
+#: pigeonplanner/ui/glade/MainWindow.ui:99
+#: pigeonplanner/ui/glade/MainWindow.ui:750
 msgid "Add a range of pigeons"
 msgstr "批量添加鴿子"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:120
+#: pigeonplanner/ui/glade/MainWindow.ui:107
 msgid "_Logfile Viewer"
 msgstr "日誌檔瀏覽器 (_L)"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:121
+#: pigeonplanner/ui/glade/MainWindow.ui:108
 msgid "See the logfile"
 msgstr "查閱日誌檔"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:129
+#: pigeonplanner/ui/glade/MainWindow.ui:116
 msgid "Edit the selected pigeon"
 msgstr "編輯所選鴿子"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:137
+#: pigeonplanner/ui/glade/MainWindow.ui:124
 msgid "Remove the selected pigeon"
 msgstr "移除所選鴿子"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:146
+#: pigeonplanner/ui/glade/MainWindow.ui:133
 msgid "View the detailed pedigree of this pigeon"
 msgstr "查閱所選鴿子完整血統書"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:154
+#: pigeonplanner/ui/glade/MainWindow.ui:141
 msgid "Add resul_t"
 msgstr "添加成績"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:155
+#: pigeonplanner/ui/glade/MainWindow.ui:142
 msgid "Add a new result for this pigeon"
 msgstr "添加新成績"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:162
+#: pigeonplanner/ui/glade/MainWindow.ui:149
 msgid "Configure the application"
 msgstr "設定此程式"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:170
+#: pigeonplanner/ui/glade/MainWindow.ui:157
 msgid "_Filter..."
 msgstr "過濾項目(_F)..."
 
-#: pigeonplanner/ui/glade/MainWindow.ui:171
+#: pigeonplanner/ui/glade/MainWindow.ui:158
 #: pigeonplanner/ui/glade/ResultWindow.ui:24
 msgid "Set filter options"
 msgstr "設定過濾項目"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:179
+#: pigeonplanner/ui/glade/MainWindow.ui:166
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:95
 msgid "Velocity calculator"
 msgstr "速率計算機"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:180
+#: pigeonplanner/ui/glade/MainWindow.ui:167
 msgid "Calculate the velocity of flights"
 msgstr "計算飛行速率"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:186
+#: pigeonplanner/ui/glade/MainWindow.ui:173
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:26
 msgid "Distance calculator"
 msgstr "距離計算機"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:187
+#: pigeonplanner/ui/glade/MainWindow.ui:174
 msgid "Calculate the distance between locations"
 msgstr "計算兩地之間空中距離"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:193
+#: pigeonplanner/ui/glade/MainWindow.ui:180
 #: pigeonplanner/ui/glade/RaceManager.ui:20
 msgid "Racepoint manager"
 msgstr "管理放鴿地"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:194
+#: pigeonplanner/ui/glade/MainWindow.ui:181
 msgid "Manage the racepoints and distances"
 msgstr "管理放鴿地及距離"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:200
+#: pigeonplanner/ui/glade/MainWindow.ui:187
 msgid "Photo album"
 msgstr "相簿"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:201
+#: pigeonplanner/ui/glade/MainWindow.ui:188
 msgid "View the images of your pigeons"
 msgstr "查看所有鴿子相片"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:207
+#: pigeonplanner/ui/glade/MainWindow.ui:194
 #: pigeonplanner/ui/glade/AddressBook.ui:17
 msgid "Address book"
 msgstr "通訊錄"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:208
+#: pigeonplanner/ui/glade/MainWindow.ui:195
 msgid "View the address book"
 msgstr "查看通訊錄"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:214
+#: pigeonplanner/ui/glade/MainWindow.ui:201
 #: pigeonplanner/ui/glade/DataManager.ui:26
 msgid "Data manager"
 msgstr "資料管理員"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:215
+#: pigeonplanner/ui/glade/MainWindow.ui:202
 msgid "Manage your data"
 msgstr "管理資料"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:221
+#: pigeonplanner/ui/glade/MainWindow.ui:208
 msgid "Website"
 msgstr "官方網站"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:222
+#: pigeonplanner/ui/glade/MainWindow.ui:209
 msgid "Go to the website for more information"
 msgstr "更多資訊請前往官方網站"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:229
+#: pigeonplanner/ui/glade/MainWindow.ui:216
 msgid "Forum"
 msgstr "官方論壇"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:230
+#: pigeonplanner/ui/glade/MainWindow.ui:217
 msgid "Go to the forum for online help"
 msgstr "前往官方論壇尋求幫助。"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:238
+#: pigeonplanner/ui/glade/MainWindow.ui:225
 msgid "Search online for program updates"
 msgstr "搜尋線上更新檔"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:252
+#: pigeonplanner/ui/glade/MainWindow.ui:239
 msgid "About this application"
 msgstr "關於本程式"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:259
+#: pigeonplanner/ui/glade/MainWindow.ui:246
 msgid "Navigation arrows"
 msgstr "導覽箭頭"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:260
-#: pigeonplanner/ui/glade/OptionsDialog.ui:601
+#: pigeonplanner/ui/glade/MainWindow.ui:247
+#: pigeonplanner/ui/glade/OptionsDialog.ui:600
 msgid "Show or hide the navigation arrows"
 msgstr "顯示/隱藏導覽箭頭"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:266
+#: pigeonplanner/ui/glade/MainWindow.ui:253
 msgid "Statistics"
 msgstr "統計資料"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:267
-#: pigeonplanner/ui/glade/OptionsDialog.ui:615
+#: pigeonplanner/ui/glade/MainWindow.ui:254
+#: pigeonplanner/ui/glade/OptionsDialog.ui:614
 msgid "Show or hide pigeon statistics"
 msgstr "顯示/隱藏鴿子統計資料"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:273
+#: pigeonplanner/ui/glade/MainWindow.ui:260
 msgid "Toolbar"
 msgstr "工具列"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:274
-#: pigeonplanner/ui/glade/OptionsDialog.ui:629
+#: pigeonplanner/ui/glade/MainWindow.ui:261
+#: pigeonplanner/ui/glade/OptionsDialog.ui:628
 msgid "Show or hide the toolbar"
 msgstr "顯示/隱藏工具列"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:280
+#: pigeonplanner/ui/glade/MainWindow.ui:267
 msgid "Statusbar"
 msgstr "狀態列"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:281
-#: pigeonplanner/ui/glade/OptionsDialog.ui:643
+#: pigeonplanner/ui/glade/MainWindow.ui:268
+#: pigeonplanner/ui/glade/OptionsDialog.ui:642
 msgid "Show or hide the statusbar"
 msgstr "顯示/隱藏狀態列"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:287
+#: pigeonplanner/ui/glade/MainWindow.ui:274
 msgid "Export..."
 msgstr "匯出..."
 
-#: pigeonplanner/ui/glade/MainWindow.ui:288
+#: pigeonplanner/ui/glade/MainWindow.ui:275
 msgid "Export data to other formats"
 msgstr "將資料庫導出為其他格式"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:295
+#: pigeonplanner/ui/glade/MainWindow.ui:282
 msgid "Print a list of pigeons"
 msgstr "列印種鴿列表"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:302
+#: pigeonplanner/ui/glade/MainWindow.ui:289
 msgid "Show all pigeons in the list"
 msgstr "顯示此列表中所有種鴿"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:308
+#: pigeonplanner/ui/glade/MainWindow.ui:296
 #: pigeonplanner/ui/glade/DBManager.ui:25
 msgid "Database manager"
 msgstr "資料庫管理"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:309
+#: pigeonplanner/ui/glade/MainWindow.ui:297
 msgid "Manage your databases"
 msgstr "管理您的資料庫"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:402
+#: pigeonplanner/ui/glade/MainWindow.ui:390
 msgid "Total"
 msgstr "總計"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:942
+#: pigeonplanner/ui/glade/MainWindow.ui:930
 #: pigeonplanner/ui/glade/DetailsView.ui:1534
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:331
 msgid "To"
 msgstr "到"
 
-#: pigeonplanner/ui/glade/MainWindow.ui:994
+#: pigeonplanner/ui/glade/MainWindow.ui:982
 #: pigeonplanner/ui/glade/DetailsView.ui:1473
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:203
 msgid "From"
 msgstr "由"
 
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:190
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:189
 msgid "Time"
 msgstr "時間"
 
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:213
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:581
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:212
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:580
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:415
 msgid "Calculate"
 msgstr "計算"
 
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:331
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:732
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:330
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:731
 msgid "Hours"
 msgstr "小時"
 
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:355
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:756
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:354
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:755
 msgid "Minutes"
 msgstr "分鐘"
 
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:379
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:780
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:378
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:779
 msgid "Seconds"
 msgstr "秒鐘"
 
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:569
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:568
 msgid "Range"
 msgstr "批量添加鴿子"
 
-#: pigeonplanner/ui/glade/VelocityCalculator.ui:1024
+#: pigeonplanner/ui/glade/VelocityCalculator.ui:1023
 msgid "Prognosis"
 msgstr "預測時間"
 
@@ -1713,13 +1737,13 @@ msgstr "查看全部"
 msgid "Import"
 msgstr "匯入"
 
-#: pigeonplanner/ui/glade/ResultsView.ui:263
+#: pigeonplanner/ui/glade/ResultsView.ui:262
 #: pigeonplanner/ui/glade/BreedingView.ui:117
 #: pigeonplanner/ui/glade/MedicationView.ui:737
 msgid "Date*"
 msgstr "日期*"
 
-#: pigeonplanner/ui/glade/ResultsView.ui:275
+#: pigeonplanner/ui/glade/ResultsView.ui:274
 msgid "Racepoint*"
 msgstr "放鴿地*"
 
@@ -1782,7 +1806,7 @@ msgid "Filter pigeons"
 msgstr "過濾鴿子"
 
 #: pigeonplanner/ui/glade/FilterDialog.ui:109
-#: pigeonplanner/ui/glade/ResultWindow.ui:472
+#: pigeonplanner/ui/glade/ResultWindow.ui:471
 msgid "Pigeon year"
 msgstr "種鴿年份"
 
@@ -1815,157 +1839,158 @@ msgid "Splitted"
 msgstr "已分開"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:105
-#: pigeonplanner/ui/glade/Backup.ui:215 pigeonplanner/ui/glade/Backup.ui:424
+#: pigeonplanner/ui/glade/BackupDialog.ui:520
+#: pigeonplanner/ui/glade/BackupDialog.ui:748
 msgid "Options"
 msgstr "選項"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:126
+#: pigeonplanner/ui/glade/OptionsDialog.ui:125
 msgid "Default"
 msgstr "預設"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:252
+#: pigeonplanner/ui/glade/OptionsDialog.ui:251
 msgid "Check for updates on startup"
 msgstr "在啟動時檢查是否有更新可用"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:265
+#: pigeonplanner/ui/glade/OptionsDialog.ui:264
 msgid "Update"
 msgstr "更新"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:295
+#: pigeonplanner/ui/glade/OptionsDialog.ui:294
 msgid "Make an automatic backup"
 msgstr "製作自動備份"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:355
+#: pigeonplanner/ui/glade/OptionsDialog.ui:354
 msgid "Interval"
 msgstr "間隔時間"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:449
+#: pigeonplanner/ui/glade/OptionsDialog.ui:448
 msgid "Change the language to"
 msgstr "變更語系為"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:464
+#: pigeonplanner/ui/glade/OptionsDialog.ui:463
 msgid "Language"
 msgstr "語系"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:500
+#: pigeonplanner/ui/glade/OptionsDialog.ui:499
 msgid "Default distance unit"
 msgstr "預設距離公制"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:512
+#: pigeonplanner/ui/glade/OptionsDialog.ui:511
 msgid "Default speed unit"
 msgstr "預設速率公制"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:551
+#: pigeonplanner/ui/glade/OptionsDialog.ui:550
 msgid "Units"
 msgstr "公制"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:663
+#: pigeonplanner/ui/glade/OptionsDialog.ui:662
 msgid "Window"
 msgstr "視窗"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:701
+#: pigeonplanner/ui/glade/OptionsDialog.ui:700
 msgid "Results mode"
 msgstr "結果模式"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:736
+#: pigeonplanner/ui/glade/OptionsDialog.ui:735
 msgid "Hide deleted pigeons in lists"
 msgstr "由列表中隱藏已刪除種鴿"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:755
+#: pigeonplanner/ui/glade/OptionsDialog.ui:754
 msgid "Color row of deleted pigeons in lists"
 msgstr "將列表中已刪除種鴿顯示顏色列"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:941
+#: pigeonplanner/ui/glade/OptionsDialog.ui:940
 msgid "Text"
 msgstr "內文"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:955
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1644
+#: pigeonplanner/ui/glade/OptionsDialog.ui:954
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1643
 msgid "Image"
 msgstr "圖片"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:970
+#: pigeonplanner/ui/glade/OptionsDialog.ui:969
 msgid "Text and image"
 msgstr "內文及圖片"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1045
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1044
 msgid "Main Columns"
 msgstr "主要欄位"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1217
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1216
 msgid "Results Columns"
 msgstr "賽績欄位"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1273
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1272
 msgid "Paper format:"
 msgstr "紙張格式"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1307
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1306
 msgid "Paper"
 msgstr "紙張"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1348
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1347
 msgid "Address"
 msgstr "地址"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1361
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1360
 #: pigeonplanner/ui/glade/AddressBook.ui:338
 msgid "Phone"
 msgstr "電話"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1395
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1394
 msgid "Personal"
 msgstr "個人化設定"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1455
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1454
 msgid "Pedigree layout:"
 msgstr "血統書版面："
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1511
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1510
 msgid "Show pigeon colour in pedigree"
 msgstr "於血統書中顯示種鴿顏色"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1525
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1524
 msgid "Enable box border color"
 msgstr "啟用邊線顏色"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1539
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1538
 msgid "Enable box fill color"
 msgstr "啟用底色"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1559
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1558
 msgid "Layout"
 msgstr "版面佈局"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1629
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1628
 #: pigeonplanner/ui/glade/DetailsView.ui:100
 #: pigeonplanner/ui/glade/DetailsView.ui:666
 msgid "Extra"
 msgstr "註記"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1663
-#: pigeonplanner/ui/glade/ResultWindow.ui:460
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1662
+#: pigeonplanner/ui/glade/ResultWindow.ui:459
 msgid "Pigeon"
 msgstr "鴿子"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1716
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1803
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1715
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1802
 msgid "Show the column names"
 msgstr "顯示欄位名稱"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1730
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1729
 msgid "Always show the sex column"
 msgstr "永久顯示性別欄"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1817
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1816
 msgid "Show the date"
 msgstr "顯示日期"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1895
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1894
 msgid "Custom coefficient multiplier"
 msgstr "自定義係數乘法器"
 
-#: pigeonplanner/ui/glade/OptionsDialog.ui:1942
+#: pigeonplanner/ui/glade/OptionsDialog.ui:1941
 msgid "Check for development updates"
 msgstr "檢查開發版本更新"
 
@@ -2002,11 +2027,11 @@ msgstr "導出成績"
 msgid "View all results"
 msgstr "查看所有成績"
 
-#: pigeonplanner/ui/glade/ResultWindow.ui:117
+#: pigeonplanner/ui/glade/ResultWindow.ui:116
 msgid "Filter results"
 msgstr "過濾結果"
 
-#: pigeonplanner/ui/glade/ResultWindow.ui:795
+#: pigeonplanner/ui/glade/ResultWindow.ui:794
 msgid "Hide non-classified results"
 msgstr "隱藏非機密成績"
 
@@ -2061,31 +2086,68 @@ msgstr "歸還日期"
 msgid "Partner"
 msgstr "夥伴"
 
-#: pigeonplanner/ui/glade/Dialogs.ui:114
+#: pigeonplanner/ui/glade/BackupDialog.ui:198
+msgid "Create a backup of your data"
+msgstr ""
+
+#: pigeonplanner/ui/glade/BackupDialog.ui:271
+msgid "Restore a backup of your data"
+msgstr ""
+
+#: pigeonplanner/ui/glade/BackupDialog.ui:416
+msgid "The following databases will be included."
+msgstr ""
+
+#: pigeonplanner/ui/glade/BackupDialog.ui:468
+#: pigeonplanner/ui/glade/BackupDialog.ui:697
+msgid "Database"
+msgstr "數據庫"
+
+#: pigeonplanner/ui/glade/BackupDialog.ui:499
+msgid "Include application configuration file"
+msgstr ""
+
+#: pigeonplanner/ui/glade/BackupDialog.ui:573
+msgid "Backup file"
+msgstr ""
+
+#: pigeonplanner/ui/glade/BackupDialog.ui:607
+msgid "Select which databases to restore."
+msgstr ""
+
+#: pigeonplanner/ui/glade/BackupDialog.ui:669
+msgid "Change database path"
+msgstr ""
+
+#: pigeonplanner/ui/glade/BackupDialog.ui:727
+msgid "Restore application configuration file"
+msgstr ""
+
+#: pigeonplanner/ui/glade/Dialogs.ui:113
 msgid "Send to:"
 msgstr "傳送到："
 
-#: pigeonplanner/ui/glade/Dialogs.ui:149
+#: pigeonplanner/ui/glade/Dialogs.ui:148
 msgid "Your name:"
 msgstr "您的名稱："
 
-#: pigeonplanner/ui/glade/Dialogs.ui:184
+#: pigeonplanner/ui/glade/Dialogs.ui:183
 msgid "Your e-mailaddress:"
 msgstr "您的電子信箱："
 
-#: pigeonplanner/ui/glade/Dialogs.ui:218
+#: pigeonplanner/ui/glade/Dialogs.ui:217
 msgid "Subject:"
 msgstr "主旨："
 
-#: pigeonplanner/ui/glade/Dialogs.ui:257
+#: pigeonplanner/ui/glade/Dialogs.ui:256
 msgid "Message:"
 msgstr "訊息："
 
-#: pigeonplanner/ui/glade/Dialogs.ui:380
+#: pigeonplanner/ui/glade/Dialogs.ui:379
 msgid "Attached file:"
 msgstr "添加附件："
 
-#: pigeonplanner/ui/glade/Dialogs.ui:403
+#: pigeonplanner/ui/glade/Dialogs.ui:402
 msgid "Sending..."
 msgstr "傳送中..."
 
@@ -2150,22 +2212,6 @@ msgstr "進階用戶專用。如有疑問請用預設設定即可。"
 #: pigeonplanner/ui/glade/DistanceCalculator.ui:446
 msgid "Result"
 msgstr "結果"
-
-#: pigeonplanner/ui/glade/Backup.ui:152
-msgid "Destination"
-msgstr "目的地"
-
-#: pigeonplanner/ui/glade/Backup.ui:165 pigeonplanner/ui/glade/Backup.ui:373
-msgid "Database"
-msgstr "數據庫"
-
-#: pigeonplanner/ui/glade/Backup.ui:195
-msgid "Restore configuration file"
-msgstr "恢復配置文件"
-
-#: pigeonplanner/ui/glade/Backup.ui:404
-msgid "Include configuration file"
-msgstr "包括配置文件"
 
 #: pigeonplanner/ui/glade/MedicationView.ui:181
 #: pigeonplanner/ui/glade/MedicationView.ui:763
@@ -2366,6 +2412,12 @@ msgstr "這是我的資料"
 
 #~ msgid "Year of pigeon"
 #~ msgstr "鴿子年份"
+
+#~ msgid "Restore a backup of your database"
+#~ msgstr "還原備份資料庫"
+
+#~ msgid "_Restore"
+#~ msgstr "還原(_R)"
 
 #~ msgid "Search through the list of pigeons"
 #~ msgstr "搜尋所有列表內的鴿子"
