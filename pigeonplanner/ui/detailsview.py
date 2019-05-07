@@ -494,7 +494,7 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
     def start_edit(self, operation):
         self._operation = operation
         if operation == enums.Action.edit:
-            logger.debug("Start editing pigeon %s", self.pigeon.band_tuple)
+            logger.debug("Start editing pigeon id=%s band=%s", self.pigeon.id, self.pigeon.band_tuple)
             self.widgets.entrybandedit.set_pigeon(self.pigeon)
             self.widgets.entrysireedit.set_pigeon(self.pigeon.sire)
             self.widgets.entrydamedit.set_pigeon(self.pigeon.dam)
@@ -570,7 +570,7 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
         self.widgets.combocolour.add_item(data["colour"])
         self.widgets.combostrain.add_item(data["strain"])
         self.widgets.comboloft.add_item(data["loft"])
-        logger.debug("Operation '%s' finished", self._operation)
+        logger.debug("Operation '%s' finished, pigeon id=%s band=%s", self._operation, pigeon.id, pigeon.band_tuple)
 
         return False
 
