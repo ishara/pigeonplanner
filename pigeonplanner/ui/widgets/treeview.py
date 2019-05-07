@@ -233,6 +233,11 @@ class MainTreeView(gtk.TreeView, component.Component):
         return len(self._liststore)
 
     def fill_treeview(self, path=0):
+        self.set_model(None)
+        component.get("MainWindow").widgets.hbox_loading.show()
+        while gtk.events_pending():
+            gtk.main_iteration()
+
         # Block the function that checks if a row needs to be shown or not.
         # This is an expensive operation and is called on each insert. This slows
         # down startup with many pigeons. The check is useless anyway when pigeons
@@ -245,9 +250,13 @@ class MainTreeView(gtk.TreeView, component.Component):
             query = query.where(Pigeon.visible == True)
         for pigeon in query:
             self._liststore.insert(0, self._row_for_pigeon(pigeon))
+            while gtk.events_pending():
+                gtk.main_iteration()
 
+        self.set_model(self._modelsort)
         self._selection.select_path(path)
         self.emit("pigeons-changed")
+        component.get("MainWindow").widgets.hbox_loading.hide()
 
         self._block_visible_func = False
 

@@ -173,8 +173,8 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         except DatabaseInfoError:
             return
 
-        self.emit("database-loaded")
         self._close_dialog()
+        self.emit("database-loaded")
 
     def on_add_clicked(self, widgets):
         dialog = DBFileChooserDialog(self.widgets.dialog)
