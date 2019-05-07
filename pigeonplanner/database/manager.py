@@ -32,13 +32,11 @@ logger = logging.getLogger(__name__)
 
 
 class DatabaseInfoError(Exception):
-    def __init__(self, msg):
-        self.msg = msg
+    pass
 
 
 class DatabaseOperationError(Exception):
-    def __init__(self, msg):
-        self.msg = msg
+    pass
 
 
 class DatabaseInfo(object):

@@ -188,7 +188,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
                 try:
                     dbobj = dbmanager.add(name, description, path)
                 except DatabaseInfoError as exc:
-                    ErrorDialog((exc.msg, None, ""), dialog)
+                    ErrorDialog((exc.message, None, ""), dialog)
                 else:
                     self.add_liststore_item(dbobj, select=True)
                     break
@@ -218,7 +218,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
                 try:
                     dbobj = dbmanager.create(name, description, path)
                 except DatabaseInfoError as exc:
-                    ErrorDialog((exc.msg, None, ""), self.widgets.editdialog)
+                    ErrorDialog((exc.message, None, ""), self.widgets.editdialog)
                 else:
                     self.add_liststore_item(dbobj, select=True)
                     break
@@ -249,7 +249,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
                 try:
                     dbobj = dbmanager.edit(dbobj, name, description, path)
                 except (DatabaseInfoError, DatabaseOperationError) as exc:
-                    ErrorDialog((exc.msg, None, ""), self.widgets.editdialog)
+                    ErrorDialog((exc.message, None, ""), self.widgets.editdialog)
                 else:
                     self.edit_liststore_item(rowiter, dbobj)
                     break
@@ -267,7 +267,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         try:
             dbmanager.delete(dbobj)
         except DatabaseOperationError as exc:
-            ErrorDialog((exc.msg, None, ""), self.widgets.dialog)
+            ErrorDialog((exc.message, None, ""), self.widgets.dialog)
             return
 
         model.remove(rowiter)
@@ -290,7 +290,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
                 try:
                     dbobj = dbmanager.move(dbobj, path)
                 except DatabaseOperationError as exc:
-                    ErrorDialog((exc.msg, None, ""), self.widgets.dialog)
+                    ErrorDialog((exc.message, None, ""), self.widgets.dialog)
                 else:
                     self.edit_liststore_item(rowiter, dbobj)
                     break
