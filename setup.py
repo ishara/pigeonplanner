@@ -126,6 +126,13 @@ setup(
     package_data=package_data,
     data_files=data_files,
     entry_points=entry_points,
+    classifiers=[
+        "Development Status :: 6 - Mature",
+        "Environment :: X11 Applications :: GTK",
+        "Intended Audience :: End Users/Desktop",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Operating System :: OS Independent",
+    ],
     **platform_options
 )
 
