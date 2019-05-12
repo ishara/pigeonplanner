@@ -2,6 +2,7 @@ include AUTHORS CHANGES COPYING README.dev
 include Makefile
 include i18n.py
 include pigeonplanner.py
+include requirements.txt
 
 graft data
 graft mac
