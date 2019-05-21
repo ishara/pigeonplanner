@@ -163,18 +163,7 @@ class BackupDialog(builder.GtkBuilder):
         self._set_restore_button()
 
     def on_button_changedest_clicked(self, widget):
-        image_info = gtk.image_new_from_stock(gtk.STOCK_INFO, gtk.ICON_SIZE_BUTTON)
-        label_info = gtk.Label()
-        label_info.set_markup("%s <b>%s</b>" % (_("The default location is:"), escape(const.PREFDIR)))
-        button_info = gtk.Button(_("Select"))
-        button_info.connect("clicked", lambda w: dialog.set_current_folder(const.PREFDIR))
-        box_info = gtk.HBox(spacing=4)
-        box_info.pack_start(image_info, False, False, 0)
-        box_info.pack_start(label_info, False, False, 0)
-        box_info.pack_start(button_info, False, False, 0)
-        box_info.show_all()
-        dialog = filechooser.PathChooserDialog(self.widgets.dialog, const.PREFDIR)
-        dialog.set_extra_widget(box_info)
+        dialog = filechooser.DatabasePathChooserDialog(self.widgets.dialog)
         response = dialog.run()
         if response == gtk.RESPONSE_OK:
             new_path = dialog.get_filename()

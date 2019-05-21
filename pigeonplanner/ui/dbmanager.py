@@ -72,14 +72,6 @@ class DBFileChooserDialog(filechooser._FileChooserDialog):
         return self.entrydescription.get_text()
 
 
-class FolderChooser(filechooser._FileChooserDialog):
-    def __init__(self, parent):
-        super(FolderChooser, self).__init__(parent, preview=False,
-                                            action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
-        self.set_title(_("Select a folder..."))
-        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
-
-
 class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
     __gsignals__ = {"database-loaded": (gobject.SIGNAL_RUN_LAST, None, ())}
 
@@ -101,7 +93,8 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
 
-        self.widgets.pathchooser = pc = filechooser.PathChooser()
+        db_dialog = filechooser.DatabasePathChooserDialog(self.widgets.dialog)
+        self.widgets.pathchooser = pc = filechooser.PathChooser(dialog=db_dialog)
         self.widgets.pathchooser.show()
         self.widgets.tableadvanced.attach(pc, 1, 2, 0, 1)
 
@@ -281,7 +274,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
     def on_move_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
-        dialog = FolderChooser(self.widgets.dialog)
+        dialog = filechooser.DatabasePathChooserDialog(self.widgets.dialog)
 
         while True:
             response = dialog.run()

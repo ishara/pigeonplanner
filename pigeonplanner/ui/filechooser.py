@@ -17,6 +17,7 @@
 
 
 import os
+from xml.sax.saxutils import escape
 
 import gtk
 import glib
@@ -245,13 +246,42 @@ class PathChooserDialog(_FileChooserDialog):
         self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
 
 
+class DatabasePathChooserDialog(_FileChooserDialog):
+
+    __gtype_name__ = "DatabasePathChooserDialog"
+
+    def __init__(self, parent, folder=const.PREFDIR):
+        super(DatabasePathChooserDialog, self).__init__(parent, preview=False, folder=folder,
+                                                        action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+        self.set_title(_("Select a folder..."))
+        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+
+        image_info = gtk.image_new_from_stock(gtk.STOCK_INFO, gtk.ICON_SIZE_BUTTON)
+        label_info = gtk.Label()
+        label_info.set_markup("%s <b>%s</b>" % (_("The default location is:"), escape(const.PREFDIR)))
+        button_info = gtk.Button(_("Select"))
+        button_info.connect("clicked", self.on_button_default_path_clicked)
+        box_info = gtk.HBox(spacing=4)
+        box_info.pack_start(image_info, False, False, 0)
+        box_info.pack_start(label_info, False, False, 0)
+        box_info.pack_start(button_info, False, False, 0)
+        box_info.show_all()
+        self.set_extra_widget(box_info)
+
+    def on_button_default_path_clicked(self, widget):
+        self.set_current_folder(const.PREFDIR)
+
+
 ########
 # Buttons
 # General
 class _FileChooserButton(gtk.FileChooserButton, _FileChooser):
     def __init__(self, folder=const.HOMEDIR,
-                 action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True):
-        super(_FileChooserButton, self).__init__("")
+                 action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True, dialog=None):
+        if dialog is None:
+            super(_FileChooserButton, self).__init__("")
+        else:
+            super(_FileChooserButton, self).__init__(dialog)
         self.set_current_folder(folder)
         self.set_preview(preview)
         self.set_action(action)
@@ -261,8 +291,8 @@ class PathChooser(_FileChooserButton):
 
     __gtype_name__ = "PathChooser"
 
-    def __init__(self, title=None):
-        super(PathChooser, self).__init__(preview=False,
+    def __init__(self, title=None, dialog=None):
+        super(PathChooser, self).__init__(preview=False, dialog=dialog,
                                           action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
         if title is None:
             title = _("Select a folder...")
