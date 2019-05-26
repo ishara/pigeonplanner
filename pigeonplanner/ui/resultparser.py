@@ -149,7 +149,7 @@ class ResultParser(builder.GtkBuilder):
                 query = Result.insert(pigeon=pigeon, **data)
                 query.execute()
             except errors.IntegrityError:
-                logger.info("Pigeon %s already has the selected result" % pigeon.band_tuple)
+                logger.info("Selected result already exists for pigeon id=%s band=%s", pigeon.id, pigeon.band_tuple)
         self.close_window()
 
     def on_celltoggle_toggled(self, cell, path):
