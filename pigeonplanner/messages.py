@@ -52,10 +52,6 @@ MSG_DELETE_DATABASE = (_("Removing database"),
                          "All data will be lost."),
                        _("Removing database"))
 
-MSG_EVENT_NOTIFY = (_("Notification for '%s'"),
-                    _("Go to the calendar?"),
-                    "")
-
 MSG_INVALID_IMAGE = (_("Invalid image!"),
                      _("This image is either not supported or corrupt, "
                        "please choose another one."),
