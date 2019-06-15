@@ -55,8 +55,8 @@ class PedigreeReport(Report):
         header_bottom = self._draw_user_info()
 
         ## Draw image
-        if config.get("printing.pedigree-image") and self._pigeon is not None and\
-                                      self._pigeon.main_image is not None:
+        if config.get("printing.pedigree-image") and self._pigeon is not None and \
+                self._pigeon.main_image is not None and self._pigeon.main_image.exists:
             img_x = self.doc.get_usable_width()
             img_y = 1
             img_w = 6

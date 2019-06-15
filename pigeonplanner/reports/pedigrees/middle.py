@@ -59,8 +59,8 @@ class PedigreeReport(Report):
         header_y = self.doc.get_usable_height() - 3
         self.doc.center_text("User", "\n".join(userinfo), w_center, header_y)
 
-        if config.get("printing.pedigree-image") and self._pigeon is not None and\
-                                self._pigeon.main_image is not None:
+        if config.get("printing.pedigree-image") and self._pigeon is not None and \
+                self._pigeon.main_image is not None and self._pigeon.main_image.exists:
             img_x = w_center
             img_y = 2
             img_w = 7

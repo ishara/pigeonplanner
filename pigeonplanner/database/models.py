@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+import os
+
 from pigeonplanner.core import enums
 
 from peewee import SqliteDatabase
@@ -246,6 +248,10 @@ class Image(BaseModel):
 
     def __repr__(self):
         return "<Image %s for %s>" % (self.path, self.pigeon.band)
+
+    @property
+    def exists(self):
+        return os.path.exists(self.path)
 
 
 class Result(BaseModel):
