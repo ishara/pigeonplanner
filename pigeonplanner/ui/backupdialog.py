@@ -106,6 +106,9 @@ class BackupDialog(builder.GtkBuilder):
 
     def on_button_restore_clicked(self, widget):
         dbobjs = [row[self.LS_RESTORE_DBOBJ] for row in self.widgets.liststoredbrestore if row[self.LS_RESTORE_CHECK]]
+        if len(dbobjs) == 0:
+            if not messagedialog.QuestionDialog(messages.MSG_RESTORE_NO_DBS, self.widgets.dialog).run():
+                return
         configfile = self.widgets.check_restoreconfig.get_active()
         try:
             self.restore_op.restore_backup(dbobjs, configfile)

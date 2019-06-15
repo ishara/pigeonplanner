@@ -138,6 +138,9 @@ MSG_BACKUP_SUCCES = (_("The backup was successfully created."),
 MSG_RESTORE_SUCCES = (_("The backup was successfully restored."),
                       _("The program will now quit automatically to apply all changes."),
                       _("Completed!"))
+MSG_RESTORE_NO_DBS = (_("No database selected to restore."),
+                      _("Do you want to continue anyway?"),
+                      "")
 
 MSG_NO_INFO = (_("No personal information found."),
                _("This will be shown on top of the printed pedigree.\n"
