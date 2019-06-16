@@ -243,7 +243,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
                     backup.create_backup(save_path, overwrite=True, include_config=True)
                 except Exception as exc:
                     logger.error(exc)
-                    msg = (_("There was an error making the backup."), str(exc), _("Failed!"))
+                    msg = (_("There was an error making the backup."), exc.message, _("Failed!"))
                     InfoDialog(msg, self)
                 else:
                     InfoDialog(messages.MSG_BACKUP_SUCCES, self)
