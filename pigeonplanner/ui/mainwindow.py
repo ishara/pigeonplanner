@@ -206,6 +206,13 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         self._dbman.connect("database-loaded", self.on_database_loaded)
         self._dbman.run(True)
 
+        self.widgets.database_infobar = gtk.InfoBar()
+        self.widgets.database_infobar.get_content_area().add(gtk.Label(_("Open a database to use the application.")))
+        self.widgets.database_infobar.add_button(_("Database manager"), gtk.RESPONSE_APPLY)
+        self.widgets.database_infobar.connect("response", lambda *args: self.widgets.DBMan.activate())
+        self.widgets.database_infobar.show_all()
+        self.widgets.mainvbox.pack_start(self.widgets.database_infobar, False, False)
+
         if gtkosx is not None:
             def osx_quit(*args):
                 self.quit_program(bckp=False)
@@ -253,6 +260,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         return True
 
     def on_database_loaded(self, dbman):
+        self.widgets.database_infobar.hide()
+        self.widgets.mainvpaned.set_sensitive(True)
+        self.widgets.actiongroup_database.set_sensitive(True)
         self.widgets.treeview.fill_treeview()
 
     def on_interface_changed(self, dialog, arrows, stats, toolbar, statusbar):
@@ -657,6 +667,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(self.ui)
         uimanager.insert_action_group(self.widgets.actiongroup_main, 0)
+        uimanager.insert_action_group(self.widgets.actiongroup_database, 0)
         uimanager.insert_action_group(self.widgets.actiongroup_pigeon, 0)
         uimanager.insert_action_group(self.widgets.actiongroup_pigeon_remove, 0)
         accelgroup = uimanager.get_accel_group()

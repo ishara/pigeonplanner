@@ -302,10 +302,6 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
     ## Public methods ##
     def run(self, startup=False):
         self.fill_treeview()
-        #TODO: allow dbmanager to close even without database. Needs major
-        #      changes to prevent any database interaction.
-        self.widgets.dialog.set_deletable(session.is_open())
-        self.widgets.close.set_sensitive(session.is_open())
         self.widgets.dialog.show()
 
         # Load the default database only if this dialog is run on startup
@@ -338,17 +334,8 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
 
     ## Private methods ##
     def _close_dialog(self):
-        if session.is_open():
-            self._save_list_order()
-            self.widgets.dialog.hide()
-        else:
-            # Disable closing the dialog when no database is open. Pigeon Planner
-            # was never built with the intention of multiple database, so this
-            # database manager is built on top of the main application which has
-            # some drawbacks. Unable to use Pigeon Planner without database being
-            # one of them. This might (or better yet, should) change in the future.
-            ErrorDialog((_("It's not allowed to close the database manager when no database is opened."), "", ""),
-                        self.widgets.dialog)
+        self._save_list_order()
+        self.widgets.dialog.hide()
 
     def _save_list_order(self):
         dbs = [row[self.COL_OBJ] for row in self.widgets.liststore]
