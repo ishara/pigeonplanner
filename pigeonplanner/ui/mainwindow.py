@@ -611,10 +611,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     def on_selection_changed(self, selection):
         n_rows_selected = selection.count_selected_rows()
         model, paths = selection.get_selected_rows()
-        widgets = [self.widgets.ToolRemove, self.widgets.MenuRemove,
-                   self.widgets.ToolEdit, self.widgets.ToolPedigree,
-                   self.widgets.MenuEdit,
-                   self.widgets.MenuPedigree, self.widgets.MenuAddresult]
+        widgets = [self.widgets.actiongroup_pigeon, self.widgets.actiongroup_pigeon_remove]
         for tab in self._loaded_tabs:
             widgets.extend(tab.get_pigeon_state_widgets())
 
@@ -627,7 +624,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         elif n_rows_selected > 1:
             # Disable everything except the remove buttons
             self._clear_pigeon_data()
-            utils.set_multiple_sensitive(widgets[2:], False)
+            utils.set_multiple_sensitive(widgets, False)
+            self.widgets.actiongroup_pigeon_remove.set_sensitive(True)
             return
         self.current_pigeon = paths[0][0]
         pigeon = self.widgets.treeview.get_selected_pigeon()
@@ -658,7 +656,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     def _build_menubar(self):
         uimanager = gtk.UIManager()
         uimanager.add_ui_from_string(self.ui)
-        uimanager.insert_action_group(self.widgets.actiongroup, 0)
+        uimanager.insert_action_group(self.widgets.actiongroup_main, 0)
+        uimanager.insert_action_group(self.widgets.actiongroup_pigeon, 0)
+        uimanager.insert_action_group(self.widgets.actiongroup_pigeon_remove, 0)
         accelgroup = uimanager.get_accel_group()
         self.add_accel_group(accelgroup)
 
@@ -671,25 +671,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             "MenuToolbar": uimanager.get_widget("/MenuBar/ViewMenu/Toolbar"),
             "MenuStatusbar":
                 uimanager.get_widget("/MenuBar/ViewMenu/Statusbar"),
-            "Filtermenu": uimanager.get_widget("/MenuBar/ViewMenu/FilterMenu"),
-            "MenuEdit": uimanager.get_widget("/MenuBar/PigeonMenu/Edit"),
-            "MenuRemove": uimanager.get_widget("/MenuBar/PigeonMenu/Remove"),
-            "MenuPedigree":
-                uimanager.get_widget("/MenuBar/PigeonMenu/Pedigree"),
-            "MenuAddresult":
-                uimanager.get_widget("/MenuBar/PigeonMenu/Addresult"),
-            "ToolEdit": uimanager.get_widget("/Toolbar/Edit"),
-            "ToolRemove": uimanager.get_widget("/Toolbar/Remove"),
-            "ToolPedigree": uimanager.get_widget("/Toolbar/Pedigree")
-            }
+        }
         for name, widget in widget_dic.items():
             setattr(self.widgets, name, widget)
-
-        utils.set_multiple_sensitive([
-                            self.widgets.MenuEdit, self.widgets.MenuRemove,
-                            self.widgets.MenuPedigree, self.widgets.MenuAddresult,
-                            self.widgets.ToolEdit, self.widgets.ToolRemove,
-                            self.widgets.ToolPedigree], False)
 
         self.widgets.mainvbox.pack_start(self.widgets.menubar, False, False)
         self.widgets.mainvbox.pack_start(self.widgets.toolbar, False, False)
