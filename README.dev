@@ -36,8 +36,7 @@ Linux:
 
 Windows:
     python setup.py py2exe
-    cd win
-    python build_packages.py
+    python win/build_packages.py
 
 macOS:
     jhbuild shell

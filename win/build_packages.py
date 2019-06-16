@@ -6,11 +6,11 @@ import shutil
 import zipfile
 import subprocess
 
-sys.path.insert(0, os.path.abspath(".."))
+sys.path.insert(0, os.path.abspath("."))
 from pigeonplanner.core.const import VERSION
 
 
-package_root = "..\\dist"
+package_root = "dist"
 if not os.path.exists(package_root):
     print("Dist directory not found. Did you py2exe'd?")
     sys.exit()
@@ -71,16 +71,16 @@ def copy_files():
 
 def build_installer():
     iss_compiler = "C:\\Program Files (x86)\\Inno Setup 5\\ISCC.exe"
-    subprocess.call([iss_compiler, "setup.iss"])
+    subprocess.call([iss_compiler, "win\\setup.iss"])
 
 
 def build_zip():
     ziproot = "Pigeon Planner %s" % VERSION
-    zfile = zipfile.ZipFile("pigeonplanner-%s-win32.zip" % VERSION, "w", zipfile.ZIP_DEFLATED)
+    zfile = zipfile.ZipFile("win\\pigeonplanner-%s-win32.zip" % VERSION, "w", zipfile.ZIP_DEFLATED)
     for root, dirs, files in os.walk(package_root):
         for file in files:
             filepath = os.path.join(root, file)
-            zfile.write(filepath, filepath.replace("..\\dist", ziproot))
+            zfile.write(filepath, filepath.replace("dist", ziproot))
     zfile.close()
 
 
