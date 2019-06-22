@@ -235,6 +235,13 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         config.set("interface.window-w", w)
         config.set("interface.window-h", h)
 
+        # NOTE: added in version 3.6.0 to see if it makes things more clear for the user.
+        #       The "show all pigeons" option is meant to help with operations on hidden pigeons
+        #       for a short time and then to be turned off again to only see the main list
+        #       of pigeons. It can be confusing to see these pigeons if the option was toggled
+        #       and then forgotten about.
+        config.set("interface.show-all-pigeons", False)
+
         if config.get("backup.automatic-backup") and bckp:
             days_in_seconds = config.get("backup.interval") * 24 * 60 * 60
             if time.time() - config.get("backup.last") >= days_in_seconds:
