@@ -3,6 +3,7 @@
 ./pigeonplanner/data/languages
 ./MANIFEST
 ./dist
+./build
 ./data/TranslationWorkaround.ui
 ./dev
 ./pigeonplanner.egg-info
