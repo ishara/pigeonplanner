@@ -234,6 +234,7 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     def fill_treeview(self, path=0):
         self.set_model(None)
+        component.get("MainWindow").widgets.actiongroup_database.set_sensitive(False)
         component.get("MainWindow").widgets.hbox_loading.show()
         while gtk.events_pending():
             gtk.main_iteration()
@@ -257,6 +258,7 @@ class MainTreeView(gtk.TreeView, component.Component):
         self._selection.select_path(path)
         self.emit("pigeons-changed")
         component.get("MainWindow").widgets.hbox_loading.hide()
+        component.get("MainWindow").widgets.actiongroup_database.set_sensitive(True)
 
         self._block_visible_func = False
 
