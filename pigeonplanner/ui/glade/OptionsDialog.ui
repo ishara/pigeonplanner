@@ -849,6 +849,9 @@
                                       <placeholder/>
                                     </child>
                                     <child>
+                                      <placeholder/>
+                                    </child>
+                                    <child>
                                       <object class="GtkCheckButton" id="chkName">
                                         <property name="label" translatable="yes">Name</property>
                                         <property name="visible">True</property>
@@ -1016,9 +1019,6 @@
                                         <property name="top_attach">3</property>
                                         <property name="bottom_attach">4</property>
                                       </packing>
-                                    </child>
-                                    <child>
-                                      <placeholder/>
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="chkCountry">
@@ -1506,12 +1506,72 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="chkPigOptColour">
-                                        <property name="label" translatable="yes">Show pigeon colour in pedigree</property>
+                                      <object class="GtkVBox" id="vbox15">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">True</property>
-                                        <property name="receives_default">False</property>
-                                        <property name="draw_indicator">True</property>
+                                        <property name="can_focus">False</property>
+                                        <child>
+                                          <object class="GtkCheckButton" id="chkPigOptExtraLine">
+                                            <property name="label" translatable="yes">Show extra line in the pedigree</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">False</property>
+                                            <property name="draw_indicator">True</property>
+                                            <signal name="toggled" handler="on_chkPigOptExtraLine_toggled" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">True</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkAlignment" id="align_extra_line">
+                                            <property name="visible">True</property>
+                                            <property name="sensitive">False</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="left_padding">20</property>
+                                            <child>
+                                              <object class="GtkVBox" id="vbox16">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <child>
+                                                  <object class="GtkRadioButton" id="radioPigeonExtraColour">
+                                                    <property name="label" translatable="yes">Colour</property>
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <property name="receives_default">False</property>
+                                                    <property name="draw_indicator">True</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">True</property>
+                                                    <property name="fill">True</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkRadioButton" id="radioPigeonExtraStrain">
+                                                    <property name="label" translatable="yes">Strain</property>
+                                                    <property name="visible">True</property>
+                                                    <property name="can_focus">True</property>
+                                                    <property name="receives_default">False</property>
+                                                    <property name="draw_indicator">True</property>
+                                                    <property name="group">radioPigeonExtraColour</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">True</property>
+                                                    <property name="fill">True</property>
+                                                    <property name="position">1</property>
+                                                  </packing>
+                                                </child>
+                                              </object>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">True</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
                                       </object>
                                       <packing>
                                         <property name="expand">True</property>

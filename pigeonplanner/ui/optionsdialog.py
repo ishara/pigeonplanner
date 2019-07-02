@@ -114,6 +114,9 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     def on_chkSex_toggled(self, widget):
         self.widgets.vboxSexCol.set_sensitive(widget.get_active())
 
+    def on_chkPigOptExtraLine_toggled(self, widget):
+        self.widgets.align_extra_line.set_sensitive(widget.get_active())
+
     def on_btnPreview_clicked(self, widget):
         selected = self.widgets.cbLayout.get_active()
         userinfo = common.get_own_address()
@@ -141,6 +144,13 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
             sexcoltype = 2
         elif self.widgets.radioSexTextImage.get_active():
             sexcoltype = 3
+
+        if not self.widgets.chkPigOptExtraLine.get_active():
+            extra_line_type = 0
+        elif self.widgets.radioPigeonExtraColour.get_active():
+            extra_line_type = 1
+        elif self.widgets.radioPigeonExtraStrain.get_active():
+            extra_line_type = 2
 
         settings = [
                 ("options.check-for-updates", self.widgets.chkUpdate.get_active()),
@@ -190,7 +200,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 ("printing.pedigree-layout", self.widgets.cbLayout.get_active()),
                 ("printing.pedigree-use-box-color", self.widgets.chkBoxColor.get_active()),
                 ("printing.pedigree-use-box-fill-color", self.widgets.chkBoxFillColor.get_active()),
-                ("printing.pedigree-box-colour", self.widgets.chkPigOptColour.get_active()),
+                ("printing.pedigree-box-extra-line", extra_line_type),
                 ("printing.pedigree-name", self.widgets.chkPigName.get_active()),
                 ("printing.pedigree-colour", self.widgets.chkPigColour.get_active()),
                 ("printing.pedigree-sex", self.widgets.chkPigSex.get_active()),
@@ -270,9 +280,18 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
                 gtk.gdk.color_parse(config.get("interface.missing-pigeon-color-value")))
 
         # Printing
+        extra_line_type = config.get("printing.pedigree-box-extra-line")
+        if extra_line_type == 0:
+            self.widgets.chkPigOptExtraLine.set_active(False)
+        elif extra_line_type == 1:
+            self.widgets.chkPigOptExtraLine.set_active(True)
+            self.widgets.radioPigeonExtraColour.set_active(True)
+        elif extra_line_type == 2:
+            self.widgets.chkPigOptExtraLine.set_active(True)
+            self.widgets.radioPigeonExtraStrain.set_active(True)
+
         self.widgets.cbPaper.set_active(config.get("printing.general-paper"))
         self.widgets.cbLayout.set_active(config.get("printing.pedigree-layout"))
-        self.widgets.chkPigOptColour.set_active(config.get("printing.pedigree-box-colour"))
         self.widgets.chkBoxColor.set_active(config.get("printing.pedigree-use-box-color"))
         self.widgets.chkBoxFillColor.set_active(config.get("printing.pedigree-use-box-fill-color"))
 

@@ -80,7 +80,7 @@ class PedigreeReport(Report):
         h_total = self.doc.get_usable_height() - (header_bottom + .2)
         y_start = header_bottom + .2
         y_div = (h_total / 16) + y_start
-        if config.get("printing.pedigree-box-colour"):
+        if config.get("printing.pedigree-box-extra-line"):
             h0, h1, h2, h3, h4 = 3.4, 3.1, 3.1, 1.9, 0.9
         else:
             h0, h1, h2, h3, h4 = 3.1, 2.8, 2.8, 1.6, 0.9
@@ -149,8 +149,9 @@ class PedigreeReport(Report):
                 ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.extra
                 if first:
                     text += "\n" + pigeon.sex_string
-                if not last and config.get("printing.pedigree-box-colour"):
-                    text += "\n" + pigeon.colour
+                if not last and config.get("printing.pedigree-box-extra-line"):
+                    text += "\n" + \
+                            (pigeon.colour if config.get("printing.pedigree-box-extra-line") == 1 else pigeon.strain)
             else:
                 text = ""
                 ex1, ex2, ex3, ex4, ex5, ex6 = ("", "", "", "", "", "")

@@ -122,8 +122,9 @@ class PedigreeReport(Report):
             if pigeon is not None:
                 text = [pigeon.band]
                 ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.extra
-                if config.get("printing.pedigree-box-colour"):
-                    text.append(pigeon.colour)
+                if config.get("printing.pedigree-box-extra-line"):
+                    extra_line = pigeon.colour if config.get("printing.pedigree-box-extra-line") == 1 else pigeon.strain
+                    text.append(extra_line)
             else:
                 text = [""]
                 ex1, ex2, ex3, ex4, ex5, ex6 = ("", "", "", "", "", "")
