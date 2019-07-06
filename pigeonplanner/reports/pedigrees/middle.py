@@ -76,7 +76,7 @@ class PedigreeReport(Report):
         h_sep = .2
         w_sep = .2
         w = (self.doc.get_usable_width() / 5) - (w_sep * 3)
-        h = 3.1
+        h = 3.3
 
         x_0 = w_center - (w / 2.)
         x_left_1 = w_center - w - w / 2. - w_sep * 2

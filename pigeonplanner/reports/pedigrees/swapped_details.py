@@ -81,7 +81,7 @@ class PedigreeReport(Report):
         y_start = header_bottom + .2
         y_div = (h_total / 16) + y_start
         if config.get("printing.pedigree-box-extra-line"):
-            h0, h1, h2, h3, h4 = 3.4, 3.1, 3.1, 1.9, 0.9
+            h0, h1, h2, h3, h4 = 3.8, 3.3, 3.3, 2.0, 0.9
         else:
             h0, h1, h2, h3, h4 = 3.1, 2.8, 2.8, 1.6, 0.9
 
