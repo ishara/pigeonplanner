@@ -16,10 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
+from gi.repository import Gtk
 
-from pigeonplanner.ui import WidgetFactory
 from pigeonplanner.ui.tabs import basetab
+from pigeonplanner.ui.builder import WidgetFactory
 
 
 class PedigreeTab(WidgetFactory, basetab.BaseTab):
@@ -28,31 +28,31 @@ class PedigreeTab(WidgetFactory, basetab.BaseTab):
         basetab.BaseTab.__init__(self, "PedigreeTab", _("Pedigree"), "icon_pedigree.png")
         self.pedigree = pedigree
 
-        tablesire = gtk.Table(7, 5)
-        alignsire = gtk.Alignment(.5, .5, 1, 1)
+        tablesire = Gtk.Table(7, 5)
+        alignsire = Gtk.Alignment.new(.5, .5, 1, 1)
         alignsire.set_padding(4, 4, 4, 4)
         alignsire.add(tablesire)
-        framesire = gtk.Frame(_("<b>Pedigree sire</b>"))
+        framesire = Gtk.Frame(label=_("<b>Pedigree sire</b>"))
         framesire.get_label_widget().set_use_markup(True)
-        framesire.set_shadow_type(gtk.SHADOW_IN)
+        framesire.set_shadow_type(Gtk.ShadowType.IN)
         framesire.add(alignsire)
-        alignsiretop = gtk.Alignment(.5, .5, 0, 0)
+        alignsiretop = Gtk.Alignment.new(.5, .5, 0, 0)
         alignsiretop.set_padding(2, 2, 2, 2)
         alignsiretop.add(framesire)
 
-        tabledam = gtk.Table(7, 5)
-        aligndam = gtk.Alignment(.5, .5, 1, 1)
+        tabledam = Gtk.Table(7, 5)
+        aligndam = Gtk.Alignment.new(.5, .5, 1, 1)
         aligndam.set_padding(4, 4, 4, 4)
         aligndam.add(tabledam)
-        framedam = gtk.Frame(_("<b>Pedigree dam</b>"))
+        framedam = Gtk.Frame(label=_("<b>Pedigree dam</b>"))
         framedam.get_label_widget().set_use_markup(True)
-        framedam.set_shadow_type(gtk.SHADOW_IN)
+        framedam.set_shadow_type(Gtk.ShadowType.IN)
         framedam.add(aligndam)
-        aligndamtop = gtk.Alignment(.5, .5, 0, 0)
+        aligndamtop = Gtk.Alignment.new(.5, .5, 0, 0)
         aligndamtop.set_padding(2, 2, 2, 2)
         aligndamtop.add(framedam)
 
-        self.widgets._root = gtk.HBox()
+        self.widgets._root = Gtk.HBox()
         self.widgets._root.pack_start(alignsiretop, True, True, 0)
         self.widgets._root.pack_start(aligndamtop, True, True, 0)
         self.widgets._root.show_all()

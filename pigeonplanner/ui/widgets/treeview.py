@@ -16,8 +16,9 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
-import gobject
+from gi.repository import Gtk
+from gi.repository import GObject
+from gi.repository import GdkPixbuf
 
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
@@ -80,7 +81,7 @@ class FilterDialog(builder.GtkBuilder):
         for spin in ["year"]:
             getattr(self.widgets, "spin"+spin).set_value(0)
         for combo in ["colour", "strain", "loft"]:
-            getattr(self.widgets, "combo"+combo).child.set_text("")
+            getattr(self.widgets, "combo"+combo).get_child().set_text("")
         for check in ["sex", "status", "sire", "dam"]:
             getattr(self.widgets, "check"+check).set_active(False)
         self.widgets.bandentrysire.clear()
@@ -114,13 +115,13 @@ class FilterDialog(builder.GtkBuilder):
             dam = self.widgets.bandentrydam.get_band(False)
             self.filter.add("dam_filter", dam, type_=tuple, allow_empty_value=True)
 
-        colour = self.widgets.combocolour.child.get_text()
+        colour = self.widgets.combocolour.get_child().get_text()
         self.filter.add("colour", colour)
 
-        strain = self.widgets.combostrain.child.get_text()
+        strain = self.widgets.combostrain.get_child().get_text()
         self.filter.add("strain", strain)
 
-        loft = self.widgets.comboloft.child.get_text()
+        loft = self.widgets.comboloft.get_child().get_text()
         self.filter.add("loft", loft)
 
         self.treeview._modelfilter.refilter()
@@ -128,10 +129,10 @@ class FilterDialog(builder.GtkBuilder):
         self.treeview.emit("pigeons-changed")
 
 
-class MainTreeView(gtk.TreeView, component.Component):
+class MainTreeView(Gtk.TreeView, component.Component):
 
     __gtype_name__ = "MainTreeView"
-    __gsignals__ = {"pigeons-changed": (gobject.SIGNAL_RUN_LAST, None, ())}
+    __gsignals__ = {"pigeons-changed": (GObject.SIGNAL_RUN_LAST, None, ())}
 
     (LS_PIGEON,
      LS_RING,
@@ -160,7 +161,7 @@ class MainTreeView(gtk.TreeView, component.Component):
      COL_STATUS) = range(11)
 
     def __init__(self):
-        gtk.TreeView.__init__(self)
+        Gtk.TreeView.__init__(self)
         component.Component.__init__(self, "Treeview")
 
         self._block_visible_func = False
@@ -169,13 +170,13 @@ class MainTreeView(gtk.TreeView, component.Component):
         self._liststore = self._build_treeview()
         self._modelfilter = self._liststore.filter_new()
         self._modelfilter.set_visible_func(self._visible_func)
-        self._modelsort = gtk.TreeModelSort(self._modelfilter)
+        self._modelsort = Gtk.TreeModelSort(self._modelfilter)
         self._modelsort.set_sort_func(self.LS_YEAR, self._sort_func)
-        self._modelsort.set_sort_column_id(self.LS_YEAR, gtk.SORT_ASCENDING)
+        self._modelsort.set_sort_column_id(self.LS_YEAR, Gtk.SortType.ASCENDING)
         self.set_model(self._modelsort)
         self.set_rules_hint(True)
         self._selection = self.get_selection()
-        self._selection.set_mode(gtk.SELECTION_MULTIPLE)
+        self._selection.set_mode(Gtk.SelectionMode.MULTIPLE)
         self.set_columns()
         self.show_all()
 
@@ -183,11 +184,12 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     # Public methods
     def get_top_iter(self, rowiter):
-        filteriter = self._modelfilter.convert_child_iter_to_iter(rowiter)
-        return self._modelsort.convert_child_iter_to_iter(None, filteriter)
+        valid, filteriter = self._modelfilter.convert_child_iter_to_iter(rowiter)
+        valid, sortiter = self._modelsort.convert_child_iter_to_iter(filteriter)
+        return sortiter
 
     def get_child_iter(self, rowiter):
-        filteriter = self._modelsort.convert_iter_to_child_iter(None, rowiter)
+        filteriter = self._modelsort.convert_iter_to_child_iter(rowiter)
         return self._modelfilter.convert_iter_to_child_iter(filteriter)
 
     def get_top_path(self, path):
@@ -195,6 +197,8 @@ class MainTreeView(gtk.TreeView, component.Component):
         return self._modelsort.convert_child_path_to_path(filterpath)
 
     def get_child_path(self, path):
+        if isinstance(path, int):
+            path = Gtk.TreePath(path)
         filterpath = self._modelsort.convert_path_to_child_path(path)
         return self._modelfilter.convert_path_to_child_path(filterpath)
 
@@ -236,8 +240,8 @@ class MainTreeView(gtk.TreeView, component.Component):
         self.set_model(None)
         component.get("MainWindow").widgets.actiongroup_database.set_sensitive(False)
         component.get("MainWindow").widgets.hbox_loading.show()
-        while gtk.events_pending():
-            gtk.main_iteration()
+        while Gtk.events_pending():
+            Gtk.main_iteration()
 
         # Block the function that checks if a row needs to be shown or not.
         # This is an expensive operation and is called on each insert. This slows
@@ -251,8 +255,8 @@ class MainTreeView(gtk.TreeView, component.Component):
             query = query.where(Pigeon.visible == True)
         for pigeon in query:
             self._liststore.insert(0, self._row_for_pigeon(pigeon))
-            while gtk.events_pending():
-                gtk.main_iteration()
+            while Gtk.events_pending():
+                Gtk.main_iteration()
 
         self.set_model(self._modelsort)
         self._selection.select_path(path)
@@ -376,7 +380,7 @@ class MainTreeView(gtk.TreeView, component.Component):
             if key == self.COL_SEX and value:
                 sexcoltype = config.get("columns.pigeon-sex-type")
                 for renderer in self.get_column(key).get_cell_renderers():
-                    if isinstance(renderer, gtk.CellRendererText):
+                    if isinstance(renderer, Gtk.CellRendererText):
                         text = renderer
                     else:
                         pixbuf = renderer
@@ -388,17 +392,17 @@ class MainTreeView(gtk.TreeView, component.Component):
 
     # Internal methods
     def _build_treeview(self):
-        liststore = gtk.ListStore(int, str, str, str, str, str, str, str,
-                                  str, str, str, str, gtk.gdk.Pixbuf)
+        liststore = Gtk.ListStore(int, str, str, str, str, str, str, str,
+                                  str, str, str, str, GdkPixbuf.Pixbuf)
         columns = [_("Band no."), _("Year"), _("Country"), _("Name"), _("Colour"), _("Sex"),
                    _("Sire"), _("Dam"), _("Loft"), _("Strain"), _("Status")]
         for index, column in enumerate(columns):
-            tvcolumn = gtk.TreeViewColumn(column)
+            tvcolumn = Gtk.TreeViewColumn(column)
             if index == self.COL_SEX:
-                renderer = gtk.CellRendererPixbuf()
+                renderer = Gtk.CellRendererPixbuf()
                 tvcolumn.pack_start(renderer, expand=False)
                 tvcolumn.add_attribute(renderer, "pixbuf", self.LS_SEXIMG)
-            textrenderer = gtk.CellRendererText()
+            textrenderer = Gtk.CellRendererText()
             tvcolumn.pack_start(textrenderer, expand=False)
             tvcolumn.add_attribute(textrenderer, "text", index+1)
             tvcolumn.set_sort_column_id(index+1)
@@ -423,7 +427,7 @@ class MainTreeView(gtk.TreeView, component.Component):
             utils.get_sex_image(pigeon.sex)
         ]
 
-    def _visible_func(self, model, treeiter):
+    def _visible_func(self, model, treeiter, data=None):
         if self._block_visible_func:
             return True
         pigeon = Pigeon.get_by_id(model[treeiter][self.LS_PIGEON])
@@ -433,7 +437,7 @@ class MainTreeView(gtk.TreeView, component.Component):
                 return False
         return True
 
-    def _sort_func(self, model, iter1, iter2):
+    def _sort_func(self, model, iter1, iter2, data=None):
         data1 = model.get_value(iter1, self.LS_YEAR)
         data2 = model.get_value(iter2, self.LS_YEAR)
         if data1 == data2:

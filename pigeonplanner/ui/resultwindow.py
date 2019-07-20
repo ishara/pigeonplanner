@@ -23,7 +23,7 @@ Results window class
 import operator
 import datetime
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import tools
@@ -50,6 +50,28 @@ def get_view_for_current_config():
 
 class BaseView(object):
     ID = None
+
+    (LS_COL_OBJECT,
+     LS_COL_BAND_TUPLE,
+     LS_COL_BAND,
+     LS_COL_YEAR,
+     LS_COL_DATE,
+     LS_COL_RACEPOINT,
+     LS_COL_PLACED,
+     LS_COL_OUT,
+     LS_COL_COEF,
+     LS_COL_SPEED,
+     LS_COL_SECTOR,
+     LS_COL_TYPE,
+     LS_COL_CATEGORY,
+     LS_COL_WIND,
+     LS_COL_WINDSPEED,
+     LS_COL_WEATHER,
+     LS_COL_TEMPERATURE,
+     LS_COL_COMMENT,
+     LS_COL_PLACEDINT,
+     LS_COL_COEFFLOAT,
+     LS_COL_SPEEDFLOAT) = range(21)
 
     def __init__(self, root):
         self._root = root
@@ -103,15 +125,15 @@ class BaseView(object):
         self.build_ui()
 
     def _build_parent_frame(self, label, child):
-        sw = gtk.ScrolledWindow()
-        sw.set_shadow_type(gtk.SHADOW_IN)
-        sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        sw = Gtk.ScrolledWindow()
+        sw.set_shadow_type(Gtk.ShadowType.IN)
+        sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         sw.add(child)
-        label = gtk.Label("<b>%s</b>" % label)
+        label = Gtk.Label("<b>%s</b>" % label)
         label.set_use_markup(True)
-        frame = gtk.Frame()
+        frame = Gtk.Frame()
         frame.set_label_widget(label)
-        frame.set_shadow_type(gtk.SHADOW_NONE)
+        frame.set_shadow_type(Gtk.ShadowType.NONE)
         frame.add(sw)
 
         return frame
@@ -198,15 +220,15 @@ class ClassicView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.liststore = gtk.ListStore(object, object, str, str, str, str, str, int, str, str, str, str,
+        self.liststore = Gtk.ListStore(object, object, str, str, str, str, str, int, str, str, str, str,
                                        str, str, str, str, str, str, int, float, float)
 
         self.filtermodel = self.liststore.filter_new()
         self.filtermodel.set_visible_func(self._visible_func)
-        self.sortmodel = gtk.TreeModelSort(self.filtermodel)
+        self.sortmodel = Gtk.TreeModelSort(self.filtermodel)
         self.sortmodel.set_sort_func(self.LS_COL_YEAR, self._sort_func)
 
-        self.treeview = gtk.TreeView()
+        self.treeview = Gtk.TreeView()
         self.treeview.set_model(self.sortmodel)
         self.treeview.set_rules_hint(True)
         self.treeview.set_enable_search(False)
@@ -221,10 +243,10 @@ class ClassicView(BaseView):
                     ("weather", None), ("temperature", None), ("comment", None)]
         for index, (colname, sortid) in enumerate(colnames):
             startcol = index + 2
-            textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
+            textrenderer = Gtk.CellRendererText()
+            tvcolumn = Gtk.TreeViewColumn(self.colname2string[colname],
                                           textrenderer, text=startcol)
-            tvcolumn.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
+            tvcolumn.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(sortid or startcol)
             self.treeview.append_column(tvcolumn)
@@ -250,7 +272,7 @@ class ClassicView(BaseView):
         self.treeview.freeze_child_notify()
         self.treeview.set_model(None)
         self.liststore.set_default_sort_func(lambda *args: -1) 
-        self.liststore.set_sort_column_id(-1, gtk.SORT_ASCENDING)
+        self.liststore.set_sort_column_id(-1, Gtk.SortType.ASCENDING)
 
         self.clear()
         for result in Result.select():
@@ -262,7 +284,7 @@ class ClassicView(BaseView):
             year = "" if result.pigeon is None else result.pigeon.band_year
 
             self.liststore.insert(0,
-                [result, band_tuple, band, year, result.date, result.racepoint,
+                [result, band_tuple, band, year, str(result.date), result.racepoint,
                  placestr, result.out, coefstr, speed, result.sector, result.type,
                  result.category, result.wind, result.windspeed, result.weather,
                  result.temperature, result.comment, result.place, coef, result.speed
@@ -271,7 +293,7 @@ class ClassicView(BaseView):
 
         self.treeview.set_model(self.sortmodel)
         self.treeview.thaw_child_notify()
-        self.liststore.set_sort_column_id(self.LS_COL_DATE, gtk.SORT_ASCENDING)
+        self.liststore.set_sort_column_id(self.LS_COL_DATE, Gtk.SortType.ASCENDING)
 
     def clear(self):
         self.liststore.clear()
@@ -306,14 +328,14 @@ class ClassicView(BaseView):
             data.append(temp)
         return data
 
-    def _visible_func(self, model, treeiter):
+    def _visible_func(self, model, treeiter, data=None):
         for item in self._filter:
             modelvalue = model.get_value(treeiter, item.name)
             if not item.operator(modelvalue, item.value):
                 return False
         return True
 
-    def _sort_func(self, model, iter1, iter2):
+    def _sort_func(self, model, iter1, iter2, data=None):
         data1 = model.get_value(iter1, self.LS_COL_YEAR)
         data2 = model.get_value(iter2, self.LS_COL_YEAR)
         if data1 == data2:
@@ -376,11 +398,11 @@ class SplittedView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.race_ls = gtk.ListStore(int, str, str, str, str, str, str, str)
+        self.race_ls = Gtk.ListStore(int, str, str, str, str, str, str, str)
         self.race_filter = self.race_ls.filter_new()
         self.race_filter.set_visible_func(self._visible_races_func)
-        self.race_sort = gtk.TreeModelSort(self.race_filter)
-        self.race_tv = gtk.TreeView()
+        self.race_sort = Gtk.TreeModelSort(self.race_filter)
+        self.race_tv = Gtk.TreeView()
         self.race_tv.set_model(self.race_sort)
         self.race_tv.set_rules_hint(True)
         self.race_tv.set_enable_search(False)
@@ -390,10 +412,10 @@ class SplittedView(BaseView):
                     "windspeed", "weather", "temperature"]
         for index, colname in enumerate(colnames):
             startcol = index + 1
-            textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
+            textrenderer = Gtk.CellRendererText()
+            tvcolumn = Gtk.TreeViewColumn(self.colname2string[colname],
                                           textrenderer, text=startcol)
-            tvcolumn.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
+            tvcolumn.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(startcol)
             self.race_tv.append_column(tvcolumn)
@@ -401,8 +423,8 @@ class SplittedView(BaseView):
         self._frame1.show_all()
         self._root.pack_start(self._frame1, True, True, 0)
 
-        self.liststore = gtk.ListStore(object, str, str, str, int, str, str, str, str, str, int, float, float)
-        self.treeview = gtk.TreeView()
+        self.liststore = Gtk.ListStore(object, str, str, str, int, str, str, str, str, str, int, float, float)
+        self.treeview = Gtk.TreeView()
         self.treeview.set_model(self.liststore)
         self.treeview.set_rules_hint(True)
         self.treeview.set_enable_search(False)
@@ -413,10 +435,10 @@ class SplittedView(BaseView):
                     ("speed", self.LS_COL_SPEEDFLOAT), ("sector", None),
                     ("category", None), ("comment", None)]
         for index, (colname, sortid) in enumerate(colnames, start=1):
-            textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
+            textrenderer = Gtk.CellRendererText()
+            tvcolumn = Gtk.TreeViewColumn(self.colname2string[colname],
                                           textrenderer, text=index)
-            tvcolumn.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
+            tvcolumn.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(sortid or index)
             self.treeview.append_column(tvcolumn)
@@ -470,7 +492,7 @@ class SplittedView(BaseView):
                 self.results_cache[counter]["results"].append(result)
                 self.results_cache[counter]["filtered"].append(result)
 
-            self.race_ls.append([counter, race.date, race.racepoint, race.type,
+            self.race_ls.append([counter, str(race.date), race.racepoint, race.type,
                                           race.wind, race.windspeed,
                                           race.weather, race.temperature])
             counter += 1
@@ -556,7 +578,7 @@ class SplittedView(BaseView):
                 result["sector"], result["category"], result["comment"],
                 result["place"], result["coef"], result["speed"]])
 
-    def _visible_races_func(self, model, treeiter):
+    def _visible_races_func(self, model, treeiter, data=None):
         for item in self._filter_races:
             modelvalue = model.get_value(treeiter, item.name)
             if not item.operator(modelvalue, item.value):
@@ -632,7 +654,7 @@ class ResultWindow(builder.GtkBuilder):
         for spin in ["year", "place", "out", "coef"]:
             getattr(self.widgets, "spin"+spin).set_value(0)
         for combo in ["point", "type", "wind", "weather", "sector", "category"]:
-            getattr(self.widgets, "combo"+combo).child.set_text("")
+            getattr(self.widgets, "combo"+combo).get_child().set_text("")
 
         self.widgets.entrydate.set_text("")
         self.widgets.entryband.clear()
@@ -654,16 +676,16 @@ class ResultWindow(builder.GtkBuilder):
         dateop = self.widgets.combodate.get_operator()
         self._filter_races.add(self.widgets.resultview.LS_COL_DATE, date, dateop)
 
-        point = self.widgets.combopoint.child.get_text()
+        point = self.widgets.combopoint.get_child().get_text()
         self._filter_races.add(self.widgets.resultview.LS_COL_RACEPOINT, point)
 
-        ftype = self.widgets.combotype.child.get_text()
+        ftype = self.widgets.combotype.get_child().get_text()
         self._filter_races.add(self.widgets.resultview.LS_COL_TYPE, ftype)
 
-        wind = self.widgets.combowind.child.get_text()
+        wind = self.widgets.combowind.get_child().get_text()
         self._filter_races.add(self.widgets.resultview.LS_COL_WIND, wind)
 
-        weather = self.widgets.comboweather.child.get_text()
+        weather = self.widgets.comboweather.get_child().get_text()
         self._filter_races.add(self.widgets.resultview.LS_COL_WEATHER, weather)
 
         # Results filter
@@ -692,10 +714,10 @@ class ResultWindow(builder.GtkBuilder):
         coefop = self.widgets.combocoef.get_operator()
         self._filter_results.add(self.widgets.resultview.LS_COL_COEFFLOAT, coef, coefop, float)
 
-        sector = self.widgets.combosector.child.get_text()
+        sector = self.widgets.combosector.get_child().get_text()
         self._filter_results.add(self.widgets.resultview.LS_COL_SECTOR, sector)
 
-        category = self.widgets.combocategory.child.get_text()
+        category = self.widgets.combocategory.get_child().get_text()
         self._filter_results.add(self.widgets.resultview.LS_COL_CATEGORY, category)
 
         if self.widgets.checkclassified.get_active():
@@ -723,7 +745,7 @@ class ResultWindow(builder.GtkBuilder):
     def on_export_clicked(self, widget):
         chooser = ExportChooser(self.widgets.resultwindow, self.csvname, ("CSV", "*.csv"))
         response = chooser.run()
-        if response == gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             save_path = chooser.get_filename()
             data = self.widgets.resultview.get_report_data(flatten=True)
             columns = ["band", "year", "date", "point", "place", "out", "coef", "speed",
@@ -740,7 +762,7 @@ class ResultWindow(builder.GtkBuilder):
     def on_save_clicked(self, widget):
         chooser = PdfSaver(self.widgets.resultwindow, self.pdfname)
         response = chooser.run()
-        if response == gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             save_path = chooser.get_filename()
             self._do_operation(PRINT_ACTION_EXPORT, save_path)
         chooser.destroy()
@@ -753,14 +775,14 @@ class ResultWindow(builder.GtkBuilder):
 
     # Private methods
     def _build_toolbar(self):
-        uimanager = gtk.UIManager()
+        uimanager = Gtk.UIManager()
         uimanager.add_ui_from_string(self.ui)
         uimanager.insert_action_group(self.widgets.actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
         self.widgets.resultwindow.add_accel_group(accelgroup)
 
         toolbar = uimanager.get_widget("/Toolbar")
-        self.widgets.vbox.pack_start(toolbar, False, False)
+        self.widgets.vbox.pack_start(toolbar, False, False, 0)
 
     def _save_filter_results(self):
         self.widgets.resultview.set_filter(self._filter_races, self._filter_results)

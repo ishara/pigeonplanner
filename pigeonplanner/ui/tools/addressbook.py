@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
@@ -152,7 +152,7 @@ class AddressBook(builder.GtkBuilder):
         self.widgets.liststore.clear()
         for item in Person.select().order_by(Person.name.asc()):
             self.widgets.liststore.insert(0, [item, item.name])
-        self.widgets.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
+        self.widgets.liststore.set_sort_column_id(1, Gtk.SortType.ASCENDING)
 
     def _set_widgets(self, value):
         """
@@ -169,7 +169,7 @@ class AddressBook(builder.GtkBuilder):
         )
         utils.set_multiple_visible([self.widgets.checkme], show_me if value else False)
 
-        shadow = gtk.SHADOW_NONE if value else gtk.SHADOW_IN
+        shadow = Gtk.ShadowType.NONE if value else Gtk.ShadowType.IN
         for entry in self._entries:
             entry.set_editable(value)
             if isinstance(entry, latlongentry.LatLongEntry):

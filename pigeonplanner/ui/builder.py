@@ -22,10 +22,34 @@ Interface for Gtkbuilder
 
 import os
 
-import gtk
+from gi.repository import Gtk
 
-from pigeonplanner.ui import WidgetFactory
+# from pigeonplanner.ui import WidgetFactory
 from pigeonplanner.core import const
+
+
+class _Widgets(dict):
+    """ Object to hold all widgets
+    """
+
+    def __iter__(self):
+        return self.itervalues()
+
+    def __getattr__(self, name):
+        return self[name]
+
+    def __setattr__(self, name, value):
+        self[name] = value
+
+
+class WidgetFactory(object):
+    def __init__(self):
+        self.widgets = _Widgets()
+
+    def set_builder_objects(self, objects):
+        for obj in objects:
+            if issubclass(type(obj), Gtk.Buildable):
+                self.widgets[Gtk.Buildable.get_name(obj)] = obj
 
 
 class GtkBuilder(WidgetFactory):
@@ -37,7 +61,7 @@ class GtkBuilder(WidgetFactory):
         """
         WidgetFactory.__init__(self)
 
-        self._builder = gtk.Builder()
+        self._builder = Gtk.Builder()
         self._builder.set_translation_domain(const.DOMAIN)
         uipath = os.path.join(const.GLADEDIR, uifile)
         if objects is None:
@@ -63,4 +87,4 @@ class GtkBuilder(WidgetFactory):
 
         :param obj: The object to get the name from
         """
-        return gtk.Buildable.get_name(obj)
+        return Gtk.Buildable.get_name(obj)

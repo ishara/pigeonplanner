@@ -69,8 +69,8 @@ class DistanceCalculator(builder.GtkBuilder):
             latto = self.widgets.entrylatto.get_text(as_float=True)
             lngto = self.widgets.entrylongto.get_text(as_float=True)
         except errors.InvalidInputError:
-            ErrorDialog((_("The latitude and longitude need to be in "
-                           "DD.dddddd° format to use this function."),
+            ErrorDialog((_(u"The latitude and longitude need to be in "
+                           u"DD.dddddd° format to use this function."),
                          None, _("Error")), self.widgets.window)
             return
 

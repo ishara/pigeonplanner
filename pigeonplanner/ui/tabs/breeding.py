@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
@@ -248,9 +248,9 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             mate_obj = getattr(record, mate.name)
             if parent is None or mate_obj.id != last:
                 parent = self._add_parent_record(mate_obj)
-            self.widgets.treestore.append(parent, [record, mate_obj, record.date])
+            self.widgets.treestore.append(parent, [record, mate_obj, str(record.date)])
             last = mate_obj.id
-        self.widgets.treestore.set_sort_column_id(COL_DATA, gtk.SORT_ASCENDING)
+        self.widgets.treestore.set_sort_column_id(COL_DATA, Gtk.SortType.ASCENDING)
 
     def clear_pigeon(self):
         self.widgets.treestore.clear()

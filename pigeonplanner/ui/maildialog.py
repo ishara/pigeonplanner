@@ -20,10 +20,9 @@ import os
 import os.path
 import threading
 import logging
-logger = logging.getLogger(__name__)
 
-import gtk
-import gobject
+from gi.repository import Gtk
+from gi.repository import GLib
 
 from pigeonplanner import messages
 from pigeonplanner.ui import builder
@@ -32,6 +31,8 @@ from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
 from pigeonplanner.core import mailing
+
+logger = logging.getLogger(__name__)
 
 
 class MailDialog(builder.GtkBuilder):
@@ -45,7 +46,7 @@ class MailDialog(builder.GtkBuilder):
         self.kind = kind
         self.sending = False
 
-        self.widgets.textbuffer = gtk.TextBuffer()
+        self.widgets.textbuffer = Gtk.TextBuffer()
         self.widgets.textview_message.set_buffer(self.widgets.textbuffer)
 
         if kind == "pdf":
@@ -124,7 +125,7 @@ class MailDialog(builder.GtkBuilder):
 
     def sendmail_thread(self):
         self.sending = True
-        gobject.timeout_add(100, self.pulse_progressbar)
+        GLib.timeout_add(100, self.pulse_progressbar)
 
         recipient = self.widgets.entry_to.get_text()
         subject = self.widgets.entry_subject.get_text()
@@ -141,7 +142,7 @@ class MailDialog(builder.GtkBuilder):
             logger.error(exc)
 
         self.sending = False
-        gobject.idle_add(self.send_finished, error)
+        GLib.idle_add(self.send_finished, error)
 
     def send_finished(self, error):
         self.widgets.progressbar.hide()

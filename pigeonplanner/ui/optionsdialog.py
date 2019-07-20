@@ -22,12 +22,12 @@ Options dialog class
 
 import os
 
-import gtk
-import gobject
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
 
 from pigeonplanner import messages
 from pigeonplanner.ui import builder
-from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import InfoDialog, WarningDialog
 from pigeonplanner.core import const
 from pigeonplanner.core import common
@@ -36,14 +36,14 @@ from pigeonplanner.reportlib import report, PRINT_ACTION_PREVIEW
 from pigeonplanner.reports import get_pedigree
 
 
-class OptionsDialog(builder.GtkBuilder, gobject.GObject):
+class OptionsDialog(builder.GtkBuilder, GObject.GObject):
     __gsignals__ = {
-        "interface-changed": (gobject.SIGNAL_RUN_LAST, None, (bool, bool, bool, bool)),
+        "interface-changed": (GObject.SIGNAL_RUN_LAST, None, (bool, bool, bool, bool)),
     }
 
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "OptionsDialog.ui")
-        gobject.GObject.__init__(self)
+        GObject.GObject.__init__(self)
 
         # Build main treeview
         self.widgets.selection = self.widgets.treeview.get_selection()
@@ -52,16 +52,16 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         # Add the categories
         # [(Category, image, [children]), ]
         categories = [
-            (_("General"), gtk.STOCK_PROPERTIES, []),
-            (_("Appearance"), gtk.STOCK_PAGE_SETUP, []),
+            (_("General"), Gtk.STOCK_PROPERTIES, []),
+            (_("Appearance"), Gtk.STOCK_PAGE_SETUP, []),
             (_("Columns"), "columns", []),
-            (_("Printing"), gtk.STOCK_PRINT,
+            (_("Printing"), Gtk.STOCK_PRINT,
                 [_("Pedigree"), _("Pigeons"), _("Results")]),
-            (_("Advanced"), gtk.STOCK_PREFERENCES, []),
+            (_("Advanced"), Gtk.STOCK_PREFERENCES, []),
         ]
         i = 0
         for par, img, children in categories:
-            icon = self.widgets.treeview.render_icon(img, gtk.ICON_SIZE_LARGE_TOOLBAR)
+            icon = self.widgets.treeview.render_icon(img, Gtk.IconSize.LARGE_TOOLBAR)
             p_iter = self.widgets.treestore.append(None, [i, icon, par])
             for child in children:
                 i += 1
@@ -79,7 +79,8 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.languages.insert(0, "en")
         self.languages.sort()
         self.languages.insert(0, "Default")
-        comboboxes.fill_combobox(self.widgets.combolangs, self.languages, sort=False)
+        for language in self.languages:
+            self.widgets.combolangs.append_text(language)
 
         self._set_options()
 
@@ -120,11 +121,11 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
     def on_btnPreview_clicked(self, widget):
         selected = self.widgets.cbLayout.get_active()
         userinfo = common.get_own_address()
-        PedigreeReport, PedigreeReportOptions = get_pedigree(layout=selected)
+        pedigree_report, pedigree_report_options = get_pedigree(layout=selected)
         psize = common.get_pagesize_from_opts()
-        opts = PedigreeReportOptions(psize, print_action=PRINT_ACTION_PREVIEW,
-                                            parent=self.widgets.optionsdialog)
-        report(PedigreeReport, opts, None, userinfo)
+        opts = pedigree_report_options(psize, print_action=PRINT_ACTION_PREVIEW,
+                                       parent=self.widgets.optionsdialog)
+        report(pedigree_report, opts, None, userinfo)
 
     def on_buttondefault_clicked(self, widget):
         if WarningDialog(messages.MSG_DEFAULT_OPTIONS, self.widgets.optionsdialog).run():
@@ -277,7 +278,7 @@ class OptionsDialog(builder.GtkBuilder, gobject.GObject):
         self.widgets.chkShowHidden.set_active(config.get("interface.missing-pigeon-hide"))
         self.widgets.chkColorHidden.set_active(config.get("interface.missing-pigeon-color"))
         self.widgets.chkColorHiddenValue.set_color(
-                gtk.gdk.color_parse(config.get("interface.missing-pigeon-color-value")))
+                Gdk.color_parse(config.get("interface.missing-pigeon-color-value")))
 
         # Printing
         extra_line_type = config.get("printing.pedigree-box-extra-line")

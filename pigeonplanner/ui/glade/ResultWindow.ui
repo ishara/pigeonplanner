@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
 <interface>
-  <!-- interface-requires pigeonplannerwidgets 0.0 -->
-  <requires lib="gtk+" version="2.20"/>
-  <!-- interface-naming-policy project-wide -->
+  <requires lib="gtk+" version="3.20"/>
+  <requires lib="pigeonplannerwidgets" version="0.0"/>
   <object class="GtkActionGroup" id="actiongroup">
     <child>
       <object class="GtkAction" id="Print">
@@ -83,6 +83,9 @@
     <property name="skip_taskbar_hint">True</property>
     <signal name="delete-event" handler="on_close_window" swapped="no"/>
     <child>
+      <placeholder/>
+    </child>
+    <child>
       <object class="GtkVBox" id="vbox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
@@ -121,13 +124,17 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">resultwindow</property>
     <signal name="delete-event" handler="on_close_filter" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area1">
+          <object class="GtkButtonBox" id="dialog-action_area1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
@@ -211,8 +218,8 @@
                           <object class="GtkLabel" id="label5">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Date</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="x_options">GTK_FILL</property>
@@ -223,8 +230,8 @@
                           <object class="GtkLabel" id="label6">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Racepoint</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">1</property>
@@ -237,8 +244,8 @@
                           <object class="GtkLabel" id="label7">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Type</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">2</property>
@@ -251,8 +258,8 @@
                           <object class="GtkLabel" id="label8">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Wind</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">3</property>
@@ -265,109 +272,13 @@
                           <object class="GtkLabel" id="label9">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Weather</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">4</property>
                             <property name="bottom_attach">5</property>
                             <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"/>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="DataComboboxEntry" id="combopoint">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child internal-child="entry">
-                              <object class="GtkEntry" id="comboboxentry-entry1">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                            <property name="y_options"/>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="DataComboboxEntry" id="combotype">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child internal-child="entry">
-                              <object class="GtkEntry" id="comboboxentry-entry2">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">2</property>
-                            <property name="bottom_attach">3</property>
-                            <property name="y_options"/>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="DataComboboxEntry" id="combowind">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child internal-child="entry">
-                              <object class="GtkEntry" id="comboboxentry-entry3">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">3</property>
-                            <property name="bottom_attach">4</property>
-                            <property name="y_options"/>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="DataComboboxEntry" id="comboweather">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child internal-child="entry">
-                              <object class="GtkEntry" id="comboboxentry-entry4">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">4</property>
-                            <property name="bottom_attach">5</property>
                             <property name="y_options"/>
                           </packing>
                         </child>
@@ -405,6 +316,89 @@
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="right_attach">2</property>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="DataComboboxEntry" id="combopoint">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="has_entry">True</property>
+                            <property name="entry_text_column">0</property>
+                            <property name="id_column">0</property>
+                            <child internal-child="entry">
+                              <object class="GtkEntry">
+                                <property name="can_focus">True</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="DataComboboxEntry" id="combotype">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="has_entry">True</property>
+                            <property name="entry_text_column">0</property>
+                            <property name="id_column">0</property>
+                            <child internal-child="entry">
+                              <object class="GtkEntry">
+                                <property name="can_focus">False</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">2</property>
+                            <property name="bottom_attach">3</property>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="DataComboboxEntry" id="combowind">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="has_entry">True</property>
+                            <property name="entry_text_column">0</property>
+                            <property name="id_column">0</property>
+                            <child internal-child="entry">
+                              <object class="GtkEntry">
+                                <property name="can_focus">False</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">3</property>
+                            <property name="bottom_attach">4</property>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="DataComboboxEntry" id="comboweather">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="has_entry">True</property>
+                            <property name="entry_text_column">0</property>
+                            <property name="id_column">0</property>
+                            <child internal-child="entry">
+                              <object class="GtkEntry">
+                                <property name="can_focus">False</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">4</property>
+                            <property name="bottom_attach">5</property>
                             <property name="y_options"/>
                           </packing>
                         </child>
@@ -455,8 +449,8 @@
                           <object class="GtkLabel" id="label10">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Pigeon</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="x_options">GTK_FILL</property>
@@ -467,8 +461,8 @@
                           <object class="GtkLabel" id="label11">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Pigeon year</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">1</property>
@@ -481,8 +475,8 @@
                           <object class="GtkLabel" id="label12">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Placed</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">2</property>
@@ -495,8 +489,8 @@
                           <object class="GtkLabel" id="label13">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Out of</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">3</property>
@@ -509,8 +503,8 @@
                           <object class="GtkLabel" id="label14">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Coefficient</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">4</property>
@@ -523,8 +517,8 @@
                           <object class="GtkLabel" id="label15">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Sector</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">5</property>
@@ -537,8 +531,8 @@
                           <object class="GtkLabel" id="label16">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Category</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="top_attach">6</property>
@@ -588,8 +582,6 @@
                                 <property name="invisible_char">•</property>
                                 <property name="primary_icon_activatable">False</property>
                                 <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
                                 <property name="adjustment">adjyear</property>
                                 <property name="numeric">True</property>
                                 <signal name="output" handler="on_spinbutton_output" swapped="no"/>
@@ -632,8 +624,6 @@
                                 <property name="invisible_char">•</property>
                                 <property name="primary_icon_activatable">False</property>
                                 <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
                                 <property name="adjustment">adjplace</property>
                                 <property name="numeric">True</property>
                                 <signal name="output" handler="on_spinbutton_output" swapped="no"/>
@@ -676,8 +666,6 @@
                                 <property name="invisible_char">•</property>
                                 <property name="primary_icon_activatable">False</property>
                                 <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
                                 <property name="adjustment">adjout</property>
                                 <property name="numeric">True</property>
                                 <signal name="output" handler="on_spinbutton_output" swapped="no"/>
@@ -720,8 +708,6 @@
                                 <property name="invisible_char">•</property>
                                 <property name="primary_icon_activatable">False</property>
                                 <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
                                 <property name="adjustment">adjcoef</property>
                                 <property name="numeric">True</property>
                                 <signal name="output" handler="on_spinbutton_output" swapped="no"/>
@@ -742,18 +728,30 @@
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkCheckButton" id="checkclassified">
+                            <property name="label" translatable="yes">Hide non-classified results</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="draw_indicator">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">7</property>
+                            <property name="bottom_attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="DataComboboxEntry" id="combosector">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="has_entry">True</property>
+                            <property name="entry_text_column">0</property>
+                            <property name="id_column">0</property>
                             <child internal-child="entry">
-                              <object class="GtkEntry" id="comboboxentry-entry5">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
+                              <object class="GtkEntry">
+                                <property name="can_focus">False</property>
                               </object>
                             </child>
                           </object>
@@ -769,15 +767,12 @@
                           <object class="DataComboboxEntry" id="combocategory">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="has_entry">True</property>
+                            <property name="entry_text_column">0</property>
+                            <property name="id_column">0</property>
                             <child internal-child="entry">
-                              <object class="GtkEntry" id="comboboxentry-entry6">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
+                              <object class="GtkEntry">
+                                <property name="can_focus">False</property>
                               </object>
                             </child>
                           </object>
@@ -787,21 +782,6 @@
                             <property name="top_attach">6</property>
                             <property name="bottom_attach">7</property>
                             <property name="y_options"/>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="checkclassified">
-                            <property name="label" translatable="yes">Hide non-classified results</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="draw_indicator">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">7</property>
-                            <property name="bottom_attach">8</property>
                           </packing>
                         </child>
                       </object>

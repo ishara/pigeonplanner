@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
@@ -73,15 +73,15 @@ class BaseView(object):
         self.build_ui()
 
     def _build_parent_frame(self, label, child):
-        sw = gtk.ScrolledWindow()
-        sw.set_shadow_type(gtk.SHADOW_IN)
-        sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        sw = Gtk.ScrolledWindow()
+        sw.set_shadow_type(Gtk.ShadowType.IN)
+        sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         sw.add(child)
-        label = gtk.Label("<b>%s</b>" % label)
+        label = Gtk.Label("<b>%s</b>" % label)
         label.set_use_markup(True)
-        frame = gtk.Frame()
+        frame = Gtk.Frame()
         frame.set_label_widget(label)
-        frame.set_shadow_type(gtk.SHADOW_NONE)
+        frame.set_shadow_type(Gtk.ShadowType.NONE)
         frame.add(sw)
 
         return frame
@@ -165,7 +165,7 @@ class ClassicView(BaseView):
         placestr, coef, coefstr = common.format_place_coef(result.place, result.out)
         speed = common.format_speed(result.speed)
         return [
-            result, result.date, result.racepoint,
+            result, str(result.date), result.racepoint,
             placestr, result.out, coefstr, speed, result.sector, result.type,
             result.category, result.wind, result.windspeed, result.weather,
             result.temperature, result.comment, result.place, coef, result.speed
@@ -176,10 +176,10 @@ class ClassicView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.liststore = gtk.ListStore(object, str, str, str, int, str, str, str, str,
+        self.liststore = Gtk.ListStore(object, str, str, str, int, str, str, str, str,
                                        str, str, str, str, str, str, int, float, float)
-        self.liststore.set_sort_column_id(1, gtk.SORT_ASCENDING)
-        self.treeview = gtk.TreeView()
+        self.liststore.set_sort_column_id(1, Gtk.SortType.ASCENDING)
+        self.treeview = Gtk.TreeView()
         self.treeview.set_model(self.liststore)
         self.treeview.set_rules_hint(True)
         self.treeview.set_enable_search(False)
@@ -192,10 +192,10 @@ class ClassicView(BaseView):
                     ("wind", None), ("windspeed", None),
                     ("weather", None), ("temperature", None), ("comment", None)]
         for index, (colname, sortid) in enumerate(colnames):
-            textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
+            textrenderer = Gtk.CellRendererText()
+            tvcolumn = Gtk.TreeViewColumn(self.colname2string[colname],
                                           textrenderer, text=index+1)
-            tvcolumn.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
+            tvcolumn.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(sortid or index+1)
             self.treeview.append_column(tvcolumn)
@@ -342,8 +342,8 @@ class SplittedView(BaseView):
         return self.treeview
 
     def build_ui(self):
-        self.race_ls = gtk.ListStore(str, str, str, str, str, str, str)
-        self.race_tv = gtk.TreeView()
+        self.race_ls = Gtk.ListStore(str, str, str, str, str, str, str)
+        self.race_tv = Gtk.TreeView()
         self.race_tv.set_model(self.race_ls)
         self.race_tv.set_rules_hint(True)
         self.race_tv.set_enable_search(False)
@@ -352,10 +352,10 @@ class SplittedView(BaseView):
         colnames = ["date", "racepoint", "type", "wind", 
                     "windspeed", "weather", "temperature"]
         for index, colname in enumerate(colnames):
-            textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
+            textrenderer = Gtk.CellRendererText()
+            tvcolumn = Gtk.TreeViewColumn(self.colname2string[colname],
                                           textrenderer, text=index)
-            tvcolumn.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
+            tvcolumn.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(index)
             self.race_tv.append_column(tvcolumn)
@@ -363,8 +363,8 @@ class SplittedView(BaseView):
         self._frame1.show_all()
         self._root.pack_start(self._frame1, True, True, 0)
 
-        self.liststore = gtk.ListStore(object, str, int, str, str, str, str, str, int, float, float)
-        self.treeview = gtk.TreeView()
+        self.liststore = Gtk.ListStore(object, str, int, str, str, str, str, str, int, float, float)
+        self.treeview = Gtk.TreeView()
         self.treeview.set_model(self.liststore)
         self.treeview.set_rules_hint(True)
         self.treeview.set_enable_search(False)
@@ -374,10 +374,10 @@ class SplittedView(BaseView):
                     ("speed", self.LS_COL_SPEEDFLOAT), ("sector", None),
                     ("category", None), ("comment", None)]
         for index, (colname, sortid) in enumerate(colnames):
-            textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(self.colname2string[colname],
+            textrenderer = Gtk.CellRendererText()
+            tvcolumn = Gtk.TreeViewColumn(self.colname2string[colname],
                                           textrenderer, text=index+1)
-            tvcolumn.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
+            tvcolumn.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(sortid or index+1)
             self.treeview.append_column(tvcolumn)
@@ -408,7 +408,7 @@ class SplittedView(BaseView):
         self.liststore.clear()
         self.race_ls.clear()
         for race in pigeon.results.group_by(Result.date, Result.racepoint).order_by(Result.date.asc()):
-            self.race_ls.append([race.date, race.racepoint, race.type, race.wind,
+            self.race_ls.append([str(race.date), race.racepoint, race.type, race.wind,
                                  race.windspeed, race.weather, race.temperature])
 
     def get_selected(self):
@@ -468,7 +468,7 @@ class SplittedView(BaseView):
             rowiter = self.race_ls.insert(0, [result.date, result.racepoint, result.type,
                                               result.wind, result.windspeed,
                                               result.weather, result.temperature])
-            self.race_ls.set_sort_column_id(0, gtk.SORT_ASCENDING)
+            self.race_ls.set_sort_column_id(0, Gtk.SortType.ASCENDING)
             self.race_sel.select_iter(rowiter)
             path = self.race_ls.get_path(rowiter)
             self.race_tv.scroll_to_cell(path)
@@ -570,9 +570,9 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             return
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
-                (gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None, None),
-                (gtk.STOCK_JUMP_TO, self.on_addtopedigree_clicked, None, _("Add to pedigree details"))]
+                (Gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
+                (Gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None, None),
+                (Gtk.STOCK_JUMP_TO, self.on_addtopedigree_clicked, None, _("Add to pedigree details"))]
             utils.popup_menu(event, entries)
 
     def on_buttonall_clicked(self, widget):
@@ -710,19 +710,19 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self.widgets.dialog)
             return
-        point = self.widgets.comboracepoint.child.get_text()
+        point = self.widgets.comboracepoint.get_child().get_text()
         if self.widgets.checkplaced.get_active():
             place = self.widgets.spinplaced.get_value_as_int()
         else:
             place = 0
         out = self.widgets.spinoutof.get_value_as_int()
         speed = self.widgets.spinspeed.get_value()
-        sector = self.widgets.combosector.child.get_text()
-        ftype = self.widgets.combotype.child.get_text()
-        category = self.widgets.combocategory.child.get_text()
-        weather = self.widgets.comboweather.child.get_text()
+        sector = self.widgets.combosector.get_child().get_text()
+        ftype = self.widgets.combotype.get_child().get_text()
+        category = self.widgets.combocategory.get_child().get_text()
+        weather = self.widgets.comboweather.get_child().get_text()
         temperature = self.widgets.entrytemperature.get_text()
-        wind = self.widgets.combowind.child.get_text()
+        wind = self.widgets.combowind.get_child().get_text()
         windspeed = self.widgets.entrywindspeed.get_text()
         comment = self.widgets.entrycomment.get_text()
 
@@ -765,16 +765,16 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.checkplaced.set_active(bool(placed))
 
         self.widgets.entrydate.set_text(values["date"])
-        self.widgets.comboracepoint.child.set_text(values["racepoint"])
+        self.widgets.comboracepoint.get_child().set_text(values["racepoint"])
         self.widgets.spinplaced.set_value(placed)
         self.widgets.spinoutof.set_value(values["out"])
         self.widgets.spinspeed.set_value(values["speed"])
-        self.widgets.combosector.child.set_text(values["sector"])
-        self.widgets.combotype.child.set_text(values["type"])
-        self.widgets.combocategory.child.set_text(values["category"])
-        self.widgets.comboweather.child.set_text(values["weather"])
+        self.widgets.combosector.get_child().set_text(values["sector"])
+        self.widgets.combotype.get_child().set_text(values["type"])
+        self.widgets.combocategory.get_child().set_text(values["category"])
+        self.widgets.comboweather.get_child().set_text(values["weather"])
         self.widgets.entrytemperature.set_text(values["temperature"])
-        self.widgets.combowind.child.set_text(values["wind"])
+        self.widgets.combowind.get_child().set_text(values["wind"])
         self.widgets.entrywindspeed.set_text(values["windspeed"])
         self.widgets.entrycomment.set_text(values["comment"])
 
@@ -784,7 +784,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         except errors.InvalidInputError as msg:
             ErrorDialog(msg.value, self.widgets.dialog)
             return
-        racepoint = self.widgets.comboracepoint.child.get_text()
+        racepoint = self.widgets.comboracepoint.get_child().get_text()
         if date == "" or racepoint == "":
             # Don't bother checking
             return
@@ -795,8 +795,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                 race.weather, race.temperature)
         except Result.DoesNotExist:
             ftype, wind, windspeed, weather, temperature = "", "", "", "", ""
-        self.widgets.combotype.child.set_text(ftype)
-        self.widgets.combowind.child.set_text(wind)
+        self.widgets.combotype.get_child().set_text(ftype)
+        self.widgets.combowind.get_child().set_text(wind)
         self.widgets.entrywindspeed.set_text(windspeed)
-        self.widgets.comboweather.child.set_text(weather)
+        self.widgets.comboweather.get_child().set_text(weather)
         self.widgets.entrytemperature.set_text(temperature)

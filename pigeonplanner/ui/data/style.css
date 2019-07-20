@@ -1,0 +1,12 @@
+viewport {
+  border-style: solid;
+}
+
+#logfile-textview text {
+  background-image: none;
+  background-color: black;
+}
+
+.no-border {
+  border-width: 0px;
+}

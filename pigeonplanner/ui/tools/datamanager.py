@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import builder
@@ -155,20 +155,20 @@ class DataManager(builder.GtkBuilder):
     def _build_treeview(self):
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
-        self.widgets.liststore = gtk.ListStore(object, bool, str)
+        self.widgets.liststore = Gtk.ListStore(object, bool, str)
         self.widgets.treeview.set_model(self.widgets.liststore)
 
-        textrenderer = gtk.CellRendererText()
-        boolrenderer = gtk.CellRendererToggle()
+        textrenderer = Gtk.CellRendererText()
+        boolrenderer = Gtk.CellRendererToggle()
         boolrenderer.connect("toggled", self.on_selection_toggled)
 
-        check = gtk.CheckButton()
+        check = Gtk.CheckButton()
         check.set_active(True)
         check.show()
-        mark_column = gtk.TreeViewColumn(None, boolrenderer, active=1)
+        mark_column = Gtk.TreeViewColumn(None, boolrenderer, active=1)
         mark_column.set_widget(check)
         mark_column.set_sort_column_id(1)
         self.widgets.treeview.append_column(mark_column)
-        band_column = gtk.TreeViewColumn(None, textrenderer, text=2)
+        band_column = Gtk.TreeViewColumn(None, textrenderer, text=2)
         band_column.set_sort_column_id(2)
         self.widgets.treeview.append_column(band_column)

@@ -22,4 +22,3 @@ from pigeonplanner.ui.tools.distancecalculator import DistanceCalculator
 from pigeonplanner.ui.tools.photoalbum import PhotoAlbum
 from pigeonplanner.ui.tools.datamanager import DataManager
 from pigeonplanner.ui.tools.racepointmanager import RacepointManager
-

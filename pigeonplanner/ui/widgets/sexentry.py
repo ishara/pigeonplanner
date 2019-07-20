@@ -16,19 +16,19 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner.ui import utils
 from pigeonplanner.core import enums
 
 
-class SexEntry(gtk.Viewport):
+class SexEntry(Gtk.Viewport):
     __gtype_name__ = "SexEntry"
 
     def __init__(self):
-        gtk.Viewport.__init__(self)
+        Gtk.Viewport.__init__(self)
 
-        self._entry = gtk.Entry()
+        self._entry = Gtk.Entry()
         self._entry.set_has_frame(False)
         self._entry.set_editable(False)
         self._entry.set_icon_activatable(0, False)

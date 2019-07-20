@@ -18,7 +18,7 @@
 
 import os
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner import mime
 from pigeonplanner import messages
@@ -44,7 +44,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         basetab.BaseTab.__init__(self, "MediaTab", _("Media"), "icon_media.png")
 
         self.widgets.selection = self.widgets.treeview.get_selection()
-        self.widgets.selection.set_select_function(self._select_func, full=True)
+        self.widgets.selection.set_select_function(self._select_func)
         self.widgets.selection.connect("changed", self.on_selection_changed)
 
     def on_selection_changed(self, selection):
@@ -63,8 +63,8 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
                 image = mime.get_pixbuf(media.type)
                 self.widgets.image.set_from_pixbuf(image)
             except mime.MimeIconError:
-                self.widgets.image.set_from_stock(gtk.STOCK_FILE,
-                                                  gtk.ICON_SIZE_DIALOG)
+                self.widgets.image.set_from_stock(Gtk.STOCK_FILE,
+                                                  Gtk.IconSize.DIALOG)
 
     def on_buttonopen_clicked(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
@@ -74,7 +74,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonadd_clicked(self, widget):
         chooser = filechooser.MediaChooser(self._parent)
         response = chooser.run()
-        if response == gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             data = {
                 "pigeon": self.pigeon,
                 "path": chooser.get_filename(),
@@ -139,5 +139,5 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
                         % common.escape_text(description)
         return text
 
-    def _select_func(self, selection, model, path, is_selected):
+    def _select_func(self, selection, model, path, is_selected, data=None):
         return model[path][COL_SELECTABLE]

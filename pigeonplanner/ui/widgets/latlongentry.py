@@ -16,41 +16,41 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
-import gobject
+from gi.repository import Gtk
+from gi.repository import GObject
 
 from pigeonplanner.core import errors
 
 
-class LatLongEntry(gtk.Viewport):
+class LatLongEntry(Gtk.Viewport):
     __gtype_name__ = "LatLongEntry"
-    can_empty = gobject.property(type=bool, default=False, nick="Can empty")
+    can_empty = GObject.property(type=bool, default=False, nick="Can empty")
 
     def __init__(self, editable=False, can_empty=False):
-        gtk.Viewport.__init__(self)
+        Gtk.Viewport.__init__(self)
 
-        self._entry = gtk.Entry()
+        self._entry = Gtk.Entry()
 
-        self.can_empty = can_empty
-        self.editable = editable
+        self._can_empty = can_empty
+        self._editable = editable
         self.add(self._entry)
         self.show_all()
 
-        self._tooltip = _("Input should be in one of these formats:\n  "
-                          "DD.dddddd°\n  "
-                          "DD°MM.mmm’\n  "
-                          "DD°MM’SS.s”")
+        self._tooltip = _(u"Input should be in one of these formats:\n  "
+                          u"DD.dddddd°\n  "
+                          u"DD°MM.mmm’\n  "
+                          u"DD°MM’SS.s”")
 
     def get_editable(self):
         return self._editable
 
     def set_editable(self, editable):
         self._editable = editable
-        self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
+        self.set_shadow_type(Gtk.ShadowType.NONE if editable else Gtk.ShadowType.IN)
         self._entry.set_has_frame(editable)
         self._entry.set_editable(editable)
         self._entry.set_activates_default(editable)
-    editable = gobject.property(get_editable, set_editable, bool, False, "Editable")
+    editable = GObject.property(get_editable, set_editable, bool, False, "Editable")
 
     def set_text(self, text):
         self._entry.set_text(str(text))
@@ -65,11 +65,11 @@ class LatLongEntry(gtk.Viewport):
         return value
 
     def _warn(self):
-        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
-        self._entry.set_icon_tooltip_text(gtk.ENTRY_ICON_PRIMARY, self._tooltip)
+        self._entry.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, Gtk.STOCK_STOP)
+        self._entry.set_icon_tooltip_text(Gtk.EntryIconPosition.PRIMARY, self._tooltip)
 
     def _unwarn(self):
-        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
+        self._entry.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, None)
 
     def __validate(self, value, as_float=False):
         if self.can_empty and value == "":

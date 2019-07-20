@@ -26,7 +26,8 @@ import time
 import webbrowser
 import logging
 
-import gtk
+from gi.repository import Gtk
+from gi.repository import Gdk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import tabs
@@ -73,7 +74,7 @@ else:
     gtkosx = Application()
 
 
-class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
+class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component):
     ui = """
 <ui>
    <menubar name="MenuBar">
@@ -152,8 +153,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 </ui>
 """
 
-    def __init__(self):
-        gtk.Window.__init__(self)
+    def __init__(self, application):
+        Gtk.ApplicationWindow.__init__(self, application=application)
         builder.GtkBuilder.__init__(self, "MainWindow.ui")
         component.Component.__init__(self, "MainWindow")
 
@@ -175,9 +176,9 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         breedingtab = tabs.BreedingTab()
         mediatab = tabs.MediaTab()
         medicationtab = tabs.MedicationTab()
-        self._loaded_tabs = [pedigreetab, relativestab,
-                             self.resultstab, breedingtab,
-                             mediatab, medicationtab]
+        self._loaded_tabs = [
+            pedigreetab, relativestab, self.resultstab, breedingtab, mediatab, medicationtab
+        ]
         for tab in self._loaded_tabs:
             self.widgets.notebook.append_page(*tab.get_tab_widgets())
 
@@ -206,12 +207,12 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         self._dbman.connect("database-loaded", self.on_database_loaded)
         self._dbman.run(True)
 
-        self.widgets.database_infobar = gtk.InfoBar()
-        self.widgets.database_infobar.get_content_area().add(gtk.Label(_("Open a database to use the application.")))
-        self.widgets.database_infobar.add_button(_("Database manager"), gtk.RESPONSE_APPLY)
+        self.widgets.database_infobar = Gtk.InfoBar()
+        self.widgets.database_infobar.get_content_area().add(Gtk.Label(_("Open a database to use the application.")))
+        self.widgets.database_infobar.add_button(_("Database manager"), Gtk.ResponseType.APPLY)
         self.widgets.database_infobar.connect("response", lambda *args: self.widgets.DBMan.activate())
         self.widgets.database_infobar.show_all()
-        self.widgets.mainvbox.pack_start(self.widgets.database_infobar, False, False)
+        self.widgets.mainvbox.pack_start(self.widgets.database_infobar, False, False, 0)
 
         if gtkosx is not None:
             def osx_quit(*args):
@@ -256,7 +257,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
                     InfoDialog(messages.MSG_BACKUP_SUCCES, self)
                 config.set("backup.last", time.time())
         config.save()
-        gtk.main_quit()
+        self.get_application().quit()
 
     ####################
     # Callbacks
@@ -300,15 +301,15 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     # Menu callbacks
     def on_uimanager_connect_proxy(self, uimgr, action, widget):
         tooltip = action.get_property("tooltip")
-        if isinstance(widget, gtk.MenuItem) and tooltip:
+        if isinstance(widget, Gtk.MenuItem) and tooltip:
             widget.connect("select", self.on_menuitem_select, tooltip)
             widget.connect("deselect", self.on_menuitem_deselect)
 
     def on_menuitem_select(self, menuitem, tooltip):
-        self.widgets.statusbar.push(-1, tooltip)
+        self.widgets.statusbar.push(888, tooltip)
 
     def on_menuitem_deselect(self, menuitem):
-        self.widgets.statusbar.pop(-1)
+        self.widgets.statusbar.pop(888)
 
     def menudbman_activate(self, widget):
         self._dbman.run()
@@ -605,13 +606,13 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
 
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.menuedit_activate, None, None),
-                (gtk.STOCK_REMOVE, self.menuremove_activate, None, None),
+                (Gtk.STOCK_EDIT, self.menuedit_activate, None, None),
+                (Gtk.STOCK_REMOVE, self.menuremove_activate, None, None),
                 ("pedigree-detail", self.menupedigree_activate, None, None)
             ]
             selected = self.widgets.treeview.get_selected_pigeon()
             if isinstance(selected, Pigeon) and not selected.visible:
-                entries.append((gtk.STOCK_REVERT_TO_SAVED, self.restore_pigeon, (selected,), _("Restore")))
+                entries.append((Gtk.STOCK_REVERT_TO_SAVED, self.restore_pigeon, (selected,), _("Restore")))
             utils.popup_menu(event, entries)
 
     def restore_pigeon(self, widget, pigeon):
@@ -619,7 +620,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         pigeon.save()
 
     def on_treeview_key_press(self, treeview, event):
-        keyname = gtk.gdk.keyval_name(event.keyval)
+        keyname = Gdk.keyval_name(event.keyval)
         if keyname == "Delete":
             self.menuremove_activate(None)
         elif keyname == "Insert":
@@ -671,7 +672,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
     # Internal methods
     ####################
     def _build_menubar(self):
-        uimanager = gtk.UIManager()
+        uimanager = Gtk.UIManager()
         uimanager.add_ui_from_string(self.ui)
         uimanager.insert_action_group(self.widgets.actiongroup_main, 0)
         uimanager.insert_action_group(self.widgets.actiongroup_database, 0)
@@ -693,8 +694,8 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
         for name, widget in widget_dic.items():
             setattr(self.widgets, name, widget)
 
-        self.widgets.mainvbox.pack_start(self.widgets.menubar, False, False)
-        self.widgets.mainvbox.pack_start(self.widgets.toolbar, False, False)
+        self.widgets.mainvbox.pack_start(self.widgets.menubar, False, False, 0)
+        self.widgets.mainvbox.pack_start(self.widgets.toolbar, False, False, 0)
 
         if gtkosx is not None:
             logger.debug("Setting up Mac menubar")
@@ -708,7 +709,7 @@ class MainWindow(gtk.Window, builder.GtkBuilder, component.Component):
             upd = uimanager.get_widget("/MenuBar/HelpMenu/Update")
             prefs = uimanager.get_widget("/MenuBar/EditMenu/Preferences")
             gtkosx.insert_app_menu_item(about, 0)
-            gtkosx.insert_app_menu_item(gtk.SeparatorMenuItem(), 1)
+            gtkosx.insert_app_menu_item(Gtk.SeparatorMenuItem(), 1)
             gtkosx.insert_app_menu_item(upd, 2)
             gtkosx.insert_app_menu_item(prefs, 3)
 

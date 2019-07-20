@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
-
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../../..'))

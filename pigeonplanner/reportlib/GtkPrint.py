@@ -29,7 +29,7 @@
 # Python modules
 #
 #------------------------------------------------------------------------
-from gettext import gettext as _
+#from gettext import gettext as _
 
 ##try:
     ##from cStringIO import StringIO
@@ -60,10 +60,9 @@ log = logging.getLogger(".GtkPrint")
 #-------------------------------------------------------------------------
 import cairo
 try: # the Gramps-Connect server has no DISPLAY
-    import gtk
-    if gtk.pygtk_version < (2, 10, 0):
-        raise SystemExit(_("PyGtk 2.10 or later is required"))
-    import gobject
+    from gi.repository import GObject
+    from gi.repository import GLib
+    from gi.repository import Gtk
 except:
     pass
 
@@ -89,10 +88,11 @@ MARGIN = 6
  ZOOM_FREE,) = range(3)
 
 # Print actions
-PRINT_ACTION_DIALOG = gtk.PRINT_OPERATION_ACTION_PRINT_DIALOG
-PRINT_ACTION_PRINT = gtk.PRINT_OPERATION_ACTION_PRINT
-PRINT_ACTION_PREVIEW = gtk.PRINT_OPERATION_ACTION_PREVIEW
-PRINT_ACTION_EXPORT = gtk.PRINT_OPERATION_ACTION_EXPORT
+PRINT_ACTION_DIALOG = Gtk.PrintOperationAction.PRINT_DIALOG
+PRINT_ACTION_PRINT = Gtk.PrintOperationAction.PRINT
+PRINT_ACTION_PREVIEW = Gtk.PrintOperationAction.PREVIEW
+PRINT_ACTION_EXPORT = Gtk.PrintOperationAction.EXPORT
+
  
 #------------------------------------------------------------------------
 #
@@ -101,12 +101,12 @@ PRINT_ACTION_EXPORT = gtk.PRINT_OPERATION_ACTION_EXPORT
 #------------------------------------------------------------------------
 
 def paperstyle_to_pagesetup(paper_style):
-    """Convert a PaperStyle instance into a gtk.PageSetup instance.
-    
+    """Convert a PaperStyle instance into a Gtk.PageSetup instance.
+
     @param paper_style: Gramps paper style object to convert
     @param type: PaperStyle
     @return: page_setup
-    @rtype: gtk.PageSetup
+    @rtype: Gtk.PageSetup
     """
     # paper size names according to 'PWG Candidate Standard 5101.1-2002'
     # ftp://ftp.pwg.org/pub/pwg/candidates/cs-pwgmsn10-20020226-5101.1.pdf
@@ -135,12 +135,12 @@ def paperstyle_to_pagesetup(paper_style):
     # First set the paper size
     gramps_paper_size = paper_style.get_size()
     gramps_paper_name = gramps_paper_size.get_name()
-    
+
     # All sizes not included in the translation table (even if a standard size)
     # are handled as custom format, because we are not intelligent enough.
     if gramps_paper_name in gramps_to_gtk:
-        paper_size = gtk.PaperSize(gramps_to_gtk[gramps_paper_name])
-        log.debug("Selected paper size: %s" % gramps_to_gtk[gramps_paper_name])
+        paper_size = Gtk.PaperSize.new(name=gramps_to_gtk[gramps_paper_name])
+        log.debug("Selected paper size: %s", gramps_to_gtk[gramps_paper_name])
     else:
         if paper_style.get_orientation() == PAPER_PORTRAIT:
             paper_width = gramps_paper_size.get_width() * 10
@@ -148,34 +148,33 @@ def paperstyle_to_pagesetup(paper_style):
         else:
             paper_width = gramps_paper_size.get_height() * 10
             paper_height = gramps_paper_size.get_width() * 10
-        paper_size = gtk.paper_size_new_custom("custom",
-                                               "Custom Size",
-                                               paper_width,
-                                               paper_height,
-                                               gtk.UNIT_MM)
-        log.debug("Selected paper size: (%f,%f)" % (paper_width, paper_height))
-        
-    page_setup = gtk.PageSetup()
+        paper_size = Gtk.PaperSize.new_custom("custom", "Custom Size",
+                                              paper_width, paper_height,
+                                              Gtk.Unit.MM)
+        log.debug("Selected paper size: (%f,%f)", paper_width, paper_height)
+
+    page_setup = Gtk.PageSetup()
     page_setup.set_paper_size(paper_size)
-    
+
     # Set paper orientation
     if paper_style.get_orientation() == PAPER_PORTRAIT:
-        page_setup.set_orientation(gtk.PAGE_ORIENTATION_PORTRAIT)
+        page_setup.set_orientation(Gtk.PageOrientation.PORTRAIT)
     else:
-        page_setup.set_orientation(gtk.PAGE_ORIENTATION_LANDSCAPE)
+        page_setup.set_orientation(Gtk.PageOrientation.LANDSCAPE)
 
     # Set paper margins
     page_setup.set_top_margin(paper_style.get_top_margin() * 10,
-                              gtk.UNIT_MM)
+                              Gtk.Unit.MM)
     page_setup.set_bottom_margin(paper_style.get_bottom_margin() * 10,
-                                 gtk.UNIT_MM)
+                                 Gtk.Unit.MM)
     page_setup.set_left_margin(paper_style.get_left_margin() * 10,
-                               gtk.UNIT_MM)
+                               Gtk.Unit.MM)
     page_setup.set_right_margin(paper_style.get_right_margin() * 10,
-                                gtk.UNIT_MM)
-    
+                                Gtk.Unit.MM)
+
     return page_setup
-    
+
+
 #------------------------------------------------------------------------
 #
 # GtkPrint class
@@ -183,9 +182,9 @@ def paperstyle_to_pagesetup(paper_style):
 #------------------------------------------------------------------------
 class GtkPrint(libcairodoc.CairoDoc):
     """Print document via GtkPrint* interface.
-    
+
     Requires Gtk+ 2.10.
-    
+
     """
     def run(self, print_action):
         """Run the Gtk Print operation.
@@ -194,9 +193,9 @@ class GtkPrint(libcairodoc.CairoDoc):
 
         # get a page setup from the paper style we have
         page_setup = paperstyle_to_pagesetup(self.paper)
-        
+
         # set up a print operation
-        operation = gtk.PrintOperation()
+        operation = Gtk.PrintOperation()
         operation.set_default_page_setup(page_setup)
         operation.connect("begin_print", self.on_begin_print)
         operation.connect("draw_page", self.on_draw_page)
@@ -210,9 +209,13 @@ class GtkPrint(libcairodoc.CairoDoc):
         # run print dialog
         while True:
             self.preview = None
+            # res = operation.run(Gtk.PrintOperationAction.PRINT_DIALOG,
+            #                     self.uistate.window)
+            # if self.preview is None: # cancel or print
+            #     break
             try:
                 res = operation.run(print_action, self._parent)
-            except gobject.GError:
+            except GLib.GError:
                 # Windows only. Rare case where the user clicks cancel in the
                 # dialog to choose a filename for printing to a file.
                 res = None
@@ -220,7 +223,7 @@ class GtkPrint(libcairodoc.CairoDoc):
                 # cancel, print or non-printing action
                 break
             # set up printing again; can't reuse PrintOperation?
-            operation = gtk.PrintOperation()
+            operation = Gtk.PrintOperation()
             operation.set_default_page_setup(page_setup)
             operation.connect("begin_print", self.on_begin_print)
             operation.connect("draw_page", self.on_draw_page)
@@ -229,9 +232,9 @@ class GtkPrint(libcairodoc.CairoDoc):
             # set print settings if it was stored previously
             if PRINT_SETTINGS is not None:
                 operation.set_print_settings(PRINT_SETTINGS)
-        
+
         # store print settings if printing was successful
-        if res == gtk.PRINT_OPERATION_RESULT_APPLY:
+        if res == Gtk.PrintOperationResult.APPLY:
             PRINT_SETTINGS = operation.get_print_settings()
 
     def on_begin_print(self, operation, context):
@@ -242,7 +245,7 @@ class GtkPrint(libcairodoc.CairoDoc):
         self.page_height = round(context.get_height())
         self.dpi_x = context.get_dpi_x()
         self.dpi_y = context.get_dpi_y()
-        
+
     def on_paginate(self, operation, context):
         """Paginate the whole document in chunks.
         """
@@ -255,11 +258,11 @@ class GtkPrint(libcairodoc.CairoDoc):
                                  self.dpi_y)
         # update page number
         operation.set_n_pages(len(self._pages))
-        
+
         # start preview if needed
         if finished and self.preview:
             self.preview.start()
-            
+
         return finished
 
     def on_draw_page(self, operation, context, page_nr):
@@ -273,16 +276,16 @@ class GtkPrint(libcairodoc.CairoDoc):
         dpi_y = context.get_dpi_y()
 
         self.draw_page(page_nr, cr, layout, width, height, dpi_x, dpi_y)
-        
+
     def on_preview(self, operation, preview, context, parent):
         """Implement custom print preview functionality.
         """
         ##if constfunc.win()':
             ##return False
-            
+
         self.preview = PrintPreview(operation, preview, context, parent)
-        
-        # give a dummy cairo context to gtk.PrintContext,
+
+        # give a dummy cairo context to Gtk.PrintContext,
         # PrintPreview will update it with the real one
         try:
             width = int(round(context.get_width()))
@@ -295,5 +298,5 @@ class GtkPrint(libcairodoc.CairoDoc):
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
         cr = cairo.Context(surface)
         context.set_cairo_context(cr, PRINTER_DPI, PRINTER_DPI)
-        
+
         return True

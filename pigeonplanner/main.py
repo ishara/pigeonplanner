@@ -142,7 +142,8 @@ class Startup(object):
                     # to detect if we're running a py2exe'd package and the gtk
                     # interface is requested.
                     # Also shut up any code analysers...
-                    import gtk; gtk
+                    #import gtk; gtk  # TODO GTK3: is this still needed?
+                    pass
 
                 from ctypes import cdll
                 cdll.msvcrt._putenv("LANG=%s" % language)
@@ -208,7 +209,8 @@ def run(gtk_ui=True):
 
     if gtk_ui:
         from pigeonplanner.ui import gtkmain
-        gtkmain.run_ui(missing_libs)
+        app = gtkmain.Application(missing_libs)
+        app.run()
 
 
 if __name__ == "__main__":

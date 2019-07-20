@@ -16,18 +16,18 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
-import gobject
+from gi.repository import Gtk
+from gi.repository import GLib
 
 from pigeonplanner.ui import component
 
 
-class _TotalLabel(gtk.Label):
+class _TotalLabel(Gtk.Label):
     __gtype_name__ = "_TotalLabel"
     TEMPLATE = _("Pigeons: %s")
 
     def __init__(self):
-        gtk.Label.__init__(self)
+        Gtk.Label.__init__(self)
         self._value = None
 
     def get_value(self):
@@ -38,14 +38,14 @@ class _TotalLabel(gtk.Label):
         self.set_text(self.TEMPLATE % value)
 
 
-class _FilterLabel(gtk.Label):
+class _FilterLabel(Gtk.Label):
     __gtype_name__ = "_FilterLabel"
     TEMPLATE = _("Filter: %s")
     ON = "<b>%s</b>" % _("On")
     OFF = _("Off")
 
     def __init__(self):
-        gtk.Label.__init__(self)
+        Gtk.Label.__init__(self)
         self._value = None
 
     def get_value(self):
@@ -56,12 +56,15 @@ class _FilterLabel(gtk.Label):
         self.set_markup(self.TEMPLATE % (self.ON if value else self.OFF))
 
 
-class StatusBar(gtk.Statusbar, component.Component):
+class StatusBar(Gtk.Statusbar, component.Component):
     __gtype_name__ = "StatusBar"
 
     def __init__(self):
-        gtk.Statusbar.__init__(self)
+        Gtk.Statusbar.__init__(self)
         component.Component.__init__(self, "Statusbar")
+
+        self.set_margin_top(0)
+        self.set_margin_bottom(0)
 
         self._build_labels()
         self.show_all()
@@ -69,16 +72,12 @@ class StatusBar(gtk.Statusbar, component.Component):
     def _build_labels(self):
         total = self._total = _TotalLabel()
         self._filter = _FilterLabel()
-        filterbox = gtk.EventBox()
+        filterbox = Gtk.EventBox()
         filterbox.connect("button-press-event", self.on_filterbox_clicked)
         filterbox.add(self._filter)
-        try:
-            box = self.get_message_area()
-        except AttributeError:
-            # PyGTK < 2.22
-            return
-        box.pack_start(total, False, False)
-        box.pack_start(filterbox, False, False, 4)
+        box = self.get_message_area()
+        box.pack_end(total, False, False, 0)
+        box.pack_end(filterbox, False, False, 4)
 
     def on_filterbox_clicked(self, widget, event):
         #TODO
@@ -89,7 +88,7 @@ class StatusBar(gtk.Statusbar, component.Component):
             self.pop(0)
             return False
         self.push(0, message)
-        gobject.timeout_add_seconds(timeout, timer_cb)
+        GLib.timeout_add_seconds(timeout, timer_cb)
 
     def get_total(self):
         return self._total.get_value()

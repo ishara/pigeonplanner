@@ -18,7 +18,7 @@
 
 import mimetypes
 
-import gtk
+from gi.repository import Gtk
 
 
 class MimeIconError(Exception):
@@ -46,7 +46,7 @@ def get_basetype(mime):
     return mime.split("/")[0]
 
 
-_icontheme = gtk.icon_theme_get_default()
+_icontheme = Gtk.IconTheme.get_default()
 
 
 def get_pixbuf(mime):
@@ -66,8 +66,8 @@ def get_pixbuf(mime):
 
 def get_stock(mime):
     if is_directory(mime):
-        return gtk.STOCK_DIRECTORY
-    return gtk.STOCK_FILE
+        return Gtk.STOCK_DIRECTORY
+    return Gtk.STOCK_FILE
 
 
 def is_image(mime):

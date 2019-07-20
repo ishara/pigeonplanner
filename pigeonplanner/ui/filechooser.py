@@ -19,8 +19,9 @@
 import os
 from xml.sax.saxutils import escape
 
-import gtk
-import glib
+from gi.repository import Gtk
+from gi.repository import GLib
+from gi.repository import GdkPixbuf
 
 from pigeonplanner import mime
 from pigeonplanner.core import const
@@ -31,11 +32,11 @@ LAST_FOLDER = None
 
 ########
 # Main filechooser
-class _FileChooser(gtk.FileChooser):
+class _FileChooser(object):#Gtk.FileChooser):  # TODO GTK3: why does this fail?
     def _update_preview_cb(self, filechooser):
         filename = filechooser.get_preview_filename()
         try:
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128, 128)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
             self.preview_image.set_from_pixbuf(pixbuf)
         except:
             mimetype = mime.get_type(filename)
@@ -45,16 +46,16 @@ class _FileChooser(gtk.FileChooser):
             except mime.MimeIconError:
                 if filename is None:
                     return
-                stock = gtk.STOCK_FILE
+                stock = Gtk.STOCK_FILE
                 if os.path.isdir(filename):
-                    stock = gtk.STOCK_DIRECTORY
-                self.preview_image.set_from_stock(stock, gtk.ICON_SIZE_DIALOG)
+                    stock = Gtk.STOCK_DIRECTORY
+                self.preview_image.set_from_stock(stock, Gtk.IconSize.DIALOG)
         filechooser.set_preview_widget_active(True)
 
     def _create_preview_widget(self):
-        self.preview_image = gtk.Image()
-        frame = gtk.Frame(_("Preview"))
-        frame.set_shadow_type(gtk.SHADOW_ETCHED_IN)
+        self.preview_image = Gtk.Image()
+        frame = Gtk.Frame(label=_("Preview"))
+        frame.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         frame.add(self.preview_image)
         frame.show_all()
         return frame
@@ -67,7 +68,7 @@ class _FileChooser(gtk.FileChooser):
         self.set_use_preview_label(False)
 
     def get_filename(self):
-        filename = gtk.FileChooser.get_filename(self)
+        filename = Gtk.FileChooser.get_filename(self)
         # filename is None when no file is selected. So prevent returning
         # u"None" by only converting when needed.
         if filename is not None:
@@ -75,38 +76,38 @@ class _FileChooser(gtk.FileChooser):
 
     def get_current_folder(self):
         # TODO: deprecate this, use get_filename() instead (even for folders!)
-        return unicode(gtk.FileChooser.get_current_folder(self))
+        return unicode(Gtk.FileChooser.get_current_folder(self))
 
     def add_image_filter(self):
-        filter_ = gtk.FileFilter()
+        filter_ = Gtk.FileFilter()
         filter_.set_name(_("Images"))
         filter_.add_pixbuf_formats()
         self.add_filter(filter_)
 
     def add_pdf_filter(self):
-        filter_ = gtk.FileFilter()
+        filter_ = Gtk.FileFilter()
         filter_.set_name("PDF")
         filter_.add_pattern("*.pdf")
         self.add_filter(filter_)
 
     def add_text_filter(self):
-        filter_ = gtk.FileFilter()
+        filter_ = Gtk.FileFilter()
         filter_.set_name("Text (.txt)")
         filter_.add_pattern("*.txt")
         filter_.add_pattern("*.TXT")
         self.add_filter(filter_)
 
     def add_backup_filter(self):
-        filter_ = gtk.FileFilter()
+        filter_ = Gtk.FileFilter()
         filter_.set_name("Zip (.zip)")
         filter_.add_mime_type("zip/zip")
         filter_.add_pattern("*.zip")
         self.add_filter(filter_)
 
     def add_custom_filter(self, filter_):
-        class Filter(gtk.FileFilter):
+        class Filter(Gtk.FileFilter):
             def __init__(self, name, pattern):
-                gtk.FileFilter.__init__(self)
+                Gtk.FileFilter.__init__(self)
                 self.set_name(name)
                 self.add_pattern(pattern)
         name, pattern = filter_
@@ -116,11 +117,11 @@ class _FileChooser(gtk.FileChooser):
 
 ########
 # Dialogs
-class _FileChooserDialog(gtk.FileChooserDialog, _FileChooser):
+class _FileChooserDialog(Gtk.FileChooserDialog, _FileChooser):
     def __init__(self, parent=None, folder=const.HOMEDIR,
-                 action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True):
+                 action=Gtk.FileChooserAction.OPEN, preview=True):
         super(_FileChooserDialog, self).__init__(parent=parent, action=action)
-        self.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
+        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
         self.set_preview(preview)
         if LAST_FOLDER is not None:
             folder = LAST_FOLDER
@@ -129,7 +130,7 @@ class _FileChooserDialog(gtk.FileChooserDialog, _FileChooser):
         self.set_current_folder(folder)
 
     def do_response(self, response):
-        if response == gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             global LAST_FOLDER
             LAST_FOLDER = self.get_current_folder()
 
@@ -141,13 +142,13 @@ class ImageChooser(_FileChooserDialog):
     RESPONSE_CLEAR = -40
 
     def __init__(self, parent):
-        super(ImageChooser, self).__init__(parent, glib.get_user_special_dir(glib.USER_DIRECTORY_PICTURES))
+        super(ImageChooser, self).__init__(parent, GLib.get_user_special_dir(GLib.USER_DIRECTORY_PICTURES))
         self.set_title(_("Select an image..."))
         self.add_image_filter()
-        image = gtk.image_new_from_stock(gtk.STOCK_CLEAR, gtk.ICON_SIZE_BUTTON)
+        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
+        image = Gtk.Image.new_from_stock(Gtk.STOCK_CLEAR, Gtk.IconSize.BUTTON)
         buttonclear = self.add_button(_("No image"), self.RESPONSE_CLEAR)
         buttonclear.set_image(image)
-        self.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
 
 
 class MediaChooser(_FileChooserDialog):
@@ -158,7 +159,7 @@ class MediaChooser(_FileChooserDialog):
         super(MediaChooser, self).__init__(parent)
         self.connect("selection-changed", self._selection_changed_cb)
         self.set_title(_("Select a file..."))
-        self.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
         self.set_extra_widget(self._create_extra_widget())
 
     def _selection_changed_cb(self, filechooser):
@@ -168,20 +169,20 @@ class MediaChooser(_FileChooserDialog):
         self.entrytitle.set_text(os.path.splitext(os.path.basename(fname))[0])
 
     def _create_extra_widget(self):
-        labeltitle = gtk.Label(_("Title"))
+        labeltitle = Gtk.Label(_("Title"))
         labeltitle.set_alignment(0, .5)
-        self.entrytitle = gtk.Entry()
+        self.entrytitle = Gtk.Entry()
 
-        labeldesc = gtk.Label(_("Description"))
+        labeldesc = Gtk.Label(_("Description"))
         labeldesc.set_alignment(0, .5)
-        self.entrydescription = gtk.Entry()
+        self.entrydescription = Gtk.Entry()
 
-        table = gtk.Table(2, 2, False)
+        table = Gtk.Table(2, 2, False)
         table.set_row_spacings(4)
         table.set_col_spacings(8)
-        table.attach(labeltitle, 0, 1, 0, 1, gtk.FILL, 0)
+        table.attach(labeltitle, 0, 1, 0, 1, Gtk.AttachOptions.FILL, 0)
         table.attach(self.entrytitle, 1, 2, 0, 1)
-        table.attach(labeldesc, 0, 1, 1, 2, gtk.FILL, 0)
+        table.attach(labeldesc, 0, 1, 1, 2, Gtk.AttachOptions.FILL, 0)
         table.attach(self.entrydescription, 1, 2, 1, 2)
         table.show_all()
         return table
@@ -202,10 +203,10 @@ class PdfSaver(_FileChooserDialog):
 
     def __init__(self, parent, pdf_name):
         super(PdfSaver, self).__init__(parent, preview=False,
-                                       action=gtk.FILE_CHOOSER_ACTION_SAVE)
+                                       action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
         self.add_pdf_filter()
-        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
         self.set_current_name(pdf_name)
 
 
@@ -215,10 +216,10 @@ class BackupSaver(_FileChooserDialog):
 
     def __init__(self, parent, backup_name):
         super(BackupSaver, self).__init__(parent, preview=False,
-                                          action=gtk.FILE_CHOOSER_ACTION_SAVE)
+                                          action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
         self.add_backup_filter()
-        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
         self.set_current_name(backup_name)
 
 
@@ -228,10 +229,10 @@ class ExportChooser(_FileChooserDialog):
 
     def __init__(self, parent, filename, filter_):
         super(ExportChooser, self).__init__(parent, preview=False,
-                                            action=gtk.FILE_CHOOSER_ACTION_SAVE)
+                                            action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
         self.add_custom_filter(filter_)
-        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
         self.set_current_name(filename)
 
 
@@ -241,9 +242,9 @@ class PathChooserDialog(_FileChooserDialog):
 
     def __init__(self, parent, folder):
         super(PathChooserDialog, self).__init__(parent, preview=False, folder=folder,
-                                                action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+                                                action=Gtk.FileChooserAction.SELECT_FOLDER)
         self.set_title(_("Select a folder..."))
-        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
 
 
 class DatabasePathChooserDialog(_FileChooserDialog):
@@ -252,16 +253,16 @@ class DatabasePathChooserDialog(_FileChooserDialog):
 
     def __init__(self, parent, folder=const.PREFDIR):
         super(DatabasePathChooserDialog, self).__init__(parent, preview=False, folder=folder,
-                                                        action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+                                                        action=Gtk.FileChooserAction.SELECT_FOLDER)
         self.set_title(_("Select a folder..."))
-        self.add_button(gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
 
-        image_info = gtk.image_new_from_stock(gtk.STOCK_INFO, gtk.ICON_SIZE_BUTTON)
-        label_info = gtk.Label()
+        image_info = Gtk.Image.new_from_stock(Gtk.STOCK_INFO, Gtk.IconSize.BUTTON)
+        label_info = Gtk.Label()
         label_info.set_markup("%s <b>%s</b>" % (_("The default location is:"), escape(const.PREFDIR)))
-        button_info = gtk.Button(_("Select"))
+        button_info = Gtk.Button(_("Select"))
         button_info.connect("clicked", self.on_button_default_path_clicked)
-        box_info = gtk.HBox(spacing=4)
+        box_info = Gtk.HBox(spacing=4)
         box_info.pack_start(image_info, False, False, 0)
         box_info.pack_start(label_info, False, False, 0)
         box_info.pack_start(button_info, False, False, 0)
@@ -275,9 +276,9 @@ class DatabasePathChooserDialog(_FileChooserDialog):
 ########
 # Buttons
 # General
-class _FileChooserButton(gtk.FileChooserButton, _FileChooser):
+class _FileChooserButton(Gtk.FileChooserButton, _FileChooser):
     def __init__(self, folder=const.HOMEDIR,
-                 action=gtk.FILE_CHOOSER_ACTION_OPEN, preview=True, dialog=None):
+                 action=Gtk.FileChooserAction.OPEN, preview=True, dialog=None):
         if dialog is None:
             super(_FileChooserButton, self).__init__("")
         else:
@@ -293,7 +294,7 @@ class PathChooser(_FileChooserButton):
 
     def __init__(self, title=None, dialog=None):
         super(PathChooser, self).__init__(preview=False, dialog=dialog,
-                                          action=gtk.FILE_CHOOSER_ACTION_SELECT_FOLDER)
+                                          action=Gtk.FileChooserAction.SELECT_FOLDER)
         if title is None:
             title = _("Select a folder...")
         self.set_title(title)

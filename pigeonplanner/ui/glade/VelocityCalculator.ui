@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
 <interface>
-  <!-- interface-requires pigeonplannerwidgets 0.0 -->
-  <requires lib="gtk+" version="2.20"/>
-  <!-- interface-naming-policy project-wide -->
+  <requires lib="gtk+" version="3.20"/>
+  <requires lib="pigeonplannerwidgets" version="0.0"/>
   <object class="GtkAdjustment" id="adjustment11">
     <property name="upper">60</property>
     <property name="step_increment">1</property>
@@ -100,13 +100,17 @@
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <signal name="delete-event" handler="close_window" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
+      <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="actionarea">
+          <object class="GtkButtonBox" id="actionarea">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
@@ -171,8 +175,8 @@
                   <object class="GtkLabel" id="label5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">0.049999997019767761</property>
                     <property name="label" translatable="yes">Distance</property>
+                    <property name="xalign">0.049999997019767761</property>
                   </object>
                   <packing>
                     <property name="top_attach">1</property>
@@ -185,8 +189,8 @@
                   <object class="GtkLabel" id="label18">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">0.049999997019767761</property>
                     <property name="label" translatable="yes">Time</property>
+                    <property name="xalign">0.049999997019767761</property>
                   </object>
                   <packing>
                     <property name="x_options">GTK_FILL</property>
@@ -197,8 +201,8 @@
                   <object class="GtkLabel" id="label19">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">0.05000000074505806</property>
                     <property name="label" translatable="yes">Velocity</property>
+                    <property name="xalign">0.05000000074505806</property>
                   </object>
                   <packing>
                     <property name="top_attach">2</property>
@@ -237,8 +241,6 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment7</property>
                         <property name="numeric">True</property>
                       </object>
@@ -267,8 +269,6 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment8</property>
                         <property name="numeric">True</property>
                         <signal name="value-changed" handler="on_spinbutton_time_changed" swapped="no"/>
@@ -298,8 +298,6 @@
                         <property name="invisible_char">•</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment9</property>
                         <property name="numeric">True</property>
                         <signal name="value-changed" handler="on_spinbutton_time_changed" swapped="no"/>
@@ -407,8 +405,6 @@
                         <property name="shadow_type">none</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
                       </object>
                     </child>
                   </object>
@@ -458,11 +454,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
-                        <property name="invisible_char_set">True</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment_velocity_distance</property>
                         <property name="climb_rate">5</property>
                         <property name="digits">2</property>
@@ -536,8 +529,8 @@
                       <object class="GtkLabel" id="label13">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0.05000000074505806</property>
                         <property name="label" translatable="yes">Distance</property>
+                        <property name="xalign">0.05000000074505806</property>
                       </object>
                       <packing>
                         <property name="top_attach">1</property>
@@ -551,8 +544,8 @@
                       <object class="GtkLabel" id="label14">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0.05000000074505806</property>
                         <property name="label" translatable="yes">Released</property>
+                        <property name="xalign">0.05000000074505806</property>
                       </object>
                       <packing>
                         <property name="x_options">GTK_FILL</property>
@@ -564,8 +557,8 @@
                       <object class="GtkLabel" id="label15">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="xalign">0.05000000074505806</property>
                         <property name="label" translatable="yes">Range</property>
+                        <property name="xalign">0.05000000074505806</property>
                       </object>
                       <packing>
                         <property name="top_attach">2</property>
@@ -625,8 +618,6 @@
                             <property name="width_chars">4</property>
                             <property name="primary_icon_activatable">False</property>
                             <property name="secondary_icon_activatable">False</property>
-                            <property name="primary_icon_sensitive">True</property>
-                            <property name="secondary_icon_sensitive">True</property>
                             <property name="adjustment">adjustment5</property>
                             <property name="snap_to_ticks">True</property>
                             <property name="numeric">True</property>
@@ -660,8 +651,6 @@
                             <property name="width_chars">4</property>
                             <property name="primary_icon_activatable">False</property>
                             <property name="secondary_icon_activatable">False</property>
-                            <property name="primary_icon_sensitive">True</property>
-                            <property name="secondary_icon_sensitive">True</property>
                             <property name="adjustment">adjustment4</property>
                             <property name="snap_to_ticks">True</property>
                             <property name="numeric">True</property>
@@ -696,8 +685,6 @@
                             <property name="width_chars">4</property>
                             <property name="primary_icon_activatable">False</property>
                             <property name="secondary_icon_activatable">False</property>
-                            <property name="primary_icon_sensitive">True</property>
-                            <property name="secondary_icon_sensitive">True</property>
                             <property name="adjustment">adjustment11</property>
                             <property name="snap_to_ticks">True</property>
                             <property name="numeric">True</property>
@@ -806,8 +793,6 @@
                             <property name="width_chars">6</property>
                             <property name="primary_icon_activatable">False</property>
                             <property name="secondary_icon_activatable">False</property>
-                            <property name="primary_icon_sensitive">True</property>
-                            <property name="secondary_icon_sensitive">True</property>
                             <property name="adjustment">adjustment3</property>
                             <property name="snap_to_ticks">True</property>
                             <property name="numeric">True</property>
@@ -841,8 +826,6 @@
                             <property name="width_chars">6</property>
                             <property name="primary_icon_activatable">False</property>
                             <property name="secondary_icon_activatable">False</property>
-                            <property name="primary_icon_sensitive">True</property>
-                            <property name="secondary_icon_sensitive">True</property>
                             <property name="adjustment">adjustment2</property>
                             <property name="snap_to_ticks">True</property>
                             <property name="numeric">True</property>
@@ -901,11 +884,8 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">•</property>
-                            <property name="invisible_char_set">True</property>
                             <property name="primary_icon_activatable">False</property>
                             <property name="secondary_icon_activatable">False</property>
-                            <property name="primary_icon_sensitive">True</property>
-                            <property name="secondary_icon_sensitive">True</property>
                             <property name="adjustment">adjustment6</property>
                             <property name="climb_rate">5</property>
                             <property name="digits">2</property>
@@ -959,8 +939,6 @@
                   <object class="GtkScrolledWindow" id="scrolledwindow3">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">automatic</property>
-                    <property name="vscrollbar_policy">automatic</property>
                     <property name="shadow_type">etched-in</property>
                     <child>
                       <object class="GtkTreeView" id="tv_velocity">
@@ -969,6 +947,9 @@
                         <property name="model">ls_velocity</property>
                         <property name="headers_clickable">False</property>
                         <property name="search_column">0</property>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection"/>
+                        </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn7">
                             <property name="title" translatable="yes">Velocity</property>
@@ -1055,13 +1036,17 @@
     <property name="skip_pager_hint">True</property>
     <property name="transient_for">velocitywindow</property>
     <signal name="delete-event" handler="on_dialog_delete_event" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox2">
+      <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area2">
+          <object class="GtkButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
@@ -1118,8 +1103,6 @@
                   <object class="GtkScrolledWindow" id="scrolledwindow1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">automatic</property>
-                    <property name="vscrollbar_policy">automatic</property>
                     <property name="shadow_type">in</property>
                     <child>
                       <object class="GtkTreeView" id="tv_distance">
@@ -1128,6 +1111,9 @@
                         <property name="model">ls_distance</property>
                         <property name="rules_hint">True</property>
                         <property name="search_column">0</property>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection"/>
+                        </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeviewcolumn1">
                             <property name="sizing">autosize</property>

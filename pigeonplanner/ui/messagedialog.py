@@ -16,13 +16,13 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
+from gi.repository import Gtk
 
 
-class _MessageDialog(gtk.MessageDialog):
+class _MessageDialog(Gtk.MessageDialog):
     def __init__(self, parent, msg, msgtype, buttons, extra):
-        gtk.MessageDialog.__init__(self, parent,
-                                   flags=gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+        Gtk.MessageDialog.__init__(self, parent,
+                                   flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
                                    type=msgtype)
 
         head, secondary, title = msg
@@ -37,39 +37,39 @@ class _MessageDialog(gtk.MessageDialog):
 
 class ErrorDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
-        _MessageDialog.__init__(self, parent, msg, gtk.MESSAGE_ERROR,
-                                (gtk.STOCK_OK, gtk.RESPONSE_OK), extra)
+        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.ERROR,
+                                (Gtk.STOCK_OK, Gtk.ResponseType.OK), extra)
         self.run()
         self.destroy()
 
 
 class InfoDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
-        _MessageDialog.__init__(self, parent, msg, gtk.MESSAGE_INFO,
-                                (gtk.STOCK_OK, gtk.RESPONSE_OK), extra)
+        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.INFO,
+                                (Gtk.STOCK_OK, Gtk.ResponseType.OK), extra)
         self.run()
         self.destroy()
 
 
 class WarningDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
-        _MessageDialog.__init__(self, parent, msg, gtk.MESSAGE_WARNING,
-                                (gtk.STOCK_NO, gtk.RESPONSE_NO,
-                                 gtk.STOCK_YES, gtk.RESPONSE_YES), extra)
+        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.WARNING,
+                                (Gtk.STOCK_NO, Gtk.ResponseType.NO,
+                                 Gtk.STOCK_YES, Gtk.ResponseType.YES), extra)
 
     def run(self):
         response = _MessageDialog.run(self)
         self.destroy()
-        return response == gtk.RESPONSE_YES
+        return response == Gtk.ResponseType.YES
 
 
 class QuestionDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
-        _MessageDialog.__init__(self, parent, msg, gtk.MESSAGE_QUESTION,
-                                (gtk.STOCK_NO, gtk.RESPONSE_NO,
-                                 gtk.STOCK_YES, gtk.RESPONSE_YES), extra)
+        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.QUESTION,
+                                (Gtk.STOCK_NO, Gtk.ResponseType.NO,
+                                 Gtk.STOCK_YES, Gtk.ResponseType.YES), extra)
 
     def run(self):
         response = _MessageDialog.run(self)
         self.destroy()
-        return response == gtk.RESPONSE_YES
+        return response == Gtk.ResponseType.YES

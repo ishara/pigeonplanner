@@ -19,8 +19,8 @@
 import os
 from xml.sax.saxutils import escape
 
-import gtk
-import gobject
+from gi.repository import Gtk
+from gi.repository import GObject
 
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
@@ -42,25 +42,25 @@ class DBFileChooserDialog(filechooser._FileChooserDialog):
     def __init__(self, parent):
         super(DBFileChooserDialog, self).__init__(parent, preview=False)
         self.set_title(_("Select a database file..."))
-        self.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
+        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
         self.set_extra_widget(self._create_extra_widget())
         self.add_custom_filter((_("Pigeon Planner database"), "pigeonplanner*.db"))
 
     def _create_extra_widget(self):
-        labeltitle = gtk.Label(_("Name"))
+        labeltitle = Gtk.Label(_("Name"))
         labeltitle.set_alignment(0, .5)
-        self.entryname = gtk.Entry()
+        self.entryname = Gtk.Entry()
 
-        labeldesc = gtk.Label(_("Description"))
+        labeldesc = Gtk.Label(_("Description"))
         labeldesc.set_alignment(0, .5)
-        self.entrydescription = gtk.Entry()
+        self.entrydescription = Gtk.Entry()
 
-        table = gtk.Table(2, 2, False)
+        table = Gtk.Table(2, 2, False)
         table.set_row_spacings(4)
         table.set_col_spacings(8)
-        table.attach(labeltitle, 0, 1, 0, 1, gtk.FILL, 0)
+        table.attach(labeltitle, 0, 1, 0, 1, Gtk.AttachOptions.FILL, 0)
         table.attach(self.entryname, 1, 2, 0, 1)
-        table.attach(labeldesc, 0, 1, 1, 2, gtk.FILL, 0)
+        table.attach(labeldesc, 0, 1, 1, 2, Gtk.AttachOptions.FILL, 0)
         table.attach(self.entrydescription, 1, 2, 1, 2)
         table.show_all()
         return table
@@ -72,8 +72,8 @@ class DBFileChooserDialog(filechooser._FileChooserDialog):
         return self.entrydescription.get_text()
 
 
-class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
-    __gsignals__ = {"database-loaded": (gobject.SIGNAL_RUN_LAST, None, ())}
+class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
+    __gsignals__ = {"database-loaded": (GObject.SIGNAL_RUN_LAST, None, ())}
 
     (COL_OBJ,
      COL_ICON,
@@ -84,7 +84,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
 
     def __init__(self, parent=None):
         builder.GtkBuilder.__init__(self, "DBManager.ui")
-        gobject.GObject.__init__(self)
+        GObject.GObject.__init__(self)
         component.Component.__init__(self, "DBManager")
 
         dbmanager.prompt_do_upgrade = self._prompt_do_upgrade
@@ -132,8 +132,8 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
 
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.on_edit_clicked, None, None),
-                (gtk.STOCK_REMOVE, self.on_remove_clicked, None, None)]
+                (Gtk.STOCK_EDIT, self.on_edit_clicked, None, None),
+                (Gtk.STOCK_REMOVE, self.on_remove_clicked, None, None)]
             utils.popup_menu(event, entries)
 
     def on_treeview_row_activated(self, widget, path, view_column):
@@ -173,7 +173,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
         dialog = DBFileChooserDialog(self.widgets.dialog)
         while True:
             response = dialog.run()
-            if response == gtk.RESPONSE_OK:
+            if response == Gtk.ResponseType.OK:
                 name = dialog.get_db_name()
                 description = dialog.get_db_description()
                 path = dialog.get_filename()
@@ -278,7 +278,7 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
 
         while True:
             response = dialog.run()
-            if response == gtk.RESPONSE_OK:
+            if response == Gtk.ResponseType.OK:
                 path = dialog.get_filename()
                 try:
                     dbobj = dbmanager.move(dbobj, path)
@@ -352,9 +352,9 @@ class DBManagerWindow(builder.GtkBuilder, gobject.GObject, component.Component):
     def _dbobj_liststore_info(self, dbobj):
         icon = None
         if not dbobj.exists or not dbobj.writable:
-            icon = gtk.STOCK_DIALOG_ERROR
+            icon = Gtk.STOCK_DIALOG_ERROR
         elif dbobj.path == session.dbfile:
-            icon = gtk.STOCK_YES
+            icon = Gtk.STOCK_YES
 
         info = self._format_info(dbobj.name, dbobj.description, dbobj.path)
         modified = "%s\n%s" % tuple(dbobj.last_access.split())

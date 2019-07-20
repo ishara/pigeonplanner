@@ -22,7 +22,8 @@ Provides an interface to draw the pedigree
 """
 
 
-import gtk
+from gi.repository import Gtk
+from gi.repository import Gdk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
@@ -33,10 +34,6 @@ from pigeonplanner.ui.messagedialog import InfoDialog
 from pigeonplanner.core import const
 from pigeonplanner.core import enums
 from pigeonplanner.core import pigeon as corepigeon
-
-
-# TODO: Cairo-drawn boxes mess up window drawing on Mac OS X
-cairo_available = not const.OSX
 
 
 class DrawPedigree(object):
@@ -52,29 +49,29 @@ class DrawPedigree(object):
         if detailed:
             if not box.editable:
                 return
-            if event.button == 1:
+            if event.button == Gdk.BUTTON_PRIMARY:
                 self._edit_pigeon_details(None, box.pigeon, box.child,
                                           box.get_sex(), parent)
-            elif event.button == 3:
-                entries = [(gtk.STOCK_EDIT, self._edit_pigeon_details,
+            elif event.button == Gdk.BUTTON_SECONDARY:
+                entries = [(Gtk.STOCK_EDIT, self._edit_pigeon_details,
                             (box.pigeon, box.child, box.get_sex(), parent), None)]
                 if box.pigeon is not None:
-                    entries.insert(0, (gtk.STOCK_INFO, self._show_pigeon_details,
+                    entries.insert(0, (Gtk.STOCK_INFO, self._show_pigeon_details,
                                    (box.pigeon, parent), None))
                     if not box.pigeon.visible:
-                        entries.append((gtk.STOCK_CLEAR, self._clear_box,
+                        entries.append((Gtk.STOCK_CLEAR, self._clear_box,
                                         (box.pigeon, box.child), None))
-                        entries.append((gtk.STOCK_REMOVE, self._remove_pigeon,
+                        entries.append((Gtk.STOCK_REMOVE, self._remove_pigeon,
                                         (box.pigeon, box.child), None))
         else:
             if box.textlayout.get_text() == "":
                 return
-            if event.button == 1:
+            if event.button == Gdk.BUTTON_PRIMARY:
                 self._show_pigeon_details(None, box.pigeon, parent)
-            elif event.button == 3:
+            elif event.button == Gdk.BUTTON_SECONDARY:
                 entries = [
-                    (gtk.STOCK_INFO, self._show_pigeon_details, (box.pigeon, parent), None),
-                    (gtk.STOCK_JUMP_TO, self._select_pigeon, (box.pigeon, parent), None),
+                    (Gtk.STOCK_INFO, self._show_pigeon_details, (box.pigeon, parent), None),
+                    (Gtk.STOCK_JUMP_TO, self._select_pigeon, (box.pigeon, parent), None),
                 ]
         if entries is not None:
             utils.popup_menu(event, entries)
@@ -137,7 +134,7 @@ class DrawPedigree(object):
     # Internal methods
     def _draw(self, table, positions, lst, sex, detailed):
         for child in table.get_children():
-            if isinstance(child, gtk.DrawingArea):
+            if isinstance(child, Gtk.DrawingArea):
                 child.destroy()
 
         for index, position in enumerate(positions):
@@ -155,10 +152,7 @@ class DrawPedigree(object):
             else:
                 child = self.pigeon if index == 0 else lst[(index - 1) / 2]
 
-            if cairo_available:
-                box = pedigreeboxes.PedigreeBox(pigeon, child, detailed)
-            else:
-                box = pedigreeboxes.PedigreeBox_gdk(pigeon, child, detailed)
+            box = pedigreeboxes.PedigreeBox(pigeon, child, detailed)
             try:
                 sex = pigeon.sex
             except AttributeError:
@@ -177,10 +171,7 @@ class DrawPedigree(object):
                 else:
                     lines = 1
                     attach = 1
-                if cairo_available:
-                    extrabox = pedigreeboxes.ExtraBox(pigeon, lines)
-                else:
-                    extrabox = pedigreeboxes.ExtraBox_gdk(pigeon, lines)
+                extrabox = pedigreeboxes.ExtraBox(pigeon, lines)
                 table.attach(extrabox, x, y, w+1, h+attach)
 
             if position[1]:
@@ -192,13 +183,13 @@ class DrawPedigree(object):
                 y = position[1][0][0]
                 h = position[1][0][1]
                 line_up = pedigreeboxes.PedigreeLine()
-                line_up.set_data("idx", index*2+1)
+                line_up.idx = index*2+1
                 table.attach(line_up, left, right, y, y+h)
 
                 y = position[1][1][0]
                 h = position[1][1][1]
                 line_down = pedigreeboxes.PedigreeLine()
-                line_down.set_data("idx", index*2+2)
+                line_down.idx = index*2+2
                 table.attach(line_down, left, right, y, y+h)
 
         table.show_all()

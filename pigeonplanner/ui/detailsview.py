@@ -18,9 +18,11 @@
 
 import logging
 
-import gtk
-import gtk.gdk
-import gobject
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GLib
+from gi.repository import GObject
+from gi.repository import GdkPixbuf
 
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
@@ -46,28 +48,28 @@ RESPONSE_EDIT = 10
 RESPONSE_SAVE = 12
 
 
-class DetailsDialog(gtk.Dialog):
+class DetailsDialog(Gtk.Dialog):
     def __init__(self, pigeon=None, parent=None, mode=None):
-        gtk.Dialog.__init__(self, None, parent, gtk.DIALOG_MODAL)
+        Gtk.Dialog.__init__(self, None, parent, Gtk.DialogFlags.MODAL)
 
         if parent is None:
-            self.set_position(gtk.WIN_POS_MOUSE)
+            self.set_position(Gtk.WindowPosition.MOUSE)
 
         if mode in (enums.Action.edit, enums.Action.add):
             self.details = DetailsViewEdit(parent=self, pigeon=pigeon)
             self.details.start_edit(mode)
-            self.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                             gtk.STOCK_SAVE, RESPONSE_SAVE)
+            self.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                             Gtk.STOCK_SAVE, RESPONSE_SAVE)
             self.set_default_response(RESPONSE_SAVE)
             self.set_resizable(True)
             self.resize(620, 1)
         else:
             self.details = DetailsView(parent=self)
             self.details.set_details(pigeon)
-            self.add_buttons(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
-            self.set_default_response(gtk.RESPONSE_CLOSE)
+            self.add_button(Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE)
+            self.set_default_response(Gtk.ResponseType.CLOSE)
             self.set_resizable(False)
-        self.vbox.pack_start(self.details.get_root_widget(), False, False)
+        self.vbox.pack_start(self.details.get_root_widget(), False, False, 0)
 
         if pigeon is None:
             title = _("Details of pigeon")
@@ -84,28 +86,29 @@ class DetailsDialog(gtk.Dialog):
 
     def on_dialog_response(self, dialog, response_id):
         keep_alive = False
-        if response_id in (gtk.RESPONSE_CLOSE, gtk.RESPONSE_DELETE_EVENT):
+        if response_id in (Gtk.ResponseType.CLOSE, Gtk.ResponseType.DELETE_EVENT):
             pass
         elif response_id == RESPONSE_SAVE:
             keep_alive = self.details.operation_saved()
-        elif response_id == gtk.RESPONSE_CANCEL:
+        elif response_id == Gtk.ResponseType.CANCEL:
             self.details.operation_cancelled()
 
         if not keep_alive:
             dialog.destroy()
 
 
-class PigeonImageWidget(gtk.EventBox):
+class PigeonImageWidget(Gtk.EventBox):
     def __init__(self, editable, view, parent=None):
-        gtk.EventBox.__init__(self)
+        Gtk.EventBox.__init__(self)
         if editable:
             self.connect("button-press-event", self.on_editable_button_press_event)
         else:
             self.connect("button-press-event", self.on_button_press_event)
 
+        self._logo_pb = GdkPixbuf.Pixbuf.new_from_file_at_size(const.LOGO_IMG, 75, 75)
         self._view = view
         self._parent = parent
-        self._imagewidget = gtk.Image()
+        self._imagewidget = Gtk.Image.new_from_pixbuf(self._logo_pb)
         self._imagewidget.set_size_request(200, 200)
         self.add(self._imagewidget)
         self._imagepath = ""
@@ -114,14 +117,14 @@ class PigeonImageWidget(gtk.EventBox):
     def on_button_press_event(self, widget, event):
         if self._view.pigeon is None:
             return
-        parent = None if isinstance(self._parent, gtk.Dialog) else self._parent
+        parent = None if isinstance(self._parent, Gtk.Dialog) else self._parent
         tools.PhotoAlbum(parent, self._view.pigeon.main_image)
 
     def on_editable_button_press_event(self, widget, event):
-        if event.button == 3:
+        if event.button == Gdk.BUTTON_SECONDARY:
             entries = [
-                (gtk.STOCK_ADD, self.on_open_imagechooser, None, None),
-                (gtk.STOCK_REMOVE, self.set_default_image, None, None)]
+                (Gtk.STOCK_ADD, self.on_open_imagechooser, None, None),
+                (Gtk.STOCK_REMOVE, self.set_default_image, None, None)]
             utils.popup_menu(event, entries)
         else:
             self.on_open_imagechooser()
@@ -129,11 +132,11 @@ class PigeonImageWidget(gtk.EventBox):
     def on_open_imagechooser(self, widget=None):
         chooser = filechooser.ImageChooser(self._parent)
         response = chooser.run()
-        if response == gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             filename = chooser.get_filename()
             try:
-                pb = gtk.gdk.pixbuf_new_from_file_at_size(filename, 200, 200)
-            except gobject.GError as exc:
+                pb = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 200, 200)
+            except GLib.GError as exc:
                 logger.error("Can't set image '%s':%s", filename, exc)
                 ErrorDialog(messages.MSG_INVALID_IMAGE, self._parent)
             else:
@@ -144,8 +147,7 @@ class PigeonImageWidget(gtk.EventBox):
         chooser.destroy()
 
     def set_default_image(self, widget=None):
-        logo = gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
-        self._imagewidget.set_from_pixbuf(logo)
+        self._imagewidget.set_from_pixbuf(self._logo_pb)
         self._imagepath = ""
 
     def set_image(self, image=None):
@@ -290,7 +292,7 @@ class StatusButton(builder.GtkBuilder):
 
     def set_editable(self, value):
         def set_editable(widget, value):
-            if isinstance(widget, gtk.ScrolledWindow):
+            if isinstance(widget, Gtk.ScrolledWindow):
                 set_editable(widget.get_child(), value)
             if isinstance(widget, bandentry.BandEntry):
                 widget.set_has_search(value)
@@ -324,11 +326,6 @@ class DetailsView(builder.GtkBuilder, component.Component):
         self.widgets.table.attach(sb.widget, 2, 3, 2, 3)
 
         self.widgets.root_view.show_all()
-
-        # Reduce the inner borders vertically for the extra entries
-        border = gtk.Border(top=1, bottom=1)
-        for x in range(1, 7):
-            getattr(self.widgets, "entryextra%s" % x).set_inner_border(border)
 
     # Public methods
     def get_root_widget(self):
@@ -386,16 +383,16 @@ class DetailsView(builder.GtkBuilder, component.Component):
             text.get_buffer().set_text("")
 
 
-class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
-    __gsignals__ = {"edit-finished": (gobject.SIGNAL_RUN_LAST,
+class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
+    __gsignals__ = {"edit-finished": (GObject.SIGNAL_RUN_LAST,
                                       None, (object, int)),
-                    "edit-cancelled": (gobject.SIGNAL_RUN_LAST,
+                    "edit-cancelled": (GObject.SIGNAL_RUN_LAST,
                                        None, ()),
                     }
 
     def __init__(self, parent=None, pigeon=None):
         builder.GtkBuilder.__init__(self, "DetailsView.ui", ["root_edit"])
-        gobject.GObject.__init__(self)
+        GObject.GObject.__init__(self)
 
         self.parent = parent or component.get("MainWindow")
         self.pigeon = pigeon
@@ -460,10 +457,10 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
             "dam": dam,
             "visible": visible,
             "sex": self.widgets.combosex.get_sex(),
-            "colour": self.widgets.combocolour.child.get_text(),
+            "colour": self.widgets.combocolour.get_child().get_text(),
             "name": self.widgets.entrynameedit.get_text(),
-            "strain": self.widgets.combostrain.child.get_text(),
-            "loft": self.widgets.comboloft.child.get_text(),
+            "strain": self.widgets.combostrain.get_child().get_text(),
+            "loft": self.widgets.comboloft.get_child().get_text(),
             "image": self.widgets.pigeonimage_edit.get_image_path(),
             "extra1": self.widgets.entryextraedit1.get_text(),
             "extra2": self.widgets.entryextraedit2.get_text(),
@@ -479,9 +476,9 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
         self.widgets.entrysireedit.clear()
         self.widgets.entrydamedit.clear()
 
-        self.widgets.combocolour.child.set_text("")
-        self.widgets.combostrain.child.set_text("")
-        self.widgets.comboloft.child.set_text("")
+        self.widgets.combocolour.get_child().set_text("")
+        self.widgets.combostrain.get_child().set_text("")
+        self.widgets.comboloft.get_child().set_text("")
         self.widgets.combosex.set_active(0)
 
         self.widgets.statusbuttonedit.set_default()
@@ -506,9 +503,9 @@ class DetailsViewEdit(builder.GtkBuilder, gobject.GObject):
             self.widgets.entryextraedit4.set_text(extra[3])
             self.widgets.entryextraedit5.set_text(extra[4])
             self.widgets.entryextraedit6.set_text(extra[5])
-            self.widgets.combocolour.child.set_text(self.pigeon.colour)
-            self.widgets.combostrain.child.set_text(self.pigeon.strain)
-            self.widgets.comboloft.child.set_text(self.pigeon.loft)
+            self.widgets.combocolour.get_child().set_text(self.pigeon.colour)
+            self.widgets.combostrain.get_child().set_text(self.pigeon.strain)
+            self.widgets.comboloft.get_child().set_text(self.pigeon.loft)
             self.widgets.combosex.set_active(self.pigeon.sex)
 
             self.widgets.statusbuttonedit.set_pigeon(self.pigeon)

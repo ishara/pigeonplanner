@@ -15,10 +15,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-
-# $Id: cairobackend.py 18338 2011-10-16 20:21:22Z paul-franklin $
 
 """File and File format management for the different reports
 """
@@ -61,7 +59,7 @@ class CairoBackend(DocBackend):
     """
     Implementation for cairo docs
     """
-    
+
     STYLETAG_TO_PROPERTY = {
         DocBackend.FONTCOLOR : 'foreground',
         DocBackend.HIGHLIGHT : 'background',
@@ -86,7 +84,7 @@ class CairoBackend(DocBackend):
         DocBackend.UNDERLINE   : ("<u>", "</u>"),
         DocBackend.SUPERSCRIPT : ("<sup>", "</sup>"),
     }
-    
+
     ESCAPE_FUNC = lambda x: escape
 
     def _create_xmltag(self, tagtype, value):
@@ -99,7 +97,7 @@ class CairoBackend(DocBackend):
         if tagtype == DocBackend.FONTSIZE:
             #size is in thousandths of a point in pango
             value = str(1000 * value)
-        
-        return ('<span %s="%s">' % (self.STYLETAG_TO_PROPERTY[tagtype], 
-                                    self.ESCAPE_FUNC()(value)), 
+
+        return ('<span %s="%s">' % (self.STYLETAG_TO_PROPERTY[tagtype],
+                                    self.ESCAPE_FUNC()(value)),
                 '</span>')

@@ -19,24 +19,25 @@
 import os.path
 import datetime
 
-import gtk
-import gtk.gdk
-import gobject
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
+from gi.repository import GdkPixbuf
 
 from pigeonplanner import messages
 from pigeonplanner.core import const
 from pigeonplanner.core import errors
 
 
-class DateEntry(gtk.Viewport):
+class DateEntry(Gtk.Viewport):
     __gtype_name__ = "DateEntry"
-    __gsignals__ = {"changed": (gobject.SIGNAL_RUN_LAST, None, ())}
-    can_empty = gobject.property(type=bool, default=False, nick="Can empty")
+    __gsignals__ = {"changed": (GObject.SIGNAL_RUN_LAST, None, ())}
+    can_empty = GObject.property(type=bool, default=False, nick="Can empty")
 
     def __init__(self, editable=False, clear=False, can_empty=False):
-        gtk.Viewport.__init__(self)
+        Gtk.Viewport.__init__(self)
 
-        self._entry = gtk.Entry()
+        self._entry = Gtk.Entry()
         self._entry.set_max_length(10)
         self._entry.set_width_chars(16)
         self._entry.set_alignment(.5)
@@ -49,7 +50,7 @@ class DateEntry(gtk.Viewport):
         self.show_all()
 
     def on_icon_pressed(self, widget, icon_pos, event):
-        if icon_pos == gtk.ENTRY_ICON_SECONDARY:
+        if icon_pos == Gtk.EntryIconPosition.SECONDARY:
             CalendarPopup(self)
 
     def get_editable(self):
@@ -57,13 +58,13 @@ class DateEntry(gtk.Viewport):
 
     def set_editable(self, editable):
         self._editable = editable
-        self.set_shadow_type(gtk.SHADOW_NONE if editable else gtk.SHADOW_IN)
+        self.set_shadow_type(Gtk.ShadowType.NONE if editable else Gtk.ShadowType.IN)
         self._entry.set_has_frame(editable)
         self._entry.set_editable(editable)
         icon = os.path.join(const.IMAGEDIR, "icon_calendar.png")
-        pixbuf = gtk.gdk.pixbuf_new_from_file(icon) if editable else None
-        self._entry.set_icon_from_pixbuf(gtk.ENTRY_ICON_SECONDARY, pixbuf)
-    editable = gobject.property(get_editable, set_editable, bool, False)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(icon) if editable else None
+        self._entry.set_icon_from_pixbuf(Gtk.EntryIconPosition.SECONDARY, pixbuf)
+    editable = GObject.property(get_editable, set_editable, bool, False)
 
     def get_clear(self):
         return self._clear
@@ -76,7 +77,7 @@ class DateEntry(gtk.Viewport):
             today = datetime.datetime.today()
             text = today.strftime(const.DATE_FORMAT)
         self._entry.set_text(text)
-    clear = gobject.property(get_clear, set_clear, bool, False)
+    clear = GObject.property(get_clear, set_clear, bool, False)
 
     def set_text(self, text):
         if text is None:
@@ -96,10 +97,10 @@ class DateEntry(gtk.Viewport):
         self._entry.set_position(-1)
 
     def _warn(self):
-        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, gtk.STOCK_STOP)
+        self._entry.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, Gtk.STOCK_STOP)
 
     def _unwarn(self):
-        self._entry.set_icon_from_stock(gtk.ENTRY_ICON_PRIMARY, None)
+        self._entry.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, None)
 
     def __validate(self, date):
         if self.can_empty and date == "":
@@ -112,35 +113,35 @@ class DateEntry(gtk.Viewport):
         self._unwarn()
 
 
-class CalendarPopup(gtk.Window):
+class CalendarPopup(Gtk.Window):
 
     __gtype_name__ = "CalendarPopup"
 
     def __init__(self, entry):
-        gtk.Window.__init__(self, gtk.WINDOW_POPUP)
-        self.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_DIALOG)
+        Gtk.Window.__init__(self, Gtk.WindowType.POPUP)
+        self.set_type_hint(Gdk.WindowTypeHint.DIALOG)
         self.set_modal(True)
         self.set_resizable(False)
         self.set_destroy_with_parent(True)
         toplevel = entry.get_toplevel()
         self.set_transient_for(toplevel)
 
-        buttonapply = gtk.Button()
-        img = gtk.image_new_from_stock(gtk.STOCK_APPLY, gtk.ICON_SIZE_BUTTON)
+        buttonapply = Gtk.Button()
+        img = Gtk.Image.new_from_stock(Gtk.STOCK_APPLY, Gtk.IconSize.BUTTON)
         buttonapply.set_image(img)
         buttonapply.connect("clicked", self.on_buttonapply_clicked)
-        buttoncancel = gtk.Button()
-        img = gtk.image_new_from_stock(gtk.STOCK_CANCEL, gtk.ICON_SIZE_BUTTON)
+        buttoncancel = Gtk.Button()
+        img = Gtk.Image.new_from_stock(Gtk.STOCK_CANCEL, Gtk.IconSize.BUTTON)
         buttoncancel.set_image(img)
         buttoncancel.connect("clicked", self.on_buttoncancel_clicked)
-        vbox = gtk.VBox(False, 8)
+        vbox = Gtk.VBox(False, 8)
         vbox.pack_start(buttonapply, False, False, 0)
         vbox.pack_start(buttoncancel, False, False, 0)
 
-        calendar = gtk.Calendar()
+        calendar = Gtk.Calendar()
         calendar.connect("day-selected", self.on_day_selected)
         calendar.connect("day-selected-double-click", self.on_day_clicked)
-        hbox = gtk.HBox()
+        hbox = Gtk.HBox()
         hbox.pack_start(vbox, False, False, 0)
         hbox.pack_start(calendar, False, False, 0)
 
@@ -160,7 +161,7 @@ class CalendarPopup(gtk.Window):
                 self._saved_date = date
                 self._entry.set_text(date)
 
-        vp = gtk.Viewport()
+        vp = Gtk.Viewport()
         vp.add(hbox)
         self.add(vp)
         self._set_position()
@@ -195,15 +196,18 @@ class CalendarPopup(gtk.Window):
 
     # Internal methods
     def _set_position(self):
+        allocation = self._entry.get_allocation()
         window = self._entry.get_parent_window()
-        (x, y) = gtk.gdk.Window.get_origin(window)
+        origin = Gdk.Window.get_origin(window)
+        x = origin.x
+        y = origin.y
 
-        x += self._entry.allocation.x
-        y += self._entry.allocation.y
-        bwidth = self._entry.allocation.width
-        bheight = self._entry.allocation.height
+        x += allocation.x
+        y += allocation.y
+        bwidth = allocation.width
+        bheight = allocation.height
 
-        x += bwidth - self._entry.size_request()[0]
+        x += bwidth - self._entry.size_request().width
         y += bheight
 
         if x < 0:

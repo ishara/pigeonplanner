@@ -16,15 +16,16 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
-import gtk.gdk
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GdkPixbuf
 
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import component
-from pigeonplanner.ui import WidgetFactory
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.utils import HiddenPigeonsMixin
+from pigeonplanner.ui.builder import WidgetFactory
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import InfoDialog
 from pigeonplanner.core import enums
@@ -36,46 +37,46 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         WidgetFactory.__init__(self)
         basetab.BaseTab.__init__(self, "RelativesTab", _("Relatives"), "icon_relatives.png")
 
-        treeviewdirect = gtk.TreeView()
-        swdirect = gtk.ScrolledWindow()
-        swdirect.set_shadow_type(gtk.SHADOW_IN)
-        swdirect.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        treeviewdirect = Gtk.TreeView()
+        swdirect = Gtk.ScrolledWindow()
+        swdirect.set_shadow_type(Gtk.ShadowType.IN)
+        swdirect.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         swdirect.add(treeviewdirect)
-        aligndirect = gtk.Alignment(.5, .5, 1, 1)
+        aligndirect = Gtk.Alignment.new(.5, .5, 1, 1)
         aligndirect.add(swdirect)
-        framedirect = gtk.Frame(_("<b>Brothers and sisters</b>"))
-        framedirect.set_shadow_type(gtk.SHADOW_NONE)
+        framedirect = Gtk.Frame(label=_("<b>Brothers and sisters</b>"))
+        framedirect.set_shadow_type(Gtk.ShadowType.NONE)
         framedirect.get_label_widget().set_use_markup(True)
         framedirect.add(aligndirect)
         self._liststoredirect = self._build_treeview(treeviewdirect)
 
-        treeviewhalf = gtk.TreeView()
-        swhalf = gtk.ScrolledWindow()
-        swhalf.set_shadow_type(gtk.SHADOW_IN)
-        swhalf.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        treeviewhalf = Gtk.TreeView()
+        swhalf = Gtk.ScrolledWindow()
+        swhalf.set_shadow_type(Gtk.ShadowType.IN)
+        swhalf.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         swhalf.add(treeviewhalf)
-        alignhalf = gtk.Alignment(.5, .5, 1, 1)
+        alignhalf = Gtk.Alignment.new(.5, .5, 1, 1)
         alignhalf.add(swhalf)
-        framehalf = gtk.Frame(_("<b>Half brothers and sisters</b>"))
-        framehalf.set_shadow_type(gtk.SHADOW_NONE)
+        framehalf = Gtk.Frame(label=_("<b>Half brothers and sisters</b>"))
+        framehalf.set_shadow_type(Gtk.ShadowType.NONE)
         framehalf.get_label_widget().set_use_markup(True)
         framehalf.add(alignhalf)
         self._liststorehalf = self._build_treeview(treeviewhalf, True)
 
-        treeviewoff = gtk.TreeView()
-        swoff = gtk.ScrolledWindow()
-        swoff.set_shadow_type(gtk.SHADOW_IN)
-        swoff.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        treeviewoff = Gtk.TreeView()
+        swoff = Gtk.ScrolledWindow()
+        swoff.set_shadow_type(Gtk.ShadowType.IN)
+        swoff.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         swoff.add(treeviewoff)
-        alignoff = gtk.Alignment(.5, .5, 1, 1)
+        alignoff = Gtk.Alignment.new(.5, .5, 1, 1)
         alignoff.add(swoff)
-        frameoff = gtk.Frame(_("<b>Offspring</b>"))
-        frameoff.set_shadow_type(gtk.SHADOW_NONE)
+        frameoff = Gtk.Frame(label=_("<b>Offspring</b>"))
+        frameoff.set_shadow_type(Gtk.ShadowType.NONE)
         frameoff.get_label_widget().set_use_markup(True)
         frameoff.add(alignoff)
         self._liststoreoff = self._build_treeview(treeviewoff)
 
-        self.widgets._root = gtk.HBox(True)
+        self.widgets._root = Gtk.HBox(True)
         self.widgets._root.pack_start(framedirect, True, True, 4)
         self.widgets._root.pack_start(framehalf, True, True, 0)
         self.widgets._root.pack_start(frameoff, True, True, 4)
@@ -89,13 +90,13 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         path, col, cellx, celly = pthinfo
         pigeon = treeview.get_model()[path][0]
 
-        if event.button == 3:
-            items = [(gtk.STOCK_INFO, self.on_show_details, (pigeon,), None),
-                     (gtk.STOCK_EDIT, self.on_edit_details, (pigeon,), None)]
+        if event.button == Gdk.BUTTON_SECONDARY:
+            items = [(Gtk.STOCK_INFO, self.on_show_details, (pigeon,), None),
+                     (Gtk.STOCK_EDIT, self.on_edit_details, (pigeon,), None)]
             if pigeon.visible:
-                items.append((gtk.STOCK_JUMP_TO, self.on_goto_pigeon, (pigeon,), None))
+                items.append((Gtk.STOCK_JUMP_TO, self.on_goto_pigeon, (pigeon,), None))
             utils.popup_menu(event, items)
-        elif event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
+        elif event.button == Gdk.BUTTON_PRIMARY and event.type == Gdk.EventType.DOUBLE_BUTTON_PRESS:
             self.on_show_details(None, pigeon)
 
     def on_show_details(self, widget, pigeon):
@@ -152,12 +153,12 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             seximg = utils.get_sex_image(p.sex)
             self._liststorehalf.insert(0, [p, p.band, p.band_year, p.dam.band, p.sex, seximg])
 
-        self._liststoredirect.set_sort_column_id(1, gtk.SORT_ASCENDING)
-        self._liststoredirect.set_sort_column_id(2, gtk.SORT_ASCENDING)
-        self._liststorehalf.set_sort_column_id(1, gtk.SORT_ASCENDING)
-        self._liststorehalf.set_sort_column_id(2, gtk.SORT_ASCENDING)
-        self._liststoreoff.set_sort_column_id(1, gtk.SORT_ASCENDING)
-        self._liststoreoff.set_sort_column_id(2, gtk.SORT_ASCENDING)
+        self._liststoredirect.set_sort_column_id(1, Gtk.SortType.ASCENDING)
+        self._liststoredirect.set_sort_column_id(2, Gtk.SortType.ASCENDING)
+        self._liststorehalf.set_sort_column_id(1, Gtk.SortType.ASCENDING)
+        self._liststorehalf.set_sort_column_id(2, Gtk.SortType.ASCENDING)
+        self._liststoreoff.set_sort_column_id(1, Gtk.SortType.ASCENDING)
+        self._liststoreoff.set_sort_column_id(2, Gtk.SortType.ASCENDING)
 
     def clear_pigeon(self):
         self._liststoredirect.clear()
@@ -167,27 +168,27 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
     # Internal methods
     def _build_treeview(self, treeview, extended=False):
         pb_id = 4
-        store = [object, str, str, str, gtk.gdk.Pixbuf]
+        store = [object, str, str, int, GdkPixbuf.Pixbuf]
         columns = [_("Band no."), _("Year")]
         if extended:
             pb_id = 5
             store.insert(1, str)
             columns.append(_("Common parent"))
-        liststore = gtk.ListStore(*store)
+        liststore = Gtk.ListStore(*store)
         modelfilter = liststore.filter_new()
         modelfilter.set_visible_func(self._visible_func)
         treeview.set_model(modelfilter)
         treeview.connect("button-press-event", self.on_treeview_press)
         for index, column in enumerate(columns):
-            textrenderer = gtk.CellRendererText()
-            tvcolumn = gtk.TreeViewColumn(column, textrenderer, text=index+1)
+            textrenderer = Gtk.CellRendererText()
+            tvcolumn = Gtk.TreeViewColumn(column, textrenderer, text=index+1)
             tvcolumn.set_sort_column_id(index+1)
             tvcolumn.set_resizable(True)
             tvcolumn.set_cell_data_func(textrenderer, self._cell_func)
             treeview.append_column(tvcolumn)
-        pbrenderer = gtk.CellRendererPixbuf()
+        pbrenderer = Gtk.CellRendererPixbuf()
         pbrenderer.set_property("xalign", 0.0)
-        tvcolumn = gtk.TreeViewColumn(_("Sex"), pbrenderer, pixbuf=pb_id)
+        tvcolumn = Gtk.TreeViewColumn(_("Sex"), pbrenderer, pixbuf=pb_id)
         tvcolumn.set_sort_column_id(pb_id-1)
         tvcolumn.set_resizable(True)
         tvcolumn.set_cell_data_func(pbrenderer, self._cell_func)

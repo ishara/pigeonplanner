@@ -18,8 +18,9 @@
 
 import os.path
 
-import gtk
-import gtk.gdk
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GdkPixbuf
 
 from pigeonplanner.ui import component
 from pigeonplanner.core import const
@@ -31,17 +32,17 @@ class BaseTab(component.Component):
 
         self._parent = component.get("MainWindow")
 
-        self.widgets._label = gtk.VBox()
+        self.widgets._label = Gtk.VBox()
         img = os.path.join(const.IMAGEDIR, img)
-        if gtk.gdk.screen_height() <= 768:
-            self.widgets._label.set_orientation(gtk.ORIENTATION_HORIZONTAL)
-            pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(img, 18, 18)
+        if Gdk.Screen.height() <= 768:
+            self.widgets._label.set_orientation(Gtk.Orientation.HORIZONTAL)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(img, 18, 18)
         else:
-            pixbuf = gtk.gdk.pixbuf_new_from_file(img)
-        image = gtk.image_new_from_pixbuf(pixbuf)
-        label = gtk.Label(title)
-        self.widgets._label.pack_start(image)
-        self.widgets._label.pack_start(label)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(img)
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
+        label = Gtk.Label(title)
+        self.widgets._label.pack_start(image, False, False, 0)
+        self.widgets._label.pack_start(label, False, False, 0)
         self.widgets._label.show_all()
 
     def get_tab_widgets(self):

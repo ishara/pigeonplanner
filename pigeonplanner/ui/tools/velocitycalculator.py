@@ -19,7 +19,7 @@
 import locale
 import datetime
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner.ui import builder
 from pigeonplanner.core import common
@@ -132,9 +132,9 @@ class VelocityCalculator(builder.GtkBuilder):
             arrival = seconds_total + flight
             self.widgets.ls_velocity.insert(0, [
                 speed,
-                datetime.timedelta(seconds=flight),
-                datetime.timedelta(seconds=arrival)])
-        self.widgets.ls_velocity.set_sort_column_id(0, gtk.SORT_ASCENDING)
+                str(datetime.timedelta(seconds=flight)),
+                str(datetime.timedelta(seconds=arrival))])
+        self.widgets.ls_velocity.set_sort_column_id(0, Gtk.SortType.ASCENDING)
 
     def on_printcalc_clicked(self, widget):
         data = [self.widgets.ls_velocity.get(row.iter, 0, 1, 2)
@@ -143,7 +143,7 @@ class VelocityCalculator(builder.GtkBuilder):
             date = datetime.datetime.now()
             distance = "%s %s" % (
                         self.widgets.spinbutton_prognosis_distance.get_value_as_int(),
-                        self.widgets.combobox_prognosis_distance.get_active_text())
+                        self.widgets.combobox_prognosis_distance.get_active_id())
             release = "%s:%s:%s" % (self.widgets.spinbutton_prognosis_hours.get_text(),
                                     self.widgets.spinbutton_prognosis_minutes.get_text(),
                                     self.widgets.spinbutton_prognosis_seconds.get_text())

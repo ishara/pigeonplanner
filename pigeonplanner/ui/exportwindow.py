@@ -18,9 +18,8 @@
 
 import os.path
 import logging
-logger = logging.getLogger(__name__)
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner.export import get_exporters
 from pigeonplanner.ui import builder
@@ -28,6 +27,8 @@ from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.database.models import Pigeon
+
+logger = logging.getLogger(__name__)
 
 
 class ExportWindow(builder.GtkBuilder):
@@ -97,7 +98,7 @@ class ExportWindow(builder.GtkBuilder):
         dialog = filechooser.ExportChooser(self.widgets.window, exporter.extension,
                                                         exporter.filefilter)
         response = dialog.run()
-        if response == gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             widget.set_text(dialog.get_filename())
         dialog.destroy()
 

@@ -17,20 +17,23 @@
 
 
 import os
+import logging
 import hashlib
 
-import gtk
-import gobject
+from gi.repository import GLib
+from gi.repository import GdkPixbuf
 
 from pigeonplanner.core import const
+
+logger = logging.getLogger(__name__)
 
 
 def get_image(src_file):
     try:
         filename = get_path(src_file)
-        return gtk.gdk.pixbuf_new_from_file(filename)
-    except (gobject.GError, OSError):
-        return gtk.gdk.pixbuf_new_from_file_at_size(const.LOGO_IMG, 75, 75)
+        return GdkPixbuf.Pixbuf.new_from_file(filename)
+    except (GLib.GError, OSError) as exc:
+        return GdkPixbuf.Pixbuf.new_from_file_at_size(const.LOGO_IMG, 75, 75)
 
 
 def get_path(src_file):
@@ -49,8 +52,14 @@ def __build_path(path):
 
 def __create_image(src_file):
     filename = __build_path(src_file)
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(src_file, 200, 200)
     try:
-        pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(src_file, 200, 200)
-        pixbuf.save(filename, "png")
-    except:
-        pass
+        pixbuf.save(filename, "png", [], [])
+    except AttributeError:
+        # Some GdkPixbuf versions are missing the save method
+        try:
+            pixbuf.savev(filename, "png", [], [])
+        except AttributeError:
+            # Apparently even some miss the savev method!
+            logger.error("Can't find either save or savev methods on GdkPixbuf.Pixbuf to save thumbnail")
+

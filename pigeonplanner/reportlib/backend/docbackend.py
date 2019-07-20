@@ -15,10 +15,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-
-# $Id: docbackend.py 18338 2011-10-16 20:21:22Z paul-franklin $
 
 """File and File format management for the different reports
 """
@@ -28,19 +26,7 @@
 # Python modules
 #
 #------------------------------------------------------------------------
-from gettext import gettext as _
 
-#-------------------------------------------------------------------------
-#
-# GTK modules
-#
-#-------------------------------------------------------------------------
-
-#------------------------------------------------------------------------
-#
-# Gramps modules
-#
-#------------------------------------------------------------------------
 
 #------------------------------------------------------------------------
 #
@@ -75,19 +61,19 @@ class DocBackendError(Exception):
 
     def __str__(self):
         return self.value
-    
+
 #------------------------------------------------------------------------
 #
 # Document Backend class
 #
 #------------------------------------------------------------------------
 
-class DocBackend(object):
+class DocBackend:
     """
-    Base class for text document backends. 
-    The DocBackend manages a file to which it writes. It further knowns 
-    enough of the file format to be able to translate between the BaseDoc API 
-    and the file format. 
+    Base class for text document backends.
+    The DocBackend manages a file to which it writes. It further knowns
+    enough of the file format to be able to translate between the BaseDoc API
+    and the file format.
     Specifically for text reports a translation of styled notes to the file
     format usage is done.
     """
@@ -100,16 +86,16 @@ class DocBackend(object):
     HIGHLIGHT = 6
     SUPERSCRIPT = 7
     LINK = 8
-    
+
     SUPPORTED_MARKUP = []
 
-    ESCAPE_FUNC = lambda x: noescape
+    ESCAPE_FUNC = lambda: noescape
     #Map between styletypes and internally used values. This map is needed
     # to make TextDoc officially independant of gen.lib.styledtexttag
     STYLETYPE_MAP = {
         }
     CLASSMAP = None
-    
+
     #STYLETAGTABLE to store markup for write_markup associated with style tags
     STYLETAG_MARKUP = {
         BOLD        : ("", ""),
@@ -121,25 +107,25 @@ class DocBackend(object):
 
     def __init__(self, filename=None):
         """
-        @param filename: path name of the file the backend works on
+        :param filename: path name of the file the backend works on
         """
         self.__file = None
         self._filename = filename
-    
+
     def getf(self):
         """
         Obtain the filename on which backend writes
         """
         return self._filename
-    
+
     def setf(self, value):
         """
-        Set the filename on which the backend writes, changing the value 
-        passed on initialization
-        Can only be done if the previous filename is not open
+        Set the filename on which the backend writes, changing the value
+        passed on initialization.
+        Can only be done if the previous filename is not open.
         """
         if self.__file is not None:
-            raise ValueError, _('Close file first')
+            raise ValueError(_('Close file first'))
         self._filename = value
 
     filename = property(getf, setf, None, "The filename the backend works on")
@@ -155,8 +141,8 @@ class DocBackend(object):
                                             % self.filename)
         self._checkfilename()
         try:
-            self.__file = open(self.filename, "w")
-        except IOError, msg:
+            self.__file = open(self.filename, "w", encoding="utf-8")
+        except IOError as msg:
             errmsg = "%s\n%s" % (_("Could not create %s") % self.filename, msg)
             raise DocBackendError(errmsg)
         except:
@@ -167,57 +153,59 @@ class DocBackend(object):
         Check to make sure filename satisfies the standards for this filetype
         """
         pass
-    
+
     def close(self):
         """
         Closes the file that is written on.
         """
         if self.__file is None:
-            raise IOError, 'No file open'
+            raise IOError('No file open')
         self.__file.close()
-        self.__file = None        
+        self.__file = None
 
     def write(self, string):
-        """Write a string to the file. There is no return value. 
-            Due to buffering, the string may not actually show up untill the 
-            close() method is called.
+        """
+        Write a string to the file. There is no return value.
+        Due to buffering, the string may not actually show up until the
+        :meth:`close` method is called.
         """
         self.__file.write(string)
 
     def writelines(self, sequence):
-        """Write a sequence of strings to the file. The sequence can be any 
-            iterable object producing strings, typically a list of strings. 
+        """
+        Write a sequence of strings to the file. The sequence can be any
+        iterable object producing strings, typically a list of strings.
         """
         self.__file.writelines(sequence)
-    
+
     def escape(self, preformatted=False):
         """
         The escape func on text for this file format.
-        @param preformatted: bool: some formats can have different escape 
-                function for normal text and preformatted text
-        
+
+        :param preformatted: some formats can have different escape function
+                             for normal text and preformatted text
+        :type preformatted: bool
         """
         return self.ESCAPE_FUNC()
-        
-    
+
+
     def find_tag_by_stag(self, s_tag):
         """
-        @param s_tag: object: assumed styledtexttag
-        @param s_tagvalue: None/int/str: value associated with the tag
-        
-        A styled tag is type with a value. 
-        Every styled tag must be converted to the tags used in the corresponding
-            markup for the backend, eg <b>text</b> for bold in html.
-        These markups are stored in STYLETAG_MARKUP. They are tuples for begin
-            and end tag
-        If a markup is not present yet, it is created, using the 
-            _create_xmltag method you can overwrite
+        :param s_tag: object: assumed styledtexttag
+        :param s_tagvalue: None/int/str: value associated with the tag
+
+        A styled tag is type with a value. Every styled tag must be converted
+        to the tags used in the corresponding markup for the backend,
+        eg <b>text</b> for bold in html. These markups are stored in
+        STYLETAG_MARKUP. They are tuples for begin and end tag. If a markup is
+        not present yet, it is created, using the :meth:`_create_xmltag` method
+        you can overwrite.
         """
         tagtype = s_tag.name
-        
+
         if not self.STYLETYPE_MAP or \
         self.CLASSMAP != tagtype.__class__.__name__ :
-            self.CLASSMAP == tagtype.__class__.__name__
+            self.CLASSMAP = tagtype.__class__.__name__
             self.STYLETYPE_MAP[tagtype.BOLD]        = self.BOLD
             self.STYLETYPE_MAP[tagtype.ITALIC]      = self.ITALIC
             self.STYLETYPE_MAP[tagtype.UNDERLINE]   = self.UNDERLINE
@@ -228,7 +216,7 @@ class DocBackend(object):
             self.STYLETYPE_MAP[tagtype.SUPERSCRIPT] = self.SUPERSCRIPT
             self.STYLETYPE_MAP[tagtype.LINK]        = self.LINK
 
-        if s_tag.name == 'Link':
+        if s_tag.name == tagtype.LINK:
             return self.format_link(s_tag.value)
         typeval = int(s_tag.name)
         s_tagvalue = s_tag.value
@@ -238,10 +226,10 @@ class DocBackend(object):
         elif tagtype.STYLE_TYPE[typeval] == str:
             tag_name = "%d %s" % (typeval, s_tagvalue)
         elif tagtype.STYLE_TYPE[typeval] == int:
-            tag_name = "%d %d" % (typeval, s_tagvalue)
+            tag_name = "%d %d" % (typeval, int(s_tagvalue))
         if not tag_name:
             return None
-        
+
         tags = self.STYLETAG_MARKUP.get(tag_name)
         if tags is not None:
             return tags
@@ -258,33 +246,36 @@ class DocBackend(object):
         if tagtype not in self.SUPPORTED_MARKUP:
             return None
         return ('', '')
-    
-    def add_markup_from_styled(self, text, s_tags, split=''):
+
+    def add_markup_from_styled(self, text, s_tags, split='', escape=True):
         """
         Input is plain text, output is text with markup added according to the
         s_tags which are assumed to be styledtexttags.
-        When split is given the text will be split over the value given, and 
+        When split is given the text will be split over the value given, and
         tags applied in such a way that it the text can be safely splitted in
-        pieces along split
-        
-        @param text   : str, a piece of text
-        @param s_tags : styledtexttags that must be applied to the text
-        @param split  : str, optional. A string along which the output can 
-                    be safely split without breaking the styling.
-        As adding markup means original text must be escaped, ESCAPE_FUNC is 
-            used
-        This can be used to convert the text of a styledtext to the format 
-            needed for a document backend
-        Do not call this method in a report, use the write_markup method
-            
-        @note: the algorithm is complex as it assumes mixing of tags is not
-                allowed: eg <b>text<i> here</b> not</i> is assumed invalid
-                as markup. If the s_tags require such a setup, what is returned
-                is <b>text</b><i><b> here</b> not</i>
-               overwrite this method if this complexity is not needed. 
+        pieces along split.
+
+        :param text: str, a piece of text
+        :param s_tags: styledtexttags that must be applied to the text
+        :param split: str, optional. A string along which the output can
+                      be safely split without breaking the styling.
+
+        As adding markup means original text must be escaped, ESCAPE_FUNC is
+        used. This can be used to convert the text of a styledtext to the format
+        needed for a document backend.  Do not call this method in a report,
+        use the :meth:`write_markup` method.
+
+        .. note:: the algorithm is complex as it assumes mixing of tags is not
+                  allowed: eg <b>text<i> here</b> not</i> is assumed invalid
+                  as markup. If the s_tags require such a setup, what is
+                  returned is <b>text</b><i><b> here</b> not</i>
+                  overwrite this method if this complexity is not needed.
         """
+        if not escape:
+            escape_func = self.ESCAPE_FUNC
+            self.ESCAPE_FUNC = lambda: (lambda text: text)
         #unicode text must be sliced correctly
-        text = unicode(text)
+        text = str(text)
         FIRST = 0
         LAST = 1
         tagspos = {}
@@ -302,11 +293,11 @@ class DocBackend(object):
                         tagspos[end] = [(tag, LAST)]
         start = 0
         end = len(text)
-        keylist = tagspos.keys()
+        keylist = list(tagspos.keys())
         keylist.sort()
         keylist = [x for x in keylist if x <= len(text)]
         opentags = []
-        otext = u""  #the output, text with markup
+        otext = ""  #the output, text with markup
         lensplit = len(split)
         for pos in keylist:
             #write text up to tag
@@ -327,7 +318,7 @@ class DocBackend(object):
                         #obtain new values
                         start = start + splitpos + lensplit
                         splitpos = text[start:pos].find(split)
-                    
+
                 otext += self.ESCAPE_FUNC()(text[start:pos])
             #write out tags
             for tag in tagspos[pos]:
@@ -349,8 +340,8 @@ class DocBackend(object):
             # a problem, we don't have a closing tag left but there are open
             # tags. Just keep them up to end of text
             pos = len(text)
-            print 'WARNING: DocBackend : More style tags in text than length '\
-                    'of text allows.\n', opentags
+            print('WARNING: DocBackend : More style tags in text than length '\
+                    'of text allows.\n', opentags)
             if pos > start:
                 if split:
                     #make sure text can split
@@ -368,13 +359,14 @@ class DocBackend(object):
                         #obtain new values
                         start = start + splitpos + lensplit
                         splitpos = text[start:pos].find(split)
-                    
+
                 otext += self.ESCAPE_FUNC()(text[start:pos])
             for opentag in reversed(opentags):
                 otext += opentag[1]
         else:
             otext += self.ESCAPE_FUNC()(text[start:end])
-
+        if not escape:
+            self.ESCAPE_FUNC = escape_func
         return otext
 
     def format_link(self, value):
@@ -385,4 +377,3 @@ class DocBackend(object):
 
         """
         return self.STYLETAG_MARKUP[DocBackend.UNDERLINE]
-

@@ -16,10 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
+from gi.repository import Gtk
 
 
-class DisplayCheckButton(gtk.CheckButton):
+class DisplayCheckButton(Gtk.CheckButton):
     """
     This class subclasses gtk.CheckButton which we will use to display
     the status of some data. Because this is just an indicator,
@@ -32,7 +32,7 @@ class DisplayCheckButton(gtk.CheckButton):
     __gtype_name__ = "DisplayCheckButton"
 
     def __init__(self, label=None):
-        gtk.CheckButton.__init__(self, label)
+        Gtk.CheckButton.__init__(self, label)
         self.show()
 
     def do_pressed(self):

@@ -20,10 +20,11 @@ import json
 import logging
 from xml.sax.saxutils import escape
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import builder
+from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui import messagedialog
 from pigeonplanner.core import const
@@ -120,14 +121,14 @@ class BackupDialog(builder.GtkBuilder):
             messagedialog.InfoDialog(messages.MSG_RESTORE_SUCCES, self.widgets.dialog)
             if session.is_open():
                 session.close()
-            gtk.main_quit()
+            component.get("MainWindow").get_application().quit()
 
     def on_button_saveselect_clicked(self, widget):
         filename = backup.create_backup_filename()
         chooser = filechooser.BackupSaver(self.widgets.dialog, filename)
         chooser.set_do_overwrite_confirmation(True)
         response = chooser.run()
-        if response == gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             save_path = chooser.get_filename()
             if not save_path.endswith(".zip"):
                 save_path = save_path + ".zip"
@@ -168,7 +169,7 @@ class BackupDialog(builder.GtkBuilder):
     def on_button_changedest_clicked(self, widget):
         dialog = filechooser.DatabasePathChooserDialog(self.widgets.dialog)
         response = dialog.run()
-        if response == gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             new_path = dialog.get_filename()
             model, rowiter = self.widgets.selection_dbrestore.get_selected()
             dbobj = model.get_value(rowiter, self.LS_RESTORE_DBOBJ)

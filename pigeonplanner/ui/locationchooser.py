@@ -18,7 +18,6 @@
 
 import urllib2
 import logging
-logger = logging.getLogger(__name__)
 
 try:
     geopy_log = logging.getLogger("geopy")
@@ -28,11 +27,13 @@ try:
 except ImportError:
     geopy_available = False
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner import messages
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.messagedialog import ErrorDialog
+
+logger = logging.getLogger(__name__)
 
 
 class LocationChooser(builder.GtkBuilder):
@@ -74,7 +75,7 @@ class LocationChooser(builder.GtkBuilder):
         self.widgets.entrylng.set_text(str(lng))
 
     def _set_error(self, message):
-        self.widgets.entryloc.set_icon_from_stock(0, gtk.STOCK_DIALOG_ERROR)
+        self.widgets.entryloc.set_icon_from_stock(0, Gtk.STOCK_DIALOG_ERROR)
         self.widgets.entryloc.set_icon_tooltip_text(0, message)
 
     def get_latlng(self):

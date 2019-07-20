@@ -98,6 +98,7 @@ else:
     LANGDIR = os.path.join(ROOTDIR, u"data", u"languages")
 
 RESULTPARSERDIR = os.path.join(ROOTDIR, u"resultparsers")
+CSSFILE = os.path.join(ROOTDIR, u"ui", u"data", u"style.css")
 
 THUMBDIR = os.path.join(PREFDIR, u"thumbs")
 PLUGINDIR = os.path.join(PREFDIR, u"plugins")

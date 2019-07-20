@@ -18,27 +18,28 @@
 
 import os
 import sys
+import signal
 import webbrowser
 from threading import Thread
 import logging
-logger = logging.getLogger()
 
 try:
-    import pygtk; pygtk.require("2.0")
-except:
-    print("The Python GTK (PyGTK) bindings are required to run this program.")
+    import gi
+    gi.require_version("Gtk", "3.0")
+    gi.require_version("PangoCairo", "1.0")
+    from gi.repository import Gtk
+    from gi.repository import Gdk
+    from gi.repository import Gio
+    from gi.repository import GLib
+    from gi.repository import GObject
+except ImportError:
+    print("The GTK+ runtime and GObject introspection bindings are required to run this program.")
     sys.exit(0)
-
-try:
-    import gtk
-except:
-    print("The GTK+ runtime is required to run this program.")
-    sys.exit(0)
-
-import gobject
-gobject.threads_init()
 
 from pigeonplanner.core import const
+
+logger = logging.getLogger()
+GLib.threads_init()
 
 
 class GtkLogHandler(logging.Handler):
@@ -48,6 +49,20 @@ class GtkLogHandler(logging.Handler):
     def emit(self, record):
         from pigeonplanner.ui import exceptiondialog
         exceptiondialog.ExceptionDialog(record.getMessage())
+
+
+def setup_logging():
+    formatter = logging.Formatter(const.LOG_FORMAT)
+    handler = GtkLogHandler()
+    handler.setFormatter(formatter)
+    handler.setLevel(logging.CRITICAL)
+    logger.addHandler(handler)
+
+    logger.debug("Python version: %s" % ".".join(map(str, sys.version_info[:3])))
+    logger.debug("GTK+ version: %s.%s.%s" % (Gtk.MAJOR_VERSION, Gtk.MINOR_VERSION, Gtk.MICRO_VERSION))
+    logger.debug("PyGObject version: %s" % ".".join(map(str, GObject.pygobject_version)))
+    import peewee
+    logger.debug("Peewee version: %s" % peewee.__version__)
 
 
 def setup_icons():
@@ -62,7 +77,26 @@ def setup_icons():
         ])
 
     # Set default icon for all windows
-    gtk.window_set_default_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
+    Gtk.Window.set_default_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
+
+
+def setup_custom_style():
+    screen = Gdk.Screen.get_default()
+    style_context = Gtk.StyleContext()
+    provider = Gtk.CssProvider()
+    provider.load_from_path(const.CSSFILE)
+    style_context.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
+
+def notify_missing_libs(missing_libs):
+    if len(missing_libs) > 0:
+        # TODO: create a helppage on the website? Link to PyPI?
+        from pigeonplanner.ui.messagedialog import ErrorDialog
+        libs_label = "\n".join(missing_libs)
+        help_label = "Pigeon Planner requires the following libraries to run correctly:"
+        ErrorDialog((help_label, libs_label, None))
+        return
+
 
 def search_updates():
     from pigeonplanner.core import update
@@ -73,9 +107,10 @@ def search_updates():
         return
 
     if new:
-        gobject.idle_add(update_dialog)
+        GLib.idle_add(update_dialog)
     else:
         logger.info("AutoUpdate: %s" % msg)
+
 
 def update_dialog():
     from pigeonplanner import messages
@@ -86,41 +121,61 @@ def update_dialog():
 
     return False
 
-def run_ui(missing_libs):
-    if len(missing_libs) > 0:
-        #TODO: create a helppage on the website? Link to PyPI?
-        libs_label = "\n".join(missing_libs)
-        help_label = "Pigeon Planner requires the following libraries to run correctly:"
-        from pigeonplanner.ui.messagedialog import ErrorDialog
-        ErrorDialog((help_label, libs_label, None))
-        return
 
-    formatter = logging.Formatter(const.LOG_FORMAT)
-    handler = GtkLogHandler()
-    handler.setFormatter(formatter)
-    handler.setLevel(logging.CRITICAL)
-    logger.addHandler(handler)
+class Application(Gtk.Application):
+    def __init__(self, missing_libs):
+        super(Application, self).__init__(application_id="net.launchpad.pigeonplanner",
+                                          flags=Gio.ApplicationFlags.FLAGS_NONE)
+        GLib.set_application_name(const.NAME)
+        GLib.set_prgname(const.NAME)
 
-    logger.debug("Python version: %s" % ".".join(map(str, sys.version_info[:3])))
-    logger.debug("GTK+ version: %s" % ".".join(map(str, gtk.gtk_version)))
-    logger.debug("PyGTK version: %s" % ".".join(map(str, gtk.pygtk_version)))
-    import peewee
-    logger.debug("Peewee version: %s" % peewee.__version__)
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, self.quit)
 
-    setup_icons()
+        self._missing_libs = missing_libs
+        self._window = None
+        self._actions = [
+            ("about", True, self.on_about),
+            ("quit",  True, self.on_quit),
+        ]
 
-    # Import widgets that are used in GtkBuilder files
-    from pigeonplanner.ui.widgets import statusbar
-    from pigeonplanner.ui.widgets import checkbutton
-    from pigeonplanner.ui.widgets import latlongentry
+    def do_startup(self):
+        Gtk.Application.do_startup(self)
 
-    from pigeonplanner.ui import mainwindow
-    mainwindow.MainWindow()
+        menu = Gio.Menu()
+        for action, is_menu_item, callback in self._actions:
+            if is_menu_item:
+                menu.append(action.capitalize(), "app.%s" % action)
+            simple_action = Gio.SimpleAction.new(action, None)
+            simple_action.connect("activate", callback)
+            self.add_action(simple_action)
+        # TODO GTK3: application icon is way too large if menu is attached to title bar
+        # self.set_app_menu(menu)
 
-    from pigeonplanner.core import config
-    if config.get("options.check-for-updates"):
-        updatethread = Thread(None, search_updates, None)
-        updatethread.start()
+        setup_logging()
+        setup_icons()
+        setup_custom_style()
+        notify_missing_libs(self._missing_libs)
 
-    gtk.main()
+        # Import widgets that are used in GtkBuilder files (no idea why these three and not others)
+        from pigeonplanner.ui.widgets import statusbar; statusbar
+        from pigeonplanner.ui.widgets import checkbutton; checkbutton
+        from pigeonplanner.ui.widgets import latlongentry; latlongentry
 
+        from pigeonplanner.core import config
+        if config.get("options.check-for-updates"):
+            updatethread = Thread(None, search_updates, None)
+            updatethread.start()
+
+    def do_activate(self):
+        if not self._window:
+            from pigeonplanner.ui import mainwindow
+            self._window = mainwindow.MainWindow(application=self)
+
+        self._window.present()
+
+    def on_about(self, action, param):
+        from pigeonplanner.ui import dialogs
+        dialogs.AboutDialog(self._window)
+
+    def on_quit(self, action, param):
+        self.quit()

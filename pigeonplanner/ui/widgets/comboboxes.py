@@ -20,7 +20,8 @@
 
 import operator
 
-import gtk
+from gi.repository import Gtk
+from gi.repository import GdkPixbuf
 
 from pigeonplanner.ui import utils
 from pigeonplanner.core import enums
@@ -33,11 +34,11 @@ def set_entry_completion(widget):
 
     :param widget: the widget to set entrycompletion
     """
-    completion = gtk.EntryCompletion()
+    completion = Gtk.EntryCompletion()
     completion.set_model(widget.get_model())
     completion.set_minimum_key_length(1)
     completion.set_text_column(0)
-    widget.child.set_completion(completion)
+    widget.get_child().set_completion(completion)
 
 
 def fill_combobox(combobox, items, active=0, sort=True):
@@ -48,35 +49,39 @@ def fill_combobox(combobox, items, active=0, sort=True):
     :param active: index of the active value
     :param sort: sort the data or not
     """
-    model = combobox.get_model()
-    model.clear()
-    if sort:
-        items.sort()
-    for item in items:
-        model.append([item])
+    if isinstance(combobox, Gtk.ComboBoxText):
+        for item in items:
+            combobox.append_text(item)
+    else:
+        model = combobox.get_model()
+        model.clear()
+        if sort:
+            items.sort()
+        for item in items:
+            model.append([item])
 
     if active is not None:
         combobox.set_active(active)
 
 
-class SexCombobox(gtk.ComboBox):
+class SexCombobox(Gtk.ComboBox):
 
     __gtype_name__ = "SexCombobox"
 
     def __init__(self):
-        store = gtk.ListStore(int, str, gtk.gdk.Pixbuf)
-        gtk.ComboBox.__init__(self, store)
+        Gtk.ComboBox.__init__(self)
+        store = Gtk.ListStore(int, str, GdkPixbuf.Pixbuf)
+        self.set_model(store)
 
         for key, value in enums.Sex.mapping.items():
             store.insert(key, [key, value, utils.get_sex_image(key)])
 
-        pb = gtk.CellRendererPixbuf()
+        pb = Gtk.CellRendererPixbuf()
         self.pack_start(pb, expand=False)
         self.add_attribute(pb, "pixbuf", 2)
-        cell = gtk.CellRendererText()
+        cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 1)
-
         self.set_active(0)
         self.show()
 
@@ -84,21 +89,22 @@ class SexCombobox(gtk.ComboBox):
         return self.get_active()
 
 
-class StatusCombobox(gtk.ComboBox):
+class StatusCombobox(Gtk.ComboBox):
 
     __gtype_name__ = "StatusCombobox"
 
     def __init__(self):
-        store = gtk.ListStore(int, str, gtk.gdk.Pixbuf)
-        gtk.ComboBox.__init__(self, store)
+        Gtk.ComboBox.__init__(self)
+        store = Gtk.ListStore(int, str, GdkPixbuf.Pixbuf)
+        self.set_model(store)
 
         for key, value in enums.Status.mapping.items():
             store.insert(key, [key, value, utils.get_status_image(key)])
 
-        pb = gtk.CellRendererPixbuf()
+        pb = Gtk.CellRendererPixbuf()
         self.pack_start(pb, expand=False)
         self.add_attribute(pb, "pixbuf", 2)
-        cell = gtk.CellRendererText()
+        cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 1)
         self.set_active(0)
@@ -108,13 +114,14 @@ class StatusCombobox(gtk.ComboBox):
         return self.get_active()
 
 
-class OperatorCombobox(gtk.ComboBox):
+class OperatorCombobox(Gtk.ComboBox):
 
     __gtype_name__ = "OperatorCombobox"
 
     def __init__(self):
-        store = gtk.ListStore(str, object)
-        gtk.ComboBox.__init__(self, store)
+        Gtk.ComboBox.__init__(self)
+        store = Gtk.ListStore(str, object)
+        self.set_model(store)
 
         items = [("<", operator.lt),
                  ("<=", operator.le),
@@ -124,9 +131,10 @@ class OperatorCombobox(gtk.ComboBox):
                  (">", operator.gt)]
         for item in items:
             store.append(item)
-        cell = gtk.CellRendererText()
+        cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 0)
+        self.set_id_column(0)
         self.set_active(0)
 
     def get_operator(self):
@@ -134,18 +142,24 @@ class OperatorCombobox(gtk.ComboBox):
         return self.get_model().get(ls_iter, 1)[0]
 
 
-class DataComboboxEntry(gtk.ComboBoxEntry):
+class DataComboboxEntry(Gtk.ComboBox):
 
     __gtype_name__ = "DataComboboxEntry"
 
     def __init__(self):
-        self.store = gtk.ListStore(str)
-        gtk.ComboBoxEntry.__init__(self, self.store, 0)
-        set_entry_completion(self)
+        Gtk.ComboBox.__init__(self, has_entry=True)
+        self.store = Gtk.ListStore(str)
+        self.set_model(self.store)
+        cell = Gtk.CellRendererText()
+        self.pack_start(cell, True)
+        self.add_attribute(cell, "text", 0)
+        self.set_id_column(0)
+        self.set_entry_text_column(0)
 
     def set_data(self, table, active=0):
         self._table = table
         fill_combobox(self, self._table.get_data_list(), active, False)
+        set_entry_completion(self)
 
     def add_item(self, item):
         try:
@@ -156,16 +170,17 @@ class DataComboboxEntry(gtk.ComboBoxEntry):
             return
 
         self.store.append([item])
-        self.store.set_sort_column_id(0, gtk.SORT_ASCENDING)
+        self.store.set_sort_column_id(0, Gtk.SortType.ASCENDING)
 
 
-class DistanceCombobox(gtk.ComboBox):
+class DistanceCombobox(Gtk.ComboBox):
 
     __gtype_name__ = "DistanceCombobox"
 
     def __init__(self):
-        store = gtk.ListStore(str, float)
-        gtk.ComboBox.__init__(self, store)
+        Gtk.ComboBox.__init__(self)
+        store = Gtk.ListStore(str, float)
+        self.set_model(store)
 
         units = ((_("Yards"), 0.9144),
                  (_("Kilometres"), 1000.),
@@ -178,10 +193,11 @@ class DistanceCombobox(gtk.ComboBox):
                  )
         for unit in units:
             store.append(unit)
-        cell = gtk.CellRendererText()
+        cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 0)
         self.set_active(config.get("options.distance-unit"))
+        self.set_id_column(0)
         self.show()
 
     def get_unit(self):
@@ -189,13 +205,14 @@ class DistanceCombobox(gtk.ComboBox):
         return self.get_model().get(ls_iter, 1)[0]
 
 
-class SpeedCombobox(gtk.ComboBox):
+class SpeedCombobox(Gtk.ComboBox):
 
     __gtype_name__ = "SpeedCombobox"
 
     def __init__(self):
-        store = gtk.ListStore(str, float)
-        gtk.ComboBox.__init__(self, store)
+        Gtk.ComboBox.__init__(self)
+        store = Gtk.ListStore(str, float)
+        self.set_model(store)
 
         units = ((_("Yard per Minute"), 0.01524),
                  (_("Metres per Minute"), 0.0166666666),
@@ -207,7 +224,7 @@ class SpeedCombobox(gtk.ComboBox):
                  )
         for unit in units:
             store.append(unit)
-        cell = gtk.CellRendererText()
+        cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 0)
         self.set_active(config.get("options.speed-unit"))

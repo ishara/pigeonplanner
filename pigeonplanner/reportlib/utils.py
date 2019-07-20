@@ -115,37 +115,91 @@ def image_actual_size(x_cm, y_cm, x, y):
 
     return (act_width, act_height)
 
+
+def crop_percentage_to_subpixel(width, height, crop):
+    """
+    Convert from Gramps cropping coordinates [0, 100] to
+    pixels, given image width and height. No rounding to pixel resolution.
+    """
+    return (
+        crop[0]/100.0*width,
+        crop[1]/100.0*height,
+        crop[2]/100.0*width,
+        crop[3]/100.0*height )
+
+
+def crop_percentage_to_pixel(width, height, crop):
+    return map (int, crop_percentage_to_subpixel(width, height, crop))
+
+
 def resize_to_buffer(source, size, crop=None):
     """
     Loads the image and resizes it. Instead of saving the file, the data
     is returned in a buffer.
-
     :param source: source image file, in any format that gtk recognizes
     :type source: unicode
     :param size: desired size of the destination image ([width, height])
     :type size: list
     :param crop: cropping coordinates
     :type crop: array of integers ([start_x, start_y, end_x, end_y])
-    :rtype: buffer of data 
+    :rtype: buffer of data
     :returns: raw data
     """
-    import gtk
-    img = gtk.gdk.pixbuf_new_from_file(source)
+    from gi.repository import GdkPixbuf
+    img = GdkPixbuf.Pixbuf.new_from_file(source)
 
     if crop:
-        # Gramps cropping coorinates are [0, 100], so we need to convert to pixels
-        start_x = int((crop[0]/100.0)*img.get_width())
-        start_y = int((crop[1]/100.0)*img.get_height())
-        end_x = int((crop[2]/100.0)*img.get_width())
-        end_y = int((crop[3]/100.0)*img.get_height())
-
-        img = img.subpixbuf(start_x, start_y, end_x-start_x, end_y-start_y)
+        (start_x, start_y, end_x, end_y
+                ) = crop_percentage_to_pixel(
+                        img.get_width(), img.get_height(), crop)
+        if end_x-start_x > 0 and end_y-start_y > 0:
+            img = img.new_subpixbuf(start_x, start_y,
+                                    end_x-start_x, end_y-start_y)
 
     # Need to keep the ratio intact, otherwise scaled images look stretched
     # if the dimensions aren't close in size
     (size[0], size[1]) = image_actual_size(size[0], size[1], img.get_width(), img.get_height())
 
-    scaled = img.scale_simple(int(size[0]), int(size[1]), gtk.gdk.INTERP_BILINEAR)
+    scaled = img.scale_simple(int(size[0]), int(size[1]), GdkPixbuf.InterpType.BILINEAR)
 
     return scaled
 
+
+#-------------------------------------------------------------------------
+#
+# SystemFonts class  (gramps/gui/utils.py)
+#
+#-------------------------------------------------------------------------
+
+class SystemFonts:
+    """
+    Define fonts available to Gramps
+    This is a workaround for bug which prevents the list_families method
+    being called more than once.
+    The bug is described here: https://bugzilla.gnome.org/show_bug.cgi?id=679654
+    This code generates a warning:
+    /usr/local/lib/python2.7/site-packages/gi/types.py:47:
+    Warning: g_value_get_object: assertion `G_VALUE_HOLDS_OBJECT (value)' failed
+    To get a list of fonts, instantiate this class and call
+    :meth:`get_system_fonts`
+    .. todo:: GTK3: the underlying bug may be fixed at some point in the future
+    """
+
+    __FONTS = None
+
+    def __init__(self):
+        """
+        Populate the class variable __FONTS only once.
+        """
+        if SystemFonts.__FONTS is None:
+            from gi.repository import PangoCairo
+            families = PangoCairo.font_map_get_default().list_families()
+            #print ('GRAMPS GTK3: a g_value_get_object warning:')
+            SystemFonts.__FONTS = [family.get_name() for family in families]
+            SystemFonts.__FONTS.sort()
+
+    def get_system_fonts(self):
+        """
+        Return a sorted list of fonts available to Gramps
+        """
+        return SystemFonts.__FONTS

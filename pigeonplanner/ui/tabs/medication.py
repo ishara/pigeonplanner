@@ -16,7 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
+from gi.repository import Gtk
 
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
@@ -40,34 +40,34 @@ from pigeonplanner.database.models import Pigeon, Medication, Loft
  COL_SEL_YEAR) = range(5)
 
 
-class MedicationRemoveDialog(gtk.Dialog):
+class MedicationRemoveDialog(Gtk.Dialog):
     def __init__(self, parent, multiple=False):
-        gtk.Dialog.__init__(self, "", parent, gtk.DIALOG_DESTROY_WITH_PARENT,
-                            (gtk.STOCK_NO, gtk.RESPONSE_NO,
-                             gtk.STOCK_YES, gtk.RESPONSE_YES))
+        Gtk.Dialog.__init__(self, "", parent, Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                            (Gtk.STOCK_NO, Gtk.ResponseType.NO,
+                             Gtk.STOCK_YES, Gtk.ResponseType.YES))
 
-        self.set_position(gtk.WIN_POS_CENTER_ON_PARENT)
+        self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT)
         self.set_resizable(False)
         self.set_skip_taskbar_hint(True)
 
         text = _("Removing the selected medication entry")
-        self.check = gtk.CheckButton(_("Remove this entry for all pigeons?"))
-        label1 = gtk.Label()
+        self.check = Gtk.CheckButton(_("Remove this entry for all pigeons?"))
+        label1 = Gtk.Label()
         label1.set_markup("<b>%s</b>" % text)
         label1.set_alignment(0.0, 0.5)
-        label2 = gtk.Label(_("Are you sure?"))
+        label2 = Gtk.Label(_("Are you sure?"))
         label2.set_alignment(0.0, 0.5)
-        vbox = gtk.VBox()
+        vbox = Gtk.VBox()
         vbox.pack_start(label1, False, False, 8)
         vbox.pack_start(label2, False, False, 8)
         if multiple:
             vbox.pack_start(self.check, False, False, 12)
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_DIALOG_WARNING, gtk.ICON_SIZE_DIALOG)
-        hbox = gtk.HBox()
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_DIALOG_WARNING, Gtk.IconSize.DIALOG)
+        hbox = Gtk.HBox()
         hbox.pack_start(image, False, False, 12)
         hbox.pack_start(vbox, False, False, 12)
-        self.vbox.pack_start(hbox, False, False)
+        self.vbox.pack_start(hbox, False, False, 0)
         self.vbox.show_all()
 
 
@@ -97,8 +97,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             return
         if event.button == 3:
             entries = [
-                (gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
-                (gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None, None)]
+                (Gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
+                (Gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None, None)]
 
             utils.popup_menu(event, entries)
 
@@ -140,7 +140,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         dialog = MedicationRemoveDialog(self._parent, has_multiple_pigeons)
         dialog.check.set_active(has_multiple_pigeons)
         resp = dialog.run()
-        if resp == gtk.RESPONSE_YES:
+        if resp == Gtk.ResponseType.YES:
             if dialog.check.get_active():
                 med.pigeons.clear()
                 med.delete_instance()
@@ -191,8 +191,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self._expanded = not self._expanded
         utils.set_multiple_visible([self.widgets.seperator,
                                     self.widgets.vboxexpand], self._expanded)
-        img = gtk.STOCK_GO_BACK if self._expanded else gtk.STOCK_GO_FORWARD
-        self.widgets.imageexpand.set_from_stock(img, gtk.ICON_SIZE_BUTTON)
+        img = Gtk.STOCK_GO_BACK if self._expanded else Gtk.STOCK_GO_FORWARD
+        self.widgets.imageexpand.set_from_stock(img, Gtk.IconSize.BUTTON)
 
     def on_checkloft_toggled(self, widget):
         if widget.get_active():
@@ -240,8 +240,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
 
         self.widgets.liststore.clear()
         for med in pigeon.medication:
-            self.widgets.liststore.insert(0, [med, med.date, med.description])
-        self.widgets.liststore.set_sort_column_id(COL_DATE, gtk.SORT_ASCENDING)
+            self.widgets.liststore.insert(0, [med, str(med.date), med.description])
+        self.widgets.liststore.set_sort_column_id(COL_DATE, Gtk.SortType.ASCENDING)
 
     def clear_pigeon(self):
         self.widgets.liststore.clear()
@@ -255,8 +255,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         for pigeon in Pigeon.select().where(Pigeon.visible == True):
             active = not self.pigeon == pigeon
             self.widgets.liststoreselect.insert(0, [active, not active, pigeon, pigeon.band, pigeon.band_year])
-        self.widgets.liststoreselect.set_sort_column_id(COL_SEL_BAND, gtk.SORT_ASCENDING)
-        self.widgets.liststoreselect.set_sort_column_id(COL_SEL_YEAR, gtk.SORT_ASCENDING)
+        self.widgets.liststoreselect.set_sort_column_id(COL_SEL_BAND, Gtk.SortType.ASCENDING)
+        self.widgets.liststoreselect.set_sort_column_id(COL_SEL_YEAR, Gtk.SortType.ASCENDING)
 
     def _select_loft(self):
         loft = self.widgets.comboloft.get_active_text()

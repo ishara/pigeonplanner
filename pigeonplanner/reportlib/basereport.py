@@ -24,7 +24,7 @@
 # $Id: _reportbase.py 18378 2011-10-29 05:02:33Z pez4brian $
 
 
-from .PdfDoc import PdfDoc
+from .cairodoc import PdfDoc
 from .GtkPrint import GtkPrint, PRINT_ACTION_DIALOG, PRINT_ACTION_EXPORT
 from .styles import StyleSheet, PaperStyle, PaperSize, PAPER_PORTRAIT
 

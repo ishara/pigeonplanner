@@ -19,7 +19,8 @@
 import os
 import operator
 
-import gtk
+from gi.repository import Gtk
+from gi.repository import GdkPixbuf
 
 from pigeonplanner.core import const
 from pigeonplanner.core import common
@@ -27,11 +28,11 @@ from pigeonplanner.core import config
 
 
 def get_sex_image(sex):
-    return gtk.gdk.pixbuf_new_from_file(common.SEX_IMGS[sex])
+    return GdkPixbuf.Pixbuf.new_from_file(common.SEX_IMGS[sex])
 
 
 def get_status_image(status):
-    return gtk.gdk.pixbuf_new_from_file(common.STATUS_IMGS[status])
+    return GdkPixbuf.Pixbuf.new_from_file(common.STATUS_IMGS[status])
 
 
 def create_stock_button(icons):
@@ -39,13 +40,17 @@ def create_stock_button(icons):
 
     :param icons: A list of tuples containing filename, name and description
     """
-    factory = gtk.IconFactory()
+    factory = Gtk.IconFactory()
     factory.add_default()
     for img, name, description in icons:
-        pb = gtk.gdk.pixbuf_new_from_file(os.path.join(const.IMAGEDIR, img))
-        iconset = gtk.IconSet(pb)
+        pb = GdkPixbuf.Pixbuf.new_from_file(os.path.join(const.IMAGEDIR, img))
+        iconset = Gtk.IconSet(pb)
         factory.add(name, iconset)
-        gtk.stock_add([(name, description, 0, 0, "pigeonplanner")])
+        item = Gtk.StockItem()
+        item.stock_id = name
+        item.label = description
+        item.translation_domain = "pigeonplanner"
+        Gtk.stock_add([item])  # TODO GTK3: deprecated. Also might be stock_add_static instead.
 
 
 def set_multiple_sensitive(widgets, value=None):
@@ -82,9 +87,9 @@ def popup_menu(event, entries):
     :param event: The GTK event
     :param entries: List of wanted menuentries
     """
-    menu = gtk.Menu()
+    menu = Gtk.Menu()
     for stock_id, callback, data, label in entries:
-        item = gtk.ImageMenuItem(stock_id)
+        item = Gtk.ImageMenuItem.new_from_stock(stock_id, None)
         if data:
             item.connect("activate", callback, *data)
         else:
@@ -93,17 +98,17 @@ def popup_menu(event, entries):
             item.set_label(label)
         item.show()
         menu.append(item)
-    menu.popup(None, None, None, event.button, event.time)
+    menu.popup_at_pointer(event)
 
 
 class HiddenPigeonsMixin(object):
-    def _visible_func(self, model, rowiter):
+    def _visible_func(self, model, rowiter, data=None):
         pigeon = model.get_value(rowiter, 0)
         if not pigeon.visible:
             return not config.get("interface.missing-pigeon-hide")
         return True
 
-    def _cell_func(self, column, cell, model, rowiter):
+    def _cell_func(self, column, cell, model, rowiter, data=None):
         pigeon = model.get_value(rowiter, 0)
         color = "white"
         if config.get("interface.missing-pigeon-color"):

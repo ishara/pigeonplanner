@@ -16,8 +16,8 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import gtk
-import gobject
+from gi.repository import Gtk
+from gi.repository import GLib
 
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import locationchooser
@@ -63,7 +63,7 @@ class RacepointManager(builder.GtkBuilder):
     def on_buttonadd_clicked(self, widget):
         manager = DataManager(self.widgets.window)
         response = manager.widgets.window.run()
-        if response == gtk.RESPONSE_CLOSE:
+        if response == Gtk.ResponseType.CLOSE:
             self._fill_racepoints_combo()
         manager.widgets.window.destroy()
 
@@ -71,7 +71,7 @@ class RacepointManager(builder.GtkBuilder):
         racepoint = self.widgets.combopoint.get_active_text()
         dialog = locationchooser.LocationChooser(self.widgets.window, racepoint)
         response = dialog.run()
-        if response == gtk.RESPONSE_OK:
+        if response == Gtk.ResponseType.OK:
             lat, lng = dialog.get_latlng()
             self.widgets.entrylatitude.set_text(lat)
             self.widgets.entrylongitude.set_text(lng)
@@ -81,7 +81,7 @@ class RacepointManager(builder.GtkBuilder):
         point = self.widgets.combopoint.get_active()
         calculator = DistanceCalculator(self.widgets.window, point)
         response = calculator.widgets.window.run()
-        if response == gtk.RESPONSE_CLOSE:
+        if response == Gtk.ResponseType.CLOSE:
             self.widgets.spindistance.set_value(float(calculator.get_distance()))
             self.widgets.combodistance.set_active(calculator.get_unit())
         calculator.widgets.window.destroy()
@@ -104,8 +104,8 @@ class RacepointManager(builder.GtkBuilder):
         def clear_image():
             self.widgets.image.clear()
             return False
-        self.widgets.image.set_from_stock(gtk.STOCK_OK, gtk.ICON_SIZE_BUTTON)
-        gobject.timeout_add(3000, clear_image)
+        self.widgets.image.set_from_stock(Gtk.STOCK_OK, Gtk.IconSize.BUTTON)
+        GLib.timeout_add(3000, clear_image)
 
     def _fill_racepoints_combo(self):
         comboboxes.fill_combobox(self.widgets.combopoint, Racepoint.get_data_list())

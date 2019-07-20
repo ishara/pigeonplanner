@@ -23,8 +23,9 @@ Logdialog class
 import glob
 import os.path
 
-import gtk
-import gobject
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GLib
 
 from pigeonplanner.core import const
 
@@ -40,57 +41,50 @@ COLORS = {
 }
 
 
-class LogDialog(gtk.Dialog):
+class LogDialog(Gtk.Dialog):
     def __init__(self,):
-        gtk.Dialog.__init__(self)
+        Gtk.Dialog.__init__(self)
         self.set_title(_("Logfile Viewer"))
         self.set_size_request(700, 500)
-        self.set_icon(self.render_icon(gtk.STOCK_FILE, gtk.ICON_SIZE_MENU))
+        self.set_icon(self.render_icon(Gtk.STOCK_FILE, Gtk.IconSize.MENU))
 
         self.set_logfile()
 
-        frame = gtk.Frame()
-        self.vbox.pack_start(frame)
+        frame = Gtk.Frame()
+        self.vbox.pack_start(frame, True, True, 0)
         frame.set_border_width(10)
-        hbox = gtk.HBox()
+        hbox = Gtk.HBox()
         frame.add(hbox)
 
         # auto scroll
-        scroll = gtk.ScrolledWindow()
-        hbox.pack_start(scroll)
-        scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        scroll = Gtk.ScrolledWindow()
+        hbox.pack_start(scroll, True, True, 0)
+        scroll.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         scroll.get_vadjustment().connect("changed", self.changed)
         scroll.get_vadjustment().connect("value-changed", self.value_changed)
 
         # textview
-        bffr = gtk.TextBuffer()
-        self.textview = gtk.TextView(bffr)
+        self.textview = Gtk.TextView()
         scroll.add(self.textview)
-        self.textview.set_wrap_mode(gtk.WRAP_NONE)
+        self.textview.set_wrap_mode(Gtk.WrapMode.NONE)
         self.textview.set_editable(False)
         self.textview.set_cursor_visible(False)
-        self.textview.modify_base(gtk.STATE_NORMAL,
-                                  gtk.gdk.color_parse("black"))
+        self.textview.set_name("logfile-textview")
 
-        table = bffr.get_tag_table()
         for name, color in COLORS.items():
-            tag = gtk.TextTag(name)
-            tag.set_property("foreground", color)
-            tag.set_property("left_margin", 10)
-            tag.set_property("right_margin", 10)
-            table.add(tag)
+            self.textview.get_buffer().create_tag(name, foreground=color, left_margin=10, right_margin=10)
 
         # combo
-        vbox = gtk.VBox(False, 4)
-        align = gtk.Alignment(.0, .0, .0, .0)
+        vbox = Gtk.VBox(False, 4)
+        align = Gtk.Alignment.new(.0, .0, .0, .0)
         align.add(vbox)
         self.vbox.pack_start(align, False, False, 0)
-        label = gtk.Label("Minimum severity shown:")
+        label = Gtk.Label("Minimum severity shown:")
         label.set_alignment(0, .5)
         vbox.pack_start(label, False, False, 0)
 
         # combo severity
-        self.combo = gtk.combo_box_new_text()
+        self.combo = Gtk.ComboBoxText()
         vbox.pack_start(self.combo, False, False, 0)
         self.combo.connect("changed", self.reload_view)
 
@@ -99,7 +93,7 @@ class LogDialog(gtk.Dialog):
         self.combo.set_active(0)
 
         # combo logs
-        self.combo_logs = gtk.combo_box_new_text()
+        self.combo_logs = Gtk.ComboBoxText()
         vbox.pack_start(self.combo_logs, False, False, 0)
         self.combo_logs.connect("changed", self.set_logfile)
         self.combo_logs.connect("changed", self.reload_view)
@@ -110,14 +104,14 @@ class LogDialog(gtk.Dialog):
         self.combo_logs.set_active(0)
 
         # action area
-        button_close = gtk.Button(None, gtk.STOCK_CLOSE)
+        button_close = Gtk.Button.new_from_stock(Gtk.STOCK_CLOSE)
         button_close.connect("clicked", self.close)
-        self.action_area.pack_start(button_close)
+        self.action_area.pack_start(button_close, False, False, 0)
 
         self.connect("response", self.close)
         self.show_all()
 
-        gobject.timeout_add(1000, self.update)
+        GLib.timeout_add(1000, self.update)
         self.run()
 
     def set_logfile(self, widget=None):
@@ -126,7 +120,7 @@ class LogDialog(gtk.Dialog):
         else:
             logfile = const.LOGFILE
         self.file = open(logfile, "r")
-        self.back_buffer = gtk.TextBuffer()
+        self.back_buffer = Gtk.TextBuffer()
         self.back_buffer.set_text(self.file.read())
 
     def insert_color(self, bffr, line):
@@ -140,7 +134,7 @@ class LogDialog(gtk.Dialog):
         bffr = self.textview.get_buffer()
         bffr.set_text("")
         start, end = self.back_buffer.get_bounds()
-        for line in self.back_buffer.get_text(start, end).split("\n"):
+        for line in self.back_buffer.get_text(start, end, True).split("\n"):
             self.insert_color(bffr, line)
 
     def update(self):
@@ -156,12 +150,12 @@ class LogDialog(gtk.Dialog):
 
     def changed(self, vadjust):
         if not hasattr(vadjust, "need_scroll") or vadjust.need_scroll:
-            vadjust.set_value(vadjust.upper-vadjust.page_size)
+            vadjust.set_value(vadjust.get_upper()-vadjust.get_page_size())
             vadjust.need_scroll = True
 
     def value_changed(self, vadjust):
-        vadjust.need_scroll = abs(vadjust.value + vadjust.page_size -
-                                  vadjust.upper) < vadjust.step_increment
+        vadjust.need_scroll = abs(vadjust.get_value() + vadjust.get_page_size() -
+                                  vadjust.get_upper()) < vadjust.get_step_increment()
 
     def close(self, widget=None, other=None):
         self.file.close()
