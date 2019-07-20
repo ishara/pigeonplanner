@@ -53,7 +53,7 @@ class LogDialog(Gtk.Dialog):
         frame = Gtk.Frame()
         self.vbox.pack_start(frame, True, True, 0)
         frame.set_border_width(10)
-        hbox = Gtk.HBox()
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         frame.add(hbox)
 
         # auto scroll
@@ -75,7 +75,7 @@ class LogDialog(Gtk.Dialog):
             self.textview.get_buffer().create_tag(name, foreground=color, left_margin=10, right_margin=10)
 
         # combo
-        vbox = Gtk.VBox(False, 4)
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
         align = Gtk.Alignment.new(.0, .0, .0, .0)
         align.add(vbox)
         self.vbox.pack_start(align, False, False, 0)

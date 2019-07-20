@@ -324,9 +324,10 @@
       <accelerator key="r" modifiers="GDK_CONTROL_MASK"/>
     </child>
   </object>
-  <object class="GtkVBox" id="mainvbox">
+  <object class="GtkBox" id="mainvbox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
     <child>
       <placeholder/>
     </child>
@@ -355,15 +356,16 @@
         <property name="sensitive">False</property>
         <property name="can_focus">True</property>
         <child>
-          <object class="GtkHBox" id="hbox1">
+          <object class="GtkBox" id="hbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkVBox" id="vbox1">
+              <object class="GtkBox" id="vbox1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkHBox" id="hbox_loading">
+                  <object class="GtkBox" id="hbox_loading">
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkSpinner" id="spinner1">
@@ -600,8 +602,9 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vboxButtons">
+              <object class="GtkBox" id="vboxButtons">
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">4</property>
                 <child>
                   <object class="GtkLabel" id="label6">

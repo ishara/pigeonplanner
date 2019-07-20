@@ -76,7 +76,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         frameoff.add(alignoff)
         self._liststoreoff = self._build_treeview(treeviewoff)
 
-        self.widgets._root = Gtk.HBox(True)
+        self.widgets._root = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, homogeneous=True)
         self.widgets._root.pack_start(framedirect, True, True, 4)
         self.widgets._root.pack_start(framehalf, True, True, 0)
         self.widgets._root.pack_start(frameoff, True, True, 4)

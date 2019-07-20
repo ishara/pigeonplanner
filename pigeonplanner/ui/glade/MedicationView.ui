@@ -13,7 +13,7 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkHBox" id="_root">
+  <object class="GtkBox" id="_root">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
@@ -101,11 +101,12 @@
             <property name="can_focus">False</property>
             <property name="left_padding">4</property>
             <child>
-              <object class="GtkVBox" id="vbox1">
+              <object class="GtkBox" id="vbox1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkHBox" id="hbox2">
+                  <object class="GtkBox" id="hbox2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -240,7 +241,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox3">
+                  <object class="GtkBox" id="hbox3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -605,7 +606,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHBox" id="hbox12">
+          <object class="GtkBox" id="hbox12">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">4</property>
@@ -792,7 +793,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkHBox" id="hbox22">
+                  <object class="GtkBox" id="hbox22">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -868,11 +869,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vboxexpand">
+              <object class="GtkBox" id="vboxexpand">
                 <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
                 <property name="spacing">4</property>
                 <child>
-                  <object class="GtkHBox" id="hbox18">
+                  <object class="GtkBox" id="hbox18">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="spacing">8</property>

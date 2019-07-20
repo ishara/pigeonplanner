@@ -96,7 +96,7 @@ class PedigreeWindow(Gtk.Window):
                                     self.on_pedigree_draw)
 
     def _build_ui(self):
-        vbox = Gtk.VBox(False, 8)
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
 
         actiongroup = Gtk.ActionGroup("PedigreeWindowActions")
         actiongroup.add_actions((

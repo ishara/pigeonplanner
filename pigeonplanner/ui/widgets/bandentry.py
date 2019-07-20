@@ -28,14 +28,14 @@ from pigeonplanner.core import checks
 from pigeonplanner.core import errors
 
 
-class BandEntry(Gtk.HBox):
+class BandEntry(Gtk.Box):
     __gtype_name__ = "BandEntry"
     __gsignals__ = {"search-clicked": (GObject.SIGNAL_RUN_LAST, object, ())}
     can_empty = GObject.property(type=bool, default=False, nick="Can empty")
     show_band_format = GObject.property(type=bool, default=True, nick="Show band format")
 
     def __init__(self, editable=False, can_empty=False, has_search=False, show_band_format=True):
-        Gtk.HBox.__init__(self)
+        Gtk.Box.__init__(self, orientation=Gtk.Orientation.HORIZONTAL)
         self.set_spacing(2)
 
         self.band_format = config.get("options.band-format")
@@ -73,7 +73,7 @@ class BandEntry(Gtk.HBox):
         self.entry_year.set_tooltip_text(_("Year"))
         self.entry_year.set_max_length(4)
         self.entry_year.set_activates_default(True)
-        self._hbox_band = Gtk.HBox(False, 2)
+        self._hbox_band = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=2)
         self._hbox_band.set_no_show_all(True)
         self._hbox_band.pack_start(self.entry_country, False, False, 0)
         self._hbox_band.pack_start(self.entry_letters, False, False, 0)
@@ -313,7 +313,7 @@ class BandEntryPopup(Gtk.Window):
         button_apply.set_focus_on_click(False)
         button_apply.connect("clicked", self.on_button_apply_clicked)
 
-        self._hbox_entry = Gtk.HBox(False, 2)
+        self._hbox_entry = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=2)
         self._hbox_entry.pack_start(self._entry_country, False, False, 0)
         self._hbox_entry.pack_start(self._entry_letters, False, False, 0)
         self._hbox_entry.pack_start(self._entry_number, False, False, 0)
@@ -333,7 +333,7 @@ class BandEntryPopup(Gtk.Window):
         label_info3 = Gtk.Label(_("The year has to be four digits long."))
         label_info3.set_alignment(0.0, 0.5)
 
-        vbox_info = Gtk.VBox(False, 8)
+        vbox_info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         vbox_info.pack_start(label_info1, False, True, 0)
         vbox_info.pack_start(label_info2, False, True, 0)
         vbox_info.pack_start(label_info3, False, True, 0)
@@ -358,7 +358,7 @@ class BandEntryPopup(Gtk.Window):
         self._combobox3 = BandItemCombobox()
         self._combobox4 = BandItemCombobox()
 
-        self._hbox_format = Gtk.HBox(False, 0)
+        self._hbox_format = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self._hbox_format.pack_start(self._combobox1, False, False, 0)
         self._hbox_format.pack_start(self._entry_sep1, False, False, 0)
         self._hbox_format.pack_start(self._combobox2, False, False, 0)
@@ -370,7 +370,7 @@ class BandEntryPopup(Gtk.Window):
         self._label_preview = Gtk.Label()
         self.checkbox_default = Gtk.CheckButton(_("Make this format the default"))
 
-        vbox_format = Gtk.VBox(False, 8)
+        vbox_format = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         vbox_format.pack_start(self._hbox_format, False, False, 0)
         vbox_format.pack_start(self._label_preview, False, False, 0)
         vbox_format.pack_start(self.checkbox_default, False, False, 0)
@@ -383,7 +383,7 @@ class BandEntryPopup(Gtk.Window):
         frame_format.add(align_format)
 
         # Main layout
-        vbox = Gtk.VBox(False, 8)
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         vbox.pack_start(align_entry, False, False, 0)
         vbox.pack_start(frame_info, False, False, 0)
         if self.main_entry.show_band_format:

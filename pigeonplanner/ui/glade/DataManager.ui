@@ -73,9 +73,10 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox1">
+          <object class="GtkBox" id="vbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">8</property>
             <child>
               <object class="GtkFrame" id="frameitems">
@@ -248,9 +249,10 @@
                     <property name="can_focus">False</property>
                     <property name="left_padding">12</property>
                     <child>
-                      <object class="GtkVBox" id="vbox2">
+                      <object class="GtkBox" id="vbox2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">5</property>
                         <child>
                           <object class="GtkScrolledWindow" id="scrolledwindow1">
@@ -275,7 +277,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkHBox" id="messagebox">
+                          <object class="GtkBox" id="messagebox">
                             <property name="can_focus">False</property>
                             <property name="spacing">4</property>
                             <child>

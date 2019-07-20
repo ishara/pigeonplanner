@@ -32,7 +32,7 @@ class BaseTab(component.Component):
 
         self._parent = component.get("MainWindow")
 
-        self.widgets._label = Gtk.VBox()
+        self.widgets._label = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         img = os.path.join(const.IMAGEDIR, img)
         if Gdk.Screen.height() <= 768:
             self.widgets._label.set_orientation(Gtk.Orientation.HORIZONTAL)

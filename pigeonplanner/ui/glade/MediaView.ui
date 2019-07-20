@@ -14,7 +14,7 @@
       <column type="gboolean"/>
     </columns>
   </object>
-  <object class="GtkHBox" id="_root">
+  <object class="GtkBox" id="_root">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="spacing">4</property>

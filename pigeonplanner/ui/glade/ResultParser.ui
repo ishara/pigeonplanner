@@ -116,9 +116,10 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox1">
+          <object class="GtkBox" id="vbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">4</property>
             <child>
               <object class="GtkTable" id="table">
@@ -541,7 +542,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="infobar">
+              <object class="GtkBox" id="infobar">
                 <property name="can_focus">False</property>
                 <property name="no_show_all">True</property>
                 <property name="spacing">4</property>

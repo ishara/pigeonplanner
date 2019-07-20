@@ -50,7 +50,7 @@ class PrintPreview(Gtk.Window):
         self._swin.connect('size-allocate', self.on_swin_size_allocate)
         self._swin.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         self._swin.add_with_viewport(self._drawing_area)
-        self._vbox = Gtk.VBox()
+        self._vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self._vbox.pack_end(self._swin, True, True, 0)
         self.add(self._vbox)
 
@@ -95,7 +95,7 @@ class PrintPreview(Gtk.Window):
         self._pages_entry.connect("activate", self.on_entry_activate)
         self._pages_entry.set_width_chars(6)
         self._pages_label = Gtk.Label("of 8")
-        hbox = Gtk.HBox(False, 6)
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         hbox.pack_start(self._pages_entry, False, True, 0)
         hbox.pack_start(self._pages_label, False, True, 0)
         toolitem = Gtk.ToolItem()

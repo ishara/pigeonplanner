@@ -63,7 +63,7 @@ class ExceptionDialog(Gtk.Dialog):
         self.set_title("")
         self.vbox.set_spacing(4)
         self.set_border_width(12)
-        hbox = Gtk.HBox()
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         hbox.set_spacing(12)
         image = Gtk.Image()
         image.set_from_stock(Gtk.STOCK_DIALOG_ERROR, Gtk.IconSize.DIALOG)

@@ -176,9 +176,10 @@
                     <property name="can_focus">False</property>
                     <property name="resize_mode">queue</property>
                     <child>
-                      <object class="GtkVBox" id="vbox3">
+                      <object class="GtkBox" id="vbox3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkEntry" id="entryextraedit1">
                             <property name="visible">True</property>
@@ -450,9 +451,10 @@
     <property name="can_focus">False</property>
     <property name="label_xalign">0</property>
     <child>
-      <object class="GtkVBox" id="vbox1">
+      <object class="GtkBox" id="vbox1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkLabel" id="errorlabel">
             <property name="can_focus">False</property>
@@ -697,9 +699,10 @@
                         <property name="can_focus">False</property>
                         <property name="resize_mode">queue</property>
                         <child>
-                          <object class="GtkVBox" id="vbox4">
+                          <object class="GtkBox" id="vbox4">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkEntry" id="entryextra1">
                                 <property name="visible">True</property>
@@ -924,7 +927,7 @@
     <property name="relief">none</property>
     <signal name="clicked" handler="on_statusbutton_clicked" swapped="no"/>
     <child>
-      <object class="GtkHBox" id="hbox3">
+      <object class="GtkBox" id="hbox3">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">4</property>
@@ -1008,12 +1011,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox8">
+          <object class="GtkBox" id="vbox8">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <property name="spacing">8</property>
             <child>
-              <object class="GtkHBox" id="hboxstatusedit">
+              <object class="GtkBox" id="hboxstatusedit">
                 <property name="can_focus">False</property>
                 <property name="spacing">8</property>
                 <child>
@@ -1049,7 +1053,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="hboxstatusnormal">
+              <object class="GtkBox" id="hboxstatusnormal">
                 <property name="can_focus">False</property>
                 <property name="spacing">8</property>
                 <child>

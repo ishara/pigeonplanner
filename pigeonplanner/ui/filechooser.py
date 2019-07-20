@@ -262,7 +262,7 @@ class DatabasePathChooserDialog(_FileChooserDialog):
         label_info.set_markup("%s <b>%s</b>" % (_("The default location is:"), escape(const.PREFDIR)))
         button_info = Gtk.Button(_("Select"))
         button_info.connect("clicked", self.on_button_default_path_clicked)
-        box_info = Gtk.HBox(spacing=4)
+        box_info = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         box_info.pack_start(image_info, False, False, 0)
         box_info.pack_start(label_info, False, False, 0)
         box_info.pack_start(button_info, False, False, 0)

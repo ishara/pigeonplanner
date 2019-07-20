@@ -52,7 +52,7 @@ class PedigreeTab(WidgetFactory, basetab.BaseTab):
         aligndamtop.set_padding(2, 2, 2, 2)
         aligndamtop.add(framedam)
 
-        self.widgets._root = Gtk.HBox()
+        self.widgets._root = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self.widgets._root.pack_start(alignsiretop, True, True, 0)
         self.widgets._root.pack_start(aligndamtop, True, True, 0)
         self.widgets._root.show_all()
