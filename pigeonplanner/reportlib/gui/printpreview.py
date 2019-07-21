@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from math import radians
-
 from gi.repository import Gtk
 from gi.repository import GObject
 

@@ -19,10 +19,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-
-# $Id: paperstyle.py 18338 2011-10-16 20:21:22Z paul-franklin $
 
 
 #-------------------------------------------------------------------------
@@ -33,9 +31,10 @@
 
 #-------------------------------------------------------------------------
 #
-# GRAMPS modules
+# Gramps modules
 #
 #-------------------------------------------------------------------------
+
 
 #-------------------------------------------------------------------------
 #
@@ -50,7 +49,7 @@ log = logging.getLogger(".paperstyle")
 # Page orientation
 #
 #-------------------------------------------------------------------------
-PAPER_PORTRAIT  = 0
+PAPER_PORTRAIT = 0
 PAPER_LANDSCAPE = 1
 
 #------------------------------------------------------------------------
@@ -58,7 +57,7 @@ PAPER_LANDSCAPE = 1
 # PaperSize
 #
 #------------------------------------------------------------------------
-class PaperSize(object):
+class PaperSize:
     """
     Defines the dimensions of a sheet of paper. All dimensions are in
     centimeters.
@@ -67,13 +66,21 @@ class PaperSize(object):
         """
         Create a new paper style with.
 
-        @param name: name of the new style
-        @param height: page height in centimeters
-        @param width: page width in centimeters
+        :param name: name of the new style
+        :param height: page height in centimeters
+        :param width: page width in centimeters
         """
         self.name = name
         self.height = height
         self.width = width
+        if self.name == 'Letter':
+            self.trans_pname = 'paper size|Letter'
+        elif self.name == 'Legal':
+            self.trans_pname = 'paper size|Legal'
+        elif self.name == 'Custom Size':
+            self.trans_pname = 'Custom Size'
+        else:
+            self.trans_pname = None
 
     def get_name(self):
         "Return the name of the paper style"
@@ -108,7 +115,7 @@ class PaperSize(object):
 # PaperStyle
 #
 #------------------------------------------------------------------------
-class PaperStyle(object):
+class PaperStyle:
     """
     Define the various options for a sheet of paper.
     """
@@ -117,10 +124,10 @@ class PaperStyle(object):
         """
         Create a new paper style.
 
-        @param size: size of the new style
-        @type size: PaperSize
-        @param orientation: page orientation
-        @type orientation: PAPER_PORTRAIT or PAPER_LANDSCAPE
+        :param size: size of the new style
+        :type size: :class:`.PaperSize`
+        :param orientation: page orientation
+        :type orientation: PAPER_PORTRAIT or PAPER_LANDSCAPE
 
         """
         self.__orientation = orientation
@@ -137,42 +144,42 @@ class PaperStyle(object):
         self.__rmargin = rmargin
         self.__tmargin = tmargin
         self.__bmargin = bmargin
-        
+
     def get_size(self):
         """
         Return the size of the paper.
 
-        @returns: object indicating the paper size
-        @rtype: PaperSize
-        
+        :returns: object indicating the paper size
+        :rtype: :class:`.PaperSize`
+
         """
         return self.__size
-        
+
     def get_orientation(self):
         """
         Return the orientation of the page.
 
-        @returns: PAPER_PORTRIAT or PAPER_LANDSCAPE
-        @rtype: int
-        
+        :returns: PAPER_PORTRIAT or PAPER_LANDSCAPE
+        :rtype: int
+
         """
         return self.__orientation
-        
+
     def get_usable_width(self):
         """
         Return the width of the page area in centimeters.
-        
+
         The value is the page width less the margins.
-        
+
         """
         return self.__size.get_width() - (self.__rmargin + self.__lmargin)
 
     def get_usable_height(self):
         """
         Return the height of the page area in centimeters.
-        
+
         The value is the page height less the margins.
-        
+
         """
         return self.__size.get_height() - (self.__tmargin + self.__bmargin)
 
@@ -180,9 +187,9 @@ class PaperStyle(object):
         """
         Return the right margin.
 
-        @returns: Right margin in centimeters
-        @rtype: float
-        
+        :returns: Right margin in centimeters
+        :rtype: float
+
         """
         return self.__rmargin
 
@@ -190,9 +197,9 @@ class PaperStyle(object):
         """
         Return the left margin.
 
-        @returns: Left margin in centimeters
-        @rtype: float
-        
+        :returns: Left margin in centimeters
+        :rtype: float
+
         """
         return self.__lmargin
 
@@ -200,9 +207,9 @@ class PaperStyle(object):
         """
         Return the top margin.
 
-        @returns: Top margin in centimeters
-        @rtype: float
-        
+        :returns: Top margin in centimeters
+        :rtype: float
+
         """
         return self.__tmargin
 
@@ -210,8 +217,8 @@ class PaperStyle(object):
         """
         Return the bottom margin.
 
-        @returns: Bottom margin in centimeters
-        @rtype: float
-        
+        :returns: Bottom margin in centimeters
+        :rtype: float
+
         """
         return self.__bmargin

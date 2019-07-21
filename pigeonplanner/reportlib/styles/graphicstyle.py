@@ -20,10 +20,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-
-# $Id: graphicstyle.py 18338 2011-10-16 20:21:22Z paul-franklin $
 
 
 #-------------------------------------------------------------------------
@@ -35,7 +33,7 @@
 
 #-------------------------------------------------------------------------
 #
-# GRAMPS modules
+# Gramps modules
 #
 #-------------------------------------------------------------------------
 
@@ -53,7 +51,7 @@ log = logging.getLogger(".graphicstyle")
 # Line style
 #
 #-------------------------------------------------------------------------
-SOLID  = 0
+SOLID = 0
 DASHED = 1
 DOTTED = 2
 
@@ -78,7 +76,7 @@ def get_line_style_by_name(style_name):
 # GraphicsStyle
 #
 #------------------------------------------------------------------------
-class GraphicsStyle(object):
+class GraphicsStyle:
     """
     Defines the properties of graphics objects, such as line width,
     color, fill, ect.
@@ -97,6 +95,7 @@ class GraphicsStyle(object):
             self.fill_color = obj.fill_color
             self.lwidth = obj.lwidth
             self.lstyle = obj.lstyle
+            self.description = obj.description
         else:
             self.para_name = ""
             self.shadow = 0
@@ -105,6 +104,19 @@ class GraphicsStyle(object):
             self.color = (0, 0, 0)
             self.fill_color = (255, 255, 255)
             self.lstyle = SOLID
+            self.description = ""
+
+    def set_description(self, text):
+        """
+        Set the description of the graphics object
+        """
+        self.description = text
+
+    def get_description(self):
+        """
+        Return the description of the graphics object
+        """
+        return self.description
 
     def set_line_width(self, val):
         """
@@ -139,7 +151,7 @@ class GraphicsStyle(object):
             return line_style_names[val]
         else:
             return line_style_names[0]
-    
+
     def set_paragraph_style(self, val):
         self.para_name = val
 

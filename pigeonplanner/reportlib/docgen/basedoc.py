@@ -55,8 +55,7 @@ log = logging.getLogger(".basedoc")
 # BaseDoc
 #
 #------------------------------------------------------------------------
-#class BaseDoc(metaclass=ABCMeta):  # TODO: from Gramps, Python 3 only
-class BaseDoc(object):
+class BaseDoc(metaclass=ABCMeta):
     """
     Base class for document generators. Different output formats,
     such as OpenOffice, AbiWord, and LaTeX are derived from this base

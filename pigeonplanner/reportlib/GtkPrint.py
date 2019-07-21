@@ -41,7 +41,7 @@
 # Gramps modules
 #
 #------------------------------------------------------------------------
-import libcairodoc
+from . import libcairodoc
 from .styles.paperstyle import PAPER_PORTRAIT
 from .gui.printpreview import PrintPreview
 

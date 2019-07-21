@@ -19,10 +19,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-
-# $Id: fontstyle.py 18338 2011-10-16 20:21:22Z paul-franklin $
 
 
 #-------------------------------------------------------------------------
@@ -33,7 +31,7 @@
 
 #-------------------------------------------------------------------------
 #
-# GRAMPS modules
+# Gramps modules
 #
 #-------------------------------------------------------------------------
 
@@ -52,15 +50,15 @@ log = logging.getLogger(".fontstyle")
 #
 #-------------------------------------------------------------------------
 FONT_SANS_SERIF = 0
-FONT_SERIF      = 1
-FONT_MONOSPACE  = 2
+FONT_SERIF = 1
+FONT_MONOSPACE = 2
 
 #------------------------------------------------------------------------
 #
 # FontStyle
 #
 #------------------------------------------------------------------------
-class FontStyle(object):
+class FontStyle:
     """
     Defines a font style. Controls the font face, size, color, and
     attributes. In order to remain generic, the only font faces available
@@ -71,42 +69,42 @@ class FontStyle(object):
     guarentees that the document format generator will be able implement
     all or any of the characteristics.
     """
-    
+
     def __init__(self, style=None):
         """
         Create a new FontStyle object, accepting the default values.
 
-        @param style: if specified, initializes the FontStyle from the passed
-            FontStyle instead of using the defaults.
+        :param style: if specified, initializes the FontStyle from the passed
+                      FontStyle instead of using the defaults.
         """
         if style:
-            self.face   = style.face
-            self.size   = style.size
+            self.face = style.face
+            self.size = style.size
             self.italic = style.italic
-            self.bold   = style.bold
-            self.color  = style.color
-            self.under  = style.under
+            self.bold = style.bold
+            self.color = style.color
+            self.under = style.under
         else:
-            self.face   = FONT_SERIF
-            self.size   = 12
+            self.face = FONT_SERIF
+            self.size = 12
             self.italic = 0
-            self.bold   = 0
-            self.color  = (0, 0, 0)
-            self.under  = 0
-            
+            self.bold = 0
+            self.color = (0, 0, 0)
+            self.under = 0
+
     def set(self, face=None, size=None, italic=None, bold=None,
             underline=None, color=None):
         """
         Set font characteristics.
 
-        @param face: font type face, either FONT_SERIF or FONT_SANS_SERIF
-        @param size: type face size in points
-        @param italic: True enables italics, False disables italics
-        @param bold: True enables bold face, False disables bold face
-        @param underline: True enables underline, False disables underline
-        @param color: an RGB color representation in the form of three integers
-            in the range of 0-255 represeting the red, green, and blue
-            components of a color.
+        :param face: font type face, either FONT_SERIF or FONT_SANS_SERIF
+        :param size: type face size in points
+        :param italic: True enables italics, False disables italics
+        :param bold: True enables bold face, False disables bold face
+        :param underline: True enables underline, False disables underline
+        :param color: an RGB color representation in the form of three integers
+                      in the range of 0-255 represeting the red, green, and blue
+                      components of a color.
         """
         if face is not None:
             self.set_type_face(face)

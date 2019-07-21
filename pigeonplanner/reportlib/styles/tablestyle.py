@@ -19,10 +19,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-
-# $Id: tablestyle.py 18338 2011-10-16 20:21:22Z paul-franklin $
 
 #-------------------------------------------------------------------------
 #
@@ -32,7 +30,7 @@
 
 #-------------------------------------------------------------------------
 #
-# GRAMPS modules
+# Gramps modules
 #
 #-------------------------------------------------------------------------
 
@@ -49,7 +47,7 @@ log = logging.getLogger(".tablestyle")
 # TableStyle
 #
 #------------------------------------------------------------------------
-class TableStyle(object):
+class TableStyle:
     """
     Specifies the style or format of a table. The TableStyle contains the
     characteristics of table width (in percentage of the full width), the
@@ -61,17 +59,32 @@ class TableStyle(object):
         Create a new TableStyle object, with the values initialized to
         empty, with allocating space for up to 100 columns.
 
-        @param obj: if not None, then the object created gets is attributes
-            from the passed object instead of being initialized to empty.
+        :param obj: if not None, then the object created gets is attributes
+                    from the passed object instead of being initialized to
+                    empty.
         """
         if obj:
             self.width = obj.width
             self.columns = obj.columns
-            self.colwid  = obj.colwid[:]
+            self.colwid = obj.colwid[:]
+            self.description = obj.description
         else:
             self.width = 0
             self.columns = 0
             self.colwid = [ 0 ] * 100
+            self.description = ""
+
+    def set_description(self, text):
+        """
+        Set the description of the table object
+        """
+        self.description = text
+
+    def get_description(self):
+        """
+        Return the description of the table object
+        """
+        return self.description
 
     def set_width(self, width):
         """
@@ -90,7 +103,7 @@ class TableStyle(object):
         """
         Set the number of columns.
 
-        @param columns: number of columns that should be used.
+        :param columns: number of columns that should be used.
         """
         self.columns = columns
 
@@ -98,7 +111,7 @@ class TableStyle(object):
         """
         Return the number of columns
         """
-        return self.columns 
+        return self.columns
 
     def set_column_widths(self, clist):
         """
@@ -113,8 +126,8 @@ class TableStyle(object):
         """
         Set the width of a specified column to the specified width.
 
-        @param index: column being set (index starts at 0)
-        @param width: percentage of the table width assigned to the column
+        :param index: column being set (index starts at 0)
+        :param width: percentage of the table width assigned to the column
         """
         self.colwid[index] = width
 
@@ -123,7 +136,7 @@ class TableStyle(object):
         Return the column width of the specified column as a percentage of
         the entire table width.
 
-        @param index: column to return (index starts at 0)
+        :param index: column to return (index starts at 0)
         """
         return self.colwid[index]
 
@@ -132,7 +145,7 @@ class TableStyle(object):
 # TableCellStyle
 #
 #------------------------------------------------------------------------
-class TableCellStyle(object):
+class TableCellStyle:
     """
     Defines the style of a particular table cell. Characteristics are:
     right border, left border, top border, bottom border, and padding.
@@ -141,8 +154,9 @@ class TableCellStyle(object):
         """
         Create a new TableCellStyle instance.
 
-        @param obj: if not None, specifies that the values should be
-            copied from the passed object instead of being initialized to empty.
+        :param obj: if not None, specifies that the values should be
+                    copied from the passed object instead of being initialized
+                    to empty.
         """
         if obj:
             self.rborder = obj.rborder
@@ -151,6 +165,7 @@ class TableCellStyle(object):
             self.bborder = obj.bborder
             self.padding = obj.padding
             self.longlist = obj.longlist
+            self.description = obj.description
         else:
             self.rborder = 0
             self.lborder = 0
@@ -158,22 +173,40 @@ class TableCellStyle(object):
             self.bborder = 0
             self.padding = 0
             self.longlist = 0
-    
+            self.description = ""
+
+    def set_description(self, text):
+        """
+        Set the description of the table cell object
+        """
+        self.description = text
+
+    def get_description(self):
+        """
+        Return the description of the table cell object
+        """
+        return self.description
+
     def set_padding(self, val):
         "Return the cell padding in centimeters"
         self.padding = val
 
-    def set_borders(self, top, bottom, left, right):
-        self.tborder = top
-        self.bborder = bottom
-        self.lborder = left
-        self.rborder = right
+    def set_borders(self, val):
+        """
+        Defines if a border is used
+
+        :param val: if True, a border is used, if False, it is not
+        """
+        self.rborder = val
+        self.lborder = val
+        self.tborder = val
+        self.bborder = val
 
     def set_right_border(self, val):
         """
         Defines if a right border in used
 
-        @param val: if True, a right border is used, if False, it is not
+        :param val: if True, a right border is used, if False, it is not
         """
         self.rborder = val
 
@@ -181,7 +214,7 @@ class TableCellStyle(object):
         """
         Defines if a left border in used
 
-        @param val: if True, a left border is used, if False, it is not
+        :param val: if True, a left border is used, if False, it is not
         """
         self.lborder = val
 
@@ -189,7 +222,7 @@ class TableCellStyle(object):
         """
         Defines if a top border in used
 
-        @param val: if True, a top border is used, if False, it is not
+        :param val: if True, a top border is used, if False, it is not
         """
         self.tborder = val
 
@@ -197,7 +230,7 @@ class TableCellStyle(object):
         """
         Defines if a bottom border in used
 
-        @param val: if 1, a bottom border is used, if 0, it is not
+        :param val: if 1, a bottom border is used, if 0, it is not
         """
         self.bborder = val
 

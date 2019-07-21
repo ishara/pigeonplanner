@@ -19,10 +19,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-
-# $Id: paragraphstyle.py 18338 2011-10-16 20:21:22Z paul-franklin $
 
 #-------------------------------------------------------------------------
 #
@@ -32,7 +30,7 @@
 
 #-------------------------------------------------------------------------
 #
-# GRAMPS modules
+# Gramps modules
 #
 #-------------------------------------------------------------------------
 from .fontstyle import FontStyle
@@ -50,9 +48,9 @@ log = logging.getLogger(".paragraphstyle")
 # Paragraph alignment
 #
 #-------------------------------------------------------------------------
-PARA_ALIGN_CENTER  = 0
-PARA_ALIGN_LEFT    = 1 
-PARA_ALIGN_RIGHT   = 2
+PARA_ALIGN_CENTER = 0
+PARA_ALIGN_LEFT = 1
+PARA_ALIGN_RIGHT = 2
 PARA_ALIGN_JUSTIFY = 3
 
 #------------------------------------------------------------------------
@@ -60,18 +58,18 @@ PARA_ALIGN_JUSTIFY = 3
 # ParagraphStyle
 #
 #------------------------------------------------------------------------
-class ParagraphStyle(object):
+class ParagraphStyle:
     """
     Defines the characteristics of a paragraph. The characteristics are:
-    font (a FontStyle instance), right margin, left margin, first indent,
-    top margin, bottom margin, alignment, level, top border, bottom border,
-    right border, left border, padding, and background color.
+    font (a :class:`.FontStyle` instance), right margin, left margin,
+    first indent, top margin, bottom margin, alignment, level, top border,
+    bottom border, right border, left border, padding, and background color.
 
     """
     def __init__(self, source=None):
         """
-        @param source: if not None, then the ParagraphStyle is created
-            using the values of the source instead of the default values.
+        :param source: if not None, then the ParagraphStyle is created using the
+                       values of the source instead of the default values.
         """
         if source:
             self.font = FontStyle(source.font)
@@ -110,13 +108,13 @@ class ParagraphStyle(object):
 
     def set_description(self, text):
         """
-        Set the desciption of the paragraph
+        Set the description of the paragraph
         """
         self.description = text
 
     def get_description(self):
         """
-        Return the desciption of the paragraph
+        Return the description of the paragraph
         """
         return self.description
 
@@ -127,19 +125,19 @@ class ParagraphStyle(object):
         """
         Allows the values of the object to be set.
 
-        @param rmargin: right indent in centimeters
-        @param lmargin: left indent in centimeters
-        @param first_indent: first line indent in centimeters
-        @param tmargin: space above paragraph in centimeters
-        @param bmargin: space below paragraph in centimeters
-        @param align: alignment type (PARA_ALIGN_LEFT, PARA_ALIGN_RIGHT, PARA_ALIGN_CENTER, or PARA_ALIGN_JUSTIFY)
-        @param tborder: non zero indicates that a top border should be used
-        @param bborder: non zero indicates that a bottom border should be used
-        @param rborder: non zero indicates that a right border should be used
-        @param lborder: non zero indicates that a left border should be used
-        @param pad: padding in centimeters
-        @param bgcolor: background color of the paragraph as an RGB tuple.
-        @param font: FontStyle instance that defines the font
+        :param rmargin: right indent in centimeters
+        :param lmargin: left indent in centimeters
+        :param first_indent: first line indent in centimeters
+        :param tmargin: space above paragraph in centimeters
+        :param bmargin: space below paragraph in centimeters
+        :param align: alignment type (PARA_ALIGN_LEFT, PARA_ALIGN_RIGHT, PARA_ALIGN_CENTER, or PARA_ALIGN_JUSTIFY)
+        :param tborder: non zero indicates that a top border should be used
+        :param bborder: non zero indicates that a bottom border should be used
+        :param rborder: non zero indicates that a right border should be used
+        :param lborder: non zero indicates that a left border should be used
+        :param pad: padding in centimeters
+        :param bgcolor: background color of the paragraph as an RGB tuple.
+        :param font: FontStyle instance that defines the font
         """
         if font is not None:
             self.font = FontStyle(font)
@@ -167,7 +165,7 @@ class ParagraphStyle(object):
             self.set_top_margin(tmargin)
         if bmargin is not None:
             self.set_bottom_margin(bmargin)
-            
+
     def set_header_level(self, level):
         """
         Set the header level for the paragraph. This is useful for
@@ -185,19 +183,20 @@ class ParagraphStyle(object):
         """
         Set the font style of the paragraph.
 
-        @param font: FontStyle object containing the font definition to use.
+        :param font: :class:`.FontStyle` object containing the font definition
+                     to use.
         """
         self.font = FontStyle(font)
 
     def get_font(self):
-        "Return the FontStyle of the paragraph"
+        "Return the :class:`.FontStyle` of the paragraph"
         return self.font
 
     def set_padding(self, val):
         """
         Set the paragraph padding in centimeters
 
-        @param val: floating point value indicating the padding in centimeters
+        :param val: floating point value indicating the padding in centimeters
         """
         self.pad = val
 
@@ -209,8 +208,8 @@ class ParagraphStyle(object):
         """
         Set the presence or absence of top border.
 
-        @param val: True indicates a border should be used, False indicates
-            no border.
+        :param val: True indicates a border should be used, False indicates
+                    no border.
         """
         self.top_border = val
 
@@ -222,8 +221,8 @@ class ParagraphStyle(object):
         """
         Set the presence or absence of bottom border.
 
-        @param val: True indicates a border should be used, False
-            indicates no border.
+        :param val: True indicates a border should be used, False
+                    indicates no border.
         """
         self.bottom_border = val
 
@@ -235,8 +234,8 @@ class ParagraphStyle(object):
         """
         Set the presence or absence of left border.
 
-        @param val: True indicates a border should be used, False
-            indicates no border.
+        :param val: True indicates a border should be used, False
+                    indicates no border.
         """
         self.left_border = val
 
@@ -248,8 +247,8 @@ class ParagraphStyle(object):
         """
         Set the presence or absence of rigth border.
 
-        @param val: True indicates a border should be used, False
-            indicates no border.
+        :param val: True indicates a border should be used, False
+                    indicates no border.
         """
         self.right_border = val
 
@@ -268,8 +267,8 @@ class ParagraphStyle(object):
         """
         Set the background color of the paragraph.
 
-        @param color: tuple representing the RGB components of a color
-            (0,0,0) to (255,255,255)
+        :param color: tuple representing the RGB components of a color
+                      (0,0,0) to (255,255,255)
         """
         self.bgcolor = color
 
@@ -277,8 +276,8 @@ class ParagraphStyle(object):
         """
         Set the paragraph alignment.
 
-        @param align: PARA_ALIGN_LEFT, PARA_ALIGN_RIGHT, PARA_ALIGN_CENTER,
-            or PARA_ALIGN_JUSTIFY
+        :param align: PARA_ALIGN_LEFT, PARA_ALIGN_RIGHT, PARA_ALIGN_CENTER,
+                      or PARA_ALIGN_JUSTIFY
         """
         self.align = align
 
@@ -288,7 +287,7 @@ class ParagraphStyle(object):
 
     def get_alignment_text(self):
         """
-        Return a text string representing the alginment, either 'left',
+        Return a text string representing the alignment, either 'left',
         'right', 'center', or 'justify'
         """
         if self.align == PARA_ALIGN_LEFT:
