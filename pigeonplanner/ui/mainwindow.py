@@ -203,16 +203,16 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.show()
         self.widgets.treeview.grab_focus()
 
-        self._dbman = dbmanager.DBManagerWindow(parent=self)
-        self._dbman.connect("database-loaded", self.on_database_loaded)
-        self._dbman.run(True)
-
         self.widgets.database_infobar = Gtk.InfoBar()
         self.widgets.database_infobar.get_content_area().add(Gtk.Label(_("Open a database to use the application.")))
         self.widgets.database_infobar.add_button(_("Database manager"), Gtk.ResponseType.APPLY)
         self.widgets.database_infobar.connect("response", lambda *args: self.widgets.DBMan.activate())
         self.widgets.database_infobar.show_all()
         self.widgets.mainvbox.pack_start(self.widgets.database_infobar, False, False, 0)
+
+        self._dbman = dbmanager.DBManagerWindow(parent=self)
+        self._dbman.connect("database-loaded", self.on_database_loaded)
+        self._dbman.run(True)
 
         if gtkosx is not None:
             def osx_quit(*args):
