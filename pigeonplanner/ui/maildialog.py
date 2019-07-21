@@ -130,7 +130,7 @@ class MailDialog(builder.GtkBuilder):
         recipient = self.widgets.entry_to.get_text()
         subject = self.widgets.entry_subject.get_text()
         body = self.widgets.textbuffer.get_text(
-                                *self.widgets.textbuffer.get_bounds()).strip()
+                                *self.widgets.textbuffer.get_bounds(), include_hidden_chars=True).strip()
         sender = "%s <%s>" % (self.widgets.entry_name.get_text(),
                               self.widgets.entry_mail.get_text())
 
