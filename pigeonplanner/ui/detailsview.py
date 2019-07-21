@@ -102,6 +102,7 @@ class PigeonImageWidget(Gtk.EventBox):
         Gtk.EventBox.__init__(self)
         if editable:
             self.connect("button-press-event", self.on_editable_button_press_event)
+            self.connect("realize", self.on_realize)
         else:
             self.connect("button-press-event", self.on_button_press_event)
 
@@ -146,6 +147,9 @@ class PigeonImageWidget(Gtk.EventBox):
             self.set_default_image()
         chooser.destroy()
 
+    def on_realize(self, widget):
+        self.set_cursor("pointer")
+
     def set_default_image(self, widget=None):
         self._imagewidget.set_from_pixbuf(self._logo_pb)
         self._imagepath = ""
@@ -155,11 +159,19 @@ class PigeonImageWidget(Gtk.EventBox):
             pixbuf = thumbnail.get_image(image.path)
             self._imagewidget.set_from_pixbuf(pixbuf)
             self._imagepath = image.path
+            self.set_cursor("pointer")
         else:
             self.set_default_image()
+            self.set_cursor(None)
 
     def get_image_path(self):
         return self._imagepath
+
+    def set_cursor(self, cursor):
+        if cursor is not None:
+            cursor = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), cursor)
+        gdkwindow = self.get_window()
+        gdkwindow.set_cursor(cursor)
 
 
 class StatusButton(builder.GtkBuilder):
