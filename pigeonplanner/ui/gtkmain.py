@@ -88,16 +88,6 @@ def setup_custom_style():
     style_context.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 
-def notify_missing_libs(missing_libs):
-    if len(missing_libs) > 0:
-        # TODO: create a helppage on the website? Link to PyPI?
-        from pigeonplanner.ui.messagedialog import ErrorDialog
-        libs_label = "\n".join(missing_libs)
-        help_label = "Pigeon Planner requires the following libraries to run correctly:"
-        ErrorDialog((help_label, libs_label, None))
-        return
-
-
 def search_updates():
     from pigeonplanner.core import update
     try:
@@ -151,15 +141,16 @@ class Application(Gtk.Application):
         # TODO GTK3: application icon is way too large if menu is attached to title bar
         # self.set_app_menu(menu)
 
-        setup_logging()
-        setup_icons()
-        setup_custom_style()
-        notify_missing_libs(self._missing_libs)
-
         # Import widgets that are used in GtkBuilder files (no idea why these three and not others)
         from pigeonplanner.ui.widgets import statusbar; statusbar
         from pigeonplanner.ui.widgets import checkbutton; checkbutton
         from pigeonplanner.ui.widgets import latlongentry; latlongentry
+
+        # Do this as soon as possible to avoid importing files that import a missing module
+        self.notify_missing_libs()
+        setup_logging()
+        setup_icons()
+        setup_custom_style()
 
         from pigeonplanner.core import config
         if config.get("options.check-for-updates"):
@@ -179,3 +170,12 @@ class Application(Gtk.Application):
 
     def on_quit(self, action, param):
         self.quit()
+
+    def notify_missing_libs(self):
+        if len(self._missing_libs) > 0:
+            # TODO: create a helppage on the website? Link to PyPI?
+            from pigeonplanner.ui.messagedialog import ErrorDialog
+            libs_label = "\n".join(self._missing_libs)
+            help_label = "Pigeon Planner requires the following libraries to run correctly:"
+            ErrorDialog((help_label, libs_label, None))
+            self.quit()
