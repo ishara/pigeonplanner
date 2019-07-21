@@ -56,6 +56,7 @@ class PedigreeWindow(Gtk.Window):
    </toolbar>
 </ui>
 """
+
     def __init__(self, parent, pedigree, pigeon):
         Gtk.Window.__init__(self)
         self.connect("delete-event", self.on_close_dialog)
@@ -65,6 +66,11 @@ class PedigreeWindow(Gtk.Window):
         self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT)
         self.set_skip_taskbar_hint(True)
 
+        self.pigeon = None
+        self._current_pigeon = None
+        self._current_pigeon_path = None
+        self._previous_pigeons = []
+        self.pdfname = ""
         self.pedigree = pedigree
         self._original_pigeon = pigeon
         self._treeview = component.get("Treeview")
@@ -96,26 +102,22 @@ class PedigreeWindow(Gtk.Window):
                                     self.on_pedigree_draw)
 
     def _build_ui(self):
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-
         actiongroup = Gtk.ActionGroup("PedigreeWindowActions")
         actiongroup.add_actions((
             ("Previous", Gtk.STOCK_GO_BACK, None, None,
-                    _("Go to the previous pedigree"), self.on_previous_clicked),
+             _("Go to the previous pedigree"), self.on_previous_clicked),
             ("Home", Gtk.STOCK_HOME, None, None,
-                    _("Go to the first selected pedigree"), self.on_home_clicked),
+             _("Go to the first selected pedigree"), self.on_home_clicked),
             ("Next", Gtk.STOCK_GO_FORWARD, None, None,
-                    _("Go to the next pedigree"), self.on_next_clicked),
+             _("Go to the next pedigree"), self.on_next_clicked),
             ("Save", Gtk.STOCK_SAVE, None, None,
-                    _("Save this pedigree"), self.on_save_clicked),
-            ##("Mail", "email", None, None,
-            ##        _("Email this pedigree"), self.on_mail_clicked),
+             _("Save this pedigree"), self.on_save_clicked),
             ("Preview", Gtk.STOCK_PRINT_PREVIEW, None, None,
-                    _("View this pedigree"), self.on_preview_clicked),
+             _("View this pedigree"), self.on_preview_clicked),
             ("Print", Gtk.STOCK_PRINT, None, None,
-                    _("Print this pedigree"), self.on_print_clicked),
+             _("Print this pedigree"), self.on_print_clicked),
             ("Close", Gtk.STOCK_CLOSE, None, None,
-                    _("Close this window"), self.on_close_dialog)
+             _("Close this window"), self.on_close_dialog)
             ))
         uimanager = Gtk.UIManager()
         uimanager.add_ui_from_string(self.ui)
@@ -124,11 +126,19 @@ class PedigreeWindow(Gtk.Window):
         self.add_accel_group(accelgroup)
 
         toolbar = uimanager.get_widget("/Toolbar")
-        vbox.pack_start(toolbar, False, False, 0)
-
         self._home_pedigree_button = uimanager.get_widget("/Toolbar/Home")
         self._previous_pedigree_button = uimanager.get_widget("/Toolbar/Previous")
         self._next_pedigree_button = uimanager.get_widget("/Toolbar/Next")
+
+        self.buttonprev = Gtk.Button.new_from_icon_name(Gtk.STOCK_GO_BACK, Gtk.IconSize.BUTTON)
+        self.buttonprev.set_relief(Gtk.ReliefStyle.NONE)
+        self.buttonprev.connect("clicked", self.on_navbutton_clicked, PREVIOUS)
+        self.buttonnextsire = Gtk.Button.new_from_icon_name(Gtk.STOCK_GO_FORWARD, Gtk.IconSize.BUTTON)
+        self.buttonnextsire.set_relief(Gtk.ReliefStyle.NONE)
+        self.buttonnextsire.connect("clicked", self.on_navbutton_clicked, NEXT_SIRE)
+        self.buttonnextdam = Gtk.Button.new_from_icon_name(Gtk.STOCK_GO_FORWARD, Gtk.IconSize.BUTTON)
+        self.buttonnextdam.set_relief(Gtk.ReliefStyle.NONE)
+        self.buttonnextdam.connect("clicked", self.on_navbutton_clicked, NEXT_DAM)
 
         self.table = table = Gtk.Table(20, 7)
         table.set_size_request(-1, 340)
@@ -136,26 +146,12 @@ class PedigreeWindow(Gtk.Window):
         table.set_margin_bottom(8)
         table.set_margin_start(4)
         table.set_margin_end(4)
-
-        image = Gtk.Image.new_from_stock(Gtk.STOCK_GO_BACK, Gtk.IconSize.BUTTON)
-        self.buttonprev = Gtk.Button()
-        self.buttonprev.add(image)
-        self.buttonprev.set_relief(Gtk.ReliefStyle.NONE)
-        self.buttonprev.connect("clicked", self.on_navbutton_clicked, PREVIOUS)
         table.attach(self.buttonprev, 0, 1, 7, 8, 0, 0)
-        image = Gtk.Image.new_from_stock(Gtk.STOCK_GO_FORWARD, Gtk.IconSize.BUTTON)
-        self.buttonnextsire = Gtk.Button()
-        self.buttonnextsire.add(image)
-        self.buttonnextsire.set_relief(Gtk.ReliefStyle.NONE)
-        self.buttonnextsire.connect("clicked", self.on_navbutton_clicked, NEXT_SIRE)
         table.attach(self.buttonnextsire, 8, 9, 3, 4, 0, 0)
-        image = Gtk.Image.new_from_stock(Gtk.STOCK_GO_FORWARD, Gtk.IconSize.BUTTON)
-        self.buttonnextdam = Gtk.Button()
-        self.buttonnextdam.add(image)
-        self.buttonnextdam.set_relief(Gtk.ReliefStyle.NONE)
-        self.buttonnextdam.connect("clicked", self.on_navbutton_clicked, NEXT_DAM)
         table.attach(self.buttonnextdam, 8, 9, 11, 12, 0, 0)
 
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        vbox.pack_start(toolbar, False, False, 0)
         vbox.pack_start(table, False, False, 0)
         self.add(vbox)
 
@@ -185,13 +181,6 @@ class PedigreeWindow(Gtk.Window):
         self.buttonnextsire.set_sensitive(can_next_sire)
         can_next_dam = self._current_pigeon.dam is not None
         self.buttonnextdam.set_sensitive(can_next_dam)
-
-    def on_mail_clicked(self, widget):
-        #TODO: disabled for now. Remove?
-        ##self.do_operation(const.MAIL)
-        ##pedigree = os.path.join(const.TEMPDIR, self.pdfname)
-        ##maildialog.MailDialog(self, pedigree)
-        pass
 
     def on_home_clicked(self, widget):
         self.set_pigeon(self._original_pigeon)
