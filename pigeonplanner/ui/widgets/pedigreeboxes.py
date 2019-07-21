@@ -33,7 +33,6 @@ class PedigreeBox(Gtk.DrawingArea):
     def __init__(self, pigeon=None, child=None, detailed=False):
         Gtk.DrawingArea.__init__(self)
 
-        self.context = None
         self.textlayout = None
 
         if not detailed:
@@ -43,7 +42,6 @@ class PedigreeBox(Gtk.DrawingArea):
         self.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK)
         self.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK)
         self.connect("draw", self.draw)
-        self.connect("realize", self.realize)
         self.connect("enter-notify-event", self.on_enter_event)
         self.connect("leave-notify-event", self.on_leave_event)
         self.connect("state-changed", self.state_changed)
@@ -107,26 +105,20 @@ class PedigreeBox(Gtk.DrawingArea):
             return True
         return False
 
-    def realize(self, widget):
-        # Class needs a context
-        self.context = self.get_window().cairo_create()
+    def draw(self, widget, context):
+        alloc = self.get_allocation()
+
+        minw = 155
+        minh = 25
         if not self.textlayout:
-            self.textlayout = PangoCairo.create_layout(self.context)
+            self.textlayout = PangoCairo.create_layout(context)
             font_desc = self.get_style_context().get_font(Gtk.StateFlags.NORMAL)
             self.textlayout.set_font_description(font_desc)
             self.textlayout.set_markup(self.text, -1)
         size = self.textlayout.get_pixel_size()
         xmin = size[0] + 12
         ymin = size[1] + 11
-        self.set_size_request(max(xmin, 155), max(ymin, 25))
-
-    def draw(self, widget, context):
-        alloc = self.get_allocation()
-
-        self.textlayout = PangoCairo.create_layout(self.context)
-        font_desc = self.get_style_context().get_font(Gtk.StateFlags.NORMAL)
-        self.textlayout.set_font_description(font_desc)
-        self.textlayout.set_markup(self.text, -1)
+        self.set_size_request(max(xmin, minw), max(ymin, minh))
 
         context.move_to(0, 5)
         context.curve_to(0, 2, 2, 0, 5, 0)
@@ -174,11 +166,9 @@ class ExtraBox(Gtk.DrawingArea):
     def __init__(self, pigeon, lines):
         Gtk.DrawingArea.__init__(self)
 
-        self.context = None
         self.textlayout = None
 
         self.connect("draw", self.draw)
-        self.connect("realize", self.realize)
 
         self.text = ""
         if pigeon is not None:
@@ -188,26 +178,21 @@ class ExtraBox(Gtk.DrawingArea):
         else:
             self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
             self.bordercolor = (0, 0, 0)
+        
+    def draw(self, widget, context):
+        alloc = self.get_allocation()
 
-    def realize(self, widget):
-        self.context = self.get_window().cairo_create()
+        minw = 220
+        minh = 25
         if not self.textlayout:
-            self.textlayout = PangoCairo.create_layout(self.context)
+            self.textlayout = PangoCairo.create_layout(context)
             font_desc = self.get_style_context().get_font(Gtk.StateFlags.NORMAL)
             self.textlayout.set_font_description(font_desc)
             self.textlayout.set_markup(self.text, -1)
         size = self.textlayout.get_pixel_size()
         xmin = size[0] + 12
         ymin = size[1] + 8
-        self.set_size_request(max(xmin, 220), max(ymin, 25))
-        
-    def draw(self, widget, context):
-        alloc = self.get_allocation()
-
-        self.textlayout = PangoCairo.create_layout(self.context)
-        font_desc = self.get_style_context().get_font(Gtk.StateFlags.NORMAL)
-        self.textlayout.set_font_description(font_desc)
-        self.textlayout.set_markup(self.text, -1)
+        self.set_size_request(max(xmin, minw), max(ymin, minh))
 
         context.move_to(0, 5)
         context.curve_to(0, 2, 2, 0, 5, 0)
@@ -248,180 +233,6 @@ class ExtraBox(Gtk.DrawingArea):
         context.append_path(path)
         context.set_source_rgb(*self.bordercolor)
         context.stroke()
-
-
-# class PedigreeBox_gdk(gtk.DrawingArea):
-#     def __init__(self, pigeon, child, detailed):
-#         gtk.DrawingArea.__init__(self)
-#
-#         if not detailed:
-#             self.set_property("can-focus", True)
-#         self.add_events(gtk.gdk.BUTTON_PRESS_MASK)
-#         self.add_events(gtk.gdk.ENTER_NOTIFY_MASK)
-#         self.add_events(gtk.gdk.LEAVE_NOTIFY_MASK)
-#         self.connect("expose_event", self.expose)
-#         self.connect("realize", self.realize)
-#         self.connect("enter-notify-event", self.on_enter_event)
-#         self.connect("leave-notify-event", self.on_leave_event)
-#         self.connect("state_changed", self.state_changed)
-#         self.pigeon = pigeon
-#         self.child = child
-#         self.sex = None
-#         self.editable = False
-#         self.highlight = False
-#
-#         text = ""
-#         if self.pigeon:
-#             self.editable = True
-#             text = self.pigeon.band
-#         else:
-#             if detailed and child is not None:
-#                 self.editable = True
-#                 tform = "<span style=\"italic\" foreground=\"#6a6a6a\">%s</span>"
-#                 text = tform % common.escape_text(_("<edit>"))
-#
-#         self.textlayout = self.create_pango_layout("")
-#         self.textlayout.set_markup(text)
-#         s = self.textlayout.get_pixel_size()
-#         xmin = s[0] + 12
-#         ymin = s[1] + 11
-#         y = 34 if detailed else 25
-#         self.set_size_request(max(xmin, 150), max(ymin, y))
-#
-#     def get_sex(self):
-#         return self.sex
-#
-#     def set_sex(self, value):
-#         self.sex = value
-#
-#     def set_highlight(self, value):
-#         width = 3 if value else 1
-#         self.border_gc.line_width = width
-#         self.queue_draw()
-#
-#     def on_enter_event(self, widget, event):
-#         if self.editable:
-#             self.set_highlight(True)
-#
-#     def on_leave_event(self, widget, event):
-#         self.set_highlight(False)
-#
-#     def state_changed(self, widget, prev_state):
-#         #TODO
-#         pass
-#
-#     def realize(self, widget):
-#         self.bg_gc = self.window.new_gc()
-#         self.text_gc = self.window.new_gc()
-#         self.border_gc = self.window.new_gc()
-#         self.border_gc.line_style = gtk.gdk.LINE_SOLID
-#         self.border_gc.line_width = 1
-#         self.shadow_gc = self.window.new_gc()
-#         self.shadow_gc.line_style = gtk.gdk.LINE_SOLID
-#         self.shadow_gc.line_width = 4
-#         if self.pigeon:
-#             if self.pigeon.is_cock():
-#                 self.bg_gc.set_foreground(
-#                         self.get_colormap().alloc_color("#b9cfe7"))
-#                 self.border_gc.set_foreground(
-#                         self.get_colormap().alloc_color("#204a87"))
-#             elif self.pigeon.is_hen():
-#                 self.bg_gc.set_foreground(
-#                         self.get_colormap().alloc_color("#ffcdf1"))
-#                 self.border_gc.set_foreground(
-#                         self.get_colormap().alloc_color("#87206a"))
-#             else:
-#                 self.bg_gc.set_foreground(
-#                         self.get_colormap().alloc_color("#c8c8c8"))
-#                 self.border_gc.set_foreground(
-#                         self.get_colormap().alloc_color("#646464"))
-#         else:
-#             self.bg_gc.set_foreground(
-#                         self.get_colormap().alloc_color("#eeeeee"))
-#             self.border_gc.set_foreground(
-#                         self.get_colormap().alloc_color("#777777"))
-#         self.shadow_gc.set_foreground(
-#                         self.get_colormap().alloc_color("#999999"))
-#
-#     def expose(self, widget, event):
-#         alloc = self.get_allocation()
-#
-#         self.window.draw_line(self.shadow_gc, 3, alloc.height-1,
-#                               alloc.width, alloc.height-1)
-#         self.window.draw_line(self.shadow_gc, alloc.width-1, 3,
-#                               alloc.width-1, alloc.height)
-#
-#         self.window.draw_rectangle(self.bg_gc, True, 1, 1,
-#                                    alloc.width-5, alloc.height-5)
-#
-#         if self.pigeon or self.editable:
-#             self.window.draw_layout(self.text_gc, 5, 4, self.textlayout)
-#
-#         if self.border_gc.line_width > 1:
-#             self.window.draw_rectangle(self.border_gc, False, 1, 1,
-#                                        alloc.width-6, alloc.height-6)
-#         else:
-#             self.window.draw_rectangle(self.border_gc, False, 0, 0,
-#                                        alloc.width-4, alloc.height-4)
-#
-#
-# class ExtraBox_gdk(gtk.DrawingArea):
-#     def __init__(self, pigeon, lines):
-#         gtk.DrawingArea.__init__(self)
-#         self.connect("expose_event", self.expose)
-#         self.connect("realize", self.realize)
-#
-#         self.text = ""
-#         if pigeon is not None:
-#             self.text = common.escape_text("\n".join(pigeon.extra[:lines]))
-#         self.textlayout = self.create_pango_layout(self.text)
-#         s = self.textlayout.get_pixel_size()
-#         xmin = s[0] + 12
-#         ymin = s[1] + 11
-#         self.set_size_request(max(xmin, 220), max(ymin, 25))
-#
-#     def realize(self, widget):
-#         self.bg_gc = self.window.new_gc()
-#         self.text_gc = self.window.new_gc()
-#         self.border_gc = self.window.new_gc()
-#         self.border_gc.line_style = gtk.gdk.LINE_SOLID
-#         self.border_gc.line_width = 1
-#         self.shadow_gc = self.window.new_gc()
-#         self.shadow_gc.line_style = gtk.gdk.LINE_SOLID
-#         self.shadow_gc.line_width = 4
-#         if self.text != "":
-#             self.bg_gc.set_foreground(
-#                             self.get_colormap().alloc_color("#f0e68c"))
-#             self.border_gc.set_foreground(
-#                             self.get_colormap().alloc_color("#777777"))
-#         else:
-#             self.bg_gc.set_foreground(
-#                             self.get_colormap().alloc_color("#eeeeee"))
-#             self.border_gc.set_foreground(
-#                             self.get_colormap().alloc_color("#777777"))
-#         self.shadow_gc.set_foreground(
-#                             self.get_colormap().alloc_color("#999999"))
-#
-#     def expose(self, widget, event):
-#         alloc = self.get_allocation()
-#
-#         self.window.draw_line(self.shadow_gc, 3, alloc.height-1,
-#                               alloc.width, alloc.height-1)
-#         self.window.draw_line(self.shadow_gc, alloc.width-1, 3,
-#                               alloc.width-1, alloc.height)
-#
-#         self.window.draw_rectangle(self.bg_gc, True, 1, 1, alloc.width-5,
-#                                    alloc.height-5)
-#
-#         if self.text:
-#             self.window.draw_layout(self.text_gc, 5, 4, self.textlayout)
-#
-#         if self.border_gc.line_width > 1:
-#             self.window.draw_rectangle(self.border_gc, False, 1, 1,
-#                                        alloc.width-6, alloc.height-6)
-#         else:
-#             self.window.draw_rectangle(self.border_gc, False, 0, 0,
-#                                        alloc.width-4, alloc.height-4)
 
 
 class PedigreeCross(Gtk.DrawingArea):

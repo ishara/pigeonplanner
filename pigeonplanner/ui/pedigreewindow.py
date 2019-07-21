@@ -131,6 +131,11 @@ class PedigreeWindow(Gtk.Window):
         self._next_pedigree_button = uimanager.get_widget("/Toolbar/Next")
 
         self.table = table = Gtk.Table(20, 7)
+        table.set_size_request(-1, 340)
+        table.set_margin_top(8)
+        table.set_margin_bottom(8)
+        table.set_margin_start(4)
+        table.set_margin_end(4)
 
         image = Gtk.Image.new_from_stock(Gtk.STOCK_GO_BACK, Gtk.IconSize.BUTTON)
         self.buttonprev = Gtk.Button()
@@ -151,11 +156,7 @@ class PedigreeWindow(Gtk.Window):
         self.buttonnextdam.connect("clicked", self.on_navbutton_clicked, NEXT_DAM)
         table.attach(self.buttonnextdam, 8, 9, 11, 12, 0, 0)
 
-        alignment = Gtk.Alignment.new(.5, .5, 0, 0)
-        alignment.set_padding(4, 4, 8, 8)
-        alignment.add(table)
-
-        vbox.pack_start(alignment, False, False, 0)
+        vbox.pack_start(table, False, False, 0)
         self.add(vbox)
 
     def _get_pedigree_table(self):
