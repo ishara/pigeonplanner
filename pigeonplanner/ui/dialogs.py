@@ -116,7 +116,7 @@ class InformationDialog(Gtk.Dialog):
         sw = Gtk.ScrolledWindow()
         sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         sw.add(treeview)
-        self.vbox.pack_start(sw, False, False, 0)
+        self.vbox.pack_start(sw, True, True, 0)
         self.vbox.show_all()
 
         template = "<b>%s</b>"
@@ -167,7 +167,7 @@ class InformationDialog(Gtk.Dialog):
             return "0"
         return "%.2f" % ((value / float(total)) * 100)
 
-    def _select_func(self, data):
+    def _select_func(self, selection, model, path, is_selected, data=None):
         return False
 
 
