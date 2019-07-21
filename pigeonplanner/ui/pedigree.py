@@ -31,12 +31,11 @@ from pigeonplanner.ui import component
 from pigeonplanner.ui.widgets import pedigreeboxes
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import InfoDialog
-from pigeonplanner.core import const
 from pigeonplanner.core import enums
 from pigeonplanner.core import pigeon as corepigeon
 
 
-class DrawPedigree(object):
+class DrawPedigree:
     def __init__(self):
         self.tables = None
         self.pigeon = None
@@ -150,7 +149,7 @@ class DrawPedigree(object):
             if pigeon is self.pigeon:
                 child = None
             else:
-                child = self.pigeon if index == 0 else lst[(index - 1) / 2]
+                child = self.pigeon if index == 0 else lst[(index - 1) // 2]
 
             box = pedigreeboxes.PedigreeBox(pigeon, child, detailed)
             try:

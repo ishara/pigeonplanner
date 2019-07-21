@@ -20,7 +20,7 @@ Interface for sending mails
 """
 
 
-import urllib
+import urllib.parse
 import mimetypes
 
 from pigeonplanner.core import const
@@ -30,12 +30,12 @@ from pigeonplanner.core import common
 def send_email(recipient="", sender="", subject="", body="", attachment=None):
     files = []
     if attachment:
-        files.append(("file", open(attachment, "rb")))
+        files.append(("file", open(attachment, "r")))
 
     fields = [("mail_to", recipient),
               ("mail_from", sender),
-              ("subject", urllib.quote(subject)),
-              ("comment", urllib.quote(body))
+              ("subject", urllib.parse.quote(subject)),
+              ("comment", urllib.parse.quote(body))
               ]
 
     post_multipart(const.MAILURL, fields, files)
@@ -45,7 +45,7 @@ def post_multipart(url, fields, files):
     content_type, body = encode_multipart_formdata(fields, files)
     headers = {"Content-type": content_type, "Content-length": str(len(body))}
 
-    return common.URLOpen().open(url, body, headers, 40).read().strip()
+    return common.URLOpen().open(url, body.encode("utf-8"), headers, 40).read().strip()
 
 
 def encode_multipart_formdata(fields, files):

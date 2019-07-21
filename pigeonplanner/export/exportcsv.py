@@ -16,22 +16,23 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
+import csv
+
 from . import utils
-from pigeonplanner.core import common
 
 
 __all__ = ["ExportCSV"]
 
 
-class ExportCSV(object):
+class ExportCSV:
     name = "CSV"
     extension = ".csv"
     filefilter = ("CSV", "*.csv")
 
     @classmethod
     def run(cls, filepath, pigeons):
-        with open(filepath, "wb") as output:
-            writer = common.UnicodeWriter(output, fieldnames=utils.COLS_PIGEON)
+        with open(filepath, "w") as output:
+            writer = csv.DictWriter(output, dialect=csv.excel, quoting=csv.QUOTE_ALL, fieldnames=utils.COLS_PIGEON)
             writer.writerow(dict((name, name) for name in utils.COLS_PIGEON))
             for pigeon in pigeons:
                 writer.writerow({

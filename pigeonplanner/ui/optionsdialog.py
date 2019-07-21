@@ -174,7 +174,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
 
                 ("backup.automatic-backup", self.widgets.checkbackup.get_active()),
                 ("backup.interval", self.widgets.spinday.get_value_as_int()),
-                ("backup.location", self.widgets.fcbutton.get_current_folder()),
+                ("backup.location", self.widgets.fcbutton.get_filename()),
 
                 ("columns.pigeon-name", self.widgets.chkName.get_active()),
                 ("columns.pigeon-band-country", self.widgets.chkCountry.get_active()),

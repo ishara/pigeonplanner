@@ -27,7 +27,7 @@ from pigeonplanner.core import const
 logger = logging.getLogger(__name__)
 
 
-class Config(object):
+class Config:
     def __init__(self):
         self.default = {}
         self.settings = {}
@@ -183,12 +183,12 @@ for option, value in default_config:
 if os.path.exists(const.CONFIGFILE_OLD):
     with open(const.CONFIGFILE_OLD) as cfg:
         logger.debug("Convert old config file to new format")
-        import ConfigParser
-        parser = ConfigParser.RawConfigParser()
+        import configparser
+        parser = configparser.RawConfigParser()
         try:
             do_transform = True
             parser.readfp(cfg)
-        except ConfigParser.MissingSectionHeaderError:
+        except configparser.MissingSectionHeaderError:
             # This is a rare situation when the new config gets written to
             # the old config file. This can happen in some 1.7 versions.
             do_transform = False

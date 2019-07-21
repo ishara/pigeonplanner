@@ -39,7 +39,7 @@ class DatabaseOperationError(Exception):
     pass
 
 
-class DatabaseInfo(object):
+class DatabaseInfo:
     def __init__(self, name, path, description, default, **kwargs):
         self.name = name
         self.path = path
@@ -82,7 +82,7 @@ class DatabaseInfo(object):
         return s
 
 
-class DBManager(object):
+class DBManager:
     default_name = _("My pigeons")
     default_description = _("My default database")
 

@@ -127,7 +127,7 @@ class VelocityCalculator(builder.GtkBuilder):
         seconds_total = (hours * 3600) + (minutes * 60) + seconds
 
         self.widgets.ls_velocity.clear()
-        for speed in xrange(begin, end+50, 50):
+        for speed in range(begin, end+50, 50):
             flight = int((distance*distunit) / (speed*speedunit))
             arrival = seconds_total + flight
             self.widgets.ls_velocity.insert(0, [

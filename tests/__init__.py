@@ -16,6 +16,5 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import __builtin__
-setattr(__builtin__, '_', lambda x: x)
-
+import gettext
+gettext.install("", "")

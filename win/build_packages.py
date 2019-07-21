@@ -94,4 +94,4 @@ if __name__ == "__main__":
         copy_files()
         build_zip()
         build_installer()
-    print "Done!"
+    print("Done!")

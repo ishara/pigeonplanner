@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # This file is part of Pigeon Planner.
@@ -60,7 +60,7 @@ def create_potfiles_in():
 
     for format, folders in FORMATS.items():
         potfile = POTFILES[format]
-        print "Creating %s" %potfile
+        print("Creating %s" % potfile)
         to_translate = []
         for folder, ext in folders:
             to_translate.extend(_get_files(folder, ext))

@@ -73,16 +73,10 @@ elif OSX:
 else:
     HOMEDIR = os.environ["HOME"]
     PREFDIR = os.path.join(HOMEDIR, ".pigeonplanner")
-# Make sure these directories are unicode
-if not isinstance(HOMEDIR, unicode):
-    HOMEDIR = unicode(HOMEDIR, sys.getfilesystemencoding())
-if not isinstance(PREFDIR, unicode):
-    PREFDIR = unicode(PREFDIR, sys.getfilesystemencoding())
 
 if hasattr(sys, "frozen"):
     # Most likely a py2exe package on Windows
-    ROOTDIR = os.path.abspath(os.path.dirname(
-        unicode(sys.executable, sys.getfilesystemencoding())))
+    ROOTDIR = os.path.abspath(os.path.dirname(sys.executable))
     IMAGEDIR = os.path.join(ROOTDIR, u"images")
     GLADEDIR = os.path.join(ROOTDIR, u"glade")
     LANGDIR = os.path.abspath("languages")
@@ -91,8 +85,7 @@ if hasattr(sys, "frozen"):
     # LANGDIR = os.path.join(ROOTDIR, u"languages")
 else:
     # This file is in pigeonplanner.core, so go 1 directory up
-    ROOTDIR = os.path.abspath(os.path.join(os.path.dirname(
-        unicode(__file__, sys.getfilesystemencoding())), os.pardir))
+    ROOTDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
     IMAGEDIR = os.path.join(ROOTDIR, u"data", u"images")
     GLADEDIR = os.path.join(ROOTDIR, u"ui", u"glade")
     LANGDIR = os.path.join(ROOTDIR, u"data", u"languages")

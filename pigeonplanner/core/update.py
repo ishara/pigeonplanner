@@ -22,8 +22,8 @@ Interface for checking program updates
 
 import os
 import json
-import urllib
 import logging
+from urllib.request import urlretrieve
 
 from pigeonplanner import messages
 from pigeonplanner.core import const
@@ -49,7 +49,7 @@ def update():
     local = os.path.join(const.TEMPDIR, "pigeonplanner_update")
 
     try:
-        urllib.urlretrieve(const.UPDATEURL, local)
+        urlretrieve(const.UPDATEURL, local)
         with open(local, "r") as versionfile:
             versiondict = json.load(versionfile)
     except IOError as exc:

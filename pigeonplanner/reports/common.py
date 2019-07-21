@@ -19,7 +19,7 @@
 from pigeonplanner.core import config
 
 
-class HelperMethods(object):
+class HelperMethods:
     def add_header(self):
         """
         Add a header with user info to the report.

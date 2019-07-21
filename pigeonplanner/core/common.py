@@ -21,17 +21,14 @@ Functions for some common tasks
 
 
 import os
-import cgi
-import csv
+import html
 import string
-import codecs
 import random
 import locale
 import inspect
-import urllib2
 import datetime
-import cStringIO
 import webbrowser
+import urllib.request
 
 import peewee
 
@@ -178,18 +175,13 @@ def email_hook(about, email):
 def escape_text(text):
     if not text:
         return ""
-    return cgi.escape(text, True)
+    return html.escape(text, True)
 
 
 def open_file(path):
     from pigeonplanner.ui.messagedialog import ErrorDialog
 
     norm_path = os.path.normpath(path)
-    try:
-        norm_path = unicode(norm_path, "utf-8")
-    except TypeError:
-        # String is already in unicode
-        pass
     if not os.path.exists(norm_path):
         ErrorDialog((_("Error: This file does not exist"), None, _("Error")))
         return
@@ -232,12 +224,12 @@ class URLOpen:
     """
     def __init__(self, cookie=None):
         """
-        Build our urllib2 opener
+        Build our urllib.request opener
 
         @param cookie: Cookie to be used
         """
 
-        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+        self.opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie))
 
     def open(self, url, body, headers=None, timeout=8):
         """
@@ -255,68 +247,4 @@ class URLOpen:
             if "User-Agent" not in headers:
                 headers.update(const.USER_AGENT)
 
-        return self.opener.open(urllib2.Request(url, body, headers), timeout=timeout)
-
-
-# Unicode classes taken from http://docs.python.org/library/csv.html
-class UTF8Recoder:
-    """
-    Iterator that reads an encoded stream and reencodes the input to UTF-8
-    """
-    def __init__(self, f, encoding):
-        self.reader = codecs.getreader(encoding)(f)
-
-    def __iter__(self):
-        return self
-
-    def next(self):
-        return self.reader.next().encode("utf-8")
-
-
-class UnicodeReader:
-    """
-    A CSV reader which will iterate over lines in the CSV file "f",
-    which is encoded in the given encoding.
-    """
-
-    def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
-        f = UTF8Recoder(f, encoding)
-        self.reader = csv.reader(f, dialect=dialect, **kwds)
-
-    def next(self):
-        row = self.reader.next()
-        return [unicode(s, "utf-8") for s in row]
-
-    def __iter__(self):
-        return self
-
-
-class UnicodeWriter:
-    """
-    A CSV writer which will write rows to CSV file "f",
-    which is encoded in the given encoding.
-    """
-
-    def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
-        # Redirect output to a queue
-        self.queue = cStringIO.StringIO()
-        self.writer = csv.DictWriter(self.queue, dialect=dialect,
-                                     quoting=csv.QUOTE_ALL, **kwds)
-        self.stream = f
-        self.encoder = codecs.getincrementalencoder(encoding)()
-
-    def writerow(self, row):
-        self.writer.writerow({k: str(v).encode("utf-8") for k, v in row.items()})
-        # Fetch UTF-8 output from the queue ...
-        data = self.queue.getvalue()
-        data = data.decode("utf-8")
-        # ... and reencode it into the target encoding
-        data = self.encoder.encode(data)
-        # write to the target stream
-        self.stream.write(data)
-        # empty queue
-        self.queue.truncate(0)
-
-    def writerows(self, rows):
-        for row in rows:
-            self.writerow(row)
+        return self.opener.open(urllib.request.Request(url, body, headers), timeout=timeout)

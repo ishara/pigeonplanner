@@ -20,7 +20,7 @@ class ComponentAlreadyRegistered(Exception):
     pass
 
 
-class Component(object):
+class Component:
     def __init__(self, name):
         self._component_name = name
         _ComponentRegistry.register(self)
@@ -30,7 +30,7 @@ class Component(object):
             _ComponentRegistry.deregister(self._component_name)
 
 
-class ComponentRegistry(object):
+class ComponentRegistry:
     def __init__(self):
         self.components = {}
 

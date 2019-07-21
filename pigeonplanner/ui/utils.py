@@ -101,7 +101,7 @@ def popup_menu(event, entries):
     menu.popup_at_pointer(event)
 
 
-class HiddenPigeonsMixin(object):
+class HiddenPigeonsMixin:
     def _visible_func(self, model, rowiter, data=None):
         pigeon = model.get_value(rowiter, 0)
         if not pigeon.visible:
@@ -117,8 +117,8 @@ class HiddenPigeonsMixin(object):
         cell.set_property("cell-background", color)
 
 
-class TreeviewFilter(object):
-    class FilterItem(object):
+class TreeviewFilter:
+    class FilterItem:
         def __init__(self, name, value, operator_, type_):
             self.name = name
             self.value = value

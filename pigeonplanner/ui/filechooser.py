@@ -32,7 +32,7 @@ LAST_FOLDER = None
 
 ########
 # Main filechooser
-class _FileChooser(object):#Gtk.FileChooser):  # TODO GTK3: why does this fail?
+class _FileChooser:#Gtk.FileChooser):  # TODO GTK3: why does this fail?
     def _update_preview_cb(self, filechooser):
         filename = filechooser.get_preview_filename()
         try:
@@ -66,17 +66,6 @@ class _FileChooser(object):#Gtk.FileChooser):  # TODO GTK3: why does this fail?
         self.connect("update-preview", self._update_preview_cb)
         self.set_preview_widget(self._create_preview_widget())
         self.set_use_preview_label(False)
-
-    def get_filename(self):
-        filename = Gtk.FileChooser.get_filename(self)
-        # filename is None when no file is selected. So prevent returning
-        # u"None" by only converting when needed.
-        if filename is not None:
-            return unicode(filename)
-
-    def get_current_folder(self):
-        # TODO: deprecate this, use get_filename() instead (even for folders!)
-        return unicode(Gtk.FileChooser.get_current_folder(self))
 
     def add_image_filter(self):
         filter_ = Gtk.FileFilter()

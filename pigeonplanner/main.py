@@ -50,7 +50,7 @@ def get_operating_system():
     return operatingsystem, distribution
 
 
-class NullFile(object):
+class NullFile:
     def __init__(self, *arg, **kwarg):
         pass
 
@@ -61,7 +61,7 @@ class NullFile(object):
         pass
 
 
-class Startup(object):
+class Startup:
     def __init__(self):
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
@@ -79,7 +79,7 @@ class Startup(object):
 
         # Create the needed configuration folders
         if not os.path.exists(const.PREFDIR):
-            os.makedirs(const.PREFDIR, 0755)
+            os.makedirs(const.PREFDIR, 0o755)
         if not os.path.isdir(const.THUMBDIR):
             os.mkdir(const.THUMBDIR)
         if not os.path.isdir(os.path.join(const.PLUGINDIR, "resultparsers")):
@@ -129,7 +129,7 @@ class Startup(object):
         gettext.bindtextdomain(localedomain, localedir)
         gettext.bind_textdomain_codeset(localedomain, "UTF-8")
         gettext.textdomain(localedomain)
-        gettext.install(localedomain, localedir, unicode=True)
+        gettext.install(localedomain, localedir)
         try:
             locale.bindtextdomain(localedomain, localedir)
         except AttributeError:

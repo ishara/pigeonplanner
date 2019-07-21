@@ -38,15 +38,15 @@ class DataManager(builder.GtkBuilder):
         # XXX: Translated strings are not unicode on some Windows XP systems
         #      that were tested.
         self.tables = {
-            unicode(_("Colours")): Colour,
-            unicode(_("Sectors")): Sector,
-            unicode(_("Types")): Type,
-            unicode(_("Categories")): Category,
-            unicode(_("Racepoints")): Racepoint,
-            unicode(_("Strains")): Strain,
-            unicode(_("Lofts")): Loft,
-            unicode(_("Weather")): Weather,
-            unicode(_("Wind")): Wind
+            _("Colours"): Colour,
+            _("Sectors"): Sector,
+            _("Types"): Type,
+            _("Categories"): Category,
+            _("Racepoints"): Racepoint,
+            _("Strains"): Strain,
+            _("Lofts"): Loft,
+            _("Weather"): Weather,
+            _("Wind"): Wind
         }
         comboboxes.fill_combobox(self.widgets.comboset, self.tables.keys())
 
@@ -62,7 +62,7 @@ class DataManager(builder.GtkBuilder):
         common.open_help(10)
 
     def on_buttonremove_clicked(self, widget):
-        dataset = unicode(self.widgets.comboset.get_active_text())
+        dataset = self.widgets.comboset.get_active_text()
         item = self.widgets.comboitem.get_active_text()
         if QuestionDialog(messages.MSG_REMOVE_ITEM,
                           self.widgets.window, (item, dataset)).run():
@@ -73,7 +73,7 @@ class DataManager(builder.GtkBuilder):
             self.widgets.comboitem.set_active(0)
 
     def on_buttonadd_clicked(self, widget):
-        dataset = unicode(self.widgets.comboset.get_active_text())
+        dataset = self.widgets.comboset.get_active_text()
         item = self.widgets.entryitem.get_text()
         table = self.tables[dataset]
         try:
@@ -86,7 +86,7 @@ class DataManager(builder.GtkBuilder):
         self._fill_item_combobox(dataset)
 
     def on_comboset_changed(self, widget):
-        dataset = unicode(widget.get_active_text())
+        dataset = widget.get_active_text()
         self._fill_item_combobox(dataset)
 
     def on_entryitem_changed(self, widget):

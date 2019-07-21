@@ -443,4 +443,4 @@ class MainTreeView(Gtk.TreeView, component.Component):
         if data1 == data2:
             data1 = model.get_value(iter1, self.LS_RING)
             data2 = model.get_value(iter2, self.LS_RING)
-        return cmp(data1, data2)
+        return (data1 > data2) - (data1 < data2)

@@ -41,7 +41,7 @@ def get_view_for_current_config():
         return SplittedView
 
 
-class BaseView(object):
+class BaseView:
     ID = None
 
     def __init__(self, root):

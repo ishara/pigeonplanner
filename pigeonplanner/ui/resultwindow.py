@@ -20,6 +20,7 @@ Results window class
 """
 
 
+import csv
 import operator
 import datetime
 
@@ -48,7 +49,7 @@ def get_view_for_current_config():
         return SplittedView
 
 
-class BaseView(object):
+class BaseView:
     ID = None
 
     (LS_COL_OBJECT,
@@ -341,7 +342,7 @@ class ClassicView(BaseView):
         if data1 == data2:
             data1 = model.get_value(iter1, self.LS_COL_BAND)
             data2 = model.get_value(iter2, self.LS_COL_BAND)
-        return cmp(data1, data2)
+        return (data1 > data2) - (data1 < data2)
 
 
 class SplittedView(BaseView):
@@ -751,9 +752,9 @@ class ResultWindow(builder.GtkBuilder):
             columns = ["band", "year", "date", "point", "place", "out", "coef", "speed",
                        "sector", "type", "category", "wind", "windspeed", "weather",
                        "temperature", "comment"]
-            with open(save_path, "wb") as output:
-                writer = common.UnicodeWriter(output, fieldnames=columns,
-                                              extrasaction="ignore")
+            with open(save_path, "w") as output:
+                writer = csv.DictWriter(output, dialect=csv.excel, quoting=csv.QUOTE_ALL,
+                                        fieldnames=columns, extrasaction="ignore")
                 writer.writerow(dict((col, self.widgets.resultview.colname2string[col])
                                      for col in columns))
                 writer.writerows(data)

@@ -36,7 +36,7 @@ class DatabaseVersionError(Exception): pass
 class DatabaseMigrationError(Exception): pass
 
 
-class DatabaseSession(object):
+class DatabaseSession:
     def __init__(self):
         self.dbfile = None
 

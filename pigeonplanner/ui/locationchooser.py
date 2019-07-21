@@ -16,13 +16,13 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import urllib2
 import logging
 
 try:
     geopy_log = logging.getLogger("geopy")
     geopy_log.setLevel(logging.ERROR)
     import geopy
+    from geopy.exc import GeopyError
     geopy_available = True
 except ImportError:
     geopy_available = False
@@ -65,7 +65,7 @@ class LocationChooser(builder.GtkBuilder):
         except ValueError:
             self._set_error(_("Can't find location '%s'") % location)
             return
-        except urllib2.URLError:
+        except GeopyError:
             self._set_error(messages.MSG_CONNECTION_ERROR)
             return
 

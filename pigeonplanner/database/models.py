@@ -50,7 +50,7 @@ def all_tables():
     return tables
 
 
-class DataModelMixin(object):
+class DataModelMixin:
     @classmethod
     def get_data_list(cls):
         column = cls.get_item_column()

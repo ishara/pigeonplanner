@@ -33,7 +33,7 @@ class _Widgets(dict):
     """
 
     def __iter__(self):
-        return self.itervalues()
+        return self.values()
 
     def __getattr__(self, name):
         return self[name]
@@ -42,7 +42,7 @@ class _Widgets(dict):
         self[name] = value
 
 
-class WidgetFactory(object):
+class WidgetFactory:
     def __init__(self):
         self.widgets = _Widgets()
 
