@@ -119,7 +119,8 @@ class Application(Gtk.Application):
         GLib.set_application_name(const.NAME)
         GLib.set_prgname(const.NAME)
 
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, self.quit)
+        if const.UNIX:
+            GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, self.quit)
 
         self._missing_libs = missing_libs
         self._window = None
