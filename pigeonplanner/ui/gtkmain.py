@@ -77,7 +77,7 @@ def setup_icons():
         ])
 
     # Set default icon for all windows
-    Gtk.Window.set_default_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
+    Gtk.Window.set_default_icon_from_file(const.LOGO_IMG)
 
 
 def setup_custom_style():

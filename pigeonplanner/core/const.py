@@ -119,4 +119,4 @@ LOG_FORMAT = "[%(asctime)s] %(name)s %(levelname)s: %(message)s"
 LOG_FORMAT_CLI = "%(name)s %(levelname)s: %(message)s"
 DATE_FORMAT = "%Y-%m-%d"
 
-LOGO_IMG = os.path.join(IMAGEDIR, "icon_logo.png")
+LOGO_IMG = os.path.join(IMAGEDIR, "pigeonplanner.svg")

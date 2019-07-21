@@ -194,7 +194,6 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
 
         self.connect("delete-event", self.quit_program)
         self.set_title(const.NAME)
-        self.set_icon_from_file(os.path.join(const.IMAGEDIR, "icon_logo.png"))
         self.add(self.widgets.mainvbox)
         self.resize(config.get("interface.window-w"),
                     config.get("interface.window-h"))
