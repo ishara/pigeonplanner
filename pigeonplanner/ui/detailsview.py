@@ -185,8 +185,8 @@ class StatusButton(builder.GtkBuilder):
 
     def on_statusdialog_close(self, widget, event=None):
         page = self.widgets.notebookstatus.get_current_page()
-        table = self.widgets.notebookstatus.get_nth_page(page)
-        for child in table.get_children():
+        grid = self.widgets.notebookstatus.get_nth_page(page)
+        for child in grid.get_children():
             if isinstance(child, date.DateEntry):
                 try:
                     # Just check the date, the value is used elsewhere
@@ -312,8 +312,8 @@ class StatusButton(builder.GtkBuilder):
                 widget.set_editable(value)
             except:
                 pass
-        for table in self.widgets.notebookstatus.get_children():
-            table.foreach(set_editable, value)
+        for grid in self.widgets.notebookstatus.get_children():
+            grid.foreach(set_editable, value)
         self.widgets.hboxstatusedit.set_visible(value)
         self.widgets.hboxstatusnormal.set_visible(not value)
 
@@ -335,7 +335,7 @@ class DetailsView(builder.GtkBuilder, component.Component):
         self.widgets.statusbutton = sb = StatusButton(self.parent)
         self.widgets.statusbutton.set_editable(False)
         self.widgets.statusbutton.set_sensitive(False)
-        self.widgets.table.attach(sb.widget, 2, 3, 2, 3)
+        self.widgets.grid.attach(sb.widget, 2, 2, 1, 1)
 
         self.widgets.root_view.show_all()
 
@@ -416,7 +416,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
 
         self.widgets.statusbuttonedit = sb = StatusButton(self.parent)
         self.widgets.statusbuttonedit.set_editable(True)
-        self.widgets.tableedit.attach(sb.widget, 2, 3, 2, 3)
+        self.widgets.gridedit.attach(sb.widget, 2, 2, 1, 1)
 
         self.widgets.combocolour.set_data(Colour)
         self.widgets.combostrain.set_data(Strain)

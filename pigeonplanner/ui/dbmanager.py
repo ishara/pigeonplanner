@@ -95,8 +95,9 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
 
         db_dialog = filechooser.DatabasePathChooserDialog(self.widgets.dialog)
         self.widgets.pathchooser = pc = filechooser.PathChooser(dialog=db_dialog)
+        self.widgets.pathchooser.set_hexpand(True)
         self.widgets.pathchooser.show()
-        self.widgets.tableadvanced.attach(pc, 1, 2, 0, 1)
+        self.widgets.gridadvanced.attach(pc, 1, 0, 1, 1)
 
         self.widgets.dialog.set_transient_for(parent)
 

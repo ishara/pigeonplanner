@@ -835,10 +835,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkTable" id="table1">
+                      <object class="GtkGrid" id="grid1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="n_columns">2</property>
                         <property name="column_spacing">4</property>
                         <child>
                           <object class="GtkButton" id="buttoninfo1">
@@ -856,8 +855,8 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="x_options"/>
-                            <property name="y_options"/>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                         <child>
@@ -877,9 +876,7 @@
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="x_options"/>
-                            <property name="y_options"/>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                       </object>
@@ -1033,10 +1030,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkTable" id="table2">
+                      <object class="GtkGrid" id="grid2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="n_columns">2</property>
                         <property name="column_spacing">4</property>
                         <child>
                           <object class="GtkButton" id="buttoninfo2">
@@ -1054,8 +1050,8 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="x_options"/>
-                            <property name="y_options"/>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                         <child>
@@ -1075,9 +1071,7 @@
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="x_options"/>
-                            <property name="y_options"/>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                       </object>

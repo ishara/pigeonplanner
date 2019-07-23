@@ -423,12 +423,11 @@
                     <property name="left_padding">2</property>
                     <property name="right_padding">2</property>
                     <child>
-                      <object class="GtkTable" id="tableStatistics">
+                      <object class="GtkGrid" id="gridStatistics">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="n_columns">5</property>
                         <property name="column_spacing">8</property>
-                        <property name="homogeneous">True</property>
+                        <property name="column_homogeneous">True</property>
                         <child>
                           <object class="GtkFrame" id="frame7">
                             <property name="visible">True</property>
@@ -456,6 +455,10 @@
                               </object>
                             </child>
                           </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">0</property>
+                          </packing>
                         </child>
                         <child>
                           <object class="GtkFrame" id="frame8">
@@ -486,7 +489,7 @@
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                         <child>
@@ -518,7 +521,7 @@
                           </object>
                           <packing>
                             <property name="left_attach">2</property>
-                            <property name="right_attach">3</property>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                         <child>
@@ -550,7 +553,7 @@
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
-                            <property name="right_attach">4</property>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                         <child>
@@ -582,7 +585,7 @@
                           </object>
                           <packing>
                             <property name="left_attach">4</property>
-                            <property name="right_attach">5</property>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                       </object>
@@ -881,120 +884,24 @@
                 <property name="left_padding">12</property>
                 <property name="right_padding">12</property>
                 <child>
-                  <object class="GtkTable" id="tablerange">
+                  <object class="GtkGrid">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="n_rows">2</property>
-                    <property name="n_columns">7</property>
-                    <property name="column_spacing">4</property>
                     <property name="row_spacing">8</property>
+                    <property name="column_spacing">4</property>
                     <child>
-                      <object class="GtkLabel" id="label53">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label">:</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">5</property>
-                        <property name="right_attach">6</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"/>
-                        <property name="y_options"/>
-                      </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label50">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Sex</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">6</property>
-                        <property name="right_attach">7</property>
-                        <property name="y_options"/>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label52">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label">/</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">3</property>
-                        <property name="right_attach">4</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"/>
-                        <property name="y_options"/>
-                      </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="entryRangeYear">
+                      <object class="GtkEntry" id="entryRangeFrom">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
+                        <property name="max_length">14</property>
                         <property name="activates_default">True</property>
-                        <property name="width_chars">4</property>
+                        <property name="width_chars">14</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                       </object>
                       <packing>
-                        <property name="left_attach">4</property>
-                        <property name="right_attach">5</property>
+                        <property name="left_attach">0</property>
                         <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"/>
-                        <property name="y_options"/>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label40">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Year</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">4</property>
-                        <property name="right_attach">5</property>
-                        <property name="y_options"/>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label51">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label">-&gt;</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"/>
-                        <property name="y_options"/>
-                      </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label26">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">To</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">2</property>
-                        <property name="right_attach">3</property>
-                        <property name="y_options"/>
                       </packing>
                     </child>
                     <child>
@@ -1009,28 +916,18 @@
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
-                        <property name="right_attach">3</property>
                         <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"/>
-                        <property name="y_options"/>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="entryRangeFrom">
+                      <object class="GtkLabel" id="label51">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="max_length">14</property>
-                        <property name="activates_default">True</property>
-                        <property name="width_chars">14</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">-&gt;</property>
                       </object>
                       <packing>
+                        <property name="left_attach">1</property>
                         <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"/>
-                        <property name="y_options"/>
                       </packing>
                     </child>
                     <child>
@@ -1040,7 +937,45 @@
                         <property name="label" translatable="yes">From</property>
                       </object>
                       <packing>
-                        <property name="y_options"/>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label52">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">/</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">3</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="entryRangeYear">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="max_length">4</property>
+                        <property name="activates_default">True</property>
+                        <property name="width_chars">6</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">4</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label53">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">:</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">5</property>
+                        <property name="top_attach">1</property>
                       </packing>
                     </child>
                     <child>
@@ -1050,12 +985,50 @@
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
-                        <property name="right_attach">7</property>
                         <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"/>
-                        <property name="y_options"/>
                       </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label50">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Sex</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">6</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label40">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Year</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">4</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label26">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">To</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
                     </child>
                   </object>
                 </child>

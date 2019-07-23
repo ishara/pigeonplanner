@@ -87,7 +87,7 @@ class ResultParser(builder.GtkBuilder):
         self.widgets.categoryentry.set_text(self.data["category"].title())
         self.widgets.pigeonsentry.set_text(self.data["n_pigeons"])
 
-        self.widgets.datatable.set_sensitive(True)
+        self.widgets.datagrid.set_sensitive(True)
         self.widgets.liststore.clear()
         if not results:
             self.widgets.infobar.show()
@@ -182,7 +182,7 @@ class ResultParser(builder.GtkBuilder):
         self.widgets.sendbutton.set_use_stock(True)
 
         self.widgets.filebutton = filechooser.ResultChooser()
-        self.widgets.table.attach(self.widgets.filebutton, 1, 2, 0, 1)
+        self.widgets.grid.attach(self.widgets.filebutton, 1, 0, 1, 1)
 
     def _find_parsers(self):
         manager = VersionedPluginManager()
