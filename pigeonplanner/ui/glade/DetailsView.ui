@@ -847,6 +847,7 @@
     </child>
   </object>
   <object class="GtkButton" id="statusbutton">
+    <property name="name">statusbutton</property>
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <property name="receives_default">True</property>
