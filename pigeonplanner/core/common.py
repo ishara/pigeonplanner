@@ -21,14 +21,20 @@ Functions for some common tasks
 
 
 import os
-import html
 import string
 import random
 import locale
 import inspect
 import datetime
 import webbrowser
-import urllib.request
+
+try:
+    import html
+    import urllib.request
+except ImportError:
+    # Glade only supports Python 2 when using custom widgets. Catch these Python 3 libraries and
+    # silently pass on, no widget calls functions that use these libraries.
+    pass
 
 import peewee
 

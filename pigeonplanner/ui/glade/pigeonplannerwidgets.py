@@ -19,8 +19,10 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../../..'))
 
-import __builtin__
-__builtin__._ = lambda x: x
+# Install a dummy gettext to avoid having NameErrors on the global underscore variable.
+# The translation domain doesn't matter as this is only imported by Glade, not the main application.
+import gettext
+gettext.install("", "")
 
 from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.widgets import date
