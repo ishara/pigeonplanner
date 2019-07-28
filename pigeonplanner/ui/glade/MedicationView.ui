@@ -154,21 +154,11 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkViewport" id="viewport2">
+                              <object class="DisplayEntry" id="entryby">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="resize_mode">queue</property>
-                                <child>
-                                  <object class="GtkEntry" id="entryby">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="editable">False</property>
-                                    <property name="has_frame">False</property>
-                                    <property name="invisible_char">•</property>
-                                    <property name="primary_icon_activatable">False</property>
-                                    <property name="secondary_icon_activatable">False</property>
-                                  </object>
-                                </child>
+                                <property name="can_focus">True</property>
+                                <property name="editable">False</property>
+                                <property name="has_frame">False</property>
                               </object>
                             </child>
                           </object>
@@ -206,21 +196,11 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkViewport" id="viewport3">
+                          <object class="DisplayEntry" id="entrydescription">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="resize_mode">queue</property>
-                            <child>
-                              <object class="GtkEntry" id="entrydescription">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="editable">False</property>
-                                <property name="has_frame">False</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                              </object>
-                            </child>
+                            <property name="can_focus">True</property>
+                            <property name="editable">False</property>
+                            <property name="has_frame">False</property>
                           </object>
                         </child>
                       </object>
@@ -255,21 +235,11 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkViewport" id="viewport5">
+                              <object class="DisplayEntry" id="entrymedication">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="resize_mode">queue</property>
-                                <child>
-                                  <object class="GtkEntry" id="entrymedication">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="editable">False</property>
-                                    <property name="has_frame">False</property>
-                                    <property name="invisible_char">•</property>
-                                    <property name="primary_icon_activatable">False</property>
-                                    <property name="secondary_icon_activatable">False</property>
-                                  </object>
-                                </child>
+                                <property name="can_focus">True</property>
+                                <property name="editable">False</property>
+                                <property name="has_frame">False</property>
                               </object>
                             </child>
                           </object>
@@ -300,21 +270,11 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkViewport" id="viewport6">
+                              <object class="DisplayEntry" id="entrydosage">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="resize_mode">queue</property>
-                                <child>
-                                  <object class="GtkEntry" id="entrydosage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="editable">False</property>
-                                    <property name="has_frame">False</property>
-                                    <property name="invisible_char">•</property>
-                                    <property name="primary_icon_activatable">False</property>
-                                    <property name="secondary_icon_activatable">False</property>
-                                  </object>
-                                </child>
+                                <property name="can_focus">True</property>
+                                <property name="editable">False</property>
+                                <property name="has_frame">False</property>
                               </object>
                             </child>
                           </object>
@@ -388,21 +348,11 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkViewport" id="viewport4">
+                          <object class="DisplayEntry" id="entrycomment">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="resize_mode">queue</property>
-                            <child>
-                              <object class="GtkEntry" id="entrycomment">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="editable">False</property>
-                                <property name="has_frame">False</property>
-                                <property name="invisible_char">•</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                              </object>
-                            </child>
+                            <property name="can_focus">True</property>
+                            <property name="editable">False</property>
+                            <property name="has_frame">False</property>
                           </object>
                         </child>
                       </object>

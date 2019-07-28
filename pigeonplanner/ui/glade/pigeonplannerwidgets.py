@@ -25,6 +25,7 @@ import gettext
 gettext.install("", "")
 
 from pigeonplanner.ui.widgets import bandentry
+from pigeonplanner.ui.widgets import displayentry
 from pigeonplanner.ui.widgets import date
 from pigeonplanner.ui.widgets import checkbutton
 from pigeonplanner.ui.widgets import comboboxes

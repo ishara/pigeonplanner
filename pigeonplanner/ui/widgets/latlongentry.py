@@ -20,43 +20,24 @@ from gi.repository import Gtk
 from gi.repository import GObject
 
 from pigeonplanner.core import errors
+from pigeonplanner.ui.widgets import displayentry
 
 
-class LatLongEntry(Gtk.Viewport):
+class LatLongEntry(displayentry.DisplayEntry):
     __gtype_name__ = "LatLongEntry"
     can_empty = GObject.property(type=bool, default=False, nick="Can empty")
 
-    def __init__(self, editable=False, can_empty=False):
-        Gtk.Viewport.__init__(self)
-
-        self._entry = Gtk.Entry()
+    def __init__(self, can_empty=False):
+        displayentry.DisplayEntry.__init__(self)
 
         self._can_empty = can_empty
-        self._editable = editable
-        self.add(self._entry)
-        self.show_all()
-
         self._tooltip = _(u"Input should be in one of these formats:\n  "
                           u"DD.dddddd°\n  "
                           u"DD°MM.mmm’\n  "
                           u"DD°MM’SS.s”")
 
-    def get_editable(self):
-        return self._editable
-
-    def set_editable(self, editable):
-        self._editable = editable
-        self.set_shadow_type(Gtk.ShadowType.NONE if editable else Gtk.ShadowType.IN)
-        self._entry.set_has_frame(editable)
-        self._entry.set_editable(editable)
-        self._entry.set_activates_default(editable)
-    editable = GObject.property(get_editable, set_editable, bool, False, "Editable")
-
-    def set_text(self, text):
-        self._entry.set_text(str(text))
-
     def get_text(self, validate=True, as_float=False):
-        value = self._entry.get_text()
+        value = super().get_text()
         if validate:
             self.__validate(value, as_float)
         if as_float:
@@ -65,11 +46,11 @@ class LatLongEntry(Gtk.Viewport):
         return value
 
     def _warn(self):
-        self._entry.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, Gtk.STOCK_STOP)
-        self._entry.set_icon_tooltip_text(Gtk.EntryIconPosition.PRIMARY, self._tooltip)
+        self.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, Gtk.STOCK_STOP)
+        self.set_icon_tooltip_text(Gtk.EntryIconPosition.PRIMARY, self._tooltip)
 
     def _unwarn(self):
-        self._entry.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, None)
+        self.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, None)
 
     def __validate(self, value, as_float=False):
         if self.can_empty and value == "":

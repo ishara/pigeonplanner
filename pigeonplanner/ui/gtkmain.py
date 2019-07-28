@@ -146,6 +146,7 @@ class Application(Gtk.Application):
         from pigeonplanner.ui.widgets import statusbar; statusbar
         from pigeonplanner.ui.widgets import checkbutton; checkbutton
         from pigeonplanner.ui.widgets import latlongentry; latlongentry
+        from pigeonplanner.ui.widgets import displayentry; displayentry
 
         # Do this as soon as possible to avoid importing files that import a missing module
         self.notify_missing_libs()

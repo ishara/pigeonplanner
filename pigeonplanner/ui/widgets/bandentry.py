@@ -23,6 +23,7 @@ from gi.repository import Gdk
 from gi.repository import GObject
 
 from pigeonplanner.ui import dialogs
+from pigeonplanner.ui.widgets import displayentry
 from pigeonplanner.core import config
 from pigeonplanner.core import checks
 from pigeonplanner.core import errors
@@ -46,15 +47,10 @@ class BandEntry(Gtk.Box):
         self.show_band_format = show_band_format
 
     def _build_ui(self):
-        self._entry_display = Gtk.Entry()
+        self._entry_display = displayentry.DisplayEntry()
         self._entry_display.set_alignment(.5)
-        self._entry_display.set_editable(False)
-        self._entry_display.set_has_frame(False)
         self._entry_display.set_activates_default(False)
-        self._viewport_display = Gtk.Viewport()
-        self._viewport_display.set_no_show_all(True)
-        self._viewport_display.set_shadow_type(Gtk.ShadowType.IN)
-        self._viewport_display.add(self._entry_display)
+        self._entry_display.set_no_show_all(True)
 
         self.entry_country = Gtk.Entry()
         self.entry_country.set_width_chars(4)
@@ -97,7 +93,7 @@ class BandEntry(Gtk.Box):
         self._button_search.set_no_show_all(True)
         self._button_search.connect("clicked", self.on_button_search_clicked)
 
-        self.pack_start(self._viewport_display, True, True, 0)
+        self.pack_start(self._entry_display, True, True, 0)
         self.pack_start(self._hbox_band, False, False, 0)
         self.pack_start(self._button_help, False, False, 0)
         self.pack_start(self._button_search, False, False, 0)
@@ -134,8 +130,7 @@ class BandEntry(Gtk.Box):
 
     def set_editable(self, editable):
         self._editable = editable
-        self._viewport_display.set_visible(not editable)
-        self._viewport_display.forall(lambda child, value: child.set_visible(value), not editable)
+        self._entry_display.set_visible(not editable)
         self._hbox_band.set_visible(editable)
         self._hbox_band.forall(lambda child, value: child.set_visible(value), editable)
         self._button_help.set_visible(editable)

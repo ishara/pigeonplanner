@@ -17,25 +17,26 @@
 
 
 from gi.repository import Gtk
-
-from pigeonplanner.core import enums
-from pigeonplanner.ui import utils
-from pigeonplanner.ui.widgets import displayentry
+from gi.repository import GObject
 
 
-class SexEntry(displayentry.DisplayEntry):
-    __gtype_name__ = "SexEntry"
+class DisplayEntry(Gtk.Entry):
+    __gtype_name__ = "DisplayEntry"
 
-    def __init__(self):
-        displayentry.DisplayEntry.__init__(self)
-        self.set_icon_activatable(0, False)
+    def __init__(self, is_editable=False):
+        Gtk.Entry.__init__(self)
+        self._is_editable = is_editable
+        self.set_is_editable(is_editable)
 
-    def set_sex(self, sex):
-        try:
-            img = utils.get_sex_image(sex)
-        except KeyError:
-            img = None
-            self.set_text("")
+    def get_is_editable(self):
+        return self._is_editable
+
+    def set_is_editable(self, is_editable):
+        self._is_editable = is_editable
+        self.set_has_frame(is_editable)
+        self.set_editable(is_editable)
+        if is_editable:
+            self.get_style_context().remove_class("displayentry")
         else:
-            self.set_text(enums.Sex.get_string(sex))
-        self.set_icon_from_pixbuf(0, img)
+            self.get_style_context().add_class("displayentry")
+    is_editable = GObject.property(get_is_editable, set_is_editable, bool, False, "Is editable")

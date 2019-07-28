@@ -21,7 +21,6 @@ from gi.repository import Gtk
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
-from pigeonplanner.ui.widgets import latlongentry
 from pigeonplanner.ui.messagedialog import QuestionDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import errors
@@ -169,14 +168,9 @@ class AddressBook(builder.GtkBuilder):
         )
         utils.set_multiple_visible([self.widgets.checkme], show_me if value else False)
 
-        shadow = Gtk.ShadowType.NONE if value else Gtk.ShadowType.IN
         for entry in self._entries:
-            entry.set_editable(value)
-            if isinstance(entry, latlongentry.LatLongEntry):
-                # These will handle the frame itself by setting it editable
-                continue
-            entry.set_has_frame(value)
-            entry.get_parent().set_shadow_type(shadow)
+            # These are all displayentry.DisplayEntry widgets which implement the custom is_editable property
+            entry.set_is_editable(value)
 
         self.widgets.entryname.grab_focus()
         self.widgets.entryname.set_position(-1)

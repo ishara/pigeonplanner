@@ -12,6 +12,14 @@ viewport {
   padding-bottom: 0px;
 }
 
+.displayentry {
+  border-color: @borders;
+}
+
+.displayentry:focus {
+  box-shadow: none;
+}
+
 .no-border {
   border-width: 0px;
 }

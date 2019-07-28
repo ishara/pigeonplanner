@@ -17,6 +17,12 @@
         <property id="clear" name="Clear" default="False"/>
       </properties>
     </glade-widget-class>
+    <glade-widget-class title="Display Entry" name="DisplayEntry" generic-name="displayentry">
+      <properties>
+        <property id="editable" default="False" />
+        <property id="has-frame" default="False" />
+      </properties>
+    </glade-widget-class>
     <glade-widget-class title="Display Check" name="DisplayCheckButton" generic-name="displaycheck">
     </glade-widget-class>
     <glade-widget-class title="Sex Combobox" name="SexCombobox" generic-name="sexcombo">
@@ -55,6 +61,7 @@
   <glade-widget-group name="pigeonplanner" title="Pigeon Planner">
     <glade-widget-class-ref name="BandEntry"/>
     <glade-widget-class-ref name="DateEntry"/>
+    <glade-widget-class-ref name="DisplayEntry"/>
     <glade-widget-class-ref name="DisplayCheckButton"/>
     <glade-widget-class-ref name="SexCombobox"/>
     <glade-widget-class-ref name="StatusCombobox"/>
