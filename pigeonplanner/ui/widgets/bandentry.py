@@ -294,16 +294,16 @@ class BandEntryPopup(Gtk.Window):
         # Entry
         self._entry_country = Gtk.Entry()
         self._entry_country.set_width_chars(4)
-        self._entry_country.set_tooltip_text(_("Country"))
+        self._entry_country.set_placeholder_text(_("Country"))
         self._entry_letters = Gtk.Entry()
         self._entry_letters.set_width_chars(6)
-        self._entry_letters.set_tooltip_text(_("Letters"))
+        self._entry_letters.set_placeholder_text(_("Letters"))
         self._entry_number = Gtk.Entry()
         self._entry_number.set_width_chars(10)
-        self._entry_number.set_tooltip_text(_("Number"))
+        self._entry_number.set_placeholder_text(_("Number"))
         self._entry_year = Gtk.Entry()
         self._entry_year.set_width_chars(4)
-        self._entry_year.set_tooltip_text(_("Year"))
+        self._entry_year.set_placeholder_text(_("Year"))
         self._entry_year.set_max_length(4)
 
         button_image = Gtk.Image.new_from_stock(Gtk.STOCK_APPLY, Gtk.IconSize.BUTTON)
@@ -312,7 +312,8 @@ class BandEntryPopup(Gtk.Window):
         button_apply.set_focus_on_click(False)
         button_apply.connect("clicked", self.on_button_apply_clicked)
 
-        self._hbox_entry = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=2)
+        self._hbox_entry = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        self._hbox_entry.get_style_context().add_class("linked")
         self._hbox_entry.pack_start(self._entry_country, False, False, 0)
         self._hbox_entry.pack_start(self._entry_letters, False, False, 0)
         self._hbox_entry.pack_start(self._entry_number, False, False, 0)
@@ -358,6 +359,7 @@ class BandEntryPopup(Gtk.Window):
         self._combobox4 = BandItemCombobox()
 
         self._hbox_format = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self._hbox_format.get_style_context().add_class("linked")
         self._hbox_format.pack_start(self._combobox1, False, False, 0)
         self._hbox_format.pack_start(self._entry_sep1, False, False, 0)
         self._hbox_format.pack_start(self._combobox2, False, False, 0)
