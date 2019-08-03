@@ -34,7 +34,6 @@
             <child>
               <object class="GtkButton" id="buttonhelp">
                 <property name="label">gtk-help</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -51,7 +50,6 @@
             <child>
               <object class="GtkButton" id="buttonclose">
                 <property name="label">gtk-close</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -122,7 +120,6 @@
                         <child>
                           <object class="GtkButton" id="buttonremove">
                             <property name="label">gtk-remove</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
@@ -138,7 +135,6 @@
                         <child>
                           <object class="GtkButton" id="buttonadd">
                             <property name="label">gtk-add</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
@@ -307,7 +303,6 @@
                             <child>
                               <object class="GtkButton" id="buttonsearch">
                                 <property name="label">gtk-find</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -323,7 +318,6 @@
                             <child>
                               <object class="GtkButton" id="buttoninfo">
                                 <property name="label">gtk-info</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
@@ -340,7 +334,6 @@
                             <child>
                               <object class="GtkButton" id="buttondelete">
                                 <property name="label">gtk-remove</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>

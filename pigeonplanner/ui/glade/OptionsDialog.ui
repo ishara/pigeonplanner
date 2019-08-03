@@ -125,7 +125,6 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image1</property>
-                <property name="yalign">0</property>
                 <signal name="clicked" handler="on_buttondefault_clicked" swapped="no"/>
               </object>
               <packing>

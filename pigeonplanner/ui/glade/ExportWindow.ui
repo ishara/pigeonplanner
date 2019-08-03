@@ -76,7 +76,6 @@
             <child>
               <object class="GtkButton" id="buttonclose">
                 <property name="label">gtk-close</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -92,7 +91,6 @@
             <child>
               <object class="GtkButton" id="buttonexport">
                 <property name="label" translatable="yes">Export</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
@@ -186,7 +184,6 @@
                 <child>
                   <object class="GtkRadioButton" id="radioselected">
                     <property name="label" translatable="yes">Selected</property>
-                    <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -202,7 +199,6 @@
                 <child>
                   <object class="GtkRadioButton" id="radiovisible">
                     <property name="label" translatable="yes">Visible</property>
-                    <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -218,7 +214,6 @@
                 <child>
                   <object class="GtkRadioButton" id="radioall">
                     <property name="label" translatable="yes">All</property>
-                    <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
