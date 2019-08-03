@@ -21,6 +21,15 @@ viewport {
   box-shadow: none;
 }
 
+.extraentry {
+  border-width: 0px;
+  background-color: @theme_base_color;
+}
+
+.extraentry:focus {
+  box-shadow: none;
+}
+
 .no-border {
   border-width: 0px;
 }
