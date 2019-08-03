@@ -35,6 +35,7 @@ class DateEntry(Gtk.Viewport):
 
     def __init__(self, editable=False, clear=False, can_empty=False):
         Gtk.Viewport.__init__(self)
+        self.set_shadow_type(Gtk.ShadowType.NONE)
 
         self._entry = Gtk.Entry()
         self._entry.set_max_length(10)
@@ -60,9 +61,12 @@ class DateEntry(Gtk.Viewport):
 
     def set_editable(self, editable):
         self._editable = editable
-        self.set_shadow_type(Gtk.ShadowType.NONE if editable else Gtk.ShadowType.IN)
         self._entry.set_has_frame(editable)
         self._entry.set_editable(editable)
+        if editable:
+            self._entry.get_style_context().remove_class("displayentry")
+        else:
+            self._entry.get_style_context().add_class("displayentry")
         icon = os.path.join(const.IMAGEDIR, "icon_calendar.png")
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(icon) if editable else None
         self._entry.set_icon_from_pixbuf(Gtk.EntryIconPosition.SECONDARY, pixbuf)
