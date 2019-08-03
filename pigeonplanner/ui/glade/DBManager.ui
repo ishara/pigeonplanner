@@ -188,9 +188,10 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVButtonBox" id="vbuttonbox1">
+                  <object class="GtkButtonBox" id="vbuttonbox1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
                     <property name="spacing">4</property>
                     <property name="layout_style">start</property>
                     <child>
@@ -224,7 +225,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHSeparator" id="hseparator1">
+                      <object class="GtkSeparator" id="hseparator1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
@@ -575,9 +576,6 @@
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">0</property>
                               </packing>
-                            </child>
-                            <child>
-                              <placeholder/>
                             </child>
                           </object>
                           <packing>

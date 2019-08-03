@@ -351,10 +351,11 @@
       </packing>
     </child>
     <child>
-      <object class="GtkVPaned" id="mainvpaned">
+      <object class="GtkPaned" id="mainvpaned">
         <property name="visible">True</property>
         <property name="sensitive">False</property>
         <property name="can_focus">True</property>
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkBox" id="hbox1">
             <property name="visible">True</property>
