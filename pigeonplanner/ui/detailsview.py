@@ -171,7 +171,8 @@ class PigeonImageWidget(Gtk.EventBox):
         if cursor is not None:
             cursor = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), cursor)
         gdkwindow = self.get_window()
-        gdkwindow.set_cursor(cursor)
+        if gdkwindow is not None:
+            gdkwindow.set_cursor(cursor)
 
 
 class StatusButton(builder.GtkBuilder):
