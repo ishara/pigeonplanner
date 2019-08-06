@@ -133,7 +133,6 @@ class Startup:
         try:
             locale.bindtextdomain(localedomain, localedir)
         except AttributeError:
-            # locale has no bindtextdomain on Windows, fall back to intl.dll
             if const.WINDOWS:
                 if gtk_ui and hasattr(sys, "frozen"):
                     # There is a weird issue where cdll.intl throws an exception
@@ -146,14 +145,23 @@ class Startup:
                     pass
 
                 from ctypes import cdll
+
                 cdll.msvcrt._putenv("LANG=%s" % language)
                 cdll.msvcrt._putenv("LANGUAGE=%s" % language)
 
-                libintl = cdll.intl
-                libintl.bindtextdomain(localedomain, localedir)
-                libintl.bind_textdomain_codeset(localedomain, "UTF-8")
-                libintl.textdomain(localedomain)
-                del libintl
+                # locale has no bindtextdomain on Windows, try to fall back to libintl
+                try:
+                    libintl = cdll.LoadLibrary("libintl-8.dll")
+                except OSError:
+                    self.logger.warning("Can not find libintl-8.dll for localisation.")
+                    return
+                else:
+                    libintl.bindtextdomain(localedomain, localedir)
+                    libintl.bind_textdomain_codeset(localedomain, "UTF-8")
+                    libintl.textdomain(localedomain)
+            else:
+                # Most likely on macOS and safe to ignore
+                pass
 
     def setup_logging(self):
         """
