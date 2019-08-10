@@ -200,7 +200,6 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.move(config.get("interface.window-x"),
                   config.get("interface.window-y"))
         self.show()
-        self.widgets.treeview.grab_focus()
 
         self.widgets.database_infobar = Gtk.InfoBar()
         self.widgets.database_infobar.get_content_area().add(Gtk.Label(_("Open a database to use the application.")))
@@ -271,6 +270,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.mainvpaned.set_sensitive(True)
         self.widgets.actiongroup_database.set_sensitive(True)
         self.widgets.treeview.fill_treeview()
+        self.widgets.treeview.grab_focus()
 
     def on_interface_changed(self, dialog, arrows, stats, toolbar, statusbar):
         self.widgets.MenuArrows.set_active(arrows)
