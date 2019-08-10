@@ -82,8 +82,6 @@ class SexCombobox(Gtk.ComboBox):
         cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 1)
-        self.set_active(0)
-        self.show()
 
     def get_sex(self):
         return self.get_active()
@@ -107,8 +105,6 @@ class StatusCombobox(Gtk.ComboBox):
         cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 1)
-        self.set_active(0)
-        self.show()
 
     def get_status(self):
         return self.get_active()
@@ -135,7 +131,7 @@ class OperatorCombobox(Gtk.ComboBox):
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 0)
         self.set_id_column(0)
-        self.set_active(0)
+        self.connect("realize", lambda w: self.set_active(0))
 
     def get_operator(self):
         ls_iter = self.get_active_iter()
@@ -196,9 +192,8 @@ class DistanceCombobox(Gtk.ComboBox):
         cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 0)
-        self.set_active(config.get("options.distance-unit"))
         self.set_id_column(0)
-        self.show()
+        self.connect("realize", lambda w: self.set_active(config.get("options.distance-unit")))
 
     def get_unit(self):
         ls_iter = self.get_active_iter()
@@ -227,8 +222,7 @@ class SpeedCombobox(Gtk.ComboBox):
         cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 0)
-        self.set_active(config.get("options.speed-unit"))
-        self.show()
+        self.connect("realize", lambda w: self.set_active(config.get("options.speed-unit")))
 
     def get_unit(self):
         ls_iter = self.get_active_iter()
