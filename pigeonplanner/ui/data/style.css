@@ -33,3 +33,7 @@ viewport {
 .no-border {
   border-width: 0px;
 }
+
+.pedigree-button {
+  padding: 0px;
+}

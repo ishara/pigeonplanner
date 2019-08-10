@@ -132,12 +132,15 @@ class PedigreeWindow(Gtk.Window):
 
         self.buttonprev = Gtk.Button.new_from_icon_name(Gtk.STOCK_GO_BACK, Gtk.IconSize.BUTTON)
         self.buttonprev.set_relief(Gtk.ReliefStyle.NONE)
+        self.buttonprev.get_style_context().add_class("pedigree-button")
         self.buttonprev.connect("clicked", self.on_navbutton_clicked, PREVIOUS)
         self.buttonnextsire = Gtk.Button.new_from_icon_name(Gtk.STOCK_GO_FORWARD, Gtk.IconSize.BUTTON)
         self.buttonnextsire.set_relief(Gtk.ReliefStyle.NONE)
+        self.buttonnextsire.get_style_context().add_class("pedigree-button")
         self.buttonnextsire.connect("clicked", self.on_navbutton_clicked, NEXT_SIRE)
         self.buttonnextdam = Gtk.Button.new_from_icon_name(Gtk.STOCK_GO_FORWARD, Gtk.IconSize.BUTTON)
         self.buttonnextdam.set_relief(Gtk.ReliefStyle.NONE)
+        self.buttonnextdam.get_style_context().add_class("pedigree-button")
         self.buttonnextdam.connect("clicked", self.on_navbutton_clicked, NEXT_DAM)
 
         self.table = table = Gtk.Table(20, 7)
