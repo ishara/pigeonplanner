@@ -33,20 +33,25 @@ class BandEntry(Gtk.Box):
     __gtype_name__ = "BandEntry"
     __gsignals__ = {"search-clicked": (GObject.SIGNAL_RUN_LAST, object, ())}
     can_empty = GObject.property(type=bool, default=False, nick="Can empty")
-    show_band_format = GObject.property(type=bool, default=True, nick="Show band format")
 
     def __init__(self, editable=False, can_empty=False, has_search=False, show_band_format=True):
         Gtk.Box.__init__(self, orientation=Gtk.Orientation.HORIZONTAL)
-        self.set_spacing(2)
 
         self.band_format = config.get("options.band-format")
         self._build_ui()
+
         self.can_empty = can_empty
-        self.has_search = self._has_search = has_search
         self.editable = self._editable = editable
-        self.show_band_format = show_band_format
+        self.has_search = self._has_search = has_search
+        self.show_band_format = self._show_band_format = show_band_format
 
     def _build_ui(self):
+        tooltip = "%s | %s | %s | %s\n%s\n%s" % (
+            _("Country"), _("Letters"), _("Number"), _("Year"),
+            _("The number and year fields are required."),
+            _("The year has to be four digits long.")
+        )
+
         self._entry_display = displayentry.DisplayEntry()
         self._entry_display.set_alignment(.5)
         self._entry_display.set_activates_default(False)
@@ -69,42 +74,35 @@ class BandEntry(Gtk.Box):
         self.entry_year.set_placeholder_text(_("Year"))
         self.entry_year.set_max_length(4)
         self.entry_year.set_activates_default(True)
+
+        self._button_format = Gtk.Button.new_from_icon_name(Gtk.STOCK_PROPERTIES, Gtk.IconSize.BUTTON)
+        self._button_format.set_tooltip_text(_("Band format"))
+        self._button_format.connect("clicked", self.on_button_format_clicked)
+        self._button_search = Gtk.Button.new_from_icon_name(Gtk.STOCK_FIND, Gtk.IconSize.BUTTON)
+        self._button_search.set_tooltip_text(_("Search a pigeon"))
+        self._button_search.connect("clicked", self.on_button_search_clicked)
+
         self._hbox_band = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         self._hbox_band.get_style_context().add_class("linked")
         self._hbox_band.set_no_show_all(True)
-        self._hbox_band.set_tooltip_text("%s | %s | %s | %s" % (_("Country"), _("Letters"), _("Number"), _("Year")))
+        self._hbox_band.set_tooltip_text(tooltip)
         self._hbox_band.pack_start(self.entry_country, False, False, 0)
         self._hbox_band.pack_start(self.entry_letters, False, False, 0)
         self._hbox_band.pack_start(self.entry_number, False, False, 0)
         self._hbox_band.pack_start(self.entry_year, False, False, 0)
-
-        self._button_image = Gtk.Image.new_from_stock(Gtk.STOCK_PROPERTIES, Gtk.IconSize.BUTTON)
-        self._button_help = Gtk.Button()
-        self._button_help.add(self._button_image)
-        self._button_help.set_focus_on_click(False)
-        self._button_help.set_no_show_all(True)
-        self._button_help.set_tooltip_text(_("Information"))
-        self._button_help.connect("clicked", self.on_button_help_clicked)
-
-        image = Gtk.Image.new_from_stock(Gtk.STOCK_FIND, Gtk.IconSize.BUTTON)
-        self._button_search = Gtk.Button()
-        self._button_search.add(image)
-        self._button_search.set_focus_on_click(False)
-        self._button_search.set_no_show_all(True)
-        self._button_search.connect("clicked", self.on_button_search_clicked)
-
-        self._hbox_buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        self._hbox_buttons.get_style_context().add_class("linked")
-        self._hbox_buttons.pack_start(self._button_help, False, False, 0)
-        self._hbox_buttons.pack_start(self._button_search, False, False, 0)
+        self._hbox_band.pack_start(self._button_format, False, False, 0)
+        self._hbox_band.pack_start(self._button_search, False, False, 0)
 
         self.pack_start(self._entry_display, True, True, 0)
         self.pack_start(self._hbox_band, False, False, 0)
-        self.pack_start(self._hbox_buttons, False, False, 0)
 
-    def on_button_help_clicked(self, widget):
+    def on_button_format_clicked(self, widget):
         self.get_toplevel().get_child().set_sensitive(False)
-        BandEntryPopup(self)
+        popover = BandEntryPopover(self)
+        popover.set_relative_to(self._button_format)
+        popover.connect("closed", lambda w: self.get_toplevel().get_child().set_sensitive(True))
+        popover.show_all()
+        popover.popup()
 
     def on_button_search_clicked(self, widget):
         try:
@@ -126,8 +124,16 @@ class BandEntry(Gtk.Box):
     def set_has_search(self, has_search):
         self._has_search = has_search
         self._button_search.set_visible(has_search)
-        self._button_search.get_child().set_visible(has_search)
     has_search = GObject.property(get_has_search, set_has_search, bool, False, nick="Has search")
+
+    def get_show_band_format(self):
+        return self._show_band_format
+
+    def set_show_band_format(self, show_band_format):
+        self._show_band_format = show_band_format
+        self._button_format.set_visible(show_band_format)
+    show_band_format = GObject.property(get_show_band_format, set_show_band_format,
+                                        type=bool, default=True, nick="Show band format")
 
     def get_editable(self):
         return self._editable
@@ -136,9 +142,10 @@ class BandEntry(Gtk.Box):
         self._editable = editable
         self._entry_display.set_visible(not editable)
         self._hbox_band.set_visible(editable)
-        self._hbox_band.forall(lambda child, value: child.set_visible(value), editable)
-        self._button_help.set_visible(editable)
-        self._button_help.get_child().set_visible(editable)
+        self.entry_country.set_visible(editable)
+        self.entry_letters.set_visible(editable)
+        self.entry_number.set_visible(editable)
+        self.entry_year.set_visible(editable)
     editable = GObject.property(get_editable, set_editable, bool, False, nick="Editable")
 
     def is_empty(self):
@@ -163,7 +170,7 @@ class BandEntry(Gtk.Box):
     def get_band(self, validate=True):
         number, year = self.entry_number.get_text(), self.entry_year.get_text()
         if validate:
-            self.__validate(number, year)
+            self._validate(number, year)
         return self.entry_country.get_text(), self.entry_letters.get_text(), number, year
 
     def clear(self):
@@ -175,12 +182,14 @@ class BandEntry(Gtk.Box):
         self.entry_country.set_position(-1)
 
     def _warn(self):
-        self.entry_number.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, Gtk.STOCK_STOP)
+        self.entry_number.get_style_context().add_class("warning")
+        self.entry_year.get_style_context().add_class("warning")
 
     def _unwarn(self):
-        self.entry_number.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, None)
+        self.entry_number.get_style_context().remove_class("warning")
+        self.entry_year.get_style_context().remove_class("warning")
 
-    def __validate(self, number, year):
+    def _validate(self, number, year):
         if self.can_empty and (number == "" and year == ""):
             return
 
@@ -228,20 +237,12 @@ class BandItemCombobox(Gtk.ComboBox):
                 break
 
 
-class BandEntryPopup(Gtk.Window):
-    __gtype_name__ = "BandEntryPopup"
+class BandEntryPopover(Gtk.Popover):
+    __gtype_name__ = "BandEntryPopover"
 
     def __init__(self, main_entry):
-        Gtk.Window.__init__(self, Gtk.WindowType.TOPLEVEL)
-        self.set_type_hint(Gdk.WindowTypeHint.DIALOG)
-        self.set_decorated(False)
-        self.set_resizable(False)
-        self.set_destroy_with_parent(True)
-        self.set_transient_for(main_entry.get_toplevel())
-        self.set_border_width(8)
-        self.set_skip_pager_hint(True)
-        self.set_skip_taskbar_hint(True)
-        self.set_modal(True)
+        Gtk.Popover.__init__(self)
+        self.set_position(Gtk.PositionType.BOTTOM)
 
         self.main_entry = main_entry
 
@@ -251,9 +252,6 @@ class BandEntryPopup(Gtk.Window):
         self.update_preview()
         # Important. Wait until after setting the initial format values to connect those widget's handlers.
         self._connect_handlers()
-        self.show_all()
-        # Important. Position the window only after all widgets are shown to get the proper dimensions.
-        self._set_position()
 
     def update_preview(self, *args):
         fields = [
@@ -287,8 +285,10 @@ class BandEntryPopup(Gtk.Window):
         )
         if self.checkbox_default.get_active():
             config.set("options.band-format", self.main_entry.band_format)
-        self.main_entry.get_toplevel().get_child().set_sensitive(True)
-        self.destroy()
+        self.popdown()
+
+    def on_button_cancel_clicked(self, widget):
+        self.popdown()
 
     def _build_ui(self):
         # Entry
@@ -306,11 +306,10 @@ class BandEntryPopup(Gtk.Window):
         self._entry_year.set_placeholder_text(_("Year"))
         self._entry_year.set_max_length(4)
 
-        button_image = Gtk.Image.new_from_stock(Gtk.STOCK_APPLY, Gtk.IconSize.BUTTON)
-        button_apply = Gtk.Button()
-        button_apply.add(button_image)
-        button_apply.set_focus_on_click(False)
+        button_apply = Gtk.Button.new_from_icon_name(Gtk.STOCK_APPLY, Gtk.IconSize.BUTTON)
         button_apply.connect("clicked", self.on_button_apply_clicked)
+        button_cancel = Gtk.Button.new_from_icon_name(Gtk.STOCK_CANCEL, Gtk.IconSize.BUTTON)
+        button_cancel.connect("clicked", self.on_button_cancel_clicked)
 
         self._hbox_entry = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         self._hbox_entry.get_style_context().add_class("linked")
@@ -319,31 +318,11 @@ class BandEntryPopup(Gtk.Window):
         self._hbox_entry.pack_start(self._entry_number, False, False, 0)
         self._hbox_entry.pack_start(self._entry_year, False, False, 0)
         self._hbox_entry.pack_start(button_apply, False, False, 0)
+        self._hbox_entry.pack_start(button_cancel, False, False, 0)
 
         align_entry = Gtk.Alignment()
         align_entry.set(1.0, 0.5, 0.5, 1.0)
         align_entry.add(self._hbox_entry)
-
-        # Information
-        label_info1 = Gtk.Label("%s %s, %s, %s, %s" %
-                                (_("The fields are:"), _("Country"), _("Letters"), _("Number"), _("Year")))
-        label_info1.set_alignment(0.0, 0.5)
-        label_info2 = Gtk.Label(_("The number and year fields are required."))
-        label_info2.set_alignment(0.0, 0.5)
-        label_info3 = Gtk.Label(_("The year has to be four digits long."))
-        label_info3.set_alignment(0.0, 0.5)
-
-        vbox_info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-        vbox_info.pack_start(label_info1, False, True, 0)
-        vbox_info.pack_start(label_info2, False, True, 0)
-        vbox_info.pack_start(label_info3, False, True, 0)
-
-        align_info = Gtk.Alignment()
-        align_info.set_padding(4, 4, 12, 4)
-        align_info.add(vbox_info)
-        frame_info = Gtk.Frame(label="<b>%s</b>" % _("Information"))
-        frame_info.get_label_widget().set_use_markup(True)
-        frame_info.add(align_info)
 
         # Band format
         self._entry_sep1 = Gtk.Entry()
@@ -386,9 +365,7 @@ class BandEntryPopup(Gtk.Window):
         # Main layout
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         vbox.pack_start(align_entry, False, False, 0)
-        vbox.pack_start(frame_info, False, False, 0)
-        if self.main_entry.show_band_format:
-            vbox.pack_start(frame_format, False, False, 0)
+        vbox.pack_start(frame_format, False, False, 0)
 
         self.add(vbox)
 
@@ -418,28 +395,3 @@ class BandEntryPopup(Gtk.Window):
         self._entry_sep1.set_text(sep1)
         self._entry_sep2.set_text(sep2)
         self._entry_sep3.set_text(sep3)
-
-    def _set_position(self):
-        allocation = self.main_entry.get_allocation()
-        window = self.main_entry.get_parent_window()
-        origin = Gdk.Window.get_origin(window)
-        x = origin.x
-        y = origin.y
-
-        x += allocation.x
-        x += allocation.width / 2
-        x -= self.get_allocation().width / 2
-        y += allocation.y
-        y -= self.get_border_width()
-
-        self.move(x, y)
-
-
-if __name__ == "__main__":
-    widget = BandEntry()
-    win = Gtk.Window()
-    win.connect("delete-event", Gtk.main_quit)
-    win.set_position(Gtk.WindowPosition.CENTER)
-    win.add(widget)
-    win.show_all()
-    Gtk.main()
