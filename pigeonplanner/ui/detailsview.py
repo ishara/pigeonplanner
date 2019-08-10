@@ -231,39 +231,39 @@ class StatusButton(builder.GtkBuilder):
         if status == enums.Status.dead:
             bffr = self.widgets.textinfodead.get_buffer()
             statusdata.update({"date": self.widgets.entrydatedead.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds())})
+                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
             return statusdata
         if status == enums.Status.sold:
             bffr = self.widgets.textinfosold.get_buffer()
             statusdata.update({"person": self.widgets.entrybuyersold.get_text(),
                                "date": self.widgets.entrydatesold.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds())})
+                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
             return statusdata
         if status == enums.Status.lost:
             bffr = self.widgets.textinfolost.get_buffer()
             statusdata.update({"racepoint": self.widgets.entrypointlost.get_text(),
                                "date": self.widgets.entrydatelost.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds())})
+                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
             return statusdata
         if status == enums.Status.breeder:
             bffr = self.widgets.textinfobreeder.get_buffer()
             statusdata.update({"start": self.widgets.entrydatebreedfrom.get_text(),
                                "end": self.widgets.entrydatebreedto.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds())})
+                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
             return statusdata
         if status == enums.Status.loaned:
             bffr = self.widgets.textinfoloan.get_buffer()
             statusdata.update({"start": self.widgets.entrydateloan.get_text(),
                                "end": self.widgets.entrydateloanback.get_text(),
                                "person": self.widgets.entrypersonloan.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds())})
+                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
             return statusdata
         if status == enums.Status.widow:
             bffr = self.widgets.textinfowidow.get_buffer()
             partner_band = self.widgets.entrypartnerwidow.get_band()
             partner = corepigeon.get_or_create_pigeon(partner_band, enums.Sex.cock, False)
             statusdata.update({"partner": partner,
-                               "info": bffr.get_text(*bffr.get_bounds())})
+                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
             return statusdata
 
     def set_default(self):

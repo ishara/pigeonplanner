@@ -194,7 +194,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
                 "success2": self.widgets.successcheckedit2.get_active(),
                 "clutch": self.widgets.entryclutchedit.get_text(),
                 "box": self.widgets.entryboxedit.get_text(),
-                "comment": textbuffer.get_text(*textbuffer.get_bounds())}
+                "comment": textbuffer.get_text(*textbuffer.get_bounds(), include_hidden_chars=True)}
 
         # Update when editing record
         if self._mode == enums.Action.edit:
