@@ -82,6 +82,7 @@ class SexCombobox(Gtk.ComboBox):
         cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 1)
+        self.connect("realize", lambda w: self.set_active(0))
 
     def get_sex(self):
         return self.get_active()
@@ -105,6 +106,7 @@ class StatusCombobox(Gtk.ComboBox):
         cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 1)
+        self.connect("realize", lambda w: self.set_active(0))
 
     def get_status(self):
         return self.get_active()
