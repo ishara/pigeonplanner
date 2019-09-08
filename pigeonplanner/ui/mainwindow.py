@@ -63,14 +63,15 @@ from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions
 logger = logging.getLogger(__name__)
 
 try:
-    from gtkosx_application import Application
+    import gi
+    gi.require_version("GtkosxApplication", "1.0")
+    from gi.repository import GtkosxApplication
+    macapp = GtkosxApplication.Application()
 except ImportError:
-    gtkosx = None
+    GtkosxApplication = None
+    macapp = None
     if const.OSX:
-        logger.error("Unable to import gtkosx_application")
-else:
-    # Need to be called as early as possible
-    gtkosx = Application()
+        logger.error("Unable to import GtkosxApplication")
 
 
 class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component):
@@ -210,12 +211,12 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self._dbman.connect("database-loaded", self.on_database_loaded)
         self._dbman.run(True)
 
-        if gtkosx is not None:
-            def osx_quit(*args):
+        if macapp is not None:
+            def macapp_quit(*args):
                 self.quit_program(bckp=False)
                 return False
-            gtkosx.connect("NSApplicationBlockTermination", osx_quit)
-            gtkosx.ready()
+            macapp.connect("NSApplicationBlockTermination", macapp_quit)
+            macapp.ready()
 
     def quit_program(self, widget=None, event=None, bckp=True):
         if session.is_open():
@@ -694,21 +695,25 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.mainvbox.pack_start(self.widgets.menubar, False, False, 0)
         self.widgets.mainvbox.pack_start(self.widgets.toolbar, False, False, 0)
 
-        if gtkosx is not None:
-            logger.debug("Setting up Mac menubar")
-            self.widgets.menubar.hide()
-            gtkosx.set_menu_bar(self.widgets.menubar)
+        if macapp is not None:
+            # We need to wait until the window holding the menu bar is fully realised before
+            # passing it to the GtkosxApplication library. It'll throw errors otherwise.
+            def on_window_realize(widget):
+                logger.debug("Setting up Mac menubar")
+                self.widgets.menubar.hide()
+                macapp.set_menu_bar(self.widgets.menubar)
 
-            quit = uimanager.get_widget("/MenuBar/FileMenu/Quit")
-            quit.hide()
+                quit_item = uimanager.get_widget("/MenuBar/FileMenu/Quit")
+                quit_item.hide()
 
-            about = uimanager.get_widget("/MenuBar/HelpMenu/About")
-            upd = uimanager.get_widget("/MenuBar/HelpMenu/Update")
-            prefs = uimanager.get_widget("/MenuBar/EditMenu/Preferences")
-            gtkosx.insert_app_menu_item(about, 0)
-            gtkosx.insert_app_menu_item(Gtk.SeparatorMenuItem(), 1)
-            gtkosx.insert_app_menu_item(upd, 2)
-            gtkosx.insert_app_menu_item(prefs, 3)
+                about_item = uimanager.get_widget("/MenuBar/HelpMenu/About")
+                update_item = uimanager.get_widget("/MenuBar/HelpMenu/Update")
+                prefs_item = uimanager.get_widget("/MenuBar/EditMenu/Preferences")
+                macapp.insert_app_menu_item(about_item, 0)
+                macapp.insert_app_menu_item(Gtk.SeparatorMenuItem(), 1)
+                macapp.insert_app_menu_item(update_item, 2)
+                macapp.insert_app_menu_item(prefs_item, 3)
+            self.connect("realize", on_window_realize)
 
     def _clear_pigeon_data(self):
         self.detailsview.clear_details()
