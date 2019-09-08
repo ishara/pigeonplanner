@@ -26,6 +26,7 @@ import time
 import webbrowser
 import logging
 
+import gi
 from gi.repository import Gtk
 from gi.repository import Gdk
 
@@ -63,11 +64,10 @@ from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions
 logger = logging.getLogger(__name__)
 
 try:
-    import gi
     gi.require_version("GtkosxApplication", "1.0")
     from gi.repository import GtkosxApplication
     macapp = GtkosxApplication.Application()
-except ImportError:
+except (ValueError, ImportError):
     GtkosxApplication = None
     macapp = None
     if const.OSX:
@@ -212,13 +212,13 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self._dbman.run(True)
 
         if macapp is not None:
-            def macapp_quit(*args):
+            def macapp_quit(*_args):
                 self.quit_program(bckp=False)
                 return False
             macapp.connect("NSApplicationBlockTermination", macapp_quit)
             macapp.ready()
 
-    def quit_program(self, widget=None, event=None, bckp=True):
+    def quit_program(self, _widget=None, _event=None, bckp=True):
         if session.is_open():
             try:
                 session.optimize_database()
@@ -260,18 +260,19 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
     # Callbacks
     ####################
     # Various
-    def on_dialog_delete(self, dialog, event):
+    # noinspection PyMethodMayBeStatic
+    def on_dialog_delete(self, dialog, _event):
         dialog.hide()
         return True
 
-    def on_database_loaded(self, dbman):
+    def on_database_loaded(self, _dbman):
         self.widgets.database_infobar.hide()
         self.widgets.mainvpaned.set_sensitive(True)
         self.widgets.actiongroup_database.set_sensitive(True)
         self.widgets.treeview.fill_treeview()
         self.widgets.treeview.grab_focus()
 
-    def on_interface_changed(self, dialog, arrows, stats, toolbar, statusbar):
+    def on_interface_changed(self, _dialog, arrows, stats, toolbar, statusbar):
         self.widgets.MenuArrows.set_active(arrows)
         self.widgets.MenuStats.set_active(stats)
         self.widgets.MenuToolbar.set_active(toolbar)
@@ -282,7 +283,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.treeview.set_columns()
         self.resultstab.set_columns()
 
-    def on_edit_finished(self, detailsview, pigeon, operation):
+    def on_edit_finished(self, _detailsview, pigeon, operation):
         if operation == enums.Action.edit:
             model, paths = self.widgets.selection.get_selected_rows()
             path = self.widgets.treeview.get_child_path(paths[0])
@@ -297,25 +298,25 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.treeview.grab_focus()
 
     # Menu callbacks
-    def on_uimanager_connect_proxy(self, uimgr, action, widget):
+    def on_uimanager_connect_proxy(self, _uimgr, action, widget):
         tooltip = action.get_property("tooltip")
         if isinstance(widget, Gtk.MenuItem) and tooltip:
             widget.connect("select", self.on_menuitem_select, tooltip)
             widget.connect("deselect", self.on_menuitem_deselect)
 
-    def on_menuitem_select(self, menuitem, tooltip):
+    def on_menuitem_select(self, _menuitem, tooltip):
         self.widgets.statusbar.push(888, tooltip)
 
-    def on_menuitem_deselect(self, menuitem):
+    def on_menuitem_deselect(self, _menuitem):
         self.widgets.statusbar.pop(888)
 
-    def menudbman_activate(self, widget):
+    def menudbman_activate(self, _widget):
         self._dbman.run()
 
-    def menuexport_activate(self, widget):
+    def menuexport_activate(self, _widget):
         exportwindow.ExportWindow(self)
 
-    def menuprintpigeons_activate(self, widget):
+    def menuprintpigeons_activate(self, _widget):
         logger.debug(common.get_function_name())
 
         userinfo = common.get_own_address()
@@ -327,7 +328,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         reportopts = PigeonsReportOptions(psize)
         report(PigeonsReport, reportopts, pigeons, userinfo)
 
-    def menuprintpedigree_activate(self, widget):
+    def menuprintpedigree_activate(self, _widget):
         logger.debug(common.get_function_name())
         pigeon = self.widgets.treeview.get_selected_pigeon()
         if pigeon is None or isinstance(pigeon, list):
@@ -339,7 +340,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         opts = pedigree_report_options(psize)
         report(pedigree_report, opts, pigeon, userinfo)
 
-    def menuprintblank_activate(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def menuprintblank_activate(self, _widget):
         logger.debug(common.get_function_name())
         userinfo = common.get_own_address()
 
@@ -348,31 +350,32 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         opts = pedigree_report_options(psize)
         report(pedigree_report, opts, None, userinfo)
 
-    def menubackup_activate(self, widget):
+    def menubackup_activate(self, _widget):
         logger.debug(common.get_function_name())
         backupdialog.BackupDialog(self)
 
-    def menuclose_activate(self, widget):
+    def menuclose_activate(self, _widget):
         logger.debug(common.get_function_name())
         self.quit_program()
 
-    def menuselectall_activate(self, widget):
+    def menuselectall_activate(self, _widget):
         logger.debug(common.get_function_name())
         self.widgets.treeview.select_all_pigeons()
 
-    def menualbum_activate(self, widget):
+    def menualbum_activate(self, _widget):
         logger.debug(common.get_function_name())
         tools.PhotoAlbum(self)
 
-    def menulog_activate(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def menulog_activate(self, _widget):
         logger.debug(common.get_function_name())
         logdialog.LogDialog()
 
-    def menuadd_activate(self, widget):
+    def menuadd_activate(self, _widget):
         dialog = detailsview.DetailsDialog(None, self, enums.Action.add)
         dialog.details.connect("edit-finished", self.on_edit_finished)
 
-    def menuaddrange_activate(self, widget):
+    def menuaddrange_activate(self, _widget):
         logger.debug(common.get_function_name())
         self.widgets.entryRangeFrom.set_text("")
         self.widgets.entryRangeTo.set_text("")
@@ -381,7 +384,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.entryRangeFrom.grab_focus()
         self.widgets.rangedialog.show()
 
-    def menuedit_activate(self, widget):
+    def menuedit_activate(self, _widget):
         model, paths = self.widgets.selection.get_selected_rows()
         if len(paths) != 1:
             return
@@ -389,7 +392,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         dialog = detailsview.DetailsDialog(pigeon, self, enums.Action.edit)
         dialog.details.connect("edit-finished", self.on_edit_finished)
 
-    def menuremove_activate(self, widget):
+    def menuremove_activate(self, _widget):
         model, paths = self.widgets.selection.get_selected_rows()
 
         if self.widgets.selection.count_selected_rows() == 0:
@@ -436,7 +439,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
 
         removedialog.hide()
 
-    def menupedigree_activate(self, widget):
+    def menupedigree_activate(self, _widget):
         logger.debug(common.get_function_name())
         model, paths = self.widgets.selection.get_selected_rows()
         if len(paths) != 1:
@@ -444,12 +447,12 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         pigeon = self.widgets.treeview.get_selected_pigeon()
         pedigreewindow.PedigreeWindow(self, pigeon)
 
-    def menuaddresult_activate(self, widget):
+    def menuaddresult_activate(self, _widget):
         logger.debug(common.get_function_name())
         self.widgets.notebook.set_current_page(2)
         self.resultstab.add_new_result()
 
-    def menufilter_activate(self, widget):
+    def menufilter_activate(self, _widget):
         logger.debug(common.get_function_name())
         self.widgets.treeview.run_filterdialog(self)
 
@@ -460,7 +463,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         if session.is_open():
             self.widgets.treeview.fill_treeview()
 
-    def menupref_activate(self, widget):
+    def menupref_activate(self, _widget):
         logger.debug(common.get_function_name())
         dialog = optionsdialog.OptionsDialog(self)
         dialog.connect("interface-changed", self.on_interface_changed)
@@ -485,39 +488,42 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         utils.set_multiple_visible([self.widgets.statusbar], value)
         config.set("interface.statusbar", value)
 
-    def menuvelocity_activate(self, widget):
+    def menuvelocity_activate(self, _widget):
         logger.debug(common.get_function_name())
         tools.VelocityCalculator(self)
 
-    def menudistance_activate(self, widget):
+    def menudistance_activate(self, _widget):
         logger.debug(common.get_function_name())
         tools.DistanceCalculator(self)
 
-    def menurace_activate(self, widget):
+    def menurace_activate(self, _widget):
         logger.debug(common.get_function_name())
         tools.RacepointManager(self)
 
-    def menuaddresses_activate(self, widget):
+    def menuaddresses_activate(self, _widget):
         logger.debug(common.get_function_name())
         tools.AddressBook(self)
 
-    def menudata_activate(self, widget):
+    def menudata_activate(self, _widget):
         logger.info(common.get_function_name())
         tools.DataManager(self)
 
-    def menuhelp_activate(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def menuhelp_activate(self, _widget):
         logger.debug(common.get_function_name())
         webbrowser.open(const.DOCURLMAIN)
 
-    def menuhome_activate(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def menuhome_activate(self, _widget):
         logger.debug(common.get_function_name())
         webbrowser.open(const.WEBSITE)
 
-    def menuforum_activate(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def menuforum_activate(self, _widget):
         logger.debug(common.get_function_name())
         webbrowser.open(const.FORUMURL)
 
-    def menuupdate_activate(self, widget):
+    def menuupdate_activate(self, _widget):
         logger.debug(common.get_function_name())
         try:
             new, msg = update.update()
@@ -532,16 +538,16 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         else:
             InfoDialog((msg, None, title), self)
 
-    def menuinfo_activate(self, widget):
+    def menuinfo_activate(self, _widget):
         logger.debug(common.get_function_name())
         dialogs.InformationDialog(self)
 
-    def menuabout_activate(self, widget):
+    def menuabout_activate(self, _widget):
         logger.debug(common.get_function_name())
         dialogs.AboutDialog(self)
 
     # range callbacks
-    def on_rangeadd_clicked(self, widget):
+    def on_rangeadd_clicked(self, _widget):
         rangefrom = self.widgets.entryRangeFrom.get_text()
         rangeto = self.widgets.entryRangeTo.get_text()
         rangeyear = self.widgets.entryRangeYear.get_text()
@@ -583,11 +589,11 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
 
         self.widgets.rangedialog.hide()
 
-    def on_rangecancel_clicked(self, widget):
+    def on_rangecancel_clicked(self, _widget):
         self.widgets.rangedialog.hide()
 
     # Main treeview callbacks
-    def on_treeview_pigeons_changed(self, treeview):
+    def on_treeview_pigeons_changed(self, _widget):
         pigeons = self.widgets.treeview.get_pigeons(filtered=True)
         total, cocks, hens, ybirds, unknown = common.count_active_pigeons(pigeons)
         self.widgets.labelStatTotal.set_markup("<b>%i</b>" % total)
@@ -597,8 +603,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.labelStatUnknown.set_markup("<b>%i</b>" % unknown)
         self.widgets.statusbar.set_total(total)
 
-    def on_treeview_press(self, treeview, event):
-        pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
+    def on_treeview_press(self, widget, event):
+        pthinfo = widget.get_path_at_pos(int(event.x), int(event.y))
         if pthinfo is None:
             return
 
@@ -613,11 +619,12 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
                 entries.append((Gtk.STOCK_REVERT_TO_SAVED, self.restore_pigeon, (selected,), _("Restore")))
             utils.popup_menu(event, entries)
 
-    def restore_pigeon(self, widget, pigeon):
+    # noinspection PyMethodMayBeStatic
+    def restore_pigeon(self, _widget, pigeon):
         pigeon.visible = True
         pigeon.save()
 
-    def on_treeview_key_press(self, treeview, event):
+    def on_treeview_key_press(self, _widget, event):
         keyname = Gdk.keyval_name(event.keyval)
         if keyname == "Delete":
             self.menuremove_activate(None)
@@ -650,16 +657,16 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
             tab.set_pigeon(pigeon)
 
     # Navigation arrows callbacks
-    def on_button_top_clicked(self, widget):
+    def on_button_top_clicked(self, _widget):
         self._set_pigeon(0)
 
-    def on_button_up_clicked(self, widget):
+    def on_button_up_clicked(self, _widget):
         self._set_pigeon(self.current_pigeon - 1)
 
-    def on_button_down_clicked(self, widget):
+    def on_button_down_clicked(self, _widget):
         self._set_pigeon(self.current_pigeon + 1)
 
-    def on_button_bottom_clicked(self, widget):
+    def on_button_bottom_clicked(self, _widget):
         self._set_pigeon(len(self.widgets.treeview.get_model()) - 1)
 
     ####################
@@ -698,7 +705,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         if macapp is not None:
             # We need to wait until the window holding the menu bar is fully realised before
             # passing it to the GtkosxApplication library. It'll throw errors otherwise.
-            def on_window_realize(widget):
+            def on_window_realize(_widget):
                 logger.debug("Setting up Mac menubar")
                 self.widgets.menubar.hide()
                 macapp.set_menu_bar(self.widgets.menubar)

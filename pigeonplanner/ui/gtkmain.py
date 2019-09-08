@@ -16,7 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import os
 import sys
 import signal
 import webbrowser
@@ -142,11 +141,11 @@ class Application(Gtk.Application):
         # TODO GTK3: application icon is way too large if menu is attached to title bar
         # self.set_app_menu(menu)
 
-        # Import widgets that are used in GtkBuilder files (no idea why these three and not others)
-        from pigeonplanner.ui.widgets import statusbar; statusbar
-        from pigeonplanner.ui.widgets import checkbutton; checkbutton
-        from pigeonplanner.ui.widgets import latlongentry; latlongentry
-        from pigeonplanner.ui.widgets import displayentry; displayentry
+        # Import widgets that are used in GtkBuilder files (no idea why these and not others)
+        from pigeonplanner.ui.widgets import statusbar
+        from pigeonplanner.ui.widgets import checkbutton
+        from pigeonplanner.ui.widgets import latlongentry
+        from pigeonplanner.ui.widgets import displayentry
 
         # Do this as soon as possible to avoid importing files that import a missing module
         self.notify_missing_libs()
@@ -166,11 +165,11 @@ class Application(Gtk.Application):
 
         self._window.present()
 
-    def on_about(self, action, param):
+    def on_about(self, _action, _param):
         from pigeonplanner.ui import dialogs
         dialogs.AboutDialog(self._window)
 
-    def on_quit(self, action, param):
+    def on_quit(self, _action, _param):
         self.quit()
 
     def notify_missing_libs(self):

@@ -142,20 +142,20 @@ class PedigreeWindow(builder.GtkBuilder):
         self._current_pigeon = pigeon
         utils.draw_pedigree(self.widgets.grid, pigeon, self.on_pedigree_draw)
 
-    def on_close_dialog(self, widget, event=None):
+    def on_close_dialog(self, _widget, _event=None):
         self.widgets.window.destroy()
         return False
 
-    def on_navbutton_prev_clicked(self, widget):
+    def on_navbutton_prev_clicked(self, _widget):
         self._nav_change(PREVIOUS)
 
-    def on_navbutton_sire_clicked(self, widget):
+    def on_navbutton_sire_clicked(self, _widget):
         self._nav_change(NEXT_SIRE)
 
-    def on_navbutton_dam_clicked(self, widget):
+    def on_navbutton_dam_clicked(self, _widget):
         self._nav_change(NEXT_DAM)
 
-    def on_redraw_pedigree(self, widget):
+    def on_redraw_pedigree(self, _widget):
         self.pigeon = Pigeon.get_by_id(self.pigeon.id)
         utils.draw_pedigree(self.widgets.grid, self.pigeon, self.on_pedigree_draw)
         self.widgets.treeview.get_selection().emit("changed")
@@ -169,18 +169,18 @@ class PedigreeWindow(builder.GtkBuilder):
         can_next_dam = self._current_pigeon.dam is not None
         self.widgets.buttonnextdam.set_sensitive(can_next_dam)
 
-    def on_home_clicked(self, widget):
+    def on_home_clicked(self, _widget):
         self.set_pigeon(self._original_pigeon)
 
-    def on_previous_clicked(self, widget):
+    def on_previous_clicked(self, _widget):
         new_pigeon = self.widgets.treeview.get_pigeon_at_path(self._current_pigeon_path - 1)
         self.set_pigeon(new_pigeon)
 
-    def on_next_clicked(self, widget):
+    def on_next_clicked(self, _widget):
         new_pigeon = self.widgets.treeview.get_pigeon_at_path(self._current_pigeon_path + 1)
         self.set_pigeon(new_pigeon)
 
-    def on_save_clicked(self, widget):
+    def on_save_clicked(self, _widget):
         pdfname = "%s_%s.pdf" % (_("Pedigree"), self.pigeon.band.replace(" ", "_").replace("/", "-"))
         chooser = PdfSaver(self.widgets.window, pdfname)
         response = chooser.run()
@@ -189,10 +189,10 @@ class PedigreeWindow(builder.GtkBuilder):
             self.do_operation(PRINT_ACTION_EXPORT, save_path)
         chooser.destroy()
 
-    def on_preview_clicked(self, widget):
+    def on_preview_clicked(self, _widget):
         self.do_operation(PRINT_ACTION_PREVIEW)
 
-    def on_print_clicked(self, widget):
+    def on_print_clicked(self, _widget):
         self.do_operation(PRINT_ACTION_DIALOG)
 
     def do_operation(self, print_action, save_path=None):

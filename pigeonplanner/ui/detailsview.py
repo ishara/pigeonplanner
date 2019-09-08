@@ -115,13 +115,13 @@ class PigeonImageWidget(Gtk.EventBox):
         self._imagepath = ""
         self.set_default_image()
 
-    def on_button_press_event(self, widget, event):
+    def on_button_press_event(self, _widget, _event):
         if self._view.pigeon is None:
             return
         parent = None if isinstance(self._parent, Gtk.Dialog) else self._parent
         tools.PhotoAlbum(parent, self._view.pigeon.main_image)
 
-    def on_editable_button_press_event(self, widget, event):
+    def on_editable_button_press_event(self, _widget, event):
         if event.button == Gdk.BUTTON_SECONDARY:
             entries = [
                 (Gtk.STOCK_ADD, self.on_open_imagechooser, None, None),
@@ -130,7 +130,7 @@ class PigeonImageWidget(Gtk.EventBox):
         else:
             self.on_open_imagechooser()
 
-    def on_open_imagechooser(self, widget=None):
+    def on_open_imagechooser(self, _widget=None):
         chooser = filechooser.ImageChooser(self._parent)
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
@@ -147,10 +147,10 @@ class PigeonImageWidget(Gtk.EventBox):
             self.set_default_image()
         chooser.destroy()
 
-    def on_realize(self, widget):
+    def on_realize(self, _widget):
         self.set_cursor("pointer")
 
-    def set_default_image(self, widget=None):
+    def set_default_image(self, _widget=None):
         self._imagewidget.set_from_pixbuf(self._logo_pb)
         self._imagepath = ""
 
@@ -180,11 +180,12 @@ class StatusButton(builder.GtkBuilder):
         builder.GtkBuilder.__init__(self, "DetailsView.ui",
                                     ["statusbutton", "statusdialog"])
         self.parent = parent
+        self.pigeon = None
         self.widget = self.widgets.statusbutton
         self.widgets.statusdialog.set_transient_for(parent)
         self.set_default()
 
-    def on_statusdialog_close(self, widget, event=None):
+    def on_statusdialog_close(self, _widget, _event=None):
         page = self.widgets.notebookstatus.get_current_page()
         grid = self.widgets.notebookstatus.get_nth_page(page)
         for child in grid.get_children():
@@ -198,7 +199,8 @@ class StatusButton(builder.GtkBuilder):
         self.widgets.statusdialog.hide()
         return True
 
-    def on_entrypartnerwidow_search_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_entrypartnerwidow_search_clicked(self, _widget):
         return None, enums.Sex.cock, None
 
     def on_combostatus_changed(self, widget):
@@ -206,7 +208,7 @@ class StatusButton(builder.GtkBuilder):
         self.widgets.notebookstatus.set_current_page(status)
         self._set_button_info(status)
 
-    def on_statusbutton_clicked(self, widget):
+    def on_statusbutton_clicked(self, _widget):
         if self.pigeon:
             status_id = self.pigeon.status.status_id
             self.widgets.labelstatus.set_text(enums.Status.get_string(status_id))
@@ -304,17 +306,17 @@ class StatusButton(builder.GtkBuilder):
             self.widgets.textinfowidow.get_buffer().set_text(pigeon.status.info)
 
     def set_editable(self, value):
-        def set_editable(widget, value):
+        def set_editable(widget):
             if isinstance(widget, Gtk.ScrolledWindow):
-                set_editable(widget.get_child(), value)
+                set_editable(widget.get_child())
             if isinstance(widget, bandentry.BandEntry):
                 widget.set_has_search(value)
             try:
                 widget.set_editable(value)
-            except:
+            except AttributeError:
                 pass
         for grid in self.widgets.notebookstatus.get_children():
-            grid.foreach(set_editable, value)
+            grid.foreach(set_editable)
         self.widgets.hboxstatusedit.set_visible(value)
         self.widgets.hboxstatusnormal.set_visible(not value)
 
@@ -394,6 +396,13 @@ class DetailsView(builder.GtkBuilder, component.Component):
         for text in self.get_objects_from_prefix("text"):
             text.get_buffer().set_text("")
 
+    # noinspection PyMethodMayBeStatic
+    def operation_saved(self):
+        return False
+
+    def operation_cancelled(self):
+        pass
+
 
 class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
     __gsignals__ = {"edit-finished": (GObject.SIGNAL_RUN_LAST,
@@ -406,6 +415,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
         builder.GtkBuilder.__init__(self, "DetailsView.ui", ["root_edit"])
         GObject.GObject.__init__(self)
 
+        self._operation = None
         self.parent = parent or component.get("MainWindow")
         self.pigeon = pigeon
         self.pedigree_mode = False
@@ -424,10 +434,10 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
         self.widgets.root_edit.show_all()
 
     # Callbacks
-    def on_entrysireedit_search_clicked(self, widget):
+    def on_entrysireedit_search_clicked(self, _widget):
         return self._get_pigeonsearch_details(enums.Sex.cock)
 
-    def on_entrydamedit_search_clicked(self, widget):
+    def on_entrydamedit_search_clicked(self, _widget):
         return self._get_pigeonsearch_details(enums.Sex.hen)
 
     # Public methods
@@ -538,6 +548,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
         status = self.widgets.statusbuttonedit.get_current_status()
         statusdata = self.widgets.statusbuttonedit.get_current_data()
 
+        pigeon = None
         if self._operation == enums.Action.edit:
             try:
                 pigeon = corepigeon.update_pigeon(self.pigeon, data, status, statusdata)

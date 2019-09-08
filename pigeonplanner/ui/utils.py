@@ -126,13 +126,15 @@ def draw_pedigree(grid, root_pigeon=None, draw_cb=None):
 
 
 class HiddenPigeonsMixin:
-    def _visible_func(self, model, rowiter, data=None):
+    # noinspection PyMethodMayBeStatic
+    def _visible_func(self, model, rowiter, _data=None):
         pigeon = model.get_value(rowiter, 0)
         if not pigeon.visible:
             return not config.get("interface.missing-pigeon-hide")
         return True
 
-    def _cell_func(self, column, cell, model, rowiter, data=None):
+    # noinspection PyMethodMayBeStatic
+    def _cell_func(self, _column, cell, model, rowiter, _data=None):
         pigeon = model.get_value(rowiter, 0)
         color = "white"
         if config.get("interface.missing-pigeon-color"):
@@ -157,6 +159,7 @@ class TreeviewFilter:
         return iter(self._items)
 
     def __add__(self, other):
+        # noinspection PyProtectedMember
         self._items.extend(other._items)
         return self._items
 
