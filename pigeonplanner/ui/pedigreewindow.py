@@ -23,12 +23,16 @@ import os
 
 from gi.repository import Gtk
 
+from pigeonplanner.ui import utils
 from pigeonplanner.ui import tools
+from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
+from pigeonplanner.ui.widgets import pedigreeboxes
 from pigeonplanner.ui.filechooser import PdfSaver
 from pigeonplanner.ui.messagedialog import InfoDialog, ErrorDialog
 from pigeonplanner.core import common
 from pigeonplanner.core import config
+from pigeonplanner.database.models import Pigeon
 from pigeonplanner.reportlib import (report, ReportError, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports import get_pedigree
@@ -39,7 +43,7 @@ from pigeonplanner.reports import get_pedigree
  NEXT_DAM) = range(3)
 
 
-class PedigreeWindow(Gtk.Window):
+class PedigreeWindow(builder.GtkBuilder):
     ui = """
 <ui>
    <toolbar name="Toolbar">
@@ -57,49 +61,41 @@ class PedigreeWindow(Gtk.Window):
 </ui>
 """
 
-    def __init__(self, parent, pedigree, pigeon):
-        Gtk.Window.__init__(self)
-        self.connect("delete-event", self.on_close_dialog)
-        self.set_modal(True)
-        self.resize(960, 600)
-        self.set_transient_for(parent)
-        self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT)
-        self.set_skip_taskbar_hint(True)
+    def __init__(self, parent, pigeon):
+        builder.GtkBuilder.__init__(self, "PedigreeWindow.ui")
 
+        self.widgets.treeview = component.get("Treeview")
         self.pigeon = None
         self._current_pigeon = None
         self._current_pigeon_path = None
         self._previous_pigeons = []
-        self.pdfname = ""
-        self.pedigree = pedigree
         self._original_pigeon = pigeon
-        self._treeview = component.get("Treeview")
         self._build_ui()
         self.set_pigeon(pigeon)
-        self.show_all()
+
+        self.widgets.window.set_transient_for(parent)
+        self.widgets.window.show_all()
 
     def set_pigeon(self, pigeon):
         self.pigeon = pigeon
         self._current_pigeon = pigeon
-        self._current_pigeon_path = self._treeview.get_path_for_pigeon(pigeon)
+        self._current_pigeon_path = self.widgets.treeview.get_path_for_pigeon(pigeon)
         self._previous_pigeons = []
-        self.pdfname = "%s_%s.pdf" % (_("Pedigree"), pigeon.band.replace(" ", "_").replace("/", "-"))
         name = pigeon.name
         if name:
             name = ", " + name
         title = "%s: %s%s - %s" % (_("Pedigree"), pigeon.band,
                                    name, pigeon.sex_string)
-        self.set_title(title)
+        self.widgets.window.set_title(title)
 
         is_home = self._original_pigeon == pigeon
-        self._home_pedigree_button.set_sensitive(not is_home)
+        self.widgets.home_pedigree_button.set_sensitive(not is_home)
         has_previous = self._current_pigeon_path != 0
-        self._previous_pedigree_button.set_sensitive(has_previous)
-        has_next = self._current_pigeon_path < len(self._treeview.get_model()) - 1
-        self._next_pedigree_button.set_sensitive(has_next)
+        self.widgets.previous_pedigree_button.set_sensitive(has_previous)
+        has_next = self._current_pigeon_path < len(self.widgets.treeview.get_model()) - 1
+        self.widgets.next_pedigree_button.set_sensitive(has_next)
 
-        self.pedigree.draw_pedigree(self._get_pedigree_table(), pigeon, True,
-                                    self.on_pedigree_draw)
+        utils.draw_pedigree(self.widgets.grid, pigeon, self.on_pedigree_draw)
 
     def _build_ui(self):
         actiongroup = Gtk.ActionGroup("PedigreeWindowActions")
@@ -123,50 +119,20 @@ class PedigreeWindow(Gtk.Window):
         uimanager.add_ui_from_string(self.ui)
         uimanager.insert_action_group(actiongroup, 0)
         accelgroup = uimanager.get_accel_group()
-        self.add_accel_group(accelgroup)
+        self.widgets.window.add_accel_group(accelgroup)
+
+        self.widgets.home_pedigree_button = uimanager.get_widget("/Toolbar/Home")
+        self.widgets.previous_pedigree_button = uimanager.get_widget("/Toolbar/Previous")
+        self.widgets.next_pedigree_button = uimanager.get_widget("/Toolbar/Next")
 
         toolbar = uimanager.get_widget("/Toolbar")
-        self._home_pedigree_button = uimanager.get_widget("/Toolbar/Home")
-        self._previous_pedigree_button = uimanager.get_widget("/Toolbar/Previous")
-        self._next_pedigree_button = uimanager.get_widget("/Toolbar/Next")
+        self.widgets.main_box.pack_start(toolbar, False, False, 0)
 
-        self.buttonprev = Gtk.Button.new_from_icon_name(Gtk.STOCK_GO_BACK, Gtk.IconSize.BUTTON)
-        self.buttonprev.set_relief(Gtk.ReliefStyle.NONE)
-        self.buttonprev.get_style_context().add_class("pedigree-button")
-        self.buttonprev.connect("clicked", self.on_navbutton_clicked, PREVIOUS)
-        self.buttonnextsire = Gtk.Button.new_from_icon_name(Gtk.STOCK_GO_FORWARD, Gtk.IconSize.BUTTON)
-        self.buttonnextsire.set_relief(Gtk.ReliefStyle.NONE)
-        self.buttonnextsire.get_style_context().add_class("pedigree-button")
-        self.buttonnextsire.connect("clicked", self.on_navbutton_clicked, NEXT_SIRE)
-        self.buttonnextdam = Gtk.Button.new_from_icon_name(Gtk.STOCK_GO_FORWARD, Gtk.IconSize.BUTTON)
-        self.buttonnextdam.set_relief(Gtk.ReliefStyle.NONE)
-        self.buttonnextdam.get_style_context().add_class("pedigree-button")
-        self.buttonnextdam.connect("clicked", self.on_navbutton_clicked, NEXT_DAM)
+        for child in self.widgets.grid.get_children():
+            if isinstance(child, pedigreeboxes.PedigreeBox):
+                child.connect("redraw-pedigree", self.on_redraw_pedigree)
 
-        self.table = table = Gtk.Table(20, 7)
-        table.set_size_request(-1, 340)
-        table.set_margin_top(8)
-        table.set_margin_bottom(8)
-        table.set_margin_start(4)
-        table.set_margin_end(4)
-        table.attach(self.buttonprev, 0, 1, 7, 8, 0, 0)
-        table.attach(self.buttonnextsire, 8, 9, 3, 4, 0, 0)
-        table.attach(self.buttonnextdam, 8, 9, 11, 12, 0, 0)
-
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-        vbox.pack_start(toolbar, False, False, 0)
-        vbox.pack_start(table, False, False, 0)
-        self.add(vbox)
-
-    def _get_pedigree_table(self):
-        return self.table
-
-    def on_close_dialog(self, widget, event=None):
-        self.destroy()
-        self.pedigree.draw_cb = None
-        return False
-
-    def on_navbutton_clicked(self, widget, nav):
+    def _nav_change(self, nav):
         if nav == PREVIOUS:
             pigeon = self._previous_pigeons.pop()
         else:
@@ -174,30 +140,49 @@ class PedigreeWindow(Gtk.Window):
             pigeon = self._current_pigeon.sire if nav == NEXT_SIRE else self._current_pigeon.dam
 
         self._current_pigeon = pigeon
-        self.pedigree.draw_pedigree(self._get_pedigree_table(), pigeon, True)
+        utils.draw_pedigree(self.widgets.grid, pigeon, self.on_pedigree_draw)
+
+    def on_close_dialog(self, widget, event=None):
+        self.widgets.window.destroy()
+        return False
+
+    def on_navbutton_prev_clicked(self, widget):
+        self._nav_change(PREVIOUS)
+
+    def on_navbutton_sire_clicked(self, widget):
+        self._nav_change(NEXT_SIRE)
+
+    def on_navbutton_dam_clicked(self, widget):
+        self._nav_change(NEXT_DAM)
+
+    def on_redraw_pedigree(self, widget):
+        self.pigeon = Pigeon.get_by_id(self.pigeon.id)
+        utils.draw_pedigree(self.widgets.grid, self.pigeon, self.on_pedigree_draw)
+        self.widgets.treeview.get_selection().emit("changed")
 
     def on_pedigree_draw(self):
         can_prev = self._current_pigeon != self.pigeon
-        self.buttonprev.set_sensitive(can_prev)
+        self.widgets.buttonprev.set_sensitive(can_prev)
 
         can_next_sire = self._current_pigeon.sire is not None
-        self.buttonnextsire.set_sensitive(can_next_sire)
+        self.widgets.buttonnextsire.set_sensitive(can_next_sire)
         can_next_dam = self._current_pigeon.dam is not None
-        self.buttonnextdam.set_sensitive(can_next_dam)
+        self.widgets.buttonnextdam.set_sensitive(can_next_dam)
 
     def on_home_clicked(self, widget):
         self.set_pigeon(self._original_pigeon)
 
     def on_previous_clicked(self, widget):
-        new_pigeon = self._treeview.get_pigeon_at_path(self._current_pigeon_path - 1)
+        new_pigeon = self.widgets.treeview.get_pigeon_at_path(self._current_pigeon_path - 1)
         self.set_pigeon(new_pigeon)
 
     def on_next_clicked(self, widget):
-        new_pigeon = self._treeview.get_pigeon_at_path(self._current_pigeon_path + 1)
+        new_pigeon = self.widgets.treeview.get_pigeon_at_path(self._current_pigeon_path + 1)
         self.set_pigeon(new_pigeon)
 
     def on_save_clicked(self, widget):
-        chooser = PdfSaver(self, self.pdfname)
+        pdfname = "%s_%s.pdf" % (_("Pedigree"), self.pigeon.band.replace(" ", "_").replace("/", "-"))
+        chooser = PdfSaver(self.widgets.window, pdfname)
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
             save_path = chooser.get_filename()
@@ -212,7 +197,7 @@ class PedigreeWindow(Gtk.Window):
 
     def do_operation(self, print_action, save_path=None):
         userinfo = common.get_own_address()
-        if not tools.check_user_info(self, userinfo):
+        if not tools.check_user_info(self.widgets.window, userinfo):
             return
 
         # Show a message to the user if the original image is not found and
@@ -225,13 +210,13 @@ class PedigreeWindow(Gtk.Window):
                        "")
                 # In some very old versions, an empty image was stored as an
                 # empty string instead of None. Don't show this message in cases
-                # like this ofcourse.
+                # like this of course.
                 if not self.pigeon.main_image.path == "":
-                    InfoDialog(msg, self, self.pigeon.main_image.path)
+                    InfoDialog(msg, self.widgets.window, self.pigeon.main_image.path)
 
         pedigree_report, pedigree_report_options = get_pedigree()
         psize = common.get_pagesize_from_opts()
-        opts = pedigree_report_options(psize, print_action=print_action, filename=save_path, parent=self)
+        opts = pedigree_report_options(psize, print_action=print_action, filename=save_path, parent=self.widgets.window)
         try:
             report(pedigree_report, opts, self.pigeon, userinfo)
         except ReportError as exc:

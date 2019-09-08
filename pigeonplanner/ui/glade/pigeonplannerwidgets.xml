@@ -56,6 +56,12 @@
         <property id="size" query="False" default="0" visible="False" />
       </properties>
     </glade-widget-class>
+    <glade-widget-class title="Pedigree Box" name="PedigreeBox" generic-name="pedigreebox">
+    </glade-widget-class>
+    <glade-widget-class title="Pedigree Box Join" name="PedigreeBoxJoin" generic-name="pedigreeboxjoin">
+    </glade-widget-class>
+    <glade-widget-class title="Pedigree Extra Box" name="PedigreeExtraBox" generic-name="pedigreeextrabox">
+    </glade-widget-class>
   </glade-widget-classes>
 
   <glade-widget-group name="pigeonplanner" title="Pigeon Planner">
@@ -72,6 +78,9 @@
     <glade-widget-class-ref name="LatLongEntry"/>
     <glade-widget-class-ref name="SexEntry"/>
     <glade-widget-class-ref name="StatusBar"/>
+    <glade-widget-class-ref name="PedigreeBox"/>
+    <glade-widget-class-ref name="PedigreeBoxJoin"/>
+    <glade-widget-class-ref name="PedigreeExtraBox"/>
   </glade-widget-group>
 
 </glade-catalog>

@@ -25,6 +25,7 @@ from gi.repository import GdkPixbuf
 from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.core import config
+from pigeonplanner.core import pigeon as corepigeon
 
 
 def get_sex_image(sex):
@@ -99,6 +100,29 @@ def popup_menu(event, entries):
         item.show()
         menu.append(item)
     menu.popup_at_pointer(event)
+
+
+def draw_pedigree(grid, root_pigeon=None, draw_cb=None):
+    # Moved down here to avoid import errors
+    from pigeonplanner.ui.widgets import pedigreeboxes
+
+    pedigree_tree = [None] * 15
+    if root_pigeon is not None:
+        corepigeon.build_pedigree_tree(root_pigeon, 0, 1, pedigree_tree)
+
+    for grid_child in grid.get_children():
+        if isinstance(grid_child, (pedigreeboxes.PedigreeBox, pedigreeboxes.PedigreeExtraBox)):
+            pigeon = pedigree_tree[grid_child.index]
+            if pigeon is root_pigeon:
+                pigeon_child = None
+            else:
+                pigeon_child = root_pigeon if grid_child.index == 0 else pedigree_tree[(grid_child.index - 1) // 2]
+            grid_child.set_pigeon(pigeon, pigeon_child)
+
+    if callable(draw_cb):
+        draw_cb()
+
+    grid.queue_draw()
 
 
 class HiddenPigeonsMixin:

@@ -328,7 +328,6 @@ class DetailsView(builder.GtkBuilder, component.Component):
         self.parent = parent or component.get("MainWindow")
         self.pedigree_mode = False
         self.pigeon = None
-        self.child = None
 
         self.widgets.pigeonimage = PigeonImageWidget(False, self, parent)
         self.widgets.viewportImage.add(self.widgets.pigeonimage)
@@ -410,7 +409,6 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
         self.parent = parent or component.get("MainWindow")
         self.pigeon = pigeon
         self.pedigree_mode = False
-        self.child = None
 
         self.widgets.pigeonimage_edit = PigeonImageWidget(True, self, parent)
         self.widgets.viewportImageEdit.add(self.widgets.pigeonimage_edit)
@@ -435,12 +433,6 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
     # Public methods
     def get_root_widget(self):
         return self.widgets.root_edit
-
-    def get_child(self):
-        return self.child
-
-    def set_child(self, child):
-        self.child = child
 
     def get_pedigree_mode(self):
         return self.pedigree_mode

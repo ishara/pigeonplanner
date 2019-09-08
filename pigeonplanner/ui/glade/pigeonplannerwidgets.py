@@ -24,6 +24,9 @@ sys.path.insert(0, os.path.abspath('../../..'))
 import gettext
 gettext.install("", "")
 
+import gi
+gi.require_version("PangoCairo", "1.0")
+
 from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.widgets import displayentry
 from pigeonplanner.ui.widgets import date
@@ -32,3 +35,4 @@ from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.widgets import latlongentry
 from pigeonplanner.ui.widgets import sexentry
 from pigeonplanner.ui.widgets import statusbar
+from pigeonplanner.ui.widgets import pedigreeboxes

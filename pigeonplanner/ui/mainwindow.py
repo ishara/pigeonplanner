@@ -35,7 +35,6 @@ from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import dialogs
-from pigeonplanner.ui import pedigree
 from pigeonplanner.ui import dbmanager
 from pigeonplanner.ui import logdialog
 from pigeonplanner.ui import component
@@ -166,11 +165,10 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
 
-        self.pedigree = pedigree.DrawPedigree()
         self.detailsview = detailsview.DetailsView(self, True)
         self.widgets.aligndetails.add(self.detailsview.get_root_widget())
 
-        pedigreetab = tabs.PedigreeTab(self.pedigree)
+        pedigreetab = tabs.PedigreeTab()
         relativestab = tabs.RelativesTab()
         self.resultstab = tabs.ResultsTab()
         breedingtab = tabs.BreedingTab()
@@ -443,7 +441,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         if len(paths) != 1:
             return
         pigeon = self.widgets.treeview.get_selected_pigeon()
-        pedigreewindow.PedigreeWindow(self, self.pedigree, pigeon)
+        pedigreewindow.PedigreeWindow(self, pigeon)
 
     def menuaddresult_activate(self, widget):
         logger.debug(common.get_function_name())
