@@ -47,6 +47,9 @@ class LogDialog(Gtk.Dialog):
         self.set_size_request(700, 500)
         self.set_icon(self.render_icon(Gtk.STOCK_FILE, Gtk.IconSize.MENU))
 
+        self.file = None
+        self.back_buffer = None
+
         self.set_logfile()
 
         frame = Gtk.Frame()
@@ -129,7 +132,7 @@ class LogDialog(Gtk.Dialog):
                                       bffr.get_tag_table().lookup(s))
                 break
 
-    def reload_view(self, textview):
+    def reload_view(self, _textview):
         bffr = self.textview.get_buffer()
         bffr.set_text("")
         start, end = self.back_buffer.get_bounds()
@@ -147,15 +150,17 @@ class LogDialog(Gtk.Dialog):
         else:
             return True
 
+    # noinspection PyMethodMayBeStatic
     def changed(self, vadjust):
         if not hasattr(vadjust, "need_scroll") or vadjust.need_scroll:
             vadjust.set_value(vadjust.get_upper()-vadjust.get_page_size())
             vadjust.need_scroll = True
 
+    # noinspection PyMethodMayBeStatic
     def value_changed(self, vadjust):
         vadjust.need_scroll = abs(vadjust.get_value() + vadjust.get_page_size() -
                                   vadjust.get_upper()) < vadjust.get_step_increment()
 
-    def close(self, widget=None, other=None):
+    def close(self, _widget=None, _other=None):
         self.file.close()
         self.destroy()

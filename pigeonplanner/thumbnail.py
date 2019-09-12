@@ -32,7 +32,7 @@ def get_image(src_file):
     try:
         filename = get_path(src_file)
         return GdkPixbuf.Pixbuf.new_from_file(filename)
-    except (GLib.GError, OSError) as exc:
+    except (GLib.GError, OSError):
         return GdkPixbuf.Pixbuf.new_from_file_at_size(const.LOGO_IMG, 75, 75)
 
 
@@ -62,4 +62,3 @@ def __create_image(src_file):
         except AttributeError:
             # Apparently even some miss the savev method!
             logger.error("Can't find either save or savev methods on GdkPixbuf.Pixbuf to save thumbnail")
-

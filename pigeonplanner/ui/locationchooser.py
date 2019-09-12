@@ -51,7 +51,7 @@ class LocationChooser(builder.GtkBuilder):
     def destroy(self):
         self.widgets.dialog.destroy()
 
-    def on_entryloc_icon_press(self, widget, icon_pos, event):
+    def on_entryloc_icon_press(self, widget, _icon_pos, _event):
         location = widget.get_text()
 
         if not geopy_available:

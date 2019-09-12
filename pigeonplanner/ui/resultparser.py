@@ -41,6 +41,7 @@ class ResultParser(builder.GtkBuilder):
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "ResultParser.ui")
         self.data = None
+        self.resultfilename = None
 
         self._build_interface()
         self.widgets.parserdialog.set_transient_for(parent)
@@ -51,11 +52,11 @@ class ResultParser(builder.GtkBuilder):
             ErrorDialog((_("This tool needs Yapsy to run correctly."), None, ""),
                         self.widgets.parserdialog)
 
-    def close_window(self, widget=None, event=None):
+    def close_window(self, _widget=None, _event=None):
         self.widgets.parserdialog.destroy()
         return False
 
-    def on_parsebutton_clicked(self, widget):
+    def on_parsebutton_clicked(self, _widget):
         self.resultfilename = self.widgets.filebutton.get_filename()
         if self.resultfilename is None:
             return
@@ -109,13 +110,14 @@ class ResultParser(builder.GtkBuilder):
             row.append(speedfloat)
             self.widgets.liststore.append(row)
 
-    def on_helpbutton_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_helpbutton_clicked(self, _widget):
         common.open_help(9)
 
-    def on_cancelbutton_clicked(self, widget):
+    def on_cancelbutton_clicked(self, _widget):
         self.close_window()
 
-    def on_addbutton_clicked(self, widget):
+    def on_addbutton_clicked(self, _widget):
         point = self.widgets.racepointentry.get_text()
         out = self.widgets.pigeonsentry.get_text()
         try:
@@ -152,20 +154,21 @@ class ResultParser(builder.GtkBuilder):
                 logger.info("Selected result already exists for pigeon id=%s band=%s", pigeon.id, pigeon.band_tuple)
         self.close_window()
 
-    def on_celltoggle_toggled(self, cell, path):
+    def on_celltoggle_toggled(self, _cell, path):
         self.widgets.liststore[path][0] = not self.widgets.liststore[path][0]
 
     def on_parsercombo_changed(self, widget):
         parserplugin = self._get_active_parserplugin()
         widget.set_tooltip_text(parserplugin.description)
 
-    def on_reportdialog_delete_event(self, widget, event):
+    # noinspection PyMethodMayBeStatic
+    def on_reportdialog_delete_event(self, _widget, _event):
         return True
 
-    def on_closebutton_clicked(self, widget):
+    def on_closebutton_clicked(self, _widget):
         self.widgets.reportdialog.hide()
 
-    def on_sendbutton_clicked(self, widget):
+    def on_sendbutton_clicked(self, _widget):
         self.widgets.reportdialog.hide()
         textbuffer = self.widgets.textview.get_buffer()
         body = textbuffer.get_text(*textbuffer.get_bounds())

@@ -98,12 +98,13 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         except TypeError:
             pass
 
-    def on_close_dialog(self, widget, event=None):
+    def on_close_dialog(self, _widget, _event=None):
         self.widgets.optionsdialog.destroy()
 
     def on_checkbackup_toggled(self, widget):
         self.widgets.alignbackup.set_sensitive(widget.get_active())
 
+    # noinspection PyMethodMayBeStatic
     def on_spinday_changed(self, widget):
         value = widget.get_value_as_int()
         dstring = _("day") if value == 1 else _("days")
@@ -118,7 +119,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
     def on_chkPigOptExtraLine_toggled(self, widget):
         self.widgets.align_extra_line.set_sensitive(widget.get_active())
 
-    def on_btnPreview_clicked(self, widget):
+    def on_btnPreview_clicked(self, _widget):
         selected = self.widgets.cbLayout.get_active()
         userinfo = common.get_own_address()
         pedigree_report, pedigree_report_options = get_pedigree(layout=selected)
@@ -127,16 +128,16 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
                                        parent=self.widgets.optionsdialog)
         report(pedigree_report, opts, None, userinfo)
 
-    def on_buttondefault_clicked(self, widget):
+    def on_buttondefault_clicked(self, _widget):
         if WarningDialog(messages.MSG_DEFAULT_OPTIONS, self.widgets.optionsdialog).run():
             config.reset()
             self._set_options()
             self._finish_options(False, True)
 
-    def on_buttoncancel_clicked(self, widget):
+    def on_buttoncancel_clicked(self, _widget):
         self.widgets.optionsdialog.destroy()
 
-    def on_buttonok_clicked(self, widget):
+    def on_buttonok_clicked(self, _widget):
         restart = self.widgets.combolangs.get_active_text() != config.get("options.language")
 
         if self.widgets.radioSexText.get_active():

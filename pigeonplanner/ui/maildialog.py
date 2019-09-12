@@ -74,7 +74,7 @@ class MailDialog(builder.GtkBuilder):
             self.widgets.entry_name.set_position(-1)
         self.widgets.maildialog.show()
 
-    def close_dialog(self, widget=None, event=None):
+    def close_dialog(self, _widget=None, _event=None):
         if not self.sending:
             if self.kind == "pdf":
                 try:
@@ -84,19 +84,19 @@ class MailDialog(builder.GtkBuilder):
 
             self.widgets.maildialog.destroy()
 
-    def on_cancel_clicked(self, widget):
+    def on_cancel_clicked(self, _widget):
         self.close_dialog()
 
-    def on_close_clicked(self, widget):
+    def on_close_clicked(self, _widget):
         self.close_dialog()
 
-    def on_rename_clicked(self, widget):
+    def on_rename_clicked(self, _widget):
         self.widgets.entry_attachment.set_text(os.path.basename(self.attachment))
 
         self.widgets.hbox_label.hide()
         self.widgets.hbox_entry.show()
 
-    def on_apply_clicked(self, widget):
+    def on_apply_clicked(self, _widget):
         filename = self.widgets.entry_attachment.get_text()
         if not filename.endswith(".pdf"):
             filename += ".pdf"
@@ -111,7 +111,7 @@ class MailDialog(builder.GtkBuilder):
         self.widgets.hbox_entry.hide()
         self.widgets.hbox_label.show()
 
-    def on_send_clicked(self, widget):
+    def on_send_clicked(self, _widget):
         if (not self.widgets.entry_to.get_text() or not 
                 self.widgets.entry_mail.get_text()):
             ErrorDialog(messages.MSG_NEED_EMAIL, self.widgets.maildialog)
@@ -151,7 +151,7 @@ class MailDialog(builder.GtkBuilder):
         self.widgets.close.show()
         self.widgets.action_area.set_sensitive(True)
         msg = _("The e-mail has been sent succesfully!") if not error else \
-                    _("Connection to server failed!")
+            _("Connection to server failed!")
         self.widgets.label_result.set_markup("<b>%s</b>" % msg)
         self.widgets.label_result.show()
 
@@ -159,4 +159,3 @@ class MailDialog(builder.GtkBuilder):
         if self.sending:
             self.widgets.progressbar.pulse()
             return True
-

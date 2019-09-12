@@ -44,15 +44,15 @@ class ExportWindow(builder.GtkBuilder):
         self.widgets.window.set_transient_for(parent)
         self.widgets.window.show_all()
 
-    def on_window_delete_event(self, widget, event):
+    def on_window_delete_event(self, _widget, _event):
         self.widgets.window.destroy()
         return False
 
-    def on_buttonclose_clicked(self, widget):
+    def on_buttonclose_clicked(self, _widget):
         self.widgets.window.destroy()
         return False
 
-    def on_buttonexport_clicked(self, widget):
+    def on_buttonexport_clicked(self, _widget):
         filepath = self.widgets.entrypath.get_text()
         path = os.path.dirname(filepath)
         if not os.path.exists(path) or os.path.isdir(filepath):
@@ -93,10 +93,9 @@ class ExportWindow(builder.GtkBuilder):
         value = widget.get_text_length() != 0
         self.widgets.buttonexport.set_sensitive(value)
 
-    def on_entrypath_icon_press(self, widget, icon_pos, event):
+    def on_entrypath_icon_press(self, widget, _icon_pos, _event):
         exporter = self.__get_exporter()
-        dialog = filechooser.ExportChooser(self.widgets.window, exporter.extension,
-                                                        exporter.filefilter)
+        dialog = filechooser.ExportChooser(self.widgets.window, exporter.extension, exporter.filefilter)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             widget.set_text(dialog.get_filename())
@@ -105,4 +104,3 @@ class ExportWindow(builder.GtkBuilder):
     def __get_exporter(self):
         ls_iter = self.widgets.combotype.get_active_iter()
         return self.widgets.typelist.get(ls_iter, 0)[0]
-

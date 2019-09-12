@@ -19,6 +19,7 @@
 import mimetypes
 
 from gi.repository import Gtk
+from gi.repository import GLib
 
 
 class MimeIconError(Exception):
@@ -54,14 +55,14 @@ def get_pixbuf(mime):
         icon = "gnome-mime-%s" % mime.replace("/", "-")
         try:
             return _icontheme.load_icon(icon, 48, 0)
-        except:
+        except GLib.Error:
             try:
                 icon = "gnome-mime-%s" % get_basetype(mime)
                 return _icontheme.load_icon(icon, 48, 0)
-            except:
+            except GLib.Error:
                 raise MimeIconError
-    except:
-        raise MimeIconError
+    except MimeIconError:
+        raise
 
 
 def get_stock(mime):

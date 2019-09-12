@@ -63,13 +63,13 @@ class RemovePigeonDialog(Gtk.MessageDialog):
 
         self.show_all()
 
-    def on_button_cancel_clicked(self, widget):
+    def on_button_cancel_clicked(self, _widget):
         self.response(self.RESPONSE_CANCEL)
 
-    def on_button_remove_clicked(self, widget):
+    def on_button_remove_clicked(self, _widget):
         self.response(self.RESPONSE_REMOVE)
 
-    def on_button_hide_clicked(self, widget):
+    def on_button_hide_clicked(self, _widget):
         self.response(self.RESPONSE_HIDE)
 
 
@@ -130,6 +130,7 @@ class InformationDialog(Gtk.Dialog):
         self.run()
         self.destroy()
 
+    # noinspection PyMethodMayBeStatic
     def get_versions(self):
         operatingsystem, distribution = main.get_operating_system()
         return (("Pigeon Planner", str(const.VERSION)),
@@ -140,15 +141,13 @@ class InformationDialog(Gtk.Dialog):
 
     def get_data(self):
         total, cocks, hens, ybirds, unknown = common.count_active_pigeons()
-        data = [(_("Number of pigeons"), str(total))]
-        data.append(("    %s" % _("Cocks"),
-                     "%s\t(%s %%)" % (cocks, self.get_percentage(cocks, total))))
-        data.append(("    %s" % _("Hens"),
-                     "%s\t(%s %%)" % (hens, self.get_percentage(hens, total))))
-        data.append(("    %s" % _("Young birds"),
-                     "%s\t(%s %%)" % (ybirds, self.get_percentage(ybirds, total))))
-        data.append(("    %s" % _("Unknown"),
-                     "%s\t(%s %%)" % (unknown, self.get_percentage(unknown, total))))
+        data = [
+            (_("Number of pigeons"), str(total)),
+            ("    %s" % _("Cocks"), "%s\t(%s %%)" % (cocks, self.get_percentage(cocks, total))),
+            ("    %s" % _("Hens"), "%s\t(%s %%)" % (hens, self.get_percentage(hens, total))),
+            ("    %s" % _("Young birds"), "%s\t(%s %%)" % (ybirds, self.get_percentage(ybirds, total))),
+            ("    %s" % _("Unknown"), "%s\t(%s %%)" % (unknown, self.get_percentage(unknown, total)))
+        ]
         for status in range(7):
             n_status = (Status.select()
                         .join(Pigeon, on=Status.pigeon)
@@ -162,12 +161,14 @@ class InformationDialog(Gtk.Dialog):
         data.append((_("Number of couples"), str(n_breeding)))
         return data
 
+    # noinspection PyMethodMayBeStatic
     def get_percentage(self, value, total):
         if total == 0:
             return "0"
         return "%.2f" % ((value / float(total)) * 100)
 
-    def _select_func(self, selection, model, path, is_selected, data=None):
+    # noinspection PyMethodMayBeStatic
+    def _select_func(self, _selection, _model, _path, _is_selected, _data=None):
         return False
 
 
@@ -220,7 +221,7 @@ class PigeonListDialog(Gtk.Dialog):
         if pthinfo is None:
             return
 
-        if event.button == Gdk.BUTTON_PRIMARY and event.type == Gdk.EventType._2BUTTON_PRESS:
+        if event.button == Gdk.BUTTON_PRIMARY and event.type == Gdk.EventType.DOUBLE_BUTTON_PRESS:
             self.response(Gtk.ResponseType.APPLY)
 
     def fill_treeview(self, band_tuple=None, sex=None, year=None):
@@ -246,7 +247,7 @@ class PigeonListDialog(Gtk.Dialog):
             return
         return model[rowiter][0]
 
-    def _visible_func(self, model, rowiter, data=None):
+    def _visible_func(self, model, rowiter, _data=None):
         if self.checkbutton.get_active():
             # Show everything
             return True
