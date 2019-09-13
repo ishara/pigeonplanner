@@ -19,7 +19,6 @@
 import re
 
 from gi.repository import Gtk
-from gi.repository import Gdk
 from gi.repository import GObject
 
 from pigeonplanner.ui import dialogs
@@ -96,7 +95,7 @@ class BandEntry(Gtk.Box):
         self.pack_start(self._entry_display, True, True, 0)
         self.pack_start(self._hbox_band, False, False, 0)
 
-    def on_button_format_clicked(self, widget):
+    def on_button_format_clicked(self, _widget):
         self.get_toplevel().get_child().set_sensitive(False)
         popover = BandEntryPopover(self)
         popover.set_relative_to(self._button_format)
@@ -104,7 +103,7 @@ class BandEntry(Gtk.Box):
         popover.show_all()
         popover.popup()
 
-    def on_button_search_clicked(self, widget):
+    def on_button_search_clicked(self, _widget):
         try:
             band_tuple, sex, year = self.emit("search-clicked")
         except TypeError:
@@ -253,7 +252,7 @@ class BandEntryPopover(Gtk.Popover):
         # Important. Wait until after setting the initial format values to connect those widget's handlers.
         self._connect_handlers()
 
-    def update_preview(self, *args):
+    def update_preview(self, *_args):
         fields = [
             self._combobox1.formatter,
             self._entry_sep1.get_text(),
@@ -276,7 +275,7 @@ class BandEntryPopover(Gtk.Popover):
         self._label_preview.set_text(preview)
         self.main_entry.band_format = format_string
 
-    def on_button_apply_clicked(self, widget):
+    def on_button_apply_clicked(self, _widget):
         self.main_entry.set_band(
             self._entry_country.get_text(),
             self._entry_letters.get_text(),
@@ -287,7 +286,7 @@ class BandEntryPopover(Gtk.Popover):
             config.set("options.band-format", self.main_entry.band_format)
         self.popdown()
 
-    def on_button_cancel_clicked(self, widget):
+    def on_button_cancel_clicked(self, _widget):
         self.popdown()
 
     def _build_ui(self):
@@ -385,13 +384,13 @@ class BandEntryPopover(Gtk.Popover):
         self._entry_country.set_position(-1)
 
     def _set_band_format_values(self):
-        val1, val2, val3, val4 = re.findall("{\w+}", self.main_entry.band_format)
+        val1, val2, val3, val4 = re.findall(r"{\w+}", self.main_entry.band_format)
         self._combobox1.select_value(val1)
         self._combobox2.select_value(val2)
         self._combobox3.select_value(val3)
         self._combobox4.select_value(val4)
 
-        sep1, sep2, sep3 = re.findall("}(.*?){", self.main_entry.band_format)
+        sep1, sep2, sep3 = re.findall(r"}(.*?){", self.main_entry.band_format)
         self._entry_sep1.set_text(sep1)
         self._entry_sep2.set_text(sep2)
         self._entry_sep3.set_text(sep3)
