@@ -47,10 +47,11 @@ class FilterDialog(builder.GtkBuilder):
     def hide(self):
         self.widgets.filterdialog.hide()
 
-    def on_close(self, widget, event=None):
+    def on_close(self, _widget, _event=None):
         self.widgets.filterdialog.hide()
         return True
 
+    # noinspection PyMethodMayBeStatic
     def on_spinbutton_output(self, widget):
         value = widget.get_value_as_int()
         text = "" if value == 0 else str(value)
@@ -69,13 +70,15 @@ class FilterDialog(builder.GtkBuilder):
     def on_checkdam_toggled(self, widget):
         self.widgets.bandentrydam.set_sensitive(widget.get_active())
 
-    def on_bandentrysire_search_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_bandentrysire_search_clicked(self, _widget):
         return None, enums.Sex.cock, None
 
-    def on_bandentrydam_search_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_bandentrydam_search_clicked(self, _widget):
         return None, enums.Sex.hen, None
 
-    def on_clear_clicked(self, widget):
+    def on_clear_clicked(self, _widget):
         for combo in ["year", "sex", "status"]:
             getattr(self.widgets, "combo"+combo).set_active(0)
         for spin in ["year"]:
@@ -92,7 +95,7 @@ class FilterDialog(builder.GtkBuilder):
         component.get("Statusbar").set_filter(False)
         self.treeview.emit("pigeons-changed")
 
-    def on_search_clicked(self, widget):
+    def on_search_clicked(self, _widget):
         self.filter.clear()
 
         year = self.widgets.spinyear.get_value_as_int()
@@ -297,10 +300,10 @@ class MainTreeView(Gtk.TreeView, component.Component):
                 return True
         return False
 
-    def select_pigeon(self, widget, pigeon):
+    def select_pigeon(self, _widget, pigeon):
         """Select the pigeon in the main treeview
 
-        :param widget: Only given when selected through menu
+        :param _widget: Only given when selected through menu
         :param pigeon: The pigeon object to search
         """
         for row in self._modelsort:
@@ -410,6 +413,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
             self.append_column(tvcolumn)
         return liststore
 
+    # noinspection PyMethodMayBeStatic
     def _row_for_pigeon(self, pigeon):
         return [
             pigeon.id,
@@ -427,7 +431,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
             utils.get_sex_image(pigeon.sex)
         ]
 
-    def _visible_func(self, model, treeiter, data=None):
+    def _visible_func(self, model, treeiter, _data=None):
         if self._block_visible_func:
             return True
         pigeon = Pigeon.get_by_id(model[treeiter][self.LS_PIGEON])
@@ -437,7 +441,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
                 return False
         return True
 
-    def _sort_func(self, model, iter1, iter2, data=None):
+    def _sort_func(self, model, iter1, iter2, _data=None):
         data1 = model.get_value(iter1, self.LS_YEAR)
         data2 = model.get_value(iter2, self.LS_YEAR)
         if data1 == data2:

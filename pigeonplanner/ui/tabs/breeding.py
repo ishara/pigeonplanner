@@ -42,6 +42,9 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         builder.GtkBuilder.__init__(self, "BreedingView.ui")
         basetab.BaseTab.__init__(self, "BreedingTab", _("Breeding"), "icon_breeding.png")
 
+        self.pigeon = None
+        self._mode = None
+
         self.maintreeview = component.get("Treeview")
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
@@ -52,7 +55,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         model, rowiter = selection.get_selected()
 
         widgets = [self.widgets.buttonremove, self.widgets.buttonedit]
-        utils.set_multiple_sensitive(widgets, not rowiter is None)
+        utils.set_multiple_sensitive(widgets, rowiter is not None)
 
         if rowiter is None:
             defaults = Breeding.get_fields_with_defaults()
@@ -100,18 +103,18 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.buttoninfo2.set_sensitive(record.child2 is not None)
         self.widgets.buttongoto2.set_sensitive(record.child2 is not None and record.child2.visible)
 
-    def on_buttonadd_clicked(self, widget):
+    def on_buttonadd_clicked(self, _widget):
         self._mode = enums.Action.add
         self._set_dialog_fields()
         self.widgets.editdialog.show()
 
-    def on_buttonedit_clicked(self, widget):
+    def on_buttonedit_clicked(self, _widget):
         self._mode = enums.Action.edit
         model, rowiter = self.widgets.selection.get_selected()
         self._set_dialog_fields(model[rowiter][COL_OBJ], model[rowiter][COL_MATE])
         self.widgets.editdialog.show()
 
-    def on_buttonremove_clicked(self, widget):
+    def on_buttonremove_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.treestore.get_path(rowiter)
         obj = model.get_value(rowiter, COL_OBJ)
@@ -119,38 +122,39 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self._remove_record(rowiter)
         self.widgets.selection.select_path(path)
 
-    def on_buttoninfo1_clicked(self, widget):
+    def on_buttoninfo1_clicked(self, _widget):
         band_tuple = self.widgets.bandentry1.get_band()
         pigeon = Pigeon.get_for_band(band_tuple)
         DetailsDialog(pigeon, self._parent)
 
-    def on_buttongoto1_clicked(self, widget):
+    def on_buttongoto1_clicked(self, _widget):
         band_tuple = self.widgets.bandentry1.get_band()
         pigeon = Pigeon.get_for_band(band_tuple)
         self.maintreeview.select_pigeon(None, pigeon)
 
-    def on_buttoninfo2_clicked(self, widget):
+    def on_buttoninfo2_clicked(self, _widget):
         band_tuple = self.widgets.bandentry2.get_band()
         pigeon = Pigeon.get_for_band(band_tuple)
         DetailsDialog(pigeon, self._parent)
 
-    def on_buttongoto2_clicked(self, widget):
+    def on_buttongoto2_clicked(self, _widget):
         band_tuple = self.widgets.bandentry2.get_band()
         pigeon = Pigeon.get_for_band(band_tuple)
         self.maintreeview.select_pigeon(None, pigeon)
 
     # Edit dialog
-    def on_editdialog_delete_event(self, widget, event):
+    def on_editdialog_delete_event(self, _widget, _event):
         self.widgets.editdialog.hide()
         return True
 
-    def on_buttonhelp_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_buttonhelp_clicked(self, _widget):
         common.open_help(14)
 
-    def on_buttoncancel_clicked(self, widget):
+    def on_buttoncancel_clicked(self, _widget):
         self.widgets.editdialog.hide()
 
-    def on_buttonsave_clicked(self, widget):
+    def on_buttonsave_clicked(self, _widget):
         # Get and check bands
         try:
             band_tuple_mate = self.widgets.bandmateedit.get_band()
@@ -197,6 +201,8 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
                 "comment": textbuffer.get_text(*textbuffer.get_bounds(), include_hidden_chars=True)}
 
         # Update when editing record
+        parent = None
+        rowiter = None
         if self._mode == enums.Action.edit:
             model, rowiter = self.widgets.selection.get_selected()
             old_record = self.widgets.treestore.get_value(rowiter, COL_OBJ)
@@ -223,7 +229,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.treeview.scroll_to_cell(path)
         self.widgets.editdialog.hide()
 
-    def on_bandmateedit_search_clicked(self, widget):
+    def on_bandmateedit_search_clicked(self, _widget):
         sex = enums.Sex.cock if self.pigeon.is_hen() else enums.Sex.hen
         return None, sex, None
 
@@ -316,8 +322,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         return pigeon
 
     def _add_parent_record(self, pigeon):
-        rowiter = self.widgets.treestore.append(None,
-            [None, pigeon, pigeon.band])
+        rowiter = self.widgets.treestore.append(None, [None, pigeon, pigeon.band])
         return rowiter
 
     def _get_or_create_parent_record(self, pigeon):
