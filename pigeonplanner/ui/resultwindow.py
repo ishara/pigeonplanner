@@ -78,6 +78,10 @@ class BaseView:
         self._root = root
         self.pigeon = None
 
+        self.liststore = None
+        self.treeview = None
+        self.selection = None
+
         self.column2name = {
             self.LS_COL_DATE: "date",
             self.LS_COL_RACEPOINT: "point",
@@ -123,8 +127,7 @@ class BaseView:
             "comment": _("Comment"),
         }
 
-        self.build_ui()
-
+    # noinspection PyMethodMayBeStatic
     def _build_parent_frame(self, label, child):
         sw = Gtk.ScrolledWindow()
         sw.set_shadow_type(Gtk.ShadowType.IN)
@@ -216,6 +219,12 @@ class ClassicView(BaseView):
     def __init__(self, root):
         BaseView.__init__(self, root)
 
+        self.filtermodel = None
+        self.sortmodel = None
+        self._filter = None
+
+        self.build_ui()
+
     @property
     def maintree(self):
         return self.treeview
@@ -251,9 +260,9 @@ class ClassicView(BaseView):
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(sortid or startcol)
             self.treeview.append_column(tvcolumn)
-        self._frame = self._build_parent_frame(_("Results"), self.treeview)
-        self._frame.show_all()
-        self._root.pack_start(self._frame, True, True, 0)
+        frame = self._build_parent_frame(_("Results"), self.treeview)
+        frame.show_all()
+        self._root.pack_start(frame, True, True, 0)
 
     def set_columns(self):
         columnsdic = {self.COL_COEF: config.get("columns.result-coef"),
@@ -284,13 +293,12 @@ class ClassicView(BaseView):
             band = "" if result.pigeon is None else result.pigeon.band
             year = "" if result.pigeon is None else result.pigeon.band_year
 
-            self.liststore.insert(0,
-                [result, band_tuple, band, year, str(result.date), result.racepoint,
-                 placestr, result.out, coefstr, speed, result.sector, result.type,
-                 result.category, result.wind, result.windspeed, result.weather,
-                 result.temperature, result.comment, result.place, coef, result.speed
-                ]
-            )
+            self.liststore.insert(0, [
+                result, band_tuple, band, year, str(result.date), result.racepoint,
+                placestr, result.out, coefstr, speed, result.sector, result.type,
+                result.category, result.wind, result.windspeed, result.weather,
+                result.temperature, result.comment, result.place, coef, result.speed
+            ])
 
         self.treeview.set_model(self.sortmodel)
         self.treeview.thaw_child_notify()
@@ -329,14 +337,14 @@ class ClassicView(BaseView):
             data.append(temp)
         return data
 
-    def _visible_func(self, model, treeiter, data=None):
+    def _visible_func(self, model, treeiter, _data=None):
         for item in self._filter:
             modelvalue = model.get_value(treeiter, item.name)
             if not item.operator(modelvalue, item.value):
                 return False
         return True
 
-    def _sort_func(self, model, iter1, iter2, data=None):
+    def _sort_func(self, model, iter1, iter2, _data=None):
         data1 = model.get_value(iter1, self.LS_COL_YEAR)
         data2 = model.get_value(iter2, self.LS_COL_YEAR)
         if data1 == data2:
@@ -393,6 +401,15 @@ class SplittedView(BaseView):
         BaseView.__init__(self, root)
 
         self.results_cache = {}
+        self.race_ls = None
+        self.race_filter = None
+        self.race_sort = None
+        self.race_tv = None
+        self.race_sel = None
+        self._filter_races = None
+        self._filter_results = None
+
+        self.build_ui()
 
     @property
     def maintree(self):
@@ -420,9 +437,9 @@ class SplittedView(BaseView):
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(startcol)
             self.race_tv.append_column(tvcolumn)
-        self._frame1 = self._build_parent_frame(_("Races"), self.race_tv)
-        self._frame1.show_all()
-        self._root.pack_start(self._frame1, True, True, 0)
+        frame1 = self._build_parent_frame(_("Races"), self.race_tv)
+        frame1.show_all()
+        self._root.pack_start(frame1, True, True, 0)
 
         self.liststore = Gtk.ListStore(object, str, str, str, int, str, str, str, str, str, int, float, float)
         self.treeview = Gtk.TreeView()
@@ -430,7 +447,7 @@ class SplittedView(BaseView):
         self.treeview.set_rules_hint(True)
         self.treeview.set_enable_search(False)
         self.selection = self.treeview.get_selection()
-        colnames = [("band", None),("year", None),
+        colnames = [("band", None), ("year", None),
                     ("place", self.LS_COL_PLACEDINT), ("out", None),
                     ("coef", self.LS_COL_COEFFLOAT),
                     ("speed", self.LS_COL_SPEEDFLOAT), ("sector", None),
@@ -443,9 +460,9 @@ class SplittedView(BaseView):
             tvcolumn.set_clickable(True)
             tvcolumn.set_sort_column_id(sortid or index)
             self.treeview.append_column(tvcolumn)
-        self._frame2 = self._build_parent_frame(_("Results"), self.treeview)
-        self._frame2.show_all()
-        self._root.pack_start(self._frame2, True, True, 0)
+        frame2 = self._build_parent_frame(_("Results"), self.treeview)
+        frame2.show_all()
+        self._root.pack_start(frame2, True, True, 0)
 
     def set_columns(self):
         columnsdic = {self.COL_COEF: config.get("columns.result-coef"),
@@ -472,11 +489,9 @@ class SplittedView(BaseView):
                      .order_by(Result.date.asc())):
             self.results_cache[counter] = {"results": [], "filtered": []}
             resultstmp = (Result.select()
-                .where(
-                    (Result.date == race.date) & 
-                    (Result.racepoint == race.racepoint))
-                .order_by(Result.racepoint.asc())
-                .dicts())
+                          .where((Result.date == race.date) & (Result.racepoint == race.racepoint))
+                          .order_by(Result.racepoint.asc())
+                          .dicts())
             for result in resultstmp:
                 pigeon = Pigeon.get(Pigeon.id == result["pigeon"])
                 result["band_tuple"] = pigeon.band_tuple
@@ -494,8 +509,7 @@ class SplittedView(BaseView):
                 self.results_cache[counter]["filtered"].append(result)
 
             self.race_ls.append([counter, str(race.date), race.racepoint, race.type,
-                                          race.wind, race.windspeed,
-                                          race.weather, race.temperature])
+                                 race.wind, race.windspeed, race.weather, race.temperature])
             counter += 1
 
     def clear(self):
@@ -574,12 +588,12 @@ class SplittedView(BaseView):
         key = model.get_value(rowiter, self.LS_COL_KEY)
         for result in self.results_cache[key]["filtered"]:
             self.liststore.append([
-                result["band_tuple"], result["band"],result["year"], result["placestr"],
+                result["band_tuple"], result["band"], result["year"], result["placestr"],
                 result["out"], result["coefstr"], result["speedstr"],
                 result["sector"], result["category"], result["comment"],
                 result["place"], result["coef"], result["speed"]])
 
-    def _visible_races_func(self, model, treeiter, data=None):
+    def _visible_races_func(self, model, treeiter, _data=None):
         for item in self._filter_races:
             modelvalue = model.get_value(treeiter, item.name)
             if not item.operator(modelvalue, item.value):
@@ -639,17 +653,17 @@ class ResultWindow(builder.GtkBuilder):
         self.widgets.resultwindow.show()
 
     # Callbacks
-    def on_close_window(self, widget, event=None):
+    def on_close_window(self, _widget, _event=None):
         self.widgets.resultwindow.destroy()
 
-    def on_close_filter(self, widget, event=None):
+    def on_close_filter(self, _widget, _event=None):
         self.widgets.filterdialog.hide()
         return True
 
-    def on_filter_clicked(self, widget):
+    def on_filter_clicked(self, _widget):
         self.widgets.filterdialog.show()
 
-    def on_filterclear_clicked(self, widget):
+    def on_filterclear_clicked(self, _widget):
         for combo in ["date", "year", "place", "out", "coef"]:
             getattr(self.widgets, "combo"+combo).set_active(0)
         for spin in ["year", "place", "out", "coef"]:
@@ -666,7 +680,7 @@ class ResultWindow(builder.GtkBuilder):
         self._save_filter_results()
         self.widgets.resultview.refilter()
 
-    def on_filtersearch_clicked(self, widget):
+    def on_filtersearch_clicked(self, _widget):
         # Races filter
         self._filter_races.clear()
         try:
@@ -727,23 +741,25 @@ class ResultWindow(builder.GtkBuilder):
         self._save_filter_results()
         self.widgets.resultview.refilter()
 
+    # noinspection PyMethodMayBeStatic
     def on_spinbutton_output(self, widget):
         value = widget.get_value_as_int()
         text = "" if value == 0 else str(value)
         widget.set_text(text)
         return True
 
-    def on_entryband_search_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_entryband_search_clicked(self, _widget):
         return None, None, None
 
     def on_mail_clicked(self, widget):
-        #TODO: disabled for now. Remove?
-        ##self._do_operation(const.MAIL)
-        ##results = os.path.join(const.TEMPDIR, self.pdfname)
-        ##maildialog.MailDialog(self.resultwindow, results)
+        # TODO: disabled for now. Remove?
+        # self._do_operation(const.MAIL)
+        # results = os.path.join(const.TEMPDIR, self.pdfname)
+        # maildialog.MailDialog(self.resultwindow, results)
         pass
 
-    def on_export_clicked(self, widget):
+    def on_export_clicked(self, _widget):
         chooser = ExportChooser(self.widgets.resultwindow, self.csvname, ("CSV", "*.csv"))
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
@@ -760,7 +776,7 @@ class ResultWindow(builder.GtkBuilder):
                 writer.writerows(data)
         chooser.destroy()
 
-    def on_save_clicked(self, widget):
+    def on_save_clicked(self, _widget):
         chooser = PdfSaver(self.widgets.resultwindow, self.pdfname)
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
@@ -768,10 +784,10 @@ class ResultWindow(builder.GtkBuilder):
             self._do_operation(PRINT_ACTION_EXPORT, save_path)
         chooser.destroy()
 
-    def on_preview_clicked(self, widget):
+    def on_preview_clicked(self, _widget):
         self._do_operation(PRINT_ACTION_PREVIEW)
 
-    def on_print_clicked(self, widget):
+    def on_print_clicked(self, _widget):
         self._do_operation(PRINT_ACTION_DIALOG)
 
     # Private methods
