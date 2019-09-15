@@ -88,17 +88,11 @@ class PhotoAlbum(builder.GtkBuilder):
         self.zoom = 1.0
         self.zoom_mode = ZOOM_FREE
         self.slideshow_timer = None
-        if image is not None:
-            path = tuple(index for index, row in
-                         enumerate(self.widgets.liststore) if
-                         row[1] == image)
+        if image is not None and image.exists:
+            path_index = tuple(index for index, row in enumerate(self.widgets.liststore) if row[1] == image)
         else:
-            path = (0,)
-        try:
-            self.widgets.iconview.select_path(path)
-        except:
-            # Original image is missing
-            pass
+            path_index = 0
+        self.widgets.iconview.select_path(Gtk.TreePath(path_index))
         self.set_zoom(1.0)
         self.widgets.zoom_fit_button.set_active(True)
 
