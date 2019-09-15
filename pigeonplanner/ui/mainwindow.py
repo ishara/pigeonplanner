@@ -49,7 +49,6 @@ from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog, QuestionDial
 from pigeonplanner.core import enums
 from pigeonplanner.core import const
 from pigeonplanner.core import common
-from pigeonplanner.core import checks
 from pigeonplanner.core import errors
 from pigeonplanner.core import update
 from pigeonplanner.core import backup
@@ -553,11 +552,14 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         rangeyear = self.widgets.entryRangeYear.get_text()
         rangesex = self.widgets.combosexrange.get_sex()
 
-        try:
-            checks.check_ring_entry(rangefrom, rangeyear)
-            checks.check_ring_entry(rangeto, rangeyear)
-        except errors.InvalidInputError as msg:
-            ErrorDialog(msg.value, self)
+        if not rangefrom or not rangeto or not rangeyear:
+            ErrorDialog(messages.MSG_EMPTY_FIELDS, self)
+            return
+        if not rangeyear.isdigit():
+            ErrorDialog(messages.MSG_INVALID_NUMBER, self)
+            return
+        if not len(rangeyear) == 4:
+            ErrorDialog(messages.MSG_INVALID_LENGTH, self)
             return
         if not rangefrom.isdigit() or not rangeto.isdigit():
             ErrorDialog(messages.MSG_INVALID_RANGE, self)

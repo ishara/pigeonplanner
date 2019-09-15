@@ -30,6 +30,7 @@ from pigeonplanner import messages
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
+from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.filechooser import PdfSaver, ExportChooser
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import common
@@ -707,8 +708,8 @@ class ResultWindow(builder.GtkBuilder):
         self._filter_results.clear()
         try:
             band_tuple = self.widgets.entryband.get_band()
-        except errors.InvalidInputError:
-            ErrorDialog(messages.MSG_EMPTY_FIELDS, self.widgets.filterdialog)
+        except bandentry.InvalidBandInput as exc:
+            ErrorDialog(exc.format_errors(), self.widgets.filterdialog)
             return
         if band_tuple[2] and band_tuple[3]:
             self._filter_results.add(self.widgets.resultview.LS_COL_BAND_TUPLE, band_tuple, type_=tuple)

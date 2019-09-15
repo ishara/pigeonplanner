@@ -24,8 +24,21 @@ from gi.repository import GObject
 from pigeonplanner.ui import dialogs
 from pigeonplanner.ui.widgets import displayentry
 from pigeonplanner.core import config
-from pigeonplanner.core import checks
-from pigeonplanner.core import errors
+
+
+class InvalidBandInput(Exception):
+    def __init__(self, error_list):
+        self.error_list = error_list
+
+    def format_errors(self):
+        """Format the list of errors to be displayed in an error dialog.
+
+        :return: a 3-tuple of (primary, secondary, title)
+        """
+        primary_msg = _("Invalid input!")
+        secondary_msg = "* " + "\n* ".join(self.error_list)
+        title = ""
+        return primary_msg, secondary_msg, title
 
 
 class BandEntry(Gtk.Box):
@@ -160,17 +173,17 @@ class BandEntry(Gtk.Box):
             self._entry_display.set_text(pigeon.band)
 
     def set_band(self, country, letters, number, year):
-        self._unwarn()
+        self._remove_warnings()
         self.entry_country.set_text(country)
         self.entry_letters.set_text(letters)
         self.entry_number.set_text(number)
         self.entry_year.set_text(year)
 
     def get_band(self, validate=True):
-        number, year = self.entry_number.get_text(), self.entry_year.get_text()
         if validate:
-            self._validate(number, year)
-        return self.entry_country.get_text(), self.entry_letters.get_text(), number, year
+            self._validate()
+        return (self.entry_country.get_text(), self.entry_letters.get_text(),
+                self.entry_number.get_text(), self.entry_year.get_text())
 
     def clear(self):
         self.set_band("", "", "", "")
@@ -180,25 +193,49 @@ class BandEntry(Gtk.Box):
         self.entry_country.grab_focus()
         self.entry_country.set_position(-1)
 
-    def _warn(self):
-        self.entry_number.get_style_context().add_class("warning")
-        self.entry_year.get_style_context().add_class("warning")
-
-    def _unwarn(self):
+    def _remove_warnings(self):
+        self.entry_country.get_style_context().remove_class("warning")
+        self.entry_letters.get_style_context().remove_class("warning")
         self.entry_number.get_style_context().remove_class("warning")
         self.entry_year.get_style_context().remove_class("warning")
 
-    def _validate(self, number, year):
-        if self.can_empty and (number == "" and year == ""):
+    def _validate(self):
+        self._remove_warnings()
+        error_list = []
+        country = self.entry_country.get_text()
+        letters = self.entry_letters.get_text()
+        number = self.entry_number.get_text()
+        year = self.entry_year.get_text()
+
+        if self.can_empty and not country and not letters and not number and not year:
             return
 
-        try:
-            checks.check_ring_entry(number, year)
-        except errors.InvalidInputError:
-            self._warn()
-            raise
+        if self.can_empty and country and (not number or not year):
+            error_list.append(_("The number and year are required when providing the country."))
+            self.entry_country.get_style_context().add_class("warning")
 
-        self._unwarn()
+        if self.can_empty and letters and (not number or not year):
+            error_list.append(_("The number and year are required when providing the letters."))
+            self.entry_letters.get_style_context().add_class("warning")
+
+        if not number:
+            error_list.append(_("The number is required."))
+            self.entry_number.get_style_context().add_class("warning")
+
+        if not year:
+            error_list.append(_("The year is required."))
+            self.entry_year.get_style_context().add_class("warning")
+
+        if year and not year.isdigit():
+            error_list.append(_("Only numbers are accepted as year input."))
+            self.entry_year.get_style_context().add_class("warning")
+
+        if not len(year) == 4:
+            error_list.append(_("The length of the year needs to be four digits."))
+            self.entry_year.get_style_context().add_class("warning")
+
+        if len(error_list) > 0:
+            raise InvalidBandInput(error_list)
 
 
 class BandItemCombobox(Gtk.ComboBox):

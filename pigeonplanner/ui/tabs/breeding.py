@@ -23,6 +23,7 @@ from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui.tabs import basetab
+from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import enums
@@ -160,8 +161,8 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             band_tuple_mate = self.widgets.bandmateedit.get_band()
             band_tuple1 = self.widgets.bandentryedit1.get_band()
             band_tuple2 = self.widgets.bandentryedit2.get_band()
-        except errors.InvalidInputError as msg:
-            ErrorDialog(msg.value, self.widgets.editdialog)
+        except bandentry.InvalidBandInput as exc:
+            ErrorDialog(exc.format_errors(), self.widgets.editdialog)
             return
         # Get and check dates
         try:

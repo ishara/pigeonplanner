@@ -196,6 +196,12 @@ class StatusButton(builder.GtkBuilder):
                 except errors.InvalidInputError as msg:
                     ErrorDialog(msg.value, self.parent)
                     return True
+            if isinstance(child, bandentry.BandEntry):
+                try:
+                    child.get_band()
+                except bandentry.InvalidBandInput as exc:
+                    ErrorDialog(exc.format_errors(), self.parent)
+                    return True
         self.widgets.statusdialog.hide()
         return True
 
@@ -541,8 +547,8 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
 
         try:
             data = self.get_edit_details()
-        except errors.InvalidInputError as msg:
-            ErrorDialog(msg.value, self.parent)
+        except bandentry.InvalidBandInput as exc:
+            ErrorDialog(exc.format_errors(), self.parent)
             return True
 
         status = self.widgets.statusbuttonedit.get_current_status()
@@ -595,7 +601,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
     def _get_pigeonsearch_details(self, sex):
         try:
             country, letters, number, year = self.widgets.entrybandedit.get_band()
-        except errors.InvalidInputError:
+        except bandentry.InvalidBandInput:
             ErrorDialog(messages.MSG_NO_PARENT, self.parent)
             return
         return (country, letters, number, year), sex, year
