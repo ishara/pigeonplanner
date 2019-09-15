@@ -63,19 +63,19 @@ class AddressBook(builder.GtkBuilder):
         self.widgets.addressbookwindow.show()
 
     # Callbacks
-    def close_window(self, widget, event=None):
+    def close_window(self, _widget, _event=None):
         self.widgets.addressbookwindow.destroy()
 
-    def on_buttonadd_clicked(self, widget):
+    def on_buttonadd_clicked(self, _widget):
         self._mode = enums.Action.add
         self._set_widgets(True)
         self._empty_entries()
 
-    def on_buttonedit_clicked(self, widget):
+    def on_buttonedit_clicked(self, _widget):
         self._mode = enums.Action.edit
         self._set_widgets(True)
 
-    def on_buttonremove_clicked(self, widget):
+    def on_buttonremove_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.liststore.get_path(rowiter)
         person = model[rowiter][0]
@@ -88,7 +88,7 @@ class AddressBook(builder.GtkBuilder):
         self.widgets.liststore.remove(rowiter)
         self.widgets.selection.select_path(path)
 
-    def on_buttonsave_clicked(self, widget):
+    def on_buttonsave_clicked(self, _widget):
         try:
             data = self._get_entry_data()
         except errors.InvalidInputError:
@@ -118,7 +118,7 @@ class AddressBook(builder.GtkBuilder):
             self.widgets.liststore.set(rowiter, 0, person, 1, person.name)
             self.widgets.selection.emit("changed")
 
-    def on_buttoncancel_clicked(self, widget):
+    def on_buttoncancel_clicked(self, _widget):
         self._set_widgets(False)
         self.widgets.selection.emit("changed")
 
@@ -163,7 +163,8 @@ class AddressBook(builder.GtkBuilder):
         utils.set_multiple_sensitive([self.widgets.treeview], not value)
         utils.set_multiple_visible(self._normalbuttons, not value)
         utils.set_multiple_visible(self._editbuttons, value)
-        show_me = (Person.select().where(Person.me == True).count() == 0 or 
+        show_me = (Person.select().where(
+            Person.me == True).count() == 0 or
             (self._mode == enums.Action.edit and self._get_person_object().me)
         )
         utils.set_multiple_visible([self.widgets.checkme], show_me if value else False)

@@ -87,6 +87,7 @@ class PhotoAlbum(builder.GtkBuilder):
         self.current_picture = 0
         self.zoom = 1.0
         self.zoom_mode = ZOOM_FREE
+        self.slideshow_timer = None
         if image is not None:
             path = tuple(index for index, row in
                          enumerate(self.widgets.liststore) if
@@ -208,22 +209,23 @@ class PhotoAlbum(builder.GtkBuilder):
 
         return zoom
 
-    def on_window_delete(self, widget, event):
+    # noinspection PyMethodMayBeStatic
+    def on_window_delete(self, _widget, _event):
         return False
 
-    def on_close_clicked(self, widget):
+    def on_close_clicked(self, _widget):
         self.widgets.photoalbum.destroy()
 
-    def on_first_clicked(self, widget):
+    def on_first_clicked(self, _widget):
         self.set_picture(0)
     
-    def on_prev_clicked(self, widget):
+    def on_prev_clicked(self, _widget):
         self.set_picture(self.current_picture - 1)
     
-    def on_next_clicked(self, widget):
+    def on_next_clicked(self, _widget):
         self.set_picture(self.current_picture + 1)
     
-    def on_last_clicked(self, widget):
+    def on_last_clicked(self, _widget):
         self.set_picture(self.picture_no - 1)
 
     def on_zoom_fit_toggled(self, widget):
@@ -233,12 +235,12 @@ class PhotoAlbum(builder.GtkBuilder):
         else:
             self.zoom_mode = ZOOM_FREE
 
-    def on_zoom_in_clicked(self, widget):
+    def on_zoom_in_clicked(self, _widget):
         self.widgets.zoom_fit_button.set_active(False)
         self.zoom_mode = ZOOM_FREE
         self.set_zoom(self.zoom_in())
     
-    def on_zoom_out_clicked(self, widget):
+    def on_zoom_out_clicked(self, _widget):
         self.widgets.zoom_fit_button.set_active(False)
         self.zoom_mode = ZOOM_FREE
         self.set_zoom(self.zoom_out())
@@ -259,19 +261,19 @@ class PhotoAlbum(builder.GtkBuilder):
 
     def slideshow(self):
         if self.current_picture + 1 == self.picture_no:
-            next = 0
+            next_index = 0
         else:
-            next = self.current_picture + 1
+            next_index = self.current_picture + 1
 
-        self.set_picture(next)
+        self.set_picture(next_index)
 
         return True
 
-    def on_swin_size_allocate(self, scrolledwindow, allocation):
+    def on_swin_size_allocate(self, _scrolledwindow, _allocation):
         if self.zoom_mode == ZOOM_BEST_FIT:
             self.set_zoom(self.zoom_best_fit())
 
-    def on_drawingarea_draw(self, widget, context):
+    def on_drawingarea_draw(self, _widget, context):
         if not self.pixbuf:
             return
 
@@ -296,11 +298,11 @@ class PhotoAlbum(builder.GtkBuilder):
         Gdk.cairo_set_source_pixbuf(context, self.pixbuf.scale_simple(picture_w, picture_h, self.interp), 0, 0)
         context.paint()
 
-    def on_drawingarea_press(self, widget, event):
+    def on_drawingarea_press(self, _widget, event):
         if event.button == 2:
             self.widgets.zoom_fit_button.set_active(True)
 
-    def on_drawingarea_scroll(self, widget, event):
+    def on_drawingarea_scroll(self, _widget, event):
         if event.direction == Gdk.ScrollDirection.UP:
             self.widgets.zoom_fit_button.set_active(False)
             self.zoom_mode = ZOOM_FREE
@@ -310,7 +312,7 @@ class PhotoAlbum(builder.GtkBuilder):
             self.zoom_mode = ZOOM_FREE
             self.set_zoom(self.zoom_out())
 
-    def on_iconview_scroll(self, widget, event):
+    def on_iconview_scroll(self, _widget, event):
         if event.direction == Gdk.ScrollDirection.UP:
             self.set_picture(self.current_picture - 1)
         elif event.direction == Gdk.ScrollDirection.DOWN:
@@ -354,6 +356,7 @@ class PhotoAlbum(builder.GtkBuilder):
             self.pixbuf = pixbuf.scale_simple(width, height, self.interp)
         self.widgets.drawingarea.queue_draw()
 
+    # noinspection PyMethodMayBeStatic
     def scale_to_fit(self, image, frame):
         image_width, image_height = image
         frame_width, frame_height = frame

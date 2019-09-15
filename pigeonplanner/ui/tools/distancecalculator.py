@@ -53,16 +53,17 @@ class DistanceCalculator(builder.GtkBuilder):
             ErrorDialog((_("This tool needs Geopy 0.95.0 or higher to run correctly."), None, ""),
                         self.widgets.window)
 
-    def close_window(self, widget, event=None):
+    def close_window(self, _widget, _event=None):
         self._unit = self.widgets.combounit.get_active()
         self._distance = self.widgets.entryresult.get_text() or 0.0
         self.widgets.window.destroy()
         return False
 
-    def on_buttonhelp_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_buttonhelp_clicked(self, _widget):
         common.open_help(12)
 
-    def on_buttoncalculate_clicked(self, widget):
+    def on_buttoncalculate_clicked(self, _widget):
         try:
             latfrom = self.widgets.entrylatfrom.get_text(as_float=True)
             lngfrom = self.widgets.entrylongfrom.get_text(as_float=True)
@@ -154,6 +155,7 @@ class DistanceCalculator(builder.GtkBuilder):
     def get_distance(self):
         return self._distance
 
+    # noinspection PyMethodMayBeStatic
     def wgs84_to_latlon(self, lat, lon):
         def split(number):
             nstr = str(number)

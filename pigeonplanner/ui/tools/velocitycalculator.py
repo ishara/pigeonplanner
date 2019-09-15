@@ -33,6 +33,8 @@ class VelocityCalculator(builder.GtkBuilder):
         builder.GtkBuilder.__init__(self, "VelocityCalculator.ui")
 
         self.parent = parent
+        self._distance = None
+        self._distance_unit = None
 
         dt = datetime.datetime.now()
         self.widgets.spinbutton_prognosis_hours.set_value(dt.hour)
@@ -48,23 +50,25 @@ class VelocityCalculator(builder.GtkBuilder):
         self.widgets.velocitywindow.show()
 
     # Callbacks
-    def close_window(self, widget, event=None):
+    def close_window(self, _widget, _event=None):
         self.widgets.velocitywindow.destroy()
 
-    def on_buttonhelp_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_buttonhelp_clicked(self, _widget):
         common.open_help(11)
 
+    # noinspection PyMethodMayBeStatic
     def on_spinbutton_time_changed(self, widget):
         value = widget.get_value_as_int()
         widget.set_text(common.add_zero_to_time(value))
 
     # Exact
-    def on_button_racepoint_clicked(self, widget):
+    def on_button_racepoint_clicked(self, _widget):
         self._distance = self.widgets.spinbutton_velocity_distance
         self._distance_unit = self.widgets.combobox_velocity_distance
         self._show_distance_dialog()
 
-    def on_button_racepoint2_clicked(self, widget):
+    def on_button_racepoint2_clicked(self, _widget):
         self._distance = self.widgets.spinbutton_prognosis_distance
         self._distance_unit = self.widgets.combobox_prognosis_distance
         self._show_distance_dialog()
@@ -73,14 +77,14 @@ class VelocityCalculator(builder.GtkBuilder):
         model, rowiter = selection.get_selected()
         self.widgets.button_ok.set_sensitive(rowiter is not None)
 
-    def on_dialog_delete_event(self, widget, event):
+    def on_dialog_delete_event(self, _widget, _event):
         self.widgets.dialog.hide()
         return True
 
-    def on_button_cancel_clicked(self, widget):
+    def on_button_cancel_clicked(self, _widget):
         self.widgets.dialog.hide()
 
-    def on_button_ok_clicked(self, widget):
+    def on_button_ok_clicked(self, _widget):
         model, rowiter = self.widgets.sel_distance.get_selected()
         racepoint = model[rowiter][0]
         try:
@@ -92,7 +96,7 @@ class VelocityCalculator(builder.GtkBuilder):
 
         self.widgets.dialog.hide()
 
-    def on_button_velocity_calculate_clicked(self, widget):
+    def on_button_velocity_calculate_clicked(self, _widget):
         distunit = self.widgets.combobox_velocity_distance.get_unit()
         speedunit = self.widgets.combobox_velocity_speed.get_unit()
 
@@ -114,7 +118,7 @@ class VelocityCalculator(builder.GtkBuilder):
         spinmax = widget.get_range()[1]
         self.widgets.spinbutton_prognosis_to.set_range(spinmin, spinmax)
 
-    def on_calculate_clicked(self, widget):
+    def on_calculate_clicked(self, _widget):
         distunit = self.widgets.combobox_prognosis_distance.get_unit()
         speedunit = self.widgets.combobox_prognosis_speed.get_unit()
 
@@ -136,7 +140,7 @@ class VelocityCalculator(builder.GtkBuilder):
                 str(datetime.timedelta(seconds=arrival))])
         self.widgets.ls_velocity.set_sort_column_id(0, Gtk.SortType.ASCENDING)
 
-    def on_printcalc_clicked(self, widget):
+    def on_printcalc_clicked(self, _widget):
         data = [self.widgets.ls_velocity.get(row.iter, 0, 1, 2)
                 for row in self.widgets.ls_velocity]
         if data:

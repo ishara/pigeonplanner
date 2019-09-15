@@ -37,7 +37,7 @@ class RacepointManager(builder.GtkBuilder):
         self.widgets.window.set_transient_for(parent)
         self.widgets.window.show()
 
-    def close_window(self, widget, event=None):
+    def close_window(self, _widget, _event=None):
         self.widgets.window.destroy()
 
     def on_combopoint_changed(self, widget):
@@ -57,17 +57,18 @@ class RacepointManager(builder.GtkBuilder):
             unit = 0
         self.widgets.combodistance.set_active(unit)
 
-    def on_buttonhelp_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_buttonhelp_clicked(self, _widget):
         common.open_help(13)
 
-    def on_buttonadd_clicked(self, widget):
+    def on_buttonadd_clicked(self, _widget):
         manager = DataManager(self.widgets.window)
         response = manager.widgets.window.run()
         if response == Gtk.ResponseType.CLOSE:
             self._fill_racepoints_combo()
         manager.widgets.window.destroy()
 
-    def on_buttonsearch_clicked(self, widget):
+    def on_buttonsearch_clicked(self, _widget):
         racepoint = self.widgets.combopoint.get_active_text()
         dialog = locationchooser.LocationChooser(self.widgets.window, racepoint)
         response = dialog.run()
@@ -77,7 +78,7 @@ class RacepointManager(builder.GtkBuilder):
             self.widgets.entrylongitude.set_text(lng)
         dialog.destroy()
 
-    def on_buttoncalculate_clicked(self, widget):
+    def on_buttoncalculate_clicked(self, _widget):
         point = self.widgets.combopoint.get_active()
         calculator = DistanceCalculator(self.widgets.window, point)
         response = calculator.widgets.window.run()
@@ -86,7 +87,7 @@ class RacepointManager(builder.GtkBuilder):
             self.widgets.combodistance.set_active(calculator.get_unit())
         calculator.widgets.window.destroy()
 
-    def on_buttonsave_clicked(self, widget):
+    def on_buttonsave_clicked(self, _widget):
         try:
             latitude = self.widgets.entrylatitude.get_text()
             longitude = self.widgets.entrylongitude.get_text()

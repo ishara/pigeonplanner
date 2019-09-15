@@ -44,12 +44,12 @@ class DateEntry(Gtk.Viewport):
         self._entry.connect("icon-press", self.on_icon_pressed)
 
         self.can_empty = can_empty
-        self.clear = clear
-        self.editable = editable
+        self.clear = self._clear = clear
+        self.editable = self._editable = editable
         self.add(self._entry)
         self.show_all()
 
-    def on_icon_pressed(self, widget, icon_pos, event):
+    def on_icon_pressed(self, _widget, icon_pos, _event):
         if icon_pos == Gtk.EntryIconPosition.SECONDARY:
             popover = CalendarPopover(self)
             popover.set_relative_to(self)
@@ -161,10 +161,10 @@ class CalendarPopover(Gtk.Popover):
 
         self.add(main_box)
 
-    def on_buttonapply_clicked(self, widget):
+    def on_buttonapply_clicked(self, _widget):
         self.popdown()
 
-    def on_buttoncancel_clicked(self, widget):
+    def on_buttoncancel_clicked(self, _widget):
         if not self._entry.can_empty and self._saved_date == "":
             # Don't trigger the changed signal on the entry
             pass
@@ -172,7 +172,7 @@ class CalendarPopover(Gtk.Popover):
             self._entry.set_text(self._saved_date)
         self.popdown()
 
-    def on_day_selected(self, widget):
+    def on_day_selected(self, _widget):
         year, month, day = self._calendar.get_date()
         the_date = datetime.date(year, month + 1, day)
 
@@ -184,5 +184,5 @@ class CalendarPopover(Gtk.Popover):
         else:
             self._entry.set_text("")
 
-    def on_day_clicked(self, widget):
+    def on_day_clicked(self, _widget):
         self.popdown()

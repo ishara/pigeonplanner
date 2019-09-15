@@ -55,13 +55,14 @@ class DataManager(builder.GtkBuilder):
         self.widgets.window.show()
 
     # Callbacks
-    def close_window(self, widget, event=None):
+    def close_window(self, _widget, _event=None):
         self.widgets.window.destroy()
 
-    def on_buttonhelp_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_buttonhelp_clicked(self, _widget):
         common.open_help(10)
 
-    def on_buttonremove_clicked(self, widget):
+    def on_buttonremove_clicked(self, _widget):
         dataset = self.widgets.comboset.get_active_text()
         item = self.widgets.comboitem.get_active_text()
         if QuestionDialog(messages.MSG_REMOVE_ITEM,
@@ -72,7 +73,7 @@ class DataManager(builder.GtkBuilder):
             self.widgets.comboitem.remove_text(index)
             self.widgets.comboitem.set_active(0)
 
-    def on_buttonadd_clicked(self, widget):
+    def on_buttonadd_clicked(self, _widget):
         dataset = self.widgets.comboset.get_active_text()
         item = self.widgets.entryitem.get_text()
         table = self.tables[dataset]
@@ -93,7 +94,7 @@ class DataManager(builder.GtkBuilder):
         value = len(widget.get_text()) > 0
         self.widgets.buttonadd.set_sensitive(value)
 
-    def on_buttonsearch_clicked(self, widget):
+    def on_buttonsearch_clicked(self, _widget):
         self.widgets.messagebox.hide()
         self.widgets.liststore.clear()
         for pigeon in Pigeon.select().where(
@@ -108,13 +109,13 @@ class DataManager(builder.GtkBuilder):
         if len(self.widgets.liststore) == 0:
             self.widgets.messagebox.show()
 
-    def on_buttoninfo_clicked(self, widget):
+    def on_buttoninfo_clicked(self, _widget):
         model, node = self.widgets.selection.get_selected()
         pigeon = self.widgets.liststore.get_value(node, 0)
         from pigeonplanner.ui.detailsview import DetailsDialog
         DetailsDialog(pigeon, self.widgets.window)
 
-    def on_buttondelete_clicked(self, widget):
+    def on_buttondelete_clicked(self, _widget):
         main_treeview = component.get("Treeview")
         for row_num in range(len(self.widgets.liststore)-1, -1, -1):
             row = self.widgets.liststore[row_num]
@@ -134,7 +135,7 @@ class DataManager(builder.GtkBuilder):
         value = False if node is None else True
         self.widgets.buttoninfo.set_sensitive(value)
 
-    def on_selection_toggled(self, cell, path):
+    def on_selection_toggled(self, _cell, path):
         row = self.widgets.liststore[path]
         row[1] = not row[1]
         value = row[1]
