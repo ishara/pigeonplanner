@@ -26,16 +26,15 @@ import datetime
 
 from gi.repository import Gtk
 
-from pigeonplanner import messages
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.widgets import bandentry
+from pigeonplanner.ui.widgets import dateentry
 from pigeonplanner.ui.filechooser import PdfSaver, ExportChooser
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import common
 from pigeonplanner.core import config
-from pigeonplanner.core import errors
 from pigeonplanner.reportlib import (report, ReportError, PRINT_ACTION_DIALOG,
                                      PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
 from pigeonplanner.reports.results import ResultsReport, ResultsReportOptions
@@ -686,8 +685,8 @@ class ResultWindow(builder.GtkBuilder):
         self._filter_races.clear()
         try:
             date = self.widgets.entrydate.get_text()
-        except errors.InvalidInputError:
-            ErrorDialog(messages.MSG_INVALID_FORMAT, self.widgets.filterdialog)
+        except dateentry.InvalidDateInput as exc:
+            ErrorDialog(exc.format_error(), self.widgets.filterdialog)
             return
         dateop = self.widgets.combodate.get_operator()
         self._filter_races.add(self.widgets.resultview.LS_COL_DATE, date, dateop)

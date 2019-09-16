@@ -31,7 +31,7 @@ from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
-from pigeonplanner.ui.widgets import date
+from pigeonplanner.ui.widgets import dateentry
 from pigeonplanner.ui.widgets import sexentry
 from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.messagedialog import ErrorDialog, WarningDialog
@@ -189,12 +189,12 @@ class StatusButton(builder.GtkBuilder):
         page = self.widgets.notebookstatus.get_current_page()
         grid = self.widgets.notebookstatus.get_nth_page(page)
         for child in grid.get_children():
-            if isinstance(child, date.DateEntry):
+            if isinstance(child, dateentry.DateEntry):
                 try:
                     # Just check the date, the value is used elsewhere
                     child.get_text()
-                except errors.InvalidInputError as msg:
-                    ErrorDialog(msg.value, self.parent)
+                except dateentry.InvalidDateInput as exc:
+                    ErrorDialog(exc.format_error(), self.parent)
                     return True
             if isinstance(child, bandentry.BandEntry):
                 try:
@@ -393,7 +393,7 @@ class DetailsView(builder.GtkBuilder, component.Component):
         for entry in self.get_objects_from_prefix("entry"):
             if isinstance(entry, bandentry.BandEntry):
                 continue
-            if isinstance(entry, date.DateEntry):
+            if isinstance(entry, dateentry.DateEntry):
                 continue
             if isinstance(entry, sexentry.SexEntry):
                 entry.set_sex(None)
@@ -566,7 +566,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
                     pigeon.visible = True
                     pigeon.save()
-            except errors.InvalidInputError:
+            except dateentry.InvalidDateInput:
                 # This is a corner case. Some status date is incorrect, but the
                 # user chose another one. Don't bother him with this.
                 pass
@@ -581,7 +581,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
                 if WarningDialog(messages.MSG_SHOW_PIGEON, self.parent).run():
                     pigeon.visible = True
                     pigeon.save()
-            except errors.InvalidInputError:
+            except dateentry.InvalidDateInput:
                 # See comment above
                 pass
 

@@ -24,11 +24,11 @@ from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import bandentry
+from pigeonplanner.ui.widgets import dateentry
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import common
-from pigeonplanner.core import errors
 from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.database.models import Pigeon, Breeding
 
@@ -171,8 +171,8 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             hatched1 = self.widgets.datehatchededit1.get_text()
             laid2 = self.widgets.datelaidedit2.get_text()
             hatched2 = self.widgets.datehatchededit2.get_text()
-        except errors.InvalidInputError as msg:
-            ErrorDialog(msg.value, self.widgets.editdialog)
+        except dateentry.InvalidDateInput as exc:
+            ErrorDialog(exc.format_error(), self.widgets.editdialog)
             return
 
         try:

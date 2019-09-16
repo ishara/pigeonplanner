@@ -27,6 +27,7 @@ except ImportError:
 
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import filechooser
+from pigeonplanner.ui.widgets import dateentry
 from pigeonplanner.ui.messagedialog import WarningDialog, ErrorDialog
 from pigeonplanner.core import const
 from pigeonplanner.core import common
@@ -126,7 +127,7 @@ class ResultParser(builder.GtkBuilder):
                 raise ValueError
             # Just raise a ValueError if it's not a number
             int(out)
-        except (errors.InvalidInputError, ValueError):
+        except (dateentry.InvalidDateInput, ValueError):
             ErrorDialog((_("The date, racepoint or number of pigeons is incorrect."),
                          None, ""), self.widgets.parserdialog)
             return

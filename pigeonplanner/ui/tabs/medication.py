@@ -21,11 +21,11 @@ from gi.repository import Gtk
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.tabs import basetab
+from pigeonplanner.ui.widgets import dateentry
 from pigeonplanner.ui.widgets import comboboxes
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import common
-from pigeonplanner.core import errors
 from pigeonplanner.database.models import Pigeon, Medication, Loft
 
 
@@ -156,8 +156,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
     def on_buttonsave_clicked(self, widget):
         try:
             data = self._get_entry_data()
-        except errors.InvalidInputError as msg:
-            ErrorDialog(msg.value, self._parent)
+        except dateentry.InvalidDateInput as exc:
+            ErrorDialog(exc.format_error(), self._parent)
             return
         pigeons_toggled = [row[COL_SEL_PIGEON] for row in self.widgets.liststoreselect if row[COL_SEL_TOGGLED]]
         if self._mode == enums.Action.add:

@@ -25,7 +25,16 @@ from gi.repository import GdkPixbuf
 
 from pigeonplanner import messages
 from pigeonplanner.core import const
-from pigeonplanner.core import errors
+
+
+class InvalidDateInput(Exception):
+    # noinspection PyMethodMayBeStatic
+    def format_error(self):
+        """Format the error to be displayed in an error dialog.
+
+        :return: a 3-tuple of (primary, secondary, title)
+        """
+        return messages.MSG_INVALID_FORMAT
 
 
 class DateEntry(Gtk.Viewport):
@@ -88,35 +97,45 @@ class DateEntry(Gtk.Viewport):
     def set_text(self, text):
         if text is None:
             text = ""
-        self._unwarn()
+        self._remove_warning()
         self._entry.set_text(str(text))
         self.emit("changed")
 
     def get_text(self, validate=True):
-        date = self._entry.get_text()
         if validate:
-            self.__validate(date)
-        return date
+            self._validate()
+        return self._entry.get_text()
+
+    def set_today(self):
+        today = datetime.datetime.today()
+        text = today.strftime(const.DATE_FORMAT)
+        self.set_text(text)
+
+    def is_valid_date(self):
+        try:
+            self.get_text()
+        except InvalidDateInput:
+            return False
+        return True
 
     def grab_focus(self):
         self._entry.grab_focus()
         self._entry.set_position(-1)
 
-    def _warn(self):
-        self._entry.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, Gtk.STOCK_STOP)
+    def _remove_warning(self):
+        self._entry.get_style_context().remove_class("warning")
 
-    def _unwarn(self):
-        self._entry.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, None)
+    def _validate(self):
+        self._remove_warning()
+        date = self._entry.get_text()
 
-    def __validate(self, date):
         if self.can_empty and date == "":
             return
         try:
             datetime.datetime.strptime(date, const.DATE_FORMAT)
         except ValueError:
-            self._warn()
-            raise errors.InvalidInputError(messages.MSG_INVALID_FORMAT)
-        self._unwarn()
+            self._entry.get_style_context().add_class("warning")
+            raise InvalidDateInput
 
 
 class CalendarPopover(Gtk.Popover):

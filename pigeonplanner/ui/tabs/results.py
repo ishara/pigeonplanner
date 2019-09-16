@@ -25,6 +25,7 @@ from pigeonplanner.ui import component
 from pigeonplanner.ui import resultwindow
 from pigeonplanner.ui import resultparser
 from pigeonplanner.ui.tabs import basetab
+from pigeonplanner.ui.widgets import dateentry
 from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog, InfoDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import common
@@ -561,7 +562,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
 
     # Callbacks
     def on_dialog_delete(self, widget, event):
-        self.widgets.dialog.hide()
+        self._close_dialog()
         return True
 
     def on_treeview_press(self, treeview, event):
@@ -602,7 +603,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.resultview.remove_selected()
 
     def on_buttonclose_clicked(self, widget):
-        self.widgets.dialog.hide()
+        self._close_dialog()
 
     def on_buttonsave_clicked(self, widget):
         data = self._get_data()
@@ -704,11 +705,16 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                 self.widgets.resultview.set_pigeon(self.pigeon)
 
     # Internal methods
+    def _close_dialog(self):
+        if not self.widgets.entrydate.is_valid_date():
+            self.widgets.entrydate.set_today()
+        self.widgets.dialog.hide()
+
     def _get_data(self):
         try:
             date = self.widgets.entrydate.get_text()
-        except errors.InvalidInputError as msg:
-            ErrorDialog(msg.value, self.widgets.dialog)
+        except dateentry.InvalidDateInput as exc:
+            ErrorDialog(exc.format_error(), self.widgets.dialog)
             return
         point = self.widgets.comboracepoint.get_child().get_text()
         if self.widgets.checkplaced.get_active():
@@ -781,8 +787,8 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
     def _autofill_race(self):
         try:
             date = self.widgets.entrydate.get_text()
-        except errors.InvalidInputError as msg:
-            ErrorDialog(msg.value, self.widgets.dialog)
+        except dateentry.InvalidDateInput as exc:
+            ErrorDialog(exc.format_error(), self.widgets.dialog)
             return
         racepoint = self.widgets.comboracepoint.get_child().get_text()
         if date == "" or racepoint == "":
