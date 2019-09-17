@@ -273,7 +273,7 @@ class DetailsView(builder.GtkBuilder, component.Component):
         gdkwindow.set_cursor(cursor)
 
     def on_imagewidgeteventbox_enter_notify_event(self, _widget, _event):
-        if self.pigeon.main_image is not None and self.pigeon.main_image.exists:
+        if self.pigeon is not None and self.pigeon.main_image is not None and self.pigeon.main_image.exists:
             self.widgets.imagerevealer.set_reveal_child(True)
 
     def on_imagewidgeteventbox_leave_notify_event(self, _widget, _event):
