@@ -84,11 +84,12 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.dialog.set_transient_for(self._parent)
 
     # Callbacks
-    def on_dialog_delete(self, widget, event):
+    def on_dialog_delete(self, _widget, _event):
         self.widgets.dialog.hide()
         return True
 
-    def on_buttonhelp_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_buttonhelp_clicked(self, _widget):
         common.open_help(15)
 
     def on_treeview_press(self, treeview, event):
@@ -102,7 +103,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
 
             utils.popup_menu(event, entries)
 
-    def on_buttonadd_clicked(self, widget):
+    def on_buttonadd_clicked(self, _widget):
         self._mode = enums.Action.add
         self._clear_dialog_widgets()
         self._fill_select_treeview()
@@ -110,7 +111,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.dialog.show()
         self.widgets.entrydate2.grab_focus()
 
-    def on_buttonedit_clicked(self, widget):
+    def on_buttonedit_clicked(self, _widget):
         self._mode = enums.Action.edit
         self._fill_select_treeview()
         comboboxes.fill_combobox(self.widgets.comboloft, Loft.get_data_list())
@@ -131,7 +132,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.dialog.show()
         self.widgets.entrydate2.grab_focus()
 
-    def on_buttonremove_clicked(self, widget):
+    def on_buttonremove_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.liststore.get_path(rowiter)
         med = model[rowiter][COL_OBJECT]
@@ -153,7 +154,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             self.widgets.selection.select_path(path)
         dialog.destroy()
 
-    def on_buttonsave_clicked(self, widget):
+    def on_buttonsave_clicked(self, _widget):
         try:
             data = self._get_entry_data()
         except dateentry.InvalidDateInput as exc:
@@ -184,10 +185,10 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             self.widgets.selection.emit("changed")
         self.widgets.dialog.hide()
 
-    def on_buttoncancel_clicked(self, widget):
+    def on_buttoncancel_clicked(self, _widget):
         self.widgets.dialog.hide()
 
-    def on_buttonexpand_clicked(self, widget):
+    def on_buttonexpand_clicked(self, _widget):
         self._expanded = not self._expanded
         utils.set_multiple_visible([self.widgets.seperator,
                                     self.widgets.vboxexpand], self._expanded)
@@ -203,11 +204,11 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
                     continue
                 row[COL_SEL_TOGGLED] = False
 
-    def on_comboloft_changed(self, widget):
+    def on_comboloft_changed(self, _widget):
         if self.widgets.checkloft.get_active():
             self._select_loft()
 
-    def on_celltoggle_toggled(self, cell, path):
+    def on_celltoggle_toggled(self, _cell, path):
         self.widgets.liststoreselect[path][COL_SEL_TOGGLED] =\
                             not self.widgets.liststoreselect[path][COL_SEL_TOGGLED]
 

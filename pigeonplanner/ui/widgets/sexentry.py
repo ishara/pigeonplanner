@@ -16,8 +16,6 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-from gi.repository import Gtk
-
 from pigeonplanner.core import enums
 from pigeonplanner.ui import utils
 from pigeonplanner.ui.widgets import displayentry

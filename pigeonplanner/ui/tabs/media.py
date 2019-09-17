@@ -43,6 +43,8 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         builder.GtkBuilder.__init__(self, "MediaView.ui")
         basetab.BaseTab.__init__(self, "MediaTab", _("Media"), "icon_media.png")
 
+        self.pigeon = None
+
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.set_select_function(self._select_func)
         self.widgets.selection.connect("changed", self.on_selection_changed)
@@ -66,12 +68,12 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
                 self.widgets.image.set_from_stock(Gtk.STOCK_FILE,
                                                   Gtk.IconSize.DIALOG)
 
-    def on_buttonopen_clicked(self, widget):
+    def on_buttonopen_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         media = model.get_value(rowiter, COL_OBJECT)
         common.open_file(media.path)
 
-    def on_buttonadd_clicked(self, widget):
+    def on_buttonadd_clicked(self, _widget):
         chooser = filechooser.MediaChooser(self._parent)
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
@@ -88,7 +90,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
             self.set_pigeon(self.pigeon)
         chooser.destroy()
 
-    def on_buttonremove_clicked(self, widget):
+    def on_buttonremove_clicked(self, _widget):
         if not QuestionDialog(messages.MSG_REMOVE_MEDIA, self._parent).run():
             return
 
@@ -98,7 +100,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         if mime.is_image(media.type):
             try:
                 os.remove(thumbnail.get_path(media.path))
-            except:
+            except FileNotFoundError:
                 pass
         media.delete_instance()
         self.widgets.liststore.remove(rowiter)
@@ -132,6 +134,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def get_pigeon_state_widgets(self):
         return [self.widgets.buttonadd]
 
+    # noinspection PyMethodMayBeStatic
     def _format_text(self, title, description):
         text = common.escape_text(title)
         if description:
@@ -139,5 +142,6 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
                         % common.escape_text(description)
         return text
 
-    def _select_func(self, selection, model, path, is_selected, data=None):
+    # noinspection PyMethodMayBeStatic
+    def _select_func(self, _selection, model, path, _is_selected, _data=None):
         return model[path][COL_SELECTABLE]

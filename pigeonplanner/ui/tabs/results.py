@@ -49,6 +49,10 @@ class BaseView:
         self._root = root
         self.pigeon = None
 
+        self.liststore = None
+        self.treeview = None
+        self.selection = None
+
         self.colname2string = {
             "date": _("Date"),
             "racepoint": _("Racepoint"),
@@ -71,8 +75,7 @@ class BaseView:
             "comment": _("Comment"),
         }
 
-        self.build_ui()
-
+    # noinspection PyMethodMayBeStatic
     def _build_parent_frame(self, label, child):
         sw = Gtk.ScrolledWindow()
         sw.set_shadow_type(Gtk.ShadowType.IN)
@@ -162,6 +165,11 @@ class ClassicView(BaseView):
     def __init__(self, root):
         BaseView.__init__(self, root)
 
+        self._frame = None
+
+        self.build_ui()
+
+    # noinspection PyMethodMayBeStatic
     def _row_for_result(self, result):
         placestr, coef, coefstr = common.format_place_coef(result.place, result.out)
         speed = common.format_speed(result.speed)
@@ -337,6 +345,14 @@ class SplittedView(BaseView):
 
     def __init__(self, root):
         BaseView.__init__(self, root)
+
+        self.race_ls = None
+        self.race_tv = None
+        self.race_sel = None
+        self._frame1 = None
+        self._frame2 = None
+
+        self.build_ui()
 
     @property
     def maintree(self):
@@ -550,6 +566,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         basetab.BaseTab.__init__(self, "ResultsTab", _("Results"), "icon_result.png")
 
         self.pigeon = None
+        self._mode = None
 
         view = get_view_for_current_config()
         self.widgets.resultview = view(self.widgets._root)
@@ -561,7 +578,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.dialog.set_transient_for(self._parent)
 
     # Callbacks
-    def on_dialog_delete(self, widget, event):
+    def on_dialog_delete(self, _widget, _event):
         self._close_dialog()
         return True
 
@@ -576,13 +593,13 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                 (Gtk.STOCK_JUMP_TO, self.on_addtopedigree_clicked, None, _("Add to pedigree details"))]
             utils.popup_menu(event, entries)
 
-    def on_buttonall_clicked(self, widget):
+    def on_buttonall_clicked(self, _widget):
         resultwindow.ResultWindow(self._parent)
 
-    def on_buttonimport_clicked(self, widget):
+    def on_buttonimport_clicked(self, _widget):
         resultparser.ResultParser(self._parent)
 
-    def on_buttonadd_clicked(self, widget):
+    def on_buttonadd_clicked(self, _widget):
         self._mode = enums.Action.add
         values = Result.get_fields_with_defaults()
         values["date"] = common.get_date()
@@ -591,21 +608,21 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         values["out"] = 1
         self._set_dialog(self._mode, values)
 
-    def on_buttonedit_clicked(self, widget):
+    def on_buttonedit_clicked(self, _widget):
         result = self.widgets.resultview.get_selected()
         self._mode = enums.Action.edit
         self._set_dialog(self._mode, result)
 
-    def on_buttonremove_clicked(self, widget):
+    def on_buttonremove_clicked(self, _widget):
         if not QuestionDialog(messages.MSG_REMOVE_RESULT, self._parent).run():
             return
 
         self.widgets.resultview.remove_selected()
 
-    def on_buttonclose_clicked(self, widget):
+    def on_buttonclose_clicked(self, _widget):
         self._close_dialog()
 
-    def on_buttonsave_clicked(self, widget):
+    def on_buttonsave_clicked(self, _widget):
         data = self._get_data()
         if data is None:
             return
@@ -620,7 +637,7 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         elif self._mode == enums.Action.edit:
             old_result = self.widgets.resultview.update_result(data)
             try:
-                result = old_result.update_and_return(**data)
+                old_result.update_and_return(**data)
             except errors.IntegrityError:
                 ErrorDialog(messages.MSG_RESULT_EXISTS, self._parent)
                 return
@@ -654,13 +671,13 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.spinoutof.set_range(widget.get_value_as_int(),
                                          widget.get_range()[1])
 
-    def on_entrydate_changed(self, widget):
+    def on_entrydate_changed(self, _widget):
         self._autofill_race()
 
-    def on_comboracepoint_changed(self, widget):
+    def on_comboracepoint_changed(self, _widget):
         self._autofill_race()
 
-    def on_addtopedigree_clicked(self, widget):
+    def on_addtopedigree_clicked(self, _widget):
         result = self.widgets.resultview.get_selected()
         text = "%se %s %s %s." % (result["place"], result["racepoint"],
                                   result["out"], _("Pigeons")[0].lower())

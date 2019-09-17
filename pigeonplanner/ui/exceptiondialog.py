@@ -37,10 +37,10 @@ class ExceptionDialog(Gtk.Dialog):
         self.run()
         self.destroy()
 
-    def report_log(self, widget):
+    def report_log(self, _widget):
         try:
             new, msg = update.update()
-        except update.UpdateError as exc:
+        except update.UpdateError:
             new = False
         if new:
             desc = _("Chances are that your problem is already fixed in "

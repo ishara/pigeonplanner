@@ -24,7 +24,6 @@ import os
 
 from gi.repository import Gtk
 
-# from pigeonplanner.ui import WidgetFactory
 from pigeonplanner.core import const
 
 
@@ -82,6 +81,7 @@ class GtkBuilder(WidgetFactory):
                 objects.append(obj)
         return objects
 
+    # noinspection PyMethodMayBeStatic
     def get_object_name(self, obj):
         """Get the widget name of the object
 

@@ -101,8 +101,9 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
 
         self.widgets.dialog.set_transient_for(parent)
 
-    ## Callbacks ##
-    def on_dialog_delete_event(self, widget, event):
+    # Callbacks
+    def on_dialog_delete_event(self, _widget,
+                               _event):
         self._close_dialog()
         return True
 
@@ -137,22 +138,23 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
                 (Gtk.STOCK_REMOVE, self.on_remove_clicked, None, None)]
             utils.popup_menu(event, entries)
 
-    def on_treeview_row_activated(self, widget, path, view_column):
+    def on_treeview_row_activated(self, _widget, _path, _view_column):
         if self.widgets.open.get_sensitive():
             # This avoids opening a non-existing database
             self.on_open_clicked(None)
 
-    def on_close_clicked(self, widget):
+    def on_close_clicked(self, _widget):
         self._close_dialog()
 
-    def on_quit_clicked(self, widget):
+    def on_quit_clicked(self, _widget):
         self._save_list_order()
         component.get("MainWindow").quit_program(bckp=False)
 
-    def on_help_clicked(self, widget):
+    # noinspection PyMethodMayBeStatic
+    def on_help_clicked(self, _widget):
         common.open_help(19)
 
-    def on_open_clicked(self, widget):
+    def on_open_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
 
@@ -170,7 +172,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         self._close_dialog()
         self.emit("database-loaded")
 
-    def on_add_clicked(self, widgets):
+    def on_add_clicked(self, _widgets):
         dialog = DBFileChooserDialog(self.widgets.dialog)
         while True:
             response = dialog.run()
@@ -191,7 +193,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         dialog.destroy()
         self.widgets.treeview.grab_focus()
 
-    def on_new_clicked(self, widgets):
+    def on_new_clicked(self, _widgets):
         name, description = "", ""
         if len(dbmanager.get_databases()) == 0:
             # There's no database yet, give the user some help.
@@ -221,7 +223,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         self.widgets.editdialog.hide()
         self.widgets.treeview.grab_focus()
 
-    def on_edit_clicked(self, widget):
+    def on_edit_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
         dbpath = os.path.dirname(dbobj.path)
@@ -252,7 +254,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         self.widgets.editdialog.hide()
         self.widgets.treeview.grab_focus()
 
-    def on_remove_clicked(self, widget):
+    def on_remove_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
         if not WarningDialog(messages.MSG_DELETE_DATABASE, self.widgets.dialog).run():
@@ -266,13 +268,13 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
 
         model.remove(rowiter)
 
-    def on_copy_clicked(self, widget):
+    def on_copy_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
         new_dbobj = dbmanager.copy(dbobj)
         self.add_liststore_item(new_dbobj, select=True)
 
-    def on_move_clicked(self, widget):
+    def on_move_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
         dialog = filechooser.DatabasePathChooserDialog(self.widgets.dialog)
@@ -300,7 +302,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         value = widget.get_active()
         dbmanager.set_default(dbobj, value)
 
-    ## Public methods ##
+    # Public methods
     def run(self, startup=False):
         self.fill_treeview()
         self.widgets.dialog.show()
@@ -331,9 +333,9 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
     def edit_liststore_item(self, rowiter, dbobj):
         icon, info, modified = self._dbobj_liststore_info(dbobj)
         self.widgets.liststore.set(rowiter, self.COL_OBJ, dbobj, self.COL_ICON, icon,
-                                            self.COL_INFO, info, self.COL_MODIFIED, modified)
+                                   self.COL_INFO, info, self.COL_MODIFIED, modified)
 
-    ## Private methods ##
+    # Private methods
     def _close_dialog(self):
         self._save_list_order()
         self.widgets.dialog.hide()
@@ -342,6 +344,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         dbs = [row[self.COL_OBJ] for row in self.widgets.liststore]
         dbmanager.reorder(dbs)
 
+    # noinspection PyMethodMayBeStatic
     def _format_info(self, name, description, path):
         head = "%s" % escape(name)
         if description:

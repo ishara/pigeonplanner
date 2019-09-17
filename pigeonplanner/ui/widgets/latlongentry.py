@@ -75,6 +75,7 @@ class LatLongEntry(displayentry.DisplayEntry):
         self._warn()
         raise errors.InvalidInputError(value)
 
+    # noinspection PyMethodMayBeStatic
     def __check_float_repr(self, value):
         value = value.replace(u"°", u"")
         try:
@@ -82,6 +83,7 @@ class LatLongEntry(displayentry.DisplayEntry):
         except ValueError:
             return None
 
+    # noinspection PyMethodMayBeStatic
     def __check_dms_repr(self, value):
         # Replace the degree and quotes by colons...
         for char in u"°'\"":

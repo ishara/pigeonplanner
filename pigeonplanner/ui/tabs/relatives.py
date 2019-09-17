@@ -99,13 +99,13 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         elif event.button == Gdk.BUTTON_PRIMARY and event.type == Gdk.EventType.DOUBLE_BUTTON_PRESS:
             self.on_show_details(None, pigeon)
 
-    def on_show_details(self, widget, pigeon):
+    def on_show_details(self, _widget, pigeon):
         DetailsDialog(pigeon, self._parent)
 
-    def on_edit_details(self, widget, pigeon):
+    def on_edit_details(self, _widget, pigeon):
         DetailsDialog(pigeon, self._parent, enums.Action.edit)
 
-    def on_goto_pigeon(self, widget, pigeon):
+    def on_goto_pigeon(self, _widget, pigeon):
         if not component.get("Treeview").select_pigeon(None, pigeon):
             InfoDialog(messages.MSG_NO_PIGEON, self._parent)
 
@@ -144,8 +144,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             (Pigeon.sire == pigeon.sire))
         for p in half_relatives_sire:
             seximg = utils.get_sex_image(p.sex)
-            self._liststorehalf.insert(0,
-                [p, p.band, p.band_year, p.sire.band, p.sex, seximg])
+            self._liststorehalf.insert(0, [p, p.band, p.band_year, p.sire.band, p.sex, seximg])
         half_relatives_dam = template.where(
             (Pigeon.dam != None) &
             (Pigeon.dam == pigeon.dam))

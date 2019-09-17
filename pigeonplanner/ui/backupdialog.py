@@ -66,20 +66,20 @@ class BackupDialog(builder.GtkBuilder):
 
         self.restore_op = None
 
-    def on_dialog_delete_event(self, widget, event):
+    def on_dialog_delete_event(self, _widget, _event):
         self.widgets.dialog.destroy()
         return False
 
-    def on_button_close_clicked(self, widget):
+    def on_button_close_clicked(self, _widget):
         self.widgets.dialog.destroy()
 
-    def on_button_back_clicked(self, widget):
+    def on_button_back_clicked(self, _widget):
         self.widgets.button_back.hide()
         self.widgets.button_create.hide()
         self.widgets.button_restore.hide()
         self.widgets.notebook.set_current_page(self.PAGE_MAIN)
 
-    def on_button_main_create_clicked(self, widget):
+    def on_button_main_create_clicked(self, _widget):
         self.widgets.liststoredbcreate.clear()
         for dbobj in backup.get_valid_databases():
             self.widgets.liststoredbcreate.append([dbobj, self._format_dbobj_liststore_create_info(dbobj)])
@@ -88,12 +88,12 @@ class BackupDialog(builder.GtkBuilder):
         self.widgets.button_create.show()
         self.widgets.notebook.set_current_page(self.PAGE_CREATE)
 
-    def on_button_main_restore_clicked(self, widget):
+    def on_button_main_restore_clicked(self, _widget):
         self.widgets.button_back.show()
         self.widgets.button_restore.show()
         self.widgets.notebook.set_current_page(self.PAGE_RESTORE)
 
-    def on_button_create_clicked(self, widget):
+    def on_button_create_clicked(self, _widget):
         save_path = self.widgets.label_savepath.get_text()
         save_config = self.widgets.check_saveconfig.get_active()
         try:
@@ -105,7 +105,7 @@ class BackupDialog(builder.GtkBuilder):
         else:
             messagedialog.InfoDialog(messages.MSG_BACKUP_SUCCES, self.widgets.dialog)
 
-    def on_button_restore_clicked(self, widget):
+    def on_button_restore_clicked(self, _widget):
         dbobjs = [row[self.LS_RESTORE_DBOBJ] for row in self.widgets.liststoredbrestore if row[self.LS_RESTORE_CHECK]]
         if len(dbobjs) == 0:
             if not messagedialog.QuestionDialog(messages.MSG_RESTORE_NO_DBS, self.widgets.dialog).run():
@@ -123,7 +123,7 @@ class BackupDialog(builder.GtkBuilder):
                 session.close()
             component.get("MainWindow").get_application().quit()
 
-    def on_button_saveselect_clicked(self, widget):
+    def on_button_saveselect_clicked(self, _widget):
         filename = backup.create_backup_filename()
         chooser = filechooser.BackupSaver(self.widgets.dialog, filename)
         chooser.set_do_overwrite_confirmation(True)
@@ -166,7 +166,7 @@ class BackupDialog(builder.GtkBuilder):
 
         self._set_restore_button()
 
-    def on_button_changedest_clicked(self, widget):
+    def on_button_changedest_clicked(self, _widget):
         dialog = filechooser.DatabasePathChooserDialog(self.widgets.dialog)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
@@ -183,7 +183,7 @@ class BackupDialog(builder.GtkBuilder):
             self._set_restore_button()
         dialog.destroy()
 
-    def on_celltoggle_restore_toggled(self, cell, path):
+    def on_celltoggle_restore_toggled(self, _cell, path):
         self.widgets.liststoredbrestore[path][self.LS_RESTORE_CHECK] = \
             not self.widgets.liststoredbrestore[path][self.LS_RESTORE_CHECK]
         self._set_restore_button()
@@ -208,6 +208,7 @@ class BackupDialog(builder.GtkBuilder):
             action = self.RESTORE_ACTION_ADD
         return action
 
+    # noinspection PyMethodMayBeStatic
     def _format_dbobj_liststore_restore_info(self, dbobj, action):
         head = "%s" % escape(dbobj.name)
         if dbobj.description:
@@ -223,6 +224,7 @@ class BackupDialog(builder.GtkBuilder):
 
         return "%s\n%s" % (head, second)
 
+    # noinspection PyMethodMayBeStatic
     def _format_dbobj_liststore_create_info(self, dbobj):
         head = "%s" % escape(dbobj.name)
         if dbobj.description:

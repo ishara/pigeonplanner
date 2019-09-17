@@ -79,7 +79,7 @@ class MailDialog(builder.GtkBuilder):
             if self.kind == "pdf":
                 try:
                     os.remove(self.attachment)
-                except:
+                except FileNotFoundError:
                     pass
 
             self.widgets.maildialog.destroy()
