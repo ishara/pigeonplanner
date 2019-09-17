@@ -24,23 +24,6 @@
             <property name="row_spacing">2</property>
             <property name="column_spacing">4</property>
             <child>
-              <object class="GtkViewport" id="viewportImageEdit">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="resize_mode">queue</property>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">3</property>
-                <property name="height">4</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkEntry" id="entrynameedit">
                 <property name="width_request">190</property>
                 <property name="visible">True</property>
@@ -387,6 +370,116 @@
               </packing>
             </child>
             <child>
+              <object class="GtkEventBox" id="imagewidgeteventboxedit">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <signal name="enter-notify-event" handler="on_imagewidgeteventboxedit_enter_notify_event" swapped="no"/>
+                <signal name="leave-notify-event" handler="on_imagewidgeteventboxedit_leave_notify_event" swapped="no"/>
+                <child>
+                  <object class="GtkOverlay">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImage" id="pigeonimageedit">
+                        <property name="width_request">200</property>
+                        <property name="height_request">200</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_left">2</property>
+                        <property name="margin_right">2</property>
+                        <property name="margin_top">2</property>
+                        <property name="margin_bottom">2</property>
+                        <property name="stock">gtk-missing-image</property>
+                      </object>
+                      <packing>
+                        <property name="index">-1</property>
+                      </packing>
+                    </child>
+                    <child type="overlay">
+                      <object class="GtkRevealer" id="imagerevealeredit">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="transition_type">crossfade</property>
+                        <property name="transition_duration">500</property>
+                        <child>
+                          <object class="GtkActionBar">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="valign">end</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child type="center">
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkButton" id="pigeonimageadd">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <signal name="clicked" handler="on_pigeonimageadd_clicked" swapped="no"/>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="stock">gtk-add</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="pigeonimageremove">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <signal name="clicked" handler="on_pigeonimageremove_clicked" swapped="no"/>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="stock">gtk-remove</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <style>
+                                  <class name="linked"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <style>
+                  <class name="frame"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">3</property>
+                <property name="height">4</property>
+              </packing>
+            </child>
+            <child>
               <placeholder/>
             </child>
           </object>
@@ -587,23 +680,6 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkViewport" id="viewportImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="resize_mode">queue</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="top_attach">3</property>
-                    <property name="height">4</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="BandEntry" id="entryband">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -782,6 +858,65 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEventBox" id="imagewidgeteventbox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <signal name="button-press-event" handler="on_imagewidgeteventbox_button_press_event" swapped="no"/>
+                    <signal name="enter-notify-event" handler="on_imagewidgeteventbox_enter_notify_event" swapped="no"/>
+                    <signal name="leave-notify-event" handler="on_imagewidgeteventbox_leave_notify_event" swapped="no"/>
+                    <child>
+                      <object class="GtkOverlay">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkImage" id="pigeonimage">
+                            <property name="width_request">200</property>
+                            <property name="height_request">200</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">2</property>
+                            <property name="margin_right">2</property>
+                            <property name="margin_top">2</property>
+                            <property name="margin_bottom">2</property>
+                            <property name="stock">gtk-missing-image</property>
+                          </object>
+                          <packing>
+                            <property name="index">-1</property>
+                          </packing>
+                        </child>
+                        <child type="overlay">
+                          <object class="GtkRevealer" id="imagerevealer">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="transition_type">crossfade</property>
+                            <property name="transition_duration">500</property>
+                            <child>
+                              <object class="GtkImage" id="pigeonimageoverlay">
+                                <property name="name">pigeonimageoverlay</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="stock">gtk-zoom-in</property>
+                                <property name="icon_size">6</property>
+                                <signal name="realize" handler="on_pigeonimageoverlay_realize" swapped="no"/>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="frame"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="top_attach">3</property>
+                    <property name="height">4</property>
                   </packing>
                 </child>
                 <child>

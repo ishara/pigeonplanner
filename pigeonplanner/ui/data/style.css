@@ -12,6 +12,10 @@ viewport {
   padding-bottom: 0px;
 }
 
+#pigeonimageoverlay {
+  background-color: rgba(1, 1, 1, 0.2);
+}
+
 .displayentry {
   border-color: @borders;
   background-color: @theme_base_color;

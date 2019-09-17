@@ -135,9 +135,6 @@ class ImageChooser(_FileChooserDialog):
         self.set_title(_("Select an image..."))
         self.add_image_filter()
         self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
-        image = Gtk.Image.new_from_stock(Gtk.STOCK_CLEAR, Gtk.IconSize.BUTTON)
-        buttonclear = self.add_button(_("No image"), self.RESPONSE_CLEAR)
-        buttonclear.set_image(image)
 
 
 class MediaChooser(_FileChooserDialog):

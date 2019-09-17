@@ -27,7 +27,6 @@ from gi.repository import GdkPixbuf
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
 from pigeonplanner.ui import tools
-from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
@@ -95,84 +94,6 @@ class DetailsDialog(Gtk.Dialog):
 
         if not keep_alive:
             dialog.destroy()
-
-
-class PigeonImageWidget(Gtk.EventBox):
-    def __init__(self, editable, view, parent=None):
-        Gtk.EventBox.__init__(self)
-        if editable:
-            self.connect("button-press-event", self.on_editable_button_press_event)
-            self.connect("realize", self.on_realize)
-        else:
-            self.connect("button-press-event", self.on_button_press_event)
-
-        self._logo_pb = GdkPixbuf.Pixbuf.new_from_file_at_size(const.LOGO_IMG, 75, 75)
-        self._view = view
-        self._parent = parent
-        self._imagewidget = Gtk.Image.new_from_pixbuf(self._logo_pb)
-        self._imagewidget.set_size_request(200, 200)
-        self.add(self._imagewidget)
-        self._imagepath = ""
-        self.set_default_image()
-
-    def on_button_press_event(self, _widget, _event):
-        if self._view.pigeon is None:
-            return
-        parent = None if isinstance(self._parent, Gtk.Dialog) else self._parent
-        tools.PhotoAlbum(parent, self._view.pigeon.main_image)
-
-    def on_editable_button_press_event(self, _widget, event):
-        if event.button == Gdk.BUTTON_SECONDARY:
-            entries = [
-                (Gtk.STOCK_ADD, self.on_open_imagechooser, None, None),
-                (Gtk.STOCK_REMOVE, self.set_default_image, None, None)]
-            utils.popup_menu(event, entries)
-        else:
-            self.on_open_imagechooser()
-
-    def on_open_imagechooser(self, _widget=None):
-        chooser = filechooser.ImageChooser(self._parent)
-        response = chooser.run()
-        if response == Gtk.ResponseType.OK:
-            filename = chooser.get_filename()
-            try:
-                pb = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 200, 200)
-            except GLib.GError as exc:
-                logger.error("Can't set image '%s':%s", filename, exc)
-                ErrorDialog(messages.MSG_INVALID_IMAGE, self._parent)
-            else:
-                self._imagewidget.set_from_pixbuf(pb)
-                self._imagepath = filename
-        elif response == chooser.RESPONSE_CLEAR:
-            self.set_default_image()
-        chooser.destroy()
-
-    def on_realize(self, _widget):
-        self.set_cursor("pointer")
-
-    def set_default_image(self, _widget=None):
-        self._imagewidget.set_from_pixbuf(self._logo_pb)
-        self._imagepath = ""
-
-    def set_image(self, image=None):
-        if image is not None:
-            pixbuf = thumbnail.get_image(image.path)
-            self._imagewidget.set_from_pixbuf(pixbuf)
-            self._imagepath = image.path
-            self.set_cursor("pointer")
-        else:
-            self.set_default_image()
-            self.set_cursor(None)
-
-    def get_image_path(self):
-        return self._imagepath
-
-    def set_cursor(self, cursor):
-        if cursor is not None:
-            cursor = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), cursor)
-        gdkwindow = self.get_window()
-        if gdkwindow is not None:
-            gdkwindow.set_cursor(cursor)
 
 
 class StatusButton(builder.GtkBuilder):
@@ -336,9 +257,8 @@ class DetailsView(builder.GtkBuilder, component.Component):
         self.parent = parent or component.get("MainWindow")
         self.pedigree_mode = False
         self.pigeon = None
-
-        self.widgets.pigeonimage = PigeonImageWidget(False, self, parent)
-        self.widgets.viewportImage.add(self.widgets.pigeonimage)
+        self._logo_pb = GdkPixbuf.Pixbuf.new_from_file_at_size(const.LOGO_IMG, 75, 75)
+        self.set_default_image()
 
         self.widgets.statusbutton = sb = StatusButton(self.parent)
         self.widgets.statusbutton.set_editable(False)
@@ -346,6 +266,25 @@ class DetailsView(builder.GtkBuilder, component.Component):
         self.widgets.grid.attach(sb.widget, 2, 2, 1, 1)
 
         self.widgets.root_view.show_all()
+
+    def on_pigeonimageoverlay_realize(self, _widget):
+        cursor = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), "pointer")
+        gdkwindow = self.widgets.pigeonimageoverlay.get_window()
+        gdkwindow.set_cursor(cursor)
+
+    def on_imagewidgeteventbox_enter_notify_event(self, _widget, _event):
+        if self.pigeon.main_image is not None and self.pigeon.main_image.exists:
+            self.widgets.imagerevealer.set_reveal_child(True)
+
+    def on_imagewidgeteventbox_leave_notify_event(self, _widget, _event):
+        self.widgets.imagerevealer.set_reveal_child(False)
+
+    def on_imagewidgeteventbox_button_press_event(self, _widget, event):
+        if self.pigeon is None or self.pigeon.main_image is None or not self.pigeon.main_image.exists:
+            return
+        if event.button == Gdk.BUTTON_PRIMARY:
+            parent = None if isinstance(self.parent, Gtk.Dialog) else self.parent
+            tools.PhotoAlbum(parent, self.pigeon.main_image)
 
     # Public methods
     def get_root_widget(self):
@@ -377,7 +316,7 @@ class DetailsView(builder.GtkBuilder, component.Component):
 
         self.widgets.statusbutton.set_sensitive(True)
         self.widgets.statusbutton.set_pigeon(pigeon)
-        self.widgets.pigeonimage.set_image(pigeon.main_image)
+        self.set_image(pigeon.main_image)
 
     def clear_details(self):
         self.pigeon = None
@@ -388,7 +327,7 @@ class DetailsView(builder.GtkBuilder, component.Component):
 
         self.widgets.statusbutton.set_sensitive(False)
         self.widgets.statusbutton.set_default()
-        self.widgets.pigeonimage.set_default_image()
+        self.set_default_image()
 
         for entry in self.get_objects_from_prefix("entry"):
             if isinstance(entry, bandentry.BandEntry):
@@ -401,6 +340,16 @@ class DetailsView(builder.GtkBuilder, component.Component):
             entry.set_text("")
         for text in self.get_objects_from_prefix("text"):
             text.get_buffer().set_text("")
+
+    def set_default_image(self, _widget=None):
+        self.widgets.pigeonimage.set_from_pixbuf(self._logo_pb)
+
+    def set_image(self, image=None):
+        if image is not None:
+            pixbuf = thumbnail.get_image(image.path)
+            self.widgets.pigeonimage.set_from_pixbuf(pixbuf)
+        else:
+            self.set_default_image()
 
     # noinspection PyMethodMayBeStatic
     def operation_saved(self):
@@ -425,9 +374,8 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
         self.parent = parent or component.get("MainWindow")
         self.pigeon = pigeon
         self.pedigree_mode = False
-
-        self.widgets.pigeonimage_edit = PigeonImageWidget(True, self, parent)
-        self.widgets.viewportImageEdit.add(self.widgets.pigeonimage_edit)
+        self._logo_pb = GdkPixbuf.Pixbuf.new_from_file_at_size(const.LOGO_IMG, 75, 75)
+        self._current_image_path = None
 
         self.widgets.statusbuttonedit = sb = StatusButton(self.parent)
         self.widgets.statusbuttonedit.set_editable(True)
@@ -446,6 +394,32 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
     def on_entrydamedit_search_clicked(self, _widget):
         return self._get_pigeonsearch_details(enums.Sex.hen)
 
+    def on_imagewidgeteventboxedit_enter_notify_event(self, _widget, _event):
+        self.widgets.imagerevealeredit.set_reveal_child(True)
+
+    def on_imagewidgeteventboxedit_leave_notify_event(self, _widget, _event):
+        self.widgets.imagerevealeredit.set_reveal_child(False)
+
+    def on_pigeonimageadd_clicked(self, _widget):
+        chooser = filechooser.ImageChooser(self.parent)
+        response = chooser.run()
+        if response == Gtk.ResponseType.OK:
+            filename = chooser.get_filename()
+            try:
+                pb = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 200, 200)
+            except GLib.GError as exc:
+                logger.error("Can't set image '%s':%s", filename, exc)
+                ErrorDialog(messages.MSG_INVALID_IMAGE, self.parent)
+            else:
+                self.widgets.pigeonimageedit.set_from_pixbuf(pb)
+                self._current_image_path = filename
+        elif response == chooser.RESPONSE_CLEAR:
+            self.set_default_image()
+        chooser.destroy()
+
+    def on_pigeonimageremove_clicked(self, _widget):
+        self.set_default_image()
+
     # Public methods
     def get_root_widget(self):
         return self.widgets.root_edit
@@ -459,6 +433,18 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
 
     def set_sex(self, value):
         self.widgets.combosex.set_active(value)
+
+    def set_default_image(self, _widget=None):
+        self.widgets.pigeonimageedit.set_from_pixbuf(self._logo_pb)
+        self._current_image_path = None
+
+    def set_image(self, image=None):
+        if image is not None:
+            pixbuf = thumbnail.get_image(image.path)
+            self.widgets.pigeonimageedit.set_from_pixbuf(pixbuf)
+            self._current_image_path = image.path
+        else:
+            self.set_default_image()
 
     def get_edit_details(self):
         country, letters, number, year = self.widgets.entrybandedit.get_band()
@@ -482,7 +468,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
             "name": self.widgets.entrynameedit.get_text(),
             "strain": self.widgets.combostrain.get_child().get_text(),
             "loft": self.widgets.comboloft.get_child().get_text(),
-            "image": self.widgets.pigeonimage_edit.get_image_path(),
+            "image": self._current_image_path,
             "extra1": self.widgets.entryextraedit1.get_text(),
             "extra2": self.widgets.entryextraedit2.get_text(),
             "extra3": self.widgets.entryextraedit3.get_text(),
@@ -503,7 +489,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
         self.widgets.combosex.set_active(0)
 
         self.widgets.statusbuttonedit.set_default()
-        self.widgets.pigeonimage_edit.set_default_image()
+        self.set_default_image()
 
         self.widgets.entrynameedit.set_text("")
         for x in range(1, 7):
@@ -531,7 +517,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
 
             self.widgets.statusbuttonedit.set_pigeon(self.pigeon)
             image = self.pigeon.main_image
-            self.widgets.pigeonimage_edit.set_image(image)
+            self.set_image(image)
         else:
             logger.debug("Start adding a pigeon")
 
