@@ -48,7 +48,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
         self.maintreeview = component.get("Treeview")
         self.widgets.selection = self.widgets.treeview.get_selection()
-        self.widgets.selection.connect("changed", self.on_selection_changed)
+        self._selection_changed_handler_id = self.widgets.selection.connect("changed", self.on_selection_changed)
         self.widgets.editdialog.set_transient_for(self._parent)
 
     # Tab
@@ -246,7 +246,11 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
         parent = None
         last = None
-        self.widgets.treestore.clear()
+        # Since the update to GTK3 clearing the tree store will trigger the selection::changed signal. This
+        # would throw an error when clicking another pigeon while a breeding record was selected. Just block
+        # the signal handler during this action.
+        with self.widgets.selection.handler_block(self._selection_changed_handler_id):
+            self.widgets.treestore.clear()
         this, mate = (Breeding.sire, Breeding.dam) if pigeon.is_cock() else (Breeding.dam, Breeding.sire)
         query = (Breeding.select()
                  .where(this == pigeon)
