@@ -903,7 +903,6 @@
                                 <property name="can_focus">False</property>
                                 <property name="stock">gtk-zoom-in</property>
                                 <property name="icon_size">6</property>
-                                <signal name="realize" handler="on_pigeonimageoverlay_realize" swapped="no"/>
                               </object>
                             </child>
                           </object>

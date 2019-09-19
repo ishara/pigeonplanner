@@ -267,17 +267,17 @@ class DetailsView(builder.GtkBuilder, component.Component):
 
         self.widgets.root_view.show_all()
 
-    def on_pigeonimageoverlay_realize(self, _widget):
-        cursor = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), "pointer")
-        gdkwindow = self.widgets.pigeonimageoverlay.get_window()
-        gdkwindow.set_cursor(cursor)
-
     def on_imagewidgeteventbox_enter_notify_event(self, _widget, _event):
         if self.pigeon is not None and self.pigeon.main_image is not None and self.pigeon.main_image.exists:
             self.widgets.imagerevealer.set_reveal_child(True)
+            cursor = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), "pointer")
+            gdkwindow = self.widgets.imagewidgeteventbox.get_window()
+            gdkwindow.set_cursor(cursor)
 
     def on_imagewidgeteventbox_leave_notify_event(self, _widget, _event):
         self.widgets.imagerevealer.set_reveal_child(False)
+        gdkwindow = self.widgets.imagewidgeteventbox.get_window()
+        gdkwindow.set_cursor(None)
 
     def on_imagewidgeteventbox_button_press_event(self, _widget, event):
         if self.pigeon is None or self.pigeon.main_image is None or not self.pigeon.main_image.exists:
