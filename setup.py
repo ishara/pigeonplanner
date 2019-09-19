@@ -22,12 +22,17 @@ This is the Pigeon Planner setup script
 """
 
 import os
+import sys
 import glob
 import shutil
 from setuptools import setup, find_packages
 
 from pigeonplanner.core import const
 
+
+if sys.version_info.major != 3:
+    print("Only Python 3 is supported, your version is: %s" % sys.version)
+    sys.exit()
 
 data_files = []
 package_data = {}
