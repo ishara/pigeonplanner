@@ -249,6 +249,7 @@
                               <object class="OperatorCombobox" id="combodate">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="active">0</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -462,6 +463,7 @@
                               <object class="OperatorCombobox" id="comboyear">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="active">0</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -502,6 +504,7 @@
                               <object class="OperatorCombobox" id="comboplace">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="active">0</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -541,6 +544,7 @@
                               <object class="OperatorCombobox" id="comboout">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="active">0</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -580,6 +584,7 @@
                               <object class="OperatorCombobox" id="combocoef">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="active">0</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
