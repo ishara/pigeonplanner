@@ -17,11 +17,11 @@
 
 
 import time
-import sqlite3
 import logging
 from datetime import datetime
 from collections import defaultdict
 
+import peewee
 from peewee import SQL
 from peewee import SqliteDatabase
 from peewee import IntegrityError
@@ -45,7 +45,7 @@ def do_migration(db):
     start_time = time.time()
 
     migrator = SqliteMigrator(database)
-    database.connection().row_factory = sqlite3.Row
+    database.connection().row_factory = peweee.sqlite3.Row
 
     status_tables = ["Dead", "Sold", "Lost", "Breeder", "Onloan", "Widow"]
     old_tables = ["Pigeons", "Results", "Breeding", "Media", "Medication", "Addresses", "Categories",
