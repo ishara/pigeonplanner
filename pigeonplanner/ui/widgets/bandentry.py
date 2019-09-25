@@ -109,10 +109,12 @@ class BandEntry(Gtk.Box):
         self.pack_start(self._hbox_band, False, False, 0)
 
     def on_button_format_clicked(self, _widget):
-        self.get_toplevel().get_child().set_sensitive(False)
+        # TODO: setting sensitive(False) only works on Linux. In Windows and macOS this will also
+        #       disable the popup itself instead of only the underlying widgets.
+        # self.get_toplevel().get_child().set_sensitive(False)
         popover = BandEntryPopover(self)
         popover.set_relative_to(self._button_format)
-        popover.connect("closed", lambda w: self.get_toplevel().get_child().set_sensitive(True))
+        # popover.connect("closed", lambda w: self.get_toplevel().get_child().set_sensitive(True))
         popover.show_all()
         popover.popup()
 
