@@ -96,6 +96,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
          <menuitem action="Quit"/>
       </menu>
       <menu action="EditMenu">
+         <menuitem action="Search"/>
          <menuitem action="SelectAll"/>
          <separator/>
          <menuitem action="Preferences"/>
@@ -161,6 +162,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.treeview.connect("pigeons-changed", self.on_treeview_pigeons_changed)
         self.widgets.treeview.connect("key-press-event", self.on_treeview_key_press)
         self.widgets.treeview.connect("button-press-event", self.on_treeview_press)
+        self.widgets.treeview.set_search_entry(self.widgets.pigeon_search_entry)
         self.widgets.scrolledwindow.add(self.widgets.treeview)
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
@@ -450,6 +452,10 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         logger.debug(common.get_function_name())
         self.widgets.notebook.set_current_page(2)
         self.resultstab.add_new_result()
+
+    def menusearch_activate(self, _widget):
+        search_mode = self.widgets.pigeon_search_bar.get_search_mode()
+        self.widgets.pigeon_search_bar.set_search_mode(not search_mode)
 
     def menufilter_activate(self, _widget):
         logger.debug(common.get_function_name())

@@ -95,6 +95,16 @@
       <accelerator key="f" modifiers="GDK_CONTROL_MASK"/>
     </child>
     <child>
+      <object class="GtkAction" id="Search">
+        <property name="label" translatable="yes">_Search...</property>
+        <property name="short_label" translatable="yes">_Search...</property>
+        <property name="tooltip" translatable="yes">Search a pigeon</property>
+        <property name="stock_id">gtk-zoom-in</property>
+        <signal name="activate" handler="menusearch_activate" swapped="no"/>
+      </object>
+      <accelerator key="s" modifiers="GDK_CONTROL_MASK"/>
+    </child>
+    <child>
       <object class="GtkAction" id="Addrange">
         <property name="label" translatable="yes">Add range</property>
         <property name="short_label" translatable="yes">Add range</property>
@@ -402,6 +412,29 @@
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkSearchBar" id="pigeon_search_bar">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="show_close_button">True</property>
+                    <child>
+                      <object class="GtkSearchEntry" id="pigeon_search_entry">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="width_chars">28</property>
+                        <property name="primary_icon_name">edit-find-symbolic</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">False</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkScrolledWindow" id="scrolledwindow">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -413,7 +446,7 @@
                   <packing>
                     <property name="expand">True</property>
                     <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
@@ -595,7 +628,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
               </object>
