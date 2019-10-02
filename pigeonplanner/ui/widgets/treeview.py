@@ -178,12 +178,14 @@ class MainTreeView(Gtk.TreeView, component.Component):
         self._modelsort.set_sort_column_id(self.LS_YEAR, Gtk.SortType.ASCENDING)
         self.set_model(self._modelsort)
         self.set_rules_hint(True)
+        self.set_search_equal_func(self._search_func)
         self._selection = self.get_selection()
         self._selection.set_mode(Gtk.SelectionMode.MULTIPLE)
         self.set_columns()
         self.show_all()
 
         self._filterdialog = FilterDialog(self)
+        self._pigeon_search_combo = component.get("MainWindow").widgets.pigeon_search_combo
 
     # Public methods
     def get_top_iter(self, rowiter):
@@ -448,3 +450,9 @@ class MainTreeView(Gtk.TreeView, component.Component):
             data1 = model.get_value(iter1, self.LS_RING)
             data2 = model.get_value(iter2, self.LS_RING)
         return (data1 > data2) - (data1 < data2)
+
+    def _search_func(self, model, _column, searchterm, treeiter, _data=None):
+        selected_column = self._pigeon_search_combo.get_column()
+        model_value = model.get_value(treeiter, selected_column)
+        # return False if match
+        return searchterm not in model_value

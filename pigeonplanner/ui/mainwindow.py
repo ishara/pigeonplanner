@@ -456,6 +456,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
     def menusearch_activate(self, _widget):
         search_mode = self.widgets.pigeon_search_bar.get_search_mode()
         self.widgets.pigeon_search_bar.set_search_mode(not search_mode)
+        if not search_mode:
+            self.widgets.pigeon_search_entry.grab_focus()
 
     def menufilter_activate(self, _widget):
         logger.debug(common.get_function_name())

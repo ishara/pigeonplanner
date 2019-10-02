@@ -24,6 +24,7 @@ from gi.repository import Gtk
 from gi.repository import GdkPixbuf
 
 from pigeonplanner.ui import utils
+from pigeonplanner.ui.widgets import treeview
 from pigeonplanner.core import enums
 from pigeonplanner.core import config
 from pigeonplanner.core import errors
@@ -224,5 +225,32 @@ class SpeedCombobox(Gtk.ComboBox):
         self.connect("realize", lambda w: self.set_active(config.get("options.speed-unit")))
 
     def get_unit(self):
+        ls_iter = self.get_active_iter()
+        return self.get_model().get(ls_iter, 1)[0]
+
+
+class PigeonSearchCombobox(Gtk.ComboBox):
+
+    __gtype_name__ = "PigeonSearchCombobox"
+
+    def __init__(self):
+        Gtk.ComboBox.__init__(self)
+        store = Gtk.ListStore(str, int)
+        self.set_model(store)
+        columns = [
+            (_("Band no."), treeview.MainTreeView.LS_RING),
+            (_("Name"), treeview.MainTreeView.LS_NAME),
+            (_("Colour"), treeview.MainTreeView.LS_COLOUR),
+            (_("Loft"), treeview.MainTreeView.LS_LOFT),
+            (_("Strain"), treeview.MainTreeView.LS_STRAIN)
+        ]
+        for column in columns:
+            store.append(column)
+        cell = Gtk.CellRendererText()
+        self.pack_start(cell, True)
+        self.add_attribute(cell, "text", 0)
+        self.set_id_column(0)
+
+    def get_column(self):
         ls_iter = self.get_active_iter()
         return self.get_model().get(ls_iter, 1)[0]
