@@ -70,7 +70,7 @@ class DataManager(builder.GtkBuilder):
             table = self.tables[dataset]
             table.delete().where(table.get_item_column() == item).execute()
             index = self.widgets.comboitem.get_active()
-            self.widgets.comboitem.remove_text(index)
+            self.widgets.comboitem.remove(index)
             self.widgets.comboitem.set_active(0)
 
     def on_buttonadd_clicked(self, _widget):

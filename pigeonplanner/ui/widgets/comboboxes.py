@@ -51,6 +51,7 @@ def fill_combobox(combobox, items, active=0, sort=True):
     :param sort: sort the data or not
     """
     if isinstance(combobox, Gtk.ComboBoxText):
+        combobox.remove_all()
         for item in items:
             combobox.append_text(item)
     else:
