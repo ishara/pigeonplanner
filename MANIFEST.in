@@ -10,6 +10,7 @@ graft win
 graft tests
 
 graft pigeonplanner/data/
+graft pigeonplanner/ui/data
 graft pigeonplanner/ui/glade
 graft pigeonplanner/resultparsers
 

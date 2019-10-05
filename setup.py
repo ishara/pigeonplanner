@@ -92,12 +92,14 @@ else:
     package_data = {
         "pigeonplanner": [
             "data/images/*.png",
+            "data/images/pigeonplanner.svg",
             "data/languages/*/LC_MESSAGES/pigeonplanner.mo",
             "resultparsers/*.py",
             "resultparsers/*.yapsy-plugin",
         ],
         "pigeonplanner.ui": [
-            "glade/*.ui"
+            "glade/*.ui",
+            "data/*.css"
         ]
     }
 
