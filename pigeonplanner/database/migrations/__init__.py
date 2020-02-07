@@ -21,27 +21,18 @@ import sys
 import glob
 from importlib import import_module
 
+from pigeonplanner.core import const
 
 _migrations = None
 
 
 def get_filenames():
     """ Get a sorted list of migration filenames """
-    if hasattr(sys, "frozen"):
-        # This is a workaround when compiled with py2exe. All Python modules are compiled and packed
-        # into a zipfile. Using glob doesn't work in this case so we need to reach into the archive
-        # and filter out the right files.
-        import zipfile
-        import fnmatch
-        # The file names to match include the directory and are compiled pyo files. Example:
-        #   /pigeonplanner/database/migrations/000_example.pyo
-        match = "*/[0-9][0-9][0-9]_*.pyo"
-        library_zip = os.path.join(sys.prefix, "library.zip")
-        with zipfile.ZipFile(library_zip) as library:
-            files = fnmatch.filter(library.namelist(), match)
+    if const.IS_FROZEN:
+        folder = const.MIGRATIONSDIR
     else:
         folder = os.path.dirname(os.path.abspath(__file__))
-        files = glob.glob(os.path.join(folder, "[0-9][0-9][0-9]_*.py"))
+    files = glob.glob(os.path.join(folder, "[0-9][0-9][0-9]_*.py"))
     filenames = [os.path.splitext(os.path.basename(f))[0] for f in files]
     return sorted(filenames, key=lambda fname: int(fname.split("_", 1)[0]))
 
@@ -54,7 +45,10 @@ def get_migrations():
     if _migrations is None:
         _migrations = []
         for module_name in get_filenames():
-            module_path = "pigeonplanner.database.migrations.%s" % module_name
+            if const.IS_FROZEN:
+                module_path = module_name
+            else:
+                module_path = "pigeonplanner.database.migrations.%s" % module_name
             module = import_module(module_path)
             _migrations.append({"version": module.database_version, "module": module})
     return _migrations

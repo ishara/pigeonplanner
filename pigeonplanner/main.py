@@ -50,32 +50,11 @@ def get_operating_system():
     return operatingsystem, distribution
 
 
-class NullFile:
-    def __init__(self, *arg, **kwarg):
-        pass
-
-    def write(self, data):
-        pass
-
-    def close(self):
-        pass
-
-
 class Startup:
     def __init__(self):
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
         sys.excepthook = self.exception_hook
-
-        # Disable py2exe log feature
-        if const.WINDOWS and hasattr(sys, "frozen"):
-            try:
-                sys.stdout = open(os.devnull, "w")
-                sys.stderr = open(os.devnull, "w")
-            except IOError:
-                # "nul" doesn't exist, use our own class
-                sys.stdout = NullFile()
-                sys.stderr = NullFile()
 
         # Create the needed configuration folders
         if not os.path.exists(const.PREFDIR):
@@ -134,15 +113,11 @@ class Startup:
             locale.bindtextdomain(localedomain, localedir)
         except AttributeError:
             if const.WINDOWS:
-                if gtk_ui and hasattr(sys, "frozen"):
-                    # There is a weird issue where cdll.intl throws an exception
-                    # when built with py2exe. Apparently GTK links some libraries
-                    # on import (details needed!). So this is a little workaround
-                    # to detect if we're running a py2exe'd package and the gtk
-                    # interface is requested.
-                    # Also shut up any code analysers...
-                    #import gtk; gtk  # TODO GTK3: is this still needed?
-                    pass
+                if gtk_ui:
+                    # For some reason we need to import GTK before loading the
+                    # libintl DLL. Do this by importing our own main GTK module
+                    # so all checks are done as well.
+                    from pigeonplanner.ui import gtkmain
 
                 from ctypes import cdll
 

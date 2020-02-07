@@ -3,8 +3,8 @@
 
 #define MyAppName "Pigeon Planner"
 #define MyAppURL "http://www.pigeonplanner.com"
-#define MyAppVersion GetFileVersion("..\dist\pigeonplanner.exe")
-#define MyVersion() ParseVersion("..\dist\pigeonplanner.exe", Local[0], Local[1], Local[2], Local[3]), Str(Local[0]) + "." + Str(Local[1]) + "." + Str(Local[2]);
+#define MyAppVersion GetFileVersion("dist\pigeonplanner\pigeonplanner.exe")
+#define MyVersion() ParseVersion("dist\pigeonplanner\pigeonplanner.exe", Local[0], Local[1], Local[2], Local[3]), Str(Local[0]) + "." + Str(Local[1]) + "." + Str(Local[2]);
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -47,8 +47,8 @@ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:Ad
 Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
 
 [Files]
-Source: ..\dist\pigeonplanner.exe; DestDir: {app}; Flags: ignoreversion
-Source: ..\dist\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: dist\pigeonplanner\pigeonplanner.exe; DestDir: {app}; Flags: ignoreversion
+Source: dist\pigeonplanner\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Code]
@@ -90,7 +90,6 @@ end;
 
 [Icons]
 Name: {group}\Pigeon Planner; Filename: {app}\pigeonplanner.exe; WorkingDir: {app}
-Name: {group}\Pigeon Planner Database Tool; Filename: {app}\pigeonplanner-db.exe; WorkingDir: {app}
 Name: {group}\{cm:ProgramOnTheWeb,Pigeon Planner}; Filename: http://www.pigeonplanner.com
 Name: {group}\{cm:UninstallProgram,Pigeon Planner}; Filename: {uninstallexe}
 Name: {commondesktop}\Pigeon Planner; Filename: {app}\pigeonplanner.exe; WorkingDir: {app}; Tasks: desktopicon

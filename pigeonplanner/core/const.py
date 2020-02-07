@@ -63,6 +63,8 @@ elif "darwin" in sys.platform:
 else:
     UNIX = True
 
+# Check if we're running inside a PyInstaller bundle.
+IS_FROZEN = getattr(sys, "frozen", False)
 
 if WINDOWS:
     HOMEDIR = os.environ["USERPROFILE"]
@@ -74,24 +76,24 @@ else:
     HOMEDIR = os.environ["HOME"]
     PREFDIR = os.path.join(HOMEDIR, ".pigeonplanner")
 
-if hasattr(sys, "frozen"):
-    # Most likely a py2exe package on Windows
-    ROOTDIR = os.path.abspath(os.path.dirname(sys.executable))
-    IMAGEDIR = os.path.join(ROOTDIR, u"images")
-    GLADEDIR = os.path.join(ROOTDIR, u"glade")
-    LANGDIR = os.path.abspath("languages")
-    # TODO: the following line should be much better, but for some reason translations
-    #       are only applied partially. Both paths look identical.
-    # LANGDIR = os.path.join(ROOTDIR, u"languages")
+if IS_FROZEN:
+    ROOTDIR = os.path.abspath(os.path.dirname(sys.executable))  # Might use sys._MEIPASS instead
+    _DATADIR = os.path.join(ROOTDIR, u"share", u"pigeonplanner")
+    IMAGEDIR = os.path.join(_DATADIR, u"images")
+    GLADEDIR = os.path.join(_DATADIR, u"glade")
+    LANGDIR = os.path.join(_DATADIR, u"languages")
+    RESULTPARSERDIR = os.path.join(_DATADIR, u"resultparsers")
+    CSSFILE = os.path.join(_DATADIR, u"style.css")
+    MIGRATIONSDIR = os.path.join(_DATADIR, u"migrations")
+    sys.path.append(MIGRATIONSDIR)
 else:
     # This file is in pigeonplanner.core, so go 1 directory up
     ROOTDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
     IMAGEDIR = os.path.join(ROOTDIR, u"data", u"images")
     GLADEDIR = os.path.join(ROOTDIR, u"ui", u"glade")
     LANGDIR = os.path.join(ROOTDIR, u"data", u"languages")
-
-RESULTPARSERDIR = os.path.join(ROOTDIR, u"resultparsers")
-CSSFILE = os.path.join(ROOTDIR, u"ui", u"data", u"style.css")
+    RESULTPARSERDIR = os.path.join(ROOTDIR, u"resultparsers")
+    CSSFILE = os.path.join(ROOTDIR, u"ui", u"data", u"style.css")
 
 THUMBDIR = os.path.join(PREFDIR, u"thumbs")
 PLUGINDIR = os.path.join(PREFDIR, u"plugins")
