@@ -42,15 +42,15 @@ from pigeonplanner.ui import component
 from pigeonplanner.ui import detailsview
 from pigeonplanner.ui import exportwindow
 from pigeonplanner.ui import backupdialog
+from pigeonplanner.ui import updatedialog
 from pigeonplanner.ui import optionsdialog
 from pigeonplanner.ui import pedigreewindow
 from pigeonplanner.ui.widgets import treeview
-from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog, QuestionDialog
+from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
-from pigeonplanner.core import update
 from pigeonplanner.core import backup
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeon as corepigeon
@@ -532,18 +532,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
 
     def menuupdate_activate(self, _widget):
         logger.debug(common.get_function_name())
-        try:
-            new, msg = update.update()
-        except update.UpdateError as exc:
-            new = False
-            msg = str(exc)
-
-        title = _("Search for updates...")
-        if new:
-            if QuestionDialog((msg, _("Go to the website?"), title), self).run():
-                webbrowser.open(const.DOWNLOADURL)
-        else:
-            InfoDialog((msg, None, title), self)
+        updatedialog.UpdateDialog(self, False)
 
     def menuinfo_activate(self, _widget):
         logger.debug(common.get_function_name())

@@ -18,8 +18,6 @@
 
 import sys
 import signal
-import webbrowser
-from threading import Thread
 import logging
 
 try:
@@ -87,30 +85,6 @@ def setup_custom_style():
     style_context.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 
-def search_updates():
-    from pigeonplanner.core import update
-    try:
-        new, msg = update.update()
-    except update.UpdateError as exc:
-        logger.error(exc)
-        return
-
-    if new:
-        GLib.idle_add(update_dialog)
-    else:
-        logger.info("AutoUpdate: %s" % msg)
-
-
-def update_dialog():
-    from pigeonplanner import messages
-    from pigeonplanner.ui.messagedialog import QuestionDialog
-
-    if QuestionDialog(messages.MSG_UPDATE_NOW).run():
-        webbrowser.open(const.DOWNLOADURL)
-
-    return False
-
-
 class Application(Gtk.Application):
     def __init__(self, missing_libs):
         super(Application, self).__init__(application_id="net.launchpad.pigeonplanner",
@@ -153,15 +127,15 @@ class Application(Gtk.Application):
         setup_icons()
         setup_custom_style()
 
-        from pigeonplanner.core import config
-        if config.get("options.check-for-updates"):
-            updatethread = Thread(None, search_updates, None)
-            updatethread.start()
-
     def do_activate(self):
         if not self._window:
             from pigeonplanner.ui import mainwindow
+            from pigeonplanner.core import config
             self._window = mainwindow.MainWindow(application=self)
+            if config.get("options.check-for-updates"):
+                from pigeonplanner.ui import updatedialog
+                dialog = updatedialog.UpdateDialog(self._window, True)
+                dialog.search_updates()
 
         self._window.present()
 

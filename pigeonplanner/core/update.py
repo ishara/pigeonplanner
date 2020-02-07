@@ -20,66 +20,50 @@ Interface for checking program updates
 """
 
 
-import os
 import json
 import logging
-from urllib.request import urlretrieve
+from collections import namedtuple
+from urllib.error import URLError
+from urllib.request import urlopen
 
 from pigeonplanner import messages
 from pigeonplanner.core import const
-from pigeonplanner.core import config
 
 logger = logging.getLogger(__name__)
+UpdateInfo = namedtuple("UpdateInfo", ["update_available", "message", "latest_version"])
 
 
 class UpdateError(Exception):
-    def __init__(self, msg):
-        self.msg = msg
-
-    def __str__(self):
-        return "Updater: %s" % self.msg
+    def __init__(self, message):
+        self.message = message
 
 
-def versiontuple(version):
+def version_to_tuple(version: str) -> tuple:
     """Convert version string to tuple"""
     return tuple(map(int, (version.split("."))))
 
 
-def update():
-    local = os.path.join(const.TEMPDIR, "pigeonplanner_update")
-
+def get_latest_version() -> str:
     try:
-        urlretrieve(const.UPDATEURL, local)
-        with open(local, "r") as versionfile:
-            versiondict = json.load(versionfile)
-    except IOError as exc:
-        logger.error(exc)
-        raise UpdateError(messages.MSG_CONNECTION_ERROR)
+        response = urlopen(const.UPDATEURL)
+    except URLError as exc:
+        raise UpdateError(exc.reason)
+    data = response.read().decode("utf-8")
+    versiondict = json.loads(data)
+    return versiondict["stable"]
 
-    try:
-        os.remove(local)
-    except:
-        pass
 
-    # See what version we need to check for
-    dev = versiontuple(versiondict["dev"])
-    stable = versiontuple(versiondict["stable"])
-    if config.get("options.check-for-dev-updates"):
-        if stable > dev:
-            version = stable
-        else:
-            version = dev
-    else:
-        version = stable
+def get_update_info() -> UpdateInfo:
+    latest = get_latest_version()
+    latest_tuple = version_to_tuple(latest)
+    message = ""
+    update_available = False
+    if const.VERSION_TUPLE < latest_tuple:
+        message = messages.MSG_UPDATE_AVAILABLE
+        update_available = True
+    elif const.VERSION_TUPLE == latest_tuple:
+        message = messages.MSG_NO_UPDATE
+    elif const.VERSION_TUPLE > latest_tuple:
+        message = messages.MSG_UPDATE_DEVELOPMENT
 
-    new = False
-    current = const.VERSION_TUPLE
-    if current < version:
-        msg = messages.MSG_UPDATE_AVAILABLE
-        new = True
-    elif current == version:
-        msg = messages.MSG_NO_UPDATE
-    elif current > version:
-        msg = messages.MSG_UPDATE_DEVELOPMENT
-
-    return new, msg
+    return UpdateInfo(update_available, message, latest)
