@@ -87,10 +87,10 @@ class BandEntry(Gtk.Box):
         self.entry_year.set_max_length(4)
         self.entry_year.set_activates_default(True)
 
-        self._button_format = Gtk.Button.new_from_icon_name(Gtk.STOCK_PROPERTIES, Gtk.IconSize.BUTTON)
+        self._button_format = Gtk.Button.new_from_icon_name("document-properties", Gtk.IconSize.BUTTON)
         self._button_format.set_tooltip_text(_("Band format"))
         self._button_format.connect("clicked", self.on_button_format_clicked)
-        self._button_search = Gtk.Button.new_from_icon_name(Gtk.STOCK_FIND, Gtk.IconSize.BUTTON)
+        self._button_search = Gtk.Button.new_from_icon_name("edit-find", Gtk.IconSize.BUTTON)
         self._button_search.set_tooltip_text(_("Search a pigeon"))
         self._button_search.connect("clicked", self.on_button_search_clicked)
 
