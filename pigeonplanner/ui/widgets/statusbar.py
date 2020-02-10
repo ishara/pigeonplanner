@@ -20,6 +20,7 @@ from gi.repository import Gtk
 from gi.repository import GLib
 
 from pigeonplanner.ui import component
+from pigeonplanner.core import const
 
 
 class _TotalLabel(Gtk.Label):
@@ -78,6 +79,11 @@ class StatusBar(Gtk.Statusbar, component.Component):
         box = self.get_message_area()
         box.pack_end(total, False, False, 0)
         box.pack_end(filterbox, False, False, 4)
+        # If the second number in the version is uneven, it's a development version.
+        if const.VERSION_TUPLE[1] % 2 == 1:
+            dev_label = Gtk.Label()
+            dev_label.set_markup("""<span foreground="red" font_weight="bold">Development version</span>""")
+            box.pack_end(dev_label, False, False, 4)
 
     def on_filterbox_clicked(self, widget, event):
         #TODO
