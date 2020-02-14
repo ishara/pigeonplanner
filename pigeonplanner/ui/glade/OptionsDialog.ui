@@ -1469,13 +1469,12 @@
                                             <property name="visible">True</property>
                                             <property name="can_focus">True</property>
                                             <property name="receives_default">True</property>
-                                            <property name="relief">none</property>
                                             <signal name="clicked" handler="on_btnPreview_clicked" swapped="no"/>
                                             <child>
                                               <object class="GtkImage" id="image4">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
-                                                <property name="stock">gtk-find</property>
+                                                <property name="icon_name">document-print-preview</property>
                                               </object>
                                             </child>
                                           </object>
@@ -1485,6 +1484,9 @@
                                             <property name="position">2</property>
                                           </packing>
                                         </child>
+                                        <style>
+                                          <class name="linked"/>
+                                        </style>
                                       </object>
                                       <packing>
                                         <property name="expand">True</property>
