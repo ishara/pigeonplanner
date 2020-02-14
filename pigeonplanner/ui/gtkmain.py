@@ -73,6 +73,13 @@ def setup_icons():
             ("icon_columns.png", "columns", "columns"),
         ])
 
+    # Ideally our custom icons should go into icons/hicolor/WxH/<category>, but for
+    # simplicity sake we just add the directory that contains them to the search path.
+    # This makes sure icons are found in all scenarios, especially running from source
+    # where icons aren't installed yet.
+    icon_theme = Gtk.IconTheme.get_default()
+    icon_theme.append_search_path(const.IMAGEDIR)
+
     # Set default icon for all windows
     Gtk.Window.set_default_icon_from_file(const.LOGO_IMG)
 
