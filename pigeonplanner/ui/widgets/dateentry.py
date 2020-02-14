@@ -145,9 +145,9 @@ class CalendarPopover(Gtk.Popover):
         Gtk.Popover.__init__(self)
         self.set_position(Gtk.PositionType.BOTTOM)
 
-        buttonapply = Gtk.Button.new_from_icon_name(Gtk.STOCK_APPLY, Gtk.IconSize.BUTTON)
+        buttonapply = Gtk.Button.new_from_icon_name("icon_check", Gtk.IconSize.BUTTON)
         buttonapply.connect("clicked", self.on_buttonapply_clicked)
-        buttoncancel = Gtk.Button.new_from_icon_name(Gtk.STOCK_CANCEL, Gtk.IconSize.BUTTON)
+        buttoncancel = Gtk.Button.new_from_icon_name("icon_cancel", Gtk.IconSize.BUTTON)
         buttoncancel.connect("clicked", self.on_buttoncancel_clicked)
         button_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         button_box.set_halign(Gtk.Align.CENTER)

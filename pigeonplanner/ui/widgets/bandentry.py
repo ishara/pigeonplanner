@@ -344,9 +344,9 @@ class BandEntryPopover(Gtk.Popover):
         self._entry_year.set_placeholder_text(_("Year"))
         self._entry_year.set_max_length(4)
 
-        button_apply = Gtk.Button.new_from_icon_name(Gtk.STOCK_APPLY, Gtk.IconSize.BUTTON)
+        button_apply = Gtk.Button.new_from_icon_name("icon_check", Gtk.IconSize.BUTTON)
         button_apply.connect("clicked", self.on_button_apply_clicked)
-        button_cancel = Gtk.Button.new_from_icon_name(Gtk.STOCK_CANCEL, Gtk.IconSize.BUTTON)
+        button_cancel = Gtk.Button.new_from_icon_name("icon_cancel", Gtk.IconSize.BUTTON)
         button_cancel.connect("clicked", self.on_button_cancel_clicked)
 
         self._hbox_entry = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
