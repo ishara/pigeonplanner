@@ -367,7 +367,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
                     }
 
     def __init__(self, parent=None, pigeon=None):
-        builder.GtkBuilder.__init__(self, "DetailsView.ui", ["root_edit"])
+        builder.GtkBuilder.__init__(self, "DetailsView.ui", ["root_edit", "popover_extrahelp"])
         GObject.GObject.__init__(self)
 
         self._operation = None
@@ -419,6 +419,41 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
 
     def on_pigeonimageremove_clicked(self, _widget):
         self.set_default_image()
+
+    def on_viewport_extra_realize(self, widget):
+        # Calculate the space needed for the drawing area that indicates the amount of
+        # space available on the printed pedigree.
+        # TODO: this is a bad way and found by trial and error. Can this be calculated
+        #       by font somehow?
+        needed_width = 190 if const.WINDOWS else 240
+        alloc = widget.get_allocation()
+        self.widgets.drawingarea_extra.set_size_request(alloc.width-needed_width, -1)
+
+    # noinspection PyMethodMayBeStatic
+    def on_drawingarea_extra_draw(self, widget, context):
+        alloc = widget.get_allocation()
+
+        context.set_source_rgba(0, 0, 0, 0.08)
+        context.rectangle(0, 0, alloc.width, alloc.height)
+        context.fill()
+
+        context.set_source_rgba(0, 0, 0, 0.4)
+        context.set_line_width(2)
+        context.move_to(0, 0)
+        context.line_to(0, alloc.height)
+        context.stroke()
+
+    def on_eventbox_extrahelp_enter_notify_event(self, widget, _event):
+        cursor = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), "help")
+        gdkwindow = widget.get_window()
+        gdkwindow.set_cursor(cursor)
+        self.widgets.popover_extrahelp.show_all()
+        self.widgets.popover_extrahelp.popup()
+
+    def on_eventbox_extrahelp_leave_notify_event(self, widget, _event):
+        gdkwindow = widget.get_window()
+        gdkwindow.set_cursor(None)
+        self.widgets.popover_extrahelp.popdown()
 
     # Public methods
     def get_root_widget(self):

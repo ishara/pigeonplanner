@@ -35,7 +35,8 @@ NAME = "Pigeon Planner"
 COPYRIGHT = "(C)opyright 2009-%s Timo Vanwynsberghe" % datetime.now().year
 AUTHORS = ["Timo Vanwynsberghe <timovwb@gmail.com>"]
 ARTISTS = ["Timo Vanwynsberghe <timovwb@gmail.com>",
-           "http://www.openclipart.org"]
+           "http://www.openclipart.org",
+           "https://www.flaticon.com/authors/dave-gandy"]
 WEBSITE = "http://www.pigeonplanner.com"
 DESCRIPTION = "Organise and manage your pigeons"
 LICENSE = """
