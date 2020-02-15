@@ -92,6 +92,7 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
         self.highlight = False
         self.text = ""
         self.textlayout = None
+        self.text_baseline = 0
 
     @property
     def sex(self):
@@ -187,6 +188,8 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
         if not self.textlayout:
             self.textlayout = PangoCairo.create_layout(context)
             font_desc = self.get_style_context().get_font(Gtk.StateFlags.NORMAL)
+            font_size = int(font_desc.get_size()/1000)
+            self.text_baseline = -font_size + 15
             self.textlayout.set_font_description(font_desc)
             self.textlayout.set_ellipsize(Pango.EllipsizeMode.END)
         self.textlayout.set_width(Pango.units_from_double(alloc.width - 8))
@@ -222,7 +225,7 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
         context.fill_preserve()
         context.stroke()
 
-        context.move_to(5, 4)
+        context.move_to(5, self.text_baseline)
         context.set_source_rgb(0, 0, 0)
         PangoCairo.show_layout(context, self.textlayout)
 
