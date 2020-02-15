@@ -144,6 +144,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
       <toolitem action="Remove"/>
       <toolitem action="Pedigree"/>
       <separator/>
+      <toolitem action="Search"/>
       <toolitem action="Filter"/>
       <separator/>
       <toolitem action="Preferences"/>
