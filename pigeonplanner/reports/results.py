@@ -217,10 +217,9 @@ class ResultsReportOptions(ReportOptions):
 
         cell = TableCellStyle()
         cell.set_padding(0.1)
-        cell.set_borders(0, 1, 0, 0)
+        cell.set_bottom_border(True)
         default_style.add_cell_style("headercell", cell)
 
         cell = TableCellStyle()
         cell.set_padding(0.1)
-        cell.set_borders(0, 0, 0, 0)
         default_style.add_cell_style("cell", cell)
