@@ -656,6 +656,9 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         for tab in self._loaded_tabs:
             tab.set_pigeon(pigeon)
 
+    def on_pigeon_search_entry_stop_search(self, _widget):
+        self.widgets.pigeon_search_bar.set_search_mode(False)
+
     # Navigation arrows callbacks
     def on_button_top_clicked(self, _widget):
         self._set_pigeon(0)
