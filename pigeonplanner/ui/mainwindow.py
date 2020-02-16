@@ -151,6 +151,12 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
       <toolitem action="About"/>
       <toolitem action="Quit"/>
    </toolbar>
+   <popup name="PopupMenu">
+      <menuitem action="Edit"/>
+      <menuitem action="Remove"/>
+      <menuitem action="Pedigree"/>
+      <menuitem action="RestoreHidden"/>
+   </popup>
 </ui>
 """
 
@@ -162,7 +168,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.treeview = treeview.MainTreeView()
         self.widgets.treeview.connect("pigeons-changed", self.on_treeview_pigeons_changed)
         self.widgets.treeview.connect("key-press-event", self.on_treeview_key_press)
-        self.widgets.treeview.connect("button-press-event", self.on_treeview_press)
+        self.widgets.treeview.connect("button-release-event", self.on_treeview_release_event)
         self.widgets.treeview.set_search_entry(self.widgets.pigeon_search_entry)
         self.widgets.scrolledwindow.add(self.widgets.treeview)
         self.widgets.selection = self.widgets.treeview.get_selection()
@@ -603,24 +609,18 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.labelStatUnknown.set_markup("<b>%i</b>" % unknown)
         self.widgets.statusbar.set_total(total)
 
-    def on_treeview_press(self, widget, event):
+    def on_treeview_release_event(self, widget, event):
         pthinfo = widget.get_path_at_pos(int(event.x), int(event.y))
         if pthinfo is None:
             return
 
         if event.button == 3:
-            entries = [
-                (Gtk.STOCK_EDIT, self.menuedit_activate, None, None),
-                (Gtk.STOCK_REMOVE, self.menuremove_activate, None, None),
-                ("pedigree-detail", self.menupedigree_activate, None, None)
-            ]
             selected = self.widgets.treeview.get_selected_pigeon()
-            if isinstance(selected, Pigeon) and not selected.visible:
-                entries.append((Gtk.STOCK_REVERT_TO_SAVED, self.restore_pigeon, (selected,), _("Restore")))
-            utils.popup_menu(event, entries)
+            self.widgets.MenuRestoreHidden.set_visible(isinstance(selected, Pigeon) and not selected.visible)
+            self.widgets.popupmenu.popup_at_pointer(event)
 
-    # noinspection PyMethodMayBeStatic
-    def restore_pigeon(self, _widget, pigeon):
+    def restore_pigeon(self, _widget):
+        pigeon = self.widgets.treeview.get_selected_pigeon()
         pigeon.visible = True
         pigeon.save()
 
@@ -692,12 +692,14 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         widget_dic = {
             "menubar": uimanager.get_widget("/MenuBar"),
             "toolbar": uimanager.get_widget("/Toolbar"),
+            "popupmenu": uimanager.get_widget("/PopupMenu"),
             "MenuShowAll": uimanager.get_widget("/MenuBar/ViewMenu/ShowAll"),
             "MenuArrows": uimanager.get_widget("/MenuBar/ViewMenu/Arrows"),
             "MenuStats": uimanager.get_widget("/MenuBar/ViewMenu/Stats"),
             "MenuToolbar": uimanager.get_widget("/MenuBar/ViewMenu/Toolbar"),
             "MenuStatusbar":
                 uimanager.get_widget("/MenuBar/ViewMenu/Statusbar"),
+            "MenuRestoreHidden": uimanager.get_widget("/PopupMenu/RestoreHidden"),
         }
         for name, widget in widget_dic.items():
             setattr(self.widgets, name, widget)
