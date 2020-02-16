@@ -50,6 +50,8 @@ RESPONSE_SAVE = 12
 class DetailsDialog(Gtk.Dialog):
     def __init__(self, pigeon=None, parent=None, mode=None):
         Gtk.Dialog.__init__(self, None, parent, Gtk.DialogFlags.MODAL)
+        self.set_border_width(4)
+        self.get_content_area().set_spacing(2)
 
         if parent is None:
             self.set_position(Gtk.WindowPosition.MOUSE)
