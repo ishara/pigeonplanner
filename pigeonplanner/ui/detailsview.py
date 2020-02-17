@@ -37,7 +37,6 @@ from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.messagedialog import ErrorDialog, WarningDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import const
-from pigeonplanner.core import common
 from pigeonplanner.core import errors
 from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.database.models import Status, Colour, Strain, Loft
