@@ -390,13 +390,11 @@ class MainTreeView(Gtk.TreeView, component.Component):
             self.get_column(key).set_visible(value)
             if key == self.COL_SEX and value:
                 sexcoltype = config.get("columns.pigeon-sex-type")
-                for renderer in self.get_column(key).get_cell_renderers():
+                for renderer in self.get_column(key).get_cells():
                     if isinstance(renderer, Gtk.CellRendererText):
-                        text = renderer
-                    else:
-                        pixbuf = renderer
-                text.set_visible(sexcoltype == 1 or sexcoltype == 3)
-                pixbuf.set_visible(sexcoltype == 2 or sexcoltype == 3)
+                        renderer.set_visible(sexcoltype == 1 or sexcoltype == 3)
+                    elif isinstance(renderer, Gtk.CellRendererPixbuf):
+                        renderer.set_visible(sexcoltype == 2 or sexcoltype == 3)
 
     def run_filterdialog(self, parent):
         self._filterdialog.show(parent)
