@@ -851,7 +851,7 @@
                               <object class="GtkImage" id="image1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-info</property>
+                                <property name="icon_name">dialog-information</property>
                               </object>
                             </child>
                           </object>
@@ -871,7 +871,7 @@
                               <object class="GtkImage" id="image2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-jump-to</property>
+                                <property name="icon_name">go-jump</property>
                               </object>
                             </child>
                           </object>
@@ -1046,7 +1046,7 @@
                               <object class="GtkImage" id="image3">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-info</property>
+                                <property name="icon_name">dialog-information</property>
                               </object>
                             </child>
                           </object>
@@ -1066,7 +1066,7 @@
                               <object class="GtkImage" id="image4">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-jump-to</property>
+                                <property name="icon_name">go-jump</property>
                               </object>
                             </child>
                           </object>
