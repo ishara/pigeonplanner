@@ -149,9 +149,11 @@ class MainTreeView(Gtk.TreeView, component.Component):
      LS_LOFT,
      LS_STRAIN,
      LS_STATUS,
-     LS_SEXIMG) = range(13)
+     LS_SEXIMG,
+     LS_HIDDENIMG) = range(14)
 
-    (COL_BAND,
+    (COL_HIDDEN,
+     COL_BAND,
      COL_YEAR,
      COL_COUNTRY,
      COL_NAME,
@@ -161,7 +163,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
      COL_DAM,
      COL_LOFT,
      COL_STRAIN,
-     COL_STATUS) = range(11)
+     COL_STATUS) = range(12)
 
     def __init__(self):
         Gtk.TreeView.__init__(self)
@@ -269,6 +271,9 @@ class MainTreeView(Gtk.TreeView, component.Component):
         component.get("MainWindow").widgets.hbox_loading.hide()
         component.get("MainWindow").widgets.actiongroup_database.set_sensitive(True)
 
+        hidden_img_column = self.get_column(self.COL_HIDDEN)
+        hidden_img_column.set_visible(config.get("interface.show-all-pigeons"))
+
         self._block_visible_func = False
 
     def add_pigeon(self, pigeon, select=True):
@@ -292,7 +297,8 @@ class MainTreeView(Gtk.TreeView, component.Component):
             self.LS_LOFT, pigeon.loft,
             self.LS_STRAIN, pigeon.strain,
             self.LS_STATUS, pigeon.status.status_string,
-            self.LS_SEXIMG, utils.get_sex_image(pigeon.sex)
+            self.LS_SEXIMG, utils.get_sex_image(pigeon.sex),
+            self.LS_HIDDENIMG, "" if pigeon.visible else "icon_hidden"
         )
         self.update_row(data, rowiter=rowiter, path=path)
 
@@ -398,19 +404,25 @@ class MainTreeView(Gtk.TreeView, component.Component):
     # Internal methods
     def _build_treeview(self):
         liststore = Gtk.ListStore(int, str, str, str, str, str, str, str,
-                                  str, str, str, str, GdkPixbuf.Pixbuf)
-        columns = [_("Band no."), _("Year"), _("Country"), _("Name"), _("Colour"), _("Sex"),
+                                  str, str, str, str, GdkPixbuf.Pixbuf, str)
+        columns = ["", _("Band no."), _("Year"), _("Country"), _("Name"), _("Colour"), _("Sex"),
                    _("Sire"), _("Dam"), _("Loft"), _("Strain"), _("Status")]
         for index, column in enumerate(columns):
             tvcolumn = Gtk.TreeViewColumn(column)
+            if index == self.COL_HIDDEN:
+                renderer = Gtk.CellRendererPixbuf()
+                tvcolumn.pack_start(renderer, expand=False)
+                tvcolumn.add_attribute(renderer, "icon-name", self.LS_HIDDENIMG)
+                self.append_column(tvcolumn)
+                continue
             if index == self.COL_SEX:
                 renderer = Gtk.CellRendererPixbuf()
                 tvcolumn.pack_start(renderer, expand=False)
                 tvcolumn.add_attribute(renderer, "pixbuf", self.LS_SEXIMG)
             textrenderer = Gtk.CellRendererText()
             tvcolumn.pack_start(textrenderer, expand=False)
-            tvcolumn.add_attribute(textrenderer, "text", index+1)
-            tvcolumn.set_sort_column_id(index+1)
+            tvcolumn.add_attribute(textrenderer, "text", index)
+            tvcolumn.set_sort_column_id(index)
             tvcolumn.set_resizable(True)
             self.append_column(tvcolumn)
         return liststore
@@ -430,7 +442,8 @@ class MainTreeView(Gtk.TreeView, component.Component):
             pigeon.loft,
             pigeon.strain,
             pigeon.status.status_string,
-            utils.get_sex_image(pigeon.sex)
+            utils.get_sex_image(pigeon.sex),
+            "" if pigeon.visible else "icon_hidden"
         ]
 
     def _visible_func(self, model, treeiter, _data=None):

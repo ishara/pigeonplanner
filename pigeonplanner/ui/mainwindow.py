@@ -424,6 +424,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
                 for pigeon in pigeons:
                     pigeon.visible = False
                     pigeon.save()
+                    self.widgets.treeview.update_pigeon(pigeon)
 
             if response == removedialog.RESPONSE_HIDE and config.get("interface.show-all-pigeons"):
                 # Do not remove the pigeon(s) from the treeview when hiding and
@@ -623,6 +624,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         pigeon = self.widgets.treeview.get_selected_pigeon()
         pigeon.visible = True
         pigeon.save()
+        self.widgets.treeview.update_pigeon(pigeon)
 
     def on_treeview_key_press(self, _widget, event):
         keyname = Gdk.keyval_name(event.keyval)
