@@ -39,23 +39,8 @@ except ImportError:
 import peewee
 
 from pigeonplanner.core import const
-from pigeonplanner.core import enums
 from pigeonplanner.core import config
 from pigeonplanner.database.models import Pigeon, Person
-
-
-SEX_IMGS = {enums.Sex.cock: os.path.join(const.IMAGEDIR, "symbol_male.png"),
-            enums.Sex.hen: os.path.join(const.IMAGEDIR, "symbol_female.png"),
-            enums.Sex.youngbird: os.path.join(const.IMAGEDIR, "symbol_young.png"),
-            enums.Sex.unknown: os.path.join(const.IMAGEDIR, "symbol_young.png")}
-
-STATUS_IMGS = {enums.Status.dead: os.path.join(const.IMAGEDIR, "status_dead.png"),
-               enums.Status.active: os.path.join(const.IMAGEDIR, "status_active.png"),
-               enums.Status.sold: os.path.join(const.IMAGEDIR, "status_sold.png"),
-               enums.Status.lost: os.path.join(const.IMAGEDIR, "status_lost.png"),
-               enums.Status.breeder: os.path.join(const.IMAGEDIR, "status_breeder.png"),
-               enums.Status.loaned: os.path.join(const.IMAGEDIR, "status_onloan.png"),
-               enums.Status.widow: os.path.join(const.IMAGEDIR, "status_widow.png")}
 
 
 def get_function_name():

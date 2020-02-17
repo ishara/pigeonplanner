@@ -42,8 +42,17 @@ def get_sex_icon_name(sex):
         return "symbol_young"
 
 
-def get_status_image(status):
-    return GdkPixbuf.Pixbuf.new_from_file(common.STATUS_IMGS[status])
+def get_status_icon_name(status):
+    status_icon_mapping = {
+        enums.Status.dead: "status_dead",
+        enums.Status.active: "status_active",
+        enums.Status.sold: "status_sold",
+        enums.Status.lost: "status_lost",
+        enums.Status.breeder: "status_breeder",
+        enums.Status.loaned: "status_onloan",
+        enums.Status.widow: "status_widow"
+    }
+    return status_icon_mapping[status]
 
 
 def create_stock_button(icons):

@@ -26,6 +26,7 @@ from gi.repository import GdkPixbuf
 
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
+from pigeonplanner.ui import utils
 from pigeonplanner.ui import tools
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
@@ -146,10 +147,10 @@ class StatusButton(builder.GtkBuilder):
         self.widgets.buttonstatusok.grab_focus()
 
     def _set_button_info(self, status):
-        image = common.STATUS_IMGS[status]
         label = enums.Status.get_string(status)
         self.widgets.statuslabel.set_text(label)
-        self.widgets.statusimage.set_from_file(image)
+        icon_name = utils.get_status_icon_name(status)
+        self.widgets.statusimage.set_from_icon_name(icon_name, Gtk.IconSize.BUTTON)
 
     def get_current_status(self):
         return self.widgets.combostatus.get_active()

@@ -95,15 +95,15 @@ class StatusCombobox(Gtk.ComboBox):
 
     def __init__(self):
         Gtk.ComboBox.__init__(self)
-        store = Gtk.ListStore(int, str, GdkPixbuf.Pixbuf)
+        store = Gtk.ListStore(int, str, str)
         self.set_model(store)
 
         for key, value in enums.Status.mapping.items():
-            store.insert(key, [key, value, utils.get_status_image(key)])
+            store.insert(key, [key, value, utils.get_status_icon_name(key)])
 
         pb = Gtk.CellRendererPixbuf()
         self.pack_start(pb, expand=False)
-        self.add_attribute(pb, "pixbuf", 2)
+        self.add_attribute(pb, "icon-name", 2)
         cell = Gtk.CellRendererText()
         self.pack_start(cell, True)
         self.add_attribute(cell, "text", 1)
