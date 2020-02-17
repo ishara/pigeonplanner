@@ -29,11 +29,11 @@ class SexEntry(displayentry.DisplayEntry):
         self.set_icon_activatable(0, False)
 
     def set_sex(self, sex):
-        try:
-            img = utils.get_sex_image(sex)
-        except KeyError:
-            img = None
-            self.set_text("")
+        if sex is None:
+            text = ""
+            icon_name = None
         else:
-            self.set_text(enums.Sex.get_string(sex))
-        self.set_icon_from_pixbuf(0, img)
+            text = enums.Sex.get_string(sex)
+            icon_name = utils.get_sex_icon_name(sex)
+        self.set_text(text)
+        self.set_icon_from_icon_name(0, icon_name)
