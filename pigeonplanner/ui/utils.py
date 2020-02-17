@@ -23,6 +23,7 @@ from gi.repository import Gtk
 from gi.repository import GdkPixbuf
 
 from pigeonplanner.core import const
+from pigeonplanner.core import enums
 from pigeonplanner.core import common
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeon as corepigeon
@@ -30,6 +31,15 @@ from pigeonplanner.core import pigeon as corepigeon
 
 def get_sex_image(sex):
     return GdkPixbuf.Pixbuf.new_from_file(common.SEX_IMGS[sex])
+
+
+def get_sex_icon_name(sex):
+    if sex == enums.Sex.cock:
+        return "symbol_male"
+    elif sex == enums.Sex.hen:
+        return "symbol_female"
+    else:
+        return "symbol_young"
 
 
 def get_status_image(status):

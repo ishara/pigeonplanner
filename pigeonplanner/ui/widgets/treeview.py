@@ -297,7 +297,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
             self.LS_LOFT, pigeon.loft,
             self.LS_STRAIN, pigeon.strain,
             self.LS_STATUS, pigeon.status.status_string,
-            self.LS_SEXIMG, utils.get_sex_image(pigeon.sex),
+            self.LS_SEXIMG, utils.get_sex_icon_name(pigeon.sex),
             self.LS_HIDDENIMG, "" if pigeon.visible else "icon_hidden"
         )
         self.update_row(data, rowiter=rowiter, path=path)
@@ -402,7 +402,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
     # Internal methods
     def _build_treeview(self):
         liststore = Gtk.ListStore(int, str, str, str, str, str, str, str,
-                                  str, str, str, str, GdkPixbuf.Pixbuf, str)
+                                  str, str, str, str, str, str)
         columns = ["", _("Band no."), _("Year"), _("Country"), _("Name"), _("Colour"), _("Sex"),
                    _("Sire"), _("Dam"), _("Loft"), _("Strain"), _("Status")]
         for index, column in enumerate(columns):
@@ -416,7 +416,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
             if index == self.COL_SEX:
                 renderer = Gtk.CellRendererPixbuf()
                 tvcolumn.pack_start(renderer, expand=False)
-                tvcolumn.add_attribute(renderer, "pixbuf", self.LS_SEXIMG)
+                tvcolumn.add_attribute(renderer, "icon-name", self.LS_SEXIMG)
             textrenderer = Gtk.CellRendererText()
             tvcolumn.pack_start(textrenderer, expand=False)
             tvcolumn.add_attribute(textrenderer, "text", index)
@@ -440,7 +440,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
             pigeon.loft,
             pigeon.strain,
             pigeon.status.status_string,
-            utils.get_sex_image(pigeon.sex),
+            utils.get_sex_icon_name(pigeon.sex),
             "" if pigeon.visible else "icon_hidden"
         ]
 

@@ -116,7 +116,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         # Offspring
         for children in [pigeon.children_sire, pigeon.children_dam]:
             for child in children:
-                seximg = utils.get_sex_image(child.sex)
+                seximg = utils.get_sex_icon_name(child.sex)
                 self._liststoreoff.insert(0, [child, child.band, child.band_year, child.sex, seximg])
 
         # Direct siblings
@@ -127,7 +127,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             (Pigeon.sire == pigeon.sire) & 
             (Pigeon.dam == pigeon.dam))
         for p in direct_relatives:
-            seximg = utils.get_sex_image(p.sex)
+            seximg = utils.get_sex_icon_name(p.sex)
             self._liststoredirect.insert(0, [p, p.band, p.band_year, p.sex, seximg])
 
         # Half siblings
@@ -143,13 +143,13 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             # Both pigeon's sire must match
             (Pigeon.sire == pigeon.sire))
         for p in half_relatives_sire:
-            seximg = utils.get_sex_image(p.sex)
+            seximg = utils.get_sex_icon_name(p.sex)
             self._liststorehalf.insert(0, [p, p.band, p.band_year, p.sire.band, p.sex, seximg])
         half_relatives_dam = template.where(
             (Pigeon.dam != None) &
             (Pigeon.dam == pigeon.dam))
         for p in half_relatives_dam:
-            seximg = utils.get_sex_image(p.sex)
+            seximg = utils.get_sex_icon_name(p.sex)
             self._liststorehalf.insert(0, [p, p.band, p.band_year, p.dam.band, p.sex, seximg])
 
         self._liststoredirect.set_sort_column_id(1, Gtk.SortType.ASCENDING)
@@ -167,7 +167,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
     # Internal methods
     def _build_treeview(self, treeview, extended=False):
         pb_id = 4
-        store = [object, str, str, int, GdkPixbuf.Pixbuf]
+        store = [object, str, str, int, str]
         columns = [_("Band no."), _("Year")]
         if extended:
             pb_id = 5
@@ -187,7 +187,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
             treeview.append_column(tvcolumn)
         pbrenderer = Gtk.CellRendererPixbuf()
         pbrenderer.set_property("xalign", 0.0)
-        tvcolumn = Gtk.TreeViewColumn(_("Sex"), pbrenderer, pixbuf=pb_id)
+        tvcolumn = Gtk.TreeViewColumn(_("Sex"), pbrenderer, icon_name=pb_id)
         tvcolumn.set_sort_column_id(pb_id-1)
         tvcolumn.set_resizable(True)
         tvcolumn.set_cell_data_func(pbrenderer, self._cell_func)
