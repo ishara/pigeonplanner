@@ -98,36 +98,6 @@ class PedigreeWindow(builder.GtkBuilder):
         utils.draw_pedigree(self.widgets.grid, pigeon, self.on_pedigree_draw)
 
     def _build_ui(self):
-        actiongroup = Gtk.ActionGroup("PedigreeWindowActions")
-        actiongroup.add_actions((
-            ("Previous", Gtk.STOCK_GO_BACK, None, None,
-             _("Go to the previous pedigree"), self.on_previous_clicked),
-            ("Home", Gtk.STOCK_HOME, None, None,
-             _("Go to the first selected pedigree"), self.on_home_clicked),
-            ("Next", Gtk.STOCK_GO_FORWARD, None, None,
-             _("Go to the next pedigree"), self.on_next_clicked),
-            ("Save", Gtk.STOCK_SAVE, None, None,
-             _("Save this pedigree"), self.on_save_clicked),
-            ("Preview", Gtk.STOCK_PRINT_PREVIEW, None, None,
-             _("View this pedigree"), self.on_preview_clicked),
-            ("Print", Gtk.STOCK_PRINT, None, None,
-             _("Print this pedigree"), self.on_print_clicked),
-            ("Close", Gtk.STOCK_CLOSE, None, None,
-             _("Close this window"), self.on_close_dialog)
-            ))
-        uimanager = Gtk.UIManager()
-        uimanager.add_ui_from_string(self.ui)
-        uimanager.insert_action_group(actiongroup, 0)
-        accelgroup = uimanager.get_accel_group()
-        self.widgets.window.add_accel_group(accelgroup)
-
-        self.widgets.home_pedigree_button = uimanager.get_widget("/Toolbar/Home")
-        self.widgets.previous_pedigree_button = uimanager.get_widget("/Toolbar/Previous")
-        self.widgets.next_pedigree_button = uimanager.get_widget("/Toolbar/Next")
-
-        toolbar = uimanager.get_widget("/Toolbar")
-        self.widgets.main_box.pack_start(toolbar, False, False, 0)
-
         for child in self.widgets.grid.get_children():
             if isinstance(child, pedigreeboxes.PedigreeBox):
                 child.connect("redraw-pedigree", self.on_redraw_pedigree)
