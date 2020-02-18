@@ -44,23 +44,6 @@ from pigeonplanner.reports import get_pedigree
 
 
 class PedigreeWindow(builder.GtkBuilder):
-    ui = """
-<ui>
-   <toolbar name="Toolbar">
-      <toolitem action="Previous"/>
-      <toolitem action="Home"/>
-      <toolitem action="Next"/>
-      <separator/>
-      <toolitem action="Save"/>
-      <separator/>
-      <toolitem action="Preview"/>
-      <toolitem action="Print"/>
-      <separator/>
-      <toolitem action="Close"/>
-   </toolbar>
-</ui>
-"""
-
     def __init__(self, parent, pigeon):
         builder.GtkBuilder.__init__(self, "PedigreeWindow.ui")
 
