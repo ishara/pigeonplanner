@@ -2,78 +2,6 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkActionGroup" id="actiongroup">
-    <child>
-      <object class="GtkAction" id="First">
-        <property name="tooltip" translatable="yes">Shows the first picture</property>
-        <property name="stock_id">gtk-goto-first</property>
-        <signal name="activate" handler="on_first_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Prev">
-        <property name="tooltip" translatable="yes">Shows previous picture</property>
-        <property name="stock_id">gtk-go-back</property>
-        <signal name="activate" handler="on_prev_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Next">
-        <property name="tooltip" translatable="yes">Shows the next picture</property>
-        <property name="stock_id">gtk-go-forward</property>
-        <signal name="activate" handler="on_next_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Last">
-        <property name="tooltip" translatable="yes">Shows the last picture</property>
-        <property name="stock_id">gtk-goto-last</property>
-        <signal name="activate" handler="on_last_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="In">
-        <property name="tooltip" translatable="yes">Zooms the picture in</property>
-        <property name="stock_id">gtk-zoom-in</property>
-        <signal name="activate" handler="on_zoom_in_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Out">
-        <property name="tooltip" translatable="yes">Zooms the picture out</property>
-        <property name="stock_id">gtk-zoom-out</property>
-        <signal name="activate" handler="on_zoom_out_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Close">
-        <property name="tooltip" translatable="yes">Close this window</property>
-        <property name="stock_id">gtk-close</property>
-        <signal name="activate" handler="on_close_clicked" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkToggleAction" id="Screen">
-        <property name="tooltip" translatable="yes">View in fullscreen</property>
-        <property name="stock_id">gtk-fullscreen</property>
-        <signal name="toggled" handler="on_fullscreen_toggled" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkToggleAction" id="Slide">
-        <property name="tooltip" translatable="yes">View slideshow</property>
-        <property name="stock_id">gtk-media-play</property>
-        <signal name="toggled" handler="on_slideshow_toggled" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkToggleAction" id="Fit">
-        <property name="tooltip" translatable="yes">Zooms to fit the whole picture</property>
-        <property name="stock_id">gtk-zoom-fit</property>
-        <signal name="toggled" handler="on_zoom_fit_toggled" swapped="no"/>
-      </object>
-    </child>
-  </object>
   <object class="GtkListStore" id="liststore">
     <columns>
       <!-- column-name pigeon -->
@@ -146,7 +74,185 @@
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <placeholder/>
+              <object class="GtkToolbar">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkToolButton" id="first_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">go-first</property>
+                    <signal name="clicked" handler="on_first_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="prev_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">go-previous</property>
+                    <signal name="clicked" handler="on_prev_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="next_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">go-last</property>
+                    <signal name="clicked" handler="on_next_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="last_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">go-last</property>
+                    <signal name="clicked" handler="on_last_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparatorToolItem">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToggleToolButton" id="slide_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">media-playback-start</property>
+                    <signal name="toggled" handler="on_slideshow_toggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparatorToolItem">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToggleToolButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">view-fullscreen</property>
+                    <signal name="toggled" handler="on_fullscreen_toggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparatorToolItem">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToggleToolButton" id="zoom_fit_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">zoom-fit-best</property>
+                    <signal name="toggled" handler="on_zoom_fit_toggled" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="zoom_in_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">zoom-in</property>
+                    <signal name="clicked" handler="on_zoom_in_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton" id="zoom_out_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">zoom-out</property>
+                    <signal name="clicked" handler="on_zoom_out_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparatorToolItem">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="icon_name">window-close</property>
+                    <signal name="clicked" handler="on_close_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="homogeneous">True</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="labelImage">

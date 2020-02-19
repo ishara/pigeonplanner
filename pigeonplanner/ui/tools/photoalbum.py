@@ -40,27 +40,6 @@ MARGIN = 6
 
 
 class PhotoAlbum(builder.GtkBuilder):
-    ui = """
-<ui>
-   <toolbar name="Toolbar">
-      <toolitem action="First"/>
-      <toolitem action="Prev"/>
-      <toolitem action="Next"/>
-      <toolitem action="Last"/>
-      <separator/>
-      <toolitem action="Slide"/>
-      <separator/>
-      <toolitem action="Screen"/>
-      <separator/>
-      <toolitem action="Fit"/>
-      <toolitem action="In"/>
-      <toolitem action="Out"/>
-      <separator/>
-      <toolitem action="Close"/>
-   </toolbar>
-</ui>
-"""
-
     zoom_factors = {
         0.25: "25%",
         0.50: "50%",
@@ -77,7 +56,6 @@ class PhotoAlbum(builder.GtkBuilder):
 
         self.widgets.photoalbum.set_transient_for(parent)
 
-        self.build_toolbar()
         self.fill_iconview()
 
         self.pixbuf = None
@@ -97,27 +75,6 @@ class PhotoAlbum(builder.GtkBuilder):
         self.widgets.zoom_fit_button.set_active(True)
 
         self.widgets.photoalbum.show()
-
-    def build_toolbar(self):
-        uimanager = Gtk.UIManager()
-        uimanager.add_ui_from_string(self.ui)
-        uimanager.insert_action_group(self.widgets.actiongroup, 0)
-        accelgroup = uimanager.get_accel_group()
-        self.widgets.photoalbum.add_accel_group(accelgroup)
-
-        self.widgets.zoom_in_button = uimanager.get_widget("/Toolbar/In")
-        self.widgets.zoom_out_button = uimanager.get_widget("/Toolbar/Out")
-        self.widgets.zoom_fit_button = uimanager.get_widget("/Toolbar/Fit")
-        self.widgets.first_button = uimanager.get_widget("/Toolbar/First")
-        self.widgets.prev_button = uimanager.get_widget("/Toolbar/Prev")
-        self.widgets.next_button = uimanager.get_widget("/Toolbar/Next")
-        self.widgets.last_button = uimanager.get_widget("/Toolbar/Last")
-        self.widgets.slide_button = uimanager.get_widget("/Toolbar/Slide")
-
-        toolbar = uimanager.get_widget("/Toolbar")
-        toolbar.set_style(Gtk.ToolbarStyle.ICONS)
-        self.widgets.vbox.pack_start(toolbar, False, False, 0)
-        self.widgets.vbox.reorder_child(toolbar, 0)
 
     def fill_iconview(self):
         for image in Image.select():
