@@ -608,23 +608,6 @@ class SplittedView(BaseView):
 
 
 class ResultWindow(builder.GtkBuilder):
-    ui = """
-<ui>
-   <toolbar name="Toolbar">
-      <toolitem action="Export"/>
-      <toolitem action="Save"/>
-      <toolitem action="Mail"/>
-      <separator/>
-      <toolitem action="Preview"/>
-      <toolitem action="Print"/>
-      <separator/>
-      <toolitem action="Filter"/>
-      <separator/>
-      <toolitem action="Close"/>
-   </toolbar>
-</ui>
-"""
-
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "ResultWindow.ui")
 
@@ -633,8 +616,6 @@ class ResultWindow(builder.GtkBuilder):
         self.csvname = filename + ".csv"
         self._filter_races = utils.TreeviewFilter()
         self._filter_results = utils.TreeviewFilter()
-
-        self._build_toolbar()
 
         view = get_view_for_current_config()
         self.widgets.resultview = view(self.widgets.hbox)
@@ -752,13 +733,6 @@ class ResultWindow(builder.GtkBuilder):
     def on_entryband_search_clicked(self, _widget):
         return None, None, None
 
-    def on_mail_clicked(self, widget):
-        # TODO: disabled for now. Remove?
-        # self._do_operation(const.MAIL)
-        # results = os.path.join(const.TEMPDIR, self.pdfname)
-        # maildialog.MailDialog(self.resultwindow, results)
-        pass
-
     def on_export_clicked(self, _widget):
         chooser = ExportChooser(self.widgets.resultwindow, self.csvname, ("CSV", "*.csv"))
         response = chooser.run()
@@ -791,16 +765,6 @@ class ResultWindow(builder.GtkBuilder):
         self._do_operation(PRINT_ACTION_DIALOG)
 
     # Private methods
-    def _build_toolbar(self):
-        uimanager = Gtk.UIManager()
-        uimanager.add_ui_from_string(self.ui)
-        uimanager.insert_action_group(self.widgets.actiongroup, 0)
-        accelgroup = uimanager.get_accel_group()
-        self.widgets.resultwindow.add_accel_group(accelgroup)
-
-        toolbar = uimanager.get_widget("/Toolbar")
-        self.widgets.vbox.pack_start(toolbar, False, False, 0)
-
     def _save_filter_results(self):
         self.widgets.resultview.set_filter(self._filter_races, self._filter_results)
         self.widgets.resultview.update_filter()
