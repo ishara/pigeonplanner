@@ -299,7 +299,7 @@ class Map(OsmGpsMap.Map):
         self.add_home_marker(person)
 
     def add_home_marker(self, person):
-        if person is None and not person.has_valid_coordinates():
+        if person is None or not person.has_valid_coordinates():
             return
 
         img = get_marker_pixbuf("marker_home")
