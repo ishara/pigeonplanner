@@ -1453,9 +1453,9 @@ class CairoDoc(BaseDoc, TextDoc, DrawDoc):
         elif fe[-1] != self.EXT:
             # NOTE: the warning will be bogus
             # if the EXT isn't properly overridden by derived class
-            log.warning(_(
+            log.warning(
 """Mismatch between selected extension %(ext)s and actual format.
- Writing to %(filename)s in format %(impliedext)s.""") %
+ Writing to %(filename)s in format %(impliedext)s.""" %
                 {'ext' : fe[-1],
                  'filename' : filename,
                  'impliedext' : self.EXT} )
