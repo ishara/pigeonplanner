@@ -118,8 +118,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
       </menu>
       <menu action="ToolsMenu">
          <menuitem action="Velocity"/>
-         <menuitem action="Distance"/>
-         <menuitem action="Racepoints"/>
+         <menuitem action="Racepointsmap"/>
          <menuitem action="Album"/>
          <menuitem action="Addresses"/>
          <menuitem action="Data"/>
@@ -507,13 +506,9 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         logger.debug(common.get_function_name())
         tools.VelocityCalculator(self)
 
-    def menudistance_activate(self, _widget):
+    def menuracepointsmap_activate(self, _widget):
         logger.debug(common.get_function_name())
-        tools.DistanceCalculator(self)
-
-    def menurace_activate(self, _widget):
-        logger.debug(common.get_function_name())
-        tools.RacepointManager(self)
+        tools.RacepointsmapWindow(self)
 
     def menuaddresses_activate(self, _widget):
         logger.debug(common.get_function_name())

@@ -12,4 +12,5 @@ pacman --noconfirm -S --needed \
     mingw-w64-x86_64-python3-gobject \
     mingw-w64-x86_64-python3-cairo \
     mingw-w64-x86_64-python3-pip \
-    mingw-w64-x86_64-python3-setuptools
+    mingw-w64-x86_64-python3-setuptools \
+    mingw-w64-x86_64-osm-gps-map

@@ -36,6 +36,15 @@ except ImportError:
     print("The GTK+ runtime and GObject introspection bindings are required to run this program.")
     sys.exit(0)
 
+try:
+    gi.require_version("OsmGpsMap", "1.0")
+except ValueError:
+    dialog = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR,
+                               Gtk.ButtonsType.CLOSE, "The OsmGpsMap typelib file can not be found.")
+    dialog.format_secondary_text("Install gir1.2-osmgpsmap-1.0 or equivalent for your operating system.")
+    dialog.run()
+    sys.exit(0)
+
 from pigeonplanner.core import const
 
 logger = logging.getLogger()

@@ -60,6 +60,25 @@ class DataModelMixin:
         return [item[column.name] for item in data]
 
 
+class CoordinatesMixin:
+    @property
+    def latitude_float(self):
+        try:
+            return float(self.latitude)
+        except ValueError:
+            return None
+
+    @property
+    def longitude_float(self):
+        try:
+            return float(self.longitude)
+        except ValueError:
+            return None
+
+    def has_valid_coordinates(self):
+        return self.latitude_float is not None and self.longitude_float is not None
+
+
 class BaseModel(Model):
     defaults_fields_excludes = ["id"]
 
@@ -340,7 +359,7 @@ PigeonMedication = Medication.pigeons.get_through_model()
 ###################
 # Data
 ###################
-class Person(BaseModel):
+class Person(BaseModel, CoordinatesMixin):
     name = CharField()
     me = BooleanField()
     street = CharField(default="")
@@ -393,7 +412,7 @@ class Loft(BaseModel, DataModelMixin):
         return cls.loft
 
 
-class Racepoint(BaseModel, DataModelMixin):
+class Racepoint(BaseModel, DataModelMixin, CoordinatesMixin):
     racepoint = CharField(unique=True, constraints=[Check("racepoint != ''")])
     distance = CharField(default="")
     unit = IntegerField(default=0)
@@ -406,6 +425,15 @@ class Racepoint(BaseModel, DataModelMixin):
     @classmethod
     def get_item_column(cls):
         return cls.racepoint
+
+    # TODO: change xco/yco fields to latitude/longitude in a future schema migration
+    @property
+    def latitude(self):
+        return self.xco
+
+    @property
+    def longitude(self):
+        return self.yco
 
 
 class Sector(BaseModel, DataModelMixin):

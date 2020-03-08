@@ -61,19 +61,11 @@
       </object>
     </child>
     <child>
-      <object class="GtkAction" id="Racepoints">
-        <property name="label" translatable="yes">Racepoint manager</property>
-        <property name="short_label" translatable="yes">Racepoint manager</property>
+      <object class="GtkAction" id="Racepointsmap">
+        <property name="label" translatable="yes">Racepoints map</property>
+        <property name="short_label" translatable="yes">Racepoints map</property>
         <property name="tooltip" translatable="yes">Manage the racepoints and distances</property>
-        <signal name="activate" handler="menurace_activate" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="Distance">
-        <property name="label" translatable="yes">Distance calculator</property>
-        <property name="short_label" translatable="yes">Distance calculator</property>
-        <property name="tooltip" translatable="yes">Calculate the distance between locations</property>
-        <signal name="activate" handler="menudistance_activate" swapped="no"/>
+        <signal name="activate" handler="menuracepointsmap_activate" swapped="no"/>
       </object>
     </child>
     <child>
