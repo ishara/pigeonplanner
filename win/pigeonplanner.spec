@@ -50,7 +50,7 @@ a = Analysis(
         "packaging.specifiers",
         "packaging.requirements"
     ],
-    hookspath=[],
+    hookspath=["."],
     runtime_hooks=["pyinstaller_add_lib_dir.py"],
     excludes=["lib2to3", "tcl", "tk", "tkinter"],
     win_no_prefer_redirects=False,
