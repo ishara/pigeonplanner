@@ -105,10 +105,12 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
+                <property name="spacing">4</property>
                 <child>
                   <object class="GtkBox" id="hbox2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="spacing">8</property>
                     <child>
                       <object class="GtkFrame" id="frame3">
                         <property name="visible">True</property>
@@ -224,6 +226,7 @@
                   <object class="GtkBox" id="hbox3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="spacing">8</property>
                     <child>
                       <object class="GtkFrame" id="frame7">
                         <property name="visible">True</property>
