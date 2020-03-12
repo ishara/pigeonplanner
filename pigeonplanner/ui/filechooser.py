@@ -23,7 +23,7 @@ from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
 
-from pigeonplanner import mime
+from pigeonplanner.ui import mime
 from pigeonplanner.core import const
 
 
@@ -35,21 +35,18 @@ LAST_FOLDER = None
 class _FileChooser:#Gtk.FileChooser):  # TODO GTK3: why does this fail?
     def _update_preview_cb(self, filechooser):
         filename = filechooser.get_preview_filename()
+        if filename is None:
+            return
         try:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
             self.preview_image.set_from_pixbuf(pixbuf)
-        except:
-            mimetype = mime.get_type(filename)
-            try:
-                image = mime.get_pixbuf(mimetype)
-                self.preview_image.set_from_pixbuf(image)
-            except mime.MimeIconError:
-                if filename is None:
-                    return
-                stock = Gtk.STOCK_FILE
-                if os.path.isdir(filename):
-                    stock = Gtk.STOCK_DIRECTORY
-                self.preview_image.set_from_stock(stock, Gtk.IconSize.DIALOG)
+        except GLib.Error:
+            if os.path.isdir(filename):
+                self.preview_image.set_from_icon_name("folder", Gtk.IconSize.DIALOG)
+            else:
+                mimetype = mime.get_type(filename)
+                icon = mime.get_icon(mimetype)
+                self.preview_image.set_from_gicon(icon, Gtk.IconSize.DIALOG)
         filechooser.set_preview_widget_active(True)
 
     def _create_preview_widget(self):

@@ -20,9 +20,9 @@ import os
 
 from gi.repository import Gtk
 
-from pigeonplanner import mime
 from pigeonplanner import messages
 from pigeonplanner import thumbnail
+from pigeonplanner.ui import mime
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import filechooser
@@ -61,12 +61,8 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         if mime.is_image(media.type):
             self.widgets.image.set_from_pixbuf(thumbnail.get_image(media.path))
         else:
-            try:
-                image = mime.get_pixbuf(media.type)
-                self.widgets.image.set_from_pixbuf(image)
-            except mime.MimeIconError:
-                self.widgets.image.set_from_stock(Gtk.STOCK_FILE,
-                                                  Gtk.IconSize.DIALOG)
+            icon = mime.get_icon(media.type)
+            self.widgets.image.set_from_gicon(icon, Gtk.IconSize.DIALOG)
 
     def on_buttonopen_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
