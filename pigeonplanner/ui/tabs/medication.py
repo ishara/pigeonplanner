@@ -78,7 +78,6 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
 
         self.pigeon = None
         self._mode = None
-        self._expanded = False
         self.widgets.selection = self.widgets.treeview.get_selection()
         self.widgets.selection.connect("changed", self.on_selection_changed)
         self.widgets.dialog.set_transient_for(self._parent)
@@ -187,13 +186,6 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
 
     def on_buttoncancel_clicked(self, _widget):
         self.widgets.dialog.hide()
-
-    def on_buttonexpand_clicked(self, _widget):
-        self._expanded = not self._expanded
-        utils.set_multiple_visible([self.widgets.seperator,
-                                    self.widgets.vboxexpand], self._expanded)
-        img = Gtk.STOCK_GO_BACK if self._expanded else Gtk.STOCK_GO_FORWARD
-        self.widgets.imageexpand.set_from_stock(img, Gtk.IconSize.BUTTON)
 
     def on_checkloft_toggled(self, widget):
         if widget.get_active():

@@ -475,7 +475,8 @@
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
-    <property name="default_width">360</property>
+    <property name="default_width">800</property>
+    <property name="default_height">400</property>
     <property name="destroy_with_parent">True</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
@@ -488,7 +489,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
+        <property name="spacing">4</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox" id="dialog-action_area4">
             <property name="visible">True</property>
@@ -554,11 +555,12 @@
           <object class="GtkBox" id="hbox12">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="spacing">4</property>
+            <property name="spacing">12</property>
             <child>
               <object class="GtkGrid" id="grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="valign">start</property>
                 <property name="row_spacing">8</property>
                 <property name="column_spacing">10</property>
                 <property name="row_homogeneous">True</property>
@@ -631,50 +633,6 @@
                   <packing>
                     <property name="left_attach">1</property>
                     <property name="top_attach">5</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="hbox22">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkCheckButton" id="checkvaccination2">
-                        <property name="label" translatable="yes">Vaccination</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="draw_indicator">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="buttonexpand">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <signal name="clicked" handler="on_buttonexpand_clicked" swapped="no"/>
-                        <child>
-                          <object class="GtkImage" id="imageexpand">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="stock">gtk-go-forward</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">6</property>
                   </packing>
                 </child>
                 <child>
@@ -762,6 +720,19 @@
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkCheckButton" id="checkvaccination2">
+                    <property name="label" translatable="yes">Vaccination</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="draw_indicator">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">6</property>
+                  </packing>
+                </child>
+                <child>
                   <placeholder/>
                 </child>
               </object>
@@ -773,6 +744,7 @@
             </child>
             <child>
               <object class="GtkSeparator" id="seperator">
+                <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
               </object>
@@ -784,6 +756,7 @@
             </child>
             <child>
               <object class="GtkBox" id="vboxexpand">
+                <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">4</property>
