@@ -45,7 +45,6 @@ class LogDialog(Gtk.Dialog):
         Gtk.Dialog.__init__(self)
         self.set_title(_("Logfile Viewer"))
         self.set_size_request(700, 500)
-        self.set_icon(self.render_icon(Gtk.STOCK_FILE, Gtk.IconSize.MENU))
 
         self.file = None
         self.back_buffer = None
