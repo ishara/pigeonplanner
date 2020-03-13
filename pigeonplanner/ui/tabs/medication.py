@@ -23,7 +23,7 @@ from pigeonplanner.ui import builder
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import dateentry
 from pigeonplanner.ui.widgets import comboboxes
-from pigeonplanner.ui.messagedialog import ErrorDialog
+from pigeonplanner.ui.messagedialog import ErrorDialog, QuestionDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import common
 from pigeonplanner.database.models import Pigeon, Medication, Loft
@@ -38,37 +38,6 @@ from pigeonplanner.database.models import Pigeon, Medication, Loft
  COL_SEL_PIGEON,
  COL_SEL_BAND,
  COL_SEL_YEAR) = range(5)
-
-
-class MedicationRemoveDialog(Gtk.Dialog):
-    def __init__(self, parent, multiple=False):
-        Gtk.Dialog.__init__(self, "", parent, Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                            (Gtk.STOCK_NO, Gtk.ResponseType.NO,
-                             Gtk.STOCK_YES, Gtk.ResponseType.YES))
-
-        self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT)
-        self.set_resizable(False)
-        self.set_skip_taskbar_hint(True)
-
-        text = _("Removing the selected medication entry")
-        self.check = Gtk.CheckButton(_("Remove this entry for all pigeons?"))
-        label1 = Gtk.Label()
-        label1.set_markup("<b>%s</b>" % text)
-        label1.set_alignment(0.0, 0.5)
-        label2 = Gtk.Label(_("Are you sure?"))
-        label2.set_alignment(0.0, 0.5)
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        vbox.pack_start(label1, False, False, 8)
-        vbox.pack_start(label2, False, False, 8)
-        if multiple:
-            vbox.pack_start(self.check, False, False, 12)
-        image = Gtk.Image()
-        image.set_from_stock(Gtk.STOCK_DIALOG_WARNING, Gtk.IconSize.DIALOG)
-        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        hbox.pack_start(image, False, False, 12)
-        hbox.pack_start(vbox, False, False, 12)
-        self.vbox.pack_start(hbox, False, False, 0)
-        self.vbox.show_all()
 
 
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
@@ -136,12 +105,16 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         path = self.widgets.liststore.get_path(rowiter)
         med = model[rowiter][COL_OBJECT]
 
-        has_multiple_pigeons = med.pigeons.count() > 1
-        dialog = MedicationRemoveDialog(self._parent, has_multiple_pigeons)
-        dialog.check.set_active(has_multiple_pigeons)
-        resp = dialog.run()
-        if resp == Gtk.ResponseType.YES:
-            if dialog.check.get_active():
+        primary_text = _("Removing the selected medication entry")
+        secondary_text = _("Are you sure?")
+        check_multiple = Gtk.CheckButton(_("Remove this entry for all pigeons?"))
+        dialog = QuestionDialog((primary_text, secondary_text, ""), self._parent)
+        if med.pigeons.count() > 1:
+            message_area = dialog.get_message_area()
+            message_area.pack_start(check_multiple, False, False, 0)
+            check_multiple.show()
+        if dialog.run():
+            if check_multiple.get_active():
                 med.pigeons.clear()
                 med.delete_instance()
             else:
@@ -151,7 +124,6 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
                     med.delete_instance()
             self.widgets.liststore.remove(rowiter)
             self.widgets.selection.select_path(path)
-        dialog.destroy()
 
     def on_buttonsave_clicked(self, _widget):
         try:
