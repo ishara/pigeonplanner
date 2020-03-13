@@ -4,6 +4,7 @@ import os
 import sys
 import glob
 import shutil
+import fnmatch
 sys.path.insert(0, os.path.abspath(".."))
 
 from pigeonplanner.core import const
@@ -126,7 +127,32 @@ for lang in installed_languages:
     if lang not in supported_languages:
         shutil.rmtree("share/locale/" + lang)
 
-# TODO: clean up some icons/cursors we don't use
+# Remove icons we don't use.
+# TODO: There are still a bunch of unused icons left. Idea: scan Python and Glade files to find
+#       actually used icons and only keep those.
+icon_directories = [
+    "share/icons/hicolor",
+    "share/icons/Adwaita/256x256",
+    "share/icons/Adwaita/512x512",
+    "share/icons/Adwaita/*/actions",
+    "share/icons/Adwaita/*/apps",
+    "share/icons/Adwaita/*/categories",
+    "share/icons/Adwaita/*/devices",
+    "share/icons/Adwaita/*/emblems",
+    "share/icons/Adwaita/*/emotes",
+    # "share/icons/Adwaita/*/legacy",
+    # "share/icons/Adwaita/*/mimetypes",  # TODO: ?
+    "share/icons/Adwaita/*/places",
+    "share/icons/Adwaita/*/status",
+    "share/icons/Adwaita/*/ui",
+]
+icons_to_keep = []
+for directory in icon_directories:
+    icons = glob.glob(os.path.join(directory, "**", "*.png"), recursive=True)
+    for icon in icons:
+        if any(fnmatch.fnmatch(icon, pattern) for pattern in icons_to_keep):
+            continue
+        os.remove(icon)
 
 # This file is executed by PyInstaller. Change the working directory back to
 # where we started just to be sure PyInstaller continues correctly.
