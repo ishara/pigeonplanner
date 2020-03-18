@@ -96,6 +96,10 @@ def get_own_address():
         # user's email address for the report dialog. When the error happens
         # during database creation or migration, there's no Person table yet.
         person = None
+    except Exception:
+        # When an unhandled exception occurs before a database is opened, this
+        # function is called as well. PeeWee just throws a generic Exception.
+        person = None
     return person
 
 
