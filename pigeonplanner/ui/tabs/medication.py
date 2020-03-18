@@ -66,8 +66,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             return
         if event.button == 3:
             entries = [
-                (Gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
-                (Gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None, None)]
+                (self.on_buttonedit_clicked, None, _("Edit")),
+                (self.on_buttonremove_clicked, None, _("Remove"))]
 
             utils.popup_menu(event, entries)
 

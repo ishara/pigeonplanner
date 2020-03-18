@@ -46,11 +46,11 @@ class LatLongEntry(displayentry.DisplayEntry):
         return value
 
     def _warn(self):
-        self.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, Gtk.STOCK_STOP)
+        self.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "process-stop")
         self.set_icon_tooltip_text(Gtk.EntryIconPosition.PRIMARY, self._tooltip)
 
     def _unwarn(self):
-        self.set_icon_from_stock(Gtk.EntryIconPosition.PRIMARY, None)
+        self.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, None)
 
     def __validate(self, value, as_float=False):
         if self.can_empty and value == "":

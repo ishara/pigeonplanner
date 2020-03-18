@@ -105,7 +105,7 @@ class LogDialog(Gtk.Dialog):
         self.combo_logs.set_active(0)
 
         # action area
-        button_close = Gtk.Button.new_from_stock(Gtk.STOCK_CLOSE)
+        button_close = Gtk.Button.new_with_label(_("Close"))
         button_close.connect("clicked", self.close)
         self.action_area.pack_start(button_close, False, False, 0)
 

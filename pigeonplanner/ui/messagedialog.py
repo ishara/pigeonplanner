@@ -38,7 +38,7 @@ class _MessageDialog(Gtk.MessageDialog):
 class ErrorDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
         _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.ERROR,
-                                (Gtk.STOCK_OK, Gtk.ResponseType.OK), extra)
+                                (_("OK"), Gtk.ResponseType.OK), extra)
         self.run()
         self.destroy()
 
@@ -46,7 +46,7 @@ class ErrorDialog(_MessageDialog):
 class InfoDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
         _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.INFO,
-                                (Gtk.STOCK_OK, Gtk.ResponseType.OK), extra)
+                                (_("OK"), Gtk.ResponseType.OK), extra)
         self.run()
         self.destroy()
 
@@ -54,8 +54,8 @@ class InfoDialog(_MessageDialog):
 class WarningDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
         _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.WARNING,
-                                (Gtk.STOCK_NO, Gtk.ResponseType.NO,
-                                 Gtk.STOCK_YES, Gtk.ResponseType.YES), extra)
+                                (_("No"), Gtk.ResponseType.NO,
+                                 _("Yes"), Gtk.ResponseType.YES), extra)
 
     def run(self):
         response = _MessageDialog.run(self)
@@ -66,8 +66,8 @@ class WarningDialog(_MessageDialog):
 class QuestionDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
         _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.QUESTION,
-                                (Gtk.STOCK_NO, Gtk.ResponseType.NO,
-                                 Gtk.STOCK_YES, Gtk.ResponseType.YES), extra)
+                                (_("No"), Gtk.ResponseType.NO,
+                                 _("Yes"), Gtk.ResponseType.YES), extra)
 
     def run(self):
         response = _MessageDialog.run(self)

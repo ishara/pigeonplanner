@@ -22,7 +22,6 @@ Options dialog class
 
 import os
 
-from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GObject
 
@@ -52,17 +51,16 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         # Add the categories
         # [(Category, image, [children]), ]
         categories = [
-            (_("General"), Gtk.STOCK_PROPERTIES, []),
-            (_("Appearance"), Gtk.STOCK_PAGE_SETUP, []),
-            (_("Columns"), "columns", []),
-            (_("Printing"), Gtk.STOCK_PRINT,
+            (_("General"), "document-properties", []),
+            (_("Appearance"), "document-page-setup", []),
+            (_("Columns"), "icon_columns", []),
+            (_("Printing"), "document-print",
                 [_("Pedigree"), _("Pigeons"), _("Results")]),
-            (_("Advanced"), Gtk.STOCK_PREFERENCES, []),
+            (_("Advanced"), "preferences-system", []),
         ]
         i = 0
-        for par, img, children in categories:
-            icon = self.widgets.treeview.render_icon(img, Gtk.IconSize.LARGE_TOOLBAR)
-            p_iter = self.widgets.treestore.append(None, [i, icon, par])
+        for par, icon_name, children in categories:
+            p_iter = self.widgets.treestore.append(None, [i, icon_name, par])
             for child in children:
                 i += 1
                 self.widgets.treestore.append(p_iter, [i, None, child])

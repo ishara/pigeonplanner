@@ -41,7 +41,6 @@ class MailDialog(builder.GtkBuilder):
 
         self.widgets.maildialog.set_transient_for(parent)
 
-        self.widgets.send.set_use_stock(True)
         self.attachment = attachment
         self.kind = kind
         self.sending = False

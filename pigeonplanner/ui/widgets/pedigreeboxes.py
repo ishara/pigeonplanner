@@ -162,12 +162,12 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
             if event.button == Gdk.BUTTON_PRIMARY:
                 self._edit_pigeon_details(None)
             elif event.button == Gdk.BUTTON_SECONDARY:
-                entries = [(Gtk.STOCK_EDIT, self._edit_pigeon_details, None, None)]
+                entries = [(self._edit_pigeon_details, None, _("Edit"))]
                 if self.pigeon is not None:
-                    entries.insert(0, (Gtk.STOCK_INFO, self._show_pigeon_details, None, None))
+                    entries.insert(0, (self._show_pigeon_details, None, _("Information")))
                     if not self.pigeon.visible:
-                        entries.append((Gtk.STOCK_CLEAR, self._clear_box, None, None))
-                        entries.append((Gtk.STOCK_REMOVE, self._remove_pigeon, None, None))
+                        entries.append((self._clear_box, None, _("Clear")))
+                        entries.append((self._remove_pigeon, None, _("Remove")))
                 utils.popup_menu(event, entries)
         else:
             if self.pigeon is None:
@@ -176,8 +176,8 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
                 self._show_pigeon_details(None)
             elif event.button == Gdk.BUTTON_SECONDARY:
                 entries = [
-                    (Gtk.STOCK_INFO, self._show_pigeon_details, None, None),
-                    (Gtk.STOCK_JUMP_TO, self._select_pigeon, None, None),
+                    (self._show_pigeon_details, None, _("Information")),
+                    (self._select_pigeon, None, _("Go to")),
                 ]
                 utils.popup_menu(event, entries)
         return True

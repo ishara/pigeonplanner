@@ -42,7 +42,7 @@ class DBFileChooserDialog(filechooser._FileChooserDialog):
     def __init__(self, parent):
         super(DBFileChooserDialog, self).__init__(parent, preview=False)
         self.set_title(_("Select a database file..."))
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
+        self.add_button(_("OK"), Gtk.ResponseType.OK)
         self.set_extra_widget(self._create_extra_widget())
         self.add_custom_filter((_("Pigeon Planner database"), "pigeonplanner*.db"))
 
@@ -134,8 +134,8 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
 
         if event.button == 3:
             entries = [
-                (Gtk.STOCK_EDIT, self.on_edit_clicked, None, None),
-                (Gtk.STOCK_REMOVE, self.on_remove_clicked, None, None)]
+                (self.on_edit_clicked, None, _("Edit")),
+                (self.on_remove_clicked, None, _("Remove"))]
             utils.popup_menu(event, entries)
 
     def on_treeview_row_activated(self, _widget, _path, _view_column):
@@ -356,9 +356,9 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
     def _dbobj_liststore_info(self, dbobj):
         icon = None
         if not dbobj.exists or not dbobj.writable:
-            icon = Gtk.STOCK_DIALOG_ERROR
+            icon = "dialog-error"
         elif dbobj.path == session.dbfile:
-            icon = Gtk.STOCK_YES
+            icon = "document-open"
 
         info = self._format_info(dbobj.name, dbobj.description, dbobj.path)
         modified = "%s\n%s" % tuple(dbobj.last_access.split())

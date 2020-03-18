@@ -107,7 +107,7 @@ class _FileChooserDialog(Gtk.FileChooserDialog, _FileChooser):
     def __init__(self, parent=None, folder=const.HOMEDIR,
                  action=Gtk.FileChooserAction.OPEN, preview=True):
         super(_FileChooserDialog, self).__init__(parent=parent, action=action)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        self.add_button(_("Cancel"), Gtk.ResponseType.CANCEL)
         self.set_preview(preview)
         if LAST_FOLDER is not None:
             folder = LAST_FOLDER
@@ -131,7 +131,7 @@ class ImageChooser(_FileChooserDialog):
         super(ImageChooser, self).__init__(parent, GLib.get_user_special_dir(GLib.USER_DIRECTORY_PICTURES))
         self.set_title(_("Select an image..."))
         self.add_image_filter()
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
+        self.add_button(_("OK"), Gtk.ResponseType.OK)
 
 
 class MediaChooser(_FileChooserDialog):
@@ -142,7 +142,7 @@ class MediaChooser(_FileChooserDialog):
         super(MediaChooser, self).__init__(parent)
         self.connect("selection-changed", self._selection_changed_cb)
         self.set_title(_("Select a file..."))
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
+        self.add_button(_("OK"), Gtk.ResponseType.OK)
         self.set_extra_widget(self._create_extra_widget())
 
     def _selection_changed_cb(self, filechooser):
@@ -189,7 +189,7 @@ class PdfSaver(_FileChooserDialog):
                                        action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
         self.add_pdf_filter()
-        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
+        self.add_button(_("Save"), Gtk.ResponseType.OK)
         self.set_current_name(pdf_name)
 
 
@@ -202,7 +202,7 @@ class BackupSaver(_FileChooserDialog):
                                           action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
         self.add_backup_filter()
-        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
+        self.add_button(_("Save"), Gtk.ResponseType.OK)
         self.set_current_name(backup_name)
 
 
@@ -215,7 +215,7 @@ class ExportChooser(_FileChooserDialog):
                                             action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
         self.add_custom_filter(filter_)
-        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
+        self.add_button(_("Save"), Gtk.ResponseType.OK)
         self.set_current_name(filename)
 
 
@@ -227,7 +227,7 @@ class PathChooserDialog(_FileChooserDialog):
         super(PathChooserDialog, self).__init__(parent, preview=False, folder=folder,
                                                 action=Gtk.FileChooserAction.SELECT_FOLDER)
         self.set_title(_("Select a folder..."))
-        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
+        self.add_button(_("Save"), Gtk.ResponseType.OK)
 
 
 class DatabasePathChooserDialog(_FileChooserDialog):
@@ -238,9 +238,9 @@ class DatabasePathChooserDialog(_FileChooserDialog):
         super(DatabasePathChooserDialog, self).__init__(parent, preview=False, folder=folder,
                                                         action=Gtk.FileChooserAction.SELECT_FOLDER)
         self.set_title(_("Select a folder..."))
-        self.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
+        self.add_button(_("Save"), Gtk.ResponseType.OK)
 
-        image_info = Gtk.Image.new_from_stock(Gtk.STOCK_INFO, Gtk.IconSize.BUTTON)
+        image_info = Gtk.Image.new_from_icon_name("dialog-information", Gtk.IconSize.BUTTON)
         label_info = Gtk.Label()
         label_info.set_markup("%s <b>%s</b>" % (_("The default location is:"), escape(const.PREFDIR)))
         button_info = Gtk.Button(_("Select"))

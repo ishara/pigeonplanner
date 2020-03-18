@@ -50,24 +50,6 @@ def get_status_icon_name(status):
     return status_icon_mapping[status]
 
 
-def create_stock_button(icons):
-    """Register stock buttons from custom images.
-
-    :param icons: A list of tuples containing filename, name and description
-    """
-    factory = Gtk.IconFactory()
-    factory.add_default()
-    for img, name, description in icons:
-        pb = GdkPixbuf.Pixbuf.new_from_file(os.path.join(const.IMAGEDIR, img))
-        iconset = Gtk.IconSet(pb)
-        factory.add(name, iconset)
-        item = Gtk.StockItem()
-        item.stock_id = name
-        item.label = description
-        item.translation_domain = "pigeonplanner"
-        Gtk.stock_add([item])  # TODO GTK3: deprecated. Also might be stock_add_static instead.
-
-
 def set_multiple_sensitive(widgets, value=None):
     """Set multiple widgets sensitive at once
 
@@ -103,8 +85,8 @@ def popup_menu(event, entries):
     :param entries: List of wanted menuentries
     """
     menu = Gtk.Menu()
-    for stock_id, callback, data, label in entries:
-        item = Gtk.ImageMenuItem.new_from_stock(stock_id, None)
+    for callback, data, label in entries:
+        item = Gtk.MenuItem.new()
         if data:
             item.connect("activate", callback, *data)
         else:

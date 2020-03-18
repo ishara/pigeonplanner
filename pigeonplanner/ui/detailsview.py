@@ -59,15 +59,15 @@ class DetailsDialog(Gtk.Dialog):
         if mode in (enums.Action.edit, enums.Action.add):
             self.details = DetailsViewEdit(parent=self, pigeon=pigeon)
             self.details.start_edit(mode)
-            self.add_buttons(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                             Gtk.STOCK_SAVE, RESPONSE_SAVE)
+            self.add_buttons(_("Cancel"), Gtk.ResponseType.CANCEL,
+                             _("Save"), RESPONSE_SAVE)
             self.set_default_response(RESPONSE_SAVE)
             self.set_resizable(True)
             self.resize(620, 1)
         else:
             self.details = DetailsView(parent=self)
             self.details.set_details(pigeon)
-            self.add_button(Gtk.STOCK_CLOSE, Gtk.ResponseType.CLOSE)
+            self.add_button(_("Close"), Gtk.ResponseType.CLOSE)
             self.set_default_response(Gtk.ResponseType.CLOSE)
             self.set_resizable(False)
         self.vbox.pack_start(self.details.get_root_widget(), False, False, 0)

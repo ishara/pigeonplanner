@@ -47,7 +47,7 @@ class RemovePigeonDialog(Gtk.MessageDialog):
         secondary_2 = _("Hide the pigeon to keep it in the pedigrees.")
         self.format_secondary_text("%s\n\n%s" % (secondary_1, secondary_2))
 
-        button_cancel = Gtk.Button(stock=Gtk.STOCK_CANCEL)
+        button_cancel = Gtk.Button(label=_("Cancel"))
         button_cancel.connect("clicked", self.on_button_cancel_clicked)
         button_remove = Gtk.Button(label=_("Remove with data"))
         button_remove.connect("clicked", self.on_button_remove_clicked)
@@ -178,12 +178,12 @@ class PigeonListDialog(Gtk.Dialog):
     def __init__(self, parent):
         Gtk.Dialog.__init__(self, _("Search a pigeon"), parent,
                             Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
+                            (_("Cancel"), Gtk.ResponseType.CANCEL))
         self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT)
         self.set_modal(True)
         self.set_skip_taskbar_hint(True)
         self.resize(400, 400)
-        self.buttonadd = self.add_button(Gtk.STOCK_ADD, Gtk.ResponseType.APPLY)
+        self.buttonadd = self.add_button(_("Add"), Gtk.ResponseType.APPLY)
         self.buttonadd.set_sensitive(False)
 
         self._liststore = Gtk.ListStore(object, str, str, str)

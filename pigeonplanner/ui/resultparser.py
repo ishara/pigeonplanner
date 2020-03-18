@@ -183,8 +183,6 @@ class ResultParser(builder.GtkBuilder):
                         self.widgets.parserdialog)
 
     def _build_interface(self):
-        self.widgets.sendbutton.set_use_stock(True)
-
         self.widgets.filebutton = filechooser.ResultChooser()
         self.widgets.grid.attach(self.widgets.filebutton, 1, 0, 1, 1)
 

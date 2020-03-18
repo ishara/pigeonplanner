@@ -66,7 +66,7 @@ class ExceptionDialog(Gtk.Dialog):
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         hbox.set_spacing(12)
         image = Gtk.Image()
-        image.set_from_stock(Gtk.STOCK_DIALOG_ERROR, Gtk.IconSize.DIALOG)
+        image.set_from_icon_name("dialog-error", Gtk.IconSize.DIALOG)
         label = Gtk.Label("<span size=\"larger\" weight=\"bold\">%s</span>"
                           % _("Pigeon Planner has experienced an unexpected error"))
         label.set_use_markup(True)
@@ -101,10 +101,10 @@ class ExceptionDialog(Gtk.Dialog):
 
         self.vbox.pack_start(expander, True, True, 4)
 
-        button_report = Gtk.Button.new_from_stock("report")
+        button_report = Gtk.Button.new_with_label(_("Report"))
         button_report.connect("clicked", self.report_log)
         self.action_area.pack_start(button_report, False, False, 0)
-        button_close = Gtk.Button.new_from_stock(Gtk.STOCK_CLOSE)
+        button_close = Gtk.Button.new_with_label(_("Close"))
         button_close.connect("clicked", lambda w: self.destroy())
         self.action_area.pack_start(button_close, False, False, 0)
 

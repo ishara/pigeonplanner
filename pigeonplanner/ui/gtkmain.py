@@ -75,16 +75,6 @@ def setup_logging():
 
 
 def setup_icons():
-    from pigeonplanner.ui import utils
-    # Register custom stock icons
-    utils.create_stock_button([
-            ("icon_pedigree_detail.png", "pedigree-detail", _("Pedigree")),
-            ("icon_email.png", "email", _("E-mail")),
-            ("icon_send.png", "send", _("Send")),
-            ("icon_report.png", "report", _("Report")),
-            ("icon_columns.png", "columns", "columns"),
-        ])
-
     # Ideally our custom icons should go into icons/hicolor/WxH/<category>, but for
     # simplicity sake we just add the directory that contains them to the search path.
     # This makes sure icons are found in all scenarios, especially running from source

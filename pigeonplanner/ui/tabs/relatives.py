@@ -91,10 +91,10 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         pigeon = treeview.get_model()[path][0]
 
         if event.button == Gdk.BUTTON_SECONDARY:
-            items = [(Gtk.STOCK_INFO, self.on_show_details, (pigeon,), None),
-                     (Gtk.STOCK_EDIT, self.on_edit_details, (pigeon,), None)]
+            items = [(self.on_show_details, (pigeon,), _("Information")),
+                     (self.on_edit_details, (pigeon,), _("Edit"))]
             if pigeon.visible:
-                items.append((Gtk.STOCK_JUMP_TO, self.on_goto_pigeon, (pigeon,), None))
+                items.append((self.on_goto_pigeon, (pigeon,), _("Go to")))
             utils.popup_menu(event, items)
         elif event.button == Gdk.BUTTON_PRIMARY and event.type == Gdk.EventType.DOUBLE_BUTTON_PRESS:
             self.on_show_details(None, pigeon)

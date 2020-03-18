@@ -204,10 +204,10 @@ class PhotoAlbum(builder.GtkBuilder):
 
     def on_slideshow_toggled(self, widget):
         if widget.get_active():
-            self.widgets.slide_button.set_stock_id(Gtk.STOCK_MEDIA_STOP)
+            self.widgets.slide_button.set_icon_name("media-playback-stop")
             self.slideshow_timer = GLib.timeout_add(3000, self.slideshow)
         else:
-            self.widgets.slide_button.set_stock_id(Gtk.STOCK_MEDIA_PLAY)
+            self.widgets.slide_button.set_icon_name("media-playback-start")
             GLib.source_remove(self.slideshow_timer)
 
     def slideshow(self):

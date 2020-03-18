@@ -588,9 +588,9 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
             return
         if event.button == 3:
             entries = [
-                (Gtk.STOCK_EDIT, self.on_buttonedit_clicked, None, None),
-                (Gtk.STOCK_REMOVE, self.on_buttonremove_clicked, None, None),
-                (Gtk.STOCK_JUMP_TO, self.on_addtopedigree_clicked, None, _("Add to pedigree details"))]
+                (self.on_buttonedit_clicked, None, _("Edit")),
+                (self.on_buttonremove_clicked, None, _("Remove")),
+                (self.on_addtopedigree_clicked, None, _("Add to pedigree details"))]
             utils.popup_menu(event, entries)
 
     def on_buttonall_clicked(self, _widget):
