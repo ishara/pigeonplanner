@@ -21,9 +21,7 @@ from gi.repository import Gtk
 from gi.repository import GLib
 
 from pigeonplanner.core import const
-from pigeonplanner.core import update
 from pigeonplanner.ui import maildialog
-from pigeonplanner.ui.messagedialog import QuestionDialog
 
 
 class ExceptionDialog(Gtk.Dialog):
@@ -38,15 +36,6 @@ class ExceptionDialog(Gtk.Dialog):
         self.destroy()
 
     def report_log(self, _widget):
-        try:
-            new, msg = update.update()
-        except update.UpdateError:
-            new = False
-        if new:
-            desc = _("Chances are that your problem is already fixed in "
-                     "this new version. Send a report anyway?")
-            if not QuestionDialog((msg, desc, msg), self).run():
-                return
         maildialog.MailDialog(self, const.LOGFILE, "log")
 
     def on_expander_activate(self, widget):
