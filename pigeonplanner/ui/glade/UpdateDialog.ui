@@ -115,7 +115,7 @@
                   <object class="GtkImage" id="failed_image">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="stock">gtk-dialog-error</property>
+                    <property name="icon_name">dialog-error</property>
                   </object>
                   <packing>
                     <property name="name">page2</property>

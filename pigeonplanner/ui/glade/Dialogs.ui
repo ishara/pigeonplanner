@@ -29,11 +29,10 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="cancel">
-                <property name="label">gtk-cancel</property>
+                <property name="label">Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_cancel_clicked" swapped="no"/>
               </object>
               <packing>
@@ -44,7 +43,7 @@
             </child>
             <child>
               <object class="GtkButton" id="send">
-                <property name="label">send</property>
+                <property name="label">Send</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -60,10 +59,9 @@
             </child>
             <child>
               <object class="GtkButton" id="close">
-                <property name="label">gtk-close</property>
+                <property name="label">Close</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_close_clicked" swapped="no"/>
               </object>
               <packing>
@@ -297,7 +295,7 @@
                                   <object class="GtkImage" id="image2">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="stock">gtk-edit</property>
+                                    <property name="icon_name">gtk-edit</property>
                                   </object>
                                 </child>
                               </object>
@@ -343,7 +341,7 @@
                                   <object class="GtkImage" id="image1">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="stock">gtk-apply</property>
+                                    <property name="icon_name">gtk-apply</property>
                                   </object>
                                 </child>
                               </object>

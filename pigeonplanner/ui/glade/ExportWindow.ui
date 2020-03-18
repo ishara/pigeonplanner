@@ -2,11 +2,6 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkImage" id="exportimage">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-execute</property>
-  </object>
   <object class="GtkListStore" id="typelist">
     <columns>
       <!-- column-name exporter -->
@@ -57,7 +52,7 @@
                   <object class="GtkImage" id="imageprogress">
                     <property name="can_focus">False</property>
                     <property name="no_show_all">True</property>
-                    <property name="stock">gtk-ok</property>
+                    <property name="icon_name">gtk-ok</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -75,11 +70,10 @@
             </child>
             <child>
               <object class="GtkButton" id="buttonclose">
-                <property name="label">gtk-close</property>
+                <property name="label">Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_buttonclose_clicked" swapped="no"/>
               </object>
               <packing>
@@ -95,7 +89,6 @@
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="image">exportimage</property>
                 <signal name="clicked" handler="on_buttonexport_clicked" swapped="no"/>
               </object>
               <packing>
@@ -147,7 +140,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="invisible_char">•</property>
-                <property name="secondary_icon_stock">gtk-open</property>
+                <property name="secondary_icon_name">document-open</property>
                 <property name="primary_icon_activatable">False</property>
                 <signal name="changed" handler="on_entrypath_changed" swapped="no"/>
                 <signal name="icon-press" handler="on_entrypath_icon_press" swapped="no"/>

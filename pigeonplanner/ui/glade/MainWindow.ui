@@ -31,8 +31,9 @@
     </child>
     <child>
       <object class="GtkAction" id="Info">
+        <property name="label" translatable="yes">Information</property>
         <property name="tooltip" translatable="yes">General information</property>
-        <property name="stock_id">gtk-info</property>
+        <property name="icon_name">dialog-information</property>
         <signal name="activate" handler="menuinfo_activate" swapped="no"/>
       </object>
     </child>
@@ -81,7 +82,7 @@
         <property name="label" translatable="yes">_Filter...</property>
         <property name="short_label" translatable="yes">_Filter...</property>
         <property name="tooltip" translatable="yes">Set filter options</property>
-        <property name="stock_id">gtk-clear</property>
+        <property name="icon_name">edit-clear</property>
         <signal name="activate" handler="menufilter_activate" swapped="no"/>
       </object>
       <accelerator key="f" modifiers="GDK_CONTROL_MASK"/>
@@ -91,7 +92,7 @@
         <property name="label" translatable="yes">_Search...</property>
         <property name="short_label" translatable="yes">_Search...</property>
         <property name="tooltip" translatable="yes">Search a pigeon</property>
-        <property name="stock_id">gtk-find</property>
+        <property name="icon_name">edit-find</property>
         <signal name="activate" handler="menusearch_activate" swapped="no"/>
       </object>
       <accelerator key="s" modifiers="GDK_CONTROL_MASK"/>
@@ -101,7 +102,7 @@
         <property name="label" translatable="yes">Add range</property>
         <property name="short_label" translatable="yes">Add range</property>
         <property name="tooltip" translatable="yes">Add a range of pigeons</property>
-        <property name="stock_id">gtk-add</property>
+        <property name="icon_name">list-add</property>
         <signal name="activate" handler="menuaddrange_activate" swapped="no"/>
       </object>
       <accelerator key="a" modifiers="GDK_SHIFT_MASK | GDK_CONTROL_MASK"/>
@@ -116,8 +117,9 @@
     </child>
     <child>
       <object class="GtkAction" id="Add">
+        <property name="label" translatable="yes">_Add</property>
         <property name="tooltip" translatable="yes">Add a new pigeon</property>
-        <property name="stock_id">gtk-add</property>
+        <property name="icon_name">list-add</property>
         <signal name="activate" handler="menuadd_activate" swapped="no"/>
       </object>
       <accelerator key="a" modifiers="GDK_CONTROL_MASK"/>
@@ -127,8 +129,9 @@
     <signal name="connect-proxy" handler="on_uimanager_connect_proxy" swapped="no"/>
     <child>
       <object class="GtkAction" id="Help">
+        <property name="label" translatable="yes">Online help</property>
         <property name="tooltip" translatable="yes">View online help</property>
-        <property name="stock_id">gtk-help</property>
+        <property name="icon_name">help-browser</property>
         <signal name="activate" handler="menuhelp_activate" swapped="no"/>
       </object>
       <accelerator key="F1"/>
@@ -140,7 +143,8 @@
     </child>
     <child>
       <object class="GtkAction" id="PrintMenu">
-        <property name="stock_id">gtk-print</property>
+        <property name="label" translatable="yes">_Print</property>
+        <property name="icon_name">document-print</property>
       </object>
     </child>
     <child>
@@ -172,14 +176,14 @@
       <object class="GtkAction" id="Backup">
         <property name="label" translatable="yes">_Backup</property>
         <property name="tooltip" translatable="yes">Create a backup of your database</property>
-        <property name="stock_id">gtk-floppy</property>
         <signal name="activate" handler="menubackup_activate" swapped="no"/>
       </object>
     </child>
     <child>
       <object class="GtkAction" id="Quit">
+        <property name="label" translatable="yes">_Quit</property>
         <property name="tooltip" translatable="yes">Quit the program</property>
-        <property name="stock_id">gtk-quit</property>
+        <property name="icon_name">application-exit</property>
         <signal name="activate" handler="quit_program" swapped="no"/>
       </object>
       <accelerator key="q" modifiers="GDK_CONTROL_MASK"/>
@@ -188,15 +192,16 @@
       <object class="GtkAction" id="Log">
         <property name="label" translatable="yes">_Logfile Viewer</property>
         <property name="tooltip" translatable="yes">See the logfile</property>
-        <property name="stock_id">gtk-file</property>
+        <property name="icon_name">text-x-generic</property>
         <signal name="activate" handler="menulog_activate" swapped="no"/>
       </object>
       <accelerator key="l" modifiers="GDK_CONTROL_MASK"/>
     </child>
     <child>
       <object class="GtkAction" id="Preferences">
+        <property name="label" translatable="yes">_Preferences</property>
         <property name="tooltip" translatable="yes">Configure the application</property>
-        <property name="stock_id">gtk-preferences</property>
+        <property name="icon_name">preferences-system</property>
         <signal name="activate" handler="menupref_activate" swapped="no"/>
       </object>
       <accelerator key="p" modifiers="GDK_CONTROL_MASK"/>
@@ -205,7 +210,7 @@
       <object class="GtkAction" id="Home">
         <property name="label" translatable="yes">Website</property>
         <property name="tooltip" translatable="yes">Go to the website for more information</property>
-        <property name="stock_id">gtk-home</property>
+        <property name="icon_name">go-home</property>
         <signal name="activate" handler="menuhome_activate" swapped="no"/>
       </object>
     </child>
@@ -213,7 +218,7 @@
       <object class="GtkAction" id="Forum">
         <property name="label" translatable="yes">Forum</property>
         <property name="tooltip" translatable="yes">Go to the forum for online help</property>
-        <property name="stock_id">gtk-info</property>
+        <property name="icon_name">dialog-information</property>
         <signal name="activate" handler="menuforum_activate" swapped="no"/>
       </object>
     </child>
@@ -221,14 +226,14 @@
       <object class="GtkAction" id="Update">
         <property name="label" translatable="yes">Search for updates...</property>
         <property name="tooltip" translatable="yes">Search online for program updates</property>
-        <property name="stock_id">gtk-connect</property>
         <signal name="activate" handler="menuupdate_activate" swapped="no"/>
       </object>
     </child>
     <child>
       <object class="GtkAction" id="About">
+        <property name="label" translatable="yes">_About</property>
         <property name="tooltip" translatable="yes">About this application</property>
-        <property name="stock_id">gtk-about</property>
+        <property name="icon_name">help-about</property>
         <signal name="activate" handler="menuabout_activate" swapped="no"/>
       </object>
     </child>
@@ -292,7 +297,7 @@
         <property name="label" translatable="yes">Add resul_t</property>
         <property name="short_label" translatable="yes">Add resul_t</property>
         <property name="tooltip" translatable="yes">Add a new result for this pigeon</property>
-        <property name="stock_id">gtk-add</property>
+        <property name="icon_name">list-add</property>
         <signal name="activate" handler="menuaddresult_activate" swapped="no"/>
       </object>
     </child>
@@ -301,15 +306,16 @@
         <property name="label" translatable="yes">_Pedigree</property>
         <property name="short_label" translatable="yes">_Pedigree</property>
         <property name="tooltip" translatable="yes">View the detailed pedigree of this pigeon</property>
-        <property name="stock_id">pedigree-detail</property>
+        <property name="icon_name">icon_pedigree_detail</property>
         <signal name="activate" handler="menupedigree_activate" swapped="no"/>
       </object>
       <accelerator key="g" modifiers="GDK_CONTROL_MASK"/>
     </child>
     <child>
       <object class="GtkAction" id="Edit">
+        <property name="label" translatable="yes">_Edit</property>
         <property name="tooltip" translatable="yes">Edit the selected pigeon</property>
-        <property name="stock_id">gtk-edit</property>
+        <property name="icon_name">gtk-edit</property>
         <signal name="activate" handler="menuedit_activate" swapped="no"/>
       </object>
       <accelerator key="e" modifiers="GDK_CONTROL_MASK"/>
@@ -318,7 +324,7 @@
       <object class="GtkAction" id="RestoreHidden">
         <property name="label" translatable="yes">Restore hidden</property>
         <property name="tooltip" translatable="yes">Restore the selected hidden pigeon</property>
-        <property name="stock_id">gtk-revert-to-saved</property>
+        <property name="icon_name">document-revert</property>
         <signal name="activate" handler="restore_pigeon" swapped="no"/>
       </object>
     </child>
@@ -327,8 +333,9 @@
     <property name="sensitive">False</property>
     <child>
       <object class="GtkAction" id="Remove">
+        <property name="label" translatable="yes">_Remove</property>
         <property name="tooltip" translatable="yes">Remove the selected pigeon</property>
-        <property name="stock_id">gtk-remove</property>
+        <property name="icon_name">list-remove</property>
         <signal name="activate" handler="menuremove_activate" swapped="no"/>
       </object>
       <accelerator key="r" modifiers="GDK_CONTROL_MASK"/>
@@ -679,7 +686,7 @@
                       <object class="GtkImage" id="image17">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="stock">gtk-goto-top</property>
+                        <property name="icon_name">go-top</property>
                       </object>
                     </child>
                   </object>
@@ -699,7 +706,7 @@
                       <object class="GtkImage" id="image18">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="stock">gtk-go-up</property>
+                        <property name="icon_name">go-up</property>
                       </object>
                     </child>
                   </object>
@@ -719,7 +726,7 @@
                       <object class="GtkImage" id="image19">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="stock">gtk-go-down</property>
+                        <property name="icon_name">go-down</property>
                       </object>
                     </child>
                   </object>
@@ -739,7 +746,7 @@
                       <object class="GtkImage" id="image20">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="stock">gtk-goto-bottom</property>
+                        <property name="icon_name">go-bottom</property>
                       </object>
                     </child>
                   </object>
@@ -843,11 +850,10 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="rangecancel">
-                <property name="label">gtk-cancel</property>
+                <property name="label">Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_rangecancel_clicked" swapped="no"/>
               </object>
               <packing>
@@ -858,13 +864,12 @@
             </child>
             <child>
               <object class="GtkButton" id="rangeadd">
-                <property name="label">gtk-add</property>
+                <property name="label">Add</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_rangeadd_clicked" swapped="no"/>
               </object>
               <packing>

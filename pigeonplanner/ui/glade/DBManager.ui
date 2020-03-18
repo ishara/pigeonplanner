@@ -2,10 +2,10 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkImage" id="image2">
+  <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-goto-last</property>
+    <property name="icon_name">help-browser</property>
   </object>
   <object class="GtkListStore" id="liststore">
     <columns>
@@ -46,11 +46,12 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="help">
-                <property name="label">gtk-help</property>
+                <property name="label">Help</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
+                <property name="image">image3</property>
+                <property name="always_show_image">True</property>
                 <signal name="clicked" handler="on_help_clicked" swapped="no"/>
               </object>
               <packing>
@@ -62,11 +63,10 @@
             </child>
             <child>
               <object class="GtkButton" id="quit">
-                <property name="label">gtk-quit</property>
+                <property name="label">Quit</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_quit_clicked" swapped="no"/>
               </object>
               <packing>
@@ -77,11 +77,10 @@
             </child>
             <child>
               <object class="GtkButton" id="close">
-                <property name="label">gtk-close</property>
+                <property name="label">Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_close_clicked" swapped="no"/>
               </object>
               <packing>
@@ -92,12 +91,11 @@
             </child>
             <child>
               <object class="GtkButton" id="open">
-                <property name="label">gtk-open</property>
+                <property name="label">Open</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_open_clicked" swapped="no"/>
               </object>
               <packing>
@@ -148,7 +146,7 @@
                             <child>
                               <object class="GtkCellRendererPixbuf" id="cellrendererpixbuf1"/>
                               <attributes>
-                                <attribute name="stock-id">1</attribute>
+                                <attribute name="icon-name">1</attribute>
                               </attributes>
                             </child>
                           </object>
@@ -196,11 +194,10 @@
                     <property name="layout_style">start</property>
                     <child>
                       <object class="GtkButton" id="new">
-                        <property name="label">gtk-new</property>
+                        <property name="label">New</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="use_stock">True</property>
                         <signal name="clicked" handler="on_new_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -211,11 +208,10 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="add">
-                        <property name="label">gtk-add</property>
+                        <property name="label">Add</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="use_stock">True</property>
                         <signal name="clicked" handler="on_add_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -238,12 +234,11 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="edit">
-                        <property name="label">gtk-edit</property>
+                        <property name="label">Edit</property>
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="use_stock">True</property>
                         <signal name="clicked" handler="on_edit_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -254,12 +249,11 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="remove">
-                        <property name="label">gtk-remove</property>
+                        <property name="label">Remove</property>
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="use_stock">True</property>
                         <signal name="clicked" handler="on_remove_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -270,12 +264,11 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="copy_">
-                        <property name="label">gtk-copy</property>
+                        <property name="label">Copy</property>
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="use_stock">True</property>
                         <signal name="clicked" handler="on_copy_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -291,7 +284,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="image">image2</property>
                         <signal name="clicked" handler="on_move_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -372,11 +364,10 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="cancel">
-                <property name="label">gtk-cancel</property>
+                <property name="label">Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -386,13 +377,12 @@
             </child>
             <child>
               <object class="GtkButton" id="save">
-                <property name="label">gtk-save</property>
+                <property name="label">Save</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -531,7 +521,7 @@
                               <object class="GtkImage" id="image1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-dialog-warning</property>
+                                <property name="icon_name">dialog-warning</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>

@@ -129,12 +129,11 @@
         <property name="layout_style">end</property>
         <child>
           <object class="GtkButton" id="buttonopen">
-            <property name="label">gtk-open</property>
+            <property name="label">Open</property>
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="use_stock">True</property>
             <signal name="clicked" handler="on_buttonopen_clicked" swapped="no"/>
           </object>
           <packing>
@@ -145,12 +144,11 @@
         </child>
         <child>
           <object class="GtkButton" id="buttonadd">
-            <property name="label">gtk-add</property>
+            <property name="label">Add</property>
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="use_stock">True</property>
             <signal name="clicked" handler="on_buttonadd_clicked" swapped="no"/>
           </object>
           <packing>
@@ -161,12 +159,11 @@
         </child>
         <child>
           <object class="GtkButton" id="buttonremove">
-            <property name="label">gtk-remove</property>
+            <property name="label">Remove</property>
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <property name="use_stock">True</property>
             <signal name="clicked" handler="on_buttonremove_clicked" swapped="no"/>
           </object>
           <packing>

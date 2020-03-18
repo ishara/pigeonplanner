@@ -11,12 +11,12 @@
   <object class="GtkImage" id="imagebackup">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-floppy</property>
+    <property name="icon_name">document-save</property>
   </object>
   <object class="GtkImage" id="imagerestore">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-revert-to-saved</property>
+    <property name="icon_name">document-revert</property>
   </object>
   <object class="GtkListStore" id="liststoredbcreate">
     <columns>
@@ -65,11 +65,10 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button_back">
-                <property name="label">gtk-go-back</property>
+                <property name="label">Back</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="no_show_all">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_button_back_clicked" swapped="no"/>
               </object>
               <packing>
@@ -87,6 +86,7 @@
                 <property name="receives_default">True</property>
                 <property name="no_show_all">True</property>
                 <property name="image">imagebackup</property>
+                <property name="always_show_image">True</property>
                 <signal name="clicked" handler="on_button_create_clicked" swapped="no"/>
               </object>
               <packing>
@@ -103,6 +103,7 @@
                 <property name="receives_default">True</property>
                 <property name="no_show_all">True</property>
                 <property name="image">imagerestore</property>
+                <property name="always_show_image">True</property>
                 <signal name="clicked" handler="on_button_restore_clicked" swapped="no"/>
               </object>
               <packing>
@@ -113,11 +114,10 @@
             </child>
             <child>
               <object class="GtkButton" id="button_close">
-                <property name="label">gtk-close</property>
+                <property name="label">Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_button_close_clicked" swapped="no"/>
               </object>
               <packing>
@@ -166,7 +166,7 @@
                               <object class="GtkImage" id="image3">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-save</property>
+                                <property name="icon_name">document-save</property>
                                 <property name="icon_size">6</property>
                               </object>
                               <packing>
@@ -240,7 +240,7 @@
                               <object class="GtkImage" id="image2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-revert-to-saved</property>
+                                <property name="icon_name">document-revert</property>
                                 <property name="icon_size">6</property>
                               </object>
                               <packing>

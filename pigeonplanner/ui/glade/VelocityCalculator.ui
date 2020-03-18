@@ -59,15 +59,20 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
+  <object class="GtkImage" id="image3">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">help-browser</property>
+  </object>
   <object class="GtkImage" id="imageCalculate">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-execute</property>
+    <property name="icon_name">system-run</property>
   </object>
   <object class="GtkImage" id="imageCalculate2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-execute</property>
+    <property name="icon_name">system-run</property>
   </object>
   <object class="GtkListStore" id="ls_distance">
     <columns>
@@ -116,11 +121,12 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="buttonhelp">
-                <property name="label">gtk-help</property>
+                <property name="label">Help</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
+                <property name="image">image3</property>
+                <property name="always_show_image">True</property>
                 <signal name="clicked" handler="on_buttonhelp_clicked" swapped="no"/>
               </object>
               <packing>
@@ -132,11 +138,10 @@
             </child>
             <child>
               <object class="GtkButton" id="buttonclose">
-                <property name="label">gtk-close</property>
+                <property name="label">Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="close_window" swapped="no"/>
               </object>
               <packing>
@@ -224,6 +229,7 @@
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="image">imageCalculate</property>
+                    <property name="always_show_image">True</property>
                     <signal name="clicked" handler="on_button_velocity_calculate_clicked" swapped="no"/>
                   </object>
                   <packing>
@@ -463,7 +469,7 @@
                           <object class="GtkImage" id="image1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="stock">gtk-find</property>
+                            <property name="icon_name">edit-find</property>
                           </object>
                         </child>
                       </object>
@@ -548,6 +554,7 @@
                         <property name="receives_default">True</property>
                         <property name="halign">center</property>
                         <property name="image">imageCalculate2</property>
+                        <property name="always_show_image">True</property>
                         <signal name="clicked" handler="on_calculate_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -557,12 +564,11 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="printcalc">
-                        <property name="label">gtk-print</property>
+                        <property name="label">Print</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="halign">center</property>
-                        <property name="use_stock">True</property>
                         <signal name="clicked" handler="on_printcalc_clicked" swapped="no"/>
                       </object>
                       <packing>
@@ -857,7 +863,7 @@
                               <object class="GtkImage" id="image2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="stock">gtk-find</property>
+                                <property name="icon_name">edit-find</property>
                               </object>
                             </child>
                           </object>
@@ -991,11 +997,10 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button_cancel">
-                <property name="label">gtk-cancel</property>
+                <property name="label">Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_button_cancel_clicked" swapped="no"/>
               </object>
               <packing>
@@ -1006,12 +1011,11 @@
             </child>
             <child>
               <object class="GtkButton" id="button_ok">
-                <property name="label">gtk-ok</property>
+                <property name="label">OK</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_button_ok_clicked" swapped="no"/>
               </object>
               <packing>
