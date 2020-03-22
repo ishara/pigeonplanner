@@ -21,8 +21,8 @@
           <object class="GtkGrid" id="gridedit">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="row_spacing">2</property>
-            <property name="column_spacing">4</property>
+            <property name="row_spacing">4</property>
+            <property name="column_spacing">10</property>
             <child>
               <object class="GtkEntry" id="entrynameedit">
                 <property name="width_request">190</property>

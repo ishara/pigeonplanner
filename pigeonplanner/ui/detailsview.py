@@ -63,7 +63,6 @@ class DetailsDialog(Gtk.Dialog):
                              _("Save"), RESPONSE_SAVE)
             self.set_default_response(RESPONSE_SAVE)
             self.set_resizable(True)
-            self.resize(620, 1)
         else:
             self.details = DetailsView(parent=self)
             self.details.set_details(pigeon)
