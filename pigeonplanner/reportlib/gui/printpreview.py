@@ -195,10 +195,10 @@ class PrintPreview(Gtk.Window):
         spacing = GObject.Value()
         spacing.init(GObject.TYPE_INT)
         spacing = self._swin.style_get_property('scrollbar-spacing', spacing)
-        if spacing:
-            spacing = spacing.get_int()
-        else:
-            spacing = 0
+        # if spacing:
+        #     spacing = spacing.get_int()
+        # else:
+        #     spacing = 0
 
         reqmin, req = self._swin.get_vscrollbar().get_preferred_size()
         vsb_w = spacing + req.width
