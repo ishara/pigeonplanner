@@ -41,7 +41,8 @@ a = Analysis(
         ("../AUTHORS", "."),
         ("../CHANGES", "."),
         ("../COPYING", "."),
-        ("../README", ".")
+        ("../README", "."),
+        ("settings.ini", "etc/gtk-3.0")
     ],
     hiddenimports=[
         "playhouse",
@@ -117,7 +118,8 @@ shutil.move("gi/", "lib/")
 
 # These directories and files inside are not required.
 shutil.rmtree("lib/python3.8/")
-shutil.rmtree("share/themes/")
+shutil.rmtree("share/themes/Default/")
+shutil.rmtree("share/themes/Emacs/")
 shutil.rmtree("include/")
 
 # Remove all GTK/GLib translations we don't support ourselves.
