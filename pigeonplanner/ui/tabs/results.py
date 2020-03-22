@@ -81,7 +81,7 @@ class BaseView:
         sw.set_shadow_type(Gtk.ShadowType.IN)
         sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         sw.add(child)
-        label = Gtk.Label("<b>%s</b>" % label)
+        label = Gtk.Label(label="<b>%s</b>" % label)
         label.set_use_markup(True)
         frame = Gtk.Frame()
         frame.set_label_widget(label)

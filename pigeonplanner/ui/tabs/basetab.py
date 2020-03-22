@@ -40,7 +40,7 @@ class BaseTab(component.Component):
         else:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file(img)
         image = Gtk.Image.new_from_pixbuf(pixbuf)
-        label = Gtk.Label(title)
+        label = Gtk.Label(label=title)
         self.widgets._label.pack_start(image, False, False, 0)
         self.widgets._label.pack_start(label, False, False, 0)
         self.widgets._label.show_all()

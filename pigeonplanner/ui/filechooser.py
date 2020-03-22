@@ -243,7 +243,7 @@ class DatabasePathChooserDialog(_FileChooserDialog):
         image_info = Gtk.Image.new_from_icon_name("dialog-information", Gtk.IconSize.BUTTON)
         label_info = Gtk.Label()
         label_info.set_markup("%s <b>%s</b>" % (_("The default location is:"), escape(const.PREFDIR)))
-        button_info = Gtk.Button(_("Select"))
+        button_info = Gtk.Button(label=_("Select"))
         button_info.connect("clicked", self.on_button_default_path_clicked)
         box_info = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         box_info.pack_start(image_info, False, False, 0)

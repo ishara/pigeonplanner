@@ -32,7 +32,7 @@ class DisplayCheckButton(Gtk.CheckButton):
     __gtype_name__ = "DisplayCheckButton"
 
     def __init__(self, label=None):
-        Gtk.CheckButton.__init__(self, label)
+        Gtk.CheckButton.__init__(self, label=label)
         self.show()
 
     def do_pressed(self):

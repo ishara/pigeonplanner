@@ -175,7 +175,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
         self._liststore = self._build_treeview()
         self._modelfilter = self._liststore.filter_new()
         self._modelfilter.set_visible_func(self._visible_func)
-        self._modelsort = Gtk.TreeModelSort(self._modelfilter)
+        self._modelsort = Gtk.TreeModelSort(model=self._modelfilter)
         self._modelsort.set_sort_func(self.LS_YEAR, self._sort_func)
         self._modelsort.set_sort_column_id(self.LS_YEAR, Gtk.SortType.ASCENDING)
         self.set_model(self._modelsort)
