@@ -146,7 +146,7 @@ class RacepointsmapWindow(builder.GtkBuilder):
     def on_edit_apply_clicked(self, _widget):
         name = self.widgets.edit_racepoint_entry.get_text()
         if name == "":
-            self.widgets.addedit_error_label.set_text("The racepoint name is required.")
+            self.widgets.addedit_error_label.set_text(_("The racepoint name is required."))
             self.widgets.addedit_error_revealer.set_reveal_child(True)
             return
 
