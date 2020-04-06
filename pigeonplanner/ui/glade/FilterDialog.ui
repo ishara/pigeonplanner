@@ -32,7 +32,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="search">
-                <property name="label">Search</property>
+                <property name="label" translatable="yes">Search</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -46,7 +46,7 @@
             </child>
             <child>
               <object class="GtkButton" id="clear">
-                <property name="label">Clear</property>
+                <property name="label" translatable="yes">Clear</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -60,7 +60,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button3">
-                <property name="label">Close</property>
+                <property name="label" translatable="yes">Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

@@ -67,7 +67,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="helpbutton">
-                <property name="label">Help</property>
+                <property name="label" translatable="yes">Help</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -84,7 +84,7 @@
             </child>
             <child>
               <object class="GtkButton" id="cancelbutton">
-                <property name="label">Cancel</property>
+                <property name="label" translatable="yes">Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -98,7 +98,7 @@
             </child>
             <child>
               <object class="GtkButton" id="addbutton">
-                <property name="label">Add</property>
+                <property name="label" translatable="yes">Add</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
@@ -666,7 +666,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="sendbutton">
-                <property name="label">Send</property>
+                <property name="label" translatable="yes">Send</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -680,7 +680,7 @@
             </child>
             <child>
               <object class="GtkButton" id="closebutton">
-                <property name="label">Close</property>
+                <property name="label" translatable="yes">Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

@@ -29,7 +29,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="cancel">
-                <property name="label">Cancel</property>
+                <property name="label" translatable="yes">Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -43,7 +43,7 @@
             </child>
             <child>
               <object class="GtkButton" id="send">
-                <property name="label">Send</property>
+                <property name="label" translatable="yes">Send</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -59,7 +59,7 @@
             </child>
             <child>
               <object class="GtkButton" id="close">
-                <property name="label">Close</property>
+                <property name="label" translatable="yes">Close</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <signal name="clicked" handler="on_close_clicked" swapped="no"/>

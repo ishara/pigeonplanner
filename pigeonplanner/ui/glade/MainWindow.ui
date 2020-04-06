@@ -850,7 +850,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="rangecancel">
-                <property name="label">Cancel</property>
+                <property name="label" translatable="yes">Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -864,7 +864,7 @@
             </child>
             <child>
               <object class="GtkButton" id="rangeadd">
-                <property name="label">Add</property>
+                <property name="label" translatable="yes">Add</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>

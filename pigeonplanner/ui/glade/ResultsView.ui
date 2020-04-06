@@ -50,7 +50,7 @@
         </child>
         <child>
           <object class="GtkButton" id="buttonadd">
-            <property name="label">Add</property>
+            <property name="label" translatable="yes">Add</property>
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
@@ -65,7 +65,7 @@
         </child>
         <child>
           <object class="GtkButton" id="buttonedit">
-            <property name="label">Edit</property>
+            <property name="label" translatable="yes">Edit</property>
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
@@ -80,7 +80,7 @@
         </child>
         <child>
           <object class="GtkButton" id="buttonremove">
-            <property name="label">Remove</property>
+            <property name="label" translatable="yes">Remove</property>
             <property name="visible">True</property>
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
@@ -150,7 +150,7 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="buttonclose">
-                <property name="label">Close</property>
+                <property name="label" translatable="yes">Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -164,7 +164,7 @@
             </child>
             <child>
               <object class="GtkButton" id="buttonsave">
-                <property name="label">Save</property>
+                <property name="label" translatable="yes">Save</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
