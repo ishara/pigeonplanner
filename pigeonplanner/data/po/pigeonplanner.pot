@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-06 16:08+0200\n"
+"POT-Creation-Date: 2020-04-06 16:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1917,8 +1917,10 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/FilterDialog.ui:35
 #: pigeonplanner/ui/glade/ResultWindow.ui:212
+#: pigeonplanner/ui/glade/UpdateDialog.ui:73
+#: pigeonplanner/ui/glade/DataManager.ui:302
 #: pigeonplanner/ui/glade/BreedingWindow.ui:278
-msgid "Search"
+msgid "Search..."
 msgstr ""
 
 #: pigeonplanner/ui/glade/FilterDialog.ui:108
@@ -2266,11 +2268,6 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/UpdateDialog.ui:52
 msgid "Latest version:"
-msgstr ""
-
-#: pigeonplanner/ui/glade/UpdateDialog.ui:73
-#: pigeonplanner/ui/glade/DataManager.ui:302
-msgid "Search..."
 msgstr ""
 
 #: pigeonplanner/ui/glade/UpdateDialog.ui:134
