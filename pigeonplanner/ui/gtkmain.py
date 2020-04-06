@@ -70,6 +70,8 @@ def setup_logging():
     logger.debug("Python version: %s" % ".".join(map(str, sys.version_info[:3])))
     logger.debug("GTK+ version: %s.%s.%s" % (Gtk.MAJOR_VERSION, Gtk.MINOR_VERSION, Gtk.MICRO_VERSION))
     logger.debug("PyGObject version: %s" % ".".join(map(str, GObject.pygobject_version)))
+    gtksettings = Gtk.Settings.get_default()
+    logger.debug("GTK theme name: %s" % gtksettings.get_property("gtk-theme-name"))
     import peewee
     logger.debug("Peewee version: %s" % peewee.__version__)
 
