@@ -22,6 +22,7 @@ from pigeonplanner import messages
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
+from pigeonplanner.ui import breedingwindow
 from pigeonplanner.ui.tabs import basetab
 from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.widgets import dateentry
@@ -103,6 +104,9 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.buttongoto1.set_sensitive(record.child1 is not None and record.child1.visible)
         self.widgets.buttoninfo2.set_sensitive(record.child2 is not None)
         self.widgets.buttongoto2.set_sensitive(record.child2 is not None and record.child2.visible)
+
+    def on_buttonall_clicked(self, _widget):
+        breedingwindow.BreedingWindow(self._parent)
 
     def on_buttonadd_clicked(self, _widget):
         self._mode = enums.Action.add
