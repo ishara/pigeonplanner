@@ -22,6 +22,7 @@ Options dialog class
 
 import os
 
+from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GObject
 
@@ -79,6 +80,10 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         self.languages.insert(0, "Default")
         for language in self.languages:
             self.widgets.combolangs.append_text(language)
+
+        # Only show theme selection on Windows
+        if const.WINDOWS:
+            self.widgets.frametheme.show()
 
         self._set_options()
 
@@ -170,6 +175,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
                 ("interface.missing-pigeon-color", self.widgets.chkColorHidden.get_active()),
                 ("interface.missing-pigeon-color-value",
                     self.widgets.chkColorHiddenValue.get_color().to_string()),
+                ("interface.theme-name", self.widgets.cbThemeName.get_active_text()),
 
                 ("backup.automatic-backup", self.widgets.checkbackup.get_active()),
                 ("backup.interval", self.widgets.spinday.get_value_as_int()),
@@ -278,6 +284,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         self.widgets.chkColorHidden.set_active(config.get("interface.missing-pigeon-color"))
         self.widgets.chkColorHiddenValue.set_color(
                 Gdk.color_parse(config.get("interface.missing-pigeon-color-value")))
+        self.widgets.cbThemeName.set_active_id(config.get("interface.theme-name"))
 
         # Printing
         extra_line_type = config.get("printing.pedigree-box-extra-line")
@@ -318,6 +325,11 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         toolbar = self.widgets.chkToolbar.get_active()
         statusbar = self.widgets.chkStatusbar.get_active()
         self.emit("interface-changed", arrows, stats, toolbar, statusbar)
+
+        if const.WINDOWS:
+            theme_name = self.widgets.cbThemeName.get_active_text()
+            gtksettings = Gtk.Settings.get_default()
+            gtksettings.set_property("gtk-theme-name", theme_name)
 
         if restart:
             InfoDialog(messages.MSG_RESTART_APP, self.widgets.optionsdialog)

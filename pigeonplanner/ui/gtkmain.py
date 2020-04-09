@@ -132,6 +132,11 @@ class Application(Gtk.Application):
         from pigeonplanner.ui.widgets import latlongentry
         from pigeonplanner.ui.widgets import displayentry
 
+        if const.WINDOWS:
+            from pigeonplanner.core import config
+            gtksettings = Gtk.Settings.get_default()
+            gtksettings.set_property("gtk-theme-name", config.get("interface.theme-name"))
+
         # Do this as soon as possible to avoid importing files that import a missing module
         self.notify_missing_libs()
         setup_logging()

@@ -121,6 +121,7 @@ default_config = [
                 ("interface.missing-pigeon-color", False),
                 ("interface.missing-pigeon-color-value", "#FAD9D9"),
                 ("interface.pedigree-tab-generations", "3"),
+                ("interface.theme-name", "Adwaita"),
 
                 ("backup.automatic-backup", True),
                 ("backup.interval", 30),
