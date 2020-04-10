@@ -47,6 +47,8 @@ class ResultParser(builder.GtkBuilder):
         self._build_interface()
         self.widgets.parserdialog.set_transient_for(parent)
         self.widgets.parserdialog.show_all()
+        # For some reason the grid is still expanded when it's properly set in Glade.
+        self.widgets.datagrid.set_property("expand", False)
         if yapsy_available:
             self._find_parsers()
         else:
