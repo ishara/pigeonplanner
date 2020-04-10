@@ -174,7 +174,7 @@ class ResultParser(builder.GtkBuilder):
     def on_sendbutton_clicked(self, _widget):
         self.widgets.reportdialog.hide()
         textbuffer = self.widgets.textview.get_buffer()
-        body = textbuffer.get_text(*textbuffer.get_bounds())
+        body = textbuffer.get_text(*textbuffer.get_bounds(), include_hidden_chars=True)
         subject = "[Pigeon Planner] Resultparser exception"
         try:
             mailing.send_email(const.REPORTMAIL, "", subject, body,
