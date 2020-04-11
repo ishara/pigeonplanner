@@ -131,9 +131,10 @@ class Startup:
                     self.logger.warning("Can not find libintl-8.dll for localisation.")
                     return
                 else:
-                    libintl.bindtextdomain(localedomain, localedir)
-                    libintl.bind_textdomain_codeset(localedomain, "UTF-8")
-                    libintl.textdomain(localedomain)
+                    # Important! libintl only accepts encoded strings and will fail silently otherwise.
+                    libintl.bindtextdomain(localedomain.encode("utf-8"), localedir.encode("utf-8"))
+                    libintl.bind_textdomain_codeset(localedomain.encode("utf-8"), "UTF-8")
+                    libintl.textdomain(localedomain.encode("utf-8"))
             else:
                 # Most likely on macOS and safe to ignore
                 pass
