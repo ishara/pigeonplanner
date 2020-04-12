@@ -176,7 +176,8 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         liststore = Gtk.ListStore(*store)
         modelfilter = liststore.filter_new()
         modelfilter.set_visible_func(self._visible_func)
-        treeview.set_model(modelfilter)
+        modelsort = Gtk.TreeModelSort(model=modelfilter)
+        treeview.set_model(modelsort)
         treeview.connect("button-press-event", self.on_treeview_press)
         for index, column in enumerate(columns):
             textrenderer = Gtk.CellRendererText()
