@@ -115,6 +115,12 @@ class _FileChooserDialog(Gtk.FileChooserDialog, _FileChooser):
             folder = const.HOMEDIR
         self.set_current_folder(folder)
 
+    def add_button(self, label, response_id):
+        button = super().add_button(label, response_id)
+        if response_id == Gtk.ResponseType.OK:
+            context = button.get_style_context()
+            context.add_class("suggested-action")
+
     def do_response(self, response):
         if response == Gtk.ResponseType.OK:
             global LAST_FOLDER
