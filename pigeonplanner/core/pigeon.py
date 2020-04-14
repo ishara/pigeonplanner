@@ -143,12 +143,13 @@ def build_pedigree_tree(pigeon, index, depth, lst):
     build_pedigree_tree(pigeon.dam, (2*index)+2, depth+1, lst)
 
 
-def get_or_create_pigeon(band_tuple, sex, visible):
+def get_or_create_pigeon(band_tuple, sex, visible, **data):
     """
 
     :param band_tuple: tuple of (country, letters, number, year) or None
     :param sex: one of the sex constants
     :param visible: boolean
+    :param data: keyword arguments passed to Pigeon.create()
     """
     if band_tuple is not None and band_tuple != ("", "", "", ""):
         country, letters, number, year = band_tuple
@@ -156,7 +157,7 @@ def get_or_create_pigeon(band_tuple, sex, visible):
             with database.transaction():
                 pigeon = Pigeon.create(band_country=country, band_letters=letters,
                                        band_number=number, band_year=year,
-                                       sex=sex, visible=visible)
+                                       sex=sex, visible=visible, **data)
                 query = Status.insert(pigeon=pigeon)
                 query.execute()
         except peewee.IntegrityError:

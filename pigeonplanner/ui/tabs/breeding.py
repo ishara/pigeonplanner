@@ -191,9 +191,11 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             sire = mate
             dam = self.pigeon
         child1 = self._add_child_pigeon(band_tuple1, sire, dam,
-                                        self.widgets.listcheckedit1.get_active())
+                                        self.widgets.listcheckedit1.get_active(),
+                                        self.widgets.bandentryedit1.band_format)
         child2 = self._add_child_pigeon(band_tuple2, sire, dam,
-                                        self.widgets.listcheckedit2.get_active())
+                                        self.widgets.listcheckedit2.get_active(),
+                                        self.widgets.bandentryedit2.band_format)
 
         textbuffer = self.widgets.textviewcommentedit.get_buffer()
         data = {"sire": sire, "dam": dam, "date": date,
@@ -313,8 +315,8 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.listcheckedit1.set_active(False)
         self.widgets.listcheckedit2.set_active(False)
 
-    def _add_child_pigeon(self, band_tuple, sire, dam, visible):
-        pigeon = corepigeon.get_or_create_pigeon(band_tuple, enums.Sex.youngbird, visible)
+    def _add_child_pigeon(self, band_tuple, sire, dam, visible, band_format):
+        pigeon = corepigeon.get_or_create_pigeon(band_tuple, enums.Sex.youngbird, visible, band_format=band_format)
         if pigeon is None:
             return None
 
