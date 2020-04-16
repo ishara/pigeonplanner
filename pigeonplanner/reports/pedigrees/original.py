@@ -179,8 +179,12 @@ class PedigreeReport(Report):
                 text = pigeon.band
                 ex1, ex2, ex3, ex4, ex5, ex6 = pigeon.extra
                 if not last and config.get("printing.pedigree-box-extra-line"):
-                    text += "\n" + \
-                            (pigeon.colour if config.get("printing.pedigree-box-extra-line") == 1 else pigeon.strain)
+                    extra_line_map = {
+                        1: pigeon.colour,
+                        2: pigeon.strain,
+                        3: pigeon.loft
+                    }
+                    text += "\n" + extra_line_map[config.get("printing.pedigree-box-extra-line")]
             else:
                 text = ""
                 ex1, ex2, ex3, ex4, ex5, ex6 = ("", "", "", "", "", "")

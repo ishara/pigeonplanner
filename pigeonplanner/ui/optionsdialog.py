@@ -156,6 +156,8 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
             extra_line_type = 1
         elif self.widgets.radioPigeonExtraStrain.get_active():
             extra_line_type = 2
+        elif self.widgets.radioPigeonExtraLoft.get_active():
+            extra_line_type = 3
 
         settings = [
                 ("options.check-for-updates", self.widgets.chkUpdate.get_active()),
@@ -296,6 +298,9 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         elif extra_line_type == 2:
             self.widgets.chkPigOptExtraLine.set_active(True)
             self.widgets.radioPigeonExtraStrain.set_active(True)
+        elif extra_line_type == 3:
+            self.widgets.chkPigOptExtraLine.set_active(True)
+            self.widgets.radioPigeonExtraLoft.set_active(True)
 
         self.widgets.cbPaper.set_active(config.get("printing.general-paper"))
         self.widgets.cbLayout.set_active(config.get("printing.pedigree-layout"))
