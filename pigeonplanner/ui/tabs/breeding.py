@@ -60,25 +60,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         utils.set_multiple_sensitive(widgets, rowiter is not None)
 
         if rowiter is None:
-            defaults = Breeding.get_fields_with_defaults()
-            self.widgets.datelaid1.set_text(defaults["laid1"])
-            self.widgets.datehatched1.set_text(defaults["hatched1"])
-            self.widgets.bandentry1.set_pigeon(defaults["child1"])
-            self.widgets.successcheck1.set_active(defaults["success1"])
-            self.widgets.datelaid2.set_text(defaults["laid2"])
-            self.widgets.datehatched2.set_text(defaults["hatched2"])
-            self.widgets.bandentry2.set_pigeon(defaults["child2"])
-            self.widgets.successcheck2.set_active(defaults["success2"])
-            self.widgets.entryclutch.set_text(defaults["clutch"])
-            self.widgets.entrybox.set_text(defaults["box"])
-            self.widgets.textviewcomment.get_buffer().set_text(defaults["comment"])
-
-            p1 = not self.widgets.bandentry1.is_empty()
-            p2 = not self.widgets.bandentry2.is_empty()
-            self.widgets.buttoninfo1.set_sensitive(p1)
-            self.widgets.buttongoto1.set_sensitive(p1)
-            self.widgets.buttoninfo2.set_sensitive(p2)
-            self.widgets.buttongoto2.set_sensitive(p2)
+            self._clear_data_fields()
             return
 
         # Never select parent rows. Expand them and select first child row.
@@ -257,6 +239,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         # the signal handler during this action.
         with self.widgets.selection.handler_block(self._selection_changed_handler_id):
             self.widgets.treestore.clear()
+        self._clear_data_fields()
         this, mate = (Breeding.sire, Breeding.dam) if pigeon.is_cock() else (Breeding.dam, Breeding.sire)
         query = (Breeding.select()
                  .where(this == pigeon)
@@ -276,6 +259,27 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         return [self.widgets.buttonadd]
 
     # Private methods
+    def _clear_data_fields(self):
+        defaults = Breeding.get_fields_with_defaults()
+        self.widgets.datelaid1.set_text(defaults["laid1"])
+        self.widgets.datehatched1.set_text(defaults["hatched1"])
+        self.widgets.bandentry1.set_pigeon(defaults["child1"])
+        self.widgets.successcheck1.set_active(defaults["success1"])
+        self.widgets.datelaid2.set_text(defaults["laid2"])
+        self.widgets.datehatched2.set_text(defaults["hatched2"])
+        self.widgets.bandentry2.set_pigeon(defaults["child2"])
+        self.widgets.successcheck2.set_active(defaults["success2"])
+        self.widgets.entryclutch.set_text(defaults["clutch"])
+        self.widgets.entrybox.set_text(defaults["box"])
+        self.widgets.textviewcomment.get_buffer().set_text(defaults["comment"])
+
+        p1 = not self.widgets.bandentry1.is_empty()
+        p2 = not self.widgets.bandentry2.is_empty()
+        self.widgets.buttoninfo1.set_sensitive(p1)
+        self.widgets.buttongoto1.set_sensitive(p1)
+        self.widgets.buttoninfo2.set_sensitive(p2)
+        self.widgets.buttongoto2.set_sensitive(p2)
+
     def _set_dialog_fields(self, obj=None, mate=None):
         if obj is None:
             data = Breeding.get_fields_with_defaults()
