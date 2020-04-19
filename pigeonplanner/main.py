@@ -174,6 +174,9 @@ class Startup:
 
 
 def run(gtk_ui=True):
+    from pigeonplanner.core import config
+    loaded_config = config.load()
+
     app = Startup()
     app.setup_locale(gtk_ui)
 
@@ -193,7 +196,7 @@ def run(gtk_ui=True):
 
     if gtk_ui:
         from pigeonplanner.ui import gtkmain
-        app = gtkmain.Application(missing_libs)
+        app = gtkmain.Application(missing_libs, loaded_config)
         app.run()
 
 

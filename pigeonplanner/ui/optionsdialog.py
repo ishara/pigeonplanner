@@ -133,6 +133,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
 
     def on_buttondefault_clicked(self, _widget):
         if WarningDialog(messages.MSG_DEFAULT_OPTIONS, self.widgets.optionsdialog).run():
+            config.save_backup()
             config.reset()
             self._set_options()
             self._finish_options(False, True)
@@ -224,6 +225,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
                 ("printing.user-email", self.widgets.chkPerEmail.get_active()),
             ]
 
+        config.save_backup()
         for option, value in settings:
             config.set(option, value)
         config.save()

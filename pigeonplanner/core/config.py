@@ -27,6 +27,12 @@ from pigeonplanner.core import const
 logger = logging.getLogger(__name__)
 
 
+LOADED_CONFIG_NEW = 0
+LOADED_CONFIG_SAVED = 1
+LOADED_CONFIG_BACKUP = 2
+LOADED_CONFIG_DEFAULT = 3
+
+
 class Config:
     def __init__(self):
         self.default = {}
@@ -60,16 +66,39 @@ class Config:
                 copy.deepcopy(self.default[section][setting])
 
     def load(self):
+        # End 2019-begin 2020: there are frequent error reports from users where the configuration
+        # file suddenly ends up empty. The reason is unknown, little suspicious about Avast antivirus,
+        # but that needs investigation. In the meantime we do the following: try to load the configuration
+        # file. If it fails, see if there's a backup file which is created right before saving the settings
+        # in the preferences window. If that doesn't exist, fall back to the default settings.
+        # Return a value corresponding to the action taken so a message can be shown to the user to let
+        # them know what happened.
         if os.path.exists(const.CONFIGFILE):
+            loaded_config = LOADED_CONFIG_SAVED
             with open(const.CONFIGFILE) as cfg:
-                loaded = json.load(cfg)
+                try:
+                    loaded = json.load(cfg)
+                except ValueError:
+                    if os.path.exists(const.CONFIGFILE_BACKUP):
+                        with open(const.CONFIGFILE_BACKUP) as cfg:
+                            loaded = json.load(cfg)
+                            loaded_config = LOADED_CONFIG_BACKUP
+                    else:
+                        self.save(default=True)
+                        return LOADED_CONFIG_DEFAULT
             for section in self.settings.keys():
                 self.settings[section].update(loaded[section])
+            return loaded_config
+        return LOADED_CONFIG_NEW
 
-    def save(self, default=False):
-        with open(const.CONFIGFILE, "w") as cfg:
+    def save(self, default=False, backup=False):
+        filename = const.CONFIGFILE_BACKUP if backup else const.CONFIGFILE
+        with open(filename, "w") as cfg:
             settings = self.settings if not default else self.default
             json.dump(settings, cfg, indent=4)
+
+    def save_backup(self):
+        self.save(default=False, backup=True)
 
     def get(self, key):
         section, setting = key.split(".", 1)
@@ -174,6 +203,7 @@ get = CONFIG.get
 set = CONFIG.set
 register = CONFIG.register
 save = CONFIG.save
+save_backup = CONFIG.save_backup
 load = CONFIG.load
 reset = CONFIG.reset
 
@@ -291,6 +321,3 @@ if os.path.exists(const.CONFIGFILE_OLD):
         os.remove(const.CONFIGFILE_OLD)
     except Exception as exc:
         logger.error("Couldn't remove old config file:", exc)
-
-# Load the config file
-load()

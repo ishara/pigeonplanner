@@ -104,6 +104,7 @@ DATABASEINFO = os.path.join(PREFDIR, u"database.json")
 LOGFILE = os.path.join(PREFDIR, u"pigeonplanner.log")
 CONFIGFILE_OLD = os.path.join(PREFDIR, u"pigeonplanner.cfg")
 CONFIGFILE = os.path.join(PREFDIR, u"pigeonplanner.json")
+CONFIGFILE_BACKUP = os.path.join(PREFDIR, u"pigeonplanner.json_bckp")
 
 TEMPDIR = tempfile.gettempdir()
 

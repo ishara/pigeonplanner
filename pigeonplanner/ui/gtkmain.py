@@ -97,7 +97,7 @@ def setup_custom_style():
 
 
 class Application(Gtk.Application):
-    def __init__(self, missing_libs):
+    def __init__(self, missing_libs, loaded_config):
         super(Application, self).__init__(application_id="net.launchpad.pigeonplanner",
                                           flags=Gio.ApplicationFlags.FLAGS_NONE)
         GLib.set_application_name(const.NAME)
@@ -107,6 +107,7 @@ class Application(Gtk.Application):
             GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, self.quit)
 
         self._missing_libs = missing_libs
+        self._loaded_config = loaded_config
         self._window = None
         self._actions = [
             ("about", True, self.on_about),
@@ -154,6 +155,7 @@ class Application(Gtk.Application):
                 dialog.search_updates()
 
         self._window.present()
+        self.notify_loaded_config()
 
     def on_about(self, _action, _param):
         from pigeonplanner.ui import dialogs
@@ -170,3 +172,15 @@ class Application(Gtk.Application):
             help_label = "Pigeon Planner requires the following libraries to run correctly:"
             ErrorDialog((help_label, libs_label, None))
             self.quit()
+
+    def notify_loaded_config(self):
+        from pigeonplanner.core import config
+        from pigeonplanner.ui.messagedialog import InfoDialog
+        if self._loaded_config == config.LOADED_CONFIG_BACKUP:
+            secondary = _("A previously saved version will be used instead.")
+        elif self._loaded_config == config.LOADED_CONFIG_DEFAULT:
+            secondary = _("The default settings will be used instead.")
+        else:
+            return
+        primary = _("There was an error loading the configuration file.")
+        InfoDialog((primary, secondary, None), self._window)
