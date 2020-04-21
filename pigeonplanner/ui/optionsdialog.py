@@ -72,11 +72,10 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         # Fill language combobox with available languages
         try:
             self.languages = os.listdir(const.LANGDIR)
+            self.languages.sort()
         except OSError:
             # There are no compiled mo-files
             self.languages = []
-        self.languages.insert(0, "en")
-        self.languages.sort()
         self.languages.insert(0, "Default")
         for language in self.languages:
             self.widgets.combolangs.append_text(language)
