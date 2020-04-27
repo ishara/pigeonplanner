@@ -8,14 +8,12 @@ Create/update compiled mo languages:
 
 -= Install build system =-
 Windows:
-    Install Python 2.7:
-        https://www.python.org/downloads/windows/
-    Install py2exe:
-        https://sourceforge.net/projects/py2exe/files/py2exe/0.6.9/py2exe-0.6.9.win32-py2.7.exe/download
-    Install PyGTK AIO:
-        http://ftp.gnome.org/pub/GNOME/binaries/win32/pygtk/2.24/pygtk-all-in-one-2.24.2.win32-py2.7.msi
-    Install GTK2 Themes:
-        https://sourceforge.net/projects/gtk-win/files/GTK%2B%20Themes%20Package/2009-09-07/gtk2-themes-2009-09-07-ash.exe/download
+    Install MSYS2:
+        https://www.msys2.org/
+    Run the MSYS2 shell, then:
+        sh win/msys2_install_deps.sh
+        python3 -m pip install -r requirements
+        python3 -m pip install pyinstaller
     Install Inno Setup QuickStart Pack:
         http://www.jrsoftware.org/isdl.php
 
@@ -35,7 +33,8 @@ Linux:
     python setup.py sdist
 
 Windows:
-    python setup.py py2exe
+    Start the MSYS2 environment.
+    python3 -m pip install .
     python win/build_packages.py
 
 macOS:
