@@ -2,34 +2,36 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-    <repository type="git" name="github.com"
-        href="git://github.com/"/>
 
-    <metamodule id="pigeonplanner">
-        <dependencies>
-            <dep package="gtk-mac-bundler"/>
-            <dep package="pigeonplanner-python-deps"/>
-        </dependencies>
-    </metamodule>
+  <include href="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/modulesets-stable/gtk-osx.modules"/>
 
-    <autotools id="gtk-mac-bundler" autogen-template="echo no configure">
-        <branch repo="github.com" module="jralls/gtk-mac-bundler.git"/>
-    </autotools>
+  <repository type="git" name="github-git" href="git://github.com/"/>
+  <repository type="tarball" name="github-tarball" href="git://github.com/"/>
 
-    <metamodule id="pigeonplanner-python-deps">
-        <dependencies>
-            <dep package="setuptools"/>
-            <dep package="yapsy"/>
-        </dependencies>
-    </metamodule>
-    <repository type="tarball" name="pypi"
-        href="http://pypi.python.org/packages/source/"/>
-    <distutils id="setuptools">
-        <branch repo="pypi" version="1.1.3"
-            module="s/setuptools/setuptools-1.1.3.tar.gz"/>
-    </distutils>
-    <distutils id="yapsy">
-        <branch repo="pypi" version="1.10.2-pythons2n3"
-            module="Y/Yapsy/Yapsy-1.10.2-pythons2n3.tar.gz"/>
-    </distutils>
+  <autotools id="osmgpsmap" skip-autogen="never"
+             autogenargs="--disable-gtk-doc-html"
+             supports-non-srcdir-builds="no">
+    <branch module="nzjrs/osm-gps-map" revision="1.1.0" repo="github-git"/>
+    <dependencies>
+      <dep package="libsoup"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3.14"/>
+    </after>
+  </autotools>
+
+  <metamodule id="meta-pigeonplanner">
+    <dependencies>
+      <dep package="python3"/>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3-core-themes"/>
+      <dep package="librsvg"/>
+      <dep package="shared-mime-info"/>
+      <dep package="osmgpsmap"/>
+      <dep package="meta-gtk-osx-python3-gtk3"/>
+    </dependencies>
+  </metamodule>
+
 </moduleset>

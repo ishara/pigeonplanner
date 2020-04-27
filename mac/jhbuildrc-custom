@@ -1,16 +1,9 @@
 # -*- mode: python -*-
 
-_gtk_osx_use_jhbuild_python = True
-setup_sdk(target="10.12", sdk_version=None, architectures=["x86_64"])
-build_policy = "updated-deps"
-modules = [ 
-    "sqlite",
-    "python",
-    "meta-gtk-osx-bootstrap",
-    "meta-gtk-osx-core",
-    "librsvg",
-    "shared-mime-info",
-    "meta-gtk-osx-python",
-    "meta-gtk-osx-themes",
-]
+import os
 
+setup_sdk(target="10.14", sdk_version="native", architectures=["x86_64"])
+build_policy = "updated-deps"
+
+modulesets = os.path.expanduser("~/.config/pigeonplanner.modules")
+modules = ["meta-pigeonplanner"]

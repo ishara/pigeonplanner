@@ -20,14 +20,14 @@ Windows:
         http://www.jrsoftware.org/isdl.php
 
 macOS:
-    wget https://git.gnome.org/browse/gtk-osx/plain/gtk-osx-build-setup.sh
-    sh gtk-osx-build-setup.sh
-    ln -sf mac/jhbuildrc-custom ~/.jhbuildrc-custom
-    jhbuild bootstrap --skip=cmake
-    jhbuild
+    wget https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/gtk-osx-setup.sh
+    sh gtk-osx-setup.sh
+    cp mac/jhbuildrc-custom ~/.config/jhbuildrc-custom
+    cp mac/pigeonplanner.modules ~/.config/pigeonplanner.modules
+    jhbuild bootstrap-gtk-osx
+    jhbuild build
     jhbuild shell
-    python -m ensurepip
-    python -m pip install -r requirements.txt
+    python3 -m pip install -r requirements.txt
 
 
 -= Packaging =-
@@ -40,8 +40,8 @@ Windows:
 
 macOS:
     jhbuild shell
-    python setup.py install
-    python mac/build_package.py
+    python3 -m pip install .
+    python3 mac/build_package.py
 
 
 -= Other =-
