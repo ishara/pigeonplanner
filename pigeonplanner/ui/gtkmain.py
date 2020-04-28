@@ -92,7 +92,10 @@ def setup_custom_style():
     screen = Gdk.Screen.get_default()
     style_context = Gtk.StyleContext()
     provider = Gtk.CssProvider()
-    provider.load_from_path(const.CSSFILE)
+    if const.OSX:
+        provider.load_from_path(const.CSSFILE_MACOS)
+    else:
+        provider.load_from_path(const.CSSFILE)
     style_context.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 
