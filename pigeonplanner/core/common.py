@@ -24,8 +24,9 @@ import os
 import string
 import random
 import locale
-import inspect
+import logging
 import datetime
+import functools
 import webbrowser
 
 try:
@@ -43,12 +44,20 @@ from pigeonplanner.core import config
 from pigeonplanner.database.models import Pigeon, Person
 
 
-def get_function_name():
-    """
-    Retrieve the name of the function/method
-    """
+class LogFunctionCall:
+    def __init__(self, logger=None):
+        self.logger = logger
 
-    return inspect.stack()[1][3]
+    def __call__(self, func):
+        if self.logger is None:
+            self.logger = logging.getLogger(func.__module__)
+
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            self.logger.debug("Called function: {}".format(func.__name__))
+            result = func(*args, **kwargs)
+            return result
+        return wrapper
 
 
 def get_date():

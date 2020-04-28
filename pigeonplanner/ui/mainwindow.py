@@ -324,9 +324,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
     def menuexport_activate(self, _widget):
         exportwindow.ExportWindow(self)
 
+    @common.LogFunctionCall()
     def menuprintpigeons_activate(self, _widget):
-        logger.debug(common.get_function_name())
-
         userinfo = common.get_own_address()
         if not tools.check_user_info(self, userinfo):
             return
@@ -336,8 +335,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         reportopts = PigeonsReportOptions(psize)
         report(PigeonsReport, reportopts, pigeons, userinfo)
 
+    @common.LogFunctionCall()
     def menuprintpedigree_activate(self, _widget):
-        logger.debug(common.get_function_name())
         pigeon = self.widgets.treeview.get_selected_pigeon()
         if pigeon is None or isinstance(pigeon, list):
             return
@@ -349,8 +348,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         report(pedigree_report, opts, pigeon, userinfo)
 
     # noinspection PyMethodMayBeStatic
+    @common.LogFunctionCall()
     def menuprintblank_activate(self, _widget):
-        logger.debug(common.get_function_name())
         userinfo = common.get_own_address()
 
         pedigree_report, pedigree_report_options = get_pedigree()
@@ -358,33 +357,33 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         opts = pedigree_report_options(psize)
         report(pedigree_report, opts, None, userinfo)
 
+    @common.LogFunctionCall()
     def menubackup_activate(self, _widget):
-        logger.debug(common.get_function_name())
         backupdialog.BackupDialog(self)
 
+    @common.LogFunctionCall()
     def menuclose_activate(self, _widget):
-        logger.debug(common.get_function_name())
         self.quit_program()
 
+    @common.LogFunctionCall()
     def menuselectall_activate(self, _widget):
-        logger.debug(common.get_function_name())
         self.widgets.treeview.select_all_pigeons()
 
+    @common.LogFunctionCall()
     def menualbum_activate(self, _widget):
-        logger.debug(common.get_function_name())
         tools.PhotoAlbum(self)
 
     # noinspection PyMethodMayBeStatic
+    @common.LogFunctionCall()
     def menulog_activate(self, _widget):
-        logger.debug(common.get_function_name())
         logdialog.LogDialog()
 
     def menuadd_activate(self, _widget):
         dialog = detailsview.DetailsDialog(None, self, enums.Action.add)
         dialog.details.connect("edit-finished", self.on_edit_finished)
 
+    @common.LogFunctionCall()
     def menuaddrange_activate(self, _widget):
-        logger.debug(common.get_function_name())
         self.widgets.entryRangeFrom.set_text("")
         self.widgets.entryRangeTo.set_text("")
         self.widgets.entryRangeYear.set_text("")
@@ -448,16 +447,16 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
 
         removedialog.hide()
 
+    @common.LogFunctionCall()
     def menupedigree_activate(self, _widget):
-        logger.debug(common.get_function_name())
         model, paths = self.widgets.selection.get_selected_rows()
         if len(paths) != 1:
             return
         pigeon = self.widgets.treeview.get_selected_pigeon()
         pedigreewindow.PedigreeWindow(self, pigeon)
 
+    @common.LogFunctionCall()
     def menuaddresult_activate(self, _widget):
-        logger.debug(common.get_function_name())
         self.widgets.notebook.set_current_page(2)
         self.resultstab.add_new_result()
 
@@ -467,8 +466,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         if not search_mode:
             self.widgets.pigeon_search_entry.grab_focus()
 
+    @common.LogFunctionCall()
     def menufilter_activate(self, _widget):
-        logger.debug(common.get_function_name())
         self.widgets.treeview.run_filterdialog(self)
 
     def menushowall_toggled(self, widget):
@@ -478,8 +477,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         if session.is_open():
             self.widgets.treeview.fill_treeview()
 
+    @common.LogFunctionCall()
     def menupref_activate(self, _widget):
-        logger.debug(common.get_function_name())
         dialog = optionsdialog.OptionsDialog(self)
         dialog.connect("interface-changed", self.on_interface_changed)
 
@@ -503,47 +502,47 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         utils.set_multiple_visible([self.widgets.statusbar], value)
         config.set("interface.statusbar", value)
 
+    @common.LogFunctionCall()
     def menuvelocity_activate(self, _widget):
-        logger.debug(common.get_function_name())
         tools.VelocityCalculator(self)
 
+    @common.LogFunctionCall()
     def menuracepointsmap_activate(self, _widget):
-        logger.debug(common.get_function_name())
         tools.RacepointsmapWindow(self)
 
+    @common.LogFunctionCall()
     def menuaddresses_activate(self, _widget):
-        logger.debug(common.get_function_name())
         tools.AddressBook(self)
 
+    @common.LogFunctionCall()
     def menudata_activate(self, _widget):
-        logger.info(common.get_function_name())
         tools.DataManager(self)
 
     # noinspection PyMethodMayBeStatic
+    @common.LogFunctionCall()
     def menuhelp_activate(self, _widget):
-        logger.debug(common.get_function_name())
         webbrowser.open(const.DOCURLMAIN)
 
     # noinspection PyMethodMayBeStatic
+    @common.LogFunctionCall()
     def menuhome_activate(self, _widget):
-        logger.debug(common.get_function_name())
         webbrowser.open(const.WEBSITE)
 
     # noinspection PyMethodMayBeStatic
+    @common.LogFunctionCall()
     def menuforum_activate(self, _widget):
-        logger.debug(common.get_function_name())
         webbrowser.open(const.FORUMURL)
 
+    @common.LogFunctionCall()
     def menuupdate_activate(self, _widget):
-        logger.debug(common.get_function_name())
         updatedialog.UpdateDialog(self, False)
 
+    @common.LogFunctionCall()
     def menuinfo_activate(self, _widget):
-        logger.debug(common.get_function_name())
         dialogs.InformationDialog(self)
 
+    @common.LogFunctionCall()
     def menuabout_activate(self, _widget):
-        logger.debug(common.get_function_name())
         dialogs.AboutDialog(self)
 
     # range callbacks
