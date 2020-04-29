@@ -52,6 +52,8 @@ def get_operating_system():
 
 class Startup:
     def __init__(self):
+        self.logger = None
+
         # Customized exception hook
         self.old_exception_hook = sys.excepthook
         sys.excepthook = self.exception_hook
@@ -121,8 +123,8 @@ class Startup:
 
                 from ctypes import cdll
 
-                cdll.msvcrt._putenv("LANG=%s" % language)
-                cdll.msvcrt._putenv("LANGUAGE=%s" % language)
+                cdll.msvcrt._putenv("LANG=%s" % language)  # noqa
+                cdll.msvcrt._putenv("LANGUAGE=%s" % language)  # noqa
 
                 # locale has no bindtextdomain on Windows, try to fall back to libintl
                 try:
@@ -184,7 +186,7 @@ def run(gtk_ui=True):
     try:
         # The initial migration uses a feature which had a bug <3.5.1
         # https://github.com/coleifer/peewee/issues/1645
-        import peewee
+        import peewee  # noqa
         if not tuple([int(x) for x in peewee.__version__.split(".")]) >= (3, 5, 1):
             raise ImportError
     except ImportError:
