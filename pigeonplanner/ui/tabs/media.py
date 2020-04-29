@@ -64,11 +64,13 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
             icon = mime.get_icon(media.type)
             self.widgets.image.set_from_gicon(icon, Gtk.IconSize.DIALOG)
 
+    @common.LogFunctionCall()
     def on_buttonopen_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         media = model.get_value(rowiter, COL_OBJECT)
         common.open_file(media.path)
 
+    @common.LogFunctionCall()
     def on_buttonadd_clicked(self, _widget):
         chooser = filechooser.MediaChooser(self._parent)
         response = chooser.run()
@@ -86,6 +88,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
             self.set_pigeon(self.pigeon)
         chooser.destroy()
 
+    @common.LogFunctionCall()
     def on_buttonremove_clicked(self, _widget):
         if not QuestionDialog(messages.MSG_REMOVE_MEDIA, self._parent).run():
             return

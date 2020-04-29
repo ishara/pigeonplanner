@@ -154,6 +154,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
     def on_help_clicked(self, _widget):
         common.open_help(19)
 
+    @common.LogFunctionCall()
     def on_open_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
@@ -172,6 +173,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         self._close_dialog()
         self.emit("database-loaded")
 
+    @common.LogFunctionCall()
     def on_add_clicked(self, _widgets):
         dialog = DBFileChooserDialog(self.widgets.dialog)
         while True:
@@ -193,6 +195,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         dialog.destroy()
         self.widgets.treeview.grab_focus()
 
+    @common.LogFunctionCall()
     def on_new_clicked(self, _widgets):
         name, description = "", ""
         if len(dbmanager.get_databases()) == 0:
@@ -223,6 +226,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         self.widgets.editdialog.hide()
         self.widgets.treeview.grab_focus()
 
+    @common.LogFunctionCall()
     def on_edit_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
@@ -254,6 +258,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         self.widgets.editdialog.hide()
         self.widgets.treeview.grab_focus()
 
+    @common.LogFunctionCall()
     def on_remove_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
@@ -268,12 +273,14 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
 
         model.remove(rowiter)
 
+    @common.LogFunctionCall()
     def on_copy_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
         new_dbobj = dbmanager.copy(dbobj)
         self.add_liststore_item(new_dbobj, select=True)
 
+    @common.LogFunctionCall()
     def on_move_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)

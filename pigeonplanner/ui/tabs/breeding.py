@@ -87,20 +87,24 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.buttoninfo2.set_sensitive(record.child2 is not None)
         self.widgets.buttongoto2.set_sensitive(record.child2 is not None and record.child2.visible)
 
+    @common.LogFunctionCall()
     def on_buttonall_clicked(self, _widget):
         breedingwindow.BreedingWindow(self._parent)
 
+    @common.LogFunctionCall()
     def on_buttonadd_clicked(self, _widget):
         self._mode = enums.Action.add
         self._set_dialog_fields()
         self.widgets.editdialog.show()
 
+    @common.LogFunctionCall()
     def on_buttonedit_clicked(self, _widget):
         self._mode = enums.Action.edit
         model, rowiter = self.widgets.selection.get_selected()
         self._set_dialog_fields(model[rowiter][COL_OBJ], model[rowiter][COL_MATE])
         self.widgets.editdialog.show()
 
+    @common.LogFunctionCall()
     def on_buttonremove_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.treestore.get_path(rowiter)

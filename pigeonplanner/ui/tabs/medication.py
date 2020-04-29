@@ -71,6 +71,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
 
             utils.popup_menu(event, entries)
 
+    @common.LogFunctionCall()
     def on_buttonadd_clicked(self, _widget):
         self._mode = enums.Action.add
         self._clear_dialog_widgets()
@@ -79,6 +80,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.dialog.show()
         self.widgets.entrydate2.grab_focus()
 
+    @common.LogFunctionCall()
     def on_buttonedit_clicked(self, _widget):
         self._mode = enums.Action.edit
         self._fill_select_treeview()
@@ -100,6 +102,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.dialog.show()
         self.widgets.entrydate2.grab_focus()
 
+    @common.LogFunctionCall()
     def on_buttonremove_clicked(self, _widget):
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.liststore.get_path(rowiter)

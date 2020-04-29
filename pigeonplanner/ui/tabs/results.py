@@ -593,12 +593,15 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
                 (self.on_addtopedigree_clicked, None, _("Add to pedigree details"))]
             utils.popup_menu(event, entries)
 
+    @common.LogFunctionCall()
     def on_buttonall_clicked(self, _widget):
         resultwindow.ResultWindow(self._parent)
 
+    @common.LogFunctionCall()
     def on_buttonimport_clicked(self, _widget):
         resultparser.ResultParser(self._parent)
 
+    @common.LogFunctionCall()
     def on_buttonadd_clicked(self, _widget):
         self._mode = enums.Action.add
         values = Result.get_fields_with_defaults()
@@ -608,11 +611,13 @@ class ResultsTab(builder.GtkBuilder, basetab.BaseTab):
         values["out"] = 1
         self._set_dialog(self._mode, values)
 
+    @common.LogFunctionCall()
     def on_buttonedit_clicked(self, _widget):
         result = self.widgets.resultview.get_selected()
         self._mode = enums.Action.edit
         self._set_dialog(self._mode, result)
 
+    @common.LogFunctionCall()
     def on_buttonremove_clicked(self, _widget):
         if not QuestionDialog(messages.MSG_REMOVE_RESULT, self._parent).run():
             return
