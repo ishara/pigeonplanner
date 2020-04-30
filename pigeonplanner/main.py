@@ -28,7 +28,7 @@ import gettext
 import logging
 import logging.handlers
 import platform
-from optparse import OptionParser
+import argparse
 
 from pigeonplanner.core import const
 
@@ -67,11 +67,13 @@ class Startup:
             os.makedirs(os.path.join(const.PLUGINDIR, "resultparsers"))
 
         # Parse arguments
-        parser = OptionParser(version=const.VERSION)
-        parser.add_option("-d", action="store_true", dest="debug",
-                          help="Print debug messages to the console")
-        opts, args = parser.parse_args()
-        self._loglevel = logging.DEBUG if opts.debug else logging.WARNING
+        parser = argparse.ArgumentParser()
+        parser.add_argument("-v", "--version", action="version",
+                            version="%(prog)s {}".format(const.VERSION))
+        parser.add_argument("-d", "--debug", action="store_true", dest="debug",
+                            help="Print debug messages to the console")
+        args = parser.parse_args()
+        self._loglevel = logging.DEBUG if args.debug else logging.WARNING
 
         # Always setup logging
         try:
