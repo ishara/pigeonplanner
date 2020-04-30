@@ -87,20 +87,15 @@ class Startup:
         localedir = const.LANGDIR
 
         if language in ("def", "Default"):
-            if const.OSX:
-                # TODO: get default language
-                language = "C"
-            else:
-                language = ""
-                try:
-                    language = os.environ["LANG"]
-                except KeyError:
-                    language = locale.getlocale()[0]
-                    if not language:
-                        try:
-                            language = locale.getdefaultlocale()[0] + ".UTF-8"
-                        except (TypeError, ValueError):
-                            pass
+            try:
+                language = os.environ["LANG"]
+            except KeyError:
+                language = locale.getlocale()[0]
+                if not language:
+                    try:
+                        language = locale.getdefaultlocale()[0] + ".UTF-8"
+                    except (TypeError, ValueError):
+                        language = "C"
         else:
             language = locale.normalize(language).split(".")[0] + ".UTF-8"
 
