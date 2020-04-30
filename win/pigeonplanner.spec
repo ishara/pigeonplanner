@@ -42,8 +42,7 @@ a = Analysis(
         ("../AUTHORS", "."),
         ("../CHANGES", "."),
         ("../COPYING", "."),
-        ("../README", "."),
-        ("settings.ini", "etc/gtk-3.0")
+        ("../README", ".")
     ],
     hiddenimports=[
         "playhouse",
