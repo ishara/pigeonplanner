@@ -1,3 +1,38 @@
+4.0.0:
+ * Updated to GTK 3
+ * Updated to Python 3
+ * Added a search bar for pigeons
+ * Added a racepoints map
+ * Added indication of available pedigree space in extra boxes
+ * Added application update dialog
+ * Added icon to indicate hidden pigeons
+ * Added option to change number of generations in pedigree tab
+ * Added placeholders in band entry
+ * Added window to show and filter all breeding record
+ * Added a theme selector on Windows
+ * Added loft as optional extra line on printed pedigree
+ * Move band format options to a popover
+ * Improved error reporting on invalid band entry
+ * Show zoom icon when hovering over pigeon image
+ * Show add and remove buttons on image when editing a pigeon
+ * Changed date entry dialog to a popover
+ * Show list of pigeons in medication dialog
+ * Show some extra columns by default in main treeview
+ * Show message in the statusbar when running a development version
+ * Handle corrupt configuration file
+ * Fixed adding pigeons wit hthe default band format through the breeding option
+ * Fixed error in rare cases when reporting an error
+ * Fixed sending report when results import fails
+ * Improved results import dialog
+ * Show message about media files in backup dialog
+ * Removed update check when reporting an error
+ * Removed distance calculator
+ * Removed racepoint manager
+ * Improved look for multiple widgets
+ * Updated translations
+ * Many various UI changes
+ * Many various code changes
+
 3.4.0:
  * Redesigned backup dialog
  * Fixed backups to work with custom database paths
