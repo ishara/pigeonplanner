@@ -195,8 +195,8 @@ def run(gtk_ui=True):
 
     if gtk_ui:
         from pigeonplanner.ui import gtkmain
-        app = gtkmain.Application(missing_libs, loaded_config)
-        app.run()
+        gtkapp = gtkmain.Application(missing_libs, loaded_config)
+        gtkapp.run()
 
 
 if __name__ == "__main__":
