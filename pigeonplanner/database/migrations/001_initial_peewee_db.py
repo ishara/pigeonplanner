@@ -45,7 +45,7 @@ def do_migration(db):
     start_time = time.time()
 
     migrator = SqliteMigrator(database)
-    database.connection().row_factory = peweee.sqlite3.Row
+    database.connection().row_factory = peewee.sqlite3.Row
 
     status_tables = ["Dead", "Sold", "Lost", "Breeder", "Onloan", "Widow"]
     old_tables = ["Pigeons", "Results", "Breeding", "Media", "Medication", "Addresses", "Categories",
