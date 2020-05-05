@@ -89,17 +89,32 @@ class Startup:
         localedir = const.LANGDIR
 
         if language in ("def", "Default"):
-            try:
-                language = os.environ["LANG"]
-            except KeyError:
-                language = locale.getlocale()[0]
-                if not language:
-                    try:
-                        language = locale.getdefaultlocale()[0] + ".UTF-8"
-                    except (TypeError, ValueError):
-                        language = "C"
+            if const.WINDOWS:
+                import ctypes
+                windll = ctypes.windll.kernel32
+                cid = windll.GetUserDefaultUILanguage()
+                language = locale.windows_locale[cid]
+                detection_type = "windll"
+            else:
+                try:
+                    language = os.environ["LANG"]
+                    detection_type = "$LANG"
+                except KeyError:
+                    language = locale.getlocale()[0]
+                    if not language:
+                        try:
+                            language = locale.getdefaultlocale()[0] + ".UTF-8"
+                            detection_type = "getdefaultlocale()"
+                        except (TypeError, ValueError):
+                            language = "C"
+                            detection_type = "fallback"
+                    else:
+                        language = language + ".UTF-8"
+                        detection_type = "getlocale()"
+            self.logger.debug("Detected language from %s: %s", detection_type, language)
         else:
             language = locale.normalize(language).split(".")[0] + ".UTF-8"
+            self.logger.debug("Language from config: %s", language)
 
         os.environ["LANG"] = language
         os.environ["LANGUAGE"] = language
