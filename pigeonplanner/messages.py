@@ -109,6 +109,9 @@ MSG_RESULT_EXISTS = (_("Invalid input!"),
 MSG_REMOVE_RESULT = (_("Removing the selected result"),
                      _("Are you sure?"),
                      "")
+MSG_REMOVE_BREDING = (_("Removing the selected breeding record"),
+                      _("Are you sure?"),
+                      "")
 MSG_REMOVE_MEDIA = (_("Removing the selected media file"),
                     _("Are you sure?"),
                     "")

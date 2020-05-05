@@ -28,6 +28,7 @@ from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.widgets import dateentry
 from pigeonplanner.ui.detailsview import DetailsDialog
 from pigeonplanner.ui.messagedialog import ErrorDialog
+from pigeonplanner.ui.messagedialog import QuestionDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import common
 from pigeonplanner.core import pigeon as corepigeon
@@ -106,6 +107,9 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
 
     @common.LogFunctionCall()
     def on_buttonremove_clicked(self, _widget):
+        if not QuestionDialog(messages.MSG_REMOVE_BREDING, self._parent).run():
+            return
+
         model, rowiter = self.widgets.selection.get_selected()
         path = self.widgets.treestore.get_path(rowiter)
         obj = model.get_value(rowiter, COL_OBJ)
