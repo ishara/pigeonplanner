@@ -91,7 +91,11 @@ coll = COLLECT(
     a.zipfiles,
     a.datas,
     strip=False,
-    upx=True,
+    # The 32-bit build executable fails to start if upx is True here. The
+    # 64-bit build has no problems. This is with MSYS2, Python 3.8.1 and
+    # PyInstaller 3.6, which doesn't officially support this version of
+    # Python yet. So that might be the cause.
+    upx=False,
     name="pigeonplanner"
 )
 
@@ -104,6 +108,7 @@ os.chdir("dist/pigeonplanner/")
 # lib directory. There are however a few DLLs that need to stay in the root.
 dlls_to_keep = [
     "_struct-cpython-38.dll",
+    "libgcc_s_dw2-1.dll",
     "libpython3.8.dll",
     "libwinpthread-1.dll",
     "zlib1.dll",
