@@ -69,7 +69,12 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
             path = self.widgets.treestore.get_path(rowiter)
             self.widgets.treeview.expand_row(path, False)
             rowiter = self.widgets.treestore.iter_children(rowiter)
-            selection.select_iter(rowiter)
+            if rowiter is not None:
+                selection.select_iter(rowiter)
+            else:
+                # This sometimes happens when the last child is removed.
+                self._clear_data_fields()
+                return
 
         record = model[rowiter][COL_OBJ]
         self.widgets.datelaid1.set_text(record.laid1)
@@ -248,6 +253,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         with self.widgets.selection.handler_block(self._selection_changed_handler_id):
             self.widgets.treestore.clear()
         self._clear_data_fields()
+        utils.set_multiple_sensitive([self.widgets.buttonremove, self.widgets.buttonedit], False)
         this, mate = (Breeding.sire, Breeding.dam) if pigeon.is_cock() else (Breeding.dam, Breeding.sire)
         query = (Breeding.select()
                  .where(this == pigeon)

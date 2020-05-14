@@ -72,7 +72,7 @@ def create_backup(destination, overwrite=True, include_config=True):
                 filename = os.path.basename(filepath)
                 zfile.write(filepath, filename)
     except Exception as exc:
-        logger.exception(exc)
+        logger.error(exc)
         raise
 
 

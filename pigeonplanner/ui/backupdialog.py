@@ -99,7 +99,6 @@ class BackupDialog(builder.GtkBuilder):
         try:
             backup.create_backup(save_path, overwrite=True, include_config=save_config)
         except Exception as exc:
-            logger.error(exc)
             msg = (_("There was an error making the backup."), str(exc), _("Failed!"))
             messagedialog.ErrorDialog(msg, self.widgets.dialog)
         else:
