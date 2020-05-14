@@ -253,6 +253,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         with self.widgets.selection.handler_block(self._selection_changed_handler_id):
             self.widgets.treestore.clear()
         self._clear_data_fields()
+        utils.set_multiple_sensitive([self.widgets.buttonremove, self.widgets.buttonedit], False)
         this, mate = (Breeding.sire, Breeding.dam) if pigeon.is_cock() else (Breeding.dam, Breeding.sire)
         query = (Breeding.select()
                  .where(this == pigeon)
