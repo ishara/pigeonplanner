@@ -1,3 +1,15 @@
+4.0.1:
+ * Fixed language detection on Windows
+ * Fixed error during database migration
+ * Fixed error when backup creation fails
+ * Fixed error when last breeding record is removed
+ * Fixed buttons in breeding view not being updated on pigeon selection
+ * Added confirmation dialog when deleting a breeding record
+ * Added tooltips to resultswindow toolbar
+ * Changed Windows build to 32-bit again
+ * Minor code changes
+ * Updated translations
+
 4.0.0:
  * Updated to GTK 3
  * Updated to Python 3
