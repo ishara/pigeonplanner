@@ -171,13 +171,15 @@ class MainTreeView(Gtk.TreeView, component.Component):
 
         self._block_visible_func = False
 
+        sort_direction = Gtk.SortType.ASCENDING if config.get("interface.pigeon-sort") == 0 else Gtk.SortType.DESCENDING
+
         component.get("Statusbar").set_filter(False)
         self._liststore = self._build_treeview()
         self._modelfilter = self._liststore.filter_new()
         self._modelfilter.set_visible_func(self._visible_func)
         self._modelsort = Gtk.TreeModelSort(model=self._modelfilter)
         self._modelsort.set_sort_func(self.LS_YEAR, self._sort_func)
-        self._modelsort.set_sort_column_id(self.LS_YEAR, Gtk.SortType.ASCENDING)
+        self._modelsort.set_sort_column_id(self.LS_YEAR, sort_direction)
         self.set_model(self._modelsort)
         self.set_rules_hint(True)
         self.set_search_equal_func(self._search_func)

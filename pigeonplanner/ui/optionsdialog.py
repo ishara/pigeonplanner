@@ -172,6 +172,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
                 ("interface.stats", self.widgets.chkStats.get_active()),
                 ("interface.toolbar", self.widgets.chkToolbar.get_active()),
                 ("interface.statusbar", self.widgets.chkStatusbar.get_active()),
+                ("interface.pigeon-sort", self.widgets.cbSortPigeons.get_active()),
                 ("interface.results-mode", self.widgets.cbResultsMode.get_active()),
                 ("interface.missing-pigeon-hide", self.widgets.chkShowHidden.get_active()),
                 ("interface.missing-pigeon-color", self.widgets.chkColorHidden.get_active()),
@@ -282,6 +283,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         self.widgets.chkStats.set_active(config.get("interface.stats"))
         self.widgets.chkToolbar.set_active(config.get("interface.toolbar"))
         self.widgets.chkStatusbar.set_active(config.get("interface.statusbar"))
+        self.widgets.cbSortPigeons.set_active(config.get("interface.pigeon-sort"))
         self.widgets.cbResultsMode.set_active(config.get("interface.results-mode"))
         self.widgets.chkShowHidden.set_active(config.get("interface.missing-pigeon-hide"))
         self.widgets.chkColorHidden.set_active(config.get("interface.missing-pigeon-color"))
