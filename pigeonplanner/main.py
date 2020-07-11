@@ -88,7 +88,7 @@ class Startup:
         localedomain = const.DOMAIN
         localedir = const.LANGDIR
 
-        if language in ("def", "Default"):
+        if language in ("def", "Default", None):
             if const.WINDOWS:
                 import ctypes
                 windll = ctypes.windll.kernel32
