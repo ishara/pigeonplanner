@@ -422,11 +422,11 @@ class SplittedView(BaseView):
     def set_pigeon(self, pigeon):
         self.pigeon = pigeon
 
-        self.liststore.clear()
         self.race_ls.clear()
         for race in pigeon.results.group_by(Result.date, Result.racepoint).order_by(Result.date.asc()):
             self.race_ls.append([str(race.date), race.racepoint, race.type, race.wind,
                                  race.windspeed, race.weather, race.temperature])
+        self.liststore.clear()
 
     def get_selected(self):
         model, rowiter = self.selection.get_selected()
