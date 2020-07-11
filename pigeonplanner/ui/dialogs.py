@@ -53,6 +53,8 @@ class RemovePigeonDialog(Gtk.MessageDialog):
         button_remove.connect("clicked", self.on_button_remove_clicked)
         button_remove.set_image(Gtk.Image.new_from_icon_name("edit-delete", Gtk.IconSize.BUTTON))
         button_remove.set_always_show_image(True)
+        button_remove_ctx = button_remove.get_style_context()
+        button_remove_ctx.add_class("destructive-action")
         button_hide = Gtk.Button(label=button_hide_label)
         button_hide.connect("clicked", self.on_button_hide_clicked)
         button_hide.set_image(Gtk.Image.new_from_icon_name("list-remove", Gtk.IconSize.BUTTON))
@@ -60,8 +62,8 @@ class RemovePigeonDialog(Gtk.MessageDialog):
 
         action_area = self.get_action_area()
         action_area.add(button_cancel)
-        action_area.add(button_remove)
         action_area.add(button_hide)
+        action_area.add(button_remove)
 
         self.show_all()
 
