@@ -250,6 +250,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
         self.set_model(None)
         component.get("MainWindow").widgets.actiongroup_database.set_sensitive(False)
         component.get("MainWindow").widgets.hbox_loading.show()
+        component.get("MainWindow").widgets.vboxButtons.set_sensitive(False)
         while Gtk.events_pending():
             Gtk.main_iteration()
 
@@ -273,6 +274,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
         self.emit("pigeons-changed")
         component.get("MainWindow").widgets.hbox_loading.hide()
         component.get("MainWindow").widgets.actiongroup_database.set_sensitive(True)
+        component.get("MainWindow").widgets.vboxButtons.set_sensitive(True)
 
         hidden_img_column = self.get_column(self.COL_HIDDEN)
         hidden_img_column.set_visible(config.get("interface.show-all-pigeons"))
