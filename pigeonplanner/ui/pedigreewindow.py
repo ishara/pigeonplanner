@@ -139,7 +139,11 @@ class PedigreeWindow(builder.GtkBuilder):
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
             save_path = chooser.get_filename()
-            self.do_operation(PRINT_ACTION_EXPORT, save_path)
+            try:
+                self.do_operation(PRINT_ACTION_EXPORT, save_path)
+            except Exception as exc:
+                msg = (_("There was an error saving the pedigree."), str(exc), _("Failed!"))
+                ErrorDialog(msg, self.widgets.window)
         chooser.destroy()
 
     def on_preview_clicked(self, _widget):
