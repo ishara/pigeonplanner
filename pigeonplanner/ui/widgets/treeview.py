@@ -192,6 +192,9 @@ class MainTreeView(Gtk.TreeView, component.Component):
     # Public methods
     def get_top_iter(self, rowiter):
         valid, filteriter = self._modelfilter.convert_child_iter_to_iter(rowiter)
+        if not valid:
+            # GTK raises a RuntimeError as well in similar situations, we already catch this.
+            raise RuntimeError
         valid, sortiter = self._modelsort.convert_child_iter_to_iter(filteriter)
         return sortiter
 
