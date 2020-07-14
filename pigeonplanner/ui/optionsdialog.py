@@ -237,6 +237,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         self.widgets.chkUpdate.set_active(config.get("options.check-for-updates"))
         self.widgets.chkDevUpdate.set_active(config.get("options.check-for-dev-updates"))
 
+        self.widgets.combolangs.set_active(0)
         for index, lang in enumerate(self.languages):
             if config.get("options.language") == lang:
                 self.widgets.combolangs.set_active(index)
