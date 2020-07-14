@@ -17,6 +17,7 @@
 
 
 from gi.repository import Gtk
+from gi.repository import GObject
 
 from pigeonplanner import messages
 from pigeonplanner.ui import utils
@@ -44,9 +45,14 @@ def check_user_info(parent, userinfo):
     return True
 
 
-class AddressBook(builder.GtkBuilder):
+class AddressBook(builder.GtkBuilder, GObject.GObject):
+    __gsignals__ = {
+        "person-changed": (GObject.SIGNAL_RUN_LAST, None, (object,))
+    }
+
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "AddressBook.ui")
+        GObject.GObject.__init__(self)
 
         self._mode = None
         self._entries = self.get_objects_from_prefix("entry")
@@ -117,6 +123,8 @@ class AddressBook(builder.GtkBuilder):
             model, rowiter = self.widgets.selection.get_selected()
             self.widgets.liststore.set(rowiter, 0, person, 1, person.name)
             self.widgets.selection.emit("changed")
+
+        self.emit("person-changed", person)
 
     def on_buttoncancel_clicked(self, _widget):
         self._set_widgets(False)
