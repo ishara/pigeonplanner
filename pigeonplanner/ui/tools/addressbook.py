@@ -154,6 +154,13 @@ class AddressBook(builder.GtkBuilder, GObject.GObject):
         self.widgets.entrylat.set_text(data.latitude)
         self.widgets.entrylong.set_text(data.longitude)
 
+    def select_user(self):
+        for row in self.widgets.liststore:
+            if row[0].me:
+                self.widgets.selection.select_iter(row.iter)
+                return True
+        return False
+
     # Internal methods
     def _fill_treeview(self):
         self.widgets.liststore.clear()
