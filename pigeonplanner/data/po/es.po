@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-06 16:28+0200\n"
-"PO-Revision-Date: 2020-04-11 16:41+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2020-05-14 20:50+0000\n"
+"Last-Translator: Edgar Eliud Chávez Zenil <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-04-12 05:52+0000\n"
-"X-Generator: Launchpad (build 2e26c9bbd21cdca248baaea29aeffb920afcc32a)\n"
+"X-Launchpad-Export-Date: 2020-05-15 05:55+0000\n"
+"X-Generator: Launchpad (build 0385b538081bc4718df6fb844a3afc89729c94ce)\n"
 "Language: \n"
 
 #: pigeonplanner/messages.py:142
@@ -516,7 +516,7 @@ msgstr "Puesto"
 #: pigeonplanner/ui/glade/ResultsView.ui:361
 #: pigeonplanner/ui/glade/ResultWindow.ui:760
 msgid "Out of"
-msgstr "Fuera de"
+msgstr "Encestadas"
 
 #: pigeonplanner/reports/results.py:66 pigeonplanner/ui/resultwindow.py:111
 #: pigeonplanner/ui/tabs/results.py:59
@@ -557,7 +557,7 @@ msgstr "Coeficiente"
 #: pigeonplanner/ui/glade/ResultWindow.ui:784
 #: pigeonplanner/ui/glade/ResultParser.ui:387
 msgid "Sector"
-msgstr "Sector"
+msgstr "Club"
 
 #: pigeonplanner/reports/results.py:71 pigeonplanner/ui/resultwindow.py:126
 #: pigeonplanner/ui/tabs/results.py:74
@@ -1043,6 +1043,7 @@ msgstr ""
 "Launchpad Contributions:\n"
 "  Adolfo Jayme https://launchpad.net/~fitojb\n"
 "  DiegoJ https://launchpad.net/~diegojromerolopez\n"
+"  Edgar Eliud Chávez Zenil https://launchpad.net/~eliudchavez\n"
 "  FAMM https://launchpad.net/~famm94-deactivatedaccount\n"
 "  Federico Vera https://launchpad.net/~fedevera\n"
 "  Fernando Muñoz https://launchpad.net/~fmunozs\n"
@@ -1382,7 +1383,7 @@ msgstr "Categorías"
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:973
 #: pigeonplanner/ui/glade/Racepointsmap.ui:737
 msgid "Racepoints"
-msgstr "Puntuación."
+msgstr "Punto de suelta"
 
 #: pigeonplanner/ui/tools/datamanager.py:46
 msgid "Strains"
@@ -2064,7 +2065,7 @@ msgstr "Original"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:63
 msgid "Swapped details"
-msgstr ""
+msgstr "Detallado"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:66
 msgid "Middle"
@@ -2634,41 +2635,41 @@ msgstr "Objetos no utilizados."
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:46
 msgid "View all breeding records"
-msgstr ""
+msgstr "Ver todos los registros de cría"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:166
 #: pigeonplanner/ui/glade/BreedingWindow.ui:371
 msgid "Egg 1 laid"
-msgstr ""
+msgstr "Puesta del 1° huevo"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:179
 #: pigeonplanner/ui/glade/BreedingWindow.ui:383
 msgid "Egg 1 hatched"
-msgstr ""
+msgstr "Eclosión 1° huevo"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:192
 #: pigeonplanner/ui/glade/BreedingWindow.ui:395
 msgid "Egg 1 bandnumber"
-msgstr ""
+msgstr "Anilla 1° pichón"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:205
 #: pigeonplanner/ui/glade/BreedingWindow.ui:407
 msgid "Egg 2 laid"
-msgstr ""
+msgstr "Puesta del 2° huevo"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:218
 #: pigeonplanner/ui/glade/BreedingWindow.ui:419
 msgid "Egg 2 hatched"
-msgstr ""
+msgstr "Eclosión 2° huevo"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:231
 #: pigeonplanner/ui/glade/BreedingWindow.ui:431
 msgid "Egg 2 bandnumber"
-msgstr ""
+msgstr "Anilla 2° pichón"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:257
 msgid "Filter breeding records"
-msgstr ""
+msgstr "Filtrar registros de cría"
 
 #: pigeonplanner/ui/glade/PedigreeView.ui:17
 msgid "Number of generations"
