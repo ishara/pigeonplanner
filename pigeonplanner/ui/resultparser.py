@@ -22,6 +22,8 @@ import logging
 try:
     from yapsy.VersionedPluginManager import VersionedPluginManager
     yapsy_available = True
+    yapsy_logger = logging.getLogger("yapsy")
+    yapsy_logger.setLevel(logging.WARNING)
 except ImportError:
     yapsy_available = False
 
