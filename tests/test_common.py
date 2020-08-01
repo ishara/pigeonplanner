@@ -21,10 +21,6 @@ import nose.tools as nt
 from pigeonplanner.core import common
 
 
-def test_func_name():
-    value = common.get_function_name()
-    nt.assert_equal(value, "test_func_name")
-
 def test_coefficient():
     value = common.calculate_coefficient(1, 100)
     nt.assert_equal(value, 1.0)
