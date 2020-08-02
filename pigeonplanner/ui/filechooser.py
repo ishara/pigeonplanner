@@ -90,15 +90,12 @@ class _FileChooser:#Gtk.FileChooser):  # TODO GTK3: why does this fail?
         filter_.add_pattern("*.zip")
         self.add_filter(filter_)
 
-    def add_custom_filter(self, filter_):
-        class Filter(Gtk.FileFilter):
-            def __init__(self, name, pattern):
-                Gtk.FileFilter.__init__(self)
-                self.set_name(name)
-                self.add_pattern(pattern)
-        name, pattern = filter_
-        filefilter = Filter(name, pattern)
-        self.add_filter(filefilter)
+    def add_custom_filter(self, name, *patterns):
+        filter_ = Gtk.FileFilter()
+        filter_.set_name(name)
+        for pattern in patterns:
+            filter_.add_pattern(pattern)
+        self.add_filter(filter_)
 
 
 ########
@@ -307,7 +304,7 @@ class ResultChooser(FileChooser):
 
     def __init__(self):
         super(ResultChooser, self).__init__()
-        self.add_text_filter()
+        self.add_custom_filter("Supported filetypes (.txt, .html)", "*.txt", "*.html")
 
 
 class BackupChooser(_FileChooserButton):

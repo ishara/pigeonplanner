@@ -1,0 +1,9 @@
+[Core]
+Name = KBDB online
+Module = kbdb
+
+[Documentation]
+Author = Timo Vanwynsberghe
+Version = 0.1
+Website = http://www.pigeonplanner.com
+Description = KBDB online results
