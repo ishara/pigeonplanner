@@ -333,8 +333,8 @@
     <property name="sensitive">False</property>
     <child>
       <object class="GtkAction" id="Remove">
-        <property name="label" translatable="yes">_Remove</property>
-        <property name="tooltip" translatable="yes">Remove the selected pigeon</property>
+        <property name="label" translatable="yes">_Remove / Hide</property>
+        <property name="tooltip" translatable="yes">Remove or hide the selected pigeon</property>
         <property name="icon_name">list-remove</property>
         <signal name="activate" handler="menuremove_activate" swapped="no"/>
       </object>
