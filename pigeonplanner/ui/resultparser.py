@@ -18,6 +18,7 @@
 
 import os
 import logging
+import operator
 
 try:
     from yapsy.VersionedPluginManager import VersionedPluginManager
@@ -196,8 +197,8 @@ class ResultParser(builder.GtkBuilder):
         manager.setPluginPlaces([const.RESULTPARSERDIR,
                                  os.path.join(const.PLUGINDIR, "resultparsers")])
         manager.collectPlugins()
-
-        for plugin in manager.getAllPlugins():
+        plugins = sorted(manager.getAllPlugins(), key=operator.attrgetter("name"))
+        for plugin in plugins:
             name = "%s - %s" % (plugin.name, plugin.version)
             self.widgets.parserstore.append([plugin, name])
         self.widgets.parsercombo.set_active(0)
