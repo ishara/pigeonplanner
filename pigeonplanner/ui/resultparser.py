@@ -164,7 +164,8 @@ class ResultParser(builder.GtkBuilder):
 
     def on_parsercombo_changed(self, widget):
         parserplugin = self._get_active_parserplugin()
-        widget.set_tooltip_text(parserplugin.description)
+        self.widgets.parserdescriptionlabel.set_text(parserplugin.description)
+        self.widgets.parserusagelabel.set_markup(parserplugin.details.get("Documentation", "Usage"))
 
     # noinspection PyMethodMayBeStatic
     def on_reportdialog_delete_event(self, _widget, _event):
