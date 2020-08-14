@@ -29,6 +29,7 @@ import logging
 import logging.handlers
 import platform
 import argparse
+import subprocess
 
 from pigeonplanner.core import const
 
@@ -39,8 +40,11 @@ def get_operating_system():
         release, version, csd, ptype = platform.win32_ver()
         distribution = "%s %s" % (release, csd)
     elif operatingsystem == "Linux":
-        distname, version, nick = platform.linux_distribution()
-        distribution = "%s %s" % (distname, version)
+        try:
+            distribution = subprocess.check_output(["lsb_release", "-ds"])
+            distribution = distribution.decode().strip()
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            distribution = ""
     elif operatingsystem == "Darwin":
         operatingsystem = "Mac OS X"
         release, versioninfo, machine = platform.mac_ver()
