@@ -6,14 +6,14 @@ msgstr ""
 "Project-Id-Version: Pigeon Planner 0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-06 16:28+0200\n"
-"PO-Revision-Date: 2019-03-07 19:21+0000\n"
+"PO-Revision-Date: 2020-07-22 18:53+0000\n"
 "Last-Translator: Viktor Kosenko <ksviktor@gmail.com>\n"
 "Language-Team: none <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-04-07 05:53+0000\n"
-"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
+"X-Launchpad-Export-Date: 2020-07-23 06:01+0000\n"
+"X-Generator: Launchpad (build f877c5162b568393e2d07ce948459ba0abc456fe)\n"
 "Language: \n"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/ui/pedigreewindow.py:178
@@ -232,15 +232,15 @@ msgstr "Резервне копіювання було успішно відно
 
 #: pigeonplanner/messages.py:135
 msgid "The program will now quit automatically to apply all changes."
-msgstr ""
+msgstr "Тепер програма автоматично вийде, щоб застосувати всі зміни."
 
 #: pigeonplanner/messages.py:137
 msgid "No database selected to restore."
-msgstr ""
+msgstr "Для відновлення не вибрана база даних."
 
 #: pigeonplanner/messages.py:138
 msgid "Do you want to continue anyway?"
-msgstr ""
+msgstr "Ви хочете все-таки продовжити ?"
 
 #: pigeonplanner/messages.py:141
 msgid "No personal information found."
@@ -561,7 +561,7 @@ msgstr "Зображення"
 #: pigeonplanner/ui/glade/ResultParser.ui:87
 #: pigeonplanner/ui/glade/AddressBook.ui:472
 msgid "Cancel"
-msgstr ""
+msgstr "Скасувати"
 
 #: pigeonplanner/ui/filechooser.py:132
 msgid "Select an image..."
@@ -573,7 +573,7 @@ msgstr "Виберіть зображення ..."
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:1014
 #: pigeonplanner/ui/glade/OptionsDialog.ui:154
 msgid "OK"
-msgstr ""
+msgstr "Виконати"
 
 #: pigeonplanner/ui/filechooser.py:144 pigeonplanner/ui/filechooser.py:293
 msgid "Select a file..."
@@ -607,7 +607,7 @@ msgstr "Зберегти як..."
 #: pigeonplanner/ui/glade/MedicationView.ui:536
 #: pigeonplanner/ui/glade/AddressBook.ui:459
 msgid "Save"
-msgstr ""
+msgstr "Зберегти"
 
 #: pigeonplanner/ui/filechooser.py:229 pigeonplanner/ui/filechooser.py:240
 #: pigeonplanner/ui/filechooser.py:282
@@ -616,11 +616,11 @@ msgstr "Виберіть папку ..."
 
 #: pigeonplanner/ui/filechooser.py:245
 msgid "The default location is:"
-msgstr ""
+msgstr "Місце за замовчуванням:"
 
 #: pigeonplanner/ui/filechooser.py:246
 msgid "Select"
-msgstr ""
+msgstr "Вибрати"
 
 #: pigeonplanner/ui/optionsdialog.py:54
 #: pigeonplanner/ui/glade/BreedingView.ui:291
@@ -716,7 +716,7 @@ msgstr "Звіт"
 #: pigeonplanner/ui/glade/BreedingWindow.ui:306
 #: pigeonplanner/ui/glade/AddressBook.ui:43
 msgid "Close"
-msgstr ""
+msgstr "Закрити"
 
 #: pigeonplanner/ui/pedigreewindow.py:160
 #, python-format
@@ -818,7 +818,7 @@ msgstr "Подробиці %s"
 
 #: pigeonplanner/ui/messagedialog.py:57 pigeonplanner/ui/messagedialog.py:69
 msgid "No"
-msgstr ""
+msgstr "Ні"
 
 #: pigeonplanner/ui/messagedialog.py:58 pigeonplanner/ui/messagedialog.py:70
 msgid "Yes"
