@@ -9,3 +9,9 @@
 ./pigeonplanner.egg-info
 ./.idea
 __pycache__
+.pybuild
+*.debhelper
+debian/pigeonplanner
+debian/files
+debhelper-build-stamp
+*.substvars
