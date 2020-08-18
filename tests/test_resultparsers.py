@@ -86,5 +86,44 @@ def test_dtd():
     nt.assert_dict_equal(data, filedata)
 
 
+def test_kbdb_scrape_race_data():
+    parser = manager.getPluginByName("KBDB online").plugin_object
+
+    html_files = [
+        "tests/data/result_kbdb_1.html",
+        "tests/data/result_kbdb_2.html",
+        "tests/data/result_kbdb_3.html",
+    ]
+    race_datas = [
+        {"sector": "Nationaal", "category": "oude", "n_pigeons": "9469", "date": "2020-07-25",
+         "racepoint": "LA SOUTERRAINE"},
+        {"sector": "PE Limburg", "category": "jaarse", "n_pigeons": "1736", "date": "2020-07-25",
+         "racepoint": "LA SOUTERRAINE"},
+        {"sector": "SPE Henegouwen/Waals-Brabant", "category": "oude", "n_pigeons": "863", "date": "2020-07-24",
+         "racepoint": "MONTELIMAR"}
+    ]
+    for html_file, race_data in zip(html_files, race_datas):
+        with open(html_file) as f:
+            html = f.read()
+
+        parser.scrape_race_data(html)
+        nt.assert_dict_equal(parser.race_data, race_data)
+
+
+def test_kbdb_parse_results():
+    pigeon1_data = {"band_number": "1234567", "band_year": "2013", "sex": enums.Sex.cock}
+    pigeon1 = Pigeon.create(**pigeon1_data)
+
+    html_file = "tests/data/result_kbdb_1.html"
+    with open(html_file) as f:
+        html = f.read()
+    parser = manager.getPluginByName("KBDB online").plugin_object
+    parser.scrape_results(html)
+    nt.assert_in(pigeon1, parser.results)
+    nt.assert_list_equal(parser.results[pigeon1], ["1234567", "2013", "2", "1661.3061"])
+
+
 test_dtd.setup = utils.open_test_db
 test_dtd.teardown = utils.close_test_db
+test_kbdb_parse_results.setup = utils.open_test_db
+test_kbdb_parse_results.teardown = utils.close_test_db

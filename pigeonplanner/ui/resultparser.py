@@ -18,10 +18,13 @@
 
 import os
 import logging
+import operator
 
 try:
     from yapsy.VersionedPluginManager import VersionedPluginManager
     yapsy_available = True
+    yapsy_logger = logging.getLogger("yapsy")
+    yapsy_logger.setLevel(logging.WARNING)
 except ImportError:
     yapsy_available = False
 
@@ -162,7 +165,8 @@ class ResultParser(builder.GtkBuilder):
 
     def on_parsercombo_changed(self, widget):
         parserplugin = self._get_active_parserplugin()
-        widget.set_tooltip_text(parserplugin.description)
+        self.widgets.parserdescriptionlabel.set_text(parserplugin.description)
+        self.widgets.parserusagelabel.set_markup(parserplugin.details.get("Documentation", "Usage"))
 
     # noinspection PyMethodMayBeStatic
     def on_reportdialog_delete_event(self, _widget, _event):
@@ -193,8 +197,8 @@ class ResultParser(builder.GtkBuilder):
         manager.setPluginPlaces([const.RESULTPARSERDIR,
                                  os.path.join(const.PLUGINDIR, "resultparsers")])
         manager.collectPlugins()
-
-        for plugin in manager.getAllPlugins():
+        plugins = sorted(manager.getAllPlugins(), key=operator.attrgetter("name"))
+        for plugin in plugins:
             name = "%s - %s" % (plugin.name, plugin.version)
             self.widgets.parserstore.append([plugin, name])
         self.widgets.parsercombo.set_active(0)
