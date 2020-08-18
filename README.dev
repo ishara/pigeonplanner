@@ -32,6 +32,10 @@ macOS:
 Linux:
     python setup.py sdist
 
+Ubuntu:
+    dch -i
+    debuild -b -us -uc -I.bzr --lintian-opts --profile debian
+
 Windows:
     Start the MSYS2 environment.
     python3 -m pip install .
