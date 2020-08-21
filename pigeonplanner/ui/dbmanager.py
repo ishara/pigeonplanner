@@ -44,7 +44,7 @@ class DBFileChooserDialog(filechooser._FileChooserDialog):
         self.set_title(_("Select a database file..."))
         self.add_button(_("OK"), Gtk.ResponseType.OK)
         self.set_extra_widget(self._create_extra_widget())
-        self.add_custom_filter((_("Pigeon Planner database"), "pigeonplanner*.db"))
+        self.add_custom_filter(_("Pigeon Planner database"), "pigeonplanner*.db")
 
     def _create_extra_widget(self):
         labeltitle = Gtk.Label(_("Name"))

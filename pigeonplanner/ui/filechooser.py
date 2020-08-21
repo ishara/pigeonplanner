@@ -217,7 +217,7 @@ class ExportChooser(_FileChooserDialog):
         super(ExportChooser, self).__init__(parent, preview=False,
                                             action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
-        self.add_custom_filter(filter_)
+        self.add_custom_filter(*filter_)
         self.add_button(_("Save"), Gtk.ResponseType.OK)
         self.set_current_name(filename)
 
