@@ -61,6 +61,7 @@ class DatabaseSession:
 
     def close(self):
         models.database.close()
+        self.dbfile = None
 
     def is_open(self):
         return not models.database.is_closed()
