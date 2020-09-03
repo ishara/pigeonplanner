@@ -30,6 +30,7 @@ from pigeonplanner.ui import filechooser
 from pigeonplanner.ui import exceptiondialog
 from pigeonplanner.ui.messagedialog import (InfoDialog, QuestionDialog,
                                             ErrorDialog, WarningDialog)
+from pigeonplanner.ui.databaserepairdialog import DatabaseRepairDialog
 from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.database import session
@@ -114,6 +115,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
             self.widgets.remove.set_sensitive(False)
             self.widgets.copy_.set_sensitive(False)
             self.widgets.move.set_sensitive(False)
+            self.widgets.repair.set_sensitive(False)
             self.widgets.open.set_sensitive(False)
             self.widgets.default.set_sensitive(False)
         else:
@@ -123,6 +125,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
             self.widgets.remove.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
             self.widgets.copy_.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
             self.widgets.move.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
+            self.widgets.repair.set_sensitive(dbobj.exists and dbobj.writable and not is_open)
             self.widgets.default.set_sensitive(dbobj.exists and dbobj.writable)
             self.widgets.default.set_active(dbobj.default)
             self.widgets.open.set_sensitive(dbobj.exists and dbobj.writable)
@@ -302,6 +305,12 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
 
         dialog.destroy()
         self.widgets.treeview.grab_focus()
+
+    @common.LogFunctionCall()
+    def on_repair_clicked(self, _widget):
+        model, rowiter = self.widgets.selection.get_selected()
+        dbobj = model.get_value(rowiter, self.COL_OBJ)
+        DatabaseRepairDialog(dbobj, self.widgets.dialog)
 
     def on_default_toggled(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
