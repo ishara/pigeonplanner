@@ -379,6 +379,10 @@ class SplittedView(BaseView):
      LS_COL_COEFFLOAT,
      LS_COL_SPEEDFLOAT) = range(100, 113)
 
+    LS_COL_SORT_PLACEDINT = 10
+    LS_COL_SORT_COEFFLOAT = 11
+    LS_COL_SORT_SPEEDFLOAT = 12
+
     (COL_DATE,
      COL_RACEPOINT,
      COL_TYPE,
@@ -448,9 +452,9 @@ class SplittedView(BaseView):
         self.treeview.set_enable_search(False)
         self.selection = self.treeview.get_selection()
         colnames = [("band", None), ("year", None),
-                    ("place", self.LS_COL_PLACEDINT), ("out", None),
-                    ("coef", self.LS_COL_COEFFLOAT),
-                    ("speed", self.LS_COL_SPEEDFLOAT), ("sector", None),
+                    ("place", self.LS_COL_SORT_PLACEDINT), ("out", None),
+                    ("coef", self.LS_COL_SORT_COEFFLOAT),
+                    ("speed", self.LS_COL_SORT_SPEEDFLOAT), ("sector", None),
                     ("category", None), ("comment", None)]
         for index, (colname, sortid) in enumerate(colnames, start=1):
             textrenderer = Gtk.CellRendererText()
