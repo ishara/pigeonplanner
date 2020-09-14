@@ -1,3 +1,8 @@
+4.0.4:
+ * Fixed adding an existing database
+ * Fixed exporting pigeons
+ * Fixed sorting certain columns in results window
+
 4.0.3:
  * Added KBDB resultparser
  * Show resultparser usage
