@@ -466,6 +466,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.pigeon_search_bar.set_search_mode(not search_mode)
         if not search_mode:
             self.widgets.pigeon_search_entry.grab_focus()
+        else:
+            self.widgets.treeview.grab_focus()
 
     @common.LogFunctionCall()
     def menufilter_activate(self, _widget):
@@ -661,6 +663,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
 
     def on_pigeon_search_entry_stop_search(self, _widget):
         self.widgets.pigeon_search_bar.set_search_mode(False)
+        self.widgets.treeview.grab_focus()
 
     # Navigation arrows callbacks
     def on_button_top_clicked(self, _widget):
