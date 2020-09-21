@@ -23,6 +23,7 @@ Main window class
 import os
 import os.path
 import time
+import string
 import webbrowser
 import logging
 
@@ -627,6 +628,11 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
             self.menuremove_activate(None)
         elif keyname == "Insert":
             self.menuadd_activate(None)
+        elif event.string and event.string in string.ascii_letters:
+            self.widgets.pigeon_search_bar.set_search_mode(True)
+            self.widgets.pigeon_search_entry.grab_focus()
+            self.widgets.pigeon_search_entry.set_text(event.string)
+            self.widgets.pigeon_search_entry.set_position(-1)
 
     def on_selection_changed(self, selection):
         n_rows_selected = selection.count_selected_rows()
