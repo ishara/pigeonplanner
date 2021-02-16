@@ -16,7 +16,7 @@ Build-Depends:
 Standards-Version: 4.1.4
 Vcs-Bzr: https://code.launchpad.net/~timovwb/pigeonplanner/devel
 Vcs-browser: https://code.launchpad.net/~timovwb/pigeonplanner/devel
-Homepage: http://www.pigeonplanner.com/
+Homepage: https://www.pigeonplanner.com/
 
 Package: pigeonplanner
 Architecture: all

@@ -7,7 +7,7 @@
     <key>CFBundleExecutable</key>
     <string>pigeonplanner</string>
     <key>CFBundleGetInfoString</key>
-    <string>{version}, (C) 2009-{year} Timo Vanwynsberghe http://www.pigeonplanner.com</string>
+    <string>{version}, (C) 2009-{year} Timo Vanwynsberghe https://www.pigeonplanner.com</string>
     <key>CFBundleIconFile</key>
     <string>pigeonplanner.icns</string>
     <key>CFBundleIdentifier</key>

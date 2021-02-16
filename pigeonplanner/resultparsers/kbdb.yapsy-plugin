@@ -5,6 +5,6 @@ Module = kbdb
 [Documentation]
 Author = Timo Vanwynsberghe
 Version = 0.1
-Website = http://www.pigeonplanner.com
+Website = https://www.pigeonplanner.com
 Description = KBDB online results
 Usage = Browse to the wanted results on the <a href="https://www.kbdb.be/resultaten-internationaal/">KBDB website</a> and save the HTML file through the browser.

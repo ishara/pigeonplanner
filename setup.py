@@ -68,7 +68,7 @@ setup(
     ),
     author="Timo Vanwynsberghe",
     author_email="timovwb@gmail.com",
-    download_url="http://www.pigeonplanner.com/download",
+    download_url="https://www.pigeonplanner.com/download",
     license="GPLv3",
     url=const.WEBSITE,
     packages=find_packages(exclude=["tests"]),

@@ -38,7 +38,7 @@ ARTISTS = ["Timo Vanwynsberghe <timovwb@gmail.com>",
            "http://www.openclipart.org",
            "https://www.flaticon.com/authors/dave-gandy",
            "https://www.flaticon.com/authors/pixel-perfect"]
-WEBSITE = "http://www.pigeonplanner.com"
+WEBSITE = "https://www.pigeonplanner.com"
 DESCRIPTION = "Organise and manage your pigeons"
 LICENSE = """
 Pigeon Planner is free software: you can redistribute it and/or modify
@@ -109,10 +109,10 @@ CONFIGFILE_BACKUP = os.path.join(PREFDIR, u"pigeonplanner.json_bckp")
 
 TEMPDIR = tempfile.gettempdir()
 
-UPDATEURL = "http://www.pigeonplanner.com/version.json"
-DOWNLOADURL = "http://www.pigeonplanner.com/download"
-FORUMURL = "http://forum.pigeonplanner.com"
-MAILURL = "http://www.pigeonplanner.com/cgi-bin/pigeonplanner_mailing.py"
+UPDATEURL = "https://www.pigeonplanner.com/version.json"
+DOWNLOADURL = "https://www.pigeonplanner.com/download"
+FORUMURL = "https://forum.pigeonplanner.com"
+MAILURL = "https://www.pigeonplanner.com/cgi-bin/pigeonplanner_mailing.py"
 REPORTMAIL = "timovwb@gmail.com"
 DOCURL = WEBSITE + "/index.php?option=com_content&view=article&catid=9&id=%s"
 DOCURLMAIN = WEBSITE + "/support/documentation"

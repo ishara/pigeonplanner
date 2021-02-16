@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Pigeon Planner"
-#define MyAppURL "http://www.pigeonplanner.com"
+#define MyAppURL "https://www.pigeonplanner.com"
 #define MyAppVersion GetFileVersion("dist\pigeonplanner\pigeonplanner.exe")
 #define MyVersion() ParseVersion("dist\pigeonplanner\pigeonplanner.exe", Local[0], Local[1], Local[2], Local[3]), Str(Local[0]) + "." + Str(Local[1]) + "." + Str(Local[2]);
 
@@ -90,7 +90,7 @@ end;
 
 [Icons]
 Name: {group}\Pigeon Planner; Filename: {app}\pigeonplanner.exe; WorkingDir: {app}
-Name: {group}\{cm:ProgramOnTheWeb,Pigeon Planner}; Filename: http://www.pigeonplanner.com
+Name: {group}\{cm:ProgramOnTheWeb,Pigeon Planner}; Filename: https://www.pigeonplanner.com
 Name: {group}\{cm:UninstallProgram,Pigeon Planner}; Filename: {uninstallexe}
 Name: {commondesktop}\Pigeon Planner; Filename: {app}\pigeonplanner.exe; WorkingDir: {app}; Tasks: desktopicon
 
