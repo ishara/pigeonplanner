@@ -328,7 +328,7 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
         if const.WINDOWS:
-            cmd = ["explorer", "/select,", dbobj.directory]
+            cmd = ["explorer", "/select,", dbobj.path]
         elif const.OSX:
             cmd = ["open", dbobj.directory]
         else:
