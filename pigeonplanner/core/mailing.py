@@ -21,51 +21,29 @@ Interface for sending mails
 
 
 import urllib.parse
-import mimetypes
+
+import requests
 
 from pigeonplanner.core import const
-from pigeonplanner.core import common
+
+
+class MailError(Exception):
+    pass
 
 
 def send_email(recipient="", sender="", subject="", body="", attachment=None):
-    files = []
+    data = {
+        "mail_to": recipient,
+        "mail_from": sender,
+        "subject": urllib.parse.quote(subject),
+        "comment": urllib.parse.quote(body)
+    }
+    files = {}
     if attachment:
-        files.append(("file", open(attachment, "r")))
+        files["file"] = open(attachment, "rb")
 
-    fields = [("mail_to", recipient),
-              ("mail_from", sender),
-              ("subject", urllib.parse.quote(subject)),
-              ("comment", urllib.parse.quote(body))
-              ]
-
-    post_multipart(const.MAILURL, fields, files)
-
-
-def post_multipart(url, fields, files):
-    content_type, body = encode_multipart_formdata(fields, files)
-    headers = {"Content-type": content_type, "Content-length": str(len(body))}
-
-    return common.URLOpen().open(url, body.encode("utf-8"), headers, 40).read().strip()
-
-
-def encode_multipart_formdata(fields, files):
-    boundary = "----------%s" % common.get_random_number(20)
-    body = []
-    for (key, value) in fields:
-        body.append("--" + boundary)
-        body.append("Content-Disposition: form-data; name=\"%s\"" % key)
-        body.append("")
-        body.append(value)
-    for (key, fd) in files:
-        filename = fd.name.split("/")[-1]
-        contenttype = (mimetypes.guess_type(filename)[0] or "application/octet-stream")
-        body.append("--%s" % boundary)
-        body.append("Content-Disposition: form-data; name=\"%s\"; filename=\"%s\""
-                    % (key, filename))
-        body.append("Content-Type: %s" % contenttype)
-        fd.seek(0)
-        body.append("\r\n" + fd.read())
-    body.append("--" + boundary + "--")
-    body.append("")
-
-    return "multipart/form-data; boundary=%s" % boundary, "\r\n".join(body)
+    try:
+        response = requests.post(const.MAILURL, data=data, files=files)
+        response.raise_for_status()
+    except (requests.HTTPError, requests.ConnectionError, requests.Timeout) as exc:
+        raise MailError("Error sending email") from exc

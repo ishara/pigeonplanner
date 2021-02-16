@@ -29,7 +29,6 @@ from pigeonplanner.ui import builder
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.core import const
 from pigeonplanner.core import common
-from pigeonplanner.core import errors
 from pigeonplanner.core import mailing
 
 logger = logging.getLogger(__name__)
@@ -136,7 +135,7 @@ class MailDialog(builder.GtkBuilder):
         try:
             mailing.send_email(recipient, sender, subject, body, self.attachment)
             error = False
-        except (errors.UrlTimeout, Exception) as exc:
+        except mailing.MailError as exc:
             error = True
             logger.error(exc)
 
