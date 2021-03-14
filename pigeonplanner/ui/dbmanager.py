@@ -17,6 +17,7 @@
 
 
 import os
+import subprocess
 from xml.sax.saxutils import escape
 
 from gi.repository import Gtk
@@ -137,7 +138,8 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
             entries = [
                 (self.on_edit_clicked, None, _("Edit")),
                 (self.on_remove_clicked, None, _("Remove")),
-                (self.on_send_clicked, None, _("Send to the developers"))
+                (self.on_send_clicked, None, _("Send to the developers")),
+                (self.on_open_folder_clicked, None, _("Open folder"))
             ]
             utils.popup_menu(event, entries)
 
@@ -311,6 +313,18 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         model, rowiter = self.widgets.selection.get_selected()
         dbobj = model.get_value(rowiter, self.COL_OBJ)
         MailDialog(self.widgets.dialog, dbobj.path, kind="database")
+
+    @common.LogFunctionCall()
+    def on_open_folder_clicked(self, _widget):
+        model, rowiter = self.widgets.selection.get_selected()
+        dbobj = model.get_value(rowiter, self.COL_OBJ)
+        if const.WINDOWS:
+            cmd = ["explorer", "/select,", dbobj.path]
+        elif const.OSX:
+            cmd = ["open", dbobj.directory]
+        else:
+            cmd = ["xdg-open", dbobj.directory]
+        subprocess.run(cmd)
 
     def on_default_toggled(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
