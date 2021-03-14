@@ -51,9 +51,12 @@ class MailDialog(builder.GtkBuilder):
             self.widgets.frame_to.show()
             self.widgets.frame_subject.show()
         else:
-            import uuid
-            self.widgets.entry_subject.set_text("Pigeon Planner %s errorlog [%s]"
-                                                % (const.VERSION, str(uuid.uuid1())))
+            if kind == "database":
+                self.widgets.entry_subject.set_text("Pigeon Planner database")
+            elif kind == "log":
+                import uuid
+                self.widgets.entry_subject.set_text("Pigeon Planner %s errorlog [%s]"
+                                                    % (const.VERSION, str(uuid.uuid1())))
             self.widgets.entry_to.set_text(const.REPORTMAIL)
             self.widgets.rename.hide()
 
