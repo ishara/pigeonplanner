@@ -1,3 +1,9 @@
+4.0.5:
+ * Added menu entry to send the database to the developers
+ * Added menu entry to open the database location
+ * Updated translations
+ * Don't clean up DLLs in Windows build
+
 4.0.4:
  * Fixed adding an existing database
  * Fixed exporting pigeons
