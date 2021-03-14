@@ -104,22 +104,26 @@ print("Cleaning up dist directory...")
 orig_working_dir = os.getcwd()
 os.chdir("dist/pigeonplanner/")
 
+# TODO: this might be the cause of some startup errors. Keep everything at the
+#       root level for now again. Maybe PyInstaller will add this feature
+#       properly in the future. In the meantime we'll have to deal with a
+#       cluttered folder.
 # With the added runtime hook above, we can move a bunch of stuff inside the
 # lib directory. There are however a few DLLs that need to stay in the root.
-dlls_to_keep = [
-    "_struct-cpython-38.dll",
-    "libgcc_s_dw2-1.dll",
-    "libpython3.8.dll",
-    "libwinpthread-1.dll",
-    "zlib1.dll",
-    "zlib-cpython-38.dll",
-]
-dlls = glob.glob("*.dll")
-for dll in dlls:
-    if dll not in dlls_to_keep:
-        shutil.move(dll, "lib/")
-
-shutil.move("gi/", "lib/")
+# dlls_to_keep = [
+#     "_struct-cpython-38.dll",
+#     "libgcc_s_dw2-1.dll",
+#     "libpython3.8.dll",
+#     "libwinpthread-1.dll",
+#     "zlib1.dll",
+#     "zlib-cpython-38.dll",
+# ]
+# dlls = glob.glob("*.dll")
+# for dll in dlls:
+#     if dll not in dlls_to_keep:
+#         shutil.move(dll, "lib/")
+#
+# shutil.move("gi/", "lib/")
 
 # These directories and files inside are not required.
 shutil.rmtree("lib/python3.8/")
