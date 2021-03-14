@@ -28,6 +28,7 @@ from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui import exceptiondialog
+from pigeonplanner.ui.maildialog import MailDialog
 from pigeonplanner.ui.messagedialog import (InfoDialog, QuestionDialog,
                                             ErrorDialog, WarningDialog)
 from pigeonplanner.core import const
@@ -135,7 +136,9 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         if event.button == 3:
             entries = [
                 (self.on_edit_clicked, None, _("Edit")),
-                (self.on_remove_clicked, None, _("Remove"))]
+                (self.on_remove_clicked, None, _("Remove")),
+                (self.on_send_clicked, None, _("Send to the developers"))
+            ]
             utils.popup_menu(event, entries)
 
     def on_treeview_row_activated(self, _widget, _path, _view_column):
@@ -302,6 +305,12 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
 
         dialog.destroy()
         self.widgets.treeview.grab_focus()
+
+    @common.LogFunctionCall()
+    def on_send_clicked(self, _widget):
+        model, rowiter = self.widgets.selection.get_selected()
+        dbobj = model.get_value(rowiter, self.COL_OBJ)
+        MailDialog(self.widgets.dialog, dbobj.path, kind="database")
 
     def on_default_toggled(self, widget):
         model, rowiter = self.widgets.selection.get_selected()
