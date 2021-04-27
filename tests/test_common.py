@@ -21,10 +21,6 @@ import nose.tools as nt
 from pigeonplanner.core import common
 
 
-def test_func_name():
-    value = common.get_function_name()
-    nt.assert_equal(value, "test_func_name")
-
 def test_coefficient():
     value = common.calculate_coefficient(1, 100)
     nt.assert_equal(value, 1.0)
@@ -32,17 +28,17 @@ def test_coefficient():
     value = common.calculate_coefficient(1, 370)
     nt.assert_almost_equal(value, 0.2703, 4)
     value = common.calculate_coefficient(1, 370, True)
-    nt.assert_equal(value, "0,2703")
+    nt.assert_equal(value, "0.2703")
 
     value = common.calculate_coefficient(3, 981)
     nt.assert_almost_equal(value, 0.3058, 4)
     value = common.calculate_coefficient(3, 981, True)
-    nt.assert_equal(value, "0,3058")
+    nt.assert_equal(value, "0.3058")
 
     value = common.calculate_coefficient(30, 370)
     nt.assert_almost_equal(value, 8.1081, 4)
     value = common.calculate_coefficient(30, 370, True)
-    nt.assert_equal(value, "8,1081")
+    nt.assert_equal(value, "8.1081")
 
 def test_escape_text():
     value = common.escape_text(None)
