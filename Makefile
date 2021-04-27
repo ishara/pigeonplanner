@@ -16,13 +16,13 @@ test:
 	nosetests3 tests
 
 po:
-	python i18n.py -p
+	python3 i18n.py -p
 
 mo:
-	python i18n.py -m
+	python3 i18n.py -m
 
 sdist:
-	python setup.py sdist
+	python3 setup.py sdist
 
 release: clean test mo sdist
 
