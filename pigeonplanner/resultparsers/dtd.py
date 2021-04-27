@@ -83,13 +83,13 @@ class DTDParser(IPlugin):
                             losindex = items2.index("Deelnemers")
                         except ValueError:
                             losindex = items2.index("Amateurs")
-                category = items[losindex - 1]
                 pigeonsindex = losindex - 2
-                if not items[losindex - 2].isdigit():
-                    # This is not the number of pigeons, but a category with 2 words
-                    category = "%s %s" % (items[losindex - 2], category)
-                    pigeonsindex = losindex - 3
-                data["category"] = category
+                while not items[pigeonsindex].isdigit():
+                    # Category can be 1 or more words long. Loop until the number of pigeons is found,
+                    # then build the category string based on how many items in the list have passed.
+                    # Possible categories: Oude, Oude duiven, Jonge R3, Oude + jaarse
+                    pigeonsindex -= 1
+                data["category"] = " ".join(items[pigeonsindex + 1:losindex])
                 data["n_pigeons"] = items[pigeonsindex]
                 day, month, year = items[pigeonsindex - 1].split('-')
                 dt = datetime.date(int(expand_year(year)), int(month), int(day))
