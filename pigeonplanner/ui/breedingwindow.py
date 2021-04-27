@@ -15,11 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+import csv
+import datetime
 
+from gi.repository import Gtk
 from gi.repository import GObject
 
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import builder
+from pigeonplanner.ui.filechooser import ExportChooser
 from pigeonplanner.core import enums
 from pigeonplanner.database.models import Breeding
 
@@ -68,6 +72,15 @@ class BreedingWindow(builder.GtkBuilder):
     def on_filterdialog_close(self, _widget, _event=None):
         self.widgets.filterdialog.hide()
         return True
+
+    def on_export_clicked(self, _widget):
+        default_filename = "%s_%s.csv" % (_("Breeding"), datetime.date.today())
+        chooser = ExportChooser(self.widgets.window, default_filename, ("CSV", "*.csv"))
+        response = chooser.run()
+        if response == Gtk.ResponseType.OK:
+            filename = chooser.get_filename()
+            self._export_data(filename)
+        chooser.destroy()
 
     def on_filter_clicked(self, _widget):
         self.widgets.filterdialog.show()
@@ -140,6 +153,29 @@ class BreedingWindow(builder.GtkBuilder):
     # noinspection PyMethodMayBeStatic
     def on_bandentryegg2_search_clicked(self, _widget):
         return None, None, None
+
+    def get_report_data(self):
+        data = []
+        for row in self.widgets.treemodelfilter:
+            temp = []
+            for col in (self.LS_DATE, self.LS_COCK, self.LS_HEN,
+                        self.LS_EGG_1_LAID, self.LS_EGG_1_HATCHED, self.LS_EGG_1_BAND,
+                        self.LS_EGG_2_LAID, self.LS_EGG_2_HATCHED, self.LS_EGG_2_BAND):
+                temp.append(self.widgets.treemodelfilter.get_value(row.iter, col))
+            data.append(temp)
+        return data
+
+    def _export_data(self, filename):
+        data = self.get_report_data()
+        header = [
+            _("Date"), _("Cock"), _("Hen"),
+            _("Egg 1 laid"), _("Egg 1 hatched"), _("Egg 1 bandnumber"),
+            _("Egg 2 laid"), _("Egg 2 hatched"), _("Egg 2 bandnumber")
+        ]
+        with open(filename, "w", encoding="utf-8-sig") as output:
+            writer = csv.writer(output, dialect=csv.excel, quoting=csv.QUOTE_ALL)
+            writer.writerow(header)
+            writer.writerows(data)
 
     def _fill_treeview(self):
         for record in Breeding.select():
