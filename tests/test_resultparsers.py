@@ -84,7 +84,14 @@ def test_dtd():
     with open("tests/data/result_dtd_8.txt") as resultfile:
         data, results = parser.parse_file(resultfile)
     nt.assert_dict_equal(data, filedata)
-
+    # 3 word category
+    filedata["category"] = "Oude + jaarse"
+    filedata["n_pigeons"] = "839"
+    filedata["racepoint"] = "ARRAS"
+    filedata["date"] = "2021-04-24"
+    with open("tests/data/result_dtd_9.txt") as resultfile:
+        data, results = parser.parse_file(resultfile)
+    nt.assert_dict_equal(data, filedata)
 
 def test_kbdb_scrape_race_data():
     parser = manager.getPluginByName("KBDB online").plugin_object
