@@ -71,6 +71,32 @@
  * Many various UI changes
  * Many various code changes
 
+3.6.2:
+ * Fix pigeon search
+ * Fix possibility of entering invalid bandnumbers for parents
+ * Fix value limit in velocity calculator
+ * Fix decimal input in velocity calculator
+ * Fix SQLite wrapper in inital migration
+ * Updated translations
+
+3.6.1:
+ * Fixed error when automatically loading a database at startup
+
+3.6.0:
+ * Show message while pigeons are loading
+ * Added option to select between colour and strain as the extra line in the pedigree report
+ * Added button in database filechoosers to select the default location
+ * Fixed pedigree report boxes height
+ * Fixed error when printing a pedigree with a pigeon with a non-exiting image path
+ * Fixed DTD resultparser when importing an existing result
+ * Allow the database manager to be closed without open database
+ * Improved error messages on backups
+ * The "Show all pigeons" setting is not persistent anymore
+ * Show message when no database is selected on restore
+ * Multiple code changes
+ * Added Albanian translation
+ * Updated translations
+
 3.4.0:
  * Redesigned backup dialog
  * Fixed backups to work with custom database paths
