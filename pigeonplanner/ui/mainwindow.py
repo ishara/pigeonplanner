@@ -218,6 +218,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
 
         self._dbman = dbmanager.DBManagerWindow(parent=self)
         self._dbman.connect("database-loaded", self.on_database_loaded)
+        self._dbman.connect("database-closed", self.on_database_closed)
         self._dbman.run(True)
 
         if macapp is not None:
@@ -280,6 +281,12 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.widgets.actiongroup_database.set_sensitive(True)
         self.widgets.treeview.fill_treeview()
         self.widgets.treeview.grab_focus()
+
+    def on_database_closed(self, _dbman):
+        self.widgets.database_infobar.show()
+        self.widgets.mainvpaned.set_sensitive(False)
+        self.widgets.actiongroup_database.set_sensitive(False)
+        self.widgets.treeview.clear_treeview()
 
     def on_interface_changed(self, _dialog, arrows, stats, toolbar, statusbar):
         self.widgets.MenuArrows.set_active(arrows)

@@ -248,6 +248,11 @@ class MainTreeView(Gtk.TreeView, component.Component):
     def get_n_rows(self):
         return len(self._liststore)
 
+    def clear_treeview(self):
+        self._block_visible_func = True
+        self._liststore.clear()
+        self._block_visible_func = False
+
     def fill_treeview(self, path=0):
         self.set_model(None)
         component.get("MainWindow").widgets.actiongroup_database.set_sensitive(False)

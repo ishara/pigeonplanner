@@ -28,6 +28,7 @@ import logging
 import datetime
 import functools
 import webbrowser
+import subprocess
 
 try:
     import html
@@ -207,6 +208,16 @@ def open_file(path):
                 import subprocess
                 subprocess.call((prog, norm_path))
                 return
+
+
+def open_folder(path):
+    if const.WINDOWS:
+        cmd = ["explorer", "/root,", path]
+    elif const.OSX:
+        cmd = ["open", path]
+    else:
+        cmd = ["xdg-open", path]
+    subprocess.run(cmd)
 
 
 def open_help(article):

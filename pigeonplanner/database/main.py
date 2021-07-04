@@ -60,6 +60,7 @@ class DatabaseSession:
             raise DatabaseVersionError
 
     def close(self):
+        logger.debug("Closing database %s", self.dbfile)
         models.database.close()
         self.dbfile = None
 

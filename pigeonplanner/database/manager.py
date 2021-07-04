@@ -137,6 +137,13 @@ class DBManager:
         dbobj.default = value
         self.save()
 
+    def get_default(self):
+        """ Get the default database object. """
+        for db in self._dbs:
+            if db.default:
+                return db
+        return None
+
     def prompt_do_upgrade(self):
         """ Called when a database upgrade is needed. Return True to continue or False
         to abort. Override this method in the GUI to provide a dialog for example.
@@ -152,11 +159,11 @@ class DBManager:
         @param dbobj: The DatabaseInfo to open
         """
 
-        self._close_database()
+        self.close_database()
         session.open(dbobj.path)
         if session.needs_update():
             if not self.prompt_do_upgrade():
-                self._close_database()
+                self.close_database()
                 raise DatabaseInfoError("")
             session.do_migrations()
             self.upgrade_finished()
@@ -218,7 +225,7 @@ class DBManager:
         return dbobj
 
     def delete(self, dbobj):
-        self._close_database()
+        self.close_database()
 
         try:
             os.remove(dbobj.path)
@@ -269,6 +276,13 @@ class DBManager:
         self.save()
         return dbobj
 
+    # noinspection PyMethodMayBeStatic
+    def close_database(self):
+        try:
+            session.close()
+        except Exception as exc:
+            logger.error("Failed to close database: %s", exc)
+
     def _load_dbs(self):
         with open(const.DATABASEINFO) as infile:
             data = json.load(infile)
@@ -285,12 +299,6 @@ class DBManager:
 
         with open(const.DATABASEINFO, "w") as outfile:
             json.dump(data, outfile, indent=4)
-
-    def _close_database(self):
-        try:
-            session.close()
-        except:
-            pass
 
     def _get_new_db_path(self, path):
         # Keep checking for a unique filename
