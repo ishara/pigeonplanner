@@ -53,8 +53,8 @@ def all_tables():
 class DataModelMixin:
     @classmethod
     def get_data_list(cls):
-        column = cls.get_item_column()
-        data = (cls.select(column)
+        column = cls.get_item_column()  # noqa
+        data = (cls.select(column)  # noqa
                 .order_by(column.asc())
                 .dicts())
         return [item[column.name] for item in data]
@@ -64,14 +64,14 @@ class CoordinatesMixin:
     @property
     def latitude_float(self):
         try:
-            return float(self.latitude)
+            return float(self.latitude)  # noqa
         except ValueError:
             return None
 
     @property
     def longitude_float(self):
         try:
-            return float(self.longitude)
+            return float(self.longitude)  # noqa
         except ValueError:
             return None
 
@@ -174,7 +174,7 @@ class Pigeon(BaseModel):
             "year_short": self.band_year[2:],
             "empty": "",
         }
-        return self.band_format.format(**values)
+        return self.band_format.format(**values)  # noqa
 
     @property
     def band_tuple(self):
@@ -227,7 +227,7 @@ class Pigeon(BaseModel):
     @property
     def main_image(self):
         try:
-            return self.images.where(Image.main == True).get()
+            return self.images.where(Image.main == True).get()  # noqa
         except Image.DoesNotExist:
             return None
 
@@ -270,7 +270,7 @@ class Image(BaseModel):
 
     @property
     def exists(self):
-        return os.path.exists(self.path)
+        return os.path.exists(self.path)  # noqa
 
 
 class Result(BaseModel):

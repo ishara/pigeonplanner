@@ -30,15 +30,18 @@ peewee_logger = logging.getLogger("peewee")
 peewee_logger.disabled = True
 
 
-class DatabaseVersionError(Exception): pass
+class DatabaseVersionError(Exception):
+    pass
 
 
-class DatabaseMigrationError(Exception): pass
+class DatabaseMigrationError(Exception):
+    pass
 
 
 class DatabaseSession:
     def __init__(self):
         self.dbfile = None
+        self.is_new_db = None
 
     def open(self, dbfile=None):
         self.dbfile = dbfile or const.DATABASE
@@ -64,15 +67,19 @@ class DatabaseSession:
         models.database.close()
         self.dbfile = None
 
+    # noinspection PyMethodMayBeStatic
     def is_open(self):
         return not models.database.is_closed()
 
+    # noinspection PyMethodMayBeStatic
     def get_database_version(self):
         return models.database.pragma("user_version")
 
+    # noinspection PyMethodMayBeStatic
     def set_database_version(self, version):
         models.database.pragma("user_version", version)
 
+    # noinspection PyMethodMayBeStatic
     def optimize_database(self):
         models.database.execute_sql("VACUUM")
 
@@ -111,7 +118,7 @@ class DatabaseSession:
 
         try:
             os.remove(backupdb)
-        except Exception:
+        except Exception:  # noqa
             pass
 
         return True

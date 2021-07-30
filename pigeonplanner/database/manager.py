@@ -42,7 +42,7 @@ class DatabaseOperationError(Exception):
 
 
 class DatabaseInfo:
-    def __init__(self, name, path, description, default, **kwargs):
+    def __init__(self, name, path, description, default):
         self.name = name
         self.path = path
         self.description = description
@@ -144,6 +144,7 @@ class DBManager:
                 return db
         return None
 
+    # noinspection PyMethodMayBeStatic
     def prompt_do_upgrade(self):
         """ Called when a database upgrade is needed. Return True to continue or False
         to abort. Override this method in the GUI to provide a dialog for example.
@@ -283,6 +284,7 @@ class DBManager:
         except Exception as exc:
             logger.error("Failed to close database: %s", exc)
 
+    # noinspection PyMethodMayBeStatic
     def _load_dbs(self):
         with open(const.DATABASEINFO) as infile:
             data = json.load(infile)
@@ -300,8 +302,10 @@ class DBManager:
         with open(const.DATABASEINFO, "w") as outfile:
             json.dump(data, outfile, indent=4)
 
+    # noinspection PyMethodMayBeStatic
     def _get_new_db_path(self, path):
         # Keep checking for a unique filename
+        db = None
         exists = True
         while exists:
             db = os.path.join(path, "pigeonplanner_%s.db" % common.get_random_string(8))
