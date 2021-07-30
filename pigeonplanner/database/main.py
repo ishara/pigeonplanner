@@ -43,7 +43,7 @@ class DatabaseSession:
         self.dbfile = None
         self.is_new_db = None
 
-    def open(self, dbfile=None):
+    def open(self, dbfile: str = None):
         self.dbfile = dbfile or const.DATABASE
         self.is_new_db = (not os.path.exists(self.dbfile) or
                           os.path.getsize(self.dbfile) == 0)
@@ -68,26 +68,26 @@ class DatabaseSession:
         self.dbfile = None
 
     # noinspection PyMethodMayBeStatic
-    def is_open(self):
+    def is_open(self) -> bool:
         return not models.database.is_closed()
 
     # noinspection PyMethodMayBeStatic
-    def get_database_version(self):
+    def get_database_version(self) -> int:
         return models.database.pragma("user_version")
 
     # noinspection PyMethodMayBeStatic
-    def set_database_version(self, version):
+    def set_database_version(self, version: int):
         models.database.pragma("user_version", version)
 
     # noinspection PyMethodMayBeStatic
     def optimize_database(self):
         models.database.execute_sql("VACUUM")
 
-    def needs_update(self):
+    def needs_update(self) -> bool:
         db_version = self.get_database_version()
         return db_version < migrations.get_latest_version()
 
-    def do_migrations(self):
+    def do_migrations(self) -> bool:
         current_version = self.get_database_version()
         if current_version >= migrations.get_latest_version():
             return False

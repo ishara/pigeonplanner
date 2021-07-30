@@ -22,6 +22,7 @@ import errno
 import shutil
 import logging
 from datetime import datetime
+from typing import List, Optional
 
 from pigeonplanner.core import const
 from pigeonplanner.core import common
@@ -42,7 +43,7 @@ class DatabaseOperationError(Exception):
 
 
 class DatabaseInfo:
-    def __init__(self, name, path, description, default):
+    def __init__(self, name: str, path: str, description: str, default: bool):
         self.name = name
         self.path = path
         self.description = description
@@ -52,23 +53,23 @@ class DatabaseInfo:
         return u"<DatabaseInfo name=%s>" % self.name
 
     @property
-    def directory(self):
+    def directory(self) -> str:
         return os.path.dirname(self.path)
 
     @property
-    def filename(self):
+    def filename(self) -> str:
         return os.path.basename(self.path)
 
     @property
-    def exists(self):
+    def exists(self) -> bool:
         return os.path.exists(self.path)
 
     @property
-    def writable(self):
+    def writable(self) -> bool:
         return os.access(self.path, os.W_OK)
 
     @property
-    def last_access(self):
+    def last_access(self) -> str:
         try:
             t = os.path.getmtime(self.path)
         except OSError:
@@ -76,7 +77,7 @@ class DatabaseInfo:
         return datetime.fromtimestamp(t).strftime("%Y-%m-%d %H:%M:%S")
 
     @property
-    def filesize(self):
+    def filesize(self) -> int:
         try:
             s = os.path.getsize(self.path)
         except OSError:
@@ -109,7 +110,7 @@ class DBManager:
                 self._dbs = []
             self._save_dbs()
 
-    def get_databases(self):
+    def get_databases(self) -> List[DatabaseInfo]:
         """ Return a list of available database objects """
         return self._dbs
 
@@ -117,7 +118,7 @@ class DBManager:
         """ Save all database objects to the configuration file """
         self._save_dbs()
 
-    def reorder(self, new_order):
+    def reorder(self, new_order: List[DatabaseInfo]):
         """ Reorder the current database list to match the given list.
 
         @param new_order: List of DatabaseInfo objects
@@ -125,7 +126,7 @@ class DBManager:
         self._dbs.sort(key=lambda x: new_order.index(x))
         self.save()
 
-    def set_default(self, dbobj, value):
+    def set_default(self, dbobj: DatabaseInfo, value: bool):
         """ Set the default value to the given database object.
 
         @param dbobj: The DatabaseInfo to change
@@ -137,7 +138,7 @@ class DBManager:
         dbobj.default = value
         self.save()
 
-    def get_default(self):
+    def get_default(self) -> Optional[DatabaseInfo]:
         """ Get the default database object. """
         for db in self._dbs:
             if db.default:
@@ -145,7 +146,7 @@ class DBManager:
         return None
 
     # noinspection PyMethodMayBeStatic
-    def prompt_do_upgrade(self):
+    def prompt_do_upgrade(self) -> bool:
         """ Called when a database upgrade is needed. Return True to continue or False
         to abort. Override this method in the GUI to provide a dialog for example.
         """
@@ -154,7 +155,7 @@ class DBManager:
     def upgrade_finished(self):
         pass
 
-    def open(self, dbobj):
+    def open(self, dbobj: DatabaseInfo):
         """ Open the given database object.
 
         @param dbobj: The DatabaseInfo to open
@@ -169,7 +170,7 @@ class DBManager:
             session.do_migrations()
             self.upgrade_finished()
 
-    def add(self, name, description, path):
+    def add(self, name: str, description: str, path: str) -> DatabaseInfo:
         name = name.strip()
         description = description.strip()
 
@@ -186,7 +187,7 @@ class DBManager:
         self.save()
         return info
 
-    def create(self, name, description, path):
+    def create(self, name: str, description: str, path: str) -> DatabaseInfo:
         name = name.strip()
         description = description.strip()
 
@@ -203,7 +204,7 @@ class DBManager:
         self.save()
         return info
 
-    def edit(self, dbobj, name, description, path):
+    def edit(self, dbobj: DatabaseInfo, name: str, description: str, path: str) -> DatabaseInfo:
         name = name.strip()
         description = description.strip()
 
@@ -225,7 +226,7 @@ class DBManager:
         self.save()
         return dbobj
 
-    def delete(self, dbobj):
+    def delete(self, dbobj: DatabaseInfo):
         self.close_database()
 
         try:
@@ -246,7 +247,7 @@ class DBManager:
         self._dbs.remove(dbobj)
         self.save()
 
-    def copy(self, dbobj):
+    def copy(self, dbobj: DatabaseInfo) -> DatabaseInfo:
         n_copy = 1
         while True:
             name = "%s (%s %s)" % (dbobj.name, _("copy"), n_copy)
@@ -266,7 +267,7 @@ class DBManager:
         self.save()
         return info
 
-    def move(self, dbobj, new_path):
+    def move(self, dbobj: DatabaseInfo, new_path: str) -> DatabaseInfo:
         filename = os.path.basename(dbobj.path)
         destination = os.path.join(new_path, filename)
         try:
@@ -285,7 +286,7 @@ class DBManager:
             logger.error("Failed to close database: %s", exc)
 
     # noinspection PyMethodMayBeStatic
-    def _load_dbs(self):
+    def _load_dbs(self) -> List[DatabaseInfo]:
         with open(const.DATABASEINFO) as infile:
             data = json.load(infile)
         return [DatabaseInfo(**info) for info in data]
@@ -303,7 +304,7 @@ class DBManager:
             json.dump(data, outfile, indent=4)
 
     # noinspection PyMethodMayBeStatic
-    def _get_new_db_path(self, path):
+    def _get_new_db_path(self, path: str) -> str:
         # Keep checking for a unique filename
         db = None
         exists = True
@@ -312,7 +313,7 @@ class DBManager:
             exists = os.path.exists(db)
         return db
 
-    def _check_input_name(self, name):
+    def _check_input_name(self, name: str):
         if name == "":
             raise DatabaseInfoError(_("Database name is required."))
         for dbobj in self._dbs:

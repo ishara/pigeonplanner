@@ -16,6 +16,7 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 import os
+from typing import List, Callable, Optional, Union
 
 from pigeonplanner.core import enums
 
@@ -37,7 +38,7 @@ SIGNAL_MAP = {
 database = SqliteDatabase(None)
 
 
-def all_tables():
+def all_tables() -> List["BaseModel"]:
     tables = []
     for name, obj in globals().items():
         try:
@@ -52,7 +53,7 @@ def all_tables():
 
 class DataModelMixin:
     @classmethod
-    def get_data_list(cls):
+    def get_data_list(cls) -> List[str]:
         column = cls.get_item_column()  # noqa
         data = (cls.select(column)  # noqa
                 .order_by(column.asc())
@@ -62,20 +63,20 @@ class DataModelMixin:
 
 class CoordinatesMixin:
     @property
-    def latitude_float(self):
+    def latitude_float(self) -> Optional[float]:
         try:
             return float(self.latitude)  # noqa
         except ValueError:
             return None
 
     @property
-    def longitude_float(self):
+    def longitude_float(self) -> Optional[float]:
         try:
             return float(self.longitude)  # noqa
         except ValueError:
             return None
 
-    def has_valid_coordinates(self):
+    def has_valid_coordinates(self) -> bool:
         return self.latitude_float is not None and self.longitude_float is not None
 
 
@@ -85,14 +86,14 @@ class BaseModel(Model):
     class Meta:
         database = database
 
-    def update_and_return(self, **kwargs):
+    def update_and_return(self, **kwargs) -> "BaseModel":
         cls = self.__class__
         update_query = cls.update(**kwargs).where(cls.id == self.id)
         update_query.execute()
         return cls.get(cls.id == self.id)
 
     @classmethod
-    def get_fields_with_defaults(cls):
+    def get_fields_with_defaults(cls) -> dict:
         data_fields = {name: field.default for (name, field) in
                        cls._meta.fields.items() if name not in cls.defaults_fields_excludes}
         return data_fields
@@ -100,7 +101,7 @@ class BaseModel(Model):
     # This will enable connecting signals directly on the class. Example:
     #   Pigeon.connect("post_save", on_pigeon_post_save)
     @classmethod
-    def connect(cls, signal, handler):
+    def connect(cls, signal: str, handler: Callable):
         signal_func = SIGNAL_MAP[signal]
         signal_func.connect(handler, sender=cls)
 
@@ -159,13 +160,13 @@ class Pigeon(BaseModel):
         return "<Pigeon %s>" % self.band
 
     @classmethod
-    def get_for_band(cls, band_tuple):
+    def get_for_band(cls, band_tuple: tuple) -> "Pigeon":
         country, letters, number, year = band_tuple
         return cls.get((cls.band_country == country) & (cls.band_letters == letters) &
                        (cls.band_number == number) & (cls.band_year == year))
 
     @property
-    def band(self):
+    def band(self) -> str:
         values = {
             "country": self.band_country,
             "letters": self.band_letters,
@@ -177,27 +178,27 @@ class Pigeon(BaseModel):
         return self.band_format.format(**values)  # noqa
 
     @property
-    def band_tuple(self):
+    def band_tuple(self) -> tuple:
         return self.band_country, self.band_letters, self.band_number, self.band_year
 
     @property
-    def sex_string(self):
+    def sex_string(self) -> str:
         return enums.Sex.get_string(self.sex)
 
-    def is_cock(self):
+    def is_cock(self) -> bool:
         return self.sex == enums.Sex.cock
 
-    def is_hen(self):
+    def is_hen(self) -> bool:
         return self.sex == enums.Sex.hen
 
-    def is_youngbird(self):
+    def is_youngbird(self) -> bool:
         return self.sex == enums.Sex.youngbird
 
-    def is_unknown(self):
+    def is_unknown(self) -> bool:
         return self.sex == enums.Sex.unknown
 
     @property
-    def status(self):
+    def status(self) -> "Status":
         return self.statuses.get()
 
     # Used for the pigeon filter
@@ -206,26 +207,26 @@ class Pigeon(BaseModel):
         return self.status.status_id
 
     @property
-    def sire_filter(self):
+    def sire_filter(self) -> Union[tuple, str]:
         try:
             return self.sire.band_tuple
         except AttributeError:
             return ""
 
     @property
-    def dam_filter(self):
+    def dam_filter(self) -> Union[tuple, str]:
         try:
             return self.dam.band_tuple
         except AttributeError:
             return ""
 
     @property
-    def extra(self):
+    def extra(self) -> tuple:
         return (self.extra1, self.extra2, self.extra3,
                 self.extra4, self.extra5, self.extra6)
 
     @property
-    def main_image(self):
+    def main_image(self) -> Optional["Image"]:
         try:
             return self.images.where(Image.main == True).get()  # noqa
         except Image.DoesNotExist:
@@ -253,7 +254,7 @@ class Status(BaseModel):
         return "<Status %s for %s>" % (self.status_id, self.pigeon.band)
 
     @property
-    def status_string(self):
+    def status_string(self) -> str:
         return enums.Status.get_string(self.status_id)
 
 
@@ -269,7 +270,7 @@ class Image(BaseModel):
         return "<Image %s for %s>" % (self.path, self.pigeon.band)
 
     @property
-    def exists(self):
+    def exists(self) -> bool:
         return os.path.exists(self.path)  # noqa
 
 
