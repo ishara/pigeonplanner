@@ -84,7 +84,7 @@
               <object class="GtkToolButton">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="tooltip_text" translatable="yes">Printpreview for these results</property>
+                <property name="tooltip_text" translatable="yes">Print preview for these results</property>
                 <property name="label" translatable="yes">Preview</property>
                 <property name="use_underline">True</property>
                 <property name="icon_name">document-print-preview</property>
