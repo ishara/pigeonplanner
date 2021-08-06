@@ -116,19 +116,19 @@ def set_font_families():
     fam = [f for f in _TTF_FREEFONT.values() if f in family_names]
     if len(fam) == len(_TTF_FREEFONT):
         font_families = _TTF_FREEFONT
-        log.debug('Using FreeFonts: %s' % font_families)
+        # log.debug('Using FreeFonts: %s' % font_families)
         return
 
     fam = [f for f in _MS_TTFONT.values() if f in family_names]
     if len(fam) == len(_MS_TTFONT):
         font_families = _MS_TTFONT
-        log.debug('Using MS TrueType fonts: %s' % font_families)
+        # log.debug('Using MS TrueType fonts: %s' % font_families)
         return
 
     fam = [f for f in _GNOME_FONT.values() if f in family_names]
     if len(fam) == len(_GNOME_FONT):
         font_families = _GNOME_FONT
-        log.debug('Using Gnome fonts: %s' % font_families)
+        # log.debug('Using Gnome fonts: %s' % font_families)
         return
 
     log.debug('No fonts found.')
@@ -1301,7 +1301,7 @@ class GtkDocBox(GtkDocBaseElement):
         box_width = self._width * dpi_x / 2.54
         box_height = self._height * dpi_y / 2.54
 
-        box_stroke_color = utils.rgb_color((0, 0, 0))
+        box_stroke_color = utils.rgb_color(self._style.get_color())
         box_fill_color = utils.rgb_color(self._style.get_fill_color())
         shadow_color = utils.rgb_color((192, 192, 192))
 
@@ -1747,7 +1747,7 @@ links (like ODF) and write PDF from that format.
         style = style_sheet.get_draw_style(style_name)
         paragraph_style_name = style.get_paragraph_style()
         paragraph_style = style_sheet.get_paragraph_style(paragraph_style_name)
-        paragraph_style.set_alignment(PARA_ALIGN_LEFT)
+        # paragraph_style.set_alignment(PARA_ALIGN_LEFT)  # TODO: Removed for Pedigree Print Setup
 
         new_text = GtkDocText(paragraph_style, 'top',
                               self.__markup(text), x, y, angle=0, mark=mark)

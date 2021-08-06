@@ -88,6 +88,7 @@ if IS_FROZEN:
     CSSFILE = os.path.join(_DATADIR, u"style.css")
     MIGRATIONSDIR = os.path.join(_DATADIR, u"migrations")
     sys.path.append(MIGRATIONSDIR)
+    FONTDIR = os.path.join(_DATADIR, u"fonts")
 else:
     # This file is in pigeonplanner.core, so go 1 directory up
     ROOTDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
@@ -97,6 +98,7 @@ else:
     RESULTPARSERDIR = os.path.join(ROOTDIR, u"resultparsers")
     CSSFILE = os.path.join(ROOTDIR, u"ui", u"data", u"style.css")
     CSSFILE_MACOS = os.path.join(ROOTDIR, u"ui", u"data", u"style_macos.css")
+    FONTDIR = os.path.join(ROOTDIR, u"data", u"fonts")
 
 THUMBDIR = os.path.join(PREFDIR, u"thumbs")
 PLUGINDIR = os.path.join(PREFDIR, u"plugins")

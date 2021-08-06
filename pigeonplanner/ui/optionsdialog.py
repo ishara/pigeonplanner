@@ -33,7 +33,6 @@ from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.core import config
 from pigeonplanner.reportlib import report, PRINT_ACTION_PREVIEW
-from pigeonplanner.reports import get_pedigree
 
 
 class OptionsDialog(builder.GtkBuilder, GObject.GObject):
@@ -56,7 +55,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
             (_("Appearance"), "document-page-setup", []),
             (_("Columns"), "icon_columns", []),
             (_("Printing"), "document-print",
-                [_("Pedigree"), _("Pigeons"), _("Results")]),
+                [_("Pigeons"), _("Results")]),
             (_("Advanced"), "preferences-system", []),
         ]
         i = 0
@@ -118,18 +117,6 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
     def on_chkSex_toggled(self, widget):
         self.widgets.vboxSexCol.set_sensitive(widget.get_active())
 
-    def on_chkPigOptExtraLine_toggled(self, widget):
-        self.widgets.align_extra_line.set_sensitive(widget.get_active())
-
-    def on_btnPreview_clicked(self, _widget):
-        selected = self.widgets.cbLayout.get_active()
-        userinfo = common.get_own_address()
-        pedigree_report, pedigree_report_options = get_pedigree(layout=selected)
-        psize = common.get_pagesize_from_opts()
-        opts = pedigree_report_options(psize, print_action=PRINT_ACTION_PREVIEW,
-                                       parent=self.widgets.optionsdialog)
-        report(pedigree_report, opts, None, userinfo)
-
     def on_buttondefault_clicked(self, _widget):
         if WarningDialog(messages.MSG_DEFAULT_OPTIONS, self.widgets.optionsdialog).run():
             config.save_backup()
@@ -149,15 +136,6 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
             sexcoltype = 2
         elif self.widgets.radioSexTextImage.get_active():
             sexcoltype = 3
-
-        if not self.widgets.chkPigOptExtraLine.get_active():
-            extra_line_type = 0
-        elif self.widgets.radioPigeonExtraColour.get_active():
-            extra_line_type = 1
-        elif self.widgets.radioPigeonExtraStrain.get_active():
-            extra_line_type = 2
-        elif self.widgets.radioPigeonExtraLoft.get_active():
-            extra_line_type = 3
 
         settings = [
                 ("options.check-for-updates", self.widgets.chkUpdate.get_active()),
@@ -206,15 +184,6 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
                 ("columns.result-comment", self.widgets.chkComment.get_active()),
 
                 ("printing.general-paper", self.widgets.cbPaper.get_active()),
-                ("printing.pedigree-layout", self.widgets.cbLayout.get_active()),
-                ("printing.pedigree-use-box-color", self.widgets.chkBoxColor.get_active()),
-                ("printing.pedigree-use-box-fill-color", self.widgets.chkBoxFillColor.get_active()),
-                ("printing.pedigree-box-extra-line", extra_line_type),
-                ("printing.pedigree-name", self.widgets.chkPigName.get_active()),
-                ("printing.pedigree-colour", self.widgets.chkPigColour.get_active()),
-                ("printing.pedigree-sex", self.widgets.chkPigSex.get_active()),
-                ("printing.pedigree-extra", self.widgets.chkPigExtra.get_active()),
-                ("printing.pedigree-image", self.widgets.chkPigImage.get_active()),
                 ("printing.pigeon-colnames", self.widgets.chkPigColumnNames.get_active()),
                 ("printing.pigeon-sex", self.widgets.chkPigOptSex.get_active()),
                 ("printing.result-colnames", self.widgets.chkResColumnNames.get_active()),
@@ -293,34 +262,12 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         self.widgets.cbThemeName.set_active_id(config.get("interface.theme-name"))
 
         # Printing
-        extra_line_type = config.get("printing.pedigree-box-extra-line")
-        if extra_line_type == 0:
-            self.widgets.chkPigOptExtraLine.set_active(False)
-        elif extra_line_type == 1:
-            self.widgets.chkPigOptExtraLine.set_active(True)
-            self.widgets.radioPigeonExtraColour.set_active(True)
-        elif extra_line_type == 2:
-            self.widgets.chkPigOptExtraLine.set_active(True)
-            self.widgets.radioPigeonExtraStrain.set_active(True)
-        elif extra_line_type == 3:
-            self.widgets.chkPigOptExtraLine.set_active(True)
-            self.widgets.radioPigeonExtraLoft.set_active(True)
-
         self.widgets.cbPaper.set_active(config.get("printing.general-paper"))
-        self.widgets.cbLayout.set_active(config.get("printing.pedigree-layout"))
-        self.widgets.chkBoxColor.set_active(config.get("printing.pedigree-use-box-color"))
-        self.widgets.chkBoxFillColor.set_active(config.get("printing.pedigree-use-box-fill-color"))
 
         self.widgets.chkPerName.set_active(config.get("printing.user-name"))
         self.widgets.chkPerAddress.set_active(config.get("printing.user-address"))
         self.widgets.chkPerPhone.set_active(config.get("printing.user-phone"))
         self.widgets.chkPerEmail.set_active(config.get("printing.user-email"))
-
-        self.widgets.chkPigName.set_active(config.get("printing.pedigree-name"))
-        self.widgets.chkPigColour.set_active(config.get("printing.pedigree-colour"))
-        self.widgets.chkPigSex.set_active(config.get("printing.pedigree-sex"))
-        self.widgets.chkPigExtra.set_active(config.get("printing.pedigree-extra"))
-        self.widgets.chkPigImage.set_active(config.get("printing.pedigree-image"))
 
         self.widgets.chkPigColumnNames.set_active(config.get("printing.pigeon-colnames"))
         self.widgets.chkPigOptSex.set_active(config.get("printing.pigeon-sex"))

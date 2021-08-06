@@ -136,16 +136,27 @@ class Application(Gtk.Application):
         from pigeonplanner.ui.widgets import latlongentry
         from pigeonplanner.ui.widgets import displayentry
 
-        if const.WINDOWS:
-            from pigeonplanner.core import config
-            gtksettings = Gtk.Settings.get_default()
-            gtksettings.set_property("gtk-theme-name", config.get("interface.theme-name"))
-
         # Do this as soon as possible to avoid importing files that import a missing module
         self.notify_missing_libs()
         setup_logging()
         setup_icons()
         setup_custom_style()
+
+        if const.WINDOWS:
+            from pigeonplanner.core import config
+            gtksettings = Gtk.Settings.get_default()
+            gtksettings.set_property("gtk-theme-name", config.get("interface.theme-name"))
+
+            # Add the FreeFonts on Windows to have consistent reports
+            import os
+            import ctypes
+            gdi32 = ctypes.WinDLL("gdi32")
+            fonts = [os.path.join(const.FONTDIR, f) for f in os.listdir(const.FONTDIR)]
+            for font in fonts:
+                result = gdi32.AddFontResourceW(font)
+                # result is the number of fonts added
+                if result != 1:
+                    logger.warning("Failed to add font %s", font)
 
     def do_activate(self):
         if not self._window:

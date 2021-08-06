@@ -43,6 +43,8 @@ package_data = {
         "data/*.css"
     ]
 }
+if const.WINDOWS:
+    package_data["pigeonplanner"].append("data/fonts/*.ttf")
 
 data_files = []
 if const.UNIX:

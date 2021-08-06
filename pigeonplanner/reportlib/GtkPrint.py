@@ -140,7 +140,7 @@ def paperstyle_to_pagesetup(paper_style):
     # are handled as custom format, because we are not intelligent enough.
     if gramps_paper_name in gramps_to_gtk:
         paper_size = Gtk.PaperSize.new(name=gramps_to_gtk[gramps_paper_name])
-        log.debug("Selected paper size: %s", gramps_to_gtk[gramps_paper_name])
+        # log.debug("Selected paper size: %s", gramps_to_gtk[gramps_paper_name])
     else:
         if paper_style.get_orientation() == PAPER_PORTRAIT:
             paper_width = gramps_paper_size.get_width() * 10

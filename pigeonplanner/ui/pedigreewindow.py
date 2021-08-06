@@ -19,23 +19,12 @@
 A detailed pedigree of the selected pigeon.
 """
 
-import os
-
-from gi.repository import Gtk
-
 from pigeonplanner.ui import utils
-from pigeonplanner.ui import tools
 from pigeonplanner.ui import builder
 from pigeonplanner.ui import component
 from pigeonplanner.ui.widgets import pedigreeboxes
-from pigeonplanner.ui.filechooser import PdfSaver
-from pigeonplanner.ui.messagedialog import InfoDialog, ErrorDialog
-from pigeonplanner.core import common
-from pigeonplanner.core import config
+from pigeonplanner.ui.pedigreeprintsetup import setupwindow
 from pigeonplanner.database.models import Pigeon
-from pigeonplanner.reportlib import (report, ReportError, PRINT_ACTION_DIALOG,
-                                     PRINT_ACTION_PREVIEW, PRINT_ACTION_EXPORT)
-from pigeonplanner.reports import get_pedigree
 
 
 (PREVIOUS,
@@ -133,51 +122,5 @@ class PedigreeWindow(builder.GtkBuilder):
         new_pigeon = self.widgets.treeview.get_pigeon_at_path(self._current_pigeon_path + 1)
         self.set_pigeon(new_pigeon)
 
-    def on_save_clicked(self, _widget):
-        pdfname = "%s_%s.pdf" % (_("Pedigree"), self.pigeon.band.replace(" ", "_").replace("/", "-"))
-        chooser = PdfSaver(self.widgets.window, pdfname)
-        response = chooser.run()
-        if response == Gtk.ResponseType.OK:
-            save_path = chooser.get_filename()
-            try:
-                self.do_operation(PRINT_ACTION_EXPORT, save_path)
-            except Exception as exc:
-                msg = (_("There was an error saving the pedigree."), str(exc), _("Failed!"))
-                ErrorDialog(msg, self.widgets.window)
-        chooser.destroy()
-
     def on_preview_clicked(self, _widget):
-        self.do_operation(PRINT_ACTION_PREVIEW)
-
-    def on_print_clicked(self, _widget):
-        self.do_operation(PRINT_ACTION_DIALOG)
-
-    def do_operation(self, print_action, save_path=None):
-        userinfo = common.get_own_address()
-        if not tools.check_user_info(self.widgets.window, userinfo):
-            return
-
-        # Show a message to the user if the original image is not found and
-        # can't be shown on the pedigree
-        if config.get("printing.pedigree-image") and self.pigeon.main_image is not None:
-            if not os.path.exists(self.pigeon.main_image.path):
-                msg = (_("Cannot find image '%s'"),
-                       _("You need to edit the pigeon and select the correct "
-                         "path or restore the original image on your computer."),
-                       "")
-                # In some very old versions, an empty image was stored as an
-                # empty string instead of None. Don't show this message in cases
-                # like this of course.
-                if not self.pigeon.main_image.path == "":
-                    InfoDialog(msg, self.widgets.window, self.pigeon.main_image.path)
-
-        pedigree_report, pedigree_report_options = get_pedigree()
-        psize = common.get_pagesize_from_opts()
-        opts = pedigree_report_options(psize, print_action=print_action, filename=save_path, parent=self.widgets.window)
-        try:
-            report(pedigree_report, opts, self.pigeon, userinfo)
-        except ReportError as exc:
-            ErrorDialog((exc.value.split("\n")[0],
-                         _("You probably don't have write permissions on this folder."),
-                         _("Error"))
-                        )
+        setupwindow.PedigreePrintSetupWindow(self.widgets.window, self.pigeon)

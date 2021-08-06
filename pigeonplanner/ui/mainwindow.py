@@ -48,6 +48,7 @@ from pigeonplanner.ui import optionsdialog
 from pigeonplanner.ui import pedigreewindow
 from pigeonplanner.ui.widgets import treeview
 from pigeonplanner.ui.messagedialog import ErrorDialog, InfoDialog
+from pigeonplanner.ui.pedigreeprintsetup import setupwindow
 from pigeonplanner.core import enums
 from pigeonplanner.core import const
 from pigeonplanner.core import common
@@ -58,7 +59,6 @@ from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.database import session
 from pigeonplanner.database.models import Pigeon
 from pigeonplanner.reportlib import report
-from pigeonplanner.reports import get_pedigree
 from pigeonplanner.reports.pigeons import PigeonsReport, PigeonsReportOptions
 
 logger = logging.getLogger(__name__)
@@ -115,6 +115,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
          <menuitem action="Edit"/>
          <menuitem action="Remove"/>
          <menuitem action="Pedigree"/>
+         <menuitem action="PrintPedigreeAlt"/>
          <menuitem action="Addresult"/>
       </menu>
       <menu action="ToolsMenu">
@@ -155,6 +156,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
       <menuitem action="Edit"/>
       <menuitem action="Remove"/>
       <menuitem action="Pedigree"/>
+      <menuitem action="PrintPedigreeAlt"/>
       <menuitem action="RestoreHidden"/>
    </popup>
 </ui>
@@ -348,22 +350,11 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         pigeon = self.widgets.treeview.get_selected_pigeon()
         if pigeon is None or isinstance(pigeon, list):
             return
-        userinfo = common.get_own_address()
+        setupwindow.PedigreePrintSetupWindow(self, pigeon)
 
-        pedigree_report, pedigree_report_options = get_pedigree()
-        psize = common.get_pagesize_from_opts()
-        opts = pedigree_report_options(psize)
-        report(pedigree_report, opts, pigeon, userinfo)
-
-    # noinspection PyMethodMayBeStatic
     @common.LogFunctionCall()
     def menuprintblank_activate(self, _widget):
-        userinfo = common.get_own_address()
-
-        pedigree_report, pedigree_report_options = get_pedigree()
-        psize = common.get_pagesize_from_opts()
-        opts = pedigree_report_options(psize)
-        report(pedigree_report, opts, None, userinfo)
+        setupwindow.PedigreePrintSetupWindow(self, None)
 
     @common.LogFunctionCall()
     def menubackup_activate(self, _widget):

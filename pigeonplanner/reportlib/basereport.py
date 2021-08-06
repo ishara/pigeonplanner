@@ -60,7 +60,12 @@ class Report(object):
         if reportopts.print_action == PRINT_ACTION_EXPORT:
             docgenclass = PdfDoc
         else:
-            docgenclass = GtkPrint
+            if reportopts.is_pedigree_preview:
+                from pigeonplanner.ui.pedigreeprintsetup.gtkprint import GtkPrintCustom
+                docgenclass = GtkPrintCustom
+            else:
+                docgenclass = GtkPrint
+
         self.doc = docgenclass(style_sheet, paper_style)
         self.doc.open(reportopts.filename, reportopts.parent)
 
@@ -77,13 +82,14 @@ class Report(object):
 class ReportOptions(object):
     def __init__(self, paper="A4", orientation=PAPER_PORTRAIT,
                        print_action=PRINT_ACTION_DIALOG, filename=None,
-                       margins={}, parent=None):
+                       margins={}, parent=None, is_pedigree_preview=False):
         self.paper = paper
         self.orientation = orientation
         self.print_action = print_action
         self.filename = filename
         self.margins = margins
         self.parent = parent
+        self.is_pedigree_preview = is_pedigree_preview
 
     def set_values(self):
         """ Override to change attributes from within the report.

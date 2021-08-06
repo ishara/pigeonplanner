@@ -20,7 +20,6 @@
   </object>
   <object class="GtkWindow" id="window">
     <property name="can_focus">False</property>
-    <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="default_width">900</property>
     <property name="default_height">600</property>
@@ -99,51 +98,11 @@
               <object class="GtkToolButton">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="tooltip_text" translatable="yes">Save this pedigree</property>
-                <property name="label" translatable="yes">Save</property>
-                <property name="use_underline">True</property>
-                <property name="icon_name">document-save</property>
-                <signal name="clicked" handler="on_save_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSeparatorToolItem">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolButton">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="tooltip_text" translatable="yes">View this pedigree</property>
                 <property name="label" translatable="yes">Preview</property>
                 <property name="use_underline">True</property>
                 <property name="icon_name">document-print-preview</property>
                 <signal name="clicked" handler="on_preview_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolButton">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="tooltip_text" translatable="yes">Print this pedigree</property>
-                <property name="label" translatable="yes">Print</property>
-                <property name="use_underline">True</property>
-                <property name="icon_name">document-print</property>
-                <signal name="clicked" handler="on_print_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>

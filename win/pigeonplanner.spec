@@ -35,6 +35,7 @@ a = Analysis(
         ("../pigeonplanner/ui/glade/*.ui", "share/pigeonplanner/glade"),
         ("../pigeonplanner/data/images/*.png", "share/pigeonplanner/images"),
         ("../pigeonplanner/data/images/pigeonplanner.svg", "share/pigeonplanner/images"),
+        ("../pigeonplanner/data/fonts/", "share/pigeonplanner/fonts"),
         ("../pigeonplanner/data/languages/", "share/pigeonplanner/languages"),
         ("../pigeonplanner/resultparsers/*.py", "share/pigeonplanner/resultparsers"),
         ("../pigeonplanner/resultparsers/*.yapsy-plugin", "share/pigeonplanner/resultparsers"),

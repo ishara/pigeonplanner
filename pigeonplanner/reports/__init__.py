@@ -14,21 +14,3 @@
 
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
-
-
-from pigeonplanner.core import config
-
-
-def get_pedigree(layout=None):
-    if layout is None:
-        layout = config.get("printing.pedigree-layout")
-
-    if layout == 0:
-        from .pedigrees.original import PedigreeReport, PedigreeReportOptions
-    elif layout == 1:
-        from .pedigrees.swapped_details import PedigreeReport, PedigreeReportOptions
-    elif layout == 2:
-        from .pedigrees.middle import PedigreeReport, PedigreeReportOptions
-
-    return PedigreeReport, PedigreeReportOptions
-
