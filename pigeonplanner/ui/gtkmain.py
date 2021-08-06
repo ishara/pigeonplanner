@@ -39,10 +39,10 @@ except ImportError:
 try:
     gi.require_version("OsmGpsMap", "1.0")
 except ValueError:
-    dialog = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR,
-                               Gtk.ButtonsType.CLOSE, "The OsmGpsMap typelib file can not be found.")
-    dialog.format_secondary_text("Install gir1.2-osmgpsmap-1.0 or equivalent for your operating system.")
-    dialog.run()
+    _dialog = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR,
+                                Gtk.ButtonsType.CLOSE, "The OsmGpsMap typelib file can not be found.")
+    _dialog.format_secondary_text("Install gir1.2-osmgpsmap-1.0 or equivalent for your operating system.")
+    _dialog.run()
     sys.exit(0)
 
 from pigeonplanner.core import const
@@ -68,7 +68,7 @@ def setup_logging():
     logger.addHandler(handler)
 
     logger.debug("Python version: %s" % ".".join(map(str, sys.version_info[:3])))
-    logger.debug("GTK+ version: %s.%s.%s" % (Gtk.MAJOR_VERSION, Gtk.MINOR_VERSION, Gtk.MICRO_VERSION))
+    logger.debug("GTK version: %s.%s.%s" % (Gtk.MAJOR_VERSION, Gtk.MINOR_VERSION, Gtk.MICRO_VERSION))
     logger.debug("PyGObject version: %s" % ".".join(map(str, GObject.pygobject_version)))
     gtksettings = Gtk.Settings.get_default()
     logger.debug("GTK theme name: %s" % gtksettings.get_property("gtk-theme-name"))
@@ -131,10 +131,10 @@ class Application(Gtk.Application):
         # self.set_app_menu(menu)
 
         # Import widgets that are used in GtkBuilder files (no idea why these and not others)
-        from pigeonplanner.ui.widgets import statusbar
-        from pigeonplanner.ui.widgets import checkbutton
-        from pigeonplanner.ui.widgets import latlongentry
-        from pigeonplanner.ui.widgets import displayentry
+        from pigeonplanner.ui.widgets import statusbar  # noqa
+        from pigeonplanner.ui.widgets import checkbutton  # noqa
+        from pigeonplanner.ui.widgets import latlongentry  # noqa
+        from pigeonplanner.ui.widgets import displayentry  # noqa
 
         # Do this as soon as possible to avoid importing files that import a missing module
         self.notify_missing_libs()

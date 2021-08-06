@@ -31,8 +31,8 @@ import webbrowser
 import subprocess
 
 try:
-    import html
-    import urllib.request
+    import html  # noqa
+    import urllib.request  # noqa
 except ImportError:
     # Glade only supports Python 2 when using custom widgets. Catch these Python 3 libraries and
     # silently pass on, no widget calls functions that use these libraries.
@@ -71,7 +71,7 @@ def count_active_pigeons(pigeons=None):
     """
 
     if pigeons is None:
-        pigeons = Pigeon.select().where(Pigeon.visible == True)
+        pigeons = Pigeon.select().where(Pigeon.visible == True)  # noqa
 
     cocks = 0
     hens = 0
@@ -98,7 +98,7 @@ def get_own_address():
     """
 
     try:
-        person = Person.get(Person.me == True)
+        person = Person.get(Person.me == True)  # noqa
     except Person.DoesNotExist:
         person = None
     except peewee.OperationalError:
@@ -106,7 +106,7 @@ def get_own_address():
         # user's email address for the report dialog. When the error happens
         # during database creation or migration, there's no Person table yet.
         person = None
-    except Exception:
+    except Exception:  # noqa
         # When an unhandled exception occurs before a database is opened, this
         # function is called as well. PeeWee just throws a generic Exception.
         person = None
@@ -169,11 +169,11 @@ def get_random_string(length):
     return "".join(random.choice(chars) for _ in range(length))
 
 
-def url_hook(about, link):
+def url_hook(_about, link):
     webbrowser.open(link)
 
 
-def email_hook(about, email):
+def email_hook(_about, email):
     webbrowser.open("mailto:%s" % email)
 
 
@@ -230,6 +230,8 @@ def get_pagesize_from_opts():
         psize = "A4"
     elif optvalue == 1:
         psize = "Letter"
+    else:
+        raise ValueError("Invalid paper size option: %s" % optvalue)
     return psize
 
 

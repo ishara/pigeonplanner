@@ -16,13 +16,10 @@
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
 
-import os
 import operator
 
 from gi.repository import Gtk
-from gi.repository import GdkPixbuf
 
-from pigeonplanner.core import const
 from pigeonplanner.core import enums
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeon as corepigeon
