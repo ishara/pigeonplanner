@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 19:10+0200\n"
+"POT-Creation-Date: 2021-08-06 21:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2213,6 +2213,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1452
 #: pigeonplanner/ui/glade/Dialogs.ui:8
+#: pigeonplanner/ui/glade/PedigreePrintSetup.ui:856
 #: pigeonplanner/ui/glade/AddressBook.ui:299
 msgid "E-mail"
 msgstr ""
@@ -2552,17 +2553,8 @@ msgstr ""
 msgid "Create a new or add an existing database to get started."
 msgstr ""
 
-#: pigeonplanner/ui/glade/DBManager.ui:287
-#: pigeonplanner/ui/glade/DBManager.ui:684
-msgid "page0"
-msgstr ""
-
 #: pigeonplanner/ui/glade/DBManager.ui:467
 msgid "For advanced use only. Use the default settings if you are in doubt."
-msgstr ""
-
-#: pigeonplanner/ui/glade/DBManager.ui:532
-msgid "page1"
 msgstr ""
 
 #: pigeonplanner/ui/glade/DBManager.ui:567
@@ -2722,10 +2714,6 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:746
 msgid "Header"
-msgstr ""
-
-#: pigeonplanner/ui/glade/PedigreePrintSetup.ui:856
-msgid "Email"
 msgstr ""
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:936
