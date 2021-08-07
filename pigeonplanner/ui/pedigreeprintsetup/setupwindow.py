@@ -62,7 +62,7 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
         self._layout_loaded = False  # TODO: might want to rename
         self.layout = None
 
-        self._preview_widget = preview.PrintPreviewWidget.get_instance()
+        self._preview_widget = preview.PrintPreviewWidget.get_instance(self)
         self.widgets.main_box.pack_start(self._preview_widget, True, True, 0)
 
         self.widgets.config_layout_combo.set_active_id("original")
@@ -151,11 +151,7 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
                                                   is_pedigree_preview=True)
         report(base_pedigree.PedigreeReport, opts, self._pigeon, userinfo, self.layout)
 
-    def on_window_destroy(self, _widget):
-        self._preview_widget.end_preview()
-        preview.PrintPreviewWidget.destroy_instance()
-
-    def on_button_save_clicked(self, _widget):
+    def save_pedigree(self):
         pdfname = "%s_%s.pdf" % (_("Pedigree"), self._pigeon.band.replace(" ", "_").replace("/", "-"))
         chooser = PdfSaver(self.widgets.window, pdfname)
         response = chooser.run()
@@ -169,8 +165,12 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
 
         chooser.destroy()
 
-    def on_button_print_clicked(self, _widget):
+    def print_pedigree(self):
         self.generate_report(print_action=PRINT_ACTION_DIALOG)
+
+    def on_window_destroy(self, _widget):
+        self._preview_widget.end_preview()
+        preview.PrintPreviewWidget.destroy_instance()
 
     def on_config_layout_combo_changed(self, widget: Gtk.ComboBoxText):
         layout_id = widget.get_active_id()

@@ -47,9 +47,11 @@ class PrintPreviewWidget(Gtk.Box, builder.WidgetFactory):
 
     _instance = None
 
-    def __init__(self):
-        Gtk.Box.__init__(self, orientation=Gtk.Orientation.VERTICAL)  # noqa
-        builder.WidgetFactory.__init__(self)  # noqa
+    def __init__(self, setup_instance=None):
+        Gtk.Box.__init__(self, orientation=Gtk.Orientation.VERTICAL)
+        builder.WidgetFactory.__init__(self)
+
+        self._setup_instance = setup_instance
 
         self.set_hexpand(True)
 
@@ -88,9 +90,9 @@ class PrintPreviewWidget(Gtk.Box, builder.WidgetFactory):
         self.show_all()
 
     @classmethod
-    def get_instance(cls):
+    def get_instance(cls, setup_instance=None):
         if cls._instance is None:
-            cls._instance = cls()
+            cls._instance = cls(setup_instance=setup_instance)
         return cls._instance
 
     @classmethod
@@ -98,36 +100,54 @@ class PrintPreviewWidget(Gtk.Box, builder.WidgetFactory):
         cls._instance = None
 
     def __build_toolbar(self):
-        toolbar = Gtk.Toolbar()
-        toolbar.set_style(Gtk.ToolbarStyle.ICONS)
-        self.pack_start(toolbar, False, False, 0)
+        image_save = Gtk.Image.new_from_icon_name("document-save-symbolic", Gtk.IconSize.BUTTON)
+        button_save = Gtk.Button(label=_("Save PDF"), image=image_save, always_show_image=True)
+        button_save.connect("clicked", self.on_save_clicked)
+        image_print = Gtk.Image.new_from_icon_name("document-print-symbolic", Gtk.IconSize.BUTTON)
+        button_print = Gtk.Button(label=_("Print"), image=image_print, always_show_image=True)
+        button_print.connect("clicked", self.on_print_clicked)
+        box_actions = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        box_actions.get_style_context().add_class("linked")
+        box_actions.pack_start(button_save, False, False, 0)
+        box_actions.pack_start(button_print, False, False, 0)
 
-        quit_button = Gtk.ToolButton(icon_name="window-close")
-        quit_button.connect("clicked", self.on_quit_clicked)
-        quit_button.set_tooltip_text(_("Close this window"))
-        toolbar.insert(quit_button, -1)
-        seperator = Gtk.SeparatorToolItem()
-        toolbar.insert(seperator, -1)
-
-        self._zoom_fit_width_button = Gtk.ToggleToolButton(icon_name="zoom-fit-best")
+        image_zoom_fit_width = Gtk.Image.new_from_icon_name("zoom-fit-best-symbolic", Gtk.IconSize.BUTTON)
+        self._zoom_fit_width_button = Gtk.ToggleButton(image=image_zoom_fit_width)
         self._zoom_fit_width_button.connect("toggled", self.on_zoom_fit_width_toggled)
         self._zoom_fit_width_button.set_tooltip_text(_("Zooms to fit the page width"))
-        toolbar.insert(self._zoom_fit_width_button, -1)
-        self._zoom_best_fit_button = Gtk.ToggleToolButton(icon_name="zoom-fit-best")
+        image_zoom_best_fit = Gtk.Image.new_from_icon_name("zoom-fit-best-symbolic", Gtk.IconSize.BUTTON)
+        self._zoom_best_fit_button = Gtk.ToggleButton(image=image_zoom_best_fit)
         self._zoom_best_fit_button.connect("toggled", self.on_zoom_best_fit_toggled)
         self._zoom_best_fit_button.set_tooltip_text(_("Zooms to fit the whole page"))
-        toolbar.insert(self._zoom_best_fit_button, -1)
-        self._zoom_original_button = Gtk.ToolButton(icon_name="zoom-original")
+        self._zoom_original_button = Gtk.Button.new_from_icon_name("zoom-original-symbolic", Gtk.IconSize.BUTTON)
         self._zoom_original_button.connect("clicked", self.on_zoom_original_clicked)
-        toolbar.insert(self._zoom_original_button, -1)
-        self._zoom_in_button = Gtk.ToolButton(icon_name="zoom-in")
+        self._zoom_in_button = Gtk.Button.new_from_icon_name("zoom-in-symbolic", Gtk.IconSize.BUTTON)
         self._zoom_in_button.connect("clicked", self.on_zoom_in_clicked)
         self._zoom_in_button.set_tooltip_text(_("Zooms the page in"))
-        toolbar.insert(self._zoom_in_button, -1)
-        self._zoom_out_button = Gtk.ToolButton(icon_name="zoom-out")
+        self._zoom_out_button = Gtk.Button.new_from_icon_name("zoom-out-symbolic", Gtk.IconSize.BUTTON)
         self._zoom_out_button.connect("clicked", self.on_zoom_out_clicked)
         self._zoom_out_button.set_tooltip_text(_("Zooms the page out"))
-        toolbar.insert(self._zoom_out_button, -1)
+        box_zoom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        box_zoom.get_style_context().add_class("linked")
+        box_zoom.pack_start(self._zoom_fit_width_button, False, False, 0)
+        box_zoom.pack_start(self._zoom_best_fit_button, False, False, 0)
+        box_zoom.pack_start(self._zoom_original_button, False, False, 0)
+        box_zoom.pack_start(self._zoom_in_button, False, False, 0)
+        box_zoom.pack_start(self._zoom_out_button, False, False, 0)
+
+        button_quit = Gtk.Button.new_from_icon_name("window-close", Gtk.IconSize.BUTTON)
+        button_quit.connect("clicked", self.on_quit_clicked)
+        button_quit.set_tooltip_text(_("Close this window"))
+        box_window = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        box_window.get_style_context().add_class("linked")
+        box_window.pack_start(button_quit, False, False, 0)
+
+        box_outer = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12, border_width=10)
+        box_outer.pack_start(box_actions, False, False, 0)
+        box_outer.pack_start(box_zoom, False, False, 0)
+        box_outer.pack_start(box_window, False, False, 0)
+
+        self.pack_start(box_outer, False, False, 0)
 
     def __set_zoom(self, zoom):
         self._zoom = zoom
@@ -247,6 +267,12 @@ class PrintPreviewWidget(Gtk.Box, builder.WidgetFactory):
 
     def on_quit_clicked(self, _widget):
         self.get_toplevel().destroy()
+
+    def on_save_clicked(self, _widget):
+        self._setup_instance.save_pedigree()
+
+    def on_print_clicked(self, _widget):
+        self._setup_instance.print_pedigree()
 
     def on_zoom_fit_width_toggled(self, toggletoolbutton):
         if toggletoolbutton.get_active():
