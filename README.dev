@@ -1,9 +1,9 @@
 -= Translations =-
 Create/update translation template:
-    python i18n.py -p
+    python3 i18n.py -p
 
 Create/update compiled mo languages:
-    python i18n.py -m
+    python3 i18n.py -m
 
 
 -= Install build system =-
@@ -13,7 +13,7 @@ Windows:
     Run the MSYS2 shell, then:
         sh win/msys2_install_deps.sh
         python3 -m pip install -r requirements
-        python3 -m pip install pyinstaller
+        python3 -m pip install pyinstaller==3.6
     Install Inno Setup QuickStart Pack:
         http://www.jrsoftware.org/isdl.php
 
@@ -30,7 +30,7 @@ macOS:
 
 -= Packaging =-
 Linux:
-    python setup.py sdist
+    python3 setup.py sdist
 
 Ubuntu:
     dch -i
@@ -39,7 +39,7 @@ Ubuntu:
 Windows:
     Start the MSYS2 environment.
     python3 -m pip install .
-    python win/build_packages.py
+    python3 win/build_packages.py
 
 macOS:
     jhbuild shell
