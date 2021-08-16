@@ -33,7 +33,6 @@ from typing import Tuple, Optional, Union
 
 try:
     import html  # noqa
-    import urllib.request  # noqa
 except ImportError:
     # Glade only supports Python 2 when using custom widgets. Catch these Python 3 libraries and
     # silently pass on, no widget calls functions that use these libraries.
@@ -156,15 +155,6 @@ def add_zero_to_time(value: int) -> str:
     return str(value)
 
 
-def get_random_number(value: int) -> str:
-    """Get a random number of the given length
-
-    :param value: The length of the number
-    """
-
-    return "".join([random.choice("0123456789") for _ in range(value)])
-
-
 def get_random_string(length: int) -> str:
     chars = string.ascii_letters + string.digits
     return "".join(random.choice(chars) for _ in range(length))
@@ -234,35 +224,3 @@ def get_pagesize_from_opts() -> str:
     else:
         raise ValueError("Invalid paper size option: %s" % optvalue)
     return psize
-
-
-class URLOpen:
-    """
-    A custom class to open URLs
-    """
-    def __init__(self, cookie=None):
-        """
-        Build our urllib.request opener
-
-        @param cookie: Cookie to be used
-        """
-
-        self.opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie))
-
-    def open(self, url, body, headers=None, timeout=8):
-        """
-        Open a given url
-
-        @param url: The url to open
-        @param body: Extra data to send along
-        @param headers: Optional header
-        @param timeout: timeout in seconds
-        """
-
-        if not headers:
-            headers = const.USER_AGENT
-        else:
-            if "User-Agent" not in headers:
-                headers.update(const.USER_AGENT)
-
-        return self.opener.open(urllib.request.Request(url, body, headers), timeout=timeout)
