@@ -17,15 +17,18 @@
 
 
 import operator
+from typing import List, Tuple, Callable, Optional
 
 from gi.repository import Gtk
+from gi.repository import Gdk
 
 from pigeonplanner.core import enums
 from pigeonplanner.core import config
 from pigeonplanner.core import pigeon as corepigeon
+from pigeonplanner.database.models import Pigeon
 
 
-def get_sex_icon_name(sex):
+def get_sex_icon_name(sex: enums.Sex) -> str:
     if sex == enums.Sex.cock:
         return "symbol_male"
     elif sex == enums.Sex.hen:
@@ -34,7 +37,7 @@ def get_sex_icon_name(sex):
         return "symbol_young"
 
 
-def get_status_icon_name(status):
+def get_status_icon_name(status: enums.Status) -> str:
     status_icon_mapping = {
         enums.Status.dead: "status_dead",
         enums.Status.active: "status_active",
@@ -47,7 +50,7 @@ def get_status_icon_name(status):
     return status_icon_mapping[status]
 
 
-def set_multiple_sensitive(widgets, value=None):
+def set_multiple_sensitive(widgets: List[Gtk.Widget], value: Optional[bool] = None):
     """Set multiple widgets sensitive at once
 
     :param widgets: dic or list of widgets
@@ -61,7 +64,7 @@ def set_multiple_sensitive(widgets, value=None):
             widget.set_sensitive(value)
 
 
-def set_multiple_visible(widgets, value=None):
+def set_multiple_visible(widgets: List[Gtk.Widget], value: Optional[bool] = None):
     """Set multiple widgets visible at once
 
     :param widgets: dic or list of widgets
@@ -75,7 +78,7 @@ def set_multiple_visible(widgets, value=None):
             widget.set_visible(value)
 
 
-def popup_menu(event, entries):
+def popup_menu(event: Gdk.Event, entries: List[Tuple[Callable, Optional[Tuple], str]]):
     """Make a right click menu
 
     :param event: The GTK event
@@ -95,7 +98,7 @@ def popup_menu(event, entries):
     menu.popup_at_pointer(event)
 
 
-def draw_pedigree(grid, root_pigeon=None, draw_cb=None):
+def draw_pedigree(grid: Gtk.Grid, root_pigeon: Optional[Pigeon] = None, draw_cb: Optional[Callable] = None):
     # Moved down here to avoid import errors
     from pigeonplanner.ui.widgets import pedigreeboxes
 
@@ -120,14 +123,14 @@ def draw_pedigree(grid, root_pigeon=None, draw_cb=None):
 
 class HiddenPigeonsMixin:
     # noinspection PyMethodMayBeStatic
-    def _visible_func(self, model, rowiter, _data=None):
+    def _visible_func(self, model: Gtk.TreeModel, rowiter: Gtk.TreeModelRowIter, _data=None) -> bool:
         pigeon = model.get_value(rowiter, 0)
         if not pigeon.visible:
             return not config.get("interface.missing-pigeon-hide")
         return True
 
     # noinspection PyMethodMayBeStatic
-    def _cell_func(self, _column, cell, model, rowiter, _data=None):
+    def _cell_func(self, _col, cell: Gtk.CellRenderer, model: Gtk.TreeModel, rowiter: Gtk.TreeModelRowIter, _data=None):
         pigeon = model.get_value(rowiter, 0)
         color = "white"
         if config.get("interface.missing-pigeon-color"):

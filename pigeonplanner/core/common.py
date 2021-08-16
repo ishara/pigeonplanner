@@ -29,6 +29,7 @@ import datetime
 import functools
 import webbrowser
 import subprocess
+from typing import Tuple, Optional, Union
 
 try:
     import html  # noqa
@@ -61,7 +62,7 @@ class LogFunctionCall:
         return wrapper
 
 
-def get_date():
+def get_date() -> str:
     return datetime.date.today().strftime(const.DATE_FORMAT)
 
 
@@ -92,7 +93,7 @@ def count_active_pigeons(pigeons=None):
     return total, cocks, hens, ybirds, unknown
 
 
-def get_own_address():
+def get_own_address() -> Optional[Person]:
     """
     Retrieve the users personal info
     """
@@ -113,7 +114,7 @@ def get_own_address():
     return person
 
 
-def calculate_coefficient(place, out, as_string=False):
+def calculate_coefficient(place: int, out: int, as_string: Optional[bool] = False) -> Union[str, float]:
     """Calculate the coefficient of a result
 
     :param place: The pigeons place
@@ -127,7 +128,7 @@ def calculate_coefficient(place, out, as_string=False):
     return coef
 
 
-def format_place_coef(place, out):
+def format_place_coef(place: int, out: int) -> Tuple[str, float, str]:
     coef = calculate_coefficient(place, out)
     if place == 0:
         coefstr = "-"
@@ -138,13 +139,13 @@ def format_place_coef(place, out):
     return placestr, coef, coefstr
 
 
-def format_speed(value):
+def format_speed(value: float) -> str:
     if value <= 0.0:
         return ""
     return locale.format_string("%.2f", value)
 
 
-def add_zero_to_time(value):
+def add_zero_to_time(value: int) -> str:
     """Add a zero in front of a one digit number
 
     :param value: The value to be checked
@@ -155,7 +156,7 @@ def add_zero_to_time(value):
     return str(value)
 
 
-def get_random_number(value):
+def get_random_number(value: int) -> str:
     """Get a random number of the given length
 
     :param value: The length of the number
@@ -164,26 +165,26 @@ def get_random_number(value):
     return "".join([random.choice("0123456789") for _ in range(value)])
 
 
-def get_random_string(length):
+def get_random_string(length: int) -> str:
     chars = string.ascii_letters + string.digits
     return "".join(random.choice(chars) for _ in range(length))
 
 
-def url_hook(_about, link):
+def url_hook(_about, link: str):
     webbrowser.open(link)
 
 
-def email_hook(_about, email):
+def email_hook(_about, email: str):
     webbrowser.open("mailto:%s" % email)
 
 
-def escape_text(text):
+def escape_text(text: str) -> str:
     if not text:
         return ""
     return html.escape(text, True)
 
 
-def open_file(path):
+def open_file(path: str):
     from pigeonplanner.ui.messagedialog import ErrorDialog
 
     norm_path = os.path.normpath(path)
@@ -210,7 +211,7 @@ def open_file(path):
                 return
 
 
-def open_folder(path):
+def open_folder(path: str):
     if const.WINDOWS:
         cmd = ["explorer", "/root,", path]
     elif const.OSX:
@@ -220,11 +221,11 @@ def open_folder(path):
     subprocess.run(cmd)
 
 
-def open_help(article):
+def open_help(article: int):
     webbrowser.open(const.DOCURL % article)
 
 
-def get_pagesize_from_opts():
+def get_pagesize_from_opts() -> str:
     optvalue = config.get("printing.general-paper")
     if optvalue == 0:
         psize = "A4"
