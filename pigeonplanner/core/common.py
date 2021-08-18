@@ -29,7 +29,7 @@ import datetime
 import functools
 import webbrowser
 import subprocess
-from typing import Tuple, Optional, Union
+from typing import List, Dict, Tuple, Optional, Union
 
 try:
     import html  # noqa
@@ -41,6 +41,7 @@ except ImportError:
 import peewee
 
 from pigeonplanner.core import const
+from pigeonplanner.core import enums
 from pigeonplanner.core import config
 from pigeonplanner.database.models import Pigeon, Person
 
@@ -65,31 +66,36 @@ def get_date() -> str:
     return datetime.date.today().strftime(const.DATE_FORMAT)
 
 
-def count_active_pigeons(pigeons=None):
+def count_active_pigeons(pigeons: Optional[List[Pigeon]] = None) -> Dict[Union[str, int], int]:
+    """Count the number of active pigeons in the database. If an optional list of pigeons
+    is given, count those.
+
+    :param pigeons: Optional. List of Pigeon objects.
+    :returns: A dictionary containing total number of pigeons and numbers per sex.
     """
-    Count the active pigeons as total and seperate sexes
-    """
+
+    counts = {
+        "total": 0,
+        enums.Sex.cock: 0,
+        enums.Sex.hen: 0,
+        enums.Sex.youngbird: 0,
+        enums.Sex.unknown: 0
+    }
 
     if pigeons is None:
-        pigeons = Pigeon.select().where(Pigeon.visible == True)  # noqa
+        query = (Pigeon
+               .select(Pigeon.sex, peewee.fn.Count(Pigeon.sex).alias("count"))
+               .where(Pigeon.visible == True)  # noqa
+               .group_by(Pigeon.sex))
+        for row in query:
+            counts[row.sex] = row.count
+    else:
+        for pigeon in pigeons:
+            counts[pigeon.sex] += 1
 
-    cocks = 0
-    hens = 0
-    ybirds = 0
-    unknown = 0
-    total = 0
-    for pigeon in pigeons:
-        total += 1
-        if pigeon.is_cock():
-            cocks += 1
-        elif pigeon.is_hen():
-            hens += 1
-        elif pigeon.is_youngbird():
-            ybirds += 1
-        elif pigeon.is_unknown():
-            unknown += 1
+    counts["total"] = sum(counts.values())
 
-    return total, cocks, hens, ybirds, unknown
+    return counts
 
 
 def get_own_address() -> Optional[Person]:

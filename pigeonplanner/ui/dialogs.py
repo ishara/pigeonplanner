@@ -144,13 +144,18 @@ class InformationDialog(Gtk.Dialog):
                 ("Distribution", distribution))
 
     def get_data(self):
-        total, cocks, hens, ybirds, unknown = common.count_active_pigeons()
+        pigeon_count = common.count_active_pigeons()
+        total = pigeon_count["total"]
         data = [
             (_("Number of pigeons"), str(total)),
-            ("    %s" % _("Cocks"), "%s\t(%s %%)" % (cocks, self.get_percentage(cocks, total))),
-            ("    %s" % _("Hens"), "%s\t(%s %%)" % (hens, self.get_percentage(hens, total))),
-            ("    %s" % _("Young birds"), "%s\t(%s %%)" % (ybirds, self.get_percentage(ybirds, total))),
-            ("    %s" % _("Unknown"), "%s\t(%s %%)" % (unknown, self.get_percentage(unknown, total)))
+            ("    %s" % _("Cocks"), "%s\t(%s %%)"
+             % (pigeon_count[enums.Sex.cock], self.get_percentage(pigeon_count[enums.Sex.cock], total))),
+            ("    %s" % _("Hens"), "%s\t(%s %%)"
+             % (pigeon_count[enums.Sex.hen], self.get_percentage(pigeon_count[enums.Sex.hen], total))),
+            ("    %s" % _("Young birds"), "%s\t(%s %%)"
+             % (pigeon_count[enums.Sex.youngbird], self.get_percentage(pigeon_count[enums.Sex.youngbird], total))),
+            ("    %s" % _("Unknown"), "%s\t(%s %%)"
+             % (pigeon_count[enums.Sex.unknown], self.get_percentage(pigeon_count[enums.Sex.unknown], total)))
         ]
         for status in range(7):
             n_status = (Status.select()

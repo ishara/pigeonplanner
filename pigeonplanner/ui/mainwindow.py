@@ -598,13 +598,13 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
     # Main treeview callbacks
     def on_treeview_pigeons_changed(self, _widget):
         pigeons = self.widgets.treeview.get_pigeons(filtered=True)
-        total, cocks, hens, ybirds, unknown = common.count_active_pigeons(pigeons)
-        self.widgets.labelStatTotal.set_markup("<b>%i</b>" % total)
-        self.widgets.labelStatCocks.set_markup("<b>%i</b>" % cocks)
-        self.widgets.labelStatHens.set_markup("<b>%i</b>" % hens)
-        self.widgets.labelStatYoung.set_markup("<b>%i</b>" % ybirds)
-        self.widgets.labelStatUnknown.set_markup("<b>%i</b>" % unknown)
-        self.widgets.statusbar.set_total(total)
+        pigeon_count = common.count_active_pigeons(pigeons)
+        self.widgets.labelStatTotal.set_markup("<b>%i</b>" % pigeon_count["total"])
+        self.widgets.labelStatCocks.set_markup("<b>%i</b>" % pigeon_count[enums.Sex.cock])
+        self.widgets.labelStatHens.set_markup("<b>%i</b>" % pigeon_count[enums.Sex.hen])
+        self.widgets.labelStatYoung.set_markup("<b>%i</b>" % pigeon_count[enums.Sex.youngbird])
+        self.widgets.labelStatUnknown.set_markup("<b>%i</b>" % pigeon_count[enums.Sex.unknown])
+        self.widgets.statusbar.set_total(pigeon_count["total"])
 
     def on_treeview_release_event(self, widget, event):
         pthinfo = widget.get_path_at_pos(int(event.x), int(event.y))
