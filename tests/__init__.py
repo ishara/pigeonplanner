@@ -17,4 +17,12 @@
 
 
 import gettext
+
+import gi
+
+
 gettext.install("", "")
+
+gi.require_version("Gtk", "3.0")
+gi.require_version("GdkPixbuf", "2.0")
+gi.require_version("OsmGpsMap", "1.0")
