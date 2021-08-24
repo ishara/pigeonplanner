@@ -26,6 +26,7 @@ gettext.install("", "")
 
 import gi
 gi.require_version("PangoCairo", "1.0")
+gi.require_version("OsmGpsMap", "1.0")
 
 from pigeonplanner.ui.widgets import bandentry
 from pigeonplanner.ui.widgets import displayentry
