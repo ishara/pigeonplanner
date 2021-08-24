@@ -47,6 +47,23 @@ macOS:
     python3 mac/build_package.py
 
 
+-= Glade =-
+Compile Glade with Python 3 support:
+
+    PYTHON="/usr/bin/python3" ./configure
+
+Make sure the output shows that Python widgets are supported:
+
+    PYTHON Widgets support:	 yes
+
+If not, check if python-gi-dev is installed and configure again.
+
+Run Glade with the correct path to the custom widgets:
+
+    cd pigeonplanner/ui/glade
+    GLADE_ENV_MODULE_PATH=. GLADE_MODULE_SEARCH_PATH=. GLADE_CATALOG_SEARCH_PATH=. glade
+
+
 -= Other =-
     export PYTHONPATH=dev
     python setup.py develop --install-dir dev
