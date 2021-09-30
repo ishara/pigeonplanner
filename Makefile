@@ -1,3 +1,5 @@
+.PHONY: help clean test po mo sdist release
+
 help:
 	@echo "  clean       remove unwanted stuff"
 	@echo "  test        run tests using nose"
