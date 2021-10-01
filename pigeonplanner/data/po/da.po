@@ -1,48 +1,48 @@
-# Russian translations for Pigeon Planner package.
-# Copyright (C) 2009 Alexey Bogdanov
-# This file is distributed under the same license as the Pigeon Planner package.
+# Danish translation for pigeonplanner
+# Copyright (c) 2021 Rosetta Contributors and Canonical Ltd 2021
+# This file is distributed under the same license as the pigeonplanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Pigeon Planner 0.4\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pigeonplanner\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2021-08-06 23:25+0200\n"
-"PO-Revision-Date: 2020-03-15 16:22+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
-"Language-Team: none <>\n"
+"PO-Revision-Date: 2021-09-21 15:22+0000\n"
+"Last-Translator: Jimmy Frydkær Jensen <jimmy@frydkaer.net>\n"
+"Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-08-07 06:13+0000\n"
-"X-Generator: Launchpad (build c08a1e23be9b835a8d0e7a32b2e55270fac05933)\n"
-"Language: \n"
+"X-Launchpad-Export-Date: 2021-09-22 04:36+0000\n"
+"X-Generator: Launchpad (build 1ebe1b0e212bc611a219cd41410c4d5143daacf0)\n"
 
 #: pigeonplanner/messages.py:19 pigeonplanner/ui/resultwindow.py:793
 #: pigeonplanner/ui/backupdialog.py:144 pigeonplanner/ui/exportwindow.py:59
 #: pigeonplanner/ui/exportwindow.py:83 pigeonplanner/core/common.py:191
 #: pigeonplanner/core/common.py:198
 msgid "Error"
-msgstr "Ошибка"
+msgstr "Fejl"
 
 #: pigeonplanner/messages.py:20
 msgid "Warning"
-msgstr "Предупреждение"
+msgstr "Advarsel"
 
 #: pigeonplanner/messages.py:23
 msgid "Pigeon Planner is already running."
-msgstr "Pigeon Planner уже запущен"
+msgstr "Pigeon Planner kører allerede."
 
 #: pigeonplanner/messages.py:27
 msgid ""
 "The database you are trying to open is too new for your version of Pigeon "
 "Planner. You need to reinstall the latest version to continue."
 msgstr ""
-"Ваша версия программы Pigeon Planner устарела и не поддерживает новый тип "
-"базы данных, которую Вы собираетесь открыть. Чтобы продолжить работу,  Вам "
-"необходимо установить более свежую версию программы."
+"Databasen du prøver at åbne er for ny til din version af Pigeon Planner. Du "
+"skal geninstallere den seneste version for at fortsætte."
 
 #: pigeonplanner/messages.py:32
 msgid "Database update required!"
-msgstr ""
+msgstr "Database opdatering påkrævet!"
 
 #: pigeonplanner/messages.py:33
 msgid ""
@@ -50,6 +50,9 @@ msgid ""
 "Pigeon Planner won't work anymore. This may take a moment. Do you want to "
 "continue?"
 msgstr ""
+"Denne database har brug for en opdatering før den kan bruges. Tidligere "
+"versioner af Pigeon Planner virker ikke længere. Dette kan tage et øjeblik. "
+"Ønsker du at fortsætte?"
 
 #: pigeonplanner/messages.py:38
 msgid ""
@@ -57,80 +60,83 @@ msgid ""
 "Note that it is not advised to run an older version, which can lead to data "
 "corruption."
 msgstr ""
-"Базы данных программы Pigeon Planner были обновлены, чтобы соответствовать "
-"текущей версии. Обратите внимание: не рекомендуется запускать более старую "
-"версию, так как это может привести к потере данных."
+"Pigeon Planner databasen er blevet opdateret for at matche den nuværende "
+"version. Det er ikke tilrådeligt at køre en ældre version, som kan føre til "
+"datakorruption."
 
 #: pigeonplanner/messages.py:44
 msgid ""
 "The database migration has failed! Any further actions are stopped to "
 "prevent data loss. Please contact the developers to fix this problem."
 msgstr ""
+"Database migrationen fejlede. Alle yderligere handlinger er stoppet for at "
+"forhindre tab af data. Kontakt venligst udviklerne for at løse dette problem."
 
 #: pigeonplanner/messages.py:50 pigeonplanner/messages.py:53
 msgid "Removing database"
-msgstr "Удаление базы данных"
+msgstr "Fjerner database"
 
 #: pigeonplanner/messages.py:51
 msgid "Are you sure you want to remove the database? All data will be lost."
 msgstr ""
-"Вы уверены, что хотите удалить базу данных? Все данные будут потеряны."
+"Er du sikker på at du ønsker at fjerne databasen? Alle data vil gå tabt."
 
 #: pigeonplanner/messages.py:55
 msgid "Invalid image!"
-msgstr "Неправильный файл изображения!"
+msgstr "Ugyldigt billede"
 
 #: pigeonplanner/messages.py:56
 msgid ""
 "This image is either not supported or corrupt, please choose another one."
 msgstr ""
-"Формат изображения не поддерживается или файл поврежден. Выберете другой."
+"Dette billede er enten ikke understøttet eller korrupt, vælg venligst et "
+"andet."
 
 #: pigeonplanner/messages.py:59
 msgid "Loading image failed!"
-msgstr "Ошибка загрузки изображения!"
+msgstr "Indlæsning af billede fejlede!"
 
 #: pigeonplanner/messages.py:60
 msgid "Maybe you have renamed the image or moved it on your disk."
-msgstr "Возможно вы переименовали или переместили файл."
+msgstr "Måske har du omdøbt billedet eller flyttet det på din disk."
 
 #: pigeonplanner/messages.py:63
 msgid ""
 "This pigeon already exists, but isn't showing. Do you want to show it again?"
 msgstr ""
-"Этот голубь уже зарегистрирован, но не показан. Хотите показать его снова?"
+"Denne pigeon due allerede, men vises ikke. Ønsker du at vise den igen?"
 
 #: pigeonplanner/messages.py:67
 msgid "This pigeon already exists. Overwrite it?"
-msgstr "Этот голубь уже зарегистрирован. Перезаписать?"
+msgstr "Denne due eksisterer allerede. Overskriv den?"
 
 #: pigeonplanner/messages.py:70
 msgid "This pigeon already exists."
-msgstr "Этот голубь уже есть."
+msgstr "Denne due eksisterer allerede."
 
 #: pigeonplanner/messages.py:73
 msgid "This pigeon doesn't exist. Do you want to add it?"
-msgstr "Такой голубь не зарегистрирован. Добавить его?"
+msgstr "Denne due eksisterer ikke. Ønsker du at tilføje den?"
 
 #: pigeonplanner/messages.py:75
 msgid "Adding pigeon"
-msgstr "Добавление голубя"
+msgstr "Tilføjer due"
 
 #: pigeonplanner/messages.py:76
 msgid "The selected pigeon can't be found."
-msgstr "Выбранный голубь не найден."
+msgstr "Den valgte due kan ikke findes."
 
 #: pigeonplanner/messages.py:78
 msgid "Not found!"
-msgstr "Не найден!"
+msgstr "Ikke fundet!"
 
 #: pigeonplanner/messages.py:79
 msgid "Can't search for parents, enter the pigeon band first."
-msgstr "Невозможно найти родителей. Сначала введите номер кольца голубя."
+msgstr "Kan ikke søge forældre, indtast due båndet først."
 
 #: pigeonplanner/messages.py:82
 msgid "Mate does not exist, enter or search for an existing pigeon."
-msgstr ""
+msgstr "Makker eksisterer ikke, indtast eller søg efter en eksisterende due."
 
 #: pigeonplanner/messages.py:86 pigeonplanner/messages.py:89
 #: pigeonplanner/messages.py:92 pigeonplanner/messages.py:95
@@ -139,178 +145,177 @@ msgstr ""
 #: pigeonplanner/messages.py:122 pigeonplanner/ui/exportwindow.py:59
 #: pigeonplanner/ui/widgets/bandentry.py:38
 msgid "Invalid input!"
-msgstr "Неверный ввод!"
+msgstr "Ugyldig inddata!"
 
 #: pigeonplanner/messages.py:87
 msgid "The ringnumber and year are necessary."
-msgstr "Номер кольца и год должны быть указаны"
+msgstr "Ringnummeret og år er nødvendig."
 
 #: pigeonplanner/messages.py:90 pigeonplanner/ui/widgets/bandentry.py:232
 msgid "Only numbers are accepted as year input."
-msgstr "В поле ввода года допускаются только цифры."
+msgstr "Kun tal er accepteret som i år inddata."
 
 #: pigeonplanner/messages.py:93
 msgid "Check the length of the year."
-msgstr "Проверьте  корректность введенного года"
+msgstr "Kontroller længden af året."
 
 #: pigeonplanner/messages.py:96
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr "В поле ввода номера кольца допустимы только числа"
+msgstr "Kun tal er tilladt når du tilføjer flere duer."
 
 #: pigeonplanner/messages.py:100
 msgid "At least the date and racepoint have to be entered."
-msgstr "По крайней мере, дата и позиция в гонке должны быть введены."
+msgstr "I det mindste skal dato og racepoint indtastes."
 
 #: pigeonplanner/messages.py:103
 msgid ""
 "The date you entered has the wrong format. It should be ISO-format (YYYY-MM-"
 "DD)."
 msgstr ""
-"Вы ввели дату в неправильном формате. Нужно испльзовать ISO формат ГГГГ-ММ-ДД"
+"Datoen du indtastede har forkert format. Det skal være ISO-format (YYYY-MM-"
+"DD)."
 
 #: pigeonplanner/messages.py:107
 msgid "The result you want to add already exists."
-msgstr "Результаты, которые вы хотите ввести уже записаны"
+msgstr "Resultatet du ønsker at tilføje eksisterer allerede."
 
 #: pigeonplanner/messages.py:109
 msgid "Removing the selected result"
-msgstr "Удаление выбраного результата."
+msgstr "Fjerner det valgte resultat"
 
 #: pigeonplanner/messages.py:110 pigeonplanner/messages.py:113
 #: pigeonplanner/messages.py:116 pigeonplanner/messages.py:157
 #: pigeonplanner/ui/tabs/medication.py:112
 #: pigeonplanner/ui/tools/racepointsmap.py:140
 msgid "Are you sure?"
-msgstr "Вы уверены?"
+msgstr "Er du sikker?"
 
 #: pigeonplanner/messages.py:112
 msgid "Removing the selected breeding record"
-msgstr ""
+msgstr "Fjerner den valgte avls rapport"
 
 #: pigeonplanner/messages.py:115
 msgid "Removing the selected media file"
-msgstr "Удаление выбранного медиа-файла"
+msgstr "Fjerner den valgte mediefil"
 
 #: pigeonplanner/messages.py:120
 msgid "The name has to be entered."
-msgstr "Имя должно быть введено."
+msgstr "Navnet skal indtastes"
 
 #: pigeonplanner/messages.py:123
 msgid "The persoon you want to add already exists."
-msgstr "Добавляемая вами персона уже зарегистрирована."
+msgstr "Personen du ønsker at tilføje eksisterer allerede."
 
 #: pigeonplanner/messages.py:125
 #, python-format
 msgid "Removing '%s'"
-msgstr "Удаление '%s'"
+msgstr "Fjerner '%s'"
 
 #: pigeonplanner/messages.py:126
 msgid "Are you sure you want to remove this person from your addresses?"
-msgstr "Вы уверены, что хотите удалить эту персону с ваших адресов?"
+msgstr ""
+"Er du sikker på at du ønsker at fjerne denne person fra dine adresser?"
 
 #: pigeonplanner/messages.py:130
 #, python-format
 msgid "Removing '%s' from '%s'."
-msgstr "Удаление  '%s' из '%s'."
+msgstr "Fjerner '%s' fra '%s'"
 
 #: pigeonplanner/messages.py:131
 msgid "Are you sure you want to remove this item?"
-msgstr "Вы уверены, что хотите удалить это?"
+msgstr "Er du sikker på at du ønsker at fjerne dette objekt?"
 
 #: pigeonplanner/messages.py:134
 msgid "The backup was successfully created."
-msgstr "Резервная копия успешно создана."
+msgstr "Sikkerhedskopien blev oprettet succesfuldt."
 
 #: pigeonplanner/messages.py:136 pigeonplanner/messages.py:139
 msgid "Completed!"
-msgstr "Завершено!"
+msgstr "Gennemført!"
 
 #: pigeonplanner/messages.py:137
 msgid "The backup was successfully restored."
-msgstr "Резервная копия была успешно восстановлена."
+msgstr "Sikkerhedskopien blev succesfuldt genskabt."
 
 #: pigeonplanner/messages.py:138
 msgid "The program will now quit automatically to apply all changes."
-msgstr ""
+msgstr "Programmet vil nu lukke automatisk for at anvende alle ændringer."
 
 #: pigeonplanner/messages.py:140
 msgid "No database selected to restore."
-msgstr ""
+msgstr "Ingen database til genskabelse valgt"
 
 #: pigeonplanner/messages.py:141
 msgid "Do you want to continue anyway?"
-msgstr ""
+msgstr "Ønsker du at fortsætte alligevel?"
 
 #: pigeonplanner/messages.py:144
 msgid "No personal information found."
-msgstr "Персональная информация не найдена."
+msgstr "Ingen personlig information fundet."
 
 #: pigeonplanner/messages.py:145
 msgid ""
 "This will be shown on top of the printed pedigree.\n"
 "Do you want to add it now?"
 msgstr ""
-"Это будет показано вверху печатаемой родословной? \n"
-"Хотите добавить это сейчас?"
+"Dette vil blive vist i toppen af den printede stamtavle.\n"
+"Ønsker du at tilføje det nu?"
 
 #: pigeonplanner/messages.py:149
 msgid "Error printing the pedigree"
-msgstr "Ошибка печати родословной"
+msgstr "Fejl ved udskrivning af stamtavle"
 
 #: pigeonplanner/messages.py:152
 msgid "An error occured in the print operation!"
-msgstr "Во время печати возникла ошибка!"
+msgstr "Der skete en fejl i printeroperationen!"
 
 #: pigeonplanner/messages.py:153
 msgid "See the logfile (File->Logfile viewer) for more info."
-msgstr ""
-"Откройте журнал (Файл->Просмотр журнала) для дополнительной информации"
+msgstr "Se logfilen (File-Logfile-viewer) for mere information."
 
 #: pigeonplanner/messages.py:156
 msgid "This will set back all the settings to the default values."
-msgstr "Это вернёт все настройки к параметрам по умолчанию."
+msgstr "Dette vil sætte alle indstillinger tilbage til standardværdier."
 
 #: pigeonplanner/messages.py:158
 msgid "Default settings"
-msgstr "Параметры по умолчанию"
+msgstr "Standard indstillinger"
 
 #: pigeonplanner/messages.py:160
 msgid "Pigeon Planner needs to be restarted for the changes to take effect."
-msgstr "Изменения вступят в силу после перезапуска."
+msgstr "Pigeon Planner skal genstartes for at ændringerne træder i kraft."
 
 #: pigeonplanner/messages.py:163
 msgid "Restart required"
-msgstr "Требуется перезапуск"
+msgstr "Genstart kræves"
 
 #: pigeonplanner/messages.py:165
 msgid "Update available!"
-msgstr "Доступно обновление!"
+msgstr "Der er en opdatering!"
 
 #: pigeonplanner/messages.py:166
 msgid "There is an update available, do you want to download it now?"
-msgstr "Доступно обновление. Вы хотите скачать его?"
+msgstr "Der er en opdatering tilgængelig, ønsker du at hente den nu?"
 
 #: pigeonplanner/messages.py:169
 msgid "The recipient and sender's e-mailaddress are required."
-msgstr ""
-"Необходимо указать адреса электронных почтовых ящиков получателя и "
-"отправителя."
+msgstr "Sender og modtagers email adresse er påkrævet."
 
 #: pigeonplanner/messages.py:173
 msgid "Error trying to get information. Are you connected to the internet?"
-msgstr "Ошибка получения информации. Вы подключены к интернету?"
+msgstr "Fejl ved hentning af information. Er du forbundet til internettet?"
 
 #: pigeonplanner/messages.py:174
 msgid "A new version is available."
-msgstr "Доступна новая версия."
+msgstr "Der er en ny version tilgængelig."
 
 #: pigeonplanner/messages.py:175
 msgid "You already have the latest version installed."
-msgstr "У вас установлена последняя версия программы."
+msgstr "Du har allerede den seneste version installeret."
 
 #: pigeonplanner/messages.py:176
 msgid "This isn't normal, or you must be running a development version"
-msgstr "Это не нормально, или возможно вы используете не стабильную версию."
+msgstr "Dette er ikke normalt, eller du må køre en udviklings version."
 
 #: pigeonplanner/reports/pigeons.py:51 pigeonplanner/reports/results.py:63
 #: pigeonplanner/ui/resultwindow.py:116 pigeonplanner/ui/dialogs.py:196
@@ -323,7 +328,7 @@ msgstr "Это не нормально, или возможно вы испол�
 #: pigeonplanner/ui/glade/BreedingView.ui:1005
 #: pigeonplanner/ui/glade/ResultParser.ui:373
 msgid "Band no."
-msgstr "№ кольца"
+msgstr "Bånd nej"
 
 #: pigeonplanner/reports/pigeons.py:54 pigeonplanner/ui/tabs/relatives.py:191
 #: pigeonplanner/ui/widgets/treeview.py:418
@@ -334,7 +339,7 @@ msgstr "№ кольца"
 #: pigeonplanner/ui/glade/DetailsView.ui:711
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1012
 msgid "Sex"
-msgstr "Пол"
+msgstr "Køn"
 
 #: pigeonplanner/reports/pigeons.py:56 pigeonplanner/ui/dbmanager.py:58
 #: pigeonplanner/ui/dbmanager.py:116 pigeonplanner/ui/dialogs.py:196
@@ -352,7 +357,7 @@ msgstr "Пол"
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1767
 #: pigeonplanner/ui/glade/AddressBook.ui:128
 msgid "Name"
-msgstr "Имя"
+msgstr "Navn"
 
 #: pigeonplanner/reports/pigeons.py:58 pigeonplanner/ui/widgets/treeview.py:419
 #: pigeonplanner/ui/glade/FilterDialog.ui:438
@@ -360,7 +365,7 @@ msgstr "Имя"
 #: pigeonplanner/ui/glade/DetailsView.ui:179
 #: pigeonplanner/ui/glade/DetailsView.ui:747
 msgid "Sire"
-msgstr "Отец"
+msgstr "Han"
 
 #: pigeonplanner/reports/pigeons.py:60 pigeonplanner/ui/widgets/treeview.py:419
 #: pigeonplanner/ui/glade/FilterDialog.ui:450
@@ -368,7 +373,7 @@ msgstr "Отец"
 #: pigeonplanner/ui/glade/DetailsView.ui:203
 #: pigeonplanner/ui/glade/DetailsView.ui:759
 msgid "Dam"
-msgstr "Мать"
+msgstr "Høne"
 
 #: pigeonplanner/reports/pigeons.py:62 pigeonplanner/ui/widgets/treeview.py:418
 #: pigeonplanner/ui/widgets/comboboxes.py:244
@@ -382,7 +387,7 @@ msgstr "Мать"
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1748
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1765
 msgid "Colour"
-msgstr "Цвет"
+msgstr "Farve"
 
 #: pigeonplanner/reports/pigeons.py:64 pigeonplanner/ui/widgets/treeview.py:419
 #: pigeonplanner/ui/widgets/comboboxes.py:245
@@ -393,7 +398,7 @@ msgstr "Цвет"
 #: pigeonplanner/ui/glade/DetailsView.ui:735
 #: pigeonplanner/ui/glade/MedicationView.ui:774
 msgid "Loft"
-msgstr "Голубятня"
+msgstr "Loft"
 
 #: pigeonplanner/reports/pigeons.py:66 pigeonplanner/ui/widgets/treeview.py:419
 #: pigeonplanner/ui/widgets/comboboxes.py:246
@@ -406,17 +411,17 @@ msgstr "Голубятня"
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1749
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1766
 msgid "Strain"
-msgstr "Порода"
+msgstr "Pres"
 
 #: pigeonplanner/reports/pigeons.py:68 pigeonplanner/ui/widgets/treeview.py:419
 #: pigeonplanner/ui/glade/FilterDialog.ui:426
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1032
 msgid "Status"
-msgstr "Состояние"
+msgstr "Status"
 
 #: pigeonplanner/reports/base_pedigree.py:67
 msgid "Pedigree of:"
-msgstr "Родословная:"
+msgstr "Stamtavle for:"
 
 #: pigeonplanner/reports/results.py:61 pigeonplanner/reports/velocity.py:39
 #: pigeonplanner/ui/resultwindow.py:109 pigeonplanner/ui/breedingwindow.py:171
@@ -431,7 +436,7 @@ msgstr "Родословная:"
 #: pigeonplanner/ui/glade/BreedingWindow.ui:152
 #: pigeonplanner/ui/glade/BreedingWindow.ui:360
 msgid "Date"
-msgstr "Дата"
+msgstr "Dato"
 
 #: pigeonplanner/reports/results.py:62 pigeonplanner/ui/resultwindow.py:110
 #: pigeonplanner/ui/tabs/results.py:58
@@ -442,7 +447,7 @@ msgstr "Дата"
 #: pigeonplanner/ui/glade/DetailsView.ui:1501
 #: pigeonplanner/ui/glade/ResultParser.ui:462
 msgid "Racepoint"
-msgstr "Позиция в гонке"
+msgstr "Racepoint"
 
 #: pigeonplanner/reports/results.py:64 pigeonplanner/ui/resultwindow.py:118
 #: pigeonplanner/ui/resultwindow.py:119 pigeonplanner/ui/tabs/results.py:66
@@ -450,14 +455,14 @@ msgstr "Позиция в гонке"
 #: pigeonplanner/ui/glade/ResultsView.ui:619
 #: pigeonplanner/ui/glade/ResultWindow.ui:754
 msgid "Placed"
-msgstr "Место"
+msgstr "Placeret"
 
 #: pigeonplanner/reports/results.py:65 pigeonplanner/ui/resultwindow.py:120
 #: pigeonplanner/ui/tabs/results.py:68
 #: pigeonplanner/ui/glade/ResultsView.ui:361
 #: pigeonplanner/ui/glade/ResultWindow.ui:766
 msgid "Out of"
-msgstr "Из"
+msgstr "Ud af"
 
 #: pigeonplanner/reports/results.py:66 pigeonplanner/ui/resultwindow.py:111
 #: pigeonplanner/ui/tabs/results.py:59
@@ -467,7 +472,7 @@ msgstr "Из"
 #: pigeonplanner/ui/glade/ExportWindow.ui:118
 #: pigeonplanner/ui/glade/ResultParser.ui:642
 msgid "Type"
-msgstr "Тип"
+msgstr "Type"
 
 #: pigeonplanner/reports/results.py:67 pigeonplanner/ui/resultwindow.py:112
 #: pigeonplanner/ui/tabs/results.py:60 pigeonplanner/ui/tools/datamanager.py:49
@@ -476,7 +481,7 @@ msgstr "Тип"
 #: pigeonplanner/ui/glade/ResultWindow.ui:440
 #: pigeonplanner/ui/glade/ResultParser.ui:654
 msgid "Wind"
-msgstr "Ветер"
+msgstr "Vind"
 
 #: pigeonplanner/reports/results.py:68 pigeonplanner/ui/resultwindow.py:114
 #: pigeonplanner/ui/tabs/results.py:62 pigeonplanner/ui/tools/datamanager.py:48
@@ -485,11 +490,11 @@ msgstr "Ветер"
 #: pigeonplanner/ui/glade/ResultWindow.ui:452
 #: pigeonplanner/ui/glade/ResultParser.ui:678
 msgid "Weather"
-msgstr "Погода"
+msgstr "Vejr"
 
 #: pigeonplanner/reports/results.py:69
 msgid "Coef."
-msgstr "Коэф."
+msgstr "Coef."
 
 #: pigeonplanner/reports/results.py:70 pigeonplanner/ui/resultwindow.py:125
 #: pigeonplanner/ui/tabs/results.py:73
@@ -498,7 +503,7 @@ msgstr "Коэф."
 #: pigeonplanner/ui/glade/ResultWindow.ui:790
 #: pigeonplanner/ui/glade/ResultParser.ui:606
 msgid "Sector"
-msgstr "Сектор"
+msgstr "Sektor"
 
 #: pigeonplanner/reports/results.py:71 pigeonplanner/ui/resultwindow.py:126
 #: pigeonplanner/ui/tabs/results.py:74
@@ -507,7 +512,7 @@ msgstr "Сектор"
 #: pigeonplanner/ui/glade/ResultWindow.ui:802
 #: pigeonplanner/ui/glade/ResultParser.ui:618
 msgid "Category"
-msgstr "Категория"
+msgstr "Kategori"
 
 #: pigeonplanner/reports/results.py:72 pigeonplanner/ui/resultwindow.py:127
 #: pigeonplanner/ui/tabs/results.py:75
@@ -519,19 +524,19 @@ msgstr "Категория"
 #: pigeonplanner/ui/glade/MedicationView.ui:718
 #: pigeonplanner/ui/glade/AddressBook.ui:328
 msgid "Comment"
-msgstr "Комментировать"
+msgstr "Kommentar"
 
 #: pigeonplanner/reports/velocity.py:35 pigeonplanner/reports/velocity.py:46
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:215
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:497
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:909
 msgid "Velocity"
-msgstr "Скорость"
+msgstr "Hastighed"
 
 #: pigeonplanner/reports/velocity.py:40
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:529
 msgid "Released"
-msgstr "Выпущен"
+msgstr "Udgivet"
 
 #: pigeonplanner/reports/velocity.py:41
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:191
@@ -540,27 +545,27 @@ msgstr "Выпущен"
 #: pigeonplanner/ui/glade/Racepointsmap.ui:772
 #: pigeonplanner/ui/glade/Racepointsmap.ui:848
 msgid "Distance"
-msgstr "Расстояние"
+msgstr "Distance"
 
 #: pigeonplanner/reports/velocity.py:47
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:920
 msgid "Flight Time"
-msgstr "Время полёта"
+msgstr "Flyvetid"
 
 #: pigeonplanner/reports/velocity.py:48
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:931
 msgid "Time of Arrival"
-msgstr "Время прибытия"
+msgstr "Tid for ankomst"
 
 #: pigeonplanner/ui/filechooser.py:54
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:102
 #: pigeonplanner/ui/glade/ResultWindow.ui:88
 msgid "Preview"
-msgstr "Предпросмотр"
+msgstr "Forhåndsvisning"
 
 #: pigeonplanner/ui/filechooser.py:69 pigeonplanner/ui/tabs/media.py:121
 msgid "Images"
-msgstr "Изображения"
+msgstr "Billeder"
 
 #: pigeonplanner/ui/filechooser.py:107 pigeonplanner/ui/detailsview.py:62
 #: pigeonplanner/ui/dialogs.py:50 pigeonplanner/ui/dialogs.py:183
@@ -573,11 +578,11 @@ msgstr "Изображения"
 #: pigeonplanner/ui/glade/ResultParser.ui:87
 #: pigeonplanner/ui/glade/AddressBook.ui:472
 msgid "Cancel"
-msgstr ""
+msgstr "Annullér"
 
 #: pigeonplanner/ui/filechooser.py:135
 msgid "Select an image..."
-msgstr "Выберите изображение..."
+msgstr "Vælg et billede..."
 
 #: pigeonplanner/ui/filechooser.py:137 pigeonplanner/ui/filechooser.py:148
 #: pigeonplanner/ui/messagedialog.py:41 pigeonplanner/ui/messagedialog.py:49
@@ -585,16 +590,16 @@ msgstr "Выберите изображение..."
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:1014
 #: pigeonplanner/ui/glade/OptionsDialog.ui:168
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: pigeonplanner/ui/filechooser.py:147 pigeonplanner/ui/filechooser.py:296
 msgid "Select a file..."
-msgstr "Выберите файл..."
+msgstr "Vælg en fil ..."
 
 #: pigeonplanner/ui/filechooser.py:158
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:589
 msgid "Title"
-msgstr "Заголовок"
+msgstr "Titel"
 
 #: pigeonplanner/ui/filechooser.py:162 pigeonplanner/ui/dbmanager.py:63
 #: pigeonplanner/ui/glade/DBManager.ui:372
@@ -603,12 +608,12 @@ msgstr "Заголовок"
 #: pigeonplanner/ui/glade/MedicationView.ui:219
 #: pigeonplanner/ui/glade/MedicationView.ui:670
 msgid "Description"
-msgstr "Описание"
+msgstr "Beskrivelse"
 
 #: pigeonplanner/ui/filechooser.py:193 pigeonplanner/ui/filechooser.py:206
 #: pigeonplanner/ui/filechooser.py:219
 msgid "Save as..."
-msgstr "Сохранить как..."
+msgstr "Gem som …"
 
 #: pigeonplanner/ui/filechooser.py:195 pigeonplanner/ui/filechooser.py:208
 #: pigeonplanner/ui/filechooser.py:221 pigeonplanner/ui/filechooser.py:233
@@ -620,20 +625,20 @@ msgstr "Сохранить как..."
 #: pigeonplanner/ui/glade/MedicationView.ui:536
 #: pigeonplanner/ui/glade/AddressBook.ui:459
 msgid "Save"
-msgstr ""
+msgstr "Gem"
 
 #: pigeonplanner/ui/filechooser.py:232 pigeonplanner/ui/filechooser.py:243
 #: pigeonplanner/ui/filechooser.py:285
 msgid "Select a folder..."
-msgstr "Выберите каталог..."
+msgstr "Vælg en mappe..."
 
 #: pigeonplanner/ui/filechooser.py:248
 msgid "The default location is:"
-msgstr ""
+msgstr "Standard location er:"
 
 #: pigeonplanner/ui/filechooser.py:249
 msgid "Select"
-msgstr ""
+msgstr "Vælg"
 
 #: pigeonplanner/ui/optionsdialog.py:54
 #: pigeonplanner/ui/glade/BreedingView.ui:291
@@ -643,19 +648,19 @@ msgstr ""
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1793
 #: pigeonplanner/ui/glade/DBManager.ui:416
 msgid "General"
-msgstr "Общее"
+msgstr "Generelt"
 
 #: pigeonplanner/ui/optionsdialog.py:55
 msgid "Appearance"
-msgstr "Внешний вид"
+msgstr "Udseende"
 
 #: pigeonplanner/ui/optionsdialog.py:56
 msgid "Columns"
-msgstr "Столбцы"
+msgstr "Kolonner"
 
 #: pigeonplanner/ui/optionsdialog.py:57
 msgid "Printing"
-msgstr "Идёт печать"
+msgstr "Udskriver"
 
 #: pigeonplanner/ui/optionsdialog.py:58 pigeonplanner/ui/tabs/results.py:688
 #: pigeonplanner/ui/glade/MainWindow.ui:18
@@ -663,7 +668,7 @@ msgstr "Идёт печать"
 #: pigeonplanner/ui/glade/ExportWindow.ui:233
 #: pigeonplanner/ui/glade/ResultParser.ui:630
 msgid "Pigeons"
-msgstr "Голуби"
+msgstr "Duer"
 
 #: pigeonplanner/ui/optionsdialog.py:58 pigeonplanner/ui/resultwindow.py:263
 #: pigeonplanner/ui/resultwindow.py:467 pigeonplanner/ui/resultwindow.py:618
@@ -671,38 +676,39 @@ msgstr "Голуби"
 #: pigeonplanner/ui/glade/ResultsView.ui:131
 #: pigeonplanner/ui/glade/ResultWindow.ui:821
 msgid "Results"
-msgstr "Результаты"
+msgstr "Resultat"
 
 #: pigeonplanner/ui/optionsdialog.py:59 pigeonplanner/ui/glade/DBManager.ui:516
 msgid "Advanced"
-msgstr "Дополнительно"
+msgstr "Avanceret"
 
 #: pigeonplanner/ui/optionsdialog.py:111
 msgid "day"
-msgstr "день"
+msgstr "dag"
 
 #: pigeonplanner/ui/optionsdialog.py:111
 msgid "days"
-msgstr "дни;дней"
+msgstr "Dage"
 
 #: pigeonplanner/ui/exceptiondialog.py:60
 msgid "Pigeon Planner has experienced an unexpected error"
-msgstr "В Pigeon Planner возникла непредвиденная ошибка"
+msgstr "Pigeon Planner har opdaget en uventet fejl"
 
 #: pigeonplanner/ui/exceptiondialog.py:68
 msgid ""
 "You can help the Pigeon Planner developers by taking the time to report this "
 "bug."
 msgstr ""
-"Вы можете помочь разработчикам Pigeon Planner сообщив об этой ошибке."
+"Du kan hjælpe Pigeon Planner udviklerne ved at tage dig tid til at "
+"rapportere denne fejl."
 
 #: pigeonplanner/ui/exceptiondialog.py:86
 msgid "Error Detail"
-msgstr "Подробная информация об ошибке"
+msgstr "Fejldetalje"
 
 #: pigeonplanner/ui/exceptiondialog.py:93
 msgid "Report"
-msgstr "Отчет"
+msgstr "Rapport"
 
 #: pigeonplanner/ui/exceptiondialog.py:96 pigeonplanner/ui/detailsview.py:69
 #: pigeonplanner/ui/logdialog.py:108
@@ -724,39 +730,39 @@ msgstr "Отчет"
 #: pigeonplanner/ui/glade/BreedingWindow.ui:331
 #: pigeonplanner/ui/glade/AddressBook.ui:43
 msgid "Close"
-msgstr ""
+msgstr "Luk"
 
 #: pigeonplanner/ui/gtkmain.py:194
 msgid "A previously saved version will be used instead."
-msgstr ""
+msgstr "En tidligere gemt version vil blive brugt i stedet."
 
 #: pigeonplanner/ui/gtkmain.py:196
 msgid "The default settings will be used instead."
-msgstr ""
+msgstr "Standard indstillingerne vil blive brugt i stedet."
 
 #: pigeonplanner/ui/gtkmain.py:199
 msgid "There was an error loading the configuration file."
-msgstr ""
+msgstr "Der var en fejl ved indlæsning af konfigurationsfil"
 
 #: pigeonplanner/ui/pedigreewindow.py:59 pigeonplanner/ui/tabs/pedigree.py:27
 #: pigeonplanner/ui/pedigreeprintsetup/setupwindow.py:159
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1807
 msgid "Pedigree"
-msgstr "Родословная"
+msgstr "Stamtavle"
 
 #: pigeonplanner/ui/resultwindow.py:113 pigeonplanner/ui/tabs/results.py:61
 #: pigeonplanner/ui/glade/ResultsView.ui:607
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1258
 #: pigeonplanner/ui/glade/ResultParser.ui:666
 msgid "Windspeed"
-msgstr ""
+msgstr "Vindhastighed"
 
 #: pigeonplanner/ui/resultwindow.py:115 pigeonplanner/ui/tabs/results.py:63
 #: pigeonplanner/ui/glade/ResultsView.ui:583
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1284
 #: pigeonplanner/ui/glade/ResultParser.ui:690
 msgid "Temperature"
-msgstr ""
+msgstr "Temperatur"
 
 #: pigeonplanner/ui/resultwindow.py:117 pigeonplanner/ui/dialogs.py:196
 #: pigeonplanner/ui/tabs/results.py:65 pigeonplanner/ui/tabs/relatives.py:171
@@ -768,14 +774,14 @@ msgstr ""
 #: pigeonplanner/ui/glade/MainWindow.ui:1030
 #: pigeonplanner/ui/glade/ResultParser.ui:386
 msgid "Year"
-msgstr "Год"
+msgstr "År"
 
 #: pigeonplanner/ui/resultwindow.py:121 pigeonplanner/ui/resultwindow.py:122
 #: pigeonplanner/ui/tabs/results.py:69 pigeonplanner/ui/tabs/results.py:70
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1167
 #: pigeonplanner/ui/glade/ResultWindow.ui:778
 msgid "Coefficient"
-msgstr "Коэффициент"
+msgstr "Koefficient"
 
 #: pigeonplanner/ui/resultwindow.py:123 pigeonplanner/ui/resultwindow.py:124
 #: pigeonplanner/ui/tabs/results.py:71 pigeonplanner/ui/tabs/results.py:72
@@ -783,77 +789,77 @@ msgstr "Коэффициент"
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1219
 #: pigeonplanner/ui/glade/ResultParser.ui:412
 msgid "Speed"
-msgstr ""
+msgstr "Hastighed"
 
 #: pigeonplanner/ui/resultwindow.py:444 pigeonplanner/ui/tabs/results.py:379
 #: pigeonplanner/ui/glade/ResultWindow.ui:468
 msgid "Races"
-msgstr ""
+msgstr "Racer"
 
 #: pigeonplanner/ui/resultwindow.py:792
 msgid "You probably don't have write permissions on this folder."
-msgstr ""
+msgstr "Du har formentlig ikke skriverettigheder til denne mappe."
 
 #: pigeonplanner/ui/maildialog.py:154
 msgid "The e-mail has been sent succesfully!"
-msgstr "Электронное письмо успешно отправлено!"
+msgstr "Mailen er succesfuldt blevet sendt."
 
 #: pigeonplanner/ui/maildialog.py:155
 msgid "Connection to server failed!"
-msgstr "Ошибка при подключении к серверу!"
+msgstr "Forbindelse til server fejlede!"
 
 #: pigeonplanner/ui/resultparser.py:58
 msgid "This tool needs Yapsy to run correctly."
-msgstr ""
+msgstr "Dette værktøj behøver Yapsy for at køre korrekt."
 
 #: pigeonplanner/ui/resultparser.py:73
 #, python-format
 msgid "This result is not in the '%s' format. Do you want to continue?"
-msgstr ""
+msgstr "Resultatet er ikke i '%s' format, Ønsker du at fortsætte?"
 
 #: pigeonplanner/ui/resultparser.py:136
 msgid "The date, racepoint or number of pigeons is incorrect."
-msgstr ""
+msgstr "Datoen, racepoint og antal pigeons er ikke korrekt."
 
 #: pigeonplanner/ui/resultparser.py:188
 msgid "Failed to send report."
-msgstr ""
+msgstr "Kunne ikke sende rapport."
 
 #: pigeonplanner/ui/detailsview.py:75 pigeonplanner/ui/glade/DetailsView.ui:541
 #: pigeonplanner/ui/glade/DetailsView.ui:1051
 msgid "Details of pigeon"
-msgstr "Информация о голубе"
+msgstr "Detaljer for due"
 
 #: pigeonplanner/ui/detailsview.py:78
 #, python-format
 msgid "Details of %s"
-msgstr "Информация о %s"
+msgstr "Deetaljer for %s"
 
 #: pigeonplanner/ui/messagedialog.py:57 pigeonplanner/ui/messagedialog.py:69
 msgid "No"
-msgstr ""
+msgstr "Nej"
 
 #: pigeonplanner/ui/messagedialog.py:58 pigeonplanner/ui/messagedialog.py:70
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: pigeonplanner/ui/backupdialog.py:102 pigeonplanner/ui/mainwindow.py:263
 msgid "There was an error making the backup."
-msgstr "При создании резервной копии произошла ошибка."
+msgstr "Der skete en fejl ved sikkerhedskopieringen"
 
 #: pigeonplanner/ui/backupdialog.py:102 pigeonplanner/ui/backupdialog.py:117
 #: pigeonplanner/ui/mainwindow.py:263
 #: pigeonplanner/ui/pedigreeprintsetup/setupwindow.py:167
 msgid "Failed!"
-msgstr "Неудачно!"
+msgstr "Fejlede!"
 
 #: pigeonplanner/ui/backupdialog.py:117
 msgid "There was an error restoring the backup."
-msgstr "Произошла ошибка при восстановлении резервной копии."
+msgstr "Der var en fejl ved genskabelse af sikkerhedskopien."
 
 #: pigeonplanner/ui/backupdialog.py:144
 msgid "The selected file is not a valid backup file."
-msgstr ""
+msgstr "Den valgte fil er ikke en gyldig sikkerhedskopifil."
 
 #: pigeonplanner/ui/backupdialog.py:216 pigeonplanner/ui/dialogs.py:188
 #: pigeonplanner/ui/glade/MainWindow.ui:875
@@ -867,278 +873,270 @@ msgstr ""
 #: pigeonplanner/ui/glade/DataManager.ui:135
 #: pigeonplanner/ui/glade/AddressBook.ui:416
 msgid "Add"
-msgstr ""
+msgstr "Tilføj"
 
 #: pigeonplanner/ui/backupdialog.py:217
 msgid "Overwrite"
-msgstr ""
+msgstr "Overskriv"
 
 #: pigeonplanner/ui/backupdialog.py:218
 msgid "Invalid path"
-msgstr ""
+msgstr "Ugyldig sti"
 
 #: pigeonplanner/ui/mainwindow.py:213
 msgid "Open a database to use the application."
-msgstr ""
+msgstr "Åben en database for at bruge programmet."
 
 #: pigeonplanner/ui/mainwindow.py:216 pigeonplanner/ui/glade/MainWindow.ui:278
 #: pigeonplanner/ui/glade/DBManager.ui:18
 msgid "Database manager"
-msgstr ""
+msgstr "Database-administrator"
 
 #: pigeonplanner/ui/mainwindow.py:315
 #, python-format
 msgid "Pigeon %s has been added"
-msgstr "Голубь %s добавлен"
+msgstr "Due %s er blevet tilføjet"
 
 #: pigeonplanner/ui/mainwindow.py:409
 #, python-format
 msgid "Pigeon %s has been removed"
-msgstr "Голубь %s удалён"
+msgstr "Due %s er blevet fjernet"
 
 #: pigeonplanner/ui/mainwindow.py:412
 #, python-format
 msgid "%s pigeons have been removed"
-msgstr "%s голуби удалены"
+msgstr "%s due er blevet fjernet"
 
 #: pigeonplanner/ui/breedingwindow.py:77 pigeonplanner/ui/tabs/breeding.py:46
 msgid "Breeding"
-msgstr "Селекция"
+msgstr "Avl"
 
 #: pigeonplanner/ui/breedingwindow.py:171 pigeonplanner/core/enums.py:26
 #: pigeonplanner/ui/glade/BreedingWindow.ui:165
 #: pigeonplanner/ui/glade/BreedingWindow.ui:372
 msgid "Cock"
-msgstr "Голубь"
+msgstr "Kok"
 
 #: pigeonplanner/ui/breedingwindow.py:171 pigeonplanner/core/enums.py:27
 #: pigeonplanner/ui/glade/BreedingWindow.ui:178
 #: pigeonplanner/ui/glade/BreedingWindow.ui:384
 msgid "Hen"
-msgstr "Голубка"
+msgstr "Høne"
 
 #: pigeonplanner/ui/breedingwindow.py:172
 #: pigeonplanner/ui/glade/BreedingWindow.ui:191
 #: pigeonplanner/ui/glade/BreedingWindow.ui:396
 msgid "Egg 1 laid"
-msgstr ""
+msgstr "Æg 1 lagt"
 
 #: pigeonplanner/ui/breedingwindow.py:172
 #: pigeonplanner/ui/glade/BreedingWindow.ui:204
 #: pigeonplanner/ui/glade/BreedingWindow.ui:408
 msgid "Egg 1 hatched"
-msgstr ""
+msgstr "Æg 1 udklækket"
 
 #: pigeonplanner/ui/breedingwindow.py:172
 #: pigeonplanner/ui/glade/BreedingWindow.ui:217
 #: pigeonplanner/ui/glade/BreedingWindow.ui:420
 msgid "Egg 1 bandnumber"
-msgstr ""
+msgstr "Æg 1 båndnummer"
 
 #: pigeonplanner/ui/breedingwindow.py:173
 #: pigeonplanner/ui/glade/BreedingWindow.ui:230
 #: pigeonplanner/ui/glade/BreedingWindow.ui:432
 msgid "Egg 2 laid"
-msgstr ""
+msgstr "Æg 2 lagt"
 
 #: pigeonplanner/ui/breedingwindow.py:173
 #: pigeonplanner/ui/glade/BreedingWindow.ui:243
 #: pigeonplanner/ui/glade/BreedingWindow.ui:444
 msgid "Egg 2 hatched"
-msgstr ""
+msgstr "Æg 2 udklækket"
 
 #: pigeonplanner/ui/breedingwindow.py:173
 #: pigeonplanner/ui/glade/BreedingWindow.ui:256
 #: pigeonplanner/ui/glade/BreedingWindow.ui:456
 msgid "Egg 2 bandnumber"
-msgstr ""
+msgstr "Æg 2 antal bånd"
 
 #: pigeonplanner/ui/exportwindow.py:83
 msgid "The selected path is not writeable."
-msgstr ""
+msgstr "Den valgte sti er ikke skrivebar."
 
 #: pigeonplanner/ui/dbmanager.py:50
 msgid "Select a database file..."
-msgstr ""
+msgstr "Vælg en databasefil..."
 
 #: pigeonplanner/ui/dbmanager.py:53
 msgid "Pigeon Planner database"
-msgstr ""
+msgstr "Pigeon Planner database"
 
 #: pigeonplanner/ui/dbmanager.py:58 pigeonplanner/ui/dbmanager.py:116
 msgid "Required"
-msgstr ""
+msgstr "Kræves"
 
 #: pigeonplanner/ui/dbmanager.py:249
 msgid "Can't repair database that needs an update."
-msgstr ""
+msgstr "Kan ikke reparere database der behøver en opdatering."
 
 #: pigeonplanner/ui/dbmanager.py:460
 #: pigeonplanner/ui/glade/OptionsDialog.ui:137
 msgid "Default"
-msgstr "По умолчанию"
+msgstr "Standard"
 
 #: pigeonplanner/ui/dbmanager.py:462
 msgid "Opened"
-msgstr ""
+msgstr "Åbnet"
 
 #: pigeonplanner/ui/dbmanager.py:464
 msgid "Not found"
-msgstr ""
+msgstr "Ikke fundet"
 
 #: pigeonplanner/ui/dbmanager.py:466
 msgid "Not writable"
-msgstr ""
+msgstr "Ikke skrivbar"
 
 #: pigeonplanner/ui/dbmanager.py:475
 msgid "Last modified:"
-msgstr ""
+msgstr "Senest ændret:"
 
 #: pigeonplanner/ui/dbmanager.py:546
 msgid "Waiting for action..."
-msgstr ""
+msgstr "Venter på handling..."
 
 #: pigeonplanner/ui/dbmanager.py:555
 msgid "Check for pigeons with an empty value as year."
-msgstr ""
+msgstr "Kontroller for duer med en tom værdi som år."
 
 #: pigeonplanner/ui/dbmanager.py:556
 msgid "Delete pigeon."
-msgstr ""
+msgstr "slet due."
 
 #: pigeonplanner/ui/dbmanager.py:562
 #, python-format
 msgid "Deleted %s object(s)"
-msgstr ""
+msgstr "Slettet %s objekt(er)"
 
 #: pigeonplanner/ui/dbmanager.py:567
 msgid "Check for racepoints with an invalid unit value."
-msgstr ""
+msgstr "Kontroller for racepoint med en ugyldig enheds værdi."
 
 #: pigeonplanner/ui/dbmanager.py:568
 msgid "Reset unit value to the default."
-msgstr ""
+msgstr "Nulstil enheds værdi til standarden."
 
 #: pigeonplanner/ui/dbmanager.py:574
 #, python-format
 msgid "Updated %s object(s)"
-msgstr ""
+msgstr "Opdaterede %s objekt(er)"
 
 #: pigeonplanner/ui/logdialog.py:46
 msgid "Logfile Viewer"
-msgstr "Просмотр журнала"
+msgstr "Logfilviser"
 
 #: pigeonplanner/ui/dialogs.py:38
 msgid "Remove selected pigeons?"
-msgstr ""
+msgstr "Slet valgte duer?"
 
 #: pigeonplanner/ui/dialogs.py:38
 msgid "Remove selected pigeon?"
-msgstr ""
+msgstr "Slet valgte due?"
 
 #: pigeonplanner/ui/dialogs.py:39
 msgid "Hide pigeons"
-msgstr ""
+msgstr "Skjul duer"
 
 #: pigeonplanner/ui/dialogs.py:39
 msgid "Hide pigeon"
-msgstr ""
+msgstr "Skjul due"
 
 #: pigeonplanner/ui/dialogs.py:45
 msgid ""
 "Remove with data will permanently delete the pigeon with all its data like "
 "pedigree, results and breeding details."
 msgstr ""
+"Fjerne med data vil permanent slette duen med alle dens data som stamtavle, "
+"resultater og avls detaljer."
 
 #: pigeonplanner/ui/dialogs.py:47
 msgid "Hide the pigeon to keep it in the pedigrees."
-msgstr ""
+msgstr "Skjul duen for at beholde den i stamtavlerne."
 
 #: pigeonplanner/ui/dialogs.py:52
 msgid "Remove with data"
-msgstr ""
+msgstr "Fjern med data"
 
 #: pigeonplanner/ui/dialogs.py:93
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Andrey Kulakov https://launchpad.net/~grcool\n"
-"  Auduf https://launchpad.net/~5097-mail\n"
-"  Didenko Dmitriy https://launchpad.net/~didenkods\n"
-"  Eugenia Vlasova https://launchpad.net/~jane-vlasova\n"
-"  G-Shadow https://launchpad.net/~gshadow\n"
-"  Ivan Ysh https://launchpad.net/~gadjin\n"
-"  Nkolay Parukhin https://launchpad.net/~parukhin\n"
-"  Sergey Sedov https://launchpad.net/~serg-sedov\n"
-"  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
-"  korisk https://launchpad.net/~korisk\n"
-"  korisk https://launchpad.net/~korisk-yandex"
+"  Jimmy Frydkær Jensen https://launchpad.net/~jimmyfj"
 
 #: pigeonplanner/ui/dialogs.py:102 pigeonplanner/ui/glade/MainWindow.ui:35
 msgid "General information"
-msgstr "Общая информация"
+msgstr "General information"
 
 #: pigeonplanner/ui/dialogs.py:127
 msgid "Technical details"
-msgstr "Технические сведения"
+msgstr "Tekniske detaljer"
 
 #: pigeonplanner/ui/dialogs.py:130
 msgid "Data information"
-msgstr "Информация о базе данных"
+msgstr "Datainformation"
 
 #: pigeonplanner/ui/dialogs.py:149
 msgid "Number of pigeons"
-msgstr "Количество голубей"
+msgstr "Antal duer"
 
 #: pigeonplanner/ui/dialogs.py:150 pigeonplanner/ui/glade/MainWindow.ui:559
 msgid "Cocks"
-msgstr "Самцы"
+msgstr "Kokke"
 
 #: pigeonplanner/ui/dialogs.py:151 pigeonplanner/ui/glade/MainWindow.ui:591
 msgid "Hens"
-msgstr "Самки"
+msgstr "Høner"
 
 #: pigeonplanner/ui/dialogs.py:152 pigeonplanner/ui/glade/MainWindow.ui:623
 msgid "Young birds"
-msgstr "Птенцы"
+msgstr "Unge fugle"
 
 #: pigeonplanner/ui/dialogs.py:153 pigeonplanner/core/enums.py:29
 #: pigeonplanner/ui/glade/MainWindow.ui:655
 msgid "Unknown"
-msgstr ""
+msgstr "Ukendt"
 
 #: pigeonplanner/ui/dialogs.py:164
 msgid "Number of results"
-msgstr "Количество результатов"
+msgstr "Antal resultater"
 
 #: pigeonplanner/ui/dialogs.py:165
 msgid "Number of couples"
-msgstr "Количество пар"
+msgstr "Antal par"
 
 #: pigeonplanner/ui/dialogs.py:181 pigeonplanner/ui/widgets/bandentry.py:94
 #: pigeonplanner/ui/glade/MainWindow.ui:94
 msgid "Search a pigeon"
-msgstr "Искать голубя"
+msgstr "Søg en due"
 
 #: pigeonplanner/ui/dialogs.py:214 pigeonplanner/ui/glade/MainWindow.ui:270
 msgid "Show all pigeons"
-msgstr ""
+msgstr "Vis alle duer"
 
 #: pigeonplanner/ui/tabs/media.py:44 pigeonplanner/ui/glade/MediaView.ui:69
 msgid "Media"
-msgstr "Медиа-данные"
+msgstr "Medie"
 
 #: pigeonplanner/ui/tabs/media.py:125
 #: pigeonplanner/ui/glade/OptionsDialog.ui:822
 msgid "Other"
-msgstr "Прочее"
+msgstr "Anden"
 
 #: pigeonplanner/ui/tabs/medication.py:46
 #: pigeonplanner/ui/glade/MedicationView.ui:259
 #: pigeonplanner/ui/glade/MedicationView.ui:479
 #: pigeonplanner/ui/glade/MedicationView.ui:694
 msgid "Medication"
-msgstr "Лечение"
+msgstr "Medicinering"
 
 #: pigeonplanner/ui/tabs/medication.py:69 pigeonplanner/ui/tabs/results.py:591
 #: pigeonplanner/ui/tabs/relatives.py:95
@@ -1149,7 +1147,7 @@ msgstr "Лечение"
 #: pigeonplanner/ui/glade/MedicationView.ui:425
 #: pigeonplanner/ui/glade/AddressBook.ui:431
 msgid "Edit"
-msgstr ""
+msgstr "Redigér"
 
 #: pigeonplanner/ui/tabs/medication.py:70 pigeonplanner/ui/tabs/results.py:592
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:170
@@ -1162,51 +1160,51 @@ msgstr ""
 #: pigeonplanner/ui/glade/DataManager.ui:331
 #: pigeonplanner/ui/glade/AddressBook.ui:446
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
 #: pigeonplanner/ui/tabs/medication.py:111
 msgid "Removing the selected medication entry"
-msgstr "Удаление выбранной записи о лекарстве"
+msgstr "Fjerner den valgte medicineringsport"
 
 #: pigeonplanner/ui/tabs/medication.py:113
 msgid "Remove this entry for all pigeons?"
-msgstr "Удалить эту запись для всех голубей?"
+msgstr "Fjern denne indtræden for alle duer?"
 
 #: pigeonplanner/ui/tabs/results.py:211 pigeonplanner/ui/tabs/results.py:401
 msgid "Results of pigeon"
-msgstr "Результаты голубя"
+msgstr "Resultat af due"
 
 #: pigeonplanner/ui/tabs/results.py:593
 msgid "Add to pedigree details"
-msgstr ""
+msgstr "Føj til stamtavledetaljer"
 
 #: pigeonplanner/ui/tabs/results.py:697
 msgid "No empty space found in pedigree details."
-msgstr ""
+msgstr "Ingen tom plads fundet i stamtavledetaljer."
 
 #: pigeonplanner/ui/tabs/results.py:784
 msgid "Edit result for:"
-msgstr "Редактировать результат для:"
+msgstr "Rediger resultat for:"
 
 #: pigeonplanner/ui/tabs/results.py:784
 msgid "Add result for:"
-msgstr "Добавить результат для:"
+msgstr "Tilføj resultat for:"
 
 #: pigeonplanner/ui/tabs/relatives.py:38
 msgid "Relatives"
-msgstr "Родственники"
+msgstr "Slægtninge"
 
 #: pigeonplanner/ui/tabs/relatives.py:47
 msgid "<b>Brothers and sisters</b>"
-msgstr "<b>Братья и сестры</b>"
+msgstr "<b> Brødre og Søstre</b>"
 
 #: pigeonplanner/ui/tabs/relatives.py:60
 msgid "<b>Half brothers and sisters</b>"
-msgstr "<b>Братья и сестры по одному общему родителю</b>"
+msgstr "<b>Halv-brødre og søstre</b>"
 
 #: pigeonplanner/ui/tabs/relatives.py:73
 msgid "<b>Offspring</b>"
-msgstr "<b>Потомки</b>"
+msgstr "<b>Afkom</b>"
 
 #: pigeonplanner/ui/tabs/relatives.py:94
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:167
@@ -1214,16 +1212,16 @@ msgstr "<b>Потомки</b>"
 #: pigeonplanner/ui/glade/MainWindow.ui:34
 #: pigeonplanner/ui/glade/DataManager.ui:316
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: pigeonplanner/ui/tabs/relatives.py:97
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:180
 msgid "Go to"
-msgstr ""
+msgstr "Gå til"
 
 #: pigeonplanner/ui/tabs/relatives.py:175
 msgid "Common parent"
-msgstr "Общий родитель"
+msgstr "Fælles forældre"
 
 #: pigeonplanner/ui/widgets/bandentry.py:62
 #: pigeonplanner/ui/widgets/bandentry.py:74
@@ -1233,58 +1231,58 @@ msgstr "Общий родитель"
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1006
 #: pigeonplanner/ui/glade/AddressBook.ui:241
 msgid "Country"
-msgstr "Страна"
+msgstr "Land"
 
 #: pigeonplanner/ui/widgets/bandentry.py:62
 #: pigeonplanner/ui/widgets/bandentry.py:78
 #: pigeonplanner/ui/widgets/bandentry.py:253
 #: pigeonplanner/ui/widgets/bandentry.py:338
 msgid "Letters"
-msgstr ""
+msgstr "Bogstaver"
 
 #: pigeonplanner/ui/widgets/bandentry.py:62
 #: pigeonplanner/ui/widgets/bandentry.py:82
 #: pigeonplanner/ui/widgets/bandentry.py:254
 #: pigeonplanner/ui/widgets/bandentry.py:341
 msgid "Number"
-msgstr ""
+msgstr "Tal"
 
 #: pigeonplanner/ui/widgets/bandentry.py:63
 msgid "The number and year fields are required."
-msgstr ""
+msgstr "Antal og år-felterne er kræves."
 
 #: pigeonplanner/ui/widgets/bandentry.py:64
 msgid "The year has to be four digits long."
-msgstr ""
+msgstr "Året skal være fire tal langt."
 
 #: pigeonplanner/ui/widgets/bandentry.py:91
 #: pigeonplanner/ui/widgets/bandentry.py:399
 msgid "Band format"
-msgstr ""
+msgstr "Båndformat"
 
 #: pigeonplanner/ui/widgets/bandentry.py:216
 msgid "The number and year are required when providing the country."
-msgstr ""
+msgstr "Antallet og år er påkrævet ved oplysning af landet."
 
 #: pigeonplanner/ui/widgets/bandentry.py:220
 msgid "The number and year are required when providing the letters."
-msgstr ""
+msgstr "Antallet og år er krævet ved oplysning om bogstaverne."
 
 #: pigeonplanner/ui/widgets/bandentry.py:224
 msgid "The number is required."
-msgstr ""
+msgstr "Antallet er krævet."
 
 #: pigeonplanner/ui/widgets/bandentry.py:228
 msgid "The year is required."
-msgstr ""
+msgstr "Året er krævet."
 
 #: pigeonplanner/ui/widgets/bandentry.py:236
 msgid "The length of the year needs to be four digits."
-msgstr ""
+msgstr "Længden af året skal være fire tal."
 
 #: pigeonplanner/ui/widgets/bandentry.py:256
 msgid "Year (short)"
-msgstr ""
+msgstr "År (kort)"
 
 #: pigeonplanner/ui/widgets/bandentry.py:257
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1689
@@ -1292,71 +1290,71 @@ msgstr ""
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1747
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1764
 msgid "Empty"
-msgstr ""
+msgstr "Tom"
 
 #: pigeonplanner/ui/widgets/bandentry.py:389
 msgid "Make this format the default"
-msgstr ""
+msgstr "Gør dette format standarden."
 
 #: pigeonplanner/ui/widgets/comboboxes.py:182
 msgid "Yards"
-msgstr "Ярды"
+msgstr "Meter"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:183
 msgid "Kilometres"
-msgstr "Километры"
+msgstr "Kilometer"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:184
 msgid "Metres"
-msgstr "Метры"
+msgstr "Meter"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:185
 msgid "Centimetres"
-msgstr "Сантиметры"
+msgstr "Centimeter"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:186
 msgid "Inches"
-msgstr "Дюймы"
+msgstr "Tommer"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:187
 msgid "Feet"
-msgstr "Футы"
+msgstr "Fod"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:188
 msgid "Miles"
-msgstr "Мили"
+msgstr "Mil"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:189
 msgid "Nautical Miles"
-msgstr "Морские мили"
+msgstr "Sømil"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:213
 msgid "Yard per Minute"
-msgstr "Ярдов в Минуту"
+msgstr "Yard per minut"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:214
 msgid "Metres per Minute"
-msgstr "Метров в Минуту"
+msgstr "Meter per minut"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:215
 msgid "Metres per Second"
-msgstr "Метров в Секунду"
+msgstr "Meter per sekund"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:216
 msgid "Kilometre per Hour"
-msgstr "Километров в Час"
+msgstr "Kilometer per time"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:217
 msgid "Feet per Second"
-msgstr "Футов в Секунду"
+msgstr "Fod per sekund"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:218
 msgid "Feet per Minute"
-msgstr "Футов в Минуту"
+msgstr "Fod per minut"
 
 #: pigeonplanner/ui/widgets/comboboxes.py:219
 msgid "Mile per Hour"
-msgstr "Миль в Час"
+msgstr "Mil per time"
 
 #: pigeonplanner/ui/widgets/latlongentry.py:34
 msgid ""
@@ -1365,108 +1363,108 @@ msgid ""
 "  DD°MM.mmm’\n"
 "  DD°MM’SS.s”"
 msgstr ""
-"Данные следует вводить в таком формате: \n"
-"  ГГ.гггггг° \n"
-"  ГГ°ММ.ммм’\n"
-"  ГГ°ММ’СС.с”"
+"Inddata skal være i et af disse formater:\n"
+"  DD.dddddd°\n"
+"  DD°MM.mmm’\n"
+"  DD°MM’SS.s”"
 
 #: pigeonplanner/ui/widgets/statusbar.py:28
 #, python-format
 msgid "Pigeons: %s"
-msgstr "Голуби: %s"
+msgstr "Duer: %s"
 
 #: pigeonplanner/ui/widgets/statusbar.py:44
 #, python-format
 msgid "Filter: %s"
-msgstr "Фильтр: %s"
+msgstr "Filter: %s"
 
 #: pigeonplanner/ui/widgets/statusbar.py:45
 msgid "On"
-msgstr "Вкл"
+msgstr "Til"
 
 #: pigeonplanner/ui/widgets/statusbar.py:46
 msgid "Off"
-msgstr "Откл"
+msgstr "Fra"
 
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:130
 msgid "<edit>"
-msgstr "<редактировать>"
+msgstr "(rediger)"
 
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:169
 #: pigeonplanner/ui/glade/FilterDialog.ui:52
 #: pigeonplanner/ui/glade/ResultWindow.ui:232
 #: pigeonplanner/ui/glade/BreedingWindow.ui:317
 msgid "Clear"
-msgstr ""
+msgstr "Ryd"
 
 #: pigeonplanner/ui/tools/datamanager.py:41
 msgid "Colours"
-msgstr "Цвета"
+msgstr "Farver"
 
 #: pigeonplanner/ui/tools/datamanager.py:42
 msgid "Sectors"
-msgstr "Секторы"
+msgstr "Sektorer"
 
 #: pigeonplanner/ui/tools/datamanager.py:43
 msgid "Types"
-msgstr "Типы"
+msgstr "Typer"
 
 #: pigeonplanner/ui/tools/datamanager.py:44
 msgid "Categories"
-msgstr "Категории"
+msgstr "Kategorier"
 
 #: pigeonplanner/ui/tools/datamanager.py:45
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:973
 #: pigeonplanner/ui/glade/Racepointsmap.ui:737
 msgid "Racepoints"
-msgstr "Места выпуска"
+msgstr "Racepoints"
 
 #: pigeonplanner/ui/tools/datamanager.py:46
 msgid "Strains"
-msgstr "Породы"
+msgstr "pres"
 
 #: pigeonplanner/ui/tools/datamanager.py:47
 msgid "Lofts"
-msgstr "Голубятни"
+msgstr "Lofts"
 
 #: pigeonplanner/ui/tools/racepointsmap.py:140
 msgid "Removing the selected racepoint."
-msgstr ""
+msgstr "Fjerner de valgte racepoint."
 
 #: pigeonplanner/ui/tools/racepointsmap.py:149
 msgid "The racepoint name is required."
-msgstr ""
+msgstr "Racepointnavn er krævet."
 
 #: pigeonplanner/ui/pedigreeprintsetup/preview.py:107
 #: pigeonplanner/reportlib/gui/printpreview.py:66
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:126
 #: pigeonplanner/ui/glade/ResultWindow.ui:152
 msgid "Close this window"
-msgstr "Закрыть это окно"
+msgstr "Luk dette vindue"
 
 #: pigeonplanner/ui/pedigreeprintsetup/preview.py:114
 #: pigeonplanner/reportlib/gui/printpreview.py:109
 msgid "Zooms to fit the page width"
-msgstr "Масштаб по ширине страницы"
+msgstr "Zoomer for at passe til side bredde"
 
 #: pigeonplanner/ui/pedigreeprintsetup/preview.py:118
 #: pigeonplanner/reportlib/gui/printpreview.py:113
 msgid "Zooms to fit the whole page"
-msgstr "Поместить всю страницу"
+msgstr "Tilpas zoom til hele siden"
 
 #: pigeonplanner/ui/pedigreeprintsetup/preview.py:125
 #: pigeonplanner/reportlib/gui/printpreview.py:117
 msgid "Zooms the page in"
-msgstr "Увеличить масштаб"
+msgstr "Zoom ind på siden"
 
 #: pigeonplanner/ui/pedigreeprintsetup/preview.py:129
 #: pigeonplanner/reportlib/gui/printpreview.py:121
 msgid "Zooms the page out"
-msgstr "Уменьшить масштаб"
+msgstr "Zoom ud på siden"
 
 #: pigeonplanner/ui/pedigreeprintsetup/setupwindow.py:167
 msgid "There was an error saving the pedigree."
-msgstr ""
+msgstr "Der skete en fejl ved gem af stamtavlen."
 
 #: pigeonplanner/reportlib/cairodoc.py:234
 #: pigeonplanner/reportlib/cairodoc.py:237
@@ -1474,62 +1472,62 @@ msgstr ""
 #: pigeonplanner/reportlib/backend/docbackend.py:149
 #, python-format
 msgid "Could not create %s"
-msgstr "Ошибка при создании %s"
+msgstr "Kunne ikke danne %s"
 
 #: pigeonplanner/reportlib/backend/docbackend.py:128
 msgid "Close file first"
-msgstr "Сначала закройте файл"
+msgstr "Luk fil først"
 
 #: pigeonplanner/reportlib/backend/docbackend.py:138
 msgid "No filename given"
-msgstr "Не указано имя файла"
+msgstr "Ingen filnavn givet"
 
 #: pigeonplanner/reportlib/backend/docbackend.py:140
 #, python-format
 msgid "File %s already open, close it first."
-msgstr "Файл %s уже открыт, сначала необходимо его закрыть."
+msgstr "Fil %s ar allerede åben, luk den først."
 
 #: pigeonplanner/reportlib/gui/printpreview.py:35
 msgid "Print Preview"
-msgstr "Предварительный просмотр"
+msgstr "Forhåndsvisning af udskrift"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:74
 msgid "Shows the first page"
-msgstr "Показать первую страницу"
+msgstr "Viser den første side"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:78
 msgid "Shows previous page"
-msgstr "Показать предыдущую страницу"
+msgstr "Viser den forrige side"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:82
 msgid "Shows the next page"
-msgstr "Показать следующую страницу"
+msgstr "Viser den næste side"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:86
 msgid "Shows the last page"
-msgstr "Показать последнюю страницу"
+msgstr "Viser den sidste side"
 
 #: pigeonplanner/reportlib/gui/printpreview.py:352
 #, python-format
 msgid "of %d"
-msgstr "из %d"
+msgstr "af %d"
 
 #: pigeonplanner/database/manager.py:89
 msgid "My pigeons"
-msgstr ""
+msgstr "Mine duer"
 
 #: pigeonplanner/database/manager.py:90
 msgid "My default database"
-msgstr ""
+msgstr "Min standard database"
 
 #: pigeonplanner/database/manager.py:181
 msgid "This database is already added."
-msgstr ""
+msgstr "Denne database er allerede tilføjet."
 
 #: pigeonplanner/database/manager.py:200
 #, python-format
 msgid "Database path '%s' is not writeable."
-msgstr ""
+msgstr "Database sti '%s' er ikke skrivebar."
 
 #: pigeonplanner/database/manager.py:221 pigeonplanner/database/manager.py:276
 #, python-format
@@ -1537,422 +1535,424 @@ msgid ""
 "Moving the database failed with message:\n"
 "%s"
 msgstr ""
+"At flytte databasen fejlede med beskeden:\n"
+"%s"
 
 #: pigeonplanner/database/manager.py:241
 msgid "Unable to remove the database: permission denied"
-msgstr ""
+msgstr "Kunne ikke fjerne databasen: tilladelse nægtet"
 
 #: pigeonplanner/database/manager.py:253 pigeonplanner/database/manager.py:254
 msgid "copy"
-msgstr ""
+msgstr "kopier"
 
 #: pigeonplanner/database/manager.py:318
 msgid "Database name is required."
-msgstr ""
+msgstr "Databasenavn er krævet"
 
 #: pigeonplanner/database/manager.py:321
 #, python-format
 msgid "Database name '%s' already exists."
-msgstr ""
+msgstr "Databasenavn '%s' eksisterer allerede."
 
 #: pigeonplanner/core/backup.py:118
 #, python-format
 msgid "The file '%s' is not a valid Pigeon Planner backup."
-msgstr ""
+msgstr "Filen '%s' er ikke en guldig Pigeon Planner sikkerhedskopi."
 
 #: pigeonplanner/core/common.py:191
 msgid "Error: This file does not exist"
-msgstr "Ошибка: Указанный файл не существует."
+msgstr "Fejl: denne fil eksisterer ikke"
 
 #: pigeonplanner/core/common.py:198
 msgid "Error opening file:"
-msgstr "Ошибка при открытии файла:"
+msgstr "Fejl ved åbning af fil:"
 
 #: pigeonplanner/core/enums.py:28
 msgid "Young bird"
-msgstr "Птенец"
+msgstr "Ung fugl"
 
 #: pigeonplanner/core/enums.py:47
 msgid "Dead"
-msgstr "Умер[ла]"
+msgstr "Død"
 
 #: pigeonplanner/core/enums.py:48
 msgid "Active"
-msgstr "Активен"
+msgstr "Aktive"
 
 #: pigeonplanner/core/enums.py:49
 msgid "Sold"
-msgstr "Продано"
+msgstr "Solgt"
 
 #: pigeonplanner/core/enums.py:50
 msgid "Lost"
-msgstr "Потерян"
+msgstr "Tabt"
 
 #: pigeonplanner/core/enums.py:51
 msgid "Breeder"
-msgstr "Голубевод"
+msgstr "Avler"
 
 #: pigeonplanner/core/enums.py:52
 msgid "On loan"
-msgstr "Отдан во временное польщование"
+msgstr "Til lån"
 
 #: pigeonplanner/core/enums.py:53
 msgid "Widow"
-msgstr ""
+msgstr "Enke"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:46
 msgid "Go to the previous pedigree"
-msgstr ""
+msgstr "Gå til den forrige stamtavle"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:47
 msgid "Previous"
-msgstr ""
+msgstr "Forrige"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:61
 msgid "Go to the first selected pedigree"
-msgstr ""
+msgstr "Gå til den først valgte stamtavle"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:62
 msgid "Home"
-msgstr ""
+msgstr "Hjem"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:76
 msgid "Go to the next pedigree"
-msgstr ""
+msgstr "Gå til næste stamtavle"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:77
 msgid "Next"
-msgstr ""
+msgstr "Næste"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:101
 msgid "View this pedigree"
-msgstr "Показать эту родословную"
+msgstr "Gennemse denne stamtavle"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:10
 #: pigeonplanner/ui/glade/MainWindow.ui:11
 msgid "Blank pedigree"
-msgstr "Шаблон родословной"
+msgstr "Blank stamtavle"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:12
 msgid "Print a blank pedigree"
-msgstr "Напечатать шаблон для родословной"
+msgstr "Udskriv blank stamtavle"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:20
 msgid "Print a list of pigeons"
-msgstr "Печатать список голубей"
+msgstr "Udskriv en liste af duer"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:26
 #: pigeonplanner/ui/glade/MainWindow.ui:27
 msgid "Export..."
-msgstr "Экспорт..."
+msgstr "Eksportér …"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:28
 msgid "Export data to other formats"
-msgstr "Экспорт данных в другие форматы"
+msgstr "Eksporter data til andet format"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:42
 #: pigeonplanner/ui/glade/MainWindow.ui:43
 #: pigeonplanner/ui/glade/DataManager.ui:13
 msgid "Data manager"
-msgstr "Управление данными"
+msgstr "Data administrator"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:44
 msgid "Manage your data"
-msgstr "Управляйте своими данными"
+msgstr "Administrer dine data"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:50
 #: pigeonplanner/ui/glade/MainWindow.ui:51
 #: pigeonplanner/ui/glade/AddressBook.ui:17
 msgid "Address book"
-msgstr "Адресная книга"
+msgstr "Adressebog"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:52
 msgid "View the address book"
-msgstr "Просмотреть адресную книгу"
+msgstr "Se adressebogen"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:58
 #: pigeonplanner/ui/glade/MainWindow.ui:59
 msgid "Photo album"
-msgstr "Фотоальбом"
+msgstr "Fotoalbum"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:60
 msgid "View the images of your pigeons"
-msgstr "Просмотреть изображения с Вашими голубями"
+msgstr "Se billederne af dine duer"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:66
 #: pigeonplanner/ui/glade/MainWindow.ui:67
 #: pigeonplanner/ui/glade/Racepointsmap.ui:316
 msgid "Racepoints map"
-msgstr ""
+msgstr "Racepoints kort"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:68
 msgid "Manage the racepoints and distances"
-msgstr "Помогает вести учёт полётов и расстояний"
+msgstr "Administrer racepointen og afstand"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:74
 #: pigeonplanner/ui/glade/MainWindow.ui:75
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:100
 msgid "Velocity calculator"
-msgstr "Калькулятор скорости"
+msgstr "Hastigheds-udregner"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:76
 msgid "Calculate the velocity of flights"
-msgstr "Определить скорость во время полетов"
+msgstr "Kalkuler hastigheden af flyvninger"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:82
 #: pigeonplanner/ui/glade/MainWindow.ui:83
 msgid "_Filter..."
-msgstr "_Фильтр..."
+msgstr "_Filter..."
 
 #: pigeonplanner/ui/glade/MainWindow.ui:84
 msgid "Set filter options"
-msgstr "Настроить фильтр"
+msgstr "Sæt filterindstillinger"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:92
 #: pigeonplanner/ui/glade/MainWindow.ui:93
 msgid "_Search..."
-msgstr ""
+msgstr "_Søg..."
 
 #: pigeonplanner/ui/glade/MainWindow.ui:102
 #: pigeonplanner/ui/glade/MainWindow.ui:103
 msgid "Add range"
-msgstr "Добавить несколько голубей"
+msgstr "Tilføj interval"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:104
 #: pigeonplanner/ui/glade/MainWindow.ui:839
 msgid "Add a range of pigeons"
-msgstr "Добавить список голубей"
+msgstr "Tilføj interval af duer"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:112
 #: pigeonplanner/ui/glade/MainWindow.ui:113
 msgid "Select all"
-msgstr "Выбрать всё"
+msgstr "Vælg alt"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:114
 msgid "Select all pigeons"
-msgstr "Выбрать всех голубей"
+msgstr "Vælg alle duer"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:120
 msgid "_Add"
-msgstr ""
+msgstr "_Tilføj"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:121
 msgid "Add a new pigeon"
-msgstr "Добавить нового голубя"
+msgstr "Tilføj en ny due"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:132
 msgid "Online help"
-msgstr ""
+msgstr "Online hjælp"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:133
 msgid "View online help"
-msgstr "Просмотреть онлайн-справку"
+msgstr "Se online hjælp"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:141
 msgid "_File"
-msgstr "_Файл"
+msgstr "_Fil"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:146
 msgid "_Print"
-msgstr ""
+msgstr "_Udskriv"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:152
 msgid "_Pigeon"
-msgstr "_Голубь"
+msgstr "_Due"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:157
 #: pigeonplanner/ui/glade/MainWindow.ui:324
 msgid "_Edit"
-msgstr "_Правка"
+msgstr "_Rediger"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:162
 msgid "_View"
-msgstr "_Вид"
+msgstr "_Vis"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:167
 msgid "_Tools"
-msgstr "_Инструменты"
+msgstr "_Værktøjer"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:172
 msgid "_Help"
-msgstr "_Помощь"
+msgstr "_Hjælp"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:177
 msgid "_Backup"
-msgstr "_Резервное копирование"
+msgstr "_sikkerhedskopi"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:178
 msgid "Create a backup of your database"
-msgstr "Создать резервную копию базы данных"
+msgstr "Opret en sikkerhedskopi af din database"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:184
 msgid "_Quit"
-msgstr ""
+msgstr "_Afslut"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:185
 msgid "Quit the program"
-msgstr "Выйти из программы"
+msgstr "Afslut programmet"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:193
 msgid "_Logfile Viewer"
-msgstr "Просмотр_Журнала"
+msgstr "Logfil viser"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:194
 msgid "See the logfile"
-msgstr "Просмотреть журнал"
+msgstr "Se logfilen"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:202
 msgid "_Preferences"
-msgstr ""
+msgstr "_Præferencer"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:203
 msgid "Configure the application"
-msgstr "Настройка приложения"
+msgstr "Konfigurér programmet"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:211
 msgid "Website"
-msgstr "Веб-сайт"
+msgstr "Hjemmeside"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:212
 msgid "Go to the website for more information"
-msgstr "Посетите сайт проекта для дополнительной информации"
+msgstr "Gå til websiden for mere information"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:219
 msgid "Forum"
-msgstr "Форум разработчика"
+msgstr "Forum"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:220
 msgid "Go to the forum for online help"
-msgstr "Перейти на форум для онлайн-помощи"
+msgstr "Gå til forumet for online hjælp"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:227
 #: pigeonplanner/ui/glade/UpdateDialog.ui:7
 msgid "Search for updates..."
-msgstr "Поиск обновлений..."
+msgstr "Søg efter opdateringer..."
 
 #: pigeonplanner/ui/glade/MainWindow.ui:228
 msgid "Search online for program updates"
-msgstr "Поиск обновлений программы в сети Интернет"
+msgstr "Søg online for program opdateringer"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:234
 msgid "_About"
-msgstr ""
+msgstr "_Om"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:235
 msgid "About this application"
-msgstr "О программе"
+msgstr "Om dette program"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:242
 msgid "Navigation arrows"
-msgstr "Стрелки навигации"
+msgstr "Navigations pile"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:243
 #: pigeonplanner/ui/glade/OptionsDialog.ui:598
 msgid "Show or hide the navigation arrows"
-msgstr "Показывает/скрывает стрелки навигации"
+msgstr "Vis eller skjul navigations pile"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:249
 msgid "Statistics"
-msgstr "Статистика"
+msgstr "Statistik"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:250
 #: pigeonplanner/ui/glade/OptionsDialog.ui:612
 msgid "Show or hide pigeon statistics"
-msgstr "Показать или скрыть статистику"
+msgstr "Vis eller skjul due statistikker"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:256
 msgid "Toolbar"
-msgstr "Панель инструментов"
+msgstr "Værktøjslinje"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:257
 #: pigeonplanner/ui/glade/OptionsDialog.ui:626
 msgid "Show or hide the toolbar"
-msgstr "Показать/спрятать панель инструментов"
+msgstr "Vis eller skjul værktøjsbjælken"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:263
 msgid "Statusbar"
-msgstr "Панель состояния"
+msgstr "Statuslinje"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:264
 #: pigeonplanner/ui/glade/OptionsDialog.ui:640
 msgid "Show or hide the statusbar"
-msgstr "Отобразить/скрыть панель состояния"
+msgstr "Vis eller skjul statusbjælken"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:271
 msgid "Show all pigeons in the list"
-msgstr ""
+msgstr "Vis alle duer på listen"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:279
 msgid "Manage your databases"
-msgstr ""
+msgstr "Administrer din database"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:289
 #: pigeonplanner/ui/glade/MainWindow.ui:290
 #: pigeonplanner/ui/glade/MainWindow.ui:306
 #: pigeonplanner/ui/glade/MainWindow.ui:307
 msgid "_Pedigree"
-msgstr "_Родословная"
+msgstr "_Stamtavle"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:291
 #: pigeonplanner/ui/glade/MainWindow.ui:318
 msgid "Print this pedigree"
-msgstr "Напечатать эту родословную"
+msgstr "Udskriv denne stamtavle"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:297
 #: pigeonplanner/ui/glade/MainWindow.ui:298
 msgid "Add resul_t"
-msgstr "Добавить_Результат"
+msgstr "Tilføj resulta_t"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:299
 msgid "Add a new result for this pigeon"
-msgstr "Добавить новый результат этому голубю"
+msgstr "Tilføj et nyt resultat for denne due"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:308
 msgid "View the detailed pedigree of this pigeon"
-msgstr "Просмотреть подробную родословную голубя"
+msgstr "Vis den detaljerede stamtavle for denne due"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:316
 #: pigeonplanner/ui/glade/MainWindow.ui:317
 msgid "Print pedigree"
-msgstr ""
+msgstr "Udskriv stamtavle"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:325
 msgid "Edit the selected pigeon"
-msgstr "Редактировать выбранного голубя"
+msgstr "Rediger den valgte due"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:333
 msgid "Restore hidden"
-msgstr ""
+msgstr "Genskab skjult"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:334
 msgid "Restore the selected hidden pigeon"
-msgstr ""
+msgstr "Genskab den valgte skjulte due"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:344
 msgid "_Remove / Hide"
-msgstr ""
+msgstr "Fjern/Skjul"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:345
 msgid "Remove or hide the selected pigeon"
-msgstr ""
+msgstr "Fjern eller skjul den valgte due"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:413
 msgid "Loading pigeons..."
-msgstr ""
+msgstr "Indlæser duer"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:527
 msgid "Total"
-msgstr "Всего"
+msgstr "Total"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:961
 #: pigeonplanner/ui/glade/DetailsView.ui:1585
 msgid "From"
-msgstr "Из"
+msgstr "Fra"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:1041
 #: pigeonplanner/ui/glade/DetailsView.ui:1597
 msgid "To"
-msgstr "В"
+msgstr "Til"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:124
 #: pigeonplanner/ui/glade/BreedingView.ui:36
@@ -1961,116 +1961,116 @@ msgstr "В"
 #: pigeonplanner/ui/glade/ResultParser.ui:70
 #: pigeonplanner/ui/glade/DataManager.ui:35
 msgid "Help"
-msgstr ""
+msgstr "Hjælp"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:203
 msgid "Time"
-msgstr "Время"
+msgstr "Tidspunkt"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:225
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:551
 msgid "Calculate"
-msgstr "Посчитать"
+msgstr "Beregn"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:334
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:688
 msgid "Hours"
-msgstr "Часы"
+msgstr "Timer"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:358
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:712
 msgid "Minutes"
-msgstr "Минуты"
+msgstr "Minutter"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:382
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:736
 msgid "Seconds"
-msgstr "Секунды"
+msgstr "Sekunder"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:541
 msgid "Range"
-msgstr "Диапазон"
+msgstr "Interval"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:952
 msgid "Prognosis"
-msgstr "Прогноз"
+msgstr "Prognose"
 
 #: pigeonplanner/ui/glade/ResultsView.ui:24
 #: pigeonplanner/ui/glade/BreedingView.ui:1304
 msgid "View all"
-msgstr "Просмотреть все"
+msgstr "Vis alle"
 
 #: pigeonplanner/ui/glade/ResultsView.ui:39
 msgid "Import"
-msgstr "Импорт"
+msgstr "Importer"
 
 #: pigeonplanner/ui/glade/ResultsView.ui:255
 #: pigeonplanner/ui/glade/BreedingView.ui:126
 #: pigeonplanner/ui/glade/MedicationView.ui:658
 msgid "Date*"
-msgstr "Дата*"
+msgstr "Dato*"
 
 #: pigeonplanner/ui/glade/ResultsView.ui:267
 msgid "Racepoint*"
-msgstr "Место выпуска*"
+msgstr "Racepoint*"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:14
 msgid "Breeding data"
-msgstr "Данные селекции"
+msgstr "Avls data"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:157
 msgid "Mate*"
-msgstr "Партнер*"
+msgstr "Han*"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:199
 #: pigeonplanner/ui/glade/BreedingView.ui:1153
 msgid "Series"
-msgstr "Отдел"
+msgstr "Serier"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:229
 #: pigeonplanner/ui/glade/BreedingView.ui:1182
 msgid "Nestbox"
-msgstr "Гнездо"
+msgstr "Redekasse"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:345
 #: pigeonplanner/ui/glade/BreedingView.ui:515
 #: pigeonplanner/ui/glade/BreedingView.ui:755
 #: pigeonplanner/ui/glade/BreedingView.ui:950
 msgid "Laid"
-msgstr "Отложение яйца"
+msgstr "Lagt"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:375
 #: pigeonplanner/ui/glade/BreedingView.ui:545
 #: pigeonplanner/ui/glade/BreedingView.ui:783
 #: pigeonplanner/ui/glade/BreedingView.ui:978
 msgid "Hatched"
-msgstr "Появление птенца"
+msgstr "Udklækket"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:388
 #: pigeonplanner/ui/glade/BreedingView.ui:558
 #: pigeonplanner/ui/glade/BreedingView.ui:828
 #: pigeonplanner/ui/glade/BreedingView.ui:1023
 msgid "Successful"
-msgstr "Успешно"
+msgstr "Succesfuld"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:439
 #: pigeonplanner/ui/glade/BreedingView.ui:609
 msgid "Add pigeon to list"
-msgstr "Добавить голубя в список"
+msgstr "Tilføj due til liste"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:466
 #: pigeonplanner/ui/glade/BreedingView.ui:902
 msgid "Egg 1"
-msgstr "Яйцо 1"
+msgstr "Æg 1"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:636
 #: pigeonplanner/ui/glade/BreedingView.ui:1097
 msgid "Egg 2"
-msgstr "Яйцо 2"
+msgstr "Æg 2"
 
 #: pigeonplanner/ui/glade/FilterDialog.ui:13
 msgid "Filter pigeons"
-msgstr "Фильтровать голубей"
+msgstr "Filtrer duer"
 
 #: pigeonplanner/ui/glade/FilterDialog.ui:35
 #: pigeonplanner/ui/glade/ResultWindow.ui:218
@@ -2078,12 +2078,12 @@ msgstr "Фильтровать голубей"
 #: pigeonplanner/ui/glade/DataManager.ui:302
 #: pigeonplanner/ui/glade/BreedingWindow.ui:303
 msgid "Search..."
-msgstr ""
+msgstr "Søg …"
 
 #: pigeonplanner/ui/glade/FilterDialog.ui:111
 #: pigeonplanner/ui/glade/ResultWindow.ui:742
 msgid "Pigeon year"
-msgstr ""
+msgstr "Due år"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:46
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:420
@@ -2093,327 +2093,331 @@ msgstr "A4"
 #: pigeonplanner/ui/glade/OptionsDialog.ui:49
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:421
 msgid "Letter"
-msgstr "Letter"
+msgstr "Brev"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:60
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:328
 msgid "Original"
-msgstr "Исходная"
+msgstr "Original"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:63
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:329
 msgid "Swapped details"
-msgstr "Измененная"
+msgstr "Byttede detaljer"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:66
 msgid "Middle"
-msgstr ""
+msgstr "Midt"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:77
 msgid "Classic"
-msgstr ""
+msgstr "Klassisk"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:80
 msgid "Splitted"
-msgstr ""
+msgstr "Splittet"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:91
 msgid "Ascending"
-msgstr ""
+msgstr "Stigende"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:94
 msgid "Descending"
-msgstr ""
+msgstr "Faldende"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:113
 #: pigeonplanner/ui/glade/Racepointsmap.ui:916
 #: pigeonplanner/ui/glade/BackupDialog.ui:532
 #: pigeonplanner/ui/glade/BackupDialog.ui:801
 msgid "Options"
-msgstr "Опции"
+msgstr "Indstillinger"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:265
 msgid "Check for updates on startup"
-msgstr "Проверять обновления при запуске"
+msgstr "Søg efter updateringer ved start"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:278
 msgid "Update"
-msgstr "Обновить"
+msgstr "Opdater"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:309
 msgid "Make an automatic backup"
-msgstr "Автоматически создавать резервную копию"
+msgstr "Lav en automatisk sikkerhedskopi"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:366
 msgid "Interval"
-msgstr "Периодичность"
+msgstr "Interval"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:378
 #: pigeonplanner/ui/glade/BackupDialog.ui:391
 msgid "Location"
-msgstr "Расположение"
+msgstr "Placering"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:403
 #: pigeonplanner/ui/glade/BackupDialog.ui:44
 #: pigeonplanner/ui/glade/BackupDialog.ui:83
 msgid "Backup"
-msgstr "Резервное копирование"
+msgstr "Sikkerhedskopi"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:436
 msgid "Change the language to"
-msgstr "Сменить язык на"
+msgstr "Ændr sproget til"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:463
 msgid "Language"
-msgstr "Язык"
+msgstr "Sprog"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:496
 msgid "Default distance unit"
-msgstr ""
+msgstr "Standard afstand enhed"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:530
 msgid "Default speed unit"
-msgstr ""
+msgstr "Standard hastighed enhed"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:546
 msgid "Units"
-msgstr ""
+msgstr "Enheder"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:660
 msgid "Window"
-msgstr "Окно"
+msgstr "Vindue"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:699
 msgid "Sort pigeons"
-msgstr ""
+msgstr "Sorter duer"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:711
 msgid "Results mode"
-msgstr ""
+msgstr "Resultat tilstand"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:762
 msgid "Hide deleted pigeons in lists"
-msgstr "Скрыть удаленных голубей в списках"
+msgstr "Skjul slettede duer på lister"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:781
 msgid "Color row of deleted pigeons in lists"
-msgstr "Цвет строк удаленных голубей в списках"
+msgstr "Farve række af slettede duer på lister"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:854
 msgid "Theme name"
-msgstr ""
+msgstr "Temanavn"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:886
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1070
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1085
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1237
 msgid "Image"
-msgstr "Изображение"
+msgstr "Billede"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1100
 msgid "Text and image"
-msgstr ""
+msgstr "Tekst og billede"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1135
 msgid "Main Columns"
-msgstr "Основные столбцы"
+msgstr "Hovedkolonner"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1303
 msgid "Results Columns"
-msgstr "Столбцы результатов"
+msgstr "Resultats kolonner"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1359
 msgid "Paper format:"
-msgstr "Формат бумаги:"
+msgstr "Papirformat:"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1394
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:470
 msgid "Paper"
-msgstr "Бумага"
+msgstr "Papir"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1439
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:793
 msgid "Address"
-msgstr "Адрес"
+msgstr "Adresse"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1452
 #: pigeonplanner/ui/glade/Dialogs.ui:8
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:856
 #: pigeonplanner/ui/glade/AddressBook.ui:299
 msgid "E-mail"
-msgstr "Эл.почта"
+msgstr "E-mail"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1465
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:805
 #: pigeonplanner/ui/glade/AddressBook.ui:270
 msgid "Phone"
-msgstr "Телефон"
+msgstr "Telefon"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1484
 msgid "Personal"
-msgstr "Личное"
+msgstr "Personlig"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1539
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1628
 msgid "Show the column names"
-msgstr "Показывать названия столбцов"
+msgstr "Vis kolonne navne"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1553
 msgid "Always show the sex column"
-msgstr "Всегда показывать столбец \"Пол\""
+msgstr "Vis altid køn kolonnen"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1642
 msgid "Show the date"
-msgstr "Показывать дату"
+msgstr "Vis datoen"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1718
 msgid "Custom coefficient multiplier"
-msgstr "Стандартный множитель"
+msgstr "Tilfældig koefficient ganger"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1739
 msgid "Check for development updates"
-msgstr "Проверять наличие бета-обновлений"
+msgstr "Kontroller for udviklings opdateringer"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:63
 #: pigeonplanner/ui/glade/Racepointsmap.ui:481
 #: pigeonplanner/ui/glade/Racepointsmap.ui:610
 #: pigeonplanner/ui/glade/AddressBook.ui:358
 msgid "Latitude"
-msgstr "Широта"
+msgstr "Breddegrad"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:75
 #: pigeonplanner/ui/glade/Racepointsmap.ui:493
 #: pigeonplanner/ui/glade/Racepointsmap.ui:621
 #: pigeonplanner/ui/glade/AddressBook.ui:388
 msgid "Longitude"
-msgstr "Долгота"
+msgstr "Længdegrad"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:261
 msgid "Drag with the left mousebutton or use the arrow keys to navigate."
 msgstr ""
+"Træk med den venstre museknap eller brug pile-tasterne for at navigere."
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:277
 msgid "Use the scrollwheel or plus and minus keys to zoom."
-msgstr ""
+msgstr "Brug scrolhjulet eller plus og minus tasterne for at zoome"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:293
 msgid "Right click to add a racepoint at the current location."
-msgstr ""
+msgstr "Højreklik for at tilføje racepoint på den nuværende placering"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:387
 msgid ""
 "A loft with valid coordinates is required to use the distance calculation "
 "feature."
 msgstr ""
+"Et loft med gyldige koordinater er krævet for at bruge afstands beregnerens "
+"muligheder"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:420
 msgid "Not now"
-msgstr ""
+msgstr "Ikke nu"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:784
 msgid "Unit"
-msgstr ""
+msgstr "Enhed"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:820
 msgid "GPS track"
-msgstr ""
+msgstr "GPS spor"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:883
 msgid "Map type"
-msgstr ""
+msgstr "Korttype"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:24
 msgid "View all results"
-msgstr "Смотреть все результаты"
+msgstr "Vis alle resultater"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:47
 msgid "Export these results"
-msgstr ""
+msgstr "Eksporter disse resultater"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:48
 #: pigeonplanner/ui/glade/ExportWindow.ui:87
 #: pigeonplanner/ui/glade/BreedingWindow.ui:70
 #: pigeonplanner/ui/glade/BreedingWindow.ui:71
 msgid "Export"
-msgstr "Экспорт"
+msgstr "Eksportér"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:62
 msgid "Save these results"
-msgstr "Сохранить эти результаты"
+msgstr "Gem disse resultater"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:87
 msgid "Print preview for these results"
-msgstr ""
+msgstr "Udskriv visning for disse resultater"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:102
 msgid "Print these results"
-msgstr "Распечатать эти результаты"
+msgstr "Udskriv disse resultater"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:103
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:279
 msgid "Print"
-msgstr ""
+msgstr "Udskriv"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:127
 #: pigeonplanner/ui/glade/ResultWindow.ui:194
 msgid "Filter results"
-msgstr "Отфильтровать результаты"
+msgstr "Filtrér resultater"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:128
 #: pigeonplanner/ui/glade/BreedingWindow.ui:95
 msgid "Filter"
-msgstr "Фильтр"
+msgstr "Filter"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:503
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1221
 msgid "Pigeon"
-msgstr "Голубь"
+msgstr "Due"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:691
 msgid "Hide non-classified results"
-msgstr ""
+msgstr "Skjul ikke-klasificerede resultater"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:492
 #: pigeonplanner/ui/glade/DetailsView.ui:771
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1075
 msgid "Extra"
-msgstr "Дополнительно"
+msgstr "Ekstra"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:583
 msgid "These lines will be shown on the pedigree."
-msgstr ""
+msgstr "Disse linjer vil blive vist på stamtavlen"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:599
 msgid ""
 "The grey area on the right roughly indicates the amount of space available "
 "on the printed pedigree."
 msgstr ""
+"Det grå område til højre indikerer omtrent mængden af plads tilgængelig på "
+"den udskrevne stamtavle."
 
 #: pigeonplanner/ui/glade/DetailsView.ui:633
 msgid ""
 "Unable to retrieve data. The requested pigeon is probably removed from the "
 "database."
 msgstr ""
-"Не удалось получить данные. Вероятно указанный голубь был удален из базы "
-"данных."
+"Kunne ikke hente data. Den anmodede due er formentlig fjernet fra databasen."
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1102
 msgid "Pigeon status"
-msgstr "Статус голубя"
+msgstr "Due status"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1163
 msgid "Choose a status for this pigeon:"
-msgstr "Выберите статус для этого голубя:"
+msgstr "Vælg en status for denne due:"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1199
 msgid "The current status is:"
-msgstr "Текущий статус:"
+msgstr "Den nuværende status er:"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1300
 #: pigeonplanner/ui/glade/DetailsView.ui:1417
@@ -2422,445 +2426,446 @@ msgstr "Текущий статус:"
 #: pigeonplanner/ui/glade/DetailsView.ui:1730
 #: pigeonplanner/ui/glade/DetailsView.ui:1801
 msgid "Extra info"
-msgstr "Дополнительная информация"
+msgstr "Ekstra information"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1322
 msgid "No extra information available."
-msgstr "Нет дополнительной информации."
+msgstr "Ingen ekstra information tilgængelig."
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1405
 msgid "Buyer"
-msgstr "Покупатель"
+msgstr "Køber"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1694
 msgid "Loaned"
-msgstr "Отдан в пользование"
+msgstr "Udlånt"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1706
 #: pigeonplanner/ui/glade/BackupDialog.ui:68
 #: pigeonplanner/ui/glade/DBManager.ui:553
 msgid "Back"
-msgstr "Назад"
+msgstr "Tilbage"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1718
 msgid "Person"
-msgstr "Кому"
+msgstr "Person"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:1789
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #: pigeonplanner/ui/glade/UpdateDialog.ui:40
 msgid "Current version:"
-msgstr ""
+msgstr "Nuværende version:"
 
 #: pigeonplanner/ui/glade/UpdateDialog.ui:52
 msgid "Latest version:"
-msgstr ""
+msgstr "Seneste version:"
 
 #: pigeonplanner/ui/glade/UpdateDialog.ui:134
 msgid "Download"
-msgstr ""
+msgstr "Hent"
 
 #: pigeonplanner/ui/glade/MediaView.ui:132
 #: pigeonplanner/ui/glade/DBManager.ui:1059
 msgid "Open"
-msgstr ""
+msgstr "Åbn"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:100
 msgid "Restore"
-msgstr "Восстановить"
+msgstr "Gendan"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:187
 msgid "Create backup"
-msgstr "Создать резервную копию"
+msgstr "Opret sikkerhedskopi"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:203
 msgid "Create a backup of your data"
-msgstr ""
+msgstr "Opret en sikkerhedskopi af dine data"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:261
 msgid "Restore backup"
-msgstr "Восстановить резервную копию"
+msgstr "Gendan sikkerhedskopi..."
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:277
 msgid "Restore a backup of your data"
-msgstr ""
+msgstr "Genskab en sikkerhedskopi af dine data"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:425
 msgid "The following databases will be included."
-msgstr ""
+msgstr "Den følgende database vil blive inkluderet."
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:479
 #: pigeonplanner/ui/glade/BackupDialog.ui:749
 msgid "Database"
-msgstr "База данных"
+msgstr "Database"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:511
 msgid "Include application configuration file"
-msgstr ""
+msgstr "Inkluder profram konfigurationfil"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:566
 msgid "This will not include pigeon images and media files."
-msgstr ""
+msgstr "Dette vil ikke inkludere due billeder og mediefiler."
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:623
 msgid "Backup file"
-msgstr ""
+msgstr "Sikkerhedskopi"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:657
 msgid "Select which databases to restore."
-msgstr ""
+msgstr "Vælg hvilken database der skal genskabes."
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:721
 msgid "Change database path"
-msgstr ""
+msgstr "Ændr databasesti"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:780
 msgid "Restore application configuration file"
-msgstr ""
+msgstr "Gendan program konfigurationfil"
 
 #: pigeonplanner/ui/glade/Dialogs.ui:46
 #: pigeonplanner/ui/glade/ResultParser.ui:756
 msgid "Send"
-msgstr "Отправить"
+msgstr "Send"
 
 #: pigeonplanner/ui/glade/Dialogs.ui:112
 msgid "Send to:"
-msgstr "Отправить:"
+msgstr "Send til:"
 
 #: pigeonplanner/ui/glade/Dialogs.ui:145
 msgid "Your name:"
-msgstr "Ваше имя:"
+msgstr "Dit navn:"
 
 #: pigeonplanner/ui/glade/Dialogs.ui:178
 msgid "Your e-mailaddress:"
-msgstr "Адрес Вашей электронной почты"
+msgstr "Din email adresse:"
 
 #: pigeonplanner/ui/glade/Dialogs.ui:210
 msgid "Subject:"
-msgstr "Тема:"
+msgstr "Emne:"
 
 #: pigeonplanner/ui/glade/Dialogs.ui:247
 msgid "Message:"
-msgstr "Текст сообщения:"
+msgstr "Besked:"
 
 #: pigeonplanner/ui/glade/Dialogs.ui:367
 msgid "Attached file:"
-msgstr "Прикрепленный файл:"
+msgstr "Vedhæftet fil:"
 
 #: pigeonplanner/ui/glade/Dialogs.ui:390
 msgid "Sending..."
-msgstr "Отправка..."
+msgstr "Sender..."
 
 #: pigeonplanner/ui/glade/ExportWindow.ui:16
 msgid "Export data"
-msgstr "Экспорт данных"
+msgstr "Eksporter data"
 
 #: pigeonplanner/ui/glade/ExportWindow.ui:130
 #: pigeonplanner/ui/glade/DBManager.ui:493
 msgid "Path"
-msgstr "Путь"
+msgstr "Sti"
 
 #: pigeonplanner/ui/glade/ExportWindow.ui:179
 msgid "Selected"
-msgstr "Выбрано"
+msgstr "Valgt"
 
 #: pigeonplanner/ui/glade/ExportWindow.ui:194
 msgid "Visible"
-msgstr "Отображаемые"
+msgstr "Synlig"
 
 #: pigeonplanner/ui/glade/ExportWindow.ui:209
 msgid "All"
-msgstr "Все"
+msgstr "Alle"
 
 #: pigeonplanner/ui/glade/DBManager.ui:55
 msgid "Quit"
-msgstr ""
+msgstr "Afslut"
 
 #: pigeonplanner/ui/glade/DBManager.ui:109
 msgid "New"
-msgstr ""
+msgstr "Ny"
 
 #: pigeonplanner/ui/glade/DBManager.ui:228
 msgid "Create a new or add an existing database to get started."
-msgstr ""
+msgstr "Opret en ny eller tilføj en eksisterende database for at begynde."
 
 #: pigeonplanner/ui/glade/DBManager.ui:467
 msgid "For advanced use only. Use the default settings if you are in doubt."
 msgstr ""
+"Til avanceret brug alene. Brug standard indstillingerne hvis du er i tvivl."
 
 #: pigeonplanner/ui/glade/DBManager.ui:567
 msgid "Repair selected"
-msgstr ""
+msgstr "Reparer valgte"
 
 #: pigeonplanner/ui/glade/DBManager.ui:732
 msgid "Action"
-msgstr ""
+msgstr "Handling"
 
 #: pigeonplanner/ui/glade/DBManager.ui:744
 msgid "Result"
-msgstr ""
+msgstr "Resultat"
 
 #: pigeonplanner/ui/glade/DBManager.ui:842
 msgid "Copy"
-msgstr ""
+msgstr "Kopiér"
 
 #: pigeonplanner/ui/glade/DBManager.ui:856
 msgid "Move"
-msgstr ""
+msgstr "Flyt"
 
 #: pigeonplanner/ui/glade/DBManager.ui:870
 msgid "Repair"
-msgstr ""
+msgstr "Reparer"
 
 #: pigeonplanner/ui/glade/DBManager.ui:930
 msgid "Set as default"
-msgstr ""
+msgstr "Sæt som standard"
 
 #: pigeonplanner/ui/glade/DBManager.ui:945
 msgid "Load this database as default on startup"
-msgstr ""
+msgstr "Indlæs denne database som standard ved opstart"
 
 #: pigeonplanner/ui/glade/DBManager.ui:973
 msgid "Send to the developers"
-msgstr ""
+msgstr "Send til udviklerne"
 
 #: pigeonplanner/ui/glade/DBManager.ui:987
 msgid "Open folder"
-msgstr ""
+msgstr "Åbn mappe"
 
 #: pigeonplanner/ui/glade/MedicationView.ui:177
 #: pigeonplanner/ui/glade/MedicationView.ui:682
 msgid "Done by"
-msgstr "Выполнил(а)"
+msgstr "Udført af"
 
 #: pigeonplanner/ui/glade/MedicationView.ui:294
 #: pigeonplanner/ui/glade/MedicationView.ui:706
 msgid "Dosage"
-msgstr "Дозировка"
+msgstr "Dosering"
 
 #: pigeonplanner/ui/glade/MedicationView.ui:330
 #: pigeonplanner/ui/glade/MedicationView.ui:728
 msgid "Vaccination"
-msgstr "Вакцинация"
+msgstr "Vaccination"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:145
 msgid "Top margin"
-msgstr ""
+msgstr "Topmargen"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:157
 msgid "Bottom margin"
-msgstr ""
+msgstr "Bundmargen"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:169
 msgid "Left margin"
-msgstr ""
+msgstr "Venstre margen"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:181
 msgid "Right margin"
-msgstr ""
+msgstr "Højremargen"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:229
 msgid "Pedigree print setup"
-msgstr ""
+msgstr "Stamtavle udskriv opsætning"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:263
 msgid "Save PDF"
-msgstr ""
+msgstr "Gem PDF"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:314
 msgid "Layout configuration"
-msgstr ""
+msgstr "Layout configuration"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:330
 msgid "Custom"
-msgstr ""
+msgstr "Tilpasset"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:406
 msgid "Paper format"
-msgstr ""
+msgstr "Papirformat"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:435
 msgid "Margins"
-msgstr ""
+msgstr "Margener"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:453
 msgid "Configure..."
-msgstr ""
+msgstr "Konfigurer..."
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:505
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:893
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1112
 msgid "Font colour"
-msgstr ""
+msgstr "Skriftfarve"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:531
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:881
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1100
 msgid "Font size"
-msgstr ""
+msgstr "Skriftstørrelse"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:560
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:648
 msgid "Separator"
-msgstr ""
+msgstr "Adskiller"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:624
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:965
 msgid "User info"
-msgstr ""
+msgstr "Brugerinfo"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:636
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1158
 msgid "Pigeon info"
-msgstr ""
+msgstr "Due information"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:674
 msgid "Pigeon image"
-msgstr ""
+msgstr "Due billede"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:688
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:707
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:726
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1235
 msgid "Don't show"
-msgstr ""
+msgstr "Vis ikke"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:689
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:708
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:727
 msgid "Left"
-msgstr ""
+msgstr "Venstre"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:690
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:709
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:728
 msgid "Center"
-msgstr ""
+msgstr "Centrer"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:691
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:710
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:729
 msgid "Right"
-msgstr ""
+msgstr "Højre"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:746
 msgid "Header"
-msgstr ""
+msgstr "Overskrift"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:936
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1236
 msgid "Details"
-msgstr ""
+msgstr "Detaljer"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:945
 msgid "Edit..."
-msgstr ""
+msgstr "Rediger …"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1178
 msgid "Page layout"
-msgstr ""
+msgstr "Sidelayout"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1251
 msgid "Generation 1 lines"
-msgstr ""
+msgstr "Generation 1 linjer"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1263
 msgid "Generation 2 lines"
-msgstr ""
+msgstr "Generation 2 linjer"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1275
 msgid "Generation 3 lines"
-msgstr ""
+msgstr "Generation 3 linjer"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1287
 msgid "Generation 4 lines"
-msgstr ""
+msgstr "Generation 4 linjer"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1366
 msgid "Layout"
-msgstr "Макет"
+msgstr "Layout"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1401
 msgid "Colour edge"
-msgstr ""
+msgstr "Farvekant"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1413
 msgid "Colour background"
-msgstr ""
+msgstr "Baggrundsfarve"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1450
 msgid "Bandnumber font size"
-msgstr ""
+msgstr "Båndnummer skriftstørrelse"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1462
 msgid "Bandnumber colour"
-msgstr ""
+msgstr "Båndnummer farve"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1474
 msgid "Details font size"
-msgstr ""
+msgstr "Detaljers skriftstørrelse"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1486
 msgid "Details colour"
-msgstr ""
+msgstr "Detaljers farve"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1526
 msgid "Comments font size"
-msgstr ""
+msgstr "Kommentars skriftstørrelse"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1538
 msgid "Comments colour"
-msgstr ""
+msgstr "Kommentar farve"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1618
 msgid "Pedigree box"
-msgstr ""
+msgstr "Stamtavle boks"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1654
 msgid "Comments"
-msgstr ""
+msgstr "Kommentarer"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1677
 msgid "Bandnumber"
-msgstr ""
+msgstr "Båndnummer"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1706
 msgid "Sex sign"
-msgstr ""
+msgstr "køn tegn"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1787
 msgid "Pedigree box layout"
-msgstr ""
+msgstr "Stamtavleboks layout"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:46
 msgid "Import results"
-msgstr "Иморт результатов"
+msgstr "Importer resultater"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:145
 msgid "File:"
-msgstr "Файл:"
+msgstr "Fil:"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:157
 msgid "Parser:"
-msgstr "Анализатор"
+msgstr "Fortolker::"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:192
 msgid "Parse"
-msgstr "Анализировать"
+msgstr "Fortolk"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:324
 msgid "No results were found for your pigeons"
-msgstr "Нет результатов для Ваших голубей"
+msgstr "Ingen resultater blev funder for dine duer"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:399
 msgid "Place"
-msgstr "Место"
+msgstr "Sted"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:731
 msgid "Parser error"
-msgstr "Синтаксическая ошибка"
+msgstr "Fortolker fejl"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:794
 msgid ""
@@ -2868,549 +2873,67 @@ msgid ""
 "parser that matches your file and try again. Or send the developers some "
 "useful data shown below, so they can work on this issue."
 msgstr ""
-"Выбранный файл не может быть проанализирован. Выберите другой анализатор, "
-"который подходит этому файлу, и повторите попытку. Или отправьте "
-"разработчикам данные об ошибке, приведенные ниже, для того чтобы они смогли "
-"решить эту проблему."
+"Filen du valgte kunne ikke blive fortolket korrekt. Prøv at vælge en anden "
+"analyser der matcher din fil og prøv igen.Eller send udviklerne brugbar data "
+"vist nedenfor så de kan arbejde på dette problem."
 
 #: pigeonplanner/ui/glade/PhotoAlbum.ui:19
 msgid "Photo Album"
-msgstr "Фотоальбом"
+msgstr "Fotoalbum"
 
 #: pigeonplanner/ui/glade/PhotoAlbum.ui:261
 msgid "There are no images found."
-msgstr "Ни одной картинки не найдено."
+msgstr "Der er ikke fundet nogen billeder."
 
 #: pigeonplanner/ui/glade/DataManager.ui:99
 msgid "Dataset"
-msgstr "Данные"
+msgstr "Datasæt"
 
 #: pigeonplanner/ui/glade/DataManager.ui:111
 #: pigeonplanner/ui/glade/DataManager.ui:165
 msgid "Item"
-msgstr "Элемент"
+msgstr "Element"
 
 #: pigeonplanner/ui/glade/DataManager.ui:206
 msgid "Manage items"
-msgstr "Управление элементами"
+msgstr "Administrer elementer"
 
 #: pigeonplanner/ui/glade/DataManager.ui:278
 msgid "No unused objects found!"
-msgstr ""
+msgstr "Ingen ubrugte objekter fundet"
 
 #: pigeonplanner/ui/glade/DataManager.ui:359
 msgid "Unused objects"
-msgstr "Неиспользованные элементы"
+msgstr "Ubrugte objekter"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:46
 msgid "View all breeding records"
-msgstr ""
+msgstr "Vis alla l avler arkiver"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:282
 msgid "Filter breeding records"
-msgstr ""
+msgstr "Filter avler arkiver"
 
 #: pigeonplanner/ui/glade/PedigreeView.ui:17
 msgid "Number of generations"
-msgstr ""
+msgstr "Antal generationer"
 
 #: pigeonplanner/ui/glade/PedigreeView.ui:491
 msgid "Pedigree sire"
-msgstr ""
+msgstr "Due far"
 
 #: pigeonplanner/ui/glade/PedigreeView.ui:945
 msgid "Pedigree dam"
-msgstr ""
+msgstr "Stamtavle dæmning"
 
 #: pigeonplanner/ui/glade/AddressBook.ui:157
 msgid "Street"
-msgstr "Улица"
+msgstr "Gade"
 
 #: pigeonplanner/ui/glade/AddressBook.ui:212
 msgid "Zipcode / City"
-msgstr "Индекс / Город"
+msgstr "Postnummer/By"
 
 #: pigeonplanner/ui/glade/AddressBook.ui:488
 msgid "This is me"
-msgstr "Это я"
-
-#~ msgid "Remove result"
-#~ msgstr "Удалить результат"
-
-#~ msgid "Go to the website?"
-#~ msgstr "Перейти на домашнюю страницу?"
-
-#~ msgid ""
-#~ "Pigeon Planner is free software. You don’t need to pay for using it. But if "
-#~ "you like it, please consider donating to help improving it."
-#~ msgstr ""
-#~ "Pigeon Planner это свободное програмное обеспечение. Вы не обязаны платить "
-#~ "за его использование. Но если он вам понравился, внесите немного денег на "
-#~ "его улучшение."
-
-#~ msgid "All fields have to be entered."
-#~ msgstr "Все поля должны быть заполнены"
-
-#~ msgid "Optimization has been completed."
-#~ msgstr "Оптимизация завершена."
-
-#~ msgid ""
-#~ "Click \"OK\" to close the program. A new database will be created the next "
-#~ "time you start the program again."
-#~ msgstr ""
-#~ "Нажмите \"ОК\" для закрытия програмы. При следующем запуске прогрммы будет "
-#~ "создана новая база данных"
-
-#~ msgid ""
-#~ "The backup was successfully restored.\n"
-#~ "Restart the program."
-#~ msgstr ""
-#~ "Резервная копия была успешно восстановлена.\n"
-#~ "Перезапуск программы."
-
-#~ msgid ""
-#~ "This will set back all the settings to the default values.\n"
-#~ "Are you sure?"
-#~ msgstr ""
-#~ "Произойдет откат всех настроек к первоначальным.\n"
-#~ "Вы уверены?"
-
-#~ msgid "Choose a directory where to save the backup"
-#~ msgstr "Выберите каталог для хранения резервной копии"
-
-#~ msgid "Tools"
-#~ msgstr "Инструменты"
-
-#~ msgid "Addresses"
-#~ msgstr "Адреса"
-
-#~ msgid "Click here to add an image"
-#~ msgstr "Нажмите сюда для добавления изображения"
-
-#~ msgid "Enter a name for the pigeon"
-#~ msgstr "Введите имя голубя"
-
-#~ msgid ""
-#~ "A new version is available. Please go to the Pigeon Planner website by "
-#~ "clicking the link below and download the latest version"
-#~ msgstr ""
-#~ "Доступна новая версия. Пожалуйста, скачайте новую версию на сайте \"Pigeon "
-#~ "Planner\""
-
-#~ msgid "#Pigeon Planner configuration file"
-#~ msgstr "Конфигурационный файл #Pigeon Planner"
-
-#~ msgid "_Photo Album"
-#~ msgstr "_Фотоальбом"
-
-#~ msgid "Remove the selected pigeon"
-#~ msgstr "Удалить выбранного голубя"
-
-#~ msgid "Year pigeons"
-#~ msgstr "Голуби года"
-
-#~ msgid "_Website"
-#~ msgstr "Са_йт проекта"
-
-#~ msgid "Choose a Pigeon Planner backup file to restore"
-#~ msgstr "Выбрать резервную копию для восстановления"
-
-#~ msgid "Click to close this window"
-#~ msgstr "Нажмите, чтобы закрыть окно"
-
-#~ msgid "Warning! This will overwrite the existing database!"
-#~ msgstr "Внимание! Эта операция перезапишет имеющуюся базу данных!"
-
-#~ msgid "View image: "
-#~ msgstr "Смотеть изображние: "
-
-#~ msgid "Select a valid backup file"
-#~ msgstr "Выбрать хорошую резервную копию."
-
-#~ msgid "Select a directory"
-#~ msgstr "Выбрать каталог"
-
-#~ msgid "Datasets"
-#~ msgstr "Множества"
-
-#~ msgid "Number of cocks"
-#~ msgstr "Число самцов"
-
-#~ msgid "Number of hens"
-#~ msgstr "Число самок"
-
-#~ msgid "Number of young birds"
-#~ msgstr "Число птенцов"
-
-#~ msgid "Search through the list of cocks"
-#~ msgstr "Искать в списке голубей самцов"
-
-#~ msgid "Search through the list of hens"
-#~ msgstr "Искать в списке голубок"
-
-#~ msgid "cock"
-#~ msgstr "голубь"
-
-#~ msgid "young bird"
-#~ msgstr "птенец"
-
-#~ msgid "hen"
-#~ msgstr "голубка"
-
-#~ msgid "Add ran_ge"
-#~ msgstr "Доба_вить список"
-
-#~ msgid "_Restore"
-#~ msgstr "_Восстановить"
-
-#~ msgid "_Find..."
-#~ msgstr "_Искать"
-
-#~ msgid "Various tools"
-#~ msgstr "Различные инструменты"
-
-#~ msgid "<b>Details of pigeon</b>"
-#~ msgstr "<b>Подробно о голубе</b>"
-
-#~ msgid "Choose an image..."
-#~ msgstr "Выбрать изображение..."
-
-#~ msgid "Add result"
-#~ msgstr "Добавить результат"
-
-#~ msgid "<b>Results of pigeon</b>"
-#~ msgstr "<b>Результаты голубя</b>"
-
-#~ msgid "Keep results of this pigeon"
-#~ msgstr "Сохранить результаты голубя"
-
-#~ msgid "Edit result"
-#~ msgstr "Редактировать результаты"
-
-#~ msgid "Go to pigeon"
-#~ msgstr "К голубю"
-
-#~ msgid "Remove pigeon"
-#~ msgstr "Удалить голубя"
-
-#~ msgid "Names"
-#~ msgstr "Имена"
-
-#~ msgid "Search for:"
-#~ msgstr "Искать:"
-
-#~ msgid "Search in:"
-#~ msgstr "Искать в:"
-
-#~ msgid "The following pigeon will be removed:"
-#~ msgstr "Следующий голубь будет удален:"
-
-#~ msgid "<b>Theme</b>"
-#~ msgstr "<b>Тема</b>"
-
-#~ msgid "<b>Language</b>"
-#~ msgstr "<b>Язык</b>"
-
-#~ msgid "<b>Backup</b>"
-#~ msgstr "<b>Резервное копирование</b>"
-
-#~ msgid "View detail"
-#~ msgstr "Смотреть подробности"
-
-#~ msgid "<b>Columns</b>"
-#~ msgstr "<b>Столбцы</b>"
-
-#~ msgid "<b>Other</b>"
-#~ msgstr "<b>Прочее</b>"
-
-#~ msgid "<b>Update</b>"
-#~ msgstr "<b>Обновить</b>"
-
-#, python-format
-#~ msgid ""
-#~ "Warning: There is no section '%(section)s' in the configuration file; an "
-#~ "error occured parsing its option '%(option)s', using the default "
-#~ "'%(default)s'."
-#~ msgstr ""
-#~ "Предупреждение: В конфигурационном файле не существует секции  "
-#~ "'%(section)s';В процессе разбра файла произошла ошибка. Для параметра "
-#~ "'%(option)s'    будет использовано значение '%(default)s'."
-
-#, python-format
-#~ msgid ""
-#~ "Error: There went something wrong parsing the '%(option)s' option in the "
-#~ "'%(section)s' section of the configuration file, using the default "
-#~ "'%(default)s'."
-#~ msgstr ""
-#~ "Ошибка: Er ging iets fout bij het afhandelen van de '%(option)s' optie in de "
-#~ "'%(section)s' sectie van het configuratiebestand, de standaardwaarde "
-#~ "'%(default)s' wordt gebruikt."
-
-#~ msgid "Year race"
-#~ msgstr "Ежегодная гонка:"
-
-#~ msgid "PP Backups"
-#~ msgstr "PP Возврат"
-
-#, python-format
-#~ msgid ""
-#~ "Removing item '%(item)s' from '%(dataset)s'.\n"
-#~ "\n"
-#~ "Are you sure?"
-#~ msgstr ""
-#~ "Удалить  '%(item)s' из '%(dataset)s'.\n"
-#~ "\n"
-#~ "Вы уверенны?"
-
-#~ msgid "Enter the bandnumber of the pigeon"
-#~ msgstr "Введите номер кольца голубя"
-
-#~ msgid "Enter the year of the pigeon"
-#~ msgstr "Введите год голубя"
-
-#~ msgid "<b>Edit this result</b>"
-#~ msgstr "<b>Редактировать результат</b>"
-
-#~ msgid "<b>Add a new result</b>"
-#~ msgstr "<b>Добавить новый результат</b>"
-
-#~ msgid "Restore a backup of your database"
-#~ msgstr "Восстановать резервную копию базы данных"
-
-#~ msgid "Search through the list of pigeons"
-#~ msgstr "Искать по списку голубей"
-
-#~ msgid "<b>Pedigree dam</b>"
-#~ msgstr "<b>Родоначальница</b>"
-
-#~ msgid "<b>Pedigree sire</b>"
-#~ msgstr "<b>Родоначальник</b>"
-
-#~ msgid "Band numbers"
-#~ msgstr "Номера колец"
-
-#~ msgid "At position:"
-#~ msgstr "В позиции:"
-
-#~ msgid "Show an extra column"
-#~ msgstr "Показать дополнительные столбцы"
-
-#~ msgid "Value of column:"
-#~ msgstr "Зачение столбца:"
-
-#~ msgid "Insert a pigeon"
-#~ msgstr "Вставить голубя"
-
-#~ msgid "<b>Sort options</b>"
-#~ msgstr "<b>Параметры сортировки</b>"
-
-#~ msgid "Results:"
-#~ msgstr "Результаты:"
-
-#~ msgid "<b><i><big>Backup</big></i></b>"
-#~ msgstr "<b><i><big>Резервная копия</big></i></b>"
-
-#~ msgid "<b><i><big>Manage data</big></i></b>"
-#~ msgstr "<b><i><big>Данные управления</big></i></b>"
-
-#~ msgid "<b><i><big>Update</big></i></b>"
-#~ msgstr "<b><i><big>Обновить</big></i></b>"
-
-#~ msgid "<b><i><big>Velocity calculator</big></i></b>"
-#~ msgstr "<b><i><big>Калькулятор скорости</big></i></b>"
-
-#~ msgid "<b>Add items</b>"
-#~ msgstr "<b>Добавить</b>"
-
-#~ msgid "<b>Create backup</b>"
-#~ msgstr "<b>Создать резервную копию</b>"
-
-#~ msgid "<b>Remove items</b>"
-#~ msgstr "<b>Удалить</b>"
-
-#~ msgid "<b>Restore backup</b>"
-#~ msgstr "<b>Восстановить резервную копию</b>"
-
-#~ msgid "<i>Click the button below</i>"
-#~ msgstr "<i>Нажмите лежащую ниже кнопку</i>"
-
-#~ msgid "Add and remove items from your datasets"
-#~ msgstr "Добавить и удалить из базы данных"
-
-#~ msgid "Calculate velocity"
-#~ msgstr "Посчитать скорость"
-
-#~ msgid "Check now!"
-#~ msgstr "Проверить сейчас!"
-
-#~ msgid ""
-#~ "Create and restore backups from\n"
-#~ "your pigeons and results."
-#~ msgstr ""
-#~ "Создать и восстановить резервные копии из\n"
-#~ "выши голуби и результаты."
-
-#~ msgid "Distance (km)"
-#~ msgstr "Расстояние (км)"
-
-#~ msgid "Downloadpage"
-#~ msgstr "Страница загрузки"
-
-#~ msgid "From - To (meter/min)"
-#~ msgstr "Из - В (метры/мин)"
-
-#~ msgid "Here you can check if there is a program update available."
-#~ msgstr "Здесь вы можете проверить доступно ли обновление программы."
-
-#~ msgid "Here you can see some statistics of your database"
-#~ msgstr "Здесь вы можете посмотреть статистику базы данных"
-
-#~ msgid "Phone / E-mail"
-#~ msgstr "Телефон / E-mail"
-
-#~ msgid "Released (hh : mm)"
-#~ msgstr "Отказ  (чч : мм)"
-
-#~ msgid "Search database"
-#~ msgstr "Поиск базы данных"
-
-#~ msgid "Date: "
-#~ msgstr "Datum: "
-
-#~ msgid "If you remove the database, all your data will be lost."
-#~ msgstr "Еилс вы удалите базу данных, все выши данные будут потеряны."
-
-#~ msgid ""
-#~ "Optimize your database.\n"
-#~ "(Please wait, this can take some time)"
-#~ msgstr ""
-#~ "Оптимизирую вашу  базу данных\n"
-#~ "(Пожалуйста, подождите. Это может занять некоторое время."
-
-#~ msgid "<b>Optimize database</b>"
-#~ msgstr "<b>Оптимизировать базу данных</b>"
-
-#~ msgid "<b>Warning!</b>"
-#~ msgstr "<b>Предупреждение!</b>"
-
-#~ msgid "<b>Remove database</b>"
-#~ msgstr "<b>Удалить базу данных</b>"
-
-#, python-format
-#~ msgid "Removing '%(item)s' from '%(dataset)s'."
-#~ msgstr "Удаление '%(item)s' из '%(dataset)s'."
-
-#~ msgid "Click here to set the status of the pigeon"
-#~ msgstr "Нажмите здесь, чтобы установить статус"
-
-#~ msgid "Save this pedigree"
-#~ msgstr "Сохранить эту родословную"
-
-#~ msgid "Only show:"
-#~ msgstr "Отображать только:"
-
-#~ msgid "<b>Personal</b>"
-#~ msgstr "<b>Личные</b>"
-
-#~ msgid "<b>Pigeon</b>"
-#~ msgstr "<b>Голубь</b>"
-
-#~ msgid "<b>Layout</b>"
-#~ msgstr "<b>Внешний вид</b>"
-
-#~ msgid "<b>Paper</b>"
-#~ msgstr "<b>Бумага</b>"
-
-#~ msgid "Pedigree layout:"
-#~ msgstr "Планировка родословной:"
-
-#~ msgid "Distance: "
-#~ msgstr "Расстояние: "
-
-#~ msgid "City"
-#~ msgstr "Город"
-
-#~ msgid "Zipcode"
-#~ msgstr "Индекс"
-
-#~ msgid "Telephone number"
-#~ msgstr "Телефон"
-
-#~ msgid "Go to the calendar?"
-#~ msgstr "Перейти к календарю?"
-
-#, python-format
-#~ msgid "Notification for '%s'"
-#~ msgstr "Уведомление для '%s'"
-
-#~ msgid "Page"
-#~ msgstr "Страница"
-
-#~ msgid "View these results"
-#~ msgstr "Просмотреть эти результаты"
-
-#~ msgid "Email these results"
-#~ msgstr "Послать почтой эти результаты"
-
-#~ msgid "Calendar"
-#~ msgstr "Календарь"
-
-#~ msgid "View slideshow"
-#~ msgstr "Посмотреть слайдшоу"
-
-#~ msgid "View in fullscreen"
-#~ msgstr "Просмотреть на весь экран"
-
-#~ msgid "Zooms the picture in"
-#~ msgstr "Увеличить картинку"
-
-#~ msgid "Zooms the picture out"
-#~ msgstr "Уменьшить картинку"
-
-#~ msgid "Shows the next picture"
-#~ msgstr "Показать следущую картинку"
-
-#~ msgid "Shows the last picture"
-#~ msgstr "Показать последнюю картинку"
-
-#~ msgid "Shows the first picture"
-#~ msgstr "Показать первую картинку"
-
-#~ msgid "Shows previous picture"
-#~ msgstr "Показать предыдущую картинку"
-
-#~ msgid "<b>Your name:</b>"
-#~ msgstr "<b>Ваше имя:</b>"
-
-#~ msgid "<b>Subject:</b>"
-#~ msgstr "<b>Тема:</b>"
-
-#~ msgid "<b>Message:</b>"
-#~ msgstr "<b>Сообщение:</b>"
-
-#~ msgid "Year of race"
-#~ msgstr "Год проведения лёта"
-
-#~ msgid "Year of pigeon"
-#~ msgstr "Год рождения голубя"
-
-#~ msgid "No notification set"
-#~ msgstr "Напоминания отключены"
-
-#~ msgid "Keep this pigeon in the pedigree"
-#~ msgstr "Сохранить этого голубя в родословной"
-
-#~ msgid "Number of days in advance:"
-#~ msgstr "Дней:"
-
-#~ msgid "Notify me!"
-#~ msgstr "Оповестить меня!"
-
-#~ msgid "Change the theme"
-#~ msgstr "Сменить тему"
-
-#~ msgid "Zooms to fit the whole picture"
-#~ msgstr "Рисунок на весь экран"
-
-#~ msgid "Optimize"
-#~ msgstr "Оптимизация"
+msgstr "Dette er mig"
