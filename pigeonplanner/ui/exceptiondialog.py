@@ -29,7 +29,7 @@ class ExceptionDialog(Gtk.Dialog):
         Gtk.Dialog.__init__(self)
 
         self._errortext = errortext
-        
+
         self._create_dialog()
         self._size = self.get_size()
         self.run()
@@ -42,6 +42,7 @@ class ExceptionDialog(Gtk.Dialog):
         def resize_timeout():
             self.resize(*self._size)
             return False
+
         # Reverse logic, "expanded" property is set *after* this signal
         if widget.get_expanded():
             # Wait a small amount of time to resize. The expander takes a
@@ -56,8 +57,9 @@ class ExceptionDialog(Gtk.Dialog):
         hbox.set_spacing(12)
         image = Gtk.Image()
         image.set_from_icon_name("dialog-error", Gtk.IconSize.DIALOG)
-        label = Gtk.Label("<span size=\"larger\" weight=\"bold\">%s</span>"
-                          % _("Pigeon Planner has experienced an unexpected error"))
+        label = Gtk.Label(
+            '<span size="larger" weight="bold">%s</span>' % _("Pigeon Planner has experienced an unexpected error")
+        )
         label.set_use_markup(True)
 
         hbox.pack_start(image, False, False, 0)
@@ -65,8 +67,7 @@ class ExceptionDialog(Gtk.Dialog):
 
         self.vbox.pack_start(hbox, False, False, 4)
 
-        label = Gtk.Label(_("You can help the Pigeon Planner "
-                            "developers by taking the time to report this bug."))
+        label = Gtk.Label(_("You can help the Pigeon Planner developers by taking the time to report this bug."))
         label.set_line_wrap(True)
         label.set_use_markup(True)
         label.set_justify(Gtk.Justification.CENTER)
@@ -77,7 +78,7 @@ class ExceptionDialog(Gtk.Dialog):
         textview.get_buffer().set_text(self._errortext)
         textview.set_border_width(6)
         textview.set_editable(False)
-        
+
         scroll = Gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         scroll.set_size_request(-1, 240)

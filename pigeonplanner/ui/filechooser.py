@@ -32,7 +32,7 @@ LAST_FOLDER = None
 
 ########
 # Main filechooser
-class _FileChooser:#Gtk.FileChooser):  # TODO GTK3: why does this fail?
+class _FileChooser:  # Gtk.FileChooser):  # TODO GTK3: why does this fail?
     def _update_preview_cb(self, filechooser):
         filename = filechooser.get_preview_filename()
         if filename is None:
@@ -101,8 +101,7 @@ class _FileChooser:#Gtk.FileChooser):  # TODO GTK3: why does this fail?
 ########
 # Dialogs
 class _FileChooserDialog(Gtk.FileChooserDialog, _FileChooser):
-    def __init__(self, parent=None, folder=const.HOMEDIR,
-                 action=Gtk.FileChooserAction.OPEN, preview=True):
+    def __init__(self, parent=None, folder=const.HOMEDIR, action=Gtk.FileChooserAction.OPEN, preview=True):
         super(_FileChooserDialog, self).__init__(parent=parent, action=action)
         self.add_button(_("Cancel"), Gtk.ResponseType.CANCEL)
         self.set_preview(preview)
@@ -156,11 +155,11 @@ class MediaChooser(_FileChooserDialog):
 
     def _create_extra_widget(self):
         labeltitle = Gtk.Label(_("Title"))
-        labeltitle.set_alignment(0, .5)
+        labeltitle.set_alignment(0, 0.5)
         self.entrytitle = Gtk.Entry()
 
         labeldesc = Gtk.Label(_("Description"))
-        labeldesc.set_alignment(0, .5)
+        labeldesc.set_alignment(0, 0.5)
         self.entrydescription = Gtk.Entry()
 
         table = Gtk.Table(2, 2, False)
@@ -188,8 +187,7 @@ class PdfSaver(_FileChooserDialog):
     __gtype_name__ = "PdfSaver"
 
     def __init__(self, parent, pdf_name):
-        super(PdfSaver, self).__init__(parent, preview=False,
-                                       action=Gtk.FileChooserAction.SAVE)
+        super(PdfSaver, self).__init__(parent, preview=False, action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
         self.add_pdf_filter()
         self.add_button(_("Save"), Gtk.ResponseType.OK)
@@ -201,8 +199,7 @@ class BackupSaver(_FileChooserDialog):
     __gtype_name__ = "BackupSaver"
 
     def __init__(self, parent, backup_name):
-        super(BackupSaver, self).__init__(parent, preview=False,
-                                          action=Gtk.FileChooserAction.SAVE)
+        super(BackupSaver, self).__init__(parent, preview=False, action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
         self.add_backup_filter()
         self.add_button(_("Save"), Gtk.ResponseType.OK)
@@ -214,8 +211,7 @@ class ExportChooser(_FileChooserDialog):
     __gtype_name__ = "ExportChooser"
 
     def __init__(self, parent, filename, filter_):
-        super(ExportChooser, self).__init__(parent, preview=False,
-                                            action=Gtk.FileChooserAction.SAVE)
+        super(ExportChooser, self).__init__(parent, preview=False, action=Gtk.FileChooserAction.SAVE)
         self.set_title(_("Save as..."))
         self.add_custom_filter(*filter_)
         self.add_button(_("Save"), Gtk.ResponseType.OK)
@@ -227,8 +223,9 @@ class PathChooserDialog(_FileChooserDialog):
     __gtype_name__ = "PathChooserDialog"
 
     def __init__(self, parent, folder):
-        super(PathChooserDialog, self).__init__(parent, preview=False, folder=folder,
-                                                action=Gtk.FileChooserAction.SELECT_FOLDER)
+        super(PathChooserDialog, self).__init__(
+            parent, preview=False, folder=folder, action=Gtk.FileChooserAction.SELECT_FOLDER
+        )
         self.set_title(_("Select a folder..."))
         self.add_button(_("Save"), Gtk.ResponseType.OK)
 
@@ -238,8 +235,9 @@ class DatabasePathChooserDialog(_FileChooserDialog):
     __gtype_name__ = "DatabasePathChooserDialog"
 
     def __init__(self, parent, folder=const.PREFDIR):
-        super(DatabasePathChooserDialog, self).__init__(parent, preview=False, folder=folder,
-                                                        action=Gtk.FileChooserAction.SELECT_FOLDER)
+        super(DatabasePathChooserDialog, self).__init__(
+            parent, preview=False, folder=folder, action=Gtk.FileChooserAction.SELECT_FOLDER
+        )
         self.set_title(_("Select a folder..."))
         self.add_button(_("Save"), Gtk.ResponseType.OK)
 
@@ -263,8 +261,7 @@ class DatabasePathChooserDialog(_FileChooserDialog):
 # Buttons
 # General
 class _FileChooserButton(Gtk.FileChooserButton, _FileChooser):
-    def __init__(self, folder=const.HOMEDIR,
-                 action=Gtk.FileChooserAction.OPEN, preview=True, dialog=None):
+    def __init__(self, folder=const.HOMEDIR, action=Gtk.FileChooserAction.OPEN, preview=True, dialog=None):
         if dialog is None:
             super(_FileChooserButton, self).__init__("")
         else:
@@ -279,8 +276,7 @@ class PathChooser(_FileChooserButton):
     __gtype_name__ = "PathChooser"
 
     def __init__(self, title=None, dialog=None):
-        super(PathChooser, self).__init__(preview=False, dialog=dialog,
-                                          action=Gtk.FileChooserAction.SELECT_FOLDER)
+        super(PathChooser, self).__init__(preview=False, dialog=dialog, action=Gtk.FileChooserAction.SELECT_FOLDER)
         if title is None:
             title = _("Select a folder...")
         self.set_title(title)

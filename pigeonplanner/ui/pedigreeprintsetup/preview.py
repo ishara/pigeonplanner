@@ -27,22 +27,24 @@ PRINTER_DPI = 72.0
 
 MARGIN = 6
 
-(ZOOM_BEST_FIT,
- ZOOM_FIT_WIDTH,
- ZOOM_FREE,) = range(3)
+(
+    ZOOM_BEST_FIT,
+    ZOOM_FIT_WIDTH,
+    ZOOM_FREE,
+) = range(3)
 
 
 class PrintPreviewWidget(Gtk.Box, builder.WidgetFactory):
     zoom_factors = {
-        0.50: '50%',
-        0.75: '75%',
-        1.00: '100%',
-        1.25: '125%',
-        1.50: '150%',
-        1.75: '175%',
-        2.00: '200%',
-        3.00: '300%',
-        4.00: '400%',
+        0.50: "50%",
+        0.75: "75%",
+        1.00: "100%",
+        1.25: "125%",
+        1.50: "150%",
+        1.75: "175%",
+        2.00: "200%",
+        3.00: "300%",
+        4.00: "400%",
     }
 
     _instance = None
@@ -157,10 +159,8 @@ class PrintPreviewWidget(Gtk.Box, builder.WidgetFactory):
         self.widgets.drawingarea.set_size_request(screen_width, screen_height)
         self.widgets.drawingarea.queue_draw()
 
-        self._zoom_in_button.set_sensitive(self._zoom !=
-                                           max(self.zoom_factors))
-        self._zoom_out_button.set_sensitive(self._zoom !=
-                                            min(self.zoom_factors))
+        self._zoom_in_button.set_sensitive(self._zoom != max(self.zoom_factors))
+        self._zoom_out_button.set_sensitive(self._zoom != min(self.zoom_factors))
 
     def __zoom_in(self):
         zoom = [z for z in self.zoom_factors if z > self._zoom]
@@ -204,7 +204,7 @@ class PrintPreviewWidget(Gtk.Box, builder.WidgetFactory):
 
         spacing = GObject.Value()
         spacing.init(GObject.TYPE_INT)
-        spacing = self.widgets.swin.style_get_property('scrollbar-spacing', spacing)
+        spacing = self.widgets.swin.style_get_property("scrollbar-spacing", spacing)
 
         reqmin, req = self.widgets.swin.get_vscrollbar().get_preferred_size()
         vsb_w = spacing + req.width
@@ -255,7 +255,7 @@ class PrintPreviewWidget(Gtk.Box, builder.WidgetFactory):
         dpi = PRINTER_DPI * self._zoom
         self._context.set_cairo_context(cr, dpi, dpi)
         # print("n_pages:", self._operation.get_property('n_pages'))
-        if self._operation.get_property('n_pages') > 0:
+        if self._operation.get_property("n_pages") > 0:
             self._preview.render_page(0)  # self._current_page)
 
     def on_swin_size_allocate(self, _scrolledwindow, _allocation):
@@ -327,8 +327,9 @@ class PrintPreviewWidget(Gtk.Box, builder.WidgetFactory):
         return False
 
     def on_motion_notify_event(self, _widget, event):
-        if self._is_dragging and \
-                (event.type == Gdk.EventType.MOTION_NOTIFY or event.type == Gdk.EventType.BUTTON_RELEASE):
+        if self._is_dragging and (
+            event.type == Gdk.EventType.MOTION_NOTIFY or event.type == Gdk.EventType.BUTTON_RELEASE
+        ):
             hadjustment = self.widgets.swin.get_hadjustment()
             vadjustment = self.widgets.swin.get_vadjustment()
             self._update_scrollbar_positions(vadjustment, vadjustment.get_value() - (event.y - self._last_y))

@@ -96,7 +96,7 @@ def update_pigeon(pigeon, data, status, statusdata):
 
     # Update the images
     if pigeon.main_image is None:
-        _create_image(pigeon, imagepath) 
+        _create_image(pigeon, imagepath)
     else:
         if imagepath != pigeon.main_image.path:
             # Remove the old thumbnail (if exists)
@@ -105,15 +105,13 @@ def update_pigeon(pigeon, data, status, statusdata):
             except:
                 pass
             if imagepath:
-                query = Image.update(path=imagepath).where(
-                    (Image.pigeon == pigeon) & (Image.main == True))
+                query = Image.update(path=imagepath).where((Image.pigeon == pigeon) & (Image.main == True))
                 query.execute()
             else:
                 pigeon.main_image.delete_instance()
 
     # Update the status
-    query = Status.update(pigeon=pigeon, status_id=status, **statusdata).where(
-        Status.pigeon == pigeon)
+    query = Status.update(pigeon=pigeon, status_id=status, **statusdata).where(Status.pigeon == pigeon)
     query.execute()
 
     return pigeon
@@ -139,8 +137,8 @@ def build_pedigree_tree(pigeon, index, depth, lst):
         return
 
     lst[index] = pigeon
-    build_pedigree_tree(pigeon.sire, (2*index)+1, depth+1, lst)
-    build_pedigree_tree(pigeon.dam, (2*index)+2, depth+1, lst)
+    build_pedigree_tree(pigeon.sire, (2 * index) + 1, depth + 1, lst)
+    build_pedigree_tree(pigeon.dam, (2 * index) + 2, depth + 1, lst)
 
 
 def get_or_create_pigeon(band_tuple, sex, visible, **data):
@@ -155,9 +153,15 @@ def get_or_create_pigeon(band_tuple, sex, visible, **data):
         country, letters, number, year = band_tuple
         try:
             with database.transaction():
-                pigeon = Pigeon.create(band_country=country, band_letters=letters,
-                                       band_number=number, band_year=year,
-                                       sex=sex, visible=visible, **data)
+                pigeon = Pigeon.create(
+                    band_country=country,
+                    band_letters=letters,
+                    band_number=number,
+                    band_year=year,
+                    sex=sex,
+                    visible=visible,
+                    **data
+                )
                 query = Status.insert(pigeon=pigeon)
                 query.execute()
         except peewee.IntegrityError:

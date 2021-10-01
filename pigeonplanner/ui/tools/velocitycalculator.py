@@ -131,26 +131,27 @@ class VelocityCalculator(builder.GtkBuilder):
         seconds_total = (hours * 3600) + (minutes * 60) + seconds
 
         self.widgets.ls_velocity.clear()
-        for speed in range(begin, end+50, 50):
-            flight = int((distance*distunit) / (speed*speedunit))
+        for speed in range(begin, end + 50, 50):
+            flight = int((distance * distunit) / (speed * speedunit))
             arrival = seconds_total + flight
-            self.widgets.ls_velocity.insert(0, [
-                speed,
-                str(datetime.timedelta(seconds=flight)),
-                str(datetime.timedelta(seconds=arrival))])
+            self.widgets.ls_velocity.insert(
+                0, [speed, str(datetime.timedelta(seconds=flight)), str(datetime.timedelta(seconds=arrival))]
+            )
         self.widgets.ls_velocity.set_sort_column_id(0, Gtk.SortType.ASCENDING)
 
     def on_printcalc_clicked(self, _widget):
-        data = [self.widgets.ls_velocity.get(row.iter, 0, 1, 2)
-                for row in self.widgets.ls_velocity]
+        data = [self.widgets.ls_velocity.get(row.iter, 0, 1, 2) for row in self.widgets.ls_velocity]
         if data:
             date = datetime.datetime.now()
             distance = "%s %s" % (
-                        self.widgets.spinbutton_prognosis_distance.get_value_as_int(),
-                        self.widgets.combobox_prognosis_distance.get_active_id())
-            release = "%s:%s:%s" % (self.widgets.spinbutton_prognosis_hours.get_text(),
-                                    self.widgets.spinbutton_prognosis_minutes.get_text(),
-                                    self.widgets.spinbutton_prognosis_seconds.get_text())
+                self.widgets.spinbutton_prognosis_distance.get_value_as_int(),
+                self.widgets.combobox_prognosis_distance.get_active_id(),
+            )
+            release = "%s:%s:%s" % (
+                self.widgets.spinbutton_prognosis_hours.get_text(),
+                self.widgets.spinbutton_prognosis_minutes.get_text(),
+                self.widgets.spinbutton_prognosis_seconds.get_text(),
+            )
             info = [date.strftime("%Y-%m-%d"), release, distance]
 
             psize = common.get_pagesize_from_opts()

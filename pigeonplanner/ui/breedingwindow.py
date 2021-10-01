@@ -54,14 +54,18 @@ class BreedingWindow(builder.GtkBuilder):
         self.widgets.treemodelfilter = self._builder.get_object("treemodelfilter")
         self.widgets.treemodelfilter.set_visible_func(self._visible_func)
 
-        self.widgets.checkcockband.bind_property("active", self.widgets.bandentrycock,
-                                                 "sensitive", GObject.BindingFlags.DEFAULT)
-        self.widgets.checkhenband.bind_property("active", self.widgets.bandentryhen,
-                                                "sensitive", GObject.BindingFlags.DEFAULT)
-        self.widgets.checkegg1band.bind_property("active", self.widgets.bandentryegg1,
-                                                 "sensitive", GObject.BindingFlags.DEFAULT)
-        self.widgets.checkegg2band.bind_property("active", self.widgets.bandentryegg2,
-                                                 "sensitive", GObject.BindingFlags.DEFAULT)
+        self.widgets.checkcockband.bind_property(
+            "active", self.widgets.bandentrycock, "sensitive", GObject.BindingFlags.DEFAULT
+        )
+        self.widgets.checkhenband.bind_property(
+            "active", self.widgets.bandentryhen, "sensitive", GObject.BindingFlags.DEFAULT
+        )
+        self.widgets.checkegg1band.bind_property(
+            "active", self.widgets.bandentryegg1, "sensitive", GObject.BindingFlags.DEFAULT
+        )
+        self.widgets.checkegg2band.bind_property(
+            "active", self.widgets.bandentryegg2, "sensitive", GObject.BindingFlags.DEFAULT
+        )
 
         self.widgets.window.set_transient_for(parent)
         self.widgets.window.show()
@@ -87,12 +91,12 @@ class BreedingWindow(builder.GtkBuilder):
 
     def on_filterclear_clicked(self, _widget):
         for item in ["date", "egg1laid", "egg1hatched", "egg2laid", "egg2hatched"]:
-            getattr(self.widgets, "combo"+item).set_active(0)
-            getattr(self.widgets, "entry"+item).set_text("")
+            getattr(self.widgets, "combo" + item).set_active(0)
+            getattr(self.widgets, "entry" + item).set_text("")
         for check in ["cockband", "henband", "egg1band", "egg2band"]:
-            getattr(self.widgets, "check"+check).set_active(False)
+            getattr(self.widgets, "check" + check).set_active(False)
         for bandentry in ["cock", "hen", "egg1", "egg2"]:
-            getattr(self.widgets, "bandentry"+bandentry).clear()
+            getattr(self.widgets, "bandentry" + bandentry).clear()
 
         self._filter.clear()
         self.widgets.treemodelfilter.refilter()
@@ -158,9 +162,17 @@ class BreedingWindow(builder.GtkBuilder):
         data = []
         for row in self.widgets.treemodelfilter:
             temp = []
-            for col in (self.LS_DATE, self.LS_COCK, self.LS_HEN,
-                        self.LS_EGG_1_LAID, self.LS_EGG_1_HATCHED, self.LS_EGG_1_BAND,
-                        self.LS_EGG_2_LAID, self.LS_EGG_2_HATCHED, self.LS_EGG_2_BAND):
+            for col in (
+                self.LS_DATE,
+                self.LS_COCK,
+                self.LS_HEN,
+                self.LS_EGG_1_LAID,
+                self.LS_EGG_1_HATCHED,
+                self.LS_EGG_1_BAND,
+                self.LS_EGG_2_LAID,
+                self.LS_EGG_2_HATCHED,
+                self.LS_EGG_2_BAND,
+            ):
                 temp.append(self.widgets.treemodelfilter.get_value(row.iter, col))
             data.append(temp)
         return data
@@ -168,9 +180,15 @@ class BreedingWindow(builder.GtkBuilder):
     def _export_data(self, filename):
         data = self.get_report_data()
         header = [
-            _("Date"), _("Cock"), _("Hen"),
-            _("Egg 1 laid"), _("Egg 1 hatched"), _("Egg 1 bandnumber"),
-            _("Egg 2 laid"), _("Egg 2 hatched"), _("Egg 2 bandnumber")
+            _("Date"),
+            _("Cock"),
+            _("Hen"),
+            _("Egg 1 laid"),
+            _("Egg 1 hatched"),
+            _("Egg 1 bandnumber"),
+            _("Egg 2 laid"),
+            _("Egg 2 hatched"),
+            _("Egg 2 bandnumber"),
         ]
         with open(filename, "w", encoding="utf-8-sig") as output:
             writer = csv.writer(output, dialect=csv.excel, quoting=csv.QUOTE_ALL)
@@ -179,12 +197,22 @@ class BreedingWindow(builder.GtkBuilder):
 
     def _fill_treeview(self):
         for record in Breeding.select():
-            row = [record, str(record.date), record.sire.band, record.dam.band,
-                   str(record.laid1), str(record.hatched1), record.child1.band if record.child1 is not None else "",
-                   str(record.laid2), str(record.hatched2), record.child2.band if record.child2 is not None else "",
-                   record.sire.band_tuple, record.dam.band_tuple,
-                   record.child1.band_tuple if record.child1 is not None else (),
-                   record.child2.band_tuple if record.child2 is not None else ()]
+            row = [
+                record,
+                str(record.date),
+                record.sire.band,
+                record.dam.band,
+                str(record.laid1),
+                str(record.hatched1),
+                record.child1.band if record.child1 is not None else "",
+                str(record.laid2),
+                str(record.hatched2),
+                record.child2.band if record.child2 is not None else "",
+                record.sire.band_tuple,
+                record.dam.band_tuple,
+                record.child1.band_tuple if record.child1 is not None else (),
+                record.child2.band_tuple if record.child2 is not None else (),
+            ]
             self.widgets.liststore.append(row)
 
     def _visible_func(self, model, treeiter, _data=None):

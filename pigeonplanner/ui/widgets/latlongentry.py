@@ -31,10 +31,9 @@ class LatLongEntry(displayentry.DisplayEntry):
         displayentry.DisplayEntry.__init__(self)
 
         self._can_empty = can_empty
-        self._tooltip = _(u"Input should be in one of these formats:\n  "
-                          u"DD.dddddd°\n  "
-                          u"DD°MM.mmm’\n  "
-                          u"DD°MM’SS.s”")
+        self._tooltip = _(
+            u"Input should be in one of these formats:\n  DD.dddddd°\n  DD°MM.mmm’\n  DD°MM’SS.s”"
+        )
 
     def get_text(self, validate=True, as_float=False):
         value = super().get_text()
@@ -69,7 +68,7 @@ class LatLongEntry(displayentry.DisplayEntry):
         if as_float:
             # We need the float repr, above float check failed
             raise errors.InvalidInputError(value)
-        if self.__check_dms_repr(value) is not None: 
+        if self.__check_dms_repr(value) is not None:
             self._unwarn()
             return
         self._warn()
@@ -79,7 +78,7 @@ class LatLongEntry(displayentry.DisplayEntry):
     def __check_float_repr(self, value):
         value = value.replace(u"°", u"")
         try:
-            return float(value)      
+            return float(value)
         except ValueError:
             return None
 

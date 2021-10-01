@@ -45,7 +45,7 @@ def get_status_icon_name(status: enums.Status) -> str:
         enums.Status.lost: "status_lost",
         enums.Status.breeder: "status_breeder",
         enums.Status.loaned: "status_onloan",
-        enums.Status.widow: "status_widow"
+        enums.Status.widow: "status_widow",
     }
     return status_icon_mapping[status]
 
@@ -130,7 +130,9 @@ class HiddenPigeonsMixin:
         return True
 
     # noinspection PyMethodMayBeStatic
-    def _cell_func(self, _col, cell: Gtk.CellRenderer, model: Gtk.TreeModel, rowiter: Gtk.TreeModelRowIter, _data=None):
+    def _cell_func(
+        self, _col, cell: Gtk.CellRenderer, model: Gtk.TreeModel, rowiter: Gtk.TreeModelRowIter, _data=None
+    ):
         pigeon = model.get_value(rowiter, 0)
         color = "white"
         if config.get("interface.missing-pigeon-color"):

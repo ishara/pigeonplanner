@@ -17,10 +17,15 @@
 
 
 from pigeonplanner.reportlib.basereport import Report, ReportOptions
-from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
-                                            TableStyle, TableCellStyle,
-                                            FONT_SANS_SERIF, PARA_ALIGN_LEFT,
-                                            PARA_ALIGN_CENTER)
+from pigeonplanner.reportlib.styles import (
+    ParagraphStyle,
+    FontStyle,
+    TableStyle,
+    TableCellStyle,
+    FONT_SANS_SERIF,
+    PARA_ALIGN_LEFT,
+    PARA_ALIGN_CENTER,
+)
 
 
 class VelocityReport(Report):
@@ -63,18 +68,17 @@ class VelocityReport(Report):
 
 
 class VelocityReportOptions(ReportOptions):
-
     def make_default_style(self, default_style):
         font = FontStyle()
         font.set(face=FONT_SANS_SERIF, size=22)
         para = ParagraphStyle()
-        para.set(font=font, align=PARA_ALIGN_CENTER, bborder=1, bmargin=.5)
+        para.set(font=font, align=PARA_ALIGN_CENTER, bborder=1, bmargin=0.5)
         default_style.add_paragraph_style("header", para)
 
         font = FontStyle()
         font.set(face=FONT_SANS_SERIF, size=14)
         para = ParagraphStyle()
-        para.set(font=font, align=PARA_ALIGN_LEFT, bborder=1, bmargin=.5)
+        para.set(font=font, align=PARA_ALIGN_LEFT, bborder=1, bmargin=0.5)
         default_style.add_paragraph_style("info", para)
 
         font = FontStyle()
@@ -102,4 +106,3 @@ class VelocityReportOptions(ReportOptions):
         cell = TableCellStyle()
         cell.set_padding(0.1)
         default_style.add_cell_style("cell", cell)
-

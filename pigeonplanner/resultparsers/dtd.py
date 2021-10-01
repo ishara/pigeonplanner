@@ -31,12 +31,10 @@ def expand_year(year):
 
 
 class DTDParser(IPlugin):
-
     def check(self, resultfile):
         for line in resultfile:
             line = line.lower()
-            if "data technology-deerlijk" in line or\
-               "data technology deerlijk" in line:
+            if "data technology-deerlijk" in line or "data technology deerlijk" in line:
                 return True
         return False
 
@@ -89,13 +87,13 @@ class DTDParser(IPlugin):
                     # then build the category string based on how many items in the list have passed.
                     # Possible categories: Oude, Oude duiven, Jonge R3, Oude + jaarse
                     pigeonsindex -= 1
-                data["category"] = " ".join(items[pigeonsindex + 1:losindex])
+                data["category"] = " ".join(items[pigeonsindex + 1 : losindex])
                 data["n_pigeons"] = items[pigeonsindex]
-                day, month, year = items[pigeonsindex - 1].split('-')
+                day, month, year = items[pigeonsindex - 1].split("-")
                 dt = datetime.date(int(expand_year(year)), int(month), int(day))
                 data["date"] = dt.strftime(const.DATE_FORMAT)
                 # The remaining items before the date form the racepoint
-                data["racepoint"] = " ".join(items[:pigeonsindex - 1])
+                data["racepoint"] = " ".join(items[: pigeonsindex - 1])
                 continue
 
             # We parse the lines from the end for easier column detection.
@@ -114,7 +112,7 @@ class DTDParser(IPlugin):
             except ValueError:
                 continue
             speed = items[revindex]
-            ring, year = items[revindex-3], items[revindex-2]
+            ring, year = items[revindex - 3], items[revindex - 2]
             # If the year is 2 digits, no space exists between the ring and year
             if len(year) > 1:
                 ring, year = year[:-2], year[-2:]

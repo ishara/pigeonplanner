@@ -59,8 +59,7 @@ class DetailsDialog(Gtk.Dialog):
         if mode in (enums.Action.edit, enums.Action.add):
             self.details = DetailsViewEdit(parent=self, pigeon=pigeon)
             self.details.start_edit(mode)
-            self.add_buttons(_("Cancel"), Gtk.ResponseType.CANCEL,
-                             _("Save"), RESPONSE_SAVE)
+            self.add_buttons(_("Cancel"), Gtk.ResponseType.CANCEL, _("Save"), RESPONSE_SAVE)
             self.set_default_response(RESPONSE_SAVE)
             self.set_resizable(True)
         else:
@@ -99,8 +98,7 @@ class DetailsDialog(Gtk.Dialog):
 
 class StatusButton(builder.GtkBuilder):
     def __init__(self, parent=None):
-        builder.GtkBuilder.__init__(self, "DetailsView.ui",
-                                    ["statusbutton", "statusdialog"])
+        builder.GtkBuilder.__init__(self, "DetailsView.ui", ["statusbutton", "statusdialog"])
         self.parent = parent
         self.pigeon = None
         self.widget = self.widgets.statusbutton
@@ -160,40 +158,61 @@ class StatusButton(builder.GtkBuilder):
             return statusdata
         if status == enums.Status.dead:
             bffr = self.widgets.textinfodead.get_buffer()
-            statusdata.update({"date": self.widgets.entrydatedead.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
+            statusdata.update(
+                {
+                    "date": self.widgets.entrydatedead.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True),
+                }
+            )
             return statusdata
         if status == enums.Status.sold:
             bffr = self.widgets.textinfosold.get_buffer()
-            statusdata.update({"person": self.widgets.entrybuyersold.get_text(),
-                               "date": self.widgets.entrydatesold.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
+            statusdata.update(
+                {
+                    "person": self.widgets.entrybuyersold.get_text(),
+                    "date": self.widgets.entrydatesold.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True),
+                }
+            )
             return statusdata
         if status == enums.Status.lost:
             bffr = self.widgets.textinfolost.get_buffer()
-            statusdata.update({"racepoint": self.widgets.entrypointlost.get_text(),
-                               "date": self.widgets.entrydatelost.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
+            statusdata.update(
+                {
+                    "racepoint": self.widgets.entrypointlost.get_text(),
+                    "date": self.widgets.entrydatelost.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True),
+                }
+            )
             return statusdata
         if status == enums.Status.breeder:
             bffr = self.widgets.textinfobreeder.get_buffer()
-            statusdata.update({"start": self.widgets.entrydatebreedfrom.get_text(),
-                               "end": self.widgets.entrydatebreedto.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
+            statusdata.update(
+                {
+                    "start": self.widgets.entrydatebreedfrom.get_text(),
+                    "end": self.widgets.entrydatebreedto.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True),
+                }
+            )
             return statusdata
         if status == enums.Status.loaned:
             bffr = self.widgets.textinfoloan.get_buffer()
-            statusdata.update({"start": self.widgets.entrydateloan.get_text(),
-                               "end": self.widgets.entrydateloanback.get_text(),
-                               "person": self.widgets.entrypersonloan.get_text(),
-                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
+            statusdata.update(
+                {
+                    "start": self.widgets.entrydateloan.get_text(),
+                    "end": self.widgets.entrydateloanback.get_text(),
+                    "person": self.widgets.entrypersonloan.get_text(),
+                    "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True),
+                }
+            )
             return statusdata
         if status == enums.Status.widow:
             bffr = self.widgets.textinfowidow.get_buffer()
             partner_band = self.widgets.entrypartnerwidow.get_band()
             partner = corepigeon.get_or_create_pigeon(partner_band, enums.Sex.cock, False)
-            statusdata.update({"partner": partner,
-                               "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)})
+            statusdata.update(
+                {"partner": partner, "info": bffr.get_text(*bffr.get_bounds(), include_hidden_chars=True)}
+            )
             return statusdata
 
     def set_default(self):
@@ -243,6 +262,7 @@ class StatusButton(builder.GtkBuilder):
                 widget.set_editable(value)
             except AttributeError:
                 pass
+
         for grid in self.widgets.notebookstatus.get_children():
             grid.foreach(set_editable)
         self.widgets.hboxstatusedit.set_visible(value)
@@ -361,11 +381,10 @@ class DetailsView(builder.GtkBuilder, component.Component):
 
 
 class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
-    __gsignals__ = {"edit-finished": (GObject.SIGNAL_RUN_LAST,
-                                      None, (object, int)),
-                    "edit-cancelled": (GObject.SIGNAL_RUN_LAST,
-                                       None, ()),
-                    }
+    __gsignals__ = {
+        "edit-finished": (GObject.SIGNAL_RUN_LAST, None, (object, int)),
+        "edit-cancelled": (GObject.SIGNAL_RUN_LAST, None, ()),
+    }
 
     def __init__(self, parent=None, pigeon=None):
         builder.GtkBuilder.__init__(self, "DetailsView.ui", ["root_edit", "popover_extrahelp"])
@@ -428,7 +447,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
         #       by font somehow?
         needed_width = 190 if const.WINDOWS else 240
         alloc = widget.get_allocation()
-        self.widgets.drawingarea_extra.set_size_request(alloc.width-needed_width, -1)
+        self.widgets.drawingarea_extra.set_size_request(alloc.width - needed_width, -1)
 
     # noinspection PyMethodMayBeStatic
     def on_drawingarea_extra_draw(self, widget, context):
@@ -510,7 +529,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
             "extra3": self.widgets.entryextraedit3.get_text(),
             "extra4": self.widgets.entryextraedit4.get_text(),
             "extra5": self.widgets.entryextraedit5.get_text(),
-            "extra6": self.widgets.entryextraedit6.get_text()
+            "extra6": self.widgets.entryextraedit6.get_text(),
         }
         return data
 

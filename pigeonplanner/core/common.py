@@ -53,6 +53,7 @@ class LogFunctionCall:
             self.logger.debug("Called function: {}".format(func.__name__))
             result = func(*args, **kwargs)
             return result
+
         return wrapper
 
 
@@ -73,14 +74,15 @@ def count_active_pigeons(pigeons: Optional[List[Pigeon]] = None) -> Dict[Union[s
         enums.Sex.cock: 0,
         enums.Sex.hen: 0,
         enums.Sex.youngbird: 0,
-        enums.Sex.unknown: 0
+        enums.Sex.unknown: 0,
     }
 
     if pigeons is None:
-        query = (Pigeon
-               .select(Pigeon.sex, peewee.fn.Count(Pigeon.sex).alias("count"))
-               .where(Pigeon.visible == True)  # noqa
-               .group_by(Pigeon.sex))
+        query = (
+            Pigeon.select(Pigeon.sex, peewee.fn.Count(Pigeon.sex).alias("count"))
+            .where(Pigeon.visible == True)  # noqa
+            .group_by(Pigeon.sex)
+        )
         for row in query:
             counts[row.sex] = row.count
     else:
@@ -121,7 +123,7 @@ def calculate_coefficient(place: int, out: int, as_string: Optional[bool] = Fals
     :param as_string: Return a localized string
     """
 
-    coef = (float(place)/float(out))*config.get("options.coef-multiplier")
+    coef = (float(place) / float(out)) * config.get("options.coef-multiplier")
     if as_string:
         return locale.format_string("%.4f", coef)
     return coef
@@ -150,7 +152,7 @@ def add_zero_to_time(value: int) -> str:
     :param value: The value to be checked
     """
 
-    if value >= 0 and value < 10:
+    if 0 <= value < 10:
         return "0%s" % value
     return str(value)
 
@@ -196,7 +198,6 @@ def open_file(path: str):
         for lpath in search:
             prog = os.path.join(lpath, utility)
             if os.path.isfile(prog):
-                import subprocess
                 subprocess.call((prog, norm_path))
                 return
 

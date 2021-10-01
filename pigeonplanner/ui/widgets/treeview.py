@@ -80,13 +80,13 @@ class FilterDialog(builder.GtkBuilder):
 
     def on_clear_clicked(self, _widget):
         for combo in ["year", "sex", "status"]:
-            getattr(self.widgets, "combo"+combo).set_active(0)
+            getattr(self.widgets, "combo" + combo).set_active(0)
         for spin in ["year"]:
-            getattr(self.widgets, "spin"+spin).set_value(0)
+            getattr(self.widgets, "spin" + spin).set_value(0)
         for combo in ["colour", "strain", "loft"]:
-            getattr(self.widgets, "combo"+combo).get_child().set_text("")
+            getattr(self.widgets, "combo" + combo).get_child().set_text("")
         for check in ["sex", "status", "sire", "dam"]:
-            getattr(self.widgets, "check"+check).set_active(False)
+            getattr(self.widgets, "check" + check).set_active(False)
         self.widgets.bandentrysire.clear()
         self.widgets.bandentrydam.clear()
 
@@ -137,33 +137,37 @@ class MainTreeView(Gtk.TreeView, component.Component):
     __gtype_name__ = "MainTreeView"
     __gsignals__ = {"pigeons-changed": (GObject.SIGNAL_RUN_LAST, None, ())}
 
-    (LS_PIGEON,
-     LS_RING,
-     LS_YEAR,
-     LS_COUNTRY,
-     LS_NAME,
-     LS_COLOUR,
-     LS_SEX,
-     LS_SIRE,
-     LS_DAM,
-     LS_LOFT,
-     LS_STRAIN,
-     LS_STATUS,
-     LS_SEXIMG,
-     LS_HIDDENIMG) = range(14)
+    (
+        LS_PIGEON,
+        LS_RING,
+        LS_YEAR,
+        LS_COUNTRY,
+        LS_NAME,
+        LS_COLOUR,
+        LS_SEX,
+        LS_SIRE,
+        LS_DAM,
+        LS_LOFT,
+        LS_STRAIN,
+        LS_STATUS,
+        LS_SEXIMG,
+        LS_HIDDENIMG,
+    ) = range(14)
 
-    (COL_HIDDEN,
-     COL_BAND,
-     COL_YEAR,
-     COL_COUNTRY,
-     COL_NAME,
-     COL_COLOUR,
-     COL_SEX,
-     COL_SIRE,
-     COL_DAM,
-     COL_LOFT,
-     COL_STRAIN,
-     COL_STATUS) = range(12)
+    (
+        COL_HIDDEN,
+        COL_BAND,
+        COL_YEAR,
+        COL_COUNTRY,
+        COL_NAME,
+        COL_COLOUR,
+        COL_SEX,
+        COL_SIRE,
+        COL_DAM,
+        COL_LOFT,
+        COL_STRAIN,
+        COL_STATUS,
+    ) = range(12)
 
     def __init__(self):
         Gtk.TreeView.__init__(self)
@@ -171,7 +175,9 @@ class MainTreeView(Gtk.TreeView, component.Component):
 
         self._block_visible_func = False
 
-        sort_direction = Gtk.SortType.ASCENDING if config.get("interface.pigeon-sort") == 0 else Gtk.SortType.DESCENDING
+        sort_direction = (
+            Gtk.SortType.ASCENDING if config.get("interface.pigeon-sort") == 0 else Gtk.SortType.DESCENDING
+        )
 
         component.get("Statusbar").set_filter(False)
         self._liststore = self._build_treeview()
@@ -297,20 +303,34 @@ class MainTreeView(Gtk.TreeView, component.Component):
             path = self.get_child_path(path)
 
         data = (
-            self.LS_PIGEON, pigeon.id,
-            self.LS_RING, pigeon.band,
-            self.LS_YEAR, pigeon.band_year,
-            self.LS_COUNTRY, pigeon.band_country,
-            self.LS_NAME, pigeon.name,
-            self.LS_COLOUR, pigeon.colour,
-            self.LS_SEX, pigeon.sex_string,
-            self.LS_SIRE, "" if pigeon.sire is None else pigeon.sire.band,
-            self.LS_DAM, "" if pigeon.dam is None else pigeon.dam.band,
-            self.LS_LOFT, pigeon.loft,
-            self.LS_STRAIN, pigeon.strain,
-            self.LS_STATUS, pigeon.status.status_string,
-            self.LS_SEXIMG, utils.get_sex_icon_name(pigeon.sex),
-            self.LS_HIDDENIMG, "" if pigeon.visible else "icon_hidden"
+            self.LS_PIGEON,
+            pigeon.id,
+            self.LS_RING,
+            pigeon.band,
+            self.LS_YEAR,
+            pigeon.band_year,
+            self.LS_COUNTRY,
+            pigeon.band_country,
+            self.LS_NAME,
+            pigeon.name,
+            self.LS_COLOUR,
+            pigeon.colour,
+            self.LS_SEX,
+            pigeon.sex_string,
+            self.LS_SIRE,
+            "" if pigeon.sire is None else pigeon.sire.band,
+            self.LS_DAM,
+            "" if pigeon.dam is None else pigeon.dam.band,
+            self.LS_LOFT,
+            pigeon.loft,
+            self.LS_STRAIN,
+            pigeon.strain,
+            self.LS_STATUS,
+            pigeon.status.status_string,
+            self.LS_SEXIMG,
+            utils.get_sex_icon_name(pigeon.sex),
+            self.LS_HIDDENIMG,
+            "" if pigeon.visible else "icon_hidden",
         )
         self.update_row(data, rowiter=rowiter, path=path)
 
@@ -358,7 +378,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
             chunk_size = 998
             pigeons = []
             for i in range(0, len(ids), chunk_size):
-                query = Pigeon.select().where(Pigeon.id.in_(ids[i:i + chunk_size]))
+                query = Pigeon.select().where(Pigeon.id.in_(ids[i : i + chunk_size]))
                 pigeons.extend([pigeon for pigeon in query])
         else:
             pigeons = Pigeon.select().where(Pigeon.id.in_(ids))
@@ -389,15 +409,17 @@ class MainTreeView(Gtk.TreeView, component.Component):
         return Pigeon.get_by_id(self._liststore[path][self.LS_PIGEON])
 
     def set_columns(self):
-        columnsdic = {self.COL_COUNTRY: config.get("columns.pigeon-band-country"),
-                      self.COL_NAME: config.get("columns.pigeon-name"),
-                      self.COL_COLOUR: config.get("columns.pigeon-colour"),
-                      self.COL_SEX: config.get("columns.pigeon-sex"),
-                      self.COL_SIRE: config.get("columns.pigeon-sire"),
-                      self.COL_DAM: config.get("columns.pigeon-dam"),
-                      self.COL_LOFT: config.get("columns.pigeon-loft"),
-                      self.COL_STRAIN: config.get("columns.pigeon-strain"),
-                      self.COL_STATUS: config.get("columns.pigeon-status")}
+        columnsdic = {
+            self.COL_COUNTRY: config.get("columns.pigeon-band-country"),
+            self.COL_NAME: config.get("columns.pigeon-name"),
+            self.COL_COLOUR: config.get("columns.pigeon-colour"),
+            self.COL_SEX: config.get("columns.pigeon-sex"),
+            self.COL_SIRE: config.get("columns.pigeon-sire"),
+            self.COL_DAM: config.get("columns.pigeon-dam"),
+            self.COL_LOFT: config.get("columns.pigeon-loft"),
+            self.COL_STRAIN: config.get("columns.pigeon-strain"),
+            self.COL_STATUS: config.get("columns.pigeon-status"),
+        }
         for key, value in columnsdic.items():
             self.get_column(key).set_visible(value)
             if key == self.COL_SEX and value:
@@ -413,10 +435,21 @@ class MainTreeView(Gtk.TreeView, component.Component):
 
     # Internal methods
     def _build_treeview(self):
-        liststore = Gtk.ListStore(int, str, str, str, str, str, str, str,
-                                  str, str, str, str, str, str)
-        columns = ["", _("Band no."), _("Year"), _("Country"), _("Name"), _("Colour"), _("Sex"),
-                   _("Sire"), _("Dam"), _("Loft"), _("Strain"), _("Status")]
+        liststore = Gtk.ListStore(int, str, str, str, str, str, str, str, str, str, str, str, str, str)
+        columns = [
+            "",
+            _("Band no."),
+            _("Year"),
+            _("Country"),
+            _("Name"),
+            _("Colour"),
+            _("Sex"),
+            _("Sire"),
+            _("Dam"),
+            _("Loft"),
+            _("Strain"),
+            _("Status"),
+        ]
         for index, column in enumerate(columns):
             tvcolumn = Gtk.TreeViewColumn(column)
             if index == self.COL_HIDDEN:
@@ -453,7 +486,7 @@ class MainTreeView(Gtk.TreeView, component.Component):
             pigeon.strain,
             pigeon.status.status_string,
             utils.get_sex_icon_name(pigeon.sex),
-            "" if pigeon.visible else "icon_hidden"
+            "" if pigeon.visible else "icon_hidden",
         ]
 
     def _visible_func(self, model, treeiter, _data=None):

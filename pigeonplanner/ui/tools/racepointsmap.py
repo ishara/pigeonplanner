@@ -41,7 +41,7 @@ MAP_TYPES = {
     OsmGpsMap.MapSource_t.GOOGLE_HYBRID: "Google hybrid",
     OsmGpsMap.MapSource_t.VIRTUAL_EARTH_STREET: "Virtualearth street",
     OsmGpsMap.MapSource_t.VIRTUAL_EARTH_SATELLITE: "Virtualearth satellite",
-    OsmGpsMap.MapSource_t.VIRTUAL_EARTH_HYBRID: "Virtualearth hybrid"
+    OsmGpsMap.MapSource_t.VIRTUAL_EARTH_HYBRID: "Virtualearth hybrid",
 }
 
 DEFAULT_ZOOM = 6
@@ -55,12 +55,14 @@ def get_marker_pixbuf(marker_name):
 
 
 class RacepointsmapWindow(builder.GtkBuilder):
-    (LS_OBJID,
-     LS_NAME,
-     LS_LATITUDE,
-     LS_LONGITUDE,
-     LS_MARKER,
-     LS_POINT) = range(6)
+    (
+        LS_OBJID,
+        LS_NAME,
+        LS_LATITUDE,
+        LS_LONGITUDE,
+        LS_MARKER,
+        LS_POINT
+    ) = range(6)
 
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "Racepointsmap.ui")
@@ -137,8 +139,7 @@ class RacepointsmapWindow(builder.GtkBuilder):
     def on_button_remove_clicked(self, _widget):
         selection = self.widgets.treeview.get_selection()
         model, treeiter = selection.get_selected()
-        if QuestionDialog((_("Removing the selected racepoint."), _("Are you sure?"), ""),
-                          self.widgets.window).run():
+        if QuestionDialog((_("Removing the selected racepoint."), _("Are you sure?"), ""), self.widgets.window).run():
             Racepoint.delete_by_id(model[treeiter][self.LS_OBJID])
             model[treeiter][self.LS_MARKER].remove_from_map()
             model.remove(treeiter)

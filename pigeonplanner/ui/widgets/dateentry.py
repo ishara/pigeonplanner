@@ -49,7 +49,7 @@ class DateEntry(Gtk.Viewport):
         self._entry = Gtk.Entry()
         self._entry.set_max_length(10)
         self._entry.set_width_chars(16)
-        self._entry.set_alignment(.5)
+        self._entry.set_alignment(0.5)
         self._entry.connect("icon-press", self.on_icon_pressed)
 
         self.can_empty = can_empty
@@ -79,6 +79,7 @@ class DateEntry(Gtk.Viewport):
         icon = os.path.join(const.IMAGEDIR, "icon_calendar.png")
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(icon) if editable else None
         self._entry.set_icon_from_pixbuf(Gtk.EntryIconPosition.SECONDARY, pixbuf)
+
     editable = GObject.property(get_editable, set_editable, bool, False)
 
     def get_clear(self):
@@ -92,6 +93,7 @@ class DateEntry(Gtk.Viewport):
             today = datetime.datetime.today()
             text = today.strftime(const.DATE_FORMAT)
         self._entry.set_text(text)
+
     clear = GObject.property(get_clear, set_clear, bool, False)
 
     def set_text(self, text):

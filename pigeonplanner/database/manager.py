@@ -97,29 +97,22 @@ class DBManager:
             if os.path.exists(const.DATABASE):
                 # The default database exist, which means an older version of Pigeon Planner
                 # was already used before. Just add this database to the list.
-                self._dbs = [
-                    DatabaseInfo(
-                        self.default_name,
-                        const.DATABASE,
-                        self.default_description,
-                        False
-                    )
-                ]
+                self._dbs = [DatabaseInfo(self.default_name, const.DATABASE, self.default_description, False)]
             else:
                 # First run, let the user create their own database.
                 self._dbs = []
             self._save_dbs()
 
     def get_databases(self) -> List[DatabaseInfo]:
-        """ Return a list of available database objects """
+        """Return a list of available database objects"""
         return self._dbs
 
     def save(self):
-        """ Save all database objects to the configuration file """
+        """Save all database objects to the configuration file"""
         self._save_dbs()
 
     def reorder(self, new_order: List[DatabaseInfo]):
-        """ Reorder the current database list to match the given list.
+        """Reorder the current database list to match the given list.
 
         @param new_order: List of DatabaseInfo objects
         """
@@ -127,11 +120,11 @@ class DBManager:
         self.save()
 
     def set_default(self, dbobj: DatabaseInfo, value: bool):
-        """ Set the default value to the given database object.
+        """Set the default value to the given database object.
 
         @param dbobj: The DatabaseInfo to change
         @param value: Bool to set the default value
-        """ 
+        """
         if value:
             for db in self._dbs:
                 db.default = False
@@ -139,7 +132,7 @@ class DBManager:
         self.save()
 
     def get_default(self) -> Optional[DatabaseInfo]:
-        """ Get the default database object. """
+        """Get the default database object."""
         for db in self._dbs:
             if db.default:
                 return db
@@ -147,7 +140,7 @@ class DBManager:
 
     # noinspection PyMethodMayBeStatic
     def prompt_do_upgrade(self) -> bool:
-        """ Called when a database upgrade is needed. Return True to continue or False
+        """Called when a database upgrade is needed. Return True to continue or False
         to abort. Override this method in the GUI to provide a dialog for example.
         """
         return True
@@ -156,7 +149,7 @@ class DBManager:
         pass
 
     def open(self, dbobj: DatabaseInfo):
-        """ Open the given database object.
+        """Open the given database object.
 
         @param dbobj: The DatabaseInfo to open
         """
@@ -294,10 +287,7 @@ class DBManager:
     def _save_dbs(self):
         data = []
         for dbobj in self._dbs:
-            info = dict(path=dbobj.path,
-                        name=dbobj.name,
-                        description=dbobj.description,
-                        default=dbobj.default)
+            info = dict(path=dbobj.path, name=dbobj.name, description=dbobj.description, default=dbobj.default)
             data.append(info)
 
         with open(const.DATABASEINFO, "w") as outfile:

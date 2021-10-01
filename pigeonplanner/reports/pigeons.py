@@ -19,9 +19,14 @@
 from pigeonplanner.core import config
 from pigeonplanner.reports.common import HelperMethods
 from pigeonplanner.reportlib.basereport import Report, ReportOptions
-from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
-                                            TableStyle, TableCellStyle,
-                                            FONT_SANS_SERIF, PARA_ALIGN_LEFT)
+from pigeonplanner.reportlib.styles import (
+    ParagraphStyle,
+    FontStyle,
+    TableStyle,
+    TableCellStyle,
+    FONT_SANS_SERIF,
+    PARA_ALIGN_LEFT,
+)
 
 
 class PigeonsReport(Report, HelperMethods):
@@ -45,7 +50,7 @@ class PigeonsReport(Report, HelperMethods):
             "colour": 10,
             "loft": 10,
             "strain": 10,
-            "status_string": 10
+            "status_string": 10,
         }
 
         columns = [(_("Band no."), "band")]
@@ -106,16 +111,14 @@ class PigeonsReport(Report, HelperMethods):
 
 
 class PigeonsReportOptions(ReportOptions):
-
     def set_values(self):
-        self.margins = {"lmargin": 1., "rmargin": 1.,
-                        "tmargin": 1., "bmargin": 1.}
+        self.margins = {"lmargin": 1.0, "rmargin": 1.0, "tmargin": 1.0, "bmargin": 1.0}
 
     def make_default_style(self, default_style):
         font = FontStyle()
         font.set(face=FONT_SANS_SERIF, size=11)
         para = ParagraphStyle()
-        para.set(font=font, align=PARA_ALIGN_LEFT, bborder=1, bmargin=.5)
+        para.set(font=font, align=PARA_ALIGN_LEFT, bborder=1, bmargin=0.5)
         default_style.add_paragraph_style("header", para)
 
         font = FontStyle()

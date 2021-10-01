@@ -55,7 +55,7 @@ class BaseTab(component.Component):
         pass
 
     def get_pigeon_state_widgets(self):
-        """ List of widgets that need a 'sensitive' property update whenever
+        """List of widgets that need a 'sensitive' property update whenever
         a pigeon is selected/deselected in the main treeview.
         """
         return []

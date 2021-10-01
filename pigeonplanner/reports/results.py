@@ -19,25 +19,31 @@
 from pigeonplanner.core import config
 from pigeonplanner.reports.common import HelperMethods
 from pigeonplanner.reportlib.basereport import Report, ReportOptions
-from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
-                                            TableStyle, TableCellStyle,
-                                            FONT_SANS_SERIF, PAPER_LANDSCAPE,
-                                            PARA_ALIGN_LEFT)
+from pigeonplanner.reportlib.styles import (
+    ParagraphStyle,
+    FontStyle,
+    TableStyle,
+    TableCellStyle,
+    FONT_SANS_SERIF,
+    PAPER_LANDSCAPE,
+    PARA_ALIGN_LEFT,
+)
 
 
-columnsize = {"date": 7,
-              "point": 12,
-              "ring": 8,
-              "placestr": 5,
-              "out": 5,
-              "type": 6,
-              "wind": 6.5,
-              "weather": 6.5,
-              "coefstr": 6,
-              "sector": 10,
-              "category": 7,
-              "comment": 21
-        }
+columnsize = {
+    "date": 7,
+    "point": 12,
+    "ring": 8,
+    "placestr": 5,
+    "out": 5,
+    "type": 6,
+    "wind": 6.5,
+    "weather": 6.5,
+    "coefstr": 6,
+    "sector": 10,
+    "category": 7,
+    "comment": 21,
+}
 
 
 class ResultsReport(Report, HelperMethods):
@@ -52,25 +58,26 @@ class ResultsReport(Report, HelperMethods):
         self.add_header()
 
         # Pagenumber and date
-        #TODO: how to get pagenr and total pages at this point?
-#        self.doc.start_paragraph("pagenr")
-#        self.doc.write_text("")
-#        self.doc.end_paragraph()
+        # TODO: how to get pagenr and total pages at this point?
+        #        self.doc.start_paragraph("pagenr")
+        #        self.doc.write_text("")
+        #        self.doc.end_paragraph()
 
         # Actual results
-        self.headermap = {"date": _("Date"),
-                          "point": _("Racepoint"),
-                          "ring": _("Band no."),
-                          "placestr": _("Placed"),
-                          "out": _("Out of"),
-                          "type": _("Type"),
-                          "wind": _("Wind"),
-                          "weather": _("Weather"),
-                          "coefstr": _("Coef."),
-                          "sector": _("Sector"),
-                          "category": _("Category"),
-                          "comment": _("Comment")
-                }
+        self.headermap = {
+            "date": _("Date"),
+            "point": _("Racepoint"),
+            "ring": _("Band no."),
+            "placestr": _("Placed"),
+            "out": _("Out of"),
+            "type": _("Type"),
+            "wind": _("Wind"),
+            "weather": _("Weather"),
+            "coefstr": _("Coef."),
+            "sector": _("Sector"),
+            "category": _("Category"),
+            "comment": _("Comment"),
+        }
 
         if config.get("interface.results-mode") == 0:
             self._do_report_classic()
@@ -144,11 +151,7 @@ class ResultsReport(Report, HelperMethods):
             resultcolumns.append("comment")
 
         columns = racecolumns + resultcolumns
-        dummyrace = {"date": "",
-                     "point": "",
-                     "type": "",
-                     "wind": "",
-                     "weather": ""}
+        dummyrace = {"date": "", "point": "", "type": "", "wind": "", "weather": ""}
 
         self._add_table_style([columnsize[col] for col in columns])
         self.doc.start_table("my_table", "table")
@@ -184,17 +187,15 @@ class ResultsReport(Report, HelperMethods):
 
 
 class ResultsReportOptions(ReportOptions):
-
     def set_values(self):
         self.orientation = PAPER_LANDSCAPE
-        self.margins = {"lmargin": 1., "rmargin": 1.,
-                        "tmargin": 1., "bmargin": 1.}
+        self.margins = {"lmargin": 1.0, "rmargin": 1.0, "tmargin": 1.0, "bmargin": 1.0}
 
     def make_default_style(self, default_style):
         font = FontStyle()
         font.set(face=FONT_SANS_SERIF, size=12)
         para = ParagraphStyle()
-        para.set(font=font, align=PARA_ALIGN_LEFT, bborder=1, bmargin=.5)
+        para.set(font=font, align=PARA_ALIGN_LEFT, bborder=1, bmargin=0.5)
         default_style.add_paragraph_style("header", para)
 
         font = FontStyle()

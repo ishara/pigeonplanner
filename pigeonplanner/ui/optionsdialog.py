@@ -54,8 +54,7 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
             (_("General"), "document-properties", []),
             (_("Appearance"), "document-page-setup", []),
             (_("Columns"), "icon_columns", []),
-            (_("Printing"), "document-print",
-                [_("Pigeons"), _("Results")]),
+            (_("Printing"), "document-print", [_("Pigeons"), _("Results")]),
             (_("Advanced"), "preferences-system", []),
         ]
         i = 0
@@ -138,61 +137,56 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
             sexcoltype = 3
 
         settings = [
-                ("options.check-for-updates", self.widgets.chkUpdate.get_active()),
-                ("options.check-for-dev-updates", self.widgets.chkDevUpdate.get_active()),
-                ("options.language", self.widgets.combolangs.get_active_text()),
-                ("options.coef-multiplier", self.widgets.spincoef.get_value_as_int()),
-                ("options.distance-unit", self.widgets.combodistance.get_active()),
-                ("options.speed-unit", self.widgets.combospeed.get_active()),
-                ##("options.format-date", self.entrydate.get_text()),
-
-                ("interface.arrows", self.widgets.chkArrows.get_active()),
-                ("interface.stats", self.widgets.chkStats.get_active()),
-                ("interface.toolbar", self.widgets.chkToolbar.get_active()),
-                ("interface.statusbar", self.widgets.chkStatusbar.get_active()),
-                ("interface.pigeon-sort", self.widgets.cbSortPigeons.get_active()),
-                ("interface.results-mode", self.widgets.cbResultsMode.get_active()),
-                ("interface.missing-pigeon-hide", self.widgets.chkShowHidden.get_active()),
-                ("interface.missing-pigeon-color", self.widgets.chkColorHidden.get_active()),
-                ("interface.missing-pigeon-color-value",
-                    self.widgets.chkColorHiddenValue.get_color().to_string()),
-                ("interface.theme-name", self.widgets.cbThemeName.get_active_text()),
-
-                ("backup.automatic-backup", self.widgets.checkbackup.get_active()),
-                ("backup.interval", self.widgets.spinday.get_value_as_int()),
-                ("backup.location", self.widgets.fcbutton.get_filename()),
-
-                ("columns.pigeon-name", self.widgets.chkName.get_active()),
-                ("columns.pigeon-band-country", self.widgets.chkCountry.get_active()),
-                ("columns.pigeon-colour", self.widgets.chkColour.get_active()),
-                ("columns.pigeon-sex", self.widgets.chkSex.get_active()),
-                ("columns.pigeon-sex-type", sexcoltype),
-                ("columns.pigeon-sire", self.widgets.chkSire.get_active()),
-                ("columns.pigeon-dam", self.widgets.chkDam.get_active()),
-                ("columns.pigeon-strain", self.widgets.chkStrain.get_active()),
-                ("columns.pigeon-status", self.widgets.chkStatus.get_active()),
-                ("columns.pigeon-loft", self.widgets.chkLoft.get_active()),
-                ("columns.result-coef", self.widgets.chkCoef.get_active()),
-                ("columns.result-speed", self.widgets.chkSpeed.get_active()),
-                ("columns.result-sector", self.widgets.chkSector.get_active()),
-                ("columns.result-category", self.widgets.chkCategory.get_active()),
-                ("columns.result-type", self.widgets.chkType.get_active()),
-                ("columns.result-weather", self.widgets.chkWeather.get_active()),
-                ("columns.result-temperature", self.widgets.chkTemperature.get_active()),
-                ("columns.result-wind", self.widgets.chkWind.get_active()),
-                ("columns.result-windspeed", self.widgets.chkWindspeed.get_active()),
-                ("columns.result-comment", self.widgets.chkComment.get_active()),
-
-                ("printing.general-paper", self.widgets.cbPaper.get_active()),
-                ("printing.pigeon-colnames", self.widgets.chkPigColumnNames.get_active()),
-                ("printing.pigeon-sex", self.widgets.chkPigOptSex.get_active()),
-                ("printing.result-colnames", self.widgets.chkResColumnNames.get_active()),
-                ("printing.result-date", self.widgets.chkResDate.get_active()),
-                ("printing.user-name", self.widgets.chkPerName.get_active()),
-                ("printing.user-address", self.widgets.chkPerAddress.get_active()),
-                ("printing.user-phone", self.widgets.chkPerPhone.get_active()),
-                ("printing.user-email", self.widgets.chkPerEmail.get_active()),
-            ]
+            ("options.check-for-updates", self.widgets.chkUpdate.get_active()),
+            ("options.check-for-dev-updates", self.widgets.chkDevUpdate.get_active()),
+            ("options.language", self.widgets.combolangs.get_active_text()),
+            ("options.coef-multiplier", self.widgets.spincoef.get_value_as_int()),
+            ("options.distance-unit", self.widgets.combodistance.get_active()),
+            ("options.speed-unit", self.widgets.combospeed.get_active()),
+            ##("options.format-date", self.entrydate.get_text()),
+            ("interface.arrows", self.widgets.chkArrows.get_active()),
+            ("interface.stats", self.widgets.chkStats.get_active()),
+            ("interface.toolbar", self.widgets.chkToolbar.get_active()),
+            ("interface.statusbar", self.widgets.chkStatusbar.get_active()),
+            ("interface.pigeon-sort", self.widgets.cbSortPigeons.get_active()),
+            ("interface.results-mode", self.widgets.cbResultsMode.get_active()),
+            ("interface.missing-pigeon-hide", self.widgets.chkShowHidden.get_active()),
+            ("interface.missing-pigeon-color", self.widgets.chkColorHidden.get_active()),
+            ("interface.missing-pigeon-color-value", self.widgets.chkColorHiddenValue.get_color().to_string()),
+            ("interface.theme-name", self.widgets.cbThemeName.get_active_text()),
+            ("backup.automatic-backup", self.widgets.checkbackup.get_active()),
+            ("backup.interval", self.widgets.spinday.get_value_as_int()),
+            ("backup.location", self.widgets.fcbutton.get_filename()),
+            ("columns.pigeon-name", self.widgets.chkName.get_active()),
+            ("columns.pigeon-band-country", self.widgets.chkCountry.get_active()),
+            ("columns.pigeon-colour", self.widgets.chkColour.get_active()),
+            ("columns.pigeon-sex", self.widgets.chkSex.get_active()),
+            ("columns.pigeon-sex-type", sexcoltype),
+            ("columns.pigeon-sire", self.widgets.chkSire.get_active()),
+            ("columns.pigeon-dam", self.widgets.chkDam.get_active()),
+            ("columns.pigeon-strain", self.widgets.chkStrain.get_active()),
+            ("columns.pigeon-status", self.widgets.chkStatus.get_active()),
+            ("columns.pigeon-loft", self.widgets.chkLoft.get_active()),
+            ("columns.result-coef", self.widgets.chkCoef.get_active()),
+            ("columns.result-speed", self.widgets.chkSpeed.get_active()),
+            ("columns.result-sector", self.widgets.chkSector.get_active()),
+            ("columns.result-category", self.widgets.chkCategory.get_active()),
+            ("columns.result-type", self.widgets.chkType.get_active()),
+            ("columns.result-weather", self.widgets.chkWeather.get_active()),
+            ("columns.result-temperature", self.widgets.chkTemperature.get_active()),
+            ("columns.result-wind", self.widgets.chkWind.get_active()),
+            ("columns.result-windspeed", self.widgets.chkWindspeed.get_active()),
+            ("columns.result-comment", self.widgets.chkComment.get_active()),
+            ("printing.general-paper", self.widgets.cbPaper.get_active()),
+            ("printing.pigeon-colnames", self.widgets.chkPigColumnNames.get_active()),
+            ("printing.pigeon-sex", self.widgets.chkPigOptSex.get_active()),
+            ("printing.result-colnames", self.widgets.chkResColumnNames.get_active()),
+            ("printing.result-date", self.widgets.chkResDate.get_active()),
+            ("printing.user-name", self.widgets.chkPerName.get_active()),
+            ("printing.user-address", self.widgets.chkPerAddress.get_active()),
+            ("printing.user-phone", self.widgets.chkPerPhone.get_active()),
+            ("printing.user-email", self.widgets.chkPerEmail.get_active()),
+        ]
 
         config.save_backup()
         for option, value in settings:
@@ -258,7 +252,8 @@ class OptionsDialog(builder.GtkBuilder, GObject.GObject):
         self.widgets.chkShowHidden.set_active(config.get("interface.missing-pigeon-hide"))
         self.widgets.chkColorHidden.set_active(config.get("interface.missing-pigeon-color"))
         self.widgets.chkColorHiddenValue.set_color(
-                Gdk.color_parse(config.get("interface.missing-pigeon-color-value")))
+            Gdk.color_parse(config.get("interface.missing-pigeon-color-value"))
+        )
         self.widgets.cbThemeName.set_active_id(config.get("interface.theme-name"))
 
         # Printing

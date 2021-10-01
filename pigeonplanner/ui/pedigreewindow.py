@@ -27,9 +27,7 @@ from pigeonplanner.ui.pedigreeprintsetup import setupwindow
 from pigeonplanner.database.models import Pigeon
 
 
-(PREVIOUS,
- NEXT_SIRE,
- NEXT_DAM) = range(3)
+(PREVIOUS, NEXT_SIRE, NEXT_DAM) = range(3)
 
 
 class PedigreeWindow(builder.GtkBuilder):
@@ -56,8 +54,7 @@ class PedigreeWindow(builder.GtkBuilder):
         name = pigeon.name
         if name:
             name = ", " + name
-        title = "%s: %s%s - %s" % (_("Pedigree"), pigeon.band,
-                                   name, pigeon.sex_string)
+        title = "%s: %s%s - %s" % (_("Pedigree"), pigeon.band, name, pigeon.sex_string)
         self.widgets.window.set_title(title)
 
         is_home = self._original_pigeon == pigeon

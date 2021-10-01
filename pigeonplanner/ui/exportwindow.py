@@ -79,10 +79,7 @@ class ExportWindow(builder.GtkBuilder):
             exporter.run(filepath, pigeons)
         except IOError as e:
             logger.exception(e)
-            ErrorDialog(
-                (_("The selected path is not writeable."), None, _("Error")),
-                self.widgets.window
-            )
+            ErrorDialog((_("The selected path is not writeable."), None, _("Error")), self.widgets.window)
         else:
             self.widgets.imageprogress.show()
 

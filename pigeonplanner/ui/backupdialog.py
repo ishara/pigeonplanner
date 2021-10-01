@@ -37,18 +37,11 @@ logger = logging.getLogger(__name__)
 
 
 class BackupDialog(builder.GtkBuilder):
-    (PAGE_MAIN,
-     PAGE_CREATE,
-     PAGE_RESTORE) = range(3)
+    (PAGE_MAIN, PAGE_CREATE, PAGE_RESTORE) = range(3)
 
-    (LS_RESTORE_CHECK,
-     LS_RESTORE_INFO,
-     LS_RESTORE_ACTION,
-     LS_RESTORE_DBOBJ) = range(4)
+    (LS_RESTORE_CHECK, LS_RESTORE_INFO, LS_RESTORE_ACTION, LS_RESTORE_DBOBJ) = range(4)
 
-    (RESTORE_ACTION_ADD,
-     RESTORE_ACTION_OVERWRITE,
-     RESTORE_ACTION_INVALID) = range(3)
+    (RESTORE_ACTION_ADD, RESTORE_ACTION_OVERWRITE, RESTORE_ACTION_INVALID) = range(3)
 
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "BackupDialog.ui")
@@ -149,9 +142,14 @@ class BackupDialog(builder.GtkBuilder):
 
         self.widgets.liststoredbrestore.clear()
         if self.restore_op.old_backup:
-            dbobjs = [DatabaseInfo(DBManager.default_name,
-                                   os.path.join(const.PREFDIR, "pigeonplanner.db"),
-                                   DBManager.default_description, False)]
+            dbobjs = [
+                DatabaseInfo(
+                    DBManager.default_name,
+                    os.path.join(const.PREFDIR, "pigeonplanner.db"),
+                    DBManager.default_description,
+                    False,
+                )
+            ]
         else:
             dbobjs = [DatabaseInfo(**entry) for entry in json.loads(self.restore_op.database_info)]
         for dbobj in dbobjs:
@@ -175,16 +173,22 @@ class BackupDialog(builder.GtkBuilder):
             dbobj.path = os.path.join(new_path, dbobj.filename)
             new_action = self._get_restore_action(dbobj)
             new_info = self._format_dbobj_liststore_restore_info(dbobj, new_action)
-            model.set(rowiter,
-                      self.LS_RESTORE_DBOBJ, dbobj,
-                      self.LS_RESTORE_INFO, new_info,
-                      self.LS_RESTORE_ACTION, new_action)
+            model.set(
+                rowiter,
+                self.LS_RESTORE_DBOBJ,
+                dbobj,
+                self.LS_RESTORE_INFO,
+                new_info,
+                self.LS_RESTORE_ACTION,
+                new_action,
+            )
             self._set_restore_button()
         dialog.destroy()
 
     def on_celltoggle_restore_toggled(self, _cell, path):
-        self.widgets.liststoredbrestore[path][self.LS_RESTORE_CHECK] = \
-            not self.widgets.liststoredbrestore[path][self.LS_RESTORE_CHECK]
+        self.widgets.liststoredbrestore[path][self.LS_RESTORE_CHECK] = not self.widgets.liststoredbrestore[path][
+            self.LS_RESTORE_CHECK
+        ]
         self._set_restore_button()
 
     def on_selection_dbrestore_changed(self, selection):
@@ -212,11 +216,7 @@ class BackupDialog(builder.GtkBuilder):
         head = "%s" % escape(dbobj.name)
         if dbobj.description:
             head += " - <small>%s</small>" % escape(dbobj.description)
-        action_data = [
-            (_("Add"), "#00C411"),
-            (_("Overwrite"), "#FFA100"),
-            (_("Invalid path"), "#C40B00")
-        ]
+        action_data = [(_("Add"), "#00C411"), (_("Overwrite"), "#FFA100"), (_("Invalid path"), "#C40B00")]
         action_string, colour = action_data[action]
         second_format = "<span style='italic' size='smaller' foreground='%s'>%s: %s</span>"
         second = second_format % (colour, action_string, escape(dbobj.path))

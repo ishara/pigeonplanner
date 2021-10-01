@@ -21,14 +21,14 @@ from gi.repository import Gtk
 
 class _MessageDialog(Gtk.MessageDialog):
     def __init__(self, parent, msg, msgtype, buttons, extra):
-        Gtk.MessageDialog.__init__(self, parent,
-                                   flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                                   type=msgtype)
+        Gtk.MessageDialog.__init__(
+            self, parent, flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT, type=msgtype
+        )
 
         head, secondary, title = msg
         if extra:
             head = head % extra
-        self.set_markup("<span weight=\"bold\" size=\"larger\">%s</span>" % head)
+        self.set_markup('<span weight="bold" size="larger">%s</span>' % head)
         self.format_secondary_text(secondary)
         if title:
             self.set_title("%s - Pigeon Planner" % title)
@@ -37,25 +37,28 @@ class _MessageDialog(Gtk.MessageDialog):
 
 class ErrorDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
-        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.ERROR,
-                                (_("OK"), Gtk.ResponseType.OK), extra)
+        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.ERROR, (_("OK"), Gtk.ResponseType.OK), extra)
         self.run()
         self.destroy()
 
 
 class InfoDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
-        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.INFO,
-                                (_("OK"), Gtk.ResponseType.OK), extra)
+        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.INFO, (_("OK"), Gtk.ResponseType.OK), extra)
         self.run()
         self.destroy()
 
 
 class WarningDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
-        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.WARNING,
-                                (_("No"), Gtk.ResponseType.NO,
-                                 _("Yes"), Gtk.ResponseType.YES), extra)
+        _MessageDialog.__init__(
+            self,
+            parent,
+            msg,
+            Gtk.MessageType.WARNING,
+            (_("No"), Gtk.ResponseType.NO, _("Yes"), Gtk.ResponseType.YES),
+            extra,
+        )
 
     def run(self):
         response = _MessageDialog.run(self)
@@ -65,9 +68,14 @@ class WarningDialog(_MessageDialog):
 
 class QuestionDialog(_MessageDialog):
     def __init__(self, msg, parent=None, extra=None):
-        _MessageDialog.__init__(self, parent, msg, Gtk.MessageType.QUESTION,
-                                (_("No"), Gtk.ResponseType.NO,
-                                 _("Yes"), Gtk.ResponseType.YES), extra)
+        _MessageDialog.__init__(
+            self,
+            parent,
+            msg,
+            Gtk.MessageType.QUESTION,
+            (_("No"), Gtk.ResponseType.NO, _("Yes"), Gtk.ResponseType.YES),
+            extra,
+        )
 
     def run(self):
         response = _MessageDialog.run(self)

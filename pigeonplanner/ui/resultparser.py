@@ -22,6 +22,7 @@ import operator
 
 try:
     from yapsy.VersionedPluginManager import VersionedPluginManager
+
     yapsy_available = True
     yapsy_logger = logging.getLogger("yapsy")
     yapsy_logger.setLevel(logging.WARNING)
@@ -55,8 +56,7 @@ class ResultParser(builder.GtkBuilder):
         if yapsy_available:
             self._find_parsers()
         else:
-            ErrorDialog((_("This tool needs Yapsy to run correctly."), None, ""),
-                        self.widgets.parserdialog)
+            ErrorDialog((_("This tool needs Yapsy to run correctly."), None, ""), self.widgets.parserdialog)
 
     def close_window(self, _widget=None, _event=None):
         self.widgets.parserdialog.destroy()
@@ -70,8 +70,11 @@ class ResultParser(builder.GtkBuilder):
         parserplugin = self._get_active_parserplugin()
         parser = parserplugin.plugin_object
         if not parser.check(resultfile):
-            msg = (_("This result is not in the '%s' format. Do you want to continue?") % 
-                   parserplugin.name, None, None)
+            msg = (
+                _("This result is not in the '%s' format. Do you want to continue?") % parserplugin.name,
+                None,
+                None,
+            )
             if not WarningDialog(msg, self.widgets.parserdialog).run():
                 return
         resultfile.seek(0)
@@ -79,9 +82,15 @@ class ResultParser(builder.GtkBuilder):
             self.data, results = parser.parse_file(resultfile)
         except Exception:
             import traceback
-            data = [" **** File:", self.resultfilename,
-                    "\n **** Parser:", "%s %s" % (parserplugin.name, parserplugin.version),
-                    "\n **** Exception:", traceback.format_exc()]
+
+            data = [
+                " **** File:",
+                self.resultfilename,
+                "\n **** Parser:",
+                "%s %s" % (parserplugin.name, parserplugin.version),
+                "\n **** Exception:",
+                traceback.format_exc(),
+            ]
             text = "\n".join(data)
             textbuffer = self.widgets.textview.get_buffer()
             textbuffer.set_text(text)
@@ -133,8 +142,9 @@ class ResultParser(builder.GtkBuilder):
             # Just raise a ValueError if it's not a number
             int(out)
         except (dateentry.InvalidDateInput, ValueError):
-            ErrorDialog((_("The date, racepoint or number of pigeons is incorrect."),
-                         None, ""), self.widgets.parserdialog)
+            ErrorDialog(
+                (_("The date, racepoint or number of pigeons is incorrect."), None, ""), self.widgets.parserdialog
+            )
             return
         sector = self.widgets.sectorentry.get_text()
         category = self.widgets.categoryentry.get_text()
@@ -143,15 +153,26 @@ class ResultParser(builder.GtkBuilder):
         windspeed = self.widgets.windspeedentry.get_text()
         weather = self.widgets.weatherentry.get_text()
         temperature = self.widgets.temperatureentry.get_text()
-        
+
         for row in self.widgets.liststore:
             toggle, pigeon, ring, year, place, speed, speedfloat = row
             if not toggle:
                 continue
-            data = {"date": date, "racepoint": point, "place": place,
-                    "out": out, "sector": sector, "type": ftype, "category": category,
-                    "wind": wind, "weather": weather, "comment": "",
-                    "speed": speedfloat, "windspeed": windspeed, "temperature": temperature}
+            data = {
+                "date": date,
+                "racepoint": point,
+                "place": place,
+                "out": out,
+                "sector": sector,
+                "type": ftype,
+                "category": category,
+                "wind": wind,
+                "weather": weather,
+                "comment": "",
+                "speed": speedfloat,
+                "windspeed": windspeed,
+                "temperature": temperature,
+            }
 
             try:
                 query = Result.insert(pigeon=pigeon, **data)
@@ -181,12 +202,10 @@ class ResultParser(builder.GtkBuilder):
         body = textbuffer.get_text(*textbuffer.get_bounds(), include_hidden_chars=True)
         subject = "[Pigeon Planner] Resultparser exception"
         try:
-            mailing.send_email(const.REPORTMAIL, "", subject, body,
-                               self.resultfilename)
+            mailing.send_email(const.REPORTMAIL, "", subject, body, self.resultfilename)
         except Exception as exc:
             logger.error("Failed to send report: %s", exc)
-            ErrorDialog((_("Failed to send report."), None, ""),
-                        self.widgets.parserdialog)
+            ErrorDialog((_("Failed to send report."), None, ""), self.widgets.parserdialog)
 
     def _build_interface(self):
         self.widgets.filebutton = filechooser.ResultChooser()
@@ -194,8 +213,7 @@ class ResultParser(builder.GtkBuilder):
 
     def _find_parsers(self):
         manager = VersionedPluginManager()
-        manager.setPluginPlaces([const.RESULTPARSERDIR,
-                                 os.path.join(const.PLUGINDIR, "resultparsers")])
+        manager.setPluginPlaces([const.RESULTPARSERDIR, os.path.join(const.PLUGINDIR, "resultparsers")])
         manager.collectPlugins()
         plugins = sorted(manager.getAllPlugins(), key=operator.attrgetter("name"))
         for plugin in plugins:

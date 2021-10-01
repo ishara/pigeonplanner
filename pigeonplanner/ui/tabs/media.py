@@ -32,10 +32,7 @@ from pigeonplanner.core import common
 from pigeonplanner.database.models import Media
 
 
-(COL_OBJECT,
- COL_TEXT,
- COL_COLOR,
- COL_SELECTABLE) = range(4)
+(COL_OBJECT, COL_TEXT, COL_COLOR, COL_SELECTABLE) = range(4)
 
 
 class MediaTab(builder.GtkBuilder, basetab.BaseTab):
@@ -80,7 +77,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
                 "path": chooser.get_filename(),
                 "type": chooser.get_filetype(),
                 "title": chooser.get_filetitle(),
-                "description": chooser.get_filedescription()
+                "description": chooser.get_filedescription(),
             }
             query = Media.insert(**data)
             query.execute()
@@ -111,7 +108,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         images = []
         other = []
         self.widgets.liststore.clear()
-        for media in (Media.select().where(Media.pigeon == pigeon).order_by(Media.title.asc())):
+        for media in Media.select().where(Media.pigeon == pigeon).order_by(Media.title.asc()):
             if mime.is_image(media.type):
                 images.append(media)
             else:
@@ -121,11 +118,11 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.liststore.append([None, _("Images"), "#dcdcdc", False])
         for media in images:
             text = self._format_text(media.title, media.description)
-            self.widgets.liststore.append([media, text]+normal)
+            self.widgets.liststore.append([media, text] + normal)
         self.widgets.liststore.append([None, _("Other"), "#dcdcdc", False])
         for media in other:
             text = self._format_text(media.title, media.description)
-            self.widgets.liststore.append([media, text]+normal)
+            self.widgets.liststore.append([media, text] + normal)
 
     def clear_pigeon(self):
         self.widgets.liststore.clear()
@@ -137,8 +134,7 @@ class MediaTab(builder.GtkBuilder, basetab.BaseTab):
     def _format_text(self, title, description):
         text = common.escape_text(title)
         if description:
-            text += " - <span style=\"italic\" size=\"smaller\">%s</span>"\
-                        % common.escape_text(description)
+            text += ' - <span style="italic" size="smaller">%s</span>' % common.escape_text(description)
         return text
 
     # noinspection PyMethodMayBeStatic

@@ -21,10 +21,18 @@ from typing import List, Callable, Optional, Union
 from pigeonplanner.core import enums
 
 from peewee import SqliteDatabase
-from peewee import (Check, ForeignKeyField, CharField, TextField,
-                    IntegerField, BooleanField, FloatField, DateField, ManyToManyField)
-from playhouse.signals import (Model, pre_save, post_save, pre_delete, post_delete,
-                               pre_init)
+from peewee import (
+    Check,
+    ForeignKeyField,
+    CharField,
+    TextField,
+    IntegerField,
+    BooleanField,
+    FloatField,
+    DateField,
+    ManyToManyField,
+)
+from playhouse.signals import Model, pre_save, post_save, pre_delete, post_delete, pre_init
 
 
 SIGNAL_MAP = {
@@ -55,9 +63,7 @@ class DataModelMixin:
     @classmethod
     def get_data_list(cls) -> List[str]:
         column = cls.get_item_column()  # noqa
-        data = (cls.select(column)  # noqa
-                .order_by(column.asc())
-                .dicts())
+        data = cls.select(column).order_by(column.asc()).dicts()  # noqa
         return [item[column.name] for item in data]
 
 
@@ -94,8 +100,11 @@ class BaseModel(Model):
 
     @classmethod
     def get_fields_with_defaults(cls) -> dict:
-        data_fields = {name: field.default for (name, field) in
-                       cls._meta.fields.items() if name not in cls.defaults_fields_excludes}
+        data_fields = {
+            name: field.default
+            for (name, field) in cls._meta.fields.items()
+            if name not in cls.defaults_fields_excludes
+        }
         return data_fields
 
     # This will enable connecting signals directly on the class. Example:
@@ -138,10 +147,8 @@ class Pigeon(BaseModel):
     name = CharField(default="")
     strain = CharField(default="")
     loft = CharField(default="")
-    sire = ForeignKeyField("self", null=True, backref="children_sire",
-                           on_delete="SET NULL")
-    dam = ForeignKeyField("self", null=True, backref="children_dam",
-                          on_delete="SET NULL")
+    sire = ForeignKeyField("self", null=True, backref="children_sire", on_delete="SET NULL")
+    dam = ForeignKeyField("self", null=True, backref="children_dam", on_delete="SET NULL")
     extra1 = CharField(default="")
     extra2 = CharField(default="")
     extra3 = CharField(default="")
@@ -162,8 +169,12 @@ class Pigeon(BaseModel):
     @classmethod
     def get_for_band(cls, band_tuple: tuple) -> "Pigeon":
         country, letters, number, year = band_tuple
-        return cls.get((cls.band_country == country) & (cls.band_letters == letters) &
-                       (cls.band_number == number) & (cls.band_year == year))
+        return cls.get(
+            (cls.band_country == country)
+            & (cls.band_letters == letters)
+            & (cls.band_number == number)
+            & (cls.band_year == year)
+        )
 
     @property
     def band(self) -> str:
@@ -222,8 +233,7 @@ class Pigeon(BaseModel):
 
     @property
     def extra(self) -> tuple:
-        return (self.extra1, self.extra2, self.extra3,
-                self.extra4, self.extra5, self.extra6)
+        return (self.extra1, self.extra2, self.extra3, self.extra4, self.extra5, self.extra6)
 
     @property
     def main_image(self) -> Optional["Image"]:
@@ -242,8 +252,7 @@ class Status(BaseModel):
     end = DateField(default="")
     racepoint = CharField(default="")
     person = CharField(default="")
-    partner = ForeignKeyField(Pigeon, null=True, on_delete="SET NULL",
-                              backref="status_partner")
+    partner = ForeignKeyField(Pigeon, null=True, on_delete="SET NULL", backref="status_partner")
 
     defaults_fields_excludes = ["id", "pigeon", "status_id"]
 
@@ -307,13 +316,11 @@ class Breeding(BaseModel):
     date = DateField()
     laid1 = DateField(default="")
     hatched1 = DateField(default="")
-    child1 = ForeignKeyField(Pigeon, null=True, backref="breeding_child1",
-                             on_delete="SET NULL")
+    child1 = ForeignKeyField(Pigeon, null=True, backref="breeding_child1", on_delete="SET NULL")
     success1 = BooleanField(default=False)
     laid2 = DateField(default="")
     hatched2 = DateField(default="")
-    child2 = ForeignKeyField(Pigeon, null=True, backref="breeding_child2",
-                             on_delete="SET NULL")
+    child2 = ForeignKeyField(Pigeon, null=True, backref="breeding_child2", on_delete="SET NULL")
     success2 = BooleanField(default=False)
     clutch = CharField(default="")
     box = CharField(default="")

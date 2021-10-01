@@ -86,13 +86,14 @@ class StatusBar(Gtk.Statusbar, component.Component):
             box.pack_end(dev_label, False, False, 4)
 
     def on_filterbox_clicked(self, widget, event):
-        #TODO
+        # TODO
         pass
 
     def display_message(self, message, timeout=3):
         def timer_cb():
             self.pop(0)
             return False
+
         self.push(0, message)
         GLib.timeout_add_seconds(timeout, timer_cb)
 

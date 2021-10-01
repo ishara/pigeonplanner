@@ -34,9 +34,11 @@ logger = logging.getLogger(__name__)
 
 MARGIN = 6
 
-(ZOOM_BEST_FIT,
- ZOOM_FIT_WIDTH,
- ZOOM_FREE,) = range(3)
+(
+    ZOOM_BEST_FIT,
+    ZOOM_FIT_WIDTH,
+    ZOOM_FREE,
+) = range(3)
 
 
 class PhotoAlbum(builder.GtkBuilder):
@@ -80,8 +82,7 @@ class PhotoAlbum(builder.GtkBuilder):
         for image in Image.select():
             try:
                 pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(image.path, 96, 96)
-                self.widgets.liststore.append(
-                    [image.pigeon, image, image.pigeon.band, pixbuf])
+                self.widgets.liststore.append([image.pigeon, image, image.pigeon.band, pixbuf])
             except GLib.GError:
                 logger.error("Could not find original image for: %s" % image.pigeon.band)
 
@@ -100,10 +101,10 @@ class PhotoAlbum(builder.GtkBuilder):
             height -= 2 * self.widgets.swin.style.ythickness
 
         spacing = self.widgets.swin.style_get_property("scrollbar-spacing")
-        
+
         vreq = self.widgets.swin.get_vscrollbar().size_request()
         vsb_w = vreq.width + spacing
-        
+
         hreq = self.widgets.swin.get_hscrollbar().size_request()
         hsb_h = hreq.height + spacing
 
@@ -131,10 +132,10 @@ class PhotoAlbum(builder.GtkBuilder):
             screen_height = 1
         self.widgets.drawingarea.set_size_request(screen_width, screen_height)
         self.widgets.drawingarea.queue_draw()
-        
+
         self.widgets.zoom_in_button.set_sensitive(self.zoom != max(self.zoom_factors.keys()))
         self.widgets.zoom_out_button.set_sensitive(self.zoom != min(self.zoom_factors.keys()))
-        
+
     def zoom_in(self):
         zoom = [z for z in self.zoom_factors.keys() if z > self.zoom]
 
@@ -169,13 +170,13 @@ class PhotoAlbum(builder.GtkBuilder):
 
     def on_first_clicked(self, _widget):
         self.set_picture(0)
-    
+
     def on_prev_clicked(self, _widget):
         self.set_picture(self.current_picture - 1)
-    
+
     def on_next_clicked(self, _widget):
         self.set_picture(self.current_picture + 1)
-    
+
     def on_last_clicked(self, _widget):
         self.set_picture(self.picture_no - 1)
 
@@ -190,7 +191,7 @@ class PhotoAlbum(builder.GtkBuilder):
         self.widgets.zoom_fit_button.set_active(False)
         self.zoom_mode = ZOOM_FREE
         self.set_zoom(self.zoom_in())
-    
+
     def on_zoom_out_clicked(self, _widget):
         self.widgets.zoom_fit_button.set_active(False)
         self.zoom_mode = ZOOM_FREE
@@ -282,14 +283,17 @@ class PhotoAlbum(builder.GtkBuilder):
         self.current_picture = path[0]
 
         utils.set_multiple_sensitive(
-            {self.widgets.first_button: self.current_picture,
-             self.widgets.prev_button: self.current_picture,
-             self.widgets.next_button: self.current_picture < self.picture_no - 1,
-             self.widgets.last_button: self.current_picture < self.picture_no - 1,
-             self.widgets.zoom_in_button: True,
-             self.widgets.zoom_out_button: True,
-             self.widgets.zoom_fit_button: True,
-             self.widgets.slide_button: True})
+            {
+                self.widgets.first_button: self.current_picture,
+                self.widgets.prev_button: self.current_picture,
+                self.widgets.next_button: self.current_picture < self.picture_no - 1,
+                self.widgets.last_button: self.current_picture < self.picture_no - 1,
+                self.widgets.zoom_in_button: True,
+                self.widgets.zoom_out_button: True,
+                self.widgets.zoom_fit_button: True,
+                self.widgets.slide_button: True,
+            }
+        )
 
     def set_pixbuf(self, filename):
         if not filename:
@@ -325,11 +329,15 @@ class PhotoAlbum(builder.GtkBuilder):
 
     def disable_toolbuttons(self):
         utils.set_multiple_sensitive(
-            [self.widgets.first_button,
-             self.widgets.prev_button,
-             self.widgets.next_button,
-             self.widgets.last_button,
-             self.widgets.zoom_in_button,
-             self.widgets.zoom_out_button,
-             self.widgets.zoom_fit_button,
-             self.widgets.slide_button], False)
+            [
+                self.widgets.first_button,
+                self.widgets.prev_button,
+                self.widgets.next_button,
+                self.widgets.last_button,
+                self.widgets.zoom_in_button,
+                self.widgets.zoom_out_button,
+                self.widgets.zoom_fit_button,
+                self.widgets.slide_button,
+            ],
+            False,
+        )

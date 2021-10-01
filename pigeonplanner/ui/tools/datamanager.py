@@ -27,8 +27,18 @@ from pigeonplanner.core import enums
 from pigeonplanner.core import common
 from pigeonplanner.core import errors
 from pigeonplanner.core import pigeon as corepigeon
-from pigeonplanner.database.models import (Pigeon, Colour, Sector, Type, Category,
-                                           Racepoint, Strain, Loft, Weather, Wind)
+from pigeonplanner.database.models import (
+    Pigeon,
+    Colour,
+    Sector,
+    Type,
+    Category,
+    Racepoint,
+    Strain,
+    Loft,
+    Weather,
+    Wind,
+)
 
 
 class DataManager(builder.GtkBuilder):
@@ -46,7 +56,7 @@ class DataManager(builder.GtkBuilder):
             _("Strains"): Strain,
             _("Lofts"): Loft,
             _("Weather"): Weather,
-            _("Wind"): Wind
+            _("Wind"): Wind,
         }
         comboboxes.fill_combobox(self.widgets.comboset, self.tables.keys())
 
@@ -65,8 +75,7 @@ class DataManager(builder.GtkBuilder):
     def on_buttonremove_clicked(self, _widget):
         dataset = self.widgets.comboset.get_active_text()
         item = self.widgets.comboitem.get_active_text()
-        if QuestionDialog(messages.MSG_REMOVE_ITEM,
-                          self.widgets.window, (item, dataset)).run():
+        if QuestionDialog(messages.MSG_REMOVE_ITEM, self.widgets.window, (item, dataset)).run():
             table = self.tables[dataset]
             table.delete().where(table.get_item_column() == item).execute()
             index = self.widgets.comboitem.get_active()
@@ -98,11 +107,9 @@ class DataManager(builder.GtkBuilder):
         self.widgets.messagebox.hide()
         self.widgets.liststore.clear()
         for pigeon in Pigeon.select().where(
-                (Pigeon.visible == False) & 
-                ((Pigeon.sex != enums.Sex.youngbird) | (Pigeon.sex != enums.Sex.unknown))):
-            is_parent = Pigeon.select().where(
-                (Pigeon.sire == pigeon) |
-                (Pigeon.dam == pigeon)).exists()
+            (Pigeon.visible == False) & ((Pigeon.sex != enums.Sex.youngbird) | (Pigeon.sex != enums.Sex.unknown))
+        ):
+            is_parent = Pigeon.select().where((Pigeon.sire == pigeon) | (Pigeon.dam == pigeon)).exists()
             if not is_parent:
                 self.widgets.liststore.insert(0, [pigeon, False, pigeon.band])
 
@@ -113,11 +120,12 @@ class DataManager(builder.GtkBuilder):
         model, node = self.widgets.selection.get_selected()
         pigeon = self.widgets.liststore.get_value(node, 0)
         from pigeonplanner.ui.detailsview import DetailsDialog
+
         DetailsDialog(pigeon, self.widgets.window)
 
     def on_buttondelete_clicked(self, _widget):
         main_treeview = component.get("Treeview")
-        for row_num in range(len(self.widgets.liststore)-1, -1, -1):
+        for row_num in range(len(self.widgets.liststore) - 1, -1, -1):
             row = self.widgets.liststore[row_num]
             if not row[1]:
                 continue

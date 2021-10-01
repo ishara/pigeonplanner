@@ -37,8 +37,7 @@ class ComponentRegistry:
     def register(self, obj):
         name = obj._component_name
         if name in self.components:
-            raise ComponentAlreadyRegistered(
-                "Component already registered with name %s" % name)
+            raise ComponentAlreadyRegistered("Component already registered with name %s" % name)
 
         self.components[name] = obj
 

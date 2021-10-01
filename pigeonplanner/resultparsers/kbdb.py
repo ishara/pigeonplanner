@@ -66,7 +66,7 @@ class KDBDParser(IPlugin):
             "category": category,
             "n_pigeons": n_pigeons,
             "date": date,
-            "racepoint": racepoint
+            "racepoint": racepoint,
         }
 
     def scrape_results(self, html):

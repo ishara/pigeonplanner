@@ -46,9 +46,7 @@ def check_user_info(parent, userinfo):
 
 
 class AddressBook(builder.GtkBuilder, GObject.GObject):
-    __gsignals__ = {
-        "person-changed": (GObject.SIGNAL_RUN_LAST, None, (object,))
-    }
+    __gsignals__ = {"person-changed": (GObject.SIGNAL_RUN_LAST, None, (object,))}
 
     def __init__(self, parent):
         builder.GtkBuilder.__init__(self, "AddressBook.ui")
@@ -56,9 +54,7 @@ class AddressBook(builder.GtkBuilder, GObject.GObject):
 
         self._mode = None
         self._entries = self.get_objects_from_prefix("entry")
-        self._normalbuttons = [self.widgets.buttonadd,
-                               self.widgets.buttonedit,
-                               self.widgets.buttonremove]
+        self._normalbuttons = [self.widgets.buttonadd, self.widgets.buttonedit, self.widgets.buttonremove]
         self._editbuttons = [self.widgets.buttonsave, self.widgets.buttoncancel]
         self._fill_treeview()
         self.widgets.selection = self.widgets.treeview.get_selection()
@@ -86,8 +82,7 @@ class AddressBook(builder.GtkBuilder, GObject.GObject):
         path = self.widgets.liststore.get_path(rowiter)
         person = model[rowiter][0]
 
-        if not QuestionDialog(messages.MSG_REMOVE_ADDRESS,
-                              self.widgets.addressbookwindow, person.name).run():
+        if not QuestionDialog(messages.MSG_REMOVE_ADDRESS, self.widgets.addressbookwindow, person.name).run():
             return
 
         person.delete_instance()
@@ -178,9 +173,8 @@ class AddressBook(builder.GtkBuilder, GObject.GObject):
         utils.set_multiple_sensitive([self.widgets.treeview], not value)
         utils.set_multiple_visible(self._normalbuttons, not value)
         utils.set_multiple_visible(self._editbuttons, value)
-        show_me = (Person.select().where(
-            Person.me == True).count() == 0 or
-            (self._mode == enums.Action.edit and self._get_person_object().me)
+        show_me = Person.select().where(Person.me == True).count() == 0 or (
+            self._mode == enums.Action.edit and self._get_person_object().me
         )
         utils.set_multiple_visible([self.widgets.checkme], show_me if value else False)
 
@@ -192,17 +186,19 @@ class AddressBook(builder.GtkBuilder, GObject.GObject):
         self.widgets.entryname.set_position(-1)
 
     def _get_entry_data(self):
-        return {"name": self.widgets.entryname.get_text(),
-                "street": self.widgets.entrystreet.get_text(),
-                "code": self.widgets.entryzip.get_text(),
-                "city": self.widgets.entrycity.get_text(),
-                "country": self.widgets.entrycountry.get_text(),
-                "phone": self.widgets.entryphone.get_text(),
-                "email": self.widgets.entryemail.get_text(),
-                "comment": self.widgets.entrycomment.get_text(),
-                "me": self.widgets.checkme.get_active(),
-                "latitude": self.widgets.entrylat.get_text(),
-                "longitude": self.widgets.entrylong.get_text()}
+        return {
+            "name": self.widgets.entryname.get_text(),
+            "street": self.widgets.entrystreet.get_text(),
+            "code": self.widgets.entryzip.get_text(),
+            "city": self.widgets.entrycity.get_text(),
+            "country": self.widgets.entrycountry.get_text(),
+            "phone": self.widgets.entryphone.get_text(),
+            "email": self.widgets.entryemail.get_text(),
+            "comment": self.widgets.entrycomment.get_text(),
+            "me": self.widgets.checkme.get_active(),
+            "latitude": self.widgets.entrylat.get_text(),
+            "longitude": self.widgets.entrylong.get_text(),
+        }
 
     def _get_person_object(self):
         model, rowiter = self.widgets.selection.get_selected()

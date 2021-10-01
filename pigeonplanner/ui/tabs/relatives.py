@@ -42,7 +42,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         swdirect.set_shadow_type(Gtk.ShadowType.IN)
         swdirect.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         swdirect.add(treeviewdirect)
-        aligndirect = Gtk.Alignment.new(.5, .5, 1, 1)
+        aligndirect = Gtk.Alignment.new(0.5, 0.5, 1, 1)
         aligndirect.add(swdirect)
         framedirect = Gtk.Frame(label=_("<b>Brothers and sisters</b>"))
         framedirect.set_shadow_type(Gtk.ShadowType.NONE)
@@ -55,7 +55,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         swhalf.set_shadow_type(Gtk.ShadowType.IN)
         swhalf.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         swhalf.add(treeviewhalf)
-        alignhalf = Gtk.Alignment.new(.5, .5, 1, 1)
+        alignhalf = Gtk.Alignment.new(0.5, 0.5, 1, 1)
         alignhalf.add(swhalf)
         framehalf = Gtk.Frame(label=_("<b>Half brothers and sisters</b>"))
         framehalf.set_shadow_type(Gtk.ShadowType.NONE)
@@ -68,7 +68,7 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         swoff.set_shadow_type(Gtk.ShadowType.IN)
         swoff.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         swoff.add(treeviewoff)
-        alignoff = Gtk.Alignment.new(.5, .5, 1, 1)
+        alignoff = Gtk.Alignment.new(0.5, 0.5, 1, 1)
         alignoff.add(swoff)
         frameoff = Gtk.Frame(label=_("<b>Offspring</b>"))
         frameoff.set_shadow_type(Gtk.ShadowType.NONE)
@@ -91,8 +91,10 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         pigeon = treeview.get_model()[path][0]
 
         if event.button == Gdk.BUTTON_SECONDARY:
-            items = [(self.on_show_details, (pigeon,), _("Information")),
-                     (self.on_edit_details, (pigeon,), _("Edit"))]
+            items = [
+                (self.on_show_details, (pigeon,), _("Information")),
+                (self.on_edit_details, (pigeon,), _("Edit")),
+            ]
             if pigeon.visible:
                 items.append((self.on_goto_pigeon, (pigeon,), _("Go to")))
             utils.popup_menu(event, items)
@@ -121,11 +123,12 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
 
         # Direct siblings
         direct_relatives = Pigeon.select().where(
-            (Pigeon.id != pigeon.id) & 
-            (Pigeon.sire != None) &
-            (Pigeon.dam != None) &
-            (Pigeon.sire == pigeon.sire) & 
-            (Pigeon.dam == pigeon.dam))
+            (Pigeon.id != pigeon.id)
+            & (Pigeon.sire != None)
+            & (Pigeon.dam != None)
+            & (Pigeon.sire == pigeon.sire)
+            & (Pigeon.dam == pigeon.dam)
+        )
         for p in direct_relatives:
             seximg = utils.get_sex_icon_name(p.sex)
             self._liststoredirect.insert(0, [p, p.band, p.band_year, p.sex, seximg])
@@ -133,21 +136,22 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         # Half siblings
         template = Pigeon.select().where(
             # Not direct relative
-            ~((Pigeon.sire == pigeon.sire) & 
-            (Pigeon.dam == pigeon.dam)) &
+            ~((Pigeon.sire == pigeon.sire) & (Pigeon.dam == pigeon.dam))
+            &
             # Not this selected pigeon
-            (Pigeon.id != pigeon.id))
+            (Pigeon.id != pigeon.id)
+        )
         half_relatives_sire = template.where(
             # Only with a valid sire
-            (Pigeon.sire != None) &
+            (Pigeon.sire != None)
+            &
             # Both pigeon's sire must match
-            (Pigeon.sire == pigeon.sire))
+            (Pigeon.sire == pigeon.sire)
+        )
         for p in half_relatives_sire:
             seximg = utils.get_sex_icon_name(p.sex)
             self._liststorehalf.insert(0, [p, p.band, p.band_year, p.sire.band, p.sex, seximg])
-        half_relatives_dam = template.where(
-            (Pigeon.dam != None) &
-            (Pigeon.dam == pigeon.dam))
+        half_relatives_dam = template.where((Pigeon.dam != None) & (Pigeon.dam == pigeon.dam))
         for p in half_relatives_dam:
             seximg = utils.get_sex_icon_name(p.sex)
             self._liststorehalf.insert(0, [p, p.band, p.band_year, p.dam.band, p.sex, seximg])
@@ -181,15 +185,15 @@ class RelativesTab(WidgetFactory, basetab.BaseTab, HiddenPigeonsMixin):
         treeview.connect("button-press-event", self.on_treeview_press)
         for index, column in enumerate(columns):
             textrenderer = Gtk.CellRendererText()
-            tvcolumn = Gtk.TreeViewColumn(column, textrenderer, text=index+1)
-            tvcolumn.set_sort_column_id(index+1)
+            tvcolumn = Gtk.TreeViewColumn(column, textrenderer, text=index + 1)
+            tvcolumn.set_sort_column_id(index + 1)
             tvcolumn.set_resizable(True)
             tvcolumn.set_cell_data_func(textrenderer, self._cell_func)
             treeview.append_column(tvcolumn)
         pbrenderer = Gtk.CellRendererPixbuf()
         pbrenderer.set_property("xalign", 0.0)
         tvcolumn = Gtk.TreeViewColumn(_("Sex"), pbrenderer, icon_name=pb_id)
-        tvcolumn.set_sort_column_id(pb_id-1)
+        tvcolumn.set_sort_column_id(pb_id - 1)
         tvcolumn.set_resizable(True)
         tvcolumn.set_cell_data_func(pbrenderer, self._cell_func)
         treeview.append_column(tvcolumn)

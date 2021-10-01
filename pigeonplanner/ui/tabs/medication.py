@@ -29,15 +29,19 @@ from pigeonplanner.core import common
 from pigeonplanner.database.models import Pigeon, Medication, Loft
 
 
-(COL_OBJECT,
- COL_DATE,
- COL_DESCRIPTION) = range(3)
+(
+    COL_OBJECT,
+    COL_DATE,
+    COL_DESCRIPTION
+) = range(3)
 
-(COL_SEL_CAN_ACTIVE,
- COL_SEL_TOGGLED,
- COL_SEL_PIGEON,
- COL_SEL_BAND,
- COL_SEL_YEAR) = range(5)
+(
+    COL_SEL_CAN_ACTIVE,
+    COL_SEL_TOGGLED,
+    COL_SEL_PIGEON,
+    COL_SEL_BAND,
+    COL_SEL_YEAR
+) = range(5)
 
 
 class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
@@ -67,7 +71,8 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         if event.button == 3:
             entries = [
                 (self.on_buttonedit_clicked, None, _("Edit")),
-                (self.on_buttonremove_clicked, None, _("Remove"))]
+                (self.on_buttonremove_clicked, None, _("Remove")),
+            ]
 
             utils.popup_menu(event, entries)
 
@@ -176,8 +181,7 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
             self._select_loft()
 
     def on_celltoggle_toggled(self, _cell, path):
-        self.widgets.liststoreselect[path][COL_SEL_TOGGLED] =\
-                            not self.widgets.liststoreselect[path][COL_SEL_TOGGLED]
+        self.widgets.liststoreselect[path][COL_SEL_TOGGLED] = not self.widgets.liststoreselect[path][COL_SEL_TOGGLED]
 
     def on_selection_changed(self, selection):
         model, rowiter = selection.get_selected()
@@ -245,10 +249,12 @@ class MedicationTab(builder.GtkBuilder, basetab.BaseTab):
         return model[rowiter][COL_OBJECT]
 
     def _get_entry_data(self):
-        return {"date": self.widgets.entrydate2.get_text(),
-                "description": self.widgets.entrydescription2.get_text(),
-                "doneby": self.widgets.entryby2.get_text(),
-                "medication": self.widgets.entrymedication2.get_text(),
-                "dosage": self.widgets.entrydosage2.get_text(),
-                "comment": self.widgets.entrycomment2.get_text(),
-                "vaccination": self.widgets.checkvaccination2.get_active()}
+        return {
+            "date": self.widgets.entrydate2.get_text(),
+            "description": self.widgets.entrydescription2.get_text(),
+            "doneby": self.widgets.entryby2.get_text(),
+            "medication": self.widgets.entrymedication2.get_text(),
+            "dosage": self.widgets.entrydosage2.get_text(),
+            "comment": self.widgets.entrycomment2.get_text(),
+            "vaccination": self.widgets.checkvaccination2.get_active(),
+        }

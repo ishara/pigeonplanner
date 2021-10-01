@@ -59,13 +59,16 @@ class BandEntry(Gtk.Box):
 
     def _build_ui(self):
         tooltip = "%s | %s | %s | %s\n%s\n%s" % (
-            _("Country"), _("Letters"), _("Number"), _("Year"),
+            _("Country"),
+            _("Letters"),
+            _("Number"),
+            _("Year"),
             _("The number and year fields are required."),
-            _("The year has to be four digits long.")
+            _("The year has to be four digits long."),
         )
 
         self._entry_display = displayentry.DisplayEntry()
-        self._entry_display.set_alignment(.5)
+        self._entry_display.set_alignment(0.5)
         self._entry_display.set_activates_default(False)
         self._entry_display.set_no_show_all(True)
 
@@ -138,6 +141,7 @@ class BandEntry(Gtk.Box):
     def set_has_search(self, has_search):
         self._has_search = has_search
         self._button_search.set_visible(has_search)
+
     has_search = GObject.property(get_has_search, set_has_search, bool, False, nick="Has search")
 
     def get_show_band_format(self):
@@ -146,8 +150,10 @@ class BandEntry(Gtk.Box):
     def set_show_band_format(self, show_band_format):
         self._show_band_format = show_band_format
         self._button_format.set_visible(show_band_format)
-    show_band_format = GObject.property(get_show_band_format, set_show_band_format,
-                                        type=bool, default=True, nick="Show band format")
+
+    show_band_format = GObject.property(
+        get_show_band_format, set_show_band_format, type=bool, default=True, nick="Show band format"
+    )
 
     def get_editable(self):
         return self._editable
@@ -160,6 +166,7 @@ class BandEntry(Gtk.Box):
         self.entry_letters.set_visible(editable)
         self.entry_number.set_visible(editable)
         self.entry_year.set_visible(editable)
+
     editable = GObject.property(get_editable, set_editable, bool, False, nick="Editable")
 
     def is_empty(self):
@@ -184,8 +191,12 @@ class BandEntry(Gtk.Box):
     def get_band(self, validate=True):
         if validate:
             self._validate()
-        return (self.entry_country.get_text(), self.entry_letters.get_text(),
-                self.entry_number.get_text(), self.entry_year.get_text())
+        return (
+            self.entry_country.get_text(),
+            self.entry_letters.get_text(),
+            self.entry_number.get_text(),
+            self.entry_year.get_text(),
+        )
 
     def clear(self):
         self.set_band("", "", "", "")
@@ -319,7 +330,7 @@ class BandEntryPopover(Gtk.Popover):
             self._entry_country.get_text(),
             self._entry_letters.get_text(),
             self._entry_number.get_text(),
-            self._entry_year.get_text()
+            self._entry_year.get_text(),
         )
         if self.checkbox_default.get_active():
             config.set("options.band-format", self.main_entry.band_format)

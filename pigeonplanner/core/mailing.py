@@ -36,7 +36,7 @@ def send_email(recipient="", sender="", subject="", body="", attachment=None):
         "mail_to": recipient,
         "mail_from": sender,
         "subject": urllib.parse.quote(subject),
-        "comment": urllib.parse.quote(body)
+        "comment": urllib.parse.quote(body),
     }
     files = {}
     if attachment:

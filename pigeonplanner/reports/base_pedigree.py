@@ -59,12 +59,12 @@ class PedigreeReport(Report):
         font_style = style_sheet.get_paragraph_style(style_name).get_font()
         font_size = font_style.get_size()
         # TODO: Count and add spacing around text (see libcairodoc.GtkDocText), document this? Get value from there?
-        return pt2cm(int(round(font_size + font_size * .2)))
+        return pt2cm(int(round(font_size + font_size * 0.2)))
 
     def _draw_title(self) -> float:
         text_height = self.get_text_height("Title")
-        line_y = text_height + text_height * .15
-        self.doc.draw_text("Title", _("Pedigree of:"), .1, 0)
+        line_y = text_height + text_height * 0.15
+        self.doc.draw_text("Title", _("Pedigree of:"), 0.1, 0)
         if self._pigeon is not None:
             band_x = self.get_right_align_x("Title", self._pigeon.band)
             self.doc.draw_text("Title", self._pigeon.band, band_x, 0)
@@ -73,14 +73,14 @@ class PedigreeReport(Report):
 
     def _draw_user_info(self, title_y: float) -> float:
         if self._layout["options"]["user_info"] == "no_show" or self._userinfo is None:
-            return .0
+            return 0.0
         elif self._layout["options"]["user_info"] == "left":
-            header_x = .1
+            header_x = 0.1
         elif self._layout["options"]["user_info"] == "right":
             header_x = self.doc.get_usable_width()
         else:  # Center
             header_x = self.doc.get_usable_width() / 2
-        header_y = title_y + .2
+        header_y = title_y + 0.2
 
         user_info = []
         if self._layout["options"]["user_name"]:
@@ -98,9 +98,13 @@ class PedigreeReport(Report):
 
     def _draw_pigeon_image(self, title_y: float) -> float:
         pigeon_image_location = self._layout["options"]["pigeon_image"]
-        if pigeon_image_location == "no_show" or self._pigeon is None or \
-                self._pigeon.main_image is None or not self._pigeon.main_image.exists:
-            return .0
+        if (
+            pigeon_image_location == "no_show"
+            or self._pigeon is None
+            or self._pigeon.main_image is None
+            or not self._pigeon.main_image.exists
+        ):
+            return 0.0
 
         if pigeon_image_location == "left":
             img_x = 0
@@ -112,12 +116,13 @@ class PedigreeReport(Report):
             img_x = self.doc.get_usable_width() / 2
             img_x_align = "center"
 
-        img_y = title_y + .2
+        img_y = title_y + 0.2
         img_w = 6
         img_h = 3
 
-        self.doc.draw_image(self._pigeon.main_image.path, img_x, img_y, img_w, img_h,
-                            xalign=img_x_align, yalign="top")
+        self.doc.draw_image(
+            self._pigeon.main_image.path, img_x, img_y, img_w, img_h, xalign=img_x_align, yalign="top"
+        )
         return img_h + img_y
 
     def _draw_pigeon_info(self, title_y: float) -> float:
@@ -125,14 +130,14 @@ class PedigreeReport(Report):
             return title_y
 
         if self._layout["options"]["pigeon_info"] == "no_show":
-            return .0
+            return 0.0
         elif self._layout["options"]["pigeon_info"] == "left":
-            header_x = .1
+            header_x = 0.1
         elif self._layout["options"]["pigeon_info"] == "right":
             header_x = self.doc.get_usable_width()
         else:  # Center
             header_x = self.doc.get_usable_width() / 2
-        header_y = title_y + .2
+        header_y = title_y + 0.2
 
         details = []
         pigeon_info = []
@@ -163,12 +168,21 @@ class PedigreeReport(Report):
         self.doc.draw_line("HeaderSeparator", 0, separator_y, self.doc.get_usable_width(), separator_y)
         return separator_y
 
-    def _calculate_box_height(self, top_line_height: float, details_line_height: float, comments_line_height: float,
-                              n_lines_allowed: int, box_text_offset_y: float) -> float:
+    def _calculate_box_height(
+        self,
+        top_line_height: float,
+        details_line_height: float,
+        comments_line_height: float,
+        n_lines_allowed: int,
+        box_text_offset_y: float,
+    ) -> float:
         box_height = top_line_height
         n_lines = 1
-        if self._layout["options"]["box_middle_left"] != "empty" or \
-                self._layout["options"]["box_middle_right"] != "empty" and n_lines < n_lines_allowed:
+        if (
+            self._layout["options"]["box_middle_left"] != "empty"
+            or self._layout["options"]["box_middle_right"] != "empty"
+            and n_lines < n_lines_allowed
+        ):
             box_height += details_line_height
             n_lines += 1
         if self._layout["options"]["box_bottom_left"] != "empty" and n_lines < n_lines_allowed:
@@ -178,26 +192,26 @@ class PedigreeReport(Report):
         box_height += comments_line_height * n_lines_comments
         # TODO: on closer look, the below changes depending on zoom level. This can get ugly...
         #       Save to PDF to be sure. Looks like zoom level 1 is correct.
-        box_height += (box_text_offset_y * min(2, n_lines_allowed - 1))  # TODO: better, still wrong with 3 lines?
+        box_height += box_text_offset_y * min(2, n_lines_allowed - 1)  # TODO: better, still wrong with 3 lines?
         box_height = max(box_height, top_line_height + details_line_height + box_text_offset_y)
         return box_height
 
     def _draw_pedigree(self, header_bottom):
-        pedigree_lst: List[Optional[Pigeon]] = [None]*31
+        pedigree_lst: List[Optional[Pigeon]] = [None] * 31
         corepigeon.build_pedigree_tree(self._pigeon, 0, 1, pedigree_lst)
 
-        box_separator_w = .2
-        box_separator_h = .2
+        box_separator_w = 0.2
+        box_separator_h = 0.2
         box_width = (self.doc.get_usable_width() / 4) - box_separator_w
-        start_y = header_bottom + .4
+        start_y = header_bottom + 0.4
 
         gen1_n_lines_allowed = self._layout["options"]["pedigree_gen_1_lines"]
         gen2_n_lines_allowed = self._layout["options"]["pedigree_gen_2_lines"]
         gen3_n_lines_allowed = self._layout["options"]["pedigree_gen_3_lines"]
         gen4_n_lines_allowed = self._layout["options"]["pedigree_gen_4_lines"]
 
-        box_text_offset_x = .08
-        box_text_offset_y = .08
+        box_text_offset_x = 0.08
+        box_text_offset_y = 0.08
 
         # calculate heights
         band_line_height = self.get_text_height("PedigreeBoxBand")
@@ -205,14 +219,18 @@ class PedigreeReport(Report):
         comments_line_height = self.get_text_height("PedigreeBoxComments")
         top_line_height = max(band_line_height, details_line_height)
 
-        gen_1_box_height = self._calculate_box_height(top_line_height, details_line_height, comments_line_height,
-                                                      gen1_n_lines_allowed, box_text_offset_y)
-        gen_2_box_height = self._calculate_box_height(top_line_height, details_line_height, comments_line_height,
-                                                      gen2_n_lines_allowed, box_text_offset_y)
-        gen_3_box_height = self._calculate_box_height(top_line_height, details_line_height, comments_line_height,
-                                                      gen3_n_lines_allowed, box_text_offset_y)
-        gen_4_box_height = self._calculate_box_height(top_line_height, details_line_height, comments_line_height,
-                                                      gen4_n_lines_allowed, box_text_offset_y)
+        gen_1_box_height = self._calculate_box_height(
+            top_line_height, details_line_height, comments_line_height, gen1_n_lines_allowed, box_text_offset_y
+        )
+        gen_2_box_height = self._calculate_box_height(
+            top_line_height, details_line_height, comments_line_height, gen2_n_lines_allowed, box_text_offset_y
+        )
+        gen_3_box_height = self._calculate_box_height(
+            top_line_height, details_line_height, comments_line_height, gen3_n_lines_allowed, box_text_offset_y
+        )
+        gen_4_box_height = self._calculate_box_height(
+            top_line_height, details_line_height, comments_line_height, gen4_n_lines_allowed, box_text_offset_y
+        )
 
         sex_symbol_map = {
             enums.Sex.cock: "\u2642",
@@ -275,10 +293,11 @@ class PedigreeReport(Report):
                 if self._layout["options"]["pedigree_layout_pigeon"] == "image":
                     if self._pigeon is None or self._pigeon.main_image is None or not self._pigeon.main_image.exists:
                         continue
-                    img_w = box_width - .2
+                    img_w = box_width - 0.2
                     img_h = 5
-                    self.doc.draw_image(self._pigeon.main_image.path, x, y_mid, img_w, img_h,
-                                        xalign="left", yalign="center")
+                    self.doc.draw_image(
+                        self._pigeon.main_image.path, x, y_mid, img_w, img_h, xalign="left", yalign="center"
+                    )
                     continue
                 if self._layout["options"]["pedigree_layout_pigeon"] == "details":
                     pass
@@ -323,16 +342,25 @@ class PedigreeReport(Report):
             has_bottom_line = False
             self.doc.draw_text("PedigreeBoxBand", bandnumber, x + box_text_offset_x, y + box_text_offset_y)
             if top_right is not None:
-                self.doc.draw_text("PedigreeBoxDetailsRight", top_right,
-                                   x + box_width - box_text_offset_x, y + box_text_offset_y)
+                self.doc.draw_text(
+                    "PedigreeBoxDetailsRight", top_right, x + box_width - box_text_offset_x, y + box_text_offset_y
+                )
             if middle_left is not None and n_lines < n_lines_allowed:
                 has_middle_line = True
-                self.doc.draw_text("PedigreeBoxDetailsLeft", middle_left,
-                                   x + box_text_offset_x, y + top_line_height + box_text_offset_y)
+                self.doc.draw_text(
+                    "PedigreeBoxDetailsLeft",
+                    middle_left,
+                    x + box_text_offset_x,
+                    y + top_line_height + box_text_offset_y,
+                )
             if middle_right is not None and n_lines < n_lines_allowed:
                 has_middle_line = True
-                self.doc.draw_text("PedigreeBoxDetailsRight", middle_right,
-                                   x + box_width - box_text_offset_x, y + top_line_height + box_text_offset_y)
+                self.doc.draw_text(
+                    "PedigreeBoxDetailsRight",
+                    middle_right,
+                    x + box_width - box_text_offset_x,
+                    y + top_line_height + box_text_offset_y,
+                )
             n_lines += 1 if has_middle_line else 0
             if bottom_left is not None and n_lines < n_lines_allowed:
                 n_lines += 1
@@ -347,27 +375,23 @@ class PedigreeReport(Report):
                     comments_y += details_line_height
                 if has_bottom_line:
                     comments_y += details_line_height
-                comments_str = "\n".join(comments[:n_lines_allowed-n_lines])
+                comments_str = "\n".join(comments[: n_lines_allowed - n_lines])
                 self.doc.draw_text("PedigreeBoxComments", comments_str, x + box_text_offset_x, comments_y)
 
             # Draw pedigree lines
             if gen_1 or gen_2 or gen_3:
-                self.doc.draw_line("PedigreeLine",
-                                   x + box_width, y_mid, x + box_width + (box_separator_w / 2), y_mid)
+                self.doc.draw_line("PedigreeLine", x + box_width, y_mid, x + box_width + (box_separator_w / 2), y_mid)
             if gen_2 or gen_3 or gen_4:
-                self.doc.draw_line("PedigreeLine",
-                                   x, y_mid, x - (box_separator_w / 2), y_mid)
+                self.doc.draw_line("PedigreeLine", x, y_mid, x - (box_separator_w / 2), y_mid)
                 if index % 2 == 1:
-                    self.doc.draw_line("PedigreeLine",
-                                       x - (box_separator_w / 2), y_mid,
-                                       x - (box_separator_w / 2), y_mid + y_offset)
+                    self.doc.draw_line(
+                        "PedigreeLine", x - (box_separator_w / 2), y_mid, x - (box_separator_w / 2), y_mid + y_offset
+                    )
             if gen_0:
-                self.doc.draw_line("PedigreeLine",
-                                   x + box_width/2, y,
-                                   x + box_width/2, y - 3.8)
-                self.doc.draw_line("PedigreeLine",
-                                   x + box_width/2, y + box_height,
-                                   x + box_width/2, y + box_height + 3.8)
+                self.doc.draw_line("PedigreeLine", x + box_width / 2, y, x + box_width / 2, y - 3.8)
+                self.doc.draw_line(
+                    "PedigreeLine", x + box_width / 2, y + box_height, x + box_width / 2, y + box_height + 3.8
+                )
 
             # Increase y position for next box
             y += y_offset

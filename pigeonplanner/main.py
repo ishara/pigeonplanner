@@ -72,10 +72,10 @@ class Startup:
 
         # Parse arguments
         parser = argparse.ArgumentParser()
-        parser.add_argument("-v", "--version", action="version",
-                            version="%(prog)s {}".format(const.VERSION))
-        parser.add_argument("-d", "--debug", action="store_true", dest="debug",
-                            help="Print debug messages to the console")
+        parser.add_argument("-v", "--version", action="version", version="%(prog)s {}".format(const.VERSION))
+        parser.add_argument(
+            "-d", "--debug", action="store_true", dest="debug", help="Print debug messages to the console"
+        )
         args = parser.parse_args()
         self._loglevel = logging.DEBUG if args.debug else logging.WARNING
 
@@ -88,6 +88,7 @@ class Startup:
 
     def setup_locale(self, gtk_ui):
         from pigeonplanner.core import config
+
         language = config.get("options.language")
         localedomain = const.DOMAIN
         localedir = const.LANGDIR
@@ -95,6 +96,7 @@ class Startup:
         if language in ("def", "Default", None):
             if const.WINDOWS:
                 import ctypes
+
                 windll = ctypes.windll.kernel32
                 cid = windll.GetUserDefaultUILanguage()
                 language = locale.windows_locale[cid]
@@ -187,12 +189,14 @@ class Startup:
 
     def exception_hook(self, type_, value, tb):
         import traceback
+
         tb = "".join(traceback.format_exception(type_, value, tb))
         self.logger.critical("Unhandled exception\n%s" % tb)
 
 
 def run(gtk_ui=True):
     from pigeonplanner.core import config
+
     loaded_config = config.load()
 
     app = Startup()
@@ -203,6 +207,7 @@ def run(gtk_ui=True):
         # The initial migration uses a feature which had a bug <3.5.1
         # https://github.com/coleifer/peewee/issues/1645
         import peewee  # noqa
+
         if not tuple([int(x) for x in peewee.__version__.split(".")]) >= (3, 5, 1):
             raise ImportError
     except ImportError:
@@ -210,10 +215,12 @@ def run(gtk_ui=True):
         missing_libs.append("Peewee >= 3.5.1")
     else:
         from pigeonplanner.database import manager
+
         manager.init_manager()
 
     if gtk_ui:
         from pigeonplanner.ui import gtkmain
+
         gtkapp = gtkmain.Application(missing_libs, loaded_config)
         gtkapp.run()
 

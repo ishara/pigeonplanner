@@ -28,8 +28,7 @@ from pigeonplanner.core import const
 
 
 class _Widgets(dict):
-    """ Object to hold all widgets
-    """
+    """Object to hold all widgets"""
 
     def __iter__(self):
         return self.values()

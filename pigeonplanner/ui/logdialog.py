@@ -36,12 +36,12 @@ COLORS = {
     "WARNING": "yellow",
     "ERROR": "red",
     "CRITICAL": "white",
-    "TRACEBACK": "white"
+    "TRACEBACK": "white",
 }
 
 
 class LogDialog(Gtk.Dialog):
-    def __init__(self,):
+    def __init__(self):
         Gtk.Dialog.__init__(self)
         self.set_title(_("Logfile Viewer"))
         self.set_size_request(700, 500)
@@ -77,11 +77,11 @@ class LogDialog(Gtk.Dialog):
 
         # combo
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-        align = Gtk.Alignment.new(.0, .0, .0, .0)
+        align = Gtk.Alignment.new(0.0, 0.0, 0.0, 0.0)
         align.add(vbox)
         self.vbox.pack_start(align, False, False, 0)
         label = Gtk.Label("Minimum severity shown:")
-        label.set_alignment(0, .5)
+        label.set_alignment(0, 0.5)
         vbox.pack_start(label, False, False, 0)
 
         # combo severity
@@ -125,10 +125,9 @@ class LogDialog(Gtk.Dialog):
         self.back_buffer.set_text(self.file.read())
 
     def insert_color(self, bffr, line):
-        for s in SEVERITY[self.combo.get_active():]:
+        for s in SEVERITY[self.combo.get_active() :]:
             if s in line:
-                bffr.insert_with_tags(bffr.get_end_iter(), "%s\n" % line,
-                                      bffr.get_tag_table().lookup(s))
+                bffr.insert_with_tags(bffr.get_end_iter(), "%s\n" % line, bffr.get_tag_table().lookup(s))
                 break
 
     def reload_view(self, _textview):
@@ -152,13 +151,14 @@ class LogDialog(Gtk.Dialog):
     # noinspection PyMethodMayBeStatic
     def changed(self, vadjust):
         if not hasattr(vadjust, "need_scroll") or vadjust.need_scroll:
-            vadjust.set_value(vadjust.get_upper()-vadjust.get_page_size())
+            vadjust.set_value(vadjust.get_upper() - vadjust.get_page_size())
             vadjust.need_scroll = True
 
     # noinspection PyMethodMayBeStatic
     def value_changed(self, vadjust):
-        vadjust.need_scroll = abs(vadjust.get_value() + vadjust.get_page_size() -
-                                  vadjust.get_upper()) < vadjust.get_step_increment()
+        vadjust.need_scroll = (
+            abs(vadjust.get_value() + vadjust.get_page_size() - vadjust.get_upper()) < vadjust.get_step_increment()
+        )
 
     def close(self, _widget=None, _other=None):
         self.file.close()

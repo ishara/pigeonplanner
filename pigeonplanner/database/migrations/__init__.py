@@ -27,7 +27,7 @@ _migrations = None
 
 
 def get_filenames():
-    """ Get a sorted list of migration filenames """
+    """Get a sorted list of migration filenames"""
     if const.IS_FROZEN:
         folder = const.MIGRATIONSDIR
     else:
@@ -38,7 +38,7 @@ def get_filenames():
 
 
 def get_migrations():
-    """ Get a sorted list of dicts of migrations.
+    """Get a sorted list of dicts of migrations.
     The dicts contain a version and module key.
     """
     global _migrations

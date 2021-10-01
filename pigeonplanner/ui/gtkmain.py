@@ -22,6 +22,7 @@ import logging
 
 try:
     import gi
+
     gi.require_version("Pango", "1.0")
     gi.require_version("PangoCairo", "1.0")
     gi.require_version("Gtk", "3.0")
@@ -39,8 +40,9 @@ except ImportError:
 try:
     gi.require_version("OsmGpsMap", "1.0")
 except ValueError:
-    _dialog = Gtk.MessageDialog(None, 0, Gtk.MessageType.ERROR,
-                                Gtk.ButtonsType.CLOSE, "The OsmGpsMap typelib file can not be found.")
+    _dialog = Gtk.MessageDialog(
+        None, 0, Gtk.MessageType.ERROR, Gtk.ButtonsType.CLOSE, "The OsmGpsMap typelib file can not be found."
+    )
     _dialog.format_secondary_text("Install gir1.2-osmgpsmap-1.0 or equivalent for your operating system.")
     _dialog.run()
     sys.exit(0)
@@ -57,6 +59,7 @@ class GtkLogHandler(logging.Handler):
 
     def emit(self, record):
         from pigeonplanner.ui import exceptiondialog
+
         exceptiondialog.ExceptionDialog(record.getMessage())
 
 
@@ -73,6 +76,7 @@ def setup_logging():
     gtksettings = Gtk.Settings.get_default()
     logger.debug("GTK theme name: %s" % gtksettings.get_property("gtk-theme-name"))
     import peewee
+
     logger.debug("Peewee version: %s" % peewee.__version__)
 
 
@@ -101,8 +105,9 @@ def setup_custom_style():
 
 class Application(Gtk.Application):
     def __init__(self, missing_libs, loaded_config):
-        super(Application, self).__init__(application_id="net.launchpad.pigeonplanner",
-                                          flags=Gio.ApplicationFlags.FLAGS_NONE)
+        super(Application, self).__init__(
+            application_id="net.launchpad.pigeonplanner", flags=Gio.ApplicationFlags.FLAGS_NONE
+        )
         GLib.set_application_name(const.NAME)
         GLib.set_prgname(const.NAME)
 
@@ -114,7 +119,7 @@ class Application(Gtk.Application):
         self._window = None
         self._actions = [
             ("about", True, self.on_about),
-            ("quit",  True, self.on_quit),
+            ("quit", True, self.on_quit),
         ]
 
     def do_startup(self):
@@ -144,12 +149,14 @@ class Application(Gtk.Application):
 
         if const.WINDOWS:
             from pigeonplanner.core import config
+
             gtksettings = Gtk.Settings.get_default()
             gtksettings.set_property("gtk-theme-name", config.get("interface.theme-name"))
 
             # Add the FreeFonts on Windows to have consistent reports
             import os
             import ctypes
+
             gdi32 = ctypes.WinDLL("gdi32")
             fonts = [os.path.join(const.FONTDIR, f) for f in os.listdir(const.FONTDIR)]
             for font in fonts:
@@ -162,9 +169,11 @@ class Application(Gtk.Application):
         if not self._window:
             from pigeonplanner.ui import mainwindow
             from pigeonplanner.core import config
+
             self._window = mainwindow.MainWindow(application=self)
             if config.get("options.check-for-updates"):
                 from pigeonplanner.ui import updatedialog
+
                 dialog = updatedialog.UpdateDialog(self._window, True)
                 dialog.search_updates()
 
@@ -173,6 +182,7 @@ class Application(Gtk.Application):
 
     def on_about(self, _action, _param):
         from pigeonplanner.ui import dialogs
+
         dialogs.AboutDialog(self._window)
 
     def on_quit(self, _action, _param):
@@ -182,6 +192,7 @@ class Application(Gtk.Application):
         if len(self._missing_libs) > 0:
             # TODO: create a helppage on the website? Link to PyPI?
             from pigeonplanner.ui.messagedialog import ErrorDialog
+
             libs_label = "\n".join(self._missing_libs)
             help_label = "Pigeon Planner requires the following libraries to run correctly:"
             ErrorDialog((help_label, libs_label, None))
@@ -190,6 +201,7 @@ class Application(Gtk.Application):
     def notify_loaded_config(self):
         from pigeonplanner.core import config
         from pigeonplanner.ui.messagedialog import InfoDialog
+
         if self._loaded_config == config.LOADED_CONFIG_BACKUP:
             secondary = _("A previously saved version will be used instead.")
         elif self._loaded_config == config.LOADED_CONFIG_DEFAULT:

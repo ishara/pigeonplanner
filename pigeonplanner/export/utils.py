@@ -37,5 +37,5 @@ COLS_PIGEON = (
     "extra3",
     "extra4",
     "extra5",
-    "extra6"
+    "extra6",
 )

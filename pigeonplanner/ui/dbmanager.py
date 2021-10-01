@@ -30,15 +30,13 @@ from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui import exceptiondialog
 from pigeonplanner.ui.maildialog import MailDialog
-from pigeonplanner.ui.messagedialog import (InfoDialog, QuestionDialog,
-                                            ErrorDialog, WarningDialog)
+from pigeonplanner.ui.messagedialog import InfoDialog, QuestionDialog, ErrorDialog, WarningDialog
 from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.database import session
 from pigeonplanner.database.main import DatabaseVersionError, DatabaseMigrationError
 from pigeonplanner.database.models import Pigeon, Racepoint
-from pigeonplanner.database.manager import (dbmanager, DatabaseInfo,
-                                            DatabaseOperationError, DatabaseInfoError)
+from pigeonplanner.database.manager import dbmanager, DatabaseInfo, DatabaseOperationError, DatabaseInfoError
 
 
 logger = logging.getLogger(__name__)
@@ -56,12 +54,12 @@ class DBFileChooserDialog(filechooser._FileChooserDialog):  # noqa
         label_title = Gtk.Label()
         label_template = "%s <span style='italic' size='smaller' foreground='#787878'>(%s)</span>"
         label_title.set_markup(label_template % (_("Name"), _("Required")))
-        label_title.set_alignment(0, .5)
+        label_title.set_alignment(0, 0.5)
         self.entry_name = Gtk.Entry()
         self.entry_name.set_width_chars(40)
 
         label_desc = Gtk.Label(_("Description"))
-        label_desc.set_alignment(0, .5)
+        label_desc.set_alignment(0, 0.5)
         self.entry_description = Gtk.Entry()
 
         table = Gtk.Table(2, 2, False)
@@ -425,8 +423,9 @@ class DatabaseListboxRow(Gtk.ListBoxRow, builder.GtkBuilder):
         Gtk.ListBoxRow.__init__(self)
         builder.GtkBuilder.__init__(self, "DBManager.ui", ["listboxrowcontent", "popover_actions", "popover_more"])
         self.dbobj = dbobj
-        self._switch_default_notify_handler_id = \
-            self.widgets.switch_default.connect("notify::active", self.on_switch_default_active_notify)
+        self._switch_default_notify_handler_id = self.widgets.switch_default.connect(
+            "notify::active", self.on_switch_default_active_notify
+        )
         self._dbmanager: DBManagerWindow = component.get("DBManager")
         self.add(self.widgets.listboxrowcontent)
         self.update_data()

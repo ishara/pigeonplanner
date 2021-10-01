@@ -50,7 +50,7 @@ class Status:
         lost: _("Lost"),
         breeder: _("Breeder"),
         loaned: _("On loan"),
-        widow: _("Widow")
+        widow: _("Widow"),
     }
 
     @classmethod

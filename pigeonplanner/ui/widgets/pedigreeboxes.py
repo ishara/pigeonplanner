@@ -37,6 +37,7 @@ from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.ui import utils
 from pigeonplanner.ui import component
 from pigeonplanner.ui.messagedialog import InfoDialog
+
 try:
     from pigeonplanner.ui.detailsview import DetailsDialog
 except SyntaxError:
@@ -84,7 +85,7 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
         self.connect("leave-notify-event", self.on_leave_event)
         self.connect("state-changed", self.state_changed)
         self.connect("query-tooltip", self.on_query_tooltip)
-        self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
+        self.bgcolor = (211 / 256.0, 215 / 256.0, 207 / 256.0)
         self.bordercolor = (0, 0, 0)
         self.pigeon = None
         self.pigeon_child = None
@@ -99,9 +100,11 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
         try:
             return self.pigeon.sex
         except AttributeError:
-            return enums.Sex.cock \
-                if (self.index % 2 == 1 or (self.index == 0 and self.pigeon.sex == enums.Sex.cock)) \
+            return (
+                enums.Sex.cock
+                if (self.index % 2 == 1 or (self.index == 0 and self.pigeon.sex == enums.Sex.cock))
                 else enums.Sex.hen
+            )
 
     def set_pigeon(self, pigeon, pigeon_child):
         self.pigeon = pigeon
@@ -111,22 +114,22 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
             self.editable = True
             self.text = self.pigeon.band
             if self.pigeon.is_cock():
-                self.bgcolor = (185/256.0, 207/256.0, 231/256.0)
-                self.bordercolor = (32/256.0, 74/256.0, 135/256.0)
+                self.bgcolor = (185 / 256.0, 207 / 256.0, 231 / 256.0)
+                self.bordercolor = (32 / 256.0, 74 / 256.0, 135 / 256.0)
             elif self.pigeon.is_hen():
-                self.bgcolor = (255/256.0, 205/256.0, 241/256.0)
-                self.bordercolor = (135/256.0, 32/256.0, 106/256.0)
+                self.bgcolor = (255 / 256.0, 205 / 256.0, 241 / 256.0)
+                self.bordercolor = (135 / 256.0, 32 / 256.0, 106 / 256.0)
             else:
-                self.bgcolor = (200/256.0, 200/256.0, 200/256.0)
-                self.bordercolor = (100/256.0, 100/256.0, 100/256.0)
+                self.bgcolor = (200 / 256.0, 200 / 256.0, 200 / 256.0)
+                self.bordercolor = (100 / 256.0, 100 / 256.0, 100 / 256.0)
         else:
             self.editable = False
             self.text = ""
-            self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
+            self.bgcolor = (211 / 256.0, 215 / 256.0, 207 / 256.0)
             self.bordercolor = (0, 0, 0)
             if self.detailed and pigeon_child is not None:
                 self.editable = True
-                tform = "<span style=\"italic\" foreground=\"#6a6a6a\">%s</span>"
+                tform = '<span style="italic" foreground="#6a6a6a">%s</span>'
                 self.text = tform % common.escape_text(_("<edit>"))
 
     def set_highlight(self, value):
@@ -142,8 +145,8 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
 
     def state_changed(self, widget, _prev_state):
         if widget.get_state() == Gtk.StateType.INSENSITIVE:
-            self.text = "<span foreground=\"#6a6a6a\">%s</span>" % self.text
-            self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
+            self.text = '<span foreground="#6a6a6a">%s</span>' % self.text
+            self.bgcolor = (211 / 256.0, 215 / 256.0, 207 / 256.0)
         self.queue_draw()
 
     def on_query_tooltip(self, _widget, _x, _y, _keyboard, tooltip):
@@ -188,7 +191,7 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
         if not self.textlayout:
             self.textlayout = PangoCairo.create_layout(context)
             font_desc = self.get_style_context().get_font(Gtk.StateFlags.NORMAL)
-            font_size = int(font_desc.get_size()/Pango.SCALE)
+            font_size = int(font_desc.get_size() / Pango.SCALE)
             self.text_baseline = -font_size + 15
             self.textlayout.set_font_description(font_desc)
             self.textlayout.set_ellipsize(Pango.EllipsizeMode.END)
@@ -197,13 +200,14 @@ class PedigreeBox(Gtk.DrawingArea, PedigreeBoxMixin):
 
         context.move_to(0, 5)
         context.curve_to(0, 2, 2, 0, 5, 0)
-        context.line_to(alloc.width-8, 0)
-        context.curve_to(alloc.width-5, 0, alloc.width-3, 2, alloc.width-3, 5)
-        context.line_to(alloc.width-3, alloc.height-8)
-        context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5,
-                         alloc.height-3, alloc.width-8, alloc.height-3)
-        context.line_to(5, alloc.height-3)
-        context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0, alloc.height-8)
+        context.line_to(alloc.width - 8, 0)
+        context.curve_to(alloc.width - 5, 0, alloc.width - 3, 2, alloc.width - 3, 5)
+        context.line_to(alloc.width - 3, alloc.height - 8)
+        context.curve_to(
+            alloc.width - 3, alloc.height - 5, alloc.width - 5, alloc.height - 3, alloc.width - 8, alloc.height - 3
+        )
+        context.line_to(5, alloc.height - 3)
+        context.curve_to(2, alloc.height - 3, 0, alloc.height - 5, 0, alloc.height - 8)
         context.close_path()
         path = context.copy_path()
 
@@ -297,14 +301,14 @@ class PedigreeExtraBox(Gtk.DrawingArea, PedigreeBoxMixin):
 
     def set_pigeon(self, pigeon, _pigeon_child):
         if pigeon is not None:
-            self.text = common.escape_text("\n".join(pigeon.extra[:self.num_lines]))
-            self.bgcolor = (240/256.0, 230/256.0, 140/256.0)
+            self.text = common.escape_text("\n".join(pigeon.extra[: self.num_lines]))
+            self.bgcolor = (240 / 256.0, 230 / 256.0, 140 / 256.0)
             self.bordercolor = (0, 0, 0)
         else:
             self.text = ""
-            self.bgcolor = (211/256.0, 215/256.0, 207/256.0)
+            self.bgcolor = (211 / 256.0, 215 / 256.0, 207 / 256.0)
             self.bordercolor = (0, 0, 0)
-        
+
     def draw(self, _widget, context):
         alloc = self.get_allocation()
 
@@ -318,13 +322,14 @@ class PedigreeExtraBox(Gtk.DrawingArea, PedigreeBoxMixin):
 
         context.move_to(0, 5)
         context.curve_to(0, 2, 2, 0, 5, 0)
-        context.line_to(alloc.width-8, 0)
-        context.curve_to(alloc.width-5, 0, alloc.width-3, 2, alloc.width-3, 5)
-        context.line_to(alloc.width-3, alloc.height-8)
-        context.curve_to(alloc.width-3, alloc.height-5, alloc.width-5,
-                         alloc.height-3, alloc.width-8, alloc.height-3)
-        context.line_to(5, alloc.height-3)
-        context.curve_to(2, alloc.height-3, 0, alloc.height-5, 0, alloc.height-8)
+        context.line_to(alloc.width - 8, 0)
+        context.curve_to(alloc.width - 5, 0, alloc.width - 3, 2, alloc.width - 3, 5)
+        context.line_to(alloc.width - 3, alloc.height - 8)
+        context.curve_to(
+            alloc.width - 3, alloc.height - 5, alloc.width - 5, alloc.height - 3, alloc.width - 8, alloc.height - 3
+        )
+        context.line_to(5, alloc.height - 3)
+        context.curve_to(2, alloc.height - 3, 0, alloc.height - 5, 0, alloc.height - 8)
         context.close_path()
         path = context.copy_path()
 
@@ -376,12 +381,12 @@ class PedigreeBoxJoin(Gtk.DrawingArea):
             context.translate(alloc.width, alloc.height)
             context.rotate(math.pi)
 
-        context.move_to(0, alloc.height/2)
-        context.line_to(alloc.width/2, alloc.height/2)
-        context.line_to(alloc.width/2, 0+height_offset)
-        context.line_to(alloc.width, 0+height_offset)
-        context.move_to(alloc.width/2, alloc.height/2)
-        context.line_to(alloc.width/2, alloc.height-height_offset)
-        context.line_to(alloc.width, alloc.height-height_offset)
+        context.move_to(0, alloc.height / 2)
+        context.line_to(alloc.width / 2, alloc.height / 2)
+        context.line_to(alloc.width / 2, 0 + height_offset)
+        context.line_to(alloc.width, 0 + height_offset)
+        context.move_to(alloc.width / 2, alloc.height / 2)
+        context.line_to(alloc.width / 2, alloc.height - height_offset)
+        context.line_to(alloc.width, alloc.height - height_offset)
 
         context.stroke()

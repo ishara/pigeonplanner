@@ -36,11 +36,7 @@ from pigeonplanner.database.models import Pigeon
 
 
 def location_to_para_align(loc: str) -> int:
-    mapping = {
-        "left": PARA_ALIGN_LEFT,
-        "center": PARA_ALIGN_CENTER,
-        "right": PARA_ALIGN_RIGHT
-    }
+    mapping = {"left": PARA_ALIGN_LEFT, "center": PARA_ALIGN_CENTER, "right": PARA_ALIGN_RIGHT}
     return mapping.get(loc, PARA_ALIGN_LEFT)
 
 
@@ -50,6 +46,7 @@ def setting(method):
         ret = method(self, *args, **kwargs)
         self._setting_changed()
         return ret
+
     return wrapper
 
 
@@ -115,7 +112,9 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
         self.widgets.colour_bg_switch.set_active(self.layout["options"]["colour_bg"])
         self.widgets.pedigree_band_font_size.set_value(self.layout["font_styles"]["PedigreeBoxBand"]["size"])
         self.widgets.pedigree_band_color.set_rgba(self.layout["font_styles"]["PedigreeBoxBand"]["color"])
-        self.widgets.pedigree_details_font_size.set_value(self.layout["font_styles"]["PedigreeBoxDetailsLeft"]["size"])
+        self.widgets.pedigree_details_font_size.set_value(
+            self.layout["font_styles"]["PedigreeBoxDetailsLeft"]["size"]
+        )
         self.widgets.pedigree_details_color.set_rgba(self.layout["font_styles"]["PedigreeBoxDetailsLeft"]["color"])
         self.widgets.pedigree_comments_font_size.set_value(self.layout["font_styles"]["PedigreeBoxComments"]["size"])
         self.widgets.pedigree_comments_color.set_rgba(self.layout["font_styles"]["PedigreeBoxComments"]["color"])
@@ -146,9 +145,13 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
 
     def generate_report(self, print_action: int, filename: Optional[str] = None):
         userinfo = common.get_own_address()
-        opts = reportconfig.PedigreeReportOptions(self._paper_format, print_action=print_action,
-                                                  filename=filename, parent=self.widgets.window,
-                                                  is_pedigree_preview=True)
+        opts = reportconfig.PedigreeReportOptions(
+            self._paper_format,
+            print_action=print_action,
+            filename=filename,
+            parent=self.widgets.window,
+            is_pedigree_preview=True,
+        )
         report(base_pedigree.PedigreeReport, opts, self._pigeon, userinfo, self.layout)
 
     def save_pedigree(self):
@@ -250,6 +253,7 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
     def on_user_details_edit_clicked(self, _widget):
         def on_person_changed(_widget, _person):
             self._setting_changed()
+
         book = AddressBook(self.widgets.window)
         book.select_user()
         book.connect("person-changed", on_person_changed)
@@ -334,23 +338,29 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
     @setting
     def on_colour_edge_switch_notify(self, widget: Gtk.Switch, _gparam):
         is_active = widget.get_active()
-        reportconfig.set_graphics_style("PedigreeBoxCock",
-                                        color=Gdk.RGBA(.12, .29, .53) if is_active else Gdk.RGBA(0, 0, 0))
-        reportconfig.set_graphics_style("PedigreeBoxHen",
-                                        color=Gdk.RGBA(.53, .12, .41) if is_active else Gdk.RGBA(0, 0, 0))
-        reportconfig.set_graphics_style("PedigreeBoxUnknown",
-                                        color=Gdk.RGBA(.39, .39, .39) if is_active else Gdk.RGBA(0, 0, 0))
+        reportconfig.set_graphics_style(
+            "PedigreeBoxCock", color=Gdk.RGBA(0.12, 0.29, 0.53) if is_active else Gdk.RGBA(0, 0, 0)
+        )
+        reportconfig.set_graphics_style(
+            "PedigreeBoxHen", color=Gdk.RGBA(0.53, 0.12, 0.41) if is_active else Gdk.RGBA(0, 0, 0)
+        )
+        reportconfig.set_graphics_style(
+            "PedigreeBoxUnknown", color=Gdk.RGBA(0.39, 0.39, 0.39) if is_active else Gdk.RGBA(0, 0, 0)
+        )
         self.layout["options"]["colour_edge"] = is_active
 
     @setting
     def on_colour_bg_switch_notify(self, widget: Gtk.Switch, _gparam):
         is_active = widget.get_active()
-        reportconfig.set_graphics_style("PedigreeBoxCock",
-                                        fill_color=Gdk.RGBA(.72, .81, .90) if is_active else Gdk.RGBA(1, 1, 1))
-        reportconfig.set_graphics_style("PedigreeBoxHen",
-                                        fill_color=Gdk.RGBA(1, .80, .94) if is_active else Gdk.RGBA(1, 1, 1))
-        reportconfig.set_graphics_style("PedigreeBoxUnknown",
-                                        fill_color=Gdk.RGBA(.78, .78, .78) if is_active else Gdk.RGBA(1, 1, 1))
+        reportconfig.set_graphics_style(
+            "PedigreeBoxCock", fill_color=Gdk.RGBA(0.72, 0.81, 0.90) if is_active else Gdk.RGBA(1, 1, 1)
+        )
+        reportconfig.set_graphics_style(
+            "PedigreeBoxHen", fill_color=Gdk.RGBA(1, 0.80, 0.94) if is_active else Gdk.RGBA(1, 1, 1)
+        )
+        reportconfig.set_graphics_style(
+            "PedigreeBoxUnknown", fill_color=Gdk.RGBA(0.78, 0.78, 0.78) if is_active else Gdk.RGBA(1, 1, 1)
+        )
         self.layout["options"]["colour_bg"] = is_active
 
     @setting

@@ -121,12 +121,14 @@ class OperatorCombobox(Gtk.ComboBox):
         store = Gtk.ListStore(str, object)
         self.set_model(store)
 
-        items = [("<", operator.lt),
-                 ("<=", operator.le),
-                 ("=", operator.eq),
-                 ("!=", operator.ne),
-                 (">=", operator.ge),
-                 (">", operator.gt)]
+        items = [
+            ("<", operator.lt),
+            ("<=", operator.le),
+            ("=", operator.eq),
+            ("!=", operator.ne),
+            (">=", operator.ge),
+            (">", operator.gt),
+        ]
         for item in items:
             store.append(item)
         cell = Gtk.CellRendererText()
@@ -179,15 +181,16 @@ class DistanceCombobox(Gtk.ComboBox):
         store = Gtk.ListStore(str, float)
         self.set_model(store)
 
-        units = ((_("Yards"), 0.9144),
-                 (_("Kilometres"), 1000.),
-                 (_("Metres"), 1.),
-                 (_("Centimetres"), 0.01),
-                 (_("Inches"), 0.025),
-                 (_("Feet"), 0.3048),
-                 (_("Miles"), 1609.344),
-                 (_("Nautical Miles"), 1852.)
-                 )
+        units = (
+            (_("Yards"), 0.9144),
+            (_("Kilometres"), 1000.0),
+            (_("Metres"), 1.0),
+            (_("Centimetres"), 0.01),
+            (_("Inches"), 0.025),
+            (_("Feet"), 0.3048),
+            (_("Miles"), 1609.344),
+            (_("Nautical Miles"), 1852.0),
+        )
         for unit in units:
             store.append(unit)
         cell = Gtk.CellRendererText()
@@ -210,14 +213,15 @@ class SpeedCombobox(Gtk.ComboBox):
         store = Gtk.ListStore(str, float)
         self.set_model(store)
 
-        units = ((_("Yard per Minute"), 0.01524),
-                 (_("Metres per Minute"), 0.0166666666),
-                 (_("Metres per Second"), 1.),
-                 (_("Kilometre per Hour"), 0.27777777777777777777777777777777),
-                 (_("Feet per Second"), 0.3048),
-                 (_("Feet per Minute"), 0.00508),
-                 (_("Mile per Hour"), 0.44704)
-                 )
+        units = (
+            (_("Yard per Minute"), 0.01524),
+            (_("Metres per Minute"), 0.0166666666),
+            (_("Metres per Second"), 1.0),
+            (_("Kilometre per Hour"), 0.27777777777777777777777777777777),
+            (_("Feet per Second"), 0.3048),
+            (_("Feet per Minute"), 0.00508),
+            (_("Mile per Hour"), 0.44704),
+        )
         for unit in units:
             store.append(unit)
         cell = Gtk.CellRendererText()
@@ -243,7 +247,7 @@ class PigeonSearchCombobox(Gtk.ComboBox):
             (_("Name"), treeview.MainTreeView.LS_NAME),
             (_("Colour"), treeview.MainTreeView.LS_COLOUR),
             (_("Loft"), treeview.MainTreeView.LS_LOFT),
-            (_("Strain"), treeview.MainTreeView.LS_STRAIN)
+            (_("Strain"), treeview.MainTreeView.LS_STRAIN),
         ]
         for column in columns:
             store.append(column)

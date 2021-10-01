@@ -35,9 +35,7 @@ from pigeonplanner.core import pigeon as corepigeon
 from pigeonplanner.database.models import Pigeon, Breeding
 
 
-(COL_OBJ,
- COL_MATE,
- COL_DATA) = range(3)
+(COL_OBJ, COL_MATE, COL_DATA) = range(3)
 
 
 class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
@@ -185,22 +183,30 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         else:
             sire = mate
             dam = self.pigeon
-        child1 = self._add_child_pigeon(band_tuple1, sire, dam,
-                                        self.widgets.listcheckedit1.get_active(),
-                                        self.widgets.bandentryedit1.band_format)
-        child2 = self._add_child_pigeon(band_tuple2, sire, dam,
-                                        self.widgets.listcheckedit2.get_active(),
-                                        self.widgets.bandentryedit2.band_format)
+        child1 = self._add_child_pigeon(
+            band_tuple1, sire, dam, self.widgets.listcheckedit1.get_active(), self.widgets.bandentryedit1.band_format
+        )
+        child2 = self._add_child_pigeon(
+            band_tuple2, sire, dam, self.widgets.listcheckedit2.get_active(), self.widgets.bandentryedit2.band_format
+        )
 
         textbuffer = self.widgets.textviewcommentedit.get_buffer()
-        data = {"sire": sire, "dam": dam, "date": date,
-                "laid1": laid1, "hatched1": hatched1, "child1": child1,
-                "success1": self.widgets.successcheckedit1.get_active(),
-                "laid2": laid2, "hatched2": hatched2, "child2": child2,
-                "success2": self.widgets.successcheckedit2.get_active(),
-                "clutch": self.widgets.entryclutchedit.get_text(),
-                "box": self.widgets.entryboxedit.get_text(),
-                "comment": textbuffer.get_text(*textbuffer.get_bounds(), include_hidden_chars=True)}
+        data = {
+            "sire": sire,
+            "dam": dam,
+            "date": date,
+            "laid1": laid1,
+            "hatched1": hatched1,
+            "child1": child1,
+            "success1": self.widgets.successcheckedit1.get_active(),
+            "laid2": laid2,
+            "hatched2": hatched2,
+            "child2": child2,
+            "success2": self.widgets.successcheckedit2.get_active(),
+            "clutch": self.widgets.entryclutchedit.get_text(),
+            "box": self.widgets.entryboxedit.get_text(),
+            "comment": textbuffer.get_text(*textbuffer.get_bounds(), include_hidden_chars=True),
+        }
 
         # Update when editing record
         parent = None
@@ -255,9 +261,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self._clear_data_fields()
         utils.set_multiple_sensitive([self.widgets.buttonremove, self.widgets.buttonedit], False)
         this, mate = (Breeding.sire, Breeding.dam) if pigeon.is_cock() else (Breeding.dam, Breeding.sire)
-        query = (Breeding.select()
-                 .where(this == pigeon)
-                 .order_by(mate, Breeding.date))
+        query = Breeding.select().where(this == pigeon).order_by(mate, Breeding.date)
         for record in query:
             mate_obj = getattr(record, mate.name)
             if parent is None or mate_obj.id != last:
@@ -312,7 +316,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
                 "laid2": obj.laid2,
                 "hatched2": obj.hatched2,
                 "child2": obj.child2,
-                "success2": obj.success2
+                "success2": obj.success2,
             }
 
         self.widgets.dateedit.set_text(data["date"])

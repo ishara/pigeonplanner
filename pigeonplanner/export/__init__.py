@@ -18,9 +18,11 @@
 
 _exporters = None
 
+
 def get_exporters():
     global _exporters
     if _exporters is None:
         from .exportcsv import ExportCSV
+
         _exporters = [ExportCSV]
     return _exporters

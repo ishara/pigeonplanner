@@ -55,8 +55,10 @@ class MailDialog(builder.GtkBuilder):
                 self.widgets.entry_subject.set_text("Pigeon Planner database")
             elif kind == "log":
                 import uuid
-                self.widgets.entry_subject.set_text("Pigeon Planner %s errorlog [%s]"
-                                                    % (const.VERSION, str(uuid.uuid1())))
+
+                self.widgets.entry_subject.set_text(
+                    "Pigeon Planner %s errorlog [%s]" % (const.VERSION, str(uuid.uuid1()))
+                )
             self.widgets.entry_to.set_text(const.REPORTMAIL)
             self.widgets.rename.hide()
 
@@ -113,8 +115,7 @@ class MailDialog(builder.GtkBuilder):
         self.widgets.hbox_label.show()
 
     def on_send_clicked(self, _widget):
-        if (not self.widgets.entry_to.get_text() or not 
-                self.widgets.entry_mail.get_text()):
+        if not self.widgets.entry_to.get_text() or not self.widgets.entry_mail.get_text():
             ErrorDialog(messages.MSG_NEED_EMAIL, self.widgets.maildialog)
             return
 
@@ -131,9 +132,9 @@ class MailDialog(builder.GtkBuilder):
         recipient = self.widgets.entry_to.get_text()
         subject = self.widgets.entry_subject.get_text()
         body = self.widgets.textbuffer.get_text(
-                                *self.widgets.textbuffer.get_bounds(), include_hidden_chars=True).strip()
-        sender = "%s <%s>" % (self.widgets.entry_name.get_text(),
-                              self.widgets.entry_mail.get_text())
+            *self.widgets.textbuffer.get_bounds(), include_hidden_chars=True
+        ).strip()
+        sender = "%s <%s>" % (self.widgets.entry_name.get_text(), self.widgets.entry_mail.get_text())
 
         try:
             mailing.send_email(recipient, sender, subject, body, self.attachment)
@@ -151,8 +152,7 @@ class MailDialog(builder.GtkBuilder):
         self.widgets.cancel.hide()
         self.widgets.close.show()
         self.widgets.action_area.set_sensitive(True)
-        msg = _("The e-mail has been sent succesfully!") if not error else \
-            _("Connection to server failed!")
+        msg = _("The e-mail has been sent succesfully!") if not error else _("Connection to server failed!")
         self.widgets.label_result.set_markup("<b>%s</b>" % msg)
         self.widgets.label_result.show()
 

@@ -25,8 +25,17 @@ import peewee
 from peewee import SQL
 from peewee import SqliteDatabase
 from peewee import IntegrityError
-from peewee import (Check, ForeignKeyField, CharField, TextField,
-                    IntegerField, BooleanField, FloatField, DateField, ManyToManyField)
+from peewee import (
+    Check,
+    ForeignKeyField,
+    CharField,
+    TextField,
+    IntegerField,
+    BooleanField,
+    FloatField,
+    DateField,
+    ManyToManyField,
+)
 from playhouse.signals import Model
 from playhouse.migrate import migrate, SqliteMigrator
 
@@ -48,8 +57,23 @@ def do_migration(db):
     database.connection().row_factory = peewee.sqlite3.Row
 
     status_tables = ["Dead", "Sold", "Lost", "Breeder", "Onloan", "Widow"]
-    old_tables = ["Pigeons", "Results", "Breeding", "Media", "Medication", "Addresses", "Categories",
-                  "Colours", "Lofts", "Racepoints", "Sectors", "Strains", "Types", "Weather", "Wind"]
+    old_tables = [
+        "Pigeons",
+        "Results",
+        "Breeding",
+        "Media",
+        "Medication",
+        "Addresses",
+        "Categories",
+        "Colours",
+        "Lofts",
+        "Racepoints",
+        "Sectors",
+        "Strains",
+        "Types",
+        "Weather",
+        "Wind",
+    ]
 
     logger.info("Renaming tables")
     migrators = [migrator.rename_table(table_name, table_name + "_orig") for table_name in old_tables]
@@ -113,12 +137,7 @@ def _pigeon_for_pindex(pindex):
 
 
 def _insert_pigeon(band_number, band_year, sex, visible):
-    pigeon_id = Pigeon.insert(
-        band_number=band_number,
-        band_year=band_year,
-        sex=sex,
-        visible=visible
-    ).execute()
+    pigeon_id = Pigeon.insert(band_number=band_number, band_year=band_year, sex=sex, visible=visible).execute()
     Status.insert(pigeon=pigeon_id).execute()
     return pigeon_id
 
@@ -146,24 +165,26 @@ def _migrate_pigeons():
 
 
 def _migrate_parents(pigeon):
-    sire_row = database.execute_sql("SELECT sire, yearsire FROM Pigeons_orig WHERE sire != '' AND band=? AND year=?",
-                                    (pigeon.band_number, pigeon.band_year)).fetchone()
+    sire_row = database.execute_sql(
+        "SELECT sire, yearsire FROM Pigeons_orig WHERE sire != '' AND band=? AND year=?",
+        (pigeon.band_number, pigeon.band_year),
+    ).fetchone()
     if sire_row is not None:
         try:
-            sire = Pigeon.get((Pigeon.band_number == sire_row["sire"]) &
-                              (Pigeon.band_year == sire_row["yearsire"]))
+            sire = Pigeon.get((Pigeon.band_number == sire_row["sire"]) & (Pigeon.band_year == sire_row["yearsire"]))
         except Pigeon.DoesNotExist:
             _insert_pigeon(sire_row["sire"], sire_row["yearsire"], enums.Sex.cock, False)
         else:
             pigeon.sire = sire
             pigeon.save()
 
-    dam_row = database.execute_sql("SELECT dam, yeardam FROM Pigeons_orig WHERE dam != '' AND band=? AND year=?",
-                                   (pigeon.band_number, pigeon.band_year)).fetchone()
+    dam_row = database.execute_sql(
+        "SELECT dam, yeardam FROM Pigeons_orig WHERE dam != '' AND band=? AND year=?",
+        (pigeon.band_number, pigeon.band_year),
+    ).fetchone()
     if dam_row is not None:
         try:
-            dam = Pigeon.get((Pigeon.band_number == dam_row["dam"]) &
-                             (Pigeon.band_year == dam_row["yeardam"]))
+            dam = Pigeon.get((Pigeon.band_number == dam_row["dam"]) & (Pigeon.band_year == dam_row["yeardam"]))
         except Pigeon.DoesNotExist:
             _insert_pigeon(dam_row["dam"], dam_row["yeardam"], enums.Sex.hen, False)
         else:
@@ -201,8 +222,9 @@ def _migrate_status(pigeon, old_pindex):
         data = database.execute_sql("SELECT * FROM Onloan WHERE pindex=?;", (old_pindex,)).fetchone()
         if data is None:
             data = defaultdict(str)
-        status_data.update(start=_to_date(data["loaned"]), end=_to_date(data["back"]),
-                           info=data["info"], person=data["person"])
+        status_data.update(
+            start=_to_date(data["loaned"]), end=_to_date(data["back"]), info=data["info"], person=data["person"]
+        )
     elif status_id == enums.Status.widow:
         data = database.execute_sql("SELECT * FROM Widow WHERE pindex=?;", (old_pindex,)).fetchone()
         if data is None:
@@ -213,8 +235,9 @@ def _migrate_status(pigeon, old_pindex):
 
 
 def _migrate_images(pigeon, old_pindex):
-    row = database.execute_sql("SELECT image FROM Pigeons_orig WHERE image != '' AND pindex=?;",
-                               (old_pindex,)).fetchone()
+    row = database.execute_sql(
+        "SELECT image FROM Pigeons_orig WHERE image != '' AND pindex=?;", (old_pindex,)
+    ).fetchone()
     if row is not None:
         Image.insert(pigeon=pigeon, path=row["image"], main=True).execute()
 
@@ -295,8 +318,9 @@ def _migrate_breeding():
 
 
 def _migrate_medication():
-    cursor = database.execute_sql("SELECT *, GROUP_CONCAT(pindex, ',') AS pindexes "
-                                  "FROM Medication_orig GROUP BY medid;")
+    cursor = database.execute_sql(
+        "SELECT *, GROUP_CONCAT(pindex, ',') AS pindexes " "FROM Medication_orig GROUP BY medid;"
+    )
     for row in cursor:
         pigeons = [_pigeon_for_pindex(pindex) for pindex in row["pindexes"].split(",")]
         pigeons = [pigeon for pigeon in pigeons if pigeon is not None]
@@ -337,7 +361,8 @@ def _migrate_data_tables():
     Loft.insert_from(SQL("SELECT loft FROM Lofts_orig;"), ["loft"]).execute()
     Racepoint.insert_from(
         SQL("SELECT racepoint, distance, unit, xco, yco FROM Racepoints_orig;"),
-        ["racepoint", "distance", "unit", "xco", "yco"]).execute()
+        ["racepoint", "distance", "unit", "xco", "yco"],
+    ).execute()
     Sector.insert_from(SQL("SELECT sector FROM Sectors_orig;"), ["sector"]).execute()
     Strain.insert_from(SQL("SELECT strain FROM Strains_orig;"), ["strain"]).execute()
     Type.insert_from(SQL("SELECT type FROM Types_orig;"), ["type"]).execute()
@@ -387,10 +412,8 @@ class Pigeon(BaseModel):
     name = CharField(default="")
     strain = CharField(default="")
     loft = CharField(default="")
-    sire = ForeignKeyField("self", null=True, backref="children_sire",
-                           on_delete="SET NULL")
-    dam = ForeignKeyField("self", null=True, backref="children_dam",
-                          on_delete="SET NULL")
+    sire = ForeignKeyField("self", null=True, backref="children_sire", on_delete="SET NULL")
+    dam = ForeignKeyField("self", null=True, backref="children_dam", on_delete="SET NULL")
     extra1 = CharField(default="")
     extra2 = CharField(default="")
     extra3 = CharField(default="")
@@ -415,8 +438,7 @@ class Status(BaseModel):
     end = DateField(default="")
     racepoint = CharField(default="")
     person = CharField(default="")
-    partner = ForeignKeyField(Pigeon, null=True, on_delete="SET NULL",
-                              backref="status_partner")
+    partner = ForeignKeyField(Pigeon, null=True, on_delete="SET NULL", backref="status_partner")
 
     defaults_fields_excludes = ["id", "pigeon", "status_id"]
 
@@ -463,13 +485,11 @@ class Breeding(BaseModel):
     date = DateField()
     laid1 = DateField(default="")
     hatched1 = DateField(default="")
-    child1 = ForeignKeyField(Pigeon, null=True, backref="breeding_child1",
-                             on_delete="SET NULL")
+    child1 = ForeignKeyField(Pigeon, null=True, backref="breeding_child1", on_delete="SET NULL")
     success1 = BooleanField(default=False)
     laid2 = DateField(default="")
     hatched2 = DateField(default="")
-    child2 = ForeignKeyField(Pigeon, null=True, backref="breeding_child2",
-                             on_delete="SET NULL")
+    child2 = ForeignKeyField(Pigeon, null=True, backref="breeding_child2", on_delete="SET NULL")
     success2 = BooleanField(default=False)
     clutch = CharField(default="")
     box = CharField(default="")

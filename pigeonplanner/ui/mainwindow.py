@@ -66,6 +66,7 @@ logger = logging.getLogger(__name__)
 try:
     gi.require_version("GtkosxApplication", "1.0")
     from gi.repository import GtkosxApplication
+
     macapp = GtkosxApplication.Application()
 except (ValueError, ImportError):
     GtkosxApplication = None
@@ -185,9 +186,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         breedingtab = tabs.BreedingTab()
         mediatab = tabs.MediaTab()
         medicationtab = tabs.MedicationTab()
-        self._loaded_tabs = [
-            pedigreetab, relativestab, self.resultstab, breedingtab, mediatab, medicationtab
-        ]
+        self._loaded_tabs = [pedigreetab, relativestab, self.resultstab, breedingtab, mediatab, medicationtab]
         for tab in self._loaded_tabs:
             self.widgets.notebook.append_page(*tab.get_tab_widgets())
 
@@ -204,10 +203,8 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self.connect("delete-event", self.quit_program)
         self.set_title(const.NAME)
         self.add(self.widgets.mainvbox)
-        self.resize(config.get("interface.window-w"),
-                    config.get("interface.window-h"))
-        self.move(config.get("interface.window-x"),
-                  config.get("interface.window-y"))
+        self.resize(config.get("interface.window-w"), config.get("interface.window-h"))
+        self.move(config.get("interface.window-x"), config.get("interface.window-y"))
         self.show()
 
         infobar_label = Gtk.Label(label=_("Open a database to use the application."))
@@ -224,9 +221,11 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self._dbman.run(True)
 
         if macapp is not None:
+
             def macapp_quit(*_args):
                 self.quit_program(bckp=False)
                 return False
+
             macapp.connect("NSApplicationBlockTermination", macapp_quit)
             macapp.ready()
 
@@ -311,8 +310,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
             if not pigeon.visible:
                 return
             self.widgets.treeview.add_pigeon(pigeon)
-            self.widgets.statusbar.display_message(
-                        _("Pigeon %s has been added") % pigeon.band)
+            self.widgets.statusbar.display_message(_("Pigeon %s has been added") % pigeon.band)
         self.widgets.treeview.grab_focus()
 
     # Menu callbacks
@@ -578,13 +576,12 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
                 "sex": rangesex,
                 "sire": None,
                 "dam": None,
-                "image": None
+                "image": None,
             }
             logger.debug("Range: adding '%s'", (band, rangeyear))
             try:
                 pigeon = corepigeon.add_pigeon(data, enums.Status.active, {})
-            except (errors.PigeonAlreadyExists,
-                    errors.PigeonAlreadyExistsHidden):
+            except (errors.PigeonAlreadyExists, errors.PigeonAlreadyExistsHidden):
                 value += 1
                 continue
             self.widgets.treeview.add_pigeon(pigeon)
@@ -701,8 +698,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
             "MenuArrows": uimanager.get_widget("/MenuBar/ViewMenu/Arrows"),
             "MenuStats": uimanager.get_widget("/MenuBar/ViewMenu/Stats"),
             "MenuToolbar": uimanager.get_widget("/MenuBar/ViewMenu/Toolbar"),
-            "MenuStatusbar":
-                uimanager.get_widget("/MenuBar/ViewMenu/Statusbar"),
+            "MenuStatusbar": uimanager.get_widget("/MenuBar/ViewMenu/Statusbar"),
             "MenuRestoreHidden": uimanager.get_widget("/PopupMenu/RestoreHidden"),
         }
         for name, widget in widget_dic.items():
@@ -729,6 +725,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
                 macapp.insert_app_menu_item(Gtk.SeparatorMenuItem(), 1)
                 macapp.insert_app_menu_item(update_item, 2)
                 macapp.insert_app_menu_item(prefs_item, 3)
+
             self.connect("realize", on_window_realize)
 
     def _clear_pigeon_data(self):

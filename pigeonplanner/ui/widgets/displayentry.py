@@ -39,4 +39,5 @@ class DisplayEntry(Gtk.Entry):
             self.get_style_context().remove_class("displayentry")
         else:
             self.get_style_context().add_class("displayentry")
+
     is_editable = GObject.property(get_is_editable, set_is_editable, bool, False, "Is editable")

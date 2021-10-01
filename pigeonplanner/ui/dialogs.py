@@ -37,13 +37,18 @@ class RemovePigeonDialog(Gtk.MessageDialog):
     def __init__(self, parent, multiple):
         message = _("Remove selected pigeons?") if multiple else _("Remove selected pigeon?")
         button_hide_label = _("Hide pigeons") if multiple else _("Hide pigeon")
-        Gtk.MessageDialog.__init__(self, parent=parent,
-                                   flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                                   type=Gtk.MessageType.WARNING,
-                                   message_format=message)
+        Gtk.MessageDialog.__init__(
+            self,
+            parent=parent,
+            flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            type=Gtk.MessageType.WARNING,
+            message_format=message,
+        )
         self.set_transient_for(parent)
-        secondary_1 = _("Remove with data will permanently delete the pigeon with all its "
-                        "data like pedigree, results and breeding details.")
+        secondary_1 = _(
+            "Remove with data will permanently delete the pigeon with all its "
+            "data like pedigree, results and breeding details."
+        )
         secondary_2 = _("Hide the pigeon to keep it in the pedigrees.")
         self.format_secondary_text("%s\n\n%s" % (secondary_1, secondary_2))
 
@@ -99,9 +104,13 @@ class AboutDialog(Gtk.AboutDialog):
 
 class InformationDialog(Gtk.Dialog):
     def __init__(self, parent):
-        Gtk.Dialog.__init__(self, _("General information"), parent,
-                            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                            ("gtk-close", Gtk.ResponseType.CLOSE))
+        Gtk.Dialog.__init__(
+            self,
+            _("General information"),
+            parent,
+            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            ("gtk-close", Gtk.ResponseType.CLOSE),
+        )
         self.set_default_response(Gtk.ResponseType.CLOSE)
         self.resize(440, 380)
 
@@ -137,33 +146,53 @@ class InformationDialog(Gtk.Dialog):
     # noinspection PyMethodMayBeStatic
     def get_versions(self):
         operatingsystem, distribution = main.get_operating_system()
-        return (("Pigeon Planner", str(const.VERSION)),
-                ("Python", str(sys.version).replace("\n", "")),
-                ("LANG", os.environ.get("LANG", "")),
-                ("OS", operatingsystem),
-                ("Distribution", distribution))
+        return (
+            ("Pigeon Planner", str(const.VERSION)),
+            ("Python", str(sys.version).replace("\n", "")),
+            ("LANG", os.environ.get("LANG", "")),
+            ("OS", operatingsystem),
+            ("Distribution", distribution),
+        )
 
     def get_data(self):
         pigeon_count = common.count_active_pigeons()
         total = pigeon_count["total"]
         data = [
             (_("Number of pigeons"), str(total)),
-            ("    %s" % _("Cocks"), "%s\t(%s %%)"
-             % (pigeon_count[enums.Sex.cock], self.get_percentage(pigeon_count[enums.Sex.cock], total))),
-            ("    %s" % _("Hens"), "%s\t(%s %%)"
-             % (pigeon_count[enums.Sex.hen], self.get_percentage(pigeon_count[enums.Sex.hen], total))),
-            ("    %s" % _("Young birds"), "%s\t(%s %%)"
-             % (pigeon_count[enums.Sex.youngbird], self.get_percentage(pigeon_count[enums.Sex.youngbird], total))),
-            ("    %s" % _("Unknown"), "%s\t(%s %%)"
-             % (pigeon_count[enums.Sex.unknown], self.get_percentage(pigeon_count[enums.Sex.unknown], total)))
+            (
+                "    %s" % _("Cocks"),
+                "%s\t(%s %%)"
+                % (pigeon_count[enums.Sex.cock], self.get_percentage(pigeon_count[enums.Sex.cock], total)),
+            ),
+            (
+                "    %s" % _("Hens"),
+                "%s\t(%s %%)"
+                % (pigeon_count[enums.Sex.hen], self.get_percentage(pigeon_count[enums.Sex.hen], total)),
+            ),
+            (
+                "    %s" % _("Young birds"),
+                "%s\t(%s %%)"
+                % (pigeon_count[enums.Sex.youngbird], self.get_percentage(pigeon_count[enums.Sex.youngbird], total)),
+            ),
+            (
+                "    %s" % _("Unknown"),
+                "%s\t(%s %%)"
+                % (pigeon_count[enums.Sex.unknown], self.get_percentage(pigeon_count[enums.Sex.unknown], total)),
+            ),
         ]
         for status in range(7):
-            n_status = (Status.select()
-                        .join(Pigeon, on=Status.pigeon)
-                        .where((Status.status_id == status) & (Pigeon.visible == True))
-                        .count())
-            data.append(("    %s" % enums.Status.get_string(status),
-                         "%s\t(%s %%)" % (n_status, self.get_percentage(n_status, total))))
+            n_status = (
+                Status.select()
+                .join(Pigeon, on=Status.pigeon)
+                .where((Status.status_id == status) & (Pigeon.visible == True))
+                .count()
+            )
+            data.append(
+                (
+                    "    %s" % enums.Status.get_string(status),
+                    "%s\t(%s %%)" % (n_status, self.get_percentage(n_status, total)),
+                )
+            )
         n_results = Result.select().count()
         n_breeding = Breeding.select().count()
         data.append((_("Number of results"), str(n_results)))
@@ -183,9 +212,13 @@ class InformationDialog(Gtk.Dialog):
 
 class PigeonListDialog(Gtk.Dialog):
     def __init__(self, parent):
-        Gtk.Dialog.__init__(self, _("Search a pigeon"), parent,
-                            Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                            (_("Cancel"), Gtk.ResponseType.CANCEL))
+        Gtk.Dialog.__init__(
+            self,
+            _("Search a pigeon"),
+            parent,
+            Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            (_("Cancel"), Gtk.ResponseType.CANCEL),
+        )
         self.set_position(Gtk.WindowPosition.CENTER_ON_PARENT)
         self.set_modal(True)
         self.set_skip_taskbar_hint(True)
@@ -201,8 +234,8 @@ class PigeonListDialog(Gtk.Dialog):
         columns = (_("Band no."), _("Year"), _("Name"))
         for index, column in enumerate(columns):
             textrenderer = Gtk.CellRendererText()
-            tvcolumn = Gtk.TreeViewColumn(column, textrenderer, text=index+1)
-            tvcolumn.set_sort_column_id(index+1)
+            tvcolumn = Gtk.TreeViewColumn(column, textrenderer, text=index + 1)
+            tvcolumn.set_sort_column_id(index + 1)
             tvcolumn.set_resizable(True)
             self._treeview.append_column(tvcolumn)
         self._selection = self._treeview.get_selection()

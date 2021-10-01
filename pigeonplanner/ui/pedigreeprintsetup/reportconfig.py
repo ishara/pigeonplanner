@@ -18,8 +18,7 @@
 from gi.repository import Gdk
 
 from pigeonplanner.reportlib.basereport import ReportOptions
-from pigeonplanner.reportlib.styles import (ParagraphStyle, FontStyle,
-                                            GraphicsStyle, FONT_SANS_SERIF)
+from pigeonplanner.reportlib.styles import ParagraphStyle, FontStyle, GraphicsStyle, FONT_SANS_SERIF
 
 
 paragraph_styles = {}
@@ -63,8 +62,14 @@ def set_font_style(style_id: str, size: int = None, color: Gdk.RGBA = None, alig
     graphic_styles[style_id] = graph_style
 
 
-def set_graphics_style(style_id: str, line_width: float = None, line_style: int = None,
-                       color: Gdk.RGBA = None, fill_color: Gdk.RGBA = None, para_style: str = None):
+def set_graphics_style(
+    style_id: str,
+    line_width: float = None,
+    line_style: int = None,
+    color: Gdk.RGBA = None,
+    fill_color: Gdk.RGBA = None,
+    para_style: str = None,
+):
     graph_style = graphic_styles.get(style_id, GraphicsStyle())
     if line_width is not None:
         graph_style.set_line_width(line_width)
@@ -82,7 +87,6 @@ def set_graphics_style(style_id: str, line_width: float = None, line_style: int 
 
 
 class PedigreeReportOptions(ReportOptions):
-
     def set_values(self):
         self.margins = paper_margins
 

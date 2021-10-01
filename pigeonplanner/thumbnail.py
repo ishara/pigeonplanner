@@ -47,7 +47,7 @@ def get_path(src_file):
 
 def __build_path(path):
     md5_hash = hashlib.md5(path.encode("utf-8"))
-    return os.path.join(const.THUMBDIR, md5_hash.hexdigest()+".png")
+    return os.path.join(const.THUMBDIR, md5_hash.hexdigest() + ".png")
 
 
 def __create_image(src_file):
