@@ -1,3 +1,16 @@
+4.2.0:
+ * Added pedigree print setup
+ * Redesigned database manager
+ * Added a database repair tool
+ * Added export option for breeding records
+ * Added option to set default pigeon sort direction
+ * Start pigeon search when typing inside the list of pigeons
+ * Removed pedigree print settings in preferences window
+ * Many little UI changes
+ * Various code changes, cleanup and improvements
+ * Added Danish translation
+ * Updated translations
+
 4.0.5:
  * Added menu entry to send the database to the developers
  * Added menu entry to open the database location
