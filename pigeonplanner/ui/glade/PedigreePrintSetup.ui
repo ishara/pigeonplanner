@@ -218,7 +218,7 @@
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Pedigree print setup</property>
     <property name="window_position">center-on-parent</property>
-    <property name="default_width">980</property>
+    <property name="default_width">1040</property>
     <property name="default_height">780</property>
     <signal name="destroy" handler="on_window_destroy" swapped="no"/>
     <child>
