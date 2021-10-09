@@ -218,6 +218,8 @@ def run(gtk_ui=True):
 
         manager.init_manager()
 
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+
     if gtk_ui:
         from pigeonplanner.ui import gtkmain
 
