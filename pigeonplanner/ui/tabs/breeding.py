@@ -47,6 +47,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self._mode = None
 
         self.maintreeview = component.get("Treeview")
+        self.widgets.treeview.connect("button-press-event", self.on_treeview_press)
         self.widgets.selection = self.widgets.treeview.get_selection()
         self._selection_changed_handler_id = self.widgets.selection.connect("changed", self.on_selection_changed)
         self.widgets.editdialog.set_transient_for(self._parent)
@@ -90,6 +91,17 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         self.widgets.buttongoto1.set_sensitive(record.child1 is not None and record.child1.visible)
         self.widgets.buttoninfo2.set_sensitive(record.child2 is not None)
         self.widgets.buttongoto2.set_sensitive(record.child2 is not None and record.child2.visible)
+
+    def on_treeview_press(self, treeview, event):
+        pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
+        if pthinfo is None:
+            return
+        if event.button == 3:
+            entries = [
+                (self.on_buttonedit_clicked, None, _("Edit")),
+                (self.on_buttonremove_clicked, None, _("Remove")),
+            ]
+            utils.popup_menu(event, entries)
 
     @common.LogFunctionCall()
     def on_buttonall_clicked(self, _widget):
