@@ -20,11 +20,10 @@ Interface for checking program updates
 """
 
 
-import json
 import logging
 from collections import namedtuple
-from urllib.error import URLError
-from urllib.request import urlopen
+
+import requests
 
 from pigeonplanner import messages
 from pigeonplanner.core import const
@@ -45,11 +44,11 @@ def version_to_tuple(version: str) -> tuple:
 
 def get_latest_version() -> str:
     try:
-        response = urlopen(const.UPDATEURL)
-    except URLError as exc:
-        raise UpdateError(exc.reason)
-    data = response.read().decode("utf-8")
-    versiondict = json.loads(data)
+        response = requests.post(const.UPDATEURL)
+        response.raise_for_status()
+    except (requests.HTTPError, requests.ConnectionError, requests.Timeout) as exc:
+        raise UpdateError(exc)
+    versiondict = response.json()
     return versiondict["stable"]
 
 
