@@ -843,7 +843,6 @@
                       <object class="GtkGrid" id="grid1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="column_spacing">4</property>
                         <child>
                           <object class="GtkButton" id="buttoninfo1">
                             <property name="visible">True</property>
@@ -886,6 +885,9 @@
                             <property name="top_attach">0</property>
                           </packing>
                         </child>
+                        <style>
+                          <class name="linked"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1040,7 +1042,6 @@
                       <object class="GtkGrid" id="grid2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="column_spacing">4</property>
                         <child>
                           <object class="GtkButton" id="buttoninfo2">
                             <property name="visible">True</property>
@@ -1083,6 +1084,9 @@
                             <property name="top_attach">0</property>
                           </packing>
                         </child>
+                        <style>
+                          <class name="linked"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
