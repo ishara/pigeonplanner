@@ -850,6 +850,7 @@
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Information</property>
                             <signal name="clicked" handler="on_buttoninfo1_clicked" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image1">
@@ -870,6 +871,7 @@
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Go to</property>
                             <signal name="clicked" handler="on_buttongoto1_clicked" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image2">
@@ -1045,6 +1047,7 @@
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Information</property>
                             <signal name="clicked" handler="on_buttoninfo2_clicked" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image3">
@@ -1065,6 +1068,7 @@
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Go to</property>
                             <signal name="clicked" handler="on_buttongoto2_clicked" swapped="no"/>
                             <child>
                               <object class="GtkImage" id="image4">
