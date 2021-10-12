@@ -155,7 +155,10 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
         report(base_pedigree.PedigreeReport, opts, self._pigeon, userinfo, self.layout)
 
     def save_pedigree(self):
-        pdfname = "%s_%s.pdf" % (_("Pedigree"), self._pigeon.band.replace(" ", "_").replace("/", "-"))
+        if self._pigeon is not None:
+            pdfname = "%s_%s.pdf" % (_("Pedigree"), self._pigeon.band.replace(" ", "_").replace("/", "-"))
+        else:
+            pdfname = "%s.pdf" % _("Pedigree")
         chooser = PdfSaver(self.widgets.window, pdfname)
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
