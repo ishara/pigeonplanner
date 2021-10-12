@@ -25,6 +25,7 @@ from pigeonplanner.ui import builder
 from pigeonplanner.ui.messagedialog import QuestionDialog
 from pigeonplanner.core import enums
 from pigeonplanner.core import errors
+from pigeonplanner.core import common
 from pigeonplanner.database.models import Person
 
 
@@ -160,7 +161,10 @@ class AddressBook(builder.GtkBuilder, GObject.GObject):
     def _fill_treeview(self):
         self.widgets.liststore.clear()
         for item in Person.select().order_by(Person.name.asc()):
-            self.widgets.liststore.insert(0, [item, item.name])
+            name = common.escape_text(item.name)
+            if item.me:
+                name += " <span style='italic' size='smaller' foreground='#787878'>(%s)</span>" % _("this user")
+            self.widgets.liststore.insert(0, [item, name])
         self.widgets.liststore.set_sort_column_id(1, Gtk.SortType.ASCENDING)
 
     def _set_widgets(self, value):
