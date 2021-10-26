@@ -880,12 +880,16 @@ class ResultWindow(builder.GtkBuilder):
                 "temperature",
                 "comment",
             ]
-            with open(save_path, "w") as output:
-                writer = csv.DictWriter(
-                    output, dialect=csv.excel, quoting=csv.QUOTE_ALL, fieldnames=columns, extrasaction="ignore"
-                )
-                writer.writerow(dict((col, self.widgets.resultview.colname2string[col]) for col in columns))
-                writer.writerows(data)
+            try:
+                with open(save_path, "w") as output:
+                    writer = csv.DictWriter(
+                        output, dialect=csv.excel, quoting=csv.QUOTE_ALL, fieldnames=columns, extrasaction="ignore"
+                    )
+                    writer.writerow(dict((col, self.widgets.resultview.colname2string[col]) for col in columns))
+                    writer.writerows(data)
+            except Exception as exc:
+                msg = (_("There was an error saving the results."), str(exc), _("Failed!"))
+                ErrorDialog(msg, self.widgets.resultwindow)
         chooser.destroy()
 
     def on_save_clicked(self, _widget):
@@ -893,7 +897,11 @@ class ResultWindow(builder.GtkBuilder):
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
             save_path = chooser.get_filename()
-            self._do_operation(PRINT_ACTION_EXPORT, save_path)
+            try:
+                self._do_operation(PRINT_ACTION_EXPORT, save_path)
+            except Exception as exc:
+                msg = (_("There was an error saving the results."), str(exc), _("Failed!"))
+                ErrorDialog(msg, self.widgets.resultwindow)
         chooser.destroy()
 
     def on_preview_clicked(self, _widget):
