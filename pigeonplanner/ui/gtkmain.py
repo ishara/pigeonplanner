@@ -104,7 +104,7 @@ def setup_custom_style():
 
 
 class Application(Gtk.Application):
-    def __init__(self, missing_libs, loaded_config):
+    def __init__(self, missing_libs, loaded_config, cmdline_args):
         super(Application, self).__init__(
             application_id="net.launchpad.pigeonplanner", flags=Gio.ApplicationFlags.FLAGS_NONE
         )
@@ -114,6 +114,7 @@ class Application(Gtk.Application):
         if const.UNIX:
             GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, signal.SIGINT, self.quit)
 
+        self.cmdline_args = cmdline_args
         self._missing_libs = missing_libs
         self._loaded_config = loaded_config
         self._window = None

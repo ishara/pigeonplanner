@@ -189,6 +189,7 @@ class MainWindow(Gtk.ApplicationWindow, builder.GtkBuilder, component.Component)
         self._loaded_tabs = [pedigreetab, relativestab, self.resultstab, breedingtab, mediatab, medicationtab]
         for tab in self._loaded_tabs:
             self.widgets.notebook.append_page(*tab.get_tab_widgets())
+        self.widgets.notebook.set_current_page(application.cmdline_args.tab)
 
         self._build_menubar()
         self.current_pigeon = 0

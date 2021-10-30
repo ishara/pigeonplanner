@@ -76,8 +76,11 @@ class Startup:
         parser.add_argument(
             "-d", "--debug", action="store_true", dest="debug", help="Print debug messages to the console"
         )
-        args = parser.parse_args()
-        self._loglevel = logging.DEBUG if args.debug else logging.WARNING
+        parser.add_argument(
+            "-t", "--tab", type=int, help="select this tab on startup", default=0
+        )
+        self.cmdline_args = parser.parse_args()
+        self._loglevel = logging.DEBUG if self.cmdline_args.debug else logging.WARNING
 
         # Always setup logging
         try:
@@ -223,7 +226,7 @@ def run(gtk_ui=True):
     if gtk_ui:
         from pigeonplanner.ui import gtkmain
 
-        gtkapp = gtkmain.Application(missing_libs, loaded_config)
+        gtkapp = gtkmain.Application(missing_libs, loaded_config, app.cmdline_args)
         gtkapp.run()
 
 
