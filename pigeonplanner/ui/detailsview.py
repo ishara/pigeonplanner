@@ -427,6 +427,7 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
             else:
                 self.widgets.pigeonimageedit.set_from_pixbuf(pb)
                 self._current_image_path = filename
+                self.widgets.pigeonimageremove.set_sensitive(True)
         elif response == chooser.RESPONSE_CLEAR:
             self.set_default_image()
         chooser.destroy()
@@ -486,12 +487,14 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
     def set_default_image(self, _widget=None):
         self.widgets.pigeonimageedit.set_from_pixbuf(self._logo_pb)
         self._current_image_path = None
+        self.widgets.pigeonimageremove.set_sensitive(False)
 
     def set_image(self, image=None):
         if image is not None:
             pixbuf = thumbnail.get_image(image.path)
             self.widgets.pigeonimageedit.set_from_pixbuf(pixbuf)
             self._current_image_path = image.path
+            self.widgets.pigeonimageremove.set_sensitive(True)
         else:
             self.set_default_image()
 
