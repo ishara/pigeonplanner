@@ -414,12 +414,6 @@ class DetailsViewEdit(builder.GtkBuilder, GObject.GObject):
     def on_entrydamedit_search_clicked(self, _widget):
         return self._get_pigeonsearch_details(enums.Sex.hen)
 
-    def on_imagewidgeteventboxedit_enter_notify_event(self, _widget, _event):
-        self.widgets.imagerevealeredit.set_reveal_child(True)
-
-    def on_imagewidgeteventboxedit_leave_notify_event(self, _widget, _event):
-        self.widgets.imagerevealeredit.set_reveal_child(False)
-
     def on_pigeonimageadd_clicked(self, _widget):
         chooser = filechooser.ImageChooser(self.parent)
         response = chooser.run()
