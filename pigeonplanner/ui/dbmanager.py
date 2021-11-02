@@ -30,7 +30,7 @@ from pigeonplanner.ui import component
 from pigeonplanner.ui import filechooser
 from pigeonplanner.ui import exceptiondialog
 from pigeonplanner.ui.maildialog import MailDialog
-from pigeonplanner.ui.messagedialog import InfoDialog, QuestionDialog, ErrorDialog, WarningDialog
+from pigeonplanner.ui.messagedialog import InfoDialog, QuestionDialog, ErrorDialog
 from pigeonplanner.core import const
 from pigeonplanner.core import common
 from pigeonplanner.database import session
@@ -77,6 +77,53 @@ class DBFileChooserDialog(filechooser._FileChooserDialog):  # noqa
 
     def get_db_description(self) -> str:
         return self.entry_description.get_text()
+
+
+class RemoveDatabaseDialog(Gtk.MessageDialog):
+    RESPONSE_CANCEL = 1
+    RESPONSE_REMOVE_DB = 2
+    RESPONSE_REMOVE_ENTRY = 3
+
+    def __init__(self, parent):
+        Gtk.MessageDialog.__init__(
+            self,
+            parent=parent,
+            flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            type=Gtk.MessageType.WARNING,
+            message_format=_("Removing database"),
+        )
+        self.set_transient_for(parent)
+        secondary = _("Are you sure you want to remove the database? All data will be lost.")
+        self.format_secondary_text(secondary)
+
+        button_cancel = Gtk.Button(label=_("Cancel"))
+        button_cancel.connect("clicked", self.on_button_cancel_clicked)
+        button_remove_db = Gtk.Button(label=_("Remove database"))
+        button_remove_db.connect("clicked", self.on_button_remove_db_clicked)
+        button_remove_db.set_image(Gtk.Image.new_from_icon_name("edit-delete", Gtk.IconSize.BUTTON))
+        button_remove_db.set_always_show_image(True)
+        button_remove_db_ctx = button_remove_db.get_style_context()
+        button_remove_db_ctx.add_class("destructive-action")
+        button_remove_entry = Gtk.Button(label=_("Remove from list"))
+        button_remove_entry.connect("clicked", self.on_button_remove_entry_clicked)
+        button_remove_entry.set_image(Gtk.Image.new_from_icon_name("list-remove", Gtk.IconSize.BUTTON))
+        button_remove_entry.set_always_show_image(True)
+
+        action_area = self.get_action_area()
+        action_area.add(button_cancel)
+        action_area.add(button_remove_entry)
+        action_area.add(button_remove_db)
+
+        self.show_all()
+
+    def on_button_cancel_clicked(self, _widget):
+        self.response(self.RESPONSE_CANCEL)
+
+    def on_button_remove_db_clicked(self, _widget):
+        self.response(self.RESPONSE_REMOVE_DB)
+
+    def on_button_remove_entry_clicked(self, _widget):
+        self.response(self.RESPONSE_REMOVE_ENTRY)
 
 
 class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
@@ -329,17 +376,24 @@ class DBManagerWindow(builder.GtkBuilder, GObject.GObject, component.Component):
         self.update_all_rows()
 
     def remove_database(self, dbobj: DatabaseInfo, row: Optional[Gtk.ListBoxRow] = None):
-        if not WarningDialog(messages.MSG_DELETE_DATABASE, self.widgets.dialog).run():
-            return
-
-        try:
-            dbmanager.delete(dbobj)
-        except DatabaseOperationError as exc:
-            ErrorDialog((exc.message, None, ""), self.widgets.dialog)
-            return
-
-        if row is not None:
+        removedialog = RemoveDatabaseDialog(self.widgets.dialog)
+        response = removedialog.run()
+        if response == removedialog.RESPONSE_REMOVE_DB:
+            try:
+                dbmanager.delete(dbobj)
+            except DatabaseOperationError as exc:
+                ErrorDialog((exc.message, None, ""), self.widgets.dialog)
+                return
+        elif response == removedialog.RESPONSE_REMOVE_ENTRY:
+            dbmanager.remove_from_config(dbobj)
+        if (
+            response == removedialog.RESPONSE_REMOVE_DB
+            or response == removedialog.RESPONSE_REMOVE_ENTRY
+            and row is not None
+        ):
             self.widgets.listbox.remove(row)
+
+        removedialog.destroy()
 
     def edit_database(self, dbobj: DatabaseInfo):
         self.widgets.frame_advanced.set_visible(False)

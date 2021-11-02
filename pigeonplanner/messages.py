@@ -58,12 +58,6 @@ MSG_ERROR_DATABASE = (
     ERROR,
 )
 
-MSG_DELETE_DATABASE = (
-    _("Removing database"),
-    _("Are you sure you want to remove the database? " "All data will be lost."),
-    _("Removing database"),
-)
-
 MSG_INVALID_IMAGE = (
     _("Invalid image!"),
     _("This image is either not supported or corrupt, " "please choose another one."),

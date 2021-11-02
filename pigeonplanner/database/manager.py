@@ -240,6 +240,11 @@ class DBManager:
         self._dbs.remove(dbobj)
         self.save()
 
+    def remove_from_config(self, dbobj: DatabaseInfo):
+        """Remove a database from the configuration file without removing the actual database"""
+        self._dbs.remove(dbobj)
+        self.save()
+
     def copy(self, dbobj: DatabaseInfo) -> DatabaseInfo:
         n_copy = 1
         while True:
