@@ -96,7 +96,17 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         pthinfo = treeview.get_path_at_pos(int(event.x), int(event.y))
         if pthinfo is None:
             return
+
         if event.button == 3:
+            path, _column, _cell_x, _cell_y = pthinfo
+            if path.get_depth() == 1:
+                mate = self.widgets.treestore[path][COL_MATE]
+                entries = [
+                    (self.on_buttonadd_clicked, (mate,), _("New with this mate")),
+                ]
+                utils.popup_menu(event, entries)
+                # Don't trigger the selection_changed callback
+                return True
             entries = [
                 (self.on_buttonedit_clicked, None, _("Edit")),
                 (self.on_buttonremove_clicked, None, _("Remove")),
@@ -108,9 +118,9 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
         breedingwindow.BreedingWindow(self._parent)
 
     @common.LogFunctionCall()
-    def on_buttonadd_clicked(self, _widget):
+    def on_buttonadd_clicked(self, _widget, mate=None):
         self._mode = enums.Action.add
-        self._set_dialog_fields()
+        self._set_dialog_fields(mate=mate)
         self.widgets.editdialog.show()
 
     @common.LogFunctionCall()
@@ -313,7 +323,7 @@ class BreedingTab(builder.GtkBuilder, basetab.BaseTab):
     def _set_dialog_fields(self, obj=None, mate=None):
         if obj is None:
             data = Breeding.get_fields_with_defaults()
-            data["mate"] = None
+            data["mate"] = mate
         else:
             data = {
                 "date": obj.date,
