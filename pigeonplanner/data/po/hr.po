@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-06 23:25+0200\n"
-"PO-Revision-Date: 2020-03-15 16:21+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2021-10-24 13:16+0000\n"
+"Last-Translator: Zoran Gregorić <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-08-07 06:14+0000\n"
-"X-Generator: Launchpad (build c08a1e23be9b835a8d0e7a32b2e55270fac05933)\n"
+"X-Launchpad-Export-Date: 2021-10-25 04:38+0000\n"
+"X-Generator: Launchpad (build 077cd577c00fa794e72ab856f950ae412860db5f)\n"
 "Language: hr\n"
 
 #, python-format
@@ -196,7 +196,7 @@ msgstr "Jeste li sigurni?"
 
 #: pigeonplanner/messages.py:112
 msgid "Removing the selected breeding record"
-msgstr ""
+msgstr "Uklanjanje odabranog uzgojnog zapisa"
 
 #: pigeonplanner/messages.py:115
 msgid "Removing the selected media file"
@@ -583,7 +583,7 @@ msgstr "Slike"
 #: pigeonplanner/ui/glade/ResultParser.ui:87
 #: pigeonplanner/ui/glade/AddressBook.ui:472
 msgid "Cancel"
-msgstr ""
+msgstr "Odustani"
 
 #: pigeonplanner/ui/filechooser.py:135
 msgid "Select an image..."
@@ -595,7 +595,7 @@ msgstr "Odaberite sliku ..."
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:1014
 #: pigeonplanner/ui/glade/OptionsDialog.ui:168
 msgid "OK"
-msgstr ""
+msgstr "U redu"
 
 #: pigeonplanner/ui/filechooser.py:147 pigeonplanner/ui/filechooser.py:296
 msgid "Select a file..."
@@ -630,7 +630,7 @@ msgstr "Pohrani kao..."
 #: pigeonplanner/ui/glade/MedicationView.ui:536
 #: pigeonplanner/ui/glade/AddressBook.ui:459
 msgid "Save"
-msgstr ""
+msgstr "Spremi"
 
 #: pigeonplanner/ui/filechooser.py:232 pigeonplanner/ui/filechooser.py:243
 #: pigeonplanner/ui/filechooser.py:285
@@ -713,7 +713,7 @@ msgstr "Pojedinosti o pogrešci"
 
 #: pigeonplanner/ui/exceptiondialog.py:93
 msgid "Report"
-msgstr "Izvještaj"
+msgstr "Izvješće"
 
 #: pigeonplanner/ui/exceptiondialog.py:96 pigeonplanner/ui/detailsview.py:69
 #: pigeonplanner/ui/logdialog.py:108
@@ -735,19 +735,19 @@ msgstr "Izvještaj"
 #: pigeonplanner/ui/glade/BreedingWindow.ui:331
 #: pigeonplanner/ui/glade/AddressBook.ui:43
 msgid "Close"
-msgstr ""
+msgstr "Zatvori"
 
 #: pigeonplanner/ui/gtkmain.py:194
 msgid "A previously saved version will be used instead."
-msgstr ""
+msgstr "Umjesto toga koristit će se prethodno spremljena verzija."
 
 #: pigeonplanner/ui/gtkmain.py:196
 msgid "The default settings will be used instead."
-msgstr ""
+msgstr "Umjesto toga koristit će se zadane postavke."
 
 #: pigeonplanner/ui/gtkmain.py:199
 msgid "There was an error loading the configuration file."
-msgstr ""
+msgstr "Prilikom učitavanja konfiguracijske datoteke došlo je do pogreške."
 
 #: pigeonplanner/ui/pedigreewindow.py:59 pigeonplanner/ui/tabs/pedigree.py:27
 #: pigeonplanner/ui/pedigreeprintsetup/setupwindow.py:159
@@ -842,11 +842,11 @@ msgstr "Pojedinosti of %s"
 
 #: pigeonplanner/ui/messagedialog.py:57 pigeonplanner/ui/messagedialog.py:69
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: pigeonplanner/ui/messagedialog.py:58 pigeonplanner/ui/messagedialog.py:70
 msgid "Yes"
-msgstr ""
+msgstr "Da"
 
 #: pigeonplanner/ui/backupdialog.py:102 pigeonplanner/ui/mainwindow.py:263
 msgid "There was an error making the backup."
@@ -932,37 +932,37 @@ msgstr "Ženka"
 #: pigeonplanner/ui/glade/BreedingWindow.ui:191
 #: pigeonplanner/ui/glade/BreedingWindow.ui:396
 msgid "Egg 1 laid"
-msgstr ""
+msgstr "Jaje 1 sneseno"
 
 #: pigeonplanner/ui/breedingwindow.py:172
 #: pigeonplanner/ui/glade/BreedingWindow.ui:204
 #: pigeonplanner/ui/glade/BreedingWindow.ui:408
 msgid "Egg 1 hatched"
-msgstr ""
+msgstr "Jaje 1 izleženo"
 
 #: pigeonplanner/ui/breedingwindow.py:172
 #: pigeonplanner/ui/glade/BreedingWindow.ui:217
 #: pigeonplanner/ui/glade/BreedingWindow.ui:420
 msgid "Egg 1 bandnumber"
-msgstr ""
+msgstr "Jaje 1 broj prstena"
 
 #: pigeonplanner/ui/breedingwindow.py:173
 #: pigeonplanner/ui/glade/BreedingWindow.ui:230
 #: pigeonplanner/ui/glade/BreedingWindow.ui:432
 msgid "Egg 2 laid"
-msgstr ""
+msgstr "Jaje 2 sneseno"
 
 #: pigeonplanner/ui/breedingwindow.py:173
 #: pigeonplanner/ui/glade/BreedingWindow.ui:243
 #: pigeonplanner/ui/glade/BreedingWindow.ui:444
 msgid "Egg 2 hatched"
-msgstr ""
+msgstr "Jaje 2 izleženo"
 
 #: pigeonplanner/ui/breedingwindow.py:173
 #: pigeonplanner/ui/glade/BreedingWindow.ui:256
 #: pigeonplanner/ui/glade/BreedingWindow.ui:456
 msgid "Egg 2 bandnumber"
-msgstr ""
+msgstr "Jaje 2 broj prstena"
 
 #: pigeonplanner/ui/exportwindow.py:83
 msgid "The selected path is not writeable."
@@ -978,11 +978,11 @@ msgstr "Pigeon Planner baza podataka"
 
 #: pigeonplanner/ui/dbmanager.py:58 pigeonplanner/ui/dbmanager.py:116
 msgid "Required"
-msgstr ""
+msgstr "Obavezno"
 
 #: pigeonplanner/ui/dbmanager.py:249
 msgid "Can't repair database that needs an update."
-msgstr ""
+msgstr "Nije moguće popraviti bazu podataka potrebno je ažuriranje."
 
 #: pigeonplanner/ui/dbmanager.py:460
 #: pigeonplanner/ui/glade/OptionsDialog.ui:137
@@ -991,49 +991,50 @@ msgstr "Postojeće"
 
 #: pigeonplanner/ui/dbmanager.py:462
 msgid "Opened"
-msgstr ""
+msgstr "Otvoreno"
 
 #: pigeonplanner/ui/dbmanager.py:464
 msgid "Not found"
-msgstr ""
+msgstr "Nije pronađeno"
 
 #: pigeonplanner/ui/dbmanager.py:466
 msgid "Not writable"
-msgstr ""
+msgstr "Nemoguće upisati"
 
 #: pigeonplanner/ui/dbmanager.py:475
 msgid "Last modified:"
-msgstr ""
+msgstr "Zadnja promjena:"
 
 #: pigeonplanner/ui/dbmanager.py:546
 msgid "Waiting for action..."
-msgstr ""
+msgstr "Čekanje na akciju..."
 
 #: pigeonplanner/ui/dbmanager.py:555
 msgid "Check for pigeons with an empty value as year."
-msgstr ""
+msgstr "Provjerite ima li golubova s praznom vrijednošću za godinu."
 
 #: pigeonplanner/ui/dbmanager.py:556
 msgid "Delete pigeon."
-msgstr ""
+msgstr "Obriši goluba"
 
 #: pigeonplanner/ui/dbmanager.py:562
 #, python-format
 msgid "Deleted %s object(s)"
-msgstr ""
+msgstr "Obrisano %s objekata"
 
 #: pigeonplanner/ui/dbmanager.py:567
 msgid "Check for racepoints with an invalid unit value."
 msgstr ""
+"Provjerite točku puštanja s jediničnom vrijednošću koja nije valjana."
 
 #: pigeonplanner/ui/dbmanager.py:568
 msgid "Reset unit value to the default."
-msgstr ""
+msgstr "Vratite jediničnu vrijednost na zadanu vrijednost."
 
 #: pigeonplanner/ui/dbmanager.py:574
 #, python-format
 msgid "Updated %s object(s)"
-msgstr ""
+msgstr "Ažurirano %s objekata"
 
 #: pigeonplanner/ui/logdialog.py:46
 msgid "Logfile Viewer"
@@ -1060,7 +1061,7 @@ msgid ""
 "Remove with data will permanently delete the pigeon with all its data like "
 "pedigree, results and breeding details."
 msgstr ""
-"Uklanjanje ss podacima trajno će izbrisati goluba sa svim njegovim podacima "
+"Uklanjanje sa podacima trajno će izbrisati goluba sa svim njegovim podacima "
 "kao što su rodovnik, rezultati i detalji uzgoja."
 
 #: pigeonplanner/ui/dialogs.py:47
@@ -1087,7 +1088,7 @@ msgstr ""
 
 #: pigeonplanner/ui/dialogs.py:102 pigeonplanner/ui/glade/MainWindow.ui:35
 msgid "General information"
-msgstr "Općenito"
+msgstr "Opće informacije"
 
 #: pigeonplanner/ui/dialogs.py:127
 msgid "Technical details"
@@ -1160,7 +1161,7 @@ msgstr "Lijekovi"
 #: pigeonplanner/ui/glade/MedicationView.ui:425
 #: pigeonplanner/ui/glade/AddressBook.ui:431
 msgid "Edit"
-msgstr ""
+msgstr "Uredi"
 
 #: pigeonplanner/ui/tabs/medication.py:70 pigeonplanner/ui/tabs/results.py:592
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:170
@@ -1173,11 +1174,11 @@ msgstr ""
 #: pigeonplanner/ui/glade/DataManager.ui:331
 #: pigeonplanner/ui/glade/AddressBook.ui:446
 msgid "Remove"
-msgstr ""
+msgstr "Ukloni"
 
 #: pigeonplanner/ui/tabs/medication.py:111
 msgid "Removing the selected medication entry"
-msgstr "Uklanjanje odabranog lijeka"
+msgstr "Uklanjanje odabranog unosa lijeka"
 
 #: pigeonplanner/ui/tabs/medication.py:113
 msgid "Remove this entry for all pigeons?"
@@ -1225,12 +1226,12 @@ msgstr "<b>Potomstvo</b>"
 #: pigeonplanner/ui/glade/MainWindow.ui:34
 #: pigeonplanner/ui/glade/DataManager.ui:316
 msgid "Information"
-msgstr ""
+msgstr "Informacije"
 
 #: pigeonplanner/ui/tabs/relatives.py:97
 #: pigeonplanner/ui/widgets/pedigreeboxes.py:180
 msgid "Go to"
-msgstr ""
+msgstr "Idi na"
 
 #: pigeonplanner/ui/tabs/relatives.py:175
 msgid "Common parent"
@@ -1275,23 +1276,23 @@ msgstr "Format prstena"
 
 #: pigeonplanner/ui/widgets/bandentry.py:216
 msgid "The number and year are required when providing the country."
-msgstr ""
+msgstr "Broj i godina potrebni su prilikom unosa zemlje."
 
 #: pigeonplanner/ui/widgets/bandentry.py:220
 msgid "The number and year are required when providing the letters."
-msgstr ""
+msgstr "Broj i godina potrebni su prilikom unosa pisama."
 
 #: pigeonplanner/ui/widgets/bandentry.py:224
 msgid "The number is required."
-msgstr ""
+msgstr "Broj je obavezan"
 
 #: pigeonplanner/ui/widgets/bandentry.py:228
 msgid "The year is required."
-msgstr ""
+msgstr "Godina je obavezna"
 
 #: pigeonplanner/ui/widgets/bandentry.py:236
 msgid "The length of the year needs to be four digits."
-msgstr ""
+msgstr "Broj godine mora biti 4 broja"
 
 #: pigeonplanner/ui/widgets/bandentry.py:256
 msgid "Year (short)"
@@ -1408,7 +1409,7 @@ msgstr "<editiranje>"
 #: pigeonplanner/ui/glade/ResultWindow.ui:232
 #: pigeonplanner/ui/glade/BreedingWindow.ui:317
 msgid "Clear"
-msgstr ""
+msgstr "Očisti"
 
 #: pigeonplanner/ui/tools/datamanager.py:41
 msgid "Colours"
@@ -1442,11 +1443,11 @@ msgstr "Golubinjaci"
 
 #: pigeonplanner/ui/tools/racepointsmap.py:140
 msgid "Removing the selected racepoint."
-msgstr ""
+msgstr "Uklanjam izabrano mjesto puštanja"
 
 #: pigeonplanner/ui/tools/racepointsmap.py:149
 msgid "The racepoint name is required."
-msgstr ""
+msgstr "Ime mjesta puštanja je obavezno"
 
 #: pigeonplanner/ui/pedigreeprintsetup/preview.py:107
 #: pigeonplanner/reportlib/gui/printpreview.py:66
@@ -1468,16 +1469,16 @@ msgstr "Zumiranje do pune veličine stranice"
 #: pigeonplanner/ui/pedigreeprintsetup/preview.py:125
 #: pigeonplanner/reportlib/gui/printpreview.py:117
 msgid "Zooms the page in"
-msgstr "Zumiranje stranice"
+msgstr "Uvećava stranicu"
 
 #: pigeonplanner/ui/pedigreeprintsetup/preview.py:129
 #: pigeonplanner/reportlib/gui/printpreview.py:121
 msgid "Zooms the page out"
-msgstr "Zoom out stranice"
+msgstr "Umanjuje stranicu"
 
 #: pigeonplanner/ui/pedigreeprintsetup/setupwindow.py:167
 msgid "There was an error saving the pedigree."
-msgstr ""
+msgstr "Greška pri spremanju rodovnika"
 
 #: pigeonplanner/reportlib/cairodoc.py:234
 #: pigeonplanner/reportlib/cairodoc.py:237
@@ -1607,7 +1608,7 @@ msgstr "Uzgajatelj"
 
 #: pigeonplanner/core/enums.py:52
 msgid "On loan"
-msgstr "Na zajam"
+msgstr "Iznajmljen"
 
 #: pigeonplanner/core/enums.py:53
 msgid "Widow"
@@ -1615,11 +1616,11 @@ msgstr "Udovica"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:46
 msgid "Go to the previous pedigree"
-msgstr "Idite na prethodni rodovnik"
+msgstr "Idi na prethodni rodovnik"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:47
 msgid "Previous"
-msgstr ""
+msgstr "Predhodno"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:61
 msgid "Go to the first selected pedigree"
@@ -1627,15 +1628,15 @@ msgstr "Idite na prvi odabrani rodovnik"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:62
 msgid "Home"
-msgstr ""
+msgstr "Polazno"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:76
 msgid "Go to the next pedigree"
-msgstr "Pređite na sljedeći rodovnik"
+msgstr "Idi na na sljedeći rodovnik"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:77
 msgid "Next"
-msgstr ""
+msgstr "Slijedeće"
 
 #: pigeonplanner/ui/glade/PedigreeWindow.ui:101
 msgid "View this pedigree"
@@ -1696,7 +1697,7 @@ msgstr "Prikaz slika golubova"
 #: pigeonplanner/ui/glade/MainWindow.ui:67
 #: pigeonplanner/ui/glade/Racepointsmap.ui:316
 msgid "Racepoints map"
-msgstr ""
+msgstr "Mapa mjesta puštanja"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:68
 msgid "Manage the racepoints and distances"
@@ -1710,7 +1711,7 @@ msgstr "Proračun brzine"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:76
 msgid "Calculate the velocity of flights"
-msgstr "Izračunajte brzinu letova"
+msgstr "Izračunaj brzinu letova"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:82
 #: pigeonplanner/ui/glade/MainWindow.ui:83
@@ -1724,7 +1725,7 @@ msgstr "Postavi opcije filtera"
 #: pigeonplanner/ui/glade/MainWindow.ui:92
 #: pigeonplanner/ui/glade/MainWindow.ui:93
 msgid "_Search..."
-msgstr ""
+msgstr "_Traži..."
 
 #: pigeonplanner/ui/glade/MainWindow.ui:102
 #: pigeonplanner/ui/glade/MainWindow.ui:103
@@ -1747,7 +1748,7 @@ msgstr "Odaberi sve golubove"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:120
 msgid "_Add"
-msgstr ""
+msgstr "_Dodaj"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:121
 msgid "Add a new pigeon"
@@ -1755,7 +1756,7 @@ msgstr "Dodaj novog goluba"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:132
 msgid "Online help"
-msgstr ""
+msgstr "Online pomoć"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:133
 msgid "View online help"
@@ -1767,7 +1768,7 @@ msgstr "_Datoteka"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:146
 msgid "_Print"
-msgstr ""
+msgstr "_Ispis"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:152
 msgid "_Pigeon"
@@ -1776,7 +1777,7 @@ msgstr "_Golub"
 #: pigeonplanner/ui/glade/MainWindow.ui:157
 #: pigeonplanner/ui/glade/MainWindow.ui:324
 msgid "_Edit"
-msgstr "_Izmjena"
+msgstr "_Uredi"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:162
 msgid "_View"
@@ -1800,7 +1801,7 @@ msgstr "Kreiraj sigurnosnu kopiju baze podataka"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:184
 msgid "_Quit"
-msgstr ""
+msgstr "_Izlaz"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:185
 msgid "Quit the program"
@@ -1816,7 +1817,7 @@ msgstr "Pogledaj log datoteku"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:202
 msgid "_Preferences"
-msgstr ""
+msgstr "_Postavke"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:203
 msgid "Configure the application"
@@ -1849,7 +1850,7 @@ msgstr "Potraži najnovije programske nadogradnje"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:234
 msgid "_About"
-msgstr ""
+msgstr "_Informacije"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:235
 msgid "About this application"
@@ -1927,7 +1928,7 @@ msgstr "Prikaz detaljnog rodovnika ovoga goluba"
 #: pigeonplanner/ui/glade/MainWindow.ui:316
 #: pigeonplanner/ui/glade/MainWindow.ui:317
 msgid "Print pedigree"
-msgstr ""
+msgstr "Ispiši rodovnik"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:325
 msgid "Edit the selected pigeon"
@@ -1935,19 +1936,19 @@ msgstr "Izmjeni podatke o odabranom golubu"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:333
 msgid "Restore hidden"
-msgstr ""
+msgstr "Vrati skriveno"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:334
 msgid "Restore the selected hidden pigeon"
-msgstr ""
+msgstr "Vrati izabranog skrivenog goluba"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:344
 msgid "_Remove / Hide"
-msgstr ""
+msgstr "_Ukloni / Sakrij"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:345
 msgid "Remove or hide the selected pigeon"
-msgstr ""
+msgstr "Ukloni ili sakrij odabranog goluba"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:413
 msgid "Loading pigeons..."
@@ -1974,7 +1975,7 @@ msgstr "Za"
 #: pigeonplanner/ui/glade/ResultParser.ui:70
 #: pigeonplanner/ui/glade/DataManager.ui:35
 msgid "Help"
-msgstr ""
+msgstr "Pomoć"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:203
 msgid "Time"
@@ -1993,16 +1994,16 @@ msgstr "Sati"
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:358
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:712
 msgid "Minutes"
-msgstr "Minuta"
+msgstr "Minute"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:382
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:736
 msgid "Seconds"
-msgstr "Sekundi"
+msgstr "Sekunde"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:541
 msgid "Range"
-msgstr "Raspon"
+msgstr "Domet"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:952
 msgid "Prognosis"
@@ -2038,7 +2039,7 @@ msgstr "Partner*"
 #: pigeonplanner/ui/glade/BreedingView.ui:199
 #: pigeonplanner/ui/glade/BreedingView.ui:1153
 msgid "Series"
-msgstr "Niz"
+msgstr "Serija"
 
 #: pigeonplanner/ui/glade/BreedingView.ui:229
 #: pigeonplanner/ui/glade/BreedingView.ui:1182
@@ -2091,7 +2092,7 @@ msgstr "Filtriraj golubove"
 #: pigeonplanner/ui/glade/DataManager.ui:302
 #: pigeonplanner/ui/glade/BreedingWindow.ui:303
 msgid "Search..."
-msgstr ""
+msgstr "Traži…"
 
 #: pigeonplanner/ui/glade/FilterDialog.ui:111
 #: pigeonplanner/ui/glade/ResultWindow.ui:742
@@ -2132,18 +2133,18 @@ msgstr "Razdvojen"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:91
 msgid "Ascending"
-msgstr ""
+msgstr "Uzlazno"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:94
 msgid "Descending"
-msgstr ""
+msgstr "Silazno"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:113
 #: pigeonplanner/ui/glade/Racepointsmap.ui:916
 #: pigeonplanner/ui/glade/BackupDialog.ui:532
 #: pigeonplanner/ui/glade/BackupDialog.ui:801
 msgid "Options"
-msgstr "Opcije"
+msgstr "Mogućnosti"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:265
 msgid "Check for updates on startup"
@@ -2190,7 +2191,7 @@ msgstr "Zadana jedinica brzine"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:546
 msgid "Units"
-msgstr "Mjerne jedinice"
+msgstr "Jedinice mjere"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:660
 msgid "Window"
@@ -2198,7 +2199,7 @@ msgstr "Prozor"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:699
 msgid "Sort pigeons"
-msgstr ""
+msgstr "Razvrstaj golubove"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:711
 msgid "Results mode"
@@ -2214,11 +2215,11 @@ msgstr "Boja reda izbrisanih golubova u listama"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:854
 msgid "Theme name"
-msgstr ""
+msgstr "Naziv teme"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:886
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1070
 msgid "Text"
@@ -2309,37 +2310,39 @@ msgstr "Zemljopisna dužina"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:261
 msgid "Drag with the left mousebutton or use the arrow keys to navigate."
-msgstr ""
+msgstr "Povuci lijevomm tipkom na mišu ili koristi strelice za navigaciju"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:277
 msgid "Use the scrollwheel or plus and minus keys to zoom."
-msgstr ""
+msgstr "Koristi dugme za skrolanje ili plus i minus tipku za uvećavanje"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:293
 msgid "Right click to add a racepoint at the current location."
-msgstr ""
+msgstr "Desni klik za dodavanje mjesta puštanja na trenutnu lokaciju"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:387
 msgid ""
 "A loft with valid coordinates is required to use the distance calculation "
 "feature."
 msgstr ""
+"Za korištenje značajke izračuna udaljenosti potreban je  golubinjak s "
+"važećim koordinatama."
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:420
 msgid "Not now"
-msgstr ""
+msgstr "Ne sada"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:784
 msgid "Unit"
-msgstr ""
+msgstr "Mjerna jedinica"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:820
 msgid "GPS track"
-msgstr ""
+msgstr "GPS praćenje"
 
 #: pigeonplanner/ui/glade/Racepointsmap.ui:883
 msgid "Map type"
-msgstr ""
+msgstr "Vrsta karte"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:24
 msgid "View all results"
@@ -2347,7 +2350,7 @@ msgstr "Prikaz svih rezultata"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:47
 msgid "Export these results"
-msgstr ""
+msgstr "Izvezi ove rezultate"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:48
 #: pigeonplanner/ui/glade/ExportWindow.ui:87
@@ -2362,7 +2365,7 @@ msgstr "Spremanje ovih rezultata"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:87
 msgid "Print preview for these results"
-msgstr ""
+msgstr "Pregled ispisa za ove rezultate"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:102
 msgid "Print these results"
@@ -2371,12 +2374,12 @@ msgstr "Ispis ovih rezultata"
 #: pigeonplanner/ui/glade/ResultWindow.ui:103
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:279
 msgid "Print"
-msgstr ""
+msgstr "Ispis"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:127
 #: pigeonplanner/ui/glade/ResultWindow.ui:194
 msgid "Filter results"
-msgstr "Podaci prema zadanim kriterijima"
+msgstr "Filtriraj rezultate"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:128
 #: pigeonplanner/ui/glade/BreedingWindow.ui:95
@@ -2400,13 +2403,15 @@ msgstr "Dodatno"
 
 #: pigeonplanner/ui/glade/DetailsView.ui:583
 msgid "These lines will be shown on the pedigree."
-msgstr ""
+msgstr "Ove linije će biti prikazane na rodovniku."
 
 #: pigeonplanner/ui/glade/DetailsView.ui:599
 msgid ""
 "The grey area on the right roughly indicates the amount of space available "
 "on the printed pedigree."
 msgstr ""
+"Sivo područje na desnoj strani otprilike označava količinu raspoloživog "
+"prostora na tiskanom rodovniku."
 
 #: pigeonplanner/ui/glade/DetailsView.ui:633
 msgid ""
@@ -2465,28 +2470,28 @@ msgstr "Partner"
 
 #: pigeonplanner/ui/glade/UpdateDialog.ui:40
 msgid "Current version:"
-msgstr ""
+msgstr "Trenutna verzija"
 
 #: pigeonplanner/ui/glade/UpdateDialog.ui:52
 msgid "Latest version:"
-msgstr ""
+msgstr "Zadnja verzija"
 
 #: pigeonplanner/ui/glade/UpdateDialog.ui:134
 msgid "Download"
-msgstr ""
+msgstr "Preuzmi"
 
 #: pigeonplanner/ui/glade/MediaView.ui:132
 #: pigeonplanner/ui/glade/DBManager.ui:1059
 msgid "Open"
-msgstr ""
+msgstr "Otvori"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:100
 msgid "Restore"
-msgstr "Povrati"
+msgstr "Vrati"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:187
 msgid "Create backup"
-msgstr "Kreiraj sigurnosnu kopiju"
+msgstr "Izradi sigurnosnu kopiju"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:203
 msgid "Create a backup of your data"
@@ -2515,7 +2520,7 @@ msgstr "Uvrsti konfiguracijsku datoteku aplikacije"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:566
 msgid "This will not include pigeon images and media files."
-msgstr ""
+msgstr "To neće uključivati slike golubova i medijske datoteke."
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:623
 msgid "Backup file"
@@ -2589,15 +2594,16 @@ msgstr "Sve"
 
 #: pigeonplanner/ui/glade/DBManager.ui:55
 msgid "Quit"
-msgstr ""
+msgstr "Zatvori"
 
 #: pigeonplanner/ui/glade/DBManager.ui:109
 msgid "New"
-msgstr ""
+msgstr "Novo"
 
 #: pigeonplanner/ui/glade/DBManager.ui:228
 msgid "Create a new or add an existing database to get started."
 msgstr ""
+"Napravite novu ili dodajte postojeću bazu podataka da biste započeli."
 
 #: pigeonplanner/ui/glade/DBManager.ui:467
 msgid "For advanced use only. Use the default settings if you are in doubt."
@@ -2605,19 +2611,19 @@ msgstr "Samo za naprednu upotrebu. Ako sumnjate, koristite zadane postavke."
 
 #: pigeonplanner/ui/glade/DBManager.ui:567
 msgid "Repair selected"
-msgstr ""
+msgstr "Popravak izabran"
 
 #: pigeonplanner/ui/glade/DBManager.ui:732
 msgid "Action"
-msgstr ""
+msgstr "Akcija"
 
 #: pigeonplanner/ui/glade/DBManager.ui:744
 msgid "Result"
-msgstr ""
+msgstr "Rezultat"
 
 #: pigeonplanner/ui/glade/DBManager.ui:842
 msgid "Copy"
-msgstr ""
+msgstr "Kopiraj"
 
 #: pigeonplanner/ui/glade/DBManager.ui:856
 msgid "Move"
@@ -2625,11 +2631,11 @@ msgstr "Premjesti"
 
 #: pigeonplanner/ui/glade/DBManager.ui:870
 msgid "Repair"
-msgstr ""
+msgstr "Popravi"
 
 #: pigeonplanner/ui/glade/DBManager.ui:930
 msgid "Set as default"
-msgstr ""
+msgstr "Postavi kako zadano"
 
 #: pigeonplanner/ui/glade/DBManager.ui:945
 msgid "Load this database as default on startup"
@@ -2637,16 +2643,16 @@ msgstr "Učitajte ovu bazu podataka kao zadanu pri pokretanju"
 
 #: pigeonplanner/ui/glade/DBManager.ui:973
 msgid "Send to the developers"
-msgstr ""
+msgstr "Pošalji razvojnom timu"
 
 #: pigeonplanner/ui/glade/DBManager.ui:987
 msgid "Open folder"
-msgstr ""
+msgstr "Otvori mapu"
 
 #: pigeonplanner/ui/glade/MedicationView.ui:177
 #: pigeonplanner/ui/glade/MedicationView.ui:682
 msgid "Done by"
-msgstr "Načinio"
+msgstr "izvršio"
 
 #: pigeonplanner/ui/glade/MedicationView.ui:294
 #: pigeonplanner/ui/glade/MedicationView.ui:706
@@ -2660,136 +2666,136 @@ msgstr "Vakcinacija"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:145
 msgid "Top margin"
-msgstr ""
+msgstr "Gornja margina"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:157
 msgid "Bottom margin"
-msgstr ""
+msgstr "Donja margina"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:169
 msgid "Left margin"
-msgstr ""
+msgstr "Lijeva margina"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:181
 msgid "Right margin"
-msgstr ""
+msgstr "Desna margina"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:229
 msgid "Pedigree print setup"
-msgstr ""
+msgstr "Podešavanje postavki ispisa"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:263
 msgid "Save PDF"
-msgstr ""
+msgstr "Spremi kao PDF"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:314
 msgid "Layout configuration"
-msgstr ""
+msgstr "Konfiguracija izgleda"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:330
 msgid "Custom"
-msgstr ""
+msgstr "Prilagođeno"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:406
 msgid "Paper format"
-msgstr ""
+msgstr "Format papira"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:435
 msgid "Margins"
-msgstr ""
+msgstr "Margine"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:453
 msgid "Configure..."
-msgstr ""
+msgstr "Podesi…"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:505
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:893
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1112
 msgid "Font colour"
-msgstr ""
+msgstr "Boja fonta"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:531
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:881
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1100
 msgid "Font size"
-msgstr ""
+msgstr "Veličina fonta"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:560
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:648
 msgid "Separator"
-msgstr ""
+msgstr "Razdjelnik"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:624
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:965
 msgid "User info"
-msgstr ""
+msgstr "Informacije o korisniku"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:636
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1158
 msgid "Pigeon info"
-msgstr ""
+msgstr "Informacije o golubu"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:674
 msgid "Pigeon image"
-msgstr ""
+msgstr "Slika goluba"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:688
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:707
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:726
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1235
 msgid "Don't show"
-msgstr ""
+msgstr "Ne prikazuj"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:689
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:708
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:727
 msgid "Left"
-msgstr ""
+msgstr "Lijevo"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:690
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:709
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:728
 msgid "Center"
-msgstr ""
+msgstr "Centrirano"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:691
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:710
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:729
 msgid "Right"
-msgstr ""
+msgstr "Desno"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:746
 msgid "Header"
-msgstr ""
+msgstr "Zaglavlje"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:936
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1236
 msgid "Details"
-msgstr ""
+msgstr "Pojediosti"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:945
 msgid "Edit..."
-msgstr ""
+msgstr "Uredi..."
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1178
 msgid "Page layout"
-msgstr ""
+msgstr "Izgled stranice"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1251
 msgid "Generation 1 lines"
-msgstr ""
+msgstr "Generacija 1 linije"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1263
 msgid "Generation 2 lines"
-msgstr ""
+msgstr "Generacija 2 linije"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1275
 msgid "Generation 3 lines"
-msgstr ""
+msgstr "Generacija 3 linije"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1287
 msgid "Generation 4 lines"
-msgstr ""
+msgstr "Generacija 4 linije"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1366
 msgid "Layout"
@@ -2797,55 +2803,55 @@ msgstr "Izgled"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1401
 msgid "Colour edge"
-msgstr ""
+msgstr "Boja obruba"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1413
 msgid "Colour background"
-msgstr ""
+msgstr "Boja pozadine"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1450
 msgid "Bandnumber font size"
-msgstr ""
+msgstr "Veličina slova na prstenu"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1462
 msgid "Bandnumber colour"
-msgstr ""
+msgstr "Boja prstena"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1474
 msgid "Details font size"
-msgstr ""
+msgstr "Veličina fonta za detalje"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1486
 msgid "Details colour"
-msgstr ""
+msgstr "Boja za detalje"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1526
 msgid "Comments font size"
-msgstr ""
+msgstr "Veličina fonta komentara"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1538
 msgid "Comments colour"
-msgstr ""
+msgstr "Boja komentara"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1618
 msgid "Pedigree box"
-msgstr ""
+msgstr "Odjeljak rodovnika"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1654
 msgid "Comments"
-msgstr ""
+msgstr "Komentari"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1677
 msgid "Bandnumber"
-msgstr ""
+msgstr "Broj prstena"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1706
 msgid "Sex sign"
-msgstr ""
+msgstr "Oznaka spola"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1787
 msgid "Pedigree box layout"
-msgstr ""
+msgstr "izgled odjeljka rodovnika"
 
 #: pigeonplanner/ui/glade/ResultParser.ui:46
 msgid "Import results"
@@ -2917,23 +2923,23 @@ msgstr "Neiskorišteni predmeti"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:46
 msgid "View all breeding records"
-msgstr ""
+msgstr "Pogledaj sve uzgojne podatke"
 
 #: pigeonplanner/ui/glade/BreedingWindow.ui:282
 msgid "Filter breeding records"
-msgstr ""
+msgstr "Filtriraj uzgojne podatke"
 
 #: pigeonplanner/ui/glade/PedigreeView.ui:17
 msgid "Number of generations"
-msgstr ""
+msgstr "Broj generacija"
 
 #: pigeonplanner/ui/glade/PedigreeView.ui:491
 msgid "Pedigree sire"
-msgstr ""
+msgstr "Rodovnik oca"
 
 #: pigeonplanner/ui/glade/PedigreeView.ui:945
 msgid "Pedigree dam"
-msgstr ""
+msgstr "Rodovnik majke"
 
 #: pigeonplanner/ui/glade/AddressBook.ui:157
 msgid "Street"
