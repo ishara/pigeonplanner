@@ -1,3 +1,13 @@
+4.2.2:
+ * Added right-click menu on breeding mate
+ * Added right-click menu on breeding records
+ * Added indicator next to user's name in the address book
+ * Fixed network calls on macOS (update check, error report, database send)
+ * Fixed saving empty pedigree
+ * Show a dialog when saving/exporting results fails
+ * Small UI changes
+ * Updated translations
+
 4.2.0:
  * Added pedigree print setup
  * Redesigned database manager
