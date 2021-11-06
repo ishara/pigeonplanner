@@ -28,7 +28,7 @@ from datetime import datetime
 # No application imports!
 
 
-VERSION_TUPLE = (4, 2, 0)
+VERSION_TUPLE = (4, 2, 2)
 VERSION = ".".join(map(str, VERSION_TUPLE))
 
 NAME = "Pigeon Planner"
