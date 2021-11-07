@@ -148,3 +148,8 @@ MSG_CONNECTION_ERROR = _("Error trying to get information. Are you connected to 
 MSG_UPDATE_AVAILABLE = _("A new version is available.")
 MSG_NO_UPDATE = _("You already have the latest version installed.")
 MSG_UPDATE_DEVELOPMENT = _("This isn't normal, or you must be running a development version")
+
+# This message is shown in the Windows installer. There's no way to properly
+# handle this through gettext, so let the string be picked up here and
+# manually copy the translations into the setup script.
+_("Setup needs to uninstall the previous version of Pigeon Planner. All your data will be saved automatically.")
