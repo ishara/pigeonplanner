@@ -60,8 +60,10 @@ class DateEntry(Gtk.Viewport):
 
     def on_icon_pressed(self, _widget, icon_pos, _event):
         if icon_pos == Gtk.EntryIconPosition.SECONDARY:
+            icon_area = self._entry.get_icon_area(Gtk.EntryIconPosition.SECONDARY)
             popover = CalendarPopover(self)
             popover.set_relative_to(self)
+            popover.set_pointing_to(icon_area)
             popover.show_all()
             popover.popup()
 
