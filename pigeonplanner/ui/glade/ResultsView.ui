@@ -290,6 +290,7 @@
                   <object class="DateEntry" id="entrydate">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="halign">center</property>
                     <property name="editable">True</property>
                     <signal name="changed" handler="on_entrydate_changed" swapped="no"/>
                   </object>
