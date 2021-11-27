@@ -21,6 +21,7 @@ from functools import wraps
 from gi.repository import Gtk
 from gi.repository import Gdk
 
+from pigeonplanner import messages
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.tools import AddressBook
 from pigeonplanner.ui.filechooser import PdfSaver
@@ -59,8 +60,14 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
         self._layout_loaded = False  # TODO: might want to rename
         self.layout = None
 
+        # TODO: use these existing strings for now. They don't fit here perfectly, but
+        #       they're already translated.
+        self.widgets.label_address_infobar1.set_text(messages.MSG_NO_INFO[0])
+        self.widgets.label_address_infobar2.set_text(messages.MSG_NO_INFO[1])
+        self.widgets.infobar_address_info.set_revealed(common.get_own_address() is None)
+
         self._preview_widget = preview.PrintPreviewWidget.get_instance(self)
-        self.widgets.main_box.pack_start(self._preview_widget, True, True, 0)
+        self.widgets.preview_box.pack_start(self._preview_widget, True, True, 0)
 
         self.widgets.config_layout_combo.set_active_id("original")
 
@@ -189,6 +196,19 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
             layout_obj = layout.get_layout(layout_id)
             self.load_layout(layout_obj)
 
+    def on_infobar_address_info_response(self, infobar: Gtk.InfoBar, response_id: Gtk.ResponseType):
+        if response_id == Gtk.ResponseType.CLOSE:
+            infobar.set_revealed(False)
+        elif response_id == Gtk.ResponseType.YES:
+            book = AddressBook(self.widgets.window)
+            book.on_buttonadd_clicked(None)
+            book.widgets.checkme.set_active(True)
+            book.connect("person-changed", self.on_person_changed)
+
+    def on_person_changed(self, _widget, _person):
+        self.widgets.infobar_address_info.set_revealed(common.get_own_address() is None)
+        self._setting_changed()
+
     # ########################################################################
     # Paper
 
@@ -254,12 +274,9 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
     # User info
 
     def on_user_details_edit_clicked(self, _widget):
-        def on_person_changed(_widget, _person):
-            self._setting_changed()
-
         book = AddressBook(self.widgets.window)
         book.select_user()
-        book.connect("person-changed", on_person_changed)
+        book.connect("person-changed", self.on_person_changed)
 
     @setting
     def on_user_name_switch_notify(self, widget: Gtk.Switch, _gparam):
