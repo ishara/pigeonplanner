@@ -25,6 +25,7 @@ from pigeonplanner import messages
 from pigeonplanner.ui import builder
 from pigeonplanner.ui.tools import AddressBook
 from pigeonplanner.ui.filechooser import PdfSaver
+from pigeonplanner.ui.filechooser import ImageChooser
 from pigeonplanner.ui.messagedialog import ErrorDialog
 from pigeonplanner.ui.pedigreeprintsetup import layout
 from pigeonplanner.ui.pedigreeprintsetup import preview
@@ -69,6 +70,11 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
         self._preview_widget = preview.PrintPreviewWidget.get_instance(self)
         self.widgets.preview_box.pack_start(self._preview_widget, True, True, 0)
 
+        chooser = ImageChooser(self.widgets.window)
+        self.widgets.background_image = Gtk.FileChooserButton.new_with_dialog(chooser)  # noqa
+        self.widgets.background_image.connect("file-set", self.on_background_image_file_set)
+        self.widgets.background_image_box.pack_start(self.widgets.background_image, True, True, 0)
+
         self.widgets.config_layout_combo.set_active_id("original")
 
         self.widgets.window.set_transient_for(parent)
@@ -108,6 +114,12 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
         self.widgets.pigeon_extra_switch.set_active(self.layout["options"]["pigeon_extra"])
         self.widgets.pigeon_font_size.set_value(self.layout["font_styles"]["PigeonInfo"]["size"])
         self.widgets.pigeon_color.set_rgba(self.layout["font_styles"]["PigeonInfo"]["color"])
+
+        self.widgets.background_image.set_filename(self.layout["options"]["background_image"])
+        self.widgets.background_width_perc.set_value(self.layout["options"]["background_width_perc"])
+        self.widgets.background_height_perc.set_value(self.layout["options"]["background_height_perc"])
+        self.widgets.background_x_align_combo.set_active_id(self.layout["options"]["background_x_align"])
+        self.widgets.background_y_align_combo.set_active_id(self.layout["options"]["background_y_align"])
 
         self.widgets.pedigree_layout_pigeon_combo.set_active_id(self.layout["options"]["pedigree_layout_pigeon"])
         self.widgets.gen_1_lines.set_value(self.layout["options"]["pedigree_gen_1_lines"])
@@ -328,6 +340,33 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
     @setting
     def on_pigeon_color_color_set(self, widget: Gtk.ColorButton):
         reportconfig.set_font_style("PigeonInfo", color=widget.get_rgba())
+
+    # ########################################################################
+    # Background
+
+    @setting
+    def on_background_image_file_set(self, widget: Gtk.FileChooserButton):
+        self.layout["options"]["background_image"] = widget.get_filename()
+
+    def on_button_background_image_clear_clicked(self, _widget):
+        self.widgets.background_image.unselect_all()
+        self.widgets.background_image.emit("file-set")
+
+    @setting
+    def on_background_width_perc_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["options"]["background_width_perc"] = widget.get_value()
+
+    @setting
+    def on_background_height_perc_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["options"]["background_height_perc"] = widget.get_value()
+
+    @setting
+    def on_background_x_align_combo_changed(self, widget: Gtk.ComboBoxText):
+        self.layout["options"]["background_x_align"] = widget.get_active_id()
+
+    @setting
+    def on_background_y_align_combo_changed(self, widget: Gtk.ComboBoxText):
+        self.layout["options"]["background_y_align"] = widget.get_active_id()
 
     # ########################################################################
     # Pedigree layout

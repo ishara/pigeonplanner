@@ -1202,8 +1202,10 @@ class GtkDocFrame(GtkDocBaseElement):
         # draw each element in the frame
         cr.save()
         cr.translate(x_offset, t_margin)
-        cr.rectangle(0, 0, frame_width, frame_height)
-        cr.clip()
+        # TODO: removed clipping so we can draw a full page background image.
+        #       Try to find a better solution.
+        # cr.rectangle(0, 0, frame_width, frame_height)
+        # cr.clip()
 
         for elem in self._children:
             elem.draw(cr, layout, frame_width, dpi_x, dpi_y)

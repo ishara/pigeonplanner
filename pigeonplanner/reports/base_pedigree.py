@@ -35,6 +35,7 @@ class PedigreeReport(Report):
     def write_report(self):
         self.doc.start_page()
 
+        self._draw_background_image()
         title_y = self._draw_title()
         user_y = self._draw_user_info(title_y)
         pigeon_y = self._draw_pigeon_info(title_y)
@@ -60,6 +61,34 @@ class PedigreeReport(Report):
         font_size = font_style.get_size()
         # TODO: Count and add spacing around text (see libcairodoc.GtkDocText), document this? Get value from there?
         return pt2cm(int(round(font_size + font_size * 0.2)))
+
+    def _draw_background_image(self) -> None:
+        image_location = self._layout["options"]["background_image"]
+        if not image_location:
+            return
+
+        w = self.doc.paper.get_size().get_width() * (self._layout["options"]["background_width_perc"] / 100)
+        h = self.doc.paper.get_size().get_height() * (self._layout["options"]["background_height_perc"] / 100)
+
+        x = 0
+        x_align = self._layout["options"]["background_x_align"]
+        if x_align == "center":
+            x = 0 - self.doc.paper.get_left_margin() + self.doc.paper.get_size().get_width() / 2
+        elif x_align == "left":
+            x = 0 - self.doc.paper.get_left_margin()
+        elif x_align == "right":
+            x = self.doc.paper.get_size().get_width() - self.doc.paper.get_left_margin()
+
+        y = 0
+        y_align = self._layout["options"]["background_y_align"]
+        if y_align == "center":
+            y = 0 - self.doc.paper.get_top_margin() + self.doc.paper.get_size().get_height() / 2
+        elif y_align == "top":
+            y = 0 - self.doc.paper.get_top_margin()
+        elif y_align == "bottom":
+            y = self.doc.paper.get_size().get_height() - self.doc.paper.get_top_margin()
+
+        self.doc.draw_image(image_location, x, y, w, h, xalign=x_align, yalign=y_align)
 
     def _draw_title(self) -> float:
         text_height = self.get_text_height("Title")
