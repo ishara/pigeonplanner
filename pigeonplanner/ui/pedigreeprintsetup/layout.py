@@ -19,18 +19,36 @@ import json
 import copy
 import typing
 import copyreg
+import collections.abc
 
 from gi.repository import Gdk
 
 from pigeonplanner.reportlib.styles import PARA_ALIGN_RIGHT
 
 
-# layout_original: typing.Dict[typing.Any, typing.Any] = {
-layout_original: typing.Dict[str, typing.Any] = {
+# Make Gdk.RGBA available to copy.deepcopy()
+copyreg.pickle(Gdk.RGBA, lambda obj: (Gdk.RGBA, (obj.red, obj.green, obj.blue)))
+
+
+def update_recursively(base, custom):
+    for key, value in custom.items():
+        if isinstance(value, collections.abc.Mapping):
+            base[key] = update_recursively(base.get(key, {}), value)
+        else:
+            base[key] = value
+    return base
+
+
+def apply_default_layout(layout):
+    base = copy.deepcopy(_layout_base)
+    return update_recursively(base, layout)
+
+
+_layout_base: typing.Dict[str, typing.Any] = {
     "meta": {
-        "name": "Original",
+        "name": "",
         "description": "",
-        "author": "Pigeon Planner"
+        "author": ""
     },
     "paper_format": "A4",
     "margins": {
@@ -128,113 +146,28 @@ layout_original: typing.Dict[str, typing.Any] = {
     }
 }
 
-
-layout_swapped: typing.Dict[typing.Any, typing.Any] = {
+layout_original = {
     "meta": {
-        "name": "Swapped details",
-        "description": "",
+        "name": "Original",
         "author": "Pigeon Planner"
-    },
-    "paper_format": "A4",
-    "margins": {
-        "top": 2.5,
-        "bottom": 2.5,
-        "left": 1.0,
-        "right": 1.0
-    },
-    "font_styles": {
-        "Title": {
-            "size": 18,
-            "color": Gdk.RGBA(0, 0, 0)
-        },
-        "UserInfo": {
-            "size": 12,
-            "color": Gdk.RGBA(0, 0, 0)
-        },
-        "PigeonInfo": {
-            "size": 10,
-            "color": Gdk.RGBA(0, 0, 0)
-        },
-        "PedigreeBoxBand": {
-            "size": 8,
-            "color": Gdk.RGBA(0, 0, 0)
-        },
-        "PedigreeBoxDetailsLeft": {
-            "size": 8,
-            "color": Gdk.RGBA(0, 0, 0)
-        },
-        "PedigreeBoxDetailsRight": {
-            "size": 8,
-            "color": Gdk.RGBA(0, 0, 0),
-            "align": PARA_ALIGN_RIGHT
-        },
-        "PedigreeBoxComments": {
-            "size": 8,
-            "color": Gdk.RGBA(0, 0, 0)
-        }
-    },
-    "graphics_styles": {
-        "TitleSeparator": {
-            "line_width": 1.0,
-            "color": Gdk.RGBA(0, 0, 0)
-        },
-        "HeaderSeparator": {
-            "line_width": 1.0,
-            "color": Gdk.RGBA(0, 0, 0)
-        },
-        "PedigreeLine": {
-            "line_width": 0.6
-        },
-        "PedigreeBoxNone": {
-            "line_width": 1.0
-        },
-        "PedigreeBoxCock": {
-            "line_width": 1.0,
-        },
-        "PedigreeBoxHen": {
-            "line_width": 1.0,
-        },
-        "PedigreeBoxUnknown": {
-            "line_width": 1.0,
-        },
-    },
-    "options": {
-        "user_info": "left",
-        "pigeon_info": "no_show",
-        "pigeon_image": "right",
-        "user_name": True,
-        "user_address": True,
-        "user_phone": True,
-        "user_email": True,
-        "pigeon_name": True,
-        "pigeon_sex": True,
-        "pigeon_colour": True,
-        "pigeon_extra": True,
-        "background_image": "",
-        "background_width_perc": 100,
-        "background_height_perc": 100,
-        "background_x_align": "center",
-        "background_y_align": "center",
-        "pedigree_layout_pigeon": "details",
-        "pedigree_gen_1_lines": 7,
-        "pedigree_gen_2_lines": 7,
-        "pedigree_gen_3_lines": 4,
-        "pedigree_gen_4_lines": 2,
-        "colour_edge": False,
-        "colour_bg": False,
-        "box_top_right": "empty",
-        "box_middle_left": "empty",
-        "box_middle_right": "empty",
-        "box_bottom_left": "empty",
-        "box_comments": True,
-        "pedigree_sex_sign": False
     }
 }
 
+layout_swapped = {
+    "meta": {
+        "name": "Swapped details",
+        "author": "Pigeon Planner"
+    },
+    "options": {
+        "pigeon_info": "no_show",
+        "pigeon_image": "right",
+        "pedigree_layout_pigeon": "details",
+    }
+}
 
 layouts = {
-    "original": layout_original,
-    "swapped": layout_swapped
+    "original": apply_default_layout(layout_original),
+    "swapped": apply_default_layout(layout_swapped)
 }
 
 
@@ -242,10 +175,6 @@ def get_layout(layout_id, copy_=True):
     if copy_:
         return copy.deepcopy(layouts[layout_id])
     return layouts[layout_id]
-
-
-# Make Gdk.RGBA available to copy.deepcopy()
-copyreg.pickle(Gdk.RGBA, lambda obj: (Gdk.RGBA, (obj.red, obj.green, obj.blue)))
 
 
 class _CustomEncoder(json.JSONEncoder):
