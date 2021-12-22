@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+import string
 from typing import Optional
 from functools import wraps
 
@@ -27,6 +28,7 @@ from pigeonplanner.ui.tools import AddressBook
 from pigeonplanner.ui.filechooser import PdfSaver
 from pigeonplanner.ui.filechooser import ImageChooser
 from pigeonplanner.ui.messagedialog import ErrorDialog
+from pigeonplanner.ui.messagedialog import QuestionDialog
 from pigeonplanner.ui.pedigreeprintsetup import layout
 from pigeonplanner.ui.pedigreeprintsetup import preview
 from pigeonplanner.ui.pedigreeprintsetup import reportconfig
@@ -75,6 +77,8 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
         self.widgets.background_image.connect("file-set", self.on_background_image_file_set)
         self.widgets.background_image_box.pack_start(self.widgets.background_image, True, True, 0)
 
+        for layout_name in layout.get_user_layout_names():
+            self.widgets.config_layout_combo.append(layout_name, layout_name)
         self.widgets.config_layout_combo.set_active_id("original")
 
         self.widgets.window.set_transient_for(parent)
@@ -199,14 +203,57 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
 
     def on_config_layout_combo_changed(self, widget: Gtk.ComboBoxText):
         layout_id = widget.get_active_id()
-        if layout_id == "custom":
-            self.widgets.stackswitcher_config.set_sensitive(True)
-            self.widgets.stack_config.set_sensitive(True)
-        else:
-            self.widgets.stackswitcher_config.set_sensitive(False)
-            self.widgets.stack_config.set_sensitive(False)
+        if layout_id is None:
+            # This happens when removing an item from the combobox
+            return
+        if layout_id != "custom":
             layout_obj = layout.get_layout(layout_id)
             self.load_layout(layout_obj)
+        self.widgets.revealer_config.set_reveal_child(layout_id not in layout.default_layouts)
+        self.widgets.button_remove_layout.set_sensitive(layout_id in layout.get_user_layout_names())
+
+    def on_button_remove_layout_clicked(self, _widget):
+        layout_id = self.widgets.config_layout_combo.get_active_id()
+        msg = _("This will remove layout '%s'.") % layout_id
+        response = QuestionDialog((msg, _("Are you sure?"), None), self.widgets.window).run()
+        if response:
+            layout.remove_layout(layout_id)
+            combo_id = self.widgets.config_layout_combo.get_active()
+            self.widgets.config_layout_combo.remove(combo_id)
+            self.widgets.config_layout_combo.set_active(combo_id - 1)
+
+    def on_button_save_layout_toggled(self, widget: Gtk.MenuButton):
+        if widget.get_active():
+            layout_id = self.widgets.config_layout_combo.get_active_id()
+            self.widgets.entry_config_name.set_text("" if layout_id == "custom" else layout_id)
+            self.widgets.entry_config_name.grab_focus()
+            self.widgets.entry_config_name.set_position(-1)
+            self.widgets.button_save_config.grab_default()
+
+    def _show_error_invalid_layout_name(self, error_msg):
+        ErrorDialog((error_msg, None, None), self.widgets.window)
+        self.widgets.entry_config_name.grab_focus()
+        self.widgets.entry_config_name.set_position(-1)
+
+    def on_button_save_config_clicked(self, _widget):
+        valid_characters = string.ascii_letters + string.digits + "-_"
+        name = self.widgets.entry_config_name.get_text()
+        if not name:
+            self._show_error_invalid_layout_name(_("The name is required."))
+            return
+        if not all(char in valid_characters for char in name):
+            error_msg = _("Only the following characters are allowed: %s") % valid_characters
+            self._show_error_invalid_layout_name(error_msg)
+            return
+        if name in layout.default_layouts or name == "custom":
+            self._show_error_invalid_layout_name(_("This name is reserved."))
+            return
+
+        layout.save_layout(self.layout, name)
+        if name not in [row[1] for row in self.widgets.config_layout_combo.get_model()]:
+            self.widgets.config_layout_combo.append(name, name)
+        self.widgets.config_layout_combo.set_active_id(name)
+        self.widgets.save_config_popover.popdown()
 
     def on_infobar_address_info_response(self, infobar: Gtk.InfoBar, response_id: Gtk.ResponseType):
         if response_id == Gtk.ResponseType.CLOSE:
@@ -226,22 +273,27 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
 
     @setting
     def on_paper_format_combo_changed(self, widget: Gtk.ComboBoxText):
+        self.layout["paper_format"] = widget.get_active_text()
         self._paper_format = widget.get_active_text()
 
     @setting
     def on_margin_top_spinbutton_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["margins"]["top"] = widget.get_value()
         reportconfig.set_margins(top=widget.get_value())
 
     @setting
     def on_margin_bottom_spinbutton_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["margins"]["bottom"] = widget.get_value()
         reportconfig.set_margins(bottom=widget.get_value())
 
     @setting
     def on_margin_left_spinbutton_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["margins"]["left"] = widget.get_value()
         reportconfig.set_margins(left=widget.get_value())
 
     @setting
     def on_margin_right_spinbutton_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["margins"]["right"] = widget.get_value()
         reportconfig.set_margins(right=widget.get_value())
 
     # ########################################################################
@@ -249,14 +301,17 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
 
     @setting
     def on_title_font_size_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["font_styles"]["Title"]["size"] = widget.get_value()
         reportconfig.set_font_style("Title", size=widget.get_value())
 
     @setting
     def on_title_color_color_set(self, widget: Gtk.ColorButton):
+        self.layout["font_styles"]["Title"]["color"] = widget.get_rgba()
         reportconfig.set_font_style("Title", color=widget.get_rgba())
 
     @setting
     def on_title_separator_color_color_set(self, widget: Gtk.ColorButton):
+        self.layout["graphics_styles"]["TitleSeparator"]["color"] = widget.get_rgba()
         reportconfig.set_graphics_style("TitleSeparator", color=widget.get_rgba())
 
     # ########################################################################
@@ -280,6 +335,7 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
 
     @setting
     def on_header_separator_color_color_set(self, widget: Gtk.ColorButton):
+        self.layout["graphics_styles"]["HeaderSeparator"]["color"] = widget.get_rgba()
         reportconfig.set_graphics_style("HeaderSeparator", color=widget.get_rgba())
 
     # ########################################################################
@@ -308,10 +364,12 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
 
     @setting
     def on_user_font_size_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["font_styles"]["UserInfo"]["size"] = widget.get_value()
         reportconfig.set_font_style("UserInfo", size=widget.get_value())
 
     @setting
     def on_user_color_color_set(self, widget: Gtk.ColorButton):
+        self.layout["font_styles"]["UserInfo"]["color"] = widget.get_rgba()
         reportconfig.set_font_style("UserInfo", color=widget.get_rgba())
 
     # ########################################################################
@@ -335,10 +393,12 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
 
     @setting
     def on_pigeon_font_size_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["font_styles"]["PigeonInfo"]["size"] = widget.get_value()
         reportconfig.set_font_style("PigeonInfo", size=widget.get_value())
 
     @setting
     def on_pigeon_color_color_set(self, widget: Gtk.ColorButton):
+        self.layout["font_styles"]["PigeonInfo"]["color"] = widget.get_rgba()
         reportconfig.set_font_style("PigeonInfo", color=widget.get_rgba())
 
     # ########################################################################
@@ -424,28 +484,34 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
 
     @setting
     def on_pedigree_band_font_size_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["font_styles"]["PedigreeBoxBand"]["size"] = widget.get_value()
         reportconfig.set_font_style("PedigreeBoxBand", size=widget.get_value())
 
     @setting
     def on_pedigree_band_color_color_set(self, widget: Gtk.ColorButton):
+        self.layout["font_styles"]["PedigreeBoxBand"]["color"] = widget.get_rgba()
         reportconfig.set_font_style("PedigreeBoxBand", color=widget.get_rgba())
 
     @setting
     def on_pedigree_details_font_size_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["font_styles"]["PedigreeBoxDetailsLeft"]["size"] = widget.get_value()
         reportconfig.set_font_style("PedigreeBoxDetailsLeft", size=widget.get_value())
         reportconfig.set_font_style("PedigreeBoxDetailsRight", size=widget.get_value())
 
     @setting
     def on_pedigree_details_color_color_set(self, widget: Gtk.ColorButton):
+        self.layout["font_styles"]["PedigreeBoxDetailsLeft"]["color"] = widget.get_rgba()
         reportconfig.set_font_style("PedigreeBoxDetailsLeft", color=widget.get_rgba())
         reportconfig.set_font_style("PedigreeBoxDetailsRight", color=widget.get_rgba())
 
     @setting
     def on_pedigree_comments_font_size_value_changed(self, widget: Gtk.SpinButton):
+        self.layout["font_styles"]["PedigreeBoxComments"]["size"] = widget.get_value()
         reportconfig.set_font_style("PedigreeBoxComments", size=widget.get_value())
 
     @setting
     def on_pedigree_comments_color_color_set(self, widget: Gtk.ColorButton):
+        self.layout["font_styles"]["PedigreeBoxComments"]["color"] = widget.get_rgba()
         reportconfig.set_font_style("PedigreeBoxComments", color=widget.get_rgba())
 
     # ########################################################################

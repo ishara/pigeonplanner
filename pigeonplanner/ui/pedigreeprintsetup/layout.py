@@ -15,16 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+import os
 import json
 import copy
-import typing
 import copyreg
 import collections.abc
+from typing import Any, Dict, List
 
 from gi.repository import Gdk
 
+from pigeonplanner.core import const
 from pigeonplanner.reportlib.styles import PARA_ALIGN_RIGHT
 
+
+Layout = Dict[str, Any]
 
 # Make Gdk.RGBA available to copy.deepcopy()
 copyreg.pickle(Gdk.RGBA, lambda obj: (Gdk.RGBA, (obj.red, obj.green, obj.blue)))
@@ -44,7 +48,7 @@ def apply_default_layout(layout):
     return update_recursively(base, layout)
 
 
-_layout_base: typing.Dict[str, typing.Any] = {
+_layout_base: Layout = {
     "meta": {
         "name": "",
         "description": "",
@@ -165,23 +169,52 @@ layout_swapped = {
     }
 }
 
-layouts = {
+default_layouts = {
     "original": apply_default_layout(layout_original),
     "swapped": apply_default_layout(layout_swapped)
 }
 
 
-def get_layout(layout_id, copy_=True):
+def get_layout(layout_id: str, copy_: bool = True) -> Layout:
+    all_layouts = {**default_layouts, **get_user_layouts()}
     if copy_:
-        return copy.deepcopy(layouts[layout_id])
-    return layouts[layout_id]
+        return copy.deepcopy(all_layouts[layout_id])
+    return all_layouts[layout_id]
 
 
-class _CustomEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, Gdk.RGBA):
-            return {"GdkRGBA": {"red": obj.red, "green": obj.green, "blue": obj.blue}}
-        return json.JSONEncoder.default(self, obj)
+def get_user_layout_names() -> List[str]:
+    return sorted([_filename_to_name(filename) for filename in os.listdir(const.PEDIGREEDIR)])
+
+
+def get_user_layouts() -> Dict[str, Layout]:
+    return {_filename_to_name(filename): load_layout(os.path.join(const.PEDIGREEDIR, filename))
+            for filename in os.listdir(const.PEDIGREEDIR)}
+
+
+def save_layout(layout_obj: dict, name: str) -> None:
+    layout_obj["meta"]["name"] = name
+    layout_obj["meta"]["description"] = ""
+    layout_obj["meta"]["author"] = ""
+
+    with open(_name_to_file_path(name), "w") as f:
+        json.dump(layout_obj, f, cls=_CustomEncoder, indent=2)
+
+
+def load_layout(filename: str) -> Layout:
+    with open(filename) as f:
+        return json.load(f, object_hook=_custom_decoder)
+
+
+def remove_layout(name: str) -> None:
+    os.remove(_name_to_file_path(name))
+
+
+def _name_to_file_path(name: str) -> str:
+    return os.path.join(const.PEDIGREEDIR, f"{name}.json")
+
+
+def _filename_to_name(filename: str) -> str:
+    return filename.split(".", -1)[0]
 
 
 def _custom_decoder(dct):
@@ -190,11 +223,8 @@ def _custom_decoder(dct):
     return dct
 
 
-# TODO: what and where to save?
-def save_layout():
-    json.dumps(layouts, cls=_CustomEncoder, indent=2)
-
-
-# TODO: what and from where to load?
-def load_layout(foo):
-    json.loads(foo, object_hook=_custom_decoder)
+class _CustomEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Gdk.RGBA):
+            return {"GdkRGBA": {"red": obj.red, "green": obj.green, "blue": obj.blue}}
+        return json.JSONEncoder.default(self, obj)

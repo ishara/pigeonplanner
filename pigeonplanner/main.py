@@ -69,6 +69,8 @@ class Startup:
             os.mkdir(const.THUMBDIR)
         if not os.path.isdir(os.path.join(const.PLUGINDIR, "resultparsers")):
             os.makedirs(os.path.join(const.PLUGINDIR, "resultparsers"))
+        if not os.path.isdir(const.PEDIGREEDIR):
+            os.mkdir(const.PEDIGREEDIR)
 
         # Parse arguments
         parser = argparse.ArgumentParser()

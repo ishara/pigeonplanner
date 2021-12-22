@@ -104,6 +104,7 @@ else:
 
 THUMBDIR = os.path.join(PREFDIR, "thumbs")
 PLUGINDIR = os.path.join(PREFDIR, "plugins")
+PEDIGREEDIR = os.path.join(PREFDIR, "pedigrees")
 DATABASE = os.path.join(PREFDIR, "pigeonplanner.db")
 DATABASEINFO = os.path.join(PREFDIR, "database.json")
 LOGFILE = os.path.join(PREFDIR, "pigeonplanner.log")
