@@ -119,7 +119,8 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
         self.widgets.pigeon_font_size.set_value(self.layout["font_styles"]["PigeonInfo"]["size"])
         self.widgets.pigeon_color.set_rgba(self.layout["font_styles"]["PigeonInfo"]["color"])
 
-        self.widgets.background_image.set_filename(self.layout["options"]["background_image"])
+        if self.layout["options"]["background_image"]:
+            self.widgets.background_image.set_filename(self.layout["options"]["background_image"])
         self.widgets.background_width_perc.set_value(self.layout["options"]["background_width_perc"])
         self.widgets.background_height_perc.set_value(self.layout["options"]["background_height_perc"])
         self.widgets.background_x_align_combo.set_active_id(self.layout["options"]["background_x_align"])

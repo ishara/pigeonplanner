@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Pigeon Planner.  If not, see <http://www.gnu.org/licenses/>
 
+import os
 from typing import List, Optional
 
 from pigeonplanner.core import enums
@@ -64,7 +65,7 @@ class PedigreeReport(Report):
 
     def _draw_background_image(self) -> None:
         image_location = self._layout["options"]["background_image"]
-        if not image_location:
+        if not image_location or not os.path.exists(image_location):
             return
 
         w = self.doc.paper.get_size().get_width() * (self._layout["options"]["background_width_perc"] / 100)
