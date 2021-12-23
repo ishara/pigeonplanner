@@ -226,30 +226,35 @@ class PedigreePrintSetupWindow(builder.GtkBuilder):
     def on_button_save_layout_toggled(self, widget: Gtk.MenuButton):
         if widget.get_active():
             layout_id = self.widgets.config_layout_combo.get_active_id()
-            self.widgets.entry_config_name.set_text("" if layout_id == "custom" else layout_id)
+            self.widgets.entry_config_name.set_text("my_pedigree" if layout_id == "custom" else layout_id)
             self.widgets.entry_config_name.grab_focus()
             self.widgets.entry_config_name.set_position(-1)
             self.widgets.button_save_config.grab_default()
 
-    def _show_error_invalid_layout_name(self, error_msg):
-        ErrorDialog((error_msg, None, None), self.widgets.window)
-        self.widgets.entry_config_name.grab_focus()
-        self.widgets.entry_config_name.set_position(-1)
+    def on_entry_config_name_changed(self, widget: Gtk.Entry):
+        valid_characters = string.ascii_letters + string.digits + "-_"
+        error = False
+        error_msg = ""
+        name = widget.get_text()
+        if not name:
+            error = True
+        if name in layout.default_layouts or name == "custom":
+            error = True
+            error_msg = _("This name is reserved.")
+        # Check all characters each time, not just the last inserted to show the error
+        # message as long as there are invalid characters.
+        for char in name:
+            if char not in valid_characters:
+                error = True
+                error_msg = _("The name can not contain '%s'.") % char
+                break
+
+        self.widgets.label_name_error.set_text(error_msg)
+        self.widgets.revealer_name_error.set_reveal_child(error_msg)
+        self.widgets.button_save_config.set_sensitive(not error)
 
     def on_button_save_config_clicked(self, _widget):
-        valid_characters = string.ascii_letters + string.digits + "-_"
         name = self.widgets.entry_config_name.get_text()
-        if not name:
-            self._show_error_invalid_layout_name(_("The name is required."))
-            return
-        if not all(char in valid_characters for char in name):
-            error_msg = _("Only the following characters are allowed: %s") % valid_characters
-            self._show_error_invalid_layout_name(error_msg)
-            return
-        if name in layout.default_layouts or name == "custom":
-            self._show_error_invalid_layout_name(_("This name is reserved."))
-            return
-
         layout.save_layout(self.layout, name)
         if name not in [row[1] for row in self.widgets.config_layout_combo.get_model()]:
             self.widgets.config_layout_combo.append(name, name)
