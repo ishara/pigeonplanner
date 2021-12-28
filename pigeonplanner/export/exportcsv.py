@@ -31,7 +31,7 @@ class ExportCSV:
 
     @classmethod
     def run(cls, filepath, pigeons):
-        with open(filepath, "w") as output:
+        with open(filepath, "w", encoding="utf-8") as output:
             writer = csv.DictWriter(output, dialect=csv.excel, quoting=csv.QUOTE_ALL, fieldnames=utils.COLS_PIGEON)
             writer.writerow(dict((name, name) for name in utils.COLS_PIGEON))
             for pigeon in pigeons:
