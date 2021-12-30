@@ -22,7 +22,7 @@ import errno
 import shutil
 import logging
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Dict, Optional, Any
 
 from pigeonplanner.core import const
 from pigeonplanner.core import common
@@ -83,6 +83,14 @@ class DatabaseInfo:
         except OSError:
             return 0
         return s
+
+    def as_dict(self) -> Dict[str, Any]:
+        return {
+            "path": self.path,
+            "name": self.name,
+            "description": self.description,
+            "default": self.default,
+        }
 
 
 class DBManager:
@@ -292,8 +300,7 @@ class DBManager:
     def _save_dbs(self):
         data = []
         for dbobj in self._dbs:
-            info = dict(path=dbobj.path, name=dbobj.name, description=dbobj.description, default=dbobj.default)
-            data.append(info)
+            data.append(dbobj.as_dict())
 
         with open(const.DATABASEINFO, "w") as outfile:
             json.dump(data, outfile, indent=4)
