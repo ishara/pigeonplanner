@@ -1,3 +1,13 @@
+4.4.0:
+ * Added option to save custom pedigree layouts
+ * Added option to add a background image to the printed pedigree
+ * Fixed exporting pigeons with non-ascii characters
+ * Show message when creating a pedigree without address
+ * Changed the results icon
+ * Multiple minor visual changes
+ * Minor code changes
+ * Updated translations
+
 4.2.2:
  * Added right-click menu on breeding mate
  * Added right-click menu on breeding records
