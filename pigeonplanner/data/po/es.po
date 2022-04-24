@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: pigeonplanner\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-06 23:25+0200\n"
-"PO-Revision-Date: 2021-10-01 12:09+0000\n"
-"Last-Translator: Timo Vanwynsberghe <timovwb@gmail.com>\n"
+"PO-Revision-Date: 2022-01-31 17:12+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-10-02 06:22+0000\n"
-"X-Generator: Launchpad (build 1ce78163f6a09ed42b4201fe7d3f0e3a2eba7d02)\n"
+"X-Launchpad-Export-Date: 2022-02-01 04:35+0000\n"
+"X-Generator: Launchpad (build 001ba6012681e39ba0a5ad38d6c372dfdae2362c)\n"
 "Language: \n"
 
 #: pigeonplanner/messages.py:145
@@ -123,8 +123,8 @@ msgid ""
 "The database you are trying to open is too new for your version of Pigeon "
 "Planner. You need to reinstall the latest version to continue."
 msgstr ""
-"La base de datos que está intentando abrir es nueva para su versión de "
-"Pigeon Planner. Uste necesita reinstalar la última versión para continuar."
+"La base de datos que está intentando abrir es demasiado nueva para su "
+"versión de Pigeon Planner. Reinstale la última versión para continuar."
 
 #: pigeonplanner/messages.py:32
 msgid "Database update required!"
@@ -136,6 +136,9 @@ msgid ""
 "Pigeon Planner won't work anymore. This may take a moment. Do you want to "
 "continue?"
 msgstr ""
+"Esta base de datos necesita antes de poder ser usada. Las versiones "
+"anteriores de Pigeon Planner no seguirán funcionando. Esto puede tardar un "
+"momento.  ¿Desea continuar?"
 
 #: pigeonplanner/messages.py:38
 msgid ""
@@ -240,7 +243,7 @@ msgstr "El número de anilla y año son necesarios."
 
 #: pigeonplanner/messages.py:90 pigeonplanner/ui/widgets/bandentry.py:232
 msgid "Only numbers are accepted as year input."
-msgstr "Solo números son aceptados como entrada."
+msgstr "Sólo se aceptan números como entrada de año."
 
 #: pigeonplanner/messages.py:93
 msgid "Check the length of the year."
@@ -248,11 +251,11 @@ msgstr "Compruebe la longitud del año."
 
 #: pigeonplanner/messages.py:96
 msgid "Only numbers are allowed when adding multiple pigeons."
-msgstr "Solo números son aceptados cuando se añaden multiples palomas."
+msgstr "Sólo se permiten números cuando se añaden múltiples palomas."
 
 #: pigeonplanner/messages.py:100
 msgid "At least the date and racepoint have to be entered."
-msgstr "Al menos la fecha y puntuación, han de ser puestas."
+msgstr "Al menos hay que introducir la fecha y la puntuación."
 
 #: pigeonplanner/messages.py:103
 msgid ""
@@ -268,7 +271,7 @@ msgstr "El resultado que desea añadir ya existe."
 
 #: pigeonplanner/messages.py:109
 msgid "Removing the selected result"
-msgstr ""
+msgstr "Eliminando el resultado seleccionado."
 
 #: pigeonplanner/messages.py:110 pigeonplanner/messages.py:113
 #: pigeonplanner/messages.py:116 pigeonplanner/messages.py:157
@@ -279,7 +282,7 @@ msgstr "¿Está usted seguro?"
 
 #: pigeonplanner/messages.py:112
 msgid "Removing the selected breeding record"
-msgstr ""
+msgstr "Eliminando el registro de reproducción seleccionado"
 
 #: pigeonplanner/messages.py:115
 msgid "Removing the selected media file"
@@ -806,15 +809,15 @@ msgstr "Salir"
 
 #: pigeonplanner/ui/gtkmain.py:194
 msgid "A previously saved version will be used instead."
-msgstr ""
+msgstr "En su lugar, se utilizará una versión guardada previamente."
 
 #: pigeonplanner/ui/gtkmain.py:196
 msgid "The default settings will be used instead."
-msgstr ""
+msgstr "En su lugar, se utilizará la configuración predeterminada."
 
 #: pigeonplanner/ui/gtkmain.py:199
 msgid "There was an error loading the configuration file."
-msgstr ""
+msgstr "Hubo un error al cargar el archivo de configuración."
 
 #: pigeonplanner/ui/pedigreewindow.py:59 pigeonplanner/ui/tabs/pedigree.py:27
 #: pigeonplanner/ui/pedigreeprintsetup/setupwindow.py:159
@@ -1045,11 +1048,11 @@ msgstr "Base de datos de Pigeon Planner"
 
 #: pigeonplanner/ui/dbmanager.py:58 pigeonplanner/ui/dbmanager.py:116
 msgid "Required"
-msgstr ""
+msgstr "Obligatorio"
 
 #: pigeonplanner/ui/dbmanager.py:249
 msgid "Can't repair database that needs an update."
-msgstr ""
+msgstr "No se puede reparar la base de datos que necesita actualizarse."
 
 #: pigeonplanner/ui/dbmanager.py:460
 #: pigeonplanner/ui/glade/OptionsDialog.ui:137
@@ -1058,31 +1061,31 @@ msgstr "Predeterminado"
 
 #: pigeonplanner/ui/dbmanager.py:462
 msgid "Opened"
-msgstr ""
+msgstr "Abierta"
 
 #: pigeonplanner/ui/dbmanager.py:464
 msgid "Not found"
-msgstr ""
+msgstr "No encontrado"
 
 #: pigeonplanner/ui/dbmanager.py:466
 msgid "Not writable"
-msgstr ""
+msgstr "Escritura no permitida"
 
 #: pigeonplanner/ui/dbmanager.py:475
 msgid "Last modified:"
-msgstr ""
+msgstr "Última modificación:"
 
 #: pigeonplanner/ui/dbmanager.py:546
 msgid "Waiting for action..."
-msgstr ""
+msgstr "Esperando acción ..."
 
 #: pigeonplanner/ui/dbmanager.py:555
 msgid "Check for pigeons with an empty value as year."
-msgstr ""
+msgstr "Buscar paloma sin un año asignado."
 
 #: pigeonplanner/ui/dbmanager.py:556
 msgid "Delete pigeon."
-msgstr ""
+msgstr "Eliminar paloma."
 
 #: pigeonplanner/ui/dbmanager.py:562
 #, python-format
@@ -1091,11 +1094,11 @@ msgstr ""
 
 #: pigeonplanner/ui/dbmanager.py:567
 msgid "Check for racepoints with an invalid unit value."
-msgstr ""
+msgstr "Buscar puntos de carrera con unidades de valor invalidos."
 
 #: pigeonplanner/ui/dbmanager.py:568
 msgid "Reset unit value to the default."
-msgstr ""
+msgstr "Restablece el valor de la unidad al predeterminado."
 
 #: pigeonplanner/ui/dbmanager.py:574
 #, python-format
@@ -1155,6 +1158,7 @@ msgstr ""
 "  Jose Rostagno https://launchpad.net/~joserostagno\n"
 "  Maso https://launchpad.net/~faican\n"
 "  Monkey https://launchpad.net/~monkey-libre\n"
+"  Osvaldo L. Cangas https://launchpad.net/~osvaldolcangas\n"
 "  Paco Molinero https://launchpad.net/~franciscomol\n"
 "  Stefano Prenna https://launchpad.net/~stefanoprenna\n"
 "  Timo Vanwynsberghe https://launchpad.net/~timovwb\n"
@@ -1525,7 +1529,7 @@ msgstr "Eliminando el punto de suelta seleccionado."
 
 #: pigeonplanner/ui/tools/racepointsmap.py:149
 msgid "The racepoint name is required."
-msgstr ""
+msgstr "El nombre de los puntos de carreras es requerido."
 
 #: pigeonplanner/ui/pedigreeprintsetup/preview.py:107
 #: pigeonplanner/reportlib/gui/printpreview.py:66
@@ -1556,7 +1560,7 @@ msgstr "Reduce la página"
 
 #: pigeonplanner/ui/pedigreeprintsetup/setupwindow.py:167
 msgid "There was an error saving the pedigree."
-msgstr ""
+msgstr "Hubo un error al guardar el pedigree."
 
 #: pigeonplanner/reportlib/cairodoc.py:234
 #: pigeonplanner/reportlib/cairodoc.py:237
@@ -2002,7 +2006,7 @@ msgstr "Ver el pedigrí detallado de esta paloma"
 #: pigeonplanner/ui/glade/MainWindow.ui:316
 #: pigeonplanner/ui/glade/MainWindow.ui:317
 msgid "Print pedigree"
-msgstr ""
+msgstr "Imprimir pedigree."
 
 #: pigeonplanner/ui/glade/MainWindow.ui:325
 msgid "Edit the selected pigeon"
@@ -2018,11 +2022,11 @@ msgstr "Restaurar la paloma oculta seleccionada"
 
 #: pigeonplanner/ui/glade/MainWindow.ui:344
 msgid "_Remove / Hide"
-msgstr ""
+msgstr "_Eliminar / Ocultar."
 
 #: pigeonplanner/ui/glade/MainWindow.ui:345
 msgid "Remove or hide the selected pigeon"
-msgstr ""
+msgstr "Eliminar u Ocultar la paloma seleccionada."
 
 #: pigeonplanner/ui/glade/MainWindow.ui:413
 msgid "Loading pigeons..."
@@ -2049,7 +2053,7 @@ msgstr "A"
 #: pigeonplanner/ui/glade/ResultParser.ui:70
 #: pigeonplanner/ui/glade/DataManager.ui:35
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 #: pigeonplanner/ui/glade/VelocityCalculator.ui:203
 msgid "Time"
@@ -2207,11 +2211,11 @@ msgstr "Dividido"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:91
 msgid "Ascending"
-msgstr ""
+msgstr "Ascendente"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:94
 msgid "Descending"
-msgstr ""
+msgstr "Descendiente"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:113
 #: pigeonplanner/ui/glade/Racepointsmap.ui:916
@@ -2273,7 +2277,7 @@ msgstr "Ventana"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:699
 msgid "Sort pigeons"
-msgstr ""
+msgstr "Clasificar/Ordenar palomas"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:711
 msgid "Results mode"
@@ -2289,11 +2293,11 @@ msgstr "Color de la celda de palomas eliminadas en la lista"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:854
 msgid "Theme name"
-msgstr ""
+msgstr "Nombre del tema/apariencia"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:886
 msgid "Theme"
-msgstr ""
+msgstr "Tema/apariencia"
 
 #: pigeonplanner/ui/glade/OptionsDialog.ui:1070
 msgid "Text"
@@ -2429,7 +2433,7 @@ msgstr "Ver todos los resultados"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:47
 msgid "Export these results"
-msgstr ""
+msgstr "Exportar estos resultados"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:48
 #: pigeonplanner/ui/glade/ExportWindow.ui:87
@@ -2444,7 +2448,7 @@ msgstr "Guardar estos resultados"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:87
 msgid "Print preview for these results"
-msgstr ""
+msgstr "Vista previa de impresón para estos resultados"
 
 #: pigeonplanner/ui/glade/ResultWindow.ui:102
 msgid "Print these results"
@@ -2562,7 +2566,7 @@ msgstr "Descarga"
 #: pigeonplanner/ui/glade/MediaView.ui:132
 #: pigeonplanner/ui/glade/DBManager.ui:1059
 msgid "Open"
-msgstr ""
+msgstr "Abrir"
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:100
 msgid "Restore"
@@ -2600,6 +2604,7 @@ msgstr "Incluir archivo de configuración de la aplicación"
 #: pigeonplanner/ui/glade/BackupDialog.ui:566
 msgid "This will not include pigeon images and media files."
 msgstr ""
+"Esto NO incluira las fotos de las palomas ni otros archivos multimedia."
 
 #: pigeonplanner/ui/glade/BackupDialog.ui:623
 msgid "Backup file"
@@ -2673,15 +2678,17 @@ msgstr "Todo"
 
 #: pigeonplanner/ui/glade/DBManager.ui:55
 msgid "Quit"
-msgstr ""
+msgstr "Cerrar"
 
 #: pigeonplanner/ui/glade/DBManager.ui:109
 msgid "New"
-msgstr ""
+msgstr "Nuevo"
 
 #: pigeonplanner/ui/glade/DBManager.ui:228
 msgid "Create a new or add an existing database to get started."
 msgstr ""
+"Crear una nueva base de datos o añadir una nueva base de datos existentes "
+"para comenzar."
 
 #: pigeonplanner/ui/glade/DBManager.ui:467
 msgid "For advanced use only. Use the default settings if you are in doubt."
@@ -2691,19 +2698,19 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/DBManager.ui:567
 msgid "Repair selected"
-msgstr ""
+msgstr "Reparar lo seleccionado"
 
 #: pigeonplanner/ui/glade/DBManager.ui:732
 msgid "Action"
-msgstr ""
+msgstr "Operación"
 
 #: pigeonplanner/ui/glade/DBManager.ui:744
 msgid "Result"
-msgstr ""
+msgstr "Resultado"
 
 #: pigeonplanner/ui/glade/DBManager.ui:842
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: pigeonplanner/ui/glade/DBManager.ui:856
 msgid "Move"
@@ -2711,11 +2718,11 @@ msgstr "Mover"
 
 #: pigeonplanner/ui/glade/DBManager.ui:870
 msgid "Repair"
-msgstr ""
+msgstr "Reparar"
 
 #: pigeonplanner/ui/glade/DBManager.ui:930
 msgid "Set as default"
-msgstr ""
+msgstr "Establecer como predeterminado"
 
 #: pigeonplanner/ui/glade/DBManager.ui:945
 msgid "Load this database as default on startup"
@@ -2723,11 +2730,11 @@ msgstr "Cargar esta base de datos por defecto al arrancar"
 
 #: pigeonplanner/ui/glade/DBManager.ui:973
 msgid "Send to the developers"
-msgstr ""
+msgstr "Enviar a los desarrolladores."
 
 #: pigeonplanner/ui/glade/DBManager.ui:987
 msgid "Open folder"
-msgstr ""
+msgstr "Abrir la carpeta"
 
 #: pigeonplanner/ui/glade/MedicationView.ui:177
 #: pigeonplanner/ui/glade/MedicationView.ui:682
@@ -2746,136 +2753,136 @@ msgstr "Vacunación"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:145
 msgid "Top margin"
-msgstr ""
+msgstr "Margen superior"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:157
 msgid "Bottom margin"
-msgstr ""
+msgstr "Margen inferior"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:169
 msgid "Left margin"
-msgstr ""
+msgstr "Margen izquierdo"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:181
 msgid "Right margin"
-msgstr ""
+msgstr "Margen derecho"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:229
 msgid "Pedigree print setup"
-msgstr ""
+msgstr "Configurar impresión del pedigree"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:263
 msgid "Save PDF"
-msgstr ""
+msgstr "Guardar como PDF"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:314
 msgid "Layout configuration"
-msgstr ""
+msgstr "Configuración del diseño"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:330
 msgid "Custom"
-msgstr ""
+msgstr "Personalizado"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:406
 msgid "Paper format"
-msgstr ""
+msgstr "Formato de papel"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:435
 msgid "Margins"
-msgstr ""
+msgstr "Márgenes"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:453
 msgid "Configure..."
-msgstr ""
+msgstr "Configurar..."
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:505
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:893
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1112
 msgid "Font colour"
-msgstr ""
+msgstr "Color de las letras"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:531
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:881
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1100
 msgid "Font size"
-msgstr ""
+msgstr "Tamaño de las letra"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:560
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:648
 msgid "Separator"
-msgstr ""
+msgstr "Separador"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:624
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:965
 msgid "User info"
-msgstr ""
+msgstr "Información del usuario"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:636
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1158
 msgid "Pigeon info"
-msgstr ""
+msgstr "Información de la paloma"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:674
 msgid "Pigeon image"
-msgstr ""
+msgstr "Imagen de la paloma"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:688
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:707
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:726
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1235
 msgid "Don't show"
-msgstr ""
+msgstr "No mostrar"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:689
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:708
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:727
 msgid "Left"
-msgstr ""
+msgstr "Izquierda"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:690
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:709
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:728
 msgid "Center"
-msgstr ""
+msgstr "Centro"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:691
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:710
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:729
 msgid "Right"
-msgstr ""
+msgstr "Derecha"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:746
 msgid "Header"
-msgstr ""
+msgstr "Encabezado"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:936
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1236
 msgid "Details"
-msgstr ""
+msgstr "Detalles"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:945
 msgid "Edit..."
-msgstr ""
+msgstr "Editar..."
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1178
 msgid "Page layout"
-msgstr ""
+msgstr "Diseño de la página"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1251
 msgid "Generation 1 lines"
-msgstr ""
+msgstr "Lineas de la 1ra Generación"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1263
 msgid "Generation 2 lines"
-msgstr ""
+msgstr "Lineas de la 2da Generación"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1275
 msgid "Generation 3 lines"
-msgstr ""
+msgstr "Lineas de la 3ra Generación"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1287
 msgid "Generation 4 lines"
-msgstr ""
+msgstr "Lineas de la 4ta Generación"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1366
 msgid "Layout"
@@ -2883,19 +2890,19 @@ msgstr "Diseño"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1401
 msgid "Colour edge"
-msgstr ""
+msgstr "Color del borde"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1413
 msgid "Colour background"
-msgstr ""
+msgstr "Color del fondo"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1450
 msgid "Bandnumber font size"
-msgstr ""
+msgstr "Tamaño de letra de la anilla"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1462
 msgid "Bandnumber colour"
-msgstr ""
+msgstr "Color de letra de la anilla"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1474
 msgid "Details font size"
@@ -2919,7 +2926,7 @@ msgstr ""
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1654
 msgid "Comments"
-msgstr ""
+msgstr "Comentarios"
 
 #: pigeonplanner/ui/glade/PedigreePrintSetup.ui:1677
 msgid "Bandnumber"
