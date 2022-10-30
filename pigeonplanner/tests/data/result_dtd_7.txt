@@ -1,0 +1,11 @@
+HET LOKAAL                   LOCATION               DATA TECHNOLOGY-DEERLIJK                
+----------------------------------------------------------------------------------          
+CHIMAY-industrie     25-05-13  120 Oude Duiven    Deelnemers:23 LOSTIJD:07.10               
+----------------------------------------------------------------------------------          
+  NR Naam                  Gemeent AD IG Afstand Ring   JR Bestat     Snelh.    NR          
+  N0 Nom                   Localit EN MQ Distanc Bague  AN Constat    Vitesse   NO          
+----------------------------------------------------------------------------------          
+   1 SOME NAME             LOCATIO 10  2  123588 123456713 08.46270 1397.3536    1          
+   2 SOME NAME             LOCATIO 10  1       2 999999913 08.48260 1372.5512    2          
+   3 SOME NAME             LOCATIO 10  3       3 123456813 08.48390 1369.4033    3          
+   4 SOME NAME             LOCATIO 10  4       4 999999913 08.47500 1366.3884    4          

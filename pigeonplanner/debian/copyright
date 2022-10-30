@@ -1,0 +1,16 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: pigeonplanner
+Upstream-Contact: Timo Vanwynsberghe <timovwb@gmail.com>
+Source: https://launchpad.net/pigeonplanner/
+
+Files: *
+Copyright: 2009 Pigeon Planner
+License: GPL-3+
+ You can redistribute and/or modify this software under the terms of
+ the GNU General Public License as published by the Free
+ Software Foundation; either version 3 of the License, or (at your
+ option) any later version.
+ .
+ On Debian systems, the complete text of the GNU General Public
+ License version 3 can be found in
+ `/usr/share/common-licenses/GPL-3.

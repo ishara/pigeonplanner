@@ -1,0 +1,136 @@
+
+this is a debug log for diagnosing/reporting problems in brz
+you can delete or truncate this file, or include sections in
+bug reports to https://bugs.launchpad.net/brz/+filebug
+
+Sun 2022-10-30 13:49:14 +0000
+0.069  encoding stdout as sys.stdout encoding 'utf-8'
+0.069  encoding stdout as sys.stdout encoding 'utf-8'
+0.069  encoding stdout as sys.stdout encoding 'utf-8'
+0.086  breezy version: 3.1.0
+0.087  brz arguments: []
+0.099  encoding stdout as sys.stdout encoding 'utf-8'
+0.100  encoding stdout as sys.stdout encoding 'utf-8'
+0.101  Transferred: 0kB (0.0kB/s r:0kB w:0kB)
+0.102  return code 0
+
+Sun 2022-10-30 13:49:51 +0000
+0.047  encoding stdout as sys.stdout encoding 'utf-8'
+0.047  encoding stdout as sys.stdout encoding 'utf-8'
+0.047  encoding stdout as sys.stdout encoding 'utf-8'
+0.064  breezy version: 3.1.0
+0.064  brz arguments: ['branch', 'lp:pigeonplanner']
+0.076  encoding stdout as sys.stdout encoding 'utf-8'
+[ 1400] 2022-10-30 13:49:53.031 WARNING: You have not informed bzr of your Launchpad ID, and you must do this to
+write to Launchpad or access private data.  See "bzr help launchpad-login".
+3.909  creating repository in file:///home/isharasamantha/pigeonplanner/.bzr/.
+3.912  Using fetch logic to copy between CHKInventoryRepository('http://bazaar.launchpad.net/~timovwb/pigeonplanner/devel/.bzr/repository/')(RepositoryFormat2a()) and CHKInventoryRepository('file:///home/isharasamantha/pigeonplanner/.bzr/repository/')(RepositoryFormat2a())
+3.912  fetching: <PendingAncestryResult heads:frozenset({b'timovwb@gmail.com-20211230172759-vqneki43zqja1au5'}) repo:CHKInventoryRepository('http://bazaar.launchpad.net/~timovwb/pigeonplanner/devel/.bzr/repository/')>
+19.031  24 bytes left on the HTTP socket
+19.214  24 bytes left on the HTTP socket
+19.400  24 bytes left on the HTTP socket
+19.584  24 bytes left on the HTTP socket
+19.768  24 bytes left on the HTTP socket
+19.956  24 bytes left on the HTTP socket
+20.140  24 bytes left on the HTTP socket
+20.323  24 bytes left on the HTTP socket
+20.508  24 bytes left on the HTTP socket
+20.695  24 bytes left on the HTTP socket
+20.879  24 bytes left on the HTTP socket
+21.080  24 bytes left on the HTTP socket
+21.270  24 bytes left on the HTTP socket
+21.519  24 bytes left on the HTTP socket
+21.914  24 bytes left on the HTTP socket
+22.115  24 bytes left on the HTTP socket
+22.306  24 bytes left on the HTTP socket
+22.504  24 bytes left on the HTTP socket
+23.145  24 bytes left on the HTTP socket
+26.824  24 bytes left on the HTTP socket
+27.090  24 bytes left on the HTTP socket
+27.368  24 bytes left on the HTTP socket
+27.609  24 bytes left on the HTTP socket
+27.796  24 bytes left on the HTTP socket
+27.982  24 bytes left on the HTTP socket
+28.169  24 bytes left on the HTTP socket
+28.351  24 bytes left on the HTTP socket
+28.541  24 bytes left on the HTTP socket
+28.801  24 bytes left on the HTTP socket
+28.987  24 bytes left on the HTTP socket
+29.173  24 bytes left on the HTTP socket
+29.360  24 bytes left on the HTTP socket
+30.253  24 bytes left on the HTTP socket
+30.466  24 bytes left on the HTTP socket
+30.775  24 bytes left on the HTTP socket
+30.959  24 bytes left on the HTTP socket
+31.201  24 bytes left on the HTTP socket
+31.399  24 bytes left on the HTTP socket
+31.587  24 bytes left on the HTTP socket
+31.773  24 bytes left on the HTTP socket
+31.957  24 bytes left on the HTTP socket
+32.159  24 bytes left on the HTTP socket
+32.345  24 bytes left on the HTTP socket
+32.529  24 bytes left on the HTTP socket
+32.714  24 bytes left on the HTTP socket
+32.898  24 bytes left on the HTTP socket
+33.092  24 bytes left on the HTTP socket
+33.297  24 bytes left on the HTTP socket
+33.582  24 bytes left on the HTTP socket
+33.769  24 bytes left on the HTTP socket
+33.958  24 bytes left on the HTTP socket
+34.143  24 bytes left on the HTTP socket
+34.328  24 bytes left on the HTTP socket
+34.513  24 bytes left on the HTTP socket
+34.699  24 bytes left on the HTTP socket
+34.904  24 bytes left on the HTTP socket
+35.090  24 bytes left on the HTTP socket
+35.275  24 bytes left on the HTTP socket
+35.468  24 bytes left on the HTTP socket
+39.946  24 bytes left on the HTTP socket
+40.151  24 bytes left on the HTTP socket
+40.348  24 bytes left on the HTTP socket
+40.569  24 bytes left on the HTTP socket
+40.780  24 bytes left on the HTTP socket
+40.969  24 bytes left on the HTTP socket
+41.220  24 bytes left on the HTTP socket
+41.424  24 bytes left on the HTTP socket
+41.809  24 bytes left on the HTTP socket
+41.997  24 bytes left on the HTTP socket
+42.282  24 bytes left on the HTTP socket
+42.477  24 bytes left on the HTTP socket
+42.665  24 bytes left on the HTTP socket
+42.902  24 bytes left on the HTTP socket
+43.251  24 bytes left on the HTTP socket
+43.461  24 bytes left on the HTTP socket
+44.008  24 bytes left on the HTTP socket
+45.565  24 bytes left on the HTTP socket
+45.877  24 bytes left on the HTTP socket
+46.296  24 bytes left on the HTTP socket
+46.939  24 bytes left on the HTTP socket
+47.677  24 bytes left on the HTTP socket
+48.168  24 bytes left on the HTTP socket
+48.705  24 bytes left on the HTTP socket
+49.576  24 bytes left on the HTTP socket
+49.911  24 bytes left on the HTTP socket
+50.787  24 bytes left on the HTTP socket
+51.125  24 bytes left on the HTTP socket
+52.246  creating branch <breezy.bzr.branch.BzrBranchFormat7 object at 0x7fd39f1cd850> in file:///home/isharasamantha/pigeonplanner/
+52.272  24 bytes left on the HTTP socket
+52.659  created new branch BzrBranch7(file:///home/isharasamantha/pigeonplanner/)
+52.663  trying to create missing lock '/home/isharasamantha/pigeonplanner/.bzr/checkout/dirstate'
+52.668  opening working tree '/home/isharasamantha/pigeonplanner'
+[ 1400] 2022-10-30 13:50:44.682 INFO: Branched 1536 revisions.
+52.996  Transferred: 11866kB (227.8kB/s r:11803kB w:63kB)
+52.996  return code 0
+
+Sun 2022-10-30 13:51:44 +0000
+0.047  encoding stdout as sys.stdout encoding 'utf-8'
+0.047  encoding stdout as sys.stdout encoding 'utf-8'
+0.048  encoding stdout as sys.stdout encoding 'utf-8'
+0.064  breezy version: 3.1.0
+0.065  brz arguments: ['fast-export', '--plain', '.']
+0.078  encoding stdout as sys.stdout encoding 'utf-8'
+[ 1408] 2022-10-30 13:51:44.586 INFO: 13:51:44 Calculating the revisions to include ...
+[ 1408] 2022-10-30 13:51:44.587 INFO: 13:51:44 Starting export of 0 revisions ...
+[ 1408] 2022-10-30 13:51:44.587 INFO: 13:51:44 Exported 0 revisions in 0:00:00
+0.144  Transferred: 0kB (0.0kB/s r:0kB w:0kB)
+0.145  return code 0

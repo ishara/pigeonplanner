@@ -1,0 +1,10 @@
+[Core]
+Name = Data Technology-Deerlijk
+Module = dtd
+
+[Documentation]
+Author = Timo Vanwynsberghe
+Version = 3.6
+Website = https://www.pigeonplanner.com
+Description = Data Technology-Deerlijk resultsheet format used in Belgium
+Usage =

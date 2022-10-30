@@ -1,0 +1,9 @@
+# -*- mode: python -*-
+
+import os
+
+setup_sdk(target="10.14", sdk_version="native", architectures=["x86_64"])
+build_policy = "updated-deps"
+
+modulesets = os.path.expanduser("~/.config/pigeonplanner.modules")
+modules = ["meta-pigeonplanner"]

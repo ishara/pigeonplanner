@@ -1,0 +1,19 @@
+include AUTHORS CHANGES COPYING README.dev
+include Makefile
+include i18n.py
+include pigeonplanner.py
+include requirements.txt
+
+graft data
+graft mac
+graft win
+graft tests
+
+graft pigeonplanner/data/
+graft pigeonplanner/ui/data
+graft pigeonplanner/ui/glade
+graft pigeonplanner/resultparsers
+
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *~

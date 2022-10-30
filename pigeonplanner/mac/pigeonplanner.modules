@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+
+  <include href="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/modulesets-stable/gtk-osx.modules"/>
+
+  <repository type="git" name="github-git" href="git://github.com/"/>
+  <repository type="tarball" name="github-tarball" href="git://github.com/"/>
+
+  <autotools id="osmgpsmap" skip-autogen="never"
+             autogenargs="--disable-gtk-doc-html"
+             supports-non-srcdir-builds="no">
+    <branch module="nzjrs/osm-gps-map" revision="1.1.0" repo="github-git"/>
+    <dependencies>
+      <dep package="libsoup"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3.14"/>
+    </after>
+  </autotools>
+
+  <metamodule id="meta-pigeonplanner">
+    <dependencies>
+      <dep package="python3"/>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3-core-themes"/>
+      <dep package="librsvg"/>
+      <dep package="shared-mime-info"/>
+      <dep package="osmgpsmap"/>
+      <dep package="meta-gtk-osx-python3-gtk3"/>
+    </dependencies>
+  </metamodule>
+
+</moduleset>

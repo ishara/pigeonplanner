@@ -1,0 +1,70 @@
+-= Translations =-
+Create/update translation template:
+    python3 i18n.py -p
+
+Create/update compiled mo languages:
+    python3 i18n.py -m
+
+
+-= Install build system =-
+Windows:
+    Install MSYS2:
+        https://www.msys2.org/
+    Run the MSYS2 shell, then:
+        sh win/msys2_install_deps.sh
+        python3 -m pip install -r requirements
+        python3 -m pip install pyinstaller==3.6
+    Install Inno Setup QuickStart Pack:
+        http://www.jrsoftware.org/isdl.php
+
+macOS:
+    wget https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/gtk-osx-setup.sh
+    sh gtk-osx-setup.sh
+    cp mac/jhbuildrc-custom ~/.config/jhbuildrc-custom
+    cp mac/pigeonplanner.modules ~/.config/pigeonplanner.modules
+    jhbuild bootstrap-gtk-osx
+    jhbuild build
+    jhbuild shell
+    python3 -m pip install -r requirements.txt
+
+
+-= Packaging =-
+Linux:
+    python3 setup.py sdist
+
+Ubuntu:
+    dch -i
+    debuild -b -us -uc -I.bzr --lintian-opts --profile debian
+
+Windows:
+    Start the MSYS2 environment.
+    python3 -m pip install .
+    python3 win/build_packages.py
+
+macOS:
+    jhbuild shell
+    python3 -m pip install .
+    python3 mac/build_package.py
+
+
+-= Glade =-
+Compile Glade with Python 3 support:
+
+    PYTHON="/usr/bin/python3" ./configure
+
+Make sure the output shows that Python widgets are supported:
+
+    PYTHON Widgets support:	 yes
+
+If not, check if python-gi-dev is installed and configure again.
+
+Run Glade with the correct path to the custom widgets:
+
+    cd pigeonplanner/ui/glade
+    GLADE_ENV_MODULE_PATH=. GLADE_MODULE_SEARCH_PATH=. GLADE_CATALOG_SEARCH_PATH=. glade
+
+
+-= Other =-
+    export PYTHONPATH=dev
+    python setup.py develop --install-dir dev
+
